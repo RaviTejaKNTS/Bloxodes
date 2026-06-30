@@ -17,16 +17,16 @@ Every subagent message must set the role and exact skill:
 
 - You are the subagent for one game collection only.
 - Do not run `/bloxodes-game-collection-workflow-runner`.
-- Do not create or call other subagents.
+- **Do NOT spawn sub-agents or call other agents at any phase. Write and edit all files directly using your own tools.**
 - Start with `/bloxodes-game-collection-research`.
 - Skill file: `.agents/skills/bloxodes-game-collection-research/SKILL.md`.
 - Return `brief.md` only and wait for parent approval.
 
-For later gates, send the same subagent the exact next skill:
+For later gates, send the same subagent the exact next skill and repeat the no-sub-agents rule in every message:
 
-- Data gate: `/bloxodes-game-collection-data`; skill file `.agents/skills/bloxodes-game-collection-data/SKILL.md`.
-- Image gate: `/bloxodes-game-collection-images`; skill file `.agents/skills/bloxodes-game-collection-images/SKILL.md`.
-- Writing gate: `/bloxodes-game-collection-writing`; skill file `.agents/skills/bloxodes-game-collection-writing/SKILL.md`.
+- Data gate: `/bloxodes-game-collection-data`; skill file `.agents/skills/bloxodes-game-collection-data/SKILL.md`. **Do NOT spawn sub-agents. Write the dataset JSON directly using the Write tool.**
+- Image gate: `/bloxodes-game-collection-images`; skill file `.agents/skills/bloxodes-game-collection-images/SKILL.md`. **Do NOT spawn sub-agents. Download images and edit dataset files directly using Bash and Edit/Write tools.**
+- Writing gate: `/bloxodes-game-collection-writing`; skill file `.agents/skills/bloxodes-game-collection-writing/SKILL.md`. **Do NOT spawn sub-agents. Write final.json directly using the Write tool.**
 
 ## Workspace
 
@@ -46,7 +46,7 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/
 4. Review source proof, scope, existing Bloxodes coverage, and whether the collection is worth publishing.
 5. Provide feedback, approve, or block the collection according to the checks.
 6. If approved, ask the same subagent to use `/bloxodes-game-collection-data` and update data notes.
-7. Review item count, missing items, section plan, useful fields, grouping, image field planning, and route assumptions.
+7. Review item count, missing items, dataset metadata, section plan, useful fields, grouping, image field planning, and route assumptions.
 8. If approved, ask the same subagent to use `/bloxodes-game-collection-images` and update image notes.
 9. Review image coverage, image quality, local paths, dataset wiring, missing images, and checker result.
 10. If approved, ask the same subagent to use `/bloxodes-game-collection-writing` and create `final.json`.
@@ -87,6 +87,10 @@ Once the research subagent returns `brief.md`, check that:
 
 Once the data subagent completes the process and updates the `brief.md`, check that:
 - Data is complete, accurate, and matches the approved brief.
+- Dataset uses v2 wrapped `{ meta, items[].item, items[].system }`, not a bare array.
+- Public game fields live only in `items[].item`; system fields live only in `items[].system`.
+- If a real multi-section grouping exists, `items[].system.section`, `items[].system.sortOrder`, `meta.display.groupLabel`, and `meta.display.sectionOrder` are present and match actual rendered labels.
+- No public item field is named `collectionSection`, `section`, `sortOrder`, `image`, `slug`, source/verification/raw text, or any other workflow/debug key.
 - `npm run check:game-collection-data` passed or the remaining warning is accepted.
 - Section field, section counts, and section order are recorded.
 - Every item lands in the right section.
@@ -97,9 +101,10 @@ Once the data subagent completes the process and updates the `brief.md`, check t
 - Detail fields are complete prose when the value is a sentence; semicolon prose is not being turned into fake lists.
 - Public fields are consistent across rows, with missing source-backed values left empty/null instead of dropping the field.
 - Values do not repeat their labels, such as `Type: Standard boost` inside the `type` value.
-- Hidden/source fields are not exposed as public card fields.
+- Hidden/source/dev fields are absent from public item data and not exposed as card fields.
 - Image need and image field are recorded for the next step.
 - The route renderer/config can show the sections, fields, planned image field, and item count.
+- `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>` reports no blocking metadata issue.
 - If the data is not ready, send it back to the subagent for fixes.
 
 ## Image Checks

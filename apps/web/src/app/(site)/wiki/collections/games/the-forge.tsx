@@ -12,6 +12,7 @@ import { ContentFaq } from "@/components/ContentFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { THE_FORGE_COLLECTIONS, type GameCollectionViewConfig } from "@/lib/game-collections/games/the-forge";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 
 const FALLBACK_IMAGE = "/og-image.png";
 
@@ -82,7 +83,7 @@ async function readForgeDataset(file: string): Promise<{ meta: ForgeDatasetMeta 
     return { meta: null, items: uniquifyForgeItemIds(parsed.map(normalizeItem).filter(Boolean) as GameCollectionItem[]) };
   }
 
-  const items = uniquifyForgeItemIds((parsed.items ?? []).map(normalizeItem).filter(Boolean) as GameCollectionItem[]);
+  const items = uniquifyForgeItemIds(unwrapDatasetItems(parsed).map(normalizeItem).filter(Boolean) as GameCollectionItem[]);
   return { meta: parsed.meta ?? null, items };
 }
 

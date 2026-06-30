@@ -1,1339 +1,1272 @@
 {
   "meta": {
-    "title": "Sailor Piece titles data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Sailor Piece Wiki - titles",
-        "url": "https://sailorpiece.org/wiki/titles/",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Sailor Piece",
+    "gameSlug": "sailor-piece",
+    "collection": "titles",
+    "route": "/wiki/sailor-piece/titles",
+    "catalogCode": "sailor-piece-titles",
+    "itemFields": [
       "tier",
       "titleRole",
       "bonus",
       "unlockRoute",
       "requirement",
-      "dropOrPity",
       "availability",
-      "bestFor"
-    ]
+      "bestFor",
+      "category",
+      "effect",
+      "description",
+      "stats",
+      "requirements",
+      "obtainment",
+      "tags"
+    ],
+    "columns": [
+      "tier",
+      "titleRole",
+      "bonus",
+      "unlockRoute",
+      "requirement",
+      "availability",
+      "bestFor",
+      "category",
+      "effect",
+      "description",
+      "stats",
+      "requirements",
+      "obtainment",
+      "tags"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Damage",
+        "Farming",
+        "Luck"
+      ],
+      "badgeField": "tier",
+      "subtitleFields": [
+        "category"
+      ],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "tier",
+        "titleRole",
+        "bonus",
+        "unlockRoute",
+        "requirement",
+        "availability"
+      ],
+      "tableFields": [
+        "tier",
+        "titleRole",
+        "bonus",
+        "unlockRoute",
+        "requirement",
+        "availability",
+        "bestFor",
+        "category"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Demon Dweller",
-      "slug": "demon-dweller",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+100% Damage",
-      "bonus": "+100% Damage",
-      "recipe": null,
-      "description": "The strongest damage title added in the Anti-Magic Update (April 26, 2026), surpassing Dragon Queen (+97.5%) and all previous titles. Drops from Crystal Defense Boss waves on Punch Island. Provides +100% Damage. Not tradeable. Source: Sportskeeda + Beebom (2-source, 2026-04-27).",
-      "stats": {
-        "anti_magic_update": "crystal-defense"
+      "item": {
+        "name": "Demon Dweller",
+        "tier": "S+",
+        "titleRole": "Damage",
+        "bonus": "+100% Damage",
+        "unlockRoute": "Crystal Defense boss waves on Punch Island",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+100% Damage",
+        "description": "The strongest damage title added in the Anti-Magic Update (April 26, 2026), surpassing Dragon Queen (+97.5%) and all previous titles. Drops from Crystal Defense Boss waves on Punch Island. Provides +100% Damage. Not tradeable. Source: Sportskeeda + Beebom (2-source, 2026-04-27).",
+        "stats": {
+          "anti_magic_update": "crystal-defense"
+        },
+        "obtainment": "The strongest damage title added in the Anti-Magic Update (April 26, 2026), surpassing Dragon Queen (+97.5%) and all previous titles. Drops from Crystal Defense Boss waves on Punch Island. Provides +100% Damage. Not tradeable. Source: Sportskeeda + Beebom (2-source, 2026-04-27).",
+        "tags": [
+          "Damage",
+          "anti-magic-update",
+          "crystal-defense"
+        ]
       },
-      "requirements": null,
-      "obtainment": "The strongest damage title added in the Anti-Magic Update (April 26, 2026), surpassing Dragon Queen (+97.5%) and all previous titles. Drops from Crystal Defense Boss waves on Punch Island. Provides +100% Damage. Not tradeable. Source: Sportskeeda + Beebom (2-source, 2026-04-27).",
-      "tags": [
-        "Damage",
-        "anti-magic-update",
-        "crystal-defense"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "Crystal Defense boss waves on Punch Island",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "demon-dweller",
+        "section": "Damage",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Dragon Queen",
-      "slug": "dragon-queen",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+97.5% Damage",
-      "bonus": "+97.5% Damage",
-      "recipe": null,
-      "description": "The highest-tier damage title introduced in Sea 2. Drops from Sea Serpent / Kraken Sea Beasts. Top-tier for damage builds post-Sea 2 launch.",
-      "stats": {
-        "sea_2": "damage"
+      "item": {
+        "name": "Dragon Queen",
+        "tier": "S+",
+        "titleRole": "Damage",
+        "bonus": "+97.5% Damage",
+        "unlockRoute": "Sea Serpent / Kraken Sea Beast route",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+97.5% Damage",
+        "description": "The highest-tier damage title introduced in Sea 2. Drops from Sea Serpent / Kraken Sea Beasts. Top-tier for damage builds post-Sea 2 launch.",
+        "stats": {
+          "sea_2": "damage"
+        },
+        "obtainment": "The highest-tier damage title introduced in Sea 2. Drops from Sea Serpent / Kraken Sea Beasts. Top-tier for damage builds post-Sea 2 launch.",
+        "tags": [
+          "Damage",
+          "sea-2",
+          "damage"
+        ]
       },
-      "requirements": null,
-      "obtainment": "The highest-tier damage title introduced in Sea 2. Drops from Sea Serpent / Kraken Sea Beasts. Top-tier for damage builds post-Sea 2 launch.",
-      "tags": [
-        "Damage",
-        "sea-2",
-        "damage"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "Sea Serpent / Kraken Sea Beast route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "dragon-queen",
+        "section": "Damage",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Cosmic Being",
-      "slug": "cosmic-being",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+95% Damage",
-      "bonus": "+95% Damage",
-      "recipe": null,
-      "description": "A Sea 2 damage title that drops from the Cosmic Being World Boss (Cosmic Garou original). Same boss can drop the Cosmic Being melee spec directly.",
-      "stats": {
-        "sea_2": "damage"
+      "item": {
+        "name": "Cosmic Being",
+        "tier": "S+",
+        "titleRole": "Damage",
+        "bonus": "+95% Damage",
+        "unlockRoute": "Cosmic Being World Boss",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+95% Damage",
+        "description": "A Sea 2 damage title that drops from the Cosmic Being World Boss (Cosmic Garou original). Same boss can drop the Cosmic Being melee spec directly.",
+        "stats": {
+          "sea_2": "damage"
+        },
+        "obtainment": "A Sea 2 damage title that drops from the Cosmic Being World Boss (Cosmic Garou original). Same boss can drop the Cosmic Being melee spec directly.",
+        "tags": [
+          "Damage",
+          "sea-2",
+          "damage"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A Sea 2 damage title that drops from the Cosmic Being World Boss (Cosmic Garou original). Same boss can drop the Cosmic Being melee spec directly.",
-      "tags": [
-        "Damage",
-        "sea-2",
-        "damage"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "Cosmic Being World Boss",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "cosmic-being",
+        "section": "Damage",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Golden Tyrant",
-      "slug": "golden-tyrant",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": "+35% XP, +55% Money, +40% Gems",
-      "bonus": "+35% XP, +55% Money, +40% Gems",
-      "recipe": null,
-      "description": "The best farming title in the game, maximizing Cash, Gems, and XP gain simultaneously. Equip this when grinding mobs or farming boss drops for maximum efficiency.",
-      "stats": {
-        "farming": "cash"
+      "item": {
+        "name": "Golden Tyrant",
+        "tier": "S+",
+        "titleRole": "Farming",
+        "bonus": "+35% XP, +55% Money, +40% Gems",
+        "unlockRoute": "Farming title route",
+        "bestFor": "XP, Money, and Gems farming",
+        "category": "Farming",
+        "effect": "+35% XP, +55% Money, +40% Gems",
+        "description": "The best farming title in the game, maximizing Cash, Gems, and XP gain simultaneously. Equip this when grinding mobs or farming boss drops for maximum efficiency.",
+        "stats": {
+          "farming": "cash"
+        },
+        "obtainment": "The best farming title in the game, maximizing Cash, Gems, and XP gain simultaneously. Equip this when grinding mobs or farming boss drops for maximum efficiency.",
+        "tags": [
+          "Farming",
+          "farming",
+          "cash"
+        ]
       },
-      "requirements": null,
-      "obtainment": "The best farming title in the game, maximizing Cash, Gems, and XP gain simultaneously. Equip this when grinding mobs or farming boss drops for maximum efficiency.",
-      "tags": [
-        "Farming",
-        "farming",
-        "cash"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": "Farming title route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "XP, Money, and Gems farming"
+      "system": {
+        "slug": "golden-tyrant",
+        "section": "Farming",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Destiny Marked",
-      "slug": "destiny-marked",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Luck",
-      "type": null,
-      "effect": "+40% Luck",
-      "bonus": "+40% Luck",
-      "recipe": null,
-      "description": "A top-tier luck title. Equip Destiny Marked when hunting specific boss drops to maximize rare item chances. Surpassed by Celestial Favor (+50% Luck) which requires 5,000 boss kills.",
-      "stats": {
-        "luck": "boss-farming"
+      "item": {
+        "name": "Destiny Marked",
+        "tier": "S+",
+        "titleRole": "Luck",
+        "bonus": "+40% Luck",
+        "unlockRoute": "Boss-kill requirement route",
+        "requirement": "5,000 boss kills",
+        "bestFor": "Rare drop farming",
+        "category": "Luck",
+        "effect": "+40% Luck",
+        "description": "A top-tier luck title. Equip Destiny Marked when hunting specific boss drops to maximize rare item chances. Surpassed by Celestial Favor (+50% Luck) which requires 5,000 boss kills.",
+        "stats": {
+          "luck": "boss-farming"
+        },
+        "requirements": "5,000 boss kills",
+        "obtainment": "A top-tier luck title. Equip Destiny Marked when hunting specific boss drops to maximize rare item chances. Surpassed by Celestial Favor (+50% Luck) which requires 5,000 boss kills.",
+        "tags": [
+          "Luck",
+          "luck",
+          "boss-farming"
+        ]
       },
-      "requirements": "5,000 boss kills",
-      "obtainment": "A top-tier luck title. Equip Destiny Marked when hunting specific boss drops to maximize rare item chances. Surpassed by Celestial Favor (+50% Luck) which requires 5,000 boss kills.",
-      "tags": [
-        "Luck",
-        "luck",
-        "boss-farming"
-      ],
-      "titleRole": "Luck",
-      "unlockRoute": "Boss-kill requirement route",
-      "requirement": "5,000 boss kills",
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Rare drop farming"
+      "system": {
+        "slug": "destiny-marked",
+        "section": "Luck",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Celestial Favor",
-      "slug": "celestial-favor",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Luck",
-      "type": null,
-      "effect": "+50% Luck",
-      "bonus": "+50% Luck",
-      "recipe": null,
-      "description": "The best luck title in the game added in the Massive Update. Provides +50% Luck, making it ideal for farming rare drops and boss loot. Surpasses Destiny Marked as the top farming title.",
-      "stats": {
-        "luck": "boss-farming"
+      "item": {
+        "name": "Celestial Favor",
+        "tier": "S+",
+        "titleRole": "Luck",
+        "bonus": "+50% Luck",
+        "unlockRoute": "Boss-kill requirement route",
+        "requirement": "5,000 boss kills",
+        "bestFor": "Rare drop farming",
+        "category": "Luck",
+        "effect": "+50% Luck",
+        "description": "The best luck title in the game added in the Massive Update. Provides +50% Luck, making it ideal for farming rare drops and boss loot. Surpasses Destiny Marked as the top farming title.",
+        "stats": {
+          "luck": "boss-farming"
+        },
+        "obtainment": "The best luck title in the game added in the Massive Update. Provides +50% Luck, making it ideal for farming rare drops and boss loot. Surpasses Destiny Marked as the top farming title.",
+        "tags": [
+          "Luck",
+          "luck",
+          "boss-farming"
+        ]
       },
-      "requirements": null,
-      "obtainment": "The best luck title in the game added in the Massive Update. Provides +50% Luck, making it ideal for farming rare drops and boss loot. Surpasses Destiny Marked as the top farming title.",
-      "tags": [
-        "Luck",
-        "luck",
-        "boss-farming"
-      ],
-      "titleRole": "Luck",
-      "unlockRoute": "Boss-kill requirement route",
-      "requirement": "5,000 boss kills",
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Rare drop farming"
+      "system": {
+        "slug": "celestial-favor",
+        "section": "Luck",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "The One",
-      "slug": "the-one",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": "Massive Damage bonus",
-      "recipe": null,
-      "description": "A supreme damage title — one of the strongest damage titles in the game.",
-      "stats": {
-        "damage": "endgame"
+      "item": {
+        "name": "The One",
+        "tier": "S+",
+        "titleRole": "Damage",
+        "bonus": "Massive Damage bonus",
+        "unlockRoute": "Escanor / Boss Rush route",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "description": "A supreme damage title — one of the strongest damage titles in the game.",
+        "stats": {
+          "damage": "endgame"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "endgame"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "endgame"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "Escanor / Boss Rush route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "the-one",
+        "section": "Damage",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Transcendent Being",
-      "slug": "transcendent-being",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+72.5% Damage",
-      "bonus": "+72.5% Damage",
-      "recipe": null,
-      "description": "A top-tier damage title obtained from the True Aizen boss with +72.5% Damage. Strong for PvP and boss clearing, surpassed by Battlefield Warlord and Eminence Incarnate added in the Massive Update.",
-      "stats": {
-        "damage": "pvp"
+      "item": {
+        "name": "Transcendent Being",
+        "tier": "S+",
+        "titleRole": "Damage",
+        "bonus": "+72.5% Damage",
+        "unlockRoute": "True Aizen boss route",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+72.5% Damage",
+        "description": "A top-tier damage title obtained from the True Aizen boss with +72.5% Damage. Strong for PvP and boss clearing, surpassed by Battlefield Warlord and Eminence Incarnate added in the Massive Update.",
+        "stats": {
+          "damage": "pvp"
+        },
+        "obtainment": "A top-tier damage title obtained from the True Aizen boss with +72.5% Damage. Strong for PvP and boss clearing, surpassed by Battlefield Warlord and Eminence Incarnate added in the Massive Update.",
+        "tags": [
+          "Damage",
+          "damage",
+          "pvp"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A top-tier damage title obtained from the True Aizen boss with +72.5% Damage. Strong for PvP and boss clearing, surpassed by Battlefield Warlord and Eminence Incarnate added in the Massive Update.",
-      "tags": [
-        "Damage",
-        "damage",
-        "pvp"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "True Aizen boss route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "transcendent-being",
+        "section": "Damage",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Frost Empress",
-      "slug": "frost-empress",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+87.5% Damage. Note: this title is also the required crafting material for the Ice Queen sword — making it mandatory for the Ice Update meta. Source: Pro Game Guides + GAMES.GG + u7buy (3-source, 2026-04-09).",
-      "bonus": "+87.5% Damage",
-      "recipe": null,
-      "description": "+87.5% Damage. Note: this title is also the required crafting material for the Ice Queen sword — making it mandatory for the Ice Update meta. Source: Pro Game Guides + GAMES.GG + u7buy (3-source, 2026-04-09).",
-      "stats": {
-        "ice_update": "boss-title"
+      "item": {
+        "name": "Frost Empress",
+        "tier": "S+",
+        "titleRole": "Damage",
+        "bonus": "+87.5% Damage",
+        "unlockRoute": "Frost Boss route",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+87.5% Damage. Note: this title is also the required crafting material for the Ice Queen sword — making it mandatory for the Ice Update meta. Source: Pro Game Guides + GAMES.GG + u7buy (3-source, 2026-04-09).",
+        "description": "+87.5% Damage. Note: this title is also the required crafting material for the Ice Queen sword — making it mandatory for the Ice Update meta. Source: Pro Game Guides + GAMES.GG + u7buy (3-source, 2026-04-09).",
+        "stats": {
+          "ice_update": "boss-title"
+        },
+        "obtainment": "+87.5% Damage. Note: this title is also the required crafting material for the Ice Queen sword — making it mandatory for the Ice Update meta. Source: Pro Game Guides + GAMES.GG + u7buy (3-source, 2026-04-09).",
+        "tags": [
+          "Damage",
+          "ice-update",
+          "boss-title"
+        ]
       },
-      "requirements": null,
-      "obtainment": "+87.5% Damage. Note: this title is also the required crafting material for the Ice Queen sword — making it mandatory for the Ice Update meta. Source: Pro Game Guides + GAMES.GG + u7buy (3-source, 2026-04-09).",
-      "tags": [
-        "Damage",
-        "ice-update",
-        "boss-title"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "Frost Boss route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "frost-empress",
+        "section": "Damage",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Battlefield Warlord",
-      "slug": "battlefield-warlord",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+80% Damage",
-      "bonus": "+80% Damage",
-      "recipe": null,
-      "description": "A powerful damage title obtained from the Strongest Shinobi Boss. Provides +80% Damage, making it one of the best PvP and boss-clearing titles added in the Massive Update.",
-      "stats": {
-        "damage": "boss-farming"
+      "item": {
+        "name": "Battlefield Warlord",
+        "tier": "S+",
+        "titleRole": "Damage",
+        "bonus": "+80% Damage",
+        "unlockRoute": "Strongest Shinobi boss route",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+80% Damage",
+        "description": "A powerful damage title obtained from the Strongest Shinobi Boss. Provides +80% Damage, making it one of the best PvP and boss-clearing titles added in the Massive Update.",
+        "stats": {
+          "damage": "boss-farming"
+        },
+        "obtainment": "A powerful damage title obtained from the Strongest Shinobi Boss. Provides +80% Damage, making it one of the best PvP and boss-clearing titles added in the Massive Update.",
+        "tags": [
+          "Damage",
+          "damage",
+          "boss-farming"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A powerful damage title obtained from the Strongest Shinobi Boss. Provides +80% Damage, making it one of the best PvP and boss-clearing titles added in the Massive Update.",
-      "tags": [
-        "Damage",
-        "damage",
-        "boss-farming"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "Strongest Shinobi boss route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "battlefield-warlord",
+        "section": "Damage",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Eminence Incarnate",
-      "slug": "eminence-incarnate",
-      "tier": "S+",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+82.5% Damage",
-      "bonus": "+82.5% Damage",
-      "recipe": null,
-      "description": "The highest damage-boosting title in the game added in the Massive Update. Provides +82.5% Damage. Community-confirmed best damage title for PvP and boss clearing, obtained from the Atomic Boss.",
-      "stats": {
-        "damage": "boss-farming"
+      "item": {
+        "name": "Eminence Incarnate",
+        "tier": "S+",
+        "titleRole": "Damage",
+        "bonus": "+82.5% Damage",
+        "unlockRoute": "Atomic Boss route",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+82.5% Damage",
+        "description": "The highest damage-boosting title in the game added in the Massive Update. Provides +82.5% Damage. Community-confirmed best damage title for PvP and boss clearing, obtained from the Atomic Boss.",
+        "stats": {
+          "damage": "boss-farming"
+        },
+        "obtainment": "The highest damage-boosting title in the game added in the Massive Update. Provides +82.5% Damage. Community-confirmed best damage title for PvP and boss clearing, obtained from the Atomic Boss.",
+        "tags": [
+          "Damage",
+          "damage",
+          "boss-farming"
+        ]
       },
-      "requirements": null,
-      "obtainment": "The highest damage-boosting title in the game added in the Massive Update. Provides +82.5% Damage. Community-confirmed best damage title for PvP and boss clearing, obtained from the Atomic Boss.",
-      "tags": [
-        "Damage",
-        "damage",
-        "boss-farming"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "Atomic Boss route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "eminence-incarnate",
+        "section": "Damage",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Time Tyrant",
-      "slug": "time-tyrant",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+92.5% Damage",
-      "bonus": "+92.5% Damage",
-      "recipe": null,
-      "description": "A Sea 2 damage title dropping from The World boss on JoJo Island. Same boss gates the DIO-inspired The World melee spec questline.",
-      "stats": {
-        "sea_2": "damage"
+      "item": {
+        "name": "Time Tyrant",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bonus": "+92.5% Damage",
+        "unlockRoute": "The World boss route",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+92.5% Damage",
+        "description": "A Sea 2 damage title dropping from The World boss on JoJo Island. Same boss gates the DIO-inspired The World melee spec questline.",
+        "stats": {
+          "sea_2": "damage"
+        },
+        "obtainment": "A Sea 2 damage title dropping from The World boss on JoJo Island. Same boss gates the DIO-inspired The World melee spec questline.",
+        "tags": [
+          "Damage",
+          "sea-2",
+          "damage"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A Sea 2 damage title dropping from The World boss on JoJo Island. Same boss gates the DIO-inspired The World melee spec questline.",
-      "tags": [
-        "Damage",
-        "sea-2",
-        "damage"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "The World boss route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "time-tyrant",
+        "section": "Damage",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Ancient Mage",
-      "slug": "ancient-mage",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+90% Damage",
-      "bonus": "+90% Damage",
-      "recipe": null,
-      "description": "A Sea 2 damage title dropping from the Great Mage boss. Also required for crafting the Great Mage sword.",
-      "stats": {
-        "sea_2": "damage"
+      "item": {
+        "name": "Ancient Mage",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bonus": "+90% Damage",
+        "unlockRoute": "Great Mage boss route",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+90% Damage",
+        "description": "A Sea 2 damage title dropping from the Great Mage boss. Also required for crafting the Great Mage sword.",
+        "stats": {
+          "sea_2": "damage"
+        },
+        "obtainment": "A Sea 2 damage title dropping from the Great Mage boss. Also required for crafting the Great Mage sword.",
+        "tags": [
+          "Damage",
+          "sea-2",
+          "damage"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A Sea 2 damage title dropping from the Great Mage boss. Also required for crafting the Great Mage sword.",
-      "tags": [
-        "Damage",
-        "sea-2",
-        "damage"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "Great Mage boss route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "ancient-mage",
+        "section": "Damage",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Treasure Hunter",
-      "slug": "treasure-hunter",
-      "tier": "S",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A high-tier farming title for experienced loot hunters.",
-      "stats": {
-        "farming": "loot"
+      "item": {
+        "name": "Treasure Hunter",
+        "tier": "S",
+        "titleRole": "Farming",
+        "bestFor": "Grinding and collection progress",
+        "category": "Farming",
+        "description": "A high-tier farming title for experienced loot hunters.",
+        "stats": {
+          "farming": "loot"
+        },
+        "tags": [
+          "Farming",
+          "farming",
+          "loot"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Farming",
-        "farming",
-        "loot"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Grinding and collection progress"
+      "system": {
+        "slug": "treasure-hunter",
+        "section": "Farming",
+        "sortOrder": 14,
+        "image": null
+      }
     },
     {
-      "name": "Blessed Sovereign",
-      "slug": "blessed-sovereign",
-      "tier": "S",
-      "rarity": null,
-      "category": "Luck",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "One of the highest luck titles, providing excellent drop rate bonuses for endgame farming.",
-      "stats": {
-        "luck": "endgame"
+      "item": {
+        "name": "Blessed Sovereign",
+        "tier": "S",
+        "titleRole": "Luck",
+        "bestFor": "Rare drop farming",
+        "category": "Luck",
+        "description": "One of the highest luck titles, providing excellent drop rate bonuses for endgame farming.",
+        "stats": {
+          "luck": "endgame"
+        },
+        "obtainment": "One of the highest luck titles, providing excellent drop rate bonuses for endgame farming.",
+        "tags": [
+          "Luck",
+          "luck",
+          "endgame"
+        ]
       },
-      "requirements": null,
-      "obtainment": "One of the highest luck titles, providing excellent drop rate bonuses for endgame farming.",
-      "tags": [
-        "Luck",
-        "luck",
-        "endgame"
-      ],
-      "titleRole": "Luck",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Rare drop farming"
+      "system": {
+        "slug": "blessed-sovereign",
+        "section": "Luck",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "Living Weapon",
-      "slug": "living-weapon",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "An advanced damage title for dedicated combat players.",
-      "stats": {
-        "damage": "endgame"
+      "item": {
+        "name": "Living Weapon",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "An advanced damage title for dedicated combat players.",
+        "stats": {
+          "damage": "endgame"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "endgame"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "endgame"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "living-weapon",
+        "section": "Damage",
+        "sortOrder": 16,
+        "image": null
+      }
     },
     {
-      "name": "King of Beginning",
-      "slug": "king-of-beginning",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title inspired by Anos Voldigoad from Misfit of Demon King Academy.",
-      "stats": {
-        "damage": "anos"
+      "item": {
+        "name": "King of Beginning",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title inspired by Anos Voldigoad from Misfit of Demon King Academy.",
+        "stats": {
+          "damage": "anos"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "anos"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "anos"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "king-of-beginning",
+        "section": "Damage",
+        "sortOrder": 17,
+        "image": null
+      }
     },
     {
-      "name": "Eminence In Shadow",
-      "slug": "eminence-in-shadow",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title inspired by The Eminence in Shadow anime.",
-      "stats": {
-        "damage": "cid"
+      "item": {
+        "name": "Eminence In Shadow",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title inspired by The Eminence in Shadow anime.",
+        "stats": {
+          "damage": "cid"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "cid"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "cid"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "eminence-in-shadow",
+        "section": "Damage",
+        "sortOrder": 18,
+        "image": null
+      }
     },
     {
-      "name": "Strongest Sorcerer",
-      "slug": "strongest-sorcerer",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title inspired by Gojo as the strongest sorcerer.",
-      "stats": {
-        "damage": "gojo"
+      "item": {
+        "name": "Strongest Sorcerer",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title inspired by Gojo as the strongest sorcerer.",
+        "stats": {
+          "damage": "gojo"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "gojo"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "gojo"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "strongest-sorcerer",
+        "section": "Damage",
+        "sortOrder": 19,
+        "image": null
+      }
     },
     {
-      "name": "Soul Reaper",
-      "slug": "soul-reaper",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title inspired by Bleach's Soul Reapers. Related to Ichigo/Soul Society content.",
-      "stats": {
-        "damage": "ichigo"
+      "item": {
+        "name": "Soul Reaper",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title inspired by Bleach's Soul Reapers. Related to Ichigo/Soul Society content.",
+        "stats": {
+          "damage": "ichigo"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "ichigo"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "ichigo"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "soul-reaper",
+        "section": "Damage",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "Star Maiden",
-      "slug": "star-maiden",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title related to the Madoka boss (Valentine Island).",
-      "stats": {
-        "damage": "madoka"
+      "item": {
+        "name": "Star Maiden",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title related to the Madoka boss (Valentine Island).",
+        "stats": {
+          "damage": "madoka"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "madoka"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "madoka"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "star-maiden",
+        "section": "Damage",
+        "sortOrder": 21,
+        "image": null
+      }
     },
     {
-      "name": "Demon Lord",
-      "slug": "demon-lord",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title inspired by Rimuru from That Time I Got Reincarnated as a Slime.",
-      "stats": {
-        "damage": "rimuru"
+      "item": {
+        "name": "Demon Lord",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title inspired by Rimuru from That Time I Got Reincarnated as a Slime.",
+        "stats": {
+          "damage": "rimuru"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "rimuru"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "rimuru"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "demon-lord",
+        "section": "Damage",
+        "sortOrder": 22,
+        "image": null
+      }
     },
     {
-      "name": "Golden King",
-      "slug": "golden-king",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title inspired by Gilgamesh, the King of Heroes.",
-      "stats": {
-        "damage": "gilgamesh"
+      "item": {
+        "name": "Golden King",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title inspired by Gilgamesh, the King of Heroes.",
+        "stats": {
+          "damage": "gilgamesh"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "gilgamesh"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "gilgamesh"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "golden-king",
+        "section": "Damage",
+        "sortOrder": 23,
+        "image": null
+      }
     },
     {
-      "name": "Demon King",
-      "slug": "demon-king",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A top-tier damage title related to demon king content.",
-      "stats": {
-        "damage": "endgame"
+      "item": {
+        "name": "Demon King",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A top-tier damage title related to demon king content.",
+        "stats": {
+          "damage": "endgame"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "endgame"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "endgame"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "demon-king",
+        "section": "Damage",
+        "sortOrder": 24,
+        "image": null
+      }
     },
     {
-      "name": "King of Shadows",
-      "slug": "king-of-shadows",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A top-tier damage title inspired by Solo Leveling shadow army.",
-      "stats": {
-        "damage": "jin-woo"
+      "item": {
+        "name": "King of Shadows",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A top-tier damage title inspired by Solo Leveling shadow army.",
+        "stats": {
+          "damage": "jin-woo"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "jin-woo"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "jin-woo"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "king-of-shadows",
+        "section": "Damage",
+        "sortOrder": 25,
+        "image": null
+      }
     },
     {
-      "name": "Corrupt Tyrant",
-      "slug": "corrupt-tyrant",
-      "tier": "S",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": "+75% Damage",
-      "bonus": "+75% Damage",
-      "recipe": null,
-      "description": "The latest damage title added in the Alter Update (March 16, 2026). Provides a massive +75% Damage boost, making it one of the strongest damage titles in the game.",
-      "stats": {
-        "damage": "alter-update"
+      "item": {
+        "name": "Corrupt Tyrant",
+        "tier": "S",
+        "titleRole": "Damage",
+        "bonus": "+75% Damage",
+        "unlockRoute": "Alter Update boss route",
+        "bestFor": "Damage title slot",
+        "category": "Damage",
+        "effect": "+75% Damage",
+        "description": "The latest damage title added in the Alter Update (March 16, 2026). Provides a massive +75% Damage boost, making it one of the strongest damage titles in the game.",
+        "stats": {
+          "damage": "alter-update"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "alter-update"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "alter-update"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": "Alter Update boss route",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage title slot"
+      "system": {
+        "slug": "corrupt-tyrant",
+        "section": "Damage",
+        "sortOrder": 26,
+        "image": null
+      }
     },
     {
-      "name": "Egg Seeker",
-      "slug": "egg-seeker",
-      "tier": "A",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "Event-limited bonuses — exact values not publicly documented before event closed.",
-      "stats": {
-        "sea_2": "easter-event"
+      "item": {
+        "name": "Egg Seeker",
+        "tier": "A",
+        "titleRole": "Farming",
+        "unlockRoute": "Easter event egg hunt",
+        "availability": "Easter event ended",
+        "bestFor": "Grinding and collection progress",
+        "category": "Farming",
+        "description": "Event-limited bonuses — exact values not publicly documented before event closed.",
+        "stats": {
+          "sea_2": "easter-event"
+        },
+        "obtainment": "A time-limited Easter Event title awarded for completing the Egg Hunt. Event ENDED April 22, 2026 11:16 AM PT — title is no longer obtainable.",
+        "tags": [
+          "Farming",
+          "sea-2",
+          "easter-event"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A time-limited Easter Event title awarded for completing the Egg Hunt. Event ENDED April 22, 2026 11:16 AM PT — title is no longer obtainable.",
-      "tags": [
-        "Farming",
-        "sea-2",
-        "easter-event"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": "Easter event egg hunt",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": "Easter event ended",
-      "bestFor": "Grinding and collection progress"
+      "system": {
+        "slug": "egg-seeker",
+        "section": "Farming",
+        "sortOrder": 27,
+        "image": null
+      }
     },
     {
-      "name": "Collector",
-      "slug": "collector",
-      "tier": "A",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A farming title for players who have gathered a significant number of drops.",
-      "stats": {
-        "farming": "collection"
+      "item": {
+        "name": "Collector",
+        "tier": "A",
+        "titleRole": "Farming",
+        "bestFor": "Grinding and collection progress",
+        "category": "Farming",
+        "description": "A farming title for players who have gathered a significant number of drops.",
+        "stats": {
+          "farming": "collection"
+        },
+        "obtainment": "A farming title for players who have gathered a significant number of drops.",
+        "tags": [
+          "Farming",
+          "farming",
+          "collection"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A farming title for players who have gathered a significant number of drops.",
-      "tags": [
-        "Farming",
-        "farming",
-        "collection"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Grinding and collection progress"
+      "system": {
+        "slug": "collector",
+        "section": "Farming",
+        "sortOrder": 28,
+        "image": null
+      }
     },
     {
-      "name": "Hoarder",
-      "slug": "hoarder",
-      "tier": "A",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "An advanced farming title for dedicated collectors with large drop counts.",
-      "stats": {
-        "farming": "collection"
+      "item": {
+        "name": "Hoarder",
+        "tier": "A",
+        "titleRole": "Farming",
+        "bestFor": "Grinding and collection progress",
+        "category": "Farming",
+        "description": "An advanced farming title for dedicated collectors with large drop counts.",
+        "stats": {
+          "farming": "collection"
+        },
+        "obtainment": "An advanced farming title for dedicated collectors with large drop counts.",
+        "tags": [
+          "Farming",
+          "farming",
+          "collection"
+        ]
       },
-      "requirements": null,
-      "obtainment": "An advanced farming title for dedicated collectors with large drop counts.",
-      "tags": [
-        "Farming",
-        "farming",
-        "collection"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Grinding and collection progress"
+      "system": {
+        "slug": "hoarder",
+        "section": "Farming",
+        "sortOrder": 29,
+        "image": null
+      }
     },
     {
-      "name": "Cupid's Chosen",
-      "slug": "cupid-s-chosen",
-      "tier": "A",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "Farming bonuses",
-      "stats": {
-        "farming": "event"
+      "item": {
+        "name": "Cupid's Chosen",
+        "tier": "A",
+        "titleRole": "Farming",
+        "availability": "Seasonal event title",
+        "bestFor": "Grinding and collection progress",
+        "category": "Farming",
+        "description": "Farming bonuses",
+        "stats": {
+          "farming": "event"
+        },
+        "tags": [
+          "Farming",
+          "farming",
+          "event"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Farming",
-        "farming",
-        "event"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": "Seasonal event title",
-      "bestFor": "Grinding and collection progress"
+      "system": {
+        "slug": "cupid-s-chosen",
+        "section": "Farming",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "Blessed One",
-      "slug": "blessed-one",
-      "tier": "A",
-      "rarity": null,
-      "category": "Luck",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A high-tier luck title providing significant drop rate improvements.",
-      "stats": {
-        "luck": "drops"
+      "item": {
+        "name": "Blessed One",
+        "tier": "A",
+        "titleRole": "Luck",
+        "bestFor": "Rare drop farming",
+        "category": "Luck",
+        "description": "A high-tier luck title providing significant drop rate improvements.",
+        "stats": {
+          "luck": "drops"
+        },
+        "obtainment": "A high-tier luck title providing significant drop rate improvements.",
+        "tags": [
+          "Luck",
+          "luck",
+          "drops"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A high-tier luck title providing significant drop rate improvements.",
-      "tags": [
-        "Luck",
-        "luck",
-        "drops"
-      ],
-      "titleRole": "Luck",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Rare drop farming"
+      "system": {
+        "slug": "blessed-one",
+        "section": "Luck",
+        "sortOrder": 31,
+        "image": null
+      }
     },
     {
-      "name": "Chosen One",
-      "slug": "chosen-one",
-      "tier": "A",
-      "rarity": null,
-      "category": "Luck",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "High Luck bonus",
-      "stats": {
-        "luck": "boss-farming"
+      "item": {
+        "name": "Chosen One",
+        "tier": "A",
+        "titleRole": "Luck",
+        "bestFor": "Rare drop farming",
+        "category": "Luck",
+        "description": "High Luck bonus",
+        "stats": {
+          "luck": "boss-farming"
+        },
+        "tags": [
+          "Luck",
+          "luck",
+          "boss-farming"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Luck",
-        "luck",
-        "boss-farming"
-      ],
-      "titleRole": "Luck",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Rare drop farming"
+      "system": {
+        "slug": "chosen-one",
+        "section": "Luck",
+        "sortOrder": 32,
+        "image": null
+      }
     },
     {
-      "name": "Shadow Monarch",
-      "slug": "shadow-monarch",
-      "tier": "A",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title inspired by Solo Leveling's Sung Jin-Woo.",
-      "stats": {
-        "damage": "pvp"
+      "item": {
+        "name": "Shadow Monarch",
+        "tier": "A",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title inspired by Solo Leveling's Sung Jin-Woo.",
+        "stats": {
+          "damage": "pvp"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "pvp"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "pvp"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "shadow-monarch",
+        "section": "Damage",
+        "sortOrder": 33,
+        "image": null
+      }
     },
     {
-      "name": "Dragon Slayer",
-      "slug": "dragon-slayer",
-      "tier": "A",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title for players who have defeated dragon-type bosses.",
-      "stats": {
-        "damage": "boss-kills"
+      "item": {
+        "name": "Dragon Slayer",
+        "tier": "A",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title for players who have defeated dragon-type bosses.",
+        "stats": {
+          "damage": "boss-kills"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "boss-kills"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "boss-kills"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "dragon-slayer",
+        "section": "Damage",
+        "sortOrder": 34,
+        "image": null
+      }
     },
     {
-      "name": "Manipulator",
-      "slug": "manipulator",
-      "tier": "A",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title related to the Aizen boss encounter (Hueco Mundo).",
-      "stats": {
-        "damage": "boss-kills"
+      "item": {
+        "name": "Manipulator",
+        "tier": "A",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title related to the Aizen boss encounter (Hueco Mundo).",
+        "stats": {
+          "damage": "boss-kills"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "boss-kills"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "boss-kills"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "manipulator",
+        "section": "Damage",
+        "sortOrder": 35,
+        "image": null
+      }
     },
     {
-      "name": "Vampire King",
-      "slug": "vampire-king",
-      "tier": "A",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title related to the Alucard vampire content.",
-      "stats": {
-        "damage": "alucard"
+      "item": {
+        "name": "Vampire King",
+        "tier": "A",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title related to the Alucard vampire content.",
+        "stats": {
+          "damage": "alucard"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "alucard"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "alucard"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "vampire-king",
+        "section": "Damage",
+        "sortOrder": 36,
+        "image": null
+      }
     },
     {
-      "name": "Disgraced One",
-      "slug": "disgraced-one",
-      "tier": "A",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "High Damage bonus",
-      "stats": {},
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "item": {
+        "name": "Disgraced One",
+        "tier": "A",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "High Damage bonus",
+        "tags": [
+          "Damage",
+          "damage"
+        ]
+      },
+      "system": {
+        "slug": "disgraced-one",
+        "section": "Damage",
+        "sortOrder": 37,
+        "image": null
+      }
     },
     {
-      "name": "Warrior",
-      "slug": "warrior",
-      "tier": "B",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A mid-tier farming title earned through combat progression.",
-      "stats": {
-        "farming": "mid-game"
+      "item": {
+        "name": "Warrior",
+        "tier": "B",
+        "titleRole": "Farming",
+        "bestFor": "Grinding and collection progress",
+        "category": "Farming",
+        "description": "A mid-tier farming title earned through combat progression.",
+        "stats": {
+          "farming": "mid-game"
+        },
+        "tags": [
+          "Farming",
+          "farming",
+          "mid-game"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Farming",
-        "farming",
-        "mid-game"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Grinding and collection progress"
+      "system": {
+        "slug": "warrior",
+        "section": "Farming",
+        "sortOrder": 38,
+        "image": null
+      }
     },
     {
-      "name": "Champion",
-      "slug": "champion",
-      "tier": "B",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A farming title earned through significant combat and collection milestones.",
-      "stats": {
-        "farming": "mid-game"
+      "item": {
+        "name": "Champion",
+        "tier": "B",
+        "titleRole": "Farming",
+        "bestFor": "Grinding and collection progress",
+        "category": "Farming",
+        "description": "A farming title earned through significant combat and collection milestones.",
+        "stats": {
+          "farming": "mid-game"
+        },
+        "tags": [
+          "Farming",
+          "farming",
+          "mid-game"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Farming",
-        "farming",
-        "mid-game"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Grinding and collection progress"
+      "system": {
+        "slug": "champion",
+        "section": "Farming",
+        "sortOrder": 39,
+        "image": null
+      }
     },
     {
-      "name": "Fortune Seeker",
-      "slug": "fortune-seeker",
-      "tier": "B",
-      "rarity": null,
-      "category": "Luck",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A mid-tier luck title that improves drop rates for farming.",
-      "stats": {
-        "luck": "farming"
+      "item": {
+        "name": "Fortune Seeker",
+        "tier": "B",
+        "titleRole": "Luck",
+        "bestFor": "Rare drop farming",
+        "category": "Luck",
+        "description": "A mid-tier luck title that improves drop rates for farming.",
+        "stats": {
+          "luck": "farming"
+        },
+        "obtainment": "A mid-tier luck title that improves drop rates for farming.",
+        "tags": [
+          "Luck",
+          "luck",
+          "farming"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A mid-tier luck title that improves drop rates for farming.",
-      "tags": [
-        "Luck",
-        "luck",
-        "farming"
-      ],
-      "titleRole": "Luck",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Rare drop farming"
+      "system": {
+        "slug": "fortune-seeker",
+        "section": "Luck",
+        "sortOrder": 40,
+        "image": null
+      }
     },
     {
-      "name": "Lucky Star",
-      "slug": "lucky-star",
-      "tier": "B",
-      "rarity": null,
-      "category": "Luck",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A solid luck title for mid-game players hunting specific boss drops.",
-      "stats": {
-        "luck": "boss-farming"
+      "item": {
+        "name": "Lucky Star",
+        "tier": "B",
+        "titleRole": "Luck",
+        "bestFor": "Rare drop farming",
+        "category": "Luck",
+        "description": "A solid luck title for mid-game players hunting specific boss drops.",
+        "stats": {
+          "luck": "boss-farming"
+        },
+        "obtainment": "A solid luck title for mid-game players hunting specific boss drops.",
+        "tags": [
+          "Luck",
+          "luck",
+          "boss-farming"
+        ]
       },
-      "requirements": null,
-      "obtainment": "A solid luck title for mid-game players hunting specific boss drops.",
-      "tags": [
-        "Luck",
-        "luck",
-        "boss-farming"
-      ],
-      "titleRole": "Luck",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Rare drop farming"
+      "system": {
+        "slug": "lucky-star",
+        "section": "Luck",
+        "sortOrder": 41,
+        "image": null
+      }
     },
     {
-      "name": "Honored One",
-      "slug": "honored-one",
-      "tier": "B",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title inspired by Gojo's title from Jujutsu Kaisen.",
-      "stats": {
-        "damage": "pvp"
+      "item": {
+        "name": "Honored One",
+        "tier": "B",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title inspired by Gojo's title from Jujutsu Kaisen.",
+        "stats": {
+          "damage": "pvp"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "pvp"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "pvp"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "honored-one",
+        "section": "Damage",
+        "sortOrder": 42,
+        "image": null
+      }
     },
     {
-      "name": "Cursed King",
-      "slug": "cursed-king",
-      "tier": "B",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A damage title inspired by Sukuna from Jujutsu Kaisen (referred to as 'Curse King' in wiki).",
-      "stats": {
-        "damage": "pvp"
+      "item": {
+        "name": "Cursed King",
+        "tier": "B",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "A damage title inspired by Sukuna from Jujutsu Kaisen (referred to as 'Curse King' in wiki).",
+        "stats": {
+          "damage": "pvp"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "pvp"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "pvp"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "cursed-king",
+        "section": "Damage",
+        "sortOrder": 43,
+        "image": null
+      }
     },
     {
-      "name": "Santa Helper",
-      "slug": "santa-helper",
-      "tier": "C",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "A seasonal farming title from the Christmas event. Provides minor farming bonuses.",
-      "stats": {
-        "farming": "event"
+      "item": {
+        "name": "Santa Helper",
+        "tier": "C",
+        "titleRole": "Farming",
+        "availability": "Seasonal event title",
+        "bestFor": "Grinding and collection progress",
+        "category": "Farming",
+        "description": "A seasonal farming title from the Christmas event. Provides minor farming bonuses.",
+        "stats": {
+          "farming": "event"
+        },
+        "tags": [
+          "Farming",
+          "farming",
+          "event"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Farming",
-        "farming",
-        "event"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": "Seasonal event title",
-      "bestFor": "Grinding and collection progress"
+      "system": {
+        "slug": "santa-helper",
+        "section": "Farming",
+        "sortOrder": 44,
+        "image": null
+      }
     },
     {
-      "name": "Apprentice",
-      "slug": "apprentice",
-      "tier": "C",
-      "rarity": null,
-      "category": "Farming",
-      "type": null,
-      "effect": "+5% Gems, +10% Money",
-      "bonus": "+5% Gems, +10% Money",
-      "recipe": null,
-      "description": "An early farming title providing small Gems and Money bonuses to help with early progression.",
-      "stats": {
-        "farming": "beginner"
+      "item": {
+        "name": "Apprentice",
+        "tier": "C",
+        "titleRole": "Farming",
+        "bonus": "+5% Gems, +10% Money",
+        "unlockRoute": "Early farming progression",
+        "bestFor": "Grinding and collection progress",
+        "category": "Farming",
+        "effect": "+5% Gems, +10% Money",
+        "description": "An early farming title providing small Gems and Money bonuses to help with early progression.",
+        "stats": {
+          "farming": "beginner"
+        },
+        "tags": [
+          "Farming",
+          "farming",
+          "beginner"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Farming",
-        "farming",
-        "beginner"
-      ],
-      "titleRole": "Farming",
-      "unlockRoute": "Early farming progression",
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Grinding and collection progress"
+      "system": {
+        "slug": "apprentice",
+        "section": "Farming",
+        "sortOrder": 45,
+        "image": null
+      }
     },
     {
-      "name": "Lucky Novice",
-      "slug": "lucky-novice",
-      "tier": "C",
-      "rarity": null,
-      "category": "Luck",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "The first luck title, providing a small luck bonus to improve drop rates.",
-      "stats": {
-        "luck": "beginner"
+      "item": {
+        "name": "Lucky Novice",
+        "tier": "C",
+        "titleRole": "Luck",
+        "bestFor": "Rare drop farming",
+        "category": "Luck",
+        "description": "The first luck title, providing a small luck bonus to improve drop rates.",
+        "stats": {
+          "luck": "beginner"
+        },
+        "obtainment": "The first luck title, providing a small luck bonus to improve drop rates.",
+        "tags": [
+          "Luck",
+          "luck",
+          "beginner"
+        ]
       },
-      "requirements": null,
-      "obtainment": "The first luck title, providing a small luck bonus to improve drop rates.",
-      "tags": [
-        "Luck",
-        "luck",
-        "beginner"
-      ],
-      "titleRole": "Luck",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Rare drop farming"
+      "system": {
+        "slug": "lucky-novice",
+        "section": "Luck",
+        "sortOrder": 46,
+        "image": null
+      }
     },
     {
-      "name": "Blade Master",
-      "slug": "blade-master",
-      "tier": "C",
-      "rarity": null,
-      "category": "Damage",
-      "type": null,
-      "effect": null,
-      "bonus": null,
-      "recipe": null,
-      "description": "An early damage title providing a small damage bonus.",
-      "stats": {
-        "damage": "beginner"
+      "item": {
+        "name": "Blade Master",
+        "tier": "C",
+        "titleRole": "Damage",
+        "bestFor": "Damage build slot",
+        "category": "Damage",
+        "description": "An early damage title providing a small damage bonus.",
+        "stats": {
+          "damage": "beginner"
+        },
+        "tags": [
+          "Damage",
+          "damage",
+          "beginner"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "Damage",
-        "damage",
-        "beginner"
-      ],
-      "titleRole": "Damage",
-      "unlockRoute": null,
-      "requirement": null,
-      "dropOrPity": null,
-      "availability": null,
-      "bestFor": "Damage build slot"
+      "system": {
+        "slug": "blade-master",
+        "section": "Damage",
+        "sortOrder": 47,
+        "image": null
+      }
     }
   ]
 }

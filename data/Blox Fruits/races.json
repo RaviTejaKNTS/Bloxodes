@@ -1,106 +1,141 @@
 {
   "meta": {
-    "title": "Blox Fruits races data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Category:Races",
-        "url": "https://blox-fruits.fandom.com/wiki/Category%3ARaces",
-        "accessed": "2026-05-07"
-      }
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "races",
+    "route": "/wiki/blox-fruits/races",
+    "catalogCode": "blox-fruits-races",
+    "itemFields": [
+      "overview",
+      "source",
+      "titles"
     ],
     "columns": [
-      "name",
-      "image",
-      "fields",
       "overview",
-      "wikiUrl"
-    ]
+      "source",
+      "titles"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "source",
+      "subtitleFields": [],
+      "descriptionField": "overview",
+      "cardDescriptionField": "overview",
+      "cardFields": [
+        "overview",
+        "source",
+        "titles"
+      ],
+      "tableFields": [
+        "overview",
+        "source",
+        "titles"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Angel",
-      "slug": "angel",
-      "image": "/Blox%20Fruits/Races/angel.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/83/Angel.png/revision/latest/scale-to-width-down/268?cb=20240407190112",
-      "fields": {
+      "item": {
+        "name": "Angel",
+        "overview": "Angel largely relies on its potential to delay time in battles, providing the player with common abilities such as healing and improved jumping capabilities. The aforementioned buffs are considered by many to be easy to counter, but in return, its V4 can be effective against all races, not purely because of its powerful abilities, but thanks to the ability to break combos and the huge damage it is capable of dealing.",
         "source": "ShoptortEvent Shop or Death King",
         "titles": "Sacred Warrior (V2)Perfect Being (V3)His Majesty (V4)"
       },
-      "overview": "Angel largely relies on its potential to delay time in battles, providing the player with common abilities such as healing and improved jumping capabilities. The aforementioned buffs are considered by many to be easy to counter, but in return, its V4 can be effective against all races, not purely because of its powerful abilities, but thanks to the ability to break combos and the huge damage it is capable of dealing.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Angel"
+      "system": {
+        "slug": "angel",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Races/angel.webp"
+      }
     },
     {
-      "name": "Cyborg",
-      "slug": "cyborg",
-      "image": "/Blox%20Fruits/Races/cyborg.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a3/Cyborg.png/revision/latest/scale-to-width-down/268?cb=20240407190113",
-      "fields": {
+      "item": {
+        "name": "Cyborg",
+        "overview": "Cyborg's special abilities allow the player to fight and combo more effectively in close quarters, by disabling Instinct or by dealing extra damage and increasing their own defense. This race is mainly used against teamers due to its ability to deal extremely effective wide-area damage. In general, this race is great for grinding, PvP against teamers and especially breaking combos. Additionally, it is also good for breaking Instinct and doing combos with Instinct-trickable attacks. However, the V3's average range is also a slight drawback, and the V4's damage output is not a good choice in 1v1s.",
         "source": "Cyborg Puzzle",
         "titles": "The Cyborg (V2)War Machine (V3)Genesis (V4)"
       },
-      "overview": "Cyborg's special abilities allow the player to fight and combo more effectively in close quarters, by disabling Instinct or by dealing extra damage and increasing their own defense. This race is mainly used against teamers due to its ability to deal extremely effective wide-area damage. In general, this race is great for grinding, PvP against teamers and especially breaking combos. Additionally, it is also good for breaking Instinct and doing combos with Instinct-trickable attacks. However, the V3's average range is also a slight drawback, and the V4's damage output is not a good choice in 1v1s.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cyborg"
+      "system": {
+        "slug": "cyborg",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Races/cyborg.webp"
+      }
     },
     {
-      "name": "Draco",
-      "slug": "draco",
-      "image": "/Blox%20Fruits/Races/draco.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b5/Draco.png/revision/latest/scale-to-width-down/268?cb=20241216212032",
-      "fields": {
+      "item": {
+        "name": "Draco",
+        "overview": "Draco is one of the three races that can be obtained through a quest. However, it is the only race obtainable exclusively in the Third Sea.",
         "source": "Dragon Wizard",
         "titles": "Elder Wyrm (V2)Ancient Flame (V3)Primordial Guardian (V4)"
       },
-      "overview": "Draco is one of the three races that can be obtained through a quest. However, it is the only race obtainable exclusively in the Third Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Draco"
+      "system": {
+        "slug": "draco",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Races/draco.webp"
+      }
     },
     {
-      "name": "Ghoul",
-      "slug": "ghoul",
-      "image": "/Blox%20Fruits/Races/ghoul.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e3/Ghoul.png/revision/latest/scale-to-width-down/268?cb=20240407190114",
-      "fields": {
+      "item": {
+        "name": "Ghoul",
+        "overview": "Ghoul provides various stat boosts, most notably increasing the user’s speed during the night and allowing the player to leech health from other players, making it excellent for survivability and overall combat effectiveness. It is a great choice for PvP due to its ability to reduce cooldowns quickly and enhance mobility, alongside powerful life leech when awakened to V4. This race is strong in almost every aspect except for relatively weak armor support, which is compensated for by its life leech abilities. Ghoul does not require switching to another race after obtaining it from the Experimic, similar to Draco.",
         "source": "Experimic",
         "titles": "The Ghost (100 Ectoplasm)The Ghoul (V2)Hell Hound (V3)Nightwalker (V4)"
       },
-      "overview": "Ghoul provides various stat boosts, most notably increasing the user’s speed during the night and allowing the player to leech health from other players, making it excellent for survivability and overall combat effectiveness. It is a great choice for PvP due to its ability to reduce cooldowns quickly and enhance mobility, alongside powerful life leech when awakened to V4. This race is strong in almost every aspect except for relatively weak armor support, which is compensated for by its life leech abilities. Ghoul does not require switching to another race after obtaining it from the Experimic, similar to Draco.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghoul"
+      "system": {
+        "slug": "ghoul",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Races/ghoul.webp"
+      }
     },
     {
-      "name": "Human",
-      "slug": "human",
-      "image": "/Blox%20Fruits/Races/human.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6e/Human.png/revision/latest/scale-to-width-down/268?cb=20240407190115",
-      "fields": {
+      "item": {
+        "name": "Human",
+        "overview": "Human mainly supports damage and mobility. Due to high damage increases, Human can assist the player greatly when they wish to perform one-shot combos and improve their PvP skills, and allows for an aggressive playstyle. However, mastering this race is not easy because it does not provide any defense.",
         "source": "ShoptortEvent Shop or Death King",
         "titles": "The Unleashed (V2)Full Power (V3)Berserker (V4)"
       },
-      "overview": "Human mainly supports damage and mobility. Due to high damage increases, Human can assist the player greatly when they wish to perform one-shot combos and improve their PvP skills, and allows for an aggressive playstyle. However, mastering this race is not easy because it does not provide any defense.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Human"
+      "system": {
+        "slug": "human",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Races/human.webp"
+      }
     },
     {
-      "name": "Rabbit",
-      "slug": "rabbit",
-      "image": "/Blox%20Fruits/Races/rabbit.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fd/Rabbit.png/revision/latest/scale-to-width-down/268?cb=20240407190116",
-      "fields": {
+      "item": {
+        "name": "Rabbit",
+        "overview": "Rabbit is widely regarded as a mediocre race in the current Blox Fruits environment, being outclassed by many other races. Its main characteristic is the significant amount of speed boost and mobility that it provides. However, it lacks damage, defense, healing, etc., especially in V4 form.",
         "source": "ShoptortEvent Shop or Death King",
         "titles": "Unmatched Speed (V2)Godspeed (V3)Thunderbolt (V4)"
       },
-      "overview": "Rabbit is widely regarded as a mediocre race in the current Blox Fruits environment, being outclassed by many other races. Its main characteristic is the significant amount of speed boost and mobility that it provides. However, it lacks damage, defense, healing, etc., especially in V4 form.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rabbit"
+      "system": {
+        "slug": "rabbit",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Races/rabbit.webp"
+      }
     },
     {
-      "name": "Shark",
-      "slug": "shark",
-      "image": "/Blox%20Fruits/Races/shark.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/14/Shark.png/revision/latest/scale-to-width-down/268?cb=20240407190116",
-      "fields": {
+      "item": {
+        "name": "Shark",
+        "overview": "The Shark race provides significant damage reduction and allows the user to swim in water without taking damage, making it highly defensive. It is recommended for players participating in sea events for the first time without the Leviathan Shield accessory or for first-time bounty hunting. Shark is strong against one-shot combos, but its mobility and damage output are lower than other races, making it less suitable for advanced play.",
         "source": "ShoptortEvent Shop or Death King",
         "titles": "Sea Monster (V2)Warrior of the Sea (V3)Leviathan (V4)"
       },
-      "overview": "The Shark race provides significant damage reduction and allows the user to swim in water without taking damage, making it highly defensive. It is recommended for players participating in sea events for the first time without the Leviathan Shield accessory or for first-time bounty hunting. Shark is strong against one-shot combos, but its mobility and damage output are lower than other races, making it less suitable for advanced play.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark"
+      "system": {
+        "slug": "shark",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Races/shark.webp"
+      }
     }
   ]
 }

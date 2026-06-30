@@ -1,1879 +1,1773 @@
 {
   "meta": {
-    "title": "Kick a Lucky Block brainrots data",
-    "updatedAt": "2026-05-24",
-    "sources": [
-      {
-        "label": "Eldorado - Kick a Lucky Block All Brainrots Index",
-        "url": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Kick a Lucky Block - Brainrots",
-        "url": "https://kickaluckyblock.com/brainrots",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "xSteal a Brainrot - Complete index of all Brainrots from Kick a Lucky Block",
-        "url": "https://xstealabrainrot.com/kick-a-lucky-block/",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "TechWiser - Kick a Lucky Block All Brainrots",
-        "url": "https://techwiser.com/kick-a-lucky-block-all-brainrots/",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Steal a Brainrot Fandom item images",
-        "url": "https://stealabrainrot.fandom.com/wiki/Swag_Soda",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Plants vs Brainrots Fandom item images",
-        "url": "https://plants-vs-brainrots.fandom.com/wiki/Castlino_Fortini",
-        "accessed": "2026-05-24"
-      }
+    "schemaVersion": 2,
+    "game": "Kick a Lucky Block",
+    "gameSlug": "kick-a-lucky-block",
+    "collection": "brainrots",
+    "route": "/wiki/kick-a-lucky-block/brainrots",
+    "catalogCode": "kick-a-lucky-block-brainrots",
+    "itemFields": [
+      "rarity",
+      "baseIncome",
+      "incomeType",
+      "incomeMultiplier",
+      "availability"
     ],
     "columns": [
       "rarity",
       "baseIncome",
       "incomeType",
       "incomeMultiplier",
-      "availability",
-      "sourceStatus",
-      "image",
-      "sourceImageUrl"
+      "availability"
     ],
-    "notes": "Image audit: 110 of 114 brainrot rows use accepted item-level images. Four weak TechWiser crops were replaced with direct Fandom item renders. Astro Tim, Baba Yaga, Kicky, and Elefantucci Bananucci are intentionally left without images because checked public sources did not provide clean publish-quality item art."
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Common",
+        "Rare",
+        "Epic",
+        "Legendary",
+        "Mythic",
+        "Godly",
+        "Secret",
+        "Divine",
+        "Hacked",
+        "OG",
+        "Celestial",
+        "Eternal",
+        "Exclusive"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "baseIncome",
+        "incomeType",
+        "incomeMultiplier",
+        "availability"
+      ],
+      "tableFields": [
+        "rarity",
+        "baseIncome",
+        "incomeType",
+        "incomeMultiplier",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Noobini Pizzanini",
-      "slug": "noobini-pizzanini",
-      "rarity": "Common",
-      "collectionSection": "Common",
-      "baseIncome": "$2/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/noobini-pizzanini.webp",
-      "sortOrder": 1,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/noob.webp"
-    },
-    {
-      "name": "Lirili Larila",
-      "slug": "lirili-larila",
-      "rarity": "Common",
-      "collectionSection": "Common",
-      "baseIncome": "$3/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/lirili-larila.webp",
-      "sortOrder": 2,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/eleee.webp"
-    },
-    {
-      "name": "Tim Cheese",
-      "slug": "tim-cheese",
-      "rarity": "Common",
-      "collectionSection": "Common",
-      "baseIncome": "$3/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tim-cheese.webp",
-      "sortOrder": 3,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/cheese.webp"
-    },
-    {
-      "name": "Talpa Di Fero",
-      "slug": "talpa-di-fero",
-      "rarity": "Common",
-      "collectionSection": "Common",
-      "baseIncome": "$4/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/talpa-di-fero.webp",
-      "sortOrder": 4,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/fero.webp"
-    },
-    {
-      "name": "Svinina Bombardino",
-      "slug": "svinina-bombardino",
-      "rarity": "Common",
-      "collectionSection": "Common",
-      "baseIncome": "$5/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/svinina-bombardino.webp",
-      "sortOrder": 5,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/pigg.webp"
-    },
-    {
-      "name": "Pipi Kiwi",
-      "slug": "pipi-kiwi",
-      "rarity": "Common",
-      "collectionSection": "Common",
-      "baseIncome": "$6/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pipi-kiwi.webp",
-      "sortOrder": 6,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/kiwi.webp"
-    },
-    {
-      "name": "Trippi Troppi",
-      "slug": "trippi-troppi",
-      "rarity": "Common",
-      "collectionSection": "Common",
-      "baseIncome": "$7/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/trippi-troppi.webp",
-      "sortOrder": 7,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/f/f9/Trip_Trop_Shrimp.png/revision/latest?cb=20251113115055"
-    },
-    {
-      "name": "Fluriflura",
-      "slug": "fluriflura",
-      "rarity": "Common",
-      "collectionSection": "Common",
-      "baseIncome": "$7/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/fluriflura.webp",
-      "sortOrder": 8,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/crow.webp"
-    },
-    {
-      "name": "Gangster Footera",
-      "slug": "gangster-footera",
-      "rarity": "Rare",
-      "collectionSection": "Rare",
-      "baseIncome": "$15/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/gangster-footera.webp",
-      "sortOrder": 9,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/73/Gangster_Footera.png/revision/latest?cb=20260306211838"
-    },
-    {
-      "name": "Bandito Bobritto",
-      "slug": "bandito-bobritto",
-      "rarity": "Rare",
-      "collectionSection": "Rare",
-      "baseIncome": "$17/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bandito-bobritto.webp",
-      "sortOrder": 10,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bob.webp"
-    },
-    {
-      "name": "Boneca Ambalabu",
-      "slug": "boneca-ambalabu",
-      "rarity": "Rare",
-      "collectionSection": "Rare",
-      "baseIncome": "$17/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/boneca-ambalabu.webp",
-      "sortOrder": 11,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bonn.webp"
-    },
-    {
-      "name": "Ta Ta Ta Ta Sahur",
-      "slug": "ta-ta-ta-ta-sahur",
-      "rarity": "Rare",
-      "collectionSection": "Rare",
-      "baseIncome": "$18/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/ta-ta-ta-ta-sahur.webp",
-      "sortOrder": 12,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/ta.webp"
-    },
-    {
-      "name": "Ballerina Cappuccina",
-      "slug": "ballerina-cappuccina",
-      "rarity": "Rare",
-      "collectionSection": "Rare",
-      "baseIncome": "$19/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/ballerina-cappuccina.webp",
-      "sortOrder": 13,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bal.webp"
-    },
-    {
-      "name": "Cappuccino Assassino",
-      "slug": "cappuccino-assassino",
-      "rarity": "Rare",
-      "collectionSection": "Rare",
-      "baseIncome": "$22/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cappuccino-assassino.webp",
-      "sortOrder": 14,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/cccc.webp"
-    },
-    {
-      "name": "Brr Brr Patapim",
-      "slug": "brr-brr-patapim",
-      "rarity": "Rare",
-      "collectionSection": "Rare",
-      "baseIncome": "$22/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/brr-brr-patapim.webp",
-      "sortOrder": 15,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/wewew.webp"
-    },
-    {
-      "name": "Cacto Hipopotamo",
-      "slug": "cacto-hipopotamo",
-      "rarity": "Rare",
-      "collectionSection": "Rare",
-      "baseIncome": "$26/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cacto-hipopotamo.webp",
-      "sortOrder": 16,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/hopop.webp"
-    },
-    {
-      "name": "Garamaramam",
-      "slug": "garamaramam",
-      "rarity": "Epic",
-      "collectionSection": "Epic",
-      "baseIncome": "$40/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/garamaramam.webp",
-      "sortOrder": 17,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/gmr.webp"
-    },
-    {
-      "name": "Madung",
-      "slug": "madung",
-      "rarity": "Epic",
-      "collectionSection": "Epic",
-      "baseIncome": "$44/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/madung.webp",
-      "sortOrder": 18,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/mudang.webp"
-    },
-    {
-      "name": "Waterdino",
-      "slug": "waterdino",
-      "rarity": "Epic",
-      "collectionSection": "Epic",
-      "baseIncome": "$50/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/waterdino.webp",
-      "sortOrder": 19,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/water.webp"
-    },
-    {
-      "name": "Pesto Mortioni",
-      "slug": "pesto-mortioni",
-      "rarity": "Epic",
-      "collectionSection": "Epic",
-      "baseIncome": "$52/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pesto-mortioni.webp",
-      "sortOrder": 20,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/pesto.webp"
-    },
-    {
-      "name": "Pannaburro",
-      "slug": "pannaburro",
-      "rarity": "Epic",
-      "collectionSection": "Epic",
-      "baseIncome": "$62/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pannaburro.webp",
-      "sortOrder": 21,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/panna.webp"
-    },
-    {
-      "name": "Orcalero",
-      "slug": "orcalero",
-      "rarity": "Epic",
-      "collectionSection": "Epic",
-      "baseIncome": "$66/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/orcalero.webp",
-      "sortOrder": 22,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/orca.webp"
-    },
-    {
-      "name": "Mangolini Parrocini",
-      "slug": "mangolini-parrocini",
-      "rarity": "Epic",
-      "collectionSection": "Epic",
-      "baseIncome": "$66/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/mangolini-parrocini.webp",
-      "sortOrder": 23,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/totas.webp"
-    },
-    {
-      "name": "John Pork",
-      "slug": "john-pork",
-      "rarity": "Epic",
-      "collectionSection": "Epic",
-      "baseIncome": "$72/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/john-pork.webp",
-      "sortOrder": 24,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/john.webp"
-    },
-    {
-      "name": "Gattatino Nyanino",
-      "slug": "gattatino-nyanino",
-      "rarity": "Epic",
-      "collectionSection": "Epic",
-      "baseIncome": "$76/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/gattatino-nyanino.webp",
-      "sortOrder": 25,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bhila.webp"
-    },
-    {
-      "name": "Chimpanzini Bananini",
-      "slug": "chimpanzini-bananini",
-      "rarity": "Legendary",
-      "collectionSection": "Legendary",
-      "baseIncome": "$100/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/chimpanzini-bananini.webp",
-      "sortOrder": 26,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bandar.webp"
-    },
-    {
-      "name": "Plan Red",
-      "slug": "plan-red",
-      "rarity": "Legendary",
-      "collectionSection": "Legendary",
-      "baseIncome": "$130/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/plan-red.webp",
-      "sortOrder": 27,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/red.webp"
-    },
-    {
-      "name": "Plan Blue",
-      "slug": "plan-blue",
-      "rarity": "Legendary",
-      "collectionSection": "Legendary",
-      "baseIncome": "$140/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/plan-blue.webp",
-      "sortOrder": 28,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bluew.webp"
-    },
-    {
-      "name": "Capi Taco",
-      "slug": "capi-taco",
-      "rarity": "Legendary",
-      "collectionSection": "Legendary",
-      "baseIncome": "$150/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/capi-taco.webp",
-      "sortOrder": 29,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/taco.webp"
-    },
-    {
-      "name": "Bambini Crostini",
-      "slug": "bambini-crostini",
-      "rarity": "Legendary",
-      "collectionSection": "Legendary",
-      "baseIncome": "$180/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bambini-crostini.webp",
-      "sortOrder": 30,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/deer.webp"
-    },
-    {
-      "name": "Trulimero Trulicina",
-      "slug": "trulimero-trulicina",
-      "rarity": "Legendary",
-      "collectionSection": "Legendary",
-      "baseIncome": "$160/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/trulimero-trulicina.webp",
-      "sortOrder": 31,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/d3/Trulimero_Trulicina.png/revision/latest?cb=20260419094842"
-    },
-    {
-      "name": "Elefantucci Bananucci",
-      "slug": "elefantucci-bananucci",
-      "rarity": "Legendary",
-      "collectionSection": "Legendary",
-      "baseIncome": "$170/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": null,
-      "sortOrder": 32,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": null,
-      "imageStatus": "needs clean in-game capture; TechWiser radial graphic rejected for publish quality"
-    },
-    {
-      "name": "Bananita Dolphinita",
-      "slug": "bananita-dolphinita",
-      "rarity": "Legendary",
-      "collectionSection": "Legendary",
-      "baseIncome": "$210/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bananita-dolphinita.webp",
-      "sortOrder": 33,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/kea.webp"
-    },
-    {
-      "name": "Salamino Penguino",
-      "slug": "salamino-penguino",
-      "rarity": "Legendary",
-      "collectionSection": "Legendary",
-      "baseIncome": "$230/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/salamino-penguino.webp",
-      "sortOrder": 34,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/penguin.webp"
-    },
-    {
-      "name": "Penguino Cocosino",
-      "slug": "penguino-cocosino",
-      "rarity": "Mythic",
-      "collectionSection": "Mythic",
-      "baseIncome": "$450/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/penguino-cocosino.webp",
-      "sortOrder": 35,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/mslkdmskd.webp"
-    },
-    {
-      "name": "67",
-      "slug": "67",
-      "rarity": "Mythic",
-      "collectionSection": "Mythic",
-      "baseIncome": "$500/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/67.webp",
-      "sortOrder": 36,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/67.webp"
-    },
-    {
-      "name": "Burbaloni Lulliloli",
-      "slug": "burbaloni-lulliloli",
-      "rarity": "Mythic",
-      "collectionSection": "Mythic",
-      "baseIncome": "$550/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/burbaloni-lulliloli.webp",
-      "sortOrder": 37,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bang.webp"
-    },
-    {
-      "name": "Chef Crabracadabra",
-      "slug": "chef-crabracadabra",
-      "rarity": "Mythic",
-      "collectionSection": "Mythic",
-      "baseIncome": "$600/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/chef-crabracadabra.webp",
-      "sortOrder": 38,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/crab.webp"
-    },
-    {
-      "name": "Capybara Eggplant",
-      "slug": "capybara-eggplant",
-      "rarity": "Mythic",
-      "collectionSection": "Mythic",
-      "baseIncome": "$650/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/capybara-eggplant.webp",
-      "sortOrder": 39,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/egg.webp"
-    },
-    {
-      "name": "Bangello",
-      "slug": "bangello",
-      "rarity": "Mythic",
-      "collectionSection": "Mythic",
-      "baseIncome": "$725/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bangello.webp",
-      "sortOrder": 40,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/3/3a/Bangello1.png/revision/latest?cb=20251020052150"
-    },
-    {
-      "name": "Elefanto Frigo",
-      "slug": "elefanto-frigo",
-      "rarity": "Mythic",
-      "collectionSection": "Mythic",
-      "baseIncome": "$775/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/elefanto-frigo.webp",
-      "sortOrder": 41,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/ele.webp"
-    },
-    {
-      "name": "Rinoccio Verdini",
-      "slug": "rinoccio-verdini",
-      "rarity": "Mythic",
-      "collectionSection": "Mythic",
-      "baseIncome": "$880/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/rinoccio-verdini.webp",
-      "sortOrder": 42,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/rino.webp"
-    },
-    {
-      "name": "Glorbo Fruttodrilo",
-      "slug": "glorbo-fruttodrilo",
-      "rarity": "Mythic",
-      "collectionSection": "Mythic",
-      "baseIncome": "$920/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/glorbo-fruttodrilo.webp",
-      "sortOrder": 43,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/glorbo.webp"
-    },
-    {
-      "name": "Udin Din Din Dun",
-      "slug": "udin-din-din-dun",
-      "rarity": "Godly",
-      "collectionSection": "Godly",
-      "baseIncome": "$1.8K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/udin-din-din-dun.webp",
-      "sortOrder": 44,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/udn.webp"
-    },
-    {
-      "name": "Pandaccini Bananini",
-      "slug": "pandaccini-bananini",
-      "rarity": "Godly",
-      "collectionSection": "Godly",
-      "baseIncome": "$2K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pandaccini-bananini.webp",
-      "sortOrder": 45,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/panda.webp"
-    },
-    {
-      "name": "Waterino",
-      "slug": "waterino",
-      "rarity": "Godly",
-      "collectionSection": "Godly",
-      "baseIncome": "$2.1K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/waterino.webp",
-      "sortOrder": 46,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/octopus.webp"
-    },
-    {
-      "name": "Strawberreli Flamingelli",
-      "slug": "strawberreli-flamingelli",
-      "rarity": "Godly",
-      "collectionSection": "Godly",
-      "baseIncome": "$2.3K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/strawberreli-flamingelli.webp",
-      "sortOrder": 47,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/flamingo.webp"
-    },
-    {
-      "name": "Sigma Boy",
-      "slug": "sigma-boy",
-      "rarity": "Godly",
-      "collectionSection": "Godly",
-      "baseIncome": "$2.4K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/sigma-boy.webp",
-      "sortOrder": 48,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/boy.webp"
-    },
-    {
-      "name": "Frigo Camelo",
-      "slug": "frigo-camelo",
-      "rarity": "Godly",
-      "collectionSection": "Godly",
-      "baseIncome": "$2.6K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/frigo-camelo.webp",
-      "sortOrder": 49,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/camel.webp"
-    },
-    {
-      "name": "Orangutini Ananasini",
-      "slug": "orangutini-ananasini",
-      "rarity": "Godly",
-      "collectionSection": "Godly",
-      "baseIncome": "$2.7K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/orangutini-ananasini.webp",
-      "sortOrder": 50,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/orange.webp"
-    },
-    {
-      "name": "Rhino Toasterino",
-      "slug": "rhino-toasterino",
-      "rarity": "Godly",
-      "collectionSection": "Godly",
-      "baseIncome": "$2.8K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/rhino-toasterino.webp",
-      "sortOrder": 51,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/rhino.webp"
-    },
-    {
-      "name": "Bombardiro Crocodilo",
-      "slug": "bombardiro-crocodilo",
-      "rarity": "Godly",
-      "collectionSection": "Godly",
-      "baseIncome": "$3.1K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bombardiro-crocodilo.webp",
-      "sortOrder": 52,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/bomb.webp"
-    },
-    {
-      "name": "Bombini Gusini",
-      "slug": "bombini-gusini",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$4.7K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bombini-gusini.webp",
-      "sortOrder": 53,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/e/e0/Bombombini_Gusini.png/revision/latest?cb=20250909223121"
-    },
-    {
-      "name": "Castlino Fortini",
-      "slug": "castlino-fortini",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/castlino-fortini.webp",
-      "sortOrder": 54,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/4/4f/Castlino_Fortini.png/revision/latest?cb=20251129214004"
-    },
-    {
-      "name": "Tuff Toucan",
-      "slug": "tuff-toucan",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$5.3K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tuff-toucan.webp",
-      "sortOrder": 55,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tuffff.webp"
-    },
-    {
-      "name": "Fryuro",
-      "slug": "fryuro",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$5.8K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/fryuro.webp",
-      "sortOrder": 56,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/fries.webp"
-    },
-    {
-      "name": "Burguro",
-      "slug": "burguro",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$6.2K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/burguro.webp",
-      "sortOrder": 57,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/burger.webp"
-    },
-    {
-      "name": "Guest666",
-      "slug": "guest666",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$7K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/guest666.webp",
-      "sortOrder": 58,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/666.webp"
-    },
-    {
-      "name": "Zibra Zubra Zibralini",
-      "slug": "zibra-zubra-zibralini",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$7.7K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/zibra-zubra-zibralini.webp",
-      "sortOrder": 59,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/zebra.webp"
-    },
-    {
-      "name": "Cavallo Virtuoso",
-      "slug": "cavallo-virtuoso",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$8.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cavallo-virtuoso.webp",
-      "sortOrder": 60,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/sassas.webp"
-    },
-    {
-      "name": "Gorillo Watermelondrillo",
-      "slug": "gorillo-watermelondrillo",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$9.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/gorillo-watermelondrillo.webp",
-      "sortOrder": 61,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tarbooz.webp"
-    },
-    {
-      "name": "Cocofanto Elefanto",
-      "slug": "cocofanto-elefanto",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$10K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cocofanto-elefanto.webp",
-      "sortOrder": 62,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/coco.webp"
-    },
-    {
-      "name": "Bambu Sahur",
-      "slug": "bambu-sahur",
-      "rarity": "Secret",
-      "collectionSection": "Secret",
-      "baseIncome": "$12.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bambu-sahur.webp",
-      "sortOrder": 63,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/da/Bambu_sahur_full_rost.png/revision/latest?cb=20251203093726"
-    },
-    {
-      "name": "WL",
-      "slug": "wl",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$15K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/wl.webp",
-      "sortOrder": 64,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/4/43/WL.png/revision/latest?cb=20251122214045"
-    },
-    {
-      "name": "Girafa Celeste",
-      "slug": "girafa-celeste",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$16K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/girafa-celeste.webp",
-      "sortOrder": 65,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/celete.webp"
-    },
-    {
-      "name": "Tralalero Tralala",
-      "slug": "tralalero-tralala",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$17.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tralalero-tralala.webp",
-      "sortOrder": 66,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/shrsk.webp"
-    },
-    {
-      "name": "Tralalerita Tralala",
-      "slug": "tralalerita-tralala",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$18K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tralalerita-tralala.webp",
-      "sortOrder": 67,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tuna.webp"
-    },
-    {
-      "name": "Peant Jarro",
-      "slug": "peant-jarro",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$19.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/peant-jarro.webp",
-      "sortOrder": 68,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/ddsdsd.webp"
-    },
-    {
-      "name": "Dipperl Chiperini",
-      "slug": "dipperl-chiperini",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$20K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/dipperl-chiperini.webp",
-      "sortOrder": 69,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/chip.webp"
-    },
-    {
-      "name": "Rexosaurus",
-      "slug": "rexosaurus",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$22.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/rexosaurus.webp",
-      "sortOrder": 70,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/dino.webp"
-    },
-    {
-      "name": "1x1x1x1",
-      "slug": "1x1x1x1",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$23K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/1x1x1x1.webp",
-      "sortOrder": 71,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/1X1X1.webp"
-    },
-    {
-      "name": "Matteo",
-      "slug": "matteo",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$25K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/matteo.webp",
-      "sortOrder": 72,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/mtt.webp"
-    },
-    {
-      "name": "Espresso Signora",
-      "slug": "espresso-signora",
-      "rarity": "Divine",
-      "collectionSection": "Divine",
-      "baseIncome": "$27.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/espresso-signora.webp",
-      "sortOrder": 73,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/a/ad/Espresso.png/revision/latest?cb=20251202130252"
-    },
-    {
-      "name": "Alessio",
-      "slug": "alessio",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$27.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/alessio.webp",
-      "sortOrder": 74,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/aless.webp"
-    },
-    {
-      "name": "Tripi Tropi Tropa Tripa",
-      "slug": "tripi-tropi-tropa-tripa",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$28K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tripi-tropi-tropa-tripa.webp",
-      "sortOrder": 75,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tropa.webp"
-    },
-    {
-      "name": "Swag Soda",
-      "slug": "swag-soda",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$29K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/swag-soda.webp",
-      "sortOrder": 76,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/9f/Swag_Soda.png/revision/latest?cb=20260323193131"
-    },
-    {
-      "name": "Stoppo Luminino",
-      "slug": "stoppo-luminino",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$30K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/stoppo-luminino.webp",
-      "sortOrder": 77,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b6/Stoppo_Luminino.png/revision/latest?cb=20251108231758"
-    },
-    {
-      "name": "Torrtuginni Dragonfrutini",
-      "slug": "torrtuginni-dragonfrutini",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$32K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/torrtuginni-dragonfrutini.webp",
-      "sortOrder": 78,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/dragon.webp"
-    },
-    {
-      "name": "Tictac Sahur",
-      "slug": "tictac-sahur",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$38K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tictac-sahur.webp",
-      "sortOrder": 79,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/tictac.webp"
-    },
-    {
-      "name": "Cactus Pingo",
-      "slug": "cactus-pingo",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$44.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cactus-pingo.webp",
-      "sortOrder": 80,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/cactus.webp"
-    },
-    {
-      "name": "Los Primos Blue",
-      "slug": "los-primos-blue",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$44.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/los-primos-blue.webp",
-      "sortOrder": 81,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/blue.webp"
-    },
-    {
-      "name": "La Vacca Saturno Saturnita",
-      "slug": "la-vacca-saturno-saturnita",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$48.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/la-vacca-saturno-saturnita.webp",
-      "sortOrder": 82,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/saturn.webp"
-    },
-    {
-      "name": "Agarrini La Palini",
-      "slug": "agarrini-la-palini",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$53.5K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/agarrini-la-palini.webp",
-      "sortOrder": 83,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/kulhadi.webp"
-    },
-    {
-      "name": "Bottellini",
-      "slug": "bottellini",
-      "rarity": "Hacked",
-      "collectionSection": "Hacked",
-      "baseIncome": "$75K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/bottellini.webp",
-      "sortOrder": 84,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/1/18/Bottellini.png/revision/latest?cb=20251012193543"
-    },
-    {
-      "name": "Karkerkar Kurkur",
-      "slug": "karkerkar-kurkur",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$120K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/karkerkar-kurkur.webp",
-      "sortOrder": 85,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/kursi.webp"
-    },
-    {
-      "name": "Blackhole Goat",
-      "slug": "blackhole-goat",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$125K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/blackhole-goat.webp",
-      "sortOrder": 86,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/goat.webp"
-    },
-    {
-      "name": "Compactoroni Daskaloni",
-      "slug": "compactoroni-daskaloni",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$135K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/compactoroni-daskaloni.webp",
-      "sortOrder": 87,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/dsik.webp"
-    },
-    {
-      "name": "Cappuccino Clownino",
-      "slug": "cappuccino-clownino",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$140K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/cappuccino-clownino.webp",
-      "sortOrder": 88,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/capp.webp"
-    },
-    {
-      "name": "Nuclearo Dinossauro",
-      "slug": "nuclearo-dinossauro",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$190K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/nuclearo-dinossauro.webp",
-      "sortOrder": 89,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b5/Nuclearo_Dinossauro.png/revision/latest?cb=20260328003025"
-    },
-    {
-      "name": "Los Noo My Hotspotsitos",
-      "slug": "los-noo-my-hotspotsitos",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$200K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/los-noo-my-hotspotsitos.webp",
-      "sortOrder": 90,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/cb/LosNooMyHotspotsitos.png/revision/latest?cb=20250903124000"
-    },
-    {
-      "name": "Chillin Chilli",
-      "slug": "chillin-chilli",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$220K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/chillin-chilli.webp",
-      "sortOrder": 91,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://techwiser.com/wp-content/uploads/2026/05/chilli.webp"
-    },
-    {
-      "name": "Crazylone Pizaione",
-      "slug": "crazylone-pizaione",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$225K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/crazylone-pizaione.webp",
-      "sortOrder": 92,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/8/88/CrazylonePizaione.png/revision/latest?cb=20251012185234"
-    },
-    {
-      "name": "Corn Sahur",
-      "slug": "corn-sahur",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$225K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/corn-sahur.webp",
-      "sortOrder": 93,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/06/CornSahur.png/revision/latest?cb=20251006205228"
-    },
-    {
-      "name": "Meowl",
-      "slug": "meowl",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$275K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/meowl.webp",
-      "sortOrder": 94,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b8/Clear_background_clear_meowl_image.png/revision/latest?cb=20251022133154"
-    },
-    {
-      "name": "Strawberry Elephant",
-      "slug": "strawberry-elephant",
-      "rarity": "OG",
-      "collectionSection": "OG",
-      "baseIncome": "$420K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index",
-      "sourceConfidence": "current index with older partial source coverage",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/strawberry-elephant.webp",
-      "sortOrder": 95,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/58/Strawberryelephant.png/revision/latest?cb=20260317001745"
-    },
-    {
-      "name": "Dragonfrutina Dolphinita",
-      "slug": "dragonfrutina-dolphinita",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$475K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/dragonfrutina-dolphinita.webp",
-      "sortOrder": 96,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/plants-vs-brainro-ts/images/d/de/Dragonfrutina_Dolphinita1.png/revision/latest?cb=20251007090246"
-    },
-    {
-      "name": "Guerriro Digitale",
-      "slug": "guerriro-digitale",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$490K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/guerriro-digitale.webp",
-      "sortOrder": 97,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/7c/Guerriro_Digitale.png/revision/latest?cb=20260422155418"
-    },
-    {
-      "name": "Chicleteira Bicicleteira",
-      "slug": "chicleteira-bicicleteira",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$500K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/chicleteira-bicicleteira.webp",
-      "sortOrder": 98,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/5a/Chicleteira.png/revision/latest?cb=20250921012655"
-    },
-    {
-      "name": "Pot Hotspot",
-      "slug": "pot-hotspot",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$525K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/pot-hotspot.webp",
-      "sortOrder": 99,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4b/Pot_Hotspot.png/revision/latest?cb=20260428164612"
-    },
-    {
-      "name": "Krupuk Pagi Pagi",
-      "slug": "krupuk-pagi-pagi",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$540K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/krupuk-pagi-pagi.webp",
-      "sortOrder": 100,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/c8/Krupuk_Pagi_Pagi.png/revision/latest?cb=20260420132451"
-    },
-    {
-      "name": "Beluga Beluga",
-      "slug": "beluga-beluga",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$575K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/beluga-beluga.webp",
-      "sortOrder": 101,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/56/Belulaa.png/revision/latest?cb=20251115205345"
-    },
-    {
-      "name": "Tralaledon",
-      "slug": "tralaledon",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$625K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/tralaledon.webp",
-      "sortOrder": 102,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/79/Brr_Brr_Patapem.png/revision/latest?cb=20250909171639"
-    },
-    {
-      "name": "Anpali Babel",
-      "slug": "anpali-babel",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$750K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/anpali-babel.webp",
-      "sortOrder": 103,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/6a/Anpali_Babel.png/revision/latest?cb=20250909165504"
-    },
-    {
-      "name": "Ketchuru and Musturu",
-      "slug": "ketchuru-and-musturu",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$800K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/ketchuru-and-musturu.webp",
-      "sortOrder": 104,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/14/Ketchuru.png/revision/latest?cb=20251021163857"
-    },
-    {
-      "name": "Los Primos",
-      "slug": "los-primos",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$800K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/los-primos.webp",
-      "sortOrder": 105,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/96/LosPrimos.png/revision/latest?cb=20251006044831"
-    },
-    {
-      "name": "Mastodontico Telepiedone",
-      "slug": "mastodontico-telepiedone",
-      "rarity": "Celestial",
-      "collectionSection": "Celestial",
-      "baseIncome": "$850K/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/mastodontico-telepiedone.webp",
-      "sortOrder": 106,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b0/Mastodontico_Telepiedone.png/revision/latest?cb=20250902184428"
-    },
-    {
-      "name": "Ketupat Kepat",
-      "slug": "ketupat-kepat",
-      "rarity": "Eternal",
-      "collectionSection": "Eternal",
-      "baseIncome": "$1M/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/ketupat-kepat.webp",
-      "sortOrder": 107,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/ac/KetupatKepat.png/revision/latest?cb=20260324191002"
-    },
-    {
-      "name": "Professora 67",
-      "slug": "professora-67",
-      "rarity": "Eternal",
-      "collectionSection": "Eternal",
-      "baseIncome": "$1M/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/professora-67.webp",
-      "sortOrder": 108,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/40/Fourtyone.png/revision/latest?cb=20251014024859"
-    },
-    {
-      "name": "Astro Tim",
-      "slug": "astro-tim",
-      "rarity": "Eternal",
-      "collectionSection": "Eternal",
-      "baseIncome": "$1.1M/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": null,
-      "sortOrder": 109,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": null,
-      "imageStatus": "needs clean in-game capture; xSteal card crop rejected for publish quality"
-    },
-    {
-      "name": "Baba Yaga",
-      "slug": "baba-yaga",
-      "rarity": "Eternal",
-      "collectionSection": "Eternal",
-      "baseIncome": "$1.2M/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": null,
-      "sortOrder": 110,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": null,
-      "imageStatus": "needs clean in-game capture; xSteal card crop rejected for publish quality"
-    },
-    {
-      "name": "Kicky",
-      "slug": "kicky",
-      "rarity": "Eternal",
-      "collectionSection": "Eternal",
-      "baseIncome": "$1.4M/s",
-      "incomeType": "cash_per_second",
-      "incomeMultiplier": null,
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": null,
-      "sortOrder": 111,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": null,
-      "imageStatus": "needs clean in-game capture; xSteal card crop rejected for publish quality"
-    },
-    {
-      "name": "Spaghetti Tualetti",
-      "slug": "spaghetti-tualetti",
-      "rarity": "Exclusive",
-      "collectionSection": "Exclusive",
-      "baseIncome": null,
-      "incomeType": "exclusive_percent",
-      "incomeMultiplier": "150%",
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/spaghetti-tualetti.webp",
-      "sortOrder": 112,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b8/Spaghettitualetti.png/revision/latest?cb=20251122142032"
-    },
-    {
-      "name": "Dragon Cannelloni",
-      "slug": "dragon-cannelloni",
-      "rarity": "Exclusive",
-      "collectionSection": "Exclusive",
-      "baseIncome": null,
-      "incomeType": "exclusive_percent",
-      "incomeMultiplier": "200%",
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/dragon-cannelloni.webp",
-      "sortOrder": 113,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a5/Dragon_Cannelloni.png/revision/latest?cb=20260428162417"
-    },
-    {
-      "name": "Esok Sekolah",
-      "slug": "esok-sekolah",
-      "rarity": "Exclusive",
-      "collectionSection": "Exclusive",
-      "baseIncome": null,
-      "incomeType": "exclusive_percent",
-      "incomeMultiplier": "250%",
-      "availability": "Documented brainrot entry",
-      "sourceStatus": "current-index-only",
-      "sourceConfidence": "single current index source",
-      "image": "/Kick%20a%20Lucky%20Block/Brainrots/esok-sekolah.webp",
-      "sortOrder": 114,
-      "sourcePage": "https://www.eldorado.gg/blog/kick-a-lucky-block-all-brainrots-index/",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2a/EsokSekolah2.png/revision/latest?cb=20250819001020"
+      "item": {
+        "name": "Noobini Pizzanini",
+        "rarity": "Common",
+        "baseIncome": "$2/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "noobini-pizzanini",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/noobini-pizzanini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lirili Larila",
+        "rarity": "Common",
+        "baseIncome": "$3/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "lirili-larila",
+        "section": "Common",
+        "sortOrder": 2,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/lirili-larila.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tim Cheese",
+        "rarity": "Common",
+        "baseIncome": "$3/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "tim-cheese",
+        "section": "Common",
+        "sortOrder": 3,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/tim-cheese.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Talpa Di Fero",
+        "rarity": "Common",
+        "baseIncome": "$4/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "talpa-di-fero",
+        "section": "Common",
+        "sortOrder": 4,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/talpa-di-fero.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Svinina Bombardino",
+        "rarity": "Common",
+        "baseIncome": "$5/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "svinina-bombardino",
+        "section": "Common",
+        "sortOrder": 5,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/svinina-bombardino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pipi Kiwi",
+        "rarity": "Common",
+        "baseIncome": "$6/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "pipi-kiwi",
+        "section": "Common",
+        "sortOrder": 6,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/pipi-kiwi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Trippi Troppi",
+        "rarity": "Common",
+        "baseIncome": "$7/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "trippi-troppi",
+        "section": "Common",
+        "sortOrder": 7,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/trippi-troppi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fluriflura",
+        "rarity": "Common",
+        "baseIncome": "$7/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "fluriflura",
+        "section": "Common",
+        "sortOrder": 8,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/fluriflura.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gangster Footera",
+        "rarity": "Rare",
+        "baseIncome": "$15/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "gangster-footera",
+        "section": "Rare",
+        "sortOrder": 9,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/gangster-footera.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bandito Bobritto",
+        "rarity": "Rare",
+        "baseIncome": "$17/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "bandito-bobritto",
+        "section": "Rare",
+        "sortOrder": 10,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/bandito-bobritto.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Boneca Ambalabu",
+        "rarity": "Rare",
+        "baseIncome": "$17/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "boneca-ambalabu",
+        "section": "Rare",
+        "sortOrder": 11,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/boneca-ambalabu.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ta Ta Ta Ta Sahur",
+        "rarity": "Rare",
+        "baseIncome": "$18/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "ta-ta-ta-ta-sahur",
+        "section": "Rare",
+        "sortOrder": 12,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/ta-ta-ta-ta-sahur.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ballerina Cappuccina",
+        "rarity": "Rare",
+        "baseIncome": "$19/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "ballerina-cappuccina",
+        "section": "Rare",
+        "sortOrder": 13,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/ballerina-cappuccina.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cappuccino Assassino",
+        "rarity": "Rare",
+        "baseIncome": "$22/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "cappuccino-assassino",
+        "section": "Rare",
+        "sortOrder": 14,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/cappuccino-assassino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brr Brr Patapim",
+        "rarity": "Rare",
+        "baseIncome": "$22/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "brr-brr-patapim",
+        "section": "Rare",
+        "sortOrder": 15,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/brr-brr-patapim.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cacto Hipopotamo",
+        "rarity": "Rare",
+        "baseIncome": "$26/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "cacto-hipopotamo",
+        "section": "Rare",
+        "sortOrder": 16,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/cacto-hipopotamo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Garamaramam",
+        "rarity": "Epic",
+        "baseIncome": "$40/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "garamaramam",
+        "section": "Epic",
+        "sortOrder": 17,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/garamaramam.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Madung",
+        "rarity": "Epic",
+        "baseIncome": "$44/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "madung",
+        "section": "Epic",
+        "sortOrder": 18,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/madung.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Waterdino",
+        "rarity": "Epic",
+        "baseIncome": "$50/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "waterdino",
+        "section": "Epic",
+        "sortOrder": 19,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/waterdino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pesto Mortioni",
+        "rarity": "Epic",
+        "baseIncome": "$52/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "pesto-mortioni",
+        "section": "Epic",
+        "sortOrder": 20,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/pesto-mortioni.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pannaburro",
+        "rarity": "Epic",
+        "baseIncome": "$62/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "pannaburro",
+        "section": "Epic",
+        "sortOrder": 21,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/pannaburro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orcalero",
+        "rarity": "Epic",
+        "baseIncome": "$66/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "orcalero",
+        "section": "Epic",
+        "sortOrder": 22,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/orcalero.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mangolini Parrocini",
+        "rarity": "Epic",
+        "baseIncome": "$66/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "mangolini-parrocini",
+        "section": "Epic",
+        "sortOrder": 23,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/mangolini-parrocini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "John Pork",
+        "rarity": "Epic",
+        "baseIncome": "$72/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "john-pork",
+        "section": "Epic",
+        "sortOrder": 24,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/john-pork.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gattatino Nyanino",
+        "rarity": "Epic",
+        "baseIncome": "$76/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "gattatino-nyanino",
+        "section": "Epic",
+        "sortOrder": 25,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/gattatino-nyanino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chimpanzini Bananini",
+        "rarity": "Legendary",
+        "baseIncome": "$100/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "chimpanzini-bananini",
+        "section": "Legendary",
+        "sortOrder": 26,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/chimpanzini-bananini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plan Red",
+        "rarity": "Legendary",
+        "baseIncome": "$130/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "plan-red",
+        "section": "Legendary",
+        "sortOrder": 27,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/plan-red.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plan Blue",
+        "rarity": "Legendary",
+        "baseIncome": "$140/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "plan-blue",
+        "section": "Legendary",
+        "sortOrder": 28,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/plan-blue.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Capi Taco",
+        "rarity": "Legendary",
+        "baseIncome": "$150/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "capi-taco",
+        "section": "Legendary",
+        "sortOrder": 29,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/capi-taco.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bambini Crostini",
+        "rarity": "Legendary",
+        "baseIncome": "$180/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "bambini-crostini",
+        "section": "Legendary",
+        "sortOrder": 30,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/bambini-crostini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Trulimero Trulicina",
+        "rarity": "Legendary",
+        "baseIncome": "$160/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "trulimero-trulicina",
+        "section": "Legendary",
+        "sortOrder": 31,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/trulimero-trulicina.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elefantucci Bananucci",
+        "rarity": "Legendary",
+        "baseIncome": "$170/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "elefantucci-bananucci",
+        "section": "Legendary",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bananita Dolphinita",
+        "rarity": "Legendary",
+        "baseIncome": "$210/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "bananita-dolphinita",
+        "section": "Legendary",
+        "sortOrder": 33,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/bananita-dolphinita.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Salamino Penguino",
+        "rarity": "Legendary",
+        "baseIncome": "$230/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "salamino-penguino",
+        "section": "Legendary",
+        "sortOrder": 34,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/salamino-penguino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Penguino Cocosino",
+        "rarity": "Mythic",
+        "baseIncome": "$450/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "penguino-cocosino",
+        "section": "Mythic",
+        "sortOrder": 35,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/penguino-cocosino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "67",
+        "rarity": "Mythic",
+        "baseIncome": "$500/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "67",
+        "section": "Mythic",
+        "sortOrder": 36,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/67.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Burbaloni Lulliloli",
+        "rarity": "Mythic",
+        "baseIncome": "$550/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "burbaloni-lulliloli",
+        "section": "Mythic",
+        "sortOrder": 37,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/burbaloni-lulliloli.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chef Crabracadabra",
+        "rarity": "Mythic",
+        "baseIncome": "$600/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "chef-crabracadabra",
+        "section": "Mythic",
+        "sortOrder": 38,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/chef-crabracadabra.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Capybara Eggplant",
+        "rarity": "Mythic",
+        "baseIncome": "$650/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "capybara-eggplant",
+        "section": "Mythic",
+        "sortOrder": 39,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/capybara-eggplant.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bangello",
+        "rarity": "Mythic",
+        "baseIncome": "$725/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "bangello",
+        "section": "Mythic",
+        "sortOrder": 40,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/bangello.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elefanto Frigo",
+        "rarity": "Mythic",
+        "baseIncome": "$775/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "elefanto-frigo",
+        "section": "Mythic",
+        "sortOrder": 41,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/elefanto-frigo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rinoccio Verdini",
+        "rarity": "Mythic",
+        "baseIncome": "$880/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "rinoccio-verdini",
+        "section": "Mythic",
+        "sortOrder": 42,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/rinoccio-verdini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Glorbo Fruttodrilo",
+        "rarity": "Mythic",
+        "baseIncome": "$920/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "glorbo-fruttodrilo",
+        "section": "Mythic",
+        "sortOrder": 43,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/glorbo-fruttodrilo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Udin Din Din Dun",
+        "rarity": "Godly",
+        "baseIncome": "$1.8K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "udin-din-din-dun",
+        "section": "Godly",
+        "sortOrder": 44,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/udin-din-din-dun.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pandaccini Bananini",
+        "rarity": "Godly",
+        "baseIncome": "$2K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "pandaccini-bananini",
+        "section": "Godly",
+        "sortOrder": 45,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/pandaccini-bananini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Waterino",
+        "rarity": "Godly",
+        "baseIncome": "$2.1K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "waterino",
+        "section": "Godly",
+        "sortOrder": 46,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/waterino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberreli Flamingelli",
+        "rarity": "Godly",
+        "baseIncome": "$2.3K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "strawberreli-flamingelli",
+        "section": "Godly",
+        "sortOrder": 47,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/strawberreli-flamingelli.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sigma Boy",
+        "rarity": "Godly",
+        "baseIncome": "$2.4K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "sigma-boy",
+        "section": "Godly",
+        "sortOrder": 48,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/sigma-boy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frigo Camelo",
+        "rarity": "Godly",
+        "baseIncome": "$2.6K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "frigo-camelo",
+        "section": "Godly",
+        "sortOrder": 49,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/frigo-camelo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orangutini Ananasini",
+        "rarity": "Godly",
+        "baseIncome": "$2.7K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "orangutini-ananasini",
+        "section": "Godly",
+        "sortOrder": 50,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/orangutini-ananasini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rhino Toasterino",
+        "rarity": "Godly",
+        "baseIncome": "$2.8K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "rhino-toasterino",
+        "section": "Godly",
+        "sortOrder": 51,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/rhino-toasterino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bombardiro Crocodilo",
+        "rarity": "Godly",
+        "baseIncome": "$3.1K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "bombardiro-crocodilo",
+        "section": "Godly",
+        "sortOrder": 52,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/bombardiro-crocodilo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bombini Gusini",
+        "rarity": "Secret",
+        "baseIncome": "$4.7K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "bombini-gusini",
+        "section": "Secret",
+        "sortOrder": 53,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/bombini-gusini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Castlino Fortini",
+        "rarity": "Secret",
+        "baseIncome": "$5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "castlino-fortini",
+        "section": "Secret",
+        "sortOrder": 54,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/castlino-fortini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tuff Toucan",
+        "rarity": "Secret",
+        "baseIncome": "$5.3K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "tuff-toucan",
+        "section": "Secret",
+        "sortOrder": 55,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/tuff-toucan.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fryuro",
+        "rarity": "Secret",
+        "baseIncome": "$5.8K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "fryuro",
+        "section": "Secret",
+        "sortOrder": 56,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/fryuro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Burguro",
+        "rarity": "Secret",
+        "baseIncome": "$6.2K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "burguro",
+        "section": "Secret",
+        "sortOrder": 57,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/burguro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Guest666",
+        "rarity": "Secret",
+        "baseIncome": "$7K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "guest666",
+        "section": "Secret",
+        "sortOrder": 58,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/guest666.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zibra Zubra Zibralini",
+        "rarity": "Secret",
+        "baseIncome": "$7.7K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "zibra-zubra-zibralini",
+        "section": "Secret",
+        "sortOrder": 59,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/zibra-zubra-zibralini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cavallo Virtuoso",
+        "rarity": "Secret",
+        "baseIncome": "$8.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "cavallo-virtuoso",
+        "section": "Secret",
+        "sortOrder": 60,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/cavallo-virtuoso.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gorillo Watermelondrillo",
+        "rarity": "Secret",
+        "baseIncome": "$9.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "gorillo-watermelondrillo",
+        "section": "Secret",
+        "sortOrder": 61,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/gorillo-watermelondrillo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cocofanto Elefanto",
+        "rarity": "Secret",
+        "baseIncome": "$10K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "cocofanto-elefanto",
+        "section": "Secret",
+        "sortOrder": 62,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/cocofanto-elefanto.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bambu Sahur",
+        "rarity": "Secret",
+        "baseIncome": "$12.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "bambu-sahur",
+        "section": "Secret",
+        "sortOrder": 63,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/bambu-sahur.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "WL",
+        "rarity": "Divine",
+        "baseIncome": "$15K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "wl",
+        "section": "Divine",
+        "sortOrder": 64,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/wl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Girafa Celeste",
+        "rarity": "Divine",
+        "baseIncome": "$16K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "girafa-celeste",
+        "section": "Divine",
+        "sortOrder": 65,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/girafa-celeste.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tralalero Tralala",
+        "rarity": "Divine",
+        "baseIncome": "$17.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "tralalero-tralala",
+        "section": "Divine",
+        "sortOrder": 66,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/tralalero-tralala.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tralalerita Tralala",
+        "rarity": "Divine",
+        "baseIncome": "$18K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "tralalerita-tralala",
+        "section": "Divine",
+        "sortOrder": 67,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/tralalerita-tralala.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peant Jarro",
+        "rarity": "Divine",
+        "baseIncome": "$19.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "peant-jarro",
+        "section": "Divine",
+        "sortOrder": 68,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/peant-jarro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dipperl Chiperini",
+        "rarity": "Divine",
+        "baseIncome": "$20K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "dipperl-chiperini",
+        "section": "Divine",
+        "sortOrder": 69,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/dipperl-chiperini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rexosaurus",
+        "rarity": "Divine",
+        "baseIncome": "$22.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "rexosaurus",
+        "section": "Divine",
+        "sortOrder": 70,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/rexosaurus.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "1x1x1x1",
+        "rarity": "Divine",
+        "baseIncome": "$23K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "1x1x1x1",
+        "section": "Divine",
+        "sortOrder": 71,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/1x1x1x1.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Matteo",
+        "rarity": "Divine",
+        "baseIncome": "$25K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "matteo",
+        "section": "Divine",
+        "sortOrder": 72,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/matteo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Espresso Signora",
+        "rarity": "Divine",
+        "baseIncome": "$27.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "espresso-signora",
+        "section": "Divine",
+        "sortOrder": 73,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/espresso-signora.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alessio",
+        "rarity": "Hacked",
+        "baseIncome": "$27.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "alessio",
+        "section": "Hacked",
+        "sortOrder": 74,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/alessio.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tripi Tropi Tropa Tripa",
+        "rarity": "Hacked",
+        "baseIncome": "$28K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "tripi-tropi-tropa-tripa",
+        "section": "Hacked",
+        "sortOrder": 75,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/tripi-tropi-tropa-tripa.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Swag Soda",
+        "rarity": "Hacked",
+        "baseIncome": "$29K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "swag-soda",
+        "section": "Hacked",
+        "sortOrder": 76,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/swag-soda.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stoppo Luminino",
+        "rarity": "Hacked",
+        "baseIncome": "$30K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "stoppo-luminino",
+        "section": "Hacked",
+        "sortOrder": 77,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/stoppo-luminino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Torrtuginni Dragonfrutini",
+        "rarity": "Hacked",
+        "baseIncome": "$32K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "torrtuginni-dragonfrutini",
+        "section": "Hacked",
+        "sortOrder": 78,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/torrtuginni-dragonfrutini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tictac Sahur",
+        "rarity": "Hacked",
+        "baseIncome": "$38K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "tictac-sahur",
+        "section": "Hacked",
+        "sortOrder": 79,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/tictac-sahur.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cactus Pingo",
+        "rarity": "Hacked",
+        "baseIncome": "$44.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "cactus-pingo",
+        "section": "Hacked",
+        "sortOrder": 80,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/cactus-pingo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Los Primos Blue",
+        "rarity": "Hacked",
+        "baseIncome": "$44.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "los-primos-blue",
+        "section": "Hacked",
+        "sortOrder": 81,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/los-primos-blue.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "La Vacca Saturno Saturnita",
+        "rarity": "Hacked",
+        "baseIncome": "$48.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "la-vacca-saturno-saturnita",
+        "section": "Hacked",
+        "sortOrder": 82,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/la-vacca-saturno-saturnita.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Agarrini La Palini",
+        "rarity": "Hacked",
+        "baseIncome": "$53.5K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "agarrini-la-palini",
+        "section": "Hacked",
+        "sortOrder": 83,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/agarrini-la-palini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bottellini",
+        "rarity": "Hacked",
+        "baseIncome": "$75K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "bottellini",
+        "section": "Hacked",
+        "sortOrder": 84,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/bottellini.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Karkerkar Kurkur",
+        "rarity": "OG",
+        "baseIncome": "$120K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "karkerkar-kurkur",
+        "section": "OG",
+        "sortOrder": 85,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/karkerkar-kurkur.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blackhole Goat",
+        "rarity": "OG",
+        "baseIncome": "$125K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "blackhole-goat",
+        "section": "OG",
+        "sortOrder": 86,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/blackhole-goat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Compactoroni Daskaloni",
+        "rarity": "OG",
+        "baseIncome": "$135K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "compactoroni-daskaloni",
+        "section": "OG",
+        "sortOrder": 87,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/compactoroni-daskaloni.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cappuccino Clownino",
+        "rarity": "OG",
+        "baseIncome": "$140K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "cappuccino-clownino",
+        "section": "OG",
+        "sortOrder": 88,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/cappuccino-clownino.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nuclearo Dinossauro",
+        "rarity": "OG",
+        "baseIncome": "$190K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "nuclearo-dinossauro",
+        "section": "OG",
+        "sortOrder": 89,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/nuclearo-dinossauro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Los Noo My Hotspotsitos",
+        "rarity": "OG",
+        "baseIncome": "$200K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "los-noo-my-hotspotsitos",
+        "section": "OG",
+        "sortOrder": 90,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/los-noo-my-hotspotsitos.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chillin Chilli",
+        "rarity": "OG",
+        "baseIncome": "$220K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "chillin-chilli",
+        "section": "OG",
+        "sortOrder": 91,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/chillin-chilli.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crazylone Pizaione",
+        "rarity": "OG",
+        "baseIncome": "$225K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "crazylone-pizaione",
+        "section": "OG",
+        "sortOrder": 92,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/crazylone-pizaione.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Corn Sahur",
+        "rarity": "OG",
+        "baseIncome": "$225K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "corn-sahur",
+        "section": "OG",
+        "sortOrder": 93,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/corn-sahur.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Meowl",
+        "rarity": "OG",
+        "baseIncome": "$275K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "meowl",
+        "section": "OG",
+        "sortOrder": 94,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/meowl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberry Elephant",
+        "rarity": "OG",
+        "baseIncome": "$420K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "strawberry-elephant",
+        "section": "OG",
+        "sortOrder": 95,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/strawberry-elephant.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragonfrutina Dolphinita",
+        "rarity": "Celestial",
+        "baseIncome": "$475K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "dragonfrutina-dolphinita",
+        "section": "Celestial",
+        "sortOrder": 96,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/dragonfrutina-dolphinita.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Guerriro Digitale",
+        "rarity": "Celestial",
+        "baseIncome": "$490K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "guerriro-digitale",
+        "section": "Celestial",
+        "sortOrder": 97,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/guerriro-digitale.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chicleteira Bicicleteira",
+        "rarity": "Celestial",
+        "baseIncome": "$500K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "chicleteira-bicicleteira",
+        "section": "Celestial",
+        "sortOrder": 98,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/chicleteira-bicicleteira.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pot Hotspot",
+        "rarity": "Celestial",
+        "baseIncome": "$525K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "pot-hotspot",
+        "section": "Celestial",
+        "sortOrder": 99,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/pot-hotspot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Krupuk Pagi Pagi",
+        "rarity": "Celestial",
+        "baseIncome": "$540K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "krupuk-pagi-pagi",
+        "section": "Celestial",
+        "sortOrder": 100,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/krupuk-pagi-pagi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beluga Beluga",
+        "rarity": "Celestial",
+        "baseIncome": "$575K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "beluga-beluga",
+        "section": "Celestial",
+        "sortOrder": 101,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/beluga-beluga.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tralaledon",
+        "rarity": "Celestial",
+        "baseIncome": "$625K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "tralaledon",
+        "section": "Celestial",
+        "sortOrder": 102,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/tralaledon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Anpali Babel",
+        "rarity": "Celestial",
+        "baseIncome": "$750K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "anpali-babel",
+        "section": "Celestial",
+        "sortOrder": 103,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/anpali-babel.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ketchuru and Musturu",
+        "rarity": "Celestial",
+        "baseIncome": "$800K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "ketchuru-and-musturu",
+        "section": "Celestial",
+        "sortOrder": 104,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/ketchuru-and-musturu.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Los Primos",
+        "rarity": "Celestial",
+        "baseIncome": "$800K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "los-primos",
+        "section": "Celestial",
+        "sortOrder": 105,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/los-primos.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mastodontico Telepiedone",
+        "rarity": "Celestial",
+        "baseIncome": "$850K/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "mastodontico-telepiedone",
+        "section": "Celestial",
+        "sortOrder": 106,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/mastodontico-telepiedone.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ketupat Kepat",
+        "rarity": "Eternal",
+        "baseIncome": "$1M/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "ketupat-kepat",
+        "section": "Eternal",
+        "sortOrder": 107,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/ketupat-kepat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Professora 67",
+        "rarity": "Eternal",
+        "baseIncome": "$1M/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "professora-67",
+        "section": "Eternal",
+        "sortOrder": 108,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/professora-67.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Astro Tim",
+        "rarity": "Eternal",
+        "baseIncome": "$1.1M/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "astro-tim",
+        "section": "Eternal",
+        "sortOrder": 109,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Baba Yaga",
+        "rarity": "Eternal",
+        "baseIncome": "$1.2M/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "baba-yaga",
+        "section": "Eternal",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Kicky",
+        "rarity": "Eternal",
+        "baseIncome": "$1.4M/s",
+        "incomeType": "cash_per_second",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "kicky",
+        "section": "Eternal",
+        "sortOrder": 111,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spaghetti Tualetti",
+        "rarity": "Exclusive",
+        "incomeType": "exclusive_percent",
+        "incomeMultiplier": "150%",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "spaghetti-tualetti",
+        "section": "Exclusive",
+        "sortOrder": 112,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/spaghetti-tualetti.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Cannelloni",
+        "rarity": "Exclusive",
+        "incomeType": "exclusive_percent",
+        "incomeMultiplier": "200%",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "dragon-cannelloni",
+        "section": "Exclusive",
+        "sortOrder": 113,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/dragon-cannelloni.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Esok Sekolah",
+        "rarity": "Exclusive",
+        "incomeType": "exclusive_percent",
+        "incomeMultiplier": "250%",
+        "availability": "Documented brainrot entry"
+      },
+      "system": {
+        "slug": "esok-sekolah",
+        "section": "Exclusive",
+        "sortOrder": 114,
+        "image": "/Kick%20a%20Lucky%20Block/Brainrots/esok-sekolah.webp"
+      }
     }
   ]
 }

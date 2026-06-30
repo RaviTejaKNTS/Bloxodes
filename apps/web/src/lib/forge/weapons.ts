@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { repoPath } from "@/lib/paths";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { WEAPON_CLASS_THRESHOLDS, type Weapon, type WeaponClass } from "./data";
 
 export type ForgeWeaponDataset = {
@@ -121,7 +122,7 @@ function resolveUpdatedAt(sources: ForgeWeaponSource[] | null | undefined, updat
 
 export async function loadForgeWeaponDataset(): Promise<ForgeWeaponDataset> {
   const json = await readWeaponsJson();
-  const items = json.items ?? [];
+  const items = unwrapDatasetItems<ForgeWeaponRow>(json);
   const sources = json.meta?.sources ?? null;
   const dataLastUpdatedOn = resolveUpdatedAt(sources ?? undefined, json.meta?.updatedAt ?? null);
   const source = resolveSource(sources ?? undefined);

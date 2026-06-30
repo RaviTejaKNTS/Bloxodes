@@ -1,491 +1,649 @@
 {
   "meta": {
+    "schemaVersion": 2,
     "game": "Untitled Boxing Game",
     "gameSlug": "untitled-boxing-game",
-    "universeId": 4730278139,
     "collection": "styles",
     "route": "/wiki/untitled-boxing-game/styles",
     "catalogCode": "untitled-boxing-game-styles",
-    "updatedAt": "2026-06-15",
-    "columns": [
-      "name",
-      "collectionSection",
+    "itemFields": [
       "rarity",
       "spinChance",
       "source",
       "availability",
-      "cardSummary",
-      "image",
-      "imageStatus",
-      "sourcePage"
+      "cardSummary"
     ],
-    "sources": [
-      {
-        "label": "Untitled Boxing Game Wiki",
-        "url": "https://ubg.miraheze.org/wiki/Styles",
-        "accessed": "2026-06-15"
-      }
+    "columns": [
+      "rarity",
+      "spinChance",
+      "source",
+      "availability",
+      "cardSummary"
     ],
-    "notes": [
-      "Generated from source-backed catalog tables and crate boards.",
-      "Rows avoid live trade values, active code claims, and broad platform metadata."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Uncommon styles",
+        "Rare styles",
+        "Mythic styles",
+        "Legendary styles",
+        "Shiny styles",
+        "Unobtainable styles",
+        "Removed styles"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "spinChance",
+        "source",
+        "availability",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "rarity",
+        "spinChance",
+        "source",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "basic",
-      "name": "Basic",
-      "collectionSection": "Uncommon styles",
-      "rarity": "Uncommon",
-      "spinChance": "63%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides.",
-      "image": "/Untitled Boxing Game/Styles/basic.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Basic",
+        "rarity": "Uncommon",
+        "spinChance": "63%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides."
+      },
+      "system": {
+        "slug": "basic",
+        "section": "Uncommon styles",
+        "sortOrder": 1,
+        "image": "/Untitled Boxing Game/Styles/basic.png"
+      }
     },
     {
-      "id": "smash",
-      "name": "Smash",
-      "collectionSection": "Uncommon styles",
-      "rarity": "Uncommon",
-      "spinChance": "63%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides.",
-      "image": "/Untitled Boxing Game/Styles/smash.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Smash",
+        "rarity": "Uncommon",
+        "spinChance": "63%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides."
+      },
+      "system": {
+        "slug": "smash",
+        "section": "Uncommon styles",
+        "sortOrder": 2,
+        "image": "/Untitled Boxing Game/Styles/smash.png"
+      }
     },
     {
-      "id": "long-guard",
-      "name": "Long Guard",
-      "collectionSection": "Uncommon styles",
-      "rarity": "Uncommon",
-      "spinChance": "63%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides.",
-      "image": "/Untitled Boxing Game/Styles/long-guard.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Long Guard",
+        "rarity": "Uncommon",
+        "spinChance": "63%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides."
+      },
+      "system": {
+        "slug": "long-guard",
+        "section": "Uncommon styles",
+        "sortOrder": 3,
+        "image": "/Untitled Boxing Game/Styles/long-guard.png"
+      }
     },
     {
-      "id": "counter",
-      "name": "Counter",
-      "collectionSection": "Uncommon styles",
-      "rarity": "Uncommon",
-      "spinChance": "63%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides.",
-      "image": "/Untitled Boxing Game/Styles/counter.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Counter",
+        "rarity": "Uncommon",
+        "spinChance": "63%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides."
+      },
+      "system": {
+        "slug": "counter",
+        "section": "Uncommon styles",
+        "sortOrder": 4,
+        "image": "/Untitled Boxing Game/Styles/counter.png"
+      }
     },
     {
-      "id": "turtle",
-      "name": "Turtle",
-      "collectionSection": "Uncommon styles",
-      "rarity": "Uncommon",
-      "spinChance": "63%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides.",
-      "image": "/Untitled Boxing Game/Styles/turtle.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Turtle",
+        "rarity": "Uncommon",
+        "spinChance": "63%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A simpler style spin result with rounded tools and fewer severe downsides."
+      },
+      "system": {
+        "slug": "turtle",
+        "section": "Uncommon styles",
+        "sortOrder": 5,
+        "image": "/Untitled Boxing Game/Styles/turtle.png"
+      }
     },
     {
-      "id": "corkscrew",
-      "name": "Corkscrew",
-      "collectionSection": "Rare styles",
-      "rarity": "Rare",
-      "spinChance": "27%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push.",
-      "image": "/Untitled Boxing Game/Styles/corkscrew.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Corkscrew",
+        "rarity": "Rare",
+        "spinChance": "27%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push."
+      },
+      "system": {
+        "slug": "corkscrew",
+        "section": "Rare styles",
+        "sortOrder": 6,
+        "image": "/Untitled Boxing Game/Styles/corkscrew.png"
+      }
     },
     {
-      "id": "charge",
-      "name": "Charge",
-      "collectionSection": "Rare styles",
-      "rarity": "Rare",
-      "spinChance": "27%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push.",
-      "image": "/Untitled Boxing Game/Styles/charge.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Charge",
+        "rarity": "Rare",
+        "spinChance": "27%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push."
+      },
+      "system": {
+        "slug": "charge",
+        "section": "Rare styles",
+        "sortOrder": 7,
+        "image": "/Untitled Boxing Game/Styles/charge.png"
+      }
     },
     {
-      "id": "hammer",
-      "name": "Hammer",
-      "collectionSection": "Rare styles",
-      "rarity": "Rare",
-      "spinChance": "27%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push.",
-      "image": "/Untitled Boxing Game/Styles/hammer.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Hammer",
+        "rarity": "Rare",
+        "spinChance": "27%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push."
+      },
+      "system": {
+        "slug": "hammer",
+        "section": "Rare styles",
+        "sortOrder": 8,
+        "image": "/Untitled Boxing Game/Styles/hammer.png"
+      }
     },
     {
-      "id": "trickster",
-      "name": "Trickster",
-      "collectionSection": "Rare styles",
-      "rarity": "Rare",
-      "spinChance": "27%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push.",
-      "image": "/Untitled Boxing Game/Styles/trickster.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Trickster",
+        "rarity": "Rare",
+        "spinChance": "27%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push."
+      },
+      "system": {
+        "slug": "trickster",
+        "section": "Rare styles",
+        "sortOrder": 9,
+        "image": "/Untitled Boxing Game/Styles/trickster.png"
+      }
     },
     {
-      "id": "dragonfish",
-      "name": "Dragonfish",
-      "collectionSection": "Rare styles",
-      "rarity": "Rare",
-      "spinChance": "27%",
-      "source": "Style spins",
-      "availability": "Obtainable",
-      "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push.",
-      "image": "/Untitled Boxing Game/Styles/dragonfish.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Dragonfish",
+        "rarity": "Rare",
+        "spinChance": "27%",
+        "source": "Style spins",
+        "availability": "Obtainable",
+        "cardSummary": "A rare style spin result with a clearer ability, passive, or playstyle push."
+      },
+      "system": {
+        "slug": "dragonfish",
+        "section": "Rare styles",
+        "sortOrder": 10,
+        "image": "/Untitled Boxing Game/Styles/dragonfish.png"
+      }
     },
     {
-      "id": "ippo",
-      "name": "Ippo",
-      "collectionSection": "Mythic styles",
-      "rarity": "Mythic",
-      "spinChance": "9% from style spins; 75% from lucky spins",
-      "source": "Style spins or lucky spins",
-      "availability": "Obtainable",
-      "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn.",
-      "image": "/Untitled Boxing Game/Styles/ippo.png",
-      "imageStatus": "source-backed",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Ippo",
+        "rarity": "Mythic",
+        "spinChance": "9% from style spins; 75% from lucky spins",
+        "source": "Style spins or lucky spins",
+        "availability": "Obtainable",
+        "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn."
+      },
+      "system": {
+        "slug": "ippo",
+        "section": "Mythic styles",
+        "sortOrder": 11,
+        "image": "/Untitled Boxing Game/Styles/ippo.png"
+      }
     },
     {
-      "id": "hitman",
-      "name": "Hitman",
-      "collectionSection": "Mythic styles",
-      "rarity": "Mythic",
-      "spinChance": "9% from style spins; 75% from lucky spins",
-      "source": "Style spins or lucky spins",
-      "availability": "Obtainable",
-      "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn.",
-      "image": "/Untitled Boxing Game/Styles/hitman.png",
-      "imageStatus": "source-backed",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Hitman",
+        "rarity": "Mythic",
+        "spinChance": "9% from style spins; 75% from lucky spins",
+        "source": "Style spins or lucky spins",
+        "availability": "Obtainable",
+        "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn."
+      },
+      "system": {
+        "slug": "hitman",
+        "section": "Mythic styles",
+        "sortOrder": 12,
+        "image": "/Untitled Boxing Game/Styles/hitman.png"
+      }
     },
     {
-      "id": "hands-low",
-      "name": "Hands Low",
-      "collectionSection": "Mythic styles",
-      "rarity": "Mythic",
-      "spinChance": "9% from style spins; 75% from lucky spins",
-      "source": "Style spins or lucky spins",
-      "availability": "Obtainable",
-      "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn.",
-      "image": "/Untitled Boxing Game/Styles/hands-low.png",
-      "imageStatus": "source-backed",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Hands Low",
+        "rarity": "Mythic",
+        "spinChance": "9% from style spins; 75% from lucky spins",
+        "source": "Style spins or lucky spins",
+        "availability": "Obtainable",
+        "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn."
+      },
+      "system": {
+        "slug": "hands-low",
+        "section": "Mythic styles",
+        "sortOrder": 13,
+        "image": "/Untitled Boxing Game/Styles/hands-low.png"
+      }
     },
     {
-      "id": "wolf",
-      "name": "Wolf",
-      "collectionSection": "Mythic styles",
-      "rarity": "Mythic",
-      "spinChance": "9% from style spins; 75% from lucky spins",
-      "source": "Style spins or lucky spins",
-      "availability": "Obtainable",
-      "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn.",
-      "image": "/Untitled Boxing Game/Styles/wolf.png",
-      "imageStatus": "source-backed",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Wolf",
+        "rarity": "Mythic",
+        "spinChance": "9% from style spins; 75% from lucky spins",
+        "source": "Style spins or lucky spins",
+        "availability": "Obtainable",
+        "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn."
+      },
+      "system": {
+        "slug": "wolf",
+        "section": "Mythic styles",
+        "sortOrder": 14,
+        "image": "/Untitled Boxing Game/Styles/wolf.png"
+      }
     },
     {
-      "id": "bullet",
-      "name": "Bullet",
-      "collectionSection": "Mythic styles",
-      "rarity": "Mythic",
-      "spinChance": "9% from style spins; 75% from lucky spins",
-      "source": "Style spins or lucky spins",
-      "availability": "Obtainable",
-      "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn.",
-      "image": "/Untitled Boxing Game/Styles/bullet.png",
-      "imageStatus": "source-backed",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Bullet",
+        "rarity": "Mythic",
+        "spinChance": "9% from style spins; 75% from lucky spins",
+        "source": "Style spins or lucky spins",
+        "availability": "Obtainable",
+        "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn."
+      },
+      "system": {
+        "slug": "bullet",
+        "section": "Mythic styles",
+        "sortOrder": 15,
+        "image": "/Untitled Boxing Game/Styles/bullet.png"
+      }
     },
     {
-      "id": "switch-hit",
-      "name": "Switch Hit",
-      "collectionSection": "Mythic styles",
-      "rarity": "Mythic",
-      "spinChance": "9% from style spins; 75% from lucky spins",
-      "source": "Style spins or lucky spins",
-      "availability": "Obtainable",
-      "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn.",
-      "image": "/Untitled Boxing Game/Styles/switch-hit.png",
-      "imageStatus": "source-backed",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Switch Hit",
+        "rarity": "Mythic",
+        "spinChance": "9% from style spins; 75% from lucky spins",
+        "source": "Style spins or lucky spins",
+        "availability": "Obtainable",
+        "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn."
+      },
+      "system": {
+        "slug": "switch-hit",
+        "section": "Mythic styles",
+        "sortOrder": 16,
+        "image": "/Untitled Boxing Game/Styles/switch-hit.png"
+      }
     },
     {
-      "id": "surgeon",
-      "name": "Surgeon",
-      "collectionSection": "Mythic styles",
-      "rarity": "Mythic",
-      "spinChance": "9% from style spins; 75% from lucky spins",
-      "source": "Style spins or lucky spins",
-      "availability": "Obtainable",
-      "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn.",
-      "image": "",
-      "imageStatus": "missing-source-image",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Surgeon",
+        "rarity": "Mythic",
+        "spinChance": "9% from style spins; 75% from lucky spins",
+        "source": "Style spins or lucky spins",
+        "availability": "Obtainable",
+        "cardSummary": "A more specialized style with stronger strengths, weaknesses, or mechanics to learn."
+      },
+      "system": {
+        "slug": "surgeon",
+        "section": "Mythic styles",
+        "sortOrder": 17,
+        "image": null
+      }
     },
     {
-      "id": "slugger",
-      "name": "Slugger",
-      "collectionSection": "Legendary styles",
-      "rarity": "Legendary",
-      "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
-      "source": "Style spins, lucky spins, or pity",
-      "availability": "Obtainable",
-      "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches.",
-      "image": "/Untitled Boxing Game/Styles/slugger.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Slugger",
+        "rarity": "Legendary",
+        "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
+        "source": "Style spins, lucky spins, or pity",
+        "availability": "Obtainable",
+        "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches."
+      },
+      "system": {
+        "slug": "slugger",
+        "section": "Legendary styles",
+        "sortOrder": 18,
+        "image": "/Untitled Boxing Game/Styles/slugger.png"
+      }
     },
     {
-      "id": "hawk",
-      "name": "Hawk",
-      "collectionSection": "Legendary styles",
-      "rarity": "Legendary",
-      "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
-      "source": "Style spins, lucky spins, or pity",
-      "availability": "Obtainable",
-      "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches.",
-      "image": "/Untitled Boxing Game/Styles/hawk.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Hawk",
+        "rarity": "Legendary",
+        "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
+        "source": "Style spins, lucky spins, or pity",
+        "availability": "Obtainable",
+        "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches."
+      },
+      "system": {
+        "slug": "hawk",
+        "section": "Legendary styles",
+        "sortOrder": 19,
+        "image": "/Untitled Boxing Game/Styles/hawk.png"
+      }
     },
     {
-      "id": "ghost",
-      "name": "Ghost",
-      "collectionSection": "Legendary styles",
-      "rarity": "Legendary",
-      "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
-      "source": "Style spins, lucky spins, or pity",
-      "availability": "Obtainable",
-      "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches.",
-      "image": "/Untitled Boxing Game/Styles/ghost.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Ghost",
+        "rarity": "Legendary",
+        "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
+        "source": "Style spins, lucky spins, or pity",
+        "availability": "Obtainable",
+        "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches."
+      },
+      "system": {
+        "slug": "ghost",
+        "section": "Legendary styles",
+        "sortOrder": 20,
+        "image": "/Untitled Boxing Game/Styles/ghost.png"
+      }
     },
     {
-      "id": "iron-fist",
-      "name": "Iron Fist",
-      "collectionSection": "Legendary styles",
-      "rarity": "Legendary",
-      "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
-      "source": "Style spins, lucky spins, or pity",
-      "availability": "Obtainable",
-      "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches.",
-      "image": "/Untitled Boxing Game/Styles/iron-fist.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Iron Fist",
+        "rarity": "Legendary",
+        "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
+        "source": "Style spins, lucky spins, or pity",
+        "availability": "Obtainable",
+        "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches."
+      },
+      "system": {
+        "slug": "iron-fist",
+        "section": "Legendary styles",
+        "sortOrder": 21,
+        "image": "/Untitled Boxing Game/Styles/iron-fist.png"
+      }
     },
     {
-      "id": "shotgun",
-      "name": "Shotgun",
-      "collectionSection": "Legendary styles",
-      "rarity": "Legendary",
-      "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
-      "source": "Style spins, lucky spins, or pity",
-      "availability": "Obtainable",
-      "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches.",
-      "image": "/Untitled Boxing Game/Styles/shotgun.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Shotgun",
+        "rarity": "Legendary",
+        "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
+        "source": "Style spins, lucky spins, or pity",
+        "availability": "Obtainable",
+        "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches."
+      },
+      "system": {
+        "slug": "shotgun",
+        "section": "Legendary styles",
+        "sortOrder": 22,
+        "image": "/Untitled Boxing Game/Styles/shotgun.png"
+      }
     },
     {
-      "id": "freedom",
-      "name": "Freedom",
-      "collectionSection": "Legendary styles",
-      "rarity": "Legendary",
-      "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
-      "source": "Style spins, lucky spins, or pity",
-      "availability": "Obtainable",
-      "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches.",
-      "image": "/Untitled Boxing Game/Styles/freedom.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Freedom",
+        "rarity": "Legendary",
+        "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
+        "source": "Style spins, lucky spins, or pity",
+        "availability": "Obtainable",
+        "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches."
+      },
+      "system": {
+        "slug": "freedom",
+        "section": "Legendary styles",
+        "sortOrder": 23,
+        "image": "/Untitled Boxing Game/Styles/freedom.png"
+      }
     },
     {
-      "id": "chronos",
-      "name": "Chronos",
-      "collectionSection": "Legendary styles",
-      "rarity": "Legendary",
-      "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
-      "source": "Style spins, lucky spins, or pity",
-      "availability": "Obtainable",
-      "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches.",
-      "image": "/Untitled Boxing Game/Styles/chronos.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Chronos",
+        "rarity": "Legendary",
+        "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
+        "source": "Style spins, lucky spins, or pity",
+        "availability": "Obtainable",
+        "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches."
+      },
+      "system": {
+        "slug": "chronos",
+        "section": "Legendary styles",
+        "sortOrder": 24,
+        "image": "/Untitled Boxing Game/Styles/chronos.png"
+      }
     },
     {
-      "id": "white-ash",
-      "name": "White Ash",
-      "collectionSection": "Legendary styles",
-      "rarity": "Legendary",
-      "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
-      "source": "Style spins, lucky spins, or pity",
-      "availability": "Obtainable",
-      "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches.",
-      "image": "/Untitled Boxing Game/Styles/white-ash.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "White Ash",
+        "rarity": "Legendary",
+        "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
+        "source": "Style spins, lucky spins, or pity",
+        "availability": "Obtainable",
+        "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches."
+      },
+      "system": {
+        "slug": "white-ash",
+        "section": "Legendary styles",
+        "sortOrder": 25,
+        "image": "/Untitled Boxing Game/Styles/white-ash.png"
+      }
     },
     {
-      "id": "supernova",
-      "name": "Supernova",
-      "collectionSection": "Legendary styles",
-      "rarity": "Legendary",
-      "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
-      "source": "Style spins, lucky spins, or pity",
-      "availability": "Obtainable",
-      "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches.",
-      "image": "/Untitled Boxing Game/Styles/supernova.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Supernova",
+        "rarity": "Legendary",
+        "spinChance": "1% from style spins; 25% from lucky spins; pity guarantees one legendary within 100 spins",
+        "source": "Style spins, lucky spins, or pity",
+        "availability": "Obtainable",
+        "cardSummary": "A highly specialized style with a unique gimmick that matters in real matches."
+      },
+      "system": {
+        "slug": "supernova",
+        "section": "Legendary styles",
+        "sortOrder": 26,
+        "image": "/Untitled Boxing Game/Styles/supernova.png"
+      }
     },
     {
-      "id": "godspeed",
-      "name": "Godspeed",
-      "collectionSection": "Shiny styles",
-      "rarity": "Shiny",
-      "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
-      "source": "Style spins, lucky spins, or shiny shards",
-      "availability": "Obtainable",
-      "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX.",
-      "image": "/Untitled Boxing Game/Styles/godspeed.gif",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Godspeed",
+        "rarity": "Shiny",
+        "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
+        "source": "Style spins, lucky spins, or shiny shards",
+        "availability": "Obtainable",
+        "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX."
+      },
+      "system": {
+        "slug": "godspeed",
+        "section": "Shiny styles",
+        "sortOrder": 27,
+        "image": "/Untitled Boxing Game/Styles/godspeed.gif"
+      }
     },
     {
-      "id": "bald",
-      "name": "Bald",
-      "collectionSection": "Shiny styles",
-      "rarity": "Shiny",
-      "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
-      "source": "Style spins, lucky spins, or shiny shards",
-      "availability": "Obtainable",
-      "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX.",
-      "image": "/Untitled Boxing Game/Styles/bald.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Bald",
+        "rarity": "Shiny",
+        "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
+        "source": "Style spins, lucky spins, or shiny shards",
+        "availability": "Obtainable",
+        "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX."
+      },
+      "system": {
+        "slug": "bald",
+        "section": "Shiny styles",
+        "sortOrder": 28,
+        "image": "/Untitled Boxing Game/Styles/bald.png"
+      }
     },
     {
-      "id": "coyote",
-      "name": "Coyote",
-      "collectionSection": "Shiny styles",
-      "rarity": "Shiny",
-      "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
-      "source": "Style spins, lucky spins, or shiny shards",
-      "availability": "Obtainable",
-      "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX.",
-      "image": "/Untitled Boxing Game/Styles/coyote.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Coyote",
+        "rarity": "Shiny",
+        "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
+        "source": "Style spins, lucky spins, or shiny shards",
+        "availability": "Obtainable",
+        "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX."
+      },
+      "system": {
+        "slug": "coyote",
+        "section": "Shiny styles",
+        "sortOrder": 29,
+        "image": "/Untitled Boxing Game/Styles/coyote.png"
+      }
     },
     {
-      "id": "drill",
-      "name": "Drill",
-      "collectionSection": "Shiny styles",
-      "rarity": "Shiny",
-      "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
-      "source": "Style spins, lucky spins, or shiny shards",
-      "availability": "Obtainable",
-      "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX.",
-      "image": "/Untitled Boxing Game/Styles/drill.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Drill",
+        "rarity": "Shiny",
+        "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
+        "source": "Style spins, lucky spins, or shiny shards",
+        "availability": "Obtainable",
+        "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX."
+      },
+      "system": {
+        "slug": "drill",
+        "section": "Shiny styles",
+        "sortOrder": 30,
+        "image": "/Untitled Boxing Game/Styles/drill.png"
+      }
     },
     {
-      "id": "nanomachines",
-      "name": "Nanomachines",
-      "collectionSection": "Shiny styles",
-      "rarity": "Shiny",
-      "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
-      "source": "Style spins, lucky spins, or shiny shards",
-      "availability": "Obtainable",
-      "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX.",
-      "image": "/Untitled Boxing Game/Styles/nanomachines.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Nanomachines",
+        "rarity": "Shiny",
+        "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
+        "source": "Style spins, lucky spins, or shiny shards",
+        "availability": "Obtainable",
+        "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX."
+      },
+      "system": {
+        "slug": "nanomachines",
+        "section": "Shiny styles",
+        "sortOrder": 31,
+        "image": "/Untitled Boxing Game/Styles/nanomachines.png"
+      }
     },
     {
-      "id": "conman",
-      "name": "Conman",
-      "collectionSection": "Shiny styles",
-      "rarity": "Shiny",
-      "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
-      "source": "Style spins, lucky spins, or shiny shards",
-      "availability": "Obtainable",
-      "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX.",
-      "image": "/Untitled Boxing Game/Styles/conman.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Conman",
+        "rarity": "Shiny",
+        "spinChance": "0.015% from style spins; 0.15% from lucky spins; also tied to 500 shiny shards",
+        "source": "Style spins, lucky spins, or shiny shards",
+        "availability": "Obtainable",
+        "cardSummary": "A rare reskin of an existing style with the same general gameplan but flashier animations and VFX."
+      },
+      "system": {
+        "slug": "conman",
+        "section": "Shiny styles",
+        "sortOrder": 32,
+        "image": "/Untitled Boxing Game/Styles/conman.png"
+      }
     },
     {
-      "id": "void-samurai",
-      "name": "Void Samurai",
-      "collectionSection": "Unobtainable styles",
-      "rarity": "Special",
-      "spinChance": "Not in normal spins",
-      "source": "Developer-granted",
-      "availability": "Unobtainable for normal players",
-      "cardSummary": "A special style kept for staff, testing, or archive context rather than normal spinning.",
-      "image": "/Untitled Boxing Game/Styles/void-samurai.png",
-      "imageStatus": "source-backed",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Void Samurai",
+        "rarity": "Special",
+        "spinChance": "Not in normal spins",
+        "source": "Developer-granted",
+        "availability": "Unobtainable for normal players",
+        "cardSummary": "A special style kept for staff, testing, or archive context rather than normal spinning."
+      },
+      "system": {
+        "slug": "void-samurai",
+        "section": "Unobtainable styles",
+        "sortOrder": 33,
+        "image": "/Untitled Boxing Game/Styles/void-samurai.png"
+      }
     },
     {
-      "id": "ghost-ancient",
-      "name": "Ghost (Ancient)",
-      "collectionSection": "Unobtainable styles",
-      "rarity": "Special",
-      "spinChance": "Not in normal spins",
-      "source": "Developer-granted",
-      "availability": "Unobtainable for normal players",
-      "cardSummary": "A special style kept for staff, testing, or archive context rather than normal spinning.",
-      "image": "/Untitled Boxing Game/Styles/ghost-ancient.png",
-      "imageStatus": "source-backed",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Ghost (Ancient)",
+        "rarity": "Special",
+        "spinChance": "Not in normal spins",
+        "source": "Developer-granted",
+        "availability": "Unobtainable for normal players",
+        "cardSummary": "A special style kept for staff, testing, or archive context rather than normal spinning."
+      },
+      "system": {
+        "slug": "ghost-ancient",
+        "section": "Unobtainable styles",
+        "sortOrder": 34,
+        "image": "/Untitled Boxing Game/Styles/ghost-ancient.png"
+      }
     },
     {
-      "id": "very-long-guard",
-      "name": "Very Long Guard",
-      "collectionSection": "Unobtainable styles",
-      "rarity": "Special",
-      "spinChance": "Not in normal spins",
-      "source": "Developer-granted",
-      "availability": "Unobtainable for normal players",
-      "cardSummary": "A special style kept for staff, testing, or archive context rather than normal spinning.",
-      "image": "/Untitled Boxing Game/Styles/very-long-guard.png",
-      "imageStatus": "source-backed",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Very Long Guard",
+        "rarity": "Special",
+        "spinChance": "Not in normal spins",
+        "source": "Developer-granted",
+        "availability": "Unobtainable for normal players",
+        "cardSummary": "A special style kept for staff, testing, or archive context rather than normal spinning."
+      },
+      "system": {
+        "slug": "very-long-guard",
+        "section": "Unobtainable styles",
+        "sortOrder": 35,
+        "image": "/Untitled Boxing Game/Styles/very-long-guard.png"
+      }
     },
     {
-      "id": "testing-style",
-      "name": "Testing (Style)",
-      "collectionSection": "Unobtainable styles",
-      "rarity": "Special",
-      "spinChance": "Not in normal spins",
-      "source": "Developer-granted",
-      "availability": "Unobtainable for normal players",
-      "cardSummary": "A special style kept for staff, testing, or archive context rather than normal spinning.",
-      "image": "",
-      "imageStatus": "missing-source-image",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "Testing (Style)",
+        "rarity": "Special",
+        "spinChance": "Not in normal spins",
+        "source": "Developer-granted",
+        "availability": "Unobtainable for normal players",
+        "cardSummary": "A special style kept for staff, testing, or archive context rather than normal spinning."
+      },
+      "system": {
+        "slug": "testing-style",
+        "section": "Unobtainable styles",
+        "sortOrder": 36,
+        "image": null
+      }
     },
     {
-      "id": "legacy-kimura",
-      "name": "LEGACY:Kimura",
-      "collectionSection": "Removed styles",
-      "rarity": "Legacy",
-      "spinChance": "Not in current spins",
-      "source": "Removed style",
-      "availability": "Removed",
-      "cardSummary": "A former main-game style kept as archive context.",
-      "image": "/Untitled Boxing Game/Styles/legacy-kimura.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Styles"
+      "item": {
+        "name": "LEGACY:Kimura",
+        "rarity": "Legacy",
+        "spinChance": "Not in current spins",
+        "source": "Removed style",
+        "availability": "Removed",
+        "cardSummary": "A former main-game style kept as archive context."
+      },
+      "system": {
+        "slug": "legacy-kimura",
+        "section": "Removed styles",
+        "sortOrder": 37,
+        "image": "/Untitled Boxing Game/Styles/legacy-kimura.png"
+      }
     }
   ]
 }

@@ -1,157 +1,253 @@
 {
   "meta": {
-    "title": "Steal a Brainrot machines data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Steal a Brainrot Wiki - Machines",
-        "url": "https://stealabrainrot.fandom.com/wiki/Machines",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Steal a Brainrot",
+    "gameSlug": "steal-a-brainrot",
+    "collection": "machines",
+    "route": "/wiki/steal-a-brainrot/machines",
+    "catalogCode": "steal-a-brainrot-machines",
+    "itemFields": [
       "howToUse",
       "whatItDoes",
       "inGameRightNow"
-    ]
+    ],
+    "columns": [
+      "howToUse",
+      "whatItDoes",
+      "inGameRightNow"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "howToUse",
+        "whatItDoes",
+        "inGameRightNow"
+      ],
+      "tableFields": [
+        "howToUse",
+        "whatItDoes",
+        "inGameRightNow"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Rainbow Machine",
-      "slug": "rainbow-machine",
-      "image": "/Steal%20a%20Brainrot/Machines/rainbow-machine.webp",
-      "howToUse": "You put in 25 Gold brainrots in it",
-      "whatItDoes": "It will start the rainbow event giving brainrots a higher chance for Rainbow mutation",
-      "inGameRightNow": "No",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4e/Rainbow_Machine_Leak.webp/revision/latest?cb=20251211213904"
+      "item": {
+        "name": "Rainbow Machine",
+        "howToUse": "You put in 25 Gold brainrots in it",
+        "whatItDoes": "It will start the rainbow event giving brainrots a higher chance for Rainbow mutation",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "rainbow-machine",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Steal%20a%20Brainrot/Machines/rainbow-machine.webp"
+      }
     },
     {
-      "name": "Bubblegum Machine",
-      "slug": "bubblegum-machine",
-      "image": "/Steal%20a%20Brainrot/Machines/bubblegum-machine.webp",
-      "howToUse": "You put 10 Candy brainrots in it",
-      "whatItDoes": "It will activate and it can give the Bubblegum trait to brainrots",
-      "inGameRightNow": "Yes, but only if Sammy activates it. and you do not have put 10 Candy brainrots in it as it would be filled.",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/17/Bubblegummachine.png/revision/latest?cb=20250917181552"
+      "item": {
+        "name": "Bubblegum Machine",
+        "howToUse": "You put 10 Candy brainrots in it",
+        "whatItDoes": "It will activate and it can give the Bubblegum trait to brainrots",
+        "inGameRightNow": "Yes, but only if Sammy activates it. and you do not have put 10 Candy brainrots in it as it would be filled."
+      },
+      "system": {
+        "slug": "bubblegum-machine",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Steal%20a%20Brainrot/Machines/bubblegum-machine.webp"
+      }
     },
     {
-      "name": "Fuse Machine",
-      "slug": "fuse-machine",
-      "image": "/Steal%20a%20Brainrot/Machines/fuse-machine.webp",
-      "howToUse": "You put 4 brainrots in it",
-      "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
-      "inGameRightNow": "No",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a3/Early_Fuse_Machine.png/revision/latest?cb=20250827220115"
+      "item": {
+        "name": "Fuse Machine",
+        "howToUse": "You put 4 brainrots in it",
+        "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "fuse-machine",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Steal%20a%20Brainrot/Machines/fuse-machine.webp"
+      }
     },
     {
-      "name": "Craft Machine",
-      "slug": "craft-machine",
-      "image": "/Steal%20a%20Brainrot/Machines/craft-machine.webp",
-      "howToUse": "You put 2-4 brainrots in it, depending on the recipe.",
-      "whatItDoes": "You can craft a brainrot with a 100% chance of getting, but it required the brainrots for the recipe.",
-      "inGameRightNow": "No",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/ca/Craft_a.png/revision/latest?cb=20251125223108"
+      "item": {
+        "name": "Craft Machine",
+        "howToUse": "You put 2-4 brainrots in it, depending on the recipe.",
+        "whatItDoes": "You can craft a brainrot with a 100% chance of getting, but it required the brainrots for the recipe.",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "craft-machine",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Steal%20a%20Brainrot/Machines/craft-machine.webp"
+      }
     },
     {
-      "name": "Witch Fuse",
-      "slug": "witch-fuse",
-      "image": "/Steal%20a%20Brainrot/Machines/witch-fuse.webp",
-      "howToUse": "You put 4 brainrots in it",
-      "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
-      "inGameRightNow": "No",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/de/Witch_Fuse_894o3.png/revision/latest?cb=20251125223458"
+      "item": {
+        "name": "Witch Fuse",
+        "howToUse": "You put 4 brainrots in it",
+        "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "witch-fuse",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Steal%20a%20Brainrot/Machines/witch-fuse.webp"
+      }
     },
     {
-      "name": "Brainrot Dealer",
-      "slug": "brainrot-dealer",
-      "image": "/Steal%20a%20Brainrot/Machines/brainrot-dealer.webp",
-      "howToUse": "You spend the in game cash",
-      "whatItDoes": "You can buy brainrots and it will spawn with a 100% chance, but only if the brainrot was in stock.",
-      "inGameRightNow": "No",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/56/The_eliminaded_buy.png/revision/latest?cb=20251125224038"
+      "item": {
+        "name": "Brainrot Dealer",
+        "howToUse": "You spend the in game cash",
+        "whatItDoes": "You can buy brainrots and it will spawn with a 100% chance, but only if the brainrot was in stock.",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "brainrot-dealer",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Steal%20a%20Brainrot/Machines/brainrot-dealer.webp"
+      }
     },
     {
-      "name": "Brainrot Trader",
-      "slug": "brainrot-trader",
-      "image": "/Steal%20a%20Brainrot/Machines/brainrot-trader.webp",
-      "howToUse": "You put 1-5 brainrots in it, depending on the recipe.",
-      "whatItDoes": "You can trade for a brainrot with a 100% chance of getting, but it required the brainrots for the recipe.",
-      "inGameRightNow": "No",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/39/Brainrot_trader.png/revision/latest?cb=20251115213219"
+      "item": {
+        "name": "Brainrot Trader",
+        "howToUse": "You put 1-5 brainrots in it, depending on the recipe.",
+        "whatItDoes": "You can trade for a brainrot with a 100% chance of getting, but it required the brainrots for the recipe.",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "brainrot-trader",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Steal%20a%20Brainrot/Machines/brainrot-trader.webp"
+      }
     },
     {
-      "name": "Santa's Fuse",
-      "slug": "santa-s-fuse",
-      "image": "/Steal%20a%20Brainrot/Machines/santa-s-fuse.webp",
-      "howToUse": "You put 4 brainrots in it",
-      "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
-      "inGameRightNow": "No",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/76/Santa_fuse.png/revision/latest?cb=20251203172031"
+      "item": {
+        "name": "Santa's Fuse",
+        "howToUse": "You put 4 brainrots in it",
+        "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "santa-s-fuse",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Steal%20a%20Brainrot/Machines/santa-s-fuse.webp"
+      }
     },
     {
-      "name": "Santa's Shop",
-      "slug": "santa-s-shop",
-      "image": null,
-      "howToUse": "You spend the in game gold elves or robux",
-      "whatItDoes": "It will give you a brainrot if you buy it with robux or gold elves. but only if the brainrot was in stock.",
-      "inGameRightNow": "No",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Santa's Shop",
+        "howToUse": "You spend the in game gold elves or robux",
+        "whatItDoes": "It will give you a brainrot if you buy it with robux or gold elves. but only if the brainrot was in stock.",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "santa-s-shop",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "New Year's Machine",
-      "slug": "new-year-s-machine",
-      "image": null,
-      "howToUse": "You put brainrots that is brainrot god rarity or higher in it",
-      "whatItDoes": "It will start the New Years Event and also spawn a 2026 brainrot",
-      "inGameRightNow": "No",
-      "sourceImageUrl": null
+      "item": {
+        "name": "New Year's Machine",
+        "howToUse": "You put brainrots that is brainrot god rarity or higher in it",
+        "whatItDoes": "It will start the New Years Event and also spawn a 2026 brainrot",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "new-year-s-machine",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Cupid's Machine",
-      "slug": "cupid-s-machine",
-      "image": null,
-      "howToUse": "Insert a specific combination of Two Brainrots to get a different reward.",
-      "whatItDoes": "45% Heart Lucky Block 40.25% Nothing 14.50% Cupid Cupid Sahur 0.25% Lovin Rose 0.0625% Love Love Bear",
-      "inGameRightNow": "No",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Cupid's Machine",
+        "howToUse": "Insert a specific combination of Two Brainrots to get a different reward.",
+        "whatItDoes": "45% Heart Lucky Block 40.25% Nothing 14.50% Cupid Cupid Sahur 0.25% Lovin Rose 0.0625% Love Love Bear",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "cupid-s-machine",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Trade Machine",
-      "slug": "trade-machine",
-      "image": "/Steal%20a%20Brainrot/Machines/trade-machine.webp",
-      "howToUse": "You choose brainrot(s) to trade with the other player, and press accept after all players have pressed ready, and once all players have pressed accept, the brainrot the other player had will go into your base, same with the other one.",
-      "whatItDoes": "You can trade brainrots.",
-      "inGameRightNow": "Yes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/7c/Trade_Machine.png/revision/latest?cb=20260221001834"
+      "item": {
+        "name": "Trade Machine",
+        "howToUse": "You choose brainrot(s) to trade with the other player, and press accept after all players have pressed ready, and once all players have pressed accept, the brainrot the other player had will go into your base, same with the other one.",
+        "whatItDoes": "You can trade brainrots.",
+        "inGameRightNow": "Yes"
+      },
+      "system": {
+        "slug": "trade-machine",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": "/Steal%20a%20Brainrot/Machines/trade-machine.webp"
+      }
     },
     {
-      "name": "Divine Fuse",
-      "slug": "divine-fuse",
-      "image": "/Steal%20a%20Brainrot/Machines/divine-fuse.webp",
-      "howToUse": "You put 4 brainrots in it",
-      "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
-      "inGameRightNow": "No",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/db/Divine_Fuse2332113213.webp/revision/latest?cb=20260407013745"
+      "item": {
+        "name": "Divine Fuse",
+        "howToUse": "You put 4 brainrots in it",
+        "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
+        "inGameRightNow": "No"
+      },
+      "system": {
+        "slug": "divine-fuse",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/Steal%20a%20Brainrot/Machines/divine-fuse.webp"
+      }
     },
     {
-      "name": "Egg Incubator",
-      "slug": "egg-incubator",
-      "image": "/Steal%20a%20Brainrot/Machines/egg-incubator.webp",
-      "howToUse": "You put Egg Lucky Blocks in it",
-      "whatItDoes": "You can still get traits even if it's not on the track.",
-      "inGameRightNow": "Yes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/08/EGGI.png/revision/latest?cb=20260407014522"
+      "item": {
+        "name": "Egg Incubator",
+        "howToUse": "You put Egg Lucky Blocks in it",
+        "whatItDoes": "You can still get traits even if it's not on the track.",
+        "inGameRightNow": "Yes"
+      },
+      "system": {
+        "slug": "egg-incubator",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Steal%20a%20Brainrot/Machines/egg-incubator.webp"
+      }
     },
     {
-      "name": "Cyber Craft Machine",
-      "slug": "cyber-craft-machine",
-      "image": "/Steal%20a%20Brainrot/Machines/cyber-craft-machine.webp",
-      "howToUse": "You put specific Brainrots to craft another specific Brainrot",
-      "whatItDoes": "Once you give it the required Brainrots, it will start crafting for a certain amount of time (the better the Brainrot the longer it takes). Once the timer is over (or Sammy skips the craft timer), you can reveal the Brainrot.",
-      "inGameRightNow": "Yes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b5/Cyber_Craft_Machine.png/revision/latest?cb=20260415220425"
+      "item": {
+        "name": "Cyber Craft Machine",
+        "howToUse": "You put specific Brainrots to craft another specific Brainrot",
+        "whatItDoes": "Once you give it the required Brainrots, it will start crafting for a certain amount of time (the better the Brainrot the longer it takes). Once the timer is over (or Sammy skips the craft timer), you can reveal the Brainrot.",
+        "inGameRightNow": "Yes"
+      },
+      "system": {
+        "slug": "cyber-craft-machine",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/Steal%20a%20Brainrot/Machines/cyber-craft-machine.webp"
+      }
     }
   ]
 }

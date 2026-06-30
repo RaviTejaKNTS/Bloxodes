@@ -1,93 +1,125 @@
 {
   "meta": {
-    "title": "Grow a Garden 2 shops data",
-    "updatedAt": "2026-06-13",
-    "sources": [
-      {
-        "label": "Beebom - Grow a Garden 2 Wiki",
-        "url": "https://beebom.com/grow-a-garden-2-wiki/",
-        "accessed": "2026-06-13"
-      },
-      {
-        "label": "Beebom - All Grow a Garden 2 Plants and Seeds Guide",
-        "url": "https://beebom.com/grow-a-garden-2-plants-and-seeds/",
-        "accessed": "2026-06-13"
-      },
-      {
-        "label": "Beebom - All Grow a Garden 2 Gears Guide",
-        "url": "https://beebom.com/grow-a-garden-gear-shop-guide/",
-        "accessed": "2026-06-13"
-      },
-      {
-        "label": "Beebom - All Grow a Garden 2 Crates Guide",
-        "url": "https://beebom.com/grow-a-garden-2-crates/",
-        "accessed": "2026-06-13"
-      },
-      {
-        "label": "Beebom - All Grow a Garden 2 Pets Guide",
-        "url": "https://beebom.com/grow-a-garden-2-pets/",
-        "accessed": "2026-06-13"
-      },
-      {
-        "label": "Beebom - Grow a Garden 2 Guilds Guide",
-        "url": "https://beebom.com/grow-a-garden-2-guilds-guide/",
-        "accessed": "2026-06-13"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Grow a Garden 2",
+    "gameSlug": "grow-a-garden-2",
+    "collection": "shops",
+    "route": "/wiki/grow-a-garden-2/shops",
+    "catalogCode": "grow-a-garden-2-shops",
+    "itemFields": [
       "location",
       "currency",
       "sells",
       "whyItMatters"
-    ]
+    ],
+    "columns": [
+      "location",
+      "currency",
+      "sells",
+      "whyItMatters"
+    ],
+    "display": {
+      "groupLabel": "location",
+      "sectionOrder": [
+        "Main hub / central marketplace",
+        "Central marketplace",
+        "Lobby",
+        "Central hub"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "location",
+        "currency",
+        "sells",
+        "whyItMatters"
+      ],
+      "tableFields": [
+        "location",
+        "currency",
+        "sells",
+        "whyItMatters"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "seed-shop",
-      "name": "Seed Shop",
-      "location": "Main hub / central marketplace",
-      "currency": "Sheckles",
-      "sells": "Seed Shop plants and seeds",
-      "whyItMatters": "Main route for buying crops; common seeds restock faster while higher-rarity plants take longer.",
-      "image": "/Grow%20a%20Garden%202/Crops/carrot.webp"
+      "item": {
+        "name": "Seed Shop",
+        "location": "Main hub / central marketplace",
+        "currency": "Sheckles",
+        "sells": "Seed Shop plants and seeds",
+        "whyItMatters": "Main route for buying crops; common seeds restock faster while higher-rarity plants take longer."
+      },
+      "system": {
+        "slug": "seed-shop",
+        "section": "Main hub / central marketplace",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden%202/Crops/carrot.webp"
+      }
     },
     {
-      "id": "gears-shop",
-      "name": "Gears Shop",
-      "location": "Central marketplace",
-      "currency": "Sheckles or Robux",
-      "sells": "Watering cans, sprinklers, mushrooms, tools, defensive gear",
-      "whyItMatters": "Core shop for growth boosts, mutation support, night visibility, and garden defense.",
-      "image": "/Grow%20a%20Garden%202/Gears/common-watering-can.webp"
+      "item": {
+        "name": "Gears Shop",
+        "location": "Central marketplace",
+        "currency": "Sheckles or Robux",
+        "sells": "Watering cans, sprinklers, mushrooms, tools, defensive gear",
+        "whyItMatters": "Core shop for growth boosts, mutation support, night visibility, and garden defense."
+      },
+      "system": {
+        "slug": "gears-shop",
+        "section": "Central marketplace",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden%202/Gears/common-watering-can.webp"
+      }
     },
     {
-      "id": "props-shop",
-      "name": "Props Shop",
-      "location": "Central marketplace",
-      "currency": "Sheckles",
-      "sells": "Crates with props, structures, utilities, and defensive items",
-      "whyItMatters": "Main source for crates used to decorate, fortify, and block gardens against stealing.",
-      "image": "/Grow%20a%20Garden%202/Crates/ladder-crate.webp"
+      "item": {
+        "name": "Props Shop",
+        "location": "Central marketplace",
+        "currency": "Sheckles",
+        "sells": "Crates with props, structures, utilities, and defensive items",
+        "whyItMatters": "Main source for crates used to decorate, fortify, and block gardens against stealing."
+      },
+      "system": {
+        "slug": "props-shop",
+        "section": "Central marketplace",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden%202/Crates/ladder-crate.webp"
+      }
     },
     {
-      "id": "lobby-pet-spawns",
-      "name": "Lobby Pet Spawns",
-      "location": "Lobby",
-      "currency": "Sheckles",
-      "sells": "Spawned pets",
-      "whyItMatters": "Pets are bought when they spawn, can be outbid by other players, and disappear after their timer.",
-      "image": "/Grow%20a%20Garden%202/Pets/frog.webp"
+      "item": {
+        "name": "Lobby Pet Spawns",
+        "location": "Lobby",
+        "currency": "Sheckles",
+        "sells": "Spawned pets",
+        "whyItMatters": "Pets are bought when they spawn, can be outbid by other players, and disappear after their timer."
+      },
+      "system": {
+        "slug": "lobby-pet-spawns",
+        "section": "Lobby",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden%202/Pets/frog.webp"
+      }
     },
     {
-      "id": "guilds-counter",
-      "name": "Guilds Counter",
-      "location": "Central hub",
-      "currency": "Robux",
-      "sells": "Guild creation and guild management access",
-      "whyItMatters": "Creating a guild costs 99 Robux; rewards are not revealed yet.",
-      "image": "/Grow%20a%20Garden%202/Shops/guilds-counter.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Grow-a-Garden-2-Guilds.jpg"
+      "item": {
+        "name": "Guilds Counter",
+        "location": "Central hub",
+        "currency": "Robux",
+        "sells": "Guild creation and guild management access",
+        "whyItMatters": "Creating a guild costs 99 Robux; rewards are not revealed yet."
+      },
+      "system": {
+        "slug": "guilds-counter",
+        "section": "Central hub",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden%202/Shops/guilds-counter.webp"
+      }
     }
   ]
 }

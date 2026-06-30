@@ -1,149 +1,139 @@
 {
   "meta": {
-    "title": "Catch And Tame traits data",
-    "updatedAt": "2026-06-17",
-    "sources": [
-      {
-        "label": "Catch and Tame Wiki - Traits",
-        "url": "https://catch-and-tame.wiki/traits/",
-        "accessed": "2026-06-17"
-      },
-      {
-        "label": "Catch And Tame! Wiki - Traits",
-        "url": "https://catch-and-tame-rblx.fandom.com/wiki/Traits",
-        "accessed": "2026-06-17"
-      }
+    "schemaVersion": 2,
+    "game": "Catch And Tame",
+    "gameSlug": "catch-and-tame",
+    "collection": "traits",
+    "route": "/wiki/catch-and-tame/traits",
+    "catalogCode": "catch-and-tame-traits",
+    "itemFields": [
+      "chance",
+      "effect",
+      "role",
+      "bestUse"
     ],
     "columns": [
       "chance",
       "effect",
       "role",
-      "bestUse",
-      "collectionSection"
+      "bestUse"
     ],
-    "machine": {
-      "buildingCost": "$1,000,000",
-      "primaryPets": 1,
-      "sacrificePets": "3-10",
-      "maxTraitsPerPet": 3,
-      "rerollBehavior": "Rerolling removes the pet's current traits.",
-      "sacrificeLuckPerSlot": [
-        {
-          "rarity": "Mythic",
-          "luck": "1500%"
-        },
-        {
-          "rarity": "Legendary",
-          "luck": "800%"
-        },
-        {
-          "rarity": "Epic",
-          "luck": "400%"
-        },
-        {
-          "rarity": "Rare",
-          "luck": "100%"
-        },
-        {
-          "rarity": "Common",
-          "luck": "10%"
-        }
-      ]
-    },
-    "notes": "The standalone wiki lists six Trait Machine outcomes with chance percentages. Fandom cross-checks the six trait names, effects, $1M building cost, 3-10 sacrifice pet requirement, 3-trait maximum, and reroll replacement behavior."
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Income and pen value",
+        "Breeding and egg outcomes",
+        "Travel utility"
+      ],
+      "badgeField": "role",
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "chance",
+        "effect",
+        "role",
+        "bestUse"
+      ],
+      "tableFields": [
+        "chance",
+        "effect",
+        "role",
+        "bestUse"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Money Boost",
-      "slug": "money-boost",
-      "chance": "28.8%",
-      "effect": "Increases the pet's earning rate by 1.2x.",
-      "role": "Income",
-      "bestUse": "Best on high-BPS pets that stay in your pen for steady cash generation.",
-      "collectionSection": "Income and pen value",
-      "sortOrder": 1,
-      "sourceStatus": "Standalone wiki chance; Fandom effect cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/traits/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Traits",
-      "image": null,
-      "imageStatus": "text-only; Fandom image rejected as a before/after pet screenshot, not a clean trait icon"
+      "item": {
+        "name": "Money Boost",
+        "chance": "28.8%",
+        "effect": "Increases the pet's earning rate by 1.2x.",
+        "role": "Income",
+        "bestUse": "Best on high-BPS pets that stay in your pen for steady cash generation."
+      },
+      "system": {
+        "slug": "money-boost",
+        "section": "Income and pen value",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Hatch Speed",
-      "slug": "hatch-speed",
-      "chance": "20.6%",
-      "effect": "Increases egg hatch speed by 25% when the pet is placed in the pen.",
-      "role": "Hatching",
-      "bestUse": "Useful on pets kept near egg production because it reduces waiting time between hatch cycles.",
-      "collectionSection": "Income and pen value",
-      "sortOrder": 2,
-      "sourceStatus": "Standalone wiki chance; Fandom effect cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/traits/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Traits",
-      "image": null,
-      "imageStatus": "text-only; no clean source-backed trait icon found"
+      "item": {
+        "name": "Hatch Speed",
+        "chance": "20.6%",
+        "effect": "Increases egg hatch speed by 25% when the pet is placed in the pen.",
+        "role": "Hatching",
+        "bestUse": "Useful on pets kept near egg production because it reduces waiting time between hatch cycles."
+      },
+      "system": {
+        "slug": "hatch-speed",
+        "section": "Income and pen value",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Breed Luck",
-      "slug": "breed-luck",
-      "chance": "17.8%",
-      "effect": "Increases breeding luck by 25%, improving hatch quality.",
-      "role": "Breeding",
-      "bestUse": "Strong on breeder pets when you are trying to improve egg outcomes over repeated cycles.",
-      "collectionSection": "Breeding and egg outcomes",
-      "sortOrder": 3,
-      "sourceStatus": "Standalone wiki chance; Fandom effect cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/traits/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Traits",
-      "image": null,
-      "imageStatus": "text-only; no clean source-backed trait icon found"
+      "item": {
+        "name": "Breed Luck",
+        "chance": "17.8%",
+        "effect": "Increases breeding luck by 25%, improving hatch quality.",
+        "role": "Breeding",
+        "bestUse": "Strong on breeder pets when you are trying to improve egg outcomes over repeated cycles."
+      },
+      "system": {
+        "slug": "breed-luck",
+        "section": "Breeding and egg outcomes",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Mutation Luck",
-      "slug": "mutation-luck",
-      "chance": "12.3%",
-      "effect": "Increases the chance of a bred egg hatching into a mutated pet by 20%.",
-      "role": "Breeding",
-      "bestUse": "Best when your goal is mutation hunting through breeding rather than immediate cash income.",
-      "collectionSection": "Breeding and egg outcomes",
-      "sortOrder": 4,
-      "sourceStatus": "Standalone wiki chance; Fandom effect cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/traits/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Traits",
-      "image": null,
-      "imageStatus": "text-only; no clean source-backed trait icon found"
+      "item": {
+        "name": "Mutation Luck",
+        "chance": "12.3%",
+        "effect": "Increases the chance of a bred egg hatching into a mutated pet by 20%.",
+        "role": "Breeding",
+        "bestUse": "Best when your goal is mutation hunting through breeding rather than immediate cash income."
+      },
+      "system": {
+        "slug": "mutation-luck",
+        "section": "Breeding and egg outcomes",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Twin Eggs",
-      "slug": "twin-eggs",
-      "chance": "10.9%",
-      "effect": "Gives a high chance to produce two eggs instead of one after each breed cycle.",
-      "role": "Breeding",
-      "bestUse": "Pairs well with breeder pets because more egg output gives more chances at useful hatch results.",
-      "collectionSection": "Breeding and egg outcomes",
-      "sortOrder": 5,
-      "sourceStatus": "Standalone wiki chance; Fandom effect cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/traits/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Traits",
-      "image": "/Catch%20And%20Tame/Traits/twin-eggs.webp",
-      "imageStatus": "source-backed Twin Eggs effect image cropped/optimized from Fandom Traits",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/catch-and-tame-rblx/images/9/92/Twin_Eggs.png/revision/latest?cb=20260220141900"
+      "item": {
+        "name": "Twin Eggs",
+        "chance": "10.9%",
+        "effect": "Gives a high chance to produce two eggs instead of one after each breed cycle.",
+        "role": "Breeding",
+        "bestUse": "Pairs well with breeder pets because more egg output gives more chances at useful hatch results."
+      },
+      "system": {
+        "slug": "twin-eggs",
+        "section": "Breeding and egg outcomes",
+        "sortOrder": 5,
+        "image": "/Catch%20And%20Tame/Traits/twin-eggs.webp"
+      }
     },
     {
-      "name": "Rideable",
-      "slug": "rideable",
-      "chance": "9.6%",
-      "effect": "Allows the player to mount and ride the pet across the map.",
-      "role": "Travel",
-      "bestUse": "Best on a pet you actually keep and move with, especially when crossing islands or returning to your pen.",
-      "collectionSection": "Travel utility",
-      "sortOrder": 6,
-      "sourceStatus": "Standalone wiki chance; Fandom effect cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/traits/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Traits",
-      "image": "/Catch%20And%20Tame/Traits/rideable.webp",
-      "imageStatus": "source-backed saddle trait icon cropped from Fandom Traits row image",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/catch-and-tame-rblx/images/7/74/Trait_Rideable.jpg/revision/latest?cb=20260220150016"
+      "item": {
+        "name": "Rideable",
+        "chance": "9.6%",
+        "effect": "Allows the player to mount and ride the pet across the map.",
+        "role": "Travel",
+        "bestUse": "Best on a pet you actually keep and move with, especially when crossing islands or returning to your pen."
+      },
+      "system": {
+        "slug": "rideable",
+        "section": "Travel utility",
+        "sortOrder": 6,
+        "image": "/Catch%20And%20Tame/Traits/rideable.webp"
+      }
     }
   ]
 }

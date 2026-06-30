@@ -1,1428 +1,957 @@
 {
   "meta": {
-    "title": "Blox Fruits materials data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Materials",
-        "url": "https://blox-fruits.fandom.com/wiki/Materials",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "materials",
+    "route": "/wiki/blox-fruits/materials",
+    "catalogCode": "blox-fruits-materials",
+    "itemFields": [
       "rarity",
       "type",
       "source",
       "purpose",
       "price",
-      "sea",
-      "wikiUrl"
-    ]
+      "sea"
+    ],
+    "columns": [
+      "rarity",
+      "type",
+      "source",
+      "purpose",
+      "price",
+      "sea"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Legendary",
+        "Mythical"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "purpose",
+      "cardDescriptionField": "purpose",
+      "cardFields": [
+        "rarity",
+        "type",
+        "source",
+        "purpose",
+        "price",
+        "sea"
+      ],
+      "tableFields": [
+        "rarity",
+        "type",
+        "source",
+        "purpose",
+        "price",
+        "sea"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Angel Wings",
-      "slug": "angel-wings",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": "God's Guard • Shanda • Wysper • Royal Squad • Royal Soldier • Thunder God",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Angel Wings",
+        "rarity": "Common",
+        "type": "Material",
         "source": "God's Guard • Shanda • Wysper • Royal Squad • Royal Soldier • Thunder God",
-        "purpose": "Upgrading Weapons"
+        "purpose": "Upgrading Weapons",
+        "sea": "1"
       },
-      "rawText": "Common MaterialSource God's Guard • Shanda • Wysper • Royal Squad • Royal Soldier • Thunder GodPurpose Upgrading Weapons",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Angel_Wings",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/angel-wings.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0d/AngelWings.png/revision/latest/scale-to-width-down/125?cb=20221015205700"
+      "system": {
+        "slug": "angel-wings",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Materials/angel-wings.webp"
+      }
     },
     {
-      "name": "Blue Icicle Berry",
-      "slug": "blue-icicle-berry",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Bushes",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Skins",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Blue Icicle Berry",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Bushes",
-        "purpose": "Crafting Skins"
+        "purpose": "Crafting Skins",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource BushesPurpose Crafting Skins",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blue_Icicle_Berry",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/blue-icicle-berry.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/92/Blue_Icicle_Berry.png/revision/latest/scale-to-width-down/125?cb=20241220155810"
+      "system": {
+        "slug": "blue-icicle-berry",
+        "section": "Common",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Materials/blue-icicle-berry.webp"
+      }
     },
     {
-      "name": "Candy Egg",
-      "slug": "candy-egg",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": "Easter Event 2026",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Currency in Easter Shop",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Candy Egg",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Easter Event 2026",
-        "purpose": "Currency in Easter Shop"
+        "purpose": "Currency in Easter Shop",
+        "sea": "events"
       },
-      "rawText": "Common MaterialSource Easter Event 2026Purpose Currency in Easter Shop",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy_Egg",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/candy-egg.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/67/Candy_Egg.png/revision/latest/scale-to-width-down/125?cb=20260329214752"
+      "system": {
+        "slug": "candy-egg",
+        "section": "Common",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Materials/candy-egg.webp"
+      }
     },
     {
-      "name": "Green Toad Berry",
-      "slug": "green-toad-berry",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Bushes",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Skins",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Green Toad Berry",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Bushes",
-        "purpose": "Crafting Skins"
+        "purpose": "Crafting Skins",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource BushesPurpose Crafting Skins",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Green_Toad_Berry",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/green-toad-berry.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/93/Green_Toad_Berry.png/revision/latest/scale-to-width-down/125?cb=20241220155809"
+      "system": {
+        "slug": "green-toad-berry",
+        "section": "Common",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Materials/green-toad-berry.webp"
+      }
     },
     {
-      "name": "Leather",
-      "slug": "leather",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Various Enemies",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Leather",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Various Enemies",
-        "purpose": "Upgrading Weapons"
+        "purpose": "Upgrading Weapons",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource Various EnemiesPurpose Upgrading Weapons",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Leather",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/leather.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3d/Leather.png/revision/latest/scale-to-width-down/125?cb=20221015210301"
+      "system": {
+        "slug": "leather",
+        "section": "Common",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Materials/leather.webp"
+      }
     },
     {
-      "name": "Magma Ore",
-      "slug": "magma-ore",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2",
-      "money": null,
-      "robux": null,
-      "source": "Lava Pirate • Magma Ninja • Magma Admiral • Military Spy • Military Soldier",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons, Obtaining Godhuman",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Magma Ore",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Lava Pirate • Magma Ninja • Magma Admiral • Military Spy • Military Soldier",
-        "purpose": "Upgrading Weapons, Obtaining Godhuman"
+        "purpose": "Upgrading Weapons, Obtaining Godhuman",
+        "sea": "1 sea-2"
       },
-      "rawText": "Common MaterialSource Lava Pirate • Magma Ninja • Magma Admiral • Military Spy • Military SoldierPurpose Upgrading Weapons, Obtaining Godhuman",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Magma_Ore",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/magma-ore.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/29/Magma_Ore.png/revision/latest/scale-to-width-down/125?cb=20231026120704"
+      "system": {
+        "slug": "magma-ore",
+        "section": "Common",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Materials/magma-ore.webp"
+      }
     },
     {
-      "name": "Orange Berry",
-      "slug": "orange-berry",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Bushes",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Skins",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Orange Berry",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Bushes",
-        "purpose": "Crafting Skins"
+        "purpose": "Crafting Skins",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource BushesPurpose Crafting Skins",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Orange_Berry",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/orange-berry.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/93/Orange_Berry.png/revision/latest/scale-to-width-down/125?cb=20241220155807"
+      "system": {
+        "slug": "orange-berry",
+        "section": "Common",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Materials/orange-berry.webp"
+      }
     },
     {
-      "name": "Pink Pig Berry",
-      "slug": "pink-pig-berry",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Bushes",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Skins",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Pink Pig Berry",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Bushes",
-        "purpose": "Crafting Skins"
+        "purpose": "Crafting Skins",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource BushesPurpose Crafting Skins",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pink_Pig_Berry",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/pink-pig-berry.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/79/Pink_Pig_Berry.png/revision/latest/scale-to-width-down/125?cb=20241220155815"
+      "system": {
+        "slug": "pink-pig-berry",
+        "section": "Common",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Materials/pink-pig-berry.webp"
+      }
     },
     {
-      "name": "Purple Jelly Berry",
-      "slug": "purple-jelly-berry",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Bushes",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Skins",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Purple Jelly Berry",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Bushes",
-        "purpose": "Crafting Skins"
+        "purpose": "Crafting Skins",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource BushesPurpose Crafting Skins",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Purple_Jelly_Berry",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/purple-jelly-berry.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/41/Purple_Jelly_Berry.png/revision/latest/scale-to-width-down/125?cb=20241220160007"
+      "system": {
+        "slug": "purple-jelly-berry",
+        "section": "Common",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Materials/purple-jelly-berry.webp"
+      }
     },
     {
-      "name": "Red Cherry Berry",
-      "slug": "red-cherry-berry",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Bushes",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Skins",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Red Cherry Berry",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Bushes",
-        "purpose": "Crafting Skins"
+        "purpose": "Crafting Skins",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource BushesPurpose Crafting Skins",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Red_Cherry_Berry",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/red-cherry-berry.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/ca/Red_Cherry_Berry.png/revision/latest/scale-to-width-down/125?cb=20241220155806"
+      "system": {
+        "slug": "red-cherry-berry",
+        "section": "Common",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Materials/red-cherry-berry.webp"
+      }
     },
     {
-      "name": "Scrap Metal",
-      "slug": "scrap-metal",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Various Enemies",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Scrap Metal",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Various Enemies",
-        "purpose": "Upgrading Weapons"
+        "purpose": "Upgrading Weapons",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource Various EnemiesPurpose Upgrading Weapons",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Scrap_Metal",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/scrap-metal.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/82/Scrap_Metal.png/revision/latest/scale-to-width-down/125?cb=20231026152942"
+      "system": {
+        "slug": "scrap-metal",
+        "section": "Common",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Materials/scrap-metal.webp"
+      }
     },
     {
-      "name": "Simulation Data",
-      "slug": "simulation-data",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Simulation Hub • Shop",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Unlocking Dungeons, Upgrading Control, Buying Trinkets",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Simulation Data",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Simulation Hub • Shop",
-        "purpose": "Unlocking Dungeons, Upgrading Control, Buying Trinkets"
+        "purpose": "Unlocking Dungeons, Upgrading Control, Buying Trinkets",
+        "sea": "2 sea-3"
       },
-      "rawText": "Common MaterialSource Simulation Hub • ShopPurpose Unlocking Dungeons, Upgrading Control, Buying Trinkets",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Simulation_Data",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/simulation-data.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/73/Simulation_Data.png/revision/latest/scale-to-width-down/125?cb=20251230022358"
+      "system": {
+        "slug": "simulation-data",
+        "section": "Common",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Materials/simulation-data.webp"
+      }
     },
     {
-      "name": "White Cloud Berry",
-      "slug": "white-cloud-berry",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Bushes",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Skins",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "White Cloud Berry",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Bushes",
-        "purpose": "Crafting Skins"
+        "purpose": "Crafting Skins",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource BushesPurpose Crafting Skins",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/White_Cloud_Berry",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/white-cloud-berry.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d9/White_Cloud_Berry.png/revision/latest/scale-to-width-down/125?cb=20241220155800"
+      "system": {
+        "slug": "white-cloud-berry",
+        "section": "Common",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Materials/white-cloud-berry.webp"
+      }
     },
     {
-      "name": "Wooden Plank",
-      "slug": "wooden-plank",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Trees",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Repairing Boats",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Wooden Plank",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Trees",
-        "purpose": "Repairing Boats"
+        "purpose": "Repairing Boats",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource TreesPurpose Repairing Boats",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Wooden_Plank",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/wooden-plank.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7b/Wooden_Plank.png/revision/latest/scale-to-width-down/125?cb=20241223165920"
+      "system": {
+        "slug": "wooden-plank",
+        "section": "Common",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Materials/wooden-plank.webp"
+      }
     },
     {
-      "name": "Yellow Star Berry",
-      "slug": "yellow-star-berry",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Bushes",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Skins",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Yellow Star Berry",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Bushes",
-        "purpose": "Crafting Skins"
+        "purpose": "Crafting Skins",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Common MaterialSource BushesPurpose Crafting Skins",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Yellow_Star_Berry",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/yellow-star-berry.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f1/Yellow_Star_Berry.png/revision/latest/scale-to-width-down/125?cb=20241220155809"
+      "system": {
+        "slug": "yellow-star-berry",
+        "section": "Common",
+        "sortOrder": 15,
+        "image": "/Blox%20Fruits/Materials/yellow-star-berry.webp"
+      }
     },
     {
-      "name": "Yeti Fur",
-      "slug": "yeti-fur",
-      "rarity": "Common",
-      "type": "Material",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": "Yeti",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Items",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Yeti Fur",
+        "rarity": "Common",
+        "type": "Material",
         "source": "Yeti",
-        "purpose": "Crafting Items"
+        "purpose": "Crafting Items",
+        "sea": "1"
       },
-      "rawText": "Common MaterialSource YetiPurpose Crafting Items",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Yeti_Fur",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/yeti-fur.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e2/YetiFur.png/revision/latest/scale-to-width-down/125?cb=20221015210908"
+      "system": {
+        "slug": "yeti-fur",
+        "section": "Common",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Materials/yeti-fur.webp"
+      }
     },
     {
-      "name": "Blaze Ember",
-      "slug": "blaze-ember",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Dragon Hunter",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Items",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Blaze Ember",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Dragon Hunter",
-        "purpose": "Crafting Items"
+        "purpose": "Crafting Items",
+        "sea": "3"
       },
-      "rawText": "Uncommon MaterialSource Dragon HunterPurpose Crafting Items",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blaze_Ember",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/blaze-ember.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c6/Blaze_Ember.png/revision/latest/scale-to-width-down/125?cb=20241216213652"
+      "system": {
+        "slug": "blaze-ember",
+        "section": "Uncommon",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Materials/blaze-ember.webp"
+      }
     },
     {
-      "name": "Bones",
-      "slug": "bones",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "3 sea-events",
-      "money": null,
-      "robux": null,
-      "source": "Reborn Skeleton • Living Zombie • Demonic Soul • Possessed Mummy • Soul Reaper",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Random Surprise, Crafting Soul Guitar",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Bones",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Reborn Skeleton • Living Zombie • Demonic Soul • Possessed Mummy • Soul Reaper",
-        "purpose": "Random Surprise, Crafting Soul Guitar"
+        "purpose": "Random Surprise, Crafting Soul Guitar",
+        "sea": "3 sea-events"
       },
-      "rawText": "Uncommon MaterialSource Reborn Skeleton • Living Zombie • Demonic Soul • Possessed Mummy • Soul ReaperPurpose Random Surprise, Crafting Soul Guitar",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bones",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/bones.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5e/Bones.png/revision/latest/scale-to-width-down/125?cb=20221015205731"
+      "system": {
+        "slug": "bones",
+        "section": "Uncommon",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Materials/bones.webp"
+      }
     },
     {
-      "name": "Ectoplasm",
-      "slug": "ectoplasm",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": "Ship Deckhand • Ship Engineer • Ship Steward • Ship Officer • Cursed Captain",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Currency in Cursed Ship",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Ectoplasm",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Ship Deckhand • Ship Engineer • Ship Steward • Ship Officer • Cursed Captain",
-        "purpose": "Currency in Cursed Ship"
+        "purpose": "Currency in Cursed Ship",
+        "sea": "2"
       },
-      "rawText": "Uncommon MaterialSource Ship Deckhand • Ship Engineer • Ship Steward • Ship Officer • Cursed CaptainPurpose Currency in Cursed Ship",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ectoplasm",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/ectoplasm.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/36/Ectoplasm.png/revision/latest/scale-to-width-down/125?cb=20221015210023"
+      "system": {
+        "slug": "ectoplasm",
+        "section": "Uncommon",
+        "sortOrder": 19,
+        "image": "/Blox%20Fruits/Materials/ectoplasm.webp"
+      }
     },
     {
-      "name": "Fish Tail",
-      "slug": "fish-tail",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "1 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Fishman Warrior • Fishman Commando • Fishman Lord • Fishman Raider • Fishman Captain",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons, Obtaining Godhuman",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Fish Tail",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Fishman Warrior • Fishman Commando • Fishman Lord • Fishman Raider • Fishman Captain",
-        "purpose": "Upgrading Weapons, Obtaining Godhuman"
+        "purpose": "Upgrading Weapons, Obtaining Godhuman",
+        "sea": "1 sea-3"
       },
-      "rawText": "Uncommon MaterialSource Fishman Warrior • Fishman Commando • Fishman Lord • Fishman Raider • Fishman CaptainPurpose Upgrading Weapons, Obtaining Godhuman",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fish_Tail",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/fish-tail.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7e/FishTail.png/revision/latest/scale-to-width-down/125?cb=20221015210046"
+      "system": {
+        "slug": "fish-tail",
+        "section": "Uncommon",
+        "sortOrder": 20,
+        "image": "/Blox%20Fruits/Materials/fish-tail.webp"
+      }
     },
     {
-      "name": "Fool's Gold",
-      "slug": "fool-s-gold",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Ship Raid • Haunted Ship Raid",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Items",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Fool's Gold",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Ship Raid • Haunted Ship Raid",
-        "purpose": "Crafting Items"
+        "purpose": "Crafting Items",
+        "sea": "2 sea-3"
       },
-      "rawText": "Uncommon MaterialSource Ship Raid • Haunted Ship RaidPurpose Crafting Items",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fool%27s_Gold",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/fool-s-gold.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/41/Fool%27s_Gold.png/revision/latest/scale-to-width-down/125?cb=20231026233352"
+      "system": {
+        "slug": "fool-s-gold",
+        "section": "Uncommon",
+        "sortOrder": 21,
+        "image": "/Blox%20Fruits/Materials/fool-s-gold.webp"
+      }
     },
     {
-      "name": "Gunpowder",
-      "slug": "gunpowder",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Pistol Billionaire",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "None",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Gunpowder",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Pistol Billionaire",
-        "purpose": "None"
+        "purpose": "None",
+        "sea": "3"
       },
-      "rawText": "Uncommon MaterialSource Pistol BillionairePurpose None",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gunpowder",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/gunpowder.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ae/Gunpowder.png/revision/latest/scale-to-width-down/125?cb=20221015210216"
+      "system": {
+        "slug": "gunpowder",
+        "section": "Uncommon",
+        "sortOrder": 22,
+        "image": "/Blox%20Fruits/Materials/gunpowder.webp"
+      }
     },
     {
-      "name": "Mini Tusk",
-      "slug": "mini-tusk",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Mythological Pirate",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Mini Tusk",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Mythological Pirate",
-        "purpose": "Upgrading Weapons"
+        "purpose": "Upgrading Weapons",
+        "sea": "3"
       },
-      "rawText": "Uncommon MaterialSource Mythological PiratePurpose Upgrading Weapons",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mini_Tusk",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/mini-tusk.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/51/MiniTusk.png/revision/latest/scale-to-width-down/125?cb=20221015210459"
+      "system": {
+        "slug": "mini-tusk",
+        "section": "Uncommon",
+        "sortOrder": 23,
+        "image": "/Blox%20Fruits/Materials/mini-tusk.webp"
+      }
     },
     {
-      "name": "Mystic Droplet",
-      "slug": "mystic-droplet",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": "Sea Soldier • Water Fighter • Tide Keeper",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons, Obtaining Godhuman",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Mystic Droplet",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Sea Soldier • Water Fighter • Tide Keeper",
-        "purpose": "Upgrading Weapons, Obtaining Godhuman"
+        "purpose": "Upgrading Weapons, Obtaining Godhuman",
+        "sea": "2"
       },
-      "rawText": "Uncommon MaterialSource Sea Soldier • Water Fighter • Tide KeeperPurpose Upgrading Weapons, Obtaining Godhuman",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mystic_Droplet",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/mystic-droplet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0d/Mystic_Droplet.png/revision/latest/scale-to-width-down/125?cb=20231026152459"
+      "system": {
+        "slug": "mystic-droplet",
+        "section": "Uncommon",
+        "sortOrder": 24,
+        "image": "/Blox%20Fruits/Materials/mystic-droplet.webp"
+      }
     },
     {
-      "name": "Radioactive Material",
-      "slug": "radioactive-material",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": "Factory Staff • Factory",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Radioactive Material",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Factory Staff • Factory",
-        "purpose": "Upgrading Weapons"
+        "purpose": "Upgrading Weapons",
+        "sea": "2"
       },
-      "rawText": "Uncommon MaterialSource Factory Staff • FactoryPurpose Upgrading Weapons",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Radioactive_Material",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/radioactive-material.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/34/RadioactiveMaterial.png/revision/latest/scale-to-width-down/125?cb=20221015210634"
+      "system": {
+        "slug": "radioactive-material",
+        "section": "Uncommon",
+        "sortOrder": 25,
+        "image": "/Blox%20Fruits/Materials/radioactive-material.webp"
+      }
     },
     {
-      "name": "Shark Tooth",
-      "slug": "shark-tooth",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Shark",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Items",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Shark Tooth",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Shark",
-        "purpose": "Crafting Items"
+        "purpose": "Crafting Items",
+        "sea": "2 sea-3"
       },
-      "rawText": "Uncommon MaterialSource SharkPurpose Crafting Items",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark_Tooth",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/shark-tooth.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1b/Shark_Tooth.png/revision/latest/scale-to-width-down/125?cb=20231026233014"
+      "system": {
+        "slug": "shark-tooth",
+        "section": "Uncommon",
+        "sortOrder": 26,
+        "image": "/Blox%20Fruits/Materials/shark-tooth.webp"
+      }
     },
     {
-      "name": "Vampire Fang",
-      "slug": "vampire-fang",
-      "rarity": "Uncommon",
-      "type": "Material",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": "Vampire",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons, Obtaining Sanguine Art",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Vampire Fang",
+        "rarity": "Uncommon",
+        "type": "Material",
         "source": "Vampire",
-        "purpose": "Upgrading Weapons, Obtaining Sanguine Art"
+        "purpose": "Upgrading Weapons, Obtaining Sanguine Art",
+        "sea": "2"
       },
-      "rawText": "Uncommon MaterialSource VampirePurpose Upgrading Weapons, Obtaining Sanguine Art",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Vampire_Fang",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/vampire-fang.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/82/VampireFang.png/revision/latest/scale-to-width-down/125?cb=20221015210832"
+      "system": {
+        "slug": "vampire-fang",
+        "section": "Uncommon",
+        "sortOrder": 27,
+        "image": "/Blox%20Fruits/Materials/vampire-fang.webp"
+      }
     },
     {
-      "name": "Candy",
-      "slug": "candy",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": "Various Enemies",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Currency in Christmas Event",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Candy",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Various Enemies",
-        "purpose": "Currency in Christmas Event"
+        "purpose": "Currency in Christmas Event",
+        "sea": "events"
       },
-      "rawText": "Rare MaterialSource Various EnemiesPurpose Currency in Christmas Event",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/candy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1c/Candy.png/revision/latest/scale-to-width-down/125?cb=20221015205749"
+      "system": {
+        "slug": "candy",
+        "section": "Rare",
+        "sortOrder": 28,
+        "image": "/Blox%20Fruits/Materials/candy.webp"
+      }
     },
     {
-      "name": "Candy Corn",
-      "slug": "candy-corn",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": "Halloween Event 2025",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Halloween Gacha",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Candy Corn",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Halloween Event 2025",
-        "purpose": "Halloween Gacha"
+        "purpose": "Halloween Gacha",
+        "sea": "events"
       },
-      "rawText": "Rare MaterialSource Halloween Event 2025Purpose Halloween Gacha",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy_Corn",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/candy-corn.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ee/Candy_Corn.png/revision/latest/scale-to-width-down/125?cb=20251031182838"
+      "system": {
+        "slug": "candy-corn",
+        "section": "Rare",
+        "sortOrder": 29,
+        "image": "/Blox%20Fruits/Materials/candy-corn.webp"
+      }
     },
     {
-      "name": "Conjured Cocoa",
-      "slug": "conjured-cocoa",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Cocoa Warrior • Chocolate Bar Battler",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons, Crafting Cake Chalice",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Conjured Cocoa",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Cocoa Warrior • Chocolate Bar Battler",
-        "purpose": "Upgrading Weapons, Crafting Cake Chalice"
+        "purpose": "Upgrading Weapons, Crafting Cake Chalice",
+        "sea": "3"
       },
-      "rawText": "Rare MaterialSource Cocoa Warrior • Chocolate Bar BattlerPurpose Upgrading Weapons, Crafting Cake Chalice",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Conjured_Cocoa",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/conjured-cocoa.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/78/Conjured_Cocoa.png/revision/latest/scale-to-width-down/125?cb=20231026123954"
+      "system": {
+        "slug": "conjured-cocoa",
+        "section": "Rare",
+        "sortOrder": 30,
+        "image": "/Blox%20Fruits/Materials/conjured-cocoa.webp"
+      }
     },
     {
-      "name": "Demonic Wisp",
-      "slug": "demonic-wisp",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Demonic Soul",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons, Obtaining Sanguine Art",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Demonic Wisp",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Demonic Soul",
-        "purpose": "Upgrading Weapons, Obtaining Sanguine Art"
+        "purpose": "Upgrading Weapons, Obtaining Sanguine Art",
+        "sea": "3"
       },
-      "rawText": "Rare MaterialSource Demonic SoulPurpose Upgrading Weapons, Obtaining Sanguine Art",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Demonic_Wisp",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/demonic-wisp.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4a/DemonicWisp.png/revision/latest/scale-to-width-down/125?cb=20241216214849"
+      "system": {
+        "slug": "demonic-wisp",
+        "section": "Rare",
+        "sortOrder": 31,
+        "image": "/Blox%20Fruits/Materials/demonic-wisp.webp"
+      }
     },
     {
-      "name": "Dragon Scale",
-      "slug": "dragon-scale",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Dragon Crew Warrior • Dragon Crew Archer",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons, Obtaining Godhuman",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dragon Scale",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Dragon Crew Warrior • Dragon Crew Archer",
-        "purpose": "Upgrading Weapons, Obtaining Godhuman"
+        "purpose": "Upgrading Weapons, Obtaining Godhuman",
+        "sea": "3"
       },
-      "rawText": "Rare MaterialSource Dragon Crew Warrior • Dragon Crew ArcherPurpose Upgrading Weapons, Obtaining Godhuman",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Scale",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/dragon-scale.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/58/DragonScale.png/revision/latest/scale-to-width-down/125?cb=20221015210009"
+      "system": {
+        "slug": "dragon-scale",
+        "section": "Rare",
+        "sortOrder": 32,
+        "image": "/Blox%20Fruits/Materials/dragon-scale.webp"
+      }
     },
     {
-      "name": "Electric Wing",
-      "slug": "electric-wing",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": "Piranha",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Items",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Electric Wing",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Piranha",
-        "purpose": "Crafting Items"
+        "purpose": "Crafting Items",
+        "sea": "2 sea-3"
       },
-      "rawText": "Rare MaterialSource PiranhaPurpose Crafting Items",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Electric_Wing",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/electric-wing.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4c/Electric_Wing.png/revision/latest/scale-to-width-down/125?cb=20231026233215"
+      "system": {
+        "slug": "electric-wing",
+        "section": "Rare",
+        "sortOrder": 33,
+        "image": "/Blox%20Fruits/Materials/electric-wing.webp"
+      }
     },
     {
-      "name": "Fire Feather",
-      "slug": "fire-feather",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Tyrant of the Skies",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Eagle, Crafting Skins",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Fire Feather",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Tyrant of the Skies",
-        "purpose": "Upgrading Eagle, Crafting Skins"
+        "purpose": "Upgrading Eagle, Crafting Skins",
+        "sea": "3"
       },
-      "rawText": "Rare MaterialSource Tyrant of the SkiesPurpose Upgrading Eagle, Crafting Skins",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fire_Feather",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/fire-feather.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f3/Fire_Feather.png/revision/latest/scale-to-width-down/125?cb=20250421151055"
+      "system": {
+        "slug": "fire-feather",
+        "section": "Rare",
+        "sortOrder": 34,
+        "image": "/Blox%20Fruits/Materials/fire-feather.webp"
+      }
     },
     {
-      "name": "Fire Flower",
-      "slug": "fire-flower",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Dragon Wizard",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Obtaining Draco V2",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Fire Flower",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Dragon Wizard",
-        "purpose": "Obtaining Draco V2"
+        "purpose": "Obtaining Draco V2",
+        "sea": "3"
       },
-      "rawText": "Rare MaterialSource Dragon WizardPurpose Obtaining Draco V2",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fire_Flower",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/fire-flower.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d2/Fire_Flower.png/revision/latest/scale-to-width-down/125?cb=20241216214936"
+      "system": {
+        "slug": "fire-flower",
+        "section": "Rare",
+        "sortOrder": 35,
+        "image": "/Blox%20Fruits/Materials/fire-flower.webp"
+      }
     },
     {
-      "name": "Moonstone",
-      "slug": "moonstone",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Tyrant of the Skies",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Gravity",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Moonstone",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Tyrant of the Skies",
-        "purpose": "Upgrading Gravity"
+        "purpose": "Upgrading Gravity",
+        "sea": "3"
       },
-      "rawText": "Rare MaterialSource Tyrant of the SkiesPurpose Upgrading Gravity",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Moonstone",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/moonstone.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b6/Moonstone.png/revision/latest/scale-to-width-down/125?cb=20250421151329"
+      "system": {
+        "slug": "moonstone",
+        "section": "Rare",
+        "sortOrder": 36,
+        "image": "/Blox%20Fruits/Materials/moonstone.webp"
+      }
     },
     {
-      "name": "Mutant Tooth",
-      "slug": "mutant-tooth",
-      "rarity": "Rare",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Terrorshark",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Items",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Mutant Tooth",
+        "rarity": "Rare",
+        "type": "Material",
         "source": "Terrorshark",
-        "purpose": "Crafting Items"
+        "purpose": "Crafting Items",
+        "sea": "3"
       },
-      "rawText": "Rare MaterialSource TerrorsharkPurpose Crafting Items",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mutant_Tooth",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/mutant-tooth.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/55/Mutant_Tooth.png/revision/latest/scale-to-width-down/125?cb=20231026233340"
+      "system": {
+        "slug": "mutant-tooth",
+        "section": "Rare",
+        "sortOrder": 37,
+        "image": "/Blox%20Fruits/Materials/mutant-tooth.webp"
+      }
     },
     {
-      "name": "Azure Ember",
-      "slug": "azure-ember",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Kitsune Shrine",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons, Obtaining Items",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Azure Ember",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Kitsune Shrine",
-        "purpose": "Upgrading Weapons, Obtaining Items"
+        "purpose": "Upgrading Weapons, Obtaining Items",
+        "sea": "3"
       },
-      "rawText": "Legendary MaterialSource Kitsune ShrinePurpose Upgrading Weapons, Obtaining Items",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Azure_Ember",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/azure-ember.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/27/Azure_Ember.png/revision/latest/scale-to-width-down/125?cb=20240407184214"
+      "system": {
+        "slug": "azure-ember",
+        "section": "Legendary",
+        "sortOrder": 38,
+        "image": "/Blox%20Fruits/Materials/azure-ember.webp"
+      }
     },
     {
-      "name": "Celestial Token",
-      "slug": "celestial-token",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": "Celestial Soldier • Rip Commander • Celestial Fisherman • Celestial Gacha",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Celestial Gacha",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Celestial Token",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Celestial Soldier • Rip Commander • Celestial Fisherman • Celestial Gacha",
-        "purpose": "Celestial Gacha"
+        "purpose": "Celestial Gacha",
+        "sea": "events"
       },
-      "rawText": "Legendary MaterialSource Celestial Soldier • Rip Commander • Celestial Fisherman • Celestial GachaPurpose Celestial Gacha",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Celestial_Token",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/celestial-token.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/56/Celestial_Token.png/revision/latest/scale-to-width-down/125?cb=20250831010130"
+      "system": {
+        "slug": "celestial-token",
+        "section": "Legendary",
+        "sortOrder": 39,
+        "image": "/Blox%20Fruits/Materials/celestial-token.webp"
+      }
     },
     {
-      "name": "Dinosaur Bones",
-      "slug": "dinosaur-bones",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Volcano Event",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Items, Gacha from Dragon Hunter",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dinosaur Bones",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Volcano Event",
-        "purpose": "Crafting Items, Gacha from Dragon Hunter"
+        "purpose": "Crafting Items, Gacha from Dragon Hunter",
+        "sea": "3"
       },
-      "rawText": "Legendary MaterialSource Volcano EventPurpose Crafting Items, Gacha from Dragon Hunter",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dinosaur_Bones",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/dinosaur-bones.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6b/Dinosaur_Bones.png/revision/latest/scale-to-width-down/125?cb=20241215083608"
+      "system": {
+        "slug": "dinosaur-bones",
+        "section": "Legendary",
+        "sortOrder": 40,
+        "image": "/Blox%20Fruits/Materials/dinosaur-bones.webp"
+      }
     },
     {
-      "name": "Hearts",
-      "slug": "hearts",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": "Various Enemies",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Currency in Valentine's Event",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Hearts",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Various Enemies",
-        "purpose": "Currency in Valentine's Event"
+        "purpose": "Currency in Valentine's Event",
+        "sea": "events"
       },
-      "rawText": "Legendary MaterialSource Various EnemiesPurpose Currency in Valentine's Event",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hearts",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/hearts.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/26/Hearts.png/revision/latest/scale-to-width-down/125?cb=20230226113232"
+      "system": {
+        "slug": "hearts",
+        "section": "Legendary",
+        "sortOrder": 41,
+        "image": "/Blox%20Fruits/Materials/hearts.webp"
+      }
     },
     {
-      "name": "Leviathan Scale",
-      "slug": "leviathan-scale",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Leviathan",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Items",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Leviathan Scale",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Leviathan",
-        "purpose": "Crafting Items"
+        "purpose": "Crafting Items",
+        "sea": "3"
       },
-      "rawText": "Legendary MaterialSource LeviathanPurpose Crafting Items",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Leviathan_Scale",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/leviathan-scale.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c3/Leviathan_Scale.png/revision/latest/scale-to-width-down/125?cb=20231026233324"
+      "system": {
+        "slug": "leviathan-scale",
+        "section": "Legendary",
+        "sortOrder": 42,
+        "image": "/Blox%20Fruits/Materials/leviathan-scale.webp"
+      }
     },
     {
-      "name": "Meteorite",
-      "slug": "meteorite",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": "Fajita",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Meteorite",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Fajita",
-        "purpose": "Upgrading Weapons"
+        "purpose": "Upgrading Weapons",
+        "sea": "2"
       },
-      "rawText": "Legendary MaterialSource FajitaPurpose Upgrading Weapons",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Meteorite",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/meteorite.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9e/Meteorite.png/revision/latest/scale-to-width-down/125?cb=20221015210439"
+      "system": {
+        "slug": "meteorite",
+        "section": "Legendary",
+        "sortOrder": 43,
+        "image": "/Blox%20Fruits/Materials/meteorite.webp"
+      }
     },
     {
-      "name": "Oni Token",
-      "slug": "oni-token",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": "Oni Soldier • Red Commander • Oni Fisherman • Red Gacha",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Red Gacha",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Oni Token",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Oni Soldier • Red Commander • Oni Fisherman • Red Gacha",
-        "purpose": "Red Gacha"
+        "purpose": "Red Gacha",
+        "sea": "events"
       },
-      "rawText": "Legendary MaterialSource Oni Soldier • Red Commander • Oni Fisherman • Red GachaPurpose Red Gacha",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Oni_Token",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/oni-token.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9c/Oni_Token.png/revision/latest/scale-to-width-down/125?cb=20250831010230"
+      "system": {
+        "slug": "oni-token",
+        "section": "Legendary",
+        "sortOrder": 44,
+        "image": "/Blox%20Fruits/Materials/oni-token.webp"
+      }
     },
     {
-      "name": "Summer Token",
-      "slug": "summer-token",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": "Electrified Enemies",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Summer Gacha",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Summer Token",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Electrified Enemies",
-        "purpose": "Summer Gacha"
+        "purpose": "Summer Gacha",
+        "sea": "events"
       },
-      "rawText": "Legendary MaterialSource Electrified EnemiesPurpose Summer Gacha",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Summer_Token",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/summer-token.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/50/Summer_Token.png/revision/latest/scale-to-width-down/125?cb=20250823213301"
+      "system": {
+        "slug": "summer-token",
+        "section": "Legendary",
+        "sortOrder": 45,
+        "image": "/Blox%20Fruits/Materials/summer-token.webp"
+      }
     },
     {
-      "name": "Terror Eyes",
-      "slug": "terror-eyes",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Terrorshark",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting Items, Mythical Scrolls",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Terror Eyes",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Terrorshark",
-        "purpose": "Crafting Items, Mythical Scrolls"
+        "purpose": "Crafting Items, Mythical Scrolls",
+        "sea": "3"
       },
-      "rawText": "Legendary MaterialSource TerrorsharkPurpose Crafting Items, Mythical Scrolls",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Terror_Eyes",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/terror-eyes.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/17/Terror_Eyes.png/revision/latest/scale-to-width-down/125?cb=20231026233332"
+      "system": {
+        "slug": "terror-eyes",
+        "section": "Legendary",
+        "sortOrder": 46,
+        "image": "/Blox%20Fruits/Materials/terror-eyes.webp"
+      }
     },
     {
-      "name": "Volt Capsule",
-      "slug": "volt-capsule",
-      "rarity": "Legendary",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Sea Chanter • Ocean Prophet",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Lightning",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Volt Capsule",
+        "rarity": "Legendary",
+        "type": "Material",
         "source": "Sea Chanter • Ocean Prophet",
-        "purpose": "Upgrading Lightning"
+        "purpose": "Upgrading Lightning",
+        "sea": "3"
       },
-      "rawText": "Legendary MaterialSource Sea Chanter • Ocean ProphetPurpose Upgrading Lightning",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Volt_Capsule",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/volt-capsule.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/aa/Volt_Capsule.png/revision/latest/scale-to-width-down/125?cb=20250824012943"
+      "system": {
+        "slug": "volt-capsule",
+        "section": "Legendary",
+        "sortOrder": 47,
+        "image": "/Blox%20Fruits/Materials/volt-capsule.webp"
+      }
     },
     {
-      "name": "Alucard Fragment",
-      "slug": "alucard-fragment",
-      "rarity": "Mythical",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Scroll Trials",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Obtaining Cursed Dual Katana",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Alucard Fragment",
+        "rarity": "Mythical",
+        "type": "Material",
         "source": "Scroll Trials",
-        "purpose": "Obtaining Cursed Dual Katana"
+        "purpose": "Obtaining Cursed Dual Katana",
+        "sea": "3"
       },
-      "rawText": "Mythical MaterialSource Scroll TrialsPurpose Obtaining Cursed Dual Katana",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Alucard_Fragment",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/alucard-fragment.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a0/Alucard_Fragment.png/revision/latest/scale-to-width-down/125?cb=20240606175731"
+      "system": {
+        "slug": "alucard-fragment",
+        "section": "Mythical",
+        "sortOrder": 48,
+        "image": "/Blox%20Fruits/Materials/alucard-fragment.webp"
+      }
     },
     {
-      "name": "Confetti",
-      "slug": "confetti",
-      "rarity": "Mythical",
-      "type": "Material",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": "NPCs",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Currency in 10B Visits Event",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Confetti",
+        "rarity": "Mythical",
+        "type": "Material",
         "source": "NPCs",
-        "purpose": "Currency in 10B Visits Event"
+        "purpose": "Currency in 10B Visits Event",
+        "sea": "events"
       },
-      "rawText": "Mythical MaterialSource NPCsPurpose Currency in 10B Visits Event",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Confetti",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/confetti.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/72/Confetti.png/revision/latest/scale-to-width-down/125?cb=20230326030330"
+      "system": {
+        "slug": "confetti",
+        "section": "Mythical",
+        "sortOrder": 49,
+        "image": "/Blox%20Fruits/Materials/confetti.webp"
+      }
     },
     {
-      "name": "Dark Fragment",
-      "slug": "dark-fragment",
-      "rarity": "Mythical",
-      "type": "Material",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": "Darkbeard",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Weapons, Obtaining Items & Sanguine Art",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dark Fragment",
+        "rarity": "Mythical",
+        "type": "Material",
         "source": "Darkbeard",
-        "purpose": "Upgrading Weapons, Obtaining Items & Sanguine Art"
+        "purpose": "Upgrading Weapons, Obtaining Items & Sanguine Art",
+        "sea": "2"
       },
-      "rawText": "Mythical MaterialSource DarkbeardPurpose Upgrading Weapons, Obtaining Items & Sanguine Art",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Fragment",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/dark-fragment.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c9/Dark_Fragment.png/revision/latest/scale-to-width-down/125?cb=20231026123817"
+      "system": {
+        "slug": "dark-fragment",
+        "section": "Mythical",
+        "sortOrder": 50,
+        "image": "/Blox%20Fruits/Materials/dark-fragment.webp"
+      }
     },
     {
-      "name": "Dragon Egg",
-      "slug": "dragon-egg",
-      "rarity": "Mythical",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Volcano Event",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Crafting items, Obtaining Draco",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dragon Egg",
+        "rarity": "Mythical",
+        "type": "Material",
         "source": "Volcano Event",
-        "purpose": "Crafting items, Obtaining Draco"
+        "purpose": "Crafting items, Obtaining Draco",
+        "sea": "3"
       },
-      "rawText": "Mythical MaterialSource Volcano EventPurpose Crafting items, Obtaining Draco",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Egg",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/dragon-egg.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0b/Dragon_Egg.png/revision/latest/scale-to-width-down/125?cb=20241216214132"
+      "system": {
+        "slug": "dragon-egg",
+        "section": "Mythical",
+        "sortOrder": 51,
+        "image": "/Blox%20Fruits/Materials/dragon-egg.webp"
+      }
     },
     {
-      "name": "Leviathan Heart",
-      "slug": "leviathan-heart",
-      "rarity": "Mythical",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Leviathan",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Obtaining Sanguine Art, Crafting Mythical Scroll",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Leviathan Heart",
+        "rarity": "Mythical",
+        "type": "Material",
         "source": "Leviathan",
-        "purpose": "Obtaining Sanguine Art, Crafting Mythical Scroll"
+        "purpose": "Obtaining Sanguine Art, Crafting Mythical Scroll",
+        "sea": "3"
       },
-      "rawText": "Mythical MaterialSource LeviathanPurpose Obtaining Sanguine Art, Crafting Mythical Scroll",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Leviathan_Heart",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/leviathan-heart.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ed/Leviathan_Heart.png/revision/latest/scale-to-width-down/125?cb=20231026233359"
+      "system": {
+        "slug": "leviathan-heart",
+        "section": "Mythical",
+        "sortOrder": 52,
+        "image": "/Blox%20Fruits/Materials/leviathan-heart.webp"
+      }
     },
     {
-      "name": "Mirror Fractal",
-      "slug": "mirror-fractal",
-      "rarity": "Mythical",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Dough King",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Race Awakening, Crafting Leviathan Shield",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Mirror Fractal",
+        "rarity": "Mythical",
+        "type": "Material",
         "source": "Dough King",
-        "purpose": "Race Awakening, Crafting Leviathan Shield"
+        "purpose": "Race Awakening, Crafting Leviathan Shield",
+        "sea": "3"
       },
-      "rawText": "Mythical MaterialSource Dough KingPurpose Race Awakening, Crafting Leviathan Shield",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mirror_Fractal",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/mirror-fractal.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c6/Mirror_Fractal.png/revision/latest/scale-to-width-down/125?cb=20231026234600"
+      "system": {
+        "slug": "mirror-fractal",
+        "section": "Mythical",
+        "sortOrder": 53,
+        "image": "/Blox%20Fruits/Materials/mirror-fractal.webp"
+      }
     },
     {
-      "name": "Monster Magnet",
-      "slug": "monster-magnet",
-      "rarity": "Mythical",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Shark Hunter",
-      "price": "2 8 20 10",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Obtaining Shark Anchor",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Monster Magnet",
+        "rarity": "Mythical",
+        "type": "Material",
         "source": "Shark Hunter",
+        "purpose": "Obtaining Shark Anchor",
         "price": "2 8 20 10",
-        "purpose": "Obtaining Shark Anchor"
+        "sea": "3"
       },
-      "rawText": "Mythical MaterialSource Shark HunterPrice 2 8 20 10Purpose Obtaining Shark Anchor",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Monster_Magnet",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/monster-magnet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9e/Monster_Magnet.png/revision/latest/scale-to-width-down/125?cb=20241216213713"
+      "system": {
+        "slug": "monster-magnet",
+        "section": "Mythical",
+        "sortOrder": 54,
+        "image": "/Blox%20Fruits/Materials/monster-magnet.webp"
+      }
     },
     {
-      "name": "Nightmare Catcher",
-      "slug": "nightmare-catcher",
-      "rarity": "Mythical",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Reborn Skeleton • Living Zombie",
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Upgrading Pain",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Nightmare Catcher",
+        "rarity": "Mythical",
+        "type": "Material",
         "source": "Reborn Skeleton • Living Zombie",
-        "purpose": "Upgrading Pain"
+        "purpose": "Upgrading Pain",
+        "sea": "3"
       },
-      "rawText": "Mythical MaterialSource Reborn Skeleton • Living ZombiePurpose Upgrading Pain",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Nightmare_Catcher",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/nightmare-catcher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6e/Nightmare_Catcher.png/revision/latest/scale-to-width-down/125?cb=20250906161815"
+      "system": {
+        "slug": "nightmare-catcher",
+        "section": "Mythical",
+        "sortOrder": 55,
+        "image": "/Blox%20Fruits/Materials/nightmare-catcher.webp"
+      }
     },
     {
-      "name": "Volcanic Magnet",
-      "slug": "volcanic-magnet",
-      "rarity": "Mythical",
-      "type": "Material",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": "Dragon Hunter",
-      "price": "15 10",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": "Spawning Prehistoric Island",
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Volcanic Magnet",
+        "rarity": "Mythical",
+        "type": "Material",
         "source": "Dragon Hunter",
+        "purpose": "Spawning Prehistoric Island",
         "price": "15 10",
-        "purpose": "Spawning Prehistoric Island"
+        "sea": "3"
       },
-      "rawText": "Mythical MaterialSource Dragon HunterPrice 15 10Purpose Spawning Prehistoric Island",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Volcanic_Magnet",
-      "sourcePage": "Materials",
-      "image": "/Blox%20Fruits/Materials/volcanic-magnet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0e/Volcanic_Magnet.png/revision/latest/scale-to-width-down/125?cb=20241216213702"
+      "system": {
+        "slug": "volcanic-magnet",
+        "section": "Mythical",
+        "sortOrder": 56,
+        "image": "/Blox%20Fruits/Materials/volcanic-magnet.webp"
+      }
     }
   ]
 }

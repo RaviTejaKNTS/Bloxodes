@@ -1,38 +1,12 @@
 {
   "meta": {
-    "title": "RIVALS maps data",
-    "updatedAt": "2026-05-26",
-    "sources": [
-      {
-        "label": "Roblox RIVALS Wiki - Maps",
-        "url": "https://robloxrivals.fandom.com/wiki/Maps",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox RIVALS Wiki - Ranked",
-        "url": "https://robloxrivals.fandom.com/wiki/Ranked",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox RIVALS Wiki - Updates",
-        "url": "https://robloxrivals.fandom.com/wiki/Updates",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox - RIVALS",
-        "url": "https://www.roblox.com/games/17625359962/RIVALS",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox games API - universe 6035872082",
-        "url": "https://games.roblox.com/v1/games?universeIds=6035872082",
-        "accessed": "2026-05-26"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "maps",
+    "route": "/wiki/rivals/maps",
+    "catalogCode": "rivals-maps",
+    "itemFields": [
       "availability",
       "difficulty",
       "supportedModesSummary",
@@ -40,701 +14,645 @@
       "creator",
       "featureNote",
       "privateServerNote",
-      "mapPool",
-      "imageStatus",
-      "sourcePage",
-      "wikiUrl",
-      "sourceImageUrl",
-      "verificationNote"
+      "mapPool"
     ],
-    "sourceCount": 37,
-    "sectionCounts": {
-      "Current regular maps": 20,
-      "Big maps": 7,
-      "Experimental maps": 2,
-      "Legacy private-server maps": 7,
-      "Private-server-only maps": 1
-    },
-    "imageCount": 32,
-    "missingImageCount": 5,
-    "supportedModesVerifiedCount": 20,
-    "rankedPoolVerifiedCount": 16,
-    "countDisagreements": "Maps page navigation and headline count show 37 rows; the old overview sublist omits Museum, Studio, and Westown, and Category:Maps is incomplete at 27 items."
+    "columns": [
+      "availability",
+      "difficulty",
+      "supportedModesSummary",
+      "rankedPool",
+      "creator",
+      "featureNote",
+      "privateServerNote",
+      "mapPool"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Current regular maps",
+        "Big maps",
+        "Experimental maps",
+        "Legacy private-server maps",
+        "Private-server-only maps"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "availability",
+        "difficulty",
+        "supportedModesSummary",
+        "rankedPool",
+        "creator",
+        "featureNote"
+      ],
+      "tableFields": [
+        "availability",
+        "difficulty",
+        "supportedModesSummary",
+        "rankedPool",
+        "creator",
+        "featureNote",
+        "privateServerNote",
+        "mapPool"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Arena",
-      "slug": "arena",
-      "image": "/RIVALS/Maps/arena.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Easy",
-      "supportedModesSummary": "Beginner 2v2, 1v1, 2v2, Ranked 1v1, Ranked 2v2",
-      "rankedPool": "Ranked 1v1, Ranked 2v2",
-      "creator": "@Nosniy",
-      "featureNote": "Simple mirrored arena with matching spawns, ramps, and no special hazards.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Arena",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/f0/Arenaicon.PNG/revision/latest?cb=20251116005011",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Arena",
+        "availability": "Current regular map",
+        "difficulty": "Easy",
+        "supportedModesSummary": "Beginner 2v2, 1v1, 2v2, Ranked 1v1, Ranked 2v2",
+        "rankedPool": "Ranked 1v1, Ranked 2v2",
+        "creator": "@Nosniy",
+        "featureNote": "Simple mirrored arena with matching spawns, ramps, and no special hazards.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "arena",
+        "section": "Current regular maps",
+        "sortOrder": 1,
+        "image": "/RIVALS/Maps/arena.webp"
+      }
     },
     {
-      "name": "Backrooms",
-      "slug": "backrooms",
-      "image": "/RIVALS/Maps/backrooms.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Easy",
-      "supportedModesSummary": "1v1, 2v2, 3v3",
-      "rankedPool": null,
-      "creator": "@Nosniy",
-      "featureNote": "Dark maze-like mirrored map inspired by Backrooms Level 0.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Backrooms",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/8f/Backroomsicon.PNG/revision/latest?cb=20251116005011",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row."
+      "item": {
+        "name": "Backrooms",
+        "availability": "Current regular map",
+        "difficulty": "Easy",
+        "supportedModesSummary": "1v1, 2v2, 3v3",
+        "creator": "@Nosniy",
+        "featureNote": "Dark maze-like mirrored map inspired by Backrooms Level 0.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "backrooms",
+        "section": "Current regular maps",
+        "sortOrder": 2,
+        "image": "/RIVALS/Maps/backrooms.webp"
+      }
     },
     {
-      "name": "Battleground",
-      "slug": "battleground",
-      "image": "/RIVALS/Maps/battleground.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Easy",
-      "supportedModesSummary": "Beginner 2v2, 2v2, 3v3, 4v4, Ranked 2v2, Ranked 3v3",
-      "rankedPool": "Ranked 2v2, Ranked 3v3",
-      "creator": "@GreatGuyBoom with contributions from @ShadowTrojan",
-      "featureNote": "Mirrored facility with a center bridge and buttons that can close the middle path.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Battleground",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/37/Battelgroundsicon.PNG/revision/latest?cb=20251116005011",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Battleground",
+        "availability": "Current regular map",
+        "difficulty": "Easy",
+        "supportedModesSummary": "Beginner 2v2, 2v2, 3v3, 4v4, Ranked 2v2, Ranked 3v3",
+        "rankedPool": "Ranked 2v2, Ranked 3v3",
+        "creator": "@GreatGuyBoom with contributions from @ShadowTrojan",
+        "featureNote": "Mirrored facility with a center bridge and buttons that can close the middle path.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "battleground",
+        "section": "Current regular maps",
+        "sortOrder": 3,
+        "image": "/RIVALS/Maps/battleground.webp"
+      }
     },
     {
-      "name": "Bridge",
-      "slug": "bridge",
-      "image": "/RIVALS/Maps/bridge.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Easy",
-      "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "creator": "@GreatGuyBoom",
-      "featureNote": "Seoul bridge-themed arena with bus cover, tight obstacles, out-of-bounds areas, and a Jump Shard.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Bridge",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/7f/Bridgeicon.PNG/revision/latest?cb=20251116005010",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Bridge",
+        "availability": "Current regular map",
+        "difficulty": "Easy",
+        "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "creator": "@GreatGuyBoom",
+        "featureNote": "Seoul bridge-themed arena with bus cover, tight obstacles, out-of-bounds areas, and a Jump Shard.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "bridge",
+        "section": "Current regular maps",
+        "sortOrder": 4,
+        "image": "/RIVALS/Maps/bridge.webp"
+      }
     },
     {
-      "name": "Chess",
-      "slug": "chess",
-      "image": "/RIVALS/Maps/chess.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": null,
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Chess",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/50/Chess_map.png/revision/latest?cb=20260214133729",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Chess",
+        "availability": "Current regular map",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "chess",
+        "section": "Current regular maps",
+        "sortOrder": 5,
+        "image": "/RIVALS/Maps/chess.webp"
+      }
     },
     {
-      "name": "Construction",
-      "slug": "construction",
-      "image": "/RIVALS/Maps/construction.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Hard",
-      "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "creator": "@Nosniy",
-      "featureNote": "Hard construction-site map with gaps, crane high ground, blimps, fall risk, and a Jump Shard.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Construction",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/1c/Constructionicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Construction",
+        "availability": "Current regular map",
+        "difficulty": "Hard",
+        "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "creator": "@Nosniy",
+        "featureNote": "Hard construction-site map with gaps, crane high ground, blimps, fall risk, and a Jump Shard.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "construction",
+        "section": "Current regular maps",
+        "sortOrder": 6,
+        "image": "/RIVALS/Maps/construction.webp"
+      }
     },
     {
-      "name": "Crossroads",
-      "slug": "crossroads",
-      "image": "/RIVALS/Maps/crossroads.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Medium",
-      "supportedModesSummary": "1v1, 2v2, 3v3, 1v1v1, 2v2v2, Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "creator": "@ShadowTrojan",
-      "featureNote": "Classic Crossroads-inspired arena with larger open spaces and a Jump Shard route.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Crossroads",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/6/65/Crossroadsicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Crossroads",
+        "availability": "Current regular map",
+        "difficulty": "Medium",
+        "supportedModesSummary": "1v1, 2v2, 3v3, 1v1v1, 2v2v2, Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "creator": "@ShadowTrojan",
+        "featureNote": "Classic Crossroads-inspired arena with larger open spaces and a Jump Shard route.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "crossroads",
+        "section": "Current regular maps",
+        "sortOrder": 7,
+        "image": "/RIVALS/Maps/crossroads.webp"
+      }
     },
     {
-      "name": "Dimension",
-      "slug": "dimension",
-      "image": "/RIVALS/Maps/dimension.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Hard",
-      "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "rankedPool": "Ranked 1v1, Ranked 2v2",
-      "creator": "@GreatGuyBoom",
-      "featureNote": "Hard mirrored map with a central portal, stairs, glass, small platforms, and fall risk.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Dimension",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/0b/Dimensionicon.PNG/revision/latest?cb=20251116005013",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Dimension",
+        "availability": "Current regular map",
+        "difficulty": "Hard",
+        "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "rankedPool": "Ranked 1v1, Ranked 2v2",
+        "creator": "@GreatGuyBoom",
+        "featureNote": "Hard mirrored map with a central portal, stairs, glass, small platforms, and fall risk.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "dimension",
+        "section": "Current regular maps",
+        "sortOrder": 8,
+        "image": "/RIVALS/Maps/dimension.webp"
+      }
     },
     {
-      "name": "Docks",
-      "slug": "docks",
-      "image": "/RIVALS/Maps/docks.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Medium",
-      "supportedModesSummary": "1v1, 2v2, 3v3, 4v4, 5v5, 1v1v1, 2v2v2, Ranked 1v1, Ranked 2v2, Ranked 3v3, Gun Game, Team Deathmatch, Free For All",
-      "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "creator": "@Nosniy",
-      "featureNote": "Long-range dock map with buildings, breakable windows, water hazard, and a Jump Shard.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Docks",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/d/db/Docksicon.PNG/revision/latest?cb=20251116005013",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Docks",
+        "availability": "Current regular map",
+        "difficulty": "Medium",
+        "supportedModesSummary": "1v1, 2v2, 3v3, 4v4, 5v5, 1v1v1, 2v2v2, Ranked 1v1, Ranked 2v2, Ranked 3v3, Gun Game, Team Deathmatch, Free For All",
+        "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "creator": "@Nosniy",
+        "featureNote": "Long-range dock map with buildings, breakable windows, water hazard, and a Jump Shard.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "docks",
+        "section": "Current regular maps",
+        "sortOrder": 9,
+        "image": "/RIVALS/Maps/docks.webp"
+      }
     },
     {
-      "name": "Graveyard",
-      "slug": "graveyard",
-      "image": "/RIVALS/Maps/graveyard.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Easy",
-      "supportedModesSummary": "1v1, 2v2, 3v3",
-      "rankedPool": null,
-      "creator": "@GreatGuyBoom",
-      "featureNote": "Non-mirrored cemetery and house map with match-point and sudden-death atmosphere changes.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Graveyard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/3f/Graveyardicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row."
+      "item": {
+        "name": "Graveyard",
+        "availability": "Current regular map",
+        "difficulty": "Easy",
+        "supportedModesSummary": "1v1, 2v2, 3v3",
+        "creator": "@GreatGuyBoom",
+        "featureNote": "Non-mirrored cemetery and house map with match-point and sudden-death atmosphere changes.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "graveyard",
+        "section": "Current regular maps",
+        "sortOrder": 10,
+        "image": "/RIVALS/Maps/graveyard.webp"
+      }
     },
     {
-      "name": "Iceberg",
-      "slug": "iceberg",
-      "image": "/RIVALS/Maps/iceberg.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": "Ranked 3v3",
-      "creator": null,
-      "featureNote": null,
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Iceberg",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/ac/Iceberg.jpg/revision/latest?cb=20260412124817",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Iceberg",
+        "availability": "Current regular map",
+        "rankedPool": "Ranked 3v3",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "iceberg",
+        "section": "Current regular maps",
+        "sortOrder": 11,
+        "image": "/RIVALS/Maps/iceberg.webp"
+      }
     },
     {
-      "name": "Museum",
-      "slug": "museum",
-      "image": null,
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": "Ranked 2v2",
-      "creator": null,
-      "featureNote": null,
-      "imageStatus": "missing clean image - no map-specific source image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Museum",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used. Ranked pool checked from the Ranked page. Source image is the wiki placeholder, so no local image is assigned."
+      "item": {
+        "name": "Museum",
+        "availability": "Current regular map",
+        "rankedPool": "Ranked 2v2",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "museum",
+        "section": "Current regular maps",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Onyx",
-      "slug": "onyx",
-      "image": "/RIVALS/Maps/onyx.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Hard",
-      "supportedModesSummary": "1v1, 2v2, 3v3, 1v1v1, 2v2v2, Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "creator": "@ShadowTrojan",
-      "featureNote": "Hard lava map with pillar spawns, bounce/damage hazards, and a Jump Shard.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Onyx",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/f7/Onyxicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Onyx",
+        "availability": "Current regular map",
+        "difficulty": "Hard",
+        "supportedModesSummary": "1v1, 2v2, 3v3, 1v1v1, 2v2v2, Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "creator": "@ShadowTrojan",
+        "featureNote": "Hard lava map with pillar spawns, bounce/damage hazards, and a Jump Shard.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "onyx",
+        "section": "Current regular maps",
+        "sortOrder": 13,
+        "image": "/RIVALS/Maps/onyx.webp"
+      }
     },
     {
-      "name": "Playground",
-      "slug": "playground",
-      "image": "/RIVALS/Maps/playground.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Medium",
-      "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "creator": "@GreatGuyBoom",
-      "featureNote": "Mirrored playground map with tires, boxes, wooden cover, and maze-like routes.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Playground",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/01/Playgroundicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Playground",
+        "availability": "Current regular map",
+        "difficulty": "Medium",
+        "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "creator": "@GreatGuyBoom",
+        "featureNote": "Mirrored playground map with tires, boxes, wooden cover, and maze-like routes.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "playground",
+        "section": "Current regular maps",
+        "sortOrder": 14,
+        "image": "/RIVALS/Maps/playground.webp"
+      }
     },
     {
-      "name": "Shooting Range",
-      "slug": "shooting-range",
-      "image": "/RIVALS/Maps/shooting-range.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Medium",
-      "supportedModesSummary": "5v5, 1v1v1, 2v2v2, Team Deathmatch, Free For All",
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": "Long-range blocky map with large pillars and ziplines, also used in the lobby area.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Shooting_Range",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/74/Shootingrangeicon.png/revision/latest?cb=20251117003755",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row."
+      "item": {
+        "name": "Shooting Range",
+        "availability": "Current regular map",
+        "difficulty": "Medium",
+        "supportedModesSummary": "5v5, 1v1v1, 2v2v2, Team Deathmatch, Free For All",
+        "featureNote": "Long-range blocky map with large pillars and ziplines, also used in the lobby area.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "shooting-range",
+        "section": "Current regular maps",
+        "sortOrder": 15,
+        "image": "/RIVALS/Maps/shooting-range.webp"
+      }
     },
     {
-      "name": "Splash",
-      "slug": "splash",
-      "image": "/RIVALS/Maps/splash.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Medium",
-      "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "creator": "@Nosniy",
-      "featureNote": "Medium inflatable arena on water, with a center trampoline and bounce behavior.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Splash",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2b/Splashicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Splash",
+        "availability": "Current regular map",
+        "difficulty": "Medium",
+        "supportedModesSummary": "1v1, 2v2, 3v3, Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "creator": "@Nosniy",
+        "featureNote": "Medium inflatable arena on water, with a center trampoline and bounce behavior.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "splash",
+        "section": "Current regular maps",
+        "sortOrder": 16,
+        "image": "/RIVALS/Maps/splash.webp"
+      }
     },
     {
-      "name": "Station",
-      "slug": "station",
-      "image": "/RIVALS/Maps/station.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": "Medium",
-      "supportedModesSummary": "1v1, 2v2, 3v3, 4v4, 5v5, 1v1v1, 2v2v2, Ranked 1v1, Ranked 2v2, Ranked 3v3, Gun Game, Team Deathmatch, Free For All",
-      "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
-      "creator": "@Nosniy with contributions from @GreatGuyBoom",
-      "featureNote": "Train-station map with two buildings, interiors, breakable windows, trains, and a Jump Shard.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Station",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/c/cf/Stationicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Station",
+        "availability": "Current regular map",
+        "difficulty": "Medium",
+        "supportedModesSummary": "1v1, 2v2, 3v3, 4v4, 5v5, 1v1v1, 2v2v2, Ranked 1v1, Ranked 2v2, Ranked 3v3, Gun Game, Team Deathmatch, Free For All",
+        "rankedPool": "Ranked 1v1, Ranked 2v2, Ranked 3v3",
+        "creator": "@Nosniy with contributions from @GreatGuyBoom",
+        "featureNote": "Train-station map with two buildings, interiors, breakable windows, trains, and a Jump Shard.",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "station",
+        "section": "Current regular maps",
+        "sortOrder": 17,
+        "image": "/RIVALS/Maps/station.webp"
+      }
     },
     {
-      "name": "Studio",
-      "slug": "studio",
-      "image": null,
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": null,
-      "imageStatus": "missing clean image - no map-specific source image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Studio",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used. Source image is the wiki placeholder, so no local image is assigned."
+      "item": {
+        "name": "Studio",
+        "availability": "Current regular map",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "studio",
+        "section": "Current regular maps",
+        "sortOrder": 18,
+        "image": null
+      }
     },
     {
-      "name": "Village",
-      "slug": "village",
-      "image": "/RIVALS/Maps/village.webp",
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": "Ranked 1v1, Ranked 2v2",
-      "creator": null,
-      "featureNote": null,
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Village",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/55/Villagethumbnail.png/revision/latest?cb=20260414103842",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Village",
+        "availability": "Current regular map",
+        "rankedPool": "Ranked 1v1, Ranked 2v2",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "village",
+        "section": "Current regular maps",
+        "sortOrder": 19,
+        "image": "/RIVALS/Maps/village.webp"
+      }
     },
     {
-      "name": "Westown",
-      "slug": "westown",
-      "image": null,
-      "collectionSection": "Current regular maps",
-      "mapPool": "Current regular",
-      "availability": "Current regular map",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": "Ranked 2v2",
-      "creator": null,
-      "featureNote": null,
-      "imageStatus": "missing clean image - no map-specific source image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Westown",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used. Ranked pool checked from the Ranked page. Source image is the wiki placeholder, so no local image is assigned."
+      "item": {
+        "name": "Westown",
+        "availability": "Current regular map",
+        "rankedPool": "Ranked 2v2",
+        "mapPool": "Current regular"
+      },
+      "system": {
+        "slug": "westown",
+        "section": "Current regular maps",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "Big Arena",
-      "slug": "big-arena",
-      "image": "/RIVALS/Maps/big-arena.webp",
-      "collectionSection": "Big maps",
-      "mapPool": "Big",
-      "availability": "Big map",
-      "difficulty": "Easy",
-      "supportedModesSummary": "3v3, 4v4, 5v5, 1v1v1, 2v2v2, Ranked 3v3, Gun Game, Team Deathmatch, Free For All, Special modes",
-      "rankedPool": "Ranked 3v3",
-      "creator": "@Nosniy",
-      "featureNote": "Larger mirrored Arena variant for bigger teams and arcade-style modes.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Big_Arena",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/6/60/Bigarena.PNG/revision/latest?cb=20251116005011",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row. Ranked pool checked from the Ranked page."
+      "item": {
+        "name": "Big Arena",
+        "availability": "Big map",
+        "difficulty": "Easy",
+        "supportedModesSummary": "3v3, 4v4, 5v5, 1v1v1, 2v2v2, Ranked 3v3, Gun Game, Team Deathmatch, Free For All, Special modes",
+        "rankedPool": "Ranked 3v3",
+        "creator": "@Nosniy",
+        "featureNote": "Larger mirrored Arena variant for bigger teams and arcade-style modes.",
+        "mapPool": "Big"
+      },
+      "system": {
+        "slug": "big-arena",
+        "section": "Big maps",
+        "sortOrder": 21,
+        "image": "/RIVALS/Maps/big-arena.webp"
+      }
     },
     {
-      "name": "Big Backrooms",
-      "slug": "big-backrooms",
-      "image": "/RIVALS/Maps/big-backrooms.webp",
-      "collectionSection": "Big maps",
-      "mapPool": "Big",
-      "availability": "Big map",
-      "difficulty": "Easy",
-      "supportedModesSummary": "4v4, 5v5, 1v1v1, 2v2v2, Gun Game, Team Deathmatch, Free For All",
-      "rankedPool": null,
-      "creator": "@Nosniy",
-      "featureNote": "Large Backrooms variant for bigger teams and FFA/TDM-style play.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Big_Backrooms",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/ff/Bigbackroomsicon.png/revision/latest?cb=20251117003754",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row."
+      "item": {
+        "name": "Big Backrooms",
+        "availability": "Big map",
+        "difficulty": "Easy",
+        "supportedModesSummary": "4v4, 5v5, 1v1v1, 2v2v2, Gun Game, Team Deathmatch, Free For All",
+        "creator": "@Nosniy",
+        "featureNote": "Large Backrooms variant for bigger teams and FFA/TDM-style play.",
+        "mapPool": "Big"
+      },
+      "system": {
+        "slug": "big-backrooms",
+        "section": "Big maps",
+        "sortOrder": 22,
+        "image": "/RIVALS/Maps/big-backrooms.webp"
+      }
     },
     {
-      "name": "Big Crossroads",
-      "slug": "big-crossroads",
-      "image": "/RIVALS/Maps/big-crossroads.webp",
-      "collectionSection": "Big maps",
-      "mapPool": "Big",
-      "availability": "Big map",
-      "difficulty": "Medium",
-      "supportedModesSummary": "3v3, 4v4, 5v5, 1v1v1, 2v2v2, Gun Game, Team Deathmatch, Free For All",
-      "rankedPool": null,
-      "creator": "@GreatGuyBoom",
-      "featureNote": "Larger Crossroads variant built for big duels and arcade-style modes.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Big_Crossroads",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/1a/Bigcrossroadsicon.png/revision/latest?cb=20251117003755",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row."
+      "item": {
+        "name": "Big Crossroads",
+        "availability": "Big map",
+        "difficulty": "Medium",
+        "supportedModesSummary": "3v3, 4v4, 5v5, 1v1v1, 2v2v2, Gun Game, Team Deathmatch, Free For All",
+        "creator": "@GreatGuyBoom",
+        "featureNote": "Larger Crossroads variant built for big duels and arcade-style modes.",
+        "mapPool": "Big"
+      },
+      "system": {
+        "slug": "big-crossroads",
+        "section": "Big maps",
+        "sortOrder": 23,
+        "image": "/RIVALS/Maps/big-crossroads.webp"
+      }
     },
     {
-      "name": "Big Graveyard",
-      "slug": "big-graveyard",
-      "image": "/RIVALS/Maps/big-graveyard.webp",
-      "collectionSection": "Big maps",
-      "mapPool": "Big",
-      "availability": "Big map",
-      "difficulty": "Medium",
-      "supportedModesSummary": "3v3, 4v4, 5v5, 1v1v1, 2v2v2, Team Deathmatch, Free For All, Gun Game",
-      "rankedPool": null,
-      "creator": "@GreatGuyBoom",
-      "featureNote": "Larger Graveyard variant with a multi-story house, tunnel, cemetery area, and dark sightlines.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Big_Graveyard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/c/c6/Biggraveyardicon.png/revision/latest?cb=20251117003755",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row."
+      "item": {
+        "name": "Big Graveyard",
+        "availability": "Big map",
+        "difficulty": "Medium",
+        "supportedModesSummary": "3v3, 4v4, 5v5, 1v1v1, 2v2v2, Team Deathmatch, Free For All, Gun Game",
+        "creator": "@GreatGuyBoom",
+        "featureNote": "Larger Graveyard variant with a multi-story house, tunnel, cemetery area, and dark sightlines.",
+        "mapPool": "Big"
+      },
+      "system": {
+        "slug": "big-graveyard",
+        "section": "Big maps",
+        "sortOrder": 24,
+        "image": "/RIVALS/Maps/big-graveyard.webp"
+      }
     },
     {
-      "name": "Big Onyx",
-      "slug": "big-onyx",
-      "image": "/RIVALS/Maps/big-onyx.webp",
-      "collectionSection": "Big maps",
-      "mapPool": "Big",
-      "availability": "Big map",
-      "difficulty": "Hard",
-      "supportedModesSummary": "3v3, 4v4, 5v5, 1v1v1, 2v2v2, Team Deathmatch, Free For All",
-      "rankedPool": null,
-      "creator": "@ShadowTrojan",
-      "featureNote": "Extended Onyx variant with multiple pillars and lava pressure.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Big_Onyx",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/b3/Bigonyxicon.png/revision/latest?cb=20251117004157",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row."
+      "item": {
+        "name": "Big Onyx",
+        "availability": "Big map",
+        "difficulty": "Hard",
+        "supportedModesSummary": "3v3, 4v4, 5v5, 1v1v1, 2v2v2, Team Deathmatch, Free For All",
+        "creator": "@ShadowTrojan",
+        "featureNote": "Extended Onyx variant with multiple pillars and lava pressure.",
+        "mapPool": "Big"
+      },
+      "system": {
+        "slug": "big-onyx",
+        "section": "Big maps",
+        "sortOrder": 25,
+        "image": "/RIVALS/Maps/big-onyx.webp"
+      }
     },
     {
-      "name": "Big Splash",
-      "slug": "big-splash",
-      "image": "/RIVALS/Maps/big-splash.webp",
-      "collectionSection": "Big maps",
-      "mapPool": "Big",
-      "availability": "Big map",
-      "difficulty": "Medium",
-      "supportedModesSummary": "4v4, 5v5, Gun Game, Team Deathmatch, Free For All",
-      "rankedPool": null,
-      "creator": "@Nosniy",
-      "featureNote": "Large Splash variant with more obstacles, spawn areas, and an outer ring boundary.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Big_Splash",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/7e/Bigsplashicon.png/revision/latest?cb=20251117003755",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. Difficulty and supported modes checked from the Maps page row."
+      "item": {
+        "name": "Big Splash",
+        "availability": "Big map",
+        "difficulty": "Medium",
+        "supportedModesSummary": "4v4, 5v5, Gun Game, Team Deathmatch, Free For All",
+        "creator": "@Nosniy",
+        "featureNote": "Large Splash variant with more obstacles, spawn areas, and an outer ring boundary.",
+        "mapPool": "Big"
+      },
+      "system": {
+        "slug": "big-splash",
+        "section": "Big maps",
+        "sortOrder": 26,
+        "image": "/RIVALS/Maps/big-splash.webp"
+      }
     },
     {
-      "name": "Big Station",
-      "slug": "big-station",
-      "image": null,
-      "collectionSection": "Big maps",
-      "mapPool": "Big",
-      "availability": "Big map",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": null,
-      "imageStatus": "missing clean image - no map-specific source image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Big_Station",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used. Source image is the wiki placeholder, so no local image is assigned."
+      "item": {
+        "name": "Big Station",
+        "availability": "Big map",
+        "mapPool": "Big"
+      },
+      "system": {
+        "slug": "big-station",
+        "section": "Big maps",
+        "sortOrder": 27,
+        "image": null
+      }
     },
     {
-      "name": "Factory",
-      "slug": "factory",
-      "image": null,
-      "collectionSection": "Experimental maps",
-      "mapPool": "Experimental",
-      "availability": "Experimental map",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": null,
-      "imageStatus": "missing clean image - no map-specific source image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Factory",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used. Source image is the wiki placeholder, so no local image is assigned."
+      "item": {
+        "name": "Factory",
+        "availability": "Experimental map",
+        "mapPool": "Experimental"
+      },
+      "system": {
+        "slug": "factory",
+        "section": "Experimental maps",
+        "sortOrder": 28,
+        "image": null
+      }
     },
     {
-      "name": "Sandbox",
-      "slug": "sandbox",
-      "image": "/RIVALS/Maps/sandbox.webp",
-      "collectionSection": "Experimental maps",
-      "mapPool": "Experimental",
-      "availability": "Experimental map",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": null,
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Sandbox",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/29/Sandbox.jpg/revision/latest?cb=20260407143225",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Sandbox",
+        "availability": "Experimental map",
+        "mapPool": "Experimental"
+      },
+      "system": {
+        "slug": "sandbox",
+        "section": "Experimental maps",
+        "sortOrder": 29,
+        "image": "/RIVALS/Maps/sandbox.webp"
+      }
     },
     {
-      "name": "Legacy Backrooms",
-      "slug": "legacy-backrooms",
-      "image": "/RIVALS/Maps/legacy-backrooms.webp",
-      "collectionSection": "Legacy private-server maps",
-      "mapPool": "Legacy",
-      "availability": "Legacy private-server map",
-      "privateServerNote": "Private servers and unrestricted map voting context",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": "Legacy version of Backrooms, kept for private-server play.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Legacy_Backrooms",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/b3/Legacybackroomsicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Legacy Backrooms",
+        "availability": "Legacy private-server map",
+        "featureNote": "Legacy version of Backrooms, kept for private-server play.",
+        "privateServerNote": "Private servers and unrestricted map voting context",
+        "mapPool": "Legacy"
+      },
+      "system": {
+        "slug": "legacy-backrooms",
+        "section": "Legacy private-server maps",
+        "sortOrder": 30,
+        "image": "/RIVALS/Maps/legacy-backrooms.webp"
+      }
     },
     {
-      "name": "Legacy Battleground",
-      "slug": "legacy-battleground",
-      "image": "/RIVALS/Maps/legacy-battleground.webp",
-      "collectionSection": "Legacy private-server maps",
-      "mapPool": "Legacy",
-      "availability": "Legacy private-server map",
-      "privateServerNote": "Private servers and unrestricted map voting context",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": "Original Battleground version kept for private-server play after the revamp.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Legacy_Battleground",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/6/69/Legacybattlegroundsicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Legacy Battleground",
+        "availability": "Legacy private-server map",
+        "featureNote": "Original Battleground version kept for private-server play after the revamp.",
+        "privateServerNote": "Private servers and unrestricted map voting context",
+        "mapPool": "Legacy"
+      },
+      "system": {
+        "slug": "legacy-battleground",
+        "section": "Legacy private-server maps",
+        "sortOrder": 31,
+        "image": "/RIVALS/Maps/legacy-battleground.webp"
+      }
     },
     {
-      "name": "Legacy Big Splash",
-      "slug": "legacy-big-splash",
-      "image": "/RIVALS/Maps/legacy-big-splash.webp",
-      "collectionSection": "Legacy private-server maps",
-      "mapPool": "Legacy",
-      "availability": "Legacy private-server map",
-      "privateServerNote": "Private servers and unrestricted map voting context",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": "Legacy big-map variant kept for private-server play.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Legacy_Big_Splash",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/3f/Legacybigdocksicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Legacy Big Splash",
+        "availability": "Legacy private-server map",
+        "featureNote": "Legacy big-map variant kept for private-server play.",
+        "privateServerNote": "Private servers and unrestricted map voting context",
+        "mapPool": "Legacy"
+      },
+      "system": {
+        "slug": "legacy-big-splash",
+        "section": "Legacy private-server maps",
+        "sortOrder": 32,
+        "image": "/RIVALS/Maps/legacy-big-splash.webp"
+      }
     },
     {
-      "name": "Legacy Crossroads",
-      "slug": "legacy-crossroads",
-      "image": "/RIVALS/Maps/legacy-crossroads.webp",
-      "collectionSection": "Legacy private-server maps",
-      "mapPool": "Legacy",
-      "availability": "Legacy private-server map",
-      "privateServerNote": "Private servers and unrestricted map voting context",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": "Legacy Crossroads variant kept for private-server play.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Legacy_Crossroads",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/f8/Legacycrossroadsicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Legacy Crossroads",
+        "availability": "Legacy private-server map",
+        "featureNote": "Legacy Crossroads variant kept for private-server play.",
+        "privateServerNote": "Private servers and unrestricted map voting context",
+        "mapPool": "Legacy"
+      },
+      "system": {
+        "slug": "legacy-crossroads",
+        "section": "Legacy private-server maps",
+        "sortOrder": 33,
+        "image": "/RIVALS/Maps/legacy-crossroads.webp"
+      }
     },
     {
-      "name": "Legacy Docks",
-      "slug": "legacy-docks",
-      "image": "/RIVALS/Maps/legacy-docks.webp",
-      "collectionSection": "Legacy private-server maps",
-      "mapPool": "Legacy",
-      "availability": "Legacy private-server map",
-      "privateServerNote": "Private servers and unrestricted map voting context",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": "Legacy Docks variant kept for private-server play.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Legacy_Docks",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/1f/Legacydocksicon.PNG/revision/latest?cb=20251116005011",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Legacy Docks",
+        "availability": "Legacy private-server map",
+        "featureNote": "Legacy Docks variant kept for private-server play.",
+        "privateServerNote": "Private servers and unrestricted map voting context",
+        "mapPool": "Legacy"
+      },
+      "system": {
+        "slug": "legacy-docks",
+        "section": "Legacy private-server maps",
+        "sortOrder": 34,
+        "image": "/RIVALS/Maps/legacy-docks.webp"
+      }
     },
     {
-      "name": "Legacy Onyx",
-      "slug": "legacy-onyx",
-      "image": "/RIVALS/Maps/legacy-onyx.webp",
-      "collectionSection": "Legacy private-server maps",
-      "mapPool": "Legacy",
-      "availability": "Legacy private-server map",
-      "privateServerNote": "Private servers and unrestricted map voting context",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": "Legacy Onyx variant kept for private-server play.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Legacy_Onyx",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/d/da/Legacyonyxicon.PNG/revision/latest?cb=20251116005011",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Legacy Onyx",
+        "availability": "Legacy private-server map",
+        "featureNote": "Legacy Onyx variant kept for private-server play.",
+        "privateServerNote": "Private servers and unrestricted map voting context",
+        "mapPool": "Legacy"
+      },
+      "system": {
+        "slug": "legacy-onyx",
+        "section": "Legacy private-server maps",
+        "sortOrder": 35,
+        "image": "/RIVALS/Maps/legacy-onyx.webp"
+      }
     },
     {
-      "name": "Legacy Splash",
-      "slug": "legacy-splash",
-      "image": "/RIVALS/Maps/legacy-splash.webp",
-      "collectionSection": "Legacy private-server maps",
-      "mapPool": "Legacy",
-      "availability": "Legacy private-server map",
-      "privateServerNote": "Private servers and unrestricted map voting context",
-      "difficulty": null,
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": "Legacy Splash variant kept for private-server play.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Legacy_Splash",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/17/Legacysplashicon.PNG/revision/latest?cb=20251116005011",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Legacy Splash",
+        "availability": "Legacy private-server map",
+        "featureNote": "Legacy Splash variant kept for private-server play.",
+        "privateServerNote": "Private servers and unrestricted map voting context",
+        "mapPool": "Legacy"
+      },
+      "system": {
+        "slug": "legacy-splash",
+        "section": "Legacy private-server maps",
+        "sortOrder": 36,
+        "image": "/RIVALS/Maps/legacy-splash.webp"
+      }
     },
     {
-      "name": "Baseplate",
-      "slug": "baseplate",
-      "image": "/RIVALS/Maps/baseplate.webp",
-      "collectionSection": "Private-server-only maps",
-      "mapPool": "Private server only",
-      "availability": "Private-server-only map",
-      "privateServerNote": "Private-server-only map",
-      "difficulty": "Private Server Only",
-      "supportedModesSummary": null,
-      "rankedPool": null,
-      "creator": null,
-      "featureNote": "Private-server-only flat practice map.",
-      "imageStatus": "downloaded wiki map image",
-      "sourcePage": "Roblox RIVALS Wiki - Maps",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Baseplate",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/b6/Baseplateicon.PNG/revision/latest?cb=20251116005012",
-      "verificationNote": "Listed in the current Maps page navigation and 37-map count. No detailed Maps page row; only availability and image/navigation data are used."
+      "item": {
+        "name": "Baseplate",
+        "availability": "Private-server-only map",
+        "difficulty": "Private Server Only",
+        "featureNote": "Private-server-only flat practice map.",
+        "privateServerNote": "Private-server-only map",
+        "mapPool": "Private server only"
+      },
+      "system": {
+        "slug": "baseplate",
+        "section": "Private-server-only maps",
+        "sortOrder": 37,
+        "image": "/RIVALS/Maps/baseplate.webp"
+      }
     }
   ]
 }

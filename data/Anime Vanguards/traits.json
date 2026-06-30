@@ -1,47 +1,12 @@
 {
   "meta": {
-    "title": "Anime Vanguards traits data",
+    "schemaVersion": 2,
     "game": "Anime Vanguards",
     "gameSlug": "anime-vanguards",
     "collection": "traits",
     "route": "/wiki/anime-vanguards/traits",
     "catalogCode": "anime-vanguards-traits",
-    "universeId": 5578556129,
-    "rootPlaceId": 16146832113,
-    "updatedAt": "2026-06-22",
-    "sourceItemCount": 11,
-    "itemCount": 11,
-    "groupBy": "collectionSection",
-    "sectionOrder": [
-      "Mythic pity traits",
-      "Combat stat traits",
-      "Utility traits",
-      "Basic tiered traits"
-    ],
-    "sectionLabels": {
-      "Mythic pity traits": "Mythic pity traits",
-      "Combat stat traits": "Combat stat traits",
-      "Utility traits": "Utility traits",
-      "Basic tiered traits": "Basic tiered traits"
-    },
-    "defaultCardFields": [
-      "chance",
-      "pity",
-      "mainEffect",
-      "damageBonus",
-      "spaChange",
-      "rangeBonus",
-      "criticalEffect",
-      "placementLimitEffect",
-      "dpsIncrease",
-      "bestFor",
-      "tierDetails"
-    ],
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "itemFields": [
       "chance",
       "oddsText",
       "pity",
@@ -56,427 +21,270 @@
       "dpsIncrease",
       "bestFor",
       "tierDetails",
-      "cardSummary",
-      "sourceStatus",
-      "wikiUrl",
-      "sourceUrls",
-      "sourceRevision",
-      "sourceCheckedAt",
-      "sourceOrder",
-      "rawTraitGroup",
-      "sortOrder",
-      "imageStatus",
-      "imageSourceUrl"
+      "cardSummary"
     ],
-    "counts": {
-      "bySection": {
-        "Mythic pity traits": 4,
-        "Combat stat traits": 2,
-        "Utility traits": 2,
-        "Basic tiered traits": 3
-      },
-      "withChance": 11,
-      "withPity": 4,
-      "withCardSummary": 11,
-      "images": 11
-    },
-    "sources": [
-      {
-        "label": "Anime Vanguards Wiki - Traits",
-        "url": "https://animevanguards.fandom.com/wiki/Traits",
-        "accessed": "2026-06-22",
-        "revision": "40516",
-        "revisionTimestamp": "2026-03-05T00:11:07Z",
-        "usage": "Primary list of trait families, chances, pity values, stat effects, DPS notes, and trait icon candidates."
-      },
-      {
-        "label": "Anime Vanguards Wiki - Trait Rerolls",
-        "url": "https://animevanguards.fandom.com/wiki/Trait_Rerolls",
-        "accessed": "2026-06-22",
-        "usage": "Trait Reroll item and Mandra NPC context."
-      },
-      {
-        "label": "Anime Vanguards Wiki - Stats",
-        "url": "https://animevanguards.fandom.com/wiki/Stats",
-        "accessed": "2026-06-22",
-        "usage": "Damage, SPA, and Range terminology cross-check."
-      },
-      {
-        "label": "Roblox games API - universe 5578556129",
-        "url": "https://games.roblox.com/v1/games?universeIds=5578556129",
-        "accessed": "2026-06-22",
-        "usage": "Game identity only."
-      }
+    "columns": [
+      "chance",
+      "oddsText",
+      "pity",
+      "mainEffect",
+      "damageBonus",
+      "spaChange",
+      "rangeBonus",
+      "criticalEffect",
+      "cashOrCostEffect",
+      "expEffect",
+      "placementLimitEffect",
+      "dpsIncrease",
+      "bestFor",
+      "tierDetails",
+      "cardSummary"
     ],
-    "notes": "Rows follow the parent-approved 11-family scope from the current Fandom Traits table. Vigor, Swift, and Range keep their 1/2/3 tier values inside tierDetails instead of splitting into separate catalog rows. Non-Mythic rarity labels are intentionally omitted because the checked source text does not expose reliable rarity names for them.",
-    "imageNotes": [
-      "Image pass downloaded one clean trait icon per row from the Fandom Traits table.",
-      "All trait icons are stored under apps/web/public/Anime Vanguards/Traits and wired through the public /Anime%20Vanguards/Traits/*.webp paths."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Mythic pity traits",
+        "Combat stat traits",
+        "Utility traits",
+        "Basic tiered traits"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "chance",
+        "pity",
+        "mainEffect",
+        "damageBonus",
+        "spaChange",
+        "rangeBonus",
+        "criticalEffect"
+      ],
+      "tableFields": [
+        "chance",
+        "oddsText",
+        "pity",
+        "mainEffect",
+        "damageBonus",
+        "spaChange",
+        "rangeBonus",
+        "criticalEffect"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Monarch",
-      "slug": "monarch",
-      "image": "/Anime%20Vanguards/Traits/monarch.webp",
-      "collectionSection": "Mythic pity traits",
-      "chance": "0.1%",
-      "oddsText": "1 in 1000",
-      "pity": "1500",
-      "mainEffect": "Massive damage boost with a small SPA and range bonus, but one placement only.",
-      "damageBonus": "+300%",
-      "spaChange": "-10%",
-      "rangeBonus": "+5%",
-      "criticalEffect": "",
-      "cashOrCostEffect": "",
-      "expEffect": "",
-      "placementLimitEffect": "Limited to one placement",
-      "dpsIncrease": "Placement-dependent damage value; strongest on low-placement units.",
-      "bestFor": "Low-placement or high-cost units, especially units with three placements or fewer.",
-      "tierDetails": "Source table lists placement-limit damage value by original placement limit: 1 +344.4%, 2 +122.2%, 3 +48.1%, 4 +11.1%, 5 -11.1%, 6 -25.9%.",
-      "cardSummary": "Monarch is the rarest listed trait and trades one-placement limit for a huge damage boost plus small speed and range gains.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 1,
-      "rawTraitGroup": "Mythic",
-      "sortOrder": 1,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/9/96/Monarch.png/revision/latest?cb=20250728042118"
+      "item": {
+        "name": "Monarch",
+        "chance": "0.1%",
+        "oddsText": "1 in 1000",
+        "pity": "1500",
+        "mainEffect": "Massive damage boost with a small SPA and range bonus, but one placement only.",
+        "damageBonus": "+300%",
+        "spaChange": "-10%",
+        "rangeBonus": "+5%",
+        "placementLimitEffect": "Limited to one placement",
+        "dpsIncrease": "Placement-dependent damage value; strongest on low-placement units.",
+        "bestFor": "Low-placement or high-cost units, especially units with three placements or fewer.",
+        "tierDetails": "Source table lists placement-limit damage value by original placement limit: 1 +344.4%, 2 +122.2%, 3 +48.1%, 4 +11.1%, 5 -11.1%, 6 -25.9%.",
+        "cardSummary": "Monarch is the rarest listed trait and trades one-placement limit for a huge damage boost plus small speed and range gains."
+      },
+      "system": {
+        "slug": "monarch",
+        "section": "Mythic pity traits",
+        "sortOrder": 1,
+        "image": "/Anime%20Vanguards/Traits/monarch.webp"
+      }
     },
     {
-      "name": "Ethereal",
-      "slug": "ethereal",
-      "image": "/Anime%20Vanguards/Traits/ethereal.webp",
-      "collectionSection": "Mythic pity traits",
-      "chance": "0.175%",
-      "oddsText": "1 in 571.43",
-      "pity": "858",
-      "mainEffect": "Boosts damage, attack speed, and range.",
-      "damageBonus": "+20%",
-      "spaChange": "-20%",
-      "rangeBonus": "+5%",
-      "criticalEffect": "",
-      "cashOrCostEffect": "",
-      "expEffect": "",
-      "placementLimitEffect": "",
-      "dpsIncrease": "+50%",
-      "bestFor": "Low-cost units, support units, and units with four or more placements.",
-      "tierDetails": "",
-      "cardSummary": "Ethereal is a Mythic pity trait focused on overall combat output through damage, faster attacks, and a small range boost.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 2,
-      "rawTraitGroup": "Mythic",
-      "sortOrder": 2,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/7/78/Ethereal.png/revision/latest?cb=20250728042017"
+      "item": {
+        "name": "Ethereal",
+        "chance": "0.175%",
+        "oddsText": "1 in 571.43",
+        "pity": "858",
+        "mainEffect": "Boosts damage, attack speed, and range.",
+        "damageBonus": "+20%",
+        "spaChange": "-20%",
+        "rangeBonus": "+5%",
+        "dpsIncrease": "+50%",
+        "bestFor": "Low-cost units, support units, and units with four or more placements.",
+        "cardSummary": "Ethereal is a Mythic pity trait focused on overall combat output through damage, faster attacks, and a small range boost."
+      },
+      "system": {
+        "slug": "ethereal",
+        "section": "Mythic pity traits",
+        "sortOrder": 2,
+        "image": "/Anime%20Vanguards/Traits/ethereal.webp"
+      }
     },
     {
-      "name": "Deadeye",
-      "slug": "deadeye",
-      "image": "/Anime%20Vanguards/Traits/deadeye.webp",
-      "collectionSection": "Mythic pity traits",
-      "chance": "0.375%",
-      "oddsText": "1 in 266.67",
-      "pity": "400",
-      "mainEffect": "Raises critical chance and critical damage.",
-      "damageBonus": "",
-      "spaChange": "",
-      "rangeBonus": "",
-      "criticalEffect": "+45% Critical Chance and +50% Critical Damage",
-      "cashOrCostEffect": "",
-      "expEffect": "",
-      "placementLimitEffect": "",
-      "dpsIncrease": "+33.75%",
-      "bestFor": "Units that already have Critical Chance in their kit.",
-      "tierDetails": "Source note says Critical Damage can be higher with Hercool and Mr Boo buffs.",
-      "cardSummary": "Deadeye is a Mythic pity trait for crit-focused units, adding critical chance and critical damage instead of basic damage or range stats.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 3,
-      "rawTraitGroup": "Mythic",
-      "sortOrder": 3,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/0/0f/Deadeye.png/revision/latest?cb=20250728041926"
+      "item": {
+        "name": "Deadeye",
+        "chance": "0.375%",
+        "oddsText": "1 in 266.67",
+        "pity": "400",
+        "mainEffect": "Raises critical chance and critical damage.",
+        "criticalEffect": "+45% Critical Chance and +50% Critical Damage",
+        "dpsIncrease": "+33.75%",
+        "bestFor": "Units that already have Critical Chance in their kit.",
+        "tierDetails": "Source note says Critical Damage can be higher with Hercool and Mr Boo buffs.",
+        "cardSummary": "Deadeye is a Mythic pity trait for crit-focused units, adding critical chance and critical damage instead of basic damage or range stats."
+      },
+      "system": {
+        "slug": "deadeye",
+        "section": "Mythic pity traits",
+        "sortOrder": 3,
+        "image": "/Anime%20Vanguards/Traits/deadeye.webp"
+      }
     },
     {
-      "name": "Solar",
-      "slug": "solar",
-      "image": "/Anime%20Vanguards/Traits/solar.webp",
-      "collectionSection": "Mythic pity traits",
-      "chance": "0.5%",
-      "oddsText": "1 in 200",
-      "pity": "300",
-      "mainEffect": "Large range boost with smaller damage and SPA bonuses.",
-      "damageBonus": "+10%",
-      "spaChange": "-5%",
-      "rangeBonus": "+25%",
-      "criticalEffect": "",
-      "cashOrCostEffect": "",
-      "expEffect": "",
-      "placementLimitEffect": "",
-      "dpsIncrease": "+15.8%",
-      "bestFor": "Units that value extra reach while still benefiting from modest DPS gains.",
-      "tierDetails": "Source note says Cha-In (Blade Dancer) has different DPS math with this trait.",
-      "cardSummary": "Solar is a Mythic pity trait that heavily favors range while still giving a smaller damage and attack-speed bump.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 4,
-      "rawTraitGroup": "Mythic",
-      "sortOrder": 4,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/2/25/Solar.png/revision/latest?cb=20250728041832"
+      "item": {
+        "name": "Solar",
+        "chance": "0.5%",
+        "oddsText": "1 in 200",
+        "pity": "300",
+        "mainEffect": "Large range boost with smaller damage and SPA bonuses.",
+        "damageBonus": "+10%",
+        "spaChange": "-5%",
+        "rangeBonus": "+25%",
+        "dpsIncrease": "+15.8%",
+        "bestFor": "Units that value extra reach while still benefiting from modest DPS gains.",
+        "tierDetails": "Source note says Cha-In (Blade Dancer) has different DPS math with this trait.",
+        "cardSummary": "Solar is a Mythic pity trait that heavily favors range while still giving a smaller damage and attack-speed bump."
+      },
+      "system": {
+        "slug": "solar",
+        "section": "Mythic pity traits",
+        "sortOrder": 4,
+        "image": "/Anime%20Vanguards/Traits/solar.webp"
+      }
     },
     {
-      "name": "Blitz",
-      "slug": "blitz",
-      "image": "/Anime%20Vanguards/Traits/blitz.webp",
-      "collectionSection": "Combat stat traits",
-      "chance": "1.85%",
-      "oddsText": "1 in 54.05",
-      "pity": "",
-      "mainEffect": "Makes the unit attack faster.",
-      "damageBonus": "",
-      "spaChange": "-20%",
-      "rangeBonus": "",
-      "criticalEffect": "",
-      "cashOrCostEffect": "",
-      "expEffect": "",
-      "placementLimitEffect": "",
-      "dpsIncrease": "+25%",
-      "bestFor": "Damage dealers that benefit from faster attack cycles.",
-      "tierDetails": "",
-      "cardSummary": "Blitz is a combat trait built around speed, reducing SPA by 20% for a listed 25% DPS increase.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 5,
-      "rawTraitGroup": "Combat",
-      "sortOrder": 5,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/0/0d/Blitz.png/revision/latest?cb=20250728040350"
+      "item": {
+        "name": "Blitz",
+        "chance": "1.85%",
+        "oddsText": "1 in 54.05",
+        "mainEffect": "Makes the unit attack faster.",
+        "spaChange": "-20%",
+        "dpsIncrease": "+25%",
+        "bestFor": "Damage dealers that benefit from faster attack cycles.",
+        "cardSummary": "Blitz is a combat trait built around speed, reducing SPA by 20% for a listed 25% DPS increase."
+      },
+      "system": {
+        "slug": "blitz",
+        "section": "Combat stat traits",
+        "sortOrder": 5,
+        "image": "/Anime%20Vanguards/Traits/blitz.webp"
+      }
     },
     {
-      "name": "Marksman",
-      "slug": "marksman",
-      "image": "/Anime%20Vanguards/Traits/marksman.webp",
-      "collectionSection": "Combat stat traits",
-      "chance": "6.5%",
-      "oddsText": "1 in 15.39",
-      "pity": "",
-      "mainEffect": "Increases attack range.",
-      "damageBonus": "",
-      "spaChange": "",
-      "rangeBonus": "+30%",
-      "criticalEffect": "",
-      "cashOrCostEffect": "",
-      "expEffect": "",
-      "placementLimitEffect": "",
-      "dpsIncrease": "",
-      "bestFor": "Units whose role depends heavily on range.",
-      "tierDetails": "",
-      "cardSummary": "Marksman gives a large range boost and is most useful when a unit's value comes from reaching more lanes or targets.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 7,
-      "rawTraitGroup": "Combat",
-      "sortOrder": 6,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/9/94/Marksman.png/revision/latest?cb=20250728040135"
+      "item": {
+        "name": "Marksman",
+        "chance": "6.5%",
+        "oddsText": "1 in 15.39",
+        "mainEffect": "Increases attack range.",
+        "rangeBonus": "+30%",
+        "bestFor": "Units whose role depends heavily on range.",
+        "cardSummary": "Marksman gives a large range boost and is most useful when a unit's value comes from reaching more lanes or targets."
+      },
+      "system": {
+        "slug": "marksman",
+        "section": "Combat stat traits",
+        "sortOrder": 6,
+        "image": "/Anime%20Vanguards/Traits/marksman.webp"
+      }
     },
     {
-      "name": "Fortune",
-      "slug": "fortune",
-      "image": "/Anime%20Vanguards/Traits/fortune.webp",
-      "collectionSection": "Utility traits",
-      "chance": "2.5%",
-      "oddsText": "1 in 40",
-      "pity": "",
-      "mainEffect": "Improves economy value through farm income or lower upgrade cost.",
-      "damageBonus": "",
-      "spaChange": "",
-      "rangeBonus": "",
-      "criticalEffect": "",
-      "cashOrCostEffect": "+20% Cash income for farm units; -10% upgrade cost for non-farm units",
-      "expEffect": "",
-      "placementLimitEffect": "",
-      "dpsIncrease": "",
-      "bestFor": "Farm units such as Sprintwagon and Takaroda, or expensive non-farm upgrade paths.",
-      "tierDetails": "",
-      "cardSummary": "Fortune is the economy trait, boosting farm-unit Cash income or cutting upgrade costs on non-farm units.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 6,
-      "rawTraitGroup": "Utility",
-      "sortOrder": 7,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/f/f3/Fortune.png/revision/latest?cb=20250728040240"
+      "item": {
+        "name": "Fortune",
+        "chance": "2.5%",
+        "oddsText": "1 in 40",
+        "mainEffect": "Improves economy value through farm income or lower upgrade cost.",
+        "cashOrCostEffect": "+20% Cash income for farm units; -10% upgrade cost for non-farm units",
+        "bestFor": "Farm units such as Sprintwagon and Takaroda, or expensive non-farm upgrade paths.",
+        "cardSummary": "Fortune is the economy trait, boosting farm-unit Cash income or cutting upgrade costs on non-farm units."
+      },
+      "system": {
+        "slug": "fortune",
+        "section": "Utility traits",
+        "sortOrder": 7,
+        "image": "/Anime%20Vanguards/Traits/fortune.webp"
+      }
     },
     {
-      "name": "Scholar",
-      "slug": "scholar",
-      "image": "/Anime%20Vanguards/Traits/scholar.webp",
-      "collectionSection": "Utility traits",
-      "chance": "10%",
-      "oddsText": "1 in 10",
-      "pity": "",
-      "mainEffect": "Increases experience gain.",
-      "damageBonus": "",
-      "spaChange": "",
-      "rangeBonus": "",
-      "criticalEffect": "",
-      "cashOrCostEffect": "",
-      "expEffect": "+50% Experience",
-      "placementLimitEffect": "",
-      "dpsIncrease": "",
-      "bestFor": "Units being leveled rather than optimized for immediate combat output.",
-      "tierDetails": "",
-      "cardSummary": "Scholar is a leveling trait, giving extra experience instead of direct combat stats.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 8,
-      "rawTraitGroup": "Utility",
-      "sortOrder": 8,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/d/d0/Scholar.png/revision/latest?cb=20250728040031"
+      "item": {
+        "name": "Scholar",
+        "chance": "10%",
+        "oddsText": "1 in 10",
+        "mainEffect": "Increases experience gain.",
+        "expEffect": "+50% Experience",
+        "bestFor": "Units being leveled rather than optimized for immediate combat output.",
+        "cardSummary": "Scholar is a leveling trait, giving extra experience instead of direct combat stats."
+      },
+      "system": {
+        "slug": "scholar",
+        "section": "Utility traits",
+        "sortOrder": 8,
+        "image": "/Anime%20Vanguards/Traits/scholar.webp"
+      }
     },
     {
-      "name": "Vigor",
-      "slug": "vigor",
-      "image": "/Anime%20Vanguards/Traits/vigor.webp",
-      "collectionSection": "Basic tiered traits",
-      "chance": "26%",
-      "oddsText": "1 in 3.85",
-      "pity": "",
-      "mainEffect": "Increases damage through tiered rolls.",
-      "damageBonus": "+5%, +10%, or +15%",
-      "spaChange": "",
-      "rangeBonus": "",
-      "criticalEffect": "",
-      "cashOrCostEffect": "",
-      "expEffect": "",
-      "placementLimitEffect": "",
-      "dpsIncrease": "+5%, +10%, or +15%",
-      "bestFor": "General damage improvement when rarer traits are not available.",
-      "tierDetails": "Vigor 1: +5% Damage; Vigor 2: +10% Damage; Vigor 3: +15% Damage.",
-      "cardSummary": "Vigor is a common tiered damage trait with three listed levels from +5% to +15% damage.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 9,
-      "rawTraitGroup": "Tiered",
-      "sortOrder": 9,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/4/47/Vigor.png/revision/latest?cb=20250728035943"
+      "item": {
+        "name": "Vigor",
+        "chance": "26%",
+        "oddsText": "1 in 3.85",
+        "mainEffect": "Increases damage through tiered rolls.",
+        "damageBonus": "+5%, +10%, or +15%",
+        "dpsIncrease": "+5%, +10%, or +15%",
+        "bestFor": "General damage improvement when rarer traits are not available.",
+        "tierDetails": "Vigor 1: +5% Damage; Vigor 2: +10% Damage; Vigor 3: +15% Damage.",
+        "cardSummary": "Vigor is a common tiered damage trait with three listed levels from +5% to +15% damage."
+      },
+      "system": {
+        "slug": "vigor",
+        "section": "Basic tiered traits",
+        "sortOrder": 9,
+        "image": "/Anime%20Vanguards/Traits/vigor.webp"
+      }
     },
     {
-      "name": "Swift",
-      "slug": "swift",
-      "image": "/Anime%20Vanguards/Traits/swift.webp",
-      "collectionSection": "Basic tiered traits",
-      "chance": "26%",
-      "oddsText": "1 in 3.85",
-      "pity": "",
-      "mainEffect": "Reduces SPA through tiered rolls.",
-      "damageBonus": "",
-      "spaChange": "-5%, -7.5%, or -12.5%",
-      "rangeBonus": "",
-      "criticalEffect": "",
-      "cashOrCostEffect": "",
-      "expEffect": "",
-      "placementLimitEffect": "",
-      "dpsIncrease": "+5.3%, +8.1%, or +14.3%",
-      "bestFor": "Units that benefit from faster attacks.",
-      "tierDetails": "Swift 1: -5% SPA; Swift 2: -7.5% SPA; Swift 3: -12.5% SPA.",
-      "cardSummary": "Swift is a common tiered speed trait with three listed SPA reductions and matching DPS increases.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 10,
-      "rawTraitGroup": "Tiered",
-      "sortOrder": 10,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/0/00/Swift.png/revision/latest?cb=20250728035852"
+      "item": {
+        "name": "Swift",
+        "chance": "26%",
+        "oddsText": "1 in 3.85",
+        "mainEffect": "Reduces SPA through tiered rolls.",
+        "spaChange": "-5%, -7.5%, or -12.5%",
+        "dpsIncrease": "+5.3%, +8.1%, or +14.3%",
+        "bestFor": "Units that benefit from faster attacks.",
+        "tierDetails": "Swift 1: -5% SPA; Swift 2: -7.5% SPA; Swift 3: -12.5% SPA.",
+        "cardSummary": "Swift is a common tiered speed trait with three listed SPA reductions and matching DPS increases."
+      },
+      "system": {
+        "slug": "swift",
+        "section": "Basic tiered traits",
+        "sortOrder": 10,
+        "image": "/Anime%20Vanguards/Traits/swift.webp"
+      }
     },
     {
-      "name": "Range",
-      "slug": "range",
-      "image": "/Anime%20Vanguards/Traits/range.webp",
-      "collectionSection": "Basic tiered traits",
-      "chance": "26%",
-      "oddsText": "1 in 3.85",
-      "pity": "",
-      "mainEffect": "Increases range through tiered rolls.",
-      "damageBonus": "",
-      "spaChange": "",
-      "rangeBonus": "+5%, +10%, or +15%",
-      "criticalEffect": "",
-      "cashOrCostEffect": "",
-      "expEffect": "",
-      "placementLimitEffect": "",
-      "dpsIncrease": "",
-      "bestFor": "Units that need more reach but do not require the larger Marksman boost.",
-      "tierDetails": "Range 1: +5% Range; Range 2: +10% Range; Range 3: +15% Range.",
-      "cardSummary": "Range is a common tiered range trait with three listed levels from +5% to +15% range.",
-      "sourceStatus": "Fandom Traits table",
-      "wikiUrl": "https://animevanguards.fandom.com/wiki/Traits",
-      "sourceUrls": [
-        "https://animevanguards.fandom.com/wiki/Traits"
-      ],
-      "sourceRevision": "40516",
-      "sourceCheckedAt": "2026-06-22",
-      "sourceOrder": 11,
-      "rawTraitGroup": "Tiered",
-      "sortOrder": 11,
-      "imageStatus": "downloaded-from-fandom-traits-table",
-      "imageSourceUrl": "https://static.wikia.nocookie.net/rbx-anime-vanguards/images/1/11/Range1.png/revision/latest?cb=20250728035755"
+      "item": {
+        "name": "Range",
+        "chance": "26%",
+        "oddsText": "1 in 3.85",
+        "mainEffect": "Increases range through tiered rolls.",
+        "rangeBonus": "+5%, +10%, or +15%",
+        "bestFor": "Units that need more reach but do not require the larger Marksman boost.",
+        "tierDetails": "Range 1: +5% Range; Range 2: +10% Range; Range 3: +15% Range.",
+        "cardSummary": "Range is a common tiered range trait with three listed levels from +5% to +15% range."
+      },
+      "system": {
+        "slug": "range",
+        "section": "Basic tiered traits",
+        "sortOrder": 11,
+        "image": "/Anime%20Vanguards/Traits/range.webp"
+      }
     }
   ]
 }

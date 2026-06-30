@@ -1,27 +1,12 @@
 {
   "meta": {
-    "title": "Adopt Me potions data",
-    "updatedAt": "2026-05-18",
-    "sources": [
-      {
-        "label": "Adopt Me Wiki - Potions",
-        "url": "https://adoptme.fandom.com/wiki/Potions",
-        "accessed": "2026-05-18"
-      },
-      {
-        "label": "Adopt Me - New Weather Needs",
-        "url": "https://www.playadopt.me/news/new-weather-needs",
-        "accessed": "2026-05-18"
-      },
-      {
-        "label": "Adopt Me - Potions Update Notes",
-        "url": "https://www.playadopt.me/news/potions-update",
-        "accessed": "2026-05-18"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Adopt Me",
+    "gameSlug": "adopt-me",
+    "collection": "potions",
+    "route": "/wiki/adopt-me/potions",
+    "catalogCode": "adopt-me-potions",
+    "itemFields": [
       "category",
       "cost",
       "price",
@@ -29,1077 +14,648 @@
       "effect",
       "obtainableFrom",
       "timeToBrew",
-      "wikiUrl"
-    ]
+      "availability",
+      "event",
+      "eventUpdate",
+      "location",
+      "uses",
+      "obtainedBy",
+      "potion",
+      "cauldron",
+      "potionBrewed"
+    ],
+    "columns": [
+      "category",
+      "cost",
+      "price",
+      "rarity",
+      "effect",
+      "obtainableFrom",
+      "timeToBrew",
+      "availability",
+      "event",
+      "eventUpdate",
+      "location",
+      "uses",
+      "obtainedBy",
+      "potion",
+      "cauldron",
+      "potionBrewed"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Sky Castle Potions",
+        "Age Potions",
+        "Gamepass Potion",
+        "Event/Gift Potions",
+        "Cauldron Potions",
+        "Tim's Cauldron Potions",
+        "Unknown"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "location",
+        "availability"
+      ],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "category",
+        "cost",
+        "price",
+        "rarity",
+        "effect",
+        "obtainableFrom"
+      ],
+      "tableFields": [
+        "category",
+        "cost",
+        "price",
+        "rarity",
+        "effect",
+        "obtainableFrom",
+        "timeToBrew",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Big Head Potion",
-      "slug": "big-head-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "10",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Makes players who consume potion have a bigger head. This potion is limited to only one per player.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Big_Head_Potion",
-      "fields": {
-        "potion": "Big Head Potion",
+      "item": {
+        "name": "Big Head Potion",
+        "category": "Sky Castle Potions",
         "cost": "10",
         "effect": "Makes players who consume potion have a bigger head. This potion is limited to only one per player.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/7/72/BigHeadPotionIcon.png/revision/latest?cb=20231206204208\" class=\"mw-file-description image\"><img alt=\"BigHeadPotionIcon\" src=\"https://static.wikia.nocookie.net/adoptme/images/7/72/BigHeadPotionIcon.png/revision/latest/scale-to-width-down/123?cb=20231206204208\" decoding=\"async\" loading=\"lazy\" width=\"123\" height=\"123\" class=\"thumbimage\" data-image-name=\"BigHeadPotionIcon.png\" data-image-key=\"BigHeadPotionIcon.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/7/72/BigHeadPotionIcon.png/revision/latest/scale-to-width-down/123?cb=20231206204208\" /></a>"
+        "potion": "Big Head Potion"
       },
-      "image": "/Adopt%20Me/Potions/big-head-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "big-head-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 1,
+        "image": "/Adopt%20Me/Potions/big-head-potion.webp"
+      }
     },
     {
-      "name": "Hyperspeed Potion",
-      "slug": "hyperspeed-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "40",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Speeds up the walking pace of the player. The more this potion is consumed, the faster the player will walk. Players may take this potion multiple times.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Hyperspeed_Potion",
-      "fields": {
-        "potion": "Hyperspeed Potion",
+      "item": {
+        "name": "Hyperspeed Potion",
+        "category": "Sky Castle Potions",
         "cost": "40",
         "effect": "Speeds up the walking pace of the player. The more this potion is consumed, the faster the player will walk. Players may take this potion multiple times.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/0/05/Hyperspeedpotion.png/revision/latest?cb=20231206204208\" class=\"mw-file-description image\"><img alt=\"Hyperspeedpotion\" src=\"https://static.wikia.nocookie.net/adoptme/images/0/05/Hyperspeedpotion.png/revision/latest/scale-to-width-down/128?cb=20231206204208\" decoding=\"async\" loading=\"lazy\" width=\"128\" height=\"128\" class=\"thumbimage\" data-image-name=\"Hyperspeedpotion.png\" data-image-key=\"Hyperspeedpotion.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/0/05/Hyperspeedpotion.png/revision/latest/scale-to-width-down/128?cb=20231206204208\" /></a>"
+        "potion": "Hyperspeed Potion"
       },
-      "image": "/Adopt%20Me/Potions/hyperspeed-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "hyperspeed-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 2,
+        "image": "/Adopt%20Me/Potions/hyperspeed-potion.webp"
+      }
     },
     {
-      "name": "Anti-gravity Potion",
-      "slug": "anti-gravity-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "99",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Allows the player to jump higher for every potion they drink. This potion may be stacked.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Anti-gravity_Potion",
-      "fields": {
-        "potion": "Anti-gravity Potion",
+      "item": {
+        "name": "Anti-gravity Potion",
+        "category": "Sky Castle Potions",
         "cost": "99",
         "effect": "Allows the player to jump higher for every potion they drink. This potion may be stacked.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/1/17/Anti-gravity_Potion_inventory.png/revision/latest?cb=20231206204208\" class=\"mw-file-description image\"><img alt=\"Anti-gravity Potion inventory\" src=\"https://static.wikia.nocookie.net/adoptme/images/1/17/Anti-gravity_Potion_inventory.png/revision/latest/scale-to-width-down/123?cb=20231206204208\" decoding=\"async\" loading=\"lazy\" width=\"123\" height=\"123\" class=\"thumbimage\" data-image-name=\"Anti-gravity Potion inventory.png\" data-image-key=\"Anti-gravity_Potion_inventory.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/1/17/Anti-gravity_Potion_inventory.png/revision/latest/scale-to-width-down/123?cb=20231206204208\" /></a>"
+        "potion": "Anti-gravity Potion"
       },
-      "image": "/Adopt%20Me/Potions/anti-gravity-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "anti-gravity-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 3,
+        "image": "/Adopt%20Me/Potions/anti-gravity-potion.webp"
+      }
     },
     {
-      "name": "Grow Potion",
-      "slug": "grow-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "395",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Causes the player's character to grow bigger when consumed.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Grow_Potion",
-      "fields": {
-        "potion": "Grow Potion",
+      "item": {
+        "name": "Grow Potion",
+        "category": "Sky Castle Potions",
         "cost": "395",
         "effect": "Causes the player's character to grow bigger when consumed.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/9/9d/Grow_Potion_inventory.png/revision/latest?cb=20231206204208\" class=\"mw-file-description image\"><img alt=\"Grow Potion inventory\" src=\"https://static.wikia.nocookie.net/adoptme/images/9/9d/Grow_Potion_inventory.png/revision/latest/scale-to-width-down/123?cb=20231206204208\" decoding=\"async\" loading=\"lazy\" width=\"123\" height=\"123\" class=\"thumbimage\" data-image-name=\"Grow Potion inventory.png\" data-image-key=\"Grow_Potion_inventory.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/9/9d/Grow_Potion_inventory.png/revision/latest/scale-to-width-down/123?cb=20231206204208\" /></a>"
+        "potion": "Grow Potion"
       },
-      "image": "/Adopt%20Me/Potions/grow-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "grow-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 4,
+        "image": "/Adopt%20Me/Potions/grow-potion.webp"
+      }
     },
     {
-      "name": "Ride-A-Pet Potion",
-      "slug": "ride-a-pet-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "130",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "When fed to a pet, it makes them rideable forever.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Ride-A-Pet_Potion",
-      "fields": {
-        "potion": "Ride-A-Pet Potion",
+      "item": {
+        "name": "Ride-A-Pet Potion",
+        "category": "Sky Castle Potions",
         "cost": "130",
         "effect": "When fed to a pet, it makes them rideable forever.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/2/2a/Ride_Potion_AM.png/revision/latest?cb=20231206204208\" class=\"mw-file-description image\"><img alt=\"Ride Potion AM\" src=\"https://static.wikia.nocookie.net/adoptme/images/2/2a/Ride_Potion_AM.png/revision/latest/scale-to-width-down/75?cb=20231206204208\" decoding=\"async\" loading=\"lazy\" width=\"75\" height=\"123\" class=\"thumbimage\" data-image-name=\"Ride Potion AM.png\" data-image-key=\"Ride_Potion_AM.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/2/2a/Ride_Potion_AM.png/revision/latest/scale-to-width-down/75?cb=20231206204208\" /></a>"
+        "potion": "Ride-A-Pet Potion"
       },
-      "image": "/Adopt%20Me/Potions/ride-a-pet-potion.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/09/Robux_2019_Logo_Black.svg/revision/latest?cb=20220801052528"
+      "system": {
+        "slug": "ride-a-pet-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 5,
+        "image": "/Adopt%20Me/Potions/ride-a-pet-potion.png"
+      }
     },
     {
-      "name": "Fly-A-Pet Potion",
-      "slug": "fly-a-pet-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "255",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "When fed to a pet, it makes them flyable forever.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Fly-A-Pet_Potion",
-      "fields": {
-        "potion": "Fly-A-Pet Potion",
+      "item": {
+        "name": "Fly-A-Pet Potion",
+        "category": "Sky Castle Potions",
         "cost": "255",
         "effect": "When fed to a pet, it makes them flyable forever.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/2/2a/Fly-A-Pet_Potion.png/revision/latest?cb=20231206204208\" class=\"mw-file-description image\"><img alt=\"Fly-A-Pet Potion\" src=\"https://static.wikia.nocookie.net/adoptme/images/2/2a/Fly-A-Pet_Potion.png/revision/latest/scale-to-width-down/123?cb=20231206204208\" decoding=\"async\" loading=\"lazy\" width=\"123\" height=\"123\" class=\"thumbimage\" data-image-name=\"Fly-A-Pet Potion.png\" data-image-key=\"Fly-A-Pet_Potion.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/2/2a/Fly-A-Pet_Potion.png/revision/latest/scale-to-width-down/123?cb=20231206204208\" /></a>"
+        "potion": "Fly-A-Pet Potion"
       },
-      "image": "/Adopt%20Me/Potions/fly-a-pet-potion.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/09/Robux_2019_Logo_Black.svg/revision/latest?cb=20220801052528"
+      "system": {
+        "slug": "fly-a-pet-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 6,
+        "image": "/Adopt%20Me/Potions/fly-a-pet-potion.png"
+      }
     },
     {
-      "name": "Small Sip Potion",
-      "slug": "small-sip-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "250",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "When fed to a pet, it makes them smaller in size for 10 minutes.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Small_Sip_Potion",
-      "fields": {
-        "potion": "Small Sip Potion",
+      "item": {
+        "name": "Small Sip Potion",
+        "category": "Sky Castle Potions",
         "cost": "250",
         "effect": "When fed to a pet, it makes them smaller in size for 10 minutes.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/a/a4/Small_Sip_Potion_Inventory.png/revision/latest?cb=20210331100224\" class=\"mw-file-description image\"><img alt=\"Small Sip Potion Inventory\" src=\"https://static.wikia.nocookie.net/adoptme/images/a/a4/Small_Sip_Potion_Inventory.png/revision/latest/scale-to-width-down/123?cb=20210331100224\" decoding=\"async\" loading=\"lazy\" width=\"123\" height=\"123\" class=\"thumbimage\" data-image-name=\"Small Sip Potion Inventory.png\" data-image-key=\"Small_Sip_Potion_Inventory.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/a/a4/Small_Sip_Potion_Inventory.png/revision/latest/scale-to-width-down/123?cb=20210331100224\" /></a>"
+        "potion": "Small Sip Potion"
       },
-      "image": "/Adopt%20Me/Potions/small-sip-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "small-sip-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 7,
+        "image": "/Adopt%20Me/Potions/small-sip-potion.webp"
+      }
     },
     {
-      "name": "Big Brew Potion",
-      "slug": "big-brew-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "350",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "When fed to a pet, it makes them larger in size for 10 minutes.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Big_Brew_Potion",
-      "fields": {
-        "potion": "Big Brew Potion",
+      "item": {
+        "name": "Big Brew Potion",
+        "category": "Sky Castle Potions",
         "cost": "350",
         "effect": "When fed to a pet, it makes them larger in size for 10 minutes.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/b/be/Big_Brew_Potion_AM.png/revision/latest?cb=20210905185111\" class=\"mw-file-description image\"><img alt=\"Big Brew Potion AM\" src=\"https://static.wikia.nocookie.net/adoptme/images/b/be/Big_Brew_Potion_AM.png/revision/latest/scale-to-width-down/123?cb=20210905185111\" decoding=\"async\" loading=\"lazy\" width=\"123\" height=\"123\" class=\"thumbimage\" data-image-name=\"Big Brew Potion AM.png\" data-image-key=\"Big_Brew_Potion_AM.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/b/be/Big_Brew_Potion_AM.png/revision/latest/scale-to-width-down/123?cb=20210905185111\" /></a>"
+        "potion": "Big Brew Potion"
       },
-      "image": "/Adopt%20Me/Potions/big-brew-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "big-brew-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 8,
+        "image": "/Adopt%20Me/Potions/big-brew-potion.webp"
+      }
     },
     {
-      "name": "Translucent Tea Potion",
-      "slug": "translucent-tea-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "600",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "When fed to a pet, it makes them translucent for 10 minutes.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Translucent_Tea_Potion",
-      "fields": {
-        "potion": "Translucent Tea Potion",
+      "item": {
+        "name": "Translucent Tea Potion",
+        "category": "Sky Castle Potions",
         "cost": "600",
         "effect": "When fed to a pet, it makes them translucent for 10 minutes.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/3/3a/Translucent_Tea_Potion_AM.png/revision/latest?cb=20231206204208\" class=\"mw-file-description image\"><img alt=\"Translucent Tea Potion AM\" src=\"https://static.wikia.nocookie.net/adoptme/images/3/3a/Translucent_Tea_Potion_AM.png/revision/latest/scale-to-width-down/130?cb=20231206204208\" decoding=\"async\" loading=\"lazy\" width=\"130\" height=\"130\" class=\"thumbimage\" data-image-name=\"Translucent Tea Potion AM.png\" data-image-key=\"Translucent_Tea_Potion_AM.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/3/3a/Translucent_Tea_Potion_AM.png/revision/latest/scale-to-width-down/130?cb=20231206204208\" /></a>"
+        "potion": "Translucent Tea Potion"
       },
-      "image": "/Adopt%20Me/Potions/translucent-tea-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "translucent-tea-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 9,
+        "image": "/Adopt%20Me/Potions/translucent-tea-potion.webp"
+      }
     },
     {
-      "name": "Levitation Potion",
-      "slug": "levitation-potion",
-      "category": "Sky Castle Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "995 (Removed)",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Causes the player to levitate when consumed.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Levitation_Potion",
-      "fields": {
-        "potion": "Levitation Potion",
+      "item": {
+        "name": "Levitation Potion",
+        "category": "Sky Castle Potions",
         "cost": "995 (Removed)",
         "effect": "Causes the player to levitate when consumed.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/6/61/Levitation_Potion_inventory.png/revision/latest?cb=20180130215327\" class=\"mw-file-description image\"><img alt=\"Levitation Potion inventory\" src=\"https://static.wikia.nocookie.net/adoptme/images/6/61/Levitation_Potion_inventory.png/revision/latest/scale-to-width-down/129?cb=20180130215327\" decoding=\"async\" loading=\"lazy\" width=\"129\" height=\"129\" class=\"thumbimage\" data-image-name=\"Levitation Potion inventory.png\" data-image-key=\"Levitation_Potion_inventory.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/6/61/Levitation_Potion_inventory.png/revision/latest/scale-to-width-down/129?cb=20180130215327\" /></a>"
+        "potion": "Levitation Potion"
       },
-      "image": "/Adopt%20Me/Potions/levitation-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "levitation-potion",
+        "section": "Sky Castle Potions",
+        "sortOrder": 10,
+        "image": "/Adopt%20Me/Potions/levitation-potion.webp"
+      }
     },
     {
-      "name": "Tiny Age Potion",
-      "slug": "tiny-age-potion",
-      "category": "Age Potions",
-      "rarity": "Common",
-      "price": null,
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Ages up a pet by 3 tasks.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Tiny_Age_Potion",
-      "fields": {
-        "potion": "Tiny Age Potion",
-        "effect": "Ages up a pet by 3 tasks.",
+      "item": {
+        "name": "Tiny Age Potion",
+        "category": "Age Potions",
         "rarity": "Common",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/f/f9/Tiny_Age_Potion.png/revision/latest?cb=20241229043640\" class=\"mw-file-description image\"><img alt=\"Tiny Age Potion\" src=\"https://static.wikia.nocookie.net/adoptme/images/f/f9/Tiny_Age_Potion.png/revision/latest/scale-to-width-down/90?cb=20241229043640\" decoding=\"async\" loading=\"lazy\" width=\"90\" height=\"90\" class=\"thumbimage\" data-image-name=\"Tiny Age Potion.png\" data-image-key=\"Tiny_Age_Potion.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/f/f9/Tiny_Age_Potion.png/revision/latest/scale-to-width-down/90?cb=20241229043640\" /></a>"
+        "effect": "Ages up a pet by 3 tasks.",
+        "potion": "Tiny Age Potion"
       },
-      "image": "/Adopt%20Me/Potions/tiny-age-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/f/f9/Tiny_Age_Potion.png/revision/latest/scale-to-width-down/90?cb=20241229043640"
+      "system": {
+        "slug": "tiny-age-potion",
+        "section": "Age Potions",
+        "sortOrder": 11,
+        "image": "/Adopt%20Me/Potions/tiny-age-potion.webp"
+      }
     },
     {
-      "name": "Age-Up Potion",
-      "slug": "age-up-potion",
-      "category": "Age Potions",
-      "rarity": "Rare",
-      "price": null,
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Ages up a pet by 30 tasks.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Age-Up_Potion",
-      "fields": {
-        "potion": "Age-Up Potion",
-        "effect": "Ages up a pet by 30 tasks.",
+      "item": {
+        "name": "Age-Up Potion",
+        "category": "Age Potions",
         "rarity": "Rare",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/b/b5/Age-Up_Potion.png/revision/latest?cb=20231206203925\" class=\"mw-file-description image\"><img alt=\"Age-Up Potion\" src=\"https://static.wikia.nocookie.net/adoptme/images/b/b5/Age-Up_Potion.png/revision/latest?cb=20231206203925\" decoding=\"async\" loading=\"lazy\" width=\"70\" height=\"70\" class=\"thumbimage\" data-image-name=\"Age-Up Potion.png\" data-image-key=\"Age-Up_Potion.png\" data-relevant=\"0\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/b/b5/Age-Up_Potion.png/revision/latest?cb=20231206203925\" /></a>"
+        "effect": "Ages up a pet by 30 tasks.",
+        "potion": "Age-Up Potion"
       },
-      "image": "/Adopt%20Me/Potions/age-up-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/b/b5/Age-Up_Potion.png/revision/latest?cb=20231206203925"
+      "system": {
+        "slug": "age-up-potion",
+        "section": "Age Potions",
+        "sortOrder": 12,
+        "image": "/Adopt%20Me/Potions/age-up-potion.webp"
+      }
     },
     {
-      "name": "Sugar Skull Potion",
-      "slug": "sugar-skull-potion",
-      "category": "Age Potions",
-      "rarity": "Ultra-Rare",
-      "price": null,
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Ages up a pet by 45 tasks.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Sugar_Skull_Potion",
-      "fields": {
-        "potion": "Sugar Skull Potion",
-        "effect": "Ages up a pet by 45 tasks.",
+      "item": {
+        "name": "Sugar Skull Potion",
+        "category": "Age Potions",
         "rarity": "Ultra-Rare",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/4/47/Sugar_Skull_Potion.png/revision/latest?cb=20241018155757\" class=\"mw-file-description image\"><img alt=\"Sugar Skull Potion\" src=\"https://static.wikia.nocookie.net/adoptme/images/4/47/Sugar_Skull_Potion.png/revision/latest/scale-to-width-down/66?cb=20241018155757\" decoding=\"async\" loading=\"lazy\" width=\"66\" height=\"90\" class=\"thumbimage\" data-image-name=\"Sugar Skull Potion.png\" data-image-key=\"Sugar_Skull_Potion.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/4/47/Sugar_Skull_Potion.png/revision/latest/scale-to-width-down/66?cb=20241018155757\" /></a>"
+        "effect": "Ages up a pet by 45 tasks.",
+        "potion": "Sugar Skull Potion"
       },
-      "image": "/Adopt%20Me/Potions/sugar-skull-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/47/Sugar_Skull_Potion.png/revision/latest/scale-to-width-down/66?cb=20241018155757"
+      "system": {
+        "slug": "sugar-skull-potion",
+        "section": "Age Potions",
+        "sortOrder": 13,
+        "image": "/Adopt%20Me/Potions/sugar-skull-potion.webp"
+      }
     },
     {
-      "name": "Super Age-Up Potion",
-      "slug": "super-age-up-potion",
-      "category": "Age Potions",
-      "rarity": "Legendary",
-      "price": null,
-      "cost": "225 Robux (limited sale)",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Limited sale; may return",
-      "event": "New Weather Needs",
-      "eventUpdate": "May 8, 2026",
-      "location": null,
-      "uses": "1",
-      "effect": "Ages up an eligible pet by 18,300 XP, enough to take a Legendary pet from Newborn to Full Grown.",
-      "obtainedBy": "Robux shop or trading",
-      "obtainableFrom": "New Weather Needs limited one-week sale",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Super_Age-Up_Potion",
-      "fields": {
-        "potion": "Super Age-Up Potion",
+      "item": {
+        "name": "Super Age-Up Potion",
+        "category": "Age Potions",
         "cost": "225 Robux (limited sale)",
         "rarity": "Legendary",
-        "uses": "1",
         "effect": "Ages up an eligible pet by 18,300 XP, enough to take a Legendary pet from Newborn to Full Grown.",
-        "obtainableFrom": "New Weather Needs limited one-week sale"
+        "obtainableFrom": "New Weather Needs limited one-week sale",
+        "availability": "Limited sale; may return",
+        "event": "New Weather Needs",
+        "eventUpdate": "May 8, 2026",
+        "uses": "1",
+        "obtainedBy": "Robux shop or trading",
+        "potion": "Super Age-Up Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/0f04c0847db19f4c630271afa9bdb954b59e5e78-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/0f04c0847db19f4c630271afa9bdb954b59e5e78-1920x1080.png"
+      "system": {
+        "slug": "super-age-up-potion",
+        "section": "Age Potions",
+        "sortOrder": 14,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/0f04c0847db19f4c630271afa9bdb954b59e5e78-1920x1080.png"
+      }
     },
     {
-      "name": "Instant Hatch Potion",
-      "slug": "instant-hatch-potion",
-      "category": "Gamepass Potion",
-      "rarity": null,
-      "price": "35",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Instantly hatches an egg.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Instant_Hatch_Potion",
-      "fields": {
-        "potion": "Instant Hatch Potion",
-        "effect": "Instantly hatches an egg.",
+      "item": {
+        "name": "Instant Hatch Potion",
+        "category": "Gamepass Potion",
         "price": "35",
-        "image": ""
+        "effect": "Instantly hatches an egg.",
+        "potion": "Instant Hatch Potion"
       },
-      "image": "/Adopt%20Me/Potions/instant-hatch-potion.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/09/Robux_2019_Logo_Black.svg/revision/latest?cb=20220801052528"
+      "system": {
+        "slug": "instant-hatch-potion",
+        "section": "Gamepass Potion",
+        "sortOrder": 15,
+        "image": "/Adopt%20Me/Potions/instant-hatch-potion.png"
+      }
     },
     {
-      "name": "Snowflake Potion",
-      "slug": "snowflake-potion",
-      "category": "Event/Gift Potions",
-      "rarity": null,
-      "price": null,
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Gives the player a trail of snowflakes when they move around.",
-      "obtainedBy": null,
-      "obtainableFrom": "2018 Christmas Gifts",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Snowflake_Potion",
-      "fields": {
-        "potion": "Snowflake Potion",
-        "obtainableFrom": "2018 Christmas Gifts",
+      "item": {
+        "name": "Snowflake Potion",
+        "category": "Event/Gift Potions",
         "effect": "Gives the player a trail of snowflakes when they move around.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/0/03/Snowflake_Pot.png/revision/latest?cb=20201126224238\" class=\"mw-file-description image\"><img alt=\"Snowflake Pot\" src=\"https://static.wikia.nocookie.net/adoptme/images/0/03/Snowflake_Pot.png/revision/latest/scale-to-width-down/98?cb=20201126224238\" decoding=\"async\" loading=\"lazy\" width=\"98\" height=\"98\" class=\"thumbimage\" data-image-name=\"Snowflake Pot.png\" data-image-key=\"Snowflake_Pot.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/0/03/Snowflake_Pot.png/revision/latest/scale-to-width-down/98?cb=20201126224238\" /></a>"
-      },
-      "image": "/Adopt%20Me/Potions/snowflake-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/03/Snowflake_Pot.png/revision/latest/scale-to-width-down/98?cb=20201126224238"
-    },
-    {
-      "name": "Teleportation Potion",
-      "slug": "teleportation-potion",
-      "category": "Event/Gift Potions",
-      "rarity": null,
-      "price": null,
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Gives a player five teleports either to their house or to the Nursery.",
-      "obtainedBy": null,
-      "obtainableFrom": "2018 Christmas Gifts",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Teleportation_Potion",
-      "fields": {
-        "potion": "Teleportation Potion",
         "obtainableFrom": "2018 Christmas Gifts",
+        "potion": "Snowflake Potion"
+      },
+      "system": {
+        "slug": "snowflake-potion",
+        "section": "Event/Gift Potions",
+        "sortOrder": 16,
+        "image": "/Adopt%20Me/Potions/snowflake-potion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Teleportation Potion",
+        "category": "Event/Gift Potions",
         "effect": "Gives a player five teleports either to their house or to the Nursery.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/1/1e/Teleportation_Potion_AM.png/revision/latest?cb=20220119143329\" class=\"mw-file-description image\"><img alt=\"Teleportation Potion AM\" src=\"https://static.wikia.nocookie.net/adoptme/images/1/1e/Teleportation_Potion_AM.png/revision/latest?cb=20220119143329\" decoding=\"async\" loading=\"lazy\" width=\"100\" height=\"100\" class=\"thumbimage\" data-image-name=\"Teleportation Potion AM.png\" data-image-key=\"Teleportation_Potion_AM.png\" data-relevant=\"0\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/1/1e/Teleportation_Potion_AM.png/revision/latest?cb=20220119143329\" /></a>"
+        "obtainableFrom": "2018 Christmas Gifts",
+        "potion": "Teleportation Potion"
       },
-      "image": "/Adopt%20Me/Potions/teleportation-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Teleportation_Potion_AM.png/revision/latest?cb=20220119143329"
+      "system": {
+        "slug": "teleportation-potion",
+        "section": "Event/Gift Potions",
+        "sortOrder": 17,
+        "image": "/Adopt%20Me/Potions/teleportation-potion.webp"
+      }
     },
     {
-      "name": "Cure All Potion",
-      "slug": "cure-all-potion",
-      "category": "Event/Gift Potions",
-      "rarity": null,
-      "price": null,
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Cures the player's or pet's needs when consumed.",
-      "obtainedBy": null,
-      "obtainableFrom": "2018 Christmas Gifts, 2019 Advent Calendar, Sunshine Games Pass, or Task Board",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Cure_All_Potion",
-      "fields": {
-        "potion": "Cure All Potion",
-        "obtainableFrom": "2018 Christmas Gifts, 2019 Advent Calendar, Sunshine Games Pass, or Task Board",
+      "item": {
+        "name": "Cure All Potion",
+        "category": "Event/Gift Potions",
         "effect": "Cures the player's or pet's needs when consumed.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/4/4a/Cure_All_Potion.png/revision/latest?cb=20201126230831\" class=\"mw-file-description image\"><img alt=\"Cure All Potion\" src=\"https://static.wikia.nocookie.net/adoptme/images/4/4a/Cure_All_Potion.png/revision/latest/scale-to-width-down/100?cb=20201126230831\" decoding=\"async\" loading=\"lazy\" width=\"100\" height=\"100\" class=\"thumbimage\" data-image-name=\"Cure All Potion.png\" data-image-key=\"Cure_All_Potion.png\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/4/4a/Cure_All_Potion.png/revision/latest/scale-to-width-down/100?cb=20201126230831\" /></a>"
+        "obtainableFrom": "2018 Christmas Gifts, 2019 Advent Calendar, Sunshine Games Pass, or Task Board",
+        "potion": "Cure All Potion"
       },
-      "image": "/Adopt%20Me/Potions/cure-all-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/4a/Cure_All_Potion.png/revision/latest/scale-to-width-down/100?cb=20201126230831"
+      "system": {
+        "slug": "cure-all-potion",
+        "section": "Event/Gift Potions",
+        "sortOrder": 18,
+        "image": "/Adopt%20Me/Potions/cure-all-potion.webp"
+      }
     },
     {
-      "name": "Heart Potion",
-      "slug": "heart-potion",
-      "category": "Event/Gift Potions",
-      "rarity": null,
-      "price": null,
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Gives the player a heart effect around their body.",
-      "obtainedBy": null,
-      "obtainableFrom": "2019 Valentine's Day Update",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Heart_Potion",
-      "fields": {
-        "potion": "Heart Potion",
-        "obtainableFrom": "2019 Valentine's Day Update",
+      "item": {
+        "name": "Heart Potion",
+        "category": "Event/Gift Potions",
         "effect": "Gives the player a heart effect around their body.",
-        "image": "<a href=\"https://static.wikia.nocookie.net/adoptme/images/b/b2/Heart_Potion.png/revision/latest?cb=20210201063547\" class=\"mw-file-description image\"><img alt=\"Heart Potion\" src=\"https://static.wikia.nocookie.net/adoptme/images/b/b2/Heart_Potion.png/revision/latest/scale-to-width-down/110?cb=20210201063547\" decoding=\"async\" loading=\"lazy\" width=\"110\" height=\"110\" class=\"thumbimage\" data-image-name=\"Heart Potion.png\" data-image-key=\"Heart_Potion.png\" data-relevant=\"0\" data-src=\"https://static.wikia.nocookie.net/adoptme/images/b/b2/Heart_Potion.png/revision/latest/scale-to-width-down/110?cb=20210201063547\" /></a>"
+        "obtainableFrom": "2019 Valentine's Day Update",
+        "potion": "Heart Potion"
       },
-      "image": "/Adopt%20Me/Potions/heart-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/b/b2/Heart_Potion.png/revision/latest/scale-to-width-down/110?cb=20210201063547"
+      "system": {
+        "slug": "heart-potion",
+        "section": "Event/Gift Potions",
+        "sortOrder": 19,
+        "image": "/Adopt%20Me/Potions/heart-potion.webp"
+      }
     },
     {
-      "name": "Big Head Cauldron",
-      "slug": "big-head-cauldron",
-      "category": "Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "200",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": "Takes 45 seconds to brew.",
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Big_Head_Potion",
-      "fields": {
-        "cauldron": "Big Head Cauldron",
-        "potionBrewed": "Big Head Potion",
+      "item": {
+        "name": "Big Head Cauldron",
+        "category": "Cauldron Potions",
         "cost": "200",
-        "timeToBrew": "Takes 45 seconds to brew."
+        "timeToBrew": "Takes 45 seconds to brew.",
+        "cauldron": "Big Head Cauldron",
+        "potionBrewed": "Big Head Potion"
       },
-      "image": "/Adopt%20Me/Potions/big-head-cauldron.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "big-head-cauldron",
+        "section": "Cauldron Potions",
+        "sortOrder": 20,
+        "image": "/Adopt%20Me/Potions/big-head-cauldron.webp"
+      }
     },
     {
-      "name": "Speed Cauldron",
-      "slug": "speed-cauldron",
-      "category": "Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "650",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": "Takes 60 seconds to brew.",
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Hyperspeed_Potion",
-      "fields": {
-        "cauldron": "Speed Cauldron",
-        "potionBrewed": "Hyperspeed Potion",
+      "item": {
+        "name": "Speed Cauldron",
+        "category": "Cauldron Potions",
         "cost": "650",
-        "timeToBrew": "Takes 60 seconds to brew."
+        "timeToBrew": "Takes 60 seconds to brew.",
+        "cauldron": "Speed Cauldron",
+        "potionBrewed": "Hyperspeed Potion"
       },
-      "image": "/Adopt%20Me/Potions/speed-cauldron.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "speed-cauldron",
+        "section": "Cauldron Potions",
+        "sortOrder": 21,
+        "image": "/Adopt%20Me/Potions/speed-cauldron.webp"
+      }
     },
     {
-      "name": "Anti-Gravity Cauldron",
-      "slug": "anti-gravity-cauldron",
-      "category": "Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "3,000",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": "Takes 75 seconds to brew.",
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Anti-gravity_Potion",
-      "fields": {
-        "cauldron": "Anti-Gravity Cauldron",
-        "potionBrewed": "Anti-gravity Potion",
+      "item": {
+        "name": "Anti-Gravity Cauldron",
+        "category": "Cauldron Potions",
         "cost": "3,000",
-        "timeToBrew": "Takes 75 seconds to brew."
+        "timeToBrew": "Takes 75 seconds to brew.",
+        "cauldron": "Anti-Gravity Cauldron",
+        "potionBrewed": "Anti-gravity Potion"
       },
-      "image": "/Adopt%20Me/Potions/anti-gravity-cauldron.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1e/Bucks.png/revision/latest/scale-to-width-down/20?cb=20211117081630"
+      "system": {
+        "slug": "anti-gravity-cauldron",
+        "section": "Cauldron Potions",
+        "sortOrder": 22,
+        "image": "/Adopt%20Me/Potions/anti-gravity-cauldron.webp"
+      }
     },
     {
-      "name": "Future Sight Potion",
-      "slug": "future-sight-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Feed this to a pet to learn what its next needs will be.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Future Sight Potion",
+      "item": {
+        "name": "Future Sight Potion",
+        "category": "Tim's Cauldron Potions",
         "cost": "Crafted with Tim's cauldron ingredients",
-        "uses": "1",
         "effect": "Feed this to a pet to learn what its next needs will be.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
+        "uses": "1",
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Future Sight Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      "system": {
+        "slug": "future-sight-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 23,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
     },
     {
-      "name": "Choosy Potion",
-      "slug": "choosy-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Feed this to a pet to give it the Choose need.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Choosy Potion",
+      "item": {
+        "name": "Choosy Potion",
+        "category": "Tim's Cauldron Potions",
         "cost": "Crafted with Tim's cauldron ingredients",
-        "uses": "1",
         "effect": "Feed this to a pet to give it the Choose need.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
+        "uses": "1",
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Choosy Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      "system": {
+        "slug": "choosy-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 24,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
     },
     {
-      "name": "Preferred Potion",
-      "slug": "preferred-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Feed this to a pet to give it a random need with a preferred item.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Preferred Potion",
+      "item": {
+        "name": "Preferred Potion",
+        "category": "Tim's Cauldron Potions",
         "cost": "Crafted with Tim's cauldron ingredients",
-        "uses": "1",
         "effect": "Feed this to a pet to give it a random need with a preferred item.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
+        "uses": "1",
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Preferred Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      "system": {
+        "slug": "preferred-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 25,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
     },
     {
-      "name": "Bonus Bucks Potion",
-      "slug": "bonus-bucks-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Feed this to a pet to temporarily give it 1.2x Bucks.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Bonus Bucks Potion",
+      "item": {
+        "name": "Bonus Bucks Potion",
+        "category": "Tim's Cauldron Potions",
         "cost": "Crafted with Tim's cauldron ingredients",
-        "uses": "1",
         "effect": "Feed this to a pet to temporarily give it 1.2x Bucks.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
+        "uses": "1",
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Bonus Bucks Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      "system": {
+        "slug": "bonus-bucks-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 26,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
     },
     {
-      "name": "Bonus Aging Potion",
-      "slug": "bonus-aging-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Feed this to a pet to temporarily give it 1.2x aging.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Bonus Aging Potion",
+      "item": {
+        "name": "Bonus Aging Potion",
+        "category": "Tim's Cauldron Potions",
         "cost": "Crafted with Tim's cauldron ingredients",
-        "uses": "1",
         "effect": "Feed this to a pet to temporarily give it 1.2x aging.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
+        "uses": "1",
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Bonus Aging Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      "system": {
+        "slug": "bonus-aging-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 27,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
     },
     {
-      "name": "Secret Talent Potion",
-      "slug": "secret-talent-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Feed this to a pet to temporarily teach it all of its tricks.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Secret Talent Potion",
+      "item": {
+        "name": "Secret Talent Potion",
+        "category": "Tim's Cauldron Potions",
         "cost": "Crafted with Tim's cauldron ingredients",
-        "uses": "1",
         "effect": "Feed this to a pet to temporarily teach it all of its tricks.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
+        "uses": "1",
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Secret Talent Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      "system": {
+        "slug": "secret-talent-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 28,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
     },
     {
-      "name": "Goofy Potion",
-      "slug": "goofy-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Feed this to a pet to temporarily have it make a silly face.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Goofy Potion",
+      "item": {
+        "name": "Goofy Potion",
+        "category": "Tim's Cauldron Potions",
         "cost": "Crafted with Tim's cauldron ingredients",
-        "uses": "1",
         "effect": "Feed this to a pet to temporarily have it make a silly face.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
+        "uses": "1",
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Goofy Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      "system": {
+        "slug": "goofy-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 29,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
     },
     {
-      "name": "Polymorph Potion",
-      "slug": "polymorph-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Feed this to a pet to temporarily make it look like a random pet.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Polymorph Potion",
+      "item": {
+        "name": "Polymorph Potion",
+        "category": "Tim's Cauldron Potions",
         "cost": "Crafted with Tim's cauldron ingredients",
-        "uses": "1",
         "effect": "Feed this to a pet to temporarily make it look like a random pet.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
+        "uses": "1",
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Polymorph Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      "system": {
+        "slug": "polymorph-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 30,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
     },
     {
-      "name": "Busy Body Potion",
-      "slug": "busy-body-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Feed this to a pet to give it a random blue need.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Busy Body Potion",
+      "item": {
+        "name": "Busy Body Potion",
+        "category": "Tim's Cauldron Potions",
         "cost": "Crafted with Tim's cauldron ingredients",
-        "uses": "1",
         "effect": "Feed this to a pet to give it a random blue need.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
-      },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
-    },
-    {
-      "name": "Home Potion",
-      "slug": "home-potion",
-      "category": "Tim's Cauldron Potions",
-      "rarity": null,
-      "price": null,
-      "cost": "Crafted with Tim's cauldron ingredients",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": "Craftable",
-      "event": "Potions Update",
-      "eventUpdate": "May 15, 2026",
-      "location": "Adoption Island",
-      "uses": "1",
-      "effect": "Drink this potion to teleport to your house's front door.",
-      "obtainedBy": "Crafting at Wizard Tim's cauldron",
-      "obtainableFrom": "Ingredients earned by completing pet needs",
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": null,
-      "fields": {
-        "potion": "Home Potion",
-        "cost": "Crafted with Tim's cauldron ingredients",
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
         "uses": "1",
-        "effect": "Drink this potion to teleport to your house's front door.",
-        "obtainableFrom": "Ingredients earned by completing pet needs"
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Busy Body Potion"
       },
-      "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png",
-      "sourceImageUrl": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      "system": {
+        "slug": "busy-body-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 31,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
     },
     {
-      "name": "Water Walking Potion",
-      "slug": "water-walking-potion",
-      "category": "Unknown",
-      "rarity": null,
-      "price": null,
-      "cost": "Unknown",
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": "Allows the player to walk in water when consumed.",
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Water_Walking_Potion",
-      "fields": {
-        "potion": "Water Walking Potion",
+      "item": {
+        "name": "Home Potion",
+        "category": "Tim's Cauldron Potions",
+        "cost": "Crafted with Tim's cauldron ingredients",
+        "effect": "Drink this potion to teleport to your house's front door.",
+        "obtainableFrom": "Ingredients earned by completing pet needs",
+        "availability": "Craftable",
+        "event": "Potions Update",
+        "eventUpdate": "May 15, 2026",
+        "location": "Adoption Island",
+        "uses": "1",
+        "obtainedBy": "Crafting at Wizard Tim's cauldron",
+        "potion": "Home Potion"
+      },
+      "system": {
+        "slug": "home-potion",
+        "section": "Tim's Cauldron Potions",
+        "sortOrder": 32,
+        "image": "https://cdn.sanity.io/images/d4ypzn9i/production/1900188402a300f45c94fc379381646ec6352999-1920x1080.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Water Walking Potion",
+        "category": "Unknown",
         "cost": "Unknown",
         "effect": "Allows the player to walk in water when consumed.",
-        "image": ""
+        "potion": "Water Walking Potion"
       },
-      "image": "/Adopt%20Me/Potions/water-walking-potion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/5/57/Water_Walking_Potion_AM.png/revision/latest/scale-to-width-down/100?cb=20210124223445"
+      "system": {
+        "slug": "water-walking-potion",
+        "section": "Unknown",
+        "sortOrder": 33,
+        "image": "/Adopt%20Me/Potions/water-walking-potion.webp"
+      }
     }
   ]
 }

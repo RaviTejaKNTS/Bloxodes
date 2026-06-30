@@ -1,323 +1,236 @@
 {
   "meta": {
-    "title": "Blox Fruits fighting styles data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Fighting_Styles",
-        "url": "https://blox-fruits.fandom.com/wiki/Fighting_Styles",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
-      "source",
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "fighting-styles",
+    "route": "/wiki/blox-fruits/fighting-styles",
+    "catalogCode": "blox-fruits-fighting-styles",
+    "itemFields": [
       "price",
       "requirements",
-      "wikiUrl"
-    ]
+      "type",
+      "money"
+    ],
+    "columns": [
+      "price",
+      "requirements",
+      "type",
+      "money"
+    ],
+    "display": {
+      "groupLabel": "type",
+      "sectionOrder": [
+        "Source N/A",
+        "Source Dark Step Teacher",
+        "Source Mad Scientist",
+        "Source Water Kung Fu Teacher",
+        "Source Sabi",
+        "Source Martial Arts Master",
+        "Source Phoeyu, the Reformed",
+        "Source Sharkman Teacher",
+        "Source Previous Hero",
+        "Source Uzoth",
+        "Source Ancient Monk",
+        "Source Shafi"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "price",
+        "requirements",
+        "type",
+        "money"
+      ],
+      "tableFields": [
+        "price",
+        "requirements",
+        "type",
+        "money"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Combat",
-      "slug": "combat",
-      "rarity": null,
-      "type": "Source N/A",
-      "sea": null,
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": "N/A",
-      "requirements": "None",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Combat",
         "price": "N/A",
-        "requirements": "None"
+        "requirements": "None",
+        "type": "Source N/A"
       },
-      "rawText": "Source N/APrice N/ARequirements None",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Combat",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/combat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7c/Combat.png/revision/latest/scale-to-width-down/150?cb=20251225111312"
+      "system": {
+        "slug": "combat",
+        "section": "Source N/A",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Fighting%20Styles/combat.webp"
+      }
     },
     {
-      "name": "Dark Step",
-      "slug": "dark-step",
-      "rarity": null,
-      "type": "Source Dark Step Teacher",
-      "sea": null,
-      "money": "150,000",
-      "robux": null,
-      "source": null,
-      "price": "150,000",
-      "requirements": "None",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dark Step",
         "price": "150,000",
-        "requirements": "None"
+        "requirements": "None",
+        "type": "Source Dark Step Teacher",
+        "money": "150,000"
       },
-      "rawText": "Source Dark Step TeacherPrice 150,000Requirements None",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Step_Teacher",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/dark-step.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/39/Dark_Step.png/revision/latest/scale-to-width-down/150?cb=20220228201917"
+      "system": {
+        "slug": "dark-step",
+        "section": "Source Dark Step Teacher",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Fighting%20Styles/dark-step.webp"
+      }
     },
     {
-      "name": "Electric",
-      "slug": "electric",
-      "rarity": null,
-      "type": "Source Mad Scientist",
-      "sea": null,
-      "money": "500,000",
-      "robux": null,
-      "source": null,
-      "price": "500,000",
-      "requirements": "None",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Electric",
         "price": "500,000",
-        "requirements": "None"
+        "requirements": "None",
+        "type": "Source Mad Scientist",
+        "money": "500,000"
       },
-      "rawText": "Source Mad ScientistPrice 500,000Requirements None",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mad_Scientist",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/electric.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2f/Electric.png/revision/latest/scale-to-width-down/150?cb=20220228215637"
+      "system": {
+        "slug": "electric",
+        "section": "Source Mad Scientist",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Fighting%20Styles/electric.webp"
+      }
     },
     {
-      "name": "Water Kung Fu",
-      "slug": "water-kung-fu",
-      "rarity": null,
-      "type": "Source Water Kung Fu Teacher",
-      "sea": null,
-      "money": "750,000",
-      "robux": null,
-      "source": null,
-      "price": "750,000",
-      "requirements": "None",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Water Kung Fu",
         "price": "750,000",
-        "requirements": "None"
+        "requirements": "None",
+        "type": "Source Water Kung Fu Teacher",
+        "money": "750,000"
       },
-      "rawText": "Source Water Kung Fu TeacherPrice 750,000Requirements None",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Water_Kung_Fu_Teacher",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/water-kung-fu.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8f/Water_Kung_Fu.png/revision/latest/scale-to-width-down/150?cb=20220228233922"
+      "system": {
+        "slug": "water-kung-fu",
+        "section": "Source Water Kung Fu Teacher",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Fighting%20Styles/water-kung-fu.webp"
+      }
     },
     {
-      "name": "Dragon Breath",
-      "slug": "dragon-breath",
-      "rarity": null,
-      "type": "Source Sabi",
-      "sea": null,
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": "1,500",
-      "requirements": "None",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dragon Breath",
         "price": "1,500",
-        "requirements": "None"
+        "requirements": "None",
+        "type": "Source Sabi"
       },
-      "rawText": "Source SabiPrice 1,500Requirements None",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sabi",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/dragon-breath.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/32/Dragon_Breath.png/revision/latest/scale-to-width-down/150?cb=20220228202047"
+      "system": {
+        "slug": "dragon-breath",
+        "section": "Source Sabi",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Fighting%20Styles/dragon-breath.webp"
+      }
     },
     {
-      "name": "Superhuman",
-      "slug": "superhuman",
-      "rarity": null,
-      "type": "Source Martial Arts Master",
-      "sea": null,
-      "money": "3,000,000",
-      "robux": null,
-      "source": null,
-      "price": "3,000,000",
-      "requirements": "Mastery 300 Dark StepMastery 300 ElectricMastery 300 Water Kung FuMastery 300 Dragon Breath",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Superhuman",
         "price": "3,000,000",
-        "requirements": "Mastery 300 Dark StepMastery 300 ElectricMastery 300 Water Kung FuMastery 300 Dragon Breath"
+        "requirements": "Mastery 300 Dark StepMastery 300 ElectricMastery 300 Water Kung FuMastery 300 Dragon Breath",
+        "type": "Source Martial Arts Master",
+        "money": "3,000,000"
       },
-      "rawText": "Source Martial Arts MasterPrice 3,000,000Requirements Mastery 300 Dark StepMastery 300 ElectricMastery 300 Water Kung FuMastery 300 Dragon Breath",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Martial_Arts_Master",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/superhuman.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ad/Superhuman.png/revision/latest/scale-to-width-down/150?cb=20220228215748"
+      "system": {
+        "slug": "superhuman",
+        "section": "Source Martial Arts Master",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Fighting%20Styles/superhuman.webp"
+      }
     },
     {
-      "name": "Death Step",
-      "slug": "death-step",
-      "rarity": null,
-      "type": "Source Phoeyu, the Reformed",
-      "sea": null,
-      "money": "2,500,000",
-      "robux": null,
-      "source": null,
-      "price": "2,500,000 | 5,000",
-      "requirements": "Mastery 400 Dark Step",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Death Step",
         "price": "2,500,000 | 5,000",
-        "requirements": "Mastery 400 Dark Step"
+        "requirements": "Mastery 400 Dark Step",
+        "type": "Source Phoeyu, the Reformed",
+        "money": "2,500,000"
       },
-      "rawText": "Source Phoeyu, the ReformedPrice 2,500,000 | 5,000Requirements Mastery 400 Dark Step",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Phoeyu,_the_Reformed",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/death-step.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/89/Death_Step.png/revision/latest/scale-to-width-down/150?cb=20220228233624"
+      "system": {
+        "slug": "death-step",
+        "section": "Source Phoeyu, the Reformed",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Fighting%20Styles/death-step.webp"
+      }
     },
     {
-      "name": "Sharkman Karate",
-      "slug": "sharkman-karate",
-      "rarity": null,
-      "type": "Source Sharkman Teacher",
-      "sea": null,
-      "money": "2,500,000",
-      "robux": null,
-      "source": null,
-      "price": "2,500,000 | 5,000",
-      "requirements": "Mastery 400 Water Kung FuGiving Water Key to Sharkman Teacher",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Sharkman Karate",
         "price": "2,500,000 | 5,000",
-        "requirements": "Mastery 400 Water Kung FuGiving Water Key to Sharkman Teacher"
+        "requirements": "Mastery 400 Water Kung FuGiving Water Key to Sharkman Teacher",
+        "type": "Source Sharkman Teacher",
+        "money": "2,500,000"
       },
-      "rawText": "Source Sharkman TeacherPrice 2,500,000 | 5,000Requirements Mastery 400 Water Kung FuGiving Water Key to Sharkman Teacher",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sharkman_Teacher",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/sharkman-karate.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b3/Sharkman_Karate.png/revision/latest/scale-to-width-down/150?cb=20220228233224"
+      "system": {
+        "slug": "sharkman-karate",
+        "section": "Source Sharkman Teacher",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Fighting%20Styles/sharkman-karate.webp"
+      }
     },
     {
-      "name": "Electric Claw",
-      "slug": "electric-claw",
-      "rarity": null,
-      "type": "Source Previous Hero",
-      "sea": null,
-      "money": "3,000,000",
-      "robux": null,
-      "source": null,
-      "price": "3,000,000 | 5,000",
-      "requirements": "Mastery 400 ElectricCompleted Previous Hero's Timed Quest",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Electric Claw",
         "price": "3,000,000 | 5,000",
-        "requirements": "Mastery 400 ElectricCompleted Previous Hero's Timed Quest"
+        "requirements": "Mastery 400 ElectricCompleted Previous Hero's Timed Quest",
+        "type": "Source Previous Hero",
+        "money": "3,000,000"
       },
-      "rawText": "Source Previous HeroPrice 3,000,000 | 5,000Requirements Mastery 400 ElectricCompleted Previous Hero's Timed Quest",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Previous_Hero",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/electric-claw.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/00/Electric_Claw.png/revision/latest/scale-to-width-down/150?cb=20220228215956"
+      "system": {
+        "slug": "electric-claw",
+        "section": "Source Previous Hero",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Fighting%20Styles/electric-claw.webp"
+      }
     },
     {
-      "name": "Dragon Talon",
-      "slug": "dragon-talon",
-      "rarity": null,
-      "type": "Source Uzoth",
-      "sea": null,
-      "money": "3,000,000",
-      "robux": null,
-      "source": null,
-      "price": "3,000,000 | 5,000",
-      "requirements": "Mastery 400 Dragon BreathGiving Fire Essence to Uzoth",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dragon Talon",
         "price": "3,000,000 | 5,000",
-        "requirements": "Mastery 400 Dragon BreathGiving Fire Essence to Uzoth"
+        "requirements": "Mastery 400 Dragon BreathGiving Fire Essence to Uzoth",
+        "type": "Source Uzoth",
+        "money": "3,000,000"
       },
-      "rawText": "Source UzothPrice 3,000,000 | 5,000Requirements Mastery 400 Dragon BreathGiving Fire Essence to Uzoth",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Uzoth",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/dragon-talon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e9/Dragon_Talon.png/revision/latest/scale-to-width-down/150?cb=20220228215538"
+      "system": {
+        "slug": "dragon-talon",
+        "section": "Source Uzoth",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Fighting%20Styles/dragon-talon.webp"
+      }
     },
     {
-      "name": "Godhuman",
-      "slug": "godhuman",
-      "rarity": null,
-      "type": "Source Ancient Monk",
-      "sea": null,
-      "money": "5,000,000",
-      "robux": null,
-      "source": null,
-      "price": "20 20 10 10 5,000,000 | 5,000",
-      "requirements": "Mastery 400 Death StepMastery 400 Electric ClawMastery 400 Sharkman KarateMastery 400 Dragon TalonMastery 400 Superhuman",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Godhuman",
         "price": "20 20 10 10 5,000,000 | 5,000",
-        "requirements": "Mastery 400 Death StepMastery 400 Electric ClawMastery 400 Sharkman KarateMastery 400 Dragon TalonMastery 400 Superhuman"
+        "requirements": "Mastery 400 Death StepMastery 400 Electric ClawMastery 400 Sharkman KarateMastery 400 Dragon TalonMastery 400 Superhuman",
+        "type": "Source Ancient Monk",
+        "money": "5,000,000"
       },
-      "rawText": "Source Ancient MonkPrice 20 20 10 10 5,000,000 | 5,000Requirements Mastery 400 Death StepMastery 400 Electric ClawMastery 400 Sharkman KarateMastery 400 Dragon TalonMastery 400 Superhuman",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ancient_Monk",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/godhuman.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/41/Godhuman.png/revision/latest/scale-to-width-down/150?cb=20220913103851"
+      "system": {
+        "slug": "godhuman",
+        "section": "Source Ancient Monk",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Fighting%20Styles/godhuman.webp"
+      }
     },
     {
-      "name": "Sanguine Art",
-      "slug": "sanguine-art",
-      "rarity": null,
-      "type": "Source Shafi",
-      "sea": null,
-      "money": "5,000,000",
-      "robux": null,
-      "source": null,
-      "price": "2 20 20 5,000,000 | 5,000",
-      "requirements": "Leviathan Heart",
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Sanguine Art",
         "price": "2 20 20 5,000,000 | 5,000",
-        "requirements": "Leviathan Heart"
+        "requirements": "Leviathan Heart",
+        "type": "Source Shafi",
+        "money": "5,000,000"
       },
-      "rawText": "Source ShafiPrice 2 20 20 5,000,000 | 5,000Requirements Leviathan Heart",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shafi",
-      "sourcePage": "Fighting_Styles",
-      "image": "/Blox%20Fruits/Fighting%20Styles/sanguine-art.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/83/Sanguine_Art.png/revision/latest/scale-to-width-down/150?cb=20231025151119"
+      "system": {
+        "slug": "sanguine-art",
+        "section": "Source Shafi",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Fighting%20Styles/sanguine-art.webp"
+      }
     }
   ]
 }

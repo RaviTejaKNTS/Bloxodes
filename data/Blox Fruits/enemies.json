@@ -1,1831 +1,1799 @@
 {
   "meta": {
-    "title": "Blox Fruits enemies data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Enemies",
-        "url": "https://blox-fruits.fandom.com/wiki/Enemies",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "enemies",
+    "route": "/wiki/blox-fruits/enemies",
+    "catalogCode": "blox-fruits-enemies",
+    "itemFields": [
       "sea",
       "level",
       "elementalBladeLevel",
       "notes",
-      "wikiUrl"
-    ]
+      "enemy"
+    ],
+    "columns": [
+      "sea",
+      "level",
+      "elementalBladeLevel",
+      "notes",
+      "enemy"
+    ],
+    "display": {
+      "groupLabel": "sea",
+      "sectionOrder": [
+        "First Sea",
+        "Second Sea",
+        "Third Sea",
+        "Other"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "notes",
+      "cardDescriptionField": "notes",
+      "cardFields": [
+        "sea",
+        "level",
+        "elementalBladeLevel",
+        "notes",
+        "enemy"
+      ],
+      "tableFields": [
+        "sea",
+        "level",
+        "elementalBladeLevel",
+        "notes",
+        "enemy"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Bandits/Trainees",
-      "slug": "bandits-trainees",
-      "fields": {
-        "enemy": "Bandits/Trainees",
+      "item": {
+        "name": "Bandits/Trainees",
+        "sea": "First Sea",
         "level": "Lv. 5",
         "elementalBladeLevel": "Lv. 2",
-        "notes": "Their Quest requirement is Lv. 0, but their Lv. is set at Lv. 5, even so, their Elemental Immunity is at Lv. 2"
+        "notes": "Their Quest requirement is Lv. 0, but their Lv. is set at Lv. 5, even so, their Elemental Immunity is at Lv. 2",
+        "enemy": "Bandits/Trainees"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bandit",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 5",
-      "elementalBladeLevel": "Lv. 2",
-      "notes": "Their Quest requirement is Lv. 0, but their Lv. is set at Lv. 5, even so, their Elemental Immunity is at Lv. 2"
+      "system": {
+        "slug": "bandits-trainees",
+        "section": "First Sea",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Monkeys",
-      "slug": "monkeys",
-      "fields": {
-        "enemy": "Monkeys",
+      "item": {
+        "name": "Monkeys",
+        "sea": "First Sea",
         "level": "Lv. 14",
         "elementalBladeLevel": "Lv. 14",
-        "notes": "They are the only enemy in the game (besides enemies found in raids) to possess a level that is not a multiple of 5."
+        "notes": "They are the only enemy in the game (besides enemies found in raids) to possess a level that is not a multiple of 5.",
+        "enemy": "Monkeys"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Monkey",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 14",
-      "elementalBladeLevel": "Lv. 14",
-      "notes": "They are the only enemy in the game (besides enemies found in raids) to possess a level that is not a multiple of 5."
+      "system": {
+        "slug": "monkeys",
+        "section": "First Sea",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Gorillas",
-      "slug": "gorillas",
-      "fields": {
-        "enemy": "Gorillas",
+      "item": {
+        "name": "Gorillas",
+        "sea": "First Sea",
         "level": "Lv. 20",
         "elementalBladeLevel": "Lv. 20",
-        "notes": ""
+        "enemy": "Gorillas"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gorilla",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 20",
-      "elementalBladeLevel": "Lv. 20",
-      "notes": null
+      "system": {
+        "slug": "gorillas",
+        "section": "First Sea",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Pirates",
-      "slug": "pirates",
-      "fields": {
-        "enemy": "Pirates",
+      "item": {
+        "name": "Pirates",
+        "sea": "First Sea",
         "level": "Lv. 35",
         "elementalBladeLevel": "Lv. 35",
-        "notes": ""
+        "enemy": "Pirates"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pirate",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 35",
-      "elementalBladeLevel": "Lv. 35",
-      "notes": null
+      "system": {
+        "slug": "pirates",
+        "section": "First Sea",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Brutes",
-      "slug": "brutes",
-      "fields": {
-        "enemy": "Brutes",
+      "item": {
+        "name": "Brutes",
+        "sea": "First Sea",
         "level": "Lv. 45",
         "elementalBladeLevel": "Lv. 45",
-        "notes": ""
+        "enemy": "Brutes"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Brute",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 45",
-      "elementalBladeLevel": "Lv. 45",
-      "notes": null
+      "system": {
+        "slug": "brutes",
+        "section": "First Sea",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Desert Bandits",
-      "slug": "desert-bandits",
-      "fields": {
-        "enemy": "Desert Bandits",
+      "item": {
+        "name": "Desert Bandits",
+        "sea": "First Sea",
         "level": "Lv. 60",
         "elementalBladeLevel": "Lv. 60",
-        "notes": ""
+        "enemy": "Desert Bandits"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Desert_Bandit",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 60",
-      "elementalBladeLevel": "Lv. 60",
-      "notes": null
+      "system": {
+        "slug": "desert-bandits",
+        "section": "First Sea",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Desert Officers",
-      "slug": "desert-officers",
-      "fields": {
-        "enemy": "Desert Officers",
+      "item": {
+        "name": "Desert Officers",
+        "sea": "First Sea",
         "level": "Lv. 75",
         "elementalBladeLevel": "Lv. 75",
-        "notes": ""
+        "enemy": "Desert Officers"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Desert_Officer",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 75",
-      "elementalBladeLevel": "Lv. 75",
-      "notes": null
+      "system": {
+        "slug": "desert-officers",
+        "section": "First Sea",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Snow Bandits",
-      "slug": "snow-bandits",
-      "fields": {
-        "enemy": "Snow Bandits",
+      "item": {
+        "name": "Snow Bandits",
+        "sea": "First Sea",
         "level": "Lv. 90",
         "elementalBladeLevel": "Lv. 90",
-        "notes": ""
+        "enemy": "Snow Bandits"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snow_Bandit",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 90",
-      "elementalBladeLevel": "Lv. 90",
-      "notes": null
+      "system": {
+        "slug": "snow-bandits",
+        "section": "First Sea",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Snowmen",
-      "slug": "snowmen",
-      "fields": {
-        "enemy": "Snowmen",
+      "item": {
+        "name": "Snowmen",
+        "sea": "First Sea",
         "level": "Lv. 100",
         "elementalBladeLevel": "Lv. 100",
-        "notes": ""
+        "enemy": "Snowmen"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snowman",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 100",
-      "elementalBladeLevel": "Lv. 100",
-      "notes": null
+      "system": {
+        "slug": "snowmen",
+        "section": "First Sea",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Chief Petty Officers",
-      "slug": "chief-petty-officers",
-      "fields": {
-        "enemy": "Chief Petty Officers",
+      "item": {
+        "name": "Chief Petty Officers",
+        "sea": "First Sea",
         "level": "Lv. 120",
         "elementalBladeLevel": "Lv. 120",
-        "notes": ""
+        "enemy": "Chief Petty Officers"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chief_Petty_Officer",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 120",
-      "elementalBladeLevel": "Lv. 120",
-      "notes": null
+      "system": {
+        "slug": "chief-petty-officers",
+        "section": "First Sea",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Sky Bandits",
-      "slug": "sky-bandits",
-      "fields": {
-        "enemy": "Sky Bandits",
+      "item": {
+        "name": "Sky Bandits",
+        "sea": "First Sea",
         "level": "Lv. 150",
         "elementalBladeLevel": "Lv. 150",
-        "notes": ""
+        "enemy": "Sky Bandits"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sky_Bandit",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 150",
-      "elementalBladeLevel": "Lv. 150",
-      "notes": null
+      "system": {
+        "slug": "sky-bandits",
+        "section": "First Sea",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Dark Masters",
-      "slug": "dark-masters",
-      "fields": {
-        "enemy": "Dark Masters",
+      "item": {
+        "name": "Dark Masters",
+        "sea": "First Sea",
         "level": "Lv. 175",
         "elementalBladeLevel": "Lv. 177",
-        "notes": ""
+        "enemy": "Dark Masters"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Master",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 175",
-      "elementalBladeLevel": "Lv. 177",
-      "notes": null
+      "system": {
+        "slug": "dark-masters",
+        "section": "First Sea",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Prisoner",
-      "slug": "prisoner",
-      "fields": {
-        "enemy": "Prisoner",
+      "item": {
+        "name": "Prisoner",
+        "sea": "First Sea",
         "level": "Lv. 190",
         "elementalBladeLevel": "Lv. 192",
-        "notes": ""
+        "enemy": "Prisoner"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Prisoner",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 190",
-      "elementalBladeLevel": "Lv. 192",
-      "notes": null
+      "system": {
+        "slug": "prisoner",
+        "section": "First Sea",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Dangerous Prisoner",
-      "slug": "dangerous-prisoner",
-      "fields": {
-        "enemy": "Dangerous Prisoner",
+      "item": {
+        "name": "Dangerous Prisoner",
+        "sea": "First Sea",
         "level": "Lv. 210",
         "elementalBladeLevel": "Lv. 212",
-        "notes": ""
+        "enemy": "Dangerous Prisoner"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dangerous_Prisoner",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 210",
-      "elementalBladeLevel": "Lv. 212",
-      "notes": null
+      "system": {
+        "slug": "dangerous-prisoner",
+        "section": "First Sea",
+        "sortOrder": 14,
+        "image": null
+      }
     },
     {
-      "name": "Toga Warrior",
-      "slug": "toga-warrior",
-      "fields": {
-        "enemy": "Toga Warrior",
+      "item": {
+        "name": "Toga Warrior",
+        "sea": "First Sea",
         "level": "Lv. 250",
         "elementalBladeLevel": "Lv. 252",
-        "notes": ""
+        "enemy": "Toga Warrior"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Toga_Warrior",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 250",
-      "elementalBladeLevel": "Lv. 252",
-      "notes": null
+      "system": {
+        "slug": "toga-warrior",
+        "section": "First Sea",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "Gladiator",
-      "slug": "gladiator",
-      "fields": {
-        "enemy": "Gladiator",
+      "item": {
+        "name": "Gladiator",
+        "sea": "First Sea",
         "level": "Lv. 275",
         "elementalBladeLevel": "Lv. 277",
-        "notes": "These don't appear to spawn until you come a certain distance away from them. Unless you have the spawn locations memorised, they are a bit annoying to grind."
+        "notes": "These don't appear to spawn until you come a certain distance away from them. Unless you have the spawn locations memorised, they are a bit annoying to grind.",
+        "enemy": "Gladiator"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gladiator",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 275",
-      "elementalBladeLevel": "Lv. 277",
-      "notes": "These don't appear to spawn until you come a certain distance away from them. Unless you have the spawn locations memorised, they are a bit annoying to grind."
+      "system": {
+        "slug": "gladiator",
+        "section": "First Sea",
+        "sortOrder": 16,
+        "image": null
+      }
     },
     {
-      "name": "Military Soldier",
-      "slug": "military-soldier",
-      "fields": {
-        "enemy": "Military Soldier",
+      "item": {
+        "name": "Military Soldier",
+        "sea": "First Sea",
         "level": "Lv. 300",
         "elementalBladeLevel": "Lv. 304",
-        "notes": "Has a 50% chance to spawn with Aura, which neutralises immunity. Using Blade is recommended here, as they use swords (which Blade is immune to), and Blade is not affected by Aura."
+        "notes": "Has a 50% chance to spawn with Aura, which neutralises immunity. Using Blade is recommended here, as they use swords (which Blade is immune to), and Blade is not affected by Aura.",
+        "enemy": "Military Soldier"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Military_Soldier",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 300",
-      "elementalBladeLevel": "Lv. 304",
-      "notes": "Has a 50% chance to spawn with Aura, which neutralises immunity. Using Blade is recommended here, as they use swords (which Blade is immune to), and Blade is not affected by Aura."
+      "system": {
+        "slug": "military-soldier",
+        "section": "First Sea",
+        "sortOrder": 17,
+        "image": null
+      }
     },
     {
-      "name": "Military Spy",
-      "slug": "military-spy",
-      "fields": {
-        "enemy": "Military Spy",
+      "item": {
+        "name": "Military Spy",
+        "sea": "First Sea",
         "level": "Lv. 325",
         "elementalBladeLevel": "Lv. N/A",
-        "notes": "Uses Aura and Combat, plus Flash Step. Very annoying to grind. Recommended to grind Military Soldiers instead."
+        "notes": "Uses Aura and Combat, plus Flash Step. Very annoying to grind. Recommended to grind Military Soldiers instead.",
+        "enemy": "Military Spy"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Military_Spy",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 325",
-      "elementalBladeLevel": "Lv. N/A",
-      "notes": "Uses Aura and Combat, plus Flash Step. Very annoying to grind. Recommended to grind Military Soldiers instead."
+      "system": {
+        "slug": "military-spy",
+        "section": "First Sea",
+        "sortOrder": 18,
+        "image": null
+      }
     },
     {
-      "name": "Fishman Warrior",
-      "slug": "fishman-warrior",
-      "fields": {
-        "enemy": "Fishman Warrior",
+      "item": {
+        "name": "Fishman Warrior",
+        "sea": "First Sea",
         "level": "Lv. 375",
         "elementalBladeLevel": "Lv. 381",
-        "notes": ""
+        "enemy": "Fishman Warrior"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishman_Warrior",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 375",
-      "elementalBladeLevel": "Lv. 381",
-      "notes": null
+      "system": {
+        "slug": "fishman-warrior",
+        "section": "First Sea",
+        "sortOrder": 19,
+        "image": null
+      }
     },
     {
-      "name": "Fishman Commando",
-      "slug": "fishman-commando",
-      "fields": {
-        "enemy": "Fishman Commando",
+      "item": {
+        "name": "Fishman Commando",
+        "sea": "First Sea",
         "level": "Lv. 400",
         "elementalBladeLevel": "Lv. 406",
-        "notes": ""
+        "enemy": "Fishman Commando"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishman_Commando",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 400",
-      "elementalBladeLevel": "Lv. 406",
-      "notes": null
+      "system": {
+        "slug": "fishman-commando",
+        "section": "First Sea",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "God's Guard",
-      "slug": "god-s-guard",
-      "fields": {
-        "enemy": "God's Guard",
+      "item": {
+        "name": "God's Guard",
+        "sea": "First Sea",
         "level": "Lv. 450",
         "elementalBladeLevel": "Lv. 458",
-        "notes": ""
+        "enemy": "God's Guard"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/God%27s_Guard",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 450",
-      "elementalBladeLevel": "Lv. 458",
-      "notes": null
+      "system": {
+        "slug": "god-s-guard",
+        "section": "First Sea",
+        "sortOrder": 21,
+        "image": null
+      }
     },
     {
-      "name": "Shanda",
-      "slug": "shanda",
-      "fields": {
-        "enemy": "Shanda",
+      "item": {
+        "name": "Shanda",
+        "sea": "First Sea",
         "level": "Lv. 475",
         "elementalBladeLevel": "Lv. 483",
-        "notes": ""
+        "enemy": "Shanda"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shanda",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 475",
-      "elementalBladeLevel": "Lv. 483",
-      "notes": null
+      "system": {
+        "slug": "shanda",
+        "section": "First Sea",
+        "sortOrder": 22,
+        "image": null
+      }
     },
     {
-      "name": "Royal Squad",
-      "slug": "royal-squad",
-      "fields": {
-        "enemy": "Royal Squad",
+      "item": {
+        "name": "Royal Squad",
+        "sea": "First Sea",
         "level": "Lv. 525",
         "elementalBladeLevel": "Lv. 535",
-        "notes": ""
+        "enemy": "Royal Squad"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Royal_Squad",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 525",
-      "elementalBladeLevel": "Lv. 535",
-      "notes": null
+      "system": {
+        "slug": "royal-squad",
+        "section": "First Sea",
+        "sortOrder": 23,
+        "image": null
+      }
     },
     {
-      "name": "Royal Soldier",
-      "slug": "royal-soldier",
-      "fields": {
-        "enemy": "Royal Soldier",
+      "item": {
+        "name": "Royal Soldier",
+        "sea": "First Sea",
         "level": "Lv. 550",
         "elementalBladeLevel": "Lv. 560",
-        "notes": ""
+        "enemy": "Royal Soldier"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Royal_Soldier",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 550",
-      "elementalBladeLevel": "Lv. 560",
-      "notes": null
+      "system": {
+        "slug": "royal-soldier",
+        "section": "First Sea",
+        "sortOrder": 24,
+        "image": null
+      }
     },
     {
-      "name": "Galley Pirate",
-      "slug": "galley-pirate",
-      "fields": {
-        "enemy": "Galley Pirate",
+      "item": {
+        "name": "Galley Pirate",
+        "sea": "First Sea",
         "level": "Lv. 625",
         "elementalBladeLevel": "Lv. 637",
-        "notes": ""
+        "enemy": "Galley Pirate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Galley_Pirate",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 625",
-      "elementalBladeLevel": "Lv. 637",
-      "notes": null
+      "system": {
+        "slug": "galley-pirate",
+        "section": "First Sea",
+        "sortOrder": 25,
+        "image": null
+      }
     },
     {
-      "name": "Galley Captain",
-      "slug": "galley-captain",
-      "fields": {
-        "enemy": "Galley Captain",
+      "item": {
+        "name": "Galley Captain",
+        "sea": "First Sea",
         "level": "Lv. 650",
         "elementalBladeLevel": "Lv. 664",
-        "notes": "Uses Aura. Blade is useful here."
+        "notes": "Uses Aura. Blade is useful here.",
+        "enemy": "Galley Captain"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Galley_Captain",
-      "imageCandidate": null,
-      "sea": "First Sea",
-      "level": "Lv. 650",
-      "elementalBladeLevel": "Lv. 664",
-      "notes": "Uses Aura. Blade is useful here."
+      "system": {
+        "slug": "galley-captain",
+        "section": "First Sea",
+        "sortOrder": 26,
+        "image": null
+      }
     },
     {
-      "name": "Raider",
-      "slug": "raider",
-      "fields": {
-        "enemy": "Raider",
+      "item": {
+        "name": "Raider",
+        "sea": "Second Sea",
         "level": "Lv. 700",
         "elementalBladeLevel": "Lv. 716",
-        "notes": "Their Quick Tackle move is hard to dodge without Instinct if your immunity hasn't kicked in yet."
+        "notes": "Their Quick Tackle move is hard to dodge without Instinct if your immunity hasn't kicked in yet.",
+        "enemy": "Raider"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Raider",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 700",
-      "elementalBladeLevel": "Lv. 716",
-      "notes": "Their Quick Tackle move is hard to dodge without Instinct if your immunity hasn't kicked in yet."
+      "system": {
+        "slug": "raider",
+        "section": "Second Sea",
+        "sortOrder": 27,
+        "image": null
+      }
     },
     {
-      "name": "Mercenary",
-      "slug": "mercenary",
-      "fields": {
-        "enemy": "Mercenary",
+      "item": {
+        "name": "Mercenary",
+        "sea": "Second Sea",
         "level": "Lv. 725",
         "elementalBladeLevel": "Lv. 741",
-        "notes": ""
+        "enemy": "Mercenary"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mercenary",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 725",
-      "elementalBladeLevel": "Lv. 741",
-      "notes": null
+      "system": {
+        "slug": "mercenary",
+        "section": "Second Sea",
+        "sortOrder": 28,
+        "image": null
+      }
     },
     {
-      "name": "Swan Pirate",
-      "slug": "swan-pirate",
-      "fields": {
-        "enemy": "Swan Pirate",
+      "item": {
+        "name": "Swan Pirate",
+        "sea": "Second Sea",
         "level": "Lv. 775",
         "elementalBladeLevel": "Lv. 793",
-        "notes": ""
+        "enemy": "Swan Pirate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Swan_Pirate",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 775",
-      "elementalBladeLevel": "Lv. 793",
-      "notes": null
+      "system": {
+        "slug": "swan-pirate",
+        "section": "Second Sea",
+        "sortOrder": 29,
+        "image": null
+      }
     },
     {
-      "name": "Factory Staff",
-      "slug": "factory-staff",
-      "fields": {
-        "enemy": "Factory Staff",
+      "item": {
+        "name": "Factory Staff",
+        "sea": "Second Sea",
         "level": "Lv. 800",
         "elementalBladeLevel": "Lv. 820",
-        "notes": "Uses the Blox Fruits Smoke, Bomb and Spike, all of which can bypass immunity with its attacks. Easier to grind Swan Pirates as Factory Staffs are spaced very far apart."
+        "notes": "Uses the Blox Fruits Smoke, Bomb and Spike, all of which can bypass immunity with its attacks. Easier to grind Swan Pirates as Factory Staffs are spaced very far apart.",
+        "enemy": "Factory Staff"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Factory_Staff",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 800",
-      "elementalBladeLevel": "Lv. 820",
-      "notes": "Uses the Blox Fruits Smoke, Bomb and Spike, all of which can bypass immunity with its attacks. Easier to grind Swan Pirates as Factory Staffs are spaced very far apart."
+      "system": {
+        "slug": "factory-staff",
+        "section": "Second Sea",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "Marine Lieutenant",
-      "slug": "marine-lieutenant",
-      "fields": {
-        "enemy": "Marine Lieutenant",
+      "item": {
+        "name": "Marine Lieutenant",
+        "sea": "Second Sea",
         "level": "Lv. 875",
         "elementalBladeLevel": "Lv. 897",
-        "notes": ""
+        "enemy": "Marine Lieutenant"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Lieutenant",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 875",
-      "elementalBladeLevel": "Lv. 897",
-      "notes": null
+      "system": {
+        "slug": "marine-lieutenant",
+        "section": "Second Sea",
+        "sortOrder": 31,
+        "image": null
+      }
     },
     {
-      "name": "Marine Captain",
-      "slug": "marine-captain",
-      "fields": {
-        "enemy": "Marine Captain",
+      "item": {
+        "name": "Marine Captain",
+        "sea": "Second Sea",
         "level": "Lv. 900",
         "elementalBladeLevel": "Lv. 924",
-        "notes": "Uses Aura. Blade is recommended. It is easier to grind Marine Lieutenants as you are immune to their attacks anyway."
+        "notes": "Uses Aura. Blade is recommended. It is easier to grind Marine Lieutenants as you are immune to their attacks anyway.",
+        "enemy": "Marine Captain"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Captain",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 900",
-      "elementalBladeLevel": "Lv. 924",
-      "notes": "Uses Aura. Blade is recommended. It is easier to grind Marine Lieutenants as you are immune to their attacks anyway."
+      "system": {
+        "slug": "marine-captain",
+        "section": "Second Sea",
+        "sortOrder": 32,
+        "image": null
+      }
     },
     {
-      "name": "Zombie",
-      "slug": "zombie",
-      "fields": {
-        "enemy": "Zombie",
+      "item": {
+        "name": "Zombie",
+        "sea": "Second Sea",
         "level": "Lv. 950",
         "elementalBladeLevel": "Lv. 976",
-        "notes": ""
+        "enemy": "Zombie"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Zombie",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 950",
-      "elementalBladeLevel": "Lv. 976",
-      "notes": null
+      "system": {
+        "slug": "zombie",
+        "section": "Second Sea",
+        "sortOrder": 33,
+        "image": null
+      }
     },
     {
-      "name": "Vampire",
-      "slug": "vampire",
-      "fields": {
-        "enemy": "Vampire",
+      "item": {
+        "name": "Vampire",
+        "sea": "Second Sea",
         "level": "Lv. 975",
         "elementalBladeLevel": "Lv. 1001",
-        "notes": "Uses Flash Step, can be a bit annoying to grind. Slightly easier to grind Zombies instead."
+        "notes": "Uses Flash Step, can be a bit annoying to grind. Slightly easier to grind Zombies instead.",
+        "enemy": "Vampire"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Vampire",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 975",
-      "elementalBladeLevel": "Lv. 1001",
-      "notes": "Uses Flash Step, can be a bit annoying to grind. Slightly easier to grind Zombies instead."
+      "system": {
+        "slug": "vampire",
+        "section": "Second Sea",
+        "sortOrder": 34,
+        "image": null
+      }
     },
     {
-      "name": "Snow Trooper",
-      "slug": "snow-trooper",
-      "fields": {
-        "enemy": "Snow Trooper",
+      "item": {
+        "name": "Snow Trooper",
+        "sea": "Second Sea",
         "level": "Lv. 1000",
         "elementalBladeLevel": "Lv. 1028",
-        "notes": ""
+        "enemy": "Snow Trooper"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snow_Trooper",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1000",
-      "elementalBladeLevel": "Lv. 1028",
-      "notes": null
+      "system": {
+        "slug": "snow-trooper",
+        "section": "Second Sea",
+        "sortOrder": 35,
+        "image": null
+      }
     },
     {
-      "name": "Winter Warrior",
-      "slug": "winter-warrior",
-      "fields": {
-        "enemy": "Winter Warrior",
+      "item": {
+        "name": "Winter Warrior",
+        "sea": "Second Sea",
         "level": "Lv. 1050",
         "elementalBladeLevel": "Lv. 1080",
-        "notes": "Has a special attack that can bypass immunity and Instinct, and can also stun. Very annoying to grind, it is recommended to grind Snow Troopers instead."
+        "notes": "Has a special attack that can bypass immunity and Instinct, and can also stun. Very annoying to grind, it is recommended to grind Snow Troopers instead.",
+        "enemy": "Winter Warrior"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Winter_Warrior",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1050",
-      "elementalBladeLevel": "Lv. 1080",
-      "notes": "Has a special attack that can bypass immunity and Instinct, and can also stun. Very annoying to grind, it is recommended to grind Snow Troopers instead."
+      "system": {
+        "slug": "winter-warrior",
+        "section": "Second Sea",
+        "sortOrder": 36,
+        "image": null
+      }
     },
     {
-      "name": "Lab Subordinate",
-      "slug": "lab-subordinate",
-      "fields": {
-        "enemy": "Lab Subordinate",
+      "item": {
+        "name": "Lab Subordinate",
+        "sea": "Second Sea",
         "level": "Lv. 1100",
         "elementalBladeLevel": "Lv. 1132",
-        "notes": "Uses Flash Step."
+        "notes": "Uses Flash Step.",
+        "enemy": "Lab Subordinate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Lab_Subordinate",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1100",
-      "elementalBladeLevel": "Lv. 1132",
-      "notes": "Uses Flash Step."
+      "system": {
+        "slug": "lab-subordinate",
+        "section": "Second Sea",
+        "sortOrder": 37,
+        "image": null
+      }
     },
     {
-      "name": "Horned Warrior",
-      "slug": "horned-warrior",
-      "fields": {
-        "enemy": "Horned Warrior",
+      "item": {
+        "name": "Horned Warrior",
+        "sea": "Second Sea",
         "level": "Lv. 1125",
         "elementalBladeLevel": "Lv. 1159",
-        "notes": "Uses an attack that can bypass immunity, and can also stun. Kind of annoying to grind, it is recommended to grind Lab Subordinates instead."
+        "notes": "Uses an attack that can bypass immunity, and can also stun. Kind of annoying to grind, it is recommended to grind Lab Subordinates instead.",
+        "enemy": "Horned Warrior"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Horned_Warrior",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1125",
-      "elementalBladeLevel": "Lv. 1159",
-      "notes": "Uses an attack that can bypass immunity, and can also stun. Kind of annoying to grind, it is recommended to grind Lab Subordinates instead."
+      "system": {
+        "slug": "horned-warrior",
+        "section": "Second Sea",
+        "sortOrder": 38,
+        "image": null
+      }
     },
     {
-      "name": "Magma Ninja",
-      "slug": "magma-ninja",
-      "fields": {
-        "enemy": "Magma Ninja",
+      "item": {
+        "name": "Magma Ninja",
+        "sea": "Second Sea",
         "level": "Lv. 1175",
         "elementalBladeLevel": "Lv. 1211",
-        "notes": ""
+        "enemy": "Magma Ninja"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Magma_Ninja",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1175",
-      "elementalBladeLevel": "Lv. 1211",
-      "notes": null
+      "system": {
+        "slug": "magma-ninja",
+        "section": "Second Sea",
+        "sortOrder": 39,
+        "image": null
+      }
     },
     {
-      "name": "Lava Pirate",
-      "slug": "lava-pirate",
-      "fields": {
-        "enemy": "Lava Pirate",
+      "item": {
+        "name": "Lava Pirate",
+        "sea": "Second Sea",
         "level": "Lv. 1200",
         "elementalBladeLevel": "Lv. 1236",
-        "notes": "They have a few Magma fruit abilities that bypass immunity, but they are easy-to-dodge attacks."
+        "notes": "They have a few Magma fruit abilities that bypass immunity, but they are easy-to-dodge attacks.",
+        "enemy": "Lava Pirate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Lava_Pirate",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1200",
-      "elementalBladeLevel": "Lv. 1236",
-      "notes": "They have a few Magma fruit abilities that bypass immunity, but they are easy-to-dodge attacks."
+      "system": {
+        "slug": "lava-pirate",
+        "section": "Second Sea",
+        "sortOrder": 40,
+        "image": null
+      }
     },
     {
-      "name": "Ship Deckhand",
-      "slug": "ship-deckhand",
-      "fields": {
-        "enemy": "Ship Deckhand",
+      "item": {
+        "name": "Ship Deckhand",
+        "sea": "Second Sea",
         "level": "Lv. 1250",
         "elementalBladeLevel": "Lv. 1288",
-        "notes": ""
+        "enemy": "Ship Deckhand"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ship_Deckhand",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1250",
-      "elementalBladeLevel": "Lv. 1288",
-      "notes": null
+      "system": {
+        "slug": "ship-deckhand",
+        "section": "Second Sea",
+        "sortOrder": 41,
+        "image": null
+      }
     },
     {
-      "name": "Ship Engineer",
-      "slug": "ship-engineer",
-      "fields": {
-        "enemy": "Ship Engineer",
+      "item": {
+        "name": "Ship Engineer",
+        "sea": "Second Sea",
         "level": "Lv. 1275",
-        "elementalBladeLevel": "",
-        "notes": "Uses Aura. Annoying to grind, it is recommended to grind Ship Deckhands instead."
+        "notes": "Uses Aura. Annoying to grind, it is recommended to grind Ship Deckhands instead.",
+        "enemy": "Ship Engineer"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ship_Engineer",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1275",
-      "elementalBladeLevel": null,
-      "notes": "Uses Aura. Annoying to grind, it is recommended to grind Ship Deckhands instead."
+      "system": {
+        "slug": "ship-engineer",
+        "section": "Second Sea",
+        "sortOrder": 42,
+        "image": null
+      }
     },
     {
-      "name": "Ship Steward",
-      "slug": "ship-steward",
-      "fields": {
-        "enemy": "Ship Steward",
+      "item": {
+        "name": "Ship Steward",
+        "sea": "Second Sea",
         "level": "Lv. 1300",
         "elementalBladeLevel": "Lv. 1342",
-        "notes": ""
+        "enemy": "Ship Steward"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ship_Steward",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1300",
-      "elementalBladeLevel": "Lv. 1342",
-      "notes": null
+      "system": {
+        "slug": "ship-steward",
+        "section": "Second Sea",
+        "sortOrder": 43,
+        "image": null
+      }
     },
     {
-      "name": "Ship Officer",
-      "slug": "ship-officer",
-      "fields": {
-        "enemy": "Ship Officer",
+      "item": {
+        "name": "Ship Officer",
+        "sea": "Second Sea",
         "level": "Lv. 1325",
         "elementalBladeLevel": "Lv. 1367",
-        "notes": "Uses Aura. Not too annoying to grind, but it is recommended to grind Ship Stewards instead or use Blade/Buddha to grind these enemies easily."
+        "notes": "Uses Aura. Not too annoying to grind, but it is recommended to grind Ship Stewards instead or use Blade/Buddha to grind these enemies easily.",
+        "enemy": "Ship Officer"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ship_Officer",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1325",
-      "elementalBladeLevel": "Lv. 1367",
-      "notes": "Uses Aura. Not too annoying to grind, but it is recommended to grind Ship Stewards instead or use Blade/Buddha to grind these enemies easily."
+      "system": {
+        "slug": "ship-officer",
+        "section": "Second Sea",
+        "sortOrder": 44,
+        "image": null
+      }
     },
     {
-      "name": "Arctic Warrior",
-      "slug": "arctic-warrior",
-      "fields": {
-        "enemy": "Arctic Warrior",
+      "item": {
+        "name": "Arctic Warrior",
+        "sea": "Second Sea",
         "level": "Lv. 1350",
         "elementalBladeLevel": "Lv. 1394",
-        "notes": ""
+        "enemy": "Arctic Warrior"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Arctic_Warrior",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1350",
-      "elementalBladeLevel": "Lv. 1394",
-      "notes": null
+      "system": {
+        "slug": "arctic-warrior",
+        "section": "Second Sea",
+        "sortOrder": 45,
+        "image": null
+      }
     },
     {
-      "name": "Snow Lurker",
-      "slug": "snow-lurker",
-      "fields": {
-        "enemy": "Snow Lurker",
+      "item": {
+        "name": "Snow Lurker",
+        "sea": "Second Sea",
         "level": "Lv. 1375",
-        "elementalBladeLevel": "",
-        "notes": "Uses Aura. Very annoying to grind, it is recommended to grind Arctic Warriors instead."
+        "notes": "Uses Aura. Very annoying to grind, it is recommended to grind Arctic Warriors instead.",
+        "enemy": "Snow Lurker"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snow_Lurker",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1375",
-      "elementalBladeLevel": null,
-      "notes": "Uses Aura. Very annoying to grind, it is recommended to grind Arctic Warriors instead."
+      "system": {
+        "slug": "snow-lurker",
+        "section": "Second Sea",
+        "sortOrder": 46,
+        "image": null
+      }
     },
     {
-      "name": "Sea Soldier",
-      "slug": "sea-soldier",
-      "fields": {
-        "enemy": "Sea Soldier",
+      "item": {
+        "name": "Sea Soldier",
+        "sea": "Second Sea",
         "level": "Lv. 1425",
         "elementalBladeLevel": "Lv. 1473",
-        "notes": ""
+        "enemy": "Sea Soldier"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sea_Soldier",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1425",
-      "elementalBladeLevel": "Lv. 1473",
-      "notes": null
+      "system": {
+        "slug": "sea-soldier",
+        "section": "Second Sea",
+        "sortOrder": 47,
+        "image": null
+      }
     },
     {
-      "name": "Water Fighter",
-      "slug": "water-fighter",
-      "fields": {
-        "enemy": "Water Fighter",
+      "item": {
+        "name": "Water Fighter",
+        "sea": "Second Sea",
         "level": "Lv. 1450",
-        "elementalBladeLevel": "",
-        "notes": "Uses Aura. Very annoying to grind, it is recommended to grind Sea Soldiers instead."
+        "notes": "Uses Aura. Very annoying to grind, it is recommended to grind Sea Soldiers instead.",
+        "enemy": "Water Fighter"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Water_Fighter",
-      "imageCandidate": null,
-      "sea": "Second Sea",
-      "level": "Lv. 1450",
-      "elementalBladeLevel": null,
-      "notes": "Uses Aura. Very annoying to grind, it is recommended to grind Sea Soldiers instead."
+      "system": {
+        "slug": "water-fighter",
+        "section": "Second Sea",
+        "sortOrder": 48,
+        "image": null
+      }
     },
     {
-      "name": "Pirate Millionaire",
-      "slug": "pirate-millionaire",
-      "fields": {
-        "enemy": "Pirate Millionaire",
+      "item": {
+        "name": "Pirate Millionaire",
+        "sea": "Third Sea",
         "level": "Lv. 1500",
         "elementalBladeLevel": "Lv. 1552",
-        "notes": ""
+        "enemy": "Pirate Millionaire"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pirate_Millionaire",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1500",
-      "elementalBladeLevel": "Lv. 1552",
-      "notes": null
+      "system": {
+        "slug": "pirate-millionaire",
+        "section": "Third Sea",
+        "sortOrder": 49,
+        "image": null
+      }
     },
     {
-      "name": "Pistol Billionaire",
-      "slug": "pistol-billionaire",
-      "fields": {
-        "enemy": "Pistol Billionaire",
+      "item": {
+        "name": "Pistol Billionaire",
+        "sea": "Third Sea",
         "level": "Lv. 1525",
         "elementalBladeLevel": "Lv. 1579",
-        "notes": ""
+        "enemy": "Pistol Billionaire"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pistol_Billionaire",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1525",
-      "elementalBladeLevel": "Lv. 1579",
-      "notes": null
+      "system": {
+        "slug": "pistol-billionaire",
+        "section": "Third Sea",
+        "sortOrder": 50,
+        "image": null
+      }
     },
     {
-      "name": "Dragon Crew Warrior",
-      "slug": "dragon-crew-warrior",
-      "fields": {
-        "enemy": "Dragon Crew Warrior",
+      "item": {
+        "name": "Dragon Crew Warrior",
+        "sea": "Third Sea",
         "level": "Lv. 1575",
         "elementalBladeLevel": "Lv. 1631",
-        "notes": ""
+        "enemy": "Dragon Crew Warrior"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Crew_Warrior",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1575",
-      "elementalBladeLevel": "Lv. 1631",
-      "notes": null
+      "system": {
+        "slug": "dragon-crew-warrior",
+        "section": "Third Sea",
+        "sortOrder": 51,
+        "image": null
+      }
     },
     {
-      "name": "Dragon Crew Archer",
-      "slug": "dragon-crew-archer",
-      "fields": {
-        "enemy": "Dragon Crew Archer",
+      "item": {
+        "name": "Dragon Crew Archer",
+        "sea": "Third Sea",
         "level": "Lv. 1600",
         "elementalBladeLevel": "Lv. 1658",
-        "notes": ""
+        "enemy": "Dragon Crew Archer"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Crew_Archer",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1600",
-      "elementalBladeLevel": "Lv. 1658",
-      "notes": null
+      "system": {
+        "slug": "dragon-crew-archer",
+        "section": "Third Sea",
+        "sortOrder": 52,
+        "image": null
+      }
     },
     {
-      "name": "Hydra Enforcer",
-      "slug": "hydra-enforcer",
-      "fields": {
-        "enemy": "Hydra Enforcer",
+      "item": {
+        "name": "Hydra Enforcer",
+        "sea": "Third Sea",
         "level": "Lv. 1625",
         "elementalBladeLevel": "Lv. 1683",
-        "notes": ""
+        "enemy": "Hydra Enforcer"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hydra_Enforcer",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1625",
-      "elementalBladeLevel": "Lv. 1683",
-      "notes": null
+      "system": {
+        "slug": "hydra-enforcer",
+        "section": "Third Sea",
+        "sortOrder": 53,
+        "image": null
+      }
     },
     {
-      "name": "Venomous Assailant",
-      "slug": "venomous-assailant",
-      "fields": {
-        "enemy": "Venomous Assailant",
+      "item": {
+        "name": "Venomous Assailant",
+        "sea": "Third Sea",
         "level": "Lv. 1650",
         "elementalBladeLevel": "N/A",
-        "notes": "Uses Aura. Very annoying to grind, it is recommended to grind Female Islanders instead."
+        "notes": "Uses Aura. Very annoying to grind, it is recommended to grind Female Islanders instead.",
+        "enemy": "Venomous Assailant"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Venomous_Assailant",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1650",
-      "elementalBladeLevel": "N/A",
-      "notes": "Uses Aura. Very annoying to grind, it is recommended to grind Female Islanders instead."
+      "system": {
+        "slug": "venomous-assailant",
+        "section": "Third Sea",
+        "sortOrder": 54,
+        "image": null
+      }
     },
     {
-      "name": "Marine Commodore",
-      "slug": "marine-commodore",
-      "fields": {
-        "enemy": "Marine Commodore",
+      "item": {
+        "name": "Marine Commodore",
+        "sea": "Third Sea",
         "level": "Lv. 1700",
         "elementalBladeLevel": "Lv. 1762 (with Blade)",
-        "notes": "Uses Aura. Can be broken by Blade due to them using Triple Katana."
+        "notes": "Uses Aura. Can be broken by Blade due to them using Triple Katana.",
+        "enemy": "Marine Commodore"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Commodore",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1700",
-      "elementalBladeLevel": "Lv. 1762 (with Blade)",
-      "notes": "Uses Aura. Can be broken by Blade due to them using Triple Katana."
+      "system": {
+        "slug": "marine-commodore",
+        "section": "Third Sea",
+        "sortOrder": 55,
+        "image": null
+      }
     },
     {
-      "name": "Marine Rear Admiral",
-      "slug": "marine-rear-admiral",
-      "fields": {
-        "enemy": "Marine Rear Admiral",
+      "item": {
+        "name": "Marine Rear Admiral",
+        "sea": "Third Sea",
         "level": "Lv. 1725",
         "elementalBladeLevel": "Lv. 1789",
-        "notes": "Very annoying to grind without Elemental immunity or Buddha, it is recommended to grind Marine Commodores instead."
+        "notes": "Very annoying to grind without Elemental immunity or Buddha, it is recommended to grind Marine Commodores instead.",
+        "enemy": "Marine Rear Admiral"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Rear_Admiral",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1725",
-      "elementalBladeLevel": "Lv. 1789",
-      "notes": "Very annoying to grind without Elemental immunity or Buddha, it is recommended to grind Marine Commodores instead."
+      "system": {
+        "slug": "marine-rear-admiral",
+        "section": "Third Sea",
+        "sortOrder": 56,
+        "image": null
+      }
     },
     {
-      "name": "Fishman Raider",
-      "slug": "fishman-raider",
-      "fields": {
-        "enemy": "Fishman Raider",
+      "item": {
+        "name": "Fishman Raider",
+        "sea": "Third Sea",
         "level": "Lv. 1775",
         "elementalBladeLevel": "Lv. 1843",
-        "notes": "Their X skill can bypass Elemental and Blade immunity."
+        "notes": "Their X skill can bypass Elemental and Blade immunity.",
+        "enemy": "Fishman Raider"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishman_Raider",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1775",
-      "elementalBladeLevel": "Lv. 1843",
-      "notes": "Their X skill can bypass Elemental and Blade immunity."
+      "system": {
+        "slug": "fishman-raider",
+        "section": "Third Sea",
+        "sortOrder": 57,
+        "image": null
+      }
     },
     {
-      "name": "Fishman Captain",
-      "slug": "fishman-captain",
-      "fields": {
-        "enemy": "Fishman Captain",
+      "item": {
+        "name": "Fishman Captain",
+        "sea": "Third Sea",
         "level": "Lv. 1800",
         "elementalBladeLevel": "Lv. 1869",
-        "notes": ""
+        "enemy": "Fishman Captain"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishman_Captain",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1800",
-      "elementalBladeLevel": "Lv. 1869",
-      "notes": null
+      "system": {
+        "slug": "fishman-captain",
+        "section": "Third Sea",
+        "sortOrder": 58,
+        "image": null
+      }
     },
     {
-      "name": "Forest Pirate",
-      "slug": "forest-pirate",
-      "fields": {
-        "enemy": "Forest Pirate",
+      "item": {
+        "name": "Forest Pirate",
+        "sea": "Third Sea",
         "level": "Lv. 1825",
         "elementalBladeLevel": "Lv. 1895 (with Blade)",
-        "notes": "Uses Aura. Can be broken by Blade due to them using a Katana."
+        "notes": "Uses Aura. Can be broken by Blade due to them using a Katana.",
+        "enemy": "Forest Pirate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Forest_Pirate",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1825",
-      "elementalBladeLevel": "Lv. 1895 (with Blade)",
-      "notes": "Uses Aura. Can be broken by Blade due to them using a Katana."
+      "system": {
+        "slug": "forest-pirate",
+        "section": "Third Sea",
+        "sortOrder": 59,
+        "image": null
+      }
     },
     {
-      "name": "Mythological Pirate",
-      "slug": "mythological-pirate",
-      "fields": {
-        "enemy": "Mythological Pirate",
+      "item": {
+        "name": "Mythological Pirate",
+        "sea": "Third Sea",
         "level": "Lv. 1850",
-        "elementalBladeLevel": "",
-        "notes": "Uses Aura. Cannot be countered by Rubber, even though they use Electric."
+        "notes": "Uses Aura. Cannot be countered by Rubber, even though they use Electric.",
+        "enemy": "Mythological Pirate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mythological_Pirate",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1850",
-      "elementalBladeLevel": null,
-      "notes": "Uses Aura. Cannot be countered by Rubber, even though they use Electric."
+      "system": {
+        "slug": "mythological-pirate",
+        "section": "Third Sea",
+        "sortOrder": 60,
+        "image": null
+      }
     },
     {
-      "name": "Jungle Pirates",
-      "slug": "jungle-pirates",
-      "fields": {
-        "enemy": "Jungle Pirates",
+      "item": {
+        "name": "Jungle Pirates",
+        "sea": "Third Sea",
         "level": "Lv. 1900",
         "elementalBladeLevel": "Lv. 1974",
-        "notes": ""
+        "enemy": "Jungle Pirates"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Jungle_Pirates",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1900",
-      "elementalBladeLevel": "Lv. 1974",
-      "notes": null
+      "system": {
+        "slug": "jungle-pirates",
+        "section": "Third Sea",
+        "sortOrder": 61,
+        "image": null
+      }
     },
     {
-      "name": "Musketeer Pirate",
-      "slug": "musketeer-pirate",
-      "fields": {
-        "enemy": "Musketeer Pirate",
+      "item": {
+        "name": "Musketeer Pirate",
+        "sea": "Third Sea",
         "level": "Lv. 1925",
         "elementalBladeLevel": "Lv. 2005",
-        "notes": "Uses Flash Step. Kind of annoying to grind, you can grind Jungle Pirates instead if you'd like."
+        "notes": "Uses Flash Step. Kind of annoying to grind, you can grind Jungle Pirates instead if you'd like.",
+        "enemy": "Musketeer Pirate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Musketeer_Pirate",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1925",
-      "elementalBladeLevel": "Lv. 2005",
-      "notes": "Uses Flash Step. Kind of annoying to grind, you can grind Jungle Pirates instead if you'd like."
+      "system": {
+        "slug": "musketeer-pirate",
+        "section": "Third Sea",
+        "sortOrder": 62,
+        "image": null
+      }
     },
     {
-      "name": "Reborn Skeleton",
-      "slug": "reborn-skeleton",
-      "fields": {
-        "enemy": "Reborn Skeleton",
+      "item": {
+        "name": "Reborn Skeleton",
+        "sea": "Third Sea",
         "level": "Lv. 1975",
         "elementalBladeLevel": "Lv. 2055",
-        "notes": ""
+        "enemy": "Reborn Skeleton"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Reborn_Skeleton",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 1975",
-      "elementalBladeLevel": "Lv. 2055",
-      "notes": null
+      "system": {
+        "slug": "reborn-skeleton",
+        "section": "Third Sea",
+        "sortOrder": 63,
+        "image": null
+      }
     },
     {
-      "name": "Living Zombie",
-      "slug": "living-zombie",
-      "fields": {
-        "enemy": "Living Zombie",
+      "item": {
+        "name": "Living Zombie",
+        "sea": "Third Sea",
         "level": "Lv. 2000",
-        "elementalBladeLevel": "",
-        "notes": "Uses Aura and Flash Step. Very annoying to grind, it is recommended to grind Reborn Skeletons instead."
+        "notes": "Uses Aura and Flash Step. Very annoying to grind, it is recommended to grind Reborn Skeletons instead.",
+        "enemy": "Living Zombie"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Living_Zombie",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2000",
-      "elementalBladeLevel": null,
-      "notes": "Uses Aura and Flash Step. Very annoying to grind, it is recommended to grind Reborn Skeletons instead."
+      "system": {
+        "slug": "living-zombie",
+        "section": "Third Sea",
+        "sortOrder": 64,
+        "image": null
+      }
     },
     {
-      "name": "Demonic Souls",
-      "slug": "demonic-souls",
-      "fields": {
-        "enemy": "Demonic Souls",
+      "item": {
+        "name": "Demonic Souls",
+        "sea": "Third Sea",
         "level": "Lv. 2025",
         "elementalBladeLevel": "Lv. 2107",
-        "notes": "Uses old-unawakened Flame's \"Z\" and \"C\" move."
+        "notes": "Uses old-unawakened Flame's \"Z\" and \"C\" move.",
+        "enemy": "Demonic Souls"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Demonic_Souls",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2025",
-      "elementalBladeLevel": "Lv. 2107",
-      "notes": "Uses old-unawakened Flame's \"Z\" and \"C\" move."
+      "system": {
+        "slug": "demonic-souls",
+        "section": "Third Sea",
+        "sortOrder": 65,
+        "image": null
+      }
     },
     {
-      "name": "Possessed Mummy",
-      "slug": "possessed-mummy",
-      "fields": {
-        "enemy": "Possessed Mummy",
+      "item": {
+        "name": "Possessed Mummy",
+        "sea": "Third Sea",
         "level": "Lv. 2050",
         "elementalBladeLevel": "Lv. 2135",
-        "notes": "Uses Dark's old-unawekened \"Z\" and \"C\" move."
+        "notes": "Uses Dark's old-unawekened \"Z\" and \"C\" move.",
+        "enemy": "Possessed Mummy"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Possessed_Mummy",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2050",
-      "elementalBladeLevel": "Lv. 2135",
-      "notes": "Uses Dark's old-unawekened \"Z\" and \"C\" move."
+      "system": {
+        "slug": "possessed-mummy",
+        "section": "Third Sea",
+        "sortOrder": 66,
+        "image": null
+      }
     },
     {
-      "name": "Peanut Scout",
-      "slug": "peanut-scout",
-      "fields": {
-        "enemy": "Peanut Scout",
+      "item": {
+        "name": "Peanut Scout",
+        "sea": "Third Sea",
         "level": "Lv. 2075",
         "elementalBladeLevel": "Lv. 2161",
-        "notes": ""
+        "enemy": "Peanut Scout"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Peanut_Scout",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2075",
-      "elementalBladeLevel": "Lv. 2161",
-      "notes": null
+      "system": {
+        "slug": "peanut-scout",
+        "section": "Third Sea",
+        "sortOrder": 67,
+        "image": null
+      }
     },
     {
-      "name": "Peanut President",
-      "slug": "peanut-president",
-      "fields": {
-        "enemy": "Peanut President",
+      "item": {
+        "name": "Peanut President",
+        "sea": "Third Sea",
         "level": "Lv. 2100",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Peanut President"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Peanut_President",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2100",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "peanut-president",
+        "section": "Third Sea",
+        "sortOrder": 68,
+        "image": null
+      }
     },
     {
-      "name": "Ice Cream Chef",
-      "slug": "ice-cream-chef",
-      "fields": {
-        "enemy": "Ice Cream Chef",
+      "item": {
+        "name": "Ice Cream Chef",
+        "sea": "Third Sea",
         "level": "Lv. 2125",
         "elementalBladeLevel": "Lv. 2213",
-        "notes": ""
+        "enemy": "Ice Cream Chef"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice_Cream_Chef",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2125",
-      "elementalBladeLevel": "Lv. 2213",
-      "notes": null
+      "system": {
+        "slug": "ice-cream-chef",
+        "section": "Third Sea",
+        "sortOrder": 69,
+        "image": null
+      }
     },
     {
-      "name": "Ice Cream Commander",
-      "slug": "ice-cream-commander",
-      "fields": {
-        "enemy": "Ice Cream Commander",
+      "item": {
+        "name": "Ice Cream Commander",
+        "sea": "Third Sea",
         "level": "Lv. 2150",
         "elementalBladeLevel": "Lv. 2240 (with Blade)",
-        "notes": "Uses Aura. Can be broken by Blade due to them using the Dual-Headed Blade."
+        "notes": "Uses Aura. Can be broken by Blade due to them using the Dual-Headed Blade.",
+        "enemy": "Ice Cream Commander"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice_Cream_Commander",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2150",
-      "elementalBladeLevel": "Lv. 2240 (with Blade)",
-      "notes": "Uses Aura. Can be broken by Blade due to them using the Dual-Headed Blade."
+      "system": {
+        "slug": "ice-cream-commander",
+        "section": "Third Sea",
+        "sortOrder": 70,
+        "image": null
+      }
     },
     {
-      "name": "Cookie Crafter",
-      "slug": "cookie-crafter",
-      "fields": {
-        "enemy": "Cookie Crafter",
+      "item": {
+        "name": "Cookie Crafter",
+        "sea": "Third Sea",
         "level": "Lv. 2200",
         "elementalBladeLevel": "Lv. 2294 (with Blade)",
-        "notes": "Uses Aura. Can be broken by Blade due to them using the Wardens Sword."
+        "notes": "Uses Aura. Can be broken by Blade due to them using the Wardens Sword.",
+        "enemy": "Cookie Crafter"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cookie_Crafter",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2200",
-      "elementalBladeLevel": "Lv. 2294 (with Blade)",
-      "notes": "Uses Aura. Can be broken by Blade due to them using the Wardens Sword."
+      "system": {
+        "slug": "cookie-crafter",
+        "section": "Third Sea",
+        "sortOrder": 71,
+        "image": null
+      }
     },
     {
-      "name": "Cake Guard",
-      "slug": "cake-guard",
-      "fields": {
-        "enemy": "Cake Guard",
+      "item": {
+        "name": "Cake Guard",
+        "sea": "Third Sea",
         "level": "Lv. 2225",
         "elementalBladeLevel": "Lv. 2321",
-        "notes": "Uses Aura. Can be broken by Blade due to them using the Triple Katana."
+        "notes": "Uses Aura. Can be broken by Blade due to them using the Triple Katana.",
+        "enemy": "Cake Guard"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cake_Guard",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2225",
-      "elementalBladeLevel": "Lv. 2321",
-      "notes": "Uses Aura. Can be broken by Blade due to them using the Triple Katana."
+      "system": {
+        "slug": "cake-guard",
+        "section": "Third Sea",
+        "sortOrder": 72,
+        "image": null
+      }
     },
     {
-      "name": "Baking Staff",
-      "slug": "baking-staff",
-      "fields": {
-        "enemy": "Baking Staff",
+      "item": {
+        "name": "Baking Staff",
+        "sea": "Third Sea",
         "level": "Lv. 2250",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Baking Staff"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Baking_Staff",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2250",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "baking-staff",
+        "section": "Third Sea",
+        "sortOrder": 73,
+        "image": null
+      }
     },
     {
-      "name": "Head Baker",
-      "slug": "head-baker",
-      "fields": {
-        "enemy": "Head Baker",
+      "item": {
+        "name": "Head Baker",
+        "sea": "Third Sea",
         "level": "Lv. 2275",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Head Baker"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Head_Baker",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2275",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "head-baker",
+        "section": "Third Sea",
+        "sortOrder": 74,
+        "image": null
+      }
     },
     {
-      "name": "Cocoa Warrior",
-      "slug": "cocoa-warrior",
-      "fields": {
-        "enemy": "Cocoa Warrior",
+      "item": {
+        "name": "Cocoa Warrior",
+        "sea": "Third Sea",
         "level": "Lv. 2300",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Cocoa Warrior"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cocoa_Warrior",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2300",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "cocoa-warrior",
+        "section": "Third Sea",
+        "sortOrder": 75,
+        "image": null
+      }
     },
     {
-      "name": "Chocolate Bar Battler",
-      "slug": "chocolate-bar-battler",
-      "fields": {
-        "enemy": "Chocolate Bar Battler",
+      "item": {
+        "name": "Chocolate Bar Battler",
+        "sea": "Third Sea",
         "level": "Lv. 2325",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Chocolate Bar Battler"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chocolate_Bar_Battler",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2325",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "chocolate-bar-battler",
+        "section": "Third Sea",
+        "sortOrder": 76,
+        "image": null
+      }
     },
     {
-      "name": "Sweet Thief",
-      "slug": "sweet-thief",
-      "fields": {
-        "enemy": "Sweet Thief",
+      "item": {
+        "name": "Sweet Thief",
+        "sea": "Third Sea",
         "level": "Lv. 2350",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Sweet Thief"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sweet_Thief",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2350",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "sweet-thief",
+        "section": "Third Sea",
+        "sortOrder": 77,
+        "image": null
+      }
     },
     {
-      "name": "Candy Rebel",
-      "slug": "candy-rebel",
-      "fields": {
-        "enemy": "Candy Rebel",
+      "item": {
+        "name": "Candy Rebel",
+        "sea": "Third Sea",
         "level": "Lv. 2375",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Candy Rebel"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy_Rebel",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2375",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "candy-rebel",
+        "section": "Third Sea",
+        "sortOrder": 78,
+        "image": null
+      }
     },
     {
-      "name": "Candy Pirate",
-      "slug": "candy-pirate",
-      "fields": {
-        "enemy": "Candy Pirate",
+      "item": {
+        "name": "Candy Pirate",
+        "sea": "Third Sea",
         "level": "Lv. 2400",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Candy Pirate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy_Pirate",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2400",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "candy-pirate",
+        "section": "Third Sea",
+        "sortOrder": 79,
+        "image": null
+      }
     },
     {
-      "name": "Snow Demon",
-      "slug": "snow-demon",
-      "fields": {
-        "enemy": "Snow Demon",
+      "item": {
+        "name": "Snow Demon",
+        "sea": "Third Sea",
         "level": "Lv. 2425",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Snow Demon"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snow_Demon",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2425",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "snow-demon",
+        "section": "Third Sea",
+        "sortOrder": 80,
+        "image": null
+      }
     },
     {
-      "name": "Isle Outlaw",
-      "slug": "isle-outlaw",
-      "fields": {
-        "enemy": "Isle Outlaw",
+      "item": {
+        "name": "Isle Outlaw",
+        "sea": "Third Sea",
         "level": "Lv. 2450",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Isle Outlaw"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Isle_Outlaw",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2450",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "isle-outlaw",
+        "section": "Third Sea",
+        "sortOrder": 81,
+        "image": null
+      }
     },
     {
-      "name": "Island Boy",
-      "slug": "island-boy",
-      "fields": {
-        "enemy": "Island Boy",
+      "item": {
+        "name": "Island Boy",
+        "sea": "Third Sea",
         "level": "Lv. 2475",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Island Boy"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Island_Boy",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2475",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "island-boy",
+        "section": "Third Sea",
+        "sortOrder": 82,
+        "image": null
+      }
     },
     {
-      "name": "Sun-kissed Warrior",
-      "slug": "sun-kissed-warrior",
-      "fields": {
-        "enemy": "Sun-kissed Warrior",
+      "item": {
+        "name": "Sun-kissed Warrior",
+        "sea": "Third Sea",
         "level": "Lv. 2500",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Sun-kissed Warrior"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sun-kissed_Warrior",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2500",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "sun-kissed-warrior",
+        "section": "Third Sea",
+        "sortOrder": 83,
+        "image": null
+      }
     },
     {
-      "name": "Isle Champion",
-      "slug": "isle-champion",
-      "fields": {
-        "enemy": "Isle Champion",
+      "item": {
+        "name": "Isle Champion",
+        "sea": "Third Sea",
         "level": "Lv. 2525",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Isle Champion"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Isle_Champion",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2525",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "isle-champion",
+        "section": "Third Sea",
+        "sortOrder": 84,
+        "image": null
+      }
     },
     {
-      "name": "Serpent Hunter",
-      "slug": "serpent-hunter",
-      "fields": {
-        "enemy": "Serpent Hunter",
+      "item": {
+        "name": "Serpent Hunter",
+        "sea": "Third Sea",
         "level": "Lv. 2550",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Serpent Hunter"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Serpent_Hunter",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2550",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "serpent-hunter",
+        "section": "Third Sea",
+        "sortOrder": 85,
+        "image": null
+      }
     },
     {
-      "name": "Skull Slayer",
-      "slug": "skull-slayer",
-      "fields": {
-        "enemy": "Skull Slayer",
+      "item": {
+        "name": "Skull Slayer",
+        "sea": "Third Sea",
         "level": "Lv. 2575",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Skull Slayer"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skull_Slayer",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2575",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "skull-slayer",
+        "section": "Third Sea",
+        "sortOrder": 86,
+        "image": null
+      }
     },
     {
-      "name": "Reef Bandit",
-      "slug": "reef-bandit",
-      "fields": {
-        "enemy": "Reef Bandit",
+      "item": {
+        "name": "Reef Bandit",
+        "sea": "Third Sea",
         "level": "Lv. 2600",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Reef Bandit"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Reef_Bandit",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2600",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "reef-bandit",
+        "section": "Third Sea",
+        "sortOrder": 87,
+        "image": null
+      }
     },
     {
-      "name": "Coral Pirate",
-      "slug": "coral-pirate",
-      "fields": {
-        "enemy": "Coral Pirate",
+      "item": {
+        "name": "Coral Pirate",
+        "sea": "Third Sea",
         "level": "Lv. 2625",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Coral Pirate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Coral_Pirate",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2625",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "coral-pirate",
+        "section": "Third Sea",
+        "sortOrder": 88,
+        "image": null
+      }
     },
     {
-      "name": "Sea Chanter",
-      "slug": "sea-chanter",
-      "fields": {
-        "enemy": "Sea Chanter",
+      "item": {
+        "name": "Sea Chanter",
+        "sea": "Third Sea",
         "level": "Lv. 2650",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Sea Chanter"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sea_Chanter",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2650",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "sea-chanter",
+        "section": "Third Sea",
+        "sortOrder": 89,
+        "image": null
+      }
     },
     {
-      "name": "Ocean Prophet",
-      "slug": "ocean-prophet",
-      "fields": {
-        "enemy": "Ocean Prophet",
+      "item": {
+        "name": "Ocean Prophet",
+        "sea": "Third Sea",
         "level": "Lv. 2675",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Ocean Prophet"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ocean_Prophet",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2675",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "ocean-prophet",
+        "section": "Third Sea",
+        "sortOrder": 90,
+        "image": null
+      }
     },
     {
-      "name": "High Disciple",
-      "slug": "high-disciple",
-      "fields": {
-        "enemy": "High Disciple",
+      "item": {
+        "name": "High Disciple",
+        "sea": "Third Sea",
         "level": "Lv. 2700",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "High Disciple"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/High_Disciple",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2700",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "high-disciple",
+        "section": "Third Sea",
+        "sortOrder": 91,
+        "image": null
+      }
     },
     {
-      "name": "Grand Devotee",
-      "slug": "grand-devotee",
-      "fields": {
-        "enemy": "Grand Devotee",
+      "item": {
+        "name": "Grand Devotee",
+        "sea": "Third Sea",
         "level": "Lv. 2725",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Grand Devotee"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Grand_Devotee",
-      "imageCandidate": null,
-      "sea": "Third Sea",
-      "level": "Lv. 2725",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "grand-devotee",
+        "section": "Third Sea",
+        "sortOrder": 92,
+        "image": null
+      }
     },
     {
-      "name": "Bladesmith",
-      "slug": "bladesmith",
-      "fields": {
-        "enemy": "Bladesmith",
+      "item": {
+        "name": "Bladesmith",
+        "sea": "Other",
         "level": "Depends on Raid.",
-        "elementalBladeLevel": "",
-        "notes": "Uses the old [X] move of Dual Katana and old [X] of Katana."
+        "notes": "Uses the old [X] move of Dual Katana and old [X] of Katana.",
+        "enemy": "Bladesmith"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bladesmith",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Depends on Raid.",
-      "elementalBladeLevel": null,
-      "notes": "Uses the old [X] move of Dual Katana and old [X] of Katana."
+      "system": {
+        "slug": "bladesmith",
+        "section": "Other",
+        "sortOrder": 93,
+        "image": null
+      }
     },
     {
-      "name": "Bone Breaker",
-      "slug": "bone-breaker",
-      "fields": {
-        "enemy": "Bone Breaker",
+      "item": {
+        "name": "Bone Breaker",
+        "sea": "Other",
         "level": "Depends on Raid.",
-        "elementalBladeLevel": "",
-        "notes": "Uses the old [Z], [X] move of Dark Step."
+        "notes": "Uses the old [Z], [X] move of Dark Step.",
+        "enemy": "Bone Breaker"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bone_Breaker",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Depends on Raid.",
-      "elementalBladeLevel": null,
-      "notes": "Uses the old [Z], [X] move of Dark Step."
+      "system": {
+        "slug": "bone-breaker",
+        "section": "Other",
+        "sortOrder": 94,
+        "image": null
+      }
     },
     {
-      "name": "Shocker",
-      "slug": "shocker",
-      "fields": {
-        "enemy": "Shocker",
+      "item": {
+        "name": "Shocker",
+        "sea": "Other",
         "level": "Depends on Raid.",
-        "elementalBladeLevel": "",
-        "notes": "Uses the old [X], [C] move of Electric."
+        "notes": "Uses the old [X], [C] move of Electric.",
+        "enemy": "Shocker"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shocker",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Depends on Raid.",
-      "elementalBladeLevel": null,
-      "notes": "Uses the old [X], [C] move of Electric."
+      "system": {
+        "slug": "shocker",
+        "section": "Other",
+        "sortOrder": 95,
+        "image": null
+      }
     },
     {
-      "name": "Sorcerer",
-      "slug": "sorcerer",
-      "fields": {
-        "enemy": "Sorcerer",
+      "item": {
+        "name": "Sorcerer",
+        "sea": "Other",
         "level": "Depends on Raid.",
-        "elementalBladeLevel": "",
-        "notes": "Uses 1 of the following 3 Blox Fruits but with their old moveset: Bomb [Z] & [X], Spike [Z] & [X] or Smoke [X] & [C]."
+        "notes": "Uses 1 of the following 3 Blox Fruits but with their old moveset: Bomb [Z] & [X], Spike [Z] & [X] or Smoke [X] & [C].",
+        "enemy": "Sorcerer"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sorcerer",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Depends on Raid.",
-      "elementalBladeLevel": null,
-      "notes": "Uses 1 of the following 3 Blox Fruits but with their old moveset: Bomb [Z] & [X], Spike [Z] & [X] or Smoke [X] & [C]."
+      "system": {
+        "slug": "sorcerer",
+        "section": "Other",
+        "sortOrder": 96,
+        "image": null
+      }
     },
     {
-      "name": "Fruit User",
-      "slug": "fruit-user",
-      "fields": {
-        "enemy": "Fruit User",
+      "item": {
+        "name": "Fruit User",
+        "sea": "Other",
         "level": "Depends on Raid.",
-        "elementalBladeLevel": "",
-        "notes": ""
+        "enemy": "Fruit User"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Raids",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Depends on Raid.",
-      "elementalBladeLevel": null,
-      "notes": null
+      "system": {
+        "slug": "fruit-user",
+        "section": "Other",
+        "sortOrder": 97,
+        "image": null
+      }
     },
     {
-      "name": "Core",
-      "slug": "core",
-      "fields": {
-        "enemy": "Core",
+      "item": {
+        "name": "Core",
+        "sea": "Other",
         "level": "None",
         "elementalBladeLevel": "None",
-        "notes": "This enemy is considered part of an event that happens every 1 hour and 30 minutes, and does not attack the player back unless the player is too late to defeat it."
+        "notes": "This enemy is considered part of an event that happens every 1 hour and 30 minutes, and does not attack the player back unless the player is too late to defeat it.",
+        "enemy": "Core"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Core",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "None",
-      "elementalBladeLevel": "None",
-      "notes": "This enemy is considered part of an event that happens every 1 hour and 30 minutes, and does not attack the player back unless the player is too late to defeat it."
+      "system": {
+        "slug": "core",
+        "section": "Other",
+        "sortOrder": 98,
+        "image": null
+      }
     },
     {
-      "name": "Ghost",
-      "slug": "ghost",
-      "fields": {
-        "enemy": "Ghost",
+      "item": {
+        "name": "Ghost",
+        "sea": "Other",
         "level": "Lv. 1500",
-        "elementalBladeLevel": "",
-        "notes": ""
+        "enemy": "Ghost"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghost",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 1500",
-      "elementalBladeLevel": null,
-      "notes": null
+      "system": {
+        "slug": "ghost",
+        "section": "Other",
+        "sortOrder": 99,
+        "image": null
+      }
     },
     {
-      "name": "Training Dummy",
-      "slug": "training-dummy",
-      "fields": {
-        "enemy": "Training Dummy",
+      "item": {
+        "name": "Training Dummy",
+        "sea": "Other",
         "level": "Lv. 1500",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura and the M1s of Dark Blade."
+        "notes": "Uses Aura and the M1s of Dark Blade.",
+        "enemy": "Training Dummy"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Training_Dummy",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 1500",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura and the M1s of Dark Blade."
+      "system": {
+        "slug": "training-dummy",
+        "section": "Other",
+        "sortOrder": 100,
+        "image": null
+      }
     },
     {
-      "name": "Elite Pirate",
-      "slug": "elite-pirate",
-      "fields": {
-        "enemy": "Elite Pirate",
+      "item": {
+        "name": "Elite Pirate",
+        "sea": "Other",
         "level": "Lv. 1750",
         "elementalBladeLevel": "None",
-        "notes": "Considered a Mini-Boss. Comes in three variations, Diablo, Urban and Deandre. Uses Aura."
+        "notes": "Considered a Mini-Boss. Comes in three variations, Diablo, Urban and Deandre. Uses Aura.",
+        "enemy": "Elite Pirate"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Elite_Pirates",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 1750",
-      "elementalBladeLevel": "None",
-      "notes": "Considered a Mini-Boss. Comes in three variations, Diablo, Urban and Deandre. Uses Aura."
+      "system": {
+        "slug": "elite-pirate",
+        "section": "Other",
+        "sortOrder": 101,
+        "image": null
+      }
     },
     {
-      "name": "Ancient Zombie",
-      "slug": "ancient-zombie",
-      "fields": {
-        "enemy": "Ancient Zombie",
+      "item": {
+        "name": "Ancient Zombie",
+        "sea": "Other",
         "level": "Lv. 2000",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Ancient Zombie"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ancient_Zombie",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 2000",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "ancient-zombie",
+        "section": "Other",
+        "sortOrder": 102,
+        "image": null
+      }
     },
     {
-      "name": "Ancient Vampire",
-      "slug": "ancient-vampire",
-      "fields": {
-        "enemy": "Ancient Vampire",
+      "item": {
+        "name": "Ancient Vampire",
+        "sea": "Other",
         "level": "Lv. 2000",
         "elementalBladeLevel": "None",
-        "notes": "Uses Aura."
+        "notes": "Uses Aura.",
+        "enemy": "Ancient Vampire"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ancient_Vampire",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 2000",
-      "elementalBladeLevel": "None",
-      "notes": "Uses Aura."
+      "system": {
+        "slug": "ancient-vampire",
+        "section": "Other",
+        "sortOrder": 103,
+        "image": null
+      }
     },
     {
-      "name": "Shark",
-      "slug": "shark",
-      "fields": {
-        "enemy": "Shark",
+      "item": {
+        "name": "Shark",
+        "sea": "Other",
         "level": "Lv. 2000",
-        "elementalBladeLevel": "",
-        "notes": ""
+        "enemy": "Shark"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark_(Enemy)",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 2000",
-      "elementalBladeLevel": null,
-      "notes": null
+      "system": {
+        "slug": "shark",
+        "section": "Other",
+        "sortOrder": 104,
+        "image": null
+      }
     },
     {
-      "name": "Piranha",
-      "slug": "piranha",
-      "fields": {
-        "enemy": "Piranha",
+      "item": {
+        "name": "Piranha",
+        "sea": "Other",
         "level": "Lv. 2000",
-        "elementalBladeLevel": "",
-        "notes": ""
+        "enemy": "Piranha"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Piranha",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 2000",
-      "elementalBladeLevel": null,
-      "notes": null
+      "system": {
+        "slug": "piranha",
+        "section": "Other",
+        "sortOrder": 105,
+        "image": null
+      }
     },
     {
-      "name": "Ship Raid",
-      "slug": "ship-raid",
-      "fields": {
-        "enemy": "Ship Raid",
+      "item": {
+        "name": "Ship Raid",
+        "sea": "Other",
         "level": "N/A",
-        "elementalBladeLevel": "",
-        "notes": "Use the cannonballs."
+        "notes": "Use the cannonballs.",
+        "enemy": "Ship Raid"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ship_Raid",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "N/A",
-      "elementalBladeLevel": null,
-      "notes": "Use the cannonballs."
+      "system": {
+        "slug": "ship-raid",
+        "section": "Other",
+        "sortOrder": 106,
+        "image": null
+      }
     },
     {
-      "name": "Haunted Ship Raid",
-      "slug": "haunted-ship-raid",
-      "fields": {
-        "enemy": "Haunted Ship Raid",
+      "item": {
+        "name": "Haunted Ship Raid",
+        "sea": "Other",
         "level": "N/A",
-        "elementalBladeLevel": "",
-        "notes": "Use the cannonballs."
+        "notes": "Use the cannonballs.",
+        "enemy": "Haunted Ship Raid"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Haunted_Ship_Raid",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "N/A",
-      "elementalBladeLevel": null,
-      "notes": "Use the cannonballs."
+      "system": {
+        "slug": "haunted-ship-raid",
+        "section": "Other",
+        "sortOrder": 107,
+        "image": null
+      }
     },
     {
-      "name": "Fish Crew Member",
-      "slug": "fish-crew-member",
-      "fields": {
-        "enemy": "Fish Crew Member",
+      "item": {
+        "name": "Fish Crew Member",
+        "sea": "Other",
         "level": "Lv. 2000",
-        "elementalBladeLevel": "",
-        "notes": "Uses the old [X] move of Water Kung Fu."
+        "notes": "Uses the old [X] move of Water Kung Fu.",
+        "enemy": "Fish Crew Member"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fish_Crew_Member",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 2000",
-      "elementalBladeLevel": null,
-      "notes": "Uses the old [X] move of Water Kung Fu."
+      "system": {
+        "slug": "fish-crew-member",
+        "section": "Other",
+        "sortOrder": 108,
+        "image": null
+      }
     },
     {
-      "name": "Ghost Shark",
-      "slug": "ghost-shark",
-      "fields": {
-        "enemy": "Ghost Shark",
+      "item": {
+        "name": "Ghost Shark",
+        "sea": "Other",
         "level": "Lv. 2000",
-        "elementalBladeLevel": "",
-        "notes": "This Enemy is part of the Haunted Shipwreck Sea Event."
+        "notes": "This Enemy is part of the Haunted Shipwreck Sea Event.",
+        "enemy": "Ghost Shark"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghost_Shark",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 2000",
-      "elementalBladeLevel": null,
-      "notes": "This Enemy is part of the Haunted Shipwreck Sea Event."
+      "system": {
+        "slug": "ghost-shark",
+        "section": "Other",
+        "sortOrder": 109,
+        "image": null
+      }
     },
     {
-      "name": "Haunted Crew Member",
-      "slug": "haunted-crew-member",
-      "fields": {
-        "enemy": "Haunted Crew Member",
+      "item": {
+        "name": "Haunted Crew Member",
+        "sea": "Other",
         "level": "Lv. 2000",
-        "elementalBladeLevel": "",
-        "notes": "Uses Flash Step. They use Sanguine Art."
+        "notes": "Uses Flash Step. They use Sanguine Art.",
+        "enemy": "Haunted Crew Member"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Haunted_Crew_Member",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Lv. 2000",
-      "elementalBladeLevel": null,
-      "notes": "Uses Flash Step. They use Sanguine Art."
+      "system": {
+        "slug": "haunted-crew-member",
+        "section": "Other",
+        "sortOrder": 110,
+        "image": null
+      }
     },
     {
-      "name": "Ghost Ship Raid",
-      "slug": "ghost-ship-raid",
-      "fields": {
-        "enemy": "Ghost Ship Raid",
+      "item": {
+        "name": "Ghost Ship Raid",
+        "sea": "Other",
         "level": "N/A",
-        "elementalBladeLevel": "",
-        "notes": "This Enemy is part of the Haunted Shipwreck Sea Event."
+        "notes": "This Enemy is part of the Haunted Shipwreck Sea Event.",
+        "enemy": "Ghost Ship Raid"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghost_Ship_Raid",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "N/A",
-      "elementalBladeLevel": null,
-      "notes": "This Enemy is part of the Haunted Shipwreck Sea Event."
+      "system": {
+        "slug": "ghost-ship-raid",
+        "section": "Other",
+        "sortOrder": 111,
+        "image": null
+      }
     },
     {
-      "name": "Bone Wraith",
-      "slug": "bone-wraith",
-      "fields": {
-        "enemy": "Bone Wraith",
+      "item": {
+        "name": "Bone Wraith",
+        "sea": "Other",
         "level": "Dependent on the player's level.",
         "elementalBladeLevel": "None",
-        "notes": "They can be dropped 3-8 Bones along with a small chance of 2x EXP for 10 minutes. Elemental Immunity did not work on this NPC, as they would be scaled with whatever the player's level was."
+        "notes": "They can be dropped 3-8 Bones along with a small chance of 2x EXP for 10 minutes. Elemental Immunity did not work on this NPC, as they would be scaled with whatever the player's level was.",
+        "enemy": "Bone Wraith"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bone_Wraith",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Dependent on the player's level.",
-      "elementalBladeLevel": "None",
-      "notes": "They can be dropped 3-8 Bones along with a small chance of 2x EXP for 10 minutes. Elemental Immunity did not work on this NPC, as they would be scaled with whatever the player's level was."
+      "system": {
+        "slug": "bone-wraith",
+        "section": "Other",
+        "sortOrder": 112,
+        "image": null
+      }
     },
     {
-      "name": "Evil Wraith",
-      "slug": "evil-wraith",
-      "fields": {
-        "enemy": "Evil Wraith",
+      "item": {
+        "name": "Evil Wraith",
+        "sea": "Other",
         "level": "Dependent on the player's level.",
         "elementalBladeLevel": "None",
-        "notes": "They can be dropped 3-8 Bones along with a small chance of 2x EXP for 10 minutes and the Ghost fruit. Elemental Immunity did not work on this NPC, as they would be scaled with whatever the player's level was."
+        "notes": "They can be dropped 3-8 Bones along with a small chance of 2x EXP for 10 minutes and the Ghost fruit. Elemental Immunity did not work on this NPC, as they would be scaled with whatever the player's level was.",
+        "enemy": "Evil Wraith"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Evil_Wraith",
-      "imageCandidate": null,
-      "sea": "Other",
-      "level": "Dependent on the player's level.",
-      "elementalBladeLevel": "None",
-      "notes": "They can be dropped 3-8 Bones along with a small chance of 2x EXP for 10 minutes and the Ghost fruit. Elemental Immunity did not work on this NPC, as they would be scaled with whatever the player's level was."
+      "system": {
+        "slug": "evil-wraith",
+        "section": "Other",
+        "sortOrder": 113,
+        "image": null
+      }
     }
   ]
 }

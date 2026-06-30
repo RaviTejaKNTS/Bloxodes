@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { repoPath } from "@/lib/paths";
 
 export type GrowGarden2Crop = {
@@ -36,9 +37,10 @@ type SourceRow = {
   accessed?: string | null;
 };
 
-type CropRow = Partial<GrowGarden2Crop>;
+type CropRow = Partial<GrowGarden2Crop> & { slug?: string | null };
 type MutationRow = {
   id?: string | null;
+  slug?: string | null;
   name?: string | null;
   multiplier?: string | null;
   whereToGet?: string | null;
@@ -48,10 +50,11 @@ type MutationRow = {
 
 type DatasetJson<T> = {
   meta?: {
+    schemaVersion?: number | null;
     updatedAt?: string | null;
     sources?: SourceRow[] | null;
   } | null;
-  items?: T[] | null;
+  items?: Array<T | { item?: T; system?: Record<string, unknown> }> | null;
 };
 
 const SEEDS_PATH = repoPath("data", "Grow a Garden 2", "seeds.json");
@@ -85,10 +88,10 @@ export async function loadGrowGarden2ValueDataset(): Promise<GrowGarden2ValueDat
     readJson<MutationRow>(MUTATIONS_PATH)
   ]);
 
-  const crops = (seedJson.items ?? [])
+  const crops = unwrapDatasetItems(seedJson)
     .map((row): GrowGarden2Crop | null => {
       const name = row.name?.trim();
-      const id = row.id?.trim();
+      const id = row.id?.trim() ?? row.slug?.trim();
       if (!name || !id) return null;
       return {
         id,
@@ -103,7 +106,7 @@ export async function loadGrowGarden2ValueDataset(): Promise<GrowGarden2ValueDat
     })
     .filter((row): row is GrowGarden2Crop => Boolean(row));
 
-  const mutations = (mutationJson.items ?? [])
+  const mutations = unwrapDatasetItems(mutationJson)
     .map((row): GrowGarden2Mutation | null => {
       const name = row.name?.trim();
       const id = row.id?.trim();

@@ -5,6 +5,8 @@ description: Prepare source-backed data for one approved Bloxodes game collectio
 
 # Bloxodes Game Collection Data
 
+> **You are a subagent. Do NOT spawn sub-agents or call other agents. Write and edit all files directly using the Write and Edit tools.**
+
 Use this after `brief.md` is approved. Prepare the local data for one game collection. Do not gather images here; plan the image field and leave image collection for `bloxodes-game-collection-images`.
 
 ## Work
@@ -13,14 +15,20 @@ Use this after `brief.md` is approved. Prepare the local data for one game colle
 2. Inspect or create the local dataset under `data/<Game>/`.
 3. Check that item rows match the source-backed scope.
 4. Add useful fields players can compare. Do not add raw source clutter.
-5. Add a real section field, usually `collectionSection` unless another field is better. Every item should land in the right section.
-6. Add short `cardSummary` text when cards need a plain-English explanation beyond raw fields.
-7. When adding descriptions, always use your own words. Do not directly copy from the sources. Make sure the description is accurate and matches the source information.
-8. Do not rewrite sourced stats or facts just to sound nicer. Keep factual values accurate.
-9. Decide whether the collection should have images and which dataset field will hold image paths.
-10. Confirm `apps/web/src/lib/game-collections/index.ts` can render the collection, card fields, grouping, item count, and planned image field.
-11. Confirm section labels are stable and useful enough for the shared renderer's section dropdown. Do not split, rename, or reorder sections only for page-size reasons; pagination is handled by the renderer.
-12. If the collection is missing from `apps/web/src/lib/game-collections/index.ts`, run:
+5. Use the v2 wrapped dataset shape `{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }`. Do not create bare array datasets.
+6. Keep public game data and Bloxodes system data separate. Put player-facing facts only inside `items[].item`. Put only `slug`, `section`, `sortOrder`, and `image` inside `items[].system`.
+7. Never put system/dev/source keys inside `items[].item`: no `collectionSection`, `sortOrder`, `image`, `slug`, `sourcePage`, `sourceUrl`, `sourceImageUrl`, `verificationNote`, `imageStatus`, `rawText`, `fields`, or similar workflow/debug fields.
+8. When a real multi-section grouping exists, store the rendered section label in `items[].system.section`, store the numeric order in `items[].system.sortOrder`, and list all section labels in `meta.display.sectionOrder`.
+9. If no real multi-section field exists, set every `items[].system.section` to `Items` and set `meta.display.sectionOrder` to `["Items"]`. Do not invent fake sections.
+10. Add `meta.schemaVersion: 2`, `meta.itemFields`, `meta.columns`, and `meta.display` so the generic renderer has an explicit display contract and does not infer dev fields.
+11. In `meta.display`, set `groupLabel`, `sectionOrder`, `tableFields`, `cardFields`, `badgeField`, `subtitleFields`, `descriptionField`, `cardDescriptionField`, and `fieldPresentation` where useful. Every display field must exist in `meta.itemFields` and `items[].item`.
+12. Add short `cardSummary` text when cards need a plain-English explanation beyond raw fields.
+13. When adding descriptions, always use your own words. Do not directly copy from the sources. Make sure the description is accurate and matches the source information.
+14. Do not rewrite sourced stats or facts just to sound nicer. Keep factual values accurate.
+15. Decide whether the collection should have images. Images belong in `items[].system.image`, not in a public item field.
+16. Confirm `apps/web/src/lib/game-collections/index.ts` can render the collection, card fields, grouping, item count, and planned image field.
+17. Confirm section labels are stable and useful enough for the shared renderer's section dropdown. Do not split, rename, or reorder sections only for page-size reasons; pagination is handled by the renderer.
+18. If the collection is missing from `apps/web/src/lib/game-collections/index.ts`, run:
 
 ```bash
 npm run register:game-collection -- --game <game-slug> --collection <collection-slug> --dry-run
@@ -28,21 +36,23 @@ npm run register:game-collection -- --game <game-slug> --collection <collection-
 
 If the dry run looks right and the game group already exists, run it again without `--dry-run`.
 
-13. Run the dataset readiness check:
+19. Audit and check the dataset:
 
 ```bash
+npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>
 npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug>
 ```
 
 Use `--file <dataset.json>` if the collection is not registered yet. Do not use `--require-images` here; the image skill owns that check.
 
-14. Update `brief.md` with data status and gaps from the checker.
+20. Update `brief.md` with data status and gaps from the checker.
 
 ## Catalog Presentation Contract
 
 The shared game collection renderer now treats cards as the primary view and list/table as the complete scanning view. Prepare dataset rows so both views can show the same useful information cleanly.
 
-- Every item should have a clear name, one useful description field such as `cardSummary`, `description`, or `summary`, and the same public comparison fields across rows. If a value is not source-backed for one item, leave it empty/null so the renderer can show `-`; do not remove the field from that row.
+- Every item should have a clear `items[].item.name`, one useful description field such as `cardSummary`, `description`, or `summary`, and the same public comparison fields across rows. If a value is not source-backed for one item, leave it empty/null so the renderer can show `-`; do not remove the field from that row.
+- Dataset system metadata owns rendered grouping and ordering. Use `items[].system.section`, `items[].system.sortOrder`, and `meta.display.sectionOrder`. Do not create public `collectionSection`, `section`, or `sortOrder` item fields.
 - Include all important player-facing details in dataset fields. Do not hide useful details only because cards are compact; the renderer decides how to present long values.
 - Keep labels out of values. Use `"type": "Standard boost"`, not `"type": "Type: Standard boost"`.
 - Define the field presentation contract by collection, not by value text. For every card/table field, decide the `kind`: `plain`, `chip`, `highlight`, or `detail`.
@@ -53,15 +63,17 @@ The shared game collection renderer now treats cards as the primary view and lis
 - Do not depend on renderer word guessing. A value containing words like Robux, rare, available, cost, event, or source must not be expected to change styling by itself.
 - Avoid semicolon pseudo-lists in prose. If the value is one sentence, write it as one sentence. Use arrays only when the source really provides separate list items.
 - If the collection has some item images but not all, still wire the available images. The renderer will keep card shape consistent with placeholders for missing images.
-- When the collection is registered, add the machine-readable `fieldPresentation` map to the renderer config or dataset meta, for example:
+- When the collection is registered, add the machine-readable `fieldPresentation` map under `meta.display.fieldPresentation`, for example:
 
 ```json
 {
-  "fieldPresentation": {
+  "display": {
+    "fieldPresentation": {
     "availability": { "kind": "highlight", "label": "Status" },
     "source": "normal",
     "price": "chip",
     "obtainment": "detail"
+    }
   }
 }
 ```
@@ -77,7 +89,11 @@ Data readiness:
 - Dataset file:
 - Item count:
 - Source item count:
-- Section field:
+- Dataset shape: v2 wrapped `{ meta, items[].item, items[].system }` yes/no
+- Public item fields:
+- System fields: `slug`, `section`, `sortOrder`, `image` only yes/no
+- Metadata: `schemaVersion`, `itemFields`, `columns`, `display.groupLabel`, `display.sectionOrder`, `display.tableFields`, `display.cardFields`, `display.fieldPresentation`
+- Section source:
 - Section counts:
 - Section order:
 - Card fields:
@@ -89,12 +105,14 @@ Data readiness:
 - Detail fields:
 - Field consistency:
 - Image needed: yes/no
-- Image field:
-- Hidden/source fields:
-- Sort order:
+- Image field: `items[].system.image`
+- Hidden/source/dev fields absent from public item data: yes/no
+- Sort order: `items[].system.sortOrder`
 - description_json section keys:
 - Renderer/config support:
 - Missing items:
+- Audit command:
+- Audit result:
 - Checker command:
 - Checker result:
 - Ready for images: yes/no

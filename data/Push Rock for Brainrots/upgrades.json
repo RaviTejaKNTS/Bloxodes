@@ -1,66 +1,107 @@
 {
   "meta": {
+    "schemaVersion": 2,
     "game": "Push Rock for Brainrots",
+    "gameSlug": "push-rock-for-brainrots",
     "collection": "upgrades",
-    "updatedAt": "2026-06-16",
-    "columns": [
-      "name",
+    "route": "/wiki/push-rock-for-brainrots/upgrades",
+    "catalogCode": "push-rock-for-brainrots-upgrades",
+    "itemFields": [
       "upgradeType",
       "effect",
       "cost",
       "currency",
       "priority",
-      "collectionSection",
-      "cardSummary",
-      "image"
+      "cardSummary"
     ],
-    "sources": [
-      {
-        "label": "YouTube gameplay: Roblox Experience Push Rock for Brainrots! By RVGA - Basic Overview",
-        "url": "https://www.youtube.com/watch?v=WEa4DRRCDcU",
-        "accessed": "2026-06-16"
-      }
-    ]
+    "columns": [
+      "upgradeType",
+      "effect",
+      "cost",
+      "currency",
+      "priority",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Core upgrades",
+        "Reset upgrades"
+      ],
+      "badgeField": "cost",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "upgradeType",
+        "effect",
+        "cost",
+        "currency",
+        "priority",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "upgradeType",
+        "effect",
+        "cost",
+        "currency",
+        "priority",
+        "cardSummary"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Strength",
-      "slug": "strength",
-      "upgradeType": "Push power",
-      "effect": "Lets you move bigger rocks and reach stronger rarity gates.",
-      "cost": "Cash prices scale by level; Robux shortcut available.",
-      "currency": "Cash or Robux",
-      "priority": "Upgrade first when a rock gate is slowing your route.",
-      "collectionSection": "Core upgrades",
-      "cardSummary": "Strength is the main progress upgrade. If a rock barely moves or a rarity lane is out of reach, Strength is the upgrade that fixes it.",
-      "image": "/Push%20Rock%20for%20Brainrots/Upgrades/strength-and-carry-panel.jpg",
-      "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
+      "item": {
+        "name": "Strength",
+        "upgradeType": "Push power",
+        "effect": "Lets you move bigger rocks and reach stronger rarity gates.",
+        "cost": "Cash prices scale by level; Robux shortcut available.",
+        "currency": "Cash or Robux",
+        "priority": "Upgrade first when a rock gate is slowing your route.",
+        "cardSummary": "Strength is the main progress upgrade. If a rock barely moves or a rarity lane is out of reach, Strength is the upgrade that fixes it."
+      },
+      "system": {
+        "slug": "strength",
+        "section": "Core upgrades",
+        "sortOrder": 1,
+        "image": "/Push%20Rock%20for%20Brainrots/Upgrades/strength-and-carry-panel.jpg"
+      }
     },
     {
-      "name": "Carry",
-      "slug": "carry",
-      "upgradeType": "Inventory capacity",
-      "effect": "Raises how many rescued Brainrots you can carry before returning home.",
-      "cost": "Cash price by level; optional Robux shortcut.",
-      "currency": "Cash or Robux",
-      "priority": "Upgrade after Strength when return trips start wasting time.",
-      "collectionSection": "Core upgrades",
-      "cardSummary": "Carry is a routing upgrade. It matters once you can reach better Brainrots and want fewer trips back to base.",
-      "image": "/Push%20Rock%20for%20Brainrots/Upgrades/strength-and-carry-panel.jpg",
-      "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
+      "item": {
+        "name": "Carry",
+        "upgradeType": "Inventory capacity",
+        "effect": "Raises how many rescued Brainrots you can carry before returning home.",
+        "cost": "Cash price by level; optional Robux shortcut.",
+        "currency": "Cash or Robux",
+        "priority": "Upgrade after Strength when return trips start wasting time.",
+        "cardSummary": "Carry is a routing upgrade. It matters once you can reach better Brainrots and want fewer trips back to base."
+      },
+      "system": {
+        "slug": "carry",
+        "section": "Core upgrades",
+        "sortOrder": 2,
+        "image": "/Push%20Rock%20for%20Brainrots/Upgrades/strength-and-carry-panel.jpg"
+      }
     },
     {
-      "name": "Rebirth",
-      "slug": "rebirth",
-      "upgradeType": "Reset upgrade",
-      "effect": "Trades progress for stronger long-term multipliers and more spots.",
-      "cost": "Cash requirement by rebirth tier.",
-      "currency": "Cash requirement",
-      "priority": "Use when the next multiplier is worth rebuilding your route.",
-      "collectionSection": "Reset upgrades",
-      "cardSummary": "Rebirth is the long-term reset system. It boosts the account after you can afford the listed cash requirement.",
-      "image": "/Push%20Rock%20for%20Brainrots/Upgrades/rebirth-panel.jpg",
-      "sourcePage": "https://www.youtube.com/watch?v=WEa4DRRCDcU"
+      "item": {
+        "name": "Rebirth",
+        "upgradeType": "Reset upgrade",
+        "effect": "Trades progress for stronger long-term multipliers and more spots.",
+        "cost": "Cash requirement by rebirth tier.",
+        "currency": "Cash requirement",
+        "priority": "Use when the next multiplier is worth rebuilding your route.",
+        "cardSummary": "Rebirth is the long-term reset system. It boosts the account after you can afford the listed cash requirement."
+      },
+      "system": {
+        "slug": "rebirth",
+        "section": "Reset upgrades",
+        "sortOrder": 3,
+        "image": "/Push%20Rock%20for%20Brainrots/Upgrades/rebirth-panel.jpg"
+      }
     }
   ]
 }

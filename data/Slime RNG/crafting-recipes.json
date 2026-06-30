@@ -1,18 +1,22 @@
 {
   "meta": {
-    "title": "Slime RNG crafting recipes data",
-    "updatedAt": "2026-05-24",
-    "sources": [
-      {
-        "label": "Slime RNG Wiki - Crafting",
-        "url": "https://slime-rng.fandom.com/wiki/Crafting",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Slime RNG Wiki - Slimes",
-        "url": "https://slime-rng.fandom.com/wiki/Slimes",
-        "accessed": "2026-05-24"
-      }
+    "schemaVersion": 2,
+    "game": "Slime RNG",
+    "gameSlug": "slime-rng",
+    "collection": "crafting-recipes",
+    "route": "/wiki/slime-rng/crafting-recipes",
+    "catalogCode": "slime-rng-crafting-recipes",
+    "itemFields": [
+      "area",
+      "zone",
+      "craftingStage",
+      "resultChance",
+      "resultRarity",
+      "requiredSlimeOne",
+      "requiredSlimeTwo",
+      "requiredSlimeThree",
+      "requiredSummary",
+      "ingredientOddsText"
     ],
     "columns": [
       "area",
@@ -24,172 +28,227 @@
       "requiredSlimeTwo",
       "requiredSlimeThree",
       "requiredSummary",
-      "ingredientOddsText",
-      "image"
-    ]
+      "ingredientOddsText"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "area",
+        "zone",
+        "craftingStage",
+        "resultChance",
+        "resultRarity",
+        "requiredSlimeOne"
+      ],
+      "tableFields": [
+        "area",
+        "zone",
+        "craftingStage",
+        "resultChance",
+        "resultRarity",
+        "requiredSlimeOne",
+        "requiredSlimeTwo",
+        "requiredSlimeThree"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Crafty",
-      "slug": "crafty",
-      "craftingStage": "Early crafting recipes",
-      "area": "Cave",
-      "zone": "Zone 6",
-      "resultChance": "1 / 57.4k",
-      "resultRarity": "Mythic",
-      "requiredSlimeOne": "Lucky - 1 / 21.5k - Mythic",
-      "requiredSlimeTwo": "Rocky - 1 / 13.9k - Legendary",
-      "requiredSlimeThree": "Mushy - 1 / 7.77k - Legendary",
-      "requiredSummary": "Lucky, Rocky, Mushy",
-      "ingredientOddsText": "1 / 21.5k, 1 / 13.9k, 1 / 7.77k",
-      "image": "/Slime%20RNG/Slimes/crafty.webp",
-      "sortOrder": 1,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Crafting",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/6/6c/Crafty.png/revision/latest?cb=20260512021636"
+      "item": {
+        "name": "Crafty",
+        "area": "Cave",
+        "zone": "Zone 6",
+        "craftingStage": "Early crafting recipes",
+        "resultChance": "1 / 57.4k",
+        "resultRarity": "Mythic",
+        "requiredSlimeOne": "Lucky - 1 / 21.5k - Mythic",
+        "requiredSlimeTwo": "Rocky - 1 / 13.9k - Legendary",
+        "requiredSlimeThree": "Mushy - 1 / 7.77k - Legendary",
+        "requiredSummary": "Lucky, Rocky, Mushy",
+        "ingredientOddsText": "1 / 21.5k, 1 / 13.9k, 1 / 7.77k"
+      },
+      "system": {
+        "slug": "crafty",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Slime%20RNG/Slimes/crafty.webp"
+      }
     },
     {
-      "name": "Thorn",
-      "slug": "thorn",
-      "craftingStage": "Early crafting recipes",
-      "area": "Jungle",
-      "zone": "Zone 8",
-      "resultChance": "1 / 330k",
-      "resultRarity": "Divine",
-      "requiredSlimeOne": "Orbit - 1 / 126k - Divine",
-      "requiredSlimeTwo": "Icy - 1 / 86.1k - Divine",
-      "requiredSlimeThree": "Stump - 1 / 35.9k - Mythic",
-      "requiredSummary": "Orbit, Icy, Stump",
-      "ingredientOddsText": "1 / 126k, 1 / 86.1k, 1 / 35.9k",
-      "image": "/Slime%20RNG/Slimes/thorn.webp",
-      "sortOrder": 2,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Crafting",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/f/f3/Thorn.png/revision/latest?cb=20260512021902"
+      "item": {
+        "name": "Thorn",
+        "area": "Jungle",
+        "zone": "Zone 8",
+        "craftingStage": "Early crafting recipes",
+        "resultChance": "1 / 330k",
+        "resultRarity": "Divine",
+        "requiredSlimeOne": "Orbit - 1 / 126k - Divine",
+        "requiredSlimeTwo": "Icy - 1 / 86.1k - Divine",
+        "requiredSlimeThree": "Stump - 1 / 35.9k - Mythic",
+        "requiredSummary": "Orbit, Icy, Stump",
+        "ingredientOddsText": "1 / 126k, 1 / 86.1k, 1 / 35.9k"
+      },
+      "system": {
+        "slug": "thorn",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Slime%20RNG/Slimes/thorn.webp"
+      }
     },
     {
-      "name": "Geode",
-      "slug": "geode",
-      "craftingStage": "Midgame crafting recipes",
-      "area": "Mushroom Forest",
-      "zone": "Zone 10",
-      "resultChance": "1 / 3.11M",
-      "resultRarity": "Prismatic",
-      "requiredSlimeOne": "Ninja - 1 / 1.26M - Prismatic",
-      "requiredSlimeTwo": "Guest - 1 / 861k - Prismatic",
-      "requiredSlimeThree": "Aegis - 1 / 215k - Divine",
-      "requiredSummary": "Ninja, Guest, Aegis",
-      "ingredientOddsText": "1 / 1.26M, 1 / 861k, 1 / 215k",
-      "image": "/Slime%20RNG/Slimes/geode.webp",
-      "sortOrder": 3,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Crafting",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/4/43/Geode.png/revision/latest?cb=20260512021703"
+      "item": {
+        "name": "Geode",
+        "area": "Mushroom Forest",
+        "zone": "Zone 10",
+        "craftingStage": "Midgame crafting recipes",
+        "resultChance": "1 / 3.11M",
+        "resultRarity": "Prismatic",
+        "requiredSlimeOne": "Ninja - 1 / 1.26M - Prismatic",
+        "requiredSlimeTwo": "Guest - 1 / 861k - Prismatic",
+        "requiredSlimeThree": "Aegis - 1 / 215k - Divine",
+        "requiredSummary": "Ninja, Guest, Aegis",
+        "ingredientOddsText": "1 / 1.26M, 1 / 861k, 1 / 215k"
+      },
+      "system": {
+        "slug": "geode",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Slime%20RNG/Slimes/geode.webp"
+      }
     },
     {
-      "name": "SlimeSlimeSlime",
-      "slug": "slimeslimeslime",
-      "craftingStage": "Midgame crafting recipes",
-      "area": "Redwood Forest",
-      "zone": "Zone 12",
-      "resultChance": "1 / 24.9M",
-      "resultRarity": "Ethereal",
-      "requiredSlimeOne": "SlimeSlime - 1 / 10.7M - Transcendent",
-      "requiredSlimeTwo": "SlimeSlime - 1 / 10.7M - Transcendent",
-      "requiredSlimeThree": "SlimeSlime - 1 / 10.7M - Transcendent",
-      "requiredSummary": "SlimeSlime, SlimeSlime, SlimeSlime",
-      "ingredientOddsText": "1 / 10.7M, 1 / 10.7M, 1 / 10.7M",
-      "image": "/Slime%20RNG/Slimes/slimeslimeslime.webp",
-      "sortOrder": 4,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Crafting",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/c/c8/SlimeSlimeSlime.png/revision/latest?cb=20260512021845"
+      "item": {
+        "name": "SlimeSlimeSlime",
+        "area": "Redwood Forest",
+        "zone": "Zone 12",
+        "craftingStage": "Midgame crafting recipes",
+        "resultChance": "1 / 24.9M",
+        "resultRarity": "Ethereal",
+        "requiredSlimeOne": "SlimeSlime - 1 / 10.7M - Transcendent",
+        "requiredSlimeTwo": "SlimeSlime - 1 / 10.7M - Transcendent",
+        "requiredSlimeThree": "SlimeSlime - 1 / 10.7M - Transcendent",
+        "requiredSummary": "SlimeSlime, SlimeSlime, SlimeSlime",
+        "ingredientOddsText": "1 / 10.7M, 1 / 10.7M, 1 / 10.7M"
+      },
+      "system": {
+        "slug": "slimeslimeslime",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Slime%20RNG/Slimes/slimeslimeslime.webp"
+      }
     },
     {
-      "name": "Puffy",
-      "slug": "puffy",
-      "craftingStage": "Midgame crafting recipes",
-      "area": "Candyland",
-      "zone": "Zone 14",
-      "resultChance": "1 / 195M",
-      "resultRarity": "Ethereal",
-      "requiredSlimeOne": "Unicorn - 1 / 17.9M - Transcendent",
-      "requiredSlimeTwo": "Petal - 1 / 39.1M - Ethereal",
-      "requiredSlimeThree": "Derpy - 1 / 89.7M - Ethereal",
-      "requiredSummary": "Unicorn, Petal, Derpy",
-      "ingredientOddsText": "1 / 17.9M, 1 / 39.1M, 1 / 89.7M",
-      "image": "/Slime%20RNG/Slimes/puffy.webp",
-      "sortOrder": 5,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Crafting",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/2/2d/Puffy.png/revision/latest?cb=20260512021826"
+      "item": {
+        "name": "Puffy",
+        "area": "Candyland",
+        "zone": "Zone 14",
+        "craftingStage": "Midgame crafting recipes",
+        "resultChance": "1 / 195M",
+        "resultRarity": "Ethereal",
+        "requiredSlimeOne": "Unicorn - 1 / 17.9M - Transcendent",
+        "requiredSlimeTwo": "Petal - 1 / 39.1M - Ethereal",
+        "requiredSlimeThree": "Derpy - 1 / 89.7M - Ethereal",
+        "requiredSummary": "Unicorn, Petal, Derpy",
+        "ingredientOddsText": "1 / 17.9M, 1 / 39.1M, 1 / 89.7M"
+      },
+      "system": {
+        "slug": "puffy",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Slime%20RNG/Slimes/puffy.webp"
+      }
     },
     {
-      "name": "Astro",
-      "slug": "astro",
-      "craftingStage": "Late crafting recipes",
-      "area": "Crystal Cavern",
-      "zone": "Zone 16",
-      "resultChance": "1 / 2.47B",
-      "resultRarity": "Secret",
-      "requiredSlimeOne": "UFO - 1 / 478M - Secret",
-      "requiredSlimeTwo": "Blackhole - 1 / 1.07B - Secret",
-      "requiredSlimeThree": "Bomber - 1 / 307M - Secret",
-      "requiredSummary": "UFO, Blackhole, Bomber",
-      "ingredientOddsText": "1 / 478M, 1 / 1.07B, 1 / 307M",
-      "image": "/Slime%20RNG/Slimes/astro.webp",
-      "sortOrder": 6,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Crafting",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/a/aa/Astro.png/revision/latest?cb=20260512021622"
+      "item": {
+        "name": "Astro",
+        "area": "Crystal Cavern",
+        "zone": "Zone 16",
+        "craftingStage": "Late crafting recipes",
+        "resultChance": "1 / 2.47B",
+        "resultRarity": "Secret",
+        "requiredSlimeOne": "UFO - 1 / 478M - Secret",
+        "requiredSlimeTwo": "Blackhole - 1 / 1.07B - Secret",
+        "requiredSlimeThree": "Bomber - 1 / 307M - Secret",
+        "requiredSummary": "UFO, Blackhole, Bomber",
+        "ingredientOddsText": "1 / 478M, 1 / 1.07B, 1 / 307M"
+      },
+      "system": {
+        "slug": "astro",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Slime%20RNG/Slimes/astro.webp"
+      }
     },
     {
-      "name": "Sunny",
-      "slug": "sunny",
-      "craftingStage": "Late crafting recipes",
-      "area": "Atlantis",
-      "zone": "Zone 18",
-      "resultChance": "1 / 11.8B",
-      "resultRarity": "Celestial",
-      "requiredSlimeOne": "Pumpkin - 1 / 2.77B - Secret",
-      "requiredSlimeTwo": "Ouchy - 1 / 4.39B - Celestial",
-      "requiredSlimeThree": "Ember - 1 / 1.72B - Secret",
-      "requiredSummary": "Pumpkin, Ouchy, Ember",
-      "ingredientOddsText": "1 / 2.77B, 1 / 4.39B, 1 / 1.72B",
-      "image": "/Slime%20RNG/Slimes/sunny.webp",
-      "sortOrder": 7,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Crafting",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/9/9a/Sunny.png/revision/latest?cb=20260512021858"
+      "item": {
+        "name": "Sunny",
+        "area": "Atlantis",
+        "zone": "Zone 18",
+        "craftingStage": "Late crafting recipes",
+        "resultChance": "1 / 11.8B",
+        "resultRarity": "Celestial",
+        "requiredSlimeOne": "Pumpkin - 1 / 2.77B - Secret",
+        "requiredSlimeTwo": "Ouchy - 1 / 4.39B - Celestial",
+        "requiredSlimeThree": "Ember - 1 / 1.72B - Secret",
+        "requiredSummary": "Pumpkin, Ouchy, Ember",
+        "ingredientOddsText": "1 / 2.77B, 1 / 4.39B, 1 / 1.72B"
+      },
+      "system": {
+        "slug": "sunny",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Slime%20RNG/Slimes/sunny.webp"
+      }
     },
     {
-      "name": "Melly",
-      "slug": "melly",
-      "craftingStage": "Endgame crafting recipes",
-      "area": "Graveyard",
-      "zone": "Zone 21",
-      "resultChance": "1 / 237B",
-      "resultRarity": "Astral",
-      "requiredSlimeOne": "Monke - 1 / 15.3B - Celestial",
-      "requiredSlimeTwo": "Waxie - 1 / 50.1B - Astral",
-      "requiredSlimeThree": "Germy - 1 / 113B - Astral",
-      "requiredSummary": "Monke, Waxie, Germy",
-      "ingredientOddsText": "1 / 15.3B, 1 / 50.1B, 1 / 113B",
-      "image": "/Slime%20RNG/Slimes/melly.webp",
-      "sortOrder": 8,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Crafting",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/a/ab/Melly.png/revision/latest?cb=20260512021719"
+      "item": {
+        "name": "Melly",
+        "area": "Graveyard",
+        "zone": "Zone 21",
+        "craftingStage": "Endgame crafting recipes",
+        "resultChance": "1 / 237B",
+        "resultRarity": "Astral",
+        "requiredSlimeOne": "Monke - 1 / 15.3B - Celestial",
+        "requiredSlimeTwo": "Waxie - 1 / 50.1B - Astral",
+        "requiredSlimeThree": "Germy - 1 / 113B - Astral",
+        "requiredSummary": "Monke, Waxie, Germy",
+        "ingredientOddsText": "1 / 15.3B, 1 / 50.1B, 1 / 113B"
+      },
+      "system": {
+        "slug": "melly",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Slime%20RNG/Slimes/melly.webp"
+      }
     },
     {
-      "name": "Sweetie",
-      "slug": "sweetie",
-      "craftingStage": "Endgame crafting recipes",
-      "area": "Winter Wonderland",
-      "zone": "Zone 26",
-      "resultChance": "1 / 3.50T",
-      "resultRarity": "Nova",
-      "requiredSlimeOne": "Mato - 1 / 673B - Nova",
-      "requiredSlimeTwo": "Pouchy - 1 / 1.72T - Nova",
-      "requiredSlimeThree": "Melly - 1 / 237B - Astral",
-      "requiredSummary": "Mato, Pouchy, Melly",
-      "ingredientOddsText": "1 / 673B, 1 / 1.72T, 1 / 237B",
-      "image": "/Slime%20RNG/Slimes/sweetie.webp",
-      "sortOrder": 9,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Crafting",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/1/1d/Sweetie.png/revision/latest?cb=20260512021620"
+      "item": {
+        "name": "Sweetie",
+        "area": "Winter Wonderland",
+        "zone": "Zone 26",
+        "craftingStage": "Endgame crafting recipes",
+        "resultChance": "1 / 3.50T",
+        "resultRarity": "Nova",
+        "requiredSlimeOne": "Mato - 1 / 673B - Nova",
+        "requiredSlimeTwo": "Pouchy - 1 / 1.72T - Nova",
+        "requiredSlimeThree": "Melly - 1 / 237B - Astral",
+        "requiredSummary": "Mato, Pouchy, Melly",
+        "ingredientOddsText": "1 / 673B, 1 / 1.72T, 1 / 237B"
+      },
+      "system": {
+        "slug": "sweetie",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": "/Slime%20RNG/Slimes/sweetie.webp"
+      }
     }
   ]
 }

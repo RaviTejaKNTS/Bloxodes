@@ -1,105 +1,104 @@
 {
   "meta": {
-    "title": "Survive Zombie Arena maps data",
-    "updatedAt": "2026-05-29",
-    "sources": [
-      {
-        "label": "Roblox - Survive Zombie Arena",
-        "url": "https://www.roblox.com/games/114204398207377/Survive-Zombie-Arena",
-        "accessed": "2026-05-29"
-      },
-      {
-        "label": "Roblox games API - universe 9348272796",
-        "url": "https://games.roblox.com/v1/games?universeIds=9348272796",
-        "accessed": "2026-05-29"
-      },
-      {
-        "label": "SurviveZombieArena.com - Maps",
-        "url": "https://survivezombiearena.com/maps/",
-        "accessed": "2026-05-29"
-      },
-      {
-        "label": "SZA Companion - Survive Zombie Arena hub",
-        "url": "https://survivezombiearenaguide.com/",
-        "accessed": "2026-05-29"
-      },
-      {
-        "label": "Fans First Booyah - Galactic Event",
-        "url": "https://ffbooyah.com/2026/05/19/roblox-survive-zombie-arena-galactic-event-everything-you-need-to-know/",
-        "accessed": "2026-05-29"
-      }
-    ],
-    "columns": [
-      "name",
-      "slug",
-      "image",
+    "schemaVersion": 2,
+    "game": "Survive Zombie Arena",
+    "gameSlug": "survive-zombie-arena",
+    "collection": "maps",
+    "route": "/wiki/survive-zombie-arena/maps",
+    "catalogCode": "survive-zombie-arena-maps",
+    "itemFields": [
       "statusSection",
       "status",
-    "layout",
-    "updateContext",
-    "holdStyle",
-    "laneNotes",
-    "bestFor",
-    "performanceNote",
-    "caveat",
-      "sourcePage",
-      "sourceConfidence",
-      "verificationNote",
-      "sourceImageUrl",
-      "imageStatus"
+      "layout",
+      "updateContext",
+      "holdStyle",
+      "laneNotes",
+      "bestFor",
+      "performanceNote",
+      "caveat"
     ],
-    "sourceCount": 2,
-    "sectionCounts": {
-      "Active maps": 1,
-      "Retired maps": 1
-    },
-    "imageCount": 1,
-    "missingImageCount": 1,
-    "excludedRows": [
-      {
-        "name": "Atlantis",
-        "reason": "Excluded from public data because Phase 2 did not obtain direct in-game or official-channel verification of current status and permanence."
-      }
-    ]
+    "columns": [
+      "statusSection",
+      "status",
+      "layout",
+      "updateContext",
+      "holdStyle",
+      "laneNotes",
+      "bestFor",
+      "performanceNote",
+      "caveat"
+    ],
+    "display": {
+      "groupLabel": "status",
+      "sectionOrder": [
+        "Current active arena",
+        "Retired launch arena"
+      ],
+      "badgeField": "status",
+      "subtitleFields": [],
+      "descriptionField": "bestFor",
+      "cardDescriptionField": "bestFor",
+      "cardFields": [
+        "statusSection",
+        "status",
+        "layout",
+        "updateContext",
+        "holdStyle",
+        "laneNotes"
+      ],
+      "tableFields": [
+        "statusSection",
+        "status",
+        "layout",
+        "updateContext",
+        "holdStyle",
+        "laneNotes",
+        "bestFor",
+        "performanceNote"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Rooftop Map",
-      "slug": "rooftop-map",
-      "image": "/Survive%20Zombie%20Arena/maps/rooftop-map.png",
-      "statusSection": "Active maps",
-      "status": "Current active arena",
-      "layout": "Elevated rooftop arena with stairs, ramps, and open sightlines",
-      "updateContext": "Replaced the launch Square Arena during the April 2026 map and zombie movement update",
-      "holdStyle": "Hold stair and ramp chokepoints instead of spreading across open ground",
-      "laneNotes": "Watch the entry ramps and stairwell approaches so zombie packs funnel into predictable fire lanes.",
-      "bestFor": "Barricade and turret holds, piercing shots, area damage, and controlled retreats",
-      "performanceNote": "Rooftop Map launched with public reports of lower FPS; lowering Roblox graphics is the practical workaround until optimization changes.",
-      "caveat": "Exact in-game display name should be rechecked after the next map update; public sources use Rooftop Map or new map wording.",
-      "sourcePage": "SurviveZombieArena.com - Maps",
-      "sourceConfidence": "medium",
-      "verificationNote": "Roblox official page confirms the one-arena game premise. SurviveZombieArena.com identifies Rooftop Map as the active map at its 2026-05-18 check, and SZA Companion also treats Rooftop as the current public run context. No direct in-game check was performed in this phase.",
-      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-c4624273009e606072f89c590d166c4b/768/432/Image/Png/noFilter",
-      "imageStatus": "local official Roblox thumbnail for current arena"
+      "item": {
+        "name": "Rooftop Map",
+        "statusSection": "Active maps",
+        "status": "Current active arena",
+        "layout": "Elevated rooftop arena with stairs, ramps, and open sightlines",
+        "updateContext": "Replaced the launch Square Arena during the April 2026 map and zombie movement update",
+        "holdStyle": "Hold stair and ramp chokepoints instead of spreading across open ground",
+        "laneNotes": "Watch the entry ramps and stairwell approaches so zombie packs funnel into predictable fire lanes.",
+        "bestFor": "Barricade and turret holds, piercing shots, area damage, and controlled retreats",
+        "performanceNote": "Rooftop Map launched with public reports of lower FPS; lowering Roblox graphics is the practical workaround until optimization changes.",
+        "caveat": "Exact in-game display name should be rechecked after the next map update; public sources use Rooftop Map or new map wording."
+      },
+      "system": {
+        "slug": "rooftop-map",
+        "section": "Current active arena",
+        "sortOrder": 1,
+        "image": "/Survive%20Zombie%20Arena/maps/rooftop-map.png"
+      }
     },
     {
-      "name": "Square Arena",
-      "slug": "square-arena",
-      "image": null,
-      "statusSection": "Retired maps",
-      "status": "Retired launch arena",
-      "layout": "Flat open square arena",
-      "updateContext": "Launch-era arena replaced by Rooftop Map during the April 2026 map update",
-      "holdStyle": "Open-field positioning with fewer natural chokepoints",
-      "laneNotes": "Use it mainly to understand older guides that discuss flat placement, open movement, or pre-rooftop zombie pathing.",
-      "bestFor": "Stale-guide context and comparing old open-field advice against the current Rooftop layout",
-      "performanceNote": "No current performance note because Square Arena is not the active public layout.",
-      "caveat": "Do not treat Square Arena as the current public map unless future in-game verification shows it returned in a selectable mode.",
-      "sourcePage": "SurviveZombieArena.com - Maps",
-      "sourceConfidence": "medium",
-      "verificationNote": "SurviveZombieArena.com and SZA Companion both describe Square Arena as the previous or replaced map. Current public availability was not directly verified in-game.",
-      "sourceImageUrl": null,
-      "imageStatus": "missing verified retired Square Arena image"
+      "item": {
+        "name": "Square Arena",
+        "statusSection": "Retired maps",
+        "status": "Retired launch arena",
+        "layout": "Flat open square arena",
+        "updateContext": "Launch-era arena replaced by Rooftop Map during the April 2026 map update",
+        "holdStyle": "Open-field positioning with fewer natural chokepoints",
+        "laneNotes": "Use it mainly to understand older guides that discuss flat placement, open movement, or pre-rooftop zombie pathing.",
+        "bestFor": "Stale-guide context and comparing old open-field advice against the current Rooftop layout",
+        "performanceNote": "No current performance note because Square Arena is not the active public layout.",
+        "caveat": "Do not treat Square Arena as the current public map unless future in-game verification shows it returned in a selectable mode."
+      },
+      "system": {
+        "slug": "square-arena",
+        "section": "Retired launch arena",
+        "sortOrder": 2,
+        "image": null
+      }
     }
   ]
 }

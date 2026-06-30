@@ -5,6 +5,8 @@ description: Gather, save, wire, and verify images for one approved Bloxodes gam
 
 # Bloxodes Game Collection Images
 
+> **You are a subagent. Do NOT spawn sub-agents or call other agents. Download images and edit dataset files directly using Bash and the Edit/Write tools.**
+
 Use this after `brief.md` and data readiness are approved. Give images their own pass before writing.
 
 ## Work

@@ -1,1046 +1,968 @@
 {
   "meta": {
-    "title": "Clean the Supermarket Grocery Items",
-    "updatedAt": "2026-06-29",
-    "groupBy": "collectionSection",
-    "columns": [
-      "name",
-      "slug",
-      "collectionSection",
-      "image",
+    "schemaVersion": 2,
+    "game": "Clean the Supermarket!",
+    "gameSlug": "clean-the-supermarket",
+    "collection": "grocery-items",
+    "route": "/wiki/clean-the-supermarket/grocery-items",
+    "catalogCode": "clean-the-supermarket-grocery-items",
+    "itemFields": [
       "cardSummary",
-      "aisle",
-      "section",
-      "shelfColor",
-      "sourcePage",
-      "sourceConfidence",
-      "sourceCheckedAt",
-      "verificationNote",
-      "imageStatus",
-      "sortOrder"
-    ],
-    "defaultCardFields": [
       "aisle",
       "section",
       "shelfColor"
     ],
-    "fieldPresentation": {
-      "aisle": {
-        "kind": "chip",
-        "label": "Aisle"
-      },
-      "section": {
-        "kind": "plain",
-        "label": "Section"
-      },
-      "shelfColor": {
-        "kind": "highlight",
-        "label": "Shelf color"
-      }
-    },
-    "sources": [
-      {
-        "label": "Clean the Supermarket Roblox (cleanthesupermarket.com) - Canonical aisle table (shelf-codes)",
-        "url": "https://cleanthesupermarket.com/shelf-codes",
-        "accessed": "2026-06-29"
-      },
-      {
-        "label": "Clean the Supermarket Roblox (cleanthesupermarket.com) - Item checklist (60 items)",
-        "url": "https://cleanthesupermarket.com/collectibles",
-        "accessed": "2026-06-29"
-      },
-      {
-        "label": "Roblox - Clean the Supermarket! (identity only)",
-        "url": "https://www.roblox.com/games/120450743769548/Clean-the-Supermarket",
-        "accessed": "2026-06-29"
-      }
+    "columns": [
+      "cardSummary",
+      "aisle",
+      "section",
+      "shelfColor"
     ],
-    "sourceCount": 3,
-    "sectionCounts": {
-      "A1 — Fresh Produce": 6,
-      "A2 — Bakery": 6,
-      "A3 — Dairy & Chilled": 6,
-      "A4 — Frozen": 6,
-      "A5 — Drinks": 6,
-      "A6 — Snacks": 6,
-      "A7 — Health & Beauty": 6,
-      "A8 — Household": 6,
-      "A9 — Meat & Seafood": 6,
-      "A10 — Pantry / Canned": 6
-    },
-    "sourceNotes": [
-      "All 60 item-to-aisle-to-shelf-color rows come from a single unofficial fan source, cleanthesupermarket.com (author jimliu_dev). The site explicitly states it is NOT affiliated with the game developer (Tidyverse), Roblox, or Roblox Corporation. Treat values as best-effort; the source itself warns item and aisle names should be rechecked against the live Roblox build.",
-      "Item count of 60 is confirmed two ways: the shelf-codes canonical table lists 10 aisles x 6 example items, and the /collectibles checklist reads '0 of 60 tracked' and lists 60 rows prefixed with aisle codes A1-A10.",
-      "Roblox game identity verified via games.roblox.com (universe 10334731049, root place 120450743769548, creator Tidyverse). The Roblox API does not expose the grocery item-to-aisle mapping, so item rows are sourced from the community site, not the API.",
-      "Section grouping is by aisle (A1-A10) because the entire game loop is deciding which aisle an item belongs to; grouping items under their destination aisle mirrors the in-game sorting decision. Within each aisle, items keep the source's listed order, not alphabetical.",
-      "Shelf color is the in-game visual cue for each aisle (e.g. A3 Dairy & Chilled = blue). 'ice' (A4) and 'dark red' (A9) are the source's exact color labels.",
-      "No per-item art exists on the source (text-only checklist). Images are deferred to the image gate and are null here. Images are NOT a data blocker.",
-      "Evergreen-safe: no dates, counts, or freshness wording in any rendered prose field; the {count} token handles the title count and the updatedAt/source dates live only in this hidden meta."
-    ],
-    "imageCount": 0,
-    "missingImageCount": 60,
-    "imageStatus": "pending image gate"
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "A1 — Fresh Produce",
+        "A2 — Bakery",
+        "A3 — Dairy & Chilled",
+        "A4 — Frozen",
+        "A5 — Drinks",
+        "A6 — Snacks",
+        "A7 — Health & Beauty",
+        "A8 — Household",
+        "A9 — Meat & Seafood",
+        "A10 — Pantry / Canned"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "aisle",
+        "section",
+        "shelfColor"
+      ],
+      "tableFields": [
+        "cardSummary",
+        "aisle",
+        "section",
+        "shelfColor"
+      ],
+      "fieldPresentation": {
+        "aisle": {
+          "kind": "chip",
+          "label": "Aisle"
+        },
+        "section": {
+          "kind": "plain",
+          "label": "Section"
+        },
+        "shelfColor": {
+          "kind": "highlight",
+          "label": "Shelf color"
+        }
+      }
+    }
   },
   "items": [
     {
-      "name": "Apple",
-      "slug": "apple",
-      "collectionSection": "A1 — Fresh Produce",
-      "image": null,
-      "cardSummary": "Sort Apple onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
-      "aisle": "A1",
-      "section": "Fresh Produce",
-      "shelfColor": "green",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 1
+      "item": {
+        "name": "Apple",
+        "cardSummary": "Sort Apple onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
+        "aisle": "A1",
+        "section": "Fresh Produce",
+        "shelfColor": "green"
+      },
+      "system": {
+        "slug": "apple",
+        "section": "A1 — Fresh Produce",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Banana",
-      "slug": "banana",
-      "collectionSection": "A1 — Fresh Produce",
-      "image": null,
-      "cardSummary": "Sort Banana onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
-      "aisle": "A1",
-      "section": "Fresh Produce",
-      "shelfColor": "green",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 2
+      "item": {
+        "name": "Banana",
+        "cardSummary": "Sort Banana onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
+        "aisle": "A1",
+        "section": "Fresh Produce",
+        "shelfColor": "green"
+      },
+      "system": {
+        "slug": "banana",
+        "section": "A1 — Fresh Produce",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Tomato",
-      "slug": "tomato",
-      "collectionSection": "A1 — Fresh Produce",
-      "image": null,
-      "cardSummary": "Sort Tomato onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
-      "aisle": "A1",
-      "section": "Fresh Produce",
-      "shelfColor": "green",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 3
+      "item": {
+        "name": "Tomato",
+        "cardSummary": "Sort Tomato onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
+        "aisle": "A1",
+        "section": "Fresh Produce",
+        "shelfColor": "green"
+      },
+      "system": {
+        "slug": "tomato",
+        "section": "A1 — Fresh Produce",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Lettuce",
-      "slug": "lettuce",
-      "collectionSection": "A1 — Fresh Produce",
-      "image": null,
-      "cardSummary": "Sort Lettuce onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
-      "aisle": "A1",
-      "section": "Fresh Produce",
-      "shelfColor": "green",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 4
+      "item": {
+        "name": "Lettuce",
+        "cardSummary": "Sort Lettuce onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
+        "aisle": "A1",
+        "section": "Fresh Produce",
+        "shelfColor": "green"
+      },
+      "system": {
+        "slug": "lettuce",
+        "section": "A1 — Fresh Produce",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Carrot",
-      "slug": "carrot",
-      "collectionSection": "A1 — Fresh Produce",
-      "image": null,
-      "cardSummary": "Sort Carrot onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
-      "aisle": "A1",
-      "section": "Fresh Produce",
-      "shelfColor": "green",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 5
+      "item": {
+        "name": "Carrot",
+        "cardSummary": "Sort Carrot onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
+        "aisle": "A1",
+        "section": "Fresh Produce",
+        "shelfColor": "green"
+      },
+      "system": {
+        "slug": "carrot",
+        "section": "A1 — Fresh Produce",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Strawberry",
-      "slug": "strawberry",
-      "collectionSection": "A1 — Fresh Produce",
-      "image": null,
-      "cardSummary": "Sort Strawberry onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
-      "aisle": "A1",
-      "section": "Fresh Produce",
-      "shelfColor": "green",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 6
+      "item": {
+        "name": "Strawberry",
+        "cardSummary": "Sort Strawberry onto the A1 Fresh Produce shelf, marked by the green shelf color cue.",
+        "aisle": "A1",
+        "section": "Fresh Produce",
+        "shelfColor": "green"
+      },
+      "system": {
+        "slug": "strawberry",
+        "section": "A1 — Fresh Produce",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Bread",
-      "slug": "bread",
-      "collectionSection": "A2 — Bakery",
-      "image": null,
-      "cardSummary": "Sort Bread onto the A2 Bakery shelf, marked by the tan shelf color cue.",
-      "aisle": "A2",
-      "section": "Bakery",
-      "shelfColor": "tan",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 7
+      "item": {
+        "name": "Bread",
+        "cardSummary": "Sort Bread onto the A2 Bakery shelf, marked by the tan shelf color cue.",
+        "aisle": "A2",
+        "section": "Bakery",
+        "shelfColor": "tan"
+      },
+      "system": {
+        "slug": "bread",
+        "section": "A2 — Bakery",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Baguette",
-      "slug": "baguette",
-      "collectionSection": "A2 — Bakery",
-      "image": null,
-      "cardSummary": "Sort Baguette onto the A2 Bakery shelf, marked by the tan shelf color cue.",
-      "aisle": "A2",
-      "section": "Bakery",
-      "shelfColor": "tan",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 8
+      "item": {
+        "name": "Baguette",
+        "cardSummary": "Sort Baguette onto the A2 Bakery shelf, marked by the tan shelf color cue.",
+        "aisle": "A2",
+        "section": "Bakery",
+        "shelfColor": "tan"
+      },
+      "system": {
+        "slug": "baguette",
+        "section": "A2 — Bakery",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Croissant",
-      "slug": "croissant",
-      "collectionSection": "A2 — Bakery",
-      "image": null,
-      "cardSummary": "Sort Croissant onto the A2 Bakery shelf, marked by the tan shelf color cue.",
-      "aisle": "A2",
-      "section": "Bakery",
-      "shelfColor": "tan",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 9
+      "item": {
+        "name": "Croissant",
+        "cardSummary": "Sort Croissant onto the A2 Bakery shelf, marked by the tan shelf color cue.",
+        "aisle": "A2",
+        "section": "Bakery",
+        "shelfColor": "tan"
+      },
+      "system": {
+        "slug": "croissant",
+        "section": "A2 — Bakery",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Muffin",
-      "slug": "muffin",
-      "collectionSection": "A2 — Bakery",
-      "image": null,
-      "cardSummary": "Sort Muffin onto the A2 Bakery shelf, marked by the tan shelf color cue.",
-      "aisle": "A2",
-      "section": "Bakery",
-      "shelfColor": "tan",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 10
+      "item": {
+        "name": "Muffin",
+        "cardSummary": "Sort Muffin onto the A2 Bakery shelf, marked by the tan shelf color cue.",
+        "aisle": "A2",
+        "section": "Bakery",
+        "shelfColor": "tan"
+      },
+      "system": {
+        "slug": "muffin",
+        "section": "A2 — Bakery",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Pretzel",
-      "slug": "pretzel",
-      "collectionSection": "A2 — Bakery",
-      "image": null,
-      "cardSummary": "Sort Pretzel onto the A2 Bakery shelf, marked by the tan shelf color cue.",
-      "aisle": "A2",
-      "section": "Bakery",
-      "shelfColor": "tan",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 11
+      "item": {
+        "name": "Pretzel",
+        "cardSummary": "Sort Pretzel onto the A2 Bakery shelf, marked by the tan shelf color cue.",
+        "aisle": "A2",
+        "section": "Bakery",
+        "shelfColor": "tan"
+      },
+      "system": {
+        "slug": "pretzel",
+        "section": "A2 — Bakery",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Bagel",
-      "slug": "bagel",
-      "collectionSection": "A2 — Bakery",
-      "image": null,
-      "cardSummary": "Sort Bagel onto the A2 Bakery shelf, marked by the tan shelf color cue.",
-      "aisle": "A2",
-      "section": "Bakery",
-      "shelfColor": "tan",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 12
+      "item": {
+        "name": "Bagel",
+        "cardSummary": "Sort Bagel onto the A2 Bakery shelf, marked by the tan shelf color cue.",
+        "aisle": "A2",
+        "section": "Bakery",
+        "shelfColor": "tan"
+      },
+      "system": {
+        "slug": "bagel",
+        "section": "A2 — Bakery",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Milk",
-      "slug": "milk",
-      "collectionSection": "A3 — Dairy & Chilled",
-      "image": null,
-      "cardSummary": "Sort Milk onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
-      "aisle": "A3",
-      "section": "Dairy & Chilled",
-      "shelfColor": "blue",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 13
+      "item": {
+        "name": "Milk",
+        "cardSummary": "Sort Milk onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
+        "aisle": "A3",
+        "section": "Dairy & Chilled",
+        "shelfColor": "blue"
+      },
+      "system": {
+        "slug": "milk",
+        "section": "A3 — Dairy & Chilled",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Cheese",
-      "slug": "cheese",
-      "collectionSection": "A3 — Dairy & Chilled",
-      "image": null,
-      "cardSummary": "Sort Cheese onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
-      "aisle": "A3",
-      "section": "Dairy & Chilled",
-      "shelfColor": "blue",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 14
+      "item": {
+        "name": "Cheese",
+        "cardSummary": "Sort Cheese onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
+        "aisle": "A3",
+        "section": "Dairy & Chilled",
+        "shelfColor": "blue"
+      },
+      "system": {
+        "slug": "cheese",
+        "section": "A3 — Dairy & Chilled",
+        "sortOrder": 14,
+        "image": null
+      }
     },
     {
-      "name": "Butter",
-      "slug": "butter",
-      "collectionSection": "A3 — Dairy & Chilled",
-      "image": null,
-      "cardSummary": "Sort Butter onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
-      "aisle": "A3",
-      "section": "Dairy & Chilled",
-      "shelfColor": "blue",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 15
+      "item": {
+        "name": "Butter",
+        "cardSummary": "Sort Butter onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
+        "aisle": "A3",
+        "section": "Dairy & Chilled",
+        "shelfColor": "blue"
+      },
+      "system": {
+        "slug": "butter",
+        "section": "A3 — Dairy & Chilled",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "Yogurt",
-      "slug": "yogurt",
-      "collectionSection": "A3 — Dairy & Chilled",
-      "image": null,
-      "cardSummary": "Sort Yogurt onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
-      "aisle": "A3",
-      "section": "Dairy & Chilled",
-      "shelfColor": "blue",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 16
+      "item": {
+        "name": "Yogurt",
+        "cardSummary": "Sort Yogurt onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
+        "aisle": "A3",
+        "section": "Dairy & Chilled",
+        "shelfColor": "blue"
+      },
+      "system": {
+        "slug": "yogurt",
+        "section": "A3 — Dairy & Chilled",
+        "sortOrder": 16,
+        "image": null
+      }
     },
     {
-      "name": "Eggs",
-      "slug": "eggs",
-      "collectionSection": "A3 — Dairy & Chilled",
-      "image": null,
-      "cardSummary": "Sort Eggs onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
-      "aisle": "A3",
-      "section": "Dairy & Chilled",
-      "shelfColor": "blue",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 17
+      "item": {
+        "name": "Eggs",
+        "cardSummary": "Sort Eggs onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
+        "aisle": "A3",
+        "section": "Dairy & Chilled",
+        "shelfColor": "blue"
+      },
+      "system": {
+        "slug": "eggs",
+        "section": "A3 — Dairy & Chilled",
+        "sortOrder": 17,
+        "image": null
+      }
     },
     {
-      "name": "Cream",
-      "slug": "cream",
-      "collectionSection": "A3 — Dairy & Chilled",
-      "image": null,
-      "cardSummary": "Sort Cream onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
-      "aisle": "A3",
-      "section": "Dairy & Chilled",
-      "shelfColor": "blue",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 18
+      "item": {
+        "name": "Cream",
+        "cardSummary": "Sort Cream onto the A3 Dairy & Chilled shelf, marked by the blue shelf color cue.",
+        "aisle": "A3",
+        "section": "Dairy & Chilled",
+        "shelfColor": "blue"
+      },
+      "system": {
+        "slug": "cream",
+        "section": "A3 — Dairy & Chilled",
+        "sortOrder": 18,
+        "image": null
+      }
     },
     {
-      "name": "Ice Cream",
-      "slug": "ice-cream",
-      "collectionSection": "A4 — Frozen",
-      "image": null,
-      "cardSummary": "Sort Ice Cream onto the A4 Frozen shelf, marked by the ice shelf color cue.",
-      "aisle": "A4",
-      "section": "Frozen",
-      "shelfColor": "ice",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 19
+      "item": {
+        "name": "Ice Cream",
+        "cardSummary": "Sort Ice Cream onto the A4 Frozen shelf, marked by the ice shelf color cue.",
+        "aisle": "A4",
+        "section": "Frozen",
+        "shelfColor": "ice"
+      },
+      "system": {
+        "slug": "ice-cream",
+        "section": "A4 — Frozen",
+        "sortOrder": 19,
+        "image": null
+      }
     },
     {
-      "name": "Frozen Pizza",
-      "slug": "frozen-pizza",
-      "collectionSection": "A4 — Frozen",
-      "image": null,
-      "cardSummary": "Sort Frozen Pizza onto the A4 Frozen shelf, marked by the ice shelf color cue.",
-      "aisle": "A4",
-      "section": "Frozen",
-      "shelfColor": "ice",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 20
+      "item": {
+        "name": "Frozen Pizza",
+        "cardSummary": "Sort Frozen Pizza onto the A4 Frozen shelf, marked by the ice shelf color cue.",
+        "aisle": "A4",
+        "section": "Frozen",
+        "shelfColor": "ice"
+      },
+      "system": {
+        "slug": "frozen-pizza",
+        "section": "A4 — Frozen",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "Frozen Fish",
-      "slug": "frozen-fish",
-      "collectionSection": "A4 — Frozen",
-      "image": null,
-      "cardSummary": "Sort Frozen Fish onto the A4 Frozen shelf, marked by the ice shelf color cue.",
-      "aisle": "A4",
-      "section": "Frozen",
-      "shelfColor": "ice",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 21
+      "item": {
+        "name": "Frozen Fish",
+        "cardSummary": "Sort Frozen Fish onto the A4 Frozen shelf, marked by the ice shelf color cue.",
+        "aisle": "A4",
+        "section": "Frozen",
+        "shelfColor": "ice"
+      },
+      "system": {
+        "slug": "frozen-fish",
+        "section": "A4 — Frozen",
+        "sortOrder": 21,
+        "image": null
+      }
     },
     {
-      "name": "Frozen Vegetables",
-      "slug": "frozen-vegetables",
-      "collectionSection": "A4 — Frozen",
-      "image": null,
-      "cardSummary": "Sort Frozen Vegetables onto the A4 Frozen shelf, marked by the ice shelf color cue.",
-      "aisle": "A4",
-      "section": "Frozen",
-      "shelfColor": "ice",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 22
+      "item": {
+        "name": "Frozen Vegetables",
+        "cardSummary": "Sort Frozen Vegetables onto the A4 Frozen shelf, marked by the ice shelf color cue.",
+        "aisle": "A4",
+        "section": "Frozen",
+        "shelfColor": "ice"
+      },
+      "system": {
+        "slug": "frozen-vegetables",
+        "section": "A4 — Frozen",
+        "sortOrder": 22,
+        "image": null
+      }
     },
     {
-      "name": "Ice",
-      "slug": "ice",
-      "collectionSection": "A4 — Frozen",
-      "image": null,
-      "cardSummary": "Sort Ice onto the A4 Frozen shelf, marked by the ice shelf color cue.",
-      "aisle": "A4",
-      "section": "Frozen",
-      "shelfColor": "ice",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 23
+      "item": {
+        "name": "Ice",
+        "cardSummary": "Sort Ice onto the A4 Frozen shelf, marked by the ice shelf color cue.",
+        "aisle": "A4",
+        "section": "Frozen",
+        "shelfColor": "ice"
+      },
+      "system": {
+        "slug": "ice",
+        "section": "A4 — Frozen",
+        "sortOrder": 23,
+        "image": null
+      }
     },
     {
-      "name": "Dumplings",
-      "slug": "dumplings",
-      "collectionSection": "A4 — Frozen",
-      "image": null,
-      "cardSummary": "Sort Dumplings onto the A4 Frozen shelf, marked by the ice shelf color cue.",
-      "aisle": "A4",
-      "section": "Frozen",
-      "shelfColor": "ice",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 24
+      "item": {
+        "name": "Dumplings",
+        "cardSummary": "Sort Dumplings onto the A4 Frozen shelf, marked by the ice shelf color cue.",
+        "aisle": "A4",
+        "section": "Frozen",
+        "shelfColor": "ice"
+      },
+      "system": {
+        "slug": "dumplings",
+        "section": "A4 — Frozen",
+        "sortOrder": 24,
+        "image": null
+      }
     },
     {
-      "name": "Soda",
-      "slug": "soda",
-      "collectionSection": "A5 — Drinks",
-      "image": null,
-      "cardSummary": "Sort Soda onto the A5 Drinks shelf, marked by the red shelf color cue.",
-      "aisle": "A5",
-      "section": "Drinks",
-      "shelfColor": "red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 25
+      "item": {
+        "name": "Soda",
+        "cardSummary": "Sort Soda onto the A5 Drinks shelf, marked by the red shelf color cue.",
+        "aisle": "A5",
+        "section": "Drinks",
+        "shelfColor": "red"
+      },
+      "system": {
+        "slug": "soda",
+        "section": "A5 — Drinks",
+        "sortOrder": 25,
+        "image": null
+      }
     },
     {
-      "name": "Water",
-      "slug": "water",
-      "collectionSection": "A5 — Drinks",
-      "image": null,
-      "cardSummary": "Sort Water onto the A5 Drinks shelf, marked by the red shelf color cue.",
-      "aisle": "A5",
-      "section": "Drinks",
-      "shelfColor": "red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 26
+      "item": {
+        "name": "Water",
+        "cardSummary": "Sort Water onto the A5 Drinks shelf, marked by the red shelf color cue.",
+        "aisle": "A5",
+        "section": "Drinks",
+        "shelfColor": "red"
+      },
+      "system": {
+        "slug": "water",
+        "section": "A5 — Drinks",
+        "sortOrder": 26,
+        "image": null
+      }
     },
     {
-      "name": "Juice",
-      "slug": "juice",
-      "collectionSection": "A5 — Drinks",
-      "image": null,
-      "cardSummary": "Sort Juice onto the A5 Drinks shelf, marked by the red shelf color cue.",
-      "aisle": "A5",
-      "section": "Drinks",
-      "shelfColor": "red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 27
+      "item": {
+        "name": "Juice",
+        "cardSummary": "Sort Juice onto the A5 Drinks shelf, marked by the red shelf color cue.",
+        "aisle": "A5",
+        "section": "Drinks",
+        "shelfColor": "red"
+      },
+      "system": {
+        "slug": "juice",
+        "section": "A5 — Drinks",
+        "sortOrder": 27,
+        "image": null
+      }
     },
     {
-      "name": "Coffee",
-      "slug": "coffee",
-      "collectionSection": "A5 — Drinks",
-      "image": null,
-      "cardSummary": "Sort Coffee onto the A5 Drinks shelf, marked by the red shelf color cue.",
-      "aisle": "A5",
-      "section": "Drinks",
-      "shelfColor": "red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 28
+      "item": {
+        "name": "Coffee",
+        "cardSummary": "Sort Coffee onto the A5 Drinks shelf, marked by the red shelf color cue.",
+        "aisle": "A5",
+        "section": "Drinks",
+        "shelfColor": "red"
+      },
+      "system": {
+        "slug": "coffee",
+        "section": "A5 — Drinks",
+        "sortOrder": 28,
+        "image": null
+      }
     },
     {
-      "name": "Tea",
-      "slug": "tea",
-      "collectionSection": "A5 — Drinks",
-      "image": null,
-      "cardSummary": "Sort Tea onto the A5 Drinks shelf, marked by the red shelf color cue.",
-      "aisle": "A5",
-      "section": "Drinks",
-      "shelfColor": "red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 29
+      "item": {
+        "name": "Tea",
+        "cardSummary": "Sort Tea onto the A5 Drinks shelf, marked by the red shelf color cue.",
+        "aisle": "A5",
+        "section": "Drinks",
+        "shelfColor": "red"
+      },
+      "system": {
+        "slug": "tea",
+        "section": "A5 — Drinks",
+        "sortOrder": 29,
+        "image": null
+      }
     },
     {
-      "name": "Energy Drink",
-      "slug": "energy-drink",
-      "collectionSection": "A5 — Drinks",
-      "image": null,
-      "cardSummary": "Sort Energy Drink onto the A5 Drinks shelf, marked by the red shelf color cue.",
-      "aisle": "A5",
-      "section": "Drinks",
-      "shelfColor": "red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 30
+      "item": {
+        "name": "Energy Drink",
+        "cardSummary": "Sort Energy Drink onto the A5 Drinks shelf, marked by the red shelf color cue.",
+        "aisle": "A5",
+        "section": "Drinks",
+        "shelfColor": "red"
+      },
+      "system": {
+        "slug": "energy-drink",
+        "section": "A5 — Drinks",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "Chips",
-      "slug": "chips",
-      "collectionSection": "A6 — Snacks",
-      "image": null,
-      "cardSummary": "Sort Chips onto the A6 Snacks shelf, marked by the orange shelf color cue.",
-      "aisle": "A6",
-      "section": "Snacks",
-      "shelfColor": "orange",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 31
+      "item": {
+        "name": "Chips",
+        "cardSummary": "Sort Chips onto the A6 Snacks shelf, marked by the orange shelf color cue.",
+        "aisle": "A6",
+        "section": "Snacks",
+        "shelfColor": "orange"
+      },
+      "system": {
+        "slug": "chips",
+        "section": "A6 — Snacks",
+        "sortOrder": 31,
+        "image": null
+      }
     },
     {
-      "name": "Chocolate",
-      "slug": "chocolate",
-      "collectionSection": "A6 — Snacks",
-      "image": null,
-      "cardSummary": "Sort Chocolate onto the A6 Snacks shelf, marked by the orange shelf color cue.",
-      "aisle": "A6",
-      "section": "Snacks",
-      "shelfColor": "orange",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 32
+      "item": {
+        "name": "Chocolate",
+        "cardSummary": "Sort Chocolate onto the A6 Snacks shelf, marked by the orange shelf color cue.",
+        "aisle": "A6",
+        "section": "Snacks",
+        "shelfColor": "orange"
+      },
+      "system": {
+        "slug": "chocolate",
+        "section": "A6 — Snacks",
+        "sortOrder": 32,
+        "image": null
+      }
     },
     {
-      "name": "Candy",
-      "slug": "candy",
-      "collectionSection": "A6 — Snacks",
-      "image": null,
-      "cardSummary": "Sort Candy onto the A6 Snacks shelf, marked by the orange shelf color cue.",
-      "aisle": "A6",
-      "section": "Snacks",
-      "shelfColor": "orange",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 33
+      "item": {
+        "name": "Candy",
+        "cardSummary": "Sort Candy onto the A6 Snacks shelf, marked by the orange shelf color cue.",
+        "aisle": "A6",
+        "section": "Snacks",
+        "shelfColor": "orange"
+      },
+      "system": {
+        "slug": "candy",
+        "section": "A6 — Snacks",
+        "sortOrder": 33,
+        "image": null
+      }
     },
     {
-      "name": "Cookies",
-      "slug": "cookies",
-      "collectionSection": "A6 — Snacks",
-      "image": null,
-      "cardSummary": "Sort Cookies onto the A6 Snacks shelf, marked by the orange shelf color cue.",
-      "aisle": "A6",
-      "section": "Snacks",
-      "shelfColor": "orange",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 34
+      "item": {
+        "name": "Cookies",
+        "cardSummary": "Sort Cookies onto the A6 Snacks shelf, marked by the orange shelf color cue.",
+        "aisle": "A6",
+        "section": "Snacks",
+        "shelfColor": "orange"
+      },
+      "system": {
+        "slug": "cookies",
+        "section": "A6 — Snacks",
+        "sortOrder": 34,
+        "image": null
+      }
     },
     {
-      "name": "Popcorn",
-      "slug": "popcorn",
-      "collectionSection": "A6 — Snacks",
-      "image": null,
-      "cardSummary": "Sort Popcorn onto the A6 Snacks shelf, marked by the orange shelf color cue.",
-      "aisle": "A6",
-      "section": "Snacks",
-      "shelfColor": "orange",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 35
+      "item": {
+        "name": "Popcorn",
+        "cardSummary": "Sort Popcorn onto the A6 Snacks shelf, marked by the orange shelf color cue.",
+        "aisle": "A6",
+        "section": "Snacks",
+        "shelfColor": "orange"
+      },
+      "system": {
+        "slug": "popcorn",
+        "section": "A6 — Snacks",
+        "sortOrder": 35,
+        "image": null
+      }
     },
     {
-      "name": "Crackers",
-      "slug": "crackers",
-      "collectionSection": "A6 — Snacks",
-      "image": null,
-      "cardSummary": "Sort Crackers onto the A6 Snacks shelf, marked by the orange shelf color cue.",
-      "aisle": "A6",
-      "section": "Snacks",
-      "shelfColor": "orange",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 36
+      "item": {
+        "name": "Crackers",
+        "cardSummary": "Sort Crackers onto the A6 Snacks shelf, marked by the orange shelf color cue.",
+        "aisle": "A6",
+        "section": "Snacks",
+        "shelfColor": "orange"
+      },
+      "system": {
+        "slug": "crackers",
+        "section": "A6 — Snacks",
+        "sortOrder": 36,
+        "image": null
+      }
     },
     {
-      "name": "Shampoo",
-      "slug": "shampoo",
-      "collectionSection": "A7 — Health & Beauty",
-      "image": null,
-      "cardSummary": "Sort Shampoo onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
-      "aisle": "A7",
-      "section": "Health & Beauty",
-      "shelfColor": "purple",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 37
+      "item": {
+        "name": "Shampoo",
+        "cardSummary": "Sort Shampoo onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
+        "aisle": "A7",
+        "section": "Health & Beauty",
+        "shelfColor": "purple"
+      },
+      "system": {
+        "slug": "shampoo",
+        "section": "A7 — Health & Beauty",
+        "sortOrder": 37,
+        "image": null
+      }
     },
     {
-      "name": "Soap",
-      "slug": "soap",
-      "collectionSection": "A7 — Health & Beauty",
-      "image": null,
-      "cardSummary": "Sort Soap onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
-      "aisle": "A7",
-      "section": "Health & Beauty",
-      "shelfColor": "purple",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 38
+      "item": {
+        "name": "Soap",
+        "cardSummary": "Sort Soap onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
+        "aisle": "A7",
+        "section": "Health & Beauty",
+        "shelfColor": "purple"
+      },
+      "system": {
+        "slug": "soap",
+        "section": "A7 — Health & Beauty",
+        "sortOrder": 38,
+        "image": null
+      }
     },
     {
-      "name": "Toothpaste",
-      "slug": "toothpaste",
-      "collectionSection": "A7 — Health & Beauty",
-      "image": null,
-      "cardSummary": "Sort Toothpaste onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
-      "aisle": "A7",
-      "section": "Health & Beauty",
-      "shelfColor": "purple",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 39
+      "item": {
+        "name": "Toothpaste",
+        "cardSummary": "Sort Toothpaste onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
+        "aisle": "A7",
+        "section": "Health & Beauty",
+        "shelfColor": "purple"
+      },
+      "system": {
+        "slug": "toothpaste",
+        "section": "A7 — Health & Beauty",
+        "sortOrder": 39,
+        "image": null
+      }
     },
     {
-      "name": "Lotion",
-      "slug": "lotion",
-      "collectionSection": "A7 — Health & Beauty",
-      "image": null,
-      "cardSummary": "Sort Lotion onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
-      "aisle": "A7",
-      "section": "Health & Beauty",
-      "shelfColor": "purple",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 40
+      "item": {
+        "name": "Lotion",
+        "cardSummary": "Sort Lotion onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
+        "aisle": "A7",
+        "section": "Health & Beauty",
+        "shelfColor": "purple"
+      },
+      "system": {
+        "slug": "lotion",
+        "section": "A7 — Health & Beauty",
+        "sortOrder": 40,
+        "image": null
+      }
     },
     {
-      "name": "Tissues",
-      "slug": "tissues",
-      "collectionSection": "A7 — Health & Beauty",
-      "image": null,
-      "cardSummary": "Sort Tissues onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
-      "aisle": "A7",
-      "section": "Health & Beauty",
-      "shelfColor": "purple",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 41
+      "item": {
+        "name": "Tissues",
+        "cardSummary": "Sort Tissues onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
+        "aisle": "A7",
+        "section": "Health & Beauty",
+        "shelfColor": "purple"
+      },
+      "system": {
+        "slug": "tissues",
+        "section": "A7 — Health & Beauty",
+        "sortOrder": 41,
+        "image": null
+      }
     },
     {
-      "name": "Deodorant",
-      "slug": "deodorant",
-      "collectionSection": "A7 — Health & Beauty",
-      "image": null,
-      "cardSummary": "Sort Deodorant onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
-      "aisle": "A7",
-      "section": "Health & Beauty",
-      "shelfColor": "purple",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 42
+      "item": {
+        "name": "Deodorant",
+        "cardSummary": "Sort Deodorant onto the A7 Health & Beauty shelf, marked by the purple shelf color cue.",
+        "aisle": "A7",
+        "section": "Health & Beauty",
+        "shelfColor": "purple"
+      },
+      "system": {
+        "slug": "deodorant",
+        "section": "A7 — Health & Beauty",
+        "sortOrder": 42,
+        "image": null
+      }
     },
     {
-      "name": "Detergent",
-      "slug": "detergent",
-      "collectionSection": "A8 — Household",
-      "image": null,
-      "cardSummary": "Sort Detergent onto the A8 Household shelf, marked by the slate shelf color cue.",
-      "aisle": "A8",
-      "section": "Household",
-      "shelfColor": "slate",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 43
+      "item": {
+        "name": "Detergent",
+        "cardSummary": "Sort Detergent onto the A8 Household shelf, marked by the slate shelf color cue.",
+        "aisle": "A8",
+        "section": "Household",
+        "shelfColor": "slate"
+      },
+      "system": {
+        "slug": "detergent",
+        "section": "A8 — Household",
+        "sortOrder": 43,
+        "image": null
+      }
     },
     {
-      "name": "Paper Towels",
-      "slug": "paper-towels",
-      "collectionSection": "A8 — Household",
-      "image": null,
-      "cardSummary": "Sort Paper Towels onto the A8 Household shelf, marked by the slate shelf color cue.",
-      "aisle": "A8",
-      "section": "Household",
-      "shelfColor": "slate",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 44
+      "item": {
+        "name": "Paper Towels",
+        "cardSummary": "Sort Paper Towels onto the A8 Household shelf, marked by the slate shelf color cue.",
+        "aisle": "A8",
+        "section": "Household",
+        "shelfColor": "slate"
+      },
+      "system": {
+        "slug": "paper-towels",
+        "section": "A8 — Household",
+        "sortOrder": 44,
+        "image": null
+      }
     },
     {
-      "name": "Trash Bags",
-      "slug": "trash-bags",
-      "collectionSection": "A8 — Household",
-      "image": null,
-      "cardSummary": "Sort Trash Bags onto the A8 Household shelf, marked by the slate shelf color cue.",
-      "aisle": "A8",
-      "section": "Household",
-      "shelfColor": "slate",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 45
+      "item": {
+        "name": "Trash Bags",
+        "cardSummary": "Sort Trash Bags onto the A8 Household shelf, marked by the slate shelf color cue.",
+        "aisle": "A8",
+        "section": "Household",
+        "shelfColor": "slate"
+      },
+      "system": {
+        "slug": "trash-bags",
+        "section": "A8 — Household",
+        "sortOrder": 45,
+        "image": null
+      }
     },
     {
-      "name": "Sponges",
-      "slug": "sponges",
-      "collectionSection": "A8 — Household",
-      "image": null,
-      "cardSummary": "Sort Sponges onto the A8 Household shelf, marked by the slate shelf color cue.",
-      "aisle": "A8",
-      "section": "Household",
-      "shelfColor": "slate",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 46
+      "item": {
+        "name": "Sponges",
+        "cardSummary": "Sort Sponges onto the A8 Household shelf, marked by the slate shelf color cue.",
+        "aisle": "A8",
+        "section": "Household",
+        "shelfColor": "slate"
+      },
+      "system": {
+        "slug": "sponges",
+        "section": "A8 — Household",
+        "sortOrder": 46,
+        "image": null
+      }
     },
     {
-      "name": "Cleaner",
-      "slug": "cleaner",
-      "collectionSection": "A8 — Household",
-      "image": null,
-      "cardSummary": "Sort Cleaner onto the A8 Household shelf, marked by the slate shelf color cue.",
-      "aisle": "A8",
-      "section": "Household",
-      "shelfColor": "slate",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 47
+      "item": {
+        "name": "Cleaner",
+        "cardSummary": "Sort Cleaner onto the A8 Household shelf, marked by the slate shelf color cue.",
+        "aisle": "A8",
+        "section": "Household",
+        "shelfColor": "slate"
+      },
+      "system": {
+        "slug": "cleaner",
+        "section": "A8 — Household",
+        "sortOrder": 47,
+        "image": null
+      }
     },
     {
-      "name": "Foil",
-      "slug": "foil",
-      "collectionSection": "A8 — Household",
-      "image": null,
-      "cardSummary": "Sort Foil onto the A8 Household shelf, marked by the slate shelf color cue.",
-      "aisle": "A8",
-      "section": "Household",
-      "shelfColor": "slate",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 48
+      "item": {
+        "name": "Foil",
+        "cardSummary": "Sort Foil onto the A8 Household shelf, marked by the slate shelf color cue.",
+        "aisle": "A8",
+        "section": "Household",
+        "shelfColor": "slate"
+      },
+      "system": {
+        "slug": "foil",
+        "section": "A8 — Household",
+        "sortOrder": 48,
+        "image": null
+      }
     },
     {
-      "name": "Beef",
-      "slug": "beef",
-      "collectionSection": "A9 — Meat & Seafood",
-      "image": null,
-      "cardSummary": "Sort Beef onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
-      "aisle": "A9",
-      "section": "Meat & Seafood",
-      "shelfColor": "dark red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 49
+      "item": {
+        "name": "Beef",
+        "cardSummary": "Sort Beef onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
+        "aisle": "A9",
+        "section": "Meat & Seafood",
+        "shelfColor": "dark red"
+      },
+      "system": {
+        "slug": "beef",
+        "section": "A9 — Meat & Seafood",
+        "sortOrder": 49,
+        "image": null
+      }
     },
     {
-      "name": "Chicken",
-      "slug": "chicken",
-      "collectionSection": "A9 — Meat & Seafood",
-      "image": null,
-      "cardSummary": "Sort Chicken onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
-      "aisle": "A9",
-      "section": "Meat & Seafood",
-      "shelfColor": "dark red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 50
+      "item": {
+        "name": "Chicken",
+        "cardSummary": "Sort Chicken onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
+        "aisle": "A9",
+        "section": "Meat & Seafood",
+        "shelfColor": "dark red"
+      },
+      "system": {
+        "slug": "chicken",
+        "section": "A9 — Meat & Seafood",
+        "sortOrder": 50,
+        "image": null
+      }
     },
     {
-      "name": "Pork",
-      "slug": "pork",
-      "collectionSection": "A9 — Meat & Seafood",
-      "image": null,
-      "cardSummary": "Sort Pork onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
-      "aisle": "A9",
-      "section": "Meat & Seafood",
-      "shelfColor": "dark red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 51
+      "item": {
+        "name": "Pork",
+        "cardSummary": "Sort Pork onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
+        "aisle": "A9",
+        "section": "Meat & Seafood",
+        "shelfColor": "dark red"
+      },
+      "system": {
+        "slug": "pork",
+        "section": "A9 — Meat & Seafood",
+        "sortOrder": 51,
+        "image": null
+      }
     },
     {
-      "name": "Fish",
-      "slug": "fish",
-      "collectionSection": "A9 — Meat & Seafood",
-      "image": null,
-      "cardSummary": "Sort Fish onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
-      "aisle": "A9",
-      "section": "Meat & Seafood",
-      "shelfColor": "dark red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 52
+      "item": {
+        "name": "Fish",
+        "cardSummary": "Sort Fish onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
+        "aisle": "A9",
+        "section": "Meat & Seafood",
+        "shelfColor": "dark red"
+      },
+      "system": {
+        "slug": "fish",
+        "section": "A9 — Meat & Seafood",
+        "sortOrder": 52,
+        "image": null
+      }
     },
     {
-      "name": "Sausage",
-      "slug": "sausage",
-      "collectionSection": "A9 — Meat & Seafood",
-      "image": null,
-      "cardSummary": "Sort Sausage onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
-      "aisle": "A9",
-      "section": "Meat & Seafood",
-      "shelfColor": "dark red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 53
+      "item": {
+        "name": "Sausage",
+        "cardSummary": "Sort Sausage onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
+        "aisle": "A9",
+        "section": "Meat & Seafood",
+        "shelfColor": "dark red"
+      },
+      "system": {
+        "slug": "sausage",
+        "section": "A9 — Meat & Seafood",
+        "sortOrder": 53,
+        "image": null
+      }
     },
     {
-      "name": "Bacon",
-      "slug": "bacon",
-      "collectionSection": "A9 — Meat & Seafood",
-      "image": null,
-      "cardSummary": "Sort Bacon onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
-      "aisle": "A9",
-      "section": "Meat & Seafood",
-      "shelfColor": "dark red",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 54
+      "item": {
+        "name": "Bacon",
+        "cardSummary": "Sort Bacon onto the A9 Meat & Seafood shelf, marked by the dark red shelf color cue.",
+        "aisle": "A9",
+        "section": "Meat & Seafood",
+        "shelfColor": "dark red"
+      },
+      "system": {
+        "slug": "bacon",
+        "section": "A9 — Meat & Seafood",
+        "sortOrder": 54,
+        "image": null
+      }
     },
     {
-      "name": "Pasta",
-      "slug": "pasta",
-      "collectionSection": "A10 — Pantry / Canned",
-      "image": null,
-      "cardSummary": "Sort Pasta onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
-      "aisle": "A10",
-      "section": "Pantry / Canned",
-      "shelfColor": "brown",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 55
+      "item": {
+        "name": "Pasta",
+        "cardSummary": "Sort Pasta onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
+        "aisle": "A10",
+        "section": "Pantry / Canned",
+        "shelfColor": "brown"
+      },
+      "system": {
+        "slug": "pasta",
+        "section": "A10 — Pantry / Canned",
+        "sortOrder": 55,
+        "image": null
+      }
     },
     {
-      "name": "Rice",
-      "slug": "rice",
-      "collectionSection": "A10 — Pantry / Canned",
-      "image": null,
-      "cardSummary": "Sort Rice onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
-      "aisle": "A10",
-      "section": "Pantry / Canned",
-      "shelfColor": "brown",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 56
+      "item": {
+        "name": "Rice",
+        "cardSummary": "Sort Rice onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
+        "aisle": "A10",
+        "section": "Pantry / Canned",
+        "shelfColor": "brown"
+      },
+      "system": {
+        "slug": "rice",
+        "section": "A10 — Pantry / Canned",
+        "sortOrder": 56,
+        "image": null
+      }
     },
     {
-      "name": "Canned Soup",
-      "slug": "canned-soup",
-      "collectionSection": "A10 — Pantry / Canned",
-      "image": null,
-      "cardSummary": "Sort Canned Soup onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
-      "aisle": "A10",
-      "section": "Pantry / Canned",
-      "shelfColor": "brown",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 57
+      "item": {
+        "name": "Canned Soup",
+        "cardSummary": "Sort Canned Soup onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
+        "aisle": "A10",
+        "section": "Pantry / Canned",
+        "shelfColor": "brown"
+      },
+      "system": {
+        "slug": "canned-soup",
+        "section": "A10 — Pantry / Canned",
+        "sortOrder": 57,
+        "image": null
+      }
     },
     {
-      "name": "Beans",
-      "slug": "beans",
-      "collectionSection": "A10 — Pantry / Canned",
-      "image": null,
-      "cardSummary": "Sort Beans onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
-      "aisle": "A10",
-      "section": "Pantry / Canned",
-      "shelfColor": "brown",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 58
+      "item": {
+        "name": "Beans",
+        "cardSummary": "Sort Beans onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
+        "aisle": "A10",
+        "section": "Pantry / Canned",
+        "shelfColor": "brown"
+      },
+      "system": {
+        "slug": "beans",
+        "section": "A10 — Pantry / Canned",
+        "sortOrder": 58,
+        "image": null
+      }
     },
     {
-      "name": "Cereal",
-      "slug": "cereal",
-      "collectionSection": "A10 — Pantry / Canned",
-      "image": null,
-      "cardSummary": "Sort Cereal onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
-      "aisle": "A10",
-      "section": "Pantry / Canned",
-      "shelfColor": "brown",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 59
+      "item": {
+        "name": "Cereal",
+        "cardSummary": "Sort Cereal onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
+        "aisle": "A10",
+        "section": "Pantry / Canned",
+        "shelfColor": "brown"
+      },
+      "system": {
+        "slug": "cereal",
+        "section": "A10 — Pantry / Canned",
+        "sortOrder": 59,
+        "image": null
+      }
     },
     {
-      "name": "Flour",
-      "slug": "flour",
-      "collectionSection": "A10 — Pantry / Canned",
-      "image": null,
-      "cardSummary": "Sort Flour onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
-      "aisle": "A10",
-      "section": "Pantry / Canned",
-      "shelfColor": "brown",
-      "sourcePage": "https://cleanthesupermarket.com/shelf-codes",
-      "sourceConfidence": "medium",
-      "sourceCheckedAt": "2026-06-29",
-      "verificationNote": "Item-to-aisle mapping and shelf color from the cleanthesupermarket.com canonical aisle table (unofficial fan source); recheck against the live Roblox build where possible.",
-      "imageStatus": "pending image gate",
-      "sortOrder": 60
+      "item": {
+        "name": "Flour",
+        "cardSummary": "Sort Flour onto the A10 Pantry / Canned shelf, marked by the brown shelf color cue.",
+        "aisle": "A10",
+        "section": "Pantry / Canned",
+        "shelfColor": "brown"
+      },
+      "system": {
+        "slug": "flour",
+        "section": "A10 — Pantry / Canned",
+        "sortOrder": 60,
+        "image": null
+      }
     }
   ]
 }

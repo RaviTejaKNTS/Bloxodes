@@ -1,624 +1,609 @@
 {
   "meta": {
-    "title": "Pet Simulator 99 machines data",
-    "updatedAt": "2026-06-08",
-    "sources": [
-      {
-        "label": "Pet Simulator Wiki - List of Machines (Pet Simulator 99)",
-        "url": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "Pet Simulator Wiki - Category: Machines",
-        "url": "https://pet-simulator.fandom.com/wiki/Category%3AMachines",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "Pet Simulator 99 Wiki - List of Areas",
-        "url": "https://pet-simulator-99.fandom.com/wiki/List_of_Areas_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - First Update",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-1",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Anniversary Gift",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-36",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Grow an Egg",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-60",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Trials & Combine",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-77",
-        "accessed": "2026-06-08"
-      }
-    ],
-    "sourceAudit": {
-      "finalCount": 32,
-      "coreMachineRows": 30,
-      "edgeRows": 2,
-      "excludedVendingRows": 27,
-      "imageCoverage": "0/32",
-      "notes": [
-        "Final dataset uses the approved 32-row core/action scope.",
-        "The 27 vending machine rows from the source table are intentionally excluded from default cards and should be summarized in page copy.",
-        "Evolve Machine is included as a stable endgame conversion station with irreversible cost context.",
-        "Combine-O-Matic is included as an edge row with limited/event-origin availability context and no recipe list.",
-        "Images are intentionally blank until clean station icons or screenshots are gathered locally."
-      ]
-    },
-    "columns": [
-      "name",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "machines",
+    "route": "/wiki/pet-simulator-99/machines",
+    "catalogCode": "pet-simulator-99-machines",
+    "itemFields": [
       "task",
       "location",
       "inputCost",
       "output",
       "unlockAvailability",
       "warning",
-      "description",
-      "sortOrder",
-      "sourcePage",
-      "sourceCheckedAt",
-      "sourceStatus",
-      "verificationNote"
-    ]
+      "description"
+    ],
+    "columns": [
+      "task",
+      "location",
+      "inputCost",
+      "output",
+      "unlockAvailability",
+      "warning",
+      "description"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Pet and hatch progression",
+        "Item upgrade and crafting",
+        "Rewards, quests, and boosts",
+        "Travel and management hubs"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "task",
+        "location",
+        "inputCost",
+        "output",
+        "unlockAvailability",
+        "warning"
+      ],
+      "tableFields": [
+        "task",
+        "location",
+        "inputCost",
+        "output",
+        "unlockAvailability",
+        "warning",
+        "description"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Pet Box",
-      "slug": "pet-box",
-      "image": null,
-      "collectionSection": "Pet and hatch progression",
-      "task": "Collect transferred pets",
-      "location": "Area #1 - Spawn",
-      "inputCost": "Transferred Pet Simulator X pets",
-      "output": "Transferred pets in Pet Simulator 99",
-      "unlockAvailability": "Available at Spawn",
-      "description": "Pet Box is the first transfer station players see, used for claiming pets brought over from Pet Simulator X.",
-      "sortOrder": 1,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Pet Box",
+        "task": "Collect transferred pets",
+        "location": "Area #1 - Spawn",
+        "inputCost": "Transferred Pet Simulator X pets",
+        "output": "Transferred pets in Pet Simulator 99",
+        "unlockAvailability": "Available at Spawn",
+        "description": "Pet Box is the first transfer station players see, used for claiming pets brought over from Pet Simulator X."
+      },
+      "system": {
+        "slug": "pet-box",
+        "section": "Pet and hatch progression",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Garg Machine (Huge-A-Tron)",
-      "slug": "garg-machine-huge-a-tron",
-      "image": null,
-      "collectionSection": "Pet and hatch progression",
-      "task": "Create Huge or Gargantuan machine eggs",
-      "location": "Area #3 - Castle",
-      "inputCost": "Small Exclusive pets or listed machine requirements",
-      "output": "Huge Egg or refreshed Gargantuan Machine reward pool",
-      "unlockAvailability": "Castle machine; reward lineup can refresh",
-      "warning": "Consumes valuable Exclusive pets or machine inputs.",
-      "description": "Garg Machine, also known through Huge-A-Tron context, is an expensive pet-conversion station for chasing bigger exclusive rewards.",
-      "sortOrder": 2,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://www.biggames.io/post/pet-simulator-99-update-77",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main list identifies the Castle Huge-A-Tron use; BIG Games Update 77 confirms Gargantuan Machine refresh behavior."
+      "item": {
+        "name": "Garg Machine (Huge-A-Tron)",
+        "task": "Create Huge or Gargantuan machine eggs",
+        "location": "Area #3 - Castle",
+        "inputCost": "Small Exclusive pets or listed machine requirements",
+        "output": "Huge Egg or refreshed Gargantuan Machine reward pool",
+        "unlockAvailability": "Castle machine; reward lineup can refresh",
+        "warning": "Consumes valuable Exclusive pets or machine inputs.",
+        "description": "Garg Machine, also known through Huge-A-Tron context, is an expensive pet-conversion station for chasing bigger exclusive rewards."
+      },
+      "system": {
+        "slug": "garg-machine-huge-a-tron",
+        "section": "Pet and hatch progression",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Pets Equipped",
-      "slug": "pets-equipped",
-      "image": null,
-      "collectionSection": "Pet and hatch progression",
-      "task": "Increase equipped pet team size",
-      "location": "Area #4 - Green Forest",
-      "inputCost": "Upgrade cost shown at the machine",
-      "output": "More equipped pet slots",
-      "unlockAvailability": "Unlocked through early area progression",
-      "description": "Pets Equipped is a core team-size station, useful as soon as stronger farming depends on having more pets active.",
-      "sortOrder": 3,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Pets Equipped",
+        "task": "Increase equipped pet team size",
+        "location": "Area #4 - Green Forest",
+        "inputCost": "Upgrade cost shown at the machine",
+        "output": "More equipped pet slots",
+        "unlockAvailability": "Unlocked through early area progression",
+        "description": "Pets Equipped is a core team-size station, useful as soon as stronger farming depends on having more pets active."
+      },
+      "system": {
+        "slug": "pets-equipped",
+        "section": "Pet and hatch progression",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Egg Machine",
-      "slug": "egg-machine",
-      "image": null,
-      "collectionSection": "Pet and hatch progression",
-      "task": "Open more eggs at once",
-      "location": "Area #8 - Backyard",
-      "inputCost": "Upgrade cost shown at the machine",
-      "output": "More simultaneous egg opens",
-      "unlockAvailability": "Unlocked through early area progression",
-      "description": "Egg Machine helps hatching sessions scale by raising how many eggs a player can open at once.",
-      "sortOrder": 4,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Egg Machine",
+        "task": "Open more eggs at once",
+        "location": "Area #8 - Backyard",
+        "inputCost": "Upgrade cost shown at the machine",
+        "output": "More simultaneous egg opens",
+        "unlockAvailability": "Unlocked through early area progression",
+        "description": "Egg Machine helps hatching sessions scale by raising how many eggs a player can open at once."
+      },
+      "system": {
+        "slug": "egg-machine",
+        "section": "Pet and hatch progression",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Gold Pets Machine",
-      "slug": "gold-pets-machine",
-      "image": null,
-      "collectionSection": "Pet and hatch progression",
-      "task": "Convert pets to gold",
-      "location": "Area #10 - Mine; also available from Tech Spawn machine hub context",
-      "inputCost": "Pets selected for gold conversion",
-      "output": "Gold versions of pets",
-      "unlockAvailability": "Stable pet conversion machine",
-      "description": "Gold Pets Machine turns normal pets into gold versions, making it one of the first major pet-upgrade stops.",
-      "sortOrder": 5,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://www.biggames.io/post/pet-simulator-99-update-77",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main list gives Mine location; Update 77 confirms current Gold/Rainbow machine behavior through bug-fix notes."
+      "item": {
+        "name": "Gold Pets Machine",
+        "task": "Convert pets to gold",
+        "location": "Area #10 - Mine; also available from Tech Spawn machine hub context",
+        "inputCost": "Pets selected for gold conversion",
+        "output": "Gold versions of pets",
+        "unlockAvailability": "Stable pet conversion machine",
+        "description": "Gold Pets Machine turns normal pets into gold versions, making it one of the first major pet-upgrade stops."
+      },
+      "system": {
+        "slug": "gold-pets-machine",
+        "section": "Pet and hatch progression",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Fuse Machine",
-      "slug": "fuse-machine",
-      "image": null,
-      "collectionSection": "Pet and hatch progression",
-      "task": "Combine pets",
-      "location": "Area #28 - Shanty Town",
-      "inputCost": "Pets selected for fusing",
-      "output": "A combined pet result",
-      "unlockAvailability": "Stable pet conversion machine",
-      "description": "Fuse Machine is for turning extra pets into a new pet result instead of keeping every duplicate in inventory.",
-      "sortOrder": 6,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Fuse Machine",
+        "task": "Combine pets",
+        "location": "Area #28 - Shanty Town",
+        "inputCost": "Pets selected for fusing",
+        "output": "A combined pet result",
+        "unlockAvailability": "Stable pet conversion machine",
+        "description": "Fuse Machine is for turning extra pets into a new pet result instead of keeping every duplicate in inventory."
+      },
+      "system": {
+        "slug": "fuse-machine",
+        "section": "Pet and hatch progression",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Rainbow Machine",
-      "slug": "rainbow-machine",
-      "image": null,
-      "collectionSection": "Pet and hatch progression",
-      "task": "Convert gold pets to rainbow",
-      "location": "Area #31 - Desert Pyramids; also available from Tech Spawn machine hub context",
-      "inputCost": "Gold pets selected for rainbow conversion",
-      "output": "Rainbow versions of pets",
-      "unlockAvailability": "Stable pet conversion machine",
-      "description": "Rainbow Machine is the next pet-upgrade step after gold, turning gold pets into stronger rainbow versions.",
-      "sortOrder": 7,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://www.biggames.io/post/pet-simulator-99-update-77",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main list gives Desert Pyramids location; Update 77 confirms current Gold/Rainbow machine behavior through bug-fix notes."
+      "item": {
+        "name": "Rainbow Machine",
+        "task": "Convert gold pets to rainbow",
+        "location": "Area #31 - Desert Pyramids; also available from Tech Spawn machine hub context",
+        "inputCost": "Gold pets selected for rainbow conversion",
+        "output": "Rainbow versions of pets",
+        "unlockAvailability": "Stable pet conversion machine",
+        "description": "Rainbow Machine is the next pet-upgrade step after gold, turning gold pets into stronger rainbow versions."
+      },
+      "system": {
+        "slug": "rainbow-machine",
+        "section": "Pet and hatch progression",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Evolve Machine",
-      "slug": "evolve-machine",
-      "image": null,
-      "collectionSection": "Pet and hatch progression",
-      "task": "Convert Huge pets into evolved variants",
-      "location": "Void World Evolve Machine",
-      "inputCost": "5 eligible normal Huge pets",
-      "output": "Evolved Huge pet variant",
-      "unlockAvailability": "Stable endgame conversion station",
-      "warning": "Evolution cannot be undone and the Huge pets used are gone.",
-      "description": "Evolve Machine is for endgame players who want evolved Huge variants and the Exclusive Daycare diamond bonus, not a casual pet upgrade.",
-      "sortOrder": 8,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Evolve_Machine_%28Pet_Simulator_99%29; https://www.biggames.io/post/pet-simulator-99-update-36",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Individual page and BIG Games Update 36 confirm 5-Huge cost, irreversible conversion, and 1.5x Exclusive Daycare diamond context."
+      "item": {
+        "name": "Evolve Machine",
+        "task": "Convert Huge pets into evolved variants",
+        "location": "Void World Evolve Machine",
+        "inputCost": "5 eligible normal Huge pets",
+        "output": "Evolved Huge pet variant",
+        "unlockAvailability": "Stable endgame conversion station",
+        "warning": "Evolution cannot be undone and the Huge pets used are gone.",
+        "description": "Evolve Machine is for endgame players who want evolved Huge variants and the Exclusive Daycare diamond bonus, not a casual pet upgrade."
+      },
+      "system": {
+        "slug": "evolve-machine",
+        "section": "Pet and hatch progression",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Card Combination Machine",
-      "slug": "card-combination-machine",
-      "image": null,
-      "collectionSection": "Pet and hatch progression",
-      "task": "Convert cards to pets",
-      "location": "Super Computer",
-      "inputCost": "Eligible cards",
-      "output": "Pet rewards from card conversion",
-      "unlockAvailability": "Accessed through Super Computer",
-      "description": "Card Combination Machine handles card-to-pet conversion without needing a normal area-station stop.",
-      "sortOrder": 9,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Card Combination Machine",
+        "task": "Convert cards to pets",
+        "location": "Super Computer",
+        "inputCost": "Eligible cards",
+        "output": "Pet rewards from card conversion",
+        "unlockAvailability": "Accessed through Super Computer",
+        "description": "Card Combination Machine handles card-to-pet conversion without needing a normal area-station stop."
+      },
+      "system": {
+        "slug": "card-combination-machine",
+        "section": "Pet and hatch progression",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Upgrade Potions Machine",
-      "slug": "upgrade-potions-machine",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Upgrade potions",
-      "location": "Area #13 - Dark Forest",
-      "inputCost": "Lower-tier potions and machine cost",
-      "output": "Better potions",
-      "unlockAvailability": "Stable item upgrade machine",
-      "description": "Upgrade Potions Machine turns lower potion tiers into stronger ones, which also makes spare low-tier boosts useful later.",
-      "sortOrder": 10,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://pet-simulator.fandom.com/wiki/Upgrade_Potions_Machine_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Location from main list; exact high-tier costs intentionally left to potion catalog/in-game machine because source tables can conflict."
+      "item": {
+        "name": "Upgrade Potions Machine",
+        "task": "Upgrade potions",
+        "location": "Area #13 - Dark Forest",
+        "inputCost": "Lower-tier potions and machine cost",
+        "output": "Better potions",
+        "unlockAvailability": "Stable item upgrade machine",
+        "description": "Upgrade Potions Machine turns lower potion tiers into stronger ones, which also makes spare low-tier boosts useful later."
+      },
+      "system": {
+        "slug": "upgrade-potions-machine",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Upgrade Enchants Machine",
-      "slug": "upgrade-enchants-machine",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Upgrade enchants",
-      "location": "Area #16 - Crimson Forest",
-      "inputCost": "Lower-tier enchant books and machine cost",
-      "output": "Better enchant books",
-      "unlockAvailability": "Stable item upgrade machine",
-      "description": "Upgrade Enchants Machine is the normal route for pushing tiered enchant books into stronger versions.",
-      "sortOrder": 11,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://pet-simulator.fandom.com/wiki/Upgrade_Enchants_Machine_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Location from main list; ties to tiered enchant upgrade behavior."
+      "item": {
+        "name": "Upgrade Enchants Machine",
+        "task": "Upgrade enchants",
+        "location": "Area #16 - Crimson Forest",
+        "inputCost": "Lower-tier enchant books and machine cost",
+        "output": "Better enchant books",
+        "unlockAvailability": "Stable item upgrade machine",
+        "description": "Upgrade Enchants Machine is the normal route for pushing tiered enchant books into stronger versions."
+      },
+      "system": {
+        "slug": "upgrade-enchants-machine",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Upgrade Fruits Machine",
-      "slug": "upgrade-fruits-machine",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Upgrade fruits",
-      "location": "Area #52 - Bamboo Forest",
-      "inputCost": "Fruit stacks",
-      "output": "Rainbow Fruits or Shiny Fruits",
-      "unlockAvailability": "Stable item upgrade machine",
-      "description": "Upgrade Fruits Machine is the fruit-blending station for turning regular fruit stacks into stronger fruit variants.",
-      "sortOrder": 12,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://www.biggames.io/post/pet-simulator-99-update-1",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main list and BIG Games Update 1 confirm fruit machine context around Bamboo Forest."
+      "item": {
+        "name": "Upgrade Fruits Machine",
+        "task": "Upgrade fruits",
+        "location": "Area #52 - Bamboo Forest",
+        "inputCost": "Fruit stacks",
+        "output": "Rainbow Fruits or Shiny Fruits",
+        "unlockAvailability": "Stable item upgrade machine",
+        "description": "Upgrade Fruits Machine is the fruit-blending station for turning regular fruit stacks into stronger fruit variants."
+      },
+      "system": {
+        "slug": "upgrade-fruits-machine",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Magic Machine",
-      "slug": "magic-machine",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Craft magic items",
-      "location": "Area #77 - Haunted Mansion",
-      "inputCost": "Magic Shards and Buckets",
-      "output": "Certain crafted items",
-      "unlockAvailability": "World 1 late-area crafting station",
-      "description": "Magic Machine spends magic materials for selected crafted items after players reach Haunted Mansion.",
-      "sortOrder": 13,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Magic Machine",
+        "task": "Craft magic items",
+        "location": "Area #77 - Haunted Mansion",
+        "inputCost": "Magic Shards and Buckets",
+        "output": "Certain crafted items",
+        "unlockAvailability": "World 1 late-area crafting station",
+        "description": "Magic Machine spends magic materials for selected crafted items after players reach Haunted Mansion."
+      },
+      "system": {
+        "slug": "magic-machine",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Item Creator",
-      "slug": "item-creator",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Make items from quests",
-      "location": "Area #120 - Cuboid Canyon",
-      "inputCost": "Quest progress or listed item requirements",
-      "output": "Created items",
-      "unlockAvailability": "Tech World item station",
-      "description": "Item Creator turns quest work into items, so it belongs with crafting stations rather than normal pet machines.",
-      "sortOrder": 14,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Item Creator",
+        "task": "Make items from quests",
+        "location": "Area #120 - Cuboid Canyon",
+        "inputCost": "Quest progress or listed item requirements",
+        "output": "Created items",
+        "unlockAvailability": "Tech World item station",
+        "description": "Item Creator turns quest work into items, so it belongs with crafting stations rather than normal pet machines."
+      },
+      "system": {
+        "slug": "item-creator",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 14,
+        "image": null
+      }
     },
     {
-      "name": "Forge Machine",
-      "slug": "forge-machine",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Forge items into parent items",
-      "location": "Area #156 - Steampunk Clockwork",
-      "inputCost": "Eligible forge items",
-      "output": "Parent items",
-      "unlockAvailability": "Tech World item station",
-      "description": "Forge Machine is a later item-combination station for turning eligible materials into parent items.",
-      "sortOrder": 15,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Forge Machine",
+        "task": "Forge items into parent items",
+        "location": "Area #156 - Steampunk Clockwork",
+        "inputCost": "Eligible forge items",
+        "output": "Parent items",
+        "unlockAvailability": "Tech World item station",
+        "description": "Forge Machine is a later item-combination station for turning eligible materials into parent items."
+      },
+      "system": {
+        "slug": "forge-machine",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "Empower Enchants",
-      "slug": "empower-enchants",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Temporarily boost enchant books",
-      "location": "Area #162 - Wizard Tech Forest",
-      "inputCost": "Enchant essence and selected enchant",
-      "output": "Empowered enchant for 8 hours",
-      "unlockAvailability": "Tech World enchant station",
-      "description": "Empower Enchants is a short-session boost station for books you already plan to use.",
-      "sortOrder": 16,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://pet-simulator.fandom.com/wiki/Enchants_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main machine list confirms 8-hour empower behavior and location."
+      "item": {
+        "name": "Empower Enchants",
+        "task": "Temporarily boost enchant books",
+        "location": "Area #162 - Wizard Tech Forest",
+        "inputCost": "Enchant essence and selected enchant",
+        "output": "Empowered enchant for 8 hours",
+        "unlockAvailability": "Tech World enchant station",
+        "description": "Empower Enchants is a short-session boost station for books you already plan to use."
+      },
+      "system": {
+        "slug": "empower-enchants",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 16,
+        "image": null
+      }
     },
     {
-      "name": "Enchant Essence",
-      "slug": "enchant-essence",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Turn books into essence",
-      "location": "Area #162 - Wizard Tech Forest",
-      "inputCost": "Enchant books",
-      "output": "Enchant essence",
-      "unlockAvailability": "Tech World enchant station",
-      "description": "Enchant Essence converts books into the essence used by the empower system.",
-      "sortOrder": 17,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://pet-simulator.fandom.com/wiki/Enchants_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main machine list confirms book-to-essence behavior and location."
+      "item": {
+        "name": "Enchant Essence",
+        "task": "Turn books into essence",
+        "location": "Area #162 - Wizard Tech Forest",
+        "inputCost": "Enchant books",
+        "output": "Enchant essence",
+        "unlockAvailability": "Tech World enchant station",
+        "description": "Enchant Essence converts books into the essence used by the empower system."
+      },
+      "system": {
+        "slug": "enchant-essence",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 17,
+        "image": null
+      }
     },
     {
-      "name": "XP Potion Machine",
-      "slug": "xp-potion-machine",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Create XP potions",
-      "location": "Area #166 - Cyberpunk Industrial",
-      "inputCost": "Recipe ingredients shown at the machine",
-      "output": "Ultimate, Mastery, Huge, or Titanic XP potions",
-      "unlockAvailability": "Tech World potion station",
-      "description": "XP Potion Machine creates direct-progress potions for expensive targets such as Huge pets, Titanic pets, masteries, and ultimates.",
-      "sortOrder": 18,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://pet-simulator.fandom.com/wiki/XP_Potion_Machine_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main machine list confirms XP potion targets and location."
+      "item": {
+        "name": "XP Potion Machine",
+        "task": "Create XP potions",
+        "location": "Area #166 - Cyberpunk Industrial",
+        "inputCost": "Recipe ingredients shown at the machine",
+        "output": "Ultimate, Mastery, Huge, or Titanic XP potions",
+        "unlockAvailability": "Tech World potion station",
+        "description": "XP Potion Machine creates direct-progress potions for expensive targets such as Huge pets, Titanic pets, masteries, and ultimates."
+      },
+      "system": {
+        "slug": "xp-potion-machine",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 18,
+        "image": null
+      }
     },
     {
-      "name": "Prison P (Prison Preston)",
-      "slug": "prison-p-prison-preston",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Convert Prison Keys",
-      "location": "Area #203 - Prison Yard",
-      "inputCost": "Prison Keys",
-      "output": "Converted key rewards",
-      "unlockAvailability": "Void World prison station",
-      "description": "Prison Preston is a key-conversion station tied to the Prison area route.",
-      "sortOrder": 19,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Prison P (Prison Preston)",
+        "task": "Convert Prison Keys",
+        "location": "Area #203 - Prison Yard",
+        "inputCost": "Prison Keys",
+        "output": "Converted key rewards",
+        "unlockAvailability": "Void World prison station",
+        "description": "Prison Preston is a key-conversion station tied to the Prison area route."
+      },
+      "system": {
+        "slug": "prison-p-prison-preston",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 19,
+        "image": null
+      }
     },
     {
-      "name": "Seashell Machine",
-      "slug": "seashell-machine",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Create Summer Gifts",
-      "location": "Area #205 - Beach Island",
-      "inputCost": "Seashell materials",
-      "output": "Summer Gifts",
-      "unlockAvailability": "Void World beach station",
-      "description": "Seashell Machine is a gift-crafting station for turning seashell resources into Summer Gifts.",
-      "sortOrder": 20,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Seashell Machine",
+        "task": "Create Summer Gifts",
+        "location": "Area #205 - Beach Island",
+        "inputCost": "Seashell materials",
+        "output": "Summer Gifts",
+        "unlockAvailability": "Void World beach station",
+        "description": "Seashell Machine is a gift-crafting station for turning seashell resources into Summer Gifts."
+      },
+      "system": {
+        "slug": "seashell-machine",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "Combine-O-Matic",
-      "slug": "combine-o-matic",
-      "image": null,
-      "collectionSection": "Item upgrade and crafting",
-      "task": "Combine limited items or pets",
-      "location": "Event worlds and Fantasy World contexts",
-      "inputCost": "Event or world items listed by the active machine",
-      "output": "Higher-tier items, Huge pets, Titanic pets, or Gargantuan pets",
-      "unlockAvailability": "Limited or refreshed crafting station",
-      "warning": "Recipes change by event and should not be treated as permanent.",
-      "description": "Combine-O-Matic is a recurring limited crafting station, so the row tracks the machine role without turning old recipes into permanent card text.",
-      "sortOrder": 21,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Combine-O-Matic_%28Pet_Simulator_99%29; https://www.biggames.io/post/pet-simulator-99-update-60; https://www.biggames.io/post/pet-simulator-99-update-77",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Included as approved edge row with limited/event-origin context and no recipe-track expansion."
+      "item": {
+        "name": "Combine-O-Matic",
+        "task": "Combine limited items or pets",
+        "location": "Event worlds and Fantasy World contexts",
+        "inputCost": "Event or world items listed by the active machine",
+        "output": "Higher-tier items, Huge pets, Titanic pets, or Gargantuan pets",
+        "unlockAvailability": "Limited or refreshed crafting station",
+        "warning": "Recipes change by event and should not be treated as permanent.",
+        "description": "Combine-O-Matic is a recurring limited crafting station, so the row tracks the machine role without turning old recipes into permanent card text."
+      },
+      "system": {
+        "slug": "combine-o-matic",
+        "section": "Item upgrade and crafting",
+        "sortOrder": 21,
+        "image": null
+      }
     },
     {
-      "name": "Daycare",
-      "slug": "daycare",
-      "image": null,
-      "collectionSection": "Rewards, quests, and boosts",
-      "task": "Enroll pets for rewards",
-      "location": "Area #20 - Beach",
-      "inputCost": "Pets enrolled for a daycare timer",
-      "output": "Daycare rewards",
-      "unlockAvailability": "Stable reward station",
-      "description": "Daycare turns unused pets into timed reward runs while they are enrolled.",
-      "sortOrder": 22,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Daycare",
+        "task": "Enroll pets for rewards",
+        "location": "Area #20 - Beach",
+        "inputCost": "Pets enrolled for a daycare timer",
+        "output": "Daycare rewards",
+        "unlockAvailability": "Stable reward station",
+        "description": "Daycare turns unused pets into timed reward runs while they are enrolled."
+      },
+      "system": {
+        "slug": "daycare",
+        "section": "Rewards, quests, and boosts",
+        "sortOrder": 22,
+        "image": null
+      }
     },
     {
-      "name": "Comet Shower Machine",
-      "slug": "comet-shower-machine",
-      "image": null,
-      "collectionSection": "Rewards, quests, and boosts",
-      "task": "Start a Comet Shower",
-      "location": "Area #44 - Obsidian Cave",
-      "inputCost": "Machine requirement shown in game",
-      "output": "Comet Shower event in an area",
-      "unlockAvailability": "Stable world-action station",
-      "description": "Comet Shower Machine starts a comet event when players want a burst of breakable-style rewards.",
-      "sortOrder": 23,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Comet Shower Machine",
+        "task": "Start a Comet Shower",
+        "location": "Area #44 - Obsidian Cave",
+        "inputCost": "Machine requirement shown in game",
+        "output": "Comet Shower event in an area",
+        "unlockAvailability": "Stable world-action station",
+        "description": "Comet Shower Machine starts a comet event when players want a burst of breakable-style rewards."
+      },
+      "system": {
+        "slug": "comet-shower-machine",
+        "section": "Rewards, quests, and boosts",
+        "sortOrder": 23,
+        "image": null
+      }
     },
     {
-      "name": "Quest Machines",
-      "slug": "quest-machines",
-      "image": null,
-      "collectionSection": "Rewards, quests, and boosts",
-      "task": "Claim rotating quests",
-      "location": "Area #29 - Desert Village; Area #60 - Rainbow River; Area #111 - Oasis Ruins",
-      "inputCost": "Daily, 3 Day, or Weekly quest work",
-      "output": "Quest rewards",
-      "unlockAvailability": "Multiple quest boards across progression",
-      "description": "Quest Machines group daily, 3 Day, and weekly quest boards into one route-focused row so players can find the board they need.",
-      "sortOrder": 24,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Collapsed three quest-board variants into one row to avoid duplicate cards."
+      "item": {
+        "name": "Quest Machines",
+        "task": "Claim rotating quests",
+        "location": "Area #29 - Desert Village; Area #60 - Rainbow River; Area #111 - Oasis Ruins",
+        "inputCost": "Daily, 3 Day, or Weekly quest work",
+        "output": "Quest rewards",
+        "unlockAvailability": "Multiple quest boards across progression",
+        "description": "Quest Machines group daily, 3 Day, and weekly quest boards into one route-focused row so players can find the board they need."
+      },
+      "system": {
+        "slug": "quest-machines",
+        "section": "Rewards, quests, and boosts",
+        "sortOrder": 24,
+        "image": null
+      }
     },
     {
-      "name": "Exclusive Daycare",
-      "slug": "exclusive-daycare",
-      "image": null,
-      "collectionSection": "Rewards, quests, and boosts",
-      "task": "Earn diamonds from Huge and Titanic pets",
-      "location": "Area #145 - Egg Incubator",
-      "inputCost": "Huge and Titanic pets inserted into Exclusive Daycare",
-      "output": "Diamonds",
-      "unlockAvailability": "Late-game reward station",
-      "warning": "Only commit valuable pets when you understand the daycare timer and payoff.",
-      "description": "Exclusive Daycare is a late-game diamond station for players who can spare Huge or Titanic pets for reward time.",
-      "sortOrder": 25,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://pet-simulator.fandom.com/wiki/Evolve_Machine_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main list gives location/use; Evolve Machine page confirms Exclusive Daycare diamond bonus relevance for evolved pets."
+      "item": {
+        "name": "Exclusive Daycare",
+        "task": "Earn diamonds from Huge and Titanic pets",
+        "location": "Area #145 - Egg Incubator",
+        "inputCost": "Huge and Titanic pets inserted into Exclusive Daycare",
+        "output": "Diamonds",
+        "unlockAvailability": "Late-game reward station",
+        "warning": "Only commit valuable pets when you understand the daycare timer and payoff.",
+        "description": "Exclusive Daycare is a late-game diamond station for players who can spare Huge or Titanic pets for reward time."
+      },
+      "system": {
+        "slug": "exclusive-daycare",
+        "section": "Rewards, quests, and boosts",
+        "sortOrder": 25,
+        "image": null
+      }
     },
     {
-      "name": "Area Surge",
-      "slug": "area-surge",
-      "image": null,
-      "collectionSection": "Rewards, quests, and boosts",
-      "task": "Supercharge an area for coins",
-      "location": "Area #177 - Holographic City",
-      "inputCost": "Machine activation requirement shown in game",
-      "output": "5x coins while activated",
-      "unlockAvailability": "Tech World boost station",
-      "description": "Area Surge is a coin-focused boost station for charging an area when currency farming is the goal.",
-      "sortOrder": 26,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://pet-simulator.fandom.com/wiki/Area_Surge_Machine_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Individual page confirms Area 177 and 5x coin boost behavior."
+      "item": {
+        "name": "Area Surge",
+        "task": "Supercharge an area for coins",
+        "location": "Area #177 - Holographic City",
+        "inputCost": "Machine activation requirement shown in game",
+        "output": "5x coins while activated",
+        "unlockAvailability": "Tech World boost station",
+        "description": "Area Surge is a coin-focused boost station for charging an area when currency farming is the goal."
+      },
+      "system": {
+        "slug": "area-surge",
+        "section": "Rewards, quests, and boosts",
+        "sortOrder": 26,
+        "image": null
+      }
     },
     {
-      "name": "Boost Exchange",
-      "slug": "boost-exchange",
-      "image": null,
-      "collectionSection": "Rewards, quests, and boosts",
-      "task": "Convert Bucks into temporary boosts",
-      "location": "Area #217 - Silver City",
-      "inputCost": "Millionaire Bucks",
-      "output": "Diamond, drop chance, and egg luck boost time",
-      "unlockAvailability": "Millionaire World boost station",
-      "description": "Boost Exchange spends Millionaire Bucks for temporary farming and hatching boosts after players reach Silver City.",
-      "sortOrder": 27,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Boost_Exchange_%28Pet_Simulator_99%29; https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Individual page confirms Bucks-to-boost behavior, boost types, and 24-hour per-boost cap."
+      "item": {
+        "name": "Boost Exchange",
+        "task": "Convert Bucks into temporary boosts",
+        "location": "Area #217 - Silver City",
+        "inputCost": "Millionaire Bucks",
+        "output": "Diamond, drop chance, and egg luck boost time",
+        "unlockAvailability": "Millionaire World boost station",
+        "description": "Boost Exchange spends Millionaire Bucks for temporary farming and hatching boosts after players reach Silver City."
+      },
+      "system": {
+        "slug": "boost-exchange",
+        "section": "Rewards, quests, and boosts",
+        "sortOrder": 27,
+        "image": null
+      }
     },
     {
-      "name": "Trainer Preston",
-      "slug": "trainer-preston",
-      "image": null,
-      "collectionSection": "Rewards, quests, and boosts",
-      "task": "Complete pet-catching quests",
-      "location": "Area #229 - Elemental Realm",
-      "inputCost": "Pet-catching quest work",
-      "output": "Trainer quest rewards",
-      "unlockAvailability": "Elemental World quest station",
-      "description": "Trainer Preston is a quest station tied to catching pets rather than crafting or converting inventory items.",
-      "sortOrder": 28,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Trainer Preston",
+        "task": "Complete pet-catching quests",
+        "location": "Area #229 - Elemental Realm",
+        "inputCost": "Pet-catching quest work",
+        "output": "Trainer quest rewards",
+        "unlockAvailability": "Elemental World quest station",
+        "description": "Trainer Preston is a quest station tied to catching pets rather than crafting or converting inventory items."
+      },
+      "system": {
+        "slug": "trainer-preston",
+        "section": "Rewards, quests, and boosts",
+        "sortOrder": 28,
+        "image": null
+      }
     },
     {
-      "name": "Wings Upgrade",
-      "slug": "wings-upgrade",
-      "image": null,
-      "collectionSection": "Rewards, quests, and boosts",
-      "task": "Upgrade wings",
-      "location": "Area #230 - Elysium Fields",
-      "inputCost": "Wing upgrade requirement shown in game",
-      "output": "Improved wings",
-      "unlockAvailability": "Elemental World upgrade station",
-      "description": "Wings Upgrade is a world-specific progression station for improving the wings system.",
-      "sortOrder": 29,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Wings Upgrade",
+        "task": "Upgrade wings",
+        "location": "Area #230 - Elysium Fields",
+        "inputCost": "Wing upgrade requirement shown in game",
+        "output": "Improved wings",
+        "unlockAvailability": "Elemental World upgrade station",
+        "description": "Wings Upgrade is a world-specific progression station for improving the wings system."
+      },
+      "system": {
+        "slug": "wings-upgrade",
+        "section": "Rewards, quests, and boosts",
+        "sortOrder": 29,
+        "image": null
+      }
     },
     {
-      "name": "Woodcutting Preston",
-      "slug": "woodcutting-preston",
-      "image": null,
-      "collectionSection": "Rewards, quests, and boosts",
-      "task": "Complete woodcutting quests",
-      "location": "Area #233 - Nebula Forest",
-      "inputCost": "Woodcutting quest work",
-      "output": "Woodcutting rewards",
-      "unlockAvailability": "Elemental World quest station",
-      "description": "Woodcutting Preston is a quest station for the woodcutting route in later Elemental progression.",
-      "sortOrder": 30,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Name, use, and location from the main machine list."
+      "item": {
+        "name": "Woodcutting Preston",
+        "task": "Complete woodcutting quests",
+        "location": "Area #233 - Nebula Forest",
+        "inputCost": "Woodcutting quest work",
+        "output": "Woodcutting rewards",
+        "unlockAvailability": "Elemental World quest station",
+        "description": "Woodcutting Preston is a quest station for the woodcutting route in later Elemental progression."
+      },
+      "system": {
+        "slug": "woodcutting-preston",
+        "section": "Rewards, quests, and boosts",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "Index Machine",
-      "slug": "index-machine",
-      "image": null,
-      "collectionSection": "Travel and management hubs",
-      "task": "Check pet collection progress",
-      "location": "Area #1 - Spawn; Area #76 - Haunted Graveyard; Tech Spawn context",
-      "inputCost": "No item cost listed",
-      "output": "Pet collection index progress",
-      "unlockAvailability": "Collection-management station in multiple areas",
-      "description": "Index Machine is a collection-management stop for checking how many different pets a player has collected.",
-      "sortOrder": 31,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://www.biggames.io/post/pet-simulator-99-update-77",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main list gives source locations; Update 77 mentions current Index Machine behavior through bug-fix notes."
+      "item": {
+        "name": "Index Machine",
+        "task": "Check pet collection progress",
+        "location": "Area #1 - Spawn; Area #76 - Haunted Graveyard; Tech Spawn context",
+        "inputCost": "No item cost listed",
+        "output": "Pet collection index progress",
+        "unlockAvailability": "Collection-management station in multiple areas",
+        "description": "Index Machine is a collection-management stop for checking how many different pets a player has collected."
+      },
+      "system": {
+        "slug": "index-machine",
+        "section": "Travel and management hubs",
+        "sortOrder": 31,
+        "image": null
+      }
     },
     {
-      "name": "Super Computer",
-      "slug": "super-computer",
-      "image": null,
-      "collectionSection": "Travel and management hubs",
-      "task": "Access machines from hub locations",
-      "location": "Trading Plaza; Area #100 - Tech Spawn; Void Spawn; Area #240 - Fantasy Spawn",
-      "inputCost": "Area or rebirth access; Trading Plaza requires Rebirth 4 and Void Spawn requires Rebirth 8",
-      "output": "Machine access across World 1, World 2, World 3, and Fantasy context",
-      "unlockAvailability": "Multi-location management hub",
-      "description": "Super Computer is the main machine hub, useful when players want machine access without walking back through older worlds.",
-      "sortOrder": 32,
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/List_of_Machines_%28Pet_Simulator_99%29; https://www.biggames.io/post/pet-simulator-99-update-77",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "verified",
-      "verificationNote": "Main list gives access points and rebirth notes; Update 77 confirms Trading Terminal was added to the Super Computer."
+      "item": {
+        "name": "Super Computer",
+        "task": "Access machines from hub locations",
+        "location": "Trading Plaza; Area #100 - Tech Spawn; Void Spawn; Area #240 - Fantasy Spawn",
+        "inputCost": "Area or rebirth access; Trading Plaza requires Rebirth 4 and Void Spawn requires Rebirth 8",
+        "output": "Machine access across World 1, World 2, World 3, and Fantasy context",
+        "unlockAvailability": "Multi-location management hub",
+        "description": "Super Computer is the main machine hub, useful when players want machine access without walking back through older worlds."
+      },
+      "system": {
+        "slug": "super-computer",
+        "section": "Travel and management hubs",
+        "sortOrder": 32,
+        "image": null
+      }
     }
   ]
 }

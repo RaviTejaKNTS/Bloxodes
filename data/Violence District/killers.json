@@ -1,50 +1,12 @@
 {
   "meta": {
-    "title": "Violence District killers data",
+    "schemaVersion": 2,
     "game": "Violence District",
     "gameSlug": "violence-district",
     "collection": "killers",
     "route": "/wiki/violence-district/killers",
     "catalogCode": "violence-district-killers",
-    "universeId": 6739698191,
-    "rootPlaceId": 93978595733734,
-    "updatedAt": "2026-06-16",
-    "publishStatus": "phase-2-dataset-ready-parent-route-needed",
-    "itemCount": 8,
-    "counts": {
-      "bySection": {
-        "Starter and ambush pressure": 1,
-        "Stealth and chase builders": 2,
-        "Chain and stance pressure": 2,
-        "Anti-loop and map control": 3
-      },
-      "free": 1,
-      "screwsUnlocks": 7,
-      "images": 8
-    },
-    "imageCoverage": {
-      "present": 8,
-      "missing": 0,
-      "source": "Violence District Fandom MediaWiki imageinfo",
-      "localDirectory": "apps/web/public/Violence District/Killers"
-    },
-    "groupBy": "collectionSection",
-    "defaultCardFields": [
-      "cost",
-      "pressureStyle",
-      "power",
-      "mainStrength",
-      "mainLimit"
-    ],
-    "comparisonOnlyFields": [
-      "baseSpeed",
-      "intentRadius"
-    ],
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "itemFields": [
       "status",
       "cost",
       "pressureStyle",
@@ -53,203 +15,213 @@
       "mainLimit",
       "cardSummary",
       "baseSpeed",
-      "intentRadius",
-      "sourcePage",
-      "sourceImageUrl",
-      "sourceImageFile",
-      "sourceCheckedAt",
-      "imageStatus",
-      "sortOrder"
+      "intentRadius"
     ],
-    "sources": [
-      {
-        "label": "Violence District Wiki - Killers MediaWiki API",
-        "url": "https://violencedistrict.fandom.com/api.php?action=parse&page=Killers&prop=wikitext%7Cimages%7Clinks&format=json&origin=*",
-        "accessed": "2026-06-16",
-        "usage": "Primary killer count, killer links, and row image filename source."
-      },
-      {
-        "label": "Violence District Wiki - individual killer pages",
-        "url": "https://violencedistrict.fandom.com/wiki/Killers",
-        "accessed": "2026-06-16",
-        "usage": "Linked killer pages checked for costs, powers, stats, tips, and card summaries."
-      },
-      {
-        "label": "Violence District Wiki - Screws",
-        "url": "https://violencedistrict.fandom.com/wiki/Screws",
-        "accessed": "2026-06-16",
-        "usage": "Currency source for killer shop spending context."
-      }
-    ]
+    "columns": [
+      "status",
+      "cost",
+      "pressureStyle",
+      "power",
+      "mainStrength",
+      "mainLimit",
+      "cardSummary",
+      "baseSpeed",
+      "intentRadius"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Starter and ambush pressure",
+        "Stealth and chase builders",
+        "Chain and stance pressure",
+        "Anti-loop and map control"
+      ],
+      "badgeField": "status",
+      "subtitleFields": [
+        "status"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "cost",
+        "pressureStyle",
+        "power",
+        "mainStrength",
+        "mainLimit"
+      ],
+      "tableFields": [
+        "status",
+        "cost",
+        "pressureStyle",
+        "power",
+        "mainStrength",
+        "mainLimit",
+        "cardSummary",
+        "baseSpeed"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "The Slasher",
-      "slug": "the-slasher",
-      "image": "/Violence District/Killers/the-slasher.png",
-      "collectionSection": "Starter and ambush pressure",
-      "status": "Free",
-      "cost": "Free",
-      "pressureStyle": "Ambush patrol",
-      "power": "Lake Mist and Pursuit",
-      "mainStrength": "Simple stealth into pallet punishment",
-      "mainLimit": "Needs clean timing before survivors reach safer routes",
-      "cardSummary": "The Slasher is the baseline killer for learning ambushes, chases, and pallet pressure. He fits players who want a direct kit before saving Screws for a specialized unlock.",
-      "baseSpeed": "110% (18.7 studs/sec); Pursuit 125% (21.25 studs/sec)",
-      "intentRadius": "90 studs",
-      "sourcePage": "https://violencedistrict.fandom.com/wiki/The_Slasher",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/5/5e/TheSlasher.png/revision/latest?cb=20251231113735",
-      "sourceImageFile": "TheSlasher.png",
-      "sourceCheckedAt": "2026-06-16",
-      "imageStatus": "downloaded Fandom imageinfo original PNG",
-      "sortOrder": 10
+      "item": {
+        "name": "The Slasher",
+        "status": "Free",
+        "cost": "Free",
+        "pressureStyle": "Ambush patrol",
+        "power": "Lake Mist and Pursuit",
+        "mainStrength": "Simple stealth into pallet punishment",
+        "mainLimit": "Needs clean timing before survivors reach safer routes",
+        "cardSummary": "The Slasher is the baseline killer for learning ambushes, chases, and pallet pressure. He fits players who want a direct kit before saving Screws for a specialized unlock.",
+        "baseSpeed": "110% (18.7 studs/sec); Pursuit 125% (21.25 studs/sec)",
+        "intentRadius": "90 studs"
+      },
+      "system": {
+        "slug": "the-slasher",
+        "section": "Starter and ambush pressure",
+        "sortOrder": 10,
+        "image": "/Violence District/Killers/the-slasher.png"
+      }
     },
     {
-      "name": "The Stalker",
-      "slug": "the-stalker",
-      "image": "/Violence District/Killers/the-stalker.png",
-      "collectionSection": "Stealth and chase builders",
-      "status": "Screws unlock",
-      "cost": "7500 Screws",
-      "pressureStyle": "Stealth setup",
-      "power": "Stalk, Evil's Grasp, and Hunt Mode",
-      "mainStrength": "Undetectable setup into a timed chase burst",
-      "mainLimit": "Weak value if the stalk window is wasted or survivors stay alert",
-      "cardSummary": "The Stalker starts quiet, builds pressure by watching survivors, then cashes that setup into Hunt Mode. He rewards patience before the chase becomes loud.",
-      "baseSpeed": "110% (18.7 studs/sec) in Stalker Mode; 120% (20.4 studs/sec) in Hunt Mode",
-      "intentRadius": "0 in Stalker Mode; 90 in Hunt Mode",
-      "sourcePage": "https://violencedistrict.fandom.com/wiki/The_Stalker",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/2/2e/TheStalker.png/revision/latest?cb=20251231113636",
-      "sourceImageFile": "TheStalker.png",
-      "sourceCheckedAt": "2026-06-16",
-      "imageStatus": "downloaded Fandom imageinfo original PNG",
-      "sortOrder": 20
+      "item": {
+        "name": "The Stalker",
+        "status": "Screws unlock",
+        "cost": "7500 Screws",
+        "pressureStyle": "Stealth setup",
+        "power": "Stalk, Evil's Grasp, and Hunt Mode",
+        "mainStrength": "Undetectable setup into a timed chase burst",
+        "mainLimit": "Weak value if the stalk window is wasted or survivors stay alert",
+        "cardSummary": "The Stalker starts quiet, builds pressure by watching survivors, then cashes that setup into Hunt Mode. He rewards patience before the chase becomes loud.",
+        "baseSpeed": "110% (18.7 studs/sec) in Stalker Mode; 120% (20.4 studs/sec) in Hunt Mode",
+        "intentRadius": "0 in Stalker Mode; 90 in Hunt Mode"
+      },
+      "system": {
+        "slug": "the-stalker",
+        "section": "Stealth and chase builders",
+        "sortOrder": 20,
+        "image": "/Violence District/Killers/the-stalker.png"
+      }
     },
     {
-      "name": "The Hidden",
-      "slug": "the-hidden",
-      "image": "/Violence District/Killers/the-hidden.png",
-      "collectionSection": "Stealth and chase builders",
-      "status": "Screws unlock",
-      "cost": "8000 Screws",
-      "pressureStyle": "Precision mobility",
-      "power": "Mark and Leap",
-      "mainStrength": "Leap pressure around pallets, vaults, and walls",
-      "mainLimit": "Mark is narrow and misses can leave painful endlag",
-      "cardSummary": "The Hidden is for players who like quick routes and precise commitments. Leap helps cut through obstacles, while Mark rewards accurate reads more than panic swings.",
-      "baseSpeed": "110% (18.7 studs/sec)",
-      "intentRadius": "45 studs",
-      "sourcePage": "https://violencedistrict.fandom.com/wiki/The_Hidden",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/c/c4/TheHidden.png/revision/latest?cb=20251231114024",
-      "sourceImageFile": "TheHidden.png",
-      "sourceCheckedAt": "2026-06-16",
-      "imageStatus": "downloaded Fandom imageinfo original PNG",
-      "sortOrder": 30
+      "item": {
+        "name": "The Hidden",
+        "status": "Screws unlock",
+        "cost": "8000 Screws",
+        "pressureStyle": "Precision mobility",
+        "power": "Mark and Leap",
+        "mainStrength": "Leap pressure around pallets, vaults, and walls",
+        "mainLimit": "Mark is narrow and misses can leave painful endlag",
+        "cardSummary": "The Hidden is for players who like quick routes and precise commitments. Leap helps cut through obstacles, while Mark rewards accurate reads more than panic swings.",
+        "baseSpeed": "110% (18.7 studs/sec)",
+        "intentRadius": "45 studs"
+      },
+      "system": {
+        "slug": "the-hidden",
+        "section": "Stealth and chase builders",
+        "sortOrder": 30,
+        "image": "/Violence District/Killers/the-hidden.png"
+      }
     },
     {
-      "name": "The Killer",
-      "slug": "the-killer",
-      "image": "/Violence District/Killers/the-killer.png",
-      "collectionSection": "Chain and stance pressure",
-      "status": "Screws unlock",
-      "cost": "8500 Screws",
-      "pressureStyle": "Chain chase",
-      "power": "Frenzy",
-      "mainStrength": "Punishes grouped survivors with chained hits",
-      "mainLimit": "Whiffs, stuns, and split teams break the chain value",
-      "cardSummary": "The Killer turns crowded routes into danger. Frenzy lets him vault and chain hits, so he is strongest when survivors cluster or hesitate in a chase path.",
-      "baseSpeed": "115% (19.6 studs/sec); Frenzy speeds up with chained hits",
-      "intentRadius": "90 studs; 120 during Frenzy",
-      "sourcePage": "https://violencedistrict.fandom.com/wiki/The_Killer",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/f/f8/TheKiller.png/revision/latest?cb=20251231113841",
-      "sourceImageFile": "TheKiller.png",
-      "sourceCheckedAt": "2026-06-16",
-      "imageStatus": "downloaded Fandom imageinfo original PNG",
-      "sortOrder": 40
+      "item": {
+        "name": "The Killer",
+        "status": "Screws unlock",
+        "cost": "8500 Screws",
+        "pressureStyle": "Chain chase",
+        "power": "Frenzy",
+        "mainStrength": "Punishes grouped survivors with chained hits",
+        "mainLimit": "Whiffs, stuns, and split teams break the chain value",
+        "cardSummary": "The Killer turns crowded routes into danger. Frenzy lets him vault and chain hits, so he is strongest when survivors cluster or hesitate in a chase path.",
+        "baseSpeed": "115% (19.6 studs/sec); Frenzy speeds up with chained hits",
+        "intentRadius": "90 studs; 120 during Frenzy"
+      },
+      "system": {
+        "slug": "the-killer",
+        "section": "Chain and stance pressure",
+        "sortOrder": 40,
+        "image": "/Violence District/Killers/the-killer.png"
+      }
     },
     {
-      "name": "The Masked",
-      "slug": "the-masked",
-      "image": "/Violence District/Killers/the-masked.png",
-      "collectionSection": "Chain and stance pressure",
-      "status": "Screws unlock",
-      "cost": "8000 Screws",
-      "pressureStyle": "Random stance swaps",
-      "power": "Mask Up",
-      "mainStrength": "Unpredictable speed, stealth, lunge, vault, or one-shot windows",
-      "mainLimit": "Random masks make planning less consistent",
-      "cardSummary": "The Masked changes the round through temporary masks. He suits players who can adapt quickly when a mask gives speed, stealth, longer lunges, faster vaults, or a one-shot threat.",
-      "baseSpeed": "115% (19.6 studs/sec)",
-      "intentRadius": "90 studs; Richter mask removes the radius",
-      "sourcePage": "https://violencedistrict.fandom.com/wiki/The_Masked",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/8/8f/TheMasked.png/revision/latest?cb=20251231114317",
-      "sourceImageFile": "TheMasked.png",
-      "sourceCheckedAt": "2026-06-16",
-      "imageStatus": "downloaded Fandom imageinfo original PNG",
-      "sortOrder": 50
+      "item": {
+        "name": "The Masked",
+        "status": "Screws unlock",
+        "cost": "8000 Screws",
+        "pressureStyle": "Random stance swaps",
+        "power": "Mask Up",
+        "mainStrength": "Unpredictable speed, stealth, lunge, vault, or one-shot windows",
+        "mainLimit": "Random masks make planning less consistent",
+        "cardSummary": "The Masked changes the round through temporary masks. He suits players who can adapt quickly when a mask gives speed, stealth, longer lunges, faster vaults, or a one-shot threat.",
+        "baseSpeed": "115% (19.6 studs/sec)",
+        "intentRadius": "90 studs; Richter mask removes the radius"
+      },
+      "system": {
+        "slug": "the-masked",
+        "section": "Chain and stance pressure",
+        "sortOrder": 50,
+        "image": "/Violence District/Killers/the-masked.png"
+      }
     },
     {
-      "name": "The Abysswalker",
-      "slug": "the-abysswalker",
-      "image": "/Violence District/Killers/the-abysswalker.png",
-      "collectionSection": "Anti-loop and map control",
-      "status": "Screws unlock",
-      "cost": "8500 Screws",
-      "pressureStyle": "Slash control",
-      "power": "Dark Severance and Abyssal Burst",
-      "mainStrength": "Multi-survivor pressure, slows, and map-wide disruption",
-      "mainLimit": "Dark Severance can be crouch-dodged by prepared survivors",
-      "cardSummary": "The Abysswalker is a control pick for players who want more than basic chase swings. His slash and burst can pressure objectives, loops, and grouped survivors.",
-      "baseSpeed": "115% (19.6 studs/sec)",
-      "intentRadius": "90 studs",
-      "sourcePage": "https://violencedistrict.fandom.com/wiki/The_Abysswalker",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/5/5d/TheAbysswalker.png/revision/latest?cb=20251231113509",
-      "sourceImageFile": "TheAbysswalker.png",
-      "sourceCheckedAt": "2026-06-16",
-      "imageStatus": "downloaded Fandom imageinfo original PNG",
-      "sortOrder": 60
+      "item": {
+        "name": "The Abysswalker",
+        "status": "Screws unlock",
+        "cost": "8500 Screws",
+        "pressureStyle": "Slash control",
+        "power": "Dark Severance and Abyssal Burst",
+        "mainStrength": "Multi-survivor pressure, slows, and map-wide disruption",
+        "mainLimit": "Dark Severance can be crouch-dodged by prepared survivors",
+        "cardSummary": "The Abysswalker is a control pick for players who want more than basic chase swings. His slash and burst can pressure objectives, loops, and grouped survivors.",
+        "baseSpeed": "115% (19.6 studs/sec)",
+        "intentRadius": "90 studs"
+      },
+      "system": {
+        "slug": "the-abysswalker",
+        "section": "Anti-loop and map control",
+        "sortOrder": 60,
+        "image": "/Violence District/Killers/the-abysswalker.png"
+      }
     },
     {
-      "name": "The Veil",
-      "slug": "the-veil",
-      "image": "/Violence District/Killers/the-veil.png",
-      "collectionSection": "Anti-loop and map control",
-      "status": "Screws unlock",
-      "cost": "8500 Screws",
-      "pressureStyle": "Spear zoning",
-      "power": "Pierced Vow and Through the Veil",
-      "mainStrength": "Ranged zoning, wall shots, and generator-side pressure",
-      "mainLimit": "Missed spears and cluttered cover reduce pressure fast",
-      "cardSummary": "The Veil rewards aim and map reads. Spears let him zone routes, threaten straight-line movement, and punish predictable survivors through walls when the angle is right.",
-      "baseSpeed": "110% (18.7 studs/sec)",
-      "intentRadius": "90 studs",
-      "sourcePage": "https://violencedistrict.fandom.com/wiki/The_Veil",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/c/cf/TheVeil.png/revision/latest?cb=20251231113537",
-      "sourceImageFile": "TheVeil.png",
-      "sourceCheckedAt": "2026-06-16",
-      "imageStatus": "downloaded Fandom imageinfo original PNG",
-      "sortOrder": 70
+      "item": {
+        "name": "The Veil",
+        "status": "Screws unlock",
+        "cost": "8500 Screws",
+        "pressureStyle": "Spear zoning",
+        "power": "Pierced Vow and Through the Veil",
+        "mainStrength": "Ranged zoning, wall shots, and generator-side pressure",
+        "mainLimit": "Missed spears and cluttered cover reduce pressure fast",
+        "cardSummary": "The Veil rewards aim and map reads. Spears let him zone routes, threaten straight-line movement, and punish predictable survivors through walls when the angle is right.",
+        "baseSpeed": "110% (18.7 studs/sec)",
+        "intentRadius": "90 studs"
+      },
+      "system": {
+        "slug": "the-veil",
+        "section": "Anti-loop and map control",
+        "sortOrder": 70,
+        "image": "/Violence District/Killers/the-veil.png"
+      }
     },
     {
-      "name": "The Cure",
-      "slug": "the-cure",
-      "image": "/Violence District/Killers/the-cure.png",
-      "collectionSection": "Anti-loop and map control",
-      "status": "Highest-cost unlock",
-      "cost": "15000 Screws",
-      "pressureStyle": "Infection snowball",
-      "power": "Elucidation and I Am The Cure",
-      "mainStrength": "Pestilence, spike pressure, and SCP-049-2 minions can snowball",
-      "mainLimit": "Needs setup and can lose value if survivors avoid clouds and manage spikes",
-      "cardSummary": "The Cure is the expensive control killer built around infection and minions. He fits players who want to spread pressure over time instead of winning every chase with one clean hit.",
-      "baseSpeed": "110% (18.7 studs/sec)",
-      "intentRadius": "72 studs",
-      "sourcePage": "https://violencedistrict.fandom.com/wiki/The_Cure",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/violencedistrict/images/a/ae/The_Cure_New_picture_as_old_was_ugly.png/revision/latest?cb=20260523161246",
-      "sourceImageFile": "The Cure New picture as old was ugly.png",
-      "sourceCheckedAt": "2026-06-16",
-      "imageStatus": "downloaded Fandom imageinfo original PNG",
-      "sortOrder": 80
+      "item": {
+        "name": "The Cure",
+        "status": "Highest-cost unlock",
+        "cost": "15000 Screws",
+        "pressureStyle": "Infection snowball",
+        "power": "Elucidation and I Am The Cure",
+        "mainStrength": "Pestilence, spike pressure, and SCP-049-2 minions can snowball",
+        "mainLimit": "Needs setup and can lose value if survivors avoid clouds and manage spikes",
+        "cardSummary": "The Cure is the expensive control killer built around infection and minions. He fits players who want to spread pressure over time instead of winning every chase with one clean hit.",
+        "baseSpeed": "110% (18.7 studs/sec)",
+        "intentRadius": "72 studs"
+      },
+      "system": {
+        "slug": "the-cure",
+        "section": "Anti-loop and map control",
+        "sortOrder": 80,
+        "image": "/Violence District/Killers/the-cure.png"
+      }
     }
   ]
 }

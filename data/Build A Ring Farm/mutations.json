@@ -1,257 +1,342 @@
 {
   "meta": {
-    "title": "Build A Ring Farm mutations data",
-    "updatedAt": "2026-06-27",
-    "sources": [
-      {
-        "label": "Beebom - All Build a Ring Farm Mutations and Multipliers",
-        "url": "https://beebom.com/build-a-ring-farm-mutations-guide/",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Pro Game Guides - Build a Ring Farm Mutations, Multipliers & How to Get",
-        "url": "https://progameguides.com/roblox/build-a-ring-farm-mutations-multipliers-how-to-get/",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Bloxron - Build A Ring Farm Mutations Guide (Multipliers, Prices, Drop Odds)",
-        "url": "https://bloxron.com/build-a-ring-farm/mutations",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Stealthy Gaming - All Build a Ring Farm Mutations and Multipliers",
-        "url": "https://stealthygaming.com/all-build-a-ring-farm-mutations-and-multipliers/",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Sportskeeda - How to get Carnival Spray in Build a Ring Farm",
-        "url": "https://www.sportskeeda.com/roblox-news/how-get-carnival-spray-build-a-ring-farm",
-        "accessed": "2026-06-27"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Build A Ring Farm",
+    "gameSlug": "build-a-ring-farm",
+    "collection": "mutations",
+    "route": "/wiki/build-a-ring-farm/mutations",
+    "catalogCode": "build-a-ring-farm-mutations",
+    "itemFields": [
       "multiplier",
       "source",
       "sprayPrice",
       "eventChance",
       "stackable",
       "availability",
-      "collectionSection",
-      "cardSummary",
-      "image"
+      "cardSummary"
     ],
-    "fieldPresentation": {
-      "multiplier": {
-        "kind": "chip",
-        "label": "Multiplier"
-      },
-      "sprayPrice": {
-        "kind": "chip",
-        "label": "Spray price"
-      },
-      "eventChance": {
-        "kind": "chip",
-        "label": "Event chance"
-      },
-      "availability": {
-        "kind": "highlight",
-        "label": "Availability"
-      },
-      "stackable": {
-        "kind": "highlight",
-        "label": "Stackable"
-      },
-      "source": {
-        "kind": "detail",
-        "label": "How to get"
-      },
-      "collectionSection": {
-        "kind": "plain",
-        "label": "Section"
+    "columns": [
+      "multiplier",
+      "source",
+      "sprayPrice",
+      "eventChance",
+      "stackable",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Spray Mutations",
+        "Event & Pet Mutations"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "multiplier",
+        "source",
+        "sprayPrice",
+        "eventChance",
+        "stackable",
+        "availability"
+      ],
+      "tableFields": [
+        "multiplier",
+        "source",
+        "sprayPrice",
+        "eventChance",
+        "stackable",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "multiplier": {
+          "kind": "chip",
+          "label": "Multiplier"
+        },
+        "sprayPrice": {
+          "kind": "chip",
+          "label": "Spray price"
+        },
+        "eventChance": {
+          "kind": "chip",
+          "label": "Event chance"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "stackable": {
+          "kind": "highlight",
+          "label": "Stackable"
+        },
+        "source": {
+          "kind": "detail",
+          "label": "How to get"
+        }
       }
     }
   },
   "items": [
     {
-      "name": "Wet",
-      "multiplier": "1.35x",
-      "source": "Apply the Wet Spray from the Gear Shop, or let it land during a Rain event.",
-      "sprayPrice": "$10M",
-      "eventChance": "8%",
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "The cheapest mutation and a common early upgrade while you build cash.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/wet.webp"
+      "item": {
+        "name": "Wet",
+        "multiplier": "1.35x",
+        "source": "Apply the Wet Spray from the Gear Shop, or let it land during a Rain event.",
+        "sprayPrice": "$10M",
+        "eventChance": "8%",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "The cheapest mutation and a common early upgrade while you build cash."
+      },
+      "system": {
+        "slug": "wet",
+        "section": "Spray Mutations",
+        "sortOrder": 1,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/wet.webp"
+      }
     },
     {
-      "name": "Frozen",
-      "multiplier": "1.75x",
-      "source": "Apply the Frozen Spray from the Gear Shop, or let it land during a Blizzard event.",
-      "sprayPrice": "$750M",
-      "eventChance": "4%",
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "A modest step up from Wet once your farm can spare the spray cost.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/frozen.webp"
+      "item": {
+        "name": "Frozen",
+        "multiplier": "1.75x",
+        "source": "Apply the Frozen Spray from the Gear Shop, or let it land during a Blizzard event.",
+        "sprayPrice": "$750M",
+        "eventChance": "4%",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "A modest step up from Wet once your farm can spare the spray cost."
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Spray Mutations",
+        "sortOrder": 2,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/frozen.webp"
+      }
     },
     {
-      "name": "Autumn",
-      "multiplier": "2x",
-      "source": "Apply the Autumn Spray from the Gear Shop, or let it land during an Autumn weather event.",
-      "sprayPrice": "$850M",
-      "eventChance": "3.5%",
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "Doubles crop value and is a reliable mid-tier spray buy.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/autumn.webp"
+      "item": {
+        "name": "Autumn",
+        "multiplier": "2x",
+        "source": "Apply the Autumn Spray from the Gear Shop, or let it land during an Autumn weather event.",
+        "sprayPrice": "$850M",
+        "eventChance": "3.5%",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "Doubles crop value and is a reliable mid-tier spray buy."
+      },
+      "system": {
+        "slug": "autumn",
+        "section": "Spray Mutations",
+        "sortOrder": 3,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/autumn.webp"
+      }
     },
     {
-      "name": "Void",
-      "multiplier": "2.25x",
-      "source": "Apply the Void Spray from the Gear Shop, or let it land during a Black Hole event.",
-      "sprayPrice": "$1B",
-      "eventChance": "3%",
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "A small bump over Autumn and the first billion-tier spray.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/void.webp"
+      "item": {
+        "name": "Void",
+        "multiplier": "2.25x",
+        "source": "Apply the Void Spray from the Gear Shop, or let it land during a Black Hole event.",
+        "sprayPrice": "$1B",
+        "eventChance": "3%",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "A small bump over Autumn and the first billion-tier spray."
+      },
+      "system": {
+        "slug": "void",
+        "section": "Spray Mutations",
+        "sortOrder": 4,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/void.webp"
+      }
     },
     {
-      "name": "Radioactive",
-      "multiplier": "3x",
-      "source": "Apply the Radioactive Spray from the Gear Shop, or let it land during a Nuclear event.",
-      "sprayPrice": "$10B",
-      "eventChance": "2%",
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "Triples crop value and is a strong target once you reach the billions.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/radioactive.webp"
+      "item": {
+        "name": "Radioactive",
+        "multiplier": "3x",
+        "source": "Apply the Radioactive Spray from the Gear Shop, or let it land during a Nuclear event.",
+        "sprayPrice": "$10B",
+        "eventChance": "2%",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "Triples crop value and is a strong target once you reach the billions."
+      },
+      "system": {
+        "slug": "radioactive",
+        "section": "Spray Mutations",
+        "sortOrder": 5,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/radioactive.webp"
+      }
     },
     {
-      "name": "Rainbow",
-      "multiplier": "5x",
-      "source": "Apply the Rainbow Spray from the Gear Shop, or let it land during a Galaxy event.",
-      "sprayPrice": "$1T",
-      "eventChance": "1%",
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "A big five-times jump and the first trillion-tier spray purchase.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/rainbow.webp"
+      "item": {
+        "name": "Rainbow",
+        "multiplier": "5x",
+        "source": "Apply the Rainbow Spray from the Gear Shop, or let it land during a Galaxy event.",
+        "sprayPrice": "$1T",
+        "eventChance": "1%",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "A big five-times jump and the first trillion-tier spray purchase."
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Spray Mutations",
+        "sortOrder": 6,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/rainbow.webp"
+      }
     },
     {
-      "name": "Cosmic",
-      "multiplier": "8x",
-      "source": "Apply the Cosmic Spray, sold in the Gear Shop and also available through the Plant Rush shop.",
-      "sprayPrice": "$25T",
-      "eventChance": null,
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "A high spray-only multiplier for established farms with deep cash reserves.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/cosmic.webp"
+      "item": {
+        "name": "Cosmic",
+        "multiplier": "8x",
+        "source": "Apply the Cosmic Spray, sold in the Gear Shop and also available through the Plant Rush shop.",
+        "sprayPrice": "$25T",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "A high spray-only multiplier for established farms with deep cash reserves."
+      },
+      "system": {
+        "slug": "cosmic",
+        "section": "Spray Mutations",
+        "sortOrder": 7,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/cosmic.webp"
+      }
     },
     {
-      "name": "Bubblegum",
-      "multiplier": "9x",
-      "source": "Apply the Bubblegum Spray from the Gear Shop.",
-      "sprayPrice": "$250T",
-      "eventChance": null,
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "One of the strongest buyable mutations, saved for high-value crops.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/bubblegum.webp"
+      "item": {
+        "name": "Bubblegum",
+        "multiplier": "9x",
+        "source": "Apply the Bubblegum Spray from the Gear Shop.",
+        "sprayPrice": "$250T",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "One of the strongest buyable mutations, saved for high-value crops."
+      },
+      "system": {
+        "slug": "bubblegum",
+        "section": "Spray Mutations",
+        "sortOrder": 8,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/bubblegum.webp"
+      }
     },
     {
-      "name": "Fire",
-      "multiplier": "10x",
-      "source": "Apply the Fire Spray from the Gear Shop.",
-      "sprayPrice": "$1Qd",
-      "eventChance": null,
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "The highest multiplier in the game and the top endgame spray target.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/fire.webp"
+      "item": {
+        "name": "Fire",
+        "multiplier": "10x",
+        "source": "Apply the Fire Spray from the Gear Shop.",
+        "sprayPrice": "$1Qd",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "The highest multiplier in the game and the top endgame spray target."
+      },
+      "system": {
+        "slug": "fire",
+        "section": "Spray Mutations",
+        "sortOrder": 9,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/fire.webp"
+      }
     },
     {
-      "name": "Farm",
-      "multiplier": "4x",
-      "source": "Apply the Trucker Spray from the Gear Shop, or let it land during a Trucker event.",
-      "sprayPrice": null,
-      "eventChance": "1.5%",
-      "stackable": "No",
-      "availability": "Permanent",
-      "collectionSection": "Spray Mutations",
-      "cardSummary": "A four-times boost; public guides do not list its current spray price.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/farm.webp"
+      "item": {
+        "name": "Farm",
+        "multiplier": "4x",
+        "source": "Apply the Trucker Spray from the Gear Shop, or let it land during a Trucker event.",
+        "eventChance": "1.5%",
+        "stackable": "No",
+        "availability": "Permanent",
+        "cardSummary": "A four-times boost; public guides do not list its current spray price."
+      },
+      "system": {
+        "slug": "farm",
+        "section": "Spray Mutations",
+        "sortOrder": 10,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/farm.webp"
+      }
     },
     {
-      "name": "Alien",
-      "multiplier": "3.25x",
-      "source": "Only lands during the Alien (UFO) weather event; it cannot be bought as a spray.",
-      "sprayPrice": null,
-      "eventChance": "2.5%",
-      "stackable": "No",
-      "availability": "Event-only",
-      "collectionSection": "Event & Pet Mutations",
-      "cardSummary": "Event-only roll, so you have to wait for the UFO event to chase it.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/alien.webp"
+      "item": {
+        "name": "Alien",
+        "multiplier": "3.25x",
+        "source": "Only lands during the Alien (UFO) weather event; it cannot be bought as a spray.",
+        "eventChance": "2.5%",
+        "stackable": "No",
+        "availability": "Event-only",
+        "cardSummary": "Event-only roll, so you have to wait for the UFO event to chase it."
+      },
+      "system": {
+        "slug": "alien",
+        "section": "Event & Pet Mutations",
+        "sortOrder": 11,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/alien.webp"
+      }
     },
     {
-      "name": "Admin",
-      "multiplier": "5x",
-      "source": "Only granted during Admin Abuse events run by the developers; not for sale.",
-      "sprayPrice": null,
-      "eventChance": null,
-      "stackable": "No",
-      "availability": "Event-only",
-      "collectionSection": "Event & Pet Mutations",
-      "cardSummary": "Tied to developer-run events, so it is not something you can plan around.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/admin.webp"
+      "item": {
+        "name": "Admin",
+        "multiplier": "5x",
+        "source": "Only granted during Admin Abuse events run by the developers; not for sale.",
+        "stackable": "No",
+        "availability": "Event-only",
+        "cardSummary": "Tied to developer-run events, so it is not something you can plan around."
+      },
+      "system": {
+        "slug": "admin",
+        "section": "Event & Pet Mutations",
+        "sortOrder": 12,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/admin.webp"
+      }
     },
     {
-      "name": "Honeycomb",
-      "multiplier": "6.5x",
-      "source": "Only lands during the rare Queen Bee event; it cannot be bought as a spray.",
-      "sprayPrice": null,
-      "eventChance": "0.5%",
-      "stackable": "No",
-      "availability": "Event-only",
-      "collectionSection": "Event & Pet Mutations",
-      "cardSummary": "A rare event roll with one of the lowest chances on the list.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/honeycomb.webp"
+      "item": {
+        "name": "Honeycomb",
+        "multiplier": "6.5x",
+        "source": "Only lands during the rare Queen Bee event; it cannot be bought as a spray.",
+        "eventChance": "0.5%",
+        "stackable": "No",
+        "availability": "Event-only",
+        "cardSummary": "A rare event roll with one of the lowest chances on the list."
+      },
+      "system": {
+        "slug": "honeycomb",
+        "section": "Event & Pet Mutations",
+        "sortOrder": 13,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/honeycomb.webp"
+      }
     },
     {
-      "name": "Starfall",
-      "multiplier": "4x",
-      "source": "Applied by the Starfall Griffin pet rather than a spray or weather event.",
-      "sprayPrice": null,
-      "eventChance": null,
-      "stackable": "Yes",
-      "availability": "Pet-only",
-      "collectionSection": "Event & Pet Mutations",
-      "cardSummary": "Stacks on top of another mutation, so it can multiply an existing boost.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/starfall.webp"
+      "item": {
+        "name": "Starfall",
+        "multiplier": "4x",
+        "source": "Applied by the Starfall Griffin pet rather than a spray or weather event.",
+        "stackable": "Yes",
+        "availability": "Pet-only",
+        "cardSummary": "Stacks on top of another mutation, so it can multiply an existing boost."
+      },
+      "system": {
+        "slug": "starfall",
+        "section": "Event & Pet Mutations",
+        "sortOrder": 14,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/starfall.webp"
+      }
     },
     {
-      "name": "Carnival",
-      "multiplier": "9.5x",
-      "source": "Apply the Carnival Spray, pulled from Spray Crates earned through the Carnival Pass and Carnival Crate.",
-      "sprayPrice": null,
-      "eventChance": null,
-      "stackable": "Yes",
-      "availability": "Crate-gated",
-      "collectionSection": "Event & Pet Mutations",
-      "cardSummary": "Added in Update 5; it stacks like Starfall and comes from crate rewards.",
-      "image": "/Build%20A%20Ring%20Farm/Mutations/carnival.webp"
+      "item": {
+        "name": "Carnival",
+        "multiplier": "9.5x",
+        "source": "Apply the Carnival Spray, pulled from Spray Crates earned through the Carnival Pass and Carnival Crate.",
+        "stackable": "Yes",
+        "availability": "Crate-gated",
+        "cardSummary": "Added in Update 5; it stacks like Starfall and comes from crate rewards."
+      },
+      "system": {
+        "slug": "carnival",
+        "section": "Event & Pet Mutations",
+        "sortOrder": 15,
+        "image": "/Build%20A%20Ring%20Farm/Mutations/carnival.webp"
+      }
     }
   ]
 }

@@ -1,59 +1,12 @@
 {
   "meta": {
-    "title": "Anime Squadron units data",
-    "updatedAt": "2026-06-21",
-    "groupBy": "collectionSection",
-    "defaultCardFields": [
-      "rarity",
-      "metaTier",
-      "role",
-      "unlockRoute",
-      "passiveName",
-      "passiveEffect",
-      "bestUse",
-      "investmentPriority"
-    ],
-    "sources": [
-      {
-        "label": "BloxInformer - Anime Squadron Units",
-        "url": "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "accessed": "2026-06-21"
-      },
-      {
-        "label": "Pro Game Guides - Anime Squadron Tier List",
-        "url": "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "accessed": "2026-06-21"
-      },
-      {
-        "label": "Pro Game Guides - Anime Squadron Beginner's Guide",
-        "url": "https://progameguides.com/roblox/anime-squadron-beginners-guide/",
-        "accessed": "2026-06-21"
-      },
-      {
-        "label": "Bloxron - Anime Squadron Characters",
-        "url": "https://bloxron.com/anime-squadron/characters",
-        "accessed": "2026-06-21"
-      },
-      {
-        "label": "RoboLibrary - Anime Squadron Wiki",
-        "url": "https://robolibrary.org/wikis/anime-squadron",
-        "accessed": "2026-06-21"
-      },
-      {
-        "label": "AnimeSquadronWiki.org - Units",
-        "url": "https://animesquadronwiki.org/units",
-        "accessed": "2026-06-21"
-      },
-      {
-        "label": "Roblox API - Anime Squadron",
-        "url": "https://games.roblox.com/v1/games?universeIds=8356066619",
-        "accessed": "2026-06-21"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Anime Squadron",
+    "gameSlug": "anime-squadron",
+    "collection": "units",
+    "route": "/wiki/anime-squadron/units",
+    "catalogCode": "anime-squadron-units",
+    "itemFields": [
       "unitName",
       "variant",
       "rarity",
@@ -65,724 +18,668 @@
       "ultimateOrActive",
       "bestUse",
       "investmentPriority",
-      "sourceConfidence",
-      "cardSummary"
-    ]
+      "cardSummary",
+      "alternateSpellings"
+    ],
+    "columns": [
+      "unitName",
+      "variant",
+      "rarity",
+      "metaTier",
+      "role",
+      "unlockRoute",
+      "passiveName",
+      "passiveEffect",
+      "ultimateOrActive",
+      "bestUse",
+      "investmentPriority",
+      "cardSummary",
+      "alternateSpellings"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Evolved and Secret Units",
+        "Damage Carries",
+        "Support and Utility",
+        "Tanks and Survival",
+        "Economy Units",
+        "Speed Farming Units",
+        "Early Fillers"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "metaTier",
+        "role",
+        "unlockRoute",
+        "passiveName",
+        "passiveEffect"
+      ],
+      "tableFields": [
+        "unitName",
+        "variant",
+        "rarity",
+        "metaTier",
+        "role",
+        "unlockRoute",
+        "passiveName",
+        "passiveEffect"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Gometa (SSJ4)",
-      "slug": "gometa-ssj4",
-      "image": null,
-      "collectionSection": "Evolved and Secret Units",
-      "unitName": "Gometa",
-      "variant": "SSJ4",
-      "rarity": "Secret",
-      "metaTier": "S",
-      "role": "Main DPS",
-      "unlockRoute": "Primal Fusion after the Primal Core checklist; requires maxed Goki (SSJ4 Full Power) and Vegata (SSJ4 Full Power).",
-      "passiveName": "Primal scaling",
-      "passiveEffect": "Stacks damage, defense, dodge, and crit-chance growth from teammate deaths and kills.",
-      "ultimateOrActive": "Big Bang Kamehameha line blast.",
-      "investmentPriority": "Endgame target; plan materials and parent-unit leveling before spending cubes elsewhere.",
-      "sourceConfidence": "Medium - backed by PGG tier/meta notes and Bloxron item-level details; not present on BloxInformer units page.",
-      "cardSummary": "Plan Gometa as the late-game fusion carry, not as a normal banner pull.",
-      "alternateSpellings": [
-        "Gogeta (SSJ4)"
-      ],
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://animesquadronwiki.org/units"
-      ],
-      "verificationNote": "Included because two independent sources identify the unit and Bloxron provides unlock/passive details. Needs in-game or stronger wiki confirmation during future refresh.",
-      "sortOrder": 10,
-      "bestUse": "Long-fight carry for Story, Raids, and Infinite once the account can support the fusion route."
+      "item": {
+        "name": "Gometa (SSJ4)",
+        "unitName": "Gometa",
+        "variant": "SSJ4",
+        "rarity": "Secret",
+        "metaTier": "S",
+        "role": "Main DPS",
+        "unlockRoute": "Primal Fusion after the Primal Core checklist; requires maxed Goki (SSJ4 Full Power) and Vegata (SSJ4 Full Power).",
+        "passiveName": "Primal scaling",
+        "passiveEffect": "Stacks damage, defense, dodge, and crit-chance growth from teammate deaths and kills.",
+        "ultimateOrActive": "Big Bang Kamehameha line blast.",
+        "bestUse": "Long-fight carry for Story, Raids, and Infinite once the account can support the fusion route.",
+        "investmentPriority": "Endgame target; plan materials and parent-unit leveling before spending cubes elsewhere.",
+        "cardSummary": "Plan Gometa as the late-game fusion carry, not as a normal banner pull.",
+        "alternateSpellings": [
+          "Gogeta (SSJ4)"
+        ]
+      },
+      "system": {
+        "slug": "gometa-ssj4",
+        "section": "Evolved and Secret Units",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Woo (Shadow)",
-      "slug": "woo-shadow",
-      "image": null,
-      "collectionSection": "Evolved and Secret Units",
-      "unitName": "Woo",
-      "variant": "Shadow",
-      "rarity": "Secret",
-      "metaTier": "S",
-      "role": "Summoner DPS",
-      "unlockRoute": "Limited banner; available evidence points to an extremely rare chase with a possible pity path.",
-      "passiveName": "Shadow Extraction",
-      "passiveEffect": "Skill activation grants a short dodge window and mana generation; kills can convert enemies into Shadow Soldiers.",
-      "ultimateOrActive": "Frenzy Slash spender that uses mana for burst damage.",
-      "investmentPriority": "Only chase after core economy and reliable carry slots are stable.",
-      "sourceConfidence": "Medium - backed by PGG tier/meta notes, Bloxron item-level details, and AnimeSquadronWiki.org unlock notes; not present on BloxInformer units page.",
-      "cardSummary": "A rare limited Secret with ramping shadow-soldier value in longer waves.",
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://animesquadronwiki.org/units"
-      ],
-      "verificationNote": "Keep rate and pity language source-qualified until official/in-game confirmation is available.",
-      "sortOrder": 20,
-      "bestUse": "High-damage Infinite or long-wave unit when the player can afford a rare limited chase."
+      "item": {
+        "name": "Woo (Shadow)",
+        "unitName": "Woo",
+        "variant": "Shadow",
+        "rarity": "Secret",
+        "metaTier": "S",
+        "role": "Summoner DPS",
+        "unlockRoute": "Limited banner; available evidence points to an extremely rare chase with a possible pity path.",
+        "passiveName": "Shadow Extraction",
+        "passiveEffect": "Skill activation grants a short dodge window and mana generation; kills can convert enemies into Shadow Soldiers.",
+        "ultimateOrActive": "Frenzy Slash spender that uses mana for burst damage.",
+        "bestUse": "High-damage Infinite or long-wave unit when the player can afford a rare limited chase.",
+        "investmentPriority": "Only chase after core economy and reliable carry slots are stable.",
+        "cardSummary": "A rare limited Secret with ramping shadow-soldier value in longer waves."
+      },
+      "system": {
+        "slug": "woo-shadow",
+        "section": "Evolved and Secret Units",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "Madora (Gunbai)",
-      "slug": "madora-gunbai",
-      "image": null,
-      "collectionSection": "Evolved and Secret Units",
-      "unitName": "Madora",
-      "variant": "Gunbai",
-      "rarity": "Secret",
-      "metaTier": "S",
-      "role": "Burn DPS",
-      "unlockRoute": "Ninja Village Act 4 boss route, with a low listed drop chance.",
-      "passiveName": "Burn and chakra overdrive",
-      "passiveEffect": "Skill attacks apply Burn, and chakra overdrive improves damage and cooldown pressure.",
-      "ultimateOrActive": "Shattered Star meteor AOE.",
-      "investmentPriority": "Strong farm target when repeat boss clears are more realistic than banner luck.",
-      "sourceConfidence": "Medium - backed by PGG tier/role placement, Bloxron item-level details, RoboLibrary naming context, and AnimeSquadronWiki.org unlock notes.",
-      "cardSummary": "A farmable Secret burn unit for raid and boss damage checks.",
-      "alternateSpellings": [
-        "Madara (Gunbai)"
-      ],
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://robolibrary.org/wikis/anime-squadron",
-        "https://animesquadronwiki.org/units"
-      ],
-      "verificationNote": "Name spelling differs across sources; dataset uses PGG/Bloxron spelling.",
-      "sortOrder": 30,
-      "bestUse": "Boss-health pressure and raid fights where damage over time matters."
+      "item": {
+        "name": "Madora (Gunbai)",
+        "unitName": "Madora",
+        "variant": "Gunbai",
+        "rarity": "Secret",
+        "metaTier": "S",
+        "role": "Burn DPS",
+        "unlockRoute": "Ninja Village Act 4 boss route, with a low listed drop chance.",
+        "passiveName": "Burn and chakra overdrive",
+        "passiveEffect": "Skill attacks apply Burn, and chakra overdrive improves damage and cooldown pressure.",
+        "ultimateOrActive": "Shattered Star meteor AOE.",
+        "bestUse": "Boss-health pressure and raid fights where damage over time matters.",
+        "investmentPriority": "Strong farm target when repeat boss clears are more realistic than banner luck.",
+        "cardSummary": "A farmable Secret burn unit for raid and boss damage checks.",
+        "alternateSpellings": [
+          "Madara (Gunbai)"
+        ]
+      },
+      "system": {
+        "slug": "madora-gunbai",
+        "section": "Evolved and Secret Units",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "Shanron (Omega)",
-      "slug": "shanron-omega",
-      "image": null,
-      "collectionSection": "Evolved and Secret Units",
-      "unitName": "Shanron",
-      "variant": "Omega",
-      "rarity": "Secret",
-      "metaTier": "S",
-      "role": "Boss Hunter",
-      "unlockRoute": "Ultimate Evil Raid, with better odds on normal clears than hard-mode clears.",
-      "passiveName": "Calamity Dragon",
-      "passiveEffect": "Deals extra boss damage and rotates elemental modes that add corruption, damage-over-time, or movement-slow pressure.",
-      "ultimateOrActive": null,
-      "investmentPriority": "High for raid accounts, but delay on fresh accounts until economy can support it.",
-      "sourceConfidence": "Medium - backed by PGG tier/role placement, Bloxron item-level details, RoboLibrary naming context, and AnimeSquadronWiki.org unlock notes.",
-      "cardSummary": "A raid-focused Secret built around boss damage and corruption utility.",
-      "alternateSpellings": [
-        "Shenron",
-        "Shanron"
-      ],
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://robolibrary.org/wikis/anime-squadron",
-        "https://animesquadronwiki.org/units"
-      ],
-      "verificationNote": "Name spelling differs across sources; dataset uses PGG/Bloxron spelling.",
-      "sortOrder": 40,
-      "bestUse": "Raid and boss-focused teams, especially after Maximum Yen upgrades can handle the deploy cost."
+      "item": {
+        "name": "Shanron (Omega)",
+        "unitName": "Shanron",
+        "variant": "Omega",
+        "rarity": "Secret",
+        "metaTier": "S",
+        "role": "Boss Hunter",
+        "unlockRoute": "Ultimate Evil Raid, with better odds on normal clears than hard-mode clears.",
+        "passiveName": "Calamity Dragon",
+        "passiveEffect": "Deals extra boss damage and rotates elemental modes that add corruption, damage-over-time, or movement-slow pressure.",
+        "bestUse": "Raid and boss-focused teams, especially after Maximum Yen upgrades can handle the deploy cost.",
+        "investmentPriority": "High for raid accounts, but delay on fresh accounts until economy can support it.",
+        "cardSummary": "A raid-focused Secret built around boss damage and corruption utility.",
+        "alternateSpellings": [
+          "Shenron",
+          "Shanron"
+        ]
+      },
+      "system": {
+        "slug": "shanron-omega",
+        "section": "Evolved and Secret Units",
+        "sortOrder": 40,
+        "image": null
+      }
     },
     {
-      "name": "Puppeteer (Transcendent)",
-      "slug": "puppeteer-transcendent",
-      "image": null,
-      "collectionSection": "Evolved and Secret Units",
-      "unitName": "Puppeteer",
-      "variant": "Transcendent",
-      "rarity": "Secret",
-      "metaTier": "S",
-      "role": "Hybrid DPS / Tank",
-      "unlockRoute": "Evolve Puppeteer using Katakara challenge materials.",
-      "passiveName": "Transcendent strings",
-      "passiveEffect": "Amplifies self damage and reduces incoming damage during active skill windows.",
-      "ultimateOrActive": "String Dominion chained AOE burst.",
-      "investmentPriority": "High-end evolution target after the account has economy and one main carry.",
-      "sourceConfidence": "Medium - backed by PGG tier/meta notes and Bloxron item-level details; not present on BloxInformer units page.",
-      "cardSummary": "A resource-heavy evolved Secret that mixes frontline survival with wide AOE damage.",
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "verificationNote": "PGG says Puppeteer was a release-version meta addition; keep freshness note for Update 0.5 checks.",
-      "sortOrder": 50,
-      "bestUse": "Stable long-run carry when a team needs both damage and frontline durability."
+      "item": {
+        "name": "Puppeteer (Transcendent)",
+        "unitName": "Puppeteer",
+        "variant": "Transcendent",
+        "rarity": "Secret",
+        "metaTier": "S",
+        "role": "Hybrid DPS / Tank",
+        "unlockRoute": "Evolve Puppeteer using Katakara challenge materials.",
+        "passiveName": "Transcendent strings",
+        "passiveEffect": "Amplifies self damage and reduces incoming damage during active skill windows.",
+        "ultimateOrActive": "String Dominion chained AOE burst.",
+        "bestUse": "Stable long-run carry when a team needs both damage and frontline durability.",
+        "investmentPriority": "High-end evolution target after the account has economy and one main carry.",
+        "cardSummary": "A resource-heavy evolved Secret that mixes frontline survival with wide AOE damage."
+      },
+      "system": {
+        "slug": "puppeteer-transcendent",
+        "section": "Evolved and Secret Units",
+        "sortOrder": 50,
+        "image": null
+      }
     },
     {
-      "name": "Rizzuto (Sage)",
-      "slug": "rizzuto-sage",
-      "image": null,
-      "collectionSection": "Damage Carries",
-      "unitName": "Rizzuto",
-      "variant": "Sage",
-      "rarity": "Mythic",
-      "metaTier": "A",
-      "role": "Support DPS",
-      "unlockRoute": "Gacha / banner pull.",
-      "passiveName": "Sage Quietude",
-      "passiveEffect": "Builds a charge meter that can grant damage and defense aura bonuses to Nature-type allies.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Good after Maximum Yen improves early deployment timing.",
-      "sourceConfidence": "Medium - backed by PGG ranked roster/role and Bloxron item-level details; not present on BloxInformer units page.",
-      "cardSummary": "A support DPS that rewards stable lanes and Nature-focused setups.",
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://robolibrary.org/wikis/anime-squadron"
-      ],
-      "sortOrder": 110,
-      "bestUse": "Boss and mid-game damage support when the front line can keep aura setup stable."
+      "item": {
+        "name": "Rizzuto (Sage)",
+        "unitName": "Rizzuto",
+        "variant": "Sage",
+        "rarity": "Mythic",
+        "metaTier": "A",
+        "role": "Support DPS",
+        "unlockRoute": "Gacha / banner pull.",
+        "passiveName": "Sage Quietude",
+        "passiveEffect": "Builds a charge meter that can grant damage and defense aura bonuses to Nature-type allies.",
+        "bestUse": "Boss and mid-game damage support when the front line can keep aura setup stable.",
+        "investmentPriority": "Good after Maximum Yen improves early deployment timing.",
+        "cardSummary": "A support DPS that rewards stable lanes and Nature-focused setups."
+      },
+      "system": {
+        "slug": "rizzuto-sage",
+        "section": "Damage Carries",
+        "sortOrder": 110,
+        "image": null
+      }
     },
     {
-      "name": "Vegata (SSJ4 Full Power)",
-      "slug": "vegata-ssj4-full-power",
-      "image": null,
-      "collectionSection": "Damage Carries",
-      "unitName": "Vegata",
-      "variant": "SSJ4 Full Power",
-      "rarity": "Legendary",
-      "metaTier": "A",
-      "role": "DPS",
-      "unlockRoute": "Gacha, then awaken from base Vegata into the SSJ4 Full Power form.",
-      "passiveName": "Galick Gun barrage",
-      "passiveEffect": "Galick Gun barrage scales with wave count and attack speed.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Worth leveling even after it stops being the main lane carry because it feeds the fusion plan.",
-      "sourceConfidence": "Medium - backed by PGG ranked roster/role, Bloxron item-level details, RoboLibrary naming context, and AnimeSquadronWiki.org fusion notes.",
-      "cardSummary": "A Legendary fusion parent that can still carry mid-game lanes.",
-      "alternateSpellings": [
-        "Vegeta (SSJ4 Full Power)",
-        "Vegeta (SSJ Full Power)"
-      ],
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://robolibrary.org/wikis/anime-squadron",
-        "https://animesquadronwiki.org/units"
-      ],
-      "verificationNote": "PGG uses Vegata SSJ4 in the ranked list; Bloxron uses SSJ4 Full Power.",
-      "sortOrder": 120,
-      "bestUse": "Mid-game carry and required parent for the Gometa fusion route."
+      "item": {
+        "name": "Vegata (SSJ4 Full Power)",
+        "unitName": "Vegata",
+        "variant": "SSJ4 Full Power",
+        "rarity": "Legendary",
+        "metaTier": "A",
+        "role": "DPS",
+        "unlockRoute": "Gacha, then awaken from base Vegata into the SSJ4 Full Power form.",
+        "passiveName": "Galick Gun barrage",
+        "passiveEffect": "Galick Gun barrage scales with wave count and attack speed.",
+        "bestUse": "Mid-game carry and required parent for the Gometa fusion route.",
+        "investmentPriority": "Worth leveling even after it stops being the main lane carry because it feeds the fusion plan.",
+        "cardSummary": "A Legendary fusion parent that can still carry mid-game lanes.",
+        "alternateSpellings": [
+          "Vegeta (SSJ4 Full Power)",
+          "Vegeta (SSJ Full Power)"
+        ]
+      },
+      "system": {
+        "slug": "vegata-ssj4-full-power",
+        "section": "Damage Carries",
+        "sortOrder": 120,
+        "image": null
+      }
     },
     {
-      "name": "Goki (SSJ4 Full Power)",
-      "slug": "goki-ssj4-full-power",
-      "image": "/Anime%20Squadron/units/goki-ssj4-full-power.png",
-      "collectionSection": "Damage Carries",
-      "unitName": "Goki",
-      "variant": "SSJ4 Full Power",
-      "rarity": "Mythic",
-      "metaTier": "A",
-      "role": "Anti-Air DPS",
-      "unlockRoute": "Gacha, then awaken to SSJ4 with Eclipse God Stone and Gold.",
-      "passiveName": "Crimson Ape Spirit",
-      "passiveEffect": "Below half HP, gains damage, ability damage, and lifesteal; also functions as a true anti-air path for flyer lanes.",
-      "ultimateOrActive": null,
-      "investmentPriority": "High because it solves anti-air pressure and feeds the late-game fusion path.",
-      "sourceConfidence": "High - BloxInformer confirms a Goki SSJ4 unit/passive, while PGG and Bloxron back role and progression value.",
-      "cardSummary": "The SSJ4 Goki line is both anti-air coverage and half of the Gometa plan.",
-      "alternateSpellings": [
-        "Goki (SSJ4)",
-        "Goku (SSJ4 Full Power)"
-      ],
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://robolibrary.org/wikis/anime-squadron",
-        "https://animesquadronwiki.org/units"
-      ],
-      "verificationNote": "BloxInformer uses the shorter label Goki (SSJ4); Bloxron uses Goki (SSJ4 Full Power).",
-      "sortOrder": 130,
-      "bestUse": "Flyer lanes, mid-game damage, and required parent for Gometa fusion."
+      "item": {
+        "name": "Goki (SSJ4 Full Power)",
+        "unitName": "Goki",
+        "variant": "SSJ4 Full Power",
+        "rarity": "Mythic",
+        "metaTier": "A",
+        "role": "Anti-Air DPS",
+        "unlockRoute": "Gacha, then awaken to SSJ4 with Eclipse God Stone and Gold.",
+        "passiveName": "Crimson Ape Spirit",
+        "passiveEffect": "Below half HP, gains damage, ability damage, and lifesteal; also functions as a true anti-air path for flyer lanes.",
+        "bestUse": "Flyer lanes, mid-game damage, and required parent for Gometa fusion.",
+        "investmentPriority": "High because it solves anti-air pressure and feeds the late-game fusion path.",
+        "cardSummary": "The SSJ4 Goki line is both anti-air coverage and half of the Gometa plan.",
+        "alternateSpellings": [
+          "Goki (SSJ4)",
+          "Goku (SSJ4 Full Power)"
+        ]
+      },
+      "system": {
+        "slug": "goki-ssj4-full-power",
+        "section": "Damage Carries",
+        "sortOrder": 130,
+        "image": "/Anime%20Squadron/units/goki-ssj4-full-power.png"
+      }
     },
     {
-      "name": "Shinks",
-      "slug": "shinks",
-      "image": null,
-      "collectionSection": "Support and Utility",
-      "unitName": "Shinks",
-      "variant": null,
-      "rarity": "Mythic",
-      "metaTier": "S",
-      "role": "Support",
-      "unlockRoute": "Gacha / banner pull.",
-      "passiveName": "Defensive aura",
-      "passiveEffect": "Gives nearby allies defensive support through damage reduction and dodge help.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Useful when a team has damage but needs wave control and survival help.",
-      "sourceConfidence": "Medium - backed by PGG ranked roster/role, Bloxron item-level details, and RoboLibrary naming context; not present on BloxInformer units page.",
-      "cardSummary": "A support unit for protecting the main lane while carries ramp.",
-      "alternateSpellings": [
-        "Shanks"
-      ],
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://robolibrary.org/wikis/anime-squadron"
-      ],
-      "sortOrder": 210,
-      "bestUse": "Defensive support slot that buys time for upgrades and carry setup."
+      "item": {
+        "name": "Shinks",
+        "unitName": "Shinks",
+        "rarity": "Mythic",
+        "metaTier": "S",
+        "role": "Support",
+        "unlockRoute": "Gacha / banner pull.",
+        "passiveName": "Defensive aura",
+        "passiveEffect": "Gives nearby allies defensive support through damage reduction and dodge help.",
+        "bestUse": "Defensive support slot that buys time for upgrades and carry setup.",
+        "investmentPriority": "Useful when a team has damage but needs wave control and survival help.",
+        "cardSummary": "A support unit for protecting the main lane while carries ramp.",
+        "alternateSpellings": [
+          "Shanks"
+        ]
+      },
+      "system": {
+        "slug": "shinks",
+        "section": "Support and Utility",
+        "sortOrder": 210,
+        "image": null
+      }
     },
     {
-      "name": "Rudaus",
-      "slug": "rudaus",
-      "image": "/Anime%20Squadron/units/rudaus.png",
-      "collectionSection": "Support and Utility",
-      "unitName": "Rudaus",
-      "variant": null,
-      "rarity": "Epic",
-      "metaTier": "A",
-      "role": "Utility / Support",
-      "unlockRoute": "Gacha / banner pull.",
-      "passiveName": "Chantless Casting",
-      "passiveEffect": "Reduces his own ability cooldown and gives nearby allies a smaller ability-cooldown reduction.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Test with the main DPS first; cooldown support is strongest when the carry benefits from it.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support the utility role.",
-      "cardSummary": "A cooldown support unit for skill-heavy teams.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "verificationNote": "BloxInformer lists Epic rarity; Bloxron describes Mythic support. Keep rarity conflict visible in future review.",
-      "sortOrder": 220,
-      "bestUse": "Cooldown support for lineups that depend on frequent skill casts."
+      "item": {
+        "name": "Rudaus",
+        "unitName": "Rudaus",
+        "rarity": "Epic",
+        "metaTier": "A",
+        "role": "Utility / Support",
+        "unlockRoute": "Gacha / banner pull.",
+        "passiveName": "Chantless Casting",
+        "passiveEffect": "Reduces his own ability cooldown and gives nearby allies a smaller ability-cooldown reduction.",
+        "bestUse": "Cooldown support for lineups that depend on frequent skill casts.",
+        "investmentPriority": "Test with the main DPS first; cooldown support is strongest when the carry benefits from it.",
+        "cardSummary": "A cooldown support unit for skill-heavy teams."
+      },
+      "system": {
+        "slug": "rudaus",
+        "section": "Support and Utility",
+        "sortOrder": 220,
+        "image": "/Anime%20Squadron/units/rudaus.png"
+      }
     },
     {
-      "name": "Mamosa",
-      "slug": "mamosa",
-      "image": "/Anime%20Squadron/units/mamosa.png",
-      "collectionSection": "Support and Utility",
-      "unitName": "Mamosa",
-      "variant": null,
-      "rarity": "Epic",
-      "metaTier": "B",
-      "role": "Utility / Support",
-      "unlockRoute": "Gacha / campaign.",
-      "passiveName": "Healing Bloom",
-      "passiveEffect": "Allies in range regenerate HP based on Mamosa's max HP.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Good temporary support; do not over-invest once boss damage outpaces healing.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support the healer role.",
-      "cardSummary": "A healer that helps early lanes survive before endgame burst becomes the wall.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "sortOrder": 230,
-      "bestUse": "Early and mid-game protection while players learn Acts and stabilize lanes."
+      "item": {
+        "name": "Mamosa",
+        "unitName": "Mamosa",
+        "rarity": "Epic",
+        "metaTier": "B",
+        "role": "Utility / Support",
+        "unlockRoute": "Gacha / campaign.",
+        "passiveName": "Healing Bloom",
+        "passiveEffect": "Allies in range regenerate HP based on Mamosa's max HP.",
+        "bestUse": "Early and mid-game protection while players learn Acts and stabilize lanes.",
+        "investmentPriority": "Good temporary support; do not over-invest once boss damage outpaces healing.",
+        "cardSummary": "A healer that helps early lanes survive before endgame burst becomes the wall."
+      },
+      "system": {
+        "slug": "mamosa",
+        "section": "Support and Utility",
+        "sortOrder": 230,
+        "image": "/Anime%20Squadron/units/mamosa.png"
+      }
     },
     {
-      "name": "Shield Hero",
-      "slug": "shield-hero",
-      "image": null,
-      "collectionSection": "Tanks and Survival",
-      "unitName": "Shield Hero",
-      "variant": null,
-      "rarity": "Legendary",
-      "metaTier": "A",
-      "role": "Tank / Utility",
-      "unlockRoute": "Unlock path needs confirmation; listed paths include Battle Pass and gacha/campaign availability.",
-      "passiveName": "Damage interception",
-      "passiveEffect": "Redirects or intercepts part of the damage aimed at allies.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Good practical tank before late-game fusion options are ready.",
-      "sourceConfidence": "Medium - backed by PGG and Bloxron item-level notes, plus AnimeSquadronWiki.org top-unit guidance; not present on BloxInformer units page.",
-      "cardSummary": "A practical tank choice while building toward stronger endgame options.",
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://animesquadronwiki.org/units"
-      ],
-      "verificationNote": "Unlock route conflicts between PGG and Bloxron; keep source-qualified until checked in-game.",
-      "sortOrder": 310,
-      "bestUse": "Frontline survival slot for raids or stages where chip damage threatens the back line."
+      "item": {
+        "name": "Shield Hero",
+        "unitName": "Shield Hero",
+        "rarity": "Legendary",
+        "metaTier": "A",
+        "role": "Tank / Utility",
+        "unlockRoute": "Unlock path needs confirmation; listed paths include Battle Pass and gacha/campaign availability.",
+        "passiveName": "Damage interception",
+        "passiveEffect": "Redirects or intercepts part of the damage aimed at allies.",
+        "bestUse": "Frontline survival slot for raids or stages where chip damage threatens the back line.",
+        "investmentPriority": "Good practical tank before late-game fusion options are ready.",
+        "cardSummary": "A practical tank choice while building toward stronger endgame options."
+      },
+      "system": {
+        "slug": "shield-hero",
+        "section": "Tanks and Survival",
+        "sortOrder": 310,
+        "image": null
+      }
     },
     {
-      "name": "Big Beard",
-      "slug": "big-beard",
-      "image": "/Anime%20Squadron/units/big-beard.png",
-      "collectionSection": "Tanks and Survival",
-      "unitName": "Big Beard",
-      "variant": null,
-      "rarity": "Mythic",
-      "metaTier": "B",
-      "role": "Tank",
-      "unlockRoute": "Gacha / campaign.",
-      "passiveName": "Titan's Resolve",
-      "passiveEffect": "Missing HP increases Defense up to a cap.",
-      "ultimateOrActive": "Screen-wide Quake AOE.",
-      "investmentPriority": "Low-to-medium; useful early, but not a primary endgame target.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support tank value.",
-      "cardSummary": "A bruiser-style tank whose value comes from surviving at lower HP.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "verificationNote": "BloxInformer labels it Mythic; PGG places it as a B-tier tank.",
-      "sortOrder": 320,
-      "bestUse": "Temporary bruiser or tank slot until stronger survival units are available."
+      "item": {
+        "name": "Big Beard",
+        "unitName": "Big Beard",
+        "rarity": "Mythic",
+        "metaTier": "B",
+        "role": "Tank",
+        "unlockRoute": "Gacha / campaign.",
+        "passiveName": "Titan's Resolve",
+        "passiveEffect": "Missing HP increases Defense up to a cap.",
+        "ultimateOrActive": "Screen-wide Quake AOE.",
+        "bestUse": "Temporary bruiser or tank slot until stronger survival units are available.",
+        "investmentPriority": "Low-to-medium; useful early, but not a primary endgame target.",
+        "cardSummary": "A bruiser-style tank whose value comes from surviving at lower HP."
+      },
+      "system": {
+        "slug": "big-beard",
+        "section": "Tanks and Survival",
+        "sortOrder": 320,
+        "image": "/Anime%20Squadron/units/big-beard.png"
+      }
     },
     {
-      "name": "Fastwagon",
-      "slug": "fastwagon",
-      "image": "/Anime%20Squadron/units/fastwagon.png",
-      "collectionSection": "Economy Units",
-      "unitName": "Fastwagon",
-      "variant": null,
-      "rarity": "Epic",
-      "metaTier": "A",
-      "role": "Farm",
-      "unlockRoute": "Gacha / early banner.",
-      "passiveName": "Fastwagon Foundation",
-      "passiveEffect": "Increases money generation while alive and grants extra Yen on death.",
-      "ultimateOrActive": null,
-      "investmentPriority": "High for new accounts because income is harder to replace than raw damage.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron both identify the economy role.",
-      "cardSummary": "The dedicated Yen unit for speeding up deployments and upgrades.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "verificationNote": "BloxInformer lists Epic rarity; Bloxron describes Legendary economy. Keep rarity conflict visible in future review.",
-      "sortOrder": 410,
-      "bestUse": "Economy slot that helps expensive units come online earlier during waves."
+      "item": {
+        "name": "Fastwagon",
+        "unitName": "Fastwagon",
+        "rarity": "Epic",
+        "metaTier": "A",
+        "role": "Farm",
+        "unlockRoute": "Gacha / early banner.",
+        "passiveName": "Fastwagon Foundation",
+        "passiveEffect": "Increases money generation while alive and grants extra Yen on death.",
+        "bestUse": "Economy slot that helps expensive units come online earlier during waves.",
+        "investmentPriority": "High for new accounts because income is harder to replace than raw damage.",
+        "cardSummary": "The dedicated Yen unit for speeding up deployments and upgrades."
+      },
+      "system": {
+        "slug": "fastwagon",
+        "section": "Economy Units",
+        "sortOrder": 410,
+        "image": "/Anime%20Squadron/units/fastwagon.png"
+      }
     },
     {
-      "name": "Karashi (Sharingan)",
-      "slug": "karashi-sharingan",
-      "image": null,
-      "collectionSection": "Speed Farming Units",
-      "unitName": "Karashi",
-      "variant": "Sharingan",
-      "rarity": "Mythic",
-      "metaTier": "A",
-      "role": "Speed",
-      "unlockRoute": "Gacha / banner pull.",
-      "passiveName": "Marked follow-ups",
-      "passiveEffect": "Marked targets take faster follow-up hits and added crit pressure.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Worth using when pulled early; lower priority than the main endgame carry path.",
-      "sourceConfidence": "Medium - backed by PGG ranked roster/role and Bloxron item-level details; not present on BloxInformer units page.",
-      "cardSummary": "A speed-clear unit for farming lower-pressure stages quickly.",
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters",
-        "https://robolibrary.org/wikis/anime-squadron"
-      ],
-      "sortOrder": 510,
-      "bestUse": "Fast Act clearing and speed farming before enemy HP scales too high."
+      "item": {
+        "name": "Karashi (Sharingan)",
+        "unitName": "Karashi",
+        "variant": "Sharingan",
+        "rarity": "Mythic",
+        "metaTier": "A",
+        "role": "Speed",
+        "unlockRoute": "Gacha / banner pull.",
+        "passiveName": "Marked follow-ups",
+        "passiveEffect": "Marked targets take faster follow-up hits and added crit pressure.",
+        "bestUse": "Fast Act clearing and speed farming before enemy HP scales too high.",
+        "investmentPriority": "Worth using when pulled early; lower priority than the main endgame carry path.",
+        "cardSummary": "A speed-clear unit for farming lower-pressure stages quickly."
+      },
+      "system": {
+        "slug": "karashi-sharingan",
+        "section": "Speed Farming Units",
+        "sortOrder": 510,
+        "image": null
+      }
     },
     {
-      "name": "Zemitsu",
-      "slug": "zemitsu",
-      "image": "/Anime%20Squadron/units/zemitsu.png",
-      "collectionSection": "Speed Farming Units",
-      "unitName": "Zemitsu",
-      "variant": null,
-      "rarity": "Epic",
-      "metaTier": "B",
-      "role": "DPS",
-      "unlockRoute": "Gacha / basic banner.",
-      "passiveName": "Sleep Trigger",
-      "passiveEffect": "Periodically enters Sleep Mode for damage, cooldown, and ability-cooldown boosts.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Good early pull, but stop heavy investment once better DPS arrives.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support early speed value.",
-      "cardSummary": "A fast early DPS that falls off once stronger damage units arrive.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "verificationNote": "BloxInformer lists Epic rarity; Bloxron describes Common speed DPS.",
-      "sortOrder": 520,
-      "bestUse": "Early speed-clear slot before stronger Mythic or Legendary DPS units replace it."
+      "item": {
+        "name": "Zemitsu",
+        "unitName": "Zemitsu",
+        "rarity": "Epic",
+        "metaTier": "B",
+        "role": "DPS",
+        "unlockRoute": "Gacha / basic banner.",
+        "passiveName": "Sleep Trigger",
+        "passiveEffect": "Periodically enters Sleep Mode for damage, cooldown, and ability-cooldown boosts.",
+        "bestUse": "Early speed-clear slot before stronger Mythic or Legendary DPS units replace it.",
+        "investmentPriority": "Good early pull, but stop heavy investment once better DPS arrives.",
+        "cardSummary": "A fast early DPS that falls off once stronger damage units arrive."
+      },
+      "system": {
+        "slug": "zemitsu",
+        "section": "Speed Farming Units",
+        "sortOrder": 520,
+        "image": "/Anime%20Squadron/units/zemitsu.png"
+      }
     },
     {
-      "name": "Ramuru",
-      "slug": "ramuru",
-      "image": "/Anime%20Squadron/units/ramuru.png",
-      "collectionSection": "Early Fillers",
-      "unitName": "Ramuru",
-      "variant": null,
-      "rarity": "Epic",
-      "metaTier": "C",
-      "role": "DPS",
-      "unlockRoute": "Gacha / basic banner.",
-      "passiveName": "Predator Instinct",
-      "passiveEffect": "Kills absorb Max HP into Ramuru's damage up to a cap.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Low; use briefly and recycle or bench after stronger pulls.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support early-filler value.",
-      "cardSummary": "A starter-friendly DPS filler with limited long-term scaling.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "verificationNote": "BloxInformer spells this Ramuru; keep that spelling for now.",
-      "sortOrder": 610,
-      "bestUse": "Cheap early DPS filler until higher-tier units take the lane."
+      "item": {
+        "name": "Ramuru",
+        "unitName": "Ramuru",
+        "rarity": "Epic",
+        "metaTier": "C",
+        "role": "DPS",
+        "unlockRoute": "Gacha / basic banner.",
+        "passiveName": "Predator Instinct",
+        "passiveEffect": "Kills absorb Max HP into Ramuru's damage up to a cap.",
+        "bestUse": "Cheap early DPS filler until higher-tier units take the lane.",
+        "investmentPriority": "Low; use briefly and recycle or bench after stronger pulls.",
+        "cardSummary": "A starter-friendly DPS filler with limited long-term scaling."
+      },
+      "system": {
+        "slug": "ramuru",
+        "section": "Early Fillers",
+        "sortOrder": 610,
+        "image": "/Anime%20Squadron/units/ramuru.png"
+      }
     },
     {
-      "name": "Choi",
-      "slug": "choi",
-      "image": null,
-      "collectionSection": "Early Fillers",
-      "unitName": "Choi",
-      "variant": null,
-      "rarity": "Rare",
-      "metaTier": "C",
-      "role": "DPS",
-      "unlockRoute": "Basic gacha.",
-      "passiveName": "Short combo chain",
-      "passiveEffect": "Simple combo chain without meaningful scaling hooks.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Low; replace at the first reliable B-tier or better pull.",
-      "sourceConfidence": "Medium - backed by PGG ranked roster/role and Bloxron item-level details; not present on BloxInformer units page.",
-      "cardSummary": "A low-priority early DPS placeholder.",
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "sortOrder": 620,
-      "bestUse": "Early Act body when the player needs any lane filled."
+      "item": {
+        "name": "Choi",
+        "unitName": "Choi",
+        "rarity": "Rare",
+        "metaTier": "C",
+        "role": "DPS",
+        "unlockRoute": "Basic gacha.",
+        "passiveName": "Short combo chain",
+        "passiveEffect": "Simple combo chain without meaningful scaling hooks.",
+        "bestUse": "Early Act body when the player needs any lane filled.",
+        "investmentPriority": "Low; replace at the first reliable B-tier or better pull.",
+        "cardSummary": "A low-priority early DPS placeholder."
+      },
+      "system": {
+        "slug": "choi",
+        "section": "Early Fillers",
+        "sortOrder": 620,
+        "image": null
+      }
     },
     {
-      "name": "Tranks",
-      "slug": "tranks",
-      "image": null,
-      "collectionSection": "Early Fillers",
-      "unitName": "Tranks",
-      "variant": null,
-      "rarity": "Rare",
-      "metaTier": "C",
-      "role": "DPS",
-      "unlockRoute": "Gacha / early campaign.",
-      "passiveName": "Crit stun",
-      "passiveEffect": "Melee crits can briefly stun nearby targets.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Low; do not carry it into raid progression unless roster options are thin.",
-      "sourceConfidence": "Medium - backed by PGG ranked roster/role and Bloxron item-level details; not present on BloxInformer units page.",
-      "cardSummary": "A filler hybrid whose brief crit stun is useful only while options are limited.",
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "sortOrder": 630,
-      "bestUse": "Temporary hybrid filler in early or mid Acts."
+      "item": {
+        "name": "Tranks",
+        "unitName": "Tranks",
+        "rarity": "Rare",
+        "metaTier": "C",
+        "role": "DPS",
+        "unlockRoute": "Gacha / early campaign.",
+        "passiveName": "Crit stun",
+        "passiveEffect": "Melee crits can briefly stun nearby targets.",
+        "bestUse": "Temporary hybrid filler in early or mid Acts.",
+        "investmentPriority": "Low; do not carry it into raid progression unless roster options are thin.",
+        "cardSummary": "A filler hybrid whose brief crit stun is useful only while options are limited."
+      },
+      "system": {
+        "slug": "tranks",
+        "section": "Early Fillers",
+        "sortOrder": 630,
+        "image": null
+      }
     },
     {
-      "name": "Zaro",
-      "slug": "zaro",
-      "image": "/Anime%20Squadron/units/zaro.png",
-      "collectionSection": "Early Fillers",
-      "unitName": "Zaro",
-      "variant": null,
-      "rarity": "Legendary",
-      "metaTier": "C",
-      "role": "DPS",
-      "unlockRoute": "Gacha / campaign.",
-      "passiveName": "Crimson Slash",
-      "passiveEffect": "Ability attacks apply Bleed that damages over time and reduces regeneration.",
-      "ultimateOrActive": "Executioner resets ability cooldown after a kill, with a cooldown.",
-      "investmentPriority": "Low-to-medium; useful early, but do not over-invest for endgame.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support early-filler value.",
-      "cardSummary": "A bleed-focused DPS that works early but is not a long-term carry.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "verificationNote": "PGG places Zaro low despite BloxInformer listing a Legendary passive.",
-      "sortOrder": 640,
-      "bestUse": "Early lane DPS with bleed utility before better units replace it."
+      "item": {
+        "name": "Zaro",
+        "unitName": "Zaro",
+        "rarity": "Legendary",
+        "metaTier": "C",
+        "role": "DPS",
+        "unlockRoute": "Gacha / campaign.",
+        "passiveName": "Crimson Slash",
+        "passiveEffect": "Ability attacks apply Bleed that damages over time and reduces regeneration.",
+        "ultimateOrActive": "Executioner resets ability cooldown after a kill, with a cooldown.",
+        "bestUse": "Early lane DPS with bleed utility before better units replace it.",
+        "investmentPriority": "Low-to-medium; useful early, but do not over-invest for endgame.",
+        "cardSummary": "A bleed-focused DPS that works early but is not a long-term carry."
+      },
+      "system": {
+        "slug": "zaro",
+        "section": "Early Fillers",
+        "sortOrder": 640,
+        "image": "/Anime%20Squadron/units/zaro.png"
+      }
     },
     {
-      "name": "Shin",
-      "slug": "shin",
-      "image": "/Anime%20Squadron/units/shin.png",
-      "collectionSection": "Early Fillers",
-      "unitName": "Shin",
-      "variant": null,
-      "rarity": "Legendary",
-      "metaTier": "C",
-      "role": "DPS",
-      "unlockRoute": "Starter roster or basic gacha.",
-      "passiveName": "Scorch",
-      "passiveEffect": "Ability attacks apply Burn, and repeated ability casts stack extra Burn damage up to a cap.",
-      "ultimateOrActive": "Ignition Burst stacking burn boost.",
-      "investmentPriority": "Low; replace when stronger burn or burst units arrive.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG lists Shin in the ranked roster.",
-      "cardSummary": "A burn-based early DPS that should be replaced by stronger carries.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/"
-      ],
-      "verificationNote": "BloxInformer lists Legendary rarity; Bloxron text extraction around Shin was inconsistent, so BloxInformer/PGG are weighted more heavily.",
-      "sortOrder": 650,
-      "bestUse": "Early DPS filler when burn pressure helps basic progression."
+      "item": {
+        "name": "Shin",
+        "unitName": "Shin",
+        "rarity": "Legendary",
+        "metaTier": "C",
+        "role": "DPS",
+        "unlockRoute": "Starter roster or basic gacha.",
+        "passiveName": "Scorch",
+        "passiveEffect": "Ability attacks apply Burn, and repeated ability casts stack extra Burn damage up to a cap.",
+        "ultimateOrActive": "Ignition Burst stacking burn boost.",
+        "bestUse": "Early DPS filler when burn pressure helps basic progression.",
+        "investmentPriority": "Low; replace when stronger burn or burst units arrive.",
+        "cardSummary": "A burn-based early DPS that should be replaced by stronger carries."
+      },
+      "system": {
+        "slug": "shin",
+        "section": "Early Fillers",
+        "sortOrder": 650,
+        "image": "/Anime%20Squadron/units/shin.png"
+      }
     },
     {
-      "name": "Igras",
-      "slug": "igras",
-      "image": null,
-      "collectionSection": "Early Fillers",
-      "unitName": "Igras",
-      "variant": null,
-      "rarity": "Common",
-      "metaTier": "C",
-      "role": "DPS",
-      "unlockRoute": "Starter roster.",
-      "passiveName": "Basic dagger attacks",
-      "passiveEffect": "Weak dagger attacks with no meaningful scaling hook.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Very low; avoid Stat Cube spending.",
-      "sourceConfidence": "Medium - backed by PGG ranked roster/role and Bloxron item-level details; not present on BloxInformer units page.",
-      "cardSummary": "A starter unit to replace before any serious reroll spending.",
-      "sourceUrls": [
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "sortOrder": 660,
-      "bestUse": "Starter body for the first pulls and first lanes."
+      "item": {
+        "name": "Igras",
+        "unitName": "Igras",
+        "rarity": "Common",
+        "metaTier": "C",
+        "role": "DPS",
+        "unlockRoute": "Starter roster.",
+        "passiveName": "Basic dagger attacks",
+        "passiveEffect": "Weak dagger attacks with no meaningful scaling hook.",
+        "bestUse": "Starter body for the first pulls and first lanes.",
+        "investmentPriority": "Very low; avoid Stat Cube spending.",
+        "cardSummary": "A starter unit to replace before any serious reroll spending."
+      },
+      "system": {
+        "slug": "igras",
+        "section": "Early Fillers",
+        "sortOrder": 660,
+        "image": null
+      }
     },
     {
-      "name": "Michigo",
-      "slug": "michigo",
-      "image": "/Anime%20Squadron/units/michigo.png",
-      "collectionSection": "Early Fillers",
-      "unitName": "Michigo",
-      "variant": null,
-      "rarity": "Rare",
-      "metaTier": "D",
-      "role": "DPS",
-      "unlockRoute": "Gacha / campaign.",
-      "passiveName": "Hollow Instinct",
-      "passiveEffect": "At half HP, gains Speed and Damage until death.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Very low; recycle or bench after better pulls.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support low-tier filler value.",
-      "cardSummary": "A low-priority DPS filler with a half-HP self-buff.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "sortOrder": 670,
-      "bestUse": "Low-ceiling filler when no better lane unit is available."
+      "item": {
+        "name": "Michigo",
+        "unitName": "Michigo",
+        "rarity": "Rare",
+        "metaTier": "D",
+        "role": "DPS",
+        "unlockRoute": "Gacha / campaign.",
+        "passiveName": "Hollow Instinct",
+        "passiveEffect": "At half HP, gains Speed and Damage until death.",
+        "bestUse": "Low-ceiling filler when no better lane unit is available.",
+        "investmentPriority": "Very low; recycle or bench after better pulls.",
+        "cardSummary": "A low-priority DPS filler with a half-HP self-buff."
+      },
+      "system": {
+        "slug": "michigo",
+        "section": "Early Fillers",
+        "sortOrder": 670,
+        "image": "/Anime%20Squadron/units/michigo.png"
+      }
     },
     {
-      "name": "Asto",
-      "slug": "asto",
-      "image": "/Anime%20Squadron/units/asto.png",
-      "collectionSection": "Early Fillers",
-      "unitName": "Asto",
-      "variant": null,
-      "rarity": "Rare",
-      "metaTier": "D",
-      "role": "DPS",
-      "unlockRoute": "Gacha / campaign.",
-      "passiveName": "Anti Magic Body",
-      "passiveEffect": "Takes reduced ability damage.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Very low; do not spend major reroll items.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support low-tier filler value.",
-      "cardSummary": "A short-term filler whose defensive passive does not justify long-term investment.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "sortOrder": 680,
-      "bestUse": "Temporary early body with a defensive passive."
+      "item": {
+        "name": "Asto",
+        "unitName": "Asto",
+        "rarity": "Rare",
+        "metaTier": "D",
+        "role": "DPS",
+        "unlockRoute": "Gacha / campaign.",
+        "passiveName": "Anti Magic Body",
+        "passiveEffect": "Takes reduced ability damage.",
+        "bestUse": "Temporary early body with a defensive passive.",
+        "investmentPriority": "Very low; do not spend major reroll items.",
+        "cardSummary": "A short-term filler whose defensive passive does not justify long-term investment."
+      },
+      "system": {
+        "slug": "asto",
+        "section": "Early Fillers",
+        "sortOrder": 680,
+        "image": "/Anime%20Squadron/units/asto.png"
+      }
     },
     {
-      "name": "Goki",
-      "slug": "goki",
-      "image": "/Anime%20Squadron/units/goki.png",
-      "collectionSection": "Early Fillers",
-      "unitName": "Goki",
-      "variant": "Base",
-      "rarity": "Rare",
-      "metaTier": "D",
-      "role": "DPS",
-      "unlockRoute": "Gacha / basic banner.",
-      "passiveName": "Ki Overflow",
-      "passiveEffect": "Every third attack gains extra ability damage.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Low for combat, but keep progression needs in mind if pursuing Goki SSJ4 and Gometa.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support low-tier base-form value.",
-      "cardSummary": "Base Goki is mainly useful as a stepping stone toward stronger forms.",
-      "alternateSpellings": [
-        "Goku"
-      ],
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "sortOrder": 690,
-      "bestUse": "Base-form stepping stone toward the SSJ4 line, not a long-term carry."
+      "item": {
+        "name": "Goki",
+        "unitName": "Goki",
+        "variant": "Base",
+        "rarity": "Rare",
+        "metaTier": "D",
+        "role": "DPS",
+        "unlockRoute": "Gacha / basic banner.",
+        "passiveName": "Ki Overflow",
+        "passiveEffect": "Every third attack gains extra ability damage.",
+        "bestUse": "Base-form stepping stone toward the SSJ4 line, not a long-term carry.",
+        "investmentPriority": "Low for combat, but keep progression needs in mind if pursuing Goki SSJ4 and Gometa.",
+        "cardSummary": "Base Goki is mainly useful as a stepping stone toward stronger forms.",
+        "alternateSpellings": [
+          "Goku"
+        ]
+      },
+      "system": {
+        "slug": "goki",
+        "section": "Early Fillers",
+        "sortOrder": 690,
+        "image": "/Anime%20Squadron/units/goki.png"
+      }
     },
     {
-      "name": "Mab",
-      "slug": "mab",
-      "image": "/Anime%20Squadron/units/mab.png",
-      "collectionSection": "Early Fillers",
-      "unitName": "Mab",
-      "variant": null,
-      "rarity": "Rare",
-      "metaTier": "D",
-      "role": "DPS",
-      "unlockRoute": "Gacha / campaign.",
-      "passiveName": "Esper Focus",
-      "passiveEffect": "Every third attack deals extra damage.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Very low; replace quickly.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support low-tier filler value.",
-      "cardSummary": "A simple early DPS filler with every-third-attack damage.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "sortOrder": 700,
-      "bestUse": "Early roster body while waiting for stronger DPS."
+      "item": {
+        "name": "Mab",
+        "unitName": "Mab",
+        "rarity": "Rare",
+        "metaTier": "D",
+        "role": "DPS",
+        "unlockRoute": "Gacha / campaign.",
+        "passiveName": "Esper Focus",
+        "passiveEffect": "Every third attack deals extra damage.",
+        "bestUse": "Early roster body while waiting for stronger DPS.",
+        "investmentPriority": "Very low; replace quickly.",
+        "cardSummary": "A simple early DPS filler with every-third-attack damage."
+      },
+      "system": {
+        "slug": "mab",
+        "section": "Early Fillers",
+        "sortOrder": 700,
+        "image": "/Anime%20Squadron/units/mab.png"
+      }
     },
     {
-      "name": "Muffy",
-      "slug": "muffy",
-      "image": "/Anime%20Squadron/units/muffy.png",
-      "collectionSection": "Early Fillers",
-      "unitName": "Muffy",
-      "variant": null,
-      "rarity": "Rare",
-      "metaTier": "D",
-      "role": "DPS",
-      "unlockRoute": "Gacha / campaign.",
-      "passiveName": "Gomu Gomu Reflex",
-      "passiveEffect": "Gains a base Dodge chance.",
-      "ultimateOrActive": null,
-      "investmentPriority": "Very low; never a priority cube target.",
-      "sourceConfidence": "High - BloxInformer confirms rarity/passive, and PGG/Bloxron support low-tier filler value.",
-      "cardSummary": "A low-priority brawler whose dodge passive is not enough for long-term investment.",
-      "sourceUrls": [
-        "https://bloxinformer.com/wikis/anime-squadron/units/",
-        "https://progameguides.com/roblox/anime-squadron-tier-list/",
-        "https://bloxron.com/anime-squadron/characters"
-      ],
-      "sortOrder": 710,
-      "bestUse": "Early filler when the roster is still thin."
+      "item": {
+        "name": "Muffy",
+        "unitName": "Muffy",
+        "rarity": "Rare",
+        "metaTier": "D",
+        "role": "DPS",
+        "unlockRoute": "Gacha / campaign.",
+        "passiveName": "Gomu Gomu Reflex",
+        "passiveEffect": "Gains a base Dodge chance.",
+        "bestUse": "Early filler when the roster is still thin.",
+        "investmentPriority": "Very low; never a priority cube target.",
+        "cardSummary": "A low-priority brawler whose dodge passive is not enough for long-term investment."
+      },
+      "system": {
+        "slug": "muffy",
+        "section": "Early Fillers",
+        "sortOrder": 710,
+        "image": "/Anime%20Squadron/units/muffy.png"
+      }
     }
   ]
 }

@@ -23,14 +23,15 @@ tmp/content-workspace/<game-slug>/quizzes/<quiz-code>/
 
 ## Voice & Tone
 
-Bloxodes house voice for the page copy (`description_md`, intro, explanations): write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful — never formal, corporate, or hyped.
+Bloxodes house voice for the page copy (`description_md`, intro, explanations): write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
 
 - Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Playful, not loud. Drop in a light, dry touch of wit — roughly one per short paragraph — and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays — not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length — not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing — the topic or the challenge. No "Welcome to…" or mood-setting warm-ups.
-- Keep functional slots clean. Questions, options, and explanations stay plain, clear, and unambiguous — the playful voice lives in the page intro and description, never inside a question that needs one exact answer.
+- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
+- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
+- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
+- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
+- Open on the real thing: the topic or the challenge. No "Welcome to…" or mood-setting warm-ups.
+- Keep functional slots clean. Questions, options, and explanations stay plain, clear, and unambiguous; the playful voice lives in the page intro and description, never inside a question that needs one exact answer.
 - No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
 
 ## Question Rules

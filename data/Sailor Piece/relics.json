@@ -1,116 +1,167 @@
 {
   "meta": {
-    "title": "Sailor Piece relics data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Sailor Piece Wiki - relics",
-        "url": "https://sailorpiece.org/wiki/relics/",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Sailor Piece",
+    "gameSlug": "sailor-piece",
+    "collection": "relics",
+    "route": "/wiki/sailor-piece/relics",
+    "catalogCode": "sailor-piece-relics",
+    "itemFields": [
       "tier",
-      "collectionSection",
       "effect",
       "recipe",
       "partRoute",
-      "bestFor"
-    ]
+      "bestFor",
+      "category",
+      "bonus",
+      "description",
+      "stats",
+      "tags"
+    ],
+    "columns": [
+      "tier",
+      "effect",
+      "recipe",
+      "partRoute",
+      "bestFor",
+      "category",
+      "bonus",
+      "description",
+      "stats",
+      "tags"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Raw damage",
+        "Critical stats",
+        "Drop farming"
+      ],
+      "badgeField": "tier",
+      "subtitleFields": [],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "tier",
+        "effect",
+        "recipe",
+        "partRoute",
+        "bestFor",
+        "category"
+      ],
+      "tableFields": [
+        "tier",
+        "effect",
+        "recipe",
+        "partRoute",
+        "bestFor",
+        "category",
+        "bonus",
+        "description"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Damage Relic",
-      "slug": "damage-relic",
-      "tier": "S+",
-      "rarity": null,
-      "category": "sea-2",
-      "type": null,
-      "effect": "+30% Damage",
-      "bonus": "+30% Damage",
-      "recipe": "40x Relic Part #7 + 30x Relic Part #8 + 50x Relic Part #1 + 50x Relic Part #3",
-      "description": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3",
-      "stats": {
-        "recipe": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3"
+      "item": {
+        "name": "Damage Relic",
+        "tier": "S+",
+        "effect": "+30% Damage",
+        "recipe": "40x Relic Part #7 + 30x Relic Part #8 + 50x Relic Part #1 + 50x Relic Part #3",
+        "partRoute": "Starter Island + Punch Island parts",
+        "bestFor": "Boss damage and general DPS",
+        "category": "sea-2",
+        "bonus": "+30% Damage",
+        "description": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3",
+        "stats": {
+          "recipe": "40x Part #7 + 30x Part #8 + 50x Part #1 + 50x Part #3"
+        },
+        "tags": [
+          "sea-2"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "sea-2"
-      ],
-      "collectionSection": "Raw damage",
-      "partRoute": "Starter Island + Punch Island parts",
-      "bestFor": "Boss damage and general DPS"
+      "system": {
+        "slug": "damage-relic",
+        "section": "Raw damage",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Crit Damage Relic",
-      "slug": "crit-damage-relic",
-      "tier": "A",
-      "rarity": null,
-      "category": "sea-2",
-      "type": null,
-      "effect": "+20% Crit Damage",
-      "bonus": "+20% Crit Damage",
-      "recipe": "25x Relic Part #3 + 20x Relic Part #4",
-      "description": "Recipe",
-      "stats": {
-        "recipe": "25x Part #3 + 20x Part #4"
+      "item": {
+        "name": "Crit Damage Relic",
+        "tier": "A",
+        "effect": "+20% Crit Damage",
+        "recipe": "25x Relic Part #3 + 20x Relic Part #4",
+        "partRoute": "Starter Island part pair",
+        "bestFor": "Crit damage builds",
+        "category": "sea-2",
+        "bonus": "+20% Crit Damage",
+        "description": "Recipe",
+        "stats": {
+          "recipe": "25x Part #3 + 20x Part #4"
+        },
+        "tags": [
+          "sea-2"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "sea-2"
-      ],
-      "collectionSection": "Critical stats",
-      "partRoute": "Starter Island part pair",
-      "bestFor": "Crit damage builds"
+      "system": {
+        "slug": "crit-damage-relic",
+        "section": "Critical stats",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Luck Relic",
-      "slug": "luck-relic",
-      "tier": "A",
-      "rarity": null,
-      "category": "sea-2",
-      "type": null,
-      "effect": "+20% Luck",
-      "bonus": "+20% Luck",
-      "recipe": "30x Relic Part #5 + 25x Relic Part #6",
-      "description": "Recipe",
-      "stats": {
-        "recipe": "30x Part #5 + 25x Part #6"
+      "item": {
+        "name": "Luck Relic",
+        "tier": "A",
+        "effect": "+20% Luck",
+        "recipe": "30x Relic Part #5 + 25x Relic Part #6",
+        "partRoute": "Bizarre Island parts",
+        "bestFor": "Rare drop farming",
+        "category": "sea-2",
+        "bonus": "+20% Luck",
+        "description": "Recipe",
+        "stats": {
+          "recipe": "30x Part #5 + 25x Part #6"
+        },
+        "tags": [
+          "sea-2"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "sea-2"
-      ],
-      "collectionSection": "Drop farming",
-      "partRoute": "Bizarre Island parts",
-      "bestFor": "Rare drop farming"
+      "system": {
+        "slug": "luck-relic",
+        "section": "Drop farming",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Crit Chance Relic",
-      "slug": "crit-chance-relic",
-      "tier": "B",
-      "rarity": null,
-      "category": "sea-2",
-      "type": null,
-      "effect": "+5% Crit Chance",
-      "bonus": "+5% Crit Chance",
-      "recipe": "20x Relic Part #1 + 15x Relic Part #2",
-      "description": "Recipe",
-      "stats": {
-        "recipe": "20x Part #1 + 15x Part #2"
+      "item": {
+        "name": "Crit Chance Relic",
+        "tier": "B",
+        "effect": "+5% Crit Chance",
+        "recipe": "20x Relic Part #1 + 15x Relic Part #2",
+        "partRoute": "Starter Island part pair",
+        "bestFor": "Crit chance builds",
+        "category": "sea-2",
+        "bonus": "+5% Crit Chance",
+        "description": "Recipe",
+        "stats": {
+          "recipe": "20x Part #1 + 15x Part #2"
+        },
+        "tags": [
+          "sea-2"
+        ]
       },
-      "requirements": null,
-      "obtainment": null,
-      "tags": [
-        "sea-2"
-      ],
-      "collectionSection": "Critical stats",
-      "partRoute": "Starter Island part pair",
-      "bestFor": "Crit chance builds"
+      "system": {
+        "slug": "crit-chance-relic",
+        "section": "Critical stats",
+        "sortOrder": 4,
+        "image": null
+      }
     }
   ]
 }

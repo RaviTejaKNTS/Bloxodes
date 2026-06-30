@@ -1,136 +1,136 @@
 {
   "meta": {
-    "title": "Evomon capture balls data",
-    "updatedAt": "2026-06-28",
-    "groupBy": "collectionSection",
-    "sectionOrder": [
-      "Capture Balls"
-    ],
-    "imagePolicy": "text-first",
-    "imageAcceptedMissing": true,
-    "imageAcceptedMissingReason": "No clean, reusable per-ball icon exists from a reliable source. Evomon's wiki.gg Items page lists food/tools/fusion items but no capture balls; there is no Capture Balls page (404). The Fandom guide wiki returns 403. Reliable guide sites (Sportskeeda, Pro Game Guides, AllThings.How) only carry article thumbnails and in-game screenshots, not isolated ball icons, which the image rules disallow. The only source with ball-specific art is evomon-world.wiki, already flagged as unreliable. Per parent guidance, accepted text-first for this 4-item ball list rather than using logos, screenshots, or unrelated images. Matches the sibling Evomon islands collection, which also accepted text-first.",
-    "sources": [
-      {
-        "label": "Sportskeeda - How to get Prismatic Balls in Evomon",
-        "url": "https://www.sportskeeda.com/roblox-news/how-get-prismatic-balls-evomon",
-        "accessed": "2026-06-28",
-        "note": "Prismatic Ball: 100% catch rate, guaranteed SSS talent + random sparkling effect, 799 Robux each or 7,990 for a pack of 10, also from the Season Battle Pass. Notes Advanced and King as lesser alternatives."
-      },
-      {
-        "label": "Sportskeeda - Evomon Season Battle Pass guide",
-        "url": "https://www.sportskeeda.com/roblox-news/evomon-season-battle-pass-guide",
-        "accessed": "2026-06-28",
-        "note": "King Ball 'Guarantees that the captured evomon will have the SSS talent.' Prismatic Ball guarantees SSS talent plus a sparkling appearance. King Balls at pass levels 10/20/40; Prismatic at 25 and 50."
-      },
-      {
-        "label": "Pro Game Guides - Complete Evomon Farming Guide",
-        "url": "https://progameguides.com/roblox/complete-evomon-farming-guide/",
-        "accessed": "2026-06-28",
-        "note": "Advanced = Coin Shop; King = weekly Daily Quests + Battle Pass; Prismatic = Battle Pass completion. Balls also drop from codes, map chests, NPC quests, and the Traveling Merchant."
-      },
-      {
-        "label": "AllThings.How - Evomon Farming Guide",
-        "url": "https://allthings.how/evomon-farming-guide-where-to-get-exp-coins-and-materials/",
-        "accessed": "2026-06-28",
-        "note": "Basic Ball is the default starter; Advanced is bought for Coins in the Coin Shop; higher rarities (Advanced, King, Prismatic) give the catch rates needed for rare monsters."
-      },
-      {
-        "label": "Beebom - Evomon Codes",
-        "url": "https://beebom.com/evomon-codes/",
-        "accessed": "2026-06-28",
-        "note": "Confirms Advanced Ball as a common code reward (e.g. 10x, 5x), the main code-farmable ball."
-      }
-    ],
-    "columns": [
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Evomon",
+    "gameSlug": "evomon",
+    "collection": "balls",
+    "route": "/wiki/evomon/balls",
+    "catalogCode": "evomon-balls",
+    "itemFields": [
       "catchRate",
       "effect",
       "howToGet",
-      "bestUse"
+      "bestUse",
+      "cardSummary"
     ],
-    "fieldPresentation": {
-      "catchRate": {
-        "kind": "chip",
-        "label": "Catch rate"
-      },
-      "effect": {
-        "kind": "highlight",
-        "label": "Effect"
-      },
-      "howToGet": {
-        "kind": "plain",
-        "label": "How to get"
-      },
-      "bestUse": {
-        "kind": "detail",
-        "label": "Best use"
-      },
-      "cardSummary": {
-        "kind": "detail"
+    "columns": [
+      "catchRate",
+      "effect",
+      "howToGet",
+      "bestUse",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Capture Balls",
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "catchRate",
+        "effect",
+        "howToGet",
+        "bestUse",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "catchRate",
+        "effect",
+        "howToGet",
+        "bestUse",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "catchRate": {
+          "kind": "chip",
+          "label": "Catch rate"
+        },
+        "effect": {
+          "kind": "highlight",
+          "label": "Effect"
+        },
+        "howToGet": {
+          "kind": "plain",
+          "label": "How to get"
+        },
+        "bestUse": {
+          "kind": "detail",
+          "label": "Best use"
+        },
+        "cardSummary": {
+          "kind": "detail"
+        }
       }
-    },
-    "notes": "Four confirmed in-game capture balls (Basic, Advanced, King, Prismatic). SSS Ball and Diamond Ball were excluded because they appear only on evomon-world.wiki and are contradicted by every reliable source. Exact catch-rate percentages are not officially published except for the Prismatic Ball (100%), so the other balls use qualitative tiers. All four balls share one section ('Capture Balls') so the list renders as a single clean power-tier ladder (Basic to Prismatic) rather than four one-card section headers. The checker emits only a single-section WARN, matching the sibling islands collection precedent."
+    }
   },
   "items": [
     {
-      "name": "Basic Ball",
-      "slug": "basic-ball",
-      "collectionSection": "Capture Balls",
-      "catchRate": "Standard",
-      "effect": "No talent or rarity bonus",
-      "howToGet": "Default ball every player has in unlimited supply",
-      "bestUse": "Catching common, low-rarity Evomon while you build up coins and better balls.",
-      "cardSummary": "The free starter ball every player carries without limit. It has a standard catch rate and no talent or rarity bonus, so it is meant for early common catches rather than rare targets.",
-      "sortOrder": 1,
-      "sourcePage": "https://allthings.how/evomon-farming-guide-where-to-get-exp-coins-and-materials/",
-      "sourceStatus": "Confirmed across AllThings.How and Pro Game Guides farming guides",
-      "image": null,
-      "imageStatus": "text-only; no clean local ball icon collected yet"
+      "item": {
+        "name": "Basic Ball",
+        "catchRate": "Standard",
+        "effect": "No talent or rarity bonus",
+        "howToGet": "Default ball every player has in unlimited supply",
+        "bestUse": "Catching common, low-rarity Evomon while you build up coins and better balls.",
+        "cardSummary": "The free starter ball every player carries without limit. It has a standard catch rate and no talent or rarity bonus, so it is meant for early common catches rather than rare targets."
+      },
+      "system": {
+        "slug": "basic-ball",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Advanced Ball",
-      "slug": "advanced-ball",
-      "collectionSection": "Capture Balls",
-      "catchRate": "Improved",
-      "effect": "Stronger catch chance, no talent bonus",
-      "howToGet": "Buy with Coins in the Coin Shop, or claim from codes",
-      "bestUse": "General farming and improving your odds on rarer Evomon when premium balls are scarce.",
-      "cardSummary": "A purchasable upgrade over the Basic Ball with a stronger catch chance but no talent guarantee. It is the main code-reward ball and the workhorse for everyday catching of rarer Evomon.",
-      "sortOrder": 2,
-      "sourcePage": "https://progameguides.com/roblox/complete-evomon-farming-guide/",
-      "sourceStatus": "Confirmed across Pro Game Guides, AllThings.How, and Beebom codes",
-      "image": null,
-      "imageStatus": "text-only; no clean local ball icon collected yet"
+      "item": {
+        "name": "Advanced Ball",
+        "catchRate": "Improved",
+        "effect": "Stronger catch chance, no talent bonus",
+        "howToGet": "Buy with Coins in the Coin Shop, or claim from codes",
+        "bestUse": "General farming and improving your odds on rarer Evomon when premium balls are scarce.",
+        "cardSummary": "A purchasable upgrade over the Basic Ball with a stronger catch chance but no talent guarantee. It is the main code-reward ball and the workhorse for everyday catching of rarer Evomon."
+      },
+      "system": {
+        "slug": "advanced-ball",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "King Ball",
-      "slug": "king-ball",
-      "collectionSection": "Capture Balls",
-      "catchRate": "High",
-      "effect": "Guarantees SSS talent on the catch",
-      "howToGet": "Weekly Daily Quest reward and Season Battle Pass levels (4-5 from the free track)",
-      "bestUse": "Securing an SSS-talent catch on bosses and rare spawns when you do not need the sparkling effect.",
-      "cardSummary": "A premium ball that guarantees the captured Evomon has the top SSS talent. Earned from weekly Daily Quests and the Battle Pass, it is the go-to for locking in SSS talent on tough or rare targets.",
-      "sortOrder": 3,
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/evomon-season-battle-pass-guide",
-      "sourceStatus": "Effect confirmed by Sportskeeda Battle Pass guide; acquisition by Pro Game Guides",
-      "image": null,
-      "imageStatus": "text-only; no clean local ball icon collected yet"
+      "item": {
+        "name": "King Ball",
+        "catchRate": "High",
+        "effect": "Guarantees SSS talent on the catch",
+        "howToGet": "Weekly Daily Quest reward and Season Battle Pass levels (4-5 from the free track)",
+        "bestUse": "Securing an SSS-talent catch on bosses and rare spawns when you do not need the sparkling effect.",
+        "cardSummary": "A premium ball that guarantees the captured Evomon has the top SSS talent. Earned from weekly Daily Quests and the Battle Pass, it is the go-to for locking in SSS talent on tough or rare targets."
+      },
+      "system": {
+        "slug": "king-ball",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Prismatic Ball",
-      "slug": "prismatic-ball",
-      "collectionSection": "Capture Balls",
-      "catchRate": "100%",
-      "effect": "Guarantees the catch, SSS talent, and a random sparkling effect",
-      "howToGet": "Season Battle Pass levels (1 from completion) or buy for 799 Robux each (pack of 10 for 7,990 Robux)",
-      "bestUse": "Endgame captures of the strongest or rarest Evomon when you want a guaranteed SSS, sparkling catch.",
-      "cardSummary": "The top-tier ball with a guaranteed 100% catch, a guaranteed SSS talent, and a random sparkling effect. It is the premium choice for the strongest Evomon, earned from the Battle Pass or bought with Robux.",
-      "sortOrder": 4,
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/how-get-prismatic-balls-evomon",
-      "sourceStatus": "Confirmed across Sportskeeda (two guides) and Pro Game Guides",
-      "image": null,
-      "imageStatus": "text-only; no clean local ball icon collected yet"
+      "item": {
+        "name": "Prismatic Ball",
+        "catchRate": "100%",
+        "effect": "Guarantees the catch, SSS talent, and a random sparkling effect",
+        "howToGet": "Season Battle Pass levels (1 from completion) or buy for 799 Robux each (pack of 10 for 7,990 Robux)",
+        "bestUse": "Endgame captures of the strongest or rarest Evomon when you want a guaranteed SSS, sparkling catch.",
+        "cardSummary": "The top-tier ball with a guaranteed 100% catch, a guaranteed SSS talent, and a random sparkling effect. It is the premium choice for the strongest Evomon, earned from the Battle Pass or bought with Robux."
+      },
+      "system": {
+        "slug": "prismatic-ball",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": null
+      }
     }
   ]
 }

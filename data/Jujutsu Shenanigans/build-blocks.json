@@ -1,1036 +1,1081 @@
-[
-  {
-    "name": "Part",
-    "slug": "part",
-    "image": null,
-    "category": "Structure",
-    "collectionSection": "Building Blocks",
-    "function": "Spawns a default build block for walls, floors, platforms, and custom map shapes.",
-    "inputs": "Not signal-based.",
-    "outputs": "Creates a normal placed building block.",
-    "triggerBehavior": "Place it in Free Build, then edit it with the building selection menu.",
-    "settings": "Can Collide, Cast Shadow, Breakable, RGB color, transparency, material, and color picker.",
-    "builderUse": "Use it as the basic piece for arenas, platforms, barriers, rooms, and map cover.",
-    "limitations": "Breakable does not affect Wedges or Trusses, but it applies to normal parts.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Jujutsu Shenanigans",
+    "gameSlug": "jujutsu-shenanigans",
+    "collection": "build-blocks",
+    "route": "/wiki/jujutsu-shenanigans/build-blocks",
+    "catalogCode": "jujutsu-shenanigans-build-blocks",
+    "itemFields": [
+      "category",
+      "function",
+      "inputs",
+      "outputs",
+      "triggerBehavior",
+      "settings",
+      "builderUse",
+      "limitations",
+      "availability",
+      "supportingSources"
     ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source lists Part as a current building block and documents shared selection settings.",
-    "sortOrder": 10
-  },
-  {
-    "name": "Spawnpoint",
-    "slug": "spawnpoint",
-    "image": null,
-    "category": "Structure",
-    "collectionSection": "Building Blocks",
-    "function": "Places a player spawnpoint for custom starts, team spawns, or builds away from the main map.",
-    "inputs": "Not signal-based.",
-    "outputs": "Creates a spawn location tied to Neutral or to a matching team color.",
-    "triggerBehavior": "Place the spawnpoint, set its color, and toggle Neutral when it should belong to a team.",
-    "settings": "Color, Neutral toggle, Can Collide, Cast Shadow, Breakable, transparency, and material settings.",
-    "builderUse": "Use it to move players onto custom maps or separate teams into colored spawn areas.",
-    "limitations": "Same-colored spawnpoints with Neutral off are assigned to the matching Team Block color.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
+    "columns": [
+      "category",
+      "function",
+      "inputs",
+      "outputs",
+      "triggerBehavior",
+      "settings",
+      "builderUse",
+      "limitations",
+      "availability",
+      "supportingSources"
     ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source explains color/team behavior and Neutral setting for spawnpoints.",
-    "sortOrder": 20
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Building Blocks",
+        "Input Blocks",
+        "Output Blocks",
+        "Interaction Blocks",
+        "Logic Gates",
+        "Build Tools"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category",
+        "function",
+        "inputs",
+        "outputs",
+        "triggerBehavior",
+        "settings"
+      ],
+      "tableFields": [
+        "category",
+        "function",
+        "inputs",
+        "outputs",
+        "triggerBehavior",
+        "settings",
+        "builderUse",
+        "limitations"
+      ],
+      "fieldPresentation": null
+    }
   },
-  {
-    "name": "Trusses",
-    "slug": "trusses",
-    "image": null,
-    "category": "Structure",
-    "collectionSection": "Building Blocks",
-    "function": "Spawns a cubic truss or ladder piece for climbing and vertical structures.",
-    "inputs": "Not signal-based.",
-    "outputs": "Creates a placed truss block.",
-    "triggerBehavior": "Place it in Free Build and move, rotate, or resize it with build tools.",
-    "settings": "Can Collide, Cast Shadow, color, transparency, and material settings.",
-    "builderUse": "Use it for ladders, climbing sections, scaffold-style arenas, and vertical routes.",
-    "limitations": "The Breakable setting does not affect Trusses; they remain unbreakable.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source lists Trusses and notes Wedges and Trusses ignore Breakable.",
-    "sortOrder": 30
-  },
-  {
-    "name": "Image",
-    "slug": "image",
-    "image": null,
-    "category": "Structure",
-    "collectionSection": "Building Blocks",
-    "function": "Places a flat image panel that can show a chosen decal or image ID.",
-    "inputs": "Not signal-based.",
-    "outputs": "Creates a one-sided display panel.",
-    "triggerBehavior": "Place the panel, then enter an Image or Decal ID and choose whether to keep the dark background.",
-    "settings": "Image/Decal ID and dark background toggle.",
-    "builderUse": "Use it for signs, labels, fake posters, map decoration, and visual instructions.",
-    "limitations": "Image blocks use their own image settings instead of the normal building-block secondary menu.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://www.ginx.tv/en/roblox/build-blocks-jujutsu-shenanigans"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source lists Image and its Image/Decal ID and dark background settings.",
-    "sortOrder": 40
-  },
-  {
-    "name": "Wedge",
-    "slug": "wedge",
-    "image": null,
-    "category": "Structure",
-    "collectionSection": "Building Blocks",
-    "function": "Spawns a ramp-shaped block.",
-    "inputs": "Not signal-based.",
-    "outputs": "Creates a sloped placed block.",
-    "triggerBehavior": "Place it in Free Build and edit it with selection tools.",
-    "settings": "Can Collide, Cast Shadow, color, transparency, and material settings.",
-    "builderUse": "Use it for ramps, sloped cover, rooftops, arena elevation, and paths up to platforms.",
-    "limitations": "The Breakable setting does not affect Wedges; they remain unbreakable.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source lists Wedge and notes Wedges ignore Breakable.",
-    "sortOrder": 50
-  },
-  {
-    "name": "Texture",
-    "slug": "texture",
-    "image": null,
-    "category": "Structure",
-    "collectionSection": "Building Blocks",
-    "function": "Places a repeating image surface that scales across a selected side.",
-    "inputs": "Not signal-based.",
-    "outputs": "Creates a surface that repeats the chosen image by width and length settings.",
-    "triggerBehavior": "Place it, enter an Image or Decal ID, then adjust width, length, and background.",
-    "settings": "Image/Decal ID, width, length, and dark background toggle.",
-    "builderUse": "Use it for repeated patterns, tiled decoration, floor markings, or large wall textures.",
-    "limitations": "Width and length default to 1, so large surfaces need manual tuning.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source lists Texture and its Image/Decal, width, length, and background settings.",
-    "sortOrder": 60
-  },
-  {
-    "name": "Touch",
-    "slug": "touch",
-    "image": null,
-    "category": "Input",
-    "collectionSection": "Input Blocks",
-    "function": "Starts a logic signal when a player's torso fully steps inside it.",
-    "inputs": "Player torso inside the Touch block.",
-    "outputs": "Sends an output signal to blocks with the matching ID.",
-    "triggerBehavior": "Turns on while the touch condition is met.",
-    "settings": "Input/output ID and block size/position.",
-    "builderUse": "Use it for pressure plates, automatic doors, teleport zones, moveset pads, and interaction triggers.",
-    "limitations": "Interaction Blocks often need the Touch block overlapped with them so the player is inside both regions.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/f/p/4400000000000028432",
-      "https://www.reddit.com/r/JujutsuShenanigans/comments/1rvdy3g/how_do_i_actually_make_moveset_and_eraser_blocks/"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents torso trigger and recommends overlapping Touch with Interaction Blocks.",
-    "sortOrder": 110
-  },
-  {
-    "name": "Prompt",
-    "slug": "prompt",
-    "image": null,
-    "category": "Input",
-    "collectionSection": "Input Blocks",
-    "function": "Starts a logic signal when a player presses or holds the prompt.",
-    "inputs": "Player presses or holds E, or clicks the prompt pop-up.",
-    "outputs": "Sends an output signal to blocks with the matching ID.",
-    "triggerBehavior": "Activates after the prompt input completes.",
-    "settings": "Prompt name and required hold time.",
-    "builderUse": "Use it for doors, menus, start buttons, puzzle triggers, timed starts, and manual logic controls.",
-    "limitations": "For effects that require the player inside an Interaction Block, the prompt alone is not enough unless the player is positioned inside the effect region.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents E/click prompt activation, name, and hold-time settings.",
-    "sortOrder": 120
-  },
-  {
-    "name": "Voice Relay",
-    "slug": "voice-relay",
-    "image": null,
-    "category": "Input",
-    "collectionSection": "Input Blocks",
-    "function": "Relays voice chat from players inside the block to a speaker part.",
-    "inputs": "Voice audio from players inside the Voice Relay region.",
-    "outputs": "Streams voice audio through the selected speaker destination; it does not send a normal logic output signal.",
-    "triggerBehavior": "Works as a microphone and speaker route rather than a normal input trigger.",
-    "settings": "Set Output Destination for the speaker part.",
-    "builderUse": "Use it for PA systems, distant voice rooms, spectator areas, and map communication tricks.",
-    "limitations": "Unlike other input blocks, it does not activate Output or Interaction Blocks through an output signal.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source explicitly says Voice Relay does not send an output signal.",
-    "sortOrder": 130
-  },
-  {
-    "name": "Connect",
-    "slug": "connect",
-    "image": null,
-    "category": "Input",
-    "collectionSection": "Input Blocks",
-    "function": "Turns on when a custom ability reaches a matching Skill Builder Connect node.",
-    "inputs": "A custom ability with the same Connect signal reaches that node in its timeline.",
-    "outputs": "Sends a signal to connected blocks with the matching ID.",
-    "triggerBehavior": "Activates from the custom ability timeline, with range controlled on the block and duration controlled on the Connect node.",
-    "settings": "Signal name and range.",
-    "builderUse": "Use it to make custom skills trigger map logic, hazards, sounds, cameras, or rewards.",
-    "limitations": "Depends on a Skill Builder Connect node and matching signal; the node controls signal duration.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Skill_Builder"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Connect signal, range, and Skill Builder node relationship.",
-    "sortOrder": 140
-  },
-  {
-    "name": "Sound Block",
-    "slug": "sound-block",
-    "image": null,
-    "category": "Output",
-    "collectionSection": "Output Blocks",
-    "function": "Plays a chosen Roblox Marketplace audio when powered.",
-    "inputs": "A matching input or gate signal.",
-    "outputs": "Plays audio from the selected sound ID.",
-    "triggerBehavior": "Activates while receiving an output signal.",
-    "settings": "Sound ID, volume, audible distance in studs, and Loop.",
-    "builderUse": "Use it for alarms, announcers, ambience, puzzle feedback, and synced map effects.",
-    "limitations": "Loop keeps restarting the sound only while the block keeps receiving a signal.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents sound ID, volume, distance, and Loop behavior.",
-    "sortOrder": 210
-  },
-  {
-    "name": "Vehicle Block",
-    "slug": "vehicle-block",
-    "image": null,
-    "category": "Output",
-    "collectionSection": "Output Blocks",
-    "function": "Spawns a car or jeep when activated.",
-    "inputs": "A matching input or gate signal.",
-    "outputs": "Creates one drivable vehicle from the block.",
-    "triggerBehavior": "Spawns the vehicle when the signal activates.",
-    "settings": "No extra setting listed in the source.",
-    "builderUse": "Use it for vehicle starts, races, map travel, or roleplay setups in private servers.",
-    "limitations": "Only one vehicle can spawn from the block at a time.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source says only one car/jeep can spawn from the block at a time.",
-    "sortOrder": 220
-  },
-  {
-    "name": "Team Block",
-    "slug": "team-block",
-    "image": null,
-    "category": "Output",
-    "collectionSection": "Output Blocks",
-    "function": "Creates a team and can assign a player standing inside the block to that team.",
-    "inputs": "A matching signal while the player's torso is inside the Team Block region.",
-    "outputs": "Creates a team with chosen name and color, then assigns players when powered.",
-    "triggerBehavior": "Acts like an output with Interaction Block-style torso placement for assignment.",
-    "settings": "Team name, leaderboard icon color, leaderboard name color, and spawnpoint color pairing.",
-    "builderUse": "Use it for team arenas, class selection rooms, minigames, and colored spawn routing.",
-    "limitations": "Team colors must fit Roblox BrickColor behavior, cannot duplicate another team color, and may be rounded or randomized.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents team color, spawnpoint Neutral behavior, and color caveats.",
-    "sortOrder": 230
-  },
-  {
-    "name": "Mover Block",
-    "slug": "mover-block",
-    "image": null,
-    "category": "Output",
-    "collectionSection": "Output Blocks",
-    "function": "Moves an indestructible origin part to a selected destination when powered.",
-    "inputs": "A matching input or gate signal.",
-    "outputs": "Moves the visible origin part toward its destination part.",
-    "triggerBehavior": "Travels to the destination during the chosen movement duration after receiving a signal.",
-    "settings": "Select Destination, Reset Destination, Select Origin, destination placement, and travel duration.",
-    "builderUse": "Use it for moving platforms, sliding doors, elevators, traps, arena changes, and animated map pieces.",
-    "limitations": "The destination part is invisible outside Build Mode and cannot be resized.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source describes Mover origin/destination parts, duration, visibility, and resize limit.",
-    "sortOrder": 240
-  },
-  {
-    "name": "Dummy Block",
-    "slug": "dummy-block",
-    "image": null,
-    "category": "Output",
-    "collectionSection": "Output Blocks",
-    "function": "Spawns a custom dummy when it receives a signal.",
-    "inputs": "A matching input or gate signal.",
-    "outputs": "Creates a dummy and sends a signal when that dummy dies.",
-    "triggerBehavior": "Spawns on activation; death can trigger connected logic.",
-    "settings": "Dummy name, HP, shirt ID, pants ID, Invincible, and Regen Scaling.",
-    "builderUse": "Use it for training rooms, boss waves, challenge targets, puzzle triggers, and defeat checks.",
-    "limitations": "Regen Scaling changes regeneration from 1 HP per second to 1 percent HP per second based on custom HP.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents dummy customization, Invincible, Regen Scaling, and death signal.",
-    "sortOrder": 250
-  },
-  {
-    "name": "NPC Block",
-    "slug": "npc-block",
-    "image": null,
-    "category": "Output",
-    "collectionSection": "Output Blocks",
-    "function": "Spawns an attacking NPC with chosen behavior when it receives a signal.",
-    "inputs": "A matching input or gate signal.",
-    "outputs": "Creates an NPC and sends a signal when that NPC dies.",
-    "triggerBehavior": "Spawns on activation and attacks targets based on its playstyle and target setting.",
-    "settings": "NPC name, HP, shirt ID, pants ID, playstyle, Target NPCs, and Regen Scaling.",
-    "builderUse": "Use it for enemy waves, PvE rooms, team scenarios, target practice, and NPC-only fights.",
-    "limitations": "Target NPCs makes the NPC avoid players and only target NPCs when enabled.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents NPC playstyles, Target NPCs, Regen Scaling, and death signal.",
-    "sortOrder": 260
-  },
-  {
-    "name": "Damage Block",
-    "slug": "damage-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Damages, heals, or sets a maximum health cap for players inside the powered region.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Applies damage every second, heals with negative values, or changes max HP with Max HP enabled.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Damage value, negative damage for healing, and Max HP mode.",
-    "builderUse": "Use it for hazards, heal zones, boss arenas, safe rooms, and custom max-HP setups.",
-    "limitations": "Must be scaled and positioned around the player; source examples note max HP does not fill the new health amount automatically.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://www.reddit.com/r/JujutsuShenanigans/comments/1mngpkc"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents per-second damage, negative healing, Max HP mode, and torso requirement.",
-    "sortOrder": 310
-  },
-  {
-    "name": "Boost Block",
-    "slug": "boost-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Launches a player in a chosen vector direction.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Applies a launch force in the chosen x, y, and z direction.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Vector values for x, y, and z direction.",
-    "builderUse": "Use it for jump pads, launch traps, parkour boosts, arena entries, and movement puzzles.",
-    "limitations": "No extra function is listed; the launch depends on vector setup and player placement.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source lists Boost Block as a vector launch interaction.",
-    "sortOrder": 320
-  },
-  {
-    "name": "Moveset Block",
-    "slug": "moveset-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Grants a chosen move or a Skill Builder custom move to the player.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Adds or assigns a move to the player's moveset.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Move selection, Custom Skill Builder move, cooldown, move slot, Add, and Display Name.",
-    "builderUse": "Use it for custom moveset pads, character rooms, rewards, and ability-based minigames.",
-    "limitations": "New moves may not appear in the list but can still work by typing the move name; Teleport timing may need a Timer Block when paired with Moveset grants.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://screenplaysmag.com/blog/how-to-use-moveset-block-in-jujutsu-shenanigans/",
-      "https://www.reddit.com/r/JujutsuShenanigans/comments/1rvdy3g/how_do_i_actually_make_moveset_and_eraser_blocks/"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents move choice, Custom, Add, Display Name, and timing caveat.",
-    "sortOrder": 330
-  },
-  {
-    "name": "Erase Block",
-    "slug": "erase-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Fully removes the player's current moveset.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Clears the player's moveset.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "No extra setting listed in the source.",
-    "builderUse": "Use it to reset players before giving custom moves, clear loadouts, or make character-selection rooms clean.",
-    "limitations": "Some guides call this a Clear Block, but the current source name is Erase Block.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://www.ginx.tv/en/roblox/build-blocks-jujutsu-shenanigans"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source names Erase Block and says it fully erases the player's moveset.",
-    "sortOrder": 340
-  },
-  {
-    "name": "Teleport Block",
-    "slug": "teleport-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Teleports the player to a selected destination.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Moves the player to the Teleport Block destination part.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Set Destination, Select Destination, and Reset Destination.",
-    "builderUse": "Use it for portals, arena transitions, spawn rooms, puzzle routes, and custom moveset loading sequences.",
-    "limitations": "Teleport and Moveset timing can conflict before a saved build is reloaded; a Timer Block can delay teleport activation.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://www.ginx.tv/en/roblox/build-blocks-jujutsu-shenanigans"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Set Destination and the Moveset/Teleport delay caveat.",
-    "sortOrder": 350
-  },
-  {
-    "name": "Scale Block",
-    "slug": "scale-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Changes the player's model size.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Applies the chosen model scale to the player.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Player size value.",
-    "builderUse": "Use it for size-changing arenas, roleplay rooms, boss setups, and custom character gimmicks.",
-    "limitations": "No extra function is listed; placement still follows Interaction Block torso rules.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source lists Scale Block as a player model size interaction.",
-    "sortOrder": 360
-  },
-  {
-    "name": "Item Block",
-    "slug": "item-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Grants a selected item to the player.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Gives the selected item and applies its despawn/drop/durability settings.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Item name/list choice, item lifetime, Disable Drop, and Disable Durability.",
-    "builderUse": "Use it for weapon rooms, item rewards, private-server kits, shops, and minigame loadouts.",
-    "limitations": "Some items may work by typing their name even if not visible in the list; Broom is a source-backed example.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Items"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Item Block settings and Broom name-entry caveat.",
-    "sortOrder": 370
-  },
-  {
-    "name": "Fun Block",
-    "slug": "fun-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Turns a selected fun setting off or on for the affected player.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Changes the selected fun setting.",
-    "triggerBehavior": "Defaults to toggling the setting off; Set reverses the behavior so it turns the setting on.",
-    "settings": "Selected fun setting and Set.",
-    "builderUse": "Use it for controlled private-server rules, challenge rooms, and setting-based gimmicks.",
-    "limitations": "It changes fun settings, not normal Build Mode blocks or server settings as standalone catalog rows.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Settings"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source says Fun Block toggles off a selected fun setting and Set reverses behavior.",
-    "sortOrder": 380
-  },
-  {
-    "name": "Camera Block",
-    "slug": "camera-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Sets the player's camera to a selected destination.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Moves camera view to the destination part.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Set Destination, Select Destination, and Reset Destination.",
-    "builderUse": "Use it for cutscenes, spectator views, puzzle reveals, spawn previews, and dramatic arenas.",
-    "limitations": "Set Destination uses the camera's position, not the character's position.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Camera Block destination behavior.",
-    "sortOrder": 390
-  },
-  {
-    "name": "Speed Block",
-    "slug": "speed-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Changes the player's walk speed.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Applies the chosen walk speed value.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Walk speed value.",
-    "builderUse": "Use it for speed zones, slow zones, race starts, custom classes, and arena modifiers.",
-    "limitations": "Negative values stop movement, and an infinite value can break the player's character.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents walk speed changes and negative/infinite value caveats.",
-    "sortOrder": 400
-  },
-  {
-    "name": "Special Block",
-    "slug": "special-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Replaces the player's character special with a custom special.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Applies the selected or custom special to the player.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Special choice, Custom Skill Builder special, and cooldown.",
-    "builderUse": "Use it for custom character rooms, special-only rewards, and private-server class systems.",
-    "limitations": "The source says cooldown can be customized, but the bar color cannot.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Skill_Builder"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Custom, cooldown, and bar color caveat for Special Block.",
-    "sortOrder": 410
-  },
-  {
-    "name": "Awakening Block",
-    "slug": "awakening-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Replaces the player's awakening with a custom awakening sequence.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Applies the selected custom awakening to the player.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Awakening name, duration, Custom Skill Builder awakening, and Outfit Delay setting.",
-    "builderUse": "Use it for full custom characters, boss phases, awakening rooms, and transformation setups.",
-    "limitations": "The source says the awakening bar color cannot be customized.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents awakening name/duration; update log adds Outfit Delay setting.",
-    "sortOrder": 420
-  },
-  {
-    "name": "Accessory Block",
-    "slug": "accessory-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Grants an avatar accessory from a Roblox Marketplace ID.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Adds the selected accessory to the player.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Accessory ID.",
-    "builderUse": "Use it for costumes, class markers, roleplay maps, event rooms, and visual rewards.",
-    "limitations": "No extra function is listed; it depends on a valid Marketplace accessory ID.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents accessory ID behavior.",
-    "sortOrder": 430
-  },
-  {
-    "name": "Character Block",
-    "slug": "character-block",
-    "image": null,
-    "category": "Interaction",
-    "collectionSection": "Interaction Blocks",
-    "function": "Changes the player into a custom-made character.",
-    "inputs": "A matching signal while the player's torso is inside the block.",
-    "outputs": "Applies a custom character with configured skills, special, awakening, melee, and chase.",
-    "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
-    "settings": "Base character, name, icon, Skill, Special, Awakening, Melee, Chase, import/export, Show In List, cooldowns, slots, Add, duration, and Outfit Delay.",
-    "builderUse": "Use it for complete custom characters, Workshop movesets, Creator Clash setups, and shareable character rooms.",
-    "limitations": "Selecting two Character Blocks and clicking Configure can combine them and delete moves, so multiple Character Blocks should be placed far apart.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop",
-      "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Character Block configuration, import/export, Show In List, and selection issue.",
-    "sortOrder": 440
-  },
-  {
-    "name": "AND Gate",
-    "slug": "and-gate",
-    "image": null,
-    "category": "Logic",
-    "collectionSection": "Logic Gates",
-    "function": "Passes a signal only after it receives every required connected signal.",
-    "inputs": "Signals from connected blocks with matching IDs.",
-    "outputs": "Sends a signal when the threshold condition is met.",
-    "triggerBehavior": "Turns on after enough connected blocks are active at the same time.",
-    "settings": "Threshold, defaulted to 1.",
-    "builderUse": "Use it for multi-button doors, cooperative triggers, puzzle checks, and circuits that need several inputs.",
-    "limitations": "The threshold must match the number of signals you want to require.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents AND threshold behavior.",
-    "sortOrder": 510
-  },
-  {
-    "name": "Light Block",
-    "slug": "light-block",
-    "image": null,
-    "category": "Logic",
-    "collectionSection": "Logic Gates",
-    "function": "Shows a light when powered and can act like a switch-style signal relay.",
-    "inputs": "A matching signal or connected input behavior.",
-    "outputs": "Emits faint light and can pass signal behavior to connected blocks.",
-    "triggerBehavior": "Turns on when powered; Flip makes connected input behavior act like a switch.",
-    "settings": "Input/output ID and Flip.",
-    "builderUse": "Use it for visible indicators, toggles, latches, repeaters, randomizers, and logic circuit feedback.",
-    "limitations": "Visible even when Build Mode is off, unlike most Logic Blocks.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents light, input-like behavior, Flip, and visibility.",
-    "sortOrder": 520
-  },
-  {
-    "name": "NOT Gate",
-    "slug": "not-gate",
-    "image": null,
-    "category": "Logic",
-    "collectionSection": "Logic Gates",
-    "function": "Reverses a connected signal.",
-    "inputs": "A matching input or output signal.",
-    "outputs": "Turns connected output or interaction behavior off when the input is on, and on when the input is off.",
-    "triggerBehavior": "Inverts matching Input/Output ID behavior.",
-    "settings": "Input/output ID.",
-    "builderUse": "Use it for default-on effects, inverted doors, anti-triggers, cooldown circuits, and simpler logic than many overlapping inputs.",
-    "limitations": "Can reduce scaling and lag compared with multiple Input Blocks, but the connected IDs still need to be set correctly.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://www.reddit.com/r/JujutsuShenanigans/comments/1l3wc5i/why_cant_i_use_the_moveset_blocks_in_jjs_i/"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents inversion behavior and notes single NOT Gate can be better than multiple inputs.",
-    "sortOrder": 530
-  },
-  {
-    "name": "Timer Block",
-    "slug": "timer-block",
-    "image": null,
-    "category": "Logic",
-    "collectionSection": "Logic Gates",
-    "function": "Sends an output signal after a chosen delay.",
-    "inputs": "A matching signal that starts the delay.",
-    "outputs": "Sends a delayed output signal.",
-    "triggerBehavior": "Waits for the configured delay in seconds, then sends the signal.",
-    "settings": "Delay in seconds.",
-    "builderUse": "Use it for delayed teleports, cooldowns, repeaters, randomizers, timed hazards, and sequenced map events.",
-    "limitations": "Build tips recommend short 0.1 or 0.2 second delays for some repeater chains, but large chains can drift with ping.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents delay behavior and timing examples in logic builds.",
-    "sortOrder": 540
-  },
-  {
-    "name": "XOR Gate",
-    "slug": "xor-gate",
-    "image": null,
-    "category": "Logic",
-    "collectionSection": "Logic Gates",
-    "function": "Passes a signal unless none or every required connected signal is active.",
-    "inputs": "Signals from multiple connected blocks with matching IDs.",
-    "outputs": "Sends signal while the XOR condition remains active.",
-    "triggerBehavior": "Stops once zero or the threshold number of connected blocks are active.",
-    "settings": "Threshold, defaulted to 1.",
-    "builderUse": "Use it for either-or logic, limited-choice puzzles, selector circuits, and preventing all options from firing together.",
-    "limitations": "The threshold controls when the XOR Gate stops working, so wrong threshold values can invert the intended puzzle logic.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents XOR threshold behavior and no/all signal caveat.",
-    "sortOrder": 550
-  },
-  {
-    "name": "Move Value",
-    "slug": "move-value",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Changes the movement step used by the Position and Size tools.",
-    "inputs": "Manual value entry.",
-    "outputs": "Adjusts how far selected objects move or resize per step.",
-    "triggerBehavior": "Applies to Position and Size tool behavior after the value is changed.",
-    "settings": "Move step value, defaulted to 1 stud.",
-    "builderUse": "Use it for precise placement, smoother shapes, and faster large-scale movement.",
-    "limitations": "Setting the step to 0 can make spawned blocks appear in the void, and values lower than the selected part's Y size can break resizing on other axes.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents default 1 stud value and notable issue with 0 or low step values.",
-    "sortOrder": 610
-  },
-  {
-    "name": "Rotate Value",
-    "slug": "rotate-value",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Changes the rotation step used by the Rotation tool.",
-    "inputs": "Manual value entry.",
-    "outputs": "Adjusts how many degrees selected objects rotate per step.",
-    "triggerBehavior": "Applies to Rotation tool behavior after the value is changed.",
-    "settings": "Rotation step value, defaulted to 45 degrees.",
-    "builderUse": "Use it for angled ramps, rotated walls, decorations, and more precise object orientation.",
-    "limitations": "Very small rotation steps can make alignment slower and harder to scan.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Rotate Value default as 45 degrees.",
-    "sortOrder": 620
-  },
-  {
-    "name": "Position Tool",
-    "slug": "position-tool",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Moves a selected object with draggable arrows.",
-    "inputs": "Select an object, then drag the purple arrows.",
-    "outputs": "Changes the object's position.",
-    "triggerBehavior": "Manual editor control; cycled through Selection Tools or the T shortcut.",
-    "settings": "Uses Move Value and Local or Global Axis state.",
-    "builderUse": "Use it for placing every block, destination part, spawn, and logic region.",
-    "limitations": "Position is the default selection tool; multi-select behavior depends on Ctrl or Command on Mac.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Position arrows and T shortcut; Private Servers page repeats shortcut behavior.",
-    "sortOrder": 630
-  },
-  {
-    "name": "Rotation Tool",
-    "slug": "rotation-tool",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Rotates a selected object with colored dots.",
-    "inputs": "Select an object, then drag the red, yellow, or blue rotation dots.",
-    "outputs": "Changes the object's rotation.",
-    "triggerBehavior": "Manual editor control; cycled through Selection Tools or the T shortcut.",
-    "settings": "Uses Rotate Value and Local or Global Axis state.",
-    "builderUse": "Use it for ramps, angled walls, signs, platforms, and destination-facing parts.",
-    "limitations": "Axis mode changes whether rotation follows the part or the world.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Rotation tool dots and the T shortcut.",
-    "sortOrder": 640
-  },
-  {
-    "name": "Size Tool",
-    "slug": "size-tool",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Resizes a selected object with draggable dots.",
-    "inputs": "Select an object, then drag the purple size dots.",
-    "outputs": "Changes the object's size.",
-    "triggerBehavior": "Manual editor control; cycled through Selection Tools or the T shortcut.",
-    "settings": "Uses Move Value and Local or Global Axis state.",
-    "builderUse": "Use it to scale walls, zones, Touch blocks, Interaction Blocks, platforms, and destination pieces.",
-    "limitations": "Size handles can fail or invert; saving and reloading can fix the issue.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Size dots, T shortcut, and notable Size tool issue.",
-    "sortOrder": 650
-  },
-  {
-    "name": "Undo",
-    "slug": "undo",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Reverts the last build action.",
-    "inputs": "Click Undo or use Ctrl+Z.",
-    "outputs": "Restores the previous build state for the last action.",
-    "triggerBehavior": "Manual editor command.",
-    "settings": "No extra setting listed in the source.",
-    "builderUse": "Use it to recover from bad placements, accidental deletes, wrong clones, or mis-sized parts.",
-    "limitations": "Update Log notes past fixes for Logic Blocks and properties breaking when Undo is used after removals.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Undo and Ctrl+Z; Update Log records fixes around Undo behavior.",
-    "sortOrder": 660
-  },
-  {
-    "name": "Clone",
-    "slug": "clone",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Duplicates the selected block and copies its stored info.",
-    "inputs": "Select a block, then click Clone.",
-    "outputs": "Creates a duplicate with copied color, size, ID, and other info.",
-    "triggerBehavior": "Manual editor command.",
-    "settings": "Copies selected block data.",
-    "builderUse": "Use it for repeated walls, identical triggers, matching gates, cloned hazards, and faster arena building.",
-    "limitations": "Copied IDs can be useful or dangerous; change IDs when duplicated logic should not connect to the same circuit.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source says Clone copies info such as color, size, and ID.",
-    "sortOrder": 670
-  },
-  {
-    "name": "Logic Wires",
-    "slug": "logic-wires",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Shows or hides colored connection lines between connected Logic Blocks.",
-    "inputs": "Toggle the Logic Wires tool.",
-    "outputs": "Changes wire visibility for input-to-output logic connections.",
-    "triggerBehavior": "Manual editor toggle.",
-    "settings": "On/off visibility toggle.",
-    "builderUse": "Use it to debug IDs, trace circuits, find broken links, and understand complex logic.",
-    "limitations": "It only visualizes connections; it does not create or fix the IDs by itself.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents colored lines for connected Logic Blocks.",
-    "sortOrder": 680
-  },
-  {
-    "name": "Axis",
-    "slug": "axis",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Switches between Local Axis and Global Axis for selected-object controls.",
-    "inputs": "Toggle Axis or press Y.",
-    "outputs": "Changes whether editor controls follow the part orientation or the world orientation.",
-    "triggerBehavior": "Manual editor toggle.",
-    "settings": "Local Axis or Global Axis.",
-    "builderUse": "Use it when rotated objects need clean movement, rotation, or resizing relative to themselves or the map.",
-    "limitations": "Wrong axis mode can make dragging handles feel like they move in the wrong direction.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Axis toggle and Y shortcut.",
-    "sortOrder": 690
-  },
-  {
-    "name": "Remove All Spawns",
-    "slug": "remove-all-spawns",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Removes main-map spawnpoints except the ones you placed.",
-    "inputs": "Click Remove All Spawns.",
-    "outputs": "Deletes default map spawns while preserving your placed spawns.",
-    "triggerBehavior": "Manual editor command.",
-    "settings": "No extra setting listed in the source.",
-    "builderUse": "Use it when moving a private server onto a custom arena away from the main map.",
-    "limitations": "This removes spawnpoints, not the indestructible main map; the source says the main map restores after rejoining.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents Remove All Spawns and main-map deletion caveat.",
-    "sortOrder": 700
-  },
-  {
-    "name": "Saves",
-    "slug": "saves",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Opens save slots for loading, saving, version recovery, and autosave recovery.",
-    "inputs": "Open Saves and choose a slot command.",
-    "outputs": "Loads or saves placed parts and blocks.",
-    "triggerBehavior": "Manual editor menu.",
-    "settings": "Three normal save slots, six with More Build Saves, slot rename, memory near 4.3 MB per slot, Load, Load Version, Save, and Autosave.",
-    "builderUse": "Use it to protect builds, recover older versions, test alternate layouts, and load a saved arena after server changes.",
-    "limitations": "Loading a slot removes every placed part/block first; Autosave cannot be manually saved and may miss some progress.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [
-      "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop"
-    ],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents save slots, More Build Saves caveat, commands, autosave risk, and 30-day versions.",
-    "sortOrder": 710
-  },
-  {
-    "name": "Clear All Parts",
-    "slug": "clear-all-parts",
-    "image": null,
-    "category": "Editor tool",
-    "collectionSection": "Build Tools",
-    "function": "Deletes all parts and blocks you have placed after a confirmation prompt.",
-    "inputs": "Click Clear All Parts and confirm.",
-    "outputs": "Removes placed build parts/blocks.",
-    "triggerBehavior": "Manual editor command with confirmation.",
-    "settings": "Confirmation prompt.",
-    "builderUse": "Use it to reset a build space, clear failed experiments, or start a fresh private-server map.",
-    "limitations": "Deletes all placed blocks after confirmation, even if the build appears empty.",
-    "availability": "Private Server Build Mode",
-    "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode",
-    "supportingSources": [],
-    "sourceConfidence": "high",
-    "imageStatus": "hidden images approved; no clean row-specific image used",
-    "verificationNote": "Build Mode source documents the confirmation prompt and full placed-part clearing behavior.",
-    "sortOrder": 720
-  }
-]
+  "items": [
+    {
+      "item": {
+        "name": "Part",
+        "category": "Structure",
+        "function": "Spawns a default build block for walls, floors, platforms, and custom map shapes.",
+        "inputs": "Not signal-based.",
+        "outputs": "Creates a normal placed building block.",
+        "triggerBehavior": "Place it in Free Build, then edit it with the building selection menu.",
+        "settings": "Can Collide, Cast Shadow, Breakable, RGB color, transparency, material, and color picker.",
+        "builderUse": "Use it as the basic piece for arenas, platforms, barriers, rooms, and map cover.",
+        "limitations": "Breakable does not affect Wedges or Trusses, but it applies to normal parts.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
+        ]
+      },
+      "system": {
+        "slug": "part",
+        "section": "Building Blocks",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spawnpoint",
+        "category": "Structure",
+        "function": "Places a player spawnpoint for custom starts, team spawns, or builds away from the main map.",
+        "inputs": "Not signal-based.",
+        "outputs": "Creates a spawn location tied to Neutral or to a matching team color.",
+        "triggerBehavior": "Place the spawnpoint, set its color, and toggle Neutral when it should belong to a team.",
+        "settings": "Color, Neutral toggle, Can Collide, Cast Shadow, Breakable, transparency, and material settings.",
+        "builderUse": "Use it to move players onto custom maps or separate teams into colored spawn areas.",
+        "limitations": "Same-colored spawnpoints with Neutral off are assigned to the matching Team Block color.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
+        ]
+      },
+      "system": {
+        "slug": "spawnpoint",
+        "section": "Building Blocks",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Trusses",
+        "category": "Structure",
+        "function": "Spawns a cubic truss or ladder piece for climbing and vertical structures.",
+        "inputs": "Not signal-based.",
+        "outputs": "Creates a placed truss block.",
+        "triggerBehavior": "Place it in Free Build and move, rotate, or resize it with build tools.",
+        "settings": "Can Collide, Cast Shadow, color, transparency, and material settings.",
+        "builderUse": "Use it for ladders, climbing sections, scaffold-style arenas, and vertical routes.",
+        "limitations": "The Breakable setting does not affect Trusses; they remain unbreakable.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "trusses",
+        "section": "Building Blocks",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Image",
+        "category": "Structure",
+        "function": "Places a flat image panel that can show a chosen decal or image ID.",
+        "inputs": "Not signal-based.",
+        "outputs": "Creates a one-sided display panel.",
+        "triggerBehavior": "Place the panel, then enter an Image or Decal ID and choose whether to keep the dark background.",
+        "settings": "Image/Decal ID and dark background toggle.",
+        "builderUse": "Use it for signs, labels, fake posters, map decoration, and visual instructions.",
+        "limitations": "Image blocks use their own image settings instead of the normal building-block secondary menu.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://www.ginx.tv/en/roblox/build-blocks-jujutsu-shenanigans"
+        ]
+      },
+      "system": {
+        "slug": "image",
+        "section": "Building Blocks",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wedge",
+        "category": "Structure",
+        "function": "Spawns a ramp-shaped block.",
+        "inputs": "Not signal-based.",
+        "outputs": "Creates a sloped placed block.",
+        "triggerBehavior": "Place it in Free Build and edit it with selection tools.",
+        "settings": "Can Collide, Cast Shadow, color, transparency, and material settings.",
+        "builderUse": "Use it for ramps, sloped cover, rooftops, arena elevation, and paths up to platforms.",
+        "limitations": "The Breakable setting does not affect Wedges; they remain unbreakable.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "wedge",
+        "section": "Building Blocks",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Texture",
+        "category": "Structure",
+        "function": "Places a repeating image surface that scales across a selected side.",
+        "inputs": "Not signal-based.",
+        "outputs": "Creates a surface that repeats the chosen image by width and length settings.",
+        "triggerBehavior": "Place it, enter an Image or Decal ID, then adjust width, length, and background.",
+        "settings": "Image/Decal ID, width, length, and dark background toggle.",
+        "builderUse": "Use it for repeated patterns, tiled decoration, floor markings, or large wall textures.",
+        "limitations": "Width and length default to 1, so large surfaces need manual tuning.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "texture",
+        "section": "Building Blocks",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Touch",
+        "category": "Input",
+        "function": "Starts a logic signal when a player's torso fully steps inside it.",
+        "inputs": "Player torso inside the Touch block.",
+        "outputs": "Sends an output signal to blocks with the matching ID.",
+        "triggerBehavior": "Turns on while the touch condition is met.",
+        "settings": "Input/output ID and block size/position.",
+        "builderUse": "Use it for pressure plates, automatic doors, teleport zones, moveset pads, and interaction triggers.",
+        "limitations": "Interaction Blocks often need the Touch block overlapped with them so the player is inside both regions.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/f/p/4400000000000028432",
+          "https://www.reddit.com/r/JujutsuShenanigans/comments/1rvdy3g/how_do_i_actually_make_moveset_and_eraser_blocks/"
+        ]
+      },
+      "system": {
+        "slug": "touch",
+        "section": "Input Blocks",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Prompt",
+        "category": "Input",
+        "function": "Starts a logic signal when a player presses or holds the prompt.",
+        "inputs": "Player presses or holds E, or clicks the prompt pop-up.",
+        "outputs": "Sends an output signal to blocks with the matching ID.",
+        "triggerBehavior": "Activates after the prompt input completes.",
+        "settings": "Prompt name and required hold time.",
+        "builderUse": "Use it for doors, menus, start buttons, puzzle triggers, timed starts, and manual logic controls.",
+        "limitations": "For effects that require the player inside an Interaction Block, the prompt alone is not enough unless the player is positioned inside the effect region.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "prompt",
+        "section": "Input Blocks",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Voice Relay",
+        "category": "Input",
+        "function": "Relays voice chat from players inside the block to a speaker part.",
+        "inputs": "Voice audio from players inside the Voice Relay region.",
+        "outputs": "Streams voice audio through the selected speaker destination; it does not send a normal logic output signal.",
+        "triggerBehavior": "Works as a microphone and speaker route rather than a normal input trigger.",
+        "settings": "Set Output Destination for the speaker part.",
+        "builderUse": "Use it for PA systems, distant voice rooms, spectator areas, and map communication tricks.",
+        "limitations": "Unlike other input blocks, it does not activate Output or Interaction Blocks through an output signal.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "voice-relay",
+        "section": "Input Blocks",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Connect",
+        "category": "Input",
+        "function": "Turns on when a custom ability reaches a matching Skill Builder Connect node.",
+        "inputs": "A custom ability with the same Connect signal reaches that node in its timeline.",
+        "outputs": "Sends a signal to connected blocks with the matching ID.",
+        "triggerBehavior": "Activates from the custom ability timeline, with range controlled on the block and duration controlled on the Connect node.",
+        "settings": "Signal name and range.",
+        "builderUse": "Use it to make custom skills trigger map logic, hazards, sounds, cameras, or rewards.",
+        "limitations": "Depends on a Skill Builder Connect node and matching signal; the node controls signal duration.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Skill_Builder"
+        ]
+      },
+      "system": {
+        "slug": "connect",
+        "section": "Input Blocks",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sound Block",
+        "category": "Output",
+        "function": "Plays a chosen Roblox Marketplace audio when powered.",
+        "inputs": "A matching input or gate signal.",
+        "outputs": "Plays audio from the selected sound ID.",
+        "triggerBehavior": "Activates while receiving an output signal.",
+        "settings": "Sound ID, volume, audible distance in studs, and Loop.",
+        "builderUse": "Use it for alarms, announcers, ambience, puzzle feedback, and synced map effects.",
+        "limitations": "Loop keeps restarting the sound only while the block keeps receiving a signal.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "sound-block",
+        "section": "Output Blocks",
+        "sortOrder": 210,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vehicle Block",
+        "category": "Output",
+        "function": "Spawns a car or jeep when activated.",
+        "inputs": "A matching input or gate signal.",
+        "outputs": "Creates one drivable vehicle from the block.",
+        "triggerBehavior": "Spawns the vehicle when the signal activates.",
+        "settings": "No extra setting listed in the source.",
+        "builderUse": "Use it for vehicle starts, races, map travel, or roleplay setups in private servers.",
+        "limitations": "Only one vehicle can spawn from the block at a time.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "vehicle-block",
+        "section": "Output Blocks",
+        "sortOrder": 220,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Team Block",
+        "category": "Output",
+        "function": "Creates a team and can assign a player standing inside the block to that team.",
+        "inputs": "A matching signal while the player's torso is inside the Team Block region.",
+        "outputs": "Creates a team with chosen name and color, then assigns players when powered.",
+        "triggerBehavior": "Acts like an output with Interaction Block-style torso placement for assignment.",
+        "settings": "Team name, leaderboard icon color, leaderboard name color, and spawnpoint color pairing.",
+        "builderUse": "Use it for team arenas, class selection rooms, minigames, and colored spawn routing.",
+        "limitations": "Team colors must fit Roblox BrickColor behavior, cannot duplicate another team color, and may be rounded or randomized.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "team-block",
+        "section": "Output Blocks",
+        "sortOrder": 230,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mover Block",
+        "category": "Output",
+        "function": "Moves an indestructible origin part to a selected destination when powered.",
+        "inputs": "A matching input or gate signal.",
+        "outputs": "Moves the visible origin part toward its destination part.",
+        "triggerBehavior": "Travels to the destination during the chosen movement duration after receiving a signal.",
+        "settings": "Select Destination, Reset Destination, Select Origin, destination placement, and travel duration.",
+        "builderUse": "Use it for moving platforms, sliding doors, elevators, traps, arena changes, and animated map pieces.",
+        "limitations": "The destination part is invisible outside Build Mode and cannot be resized.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "mover-block",
+        "section": "Output Blocks",
+        "sortOrder": 240,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dummy Block",
+        "category": "Output",
+        "function": "Spawns a custom dummy when it receives a signal.",
+        "inputs": "A matching input or gate signal.",
+        "outputs": "Creates a dummy and sends a signal when that dummy dies.",
+        "triggerBehavior": "Spawns on activation; death can trigger connected logic.",
+        "settings": "Dummy name, HP, shirt ID, pants ID, Invincible, and Regen Scaling.",
+        "builderUse": "Use it for training rooms, boss waves, challenge targets, puzzle triggers, and defeat checks.",
+        "limitations": "Regen Scaling changes regeneration from 1 HP per second to 1 percent HP per second based on custom HP.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
+        ]
+      },
+      "system": {
+        "slug": "dummy-block",
+        "section": "Output Blocks",
+        "sortOrder": 250,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "NPC Block",
+        "category": "Output",
+        "function": "Spawns an attacking NPC with chosen behavior when it receives a signal.",
+        "inputs": "A matching input or gate signal.",
+        "outputs": "Creates an NPC and sends a signal when that NPC dies.",
+        "triggerBehavior": "Spawns on activation and attacks targets based on its playstyle and target setting.",
+        "settings": "NPC name, HP, shirt ID, pants ID, playstyle, Target NPCs, and Regen Scaling.",
+        "builderUse": "Use it for enemy waves, PvE rooms, team scenarios, target practice, and NPC-only fights.",
+        "limitations": "Target NPCs makes the NPC avoid players and only target NPCs when enabled.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
+        ]
+      },
+      "system": {
+        "slug": "npc-block",
+        "section": "Output Blocks",
+        "sortOrder": 260,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Block",
+        "category": "Interaction",
+        "function": "Damages, heals, or sets a maximum health cap for players inside the powered region.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Applies damage every second, heals with negative values, or changes max HP with Max HP enabled.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Damage value, negative damage for healing, and Max HP mode.",
+        "builderUse": "Use it for hazards, heal zones, boss arenas, safe rooms, and custom max-HP setups.",
+        "limitations": "Must be scaled and positioned around the player; source examples note max HP does not fill the new health amount automatically.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://www.reddit.com/r/JujutsuShenanigans/comments/1mngpkc"
+        ]
+      },
+      "system": {
+        "slug": "damage-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 310,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boost Block",
+        "category": "Interaction",
+        "function": "Launches a player in a chosen vector direction.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Applies a launch force in the chosen x, y, and z direction.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Vector values for x, y, and z direction.",
+        "builderUse": "Use it for jump pads, launch traps, parkour boosts, arena entries, and movement puzzles.",
+        "limitations": "No extra function is listed; the launch depends on vector setup and player placement.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "boost-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 320,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Moveset Block",
+        "category": "Interaction",
+        "function": "Grants a chosen move or a Skill Builder custom move to the player.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Adds or assigns a move to the player's moveset.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Move selection, Custom Skill Builder move, cooldown, move slot, Add, and Display Name.",
+        "builderUse": "Use it for custom moveset pads, character rooms, rewards, and ability-based minigames.",
+        "limitations": "New moves may not appear in the list but can still work by typing the move name; Teleport timing may need a Timer Block when paired with Moveset grants.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://screenplaysmag.com/blog/how-to-use-moveset-block-in-jujutsu-shenanigans/",
+          "https://www.reddit.com/r/JujutsuShenanigans/comments/1rvdy3g/how_do_i_actually_make_moveset_and_eraser_blocks/"
+        ]
+      },
+      "system": {
+        "slug": "moveset-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 330,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Erase Block",
+        "category": "Interaction",
+        "function": "Fully removes the player's current moveset.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Clears the player's moveset.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "No extra setting listed in the source.",
+        "builderUse": "Use it to reset players before giving custom moves, clear loadouts, or make character-selection rooms clean.",
+        "limitations": "Some guides call this a Clear Block, but the current source name is Erase Block.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://www.ginx.tv/en/roblox/build-blocks-jujutsu-shenanigans"
+        ]
+      },
+      "system": {
+        "slug": "erase-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 340,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Teleport Block",
+        "category": "Interaction",
+        "function": "Teleports the player to a selected destination.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Moves the player to the Teleport Block destination part.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Set Destination, Select Destination, and Reset Destination.",
+        "builderUse": "Use it for portals, arena transitions, spawn rooms, puzzle routes, and custom moveset loading sequences.",
+        "limitations": "Teleport and Moveset timing can conflict before a saved build is reloaded; a Timer Block can delay teleport activation.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://www.ginx.tv/en/roblox/build-blocks-jujutsu-shenanigans"
+        ]
+      },
+      "system": {
+        "slug": "teleport-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 350,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Scale Block",
+        "category": "Interaction",
+        "function": "Changes the player's model size.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Applies the chosen model scale to the player.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Player size value.",
+        "builderUse": "Use it for size-changing arenas, roleplay rooms, boss setups, and custom character gimmicks.",
+        "limitations": "No extra function is listed; placement still follows Interaction Block torso rules.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "scale-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 360,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Item Block",
+        "category": "Interaction",
+        "function": "Grants a selected item to the player.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Gives the selected item and applies its despawn/drop/durability settings.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Item name/list choice, item lifetime, Disable Drop, and Disable Durability.",
+        "builderUse": "Use it for weapon rooms, item rewards, private-server kits, shops, and minigame loadouts.",
+        "limitations": "Some items may work by typing their name even if not visible in the list; Broom is a source-backed example.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Items"
+        ]
+      },
+      "system": {
+        "slug": "item-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 370,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fun Block",
+        "category": "Interaction",
+        "function": "Turns a selected fun setting off or on for the affected player.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Changes the selected fun setting.",
+        "triggerBehavior": "Defaults to toggling the setting off; Set reverses the behavior so it turns the setting on.",
+        "settings": "Selected fun setting and Set.",
+        "builderUse": "Use it for controlled private-server rules, challenge rooms, and setting-based gimmicks.",
+        "limitations": "It changes fun settings, not normal Build Mode blocks or server settings as standalone catalog rows.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Settings"
+        ]
+      },
+      "system": {
+        "slug": "fun-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 380,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Camera Block",
+        "category": "Interaction",
+        "function": "Sets the player's camera to a selected destination.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Moves camera view to the destination part.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Set Destination, Select Destination, and Reset Destination.",
+        "builderUse": "Use it for cutscenes, spectator views, puzzle reveals, spawn previews, and dramatic arenas.",
+        "limitations": "Set Destination uses the camera's position, not the character's position.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "camera-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 390,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Block",
+        "category": "Interaction",
+        "function": "Changes the player's walk speed.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Applies the chosen walk speed value.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Walk speed value.",
+        "builderUse": "Use it for speed zones, slow zones, race starts, custom classes, and arena modifiers.",
+        "limitations": "Negative values stop movement, and an infinite value can break the player's character.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "speed-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 400,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Special Block",
+        "category": "Interaction",
+        "function": "Replaces the player's character special with a custom special.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Applies the selected or custom special to the player.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Special choice, Custom Skill Builder special, and cooldown.",
+        "builderUse": "Use it for custom character rooms, special-only rewards, and private-server class systems.",
+        "limitations": "The source says cooldown can be customized, but the bar color cannot.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Skill_Builder"
+        ]
+      },
+      "system": {
+        "slug": "special-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 410,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Awakening Block",
+        "category": "Interaction",
+        "function": "Replaces the player's awakening with a custom awakening sequence.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Applies the selected custom awakening to the player.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Awakening name, duration, Custom Skill Builder awakening, and Outfit Delay setting.",
+        "builderUse": "Use it for full custom characters, boss phases, awakening rooms, and transformation setups.",
+        "limitations": "The source says the awakening bar color cannot be customized.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
+        ]
+      },
+      "system": {
+        "slug": "awakening-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 420,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Accessory Block",
+        "category": "Interaction",
+        "function": "Grants an avatar accessory from a Roblox Marketplace ID.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Adds the selected accessory to the player.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Accessory ID.",
+        "builderUse": "Use it for costumes, class markers, roleplay maps, event rooms, and visual rewards.",
+        "limitations": "No extra function is listed; it depends on a valid Marketplace accessory ID.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "accessory-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 430,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Character Block",
+        "category": "Interaction",
+        "function": "Changes the player into a custom-made character.",
+        "inputs": "A matching signal while the player's torso is inside the block.",
+        "outputs": "Applies a custom character with configured skills, special, awakening, melee, and chase.",
+        "triggerBehavior": "Works only while powered and while the player is inside the interaction region.",
+        "settings": "Base character, name, icon, Skill, Special, Awakening, Melee, Chase, import/export, Show In List, cooldowns, slots, Add, duration, and Outfit Delay.",
+        "builderUse": "Use it for complete custom characters, Workshop movesets, Creator Clash setups, and shareable character rooms.",
+        "limitations": "Selecting two Character Blocks and clicking Configure can combine them and delete moves, so multiple Character Blocks should be placed far apart.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
+        ]
+      },
+      "system": {
+        "slug": "character-block",
+        "section": "Interaction Blocks",
+        "sortOrder": 440,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "AND Gate",
+        "category": "Logic",
+        "function": "Passes a signal only after it receives every required connected signal.",
+        "inputs": "Signals from connected blocks with matching IDs.",
+        "outputs": "Sends a signal when the threshold condition is met.",
+        "triggerBehavior": "Turns on after enough connected blocks are active at the same time.",
+        "settings": "Threshold, defaulted to 1.",
+        "builderUse": "Use it for multi-button doors, cooperative triggers, puzzle checks, and circuits that need several inputs.",
+        "limitations": "The threshold must match the number of signals you want to require.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "and-gate",
+        "section": "Logic Gates",
+        "sortOrder": 510,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Light Block",
+        "category": "Logic",
+        "function": "Shows a light when powered and can act like a switch-style signal relay.",
+        "inputs": "A matching signal or connected input behavior.",
+        "outputs": "Emits faint light and can pass signal behavior to connected blocks.",
+        "triggerBehavior": "Turns on when powered; Flip makes connected input behavior act like a switch.",
+        "settings": "Input/output ID and Flip.",
+        "builderUse": "Use it for visible indicators, toggles, latches, repeaters, randomizers, and logic circuit feedback.",
+        "limitations": "Visible even when Build Mode is off, unlike most Logic Blocks.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "light-block",
+        "section": "Logic Gates",
+        "sortOrder": 520,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "NOT Gate",
+        "category": "Logic",
+        "function": "Reverses a connected signal.",
+        "inputs": "A matching input or output signal.",
+        "outputs": "Turns connected output or interaction behavior off when the input is on, and on when the input is off.",
+        "triggerBehavior": "Inverts matching Input/Output ID behavior.",
+        "settings": "Input/output ID.",
+        "builderUse": "Use it for default-on effects, inverted doors, anti-triggers, cooldown circuits, and simpler logic than many overlapping inputs.",
+        "limitations": "Can reduce scaling and lag compared with multiple Input Blocks, but the connected IDs still need to be set correctly.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://www.reddit.com/r/JujutsuShenanigans/comments/1l3wc5i/why_cant_i_use_the_moveset_blocks_in_jjs_i/"
+        ]
+      },
+      "system": {
+        "slug": "not-gate",
+        "section": "Logic Gates",
+        "sortOrder": 530,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Timer Block",
+        "category": "Logic",
+        "function": "Sends an output signal after a chosen delay.",
+        "inputs": "A matching signal that starts the delay.",
+        "outputs": "Sends a delayed output signal.",
+        "triggerBehavior": "Waits for the configured delay in seconds, then sends the signal.",
+        "settings": "Delay in seconds.",
+        "builderUse": "Use it for delayed teleports, cooldowns, repeaters, randomizers, timed hazards, and sequenced map events.",
+        "limitations": "Build tips recommend short 0.1 or 0.2 second delays for some repeater chains, but large chains can drift with ping.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "timer-block",
+        "section": "Logic Gates",
+        "sortOrder": 540,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "XOR Gate",
+        "category": "Logic",
+        "function": "Passes a signal unless none or every required connected signal is active.",
+        "inputs": "Signals from multiple connected blocks with matching IDs.",
+        "outputs": "Sends signal while the XOR condition remains active.",
+        "triggerBehavior": "Stops once zero or the threshold number of connected blocks are active.",
+        "settings": "Threshold, defaulted to 1.",
+        "builderUse": "Use it for either-or logic, limited-choice puzzles, selector circuits, and preventing all options from firing together.",
+        "limitations": "The threshold controls when the XOR Gate stops working, so wrong threshold values can invert the intended puzzle logic.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "xor-gate",
+        "section": "Logic Gates",
+        "sortOrder": 550,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Move Value",
+        "category": "Editor tool",
+        "function": "Changes the movement step used by the Position and Size tools.",
+        "inputs": "Manual value entry.",
+        "outputs": "Adjusts how far selected objects move or resize per step.",
+        "triggerBehavior": "Applies to Position and Size tool behavior after the value is changed.",
+        "settings": "Move step value, defaulted to 1 stud.",
+        "builderUse": "Use it for precise placement, smoother shapes, and faster large-scale movement.",
+        "limitations": "Setting the step to 0 can make spawned blocks appear in the void, and values lower than the selected part's Y size can break resizing on other axes.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "move-value",
+        "section": "Build Tools",
+        "sortOrder": 610,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rotate Value",
+        "category": "Editor tool",
+        "function": "Changes the rotation step used by the Rotation tool.",
+        "inputs": "Manual value entry.",
+        "outputs": "Adjusts how many degrees selected objects rotate per step.",
+        "triggerBehavior": "Applies to Rotation tool behavior after the value is changed.",
+        "settings": "Rotation step value, defaulted to 45 degrees.",
+        "builderUse": "Use it for angled ramps, rotated walls, decorations, and more precise object orientation.",
+        "limitations": "Very small rotation steps can make alignment slower and harder to scan.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "rotate-value",
+        "section": "Build Tools",
+        "sortOrder": 620,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Position Tool",
+        "category": "Editor tool",
+        "function": "Moves a selected object with draggable arrows.",
+        "inputs": "Select an object, then drag the purple arrows.",
+        "outputs": "Changes the object's position.",
+        "triggerBehavior": "Manual editor control; cycled through Selection Tools or the T shortcut.",
+        "settings": "Uses Move Value and Local or Global Axis state.",
+        "builderUse": "Use it for placing every block, destination part, spawn, and logic region.",
+        "limitations": "Position is the default selection tool; multi-select behavior depends on Ctrl or Command on Mac.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
+        ]
+      },
+      "system": {
+        "slug": "position-tool",
+        "section": "Build Tools",
+        "sortOrder": 630,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rotation Tool",
+        "category": "Editor tool",
+        "function": "Rotates a selected object with colored dots.",
+        "inputs": "Select an object, then drag the red, yellow, or blue rotation dots.",
+        "outputs": "Changes the object's rotation.",
+        "triggerBehavior": "Manual editor control; cycled through Selection Tools or the T shortcut.",
+        "settings": "Uses Rotate Value and Local or Global Axis state.",
+        "builderUse": "Use it for ramps, angled walls, signs, platforms, and destination-facing parts.",
+        "limitations": "Axis mode changes whether rotation follows the part or the world.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
+        ]
+      },
+      "system": {
+        "slug": "rotation-tool",
+        "section": "Build Tools",
+        "sortOrder": 640,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Size Tool",
+        "category": "Editor tool",
+        "function": "Resizes a selected object with draggable dots.",
+        "inputs": "Select an object, then drag the purple size dots.",
+        "outputs": "Changes the object's size.",
+        "triggerBehavior": "Manual editor control; cycled through Selection Tools or the T shortcut.",
+        "settings": "Uses Move Value and Local or Global Axis state.",
+        "builderUse": "Use it to scale walls, zones, Touch blocks, Interaction Blocks, platforms, and destination pieces.",
+        "limitations": "Size handles can fail or invert; saving and reloading can fix the issue.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers"
+        ]
+      },
+      "system": {
+        "slug": "size-tool",
+        "section": "Build Tools",
+        "sortOrder": 650,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Undo",
+        "category": "Editor tool",
+        "function": "Reverts the last build action.",
+        "inputs": "Click Undo or use Ctrl+Z.",
+        "outputs": "Restores the previous build state for the last action.",
+        "triggerBehavior": "Manual editor command.",
+        "settings": "No extra setting listed in the source.",
+        "builderUse": "Use it to recover from bad placements, accidental deletes, wrong clones, or mis-sized parts.",
+        "limitations": "Update Log notes past fixes for Logic Blocks and properties breaking when Undo is used after removals.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
+        ]
+      },
+      "system": {
+        "slug": "undo",
+        "section": "Build Tools",
+        "sortOrder": 660,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Clone",
+        "category": "Editor tool",
+        "function": "Duplicates the selected block and copies its stored info.",
+        "inputs": "Select a block, then click Clone.",
+        "outputs": "Creates a duplicate with copied color, size, ID, and other info.",
+        "triggerBehavior": "Manual editor command.",
+        "settings": "Copies selected block data.",
+        "builderUse": "Use it for repeated walls, identical triggers, matching gates, cloned hazards, and faster arena building.",
+        "limitations": "Copied IDs can be useful or dangerous; change IDs when duplicated logic should not connect to the same circuit.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "clone",
+        "section": "Build Tools",
+        "sortOrder": 670,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Logic Wires",
+        "category": "Editor tool",
+        "function": "Shows or hides colored connection lines between connected Logic Blocks.",
+        "inputs": "Toggle the Logic Wires tool.",
+        "outputs": "Changes wire visibility for input-to-output logic connections.",
+        "triggerBehavior": "Manual editor toggle.",
+        "settings": "On/off visibility toggle.",
+        "builderUse": "Use it to debug IDs, trace circuits, find broken links, and understand complex logic.",
+        "limitations": "It only visualizes connections; it does not create or fix the IDs by itself.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "logic-wires",
+        "section": "Build Tools",
+        "sortOrder": 680,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Axis",
+        "category": "Editor tool",
+        "function": "Switches between Local Axis and Global Axis for selected-object controls.",
+        "inputs": "Toggle Axis or press Y.",
+        "outputs": "Changes whether editor controls follow the part orientation or the world orientation.",
+        "triggerBehavior": "Manual editor toggle.",
+        "settings": "Local Axis or Global Axis.",
+        "builderUse": "Use it when rotated objects need clean movement, rotation, or resizing relative to themselves or the map.",
+        "limitations": "Wrong axis mode can make dragging handles feel like they move in the wrong direction.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "axis",
+        "section": "Build Tools",
+        "sortOrder": 690,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Remove All Spawns",
+        "category": "Editor tool",
+        "function": "Removes main-map spawnpoints except the ones you placed.",
+        "inputs": "Click Remove All Spawns.",
+        "outputs": "Deletes default map spawns while preserving your placed spawns.",
+        "triggerBehavior": "Manual editor command.",
+        "settings": "No extra setting listed in the source.",
+        "builderUse": "Use it when moving a private server onto a custom arena away from the main map.",
+        "limitations": "This removes spawnpoints, not the indestructible main map; the source says the main map restores after rejoining.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "remove-all-spawns",
+        "section": "Build Tools",
+        "sortOrder": 700,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Saves",
+        "category": "Editor tool",
+        "function": "Opens save slots for loading, saving, version recovery, and autosave recovery.",
+        "inputs": "Open Saves and choose a slot command.",
+        "outputs": "Loads or saves placed parts and blocks.",
+        "triggerBehavior": "Manual editor menu.",
+        "settings": "Three normal save slots, six with More Build Saves, slot rename, memory near 4.3 MB per slot, Load, Load Version, Save, and Autosave.",
+        "builderUse": "Use it to protect builds, recover older versions, test alternate layouts, and load a saved arena after server changes.",
+        "limitations": "Loading a slot removes every placed part/block first; Autosave cannot be manually saved and may miss some progress.",
+        "availability": "Private Server Build Mode",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop"
+        ]
+      },
+      "system": {
+        "slug": "saves",
+        "section": "Build Tools",
+        "sortOrder": 710,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Clear All Parts",
+        "category": "Editor tool",
+        "function": "Deletes all parts and blocks you have placed after a confirmation prompt.",
+        "inputs": "Click Clear All Parts and confirm.",
+        "outputs": "Removes placed build parts/blocks.",
+        "triggerBehavior": "Manual editor command with confirmation.",
+        "settings": "Confirmation prompt.",
+        "builderUse": "Use it to reset a build space, clear failed experiments, or start a fresh private-server map.",
+        "limitations": "Deletes all placed blocks after confirmation, even if the build appears empty.",
+        "availability": "Private Server Build Mode"
+      },
+      "system": {
+        "slug": "clear-all-parts",
+        "section": "Build Tools",
+        "sortOrder": 720,
+        "image": null
+      }
+    }
+  ]
+}

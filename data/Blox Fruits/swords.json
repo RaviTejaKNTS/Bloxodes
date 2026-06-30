@@ -1,1048 +1,746 @@
 {
   "meta": {
-    "title": "Blox Fruits swords data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Swords",
-        "url": "https://blox-fruits.fandom.com/wiki/Swords",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "swords",
+    "route": "/wiki/blox-fruits/swords",
+    "catalogCode": "blox-fruits-swords",
+    "itemFields": [
       "rarity",
       "type",
       "obtainment",
       "upgrading",
       "sea",
-      "wikiUrl"
-    ]
+      "money",
+      "robux",
+      "price"
+    ],
+    "columns": [
+      "rarity",
+      "type",
+      "obtainment",
+      "upgrading",
+      "sea",
+      "money",
+      "robux",
+      "price"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Legendary",
+        "Mythical"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "type",
+        "obtainment",
+        "upgrading",
+        "sea",
+        "money"
+      ],
+      "tableFields": [
+        "rarity",
+        "type",
+        "obtainment",
+        "upgrading",
+        "sea",
+        "money",
+        "robux",
+        "price"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Cutlass",
-      "slug": "cutlass",
-      "rarity": "Common",
-      "type": "Sword",
-      "sea": "1",
-      "money": "1,000",
-      "robux": null,
-      "source": null,
-      "price": "1,000",
-      "requirements": null,
-      "obtainment": "1,000 from Sword Dealer",
-      "upgrading": "5 5",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Cutlass",
+        "rarity": "Common",
+        "type": "Sword",
         "obtainment": "1,000 from Sword Dealer",
-        "upgrading": "5 5"
+        "upgrading": "5 5",
+        "sea": "1",
+        "money": "1,000",
+        "price": "1,000"
       },
-      "rawText": "Common SwordObtainment 1,000 from Sword DealerUpgrading 5 5",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cutlass",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/cutlass.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1e/Cutlass.png/revision/latest/scale-to-width-down/125?cb=20241223061505"
+      "system": {
+        "slug": "cutlass",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Swords/cutlass.webp"
+      }
     },
     {
-      "name": "Dual Katana",
-      "slug": "dual-katana",
-      "rarity": "Common",
-      "type": "Sword",
-      "sea": "1",
-      "money": "12,000",
-      "robux": null,
-      "source": null,
-      "price": "12,000",
-      "requirements": null,
-      "obtainment": "12,000 from Sword Dealer of the West",
-      "upgrading": "12 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dual Katana",
+        "rarity": "Common",
+        "type": "Sword",
         "obtainment": "12,000 from Sword Dealer of the West",
-        "upgrading": "12 10"
+        "upgrading": "12 10",
+        "sea": "1",
+        "money": "12,000",
+        "price": "12,000"
       },
-      "rawText": "Common SwordObtainment 12,000 from Sword Dealer of the WestUpgrading 12 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dual_Katana",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/dual-katana.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/90/Dual_Katana.png/revision/latest/scale-to-width-down/125?cb=20241223061511"
+      "system": {
+        "slug": "dual-katana",
+        "section": "Common",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Swords/dual-katana.webp"
+      }
     },
     {
-      "name": "Katana",
-      "slug": "katana",
-      "rarity": "Common",
-      "type": "Sword",
-      "sea": "1",
-      "money": "1,000",
-      "robux": null,
-      "source": null,
-      "price": "1,000",
-      "requirements": null,
-      "obtainment": "1,000 from Sword Dealer",
-      "upgrading": "5 5",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Katana",
+        "rarity": "Common",
+        "type": "Sword",
         "obtainment": "1,000 from Sword Dealer",
-        "upgrading": "5 5"
+        "upgrading": "5 5",
+        "sea": "1",
+        "money": "1,000",
+        "price": "1,000"
       },
-      "rawText": "Common SwordObtainment 1,000 from Sword DealerUpgrading 5 5",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Katana",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/katana.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e9/Katana.png/revision/latest/scale-to-width-down/125?cb=20241223061522"
+      "system": {
+        "slug": "katana",
+        "section": "Common",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Swords/katana.webp"
+      }
     },
     {
-      "name": "Fishing Trophy",
-      "slug": "fishing-trophy",
-      "rarity": "Uncommon",
-      "type": "Sword",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Place top 1,000 in the 2025 Fishing Tournament",
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
-        "obtainment": "Place top 1,000 in the 2025 Fishing Tournament"
+      "item": {
+        "name": "Fishing Trophy",
+        "rarity": "Uncommon",
+        "type": "Sword",
+        "obtainment": "Place top 1,000 in the 2025 Fishing Tournament",
+        "sea": "1 sea-2 sea-3"
       },
-      "rawText": "Uncommon SwordObtainment Place top 1,000 in the 2025 Fishing Tournament",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishing_Trophy",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/fishing-trophy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c2/Fishing_Trophy.png/revision/latest/scale-to-width-down/125?cb=20251012210616"
+      "system": {
+        "slug": "fishing-trophy",
+        "section": "Uncommon",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Swords/fishing-trophy.webp"
+      }
     },
     {
-      "name": "Iron Mace",
-      "slug": "iron-mace",
-      "rarity": "Uncommon",
-      "type": "Sword",
-      "sea": "1",
-      "money": "25,000",
-      "robux": null,
-      "source": null,
-      "price": "25,000",
-      "requirements": null,
-      "obtainment": "25,000 from Sword Dealer of the West",
-      "upgrading": "10 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Iron Mace",
+        "rarity": "Uncommon",
+        "type": "Sword",
         "obtainment": "25,000 from Sword Dealer of the West",
-        "upgrading": "10 10"
+        "upgrading": "10 10",
+        "sea": "1",
+        "money": "25,000",
+        "price": "25,000"
       },
-      "rawText": "Uncommon SwordObtainment 25,000 from Sword Dealer of the WestUpgrading 10 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Iron_Mace",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/iron-mace.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ee/Iron_Mace.png/revision/latest/scale-to-width-down/125?cb=20241223032617"
+      "system": {
+        "slug": "iron-mace",
+        "section": "Uncommon",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Swords/iron-mace.webp"
+      }
     },
     {
-      "name": "Shark Saw",
-      "slug": "shark-saw",
-      "rarity": "Uncommon",
-      "type": "Sword",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat The Saw",
-      "upgrading": "12",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Shark Saw",
+        "rarity": "Uncommon",
+        "type": "Sword",
         "obtainment": "Defeat The Saw",
-        "upgrading": "12"
+        "upgrading": "12",
+        "sea": "1"
       },
-      "rawText": "Uncommon SwordObtainment Defeat The SawUpgrading 12",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark_Saw",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/shark-saw.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ea/Shark_Saw.png/revision/latest/scale-to-width-down/125?cb=20241223032633"
+      "system": {
+        "slug": "shark-saw",
+        "section": "Uncommon",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Swords/shark-saw.webp"
+      }
     },
     {
-      "name": "Triple Katana",
-      "slug": "triple-katana",
-      "rarity": "Uncommon",
-      "type": "Sword",
-      "sea": "1",
-      "money": "60,000",
-      "robux": null,
-      "source": null,
-      "price": "60,000",
-      "requirements": null,
-      "obtainment": "60,000 from Sword Dealer of the East",
-      "upgrading": "15 15",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Triple Katana",
+        "rarity": "Uncommon",
+        "type": "Sword",
         "obtainment": "60,000 from Sword Dealer of the East",
-        "upgrading": "15 15"
+        "upgrading": "15 15",
+        "sea": "1",
+        "money": "60,000",
+        "price": "60,000"
       },
-      "rawText": "Uncommon SwordObtainment 60,000 from Sword Dealer of the EastUpgrading 15 15",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Triple_Katana",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/triple-katana.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/34/Triple_Katana.png/revision/latest/scale-to-width-down/125?cb=20241223061548"
+      "system": {
+        "slug": "triple-katana",
+        "section": "Uncommon",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Swords/triple-katana.webp"
+      }
     },
     {
-      "name": "Twin Hooks",
-      "slug": "twin-hooks",
-      "rarity": "Uncommon",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Captain Elephant",
-      "upgrading": "10 8 20",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Twin Hooks",
+        "rarity": "Uncommon",
+        "type": "Sword",
         "obtainment": "Defeat Captain Elephant",
-        "upgrading": "10 8 20"
+        "upgrading": "10 8 20",
+        "sea": "3"
       },
-      "rawText": "Uncommon SwordObtainment Defeat Captain ElephantUpgrading 10 8 20",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Twin_Hooks",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/twin-hooks.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1d/Twin_Hooks.png/revision/latest/scale-to-width-down/125?cb=20241223061553"
+      "system": {
+        "slug": "twin-hooks",
+        "section": "Uncommon",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Swords/twin-hooks.webp"
+      }
     },
     {
-      "name": "Dragon Trident",
-      "slug": "dragon-trident",
-      "rarity": "Rare",
-      "type": "Sword",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Tide Keeper",
-      "upgrading": "10 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dragon Trident",
+        "rarity": "Rare",
+        "type": "Sword",
         "obtainment": "Defeat Tide Keeper",
-        "upgrading": "10 10"
+        "upgrading": "10 10",
+        "sea": "2"
       },
-      "rawText": "Rare SwordObtainment Defeat Tide KeeperUpgrading 10 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Trident",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/dragon-trident.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/09/Dragon_Trident.png/revision/latest/scale-to-width-down/125?cb=20241223032313"
+      "system": {
+        "slug": "dragon-trident",
+        "section": "Rare",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Swords/dragon-trident.webp"
+      }
     },
     {
-      "name": "Dual-Headed Blade",
-      "slug": "dual-headed-blade",
-      "rarity": "Rare",
-      "type": "Sword",
-      "sea": "1",
-      "money": "400,000",
-      "robux": null,
-      "source": null,
-      "price": "400,000",
-      "requirements": null,
-      "obtainment": "400,000 from Master Sword Dealer",
-      "upgrading": "12 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dual-Headed Blade",
+        "rarity": "Rare",
+        "type": "Sword",
         "obtainment": "400,000 from Master Sword Dealer",
-        "upgrading": "12 10"
+        "upgrading": "12 10",
+        "sea": "1",
+        "money": "400,000",
+        "price": "400,000"
       },
-      "rawText": "Rare SwordObtainment 400,000 from Master Sword DealerUpgrading 12 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dual-Headed_Blade",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/dual-headed-blade.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/69/Dual-Headed_Blade.png/revision/latest/scale-to-width-down/125?cb=20241223032343"
+      "system": {
+        "slug": "dual-headed-blade",
+        "section": "Rare",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Swords/dual-headed-blade.webp"
+      }
     },
     {
-      "name": "Flail",
-      "slug": "flail",
-      "rarity": "Rare",
-      "type": "Sword",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Smoke Admiral",
-      "upgrading": "10 15",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Flail",
+        "rarity": "Rare",
+        "type": "Sword",
         "obtainment": "Defeat Smoke Admiral",
-        "upgrading": "10 15"
+        "upgrading": "10 15",
+        "sea": "2"
       },
-      "rawText": "Rare SwordObtainment Defeat Smoke AdmiralUpgrading 10 15",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Flail",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/flail.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1d/Flail.png/revision/latest/scale-to-width-down/125?cb=20241223032358"
+      "system": {
+        "slug": "flail",
+        "section": "Rare",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Swords/flail.webp"
+      }
     },
     {
-      "name": "Gravity Blade",
-      "slug": "gravity-blade",
-      "rarity": "Rare",
-      "type": "Sword",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Orbitus",
-      "upgrading": "3 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Gravity Blade",
+        "rarity": "Rare",
+        "type": "Sword",
         "obtainment": "Defeat Orbitus",
-        "upgrading": "3 10"
+        "upgrading": "3 10",
+        "sea": "2"
       },
-      "rawText": "Rare SwordObtainment Defeat OrbitusUpgrading 3 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gravity_Blade",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/gravity-blade.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c4/Gravity_Blade.png/revision/latest/scale-to-width-down/125?cb=20241223032412"
+      "system": {
+        "slug": "gravity-blade",
+        "section": "Rare",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Swords/gravity-blade.webp"
+      }
     },
     {
-      "name": "Longsword",
-      "slug": "longsword",
-      "rarity": "Rare",
-      "type": "Sword",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Diamond (Boss)",
-      "upgrading": "10 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Longsword",
+        "rarity": "Rare",
+        "type": "Sword",
         "obtainment": "Defeat Diamond (Boss)",
-        "upgrading": "10 10"
+        "upgrading": "10 10",
+        "sea": "2"
       },
-      "rawText": "Rare SwordObtainment Defeat Diamond (Boss)Upgrading 10 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Longsword",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/longsword.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/34/Longsword.png/revision/latest/scale-to-width-down/125?cb=20241223032424"
+      "system": {
+        "slug": "longsword",
+        "section": "Rare",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Swords/longsword.webp"
+      }
     },
     {
-      "name": "Pipe",
-      "slug": "pipe",
-      "rarity": "Rare",
-      "type": "Sword",
-      "sea": "1",
-      "money": "100,000",
-      "robux": null,
-      "source": null,
-      "price": "100,000",
-      "requirements": null,
-      "obtainment": "100,000 from Sword Dealer of the East",
-      "upgrading": "12 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Pipe",
+        "rarity": "Rare",
+        "type": "Sword",
         "obtainment": "100,000 from Sword Dealer of the East",
-        "upgrading": "12 10"
+        "upgrading": "12 10",
+        "sea": "1",
+        "money": "100,000",
+        "price": "100,000"
       },
-      "rawText": "Rare SwordObtainment 100,000 from Sword Dealer of the EastUpgrading 12 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pipe",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/pipe.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b9/Pipe.png/revision/latest/scale-to-width-down/125?cb=20241223032506"
+      "system": {
+        "slug": "pipe",
+        "section": "Rare",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Swords/pipe.webp"
+      }
     },
     {
-      "name": "Soul Cane",
-      "slug": "soul-cane",
-      "rarity": "Rare",
-      "type": "Sword",
-      "sea": "1",
-      "money": "750,000",
-      "robux": null,
-      "source": null,
-      "price": "750,000",
-      "requirements": null,
-      "obtainment": "750,000 from Living Skeleton",
-      "upgrading": "5 20",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Soul Cane",
+        "rarity": "Rare",
+        "type": "Sword",
         "obtainment": "750,000 from Living Skeleton",
-        "upgrading": "5 20"
+        "upgrading": "5 20",
+        "sea": "1",
+        "money": "750,000",
+        "price": "750,000"
       },
-      "rawText": "Rare SwordObtainment 750,000 from Living SkeletonUpgrading 5 20",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Soul_Cane",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/soul-cane.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/40/Soul_Cane.png/revision/latest/scale-to-width-down/125?cb=20241223032659"
+      "system": {
+        "slug": "soul-cane",
+        "section": "Rare",
+        "sortOrder": 15,
+        "image": "/Blox%20Fruits/Swords/soul-cane.webp"
+      }
     },
     {
-      "name": "Trident",
-      "slug": "trident",
-      "rarity": "Rare",
-      "type": "Sword",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Fishman Lord",
-      "upgrading": "20 12",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Trident",
+        "rarity": "Rare",
+        "type": "Sword",
         "obtainment": "Defeat Fishman Lord",
-        "upgrading": "20 12"
+        "upgrading": "20 12",
+        "sea": "1"
       },
-      "rawText": "Rare SwordObtainment Defeat Fishman LordUpgrading 20 12",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Trident",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/trident.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9a/Trident.png/revision/latest/scale-to-width-down/125?cb=20241223032713"
+      "system": {
+        "slug": "trident",
+        "section": "Rare",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Swords/trident.webp"
+      }
     },
     {
-      "name": "Wardens Sword",
-      "slug": "wardens-sword",
-      "rarity": "Rare",
-      "type": "Sword",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Chief Warden",
-      "upgrading": "12 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Wardens Sword",
+        "rarity": "Rare",
+        "type": "Sword",
         "obtainment": "Defeat Chief Warden",
-        "upgrading": "12 10"
+        "upgrading": "12 10",
+        "sea": "1"
       },
-      "rawText": "Rare SwordObtainment Defeat Chief WardenUpgrading 12 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Wardens_Sword",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/wardens-sword.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/09/Wardens_Sword.png/revision/latest/scale-to-width-down/125?cb=20241223032757"
+      "system": {
+        "slug": "wardens-sword",
+        "section": "Rare",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Swords/wardens-sword.webp"
+      }
     },
     {
-      "name": "Bisento",
-      "slug": "bisento",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "1",
-      "money": "1,000,000",
-      "robux": null,
-      "source": null,
-      "price": "1,000,000",
-      "requirements": null,
-      "obtainment": "1,000,000 from Master Sword Dealer",
-      "upgrading": "15 12 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Bisento",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "1,000,000 from Master Sword Dealer",
-        "upgrading": "15 12 10"
+        "upgrading": "15 12 10",
+        "sea": "1",
+        "money": "1,000,000",
+        "price": "1,000,000"
       },
-      "rawText": "Legendary SwordObtainment 1,000,000 from Master Sword DealerUpgrading 15 12 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bisento",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/bisento.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/31/Bisento.png/revision/latest/scale-to-width-down/125?cb=20241223032227"
+      "system": {
+        "slug": "bisento",
+        "section": "Legendary",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Swords/bisento.webp"
+      }
     },
     {
-      "name": "Buddy Sword",
-      "slug": "buddy-sword",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Cake Queen",
-      "upgrading": "8 5 25",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Buddy Sword",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Defeat Cake Queen",
-        "upgrading": "8 5 25"
+        "upgrading": "8 5 25",
+        "sea": "3"
       },
-      "rawText": "Legendary SwordObtainment Defeat Cake QueenUpgrading 8 5 25",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Buddy_Sword",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/buddy-sword.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/62/Buddy_Sword.png/revision/latest/scale-to-width-down/125?cb=20241223061455"
+      "system": {
+        "slug": "buddy-sword",
+        "section": "Legendary",
+        "sortOrder": 19,
+        "image": "/Blox%20Fruits/Swords/buddy-sword.webp"
+      }
     },
     {
-      "name": "Canvander",
-      "slug": "canvander",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Beautiful Pirate",
-      "upgrading": "6 20",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Canvander",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Defeat Beautiful Pirate",
-        "upgrading": "6 20"
+        "upgrading": "6 20",
+        "sea": "3"
       },
-      "rawText": "Legendary SwordObtainment Defeat Beautiful PirateUpgrading 6 20",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Canvander",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/canvander.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1c/Canvander.png/revision/latest/scale-to-width-down/125?cb=20241223061500"
+      "system": {
+        "slug": "canvander",
+        "section": "Legendary",
+        "sortOrder": 20,
+        "image": "/Blox%20Fruits/Swords/canvander.webp"
+      }
     },
     {
-      "name": "Dark Dagger",
-      "slug": "dark-dagger",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat rip_indra True Form",
-      "upgrading": "1 8 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dark Dagger",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Defeat rip_indra True Form",
-        "upgrading": "1 8 10"
+        "upgrading": "1 8 10",
+        "sea": "3"
       },
-      "rawText": "Legendary SwordObtainment Defeat rip_indra True FormUpgrading 1 8 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Dagger",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/dark-dagger.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f8/Dark_Dagger.png/revision/latest/scale-to-width-down/125?cb=20241223032258"
+      "system": {
+        "slug": "dark-dagger",
+        "section": "Legendary",
+        "sortOrder": 21,
+        "image": "/Blox%20Fruits/Swords/dark-dagger.webp"
+      }
     },
     {
-      "name": "Dragonheart",
-      "slug": "dragonheart",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "1 6 15 from Dragon Hunter",
-      "upgrading": "10 15 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dragonheart",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "1 6 15 from Dragon Hunter",
-        "upgrading": "10 15 10"
+        "upgrading": "10 15 10",
+        "sea": "3"
       },
-      "rawText": "Legendary SwordObtainment 1 6 15 from Dragon HunterUpgrading 10 15 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragonheart",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/dragonheart.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/74/Dragonheart.png/revision/latest/scale-to-width-down/125?cb=20241223032328"
+      "system": {
+        "slug": "dragonheart",
+        "section": "Legendary",
+        "sortOrder": 22,
+        "image": "/Blox%20Fruits/Swords/dragonheart.webp"
+      }
     },
     {
-      "name": "Fox Lamp",
-      "slug": "fox-lamp",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "From Kitsune Shrine",
-      "upgrading": "10 15 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Fox Lamp",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "From Kitsune Shrine",
-        "upgrading": "10 15 10"
+        "upgrading": "10 15 10",
+        "sea": "3"
       },
-      "rawText": "Legendary SwordObtainment From Kitsune ShrineUpgrading 10 15 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fox_Lamp",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/fox-lamp.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/ff/Fox_Lamp.png/revision/latest/scale-to-width-down/125?cb=20241223051549"
+      "system": {
+        "slug": "fox-lamp",
+        "section": "Legendary",
+        "sortOrder": 23,
+        "image": "/Blox%20Fruits/Swords/fox-lamp.webp"
+      }
     },
     {
-      "name": "Koko",
-      "slug": "koko",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Order",
-      "upgrading": "10 15",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Koko",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Defeat Order",
-        "upgrading": "10 15"
+        "upgrading": "10 15",
+        "sea": "2"
       },
-      "rawText": "Legendary SwordObtainment Defeat OrderUpgrading 10 15",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Koko",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/koko.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f0/Koko.png/revision/latest/scale-to-width-down/125?cb=20241223061527"
+      "system": {
+        "slug": "koko",
+        "section": "Legendary",
+        "sortOrder": 24,
+        "image": "/Blox%20Fruits/Swords/koko.webp"
+      }
     },
     {
-      "name": "Midnight Blade",
-      "slug": "midnight-blade",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "100 from El Admin",
-      "upgrading": "40 15",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Midnight Blade",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "100 from El Admin",
-        "upgrading": "40 15"
+        "upgrading": "40 15",
+        "sea": "2"
       },
-      "rawText": "Legendary SwordObtainment 100 from El AdminUpgrading 40 15",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Midnight_Blade",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/midnight-blade.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/bf/Midnight_Blade.png/revision/latest/scale-to-width-down/125?cb=20241223032439"
+      "system": {
+        "slug": "midnight-blade",
+        "section": "Legendary",
+        "sortOrder": 25,
+        "image": "/Blox%20Fruits/Swords/midnight-blade.webp"
+      }
     },
     {
-      "name": "Oroshi",
-      "slug": "oroshi",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "2",
-      "money": "2,000,000",
-      "robux": null,
-      "source": null,
-      "price": "2,000,000",
-      "requirements": null,
-      "obtainment": "2,000,000 from Legendary Sword Dealer",
-      "upgrading": "8 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Oroshi",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "2,000,000 from Legendary Sword Dealer",
-        "upgrading": "8 10"
+        "upgrading": "8 10",
+        "sea": "2",
+        "money": "2,000,000",
+        "price": "2,000,000"
       },
-      "rawText": "Legendary SwordObtainment 2,000,000 from Legendary Sword DealerUpgrading 8 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Oroshi",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/oroshi.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/72/Oroshi.png/revision/latest/scale-to-width-down/125?cb=20250603090340"
+      "system": {
+        "slug": "oroshi",
+        "section": "Legendary",
+        "sortOrder": 26,
+        "image": "/Blox%20Fruits/Swords/oroshi.webp"
+      }
     },
     {
-      "name": "Pole (1st Form)",
-      "slug": "pole-1st-form",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Thunder God",
-      "upgrading": "10 20 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Pole (1st Form)",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Defeat Thunder God",
-        "upgrading": "10 20 10"
+        "upgrading": "10 20 10",
+        "sea": "1"
       },
-      "rawText": "Legendary SwordObtainment Defeat Thunder GodUpgrading 10 20 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pole_(1st_Form)",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/pole-1st-form.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b0/Pole_%281st_Form%29.png/revision/latest/scale-to-width-down/125?cb=20241223032519"
+      "system": {
+        "slug": "pole-1st-form",
+        "section": "Legendary",
+        "sortOrder": 27,
+        "image": "/Blox%20Fruits/Swords/pole-1st-form.webp"
+      }
     },
     {
-      "name": "Pole (2nd Form)",
-      "slug": "pole-2nd-form",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Get struck by lightning in Rough Sea while holding Pole",
-      "upgrading": "15 10 12",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Pole (2nd Form)",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Get struck by lightning in Rough Sea while holding Pole",
-        "upgrading": "15 10 12"
+        "upgrading": "15 10 12",
+        "sea": "2 sea-3"
       },
-      "rawText": "Legendary SwordObtainment Get struck by lightning in Rough Sea while holding PoleUpgrading 15 10 12",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pole_(2nd_Form)",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/pole-2nd-form.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/66/Pole_%282nd_Form%29.png/revision/latest/scale-to-width-down/125?cb=20241223032534"
+      "system": {
+        "slug": "pole-2nd-form",
+        "section": "Legendary",
+        "sortOrder": 28,
+        "image": "/Blox%20Fruits/Swords/pole-2nd-form.webp"
+      }
     },
     {
-      "name": "Rengoku",
-      "slug": "rengoku",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Using the Hidden Key",
-      "upgrading": "8 20 15",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Rengoku",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Using the Hidden Key",
-        "upgrading": "8 20 15"
+        "upgrading": "8 20 15",
+        "sea": "2"
       },
-      "rawText": "Legendary SwordObtainment Using the Hidden KeyUpgrading 8 20 15",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rengoku",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/rengoku.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7d/Rengoku.png/revision/latest/scale-to-width-down/125?cb=20241223032548"
+      "system": {
+        "slug": "rengoku",
+        "section": "Legendary",
+        "sortOrder": 29,
+        "image": "/Blox%20Fruits/Swords/rengoku.webp"
+      }
     },
     {
-      "name": "Saber",
-      "slug": "saber",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Saber Expert",
-      "upgrading": "5 10 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Saber",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Defeat Saber Expert",
-        "upgrading": "5 10 10"
+        "upgrading": "5 10 10",
+        "sea": "1"
       },
-      "rawText": "Legendary SwordObtainment Defeat Saber ExpertUpgrading 5 10 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Saber",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/saber.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/23/Saber.png/revision/latest/scale-to-width-down/125?cb=20241223032603"
+      "system": {
+        "slug": "saber",
+        "section": "Legendary",
+        "sortOrder": 30,
+        "image": "/Blox%20Fruits/Swords/saber.webp"
+      }
     },
     {
-      "name": "Saishi",
-      "slug": "saishi",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "2",
-      "money": "2,000,000",
-      "robux": null,
-      "source": null,
-      "price": "2,000,000",
-      "requirements": null,
-      "obtainment": "2,000,000 from Legendary Sword Dealer",
-      "upgrading": "8 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Saishi",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "2,000,000 from Legendary Sword Dealer",
-        "upgrading": "8 10"
+        "upgrading": "8 10",
+        "sea": "2",
+        "money": "2,000,000",
+        "price": "2,000,000"
       },
-      "rawText": "Legendary SwordObtainment 2,000,000 from Legendary Sword DealerUpgrading 8 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Saishi",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/saishi.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f7/Saishi.png/revision/latest/scale-to-width-down/125?cb=20241223032618"
+      "system": {
+        "slug": "saishi",
+        "section": "Legendary",
+        "sortOrder": 31,
+        "image": "/Blox%20Fruits/Swords/saishi.webp"
+      }
     },
     {
-      "name": "Shark Anchor",
-      "slug": "shark-anchor",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Anchor Terrorshark",
-      "upgrading": "10 5 50",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Shark Anchor",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Defeat Anchor Terrorshark",
-        "upgrading": "10 5 50"
+        "upgrading": "10 5 50",
+        "sea": "3"
       },
-      "rawText": "Legendary SwordObtainment Defeat Anchor TerrorsharkUpgrading 10 5 50",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark_Anchor",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/shark-anchor.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ee/Shark_Anchor.png/revision/latest/scale-to-width-down/125?cb=20241223143202"
+      "system": {
+        "slug": "shark-anchor",
+        "section": "Legendary",
+        "sortOrder": 32,
+        "image": "/Blox%20Fruits/Swords/shark-anchor.webp"
+      }
     },
     {
-      "name": "Shizu",
-      "slug": "shizu",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "2",
-      "money": "2,000,000",
-      "robux": null,
-      "source": null,
-      "price": "2,000,000",
-      "requirements": null,
-      "obtainment": "2,000,000 from Legendary Sword Dealer",
-      "upgrading": "8 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Shizu",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "2,000,000 from Legendary Sword Dealer",
-        "upgrading": "8 10"
+        "upgrading": "8 10",
+        "sea": "2",
+        "money": "2,000,000",
+        "price": "2,000,000"
       },
-      "rawText": "Legendary SwordObtainment 2,000,000 from Legendary Sword DealerUpgrading 8 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shizu",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/shizu.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/48/Shizu.png/revision/latest/scale-to-width-down/125?cb=20241223032646"
+      "system": {
+        "slug": "shizu",
+        "section": "Legendary",
+        "sortOrder": 33,
+        "image": "/Blox%20Fruits/Swords/shizu.webp"
+      }
     },
     {
-      "name": "Spikey Trident",
-      "slug": "spikey-trident",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Cake Prince or Dough King",
-      "upgrading": "8 5 25",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Spikey Trident",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Defeat Cake Prince or Dough King",
-        "upgrading": "8 5 25"
+        "upgrading": "8 5 25",
+        "sea": "3"
       },
-      "rawText": "Legendary SwordObtainment Defeat Cake Prince or Dough KingUpgrading 8 5 25",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Spikey_Trident",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/spikey-trident.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3f/Spikey_Trident.png/revision/latest/scale-to-width-down/125?cb=20241223061542"
+      "system": {
+        "slug": "spikey-trident",
+        "section": "Legendary",
+        "sortOrder": 34,
+        "image": "/Blox%20Fruits/Swords/spikey-trident.webp"
+      }
     },
     {
-      "name": "Tushita",
-      "slug": "tushita",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Longma",
-      "upgrading": "20 6",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Tushita",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Defeat Longma",
-        "upgrading": "20 6"
+        "upgrading": "20 6",
+        "sea": "3"
       },
-      "rawText": "Legendary SwordObtainment Defeat LongmaUpgrading 20 6",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tushita",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/tushita.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0e/Tushita.png/revision/latest/scale-to-width-down/125?cb=20241223032742"
+      "system": {
+        "slug": "tushita",
+        "section": "Legendary",
+        "sortOrder": 35,
+        "image": "/Blox%20Fruits/Swords/tushita.webp"
+      }
     },
     {
-      "name": "Yama",
-      "slug": "yama",
-      "rarity": "Legendary",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Complete 20-30 Elite/Player Hunter quests",
-      "upgrading": "20 6",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Yama",
+        "rarity": "Legendary",
+        "type": "Sword",
         "obtainment": "Complete 20-30 Elite/Player Hunter quests",
-        "upgrading": "20 6"
+        "upgrading": "20 6",
+        "sea": "3"
       },
-      "rawText": "Legendary SwordObtainment Complete 20-30 Elite/Player Hunter questsUpgrading 20 6",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Yama",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/yama.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/ba/Yama.png/revision/latest/scale-to-width-down/125?cb=20241223032812"
+      "system": {
+        "slug": "yama",
+        "section": "Legendary",
+        "sortOrder": 36,
+        "image": "/Blox%20Fruits/Swords/yama.webp"
+      }
     },
     {
-      "name": "Cursed Dual Katana",
-      "slug": "cursed-dual-katana",
-      "rarity": "Mythical",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Completion of Scroll Trials",
-      "upgrading": "10 10 60",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Cursed Dual Katana",
+        "rarity": "Mythical",
+        "type": "Sword",
         "obtainment": "Completion of Scroll Trials",
-        "upgrading": "10 10 60"
+        "upgrading": "10 10 60",
+        "sea": "3"
       },
-      "rawText": "Mythical SwordObtainment Completion of Scroll TrialsUpgrading 10 10 60",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cursed_Dual_Katana",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/cursed-dual-katana.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/74/Cursed_Dual_Katana.png/revision/latest/scale-to-width-down/125?cb=20241223032242"
+      "system": {
+        "slug": "cursed-dual-katana",
+        "section": "Mythical",
+        "sortOrder": 37,
+        "image": "/Blox%20Fruits/Swords/cursed-dual-katana.webp"
+      }
     },
     {
-      "name": "Dark Blade",
-      "slug": "dark-blade",
-      "rarity": "Mythical",
-      "type": "Sword",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": "1,200",
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "1,200 from Shop",
-      "upgrading": "1 15 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dark Blade",
+        "rarity": "Mythical",
+        "type": "Sword",
         "obtainment": "1,200 from Shop",
-        "upgrading": "1 15 10"
+        "upgrading": "1 15 10",
+        "sea": "1 sea-2 sea-3",
+        "robux": "1,200"
       },
-      "rawText": "Mythical SwordObtainment 1,200 from ShopUpgrading 1 15 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Blade",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/dark-blade.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a0/Dark_Blade.png/revision/latest/scale-to-width-down/125?cb=20241223051659"
+      "system": {
+        "slug": "dark-blade",
+        "section": "Mythical",
+        "sortOrder": 38,
+        "image": "/Blox%20Fruits/Swords/dark-blade.webp"
+      }
     },
     {
-      "name": "Hallow Scythe",
-      "slug": "hallow-scythe",
-      "rarity": "Mythical",
-      "type": "Sword",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Soul Reaper",
-      "upgrading": "8 800 25",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Hallow Scythe",
+        "rarity": "Mythical",
+        "type": "Sword",
         "obtainment": "Defeat Soul Reaper",
-        "upgrading": "8 800 25"
+        "upgrading": "8 800 25",
+        "sea": "3"
       },
-      "rawText": "Mythical SwordObtainment Defeat Soul ReaperUpgrading 8 800 25",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hallow_Scythe",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/hallow-scythe.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c5/Hallow_Scythe.png/revision/latest/scale-to-width-down/125?cb=20241223061516"
+      "system": {
+        "slug": "hallow-scythe",
+        "section": "Mythical",
+        "sortOrder": 39,
+        "image": "/Blox%20Fruits/Swords/hallow-scythe.webp"
+      }
     },
     {
-      "name": "Triple Dark Blade",
-      "slug": "triple-dark-blade",
-      "rarity": "Mythical",
-      "type": "Sword",
-      "sea": "admins",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": "25 99 99",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
-        "upgrading": "25 99 99"
+      "item": {
+        "name": "Triple Dark Blade",
+        "rarity": "Mythical",
+        "type": "Sword",
+        "upgrading": "25 99 99",
+        "sea": "admins"
       },
-      "rawText": "Mythical SwordUpgrading 25 99 99",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Triple_Dark_Blade",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/triple-dark-blade.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/17/Triple_Dark_Blade.png/revision/latest/scale-to-width-down/125?cb=20250427132425"
+      "system": {
+        "slug": "triple-dark-blade",
+        "section": "Mythical",
+        "sortOrder": 40,
+        "image": "/Blox%20Fruits/Swords/triple-dark-blade.webp"
+      }
     },
     {
-      "name": "True Triple Katana",
-      "slug": "true-triple-katana",
-      "rarity": "Mythical",
-      "type": "Sword",
-      "sea": "2",
-      "money": "2,000,000",
-      "robux": null,
-      "source": null,
-      "price": "2,000,000",
-      "requirements": null,
-      "obtainment": "2,000,000 from Mysterious Man",
-      "upgrading": "5 20 50",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "True Triple Katana",
+        "rarity": "Mythical",
+        "type": "Sword",
         "obtainment": "2,000,000 from Mysterious Man",
-        "upgrading": "5 20 50"
+        "upgrading": "5 20 50",
+        "sea": "2",
+        "money": "2,000,000",
+        "price": "2,000,000"
       },
-      "rawText": "Mythical SwordObtainment 2,000,000 from Mysterious ManUpgrading 5 20 50",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/True_Triple_Katana",
-      "sourcePage": "Swords",
-      "image": "/Blox%20Fruits/Swords/true-triple-katana.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b2/True_Triple_Katana.png/revision/latest/scale-to-width-down/125?cb=20241223032727"
+      "system": {
+        "slug": "true-triple-katana",
+        "section": "Mythical",
+        "sortOrder": 41,
+        "image": "/Blox%20Fruits/Swords/true-triple-katana.webp"
+      }
     }
   ]
 }

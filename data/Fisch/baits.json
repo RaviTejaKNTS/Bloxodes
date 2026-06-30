@@ -1,31 +1,12 @@
 {
   "meta": {
-    "title": "Fisch baits data",
+    "schemaVersion": 2,
     "game": "Fisch",
     "gameSlug": "fisch",
-    "universeId": 5750914919,
     "collection": "baits",
     "route": "/wiki/fisch/baits",
     "catalogCode": "fisch-baits",
-    "updatedAt": "2026-06-19",
-    "groupBy": "collectionSection",
-    "defaultCardFields": [
-      "rarity",
-      "preferredLuck",
-      "universalLuck",
-      "lureSpeed",
-      "resilience",
-      "progressBoost",
-      "xpBoost",
-      "mutation",
-      "control",
-      "slashChance",
-      "slashDamage",
-      "obtainment"
-    ],
-    "columns": [
-      "name",
-      "collectionSection",
+    "itemFields": [
       "rarity",
       "preferredLuck",
       "universalLuck",
@@ -38,1206 +19,1226 @@
       "slashChance",
       "slashDamage",
       "obtainment",
-      "cardSummary",
-      "image",
-      "imageStatus",
-      "sourceImageFile",
-      "wikiPage",
-      "sourcePage",
-      "sourceNote",
-      "sortOrder"
+      "cardSummary"
     ],
-    "sources": [
-      {
-        "label": "Fisch Wiki - Baits",
-        "url": "https://fisch.fandom.com/wiki/Baits",
-        "accessed": "2026-06-19"
-      },
-      {
-        "label": "Fisch Wiki - Template:Baits",
-        "url": "https://fisch.fandom.com/wiki/Template:Baits",
-        "accessed": "2026-06-19"
-      },
-      {
-        "label": "Fisch Wiki - Stats",
-        "url": "https://fisch.fandom.com/wiki/Stats",
-        "accessed": "2026-06-19"
-      },
-      {
-        "label": "Fisch Wiki - Bait Crate",
-        "url": "https://fisch.fandom.com/wiki/Bait_Crate",
-        "accessed": "2026-06-19"
-      }
+    "columns": [
+      "rarity",
+      "preferredLuck",
+      "universalLuck",
+      "lureSpeed",
+      "resilience",
+      "progressBoost",
+      "xpBoost",
+      "mutation",
+      "control",
+      "slashChance",
+      "slashDamage",
+      "obtainment",
+      "cardSummary"
     ],
-    "notes": [
-      "Rows come from the current Template:Baits list transcluded on the Fisch Wiki Baits page.",
-      "The template has 66 row entries, but Umbrella appears twice with matching stats; this dataset stores 65 unique bait cards.",
-      "The Baits page stat tables mention additional stat-only bait names not present in the rendered Baits List; those were not added as catalog cards without full row/list support.",
-      "Item images are collected under /Fisch/Baits/ from Fisch Wiki/Fandom source files."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Trash",
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Unusual",
+        "Legendary",
+        "Mythical",
+        "Exotic",
+        "Secret",
+        "Limited",
+        "Special"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "preferredLuck",
+        "universalLuck",
+        "lureSpeed",
+        "resilience",
+        "progressBoost",
+        "xpBoost",
+        "mutation"
+      ],
+      "tableFields": [
+        "rarity",
+        "preferredLuck",
+        "universalLuck",
+        "lureSpeed",
+        "resilience",
+        "progressBoost",
+        "xpBoost",
+        "mutation"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "ant",
-      "name": "Ant",
-      "collectionSection": "Trash",
-      "rarity": "Trash",
-      "sortOrder": 1,
-      "wikiPage": "Ant",
-      "sourceImageFile": "Ant.png",
-      "preferredLuck": "40%",
-      "universalLuck": "5%",
-      "resilience": "-15%",
-      "lureSpeed": "-10%",
-      "progressBoost": "+5%",
-      "obtainment": "Low-tier bait source not itemized on the Baits page.",
-      "cardSummary": "Ant is a Trash bait with preferred luck (40%), universal luck (5%), slower lure speed (-10%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/ant.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Ant.png."
-    },
-    {
-      "id": "bagel",
-      "name": "Bagel",
-      "collectionSection": "Common",
-      "rarity": "Common",
-      "sortOrder": 2,
-      "wikiPage": "Bagel",
-      "sourceImageFile": "Bagel.png",
-      "preferredLuck": "25%",
-      "resilience": "15%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Bagel is a Common bait with preferred luck (25%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/bagel.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Bagel.png."
-    },
-    {
-      "id": "worm",
-      "name": "Worm",
-      "collectionSection": "Common",
-      "rarity": "Common",
-      "sortOrder": 3,
-      "wikiPage": "Worm",
-      "sourceImageFile": "Worm.png",
-      "preferredLuck": "25%",
-      "lureSpeed": "15%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Worm is a Common bait with preferred luck (25%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/worm.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Worm.png."
-    },
-    {
-      "id": "insect",
-      "name": "Insect",
-      "collectionSection": "Common",
-      "rarity": "Common",
-      "sortOrder": 4,
-      "wikiPage": "Insect",
-      "sourceImageFile": "Insect.png",
-      "preferredLuck": "35%",
-      "lureSpeed": "5%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Insect is a Common bait with preferred luck (35%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/insect.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Insect.png."
-    },
-    {
-      "id": "flakes",
-      "name": "Flakes",
-      "collectionSection": "Common",
-      "rarity": "Common",
-      "sortOrder": 5,
-      "wikiPage": "Flakes",
-      "sourceImageFile": "Flakes.png",
-      "preferredLuck": "55%",
-      "resilience": "-3%",
-      "lureSpeed": "10%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Flakes is a Common bait with preferred luck (55%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/flakes.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Flakes.png."
-    },
-    {
-      "id": "garbage",
-      "name": "Garbage",
-      "collectionSection": "Common",
-      "rarity": "Common",
-      "sortOrder": 6,
-      "wikiPage": "Garbage",
-      "sourceImageFile": "Garbage New.png",
-      "universalLuck": "-500%",
-      "resilience": "50%",
-      "lureSpeed": "-5%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Garbage is a Common bait with slower lure speed (-5%), high resilience (50%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/garbage.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Garbage New.png."
-    },
-    {
-      "id": "lushrooms",
-      "name": "Lushrooms",
-      "collectionSection": "Common",
-      "rarity": "Common",
-      "sortOrder": 7,
-      "wikiPage": "Lushrooms",
-      "sourceImageFile": "Lushrooms.png",
-      "preferredLuck": "50%",
-      "universalLuck": "20%",
-      "resilience": "10%",
-      "lureSpeed": "10%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Lushrooms is a Common bait with preferred luck (50%), universal luck (20%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/lushrooms.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Lushrooms.png."
-    },
-    {
-      "id": "maggot",
-      "name": "Maggot",
-      "collectionSection": "Uncommon",
-      "rarity": "Uncommon",
-      "sortOrder": 8,
-      "wikiPage": "Maggot",
-      "sourceImageFile": "Maggot.png",
-      "universalLuck": "35%",
-      "lureSpeed": "-10%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Maggot is a Uncommon bait with universal luck (35%), slower lure speed (-10%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/maggot.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Maggot.png."
-    },
-    {
-      "id": "shrimp",
-      "name": "Shrimp",
-      "collectionSection": "Uncommon",
-      "rarity": "Uncommon",
-      "sortOrder": 9,
-      "wikiPage": "Shrimp_(Bait)",
-      "sourceImageFile": "Shrimp.png",
-      "universalLuck": "25%",
-      "preferredLuck": "45%",
-      "resilience": "-5%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Shrimp is a Uncommon bait with preferred luck (45%), universal luck (25%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/shrimp.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Shrimp.png."
-    },
-    {
-      "id": "beetle-grub",
-      "name": "Beetle Grub",
-      "collectionSection": "Uncommon",
-      "rarity": "Uncommon",
-      "sortOrder": 10,
-      "wikiPage": "Beetle_Grub",
-      "sourceImageFile": "BeetleGrub.png",
-      "preferredLuck": "70%",
-      "universalLuck": "15%",
-      "resilience": "5%",
-      "lureSpeed": "-5%",
-      "slashChance": "3%",
-      "slashDamage": "2.5% progress per stab",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Beetle Grub is a Uncommon bait with preferred luck (70%), universal luck (15%), slower lure speed (-5%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/beetle-grub.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file BeetleGrub.png."
-    },
-    {
-      "id": "snail",
-      "name": "Snail",
-      "collectionSection": "Rare",
-      "rarity": "Rare",
-      "sortOrder": 11,
-      "wikiPage": "Snail",
-      "sourceImageFile": "Snail.png",
-      "preferredLuck": "80%",
-      "universalLuck": "-30%",
-      "resilience": "30%",
-      "lureSpeed": "-20%",
-      "control": "0.1",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Snail is a Rare bait with preferred luck (80%), slower lure speed (-20%), 0.1 control.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/snail.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Snail.png."
-    },
-    {
-      "id": "coal",
-      "name": "Coal",
-      "collectionSection": "Rare",
-      "rarity": "Rare",
-      "sortOrder": 12,
-      "wikiPage": "Coal",
-      "sourceImageFile": "Coal baits.png",
-      "preferredLuck": "45%",
-      "resilience": "-10%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Coal is a Rare bait with preferred luck (45%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/coal.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Coal baits.png."
-    },
-    {
-      "id": "rapid-catcher",
-      "name": "Rapid Catcher",
-      "collectionSection": "Rare",
-      "rarity": "Rare",
-      "sortOrder": 13,
-      "wikiPage": "Rapid_catchers",
-      "sourceImageFile": "Rapid catchers.png",
-      "resilience": "-15%",
-      "lureSpeed": "35%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Rapid Catcher is a Rare bait with simple stat trade-offs.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/rapid-catcher.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Rapid catchers.png."
-    },
-    {
-      "id": "glass-beetle",
-      "name": "Glass Beetle",
-      "collectionSection": "Rare",
-      "rarity": "Rare",
-      "sortOrder": 14,
-      "wikiPage": "Glass_Beetle",
-      "sourceImageFile": "Glass beetle.png",
-      "preferredLuck": "125%",
-      "universalLuck": "-80%",
-      "resilience": "30%",
-      "lureSpeed": "30%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Glass Beetle is a Rare bait with preferred luck (125%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/glass-beetle.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Glass beetle.png."
-    },
-    {
-      "id": "phantom-leech",
-      "name": "Phantom Leech",
-      "collectionSection": "Rare",
-      "rarity": "Rare",
-      "sortOrder": 15,
-      "wikiPage": "Phantom_Leech",
-      "sourceImageFile": "Phantom leech.png",
-      "preferredLuck": "55%",
-      "universalLuck": "30%",
-      "resilience": "25%",
-      "lureSpeed": "10%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Phantom Leech is a Rare bait with preferred luck (55%), universal luck (30%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/phantom-leech.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Phantom leech.png."
-    },
-    {
-      "id": "crystal-bananas",
-      "name": "Crystal Bananas",
-      "collectionSection": "Rare",
-      "rarity": "Rare",
-      "sortOrder": 16,
-      "wikiPage": "Crystal_Bananas",
-      "sourceImageFile": "CrystalBananas.png",
-      "preferredLuck": "150%",
-      "universalLuck": "90%",
-      "resilience": "25%",
-      "lureSpeed": "0%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Crystal Bananas is a Rare bait with preferred luck (150%), universal luck (90%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/crystal-bananas.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file CrystalBananas.png."
-    },
-    {
-      "id": "cricket",
-      "name": "Cricket",
-      "collectionSection": "Unusual",
-      "rarity": "Unusual",
-      "sortOrder": 17,
-      "wikiPage": "Cricket",
-      "sourceImageFile": "Cricket.png",
-      "preferredLuck": "90%",
-      "universalLuck": "25%",
-      "lureSpeed": "10%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Cricket is a Unusual bait with preferred luck (90%), universal luck (25%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/cricket.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Cricket.png."
-    },
-    {
-      "id": "squid",
-      "name": "Squid",
-      "collectionSection": "Unusual",
-      "rarity": "Unusual",
-      "sortOrder": 18,
-      "wikiPage": "Squid_bait",
-      "sourceImageFile": "Squid bait.png",
-      "preferredLuck": "55%",
-      "universalLuck": "45%",
-      "lureSpeed": "-25%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Squid is a Unusual bait with preferred luck (55%), universal luck (45%), slower lure speed (-25%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/squid.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Squid bait.png."
-    },
-    {
-      "id": "seaweed",
-      "name": "Seaweed",
-      "collectionSection": "Unusual",
-      "rarity": "Unusual",
-      "sortOrder": 19,
-      "wikiPage": "Seaweed_bait",
-      "sourceImageFile": "Seaweedbait.png",
-      "preferredLuck": "35%",
-      "resilience": "10%",
-      "lureSpeed": "20%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Seaweed is a Unusual bait with preferred luck (35%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/seaweed.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Seaweedbait.png."
-    },
-    {
-      "id": "minnow",
-      "name": "Minnow",
-      "collectionSection": "Unusual",
-      "rarity": "Unusual",
-      "sortOrder": 20,
-      "wikiPage": "Minnow_(Bait)",
-      "sourceImageFile": "Minnowbait.png",
-      "preferredLuck": "65%",
-      "resilience": "-10%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Minnow is a Unusual bait with preferred luck (65%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/minnow.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Minnowbait.png."
-    },
-    {
-      "id": "coral",
-      "name": "Coral",
-      "collectionSection": "Unusual",
-      "rarity": "Unusual",
-      "sortOrder": 21,
-      "wikiPage": "Coral",
-      "sourceImageFile": "Coral.png",
-      "resilience": "20%",
-      "lureSpeed": "20%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Coral is a Unusual bait with simple stat trade-offs.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/coral.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Coral.png."
-    },
-    {
-      "id": "ember-berries",
-      "name": "Ember Berries",
-      "collectionSection": "Unusual",
-      "rarity": "Unusual",
-      "sortOrder": 22,
-      "wikiPage": "Ember_Berries",
-      "sourceImageFile": "EmberBerries.png",
-      "preferredLuck": "120%",
-      "universalLuck": "45%",
-      "resilience": "15%",
-      "lureSpeed": "5%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Ember Berries is a Unusual bait with preferred luck (120%), universal luck (45%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/ember-berries.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file EmberBerries.png."
-    },
-    {
-      "id": "peppermint-worm",
-      "name": "Peppermint Worm",
-      "collectionSection": "Unusual",
-      "rarity": "Unusual",
-      "sortOrder": 23,
-      "wikiPage": "Peppermint_Worm",
-      "sourceImageFile": "Peppermint Worm.png",
-      "preferredLuck": "50%",
-      "universalLuck": "30%",
-      "resilience": "20%",
-      "lureSpeed": "-5%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Peppermint Worm is a Unusual bait with preferred luck (50%), universal luck (30%), slower lure speed (-5%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/peppermint-worm.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Peppermint Worm.png."
-    },
-    {
-      "id": "truffle-worm",
-      "name": "Truffle Worm",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "sortOrder": 24,
-      "wikiPage": "Truffle_Worm",
-      "sourceImageFile": "Truffle Worms.png",
-      "preferredLuck": "300%",
-      "lureSpeed": "-10%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Truffle Worm is a Legendary bait with strong preferred luck (300%), slower lure speed (-10%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/truffle-worm.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Truffle Worms.png."
-    },
-    {
-      "id": "weird-algae",
-      "name": "Weird Algae",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "sortOrder": 25,
-      "wikiPage": "Weird_algae",
-      "sourceImageFile": "Weird algae.png",
-      "universalLuck": "200%",
-      "lureSpeed": "-35%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Weird Algae is a Legendary bait with strong universal luck (200%), slower lure speed (-35%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/weird-algae.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Weird algae.png."
-    },
-    {
-      "id": "fish-head",
-      "name": "Fish Head",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "sortOrder": 26,
-      "wikiPage": "Fish_Head",
-      "sourceImageFile": "Fish Head.png",
-      "preferredLuck": "150%",
-      "resilience": "-10%",
-      "lureSpeed": "10%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Fish Head is a Legendary bait with preferred luck (150%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/fish-head.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Fish Head.png."
-    },
-    {
-      "id": "night-shrimp",
-      "name": "Night Shrimp",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "sortOrder": 27,
-      "wikiPage": "Night_Shrimp_Bait",
-      "sourceImageFile": "Night Shrimp Bait.png",
-      "universalLuck": "90%",
-      "lureSpeed": "15%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Night Shrimp is a Legendary bait with universal luck (90%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/night-shrimp.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Night Shrimp Bait.png."
-    },
-    {
-      "id": "instant-catcher",
-      "name": "Instant Catcher",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "sortOrder": 28,
-      "wikiPage": "Instant_Catcher",
-      "sourceImageFile": "Instant Catcher.png",
-      "universalLuck": "-20%",
-      "resilience": "-15%",
-      "lureSpeed": "65%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Instant Catcher is a Legendary bait with fast lure speed (65%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/instant-catcher.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Instant Catcher.png."
-    },
-    {
-      "id": "deep-coral",
-      "name": "Deep Coral",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "sortOrder": 29,
-      "wikiPage": "Deep_Coral",
-      "sourceImageFile": "Deep Coral.png",
-      "preferredLuck": "-10%",
-      "resilience": "50%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Deep Coral is a Legendary bait with high resilience (50%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/deep-coral.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Deep Coral.png."
-    },
-    {
-      "id": "holly-berry",
-      "name": "Holly Berry",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "sortOrder": 30,
-      "wikiPage": "Holly_Berry",
-      "sourceImageFile": "Holly Berry.png",
-      "preferredLuck": "80%",
-      "universalLuck": "30%",
-      "resilience": "10%",
-      "lureSpeed": "-5%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Holly Berry is a Legendary bait with preferred luck (80%), universal luck (30%), slower lure speed (-5%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/holly-berry.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Holly Berry.png."
-    },
-    {
-      "id": "kraken-tentacle",
-      "name": "Kraken Tentacle",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "sortOrder": 31,
-      "wikiPage": "Kraken_Tentacle",
-      "sourceImageFile": "KrakenTentacle.png",
-      "preferredLuck": "100%",
-      "universalLuck": "35%",
-      "resilience": "15%",
-      "lureSpeed": "35%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Kraken Tentacle is a Legendary bait with preferred luck (100%), universal luck (35%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/kraken-tentacle.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file KrakenTentacle.png."
-    },
-    {
-      "id": "neuro-slug",
-      "name": "Neuro Slug",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "sortOrder": 32,
-      "wikiPage": "Neuro_Slug",
-      "sourceImageFile": "Neuro slug.png",
-      "preferredLuck": "90%",
-      "universalLuck": "100%",
-      "resilience": "60%",
-      "lureSpeed": "-20%",
-      "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
-      "cardSummary": "Neuro Slug is a Legendary bait with preferred luck (90%), universal luck (100%), slower lure speed (-20%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/neuro-slug.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Neuro slug.png."
-    },
-    {
-      "id": "stag-beetle",
-      "name": "Stag Beetle",
-      "collectionSection": "Mythical",
-      "rarity": "Mythical",
-      "sortOrder": 33,
-      "wikiPage": "Stag_Beetle",
-      "sourceImageFile": "SlagBeetle.png",
-      "preferredLuck": "120%",
-      "universalLuck": "35%",
-      "resilience": "-5%",
-      "lureSpeed": "35%",
-      "slashChance": "10%",
-      "slashDamage": "2.5% progress per stab",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Stag Beetle is a Mythical bait with preferred luck (120%), universal luck (35%), 10% slash chance.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/stag-beetle.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file SlagBeetle.png."
-    },
-    {
-      "id": "nightmare-larva",
-      "name": "Nightmare Larva",
-      "collectionSection": "Mythical",
-      "rarity": "Mythical",
-      "sortOrder": 34,
-      "wikiPage": "Nightmare_Larva",
-      "sourceImageFile": "NightmareLarva.png",
-      "preferredLuck": "120%",
-      "universalLuck": "35%",
-      "resilience": "25%",
-      "lureSpeed": "25%",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Nightmare Larva is a Mythical bait with preferred luck (120%), universal luck (35%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/nightmare-larva.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file NightmareLarva.png."
-    },
-    {
-      "id": "chocolate-fish",
-      "name": "Chocolate Fish",
-      "collectionSection": "Mythical",
-      "rarity": "Mythical",
-      "sortOrder": 35,
-      "wikiPage": "Chocolate_Fish_(Bait)",
-      "sourceImageFile": "Chocolate Fish.png",
-      "preferredLuck": "200%",
-      "universalLuck": "150%",
-      "resilience": "15%",
-      "lureSpeed": "20%",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Chocolate Fish is a Mythical bait with strong preferred luck (200%), strong universal luck (150%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/chocolate-fish.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Chocolate Fish.png."
-    },
-    {
-      "id": "lucky",
-      "name": "Lucky",
-      "collectionSection": "Mythical",
-      "rarity": "Mythical",
-      "sortOrder": 36,
-      "wikiPage": "Lucky_(Bait)",
-      "sourceImageFile": "Lucky_Bait.png",
-      "preferredLuck": "200%",
-      "universalLuck": "150%",
-      "resilience": "15%",
-      "lureSpeed": "20%",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Lucky is a Mythical bait with strong preferred luck (200%), strong universal luck (150%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/lucky.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Lucky_Bait.png."
-    },
-    {
-      "id": "moonhaze",
-      "name": "Moonhaze",
-      "collectionSection": "Mythical",
-      "rarity": "Mythical",
-      "sortOrder": 37,
-      "wikiPage": "Moonhaze",
-      "sourceImageFile": "Moonhaze.png",
-      "preferredLuck": "225%",
-      "universalLuck": "230%",
-      "resilience": "5%",
-      "lureSpeed": "60%",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Moonhaze is a Mythical bait with strong preferred luck (225%), strong universal luck (230%), fast lure speed (60%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/moonhaze.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Moonhaze.png."
-    },
-    {
-      "id": "umbrella",
-      "name": "Umbrella",
-      "collectionSection": "Mythical",
-      "rarity": "Mythical",
-      "sortOrder": 38,
-      "wikiPage": "Umbrella",
-      "sourceImageFile": "Umbrella.png",
-      "preferredLuck": "125%",
-      "universalLuck": "50%",
-      "resilience": "30%",
-      "lureSpeed": "50%",
-      "sourceNote": "Also listed under Limited on Template:Baits with matching stats; kept once to avoid duplicate cards.",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Umbrella is a Mythical bait with preferred luck (125%), universal luck (50%), fast lure speed (50%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/umbrella.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Umbrella.png."
-    },
-    {
-      "id": "dragonfly",
-      "name": "Dragonfly",
-      "collectionSection": "Exotic",
-      "rarity": "Exotic",
-      "sortOrder": 39,
-      "wikiPage": "Dragonfly",
-      "sourceImageFile": "Dragonfly.png",
-      "preferredLuck": "160%",
-      "universalLuck": "50%",
-      "resilience": "-5%",
-      "lureSpeed": "25%",
-      "progressBoost": "+20%",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Dragonfly is a Exotic bait with preferred luck (160%), universal luck (50%), +20% progress boost.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/dragonfly.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Dragonfly.png."
-    },
-    {
-      "id": "golden-worm",
-      "name": "Golden Worm",
-      "collectionSection": "Exotic",
-      "rarity": "Exotic",
-      "sortOrder": 40,
-      "wikiPage": "Golden_Worm",
-      "sourceImageFile": "Goldenwormimage.webp",
-      "preferredLuck": "200%",
-      "universalLuck": "100%",
-      "resilience": "45%",
-      "lureSpeed": "20%",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Golden Worm is a Exotic bait with strong preferred luck (200%), universal luck (100%), high resilience (45%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/golden-worm.webp",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Goldenwormimage.webp."
-    },
-    {
-      "id": "luminous-larva",
-      "name": "Luminous Larva",
-      "collectionSection": "Exotic",
-      "rarity": "Exotic",
-      "sortOrder": 41,
-      "wikiPage": "Luminous_Larva",
-      "sourceImageFile": "LuminousLarva.png",
-      "preferredLuck": "200%",
-      "universalLuck": "175%",
-      "resilience": "50%",
-      "lureSpeed": "10%",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Luminous Larva is a Exotic bait with strong preferred luck (200%), strong universal luck (175%), high resilience (50%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/luminous-larva.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file LuminousLarva.png."
-    },
-    {
-      "id": "glowworm",
-      "name": "Glowworm",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "sortOrder": 42,
-      "wikiPage": "Glowworm",
-      "sourceImageFile": "Glowworm.png",
-      "preferredLuck": "300%",
-      "universalLuck": "100%",
-      "resilience": "5%",
-      "lureSpeed": "15%",
-      "progressBoost": "+50%",
-      "mutation": "Glowy",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Glowworm is a Secret bait with strong preferred luck (300%), universal luck (100%), Glowy mutation.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/glowworm.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Glowworm.png."
-    },
-    {
-      "id": "crawlurion",
-      "name": "Crawlurion",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "sortOrder": 43,
-      "wikiPage": "Crawlurion",
-      "sourceImageFile": "Crawlurion.png",
-      "preferredLuck": "25%",
-      "universalLuck": "30%",
-      "resilience": "10%",
-      "lureSpeed": "10%",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Crawlurion is a Secret bait with preferred luck (25%), universal luck (30%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/crawlurion.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Crawlurion.png."
-    },
-    {
-      "id": "astrolure",
-      "name": "Astrolure",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "sortOrder": 44,
-      "wikiPage": "Astrolure",
-      "sourceImageFile": "Astrolure.png",
-      "preferredLuck": "175%",
-      "universalLuck": "60%",
-      "resilience": "60%",
-      "lureSpeed": "90%",
-      "xpBoost": "1x",
-      "mutation": "Galactic",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Astrolure is a Secret bait with preferred luck (175%), universal luck (60%), fast lure speed (90%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/astrolure.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Astrolure.png."
-    },
-    {
-      "id": "nullbit",
-      "name": "Nullbit",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "sortOrder": 45,
-      "wikiPage": "Nullbit",
-      "sourceImageFile": "Nullbit.png",
-      "preferredLuck": "120%",
-      "universalLuck": "120%",
-      "resilience": "-20%",
-      "lureSpeed": "60%",
-      "xpBoost": "1x",
-      "mutation": "Nullified",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Nullbit is a Secret bait with preferred luck (120%), universal luck (120%), fast lure speed (60%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/nullbit.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Nullbit.png."
-    },
-    {
-      "id": "snare",
-      "name": "Snare",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "sortOrder": 46,
-      "wikiPage": "Snare",
-      "sourceImageFile": "Snare.png",
-      "preferredLuck": "125%",
-      "universalLuck": "-10%",
-      "resilience": "-20%",
-      "lureSpeed": "80%",
-      "xpBoost": "1x",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Snare is a Secret bait with preferred luck (125%), fast lure speed (80%), 1x XP boost.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/snare.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Snare.png."
-    },
-    {
-      "id": "starlight-worm",
-      "name": "Starlight Worm",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "sortOrder": 47,
-      "wikiPage": "Starlight_Worm",
-      "sourceImageFile": "StarlightWorm.png",
-      "preferredLuck": "300%",
-      "universalLuck": "100%",
-      "resilience": "15%",
-      "lureSpeed": "30%",
-      "progressBoost": "+20%",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Starlight Worm is a Secret bait with strong preferred luck (300%), universal luck (100%), +20% progress boost.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/starlight-worm.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file StarlightWorm.png."
-    },
-    {
-      "id": "gourd-bites",
-      "name": "Gourd Bites",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 48,
-      "wikiPage": "Gourd_Bites",
-      "sourceImageFile": "GourdBites.png",
-      "preferredLuck": "100%",
-      "resilience": "35%",
-      "lureSpeed": "10%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Gourd Bites is a Limited bait with preferred luck (100%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/gourd-bites.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file GourdBites.png."
-    },
-    {
-      "id": "pumpkin-pieces",
-      "name": "Pumpkin Pieces",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 49,
-      "wikiPage": "Pumpkin_Pieces",
-      "sourceImageFile": "PumpkinPieces.png",
-      "preferredLuck": "120%",
-      "resilience": "50%",
-      "lureSpeed": "5%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Pumpkin Pieces is a Limited bait with preferred luck (120%), high resilience (50%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/pumpkin-pieces.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file PumpkinPieces.png."
-    },
-    {
-      "id": "cranberry-cluster",
-      "name": "Cranberry Cluster",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 50,
-      "wikiPage": "Cranberry_Cluster",
-      "sourceImageFile": "CranberryCluster.png",
-      "preferredLuck": "70%",
-      "resilience": "-5%",
-      "lureSpeed": "60%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Cranberry Cluster is a Limited bait with preferred luck (70%), fast lure speed (60%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/cranberry-cluster.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file CranberryCluster.png."
-    },
-    {
-      "id": "tryhard-worm",
-      "name": "Tryhard Worm",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 51,
-      "wikiPage": "Tryhard_Worm",
-      "sourceImageFile": "TryhardWorm.png",
-      "preferredLuck": "5000%",
-      "resilience": "30%",
-      "lureSpeed": "45%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Tryhard Worm is a Limited bait with strong preferred luck (5000%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/tryhard-worm.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file TryhardWorm.png."
-    },
-    {
-      "id": "meteor",
-      "name": "Meteor",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 52,
-      "wikiPage": "Meteor",
-      "sourceImageFile": "MeteorBait.png",
-      "preferredLuck": "55%",
-      "universalLuck": "65%",
-      "resilience": "100%",
-      "lureSpeed": "10%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Meteor is a Limited bait with preferred luck (55%), universal luck (65%), high resilience (100%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/meteor.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file MeteorBait.png."
-    },
-    {
-      "id": "beach-ball",
-      "name": "Beach Ball",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 53,
-      "wikiPage": "Beach_Ball",
-      "sourceImageFile": "BeachBall.png",
-      "preferredLuck": "5%",
-      "universalLuck": "5%",
-      "resilience": "0%",
-      "lureSpeed": "150%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Beach Ball is a Limited bait with preferred luck (5%), universal luck (5%), fast lure speed (150%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/beach-ball.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file BeachBall.png."
-    },
-    {
-      "id": "beached-pearl",
-      "name": "Beached Pearl",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 54,
-      "wikiPage": "Beached_Pearl",
-      "sourceImageFile": "BeachedPearl.png",
-      "preferredLuck": "250%",
-      "universalLuck": "300%",
-      "resilience": "30%",
-      "lureSpeed": "95%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Beached Pearl is a Limited bait with strong preferred luck (250%), strong universal luck (300%), fast lure speed (95%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/beached-pearl.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file BeachedPearl.png."
-    },
-    {
-      "id": "stud-bait",
-      "name": "Stud Bait",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 55,
-      "wikiPage": "Stud_Bait",
-      "sourceImageFile": "StudBait.png",
-      "preferredLuck": "150%",
-      "universalLuck": "40%",
-      "resilience": "20%",
-      "lureSpeed": "50%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Stud Bait is a Limited bait with preferred luck (150%), universal luck (40%), fast lure speed (50%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/stud-bait.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file StudBait.png."
-    },
-    {
-      "id": "colossal-ink-bait",
-      "name": "Colossal Ink Bait",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 56,
-      "wikiPage": "Colossal_Ink_Bait",
-      "sourceImageFile": "ColossalInkBait.png",
-      "preferredLuck": "150%",
-      "universalLuck": "150%",
-      "resilience": "40%",
-      "lureSpeed": "5%",
-      "mutation": "Colossal Ink",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Colossal Ink Bait is a Limited bait with preferred luck (150%), strong universal luck (150%), high resilience (40%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/colossal-ink-bait.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file ColossalInkBait.png."
-    },
-    {
-      "id": "hourglass-bait",
-      "name": "Hourglass Bait",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 57,
-      "wikiPage": "Hourglass_Bait",
-      "sourceImageFile": "HourglassBait.png",
-      "preferredLuck": "150%",
-      "universalLuck": "150%",
-      "resilience": "40%",
-      "lureSpeed": "5%",
-      "xpBoost": "1x",
-      "mutation": "Neon",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Hourglass Bait is a Limited bait with preferred luck (150%), strong universal luck (150%), high resilience (40%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/hourglass-bait.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file HourglassBait.png."
-    },
-    {
-      "id": "golden-shrimp-bait",
-      "name": "Golden Shrimp Bait",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 58,
-      "wikiPage": "Golden_Shrimp_Bait",
-      "sourceImageFile": "GoldenShrimpBait.png",
-      "preferredLuck": "120%",
-      "universalLuck": "90%",
-      "resilience": "10%",
-      "lureSpeed": "15%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Golden Shrimp Bait is a Limited bait with preferred luck (120%), universal luck (90%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/golden-shrimp-bait.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file GoldenShrimpBait.png."
-    },
-    {
-      "id": "whale-bait",
-      "name": "Whale Bait",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 59,
-      "wikiPage": "Whale_Bait",
-      "sourceImageFile": "WhaleBait.png",
-      "preferredLuck": "180%",
-      "universalLuck": "20%",
-      "resilience": "30%",
-      "lureSpeed": "-5%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Whale Bait is a Limited bait with preferred luck (180%), universal luck (20%), slower lure speed (-5%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/whale-bait.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file WhaleBait.png."
-    },
-    {
-      "id": "gobstopper",
-      "name": "Gobstopper",
-      "collectionSection": "Limited",
-      "rarity": "Limited",
-      "sortOrder": 60,
-      "wikiPage": "Gobstopper",
-      "sourceImageFile": "Gobstopper.png",
-      "preferredLuck": "500%",
-      "universalLuck": "500%",
-      "resilience": "100%",
-      "lureSpeed": "-50%",
-      "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
-      "cardSummary": "Gobstopper is a Limited bait with strong preferred luck (500%), strong universal luck (500%), slower lure speed (-50%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/gobstopper.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Gobstopper.png."
-    },
-    {
-      "id": "star",
-      "name": "Star",
-      "collectionSection": "Special",
-      "rarity": "Special",
-      "sortOrder": 61,
-      "wikiPage": "Star",
-      "sourceImageFile": "Star.png",
-      "preferredLuck": "120%",
-      "universalLuck": "120%",
-      "resilience": "-10%",
-      "lureSpeed": "100%",
-      "xpBoost": "1x",
-      "mutation": "Galaxy",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Star is a Special bait with preferred luck (120%), universal luck (120%), fast lure speed (100%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/star.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Star.png."
-    },
-    {
-      "id": "golden-coin",
-      "name": "Golden Coin",
-      "collectionSection": "Special",
-      "rarity": "Special",
-      "sortOrder": 62,
-      "wikiPage": "Golden_Coin",
-      "sourceImageFile": "GoldenCoin.png",
-      "preferredLuck": "1000%",
-      "universalLuck": "1000%",
-      "resilience": "0%",
-      "lureSpeed": "0%",
-      "xpBoost": "1x",
-      "mutation": "Radiant",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Golden Coin is a Special bait with strong preferred luck (1000%), strong universal luck (1000%), Radiant mutation.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/golden-coin.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file GoldenCoin.png."
-    },
-    {
-      "id": "singularity",
-      "name": "Singularity",
-      "collectionSection": "Special",
-      "rarity": "Special",
-      "sortOrder": 63,
-      "wikiPage": "Singularity",
-      "sourceImageFile": "Singularity.png",
-      "preferredLuck": "0%",
-      "universalLuck": "0%",
-      "resilience": "150%",
-      "lureSpeed": "-20%",
-      "xpBoost": "1x",
-      "mutation": "Surreal",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Singularity is a Special bait with slower lure speed (-20%), high resilience (150%), Surreal mutation.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/singularity.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file Singularity.png."
-    },
-    {
-      "id": "ufo",
-      "name": "UFO",
-      "collectionSection": "Special",
-      "rarity": "Special",
-      "sortOrder": 64,
-      "wikiPage": "UFO",
-      "sourceImageFile": "UFO.png",
-      "preferredLuck": "110%",
-      "universalLuck": "177%",
-      "resilience": "70%",
-      "lureSpeed": "77%",
-      "xpBoost": "1x",
-      "mutation": "Alien",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "UFO is a Special bait with preferred luck (110%), strong universal luck (177%), fast lure speed (77%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/ufo.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file UFO.png."
-    },
-    {
-      "id": "taco",
-      "name": "Taco",
-      "collectionSection": "Special",
-      "rarity": "Special",
-      "sortOrder": 65,
-      "wikiPage": "Taco",
-      "sourceImageFile": "TacoBait.png",
-      "preferredLuck": "100%",
-      "universalLuck": "100%",
-      "resilience": "-20%",
-      "lureSpeed": "100%",
-      "mutation": "Spicy",
-      "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
-      "cardSummary": "Taco is a Special bait with preferred luck (100%), universal luck (100%), fast lure speed (100%).",
-      "sourcePage": "https://fisch.fandom.com/wiki/Baits",
-      "image": "/Fisch/Baits/taco.png",
-      "imageStatus": "Collected from Fisch Wiki/Fandom source file TacoBait.png."
+      "item": {
+        "name": "Ant",
+        "rarity": "Trash",
+        "preferredLuck": "40%",
+        "universalLuck": "5%",
+        "lureSpeed": "-10%",
+        "resilience": "-15%",
+        "progressBoost": "+5%",
+        "obtainment": "Low-tier bait source not itemized on the Baits page.",
+        "cardSummary": "Ant is a Trash bait with preferred luck (40%), universal luck (5%), slower lure speed (-10%)."
+      },
+      "system": {
+        "slug": "ant",
+        "section": "Trash",
+        "sortOrder": 1,
+        "image": "/Fisch/Baits/ant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bagel",
+        "rarity": "Common",
+        "preferredLuck": "25%",
+        "resilience": "15%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Bagel is a Common bait with preferred luck (25%)."
+      },
+      "system": {
+        "slug": "bagel",
+        "section": "Common",
+        "sortOrder": 2,
+        "image": "/Fisch/Baits/bagel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Worm",
+        "rarity": "Common",
+        "preferredLuck": "25%",
+        "lureSpeed": "15%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Worm is a Common bait with preferred luck (25%)."
+      },
+      "system": {
+        "slug": "worm",
+        "section": "Common",
+        "sortOrder": 3,
+        "image": "/Fisch/Baits/worm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Insect",
+        "rarity": "Common",
+        "preferredLuck": "35%",
+        "lureSpeed": "5%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Insect is a Common bait with preferred luck (35%)."
+      },
+      "system": {
+        "slug": "insect",
+        "section": "Common",
+        "sortOrder": 4,
+        "image": "/Fisch/Baits/insect.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flakes",
+        "rarity": "Common",
+        "preferredLuck": "55%",
+        "lureSpeed": "10%",
+        "resilience": "-3%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Flakes is a Common bait with preferred luck (55%)."
+      },
+      "system": {
+        "slug": "flakes",
+        "section": "Common",
+        "sortOrder": 5,
+        "image": "/Fisch/Baits/flakes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Garbage",
+        "rarity": "Common",
+        "universalLuck": "-500%",
+        "lureSpeed": "-5%",
+        "resilience": "50%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Garbage is a Common bait with slower lure speed (-5%), high resilience (50%)."
+      },
+      "system": {
+        "slug": "garbage",
+        "section": "Common",
+        "sortOrder": 6,
+        "image": "/Fisch/Baits/garbage.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lushrooms",
+        "rarity": "Common",
+        "preferredLuck": "50%",
+        "universalLuck": "20%",
+        "lureSpeed": "10%",
+        "resilience": "10%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Lushrooms is a Common bait with preferred luck (50%), universal luck (20%)."
+      },
+      "system": {
+        "slug": "lushrooms",
+        "section": "Common",
+        "sortOrder": 7,
+        "image": "/Fisch/Baits/lushrooms.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Maggot",
+        "rarity": "Uncommon",
+        "universalLuck": "35%",
+        "lureSpeed": "-10%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Maggot is a Uncommon bait with universal luck (35%), slower lure speed (-10%)."
+      },
+      "system": {
+        "slug": "maggot",
+        "section": "Uncommon",
+        "sortOrder": 8,
+        "image": "/Fisch/Baits/maggot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shrimp",
+        "rarity": "Uncommon",
+        "preferredLuck": "45%",
+        "universalLuck": "25%",
+        "resilience": "-5%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Shrimp is a Uncommon bait with preferred luck (45%), universal luck (25%)."
+      },
+      "system": {
+        "slug": "shrimp",
+        "section": "Uncommon",
+        "sortOrder": 9,
+        "image": "/Fisch/Baits/shrimp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beetle Grub",
+        "rarity": "Uncommon",
+        "preferredLuck": "70%",
+        "universalLuck": "15%",
+        "lureSpeed": "-5%",
+        "resilience": "5%",
+        "slashChance": "3%",
+        "slashDamage": "2.5% progress per stab",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Beetle Grub is a Uncommon bait with preferred luck (70%), universal luck (15%), slower lure speed (-5%)."
+      },
+      "system": {
+        "slug": "beetle-grub",
+        "section": "Uncommon",
+        "sortOrder": 10,
+        "image": "/Fisch/Baits/beetle-grub.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snail",
+        "rarity": "Rare",
+        "preferredLuck": "80%",
+        "universalLuck": "-30%",
+        "lureSpeed": "-20%",
+        "resilience": "30%",
+        "control": "0.1",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Snail is a Rare bait with preferred luck (80%), slower lure speed (-20%), 0.1 control."
+      },
+      "system": {
+        "slug": "snail",
+        "section": "Rare",
+        "sortOrder": 11,
+        "image": "/Fisch/Baits/snail.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coal",
+        "rarity": "Rare",
+        "preferredLuck": "45%",
+        "resilience": "-10%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Coal is a Rare bait with preferred luck (45%)."
+      },
+      "system": {
+        "slug": "coal",
+        "section": "Rare",
+        "sortOrder": 12,
+        "image": "/Fisch/Baits/coal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rapid Catcher",
+        "rarity": "Rare",
+        "lureSpeed": "35%",
+        "resilience": "-15%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Rapid Catcher is a Rare bait with simple stat trade-offs."
+      },
+      "system": {
+        "slug": "rapid-catcher",
+        "section": "Rare",
+        "sortOrder": 13,
+        "image": "/Fisch/Baits/rapid-catcher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glass Beetle",
+        "rarity": "Rare",
+        "preferredLuck": "125%",
+        "universalLuck": "-80%",
+        "lureSpeed": "30%",
+        "resilience": "30%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Glass Beetle is a Rare bait with preferred luck (125%)."
+      },
+      "system": {
+        "slug": "glass-beetle",
+        "section": "Rare",
+        "sortOrder": 14,
+        "image": "/Fisch/Baits/glass-beetle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phantom Leech",
+        "rarity": "Rare",
+        "preferredLuck": "55%",
+        "universalLuck": "30%",
+        "lureSpeed": "10%",
+        "resilience": "25%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Phantom Leech is a Rare bait with preferred luck (55%), universal luck (30%)."
+      },
+      "system": {
+        "slug": "phantom-leech",
+        "section": "Rare",
+        "sortOrder": 15,
+        "image": "/Fisch/Baits/phantom-leech.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystal Bananas",
+        "rarity": "Rare",
+        "preferredLuck": "150%",
+        "universalLuck": "90%",
+        "lureSpeed": "0%",
+        "resilience": "25%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Crystal Bananas is a Rare bait with preferred luck (150%), universal luck (90%)."
+      },
+      "system": {
+        "slug": "crystal-bananas",
+        "section": "Rare",
+        "sortOrder": 16,
+        "image": "/Fisch/Baits/crystal-bananas.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cricket",
+        "rarity": "Unusual",
+        "preferredLuck": "90%",
+        "universalLuck": "25%",
+        "lureSpeed": "10%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Cricket is a Unusual bait with preferred luck (90%), universal luck (25%)."
+      },
+      "system": {
+        "slug": "cricket",
+        "section": "Unusual",
+        "sortOrder": 17,
+        "image": "/Fisch/Baits/cricket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Squid",
+        "rarity": "Unusual",
+        "preferredLuck": "55%",
+        "universalLuck": "45%",
+        "lureSpeed": "-25%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Squid is a Unusual bait with preferred luck (55%), universal luck (45%), slower lure speed (-25%)."
+      },
+      "system": {
+        "slug": "squid",
+        "section": "Unusual",
+        "sortOrder": 18,
+        "image": "/Fisch/Baits/squid.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seaweed",
+        "rarity": "Unusual",
+        "preferredLuck": "35%",
+        "lureSpeed": "20%",
+        "resilience": "10%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Seaweed is a Unusual bait with preferred luck (35%)."
+      },
+      "system": {
+        "slug": "seaweed",
+        "section": "Unusual",
+        "sortOrder": 19,
+        "image": "/Fisch/Baits/seaweed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Minnow",
+        "rarity": "Unusual",
+        "preferredLuck": "65%",
+        "resilience": "-10%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Minnow is a Unusual bait with preferred luck (65%)."
+      },
+      "system": {
+        "slug": "minnow",
+        "section": "Unusual",
+        "sortOrder": 20,
+        "image": "/Fisch/Baits/minnow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coral",
+        "rarity": "Unusual",
+        "lureSpeed": "20%",
+        "resilience": "20%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Coral is a Unusual bait with simple stat trade-offs."
+      },
+      "system": {
+        "slug": "coral",
+        "section": "Unusual",
+        "sortOrder": 21,
+        "image": "/Fisch/Baits/coral.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ember Berries",
+        "rarity": "Unusual",
+        "preferredLuck": "120%",
+        "universalLuck": "45%",
+        "lureSpeed": "5%",
+        "resilience": "15%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Ember Berries is a Unusual bait with preferred luck (120%), universal luck (45%)."
+      },
+      "system": {
+        "slug": "ember-berries",
+        "section": "Unusual",
+        "sortOrder": 22,
+        "image": "/Fisch/Baits/ember-berries.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint Worm",
+        "rarity": "Unusual",
+        "preferredLuck": "50%",
+        "universalLuck": "30%",
+        "lureSpeed": "-5%",
+        "resilience": "20%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Peppermint Worm is a Unusual bait with preferred luck (50%), universal luck (30%), slower lure speed (-5%)."
+      },
+      "system": {
+        "slug": "peppermint-worm",
+        "section": "Unusual",
+        "sortOrder": 23,
+        "image": "/Fisch/Baits/peppermint-worm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Truffle Worm",
+        "rarity": "Legendary",
+        "preferredLuck": "300%",
+        "lureSpeed": "-10%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Truffle Worm is a Legendary bait with strong preferred luck (300%), slower lure speed (-10%)."
+      },
+      "system": {
+        "slug": "truffle-worm",
+        "section": "Legendary",
+        "sortOrder": 24,
+        "image": "/Fisch/Baits/truffle-worm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Weird Algae",
+        "rarity": "Legendary",
+        "universalLuck": "200%",
+        "lureSpeed": "-35%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Weird Algae is a Legendary bait with strong universal luck (200%), slower lure speed (-35%)."
+      },
+      "system": {
+        "slug": "weird-algae",
+        "section": "Legendary",
+        "sortOrder": 25,
+        "image": "/Fisch/Baits/weird-algae.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fish Head",
+        "rarity": "Legendary",
+        "preferredLuck": "150%",
+        "lureSpeed": "10%",
+        "resilience": "-10%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Fish Head is a Legendary bait with preferred luck (150%)."
+      },
+      "system": {
+        "slug": "fish-head",
+        "section": "Legendary",
+        "sortOrder": 26,
+        "image": "/Fisch/Baits/fish-head.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Night Shrimp",
+        "rarity": "Legendary",
+        "universalLuck": "90%",
+        "lureSpeed": "15%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Night Shrimp is a Legendary bait with universal luck (90%)."
+      },
+      "system": {
+        "slug": "night-shrimp",
+        "section": "Legendary",
+        "sortOrder": 27,
+        "image": "/Fisch/Baits/night-shrimp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Instant Catcher",
+        "rarity": "Legendary",
+        "universalLuck": "-20%",
+        "lureSpeed": "65%",
+        "resilience": "-15%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Instant Catcher is a Legendary bait with fast lure speed (65%)."
+      },
+      "system": {
+        "slug": "instant-catcher",
+        "section": "Legendary",
+        "sortOrder": 28,
+        "image": "/Fisch/Baits/instant-catcher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Deep Coral",
+        "rarity": "Legendary",
+        "preferredLuck": "-10%",
+        "resilience": "50%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Deep Coral is a Legendary bait with high resilience (50%)."
+      },
+      "system": {
+        "slug": "deep-coral",
+        "section": "Legendary",
+        "sortOrder": 29,
+        "image": "/Fisch/Baits/deep-coral.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holly Berry",
+        "rarity": "Legendary",
+        "preferredLuck": "80%",
+        "universalLuck": "30%",
+        "lureSpeed": "-5%",
+        "resilience": "10%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Holly Berry is a Legendary bait with preferred luck (80%), universal luck (30%), slower lure speed (-5%)."
+      },
+      "system": {
+        "slug": "holly-berry",
+        "section": "Legendary",
+        "sortOrder": 30,
+        "image": "/Fisch/Baits/holly-berry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kraken Tentacle",
+        "rarity": "Legendary",
+        "preferredLuck": "100%",
+        "universalLuck": "35%",
+        "lureSpeed": "35%",
+        "resilience": "15%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Kraken Tentacle is a Legendary bait with preferred luck (100%), universal luck (35%)."
+      },
+      "system": {
+        "slug": "kraken-tentacle",
+        "section": "Legendary",
+        "sortOrder": 31,
+        "image": "/Fisch/Baits/kraken-tentacle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Neuro Slug",
+        "rarity": "Legendary",
+        "preferredLuck": "90%",
+        "universalLuck": "100%",
+        "lureSpeed": "-20%",
+        "resilience": "60%",
+        "obtainment": "Bait crates, fishing crates/geodes, and quest rewards can give bait; exact per-bait pool is not itemized on the Baits page.",
+        "cardSummary": "Neuro Slug is a Legendary bait with preferred luck (90%), universal luck (100%), slower lure speed (-20%)."
+      },
+      "system": {
+        "slug": "neuro-slug",
+        "section": "Legendary",
+        "sortOrder": 32,
+        "image": "/Fisch/Baits/neuro-slug.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stag Beetle",
+        "rarity": "Mythical",
+        "preferredLuck": "120%",
+        "universalLuck": "35%",
+        "lureSpeed": "35%",
+        "resilience": "-5%",
+        "slashChance": "10%",
+        "slashDamage": "2.5% progress per stab",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Stag Beetle is a Mythical bait with preferred luck (120%), universal luck (35%), 10% slash chance."
+      },
+      "system": {
+        "slug": "stag-beetle",
+        "section": "Mythical",
+        "sortOrder": 33,
+        "image": "/Fisch/Baits/stag-beetle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nightmare Larva",
+        "rarity": "Mythical",
+        "preferredLuck": "120%",
+        "universalLuck": "35%",
+        "lureSpeed": "25%",
+        "resilience": "25%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Nightmare Larva is a Mythical bait with preferred luck (120%), universal luck (35%)."
+      },
+      "system": {
+        "slug": "nightmare-larva",
+        "section": "Mythical",
+        "sortOrder": 34,
+        "image": "/Fisch/Baits/nightmare-larva.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate Fish",
+        "rarity": "Mythical",
+        "preferredLuck": "200%",
+        "universalLuck": "150%",
+        "lureSpeed": "20%",
+        "resilience": "15%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Chocolate Fish is a Mythical bait with strong preferred luck (200%), strong universal luck (150%)."
+      },
+      "system": {
+        "slug": "chocolate-fish",
+        "section": "Mythical",
+        "sortOrder": 35,
+        "image": "/Fisch/Baits/chocolate-fish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky",
+        "rarity": "Mythical",
+        "preferredLuck": "200%",
+        "universalLuck": "150%",
+        "lureSpeed": "20%",
+        "resilience": "15%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Lucky is a Mythical bait with strong preferred luck (200%), strong universal luck (150%)."
+      },
+      "system": {
+        "slug": "lucky",
+        "section": "Mythical",
+        "sortOrder": 36,
+        "image": "/Fisch/Baits/lucky.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Moonhaze",
+        "rarity": "Mythical",
+        "preferredLuck": "225%",
+        "universalLuck": "230%",
+        "lureSpeed": "60%",
+        "resilience": "5%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Moonhaze is a Mythical bait with strong preferred luck (225%), strong universal luck (230%), fast lure speed (60%)."
+      },
+      "system": {
+        "slug": "moonhaze",
+        "section": "Mythical",
+        "sortOrder": 37,
+        "image": "/Fisch/Baits/moonhaze.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Umbrella",
+        "rarity": "Mythical",
+        "preferredLuck": "125%",
+        "universalLuck": "50%",
+        "lureSpeed": "50%",
+        "resilience": "30%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Umbrella is a Mythical bait with preferred luck (125%), universal luck (50%), fast lure speed (50%)."
+      },
+      "system": {
+        "slug": "umbrella",
+        "section": "Mythical",
+        "sortOrder": 38,
+        "image": "/Fisch/Baits/umbrella.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragonfly",
+        "rarity": "Exotic",
+        "preferredLuck": "160%",
+        "universalLuck": "50%",
+        "lureSpeed": "25%",
+        "resilience": "-5%",
+        "progressBoost": "+20%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Dragonfly is a Exotic bait with preferred luck (160%), universal luck (50%), +20% progress boost."
+      },
+      "system": {
+        "slug": "dragonfly",
+        "section": "Exotic",
+        "sortOrder": 39,
+        "image": "/Fisch/Baits/dragonfly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Worm",
+        "rarity": "Exotic",
+        "preferredLuck": "200%",
+        "universalLuck": "100%",
+        "lureSpeed": "20%",
+        "resilience": "45%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Golden Worm is a Exotic bait with strong preferred luck (200%), universal luck (100%), high resilience (45%)."
+      },
+      "system": {
+        "slug": "golden-worm",
+        "section": "Exotic",
+        "sortOrder": 40,
+        "image": "/Fisch/Baits/golden-worm.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Luminous Larva",
+        "rarity": "Exotic",
+        "preferredLuck": "200%",
+        "universalLuck": "175%",
+        "lureSpeed": "10%",
+        "resilience": "50%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Luminous Larva is a Exotic bait with strong preferred luck (200%), strong universal luck (175%), high resilience (50%)."
+      },
+      "system": {
+        "slug": "luminous-larva",
+        "section": "Exotic",
+        "sortOrder": 41,
+        "image": "/Fisch/Baits/luminous-larva.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glowworm",
+        "rarity": "Secret",
+        "preferredLuck": "300%",
+        "universalLuck": "100%",
+        "lureSpeed": "15%",
+        "resilience": "5%",
+        "progressBoost": "+50%",
+        "mutation": "Glowy",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Glowworm is a Secret bait with strong preferred luck (300%), universal luck (100%), Glowy mutation."
+      },
+      "system": {
+        "slug": "glowworm",
+        "section": "Secret",
+        "sortOrder": 42,
+        "image": "/Fisch/Baits/glowworm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crawlurion",
+        "rarity": "Secret",
+        "preferredLuck": "25%",
+        "universalLuck": "30%",
+        "lureSpeed": "10%",
+        "resilience": "10%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Crawlurion is a Secret bait with preferred luck (25%), universal luck (30%)."
+      },
+      "system": {
+        "slug": "crawlurion",
+        "section": "Secret",
+        "sortOrder": 43,
+        "image": "/Fisch/Baits/crawlurion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astrolure",
+        "rarity": "Secret",
+        "preferredLuck": "175%",
+        "universalLuck": "60%",
+        "lureSpeed": "90%",
+        "resilience": "60%",
+        "xpBoost": "1x",
+        "mutation": "Galactic",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Astrolure is a Secret bait with preferred luck (175%), universal luck (60%), fast lure speed (90%)."
+      },
+      "system": {
+        "slug": "astrolure",
+        "section": "Secret",
+        "sortOrder": 44,
+        "image": "/Fisch/Baits/astrolure.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nullbit",
+        "rarity": "Secret",
+        "preferredLuck": "120%",
+        "universalLuck": "120%",
+        "lureSpeed": "60%",
+        "resilience": "-20%",
+        "xpBoost": "1x",
+        "mutation": "Nullified",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Nullbit is a Secret bait with preferred luck (120%), universal luck (120%), fast lure speed (60%)."
+      },
+      "system": {
+        "slug": "nullbit",
+        "section": "Secret",
+        "sortOrder": 45,
+        "image": "/Fisch/Baits/nullbit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snare",
+        "rarity": "Secret",
+        "preferredLuck": "125%",
+        "universalLuck": "-10%",
+        "lureSpeed": "80%",
+        "resilience": "-20%",
+        "xpBoost": "1x",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Snare is a Secret bait with preferred luck (125%), fast lure speed (80%), 1x XP boost."
+      },
+      "system": {
+        "slug": "snare",
+        "section": "Secret",
+        "sortOrder": 46,
+        "image": "/Fisch/Baits/snare.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starlight Worm",
+        "rarity": "Secret",
+        "preferredLuck": "300%",
+        "universalLuck": "100%",
+        "lureSpeed": "30%",
+        "resilience": "15%",
+        "progressBoost": "+20%",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Starlight Worm is a Secret bait with strong preferred luck (300%), universal luck (100%), +20% progress boost."
+      },
+      "system": {
+        "slug": "starlight-worm",
+        "section": "Secret",
+        "sortOrder": 47,
+        "image": "/Fisch/Baits/starlight-worm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gourd Bites",
+        "rarity": "Limited",
+        "preferredLuck": "100%",
+        "lureSpeed": "10%",
+        "resilience": "35%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Gourd Bites is a Limited bait with preferred luck (100%)."
+      },
+      "system": {
+        "slug": "gourd-bites",
+        "section": "Limited",
+        "sortOrder": 48,
+        "image": "/Fisch/Baits/gourd-bites.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Pieces",
+        "rarity": "Limited",
+        "preferredLuck": "120%",
+        "lureSpeed": "5%",
+        "resilience": "50%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Pumpkin Pieces is a Limited bait with preferred luck (120%), high resilience (50%)."
+      },
+      "system": {
+        "slug": "pumpkin-pieces",
+        "section": "Limited",
+        "sortOrder": 49,
+        "image": "/Fisch/Baits/pumpkin-pieces.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cranberry Cluster",
+        "rarity": "Limited",
+        "preferredLuck": "70%",
+        "lureSpeed": "60%",
+        "resilience": "-5%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Cranberry Cluster is a Limited bait with preferred luck (70%), fast lure speed (60%)."
+      },
+      "system": {
+        "slug": "cranberry-cluster",
+        "section": "Limited",
+        "sortOrder": 50,
+        "image": "/Fisch/Baits/cranberry-cluster.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tryhard Worm",
+        "rarity": "Limited",
+        "preferredLuck": "5000%",
+        "lureSpeed": "45%",
+        "resilience": "30%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Tryhard Worm is a Limited bait with strong preferred luck (5000%)."
+      },
+      "system": {
+        "slug": "tryhard-worm",
+        "section": "Limited",
+        "sortOrder": 51,
+        "image": "/Fisch/Baits/tryhard-worm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteor",
+        "rarity": "Limited",
+        "preferredLuck": "55%",
+        "universalLuck": "65%",
+        "lureSpeed": "10%",
+        "resilience": "100%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Meteor is a Limited bait with preferred luck (55%), universal luck (65%), high resilience (100%)."
+      },
+      "system": {
+        "slug": "meteor",
+        "section": "Limited",
+        "sortOrder": 52,
+        "image": "/Fisch/Baits/meteor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beach Ball",
+        "rarity": "Limited",
+        "preferredLuck": "5%",
+        "universalLuck": "5%",
+        "lureSpeed": "150%",
+        "resilience": "0%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Beach Ball is a Limited bait with preferred luck (5%), universal luck (5%), fast lure speed (150%)."
+      },
+      "system": {
+        "slug": "beach-ball",
+        "section": "Limited",
+        "sortOrder": 53,
+        "image": "/Fisch/Baits/beach-ball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beached Pearl",
+        "rarity": "Limited",
+        "preferredLuck": "250%",
+        "universalLuck": "300%",
+        "lureSpeed": "95%",
+        "resilience": "30%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Beached Pearl is a Limited bait with strong preferred luck (250%), strong universal luck (300%), fast lure speed (95%)."
+      },
+      "system": {
+        "slug": "beached-pearl",
+        "section": "Limited",
+        "sortOrder": 54,
+        "image": "/Fisch/Baits/beached-pearl.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stud Bait",
+        "rarity": "Limited",
+        "preferredLuck": "150%",
+        "universalLuck": "40%",
+        "lureSpeed": "50%",
+        "resilience": "20%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Stud Bait is a Limited bait with preferred luck (150%), universal luck (40%), fast lure speed (50%)."
+      },
+      "system": {
+        "slug": "stud-bait",
+        "section": "Limited",
+        "sortOrder": 55,
+        "image": "/Fisch/Baits/stud-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Colossal Ink Bait",
+        "rarity": "Limited",
+        "preferredLuck": "150%",
+        "universalLuck": "150%",
+        "lureSpeed": "5%",
+        "resilience": "40%",
+        "mutation": "Colossal Ink",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Colossal Ink Bait is a Limited bait with preferred luck (150%), strong universal luck (150%), high resilience (40%)."
+      },
+      "system": {
+        "slug": "colossal-ink-bait",
+        "section": "Limited",
+        "sortOrder": 56,
+        "image": "/Fisch/Baits/colossal-ink-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hourglass Bait",
+        "rarity": "Limited",
+        "preferredLuck": "150%",
+        "universalLuck": "150%",
+        "lureSpeed": "5%",
+        "resilience": "40%",
+        "xpBoost": "1x",
+        "mutation": "Neon",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Hourglass Bait is a Limited bait with preferred luck (150%), strong universal luck (150%), high resilience (40%)."
+      },
+      "system": {
+        "slug": "hourglass-bait",
+        "section": "Limited",
+        "sortOrder": 57,
+        "image": "/Fisch/Baits/hourglass-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Shrimp Bait",
+        "rarity": "Limited",
+        "preferredLuck": "120%",
+        "universalLuck": "90%",
+        "lureSpeed": "15%",
+        "resilience": "10%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Golden Shrimp Bait is a Limited bait with preferred luck (120%), universal luck (90%)."
+      },
+      "system": {
+        "slug": "golden-shrimp-bait",
+        "section": "Limited",
+        "sortOrder": 58,
+        "image": "/Fisch/Baits/golden-shrimp-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whale Bait",
+        "rarity": "Limited",
+        "preferredLuck": "180%",
+        "universalLuck": "20%",
+        "lureSpeed": "-5%",
+        "resilience": "30%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Whale Bait is a Limited bait with preferred luck (180%), universal luck (20%), slower lure speed (-5%)."
+      },
+      "system": {
+        "slug": "whale-bait",
+        "section": "Limited",
+        "sortOrder": 59,
+        "image": "/Fisch/Baits/whale-bait.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gobstopper",
+        "rarity": "Limited",
+        "preferredLuck": "500%",
+        "universalLuck": "500%",
+        "lureSpeed": "-50%",
+        "resilience": "100%",
+        "obtainment": "Limited/event bait; current obtainment is not itemized on the Baits page.",
+        "cardSummary": "Gobstopper is a Limited bait with strong preferred luck (500%), strong universal luck (500%), slower lure speed (-50%)."
+      },
+      "system": {
+        "slug": "gobstopper",
+        "section": "Limited",
+        "sortOrder": 60,
+        "image": "/Fisch/Baits/gobstopper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Star",
+        "rarity": "Special",
+        "preferredLuck": "120%",
+        "universalLuck": "120%",
+        "lureSpeed": "100%",
+        "resilience": "-10%",
+        "xpBoost": "1x",
+        "mutation": "Galaxy",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Star is a Special bait with preferred luck (120%), universal luck (120%), fast lure speed (100%)."
+      },
+      "system": {
+        "slug": "star",
+        "section": "Special",
+        "sortOrder": 61,
+        "image": "/Fisch/Baits/star.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Coin",
+        "rarity": "Special",
+        "preferredLuck": "1000%",
+        "universalLuck": "1000%",
+        "lureSpeed": "0%",
+        "resilience": "0%",
+        "xpBoost": "1x",
+        "mutation": "Radiant",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Golden Coin is a Special bait with strong preferred luck (1000%), strong universal luck (1000%), Radiant mutation."
+      },
+      "system": {
+        "slug": "golden-coin",
+        "section": "Special",
+        "sortOrder": 62,
+        "image": "/Fisch/Baits/golden-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Singularity",
+        "rarity": "Special",
+        "preferredLuck": "0%",
+        "universalLuck": "0%",
+        "lureSpeed": "-20%",
+        "resilience": "150%",
+        "xpBoost": "1x",
+        "mutation": "Surreal",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Singularity is a Special bait with slower lure speed (-20%), high resilience (150%), Surreal mutation."
+      },
+      "system": {
+        "slug": "singularity",
+        "section": "Special",
+        "sortOrder": 63,
+        "image": "/Fisch/Baits/singularity.png"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO",
+        "rarity": "Special",
+        "preferredLuck": "110%",
+        "universalLuck": "177%",
+        "lureSpeed": "77%",
+        "resilience": "70%",
+        "xpBoost": "1x",
+        "mutation": "Alien",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "UFO is a Special bait with preferred luck (110%), strong universal luck (177%), fast lure speed (77%)."
+      },
+      "system": {
+        "slug": "ufo",
+        "section": "Special",
+        "sortOrder": 64,
+        "image": "/Fisch/Baits/ufo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Taco",
+        "rarity": "Special",
+        "preferredLuck": "100%",
+        "universalLuck": "100%",
+        "lureSpeed": "100%",
+        "resilience": "-20%",
+        "mutation": "Spicy",
+        "obtainment": "Special or high-tier bait; exact obtainment is not itemized on the Baits page.",
+        "cardSummary": "Taco is a Special bait with preferred luck (100%), universal luck (100%), fast lure speed (100%)."
+      },
+      "system": {
+        "slug": "taco",
+        "section": "Special",
+        "sortOrder": 65,
+        "image": "/Fisch/Baits/taco.png"
+      }
     }
   ]
 }

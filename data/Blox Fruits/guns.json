@@ -1,375 +1,298 @@
 {
   "meta": {
-    "title": "Blox Fruits guns data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Guns",
-        "url": "https://blox-fruits.fandom.com/wiki/Guns",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "guns",
+    "route": "/wiki/blox-fruits/guns",
+    "catalogCode": "blox-fruits-guns",
+    "itemFields": [
       "rarity",
       "type",
       "obtainment",
       "upgrading",
       "sea",
-      "wikiUrl"
-    ]
+      "money",
+      "price"
+    ],
+    "columns": [
+      "rarity",
+      "type",
+      "obtainment",
+      "upgrading",
+      "sea",
+      "money",
+      "price"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Legendary",
+        "Mythical"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "type",
+        "obtainment",
+        "upgrading",
+        "sea",
+        "money"
+      ],
+      "tableFields": [
+        "rarity",
+        "type",
+        "obtainment",
+        "upgrading",
+        "sea",
+        "money",
+        "price"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Slingshot",
-      "slug": "slingshot",
-      "rarity": "Common",
-      "type": "Gun",
-      "sea": "1",
-      "money": "5,000",
-      "robux": null,
-      "source": null,
-      "price": "5,000",
-      "requirements": null,
-      "obtainment": "5,000 from Weapon Dealer",
-      "upgrading": "5 5",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Slingshot",
+        "rarity": "Common",
+        "type": "Gun",
         "obtainment": "5,000 from Weapon Dealer",
-        "upgrading": "5 5"
+        "upgrading": "5 5",
+        "sea": "1",
+        "money": "5,000",
+        "price": "5,000"
       },
-      "rawText": "Common GunObtainment 5,000 from Weapon DealerUpgrading 5 5",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Slingshot",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/slingshot.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3f/Slingshot.png/revision/latest/scale-to-width-down/125?cb=20241223023755"
+      "system": {
+        "slug": "slingshot",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Guns/slingshot.webp"
+      }
     },
     {
-      "name": "Flintlock",
-      "slug": "flintlock",
-      "rarity": "Uncommon",
-      "type": "Gun",
-      "sea": "1",
-      "money": "10,500",
-      "robux": null,
-      "source": null,
-      "price": "10,500",
-      "requirements": null,
-      "obtainment": "10,500 from Weapon Dealer",
-      "upgrading": "5 5",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Flintlock",
+        "rarity": "Uncommon",
+        "type": "Gun",
         "obtainment": "10,500 from Weapon Dealer",
-        "upgrading": "5 5"
+        "upgrading": "5 5",
+        "sea": "1",
+        "money": "10,500",
+        "price": "10,500"
       },
-      "rawText": "Uncommon GunObtainment 10,500 from Weapon DealerUpgrading 5 5",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Flintlock",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/flintlock.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5b/Flintlock.png/revision/latest/scale-to-width-down/125?cb=20241223023624"
+      "system": {
+        "slug": "flintlock",
+        "section": "Uncommon",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Guns/flintlock.webp"
+      }
     },
     {
-      "name": "Musket",
-      "slug": "musket",
-      "rarity": "Uncommon",
-      "type": "Gun",
-      "sea": "1",
-      "money": "8,000",
-      "robux": null,
-      "source": null,
-      "price": "8,000",
-      "requirements": null,
-      "obtainment": "8,000 from Weapon Dealer",
-      "upgrading": "5 5",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Musket",
+        "rarity": "Uncommon",
+        "type": "Gun",
         "obtainment": "8,000 from Weapon Dealer",
-        "upgrading": "5 5"
+        "upgrading": "5 5",
+        "sea": "1",
+        "money": "8,000",
+        "price": "8,000"
       },
-      "rawText": "Uncommon GunObtainment 8,000 from Weapon DealerUpgrading 5 5",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Musket",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/musket.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2b/Musket.png/revision/latest/scale-to-width-down/125?cb=20241223023710"
+      "system": {
+        "slug": "musket",
+        "section": "Uncommon",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Guns/musket.webp"
+      }
     },
     {
-      "name": "Acidum Rifle",
-      "slug": "acidum-rifle",
-      "rarity": "Rare",
-      "type": "Gun",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Factory Raid",
-      "upgrading": "8 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Acidum Rifle",
+        "rarity": "Rare",
+        "type": "Gun",
         "obtainment": "Defeat Factory Raid",
-        "upgrading": "8 10"
+        "upgrading": "8 10",
+        "sea": "2"
       },
-      "rawText": "Rare GunObtainment Defeat Factory RaidUpgrading 8 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Acidum_Rifle",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/acidum-rifle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c2/Acidum_Rifle.png/revision/latest/scale-to-width-down/125?cb=20241223023342"
+      "system": {
+        "slug": "acidum-rifle",
+        "section": "Rare",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Guns/acidum-rifle.webp"
+      }
     },
     {
-      "name": "Bizarre Revolver",
-      "slug": "bizarre-revolver",
-      "rarity": "Rare",
-      "type": "Gun",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "25 from El Rodolfo",
-      "upgrading": "20 10 5",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Bizarre Revolver",
+        "rarity": "Rare",
+        "type": "Gun",
         "obtainment": "25 from El Rodolfo",
-        "upgrading": "20 10 5"
+        "upgrading": "20 10 5",
+        "sea": "2"
       },
-      "rawText": "Rare GunObtainment 25 from El RodolfoUpgrading 20 10 5",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bizarre_Revolver",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/bizarre-revolver.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4c/Bizarre_Revolver.png/revision/latest/scale-to-width-down/125?cb=20241223023523"
+      "system": {
+        "slug": "bizarre-revolver",
+        "section": "Rare",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Guns/bizarre-revolver.webp"
+      }
     },
     {
-      "name": "Cannon",
-      "slug": "cannon",
-      "rarity": "Rare",
-      "type": "Gun",
-      "sea": "1",
-      "money": "100,000",
-      "robux": null,
-      "source": null,
-      "price": "100,000",
-      "requirements": null,
-      "obtainment": "100,000 from Advanced Weapon Dealer",
-      "upgrading": "5 5 5",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Cannon",
+        "rarity": "Rare",
+        "type": "Gun",
         "obtainment": "100,000 from Advanced Weapon Dealer",
-        "upgrading": "5 5 5"
+        "upgrading": "5 5 5",
+        "sea": "1",
+        "money": "100,000",
+        "price": "100,000"
       },
-      "rawText": "Rare GunObtainment 100,000 from Advanced Weapon DealerUpgrading 5 5 5",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cannon",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/cannon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a6/Cannon.png/revision/latest/scale-to-width-down/125?cb=20241223023539"
+      "system": {
+        "slug": "cannon",
+        "section": "Rare",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Guns/cannon.webp"
+      }
     },
     {
-      "name": "Dual Flintlock",
-      "slug": "dual-flintlock",
-      "rarity": "Rare",
-      "type": "Gun",
-      "sea": "1",
-      "money": "65,000",
-      "robux": null,
-      "source": null,
-      "price": "65,000",
-      "requirements": null,
-      "obtainment": "65,000 from Advanced Weapon Dealer",
-      "upgrading": "10 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dual Flintlock",
+        "rarity": "Rare",
+        "type": "Gun",
         "obtainment": "65,000 from Advanced Weapon Dealer",
-        "upgrading": "10 10"
+        "upgrading": "10 10",
+        "sea": "1",
+        "money": "65,000",
+        "price": "65,000"
       },
-      "rawText": "Rare GunObtainment 65,000 from Advanced Weapon DealerUpgrading 10 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dual_Flintlock",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/dual-flintlock.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ee/Dual_Flintlock.png/revision/latest/scale-to-width-down/125?cb=20241223023609"
+      "system": {
+        "slug": "dual-flintlock",
+        "section": "Rare",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Guns/dual-flintlock.webp"
+      }
     },
     {
-      "name": "Magma Blaster",
-      "slug": "magma-blaster",
-      "rarity": "Rare",
-      "type": "Gun",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Magma Admiral",
-      "upgrading": "10 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Magma Blaster",
+        "rarity": "Rare",
+        "type": "Gun",
         "obtainment": "Defeat Magma Admiral",
-        "upgrading": "10 10"
+        "upgrading": "10 10",
+        "sea": "1"
       },
-      "rawText": "Rare GunObtainment Defeat Magma AdmiralUpgrading 10 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Magma_Blaster",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/magma-blaster.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/10/Magma_Blaster.png/revision/latest/scale-to-width-down/125?cb=20241223023655"
+      "system": {
+        "slug": "magma-blaster",
+        "section": "Rare",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Guns/magma-blaster.webp"
+      }
     },
     {
-      "name": "Refined Slingshot",
-      "slug": "refined-slingshot",
-      "rarity": "Rare",
-      "type": "Gun",
-      "sea": "1",
-      "money": "30,000",
-      "robux": null,
-      "source": null,
-      "price": "30,000",
-      "requirements": null,
-      "obtainment": "30,000 from Advanced Weapon Dealer",
-      "upgrading": "10 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Refined Slingshot",
+        "rarity": "Rare",
+        "type": "Gun",
         "obtainment": "30,000 from Advanced Weapon Dealer",
-        "upgrading": "10 10"
+        "upgrading": "10 10",
+        "sea": "1",
+        "money": "30,000",
+        "price": "30,000"
       },
-      "rawText": "Rare GunObtainment 30,000 from Advanced Weapon DealerUpgrading 10 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Refined_Slingshot",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/refined-slingshot.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8b/Refined_Slingshot.png/revision/latest/scale-to-width-down/125?cb=20241223053330"
+      "system": {
+        "slug": "refined-slingshot",
+        "section": "Rare",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Guns/refined-slingshot.webp"
+      }
     },
     {
-      "name": "Bazooka",
-      "slug": "bazooka",
-      "rarity": "Legendary",
-      "type": "Gun",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Wysper",
-      "upgrading": "1 15 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Bazooka",
+        "rarity": "Legendary",
+        "type": "Gun",
         "obtainment": "Defeat Wysper",
-        "upgrading": "1 15 10"
+        "upgrading": "1 15 10",
+        "sea": "1"
       },
-      "rawText": "Legendary GunObtainment Defeat WysperUpgrading 1 15 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bazooka",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/bazooka.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3f/Bazooka.png/revision/latest/scale-to-width-down/125?cb=20241223023357"
+      "system": {
+        "slug": "bazooka",
+        "section": "Legendary",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Guns/bazooka.webp"
+      }
     },
     {
-      "name": "Dragonstorm",
-      "slug": "dragonstorm",
-      "rarity": "Legendary",
-      "type": "Gun",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "2 10 5 30 from Dragon Hunter",
-      "upgrading": "1 15 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dragonstorm",
+        "rarity": "Legendary",
+        "type": "Gun",
         "obtainment": "2 10 5 30 from Dragon Hunter",
-        "upgrading": "1 15 10"
+        "upgrading": "1 15 10",
+        "sea": "3"
       },
-      "rawText": "Legendary GunObtainment 2 10 5 30 from Dragon HunterUpgrading 1 15 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragonstorm",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/dragonstorm.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/56/Dragonstorm.png/revision/latest/scale-to-width-down/125?cb=20241223023554"
+      "system": {
+        "slug": "dragonstorm",
+        "section": "Legendary",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Guns/dragonstorm.webp"
+      }
     },
     {
-      "name": "Kabucha",
-      "slug": "kabucha",
-      "rarity": "Legendary",
-      "type": "Gun",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "1,500 from The Strongest God",
-      "upgrading": "15 3 50",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Kabucha",
+        "rarity": "Legendary",
+        "type": "Gun",
         "obtainment": "1,500 from The Strongest God",
-        "upgrading": "15 3 50"
+        "upgrading": "15 3 50",
+        "sea": "2"
       },
-      "rawText": "Legendary GunObtainment 1,500 from The Strongest GodUpgrading 15 3 50",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kabucha",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/kabucha.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/bb/Kabucha.png/revision/latest/scale-to-width-down/125?cb=20241223023639"
+      "system": {
+        "slug": "kabucha",
+        "section": "Legendary",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Guns/kabucha.webp"
+      }
     },
     {
-      "name": "Venom Bow",
-      "slug": "venom-bow",
-      "rarity": "Legendary",
-      "type": "Gun",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "Defeat Hydra Leader",
-      "upgrading": "1 10 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Venom Bow",
+        "rarity": "Legendary",
+        "type": "Gun",
         "obtainment": "Defeat Hydra Leader",
-        "upgrading": "1 10 10"
+        "upgrading": "1 10 10",
+        "sea": "3"
       },
-      "rawText": "Legendary GunObtainment Defeat Hydra LeaderUpgrading 1 10 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Venom_Bow",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/venom-bow.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f9/Venom_Bow.png/revision/latest/scale-to-width-down/125?cb=20241223023810"
+      "system": {
+        "slug": "venom-bow",
+        "section": "Legendary",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Guns/venom-bow.webp"
+      }
     },
     {
-      "name": "Skull Guitar",
-      "slug": "skull-guitar",
-      "rarity": "Mythical",
-      "type": "Gun",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": "1 250 500 5,000 from Weird Machine",
-      "upgrading": "1 15 10",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Skull Guitar",
+        "rarity": "Mythical",
+        "type": "Gun",
         "obtainment": "1 250 500 5,000 from Weird Machine",
-        "upgrading": "1 15 10"
+        "upgrading": "1 15 10",
+        "sea": "3"
       },
-      "rawText": "Mythical GunObtainment 1 250 500 5,000 from Weird MachineUpgrading 1 15 10",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skull_Guitar",
-      "sourcePage": "Guns",
-      "image": "/Blox%20Fruits/Guns/skull-guitar.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e3/Skull_Guitar.png/revision/latest/scale-to-width-down/125?cb=20241223023740"
+      "system": {
+        "slug": "skull-guitar",
+        "section": "Mythical",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Guns/skull-guitar.webp"
+      }
     }
   ]
 }

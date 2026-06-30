@@ -1,177 +1,280 @@
 {
   "meta": {
-    "title": "Grow a Garden 2 crates data",
-    "updatedAt": "2026-06-13",
-    "sources": [
-      {
-        "label": "Beebom - All Grow a Garden 2 Crates Guide",
-        "url": "https://beebom.com/grow-a-garden-2-crates/",
-        "accessed": "2026-06-13"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Grow a Garden 2",
+    "gameSlug": "grow-a-garden-2",
+    "collection": "crates",
+    "route": "/wiki/grow-a-garden-2/crates",
+    "catalogCode": "grow-a-garden-2-crates",
+    "itemFields": [
       "rarity",
       "price",
       "contents",
       "whereToGet",
       "role"
-    ]
+    ],
+    "columns": [
+      "rarity",
+      "price",
+      "contents",
+      "whereToGet",
+      "role"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Epic",
+        "Legendary",
+        "Mythic"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "price",
+        "contents",
+        "whereToGet",
+        "role"
+      ],
+      "tableFields": [
+        "rarity",
+        "price",
+        "contents",
+        "whereToGet",
+        "role"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "ladder-crate",
-      "name": "Ladder Crate",
-      "rarity": "Common",
-      "price": "30K Sheckles",
-      "contents": "Ladder, Dark Oak Ladder, Gold Ladder, Rainbow Ladder",
-      "role": "Plot building",
-      "image": "/Grow%20a%20Garden%202/Crates/ladder-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Ladder-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Ladder Crate",
+        "rarity": "Common",
+        "price": "30K Sheckles",
+        "contents": "Ladder, Dark Oak Ladder, Gold Ladder, Rainbow Ladder",
+        "whereToGet": "Props Shop",
+        "role": "Plot building"
+      },
+      "system": {
+        "slug": "ladder-crate",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden%202/Crates/ladder-crate.webp"
+      }
     },
     {
-      "id": "bench-crate",
-      "name": "Bench Crate",
-      "rarity": "Uncommon",
-      "price": "60K Sheckles",
-      "contents": "Normal Bench, Corner Bench, White Bench, Dark Bench, Log Bench, Flower Bench",
-      "role": "Decoration",
-      "image": "/Grow%20a%20Garden%202/Crates/bench-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Bench-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Bench Crate",
+        "rarity": "Uncommon",
+        "price": "60K Sheckles",
+        "contents": "Normal Bench, Corner Bench, White Bench, Dark Bench, Log Bench, Flower Bench",
+        "whereToGet": "Props Shop",
+        "role": "Decoration"
+      },
+      "system": {
+        "slug": "bench-crate",
+        "section": "Uncommon",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden%202/Crates/bench-crate.webp"
+      }
     },
     {
-      "id": "light-crate",
-      "name": "Light Crate",
-      "rarity": "Uncommon",
-      "price": "90K Sheckles",
-      "contents": "Moss Light, Rope Lights, Small Hanging Rope Light, Bonfire, Star Light",
-      "role": "Lighting/decoration",
-      "image": "/Grow%20a%20Garden%202/Crates/light-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Light-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Light Crate",
+        "rarity": "Uncommon",
+        "price": "90K Sheckles",
+        "contents": "Moss Light, Rope Lights, Small Hanging Rope Light, Bonfire, Star Light",
+        "whereToGet": "Props Shop",
+        "role": "Lighting/decoration"
+      },
+      "system": {
+        "slug": "light-crate",
+        "section": "Uncommon",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden%202/Crates/light-crate.webp"
+      }
     },
     {
-      "id": "sign-crate",
-      "name": "Sign Crate",
-      "rarity": "Rare",
-      "price": "150K Sheckles",
-      "contents": "Sign, Gold Sign, Rainbow Sign, Big Sign",
-      "role": "Decoration",
-      "image": "/Grow%20a%20Garden%202/Crates/sign-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Sign-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Sign Crate",
+        "rarity": "Rare",
+        "price": "150K Sheckles",
+        "contents": "Sign, Gold Sign, Rainbow Sign, Big Sign",
+        "whereToGet": "Props Shop",
+        "role": "Decoration"
+      },
+      "system": {
+        "slug": "sign-crate",
+        "section": "Rare",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden%202/Crates/sign-crate.webp"
+      }
     },
     {
-      "id": "arch-crate",
-      "name": "Arch Crate",
-      "rarity": "Rare",
-      "price": "200K Sheckles",
-      "contents": "Wood Arch, White Arch, Small Arch, Circle Arch",
-      "role": "Plot building",
-      "image": "/Grow%20a%20Garden%202/Crates/arch-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Arch-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Arch Crate",
+        "rarity": "Rare",
+        "price": "200K Sheckles",
+        "contents": "Wood Arch, White Arch, Small Arch, Circle Arch",
+        "whereToGet": "Props Shop",
+        "role": "Plot building"
+      },
+      "system": {
+        "slug": "arch-crate",
+        "section": "Rare",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden%202/Crates/arch-crate.webp"
+      }
     },
     {
-      "id": "roleplay-crate",
-      "name": "Roleplay Crate",
-      "rarity": "Rare",
-      "price": "300K Sheckles",
-      "contents": "Beach Towel, Bookcase, Carpet, Clock, Wood Floor, Wood Wall, Water Fountain",
-      "role": "Roleplay/decoration",
-      "image": "/Grow%20a%20Garden%202/Crates/roleplay-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Roleplay-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Roleplay Crate",
+        "rarity": "Rare",
+        "price": "300K Sheckles",
+        "contents": "Beach Towel, Bookcase, Carpet, Clock, Wood Floor, Wood Wall, Water Fountain",
+        "whereToGet": "Props Shop",
+        "role": "Roleplay/decoration"
+      },
+      "system": {
+        "slug": "roleplay-crate",
+        "section": "Rare",
+        "sortOrder": 6,
+        "image": "/Grow%20a%20Garden%202/Crates/roleplay-crate.webp"
+      }
     },
     {
-      "id": "bridge-crate",
-      "name": "Bridge Crate",
-      "rarity": "Epic",
-      "price": "700K Sheckles",
-      "contents": "Big Bridge, Red Bridge, Small Bridge, White Bridge",
-      "role": "Plot building",
-      "image": "/Grow%20a%20Garden%202/Crates/bridge-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Bridge-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Bridge Crate",
+        "rarity": "Epic",
+        "price": "700K Sheckles",
+        "contents": "Big Bridge, Red Bridge, Small Bridge, White Bridge",
+        "whereToGet": "Props Shop",
+        "role": "Plot building"
+      },
+      "system": {
+        "slug": "bridge-crate",
+        "section": "Epic",
+        "sortOrder": 7,
+        "image": "/Grow%20a%20Garden%202/Crates/bridge-crate.webp"
+      }
     },
     {
-      "id": "spring-crate",
-      "name": "Spring Crate",
-      "rarity": "Epic",
-      "price": "Unknown",
-      "contents": "Uncommon Spring, Rare Spring, Mythic Spring, Super Spring",
-      "role": "Interactive utility",
-      "image": "/Grow%20a%20Garden%202/Crates/spring-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Spring-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Spring Crate",
+        "rarity": "Epic",
+        "price": "Unknown",
+        "contents": "Uncommon Spring, Rare Spring, Mythic Spring, Super Spring",
+        "whereToGet": "Props Shop",
+        "role": "Interactive utility"
+      },
+      "system": {
+        "slug": "spring-crate",
+        "section": "Epic",
+        "sortOrder": 8,
+        "image": "/Grow%20a%20Garden%202/Crates/spring-crate.webp"
+      }
     },
     {
-      "id": "seesaw-crate",
-      "name": "Seesaw Crate",
-      "rarity": "Epic",
-      "price": "Unknown",
-      "contents": "Wood Seesaw, Gold Seesaw, Rainbow Seesaw",
-      "role": "Interactive decoration",
-      "image": "/Grow%20a%20Garden%202/Crates/seesaw-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Seesaw-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Seesaw Crate",
+        "rarity": "Epic",
+        "price": "Unknown",
+        "contents": "Wood Seesaw, Gold Seesaw, Rainbow Seesaw",
+        "whereToGet": "Props Shop",
+        "role": "Interactive decoration"
+      },
+      "system": {
+        "slug": "seesaw-crate",
+        "section": "Epic",
+        "sortOrder": 9,
+        "image": "/Grow%20a%20Garden%202/Crates/seesaw-crate.webp"
+      }
     },
     {
-      "id": "conveyor-crate",
-      "name": "Conveyor Crate",
-      "rarity": "Epic",
-      "price": "Unknown",
-      "contents": "Common Conveyor, Uncommon Conveyor, Rare Conveyor, Epic Conveyor, Super Conveyor",
-      "role": "Interactive utility",
-      "image": "/Grow%20a%20Garden%202/Crates/conveyor-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Conveyor-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Conveyor Crate",
+        "rarity": "Epic",
+        "price": "Unknown",
+        "contents": "Common Conveyor, Uncommon Conveyor, Rare Conveyor, Epic Conveyor, Super Conveyor",
+        "whereToGet": "Props Shop",
+        "role": "Interactive utility"
+      },
+      "system": {
+        "slug": "conveyor-crate",
+        "section": "Epic",
+        "sortOrder": 10,
+        "image": "/Grow%20a%20Garden%202/Crates/conveyor-crate.webp"
+      }
     },
     {
-      "id": "owner-door-crate",
-      "name": "Owner Door Crate",
-      "rarity": "Legendary",
-      "price": "1.5M Sheckles",
-      "contents": "Oak Owner Door, Dark Oak Owner Door, Gold Owner Door, Rainbow Owner Door",
-      "role": "Defense/access control",
-      "image": "/Grow%20a%20Garden%202/Crates/owner-door-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Owner-Door-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Owner Door Crate",
+        "rarity": "Legendary",
+        "price": "1.5M Sheckles",
+        "contents": "Oak Owner Door, Dark Oak Owner Door, Gold Owner Door, Rainbow Owner Door",
+        "whereToGet": "Props Shop",
+        "role": "Defense/access control"
+      },
+      "system": {
+        "slug": "owner-door-crate",
+        "section": "Legendary",
+        "sortOrder": 11,
+        "image": "/Grow%20a%20Garden%202/Crates/owner-door-crate.webp"
+      }
     },
     {
-      "id": "bear-trap-crate",
-      "name": "Bear Trap Crate",
-      "rarity": "Legendary",
-      "price": "Unknown",
-      "contents": "Common Bear Trap, Gold Bear Trap, Rainbow Bear Trap",
-      "role": "Defense/trap",
-      "image": "/Grow%20a%20Garden%202/Crates/bear-trap-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Bear-Trap-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Bear Trap Crate",
+        "rarity": "Legendary",
+        "price": "Unknown",
+        "contents": "Common Bear Trap, Gold Bear Trap, Rainbow Bear Trap",
+        "whereToGet": "Props Shop",
+        "role": "Defense/trap"
+      },
+      "system": {
+        "slug": "bear-trap-crate",
+        "section": "Legendary",
+        "sortOrder": 12,
+        "image": "/Grow%20a%20Garden%202/Crates/bear-trap-crate.webp"
+      }
     },
     {
-      "id": "fence-crate",
-      "name": "Fence Crate",
-      "rarity": "Legendary",
-      "price": "Unknown",
-      "contents": "Wood, Stone, Stick, Bamboo, White, Flower, Light, Lantern, Star, Cupid, Spike, Pole, Futuristic, Rainbow fences",
-      "role": "Defense/barrier",
-      "image": "/Grow%20a%20Garden%202/Crates/fence-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Fence-Crate.jpg",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Fence Crate",
+        "rarity": "Legendary",
+        "price": "Unknown",
+        "contents": "Wood, Stone, Stick, Bamboo, White, Flower, Light, Lantern, Star, Cupid, Spike, Pole, Futuristic, Rainbow fences",
+        "whereToGet": "Props Shop",
+        "role": "Defense/barrier"
+      },
+      "system": {
+        "slug": "fence-crate",
+        "section": "Legendary",
+        "sortOrder": 13,
+        "image": "/Grow%20a%20Garden%202/Crates/fence-crate.webp"
+      }
     },
     {
-      "id": "teleporter-pad-crate",
-      "name": "Teleporter Pad Crate",
-      "rarity": "Mythic",
-      "price": "Unknown",
-      "contents": "Teleport Pad, Big Teleport Pad, Huge Teleport Pad",
-      "role": "Movement/utility",
-      "image": "/Grow%20a%20Garden%202/Crates/teleporter-pad-crate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_404519.png?w=162&quality=75",
-      "whereToGet": "Props Shop"
+      "item": {
+        "name": "Teleporter Pad Crate",
+        "rarity": "Mythic",
+        "price": "Unknown",
+        "contents": "Teleport Pad, Big Teleport Pad, Huge Teleport Pad",
+        "whereToGet": "Props Shop",
+        "role": "Movement/utility"
+      },
+      "system": {
+        "slug": "teleporter-pad-crate",
+        "section": "Mythic",
+        "sortOrder": 14,
+        "image": "/Grow%20a%20Garden%202/Crates/teleporter-pad-crate.webp"
+      }
     }
   ]
 }

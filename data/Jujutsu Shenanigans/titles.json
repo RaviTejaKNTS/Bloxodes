@@ -1,343 +1,341 @@
 {
   "meta": {
-    "title": "Jujutsu Shenanigans titles data",
-    "updatedAt": "2026-06-01",
-    "sources": [
-      {
-        "label": "Jujutsu Shenanigans Wiki - Titles",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-        "accessed": "2026-06-01"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Titles API revision",
-        "url": "https://jujutsu-shenanigans.fandom.com/api.php?action=query&prop=revisions&titles=Titles&rvprop=timestamp%7Cuser%7Ccomment%7Ccontent&rvslots=main&format=json",
-        "accessed": "2026-06-01"
-      }
-    ],
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Jujutsu Shenanigans",
+    "gameSlug": "jujutsu-shenanigans",
+    "collection": "titles",
+    "route": "/wiki/jujutsu-shenanigans/titles",
+    "catalogCode": "jujutsu-shenanigans-titles",
+    "itemFields": [
       "titleType",
       "requirement",
       "availability",
       "whoCanUse",
-      "displayBehavior",
-      "sourceNote",
-      "sourcePage",
-      "wikiUrl",
-      "imageStatus",
-      "verificationNote",
-      "sortOrder"
-    ]
+      "displayBehavior"
+    ],
+    "columns": [
+      "titleType",
+      "requirement",
+      "availability",
+      "whoCanUse",
+      "displayBehavior"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Leaderboard kill titles",
+        "Staff and team titles",
+        "Custom and creator titles"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "titleType",
+        "requirement",
+        "availability",
+        "whoCanUse",
+        "displayBehavior"
+      ],
+      "tableFields": [
+        "titleType",
+        "requirement",
+        "availability",
+        "whoCanUse",
+        "displayBehavior"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "THE STRONGEST OF HISTORY",
-      "slug": "the-strongest-of-history",
-      "image": null,
-      "collectionSection": "Leaderboard kill titles",
-      "titleType": "Highest Kills leaderboard title",
-      "requirement": "Hold the #1 spot on the Highest Kills leaderboard.",
-      "availability": "Maintain leaderboard rank",
-      "whoCanUse": "Normal players can chase it, but only the current #1 holder keeps it.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source says the title requires reaching and maintaining Highest Kills rank #1.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this as the #1 Highest Kills title.",
-      "sortOrder": 10
+      "item": {
+        "name": "THE STRONGEST OF HISTORY",
+        "titleType": "Highest Kills leaderboard title",
+        "requirement": "Hold the #1 spot on the Highest Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current #1 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "the-strongest-of-history",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "THE STRONGEST OF TODAY",
-      "slug": "the-strongest-of-today",
-      "image": null,
-      "collectionSection": "Leaderboard kill titles",
-      "titleType": "Highest Kills leaderboard title",
-      "requirement": "Hold the #2 spot on the Highest Kills leaderboard.",
-      "availability": "Maintain leaderboard rank",
-      "whoCanUse": "Normal players can chase it, but only the current #2 holder keeps it.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source says the title requires reaching and maintaining Highest Kills rank #2.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this as the #2 Highest Kills title.",
-      "sortOrder": 20
+      "item": {
+        "name": "THE STRONGEST OF TODAY",
+        "titleType": "Highest Kills leaderboard title",
+        "requirement": "Hold the #2 spot on the Highest Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current #2 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "the-strongest-of-today",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "THE STRONGEST AVAILABLE",
-      "slug": "the-strongest-available",
-      "image": null,
-      "collectionSection": "Leaderboard kill titles",
-      "titleType": "Highest Kills leaderboard title",
-      "requirement": "Hold the #3 spot on the Highest Kills leaderboard.",
-      "availability": "Maintain leaderboard rank",
-      "whoCanUse": "Normal players can chase it, but only the current #3 holder keeps it.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source says the title requires reaching and maintaining Highest Kills rank #3.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this as the #3 Highest Kills title.",
-      "sortOrder": 30
+      "item": {
+        "name": "THE STRONGEST AVAILABLE",
+        "titleType": "Highest Kills leaderboard title",
+        "requirement": "Hold the #3 spot on the Highest Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current #3 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "the-strongest-available",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "SPECIAL GRADE",
-      "slug": "special-grade",
-      "image": null,
-      "collectionSection": "Leaderboard kill titles",
-      "titleType": "Weekly Kills leaderboard title",
-      "requirement": "Hold the #1 spot on the Weekly Kills leaderboard.",
-      "availability": "Maintain leaderboard rank",
-      "whoCanUse": "Normal players can chase it, but only the current weekly #1 holder keeps it.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source says the title requires reaching and maintaining Weekly Kills rank #1.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this as the #1 Weekly Kills title.",
-      "sortOrder": 40
+      "item": {
+        "name": "SPECIAL GRADE",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #1 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #1 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "special-grade",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 40,
+        "image": null
+      }
     },
     {
-      "name": "GRADE 1",
-      "slug": "grade-1",
-      "image": null,
-      "collectionSection": "Leaderboard kill titles",
-      "titleType": "Weekly Kills leaderboard title",
-      "requirement": "Hold the #2 spot on the Weekly Kills leaderboard.",
-      "availability": "Maintain leaderboard rank",
-      "whoCanUse": "Normal players can chase it, but only the current weekly #2 holder keeps it.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source says the title requires reaching and maintaining Weekly Kills rank #2.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this as the #2 Weekly Kills title.",
-      "sortOrder": 50
+      "item": {
+        "name": "GRADE 1",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #2 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #2 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "grade-1",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 50,
+        "image": null
+      }
     },
     {
-      "name": "SEMI-GRADE 1",
-      "slug": "semi-grade-1",
-      "image": null,
-      "collectionSection": "Leaderboard kill titles",
-      "titleType": "Weekly Kills leaderboard title",
-      "requirement": "Hold the #3 spot on the Weekly Kills leaderboard.",
-      "availability": "Maintain leaderboard rank",
-      "whoCanUse": "Normal players can chase it, but only the current weekly #3 holder keeps it.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source says the title requires reaching and maintaining Weekly Kills rank #3.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this as the #3 Weekly Kills title.",
-      "sortOrder": 60
+      "item": {
+        "name": "SEMI-GRADE 1",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #3 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #3 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "semi-grade-1",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 60,
+        "image": null
+      }
     },
     {
-      "name": "GRADE 2",
-      "slug": "grade-2",
-      "image": null,
-      "collectionSection": "Leaderboard kill titles",
-      "titleType": "Weekly Kills leaderboard title",
-      "requirement": "Hold the #4 spot on the Weekly Kills leaderboard.",
-      "availability": "Maintain leaderboard rank",
-      "whoCanUse": "Normal players can chase it, but only the current weekly #4 holder keeps it.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source says the title requires reaching and maintaining Weekly Kills rank #4.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this as the #4 Weekly Kills title.",
-      "sortOrder": 70
+      "item": {
+        "name": "GRADE 2",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #4 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #4 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "grade-2",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 70,
+        "image": null
+      }
     },
     {
-      "name": "SEMI-GRADE 2",
-      "slug": "semi-grade-2",
-      "image": null,
-      "collectionSection": "Leaderboard kill titles",
-      "titleType": "Weekly Kills leaderboard title",
-      "requirement": "Hold the #5 spot on the Weekly Kills leaderboard.",
-      "availability": "Maintain leaderboard rank",
-      "whoCanUse": "Normal players can chase it, but only the current weekly #5 holder keeps it.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source says the title requires reaching and maintaining Weekly Kills rank #5.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this as the #5 Weekly Kills title.",
-      "sortOrder": 80
+      "item": {
+        "name": "SEMI-GRADE 2",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #5 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #5 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "semi-grade-2",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 80,
+        "image": null
+      }
     },
     {
-      "name": "GRADE 3",
-      "slug": "grade-3",
-      "image": null,
-      "collectionSection": "Leaderboard kill titles",
-      "titleType": "Weekly Kills leaderboard title",
-      "requirement": "Hold the #6 spot on the Weekly Kills leaderboard.",
-      "availability": "Maintain leaderboard rank",
-      "whoCanUse": "Normal players can chase it, but only the current weekly #6 holder keeps it.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source says the title requires reaching and maintaining Weekly Kills rank #6.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this as the #6 Weekly Kills title.",
-      "sortOrder": 90
+      "item": {
+        "name": "GRADE 3",
+        "titleType": "Weekly Kills leaderboard title",
+        "requirement": "Hold the #6 spot on the Weekly Kills leaderboard.",
+        "availability": "Maintain leaderboard rank",
+        "whoCanUse": "Normal players can chase it, but only the current weekly #6 holder keeps it.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "grade-3",
+        "section": "Leaderboard kill titles",
+        "sortOrder": 90,
+        "image": null
+      }
     },
     {
-      "name": "I AM NOT TZE",
-      "slug": "i-am-not-tze",
-      "image": null,
-      "collectionSection": "Staff and team titles",
-      "titleType": "Owner title",
-      "requirement": "Reserved to Tze.",
-      "availability": "Reserved role",
-      "whoCanUse": "Tze only.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source lists this as reserved only to Tze.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this under staff titles.",
-      "sortOrder": 100
+      "item": {
+        "name": "I AM NOT TZE",
+        "titleType": "Owner title",
+        "requirement": "Reserved to Tze.",
+        "availability": "Reserved role",
+        "whoCanUse": "Tze only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "i-am-not-tze",
+        "section": "Staff and team titles",
+        "sortOrder": 100,
+        "image": null
+      }
     },
     {
-      "name": "HEAD MODERATOR",
-      "slug": "head-moderator",
-      "image": null,
-      "collectionSection": "Staff and team titles",
-      "titleType": "Head moderator title",
-      "requirement": "Reserved to the game's head moderators.",
-      "availability": "Reserved role",
-      "whoCanUse": "Head moderators only.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source lists this as reserved only to the game's head moderators.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this under staff titles.",
-      "sortOrder": 110
+      "item": {
+        "name": "HEAD MODERATOR",
+        "titleType": "Head moderator title",
+        "requirement": "Reserved to the game's head moderators.",
+        "availability": "Reserved role",
+        "whoCanUse": "Head moderators only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "head-moderator",
+        "section": "Staff and team titles",
+        "sortOrder": 110,
+        "image": null
+      }
     },
     {
-      "name": "DEVELOPER",
-      "slug": "developer",
-      "image": null,
-      "collectionSection": "Staff and team titles",
-      "titleType": "Developer title",
-      "requirement": "Reserved to the game's developers.",
-      "availability": "Reserved role",
-      "whoCanUse": "Developers only.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source lists this as reserved only to the game's developers.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this under staff titles.",
-      "sortOrder": 120
+      "item": {
+        "name": "DEVELOPER",
+        "titleType": "Developer title",
+        "requirement": "Reserved to the game's developers.",
+        "availability": "Reserved role",
+        "whoCanUse": "Developers only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "developer",
+        "section": "Staff and team titles",
+        "sortOrder": 120,
+        "image": null
+      }
     },
     {
-      "name": "MODERATOR",
-      "slug": "moderator",
-      "image": null,
-      "collectionSection": "Staff and team titles",
-      "titleType": "Moderator title",
-      "requirement": "Reserved to the game's moderators.",
-      "availability": "Reserved role",
-      "whoCanUse": "Moderators only.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source lists this as reserved only to the game's moderators.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this under staff titles.",
-      "sortOrder": 130
+      "item": {
+        "name": "MODERATOR",
+        "titleType": "Moderator title",
+        "requirement": "Reserved to the game's moderators.",
+        "availability": "Reserved role",
+        "whoCanUse": "Moderators only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "moderator",
+        "section": "Staff and team titles",
+        "sortOrder": 130,
+        "image": null
+      }
     },
     {
-      "name": "CONTRIBUTOR",
-      "slug": "contributor",
-      "image": null,
-      "collectionSection": "Staff and team titles",
-      "titleType": "Contributor title",
-      "requirement": "Reserved to the game's contributors.",
-      "availability": "Reserved role",
-      "whoCanUse": "Contributors only.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source lists this as reserved only to the game's contributors.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this under staff titles.",
-      "sortOrder": 140
+      "item": {
+        "name": "CONTRIBUTOR",
+        "titleType": "Contributor title",
+        "requirement": "Reserved to the game's contributors.",
+        "availability": "Reserved role",
+        "whoCanUse": "Contributors only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "contributor",
+        "section": "Staff and team titles",
+        "sortOrder": 140,
+        "image": null
+      }
     },
     {
-      "name": "TESTER",
-      "slug": "tester",
-      "image": null,
-      "collectionSection": "Staff and team titles",
-      "titleType": "Tester and balancer title",
-      "requirement": "Reserved to the game's testers and balancers.",
-      "availability": "Reserved role",
-      "whoCanUse": "Testers and balancers only.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source lists this as reserved only to the game's testers and balancers.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Fandom Titles page last edited 2026-05-23 lists this under staff titles.",
-      "sortOrder": 150
+      "item": {
+        "name": "TESTER",
+        "titleType": "Tester and balancer title",
+        "requirement": "Reserved to the game's testers and balancers.",
+        "availability": "Reserved role",
+        "whoCanUse": "Testers and balancers only.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "tester",
+        "section": "Staff and team titles",
+        "sortOrder": 150,
+        "image": null
+      }
     },
     {
-      "name": "OVERCOOKER",
-      "slug": "overcooker",
-      "image": null,
-      "collectionSection": "Custom and creator titles",
-      "titleType": "Speculated custom title",
-      "requirement": "Speculated to be a custom title for Frost, one of the game's head moderators.",
-      "availability": "Custom or account-specific",
-      "whoCanUse": "No normal player route is listed.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source marks this title as speculative, so it should stay lower confidence than normal table rows.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "Keep uncertainty visible or source-note-backed; do not present as a confirmed general unlock.",
-      "sortOrder": 160
+      "item": {
+        "name": "OVERCOOKER",
+        "titleType": "Speculated custom title",
+        "requirement": "Speculated to be a custom title for Frost, one of the game's head moderators.",
+        "availability": "Custom or account-specific",
+        "whoCanUse": "No normal player route is listed.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "overcooker",
+        "section": "Custom and creator titles",
+        "sortOrder": 160,
+        "image": null
+      }
     },
     {
-      "name": "GAMBLER",
-      "slug": "gambler",
-      "image": null,
-      "collectionSection": "Custom and creator titles",
-      "titleType": "Account-specific custom title",
-      "requirement": "Granted to moderator Alserex after beating Tze in Twenty One.",
-      "availability": "Custom or account-specific",
-      "whoCanUse": "No normal player route is listed.",
-      "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title.",
-      "sourceNote": "Source describes this as a moderator-specific title tied to beating Tze in Twenty One.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "The linked Twenty One experience is external context; keep this as an account-specific custom grant, not a repeatable Jujutsu Shenanigans unlock.",
-      "sortOrder": 170
+      "item": {
+        "name": "GAMBLER",
+        "titleType": "Account-specific custom title",
+        "requirement": "Granted to moderator Alserex after beating Tze in Twenty One.",
+        "availability": "Custom or account-specific",
+        "whoCanUse": "No normal player route is listed.",
+        "displayBehavior": "Equips from the Titles inventory tab and appears as a chat prefix plus an overhead bracket title."
+      },
+      "system": {
+        "slug": "gambler",
+        "section": "Custom and creator titles",
+        "sortOrder": 170,
+        "image": null
+      }
     },
     {
-      "name": "CONTENT CREATOR",
-      "slug": "content-creator",
-      "image": null,
-      "collectionSection": "Custom and creator titles",
-      "titleType": "Creator eligibility title",
-      "requirement": "Reach 15k YouTube subscribers or 25k TikTok followers, post at least 5 Jujutsu Shenanigans videos, then contact a game moderator on Discord.",
-      "availability": "Creator approval",
-      "whoCanUse": "Eligible content creators after moderator approval.",
-      "displayBehavior": "Equips from the Titles inventory tab, appears as a chat prefix plus an overhead bracket title, and source notes it grants public-server Free Cam.",
-      "sourceNote": "Source lists the audience/video requirement, Discord moderator contact step, and Free Cam permission.",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Titles",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Titles",
-      "imageStatus": "hidden by policy; no per-title image",
-      "verificationNote": "No official Discord announcement was available in this pass; source page is current community source.",
-      "sortOrder": 180
+      "item": {
+        "name": "CONTENT CREATOR",
+        "titleType": "Creator eligibility title",
+        "requirement": "Reach 15k YouTube subscribers or 25k TikTok followers, post at least 5 Jujutsu Shenanigans videos, then contact a game moderator on Discord.",
+        "availability": "Creator approval",
+        "whoCanUse": "Eligible content creators after moderator approval.",
+        "displayBehavior": "Equips from the Titles inventory tab, appears as a chat prefix plus an overhead bracket title, and source notes it grants public-server Free Cam."
+      },
+      "system": {
+        "slug": "content-creator",
+        "section": "Custom and creator titles",
+        "sortOrder": 180,
+        "image": null
+      }
     }
   ]
 }

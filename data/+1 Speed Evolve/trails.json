@@ -1,227 +1,252 @@
 {
   "meta": {
-    "title": "+1 Speed Evolve trails data",
-    "updatedAt": "2026-06-27",
-    "sources": [
-      {
-        "label": "Roblox Game Passes API - +1 Speed Evolve (universe 10057343903)",
-        "url": "https://apis.roblox.com/game-passes/v1/universes/10057343903/game-passes?passView=Full&pageSize=100",
-        "accessed": "2026-06-27",
-        "note": "Official source for trail names, Robux prices, game pass IDs, product IDs, and icon asset IDs."
-      },
-      {
-        "label": "+1 Speed Evolve Wiki - Trails",
-        "url": "https://speedevolve.wiki/trails/",
-        "accessed": "2026-06-27",
-        "note": "Fan wiki. Used only for tier framing and the few stated multipliers. Endgame prices were stale here and were replaced with official API prices."
-      },
-      {
-        "label": "+1 Speed Evolve Wiki - Early Game Trails",
-        "url": "https://speedevolve.wiki/trails/early-game/",
-        "accessed": "2026-06-27",
-        "note": "Source for Orange 1.5x, Blue 2x, and the Green 'skip' value-call."
-      },
-      {
-        "label": "+1 Speed Evolve Wiki - Multipliers Explained",
-        "url": "https://speedevolve.wiki/rebirth/multipliers/",
-        "accessed": "2026-06-27",
-        "note": "Confirms multipliers are a multiplicative layer; only Orange 1.5x and Star 100x (advertised, trail-layer only) are stated."
-      }
-    ],
-    "columns": [
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "+1 Speed Evolve",
+    "gameSlug": "1-speed-evolve",
+    "collection": "trails",
+    "route": "/wiki/1-speed-evolve/trails",
+    "catalogCode": "1-speed-evolve-trails",
+    "itemFields": [
       "robuxPrice",
       "multiplier",
       "obtain",
-      "gamePassId"
+      "robuxPriceValue",
+      "cardSummary"
     ],
-    "fieldPresentation": {
-      "robuxPrice": { "kind": "chip", "label": "Price" },
-      "multiplier": { "kind": "chip", "label": "Speed multiplier" },
-      "obtain": { "kind": "plain", "label": "How to get" },
-      "cardSummary": { "kind": "detail" }
+    "columns": [
+      "robuxPrice",
+      "multiplier",
+      "obtain",
+      "robuxPriceValue",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Budget Trails",
+        "Mid-Tier Trails",
+        "Premium & Endgame Trails"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "robuxPrice",
+        "multiplier",
+        "obtain",
+        "robuxPriceValue",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "robuxPrice",
+        "multiplier",
+        "obtain",
+        "robuxPriceValue",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "robuxPrice": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "multiplier": {
+          "kind": "chip",
+          "label": "Speed multiplier"
+        },
+        "obtain": {
+          "kind": "plain",
+          "label": "How to get"
+        },
+        "cardSummary": {
+          "kind": "detail"
+        }
+      }
     }
   },
   "items": [
     {
-      "name": "Orange Trail",
-      "slug": "orange-trail",
-      "collectionSection": "Budget Trails",
-      "robuxPrice": "19 Robux",
-      "robuxPriceValue": 19,
-      "multiplier": "1.5x",
-      "obtain": "Robux game pass",
-      "cardSummary": "The cheapest trail and a common first purchase, giving a 1.5x speed multiplier on the trail layer.",
-      "gamePassId": 1822727684,
-      "productId": 3586509094,
-      "iconAssetId": 138843243767473,
-      "image": "/%2B1%20Speed%20Evolve/Trails/orange-trail.png",
-      "sortOrder": 1
+      "item": {
+        "name": "Orange Trail",
+        "robuxPrice": "19 Robux",
+        "multiplier": "1.5x",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 19,
+        "cardSummary": "The cheapest trail and a common first purchase, giving a 1.5x speed multiplier on the trail layer."
+      },
+      "system": {
+        "slug": "orange-trail",
+        "section": "Budget Trails",
+        "sortOrder": 1,
+        "image": "/%2B1%20Speed%20Evolve/Trails/orange-trail.png"
+      }
     },
     {
-      "name": "Green Trail",
-      "slug": "green-trail",
-      "collectionSection": "Budget Trails",
-      "robuxPrice": "39 Robux",
-      "robuxPriceValue": 39,
-      "multiplier": "",
-      "obtain": "Robux game pass",
-      "cardSummary": "A low-cost trail that fan guides often suggest skipping in favor of the Blue Trail for better value.",
-      "gamePassId": 1823072927,
-      "productId": 3586509194,
-      "iconAssetId": 77080715021767,
-      "image": "/%2B1%20Speed%20Evolve/Trails/green-trail.png",
-      "sortOrder": 2
+      "item": {
+        "name": "Green Trail",
+        "robuxPrice": "39 Robux",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 39,
+        "cardSummary": "A low-cost trail that fan guides often suggest skipping in favor of the Blue Trail for better value."
+      },
+      "system": {
+        "slug": "green-trail",
+        "section": "Budget Trails",
+        "sortOrder": 2,
+        "image": "/%2B1%20Speed%20Evolve/Trails/green-trail.png"
+      }
     },
     {
-      "name": "Blue Trail",
-      "slug": "blue-trail",
-      "collectionSection": "Budget Trails",
-      "robuxPrice": "79 Robux",
-      "robuxPriceValue": 79,
-      "multiplier": "2x",
-      "obtain": "Robux game pass",
-      "cardSummary": "A popular budget-to-mid pick that fan guides cite as a 2x trail-layer multiplier.",
-      "gamePassId": 1822665773,
-      "productId": 3586509268,
-      "iconAssetId": 112867169988232,
-      "image": "/%2B1%20Speed%20Evolve/Trails/blue-trail.png",
-      "sortOrder": 3
+      "item": {
+        "name": "Blue Trail",
+        "robuxPrice": "79 Robux",
+        "multiplier": "2x",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 79,
+        "cardSummary": "A popular budget-to-mid pick that fan guides cite as a 2x trail-layer multiplier."
+      },
+      "system": {
+        "slug": "blue-trail",
+        "section": "Budget Trails",
+        "sortOrder": 3,
+        "image": "/%2B1%20Speed%20Evolve/Trails/blue-trail.png"
+      }
     },
     {
-      "name": "Purple Trail",
-      "slug": "purple-trail",
-      "collectionSection": "Mid-Tier Trails",
-      "robuxPrice": "129 Robux",
-      "robuxPriceValue": 129,
-      "multiplier": "",
-      "obtain": "Robux game pass",
-      "cardSummary": "A mid-tier step up in price from the budget trails. Its exact multiplier is not officially published.",
-      "gamePassId": 1822749541,
-      "productId": 3586509330,
-      "iconAssetId": 81414994602080,
-      "image": "/%2B1%20Speed%20Evolve/Trails/purple-trail.png",
-      "sortOrder": 4
+      "item": {
+        "name": "Purple Trail",
+        "robuxPrice": "129 Robux",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 129,
+        "cardSummary": "A mid-tier step up in price from the budget trails. Its exact multiplier is not officially published."
+      },
+      "system": {
+        "slug": "purple-trail",
+        "section": "Mid-Tier Trails",
+        "sortOrder": 4,
+        "image": "/%2B1%20Speed%20Evolve/Trails/purple-trail.png"
+      }
     },
     {
-      "name": "Rainbow Trail",
-      "slug": "rainbow-trail",
-      "collectionSection": "Mid-Tier Trails",
-      "robuxPrice": "199 Robux",
-      "robuxPriceValue": 199,
-      "multiplier": "",
-      "obtain": "Robux game pass",
-      "cardSummary": "A widely chosen cosmetic trail in the mid range. Its exact multiplier is not officially published.",
-      "gamePassId": 1822901135,
-      "productId": 3586509410,
-      "iconAssetId": 72830341189512,
-      "image": "/%2B1%20Speed%20Evolve/Trails/rainbow-trail.png",
-      "sortOrder": 5
+      "item": {
+        "name": "Rainbow Trail",
+        "robuxPrice": "199 Robux",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 199,
+        "cardSummary": "A widely chosen cosmetic trail in the mid range. Its exact multiplier is not officially published."
+      },
+      "system": {
+        "slug": "rainbow-trail",
+        "section": "Mid-Tier Trails",
+        "sortOrder": 5,
+        "image": "/%2B1%20Speed%20Evolve/Trails/rainbow-trail.png"
+      }
     },
     {
-      "name": "Galaxy Trail",
-      "slug": "galaxy-trail",
-      "collectionSection": "Mid-Tier Trails",
-      "robuxPrice": "299 Robux",
-      "robuxPriceValue": 299,
-      "multiplier": "",
-      "obtain": "Robux game pass",
-      "cardSummary": "An upper-mid trail that bridges toward the premium tier. Its exact multiplier is not officially published.",
-      "gamePassId": 1822613776,
-      "productId": 3586509476,
-      "iconAssetId": 132709043187740,
-      "image": "/%2B1%20Speed%20Evolve/Trails/galaxy-trail.png",
-      "sortOrder": 6
+      "item": {
+        "name": "Galaxy Trail",
+        "robuxPrice": "299 Robux",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 299,
+        "cardSummary": "An upper-mid trail that bridges toward the premium tier. Its exact multiplier is not officially published."
+      },
+      "system": {
+        "slug": "galaxy-trail",
+        "section": "Mid-Tier Trails",
+        "sortOrder": 6,
+        "image": "/%2B1%20Speed%20Evolve/Trails/galaxy-trail.png"
+      }
     },
     {
-      "name": "Snow Trail",
-      "slug": "snow-trail",
-      "collectionSection": "Mid-Tier Trails",
-      "robuxPrice": "499 Robux",
-      "robuxPriceValue": 499,
-      "multiplier": "",
-      "obtain": "Robux game pass",
-      "cardSummary": "The most expensive mid-tier trail and an entry point toward premium pricing. Its exact multiplier is not officially published.",
-      "gamePassId": 1840481220,
-      "productId": 3592645556,
-      "iconAssetId": 88353786102192,
-      "image": "/%2B1%20Speed%20Evolve/Trails/snow-trail.png",
-      "sortOrder": 7
+      "item": {
+        "name": "Snow Trail",
+        "robuxPrice": "499 Robux",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 499,
+        "cardSummary": "The most expensive mid-tier trail and an entry point toward premium pricing. Its exact multiplier is not officially published."
+      },
+      "system": {
+        "slug": "snow-trail",
+        "section": "Mid-Tier Trails",
+        "sortOrder": 7,
+        "image": "/%2B1%20Speed%20Evolve/Trails/snow-trail.png"
+      }
     },
     {
-      "name": "Fire Trail",
-      "slug": "fire-trail",
-      "collectionSection": "Premium & Endgame Trails",
-      "robuxPrice": "799 Robux",
-      "robuxPriceValue": 799,
-      "multiplier": "",
-      "obtain": "Robux game pass",
-      "cardSummary": "A premium trail aimed at later worlds. Its exact multiplier is not officially published.",
-      "gamePassId": 1840253203,
-      "productId": 3592645624,
-      "iconAssetId": 90648534337420,
-      "image": "/%2B1%20Speed%20Evolve/Trails/fire-trail.png",
-      "sortOrder": 8
+      "item": {
+        "name": "Fire Trail",
+        "robuxPrice": "799 Robux",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 799,
+        "cardSummary": "A premium trail aimed at later worlds. Its exact multiplier is not officially published."
+      },
+      "system": {
+        "slug": "fire-trail",
+        "section": "Premium & Endgame Trails",
+        "sortOrder": 8,
+        "image": "/%2B1%20Speed%20Evolve/Trails/fire-trail.png"
+      }
     },
     {
-      "name": "Star Trail",
-      "slug": "star-trail",
-      "collectionSection": "Premium & Endgame Trails",
-      "robuxPrice": "1,099 Robux",
-      "robuxPriceValue": 1099,
-      "multiplier": "100x (advertised)",
-      "obtain": "Robux game pass",
-      "cardSummary": "An endgame trail advertised at 100x. That figure applies to the trail multiplier layer only, not total character speed.",
-      "gamePassId": 1839629237,
-      "productId": 3592645683,
-      "iconAssetId": 128498369303034,
-      "image": "/%2B1%20Speed%20Evolve/Trails/star-trail.png",
-      "sortOrder": 9
+      "item": {
+        "name": "Star Trail",
+        "robuxPrice": "1,099 Robux",
+        "multiplier": "100x (advertised)",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 1099,
+        "cardSummary": "An endgame trail advertised at 100x. That figure applies to the trail multiplier layer only, not total character speed."
+      },
+      "system": {
+        "slug": "star-trail",
+        "section": "Premium & Endgame Trails",
+        "sortOrder": 9,
+        "image": "/%2B1%20Speed%20Evolve/Trails/star-trail.png"
+      }
     },
     {
-      "name": "Jupiter Trail",
-      "slug": "jupiter-trail",
-      "collectionSection": "Premium & Endgame Trails",
-      "robuxPrice": "1,399 Robux",
-      "robuxPriceValue": 1399,
-      "multiplier": "",
-      "obtain": "Robux game pass",
-      "cardSummary": "A high-end planet trail. Its exact multiplier is not officially published.",
-      "gamePassId": 1880830324,
-      "productId": 3605048024,
-      "iconAssetId": 93567422911108,
-      "image": "/%2B1%20Speed%20Evolve/Trails/jupiter-trail.png",
-      "sortOrder": 10
+      "item": {
+        "name": "Jupiter Trail",
+        "robuxPrice": "1,399 Robux",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 1399,
+        "cardSummary": "A high-end planet trail. Its exact multiplier is not officially published."
+      },
+      "system": {
+        "slug": "jupiter-trail",
+        "section": "Premium & Endgame Trails",
+        "sortOrder": 10,
+        "image": "/%2B1%20Speed%20Evolve/Trails/jupiter-trail.png"
+      }
     },
     {
-      "name": "Saturn Trail",
-      "slug": "saturn-trail",
-      "collectionSection": "Premium & Endgame Trails",
-      "robuxPrice": "1,699 Robux",
-      "robuxPriceValue": 1699,
-      "multiplier": "",
-      "obtain": "Robux game pass",
-      "cardSummary": "A high-end planet trail above Jupiter in price. Its exact multiplier is not officially published.",
-      "gamePassId": 1878964655,
-      "productId": 3605048044,
-      "iconAssetId": 94718954085231,
-      "image": "/%2B1%20Speed%20Evolve/Trails/saturn-trail.png",
-      "sortOrder": 11
+      "item": {
+        "name": "Saturn Trail",
+        "robuxPrice": "1,699 Robux",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 1699,
+        "cardSummary": "A high-end planet trail above Jupiter in price. Its exact multiplier is not officially published."
+      },
+      "system": {
+        "slug": "saturn-trail",
+        "section": "Premium & Endgame Trails",
+        "sortOrder": 11,
+        "image": "/%2B1%20Speed%20Evolve/Trails/saturn-trail.png"
+      }
     },
     {
-      "name": "Sun Trail",
-      "slug": "sun-trail",
-      "collectionSection": "Premium & Endgame Trails",
-      "robuxPrice": "1,999 Robux",
-      "robuxPriceValue": 1999,
-      "multiplier": "",
-      "obtain": "Robux game pass",
-      "cardSummary": "The most expensive trail in the shop. Its exact multiplier is not officially published.",
-      "gamePassId": 1875622815,
-      "productId": 3605048063,
-      "iconAssetId": 132828230861286,
-      "image": "/%2B1%20Speed%20Evolve/Trails/sun-trail.png",
-      "sortOrder": 12
+      "item": {
+        "name": "Sun Trail",
+        "robuxPrice": "1,999 Robux",
+        "obtain": "Robux game pass",
+        "robuxPriceValue": 1999,
+        "cardSummary": "The most expensive trail in the shop. Its exact multiplier is not officially published."
+      },
+      "system": {
+        "slug": "sun-trail",
+        "section": "Premium & Endgame Trails",
+        "sortOrder": 12,
+        "image": "/%2B1%20Speed%20Evolve/Trails/sun-trail.png"
+      }
     }
   ]
 }

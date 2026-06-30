@@ -1,17 +1,13 @@
 {
   "meta": {
-    "title": "Steal a Brainrot rebirths data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Steal a Brainrot Wiki - Rebirth",
-        "url": "https://stealabrainrot.fandom.com/wiki/Rebirth",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
+    "schemaVersion": 2,
+    "game": "Steal a Brainrot",
+    "gameSlug": "steal-a-brainrot",
+    "collection": "rebirths",
+    "route": "/wiki/steal-a-brainrot/rebirths",
+    "catalogCode": "steal-a-brainrot-rebirths",
+    "itemFields": [
       "level",
-      "image",
       "requiredCash",
       "requiredBrainrots",
       "multiplier",
@@ -19,402 +15,567 @@
       "lockBaseBonus",
       "slotBonus",
       "specialItemsAbilities"
-    ]
+    ],
+    "columns": [
+      "level",
+      "requiredCash",
+      "requiredBrainrots",
+      "multiplier",
+      "cashBonus",
+      "lockBaseBonus",
+      "slotBonus",
+      "specialItemsAbilities"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "level",
+        "requiredCash",
+        "requiredBrainrots",
+        "multiplier",
+        "cashBonus",
+        "lockBaseBonus"
+      ],
+      "tableFields": [
+        "level",
+        "requiredCash",
+        "requiredBrainrots",
+        "multiplier",
+        "cashBonus",
+        "lockBaseBonus",
+        "slotBonus",
+        "specialItemsAbilities"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "level": 1,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-1.webp",
-      "requiredCash": "$ 500K (Formerly 1M",
-      "requiredBrainrots": [
-        {
-          "name": "Trippi Troppi",
-          "page": "Trippi Troppi",
-          "url": "https://stealabrainrot.fandom.com/wiki/Trippi_Troppi"
-        },
-        {
-          "name": "Gangster Footera",
-          "page": "Gangster Footera",
-          "url": "https://stealabrainrot.fandom.com/wiki/Gangster_Footera"
-        },
-        {
-          "name": "Tung Tung Tung Sahur",
-          "page": "Tung Tung Tung Sahur",
-          "url": "https://stealabrainrot.fandom.com/wiki/Tung_Tung_Tung_Sahur"
-        }
-      ],
-      "multiplier": "x0.5",
-      "cashBonus": "$5K",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "None",
-      "specialItemsAbilities": "Friend Controller Unlock, Iron Slap, Gravity Coil, Bee Launcher",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/f/ff/Steal_a_Brainrot_rebirth_1.png/revision/latest?cb=20250921155400"
+      "item": {
+        "name": "Rebirth 1",
+        "level": 1,
+        "requiredCash": "$ 500K (Formerly 1M",
+        "requiredBrainrots": [
+          {
+            "name": "Trippi Troppi",
+            "page": "Trippi Troppi",
+            "url": "https://stealabrainrot.fandom.com/wiki/Trippi_Troppi"
+          },
+          {
+            "name": "Gangster Footera",
+            "page": "Gangster Footera",
+            "url": "https://stealabrainrot.fandom.com/wiki/Gangster_Footera"
+          },
+          {
+            "name": "Tung Tung Tung Sahur",
+            "page": "Tung Tung Tung Sahur",
+            "url": "https://stealabrainrot.fandom.com/wiki/Tung_Tung_Tung_Sahur"
+          }
+        ],
+        "multiplier": "x0.5",
+        "cashBonus": "$5K",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "None",
+        "specialItemsAbilities": "Friend Controller Unlock, Iron Slap, Gravity Coil, Bee Launcher"
+      },
+      "system": {
+        "slug": "rebirth-1",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-1.webp"
+      }
     },
     {
-      "level": 2,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-2.webp",
-      "requiredCash": "$1.5M (Formerly 3M)",
-      "requiredBrainrots": [
-        {
-          "name": "Boneca Ambalabu",
-          "page": "Boneca Ambalabu",
-          "url": "https://stealabrainrot.fandom.com/wiki/Boneca_Ambalabu"
-        },
-        {
-          "name": "Brr Brr Patapim",
-          "page": "Brr Brr Patapim",
-          "url": "https://stealabrainrot.fandom.com/wiki/Brr_Brr_Patapim"
-        }
-      ],
-      "multiplier": "x1",
-      "cashBonus": "$10K",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1 (2nd floor)",
-      "specialItemsAbilities": "Gold Slap, Coil Combo, Rage Table",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/d/d7/Rebirth_stage_2.png/revision/latest?cb=20251124204819"
+      "item": {
+        "name": "Rebirth 2",
+        "level": 2,
+        "requiredCash": "$1.5M (Formerly 3M)",
+        "requiredBrainrots": [
+          {
+            "name": "Boneca Ambalabu",
+            "page": "Boneca Ambalabu",
+            "url": "https://stealabrainrot.fandom.com/wiki/Boneca_Ambalabu"
+          },
+          {
+            "name": "Brr Brr Patapim",
+            "page": "Brr Brr Patapim",
+            "url": "https://stealabrainrot.fandom.com/wiki/Brr_Brr_Patapim"
+          }
+        ],
+        "multiplier": "x1",
+        "cashBonus": "$10K",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1 (2nd floor)",
+        "specialItemsAbilities": "Gold Slap, Coil Combo, Rage Table"
+      },
+      "system": {
+        "slug": "rebirth-2",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-2.webp"
+      }
     },
     {
-      "level": 3,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-3.webp",
-      "requiredCash": "$12.5M (Formerly 7.5M)",
-      "requiredBrainrots": [
-        {
-          "name": "Trulimero Trulicina",
-          "page": "Trulimero Trulicina",
-          "url": "https://stealabrainrot.fandom.com/wiki/Trulimero_Trulicina"
-        },
-        {
-          "name": "Chimpanzini Bananini",
-          "page": "Chimpanzini Bananini",
-          "url": "https://stealabrainrot.fandom.com/wiki/Chimpanzini_Bananini"
-        }
-      ],
-      "multiplier": "x2",
-      "cashBonus": "$25K",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Diamond Slap, Grapple Hook, Taser Gun",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/7/72/Rebirth_stage_3.png/revision/latest?cb=20251124204826"
+      "item": {
+        "name": "Rebirth 3",
+        "level": 3,
+        "requiredCash": "$12.5M (Formerly 7.5M)",
+        "requiredBrainrots": [
+          {
+            "name": "Trulimero Trulicina",
+            "page": "Trulimero Trulicina",
+            "url": "https://stealabrainrot.fandom.com/wiki/Trulimero_Trulicina"
+          },
+          {
+            "name": "Chimpanzini Bananini",
+            "page": "Chimpanzini Bananini",
+            "url": "https://stealabrainrot.fandom.com/wiki/Chimpanzini_Bananini"
+          }
+        ],
+        "multiplier": "x2",
+        "cashBonus": "$25K",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Diamond Slap, Grapple Hook, Taser Gun"
+      },
+      "system": {
+        "slug": "rebirth-3",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-3.webp"
+      }
     },
     {
-      "level": 4,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-4.webp",
-      "requiredCash": "$ 35M (Formerly 25M)",
-      "requiredBrainrots": [
-        {
-          "name": "Chef Crabracadabra",
-          "page": "Chef Crabracadabra",
-          "url": "https://stealabrainrot.fandom.com/wiki/Chef_Crabracadabra"
-        },
-        {
-          "name": "Glorbo Fruttodrillo",
-          "page": "Glorbo Fruttodrillo",
-          "url": "https://stealabrainrot.fandom.com/wiki/Glorbo_Fruttodrillo"
-        }
-      ],
-      "multiplier": "x3",
-      "cashBonus": "$50K",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Emerald Slap, Invisibility Cloak, Boogie Bomb",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/98/Rebirth_stage_4.jpeg/revision/latest?cb=20250809080728"
+      "item": {
+        "name": "Rebirth 4",
+        "level": 4,
+        "requiredCash": "$ 35M (Formerly 25M)",
+        "requiredBrainrots": [
+          {
+            "name": "Chef Crabracadabra",
+            "page": "Chef Crabracadabra",
+            "url": "https://stealabrainrot.fandom.com/wiki/Chef_Crabracadabra"
+          },
+          {
+            "name": "Glorbo Fruttodrillo",
+            "page": "Glorbo Fruttodrillo",
+            "url": "https://stealabrainrot.fandom.com/wiki/Glorbo_Fruttodrillo"
+          }
+        ],
+        "multiplier": "x3",
+        "cashBonus": "$50K",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Emerald Slap, Invisibility Cloak, Boogie Bomb"
+      },
+      "system": {
+        "slug": "rebirth-4",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-4.webp"
+      }
     },
     {
-      "level": 5,
-      "image": null,
-      "requiredCash": "$100M",
-      "requiredBrainrots": [
-        {
-          "name": "Frigo Camelo",
-          "page": "Frigo Camelo",
-          "url": "https://stealabrainrot.fandom.com/wiki/Frigo_Camelo"
-        },
-        {
-          "name": "Orangutini Ananassini",
-          "page": "Orangutini Ananassini",
-          "url": "https://stealabrainrot.fandom.com/wiki/Orangutini_Ananassini"
-        }
-      ],
-      "multiplier": "x4",
-      "cashBonus": "$100K",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Ruby Slap, Medusa's Head",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Rebirth 5",
+        "level": 5,
+        "requiredCash": "$100M",
+        "requiredBrainrots": [
+          {
+            "name": "Frigo Camelo",
+            "page": "Frigo Camelo",
+            "url": "https://stealabrainrot.fandom.com/wiki/Frigo_Camelo"
+          },
+          {
+            "name": "Orangutini Ananassini",
+            "page": "Orangutini Ananassini",
+            "url": "https://stealabrainrot.fandom.com/wiki/Orangutini_Ananassini"
+          }
+        ],
+        "multiplier": "x4",
+        "cashBonus": "$100K",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Ruby Slap, Medusa's Head"
+      },
+      "system": {
+        "slug": "rebirth-5",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "level": 6,
-      "image": null,
-      "requiredCash": "$350M",
-      "requiredBrainrots": [
-        {
-          "name": "Bombardiro Crocodilo",
-          "page": "Bombardiro Crocodilo",
-          "url": "https://stealabrainrot.fandom.com/wiki/Bombardiro_Crocodilo"
-        }
-      ],
-      "multiplier": "x5",
-      "cashBonus": "$250K",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Dark Matter Slap, Web Slinger",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Rebirth 6",
+        "level": 6,
+        "requiredCash": "$350M",
+        "requiredBrainrots": [
+          {
+            "name": "Bombardiro Crocodilo",
+            "page": "Bombardiro Crocodilo",
+            "url": "https://stealabrainrot.fandom.com/wiki/Bombardiro_Crocodilo"
+          }
+        ],
+        "multiplier": "x5",
+        "cashBonus": "$250K",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Dark Matter Slap, Web Slinger"
+      },
+      "system": {
+        "slug": "rebirth-6",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "level": 7,
-      "image": null,
-      "requiredCash": "$1B",
-      "requiredBrainrots": [
-        {
-          "name": "Bombombini Gusini",
-          "page": "Bombombini Gusini",
-          "url": "https://stealabrainrot.fandom.com/wiki/Bombombini_Gusini"
-        }
-      ],
-      "multiplier": "x6",
-      "cashBonus": "$500K",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Flame Slap, Quantum Cloner, All Seeing Sentry",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Rebirth 7",
+        "level": 7,
+        "requiredCash": "$1B",
+        "requiredBrainrots": [
+          {
+            "name": "Bombombini Gusini",
+            "page": "Bombombini Gusini",
+            "url": "https://stealabrainrot.fandom.com/wiki/Bombombini_Gusini"
+          }
+        ],
+        "multiplier": "x6",
+        "cashBonus": "$500K",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Flame Slap, Quantum Cloner, All Seeing Sentry"
+      },
+      "system": {
+        "slug": "rebirth-7",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "level": 8,
-      "image": null,
-      "requiredCash": "$5B",
-      "requiredBrainrots": [
-        {
-          "name": "Te Te Te Sahur",
-          "page": "Te Te Te Sahur",
-          "url": "https://stealabrainrot.fandom.com/wiki/Te_Te_Te_Sahur"
-        },
-        {
-          "name": "Cocofanto Elefanto",
-          "page": "Cocofanto Elefanto",
-          "url": "https://stealabrainrot.fandom.com/wiki/Cocofanto_Elefanto"
-        }
-      ],
-      "multiplier": "x7",
-      "cashBonus": "$1M",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Nuclear Slap, Rainbowrath Sword",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Rebirth 8",
+        "level": 8,
+        "requiredCash": "$5B",
+        "requiredBrainrots": [
+          {
+            "name": "Te Te Te Sahur",
+            "page": "Te Te Te Sahur",
+            "url": "https://stealabrainrot.fandom.com/wiki/Te_Te_Te_Sahur"
+          },
+          {
+            "name": "Cocofanto Elefanto",
+            "page": "Cocofanto Elefanto",
+            "url": "https://stealabrainrot.fandom.com/wiki/Cocofanto_Elefanto"
+          }
+        ],
+        "multiplier": "x7",
+        "cashBonus": "$1M",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Nuclear Slap, Rainbowrath Sword"
+      },
+      "system": {
+        "slug": "rebirth-8",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "level": 9,
-      "image": null,
-      "requiredCash": "$12.5B (Formerly 25B)",
-      "requiredBrainrots": [
-        {
-          "name": "Cocofanto Elefanto",
-          "page": "Cocofanto Elefanto",
-          "url": "https://stealabrainrot.fandom.com/wiki/Cocofanto_Elefanto"
-        },
-        {
-          "name": "Girafa Celestre",
-          "page": "Girafa Celestre",
-          "url": "https://stealabrainrot.fandom.com/wiki/Girafa_Celestre"
-        },
-        {
-          "name": "Tralalero Tralala",
-          "page": "Tralalero Tralala",
-          "url": "https://stealabrainrot.fandom.com/wiki/Tralalero_Tralala"
-        }
-      ],
-      "multiplier": "x8",
-      "cashBonus": "$5M",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Galaxy Slap, Laser Cape",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Rebirth 9",
+        "level": 9,
+        "requiredCash": "$12.5B (Formerly 25B)",
+        "requiredBrainrots": [
+          {
+            "name": "Cocofanto Elefanto",
+            "page": "Cocofanto Elefanto",
+            "url": "https://stealabrainrot.fandom.com/wiki/Cocofanto_Elefanto"
+          },
+          {
+            "name": "Girafa Celestre",
+            "page": "Girafa Celestre",
+            "url": "https://stealabrainrot.fandom.com/wiki/Girafa_Celestre"
+          },
+          {
+            "name": "Tralalero Tralala",
+            "page": "Tralalero Tralala",
+            "url": "https://stealabrainrot.fandom.com/wiki/Tralalero_Tralala"
+          }
+        ],
+        "multiplier": "x8",
+        "cashBonus": "$5M",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Galaxy Slap, Laser Cape"
+      },
+      "system": {
+        "slug": "rebirth-9",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "level": 10,
-      "image": null,
-      "requiredCash": "$125B (Formerly 250B)",
-      "requiredBrainrots": [
-        {
-          "name": "Girafa Celestre",
-          "page": "Girafa Celestre",
-          "url": "https://stealabrainrot.fandom.com/wiki/Girafa_Celestre"
-        },
-        {
-          "name": "Tralalero Tralala",
-          "page": "Tralalero Tralala",
-          "url": "https://stealabrainrot.fandom.com/wiki/Tralalero_Tralala"
-        }
-      ],
-      "multiplier": "x9",
-      "cashBonus": "$25M",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1 (3rd floor)",
-      "specialItemsAbilities": "Glitched Slap, Body Swap Potion",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Rebirth 10",
+        "level": 10,
+        "requiredCash": "$125B (Formerly 250B)",
+        "requiredBrainrots": [
+          {
+            "name": "Girafa Celestre",
+            "page": "Girafa Celestre",
+            "url": "https://stealabrainrot.fandom.com/wiki/Girafa_Celestre"
+          },
+          {
+            "name": "Tralalero Tralala",
+            "page": "Tralalero Tralala",
+            "url": "https://stealabrainrot.fandom.com/wiki/Tralalero_Tralala"
+          }
+        ],
+        "multiplier": "x9",
+        "cashBonus": "$25M",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1 (3rd floor)",
+        "specialItemsAbilities": "Glitched Slap, Body Swap Potion"
+      },
+      "system": {
+        "slug": "rebirth-10",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "level": 11,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-11.webp",
-      "requiredCash": "$800B (Formerly 1T)",
-      "requiredBrainrots": [
-        {
-          "name": "Tralalero Tralala",
-          "page": "Tralalero Tralala",
-          "url": "https://stealabrainrot.fandom.com/wiki/Tralalero_Tralala"
-        },
-        {
-          "name": "Odin Din Din Dun",
-          "page": "Odin Din Din Dun",
-          "url": "https://stealabrainrot.fandom.com/wiki/Odin_Din_Din_Dun"
-        }
-      ],
-      "multiplier": "x10",
-      "cashBonus": "$100M",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Splatter Slap, Paintball Gun",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/1/11/Rebirth_11_New.jpg/revision/latest?cb=20251101102346"
+      "item": {
+        "name": "Rebirth 11",
+        "level": 11,
+        "requiredCash": "$800B (Formerly 1T)",
+        "requiredBrainrots": [
+          {
+            "name": "Tralalero Tralala",
+            "page": "Tralalero Tralala",
+            "url": "https://stealabrainrot.fandom.com/wiki/Tralalero_Tralala"
+          },
+          {
+            "name": "Odin Din Din Dun",
+            "page": "Odin Din Din Dun",
+            "url": "https://stealabrainrot.fandom.com/wiki/Odin_Din_Din_Dun"
+          }
+        ],
+        "multiplier": "x10",
+        "cashBonus": "$100M",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Splatter Slap, Paintball Gun"
+      },
+      "system": {
+        "slug": "rebirth-11",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-11.webp"
+      }
     },
     {
-      "level": 12,
-      "image": null,
-      "requiredCash": "$3.5T (Formerly 7T)",
-      "requiredBrainrots": [
-        {
-          "name": "Odin Din Din Dun",
-          "page": "Odin Din Din Dun",
-          "url": "https://stealabrainrot.fandom.com/wiki/Odin_Din_Din_Dun"
-        },
-        {
-          "name": "Trenostruzzo Turbo 3000",
-          "page": "Trenostruzzo Turbo 3000",
-          "url": "https://stealabrainrot.fandom.com/wiki/Trenostruzzo_Turbo_3000"
-        }
-      ],
-      "multiplier": "x11",
-      "cashBonus": "$500M",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Heart Balloon, Magnet",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Rebirth 12",
+        "level": 12,
+        "requiredCash": "$3.5T (Formerly 7T)",
+        "requiredBrainrots": [
+          {
+            "name": "Odin Din Din Dun",
+            "page": "Odin Din Din Dun",
+            "url": "https://stealabrainrot.fandom.com/wiki/Odin_Din_Din_Dun"
+          },
+          {
+            "name": "Trenostruzzo Turbo 3000",
+            "page": "Trenostruzzo Turbo 3000",
+            "url": "https://stealabrainrot.fandom.com/wiki/Trenostruzzo_Turbo_3000"
+          }
+        ],
+        "multiplier": "x11",
+        "cashBonus": "$500M",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Heart Balloon, Magnet"
+      },
+      "system": {
+        "slug": "rebirth-12",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "level": 13,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-13.webp",
-      "requiredCash": "$14T",
-      "requiredBrainrots": [
-        {
-          "name": "Trenostruzzo Turbo 3000",
-          "page": "Trenostruzzo Turbo 3000",
-          "url": "https://stealabrainrot.fandom.com/wiki/Trenostruzzo_Turbo_3000"
-        },
-        {
-          "name": "Ballerino Lololo",
-          "page": "Ballerino Lololo",
-          "url": "https://stealabrainrot.fandom.com/wiki/Ballerino_Lololo"
-        }
-      ],
-      "multiplier": "x12",
-      "cashBonus": "$1B",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Megaphone, BeeHive",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/3b/Rebirth_13_New.png/revision/latest?cb=20251124204929"
+      "item": {
+        "name": "Rebirth 13",
+        "level": 13,
+        "requiredCash": "$14T",
+        "requiredBrainrots": [
+          {
+            "name": "Trenostruzzo Turbo 3000",
+            "page": "Trenostruzzo Turbo 3000",
+            "url": "https://stealabrainrot.fandom.com/wiki/Trenostruzzo_Turbo_3000"
+          },
+          {
+            "name": "Ballerino Lololo",
+            "page": "Ballerino Lololo",
+            "url": "https://stealabrainrot.fandom.com/wiki/Ballerino_Lololo"
+          }
+        ],
+        "multiplier": "x12",
+        "cashBonus": "$1B",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Megaphone, BeeHive"
+      },
+      "system": {
+        "slug": "rebirth-13",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-13.webp"
+      }
     },
     {
-      "level": 14,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-14.webp",
-      "requiredCash": "$40T (Formerly 100T)",
-      "requiredBrainrots": [
-        {
-          "name": "Trippi Troppi Troppa Trippa",
-          "page": "Trippi Troppi Troppa Trippa",
-          "url": "https://stealabrainrot.fandom.com/wiki/Trippi_Troppi_Troppa_Trippa"
-        }
-      ],
-      "multiplier": "x13",
-      "cashBonus": "$2.5T",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Gummy Bear, Subspace Mine",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a6/Rebirth_14_New.png/revision/latest?cb=20251124205040"
+      "item": {
+        "name": "Rebirth 14",
+        "level": 14,
+        "requiredCash": "$40T (Formerly 100T)",
+        "requiredBrainrots": [
+          {
+            "name": "Trippi Troppi Troppa Trippa",
+            "page": "Trippi Troppi Troppa Trippa",
+            "url": "https://stealabrainrot.fandom.com/wiki/Trippi_Troppi_Troppa_Trippa"
+          }
+        ],
+        "multiplier": "x13",
+        "cashBonus": "$2.5T",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Gummy Bear, Subspace Mine"
+      },
+      "system": {
+        "slug": "rebirth-14",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-14.webp"
+      }
     },
     {
-      "level": 15,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-15.webp",
-      "requiredCash": "$100T (Formerly 500T)",
-      "requiredBrainrots": [
-        {
-          "name": "Pakrahmatmamat",
-          "page": "Pakrahmatmamat",
-          "url": "https://stealabrainrot.fandom.com/wiki/Pakrahmatmamat"
-        }
-      ],
-      "multiplier": "x15",
-      "cashBonus": "$10T",
-      "lockBaseBonus": "+10 Sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Heatseeker (750M)",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/6f/Screenshot_2025-11-02_213231.png/revision/latest?cb=20251124205104"
+      "item": {
+        "name": "Rebirth 15",
+        "level": 15,
+        "requiredCash": "$100T (Formerly 500T)",
+        "requiredBrainrots": [
+          {
+            "name": "Pakrahmatmamat",
+            "page": "Pakrahmatmamat",
+            "url": "https://stealabrainrot.fandom.com/wiki/Pakrahmatmamat"
+          }
+        ],
+        "multiplier": "x15",
+        "cashBonus": "$10T",
+        "lockBaseBonus": "+10 Sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Heatseeker (750M)"
+      },
+      "system": {
+        "slug": "rebirth-15",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-15.webp"
+      }
     },
     {
-      "level": 16,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-16.webp",
-      "requiredCash": "$1Qa",
-      "requiredBrainrots": [
-        {
-          "name": "Los Tralaleritos",
-          "page": "Los Tralaleritos",
-          "url": "https://stealabrainrot.fandom.com/wiki/Los_Tralaleritos"
-        }
-      ],
-      "multiplier": "x16",
-      "cashBonus": "$25T",
-      "lockBaseBonus": "+10 sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Attack Doge (1B)",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/94/Rebirth_16.png/revision/latest?cb=20251011172134"
+      "item": {
+        "name": "Rebirth 16",
+        "level": 16,
+        "requiredCash": "$1Qa",
+        "requiredBrainrots": [
+          {
+            "name": "Los Tralaleritos",
+            "page": "Los Tralaleritos",
+            "url": "https://stealabrainrot.fandom.com/wiki/Los_Tralaleritos"
+          }
+        ],
+        "multiplier": "x16",
+        "cashBonus": "$25T",
+        "lockBaseBonus": "+10 sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Attack Doge (1B)"
+      },
+      "system": {
+        "slug": "rebirth-16",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-16.webp"
+      }
     },
     {
-      "level": 17,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-17.webp",
-      "requiredCash": "$2Qa",
-      "requiredBrainrots": [
-        {
-          "name": "Job Job Job Sahur",
-          "page": "Job Job Job Sahur",
-          "url": "https://stealabrainrot.fandom.com/wiki/Job_Job_Job_Sahur"
-        },
-        {
-          "name": "Chicleteira Bicicleteira",
-          "page": "Chicleteira Bicicleteira",
-          "url": "https://stealabrainrot.fandom.com/wiki/Chicleteira_Bicicleteira"
-        }
-      ],
-      "multiplier": "x17",
-      "cashBonus": "$50T",
-      "lockBaseBonus": "+10 sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Giant Potion (1.5B)",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/3/34/New_Rebirth_17.jpg/revision/latest?cb=20260220124307"
+      "item": {
+        "name": "Rebirth 17",
+        "level": 17,
+        "requiredCash": "$2Qa",
+        "requiredBrainrots": [
+          {
+            "name": "Job Job Job Sahur",
+            "page": "Job Job Job Sahur",
+            "url": "https://stealabrainrot.fandom.com/wiki/Job_Job_Job_Sahur"
+          },
+          {
+            "name": "Chicleteira Bicicleteira",
+            "page": "Chicleteira Bicicleteira",
+            "url": "https://stealabrainrot.fandom.com/wiki/Chicleteira_Bicicleteira"
+          }
+        ],
+        "multiplier": "x17",
+        "cashBonus": "$50T",
+        "lockBaseBonus": "+10 sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Giant Potion (1.5B)"
+      },
+      "system": {
+        "slug": "rebirth-17",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-17.webp"
+      }
     },
     {
-      "level": 18,
-      "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-18.webp",
-      "requiredCash": "$10Qa",
-      "requiredBrainrots": [
-        {
-          "name": "Graipuss Medussi",
-          "page": "Graipuss Medussi",
-          "url": "https://stealabrainrot.fandom.com/wiki/Graipuss_Medussi"
-        }
-      ],
-      "multiplier": "18x",
-      "cashBonus": "$100T",
-      "lockBaseBonus": "+10 sec",
-      "slotBonus": "+1",
-      "specialItemsAbilities": "Flash Teleport (3B)",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/6/67/Screenshot_2026-01-24_162225.png/revision/latest?cb=20260125002414"
+      "item": {
+        "name": "Rebirth 18",
+        "level": 18,
+        "requiredCash": "$10Qa",
+        "requiredBrainrots": [
+          {
+            "name": "Graipuss Medussi",
+            "page": "Graipuss Medussi",
+            "url": "https://stealabrainrot.fandom.com/wiki/Graipuss_Medussi"
+          }
+        ],
+        "multiplier": "18x",
+        "cashBonus": "$100T",
+        "lockBaseBonus": "+10 sec",
+        "slotBonus": "+1",
+        "specialItemsAbilities": "Flash Teleport (3B)"
+      },
+      "system": {
+        "slug": "rebirth-18",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-18.webp"
+      }
     }
   ]
 }

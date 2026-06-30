@@ -1,439 +1,885 @@
 {
   "meta": {
-    "title": "Grow a Garden crafting recipes data",
-    "updatedAt": "2026-04-22",
-    "sources": [
-      {
-        "label": "Grow a Garden Wiki - Crafting",
-        "url": "https://growagarden.fandom.com/wiki/Crafting",
-        "accessed": "2026-04-22"
-      }
+    "schemaVersion": 2,
+    "game": "Grow a Garden",
+    "gameSlug": "grow-a-garden",
+    "collection": "crafting-recipes",
+    "route": "/wiki/grow-a-garden/crafting-recipes",
+    "catalogCode": "grow-a-garden-crafting-recipes",
+    "itemFields": [
+      "item",
+      "category",
+      "recipe",
+      "craftTime",
+      "alternativePrices"
     ],
     "columns": [
       "item",
       "category",
       "recipe",
       "craftTime",
-      "alternativePrices",
-      "image"
-    ]
+      "alternativePrices"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Seed Crafting",
+        "Item Crafting",
+        "Sprinkler Crafting"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "item",
+        "category",
+        "recipe",
+        "craftTime",
+        "alternativePrices"
+      ],
+      "tableFields": [
+        "item",
+        "category",
+        "recipe",
+        "craftTime",
+        "alternativePrices"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "item": "Mandrake Seed ×3",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Carrot Beanstalk Common Egg",
-      "craftTime": "5 Minutes",
-      "alternativePrices": "199 199",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/mandrake-seed-x3.png"
+      "item": {
+        "name": "Mandrake Seed ×3",
+        "item": "Mandrake Seed ×3",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Carrot Beanstalk Common Egg",
+        "craftTime": "5 Minutes",
+        "alternativePrices": "199 199"
+      },
+      "system": {
+        "slug": "mandrake-seed-3",
+        "section": "Seed Crafting",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/mandrake-seed-x3.png"
+      }
     },
     {
-      "item": "Evo Apple I Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Evo Beetroot IV Evo Blueberry IV Evo Pumpkin IV Evo Mushroom IV Sugar Apple Seed",
-      "craftTime": "10 Minutes",
-      "alternativePrices": "195 195",
-      "image": "/Grow%20a%20Garden/Crops/evo-apple-i.png"
+      "item": {
+        "name": "Evo Apple I Seed",
+        "item": "Evo Apple I Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Evo Beetroot IV Evo Blueberry IV Evo Pumpkin IV Evo Mushroom IV Sugar Apple Seed",
+        "craftTime": "10 Minutes",
+        "alternativePrices": "195 195"
+      },
+      "system": {
+        "slug": "evo-apple-i-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden/Crops/evo-apple-i.png"
+      }
     },
     {
-      "item": "Evo Apple II Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Evo Apple I Seed 2x Evo Apple I Burning Bud Seed 30,000,000",
-      "craftTime": "20 Minutes",
-      "alternativePrices": "349 349",
-      "image": "/Grow%20a%20Garden/Crops/evo-apple-ii.png"
+      "item": {
+        "name": "Evo Apple II Seed",
+        "item": "Evo Apple II Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Evo Apple I Seed 2x Evo Apple I Burning Bud Seed 30,000,000",
+        "craftTime": "20 Minutes",
+        "alternativePrices": "349 349"
+      },
+      "system": {
+        "slug": "evo-apple-ii-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden/Crops/evo-apple-ii.png"
+      }
     },
     {
-      "item": "Evo Apple III Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Evo Apple II Seed 2× Evo Apple II Giant Pinecone Seed 70,000,000",
-      "craftTime": "30 Minutes",
-      "alternativePrices": "679 679",
-      "image": "/Grow%20a%20Garden/Crops/evo-apple-iii.png"
+      "item": {
+        "name": "Evo Apple III Seed",
+        "item": "Evo Apple III Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Evo Apple II Seed 2× Evo Apple II Giant Pinecone Seed 70,000,000",
+        "craftTime": "30 Minutes",
+        "alternativePrices": "679 679"
+      },
+      "system": {
+        "slug": "evo-apple-iii-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden/Crops/evo-apple-iii.png"
+      }
     },
     {
-      "item": "Evo Apple IV Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Evo Apple III Seed 2× Evo Apple III Elder Strawberry Seed 100,000,000",
-      "craftTime": "40 Minutes",
-      "alternativePrices": "849 849",
-      "image": "/Grow%20a%20Garden/Crops/evo-apple-iv.png"
+      "item": {
+        "name": "Evo Apple IV Seed",
+        "item": "Evo Apple IV Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Evo Apple III Seed 2× Evo Apple III Elder Strawberry Seed 100,000,000",
+        "craftTime": "40 Minutes",
+        "alternativePrices": "849 849"
+      },
+      "system": {
+        "slug": "evo-apple-iv-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden/Crops/evo-apple-iv.png"
+      }
     },
     {
-      "item": "Olive Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: 2x Basic Sprinkler Grape Tomato Seed",
-      "craftTime": "15 Minutes",
-      "alternativePrices": "129 129",
-      "image": "/Grow%20a%20Garden/Crops/olive.png"
+      "item": {
+        "name": "Olive Seed",
+        "item": "Olive Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: 2x Basic Sprinkler Grape Tomato Seed",
+        "craftTime": "15 Minutes",
+        "alternativePrices": "129 129"
+      },
+      "system": {
+        "slug": "olive-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 6,
+        "image": "/Grow%20a%20Garden/Crops/olive.png"
+      }
     },
     {
-      "item": "Hollow Bamboo Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Advanced Sprinkler Godly Sprinkler Bamboo Cactus Seed 5,000,000",
-      "craftTime": "45 minutes",
-      "alternativePrices": "507 507",
-      "image": "/Grow%20a%20Garden/Crops/hollow-bamboo.png"
+      "item": {
+        "name": "Hollow Bamboo Seed",
+        "item": "Hollow Bamboo Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Advanced Sprinkler Godly Sprinkler Bamboo Cactus Seed 5,000,000",
+        "craftTime": "45 minutes",
+        "alternativePrices": "507 507"
+      },
+      "system": {
+        "slug": "hollow-bamboo-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 7,
+        "image": "/Grow%20a%20Garden/Crops/hollow-bamboo.png"
+      }
     },
     {
-      "item": "Yarrow Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: 2x Master Sprinkler Burning Bud Daffodil Seed 18,000,000",
-      "craftTime": "1 Hour",
-      "alternativePrices": "729 729",
-      "image": "/Grow%20a%20Garden/Crops/yarrow.webp"
+      "item": {
+        "name": "Yarrow Seed",
+        "item": "Yarrow Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: 2x Master Sprinkler Burning Bud Daffodil Seed 18,000,000",
+        "craftTime": "1 Hour",
+        "alternativePrices": "729 729"
+      },
+      "system": {
+        "slug": "yarrow-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 8,
+        "image": "/Grow%20a%20Garden/Crops/yarrow.webp"
+      }
     },
     {
-      "item": "Egg Melon Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: 4x Easter Egg Melon Seed 10,000,000",
-      "craftTime": "45 Minutes",
-      "alternativePrices": "699 699",
-      "image": "/Grow%20a%20Garden/Crops/egg-melon.png"
+      "item": {
+        "name": "Egg Melon Seed",
+        "item": "Egg Melon Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: 4x Easter Egg Melon Seed 10,000,000",
+        "craftTime": "45 Minutes",
+        "alternativePrices": "699 699"
+      },
+      "system": {
+        "slug": "egg-melon-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 9,
+        "image": "/Grow%20a%20Garden/Crops/egg-melon.png"
+      }
     },
     {
-      "item": "Grand Volcania Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: 2× Ember Lily Dinosaur Egg Ancient Seed Pack 950,000",
-      "craftTime": "30 Minutes",
-      "alternativePrices": "819",
-      "image": "/Grow%20a%20Garden/Crops/grand-volcania.png"
+      "item": {
+        "name": "Grand Volcania Seed",
+        "item": "Grand Volcania Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: 2× Ember Lily Dinosaur Egg Ancient Seed Pack 950,000",
+        "craftTime": "30 Minutes",
+        "alternativePrices": "819"
+      },
+      "system": {
+        "slug": "grand-volcania-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 10,
+        "image": "/Grow%20a%20Garden/Crops/grand-volcania.png"
+      }
     },
     {
-      "item": "Peace Lily Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Rafflesia Seed Cauliflower Seed 3",
-      "craftTime": "15 Minutes",
-      "alternativePrices": "129",
-      "image": "/Grow%20a%20Garden/Crops/peace-lily.png"
+      "item": {
+        "name": "Peace Lily Seed",
+        "item": "Peace Lily Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Rafflesia Seed Cauliflower Seed 3",
+        "craftTime": "15 Minutes",
+        "alternativePrices": "129"
+      },
+      "system": {
+        "slug": "peace-lily-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 11,
+        "image": "/Grow%20a%20Garden/Crops/peace-lily.png"
+      }
     },
     {
-      "item": "Aloe Vera Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Peace Lily Seed Prickly Pear 18",
-      "craftTime": "20 Minutes",
-      "alternativePrices": "299",
-      "image": "/Grow%20a%20Garden/Crops/aloe-vera.png"
+      "item": {
+        "name": "Aloe Vera Seed",
+        "item": "Aloe Vera Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Peace Lily Seed Prickly Pear 18",
+        "craftTime": "20 Minutes",
+        "alternativePrices": "299"
+      },
+      "system": {
+        "slug": "aloe-vera-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 12,
+        "image": "/Grow%20a%20Garden/Crops/aloe-vera.png"
+      }
     },
     {
-      "item": "Guanabana Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Aloe Vera Seed Prickly Pear Seed Banana 30",
-      "craftTime": "25 Minutes",
-      "alternativePrices": "779",
-      "image": "/Grow%20a%20Garden/Crops/guanabana.png"
+      "item": {
+        "name": "Guanabana Seed",
+        "item": "Guanabana Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Aloe Vera Seed Prickly Pear Seed Banana 30",
+        "craftTime": "25 Minutes",
+        "alternativePrices": "779"
+      },
+      "system": {
+        "slug": "guanabana-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 13,
+        "image": "/Grow%20a%20Garden/Crops/guanabana.png"
+      }
     },
     {
-      "item": "Crafters Seed Pack",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Flower Seed Pack 10",
-      "craftTime": "10 Minute",
-      "alternativePrices": "199",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/crafters-seed-pack.png"
+      "item": {
+        "name": "Crafters Seed Pack",
+        "item": "Crafters Seed Pack",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Flower Seed Pack 10",
+        "craftTime": "10 Minute",
+        "alternativePrices": "199"
+      },
+      "system": {
+        "slug": "crafters-seed-pack",
+        "section": "Seed Crafting",
+        "sortOrder": 14,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/crafters-seed-pack.png"
+      }
     },
     {
-      "item": "Manuka Flower Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Daffodil Seed Orange Tulip Seed 6",
-      "craftTime": "8 Minutes",
-      "alternativePrices": "99",
-      "image": "/Grow%20a%20Garden/Crops/manuka-flower.png"
+      "item": {
+        "name": "Manuka Flower Seed",
+        "item": "Manuka Flower Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Daffodil Seed Orange Tulip Seed 6",
+        "craftTime": "8 Minutes",
+        "alternativePrices": "99"
+      },
+      "system": {
+        "slug": "manuka-flower-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 15,
+        "image": "/Grow%20a%20Garden/Crops/manuka-flower.png"
+      }
     },
     {
-      "item": "Dandelion Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: 2× Bamboo Manuka Flower 20",
-      "craftTime": "12 Minutes",
-      "alternativePrices": "199",
-      "image": "/Grow%20a%20Garden/Crops/dandelion.png"
+      "item": {
+        "name": "Dandelion Seed",
+        "item": "Dandelion Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: 2× Bamboo Manuka Flower 20",
+        "craftTime": "12 Minutes",
+        "alternativePrices": "199"
+      },
+      "system": {
+        "slug": "dandelion-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 16,
+        "image": "/Grow%20a%20Garden/Crops/dandelion.png"
+      }
     },
     {
-      "item": "Lumira Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: 2× Pumpkin Dandelion Seed Flower Seed Pack 40",
-      "craftTime": "15 Minutes",
-      "alternativePrices": "529",
-      "image": "/Grow%20a%20Garden/Crops/lumira.png"
+      "item": {
+        "name": "Lumira Seed",
+        "item": "Lumira Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: 2× Pumpkin Dandelion Seed Flower Seed Pack 40",
+        "craftTime": "15 Minutes",
+        "alternativePrices": "529"
+      },
+      "system": {
+        "slug": "lumira-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 17,
+        "image": "/Grow%20a%20Garden/Crops/lumira.png"
+      }
     },
     {
-      "item": "Honeysuckle Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Pink Lily Seed Purple Dahlia Seed 80",
-      "craftTime": "20 Minutes",
-      "alternativePrices": "619",
-      "image": "/Grow%20a%20Garden/Crops/honeysuckle.png"
+      "item": {
+        "name": "Honeysuckle Seed",
+        "item": "Honeysuckle Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Pink Lily Seed Purple Dahlia Seed 80",
+        "craftTime": "20 Minutes",
+        "alternativePrices": "619"
+      },
+      "system": {
+        "slug": "honeysuckle-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 18,
+        "image": "/Grow%20a%20Garden/Crops/honeysuckle.png"
+      }
     },
     {
-      "item": "Bee Balm Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Crocus Lavender 10",
-      "craftTime": "10 Minutes",
-      "alternativePrices": "179",
-      "image": "/Grow%20a%20Garden/Crops/bee-balm.png"
+      "item": {
+        "name": "Bee Balm Seed",
+        "item": "Bee Balm Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Crocus Lavender 10",
+        "craftTime": "10 Minutes",
+        "alternativePrices": "179"
+      },
+      "system": {
+        "slug": "bee-balm-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 19,
+        "image": "/Grow%20a%20Garden/Crops/bee-balm.png"
+      }
     },
     {
-      "item": "Nectar Thorn Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: 2× Cactus Cactus Seed Nectarshade Seed 20",
-      "craftTime": "15 Minutes",
-      "alternativePrices": "659",
-      "image": "/Grow%20a%20Garden/Crops/nectar-thorn.png"
+      "item": {
+        "name": "Nectar Thorn Seed",
+        "item": "Nectar Thorn Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: 2× Cactus Cactus Seed Nectarshade Seed 20",
+        "craftTime": "15 Minutes",
+        "alternativePrices": "659"
+      },
+      "system": {
+        "slug": "nectar-thorn-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 20,
+        "image": "/Grow%20a%20Garden/Crops/nectar-thorn.png"
+      }
     },
     {
-      "item": "Suncoil Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Crocus Daffodil Pink Lily 40",
-      "craftTime": "15 Minutes",
-      "alternativePrices": "749",
-      "image": "/Grow%20a%20Garden/Crops/suncoil.png"
+      "item": {
+        "name": "Suncoil Seed",
+        "item": "Suncoil Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Crocus Daffodil Pink Lily 40",
+        "craftTime": "15 Minutes",
+        "alternativePrices": "749"
+      },
+      "system": {
+        "slug": "suncoil-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 21,
+        "image": "/Grow%20a%20Garden/Crops/suncoil.png"
+      }
     },
     {
-      "item": "Twisted Tangle Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Cactus Seed Bamboo Seed Cactus Mango 50,000",
-      "craftTime": "10 Minutes",
-      "alternativePrices": "239",
-      "image": "/Grow%20a%20Garden/Crops/twisted-tangle.webp"
+      "item": {
+        "name": "Twisted Tangle Seed",
+        "item": "Twisted Tangle Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Cactus Seed Bamboo Seed Cactus Mango 50,000",
+        "craftTime": "10 Minutes",
+        "alternativePrices": "239"
+      },
+      "system": {
+        "slug": "twisted-tangle-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 22,
+        "image": "/Grow%20a%20Garden/Crops/twisted-tangle.webp"
+      }
     },
     {
-      "item": "Veinpetal Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Orange Tulip Seed Daffodil Seed Beanstalk Burning Bud 650,000",
-      "craftTime": "15 Minutes",
-      "alternativePrices": "459",
-      "image": "/Grow%20a%20Garden/Crops/veinpetal.webp"
+      "item": {
+        "name": "Veinpetal Seed",
+        "item": "Veinpetal Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Orange Tulip Seed Daffodil Seed Beanstalk Burning Bud 650,000",
+        "craftTime": "15 Minutes",
+        "alternativePrices": "459"
+      },
+      "system": {
+        "slug": "veinpetal-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 23,
+        "image": "/Grow%20a%20Garden/Crops/veinpetal.webp"
+      }
     },
     {
-      "item": "Horsetail Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Daffodil Seed Bamboo Corn 15,000",
-      "craftTime": "8 Minutes",
-      "alternativePrices": "199",
-      "image": "/Grow%20a%20Garden/Crops/horsetail.png"
+      "item": {
+        "name": "Horsetail Seed",
+        "item": "Horsetail Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Daffodil Seed Bamboo Corn 15,000",
+        "craftTime": "8 Minutes",
+        "alternativePrices": "199"
+      },
+      "system": {
+        "slug": "horsetail-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 24,
+        "image": "/Grow%20a%20Garden/Crops/horsetail.png"
+      }
     },
     {
-      "item": "Lingonberry Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: 3× Blueberry Seed Horsetail 450,000",
-      "craftTime": "20 Minutes",
-      "alternativePrices": "209",
-      "image": "/Grow%20a%20Garden/Crops/lingonberry.png"
+      "item": {
+        "name": "Lingonberry Seed",
+        "item": "Lingonberry Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: 3× Blueberry Seed Horsetail 450,000",
+        "craftTime": "20 Minutes",
+        "alternativePrices": "209"
+      },
+      "system": {
+        "slug": "lingonberry-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 25,
+        "image": "/Grow%20a%20Garden/Crops/lingonberry.png"
+      }
     },
     {
-      "item": "Amber Spine Seed",
-      "category": "Seed Crafting",
-      "recipe": "Crafting ingredients: Cactus Seed Pumpkin Horsetail 650,000",
-      "craftTime": "20 Minutes",
-      "alternativePrices": "625",
-      "image": "/Grow%20a%20Garden/Crops/amber-spine.png"
+      "item": {
+        "name": "Amber Spine Seed",
+        "item": "Amber Spine Seed",
+        "category": "Seed Crafting",
+        "recipe": "Crafting ingredients: Cactus Seed Pumpkin Horsetail 650,000",
+        "craftTime": "20 Minutes",
+        "alternativePrices": "625"
+      },
+      "system": {
+        "slug": "amber-spine-seed",
+        "section": "Seed Crafting",
+        "sortOrder": 26,
+        "image": "/Grow%20a%20Garden/Crops/amber-spine.png"
+      }
     },
     {
-      "item": "Lightning Rod",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Basic Sprinkler Advanced Sprinkler Godly Sprinkler 500,000",
-      "craftTime": "45 Minutes",
-      "alternativePrices": "179 179",
-      "image": "/Grow%20a%20Garden/Gears/lightning-rod.png"
+      "item": {
+        "name": "Lightning Rod",
+        "item": "Lightning Rod",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Basic Sprinkler Advanced Sprinkler Godly Sprinkler 500,000",
+        "craftTime": "45 Minutes",
+        "alternativePrices": "179 179"
+      },
+      "system": {
+        "slug": "lightning-rod",
+        "section": "Item Crafting",
+        "sortOrder": 27,
+        "image": "/Grow%20a%20Garden/Gears/lightning-rod.png"
+      }
     },
     {
-      "item": "Tanning Mirror",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Basic Sprinkler Advanced Sprinkler Godly Sprinkler 500,000",
-      "craftTime": "45 Minutes",
-      "alternativePrices": "219 219",
-      "image": "/Grow%20a%20Garden/Gears/tanning-mirror.png"
+      "item": {
+        "name": "Tanning Mirror",
+        "item": "Tanning Mirror",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Basic Sprinkler Advanced Sprinkler Godly Sprinkler 500,000",
+        "craftTime": "45 Minutes",
+        "alternativePrices": "219 219"
+      },
+      "system": {
+        "slug": "tanning-mirror",
+        "section": "Item Crafting",
+        "sortOrder": 28,
+        "image": "/Grow%20a%20Garden/Gears/tanning-mirror.png"
+      }
     },
     {
-      "item": "Reclaimer ×3",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Common Egg Harvest Tool 500,000",
-      "craftTime": "25 Minutes",
-      "alternativePrices": "199 199",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/reclaimer-x3.png"
+      "item": {
+        "name": "Reclaimer ×3",
+        "item": "Reclaimer ×3",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Common Egg Harvest Tool 500,000",
+        "craftTime": "25 Minutes",
+        "alternativePrices": "199 199"
+      },
+      "system": {
+        "slug": "reclaimer-3",
+        "section": "Item Crafting",
+        "sortOrder": 29,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/reclaimer-x3.png"
+      }
     },
     {
-      "item": "Event Lantern ×30",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Recall Wrench Apple 350,000",
-      "craftTime": "10 Seconds",
-      "alternativePrices": "39 39",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/event-lantern-x30.png"
+      "item": {
+        "name": "Event Lantern ×30",
+        "item": "Event Lantern ×30",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Recall Wrench Apple 350,000",
+        "craftTime": "10 Seconds",
+        "alternativePrices": "39 39"
+      },
+      "system": {
+        "slug": "event-lantern-30",
+        "section": "Item Crafting",
+        "sortOrder": 30,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/event-lantern-x30.png"
+      }
     },
     {
-      "item": "Anti Bee Egg",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Bee Egg 25",
-      "craftTime": "2 Hours",
-      "alternativePrices": "149 149",
-      "image": "/Grow%20a%20Garden/Eggs/anti-bee-egg.png"
+      "item": {
+        "name": "Anti Bee Egg",
+        "item": "Anti Bee Egg",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Bee Egg 25",
+        "craftTime": "2 Hours",
+        "alternativePrices": "149 149"
+      },
+      "system": {
+        "slug": "anti-bee-egg",
+        "section": "Item Crafting",
+        "sortOrder": 31,
+        "image": "/Grow%20a%20Garden/Eggs/anti-bee-egg.png"
+      }
     },
     {
-      "item": "Small Toy",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Common Egg Coconut Seed Coconut 1,000,000",
-      "craftTime": "10 Minutes",
-      "alternativePrices": "139 139",
-      "image": "/Grow%20a%20Garden/Gears/small-toy.png"
+      "item": {
+        "name": "Small Toy",
+        "item": "Small Toy",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Common Egg Coconut Seed Coconut 1,000,000",
+        "craftTime": "10 Minutes",
+        "alternativePrices": "139 139"
+      },
+      "system": {
+        "slug": "small-toy",
+        "section": "Item Crafting",
+        "sortOrder": 32,
+        "image": "/Grow%20a%20Garden/Gears/small-toy.png"
+      }
     },
     {
-      "item": "Small Treat",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Common Egg Dragon Fruit Seed Blueberry 1,000,000",
-      "craftTime": "10 Minutes",
-      "alternativePrices": "89 89",
-      "image": "/Grow%20a%20Garden/Gears/small-treat.png"
+      "item": {
+        "name": "Small Treat",
+        "item": "Small Treat",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Common Egg Dragon Fruit Seed Blueberry 1,000,000",
+        "craftTime": "10 Minutes",
+        "alternativePrices": "89 89"
+      },
+      "system": {
+        "slug": "small-treat",
+        "section": "Item Crafting",
+        "sortOrder": 33,
+        "image": "/Grow%20a%20Garden/Gears/small-treat.png"
+      }
     },
     {
-      "item": "Pet Pouch",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Common Egg Corndog Small Treat Small Toy 50,000,000",
-      "craftTime": "30 Minutes",
-      "alternativePrices": "89 89",
-      "image": "/Grow%20a%20Garden/Gears/pet-pouch.png"
+      "item": {
+        "name": "Pet Pouch",
+        "item": "Pet Pouch",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Common Egg Corndog Small Treat Small Toy 50,000,000",
+        "craftTime": "30 Minutes",
+        "alternativePrices": "89 89"
+      },
+      "system": {
+        "slug": "pet-pouch",
+        "section": "Item Crafting",
+        "sortOrder": 34,
+        "image": "/Grow%20a%20Garden/Gears/pet-pouch.png"
+      }
     },
     {
-      "item": "Pack Bee",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Anti Bee Egg Legacy Sunflower Purple Dahlia 250",
-      "craftTime": "4 Hours",
-      "alternativePrices": "799 799",
-      "image": "/Grow%20a%20Garden/Pets/pack-bee.png"
+      "item": {
+        "name": "Pack Bee",
+        "item": "Pack Bee",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Anti Bee Egg Legacy Sunflower Purple Dahlia 250",
+        "craftTime": "4 Hours",
+        "alternativePrices": "799 799"
+      },
+      "system": {
+        "slug": "pack-bee",
+        "section": "Item Crafting",
+        "sortOrder": 35,
+        "image": "/Grow%20a%20Garden/Pets/pack-bee.png"
+      }
     },
     {
-      "item": "Silver Ingot Cosmetic",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: 1 Sugar Apple crop Buttercup seed Basic Sprinkler 150,000",
-      "craftTime": "1 minute",
-      "alternativePrices": "29 29",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/silver-ingot-cosmetic.png"
+      "item": {
+        "name": "Silver Ingot Cosmetic",
+        "item": "Silver Ingot Cosmetic",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: 1 Sugar Apple crop Buttercup seed Basic Sprinkler 150,000",
+        "craftTime": "1 minute",
+        "alternativePrices": "29 29"
+      },
+      "system": {
+        "slug": "silver-ingot-cosmetic",
+        "section": "Item Crafting",
+        "sortOrder": 36,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/silver-ingot-cosmetic.png"
+      }
     },
     {
-      "item": "Golden Ingot Cosmetic",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Giant Pinecone produce Daffodil seed Advanced Sprinkler 300,000",
-      "craftTime": "1 minute",
-      "alternativePrices": "33 33",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/golden-ingot-cosmetic.png"
+      "item": {
+        "name": "Golden Ingot Cosmetic",
+        "item": "Golden Ingot Cosmetic",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Giant Pinecone produce Daffodil seed Advanced Sprinkler 300,000",
+        "craftTime": "1 minute",
+        "alternativePrices": "33 33"
+      },
+      "system": {
+        "slug": "golden-ingot-cosmetic",
+        "section": "Item Crafting",
+        "sortOrder": 37,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/golden-ingot-cosmetic.png"
+      }
     },
     {
-      "item": "Silver Piggy",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Pig Sushi Lightning Rod 1 Medium Toy 150,000,000",
-      "craftTime": "30 minute",
-      "alternativePrices": "419 419",
-      "image": "/Grow%20a%20Garden/Pets/silver-piggy.png"
+      "item": {
+        "name": "Silver Piggy",
+        "item": "Silver Piggy",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Pig Sushi Lightning Rod 1 Medium Toy 150,000,000",
+        "craftTime": "30 minute",
+        "alternativePrices": "419 419"
+      },
+      "system": {
+        "slug": "silver-piggy",
+        "section": "Item Crafting",
+        "sortOrder": 38,
+        "image": "/Grow%20a%20Garden/Pets/silver-piggy.png"
+      }
     },
     {
-      "item": "Golden Piggy",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Silver Piggy Pizza (Formerly Spaghetti) Tanning Mirror 1 Medium Treat 300,000,000",
-      "craftTime": "45 minutes",
-      "alternativePrices": "459 459",
-      "image": "/Grow%20a%20Garden/Pets/golden-piggy.png"
+      "item": {
+        "name": "Golden Piggy",
+        "item": "Golden Piggy",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Silver Piggy Pizza (Formerly Spaghetti) Tanning Mirror 1 Medium Treat 300,000,000",
+        "craftTime": "45 minutes",
+        "alternativePrices": "459 459"
+      },
+      "system": {
+        "slug": "golden-piggy",
+        "section": "Item Crafting",
+        "sortOrder": 39,
+        "image": "/Grow%20a%20Garden/Pets/golden-piggy.png"
+      }
     },
     {
-      "item": "Chimera Stone",
-      "category": "Item Crafting",
-      "recipe": "Crafting ingredients: Mythical Egg Bug Egg Jungle Egg Gem Egg 500,000,000",
-      "craftTime": "1 hour",
-      "alternativePrices": "199 199",
-      "image": "/Grow%20a%20Garden/Gears/chimera-stone.png"
+      "item": {
+        "name": "Chimera Stone",
+        "item": "Chimera Stone",
+        "category": "Item Crafting",
+        "recipe": "Crafting ingredients: Mythical Egg Bug Egg Jungle Egg Gem Egg 500,000,000",
+        "craftTime": "1 hour",
+        "alternativePrices": "199 199"
+      },
+      "system": {
+        "slug": "chimera-stone",
+        "section": "Item Crafting",
+        "sortOrder": 40,
+        "image": "/Grow%20a%20Garden/Gears/chimera-stone.png"
+      }
     },
     {
-      "item": "Tropical Mist Sprinkler",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Coconut Dragon Fruit Mango Godly Sprinkler",
-      "craftTime": "1 Hour",
-      "alternativePrices": "229",
-      "image": "/Grow%20a%20Garden/Gears/tropical-mist-sprinkler.png"
+      "item": {
+        "name": "Tropical Mist Sprinkler",
+        "item": "Tropical Mist Sprinkler",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Coconut Dragon Fruit Mango Godly Sprinkler",
+        "craftTime": "1 Hour",
+        "alternativePrices": "229"
+      },
+      "system": {
+        "slug": "tropical-mist-sprinkler",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 41,
+        "image": "/Grow%20a%20Garden/Gears/tropical-mist-sprinkler.png"
+      }
     },
     {
-      "item": "Berry Blusher Sprinkler",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Grape Blueberry Strawberry Godly Sprinkler",
-      "craftTime": "1 Hour",
-      "alternativePrices": "229",
-      "image": "/Grow%20a%20Garden/Gears/berry-blusher-sprinkler.png"
+      "item": {
+        "name": "Berry Blusher Sprinkler",
+        "item": "Berry Blusher Sprinkler",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Grape Blueberry Strawberry Godly Sprinkler",
+        "craftTime": "1 Hour",
+        "alternativePrices": "229"
+      },
+      "system": {
+        "slug": "berry-blusher-sprinkler",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 42,
+        "image": "/Grow%20a%20Garden/Gears/berry-blusher-sprinkler.png"
+      }
     },
     {
-      "item": "Spice Spritzer Sprinkler",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Pepper Ember Lily Cacao Master Sprinkler",
-      "craftTime": "1 Hour",
-      "alternativePrices": "229",
-      "image": "/Grow%20a%20Garden/Gears/spice-spritzer-sprinkler.png"
+      "item": {
+        "name": "Spice Spritzer Sprinkler",
+        "item": "Spice Spritzer Sprinkler",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Pepper Ember Lily Cacao Master Sprinkler",
+        "craftTime": "1 Hour",
+        "alternativePrices": "229"
+      },
+      "system": {
+        "slug": "spice-spritzer-sprinkler",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 43,
+        "image": "/Grow%20a%20Garden/Gears/spice-spritzer-sprinkler.png"
+      }
     },
     {
-      "item": "Flower Froster Sprinkler",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Orange Tulip Daffodil Advanced Sprinkler Basic Sprinkler",
-      "craftTime": "1 Hour",
-      "alternativePrices": "229",
-      "image": "/Grow%20a%20Garden/Gears/flower-froster-sprinkler.png"
+      "item": {
+        "name": "Flower Froster Sprinkler",
+        "item": "Flower Froster Sprinkler",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Orange Tulip Daffodil Advanced Sprinkler Basic Sprinkler",
+        "craftTime": "1 Hour",
+        "alternativePrices": "229"
+      },
+      "system": {
+        "slug": "flower-froster-sprinkler",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 44,
+        "image": "/Grow%20a%20Garden/Gears/flower-froster-sprinkler.png"
+      }
     },
     {
-      "item": "Stalk Sprout Sprinkler",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Bamboo Beanstalk Mushroom Advanced Sprinkler",
-      "craftTime": "1 Hour",
-      "alternativePrices": "229",
-      "image": "/Grow%20a%20Garden/Gears/stalk-sprout-sprinkler.png"
+      "item": {
+        "name": "Stalk Sprout Sprinkler",
+        "item": "Stalk Sprout Sprinkler",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Bamboo Beanstalk Mushroom Advanced Sprinkler",
+        "craftTime": "1 Hour",
+        "alternativePrices": "229"
+      },
+      "system": {
+        "slug": "stalk-sprout-sprinkler",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 45,
+        "image": "/Grow%20a%20Garden/Gears/stalk-sprout-sprinkler.png"
+      }
     },
     {
-      "item": "Sweet Soaker Sprinkler",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Watermelon Watermelon Watermelon Master Sprinkler",
-      "craftTime": "1 Hour",
-      "alternativePrices": "229",
-      "image": "/Grow%20a%20Garden/Gears/sweet-soaker-sprinkler.png"
+      "item": {
+        "name": "Sweet Soaker Sprinkler",
+        "item": "Sweet Soaker Sprinkler",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Watermelon Watermelon Watermelon Master Sprinkler",
+        "craftTime": "1 Hour",
+        "alternativePrices": "229"
+      },
+      "system": {
+        "slug": "sweet-soaker-sprinkler",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 46,
+        "image": "/Grow%20a%20Garden/Gears/sweet-soaker-sprinkler.png"
+      }
     },
     {
-      "item": "Mutation Spray Pollinated",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Cleaning Spray Bee Balm 25",
-      "craftTime": "5 Minutes",
-      "alternativePrices": "179",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-pollinated.png"
+      "item": {
+        "name": "Mutation Spray Pollinated",
+        "item": "Mutation Spray Pollinated",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Cleaning Spray Bee Balm 25",
+        "craftTime": "5 Minutes",
+        "alternativePrices": "179"
+      },
+      "system": {
+        "slug": "mutation-spray-pollinated",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 47,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-pollinated.png"
+      }
     },
     {
-      "item": "Honey Crafters Crate",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Bee Crate 12",
-      "craftTime": "30 Minutes",
-      "alternativePrices": "179",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/honey-crafters-crate.png"
+      "item": {
+        "name": "Honey Crafters Crate",
+        "item": "Honey Crafters Crate",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Bee Crate 12",
+        "craftTime": "30 Minutes",
+        "alternativePrices": "179"
+      },
+      "system": {
+        "slug": "honey-crafters-crate",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 48,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/honey-crafters-crate.png"
+      }
     },
     {
-      "item": "Mutation Spray Glimmering",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Cleaning Spray Orange Tulip Seed Daffodil Seed Mango 1,000,000",
-      "craftTime": "15 Minutes",
-      "alternativePrices": "159",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-glimmering.png"
+      "item": {
+        "name": "Mutation Spray Glimmering",
+        "item": "Mutation Spray Glimmering",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Cleaning Spray Orange Tulip Seed Daffodil Seed Mango 1,000,000",
+        "craftTime": "15 Minutes",
+        "alternativePrices": "159"
+      },
+      "system": {
+        "slug": "mutation-spray-glimmering",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 49,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-glimmering.png"
+      }
     },
     {
-      "item": "Mutation Spray Chilled",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Cleaning Spray Godly Sprinkler 500,000",
-      "craftTime": "5 Minutes",
-      "alternativePrices": "189",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-chilled.png"
+      "item": {
+        "name": "Mutation Spray Chilled",
+        "item": "Mutation Spray Chilled",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Cleaning Spray Godly Sprinkler 500,000",
+        "craftTime": "5 Minutes",
+        "alternativePrices": "189"
+      },
+      "system": {
+        "slug": "mutation-spray-chilled",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 50,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-chilled.png"
+      }
     },
     {
-      "item": "Mutation Spray Shocked",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Cleaning Spray Lightning Rod 1,000,000",
-      "craftTime": "30 Minutes",
-      "alternativePrices": "199",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-shocked.png"
+      "item": {
+        "name": "Mutation Spray Shocked",
+        "item": "Mutation Spray Shocked",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Cleaning Spray Lightning Rod 1,000,000",
+        "craftTime": "30 Minutes",
+        "alternativePrices": "199"
+      },
+      "system": {
+        "slug": "mutation-spray-shocked",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 51,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-shocked.png"
+      }
     },
     {
-      "item": "Mutation Spray Choc",
-      "category": "Sprinkler Crafting",
-      "recipe": "Crafting ingredients: Cleaning Spray Cacao 200,000",
-      "craftTime": "12 Minutes",
-      "alternativePrices": "179",
-      "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-choc.png"
+      "item": {
+        "name": "Mutation Spray Choc",
+        "item": "Mutation Spray Choc",
+        "category": "Sprinkler Crafting",
+        "recipe": "Crafting ingredients: Cleaning Spray Cacao 200,000",
+        "craftTime": "12 Minutes",
+        "alternativePrices": "179"
+      },
+      "system": {
+        "slug": "mutation-spray-choc",
+        "section": "Sprinkler Crafting",
+        "sortOrder": 52,
+        "image": "/Grow%20a%20Garden/Crafting%20Recipes/mutation-spray-choc.png"
+      }
     }
   ]
 }

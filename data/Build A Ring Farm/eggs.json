@@ -1,229 +1,208 @@
 {
   "meta": {
-    "title": "Build A Ring Farm eggs data",
-    "updatedAt": "2026-06-27",
-    "groupBy": "collectionSection",
-    "sectionOrder": [
-      "Cash Eggs (Egg Merchant)",
-      "Robux & Limited Eggs (Premium Shop)"
-    ],
-    "defaultCardFields": [
-      "cost",
-      "whereToGet",
-      "topRarity",
-      "availability"
-    ],
-    "fieldPresentation": {
-      "cost": {
-        "kind": "chip",
-        "label": "cost"
-      },
-      "whereToGet": {
-        "kind": "plain",
-        "label": "where to get"
-      },
-      "topRarity": {
-        "kind": "chip",
-        "label": "top rarity"
-      },
-      "availability": {
-        "kind": "highlight",
-        "label": "availability"
-      },
-      "petPool": {
-        "kind": "detail",
-        "label": "pet pool"
-      },
-      "cardSummary": {
-        "kind": "detail",
-        "label": "card summary"
-      }
-    },
-    "sources": [
-      {
-        "label": "allthings.how - Build a Ring Farm Eggs and Every Pet They Hatch",
-        "url": "https://allthings.how/build-a-ring-farm-eggs-and-every-pet-they-hatch/",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Sportskeeda - Build a Ring Farm Epic Egg guide (egg odds)",
-        "url": "https://www.sportskeeda.com/roblox-news/build-ring-farm-epic-egg-guide",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Sportskeeda - Build a Ring Farm Rare Egg guide",
-        "url": "https://www.sportskeeda.com/roblox-news/build-a-ring-farm-rare-egg-guide",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Sportskeeda - All Build a Ring Farm pets and abilities (egg pools)",
-        "url": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Techwiser - Build a Ring Farm Eggs and How to Get Them",
-        "url": "https://techwiser.com/build-a-ring-farm-eggs/",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Pro Game Guides - Build A Ring Farm Pets Tier List (egg sources)",
-        "url": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "bloxron.com - Build A Ring Farm pets and egg sources",
-        "url": "https://bloxron.com/build-a-ring-farm/pets",
-        "accessed": "2026-06-27"
-      }
-    ],
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Build A Ring Farm",
+    "gameSlug": "build-a-ring-farm",
+    "collection": "eggs",
+    "route": "/wiki/build-a-ring-farm/eggs",
+    "catalogCode": "build-a-ring-farm-eggs",
+    "itemFields": [
       "order",
       "cost",
       "whereToGet",
       "topRarity",
       "availability",
       "petPool",
-      "cardSummary",
-      "sourceConfidence",
-      "verificationNote",
-      "imageStatus",
-      "sourcePage"
+      "cardSummary"
     ],
-    "sourceCountSummary": {
-      "acceptedEggRows": 7,
-      "localImageCount": 0
-    },
-    "uncertainFacts": [
-      "Uncommon Egg cash price is not disclosed by sources; cost field left as 'Cash (price not disclosed)'.",
-      "Epic Egg cost listed as $25T by two Sportskeeda guides and buildaringfarm.co; some lighter listicles say $10T. Used $25T as the better-corroborated value.",
-      "Per-pet drop odds are only disclosed for the Epic Egg and Dinosaur Egg; other eggs' exact hatch rates are not published, so no odds are claimed for them.",
-      "Dinosaur Egg and Carnival Egg are limited/event Robux eggs; sources give conflicting end dates, so no hard date is stored - availability uses a stable 'Limited / event' label.",
-      "Summer Egg and Celestial Egg appear in only one source (bloxron) with no pet pool or price detail and are excluded pending second-source confirmation."
-    ]
+    "columns": [
+      "order",
+      "cost",
+      "whereToGet",
+      "topRarity",
+      "availability",
+      "petPool",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Cash Eggs (Egg Merchant)",
+        "Robux & Limited Eggs (Premium Shop)"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "cost",
+        "whereToGet",
+        "topRarity",
+        "availability"
+      ],
+      "tableFields": [
+        "order",
+        "cost",
+        "whereToGet",
+        "topRarity",
+        "availability",
+        "petPool",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "cost": {
+          "kind": "chip",
+          "label": "cost"
+        },
+        "whereToGet": {
+          "kind": "plain",
+          "label": "where to get"
+        },
+        "topRarity": {
+          "kind": "chip",
+          "label": "top rarity"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "availability"
+        },
+        "petPool": {
+          "kind": "detail",
+          "label": "pet pool"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "card summary"
+        }
+      }
+    }
   },
   "items": [
     {
-      "name": "Common Egg",
-      "slug": "common-egg",
-      "image": "/Build%20A%20Ring%20Farm/eggs/common-egg.webp",
-      "collectionSection": "Cash Eggs (Egg Merchant)",
-      "order": 1,
-      "cost": "$25M Cash",
-      "whereToGet": "Egg Merchant",
-      "topRarity": "Common",
-      "availability": "Permanent",
-      "petPool": "Hatches one of two Common pets: Capybara or Golden Retriever, both giving a small income boost.",
-      "cardSummary": "The cheapest starter egg, bought from the Egg Merchant for 25 million Cash. It only hatches the two Common pets, so it is mainly an early-game step.",
-      "sourceConfidence": "high",
-      "verificationNote": "allthings.how and Pro Game Guides: $25M Cash from Egg Merchant; pool is Capybara and Golden Retriever (Common).",
-      "imageStatus": "local image present",
-      "sourcePage": "https://allthings.how/build-a-ring-farm-eggs-and-every-pet-they-hatch/"
+      "item": {
+        "name": "Common Egg",
+        "order": 1,
+        "cost": "$25M Cash",
+        "whereToGet": "Egg Merchant",
+        "topRarity": "Common",
+        "availability": "Permanent",
+        "petPool": "Hatches one of two Common pets: Capybara or Golden Retriever, both giving a small income boost.",
+        "cardSummary": "The cheapest starter egg, bought from the Egg Merchant for 25 million Cash. It only hatches the two Common pets, so it is mainly an early-game step."
+      },
+      "system": {
+        "slug": "common-egg",
+        "section": "Cash Eggs (Egg Merchant)",
+        "sortOrder": 1,
+        "image": "/Build%20A%20Ring%20Farm/eggs/common-egg.webp"
+      }
     },
     {
-      "name": "Uncommon Egg",
-      "slug": "uncommon-egg",
-      "image": "",
-      "collectionSection": "Cash Eggs (Egg Merchant)",
-      "order": 2,
-      "cost": "Cash (price not disclosed)",
-      "whereToGet": "Egg Merchant",
-      "topRarity": "Uncommon",
-      "availability": "Permanent",
-      "petPool": "Hatches Uncommon pets such as the Llama and Elephant.",
-      "cardSummary": "A low-tier cash egg at the Egg Merchant that steps you up from Common pets to Uncommon ones like the Llama and Elephant. Its exact Cash price is not shown here yet.",
-      "sourceConfidence": "medium",
-      "verificationNote": "allthings.how and bloxron list an Uncommon Egg with Llama and Elephant; cash price not confirmed by any source.",
-      "imageStatus": "no image found - no egg icon published by any researched source (Fandom has no Eggs page; guide sites omit the Uncommon Egg icon)",
-      "sourcePage": "https://allthings.how/build-a-ring-farm-eggs-and-every-pet-they-hatch/"
+      "item": {
+        "name": "Uncommon Egg",
+        "order": 2,
+        "cost": "Cash (price not disclosed)",
+        "whereToGet": "Egg Merchant",
+        "topRarity": "Uncommon",
+        "availability": "Permanent",
+        "petPool": "Hatches Uncommon pets such as the Llama and Elephant.",
+        "cardSummary": "A low-tier cash egg at the Egg Merchant that steps you up from Common pets to Uncommon ones like the Llama and Elephant. Its exact Cash price is not shown here yet."
+      },
+      "system": {
+        "slug": "uncommon-egg",
+        "section": "Cash Eggs (Egg Merchant)",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Rare Egg",
-      "slug": "rare-egg",
-      "image": "/Build%20A%20Ring%20Farm/eggs/rare-egg.webp",
-      "collectionSection": "Cash Eggs (Egg Merchant)",
-      "order": 3,
-      "cost": "$25B Cash",
-      "whereToGet": "Egg Merchant",
-      "topRarity": "Epic",
-      "availability": "Permanent",
-      "petPool": "Six pets across Uncommon, Rare and Epic: Llama, Elephant, Gorilla, Crocodile, Lion and Polar Bear. Lion and Polar Bear are the rarest pulls.",
-      "cardSummary": "A mid-game cash egg from the Egg Merchant costing 25 billion Cash. Its six-pet pool tops out at the Epic Lion and Polar Bear.",
-      "sourceConfidence": "high",
-      "verificationNote": "Sportskeeda Rare Egg guide and allthings.how: $25B Cash; 6-pet pool (Llama, Elephant, Gorilla, Crocodile, Lion, Polar Bear); Lion/Polar Bear rarest.",
-      "imageStatus": "local image present",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/build-a-ring-farm-rare-egg-guide"
+      "item": {
+        "name": "Rare Egg",
+        "order": 3,
+        "cost": "$25B Cash",
+        "whereToGet": "Egg Merchant",
+        "topRarity": "Epic",
+        "availability": "Permanent",
+        "petPool": "Six pets across Uncommon, Rare and Epic: Llama, Elephant, Gorilla, Crocodile, Lion and Polar Bear. Lion and Polar Bear are the rarest pulls.",
+        "cardSummary": "A mid-game cash egg from the Egg Merchant costing 25 billion Cash. Its six-pet pool tops out at the Epic Lion and Polar Bear."
+      },
+      "system": {
+        "slug": "rare-egg",
+        "section": "Cash Eggs (Egg Merchant)",
+        "sortOrder": 3,
+        "image": "/Build%20A%20Ring%20Farm/eggs/rare-egg.webp"
+      }
     },
     {
-      "name": "Epic Egg",
-      "slug": "epic-egg",
-      "image": "/Build%20A%20Ring%20Farm/eggs/epic-egg.webp",
-      "collectionSection": "Cash Eggs (Egg Merchant)",
-      "order": 4,
-      "cost": "$25T Cash",
-      "whereToGet": "Egg Merchant (RNG stock)",
-      "topRarity": "Secret",
-      "availability": "Permanent",
-      "petPool": "Eight pets from Uncommon up to Secret: Elephant (~33%), Llama, Crocodile (~33%), Gorilla (~20%), Lion (~20%), Polar Bear (~9%), Mammoth (~1.6%) and the Secret Hydra (~0.3%).",
-      "cardSummary": "A late-game cash egg that adds the Legendary Mammoth and the Secret Hydra on top of the Rare Egg pool. Stock rotates on a timer, so it is not always for sale at the Egg Merchant.",
-      "sourceConfidence": "high",
-      "verificationNote": "Sportskeeda Epic Egg guide: $25T Cash, RNG stock refreshing ~every 5 min; 8-pet pool with disclosed odds (Elephant 33%, Crocodile 33.33%, Gorilla 20%, Lion 20%, Polar Bear 9.09%, Mammoth 1.58%, Hydra 0.315%). Cost corroborated by buildaringfarm.co; some listicles cite $10T.",
-      "imageStatus": "local image present",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/build-ring-farm-epic-egg-guide"
+      "item": {
+        "name": "Epic Egg",
+        "order": 4,
+        "cost": "$25T Cash",
+        "whereToGet": "Egg Merchant (RNG stock)",
+        "topRarity": "Secret",
+        "availability": "Permanent",
+        "petPool": "Eight pets from Uncommon up to Secret: Elephant (~33%), Llama, Crocodile (~33%), Gorilla (~20%), Lion (~20%), Polar Bear (~9%), Mammoth (~1.6%) and the Secret Hydra (~0.3%).",
+        "cardSummary": "A late-game cash egg that adds the Legendary Mammoth and the Secret Hydra on top of the Rare Egg pool. Stock rotates on a timer, so it is not always for sale at the Egg Merchant."
+      },
+      "system": {
+        "slug": "epic-egg",
+        "section": "Cash Eggs (Egg Merchant)",
+        "sortOrder": 4,
+        "image": "/Build%20A%20Ring%20Farm/eggs/epic-egg.webp"
+      }
     },
     {
-      "name": "Legendary Egg",
-      "slug": "legendary-egg",
-      "image": "/Build%20A%20Ring%20Farm/eggs/legendary-egg.webp",
-      "collectionSection": "Cash Eggs (Egg Merchant)",
-      "order": 5,
-      "cost": "$100T Cash",
-      "whereToGet": "Egg Merchant",
-      "topRarity": "Prismatic",
-      "availability": "Permanent",
-      "petPool": "Contains Epic, Legendary, Secret and Prismatic pets, including the Secret Rhino and the Prismatic Red Panda.",
-      "cardSummary": "The top cash egg, costing 100 trillion. It is the highest-rarity egg you can buy with farmed Cash and can hatch up to Prismatic pets like the Red Panda.",
-      "sourceConfidence": "medium",
-      "verificationNote": "Techwiser and Sportskeeda all-pets page: $100T Cash; pool spans Epic/Legendary/Secret/Prismatic including Rhino and Red Panda. Exact pool list and odds not fully disclosed.",
-      "imageStatus": "local image present",
-      "sourcePage": "https://techwiser.com/build-a-ring-farm-eggs/"
+      "item": {
+        "name": "Legendary Egg",
+        "order": 5,
+        "cost": "$100T Cash",
+        "whereToGet": "Egg Merchant",
+        "topRarity": "Prismatic",
+        "availability": "Permanent",
+        "petPool": "Contains Epic, Legendary, Secret and Prismatic pets, including the Secret Rhino and the Prismatic Red Panda.",
+        "cardSummary": "The top cash egg, costing 100 trillion. It is the highest-rarity egg you can buy with farmed Cash and can hatch up to Prismatic pets like the Red Panda."
+      },
+      "system": {
+        "slug": "legendary-egg",
+        "section": "Cash Eggs (Egg Merchant)",
+        "sortOrder": 5,
+        "image": "/Build%20A%20Ring%20Farm/eggs/legendary-egg.webp"
+      }
     },
     {
-      "name": "Dinosaur Egg",
-      "slug": "dinosaur-egg",
-      "image": "/Build%20A%20Ring%20Farm/eggs/dinosaur-egg.webp",
-      "collectionSection": "Robux & Limited Eggs (Premium Shop)",
-      "order": 1,
-      "cost": "199 Robux",
-      "whereToGet": "Premium Shop",
-      "topRarity": "Divine",
-      "availability": "Limited / event",
-      "petPool": "Five dinosaurs: Gallimimus (~52%), Triceratops (~30%), Spinosaurus (~15%), Velociraptor (~2.5%) and the Divine T-Rex (~0.5%). The only egg that can hatch Divine pets.",
-      "cardSummary": "A limited Robux egg from the Premium Shop and the only source of Divine-rarity pets. Bulk buys are sold at higher Robux tiers, and it can be gifted to other players.",
-      "sourceConfidence": "high",
-      "verificationNote": "allthings.how: 199 Robux, 5-pet pool with disclosed odds (Gallimimus 52%, Triceratops 30%, Spinosaurus 15%, Velociraptor 2.5%, T-Rex 0.5%); only Divine source. Limited offer; sources disagree on end date so none stored.",
-      "imageStatus": "local image present",
-      "sourcePage": "https://allthings.how/build-a-ring-farm-eggs-and-every-pet-they-hatch/"
+      "item": {
+        "name": "Dinosaur Egg",
+        "order": 1,
+        "cost": "199 Robux",
+        "whereToGet": "Premium Shop",
+        "topRarity": "Divine",
+        "availability": "Limited / event",
+        "petPool": "Five dinosaurs: Gallimimus (~52%), Triceratops (~30%), Spinosaurus (~15%), Velociraptor (~2.5%) and the Divine T-Rex (~0.5%). The only egg that can hatch Divine pets.",
+        "cardSummary": "A limited Robux egg from the Premium Shop and the only source of Divine-rarity pets. Bulk buys are sold at higher Robux tiers, and it can be gifted to other players."
+      },
+      "system": {
+        "slug": "dinosaur-egg",
+        "section": "Robux & Limited Eggs (Premium Shop)",
+        "sortOrder": 6,
+        "image": "/Build%20A%20Ring%20Farm/eggs/dinosaur-egg.webp"
+      }
     },
     {
-      "name": "Carnival Egg",
-      "slug": "carnival-egg",
-      "image": "/Build%20A%20Ring%20Farm/eggs/carnival-egg.webp",
-      "collectionSection": "Robux & Limited Eggs (Premium Shop)",
-      "order": 2,
-      "cost": "199 Robux",
-      "whereToGet": "Premium Shop",
-      "topRarity": "Exotic",
-      "availability": "Limited / event",
-      "petPool": "Five carnival pets: Bumper Snail, Jackpot Slime, Prizewheel Peacock, Token Toad and the Exotic Claw Machine Kraken.",
-      "cardSummary": "A limited carnival-themed Robux egg from the Premium Shop. Its five-pet pool runs up to the Exotic Claw Machine Kraken, and bulk buys are offered at higher Robux tiers.",
-      "sourceConfidence": "medium",
-      "verificationNote": "Techwiser and Sportskeeda all-pets page: limited Robux egg; pool is Bumper Snail, Jackpot Slime, Prizewheel Peacock, Token Toad, Claw Machine Kraken (Exotic). Per-pet odds not disclosed; end date conflicts so none stored.",
-      "imageStatus": "local image present",
-      "sourcePage": "https://techwiser.com/build-a-ring-farm-eggs/"
+      "item": {
+        "name": "Carnival Egg",
+        "order": 2,
+        "cost": "199 Robux",
+        "whereToGet": "Premium Shop",
+        "topRarity": "Exotic",
+        "availability": "Limited / event",
+        "petPool": "Five carnival pets: Bumper Snail, Jackpot Slime, Prizewheel Peacock, Token Toad and the Exotic Claw Machine Kraken.",
+        "cardSummary": "A limited carnival-themed Robux egg from the Premium Shop. Its five-pet pool runs up to the Exotic Claw Machine Kraken, and bulk buys are offered at higher Robux tiers."
+      },
+      "system": {
+        "slug": "carnival-egg",
+        "section": "Robux & Limited Eggs (Premium Shop)",
+        "sortOrder": 7,
+        "image": "/Build%20A%20Ring%20Farm/eggs/carnival-egg.webp"
+      }
     }
   ]
 }

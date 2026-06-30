@@ -1,282 +1,228 @@
 {
   "meta": {
-    "title": "Brookhaven RP weather and disasters data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Official Brookhaven Wiki - Brookhaven/Weather_and_Disasters",
-        "url": "https://official-brookhaven.fandom.com/wiki/Brookhaven%2FWeather_and_Disasters",
-        "accessed": "2026-05-07"
-      }
+    "schemaVersion": 2,
+    "game": "Brookhaven RP",
+    "gameSlug": "brookhaven-rp",
+    "collection": "weather-and-disasters",
+    "route": "/wiki/brookhaven-rp/weather-and-disasters",
+    "catalogCode": "brookhaven-rp-weather-and-disasters",
+    "itemFields": [
+      "number",
+      "category",
+      "description"
     ],
     "columns": [
       "number",
-      "image",
-      "name",
       "category",
       "description"
-    ]
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Overview",
+        "Natural Disasters",
+        "Sky Effects",
+        "Lighting"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "number",
+        "category",
+        "description"
+      ],
+      "tableFields": [
+        "number",
+        "category",
+        "description"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "number": "1",
-      "name": "Rain",
-      "slug": "rain",
-      "category": "Overview",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "Rain occurs occasionally at random times. If the player is under a building or roof, they will not see the rain. Rain consists of Roblox particles spread across the map. During rain, the sky turns gray and appears darker than usual.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/rain.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/7/77/WeatherEffect_%284%29.png/revision/latest/scale-to-width-down/250?cb=20260125123740"
+      "item": {
+        "name": "Rain",
+        "number": "1",
+        "category": "Overview",
+        "description": "Rain occurs occasionally at random times. If the player is under a building or roof, they will not see the rain. Rain consists of Roblox particles spread across the map. During rain, the sky turns gray and appears darker than usual."
+      },
+      "system": {
+        "slug": "rain",
+        "section": "Overview",
+        "sortOrder": 1,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/rain.webp"
+      }
     },
     {
-      "number": "2",
-      "name": "Flood",
-      "slug": "flood",
-      "category": "Overview",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "Occasionally, rain may cause floods. Floods are similar to rain but feature non-collidable, dirty, mud-colored water. Players may hear ambient thunder or lightning sounds. The sky turns gray and appears darker than usual during a flood.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/flood.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/f0/WeatherEffect_%283%29.png/revision/latest/scale-to-width-down/250?cb=20260125123740"
+      "item": {
+        "name": "Flood",
+        "number": "2",
+        "category": "Overview",
+        "description": "Occasionally, rain may cause floods. Floods are similar to rain but feature non-collidable, dirty, mud-colored water. Players may hear ambient thunder or lightning sounds. The sky turns gray and appears darker than usual during a flood."
+      },
+      "system": {
+        "slug": "flood",
+        "section": "Overview",
+        "sortOrder": 2,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/flood.webp"
+      }
     },
     {
-      "number": "3",
-      "name": "Snow",
-      "slug": "snow",
-      "category": "Overview",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "Snow typically appears in winter but was discontinued in early 2025 due to extended duration. In December 2025, snow was updated: previously resembling white rain particles in a specific direction, it became smaller and less visible, likely due to Roblox scaling. The snow texture changed from smooth plastic to a custom texture that did not fit the map, and was later removed in early 2026. The new snow also enters buildings, unlike the older version. Snow on the ground appears, and vacant plots change grass color accordingly. The sky turns gray and appears darker than usual.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/snow.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/b/bd/WeatherEffect_%282%29.png/revision/latest/scale-to-width-down/250?cb=20260125123739"
+      "item": {
+        "name": "Snow",
+        "number": "3",
+        "category": "Overview",
+        "description": "Snow typically appears in winter but was discontinued in early 2025 due to extended duration. In December 2025, snow was updated: previously resembling white rain particles in a specific direction, it became smaller and less visible, likely due to Roblox scaling. The snow texture changed from smooth plastic to a custom texture that did not fit the map, and was later removed in early 2026. The new snow also enters buildings, unlike the older version. Snow on the ground appears, and vacant plots change grass color accordingly. The sky turns gray and appears darker than usual."
+      },
+      "system": {
+        "slug": "snow",
+        "section": "Overview",
+        "sortOrder": 3,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/snow.webp"
+      }
     },
     {
-      "number": "4",
-      "name": "Snow on Ground",
-      "slug": "snow-on-ground",
-      "category": "Overview",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "Snow on the ground replaces dirty flood water with white snow. Unlike snow, there is no snowfall during snow-on-ground events. This effect was discontinued in May 2025 due to extended duration. The sky turns gray but does not darken like other weather effects. Roads and green grass are covered with snow, and vacant plots adjust grass color accordingly.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/snow-on-ground.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/00/WeatherEffect_%281%29.png/revision/latest/scale-to-width-down/250?cb=20260125123738"
+      "item": {
+        "name": "Snow on Ground",
+        "number": "4",
+        "category": "Overview",
+        "description": "Snow on the ground replaces dirty flood water with white snow. Unlike snow, there is no snowfall during snow-on-ground events. This effect was discontinued in May 2025 due to extended duration. The sky turns gray but does not darken like other weather effects. Roads and green grass are covered with snow, and vacant plots adjust grass color accordingly."
+      },
+      "system": {
+        "slug": "snow-on-ground",
+        "section": "Overview",
+        "sortOrder": 4,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/snow-on-ground.webp"
+      }
     },
     {
-      "number": "1",
-      "name": "Shop Fires",
-      "slug": "shop-fires",
-      "category": "Natural Disasters",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "Occasionally, small buildings catch fire. Players can use fire extinguishers or fire trucks to put out the flames. This is a rare but real event.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/shop-fires.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/02/BuildingFire.png/revision/latest/scale-to-width-down/250?cb=20260125124505"
+      "item": {
+        "name": "Shop Fires",
+        "number": "1",
+        "category": "Natural Disasters",
+        "description": "Occasionally, small buildings catch fire. Players can use fire extinguishers or fire trucks to put out the flames. This is a rare but real event."
+      },
+      "system": {
+        "slug": "shop-fires",
+        "section": "Natural Disasters",
+        "sortOrder": 5,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/shop-fires.webp"
+      }
     },
     {
-      "number": "2",
-      "name": "Earthquakes",
-      "slug": "earthquakes",
-      "category": "Natural Disasters",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "Very rarely, earthquakes occur with varying intensity. The player's screen shakes according to the earthquake's magnitude. A warning appears in the right corner of the screen, detailing the earthquake and its size. Some particles may appear if the player owns the Disaster Pack pass.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/earthquakes.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/2/2a/Earthquake.png/revision/latest/scale-to-width-down/250?cb=20260125124913"
+      "item": {
+        "name": "Earthquakes",
+        "number": "2",
+        "category": "Natural Disasters",
+        "description": "Very rarely, earthquakes occur with varying intensity. The player's screen shakes according to the earthquake's magnitude. A warning appears in the right corner of the screen, detailing the earthquake and its size. Some particles may appear if the player owns the Disaster Pack pass."
+      },
+      "system": {
+        "slug": "earthquakes",
+        "section": "Natural Disasters",
+        "sortOrder": 6,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/earthquakes.webp"
+      }
     },
     {
-      "number": "1",
-      "name": "Cloudy",
-      "slug": "cloudy",
-      "category": "Sky Effects",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "A gray, basic skybox similar to weather skies but without darkening. At 6 a.m., the sky is a faded pinkish color resembling sunrise; at 6 p.m., it becomes reddish-orange focused on one side of the map (sunset).",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/cloudy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/6/69/Skybox_%284%29.png/revision/latest/scale-to-width-down/250?cb=20260125123739"
+      "item": {
+        "name": "Cloudy",
+        "number": "1",
+        "category": "Sky Effects",
+        "description": "A gray, basic skybox similar to weather skies but without darkening. At 6 a.m., the sky is a faded pinkish color resembling sunrise; at 6 p.m., it becomes reddish-orange focused on one side of the map (sunset)."
+      },
+      "system": {
+        "slug": "cloudy",
+        "section": "Sky Effects",
+        "sortOrder": 7,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/cloudy.webp"
+      }
     },
     {
-      "number": "2",
-      "name": "Sky Clouds",
-      "slug": "sky-clouds",
-      "category": "Sky Effects",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "A realistic skybox with clouds. Sunlight creates rays that do not affect the map but provide realistic visuals. At 6 a.m., the sky is purple-ish, turning light blue during the day. At 6 p.m., it becomes red-ish; by 7 p.m., it turns black with a visible purple horizon. The moon does not appear.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/sky-clouds.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/3e/Skybox_%283%29.png/revision/latest/scale-to-width-down/250?cb=20260125123739"
+      "item": {
+        "name": "Sky Clouds",
+        "number": "2",
+        "category": "Sky Effects",
+        "description": "A realistic skybox with clouds. Sunlight creates rays that do not affect the map but provide realistic visuals. At 6 a.m., the sky is purple-ish, turning light blue during the day. At 6 p.m., it becomes red-ish; by 7 p.m., it turns black with a visible purple horizon. The moon does not appear."
+      },
+      "system": {
+        "slug": "sky-clouds",
+        "section": "Sky Effects",
+        "sortOrder": 8,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/sky-clouds.webp"
+      }
     },
     {
-      "number": "3",
-      "name": "Orange Skybox",
-      "slug": "orange-skybox",
-      "category": "Sky Effects",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "The sky is orange at all times, remaining orange until 7–9 p.m., when darkness sets in.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/orange-skybox.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/09/Skybox_%281%29.png/revision/latest/scale-to-width-down/250?cb=20260125123739"
+      "item": {
+        "name": "Orange Skybox",
+        "number": "3",
+        "category": "Sky Effects",
+        "description": "The sky is orange at all times, remaining orange until 7–9 p.m., when darkness sets in."
+      },
+      "system": {
+        "slug": "orange-skybox",
+        "section": "Sky Effects",
+        "sortOrder": 9,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/orange-skybox.webp"
+      }
     },
     {
-      "number": "4",
-      "name": "Green Skybox",
-      "slug": "green-skybox",
-      "category": "Sky Effects",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "Similar to the orange skybox but green, creating an apocalyptic vibe.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/green-skybox.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/8f/Skybox_%282%29.png/revision/latest/scale-to-width-down/249?cb=20260125123739"
+      "item": {
+        "name": "Green Skybox",
+        "number": "4",
+        "category": "Sky Effects",
+        "description": "Similar to the orange skybox but green, creating an apocalyptic vibe."
+      },
+      "system": {
+        "slug": "green-skybox",
+        "section": "Sky Effects",
+        "sortOrder": 10,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/green-skybox.webp"
+      }
     },
     {
-      "number": "1",
-      "name": "Normal",
-      "slug": "normal",
-      "category": "Lighting",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "Standard lighting for the map.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/normal.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/f2/Lighting_%283%29.png/revision/latest/scale-to-width-down/250?cb=20260125124310"
+      "item": {
+        "name": "Normal",
+        "number": "1",
+        "category": "Lighting",
+        "description": "Standard lighting for the map."
+      },
+      "system": {
+        "slug": "normal",
+        "section": "Lighting",
+        "sortOrder": 11,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/normal.webp"
+      }
     },
     {
-      "number": "2",
-      "name": "Darkness",
-      "slug": "darkness",
-      "category": "Lighting",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "Surroundings turn dark for everyone in the server, ideal for horror roleplay. Players can see only a small area around them. The light moves with the player and camera.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/darkness.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/1/1d/Lighting_%281%29.png/revision/latest/scale-to-width-down/250?cb=20260125123736"
+      "item": {
+        "name": "Darkness",
+        "number": "2",
+        "category": "Lighting",
+        "description": "Surroundings turn dark for everyone in the server, ideal for horror roleplay. Players can see only a small area around them. The light moves with the player and camera."
+      },
+      "system": {
+        "slug": "darkness",
+        "section": "Lighting",
+        "sortOrder": 12,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/darkness.webp"
+      }
     },
     {
-      "number": "3",
-      "name": "Foggy",
-      "slug": "foggy",
-      "category": "Lighting",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": "A fog surrounds the map, limiting distant visibility. Players can still see buildings in the horizon, though blurred like drawings. At night, fog is more noticeable, while during the day, distant objects are less visible.",
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Weather%20and%20Disasters/foggy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/7/7d/Lighting_%282%29.png/revision/latest/scale-to-width-down/250?cb=20260125123738"
+      "item": {
+        "name": "Foggy",
+        "number": "3",
+        "category": "Lighting",
+        "description": "A fog surrounds the map, limiting distant visibility. Players can still see buildings in the horizon, though blurred like drawings. At night, fog is more noticeable, while during the day, distant objects are less visible."
+      },
+      "system": {
+        "slug": "foggy",
+        "section": "Lighting",
+        "sortOrder": 13,
+        "image": "/Brookhaven%20RP/Weather%20and%20Disasters/foggy.webp"
+      }
     }
   ]
 }

@@ -1,1685 +1,1381 @@
 {
   "meta": {
-    "title": "Brookhaven RP houses data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Official Brookhaven Wiki - Houses",
-        "url": "https://official-brookhaven.fandom.com/wiki/Houses",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
+    "schemaVersion": 2,
+    "game": "Brookhaven RP",
+    "gameSlug": "brookhaven-rp",
+    "collection": "houses",
+    "route": "/wiki/brookhaven-rp/houses",
+    "catalogCode": "brookhaven-rp-houses",
+    "itemFields": [
       "number",
-      "image",
-      "name",
       "category",
       "type",
       "requirementCost",
-      "notes",
-      "wikiUrl"
-    ]
+      "notes"
+    ],
+    "columns": [
+      "number",
+      "category",
+      "type",
+      "requirementCost",
+      "notes"
+    ],
+    "display": {
+      "groupLabel": "type",
+      "sectionOrder": [
+        "Free",
+        "Premium",
+        "Special"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": "notes",
+      "cardDescriptionField": "notes",
+      "cardFields": [
+        "number",
+        "category",
+        "type",
+        "requirementCost",
+        "notes"
+      ],
+      "tableFields": [
+        "number",
+        "category",
+        "type",
+        "requirementCost",
+        "notes"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "number": "1",
-      "name": "House 1",
-      "slug": "house-1",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Mobile House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-1.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/f6/001_House.png/revision/latest/scale-to-width-down/90?cb=20250703200311"
-    },
-    {
-      "number": "2",
-      "name": "House 2",
-      "slug": "house-2",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/3a/002_House.png/revision/latest/scale-to-width-down/90?cb=20250703200313"
-    },
-    {
-      "number": "3",
-      "name": "House 003",
-      "slug": "house-003",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Luxury House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-003.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/8f/003_House.png/revision/latest/scale-to-width-down/90?cb=20250703200313"
-    },
-    {
-      "number": "4",
-      "name": "House 004",
-      "slug": "house-004",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Modern House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-004.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/6/6e/004_House.png/revision/latest/scale-to-width-down/90?cb=20250703200313"
-    },
-    {
-      "number": "5",
-      "name": "House 005",
-      "slug": "house-005",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-005.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/a1/005_House.png/revision/latest/scale-to-width-down/90?cb=20250703200313"
-    },
-    {
-      "number": "6",
-      "name": "House 006",
-      "slug": "house-006",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-006.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/6/66/006_House.png/revision/latest/scale-to-width-down/90?cb=20250703200314"
-    },
-    {
-      "number": "7",
-      "name": "Tree House",
-      "slug": "tree-house",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Tree House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/tree-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/f5/007_House.png/revision/latest/scale-to-width-down/90?cb=20250703200313"
-    },
-    {
-      "number": "8",
-      "name": "House 008",
-      "slug": "house-008",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Modern House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-008.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/3d/008_House.png/revision/latest/scale-to-width-down/90?cb=20250703200314"
-    },
-    {
-      "number": "9",
-      "name": "House 009",
-      "slug": "house-009",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Luxury House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-009.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/4e/009_House.png/revision/latest/scale-to-width-down/90?cb=20250703200314"
-    },
-    {
-      "number": "10",
-      "name": "House 010",
-      "slug": "house-010",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-010.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/31/010_House.png/revision/latest/scale-to-width-down/90?cb=20250703200314"
-    },
-    {
-      "number": "11",
-      "name": "House 011",
-      "slug": "house-011",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-011.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/4f/011_House.png/revision/latest/scale-to-width-down/90?cb=20250703200604"
-    },
-    {
-      "number": "12",
-      "name": "House 012",
-      "slug": "house-012",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-012.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/a3/012_House.png/revision/latest/scale-to-width-down/90?cb=20250703200605"
-    },
-    {
-      "number": "13",
-      "name": "House 013",
-      "slug": "house-013",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-013.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/1/1e/013_House.png/revision/latest/scale-to-width-down/90?cb=20250703200314"
-    },
-    {
-      "number": "14",
-      "name": "House 014",
-      "slug": "house-014",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-014.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/5c/014_House.png/revision/latest/scale-to-width-down/90?cb=20250703200314"
-    },
-    {
-      "number": "15",
-      "name": "House 015",
-      "slug": "house-015",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Broke RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-015.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/3e/015_House.png/revision/latest/scale-to-width-down/90?cb=20250703200315"
-    },
-    {
-      "number": "16",
-      "name": "House 016",
-      "slug": "house-016",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-016.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/aa/016_House.png/revision/latest/scale-to-width-down/90?cb=20251112002027"
-    },
-    {
-      "number": "17",
-      "name": "House 017",
-      "slug": "house-017",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Modern Forest House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-017.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/e/e1/017_House.png/revision/latest/scale-to-width-down/90?cb=20250703200314"
-    },
-    {
-      "number": "18",
-      "name": "House 018",
-      "slug": "house-018",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Luxury House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-018.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/4e/018_House.png/revision/latest/scale-to-width-down/90?cb=20250703200314"
-    },
-    {
-      "number": "19",
-      "name": "House 019",
-      "slug": "house-019",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-019.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/c/ce/019_House.png/revision/latest/scale-to-width-down/90?cb=20250703200703"
-    },
-    {
-      "number": "20",
-      "name": "House 020",
-      "slug": "house-020",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Modern Dark House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-020.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/a7/020_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "21",
-      "name": "House 021",
-      "slug": "house-021",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-021.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/59/021_House.png/revision/latest/scale-to-width-down/90?cb=20250703200315"
-    },
-    {
-      "number": "22",
-      "name": "House 022",
-      "slug": "house-022",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Luxury House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-022.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/c/c9/022_House.png/revision/latest/scale-to-width-down/90?cb=20250703200605"
-    },
-    {
-      "number": "23",
-      "name": "House 023",
-      "slug": "house-023",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Haunted House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-023.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/ae/023_House.png/revision/latest/scale-to-width-down/90?cb=20250703200315"
-    },
-    {
-      "number": "24",
-      "name": "House 024",
-      "slug": "house-024",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-024.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/d/d4/024_House.png/revision/latest/scale-to-width-down/90?cb=20250703200605"
-    },
-    {
-      "number": "25",
-      "name": "House 025",
-      "slug": "house-025",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-025.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/87/025_House.png/revision/latest/scale-to-width-down/90?cb=20250703200605"
-    },
-    {
-      "number": "26",
-      "name": "House 026",
-      "slug": "house-026",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Bunker RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-026.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/c/cc/026_House.png/revision/latest/scale-to-width-down/90?cb=20250703200605"
-    },
-    {
-      "number": "27",
-      "name": "House 027",
-      "slug": "house-027",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-027.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/43/027_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "28",
-      "name": "House 028",
-      "slug": "house-028",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Modern Lake House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-028.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/1/13/028_House.png/revision/latest/scale-to-width-down/90?cb=20250703200605"
-    },
-    {
-      "number": "29",
-      "name": "House 029",
-      "slug": "house-029",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-029.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/7/70/029_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "30",
-      "name": "House 030",
-      "slug": "house-030",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Modern House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-030.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/5d/030_House.png/revision/latest/scale-to-width-down/90?cb=20250703200315"
-    },
-    {
-      "number": "31",
-      "name": "House 031",
-      "slug": "house-031",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Military RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-031.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/9/99/031_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "32",
-      "name": "House 032",
-      "slug": "house-032",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Forest House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-032.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/0b/032_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "33",
-      "name": "House 033",
-      "slug": "house-033",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Luxury House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-033.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/c/ce/033_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "34",
-      "name": "House 034",
-      "slug": "house-034",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Bakery RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-034.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/45/034_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "35",
-      "name": "Santa's Workshop",
-      "slug": "santa-s-workshop",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Christmas version of House 34",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/santa-s-workshop.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/2/21/SantasWorkshopRPHouse.jpeg/revision/latest/scale-to-width-down/90?cb=20251221193411"
-    },
-    {
-      "number": "36",
-      "name": "House 035",
-      "slug": "house-035",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Car's House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-035.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/d/d0/035_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "37",
-      "name": "House 036",
-      "slug": "house-036",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Daycare RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-036.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/c/c9/036_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "38",
-      "name": "House 037",
-      "slug": "house-037",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Rocket RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-037.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/a7/037_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "39",
-      "name": "House 038",
-      "slug": "house-038",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Beach Luxury House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-038.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/c/cc/038_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "40",
-      "name": "House 039",
-      "slug": "house-039",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Submarine RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-039.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/2/20/039_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "41",
-      "name": "House 040",
-      "slug": "house-040",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Modern House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-040.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/f3/040_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "42",
-      "name": "House 041",
-      "slug": "house-041",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Junkyard RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-041.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/d/d9/041_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "43",
-      "name": "House 042",
-      "slug": "house-042",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Farm House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-042.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/d/db/042_House.png/revision/latest/scale-to-width-down/90?cb=20250703200704"
-    },
-    {
-      "number": "44",
-      "name": "House 043",
-      "slug": "house-043",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Luxury House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-043.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/b/b2/043_House.png/revision/latest/scale-to-width-down/90?cb=20250703200829"
-    },
-    {
-      "number": "45",
-      "name": "House 044",
-      "slug": "house-044",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Gaming House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-044.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/4c/044_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "46",
-      "name": "House 045",
-      "slug": "house-045",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Blue House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-045.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/8c/045_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "47",
-      "name": "House 046",
-      "slug": "house-046",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "In-Construction House RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-046.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/53/046_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "48",
-      "name": "House 047",
-      "slug": "house-047",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Modern House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-047.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/a9/047_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "49",
-      "name": "House 048",
-      "slug": "house-048",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-048.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/2/27/048_House.png/revision/latest/scale-to-width-down/90?cb=20250703200705"
-    },
-    {
-      "number": "50",
-      "name": "House 049",
-      "slug": "house-049",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Castle RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-049.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/e/e1/049_House.png/revision/latest/scale-to-width-down/90?cb=20250703200705"
-    },
-    {
-      "number": "51",
-      "name": "House 050",
-      "slug": "house-050",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Warehouse RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-050.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/d/d9/050_House.png/revision/latest/scale-to-width-down/90?cb=20250703200705"
-    },
-    {
-      "number": "52",
-      "name": "House 051",
-      "slug": "house-051",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Laboratory RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-051.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/59/051_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "53",
-      "name": "House 052",
-      "slug": "house-052",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Hackers Base RP Set",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-052.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/34/052_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "54",
-      "name": "House 053",
-      "slug": "house-053",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Laboratory House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-053.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/fd/053_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "55",
-      "name": "House 054",
-      "slug": "house-054",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-054.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/b/b1/054_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "56",
-      "name": "House 055",
-      "slug": "house-055",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Standard house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-055.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/0a/055_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "57",
-      "name": "House 056",
-      "slug": "house-056",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Abandoned House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-056.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/2/27/056_House.png/revision/latest/scale-to-width-down/90?cb=20250703200705"
-    },
-    {
-      "number": "58",
-      "name": "House 057",
-      "slug": "house-057",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Police RP House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-057.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/03/057_House.png/revision/latest/scale-to-width-down/90?cb=20250703200829"
-    },
-    {
-      "number": "59",
-      "name": "House 058",
-      "slug": "house-058",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Horse House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-058.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/8f/058_House.png/revision/latest/scale-to-width-down/90?cb=20250703200756"
-    },
-    {
-      "number": "60",
-      "name": "House 059",
-      "slug": "house-059",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Abandoned Set House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-059.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/e/e3/059_House.png/revision/latest/scale-to-width-down/90?cb=20250703200705"
-    },
-    {
-      "number": "61",
-      "name": "House 060",
-      "slug": "house-060",
-      "category": "Houses",
-      "type": "Special",
-      "requirementCost": "House & Motorcycle",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Robux Bundle House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-060.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/38/060_House.png/revision/latest/scale-to-width-down/90?cb=20250703200829"
-    },
-    {
-      "number": "62",
-      "name": "House 061",
-      "slug": "house-061",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Movie Set RP",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/house-061.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/ff/061_House.png/revision/latest/scale-to-width-down/90?cb=20250703200705"
-    },
-    {
-      "number": "63",
-      "name": "Summer House Yellow",
-      "slug": "summer-house-yellow",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Summer House Yellow",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/summer-house-yellow.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/3c/062_House.png/revision/latest/scale-to-width-down/90?cb=20250703200829"
-    },
-    {
-      "number": "64",
-      "name": "Military Range House",
-      "slug": "military-range-house",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Military Range RP",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/military-range-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/3d/063_House.png/revision/latest/scale-to-width-down/90?cb=20250703200705"
-    },
-    {
-      "number": "65",
-      "name": "Summer Green House",
-      "slug": "summer-green-house",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Summer House Green",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/summer-green-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/7/73/064_House.png/revision/latest/scale-to-width-down/90?cb=20250703200829"
-    },
-    {
-      "number": "66",
-      "name": "Tree House",
-      "slug": "tree-house",
-      "category": "Houses",
-      "type": "Special",
-      "requirementCost": "800 Tickets",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Summer Carnival 2025",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/tree-house-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/6/65/Treehouse.png/revision/latest/scale-to-width-down/90?cb=20250704180535"
-    },
-    {
-      "number": "67",
-      "name": "Summer Camp",
-      "slug": "summer-camp",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Summer Camp",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/summer-camp.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/45/House_Summer_Camp.png/revision/latest/scale-to-width-down/90?cb=20250902123724"
-    },
-    {
-      "number": "68",
-      "name": "Scandinavian House",
-      "slug": "scandinavian-house",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Scandinavian House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/scandinavian-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/b/b4/ScandinavianHouse_Paid.png/revision/latest/scale-to-width-down/90?cb=20250902123818"
-    },
-    {
-      "number": "69",
-      "name": "Scandinavian House",
-      "slug": "scandinavian-house",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Scandinavian House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/scandinavian-house-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/a7/ScandinavianHouse_Free.png/revision/latest/scale-to-width-down/90?cb=20250902123435"
-    },
-    {
-      "number": "70",
-      "name": "Mediterranean House",
-      "slug": "mediterranean-house",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Mediterranean House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/mediterranean-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/e/e3/MediterraneanFree.png/revision/latest/scale-to-width-down/90?cb=20250929110402"
-    },
-    {
-      "number": "71",
-      "name": "Mediterranean House",
-      "slug": "mediterranean-house",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Mediterranean House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/mediterranean-house-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/0b/MediterraneanPremium.png/revision/latest/scale-to-width-down/90?cb=20250929110402"
-    },
-    {
-      "number": "72",
-      "name": "Soccer Field",
-      "slug": "soccer-field",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "Free",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Soccer Field",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/soccer-field.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/0d/StadiumFreeIcon.png/revision/latest/scale-to-width-down/90?cb=20250929110402"
-    },
-    {
-      "number": "73",
-      "name": "Brownstone House",
-      "slug": "brownstone-house",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Brownstone House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Brownstone_House",
-      "image": "/Brookhaven%20RP/Houses/brownstone-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/85/BrownstoneFreeIcon.png/revision/latest/scale-to-width-down/90?cb=20250929110401"
-    },
-    {
-      "number": "74",
-      "name": "Brownstone House",
-      "slug": "brownstone-house",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Brownstone House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Brownstone_Premium_House",
-      "image": "/Brookhaven%20RP/Houses/brownstone-house-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/7/7c/Brownstone_Premium_Icon.png/revision/latest/scale-to-width-down/90?cb=20251228174138"
-    },
-    {
-      "number": "75",
-      "name": "Woodland House",
-      "slug": "woodland-house",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Woodland House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/woodland-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/fa/WoodlandHouse.png/revision/latest/scale-to-width-down/90?cb=20251103085030"
-    },
-    {
-      "number": "76",
-      "name": "Midnight Manor",
-      "slug": "midnight-manor",
-      "category": "Houses",
-      "type": "Special",
-      "requirementCost": "Midnight Manor Pass",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Halloween 2025",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/midnight-manor.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/2/24/HalloweenPaidHouse.png/revision/latest/scale-to-width-down/90?cb=20251130103428"
-    },
-    {
-      "number": "77",
-      "name": "Halloween House",
-      "slug": "halloween-house",
-      "category": "Houses",
-      "type": "Special",
-      "requirementCost": "Extreme Mode Week 1",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Halloween 2025 Week 1",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/halloween-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/58/HalloweenFreeHouse.png/revision/latest/scale-to-width-down/90?cb=20251130103428"
-    },
-    {
-      "number": "78",
-      "name": "Contemporary House",
-      "slug": "contemporary-house",
-      "category": "Houses",
-      "type": "Premium",
-      "requirementCost": "Premium",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Contemporary House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/contemporary-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/b/b2/Contemporary_House_Premium_Icon.png/revision/latest/scale-to-width-down/90?cb=20251228172133"
-    },
-    {
-      "number": "79",
-      "name": "Contemporary House",
-      "slug": "contemporary-house",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Contemporary House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/contemporary-house-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/5a/Contemporary_House_Icon.png/revision/latest/scale-to-width-down/90?cb=20251228172158"
-    },
-    {
-      "number": "80",
-      "name": "Frosty Manor",
-      "slug": "frosty-manor",
-      "category": "Houses",
-      "type": "Special",
-      "requirementCost": "Frosty Manor Gamepass",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Winter Festival 2025",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Frosty_Manor",
-      "image": "/Brookhaven%20RP/Houses/frosty-manor.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/1/12/FrostyManorHouse.png/revision/latest/scale-to-width-down/90?cb=20260102205520"
-    },
-    {
-      "number": "81",
-      "name": "Snowy Bungalow",
-      "slug": "snowy-bungalow",
-      "category": "Houses",
-      "type": "Special",
-      "requirementCost": "10,000 Snowflakes",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Winter Festival 2025 Week 1",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Snowy_Bungalow",
-      "image": "/Brookhaven%20RP/Houses/snowy-bungalow.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/8d/SnowyBungalow.jpeg/revision/latest/scale-to-width-down/90?cb=20251221193411"
-    },
-    {
-      "number": "82",
-      "name": "Wolf Den",
-      "slug": "wolf-den",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "The Wolf Den House",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/The_Wolf_Den_House",
-      "image": "/Brookhaven%20RP/Houses/wolf-den.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/4d/Wolf_Den_Free_House.webp/revision/latest/scale-to-width-down/90?cb=20260102205521"
-    },
-    {
-      "number": "83",
-      "name": "Pink house",
-      "slug": "pink-house",
-      "category": "Houses",
-      "type": "Free",
-      "requirementCost": "None",
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": "Pink house",
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Houses/pink-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/00/Pink_House_image.jpg/revision/latest/scale-to-width-down/90?cb=20260505221008"
+      "item": {
+        "name": "House 1",
+        "number": "1",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Mobile House"
+      },
+      "system": {
+        "slug": "house-1",
+        "section": "Free",
+        "sortOrder": 1,
+        "image": "/Brookhaven%20RP/Houses/house-1.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 2",
+        "number": "2",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-2",
+        "section": "Free",
+        "sortOrder": 2,
+        "image": "/Brookhaven%20RP/Houses/house-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 003",
+        "number": "3",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Luxury House"
+      },
+      "system": {
+        "slug": "house-003",
+        "section": "Premium",
+        "sortOrder": 3,
+        "image": "/Brookhaven%20RP/Houses/house-003.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 004",
+        "number": "4",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Modern House"
+      },
+      "system": {
+        "slug": "house-004",
+        "section": "Premium",
+        "sortOrder": 4,
+        "image": "/Brookhaven%20RP/Houses/house-004.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 005",
+        "number": "5",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-005",
+        "section": "Free",
+        "sortOrder": 5,
+        "image": "/Brookhaven%20RP/Houses/house-005.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 006",
+        "number": "6",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-006",
+        "section": "Free",
+        "sortOrder": 6,
+        "image": "/Brookhaven%20RP/Houses/house-006.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tree House",
+        "number": "7",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Tree House"
+      },
+      "system": {
+        "slug": "tree-house",
+        "section": "Free",
+        "sortOrder": 7,
+        "image": "/Brookhaven%20RP/Houses/tree-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 008",
+        "number": "8",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Modern House"
+      },
+      "system": {
+        "slug": "house-008",
+        "section": "Premium",
+        "sortOrder": 8,
+        "image": "/Brookhaven%20RP/Houses/house-008.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 009",
+        "number": "9",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Luxury House"
+      },
+      "system": {
+        "slug": "house-009",
+        "section": "Premium",
+        "sortOrder": 9,
+        "image": "/Brookhaven%20RP/Houses/house-009.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 010",
+        "number": "10",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-010",
+        "section": "Free",
+        "sortOrder": 10,
+        "image": "/Brookhaven%20RP/Houses/house-010.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 011",
+        "number": "11",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-011",
+        "section": "Premium",
+        "sortOrder": 11,
+        "image": "/Brookhaven%20RP/Houses/house-011.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 012",
+        "number": "12",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-012",
+        "section": "Free",
+        "sortOrder": 12,
+        "image": "/Brookhaven%20RP/Houses/house-012.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 013",
+        "number": "13",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-013",
+        "section": "Free",
+        "sortOrder": 13,
+        "image": "/Brookhaven%20RP/Houses/house-013.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 014",
+        "number": "14",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-014",
+        "section": "Premium",
+        "sortOrder": 14,
+        "image": "/Brookhaven%20RP/Houses/house-014.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 015",
+        "number": "15",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Broke RP Set"
+      },
+      "system": {
+        "slug": "house-015",
+        "section": "Free",
+        "sortOrder": 15,
+        "image": "/Brookhaven%20RP/Houses/house-015.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 016",
+        "number": "16",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-016",
+        "section": "Free",
+        "sortOrder": 16,
+        "image": "/Brookhaven%20RP/Houses/house-016.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 017",
+        "number": "17",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Modern Forest House"
+      },
+      "system": {
+        "slug": "house-017",
+        "section": "Free",
+        "sortOrder": 17,
+        "image": "/Brookhaven%20RP/Houses/house-017.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 018",
+        "number": "18",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Luxury House"
+      },
+      "system": {
+        "slug": "house-018",
+        "section": "Premium",
+        "sortOrder": 18,
+        "image": "/Brookhaven%20RP/Houses/house-018.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 019",
+        "number": "19",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-019",
+        "section": "Free",
+        "sortOrder": 19,
+        "image": "/Brookhaven%20RP/Houses/house-019.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 020",
+        "number": "20",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Modern Dark House"
+      },
+      "system": {
+        "slug": "house-020",
+        "section": "Premium",
+        "sortOrder": 20,
+        "image": "/Brookhaven%20RP/Houses/house-020.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 021",
+        "number": "21",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-021",
+        "section": "Free",
+        "sortOrder": 21,
+        "image": "/Brookhaven%20RP/Houses/house-021.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 022",
+        "number": "22",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Luxury House"
+      },
+      "system": {
+        "slug": "house-022",
+        "section": "Premium",
+        "sortOrder": 22,
+        "image": "/Brookhaven%20RP/Houses/house-022.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 023",
+        "number": "23",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Haunted House"
+      },
+      "system": {
+        "slug": "house-023",
+        "section": "Free",
+        "sortOrder": 23,
+        "image": "/Brookhaven%20RP/Houses/house-023.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 024",
+        "number": "24",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-024",
+        "section": "Free",
+        "sortOrder": 24,
+        "image": "/Brookhaven%20RP/Houses/house-024.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 025",
+        "number": "25",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-025",
+        "section": "Free",
+        "sortOrder": 25,
+        "image": "/Brookhaven%20RP/Houses/house-025.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 026",
+        "number": "26",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Bunker RP Set"
+      },
+      "system": {
+        "slug": "house-026",
+        "section": "Free",
+        "sortOrder": 26,
+        "image": "/Brookhaven%20RP/Houses/house-026.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 027",
+        "number": "27",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-027",
+        "section": "Free",
+        "sortOrder": 27,
+        "image": "/Brookhaven%20RP/Houses/house-027.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 028",
+        "number": "28",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Modern Lake House"
+      },
+      "system": {
+        "slug": "house-028",
+        "section": "Free",
+        "sortOrder": 28,
+        "image": "/Brookhaven%20RP/Houses/house-028.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 029",
+        "number": "29",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-029",
+        "section": "Free",
+        "sortOrder": 29,
+        "image": "/Brookhaven%20RP/Houses/house-029.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 030",
+        "number": "30",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Modern House"
+      },
+      "system": {
+        "slug": "house-030",
+        "section": "Premium",
+        "sortOrder": 30,
+        "image": "/Brookhaven%20RP/Houses/house-030.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 031",
+        "number": "31",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Military RP Set"
+      },
+      "system": {
+        "slug": "house-031",
+        "section": "Free",
+        "sortOrder": 31,
+        "image": "/Brookhaven%20RP/Houses/house-031.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 032",
+        "number": "32",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Forest House"
+      },
+      "system": {
+        "slug": "house-032",
+        "section": "Free",
+        "sortOrder": 32,
+        "image": "/Brookhaven%20RP/Houses/house-032.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 033",
+        "number": "33",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Luxury House"
+      },
+      "system": {
+        "slug": "house-033",
+        "section": "Premium",
+        "sortOrder": 33,
+        "image": "/Brookhaven%20RP/Houses/house-033.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 034",
+        "number": "34",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Bakery RP Set"
+      },
+      "system": {
+        "slug": "house-034",
+        "section": "Free",
+        "sortOrder": 34,
+        "image": "/Brookhaven%20RP/Houses/house-034.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa's Workshop",
+        "number": "35",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Christmas version of House 34"
+      },
+      "system": {
+        "slug": "santa-s-workshop",
+        "section": "Free",
+        "sortOrder": 35,
+        "image": "/Brookhaven%20RP/Houses/santa-s-workshop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 035",
+        "number": "36",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Car's House"
+      },
+      "system": {
+        "slug": "house-035",
+        "section": "Free",
+        "sortOrder": 36,
+        "image": "/Brookhaven%20RP/Houses/house-035.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 036",
+        "number": "37",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Daycare RP Set"
+      },
+      "system": {
+        "slug": "house-036",
+        "section": "Free",
+        "sortOrder": 37,
+        "image": "/Brookhaven%20RP/Houses/house-036.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 037",
+        "number": "38",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Rocket RP Set"
+      },
+      "system": {
+        "slug": "house-037",
+        "section": "Free",
+        "sortOrder": 38,
+        "image": "/Brookhaven%20RP/Houses/house-037.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 038",
+        "number": "39",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Beach Luxury House"
+      },
+      "system": {
+        "slug": "house-038",
+        "section": "Premium",
+        "sortOrder": 39,
+        "image": "/Brookhaven%20RP/Houses/house-038.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 039",
+        "number": "40",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Submarine RP Set"
+      },
+      "system": {
+        "slug": "house-039",
+        "section": "Free",
+        "sortOrder": 40,
+        "image": "/Brookhaven%20RP/Houses/house-039.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 040",
+        "number": "41",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Modern House"
+      },
+      "system": {
+        "slug": "house-040",
+        "section": "Free",
+        "sortOrder": 41,
+        "image": "/Brookhaven%20RP/Houses/house-040.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 041",
+        "number": "42",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Junkyard RP Set"
+      },
+      "system": {
+        "slug": "house-041",
+        "section": "Free",
+        "sortOrder": 42,
+        "image": "/Brookhaven%20RP/Houses/house-041.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 042",
+        "number": "43",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Farm House"
+      },
+      "system": {
+        "slug": "house-042",
+        "section": "Free",
+        "sortOrder": 43,
+        "image": "/Brookhaven%20RP/Houses/house-042.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 043",
+        "number": "44",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Luxury House"
+      },
+      "system": {
+        "slug": "house-043",
+        "section": "Premium",
+        "sortOrder": 44,
+        "image": "/Brookhaven%20RP/Houses/house-043.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 044",
+        "number": "45",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Gaming House"
+      },
+      "system": {
+        "slug": "house-044",
+        "section": "Free",
+        "sortOrder": 45,
+        "image": "/Brookhaven%20RP/Houses/house-044.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 045",
+        "number": "46",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Blue House"
+      },
+      "system": {
+        "slug": "house-045",
+        "section": "Free",
+        "sortOrder": 46,
+        "image": "/Brookhaven%20RP/Houses/house-045.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 046",
+        "number": "47",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "In-Construction House RP Set"
+      },
+      "system": {
+        "slug": "house-046",
+        "section": "Free",
+        "sortOrder": 47,
+        "image": "/Brookhaven%20RP/Houses/house-046.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 047",
+        "number": "48",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Modern House"
+      },
+      "system": {
+        "slug": "house-047",
+        "section": "Premium",
+        "sortOrder": 48,
+        "image": "/Brookhaven%20RP/Houses/house-047.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 048",
+        "number": "49",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-048",
+        "section": "Free",
+        "sortOrder": 49,
+        "image": "/Brookhaven%20RP/Houses/house-048.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 049",
+        "number": "50",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Castle RP Set"
+      },
+      "system": {
+        "slug": "house-049",
+        "section": "Free",
+        "sortOrder": 50,
+        "image": "/Brookhaven%20RP/Houses/house-049.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 050",
+        "number": "51",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Warehouse RP Set"
+      },
+      "system": {
+        "slug": "house-050",
+        "section": "Free",
+        "sortOrder": 51,
+        "image": "/Brookhaven%20RP/Houses/house-050.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 051",
+        "number": "52",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Laboratory RP Set"
+      },
+      "system": {
+        "slug": "house-051",
+        "section": "Free",
+        "sortOrder": 52,
+        "image": "/Brookhaven%20RP/Houses/house-051.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 052",
+        "number": "53",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Hackers Base RP Set"
+      },
+      "system": {
+        "slug": "house-052",
+        "section": "Free",
+        "sortOrder": 53,
+        "image": "/Brookhaven%20RP/Houses/house-052.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 053",
+        "number": "54",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Laboratory House"
+      },
+      "system": {
+        "slug": "house-053",
+        "section": "Free",
+        "sortOrder": 54,
+        "image": "/Brookhaven%20RP/Houses/house-053.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 054",
+        "number": "55",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-054",
+        "section": "Premium",
+        "sortOrder": 55,
+        "image": "/Brookhaven%20RP/Houses/house-054.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 055",
+        "number": "56",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Standard house"
+      },
+      "system": {
+        "slug": "house-055",
+        "section": "Free",
+        "sortOrder": 56,
+        "image": "/Brookhaven%20RP/Houses/house-055.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 056",
+        "number": "57",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Abandoned House"
+      },
+      "system": {
+        "slug": "house-056",
+        "section": "Free",
+        "sortOrder": 57,
+        "image": "/Brookhaven%20RP/Houses/house-056.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 057",
+        "number": "58",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Police RP House"
+      },
+      "system": {
+        "slug": "house-057",
+        "section": "Free",
+        "sortOrder": 58,
+        "image": "/Brookhaven%20RP/Houses/house-057.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 058",
+        "number": "59",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Horse House"
+      },
+      "system": {
+        "slug": "house-058",
+        "section": "Free",
+        "sortOrder": 59,
+        "image": "/Brookhaven%20RP/Houses/house-058.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 059",
+        "number": "60",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Abandoned Set House"
+      },
+      "system": {
+        "slug": "house-059",
+        "section": "Free",
+        "sortOrder": 60,
+        "image": "/Brookhaven%20RP/Houses/house-059.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 060",
+        "number": "61",
+        "category": "Houses",
+        "type": "Special",
+        "requirementCost": "House & Motorcycle",
+        "notes": "Robux Bundle House"
+      },
+      "system": {
+        "slug": "house-060",
+        "section": "Special",
+        "sortOrder": 61,
+        "image": "/Brookhaven%20RP/Houses/house-060.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "House 061",
+        "number": "62",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Movie Set RP"
+      },
+      "system": {
+        "slug": "house-061",
+        "section": "Free",
+        "sortOrder": 62,
+        "image": "/Brookhaven%20RP/Houses/house-061.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer House Yellow",
+        "number": "63",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Summer House Yellow"
+      },
+      "system": {
+        "slug": "summer-house-yellow",
+        "section": "Free",
+        "sortOrder": 63,
+        "image": "/Brookhaven%20RP/Houses/summer-house-yellow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Military Range House",
+        "number": "64",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Military Range RP"
+      },
+      "system": {
+        "slug": "military-range-house",
+        "section": "Free",
+        "sortOrder": 64,
+        "image": "/Brookhaven%20RP/Houses/military-range-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer Green House",
+        "number": "65",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Summer House Green"
+      },
+      "system": {
+        "slug": "summer-green-house",
+        "section": "Free",
+        "sortOrder": 65,
+        "image": "/Brookhaven%20RP/Houses/summer-green-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tree House",
+        "number": "66",
+        "category": "Houses",
+        "type": "Special",
+        "requirementCost": "800 Tickets",
+        "notes": "Summer Carnival 2025"
+      },
+      "system": {
+        "slug": "tree-house",
+        "section": "Special",
+        "sortOrder": 66,
+        "image": "/Brookhaven%20RP/Houses/tree-house-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer Camp",
+        "number": "67",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Summer Camp"
+      },
+      "system": {
+        "slug": "summer-camp",
+        "section": "Free",
+        "sortOrder": 67,
+        "image": "/Brookhaven%20RP/Houses/summer-camp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scandinavian House",
+        "number": "68",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Scandinavian House"
+      },
+      "system": {
+        "slug": "scandinavian-house",
+        "section": "Premium",
+        "sortOrder": 68,
+        "image": "/Brookhaven%20RP/Houses/scandinavian-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Scandinavian House",
+        "number": "69",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Scandinavian House"
+      },
+      "system": {
+        "slug": "scandinavian-house",
+        "section": "Free",
+        "sortOrder": 69,
+        "image": "/Brookhaven%20RP/Houses/scandinavian-house-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mediterranean House",
+        "number": "70",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Mediterranean House"
+      },
+      "system": {
+        "slug": "mediterranean-house",
+        "section": "Free",
+        "sortOrder": 70,
+        "image": "/Brookhaven%20RP/Houses/mediterranean-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mediterranean House",
+        "number": "71",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Mediterranean House"
+      },
+      "system": {
+        "slug": "mediterranean-house",
+        "section": "Premium",
+        "sortOrder": 71,
+        "image": "/Brookhaven%20RP/Houses/mediterranean-house-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Soccer Field",
+        "number": "72",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "Free",
+        "notes": "Soccer Field"
+      },
+      "system": {
+        "slug": "soccer-field",
+        "section": "Free",
+        "sortOrder": 72,
+        "image": "/Brookhaven%20RP/Houses/soccer-field.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brownstone House",
+        "number": "73",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Brownstone House"
+      },
+      "system": {
+        "slug": "brownstone-house",
+        "section": "Free",
+        "sortOrder": 73,
+        "image": "/Brookhaven%20RP/Houses/brownstone-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brownstone House",
+        "number": "74",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Brownstone House"
+      },
+      "system": {
+        "slug": "brownstone-house",
+        "section": "Premium",
+        "sortOrder": 74,
+        "image": "/Brookhaven%20RP/Houses/brownstone-house-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Woodland House",
+        "number": "75",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Woodland House"
+      },
+      "system": {
+        "slug": "woodland-house",
+        "section": "Free",
+        "sortOrder": 75,
+        "image": "/Brookhaven%20RP/Houses/woodland-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Midnight Manor",
+        "number": "76",
+        "category": "Houses",
+        "type": "Special",
+        "requirementCost": "Midnight Manor Pass",
+        "notes": "Halloween 2025"
+      },
+      "system": {
+        "slug": "midnight-manor",
+        "section": "Special",
+        "sortOrder": 76,
+        "image": "/Brookhaven%20RP/Houses/midnight-manor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween House",
+        "number": "77",
+        "category": "Houses",
+        "type": "Special",
+        "requirementCost": "Extreme Mode Week 1",
+        "notes": "Halloween 2025 Week 1"
+      },
+      "system": {
+        "slug": "halloween-house",
+        "section": "Special",
+        "sortOrder": 77,
+        "image": "/Brookhaven%20RP/Houses/halloween-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Contemporary House",
+        "number": "78",
+        "category": "Houses",
+        "type": "Premium",
+        "requirementCost": "Premium",
+        "notes": "Contemporary House"
+      },
+      "system": {
+        "slug": "contemporary-house",
+        "section": "Premium",
+        "sortOrder": 78,
+        "image": "/Brookhaven%20RP/Houses/contemporary-house.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Contemporary House",
+        "number": "79",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Contemporary House"
+      },
+      "system": {
+        "slug": "contemporary-house",
+        "section": "Free",
+        "sortOrder": 79,
+        "image": "/Brookhaven%20RP/Houses/contemporary-house-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frosty Manor",
+        "number": "80",
+        "category": "Houses",
+        "type": "Special",
+        "requirementCost": "Frosty Manor Gamepass",
+        "notes": "Winter Festival 2025"
+      },
+      "system": {
+        "slug": "frosty-manor",
+        "section": "Special",
+        "sortOrder": 80,
+        "image": "/Brookhaven%20RP/Houses/frosty-manor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowy Bungalow",
+        "number": "81",
+        "category": "Houses",
+        "type": "Special",
+        "requirementCost": "10,000 Snowflakes",
+        "notes": "Winter Festival 2025 Week 1"
+      },
+      "system": {
+        "slug": "snowy-bungalow",
+        "section": "Special",
+        "sortOrder": 81,
+        "image": "/Brookhaven%20RP/Houses/snowy-bungalow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wolf Den",
+        "number": "82",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "The Wolf Den House"
+      },
+      "system": {
+        "slug": "wolf-den",
+        "section": "Free",
+        "sortOrder": 82,
+        "image": "/Brookhaven%20RP/Houses/wolf-den.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink house",
+        "number": "83",
+        "category": "Houses",
+        "type": "Free",
+        "requirementCost": "None",
+        "notes": "Pink house"
+      },
+      "system": {
+        "slug": "pink-house",
+        "section": "Free",
+        "sortOrder": 83,
+        "image": "/Brookhaven%20RP/Houses/pink-house.webp"
+      }
     }
   ]
 }

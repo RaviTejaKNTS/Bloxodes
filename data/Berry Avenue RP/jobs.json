@@ -1,117 +1,199 @@
 {
   "meta": {
-    "title": "Berry Avenue RP jobs data",
-    "updatedAt": "2026-06-23",
-    "groupBy": "category",
-    "sources": [
-      {
-        "label": "BioBlox - Berry Avenue RP Guide: Jobs, Best Roles & How to Roleplay",
-        "url": "https://bioblox.fun/guides/roblox-berry-avenue-rp-guide",
-        "accessed": "2026-06-23"
-      },
-      {
-        "label": "Robloxiapedia - Berry Avenue (buildings and locations)",
-        "url": "https://robloxcities.fandom.com/wiki/Berry_Avenue",
-        "accessed": "2026-06-23"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Berry Avenue RP",
+    "gameSlug": "berry-avenue-rp",
+    "collection": "jobs",
+    "route": "/wiki/berry-avenue-rp/jobs",
+    "catalogCode": "berry-avenue-rp-jobs",
+    "itemFields": [
       "category",
       "building",
-      "cardSummary",
-      "image"
+      "cardSummary"
     ],
-    "notes": "Roleplay roles selected from the in-game phone Jobs menu. Berry Avenue has no in-game currency, so these roles do not pay money or wages. Roster limited to roles sources confirm as Jobs-menu entries. Per-role icons are not reliably available, so the catalog launches image-light."
+    "columns": [
+      "category",
+      "building",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Emergency Services",
+        "Service & Retail",
+        "Transportation"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "category",
+        "building",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "category",
+        "building",
+        "cardSummary"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Doctor / Nurse",
-      "slug": "doctor-nurse",
-      "category": "Emergency Services",
-      "building": "Hospital",
-      "cardSummary": "Work out of the hospital, treat injured players, and run medical roleplay scenarios with patients and other staff.",
-      "image": null
+      "item": {
+        "name": "Doctor / Nurse",
+        "category": "Emergency Services",
+        "building": "Hospital",
+        "cardSummary": "Work out of the hospital, treat injured players, and run medical roleplay scenarios with patients and other staff."
+      },
+      "system": {
+        "slug": "doctor-nurse",
+        "section": "Emergency Services",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Firefighter",
-      "slug": "firefighter",
-      "category": "Emergency Services",
-      "building": "Fire Department",
-      "cardSummary": "Respond to emergencies and fire callouts around town, working as part of the emergency response side of roleplay.",
-      "image": null
+      "item": {
+        "name": "Firefighter",
+        "category": "Emergency Services",
+        "building": "Fire Department",
+        "cardSummary": "Respond to emergencies and fire callouts around town, working as part of the emergency response side of roleplay."
+      },
+      "system": {
+        "slug": "firefighter",
+        "section": "Emergency Services",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Lifeguard",
-      "slug": "lifeguard",
-      "category": "Emergency Services",
-      "building": "Pool / beach area",
-      "cardSummary": "Watch over the pool or beach area and keep swimmers safe, a relaxed role with plenty of social roleplay.",
-      "image": null
+      "item": {
+        "name": "Lifeguard",
+        "category": "Emergency Services",
+        "building": "Pool / beach area",
+        "cardSummary": "Watch over the pool or beach area and keep swimmers safe, a relaxed role with plenty of social roleplay."
+      },
+      "system": {
+        "slug": "lifeguard",
+        "section": "Emergency Services",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Police Officer",
-      "slug": "police-officer",
-      "category": "Emergency Services",
-      "building": "Around town (patrol)",
-      "cardSummary": "Patrol the streets, respond to incidents, and arrest rule-breakers as part of law-enforcement roleplay.",
-      "image": null
+      "item": {
+        "name": "Police Officer",
+        "category": "Emergency Services",
+        "building": "Around town (patrol)",
+        "cardSummary": "Patrol the streets, respond to incidents, and arrest rule-breakers as part of law-enforcement roleplay."
+      },
+      "system": {
+        "slug": "police-officer",
+        "section": "Emergency Services",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Barista",
-      "slug": "barista",
-      "category": "Service & Retail",
-      "building": "Coffee House",
-      "cardSummary": "Serve drinks at the Coffee House, the main social hub, and chat with the players who gather there.",
-      "image": null
+      "item": {
+        "name": "Barista",
+        "category": "Service & Retail",
+        "building": "Coffee House",
+        "cardSummary": "Serve drinks at the Coffee House, the main social hub, and chat with the players who gather there."
+      },
+      "system": {
+        "slug": "barista",
+        "section": "Service & Retail",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Chef",
-      "slug": "chef",
-      "category": "Service & Retail",
-      "building": "Restaurant or home kitchen",
-      "cardSummary": "Cook and prepare food at a restaurant or in your own home for family and customer roleplay.",
-      "image": null
+      "item": {
+        "name": "Chef",
+        "category": "Service & Retail",
+        "building": "Restaurant or home kitchen",
+        "cardSummary": "Cook and prepare food at a restaurant or in your own home for family and customer roleplay."
+      },
+      "system": {
+        "slug": "chef",
+        "section": "Service & Retail",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Grocery Store Worker",
-      "slug": "grocery-store-worker",
-      "category": "Service & Retail",
-      "building": "Grocery Store",
-      "cardSummary": "Stock shelves and help customers at the grocery store for everyday shopping roleplay.",
-      "image": null
+      "item": {
+        "name": "Grocery Store Worker",
+        "category": "Service & Retail",
+        "building": "Grocery Store",
+        "cardSummary": "Stock shelves and help customers at the grocery store for everyday shopping roleplay."
+      },
+      "system": {
+        "slug": "grocery-store-worker",
+        "section": "Service & Retail",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Hairdresser / Beauty Tech",
-      "slug": "hairdresser-beauty-tech",
-      "category": "Service & Retail",
-      "building": "Hair Salon",
-      "cardSummary": "Style players at the salon and run makeover and beauty roleplay for customers.",
-      "image": null
+      "item": {
+        "name": "Hairdresser / Beauty Tech",
+        "category": "Service & Retail",
+        "building": "Hair Salon",
+        "cardSummary": "Style players at the salon and run makeover and beauty roleplay for customers."
+      },
+      "system": {
+        "slug": "hairdresser-beauty-tech",
+        "section": "Service & Retail",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Bus Driver",
-      "slug": "bus-driver",
-      "category": "Transportation",
-      "building": "Roads / routes",
-      "cardSummary": "Run routes around town and pick up students and commuters for travel roleplay.",
-      "image": null
+      "item": {
+        "name": "Bus Driver",
+        "category": "Transportation",
+        "building": "Roads / routes",
+        "cardSummary": "Run routes around town and pick up students and commuters for travel roleplay."
+      },
+      "system": {
+        "slug": "bus-driver",
+        "section": "Transportation",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Pilot / Flight Attendant",
-      "slug": "pilot-flight-attendant",
-      "category": "Transportation",
-      "building": "Berry Avenue Airport",
-      "cardSummary": "Take on airport roleplay with travel storylines, flying passengers or looking after them in the cabin.",
-      "image": null
+      "item": {
+        "name": "Pilot / Flight Attendant",
+        "category": "Transportation",
+        "building": "Berry Avenue Airport",
+        "cardSummary": "Take on airport roleplay with travel storylines, flying passengers or looking after them in the cabin."
+      },
+      "system": {
+        "slug": "pilot-flight-attendant",
+        "section": "Transportation",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Taxi Driver",
-      "slug": "taxi-driver",
-      "category": "Transportation",
-      "building": "Around town (roads)",
-      "cardSummary": "Drive people around town and build short pickup-and-dropoff roleplay scenes with passengers.",
-      "image": null
+      "item": {
+        "name": "Taxi Driver",
+        "category": "Transportation",
+        "building": "Around town (roads)",
+        "cardSummary": "Drive people around town and build short pickup-and-dropoff roleplay scenes with passengers."
+      },
+      "system": {
+        "slug": "taxi-driver",
+        "section": "Transportation",
+        "sortOrder": 11,
+        "image": null
+      }
     }
   ]
 }

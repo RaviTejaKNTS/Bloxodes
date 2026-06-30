@@ -1,29 +1,12 @@
 {
   "meta": {
-    "title": "99 Nights in the Forest Food",
+    "schemaVersion": 2,
     "game": "99 Nights in the Forest",
     "gameSlug": "99-nights-in-the-forest",
     "collection": "food",
     "route": "/wiki/99-nights-in-the-forest/food",
     "catalogCode": "99-nights-in-the-forest-food",
-    "updatedAt": "2026-05-30",
-    "itemCount": 47,
-    "counts": {
-      "Map, farm, and structure food": 7,
-      "Meat and cooked meat": 3,
-      "Crock Pot and Chef dishes": 8,
-      "Special survival food": 2,
-      "Event-only or removed food": 17,
-      "Fish and pond food": 10
-    },
-    "imageCoverage": {
-      "present": 47,
-      "missing": 0
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
+    "itemFields": [
       "type",
       "source",
       "cookMethod",
@@ -33,1009 +16,908 @@
       "tamingUse",
       "craftingUse",
       "bestFor",
-      "availability",
-      "verificationNote",
-      "sourceNote",
-      "sourcePage",
-      "imageStatus",
-      "sortOrder"
+      "availability"
     ],
-    "sources": [
-      {
-        "label": "99 Nights in the Forest Wiki - Items",
-        "url": "https://99-nights-in-the-forest.fandom.com/wiki/Items",
-        "accessed": "2026-05-30"
-      },
-      {
-        "label": "99 Nights in the Forest Wiki - Category:Food",
-        "url": "https://99-nights-in-the-forest.fandom.com/wiki/Category:Food",
-        "accessed": "2026-05-30"
-      },
-      {
-        "label": "99 Nights in the Forest Wiki - MRE",
-        "url": "https://99-nights-in-the-forest.fandom.com/wiki/MRE",
-        "accessed": "2026-05-30"
-      },
-      {
-        "label": "99 Nights in the Forest Wiki - Carrot Cake",
-        "url": "https://99-nights-in-the-forest.fandom.com/wiki/Carrot_Cake",
-        "accessed": "2026-05-30"
-      },
-      {
-        "label": "99 Nights in the Forest Wiki - Hunger",
-        "url": "https://99-nights-in-the-forest.fandom.com/wiki/Hunger",
-        "accessed": "2026-05-30"
-      },
-      {
-        "label": "PC Gamer - 99 Nights in the Forest animal taming",
-        "url": "https://www.pcgamer.com/games/roblox/99-nights-in-the-forest-animal-taming/",
-        "accessed": "2026-05-30"
-      }
+    "columns": [
+      "type",
+      "source",
+      "cookMethod",
+      "hunger",
+      "healing",
+      "effect",
+      "tamingUse",
+      "craftingUse",
+      "bestFor",
+      "availability"
     ],
-    "competitorChecks": [
-      {
-        "label": "BloxInformer - Consumable Items",
-        "url": "https://bloxinformer.com/wikis/99-nights-in-the-forest/consumable-items/",
-        "accessed": "2026-05-30"
-      },
-      {
-        "label": "99nightsintheforest.wiki - Consumables",
-        "url": "https://99nightsintheforest.wiki/consumables",
-        "accessed": "2026-05-30"
-      },
-      {
-        "label": "99nights.wiki - Food",
-        "url": "https://99nights.wiki/items/food/",
-        "accessed": "2026-05-30"
-      }
-    ],
-    "notes": [
-      "Dataset includes consumable food items and prepared dishes only. Non-food materials, potion ingredients, seeds, fuel, healing supplies, and Seasoning are excluded.",
-      "BBQ Ribs is deduped across the Food and Thanksgiving Dinner tables into one row.",
-      "Carrot Cake healing has a source conflict: Items says +40 health; the Carrot Cake page says +10 health.",
-      "Event-linked Halloween and Thanksgiving foods are included as row-level availability caveats, not as a separate event catalog."
-    ]
+    "display": {
+      "groupLabel": "type",
+      "sectionOrder": [
+        "Map, farm, and structure food",
+        "Meat and cooked meat",
+        "Crock Pot and Chef dishes",
+        "Special survival food",
+        "Event-only or removed food",
+        "Fish and pond food"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "type",
+        "source",
+        "cookMethod",
+        "hunger",
+        "healing",
+        "effect"
+      ],
+      "tableFields": [
+        "type",
+        "source",
+        "cookMethod",
+        "hunger",
+        "healing",
+        "effect",
+        "tamingUse",
+        "craftingUse"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Carrot",
-      "slug": "carrot",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/carrot.png",
-      "type": "Map, farm, and structure food",
-      "source": "Throughout the map; Farm Plots; Grocery Store",
-      "cookMethod": "Can be used in the Crock Pot for Stew.",
-      "hunger": "1 hunger icon",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "Bunny bait: 1 Carrot total in PC Gamer taming table.",
-      "craftingUse": "Crock Pot Stew ingredient.",
-      "bestFor": "Easy early hunger and Bunny taming bait.",
-      "availability": "Active normal-run food",
-      "sourceNote": "Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 1,
-      "verificationNote": ""
+      "item": {
+        "name": "Carrot",
+        "type": "Map, farm, and structure food",
+        "source": "Throughout the map; Farm Plots; Grocery Store",
+        "cookMethod": "Can be used in the Crock Pot for Stew.",
+        "hunger": "1 hunger icon",
+        "tamingUse": "Bunny bait: 1 Carrot total in PC Gamer taming table.",
+        "craftingUse": "Crock Pot Stew ingredient.",
+        "bestFor": "Easy early hunger and Bunny taming bait.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "carrot",
+        "section": "Map, farm, and structure food",
+        "sortOrder": 1,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/carrot.png"
+      }
     },
     {
-      "name": "Corn",
-      "slug": "corn",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/corn.png",
-      "type": "Map, farm, and structure food",
-      "source": "Farm Plots",
-      "cookMethod": "Can be used in the Crock Pot for Stew.",
-      "hunger": "2 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Crock Pot Stew ingredient.",
-      "bestFor": "Farm Plot food and Stew ingredient.",
-      "availability": "Active normal-run food",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 2,
-      "verificationNote": ""
+      "item": {
+        "name": "Corn",
+        "type": "Map, farm, and structure food",
+        "source": "Farm Plots",
+        "cookMethod": "Can be used in the Crock Pot for Stew.",
+        "hunger": "2 hunger icons",
+        "craftingUse": "Crock Pot Stew ingredient.",
+        "bestFor": "Farm Plot food and Stew ingredient.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "corn",
+        "section": "Map, farm, and structure food",
+        "sortOrder": 2,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/corn.png"
+      }
     },
     {
-      "name": "Pumpkin",
-      "slug": "pumpkin",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/pumpkin.png",
-      "type": "Map, farm, and structure food",
-      "source": "Farm Plots",
-      "cookMethod": "Can be used in the Crock Pot for Stew.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "Bear, Mammoth, and Hellephant bait in PC Gamer taming table.",
-      "craftingUse": "Crock Pot Stew ingredient.",
-      "bestFor": "High-value farm food and Bear/Mammoth/Hellephant taming bait.",
-      "availability": "Active normal-run food",
-      "sourceNote": "Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 3,
-      "verificationNote": ""
+      "item": {
+        "name": "Pumpkin",
+        "type": "Map, farm, and structure food",
+        "source": "Farm Plots",
+        "cookMethod": "Can be used in the Crock Pot for Stew.",
+        "hunger": "4 hunger icons",
+        "tamingUse": "Bear, Mammoth, and Hellephant bait in PC Gamer taming table.",
+        "craftingUse": "Crock Pot Stew ingredient.",
+        "bestFor": "High-value farm food and Bear/Mammoth/Hellephant taming bait.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "pumpkin",
+        "section": "Map, farm, and structure food",
+        "sortOrder": 3,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/pumpkin.png"
+      }
     },
     {
-      "name": "Berry",
-      "slug": "berry",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/berry.png",
-      "type": "Map, farm, and structure food",
-      "source": "Throughout the map; Berry Seeds",
-      "cookMethod": "No cooking method listed on the Items table.",
-      "hunger": "1 hunger icon",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "Kiwi bait: 1 Berry total in PC Gamer taming table.",
-      "craftingUse": "",
-      "bestFor": "Quick map food and Kiwi taming bait.",
-      "availability": "Active normal-run food",
-      "sourceNote": "Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 4,
-      "verificationNote": ""
+      "item": {
+        "name": "Berry",
+        "type": "Map, farm, and structure food",
+        "source": "Throughout the map; Berry Seeds",
+        "cookMethod": "No cooking method listed on the Items table.",
+        "hunger": "1 hunger icon",
+        "tamingUse": "Kiwi bait: 1 Berry total in PC Gamer taming table.",
+        "bestFor": "Quick map food and Kiwi taming bait.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "berry",
+        "section": "Map, farm, and structure food",
+        "sortOrder": 4,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/berry.png"
+      }
     },
     {
-      "name": "Apple",
-      "slug": "apple",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/apple.png",
-      "type": "Map, farm, and structure food",
-      "source": "Grocery Store; Apple Trees",
-      "cookMethod": "Can be used in the Crock Pot for Stew.",
-      "hunger": "1 hunger icon",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Crock Pot Stew ingredient.",
-      "bestFor": "Grocery Store or tree food for Stew routes.",
-      "availability": "Active normal-run food",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 5,
-      "verificationNote": ""
+      "item": {
+        "name": "Apple",
+        "type": "Map, farm, and structure food",
+        "source": "Grocery Store; Apple Trees",
+        "cookMethod": "Can be used in the Crock Pot for Stew.",
+        "hunger": "1 hunger icon",
+        "craftingUse": "Crock Pot Stew ingredient.",
+        "bestFor": "Grocery Store or tree food for Stew routes.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "apple",
+        "section": "Map, farm, and structure food",
+        "sortOrder": 5,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/apple.png"
+      }
     },
     {
-      "name": "Morsel",
-      "slug": "morsel",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/morsel.png",
-      "type": "Meat and cooked meat",
-      "source": "Bunny; Wolf; Alpha Wolf; Bear; Arctic Fox; Polar Bear; Frog; Scorpion; Meteor Crab (Morsel?)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon; 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "Wolf and Scorpion bait: 3 Morsels for Wolf, 2 Morsels for Scorpion in PC Gamer taming table.",
-      "craftingUse": "Crock Pot Stew ingredient when used as meat.",
-      "bestFor": "Cook before eating; also useful for Wolf and Scorpion taming.",
-      "availability": "Active normal-run food",
-      "sourceNote": "Raw item can damage the player according to Items table; row image uses the raw item while hunger records cooked value. Items table also shows Morsel? image for Meteor Crab source; row stays normalized as Morsel. Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 6,
-      "verificationNote": ""
+      "item": {
+        "name": "Morsel",
+        "type": "Meat and cooked meat",
+        "source": "Bunny; Wolf; Alpha Wolf; Bear; Arctic Fox; Polar Bear; Frog; Scorpion; Meteor Crab (Morsel?)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon; 2 hunger icons (cooked)",
+        "tamingUse": "Wolf and Scorpion bait: 3 Morsels for Wolf, 2 Morsels for Scorpion in PC Gamer taming table.",
+        "craftingUse": "Crock Pot Stew ingredient when used as meat.",
+        "bestFor": "Cook before eating; also useful for Wolf and Scorpion taming.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "morsel",
+        "section": "Meat and cooked meat",
+        "sortOrder": 6,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/morsel.png"
+      }
     },
     {
-      "name": "Steak",
-      "slug": "steak",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/steak.png",
-      "type": "Meat and cooked meat",
-      "source": "Wolf; Alpha Wolf; Bear; Horse; Polar Bear; Mammoth; Hellephant",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon; 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "Wolf, Scorpion, Alpha Wolf, Snow Fox, and Bear bait in PC Gamer taming table.",
-      "craftingUse": "Crock Pot Stew ingredient when used as meat.",
-      "bestFor": "Cooked meat and major animal taming bait.",
-      "availability": "Active normal-run food",
-      "sourceNote": "Raw item can damage the player according to Items table; row image uses the raw item while hunger records cooked value. Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 7,
-      "verificationNote": ""
+      "item": {
+        "name": "Steak",
+        "type": "Meat and cooked meat",
+        "source": "Wolf; Alpha Wolf; Bear; Horse; Polar Bear; Mammoth; Hellephant",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon; 2 hunger icons (cooked)",
+        "tamingUse": "Wolf, Scorpion, Alpha Wolf, Snow Fox, and Bear bait in PC Gamer taming table.",
+        "craftingUse": "Crock Pot Stew ingredient when used as meat.",
+        "bestFor": "Cooked meat and major animal taming bait.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "steak",
+        "section": "Meat and cooked meat",
+        "sortOrder": 7,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/steak.png"
+      }
     },
     {
-      "name": "Ribs",
-      "slug": "ribs",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/ribs.png",
-      "type": "Meat and cooked meat",
-      "source": "Mammoth; Hellephant",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "2 hunger icons; 4 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "Polar Bear bait in PC Gamer taming table.",
-      "craftingUse": "Crock Pot Stew ingredient when used as meat.",
-      "bestFor": "Strong cooked meat and Polar Bear bait.",
-      "availability": "Active normal-run food",
-      "sourceNote": "Raw item can damage the player according to Items table; row image uses the raw item while hunger records cooked value. Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 8,
-      "verificationNote": ""
+      "item": {
+        "name": "Ribs",
+        "type": "Meat and cooked meat",
+        "source": "Mammoth; Hellephant",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "2 hunger icons; 4 hunger icons (cooked)",
+        "tamingUse": "Polar Bear bait in PC Gamer taming table.",
+        "craftingUse": "Crock Pot Stew ingredient when used as meat.",
+        "bestFor": "Strong cooked meat and Polar Bear bait.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "ribs",
+        "section": "Meat and cooked meat",
+        "sortOrder": 8,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/ribs.png"
+      }
     },
     {
-      "name": "Cake",
-      "slug": "cake",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/cake.png",
-      "type": "Map, farm, and structure food",
-      "source": "Throughout the map; Clinic; Structures; Farm Plots; Update Parties",
-      "cookMethod": "Can be used in the Crock Pot for Stew.",
-      "hunger": "1 hunger icon",
-      "healing": "15 HP",
-      "effect": "",
-      "tamingUse": "Mammoth and Hellephant bait in PC Gamer taming table.",
-      "craftingUse": "Crock Pot Stew ingredient.",
-      "bestFor": "Food that also heals and can support Mammoth/Hellephant taming.",
-      "availability": "Active normal-run food",
-      "sourceNote": "Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 9,
-      "verificationNote": ""
+      "item": {
+        "name": "Cake",
+        "type": "Map, farm, and structure food",
+        "source": "Throughout the map; Clinic; Structures; Farm Plots; Update Parties",
+        "cookMethod": "Can be used in the Crock Pot for Stew.",
+        "hunger": "1 hunger icon",
+        "healing": "15 HP",
+        "tamingUse": "Mammoth and Hellephant bait in PC Gamer taming table.",
+        "craftingUse": "Crock Pot Stew ingredient.",
+        "bestFor": "Food that also heals and can support Mammoth/Hellephant taming.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "cake",
+        "section": "Map, farm, and structure food",
+        "sortOrder": 9,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/cake.png"
+      }
     },
     {
-      "name": "Chili",
-      "slug": "chili",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/chili.png",
-      "type": "Map, farm, and structure food",
-      "source": "Throughout the map; Chili Seeds",
-      "cookMethod": "No cooking method listed on the Items table.",
-      "hunger": "Alien Tech Energy",
-      "healing": "",
-      "effect": "Temporary speed increase.",
-      "tamingUse": "Snow Fox bait in PC Gamer taming table.",
-      "craftingUse": "",
-      "bestFor": "Short speed boost and Snow Fox taming bait.",
-      "availability": "Active normal-run food",
-      "sourceNote": "Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 10,
-      "verificationNote": ""
+      "item": {
+        "name": "Chili",
+        "type": "Map, farm, and structure food",
+        "source": "Throughout the map; Chili Seeds",
+        "cookMethod": "No cooking method listed on the Items table.",
+        "hunger": "Alien Tech Energy",
+        "effect": "Temporary speed increase.",
+        "tamingUse": "Snow Fox bait in PC Gamer taming table.",
+        "bestFor": "Short speed boost and Snow Fox taming bait.",
+        "availability": "Active normal-run food"
+      },
+      "system": {
+        "slug": "chili",
+        "section": "Map, farm, and structure food",
+        "sortOrder": 10,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/chili.png"
+      }
     },
     {
-      "name": "Stew",
-      "slug": "stew",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/stew.png",
-      "type": "Crock Pot and Chef dishes",
-      "source": "Crock Pot; Camper Class (level 3)",
-      "cookMethod": "Cooked in the Crock Pot from listed food ingredients.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "Can warm the player if cold; vegetarian state depends on ingredients.",
-      "tamingUse": "Polar Bear bait in PC Gamer taming table.",
-      "craftingUse": "",
-      "bestFor": "Large hunger refill, warming while cold, and Polar Bear bait.",
-      "availability": "Active normal-run dish",
-      "sourceNote": "Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 11,
-      "verificationNote": ""
+      "item": {
+        "name": "Stew",
+        "type": "Crock Pot and Chef dishes",
+        "source": "Crock Pot; Camper Class (level 3)",
+        "cookMethod": "Cooked in the Crock Pot from listed food ingredients.",
+        "hunger": "4 hunger icons",
+        "effect": "Can warm the player if cold; vegetarian state depends on ingredients.",
+        "tamingUse": "Polar Bear bait in PC Gamer taming table.",
+        "bestFor": "Large hunger refill, warming while cold, and Polar Bear bait.",
+        "availability": "Active normal-run dish"
+      },
+      "system": {
+        "slug": "stew",
+        "section": "Crock Pot and Chef dishes",
+        "sortOrder": 11,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/stew.png"
+      }
     },
     {
-      "name": "Hearty Stew",
-      "slug": "hearty-stew",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/hearty-stew.png",
-      "type": "Crock Pot and Chef dishes",
-      "source": "Crock Pot (Cook Class level 3)",
-      "cookMethod": "Crock Pot with Cook Class level 3 chance.",
-      "hunger": "4 hunger icons",
-      "healing": "15 HP",
-      "effect": "Can warm the player if cold.",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Stew route with extra healing.",
-      "availability": "Active class-linked dish",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 12,
-      "verificationNote": ""
+      "item": {
+        "name": "Hearty Stew",
+        "type": "Crock Pot and Chef dishes",
+        "source": "Crock Pot (Cook Class level 3)",
+        "cookMethod": "Crock Pot with Cook Class level 3 chance.",
+        "hunger": "4 hunger icons",
+        "healing": "15 HP",
+        "effect": "Can warm the player if cold.",
+        "bestFor": "Stew route with extra healing.",
+        "availability": "Active class-linked dish"
+      },
+      "system": {
+        "slug": "hearty-stew",
+        "section": "Crock Pot and Chef dishes",
+        "sortOrder": 12,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/hearty-stew.png"
+      }
     },
     {
-      "name": "Meat? Sandwich",
-      "slug": "meat-sandwich",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/meat-sandwich.png",
-      "type": "Special survival food",
-      "source": "Broken UFOs; Mothership UFOs",
-      "cookMethod": "No cooking method listed on the Items table.",
-      "hunger": "2 hunger icons",
-      "healing": "",
-      "effect": "Replenishes Alien Tech Energy; counts as non-vegetarian.",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Alien Tech Energy refill when using alien systems.",
-      "availability": "Active special food",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 13,
-      "verificationNote": ""
+      "item": {
+        "name": "Meat? Sandwich",
+        "type": "Special survival food",
+        "source": "Broken UFOs; Mothership UFOs",
+        "cookMethod": "No cooking method listed on the Items table.",
+        "hunger": "2 hunger icons",
+        "effect": "Replenishes Alien Tech Energy; counts as non-vegetarian.",
+        "bestFor": "Alien Tech Energy refill when using alien systems.",
+        "availability": "Active special food"
+      },
+      "system": {
+        "slug": "meat-sandwich",
+        "section": "Special survival food",
+        "sortOrder": 13,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/meat-sandwich.png"
+      }
     },
     {
-      "name": "Seafood Chowder",
-      "slug": "seafood-chowder",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/seafood-chowder.png",
-      "type": "Crock Pot and Chef dishes",
-      "source": "Chef Class",
-      "cookMethod": "Chef Class dish; exact recipe not listed in Items table.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "High hunger Chef food.",
-      "availability": "Active Chef dish",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 14,
-      "verificationNote": ""
+      "item": {
+        "name": "Seafood Chowder",
+        "type": "Crock Pot and Chef dishes",
+        "source": "Chef Class",
+        "cookMethod": "Chef Class dish; exact recipe not listed in Items table.",
+        "hunger": "4 hunger icons",
+        "bestFor": "High hunger Chef food.",
+        "availability": "Active Chef dish"
+      },
+      "system": {
+        "slug": "seafood-chowder",
+        "section": "Crock Pot and Chef dishes",
+        "sortOrder": 14,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/seafood-chowder.png"
+      }
     },
     {
-      "name": "Steak Dinner",
-      "slug": "steak-dinner",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/steak-dinner.png",
-      "type": "Crock Pot and Chef dishes",
-      "source": "Chef Class",
-      "cookMethod": "Chef Class dish; exact recipe not listed in Items table.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "High hunger Chef food.",
-      "availability": "Active Chef dish",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 15,
-      "verificationNote": ""
+      "item": {
+        "name": "Steak Dinner",
+        "type": "Crock Pot and Chef dishes",
+        "source": "Chef Class",
+        "cookMethod": "Chef Class dish; exact recipe not listed in Items table.",
+        "hunger": "4 hunger icons",
+        "bestFor": "High hunger Chef food.",
+        "availability": "Active Chef dish"
+      },
+      "system": {
+        "slug": "steak-dinner",
+        "section": "Crock Pot and Chef dishes",
+        "sortOrder": 15,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/steak-dinner.png"
+      }
     },
     {
-      "name": "Pumpkin Soup",
-      "slug": "pumpkin-soup",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/pumpkin-soup.png",
-      "type": "Crock Pot and Chef dishes",
-      "source": "Chef Class",
-      "cookMethod": "Chef Class dish; exact recipe not listed in Items table.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "Keeps the player warm for 2 minutes.",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Warmth for snow/cold routes.",
-      "availability": "Active Chef dish",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 16,
-      "verificationNote": ""
+      "item": {
+        "name": "Pumpkin Soup",
+        "type": "Crock Pot and Chef dishes",
+        "source": "Chef Class",
+        "cookMethod": "Chef Class dish; exact recipe not listed in Items table.",
+        "hunger": "4 hunger icons",
+        "effect": "Keeps the player warm for 2 minutes.",
+        "bestFor": "Warmth for snow/cold routes.",
+        "availability": "Active Chef dish"
+      },
+      "system": {
+        "slug": "pumpkin-soup",
+        "section": "Crock Pot and Chef dishes",
+        "sortOrder": 16,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/pumpkin-soup.png"
+      }
     },
     {
-      "name": "BBQ Ribs",
-      "slug": "bbq-ribs",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/bbq-ribs.png",
-      "type": "Crock Pot and Chef dishes",
-      "source": "Chef Class",
-      "cookMethod": "Chef Class dish; also listed as a Crock Pot dish during the Thanksgiving Quest.",
-      "hunger": "4 hunger icons",
-      "healing": "Some health; exact HP not listed in source table.",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest dish when that quest route exists.",
-      "bestFor": "Hunger plus some health, and Thanksgiving quest hand-in when that event route exists.",
-      "availability": "Active Chef dish; event-linked use also listed",
-      "sourceNote": "Deduped between Food and Thanksgiving Dinner tables; dataset keeps one row with both Chef and Thanksgiving uses.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 17,
-      "verificationNote": ""
+      "item": {
+        "name": "BBQ Ribs",
+        "type": "Crock Pot and Chef dishes",
+        "source": "Chef Class",
+        "cookMethod": "Chef Class dish; also listed as a Crock Pot dish during the Thanksgiving Quest.",
+        "hunger": "4 hunger icons",
+        "healing": "Some health; exact HP not listed in source table.",
+        "craftingUse": "Thanksgiving Quest dish when that quest route exists.",
+        "bestFor": "Hunger plus some health, and Thanksgiving quest hand-in when that event route exists.",
+        "availability": "Active Chef dish; event-linked use also listed"
+      },
+      "system": {
+        "slug": "bbq-ribs",
+        "section": "Crock Pot and Chef dishes",
+        "sortOrder": 17,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/bbq-ribs.png"
+      }
     },
     {
-      "name": "Carrot Cake",
-      "slug": "carrot-cake",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/carrot-cake.png",
-      "type": "Crock Pot and Chef dishes",
-      "source": "; Trick-or-Treating; Chef Class",
-      "cookMethod": "Chef station recipe confirmed on individual page: Cake x1 and Carrot x2.",
-      "hunger": "4 hunger icons",
-      "healing": "Source conflict: Items says +40 health; Carrot Cake page says +10 health.",
-      "effect": "Night Vision for 9 minutes; healing amount has source conflict.",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Night vision plus healing when source conflict is resolved.",
-      "availability": "Active Chef dish; Items table also lists Trick-or-Treating",
-      "sourceNote": "Healing conflict: Fandom Items says +40 health, while the Carrot Cake page says +10 health. Do not publish one exact HP number until parent/source review resolves it.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 18,
-      "verificationNote": "Healing conflict: Fandom Items says +40 HP, while the Carrot Cake page says +10 HP."
+      "item": {
+        "name": "Carrot Cake",
+        "type": "Crock Pot and Chef dishes",
+        "source": "; Trick-or-Treating; Chef Class",
+        "cookMethod": "Chef station recipe confirmed on individual page: Cake x1 and Carrot x2.",
+        "hunger": "4 hunger icons",
+        "healing": "Source conflict: Items says +40 health; Carrot Cake page says +10 health.",
+        "effect": "Night Vision for 9 minutes; healing amount has source conflict.",
+        "bestFor": "Night vision plus healing when source conflict is resolved.",
+        "availability": "Active Chef dish; Items table also lists Trick-or-Treating"
+      },
+      "system": {
+        "slug": "carrot-cake",
+        "section": "Crock Pot and Chef dishes",
+        "sortOrder": 18,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/carrot-cake.png"
+      }
     },
     {
-      "name": "Jar o' Jelly",
-      "slug": "jar-o-jelly",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/jar-o-jelly.png",
-      "type": "Crock Pot and Chef dishes",
-      "source": "Chef Class",
-      "cookMethod": "Chef Class dish; exact recipe not listed in Items table.",
-      "hunger": "4 hunger icons",
-      "healing": "Full health",
-      "effect": "5 minute speed boost.",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Emergency full heal and speed boost.",
-      "availability": "Active Chef dish",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 19,
-      "verificationNote": ""
+      "item": {
+        "name": "Jar o' Jelly",
+        "type": "Crock Pot and Chef dishes",
+        "source": "Chef Class",
+        "cookMethod": "Chef Class dish; exact recipe not listed in Items table.",
+        "hunger": "4 hunger icons",
+        "healing": "Full health",
+        "effect": "5 minute speed boost.",
+        "bestFor": "Emergency full heal and speed boost.",
+        "availability": "Active Chef dish"
+      },
+      "system": {
+        "slug": "jar-o-jelly",
+        "section": "Crock Pot and Chef dishes",
+        "sortOrder": 19,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/jar-o-jelly.png"
+      }
     },
     {
-      "name": "Candy Apple",
-      "slug": "candy-apple",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/candy-apple.png",
-      "type": "Event-only or removed food",
-      "source": "Trick-or-Treating; Spooky Crock Pot",
-      "cookMethod": "Spooky Crock Pot route listed on Items table.",
-      "hunger": "Alien Tech Energy",
-      "healing": "",
-      "effect": "Temporary speed boost.",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Seasonal speed food if Halloween route returns.",
-      "availability": "Halloween event route; not normal-run food unless that route returns",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 20,
-      "verificationNote": ""
+      "item": {
+        "name": "Candy Apple",
+        "type": "Event-only or removed food",
+        "source": "Trick-or-Treating; Spooky Crock Pot",
+        "cookMethod": "Spooky Crock Pot route listed on Items table.",
+        "hunger": "Alien Tech Energy",
+        "effect": "Temporary speed boost.",
+        "bestFor": "Seasonal speed food if Halloween route returns.",
+        "availability": "Halloween event route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "candy-apple",
+        "section": "Event-only or removed food",
+        "sortOrder": 20,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/candy-apple.png"
+      }
     },
     {
-      "name": "Candy Corn",
-      "slug": "candy-corn",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/candy-corn.png",
-      "type": "Event-only or removed food",
-      "source": "Trick-or-Treating; Spooky Crock Pot",
-      "cookMethod": "Spooky Crock Pot route listed on Items table.",
-      "hunger": "Alien Tech Energy",
-      "healing": "",
-      "effect": "Temporary speed boost.",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Seasonal speed food if Halloween route returns.",
-      "availability": "Halloween event route; not normal-run food unless that route returns",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 21,
-      "verificationNote": ""
+      "item": {
+        "name": "Candy Corn",
+        "type": "Event-only or removed food",
+        "source": "Trick-or-Treating; Spooky Crock Pot",
+        "cookMethod": "Spooky Crock Pot route listed on Items table.",
+        "hunger": "Alien Tech Energy",
+        "effect": "Temporary speed boost.",
+        "bestFor": "Seasonal speed food if Halloween route returns.",
+        "availability": "Halloween event route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "candy-corn",
+        "section": "Event-only or removed food",
+        "sortOrder": 21,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/candy-corn.png"
+      }
     },
     {
-      "name": "Pumpkin Pie",
-      "slug": "pumpkin-pie",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/pumpkin-pie.png",
-      "type": "Event-only or removed food",
-      "source": "Trick-or-Treating; Spooky Crock Pot",
-      "cookMethod": "Spooky Crock Pot route listed on Items table.",
-      "hunger": "Alien Tech Energy",
-      "healing": "",
-      "effect": "Temporary speed boost.",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Seasonal speed food if Halloween route returns.",
-      "availability": "Halloween event route; not normal-run food unless that route returns",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 22,
-      "verificationNote": ""
+      "item": {
+        "name": "Pumpkin Pie",
+        "type": "Event-only or removed food",
+        "source": "Trick-or-Treating; Spooky Crock Pot",
+        "cookMethod": "Spooky Crock Pot route listed on Items table.",
+        "hunger": "Alien Tech Energy",
+        "effect": "Temporary speed boost.",
+        "bestFor": "Seasonal speed food if Halloween route returns.",
+        "availability": "Halloween event route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "pumpkin-pie",
+        "section": "Event-only or removed food",
+        "sortOrder": 22,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/pumpkin-pie.png"
+      }
     },
     {
-      "name": "Cotton Candy",
-      "slug": "cotton-candy",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/cotton-candy.png",
-      "type": "Event-only or removed food",
-      "source": "Trick-or-Treating; Spooky Crock Pot",
-      "cookMethod": "Spooky Crock Pot route listed on Items table.",
-      "hunger": "Alien Tech Energy",
-      "healing": "",
-      "effect": "Temporary speed boost.",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Seasonal speed food if Halloween route returns.",
-      "availability": "Halloween event route; not normal-run food unless that route returns",
-      "sourceNote": "",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Food",
-      "imageStatus": "local food image present",
-      "sortOrder": 23,
-      "verificationNote": ""
+      "item": {
+        "name": "Cotton Candy",
+        "type": "Event-only or removed food",
+        "source": "Trick-or-Treating; Spooky Crock Pot",
+        "cookMethod": "Spooky Crock Pot route listed on Items table.",
+        "hunger": "Alien Tech Energy",
+        "effect": "Temporary speed boost.",
+        "bestFor": "Seasonal speed food if Halloween route returns.",
+        "availability": "Halloween event route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "cotton-candy",
+        "section": "Event-only or removed food",
+        "sortOrder": 23,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/cotton-candy.png"
+      }
     },
     {
-      "name": "Mackerel",
-      "slug": "mackerel",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/mackerel.png",
-      "type": "Fish and pond food",
-      "source": "Fresh Pond (Campfire level 1+)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "Green Frog and Alpha Wolf bait in PC Gamer taming table.",
-      "craftingUse": "",
-      "bestFor": "Fishing food and animal taming bait.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection. Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 24,
-      "verificationNote": ""
+      "item": {
+        "name": "Mackerel",
+        "type": "Fish and pond food",
+        "source": "Fresh Pond (Campfire level 1+)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
+        "tamingUse": "Green Frog and Alpha Wolf bait in PC Gamer taming table.",
+        "bestFor": "Fishing food and animal taming bait.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "mackerel",
+        "section": "Fish and pond food",
+        "sortOrder": 24,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/mackerel.png"
+      }
     },
     {
-      "name": "Salmon",
-      "slug": "salmon",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/salmon.png",
-      "type": "Fish and pond food",
-      "source": "Fresh Pond (Campfire level 1+)Algal Pond (Campfire level 4-5)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "Alpha Wolf and Bear bait in PC Gamer taming table.",
-      "craftingUse": "",
-      "bestFor": "Fishing food and animal taming bait.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection. Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 25,
-      "verificationNote": ""
+      "item": {
+        "name": "Salmon",
+        "type": "Fish and pond food",
+        "source": "Fresh Pond (Campfire level 1+)Algal Pond (Campfire level 4-5)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
+        "tamingUse": "Alpha Wolf and Bear bait in PC Gamer taming table.",
+        "bestFor": "Fishing food and animal taming bait.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "salmon",
+        "section": "Fish and pond food",
+        "sortOrder": 25,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/salmon.png"
+      }
     },
     {
-      "name": "Clownfish",
-      "slug": "clownfish",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/clownfish.png",
-      "type": "Fish and pond food",
-      "source": "Fresh Pond (Campfire level 1+)Algal Pond (Campfire level 4-5)Bone Pond (Campfire level 6)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Fishing food from listed pond routes.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 26,
-      "verificationNote": ""
+      "item": {
+        "name": "Clownfish",
+        "type": "Fish and pond food",
+        "source": "Fresh Pond (Campfire level 1+)Algal Pond (Campfire level 4-5)Bone Pond (Campfire level 6)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
+        "bestFor": "Fishing food from listed pond routes.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "clownfish",
+        "section": "Fish and pond food",
+        "sortOrder": 26,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/clownfish.png"
+      }
     },
     {
-      "name": "Jellyfish",
-      "slug": "jellyfish",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/jellyfish.png",
-      "type": "Fish and pond food",
-      "source": "Algal Pond (Campfire level 4-5)Bone Pond (Campfire level 6)",
-      "cookMethod": "No cooked form listed on the Items fish table.",
-      "hunger": "Alien Tech Energy",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Fishing food from listed pond routes.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 27,
-      "verificationNote": ""
+      "item": {
+        "name": "Jellyfish",
+        "type": "Fish and pond food",
+        "source": "Algal Pond (Campfire level 4-5)Bone Pond (Campfire level 6)",
+        "cookMethod": "No cooked form listed on the Items fish table.",
+        "hunger": "Alien Tech Energy",
+        "bestFor": "Fishing food from listed pond routes.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "jellyfish",
+        "section": "Fish and pond food",
+        "sortOrder": 27,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/jellyfish.png"
+      }
     },
     {
-      "name": "Char",
-      "slug": "char",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/char.png",
-      "type": "Fish and pond food",
-      "source": "Cold Pond (Snow Biome)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Fishing food from listed pond routes.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 28,
-      "verificationNote": ""
+      "item": {
+        "name": "Char",
+        "type": "Fish and pond food",
+        "source": "Cold Pond (Snow Biome)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
+        "bestFor": "Fishing food from listed pond routes.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "char",
+        "section": "Fish and pond food",
+        "sortOrder": 28,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/char.png"
+      }
     },
     {
-      "name": "Eel",
-      "slug": "eel",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/eel.png",
-      "type": "Fish and pond food",
-      "source": "Cold Pond (Snow Biome)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Fishing food from listed pond routes.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 29,
-      "verificationNote": ""
+      "item": {
+        "name": "Eel",
+        "type": "Fish and pond food",
+        "source": "Cold Pond (Snow Biome)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
+        "bestFor": "Fishing food from listed pond routes.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "eel",
+        "section": "Fish and pond food",
+        "sortOrder": 29,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/eel.png"
+      }
     },
     {
-      "name": "Swordfish",
-      "slug": "swordfish",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/swordfish.png",
-      "type": "Fish and pond food",
-      "source": "Fresh Pond (Campfire level 1+)Algal Pond (Campfire level 4-5)Bone Pond (Campfire level 6)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "Polar Bear bait in PC Gamer taming table.",
-      "craftingUse": "",
-      "bestFor": "Fishing food and animal taming bait.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection. Taming use is from PC Gamer animal taming table, not Fandom Items.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 30,
-      "verificationNote": ""
+      "item": {
+        "name": "Swordfish",
+        "type": "Fish and pond food",
+        "source": "Fresh Pond (Campfire level 1+)Algal Pond (Campfire level 4-5)Bone Pond (Campfire level 6)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
+        "tamingUse": "Polar Bear bait in PC Gamer taming table.",
+        "bestFor": "Fishing food and animal taming bait.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "swordfish",
+        "section": "Fish and pond food",
+        "sortOrder": 30,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/swordfish.png"
+      }
     },
     {
-      "name": "Shark",
-      "slug": "shark",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/shark.png",
-      "type": "Fish and pond food",
-      "source": "Algal Pond (Campfire level 4-5)Bone Pond (Campfire level 6)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "2 hunger icons (raw); 4 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Fishing food from listed pond routes.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 31,
-      "verificationNote": ""
+      "item": {
+        "name": "Shark",
+        "type": "Fish and pond food",
+        "source": "Algal Pond (Campfire level 4-5)Bone Pond (Campfire level 6)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "2 hunger icons (raw); 4 hunger icons (cooked)",
+        "bestFor": "Fishing food from listed pond routes.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "shark",
+        "section": "Fish and pond food",
+        "sortOrder": 31,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/shark.png"
+      }
     },
     {
-      "name": "Lava Eel",
-      "slug": "lava-eel",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/lava-eel.png",
-      "type": "Fish and pond food",
-      "source": "Lava Pool (Campfire level 2-3)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Fishing food from listed pond routes.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 32,
-      "verificationNote": ""
+      "item": {
+        "name": "Lava Eel",
+        "type": "Fish and pond food",
+        "source": "Lava Pool (Campfire level 2-3)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
+        "bestFor": "Fishing food from listed pond routes.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "lava-eel",
+        "section": "Fish and pond food",
+        "sortOrder": 32,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/lava-eel.png"
+      }
     },
     {
-      "name": "Lionfish",
-      "slug": "lionfish",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/lionfish.png",
-      "type": "Fish and pond food",
-      "source": "Lava Pool (Campfire level 2-3)",
-      "cookMethod": "Can be cooked at the Campfire.",
-      "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Fishing food from listed pond routes.",
-      "availability": "Active fishing food",
-      "sourceNote": "Fish table row from Fandom Items; pond requirements kept in Source field. Pond images were excluded from local row image selection.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Fish",
-      "imageStatus": "local food image present",
-      "sortOrder": 33,
-      "verificationNote": ""
+      "item": {
+        "name": "Lionfish",
+        "type": "Fish and pond food",
+        "source": "Lava Pool (Campfire level 2-3)",
+        "cookMethod": "Can be cooked at the Campfire.",
+        "hunger": "1 hunger icon (raw); 2 hunger icons (cooked)",
+        "bestFor": "Fishing food from listed pond routes.",
+        "availability": "Active fishing food"
+      },
+      "system": {
+        "slug": "lionfish",
+        "section": "Fish and pond food",
+        "sortOrder": 33,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/lionfish.png"
+      }
     },
     {
-      "name": "Turkey Leg",
-      "slug": "turkey-leg",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/turkey-leg.png",
-      "type": "Event-only or removed food",
-      "source": "Turkey",
-      "cookMethod": "No cooking station required for the base ingredient in the Items table.",
-      "hunger": "1 hunger icon",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Used for Turkey Legs and Roast Turkey during the Thanksgiving Quest.",
-      "bestFor": "Thanksgiving ingredient and small hunger refill.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 34,
-      "verificationNote": ""
+      "item": {
+        "name": "Turkey Leg",
+        "type": "Event-only or removed food",
+        "source": "Turkey",
+        "cookMethod": "No cooking station required for the base ingredient in the Items table.",
+        "hunger": "1 hunger icon",
+        "craftingUse": "Used for Turkey Legs and Roast Turkey during the Thanksgiving Quest.",
+        "bestFor": "Thanksgiving ingredient and small hunger refill.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "turkey-leg",
+        "section": "Event-only or removed food",
+        "sortOrder": 34,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/turkey-leg.png"
+      }
     },
     {
-      "name": "Stuffing",
-      "slug": "stuffing",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/stuffing.png",
-      "type": "Event-only or removed food",
-      "source": "Turkey",
-      "cookMethod": "No cooking station required for the base ingredient in the Items table.",
-      "hunger": "1 hunger icon",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Used for Stuffing Bowl and Stuffed Peppers during the Thanksgiving Quest.",
-      "bestFor": "Thanksgiving ingredient and small hunger refill.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 35,
-      "verificationNote": ""
+      "item": {
+        "name": "Stuffing",
+        "type": "Event-only or removed food",
+        "source": "Turkey",
+        "cookMethod": "No cooking station required for the base ingredient in the Items table.",
+        "hunger": "1 hunger icon",
+        "craftingUse": "Used for Stuffing Bowl and Stuffed Peppers during the Thanksgiving Quest.",
+        "bestFor": "Thanksgiving ingredient and small hunger refill.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "stuffing",
+        "section": "Event-only or removed food",
+        "sortOrder": 35,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/stuffing.png"
+      }
     },
     {
-      "name": "Sweet Potato",
-      "slug": "sweet-potato",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/sweet-potato.png",
-      "type": "Event-only or removed food",
-      "source": "Sweet Potato Plant",
-      "cookMethod": "No cooking station required for the base ingredient in the Items table.",
-      "hunger": "1 hunger icon",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Used for Berry Juice, Corn on the Cob, and Sweet Potato Pie during the Thanksgiving Quest.",
-      "bestFor": "Thanksgiving ingredient and small hunger refill.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 36,
-      "verificationNote": ""
+      "item": {
+        "name": "Sweet Potato",
+        "type": "Event-only or removed food",
+        "source": "Sweet Potato Plant",
+        "cookMethod": "No cooking station required for the base ingredient in the Items table.",
+        "hunger": "1 hunger icon",
+        "craftingUse": "Used for Berry Juice, Corn on the Cob, and Sweet Potato Pie during the Thanksgiving Quest.",
+        "bestFor": "Thanksgiving ingredient and small hunger refill.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "sweet-potato",
+        "section": "Event-only or removed food",
+        "sortOrder": 36,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/sweet-potato.png"
+      }
     },
     {
-      "name": "Turkey Legs",
-      "slug": "turkey-legs",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/turkey-legs.png",
-      "type": "Event-only or removed food",
-      "source": "Crock Pot during the Thanksgiving Quest",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest hand-in.",
-      "bestFor": "Thanksgiving dish or Pelt Trader hand-in during the quest.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 37,
-      "verificationNote": ""
+      "item": {
+        "name": "Turkey Legs",
+        "type": "Event-only or removed food",
+        "source": "Crock Pot during the Thanksgiving Quest",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "4 hunger icons",
+        "craftingUse": "Thanksgiving Quest hand-in.",
+        "bestFor": "Thanksgiving dish or Pelt Trader hand-in during the quest.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "turkey-legs",
+        "section": "Event-only or removed food",
+        "sortOrder": 37,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/turkey-legs.png"
+      }
     },
     {
-      "name": "Berry Juice",
-      "slug": "berry-juice",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/berry-juice.png",
-      "type": "Event-only or removed food",
-      "source": "Crock Pot during the Thanksgiving Quest",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest hand-in.",
-      "bestFor": "Thanksgiving Fairy hand-in during the quest.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 38,
-      "verificationNote": ""
+      "item": {
+        "name": "Berry Juice",
+        "type": "Event-only or removed food",
+        "source": "Crock Pot during the Thanksgiving Quest",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "4 hunger icons",
+        "craftingUse": "Thanksgiving Quest hand-in.",
+        "bestFor": "Thanksgiving Fairy hand-in during the quest.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "berry-juice",
+        "section": "Event-only or removed food",
+        "sortOrder": 38,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/berry-juice.png"
+      }
     },
     {
-      "name": "Casserole",
-      "slug": "casserole",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/casserole.png",
-      "type": "Event-only or removed food",
-      "source": "Crock Pot during the Thanksgiving Quest",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest hand-in.",
-      "bestFor": "Thanksgiving dish or Furniture Trader hand-in during the quest.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 39,
-      "verificationNote": ""
+      "item": {
+        "name": "Casserole",
+        "type": "Event-only or removed food",
+        "source": "Crock Pot during the Thanksgiving Quest",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "4 hunger icons",
+        "craftingUse": "Thanksgiving Quest hand-in.",
+        "bestFor": "Thanksgiving dish or Furniture Trader hand-in during the quest.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "casserole",
+        "section": "Event-only or removed food",
+        "sortOrder": 39,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/casserole.png"
+      }
     },
     {
-      "name": "Corn on the Cob",
-      "slug": "corn-on-the-cob",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/corn-on-the-cob.png",
-      "type": "Event-only or removed food",
-      "source": "Crock Pot during the Thanksgiving Quest",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest hand-in.",
-      "bestFor": "Thanksgiving Alien hand-in during the quest.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 40,
-      "verificationNote": ""
+      "item": {
+        "name": "Corn on the Cob",
+        "type": "Event-only or removed food",
+        "source": "Crock Pot during the Thanksgiving Quest",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "4 hunger icons",
+        "craftingUse": "Thanksgiving Quest hand-in.",
+        "bestFor": "Thanksgiving Alien hand-in during the quest.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "corn-on-the-cob",
+        "section": "Event-only or removed food",
+        "sortOrder": 40,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/corn-on-the-cob.png"
+      }
     },
     {
-      "name": "Stuffing Bowl",
-      "slug": "stuffing-bowl",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/stuffing-bowl.png",
-      "type": "Event-only or removed food",
-      "source": "Crock Pot during the Thanksgiving Quest",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest hand-in.",
-      "bestFor": "Thanksgiving Melee Cultist hand-in during the quest.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 41,
-      "verificationNote": ""
+      "item": {
+        "name": "Stuffing Bowl",
+        "type": "Event-only or removed food",
+        "source": "Crock Pot during the Thanksgiving Quest",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "4 hunger icons",
+        "craftingUse": "Thanksgiving Quest hand-in.",
+        "bestFor": "Thanksgiving Melee Cultist hand-in during the quest.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "stuffing-bowl",
+        "section": "Event-only or removed food",
+        "sortOrder": 41,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/stuffing-bowl.png"
+      }
     },
     {
-      "name": "Roast Turkey",
-      "slug": "roast-turkey",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/roast-turkey.png",
-      "type": "Event-only or removed food",
-      "source": "Crock Pot during the Thanksgiving Quest",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest hand-in.",
-      "bestFor": "Thanksgiving Crossbow Cultist hand-in during the quest.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 42,
-      "verificationNote": ""
+      "item": {
+        "name": "Roast Turkey",
+        "type": "Event-only or removed food",
+        "source": "Crock Pot during the Thanksgiving Quest",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "4 hunger icons",
+        "craftingUse": "Thanksgiving Quest hand-in.",
+        "bestFor": "Thanksgiving Crossbow Cultist hand-in during the quest.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "roast-turkey",
+        "section": "Event-only or removed food",
+        "sortOrder": 42,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/roast-turkey.png"
+      }
     },
     {
-      "name": "Stuffed Peppers",
-      "slug": "stuffed-peppers",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/stuffed-peppers.png",
-      "type": "Event-only or removed food",
-      "source": "Crock Pot during the Thanksgiving Quest",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "4 hunger icons",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest hand-in.",
-      "bestFor": "Thanksgiving Foryxe hand-in during the quest.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 43,
-      "verificationNote": ""
+      "item": {
+        "name": "Stuffed Peppers",
+        "type": "Event-only or removed food",
+        "source": "Crock Pot during the Thanksgiving Quest",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "4 hunger icons",
+        "craftingUse": "Thanksgiving Quest hand-in.",
+        "bestFor": "Thanksgiving Foryxe hand-in during the quest.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "stuffed-peppers",
+        "section": "Event-only or removed food",
+        "sortOrder": 43,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/stuffed-peppers.png"
+      }
     },
     {
-      "name": "Sweet Potato Pie",
-      "slug": "sweet-potato-pie",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/sweet-potato-pie.png",
-      "type": "Event-only or removed food",
-      "source": "Crock Pot during the Thanksgiving Quest",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "Alien Tech Energy",
-      "healing": "",
-      "effect": "Temporary speed boost.",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest hand-in.",
-      "bestFor": "Thanksgiving Cracky4 hand-in and speed food during the quest.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 44,
-      "verificationNote": ""
+      "item": {
+        "name": "Sweet Potato Pie",
+        "type": "Event-only or removed food",
+        "source": "Crock Pot during the Thanksgiving Quest",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "Alien Tech Energy",
+        "effect": "Temporary speed boost.",
+        "craftingUse": "Thanksgiving Quest hand-in.",
+        "bestFor": "Thanksgiving Cracky4 hand-in and speed food during the quest.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "sweet-potato-pie",
+        "section": "Event-only or removed food",
+        "sortOrder": 44,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/sweet-potato-pie.png"
+      }
     },
     {
-      "name": "Spicy Swordfish",
-      "slug": "spicy-swordfish",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/spicy-swordfish.png",
-      "type": "Event-only or removed food",
-      "source": "Crock Pot during the Thanksgiving Quest",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "Alien Tech Energy",
-      "healing": "",
-      "effect": "Temporary speed boost.",
-      "tamingUse": "",
-      "craftingUse": "Thanksgiving Quest hand-in.",
-      "bestFor": "Thanksgiving Viridial hand-in and speed food during the quest.",
-      "availability": "Thanksgiving Quest route; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; availability kept event-linked instead of normal-run.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 45,
-      "verificationNote": ""
+      "item": {
+        "name": "Spicy Swordfish",
+        "type": "Event-only or removed food",
+        "source": "Crock Pot during the Thanksgiving Quest",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "Alien Tech Energy",
+        "effect": "Temporary speed boost.",
+        "craftingUse": "Thanksgiving Quest hand-in.",
+        "bestFor": "Thanksgiving Viridial hand-in and speed food during the quest.",
+        "availability": "Thanksgiving Quest route; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "spicy-swordfish",
+        "section": "Event-only or removed food",
+        "sortOrder": 45,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/spicy-swordfish.png"
+      }
     },
     {
-      "name": "Hearty Thanksgiving Meal",
-      "slug": "hearty-thanksgiving-meal",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/hearty-thanksgiving-meal.png",
-      "type": "Event-only or removed food",
-      "source": "Thanksgiving Quest reward; exact guest count is TBA in the source table.",
-      "cookMethod": "Crock Pot during the Thanksgiving Quest.",
-      "hunger": "4 hunger icons",
-      "healing": "Some health; exact HP not listed in source table.",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Thanksgiving Quest reward food.",
-      "availability": "Thanksgiving Quest reward; not normal-run food unless that route returns",
-      "sourceNote": "Thanksgiving Dinner table row from Fandom Items; exact required guest count is not listed, so availability stays event-linked.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/Items#Thanksgiving_Dinner",
-      "imageStatus": "local food image present",
-      "sortOrder": 46,
-      "verificationNote": ""
+      "item": {
+        "name": "Hearty Thanksgiving Meal",
+        "type": "Event-only or removed food",
+        "source": "Thanksgiving Quest reward; exact guest count is TBA in the source table.",
+        "cookMethod": "Crock Pot during the Thanksgiving Quest.",
+        "hunger": "4 hunger icons",
+        "healing": "Some health; exact HP not listed in source table.",
+        "bestFor": "Thanksgiving Quest reward food.",
+        "availability": "Thanksgiving Quest reward; not normal-run food unless that route returns"
+      },
+      "system": {
+        "slug": "hearty-thanksgiving-meal",
+        "section": "Event-only or removed food",
+        "sortOrder": 46,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/hearty-thanksgiving-meal.png"
+      }
     },
     {
-      "name": "MRE",
-      "slug": "mre",
-      "image": "/99%20Nights%20in%20the%20Forest/Food/mre.webp",
-      "type": "Special survival food",
-      "source": "Research Outpost special crate after enabling Hard Mode and waiting one day.",
-      "cookMethod": "No cooking method listed; eaten directly.",
-      "hunger": "Full hunger",
-      "healing": "",
-      "effect": "",
-      "tamingUse": "",
-      "craftingUse": "",
-      "bestFor": "Emergency full hunger refill in Hard Mode because the source calls it rare.",
-      "availability": "Hard Mode special food",
-      "sourceNote": "MRE is listed in Fandom Category:Food and has its own page, but does not appear in the main Items food table. The local image is from the MRE page gallery.",
-      "sourcePage": "https://99-nights-in-the-forest.fandom.com/wiki/MRE",
-      "imageStatus": "local food image present",
-      "sortOrder": 47,
-      "verificationNote": ""
+      "item": {
+        "name": "MRE",
+        "type": "Special survival food",
+        "source": "Research Outpost special crate after enabling Hard Mode and waiting one day.",
+        "cookMethod": "No cooking method listed; eaten directly.",
+        "hunger": "Full hunger",
+        "bestFor": "Emergency full hunger refill in Hard Mode because the source calls it rare.",
+        "availability": "Hard Mode special food"
+      },
+      "system": {
+        "slug": "mre",
+        "section": "Special survival food",
+        "sortOrder": 47,
+        "image": "/99%20Nights%20in%20the%20Forest/Food/mre.webp"
+      }
     }
   ]
 }

@@ -1,23 +1,19 @@
 {
   "meta": {
-    "title": "Catch And Tame breeding recipes data",
-    "updatedAt": "2026-06-17",
-    "sources": [
-      {
-        "label": "Catch and Tame Wiki - Breeding",
-        "url": "https://catch-and-tame.wiki/breeding/",
-        "accessed": "2026-06-17"
-      },
-      {
-        "label": "Catch And Tame! Wiki - Breeding Hints",
-        "url": "https://catch-and-tame-rblx.fandom.com/wiki/Breeding_Hints",
-        "accessed": "2026-06-17"
-      },
-      {
-        "label": "BloxInformer - Recipes",
-        "url": "https://bloxinformer.com/wikis/catch-and-tame/rece/",
-        "accessed": "2026-06-17"
-      }
+    "schemaVersion": 2,
+    "game": "Catch And Tame",
+    "gameSlug": "catch-and-tame",
+    "collection": "breeding-recipes",
+    "route": "/wiki/catch-and-tame/breeding-recipes",
+    "catalogCode": "catch-and-tame-breeding-recipes",
+    "itemFields": [
+      "parentOne",
+      "parentTwo",
+      "resultTier",
+      "chance",
+      "recipeRole",
+      "bps",
+      "cardSummary"
     ],
     "columns": [
       "parentOne",
@@ -26,162 +22,175 @@
       "chance",
       "recipeRole",
       "bps",
-      "collectionSection",
       "cardSummary"
     ],
-    "notes": "The current standalone Catch and Tame wiki presents 8 breeding recipes. Fandom has a larger older Breeding Hints table and BloxInformer has partial/TBA rows; this dataset uses the current 8-row list and records conflicts in private notes."
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Mythic chain starters",
+        "Advanced mythic chain",
+        "Lower-tier recipes"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "parentOne",
+        "parentTwo",
+        "resultTier",
+        "chance",
+        "recipeRole",
+        "bps"
+      ],
+      "tableFields": [
+        "parentOne",
+        "parentTwo",
+        "resultTier",
+        "chance",
+        "recipeRole",
+        "bps",
+        "cardSummary"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Galaxy Kitsune",
-      "slug": "galaxy-kitsune",
-      "parentOne": "Kitsune",
-      "parentTwo": "Red Panda",
-      "resultTier": "Mythic",
-      "chance": "0.3%",
-      "recipeRole": "First mythic-chain output for Celestial Axolotl progress.",
-      "bps": null,
-      "collectionSection": "Mythic chain starters",
-      "cardSummary": "Use this recipe when building the upper mythic chain; the result later pairs with Galaxy Axolotl.",
-      "sortOrder": 1,
-      "sourceStatus": "Current standalone wiki row; Fandom cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/breeding/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Breeding_Hints",
-      "image": "/Catch%20And%20Tame/Breeding%20Recipes/galaxy-kitsune.webp",
-      "imageStatus": "source-backed result card from BloxInformer animal/recipe art",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/02/galaxy-kitsune-catch-and-tame.png"
+      "item": {
+        "name": "Galaxy Kitsune",
+        "parentOne": "Kitsune",
+        "parentTwo": "Red Panda",
+        "resultTier": "Mythic",
+        "chance": "0.3%",
+        "recipeRole": "First mythic-chain output for Celestial Axolotl progress.",
+        "cardSummary": "Use this recipe when building the upper mythic chain; the result later pairs with Galaxy Axolotl."
+      },
+      "system": {
+        "slug": "galaxy-kitsune",
+        "section": "Mythic chain starters",
+        "sortOrder": 1,
+        "image": "/Catch%20And%20Tame/Breeding%20Recipes/galaxy-kitsune.webp"
+      }
     },
     {
-      "name": "Galaxy Axolotl",
-      "slug": "galaxy-axolotl",
-      "parentOne": "Axolotl",
-      "parentTwo": "Red Panda",
-      "resultTier": "Mythic",
-      "chance": "0.3%",
-      "recipeRole": "Second mythic-chain output for Celestial Axolotl progress.",
-      "bps": null,
-      "collectionSection": "Mythic chain starters",
-      "cardSummary": "Use this recipe alongside Galaxy Kitsune production before attempting Celestial Axolotl.",
-      "sortOrder": 2,
-      "sourceStatus": "Current standalone wiki row; Fandom cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/breeding/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Breeding_Hints",
-      "image": "/Catch%20And%20Tame/Breeding%20Recipes/galaxy-axolotl.webp",
-      "imageStatus": "source-backed result card from BloxInformer animal/recipe art",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/02/galaxy-axolotl-catch-and-tame.png"
+      "item": {
+        "name": "Galaxy Axolotl",
+        "parentOne": "Axolotl",
+        "parentTwo": "Red Panda",
+        "resultTier": "Mythic",
+        "chance": "0.3%",
+        "recipeRole": "Second mythic-chain output for Celestial Axolotl progress.",
+        "cardSummary": "Use this recipe alongside Galaxy Kitsune production before attempting Celestial Axolotl."
+      },
+      "system": {
+        "slug": "galaxy-axolotl",
+        "section": "Mythic chain starters",
+        "sortOrder": 2,
+        "image": "/Catch%20And%20Tame/Breeding%20Recipes/galaxy-axolotl.webp"
+      }
     },
     {
-      "name": "Celestial Griffin",
-      "slug": "celestial-griffin",
-      "parentOne": "Griffin",
-      "parentTwo": "Cosmic Griffin",
-      "resultTier": "Mythic",
-      "chance": "0.3%",
-      "recipeRole": "Mythic output used as a high-rarity breeding target.",
-      "bps": null,
-      "collectionSection": "Mythic chain starters",
-      "cardSummary": "A separate mythic recipe that needs Cosmic Griffin before it can be attempted.",
-      "sortOrder": 3,
-      "sourceStatus": "Current standalone wiki row; Fandom cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/breeding/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Breeding_Hints",
-      "image": "/Catch%20And%20Tame/Breeding%20Recipes/celestial-griffin.webp",
-      "imageStatus": "source-backed result card cropped from Fandom Breeding Hints row image",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/catch-and-tame-rblx/images/b/bc/Breeding_Hints_Celestial_Griffin.png/revision/latest?cb=20260501190048"
+      "item": {
+        "name": "Celestial Griffin",
+        "parentOne": "Griffin",
+        "parentTwo": "Cosmic Griffin",
+        "resultTier": "Mythic",
+        "chance": "0.3%",
+        "recipeRole": "Mythic output used as a high-rarity breeding target.",
+        "cardSummary": "A separate mythic recipe that needs Cosmic Griffin before it can be attempted."
+      },
+      "system": {
+        "slug": "celestial-griffin",
+        "section": "Mythic chain starters",
+        "sortOrder": 3,
+        "image": "/Catch%20And%20Tame/Breeding%20Recipes/celestial-griffin.webp"
+      }
     },
     {
-      "name": "Celestial Axolotl",
-      "slug": "celestial-axolotl",
-      "parentOne": "Galaxy Kitsune",
-      "parentTwo": "Galaxy Axolotl",
-      "resultTier": "Mythic",
-      "chance": "0.3%",
-      "recipeRole": "Mid-chain mythic result that depends on two earlier mythic breeds.",
-      "bps": null,
-      "collectionSection": "Advanced mythic chain",
-      "cardSummary": "Plan this after both galaxy recipes are running, because both parents are bred results.",
-      "sortOrder": 4,
-      "sourceStatus": "Current standalone wiki row; Fandom cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/breeding/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Breeding_Hints",
-      "image": "/Catch%20And%20Tame/Breeding%20Recipes/celestial-axolotl.webp",
-      "imageStatus": "source-backed result card cropped from Fandom Breeding Hints row image",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/catch-and-tame-rblx/images/f/f0/Breeding_Hints_Celestial_Axolotl.jpeg/revision/latest?cb=20260222003254"
+      "item": {
+        "name": "Celestial Axolotl",
+        "parentOne": "Galaxy Kitsune",
+        "parentTwo": "Galaxy Axolotl",
+        "resultTier": "Mythic",
+        "chance": "0.3%",
+        "recipeRole": "Mid-chain mythic result that depends on two earlier mythic breeds.",
+        "cardSummary": "Plan this after both galaxy recipes are running, because both parents are bred results."
+      },
+      "system": {
+        "slug": "celestial-axolotl",
+        "section": "Advanced mythic chain",
+        "sortOrder": 4,
+        "image": "/Catch%20And%20Tame/Breeding%20Recipes/celestial-axolotl.webp"
+      }
     },
     {
-      "name": "Hydra",
-      "slug": "hydra",
-      "parentOne": "Lightning Dragon",
-      "parentTwo": "Cerberus",
-      "resultTier": "Mythic",
-      "chance": "0.3%",
-      "recipeRole": "Required parent for Celestial Hydra.",
-      "bps": null,
-      "collectionSection": "Advanced mythic chain",
-      "cardSummary": "This recipe matters because Hydra becomes one half of the highest-BPS breed route.",
-      "sortOrder": 5,
-      "sourceStatus": "Current standalone wiki row; Fandom and BloxInformer cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/breeding/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Breeding_Hints",
-      "image": "/Catch%20And%20Tame/Breeding%20Recipes/hydra.webp",
-      "imageStatus": "source-backed result card from BloxInformer animal/recipe art",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/02/three-headed-dragon-catch-and-tame.png"
+      "item": {
+        "name": "Hydra",
+        "parentOne": "Lightning Dragon",
+        "parentTwo": "Cerberus",
+        "resultTier": "Mythic",
+        "chance": "0.3%",
+        "recipeRole": "Required parent for Celestial Hydra.",
+        "cardSummary": "This recipe matters because Hydra becomes one half of the highest-BPS breed route."
+      },
+      "system": {
+        "slug": "hydra",
+        "section": "Advanced mythic chain",
+        "sortOrder": 5,
+        "image": "/Catch%20And%20Tame/Breeding%20Recipes/hydra.webp"
+      }
     },
     {
-      "name": "Celestial Hydra",
-      "slug": "celestial-hydra",
-      "parentOne": "Hydra",
-      "parentTwo": "Cosmic Griffin",
-      "resultTier": "Mythic",
-      "chance": "0.3%",
-      "recipeRole": "Highest listed BPS breed target.",
-      "bps": "250",
-      "collectionSection": "Advanced mythic chain",
-      "cardSummary": "This is the main endgame breeding target when the goal is raw income potential.",
-      "sortOrder": 6,
-      "sourceStatus": "Current standalone wiki row; Fandom confirms result, BloxInformer has the parents but leaves result TBA",
-      "sourcePage": "https://catch-and-tame.wiki/breeding/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Breeding_Hints",
-      "image": "/Catch%20And%20Tame/Breeding%20Recipes/celestial-hydra.webp",
-      "imageStatus": "source-backed golden result card cropped from Fandom Breeding Hints row image; source file title is Inferno Hydra",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/catch-and-tame-rblx/images/b/bc/Breeding_Hints_Inferno_Hydra.jpeg/revision/latest?cb=20260222003256"
+      "item": {
+        "name": "Celestial Hydra",
+        "parentOne": "Hydra",
+        "parentTwo": "Cosmic Griffin",
+        "resultTier": "Mythic",
+        "chance": "0.3%",
+        "recipeRole": "Highest listed BPS breed target.",
+        "bps": "250",
+        "cardSummary": "This is the main endgame breeding target when the goal is raw income potential."
+      },
+      "system": {
+        "slug": "celestial-hydra",
+        "section": "Advanced mythic chain",
+        "sortOrder": 6,
+        "image": "/Catch%20And%20Tame/Breeding%20Recipes/celestial-hydra.webp"
+      }
     },
     {
-      "name": "Giraffe",
-      "slug": "giraffe",
-      "parentOne": "Alligator",
-      "parentTwo": "Capybara",
-      "resultTier": "Legendary",
-      "chance": "9%",
-      "recipeRole": "Lower-tier rare breed outside the mythic chain.",
-      "bps": null,
-      "collectionSection": "Lower-tier recipes",
-      "cardSummary": "Use this as an earlier rare-breed target before committing pens to the mythic chain.",
-      "sortOrder": 7,
-      "sourceStatus": "Current standalone wiki row; Fandom cross-check; BloxInformer has parent typo and TBA result",
-      "sourcePage": "https://catch-and-tame.wiki/breeding/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Breeding_Hints",
-      "image": "/Catch%20And%20Tame/Breeding%20Recipes/giraffe.webp",
-      "imageStatus": "source-backed result card cropped from Fandom Breeding Hints row image",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/catch-and-tame-rblx/images/9/9c/Breeding_Hints_Giraffe.png/revision/latest?cb=20260426114542"
+      "item": {
+        "name": "Giraffe",
+        "parentOne": "Alligator",
+        "parentTwo": "Capybara",
+        "resultTier": "Legendary",
+        "chance": "9%",
+        "recipeRole": "Lower-tier rare breed outside the mythic chain.",
+        "cardSummary": "Use this as an earlier rare-breed target before committing pens to the mythic chain."
+      },
+      "system": {
+        "slug": "giraffe",
+        "section": "Lower-tier recipes",
+        "sortOrder": 7,
+        "image": "/Catch%20And%20Tame/Breeding%20Recipes/giraffe.webp"
+      }
     },
     {
-      "name": "Toad",
-      "slug": "toad",
-      "parentOne": "Elephant",
-      "parentTwo": "Monkey",
-      "resultTier": "Epic",
-      "chance": null,
-      "recipeRole": "Lower-tier gameplay-confirmed breed outside the mythic chain.",
-      "bps": null,
-      "collectionSection": "Lower-tier recipes",
-      "cardSummary": "Treat this as a current standalone-wiki recipe, but expect older recipe tables to show a different result.",
-      "sortOrder": 8,
-      "sourceStatus": "Current standalone wiki row conflicts with Fandom and BloxInformer, which list Gorilla for the same parents",
-      "sourcePage": "https://catch-and-tame.wiki/breeding/",
-      "secondarySourcePage": "https://catch-and-tame-rblx.fandom.com/wiki/Breeding_Hints",
-      "image": null,
-      "imageStatus": "text-only; no clean source-backed Toad row image found and older sources show Gorilla for this pair"
+      "item": {
+        "name": "Toad",
+        "parentOne": "Elephant",
+        "parentTwo": "Monkey",
+        "resultTier": "Epic",
+        "recipeRole": "Lower-tier gameplay-confirmed breed outside the mythic chain.",
+        "cardSummary": "Treat this as a current standalone-wiki recipe, but expect older recipe tables to show a different result."
+      },
+      "system": {
+        "slug": "toad",
+        "section": "Lower-tier recipes",
+        "sortOrder": 8,
+        "image": null
+      }
     }
   ]
 }

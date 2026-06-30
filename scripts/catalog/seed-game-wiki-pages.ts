@@ -2,7 +2,7 @@ import "../shared/load-env";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { GAME_COLLECTION_GROUPS } from "@/lib/game-collections";
+import { GAME_COLLECTION_GROUPS, GAME_COLLECTIONS } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
 import { validateWikiControlsJson } from "../shared/wiki-controls";
 
@@ -59,6 +59,7 @@ const args = new Set(rawArgs);
 const dryRun = args.has("--dry-run");
 const draft = args.has("--draft");
 const allowProd = args.has("--allow-prod");
+const allowGeneratedCopy = args.has("--allow-generated-copy");
 const targetGameSlugs = collectArgValues(rawArgs, ["--game", "--game-slug", "--wiki-slug"]);
 const finalJsonRoot = collectSingleArgValue(rawArgs, ["--final-json-root", "--final-json-dir"]);
 const UNIVERSE_LOOKUP_PAGE_SIZE = 1000;
@@ -130,6 +131,7 @@ async function readFinalJsonOverride(group: GameCollectionGroup): Promise<WikiFi
   const root = path.isAbsolute(finalJsonRoot) ? finalJsonRoot : repoPath(finalJsonRoot);
   const filePath = await findExistingFile([
     path.join(root, group.gameSlug, "wiki", "final.json"),
+    path.join(root, "wiki", group.gameSlug, "final.json"),
     path.join(root, group.gameSlug, "final.json"),
     path.join(root, "wiki", "final.json"),
     path.join(root, "final.json")
@@ -149,21 +151,22 @@ async function readFinalJsonOverride(group: GameCollectionGroup): Promise<WikiFi
 async function resolveWikiCopy(group: GameCollectionGroup): Promise<ResolvedWikiCopy | null> {
   const finalJson = await readFinalJsonOverride(group);
   const legacyCopy = WIKI_COPY[group.gameSlug];
+  const generatedCopy = allowGeneratedCopy ? buildGeneratedWikiCopy(group) : null;
 
-  if (!finalJson && !legacyCopy) return null;
+  if (!finalJson && !legacyCopy && !generatedCopy) return null;
 
-  const metaDescription = finalJson?.meta_description ?? legacyCopy?.metaDescription;
-  const descriptionMd = finalJson ? finalJson.description_md : legacyCopy?.descriptionMd;
-  const controlsJson = finalJson ? finalJson.controls_json : legacyCopy?.controlsJson ?? [];
-  const tipsMd = finalJson?.tips_md ?? legacyCopy?.tipsMd;
+  const metaDescription = finalJson?.meta_description ?? legacyCopy?.metaDescription ?? generatedCopy?.metaDescription;
+  const descriptionMd = finalJson ? finalJson.description_md : legacyCopy?.descriptionMd ?? generatedCopy?.descriptionMd;
+  const controlsJson = finalJson ? finalJson.controls_json : legacyCopy?.controlsJson ?? generatedCopy?.controlsJson ?? [];
+  const tipsMd = finalJson?.tips_md ?? legacyCopy?.tipsMd ?? generatedCopy?.tipsMd;
   if (!metaDescription) throw new Error(`Missing meta_description for ${group.gameSlug}`);
   if (!descriptionMd) throw new Error(`Missing description_md for ${group.gameSlug}`);
   if (!tipsMd) throw new Error(`Missing tips_md for ${group.gameSlug}`);
   validateWikiControlsJson(controlsJson, `${group.gameSlug} controls_json`);
 
   return {
-    title: finalJson?.title ?? legacyCopy?.title ?? `${group.gameName} Wiki`,
-    seoTitle: finalJson?.seo_title ?? legacyCopy?.seoTitle ?? `${group.gameName} Wiki`,
+    title: finalJson?.title ?? legacyCopy?.title ?? generatedCopy?.title ?? `${group.gameName} Wiki`,
+    seoTitle: finalJson?.seo_title ?? legacyCopy?.seoTitle ?? generatedCopy?.seoTitle ?? `${group.gameName} Wiki`,
     metaDescription,
     descriptionMd,
     tipsMd,
@@ -173,7 +176,43 @@ async function resolveWikiCopy(group: GameCollectionGroup): Promise<ResolvedWiki
         ? finalJson.cover_image ?? null
         : legacyCopy && "coverImage" in legacyCopy
           ? legacyCopy.coverImage ?? null
-          : undefined
+          : generatedCopy && "coverImage" in generatedCopy
+            ? generatedCopy.coverImage ?? null
+            : undefined
+  };
+}
+
+function buildGeneratedWikiCopy(group: GameCollectionGroup): WikiCopy {
+  const collections = GAME_COLLECTIONS.filter((config) => config.gameSlug === group.gameSlug).sort(
+    (a, b) => a.sortOrder - b.sortOrder
+  );
+  const labels = collections.map((config) => config.label);
+  const collectionList = toReadableList(labels.slice(0, 8));
+  const collectionCount = collections.length;
+  const pageCountLabel = collectionCount.toLocaleString("en-US");
+  const title = `${group.gameName} Wiki`;
+  const metaDescription = truncateMeta(
+    `${group.gameName} wiki hub with ${collectionList || "game collections"}, controls, tips, and related Roblox collection pages.`
+  );
+  const descriptionMd = `${group.gameName} is tracked on Bloxodes as a Roblox wiki hub for durable game systems, collection pages, and player reference data. Use this page as the starting point, then open a collection when you need item-level details.
+
+The current local registry includes ${pageCountLabel} ${collectionCount === 1 ? "collection" : "collections"} for ${group.gameName}${collectionList ? `, including ${collectionList}` : ""}. Those collection pages hold the specific rows, fields, images, and grouping used by the public wiki experience.
+
+This generated hub copy exists so local verification can load every registered wiki route from the same automation path. For production writing, prefer an approved wiki final.json with game-specific description, controls, and tips.`;
+  const tipsMd = `- Start with the collection list when you need item-level data.
+- Use card view for quick recognition and table view for scanning many rows.
+- Treat blank fields as unknown instead of guessing missing game data.
+- Check the related collection pages before deciding what to unlock, buy, trade, or save.
+- Replace generated hub copy with approved game-specific copy before intentional production publishing.`;
+
+  return {
+    title,
+    seoTitle: title,
+    metaDescription,
+    descriptionMd,
+    tipsMd,
+    controlsJson: [],
+    coverImage: null
   };
 }
 
@@ -827,16 +866,16 @@ async function loadExistingPublishedAt() {
 
 async function loadUniverseIdsByGameSlug() {
   const targetGroups = getTargetGroups();
-  if (targetGroups.every((group) => group.universeId)) {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) {
     return new Map(targetGroups.map((group) => [group.gameSlug, group.universeId ?? null]));
   }
 
-  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, number | null>();
   const rows = await loadRobloxUniverseLookupRows();
+  const existingUniverseIds = new Set(rows.map((row) => row.universe_id));
 
   return new Map(
     targetGroups.map((group) => {
-      if (group.universeId) return [group.gameSlug, group.universeId];
+      if (group.universeId && existingUniverseIds.has(group.universeId)) return [group.gameSlug, group.universeId];
       const candidates = new Set([group.gameSlug, group.gameName, ...group.universeNames].map(normalizeLookup));
       const match = rows.find((row) =>
         [row.name, row.display_name].some((value) => candidates.has(normalizeLookup(value)))
@@ -906,6 +945,20 @@ function normalizeLookup(value: string | null | undefined): string {
     .replace(/\s*\[[^\]]+\]\s*$/g, "")
     .trim()
     .replace(/!+$/g, "");
+}
+
+function toReadableList(values: string[]): string {
+  const cleaned = values.map((value) => value.trim()).filter(Boolean);
+  if (cleaned.length === 0) return "";
+  if (cleaned.length === 1) return cleaned[0] ?? "";
+  if (cleaned.length === 2) return `${cleaned[0]} and ${cleaned[1]}`;
+  return `${cleaned.slice(0, -1).join(", ")}, and ${cleaned[cleaned.length - 1]}`;
+}
+
+function truncateMeta(value: string): string {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length <= 155) return normalized;
+  return `${normalized.slice(0, 152).replace(/\s+\S*$/, "")}...`;
 }
 
 function isLocalSupabaseUrl(value: string | undefined): boolean {

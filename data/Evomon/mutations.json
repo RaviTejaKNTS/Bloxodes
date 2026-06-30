@@ -1,102 +1,114 @@
 {
   "meta": {
-    "title": "Evomon mutations (rare variants) data",
-    "updatedAt": "2026-06-28",
-    "sources": [
-      {
-        "label": "Roonby - How to Get Shiny Prismatic Evomons in Roblox Evomon",
-        "url": "https://roonby.com/2026/06/24/how-to-get-shiny-prismatic-evomons-in-roblox-evomon/",
-        "accessed": "2026-06-28",
-        "note": "Community-reported rates: Shiny ~0.2% (about 1 in 500) with a 600-capture pity; Prismatic ~0.8% (about 1 in 125) with a 150-capture pity. Treats both as variants that roll on encounters. Explains the Shiny Prismatic combo: raise the Prismatic counter to 149, stop capturing that species, battle until a Shiny appears, then capture to trigger the Prismatic pity at the same time."
-      },
-      {
-        "label": "Pro Game Guides - Complete Evomon Beginner's Guide",
-        "url": "https://progameguides.com/roblox/complete-evomon-beginners-guide/",
-        "accessed": "2026-06-28",
-        "note": "Lists Shiny and Prismatic as the two mutations. Describes Shiny as rarer and Prismatic as far more common. This guide attributes a random stat buff plus a cosmetic to Shiny, which conflicts with sources that call Shiny cosmetic-only; recorded both readings in item effect text."
-      },
-      {
-        "label": "Gamezebo - Evomon Shiny Hunting Guide (Including Prismatic and Pris Shinies)",
-        "url": "https://www.gamezebo.com/walkthroughs/evomon-shiny-hunting-guide/",
-        "accessed": "2026-06-28",
-        "note": "Confirms the per-species pity counter shown in the bottom-left of the combat screen and that pity differs per Evomon. Example given: Pebble has a 150 Prismatic pity and a 600 Shiny pity. Confirms Shiny Prismatic ('Pris Shiny') combined forms are obtainable."
-      },
-      {
-        "label": "Sportskeeda - How to get Prismatic Balls in Evomon",
-        "url": "https://www.sportskeeda.com/roblox-news/how-get-prismatic-balls-evomon",
-        "accessed": "2026-06-28",
-        "note": "Clarifies that the Prismatic Ball is a separate paid capture item (guaranteed SSS talent plus a sparkling effect) and is not the source of the Prismatic mutation. Used to keep the Prismatic variant distinct from the Prismatic Ball in this collection."
-      }
-    ],
-    "groupBy": "collectionSection",
-    "sectionOrder": ["Variants"],
-    "columns": [
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Evomon",
+    "gameSlug": "evomon",
+    "collection": "mutations",
+    "route": "/wiki/evomon/mutations",
+    "catalogCode": "evomon-mutations",
+    "itemFields": [
       "odds",
       "pity",
       "effect",
       "howToGet",
-      "bestUse"
+      "bestUse",
+      "cardSummary"
     ],
-    "fieldPresentation": {
-      "odds": {
-        "kind": "chip",
-        "label": "Reported odds"
-      },
-      "pity": {
-        "kind": "chip",
-        "label": "Pity example"
-      },
-      "effect": {
-        "kind": "highlight",
-        "label": "Effect"
-      },
-      "howToGet": {
-        "kind": "plain",
-        "label": "How to get"
-      },
-      "bestUse": {
-        "kind": "detail",
-        "label": "Hunting note"
-      },
-      "cardSummary": {
-        "kind": "detail"
+    "columns": [
+      "odds",
+      "pity",
+      "effect",
+      "howToGet",
+      "bestUse",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Variants",
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "odds",
+        "pity",
+        "effect",
+        "howToGet",
+        "bestUse",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "odds",
+        "pity",
+        "effect",
+        "howToGet",
+        "bestUse",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "odds": {
+          "kind": "chip",
+          "label": "Reported odds"
+        },
+        "pity": {
+          "kind": "chip",
+          "label": "Pity example"
+        },
+        "effect": {
+          "kind": "highlight",
+          "label": "Effect"
+        },
+        "howToGet": {
+          "kind": "plain",
+          "label": "How to get"
+        },
+        "bestUse": {
+          "kind": "detail",
+          "label": "Hunting note"
+        },
+        "cardSummary": {
+          "kind": "detail"
+        }
       }
-    },
-    "notes": "Two confirmed rare variants (mutations): Shiny and Prismatic. Sparkle was dropped because it appears only on the SEO fan-wiki cluster (evomon.org, evomonroblox.wiki, evomonwiki.wiki) and is not confirmed by any first-tier source (Pro Game Guides, Roonby, Gamezebo). 'Colorful' and 'talent' were also excluded as unverified. All odds are community-reported estimates, not officially published rates. Pity is per-species and varies, so it is given as a Pebble example rather than a universal number. The Prismatic variant here is the on-creature mutation; the separate paid Prismatic Ball is covered in the balls collection. collectionSection is a single shared 'Variants' value so the page renders as one flat variant list under a CATALOG_SECTION_OVERRIDES entry (groupKey collectionSection), not a per-variant grouping."
+    }
   },
   "items": [
     {
-      "name": "Prismatic",
-      "slug": "prismatic",
-      "collectionSection": "Variants",
-      "odds": "~0.8% (about 1 in 125), community-reported",
-      "pity": "Pebble example: 150 captures",
-      "effect": "Cosmetic only: adds glowing body parts and unique visual effects",
-      "howToGet": "Rolls randomly on wild encounters and egg hatches, with a per-species pity counter shown in the bottom-left of the combat screen",
-      "bestUse": "The more common of the two variants, so it is a good first variant to chase while you learn how the per-species pity counter works.",
-      "cardSummary": "Prismatic is the more common Evomon variant. Community estimates put it around 0.8% per encounter (roughly 1 in 125), with a per-species pity that guarantees one after a set number of captures (about 150 for Pebble). It is a cosmetic form that adds glowing parts and visual effects, and it is separate from the paid Prismatic Ball capture item.",
-      "sourcePage": "https://roonby.com/2026/06/24/how-to-get-shiny-prismatic-evomons-in-roblox-evomon/",
-      "secondarySourcePage": "https://www.gamezebo.com/walkthroughs/evomon-shiny-hunting-guide/",
-      "sourceStatus": "Confirmed across Roonby, Gamezebo, and Pro Game Guides; odds are community estimates",
-      "image": null,
-      "imageStatus": "accepted-missing: text-only. Prismatic is an in-game visual effect applied to a creature, not a standalone item. No reusable source has a clean Prismatic-specific render (evomon.org serves only base creature art: pebble.png returns 200 but prismatic.png and shiny-pebble.png return 404). A base creature render would not show the Prismatic effect, so none is used. Needs in-game capture."
+      "item": {
+        "name": "Prismatic",
+        "odds": "~0.8% (about 1 in 125), community-reported",
+        "pity": "Pebble example: 150 captures",
+        "effect": "Cosmetic only: adds glowing body parts and unique visual effects",
+        "howToGet": "Rolls randomly on wild encounters and egg hatches, with a per-species pity counter shown in the bottom-left of the combat screen",
+        "bestUse": "The more common of the two variants, so it is a good first variant to chase while you learn how the per-species pity counter works.",
+        "cardSummary": "Prismatic is the more common Evomon variant. Community estimates put it around 0.8% per encounter (roughly 1 in 125), with a per-species pity that guarantees one after a set number of captures (about 150 for Pebble). It is a cosmetic form that adds glowing parts and visual effects, and it is separate from the paid Prismatic Ball capture item."
+      },
+      "system": {
+        "slug": "prismatic",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Shiny",
-      "slug": "shiny",
-      "collectionSection": "Variants",
-      "odds": "~0.2% (about 1 in 500), community-reported",
-      "pity": "Pebble example: 600 captures",
-      "effect": "Recolor: a unique alternate color palette for that species. Sources disagree on whether Shiny also grants a small random stat buff or is cosmetic only.",
-      "howToGet": "Rolls randomly on wild encounters and egg hatches, with a per-species pity counter shown in the bottom-left of the combat screen",
-      "bestUse": "Rarer than Prismatic, so it is the headline hunt. You can also chase a Shiny Prismatic by holding the Prismatic counter near its pity, then capturing once a Shiny appears.",
-      "cardSummary": "Shiny is the rarer Evomon variant, community-estimated at around 0.2% per encounter (roughly 1 in 500) with a much higher per-species pity than Prismatic (about 600 for Pebble). It gives the species a unique alternate color palette; sources disagree on whether it also adds a small random stat buff. Combining it with the Prismatic pity produces a Shiny Prismatic form.",
-      "sourcePage": "https://roonby.com/2026/06/24/how-to-get-shiny-prismatic-evomons-in-roblox-evomon/",
-      "secondarySourcePage": "https://progameguides.com/roblox/complete-evomon-beginners-guide/",
-      "sourceStatus": "Confirmed across Roonby, Gamezebo, and Pro Game Guides; stat-buff claim conflicts between sources; odds are community estimates",
-      "image": null,
-      "imageStatus": "accepted-missing: text-only. Shiny is an in-game recolor applied to a creature, not a standalone item. No reusable source has a clean Shiny-specific render (evomon.org serves only base creature art: pebble.png returns 200 but shiny.png and shiny-pebble.png return 404). A base creature render would not show the Shiny palette, so none is used. Needs in-game capture."
+      "item": {
+        "name": "Shiny",
+        "odds": "~0.2% (about 1 in 500), community-reported",
+        "pity": "Pebble example: 600 captures",
+        "effect": "Recolor: a unique alternate color palette for that species. Sources disagree on whether Shiny also grants a small random stat buff or is cosmetic only.",
+        "howToGet": "Rolls randomly on wild encounters and egg hatches, with a per-species pity counter shown in the bottom-left of the combat screen",
+        "bestUse": "Rarer than Prismatic, so it is the headline hunt. You can also chase a Shiny Prismatic by holding the Prismatic counter near its pity, then capturing once a Shiny appears.",
+        "cardSummary": "Shiny is the rarer Evomon variant, community-estimated at around 0.2% per encounter (roughly 1 in 500) with a much higher per-species pity than Prismatic (about 600 for Pebble). It gives the species a unique alternate color palette; sources disagree on whether it also adds a small random stat buff. Combining it with the Prismatic pity produces a Shiny Prismatic form."
+      },
+      "system": {
+        "slug": "shiny",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
+      }
     }
   ]
 }

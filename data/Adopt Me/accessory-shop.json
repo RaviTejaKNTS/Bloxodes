@@ -1,322 +1,211 @@
 {
   "meta": {
-    "title": "Adopt Me accessory shop data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Adopt Me Wiki - Accessory Shop",
-        "url": "https://adoptme.fandom.com/wiki/Accessory_Shop",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Adopt Me",
+    "gameSlug": "adopt-me",
+    "collection": "accessory-shop",
+    "route": "/wiki/adopt-me/accessory-shop",
+    "catalogCode": "adopt-me-accessory-shop",
+    "itemFields": [
       "category",
       "rarity",
       "price",
-      "chances",
-      "wikiUrl"
-    ]
+      "gift",
+      "common",
+      "uncommon",
+      "rare",
+      "ultraRare",
+      "legendary",
+      "pet"
+    ],
+    "columns": [
+      "category",
+      "rarity",
+      "price",
+      "gift",
+      "common",
+      "uncommon",
+      "rare",
+      "ultraRare",
+      "legendary",
+      "pet"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Accessory Chests",
+        "Obtainable Pets"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category",
+        "rarity",
+        "price",
+        "gift",
+        "common",
+        "uncommon"
+      ],
+      "tableFields": [
+        "category",
+        "rarity",
+        "price",
+        "gift",
+        "common",
+        "uncommon",
+        "rare",
+        "ultraRare"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Standard Chest",
-      "slug": "standard-chest",
-      "category": "Accessory Chests",
-      "rarity": "Legendary",
-      "price": "105",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Standard_Chest",
-      "fields": {
-        "gift": "Standard Chest",
-        "image": "",
+      "item": {
+        "name": "Standard Chest",
+        "category": "Accessory Chests",
         "rarity": "Legendary",
         "price": "105",
+        "gift": "Standard Chest",
         "common": "60%",
         "uncommon": "30%",
         "rare": "7.5%",
         "ultraRare": "2%",
         "legendary": "0.5%"
       },
-      "image": "/Adopt%20Me/Accessory%20Shop/standard-chest.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/45/Standard_Chest.png/revision/latest/scale-to-width-down/70?cb=20220429040254"
+      "system": {
+        "slug": "standard-chest",
+        "section": "Accessory Chests",
+        "sortOrder": 1,
+        "image": "/Adopt%20Me/Accessory%20Shop/standard-chest.webp"
+      }
     },
     {
-      "name": "Regal Chest",
-      "slug": "regal-chest",
-      "category": "Accessory Chests",
-      "rarity": "Legendary",
-      "price": "300",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Regal_Chest",
-      "fields": {
-        "gift": "Regal Chest",
-        "image": "",
+      "item": {
+        "name": "Regal Chest",
+        "category": "Accessory Chests",
         "rarity": "Legendary",
         "price": "300",
+        "gift": "Regal Chest",
         "common": "20%",
         "uncommon": "50%",
         "rare": "20%",
         "ultraRare": "8.5%",
         "legendary": "1.5%"
       },
-      "image": "/Adopt%20Me/Accessory%20Shop/regal-chest.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/b/b6/Regal_Chest.png/revision/latest/scale-to-width-down/70?cb=20220429040254"
+      "system": {
+        "slug": "regal-chest",
+        "section": "Accessory Chests",
+        "sortOrder": 2,
+        "image": "/Adopt%20Me/Accessory%20Shop/regal-chest.webp"
+      }
     },
     {
-      "name": "Irish Water Spaniel",
-      "slug": "irish-water-spaniel",
-      "category": "Obtainable Pets",
-      "rarity": "Ultra-Rare",
-      "price": "295- 500 (5 UGC items)",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Irish_Water_Spaniel",
-      "fields": {
-        "pet": "Irish Water Spaniel",
-        "image": "",
+      "item": {
+        "name": "Irish Water Spaniel",
+        "category": "Obtainable Pets",
         "rarity": "Ultra-Rare",
-        "price": "295- 500 (5 UGC items)"
+        "price": "295- 500 (5 UGC items)",
+        "pet": "Irish Water Spaniel"
       },
-      "image": "/Adopt%20Me/Accessory%20Shop/irish-water-spaniel.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/e/eb/Irish_Water_Spaniel.png/revision/latest/scale-to-width-down/70?cb=20220714200421"
+      "system": {
+        "slug": "irish-water-spaniel",
+        "section": "Obtainable Pets",
+        "sortOrder": 3,
+        "image": "/Adopt%20Me/Accessory%20Shop/irish-water-spaniel.webp"
+      }
     },
     {
-      "name": "Bloodhound",
-      "slug": "bloodhound",
-      "category": "Obtainable Pets",
-      "rarity": "Rare",
-      "price": "600",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Bloodhound",
-      "fields": {
-        "pet": "Bloodhound",
-        "image": "",
+      "item": {
+        "name": "Bloodhound",
+        "category": "Obtainable Pets",
         "rarity": "Rare",
-        "price": "600"
+        "price": "600",
+        "pet": "Bloodhound"
       },
-      "image": "/Adopt%20Me/Accessory%20Shop/bloodhound.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/6d/Bloodhound.png/revision/latest/scale-to-width-down/70?cb=20230112220637"
+      "system": {
+        "slug": "bloodhound",
+        "section": "Obtainable Pets",
+        "sortOrder": 4,
+        "image": "/Adopt%20Me/Accessory%20Shop/bloodhound.webp"
+      }
     },
     {
-      "name": "Glacier Moth",
-      "slug": "glacier-moth",
-      "category": "Obtainable Pets",
-      "rarity": "Ultra-Rare",
-      "price": "295- 500 (5 UGC items)",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Glacier_Moth",
-      "fields": {
-        "pet": "Glacier Moth",
-        "image": "",
+      "item": {
+        "name": "Glacier Moth",
+        "category": "Obtainable Pets",
         "rarity": "Ultra-Rare",
-        "price": "295- 500 (5 UGC items)"
+        "price": "295- 500 (5 UGC items)",
+        "pet": "Glacier Moth"
       },
-      "image": "/Adopt%20Me/Accessory%20Shop/glacier-moth.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/8/88/Glacier_Moth_in_inventory.webp/revision/latest?cb=20230115215052"
+      "system": {
+        "slug": "glacier-moth",
+        "section": "Obtainable Pets",
+        "sortOrder": 5,
+        "image": "/Adopt%20Me/Accessory%20Shop/glacier-moth.webp"
+      }
     },
     {
-      "name": "African Wild Dog",
-      "slug": "african-wild-dog",
-      "category": "Obtainable Pets",
-      "rarity": "Ultra-Rare",
-      "price": "295- 500 (5 UGC items)",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/African_Wild_Dog",
-      "fields": {
-        "pet": "African Wild Dog",
-        "image": "",
+      "item": {
+        "name": "African Wild Dog",
+        "category": "Obtainable Pets",
         "rarity": "Ultra-Rare",
-        "price": "295- 500 (5 UGC items)"
+        "price": "295- 500 (5 UGC items)",
+        "pet": "African Wild Dog"
       },
-      "image": "/Adopt%20Me/Accessory%20Shop/african-wild-dog.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/3/3f/African_Wild_Dog.png/revision/latest/scale-to-width-down/70?cb=20230710163102"
+      "system": {
+        "slug": "african-wild-dog",
+        "section": "Obtainable Pets",
+        "sortOrder": 6,
+        "image": "/Adopt%20Me/Accessory%20Shop/african-wild-dog.webp"
+      }
     },
     {
-      "name": "Jellyfish",
-      "slug": "jellyfish",
-      "category": "Obtainable Pets",
-      "rarity": "Ultra-Rare",
-      "price": "295- 500 (5 UGC items)",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Jellyfish",
-      "fields": {
-        "pet": "Jellyfish",
-        "image": "",
+      "item": {
+        "name": "Jellyfish",
+        "category": "Obtainable Pets",
         "rarity": "Ultra-Rare",
-        "price": "295- 500 (5 UGC items)"
+        "price": "295- 500 (5 UGC items)",
+        "pet": "Jellyfish"
       },
-      "image": "/Adopt%20Me/Accessory%20Shop/jellyfish.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/ab/Jellyfish_inventory.png/revision/latest?cb=20240110174925"
+      "system": {
+        "slug": "jellyfish",
+        "section": "Obtainable Pets",
+        "sortOrder": 7,
+        "image": "/Adopt%20Me/Accessory%20Shop/jellyfish.webp"
+      }
     },
     {
-      "name": "Honey Badger",
-      "slug": "honey-badger",
-      "category": "Obtainable Pets",
-      "rarity": "Ultra-Rare",
-      "price": "295- 700 (5 UGC items)",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Honey_Badger",
-      "fields": {
-        "pet": "Honey Badger",
-        "image": "",
+      "item": {
+        "name": "Honey Badger",
+        "category": "Obtainable Pets",
         "rarity": "Ultra-Rare",
-        "price": "295- 700 (5 UGC items)"
+        "price": "295- 700 (5 UGC items)",
+        "pet": "Honey Badger"
       },
-      "image": "/Adopt%20Me/Accessory%20Shop/honey-badger.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/04/Honey_Badger.png/revision/latest/scale-to-width-down/70?cb=20240923160805"
+      "system": {
+        "slug": "honey-badger",
+        "section": "Obtainable Pets",
+        "sortOrder": 8,
+        "image": "/Adopt%20Me/Accessory%20Shop/honey-badger.webp"
+      }
     },
     {
-      "name": "Tri-horned Treehopper",
-      "slug": "tri-horned-treehopper",
-      "category": "Obtainable Pets",
-      "rarity": "Ultra-Rare",
-      "price": "295- 700 (5 UGC items or direct purchase)",
-      "cost": null,
-      "costBucks": null,
-      "chances": null,
-      "seats": null,
-      "available": null,
-      "availability": null,
-      "event": null,
-      "eventUpdate": null,
-      "location": null,
-      "uses": null,
-      "effect": null,
-      "obtainedBy": null,
-      "obtainableFrom": null,
-      "timeToBrew": null,
-      "description": null,
-      "interaction": null,
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Tri-horned_Treehopper",
-      "fields": {
-        "pet": "Tri-horned Treehopper",
-        "image": "",
+      "item": {
+        "name": "Tri-horned Treehopper",
+        "category": "Obtainable Pets",
         "rarity": "Ultra-Rare",
-        "price": "295- 700 (5 UGC items or direct purchase)"
+        "price": "295- 700 (5 UGC items or direct purchase)",
+        "pet": "Tri-horned Treehopper"
       },
-      "image": "/Adopt%20Me/Accessory%20Shop/tri-horned-treehopper.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/3/35/Tri-horned_Treehopper.png/revision/latest/scale-to-width-down/70?cb=20250324160746"
+      "system": {
+        "slug": "tri-horned-treehopper",
+        "section": "Obtainable Pets",
+        "sortOrder": 9,
+        "image": "/Adopt%20Me/Accessory%20Shop/tri-horned-treehopper.webp"
+      }
     }
   ]
 }

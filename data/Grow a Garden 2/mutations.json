@@ -1,85 +1,127 @@
 {
   "meta": {
-    "title": "Grow a Garden 2 mutations data",
-    "updatedAt": "2026-06-13",
-    "sources": [
-      {
-        "label": "Beebom - All Grow a Garden 2 Mutations and Multiplier",
-        "url": "https://beebom.com/grow-a-garden-2-mutations/",
-        "accessed": "2026-06-13"
-      },
-      {
-        "label": "Grow a Garden Calculator - Grow a Garden 2 Wiki",
-        "url": "https://www.growagardencalculator.com/grow-a-garden-2/wiki/",
-        "accessed": "2026-06-13"
-      },
-      {
-        "label": "Grow a Garden Calculator - Grow a Garden 2 Mutations",
-        "url": "https://www.growagardencalculator.com/grow-a-garden-2/wiki/mutations/",
-        "accessed": "2026-06-23"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Grow a Garden 2",
+    "gameSlug": "grow-a-garden-2",
+    "collection": "mutations",
+    "route": "/wiki/grow-a-garden-2/mutations",
+    "catalogCode": "grow-a-garden-2-mutations",
+    "itemFields": [
       "multiplier",
       "whereToGet",
       "bestUse"
-    ]
+    ],
+    "columns": [
+      "multiplier",
+      "whereToGet",
+      "bestUse"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "multiplier",
+        "whereToGet",
+        "bestUse"
+      ],
+      "tableFields": [
+        "multiplier",
+        "whereToGet",
+        "bestUse"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "gold",
-      "name": "Gold",
-      "multiplier": "10x",
-      "bestUse": "Value boost on crops",
-      "image": "/Grow%20a%20Garden%202/Mutations/gold.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_a71152.png?w=291&quality=75",
-      "whereToGet": "Gold mutated plants or random chance"
+      "item": {
+        "name": "Gold",
+        "multiplier": "10x",
+        "whereToGet": "Gold mutated plants or random chance",
+        "bestUse": "Value boost on crops"
+      },
+      "system": {
+        "slug": "gold",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden%202/Mutations/gold.webp"
+      }
     },
     {
-      "id": "rainbow",
-      "name": "Rainbow",
-      "multiplier": "10x",
-      "bestUse": "Value boost on crops; Unicorn can help trigger it",
-      "image": "/Grow%20a%20Garden%202/Mutations/rainbow.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_3ce343.png?w=417&quality=75",
-      "whereToGet": "Rainbow mutated plants, Unicorn, or random chance"
+      "item": {
+        "name": "Rainbow",
+        "multiplier": "10x",
+        "whereToGet": "Rainbow mutated plants, Unicorn, or random chance",
+        "bestUse": "Value boost on crops; Unicorn can help trigger it"
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden%202/Mutations/rainbow.webp"
+      }
     },
     {
-      "id": "electric",
-      "name": "Electric",
-      "multiplier": "25x",
-      "bestUse": "Large weather-event crop value boost",
-      "image": "/Grow%20a%20Garden%202/Mutations/electric.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_7e8340.png?w=525&quality=75",
-      "whereToGet": "Lightning event"
+      "item": {
+        "name": "Electric",
+        "multiplier": "25x",
+        "whereToGet": "Lightning event",
+        "bestUse": "Large weather-event crop value boost"
+      },
+      "system": {
+        "slug": "electric",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden%202/Mutations/electric.webp"
+      }
     },
     {
-      "id": "frozen",
-      "name": "Frozen",
-      "multiplier": "3x",
-      "bestUse": "Weather-event crop value boost",
-      "image": "/Grow%20a%20Garden%202/Mutations/frozen.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_ca3d3d.png?w=359&quality=75",
-      "whereToGet": "Snowfall event"
+      "item": {
+        "name": "Frozen",
+        "multiplier": "3x",
+        "whereToGet": "Snowfall event",
+        "bestUse": "Weather-event crop value boost"
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden%202/Mutations/frozen.webp"
+      }
     },
     {
-      "id": "starstruck",
-      "name": "Starstruck",
-      "multiplier": "50x",
-      "bestUse": "High-value weather-event crop value boost",
-      "image": "/Grow%20a%20Garden%202/Mutations/starstruck.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_c5cafe.png?w=449&quality=75",
-      "whereToGet": "Starfall event"
+      "item": {
+        "name": "Starstruck",
+        "multiplier": "50x",
+        "whereToGet": "Starfall event",
+        "bestUse": "High-value weather-event crop value boost"
+      },
+      "system": {
+        "slug": "starstruck",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden%202/Mutations/starstruck.webp"
+      }
     },
     {
-      "id": "bloodlit",
-      "name": "Bloodlit",
-      "multiplier": "60x",
-      "bestUse": "Very high crop value boost",
-      "image": "/Grow%20a%20Garden%202/Mutations/bloodlit.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_a751b5.png?w=267&quality=75",
-      "whereToGet": "Blood Moon event"
+      "item": {
+        "name": "Bloodlit",
+        "multiplier": "60x",
+        "whereToGet": "Blood Moon event",
+        "bestUse": "Very high crop value boost"
+      },
+      "system": {
+        "slug": "bloodlit",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Grow%20a%20Garden%202/Mutations/bloodlit.webp"
+      }
     }
   ]
 }

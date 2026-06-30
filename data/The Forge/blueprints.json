@@ -1,186 +1,317 @@
 {
   "meta": {
-    "title": "The Forge Blueprints",
-    "updatedAt": "2026-04-10",
-    "sources": [
-      {
-        "label": "Game8 blueprint list",
-        "url": "https://game8.co/games/The-Forge/archives/574399",
-        "accessed": "2026-04-10"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "The Forge",
+    "gameSlug": "the-forge",
+    "collection": "blueprints",
+    "route": "/wiki/the-forge/blueprints",
+    "catalogCode": "the-forge-blueprints",
+    "itemFields": [
       "itemType",
       "source",
       "howToGet",
-      "availability",
-      "sourceUrl"
-    ]
+      "availability"
+    ],
+    "columns": [
+      "itemType",
+      "source",
+      "howToGet",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "itemType",
+        "source",
+        "howToGet",
+        "availability"
+      ],
+      "tableFields": [
+        "itemType",
+        "source",
+        "howToGet",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Executioner's Greataxe",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574411"
+      "item": {
+        "name": "Executioner's Greataxe",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "executioner-s-greataxe",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Shark's Fangs",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574412"
+      "item": {
+        "name": "Shark's Fangs",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "shark-s-fangs",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Crystalized Broadsword",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574413"
+      "item": {
+        "name": "Crystalized Broadsword",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "crystalized-broadsword",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Anchored Straight Blade",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574414"
+      "item": {
+        "name": "Anchored Straight Blade",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "anchored-straight-blade",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Knight Spear",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574415"
+      "item": {
+        "name": "Knight Spear",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "knight-spear",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Colossal Gemblade",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574416"
+      "item": {
+        "name": "Colossal Gemblade",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "colossal-gemblade",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Anchored Greatsword",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574417"
+      "item": {
+        "name": "Anchored Greatsword",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "anchored-greatsword",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Colossal Terrorblade",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574418"
+      "item": {
+        "name": "Colossal Terrorblade",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "colossal-terrorblade",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Hook Blade",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574419"
+      "item": {
+        "name": "Hook Blade",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "hook-blade",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Dark Knight's Gauntlets",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574420"
+      "item": {
+        "name": "Dark Knight's Gauntlets",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "dark-knight-s-gauntlets",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Straight Edge Katana",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574421"
+      "item": {
+        "name": "Straight Edge Katana",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "straight-edge-katana",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Compass Spear",
-      "image": null,
-      "itemType": "Weapon",
-      "source": "Hidden Maze Event",
-      "howToGet": "Obtainable at the Fungi Store",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574422"
+      "item": {
+        "name": "Compass Spear",
+        "itemType": "Weapon",
+        "source": "Hidden Maze Event",
+        "howToGet": "Obtainable at the Fungi Store",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "compass-spear",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Hell Slayer",
-      "image": "/The%20Forge/Weapons/hell-slayer.webp",
-      "itemType": "Weapon",
-      "source": "Christmas Event",
-      "howToGet": "Previously available at the Christmas Event Shop",
-      "availability": "Unavailable",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574129"
+      "item": {
+        "name": "Hell Slayer",
+        "itemType": "Weapon",
+        "source": "Christmas Event",
+        "howToGet": "Previously available at the Christmas Event Shop",
+        "availability": "Unavailable"
+      },
+      "system": {
+        "slug": "hell-slayer",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/The%20Forge/Weapons/hell-slayer.webp"
+      }
     },
     {
-      "name": "Candy Cane",
-      "image": "/The%20Forge/Weapons/candy-cane.webp",
-      "itemType": "Weapon",
-      "source": "Christmas Event",
-      "howToGet": "Previously available at the Christmas Event Shop",
-      "availability": "Unavailable",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574410"
+      "item": {
+        "name": "Candy Cane",
+        "itemType": "Weapon",
+        "source": "Christmas Event",
+        "howToGet": "Previously available at the Christmas Event Shop",
+        "availability": "Unavailable"
+      },
+      "system": {
+        "slug": "candy-cane",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/The%20Forge/Weapons/candy-cane.webp"
+      }
     },
     {
-      "name": "Goblin's Crown",
-      "image": "/The%20Forge/Armor/goblin-s-crown.webp",
-      "itemType": "Armor",
-      "source": "Quest",
-      "howToGet": "Complete Goblin Lord's Questline",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573500"
+      "item": {
+        "name": "Goblin's Crown",
+        "itemType": "Armor",
+        "source": "Quest",
+        "howToGet": "Complete Goblin Lord's Questline",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "goblin-s-crown",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/The%20Forge/Armor/goblin-s-crown.webp"
+      }
     },
     {
-      "name": "Raven's Helmet",
-      "image": "/The%20Forge/Armor/raven-s-helmet.webp",
-      "itemType": "Armor",
-      "source": "Quest",
-      "howToGet": "Progress through the Raven Questline",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573499"
+      "item": {
+        "name": "Raven's Helmet",
+        "itemType": "Armor",
+        "source": "Quest",
+        "howToGet": "Progress through the Raven Questline",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "raven-s-helmet",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/The%20Forge/Armor/raven-s-helmet.webp"
+      }
     },
     {
-      "name": "Raven's Chestplate",
-      "image": "/The%20Forge/Armor/raven-s-chestplate.webp",
-      "itemType": "Armor",
-      "source": "Quest",
-      "howToGet": "Progress through the Raven Questline",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573498"
+      "item": {
+        "name": "Raven's Chestplate",
+        "itemType": "Armor",
+        "source": "Quest",
+        "howToGet": "Progress through the Raven Questline",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "raven-s-chestplate",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/The%20Forge/Armor/raven-s-chestplate.webp"
+      }
     },
     {
-      "name": "Raven's Leggings",
-      "image": "/The%20Forge/Armor/raven-s-leggings.webp",
-      "itemType": "Armor",
-      "source": "Quest",
-      "howToGet": "Progress through the Raven Questline",
-      "availability": "Available",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573497"
+      "item": {
+        "name": "Raven's Leggings",
+        "itemType": "Armor",
+        "source": "Quest",
+        "howToGet": "Progress through the Raven Questline",
+        "availability": "Available"
+      },
+      "system": {
+        "slug": "raven-s-leggings",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/The%20Forge/Armor/raven-s-leggings.webp"
+      }
     }
   ]
 }

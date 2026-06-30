@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { repoPath } from "@/lib/paths";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 
 export type CropRecord = {
   name: string;
@@ -124,7 +125,7 @@ function resolveSource(sources: CropSource[] | null | undefined, fallback?: stri
 
 export async function loadCropDataset(): Promise<CropDataset> {
   const json = await readCropsJson();
-  const items = json.items ?? [];
+  const items = unwrapDatasetItems<CropRow>(json);
   const sources = json.meta?.sources ?? null;
   const dataLastUpdatedOn = resolveUpdatedAt(sources ?? undefined, json.meta?.updatedAt ?? null);
   const source = resolveSource(sources ?? undefined, json.meta?.source ?? null);

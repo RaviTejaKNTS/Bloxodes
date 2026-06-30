@@ -1,813 +1,950 @@
 {
   "meta": {
-    "title": "Blox Fruits bosses data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Category:Bosses",
-        "url": "https://blox-fruits.fandom.com/wiki/Category%3ABosses",
-        "accessed": "2026-05-07"
-      }
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "bosses",
+    "route": "/wiki/blox-fruits/bosses",
+    "catalogCode": "blox-fruits-bosses",
+    "itemFields": [
+      "overview",
+      "type",
+      "location",
+      "level",
+      "usesAura",
+      "weaponType",
+      "sea",
+      "spawnTime",
+      "previous",
+      "despawnTime",
+      "hp"
     ],
     "columns": [
-      "name",
-      "image",
-      "fields",
       "overview",
-      "wikiUrl"
-    ]
+      "type",
+      "location",
+      "level",
+      "usesAura",
+      "weaponType",
+      "sea",
+      "spawnTime",
+      "previous",
+      "despawnTime",
+      "hp"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": "overview",
+      "cardDescriptionField": "overview",
+      "cardFields": [
+        "overview",
+        "type",
+        "location",
+        "level",
+        "usesAura",
+        "weaponType"
+      ],
+      "tableFields": [
+        "overview",
+        "type",
+        "location",
+        "level",
+        "usesAura",
+        "weaponType",
+        "sea",
+        "spawnTime"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Ancient Beast",
-      "slug": "ancient-beast",
-      "image": "/Blox%20Fruits/Bosses/ancient-beast.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/35/True_Ancient_Beast.png/revision/latest/scale-to-width-down/268?cb=20260128062528",
-      "fields": {
+      "item": {
+        "name": "Ancient Beast",
+        "overview": "The Ancient Beast is located on the 5th floor of a dungeon, typically being the first boss the player faces on any difficulty. He has 2 phases, similar to rip_indra True Form.",
         "type": "Boss",
         "location": "Dungeon",
         "level": "3000",
         "usesAura": "✘",
         "weaponType": "Blox Fruit"
       },
-      "overview": "The Ancient Beast is located on the 5th floor of a dungeon, typically being the first boss the player faces on any difficulty. He has 2 phases, similar to rip_indra True Form.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ancient_Beast"
+      "system": {
+        "slug": "ancient-beast",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Bosses/ancient-beast.webp"
+      }
     },
     {
-      "name": "Awakened Ice Admiral",
-      "slug": "awakened-ice-admiral",
-      "image": "/Blox%20Fruits/Bosses/awakened-ice-admiral.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fb/Awakened_Ice_Admiral.png/revision/latest/scale-to-width-down/268?cb=20241123174233",
-      "fields": {
+      "item": {
+        "name": "Awakened Ice Admiral",
+        "overview": "The Awakened Ice Admiral wears a pair of light blue pants and vest, a very dark red (almost brown) dress shirt, a green bowtie and the Marine version of the Coat on his back. He also has bushy eyebrows, stubble on his chin and upper lip, and slicked brown hair.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Ice Castle",
-        "spawnTime": "20 Minutes",
         "level": "1400",
         "usesAura": "✘",
         "weaponType": "Blox Fruit",
+        "sea": "Second Sea",
+        "spawnTime": "20 Minutes",
         "previous": "Snow Lurker"
       },
-      "overview": "The Awakened Ice Admiral wears a pair of light blue pants and vest, a very dark red (almost brown) dress shirt, a green bowtie and the Marine version of the Coat on his back. He also has bushy eyebrows, stubble on his chin and upper lip, and slicked brown hair.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Awakened_Ice_Admiral"
+      "system": {
+        "slug": "awakened-ice-admiral",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Bosses/awakened-ice-admiral.webp"
+      }
     },
     {
-      "name": "Beautiful Pirate",
-      "slug": "beautiful-pirate",
-      "image": "/Blox%20Fruits/Bosses/beautiful-pirate.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4d/Beautiful_Pirate.png/revision/latest/scale-to-width-down/268?cb=20241130112313",
-      "fields": {
+      "item": {
+        "name": "Beautiful Pirate",
+        "overview": "The Beautiful Pirate has two appearances:",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Floating Turtle",
-        "spawnTime": "45 Minutes",
         "level": "1950",
         "usesAura": "✘",
         "weaponType": "Sword",
+        "sea": "Third Sea",
+        "spawnTime": "45 Minutes",
         "previous": "Musketeer Pirate"
       },
-      "overview": "The Beautiful Pirate has two appearances:",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Beautiful_Pirate"
+      "system": {
+        "slug": "beautiful-pirate",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Bosses/beautiful-pirate.webp"
+      }
     },
     {
-      "name": "Bobby",
-      "slug": "bobby",
-      "image": "/Blox%20Fruits/Bosses/bobby.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c7/Bobby.png/revision/latest/scale-to-width-down/268?cb=20250309010425",
-      "fields": {
+      "item": {
+        "name": "Bobby",
+        "overview": "Bobby had a clown nose with blue hair, a cross-bone tattoo across his face with two scars cutting through each eye, an orange pirate hat with black shoes, some white pants with a blue belt and a green and white striped shirt with red gloves. He also wore a red scarf around his neck bearing a green gem bordered with yellow casing.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Pirate Village",
-        "spawnTime": "5 Minutes",
         "level": "55",
         "usesAura": "✘",
         "weaponType": "Sword/Blox Fruit",
+        "sea": "First Sea",
+        "spawnTime": "5 Minutes",
         "previous": "Brute"
       },
-      "overview": "Bobby had a clown nose with blue hair, a cross-bone tattoo across his face with two scars cutting through each eye, an orange pirate hat with black shoes, some white pants with a blue belt and a green and white striped shirt with red gloves. He also wore a red scarf around his neck bearing a green gem bordered with yellow casing.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bobby"
+      "system": {
+        "slug": "bobby",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Bosses/bobby.webp"
+      }
     },
     {
-      "name": "Cake Queen",
-      "slug": "cake-queen",
-      "image": "/Blox%20Fruits/Bosses/cake-queen.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/40/Cake_Queen.png/revision/latest/scale-to-width-down/268?cb=20241130114059",
-      "fields": {
+      "item": {
+        "name": "Cake Queen",
+        "overview": "Server hopping for the Cake Queen is a good way to farm mastery, money and Bounty/Honor. Her health and damage output is very high, so if possible, the player should get a good powerful fruit (such as Buddha), sword, and/or other people to assist them.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Ice Cream Land",
-        "spawnTime": "30 Minutes",
         "level": "2175",
         "usesAura": "✘",
         "weaponType": "Sword",
+        "sea": "Third Sea",
+        "spawnTime": "30 Minutes",
         "previous": "Ice Cream Commander"
       },
-      "overview": "Server hopping for the Cake Queen is a good way to farm mastery, money and Bounty/Honor. Her health and damage output is very high, so if possible, the player should get a good powerful fruit (such as Buddha), sword, and/or other people to assist them.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cake_Queen"
+      "system": {
+        "slug": "cake-queen",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Bosses/cake-queen.webp"
+      }
     },
     {
-      "name": "Captain Elephant",
-      "slug": "captain-elephant",
-      "image": "/Blox%20Fruits/Bosses/captain-elephant.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/31/Captain_Elephant.png/revision/latest/scale-to-width-down/268?cb=20241129232726",
-      "fields": {
+      "item": {
+        "name": "Captain Elephant",
+        "overview": "Captain Elephant wears a damaged brown shirt with purple pants and brown shoes with yellow hair and the Jaw Shield in his mouth. He also has grey skin and uses Aura.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Floating Turtle",
-        "spawnTime": "30 Minutes",
         "level": "1875",
         "usesAura": "✔",
         "weaponType": "Sword",
+        "sea": "Third Sea",
+        "spawnTime": "30 Minutes",
         "previous": "Mythological Pirate"
       },
-      "overview": "Captain Elephant wears a damaged brown shirt with purple pants and brown shoes with yellow hair and the Jaw Shield in his mouth. He also has grey skin and uses Aura.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Captain_Elephant"
+      "system": {
+        "slug": "captain-elephant",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Bosses/captain-elephant.webp"
+      }
     },
     {
-      "name": "Chef",
-      "slug": "chef",
-      "image": "/Blox%20Fruits/Bosses/chef.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e5/Chef.png/revision/latest/scale-to-width-down/268?cb=20250419122356",
-      "fields": {
+      "item": {
+        "name": "Chef",
+        "overview": "The Chef is located in the Pirate Village, outside the yellow house in front of the Brutes.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Pirate Village",
-        "spawnTime": "5 Minutes",
         "level": "55",
         "usesAura": "✘",
         "weaponType": "Sword/Blox Fruit",
+        "sea": "First Sea",
+        "spawnTime": "5 Minutes",
         "previous": "Brute"
       },
-      "overview": "The Chef is located in the Pirate Village, outside the yellow house in front of the Brutes.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chef"
+      "system": {
+        "slug": "chef",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Bosses/chef.webp"
+      }
     },
     {
-      "name": "Chief Warden",
-      "slug": "chief-warden",
-      "image": "/Blox%20Fruits/Bosses/chief-warden.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d3/Chief_Warden_.png/revision/latest/scale-to-width-down/268?cb=20250202170250",
-      "fields": {
+      "item": {
+        "name": "Chief Warden",
+        "overview": "The Chief Warden wears a pair of emerald-green cargo shorts with silver, diamond shaped studs, and brown shoes. He has an Egyptian headdress, with black bat-like wings growing from his back. He does not wear a shirt, and his chest is consequently visible.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Prison",
-        "spawnTime": "7 Minutes",
         "level": "230",
         "usesAura": "✘",
         "weaponType": "Sword",
+        "sea": "First Sea",
+        "spawnTime": "7 Minutes",
         "previous": "Warden"
       },
-      "overview": "The Chief Warden wears a pair of emerald-green cargo shorts with silver, diamond shaped studs, and brown shoes. He has an Egyptian headdress, with black bat-like wings growing from his back. He does not wear a shirt, and his chest is consequently visible.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chief_Warden"
+      "system": {
+        "slug": "chief-warden",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Bosses/chief-warden.webp"
+      }
     },
     {
-      "name": "Core",
-      "slug": "core",
-      "image": "/Blox%20Fruits/Bosses/core.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/aa/Factory_core.png/revision/latest/scale-to-width-down/268?cb=20251007233342",
-      "fields": {
+      "item": {
+        "name": "Core",
+        "overview": "The Core spawns in 1 hour and 30 minutes. When the Factory Raid starts, players have five minutes to destroy the core. Otherwise, the door will close, and a poison will spread, killing all players who are still in the factory.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Factory",
+        "sea": "Second Sea",
         "spawnTime": "1 Hour 30 Minutes",
         "despawnTime": "5 Minutes",
         "hp": "200,000"
       },
-      "overview": "The Core spawns in 1 hour and 30 minutes. When the Factory Raid starts, players have five minutes to destroy the core. Otherwise, the door will close, and a poison will spread, killing all players who are still in the factory.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Core"
+      "system": {
+        "slug": "core",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Bosses/core.webp"
+      }
     },
     {
-      "name": "Cursed Skeleton Boss",
-      "slug": "cursed-skeleton-boss",
-      "image": "/Blox%20Fruits/Bosses/cursed-skeleton-boss.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2c/Cursed_Skeleton_Boss.png/revision/latest/scale-to-width-down/268?cb=20241126231906",
-      "fields": {
+      "item": {
+        "name": "Cursed Skeleton Boss",
+        "overview": "The Cursed Skeleton Boss is located at the Crypt, at Floating Turtle, in Third Sea.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Floating Turtle",
         "level": "2025",
         "usesAura": "✘",
-        "weaponType": "Sword"
+        "weaponType": "Sword",
+        "sea": "Third Sea"
       },
-      "overview": "The Cursed Skeleton Boss is located at the Crypt, at Floating Turtle, in Third Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cursed_Skeleton_Boss"
+      "system": {
+        "slug": "cursed-skeleton-boss",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Bosses/cursed-skeleton-boss.webp"
+      }
     },
     {
-      "name": "Cyborg (Boss)",
-      "slug": "cyborg-boss",
-      "image": "/Blox%20Fruits/Bosses/cyborg-boss.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5c/Cyborg_%28Boss%29.png/revision/latest/scale-to-width-down/268?cb=20250419122506",
-      "fields": {
+      "item": {
+        "name": "Cyborg (Boss)",
+        "overview": "The Cyborg has a robotic left arm with a blue vest, yellow shirt, and black pants with snow white spiky hair. Cyborg is also wearing blue goggles and iron nails on his face. He uses Rocket as his main attacking method.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Fountain City",
-        "spawnTime": "12 Minutes",
         "level": "675",
         "usesAura": "✘",
         "weaponType": "Blox Fruit",
+        "sea": "First Sea",
+        "spawnTime": "12 Minutes",
         "previous": "Galley Captain"
       },
-      "overview": "The Cyborg has a robotic left arm with a blue vest, yellow shirt, and black pants with snow white spiky hair. Cyborg is also wearing blue goggles and iron nails on his face. He uses Rocket as his main attacking method.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cyborg_(Boss)"
+      "system": {
+        "slug": "cyborg-boss",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Bosses/cyborg-boss.webp"
+      }
     },
     {
-      "name": "Diamond (Boss)",
-      "slug": "diamond-boss",
-      "image": "/Blox%20Fruits/Bosses/diamond-boss.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c1/Diamond_%28Boss%29.png/revision/latest/scale-to-width-down/268?cb=20241020145910",
-      "fields": {
+      "item": {
+        "name": "Diamond (Boss)",
+        "overview": "Diamond is a tall, medium-sized man with a variety of leaves forming a shape behind his head. He also wears a green shirt which exposes his chest, along with brown pants with some visuals in it.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Kingdom of Rose",
-        "spawnTime": "15 Minutes",
         "level": "750",
         "usesAura": "✘",
         "weaponType": "Sword",
+        "sea": "Second Sea",
+        "spawnTime": "15 Minutes",
         "previous": "Mercenary"
       },
-      "overview": "Diamond is a tall, medium-sized man with a variety of leaves forming a shape behind his head. He also wears a green shirt which exposes his chest, along with brown pants with some visuals in it.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Diamond_(Boss)"
+      "system": {
+        "slug": "diamond-boss",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Bosses/diamond-boss.webp"
+      }
     },
     {
-      "name": "Don Swan",
-      "slug": "don-swan",
-      "image": "/Blox%20Fruits/Bosses/don-swan.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/08/DonSwan.png/revision/latest/scale-to-width-down/268?cb=20231210064834",
-      "fields": {
+      "item": {
+        "name": "Don Swan",
+        "overview": "Don Swan wears a black robe with maroon stripes, which is short enough to reveal muscles on his arms and torso, and maroon shoes. On his back, he wears the Pink Coat, and has black, spiky hair, a large, toothy grin, as well as a pair of Swan Glasses.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Kingdom of Rose",
-        "spawnTime": "30 Minutes",
         "level": "1000",
         "usesAura": "✘",
-        "weaponType": "Blox Fruit"
+        "weaponType": "Blox Fruit",
+        "sea": "Second Sea",
+        "spawnTime": "30 Minutes"
       },
-      "overview": "Don Swan wears a black robe with maroon stripes, which is short enough to reveal muscles on his arms and torso, and maroon shoes. On his back, he wears the Pink Coat, and has black, spiky hair, a large, toothy grin, as well as a pair of Swan Glasses.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Don_Swan"
+      "system": {
+        "slug": "don-swan",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Bosses/don-swan.webp"
+      }
     },
     {
-      "name": "Fajita",
-      "slug": "fajita",
-      "image": "/Blox%20Fruits/Bosses/fajita.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9d/Fajita.png/revision/latest/scale-to-width-down/268?cb=20241126220140",
-      "fields": {
+      "item": {
+        "name": "Fajita",
+        "overview": "Fajita had brown, bushy hair, eyebrows and a beard, and a straight scar across the top of his nose. He wore the marine version of the Coat with golden decoration and a black collar, a green robe with a maroon edge, and brown pants. He also held the Gravity Blade.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Green Zone",
-        "spawnTime": "15 Minutes",
         "level": "925",
         "usesAura": "✘",
         "weaponType": "Sword/Blox Fruit",
+        "sea": "Second Sea",
+        "spawnTime": "15 Minutes",
         "previous": "Marine Captain"
       },
-      "overview": "Fajita had brown, bushy hair, eyebrows and a beard, and a straight scar across the top of his nose. He wore the marine version of the Coat with golden decoration and a black collar, a green robe with a maroon edge, and brown pants. He also held the Gravity Blade.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fajita"
+      "system": {
+        "slug": "fajita",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Bosses/fajita.webp"
+      }
     },
     {
-      "name": "Fishman Lord",
-      "slug": "fishman-lord",
-      "image": "/Blox%20Fruits/Bosses/fishman-lord.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b2/FishmanLord1.png/revision/latest/scale-to-width-down/268?cb=20241123182129",
-      "fields": {
+      "item": {
+        "name": "Fishman Lord",
+        "overview": "The Fishman Lord has two appearances which are:",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Underwater City",
-        "spawnTime": "8 Minutes",
         "level": "425",
         "usesAura": "✘",
         "weaponType": "Sword",
+        "sea": "First Sea",
+        "spawnTime": "8 Minutes",
         "previous": "Fishman Commando"
       },
-      "overview": "The Fishman Lord has two appearances which are:",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishman_Lord"
+      "system": {
+        "slug": "fishman-lord",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/Blox%20Fruits/Bosses/fishman-lord.webp"
+      }
     },
     {
-      "name": "Gas Knight",
-      "slug": "gas-knight",
-      "image": "/Blox%20Fruits/Bosses/gas-knight.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3f/Gas_Knights.png/revision/latest/scale-to-width-down/268?cb=20260128114927",
-      "fields": {
+      "item": {
+        "name": "Gas Knight",
+        "overview": "The Gas Knight is located on the 15th floor of a dungeon. He is the final boss on Easy Mode, not in Hard and Challenge mode (Due to Zero being the last).",
         "type": "Boss",
         "location": "Dungeon",
         "level": "4000",
         "weaponType": "Blox Fruit"
       },
-      "overview": "The Gas Knight is located on the 15th floor of a dungeon. He is the final boss on Easy Mode, not in Hard and Challenge mode (Due to Zero being the last).",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gas_Knight"
+      "system": {
+        "slug": "gas-knight",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Bosses/gas-knight.webp"
+      }
     },
     {
-      "name": "Gorilla God",
-      "slug": "gorilla-god",
-      "image": "/Blox%20Fruits/Bosses/gorilla-god.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d5/The_Gorilla_God.png/revision/latest/scale-to-width-down/268?cb=20260216162447",
-      "fields": {
+      "item": {
+        "name": "Gorilla God",
+        "overview": "The Gorilla God can be found in the Dungeons, in one of the random floors on Hard Mode leading up to Zero.",
         "type": "Boss",
         "location": "Dungeons",
         "level": "TBA",
         "usesAura": "✘",
         "weaponType": "Blox Fruit"
       },
-      "overview": "The Gorilla God can be found in the Dungeons, in one of the random floors on Hard Mode leading up to Zero.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gorilla_God"
+      "system": {
+        "slug": "gorilla-god",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Bosses/gorilla-god.webp"
+      }
     },
     {
-      "name": "Heaven's Guardian",
-      "slug": "heaven-s-guardian",
-      "image": "/Blox%20Fruits/Bosses/heaven-s-guardian.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/60/Heaven%27s_Guardian.png/revision/latest/scale-to-width-down/268?cb=20241127000455",
-      "fields": {
+      "item": {
+        "name": "Heaven's Guardian",
+        "overview": "The Heaven's Guardian appears after lighting up the third torch in the Soulless scroll quest. He uses the awakened old version of the Light fruit and he possesses the Angel race but doesn't have any abilities or buffs from it. Most of his attacks cannot be dodged because of the fast start-up of the moves. He also utilizes Aura.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Heavenly Dimension",
         "level": "2200",
         "usesAura": "✔",
-        "weaponType": "Blox Fruit"
+        "weaponType": "Blox Fruit",
+        "sea": "Third Sea"
       },
-      "overview": "The Heaven's Guardian appears after lighting up the third torch in the Soulless scroll quest. He uses the awakened old version of the Light fruit and he possesses the Angel race but doesn't have any abilities or buffs from it. Most of his attacks cannot be dodged because of the fast start-up of the moves. He also utilizes Aura.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Heaven's_Guardian"
+      "system": {
+        "slug": "heaven-s-guardian",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Bosses/heaven-s-guardian.webp"
+      }
     },
     {
-      "name": "Hell's Messenger",
-      "slug": "hell-s-messenger",
-      "image": "/Blox%20Fruits/Bosses/hell-s-messenger.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c1/Hell%27s_Messenger.png/revision/latest/scale-to-width-down/268?cb=20240816232440",
-      "fields": {
+      "item": {
+        "name": "Hell's Messenger",
+        "overview": "The Hell's Messenger appears after lighting up the third torch in the Fear the Reaper scroll quest. He uses the awakened version of the Dark fruit and also utilizes Aura. He is easier to beat than Heaven's Guardian mostly due to the attacks being easy to dodge.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Hell Dimension",
         "level": "2200",
         "usesAura": "✔",
-        "weaponType": "Blox Fruit"
+        "weaponType": "Blox Fruit",
+        "sea": "Third Sea"
       },
-      "overview": "The Hell's Messenger appears after lighting up the third torch in the Fear the Reaper scroll quest. He uses the awakened version of the Dark fruit and also utilizes Aura. He is easier to beat than Heaven's Guardian mostly due to the attacks being easy to dodge.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hell's_Messenger"
+      "system": {
+        "slug": "hell-s-messenger",
+        "section": "Items",
+        "sortOrder": 19,
+        "image": "/Blox%20Fruits/Bosses/hell-s-messenger.webp"
+      }
     },
     {
-      "name": "Hydra Leader",
-      "slug": "hydra-leader",
-      "image": "/Blox%20Fruits/Bosses/hydra-leader.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b3/Hydra_Leader.png/revision/latest/scale-to-width-down/268?cb=20250309233906",
-      "fields": {
+      "item": {
+        "name": "Hydra Leader",
+        "overview": "The Hydra Leader wears a black and purple outfit and a purple band around her waist. She has a black mask covering the majority of her face and wear a black conical hat on her head. Her outfit is similar to the Venomous Assailants'.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Hydra Island",
-        "spawnTime": "30 Minutes",
         "level": "1675",
         "usesAura": "✔",
         "weaponType": "Blox Fruit",
+        "sea": "Third Sea",
+        "spawnTime": "30 Minutes",
         "previous": "Venomous Assailant"
       },
-      "overview": "The Hydra Leader wears a black and purple outfit and a purple band around her waist. She has a black mask covering the majority of her face and wear a black conical hat on her head. Her outfit is similar to the Venomous Assailants'.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hydra_Leader"
+      "system": {
+        "slug": "hydra-leader",
+        "section": "Items",
+        "sortOrder": 20,
+        "image": "/Blox%20Fruits/Bosses/hydra-leader.webp"
+      }
     },
     {
-      "name": "Ice Admiral",
-      "slug": "ice-admiral",
-      "image": "/Blox%20Fruits/Bosses/ice-admiral.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a0/IceAdmiral.png/revision/latest/scale-to-width-down/268?cb=20241123182414",
-      "fields": {
+      "item": {
+        "name": "Ice Admiral",
+        "overview": "The Ice Admiral wears a white suit vest, and white pants, along with a red dress shirt underneath. He also has a green bowtie, black shoes, combed hair, and bushy eyebrows. He wears the marine version of the Coat, which hangs off his back, and has visible muscles on his legs and arms.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Frozen Village",
-        "spawnTime": "1 minute",
         "level": "700",
         "usesAura": "✘",
         "weaponType": "Blox Fruit",
+        "sea": "First Sea",
+        "spawnTime": "1 minute",
         "previous": "Cyborg"
       },
-      "overview": "The Ice Admiral wears a white suit vest, and white pants, along with a red dress shirt underneath. He also has a green bowtie, black shoes, combed hair, and bushy eyebrows. He wears the marine version of the Coat, which hangs off his back, and has visible muscles on his legs and arms.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice_Admiral"
+      "system": {
+        "slug": "ice-admiral",
+        "section": "Items",
+        "sortOrder": 21,
+        "image": "/Blox%20Fruits/Bosses/ice-admiral.webp"
+      }
     },
     {
-      "name": "Island Empress",
-      "slug": "island-empress",
-      "image": "/Blox%20Fruits/Bosses/island-empress.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fb/Island_Empress.png/revision/latest/scale-to-width-down/268?cb=20241129231342",
-      "fields": {
+      "item": {
+        "name": "Island Empress",
+        "overview": "The Island Empress spawned every 25 minutes. She was located in front of the palace at the Hydra Island in the Third Sea.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Hydra Island",
-        "spawnTime": "25 Minutes",
         "level": "1675",
         "usesAura": "✔",
         "weaponType": "Blox Fruit",
+        "sea": "Third Sea",
+        "spawnTime": "25 Minutes",
         "previous": "Giant Islander"
       },
-      "overview": "The Island Empress spawned every 25 minutes. She was located in front of the palace at the Hydra Island in the Third Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Island_Empress"
+      "system": {
+        "slug": "island-empress",
+        "section": "Items",
+        "sortOrder": 22,
+        "image": "/Blox%20Fruits/Bosses/island-empress.webp"
+      }
     },
     {
-      "name": "Jeremy",
-      "slug": "jeremy",
-      "image": "/Blox%20Fruits/Bosses/jeremy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c6/Jeremy.png/revision/latest/scale-to-width-down/268?cb=20241123201124",
-      "fields": {
+      "item": {
+        "name": "Jeremy",
+        "overview": "Jeremy wears a pink T-shirt with white pants with black shoes and a black ribbon on his pants with yellow hair and sunglasses that cover his eyes.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Kingdom of Rose",
-        "spawnTime": "15 Minutes",
         "level": "850",
         "usesAura": "✘",
         "weaponType": "Blox Fruit",
+        "sea": "Second Sea",
+        "spawnTime": "15 Minutes",
         "previous": "Factory Staff"
       },
-      "overview": "Jeremy wears a pink T-shirt with white pants with black shoes and a black ribbon on his pants with yellow hair and sunglasses that cover his eyes.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Jeremy"
+      "system": {
+        "slug": "jeremy",
+        "section": "Items",
+        "sortOrder": 23,
+        "image": "/Blox%20Fruits/Bosses/jeremy.webp"
+      }
     },
     {
-      "name": "Kilo Admiral",
-      "slug": "kilo-admiral",
-      "image": "/Blox%20Fruits/Bosses/kilo-admiral.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4e/Kilo_Admiral.png/revision/latest/scale-to-width-down/268?cb=20241130142627",
-      "fields": {
+      "item": {
+        "name": "Kilo Admiral",
+        "overview": "The Kilo Admiral wears green clothes with watermelon images, green bracelets, dark green shoes, a green helmet covering brown hair, a green umbrella on her head, and the Lei on her neck. She uses the Winky face.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Great Tree",
-        "spawnTime": "30 Minutes",
         "level": "1750",
         "usesAura": "✘",
         "weaponType": "Blox Fruit",
+        "sea": "Third Sea",
+        "spawnTime": "30 Minutes",
         "previous": "Marine Rear Admiral"
       },
-      "overview": "The Kilo Admiral wears green clothes with watermelon images, green bracelets, dark green shoes, a green helmet covering brown hair, a green umbrella on her head, and the Lei on her neck. She uses the Winky face.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kilo_Admiral"
+      "system": {
+        "slug": "kilo-admiral",
+        "section": "Items",
+        "sortOrder": 24,
+        "image": "/Blox%20Fruits/Bosses/kilo-admiral.webp"
+      }
     },
     {
-      "name": "Kitsune Lord",
-      "slug": "kitsune-lord",
-      "image": "/Blox%20Fruits/Bosses/kitsune-lord.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/92/Kitsune_Lord.png/revision/latest/scale-to-width-down/268?cb=20260128114749",
-      "fields": {
+      "item": {
+        "name": "Kitsune Lord",
+        "overview": "The Kitsune Lord is location on the 10th floor of a dungeon. He is the second boss the player faces at any difficulty.",
         "type": "Boss",
         "location": "Dungeon",
         "level": "3500",
         "weaponType": "Blox Fruit"
       },
-      "overview": "The Kitsune Lord is location on the 10th floor of a dungeon. He is the second boss the player faces at any difficulty.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kitsune_Lord"
+      "system": {
+        "slug": "kitsune-lord",
+        "section": "Items",
+        "sortOrder": 25,
+        "image": "/Blox%20Fruits/Bosses/kitsune-lord.webp"
+      }
     },
     {
-      "name": "Longma",
-      "slug": "longma",
-      "image": "/Blox%20Fruits/Bosses/longma.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ea/Longma.png/revision/latest/scale-to-width-down/268?cb=20241020081116",
-      "fields": {
+      "item": {
+        "name": "Longma",
+        "overview": "Longma is located at the Floating Turtle, behind a door near the Previous Hero. This boss is only accessible after completing the Tushita Puzzle in the Third Sea.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Floating Turtle",
-        "spawnTime": "30 Minutes",
         "level": "2000",
         "usesAura": "✘",
-        "weaponType": "Sword"
+        "weaponType": "Sword",
+        "sea": "Third Sea",
+        "spawnTime": "30 Minutes"
       },
-      "overview": "Longma is located at the Floating Turtle, behind a door near the Previous Hero. This boss is only accessible after completing the Tushita Puzzle in the Third Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Longma"
+      "system": {
+        "slug": "longma",
+        "section": "Items",
+        "sortOrder": 26,
+        "image": "/Blox%20Fruits/Bosses/longma.webp"
+      }
     },
     {
-      "name": "Magma Admiral",
-      "slug": "magma-admiral",
-      "image": "/Blox%20Fruits/Bosses/magma-admiral.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/bd/Marineadmiralmagma.png/revision/latest/scale-to-width-down/268?cb=20241123182504",
-      "fields": {
+      "item": {
+        "name": "Magma Admiral",
+        "overview": "The Magma Admiral stands with resolve, wearing a white long coat that drapes from his torso to his lower leg (not be confused with the coat on his back). He is seen with a deep blue shirt that is similar to a marine uniform, and simple black pants. His headwear includes a pale white cap that says \"MARINE\", and he has a distinct white coat that hangs on his back like a cape.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Magma Village",
-        "spawnTime": "10 Minutes",
         "level": "350",
         "usesAura": "✘",
         "weaponType": "Blox Fruit",
+        "sea": "First Sea",
+        "spawnTime": "10 Minutes",
         "previous": "Military Spy"
       },
-      "overview": "The Magma Admiral stands with resolve, wearing a white long coat that drapes from his torso to his lower leg (not be confused with the coat on his back). He is seen with a deep blue shirt that is similar to a marine uniform, and simple black pants. His headwear includes a pale white cap that says \"MARINE\", and he has a distinct white coat that hangs on his back like a cape.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Magma_Admiral"
+      "system": {
+        "slug": "magma-admiral",
+        "section": "Items",
+        "sortOrder": 27,
+        "image": "/Blox%20Fruits/Bosses/magma-admiral.webp"
+      }
     },
     {
-      "name": "Mob Leader",
-      "slug": "mob-leader",
-      "image": "/Blox%20Fruits/Bosses/mob-leader.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/40/Mob_Leader.png/revision/latest/scale-to-width-down/268?cb=20241123182158",
-      "fields": {
+      "item": {
+        "name": "Mob Leader",
+        "overview": "The Mob Leader wears a black and gray shirt and pants with black hair, he uses the face \"Hmmm\".",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Jean-Luc Island",
-        "spawnTime": "1 Minute",
         "level": "120",
         "usesAura": "✘",
-        "weaponType": "Sword"
+        "weaponType": "Sword",
+        "sea": "First Sea",
+        "spawnTime": "1 Minute"
       },
-      "overview": "The Mob Leader wears a black and gray shirt and pants with black hair, he uses the face \"Hmmm\".",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mob_Leader"
+      "system": {
+        "slug": "mob-leader",
+        "section": "Items",
+        "sortOrder": 28,
+        "image": "/Blox%20Fruits/Bosses/mob-leader.webp"
+      }
     },
     {
-      "name": "Orbitus",
-      "slug": "orbitus",
-      "image": "/Blox%20Fruits/Bosses/orbitus.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/80/OrbitusGrav.jpg/revision/latest?cb=20260208071031",
-      "fields": {
+      "item": {
+        "name": "Orbitus",
+        "overview": "Orbitus can be found at the Green Zone island in Second Sea. To find him, the player can walk straight and then to the right from the Marine Quest Giver.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Green Zone",
-        "spawnTime": "15 Minutes",
         "level": "925",
         "usesAura": "✘",
         "weaponType": "Sword/Blox Fruit",
+        "sea": "Second Sea",
+        "spawnTime": "15 Minutes",
         "previous": "Marine Captain"
       },
-      "overview": "Orbitus can be found at the Green Zone island in Second Sea. To find him, the player can walk straight and then to the right from the Marine Quest Giver.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Orbitus"
+      "system": {
+        "slug": "orbitus",
+        "section": "Items",
+        "sortOrder": 29,
+        "image": "/Blox%20Fruits/Bosses/orbitus.webp"
+      }
     },
     {
-      "name": "Red Legionnaire",
-      "slug": "red-legionnaire",
-      "image": "/Blox%20Fruits/Bosses/red-legionnaire.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/ca/Oni_Soldier.png/revision/latest/scale-to-width-down/268?cb=20250901190739",
-      "fields": {
+      "item": {
+        "name": "Red Legionnaire",
+        "overview": "The Red Legionnaires arrive during a raid upon the Spirit Tree of the Celestial Domain.",
         "type": "Boss",
-        "sea": "First SeaSecond SeaThird Sea",
         "location": "Celestial Domain",
         "level": "3000",
         "usesAura": "✘",
-        "weaponType": "Blox Fruit"
+        "weaponType": "Blox Fruit",
+        "sea": "First SeaSecond SeaThird Sea"
       },
-      "overview": "The Red Legionnaires arrive during a raid upon the Spirit Tree of the Celestial Domain.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Red_Legionnaire"
+      "system": {
+        "slug": "red-legionnaire",
+        "section": "Items",
+        "sortOrder": 30,
+        "image": "/Blox%20Fruits/Bosses/red-legionnaire.webp"
+      }
     },
     {
-      "name": "Rip indra",
-      "slug": "rip-indra",
-      "image": "/Blox%20Fruits/Bosses/rip-indra.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e2/SecondSea_Indra_2.gif/revision/latest/scale-to-width-down/268?cb=20260120103944",
-      "fields": {
+      "item": {
+        "name": "Rip indra",
+        "overview": "rip_indra takes the appearance of the admin rip_indra's old avatar.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Indra Island",
-        "spawnTime": "20 seconds",
         "level": "1500",
         "usesAura": "✘",
         "weaponType": "Sword",
+        "sea": "Second Sea",
+        "spawnTime": "20 seconds",
         "previous": "Tide Keeper"
       },
-      "overview": "rip_indra takes the appearance of the admin rip_indra's old avatar.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rip_indra"
+      "system": {
+        "slug": "rip-indra",
+        "section": "Items",
+        "sortOrder": 31,
+        "image": "/Blox%20Fruits/Bosses/rip-indra.webp"
+      }
     },
     {
-      "name": "Rip Legionnaire",
-      "slug": "rip-legionnaire",
-      "image": "/Blox%20Fruits/Bosses/rip-legionnaire.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e7/Rip_Legionnaire.png/revision/latest/scale-to-width-down/268?cb=20250929024907",
-      "fields": {
+      "item": {
+        "name": "Rip Legionnaire",
+        "overview": "The Rip Legionnaires arrive during a raid upon the Spirit Tree of the Oni Realm",
         "type": "Boss",
-        "sea": "First SeaSecond SeaThird Sea",
         "location": "Oni Realm",
         "level": "3000",
         "usesAura": "✘",
-        "weaponType": "Blox Fruit"
+        "weaponType": "Blox Fruit",
+        "sea": "First SeaSecond SeaThird Sea"
       },
-      "overview": "The Rip Legionnaires arrive during a raid upon the Spirit Tree of the Oni Realm",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rip_Legionnaire"
+      "system": {
+        "slug": "rip-legionnaire",
+        "section": "Items",
+        "sortOrder": 32,
+        "image": "/Blox%20Fruits/Bosses/rip-legionnaire.webp"
+      }
     },
     {
-      "name": "Rip return",
-      "slug": "rip-return",
-      "image": "/Blox%20Fruits/Bosses/rip-return.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/71/Rip_Return.png/revision/latest?cb=20251031213019",
-      "fields": {
+      "item": {
+        "name": "Rip return",
+        "overview": "rip_return has white legs and torso, with blue arms, and a necklace. He wears a silver pumpkin on his head with protruding horns. He also has a pair of angel wings. The model is a representation of the developer, rip_return's Roblox avatar.",
         "type": "Boss",
-        "sea": "First SeaSecond SeaThird Sea",
         "level": "2800",
         "usesAura": "✔",
-        "weaponType": "Melee"
+        "weaponType": "Melee",
+        "sea": "First SeaSecond SeaThird Sea"
       },
-      "overview": "rip_return has white legs and torso, with blue arms, and a necklace. He wears a silver pumpkin on his head with protruding horns. He also has a pair of angel wings. The model is a representation of the developer, rip_return's Roblox avatar.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rip_return"
+      "system": {
+        "slug": "rip-return",
+        "section": "Items",
+        "sortOrder": 33,
+        "image": "/Blox%20Fruits/Bosses/rip-return.webp"
+      }
     },
     {
-      "name": "Saber Expert",
-      "slug": "saber-expert",
-      "image": "/Blox%20Fruits/Bosses/saber-expert.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a8/Saber_Expert.png/revision/latest/scale-to-width-down/268?cb=20250202132706",
-      "fields": {
+      "item": {
+        "name": "Saber Expert",
+        "overview": "The Saber Expert has red hair, wears a white vest-type shirt and a black cape and has brown to black pants. He has a short beard and a small moustache and he bears a double scar beneath his left eye.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Jungle",
-        "spawnTime": "20 Minutes",
         "level": "200",
         "usesAura": "✘",
-        "weaponType": "Sword"
+        "weaponType": "Sword",
+        "sea": "First Sea",
+        "spawnTime": "20 Minutes"
       },
-      "overview": "The Saber Expert has red hair, wears a white vest-type shirt and a black cape and has brown to black pants. He has a short beard and a small moustache and he bears a double scar beneath his left eye.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Saber_Expert"
+      "system": {
+        "slug": "saber-expert",
+        "section": "Items",
+        "sortOrder": 34,
+        "image": "/Blox%20Fruits/Bosses/saber-expert.webp"
+      }
     },
     {
-      "name": "Smoke Admiral",
-      "slug": "smoke-admiral",
-      "image": "/Blox%20Fruits/Bosses/smoke-admiral.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/38/SmokeAdmiral.png/revision/latest/scale-to-width-down/268?cb=20260104093749",
-      "fields": {
+      "item": {
+        "name": "Smoke Admiral",
+        "overview": "The Smoke Admiral has blue hair, wears a blue shirt with black pants and brown shoes with the Coat on his back.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Hot and Cold",
-        "spawnTime": "20 Minutes",
         "level": "1150",
         "usesAura": "✘",
         "weaponType": "Sword/Blox Fruit",
+        "sea": "Second Sea",
+        "spawnTime": "20 Minutes",
         "previous": "Horned Warrior"
       },
-      "overview": "The Smoke Admiral has blue hair, wears a blue shirt with black pants and brown shoes with the Coat on his back.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Smoke_Admiral"
+      "system": {
+        "slug": "smoke-admiral",
+        "section": "Items",
+        "sortOrder": 35,
+        "image": "/Blox%20Fruits/Bosses/smoke-admiral.webp"
+      }
     },
     {
-      "name": "Stone",
-      "slug": "stone",
-      "image": "/Blox%20Fruits/Bosses/stone.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d4/Stone.png/revision/latest/scale-to-width-down/268?cb=20241129231515",
-      "fields": {
+      "item": {
+        "name": "Stone",
+        "overview": "Stone wears a white shirt with a pink belt and bright blue pants with brown shoes and blue hair. He also uses the Mildly Irritated Face.",
         "type": "Boss",
-        "sea": "Third Sea",
         "location": "Port Town",
-        "spawnTime": "20 Minutes",
         "level": "1550",
         "usesAura": "✔",
         "weaponType": "Blox Fruit",
+        "sea": "Third Sea",
+        "spawnTime": "20 Minutes",
         "previous": "Pistol Billionaire"
       },
-      "overview": "Stone wears a white shirt with a pink belt and bright blue pants with brown shoes and blue hair. He also uses the Mildly Irritated Face.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Stone"
+      "system": {
+        "slug": "stone",
+        "section": "Items",
+        "sortOrder": 36,
+        "image": "/Blox%20Fruits/Bosses/stone.webp"
+      }
     },
     {
-      "name": "Swan",
-      "slug": "swan",
-      "image": "/Blox%20Fruits/Bosses/swan.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/87/Swan.png/revision/latest/scale-to-width-down/268?cb=20241123182218",
-      "fields": {
+      "item": {
+        "name": "Swan",
+        "overview": "The Swan wears a uniquely styled black and red shirt with crimson red sunglasses. He has black hair, and wears the Pink Coat on his back.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Prison",
-        "spawnTime": "30 Minutes",
         "level": "240",
         "usesAura": "✘",
         "weaponType": "Blox Fruit",
+        "sea": "First Sea",
+        "spawnTime": "30 Minutes",
         "previous": "Chief Warden"
       },
-      "overview": "The Swan wears a uniquely styled black and red shirt with crimson red sunglasses. He has black hair, and wears the Pink Coat on his back.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Swan"
+      "system": {
+        "slug": "swan",
+        "section": "Items",
+        "sortOrder": 37,
+        "image": "/Blox%20Fruits/Bosses/swan.webp"
+      }
     },
     {
-      "name": "The Gorilla King",
-      "slug": "the-gorilla-king",
-      "image": "/Blox%20Fruits/Bosses/the-gorilla-king.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ed/Gorillaking.png/revision/latest?cb=20240201110919",
-      "fields": {
+      "item": {
+        "name": "The Gorilla King",
+        "overview": "The Gorilla King resembles Gorillas, but bigger. There are certain distinguishing features, such as the crown on its head, its different skin color and the Aura that covers its hands.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Jungle",
-        "spawnTime": "2 Minutes",
         "level": "25",
         "usesAura": "✔",
         "weaponType": "Melee",
+        "sea": "First Sea",
+        "spawnTime": "2 Minutes",
         "previous": "Gorilla"
       },
-      "overview": "The Gorilla King resembles Gorillas, but bigger. There are certain distinguishing features, such as the crown on its head, its different skin color and the Aura that covers its hands.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/The_Gorilla_King"
+      "system": {
+        "slug": "the-gorilla-king",
+        "section": "Items",
+        "sortOrder": 38,
+        "image": "/Blox%20Fruits/Bosses/the-gorilla-king.webp"
+      }
     },
     {
-      "name": "The Saw",
-      "slug": "the-saw",
-      "image": "/Blox%20Fruits/Bosses/the-saw.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/dc/The_Saw.png/revision/latest/scale-to-width-down/268?cb=20250202171714",
-      "fields": {
+      "item": {
+        "name": "The Saw",
+        "overview": "\"The Saw has spawned in the game! You have 15 minutes to kill him and possibly get a rare reward!\"",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Middle Town",
-        "spawnTime": "1 Hour and 15 Minutes",
-        "despawnTime": "15 Minutes",
         "level": "100",
         "usesAura": "✘",
-        "weaponType": "Sword"
+        "weaponType": "Sword",
+        "sea": "First Sea",
+        "spawnTime": "1 Hour and 15 Minutes",
+        "despawnTime": "15 Minutes"
       },
-      "overview": "\"The Saw has spawned in the game! You have 15 minutes to kill him and possibly get a rare reward!\"",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/The_Saw"
+      "system": {
+        "slug": "the-saw",
+        "section": "Items",
+        "sortOrder": 39,
+        "image": "/Blox%20Fruits/Bosses/the-saw.webp"
+      }
     },
     {
-      "name": "Thunder God",
-      "slug": "thunder-god",
-      "image": "/Blox%20Fruits/Bosses/thunder-god.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2e/Thunder_God.png/revision/latest/scale-to-width-down/268?cb=20241123182314",
-      "fields": {
+      "item": {
+        "name": "Thunder God",
+        "overview": "The Thunder God wears brown, white, and blue pants with a blue ribbon and has the Tomoe Ring on his back. Despite this, he does not drop the Tomoe Ring.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Upper Skylands",
-        "spawnTime": "10 Minutes",
         "level": "575",
         "usesAura": "✘",
         "weaponType": "Sword/Blox Fruit",
+        "sea": "First Sea",
+        "spawnTime": "10 Minutes",
         "previous": "Royal Soldier"
       },
-      "overview": "The Thunder God wears brown, white, and blue pants with a blue ribbon and has the Tomoe Ring on his back. Despite this, he does not drop the Tomoe Ring.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Thunder_God"
+      "system": {
+        "slug": "thunder-god",
+        "section": "Items",
+        "sortOrder": 40,
+        "image": "/Blox%20Fruits/Bosses/thunder-god.webp"
+      }
     },
     {
-      "name": "Tide Keeper",
-      "slug": "tide-keeper",
-      "image": "/Blox%20Fruits/Bosses/tide-keeper.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f3/TideKeeperBoss.jpg/revision/latest/scale-to-width-down/268?cb=20251126084631",
-      "fields": {
+      "item": {
+        "name": "Tide Keeper",
+        "overview": "The Tide Keeper wears green pants with a green ribbon, golden skeletons on his shoulders, yellow shoes with green hair and the Dont Wake Me Up face.",
         "type": "Boss",
-        "sea": "Second Sea",
         "location": "Forgotten Island",
-        "spawnTime": "30 Minutes",
         "level": "1475",
         "usesAura": "✘",
         "weaponType": "Sword",
+        "sea": "Second Sea",
+        "spawnTime": "30 Minutes",
         "previous": "Water Fighter"
       },
-      "overview": "The Tide Keeper wears green pants with a green ribbon, golden skeletons on his shoulders, yellow shoes with green hair and the Dont Wake Me Up face.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tide_Keeper"
+      "system": {
+        "slug": "tide-keeper",
+        "section": "Items",
+        "sortOrder": 41,
+        "image": "/Blox%20Fruits/Bosses/tide-keeper.webp"
+      }
     },
     {
-      "name": "Vice Admiral",
-      "slug": "vice-admiral",
-      "image": "/Blox%20Fruits/Bosses/vice-admiral.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/54/Vice_Admiral.png/revision/latest/scale-to-width-down/268?cb=20250101190144",
-      "fields": {
+      "item": {
+        "name": "Vice Admiral",
+        "overview": "The Vice Admiral wears a white and red shirt which is open, black and white pants with red shoes, along with the Coat on his back. He has dark toned blue hair, and wields the Triple Katana upon encounter.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Marine Fortress",
-        "spawnTime": "5 Minutes",
         "level": "130",
         "usesAura": "✘",
         "weaponType": "Sword",
+        "sea": "First Sea",
+        "spawnTime": "5 Minutes",
         "previous": "Chief Petty Officer"
       },
-      "overview": "The Vice Admiral wears a white and red shirt which is open, black and white pants with red shoes, along with the Coat on his back. He has dark toned blue hair, and wields the Triple Katana upon encounter.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Vice_Admiral"
+      "system": {
+        "slug": "vice-admiral",
+        "section": "Items",
+        "sortOrder": 42,
+        "image": "/Blox%20Fruits/Bosses/vice-admiral.webp"
+      }
     },
     {
-      "name": "Warden",
-      "slug": "warden",
-      "image": "/Blox%20Fruits/Bosses/warden.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a5/Warden.png/revision/latest/scale-to-width-down/268?cb=20240416123503",
-      "fields": {
+      "item": {
+        "name": "Warden",
+        "overview": "The Warden sports a black bodysuit that covers his chest and legs, along with several metal plates and black bands on his torso, ankle and shoulders. He has well-defined muscles on his arms and wears a black helmet with blue horns on it.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Prison",
-        "spawnTime": "4 Minutes",
         "level": "220",
         "usesAura": "✘",
         "weaponType": "Sword",
+        "sea": "First Sea",
+        "spawnTime": "4 Minutes",
         "previous": "Dangerous Prisoner"
       },
-      "overview": "The Warden sports a black bodysuit that covers his chest and legs, along with several metal plates and black bands on his torso, ankle and shoulders. He has well-defined muscles on his arms and wears a black helmet with blue horns on it.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Warden"
+      "system": {
+        "slug": "warden",
+        "section": "Items",
+        "sortOrder": 43,
+        "image": "/Blox%20Fruits/Bosses/warden.webp"
+      }
     },
     {
-      "name": "Wysper",
-      "slug": "wysper",
-      "image": "/Blox%20Fruits/Bosses/wysper.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6b/WysperBoss.png/revision/latest/scale-to-width-down/268?cb=20241123182540",
-      "fields": {
+      "item": {
+        "name": "Wysper",
+        "overview": "Wysper wears a grey neck accessory with red sleeves as well as pink shorts with white ends, along with brown hair shaved on the sides. He uses the Furious George Face.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Upper Skylands",
-        "spawnTime": "10 Minutes",
         "level": "500",
         "usesAura": "✘",
         "weaponType": "Gun",
+        "sea": "First Sea",
+        "spawnTime": "10 Minutes",
         "previous": "Shanda"
       },
-      "overview": "Wysper wears a grey neck accessory with red sleeves as well as pink shorts with white ends, along with brown hair shaved on the sides. He uses the Furious George Face.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Wysper"
+      "system": {
+        "slug": "wysper",
+        "section": "Items",
+        "sortOrder": 44,
+        "image": "/Blox%20Fruits/Bosses/wysper.webp"
+      }
     },
     {
-      "name": "Yeti (Boss)",
-      "slug": "yeti-boss",
-      "image": "/Blox%20Fruits/Bosses/yeti-boss.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8f/Yeti_%28Boss%29.png/revision/latest/scale-to-width-down/268?cb=20250413204520",
-      "fields": {
+      "item": {
+        "name": "Yeti (Boss)",
+        "overview": "The Yeti is a reskin of The Gorilla King boss. However, it does not have the same six-pack of the latter, and uses a different head model. It is covered from head to toe in whitish-blue fur, with flatter, ice-like surfaces on its hands and feet. On its face is a large, flat nose, white eyes with red tints and a large, open mouth with large and sharp teeth. It has fluffy hair and a long, mane-like beard appearing on both his head and neck.",
         "type": "Boss",
-        "sea": "First Sea",
         "location": "Frozen Village",
-        "spawnTime": "3 Minutes",
         "level": "110",
         "usesAura": "✘",
         "weaponType": "Melee",
+        "sea": "First Sea",
+        "spawnTime": "3 Minutes",
         "previous": "Snowman"
       },
-      "overview": "The Yeti is a reskin of The Gorilla King boss. However, it does not have the same six-pack of the latter, and uses a different head model. It is covered from head to toe in whitish-blue fur, with flatter, ice-like surfaces on its hands and feet. On its face is a large, flat nose, white eyes with red tints and a large, open mouth with large and sharp teeth. It has fluffy hair and a long, mane-like beard appearing on both his head and neck.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Yeti_(Boss)"
+      "system": {
+        "slug": "yeti-boss",
+        "section": "Items",
+        "sortOrder": 45,
+        "image": "/Blox%20Fruits/Bosses/yeti-boss.webp"
+      }
     },
     {
-      "name": "Zero",
-      "slug": "zero",
-      "image": "/Blox%20Fruits/Bosses/zero.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e2/Trailer_Zero.png/revision/latest/scale-to-width-down/267?cb=20251231100016",
-      "fields": {
+      "item": {
+        "name": "Zero",
+        "overview": "Zero is located on the 20th floor of a dungeon, specifically on Hard mode. He is typically the last boss you fight before the dungeon ends and you can claim your rewards (unless you're doing Challenge difficulty).",
         "type": "Boss",
         "location": "Dungeon",
         "level": "5000",
         "weaponType": "Blox Fruit"
       },
-      "overview": "Zero is located on the 20th floor of a dungeon, specifically on Hard mode. He is typically the last boss you fight before the dungeon ends and you can claim your rewards (unless you're doing Challenge difficulty).",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Zero"
+      "system": {
+        "slug": "zero",
+        "section": "Items",
+        "sortOrder": 46,
+        "image": "/Blox%20Fruits/Bosses/zero.webp"
+      }
     }
   ]
 }

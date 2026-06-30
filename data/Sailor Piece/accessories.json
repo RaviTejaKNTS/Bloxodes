@@ -1,17 +1,12 @@
 {
   "meta": {
-    "title": "Sailor Piece accessories data",
-    "updatedAt": "2026-05-20",
-    "sources": [
-      {
-        "label": "Sailor Piece Wiki - accessories",
-        "url": "https://sailorpiece.org/wiki/accessories/",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Sailor Piece",
+    "gameSlug": "sailor-piece",
+    "collection": "accessories",
+    "route": "/wiki/sailor-piece/accessories",
+    "catalogCode": "sailor-piece-accessories",
+    "itemFields": [
       "tier",
       "rarity",
       "defense",
@@ -19,1772 +14,543 @@
       "damageReduction",
       "sourceRoute",
       "dropOrCost",
-      "bestFor"
-    ]
+      "bestFor",
+      "description",
+      "stats"
+    ],
+    "columns": [
+      "tier",
+      "rarity",
+      "defense",
+      "damage",
+      "damageReduction",
+      "sourceRoute",
+      "dropOrCost",
+      "bestFor",
+      "description",
+      "stats"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Mythical",
+        "Legendary",
+        "Items"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "tier",
+        "rarity",
+        "defense",
+        "damage",
+        "damageReduction",
+        "sourceRoute"
+      ],
+      "tableFields": [
+        "tier",
+        "rarity",
+        "defense",
+        "damage",
+        "damageReduction",
+        "sourceRoute",
+        "dropOrCost",
+        "bestFor"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Atomic Outfit",
-      "slug": "atomic-outfit",
-      "image": null,
-      "tier": "S+",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "A top-tier endgame accessory added in the Massive Update (March 25, 2026), dropped by the Atomic Boss (Cid) on Lawless Island. Atomic Outfit provides +82% DMG, +105% DEF, and +15% Damage Reduction at E0, scaling to +122% DMG, +155% DEF, +35% DR at max enchant E10. Competes directly with Manipulator Outfit for best-in-slot status. Drop rate: 1.23% (summon Atomic Boss with Abyss Sigils). Source: Beebom + web guides (2026-03-27).",
-      "stats": {
+      "item": {
+        "name": "Atomic Outfit",
+        "tier": "S+",
         "defense": "+105%",
         "damage": "+82%",
-        "damagereduction": "+15",
-        "massive_update": "lawless-island",
-        "damage_reduction": "15%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+105%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+82%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "15%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "15%",
+        "sourceRoute": "Atomic Boss on Lawless Island",
+        "dropOrCost": "1.23% drop",
+        "bestFor": "Endgame damage and defense",
+        "description": "A top-tier endgame accessory added in the Massive Update (March 25, 2026), dropped by the Atomic Boss (Cid) on Lawless Island. Atomic Outfit provides +82% DMG, +105% DEF, and +15% Damage Reduction at E0, scaling to +122% DMG, +155% DEF, +35% DR at max enchant E10. Competes directly with Manipulator Outfit for best-in-slot status. Drop rate: 1.23% (summon Atomic Boss with Abyss Sigils). Source: Beebom + web guides (2026-03-27).",
+        "stats": {
+          "defense": "+105%",
+          "damage": "+82%",
+          "damagereduction": "+15",
+          "massive_update": "lawless-island",
+          "damage_reduction": "15%"
         }
-      ],
-      "updatedAt": "2026-03-27",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/atomic-outfit/",
-      "sourceImageUrl": null,
-      "defense": "+105%",
-      "damage": "+82%",
-      "damageReduction": "15%",
-      "sourceRoute": "Atomic Boss on Lawless Island",
-      "dropOrCost": "1.23% drop",
-      "bestFor": "Endgame damage and defense"
+      },
+      "system": {
+        "slug": "atomic-outfit",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Abyssal Outfit",
-      "slug": "abyssal-outfit",
-      "image": null,
-      "tier": "S+",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "A powerful endgame accessory added in the Massive Update (March 25, 2026), purchased from the Tower Island shop using Tower Tokens. Abyssal Outfit provides +80% DMG and +105% DEF — one of the highest Defense bonuses in the game. Requires 4,000 Tower Tokens earned from the Infinite Tower. Source: Beebom (2026-03-26) [provisional].",
-      "stats": {
+      "item": {
+        "name": "Abyssal Outfit",
+        "tier": "S+",
         "defense": "+105%",
         "damage": "+80%",
-        "massive_update": "tower-island",
-        "damage_reduction": "--"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+105%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+80%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "--"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "--",
+        "sourceRoute": "Tower Island shop",
+        "dropOrCost": "4,000 Tower Tokens",
+        "bestFor": "Infinite Tower damage builds",
+        "description": "A powerful endgame accessory added in the Massive Update (March 25, 2026), purchased from the Tower Island shop using Tower Tokens. Abyssal Outfit provides +80% DMG and +105% DEF — one of the highest Defense bonuses in the game. Requires 4,000 Tower Tokens earned from the Infinite Tower. Source: Beebom (2026-03-26) [provisional].",
+        "stats": {
+          "defense": "+105%",
+          "damage": "+80%",
+          "massive_update": "tower-island",
+          "damage_reduction": "--"
         }
-      ],
-      "updatedAt": "2026-03-26",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/abyssal-outfit/",
-      "sourceImageUrl": null,
-      "defense": "+105%",
-      "damage": "+80%",
-      "damageReduction": "--",
-      "sourceRoute": "Tower Island shop",
-      "dropOrCost": "4,000 Tower Tokens",
-      "bestFor": "Infinite Tower damage builds"
+      },
+      "system": {
+        "slug": "abyssal-outfit",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Manipulator Outfit",
-      "slug": "manipulator-outfit",
-      "image": null,
-      "tier": "S+",
-      "rarity": "Mythical",
-      "type": null,
-      "category": null,
-      "description": "The best overall accessory in the game. Manipulator Outfit provides 100% Defense, 72% DMG boost, and 15% Damage Reduction — making it the clear best-in-slot for both PvP and PvE endgame builds.",
-      "stats": {
+      "item": {
+        "name": "Manipulator Outfit",
+        "tier": "S+",
+        "rarity": "Mythical",
         "defense": "+100%",
         "damage": "+72%",
-        "damagereduction": "+15",
-        "mythical": "top-tier",
-        "damage_reduction": "15%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+100%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+72%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "15%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "15%",
+        "sourceRoute": "Late-game boss route",
+        "bestFor": "Best-in-slot all-round accessory",
+        "description": "The best overall accessory in the game. Manipulator Outfit provides 100% Defense, 72% DMG boost, and 15% Damage Reduction — making it the clear best-in-slot for both PvP and PvE endgame builds.",
+        "stats": {
+          "defense": "+100%",
+          "damage": "+72%",
+          "damagereduction": "+15",
+          "mythical": "top-tier",
+          "damage_reduction": "15%"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/manipulator-outfit/",
-      "sourceImageUrl": null,
-      "defense": "+100%",
-      "damage": "+72%",
-      "damageReduction": "15%",
-      "sourceRoute": "Late-game boss route",
-      "dropOrCost": null,
-      "bestFor": "Best-in-slot all-round accessory"
+      },
+      "system": {
+        "slug": "manipulator-outfit",
+        "section": "Mythical",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Maiden Outfit",
-      "slug": "maiden-outfit",
-      "image": null,
-      "tier": "S+",
-      "rarity": "Mythical",
-      "type": null,
-      "category": null,
-      "description": "Second-best accessory overall. Maiden Outfit grants 95% Defense, 70% DMG, and 15% Damage Reduction. Nearly as powerful as Manipulator Outfit and highly sought-after.",
-      "stats": {
+      "item": {
+        "name": "Maiden Outfit",
+        "tier": "S+",
+        "rarity": "Mythical",
         "defense": "+95%",
         "damage": "+70%",
-        "damagereduction": "+15",
-        "mythical": "top-tier",
-        "damage_reduction": "15%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+95%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+70%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "15%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "15%",
+        "sourceRoute": "Blessed Maiden boss route",
+        "bestFor": "High-end boss farming and PvP",
+        "description": "Second-best accessory overall. Maiden Outfit grants 95% Defense, 70% DMG, and 15% Damage Reduction. Nearly as powerful as Manipulator Outfit and highly sought-after.",
+        "stats": {
+          "defense": "+95%",
+          "damage": "+70%",
+          "damagereduction": "+15",
+          "mythical": "top-tier",
+          "damage_reduction": "15%"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/maiden-outfit/",
-      "sourceImageUrl": null,
-      "defense": "+95%",
-      "damage": "+70%",
-      "damageReduction": "15%",
-      "sourceRoute": "Blessed Maiden boss route",
-      "dropOrCost": null,
-      "bestFor": "High-end boss farming and PvP"
+      },
+      "system": {
+        "slug": "maiden-outfit",
+        "section": "Mythical",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Demon Wing",
-      "slug": "demon-wing",
-      "image": null,
-      "tier": "S+",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "The strongest accessory in the Anti-Magic Update (April 26, 2026), obtainable from Crystal Defense Boss waves on Punch Island or via Robux. Demon Wing provides +125% DEF, +102% DMG, and 15% Damage Reduction at E0, scaling to +175% DEF, +142% DMG, and 35% Damage Reduction at E10. Best-in-slot accessory post-Anti-Magic Update, replacing Icen Queen Outfit as the top endgame pick. Drop rate: ~0.2% from Crystal Defense Bosses. Also available bundled with the Anti-Magic Sword for 1,299 Robux. Source: Beebom + Sportskeeda + PGG + Gamezebo + Kongbakpao (5-source, 2026-04-27/28).",
-      "stats": {
+      "item": {
+        "name": "Demon Wing",
+        "tier": "S+",
         "defense": "+125%",
         "damage": "+102%",
-        "damagereduction": "+15",
-        "anti_magic_update": "crystal-defense",
-        "damage_reduction": "15%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+125%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+102%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "15%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "15%",
+        "sourceRoute": "Crystal Defense on Punch Island or Robux",
+        "dropOrCost": "Crystal Defense route / Robux option",
+        "bestFor": "Anti-Magic endgame builds",
+        "description": "The strongest accessory in the Anti-Magic Update (April 26, 2026), obtainable from Crystal Defense Boss waves on Punch Island or via Robux. Demon Wing provides +125% DEF, +102% DMG, and 15% Damage Reduction at E0, scaling to +175% DEF, +142% DMG, and 35% Damage Reduction at E10. Best-in-slot accessory post-Anti-Magic Update, replacing Icen Queen Outfit as the top endgame pick. Drop rate: ~0.2% from Crystal Defense Bosses. Also available bundled with the Anti-Magic Sword for 1,299 Robux. Source: Beebom + Sportskeeda + PGG + Gamezebo + Kongbakpao (5-source, 2026-04-27/28).",
+        "stats": {
+          "defense": "+125%",
+          "damage": "+102%",
+          "damagereduction": "+15",
+          "anti_magic_update": "crystal-defense",
+          "damage_reduction": "15%"
         }
-      ],
-      "updatedAt": "2026-04-27",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/demon-wing/",
-      "sourceImageUrl": null,
-      "defense": "+125%",
-      "damage": "+102%",
-      "damageReduction": "15%",
-      "sourceRoute": "Crystal Defense on Punch Island or Robux",
-      "dropOrCost": "Crystal Defense route / Robux option",
-      "bestFor": "Anti-Magic endgame builds"
+      },
+      "system": {
+        "slug": "demon-wing",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Clover Outfit",
-      "slug": "clover-outfit",
-      "image": null,
-      "tier": "S+",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "An S+ tier accessory added in the Anti-Magic Update (April 26, 2026), themed after the Black Clover anime. Provides +120% DEF, +100% DMG, and 15% Damage Reduction at E0. Obtainable from Crystal Defense on Punch Island or purchased for 850 Crystal Coins at the Crystal Defense Merchant. Slightly weaker than Demon Wing but easier to obtain via Crystal Coins. Source: Beebom + PGG + Kongbakpao (3-source, 2026-04-28).",
-      "stats": {
+      "item": {
+        "name": "Clover Outfit",
+        "tier": "S+",
         "defense": "+120%",
         "damage": "+100%",
-        "damagereduction": "+15",
-        "anti_magic_update": "crystal-defense",
-        "damage_reduction": "15%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+120%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+100%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "15%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "15%",
+        "sourceRoute": "Crystal Defense on Punch Island or Robux",
+        "dropOrCost": "Crystal Defense route / Robux option",
+        "bestFor": "Anti-Magic endgame builds",
+        "description": "An S+ tier accessory added in the Anti-Magic Update (April 26, 2026), themed after the Black Clover anime. Provides +120% DEF, +100% DMG, and 15% Damage Reduction at E0. Obtainable from Crystal Defense on Punch Island or purchased for 850 Crystal Coins at the Crystal Defense Merchant. Slightly weaker than Demon Wing but easier to obtain via Crystal Coins. Source: Beebom + PGG + Kongbakpao (3-source, 2026-04-28).",
+        "stats": {
+          "defense": "+120%",
+          "damage": "+100%",
+          "damagereduction": "+15",
+          "anti_magic_update": "crystal-defense",
+          "damage_reduction": "15%"
         }
-      ],
-      "updatedAt": "2026-04-28",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/clover-outfit/",
-      "sourceImageUrl": null,
-      "defense": "+120%",
-      "damage": "+100%",
-      "damageReduction": "15%",
-      "sourceRoute": "Crystal Defense on Punch Island or Robux",
-      "dropOrCost": "Crystal Defense route / Robux option",
-      "bestFor": "Anti-Magic endgame builds"
+      },
+      "system": {
+        "slug": "clover-outfit",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Icen Queen Outfit",
-      "slug": "icen-queen-outfit",
-      "image": null,
-      "tier": "S+",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "The best accessory added in the Ice Update (April 8, 2026), dropped by the Frost Boss on Boss Island. Icen Queen Outfit provides strong defensive and damage buffs: +30% DEF, +35% DMG, and 17% Damage Reduction at E0, scaling to +80% DEF, +75% DMG, and 37% Damage Reduction at max enchant E10. Each enchant level adds +5% DEF, +4% DMG, and +2% DMG Reduction. Currently considered the best late-game accessory in the game. Source: Beebom + Pro Game Guides + Kongbakpao (3-source, 2026-04-09). Note: conflicting higher values exist in other sources (see code comments) — pending in-game verification.",
-      "stats": {
+      "item": {
+        "name": "Icen Queen Outfit",
+        "tier": "S+",
         "defense": "+30%",
         "damage": "+35%",
-        "damagereduction": "+17",
-        "ice_update": "boss-island",
-        "damage_reduction": "17%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+30%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+35%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "17%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "17%",
+        "sourceRoute": "Frost Boss on Boss Island",
+        "bestFor": "Ice Update sword and boss builds",
+        "description": "The best accessory added in the Ice Update (April 8, 2026), dropped by the Frost Boss on Boss Island. Icen Queen Outfit provides strong defensive and damage buffs: +30% DEF, +35% DMG, and 17% Damage Reduction at E0, scaling to +80% DEF, +75% DMG, and 37% Damage Reduction at max enchant E10. Each enchant level adds +5% DEF, +4% DMG, and +2% DMG Reduction. Currently considered the best late-game accessory in the game. Source: Beebom + Pro Game Guides + Kongbakpao (3-source, 2026-04-09). Note: conflicting higher values exist in other sources (see code comments) — pending in-game verification.",
+        "stats": {
+          "defense": "+30%",
+          "damage": "+35%",
+          "damagereduction": "+17",
+          "ice_update": "boss-island",
+          "damage_reduction": "17%"
         }
-      ],
-      "updatedAt": "2026-04-09",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/icen-queen-outfit/",
-      "sourceImageUrl": null,
-      "defense": "+30%",
-      "damage": "+35%",
-      "damageReduction": "17%",
-      "sourceRoute": "Frost Boss on Boss Island",
-      "dropOrCost": null,
-      "bestFor": "Ice Update sword and boss builds"
+      },
+      "system": {
+        "slug": "icen-queen-outfit",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Imperial Outfit",
-      "slug": "imperial-outfit",
-      "image": null,
-      "tier": "S",
-      "rarity": "Mythical",
-      "type": null,
-      "category": null,
-      "description": "A Mythical accessory with 90% Defense, 65% DMG, and 15% Damage Reduction. The third-best outfit and a strong endgame option for players who can't yet obtain the top two.",
-      "stats": {
+      "item": {
+        "name": "Imperial Outfit",
+        "tier": "S",
+        "rarity": "Mythical",
         "defense": "+90%",
         "damage": "+65%",
-        "damagereduction": "+15",
-        "mythical": "damage",
-        "damage_reduction": "15%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+90%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+65%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "15%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "15%",
+        "sourceRoute": "Endgame accessory route",
+        "bestFor": "Strong fallback below the top outfits",
+        "description": "A Mythical accessory with 90% Defense, 65% DMG, and 15% Damage Reduction. The third-best outfit and a strong endgame option for players who can't yet obtain the top two.",
+        "stats": {
+          "defense": "+90%",
+          "damage": "+65%",
+          "damagereduction": "+15",
+          "mythical": "damage",
+          "damage_reduction": "15%"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/imperial-outfit/",
-      "sourceImageUrl": null,
-      "defense": "+90%",
-      "damage": "+65%",
-      "damageReduction": "15%",
-      "sourceRoute": "Endgame accessory route",
-      "dropOrCost": null,
-      "bestFor": "Strong fallback below the top outfits"
+      },
+      "system": {
+        "slug": "imperial-outfit",
+        "section": "Mythical",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Monarch Armor",
-      "slug": "monarch-armor",
-      "image": null,
-      "tier": "S",
-      "rarity": "Mythical",
-      "type": null,
-      "category": null,
-      "description": "A powerful Mythical armor piece themed around the Monarch boss. Provides strong defensive and offensive stats, perfect for endgame tank-damage hybrid builds.",
-      "stats": {
+      "item": {
+        "name": "Monarch Armor",
+        "tier": "S",
+        "rarity": "Mythical",
         "defense": "+80%",
         "damage": "+50%",
-        "damagereduction": "+10",
-        "mythical": "defense",
-        "damage_reduction": "10%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+80%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+50%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "10%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "10%",
+        "sourceRoute": "Shadow Monarch route",
+        "bestFor": "Tank-damage hybrid builds",
+        "description": "A powerful Mythical armor piece themed around the Monarch boss. Provides strong defensive and offensive stats, perfect for endgame tank-damage hybrid builds.",
+        "stats": {
+          "defense": "+80%",
+          "damage": "+50%",
+          "damagereduction": "+10",
+          "mythical": "defense",
+          "damage_reduction": "10%"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/monarch-armor/",
-      "sourceImageUrl": null,
-      "defense": "+80%",
-      "damage": "+50%",
-      "damageReduction": "10%",
-      "sourceRoute": "Shadow Monarch route",
-      "dropOrCost": null,
-      "bestFor": "Tank-damage hybrid builds"
+      },
+      "system": {
+        "slug": "monarch-armor",
+        "section": "Mythical",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Anos Outfit",
-      "slug": "anos-outfit",
-      "image": null,
-      "tier": "S",
-      "rarity": "Mythical",
-      "type": null,
-      "category": null,
-      "description": "The outfit of the Anos boss, obtainable from the Anos fight on Academy Island. A high-tier accessory for endgame players with strong all-round stats.",
-      "stats": {
+      "item": {
+        "name": "Anos Outfit",
+        "tier": "S",
+        "rarity": "Mythical",
         "defense": "+85%",
         "damage": "+55%",
-        "damagereduction": "+10",
-        "mythical": "endgame",
-        "damage_reduction": "10%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+85%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+55%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "10%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "10%",
+        "sourceRoute": "Anos boss on Academy Island",
+        "bestFor": "Endgame all-round stats",
+        "description": "The outfit of the Anos boss, obtainable from the Anos fight on Academy Island. A high-tier accessory for endgame players with strong all-round stats.",
+        "stats": {
+          "defense": "+85%",
+          "damage": "+55%",
+          "damagereduction": "+10",
+          "mythical": "endgame",
+          "damage_reduction": "10%"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/anos-outfit/",
-      "sourceImageUrl": null,
-      "defense": "+85%",
-      "damage": "+55%",
-      "damageReduction": "10%",
-      "sourceRoute": "Anos boss on Academy Island",
-      "dropOrCost": null,
-      "bestFor": "Endgame all-round stats"
+      },
+      "system": {
+        "slug": "anos-outfit",
+        "section": "Mythical",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Gilgamesh Armor",
-      "slug": "gilgamesh-armor",
-      "image": null,
-      "tier": "S",
-      "rarity": "Mythical",
-      "type": null,
-      "category": null,
-      "description": "A legendary armor set modeled after Gilgamesh. Obtained from the high-difficulty Gilgamesh summonable boss on Boss Island. Strong stats for endgame progression.",
-      "stats": {
+      "item": {
+        "name": "Gilgamesh Armor",
+        "tier": "S",
+        "rarity": "Mythical",
         "defense": "+75%",
         "damage": "+60%",
-        "damagereduction": "+10",
-        "mythical": "endgame",
-        "damage_reduction": "10%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+75%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+60%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "10%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "10%",
+        "sourceRoute": "Gilgamesh boss on Boss Island",
+        "bestFor": "Endgame progression",
+        "description": "A legendary armor set modeled after Gilgamesh. Obtained from the high-difficulty Gilgamesh summonable boss on Boss Island. Strong stats for endgame progression.",
+        "stats": {
+          "defense": "+75%",
+          "damage": "+60%",
+          "damagereduction": "+10",
+          "mythical": "endgame",
+          "damage_reduction": "10%"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/gilgamesh-armor/",
-      "sourceImageUrl": null,
-      "defense": "+75%",
-      "damage": "+60%",
-      "damageReduction": "10%",
-      "sourceRoute": "Gilgamesh boss on Boss Island",
-      "dropOrCost": null,
-      "bestFor": "Endgame progression"
+      },
+      "system": {
+        "slug": "gilgamesh-armor",
+        "section": "Mythical",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Alter Armor",
-      "slug": "alter-armor",
-      "image": null,
-      "tier": "S",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "A top-tier accessory added in the Alter Update (March 16, 2026). Ranked among the best accessories alongside Manipulator Outfit, Maiden Outfit, and Imperial Outfit. Provides defense and damage bonuses.",
-      "stats": {
+      "item": {
+        "name": "Alter Armor",
+        "tier": "S",
         "defense": "+100%",
         "damage": "+75%",
-        "damagereduction": "+15",
-        "alter_update": "endgame",
-        "damage_reduction": "15%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+100%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+75%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "15%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "15%",
+        "sourceRoute": "Saber Alter route",
+        "bestFor": "Top-tier damage and defense",
+        "description": "A top-tier accessory added in the Alter Update (March 16, 2026). Ranked among the best accessories alongside Manipulator Outfit, Maiden Outfit, and Imperial Outfit. Provides defense and damage bonuses.",
+        "stats": {
+          "defense": "+100%",
+          "damage": "+75%",
+          "damagereduction": "+15",
+          "alter_update": "endgame",
+          "damage_reduction": "15%"
         }
-      ],
-      "updatedAt": "2026-03-24",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/alter-armor/",
-      "sourceImageUrl": null,
-      "defense": "+100%",
-      "damage": "+75%",
-      "damageReduction": "15%",
-      "sourceRoute": "Saber Alter route",
-      "dropOrCost": null,
-      "bestFor": "Top-tier damage and defense"
+      },
+      "system": {
+        "slug": "alter-armor",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Sun Armor",
-      "slug": "sun-armor",
-      "image": null,
-      "tier": "A",
-      "rarity": "Mythical",
-      "type": null,
-      "category": null,
-      "description": "An A-tier armor obtainable from Escanor Boss or Boss Rush Shop. Provides strong defensive and offensive stats as an alternative to Mythical accessories.",
-      "stats": {
+      "item": {
+        "name": "Sun Armor",
+        "tier": "A",
+        "rarity": "Mythical",
         "defense": "+75%",
         "damage": "+55%",
-        "damagereduction": "+20",
-        "endgame": "boss-rush",
-        "damage_reduction": "20%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+75%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+55%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "20%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "20%",
+        "sourceRoute": "Escanor Boss or Boss Rush Shop",
+        "dropOrCost": "Boss Rush reward route",
+        "bestFor": "Boss Rush armor option",
+        "description": "An A-tier armor obtainable from Escanor Boss or Boss Rush Shop. Provides strong defensive and offensive stats as an alternative to Mythical accessories.",
+        "stats": {
+          "defense": "+75%",
+          "damage": "+55%",
+          "damagereduction": "+20",
+          "endgame": "boss-rush",
+          "damage_reduction": "20%"
         }
-      ],
-      "updatedAt": "2026-03-24",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/sun-armor/",
-      "sourceImageUrl": null,
-      "defense": "+75%",
-      "damage": "+55%",
-      "damageReduction": "20%",
-      "sourceRoute": "Escanor Boss or Boss Rush Shop",
-      "dropOrCost": "Boss Rush reward route",
-      "bestFor": "Boss Rush armor option"
+      },
+      "system": {
+        "slug": "sun-armor",
+        "section": "Mythical",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Mirage Pendant",
-      "slug": "mirage-pendant",
-      "image": null,
-      "tier": "A",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "A mid-game accessory dropped by Aizen in Hueco Mundo. The Mirage Pendant provides solid combat bonuses and is one of the better options for players in the mid-game range.",
-      "stats": {
+      "item": {
+        "name": "Mirage Pendant",
+        "tier": "A",
         "defense": "+30%",
         "damage": "+30%",
-        "damagereduction": "+5",
-        "mid_game": "aizen-drop",
-        "damage_reduction": "5%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+30%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+30%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "5%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "5%",
+        "sourceRoute": "Aizen in Hueco Mundo",
+        "dropOrCost": "20% drop",
+        "bestFor": "Mid-game combat accessory",
+        "description": "A mid-game accessory dropped by Aizen in Hueco Mundo. The Mirage Pendant provides solid combat bonuses and is one of the better options for players in the mid-game range.",
+        "stats": {
+          "defense": "+30%",
+          "damage": "+30%",
+          "damagereduction": "+5",
+          "mid_game": "aizen-drop",
+          "damage_reduction": "5%"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/mirage-pendant/",
-      "sourceImageUrl": null,
-      "defense": "+30%",
-      "damage": "+30%",
-      "damageReduction": "5%",
-      "sourceRoute": "Aizen in Hueco Mundo",
-      "dropOrCost": "20% drop",
-      "bestFor": "Mid-game combat accessory"
+      },
+      "system": {
+        "slug": "mirage-pendant",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": null
+      }
     },
     {
-      "name": "Yuji Hair",
-      "slug": "yuji-hair",
-      "image": null,
-      "tier": "B",
-      "rarity": "Legendary",
-      "type": null,
-      "category": null,
-      "description": "A Legendary-rarity cosmetic accessory with a 5% drop rate. Provides decent stat bonuses for mid-game players.",
-      "stats": {
+      "item": {
+        "name": "Yuji Hair",
+        "tier": "B",
+        "rarity": "Legendary",
         "defense": "+35%",
         "damage": "+30%",
-        "damagereduction": "+5",
-        "mid_game": "legendary",
-        "damage_reduction": "5%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+35%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+30%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "5%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "5%",
+        "sourceRoute": "Yuji boss route",
+        "dropOrCost": "5% drop",
+        "bestFor": "Mid-game stat filler",
+        "description": "A Legendary-rarity cosmetic accessory with a 5% drop rate. Provides decent stat bonuses for mid-game players.",
+        "stats": {
+          "defense": "+35%",
+          "damage": "+30%",
+          "damagereduction": "+5",
+          "mid_game": "legendary",
+          "damage_reduction": "5%"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/yuji-hair/",
-      "sourceImageUrl": null,
-      "defense": "+35%",
-      "damage": "+30%",
-      "damageReduction": "5%",
-      "sourceRoute": "Yuji boss route",
-      "dropOrCost": "5% drop",
-      "bestFor": "Mid-game stat filler"
+      },
+      "system": {
+        "slug": "yuji-hair",
+        "section": "Legendary",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "Soul Amulet",
-      "slug": "soul-amulet",
-      "image": null,
-      "tier": "B",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "An accessory dropped by Alucard on Sailor Island. Soul Amulet is one of the earlier good accessories, providing useful bonuses before players can obtain endgame gear.",
-      "stats": {
+      "item": {
+        "name": "Soul Amulet",
+        "tier": "B",
         "defense": "+20%",
         "damage": "+20%",
-        "early_mid_game": "alucard-drop",
-        "damage_reduction": "--"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+20%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+20%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "--"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "--",
+        "sourceRoute": "Alucard on Sailor Island",
+        "bestFor": "Early accessory upgrade",
+        "description": "An accessory dropped by Alucard on Sailor Island. Soul Amulet is one of the earlier good accessories, providing useful bonuses before players can obtain endgame gear.",
+        "stats": {
+          "defense": "+20%",
+          "damage": "+20%",
+          "early_mid_game": "alucard-drop",
+          "damage_reduction": "--"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/soul-amulet/",
-      "sourceImageUrl": null,
-      "defense": "+20%",
-      "damage": "+20%",
-      "damageReduction": "--",
-      "sourceRoute": "Alucard on Sailor Island",
-      "dropOrCost": null,
-      "bestFor": "Early accessory upgrade"
+      },
+      "system": {
+        "slug": "soul-amulet",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": null
+      }
     },
     {
-      "name": "Gojo Blindfold",
-      "slug": "gojo-blindfold",
-      "image": null,
-      "tier": "C",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "A beginner-friendly cosmetic accessory with minor stat bonuses. Themed after the Gojo character.",
-      "stats": {
+      "item": {
+        "name": "Gojo Blindfold",
+        "tier": "C",
         "defense": "+10%",
         "damage": "+10%",
-        "early_game": "cosmetic",
-        "damage_reduction": "--"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+10%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+10%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "--"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "--",
+        "sourceRoute": "Gojo route",
+        "bestFor": "Beginner stat filler",
+        "description": "A beginner-friendly cosmetic accessory with minor stat bonuses. Themed after the Gojo character.",
+        "stats": {
+          "defense": "+10%",
+          "damage": "+10%",
+          "early_game": "cosmetic",
+          "damage_reduction": "--"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/gojo-blindfold/",
-      "sourceImageUrl": null,
-      "defense": "+10%",
-      "damage": "+10%",
-      "damageReduction": "--",
-      "sourceRoute": "Gojo route",
-      "dropOrCost": null,
-      "bestFor": "Beginner stat filler"
+      },
+      "system": {
+        "slug": "gojo-blindfold",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": null
+      }
     },
     {
-      "name": "Santa Hat",
-      "slug": "santa-hat",
-      "image": null,
-      "tier": "C",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "An early game placeholder accessory with minor stat bonuses. Obtained during seasonal events.",
-      "stats": {
+      "item": {
+        "name": "Santa Hat",
+        "tier": "C",
         "defense": "+10%",
         "damage": "+5%",
-        "early_game": "seasonal",
-        "damage_reduction": "--"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+10%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+5%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "--"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "--",
+        "sourceRoute": "Seasonal event route",
+        "dropOrCost": "Event-limited",
+        "bestFor": "Collection or early filler",
+        "description": "An early game placeholder accessory with minor stat bonuses. Obtained during seasonal events.",
+        "stats": {
+          "defense": "+10%",
+          "damage": "+5%",
+          "early_game": "seasonal",
+          "damage_reduction": "--"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/santa-hat/",
-      "sourceImageUrl": null,
-      "defense": "+10%",
-      "damage": "+5%",
-      "damageReduction": "--",
-      "sourceRoute": "Seasonal event route",
-      "dropOrCost": "Event-limited",
-      "bestFor": "Collection or early filler"
+      },
+      "system": {
+        "slug": "santa-hat",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": null
+      }
     },
     {
-      "name": "Saber Armor",
-      "slug": "saber-armor",
-      "image": null,
-      "tier": "D",
-      "rarity": "Legendary",
-      "type": null,
-      "category": null,
-      "description": "A Legendary-rarity mid-game accessory with a 5% drop rate. Placed in D tier by community Accessory Tierlist.",
-      "stats": {
+      "item": {
+        "name": "Saber Armor",
+        "tier": "D",
+        "rarity": "Legendary",
         "defense": "+40%",
         "damage": "+35%",
-        "damagereduction": "+5",
-        "mid_game": "legendary",
-        "damage_reduction": "5%"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Stat",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Stat": "Defense",
-              "Value": "+40%"
-            },
-            {
-              "Stat": "Damage",
-              "Value": "+35%"
-            },
-            {
-              "Stat": "Damage Reduction",
-              "Value": "5%"
-            }
-          ]
-        },
-        {
-          "title": null,
-          "headers": [
-            "Enchant Level",
-            "Material Required",
-            "Approx. Stat Bonus"
-          ],
-          "rows": [
-            {
-              "Enchant Level": "E0 (Base)",
-              "Material Required": "—",
-              "Approx. Stat Bonus": "+0%"
-            },
-            {
-              "Enchant Level": "E1–E3",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+10–30%"
-            },
-            {
-              "Enchant Level": "E4–E6",
-              "Material Required": "Standard Materials",
-              "Approx. Stat Bonus": "+40–60%"
-            },
-            {
-              "Enchant Level": "E7–E9",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+70–90%"
-            },
-            {
-              "Enchant Level": "E10 (Max)",
-              "Material Required": "Diamonds",
-              "Approx. Stat Bonus": "+~100%"
-            }
-          ]
+        "damageReduction": "5%",
+        "sourceRoute": "Saber boss route",
+        "dropOrCost": "5% drop",
+        "bestFor": "Mid-game armor fallback",
+        "description": "A Legendary-rarity mid-game accessory with a 5% drop rate. Placed in D tier by community Accessory Tierlist.",
+        "stats": {
+          "defense": "+40%",
+          "damage": "+35%",
+          "damagereduction": "+5",
+          "mid_game": "legendary",
+          "damage_reduction": "5%"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/accessories/saber-armor/",
-      "sourceImageUrl": null,
-      "defense": "+40%",
-      "damage": "+35%",
-      "damageReduction": "5%",
-      "sourceRoute": "Saber boss route",
-      "dropOrCost": "5% drop",
-      "bestFor": "Mid-game armor fallback"
+      },
+      "system": {
+        "slug": "saber-armor",
+        "section": "Legendary",
+        "sortOrder": 19,
+        "image": null
+      }
     }
   ]
 }

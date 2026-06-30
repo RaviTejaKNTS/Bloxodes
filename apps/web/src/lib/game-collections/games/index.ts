@@ -34,6 +34,9 @@ import { speedEvolveCollectionGroup } from "./1-speed-evolve";
 import { buildARingFarmCollectionGroup } from "./build-a-ring-farm";
 import { evomonCollectionGroup } from "./evomon";
 import { cleanTheSupermarketCollectionGroup } from "./clean-the-supermarket";
+import { murderMystery2CollectionGroup } from "./murder-mystery-2";
+import { lifetogetherRpCollectionGroup } from "./lifetogether-rp";
+import { catalogAvatarCreatorCollectionGroup } from "./catalog-avatar-creator";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -72,5 +75,8 @@ export const GAME_COLLECTION_GROUPS = [
   speedEvolveCollectionGroup,
   buildARingFarmCollectionGroup,
   evomonCollectionGroup,
-  cleanTheSupermarketCollectionGroup
+  cleanTheSupermarketCollectionGroup,
+  murderMystery2CollectionGroup,
+  lifetogetherRpCollectionGroup,
+  catalogAvatarCreatorCollectionGroup
 ] satisfies GameCollectionGroup[];

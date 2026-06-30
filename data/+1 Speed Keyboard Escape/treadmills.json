@@ -1,194 +1,170 @@
 {
   "meta": {
-    "title": "+1 Speed Keyboard Escape Treadmills",
-    "game": "+1 Speed Keyboard Escape | Candy & Chocolate",
+    "schemaVersion": 2,
+    "game": "+1 Speed Keyboard Escape",
     "gameSlug": "1-speed-keyboard-escape",
     "collection": "treadmills",
     "route": "/wiki/1-speed-keyboard-escape/treadmills",
     "catalogCode": "1-speed-keyboard-escape-treadmills",
-    "updatedAt": "2026-05-31",
-    "itemCount": 5,
-    "counts": {
-      "Free trainer": 1,
-      "Premium treadmill upgrades": 4
-    },
-    "imageCoverage": {
-      "present": 4,
-      "missing": 1
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "itemFields": [
       "access",
       "rate",
       "cost",
       "location",
       "bestUse",
       "availability",
-      "sourceStatus",
       "source",
-      "imageStatus",
-      "robloxGamePassId",
-      "robloxProductId",
-      "robloxIconAssetId",
       "officialName",
       "officialCreated",
-      "officialUpdated",
-      "sourcePage",
-      "secondarySourcePage",
-      "sortOrder"
+      "officialUpdated"
     ],
-    "sources": [
-      {
-        "label": "Roblox game passes API - +1 Speed Keyboard Escape",
-        "url": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?limit=100&sortOrder=Asc",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Rolimon's - +1 Speed Keyboard Escape game passes cross-check",
-        "url": "https://www.rolimons.com/game/95082159892680",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Speed Keyboard Escape Wiki - treadmill table cross-check",
-        "url": "https://speedkeyboardescape.wiki/",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Fans First Booyah - +1 Speed Keyboard Escape walkthrough",
-        "url": "https://ffbooyah.com/2026/05/15/roblox-1-speed-keyboard-escape-candy-chocolate-beginners-guide-and-full-walkthrough/",
-        "accessed": "2026-05-31"
-      }
+    "columns": [
+      "access",
+      "rate",
+      "cost",
+      "location",
+      "bestUse",
+      "availability",
+      "source",
+      "officialName",
+      "officialCreated",
+      "officialUpdated"
     ],
-    "notes": [
-      "Treadmills are treated as trainer options because source coverage describes them as spawn-area AFK Speed farming surfaces, and official Roblox game-pass data confirms four named premium treadmill passes.",
-      "Candy Treadmill is kept as a row because it is an official for-sale treadmill pass with a clean treadmill icon, but its training rate was not found in the public rate table checked on 2026-05-31.",
-      "Chocolate Treadmill is the reported free/default trainer row from the fan wiki. No clean local or official image was found for it, so its image is intentionally blank until an in-game screenshot can be captured.",
-      "Rates are copied only where a source reported them. They should be rechecked in game before publishing if an exact rate unit matters."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Free trainer",
+        "Premium treadmill upgrades"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "source"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "access",
+        "rate",
+        "cost",
+        "location",
+        "bestUse",
+        "availability"
+      ],
+      "tableFields": [
+        "access",
+        "rate",
+        "cost",
+        "location",
+        "bestUse",
+        "availability",
+        "source",
+        "officialName"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Chocolate Treadmill",
-      "slug": "chocolate-treadmill",
-      "image": null,
-      "collectionSection": "Free trainer",
-      "access": "Free/default",
-      "rate": "x1 reported",
-      "cost": "Free",
-      "location": "Spawn treadmill area",
-      "bestUse": "Baseline AFK Speed farming before spending Robux",
-      "availability": "Reported free trainer",
-      "sourceStatus": "fan wiki trainer row; free trainer needs in-game image capture",
-      "source": "Free treadmill",
-      "imageStatus": "missing; needs clean in-game screenshot",
-      "robloxGamePassId": null,
-      "robloxProductId": null,
-      "robloxIconAssetId": null,
-      "officialName": null,
-      "officialCreated": null,
-      "officialUpdated": null,
-      "sourcePage": "https://speedkeyboardescape.wiki/",
-      "secondarySourcePage": null,
-      "sortOrder": 1
+      "item": {
+        "name": "Chocolate Treadmill",
+        "access": "Free/default",
+        "rate": "x1 reported",
+        "cost": "Free",
+        "location": "Spawn treadmill area",
+        "bestUse": "Baseline AFK Speed farming before spending Robux",
+        "availability": "Reported free trainer",
+        "source": "Free treadmill"
+      },
+      "system": {
+        "slug": "chocolate-treadmill",
+        "section": "Free trainer",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Gold Treadmill",
-      "slug": "gold-treadmill",
-      "image": "/%2B1%20Speed%20Keyboard%20Escape/Treadmills/gold-treadmill.png",
-      "collectionSection": "Premium treadmill upgrades",
-      "access": "Premium",
-      "rate": "x9 reported",
-      "cost": "59 Robux",
-      "location": "Spawn treadmill area",
-      "bestUse": "Low-cost premium AFK Speed training",
-      "availability": "On sale",
-      "sourceStatus": "official pass verified; rate reported by fan wiki",
-      "source": "Roblox game pass",
-      "imageStatus": "official Roblox pass icon saved locally",
-      "robloxGamePassId": 1674743386,
-      "robloxProductId": 3517349988,
-      "robloxIconAssetId": 107746007404592,
-      "officialName": "Gold Treadmill",
-      "officialCreated": "2026-01-19T17:11:57.787Z",
-      "officialUpdated": "2026-01-19T17:11:57.793Z",
-      "sourcePage": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?limit=100&sortOrder=Asc",
-      "secondarySourcePage": "https://speedkeyboardescape.wiki/",
-      "sortOrder": 2
+      "item": {
+        "name": "Gold Treadmill",
+        "access": "Premium",
+        "rate": "x9 reported",
+        "cost": "59 Robux",
+        "location": "Spawn treadmill area",
+        "bestUse": "Low-cost premium AFK Speed training",
+        "availability": "On sale",
+        "source": "Roblox game pass",
+        "officialName": "Gold Treadmill",
+        "officialCreated": "2026-01-19T17:11:57.787Z",
+        "officialUpdated": "2026-01-19T17:11:57.793Z"
+      },
+      "system": {
+        "slug": "gold-treadmill",
+        "section": "Premium treadmill upgrades",
+        "sortOrder": 2,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Treadmills/gold-treadmill.png"
+      }
     },
     {
-      "name": "Diamond Treadmill",
-      "slug": "diamond-treadmill",
-      "image": "/%2B1%20Speed%20Keyboard%20Escape/Treadmills/diamond-treadmill.png",
-      "collectionSection": "Premium treadmill upgrades",
-      "access": "Premium",
-      "rate": "x9 reported",
-      "cost": "259 Robux",
-      "location": "Spawn treadmill area",
-      "bestUse": "Premium trainer row that needs an in-game check against Gold before value advice",
-      "availability": "On sale",
-      "sourceStatus": "official pass verified; rate reported by fan wiki; Gold/Diamond difference not verified",
-      "source": "Roblox game pass",
-      "imageStatus": "official Roblox pass icon saved locally",
-      "robloxGamePassId": 1724758929,
-      "robloxProductId": 3543623450,
-      "robloxIconAssetId": 103600156243879,
-      "officialName": "Diamond Treadmill",
-      "officialCreated": "2026-02-23T11:39:54.203Z",
-      "officialUpdated": "2026-02-23T11:39:54.21Z",
-      "sourcePage": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?limit=100&sortOrder=Asc",
-      "secondarySourcePage": "https://speedkeyboardescape.wiki/",
-      "sortOrder": 3
+      "item": {
+        "name": "Diamond Treadmill",
+        "access": "Premium",
+        "rate": "x9 reported",
+        "cost": "259 Robux",
+        "location": "Spawn treadmill area",
+        "bestUse": "Premium trainer row that needs an in-game check against Gold before value advice",
+        "availability": "On sale",
+        "source": "Roblox game pass",
+        "officialName": "Diamond Treadmill",
+        "officialCreated": "2026-02-23T11:39:54.203Z",
+        "officialUpdated": "2026-02-23T11:39:54.21Z"
+      },
+      "system": {
+        "slug": "diamond-treadmill",
+        "section": "Premium treadmill upgrades",
+        "sortOrder": 3,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Treadmills/diamond-treadmill.png"
+      }
     },
     {
-      "name": "Candy Treadmill",
-      "slug": "candy-treadmill",
-      "image": "/%2B1%20Speed%20Keyboard%20Escape/Treadmills/candy-treadmill.png",
-      "collectionSection": "Premium treadmill upgrades",
-      "access": "Premium",
-      "rate": "Not verified",
-      "cost": "749 Robux",
-      "location": "Spawn treadmill area",
-      "bestUse": "Visible premium treadmill pass, but rate needs in-game confirmation before value advice",
-      "availability": "On sale",
-      "sourceStatus": "official pass verified; rate not found in checked public sources",
-      "source": "Roblox game pass",
-      "imageStatus": "official Roblox pass icon saved locally",
-      "robloxGamePassId": 1799448573,
-      "robloxProductId": 3577769741,
-      "robloxIconAssetId": 123784165869717,
-      "officialName": "Candy Treadmill",
-      "officialCreated": "2026-04-18T16:26:39.357Z",
-      "officialUpdated": "2026-04-18T16:26:39.363Z",
-      "sourcePage": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?limit=100&sortOrder=Asc",
-      "secondarySourcePage": "https://www.rolimons.com/game/95082159892680",
-      "sortOrder": 4
+      "item": {
+        "name": "Candy Treadmill",
+        "access": "Premium",
+        "rate": "Not verified",
+        "cost": "749 Robux",
+        "location": "Spawn treadmill area",
+        "bestUse": "Visible premium treadmill pass, but rate needs in-game confirmation before value advice",
+        "availability": "On sale",
+        "source": "Roblox game pass",
+        "officialName": "Candy Treadmill",
+        "officialCreated": "2026-04-18T16:26:39.357Z",
+        "officialUpdated": "2026-04-18T16:26:39.363Z"
+      },
+      "system": {
+        "slug": "candy-treadmill",
+        "section": "Premium treadmill upgrades",
+        "sortOrder": 4,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Treadmills/candy-treadmill.png"
+      }
     },
     {
-      "name": "ADMIN Treadmill",
-      "slug": "admin-treadmill",
-      "image": "/%2B1%20Speed%20Keyboard%20Escape/Treadmills/admin-treadmill.png",
-      "collectionSection": "Premium treadmill upgrades",
-      "access": "Premium",
-      "rate": "x100 reported",
-      "cost": "1,599 Robux",
-      "location": "Spawn treadmill area",
-      "bestUse": "Highest reported AFK Speed training rate for heavy passive grinding",
-      "availability": "On sale",
-      "sourceStatus": "official pass verified; rate reported by fan wiki",
-      "source": "Roblox game pass",
-      "imageStatus": "official Roblox pass icon saved locally",
-      "robloxGamePassId": 1799430547,
-      "robloxProductId": 3581404801,
-      "robloxIconAssetId": 85048772994100,
-      "officialName": "ADMIN Treadmill",
-      "officialCreated": "2026-04-25T17:01:14.167Z",
-      "officialUpdated": "2026-04-25T17:01:31.593Z",
-      "sourcePage": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?limit=100&sortOrder=Asc",
-      "secondarySourcePage": "https://speedkeyboardescape.wiki/",
-      "sortOrder": 5
+      "item": {
+        "name": "ADMIN Treadmill",
+        "access": "Premium",
+        "rate": "x100 reported",
+        "cost": "1,599 Robux",
+        "location": "Spawn treadmill area",
+        "bestUse": "Highest reported AFK Speed training rate for heavy passive grinding",
+        "availability": "On sale",
+        "source": "Roblox game pass",
+        "officialName": "ADMIN Treadmill",
+        "officialCreated": "2026-04-25T17:01:14.167Z",
+        "officialUpdated": "2026-04-25T17:01:31.593Z"
+      },
+      "system": {
+        "slug": "admin-treadmill",
+        "section": "Premium treadmill upgrades",
+        "sortOrder": 5,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Treadmills/admin-treadmill.png"
+      }
     }
   ]
 }

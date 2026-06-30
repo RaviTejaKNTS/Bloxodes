@@ -1,481 +1,365 @@
 {
   "meta": {
-    "title": "Brookhaven RP roleplay outfits data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Official Brookhaven Wiki - Roleplay_Outfits",
-        "url": "https://official-brookhaven.fandom.com/wiki/Roleplay_Outfits",
-        "accessed": "2026-05-07"
-      }
+    "schemaVersion": 2,
+    "game": "Brookhaven RP",
+    "gameSlug": "brookhaven-rp",
+    "collection": "roleplay-outfits",
+    "route": "/wiki/brookhaven-rp/roleplay-outfits",
+    "catalogCode": "brookhaven-rp-roleplay-outfits",
+    "itemFields": [
+      "number",
+      "building",
+      "category"
     ],
     "columns": [
       "number",
-      "image",
-      "name",
-      "building"
-    ]
+      "building",
+      "category"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "number",
+        "building",
+        "category"
+      ],
+      "tableFields": [
+        "number",
+        "building",
+        "category"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "number": "1",
-      "name": "Police Officer Uniform",
-      "slug": "police-officer-uniform",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Police Station",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/police-officer-uniform.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/6/60/RoleplayOutfits_%2814%29.png/revision/latest/scale-to-width-down/141?cb=20260131000432"
+      "item": {
+        "name": "Police Officer Uniform",
+        "number": "1",
+        "building": "Police Station",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "police-officer-uniform",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/police-officer-uniform.webp"
+      }
     },
     {
-      "number": "2",
-      "name": "SWAT Uniform",
-      "slug": "swat-uniform",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Police Station",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/swat-uniform.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/0e/RoleplayOutfits_%2811%29.png/revision/latest/scale-to-width-down/119?cb=20260131000430"
+      "item": {
+        "name": "SWAT Uniform",
+        "number": "2",
+        "building": "Police Station",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "swat-uniform",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/swat-uniform.webp"
+      }
     },
     {
-      "number": "3",
-      "name": "Prisoner",
-      "slug": "prisoner",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Police Station",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/prisoner.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/4d/RoleplayOutfits_%2810%29.png/revision/latest/scale-to-width-down/125?cb=20260131000430"
+      "item": {
+        "name": "Prisoner",
+        "number": "3",
+        "building": "Police Station",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "prisoner",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/prisoner.webp"
+      }
     },
     {
-      "number": "4",
-      "name": "Firefighter Uniform",
-      "slug": "firefighter-uniform",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Fire Station",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/firefighter-uniform.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/03/RoleplayOutfits_%2813%29.png/revision/latest/scale-to-width-down/132?cb=20260131000431"
+      "item": {
+        "name": "Firefighter Uniform",
+        "number": "4",
+        "building": "Fire Station",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "firefighter-uniform",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/firefighter-uniform.webp"
+      }
     },
     {
-      "number": "5",
-      "name": "Firefighter Uniform",
-      "slug": "firefighter-uniform",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Fire Station",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/firefighter-uniform-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/9/97/RoleplayOutfits_%2812%29.png/revision/latest/scale-to-width-down/127?cb=20260131000431"
+      "item": {
+        "name": "Firefighter Uniform",
+        "number": "5",
+        "building": "Fire Station",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "firefighter-uniform",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/firefighter-uniform-2.webp"
+      }
     },
     {
-      "number": "6",
-      "name": "Doctor Uniform",
-      "slug": "doctor-uniform",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "St. Lukes Hospital",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/doctor-uniform.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/fe/RoleplayOutfits_%289%29.png/revision/latest/scale-to-width-down/123?cb=20260131000430"
+      "item": {
+        "name": "Doctor Uniform",
+        "number": "6",
+        "building": "St. Lukes Hospital",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "doctor-uniform",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/doctor-uniform.webp"
+      }
     },
     {
-      "number": "7",
-      "name": "Nurse Uniform",
-      "slug": "nurse-uniform",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "St. Lukes Hospital",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/nurse-uniform.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/47/RoleplayOutfits_%288%29.png/revision/latest/scale-to-width-down/121?cb=20260131000430"
+      "item": {
+        "name": "Nurse Uniform",
+        "number": "7",
+        "building": "St. Lukes Hospital",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "nurse-uniform",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/nurse-uniform.webp"
+      }
     },
     {
-      "number": "8",
-      "name": "Hospital Patient",
-      "slug": "hospital-patient",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "St. Lukes Hospital",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/hospital-patient.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/40/RoleplayOutfits_%286%29.png/revision/latest/scale-to-width-down/134?cb=20260131000429"
+      "item": {
+        "name": "Hospital Patient",
+        "number": "8",
+        "building": "St. Lukes Hospital",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "hospital-patient",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/hospital-patient.webp"
+      }
     },
     {
-      "number": "9",
-      "name": "Hospital Patient",
-      "slug": "hospital-patient",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "St. Lukes Hospital",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/hospital-patient-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/f0/RoleplayOutfits_%287%29.png/revision/latest/scale-to-width-down/114?cb=20260131000428"
+      "item": {
+        "name": "Hospital Patient",
+        "number": "9",
+        "building": "St. Lukes Hospital",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "hospital-patient",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/hospital-patient-2.webp"
+      }
     },
     {
-      "number": "10",
-      "name": "Grocery Store Worker",
-      "slug": "grocery-store-worker",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Grocery Store",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/grocery-store-worker.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/88/RoleplayOutfits_%2816%29.png/revision/latest/scale-to-width-down/139?cb=20260131000432"
+      "item": {
+        "name": "Grocery Store Worker",
+        "number": "10",
+        "building": "Grocery Store",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "grocery-store-worker",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/grocery-store-worker.webp"
+      }
     },
     {
-      "number": "11",
-      "name": "Grocery Store Worker",
-      "slug": "grocery-store-worker",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Grocery Store",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/grocery-store-worker-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/9/9f/RoleplayOutfits_%2815%29.png/revision/latest/scale-to-width-down/128?cb=20260131000432"
+      "item": {
+        "name": "Grocery Store Worker",
+        "number": "11",
+        "building": "Grocery Store",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "grocery-store-worker",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/grocery-store-worker-2.webp"
+      }
     },
     {
-      "number": "12",
-      "name": "Hair Stylist",
-      "slug": "hair-stylist",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Hair and Nails",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/hair-stylist.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/81/RoleplayOutfits_%2819%29.png/revision/latest/scale-to-width-down/167?cb=20260131000432"
+      "item": {
+        "name": "Hair Stylist",
+        "number": "12",
+        "building": "Hair and Nails",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "hair-stylist",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/hair-stylist.webp"
+      }
     },
     {
-      "number": "13",
-      "name": "Ice Cream Vendor",
-      "slug": "ice-cream-vendor",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Ice Cream Shop",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/ice-cream-vendor.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/4/40/RoleplayOutfits_%2818%29.png/revision/latest/scale-to-width-down/157?cb=20260131000432"
+      "item": {
+        "name": "Ice Cream Vendor",
+        "number": "13",
+        "building": "Ice Cream Shop",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "ice-cream-vendor",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/ice-cream-vendor.webp"
+      }
     },
     {
-      "number": "14",
-      "name": "Arcade Attendant",
-      "slug": "arcade-attendant",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Arcade",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/arcade-attendant.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/7/7d/RoleplayOutfits_%2817%29.png/revision/latest/scale-to-width-down/140?cb=20260131000432"
+      "item": {
+        "name": "Arcade Attendant",
+        "number": "14",
+        "building": "Arcade",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "arcade-attendant",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/arcade-attendant.webp"
+      }
     },
     {
-      "number": "15",
-      "name": "Bank Worker",
-      "slug": "bank-worker",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Bank",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/bank-worker.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/0c/RoleplayOutfits_%284%29.png/revision/latest/scale-to-width-down/128?cb=20260131000429"
+      "item": {
+        "name": "Bank Worker",
+        "number": "15",
+        "building": "Bank",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "bank-worker",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/bank-worker.webp"
+      }
     },
     {
-      "number": "16",
-      "name": "Post Office Worker",
-      "slug": "post-office-worker",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Post Office",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/post-office-worker.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/c/cc/RoleplayOutfits_%285%29.png/revision/latest/scale-to-width-down/120?cb=20260131000428"
+      "item": {
+        "name": "Post Office Worker",
+        "number": "16",
+        "building": "Post Office",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "post-office-worker",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/post-office-worker.webp"
+      }
     },
     {
-      "number": "17",
-      "name": "Airport Security",
-      "slug": "airport-security",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Airport",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/airport-security.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/7/77/RoleplayOutfits_%283%29.png/revision/latest/scale-to-width-down/110?cb=20260131000428"
+      "item": {
+        "name": "Airport Security",
+        "number": "17",
+        "building": "Airport",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "airport-security",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/airport-security.webp"
+      }
     },
     {
-      "number": "18",
-      "name": "Daycare Worker",
-      "slug": "daycare-worker",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Daycare & Adoption Center",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/daycare-worker.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/1/1b/RoleplayOutfits_%282%29.png/revision/latest/scale-to-width-down/113?cb=20260131000428"
+      "item": {
+        "name": "Daycare Worker",
+        "number": "18",
+        "building": "Daycare & Adoption Center",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "daycare-worker",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/daycare-worker.webp"
+      }
     },
     {
-      "number": "19",
-      "name": "Babies Clothes",
-      "slug": "babies-clothes",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Daycare & Adoption Center",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/babies-clothes.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/e/ef/RoleplayOutfits_%281%29.png/revision/latest/scale-to-width-down/119?cb=20260131000426"
+      "item": {
+        "name": "Babies Clothes",
+        "number": "19",
+        "building": "Daycare & Adoption Center",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "babies-clothes",
+        "section": "Items",
+        "sortOrder": 19,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/babies-clothes.webp"
+      }
     },
     {
-      "number": "20",
-      "name": "Pastry Chef",
-      "slug": "pastry-chef",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Pastry Shop",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/pastry-chef.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/9/95/RoleplayOutfits_%2820%29.png/revision/latest/scale-to-width-down/130?cb=20260131001956"
+      "item": {
+        "name": "Pastry Chef",
+        "number": "20",
+        "building": "Pastry Shop",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "pastry-chef",
+        "section": "Items",
+        "sortOrder": 20,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/pastry-chef.webp"
+      }
     },
     {
-      "number": "21",
-      "name": "Agency Agent",
-      "slug": "agency-agent",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Agency",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/agency-agent.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/a6/RoleplayOutfits_%2822%29.png/revision/latest/scale-to-width-down/130?cb=20260131002449"
+      "item": {
+        "name": "Agency Agent",
+        "number": "21",
+        "building": "Agency",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "agency-agent",
+        "section": "Items",
+        "sortOrder": 21,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/agency-agent.webp"
+      }
     },
     {
-      "number": "21",
-      "name": "Club Brooks Server",
-      "slug": "club-brooks-server",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Club Brooks",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/club-brooks-server.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/5c/RoleplayOutfits_%2821%29.png/revision/latest/scale-to-width-down/129?cb=20260131002349"
+      "item": {
+        "name": "Club Brooks Server",
+        "number": "21",
+        "building": "Club Brooks",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "club-brooks-server",
+        "section": "Items",
+        "sortOrder": 22,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/club-brooks-server.webp"
+      }
     },
     {
-      "number": "22",
-      "name": "Pilot",
-      "slug": "pilot",
-      "category": "Outfits List",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": null,
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": "Airport",
-      "wikiUrl": null,
-      "image": "/Brookhaven%20RP/Roleplay%20Outfits/pilot.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/36/RoleplayOutfits_%2823%29.png.png/revision/latest/scale-to-width-down/137?cb=20260131221741"
+      "item": {
+        "name": "Pilot",
+        "number": "22",
+        "building": "Airport",
+        "category": "Outfits List"
+      },
+      "system": {
+        "slug": "pilot",
+        "section": "Items",
+        "sortOrder": 23,
+        "image": "/Brookhaven%20RP/Roleplay%20Outfits/pilot.webp"
+      }
     }
   ]
 }

@@ -1,293 +1,366 @@
 {
   "meta": {
+    "schemaVersion": 2,
     "game": "Untitled Boxing Game",
     "gameSlug": "untitled-boxing-game",
-    "universeId": 4730278139,
     "collection": "knockout-effects",
     "route": "/wiki/untitled-boxing-game/knockout-effects",
     "catalogCode": "untitled-boxing-game-knockout-effects",
-    "updatedAt": "2026-06-15",
-    "columns": [
-      "name",
-      "collectionSection",
+    "itemFields": [
       "source",
       "availability",
       "price",
       "refresh",
       "theme",
       "effectSummary",
-      "cardSummary",
-      "image",
-      "imageStatus",
-      "sourcePage"
+      "cardSummary"
     ],
-    "sources": [
-      {
-        "label": "Untitled Boxing Game Wiki",
-        "url": "https://ubg.miraheze.org/wiki/Knockdowns",
-        "accessed": "2026-06-15"
-      }
+    "columns": [
+      "source",
+      "availability",
+      "price",
+      "refresh",
+      "theme",
+      "effectSummary",
+      "cardSummary"
     ],
-    "notes": [
-      "Generated from source-backed catalog tables and crate boards.",
-      "Rows avoid live trade values, active code claims, and broad platform metadata."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Default",
+        "Daily shop rotation",
+        "Event reward"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "source",
+        "availability",
+        "price",
+        "refresh",
+        "theme",
+        "effectSummary"
+      ],
+      "tableFields": [
+        "source",
+        "availability",
+        "price",
+        "refresh",
+        "theme",
+        "effectSummary",
+        "cardSummary"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "default",
-      "name": "Default",
-      "collectionSection": "Default",
-      "source": "Default",
-      "availability": "Default",
-      "price": "Equipped by default",
-      "refresh": "Always available",
-      "theme": "Default animation",
-      "effectSummary": "The baseline knockdown animation.",
-      "cardSummary": "The baseline knockdown animation.",
-      "image": "/Untitled Boxing Game/Knockout Effects/default.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Default",
+        "source": "Default",
+        "availability": "Default",
+        "price": "Equipped by default",
+        "refresh": "Always available",
+        "theme": "Default animation",
+        "effectSummary": "The baseline knockdown animation.",
+        "cardSummary": "The baseline knockdown animation."
+      },
+      "system": {
+        "slug": "default",
+        "section": "Default",
+        "sortOrder": 1,
+        "image": "/Untitled Boxing Game/Knockout Effects/default.png"
+      }
     },
     {
-      "id": "liberation",
-      "name": "Liberation",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "$89,999",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "One Piece themed",
-      "effectSummary": "Bounces off the ground and strikes a Gear 5-style pose; the final KO kneels with conqueror-style energy.",
-      "cardSummary": "Bounces off the ground and strikes a Gear 5-style pose; the final KO kneels with conqueror-style energy.",
-      "image": "/Untitled Boxing Game/Knockout Effects/liberation.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Liberation",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "$89,999",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "One Piece themed",
+        "effectSummary": "Bounces off the ground and strikes a Gear 5-style pose; the final KO kneels with conqueror-style energy.",
+        "cardSummary": "Bounces off the ground and strikes a Gear 5-style pose; the final KO kneels with conqueror-style energy."
+      },
+      "system": {
+        "slug": "liberation",
+        "section": "Daily shop rotation",
+        "sortOrder": 2,
+        "image": "/Untitled Boxing Game/Knockout Effects/liberation.png"
+      }
     },
     {
-      "id": "ritual",
-      "name": "Ritual",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "$99,999",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Jujutsu Kaisen themed",
-      "effectSummary": "Summons Mahoraga, adapts on later knockdowns, and burns out on the final KO.",
-      "cardSummary": "Summons Mahoraga, adapts on later knockdowns, and burns out on the final KO.",
-      "image": "/Untitled Boxing Game/Knockout Effects/ritual.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Ritual",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "$99,999",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Jujutsu Kaisen themed",
+        "effectSummary": "Summons Mahoraga, adapts on later knockdowns, and burns out on the final KO.",
+        "cardSummary": "Summons Mahoraga, adapts on later knockdowns, and burns out on the final KO."
+      },
+      "system": {
+        "slug": "ritual",
+        "section": "Daily shop rotation",
+        "sortOrder": 3,
+        "image": "/Untitled Boxing Game/Knockout Effects/ritual.png"
+      }
     },
     {
-      "id": "shatter",
-      "name": "Shatter",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "Unknown",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Lego themed",
-      "effectSummary": "Breaks apart and reassembles, with Lego-styled countdown numbers and coin drops on final KO.",
-      "cardSummary": "Breaks apart and reassembles, with Lego-styled countdown numbers and coin drops on final KO.",
-      "image": "/Untitled Boxing Game/Knockout Effects/shatter.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Shatter",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "Unknown",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Lego themed",
+        "effectSummary": "Breaks apart and reassembles, with Lego-styled countdown numbers and coin drops on final KO.",
+        "cardSummary": "Breaks apart and reassembles, with Lego-styled countdown numbers and coin drops on final KO."
+      },
+      "system": {
+        "slug": "shatter",
+        "section": "Daily shop rotation",
+        "sortOrder": 4,
+        "image": "/Untitled Boxing Game/Knockout Effects/shatter.png"
+      }
     },
     {
-      "id": "knee-pain",
-      "name": "Knee Pain",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "$22,222",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Comedy / cartoon themed",
-      "effectSummary": "Falls while yelling about leg pain and uses a twisted hurt pose on final KO.",
-      "cardSummary": "Falls while yelling about leg pain and uses a twisted hurt pose on final KO.",
-      "image": "/Untitled Boxing Game/Knockout Effects/knee-pain.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Knee Pain",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "$22,222",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Comedy / cartoon themed",
+        "effectSummary": "Falls while yelling about leg pain and uses a twisted hurt pose on final KO.",
+        "cardSummary": "Falls while yelling about leg pain and uses a twisted hurt pose on final KO."
+      },
+      "system": {
+        "slug": "knee-pain",
+        "section": "Daily shop rotation",
+        "sortOrder": 5,
+        "image": "/Untitled Boxing Game/Knockout Effects/knee-pain.png"
+      }
     },
     {
-      "id": "fling",
-      "name": "Fling",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "Unknown",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Physics gag",
-      "effectSummary": "Spins and flings the character before they recover; final KO lands face down with the winner framed.",
-      "cardSummary": "Spins and flings the character before they recover; final KO lands face down with the winner framed.",
-      "image": "/Untitled Boxing Game/Knockout Effects/fling.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Fling",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "Unknown",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Physics gag",
+        "effectSummary": "Spins and flings the character before they recover; final KO lands face down with the winner framed.",
+        "cardSummary": "Spins and flings the character before they recover; final KO lands face down with the winner framed."
+      },
+      "system": {
+        "slug": "fling",
+        "section": "Daily shop rotation",
+        "sortOrder": 6,
+        "image": "/Untitled Boxing Game/Knockout Effects/fling.png"
+      }
     },
     {
-      "id": "8-bit",
-      "name": "8-Bit",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "$32,100",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Retro game themed",
-      "effectSummary": "Uses pixel-style countdown cues and a particle disintegration on final KO.",
-      "cardSummary": "Uses pixel-style countdown cues and a particle disintegration on final KO.",
-      "image": "/Untitled Boxing Game/Knockout Effects/8-bit.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "8-Bit",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "$32,100",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Retro game themed",
+        "effectSummary": "Uses pixel-style countdown cues and a particle disintegration on final KO.",
+        "cardSummary": "Uses pixel-style countdown cues and a particle disintegration on final KO."
+      },
+      "system": {
+        "slug": "8-bit",
+        "section": "Daily shop rotation",
+        "sortOrder": 7,
+        "image": "/Untitled Boxing Game/Knockout Effects/8-bit.png"
+      }
     },
     {
-      "id": "cartoony",
-      "name": "Cartoony",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "Unknown",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Cartoon themed",
-      "effectSummary": "Flies back with stars around the head, then uses a coffin-style fall and skull flash on KO.",
-      "cardSummary": "Flies back with stars around the head, then uses a coffin-style fall and skull flash on KO.",
-      "image": "/Untitled Boxing Game/Knockout Effects/cartoony.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Cartoony",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "Unknown",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Cartoon themed",
+        "effectSummary": "Flies back with stars around the head, then uses a coffin-style fall and skull flash on KO.",
+        "cardSummary": "Flies back with stars around the head, then uses a coffin-style fall and skull flash on KO."
+      },
+      "system": {
+        "slug": "cartoony",
+        "section": "Daily shop rotation",
+        "sortOrder": 8,
+        "image": "/Untitled Boxing Game/Knockout Effects/cartoony.png"
+      }
     },
     {
-      "id": "crafted",
-      "name": "Crafted",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "Unknown",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Minecraft themed",
-      "effectSummary": "Cycles through items and eating for knockdown, then uses a block-game death screen on KO.",
-      "cardSummary": "Cycles through items and eating for knockdown, then uses a block-game death screen on KO.",
-      "image": "/Untitled Boxing Game/Knockout Effects/crafted.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Crafted",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "Unknown",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Minecraft themed",
+        "effectSummary": "Cycles through items and eating for knockdown, then uses a block-game death screen on KO.",
+        "cardSummary": "Cycles through items and eating for knockdown, then uses a block-game death screen on KO."
+      },
+      "system": {
+        "slug": "crafted",
+        "section": "Daily shop rotation",
+        "sortOrder": 9,
+        "image": "/Untitled Boxing Game/Knockout Effects/crafted.png"
+      }
     },
     {
-      "id": "cyborg",
-      "name": "Cyborg",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "Unknown",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "One Punch Man themed",
-      "effectSummary": "Uses blue electricity and thrusters to recover; final KO leaves the thrusters failing.",
-      "cardSummary": "Uses blue electricity and thrusters to recover; final KO leaves the thrusters failing.",
-      "image": "/Untitled Boxing Game/Knockout Effects/cyborg.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Cyborg",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "Unknown",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "One Punch Man themed",
+        "effectSummary": "Uses blue electricity and thrusters to recover; final KO leaves the thrusters failing.",
+        "cardSummary": "Uses blue electricity and thrusters to recover; final KO leaves the thrusters failing."
+      },
+      "system": {
+        "slug": "cyborg",
+        "section": "Daily shop rotation",
+        "sortOrder": 10,
+        "image": "/Untitled Boxing Game/Knockout Effects/cyborg.png"
+      }
     },
     {
-      "id": "pure-white-ash",
-      "name": "Pure White Ash",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "Unknown",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Ashita no Joe themed",
-      "effectSummary": "Flips down, struggles up, then ends with a seated Pure White Ash-style defeat scene.",
-      "cardSummary": "Flips down, struggles up, then ends with a seated Pure White Ash-style defeat scene.",
-      "image": "/Untitled Boxing Game/Knockout Effects/pure-white-ash.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Pure White Ash",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "Unknown",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Ashita no Joe themed",
+        "effectSummary": "Flips down, struggles up, then ends with a seated Pure White Ash-style defeat scene.",
+        "cardSummary": "Flips down, struggles up, then ends with a seated Pure White Ash-style defeat scene."
+      },
+      "system": {
+        "slug": "pure-white-ash",
+        "section": "Daily shop rotation",
+        "sortOrder": 11,
+        "image": "/Untitled Boxing Game/Knockout Effects/pure-white-ash.png"
+      }
     },
     {
-      "id": "yamcha",
-      "name": "Yamcha",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "$69,999",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Dragon Ball themed",
-      "effectSummary": "Creates crater-style knockdowns and a Saibaman bomb-style final KO.",
-      "cardSummary": "Creates crater-style knockdowns and a Saibaman bomb-style final KO.",
-      "image": "/Untitled Boxing Game/Knockout Effects/yamcha.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Yamcha",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "$69,999",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Dragon Ball themed",
+        "effectSummary": "Creates crater-style knockdowns and a Saibaman bomb-style final KO.",
+        "cardSummary": "Creates crater-style knockdowns and a Saibaman bomb-style final KO."
+      },
+      "system": {
+        "slug": "yamcha",
+        "section": "Daily shop rotation",
+        "sortOrder": 12,
+        "image": "/Untitled Boxing Game/Knockout Effects/yamcha.png"
+      }
     },
     {
-      "id": "yakuza",
-      "name": "Yakuza",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "$49,999",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Yakuza themed",
-      "effectSummary": "Darkens the arena with cinematic angles and a game-over-style final KO.",
-      "cardSummary": "Darkens the arena with cinematic angles and a game-over-style final KO.",
-      "image": "/Untitled Boxing Game/Knockout Effects/yakuza.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Yakuza",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "$49,999",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Yakuza themed",
+        "effectSummary": "Darkens the arena with cinematic angles and a game-over-style final KO.",
+        "cardSummary": "Darkens the arena with cinematic angles and a game-over-style final KO."
+      },
+      "system": {
+        "slug": "yakuza",
+        "section": "Daily shop rotation",
+        "sortOrder": 13,
+        "image": "/Untitled Boxing Game/Knockout Effects/yakuza.png"
+      }
     },
     {
-      "id": "barbarian",
-      "name": "Barbarian",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "$89,999",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Rage themed",
-      "effectSummary": "Staggers back, glows through one eye, then bursts with aura while beating the chest.",
-      "cardSummary": "Staggers back, glows through one eye, then bursts with aura while beating the chest.",
-      "image": "/Untitled Boxing Game/Knockout Effects/barbarian.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Barbarian",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "$89,999",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Rage themed",
+        "effectSummary": "Staggers back, glows through one eye, then bursts with aura while beating the chest.",
+        "cardSummary": "Staggers back, glows through one eye, then bursts with aura while beating the chest."
+      },
+      "system": {
+        "slug": "barbarian",
+        "section": "Daily shop rotation",
+        "sortOrder": 14,
+        "image": "/Untitled Boxing Game/Knockout Effects/barbarian.png"
+      }
     },
     {
-      "id": "undertale",
-      "name": "Undertale",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "Unknown",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Undertale themed",
-      "effectSummary": "Uses a pixel heart recovery on knockdowns and a shattering heart on the finisher.",
-      "cardSummary": "Uses a pixel heart recovery on knockdowns and a shattering heart on the finisher.",
-      "image": "/Untitled Boxing Game/Knockout Effects/undertale.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Undertale",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "Unknown",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Undertale themed",
+        "effectSummary": "Uses a pixel heart recovery on knockdowns and a shattering heart on the finisher.",
+        "cardSummary": "Uses a pixel heart recovery on knockdowns and a shattering heart on the finisher."
+      },
+      "system": {
+        "slug": "undertale",
+        "section": "Daily shop rotation",
+        "sortOrder": 15,
+        "image": "/Untitled Boxing Game/Knockout Effects/undertale.png"
+      }
     },
     {
-      "id": "super",
-      "name": "Super",
-      "collectionSection": "Daily shop rotation",
-      "source": "Daily shop rotation",
-      "availability": "Can appear in the daily shop rotation",
-      "price": "$94,999",
-      "refresh": "Shop shows three animations and refreshes every 12 hours",
-      "theme": "Dragon Ball themed",
-      "effectSummary": "Uses Super Saiyan-style transformations and teleports across the knockdown sequence.",
-      "cardSummary": "Uses Super Saiyan-style transformations and teleports across the knockdown sequence.",
-      "image": "/Untitled Boxing Game/Knockout Effects/super.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Super",
+        "source": "Daily shop rotation",
+        "availability": "Can appear in the daily shop rotation",
+        "price": "$94,999",
+        "refresh": "Shop shows three animations and refreshes every 12 hours",
+        "theme": "Dragon Ball themed",
+        "effectSummary": "Uses Super Saiyan-style transformations and teleports across the knockdown sequence.",
+        "cardSummary": "Uses Super Saiyan-style transformations and teleports across the knockdown sequence."
+      },
+      "system": {
+        "slug": "super",
+        "section": "Daily shop rotation",
+        "sortOrder": 16,
+        "image": "/Untitled Boxing Game/Knockout Effects/super.png"
+      }
     },
     {
-      "id": "champion",
-      "name": "Champion",
-      "collectionSection": "Event reward",
-      "source": "The Games event reward",
-      "availability": "Limited event reward",
-      "price": "Event reward",
-      "refresh": "Event route, not a normal shop refresh",
-      "theme": "The Games event themed",
-      "effectSummary": "A blue Champion variant awarded for defeating Bringus during The Games event.",
-      "cardSummary": "A blue Champion variant awarded for defeating Bringus during The Games event.",
-      "image": "/Untitled Boxing Game/Knockout Effects/champion.png",
-      "imageStatus": "source-icon",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Knockdowns"
+      "item": {
+        "name": "Champion",
+        "source": "The Games event reward",
+        "availability": "Limited event reward",
+        "price": "Event reward",
+        "refresh": "Event route, not a normal shop refresh",
+        "theme": "The Games event themed",
+        "effectSummary": "A blue Champion variant awarded for defeating Bringus during The Games event.",
+        "cardSummary": "A blue Champion variant awarded for defeating Bringus during The Games event."
+      },
+      "system": {
+        "slug": "champion",
+        "section": "Event reward",
+        "sortOrder": 17,
+        "image": "/Untitled Boxing Game/Knockout Effects/champion.png"
+      }
     }
   ]
 }

@@ -1,372 +1,553 @@
 {
   "meta": {
-    "title": "Grow a Garden 2 seeds data",
-    "updatedAt": "2026-06-23",
-    "sources": [
-      {
-        "label": "Beebom - All Grow a Garden 2 Plants and Seeds Guide",
-        "url": "https://beebom.com/grow-a-garden-2-plants-and-seeds/",
-        "accessed": "2026-06-23"
-      },
-      {
-        "label": "Grow a Garden 2 Wiki - Fandom",
-        "url": "https://growagarden2.fandom.com/wiki/Grow_A_Garden_2_Wiki",
-        "accessed": "2026-06-13"
-      },
-      {
-        "label": "Grow a Garden Calculator - Grow a Garden 2 Wiki",
-        "url": "https://www.growagardencalculator.com/grow-a-garden-2/wiki/",
-        "accessed": "2026-06-13"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Grow a Garden 2",
+    "gameSlug": "grow-a-garden-2",
+    "collection": "seeds",
+    "route": "/wiki/grow-a-garden-2/seeds",
+    "catalogCode": "grow-a-garden-2-seeds",
+    "itemFields": [
       "whereToGet",
       "price",
       "rarity",
       "harvestType",
       "availability"
-    ]
+    ],
+    "columns": [
+      "whereToGet",
+      "price",
+      "rarity",
+      "harvestType",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Epic",
+        "Legendary",
+        "Super",
+        "Mythic"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "whereToGet",
+        "price",
+        "rarity",
+        "harvestType",
+        "availability"
+      ],
+      "tableFields": [
+        "whereToGet",
+        "price",
+        "rarity",
+        "harvestType",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "carrot",
-      "name": "Carrot",
-      "price": "1 Sheckle",
-      "rarity": "Common",
-      "harvestType": "Single",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/carrot.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_52_150.webp?w=200",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Carrot",
+        "whereToGet": "Seed Shop",
+        "price": "1 Sheckle",
+        "rarity": "Common",
+        "harvestType": "Single",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "carrot",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden%202/Crops/carrot.webp"
+      }
     },
     {
-      "id": "strawberry",
-      "name": "Strawberry",
-      "price": "10 Sheckles",
-      "rarity": "Common",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/strawberry.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_297a46.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Strawberry",
+        "whereToGet": "Seed Shop",
+        "price": "10 Sheckles",
+        "rarity": "Common",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "strawberry",
+        "section": "Common",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden%202/Crops/strawberry.webp"
+      }
     },
     {
-      "id": "blueberry",
-      "name": "Blueberry",
-      "price": "25 Sheckles",
-      "rarity": "Common",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/blueberry.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_16b138.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Blueberry",
+        "whereToGet": "Seed Shop",
+        "price": "25 Sheckles",
+        "rarity": "Common",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "blueberry",
+        "section": "Common",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden%202/Crops/blueberry.webp"
+      }
     },
     {
-      "id": "tulip",
-      "name": "Tulip",
-      "price": "40 Sheckles",
-      "rarity": "Uncommon",
-      "harvestType": "Single",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/tulip.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_0a9ef3.png?w=150&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Tulip",
+        "whereToGet": "Seed Shop",
+        "price": "40 Sheckles",
+        "rarity": "Uncommon",
+        "harvestType": "Single",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "tulip",
+        "section": "Uncommon",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden%202/Crops/tulip.webp"
+      }
     },
     {
-      "id": "tomato",
-      "name": "Tomato",
-      "price": "200 Sheckles",
-      "rarity": "Uncommon",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/tomato.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_1f1706.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Tomato",
+        "whereToGet": "Seed Shop",
+        "price": "200 Sheckles",
+        "rarity": "Uncommon",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "tomato",
+        "section": "Uncommon",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden%202/Crops/tomato.webp"
+      }
     },
     {
-      "id": "apple",
-      "name": "Apple",
-      "price": "400 Sheckles",
-      "rarity": "Uncommon",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/apple.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_89575e.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Apple",
+        "whereToGet": "Seed Shop",
+        "price": "400 Sheckles",
+        "rarity": "Uncommon",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "apple",
+        "section": "Uncommon",
+        "sortOrder": 6,
+        "image": "/Grow%20a%20Garden%202/Crops/apple.webp"
+      }
     },
     {
-      "id": "bamboo",
-      "name": "Bamboo",
-      "price": "700 Sheckles",
-      "rarity": "Rare",
-      "harvestType": "Single",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/bamboo.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_f3f799.png?w=150&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Bamboo",
+        "whereToGet": "Seed Shop",
+        "price": "700 Sheckles",
+        "rarity": "Rare",
+        "harvestType": "Single",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "bamboo",
+        "section": "Rare",
+        "sortOrder": 7,
+        "image": "/Grow%20a%20Garden%202/Crops/bamboo.webp"
+      }
     },
     {
-      "id": "corn",
-      "name": "Corn",
-      "price": "2.5K Sheckles",
-      "rarity": "Rare",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/corn.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_466d60.png?w=150&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Corn",
+        "whereToGet": "Seed Shop",
+        "price": "2.5K Sheckles",
+        "rarity": "Rare",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "corn",
+        "section": "Rare",
+        "sortOrder": 8,
+        "image": "/Grow%20a%20Garden%202/Crops/corn.webp"
+      }
     },
     {
-      "id": "cactus",
-      "name": "Cactus",
-      "price": "5K Sheckles",
-      "rarity": "Rare",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/cactus.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_9bc6cc.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Cactus",
+        "whereToGet": "Seed Shop",
+        "price": "5K Sheckles",
+        "rarity": "Rare",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "cactus",
+        "section": "Rare",
+        "sortOrder": 9,
+        "image": "/Grow%20a%20Garden%202/Crops/cactus.webp"
+      }
     },
     {
-      "id": "pineapple",
-      "name": "Pineapple",
-      "price": "10K Sheckles",
-      "rarity": "Rare",
-      "harvestType": "Single",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/pineapple.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_105c28.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Pineapple",
+        "whereToGet": "Seed Shop",
+        "price": "10K Sheckles",
+        "rarity": "Rare",
+        "harvestType": "Single",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "pineapple",
+        "section": "Rare",
+        "sortOrder": 10,
+        "image": "/Grow%20a%20Garden%202/Crops/pineapple.webp"
+      }
     },
     {
-      "id": "mushroom",
-      "name": "Mushroom",
-      "price": "15K Sheckles",
-      "rarity": "Epic",
-      "harvestType": "Single",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/mushroom.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_25ae19.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Mushroom",
+        "whereToGet": "Seed Shop",
+        "price": "15K Sheckles",
+        "rarity": "Epic",
+        "harvestType": "Single",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "mushroom",
+        "section": "Epic",
+        "sortOrder": 11,
+        "image": "/Grow%20a%20Garden%202/Crops/mushroom.webp"
+      }
     },
     {
-      "id": "green-bean",
-      "name": "Green Bean",
-      "price": "20K Sheckles",
-      "rarity": "Epic",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/green-bean.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_4002b0.png?w=150&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Green Bean",
+        "whereToGet": "Seed Shop",
+        "price": "20K Sheckles",
+        "rarity": "Epic",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "green-bean",
+        "section": "Epic",
+        "sortOrder": 12,
+        "image": "/Grow%20a%20Garden%202/Crops/green-bean.webp"
+      }
     },
     {
-      "id": "banana",
-      "name": "Banana",
-      "price": "30K Sheckles",
-      "rarity": "Epic",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/banana.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_954003.png?w=150&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Banana",
+        "whereToGet": "Seed Shop",
+        "price": "30K Sheckles",
+        "rarity": "Epic",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "banana",
+        "section": "Epic",
+        "sortOrder": 13,
+        "image": "/Grow%20a%20Garden%202/Crops/banana.webp"
+      }
     },
     {
-      "id": "grape",
-      "name": "Grape",
-      "price": "50K Sheckles",
-      "rarity": "Epic",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/grape.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_6c63b7.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Grape",
+        "whereToGet": "Seed Shop",
+        "price": "50K Sheckles",
+        "rarity": "Epic",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "grape",
+        "section": "Epic",
+        "sortOrder": 14,
+        "image": "/Grow%20a%20Garden%202/Crops/grape.webp"
+      }
     },
     {
-      "id": "coconut",
-      "name": "Coconut",
-      "price": "140K Sheckles",
-      "rarity": "Epic",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/coconut.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_ec166b.png?w=150&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Coconut",
+        "whereToGet": "Seed Shop",
+        "price": "140K Sheckles",
+        "rarity": "Epic",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "coconut",
+        "section": "Epic",
+        "sortOrder": 15,
+        "image": "/Grow%20a%20Garden%202/Crops/coconut.webp"
+      }
     },
     {
-      "id": "mango",
-      "name": "Mango",
-      "price": "300K Sheckles",
-      "rarity": "Epic",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/mango.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_1b1308.png?w=150&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Mango",
+        "whereToGet": "Seed Shop",
+        "price": "300K Sheckles",
+        "rarity": "Epic",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "mango",
+        "section": "Epic",
+        "sortOrder": 16,
+        "image": "/Grow%20a%20Garden%202/Crops/mango.webp"
+      }
     },
     {
-      "id": "acorn",
-      "name": "Acorn",
-      "price": "700K Sheckles",
-      "rarity": "Legendary",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/acorn.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_f1cdcb.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Acorn",
+        "whereToGet": "Seed Shop",
+        "price": "700K Sheckles",
+        "rarity": "Legendary",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "acorn",
+        "section": "Legendary",
+        "sortOrder": 17,
+        "image": "/Grow%20a%20Garden%202/Crops/acorn.webp"
+      }
     },
     {
-      "id": "cherry",
-      "name": "Cherry",
-      "price": "1.2M Sheckles",
-      "rarity": "Legendary",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/cherry.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_53_150.webp?w=200",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Cherry",
+        "whereToGet": "Seed Shop",
+        "price": "1.2M Sheckles",
+        "rarity": "Legendary",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "cherry",
+        "section": "Legendary",
+        "sortOrder": 18,
+        "image": "/Grow%20a%20Garden%202/Crops/cherry.webp"
+      }
     },
     {
-      "id": "dragon-fruit",
-      "name": "Dragon Fruit",
-      "price": "120K Sheckles",
-      "rarity": "Legendary",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/dragon-fruit.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_38e443.png?w=150&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Dragon Fruit",
+        "whereToGet": "Seed Shop",
+        "price": "120K Sheckles",
+        "rarity": "Legendary",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "dragon-fruit",
+        "section": "Legendary",
+        "sortOrder": 19,
+        "image": "/Grow%20a%20Garden%202/Crops/dragon-fruit.webp"
+      }
     },
     {
-      "id": "dragons-breath",
-      "name": "Dragon's Breath",
-      "price": "90M Sheckles",
-      "rarity": "Super",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/dragons-breath.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_521444.png?w=150&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Dragon's Breath",
+        "whereToGet": "Seed Shop",
+        "price": "90M Sheckles",
+        "rarity": "Super",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "dragon-s-breath",
+        "section": "Super",
+        "sortOrder": 20,
+        "image": "/Grow%20a%20Garden%202/Crops/dragons-breath.webp"
+      }
     },
     {
-      "id": "moon-bloom",
-      "name": "Moon Bloom",
-      "price": "65M Sheckles",
-      "rarity": "Super",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/moon-bloom.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_54_150.webp?w=200",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Moon Bloom",
+        "whereToGet": "Seed Shop",
+        "price": "65M Sheckles",
+        "rarity": "Super",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "moon-bloom",
+        "section": "Super",
+        "sortOrder": 21,
+        "image": "/Grow%20a%20Garden%202/Crops/moon-bloom.webp"
+      }
     },
     {
-      "id": "poison-apple",
-      "name": "Poison Apple",
-      "price": "25M Sheckles",
-      "rarity": "Mythic",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/poison-apple.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_49_150.webp?w=200",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Poison Apple",
+        "whereToGet": "Seed Shop",
+        "price": "25M Sheckles",
+        "rarity": "Mythic",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "poison-apple",
+        "section": "Mythic",
+        "sortOrder": 22,
+        "image": "/Grow%20a%20Garden%202/Crops/poison-apple.webp"
+      }
     },
     {
-      "id": "pomegranate",
-      "name": "Pomegranate",
-      "price": "12M Sheckles",
-      "rarity": "Mythic",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/pomegranate.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_51_150.webp?w=200",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Pomegranate",
+        "whereToGet": "Seed Shop",
+        "price": "12M Sheckles",
+        "rarity": "Mythic",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "pomegranate",
+        "section": "Mythic",
+        "sortOrder": 23,
+        "image": "/Grow%20a%20Garden%202/Crops/pomegranate.webp"
+      }
     },
     {
-      "id": "sunflower",
-      "name": "Sunflower",
-      "price": "5M Sheckles",
-      "rarity": "Legendary",
-      "harvestType": "Unknown",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/sunflower.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_4675c5.png?w=420&quality=75",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Sunflower",
+        "whereToGet": "Seed Shop",
+        "price": "5M Sheckles",
+        "rarity": "Legendary",
+        "harvestType": "Unknown",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "sunflower",
+        "section": "Legendary",
+        "sortOrder": 24,
+        "image": "/Grow%20a%20Garden%202/Crops/sunflower.webp"
+      }
     },
     {
-      "id": "venom-spitter",
-      "name": "Venom Spitter",
-      "price": "TBA",
-      "rarity": "Mythic",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Venom Spitter",
+        "whereToGet": "Seed Shop",
+        "price": "TBA",
+        "rarity": "Mythic",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "venom-spitter",
+        "section": "Mythic",
+        "sortOrder": 25,
+        "image": null
+      }
     },
     {
-      "id": "venus-fly-trap",
-      "name": "Venus Fly Trap",
-      "price": "7M Sheckles",
-      "rarity": "Mythic",
-      "harvestType": "Multi",
-      "availability": "Main hub shop",
-      "image": "/Grow%20a%20Garden%202/Crops/venus-fly-trap.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/imgi_47_150.webp?w=200",
-      "whereToGet": "Seed Shop"
+      "item": {
+        "name": "Venus Fly Trap",
+        "whereToGet": "Seed Shop",
+        "price": "7M Sheckles",
+        "rarity": "Mythic",
+        "harvestType": "Multi",
+        "availability": "Main hub shop"
+      },
+      "system": {
+        "slug": "venus-fly-trap",
+        "section": "Mythic",
+        "sortOrder": 26,
+        "image": "/Grow%20a%20Garden%202/Crops/venus-fly-trap.webp"
+      }
     },
     {
-      "id": "horned-melon",
-      "name": "Horned Melon",
-      "price": "Pack reward",
-      "rarity": "Rare",
-      "harvestType": "Single",
-      "availability": "Seed pack plant",
-      "image": "/Grow%20a%20Garden%202/Crops/horned-melon.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_92dc47.png?w=88&quality=75",
-      "whereToGet": "Ghost Pepper Pack"
+      "item": {
+        "name": "Horned Melon",
+        "whereToGet": "Ghost Pepper Pack",
+        "price": "Pack reward",
+        "rarity": "Rare",
+        "harvestType": "Single",
+        "availability": "Seed pack plant"
+      },
+      "system": {
+        "slug": "horned-melon",
+        "section": "Rare",
+        "sortOrder": 27,
+        "image": "/Grow%20a%20Garden%202/Crops/horned-melon.webp"
+      }
     },
     {
-      "id": "baby-cactus",
-      "name": "Baby Cactus",
-      "price": "Pack reward",
-      "rarity": "Rare",
-      "harvestType": "Multi",
-      "availability": "Seed pack plant",
-      "image": "/Grow%20a%20Garden%202/Crops/baby-cactus.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_8240c8.png?w=88&quality=75",
-      "whereToGet": "Ghost Pepper Pack"
+      "item": {
+        "name": "Baby Cactus",
+        "whereToGet": "Ghost Pepper Pack",
+        "price": "Pack reward",
+        "rarity": "Rare",
+        "harvestType": "Multi",
+        "availability": "Seed pack plant"
+      },
+      "system": {
+        "slug": "baby-cactus",
+        "section": "Rare",
+        "sortOrder": 28,
+        "image": "/Grow%20a%20Garden%202/Crops/baby-cactus.webp"
+      }
     },
     {
-      "id": "glow-mushroom",
-      "name": "Glow Mushroom",
-      "price": "Pack reward",
-      "rarity": "Epic",
-      "harvestType": "Single",
-      "availability": "Seed pack plant",
-      "image": "/Grow%20a%20Garden%202/Crops/glow-mushroom.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_88bf89.png?w=90&quality=75",
-      "whereToGet": "Ghost Pepper Pack"
+      "item": {
+        "name": "Glow Mushroom",
+        "whereToGet": "Ghost Pepper Pack",
+        "price": "Pack reward",
+        "rarity": "Epic",
+        "harvestType": "Single",
+        "availability": "Seed pack plant"
+      },
+      "system": {
+        "slug": "glow-mushroom",
+        "section": "Epic",
+        "sortOrder": 29,
+        "image": "/Grow%20a%20Garden%202/Crops/glow-mushroom.webp"
+      }
     },
     {
-      "id": "poison-ivy",
-      "name": "Poison Ivy",
-      "price": "Pack reward",
-      "rarity": "Legendary",
-      "harvestType": "Single",
-      "availability": "Seed pack plant",
-      "image": "/Grow%20a%20Garden%202/Crops/poison-ivy.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_fe52c5.png?w=88&quality=75",
-      "whereToGet": "Ghost Pepper Pack"
+      "item": {
+        "name": "Poison Ivy",
+        "whereToGet": "Ghost Pepper Pack",
+        "price": "Pack reward",
+        "rarity": "Legendary",
+        "harvestType": "Single",
+        "availability": "Seed pack plant"
+      },
+      "system": {
+        "slug": "poison-ivy",
+        "section": "Legendary",
+        "sortOrder": 30,
+        "image": "/Grow%20a%20Garden%202/Crops/poison-ivy.webp"
+      }
     },
     {
-      "id": "ghost-pepper",
-      "name": "Ghost Pepper",
-      "price": "Pack reward",
-      "rarity": "Mythic",
-      "harvestType": "Multi",
-      "availability": "Seed pack plant",
-      "image": "/Grow%20a%20Garden%202/Crops/ghost-pepper.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/image_9a596a.png?w=90&quality=75",
-      "whereToGet": "Ghost Pepper Pack"
+      "item": {
+        "name": "Ghost Pepper",
+        "whereToGet": "Ghost Pepper Pack",
+        "price": "Pack reward",
+        "rarity": "Mythic",
+        "harvestType": "Multi",
+        "availability": "Seed pack plant"
+      },
+      "system": {
+        "slug": "ghost-pepper",
+        "section": "Mythic",
+        "sortOrder": 31,
+        "image": "/Grow%20a%20Garden%202/Crops/ghost-pepper.webp"
+      }
     }
   ]
 }

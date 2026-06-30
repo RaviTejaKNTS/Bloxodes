@@ -185,8 +185,29 @@ function getRows(document: DatasetDocument | Record<string, unknown>[]): {
   if (Array.isArray(document)) {
     return { meta: null, rows: document };
   }
+  const meta = document.meta ?? null;
+  if (meta?.schemaVersion === 2) {
+    return {
+      meta,
+      rows: (document.items ?? []).map((row) => {
+        const item = row.item && typeof row.item === "object" && !Array.isArray(row.item)
+          ? (row.item as Record<string, unknown>)
+          : {};
+        const system = row.system && typeof row.system === "object" && !Array.isArray(row.system)
+          ? (row.system as Record<string, unknown>)
+          : {};
+        return {
+          ...item,
+          slug: system.slug,
+          collectionSection: system.section,
+          sortOrder: system.sortOrder,
+          image: system.image
+        };
+      })
+    };
+  }
   return {
-    meta: document.meta ?? null,
+    meta,
     rows: document.items ?? document.data ?? []
   };
 }
@@ -232,8 +253,8 @@ function pickSectionField(
   columns: string[],
   rows: Record<string, unknown>[]
 ): string | null {
+  if (meta?.schemaVersion === 2) return "collectionSection";
   if (options.sectionField) return options.sectionField;
-  if (typeof meta?.groupBy === "string" && meta.groupBy.trim()) return meta.groupBy.trim();
   return SECTION_FIELD_PRIORITY.find((key) => columns.includes(key) && usefulValues(rows, key).size > 1) ?? null;
 }
 
@@ -247,6 +268,14 @@ function usefulValues(rows: Record<string, unknown>[], key: string): Set<string>
 }
 
 function getCardFields(meta: Record<string, unknown> | null, columns: string[], sectionField: string | null): string[] {
+  if (meta?.schemaVersion === 2 && meta.display && typeof meta.display === "object" && !Array.isArray(meta.display)) {
+    const display = meta.display as Record<string, unknown>;
+    const tableFields = Array.isArray(display.tableFields)
+      ? display.tableFields.filter((value): value is string => typeof value === "string")
+      : [];
+    if (tableFields.length) return tableFields;
+  }
+
   const defaultCardFields = Array.isArray(meta?.defaultCardFields)
     ? meta.defaultCardFields.filter((value): value is string => typeof value === "string")
     : [];
@@ -333,18 +362,44 @@ async function main() {
   }
 
   if (!sectionField) {
-    issues.push({ level: "error", message: "No useful section field found. Add meta.groupBy or collectionSection values." });
+    issues.push({ level: "warning", message: "No useful section field found. The renderer will use a single Items group." });
   } else if (!columns.includes(sectionField)) {
     issues.push({ level: "error", message: `Section field "${sectionField}" is not listed in dataset columns.` });
   }
 
   const sectionValues = sectionField ? usefulValues(rows, sectionField) : new Set<string>();
   const missingSectionRows = sectionField ? rows.filter((row) => !stringValue(row[sectionField])) : [];
+  const sectionOrder = Array.isArray(meta?.sectionOrder)
+    ? meta.sectionOrder.filter((value): value is string => typeof value === "string" && value.trim().length > 0)
+    : [];
   if (missingSectionRows.length) {
     issues.push({ level: "error", message: `${missingSectionRows.length} item(s) are missing section field "${sectionField}".` });
   }
   if (sectionField && sectionValues.size <= 1) {
     issues.push({ level: "warning", message: `Section field "${sectionField}" has only ${sectionValues.size} section value(s).` });
+  }
+  if (!meta || typeof meta !== "object") {
+    issues.push({ level: "error", message: "Dataset must use the wrapped shape: { meta: {...}, items: [...] }." });
+  }
+  if (meta?.schemaVersion !== 2) {
+    issues.push({ level: "error", message: "Dataset must use schemaVersion 2 with item/system rows and meta.display." });
+  }
+  const v2SectionOrder = meta?.schemaVersion === 2 && meta.display && typeof meta.display === "object" && !Array.isArray(meta.display)
+    ? (meta.display as Record<string, unknown>).sectionOrder
+    : null;
+  const effectiveSectionOrder = Array.isArray(v2SectionOrder)
+    ? v2SectionOrder.filter((value): value is string => typeof value === "string" && value.trim().length > 0)
+    : sectionOrder;
+  if (sectionField && !effectiveSectionOrder.length) {
+    issues.push({ level: "error", message: "meta.display.sectionOrder is required so section ordering is stable." });
+  } else if (sectionField) {
+    const missingOrderLabels = Array.from(sectionValues).filter((section) => !effectiveSectionOrder.includes(section));
+    if (missingOrderLabels.length) {
+      issues.push({
+        level: "error",
+        message: `meta.sectionOrder is missing rendered section label(s): ${missingOrderLabels.join(", ")}`
+      });
+    }
   }
 
   if (!cardFields.length) {

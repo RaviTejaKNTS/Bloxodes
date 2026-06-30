@@ -1,15 +1,12 @@
 {
   "meta": {
+    "schemaVersion": 2,
     "game": "Untitled Boxing Game",
     "gameSlug": "untitled-boxing-game",
-    "universeId": 4730278139,
     "collection": "gloves",
     "route": "/wiki/untitled-boxing-game/gloves",
     "catalogCode": "untitled-boxing-game-gloves",
-    "updatedAt": "2026-06-15",
-    "columns": [
-      "name",
-      "collectionSection",
+    "itemFields": [
       "rarity",
       "crate",
       "crateChance",
@@ -18,1947 +15,2503 @@
       "requirement",
       "availability",
       "tradeNote",
-      "cardSummary",
-      "image",
-      "imageStatus",
-      "sourcePage"
+      "cardSummary"
     ],
-    "sources": [
-      {
-        "label": "Untitled Boxing Game Wiki",
-        "url": "https://ubg.miraheze.org/wiki/Gloves",
-        "accessed": "2026-06-15"
-      }
+    "columns": [
+      "rarity",
+      "crate",
+      "crateChance",
+      "source",
+      "route",
+      "requirement",
+      "availability",
+      "tradeNote",
+      "cardSummary"
     ],
-    "notes": [
-      "Generated from source-backed catalog tables and crate boards.",
-      "Rows avoid live trade values, active code claims, and broad platform metadata."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Standard crate",
+        "Holiday crate",
+        "Ranked gloves",
+        "Event gloves",
+        "Original line and beta gloves"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "crate",
+        "crateChance",
+        "source",
+        "route",
+        "requirement"
+      ],
+      "tableFields": [
+        "rarity",
+        "crate",
+        "crateChance",
+        "source",
+        "route",
+        "requirement",
+        "availability",
+        "tradeNote"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "purple-stitch",
-      "name": "Purple Stitch",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Pain",
-      "crateChance": "16.38%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Purple Stitch is a uncommon glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/purple-stitch.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "camo",
-      "name": "Camo",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Pain",
-      "crateChance": "16.38%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Camo is a uncommon glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/camo.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "classic",
-      "name": "Classic",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Pain",
-      "crateChance": "16.38%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Classic is a uncommon glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/classic.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "sleek",
-      "name": "Sleek",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Pain",
-      "crateChance": "16.38%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Sleek is a uncommon glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/sleek.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "convict",
-      "name": "Convict",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Pain",
-      "crateChance": "9%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Convict is a rare glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/convict.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "turbulence",
-      "name": "Turbulence",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Pain",
-      "crateChance": "9%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Turbulence is a rare glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/turbulence.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "blotches",
-      "name": "Blotches",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Pain",
-      "crateChance": "9%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Blotches is a rare glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/blotches.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "skull",
-      "name": "Skull",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Pain",
-      "crateChance": "3%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Skull is a mythic glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/skull.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "spikes",
-      "name": "Spikes",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Pain",
-      "crateChance": "3%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Spikes is a mythic glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/spikes.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "bandages",
-      "name": "Bandages",
-      "collectionSection": "Standard crate",
-      "rarity": "Legendary",
-      "crate": "Pain",
-      "crateChance": "1.50%",
-      "source": "Pain crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Bandages is a legendary glove from the Pain crate.",
-      "image": "/Untitled Boxing Game/Gloves/bandages.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "checkered",
-      "name": "Checkered",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Gems",
-      "crateChance": "16.38%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Checkered is a uncommon glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/checkered.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "waves",
-      "name": "Waves",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Gems",
-      "crateChance": "16.38%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Waves is a uncommon glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/waves.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "jungle",
-      "name": "Jungle",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Gems",
-      "crateChance": "16.38%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Jungle is a uncommon glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/jungle.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "opal",
-      "name": "Opal",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Gems",
-      "crateChance": "16.38%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Opal is a uncommon glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/opal.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "crystal",
-      "name": "Crystal",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Gems",
-      "crateChance": "9%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Crystal is a rare glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/crystal.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "quartz",
-      "name": "Quartz",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Gems",
-      "crateChance": "9%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Quartz is a rare glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/quartz.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "emerald",
-      "name": "Emerald",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Gems",
-      "crateChance": "9%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Emerald is a rare glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/emerald.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "obsidian",
-      "name": "Obsidian",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Gems",
-      "crateChance": "3%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Obsidian is a mythic glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/obsidian.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "bismuth",
-      "name": "Bismuth",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Gems",
-      "crateChance": "3%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Bismuth is a mythic glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/bismuth.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "diamond",
-      "name": "Diamond",
-      "collectionSection": "Standard crate",
-      "rarity": "Legendary",
-      "crate": "Gems",
-      "crateChance": "1.50%",
-      "source": "Gems crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Diamond is a legendary glove from the Gems crate.",
-      "image": "/Untitled Boxing Game/Gloves/diamond.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "desert",
-      "name": "Desert",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Dragon",
-      "crateChance": "16.38%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Desert is a uncommon glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/desert.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "cloth",
-      "name": "Cloth",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Dragon",
-      "crateChance": "16.38%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Cloth is a uncommon glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/cloth.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "flame",
-      "name": "Flame",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Dragon",
-      "crateChance": "16.38%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Flame is a uncommon glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/flame.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "goo",
-      "name": "Goo",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Dragon",
-      "crateChance": "16.38%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Goo is a uncommon glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/goo.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "fade",
-      "name": "Fade",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Dragon",
-      "crateChance": "9%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Fade is a rare glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/fade.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "splash",
-      "name": "Splash",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Dragon",
-      "crateChance": "9%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Splash is a rare glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/splash.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "tiger",
-      "name": "Tiger",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Dragon",
-      "crateChance": "9%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Tiger is a rare glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/tiger.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "neon-oni",
-      "name": "Neon Oni",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Dragon",
-      "crateChance": "3%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Neon Oni is a mythic glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/neon-oni.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "flowers",
-      "name": "Flowers",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Dragon",
-      "crateChance": "3%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Flowers is a mythic glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/flowers.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "dragon-scales",
-      "name": "Dragon Scales",
-      "collectionSection": "Standard crate",
-      "rarity": "Legendary",
-      "crate": "Dragon",
-      "crateChance": "1.50%",
-      "source": "Dragon crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Dragon Scales is a legendary glove from the Dragon crate.",
-      "image": "/Untitled Boxing Game/Gloves/dragon-scales.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "astral",
-      "name": "Astral",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Sci-Fi",
-      "crateChance": "16.38%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Astral is a uncommon glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/astral.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "swirls",
-      "name": "Swirls",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Sci-Fi",
-      "crateChance": "16.38%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Swirls is a uncommon glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/swirls.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "cracks",
-      "name": "Cracks",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Sci-Fi",
-      "crateChance": "16.38%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Cracks is a uncommon glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/cracks.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "alien",
-      "name": "Alien",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Sci-Fi",
-      "crateChance": "16.38%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Alien is a uncommon glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/alien.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "gauntlets",
-      "name": "Gauntlets",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Sci-Fi",
-      "crateChance": "9%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Gauntlets is a rare glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/gauntlets.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "adamantite",
-      "name": "Adamantite",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Sci-Fi",
-      "crateChance": "9%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Adamantite is a rare glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/adamantite.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "rockets",
-      "name": "Rockets",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Sci-Fi",
-      "crateChance": "9%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Rockets is a rare glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/rockets.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "meteorite",
-      "name": "Meteorite",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Sci-Fi",
-      "crateChance": "3%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Meteorite is a mythic glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/meteorite.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "saturn",
-      "name": "Saturn",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Sci-Fi",
-      "crateChance": "3%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Saturn is a mythic glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/saturn.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "ancient",
-      "name": "Ancient",
-      "collectionSection": "Standard crate",
-      "rarity": "Legendary",
-      "crate": "Sci-Fi",
-      "crateChance": "1.50%",
-      "source": "Sci-Fi crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Ancient is a legendary glove from the Sci-Fi crate.",
-      "image": "/Untitled Boxing Game/Gloves/ancient.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "slayer",
-      "name": "Slayer",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Anime",
-      "crateChance": "16.38%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Slayer is a uncommon glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/slayer.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "ninja",
-      "name": "Ninja",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Anime",
-      "crateChance": "16.38%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Ninja is a uncommon glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/ninja.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "alchemist",
-      "name": "Alchemist",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Anime",
-      "crateChance": "16.38%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Alchemist is a uncommon glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/alchemist.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "sukuna",
-      "name": "Sukuna",
-      "collectionSection": "Standard crate",
-      "rarity": "Uncommon",
-      "crate": "Anime",
-      "crateChance": "16.38%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Sukuna is a uncommon glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/sukuna.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "kurta",
-      "name": "Kurta",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Anime",
-      "crateChance": "9%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Kurta is a rare glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/kurta.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "pantera",
-      "name": "Pantera",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Anime",
-      "crateChance": "9%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Pantera is a rare glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/pantera.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "ghoul",
-      "name": "Ghoul",
-      "collectionSection": "Standard crate",
-      "rarity": "Rare",
-      "crate": "Anime",
-      "crateChance": "9%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Ghoul is a rare glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/ghoul.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "super",
-      "name": "Super",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Anime",
-      "crateChance": "3%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Super is a mythic glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/super.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "chainsaw",
-      "name": "Chainsaw",
-      "collectionSection": "Standard crate",
-      "rarity": "Mythic",
-      "crate": "Anime",
-      "crateChance": "3%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Chainsaw is a mythic glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/chainsaw.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "berserk",
-      "name": "Berserk",
-      "collectionSection": "Standard crate",
-      "rarity": "Legendary",
-      "crate": "Anime",
-      "crateChance": "1.50%",
-      "source": "Anime crate",
-      "route": "Standard crate",
-      "availability": "Can appear in the rotating shop",
-      "tradeNote": "Tradable after opening",
-      "cardSummary": "Berserk is a legendary glove from the Anime crate.",
-      "image": "/Untitled Boxing Game/Gloves/berserk.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "splatter",
-      "name": "Splatter",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Halloween 2023",
-      "crateChance": "16.38%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Splatter is a uncommon glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/splatter.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "caution",
-      "name": "Caution",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Halloween 2023",
-      "crateChance": "16.38%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Caution is a uncommon glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/caution.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "poison",
-      "name": "Poison",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Halloween 2023",
-      "crateChance": "16.38%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Poison is a uncommon glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/poison.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "october",
-      "name": "October",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Halloween 2023",
-      "crateChance": "16.38%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "October is a uncommon glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/october.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "moth",
-      "name": "Moth",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Halloween 2023",
-      "crateChance": "9%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Moth is a rare glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/moth.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "haunted",
-      "name": "Haunted",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Halloween 2023",
-      "crateChance": "9%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Haunted is a rare glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/haunted.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "spider",
-      "name": "Spider",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Halloween 2023",
-      "crateChance": "9%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Spider is a rare glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/spider.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "joker",
-      "name": "Joker",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Halloween 2023",
-      "crateChance": "3%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Joker is a mythic glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/joker.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "bats",
-      "name": "Bats",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Halloween 2023",
-      "crateChance": "3%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Bats is a mythic glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/bats.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "corruption",
-      "name": "Corruption",
-      "collectionSection": "Holiday crate",
-      "rarity": "Legendary",
-      "crate": "Halloween 2023",
-      "crateChance": "1.50%",
-      "source": "Halloween 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Corruption is a legendary glove from the Halloween 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/corruption.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "socks",
-      "name": "Socks",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Christmas 2023",
-      "crateChance": "16.38%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Socks is a uncommon glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/socks.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "holly",
-      "name": "Holly",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Christmas 2023",
-      "crateChance": "16.38%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Holly is a uncommon glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/holly.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "snowflake",
-      "name": "Snowflake",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Christmas 2023",
-      "crateChance": "16.38%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Snowflake is a uncommon glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/snowflake.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "knitting",
-      "name": "Knitting",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Christmas 2023",
-      "crateChance": "16.38%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Knitting is a uncommon glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/knitting.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "firecracker",
-      "name": "Firecracker",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Christmas 2023",
-      "crateChance": "9%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Firecracker is a rare glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/firecracker.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "cake",
-      "name": "Cake",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Christmas 2023",
-      "crateChance": "9%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Cake is a rare glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/cake.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "candycane",
-      "name": "Candycane",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Christmas 2023",
-      "crateChance": "9%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Candycane is a rare glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/candycane.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "warped",
-      "name": "Warped",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Christmas 2023",
-      "crateChance": "3%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Warped is a mythic glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/warped.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "gift",
-      "name": "Gift",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Christmas 2023",
-      "crateChance": "3%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Gift is a mythic glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/gift.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "krampus",
-      "name": "Krampus",
-      "collectionSection": "Holiday crate",
-      "rarity": "Legendary",
-      "crate": "Christmas 2023",
-      "crateChance": "1.50%",
-      "source": "Christmas 2023 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Krampus is a legendary glove from the Christmas 2023 crate.",
-      "image": "/Untitled Boxing Game/Gloves/krampus.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "infected",
-      "name": "Infected",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Halloween 2024",
-      "crateChance": "16.38%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Infected is a uncommon glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/infected.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "dread",
-      "name": "Dread",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Halloween 2024",
-      "crateChance": "16.38%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Dread is a uncommon glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/dread.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "good-and-evil",
-      "name": "Good and Evil",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Halloween 2024",
-      "crateChance": "16.38%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Good and Evil is a uncommon glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/good-and-evil.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "molten",
-      "name": "Molten",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Halloween 2024",
-      "crateChance": "16.38%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Molten is a uncommon glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/molten.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "rat-king",
-      "name": "Rat King",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Halloween 2024",
-      "crateChance": "9%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Rat King is a rare glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/rat-king.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "arachnophobia",
-      "name": "Arachnophobia",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Halloween 2024",
-      "crateChance": "9%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Arachnophobia is a rare glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/arachnophobia.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "brains",
-      "name": "Brains",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Halloween 2024",
-      "crateChance": "9%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Brains is a rare glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/brains.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "purge",
-      "name": "Purge",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Halloween 2024",
-      "crateChance": "3%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Purge is a mythic glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/purge.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "pirate-hooks",
-      "name": "Pirate Hooks",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Halloween 2024",
-      "crateChance": "3%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Pirate Hooks is a mythic glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/pirate-hooks.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "mercenary",
-      "name": "Mercenary",
-      "collectionSection": "Holiday crate",
-      "rarity": "Legendary",
-      "crate": "Halloween 2024",
-      "crateChance": "1.50%",
-      "source": "Halloween 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Mercenary is a legendary glove from the Halloween 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/mercenary.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "snowman",
-      "name": "Snowman",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Christmas 2024",
-      "crateChance": "16.38%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Snowman is a uncommon glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/snowman.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "new-year-2025",
-      "name": "New Year (2025)",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Christmas 2024",
-      "crateChance": "16.38%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "New Year (2025) is a uncommon glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/new-year-2025.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "guard-up",
-      "name": "Guard Up",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Christmas 2024",
-      "crateChance": "16.38%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Guard Up is a uncommon glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/guard-up.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "screws",
-      "name": "Screws",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Christmas 2024",
-      "crateChance": "16.38%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Screws is a uncommon glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/screws.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "christmas-tree",
-      "name": "Christmas Tree",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Christmas 2024",
-      "crateChance": "9%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Christmas Tree is a rare glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/christmas-tree.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "rudolph",
-      "name": "Rudolph",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Christmas 2024",
-      "crateChance": "9%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Rudolph is a rare glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/rudolph.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "wrapped",
-      "name": "Wrapped",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Christmas 2024",
-      "crateChance": "9%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Wrapped is a rare glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/wrapped.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "pack-a-punch",
-      "name": "Pack-a-Punch",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Christmas 2024",
-      "crateChance": "3%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Pack-a-Punch is a mythic glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/pack-a-punch.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "frozen",
-      "name": "Frozen",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Christmas 2024",
-      "crateChance": "3%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Frozen is a mythic glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/frozen.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "snowplower",
-      "name": "Snowplower",
-      "collectionSection": "Holiday crate",
-      "rarity": "Legendary",
-      "crate": "Christmas 2024",
-      "crateChance": "1.50%",
-      "source": "Christmas 2024 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Snowplower is a legendary glove from the Christmas 2024 crate.",
-      "image": "/Untitled Boxing Game/Gloves/snowplower.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "heartbeat",
-      "name": "Heartbeat",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Valentine's 2026",
-      "crateChance": "16.38%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Heartbeat is a uncommon glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/heartbeat.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "super-love",
-      "name": "Super Love",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Valentine's 2026",
-      "crateChance": "16.38%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Super Love is a uncommon glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/super-love.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "valentine-s-2026",
-      "name": "Valentine's 2026",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Valentine's 2026",
-      "crateChance": "16.38%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Valentine's 2026 is a uncommon glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/valentine-s-2026.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "denim",
-      "name": "Denim",
-      "collectionSection": "Holiday crate",
-      "rarity": "Uncommon",
-      "crate": "Valentine's 2026",
-      "crateChance": "16.38%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Denim is a uncommon glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/denim.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "cold-hearted",
-      "name": "Cold Hearted",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Valentine's 2026",
-      "crateChance": "9%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Cold Hearted is a rare glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/cold-hearted.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "rejected",
-      "name": "Rejected",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Valentine's 2026",
-      "crateChance": "9%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Rejected is a rare glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/rejected.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "confessions",
-      "name": "Confessions",
-      "collectionSection": "Holiday crate",
-      "rarity": "Rare",
-      "crate": "Valentine's 2026",
-      "crateChance": "9%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Confessions is a rare glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/confessions.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "chocolate",
-      "name": "Chocolate",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Valentine's 2026",
-      "crateChance": "3%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Chocolate is a mythic glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/chocolate.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "roses",
-      "name": "Roses",
-      "collectionSection": "Holiday crate",
-      "rarity": "Mythic",
-      "crate": "Valentine's 2026",
-      "crateChance": "3%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Roses is a mythic glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/roses.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "cupid",
-      "name": "Cupid",
-      "collectionSection": "Holiday crate",
-      "rarity": "Legendary",
-      "crate": "Valentine's 2026",
-      "crateChance": "1.50%",
-      "source": "Valentine's 2026 crate",
-      "route": "Holiday crate",
-      "availability": "Currently unobtainable outside trading",
-      "tradeNote": "Trade-only unless the holiday crate returns",
-      "cardSummary": "Cupid is a legendary glove from the Valentine's 2026 crate.",
-      "image": "/Untitled Boxing Game/Gloves/cupid.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "torn-bronze",
-      "name": "Torn Bronze",
-      "collectionSection": "Ranked gloves",
-      "rarity": "Ranked",
-      "source": "Ranked",
-      "route": "Ranked milestone",
-      "requirement": "Bronze 3",
-      "availability": "Earnable by reaching the listed ranked tier",
-      "tradeNote": "Cannot be sold or traded",
-      "cardSummary": "Torn Bronze is awarded for reaching Bronze 3 in Ranked.",
-      "image": "/Untitled Boxing Game/Gloves/torn-bronze.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "patched-silver",
-      "name": "Patched Silver",
-      "collectionSection": "Ranked gloves",
-      "rarity": "Ranked",
-      "source": "Ranked",
-      "route": "Ranked milestone",
-      "requirement": "Silver 3",
-      "availability": "Earnable by reaching the listed ranked tier",
-      "tradeNote": "Cannot be sold or traded",
-      "cardSummary": "Patched Silver is awarded for reaching Silver 3 in Ranked.",
-      "image": "/Untitled Boxing Game/Gloves/patched-silver.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "fused-gold",
-      "name": "Fused Gold",
-      "collectionSection": "Ranked gloves",
-      "rarity": "Ranked",
-      "source": "Ranked",
-      "route": "Ranked milestone",
-      "requirement": "Gold 3",
-      "availability": "Earnable by reaching the listed ranked tier",
-      "tradeNote": "Cannot be sold or traded",
-      "cardSummary": "Fused Gold is awarded for reaching Gold 3 in Ranked.",
-      "image": "/Untitled Boxing Game/Gloves/fused-gold.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "ultra-diamond",
-      "name": "Ultra Diamond",
-      "collectionSection": "Ranked gloves",
-      "rarity": "Ranked",
-      "source": "Ranked",
-      "route": "Ranked milestone",
-      "requirement": "Diamond 3",
-      "availability": "Earnable by reaching the listed ranked tier",
-      "tradeNote": "Cannot be sold or traded",
-      "cardSummary": "Ultra Diamond is awarded for reaching Diamond 3 in Ranked.",
-      "image": "/Untitled Boxing Game/Gloves/ultra-diamond.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "champion",
-      "name": "Champion",
-      "collectionSection": "Ranked gloves",
-      "rarity": "Ranked",
-      "source": "Ranked",
-      "route": "Ranked milestone",
-      "requirement": "Champion 3",
-      "availability": "Earnable by reaching the listed ranked tier",
-      "tradeNote": "Cannot be sold or traded",
-      "cardSummary": "Champion is awarded for reaching Champion 3 in Ranked.",
-      "image": "/Untitled Boxing Game/Gloves/champion.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "beowulf",
-      "name": "Beowulf",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Valentine's Day 2024 event",
-      "route": "Limited-time event",
-      "requirement": "Bow at an opponent at the start of a match 100 times",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Beowulf is an event glove tied to Valentine's Day 2024 event.",
-      "image": "/Untitled Boxing Game/Gloves/beowulf.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "bluowulf",
-      "name": "Bluowulf",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "June 2025 2-year anniversary event",
-      "route": "Limited-time event",
-      "requirement": "Defeat opponents using all 24 styles that were in the game at that time",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Bluowulf is an event glove tied to June 2025 2-year anniversary event.",
-      "image": "/Untitled Boxing Game/Gloves/bluowulf.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "balrog",
-      "name": "Balrog",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "June 2024 1-year anniversary event",
-      "route": "Limited-time event",
-      "requirement": "Get 50 knockdowns during the event",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Balrog is an event glove tied to June 2024 1-year anniversary event.",
-      "image": "/Untitled Boxing Game/Gloves/balrog.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "balrog-breaker",
-      "name": "Balrog Breaker",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Balrog evolution quest",
-      "route": "Limited-time event",
-      "requirement": "Break 100 guards",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Balrog Breaker is an event glove tied to Balrog evolution quest.",
-      "image": "/Untitled Boxing Game/Gloves/balrog-breaker.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "balrog-greed",
-      "name": "Balrog Greed",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Balrog evolution quest",
-      "route": "Limited-time event",
-      "requirement": "Earn 59,999 cash",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Balrog Greed is an event glove tied to Balrog evolution quest.",
-      "image": "/Untitled Boxing Game/Gloves/balrog-greed.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "balrog-perfect",
-      "name": "Balrog Perfect",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Balrog evolution quest",
-      "route": "Limited-time event",
-      "requirement": "Perform 500 perfect dodges",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Balrog Perfect is an event glove tied to Balrog evolution quest.",
-      "image": "/Untitled Boxing Game/Gloves/balrog-perfect.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "balrog-triumph",
-      "name": "Balrog Triumph",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Balrog evolution quest",
-      "route": "Limited-time event",
-      "requirement": "Win 50 matches",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Balrog Triumph is an event glove tied to Balrog evolution quest.",
-      "image": "/Untitled Boxing Game/Gloves/balrog-triumph.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "balrog-ultimate",
-      "name": "Balrog Ultimate",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Balrog evolution quest",
-      "route": "Limited-time event",
-      "requirement": "Land 100 ultimates",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Balrog Ultimate is an event glove tied to Balrog evolution quest.",
-      "image": "/Untitled Boxing Game/Gloves/balrog-ultimate.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "gilgamesh",
-      "name": "Gilgamesh",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Christmas 2024 event",
-      "route": "Limited-time event",
-      "requirement": "Turn in 30 fear tokens, 20 snow tokens, and 10 corrupt tokens",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Gilgamesh is an event glove tied to Christmas 2024 event.",
-      "image": "/Untitled Boxing Game/Gloves/gilgamesh.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "bringus-beater",
-      "name": "Bringus Beater",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Roblox The Games 2024 event",
-      "route": "Limited-time event",
-      "requirement": "Knock down Coach Bringus",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Bringus Beater is an event glove tied to Roblox The Games 2024 event.",
-      "image": "/Untitled Boxing Game/Gloves/bringus-beater.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "bringus-destroyer",
-      "name": "Bringus Destroyer",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Roblox The Games 2024 event",
-      "route": "Limited-time event",
-      "requirement": "Defeat Coach Bringus",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Bringus Destroyer is an event glove tied to Roblox The Games 2024 event.",
-      "image": "/Untitled Boxing Game/Gloves/bringus-destroyer.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "troll",
-      "name": "Troll",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "April Fools 2024 event",
-      "route": "Limited-time event",
-      "requirement": "Use the freeunusual code during the event",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Troll is an event glove tied to April Fools 2024 event.",
-      "image": "/Untitled Boxing Game/Gloves/troll.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "troll-troll",
-      "name": "Troll Troll",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "April Fools 2024 event",
-      "route": "Limited-time event",
-      "requirement": "Jump off the edge at the end of the April Fools obby",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Troll Troll is an event glove tied to April Fools 2024 event.",
-      "image": "/Untitled Boxing Game/Gloves/troll-troll.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "whoopee-concussion",
-      "name": "Whoopee Concussion",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "April Fools 2026 event",
-      "route": "Limited-time event",
-      "requirement": "Complete the first event stage",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Whoopee Concussion is an event glove tied to April Fools 2026 event.",
-      "image": "/Untitled Boxing Game/Gloves/whoopee-concussion.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "whoopee-concussion-prankster",
-      "name": "Whoopee Concussion Prankster",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "April Fools 2026 event",
-      "route": "Limited-time event",
-      "requirement": "Complete the second stage to upgrade the glove",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Whoopee Concussion Prankster is an event glove tied to April Fools 2026 event.",
-      "image": "/Untitled Boxing Game/Gloves/whoopee-concussion-prankster.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "discovered",
-      "name": "Discovered",
-      "collectionSection": "Event gloves",
-      "rarity": "Event",
-      "source": "Walmart Discovered Perks promotional event",
-      "route": "Limited-time event",
-      "requirement": "Get 5 knockdowns during the November 2025 promotion",
-      "availability": "Currently unobtainable outside trading unless the event returns",
-      "tradeNote": "Event glove availability depends on ownership and trading",
-      "cardSummary": "Discovered is an event glove tied to Walmart Discovered Perks promotional event.",
-      "image": "/Untitled Boxing Game/Gloves/discovered.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "default",
-      "name": "Default",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Original",
-      "source": "Early glove shop",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "Default belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/default.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "yellow",
-      "name": "Yellow",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Original",
-      "source": "Early glove shop",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "Yellow belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/yellow.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "green",
-      "name": "Green",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Original",
-      "source": "Early glove shop",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "Green belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/green.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "blue",
-      "name": "Blue",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Original",
-      "source": "Early glove shop",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "Blue belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/blue.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "magenta",
-      "name": "Magenta",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Original",
-      "source": "Early glove shop",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "Magenta belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/magenta.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "white",
-      "name": "White",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Original",
-      "source": "Early glove shop",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "White belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/white.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "black",
-      "name": "Black",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Original",
-      "source": "Early glove shop",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "Black belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/black.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "beta-sleek",
-      "name": "Beta Sleek",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Beta",
-      "source": "Pre-rework beta glove",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "Beta Sleek belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/beta-sleek.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "beta-new-default",
-      "name": "Beta New Default",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Beta",
-      "source": "Pre-rework beta glove",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "Beta New Default belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/beta-new-default.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
-    },
-    {
-      "id": "beta-carbon",
-      "name": "Beta Carbon",
-      "collectionSection": "Original line and beta gloves",
-      "rarity": "Beta",
-      "source": "Pre-rework beta glove",
-      "route": "Old shop or trading",
-      "availability": "Currently unobtainable outside trading in the main game",
-      "tradeNote": "Collector item",
-      "cardSummary": "Beta Carbon belongs to the old glove line kept as collector context.",
-      "image": "/Untitled Boxing Game/Gloves/beta-carbon.png",
-      "sourcePage": "https://ubg.miraheze.org/wiki/Gloves"
+      "item": {
+        "name": "Purple Stitch",
+        "rarity": "Uncommon",
+        "crate": "Pain",
+        "crateChance": "16.38%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Purple Stitch is a uncommon glove from the Pain crate."
+      },
+      "system": {
+        "slug": "purple-stitch",
+        "section": "Standard crate",
+        "sortOrder": 1,
+        "image": "/Untitled Boxing Game/Gloves/purple-stitch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Camo",
+        "rarity": "Uncommon",
+        "crate": "Pain",
+        "crateChance": "16.38%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Camo is a uncommon glove from the Pain crate."
+      },
+      "system": {
+        "slug": "camo",
+        "section": "Standard crate",
+        "sortOrder": 2,
+        "image": "/Untitled Boxing Game/Gloves/camo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic",
+        "rarity": "Uncommon",
+        "crate": "Pain",
+        "crateChance": "16.38%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Classic is a uncommon glove from the Pain crate."
+      },
+      "system": {
+        "slug": "classic",
+        "section": "Standard crate",
+        "sortOrder": 3,
+        "image": "/Untitled Boxing Game/Gloves/classic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sleek",
+        "rarity": "Uncommon",
+        "crate": "Pain",
+        "crateChance": "16.38%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Sleek is a uncommon glove from the Pain crate."
+      },
+      "system": {
+        "slug": "sleek",
+        "section": "Standard crate",
+        "sortOrder": 4,
+        "image": "/Untitled Boxing Game/Gloves/sleek.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Convict",
+        "rarity": "Rare",
+        "crate": "Pain",
+        "crateChance": "9%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Convict is a rare glove from the Pain crate."
+      },
+      "system": {
+        "slug": "convict",
+        "section": "Standard crate",
+        "sortOrder": 5,
+        "image": "/Untitled Boxing Game/Gloves/convict.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Turbulence",
+        "rarity": "Rare",
+        "crate": "Pain",
+        "crateChance": "9%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Turbulence is a rare glove from the Pain crate."
+      },
+      "system": {
+        "slug": "turbulence",
+        "section": "Standard crate",
+        "sortOrder": 6,
+        "image": "/Untitled Boxing Game/Gloves/turbulence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blotches",
+        "rarity": "Rare",
+        "crate": "Pain",
+        "crateChance": "9%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Blotches is a rare glove from the Pain crate."
+      },
+      "system": {
+        "slug": "blotches",
+        "section": "Standard crate",
+        "sortOrder": 7,
+        "image": "/Untitled Boxing Game/Gloves/blotches.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skull",
+        "rarity": "Mythic",
+        "crate": "Pain",
+        "crateChance": "3%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Skull is a mythic glove from the Pain crate."
+      },
+      "system": {
+        "slug": "skull",
+        "section": "Standard crate",
+        "sortOrder": 8,
+        "image": "/Untitled Boxing Game/Gloves/skull.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spikes",
+        "rarity": "Mythic",
+        "crate": "Pain",
+        "crateChance": "3%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Spikes is a mythic glove from the Pain crate."
+      },
+      "system": {
+        "slug": "spikes",
+        "section": "Standard crate",
+        "sortOrder": 9,
+        "image": "/Untitled Boxing Game/Gloves/spikes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bandages",
+        "rarity": "Legendary",
+        "crate": "Pain",
+        "crateChance": "1.50%",
+        "source": "Pain crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Bandages is a legendary glove from the Pain crate."
+      },
+      "system": {
+        "slug": "bandages",
+        "section": "Standard crate",
+        "sortOrder": 10,
+        "image": "/Untitled Boxing Game/Gloves/bandages.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Checkered",
+        "rarity": "Uncommon",
+        "crate": "Gems",
+        "crateChance": "16.38%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Checkered is a uncommon glove from the Gems crate."
+      },
+      "system": {
+        "slug": "checkered",
+        "section": "Standard crate",
+        "sortOrder": 11,
+        "image": "/Untitled Boxing Game/Gloves/checkered.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Waves",
+        "rarity": "Uncommon",
+        "crate": "Gems",
+        "crateChance": "16.38%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Waves is a uncommon glove from the Gems crate."
+      },
+      "system": {
+        "slug": "waves",
+        "section": "Standard crate",
+        "sortOrder": 12,
+        "image": "/Untitled Boxing Game/Gloves/waves.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jungle",
+        "rarity": "Uncommon",
+        "crate": "Gems",
+        "crateChance": "16.38%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Jungle is a uncommon glove from the Gems crate."
+      },
+      "system": {
+        "slug": "jungle",
+        "section": "Standard crate",
+        "sortOrder": 13,
+        "image": "/Untitled Boxing Game/Gloves/jungle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Opal",
+        "rarity": "Uncommon",
+        "crate": "Gems",
+        "crateChance": "16.38%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Opal is a uncommon glove from the Gems crate."
+      },
+      "system": {
+        "slug": "opal",
+        "section": "Standard crate",
+        "sortOrder": 14,
+        "image": "/Untitled Boxing Game/Gloves/opal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crystal",
+        "rarity": "Rare",
+        "crate": "Gems",
+        "crateChance": "9%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Crystal is a rare glove from the Gems crate."
+      },
+      "system": {
+        "slug": "crystal",
+        "section": "Standard crate",
+        "sortOrder": 15,
+        "image": "/Untitled Boxing Game/Gloves/crystal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Quartz",
+        "rarity": "Rare",
+        "crate": "Gems",
+        "crateChance": "9%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Quartz is a rare glove from the Gems crate."
+      },
+      "system": {
+        "slug": "quartz",
+        "section": "Standard crate",
+        "sortOrder": 16,
+        "image": "/Untitled Boxing Game/Gloves/quartz.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Emerald",
+        "rarity": "Rare",
+        "crate": "Gems",
+        "crateChance": "9%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Emerald is a rare glove from the Gems crate."
+      },
+      "system": {
+        "slug": "emerald",
+        "section": "Standard crate",
+        "sortOrder": 17,
+        "image": "/Untitled Boxing Game/Gloves/emerald.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidian",
+        "rarity": "Mythic",
+        "crate": "Gems",
+        "crateChance": "3%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Obsidian is a mythic glove from the Gems crate."
+      },
+      "system": {
+        "slug": "obsidian",
+        "section": "Standard crate",
+        "sortOrder": 18,
+        "image": "/Untitled Boxing Game/Gloves/obsidian.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bismuth",
+        "rarity": "Mythic",
+        "crate": "Gems",
+        "crateChance": "3%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Bismuth is a mythic glove from the Gems crate."
+      },
+      "system": {
+        "slug": "bismuth",
+        "section": "Standard crate",
+        "sortOrder": 19,
+        "image": "/Untitled Boxing Game/Gloves/bismuth.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond",
+        "rarity": "Legendary",
+        "crate": "Gems",
+        "crateChance": "1.50%",
+        "source": "Gems crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Diamond is a legendary glove from the Gems crate."
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Standard crate",
+        "sortOrder": 20,
+        "image": "/Untitled Boxing Game/Gloves/diamond.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Desert",
+        "rarity": "Uncommon",
+        "crate": "Dragon",
+        "crateChance": "16.38%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Desert is a uncommon glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "desert",
+        "section": "Standard crate",
+        "sortOrder": 21,
+        "image": "/Untitled Boxing Game/Gloves/desert.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cloth",
+        "rarity": "Uncommon",
+        "crate": "Dragon",
+        "crateChance": "16.38%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Cloth is a uncommon glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "cloth",
+        "section": "Standard crate",
+        "sortOrder": 22,
+        "image": "/Untitled Boxing Game/Gloves/cloth.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flame",
+        "rarity": "Uncommon",
+        "crate": "Dragon",
+        "crateChance": "16.38%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Flame is a uncommon glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "flame",
+        "section": "Standard crate",
+        "sortOrder": 23,
+        "image": "/Untitled Boxing Game/Gloves/flame.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Goo",
+        "rarity": "Uncommon",
+        "crate": "Dragon",
+        "crateChance": "16.38%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Goo is a uncommon glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "goo",
+        "section": "Standard crate",
+        "sortOrder": 24,
+        "image": "/Untitled Boxing Game/Gloves/goo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fade",
+        "rarity": "Rare",
+        "crate": "Dragon",
+        "crateChance": "9%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Fade is a rare glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "fade",
+        "section": "Standard crate",
+        "sortOrder": 25,
+        "image": "/Untitled Boxing Game/Gloves/fade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Splash",
+        "rarity": "Rare",
+        "crate": "Dragon",
+        "crateChance": "9%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Splash is a rare glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "splash",
+        "section": "Standard crate",
+        "sortOrder": 26,
+        "image": "/Untitled Boxing Game/Gloves/splash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tiger",
+        "rarity": "Rare",
+        "crate": "Dragon",
+        "crateChance": "9%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Tiger is a rare glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "tiger",
+        "section": "Standard crate",
+        "sortOrder": 27,
+        "image": "/Untitled Boxing Game/Gloves/tiger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Neon Oni",
+        "rarity": "Mythic",
+        "crate": "Dragon",
+        "crateChance": "3%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Neon Oni is a mythic glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "neon-oni",
+        "section": "Standard crate",
+        "sortOrder": 28,
+        "image": "/Untitled Boxing Game/Gloves/neon-oni.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flowers",
+        "rarity": "Mythic",
+        "crate": "Dragon",
+        "crateChance": "3%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Flowers is a mythic glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "flowers",
+        "section": "Standard crate",
+        "sortOrder": 29,
+        "image": "/Untitled Boxing Game/Gloves/flowers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Scales",
+        "rarity": "Legendary",
+        "crate": "Dragon",
+        "crateChance": "1.50%",
+        "source": "Dragon crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Dragon Scales is a legendary glove from the Dragon crate."
+      },
+      "system": {
+        "slug": "dragon-scales",
+        "section": "Standard crate",
+        "sortOrder": 30,
+        "image": "/Untitled Boxing Game/Gloves/dragon-scales.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astral",
+        "rarity": "Uncommon",
+        "crate": "Sci-Fi",
+        "crateChance": "16.38%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Astral is a uncommon glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "astral",
+        "section": "Standard crate",
+        "sortOrder": 31,
+        "image": "/Untitled Boxing Game/Gloves/astral.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Swirls",
+        "rarity": "Uncommon",
+        "crate": "Sci-Fi",
+        "crateChance": "16.38%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Swirls is a uncommon glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "swirls",
+        "section": "Standard crate",
+        "sortOrder": 32,
+        "image": "/Untitled Boxing Game/Gloves/swirls.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cracks",
+        "rarity": "Uncommon",
+        "crate": "Sci-Fi",
+        "crateChance": "16.38%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Cracks is a uncommon glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "cracks",
+        "section": "Standard crate",
+        "sortOrder": 33,
+        "image": "/Untitled Boxing Game/Gloves/cracks.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alien",
+        "rarity": "Uncommon",
+        "crate": "Sci-Fi",
+        "crateChance": "16.38%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Alien is a uncommon glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "alien",
+        "section": "Standard crate",
+        "sortOrder": 34,
+        "image": "/Untitled Boxing Game/Gloves/alien.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gauntlets",
+        "rarity": "Rare",
+        "crate": "Sci-Fi",
+        "crateChance": "9%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Gauntlets is a rare glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "gauntlets",
+        "section": "Standard crate",
+        "sortOrder": 35,
+        "image": "/Untitled Boxing Game/Gloves/gauntlets.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Adamantite",
+        "rarity": "Rare",
+        "crate": "Sci-Fi",
+        "crateChance": "9%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Adamantite is a rare glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "adamantite",
+        "section": "Standard crate",
+        "sortOrder": 36,
+        "image": "/Untitled Boxing Game/Gloves/adamantite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rockets",
+        "rarity": "Rare",
+        "crate": "Sci-Fi",
+        "crateChance": "9%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Rockets is a rare glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "rockets",
+        "section": "Standard crate",
+        "sortOrder": 37,
+        "image": "/Untitled Boxing Game/Gloves/rockets.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteorite",
+        "rarity": "Mythic",
+        "crate": "Sci-Fi",
+        "crateChance": "3%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Meteorite is a mythic glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "meteorite",
+        "section": "Standard crate",
+        "sortOrder": 38,
+        "image": "/Untitled Boxing Game/Gloves/meteorite.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Saturn",
+        "rarity": "Mythic",
+        "crate": "Sci-Fi",
+        "crateChance": "3%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Saturn is a mythic glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "saturn",
+        "section": "Standard crate",
+        "sortOrder": 39,
+        "image": "/Untitled Boxing Game/Gloves/saturn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient",
+        "rarity": "Legendary",
+        "crate": "Sci-Fi",
+        "crateChance": "1.50%",
+        "source": "Sci-Fi crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Ancient is a legendary glove from the Sci-Fi crate."
+      },
+      "system": {
+        "slug": "ancient",
+        "section": "Standard crate",
+        "sortOrder": 40,
+        "image": "/Untitled Boxing Game/Gloves/ancient.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Slayer",
+        "rarity": "Uncommon",
+        "crate": "Anime",
+        "crateChance": "16.38%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Slayer is a uncommon glove from the Anime crate."
+      },
+      "system": {
+        "slug": "slayer",
+        "section": "Standard crate",
+        "sortOrder": 41,
+        "image": "/Untitled Boxing Game/Gloves/slayer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ninja",
+        "rarity": "Uncommon",
+        "crate": "Anime",
+        "crateChance": "16.38%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Ninja is a uncommon glove from the Anime crate."
+      },
+      "system": {
+        "slug": "ninja",
+        "section": "Standard crate",
+        "sortOrder": 42,
+        "image": "/Untitled Boxing Game/Gloves/ninja.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alchemist",
+        "rarity": "Uncommon",
+        "crate": "Anime",
+        "crateChance": "16.38%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Alchemist is a uncommon glove from the Anime crate."
+      },
+      "system": {
+        "slug": "alchemist",
+        "section": "Standard crate",
+        "sortOrder": 43,
+        "image": "/Untitled Boxing Game/Gloves/alchemist.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sukuna",
+        "rarity": "Uncommon",
+        "crate": "Anime",
+        "crateChance": "16.38%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Sukuna is a uncommon glove from the Anime crate."
+      },
+      "system": {
+        "slug": "sukuna",
+        "section": "Standard crate",
+        "sortOrder": 44,
+        "image": "/Untitled Boxing Game/Gloves/sukuna.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kurta",
+        "rarity": "Rare",
+        "crate": "Anime",
+        "crateChance": "9%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Kurta is a rare glove from the Anime crate."
+      },
+      "system": {
+        "slug": "kurta",
+        "section": "Standard crate",
+        "sortOrder": 45,
+        "image": "/Untitled Boxing Game/Gloves/kurta.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pantera",
+        "rarity": "Rare",
+        "crate": "Anime",
+        "crateChance": "9%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Pantera is a rare glove from the Anime crate."
+      },
+      "system": {
+        "slug": "pantera",
+        "section": "Standard crate",
+        "sortOrder": 46,
+        "image": "/Untitled Boxing Game/Gloves/pantera.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghoul",
+        "rarity": "Rare",
+        "crate": "Anime",
+        "crateChance": "9%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Ghoul is a rare glove from the Anime crate."
+      },
+      "system": {
+        "slug": "ghoul",
+        "section": "Standard crate",
+        "sortOrder": 47,
+        "image": "/Untitled Boxing Game/Gloves/ghoul.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Super",
+        "rarity": "Mythic",
+        "crate": "Anime",
+        "crateChance": "3%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Super is a mythic glove from the Anime crate."
+      },
+      "system": {
+        "slug": "super",
+        "section": "Standard crate",
+        "sortOrder": 48,
+        "image": "/Untitled Boxing Game/Gloves/super.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chainsaw",
+        "rarity": "Mythic",
+        "crate": "Anime",
+        "crateChance": "3%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Chainsaw is a mythic glove from the Anime crate."
+      },
+      "system": {
+        "slug": "chainsaw",
+        "section": "Standard crate",
+        "sortOrder": 49,
+        "image": "/Untitled Boxing Game/Gloves/chainsaw.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Berserk",
+        "rarity": "Legendary",
+        "crate": "Anime",
+        "crateChance": "1.50%",
+        "source": "Anime crate",
+        "route": "Standard crate",
+        "availability": "Can appear in the rotating shop",
+        "tradeNote": "Tradable after opening",
+        "cardSummary": "Berserk is a legendary glove from the Anime crate."
+      },
+      "system": {
+        "slug": "berserk",
+        "section": "Standard crate",
+        "sortOrder": 50,
+        "image": "/Untitled Boxing Game/Gloves/berserk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Splatter",
+        "rarity": "Uncommon",
+        "crate": "Halloween 2023",
+        "crateChance": "16.38%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Splatter is a uncommon glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "splatter",
+        "section": "Holiday crate",
+        "sortOrder": 51,
+        "image": "/Untitled Boxing Game/Gloves/splatter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Caution",
+        "rarity": "Uncommon",
+        "crate": "Halloween 2023",
+        "crateChance": "16.38%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Caution is a uncommon glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "caution",
+        "section": "Holiday crate",
+        "sortOrder": 52,
+        "image": "/Untitled Boxing Game/Gloves/caution.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poison",
+        "rarity": "Uncommon",
+        "crate": "Halloween 2023",
+        "crateChance": "16.38%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Poison is a uncommon glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "poison",
+        "section": "Holiday crate",
+        "sortOrder": 53,
+        "image": "/Untitled Boxing Game/Gloves/poison.png"
+      }
+    },
+    {
+      "item": {
+        "name": "October",
+        "rarity": "Uncommon",
+        "crate": "Halloween 2023",
+        "crateChance": "16.38%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "October is a uncommon glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "october",
+        "section": "Holiday crate",
+        "sortOrder": 54,
+        "image": "/Untitled Boxing Game/Gloves/october.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Moth",
+        "rarity": "Rare",
+        "crate": "Halloween 2023",
+        "crateChance": "9%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Moth is a rare glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "moth",
+        "section": "Holiday crate",
+        "sortOrder": 55,
+        "image": "/Untitled Boxing Game/Gloves/moth.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Haunted",
+        "rarity": "Rare",
+        "crate": "Halloween 2023",
+        "crateChance": "9%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Haunted is a rare glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "haunted",
+        "section": "Holiday crate",
+        "sortOrder": 56,
+        "image": "/Untitled Boxing Game/Gloves/haunted.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spider",
+        "rarity": "Rare",
+        "crate": "Halloween 2023",
+        "crateChance": "9%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Spider is a rare glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "spider",
+        "section": "Holiday crate",
+        "sortOrder": 57,
+        "image": "/Untitled Boxing Game/Gloves/spider.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Joker",
+        "rarity": "Mythic",
+        "crate": "Halloween 2023",
+        "crateChance": "3%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Joker is a mythic glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "joker",
+        "section": "Holiday crate",
+        "sortOrder": 58,
+        "image": "/Untitled Boxing Game/Gloves/joker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bats",
+        "rarity": "Mythic",
+        "crate": "Halloween 2023",
+        "crateChance": "3%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Bats is a mythic glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "bats",
+        "section": "Holiday crate",
+        "sortOrder": 59,
+        "image": "/Untitled Boxing Game/Gloves/bats.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corruption",
+        "rarity": "Legendary",
+        "crate": "Halloween 2023",
+        "crateChance": "1.50%",
+        "source": "Halloween 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Corruption is a legendary glove from the Halloween 2023 crate."
+      },
+      "system": {
+        "slug": "corruption",
+        "section": "Holiday crate",
+        "sortOrder": 60,
+        "image": "/Untitled Boxing Game/Gloves/corruption.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Socks",
+        "rarity": "Uncommon",
+        "crate": "Christmas 2023",
+        "crateChance": "16.38%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Socks is a uncommon glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "socks",
+        "section": "Holiday crate",
+        "sortOrder": 61,
+        "image": "/Untitled Boxing Game/Gloves/socks.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holly",
+        "rarity": "Uncommon",
+        "crate": "Christmas 2023",
+        "crateChance": "16.38%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Holly is a uncommon glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "holly",
+        "section": "Holiday crate",
+        "sortOrder": 62,
+        "image": "/Untitled Boxing Game/Gloves/holly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowflake",
+        "rarity": "Uncommon",
+        "crate": "Christmas 2023",
+        "crateChance": "16.38%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Snowflake is a uncommon glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "snowflake",
+        "section": "Holiday crate",
+        "sortOrder": 63,
+        "image": "/Untitled Boxing Game/Gloves/snowflake.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Knitting",
+        "rarity": "Uncommon",
+        "crate": "Christmas 2023",
+        "crateChance": "16.38%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Knitting is a uncommon glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "knitting",
+        "section": "Holiday crate",
+        "sortOrder": 64,
+        "image": "/Untitled Boxing Game/Gloves/knitting.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Firecracker",
+        "rarity": "Rare",
+        "crate": "Christmas 2023",
+        "crateChance": "9%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Firecracker is a rare glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "firecracker",
+        "section": "Holiday crate",
+        "sortOrder": 65,
+        "image": "/Untitled Boxing Game/Gloves/firecracker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cake",
+        "rarity": "Rare",
+        "crate": "Christmas 2023",
+        "crateChance": "9%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Cake is a rare glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "cake",
+        "section": "Holiday crate",
+        "sortOrder": 66,
+        "image": "/Untitled Boxing Game/Gloves/cake.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candycane",
+        "rarity": "Rare",
+        "crate": "Christmas 2023",
+        "crateChance": "9%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Candycane is a rare glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "candycane",
+        "section": "Holiday crate",
+        "sortOrder": 67,
+        "image": "/Untitled Boxing Game/Gloves/candycane.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Warped",
+        "rarity": "Mythic",
+        "crate": "Christmas 2023",
+        "crateChance": "3%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Warped is a mythic glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "warped",
+        "section": "Holiday crate",
+        "sortOrder": 68,
+        "image": "/Untitled Boxing Game/Gloves/warped.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gift",
+        "rarity": "Mythic",
+        "crate": "Christmas 2023",
+        "crateChance": "3%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Gift is a mythic glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "gift",
+        "section": "Holiday crate",
+        "sortOrder": 69,
+        "image": "/Untitled Boxing Game/Gloves/gift.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Krampus",
+        "rarity": "Legendary",
+        "crate": "Christmas 2023",
+        "crateChance": "1.50%",
+        "source": "Christmas 2023 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Krampus is a legendary glove from the Christmas 2023 crate."
+      },
+      "system": {
+        "slug": "krampus",
+        "section": "Holiday crate",
+        "sortOrder": 70,
+        "image": "/Untitled Boxing Game/Gloves/krampus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Infected",
+        "rarity": "Uncommon",
+        "crate": "Halloween 2024",
+        "crateChance": "16.38%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Infected is a uncommon glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "infected",
+        "section": "Holiday crate",
+        "sortOrder": 71,
+        "image": "/Untitled Boxing Game/Gloves/infected.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dread",
+        "rarity": "Uncommon",
+        "crate": "Halloween 2024",
+        "crateChance": "16.38%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Dread is a uncommon glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "dread",
+        "section": "Holiday crate",
+        "sortOrder": 72,
+        "image": "/Untitled Boxing Game/Gloves/dread.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Good and Evil",
+        "rarity": "Uncommon",
+        "crate": "Halloween 2024",
+        "crateChance": "16.38%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Good and Evil is a uncommon glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "good-and-evil",
+        "section": "Holiday crate",
+        "sortOrder": 73,
+        "image": "/Untitled Boxing Game/Gloves/good-and-evil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Molten",
+        "rarity": "Uncommon",
+        "crate": "Halloween 2024",
+        "crateChance": "16.38%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Molten is a uncommon glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "molten",
+        "section": "Holiday crate",
+        "sortOrder": 74,
+        "image": "/Untitled Boxing Game/Gloves/molten.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rat King",
+        "rarity": "Rare",
+        "crate": "Halloween 2024",
+        "crateChance": "9%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Rat King is a rare glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "rat-king",
+        "section": "Holiday crate",
+        "sortOrder": 75,
+        "image": "/Untitled Boxing Game/Gloves/rat-king.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Arachnophobia",
+        "rarity": "Rare",
+        "crate": "Halloween 2024",
+        "crateChance": "9%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Arachnophobia is a rare glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "arachnophobia",
+        "section": "Holiday crate",
+        "sortOrder": 76,
+        "image": "/Untitled Boxing Game/Gloves/arachnophobia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brains",
+        "rarity": "Rare",
+        "crate": "Halloween 2024",
+        "crateChance": "9%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Brains is a rare glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "brains",
+        "section": "Holiday crate",
+        "sortOrder": 77,
+        "image": "/Untitled Boxing Game/Gloves/brains.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Purge",
+        "rarity": "Mythic",
+        "crate": "Halloween 2024",
+        "crateChance": "3%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Purge is a mythic glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "purge",
+        "section": "Holiday crate",
+        "sortOrder": 78,
+        "image": "/Untitled Boxing Game/Gloves/purge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Hooks",
+        "rarity": "Mythic",
+        "crate": "Halloween 2024",
+        "crateChance": "3%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Pirate Hooks is a mythic glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "pirate-hooks",
+        "section": "Holiday crate",
+        "sortOrder": 79,
+        "image": "/Untitled Boxing Game/Gloves/pirate-hooks.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mercenary",
+        "rarity": "Legendary",
+        "crate": "Halloween 2024",
+        "crateChance": "1.50%",
+        "source": "Halloween 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Mercenary is a legendary glove from the Halloween 2024 crate."
+      },
+      "system": {
+        "slug": "mercenary",
+        "section": "Holiday crate",
+        "sortOrder": 80,
+        "image": "/Untitled Boxing Game/Gloves/mercenary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowman",
+        "rarity": "Uncommon",
+        "crate": "Christmas 2024",
+        "crateChance": "16.38%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Snowman is a uncommon glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "snowman",
+        "section": "Holiday crate",
+        "sortOrder": 81,
+        "image": "/Untitled Boxing Game/Gloves/snowman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "New Year (2025)",
+        "rarity": "Uncommon",
+        "crate": "Christmas 2024",
+        "crateChance": "16.38%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "New Year (2025) is a uncommon glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "new-year-2025",
+        "section": "Holiday crate",
+        "sortOrder": 82,
+        "image": "/Untitled Boxing Game/Gloves/new-year-2025.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Guard Up",
+        "rarity": "Uncommon",
+        "crate": "Christmas 2024",
+        "crateChance": "16.38%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Guard Up is a uncommon glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "guard-up",
+        "section": "Holiday crate",
+        "sortOrder": 83,
+        "image": "/Untitled Boxing Game/Gloves/guard-up.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Screws",
+        "rarity": "Uncommon",
+        "crate": "Christmas 2024",
+        "crateChance": "16.38%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Screws is a uncommon glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "screws",
+        "section": "Holiday crate",
+        "sortOrder": 84,
+        "image": "/Untitled Boxing Game/Gloves/screws.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Tree",
+        "rarity": "Rare",
+        "crate": "Christmas 2024",
+        "crateChance": "9%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Christmas Tree is a rare glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "christmas-tree",
+        "section": "Holiday crate",
+        "sortOrder": 85,
+        "image": "/Untitled Boxing Game/Gloves/christmas-tree.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rudolph",
+        "rarity": "Rare",
+        "crate": "Christmas 2024",
+        "crateChance": "9%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Rudolph is a rare glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "rudolph",
+        "section": "Holiday crate",
+        "sortOrder": 86,
+        "image": "/Untitled Boxing Game/Gloves/rudolph.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wrapped",
+        "rarity": "Rare",
+        "crate": "Christmas 2024",
+        "crateChance": "9%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Wrapped is a rare glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "wrapped",
+        "section": "Holiday crate",
+        "sortOrder": 87,
+        "image": "/Untitled Boxing Game/Gloves/wrapped.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pack-a-Punch",
+        "rarity": "Mythic",
+        "crate": "Christmas 2024",
+        "crateChance": "3%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Pack-a-Punch is a mythic glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "pack-a-punch",
+        "section": "Holiday crate",
+        "sortOrder": 88,
+        "image": "/Untitled Boxing Game/Gloves/pack-a-punch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen",
+        "rarity": "Mythic",
+        "crate": "Christmas 2024",
+        "crateChance": "3%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Frozen is a mythic glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Holiday crate",
+        "sortOrder": 89,
+        "image": "/Untitled Boxing Game/Gloves/frozen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowplower",
+        "rarity": "Legendary",
+        "crate": "Christmas 2024",
+        "crateChance": "1.50%",
+        "source": "Christmas 2024 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Snowplower is a legendary glove from the Christmas 2024 crate."
+      },
+      "system": {
+        "slug": "snowplower",
+        "section": "Holiday crate",
+        "sortOrder": 90,
+        "image": "/Untitled Boxing Game/Gloves/snowplower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heartbeat",
+        "rarity": "Uncommon",
+        "crate": "Valentine's 2026",
+        "crateChance": "16.38%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Heartbeat is a uncommon glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "heartbeat",
+        "section": "Holiday crate",
+        "sortOrder": 91,
+        "image": "/Untitled Boxing Game/Gloves/heartbeat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Super Love",
+        "rarity": "Uncommon",
+        "crate": "Valentine's 2026",
+        "crateChance": "16.38%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Super Love is a uncommon glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "super-love",
+        "section": "Holiday crate",
+        "sortOrder": 92,
+        "image": "/Untitled Boxing Game/Gloves/super-love.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine's 2026",
+        "rarity": "Uncommon",
+        "crate": "Valentine's 2026",
+        "crateChance": "16.38%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Valentine's 2026 is a uncommon glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "valentine-s-2026",
+        "section": "Holiday crate",
+        "sortOrder": 93,
+        "image": "/Untitled Boxing Game/Gloves/valentine-s-2026.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Denim",
+        "rarity": "Uncommon",
+        "crate": "Valentine's 2026",
+        "crateChance": "16.38%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Denim is a uncommon glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "denim",
+        "section": "Holiday crate",
+        "sortOrder": 94,
+        "image": "/Untitled Boxing Game/Gloves/denim.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cold Hearted",
+        "rarity": "Rare",
+        "crate": "Valentine's 2026",
+        "crateChance": "9%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Cold Hearted is a rare glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "cold-hearted",
+        "section": "Holiday crate",
+        "sortOrder": 95,
+        "image": "/Untitled Boxing Game/Gloves/cold-hearted.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rejected",
+        "rarity": "Rare",
+        "crate": "Valentine's 2026",
+        "crateChance": "9%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Rejected is a rare glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "rejected",
+        "section": "Holiday crate",
+        "sortOrder": 96,
+        "image": "/Untitled Boxing Game/Gloves/rejected.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Confessions",
+        "rarity": "Rare",
+        "crate": "Valentine's 2026",
+        "crateChance": "9%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Confessions is a rare glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "confessions",
+        "section": "Holiday crate",
+        "sortOrder": 97,
+        "image": "/Untitled Boxing Game/Gloves/confessions.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate",
+        "rarity": "Mythic",
+        "crate": "Valentine's 2026",
+        "crateChance": "3%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Chocolate is a mythic glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "chocolate",
+        "section": "Holiday crate",
+        "sortOrder": 98,
+        "image": "/Untitled Boxing Game/Gloves/chocolate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Roses",
+        "rarity": "Mythic",
+        "crate": "Valentine's 2026",
+        "crateChance": "3%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Roses is a mythic glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "roses",
+        "section": "Holiday crate",
+        "sortOrder": 99,
+        "image": "/Untitled Boxing Game/Gloves/roses.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid",
+        "rarity": "Legendary",
+        "crate": "Valentine's 2026",
+        "crateChance": "1.50%",
+        "source": "Valentine's 2026 crate",
+        "route": "Holiday crate",
+        "availability": "Currently unobtainable outside trading",
+        "tradeNote": "Trade-only unless the holiday crate returns",
+        "cardSummary": "Cupid is a legendary glove from the Valentine's 2026 crate."
+      },
+      "system": {
+        "slug": "cupid",
+        "section": "Holiday crate",
+        "sortOrder": 100,
+        "image": "/Untitled Boxing Game/Gloves/cupid.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Torn Bronze",
+        "rarity": "Ranked",
+        "source": "Ranked",
+        "route": "Ranked milestone",
+        "requirement": "Bronze 3",
+        "availability": "Earnable by reaching the listed ranked tier",
+        "tradeNote": "Cannot be sold or traded",
+        "cardSummary": "Torn Bronze is awarded for reaching Bronze 3 in Ranked."
+      },
+      "system": {
+        "slug": "torn-bronze",
+        "section": "Ranked gloves",
+        "sortOrder": 101,
+        "image": "/Untitled Boxing Game/Gloves/torn-bronze.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Patched Silver",
+        "rarity": "Ranked",
+        "source": "Ranked",
+        "route": "Ranked milestone",
+        "requirement": "Silver 3",
+        "availability": "Earnable by reaching the listed ranked tier",
+        "tradeNote": "Cannot be sold or traded",
+        "cardSummary": "Patched Silver is awarded for reaching Silver 3 in Ranked."
+      },
+      "system": {
+        "slug": "patched-silver",
+        "section": "Ranked gloves",
+        "sortOrder": 102,
+        "image": "/Untitled Boxing Game/Gloves/patched-silver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fused Gold",
+        "rarity": "Ranked",
+        "source": "Ranked",
+        "route": "Ranked milestone",
+        "requirement": "Gold 3",
+        "availability": "Earnable by reaching the listed ranked tier",
+        "tradeNote": "Cannot be sold or traded",
+        "cardSummary": "Fused Gold is awarded for reaching Gold 3 in Ranked."
+      },
+      "system": {
+        "slug": "fused-gold",
+        "section": "Ranked gloves",
+        "sortOrder": 103,
+        "image": "/Untitled Boxing Game/Gloves/fused-gold.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ultra Diamond",
+        "rarity": "Ranked",
+        "source": "Ranked",
+        "route": "Ranked milestone",
+        "requirement": "Diamond 3",
+        "availability": "Earnable by reaching the listed ranked tier",
+        "tradeNote": "Cannot be sold or traded",
+        "cardSummary": "Ultra Diamond is awarded for reaching Diamond 3 in Ranked."
+      },
+      "system": {
+        "slug": "ultra-diamond",
+        "section": "Ranked gloves",
+        "sortOrder": 104,
+        "image": "/Untitled Boxing Game/Gloves/ultra-diamond.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Champion",
+        "rarity": "Ranked",
+        "source": "Ranked",
+        "route": "Ranked milestone",
+        "requirement": "Champion 3",
+        "availability": "Earnable by reaching the listed ranked tier",
+        "tradeNote": "Cannot be sold or traded",
+        "cardSummary": "Champion is awarded for reaching Champion 3 in Ranked."
+      },
+      "system": {
+        "slug": "champion",
+        "section": "Ranked gloves",
+        "sortOrder": 105,
+        "image": "/Untitled Boxing Game/Gloves/champion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beowulf",
+        "rarity": "Event",
+        "source": "Valentine's Day 2024 event",
+        "route": "Limited-time event",
+        "requirement": "Bow at an opponent at the start of a match 100 times",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Beowulf is an event glove tied to Valentine's Day 2024 event."
+      },
+      "system": {
+        "slug": "beowulf",
+        "section": "Event gloves",
+        "sortOrder": 106,
+        "image": "/Untitled Boxing Game/Gloves/beowulf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bluowulf",
+        "rarity": "Event",
+        "source": "June 2025 2-year anniversary event",
+        "route": "Limited-time event",
+        "requirement": "Defeat opponents using all 24 styles that were in the game at that time",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Bluowulf is an event glove tied to June 2025 2-year anniversary event."
+      },
+      "system": {
+        "slug": "bluowulf",
+        "section": "Event gloves",
+        "sortOrder": 107,
+        "image": "/Untitled Boxing Game/Gloves/bluowulf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Balrog",
+        "rarity": "Event",
+        "source": "June 2024 1-year anniversary event",
+        "route": "Limited-time event",
+        "requirement": "Get 50 knockdowns during the event",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Balrog is an event glove tied to June 2024 1-year anniversary event."
+      },
+      "system": {
+        "slug": "balrog",
+        "section": "Event gloves",
+        "sortOrder": 108,
+        "image": "/Untitled Boxing Game/Gloves/balrog.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Balrog Breaker",
+        "rarity": "Event",
+        "source": "Balrog evolution quest",
+        "route": "Limited-time event",
+        "requirement": "Break 100 guards",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Balrog Breaker is an event glove tied to Balrog evolution quest."
+      },
+      "system": {
+        "slug": "balrog-breaker",
+        "section": "Event gloves",
+        "sortOrder": 109,
+        "image": "/Untitled Boxing Game/Gloves/balrog-breaker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Balrog Greed",
+        "rarity": "Event",
+        "source": "Balrog evolution quest",
+        "route": "Limited-time event",
+        "requirement": "Earn 59,999 cash",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Balrog Greed is an event glove tied to Balrog evolution quest."
+      },
+      "system": {
+        "slug": "balrog-greed",
+        "section": "Event gloves",
+        "sortOrder": 110,
+        "image": "/Untitled Boxing Game/Gloves/balrog-greed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Balrog Perfect",
+        "rarity": "Event",
+        "source": "Balrog evolution quest",
+        "route": "Limited-time event",
+        "requirement": "Perform 500 perfect dodges",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Balrog Perfect is an event glove tied to Balrog evolution quest."
+      },
+      "system": {
+        "slug": "balrog-perfect",
+        "section": "Event gloves",
+        "sortOrder": 111,
+        "image": "/Untitled Boxing Game/Gloves/balrog-perfect.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Balrog Triumph",
+        "rarity": "Event",
+        "source": "Balrog evolution quest",
+        "route": "Limited-time event",
+        "requirement": "Win 50 matches",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Balrog Triumph is an event glove tied to Balrog evolution quest."
+      },
+      "system": {
+        "slug": "balrog-triumph",
+        "section": "Event gloves",
+        "sortOrder": 112,
+        "image": "/Untitled Boxing Game/Gloves/balrog-triumph.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Balrog Ultimate",
+        "rarity": "Event",
+        "source": "Balrog evolution quest",
+        "route": "Limited-time event",
+        "requirement": "Land 100 ultimates",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Balrog Ultimate is an event glove tied to Balrog evolution quest."
+      },
+      "system": {
+        "slug": "balrog-ultimate",
+        "section": "Event gloves",
+        "sortOrder": 113,
+        "image": "/Untitled Boxing Game/Gloves/balrog-ultimate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gilgamesh",
+        "rarity": "Event",
+        "source": "Christmas 2024 event",
+        "route": "Limited-time event",
+        "requirement": "Turn in 30 fear tokens, 20 snow tokens, and 10 corrupt tokens",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Gilgamesh is an event glove tied to Christmas 2024 event."
+      },
+      "system": {
+        "slug": "gilgamesh",
+        "section": "Event gloves",
+        "sortOrder": 114,
+        "image": "/Untitled Boxing Game/Gloves/gilgamesh.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bringus Beater",
+        "rarity": "Event",
+        "source": "Roblox The Games 2024 event",
+        "route": "Limited-time event",
+        "requirement": "Knock down Coach Bringus",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Bringus Beater is an event glove tied to Roblox The Games 2024 event."
+      },
+      "system": {
+        "slug": "bringus-beater",
+        "section": "Event gloves",
+        "sortOrder": 115,
+        "image": "/Untitled Boxing Game/Gloves/bringus-beater.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bringus Destroyer",
+        "rarity": "Event",
+        "source": "Roblox The Games 2024 event",
+        "route": "Limited-time event",
+        "requirement": "Defeat Coach Bringus",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Bringus Destroyer is an event glove tied to Roblox The Games 2024 event."
+      },
+      "system": {
+        "slug": "bringus-destroyer",
+        "section": "Event gloves",
+        "sortOrder": 116,
+        "image": "/Untitled Boxing Game/Gloves/bringus-destroyer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Troll",
+        "rarity": "Event",
+        "source": "April Fools 2024 event",
+        "route": "Limited-time event",
+        "requirement": "Use the freeunusual code during the event",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Troll is an event glove tied to April Fools 2024 event."
+      },
+      "system": {
+        "slug": "troll",
+        "section": "Event gloves",
+        "sortOrder": 117,
+        "image": "/Untitled Boxing Game/Gloves/troll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Troll Troll",
+        "rarity": "Event",
+        "source": "April Fools 2024 event",
+        "route": "Limited-time event",
+        "requirement": "Jump off the edge at the end of the April Fools obby",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Troll Troll is an event glove tied to April Fools 2024 event."
+      },
+      "system": {
+        "slug": "troll-troll",
+        "section": "Event gloves",
+        "sortOrder": 118,
+        "image": "/Untitled Boxing Game/Gloves/troll-troll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whoopee Concussion",
+        "rarity": "Event",
+        "source": "April Fools 2026 event",
+        "route": "Limited-time event",
+        "requirement": "Complete the first event stage",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Whoopee Concussion is an event glove tied to April Fools 2026 event."
+      },
+      "system": {
+        "slug": "whoopee-concussion",
+        "section": "Event gloves",
+        "sortOrder": 119,
+        "image": "/Untitled Boxing Game/Gloves/whoopee-concussion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whoopee Concussion Prankster",
+        "rarity": "Event",
+        "source": "April Fools 2026 event",
+        "route": "Limited-time event",
+        "requirement": "Complete the second stage to upgrade the glove",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Whoopee Concussion Prankster is an event glove tied to April Fools 2026 event."
+      },
+      "system": {
+        "slug": "whoopee-concussion-prankster",
+        "section": "Event gloves",
+        "sortOrder": 120,
+        "image": "/Untitled Boxing Game/Gloves/whoopee-concussion-prankster.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Discovered",
+        "rarity": "Event",
+        "source": "Walmart Discovered Perks promotional event",
+        "route": "Limited-time event",
+        "requirement": "Get 5 knockdowns during the November 2025 promotion",
+        "availability": "Currently unobtainable outside trading unless the event returns",
+        "tradeNote": "Event glove availability depends on ownership and trading",
+        "cardSummary": "Discovered is an event glove tied to Walmart Discovered Perks promotional event."
+      },
+      "system": {
+        "slug": "discovered",
+        "section": "Event gloves",
+        "sortOrder": 121,
+        "image": "/Untitled Boxing Game/Gloves/discovered.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Default",
+        "rarity": "Original",
+        "source": "Early glove shop",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "Default belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "default",
+        "section": "Original line and beta gloves",
+        "sortOrder": 122,
+        "image": "/Untitled Boxing Game/Gloves/default.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yellow",
+        "rarity": "Original",
+        "source": "Early glove shop",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "Yellow belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "yellow",
+        "section": "Original line and beta gloves",
+        "sortOrder": 123,
+        "image": "/Untitled Boxing Game/Gloves/yellow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green",
+        "rarity": "Original",
+        "source": "Early glove shop",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "Green belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "green",
+        "section": "Original line and beta gloves",
+        "sortOrder": 124,
+        "image": "/Untitled Boxing Game/Gloves/green.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue",
+        "rarity": "Original",
+        "source": "Early glove shop",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "Blue belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "blue",
+        "section": "Original line and beta gloves",
+        "sortOrder": 125,
+        "image": "/Untitled Boxing Game/Gloves/blue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magenta",
+        "rarity": "Original",
+        "source": "Early glove shop",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "Magenta belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "magenta",
+        "section": "Original line and beta gloves",
+        "sortOrder": 126,
+        "image": "/Untitled Boxing Game/Gloves/magenta.png"
+      }
+    },
+    {
+      "item": {
+        "name": "White",
+        "rarity": "Original",
+        "source": "Early glove shop",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "White belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "white",
+        "section": "Original line and beta gloves",
+        "sortOrder": 127,
+        "image": "/Untitled Boxing Game/Gloves/white.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Black",
+        "rarity": "Original",
+        "source": "Early glove shop",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "Black belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "black",
+        "section": "Original line and beta gloves",
+        "sortOrder": 128,
+        "image": "/Untitled Boxing Game/Gloves/black.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beta Sleek",
+        "rarity": "Beta",
+        "source": "Pre-rework beta glove",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "Beta Sleek belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "beta-sleek",
+        "section": "Original line and beta gloves",
+        "sortOrder": 129,
+        "image": "/Untitled Boxing Game/Gloves/beta-sleek.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beta New Default",
+        "rarity": "Beta",
+        "source": "Pre-rework beta glove",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "Beta New Default belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "beta-new-default",
+        "section": "Original line and beta gloves",
+        "sortOrder": 130,
+        "image": "/Untitled Boxing Game/Gloves/beta-new-default.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beta Carbon",
+        "rarity": "Beta",
+        "source": "Pre-rework beta glove",
+        "route": "Old shop or trading",
+        "availability": "Currently unobtainable outside trading in the main game",
+        "tradeNote": "Collector item",
+        "cardSummary": "Beta Carbon belongs to the old glove line kept as collector context."
+      },
+      "system": {
+        "slug": "beta-carbon",
+        "section": "Original line and beta gloves",
+        "sortOrder": 131,
+        "image": "/Untitled Boxing Game/Gloves/beta-carbon.png"
+      }
     }
   ]
 }

@@ -1,27 +1,12 @@
 {
   "meta": {
-    "title": "RIVALS weapons data",
-    "updatedAt": "2026-05-26",
-    "sources": [
-      {
-        "label": "Roblox RIVALS Wiki - Weapons",
-        "url": "https://robloxrivals.fandom.com/wiki/Weapons",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox - RIVALS",
-        "url": "https://www.roblox.com/games/17625359962/RIVALS",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox games API - universe 6035872082",
-        "url": "https://games.roblox.com/v1/games?universeIds=6035872082",
-        "accessed": "2026-05-26"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "weapons",
+    "route": "/wiki/rivals/weapons",
+    "catalogCode": "rivals-weapons",
+    "itemFields": [
       "slot",
       "type",
       "unlockRoute",
@@ -32,1322 +17,1267 @@
       "useNote",
       "contractNote",
       "modeExclusive",
-      "imageStatus",
-      "sourcePage",
-      "wikiUrl",
-      "sourceImageUrl",
-      "verificationNote"
-    ]
+      "isDefault",
+      "contractFamilies"
+    ],
+    "columns": [
+      "slot",
+      "type",
+      "unlockRoute",
+      "costSummary",
+      "defaultState",
+      "modeExclusiveNote",
+      "modeNote",
+      "useNote",
+      "contractNote",
+      "modeExclusive",
+      "isDefault",
+      "contractFamilies"
+    ],
+    "display": {
+      "groupLabel": "type",
+      "sectionOrder": [
+        "Contraband",
+        "Prime",
+        "Standard"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "slot",
+        "type",
+        "unlockRoute",
+        "costSummary",
+        "defaultState",
+        "modeExclusiveNote"
+      ],
+      "tableFields": [
+        "slot",
+        "type",
+        "unlockRoute",
+        "costSummary",
+        "defaultState",
+        "modeExclusiveNote",
+        "modeNote",
+        "useNote"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Distortion",
-      "slug": "distortion",
-      "image": "/RIVALS/Weapons/distortion.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Contraband",
-      "unlockRoute": "Keys",
-      "costSummary": "700 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Contraband primary that creates a pull-in vortex for area control and combo pressure.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Distortion",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/d/d8/Distortion_Icon.png/revision/latest?cb=20260509224839",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Distortion",
+        "slot": "Primary",
+        "type": "Contraband",
+        "unlockRoute": "Keys",
+        "costSummary": "700 Keys",
+        "useNote": "Contraband primary that creates a pull-in vortex for area control and combo pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "distortion",
+        "section": "Contraband",
+        "sortOrder": 1,
+        "image": "/RIVALS/Weapons/distortion.webp"
+      }
     },
     {
-      "name": "Permafrost",
-      "slug": "permafrost",
-      "image": "/RIVALS/Weapons/permafrost.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Contraband",
-      "unlockRoute": "Keys",
-      "costSummary": "600 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Contraband primary built around slowing or freezing enemies during ranged fights.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Permafrost",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/5d/Permafrost_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Permafrost",
+        "slot": "Primary",
+        "type": "Contraband",
+        "unlockRoute": "Keys",
+        "costSummary": "600 Keys",
+        "useNote": "Contraband primary built around slowing or freezing enemies during ranged fights.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "permafrost",
+        "section": "Contraband",
+        "sortOrder": 2,
+        "image": "/RIVALS/Weapons/permafrost.webp"
+      }
     },
     {
-      "name": "Energy Rifle",
-      "slug": "energy-rifle",
-      "image": "/RIVALS/Weapons/energy-rifle.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "425 Keys; 1299 Robux (Energy Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime energy primary for steady ranged damage without normal ammo pressure.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Energy_Rifle",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/c/c1/Energy_Rifle_%28icon%29.png/revision/latest?cb=20251127100549",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Energy Rifle",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "425 Keys; 1299 Robux (Energy Bundle)",
+        "useNote": "Prime energy primary for steady ranged damage without normal ammo pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "energy-rifle",
+        "section": "Prime",
+        "sortOrder": 3,
+        "image": "/RIVALS/Weapons/energy-rifle.webp"
+      }
     },
     {
-      "name": "Flamethrower",
-      "slug": "flamethrower",
-      "image": "/RIVALS/Weapons/flamethrower.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "400 Keys; 1899 Robux (Heavy Duty Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime close-range primary that pressures groups with sustained fire.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Flamethrower",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/50/Flamethrower_Icon.png/revision/latest?cb=20260509221759",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Flamethrower",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "400 Keys; 1899 Robux (Heavy Duty Bundle)",
+        "useNote": "Prime close-range primary that pressures groups with sustained fire.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "flamethrower",
+        "section": "Prime",
+        "sortOrder": 4,
+        "image": "/RIVALS/Weapons/flamethrower.webp"
+      }
     },
     {
-      "name": "Grenade Launcher",
-      "slug": "grenade-launcher",
-      "image": "/RIVALS/Weapons/grenade-launcher.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "425 Keys; 1899 Robux (Heavy Duty Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime explosive primary for arcing splash damage around cover.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Grenade_Launcher",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/4/4d/GrenadeLauncher_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Grenade Launcher",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "425 Keys; 1899 Robux (Heavy Duty Bundle)",
+        "useNote": "Prime explosive primary for arcing splash damage around cover.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "grenade-launcher",
+        "section": "Prime",
+        "sortOrder": 5,
+        "image": "/RIVALS/Weapons/grenade-launcher.webp"
+      }
     },
     {
-      "name": "Minigun",
-      "slug": "minigun",
-      "image": "/RIVALS/Weapons/minigun.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "450 Keys; 1899 Robux (Heavy Duty Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime heavy primary for sustained fire, balanced by slower movement.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Minigun",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/25/Minigun_Icon.png/revision/latest?cb=20260509224840",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Minigun",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "450 Keys; 1899 Robux (Heavy Duty Bundle)",
+        "useNote": "Prime heavy primary for sustained fire, balanced by slower movement.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "minigun",
+        "section": "Prime",
+        "sortOrder": 6,
+        "image": "/RIVALS/Weapons/minigun.webp"
+      }
     },
     {
-      "name": "Paintball Gun",
-      "slug": "paintball-gun",
-      "image": "/RIVALS/Weapons/paintball-gun.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "475 Keys; 1149 Robux (Classic Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime rifle-style primary that uses fast paint shots for sustained pressure.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Paintball_Gun",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/96/PaintballGun_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Paintball Gun",
+        "slot": "Primary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "475 Keys; 1149 Robux (Classic Bundle)",
+        "useNote": "Prime rifle-style primary that uses fast paint shots for sustained pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "paintball-gun",
+        "section": "Prime",
+        "sortOrder": 7,
+        "image": "/RIVALS/Weapons/paintball-gun.webp"
+      }
     },
     {
-      "name": "Assault Rifle",
-      "slug": "assault-rifle",
-      "image": "/RIVALS/Weapons/assault-rifle.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Standard",
-      "unlockRoute": "Free default",
-      "costSummary": "Free",
-      "isDefault": true,
-      "defaultState": "Default free loadout",
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Default automatic primary for steady mid-range fights.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Assault_Rifle",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/6/66/AssaultRifle_Icon.png/revision/latest?cb=20260509221759",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Assault Rifle",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Free default",
+        "costSummary": "Free",
+        "defaultState": "Default free loadout",
+        "useNote": "Default automatic primary for steady mid-range fights.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": true,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "assault-rifle",
+        "section": "Standard",
+        "sortOrder": 8,
+        "image": "/RIVALS/Weapons/assault-rifle.webp"
+      }
     },
     {
-      "name": "Bow",
-      "slug": "bow",
-      "image": "/RIVALS/Weapons/bow.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "15 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard projectile primary for aimed charged shots and burst picks.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Bow",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/05/Bow_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Bow",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "15 Keys",
+        "useNote": "Standard projectile primary for aimed charged shots and burst picks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "bow",
+        "section": "Standard",
+        "sortOrder": 9,
+        "image": "/RIVALS/Weapons/bow.webp"
+      }
     },
     {
-      "name": "Burst Rifle",
-      "slug": "burst-rifle",
-      "image": "/RIVALS/Weapons/burst-rifle.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "25 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard burst primary for controlled mid-range damage.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Burst_Rifle",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/4/4d/BurstRifle_Icon.png/revision/latest?cb=20260509221759",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Burst Rifle",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "25 Keys",
+        "useNote": "Standard burst primary for controlled mid-range damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "burst-rifle",
+        "section": "Standard",
+        "sortOrder": 10,
+        "image": "/RIVALS/Weapons/burst-rifle.webp"
+      }
     },
     {
-      "name": "Crossbow",
-      "slug": "crossbow",
-      "image": "/RIVALS/Weapons/crossbow.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "35 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard single-shot projectile primary for accurate picks.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Crossbow",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/53/Crossbow_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Crossbow",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "35 Keys",
+        "useNote": "Standard single-shot projectile primary for accurate picks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "crossbow",
+        "section": "Standard",
+        "sortOrder": 11,
+        "image": "/RIVALS/Weapons/crossbow.webp"
+      }
     },
     {
-      "name": "Gunblade",
-      "slug": "gunblade",
-      "image": "/RIVALS/Weapons/gunblade.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "45 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard hybrid primary that mixes ranged shots with blade pressure.",
-      "contractNote": "Contracts track kills and playtime.",
-      "contractFamilies": [
-        "Kills",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Gunblade",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/52/Gunblade_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Gunblade",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "45 Keys",
+        "useNote": "Standard hybrid primary that mixes ranged shots with blade pressure.",
+        "contractNote": "Contracts track kills and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Kills",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "gunblade",
+        "section": "Standard",
+        "sortOrder": 12,
+        "image": "/RIVALS/Weapons/gunblade.webp"
+      }
     },
     {
-      "name": "RPG",
-      "slug": "rpg",
-      "image": "/RIVALS/Weapons/rpg.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Standard",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "25 Keys; 124 Robux (RPG Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard explosive launcher for splash damage and rocket-mobility plays.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/RPG",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/e3/RPG_Icon.png/revision/latest?cb=20260509224313",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "RPG",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "25 Keys; 124 Robux (RPG Bundle)",
+        "useNote": "Standard explosive launcher for splash damage and rocket-mobility plays.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "rpg",
+        "section": "Standard",
+        "sortOrder": 13,
+        "image": "/RIVALS/Weapons/rpg.webp"
+      }
     },
     {
-      "name": "Shotgun",
-      "slug": "shotgun",
-      "image": "/RIVALS/Weapons/shotgun.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "20 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard close-range primary for heavy burst damage.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Shotgun",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2d/Shotgun_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Shotgun",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "20 Keys",
+        "useNote": "Standard close-range primary for heavy burst damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "shotgun",
+        "section": "Standard",
+        "sortOrder": 14,
+        "image": "/RIVALS/Weapons/shotgun.webp"
+      }
     },
     {
-      "name": "Sniper",
-      "slug": "sniper",
-      "image": "/RIVALS/Weapons/sniper.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "75 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard long-range primary for precision picks.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Sniper",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2c/Sniper_Icon.png/revision/latest?cb=20260509222226",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Sniper",
+        "slot": "Primary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "75 Keys",
+        "useNote": "Standard long-range primary for precision picks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "sniper",
+        "section": "Standard",
+        "sortOrder": 15,
+        "image": "/RIVALS/Weapons/sniper.webp"
+      }
     },
     {
-      "name": "Scepter",
-      "slug": "scepter",
-      "image": "/RIVALS/Weapons/scepter.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Primary",
-      "type": "Contraband",
-      "unlockRoute": "Mode-exclusive",
-      "costSummary": "RIVALS RNG only",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": true,
-      "modeExclusiveNote": "RIVALS RNG only",
-      "useNote": "Mode-exclusive magic-orb primary for RIVALS RNG rounds.",
-      "contractNote": "No normal weapon contract listed.",
-      "contractFamilies": [],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Scepter",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/86/Scepter_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Primary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26. Mode-exclusive row; not a normal unlock goal.",
-      "modeNote": "RIVALS RNG only"
+      "item": {
+        "name": "Scepter",
+        "slot": "Primary",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG only",
+        "modeExclusiveNote": "RIVALS RNG only",
+        "modeNote": "RIVALS RNG only",
+        "useNote": "Mode-exclusive magic-orb primary for RIVALS RNG rounds.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "scepter",
+        "section": "Contraband",
+        "sortOrder": 16,
+        "image": "/RIVALS/Weapons/scepter.webp"
+      }
     },
     {
-      "name": "Warper",
-      "slug": "warper",
-      "image": "/RIVALS/Weapons/warper.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Contraband",
-      "unlockRoute": "Keys",
-      "costSummary": "650 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Contraband secondary that creates portals for repositioning and tricky angles.",
-      "contractNote": "Contracts track portals spawned and playtime.",
-      "contractFamilies": [
-        "Portals Spawned",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Warper",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/07/Warper_Icon.png/revision/latest?cb=20260509224840",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Warper",
+        "slot": "Secondary",
+        "type": "Contraband",
+        "unlockRoute": "Keys",
+        "costSummary": "650 Keys",
+        "useNote": "Contraband secondary that creates portals for repositioning and tricky angles.",
+        "contractNote": "Contracts track portals spawned and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Portals Spawned",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "warper",
+        "section": "Contraband",
+        "sortOrder": 17,
+        "image": "/RIVALS/Weapons/warper.webp"
+      }
     },
     {
-      "name": "Energy Pistols",
-      "slug": "energy-pistols",
-      "image": "/RIVALS/Weapons/energy-pistols.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "400 Keys; 1299 Robux (Energy Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime dual-pistol secondary for quick backup energy damage.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Energy_Pistols",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/92/EnergyPistols_Icon.png/revision/latest?cb=20260509221759",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Energy Pistols",
+        "slot": "Secondary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "400 Keys; 1299 Robux (Energy Bundle)",
+        "useNote": "Prime dual-pistol secondary for quick backup energy damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "energy-pistols",
+        "section": "Prime",
+        "sortOrder": 18,
+        "image": "/RIVALS/Weapons/energy-pistols.webp"
+      }
     },
     {
-      "name": "Exogun",
-      "slug": "exogun",
-      "image": "/RIVALS/Weapons/exogun.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "350 Keys; 649 Robux (Exogun Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime projectile secondary for special burst pressure from the backup slot.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Exogun",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/9e/Exogun_Icon.png/revision/latest?cb=20260509221909",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Exogun",
+        "slot": "Secondary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "350 Keys; 649 Robux (Exogun Bundle)",
+        "useNote": "Prime projectile secondary for special burst pressure from the backup slot.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "exogun",
+        "section": "Prime",
+        "sortOrder": 19,
+        "image": "/RIVALS/Weapons/exogun.webp"
+      }
     },
     {
-      "name": "Slingshot",
-      "slug": "slingshot",
-      "image": "/RIVALS/Weapons/slingshot.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "300 Keys; 1149 Robux (Classic Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime projectile secondary that favors fast shots and mobility.",
-      "contractNote": "Contracts track playtime.",
-      "contractFamilies": [
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Slingshot",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/16/Slingshot_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Slingshot",
+        "slot": "Secondary",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "300 Keys; 1149 Robux (Classic Bundle)",
+        "useNote": "Prime projectile secondary that favors fast shots and mobility.",
+        "contractNote": "Contracts track playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "slingshot",
+        "section": "Prime",
+        "sortOrder": 20,
+        "image": "/RIVALS/Weapons/slingshot.webp"
+      }
     },
     {
-      "name": "Daggers",
-      "slug": "daggers",
-      "image": "/RIVALS/Weapons/daggers.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "30 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard thrown-blade secondary for quick burst attacks.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Daggers",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/b8/Daggers_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Daggers",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "30 Keys",
+        "useNote": "Standard thrown-blade secondary for quick burst attacks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "daggers",
+        "section": "Standard",
+        "sortOrder": 21,
+        "image": "/RIVALS/Weapons/daggers.webp"
+      }
     },
     {
-      "name": "Flare Gun",
-      "slug": "flare-gun",
-      "image": "/RIVALS/Weapons/flare-gun.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "10 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard flare secondary for damage-over-time pressure and utility.",
-      "contractNote": "Contracts track damage dealt and playtime.",
-      "contractFamilies": [
-        "Damage Dealt",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Flare_Gun",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/ae/FlareGun_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Flare Gun",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "10 Keys",
+        "useNote": "Standard flare secondary for damage-over-time pressure and utility.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "flare-gun",
+        "section": "Standard",
+        "sortOrder": 22,
+        "image": "/RIVALS/Weapons/flare-gun.webp"
+      }
     },
     {
-      "name": "Handgun",
-      "slug": "handgun",
-      "image": "/RIVALS/Weapons/handgun.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Standard",
-      "unlockRoute": "Free default",
-      "costSummary": "Free",
-      "isDefault": true,
-      "defaultState": "Default free loadout",
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Default sidearm for reliable backup damage.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Handgun",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/93/Handgun_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Handgun",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Free default",
+        "costSummary": "Free",
+        "defaultState": "Default free loadout",
+        "useNote": "Default sidearm for reliable backup damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": true,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "handgun",
+        "section": "Standard",
+        "sortOrder": 23,
+        "image": "/RIVALS/Weapons/handgun.webp"
+      }
     },
     {
-      "name": "Revolver",
-      "slug": "revolver",
-      "image": "/RIVALS/Weapons/revolver.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "25 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard precision sidearm with a burst fan-shot ability.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Revolver",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/4/49/Revolver_Icon.png/revision/latest?cb=20260509221905",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Revolver",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "25 Keys",
+        "useNote": "Standard precision sidearm with a burst fan-shot ability.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "revolver",
+        "section": "Standard",
+        "sortOrder": 24,
+        "image": "/RIVALS/Weapons/revolver.webp"
+      }
     },
     {
-      "name": "Shorty",
-      "slug": "shorty",
-      "image": "/RIVALS/Weapons/shorty.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Standard",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "20 Keys; 49 Robux (Starter Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard close-range sidearm that acts like a compact shotgun.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Shorty",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/5f/Shorty_Icon.png/revision/latest?cb=20260509221757",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Shorty",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "20 Keys; 49 Robux (Starter Bundle)",
+        "useNote": "Standard close-range sidearm that acts like a compact shotgun.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "shorty",
+        "section": "Standard",
+        "sortOrder": 25,
+        "image": "/RIVALS/Weapons/shorty.webp"
+      }
     },
     {
-      "name": "Spray",
-      "slug": "spray",
-      "image": "/RIVALS/Weapons/spray.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "5 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard automatic secondary for short-range backup pressure.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Spray",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/3f/Spray_Icon.png/revision/latest?cb=20260509221756",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Spray",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "5 Keys",
+        "useNote": "Standard automatic secondary for short-range backup pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "spray",
+        "section": "Standard",
+        "sortOrder": 26,
+        "image": "/RIVALS/Weapons/spray.webp"
+      }
     },
     {
-      "name": "Uzi",
-      "slug": "uzi",
-      "image": "/RIVALS/Weapons/uzi.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "20 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard automatic sidearm for fast close-to-mid-range damage.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Uzi",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/06/Uzi_Icon.png/revision/latest?cb=20260509221757",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Uzi",
+        "slot": "Secondary",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "20 Keys",
+        "useNote": "Standard automatic sidearm for fast close-to-mid-range damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "uzi",
+        "section": "Standard",
+        "sortOrder": 27,
+        "image": "/RIVALS/Weapons/uzi.webp"
+      }
     },
     {
-      "name": "Glass Cannon",
-      "slug": "glass-cannon",
-      "image": "/RIVALS/Weapons/glass-cannon.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Secondary",
-      "type": "Contraband",
-      "unlockRoute": "Mode-exclusive",
-      "costSummary": "RIVALS RNG and Gun Game only",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": true,
-      "modeExclusiveNote": "RIVALS RNG and Gun Game only",
-      "useNote": "Mode-exclusive high-risk secondary for RIVALS RNG and Gun Game.",
-      "contractNote": "No normal weapon contract listed.",
-      "contractFamilies": [],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Glass_Cannon",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/bc/Glass_Cannon_%28icon%29.png/revision/latest?cb=20251204133814",
-      "verificationNote": "Listed under Secondary on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26. Mode-exclusive row; not a normal unlock goal.",
-      "modeNote": "RIVALS RNG and Gun Game only"
+      "item": {
+        "name": "Glass Cannon",
+        "slot": "Secondary",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG and Gun Game only",
+        "modeExclusiveNote": "RIVALS RNG and Gun Game only",
+        "modeNote": "RIVALS RNG and Gun Game only",
+        "useNote": "Mode-exclusive high-risk secondary for RIVALS RNG and Gun Game.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "glass-cannon",
+        "section": "Contraband",
+        "sortOrder": 28,
+        "image": "/RIVALS/Weapons/glass-cannon.webp"
+      }
     },
     {
-      "name": "Maul",
-      "slug": "maul",
-      "image": "/RIVALS/Weapons/maul.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Prime",
-      "unlockRoute": "Keys",
-      "costSummary": "550 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime heavy melee for slow, hard-hitting close-range swings.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Maul",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/11/Maul_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Maul",
+        "slot": "Melee",
+        "type": "Prime",
+        "unlockRoute": "Keys",
+        "costSummary": "550 Keys",
+        "useNote": "Prime heavy melee for slow, hard-hitting close-range swings.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "maul",
+        "section": "Prime",
+        "sortOrder": 29,
+        "image": "/RIVALS/Weapons/maul.webp"
+      }
     },
     {
-      "name": "Spear",
-      "slug": "spear",
-      "image": "/RIVALS/Weapons/spear.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Prime",
-      "unlockRoute": "Season Pass or keys",
-      "costSummary": "Key cost not listed; free from Season Pass source",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime melee with pokes, throws, and wall-stuck mobility utility.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Spear",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/26/Spear_Icon.png/revision/latest?cb=20260509221759",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26. Source page lists unknown key cost plus free Season Pass source.",
-      "modeNote": null
+      "item": {
+        "name": "Spear",
+        "slot": "Melee",
+        "type": "Prime",
+        "unlockRoute": "Season Pass or keys",
+        "costSummary": "Key cost not listed; free from Season Pass source",
+        "useNote": "Prime melee with pokes, throws, and wall-stuck mobility utility.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "spear",
+        "section": "Prime",
+        "sortOrder": 30,
+        "image": "/RIVALS/Weapons/spear.webp"
+      }
     },
     {
-      "name": "Trowel",
-      "slug": "trowel",
-      "image": "/RIVALS/Weapons/trowel.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "200 Keys; 1149 Robux (Classic Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime melee that can build cover while filling the close-range slot.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Trowel",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/19/Trowel_Icon.png/revision/latest?cb=20260509221757",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Trowel",
+        "slot": "Melee",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "200 Keys; 1149 Robux (Classic Bundle)",
+        "useNote": "Prime melee that can build cover while filling the close-range slot.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "trowel",
+        "section": "Prime",
+        "sortOrder": 31,
+        "image": "/RIVALS/Weapons/trowel.webp"
+      }
     },
     {
-      "name": "Battle Axe",
-      "slug": "battle-axe",
-      "image": "/RIVALS/Weapons/battle-axe.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "50 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard heavy melee for strong close-range hits.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Battle_Axe",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/27/BattleAxe_Icon.png/revision/latest?cb=20260509221909",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Battle Axe",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "50 Keys",
+        "useNote": "Standard heavy melee for strong close-range hits.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "battle-axe",
+        "section": "Standard",
+        "sortOrder": 32,
+        "image": "/RIVALS/Weapons/battle-axe.webp"
+      }
     },
     {
-      "name": "Chainsaw",
-      "slug": "chainsaw",
-      "image": "/RIVALS/Weapons/chainsaw.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "15 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard pressure melee with sustained close-range damage.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Chainsaw",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/21/Chainsaw_Icon.png/revision/latest?cb=20260509221759",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Chainsaw",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "15 Keys",
+        "useNote": "Standard pressure melee with sustained close-range damage.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "chainsaw",
+        "section": "Standard",
+        "sortOrder": 33,
+        "image": "/RIVALS/Weapons/chainsaw.webp"
+      }
     },
     {
-      "name": "Fists",
-      "slug": "fists",
-      "image": "/RIVALS/Weapons/fists.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Standard",
-      "unlockRoute": "Free default",
-      "costSummary": "Free",
-      "isDefault": true,
-      "defaultState": "Default free loadout",
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Default melee for quick close-range hits and starter movement.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Fists",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/be/Fists_Icon.png/revision/latest?cb=20260509221759",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Fists",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Free default",
+        "costSummary": "Free",
+        "defaultState": "Default free loadout",
+        "useNote": "Default melee for quick close-range hits and starter movement.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": true,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "fists",
+        "section": "Standard",
+        "sortOrder": 34,
+        "image": "/RIVALS/Weapons/fists.webp"
+      }
     },
     {
-      "name": "Katana",
-      "slug": "katana",
-      "image": "/RIVALS/Weapons/katana.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "45 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard sword melee for direct slashes and close pressure.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Katana",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/8d/Katana_Icon.png/revision/latest?cb=20260509221907",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Katana",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "45 Keys",
+        "useNote": "Standard sword melee for direct slashes and close pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "katana",
+        "section": "Standard",
+        "sortOrder": 35,
+        "image": "/RIVALS/Weapons/katana.webp"
+      }
     },
     {
-      "name": "Knife",
-      "slug": "knife",
-      "image": "/RIVALS/Weapons/knife.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "20 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard light melee for quick close-range attacks.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Knife",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/a7/Knife_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Knife",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "20 Keys",
+        "useNote": "Standard light melee for quick close-range attacks.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "knife",
+        "section": "Standard",
+        "sortOrder": 36,
+        "image": "/RIVALS/Weapons/knife.webp"
+      }
     },
     {
-      "name": "Riot Shield",
-      "slug": "riot-shield",
-      "image": "/RIVALS/Weapons/riot-shield.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "45 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard defensive melee that can absorb incoming damage.",
-      "contractNote": "Contracts track damage absorbed and playtime.",
-      "contractFamilies": [
-        "Damage Absorbed",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Riot_Shield",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/70/RiotShield_Icon.png/revision/latest?cb=20260509222128",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Riot Shield",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "45 Keys",
+        "useNote": "Standard defensive melee that can absorb incoming damage.",
+        "contractNote": "Contracts track damage absorbed and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Absorbed",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "riot-shield",
+        "section": "Standard",
+        "sortOrder": 37,
+        "image": "/RIVALS/Weapons/riot-shield.webp"
+      }
     },
     {
-      "name": "Scythe",
-      "slug": "scythe",
-      "image": "/RIVALS/Weapons/scythe.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "40 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard melee for sweeping close-range pressure.",
-      "contractNote": "Contracts track eliminations and playtime.",
-      "contractFamilies": [
-        "Eliminations",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Scythe",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/ea/Scythe_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Scythe",
+        "slot": "Melee",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "40 Keys",
+        "useNote": "Standard melee for sweeping close-range pressure.",
+        "contractNote": "Contracts track eliminations and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Eliminations",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "scythe",
+        "section": "Standard",
+        "sortOrder": 38,
+        "image": "/RIVALS/Weapons/scythe.webp"
+      }
     },
     {
-      "name": "Glast Shard",
-      "slug": "glast-shard",
-      "image": "/RIVALS/Weapons/glast-shard.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Melee",
-      "type": "Contraband",
-      "unlockRoute": "Mode-exclusive",
-      "costSummary": "RIVALS RNG and Gun Game only",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": true,
-      "modeExclusiveNote": "RIVALS RNG and Gun Game only",
-      "useNote": "Mode-exclusive knife-like melee for RIVALS RNG and Gun Game.",
-      "contractNote": "No normal weapon contract listed.",
-      "contractFamilies": [],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Glast_Shard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/fb/Glass_Shard_%28icon%29.png/revision/latest?cb=20251103030919",
-      "verificationNote": "Listed under Melee on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26. Mode-exclusive row; not a normal unlock goal.",
-      "modeNote": "RIVALS RNG and Gun Game only"
+      "item": {
+        "name": "Glast Shard",
+        "slot": "Melee",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG and Gun Game only",
+        "modeExclusiveNote": "RIVALS RNG and Gun Game only",
+        "modeNote": "RIVALS RNG and Gun Game only",
+        "useNote": "Mode-exclusive knife-like melee for RIVALS RNG and Gun Game.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "glast-shard",
+        "section": "Contraband",
+        "sortOrder": 39,
+        "image": "/RIVALS/Weapons/glast-shard.webp"
+      }
     },
     {
-      "name": "Grappler",
-      "slug": "grappler",
-      "image": "/RIVALS/Weapons/grappler.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Contraband",
-      "unlockRoute": "Robux bundle",
-      "costSummary": "Key cost not listed; 599 Robux Prime Bundle; 999 Robux Contraband Bundle",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Contraband utility for pulling yourself to walls or pulling enemies toward you.",
-      "contractNote": "Contracts track enemies hooked and playtime.",
-      "contractFamilies": [
-        "Enemies hooked",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Grappler",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/eb/Grappler_Icon.png/revision/latest?cb=20260509221759",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26. Source page lists unknown key cost plus Robux bundle routes.",
-      "modeNote": null
+      "item": {
+        "name": "Grappler",
+        "slot": "Utility",
+        "type": "Contraband",
+        "unlockRoute": "Robux bundle",
+        "costSummary": "Key cost not listed; 599 Robux Prime Bundle; 999 Robux Contraband Bundle",
+        "useNote": "Contraband utility for pulling yourself to walls or pulling enemies toward you.",
+        "contractNote": "Contracts track enemies hooked and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Enemies hooked",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "grappler",
+        "section": "Contraband",
+        "sortOrder": 40,
+        "image": "/RIVALS/Weapons/grappler.webp"
+      }
     },
     {
-      "name": "Medkit",
-      "slug": "medkit",
-      "image": "/RIVALS/Weapons/medkit.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Prime",
-      "unlockRoute": "Keys",
-      "costSummary": "300 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime utility for healing during longer fights.",
-      "contractNote": "Contracts track heals given and playtime.",
-      "contractFamilies": [
-        "Heals Given",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Medkit",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/c/c0/Medkit_Icon.png/revision/latest?cb=20260515011351",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Medkit",
+        "slot": "Utility",
+        "type": "Prime",
+        "unlockRoute": "Keys",
+        "costSummary": "300 Keys",
+        "useNote": "Prime utility for healing during longer fights.",
+        "contractNote": "Contracts track heals given and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Heals Given",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "medkit",
+        "section": "Prime",
+        "sortOrder": 41,
+        "image": "/RIVALS/Weapons/medkit.webp"
+      }
     },
     {
-      "name": "Subspace Tripmine",
-      "slug": "subspace-tripmine",
-      "image": "/RIVALS/Weapons/subspace-tripmine.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Prime",
-      "unlockRoute": "Keys or Robux bundle",
-      "costSummary": "250 Keys; 1149 Robux (Classic Bundle)",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime trap utility for area denial and punish setups.",
-      "contractNote": "Contracts track damage dealt and playtime.",
-      "contractFamilies": [
-        "Damage Dealt",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Subspace_Tripmine",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/7c/SubspaceTripmine_Icon.png/revision/latest?cb=20260515005944",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Subspace Tripmine",
+        "slot": "Utility",
+        "type": "Prime",
+        "unlockRoute": "Keys or Robux bundle",
+        "costSummary": "250 Keys; 1149 Robux (Classic Bundle)",
+        "useNote": "Prime trap utility for area denial and punish setups.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "subspace-tripmine",
+        "section": "Prime",
+        "sortOrder": 42,
+        "image": "/RIVALS/Weapons/subspace-tripmine.webp"
+      }
     },
     {
-      "name": "Warpstone",
-      "slug": "warpstone",
-      "image": "/RIVALS/Weapons/warpstone.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Prime",
-      "unlockRoute": "Keys",
-      "costSummary": "400 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Prime utility for teleporting out of danger or into a new angle.",
-      "contractNote": "Contracts track warps and playtime.",
-      "contractFamilies": [
-        "Warps",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Warpstone",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/9b/Warpstone_Icon.png/revision/latest?cb=20260509223446",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Warpstone",
+        "slot": "Utility",
+        "type": "Prime",
+        "unlockRoute": "Keys",
+        "costSummary": "400 Keys",
+        "useNote": "Prime utility for teleporting out of danger or into a new angle.",
+        "contractNote": "Contracts track warps and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Warps",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "warpstone",
+        "section": "Prime",
+        "sortOrder": 43,
+        "image": "/RIVALS/Weapons/warpstone.webp"
+      }
     },
     {
-      "name": "Flashbang",
-      "slug": "flashbang",
-      "image": "/RIVALS/Weapons/flashbang.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "15 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard utility that blinds enemies before a push.",
-      "contractNote": "Contracts track enemies blinded and playtime.",
-      "contractFamilies": [
-        "Enemies Blinded",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Flashbang",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/a7/Flashbang_Icon.png/revision/latest?cb=20260509221759",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Flashbang",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "15 Keys",
+        "useNote": "Standard utility that blinds enemies before a push.",
+        "contractNote": "Contracts track enemies blinded and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Enemies Blinded",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "flashbang",
+        "section": "Standard",
+        "sortOrder": 44,
+        "image": "/RIVALS/Weapons/flashbang.webp"
+      }
     },
     {
-      "name": "Freeze Ray",
-      "slug": "freeze-ray",
-      "image": "/RIVALS/Weapons/freeze-ray.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "45 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard utility that freezes enemies to set up follow-up damage.",
-      "contractNote": "Contracts track enemies frozen and playtime.",
-      "contractFamilies": [
-        "Enemies Frozen",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Freeze_Ray",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/b7/FreezeRay_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Freeze Ray",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "45 Keys",
+        "useNote": "Standard utility that freezes enemies to set up follow-up damage.",
+        "contractNote": "Contracts track enemies frozen and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Enemies Frozen",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "freeze-ray",
+        "section": "Standard",
+        "sortOrder": 45,
+        "image": "/RIVALS/Weapons/freeze-ray.webp"
+      }
     },
     {
-      "name": "Grenade",
-      "slug": "grenade",
-      "image": "/RIVALS/Weapons/grenade.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Standard",
-      "unlockRoute": "Free default",
-      "costSummary": "Free",
-      "isDefault": true,
-      "defaultState": "Default free loadout",
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Default explosive utility for splash damage and pressure around cover.",
-      "contractNote": "Contracts track damage dealt and playtime.",
-      "contractFamilies": [
-        "Damage Dealt",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Grenade",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/6/68/Grenade_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Grenade",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Free default",
+        "costSummary": "Free",
+        "defaultState": "Default free loadout",
+        "useNote": "Default explosive utility for splash damage and pressure around cover.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": true,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "grenade",
+        "section": "Standard",
+        "sortOrder": 46,
+        "image": "/RIVALS/Weapons/grenade.webp"
+      }
     },
     {
-      "name": "Jump Pad",
-      "slug": "jump-pad",
-      "image": "/RIVALS/Weapons/jump-pad.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Standard",
-      "unlockRoute": "Jump Shards",
-      "costSummary": "9 Jump Shards",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard utility that launches players and unlocks through Jump Shards.",
-      "contractNote": "Contracts track players bounced and playtime.",
-      "contractFamilies": [
-        "Players Bounced",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Jump_Pad",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/21/JumpPad_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Jump Pad",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Jump Shards",
+        "costSummary": "9 Jump Shards",
+        "useNote": "Standard utility that launches players and unlocks through Jump Shards.",
+        "contractNote": "Contracts track players bounced and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Players Bounced",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "jump-pad",
+        "section": "Standard",
+        "sortOrder": 47,
+        "image": "/RIVALS/Weapons/jump-pad.webp"
+      }
     },
     {
-      "name": "Molotov",
-      "slug": "molotov",
-      "image": "/RIVALS/Weapons/molotov.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "25 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard fire utility for area denial and damage-over-time pressure.",
-      "contractNote": "Contracts track damage dealt and playtime.",
-      "contractFamilies": [
-        "Damage Dealt",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Molotov",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/a0/Molotov_Icon.png/revision/latest?cb=20260509221907",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Molotov",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "25 Keys",
+        "useNote": "Standard fire utility for area denial and damage-over-time pressure.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "molotov",
+        "section": "Standard",
+        "sortOrder": 48,
+        "image": "/RIVALS/Weapons/molotov.webp"
+      }
     },
     {
-      "name": "Satchel",
-      "slug": "satchel",
-      "image": "/RIVALS/Weapons/satchel.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "35 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard remote explosive utility for burst damage and movement tricks.",
-      "contractNote": "Contracts track damage dealt and playtime.",
-      "contractFamilies": [
-        "Damage Dealt",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Satchel",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/c/c4/Satchel_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Satchel",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "35 Keys",
+        "useNote": "Standard remote explosive utility for burst damage and movement tricks.",
+        "contractNote": "Contracts track damage dealt and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Damage Dealt",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "satchel",
+        "section": "Standard",
+        "sortOrder": 49,
+        "image": "/RIVALS/Weapons/satchel.webp"
+      }
     },
     {
-      "name": "Smoke Grenade",
-      "slug": "smoke-grenade",
-      "image": "/RIVALS/Weapons/smoke-grenade.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "10 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard utility that creates smoke cover and blocks sightlines.",
-      "contractNote": "Contracts track enemies smoked and playtime.",
-      "contractFamilies": [
-        "Enemies smoked",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Smoke_Grenade",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/c/c1/SmokeGrenade_Icon.png/revision/latest?cb=20260509221758",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "Smoke Grenade",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "10 Keys",
+        "useNote": "Standard utility that creates smoke cover and blocks sightlines.",
+        "contractNote": "Contracts track enemies smoked and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Enemies smoked",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "smoke-grenade",
+        "section": "Standard",
+        "sortOrder": 50,
+        "image": "/RIVALS/Weapons/smoke-grenade.webp"
+      }
     },
     {
-      "name": "War Horn",
-      "slug": "war-horn",
-      "image": "/RIVALS/Weapons/war-horn.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Standard",
-      "unlockRoute": "Keys",
-      "costSummary": "30 Keys",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": false,
-      "modeExclusiveNote": null,
-      "useNote": "Standard support utility that empowers teammates or a push.",
-      "contractNote": "Contracts track players empowered and playtime.",
-      "contractFamilies": [
-        "Players Empowered",
-        "Playtime"
-      ],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/War_Horn",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/ef/WarHorn_Icon.png/revision/latest?cb=20260509221757",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26.",
-      "modeNote": null
+      "item": {
+        "name": "War Horn",
+        "slot": "Utility",
+        "type": "Standard",
+        "unlockRoute": "Keys",
+        "costSummary": "30 Keys",
+        "useNote": "Standard support utility that empowers teammates or a push.",
+        "contractNote": "Contracts track players empowered and playtime.",
+        "modeExclusive": false,
+        "isDefault": false,
+        "contractFamilies": [
+          "Players Empowered",
+          "Playtime"
+        ]
+      },
+      "system": {
+        "slug": "war-horn",
+        "section": "Standard",
+        "sortOrder": 51,
+        "image": "/RIVALS/Weapons/war-horn.webp"
+      }
     },
     {
-      "name": "Elixir",
-      "slug": "elixir",
-      "image": "/RIVALS/Weapons/elixir.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Contraband",
-      "unlockRoute": "Mode-exclusive",
-      "costSummary": "RIVALS RNG only",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": true,
-      "modeExclusiveNote": "RIVALS RNG only",
-      "useNote": "Mode-exclusive throwable utility that can damage enemies or heal allies in RIVALS RNG.",
-      "contractNote": "No normal weapon contract listed.",
-      "contractFamilies": [],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Elixir",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/f1/Elixir_%28icon%29.png/revision/latest?cb=20260214103017",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26. Mode-exclusive row; not a normal unlock goal.",
-      "modeNote": "RIVALS RNG only"
+      "item": {
+        "name": "Elixir",
+        "slot": "Utility",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG only",
+        "modeExclusiveNote": "RIVALS RNG only",
+        "modeNote": "RIVALS RNG only",
+        "useNote": "Mode-exclusive throwable utility that can damage enemies or heal allies in RIVALS RNG.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "elixir",
+        "section": "Contraband",
+        "sortOrder": 52,
+        "image": "/RIVALS/Weapons/elixir.webp"
+      }
     },
     {
-      "name": "RNG Dice",
-      "slug": "rng-dice",
-      "image": "/RIVALS/Weapons/rng-dice.webp",
-      "imageStatus": "downloaded wiki icon",
-      "slot": "Utility",
-      "type": "Contraband",
-      "unlockRoute": "Mode-exclusive",
-      "costSummary": "RIVALS RNG only",
-      "isDefault": false,
-      "defaultState": null,
-      "modeExclusive": true,
-      "modeExclusiveNote": "RIVALS RNG only",
-      "useNote": "Mode-exclusive RIVALS RNG utility that rolls other weapon behavior.",
-      "contractNote": "No normal weapon contract listed.",
-      "contractFamilies": [],
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/RNG_Dice",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/fa/RNG_Dice.png/revision/latest?cb=20250718213108",
-      "verificationNote": "Listed under Utility on the RIVALS Wiki Weapons page. Individual page checked on 2026-05-26. Mode-exclusive row; not a normal unlock goal.",
-      "modeNote": "RIVALS RNG only"
+      "item": {
+        "name": "RNG Dice",
+        "slot": "Utility",
+        "type": "Contraband",
+        "unlockRoute": "Mode-exclusive",
+        "costSummary": "RIVALS RNG only",
+        "modeExclusiveNote": "RIVALS RNG only",
+        "modeNote": "RIVALS RNG only",
+        "useNote": "Mode-exclusive RIVALS RNG utility that rolls other weapon behavior.",
+        "contractNote": "No normal weapon contract listed.",
+        "modeExclusive": true,
+        "isDefault": false
+      },
+      "system": {
+        "slug": "rng-dice",
+        "section": "Contraband",
+        "sortOrder": 53,
+        "image": "/RIVALS/Weapons/rng-dice.webp"
+      }
     }
   ]
 }

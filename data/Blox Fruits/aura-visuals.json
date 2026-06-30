@@ -1,110 +1,112 @@
 {
   "meta": {
-    "title": "Blox Fruits aura visuals data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Aura",
-        "url": "https://blox-fruits.fandom.com/wiki/Aura",
-        "accessed": "2026-05-07"
-      }
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "aura-visuals",
+    "route": "/wiki/blox-fruits/aura-visuals",
+    "catalogCode": "blox-fruits-aura-visuals",
+    "itemFields": [
+      "stage"
     ],
     "columns": [
-      "stage",
-      "image",
-      "legs",
-      "arms"
-    ]
+      "stage"
+    ],
+    "display": {
+      "groupLabel": "Stage",
+      "sectionOrder": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "stage"
+      ],
+      "tableFields": [
+        "stage"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "0",
-      "slug": "0",
-      "fields": {
-        "stage": "0",
-        "legs": "",
-        "arms": ""
+      "item": {
+        "name": "0",
+        "stage": "0"
       },
-      "wikiUrl": null,
-      "stage": "0",
-      "legs": null,
-      "arms": null,
-      "image": "/Blox%20Fruits/Aura/0.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d7/AuraLegs0.gif/revision/latest/scale-to-width-down/200?cb=20250225193436"
+      "system": {
+        "slug": "0",
+        "section": "0",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Aura/0.webp"
+      }
     },
     {
-      "name": "1",
-      "slug": "1",
-      "fields": {
-        "stage": "1",
-        "legs": "",
-        "arms": ""
+      "item": {
+        "name": "1",
+        "stage": "1"
       },
-      "wikiUrl": null,
-      "stage": "1",
-      "legs": null,
-      "arms": null,
-      "image": "/Blox%20Fruits/Aura/1.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1e/AuraLegs1.gif/revision/latest/scale-to-width-down/200?cb=20250225193444"
+      "system": {
+        "slug": "1",
+        "section": "1",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Aura/1.webp"
+      }
     },
     {
-      "name": "2",
-      "slug": "2",
-      "fields": {
-        "stage": "2",
-        "legs": "",
-        "arms": ""
+      "item": {
+        "name": "2",
+        "stage": "2"
       },
-      "wikiUrl": null,
-      "stage": "2",
-      "legs": null,
-      "arms": null,
-      "image": "/Blox%20Fruits/Aura/2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c5/AuraLegs2.gif/revision/latest/scale-to-width-down/200?cb=20250225193451"
+      "system": {
+        "slug": "2",
+        "section": "2",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Aura/2.webp"
+      }
     },
     {
-      "name": "3",
-      "slug": "3",
-      "fields": {
-        "stage": "3",
-        "legs": "",
-        "arms": ""
+      "item": {
+        "name": "3",
+        "stage": "3"
       },
-      "wikiUrl": null,
-      "stage": "3",
-      "legs": null,
-      "arms": null,
-      "image": "/Blox%20Fruits/Aura/3.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e4/AuraLegs3.gif/revision/latest/scale-to-width-down/200?cb=20250225193459"
+      "system": {
+        "slug": "3",
+        "section": "3",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Aura/3.webp"
+      }
     },
     {
-      "name": "4",
-      "slug": "4",
-      "fields": {
-        "stage": "4",
-        "legs": "",
-        "arms": ""
+      "item": {
+        "name": "4",
+        "stage": "4"
       },
-      "wikiUrl": null,
-      "stage": "4",
-      "legs": null,
-      "arms": null,
-      "image": "/Blox%20Fruits/Aura/4.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/21/AuraLegs4.gif/revision/latest/scale-to-width-down/200?cb=20250225193510"
+      "system": {
+        "slug": "4",
+        "section": "4",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Aura/4.webp"
+      }
     },
     {
-      "name": "5",
-      "slug": "5",
-      "fields": {
-        "stage": "5",
-        "legs": ""
+      "item": {
+        "name": "5",
+        "stage": "5"
       },
-      "wikiUrl": null,
-      "stage": "5",
-      "legs": null,
-      "arms": null,
-      "image": "/Blox%20Fruits/Aura/5.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e9/Aura5.gif/revision/latest/scale-to-width-down/200?cb=20250225193426"
+      "system": {
+        "slug": "5",
+        "section": "5",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Aura/5.webp"
+      }
     }
   ]
 }

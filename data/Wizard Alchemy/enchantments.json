@@ -1,38 +1,12 @@
 {
   "meta": {
-    "title": "Wizard Alchemy enchantments data",
-    "updatedAt": "2026-05-23",
-    "sources": [
-      {
-        "label": "GAMES.GG - Wizard Alchemy Guide: All Enchantments & How to Get Them",
-        "url": "https://games.gg/roblox/guides/wizard-alchemy-all-enchantments-and-how-to-get-them/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "BloxInformer - Wizard Alchemy Wiki",
-        "url": "https://bloxinformer.com/wikis/wizard-alchemy/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "Pro Game Guides - Wizard Alchemy Codes",
-        "url": "https://progameguides.com/roblox/wizard-alchemy-codes/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "Pro Game Guides - Wizard Alchemy Beginner's Guide",
-        "url": "https://progameguides.com/roblox/wizard-alchemy-beginners-guide/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "Roblox - Wizard Alchemy",
-        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
-        "accessed": "2026-05-23"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Wizard Alchemy",
+    "gameSlug": "wizard-alchemy",
+    "collection": "enchantments",
+    "route": "/wiki/wizard-alchemy/enchantments",
+    "catalogCode": "wizard-alchemy-enchantments",
+    "itemFields": [
       "stat",
       "tierOne",
       "tierThree",
@@ -40,160 +14,240 @@
       "maxValue",
       "buildRole",
       "bestFor",
-      "stoneRoute",
-      "verificationNote"
-    ]
+      "stoneRoute"
+    ],
+    "columns": [
+      "stat",
+      "tierOne",
+      "tierThree",
+      "tierFive",
+      "maxValue",
+      "buildRole",
+      "bestFor",
+      "stoneRoute"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Damage enchantments",
+        "Element damage enchantments",
+        "Utility and farming enchantments"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "bestFor",
+      "cardDescriptionField": "bestFor",
+      "cardFields": [
+        "stat",
+        "tierOne",
+        "tierThree",
+        "tierFive",
+        "maxValue",
+        "buildRole"
+      ],
+      "tableFields": [
+        "stat",
+        "tierOne",
+        "tierThree",
+        "tierFive",
+        "maxValue",
+        "buildRole",
+        "bestFor",
+        "stoneRoute"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Fatal",
-      "slug": "fatal",
-      "image": null,
-      "collectionSection": "Damage enchantments",
-      "stat": "Critical Damage",
-      "tierOne": "5%",
-      "tierThree": "15%",
-      "tierFive": "25%",
-      "maxValue": "25% Critical Damage",
-      "buildRole": "Critical burst damage",
-      "bestFor": "Boss fights, heavy hits, and crit-focused damage builds.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Fatal at 5%, 15%, and 25% Critical Damage for tiers I, III, and V. No reliable individual enchantment image found."
+      "item": {
+        "name": "Fatal",
+        "stat": "Critical Damage",
+        "tierOne": "5%",
+        "tierThree": "15%",
+        "tierFive": "25%",
+        "maxValue": "25% Critical Damage",
+        "buildRole": "Critical burst damage",
+        "bestFor": "Boss fights, heavy hits, and crit-focused damage builds.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "fatal",
+        "section": "Damage enchantments",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Critical Hit",
-      "slug": "critical-hit",
-      "image": null,
-      "collectionSection": "Damage enchantments",
-      "stat": "Crit Rate",
-      "tierOne": "5%",
-      "tierThree": "15%",
-      "tierFive": "25%",
-      "maxValue": "25% Crit Rate",
-      "buildRole": "Critical hit frequency",
-      "bestFor": "Mob farming, multi-hit spell rotations, and builds that need more crit triggers.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Critical Hit at 5%, 15%, and 25% Crit Rate for tiers I, III, and V. No reliable individual enchantment image found."
+      "item": {
+        "name": "Critical Hit",
+        "stat": "Crit Rate",
+        "tierOne": "5%",
+        "tierThree": "15%",
+        "tierFive": "25%",
+        "maxValue": "25% Crit Rate",
+        "buildRole": "Critical hit frequency",
+        "bestFor": "Mob farming, multi-hit spell rotations, and builds that need more crit triggers.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "critical-hit",
+        "section": "Damage enchantments",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Magic",
-      "slug": "magic",
-      "image": null,
-      "collectionSection": "Damage enchantments",
-      "stat": "Attack Boost",
-      "tierOne": "2%",
-      "tierThree": "6%",
-      "tierFive": "10%",
-      "maxValue": "10% Attack Boost",
-      "buildRole": "General attack boost",
-      "bestFor": "Fallback damage when an elemental or crit roll does not fit the current build.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Magic at 2%, 6%, and 10% Attack Boost for tiers I, III, and V, and calls it weaker than dedicated elemental options."
+      "item": {
+        "name": "Magic",
+        "stat": "Attack Boost",
+        "tierOne": "2%",
+        "tierThree": "6%",
+        "tierFive": "10%",
+        "maxValue": "10% Attack Boost",
+        "buildRole": "General attack boost",
+        "bestFor": "Fallback damage when an elemental or crit roll does not fit the current build.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "magic",
+        "section": "Damage enchantments",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Blazing Fire",
-      "slug": "blazing-fire",
-      "image": null,
-      "collectionSection": "Element damage enchantments",
-      "stat": "Fire Damage Boost",
-      "tierOne": "8%",
-      "tierThree": "24%",
-      "tierFive": "40%",
-      "maxValue": "40% Fire Damage Boost",
-      "buildRole": "Fire element damage",
-      "bestFor": "Fire spell builds and players leaning into fire-based damage bonuses.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Blazing Fire at 8%, 24%, and 40% Fire Damage Boost and notes that its tier V value is higher than the other elemental boosts."
+      "item": {
+        "name": "Blazing Fire",
+        "stat": "Fire Damage Boost",
+        "tierOne": "8%",
+        "tierThree": "24%",
+        "tierFive": "40%",
+        "maxValue": "40% Fire Damage Boost",
+        "buildRole": "Fire element damage",
+        "bestFor": "Fire spell builds and players leaning into fire-based damage bonuses.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "blazing-fire",
+        "section": "Element damage enchantments",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Thunder",
-      "slug": "thunder",
-      "image": null,
-      "collectionSection": "Element damage enchantments",
-      "stat": "Thunder Damage Boost",
-      "tierOne": "4%",
-      "tierThree": "12%",
-      "tierFive": "20%",
-      "maxValue": "20% Thunder Damage Boost",
-      "buildRole": "Thunder element damage",
-      "bestFor": "Thunder spell builds that want their element bonus on the wand roll.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Thunder at 4%, 12%, and 20% Thunder Damage Boost for tiers I, III, and V. No reliable individual enchantment image found."
+      "item": {
+        "name": "Thunder",
+        "stat": "Thunder Damage Boost",
+        "tierOne": "4%",
+        "tierThree": "12%",
+        "tierFive": "20%",
+        "maxValue": "20% Thunder Damage Boost",
+        "buildRole": "Thunder element damage",
+        "bestFor": "Thunder spell builds that want their element bonus on the wand roll.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "thunder",
+        "section": "Element damage enchantments",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Shadow",
-      "slug": "shadow",
-      "image": null,
-      "collectionSection": "Element damage enchantments",
-      "stat": "Dark Damage Boost",
-      "tierOne": "4%",
-      "tierThree": "12%",
-      "tierFive": "20%",
-      "maxValue": "20% Dark Damage Boost",
-      "buildRole": "Dark element damage",
-      "bestFor": "Dark spell builds and Night Wraith-style damage routes.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Shadow at 4%, 12%, and 20% Dark Damage Boost for tiers I, III, and V. No reliable individual enchantment image found."
+      "item": {
+        "name": "Shadow",
+        "stat": "Dark Damage Boost",
+        "tierOne": "4%",
+        "tierThree": "12%",
+        "tierFive": "20%",
+        "maxValue": "20% Dark Damage Boost",
+        "buildRole": "Dark element damage",
+        "bestFor": "Dark spell builds and Night Wraith-style damage routes.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "shadow",
+        "section": "Element damage enchantments",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Ice",
-      "slug": "ice",
-      "image": null,
-      "collectionSection": "Element damage enchantments",
-      "stat": "Ice Damage Boost",
-      "tierOne": "4%",
-      "tierThree": "12%",
-      "tierFive": "20%",
-      "maxValue": "20% Ice Damage Boost",
-      "buildRole": "Ice element damage",
-      "bestFor": "Ice spell builds, Frost Thorns-style farming, and defensive ice setups.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Ice at 4%, 12%, and 20% Ice Damage Boost for tiers I, III, and V. No reliable individual enchantment image found."
+      "item": {
+        "name": "Ice",
+        "stat": "Ice Damage Boost",
+        "tierOne": "4%",
+        "tierThree": "12%",
+        "tierFive": "20%",
+        "maxValue": "20% Ice Damage Boost",
+        "buildRole": "Ice element damage",
+        "bestFor": "Ice spell builds, Frost Thorns-style farming, and defensive ice setups.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "ice",
+        "section": "Element damage enchantments",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Luck",
-      "slug": "luck",
-      "image": null,
-      "collectionSection": "Utility and farming enchantments",
-      "stat": "Alchemy Luck Boost",
-      "tierOne": "10%",
-      "tierThree": "30%",
-      "tierFive": "50%",
-      "maxValue": "50% Alchemy Luck Boost",
-      "buildRole": "Crafting and farming utility",
-      "bestFor": "Potion crafting, rare material farming, and players chasing better alchemy outcomes.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Luck at 10%, 30%, and 50% Alchemy Luck Boost and describes it as strongest for crafting or rare material farming."
+      "item": {
+        "name": "Luck",
+        "stat": "Alchemy Luck Boost",
+        "tierOne": "10%",
+        "tierThree": "30%",
+        "tierFive": "50%",
+        "maxValue": "50% Alchemy Luck Boost",
+        "buildRole": "Crafting and farming utility",
+        "bestFor": "Potion crafting, rare material farming, and players chasing better alchemy outcomes.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "luck",
+        "section": "Utility and farming enchantments",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Swift",
-      "slug": "swift",
-      "image": null,
-      "collectionSection": "Utility and farming enchantments",
-      "stat": "Movement Speed Bonus",
-      "tierOne": "5%",
-      "tierThree": "15%",
-      "tierFive": "25%",
-      "maxValue": "25% Movement Speed Bonus",
-      "buildRole": "Movement and dodging",
-      "bestFor": "Chest loops, stone farming routes, dodging, and long travel before a better broom route is comfortable.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Swift at 5%, 15%, and 25% Movement Speed Bonus for tiers I, III, and V. No reliable individual enchantment image found."
+      "item": {
+        "name": "Swift",
+        "stat": "Movement Speed Bonus",
+        "tierOne": "5%",
+        "tierThree": "15%",
+        "tierFive": "25%",
+        "maxValue": "25% Movement Speed Bonus",
+        "buildRole": "Movement and dodging",
+        "bestFor": "Chest loops, stone farming routes, dodging, and long travel before a better broom route is comfortable.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "swift",
+        "section": "Utility and farming enchantments",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Staying Calm",
-      "slug": "staying-calm",
-      "image": null,
-      "collectionSection": "Utility and farming enchantments",
-      "stat": "Cooling Shrinkage",
-      "tierOne": "10%",
-      "tierThree": "30%",
-      "tierFive": "50%",
-      "maxValue": "50% Cooling Shrinkage",
-      "buildRole": "Cooldown-focused spell uptime",
-      "bestFor": "Spell-heavy farming loops where faster uptime matters more than one-hit burst.",
-      "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone.",
-      "verificationNote": "GAMES.GG lists Staying Calm at 10%, 30%, and 50% Cooling Shrinkage and frames it as a spell-uptime utility roll."
+      "item": {
+        "name": "Staying Calm",
+        "stat": "Cooling Shrinkage",
+        "tierOne": "10%",
+        "tierThree": "30%",
+        "tierFive": "50%",
+        "maxValue": "50% Cooling Shrinkage",
+        "buildRole": "Cooldown-focused spell uptime",
+        "bestFor": "Spell-heavy farming loops where faster uptime matters more than one-hit burst.",
+        "stoneRoute": "Random wand roll at the Sea of Oblivion enchanting table; spend 1 Enchanted Stone."
+      },
+      "system": {
+        "slug": "staying-calm",
+        "section": "Utility and farming enchantments",
+        "sortOrder": 10,
+        "image": null
+      }
     }
   ]
 }

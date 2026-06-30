@@ -1,525 +1,505 @@
 {
   "meta": {
-    "title": "Demonology Ghosts",
-    "updatedAt": "2026-06-25",
-    "groupBy": "collectionSection",
-    "columns": [
-      "name",
-      "slug",
-      "collectionSection",
-      "image",
+    "schemaVersion": 2,
+    "game": "Demonology",
+    "gameSlug": "demonology",
+    "collection": "ghosts",
+    "route": "/wiki/demonology/ghosts",
+    "catalogCode": "demonology-ghosts",
+    "itemFields": [
       "cardSummary",
       "evidence",
       "huntBehavior",
       "weaknessTip",
-      "idTip"
+      "idTip",
+      "evidenceAltNames"
     ],
-    "defaultCardFields": [
+    "columns": [
+      "cardSummary",
       "evidence",
       "huntBehavior",
       "weaknessTip",
-      "idTip"
+      "idTip",
+      "evidenceAltNames"
     ],
-    "sources": [
-      {
-        "label": "Demonology Wiki (Fandom) - Ghosts/Types (in-game journal entries, V1.10.0)",
-        "url": "https://demonology.fandom.com/wiki/Ghosts/Types",
-        "accessed": "2026-06-25"
-      },
-      {
-        "label": "Demonology Wiki (Fandom) - Ghosts overview (behavior, hunts)",
-        "url": "https://demonology.fandom.com/wiki/Ghosts",
-        "accessed": "2026-06-25"
-      },
-      {
-        "label": "Demonology Wiki (Fandom) - Evidence (current evidence-type labels)",
-        "url": "https://demonology.fandom.com/wiki/Evidence",
-        "accessed": "2026-06-25"
-      },
-      {
-        "label": "Roblox - Demonology (identity only)",
-        "url": "https://www.roblox.com/games/6170143659/",
-        "accessed": "2026-06-25"
-      }
-    ],
-    "sourceCount": 4,
-    "sectionCounts": {
-      "Core Ghosts": 17,
-      "Wither Ghosts": 8
-    },
-    "sourceNotes": [
-      "Roster, evidence sets, and traits are locked to the canonical Demonology Fandom wiki, which mirrors the in-game journal at update V1.10.0 (the live game place is 18199615050). The Ghosts/Types page states 'There are currently 25 ghost types in-game' and lists exactly 25 in the GhostNav template. This resolves the research-stage count conflict (16 / 23 / 24): 25 is the locked count.",
-      "demonology.wiki (standalone, 23 ghosts) was missing Ravager and Vesper, which is why secondary sources undercounted. Pro Game Guides (16) predates the Wither evidence rebalance and was not used for evidence sets or counts.",
-      "Evidence-type LABELS use the current canonical Evidence page wording: the eight types are EMF Level 5, Prints (formerly 'Handprints'), Spirit Box, Ghost Orb, Freezing Temperatures, Inscription (formerly 'Ghost Writing'), Laser Projector, and Wither. The Evidence page has adopted 'Prints' and 'Inscription'; the older Ghosts/Types template still shows the legacy 'Handprints'/'Ghost Writing' anchors, but per the single-most-current-source rule the Evidence page labels are used. Legacy names are kept in evidenceAltNames for reference, not rendered.",
-      "Section grouping is by mechanic: 'Wither Ghosts' = the 8 ghosts whose evidence set includes Wither (Aswang, Dullahan, Dybbuk, Keres, Siren, The Wisp, Vesper, Vex); 'Core Ghosts' = the remaining 17. Wither is the newest evidence type and the biggest source of identification confusion, so separating it helps readers scan to the relevant block.",
-      "Per-ghost evidence and traits are transcribed directly from each journal entry on Ghosts/Types and are sourceConfidence 'high'. Where two-or-three journal traits exist, behavior text summarizes them; no traits were invented.",
-      "Images are deferred to the image gate and are null at this stage; each ghost has an in-game journal portrait (drawn by @Windaroon) plus a 3D Ghost Model. The image gate will source/capture one portrait per ghost. Images are NOT a data blocker.",
-      "Evergreen-safe: no dates, no 'current/latest', no active-count-as-freshness wording in any rendered prose field. The update version is recorded only in this hidden source note for provenance."
-    ],
-    "imageCount": 0,
-    "missingImageCount": 25,
-    "imageStatus": "deferred to image gate; null at this stage"
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Core Ghosts",
+        "Wither Ghosts"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "evidence",
+        "huntBehavior",
+        "weaknessTip",
+        "idTip"
+      ],
+      "tableFields": [
+        "cardSummary",
+        "evidence",
+        "huntBehavior",
+        "weaknessTip",
+        "idTip",
+        "evidenceAltNames"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Spirit",
-      "slug": "spirit",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/spirit.webp",
-      "cardSummary": "A baseline ghost with no special speed or hunting quirks, identified by its Inscription, Prints, and Spirit Box evidence.",
-      "evidence": "Inscription, Prints, Spirit Box",
-      "huntBehavior": "Behaves like a standard ghost with no movement or hunting bonuses",
-      "weaknessTip": "Has no unusual resistances, so normal hiding and looping work well",
-      "idTip": "Can turn lit candles blue, a small tell unique to it",
-      "evidenceAltNames": [
-        "Ghost Writing = Inscription",
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence (Inscription/Prints/Spirit Box) and the blue-candle trait taken from the Spirit journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Spirit",
+        "cardSummary": "A baseline ghost with no special speed or hunting quirks, identified by its Inscription, Prints, and Spirit Box evidence.",
+        "evidence": "Inscription, Prints, Spirit Box",
+        "huntBehavior": "Behaves like a standard ghost with no movement or hunting bonuses",
+        "weaknessTip": "Has no unusual resistances, so normal hiding and looping work well",
+        "idTip": "Can turn lit candles blue, a small tell unique to it",
+        "evidenceAltNames": [
+          "Ghost Writing = Inscription",
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "spirit",
+        "section": "Core Ghosts",
+        "sortOrder": 1,
+        "image": "/Demonology/ghosts/spirit.webp"
+      }
     },
     {
-      "name": "Demon",
-      "slug": "demon",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/demon.webp",
-      "cardSummary": "An aggressive ghost that hunts far more often than others, leaving EMF Level 5, Freezing Temperatures, and Prints.",
-      "evidence": "EMF Level 5, Freezing Temperatures, Prints",
-      "huntBehavior": "Hunts frequently, so expect earlier and more repeated hunts",
-      "weaknessTip": "The Cross has a larger range against it and makes it float as it burns",
-      "idTip": "Unusually frequent hunts paired with its evidence set point to a Demon",
-      "evidenceAltNames": [
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and frequent-hunt / Cross-range traits taken from the Demon journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Demon",
+        "cardSummary": "An aggressive ghost that hunts far more often than others, leaving EMF Level 5, Freezing Temperatures, and Prints.",
+        "evidence": "EMF Level 5, Freezing Temperatures, Prints",
+        "huntBehavior": "Hunts frequently, so expect earlier and more repeated hunts",
+        "weaknessTip": "The Cross has a larger range against it and makes it float as it burns",
+        "idTip": "Unusually frequent hunts paired with its evidence set point to a Demon",
+        "evidenceAltNames": [
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "demon",
+        "section": "Core Ghosts",
+        "sortOrder": 2,
+        "image": "/Demonology/ghosts/demon.webp"
+      }
     },
     {
-      "name": "Banshee",
-      "slug": "banshee",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/banshee.webp",
-      "cardSummary": "A glass-breaking ghost identified by Freezing Temperatures, Ghost Orb, and Prints, sometimes announced by a unique wail.",
-      "evidence": "Freezing Temperatures, Ghost Orb, Prints",
-      "huntBehavior": "Can break multiple windows and mirrors at once and may let out a unique wail at the start of a hunt",
-      "weaknessTip": "Standard hiding works; listen for its distinctive hunt scream",
-      "idTip": "A unique wail at hunt start, plus shattered glass, signals a Banshee",
-      "evidenceAltNames": [
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and window/mirror + wail traits taken from the Banshee journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Banshee",
+        "cardSummary": "A glass-breaking ghost identified by Freezing Temperatures, Ghost Orb, and Prints, sometimes announced by a unique wail.",
+        "evidence": "Freezing Temperatures, Ghost Orb, Prints",
+        "huntBehavior": "Can break multiple windows and mirrors at once and may let out a unique wail at the start of a hunt",
+        "weaknessTip": "Standard hiding works; listen for its distinctive hunt scream",
+        "idTip": "A unique wail at hunt start, plus shattered glass, signals a Banshee",
+        "evidenceAltNames": [
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "banshee",
+        "section": "Core Ghosts",
+        "sortOrder": 3,
+        "image": "/Demonology/ghosts/banshee.webp"
+      }
     },
     {
-      "name": "Entity",
-      "slug": "entity",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/entity.webp",
-      "cardSummary": "A teleporting ghost identified by Prints, Laser Projector, and Spirit Box, marked by smoke when it moves objects.",
-      "evidence": "Prints, Laser Projector, Spirit Box",
-      "huntBehavior": "Teleports between rooms and can teleport objects, shown by a smoke effect",
-      "weaknessTip": "Hard to track by location; rely on evidence rather than chasing it room to room",
-      "idTip": "Sudden teleports between rooms and smoke-marked object moves point to an Entity",
-      "evidenceAltNames": [
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and teleport / smoke traits taken from the Entity journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Entity",
+        "cardSummary": "A teleporting ghost identified by Prints, Laser Projector, and Spirit Box, marked by smoke when it moves objects.",
+        "evidence": "Prints, Laser Projector, Spirit Box",
+        "huntBehavior": "Teleports between rooms and can teleport objects, shown by a smoke effect",
+        "weaknessTip": "Hard to track by location; rely on evidence rather than chasing it room to room",
+        "idTip": "Sudden teleports between rooms and smoke-marked object moves point to an Entity",
+        "evidenceAltNames": [
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "entity",
+        "section": "Core Ghosts",
+        "sortOrder": 4,
+        "image": "/Demonology/ghosts/entity.webp"
+      }
     },
     {
-      "name": "Ghoul",
-      "slug": "ghoul",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/ghoul.webp",
-      "cardSummary": "A chat-triggered ghost identified by Freezing Temperatures, Ghost Orb, and Spirit Box that cannot disable electronics.",
-      "evidence": "Freezing Temperatures, Ghost Orb, Spirit Box",
-      "huntBehavior": "Excessive chat messages can trigger its hunt, and it cannot disable electronics",
-      "weaknessTip": "Keep chat use limited; its inability to cut electronics keeps your gear working during hunts",
-      "idTip": "Electronics staying on during a hunt, plus chat-triggered hunts, identify a Ghoul",
-      "evidenceAltNames": [],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and chat-trigger / no-electronics-disable traits taken from the Ghoul journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Ghoul",
+        "cardSummary": "A chat-triggered ghost identified by Freezing Temperatures, Ghost Orb, and Spirit Box that cannot disable electronics.",
+        "evidence": "Freezing Temperatures, Ghost Orb, Spirit Box",
+        "huntBehavior": "Excessive chat messages can trigger its hunt, and it cannot disable electronics",
+        "weaknessTip": "Keep chat use limited; its inability to cut electronics keeps your gear working during hunts",
+        "idTip": "Electronics staying on during a hunt, plus chat-triggered hunts, identify a Ghoul"
+      },
+      "system": {
+        "slug": "ghoul",
+        "section": "Core Ghosts",
+        "sortOrder": 5,
+        "image": "/Demonology/ghosts/ghoul.webp"
+      }
     },
     {
-      "name": "Leviathan",
-      "slug": "leviathan",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/leviathan.webp",
-      "cardSummary": "A power-meddling ghost identified by Inscription, Prints, and Ghost Orb that flickers gear and kills lights.",
-      "evidence": "Inscription, Prints, Ghost Orb",
-      "huntBehavior": "Can flicker equipment and passively turns off lights",
-      "weaknessTip": "Expect unreliable gear and dark rooms; keep a light source handy",
-      "idTip": "Equipment flickering and lights going out on their own suggest a Leviathan",
-      "evidenceAltNames": [
-        "Ghost Writing = Inscription",
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and flicker / passive-lights-off traits taken from the Leviathan journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Leviathan",
+        "cardSummary": "A power-meddling ghost identified by Inscription, Prints, and Ghost Orb that flickers gear and kills lights.",
+        "evidence": "Inscription, Prints, Ghost Orb",
+        "huntBehavior": "Can flicker equipment and passively turns off lights",
+        "weaknessTip": "Expect unreliable gear and dark rooms; keep a light source handy",
+        "idTip": "Equipment flickering and lights going out on their own suggest a Leviathan",
+        "evidenceAltNames": [
+          "Ghost Writing = Inscription",
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "leviathan",
+        "section": "Core Ghosts",
+        "sortOrder": 6,
+        "image": "/Demonology/ghosts/leviathan.webp"
+      }
     },
     {
-      "name": "Nightmare",
-      "slug": "nightmare",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/nightmare.webp",
-      "cardSummary": "A light-fearing ghost identified by EMF Level 5, Ghost Orb, and Spirit Box that can fake sounds.",
-      "evidence": "EMF Level 5, Ghost Orb, Spirit Box",
-      "huntBehavior": "Can cause auditory hallucinations and is afraid of lit rooms",
-      "weaknessTip": "Keep lights on, since it avoids lit rooms",
-      "idTip": "Phantom sounds plus a clear preference for dark rooms point to a Nightmare",
-      "evidenceAltNames": [],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and hallucination / fears-light traits taken from the Nightmare journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Nightmare",
+        "cardSummary": "A light-fearing ghost identified by EMF Level 5, Ghost Orb, and Spirit Box that can fake sounds.",
+        "evidence": "EMF Level 5, Ghost Orb, Spirit Box",
+        "huntBehavior": "Can cause auditory hallucinations and is afraid of lit rooms",
+        "weaknessTip": "Keep lights on, since it avoids lit rooms",
+        "idTip": "Phantom sounds plus a clear preference for dark rooms point to a Nightmare"
+      },
+      "system": {
+        "slug": "nightmare",
+        "section": "Core Ghosts",
+        "sortOrder": 7,
+        "image": "/Demonology/ghosts/nightmare.webp"
+      }
     },
     {
-      "name": "Oni",
-      "slug": "oni",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/oni.webp",
-      "cardSummary": "A fast hunter identified by Freezing Temperatures, Laser Projector, and Spirit Box that shows itself often.",
-      "evidence": "Freezing Temperatures, Laser Projector, Spirit Box",
-      "huntBehavior": "Extremely fast during hunts and more likely to start ghost events and appear",
-      "weaknessTip": "Looping is risky because of its hunt speed; favor closets and lockers",
-      "idTip": "Very fast hunts and frequent visible appearances identify an Oni",
-      "evidenceAltNames": [],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and hunt-speed / frequent-event traits taken from the Oni journal entry on Ghosts/Types (V1.10.0). Listed among the ghosts with speed differences.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Oni",
+        "cardSummary": "A fast hunter identified by Freezing Temperatures, Laser Projector, and Spirit Box that shows itself often.",
+        "evidence": "Freezing Temperatures, Laser Projector, Spirit Box",
+        "huntBehavior": "Extremely fast during hunts and more likely to start ghost events and appear",
+        "weaknessTip": "Looping is risky because of its hunt speed; favor closets and lockers",
+        "idTip": "Very fast hunts and frequent visible appearances identify an Oni"
+      },
+      "system": {
+        "slug": "oni",
+        "section": "Core Ghosts",
+        "sortOrder": 8,
+        "image": "/Demonology/ghosts/oni.webp"
+      }
     },
     {
-      "name": "Phantom",
-      "slug": "phantom",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/phantom.webp",
-      "cardSummary": "A slow-blinking ghost identified by EMF Level 5, Prints, and Ghost Orb that speeds up while invisible.",
-      "evidence": "EMF Level 5, Prints, Ghost Orb",
-      "huntBehavior": "Blinks in and out more slowly but moves faster while invisible during hunts",
-      "weaknessTip": "Track its slow blink pattern, but be ready for fast movement when it vanishes",
-      "idTip": "Longer gaps between blinks during a hunt point to a Phantom",
-      "evidenceAltNames": [
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and slow-blink / faster-while-invisible traits taken from the Phantom journal entry on Ghosts/Types (V1.10.0). Listed among the ghosts with speed differences.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Phantom",
+        "cardSummary": "A slow-blinking ghost identified by EMF Level 5, Prints, and Ghost Orb that speeds up while invisible.",
+        "evidence": "EMF Level 5, Prints, Ghost Orb",
+        "huntBehavior": "Blinks in and out more slowly but moves faster while invisible during hunts",
+        "weaknessTip": "Track its slow blink pattern, but be ready for fast movement when it vanishes",
+        "idTip": "Longer gaps between blinks during a hunt point to a Phantom",
+        "evidenceAltNames": [
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "phantom",
+        "section": "Core Ghosts",
+        "sortOrder": 9,
+        "image": "/Demonology/ghosts/phantom.webp"
+      }
     },
     {
-      "name": "Ravager",
-      "slug": "ravager",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/ravager.webp",
-      "cardSummary": "An object-hurling ghost identified by EMF Level 5, Inscription, and Spirit Box whose abilities all leave EMF Level 5.",
-      "evidence": "EMF Level 5, Inscription, Spirit Box",
-      "huntBehavior": "Can throw multiple objects, may start a vortex while hunting, and every ability leaves EMF Level 5",
-      "weaknessTip": "Watch for thrown objects and the hunting vortex; keep distance from clutter",
-      "idTip": "Multiple objects thrown at once, with EMF Level 5 on every ability, identify a Ravager",
-      "evidenceAltNames": [
-        "Ghost Writing = Inscription"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Ravager is a current roster ghost (was the renamed Poltergeist). Evidence and throw/vortex/EMF traits taken from the Ravager journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Ravager",
+        "cardSummary": "An object-hurling ghost identified by EMF Level 5, Inscription, and Spirit Box whose abilities all leave EMF Level 5.",
+        "evidence": "EMF Level 5, Inscription, Spirit Box",
+        "huntBehavior": "Can throw multiple objects, may start a vortex while hunting, and every ability leaves EMF Level 5",
+        "weaknessTip": "Watch for thrown objects and the hunting vortex; keep distance from clutter",
+        "idTip": "Multiple objects thrown at once, with EMF Level 5 on every ability, identify a Ravager",
+        "evidenceAltNames": [
+          "Ghost Writing = Inscription"
+        ]
+      },
+      "system": {
+        "slug": "ravager",
+        "section": "Core Ghosts",
+        "sortOrder": 10,
+        "image": "/Demonology/ghosts/ravager.webp"
+      }
     },
     {
-      "name": "Revenant",
-      "slug": "revenant",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/revenant.webp",
-      "cardSummary": "A relentless hunter identified by EMF Level 5, Freezing Temperatures, and Inscription that stops hunting after a kill.",
-      "evidence": "EMF Level 5, Freezing Temperatures, Inscription",
-      "huntBehavior": "Has a low hunting cooldown but stops hunting once it kills a player",
-      "weaknessTip": "Expect back-to-back hunts until it claims a victim, then a lull",
-      "idTip": "Rapid, repeated hunts that pause after a kill point to a Revenant",
-      "evidenceAltNames": [
-        "Ghost Writing = Inscription"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and low-cooldown / stops-after-kill traits taken from the Revenant journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Revenant",
+        "cardSummary": "A relentless hunter identified by EMF Level 5, Freezing Temperatures, and Inscription that stops hunting after a kill.",
+        "evidence": "EMF Level 5, Freezing Temperatures, Inscription",
+        "huntBehavior": "Has a low hunting cooldown but stops hunting once it kills a player",
+        "weaknessTip": "Expect back-to-back hunts until it claims a victim, then a lull",
+        "idTip": "Rapid, repeated hunts that pause after a kill point to a Revenant",
+        "evidenceAltNames": [
+          "Ghost Writing = Inscription"
+        ]
+      },
+      "system": {
+        "slug": "revenant",
+        "section": "Core Ghosts",
+        "sortOrder": 11,
+        "image": "/Demonology/ghosts/revenant.webp"
+      }
     },
     {
-      "name": "Shadow",
-      "slug": "shadow",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/shadow.webp",
-      "cardSummary": "A light-shy ghost identified by EMF Level 5, Inscription, and Laser Projector with smaller temperature swings.",
-      "evidence": "EMF Level 5, Inscription, Laser Projector",
-      "huntBehavior": "Produces lower temperature changes and is less active in lit rooms",
-      "weaknessTip": "Keep rooms lit to suppress its activity; freezing temps may be subtle",
-      "idTip": "Weaker cold readings plus reduced activity in lit rooms suggest a Shadow",
-      "evidenceAltNames": [
-        "Ghost Writing = Inscription"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and low-temp / less-active-in-light traits taken from the Shadow journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Shadow",
+        "cardSummary": "A light-shy ghost identified by EMF Level 5, Inscription, and Laser Projector with smaller temperature swings.",
+        "evidence": "EMF Level 5, Inscription, Laser Projector",
+        "huntBehavior": "Produces lower temperature changes and is less active in lit rooms",
+        "weaknessTip": "Keep rooms lit to suppress its activity; freezing temps may be subtle",
+        "idTip": "Weaker cold readings plus reduced activity in lit rooms suggest a Shadow",
+        "evidenceAltNames": [
+          "Ghost Writing = Inscription"
+        ]
+      },
+      "system": {
+        "slug": "shadow",
+        "section": "Core Ghosts",
+        "sortOrder": 12,
+        "image": "/Demonology/ghosts/shadow.webp"
+      }
     },
     {
-      "name": "Skinwalker",
-      "slug": "skinwalker",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/skinwalker.webp",
-      "cardSummary": "A deceptive mimic identified by Freezing Temperatures, Inscription, and Spirit Box that fakes a Ghost Orb.",
-      "evidence": "Freezing Temperatures, Inscription, Spirit Box",
-      "huntBehavior": "Fakes a Ghost Orb that is not real evidence and can mimic other ghosts' abilities",
-      "weaknessTip": "Do not trust a lone Ghost Orb here; confirm with its three true evidence types",
-      "idTip": "A Ghost Orb that does not fit the rest of the evidence is the Skinwalker's fake",
-      "evidenceAltNames": [
-        "Ghost Writing = Inscription"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and fake-orb / mimic traits taken from the Skinwalker journal entry on Ghosts/Types (V1.10.0). Note: the fake Ghost Orb still appears in the ghost room.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Skinwalker",
+        "cardSummary": "A deceptive mimic identified by Freezing Temperatures, Inscription, and Spirit Box that fakes a Ghost Orb.",
+        "evidence": "Freezing Temperatures, Inscription, Spirit Box",
+        "huntBehavior": "Fakes a Ghost Orb that is not real evidence and can mimic other ghosts' abilities",
+        "weaknessTip": "Do not trust a lone Ghost Orb here; confirm with its three true evidence types",
+        "idTip": "A Ghost Orb that does not fit the rest of the evidence is the Skinwalker's fake",
+        "evidenceAltNames": [
+          "Ghost Writing = Inscription"
+        ]
+      },
+      "system": {
+        "slug": "skinwalker",
+        "section": "Core Ghosts",
+        "sortOrder": 13,
+        "image": "/Demonology/ghosts/skinwalker.webp"
+      }
     },
     {
-      "name": "Specter",
-      "slug": "specter",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/specter.webp",
-      "cardSummary": "A room-bound ghost identified by EMF Level 5, Freezing Temperatures, and Laser Projector that throws items often.",
-      "evidence": "EMF Level 5, Freezing Temperatures, Laser Projector",
-      "huntBehavior": "Throws items frequently and stays in its ghost room except while hunting",
-      "weaknessTip": "Its strong attachment to one room makes the ghost room easy to pin down",
-      "idTip": "Frequent thrown items and a ghost that never roams point to a Specter",
-      "evidenceAltNames": [],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and frequent-throw / room-bound traits taken from the Specter journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Specter",
+        "cardSummary": "A room-bound ghost identified by EMF Level 5, Freezing Temperatures, and Laser Projector that throws items often.",
+        "evidence": "EMF Level 5, Freezing Temperatures, Laser Projector",
+        "huntBehavior": "Throws items frequently and stays in its ghost room except while hunting",
+        "weaknessTip": "Its strong attachment to one room makes the ghost room easy to pin down",
+        "idTip": "Frequent thrown items and a ghost that never roams point to a Specter"
+      },
+      "system": {
+        "slug": "specter",
+        "section": "Core Ghosts",
+        "sortOrder": 14,
+        "image": "/Demonology/ghosts/specter.webp"
+      }
     },
     {
-      "name": "Umbra",
-      "slug": "umbra",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/umbra.webp",
-      "cardSummary": "A silent stalker identified by Prints, Ghost Orb, and Laser Projector that slows down in lit rooms.",
-      "evidence": "Prints, Ghost Orb, Laser Projector",
-      "huntBehavior": "Makes no footstep sounds and moves slower in lit rooms",
-      "weaknessTip": "Keep lights on to slow it, and do not rely on footsteps to locate it",
-      "idTip": "A ghost you cannot hear walking, that slows under lights, is an Umbra",
-      "evidenceAltNames": [
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and no-footsteps / slow-in-light traits taken from the Umbra journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Umbra",
+        "cardSummary": "A silent stalker identified by Prints, Ghost Orb, and Laser Projector that slows down in lit rooms.",
+        "evidence": "Prints, Ghost Orb, Laser Projector",
+        "huntBehavior": "Makes no footstep sounds and moves slower in lit rooms",
+        "weaknessTip": "Keep lights on to slow it, and do not rely on footsteps to locate it",
+        "idTip": "A ghost you cannot hear walking, that slows under lights, is an Umbra",
+        "evidenceAltNames": [
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "umbra",
+        "section": "Core Ghosts",
+        "sortOrder": 15,
+        "image": "/Demonology/ghosts/umbra.webp"
+      }
     },
     {
-      "name": "Wendigo",
-      "slug": "wendigo",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/wendigo.webp",
-      "cardSummary": "A flame-shy ghost identified by Inscription, Ghost Orb, and Laser Projector that speeds up as energy drops.",
-      "evidence": "Inscription, Ghost Orb, Laser Projector",
-      "huntBehavior": "Less likely to hunt near lit flames and increases in speed as average energy decreases",
-      "weaknessTip": "Keep candles or a lantern lit to discourage hunts and watch your team's energy",
-      "idTip": "A ghost that avoids flames but speeds up as energy falls points to a Wendigo",
-      "evidenceAltNames": [
-        "Ghost Writing = Inscription"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and avoids-flames / energy-speed traits taken from the Wendigo journal entry on Ghosts/Types (V1.10.0). Listed among the ghosts with speed differences.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Wendigo",
+        "cardSummary": "A flame-shy ghost identified by Inscription, Ghost Orb, and Laser Projector that speeds up as energy drops.",
+        "evidence": "Inscription, Ghost Orb, Laser Projector",
+        "huntBehavior": "Less likely to hunt near lit flames and increases in speed as average energy decreases",
+        "weaknessTip": "Keep candles or a lantern lit to discourage hunts and watch your team's energy",
+        "idTip": "A ghost that avoids flames but speeds up as energy falls points to a Wendigo",
+        "evidenceAltNames": [
+          "Ghost Writing = Inscription"
+        ]
+      },
+      "system": {
+        "slug": "wendigo",
+        "section": "Core Ghosts",
+        "sortOrder": 16,
+        "image": "/Demonology/ghosts/wendigo.webp"
+      }
     },
     {
-      "name": "Wraith",
-      "slug": "wraith",
-      "collectionSection": "Core Ghosts",
-      "image": "/Demonology/ghosts/wraith.webp",
-      "cardSummary": "An energy-draining ghost identified by EMF Level 5, Laser Projector, and Spirit Box that ignores salt.",
-      "evidence": "EMF Level 5, Laser Projector, Spirit Box",
-      "huntBehavior": "Drains player energy rapidly, roughly 0.2 to 0.4 percent per second, and does not disturb salt",
-      "weaknessTip": "Salt piles stay untouched, so use that as a confirming test",
-      "idTip": "Fast energy loss with undisturbed salt identifies a Wraith",
-      "evidenceAltNames": [],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and energy-drain / ignores-salt traits taken from the Wraith journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Wraith",
+        "cardSummary": "An energy-draining ghost identified by EMF Level 5, Laser Projector, and Spirit Box that ignores salt.",
+        "evidence": "EMF Level 5, Laser Projector, Spirit Box",
+        "huntBehavior": "Drains player energy rapidly, roughly 0.2 to 0.4 percent per second, and does not disturb salt",
+        "weaknessTip": "Salt piles stay untouched, so use that as a confirming test",
+        "idTip": "Fast energy loss with undisturbed salt identifies a Wraith"
+      },
+      "system": {
+        "slug": "wraith",
+        "section": "Core Ghosts",
+        "sortOrder": 17,
+        "image": "/Demonology/ghosts/wraith.webp"
+      }
     },
     {
-      "name": "Aswang",
-      "slug": "aswang",
-      "collectionSection": "Wither Ghosts",
-      "image": "/Demonology/ghosts/aswang.webp",
-      "cardSummary": "A snowballing killer identified by EMF Level 5, Inscription, and Wither that gets faster with every kill.",
-      "evidence": "EMF Level 5, Inscription, Wither",
-      "huntBehavior": "Speed increases every time it kills, so it becomes more dangerous as a match goes on",
-      "weaknessTip": "Salt slows it down, making salt a key tool against it",
-      "idTip": "A ghost that visibly speeds up after each kill points to an Aswang",
-      "evidenceAltNames": [
-        "Ghost Writing = Inscription"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and speed-on-kill / salt-slow traits taken from the Aswang journal entry on Ghosts/Types (V1.10.0). Listed among the ghosts with speed differences.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Aswang",
+        "cardSummary": "A snowballing killer identified by EMF Level 5, Inscription, and Wither that gets faster with every kill.",
+        "evidence": "EMF Level 5, Inscription, Wither",
+        "huntBehavior": "Speed increases every time it kills, so it becomes more dangerous as a match goes on",
+        "weaknessTip": "Salt slows it down, making salt a key tool against it",
+        "idTip": "A ghost that visibly speeds up after each kill points to an Aswang",
+        "evidenceAltNames": [
+          "Ghost Writing = Inscription"
+        ]
+      },
+      "system": {
+        "slug": "aswang",
+        "section": "Wither Ghosts",
+        "sortOrder": 18,
+        "image": "/Demonology/ghosts/aswang.webp"
+      }
     },
     {
-      "name": "Dullahan",
-      "slug": "dullahan",
-      "collectionSection": "Wither Ghosts",
-      "image": "/Demonology/ghosts/dullahan.webp",
-      "cardSummary": "A headless hunter identified by Freezing Temperatures, Laser Projector, and Wither that appears headless in photos.",
-      "evidence": "Freezing Temperatures, Laser Projector, Wither",
-      "huntBehavior": "Increases in speed the longer a player stays in its line of sight",
-      "weaknessTip": "Break line of sight quickly to keep it from accelerating",
-      "idTip": "A headless figure in Photo Camera shots confirms a Dullahan",
-      "evidenceAltNames": [],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and headless-photo / line-of-sight-speed traits taken from the Dullahan journal entry on Ghosts/Types (V1.10.0). Listed among the ghosts with speed differences.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Dullahan",
+        "cardSummary": "A headless hunter identified by Freezing Temperatures, Laser Projector, and Wither that appears headless in photos.",
+        "evidence": "Freezing Temperatures, Laser Projector, Wither",
+        "huntBehavior": "Increases in speed the longer a player stays in its line of sight",
+        "weaknessTip": "Break line of sight quickly to keep it from accelerating",
+        "idTip": "A headless figure in Photo Camera shots confirms a Dullahan"
+      },
+      "system": {
+        "slug": "dullahan",
+        "section": "Wither Ghosts",
+        "sortOrder": 19,
+        "image": "/Demonology/ghosts/dullahan.webp"
+      }
     },
     {
-      "name": "Dybbuk",
-      "slug": "dybbuk",
-      "collectionSection": "Wither Ghosts",
-      "image": "/Demonology/ghosts/dybbuk.webp",
-      "cardSummary": "A corpse-throwing ghost identified by Freezing Temperatures, Prints, and Wither that the music box stuns.",
-      "evidence": "Freezing Temperatures, Prints, Wither",
-      "huntBehavior": "Can throw corpses around the site as a hunting hazard",
-      "weaknessTip": "It is stunned the first time the music box is played, a useful counter",
-      "idTip": "Being stunned by the first music box play points to a Dybbuk",
-      "evidenceAltNames": [
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and music-box-stun / throws-corpses traits taken from the Dybbuk journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Dybbuk",
+        "cardSummary": "A corpse-throwing ghost identified by Freezing Temperatures, Prints, and Wither that the music box stuns.",
+        "evidence": "Freezing Temperatures, Prints, Wither",
+        "huntBehavior": "Can throw corpses around the site as a hunting hazard",
+        "weaknessTip": "It is stunned the first time the music box is played, a useful counter",
+        "idTip": "Being stunned by the first music box play points to a Dybbuk",
+        "evidenceAltNames": [
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "dybbuk",
+        "section": "Wither Ghosts",
+        "sortOrder": 20,
+        "image": "/Demonology/ghosts/dybbuk.webp"
+      }
     },
     {
-      "name": "Keres",
-      "slug": "keres",
-      "collectionSection": "Wither Ghosts",
-      "image": "/Demonology/ghosts/keres.webp",
-      "cardSummary": "A low-energy hunter identified by Prints, Spirit Box, and Wither that slows down with each kill.",
-      "evidence": "Prints, Spirit Box, Wither",
-      "huntBehavior": "Speed decreases every time it kills and it targets the hunter with the least energy",
-      "weaknessTip": "Keep your energy topped up, since it chases whoever is lowest; in solo it targets you below 90 percent energy",
-      "idTip": "A ghost that locks onto your lowest-energy teammate identifies a Keres",
-      "evidenceAltNames": [
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and slow-on-kill / low-energy-targeting traits taken from the Keres journal entry on Ghosts/Types (V1.10.0). Listed among the ghosts with speed differences.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Keres",
+        "cardSummary": "A low-energy hunter identified by Prints, Spirit Box, and Wither that slows down with each kill.",
+        "evidence": "Prints, Spirit Box, Wither",
+        "huntBehavior": "Speed decreases every time it kills and it targets the hunter with the least energy",
+        "weaknessTip": "Keep your energy topped up, since it chases whoever is lowest; in solo it targets you below 90 percent energy",
+        "idTip": "A ghost that locks onto your lowest-energy teammate identifies a Keres",
+        "evidenceAltNames": [
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "keres",
+        "section": "Wither Ghosts",
+        "sortOrder": 21,
+        "image": "/Demonology/ghosts/keres.webp"
+      }
     },
     {
-      "name": "Siren",
-      "slug": "siren",
-      "collectionSection": "Wither Ghosts",
-      "image": "/Demonology/ghosts/siren.webp",
-      "cardSummary": "A singing ghost identified by EMF Level 5, Spirit Box, and Wither that slows anyone in its line of sight.",
-      "evidence": "EMF Level 5, Spirit Box, Wither",
-      "huntBehavior": "Uses a female model and voice, slows anyone within line of sight, and can hum in the Spirit Box instead of answering",
-      "weaknessTip": "Avoid staying in its sightline during hunts to dodge the slow effect",
-      "idTip": "A humming Spirit Box response and a slowing effect on nearby players point to a Siren",
-      "evidenceAltNames": [],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and humming / line-of-sight-slow traits taken from the Siren journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Siren",
+        "cardSummary": "A singing ghost identified by EMF Level 5, Spirit Box, and Wither that slows anyone in its line of sight.",
+        "evidence": "EMF Level 5, Spirit Box, Wither",
+        "huntBehavior": "Uses a female model and voice, slows anyone within line of sight, and can hum in the Spirit Box instead of answering",
+        "weaknessTip": "Avoid staying in its sightline during hunts to dodge the slow effect",
+        "idTip": "A humming Spirit Box response and a slowing effect on nearby players point to a Siren"
+      },
+      "system": {
+        "slug": "siren",
+        "section": "Wither Ghosts",
+        "sortOrder": 22,
+        "image": "/Demonology/ghosts/siren.webp"
+      }
     },
     {
-      "name": "The Wisp",
-      "slug": "the-wisp",
-      "collectionSection": "Wither Ghosts",
-      "image": "/Demonology/ghosts/the-wisp.webp",
-      "cardSummary": "A fire-walking ghost identified by Laser Projector, Ghost Orb, and Wither that only hunts from its favorite room.",
-      "evidence": "Laser Projector, Ghost Orb, Wither",
-      "huntBehavior": "Can walk through lines of fire, can light candles, and only starts a hunt when a player is in its favorite room",
-      "weaknessTip": "Stay out of its ghost room to deny it the ability to hunt",
-      "idTip": "A ghost that can only hunt while you are in its room confirms The Wisp",
-      "evidenceAltNames": [],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and fire-walk / room-locked-hunt traits taken from The Wisp journal entry on Ghosts/Types (V1.10.0). Name is 'The Wisp' in-game.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "The Wisp",
+        "cardSummary": "A fire-walking ghost identified by Laser Projector, Ghost Orb, and Wither that only hunts from its favorite room.",
+        "evidence": "Laser Projector, Ghost Orb, Wither",
+        "huntBehavior": "Can walk through lines of fire, can light candles, and only starts a hunt when a player is in its favorite room",
+        "weaknessTip": "Stay out of its ghost room to deny it the ability to hunt",
+        "idTip": "A ghost that can only hunt while you are in its room confirms The Wisp"
+      },
+      "system": {
+        "slug": "the-wisp",
+        "section": "Wither Ghosts",
+        "sortOrder": 23,
+        "image": "/Demonology/ghosts/the-wisp.webp"
+      }
     },
     {
-      "name": "Vesper",
-      "slug": "vesper",
-      "collectionSection": "Wither Ghosts",
-      "image": "/Demonology/ghosts/vesper.webp",
-      "cardSummary": "A sound-driven ghost identified by Inscription, Prints, and Wither that hears through walls.",
-      "evidence": "Inscription, Prints, Wither",
-      "huntBehavior": "Relies solely on sound and can hear through walls",
-      "weaknessTip": "Stay quiet, crouch, and avoid sprinting near it to lower your noise",
-      "idTip": "A ghost that finds you through walls by sound points to a Vesper",
-      "evidenceAltNames": [
-        "Ghost Writing = Inscription",
-        "Handprints = Prints"
-      ],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Vesper is a current roster ghost missing from older 23-ghost lists. Evidence and sound-only / hears-through-walls traits taken from the Vesper journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Vesper",
+        "cardSummary": "A sound-driven ghost identified by Inscription, Prints, and Wither that hears through walls.",
+        "evidence": "Inscription, Prints, Wither",
+        "huntBehavior": "Relies solely on sound and can hear through walls",
+        "weaknessTip": "Stay quiet, crouch, and avoid sprinting near it to lower your noise",
+        "idTip": "A ghost that finds you through walls by sound points to a Vesper",
+        "evidenceAltNames": [
+          "Ghost Writing = Inscription",
+          "Handprints = Prints"
+        ]
+      },
+      "system": {
+        "slug": "vesper",
+        "section": "Wither Ghosts",
+        "sortOrder": 24,
+        "image": "/Demonology/ghosts/vesper.webp"
+      }
     },
     {
-      "name": "Vex",
-      "slug": "vex",
-      "collectionSection": "Wither Ghosts",
-      "image": "/Demonology/ghosts/vex.webp",
-      "cardSummary": "A wall-phasing ghost identified by Freezing Temperatures, Ghost Orb, and Wither that hides from the LIDAR Scanner.",
-      "evidence": "Freezing Temperatures, Ghost Orb, Wither",
-      "huntBehavior": "Does not show up in LIDAR scans and can walk through walls",
-      "weaknessTip": "Looping is unreliable since it can phase through walls; favor closets and lockers",
-      "idTip": "A ghost that never appears on the LIDAR Scanner points to a Vex",
-      "evidenceAltNames": [],
-      "sourcePage": "https://demonology.fandom.com/wiki/Ghosts/Types",
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Evidence and no-LIDAR / wall-walk traits taken from the Vex journal entry on Ghosts/Types (V1.10.0).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Vex",
+        "cardSummary": "A wall-phasing ghost identified by Freezing Temperatures, Ghost Orb, and Wither that hides from the LIDAR Scanner.",
+        "evidence": "Freezing Temperatures, Ghost Orb, Wither",
+        "huntBehavior": "Does not show up in LIDAR scans and can walk through walls",
+        "weaknessTip": "Looping is unreliable since it can phase through walls; favor closets and lockers",
+        "idTip": "A ghost that never appears on the LIDAR Scanner points to a Vex"
+      },
+      "system": {
+        "slug": "vex",
+        "section": "Wither Ghosts",
+        "sortOrder": 25,
+        "image": "/Demonology/ghosts/vex.webp"
+      }
     }
   ]
 }

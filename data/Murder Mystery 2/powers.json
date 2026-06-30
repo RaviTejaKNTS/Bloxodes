@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Murder Mystery 2",
+    "gameSlug": "murder-mystery-2",
+    "collection": "powers",
+    "route": "/wiki/murder-mystery-2/powers",
+    "catalogCode": "murder-mystery-2-powers",
+    "itemFields": [
+      "type",
+      "cost",
+      "cardSummary"
+    ],
+    "columns": [
+      "type",
+      "cost",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Cost",
+      "sectionOrder": [
+        "Free",
+        "Budget",
+        "Standard",
+        "Premium"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "type",
+        "cost"
+      ],
+      "tableFields": [
+        "type",
+        "cost",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "type": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Footsteps",
+        "type": "Passive",
+        "cost": "Free",
+        "cardSummary": "Tracks recent player footsteps as the default Murderer power."
+      },
+      "system": {
+        "slug": "footsteps",
+        "section": "Free",
+        "sortOrder": 1,
+        "image": "/Murder%20Mystery%202/powers/footsteps.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Sleight",
+        "type": "Active",
+        "cost": "1,000 Coins",
+        "cardSummary": "Improves knife throwing speed for players who like quick pressure."
+      },
+      "system": {
+        "slug": "sleight",
+        "section": "Budget",
+        "sortOrder": 2,
+        "image": "/Murder%20Mystery%202/powers/sleight.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Ninja",
+        "type": "Passive",
+        "cost": "1,000 Coins",
+        "cardSummary": "Removes the kill sound, which makes stealth rounds much cleaner."
+      },
+      "system": {
+        "slug": "ninja",
+        "section": "Budget",
+        "sortOrder": 3,
+        "image": "/Murder%20Mystery%202/powers/ninja.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Sprint",
+        "type": "Active",
+        "cost": "3,000 Coins",
+        "cardSummary": "Gives a short speed burst when you need to close distance fast."
+      },
+      "system": {
+        "slug": "sprint",
+        "section": "Standard",
+        "sortOrder": 4,
+        "image": "/Murder%20Mystery%202/powers/sprint.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Haste",
+        "type": "Passive",
+        "cost": "3,000 Coins",
+        "cardSummary": "Boosts movement while holding the knife."
+      },
+      "system": {
+        "slug": "haste",
+        "section": "Standard",
+        "sortOrder": 5,
+        "image": "/Murder%20Mystery%202/powers/haste.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Fake Gun",
+        "type": "Active",
+        "cost": "3,000 Coins",
+        "cardSummary": "Shows a fake gun to bait players into trusting the wrong person."
+      },
+      "system": {
+        "slug": "fake-gun",
+        "section": "Standard",
+        "sortOrder": 6,
+        "image": "/Murder%20Mystery%202/powers/fakegun.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Trap",
+        "type": "Active",
+        "cost": "3,000 Coins",
+        "cardSummary": "Places a trap that can stop or slow players trying to escape."
+      },
+      "system": {
+        "slug": "trap",
+        "section": "Standard",
+        "sortOrder": 7,
+        "image": "/Murder%20Mystery%202/powers/trap.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Decoy",
+        "type": "Active",
+        "cost": "3,000 Coins",
+        "cardSummary": "Creates a decoy to confuse players during a chase."
+      },
+      "system": {
+        "slug": "decoy",
+        "section": "Standard",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost",
+        "type": "Active",
+        "cost": "6,000 Coins",
+        "cardSummary": "Turns you invisible for a short time, which makes ambushes much easier."
+      },
+      "system": {
+        "slug": "ghost",
+        "section": "Premium",
+        "sortOrder": 9,
+        "image": "/Murder%20Mystery%202/powers/ghost.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "X-Ray",
+        "type": "Active",
+        "cost": "6,000 Coins",
+        "cardSummary": "Lets you see players through walls for tracking and route planning."
+      },
+      "system": {
+        "slug": "x-ray",
+        "section": "Premium",
+        "sortOrder": 10,
+        "image": "/Murder%20Mystery%202/powers/xray.jpg"
+      }
+    }
+  ]
+}

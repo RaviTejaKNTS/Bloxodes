@@ -1,23 +1,20 @@
 {
   "meta": {
-    "title": "Catch And Tame biomes data",
-    "updatedAt": "2026-06-17",
-    "sources": [
-      {
-        "label": "Catch and Tame Wiki - Biomes",
-        "url": "https://catch-and-tame.wiki/biomes/",
-        "accessed": "2026-06-17"
-      },
-      {
-        "label": "Roblox badges API - Catch And Tame discovery badges",
-        "url": "https://badges.roblox.com/v1/universes/9091133975/badges?limit=100&sortOrder=Asc",
-        "accessed": "2026-06-17"
-      },
-      {
-        "label": "BloxInformer - Catch and Tame Wiki",
-        "url": "https://bloxinformer.com/wikis/catch-and-tame/",
-        "accessed": "2026-06-17"
-      }
+    "schemaVersion": 2,
+    "game": "Catch And Tame",
+    "gameSlug": "catch-and-tame",
+    "collection": "biomes",
+    "route": "/wiki/catch-and-tame/biomes",
+    "catalogCode": "catch-and-tame-biomes",
+    "itemFields": [
+      "unlockCost",
+      "difficulty",
+      "animalCount",
+      "notableAnimals",
+      "progressionUse",
+      "weatherOrSecretNote",
+      "costValue",
+      "officialDiscoveryBadge"
     ],
     "columns": [
       "unlockCost",
@@ -26,333 +23,355 @@
       "notableAnimals",
       "progressionUse",
       "weatherOrSecretNote",
-      "collectionSection"
+      "costValue",
+      "officialDiscoveryBadge"
     ],
-    "officialDiscoveryBadges": [
-      "Bee Island",
-      "Forgotten Depths",
-      "Ice Island",
-      "Safari Island",
-      "Sky Island",
-      "Cave Island",
-      "Volcano Island",
-      "Lost Docks"
-    ],
-    "notes": "The standalone Catch and Tame wiki lists 17 biomes with costs, animals, and route tips. Roblox badges cross-check eight discovered-area names, but several badge names use island wording that does not exactly match the standalone guide, so badge-only names are recorded as cross-check metadata instead of increasing the public count."
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Free starter route",
+        "Early paid route",
+        "Mid-game unlocks",
+        "Late-game islands",
+        "Secret route"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "unlockCost",
+        "difficulty",
+        "animalCount",
+        "notableAnimals",
+        "progressionUse",
+        "weatherOrSecretNote"
+      ],
+      "tableFields": [
+        "unlockCost",
+        "difficulty",
+        "animalCount",
+        "notableAnimals",
+        "progressionUse",
+        "weatherOrSecretNote",
+        "costValue",
+        "officialDiscoveryBadge"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Starter Village / Farm",
-      "slug": "starter-village-farm",
-      "unlockCost": "Free",
-      "costValue": 0,
-      "difficulty": "Starter",
-      "animalCount": 11,
-      "notableAnimals": "Chicken, Butterfly, Dragonfly, Armadillo, Wormy, Cow, Goat, Pig, Sheep, Rabbit, Cat",
-      "progressionUse": "First income route for filling early pens before buying paid areas.",
-      "weatherOrSecretNote": "Both starter farms are free.",
-      "collectionSection": "Free starter route",
-      "sortOrder": 1,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Starter Village / Farm",
+        "unlockCost": "Free",
+        "difficulty": "Starter",
+        "animalCount": 11,
+        "notableAnimals": "Chicken, Butterfly, Dragonfly, Armadillo, Wormy, Cow, Goat, Pig, Sheep, Rabbit, Cat",
+        "progressionUse": "First income route for filling early pens before buying paid areas.",
+        "weatherOrSecretNote": "Both starter farms are free.",
+        "costValue": 0
+      },
+      "system": {
+        "slug": "starter-village-farm",
+        "section": "Free starter route",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Forest",
-      "slug": "forest",
-      "unlockCost": "Free",
-      "costValue": 0,
-      "difficulty": "Easy",
-      "animalCount": 9,
-      "notableAnimals": "Fox, Deer, Boar, Wolf, Forest Wolf, Bear, Koala, Moon Cat, Moose",
-      "progressionUse": "Early free area for stronger starter catches and night-only targets.",
-      "weatherOrSecretNote": "Wolf uses Bone Bait; Forest Wolf and Moon Cat appear at night.",
-      "collectionSection": "Free starter route",
-      "sortOrder": 2,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Forest",
+        "unlockCost": "Free",
+        "difficulty": "Easy",
+        "animalCount": 9,
+        "notableAnimals": "Fox, Deer, Boar, Wolf, Forest Wolf, Bear, Koala, Moon Cat, Moose",
+        "progressionUse": "Early free area for stronger starter catches and night-only targets.",
+        "weatherOrSecretNote": "Wolf uses Bone Bait; Forest Wolf and Moon Cat appear at night.",
+        "costValue": 0
+      },
+      "system": {
+        "slug": "forest",
+        "section": "Free starter route",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Jungle",
-      "slug": "jungle",
-      "unlockCost": "$25,000",
-      "costValue": 25000,
-      "difficulty": "Medium",
-      "animalCount": 5,
-      "notableAnimals": "Capybara, Monkey, Tiger, Flamingo, Jaguar",
-      "progressionUse": "Low-cost paid unlock that starts the Giraffe breeding route through Capybara.",
-      "weatherOrSecretNote": "No weather-only note found in the biome guide.",
-      "collectionSection": "Early paid route",
-      "sortOrder": 3,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Jungle",
+        "unlockCost": "$25,000",
+        "difficulty": "Medium",
+        "animalCount": 5,
+        "notableAnimals": "Capybara, Monkey, Tiger, Flamingo, Jaguar",
+        "progressionUse": "Low-cost paid unlock that starts the Giraffe breeding route through Capybara.",
+        "weatherOrSecretNote": "No weather-only note found in the biome guide.",
+        "costValue": 25000
+      },
+      "system": {
+        "slug": "jungle",
+        "section": "Early paid route",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Savanna",
-      "slug": "savanna",
-      "unlockCost": "$50,000",
-      "costValue": 50000,
-      "difficulty": "Medium",
-      "animalCount": 6,
-      "notableAnimals": "Lion, Leopard, Zebra, Hippo, Kangaroo, Elephant",
-      "progressionUse": "Second paid step with mounts and Elephant for the Toad breeding path.",
-      "weatherOrSecretNote": "Roblox badge wording may map this area to Safari Island.",
-      "collectionSection": "Early paid route",
-      "sortOrder": 4,
-      "sourceStatus": "Standalone wiki row; possible official badge wording cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": "Discovered Safari Island!",
-      "image": "/Catch%20And%20Tame/Biomes/savanna.png",
-      "imageStatus": "local image collected from official Roblox discovery badge for Safari Island",
-      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-6eb060e941448ccffd756a2196313161/420/420/Image/Png/noFilter"
+      "item": {
+        "name": "Savanna",
+        "unlockCost": "$50,000",
+        "difficulty": "Medium",
+        "animalCount": 6,
+        "notableAnimals": "Lion, Leopard, Zebra, Hippo, Kangaroo, Elephant",
+        "progressionUse": "Second paid step with mounts and Elephant for the Toad breeding path.",
+        "weatherOrSecretNote": "Roblox badge wording may map this area to Safari Island.",
+        "costValue": 50000,
+        "officialDiscoveryBadge": "Discovered Safari Island!"
+      },
+      "system": {
+        "slug": "savanna",
+        "section": "Early paid route",
+        "sortOrder": 4,
+        "image": "/Catch%20And%20Tame/Biomes/savanna.png"
+      }
     },
     {
-      "name": "Desert",
-      "slug": "desert",
-      "unlockCost": "$75,000",
-      "costValue": 75000,
-      "difficulty": "Medium-Hard",
-      "animalCount": 4,
-      "notableAnimals": "Scorpion, Sand Scarab, Camel, Basilisk",
-      "progressionUse": "Early harder area for Basilisk hunting and desert-specific catches.",
-      "weatherOrSecretNote": "Basilisk needs Sandstorm Totem support and a strong lasso.",
-      "collectionSection": "Early paid route",
-      "sortOrder": 5,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Desert",
+        "unlockCost": "$75,000",
+        "difficulty": "Medium-Hard",
+        "animalCount": 4,
+        "notableAnimals": "Scorpion, Sand Scarab, Camel, Basilisk",
+        "progressionUse": "Early harder area for Basilisk hunting and desert-specific catches.",
+        "weatherOrSecretNote": "Basilisk needs Sandstorm Totem support and a strong lasso.",
+        "costValue": 75000
+      },
+      "system": {
+        "slug": "desert",
+        "section": "Early paid route",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Swamp",
-      "slug": "swamp",
-      "unlockCost": "$100,000",
-      "costValue": 100000,
-      "difficulty": "Medium-Hard",
-      "animalCount": 3,
-      "notableAnimals": "Alligator, Platypus, Turtle",
-      "progressionUse": "Breeding support area because Alligator is needed for Giraffe.",
-      "weatherOrSecretNote": "No weather-only note found in the biome guide.",
-      "collectionSection": "Early paid route",
-      "sortOrder": 6,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Swamp",
+        "unlockCost": "$100,000",
+        "difficulty": "Medium-Hard",
+        "animalCount": 3,
+        "notableAnimals": "Alligator, Platypus, Turtle",
+        "progressionUse": "Breeding support area because Alligator is needed for Giraffe.",
+        "weatherOrSecretNote": "No weather-only note found in the biome guide.",
+        "costValue": 100000
+      },
+      "system": {
+        "slug": "swamp",
+        "section": "Early paid route",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Snow Biome",
-      "slug": "snow-biome",
-      "unlockCost": "$175,000",
-      "costValue": 175000,
-      "difficulty": "Hard",
-      "animalCount": 7,
-      "notableAnimals": "Arctic Fox, Penguin, Polar Bear, Yeti, Mammoth, Christmas Dragon, Festive Penguin",
-      "progressionUse": "First hard-cost jump and the place to prepare for snow-weather farming.",
-      "weatherOrSecretNote": "Yeti appears during Blizzard weather; Roblox badge wording may map this area to Ice Island.",
-      "collectionSection": "Mid-game unlocks",
-      "sortOrder": 7,
-      "sourceStatus": "Standalone wiki row; possible official badge wording cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": "Discovered Ice Island!",
-      "image": "/Catch%20And%20Tame/Biomes/snow-biome.png",
-      "imageStatus": "local image collected from official Roblox discovery badge for Ice Island",
-      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-eda8acff34792e8855694c981538be74/420/420/Image/Png/noFilter"
+      "item": {
+        "name": "Snow Biome",
+        "unlockCost": "$175,000",
+        "difficulty": "Hard",
+        "animalCount": 7,
+        "notableAnimals": "Arctic Fox, Penguin, Polar Bear, Yeti, Mammoth, Christmas Dragon, Festive Penguin",
+        "progressionUse": "First hard-cost jump and the place to prepare for snow-weather farming.",
+        "weatherOrSecretNote": "Yeti appears during Blizzard weather; Roblox badge wording may map this area to Ice Island.",
+        "costValue": 175000,
+        "officialDiscoveryBadge": "Discovered Ice Island!"
+      },
+      "system": {
+        "slug": "snow-biome",
+        "section": "Mid-game unlocks",
+        "sortOrder": 7,
+        "image": "/Catch%20And%20Tame/Biomes/snow-biome.png"
+      }
     },
     {
-      "name": "Ocean",
-      "slug": "ocean",
-      "unlockCost": "$200,000",
-      "costValue": 200000,
-      "difficulty": "Hard",
-      "animalCount": 8,
-      "notableAnimals": "Clownfish, Crab, Red Squid, Narwhal, Orca, Great White Shark, Octopus, Kraken",
-      "progressionUse": "Water route for shark, Kraken, and later Forgotten Depths key context.",
-      "weatherOrSecretNote": "Kraken appears during Tsunami weather; Great White Shark needs an Epic lasso.",
-      "collectionSection": "Mid-game unlocks",
-      "sortOrder": 8,
-      "sourceStatus": "Standalone wiki row; possible official badge wording cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": "Discovered Lost Docks!",
-      "image": "/Catch%20And%20Tame/Biomes/ocean.png",
-      "imageStatus": "local image collected from official Roblox discovery badge for Lost Docks",
-      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-ed95b7720aa9f5493d5558cc036391da/420/420/Image/Png/noFilter"
+      "item": {
+        "name": "Ocean",
+        "unlockCost": "$200,000",
+        "difficulty": "Hard",
+        "animalCount": 8,
+        "notableAnimals": "Clownfish, Crab, Red Squid, Narwhal, Orca, Great White Shark, Octopus, Kraken",
+        "progressionUse": "Water route for shark, Kraken, and later Forgotten Depths key context.",
+        "weatherOrSecretNote": "Kraken appears during Tsunami weather; Great White Shark needs an Epic lasso.",
+        "costValue": 200000,
+        "officialDiscoveryBadge": "Discovered Lost Docks!"
+      },
+      "system": {
+        "slug": "ocean",
+        "section": "Mid-game unlocks",
+        "sortOrder": 8,
+        "image": "/Catch%20And%20Tame/Biomes/ocean.png"
+      }
     },
     {
-      "name": "Prehistoric Zone",
-      "slug": "prehistoric-zone",
-      "unlockCost": "$500,000",
-      "costValue": 500000,
-      "difficulty": "Hard",
-      "animalCount": 3,
-      "notableAnimals": "Triceratops, Tribolite, Dodo Bird",
-      "progressionUse": "Mid-game farming stop for high-BPS Epic value.",
-      "weatherOrSecretNote": "The guide highlights Triceratops as a major Epic BPS target.",
-      "collectionSection": "Mid-game unlocks",
-      "sortOrder": 9,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Prehistoric Zone",
+        "unlockCost": "$500,000",
+        "difficulty": "Hard",
+        "animalCount": 3,
+        "notableAnimals": "Triceratops, Tribolite, Dodo Bird",
+        "progressionUse": "Mid-game farming stop for high-BPS Epic value.",
+        "weatherOrSecretNote": "The guide highlights Triceratops as a major Epic BPS target.",
+        "costValue": 500000
+      },
+      "system": {
+        "slug": "prehistoric-zone",
+        "section": "Mid-game unlocks",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Mountain",
-      "slug": "mountain",
-      "unlockCost": "$750,000",
-      "costValue": 750000,
-      "difficulty": "Hard",
-      "animalCount": 2,
-      "notableAnimals": "Red Panda, Andean Condor",
-      "progressionUse": "Mythic breeding setup because Red Panda feeds Galaxy Kitsune and Galaxy Axolotl chains.",
-      "weatherOrSecretNote": "No weather-only note found in the biome guide.",
-      "collectionSection": "Mid-game unlocks",
-      "sortOrder": 10,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Mountain",
+        "unlockCost": "$750,000",
+        "difficulty": "Hard",
+        "animalCount": 2,
+        "notableAnimals": "Red Panda, Andean Condor",
+        "progressionUse": "Mythic breeding setup because Red Panda feeds Galaxy Kitsune and Galaxy Axolotl chains.",
+        "weatherOrSecretNote": "No weather-only note found in the biome guide.",
+        "costValue": 750000
+      },
+      "system": {
+        "slug": "mountain",
+        "section": "Mid-game unlocks",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Underground",
-      "slug": "underground",
-      "unlockCost": "$750,000",
-      "costValue": 750000,
-      "difficulty": "Hard",
-      "animalCount": 2,
-      "notableAnimals": "Axolotl, Walrus",
-      "progressionUse": "Mythic breeding setup because Axolotl is used in major late chains.",
-      "weatherOrSecretNote": "Roblox badge wording may map this area to Cave Island.",
-      "collectionSection": "Mid-game unlocks",
-      "sortOrder": 11,
-      "sourceStatus": "Standalone wiki row; possible official badge wording cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": "Discovered Cave Island!",
-      "image": "/Catch%20And%20Tame/Biomes/underground.png",
-      "imageStatus": "local image collected from official Roblox discovery badge for Cave Island",
-      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-f28fb50dba2ee48f35aa2886e136ba81/420/420/Image/Png/noFilter"
+      "item": {
+        "name": "Underground",
+        "unlockCost": "$750,000",
+        "difficulty": "Hard",
+        "animalCount": 2,
+        "notableAnimals": "Axolotl, Walrus",
+        "progressionUse": "Mythic breeding setup because Axolotl is used in major late chains.",
+        "weatherOrSecretNote": "Roblox badge wording may map this area to Cave Island.",
+        "costValue": 750000,
+        "officialDiscoveryBadge": "Discovered Cave Island!"
+      },
+      "system": {
+        "slug": "underground",
+        "section": "Mid-game unlocks",
+        "sortOrder": 11,
+        "image": "/Catch%20And%20Tame/Biomes/underground.png"
+      }
     },
     {
-      "name": "Volcano / Volcano Core",
-      "slug": "volcano-volcano-core",
-      "unlockCost": "$1,000,000",
-      "costValue": 1000000,
-      "difficulty": "Very Hard",
-      "animalCount": 4,
-      "notableAnimals": "Fire Pup, Magma Dragon, Infernal Axolotl, Infernal Hydra",
-      "progressionUse": "First million-cost route for Infernal pets and Volcanic mutation value.",
-      "weatherOrSecretNote": "Roblox badge wording may map this area to Volcano Island.",
-      "collectionSection": "Late-game islands",
-      "sortOrder": 12,
-      "sourceStatus": "Standalone wiki row; official badge wording cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": "Discovered Volcano Island!",
-      "image": "/Catch%20And%20Tame/Biomes/volcano-volcano-core.png",
-      "imageStatus": "local image collected from official Roblox discovery badge for Volcano Island",
-      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-11888a8a83e3000a89284089d67812be/420/420/Image/Png/noFilter"
+      "item": {
+        "name": "Volcano / Volcano Core",
+        "unlockCost": "$1,000,000",
+        "difficulty": "Very Hard",
+        "animalCount": 4,
+        "notableAnimals": "Fire Pup, Magma Dragon, Infernal Axolotl, Infernal Hydra",
+        "progressionUse": "First million-cost route for Infernal pets and Volcanic mutation value.",
+        "weatherOrSecretNote": "Roblox badge wording may map this area to Volcano Island.",
+        "costValue": 1000000,
+        "officialDiscoveryBadge": "Discovered Volcano Island!"
+      },
+      "system": {
+        "slug": "volcano-volcano-core",
+        "section": "Late-game islands",
+        "sortOrder": 12,
+        "image": "/Catch%20And%20Tame/Biomes/volcano-volcano-core.png"
+      }
     },
     {
-      "name": "Mystical Zone",
-      "slug": "mystical-zone",
-      "unlockCost": "$1,500,000",
-      "costValue": 1500000,
-      "difficulty": "Very Hard",
-      "animalCount": 2,
-      "notableAnimals": "Kitsune, Phoenix",
-      "progressionUse": "Late breeding route because Kitsune connects into Galaxy Kitsune.",
-      "weatherOrSecretNote": "No weather-only note found in the biome guide.",
-      "collectionSection": "Late-game islands",
-      "sortOrder": 13,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Mystical Zone",
+        "unlockCost": "$1,500,000",
+        "difficulty": "Very Hard",
+        "animalCount": 2,
+        "notableAnimals": "Kitsune, Phoenix",
+        "progressionUse": "Late breeding route because Kitsune connects into Galaxy Kitsune.",
+        "weatherOrSecretNote": "No weather-only note found in the biome guide.",
+        "costValue": 1500000
+      },
+      "system": {
+        "slug": "mystical-zone",
+        "section": "Late-game islands",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Sky Island",
-      "slug": "sky-island",
-      "unlockCost": "$2,000,000",
-      "costValue": 2000000,
-      "difficulty": "Very Hard",
-      "animalCount": 3,
-      "notableAnimals": "Griffin, Cosmic Griffin, Pegasus",
-      "progressionUse": "High-value route for Celestial Griffin and Celestial Hydra preparation.",
-      "weatherOrSecretNote": "Cosmic Griffin route benefits from Cosmic Shower weather; official badge confirms Sky Island discovery.",
-      "collectionSection": "Late-game islands",
-      "sortOrder": 14,
-      "sourceStatus": "Standalone wiki row; official badge cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": "Discovered Sky Island!",
-      "image": "/Catch%20And%20Tame/Biomes/sky-island.png",
-      "imageStatus": "local image collected from official Roblox discovery badge for Sky Island",
-      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-155fef37696372bb91f8adf0ceecda78/420/420/Image/Png/noFilter"
+      "item": {
+        "name": "Sky Island",
+        "unlockCost": "$2,000,000",
+        "difficulty": "Very Hard",
+        "animalCount": 3,
+        "notableAnimals": "Griffin, Cosmic Griffin, Pegasus",
+        "progressionUse": "High-value route for Celestial Griffin and Celestial Hydra preparation.",
+        "weatherOrSecretNote": "Cosmic Griffin route benefits from Cosmic Shower weather; official badge confirms Sky Island discovery.",
+        "costValue": 2000000,
+        "officialDiscoveryBadge": "Discovered Sky Island!"
+      },
+      "system": {
+        "slug": "sky-island",
+        "section": "Late-game islands",
+        "sortOrder": 14,
+        "image": "/Catch%20And%20Tame/Biomes/sky-island.png"
+      }
     },
     {
-      "name": "Dragon Island",
-      "slug": "dragon-island",
-      "unlockCost": "$5,000,000",
-      "costValue": 5000000,
-      "difficulty": "Extreme",
-      "animalCount": 1,
-      "notableAnimals": "Lightning Dragon",
-      "progressionUse": "Extreme-cost target for the Lightning Dragon used in Hydra breeding.",
-      "weatherOrSecretNote": "The guide says this area was added in Update 15 and needs fast travel support.",
-      "collectionSection": "Late-game islands",
-      "sortOrder": 15,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Dragon Island",
+        "unlockCost": "$5,000,000",
+        "difficulty": "Extreme",
+        "animalCount": 1,
+        "notableAnimals": "Lightning Dragon",
+        "progressionUse": "Extreme-cost target for the Lightning Dragon used in Hydra breeding.",
+        "weatherOrSecretNote": "The guide says this area was added in Update 15 and needs fast travel support.",
+        "costValue": 5000000
+      },
+      "system": {
+        "slug": "dragon-island",
+        "section": "Late-game islands",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "Forgotten Depths",
-      "slug": "forgotten-depths",
-      "unlockCost": "$8,000,000",
-      "costValue": 8000000,
-      "difficulty": "Extreme",
-      "animalCount": 4,
-      "notableAnimals": "Cerberus, Ostrich, Rhino, Sausage Dog",
-      "progressionUse": "Most expensive listed unlock and the route for the key-and-shapes puzzle.",
-      "weatherOrSecretNote": "Catch the Clownfish with the key, then collect five underwater shapes to open the Baby Monkey cage.",
-      "collectionSection": "Late-game islands",
-      "sortOrder": 16,
-      "sourceStatus": "Standalone wiki row; official badge cross-check",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": "Discovered Forgotten Depths!",
-      "image": "/Catch%20And%20Tame/Biomes/forgotten-depths.png",
-      "imageStatus": "local image collected from official Roblox discovery badge for Forgotten Depths",
-      "sourceImageUrl": "https://tr.rbxcdn.com/180DAY-d62ad039769c0ec2a61fb1dd10db3032/420/420/Image/Png/noFilter"
+      "item": {
+        "name": "Forgotten Depths",
+        "unlockCost": "$8,000,000",
+        "difficulty": "Extreme",
+        "animalCount": 4,
+        "notableAnimals": "Cerberus, Ostrich, Rhino, Sausage Dog",
+        "progressionUse": "Most expensive listed unlock and the route for the key-and-shapes puzzle.",
+        "weatherOrSecretNote": "Catch the Clownfish with the key, then collect five underwater shapes to open the Baby Monkey cage.",
+        "costValue": 8000000,
+        "officialDiscoveryBadge": "Discovered Forgotten Depths!"
+      },
+      "system": {
+        "slug": "forgotten-depths",
+        "section": "Late-game islands",
+        "sortOrder": 16,
+        "image": "/Catch%20And%20Tame/Biomes/forgotten-depths.png"
+      }
     },
     {
-      "name": "Void Realm",
-      "slug": "void-realm",
-      "unlockCost": "Hidden Portal",
-      "costValue": null,
-      "difficulty": "Secret",
-      "animalCount": 1,
-      "notableAnimals": "Void Dragon",
-      "progressionUse": "Secret route for Void Dragon once the portal location is known.",
-      "weatherOrSecretNote": "The guide says the hidden portal location can change by update.",
-      "collectionSection": "Secret route",
-      "sortOrder": 17,
-      "sourceStatus": "Standalone wiki row",
-      "sourcePage": "https://catch-and-tame.wiki/biomes/",
-      "officialDiscoveryBadge": null,
-      "image": null,
-      "imageStatus": "text-only; no official badge or clean row-specific biome image found in inspected sources"
+      "item": {
+        "name": "Void Realm",
+        "unlockCost": "Hidden Portal",
+        "difficulty": "Secret",
+        "animalCount": 1,
+        "notableAnimals": "Void Dragon",
+        "progressionUse": "Secret route for Void Dragon once the portal location is known.",
+        "weatherOrSecretNote": "The guide says the hidden portal location can change by update."
+      },
+      "system": {
+        "slug": "void-realm",
+        "section": "Secret route",
+        "sortOrder": 17,
+        "image": null
+      }
     }
   ]
 }

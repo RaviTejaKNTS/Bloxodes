@@ -1,171 +1,139 @@
 {
   "meta": {
-    "title": "+1 Speed Keyboard Escape Auras",
-    "game": "+1 Speed Keyboard Escape | Candy & Chocolate",
+    "schemaVersion": 2,
+    "game": "+1 Speed Keyboard Escape",
     "gameSlug": "1-speed-keyboard-escape",
     "collection": "auras",
     "route": "/wiki/1-speed-keyboard-escape/auras",
     "catalogCode": "1-speed-keyboard-escape-auras",
-    "updatedAt": "2026-05-31",
-    "itemCount": 4,
-    "counts": {
-      "Starter cost tier": 1,
-      "Mid cost tier": 2,
-      "High cost tier": 1
-    },
-    "imageCoverage": {
-      "present": 4,
-      "missing": 0
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "itemFields": [
       "cost",
       "effect",
       "source",
       "availability",
       "progressionNote",
-      "verificationNote",
-      "robloxGamePassId",
-      "robloxProductId",
-      "robloxIconAssetId",
       "officialName",
       "officialCreated",
-      "officialUpdated",
-      "sourceStatus",
-      "sourcePage",
-      "secondarySourcePage",
-      "imageStatus",
-      "sortOrder"
+      "officialUpdated"
     ],
-    "sources": [
-      {
-        "label": "Roblox game passes API - +1 Speed Keyboard Escape",
-        "url": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?passView=Full&pageSize=100",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Roblox - +1 Speed Keyboard Escape | Candy & Chocolate",
-        "url": "https://www.roblox.com/games/95082159892680/1-Speed-Keyboard-Escape-Candy-Chocolate",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Rolimon's - +1 Speed Keyboard Escape game passes cross-check",
-        "url": "https://www.rolimons.com/game/95082159892680",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Pro Game Guides - +1 Speed Keyboard Escape Beginner's Guide",
-        "url": "https://progameguides.com/roblox/1-speed-keyboard-escape-beginners-guide/",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Speed Keyboard Escape Wiki - aura system cross-check",
-        "url": "https://speedkeyboardescape.wiki/",
-        "accessed": "2026-05-31"
-      }
+    "columns": [
+      "cost",
+      "effect",
+      "source",
+      "availability",
+      "progressionNote",
+      "officialName",
+      "officialCreated",
+      "officialUpdated"
     ],
-    "notes": [
-      "Official Roblox game-pass data confirms four aura-named passes and current Robux prices.",
-      "Public guide and fan-wiki sources support Auras as passive speed bonuses that stack with other speed systems, but they do not provide per-aura multipliers.",
-      "No source checked in Phase 2 confirmed exact per-aura effects or multipliers, so each row keeps effect as Not verified.",
-      "Current public copy should describe the known Aura rows as Robux game-pass sourced unless a separate in-game Wins aura route is later verified."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Starter cost tier",
+        "Mid cost tier",
+        "High cost tier"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "cost",
+        "effect",
+        "source",
+        "availability",
+        "progressionNote",
+        "officialName"
+      ],
+      "tableFields": [
+        "cost",
+        "effect",
+        "source",
+        "availability",
+        "progressionNote",
+        "officialName",
+        "officialCreated",
+        "officialUpdated"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Glow Aura",
-      "slug": "glow-aura",
-      "image": "/%2B1%20Speed%20Keyboard%20Escape/Auras/glow-aura.png",
-      "collectionSection": "Starter cost tier",
-      "cost": "59 Robux",
-      "effect": "Not verified",
-      "source": "Roblox game pass",
-      "availability": "On sale",
-      "progressionNote": "Lowest-cost verified Aura pass. Treat it as the starter cost tier until exact in-game effect values are confirmed.",
-      "verificationNote": "Pass name, price, sale status, and icon are verified from official game-pass data. Exact effect or multiplier was not confirmed by checked sources.",
-      "robloxGamePassId": 1841065578,
-      "robloxProductId": 3593505349,
-      "robloxIconAssetId": 138962708170767,
-      "officialName": "GlowAura",
-      "officialCreated": "2026-05-16T16:51:35.087Z",
-      "officialUpdated": "2026-05-16T16:51:35.093Z",
-      "sourceStatus": "official pass verified; effect not verified",
-      "sourcePage": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?passView=Full&pageSize=100",
-      "secondarySourcePage": "https://www.rolimons.com/game/95082159892680",
-      "imageStatus": "official Roblox pass icon saved locally",
-      "sortOrder": 1
+      "item": {
+        "name": "Glow Aura",
+        "cost": "59 Robux",
+        "effect": "Not verified",
+        "source": "Roblox game pass",
+        "availability": "On sale",
+        "progressionNote": "Lowest-cost verified Aura pass. Treat it as the starter cost tier until exact in-game effect values are confirmed.",
+        "officialName": "GlowAura",
+        "officialCreated": "2026-05-16T16:51:35.087Z",
+        "officialUpdated": "2026-05-16T16:51:35.093Z"
+      },
+      "system": {
+        "slug": "glow-aura",
+        "section": "Starter cost tier",
+        "sortOrder": 1,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Auras/glow-aura.png"
+      }
     },
     {
-      "name": "Wind Aura",
-      "slug": "wind-aura",
-      "image": "/%2B1%20Speed%20Keyboard%20Escape/Auras/wind-aura.png",
-      "collectionSection": "Mid cost tier",
-      "cost": "249 Robux",
-      "effect": "Not verified",
-      "source": "Roblox game pass",
-      "availability": "On sale",
-      "progressionNote": "First mid-cost Aura pass. Compare it by price until exact in-game effect values are confirmed.",
-      "verificationNote": "Pass name, price, sale status, and icon are verified from official game-pass data. Exact effect or multiplier was not confirmed by checked sources.",
-      "robloxGamePassId": 1841089568,
-      "robloxProductId": 3593505505,
-      "robloxIconAssetId": 132114368795069,
-      "officialName": "WindAura",
-      "officialCreated": "2026-05-16T16:51:54.48Z",
-      "officialUpdated": "2026-05-16T16:51:54.487Z",
-      "sourceStatus": "official pass verified; effect not verified",
-      "sourcePage": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?passView=Full&pageSize=100",
-      "secondarySourcePage": "https://www.rolimons.com/game/95082159892680",
-      "imageStatus": "official Roblox pass icon saved locally",
-      "sortOrder": 2
+      "item": {
+        "name": "Wind Aura",
+        "cost": "249 Robux",
+        "effect": "Not verified",
+        "source": "Roblox game pass",
+        "availability": "On sale",
+        "progressionNote": "First mid-cost Aura pass. Compare it by price until exact in-game effect values are confirmed.",
+        "officialName": "WindAura",
+        "officialCreated": "2026-05-16T16:51:54.48Z",
+        "officialUpdated": "2026-05-16T16:51:54.487Z"
+      },
+      "system": {
+        "slug": "wind-aura",
+        "section": "Mid cost tier",
+        "sortOrder": 2,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Auras/wind-aura.png"
+      }
     },
     {
-      "name": "Water Aura",
-      "slug": "water-aura",
-      "image": "/%2B1%20Speed%20Keyboard%20Escape/Auras/water-aura.png",
-      "collectionSection": "Mid cost tier",
-      "cost": "489 Robux",
-      "effect": "Not verified",
-      "source": "Roblox game pass",
-      "availability": "On sale",
-      "progressionNote": "Higher mid-cost Aura pass. Do not treat it as stronger than Wind Aura until exact in-game effect values are confirmed.",
-      "verificationNote": "Pass name, price, sale status, and icon are verified from official game-pass data. Exact effect or multiplier was not confirmed by checked sources.",
-      "robloxGamePassId": 1840979522,
-      "robloxProductId": 3593505602,
-      "robloxIconAssetId": 103315051192745,
-      "officialName": "WaterAura",
-      "officialCreated": "2026-05-16T16:52:04.49Z",
-      "officialUpdated": "2026-05-16T16:52:04.5Z",
-      "sourceStatus": "official pass verified; effect not verified",
-      "sourcePage": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?passView=Full&pageSize=100",
-      "secondarySourcePage": "https://www.rolimons.com/game/95082159892680",
-      "imageStatus": "official Roblox pass icon saved locally",
-      "sortOrder": 3
+      "item": {
+        "name": "Water Aura",
+        "cost": "489 Robux",
+        "effect": "Not verified",
+        "source": "Roblox game pass",
+        "availability": "On sale",
+        "progressionNote": "Higher mid-cost Aura pass. Do not treat it as stronger than Wind Aura until exact in-game effect values are confirmed.",
+        "officialName": "WaterAura",
+        "officialCreated": "2026-05-16T16:52:04.49Z",
+        "officialUpdated": "2026-05-16T16:52:04.5Z"
+      },
+      "system": {
+        "slug": "water-aura",
+        "section": "Mid cost tier",
+        "sortOrder": 3,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Auras/water-aura.png"
+      }
     },
     {
-      "name": "Fire Aura",
-      "slug": "fire-aura",
-      "image": "/%2B1%20Speed%20Keyboard%20Escape/Auras/fire-aura.png",
-      "collectionSection": "High cost tier",
-      "cost": "649 Robux",
-      "effect": "Not verified",
-      "source": "Roblox game pass",
-      "availability": "On sale",
-      "progressionNote": "Highest-cost verified Aura pass and the newest Aura row in the checked official pass list.",
-      "verificationNote": "Pass name, price, sale status, and icon are verified from official game-pass data. Exact effect or multiplier was not confirmed by checked sources.",
-      "robloxGamePassId": 1860376482,
-      "robloxProductId": 3600912265,
-      "robloxIconAssetId": 87883978023088,
-      "officialName": "FireAura",
-      "officialCreated": "2026-05-29T21:17:22.537Z",
-      "officialUpdated": "2026-05-29T21:17:22.547Z",
-      "sourceStatus": "official pass verified; effect not verified",
-      "sourcePage": "https://apis.roblox.com/game-passes/v1/universes/9584852943/game-passes?passView=Full&pageSize=100",
-      "secondarySourcePage": "https://www.rolimons.com/game/95082159892680",
-      "imageStatus": "official Roblox pass icon saved locally",
-      "sortOrder": 4
+      "item": {
+        "name": "Fire Aura",
+        "cost": "649 Robux",
+        "effect": "Not verified",
+        "source": "Roblox game pass",
+        "availability": "On sale",
+        "progressionNote": "Highest-cost verified Aura pass and the newest Aura row in the checked official pass list.",
+        "officialName": "FireAura",
+        "officialCreated": "2026-05-29T21:17:22.537Z",
+        "officialUpdated": "2026-05-29T21:17:22.547Z"
+      },
+      "system": {
+        "slug": "fire-aura",
+        "section": "High cost tier",
+        "sortOrder": 4,
+        "image": "/%2B1%20Speed%20Keyboard%20Escape/Auras/fire-aura.png"
+      }
     }
   ]
 }

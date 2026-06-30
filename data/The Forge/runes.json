@@ -1,123 +1,229 @@
 {
   "meta": {
-    "title": "The Forge Runes",
-    "updatedAt": "2026-02-07",
-    "sources": [
-      {
-        "label": "Source",
-        "url": "https://www.theforgewiki.org/runes/",
-        "accessed": "2026-02-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "The Forge",
+    "gameSlug": "the-forge",
+    "collection": "runes",
+    "route": "/wiki/the-forge/runes",
+    "catalogCode": "the-forge-runes",
+    "itemFields": [
       "element",
       "rarity",
       "effect",
       "primaryDrop",
       "link"
-    ]
+    ],
+    "columns": [
+      "element",
+      "rarity",
+      "effect",
+      "primaryDrop",
+      "link"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Uncommon",
+        "Rare",
+        "Epic"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "element",
+        "rarity",
+        "effect",
+        "primaryDrop",
+        "link"
+      ],
+      "tableFields": [
+        "element",
+        "rarity",
+        "effect",
+        "primaryDrop",
+        "link"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Miner Shard",
-      "image": "/The%20Forge/Runes/miner-shard-1.webp",
-      "element": "Mining",
-      "rarity": "Uncommon",
-      "effect": "+5-16% Luck OR +3-10% Yield OR +4-12% Mining Speed OR +8-15% Mining Power",
-      "primaryDrop": "Various Enemies",
-      "link": "/runes/miner-shard.html"
+      "item": {
+        "name": "Miner Shard",
+        "element": "Mining",
+        "rarity": "Uncommon",
+        "effect": "+5-16% Luck OR +3-10% Yield OR +4-12% Mining Speed OR +8-15% Mining Power",
+        "primaryDrop": "Various Enemies",
+        "link": "/runes/miner-shard.html"
+      },
+      "system": {
+        "slug": "miner-shard",
+        "section": "Uncommon",
+        "sortOrder": 1,
+        "image": "/The%20Forge/Runes/miner-shard-1.webp"
+      }
     },
     {
-      "name": "Frost Speck",
-      "image": "/The%20Forge/Runes/frost-speck-1.webp",
-      "element": "Ice",
-      "rarity": "Uncommon",
-      "effect": "Slows enemies on hit",
-      "primaryDrop": "Ice Enemies",
-      "link": "/runes/frost-speck.html"
+      "item": {
+        "name": "Frost Speck",
+        "element": "Ice",
+        "rarity": "Uncommon",
+        "effect": "Slows enemies on hit",
+        "primaryDrop": "Ice Enemies",
+        "link": "/runes/frost-speck.html"
+      },
+      "system": {
+        "slug": "frost-speck",
+        "section": "Uncommon",
+        "sortOrder": 2,
+        "image": "/The%20Forge/Runes/frost-speck-1.webp"
+      }
     },
     {
-      "name": "Flame Spark",
-      "image": "/The%20Forge/Runes/flame-spark-1.webp",
-      "element": "Fire",
-      "rarity": "Uncommon",
-      "effect": "Burns enemies for damage over time",
-      "primaryDrop": "Fire Enemies",
-      "link": "/runes/flame-spark.html"
+      "item": {
+        "name": "Flame Spark",
+        "element": "Fire",
+        "rarity": "Uncommon",
+        "effect": "Burns enemies for damage over time",
+        "primaryDrop": "Fire Enemies",
+        "link": "/runes/flame-spark.html"
+      },
+      "system": {
+        "slug": "flame-spark",
+        "section": "Uncommon",
+        "sortOrder": 3,
+        "image": "/The%20Forge/Runes/flame-spark-1.webp"
+      }
     },
     {
-      "name": "Venom Crumb",
-      "image": "/The%20Forge/Runes/venom-crumb-1.webp",
-      "element": "Poison",
-      "rarity": "Uncommon",
-      "effect": "Poisons enemies for damage over time",
-      "primaryDrop": "Poison Enemies",
-      "link": "/runes/venom-crumb.html"
+      "item": {
+        "name": "Venom Crumb",
+        "element": "Poison",
+        "rarity": "Uncommon",
+        "effect": "Poisons enemies for damage over time",
+        "primaryDrop": "Poison Enemies",
+        "link": "/runes/venom-crumb.html"
+      },
+      "system": {
+        "slug": "venom-crumb",
+        "section": "Uncommon",
+        "sortOrder": 4,
+        "image": "/The%20Forge/Runes/venom-crumb-1.webp"
+      }
     },
     {
-      "name": "Chill Dust",
-      "image": "/The%20Forge/Runes/chill-dust-1.webp",
-      "element": "Ice",
-      "rarity": "Rare",
-      "effect": "Stronger slow effect on enemies",
-      "primaryDrop": "Ice Enemies",
-      "link": "/runes/chill-dust.html"
+      "item": {
+        "name": "Chill Dust",
+        "element": "Ice",
+        "rarity": "Rare",
+        "effect": "Stronger slow effect on enemies",
+        "primaryDrop": "Ice Enemies",
+        "link": "/runes/chill-dust.html"
+      },
+      "system": {
+        "slug": "chill-dust",
+        "section": "Rare",
+        "sortOrder": 5,
+        "image": "/The%20Forge/Runes/chill-dust-1.webp"
+      }
     },
     {
-      "name": "Blast Chip",
-      "image": "/The%20Forge/Runes/blast-chip-1.webp",
-      "element": "Explosive",
-      "rarity": "Rare",
-      "effect": "8-20% chance for 20-40% weapon dmg AoE",
-      "primaryDrop": "Bomber",
-      "link": "/runes/blast-chip.html"
+      "item": {
+        "name": "Blast Chip",
+        "element": "Explosive",
+        "rarity": "Rare",
+        "effect": "8-20% chance for 20-40% weapon dmg AoE",
+        "primaryDrop": "Bomber",
+        "link": "/runes/blast-chip.html"
+      },
+      "system": {
+        "slug": "blast-chip",
+        "section": "Rare",
+        "sortOrder": 6,
+        "image": "/The%20Forge/Runes/blast-chip-1.webp"
+      }
     },
     {
-      "name": "Drain Edge",
-      "image": "/The%20Forge/Runes/drain-edge-1.webp",
-      "element": "Drain",
-      "rarity": "Rare",
-      "effect": "Lifesteal on hit",
-      "primaryDrop": "Undead Enemies",
-      "link": "/runes/drain-edge.html"
+      "item": {
+        "name": "Drain Edge",
+        "element": "Drain",
+        "rarity": "Rare",
+        "effect": "Lifesteal on hit",
+        "primaryDrop": "Undead Enemies",
+        "link": "/runes/drain-edge.html"
+      },
+      "system": {
+        "slug": "drain-edge",
+        "section": "Rare",
+        "sortOrder": 7,
+        "image": "/The%20Forge/Runes/drain-edge-1.webp"
+      }
     },
     {
-      "name": "Briar Notch",
-      "image": "/The%20Forge/Runes/briar-notch-1.webp",
-      "element": "Thorns",
-      "rarity": "Rare",
-      "effect": "Reflects damage back to attackers",
-      "primaryDrop": "Plant Enemies",
-      "link": "/runes/briar-notch.html"
+      "item": {
+        "name": "Briar Notch",
+        "element": "Thorns",
+        "rarity": "Rare",
+        "effect": "Reflects damage back to attackers",
+        "primaryDrop": "Plant Enemies",
+        "link": "/runes/briar-notch.html"
+      },
+      "system": {
+        "slug": "briar-notch",
+        "section": "Rare",
+        "sortOrder": 8,
+        "image": "/The%20Forge/Runes/briar-notch-1.webp"
+      }
     },
     {
-      "name": "Rage Mark",
-      "image": "/The%20Forge/Runes/rage-mark-1.webp",
-      "element": "Rage",
-      "rarity": "Epic",
-      "effect": "Increases damage as you take hits",
-      "primaryDrop": "Elite Enemies",
-      "link": "/runes/rage-mark.html"
+      "item": {
+        "name": "Rage Mark",
+        "element": "Rage",
+        "rarity": "Epic",
+        "effect": "Increases damage as you take hits",
+        "primaryDrop": "Elite Enemies",
+        "link": "/runes/rage-mark.html"
+      },
+      "system": {
+        "slug": "rage-mark",
+        "section": "Epic",
+        "sortOrder": 9,
+        "image": "/The%20Forge/Runes/rage-mark-1.webp"
+      }
     },
     {
-      "name": "Ward Patch",
-      "image": "/The%20Forge/Runes/ward-patch-1.webp",
-      "element": "Defense",
-      "rarity": "Epic",
-      "effect": "Damage reduction on hit",
-      "primaryDrop": "Elite Enemies",
-      "link": "/runes/ward-patch.html"
+      "item": {
+        "name": "Ward Patch",
+        "element": "Defense",
+        "rarity": "Epic",
+        "effect": "Damage reduction on hit",
+        "primaryDrop": "Elite Enemies",
+        "link": "/runes/ward-patch.html"
+      },
+      "system": {
+        "slug": "ward-patch",
+        "section": "Epic",
+        "sortOrder": 10,
+        "image": "/The%20Forge/Runes/ward-patch-1.webp"
+      }
     },
     {
-      "name": "Rot Stitch",
-      "image": "/The%20Forge/Runes/rot-stitch-1.webp",
-      "element": "Decay",
-      "rarity": "Epic",
-      "effect": "Applies decay debuff to enemies",
-      "primaryDrop": "Undead Enemies",
-      "link": "/runes/rot-stitch.html"
+      "item": {
+        "name": "Rot Stitch",
+        "element": "Decay",
+        "rarity": "Epic",
+        "effect": "Applies decay debuff to enemies",
+        "primaryDrop": "Undead Enemies",
+        "link": "/runes/rot-stitch.html"
+      },
+      "system": {
+        "slug": "rot-stitch",
+        "section": "Epic",
+        "sortOrder": 11,
+        "image": "/The%20Forge/Runes/rot-stitch-1.webp"
+      }
     }
   ]
 }

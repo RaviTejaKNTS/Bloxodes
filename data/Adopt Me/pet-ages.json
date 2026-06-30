@@ -1,98 +1,146 @@
 {
   "meta": {
-    "title": "Adopt Me pet ages and tricks data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Adopt Me Wiki - Pets",
-        "url": "https://adoptme.fandom.com/wiki/Pets",
-        "accessed": "2026-05-07"
-      }
+    "schemaVersion": 2,
+    "game": "Adopt Me",
+    "gameSlug": "adopt-me",
+    "collection": "pet-ages",
+    "route": "/wiki/adopt-me/pet-ages",
+    "catalogCode": "adopt-me-pet-ages",
+    "itemFields": [
+      "number",
+      "trickUnlocked",
+      "specialTricks",
+      "item",
+      "age"
     ],
     "columns": [
       "number",
-      "name",
       "trickUnlocked",
-      "specialTricks"
-    ]
+      "specialTricks",
+      "item",
+      "age"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "number",
+        "trickUnlocked",
+        "specialTricks",
+        "item",
+        "age"
+      ],
+      "tableFields": [
+        "number",
+        "trickUnlocked",
+        "specialTricks",
+        "item",
+        "age"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "number": "1",
-      "name": "Newborn",
-      "slug": "newborn",
-      "trickUnlocked": "Sit",
-      "specialTricks": "Do Nothing",
-      "fields": {
-        "item": "1",
-        "age": "Newborn",
+      "item": {
+        "name": "Newborn",
+        "number": "1",
         "trickUnlocked": "Sit",
-        "specialTricks": "Do Nothing"
+        "specialTricks": "Do Nothing",
+        "item": "1",
+        "age": "Newborn"
+      },
+      "system": {
+        "slug": "newborn",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": null
       }
     },
     {
-      "number": "2",
-      "name": "Junior",
-      "slug": "junior",
-      "trickUnlocked": "Lay down",
-      "specialTricks": "Play dead, Joyful",
-      "fields": {
-        "item": "2",
-        "age": "Junior",
+      "item": {
+        "name": "Junior",
+        "number": "2",
         "trickUnlocked": "Lay down",
-        "specialTricks": "Play dead, Joyful"
+        "specialTricks": "Play dead, Joyful",
+        "item": "2",
+        "age": "Junior"
+      },
+      "system": {
+        "slug": "junior",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
       }
     },
     {
-      "number": "3",
-      "name": "Pre-Teen",
-      "slug": "pre-teen",
-      "trickUnlocked": "Bounce",
-      "specialTricks": "Beg, Joy, Scared, Stay",
-      "fields": {
-        "item": "3",
-        "age": "Pre-Teen",
+      "item": {
+        "name": "Pre-Teen",
+        "number": "3",
         "trickUnlocked": "Bounce",
-        "specialTricks": "Beg, Joy, Scared, Stay"
+        "specialTricks": "Beg, Joy, Scared, Stay",
+        "item": "3",
+        "age": "Pre-Teen"
+      },
+      "system": {
+        "slug": "pre-teen",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": null
       }
     },
     {
-      "number": "4",
-      "name": "Teen",
-      "slug": "teen",
-      "trickUnlocked": "Roll Over",
-      "specialTricks": "Handstand, Dance 1, Erode, Joyful, Jump",
-      "fields": {
-        "item": "4",
-        "age": "Teen",
+      "item": {
+        "name": "Teen",
+        "number": "4",
         "trickUnlocked": "Roll Over",
-        "specialTricks": "Handstand, Dance 1, Erode, Joyful, Jump"
+        "specialTricks": "Handstand, Dance 1, Erode, Joyful, Jump",
+        "item": "4",
+        "age": "Teen"
+      },
+      "system": {
+        "slug": "teen",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": null
       }
     },
     {
-      "number": "5",
-      "name": "Post-Teen",
-      "slug": "post-teen",
-      "trickUnlocked": "Backflip",
-      "specialTricks": "Sideflip, Dance 1, Twirl Around, Trick 1, Dive, Dance 2, Sit Still",
-      "fields": {
-        "item": "5",
-        "age": "Post-Teen",
+      "item": {
+        "name": "Post-Teen",
+        "number": "5",
         "trickUnlocked": "Backflip",
-        "specialTricks": "Sideflip, Dance 1, Twirl Around, Trick 1, Dive, Dance 2, Sit Still"
+        "specialTricks": "Sideflip, Dance 1, Twirl Around, Trick 1, Dive, Dance 2, Sit Still",
+        "item": "5",
+        "age": "Post-Teen"
+      },
+      "system": {
+        "slug": "post-teen",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": null
       }
     },
     {
-      "number": "6",
-      "name": "Full Grown",
-      "slug": "full-grown",
-      "trickUnlocked": "Dance",
-      "specialTricks": "Shadow Breath, Frost Breath, Triple Flip, Dance 2, Trick 2, Dance 3, Think",
-      "fields": {
-        "item": "6",
-        "age": "Full Grown",
+      "item": {
+        "name": "Full Grown",
+        "number": "6",
         "trickUnlocked": "Dance",
-        "specialTricks": "Shadow Breath, Frost Breath, Triple Flip, Dance 2, Trick 2, Dance 3, Think"
+        "specialTricks": "Shadow Breath, Frost Breath, Triple Flip, Dance 2, Trick 2, Dance 3, Think",
+        "item": "6",
+        "age": "Full Grown"
+      },
+      "system": {
+        "slug": "full-grown",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
       }
     }
   ]

@@ -1,13 +1,20 @@
 {
   "meta": {
-    "title": "Slime RNG zones data",
-    "updatedAt": "2026-05-24",
-    "sources": [
-      {
-        "label": "Slime RNG Wiki - Zones",
-        "url": "https://slime-rng.fandom.com/wiki/Zones",
-        "accessed": "2026-05-24"
-      }
+    "schemaVersion": 2,
+    "game": "Slime RNG",
+    "gameSlug": "slime-rng",
+    "collection": "zones",
+    "route": "/wiki/slime-rng/zones",
+    "catalogCode": "slime-rng-zones",
+    "itemFields": [
+      "zoneName",
+      "zoneNumber",
+      "stage",
+      "cost",
+      "totalZoneLuck",
+      "enemyHealth",
+      "goopPerKill",
+      "machineUnlocks"
     ],
     "columns": [
       "zoneName",
@@ -17,572 +24,686 @@
       "totalZoneLuck",
       "enemyHealth",
       "goopPerKill",
-      "machineUnlocks",
-      "image"
-    ]
+      "machineUnlocks"
+    ],
+    "display": {
+      "groupLabel": "Stage",
+      "sectionOrder": [
+        "Earlygame",
+        "Midgame",
+        "Lategame",
+        "Endgame"
+      ],
+      "badgeField": "cost",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "zoneName",
+        "zoneNumber",
+        "stage",
+        "cost",
+        "totalZoneLuck",
+        "enemyHealth"
+      ],
+      "tableFields": [
+        "zoneName",
+        "zoneNumber",
+        "stage",
+        "cost",
+        "totalZoneLuck",
+        "enemyHealth",
+        "goopPerKill",
+        "machineUnlocks"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Zone 1: Grasslands",
-      "slug": "zone-1-grasslands",
-      "zoneName": "Grasslands",
-      "zoneNumber": 1,
-      "stage": "Earlygame",
-      "cost": "Free",
-      "totalZoneLuck": "+1",
-      "enemyHealth": "20",
-      "goopPerKill": "1",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/grasslands.webp",
-      "sortOrder": 1,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/6/6c/Grasslands.png/revision/latest?cb=20260501005836"
+      "item": {
+        "name": "Zone 1: Grasslands",
+        "zoneName": "Grasslands",
+        "zoneNumber": 1,
+        "stage": "Earlygame",
+        "cost": "Free",
+        "totalZoneLuck": "+1",
+        "enemyHealth": "20",
+        "goopPerKill": "1"
+      },
+      "system": {
+        "slug": "zone-1-grasslands",
+        "section": "Earlygame",
+        "sortOrder": 1,
+        "image": "/Slime%20RNG/Zones/grasslands.webp"
+      }
     },
     {
-      "name": "Zone 2: Desert",
-      "slug": "zone-2-desert",
-      "zoneName": "Desert",
-      "zoneNumber": 2,
-      "stage": "Earlygame",
-      "cost": "400 Coins",
-      "totalZoneLuck": "+2",
-      "enemyHealth": "100",
-      "goopPerKill": "1",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/desert.webp",
-      "sortOrder": 2,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/6/6d/Desert.png/revision/latest?cb=20260501005841"
+      "item": {
+        "name": "Zone 2: Desert",
+        "zoneName": "Desert",
+        "zoneNumber": 2,
+        "stage": "Earlygame",
+        "cost": "400 Coins",
+        "totalZoneLuck": "+2",
+        "enemyHealth": "100",
+        "goopPerKill": "1"
+      },
+      "system": {
+        "slug": "zone-2-desert",
+        "section": "Earlygame",
+        "sortOrder": 2,
+        "image": "/Slime%20RNG/Zones/desert.webp"
+      }
     },
     {
-      "name": "Zone 3: Polar",
-      "slug": "zone-3-polar",
-      "zoneName": "Polar",
-      "zoneNumber": 3,
-      "stage": "Earlygame",
-      "cost": "5k Coins",
-      "totalZoneLuck": "+3",
-      "enemyHealth": "200",
-      "goopPerKill": "1",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/polar.webp",
-      "sortOrder": 3,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/2/23/Polar.png/revision/latest?cb=20260501005846"
+      "item": {
+        "name": "Zone 3: Polar",
+        "zoneName": "Polar",
+        "zoneNumber": 3,
+        "stage": "Earlygame",
+        "cost": "5k Coins",
+        "totalZoneLuck": "+3",
+        "enemyHealth": "200",
+        "goopPerKill": "1"
+      },
+      "system": {
+        "slug": "zone-3-polar",
+        "section": "Earlygame",
+        "sortOrder": 3,
+        "image": "/Slime%20RNG/Zones/polar.webp"
+      }
     },
     {
-      "name": "Zone 4: Volcano",
-      "slug": "zone-4-volcano",
-      "zoneName": "Volcano",
-      "zoneNumber": 4,
-      "stage": "Earlygame",
-      "cost": "50k Coins",
-      "totalZoneLuck": "+4",
-      "enemyHealth": "350",
-      "goopPerKill": "2",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/volcano.webp",
-      "sortOrder": 4,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/c/cf/Volcano.png/revision/latest?cb=20260501005852"
+      "item": {
+        "name": "Zone 4: Volcano",
+        "zoneName": "Volcano",
+        "zoneNumber": 4,
+        "stage": "Earlygame",
+        "cost": "50k Coins",
+        "totalZoneLuck": "+4",
+        "enemyHealth": "350",
+        "goopPerKill": "2"
+      },
+      "system": {
+        "slug": "zone-4-volcano",
+        "section": "Earlygame",
+        "sortOrder": 4,
+        "image": "/Slime%20RNG/Zones/volcano.webp"
+      }
     },
     {
-      "name": "Zone 5: Islands",
-      "slug": "zone-5-islands",
-      "zoneName": "Islands",
-      "zoneNumber": 5,
-      "stage": "Earlygame",
-      "cost": "400k Coins",
-      "totalZoneLuck": "+5",
-      "enemyHealth": "500",
-      "goopPerKill": "3",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/islands.webp",
-      "sortOrder": 5,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/3/3f/Islands.png/revision/latest?cb=20260501005908"
+      "item": {
+        "name": "Zone 5: Islands",
+        "zoneName": "Islands",
+        "zoneNumber": 5,
+        "stage": "Earlygame",
+        "cost": "400k Coins",
+        "totalZoneLuck": "+5",
+        "enemyHealth": "500",
+        "goopPerKill": "3"
+      },
+      "system": {
+        "slug": "zone-5-islands",
+        "section": "Earlygame",
+        "sortOrder": 5,
+        "image": "/Slime%20RNG/Zones/islands.webp"
+      }
     },
     {
-      "name": "Zone 6: Cave",
-      "slug": "zone-6-cave",
-      "zoneName": "Cave",
-      "zoneNumber": 6,
-      "stage": "Earlygame",
-      "cost": "2m Coins",
-      "totalZoneLuck": "+6",
-      "enemyHealth": "750",
-      "goopPerKill": "4",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/cave.webp",
-      "sortOrder": 6,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/4/46/Cave.png/revision/latest?cb=20260501005913"
+      "item": {
+        "name": "Zone 6: Cave",
+        "zoneName": "Cave",
+        "zoneNumber": 6,
+        "stage": "Earlygame",
+        "cost": "2m Coins",
+        "totalZoneLuck": "+6",
+        "enemyHealth": "750",
+        "goopPerKill": "4"
+      },
+      "system": {
+        "slug": "zone-6-cave",
+        "section": "Earlygame",
+        "sortOrder": 6,
+        "image": "/Slime%20RNG/Zones/cave.webp"
+      }
     },
     {
-      "name": "Zone 7: Heaven",
-      "slug": "zone-7-heaven",
-      "zoneName": "Heaven",
-      "zoneNumber": 7,
-      "stage": "Earlygame",
-      "cost": "12m Coins",
-      "totalZoneLuck": "+7",
-      "enemyHealth": "1.2k",
-      "goopPerKill": "7",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/heaven.webp",
-      "sortOrder": 7,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/f/f9/Heaven.png/revision/latest?cb=20260501005916"
+      "item": {
+        "name": "Zone 7: Heaven",
+        "zoneName": "Heaven",
+        "zoneNumber": 7,
+        "stage": "Earlygame",
+        "cost": "12m Coins",
+        "totalZoneLuck": "+7",
+        "enemyHealth": "1.2k",
+        "goopPerKill": "7",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-7-heaven",
+        "section": "Earlygame",
+        "sortOrder": 7,
+        "image": "/Slime%20RNG/Zones/heaven.webp"
+      }
     },
     {
-      "name": "Zone 8: Jungle",
-      "slug": "zone-8-jungle",
-      "zoneName": "Jungle",
-      "zoneNumber": 8,
-      "stage": "Earlygame",
-      "cost": "54m Coins",
-      "totalZoneLuck": "+8",
-      "enemyHealth": "1.8k",
-      "goopPerKill": "9",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/jungle.webp",
-      "sortOrder": 8,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/a/ae/Jungle.png/revision/latest?cb=20260501005923"
+      "item": {
+        "name": "Zone 8: Jungle",
+        "zoneName": "Jungle",
+        "zoneNumber": 8,
+        "stage": "Earlygame",
+        "cost": "54m Coins",
+        "totalZoneLuck": "+8",
+        "enemyHealth": "1.8k",
+        "goopPerKill": "9"
+      },
+      "system": {
+        "slug": "zone-8-jungle",
+        "section": "Earlygame",
+        "sortOrder": 8,
+        "image": "/Slime%20RNG/Zones/jungle.webp"
+      }
     },
     {
-      "name": "Zone 9: Canyon",
-      "slug": "zone-9-canyon",
-      "zoneName": "Canyon",
-      "zoneNumber": 9,
-      "stage": "Midgame",
-      "cost": "216m Coins",
-      "totalZoneLuck": "+9",
-      "enemyHealth": "2.9k",
-      "goopPerKill": "11",
-      "machineUnlocks": [
-        "XP Transfer Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/canyon.webp",
-      "sortOrder": 9,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/3/3d/Canyon.png/revision/latest?cb=20260501005930"
+      "item": {
+        "name": "Zone 9: Canyon",
+        "zoneName": "Canyon",
+        "zoneNumber": 9,
+        "stage": "Midgame",
+        "cost": "216m Coins",
+        "totalZoneLuck": "+9",
+        "enemyHealth": "2.9k",
+        "goopPerKill": "11",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-9-canyon",
+        "section": "Midgame",
+        "sortOrder": 9,
+        "image": "/Slime%20RNG/Zones/canyon.webp"
+      }
     },
     {
-      "name": "Zone 10: Mushroom Forest",
-      "slug": "zone-10-mushroom-forest",
-      "zoneName": "Mushroom Forest",
-      "zoneNumber": 10,
-      "stage": "Midgame",
-      "cost": "936m Coins",
-      "totalZoneLuck": "+10",
-      "enemyHealth": "4.6k",
-      "goopPerKill": "13",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/mushroom-forest.webp",
-      "sortOrder": 10,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/5/57/Mushroom_Forest.png/revision/latest?cb=20260501005934"
+      "item": {
+        "name": "Zone 10: Mushroom Forest",
+        "zoneName": "Mushroom Forest",
+        "zoneNumber": 10,
+        "stage": "Midgame",
+        "cost": "936m Coins",
+        "totalZoneLuck": "+10",
+        "enemyHealth": "4.6k",
+        "goopPerKill": "13"
+      },
+      "system": {
+        "slug": "zone-10-mushroom-forest",
+        "section": "Midgame",
+        "sortOrder": 10,
+        "image": "/Slime%20RNG/Zones/mushroom-forest.webp"
+      }
     },
     {
-      "name": "Zone 11: Moon",
-      "slug": "zone-11-moon",
-      "zoneName": "Moon",
-      "zoneNumber": 11,
-      "stage": "Midgame",
-      "cost": "3.8b Coins",
-      "totalZoneLuck": "+11",
-      "enemyHealth": "7.4k",
-      "goopPerKill": "16",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/moon.webp",
-      "sortOrder": 11,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/4/47/Moon.png/revision/latest?cb=20260501005941"
+      "item": {
+        "name": "Zone 11: Moon",
+        "zoneName": "Moon",
+        "zoneNumber": 11,
+        "stage": "Midgame",
+        "cost": "3.8b Coins",
+        "totalZoneLuck": "+11",
+        "enemyHealth": "7.4k",
+        "goopPerKill": "16",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-11-moon",
+        "section": "Midgame",
+        "sortOrder": 11,
+        "image": "/Slime%20RNG/Zones/moon.webp"
+      }
     },
     {
-      "name": "Zone 12: Redwood Forest",
-      "slug": "zone-12-redwood-forest",
-      "zoneName": "Redwood Forest",
-      "zoneNumber": 12,
-      "stage": "Midgame",
-      "cost": "15.6b Coins",
-      "totalZoneLuck": "+12",
-      "enemyHealth": "11.8k",
-      "goopPerKill": "20",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/redwood-forest.webp",
-      "sortOrder": 12,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/2/2c/Redwood_Forest.png/revision/latest?cb=20260501005949"
+      "item": {
+        "name": "Zone 12: Redwood Forest",
+        "zoneName": "Redwood Forest",
+        "zoneNumber": 12,
+        "stage": "Midgame",
+        "cost": "15.6b Coins",
+        "totalZoneLuck": "+12",
+        "enemyHealth": "11.8k",
+        "goopPerKill": "20"
+      },
+      "system": {
+        "slug": "zone-12-redwood-forest",
+        "section": "Midgame",
+        "sortOrder": 12,
+        "image": "/Slime%20RNG/Zones/redwood-forest.webp"
+      }
     },
     {
-      "name": "Zone 13: Meteor",
-      "slug": "zone-13-meteor",
-      "zoneName": "Meteor",
-      "zoneNumber": 13,
-      "stage": "Midgame",
-      "cost": "75b Coins",
-      "totalZoneLuck": "+13",
-      "enemyHealth": "18.9k",
-      "goopPerKill": "27",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/meteor.webp",
-      "sortOrder": 13,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/9/99/Meteor.png/revision/latest?cb=20260501005956"
+      "item": {
+        "name": "Zone 13: Meteor",
+        "zoneName": "Meteor",
+        "zoneNumber": 13,
+        "stage": "Midgame",
+        "cost": "75b Coins",
+        "totalZoneLuck": "+13",
+        "enemyHealth": "18.9k",
+        "goopPerKill": "27",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-13-meteor",
+        "section": "Midgame",
+        "sortOrder": 13,
+        "image": "/Slime%20RNG/Zones/meteor.webp"
+      }
     },
     {
-      "name": "Zone 14: Candyland",
-      "slug": "zone-14-candyland",
-      "zoneName": "Candyland",
-      "zoneNumber": 14,
-      "stage": "Midgame",
-      "cost": "250b Coins",
-      "totalZoneLuck": "+14",
-      "enemyHealth": "28.3k",
-      "goopPerKill": "38",
-      "machineUnlocks": [
-        "XP Transfer Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/candyland.webp",
-      "sortOrder": 14,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/9/96/Candyland.png/revision/latest?cb=20260501010001"
+      "item": {
+        "name": "Zone 14: Candyland",
+        "zoneName": "Candyland",
+        "zoneNumber": 14,
+        "stage": "Midgame",
+        "cost": "250b Coins",
+        "totalZoneLuck": "+14",
+        "enemyHealth": "28.3k",
+        "goopPerKill": "38",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-14-candyland",
+        "section": "Midgame",
+        "sortOrder": 14,
+        "image": "/Slime%20RNG/Zones/candyland.webp"
+      }
     },
     {
-      "name": "Zone 15: Cherry Grove",
-      "slug": "zone-15-cherry-grove",
-      "zoneName": "Cherry Grove",
-      "zoneNumber": 15,
-      "stage": "Midgame",
-      "cost": "1t Coins",
-      "totalZoneLuck": "+15",
-      "enemyHealth": "42.5k",
-      "goopPerKill": "53",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/cherry-grove.webp",
-      "sortOrder": 15,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/7/73/Cherry_Grove.png/revision/latest?cb=20260501010007"
+      "item": {
+        "name": "Zone 15: Cherry Grove",
+        "zoneName": "Cherry Grove",
+        "zoneNumber": 15,
+        "stage": "Midgame",
+        "cost": "1t Coins",
+        "totalZoneLuck": "+15",
+        "enemyHealth": "42.5k",
+        "goopPerKill": "53",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-15-cherry-grove",
+        "section": "Midgame",
+        "sortOrder": 15,
+        "image": "/Slime%20RNG/Zones/cherry-grove.webp"
+      }
     },
     {
-      "name": "Zone 16: Crystal Cavern",
-      "slug": "zone-16-crystal-cavern",
-      "zoneName": "Crystal Cavern",
-      "zoneNumber": 16,
-      "stage": "Lategame",
-      "cost": "3.5t Coins",
-      "totalZoneLuck": "+16",
-      "enemyHealth": "64k",
-      "goopPerKill": "74",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/crystal-cavern.webp",
-      "sortOrder": 16,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/b/ba/Crystal_Cavern.png/revision/latest?cb=20260501010015"
+      "item": {
+        "name": "Zone 16: Crystal Cavern",
+        "zoneName": "Crystal Cavern",
+        "zoneNumber": 16,
+        "stage": "Lategame",
+        "cost": "3.5t Coins",
+        "totalZoneLuck": "+16",
+        "enemyHealth": "64k",
+        "goopPerKill": "74"
+      },
+      "system": {
+        "slug": "zone-16-crystal-cavern",
+        "section": "Lategame",
+        "sortOrder": 16,
+        "image": "/Slime%20RNG/Zones/crystal-cavern.webp"
+      }
     },
     {
-      "name": "Zone 17: Pumpkin Patch",
-      "slug": "zone-17-pumpkin-patch",
-      "zoneName": "Pumpkin Patch",
-      "zoneNumber": 17,
-      "stage": "Lategame",
-      "cost": "11t Coins",
-      "totalZoneLuck": "+17",
-      "enemyHealth": "96k",
-      "goopPerKill": "104",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/pumpkin-patch.webp",
-      "sortOrder": 17,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/a/a5/Pumpkin_Patch.png/revision/latest?cb=20260501010029"
+      "item": {
+        "name": "Zone 17: Pumpkin Patch",
+        "zoneName": "Pumpkin Patch",
+        "zoneNumber": 17,
+        "stage": "Lategame",
+        "cost": "11t Coins",
+        "totalZoneLuck": "+17",
+        "enemyHealth": "96k",
+        "goopPerKill": "104",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-17-pumpkin-patch",
+        "section": "Lategame",
+        "sortOrder": 17,
+        "image": "/Slime%20RNG/Zones/pumpkin-patch.webp"
+      }
     },
     {
-      "name": "Zone 18: Atlantis",
-      "slug": "zone-18-atlantis",
-      "zoneName": "Atlantis",
-      "zoneNumber": 18,
-      "stage": "Lategame",
-      "cost": "31t Coins",
-      "totalZoneLuck": "+18",
-      "enemyHealth": "144k",
-      "goopPerKill": "145",
-      "machineUnlocks": [
-        "XP Transfer Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/atlantis.webp",
-      "sortOrder": 18,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/e/ee/Atlantis.png/revision/latest?cb=20260501010042"
+      "item": {
+        "name": "Zone 18: Atlantis",
+        "zoneName": "Atlantis",
+        "zoneNumber": 18,
+        "stage": "Lategame",
+        "cost": "31t Coins",
+        "totalZoneLuck": "+18",
+        "enemyHealth": "144k",
+        "goopPerKill": "145",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-18-atlantis",
+        "section": "Lategame",
+        "sortOrder": 18,
+        "image": "/Slime%20RNG/Zones/atlantis.webp"
+      }
     },
     {
-      "name": "Zone 19: River",
-      "slug": "zone-19-river",
-      "zoneName": "River",
-      "zoneNumber": 19,
-      "stage": "Lategame",
-      "cost": "94t Coins",
-      "totalZoneLuck": "+19",
-      "enemyHealth": "216k",
-      "goopPerKill": "203",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/river.webp",
-      "sortOrder": 19,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/b/ba/River.png/revision/latest?cb=20260501010048"
+      "item": {
+        "name": "Zone 19: River",
+        "zoneName": "River",
+        "zoneNumber": 19,
+        "stage": "Lategame",
+        "cost": "94t Coins",
+        "totalZoneLuck": "+19",
+        "enemyHealth": "216k",
+        "goopPerKill": "203"
+      },
+      "system": {
+        "slug": "zone-19-river",
+        "section": "Lategame",
+        "sortOrder": 19,
+        "image": "/Slime%20RNG/Zones/river.webp"
+      }
     },
     {
-      "name": "Zone 20: Pyramid",
-      "slug": "zone-20-pyramid",
-      "zoneName": "Pyramid",
-      "zoneNumber": 20,
-      "stage": "Lategame",
-      "cost": "282t Coins",
-      "totalZoneLuck": "+20",
-      "enemyHealth": "324k",
-      "goopPerKill": "285",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/pyramid.webp",
-      "sortOrder": 20,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/f/f1/Pyramid.png/revision/latest?cb=20260501010053"
+      "item": {
+        "name": "Zone 20: Pyramid",
+        "zoneName": "Pyramid",
+        "zoneNumber": 20,
+        "stage": "Lategame",
+        "cost": "282t Coins",
+        "totalZoneLuck": "+20",
+        "enemyHealth": "324k",
+        "goopPerKill": "285",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-20-pyramid",
+        "section": "Lategame",
+        "sortOrder": 20,
+        "image": "/Slime%20RNG/Zones/pyramid.webp"
+      }
     },
     {
-      "name": "Zone 21: Graveyard",
-      "slug": "zone-21-graveyard",
-      "zoneName": "Graveyard",
-      "zoneNumber": 21,
-      "stage": "Endgame",
-      "cost": "846t Coins",
-      "totalZoneLuck": "+21",
-      "enemyHealth": "486k",
-      "goopPerKill": "398",
-      "machineUnlocks": [
-        "XP Transfer Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/graveyard.webp",
-      "sortOrder": 21,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/d/d5/Graveyard.png/revision/latest?cb=20260502070647"
+      "item": {
+        "name": "Zone 21: Graveyard",
+        "zoneName": "Graveyard",
+        "zoneNumber": 21,
+        "stage": "Endgame",
+        "cost": "846t Coins",
+        "totalZoneLuck": "+21",
+        "enemyHealth": "486k",
+        "goopPerKill": "398",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-21-graveyard",
+        "section": "Endgame",
+        "sortOrder": 21,
+        "image": "/Slime%20RNG/Zones/graveyard.webp"
+      }
     },
     {
-      "name": "Zone 22: Hot Springs",
-      "slug": "zone-22-hot-springs",
-      "zoneName": "Hot Springs",
-      "zoneNumber": 22,
-      "stage": "Endgame",
-      "cost": "2.5Qd Coins",
-      "totalZoneLuck": "+22",
-      "enemyHealth": "729k",
-      "goopPerKill": "558",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/hot-springs.webp",
-      "sortOrder": 22,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/b/b8/Hot_Springs.png/revision/latest?cb=20260502070640"
+      "item": {
+        "name": "Zone 22: Hot Springs",
+        "zoneName": "Hot Springs",
+        "zoneNumber": 22,
+        "stage": "Endgame",
+        "cost": "2.5Qd Coins",
+        "totalZoneLuck": "+22",
+        "enemyHealth": "729k",
+        "goopPerKill": "558",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-22-hot-springs",
+        "section": "Endgame",
+        "sortOrder": 22,
+        "image": "/Slime%20RNG/Zones/hot-springs.webp"
+      }
     },
     {
-      "name": "Zone 23: Tribe",
-      "slug": "zone-23-tribe",
-      "zoneName": "Tribe",
-      "zoneNumber": 23,
-      "stage": "Endgame",
-      "cost": "8Qd Coins",
-      "totalZoneLuck": "+23",
-      "enemyHealth": "1.09M",
-      "goopPerKill": "781",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/tribe.webp",
-      "sortOrder": 23,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/1/17/Tribe.png/revision/latest?cb=20260502070635"
+      "item": {
+        "name": "Zone 23: Tribe",
+        "zoneName": "Tribe",
+        "zoneNumber": 23,
+        "stage": "Endgame",
+        "cost": "8Qd Coins",
+        "totalZoneLuck": "+23",
+        "enemyHealth": "1.09M",
+        "goopPerKill": "781"
+      },
+      "system": {
+        "slug": "zone-23-tribe",
+        "section": "Endgame",
+        "sortOrder": 23,
+        "image": "/Slime%20RNG/Zones/tribe.webp"
+      }
     },
     {
-      "name": "Zone 24: Toxic Wasteland",
-      "slug": "zone-24-toxic-wasteland",
-      "zoneName": "Toxic Wasteland",
-      "zoneNumber": 24,
-      "stage": "Endgame",
-      "cost": "26Qd Coins",
-      "totalZoneLuck": "+24",
-      "enemyHealth": "1.63M",
-      "goopPerKill": "1,093",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/toxic-wasteland.webp",
-      "sortOrder": 24,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/5/5f/Toxic_Wasteland.png/revision/latest?cb=20260502070629"
+      "item": {
+        "name": "Zone 24: Toxic Wasteland",
+        "zoneName": "Toxic Wasteland",
+        "zoneNumber": 24,
+        "stage": "Endgame",
+        "cost": "26Qd Coins",
+        "totalZoneLuck": "+24",
+        "enemyHealth": "1.63M",
+        "goopPerKill": "1,093",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-24-toxic-wasteland",
+        "section": "Endgame",
+        "sortOrder": 24,
+        "image": "/Slime%20RNG/Zones/toxic-wasteland.webp"
+      }
     },
     {
-      "name": "Zone 25: Steampunk",
-      "slug": "zone-25-steampunk",
-      "zoneName": "Steampunk",
-      "zoneNumber": 25,
-      "stage": "Endgame",
-      "cost": "80Qd Coins",
-      "totalZoneLuck": "+25",
-      "enemyHealth": "2.44M",
-      "goopPerKill": "1,531",
-      "machineUnlocks": [
-        "XP Transfer Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/steampunk.webp",
-      "sortOrder": 25,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/0/02/Steampunk.png/revision/latest?cb=20260502070621"
+      "item": {
+        "name": "Zone 25: Steampunk",
+        "zoneName": "Steampunk",
+        "zoneNumber": 25,
+        "stage": "Endgame",
+        "cost": "80Qd Coins",
+        "totalZoneLuck": "+25",
+        "enemyHealth": "2.44M",
+        "goopPerKill": "1,531",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-25-steampunk",
+        "section": "Endgame",
+        "sortOrder": 25,
+        "image": "/Slime%20RNG/Zones/steampunk.webp"
+      }
     },
     {
-      "name": "Zone 26: Winter Wonderland",
-      "slug": "zone-26-winter-wonderland",
-      "zoneName": "Winter Wonderland",
-      "zoneNumber": 26,
-      "stage": "Endgame",
-      "cost": "300Qd Coins",
-      "totalZoneLuck": "+26",
-      "enemyHealth": "3.66M",
-      "goopPerKill": "2,143",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/winter-wonderland.webp",
-      "sortOrder": 26,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/8/86/Winter_Wonderland.png/revision/latest?cb=20260509021847"
+      "item": {
+        "name": "Zone 26: Winter Wonderland",
+        "zoneName": "Winter Wonderland",
+        "zoneNumber": 26,
+        "stage": "Endgame",
+        "cost": "300Qd Coins",
+        "totalZoneLuck": "+26",
+        "enemyHealth": "3.66M",
+        "goopPerKill": "2,143",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-26-winter-wonderland",
+        "section": "Endgame",
+        "sortOrder": 26,
+        "image": "/Slime%20RNG/Zones/winter-wonderland.webp"
+      }
     },
     {
-      "name": "Zone 27: Farm",
-      "slug": "zone-27-farm",
-      "zoneName": "Farm",
-      "zoneNumber": 27,
-      "stage": "Endgame",
-      "cost": "1Qn Coins",
-      "totalZoneLuck": "+27",
-      "enemyHealth": "5.49M",
-      "goopPerKill": "3,000",
-      "machineUnlocks": [
-        "XP Transfer Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/farm.webp",
-      "sortOrder": 27,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/a/a7/Farm.png/revision/latest?cb=20260509022151"
+      "item": {
+        "name": "Zone 27: Farm",
+        "zoneName": "Farm",
+        "zoneNumber": 27,
+        "stage": "Endgame",
+        "cost": "1Qn Coins",
+        "totalZoneLuck": "+27",
+        "enemyHealth": "5.49M",
+        "goopPerKill": "3,000",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-27-farm",
+        "section": "Endgame",
+        "sortOrder": 27,
+        "image": "/Slime%20RNG/Zones/farm.webp"
+      }
     },
     {
-      "name": "Zone 28: Jungle Temple",
-      "slug": "zone-28-jungle-temple",
-      "zoneName": "Jungle Temple",
-      "zoneNumber": 28,
-      "stage": "Endgame",
-      "cost": "3.5Qn Coins",
-      "totalZoneLuck": "+28",
-      "enemyHealth": "8.23M",
-      "goopPerKill": "4,200",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/jungle-temple.webp",
-      "sortOrder": 28,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/8/86/Jungle_Temple.png/revision/latest?cb=20260509022503"
+      "item": {
+        "name": "Zone 28: Jungle Temple",
+        "zoneName": "Jungle Temple",
+        "zoneNumber": 28,
+        "stage": "Endgame",
+        "cost": "3.5Qn Coins",
+        "totalZoneLuck": "+28",
+        "enemyHealth": "8.23M",
+        "goopPerKill": "4,200"
+      },
+      "system": {
+        "slug": "zone-28-jungle-temple",
+        "section": "Endgame",
+        "sortOrder": 28,
+        "image": "/Slime%20RNG/Zones/jungle-temple.webp"
+      }
     },
     {
-      "name": "Zone 29: Underworld",
-      "slug": "zone-29-underworld",
-      "zoneName": "Underworld",
-      "zoneNumber": 29,
-      "stage": "Endgame",
-      "cost": "10Qn Coins",
-      "totalZoneLuck": "+29",
-      "enemyHealth": "12.4M",
-      "goopPerKill": "5,880",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/underworld.webp",
-      "sortOrder": 29,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/a/a2/Underworld.png/revision/latest?cb=20260516035711"
+      "item": {
+        "name": "Zone 29: Underworld",
+        "zoneName": "Underworld",
+        "zoneNumber": 29,
+        "stage": "Endgame",
+        "cost": "10Qn Coins",
+        "totalZoneLuck": "+29",
+        "enemyHealth": "12.4M",
+        "goopPerKill": "5,880"
+      },
+      "system": {
+        "slug": "zone-29-underworld",
+        "section": "Endgame",
+        "sortOrder": 29,
+        "image": "/Slime%20RNG/Zones/underworld.webp"
+      }
     },
     {
-      "name": "Zone 30: Swamp",
-      "slug": "zone-30-swamp",
-      "zoneName": "Swamp",
-      "zoneNumber": 30,
-      "stage": "Endgame",
-      "cost": "60Qn Coins",
-      "totalZoneLuck": "+30",
-      "enemyHealth": "18.6M",
-      "goopPerKill": "8,233",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/swamp.webp",
-      "sortOrder": 30,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/3/3e/Swamp.png/revision/latest?cb=20260516035928"
+      "item": {
+        "name": "Zone 30: Swamp",
+        "zoneName": "Swamp",
+        "zoneNumber": 30,
+        "stage": "Endgame",
+        "cost": "60Qn Coins",
+        "totalZoneLuck": "+30",
+        "enemyHealth": "18.6M",
+        "goopPerKill": "8,233"
+      },
+      "system": {
+        "slug": "zone-30-swamp",
+        "section": "Endgame",
+        "sortOrder": 30,
+        "image": "/Slime%20RNG/Zones/swamp.webp"
+      }
     },
     {
-      "name": "Zone 31: Mushroom Village",
-      "slug": "zone-31-mushroom-village",
-      "zoneName": "Mushroom Village",
-      "zoneNumber": 31,
-      "stage": "Endgame",
-      "cost": "250Qn Coins",
-      "totalZoneLuck": "+31",
-      "enemyHealth": "27.9M",
-      "goopPerKill": "11,526",
-      "machineUnlocks": [],
-      "image": "/Slime%20RNG/Zones/mushroom-village.webp",
-      "sortOrder": 31,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/3/31/Mushroom_Village.png/revision/latest?cb=20260516035700"
+      "item": {
+        "name": "Zone 31: Mushroom Village",
+        "zoneName": "Mushroom Village",
+        "zoneNumber": 31,
+        "stage": "Endgame",
+        "cost": "250Qn Coins",
+        "totalZoneLuck": "+31",
+        "enemyHealth": "27.9M",
+        "goopPerKill": "11,526"
+      },
+      "system": {
+        "slug": "zone-31-mushroom-village",
+        "section": "Endgame",
+        "sortOrder": 31,
+        "image": "/Slime%20RNG/Zones/mushroom-village.webp"
+      }
     },
     {
-      "name": "Zone 32: The Void",
-      "slug": "zone-32-the-void",
-      "zoneName": "The Void",
-      "zoneNumber": 32,
-      "stage": "Endgame",
-      "cost": "1Sx Coins",
-      "totalZoneLuck": "+32",
-      "enemyHealth": "41.8M",
-      "goopPerKill": "16,136",
-      "machineUnlocks": [
-        "Crafting Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/the-void.webp",
-      "sortOrder": 32,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/e/e1/The_Void.png/revision/latest?cb=20260516035637"
+      "item": {
+        "name": "Zone 32: The Void",
+        "zoneName": "The Void",
+        "zoneNumber": 32,
+        "stage": "Endgame",
+        "cost": "1Sx Coins",
+        "totalZoneLuck": "+32",
+        "enemyHealth": "41.8M",
+        "goopPerKill": "16,136",
+        "machineUnlocks": [
+          "Crafting Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-32-the-void",
+        "section": "Endgame",
+        "sortOrder": 32,
+        "image": "/Slime%20RNG/Zones/the-void.webp"
+      }
     },
     {
-      "name": "Zone 33: Honeycomb",
-      "slug": "zone-33-honeycomb",
-      "zoneName": "Honeycomb",
-      "zoneNumber": 33,
-      "stage": "Endgame",
-      "cost": "4Sx Coins",
-      "totalZoneLuck": "+33",
-      "enemyHealth": "62.7M",
-      "goopPerKill": "22,590",
-      "machineUnlocks": [
-        "XP Transfer Machine"
-      ],
-      "image": "/Slime%20RNG/Zones/honeycomb.webp",
-      "sortOrder": 33,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Zones",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/7/7c/Honeycomb.png/revision/latest?cb=20260516035650"
+      "item": {
+        "name": "Zone 33: Honeycomb",
+        "zoneName": "Honeycomb",
+        "zoneNumber": 33,
+        "stage": "Endgame",
+        "cost": "4Sx Coins",
+        "totalZoneLuck": "+33",
+        "enemyHealth": "62.7M",
+        "goopPerKill": "22,590",
+        "machineUnlocks": [
+          "XP Transfer Machine"
+        ]
+      },
+      "system": {
+        "slug": "zone-33-honeycomb",
+        "section": "Endgame",
+        "sortOrder": 33,
+        "image": "/Slime%20RNG/Zones/honeycomb.webp"
+      }
     }
   ]
 }

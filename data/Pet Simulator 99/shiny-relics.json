@@ -1,2654 +1,3255 @@
 {
   "meta": {
-    "title": "Pet Simulator 99 shiny relics data",
-    "updatedAt": "2026-06-08",
-    "sources": [
-      {
-        "label": "Pet Simulator Wiki - Shiny Relic (Pet Simulator 99)",
-        "url": "https://pet-simulator.fandom.com/wiki/Shiny_Relic_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      }
-    ],
-    "approvedScope": "Permanent Shiny Relic collectible locations in Pet Simulator 99, grouped by Trading Plaza and world route. Temporary event collectibles, badges, gamepasses, developer products, platform metadata, current raids, and broad update summaries are excluded.",
-    "sourceAudit": {
-      "sourceCount": 200,
-      "sourceUpdate": "Update 69",
-      "approvedRows": 200,
-      "rowsBySection": {
-        "Trading Plaza": 3,
-        "World 1 - Spawn World": 82,
-        "World 2 - Tech World": 60,
-        "World 3 - Void World": 36,
-        "World 4 - Fantasy World": 19
-      },
-      "imageCoverage": "0/200",
-      "imagePlan": "Images intentionally left empty until clean row-specific relic/location screenshots can be gathered locally.",
-      "notes": [
-        "Rows were parsed from the current Pet Simulator Wiki Shiny Relic table through the Fandom API.",
-        "The visible title may use 200 because the source count and final local dataset both have exactly 200 permanent relic rows.",
-        "Every item uses the approved minimal player-facing card fields: World, Area, Location hint, Space, and Progress note.",
-        "No row images are wired because clean local row-specific screenshots were not gathered in this Phase 2 pass."
-      ]
-    },
-    "sectionOrder": [
-      "Trading Plaza",
-      "World 1 - Spawn World",
-      "World 2 - Tech World",
-      "World 3 - Void World",
-      "World 4 - Fantasy World"
-    ],
-    "columns": [
-      "name",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "shiny-relics",
+    "route": "/wiki/pet-simulator-99/shiny-relics",
+    "catalogCode": "pet-simulator-99-shiny-relics",
+    "itemFields": [
       "world",
       "area",
       "locationHint",
       "space",
-      "progressNote",
-      "sortOrder"
-    ]
+      "progressNote"
+    ],
+    "columns": [
+      "world",
+      "area",
+      "locationHint",
+      "space",
+      "progressNote"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Trading Plaza",
+        "World 1 - Spawn World",
+        "World 2 - Tech World",
+        "World 3 - Void World",
+        "World 4 - Fantasy World"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "world",
+        "area",
+        "locationHint",
+        "space",
+        "progressNote"
+      ],
+      "tableFields": [
+        "world",
+        "area",
+        "locationHint",
+        "space",
+        "progressNote"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "shiny-relic-001",
-      "name": "Shiny Relic #1",
-      "slug": "shiny-relic-001",
-      "image": null,
-      "collectionSection": "Trading Plaza",
-      "world": "Trading Plaza",
-      "area": "Trading Plaza",
-      "locationHint": "Underneath the bridge to the VIP Only area.",
-      "space": "Trading Plaza",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 1
-    },
-    {
-      "id": "shiny-relic-002",
-      "name": "Shiny Relic #2",
-      "slug": "shiny-relic-002",
-      "image": null,
-      "collectionSection": "Trading Plaza",
-      "world": "Trading Plaza",
-      "area": "Trading Plaza",
-      "locationHint": "Behind the fanart poster.",
-      "space": "Trading Plaza",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 2
-    },
-    {
-      "id": "shiny-relic-003",
-      "name": "Shiny Relic #3",
-      "slug": "shiny-relic-003",
-      "image": null,
-      "collectionSection": "Trading Plaza",
-      "world": "Trading Plaza",
-      "area": "Trading Plaza",
-      "locationHint": "Behind the tree next to the Trading Terminal.",
-      "space": "Trading Plaza",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 3
-    },
-    {
-      "id": "shiny-relic-004",
-      "name": "Shiny Relic #4",
-      "slug": "shiny-relic-004",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 1 - Spawn",
-      "locationHint": "Behind a bush near the orange building.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 4
-    },
-    {
-      "id": "shiny-relic-005",
-      "name": "Shiny Relic #5",
-      "slug": "shiny-relic-005",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 1 - Spawn",
-      "locationHint": "Near the \"Like The Game\" board and purple flower.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 5
-    },
-    {
-      "id": "shiny-relic-006",
-      "name": "Shiny Relic #6",
-      "slug": "shiny-relic-006",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 1 - Spawn",
-      "locationHint": "Behind the Social Rewards sign at Spawn.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 6
-    },
-    {
-      "id": "shiny-relic-007",
-      "name": "Shiny Relic #7",
-      "slug": "shiny-relic-007",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 3 - Castle",
-      "locationHint": "Behind the Free Diamond rewards.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 7
-    },
-    {
-      "id": "shiny-relic-008",
-      "name": "Shiny Relic #8",
-      "slug": "shiny-relic-008",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 5 - Autumn",
-      "locationHint": "Behind the entrance to the Classic Obby mini-game.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 8
-    },
-    {
-      "id": "shiny-relic-009",
-      "name": "Shiny Relic #9",
-      "slug": "shiny-relic-009",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 6 - Cherry Blossom",
-      "locationHint": "To the left of the Potions vending machine, leaning on the Japanese torii gate.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 9
-    },
-    {
-      "id": "shiny-relic-010",
-      "name": "Shiny Relic #10",
-      "slug": "shiny-relic-010",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 7 - Farm",
-      "locationHint": "Inside the box to the left of the Windmill.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 10
-    },
-    {
-      "id": "shiny-relic-011",
-      "name": "Shiny Relic #11",
-      "slug": "shiny-relic-011",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 8 - Backyard",
-      "locationHint": "In a crack in the wall, on the right side of the area as soon as you enter.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 11
-    },
-    {
-      "id": "shiny-relic-012",
-      "name": "Shiny Relic #12",
-      "slug": "shiny-relic-012",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 9 - Misty Falls",
-      "locationHint": "In the pond near the Enchants vending machine.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 12
-    },
-    {
-      "id": "shiny-relic-013",
-      "name": "Shiny Relic #13",
-      "slug": "shiny-relic-013",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 12 - Dead Forest",
-      "locationHint": "In a bush near the right entrance pillar.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 13
-    },
-    {
-      "id": "shiny-relic-014",
-      "name": "Shiny Relic #14",
-      "slug": "shiny-relic-014",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 13 - Dark Forest",
-      "locationHint": "On the cover of the 3rd tombstone.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 14
-    },
-    {
-      "id": "shiny-relic-015",
-      "name": "Shiny Relic #15",
-      "slug": "shiny-relic-015",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 13 - Dark Forest",
-      "locationHint": "Behind a tombstone to the left of the Potions Upgrade station.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 15
-    },
-    {
-      "id": "shiny-relic-016",
-      "name": "Shiny Relic #16",
-      "slug": "shiny-relic-016",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 15 - Enchanted Forest",
-      "locationHint": "Behind the tree and bush directly to the left as you enter the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 16
-    },
-    {
-      "id": "shiny-relic-017",
-      "name": "Shiny Relic #17",
-      "slug": "shiny-relic-017",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 15 - Enchanted Forest",
-      "locationHint": "In a log to the left of the big tree.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 17
-    },
-    {
-      "id": "shiny-relic-018",
-      "name": "Shiny Relic #18",
-      "slug": "shiny-relic-018",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 18 - Jungle Temple",
-      "locationHint": "On the temple across from the portal for the Jungle Obby mini-game.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 18
-    },
-    {
-      "id": "shiny-relic-019",
-      "name": "Shiny Relic #19",
-      "slug": "shiny-relic-019",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 18 - Jungle Obby",
-      "locationHint": "Right after the axes, pass through the arch and follow the secret path behind the pillar to the right.",
-      "space": "Minigame",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 19
-    },
-    {
-      "id": "shiny-relic-020",
-      "name": "Shiny Relic #20",
-      "slug": "shiny-relic-020",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 20 - Beach",
-      "locationHint": "In a bucket in the top left corner of the zone, near the chest.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 20
-    },
-    {
-      "id": "shiny-relic-021",
-      "name": "Shiny Relic #21",
-      "slug": "shiny-relic-021",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 20 - Beach",
-      "locationHint": "In a bucket behind the daycare.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 21
-    },
-    {
-      "id": "shiny-relic-022",
-      "name": "Shiny Relic #22",
-      "slug": "shiny-relic-022",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 21 - Coral Reef",
-      "locationHint": "Inside the yellow coral/plants on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 22
-    },
-    {
-      "id": "shiny-relic-023",
-      "name": "Shiny Relic #23",
-      "slug": "shiny-relic-023",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 23 - Atlantis",
-      "locationHint": "On top of the pillar to the left of the Atlantis minigame entrance.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 23
-    },
-    {
-      "id": "shiny-relic-024",
-      "name": "Shiny Relic #24",
-      "slug": "shiny-relic-024",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 23 - Atlantis Minigame",
-      "locationHint": "From the start, go around the entrance to the right. It's behind the large rock in front of you, next to the pillar leaning on the wall.",
-      "space": "Minigame",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 24
-    },
-    {
-      "id": "shiny-relic-025",
-      "name": "Shiny Relic #25",
-      "slug": "shiny-relic-025",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 24 - Palm Beach",
-      "locationHint": "On top of the Tunnel connecting Area 16 and 24.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 25
-    },
-    {
-      "id": "shiny-relic-026",
-      "name": "Shiny Relic #26",
-      "slug": "shiny-relic-026",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 24 - Palm Beach (Area 16-24 Tunnel)",
-      "locationHint": "In the Tunnel connecting Area 16 and 24.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 26
-    },
-    {
-      "id": "shiny-relic-027",
-      "name": "Shiny Relic #27",
-      "slug": "shiny-relic-027",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 25 - Tiki",
-      "locationHint": "Behind the Tiki totem directly to the left of the Rebirth 1 statue.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 27
-    },
-    {
-      "id": "shiny-relic-028",
-      "name": "Shiny Relic #28",
-      "slug": "shiny-relic-028",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 26 - Pirate Cove",
-      "locationHint": "In a coin pile directly to the left as you enter the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 28
-    },
-    {
-      "id": "shiny-relic-029",
-      "name": "Shiny Relic #29",
-      "slug": "shiny-relic-029",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 26 - Pirate Cove",
-      "locationHint": "In a coin pile to the right of the Fruits II vending machine.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 29
-    },
-    {
-      "id": "shiny-relic-030",
-      "name": "Shiny Relic #30",
-      "slug": "shiny-relic-030",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 27 - Pirate Tavern",
-      "locationHint": "In the boat beside the Fishing minigame entrance dock.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 30
-    },
-    {
-      "id": "shiny-relic-031",
-      "name": "Shiny Relic #31",
-      "slug": "shiny-relic-031",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 27 - Fishing",
-      "locationHint": "Behind a starfish to the left of the map.",
-      "space": "Minigame",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 31
-    },
-    {
-      "id": "shiny-relic-032",
-      "name": "Shiny Relic #32",
-      "slug": "shiny-relic-032",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 30 - Fossil Digsite",
-      "locationHint": "Behind a fossil to the right of the portal.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 32
-    },
-    {
-      "id": "shiny-relic-033",
-      "name": "Shiny Relic #33",
-      "slug": "shiny-relic-033",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 30 - Digsite",
-      "locationHint": "At the back of the Digsite map.",
-      "space": "Minigame",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 33
-    },
-    {
-      "id": "shiny-relic-034",
-      "name": "Shiny Relic #34",
-      "slug": "shiny-relic-034",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 31 - Desert Pyramids",
-      "locationHint": "Behind some cacti to the right of the pyramid.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 34
-    },
-    {
-      "id": "shiny-relic-035",
-      "name": "Shiny Relic #35",
-      "slug": "shiny-relic-035",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 33 - Wild West",
-      "locationHint": "In the window of the shortest building on the right side of the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 35
-    },
-    {
-      "id": "shiny-relic-036",
-      "name": "Shiny Relic #36",
-      "slug": "shiny-relic-036",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 34 - Grand Canyons",
-      "locationHint": "In the right side of the area in the cliff beside a yellow rock.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 36
-    },
-    {
-      "id": "shiny-relic-037",
-      "name": "Shiny Relic #37",
-      "slug": "shiny-relic-037",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 36 - Mountains",
-      "locationHint": "In a tree on the left side of the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 37
-    },
-    {
-      "id": "shiny-relic-038",
-      "name": "Shiny Relic #38",
-      "slug": "shiny-relic-038",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 37 - Snow Village",
-      "locationHint": "On top the cabin closest to the Lucky Eggs upgrade.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 38
-    },
-    {
-      "id": "shiny-relic-039",
-      "name": "Shiny Relic #39",
-      "slug": "shiny-relic-039",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 37 - Snow Village",
-      "locationHint": "Behind the building furthest to the left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 39
-    },
-    {
-      "id": "shiny-relic-040",
-      "name": "Shiny Relic #40",
-      "slug": "shiny-relic-040",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 39 - Ice Rink",
-      "locationHint": "Being held by a snowman on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 40
-    },
-    {
-      "id": "shiny-relic-041",
-      "name": "Shiny Relic #41",
-      "slug": "shiny-relic-041",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 40 - Ski Town",
-      "locationHint": "Behind the house furthest to the left of the ski lift.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 41
-    },
-    {
-      "id": "shiny-relic-042",
-      "name": "Shiny Relic #42",
-      "slug": "shiny-relic-042",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 41 - Hot Springs",
-      "locationHint": "In the waterfall closest to Area 42.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 42
-    },
-    {
-      "id": "shiny-relic-043",
-      "name": "Shiny Relic #43",
-      "slug": "shiny-relic-043",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 42 - Fire and Ice",
-      "locationHint": "Inside of an ice pillar, before the black stone on the left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 43
-    },
-    {
-      "id": "shiny-relic-044",
-      "name": "Shiny Relic #44",
-      "slug": "shiny-relic-044",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 43 - Volcano",
-      "locationHint": "The right of the entrance, beside a fossil in the lava.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 44
-    },
-    {
-      "id": "shiny-relic-045",
-      "name": "Shiny Relic #45",
-      "slug": "shiny-relic-045",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 44 - Obsidian Cave",
-      "locationHint": "To the right of the tunnel.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 45
-    },
-    {
-      "id": "shiny-relic-046",
-      "name": "Shiny Relic #46",
-      "slug": "shiny-relic-046",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 45 - Lava Forest",
-      "locationHint": "To the left of Chest Rush in the lava.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 46
-    },
-    {
-      "id": "shiny-relic-047",
-      "name": "Shiny Relic #47",
-      "slug": "shiny-relic-047",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 46 - Underworld",
-      "locationHint": "To the left of the entrance in a skull.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 47
-    },
-    {
-      "id": "shiny-relic-048",
-      "name": "Shiny Relic #48",
-      "slug": "shiny-relic-048",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 47 - Underworld Bridge",
-      "locationHint": "To the left of the Rare Potions machine over the half-wall.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 48
-    },
-    {
-      "id": "shiny-relic-049",
-      "name": "Shiny Relic #49",
-      "slug": "shiny-relic-049",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 50 - Fire Dojo",
-      "locationHint": "On the Japanese torii gate before the tunnel to Area 44.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 49
-    },
-    {
-      "id": "shiny-relic-050",
-      "name": "Shiny Relic #50",
-      "slug": "shiny-relic-050",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 50 - Fire Dojo",
-      "locationHint": "Behind the right pillar of the Rebirth Statue.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 50
-    },
-    {
-      "id": "shiny-relic-051",
-      "name": "Shiny Relic #51",
-      "slug": "shiny-relic-051",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 51 - Samurai Village",
-      "locationHint": "In a crack to the temple in which you entered, to the left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 51
-    },
-    {
-      "id": "shiny-relic-052",
-      "name": "Shiny Relic #52",
-      "slug": "shiny-relic-052",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 52 - Bamboo Forest",
-      "locationHint": "In the hut closest to the Upgrade Fruits station.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 52
-    },
-    {
-      "id": "shiny-relic-053",
-      "name": "Shiny Relic #53",
-      "slug": "shiny-relic-053",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 54 - Flower Garden",
-      "locationHint": "To the left of the flower garden exit.",
-      "space": "Minigame",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 53
-    },
-    {
-      "id": "shiny-relic-054",
-      "name": "Shiny Relic #54",
-      "slug": "shiny-relic-054",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 56 - Fairytale Castle",
-      "locationHint": "Behind the clan ticket sign.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 54
-    },
-    {
-      "id": "shiny-relic-055",
-      "name": "Shiny Relic #55",
-      "slug": "shiny-relic-055",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 58 - Fairy Castle",
-      "locationHint": "In a space between the stones on the left side of the castle.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 55
-    },
-    {
-      "id": "shiny-relic-056",
-      "name": "Shiny Relic #56",
-      "slug": "shiny-relic-056",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 59 - Cozy Village",
-      "locationHint": "Behind the 4th house in the left group of houses.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 56
-    },
-    {
-      "id": "shiny-relic-057",
-      "name": "Shiny Relic #57",
-      "slug": "shiny-relic-057",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 63 - Frost Mountains",
-      "locationHint": "In the ice diamond to the right of the snow merchant.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 57
-    },
-    {
-      "id": "shiny-relic-058",
-      "name": "Shiny Relic #58",
-      "slug": "shiny-relic-058",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 64 - Ice Sculptures",
-      "locationHint": "Behind the ice formation next to the frozen pond.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 58
-    },
-    {
-      "id": "shiny-relic-059",
-      "name": "Shiny Relic #59",
-      "slug": "shiny-relic-059",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 65 - Snowman Town",
-      "locationHint": "Behind the large snowman at the top of the slope.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 59
-    },
-    {
-      "id": "shiny-relic-060",
-      "name": "Shiny Relic #60",
-      "slug": "shiny-relic-060",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 67 - Polar Express",
-      "locationHint": "On the backside of the train carriage.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 60
-    },
-    {
-      "id": "shiny-relic-061",
-      "name": "Shiny Relic #61",
-      "slug": "shiny-relic-061",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 68 - Firefly Cold Forest",
-      "locationHint": "On the cabin's back window.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 61
-    },
-    {
-      "id": "shiny-relic-062",
-      "name": "Shiny Relic #62",
-      "slug": "shiny-relic-062",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 71 - Ancient Ruins",
-      "locationHint": "To the right of the entrance, on the 2nd pillar.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 62
-    },
-    {
-      "id": "shiny-relic-063",
-      "name": "Shiny Relic #63",
-      "slug": "shiny-relic-063",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 72 - Runic Altar",
-      "locationHint": "Towards the end of the location, on a pillar next to a stone.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 63
-    },
-    {
-      "id": "shiny-relic-064",
-      "name": "Shiny Relic #64",
-      "slug": "shiny-relic-064",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 73 - Wizard Tower",
-      "locationHint": "To the left of the castle, in the waterfall.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 64
-    },
-    {
-      "id": "shiny-relic-065",
-      "name": "Shiny Relic #65",
-      "slug": "shiny-relic-065",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 74 - Witch Marsh",
-      "locationHint": "To the left of the entrance, on the 2nd tombstone.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 65
-    },
-    {
-      "id": "shiny-relic-066",
-      "name": "Shiny Relic #66",
-      "slug": "shiny-relic-066",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 75 - Haunted Forest",
-      "locationHint": "On top of the rock formation in the purple water.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 66
-    },
-    {
-      "id": "shiny-relic-067",
-      "name": "Shiny Relic #67",
-      "slug": "shiny-relic-067",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 77 - Haunted Mansion",
-      "locationHint": "On the right window of the mansion.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 67
-    },
-    {
-      "id": "shiny-relic-068",
-      "name": "Shiny Relic #68",
-      "slug": "shiny-relic-068",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 78 - Dungeon Entrance",
-      "locationHint": "In the direct left corner as you enter, before the Free Diamonds claim.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 68
-    },
-    {
-      "id": "shiny-relic-069",
-      "name": "Shiny Relic #69",
-      "slug": "shiny-relic-069",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 79 - Dungeon",
-      "locationHint": "Behind the singular banner on the wall, will need to tilt your camera.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 69
-    },
-    {
-      "id": "shiny-relic-070",
-      "name": "Shiny Relic #70",
-      "slug": "shiny-relic-070",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 79 - Advanced Digsite",
-      "locationHint": "On the right far top side of the advanced digsite.",
-      "space": "Minigame",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 70
-    },
-    {
-      "id": "shiny-relic-071",
-      "name": "Shiny Relic #71",
-      "slug": "shiny-relic-071",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 80 - Treasure Dungeon",
-      "locationHint": "Behind the first chest on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 71
-    },
-    {
-      "id": "shiny-relic-072",
-      "name": "Shiny Relic #72",
-      "slug": "shiny-relic-072",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 81 - Empyrean Dungeon",
-      "locationHint": "On the wall to the right of the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 72
-    },
-    {
-      "id": "shiny-relic-073",
-      "name": "Shiny Relic #73",
-      "slug": "shiny-relic-073",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 83 - Cotton Candy Forest",
-      "locationHint": "Inside the blue colored cotton candy tree across from the Free Potions claim.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 73
-    },
-    {
-      "id": "shiny-relic-074",
-      "name": "Shiny Relic #74",
-      "slug": "shiny-relic-074",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 84 - Gummy Forest",
-      "locationHint": "On top of the only orange tree with a ladder on the left side of the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 74
-    },
-    {
-      "id": "shiny-relic-075",
-      "name": "Shiny Relic #75",
-      "slug": "shiny-relic-075",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 85 - Chocolate Waterfall",
-      "locationHint": "Inside the waterwall, left of the entrance to the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 75
-    },
-    {
-      "id": "shiny-relic-076",
-      "name": "Shiny Relic #76",
-      "slug": "shiny-relic-076",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 86 - Sweets",
-      "locationHint": "On top of the Ice Cream pillar directly to the right of the entrance of the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 76
-    },
-    {
-      "id": "shiny-relic-077",
-      "name": "Shiny Relic #77",
-      "slug": "shiny-relic-077",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 87 - Toys and Blocks",
-      "locationHint": "Behind the stacked blocks to the left of the stairway entrance into Lucky Blocks.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 77
-    },
-    {
-      "id": "shiny-relic-078",
-      "name": "Shiny Relic #78",
-      "slug": "shiny-relic-078",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 87 - Lucky Blocks",
-      "locationHint": "In the far left corner of the minigame area behind some bushes.",
-      "space": "Minigame",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 78
-    },
-    {
-      "id": "shiny-relic-079",
-      "name": "Shiny Relic #79",
-      "slug": "shiny-relic-079",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 88 - Carnival",
-      "locationHint": "Inside the orange tent to the left of the ferris wheel.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 79
-    },
-    {
-      "id": "shiny-relic-080",
-      "name": "Shiny Relic #80",
-      "slug": "shiny-relic-080",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 89 - Theme Park",
-      "locationHint": "Inside the only red house in the area, inside the popcorn machine.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 80
-    },
-    {
-      "id": "shiny-relic-081",
-      "name": "Shiny Relic #81",
-      "slug": "shiny-relic-081",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 91 - Cloud Garden",
-      "locationHint": "Behind the furthest left purple stone pillar in the Garden's gazebo.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 81
-    },
-    {
-      "id": "shiny-relic-082",
-      "name": "Shiny Relic #82",
-      "slug": "shiny-relic-082",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 92 - Advanced Fishing",
-      "locationHint": "Behind the Fishing Merchant store, to the left, behind a tree.",
-      "space": "Minigame",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 82
-    },
-    {
-      "id": "shiny-relic-083",
-      "name": "Shiny Relic #83",
-      "slug": "shiny-relic-083",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 93 - Cotton Cloud Houses",
-      "locationHint": "On top of house closest to the Pet Damage upgrade in the left of the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 83
-    },
-    {
-      "id": "shiny-relic-084",
-      "name": "Shiny Relic #84",
-      "slug": "shiny-relic-084",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 95 - Heaven's Gate",
-      "locationHint": "Behind the right gate.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 84
-    },
-    {
-      "id": "shiny-relic-085",
-      "name": "Shiny Relic #85",
-      "slug": "shiny-relic-085",
-      "image": null,
-      "collectionSection": "World 1 - Spawn World",
-      "world": "World 1",
-      "area": "Area 97 - Heaven Golden Castle",
-      "locationHint": "To the left of the stairs leading up to the castle.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 85
-    },
-    {
-      "id": "shiny-relic-086",
-      "name": "Shiny Relic #86",
-      "slug": "shiny-relic-086",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 100 - Tech Spawn",
-      "locationHint": "In the wall left of the Pet Index screen.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 86
-    },
-    {
-      "id": "shiny-relic-087",
-      "name": "Shiny Relic #87",
-      "slug": "shiny-relic-087",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 102 - Hologram forest",
-      "locationHint": "Behind and on the right of the Warp Portal.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 87
-    },
-    {
-      "id": "shiny-relic-088",
-      "name": "Shiny Relic #88",
-      "slug": "shiny-relic-088",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 103 - Robot Farm",
-      "locationHint": "Behind the top hay bale on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 88
-    },
-    {
-      "id": "shiny-relic-089",
-      "name": "Shiny Relic #89",
-      "slug": "shiny-relic-089",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 104 - Bit Stream",
-      "locationHint": "Behind the left rock on the left side of the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 89
-    },
-    {
-      "id": "shiny-relic-090",
-      "name": "Shiny Relic #90",
-      "slug": "shiny-relic-090",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 106 - Mushroom Lab",
-      "locationHint": "Behind the tree left of the Warp Portal.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 90
-    },
-    {
-      "id": "shiny-relic-091",
-      "name": "Shiny Relic #91",
-      "slug": "shiny-relic-091",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 108 - Data Tree Farm",
-      "locationHint": "Behind the bushes on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 91
-    },
-    {
-      "id": "shiny-relic-092",
-      "name": "Shiny Relic #92",
-      "slug": "shiny-relic-092",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 109 - Tech Jungle",
-      "locationHint": "Top of middle tree on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 92
-    },
-    {
-      "id": "shiny-relic-093",
-      "name": "Shiny Relic #93",
-      "slug": "shiny-relic-093",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 111 - Oasis Ruins",
-      "locationHint": "Behind the control panel on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 93
-    },
-    {
-      "id": "shiny-relic-094",
-      "name": "Shiny Relic #94",
-      "slug": "shiny-relic-094",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 112 - Future Beach",
-      "locationHint": "Between the rocks on the left on the right side of the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 94
-    },
-    {
-      "id": "shiny-relic-095",
-      "name": "Shiny Relic #95",
-      "slug": "shiny-relic-095",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 113 - Tech Reef",
-      "locationHint": "On a yellow Coral pipe in the far corner above water level.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 95
-    },
-    {
-      "id": "shiny-relic-096",
-      "name": "Shiny Relic #96",
-      "slug": "shiny-relic-096",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 114 - Robo Pirates",
-      "locationHint": "Behind the shipwreck pillar on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 96
-    },
-    {
-      "id": "shiny-relic-097",
-      "name": "Shiny Relic #97",
-      "slug": "shiny-relic-097",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 114 - Robo Pirates",
-      "locationHint": "On top of the shipwreck pillar on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 97
-    },
-    {
-      "id": "shiny-relic-098",
-      "name": "Shiny Relic #98",
-      "slug": "shiny-relic-098",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 119 - Tech Wild West",
-      "locationHint": "On the building on the left behind the \"The Water Hole\" sign.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 98
-    },
-    {
-      "id": "shiny-relic-099",
-      "name": "Shiny Relic #99",
-      "slug": "shiny-relic-099",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 122 - Frostbyte Forest",
-      "locationHint": "Between the ice rocks left of the Free Enchants chest.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 99
-    },
-    {
-      "id": "shiny-relic-100",
-      "name": "Shiny Relic #100",
-      "slug": "shiny-relic-100",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 123 - Forcefield Mine",
-      "locationHint": "On the ledge in the snow on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 100
-    },
-    {
-      "id": "shiny-relic-101",
-      "name": "Shiny Relic #101",
-      "slug": "shiny-relic-101",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 126 - Cracked Iceberg",
-      "locationHint": "Between the ice sheets on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 101
-    },
-    {
-      "id": "shiny-relic-102",
-      "name": "Shiny Relic #102",
-      "slug": "shiny-relic-102",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 128 - Nexus",
-      "locationHint": "On the building on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 102
-    },
-    {
-      "id": "shiny-relic-103",
-      "name": "Shiny Relic #103",
-      "slug": "shiny-relic-103",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 129 - Secure Coast",
-      "locationHint": "In the ticket booth on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 103
-    },
-    {
-      "id": "shiny-relic-104",
-      "name": "Shiny Relic #104",
-      "slug": "shiny-relic-104",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 131 - Radiation Mine",
-      "locationHint": "Behind the left grate on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 104
-    },
-    {
-      "id": "shiny-relic-105",
-      "name": "Shiny Relic #105",
-      "slug": "shiny-relic-105",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 132 - Exploded Reactor",
-      "locationHint": "Behind the rock on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 105
-    },
-    {
-      "id": "shiny-relic-106",
-      "name": "Shiny Relic #106",
-      "slug": "shiny-relic-106",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 133 - Spaceship Dock",
-      "locationHint": "Left of the rocket on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 106
-    },
-    {
-      "id": "shiny-relic-107",
-      "name": "Shiny Relic #107",
-      "slug": "shiny-relic-107",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 135 - Lunar Planet",
-      "locationHint": "Behind the big satellite dish on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 107
-    },
-    {
-      "id": "shiny-relic-108",
-      "name": "Shiny Relic #108",
-      "slug": "shiny-relic-108",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 137 - Saturn Planet",
-      "locationHint": "On the stone pillar behind the satellite dish on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 108
-    },
-    {
-      "id": "shiny-relic-109",
-      "name": "Shiny Relic #109",
-      "slug": "shiny-relic-109",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 138 - Comet Planet",
-      "locationHint": "On the back of the big comet on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 109
-    },
-    {
-      "id": "shiny-relic-110",
-      "name": "Shiny Relic #110",
-      "slug": "shiny-relic-110",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 140 - Electric Garden",
-      "locationHint": "Between the pointy bush behind the stand on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 110
-    },
-    {
-      "id": "shiny-relic-111",
-      "name": "Shiny Relic #111",
-      "slug": "shiny-relic-111",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 142 - Neon City",
-      "locationHint": "In the electrical box behind the portal on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 111
-    },
-    {
-      "id": "shiny-relic-112",
-      "name": "Shiny Relic #112",
-      "slug": "shiny-relic-112",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 144 - Robot Factory",
-      "locationHint": "Behind the pipes in the far end of the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 112
-    },
-    {
-      "id": "shiny-relic-113",
-      "name": "Shiny Relic #113",
-      "slug": "shiny-relic-113",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 145 - Egg Incubator",
-      "locationHint": "On the electrical box left of the Exclusive Daycare on the left side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 113
-    },
-    {
-      "id": "shiny-relic-114",
-      "name": "Shiny Relic #114",
-      "slug": "shiny-relic-114",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 147 - Spore Garden",
-      "locationHint": "In between rocks on the left side of the entrance.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 114
-    },
-    {
-      "id": "shiny-relic-115",
-      "name": "Shiny Relic #115",
-      "slug": "shiny-relic-115",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 149 - Alien Lab",
-      "locationHint": "On the control panel between the second and third incubator on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 115
-    },
-    {
-      "id": "shiny-relic-116",
-      "name": "Shiny Relic #116",
-      "slug": "shiny-relic-116",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 151 - Space Forge",
-      "locationHint": "Behind the first curved pillar on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 116
-    },
-    {
-      "id": "shiny-relic-117",
-      "name": "Shiny Relic #117",
-      "slug": "shiny-relic-117",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 153 - Space Junkyard",
-      "locationHint": "In the satellite dish behind the Warp Portal.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 117
-    },
-    {
-      "id": "shiny-relic-118",
-      "name": "Shiny Relic #118",
-      "slug": "shiny-relic-118",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 155 - Steampunk Town",
-      "locationHint": "In the golden cog left of the Enchants V Vending machine.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 118
-    },
-    {
-      "id": "shiny-relic-119",
-      "name": "Shiny Relic #119",
-      "slug": "shiny-relic-119",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 157 - Steampunk Airship",
-      "locationHint": "Behind the rocks behind the free items.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 119
-    },
-    {
-      "id": "shiny-relic-120",
-      "name": "Shiny Relic #120",
-      "slug": "shiny-relic-120",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 159 - Mothership Circuit Board",
-      "locationHint": "In the yellow lightbox behind the Treasure Hideout entry gate.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 120
-    },
-    {
-      "id": "shiny-relic-121",
-      "name": "Shiny Relic #121",
-      "slug": "shiny-relic-121",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 160 - Wizard Ruins",
-      "locationHint": "Inside of the ruined tower to your right when you enter.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 121
-    },
-    {
-      "id": "shiny-relic-122",
-      "name": "Shiny Relic #122",
-      "slug": "shiny-relic-122",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 161 - Wizard Forest",
-      "locationHint": "The stone to the right of the altar, behind it.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 122
-    },
-    {
-      "id": "shiny-relic-123",
-      "name": "Shiny Relic #123",
-      "slug": "shiny-relic-123",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 162 - Wizard Tech Forest",
-      "locationHint": "On top of the stone structure to your right when you enter.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 123
-    },
-    {
-      "id": "shiny-relic-124",
-      "name": "Shiny Relic #124",
-      "slug": "shiny-relic-124",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 164 - Wizard Dungeon",
-      "locationHint": "When you enter, on your right, behind the pole in the middle at the back.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 124
-    },
-    {
-      "id": "shiny-relic-125",
-      "name": "Shiny Relic #125",
-      "slug": "shiny-relic-125",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 165 - Cyberpunk Undercity",
-      "locationHint": "On the left, behind the rock wall near the back of the area.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 125
-    },
-    {
-      "id": "shiny-relic-126",
-      "name": "Shiny Relic #126",
-      "slug": "shiny-relic-126",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 168 - Cyberpunk Road",
-      "locationHint": "When you enter, next to the tunnel closest to you on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 126
-    },
-    {
-      "id": "shiny-relic-127",
-      "name": "Shiny Relic #127",
-      "slug": "shiny-relic-127",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 169 - Tech Ninja Kyoto",
-      "locationHint": "When you enter, next to a support beam of the house on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 127
-    },
-    {
-      "id": "shiny-relic-128",
-      "name": "Shiny Relic #128",
-      "slug": "shiny-relic-128",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 171 - Tech Ninja Village",
-      "locationHint": "When you enter, behind the farthest house on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 128
-    },
-    {
-      "id": "shiny-relic-129",
-      "name": "Shiny Relic #129",
-      "slug": "shiny-relic-129",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 172 - Tech Ninja City",
-      "locationHint": "Up the stairs behind a railing at the top on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 129
-    },
-    {
-      "id": "shiny-relic-130",
-      "name": "Shiny Relic #130",
-      "slug": "shiny-relic-130",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 173 - Dominus Dungeon",
-      "locationHint": "When you enter, inside a big pile of gold closest to the entrance on the left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 130
-    },
-    {
-      "id": "shiny-relic-131",
-      "name": "Shiny Relic #131",
-      "slug": "shiny-relic-131",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 176 - Holographic Powerplant",
-      "locationHint": "When you enter, inside the building on the right, between the blue and green pumps.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 131
-    },
-    {
-      "id": "shiny-relic-132",
-      "name": "Shiny Relic #132",
-      "slug": "shiny-relic-132",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 181 - Dark Tech Ruins",
-      "locationHint": "When you enter, behind the stone building in the pool of water on your left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 132
-    },
-    {
-      "id": "shiny-relic-133",
-      "name": "Shiny Relic #133",
-      "slug": "shiny-relic-133",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 182 - Dark Tech Castle",
-      "locationHint": "Behind the left pillar of the castle.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 133
-    },
-    {
-      "id": "shiny-relic-134",
-      "name": "Shiny Relic #134",
-      "slug": "shiny-relic-134",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 184 - Dark Tech Forest",
-      "locationHint": "When you enter, behind the closest wall on the left (you will have to go in behind the wall).",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 134
-    },
-    {
-      "id": "shiny-relic-135",
-      "name": "Shiny Relic #135",
-      "slug": "shiny-relic-135",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 185 - Hacker Powerplant",
-      "locationHint": "When you enter, behind the building on the far left, next to a pipe.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 135
-    },
-    {
-      "id": "shiny-relic-136",
-      "name": "Shiny Relic #136",
-      "slug": "shiny-relic-136",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 185 - Hacker Powerplant",
-      "locationHint": "Behind the back left beam of the right tower.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 136
-    },
-    {
-      "id": "shiny-relic-137",
-      "name": "Shiny Relic #137",
-      "slug": "shiny-relic-137",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 186 - Hacker Compound",
-      "locationHint": "When you enter, inside the back right truss like structure.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 137
-    },
-    {
-      "id": "shiny-relic-138",
-      "name": "Shiny Relic #138",
-      "slug": "shiny-relic-138",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 188 - Hacker Error",
-      "locationHint": "When you enter, on top of things on wall to the right. Behind the 'Zone 188 Quest'.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 138
-    },
-    {
-      "id": "shiny-relic-139",
-      "name": "Shiny Relic #139",
-      "slug": "shiny-relic-139",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 189 - Glitch Forest",
-      "locationHint": "When you enter, behind the closest tree at the front on your left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 139
-    },
-    {
-      "id": "shiny-relic-140",
-      "name": "Shiny Relic #140",
-      "slug": "shiny-relic-140",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 192 - Glitch Town",
-      "locationHint": "When you enter, above the doorway on the far right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 140
-    },
-    {
-      "id": "shiny-relic-141",
-      "name": "Shiny Relic #141",
-      "slug": "shiny-relic-141",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 193 - Glitch Quantum",
-      "locationHint": "When you enter, to the left is open area. Go to back of open area and look towards the entrance. You should see the shiny relic.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 141
-    },
-    {
-      "id": "shiny-relic-142",
-      "name": "Shiny Relic #142",
-      "slug": "shiny-relic-142",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 194 - Quantum Forest",
-      "locationHint": "When you enter, to the left is a field with trees. The shiny relic is floating in the centre.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 142
-    },
-    {
-      "id": "shiny-relic-143",
-      "name": "Shiny Relic #143",
-      "slug": "shiny-relic-143",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 195 - Quantum Space Base",
-      "locationHint": "When you enter, on the far left is a rocket ship half visible. Behind it is the shiny relic.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 143
-    },
-    {
-      "id": "shiny-relic-144",
-      "name": "Shiny Relic #144",
-      "slug": "shiny-relic-144",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 197 - Void Atomic",
-      "locationHint": "When you enter, on the far left is a shelter. Behind the electrical box to its left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 144
-    },
-    {
-      "id": "shiny-relic-145",
-      "name": "Shiny Relic #145",
-      "slug": "shiny-relic-145",
-      "image": null,
-      "collectionSection": "World 2 - Tech World",
-      "world": "World 2",
-      "area": "Area 198 - Void Fracture",
-      "locationHint": "When you enter, to your right is an open area. In the far right of that area, at the back is a white stone crystal. behind it is the shiny relic.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 145
-    },
-    {
-      "id": "shiny-relic-146",
-      "name": "Shiny Relic #146",
-      "slug": "shiny-relic-146",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Void Spawn",
-      "locationHint": "To the left of the Prison World cannon.",
-      "space": "Void Spawn",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 146
-    },
-    {
-      "id": "shiny-relic-147",
-      "name": "Shiny Relic #147",
-      "slug": "shiny-relic-147",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Void Spawn",
-      "locationHint": "Behind the Super Computer, to the right.",
-      "space": "Void Spawn",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 147
-    },
-    {
-      "id": "shiny-relic-148",
-      "name": "Shiny Relic #148",
-      "slug": "shiny-relic-148",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 200 - Prison Tower",
-      "locationHint": "Next to the building to the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 148
-    },
-    {
-      "id": "shiny-relic-149",
-      "name": "Shiny Relic #149",
-      "slug": "shiny-relic-149",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 201 - Prison Block",
-      "locationHint": "To the left of Prisoner 001's cell. Behind the big beam on your left when you enter.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 149
-    },
-    {
-      "id": "shiny-relic-150",
-      "name": "Shiny Relic #150",
-      "slug": "shiny-relic-150",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 203 - Prison Yard",
-      "locationHint": "Towards the next zone next to the pillar to the left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 150
-    },
-    {
-      "id": "shiny-relic-151",
-      "name": "Shiny Relic #151",
-      "slug": "shiny-relic-151",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 203 - Prison Yard",
-      "locationHint": "When you enter, behind the basketball court on the right are 2 chairs. Behind the tree behind the right chair.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 151
-    },
-    {
-      "id": "shiny-relic-152",
-      "name": "Shiny Relic #152",
-      "slug": "shiny-relic-152",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 205 - Beach Island",
-      "locationHint": "Next to the far left tree. (Obtainable after unlocking area 206).",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 152
-    },
-    {
-      "id": "shiny-relic-153",
-      "name": "Shiny Relic #153",
-      "slug": "shiny-relic-153",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 206 - Ocean Island",
-      "locationHint": "Behind the purple coral left of the egg.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 153
-    },
-    {
-      "id": "shiny-relic-154",
-      "name": "Shiny Relic #154",
-      "slug": "shiny-relic-154",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 207 - Tiki Island",
-      "locationHint": "Behind the house left of the egg.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 154
-    },
-    {
-      "id": "shiny-relic-155",
-      "name": "Shiny Relic #155",
-      "slug": "shiny-relic-155",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 207 - Tiki Island",
-      "locationHint": "Under the cliff next to the 2 houses.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 155
-    },
-    {
-      "id": "shiny-relic-156",
-      "name": "Shiny Relic #156",
-      "slug": "shiny-relic-156",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 209 - Volcano Island",
-      "locationHint": "On the stern of the boat.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 156
-    },
-    {
-      "id": "shiny-relic-157",
-      "name": "Shiny Relic #157",
-      "slug": "shiny-relic-157",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 209 - Volcano Island",
-      "locationHint": "Under the boat near the back of the boat.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 157
-    },
-    {
-      "id": "shiny-relic-158",
-      "name": "Shiny Relic #158",
-      "slug": "shiny-relic-158",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 210 - Hacker Matrix",
-      "locationHint": "Behind the pillar right of the hacker chest.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 158
-    },
-    {
-      "id": "shiny-relic-159",
-      "name": "Shiny Relic #159",
-      "slug": "shiny-relic-159",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 212 - Hacker Cave",
-      "locationHint": "Hidden behind the wall next to the Free Potions machine.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 159
-    },
-    {
-      "id": "shiny-relic-160",
-      "name": "Shiny Relic #160",
-      "slug": "shiny-relic-160",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 213 - Hacker Lab",
-      "locationHint": "Behind the pillar behind the egg.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 160
-    },
-    {
-      "id": "shiny-relic-161",
-      "name": "Shiny Relic #161",
-      "slug": "shiny-relic-161",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 214 - Hacker Mainframe",
-      "locationHint": "Behind the pillar left of the egg.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 161
-    },
-    {
-      "id": "shiny-relic-162",
-      "name": "Shiny Relic #162",
-      "slug": "shiny-relic-162",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 215 - Dirt Village",
-      "locationHint": "Behind the house on your right when you enter.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 162
-    },
-    {
-      "id": "shiny-relic-163",
-      "name": "Shiny Relic #163",
-      "slug": "shiny-relic-163",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 216 - Stone Forts",
-      "locationHint": "Behind the rock on your left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 163
-    },
-    {
-      "id": "shiny-relic-164",
-      "name": "Shiny Relic #164",
-      "slug": "shiny-relic-164",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 218 - Golden Netropolis",
-      "locationHint": "Next to the building on your right when you enter.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 164
-    },
-    {
-      "id": "shiny-relic-165",
-      "name": "Shiny Relic #165",
-      "slug": "shiny-relic-165",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 219 - Diamond Mega City",
-      "locationHint": "Right side of the building.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 165
-    },
-    {
-      "id": "shiny-relic-166",
-      "name": "Shiny Relic #166",
-      "slug": "shiny-relic-166",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 220 - Kawaii Tokyo",
-      "locationHint": "On the left, before exiting the area, on the window sill of the building.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 166
-    },
-    {
-      "id": "shiny-relic-167",
-      "name": "Shiny Relic #167",
-      "slug": "shiny-relic-167",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 221 - Kawaii Village",
-      "locationHint": "Behind a rock next to the purple house.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 167
-    },
-    {
-      "id": "shiny-relic-168",
-      "name": "Shiny Relic #168",
-      "slug": "shiny-relic-168",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 222 - Kawaii Grove",
-      "locationHint": "To the left, beside the pink tree, and against the cliff side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 168
-    },
-    {
-      "id": "shiny-relic-169",
-      "name": "Shiny Relic #169",
-      "slug": "shiny-relic-169",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 223 - Kawaii Dreamland",
-      "locationHint": "Behind a white chocolate bar to the right of where you enter.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 169
-    },
-    {
-      "id": "shiny-relic-170",
-      "name": "Shiny Relic #170",
-      "slug": "shiny-relic-170",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 226 - Rocky Ridge",
-      "locationHint": "Directly on the left as you enter, behind the biggest tree of the three.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 170
-    },
-    {
-      "id": "shiny-relic-171",
-      "name": "Shiny Relic #171",
-      "slug": "shiny-relic-171",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 227 - Crystal Lake",
-      "locationHint": "On the right as you enter, in the opening of one of the pink corals.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 171
-    },
-    {
-      "id": "shiny-relic-172",
-      "name": "Shiny Relic #172",
-      "slug": "shiny-relic-172",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 227 - Crystal Lake",
-      "locationHint": "On the left, before exiting the area, in the opening of one of the pink corals.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 172
-    },
-    {
-      "id": "shiny-relic-173",
-      "name": "Shiny Relic #173",
-      "slug": "shiny-relic-173",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 229 - Elemental Realm",
-      "locationHint": "Left of Trainer Preston, past the edge of the building platform, in the lava.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 173
-    },
-    {
-      "id": "shiny-relic-174",
-      "name": "Shiny Relic #174",
-      "slug": "shiny-relic-174",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 230 - Elysium Fields",
-      "locationHint": "To the left as you enter, behind the left of the building.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 174
-    },
-    {
-      "id": "shiny-relic-175",
-      "name": "Shiny Relic #175",
-      "slug": "shiny-relic-175",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 231 - Ocean Paradise",
-      "locationHint": "To the farthest left, to the tall part of the other island, In between the yellow corals.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 175
-    },
-    {
-      "id": "shiny-relic-176",
-      "name": "Shiny Relic #176",
-      "slug": "shiny-relic-176",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 233 - Nebula Forest",
-      "locationHint": "To the left as you enter, behind the big blue tall rocks.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 176
-    },
-    {
-      "id": "shiny-relic-177",
-      "name": "Shiny Relic #177",
-      "slug": "shiny-relic-177",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 234 - Aether Colosseum",
-      "locationHint": "Behind the 5th pillar in the colosseum behind the big chest.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 177
-    },
-    {
-      "id": "shiny-relic-178",
-      "name": "Shiny Relic #178",
-      "slug": "shiny-relic-178",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 235 - Doodle Meadow",
-      "locationHint": "To the right of the egg, behind the fence.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 178
-    },
-    {
-      "id": "shiny-relic-179",
-      "name": "Shiny Relic #179",
-      "slug": "shiny-relic-179",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 236 - Doodle Safari",
-      "locationHint": "Directly to the left as you enter, behind the 3rd bush.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 179
-    },
-    {
-      "id": "shiny-relic-180",
-      "name": "Shiny Relic #180",
-      "slug": "shiny-relic-180",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 239 - Doodle Oasis",
-      "locationHint": "To the left of the Doodle Jar Upgrade, behind the green bush on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 180
-    },
-    {
-      "id": "shiny-relic-181",
-      "name": "Shiny Relic #181",
-      "slug": "shiny-relic-181",
-      "image": null,
-      "collectionSection": "World 3 - Void World",
-      "world": "World 3",
-      "area": "Area 239 - Doodle Oasis",
-      "locationHint": "To the left of the Doodle Jar Upgrade, behind the \"Submit Your Drawings On X\" Sign. Behind the blue-yellow bush.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 181
-    },
-    {
-      "id": "shiny-relic-182",
-      "name": "Shiny Relic #182",
-      "slug": "shiny-relic-182",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 240 - Fantasy Spawn",
-      "locationHint": "At the start of the area to the right next to the 2nd arch behind some rocks.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 182
-    },
-    {
-      "id": "shiny-relic-183",
-      "name": "Shiny Relic #183",
-      "slug": "shiny-relic-183",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 241 - Flora Falls",
-      "locationHint": "At the start of the area to the right in the waterfall on the rocks.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 183
-    },
-    {
-      "id": "shiny-relic-184",
-      "name": "Shiny Relic #184",
-      "slug": "shiny-relic-184",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 243 - Honeycomb Hollow",
-      "locationHint": "To the right midway through the area in the gap in the rock and then behind the honey above.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 184
-    },
-    {
-      "id": "shiny-relic-185",
-      "name": "Shiny Relic #185",
-      "slug": "shiny-relic-185",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 245 - Windmill Point",
-      "locationHint": "Near the end of the area to the left behind the windmill at the top.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 185
-    },
-    {
-      "id": "shiny-relic-186",
-      "name": "Shiny Relic #186",
-      "slug": "shiny-relic-186",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 248 - Rune Graveyard",
-      "locationHint": "At the start of the area to the left behind the stone arch at the top.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 186
-    },
-    {
-      "id": "shiny-relic-187",
-      "name": "Shiny Relic #187",
-      "slug": "shiny-relic-187",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 250 - Twilight Grove",
-      "locationHint": "Right when you enter, behind the second arch on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 187
-    },
-    {
-      "id": "shiny-relic-188",
-      "name": "Shiny Relic #188",
-      "slug": "shiny-relic-188",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 252 - Starroot Highlands",
-      "locationHint": "Right when you enter on the wall, on a star on the right side.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 188
-    },
-    {
-      "id": "shiny-relic-189",
-      "name": "Shiny Relic #189",
-      "slug": "shiny-relic-189",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 253 - Aether Archways",
-      "locationHint": "Right when you enter behind the first arch on the left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 189
-    },
-    {
-      "id": "shiny-relic-190",
-      "name": "Shiny Relic #190",
-      "slug": "shiny-relic-190",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 256 - Runestone Bluff",
-      "locationHint": "As you enter, behind the arch on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 190
-    },
-    {
-      "id": "shiny-relic-191",
-      "name": "Shiny Relic #191",
-      "slug": "shiny-relic-191",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 258 - Wyrmwatch Ridge",
-      "locationHint": "As you enter, inside the dragon mouth on the left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 191
-    },
-    {
-      "id": "shiny-relic-192",
-      "name": "Shiny Relic #192",
-      "slug": "shiny-relic-192",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 261 - Charred Canyon",
-      "locationHint": "In dragon's skull on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 192
-    },
-    {
-      "id": "shiny-relic-193",
-      "name": "Shiny Relic #193",
-      "slug": "shiny-relic-193",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 263 - Molten Nest",
-      "locationHint": "Behind free items, in lava.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 193
-    },
-    {
-      "id": "shiny-relic-194",
-      "name": "Shiny Relic #194",
-      "slug": "shiny-relic-194",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 264 - Obsidian Spire",
-      "locationHint": "Behind dragon's skull near the end.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 194
-    },
-    {
-      "id": "shiny-relic-195",
-      "name": "Shiny Relic #195",
-      "slug": "shiny-relic-195",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 266 - Glimmer Grottos",
-      "locationHint": "Behind first crystal on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 195
-    },
-    {
-      "id": "shiny-relic-196",
-      "name": "Shiny Relic #196",
-      "slug": "shiny-relic-196",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 268 - Scribes Terrace",
-      "locationHint": "Behind a tree on the left.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 196
-    },
-    {
-      "id": "shiny-relic-197",
-      "name": "Shiny Relic #197",
-      "slug": "shiny-relic-197",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 269 - Archivists Tower",
-      "locationHint": "Behind a tree in the corner.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 197
-    },
-    {
-      "id": "shiny-relic-198",
-      "name": "Shiny Relic #198",
-      "slug": "shiny-relic-198",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 270 - Mystmire Bloom",
-      "locationHint": "On the left behind a cliff.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 198
-    },
-    {
-      "id": "shiny-relic-199",
-      "name": "Shiny Relic #199",
-      "slug": "shiny-relic-199",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 272 - Faerie Hex Glade",
-      "locationHint": "Behind an arch on the right.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 199
-    },
-    {
-      "id": "shiny-relic-200",
-      "name": "Shiny Relic #200",
-      "slug": "shiny-relic-200",
-      "image": null,
-      "collectionSection": "World 4 - Fantasy World",
-      "world": "World 4",
-      "area": "Area 273 - Bloomcourt Terrace",
-      "locationHint": "In the corner on the right of Bundles V.",
-      "space": "Main area",
-      "progressNote": "Counts toward the 5-relic shiny odds milestone.",
-      "sortOrder": 200
+      "item": {
+        "name": "Shiny Relic #1",
+        "world": "Trading Plaza",
+        "area": "Trading Plaza",
+        "locationHint": "Underneath the bridge to the VIP Only area.",
+        "space": "Trading Plaza",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-001",
+        "section": "Trading Plaza",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #2",
+        "world": "Trading Plaza",
+        "area": "Trading Plaza",
+        "locationHint": "Behind the fanart poster.",
+        "space": "Trading Plaza",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-002",
+        "section": "Trading Plaza",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #3",
+        "world": "Trading Plaza",
+        "area": "Trading Plaza",
+        "locationHint": "Behind the tree next to the Trading Terminal.",
+        "space": "Trading Plaza",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-003",
+        "section": "Trading Plaza",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #4",
+        "world": "World 1",
+        "area": "Area 1 - Spawn",
+        "locationHint": "Behind a bush near the orange building.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-004",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #5",
+        "world": "World 1",
+        "area": "Area 1 - Spawn",
+        "locationHint": "Near the \"Like The Game\" board and purple flower.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-005",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #6",
+        "world": "World 1",
+        "area": "Area 1 - Spawn",
+        "locationHint": "Behind the Social Rewards sign at Spawn.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-006",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #7",
+        "world": "World 1",
+        "area": "Area 3 - Castle",
+        "locationHint": "Behind the Free Diamond rewards.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-007",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #8",
+        "world": "World 1",
+        "area": "Area 5 - Autumn",
+        "locationHint": "Behind the entrance to the Classic Obby mini-game.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-008",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #9",
+        "world": "World 1",
+        "area": "Area 6 - Cherry Blossom",
+        "locationHint": "To the left of the Potions vending machine, leaning on the Japanese torii gate.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-009",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #10",
+        "world": "World 1",
+        "area": "Area 7 - Farm",
+        "locationHint": "Inside the box to the left of the Windmill.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-010",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #11",
+        "world": "World 1",
+        "area": "Area 8 - Backyard",
+        "locationHint": "In a crack in the wall, on the right side of the area as soon as you enter.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-011",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #12",
+        "world": "World 1",
+        "area": "Area 9 - Misty Falls",
+        "locationHint": "In the pond near the Enchants vending machine.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-012",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #13",
+        "world": "World 1",
+        "area": "Area 12 - Dead Forest",
+        "locationHint": "In a bush near the right entrance pillar.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-013",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #14",
+        "world": "World 1",
+        "area": "Area 13 - Dark Forest",
+        "locationHint": "On the cover of the 3rd tombstone.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-014",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #15",
+        "world": "World 1",
+        "area": "Area 13 - Dark Forest",
+        "locationHint": "Behind a tombstone to the left of the Potions Upgrade station.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-015",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #16",
+        "world": "World 1",
+        "area": "Area 15 - Enchanted Forest",
+        "locationHint": "Behind the tree and bush directly to the left as you enter the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-016",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #17",
+        "world": "World 1",
+        "area": "Area 15 - Enchanted Forest",
+        "locationHint": "In a log to the left of the big tree.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-017",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #18",
+        "world": "World 1",
+        "area": "Area 18 - Jungle Temple",
+        "locationHint": "On the temple across from the portal for the Jungle Obby mini-game.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-018",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #19",
+        "world": "World 1",
+        "area": "Area 18 - Jungle Obby",
+        "locationHint": "Right after the axes, pass through the arch and follow the secret path behind the pillar to the right.",
+        "space": "Minigame",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-019",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #20",
+        "world": "World 1",
+        "area": "Area 20 - Beach",
+        "locationHint": "In a bucket in the top left corner of the zone, near the chest.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-020",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #21",
+        "world": "World 1",
+        "area": "Area 20 - Beach",
+        "locationHint": "In a bucket behind the daycare.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-021",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #22",
+        "world": "World 1",
+        "area": "Area 21 - Coral Reef",
+        "locationHint": "Inside the yellow coral/plants on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-022",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #23",
+        "world": "World 1",
+        "area": "Area 23 - Atlantis",
+        "locationHint": "On top of the pillar to the left of the Atlantis minigame entrance.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-023",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #24",
+        "world": "World 1",
+        "area": "Area 23 - Atlantis Minigame",
+        "locationHint": "From the start, go around the entrance to the right. It's behind the large rock in front of you, next to the pillar leaning on the wall.",
+        "space": "Minigame",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-024",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #25",
+        "world": "World 1",
+        "area": "Area 24 - Palm Beach",
+        "locationHint": "On top of the Tunnel connecting Area 16 and 24.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-025",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #26",
+        "world": "World 1",
+        "area": "Area 24 - Palm Beach (Area 16-24 Tunnel)",
+        "locationHint": "In the Tunnel connecting Area 16 and 24.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-026",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #27",
+        "world": "World 1",
+        "area": "Area 25 - Tiki",
+        "locationHint": "Behind the Tiki totem directly to the left of the Rebirth 1 statue.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-027",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #28",
+        "world": "World 1",
+        "area": "Area 26 - Pirate Cove",
+        "locationHint": "In a coin pile directly to the left as you enter the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-028",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #29",
+        "world": "World 1",
+        "area": "Area 26 - Pirate Cove",
+        "locationHint": "In a coin pile to the right of the Fruits II vending machine.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-029",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #30",
+        "world": "World 1",
+        "area": "Area 27 - Pirate Tavern",
+        "locationHint": "In the boat beside the Fishing minigame entrance dock.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-030",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #31",
+        "world": "World 1",
+        "area": "Area 27 - Fishing",
+        "locationHint": "Behind a starfish to the left of the map.",
+        "space": "Minigame",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-031",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #32",
+        "world": "World 1",
+        "area": "Area 30 - Fossil Digsite",
+        "locationHint": "Behind a fossil to the right of the portal.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-032",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #33",
+        "world": "World 1",
+        "area": "Area 30 - Digsite",
+        "locationHint": "At the back of the Digsite map.",
+        "space": "Minigame",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-033",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #34",
+        "world": "World 1",
+        "area": "Area 31 - Desert Pyramids",
+        "locationHint": "Behind some cacti to the right of the pyramid.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-034",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #35",
+        "world": "World 1",
+        "area": "Area 33 - Wild West",
+        "locationHint": "In the window of the shortest building on the right side of the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-035",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #36",
+        "world": "World 1",
+        "area": "Area 34 - Grand Canyons",
+        "locationHint": "In the right side of the area in the cliff beside a yellow rock.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-036",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #37",
+        "world": "World 1",
+        "area": "Area 36 - Mountains",
+        "locationHint": "In a tree on the left side of the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-037",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #38",
+        "world": "World 1",
+        "area": "Area 37 - Snow Village",
+        "locationHint": "On top the cabin closest to the Lucky Eggs upgrade.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-038",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #39",
+        "world": "World 1",
+        "area": "Area 37 - Snow Village",
+        "locationHint": "Behind the building furthest to the left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-039",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #40",
+        "world": "World 1",
+        "area": "Area 39 - Ice Rink",
+        "locationHint": "Being held by a snowman on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-040",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #41",
+        "world": "World 1",
+        "area": "Area 40 - Ski Town",
+        "locationHint": "Behind the house furthest to the left of the ski lift.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-041",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #42",
+        "world": "World 1",
+        "area": "Area 41 - Hot Springs",
+        "locationHint": "In the waterfall closest to Area 42.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-042",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #43",
+        "world": "World 1",
+        "area": "Area 42 - Fire and Ice",
+        "locationHint": "Inside of an ice pillar, before the black stone on the left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-043",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #44",
+        "world": "World 1",
+        "area": "Area 43 - Volcano",
+        "locationHint": "The right of the entrance, beside a fossil in the lava.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-044",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #45",
+        "world": "World 1",
+        "area": "Area 44 - Obsidian Cave",
+        "locationHint": "To the right of the tunnel.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-045",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #46",
+        "world": "World 1",
+        "area": "Area 45 - Lava Forest",
+        "locationHint": "To the left of Chest Rush in the lava.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-046",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #47",
+        "world": "World 1",
+        "area": "Area 46 - Underworld",
+        "locationHint": "To the left of the entrance in a skull.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-047",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #48",
+        "world": "World 1",
+        "area": "Area 47 - Underworld Bridge",
+        "locationHint": "To the left of the Rare Potions machine over the half-wall.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-048",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #49",
+        "world": "World 1",
+        "area": "Area 50 - Fire Dojo",
+        "locationHint": "On the Japanese torii gate before the tunnel to Area 44.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-049",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #50",
+        "world": "World 1",
+        "area": "Area 50 - Fire Dojo",
+        "locationHint": "Behind the right pillar of the Rebirth Statue.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-050",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #51",
+        "world": "World 1",
+        "area": "Area 51 - Samurai Village",
+        "locationHint": "In a crack to the temple in which you entered, to the left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-051",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #52",
+        "world": "World 1",
+        "area": "Area 52 - Bamboo Forest",
+        "locationHint": "In the hut closest to the Upgrade Fruits station.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-052",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #53",
+        "world": "World 1",
+        "area": "Area 54 - Flower Garden",
+        "locationHint": "To the left of the flower garden exit.",
+        "space": "Minigame",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-053",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #54",
+        "world": "World 1",
+        "area": "Area 56 - Fairytale Castle",
+        "locationHint": "Behind the clan ticket sign.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-054",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #55",
+        "world": "World 1",
+        "area": "Area 58 - Fairy Castle",
+        "locationHint": "In a space between the stones on the left side of the castle.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-055",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #56",
+        "world": "World 1",
+        "area": "Area 59 - Cozy Village",
+        "locationHint": "Behind the 4th house in the left group of houses.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-056",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #57",
+        "world": "World 1",
+        "area": "Area 63 - Frost Mountains",
+        "locationHint": "In the ice diamond to the right of the snow merchant.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-057",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #58",
+        "world": "World 1",
+        "area": "Area 64 - Ice Sculptures",
+        "locationHint": "Behind the ice formation next to the frozen pond.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-058",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #59",
+        "world": "World 1",
+        "area": "Area 65 - Snowman Town",
+        "locationHint": "Behind the large snowman at the top of the slope.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-059",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #60",
+        "world": "World 1",
+        "area": "Area 67 - Polar Express",
+        "locationHint": "On the backside of the train carriage.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-060",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #61",
+        "world": "World 1",
+        "area": "Area 68 - Firefly Cold Forest",
+        "locationHint": "On the cabin's back window.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-061",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #62",
+        "world": "World 1",
+        "area": "Area 71 - Ancient Ruins",
+        "locationHint": "To the right of the entrance, on the 2nd pillar.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-062",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #63",
+        "world": "World 1",
+        "area": "Area 72 - Runic Altar",
+        "locationHint": "Towards the end of the location, on a pillar next to a stone.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-063",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #64",
+        "world": "World 1",
+        "area": "Area 73 - Wizard Tower",
+        "locationHint": "To the left of the castle, in the waterfall.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-064",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #65",
+        "world": "World 1",
+        "area": "Area 74 - Witch Marsh",
+        "locationHint": "To the left of the entrance, on the 2nd tombstone.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-065",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 65,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #66",
+        "world": "World 1",
+        "area": "Area 75 - Haunted Forest",
+        "locationHint": "On top of the rock formation in the purple water.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-066",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 66,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #67",
+        "world": "World 1",
+        "area": "Area 77 - Haunted Mansion",
+        "locationHint": "On the right window of the mansion.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-067",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 67,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #68",
+        "world": "World 1",
+        "area": "Area 78 - Dungeon Entrance",
+        "locationHint": "In the direct left corner as you enter, before the Free Diamonds claim.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-068",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 68,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #69",
+        "world": "World 1",
+        "area": "Area 79 - Dungeon",
+        "locationHint": "Behind the singular banner on the wall, will need to tilt your camera.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-069",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 69,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #70",
+        "world": "World 1",
+        "area": "Area 79 - Advanced Digsite",
+        "locationHint": "On the right far top side of the advanced digsite.",
+        "space": "Minigame",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-070",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #71",
+        "world": "World 1",
+        "area": "Area 80 - Treasure Dungeon",
+        "locationHint": "Behind the first chest on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-071",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #72",
+        "world": "World 1",
+        "area": "Area 81 - Empyrean Dungeon",
+        "locationHint": "On the wall to the right of the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-072",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #73",
+        "world": "World 1",
+        "area": "Area 83 - Cotton Candy Forest",
+        "locationHint": "Inside the blue colored cotton candy tree across from the Free Potions claim.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-073",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 73,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #74",
+        "world": "World 1",
+        "area": "Area 84 - Gummy Forest",
+        "locationHint": "On top of the only orange tree with a ladder on the left side of the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-074",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 74,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #75",
+        "world": "World 1",
+        "area": "Area 85 - Chocolate Waterfall",
+        "locationHint": "Inside the waterwall, left of the entrance to the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-075",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 75,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #76",
+        "world": "World 1",
+        "area": "Area 86 - Sweets",
+        "locationHint": "On top of the Ice Cream pillar directly to the right of the entrance of the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-076",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 76,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #77",
+        "world": "World 1",
+        "area": "Area 87 - Toys and Blocks",
+        "locationHint": "Behind the stacked blocks to the left of the stairway entrance into Lucky Blocks.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-077",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 77,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #78",
+        "world": "World 1",
+        "area": "Area 87 - Lucky Blocks",
+        "locationHint": "In the far left corner of the minigame area behind some bushes.",
+        "space": "Minigame",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-078",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 78,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #79",
+        "world": "World 1",
+        "area": "Area 88 - Carnival",
+        "locationHint": "Inside the orange tent to the left of the ferris wheel.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-079",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 79,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #80",
+        "world": "World 1",
+        "area": "Area 89 - Theme Park",
+        "locationHint": "Inside the only red house in the area, inside the popcorn machine.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-080",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #81",
+        "world": "World 1",
+        "area": "Area 91 - Cloud Garden",
+        "locationHint": "Behind the furthest left purple stone pillar in the Garden's gazebo.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-081",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 81,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #82",
+        "world": "World 1",
+        "area": "Area 92 - Advanced Fishing",
+        "locationHint": "Behind the Fishing Merchant store, to the left, behind a tree.",
+        "space": "Minigame",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-082",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 82,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #83",
+        "world": "World 1",
+        "area": "Area 93 - Cotton Cloud Houses",
+        "locationHint": "On top of house closest to the Pet Damage upgrade in the left of the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-083",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 83,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #84",
+        "world": "World 1",
+        "area": "Area 95 - Heaven's Gate",
+        "locationHint": "Behind the right gate.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-084",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 84,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #85",
+        "world": "World 1",
+        "area": "Area 97 - Heaven Golden Castle",
+        "locationHint": "To the left of the stairs leading up to the castle.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-085",
+        "section": "World 1 - Spawn World",
+        "sortOrder": 85,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #86",
+        "world": "World 2",
+        "area": "Area 100 - Tech Spawn",
+        "locationHint": "In the wall left of the Pet Index screen.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-086",
+        "section": "World 2 - Tech World",
+        "sortOrder": 86,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #87",
+        "world": "World 2",
+        "area": "Area 102 - Hologram forest",
+        "locationHint": "Behind and on the right of the Warp Portal.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-087",
+        "section": "World 2 - Tech World",
+        "sortOrder": 87,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #88",
+        "world": "World 2",
+        "area": "Area 103 - Robot Farm",
+        "locationHint": "Behind the top hay bale on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-088",
+        "section": "World 2 - Tech World",
+        "sortOrder": 88,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #89",
+        "world": "World 2",
+        "area": "Area 104 - Bit Stream",
+        "locationHint": "Behind the left rock on the left side of the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-089",
+        "section": "World 2 - Tech World",
+        "sortOrder": 89,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #90",
+        "world": "World 2",
+        "area": "Area 106 - Mushroom Lab",
+        "locationHint": "Behind the tree left of the Warp Portal.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-090",
+        "section": "World 2 - Tech World",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #91",
+        "world": "World 2",
+        "area": "Area 108 - Data Tree Farm",
+        "locationHint": "Behind the bushes on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-091",
+        "section": "World 2 - Tech World",
+        "sortOrder": 91,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #92",
+        "world": "World 2",
+        "area": "Area 109 - Tech Jungle",
+        "locationHint": "Top of middle tree on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-092",
+        "section": "World 2 - Tech World",
+        "sortOrder": 92,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #93",
+        "world": "World 2",
+        "area": "Area 111 - Oasis Ruins",
+        "locationHint": "Behind the control panel on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-093",
+        "section": "World 2 - Tech World",
+        "sortOrder": 93,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #94",
+        "world": "World 2",
+        "area": "Area 112 - Future Beach",
+        "locationHint": "Between the rocks on the left on the right side of the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-094",
+        "section": "World 2 - Tech World",
+        "sortOrder": 94,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #95",
+        "world": "World 2",
+        "area": "Area 113 - Tech Reef",
+        "locationHint": "On a yellow Coral pipe in the far corner above water level.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-095",
+        "section": "World 2 - Tech World",
+        "sortOrder": 95,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #96",
+        "world": "World 2",
+        "area": "Area 114 - Robo Pirates",
+        "locationHint": "Behind the shipwreck pillar on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-096",
+        "section": "World 2 - Tech World",
+        "sortOrder": 96,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #97",
+        "world": "World 2",
+        "area": "Area 114 - Robo Pirates",
+        "locationHint": "On top of the shipwreck pillar on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-097",
+        "section": "World 2 - Tech World",
+        "sortOrder": 97,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #98",
+        "world": "World 2",
+        "area": "Area 119 - Tech Wild West",
+        "locationHint": "On the building on the left behind the \"The Water Hole\" sign.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-098",
+        "section": "World 2 - Tech World",
+        "sortOrder": 98,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #99",
+        "world": "World 2",
+        "area": "Area 122 - Frostbyte Forest",
+        "locationHint": "Between the ice rocks left of the Free Enchants chest.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-099",
+        "section": "World 2 - Tech World",
+        "sortOrder": 99,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #100",
+        "world": "World 2",
+        "area": "Area 123 - Forcefield Mine",
+        "locationHint": "On the ledge in the snow on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-100",
+        "section": "World 2 - Tech World",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #101",
+        "world": "World 2",
+        "area": "Area 126 - Cracked Iceberg",
+        "locationHint": "Between the ice sheets on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-101",
+        "section": "World 2 - Tech World",
+        "sortOrder": 101,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #102",
+        "world": "World 2",
+        "area": "Area 128 - Nexus",
+        "locationHint": "On the building on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-102",
+        "section": "World 2 - Tech World",
+        "sortOrder": 102,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #103",
+        "world": "World 2",
+        "area": "Area 129 - Secure Coast",
+        "locationHint": "In the ticket booth on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-103",
+        "section": "World 2 - Tech World",
+        "sortOrder": 103,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #104",
+        "world": "World 2",
+        "area": "Area 131 - Radiation Mine",
+        "locationHint": "Behind the left grate on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-104",
+        "section": "World 2 - Tech World",
+        "sortOrder": 104,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #105",
+        "world": "World 2",
+        "area": "Area 132 - Exploded Reactor",
+        "locationHint": "Behind the rock on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-105",
+        "section": "World 2 - Tech World",
+        "sortOrder": 105,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #106",
+        "world": "World 2",
+        "area": "Area 133 - Spaceship Dock",
+        "locationHint": "Left of the rocket on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-106",
+        "section": "World 2 - Tech World",
+        "sortOrder": 106,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #107",
+        "world": "World 2",
+        "area": "Area 135 - Lunar Planet",
+        "locationHint": "Behind the big satellite dish on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-107",
+        "section": "World 2 - Tech World",
+        "sortOrder": 107,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #108",
+        "world": "World 2",
+        "area": "Area 137 - Saturn Planet",
+        "locationHint": "On the stone pillar behind the satellite dish on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-108",
+        "section": "World 2 - Tech World",
+        "sortOrder": 108,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #109",
+        "world": "World 2",
+        "area": "Area 138 - Comet Planet",
+        "locationHint": "On the back of the big comet on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-109",
+        "section": "World 2 - Tech World",
+        "sortOrder": 109,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #110",
+        "world": "World 2",
+        "area": "Area 140 - Electric Garden",
+        "locationHint": "Between the pointy bush behind the stand on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-110",
+        "section": "World 2 - Tech World",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #111",
+        "world": "World 2",
+        "area": "Area 142 - Neon City",
+        "locationHint": "In the electrical box behind the portal on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-111",
+        "section": "World 2 - Tech World",
+        "sortOrder": 111,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #112",
+        "world": "World 2",
+        "area": "Area 144 - Robot Factory",
+        "locationHint": "Behind the pipes in the far end of the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-112",
+        "section": "World 2 - Tech World",
+        "sortOrder": 112,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #113",
+        "world": "World 2",
+        "area": "Area 145 - Egg Incubator",
+        "locationHint": "On the electrical box left of the Exclusive Daycare on the left side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-113",
+        "section": "World 2 - Tech World",
+        "sortOrder": 113,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #114",
+        "world": "World 2",
+        "area": "Area 147 - Spore Garden",
+        "locationHint": "In between rocks on the left side of the entrance.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-114",
+        "section": "World 2 - Tech World",
+        "sortOrder": 114,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #115",
+        "world": "World 2",
+        "area": "Area 149 - Alien Lab",
+        "locationHint": "On the control panel between the second and third incubator on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-115",
+        "section": "World 2 - Tech World",
+        "sortOrder": 115,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #116",
+        "world": "World 2",
+        "area": "Area 151 - Space Forge",
+        "locationHint": "Behind the first curved pillar on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-116",
+        "section": "World 2 - Tech World",
+        "sortOrder": 116,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #117",
+        "world": "World 2",
+        "area": "Area 153 - Space Junkyard",
+        "locationHint": "In the satellite dish behind the Warp Portal.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-117",
+        "section": "World 2 - Tech World",
+        "sortOrder": 117,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #118",
+        "world": "World 2",
+        "area": "Area 155 - Steampunk Town",
+        "locationHint": "In the golden cog left of the Enchants V Vending machine.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-118",
+        "section": "World 2 - Tech World",
+        "sortOrder": 118,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #119",
+        "world": "World 2",
+        "area": "Area 157 - Steampunk Airship",
+        "locationHint": "Behind the rocks behind the free items.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-119",
+        "section": "World 2 - Tech World",
+        "sortOrder": 119,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #120",
+        "world": "World 2",
+        "area": "Area 159 - Mothership Circuit Board",
+        "locationHint": "In the yellow lightbox behind the Treasure Hideout entry gate.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-120",
+        "section": "World 2 - Tech World",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #121",
+        "world": "World 2",
+        "area": "Area 160 - Wizard Ruins",
+        "locationHint": "Inside of the ruined tower to your right when you enter.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-121",
+        "section": "World 2 - Tech World",
+        "sortOrder": 121,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #122",
+        "world": "World 2",
+        "area": "Area 161 - Wizard Forest",
+        "locationHint": "The stone to the right of the altar, behind it.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-122",
+        "section": "World 2 - Tech World",
+        "sortOrder": 122,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #123",
+        "world": "World 2",
+        "area": "Area 162 - Wizard Tech Forest",
+        "locationHint": "On top of the stone structure to your right when you enter.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-123",
+        "section": "World 2 - Tech World",
+        "sortOrder": 123,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #124",
+        "world": "World 2",
+        "area": "Area 164 - Wizard Dungeon",
+        "locationHint": "When you enter, on your right, behind the pole in the middle at the back.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-124",
+        "section": "World 2 - Tech World",
+        "sortOrder": 124,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #125",
+        "world": "World 2",
+        "area": "Area 165 - Cyberpunk Undercity",
+        "locationHint": "On the left, behind the rock wall near the back of the area.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-125",
+        "section": "World 2 - Tech World",
+        "sortOrder": 125,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #126",
+        "world": "World 2",
+        "area": "Area 168 - Cyberpunk Road",
+        "locationHint": "When you enter, next to the tunnel closest to you on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-126",
+        "section": "World 2 - Tech World",
+        "sortOrder": 126,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #127",
+        "world": "World 2",
+        "area": "Area 169 - Tech Ninja Kyoto",
+        "locationHint": "When you enter, next to a support beam of the house on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-127",
+        "section": "World 2 - Tech World",
+        "sortOrder": 127,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #128",
+        "world": "World 2",
+        "area": "Area 171 - Tech Ninja Village",
+        "locationHint": "When you enter, behind the farthest house on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-128",
+        "section": "World 2 - Tech World",
+        "sortOrder": 128,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #129",
+        "world": "World 2",
+        "area": "Area 172 - Tech Ninja City",
+        "locationHint": "Up the stairs behind a railing at the top on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-129",
+        "section": "World 2 - Tech World",
+        "sortOrder": 129,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #130",
+        "world": "World 2",
+        "area": "Area 173 - Dominus Dungeon",
+        "locationHint": "When you enter, inside a big pile of gold closest to the entrance on the left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-130",
+        "section": "World 2 - Tech World",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #131",
+        "world": "World 2",
+        "area": "Area 176 - Holographic Powerplant",
+        "locationHint": "When you enter, inside the building on the right, between the blue and green pumps.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-131",
+        "section": "World 2 - Tech World",
+        "sortOrder": 131,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #132",
+        "world": "World 2",
+        "area": "Area 181 - Dark Tech Ruins",
+        "locationHint": "When you enter, behind the stone building in the pool of water on your left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-132",
+        "section": "World 2 - Tech World",
+        "sortOrder": 132,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #133",
+        "world": "World 2",
+        "area": "Area 182 - Dark Tech Castle",
+        "locationHint": "Behind the left pillar of the castle.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-133",
+        "section": "World 2 - Tech World",
+        "sortOrder": 133,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #134",
+        "world": "World 2",
+        "area": "Area 184 - Dark Tech Forest",
+        "locationHint": "When you enter, behind the closest wall on the left (you will have to go in behind the wall).",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-134",
+        "section": "World 2 - Tech World",
+        "sortOrder": 134,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #135",
+        "world": "World 2",
+        "area": "Area 185 - Hacker Powerplant",
+        "locationHint": "When you enter, behind the building on the far left, next to a pipe.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-135",
+        "section": "World 2 - Tech World",
+        "sortOrder": 135,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #136",
+        "world": "World 2",
+        "area": "Area 185 - Hacker Powerplant",
+        "locationHint": "Behind the back left beam of the right tower.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-136",
+        "section": "World 2 - Tech World",
+        "sortOrder": 136,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #137",
+        "world": "World 2",
+        "area": "Area 186 - Hacker Compound",
+        "locationHint": "When you enter, inside the back right truss like structure.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-137",
+        "section": "World 2 - Tech World",
+        "sortOrder": 137,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #138",
+        "world": "World 2",
+        "area": "Area 188 - Hacker Error",
+        "locationHint": "When you enter, on top of things on wall to the right. Behind the 'Zone 188 Quest'.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-138",
+        "section": "World 2 - Tech World",
+        "sortOrder": 138,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #139",
+        "world": "World 2",
+        "area": "Area 189 - Glitch Forest",
+        "locationHint": "When you enter, behind the closest tree at the front on your left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-139",
+        "section": "World 2 - Tech World",
+        "sortOrder": 139,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #140",
+        "world": "World 2",
+        "area": "Area 192 - Glitch Town",
+        "locationHint": "When you enter, above the doorway on the far right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-140",
+        "section": "World 2 - Tech World",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #141",
+        "world": "World 2",
+        "area": "Area 193 - Glitch Quantum",
+        "locationHint": "When you enter, to the left is open area. Go to back of open area and look towards the entrance. You should see the shiny relic.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-141",
+        "section": "World 2 - Tech World",
+        "sortOrder": 141,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #142",
+        "world": "World 2",
+        "area": "Area 194 - Quantum Forest",
+        "locationHint": "When you enter, to the left is a field with trees. The shiny relic is floating in the centre.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-142",
+        "section": "World 2 - Tech World",
+        "sortOrder": 142,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #143",
+        "world": "World 2",
+        "area": "Area 195 - Quantum Space Base",
+        "locationHint": "When you enter, on the far left is a rocket ship half visible. Behind it is the shiny relic.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-143",
+        "section": "World 2 - Tech World",
+        "sortOrder": 143,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #144",
+        "world": "World 2",
+        "area": "Area 197 - Void Atomic",
+        "locationHint": "When you enter, on the far left is a shelter. Behind the electrical box to its left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-144",
+        "section": "World 2 - Tech World",
+        "sortOrder": 144,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #145",
+        "world": "World 2",
+        "area": "Area 198 - Void Fracture",
+        "locationHint": "When you enter, to your right is an open area. In the far right of that area, at the back is a white stone crystal. behind it is the shiny relic.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-145",
+        "section": "World 2 - Tech World",
+        "sortOrder": 145,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #146",
+        "world": "World 3",
+        "area": "Void Spawn",
+        "locationHint": "To the left of the Prison World cannon.",
+        "space": "Void Spawn",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-146",
+        "section": "World 3 - Void World",
+        "sortOrder": 146,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #147",
+        "world": "World 3",
+        "area": "Void Spawn",
+        "locationHint": "Behind the Super Computer, to the right.",
+        "space": "Void Spawn",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-147",
+        "section": "World 3 - Void World",
+        "sortOrder": 147,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #148",
+        "world": "World 3",
+        "area": "Area 200 - Prison Tower",
+        "locationHint": "Next to the building to the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-148",
+        "section": "World 3 - Void World",
+        "sortOrder": 148,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #149",
+        "world": "World 3",
+        "area": "Area 201 - Prison Block",
+        "locationHint": "To the left of Prisoner 001's cell. Behind the big beam on your left when you enter.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-149",
+        "section": "World 3 - Void World",
+        "sortOrder": 149,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #150",
+        "world": "World 3",
+        "area": "Area 203 - Prison Yard",
+        "locationHint": "Towards the next zone next to the pillar to the left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-150",
+        "section": "World 3 - Void World",
+        "sortOrder": 150,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #151",
+        "world": "World 3",
+        "area": "Area 203 - Prison Yard",
+        "locationHint": "When you enter, behind the basketball court on the right are 2 chairs. Behind the tree behind the right chair.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-151",
+        "section": "World 3 - Void World",
+        "sortOrder": 151,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #152",
+        "world": "World 3",
+        "area": "Area 205 - Beach Island",
+        "locationHint": "Next to the far left tree. (Obtainable after unlocking area 206).",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-152",
+        "section": "World 3 - Void World",
+        "sortOrder": 152,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #153",
+        "world": "World 3",
+        "area": "Area 206 - Ocean Island",
+        "locationHint": "Behind the purple coral left of the egg.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-153",
+        "section": "World 3 - Void World",
+        "sortOrder": 153,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #154",
+        "world": "World 3",
+        "area": "Area 207 - Tiki Island",
+        "locationHint": "Behind the house left of the egg.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-154",
+        "section": "World 3 - Void World",
+        "sortOrder": 154,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #155",
+        "world": "World 3",
+        "area": "Area 207 - Tiki Island",
+        "locationHint": "Under the cliff next to the 2 houses.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-155",
+        "section": "World 3 - Void World",
+        "sortOrder": 155,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #156",
+        "world": "World 3",
+        "area": "Area 209 - Volcano Island",
+        "locationHint": "On the stern of the boat.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-156",
+        "section": "World 3 - Void World",
+        "sortOrder": 156,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #157",
+        "world": "World 3",
+        "area": "Area 209 - Volcano Island",
+        "locationHint": "Under the boat near the back of the boat.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-157",
+        "section": "World 3 - Void World",
+        "sortOrder": 157,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #158",
+        "world": "World 3",
+        "area": "Area 210 - Hacker Matrix",
+        "locationHint": "Behind the pillar right of the hacker chest.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-158",
+        "section": "World 3 - Void World",
+        "sortOrder": 158,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #159",
+        "world": "World 3",
+        "area": "Area 212 - Hacker Cave",
+        "locationHint": "Hidden behind the wall next to the Free Potions machine.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-159",
+        "section": "World 3 - Void World",
+        "sortOrder": 159,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #160",
+        "world": "World 3",
+        "area": "Area 213 - Hacker Lab",
+        "locationHint": "Behind the pillar behind the egg.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-160",
+        "section": "World 3 - Void World",
+        "sortOrder": 160,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #161",
+        "world": "World 3",
+        "area": "Area 214 - Hacker Mainframe",
+        "locationHint": "Behind the pillar left of the egg.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-161",
+        "section": "World 3 - Void World",
+        "sortOrder": 161,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #162",
+        "world": "World 3",
+        "area": "Area 215 - Dirt Village",
+        "locationHint": "Behind the house on your right when you enter.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-162",
+        "section": "World 3 - Void World",
+        "sortOrder": 162,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #163",
+        "world": "World 3",
+        "area": "Area 216 - Stone Forts",
+        "locationHint": "Behind the rock on your left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-163",
+        "section": "World 3 - Void World",
+        "sortOrder": 163,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #164",
+        "world": "World 3",
+        "area": "Area 218 - Golden Netropolis",
+        "locationHint": "Next to the building on your right when you enter.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-164",
+        "section": "World 3 - Void World",
+        "sortOrder": 164,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #165",
+        "world": "World 3",
+        "area": "Area 219 - Diamond Mega City",
+        "locationHint": "Right side of the building.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-165",
+        "section": "World 3 - Void World",
+        "sortOrder": 165,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #166",
+        "world": "World 3",
+        "area": "Area 220 - Kawaii Tokyo",
+        "locationHint": "On the left, before exiting the area, on the window sill of the building.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-166",
+        "section": "World 3 - Void World",
+        "sortOrder": 166,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #167",
+        "world": "World 3",
+        "area": "Area 221 - Kawaii Village",
+        "locationHint": "Behind a rock next to the purple house.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-167",
+        "section": "World 3 - Void World",
+        "sortOrder": 167,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #168",
+        "world": "World 3",
+        "area": "Area 222 - Kawaii Grove",
+        "locationHint": "To the left, beside the pink tree, and against the cliff side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-168",
+        "section": "World 3 - Void World",
+        "sortOrder": 168,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #169",
+        "world": "World 3",
+        "area": "Area 223 - Kawaii Dreamland",
+        "locationHint": "Behind a white chocolate bar to the right of where you enter.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-169",
+        "section": "World 3 - Void World",
+        "sortOrder": 169,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #170",
+        "world": "World 3",
+        "area": "Area 226 - Rocky Ridge",
+        "locationHint": "Directly on the left as you enter, behind the biggest tree of the three.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-170",
+        "section": "World 3 - Void World",
+        "sortOrder": 170,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #171",
+        "world": "World 3",
+        "area": "Area 227 - Crystal Lake",
+        "locationHint": "On the right as you enter, in the opening of one of the pink corals.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-171",
+        "section": "World 3 - Void World",
+        "sortOrder": 171,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #172",
+        "world": "World 3",
+        "area": "Area 227 - Crystal Lake",
+        "locationHint": "On the left, before exiting the area, in the opening of one of the pink corals.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-172",
+        "section": "World 3 - Void World",
+        "sortOrder": 172,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #173",
+        "world": "World 3",
+        "area": "Area 229 - Elemental Realm",
+        "locationHint": "Left of Trainer Preston, past the edge of the building platform, in the lava.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-173",
+        "section": "World 3 - Void World",
+        "sortOrder": 173,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #174",
+        "world": "World 3",
+        "area": "Area 230 - Elysium Fields",
+        "locationHint": "To the left as you enter, behind the left of the building.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-174",
+        "section": "World 3 - Void World",
+        "sortOrder": 174,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #175",
+        "world": "World 3",
+        "area": "Area 231 - Ocean Paradise",
+        "locationHint": "To the farthest left, to the tall part of the other island, In between the yellow corals.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-175",
+        "section": "World 3 - Void World",
+        "sortOrder": 175,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #176",
+        "world": "World 3",
+        "area": "Area 233 - Nebula Forest",
+        "locationHint": "To the left as you enter, behind the big blue tall rocks.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-176",
+        "section": "World 3 - Void World",
+        "sortOrder": 176,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #177",
+        "world": "World 3",
+        "area": "Area 234 - Aether Colosseum",
+        "locationHint": "Behind the 5th pillar in the colosseum behind the big chest.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-177",
+        "section": "World 3 - Void World",
+        "sortOrder": 177,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #178",
+        "world": "World 3",
+        "area": "Area 235 - Doodle Meadow",
+        "locationHint": "To the right of the egg, behind the fence.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-178",
+        "section": "World 3 - Void World",
+        "sortOrder": 178,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #179",
+        "world": "World 3",
+        "area": "Area 236 - Doodle Safari",
+        "locationHint": "Directly to the left as you enter, behind the 3rd bush.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-179",
+        "section": "World 3 - Void World",
+        "sortOrder": 179,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #180",
+        "world": "World 3",
+        "area": "Area 239 - Doodle Oasis",
+        "locationHint": "To the left of the Doodle Jar Upgrade, behind the green bush on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-180",
+        "section": "World 3 - Void World",
+        "sortOrder": 180,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #181",
+        "world": "World 3",
+        "area": "Area 239 - Doodle Oasis",
+        "locationHint": "To the left of the Doodle Jar Upgrade, behind the \"Submit Your Drawings On X\" Sign. Behind the blue-yellow bush.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-181",
+        "section": "World 3 - Void World",
+        "sortOrder": 181,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #182",
+        "world": "World 4",
+        "area": "Area 240 - Fantasy Spawn",
+        "locationHint": "At the start of the area to the right next to the 2nd arch behind some rocks.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-182",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 182,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #183",
+        "world": "World 4",
+        "area": "Area 241 - Flora Falls",
+        "locationHint": "At the start of the area to the right in the waterfall on the rocks.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-183",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 183,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #184",
+        "world": "World 4",
+        "area": "Area 243 - Honeycomb Hollow",
+        "locationHint": "To the right midway through the area in the gap in the rock and then behind the honey above.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-184",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 184,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #185",
+        "world": "World 4",
+        "area": "Area 245 - Windmill Point",
+        "locationHint": "Near the end of the area to the left behind the windmill at the top.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-185",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 185,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #186",
+        "world": "World 4",
+        "area": "Area 248 - Rune Graveyard",
+        "locationHint": "At the start of the area to the left behind the stone arch at the top.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-186",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 186,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #187",
+        "world": "World 4",
+        "area": "Area 250 - Twilight Grove",
+        "locationHint": "Right when you enter, behind the second arch on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-187",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 187,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #188",
+        "world": "World 4",
+        "area": "Area 252 - Starroot Highlands",
+        "locationHint": "Right when you enter on the wall, on a star on the right side.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-188",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 188,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #189",
+        "world": "World 4",
+        "area": "Area 253 - Aether Archways",
+        "locationHint": "Right when you enter behind the first arch on the left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-189",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 189,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #190",
+        "world": "World 4",
+        "area": "Area 256 - Runestone Bluff",
+        "locationHint": "As you enter, behind the arch on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-190",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 190,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #191",
+        "world": "World 4",
+        "area": "Area 258 - Wyrmwatch Ridge",
+        "locationHint": "As you enter, inside the dragon mouth on the left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-191",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 191,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #192",
+        "world": "World 4",
+        "area": "Area 261 - Charred Canyon",
+        "locationHint": "In dragon's skull on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-192",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 192,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #193",
+        "world": "World 4",
+        "area": "Area 263 - Molten Nest",
+        "locationHint": "Behind free items, in lava.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-193",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 193,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #194",
+        "world": "World 4",
+        "area": "Area 264 - Obsidian Spire",
+        "locationHint": "Behind dragon's skull near the end.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-194",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 194,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #195",
+        "world": "World 4",
+        "area": "Area 266 - Glimmer Grottos",
+        "locationHint": "Behind first crystal on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-195",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 195,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #196",
+        "world": "World 4",
+        "area": "Area 268 - Scribes Terrace",
+        "locationHint": "Behind a tree on the left.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-196",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 196,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #197",
+        "world": "World 4",
+        "area": "Area 269 - Archivists Tower",
+        "locationHint": "Behind a tree in the corner.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-197",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 197,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #198",
+        "world": "World 4",
+        "area": "Area 270 - Mystmire Bloom",
+        "locationHint": "On the left behind a cliff.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-198",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 198,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #199",
+        "world": "World 4",
+        "area": "Area 272 - Faerie Hex Glade",
+        "locationHint": "Behind an arch on the right.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-199",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 199,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Relic #200",
+        "world": "World 4",
+        "area": "Area 273 - Bloomcourt Terrace",
+        "locationHint": "In the corner on the right of Bundles V.",
+        "space": "Main area",
+        "progressNote": "Counts toward the 5-relic shiny odds milestone."
+      },
+      "system": {
+        "slug": "shiny-relic-200",
+        "section": "World 4 - Fantasy World",
+        "sortOrder": 200,
+        "image": null
+      }
     }
   ]
 }

@@ -1,605 +1,597 @@
 {
   "meta": {
-    "title": "RIVALS emotes data",
-    "updatedAt": "2026-05-26",
-    "sources": [
-      {
-        "label": "Roblox RIVALS Wiki - Emotes",
-        "url": "https://robloxrivals.fandom.com/wiki/Emotes",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox RIVALS Wiki - Season Pass",
-        "url": "https://robloxrivals.fandom.com/wiki/Season_Pass",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox RIVALS Wiki - Shop",
-        "url": "https://robloxrivals.fandom.com/wiki/Shop",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox RIVALS Wiki - Updates",
-        "url": "https://robloxrivals.fandom.com/wiki/Updates",
-        "accessed": "2026-05-26"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "emotes",
+    "route": "/wiki/rivals/emotes",
+    "catalogCode": "rivals-emotes",
+    "itemFields": [
       "rarity",
       "sourceRoute",
       "sourceDetail",
       "keyPrice",
-      "availability",
-      "imageStatus",
-      "sourcePage",
-      "wikiUrl",
-      "sourceImageUrl",
-      "verificationNote"
-    ]
+      "availability"
+    ],
+    "columns": [
+      "rarity",
+      "sourceRoute",
+      "sourceDetail",
+      "keyPrice",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Shop emotes",
+        "Progression and bundle emotes",
+        "Special and milestone emotes",
+        "Limited-source emotes"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "sourceRoute",
+        "sourceDetail",
+        "keyPrice",
+        "availability"
+      ],
+      "tableFields": [
+        "rarity",
+        "sourceRoute",
+        "sourceDetail",
+        "keyPrice",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Agree",
-      "slug": "agree",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Common",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "50 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "clean source GIF identified; local download blocked",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/ab/Emoteagree.gif/revision/latest?cb=20260214203422",
-      "verificationNote": "Listed as a Common Daily Shop emote. Daily Shop Common price is 50 Keys."
+      "item": {
+        "name": "Agree",
+        "rarity": "Common",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "50 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "agree",
+        "section": "Shop emotes",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Coo Coo",
-      "slug": "coo-coo",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Common",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "50 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "clean source GIF identified; local download blocked",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/0a/Emotecoocoo.gif/revision/latest?cb=20260217015641",
-      "verificationNote": "Listed as a Common Daily Shop emote. Daily Shop Common price is 50 Keys."
+      "item": {
+        "name": "Coo Coo",
+        "rarity": "Common",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "50 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "coo-coo",
+        "section": "Shop emotes",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Denial",
-      "slug": "denial",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Common",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "50 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "source image link present but no clean local file",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Common Daily Shop emote. Daily Shop Common price is 50 Keys."
+      "item": {
+        "name": "Denial",
+        "rarity": "Common",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "50 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "denial",
+        "section": "Shop emotes",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Facepalm",
-      "slug": "facepalm",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Common",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "50 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "source image link present but no clean local file",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Common Daily Shop emote. Daily Shop Common price is 50 Keys."
+      "item": {
+        "name": "Facepalm",
+        "rarity": "Common",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "50 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "facepalm",
+        "section": "Shop emotes",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Kneel",
-      "slug": "kneel",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Common",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "50 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "source image link present but no clean local file",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Common Daily Shop emote. Daily Shop Common price is 50 Keys."
+      "item": {
+        "name": "Kneel",
+        "rarity": "Common",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "50 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "kneel",
+        "section": "Shop emotes",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Salty",
-      "slug": "salty",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Common",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "50 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "source image link present but no clean local file",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Common Daily Shop emote. Daily Shop Common price is 50 Keys."
+      "item": {
+        "name": "Salty",
+        "rarity": "Common",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "50 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "salty",
+        "section": "Shop emotes",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Shoulder Brush",
-      "slug": "shoulder-brush",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Common",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop free first claim",
-      "keyPrice": "Free first claim",
-      "availability": "Daily Shop until claimed",
-      "imageStatus": "source image link present but no clean local file",
-      "sourcePage": "Roblox RIVALS Wiki - Shop",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Shop",
-      "sourceImageUrl": null,
-      "verificationNote": "Emotes page lists Daily Shop. Shop page says Shoulder Brush is free and appears in every Daily Shop until claimed."
+      "item": {
+        "name": "Shoulder Brush",
+        "rarity": "Common",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop free first claim",
+        "keyPrice": "Free first claim",
+        "availability": "Daily Shop until claimed"
+      },
+      "system": {
+        "slug": "shoulder-brush",
+        "section": "Shop emotes",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Think",
-      "slug": "think",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Common",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "50 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "source image link present but no clean local file",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Common Daily Shop emote. Daily Shop Common price is 50 Keys."
+      "item": {
+        "name": "Think",
+        "rarity": "Common",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "50 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "think",
+        "section": "Shop emotes",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Cream Cheese Honey",
-      "slug": "cream-cheese-honey",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "75 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Rare Daily Shop emote. Daily Shop Rare price is 75 Keys."
+      "item": {
+        "name": "Cream Cheese Honey",
+        "rarity": "Rare",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "75 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "cream-cheese-honey",
+        "section": "Shop emotes",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Criss Cross",
-      "slug": "criss-cross",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "75 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Rare Daily Shop emote. Daily Shop Rare price is 75 Keys."
+      "item": {
+        "name": "Criss Cross",
+        "rarity": "Rare",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "75 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "criss-cross",
+        "section": "Shop emotes",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Off of You",
-      "slug": "off-of-you",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "75 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Rare Daily Shop emote. Daily Shop Rare price is 75 Keys."
+      "item": {
+        "name": "Off of You",
+        "rarity": "Rare",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "75 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "off-of-you",
+        "section": "Shop emotes",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Round & Round",
-      "slug": "round-and-round",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "75 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Rare Daily Shop emote. Daily Shop Rare price is 75 Keys."
+      "item": {
+        "name": "Round & Round",
+        "rarity": "Rare",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "75 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "round-and-round",
+        "section": "Shop emotes",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Side To Side",
-      "slug": "side-to-side",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "75 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Rare Daily Shop emote. Daily Shop Rare price is 75 Keys."
+      "item": {
+        "name": "Side To Side",
+        "rarity": "Rare",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "75 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "side-to-side",
+        "section": "Shop emotes",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Smile",
-      "slug": "smile",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "75 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Rare Daily Shop emote. Daily Shop Rare price is 75 Keys."
+      "item": {
+        "name": "Smile",
+        "rarity": "Rare",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "75 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "smile",
+        "section": "Shop emotes",
+        "sortOrder": 14,
+        "image": null
+      }
     },
     {
-      "name": "Superhero",
-      "slug": "superhero",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "75 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Rare Daily Shop emote. Daily Shop Rare price is 75 Keys."
+      "item": {
+        "name": "Superhero",
+        "rarity": "Rare",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "75 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "superhero",
+        "section": "Shop emotes",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "Vegetable",
-      "slug": "vegetable",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "75 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Rare Daily Shop emote. Daily Shop Rare price is 75 Keys."
+      "item": {
+        "name": "Vegetable",
+        "rarity": "Rare",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "75 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "vegetable",
+        "section": "Shop emotes",
+        "sortOrder": 16,
+        "image": null
+      }
     },
     {
-      "name": "Selfie",
-      "slug": "selfie",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "100 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "clean source GIF identified; local download blocked",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/6/63/Emoteselfie.gif/revision/latest?cb=20260214220600",
-      "verificationNote": "Listed as a Legendary Daily Shop emote. Daily Shop Legendary price is 100 Keys."
+      "item": {
+        "name": "Selfie",
+        "rarity": "Legendary",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "100 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "selfie",
+        "section": "Shop emotes",
+        "sortOrder": 17,
+        "image": null
+      }
     },
     {
-      "name": "Take The L",
-      "slug": "take-the-l",
-      "image": null,
-      "collectionSection": "Shop emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Shop",
-      "sourceDetail": "Daily Shop",
-      "keyPrice": "100 Keys",
-      "availability": "Daily Shop rotation",
-      "imageStatus": "clean source GIF identified; local download blocked",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/aa/Emotetakethel.gif/revision/latest?cb=20260214220723",
-      "verificationNote": "Listed as a Legendary Daily Shop emote. Daily Shop Legendary price is 100 Keys."
+      "item": {
+        "name": "Take The L",
+        "rarity": "Legendary",
+        "sourceRoute": "Shop",
+        "sourceDetail": "Daily Shop",
+        "keyPrice": "100 Keys",
+        "availability": "Daily Shop rotation"
+      },
+      "system": {
+        "slug": "take-the-l",
+        "section": "Shop emotes",
+        "sortOrder": 18,
+        "image": null
+      }
     },
     {
-      "name": "AAAND.. CUT!",
-      "slug": "aaand-cut",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Common",
-      "sourceRoute": "Progression",
-      "sourceDetail": "Season 3 Standard Pass",
-      "keyPrice": null,
-      "availability": "Season 3 pass reward; verify pass availability",
-      "imageStatus": "source placeholder rejected",
-      "sourcePage": "Roblox RIVALS Wiki - Season Pass",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Season_Pass",
-      "sourceImageUrl": null,
-      "verificationNote": "Emotes page lists Season Pass 3. Season Pass totals list AAAND.. CUT! as a Season 3 Standard emote."
+      "item": {
+        "name": "AAAND.. CUT!",
+        "rarity": "Common",
+        "sourceRoute": "Progression",
+        "sourceDetail": "Season 3 Standard Pass",
+        "availability": "Season 3 pass reward; verify pass availability"
+      },
+      "system": {
+        "slug": "aaand-cut",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 19,
+        "image": null
+      }
     },
     {
-      "name": "Warpmaker",
-      "slug": "warpmaker",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Progression",
-      "sourceDetail": "Season 1 Standard Pass",
-      "keyPrice": null,
-      "availability": "Season 1 pass reward",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Season Pass",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Season_Pass",
-      "sourceImageUrl": null,
-      "verificationNote": "Emotes page and Season Pass totals list Warpmaker as a Season 1 Standard emote."
+      "item": {
+        "name": "Warpmaker",
+        "rarity": "Rare",
+        "sourceRoute": "Progression",
+        "sourceDetail": "Season 1 Standard Pass",
+        "availability": "Season 1 pass reward"
+      },
+      "system": {
+        "slug": "warpmaker",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "Shivering",
-      "slug": "shivering",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Rare",
-      "sourceRoute": "Progression",
-      "sourceDetail": "Season 2 Standard Pass",
-      "keyPrice": null,
-      "availability": "Season 2 pass reward",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Season Pass",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Season_Pass",
-      "sourceImageUrl": null,
-      "verificationNote": "Emotes page and Season Pass totals list Shivering as a Season 2 Standard emote."
+      "item": {
+        "name": "Shivering",
+        "rarity": "Rare",
+        "sourceRoute": "Progression",
+        "sourceDetail": "Season 2 Standard Pass",
+        "availability": "Season 2 pass reward"
+      },
+      "system": {
+        "slug": "shivering",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 21,
+        "image": null
+      }
     },
     {
-      "name": "Tiptoe",
-      "slug": "tiptoe",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Not listed",
-      "sourceRoute": "Progression",
-      "sourceDetail": "Season 3 Prime Pass",
-      "keyPrice": null,
-      "availability": "Season 3 Prime pass reward; verify pass availability",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Season Pass",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Season_Pass",
-      "sourceImageUrl": null,
-      "verificationNote": "Season Pass totals list Tiptoe as a Season 3 Prime emote. It is not present on the Emotes page table yet, so rarity is not listed."
+      "item": {
+        "name": "Tiptoe",
+        "rarity": "Not listed",
+        "sourceRoute": "Progression",
+        "sourceDetail": "Season 3 Prime Pass",
+        "availability": "Season 3 Prime pass reward; verify pass availability"
+      },
+      "system": {
+        "slug": "tiptoe",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 22,
+        "image": null
+      }
     },
     {
-      "name": "Busting A Move",
-      "slug": "busting-a-move",
-      "image": null,
-      "collectionSection": "Special and milestone emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Milestone",
-      "sourceDetail": "20 UGC purchases",
-      "keyPrice": null,
-      "availability": "UGC purchase milestone",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as a Legendary emote obtained by buying 20 UGCs."
+      "item": {
+        "name": "Busting A Move",
+        "rarity": "Legendary",
+        "sourceRoute": "Milestone",
+        "sourceDetail": "20 UGC purchases",
+        "availability": "UGC purchase milestone"
+      },
+      "system": {
+        "slug": "busting-a-move",
+        "section": "Special and milestone emotes",
+        "sortOrder": 23,
+        "image": null
+      }
     },
     {
-      "name": "Coin Block",
-      "slug": "coin-block",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Bundle",
-      "sourceDetail": "Pixel Bundle",
-      "keyPrice": null,
-      "availability": "Bundle source; verify shop availability",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Shop",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Shop",
-      "sourceImageUrl": null,
-      "verificationNote": "Emotes page and Shop page list Coin Block as included in the Pixel Bundle."
+      "item": {
+        "name": "Coin Block",
+        "rarity": "Legendary",
+        "sourceRoute": "Bundle",
+        "sourceDetail": "Pixel Bundle",
+        "availability": "Bundle source; verify shop availability"
+      },
+      "system": {
+        "slug": "coin-block",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 24,
+        "image": null
+      }
     },
     {
-      "name": "Flex",
-      "slug": "flex",
-      "image": null,
-      "collectionSection": "Special and milestone emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Special",
-      "sourceDetail": "Ranked Shop",
-      "keyPrice": null,
-      "availability": "Ranked Shop source; verify stock/status",
-      "imageStatus": "clean source GIF identified; local download blocked",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2f/Emoteflex.gif/revision/latest?cb=20260214220841",
-      "verificationNote": "Listed as a Legendary Ranked Shop emote."
+      "item": {
+        "name": "Flex",
+        "rarity": "Legendary",
+        "sourceRoute": "Special",
+        "sourceDetail": "Ranked Shop",
+        "availability": "Ranked Shop source; verify stock/status"
+      },
+      "system": {
+        "slug": "flex",
+        "section": "Special and milestone emotes",
+        "sortOrder": 25,
+        "image": null
+      }
     },
     {
-      "name": "Illumina Storm",
-      "slug": "illumina-storm",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Bundle",
-      "sourceDetail": "Nostalgia Bundle",
-      "keyPrice": null,
-      "availability": "Bundle source; verify shop availability",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Shop",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Shop",
-      "sourceImageUrl": null,
-      "verificationNote": "Emotes page and Shop page list Illumina Storm as included in the Nostalgia Bundle."
+      "item": {
+        "name": "Illumina Storm",
+        "rarity": "Legendary",
+        "sourceRoute": "Bundle",
+        "sourceDetail": "Nostalgia Bundle",
+        "availability": "Bundle source; verify shop availability"
+      },
+      "system": {
+        "slug": "illumina-storm",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 26,
+        "image": null
+      }
     },
     {
-      "name": "It's Time",
-      "slug": "its-time",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Bundle",
-      "sourceDetail": "Season 2 Contraband Bundle",
-      "keyPrice": null,
-      "availability": "Bundle source; verify availability",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as included in the Season 2 Contraband Bundle."
+      "item": {
+        "name": "It's Time",
+        "rarity": "Legendary",
+        "sourceRoute": "Bundle",
+        "sourceDetail": "Season 2 Contraband Bundle",
+        "availability": "Bundle source; verify availability"
+      },
+      "system": {
+        "slug": "its-time",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 27,
+        "image": null
+      }
     },
     {
-      "name": "New Year Sparklers",
-      "slug": "new-year-sparklers",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Progression",
-      "sourceDetail": "Season 2 Prime Pass",
-      "keyPrice": null,
-      "availability": "Season 2 pass reward",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Season Pass",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Season_Pass",
-      "sourceImageUrl": null,
-      "verificationNote": "Emotes page and Season Pass totals list New Year Sparklers as a Season 2 Prime emote."
+      "item": {
+        "name": "New Year Sparklers",
+        "rarity": "Legendary",
+        "sourceRoute": "Progression",
+        "sourceDetail": "Season 2 Prime Pass",
+        "availability": "Season 2 pass reward"
+      },
+      "system": {
+        "slug": "new-year-sparklers",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 28,
+        "image": null
+      }
     },
     {
-      "name": "Portal Glitch",
-      "slug": "portal-glitch",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Bundle",
-      "sourceDetail": "Season 1 Bundle",
-      "keyPrice": null,
-      "availability": "Bundle source; verify availability",
-      "imageStatus": "clean source GIF identified; local download blocked",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/bd/Emoteportalglitch.gif/revision/latest?cb=20260214221247",
-      "verificationNote": "Listed as a Legendary emote included in the Season 1 Bundle."
+      "item": {
+        "name": "Portal Glitch",
+        "rarity": "Legendary",
+        "sourceRoute": "Bundle",
+        "sourceDetail": "Season 1 Bundle",
+        "availability": "Bundle source; verify availability"
+      },
+      "system": {
+        "slug": "portal-glitch",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 29,
+        "image": null
+      }
     },
     {
-      "name": "ROFL",
-      "slug": "rofl",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Progression",
-      "sourceDetail": "Season 1 Prime Pass",
-      "keyPrice": null,
-      "availability": "Season 1 pass reward",
-      "imageStatus": "clean source GIF identified; local download blocked",
-      "sourcePage": "Roblox RIVALS Wiki - Season Pass",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Season_Pass",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/a5/Emoterofl.gif/revision/latest?cb=20260214220929",
-      "verificationNote": "Emotes page and Season Pass totals list ROFL as a Season 1 Prime emote."
+      "item": {
+        "name": "ROFL",
+        "rarity": "Legendary",
+        "sourceRoute": "Progression",
+        "sourceDetail": "Season 1 Prime Pass",
+        "availability": "Season 1 pass reward"
+      },
+      "system": {
+        "slug": "rofl",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "Sleigh Ride",
-      "slug": "sleigh-ride",
-      "image": null,
-      "collectionSection": "Limited-source emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Limited source",
-      "sourceDetail": "2025 Festive Event Shop",
-      "keyPrice": null,
-      "availability": "Limited event shop source",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as purchased from the Shop during the 2025 Festive Event."
+      "item": {
+        "name": "Sleigh Ride",
+        "rarity": "Legendary",
+        "sourceRoute": "Limited source",
+        "sourceDetail": "2025 Festive Event Shop",
+        "availability": "Limited event shop source"
+      },
+      "system": {
+        "slug": "sleigh-ride",
+        "section": "Limited-source emotes",
+        "sortOrder": 31,
+        "image": null
+      }
     },
     {
-      "name": "Step Dancing",
-      "slug": "step-dancing",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Bundle",
-      "sourceDetail": "Lucky Bundle",
-      "keyPrice": null,
-      "availability": "Bundle source; verify availability",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as included in the Lucky Bundle."
+      "item": {
+        "name": "Step Dancing",
+        "rarity": "Legendary",
+        "sourceRoute": "Bundle",
+        "sourceDetail": "Lucky Bundle",
+        "availability": "Bundle source; verify availability"
+      },
+      "system": {
+        "slug": "step-dancing",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 32,
+        "image": null
+      }
     },
     {
-      "name": "Tango",
-      "slug": "tango",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Bundle",
-      "sourceDetail": "Lovely Bundle",
-      "keyPrice": null,
-      "availability": "Bundle source; verify availability",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": null,
-      "verificationNote": "Listed as included in the Lovely Bundle."
+      "item": {
+        "name": "Tango",
+        "rarity": "Legendary",
+        "sourceRoute": "Bundle",
+        "sourceDetail": "Lovely Bundle",
+        "availability": "Bundle source; verify availability"
+      },
+      "system": {
+        "slug": "tango",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 33,
+        "image": null
+      }
     },
     {
-      "name": "Whimsical",
-      "slug": "whimsical",
-      "image": null,
-      "collectionSection": "Progression and bundle emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Bundle",
-      "sourceDetail": "Balloon Bundle",
-      "keyPrice": null,
-      "availability": "Bundle source; verify shop availability",
-      "imageStatus": "missing clean source image",
-      "sourcePage": "Roblox RIVALS Wiki - Shop",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Shop",
-      "sourceImageUrl": null,
-      "verificationNote": "Emotes page and Shop page list Whimsical as included in the Balloon Bundle."
+      "item": {
+        "name": "Whimsical",
+        "rarity": "Legendary",
+        "sourceRoute": "Bundle",
+        "sourceDetail": "Balloon Bundle",
+        "availability": "Bundle source; verify shop availability"
+      },
+      "system": {
+        "slug": "whimsical",
+        "section": "Progression and bundle emotes",
+        "sortOrder": 34,
+        "image": null
+      }
     },
     {
-      "name": "Witch Waltz",
-      "slug": "witch-waltz",
-      "image": null,
-      "collectionSection": "Limited-source emotes",
-      "rarity": "Legendary",
-      "sourceRoute": "Limited source",
-      "sourceDetail": "2025 Spooky Event Shop",
-      "keyPrice": null,
-      "availability": "Limited event shop source",
-      "imageStatus": "clean source GIF identified; local download blocked",
-      "sourcePage": "Roblox RIVALS Wiki - Emotes",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Emotes",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/70/Emotewitchwaltz.gif/revision/latest?cb=20260523151052",
-      "verificationNote": "Listed as purchased from the Shop during the 2025 Spooky Event."
+      "item": {
+        "name": "Witch Waltz",
+        "rarity": "Legendary",
+        "sourceRoute": "Limited source",
+        "sourceDetail": "2025 Spooky Event Shop",
+        "availability": "Limited event shop source"
+      },
+      "system": {
+        "slug": "witch-waltz",
+        "section": "Limited-source emotes",
+        "sortOrder": 35,
+        "image": null
+      }
     }
   ]
 }

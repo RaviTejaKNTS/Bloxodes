@@ -1,995 +1,870 @@
 {
   "meta": {
-    "title": "Grow a Garden pet mutations data",
-    "updatedAt": "2026-04-22",
-    "sources": [
-      {
-        "label": "Grow a Garden Wiki - Pet Mutations",
-        "url": "https://growagarden.fandom.com/wiki/Pet_Mutations",
-        "accessed": "2026-04-22"
-      }
-    ],
-    "columns": [
-      "name",
-      "appearance",
+    "schemaVersion": 2,
+    "game": "Grow a Garden",
+    "gameSlug": "grow-a-garden",
+    "collection": "pet-mutations",
+    "route": "/wiki/grow-a-garden/pet-mutations",
+    "catalogCode": "grow-a-garden-pet-mutations",
+    "itemFields": [
       "passive",
       "type",
       "amount",
       "chance",
       "petSellMultiplier",
-      "obtainable",
-      "image"
-    ]
+      "obtainable"
+    ],
+    "columns": [
+      "passive",
+      "type",
+      "amount",
+      "chance",
+      "petSellMultiplier",
+      "obtainable"
+    ],
+    "display": {
+      "groupLabel": "type",
+      "sectionOrder": [
+        "Pet XP Boost",
+        "Applies Mutation",
+        "Passive Boost",
+        "Size Modification",
+        "Stealing Preventer",
+        "Plant Growth Boost",
+        "Applies mutation",
+        "Duplicates Ability",
+        "Pet XP Boost, Applies Mutation",
+        "Passive Boost, Size Modification",
+        "Follows Player",
+        "Size Modification, Pet XP Boost",
+        "Cooldown Reduction",
+        "Pet Level",
+        "Pet XP",
+        "Egg Hatch Time",
+        "Passive Boost, Pet XP"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "passive",
+        "type",
+        "amount",
+        "chance",
+        "petSellMultiplier",
+        "obtainable"
+      ],
+      "tableFields": [
+        "passive",
+        "type",
+        "amount",
+        "chance",
+        "petSellMultiplier",
+        "obtainable"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Shiny",
-      "appearance": null,
-      "passive": "Adds an extra 15% boost to the pet's XP per second!",
-      "type": "Pet XP Boost",
-      "amount": "30%",
-      "chance": "32.15%",
-      "petSellMultiplier": "x10",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/shiny.png"
-    },
-    {
-      "name": "Inverted",
-      "appearance": null,
-      "passive": "Adds an extra 30% boost to the pet's XP per second!",
-      "type": "Pet XP Boost",
-      "amount": "50%",
-      "chance": "16.08%",
-      "petSellMultiplier": "x10",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/inverted.png"
-    },
-    {
-      "name": "Frozen",
-      "appearance": null,
-      "passive": "Once every 5:00-0:30m, 20-30% chance for a nearby fruit to become Frozen!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "9.65%",
-      "petSellMultiplier": "x10",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/frozen.png"
-    },
-    {
-      "name": "Windy",
-      "appearance": null,
-      "passive": "Once every 5:00-0:30m, 20-30% chance for a nearby fruit to become Windstruck!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "9.65%",
-      "petSellMultiplier": "x2",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/windy.png"
-    },
-    {
-      "name": "Golden",
-      "appearance": null,
-      "passive": "Gives a major boost to the pet's passive!",
-      "type": "Passive Boost",
-      "amount": "10%",
-      "chance": "6.43%",
-      "petSellMultiplier": "x100",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/golden.png"
-    },
-    {
-      "name": "Mega",
-      "appearance": null,
-      "passive": "Pet is gigantic! Has 20% faster hunger rate. Gains an additional 10-40 xp per second!",
-      "type": "Size Modification",
-      "amount": "200%",
-      "chance": "6.43%",
-      "petSellMultiplier": "x1",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/mega.png"
-    },
-    {
-      "name": "Tiny",
-      "appearance": null,
-      "passive": "Pet is very tiny! Has 20% slower hunger rate. Gains an additional 5-30 xp per second!",
-      "type": "Size Modification",
-      "amount": "-90%",
-      "chance": "6.43%",
-      "petSellMultiplier": "x1",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/tiny.png"
-    },
-    {
-      "name": "IronSkin",
-      "appearance": null,
-      "passive": "When another player steals fruit from you, grants a 35-45% chance you get the stolen fruit as well!",
-      "type": "Stealing Preventer",
-      "amount": "None",
-      "chance": "3.22%",
-      "petSellMultiplier": "x100",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/ironskin.png"
-    },
-    {
-      "name": "Radiant",
-      "appearance": null,
-      "passive": "Once every 30:00-20:00m, emits sunshine at a random nearby plant and advances their growth by 24 hours!",
-      "type": "Plant Growth Boost",
-      "amount": "None",
-      "chance": "3.22%",
-      "petSellMultiplier": "x100",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/radiant.png"
-    },
-    {
-      "name": "Rainbow",
-      "appearance": null,
-      "passive": "Gives a massive increase to the pet's passive!",
-      "type": "Passive Boost",
-      "amount": "20%",
-      "chance": "3.22%",
-      "petSellMultiplier": "x100",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/rainbow.png"
-    },
-    {
-      "name": "Shocked",
-      "appearance": null,
-      "passive": "During a Thunderstorm: Once every 60-45s, has a 25-30% chance to attract lightning, shocking nearby fruits!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "3.22%",
-      "petSellMultiplier": "x100",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/shocked.png"
-    },
-    {
-      "name": "Ascended",
-      "appearance": null,
-      "passive": "Once every 360:21-300:00m (6-5 hours), a nearby fruit ascends to a higher realm, with a 75-90% chance to trigger the Dawnbound mutation!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "0.32%",
-      "petSellMultiplier": "x100",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/ascended.png"
-    },
-    {
-      "name": "Tranquil",
-      "appearance": null,
-      "passive": "Once every 25:00-16:40m, a nearby fruit finds inner peace, with a 20-30% chance to trigger the Tranquil mutation!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "3.02%",
-      "petSellMultiplier": "x100",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/tranquil.png"
-    },
-    {
-      "name": "Corrupted",
-      "appearance": null,
-      "passive": "Once every 25:00-16:40m, a nearby fruit embraces the corruption, with a 20-30% chance to trigger the Corrupted mutation!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "3.02%",
-      "petSellMultiplier": "x100",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/corrupted.png"
-    },
-    {
-      "name": "Fried",
-      "appearance": null,
-      "passive": "Once every 16:40-8:20m, a nearby fruit is sizzled up, with a 40-60% chance to trigger the Fried mutation!",
-      "type": "Applies mutation",
-      "amount": "None",
-      "chance": "N/A",
-      "petSellMultiplier": "x15",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/fried.png"
-    },
-    {
-      "name": "Aromatic",
-      "appearance": null,
-      "passive": "Once every 25:00-16:40m, a nearby fruit is infused with a pungent aroma, with a 20-30% chance to trigger the Aromatic mutation!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "N/A",
-      "petSellMultiplier": "x100",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/aromatic.png"
-    },
-    {
-      "name": "GiantBean",
-      "appearance": null,
-      "passive": "Pet is a GIANT BEAN! Has 15% faster hunger rate. Gains an additional 0.1-0.5xp/s for each Beanstalk planted in your garden!",
-      "type": "Size Modification",
-      "amount": "150%",
-      "chance": "Crafted during Beanstalk event using 3 beanstalks and 1 cleansing pet shard",
-      "petSellMultiplier": "x1",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/giantbean.png"
-    },
-    {
-      "name": "Silver",
-      "appearance": null,
-      "passive": "Gives a small increase to the pet's passive!",
-      "type": "Passive Boost",
-      "amount": "5%",
-      "chance": "Achievements",
-      "petSellMultiplier": "x10",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/silver.png"
-    },
-    {
-      "name": "Glimmering",
-      "appearance": null,
-      "passive": "Once every 25:00-13:20m, a nearby fruit is sprinkled with fairy dust, with a 20-30% chance to trigger the Glimmering mutation!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "1.72% on tier 3 of fountain rewards 3.03% on tier 4 of fountain rewards 5.88% on tier 5 of fountain rewards",
-      "petSellMultiplier": "x1",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/glimmering.png"
-    },
-    {
-      "name": "Luminous",
-      "appearance": null,
-      "passive": "Once every 33:20-16:40m, a nearby fruit is imbued with fairy power, with a 20-30% chance to trigger the Luminous mutation!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "Guaranteed reward in the form of a Mutation Shard from the Fairy Event's mini achievements section. Obtained upon completion.",
-      "petSellMultiplier": "x1",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/luminous.png"
-    },
-    {
-      "name": "Nutty",
-      "appearance": null,
-      "passive": "Once every 20:00-2:00 minutes, the pet's next ability use has a 20-40% chance to activate twice. Otherwise, this pet loses a level.",
-      "type": "Duplicates Ability",
-      "amount": "None",
-      "chance": "0.24% chance from collecting acorns from Chubby Chipmunk.",
-      "petSellMultiplier": "x1",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/nutty.png"
-    },
-    {
-      "name": "Dreadbound",
-      "appearance": null,
-      "passive": "Gains an additional 6.5-30 xp per second!",
-      "type": "Pet XP Boost",
-      "amount": "6.5-30 XP",
-      "chance": "Chance to be applied by the Headless Horseman.",
-      "petSellMultiplier": "x1",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/dreadbound.png"
-    },
-    {
-      "name": "Soulflame",
-      "appearance": null,
-      "passive": "Adds an extra 60% boost to the pet's xp per second. Once every 15:12-5:00m, a nearby fruit has a 20-30% chance to get mutated with Burnt - lower chance for Flaming!",
-      "type": "Pet XP Boost, Applies Mutation",
-      "amount": "60%",
-      "chance": "Chance to be applied by the Headless Horseman.",
-      "petSellMultiplier": "x1",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/soulflame.png"
-    },
-    {
-      "name": "Spectral",
-      "appearance": null,
-      "passive": "Gives a small increase to the pet's passive!",
-      "type": "Passive Boost",
-      "amount": "8%",
-      "chance": "Chance to be applied by the Headless Horseman.",
-      "petSellMultiplier": "x1",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/spectral.png"
-    },
-    {
-      "name": "Nightmare",
-      "appearance": null,
-      "passive": "Gives a bigger increase to the pet's passive and is slightly bigger!",
-      "type": "Passive Boost, Size Modification",
-      "amount": "22%, 125%",
-      "chance": "Rare chance to be applied by the Headless Horseman.",
-      "petSellMultiplier": "x1",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/nightmare.png"
-    },
-    {
-      "name": "Tethered",
-      "appearance": null,
-      "passive": "Constantly wanders around the player!",
-      "type": "Follows Player",
-      "amount": "None",
-      "chance": "Toffee Tether",
-      "petSellMultiplier": "x1",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/tethered.png"
-    },
-    {
-      "name": "Aurora",
-      "appearance": null,
-      "passive": "Once every 42:05-16:40m, 3-50% chance for a nearby fruit to become Aurora!",
-      "type": "Applies mutation",
-      "amount": "None",
-      "chance": "3.22%",
-      "petSellMultiplier": "x10",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/aurora.png"
-    },
-    {
-      "name": "Jumbo",
-      "appearance": null,
-      "passive": "Pet is Jumbo and gains +50% XP BOOST! All nearby plants within 14.75-35 studs will have an increased 0.004-0.01x size bonus for every Safari-type plant planted in your garden! (max 300)",
-      "type": "Size Modification, Pet XP Boost",
-      "amount": "180%, 50%",
-      "chance": "Safari Shop",
-      "petSellMultiplier": "x10",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/jumbo.png"
-    },
-    {
-      "name": "Oxpecker",
-      "appearance": null,
-      "passive": "When Safari type pets finish their abilities, they start their cooldown with 7.5-3.5 seconds less! Gains tiny increase to passives!",
-      "type": "Passive Boost",
-      "amount": "1%",
-      "chance": "2.44% chance from giving a pet to Safari Joe",
-      "petSellMultiplier": "x1",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/oxpecker.png"
-    },
-    {
-      "name": "Giraffe",
-      "appearance": null,
-      "passive": "Once every 25:54-9:43m, eats fruit that are atleast 10 studs high for 0.36-0.75x sell value. The plant the fruit came from advances growth by 30:00-16:37m! Also applies Arid mutation to all other fruits on that plant. Gains small increase to passives!",
-      "type": "Passive Boost",
-      "amount": "3%",
-      "chance": "2.04% chance from giving a pet to Safari Joe",
-      "petSellMultiplier": "x5",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/giraffe.png"
-    },
-    {
-      "name": "Rhino",
-      "appearance": null,
-      "passive": "Once every 25:54-12:57m, charges into a random egg or random fruit in your garden: Rammed eggs have hatch time halved, rammed fruits get Mirage mutation! Cannot be mimicked or refreshed. Gains medium increase to passives!",
-      "type": "Passive Boost",
-      "amount": "4.5%",
-      "chance": "0.75-4.12% chance from giving a pet to Safari Joe",
-      "petSellMultiplier": "x10",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/rhino.png"
-    },
-    {
-      "name": "Crocodile",
-      "appearance": null,
-      "passive": "Once every 35:00-17:30m, bites on to a random Plant or Pet for 7.5-12.5s and performs a roll. Plants grow an additional 22.5-11.25s/s and Pets get additional 16.25-8.75 XP/s. Gains sizable increase to passives!",
-      "type": "Passive Boost",
-      "amount": "6%",
-      "chance": "0.76-2.06% chance from giving a pet to Safari Joe",
-      "petSellMultiplier": "x15",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/crocodile.png"
-    },
-    {
-      "name": "Lion",
-      "appearance": null,
-      "passive": "Once every 23:20-5:50m, roars and calls all pets in your garden to move toward it. 100-200 total cooldown advancement is shared across each pet (max 30-15 seconds per pet). Gains big increase to passives!",
-      "type": "Passive Boost",
-      "amount": "7%",
-      "chance": "0.55-1.03% chance from giving a pet to Safari Joe",
-      "petSellMultiplier": "x20",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/lion.png"
-    },
-    {
-      "name": "Forger",
-      "appearance": null,
-      "passive": "Once every 13:20-6:40m goes to an active crafting table and advances its crafting time by 40-80s!",
-      "type": "Passive Boost",
-      "amount": "7%",
-      "chance": "Can be crafted as a Pet Mutation Shard in the smithing event, the materials required are: Gem Egg Legendary Coal Cleansing Pet Shard 4,500,000",
-      "petSellMultiplier": "x10",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/forger.png"
-    },
-    {
-      "name": "Nocturnal",
-      "appearance": null,
-      "passive": "Once every 23:34-11:40m, a random fruit gets advanced by 12h! Cooldown ticks down twice as fast during the night!",
-      "type": "Plant Growth Boost",
-      "amount": "None",
-      "chance": "0.5% Chance from the Christmas Present",
-      "petSellMultiplier": "x15",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/nocturnal.png"
-    },
-    {
-      "name": "Peppermint",
-      "appearance": null,
-      "passive": "Once every 16:06-8:20m, sacrifices 12 random Christmas-type fruit in your garden to instantly activate this pet's ability!",
-      "type": "Cooldown Reduction",
-      "amount": "None",
-      "chance": "10% chance from Peppermint Vine when hatching a pet in the plant's radius",
-      "petSellMultiplier": "x25",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/peppermint.png"
-    },
-    {
-      "name": "Spirit Sparkle",
-      "appearance": null,
-      "passive": "Once every 25:00-20:00m, your pet either ages up once, or ages down once.",
-      "type": "Pet Level",
-      "amount": "None",
-      "chance": "10% chance from Spirit Sparkle when hatching a pet in the plant's radius",
-      "petSellMultiplier": "x25",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/spirit-sparkle.png"
-    },
-    {
-      "name": "Christmas Rally",
-      "appearance": null,
-      "passive": "All Christmas-themed pets gain an additional 3.5-7.5XP per second!",
-      "type": "Pet XP",
-      "amount": "4.01xp",
-      "chance": "From the Ice Golem pet!",
-      "petSellMultiplier": "x10",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/christmas-rally.png"
-    },
-    {
-      "name": "Jolly Decorator",
-      "appearance": null,
-      "passive": "Once every 8:25-4:10m, applies Ornamented mutation to a random fruit!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "From the Ice Golem pet!",
-      "petSellMultiplier": "x50",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/jolly-decorator.png"
-    },
-    {
-      "name": "Merry Nursery",
-      "appearance": null,
-      "passive": "Once every 30:00-5:00m, goes to the unhatched egg with the highest hatch time and reduces it by 25-60s with a bonus 1-2s for every Christmas-type plant in your garden!",
-      "type": "Egg Hatch Time",
-      "amount": "None",
-      "chance": "From the Ice Golem pet!",
-      "petSellMultiplier": "x20",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/merry-nursery.png"
-    },
-    {
-      "name": "GiantGolem",
-      "appearance": null,
-      "passive": "Pet is a giant golem! Has a big increase to passive, slightly bigger & gains bonus 0.015XP/s for every Christmas-type plant in your garden!",
-      "type": "Passive Boost, Size Modification",
-      "amount": "20%, 150%",
-      "chance": "Rare chance from the Ice Golem pet!",
-      "petSellMultiplier": "x100",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/giantgolem.png"
-    },
-    {
-      "name": "HyperHunger",
-      "appearance": null,
-      "passive": "BIG boost to passive but hunger drains SUPER DUPER FAST! Boost is disabled when hunger is less than 25%.",
-      "type": "Passive Boost",
-      "amount": "30%",
-      "chance": "Santa's Stash",
-      "petSellMultiplier": "x100",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/hyperhunger.png"
-    },
-    {
-      "name": "Venom",
-      "appearance": null,
-      "passive": "BIG boost to passive but drains 0.02 xp per second!",
-      "type": "Passive Boost",
-      "amount": "30%",
-      "chance": "5 ~ 10% chance from the Giant Scorpion pet!",
-      "petSellMultiplier": "x100",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/venom.png"
-    },
-    {
-      "name": "Fiery",
-      "appearance": null,
-      "passive": "Once every 10:00-5:00m, consumes a random fruit to mutate fruits around it with the Fiery mutation!",
-      "type": "Applies Mutation",
-      "amount": "None",
-      "chance": "TBA",
-      "petSellMultiplier": "x100",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/fiery.png"
-    },
-    {
-      "name": "UFO",
-      "appearance": null,
-      "passive": "Gives a big boost to the pet's passive!",
-      "type": "Passive Boost",
-      "amount": "30%",
-      "chance": "N/A",
-      "petSellMultiplier": "x100",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/ufo.png"
-    },
-    {
-      "name": "Alienated",
-      "appearance": null,
-      "passive": "Grants small increase to passive, but drains ~0.07% XP/s!",
-      "type": "Passive Boost",
-      "amount": "30%",
-      "chance": "A chance to obtain from the Alien Chaos Weather!",
-      "petSellMultiplier": "x1",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/alienated.png"
-    },
-    {
-      "name": "Blossoming",
-      "appearance": null,
-      "passive": "Gives a bigger increase to the pet's passive, and gains an additional 7-25 XP/s!",
-      "type": "Passive Boost, Pet XP",
-      "amount": "TBA%",
-      "chance": "TBA% chance from Elder Candy Blossom when hatching a pet in the plant's radius!",
-      "petSellMultiplier": "xTBA",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Pet%20Mutations/blossoming.png"
-    }
-  ],
-  "variants": [
-    {
-      "pet": "Parasaurolophus",
-      "variant": "Rainbow",
-      "obtainmentMethod": "30% from the Rainbow Premium Primal Egg",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Iguanodon",
-      "variant": "25% from the Rainbow Premium Primal Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Pachycephalosaurus",
-      "variant": "20% from the Rainbow Premium Primal Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Dilophosaurus",
-      "variant": "10% from the Rainbow Premium Primal Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Ankylosaurus",
-      "variant": "8% from the Rainbow Premium Primal Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Spinosaurus",
-      "variant": "7% from the Rainbow Premium Primal Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Maneki-neko",
-      "variant": "Rainbow",
-      "obtainmentMethod": "28% from the Rainbow Exotic Kitsune Chest",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Kodama",
-      "variant": "15% from the Rainbow Exotic Kitsune Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Corrupted Kitsune",
-      "variant": "7% from the Rainbow Exotic Kitsune Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Bacon Pig",
-      "variant": "Rainbow",
-      "obtainmentMethod": "28% from the Rainbow Exotic Culinarian Chest",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Hotdog Daschund",
-      "variant": "15% from the Rainbow Exotic Culinarian Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Lobster Thermidor",
-      "variant": "7% from the Rainbow Exotic Culinarian Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Elk",
-      "variant": "Rainbow",
-      "obtainmentMethod": "28% from the Rainbow Exotic Skyroot Chest",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Mandrake",
-      "variant": "15% from the Rainbow Exotic Skyroot Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Griffin",
-      "variant": "7% from the Rainbow Exotic Skyroot Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Cardinal",
-      "variant": "Rainbow",
-      "obtainmentMethod": "28% from the Rainbow Exotic Enchanted Chest",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Shroomie",
-      "variant": "15% from the Rainbow Exotic Enchanted Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Phoenix",
-      "variant": "7% from the Rainbow Exotic Enchanted Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Oxpecker",
-      "variant": "Rainbow",
-      "obtainmentMethod": "45% from the Rainbow Premium Safari Egg",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Zebra",
-      "variant": "23% from the Rainbow Premium Safari Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Giraffe",
-      "variant": "17% from the Rainbow Premium Safari Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Rhino",
-      "variant": "10.5% from the Rainbow Premium Safari Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Elephant",
-      "variant": "4.5% from the Rainbow Premium Safari Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Robin",
-      "variant": "GIANT",
-      "obtainmentMethod": "55% from the GIANT Premium Fall Egg",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Badger",
-      "variant": "32.5% from the GIANT Premium Fall Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Grizzly Bear",
-      "variant": "10% from the GIANT Premium Fall Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Barn Owl",
-      "variant": "1.5% from the GIANT Premium Fall Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Swan",
-      "variant": "1% from the GIANT Premium Fall Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Bat",
-      "variant": "Ghostly",
-      "obtainmentMethod": "41% from the Ghostly Premium Spooky Egg",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Bone Dog",
-      "variant": "25% from the Ghostly Premium Spooky Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Spider",
-      "variant": "16% from the Ghostly Premium Spooky Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Black Cat",
-      "variant": "13.5% from the Ghostly Premium Spooky Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Headless Horseman",
-      "variant": "4.5% from the Ghostly Premium Spooky Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Dark Spriggan",
-      "variant": "Purchase of the Twilight Pack",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Scarab",
-      "variant": "Ghostly",
-      "obtainmentMethod": "28% chance from the Special Exotic Spooky Chest",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Tomb Marmot",
-      "variant": "15% chance from the Special Exotic Spooky Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Mummy",
-      "variant": "7% chance from the Special Exotic Spooky Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Clam",
-      "variant": "Rainbow",
-      "obtainmentMethod": "28% chance from the Special Exotic Gem Chest",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Magpie",
-      "variant": "15% chance from the Special Exotic Gem Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Bearded Dragon",
-      "variant": "7% chance from the Special Exotic Gem Chest",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Turtle Dove",
-      "variant": "Festive",
-      "obtainmentMethod": "45% chance from the Festive Premium Christmas Egg",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Reindeer",
-      "variant": "23% chance from the Festive Premium Christmas Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Nutcracker",
-      "variant": "17% chance from the Festive Premium Christmas Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Yeti",
-      "variant": "10.5% chance from the Festive Premium Christmas Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Ice Golem",
-      "variant": "4.5% chance from the Festive Premium Christmas Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Partridge",
-      "variant": "Festive",
-      "obtainmentMethod": "45% from the Festive Premium Winter Egg",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Santa Bear",
-      "variant": "23% from the Festive Premium Winter Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Moose",
-      "variant": "17% from the Festive Premium Winter Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Frost Squirrel",
-      "variant": "10.5% from the Festive Premium Winter Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Wendigo",
-      "variant": "4.5% from the Festive Premium Winter Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "New Year's Bird",
-      "variant": "Rainbow",
-      "obtainmentMethod": "27% from the Rainbow Premium New Year's Egg",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Firework Sprite",
-      "variant": "23% from the Rainbow Premium New Year's Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Celebration Puppy",
-      "variant": "18% from the Rainbow Premium New Year's Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "New Year's Chimp",
-      "variant": "15% from the Rainbow Premium New Year's Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Star Wolf",
-      "variant": "12.5% from the Rainbow Premium New Year's Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "New Year's Dragon",
-      "variant": "4.5% from the Rainbow Premium New Year's Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Unicycle Monkey",
-      "variant": "Rainbow",
-      "obtainmentMethod": "45% from the Rainbow Premium Carnival Egg",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Performer Seal",
-      "variant": "23% from the Rainbow Premium Carnival Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Bear on Bike",
-      "variant": "17% from the Rainbow Premium Carnival Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Show Pony",
-      "variant": "10.5% from the Rainbow Premium Carnival Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Carnival Elephant",
-      "variant": "4.5% from the Rainbow Premium Carnival Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Black Bird",
-      "variant": "Rainbow",
-      "obtainmentMethod": "45% from the Rainbow Premium Bird Egg",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Cuckoo",
-      "variant": "23% from the Rainbow Premium Bird Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Brown Owl",
-      "variant": "17% from the Rainbow Premium Bird Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Gold Finch",
-      "variant": "10.5% from the Rainbow Premium Bird Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Birb",
-      "variant": "4.5% from the Rainbow Premium Bird Egg",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Pink Bunny",
-      "variant": "Rainbow",
-      "obtainmentMethod": "TBA% from the Rainbow Exotic Buttercup Chest",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Blue Jay",
-      "variant": "Rainbow",
-      "obtainmentMethod": "Rewarded for reaching Level 2 of the Premium Season Pass 1",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Firefly",
-      "variant": "GIANT",
-      "obtainmentMethod": "Rewarded for reaching Level 25 of the Premium Season Pass 1",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Silver Dragonfly",
-      "variant": "Rewarded for reaching Level 40 of the Premium Season Pass 1",
-      "obtainmentMethod": "✗",
-      "obtainable": null
-    },
-    {
-      "pet": "Mizuchi",
-      "variant": "Rainbow",
-      "obtainmentMethod": "Rewarded for reaching Level 47 of the Premium Season Pass 1",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Armadillo",
-      "variant": "GIANT",
-      "obtainmentMethod": "Rewarded for reaching Level 2 of the Premium Season Pass 2",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Stag Beetle",
-      "variant": "Rainbow",
-      "obtainmentMethod": "Rewarded for reaching Level 25 of the Premium Season Pass 2",
-      "obtainable": "✗"
-    },
-    {
-      "pet": "Mantis Shrimp",
-      "variant": "GIANT",
-      "obtainmentMethod": "Rewarded for reaching Level 40 of the Premium Season Pass 2",
-      "obtainable": "✗"
-    },
+      "item": {
+        "name": "Shiny",
+        "passive": "Adds an extra 15% boost to the pet's XP per second!",
+        "type": "Pet XP Boost",
+        "amount": "30%",
+        "chance": "32.15%",
+        "petSellMultiplier": "x10",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "shiny",
+        "section": "Pet XP Boost",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/shiny.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Inverted",
+        "passive": "Adds an extra 30% boost to the pet's XP per second!",
+        "type": "Pet XP Boost",
+        "amount": "50%",
+        "chance": "16.08%",
+        "petSellMultiplier": "x10",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "inverted",
+        "section": "Pet XP Boost",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/inverted.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen",
+        "passive": "Once every 5:00-0:30m, 20-30% chance for a nearby fruit to become Frozen!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "9.65%",
+        "petSellMultiplier": "x10",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Applies Mutation",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/frozen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Windy",
+        "passive": "Once every 5:00-0:30m, 20-30% chance for a nearby fruit to become Windstruck!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "9.65%",
+        "petSellMultiplier": "x2",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "windy",
+        "section": "Applies Mutation",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/windy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden",
+        "passive": "Gives a major boost to the pet's passive!",
+        "type": "Passive Boost",
+        "amount": "10%",
+        "chance": "6.43%",
+        "petSellMultiplier": "x100",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "golden",
+        "section": "Passive Boost",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/golden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mega",
+        "passive": "Pet is gigantic! Has 20% faster hunger rate. Gains an additional 10-40 xp per second!",
+        "type": "Size Modification",
+        "amount": "200%",
+        "chance": "6.43%",
+        "petSellMultiplier": "x1",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "mega",
+        "section": "Size Modification",
+        "sortOrder": 6,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/mega.png"
+      }
+    },
     {
-      "pet": "Hydra",
-      "variant": "Rainbow",
-      "obtainmentMethod": "Rewarded for reaching Level 47 of the Premium Season Pass 2",
-      "obtainable": "✗"
+      "item": {
+        "name": "Tiny",
+        "passive": "Pet is very tiny! Has 20% slower hunger rate. Gains an additional 5-30 xp per second!",
+        "type": "Size Modification",
+        "amount": "-90%",
+        "chance": "6.43%",
+        "petSellMultiplier": "x1",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "tiny",
+        "section": "Size Modification",
+        "sortOrder": 7,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/tiny.png"
+      }
+    },
+    {
+      "item": {
+        "name": "IronSkin",
+        "passive": "When another player steals fruit from you, grants a 35-45% chance you get the stolen fruit as well!",
+        "type": "Stealing Preventer",
+        "amount": "None",
+        "chance": "3.22%",
+        "petSellMultiplier": "x100",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "ironskin",
+        "section": "Stealing Preventer",
+        "sortOrder": 8,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/ironskin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Radiant",
+        "passive": "Once every 30:00-20:00m, emits sunshine at a random nearby plant and advances their growth by 24 hours!",
+        "type": "Plant Growth Boost",
+        "amount": "None",
+        "chance": "3.22%",
+        "petSellMultiplier": "x100",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "radiant",
+        "section": "Plant Growth Boost",
+        "sortOrder": 9,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/radiant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow",
+        "passive": "Gives a massive increase to the pet's passive!",
+        "type": "Passive Boost",
+        "amount": "20%",
+        "chance": "3.22%",
+        "petSellMultiplier": "x100",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Passive Boost",
+        "sortOrder": 10,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/rainbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shocked",
+        "passive": "During a Thunderstorm: Once every 60-45s, has a 25-30% chance to attract lightning, shocking nearby fruits!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "3.22%",
+        "petSellMultiplier": "x100",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "shocked",
+        "section": "Applies Mutation",
+        "sortOrder": 11,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/shocked.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ascended",
+        "passive": "Once every 360:21-300:00m (6-5 hours), a nearby fruit ascends to a higher realm, with a 75-90% chance to trigger the Dawnbound mutation!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "0.32%",
+        "petSellMultiplier": "x100",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "ascended",
+        "section": "Applies Mutation",
+        "sortOrder": 12,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/ascended.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tranquil",
+        "passive": "Once every 25:00-16:40m, a nearby fruit finds inner peace, with a 20-30% chance to trigger the Tranquil mutation!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "3.02%",
+        "petSellMultiplier": "x100",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "tranquil",
+        "section": "Applies Mutation",
+        "sortOrder": 13,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/tranquil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupted",
+        "passive": "Once every 25:00-16:40m, a nearby fruit embraces the corruption, with a 20-30% chance to trigger the Corrupted mutation!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "3.02%",
+        "petSellMultiplier": "x100",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "corrupted",
+        "section": "Applies Mutation",
+        "sortOrder": 14,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/corrupted.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fried",
+        "passive": "Once every 16:40-8:20m, a nearby fruit is sizzled up, with a 40-60% chance to trigger the Fried mutation!",
+        "type": "Applies mutation",
+        "amount": "None",
+        "chance": "N/A",
+        "petSellMultiplier": "x15",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "fried",
+        "section": "Applies mutation",
+        "sortOrder": 15,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/fried.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aromatic",
+        "passive": "Once every 25:00-16:40m, a nearby fruit is infused with a pungent aroma, with a 20-30% chance to trigger the Aromatic mutation!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "N/A",
+        "petSellMultiplier": "x100",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "aromatic",
+        "section": "Applies Mutation",
+        "sortOrder": 16,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/aromatic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "GiantBean",
+        "passive": "Pet is a GIANT BEAN! Has 15% faster hunger rate. Gains an additional 0.1-0.5xp/s for each Beanstalk planted in your garden!",
+        "type": "Size Modification",
+        "amount": "150%",
+        "chance": "Crafted during Beanstalk event using 3 beanstalks and 1 cleansing pet shard",
+        "petSellMultiplier": "x1",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "giantbean",
+        "section": "Size Modification",
+        "sortOrder": 17,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/giantbean.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver",
+        "passive": "Gives a small increase to the pet's passive!",
+        "type": "Passive Boost",
+        "amount": "5%",
+        "chance": "Achievements",
+        "petSellMultiplier": "x10",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "silver",
+        "section": "Passive Boost",
+        "sortOrder": 18,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/silver.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glimmering",
+        "passive": "Once every 25:00-13:20m, a nearby fruit is sprinkled with fairy dust, with a 20-30% chance to trigger the Glimmering mutation!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "1.72% on tier 3 of fountain rewards 3.03% on tier 4 of fountain rewards 5.88% on tier 5 of fountain rewards",
+        "petSellMultiplier": "x1",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "glimmering",
+        "section": "Applies Mutation",
+        "sortOrder": 19,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/glimmering.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Luminous",
+        "passive": "Once every 33:20-16:40m, a nearby fruit is imbued with fairy power, with a 20-30% chance to trigger the Luminous mutation!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "Guaranteed reward in the form of a Mutation Shard from the Fairy Event's mini achievements section. Obtained upon completion.",
+        "petSellMultiplier": "x1",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "luminous",
+        "section": "Applies Mutation",
+        "sortOrder": 20,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/luminous.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nutty",
+        "passive": "Once every 20:00-2:00 minutes, the pet's next ability use has a 20-40% chance to activate twice. Otherwise, this pet loses a level.",
+        "type": "Duplicates Ability",
+        "amount": "None",
+        "chance": "0.24% chance from collecting acorns from Chubby Chipmunk.",
+        "petSellMultiplier": "x1",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "nutty",
+        "section": "Duplicates Ability",
+        "sortOrder": 21,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/nutty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dreadbound",
+        "passive": "Gains an additional 6.5-30 xp per second!",
+        "type": "Pet XP Boost",
+        "amount": "6.5-30 XP",
+        "chance": "Chance to be applied by the Headless Horseman.",
+        "petSellMultiplier": "x1",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "dreadbound",
+        "section": "Pet XP Boost",
+        "sortOrder": 22,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/dreadbound.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Soulflame",
+        "passive": "Adds an extra 60% boost to the pet's xp per second. Once every 15:12-5:00m, a nearby fruit has a 20-30% chance to get mutated with Burnt - lower chance for Flaming!",
+        "type": "Pet XP Boost, Applies Mutation",
+        "amount": "60%",
+        "chance": "Chance to be applied by the Headless Horseman.",
+        "petSellMultiplier": "x1",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "soulflame",
+        "section": "Pet XP Boost, Applies Mutation",
+        "sortOrder": 23,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/soulflame.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spectral",
+        "passive": "Gives a small increase to the pet's passive!",
+        "type": "Passive Boost",
+        "amount": "8%",
+        "chance": "Chance to be applied by the Headless Horseman.",
+        "petSellMultiplier": "x1",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "spectral",
+        "section": "Passive Boost",
+        "sortOrder": 24,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/spectral.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nightmare",
+        "passive": "Gives a bigger increase to the pet's passive and is slightly bigger!",
+        "type": "Passive Boost, Size Modification",
+        "amount": "22%, 125%",
+        "chance": "Rare chance to be applied by the Headless Horseman.",
+        "petSellMultiplier": "x1",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "nightmare",
+        "section": "Passive Boost, Size Modification",
+        "sortOrder": 25,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/nightmare.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tethered",
+        "passive": "Constantly wanders around the player!",
+        "type": "Follows Player",
+        "amount": "None",
+        "chance": "Toffee Tether",
+        "petSellMultiplier": "x1",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "tethered",
+        "section": "Follows Player",
+        "sortOrder": 26,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/tethered.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aurora",
+        "passive": "Once every 42:05-16:40m, 3-50% chance for a nearby fruit to become Aurora!",
+        "type": "Applies mutation",
+        "amount": "None",
+        "chance": "3.22%",
+        "petSellMultiplier": "x10",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "aurora",
+        "section": "Applies mutation",
+        "sortOrder": 27,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/aurora.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jumbo",
+        "passive": "Pet is Jumbo and gains +50% XP BOOST! All nearby plants within 14.75-35 studs will have an increased 0.004-0.01x size bonus for every Safari-type plant planted in your garden! (max 300)",
+        "type": "Size Modification, Pet XP Boost",
+        "amount": "180%, 50%",
+        "chance": "Safari Shop",
+        "petSellMultiplier": "x10",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "jumbo",
+        "section": "Size Modification, Pet XP Boost",
+        "sortOrder": 28,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/jumbo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oxpecker",
+        "passive": "When Safari type pets finish their abilities, they start their cooldown with 7.5-3.5 seconds less! Gains tiny increase to passives!",
+        "type": "Passive Boost",
+        "amount": "1%",
+        "chance": "2.44% chance from giving a pet to Safari Joe",
+        "petSellMultiplier": "x1",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "oxpecker",
+        "section": "Passive Boost",
+        "sortOrder": 29,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/oxpecker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Giraffe",
+        "passive": "Once every 25:54-9:43m, eats fruit that are atleast 10 studs high for 0.36-0.75x sell value. The plant the fruit came from advances growth by 30:00-16:37m! Also applies Arid mutation to all other fruits on that plant. Gains small increase to passives!",
+        "type": "Passive Boost",
+        "amount": "3%",
+        "chance": "2.04% chance from giving a pet to Safari Joe",
+        "petSellMultiplier": "x5",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "giraffe",
+        "section": "Passive Boost",
+        "sortOrder": 30,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/giraffe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rhino",
+        "passive": "Once every 25:54-12:57m, charges into a random egg or random fruit in your garden: Rammed eggs have hatch time halved, rammed fruits get Mirage mutation! Cannot be mimicked or refreshed. Gains medium increase to passives!",
+        "type": "Passive Boost",
+        "amount": "4.5%",
+        "chance": "0.75-4.12% chance from giving a pet to Safari Joe",
+        "petSellMultiplier": "x10",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "rhino",
+        "section": "Passive Boost",
+        "sortOrder": 31,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/rhino.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crocodile",
+        "passive": "Once every 35:00-17:30m, bites on to a random Plant or Pet for 7.5-12.5s and performs a roll. Plants grow an additional 22.5-11.25s/s and Pets get additional 16.25-8.75 XP/s. Gains sizable increase to passives!",
+        "type": "Passive Boost",
+        "amount": "6%",
+        "chance": "0.76-2.06% chance from giving a pet to Safari Joe",
+        "petSellMultiplier": "x15",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "crocodile",
+        "section": "Passive Boost",
+        "sortOrder": 32,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/crocodile.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lion",
+        "passive": "Once every 23:20-5:50m, roars and calls all pets in your garden to move toward it. 100-200 total cooldown advancement is shared across each pet (max 30-15 seconds per pet). Gains big increase to passives!",
+        "type": "Passive Boost",
+        "amount": "7%",
+        "chance": "0.55-1.03% chance from giving a pet to Safari Joe",
+        "petSellMultiplier": "x20",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "lion",
+        "section": "Passive Boost",
+        "sortOrder": 33,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/lion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forger",
+        "passive": "Once every 13:20-6:40m goes to an active crafting table and advances its crafting time by 40-80s!",
+        "type": "Passive Boost",
+        "amount": "7%",
+        "chance": "Can be crafted as a Pet Mutation Shard in the smithing event, the materials required are: Gem Egg Legendary Coal Cleansing Pet Shard 4,500,000",
+        "petSellMultiplier": "x10",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "forger",
+        "section": "Passive Boost",
+        "sortOrder": 34,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/forger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nocturnal",
+        "passive": "Once every 23:34-11:40m, a random fruit gets advanced by 12h! Cooldown ticks down twice as fast during the night!",
+        "type": "Plant Growth Boost",
+        "amount": "None",
+        "chance": "0.5% Chance from the Christmas Present",
+        "petSellMultiplier": "x15",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "nocturnal",
+        "section": "Plant Growth Boost",
+        "sortOrder": 35,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/nocturnal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint",
+        "passive": "Once every 16:06-8:20m, sacrifices 12 random Christmas-type fruit in your garden to instantly activate this pet's ability!",
+        "type": "Cooldown Reduction",
+        "amount": "None",
+        "chance": "10% chance from Peppermint Vine when hatching a pet in the plant's radius",
+        "petSellMultiplier": "x25",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "peppermint",
+        "section": "Cooldown Reduction",
+        "sortOrder": 36,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/peppermint.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit Sparkle",
+        "passive": "Once every 25:00-20:00m, your pet either ages up once, or ages down once.",
+        "type": "Pet Level",
+        "amount": "None",
+        "chance": "10% chance from Spirit Sparkle when hatching a pet in the plant's radius",
+        "petSellMultiplier": "x25",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "spirit-sparkle",
+        "section": "Pet Level",
+        "sortOrder": 37,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/spirit-sparkle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Rally",
+        "passive": "All Christmas-themed pets gain an additional 3.5-7.5XP per second!",
+        "type": "Pet XP",
+        "amount": "4.01xp",
+        "chance": "From the Ice Golem pet!",
+        "petSellMultiplier": "x10",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "christmas-rally",
+        "section": "Pet XP",
+        "sortOrder": 38,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/christmas-rally.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly Decorator",
+        "passive": "Once every 8:25-4:10m, applies Ornamented mutation to a random fruit!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "From the Ice Golem pet!",
+        "petSellMultiplier": "x50",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "jolly-decorator",
+        "section": "Applies Mutation",
+        "sortOrder": 39,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/jolly-decorator.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Merry Nursery",
+        "passive": "Once every 30:00-5:00m, goes to the unhatched egg with the highest hatch time and reduces it by 25-60s with a bonus 1-2s for every Christmas-type plant in your garden!",
+        "type": "Egg Hatch Time",
+        "amount": "None",
+        "chance": "From the Ice Golem pet!",
+        "petSellMultiplier": "x20",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "merry-nursery",
+        "section": "Egg Hatch Time",
+        "sortOrder": 40,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/merry-nursery.png"
+      }
+    },
+    {
+      "item": {
+        "name": "GiantGolem",
+        "passive": "Pet is a giant golem! Has a big increase to passive, slightly bigger & gains bonus 0.015XP/s for every Christmas-type plant in your garden!",
+        "type": "Passive Boost, Size Modification",
+        "amount": "20%, 150%",
+        "chance": "Rare chance from the Ice Golem pet!",
+        "petSellMultiplier": "x100",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "giantgolem",
+        "section": "Passive Boost, Size Modification",
+        "sortOrder": 41,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/giantgolem.png"
+      }
+    },
+    {
+      "item": {
+        "name": "HyperHunger",
+        "passive": "BIG boost to passive but hunger drains SUPER DUPER FAST! Boost is disabled when hunger is less than 25%.",
+        "type": "Passive Boost",
+        "amount": "30%",
+        "chance": "Santa's Stash",
+        "petSellMultiplier": "x100",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "hyperhunger",
+        "section": "Passive Boost",
+        "sortOrder": 42,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/hyperhunger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Venom",
+        "passive": "BIG boost to passive but drains 0.02 xp per second!",
+        "type": "Passive Boost",
+        "amount": "30%",
+        "chance": "5 ~ 10% chance from the Giant Scorpion pet!",
+        "petSellMultiplier": "x100",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "venom",
+        "section": "Passive Boost",
+        "sortOrder": 43,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/venom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fiery",
+        "passive": "Once every 10:00-5:00m, consumes a random fruit to mutate fruits around it with the Fiery mutation!",
+        "type": "Applies Mutation",
+        "amount": "None",
+        "chance": "TBA",
+        "petSellMultiplier": "x100",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "fiery",
+        "section": "Applies Mutation",
+        "sortOrder": 44,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/fiery.png"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO",
+        "passive": "Gives a big boost to the pet's passive!",
+        "type": "Passive Boost",
+        "amount": "30%",
+        "chance": "N/A",
+        "petSellMultiplier": "x100",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "ufo",
+        "section": "Passive Boost",
+        "sortOrder": 45,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/ufo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alienated",
+        "passive": "Grants small increase to passive, but drains ~0.07% XP/s!",
+        "type": "Passive Boost",
+        "amount": "30%",
+        "chance": "A chance to obtain from the Alien Chaos Weather!",
+        "petSellMultiplier": "x1",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "alienated",
+        "section": "Passive Boost",
+        "sortOrder": 46,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/alienated.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blossoming",
+        "passive": "Gives a bigger increase to the pet's passive, and gains an additional 7-25 XP/s!",
+        "type": "Passive Boost, Pet XP",
+        "amount": "TBA%",
+        "chance": "TBA% chance from Elder Candy Blossom when hatching a pet in the plant's radius!",
+        "petSellMultiplier": "xTBA",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "blossoming",
+        "section": "Passive Boost, Pet XP",
+        "sortOrder": 47,
+        "image": "/Grow%20a%20Garden/Pet%20Mutations/blossoming.png"
+      }
     }
   ]
 }

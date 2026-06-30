@@ -78,6 +78,11 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 ## Rules
 
 - Treat local data files as content sources, not ad hoc dumps. Keep filenames and object shapes stable once routes depend on them.
+- Game wiki collection datasets must use the v2 separated shape: `{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }`.
+- In v2 game collection datasets, `items[].item` is public game data only. Do not put `collectionSection`, `section`, `sortOrder`, `slug`, `image`, source URLs, source pages, verification notes, raw text, image status, or workflow/debug fields there.
+- In v2 game collection datasets, `items[].system` may contain only `slug`, `section`, `sortOrder`, and `image`. Use these for Bloxodes routing, grouping, ordering, and image rendering without interfering with real game fields that may have similar names.
+- `meta.display` owns the public render contract for game collections: `groupLabel`, `sectionOrder`, `tableFields`, `cardFields`, optional badge/subtitle/description fields, and `fieldPresentation`. Every display field must exist in `meta.itemFields` and in public item data.
+- Run `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>` before seeding or reviewing any game collection page.
 - For wiki/collection datasets, include source-backed fields players need, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability when those facts drive decisions.
 - When changing a dataset, update the parser/helper in `src/lib/*` or the route-family helper in `src/app/(site)`.
 - If a dataset powers a public route, verify SEO text, pagination, and revalidation behavior still make sense after the change.

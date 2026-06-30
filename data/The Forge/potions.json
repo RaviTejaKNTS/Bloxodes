@@ -1,78 +1,137 @@
 {
   "meta": {
-    "title": "The Forge Potions",
-    "updatedAt": "2026-02-07",
-    "sources": [
-      {
-        "label": "Source",
-        "url": "https://www.theforgewiki.org/items/",
-        "accessed": "2026-02-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "The Forge",
+    "gameSlug": "the-forge",
+    "collection": "potions",
+    "route": "/wiki/the-forge/potions",
+    "catalogCode": "the-forge-potions",
+    "itemFields": [
       "cost",
       "effect",
       "section",
-      "category",
-      "link"
-    ]
+      "category"
+    ],
+    "columns": [
+      "cost",
+      "effect",
+      "section",
+      "category"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "cost",
+        "effect",
+        "section",
+        "category"
+      ],
+      "tableFields": [
+        "cost",
+        "effect",
+        "section",
+        "category"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Health Potion I",
-      "image": "/The%20Forge/Potions/Health-potions.webp",
-      "cost": "150 Gold",
-      "effect": "Recover I: Restores 30 health over 5 seconds.",
-      "section": "Consumables",
-      "category": "Potions",
-      "link": null
+      "item": {
+        "name": "Health Potion I",
+        "cost": "150 Gold",
+        "effect": "Recover I: Restores 30 health over 5 seconds.",
+        "section": "Consumables",
+        "category": "Potions"
+      },
+      "system": {
+        "slug": "health-potion-i",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/The%20Forge/Potions/Health-potions.webp"
+      }
     },
     {
-      "name": "Health Potion II",
-      "image": "/The%20Forge/Potions/Health-potions.webp",
-      "cost": "150 Gold",
-      "effect": "Recover II: Restores 75 health over 5 seconds.",
-      "section": "Consumables",
-      "category": "Potions",
-      "link": null
+      "item": {
+        "name": "Health Potion II",
+        "cost": "150 Gold",
+        "effect": "Recover II: Restores 75 health over 5 seconds.",
+        "section": "Consumables",
+        "category": "Potions"
+      },
+      "system": {
+        "slug": "health-potion-ii",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/The%20Forge/Potions/Health-potions.webp"
+      }
     },
     {
-      "name": "Damage Potion",
-      "image": "/The%20Forge/Potions/Damage-potions.webp",
-      "cost": "250 Gold",
-      "effect": "Grants 10% bonus damage for 60 seconds.",
-      "section": "Consumables",
-      "category": "Potions",
-      "link": null
+      "item": {
+        "name": "Damage Potion",
+        "cost": "250 Gold",
+        "effect": "Grants 10% bonus damage for 60 seconds.",
+        "section": "Consumables",
+        "category": "Potions"
+      },
+      "system": {
+        "slug": "damage-potion",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/The%20Forge/Potions/Damage-potions.webp"
+      }
     },
     {
-      "name": "Miner Potion",
-      "image": "/The%20Forge/Potions/miner-potion.webp",
-      "cost": "500 Gold",
-      "effect": "Increases mining speed by 15% for 300 seconds.",
-      "section": "Consumables",
-      "category": "Potions",
-      "link": null
+      "item": {
+        "name": "Miner Potion",
+        "cost": "500 Gold",
+        "effect": "Increases mining speed by 15% for 300 seconds.",
+        "section": "Consumables",
+        "category": "Potions"
+      },
+      "system": {
+        "slug": "miner-potion",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/The%20Forge/Potions/miner-potion.webp"
+      }
     },
     {
-      "name": "Speed Potion",
-      "image": "/The%20Forge/Potions/speed-potion.webp",
-      "cost": "200 Gold",
-      "effect": "Grants 15% bonus movement speed for 60 seconds.",
-      "section": "Consumables",
-      "category": "Potions",
-      "link": null
+      "item": {
+        "name": "Speed Potion",
+        "cost": "200 Gold",
+        "effect": "Grants 15% bonus movement speed for 60 seconds.",
+        "section": "Consumables",
+        "category": "Potions"
+      },
+      "system": {
+        "slug": "speed-potion",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/The%20Forge/Potions/speed-potion.webp"
+      }
     },
     {
-      "name": "Luck Potion",
-      "image": "/The%20Forge/Potions/luck-potion.webp",
-      "cost": "350 Gold",
-      "effect": "Boosts your Luck by 20% for 300 seconds, raising the odds of rare drops while you farm.",
-      "section": "Consumables",
-      "category": "Potions",
-      "link": null
+      "item": {
+        "name": "Luck Potion",
+        "cost": "350 Gold",
+        "effect": "Boosts your Luck by 20% for 300 seconds, raising the odds of rare drops while you farm.",
+        "section": "Consumables",
+        "category": "Potions"
+      },
+      "system": {
+        "slug": "luck-potion",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/The%20Forge/Potions/luck-potion.webp"
+      }
     }
   ]
 }

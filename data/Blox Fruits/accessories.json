@@ -1,2016 +1,1462 @@
 {
   "meta": {
-    "title": "Blox Fruits accessories data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Accessories",
-        "url": "https://blox-fruits.fandom.com/wiki/Accessories",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "accessories",
+    "route": "/wiki/blox-fruits/accessories",
+    "catalogCode": "blox-fruits-accessories",
+    "itemFields": [
       "rarity",
       "type",
       "bonuses",
-      "sea",
-      "wikiUrl"
-    ]
+      "sea"
+    ],
+    "columns": [
+      "rarity",
+      "type",
+      "bonuses",
+      "sea"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Legendary",
+        "Mythical"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "type",
+        "bonuses",
+        "sea"
+      ],
+      "tableFields": [
+        "rarity",
+        "type",
+        "bonuses",
+        "sea"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Headband (Blue)",
-      "slug": "headband-blue",
-      "rarity": "Common",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+8% Fruit - Damage Resistance +8% Sword - Damage Resistance +8% Melee - Damage Resistance +8% Gun - Damage Resistance +30% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Common Accessory+8% Fruit - Damage Resistance +8% Sword - Damage Resistance +8% Melee - Damage Resistance +8% Gun - Damage Resistance +30% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Headband_(Blue)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/headband-blue.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/96/Headband_%28Blue%29.png/revision/latest/scale-to-width-down/125?cb=20250913192945"
-    },
-    {
-      "name": "Headband (Green)",
-      "slug": "headband-green",
-      "rarity": "Common",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+7% Fruit - Damage Resistance +7% Sword - Damage Resistance +7% Melee - Damage Resistance +7% Gun - Damage Resistance +20% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Common Accessory+7% Fruit - Damage Resistance +7% Sword - Damage Resistance +7% Melee - Damage Resistance +7% Gun - Damage Resistance +20% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Headband_(Green)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/headband-green.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/eb/Headband_%28Green%29.png/revision/latest/scale-to-width-down/125?cb=20250913192945"
-    },
-    {
-      "name": "Headband (Orange)",
-      "slug": "headband-orange",
-      "rarity": "Common",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+5% Fruit - Damage Resistance +5% Sword - Damage Resistance +5% Melee - Damage Resistance +5% Gun - Damage Resistance +15% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Common Accessory+5% Fruit - Damage Resistance +5% Sword - Damage Resistance +5% Melee - Damage Resistance +5% Gun - Damage Resistance +15% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Headband_(Orange)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/headband-orange.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5a/Headband_%28Orange%29.png/revision/latest/scale-to-width-down/125?cb=20250913192945"
-    },
-    {
-      "name": "Headband (Purple)",
-      "slug": "headband-purple",
-      "rarity": "Common",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Fruit - Damage Resistance +10% Sword - Damage Resistance +10% Melee - Damage Resistance +10% Gun - Damage Resistance +40% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Common Accessory+10% Fruit - Damage Resistance +10% Sword - Damage Resistance +10% Melee - Damage Resistance +10% Gun - Damage Resistance +40% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Headband_(Purple)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/headband-purple.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a1/Headband_%28Purple%29.png/revision/latest/scale-to-width-down/125?cb=20250913192945"
-    },
-    {
-      "name": "Headband (Red)",
-      "slug": "headband-red",
-      "rarity": "Common",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+12% Fruit - Damage Resistance +12% Sword - Damage Resistance +12% Melee - Damage Resistance +12% Gun - Damage Resistance +60% Movement Speed +5% Melee - Damage"
-      ],
-      "fields": {},
-      "rawText": "Common Accessory+12% Fruit - Damage Resistance +12% Sword - Damage Resistance +12% Melee - Damage Resistance +12% Gun - Damage Resistance +60% Movement Speed +5% Melee - Damage",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Headband_(Red)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/headband-red.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1b/Headband_%28Red%29.png/revision/latest/scale-to-width-down/125?cb=20250913192945"
-    },
-    {
-      "name": "Headband (White)",
-      "slug": "headband-white",
-      "rarity": "Common",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+2% Fruit - Damage Resistance +2% Sword - Damage Resistance +2% Melee - Damage Resistance +2% Gun - Damage Resistance +10% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Common Accessory+2% Fruit - Damage Resistance +2% Sword - Damage Resistance +2% Melee - Damage Resistance +2% Gun - Damage Resistance +10% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Headband_(White)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/headband-white.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c7/Headband_%28White%29.png/revision/latest/scale-to-width-down/125?cb=20250913192945"
-    },
-    {
-      "name": "Headband (Yellow)",
-      "slug": "headband-yellow",
-      "rarity": "Common",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+4% Fruit - Damage Resistance +4% Sword - Damage Resistance +4% Melee - Damage Resistance +4% Gun - Damage Resistance +15% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Common Accessory+4% Fruit - Damage Resistance +4% Sword - Damage Resistance +4% Melee - Damage Resistance +4% Gun - Damage Resistance +15% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Headband_(Yellow)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/headband-yellow.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4c/Headband_%28Yellow%29.png/revision/latest/scale-to-width-down/125?cb=20250913192945"
-    },
-    {
-      "name": "Dojo Belt (Blue)",
-      "slug": "dojo-belt-blue",
-      "rarity": "Uncommon",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Melee - Damage +30% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Uncommon Accessory+10% Melee - Damage +30% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dojo_Belt_(Blue)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dojo-belt-blue.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c4/Dojo_Belt_%28Blue%29.png/revision/latest/scale-to-width-down/125?cb=20241224015019"
-    },
-    {
-      "name": "Dojo Belt (Green)",
-      "slug": "dojo-belt-green",
-      "rarity": "Uncommon",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+8% Melee - Damage +20% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Uncommon Accessory+8% Melee - Damage +20% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dojo_Belt_(Green)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dojo-belt-green.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/56/Dojo_Belt_%28Green%29.png/revision/latest/scale-to-width-down/125?cb=20241224015035"
-    },
-    {
-      "name": "Dojo Belt (Orange)",
-      "slug": "dojo-belt-orange",
-      "rarity": "Uncommon",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+6% Melee - Damage +15% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Uncommon Accessory+6% Melee - Damage +15% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dojo_Belt_(Orange)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dojo-belt-orange.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d2/Dojo_Belt_%28Orange%29.png/revision/latest/scale-to-width-down/125?cb=20241225193345"
-    },
-    {
-      "name": "Dojo Belt (Purple)",
-      "slug": "dojo-belt-purple",
-      "rarity": "Uncommon",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+14% Melee - Damage +40% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Uncommon Accessory+14% Melee - Damage +40% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dojo_Belt_(Purple)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dojo-belt-purple.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Dojo_Belt_%28Purple%29.png/revision/latest/scale-to-width-down/125?cb=20241224015050"
-    },
-    {
-      "name": "Dojo Belt (Red)",
-      "slug": "dojo-belt-red",
-      "rarity": "Uncommon",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+12% Melee - Damage +60% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Uncommon Accessory+12% Melee - Damage +60% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dojo_Belt_(Red)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dojo-belt-red.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fa/Dojo_Belt_%28Red%29.png/revision/latest/scale-to-width-down/125?cb=20241224015105"
-    },
-    {
-      "name": "Dojo Belt (White)",
-      "slug": "dojo-belt-white",
-      "rarity": "Uncommon",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+2% Melee - Damage +10% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Uncommon Accessory+2% Melee - Damage +10% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dojo_Belt_(White)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dojo-belt-white.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3e/Dojo_Belt_%28White%29.png/revision/latest/scale-to-width-down/125?cb=20241224015120"
-    },
-    {
-      "name": "Dojo Belt (Yellow)",
-      "slug": "dojo-belt-yellow",
-      "rarity": "Uncommon",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+4% Melee - Damage +15% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Uncommon Accessory+4% Melee - Damage +15% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dojo_Belt_(Yellow)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dojo-belt-yellow.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Dojo_Belt_%28Yellow%29.png/revision/latest/scale-to-width-down/125?cb=20241224015135"
-    },
-    {
-      "name": "Headband (Black)",
-      "slug": "headband-black",
-      "rarity": "Uncommon",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+20% Movement Speed +7% Melee - Damage +16% Sword - Damage Resistance +16% Melee - Damage Resistance +16% Fruit - Damage Resistance +16% Gun - Damage Resistance +1 Instinct Dodge Boost"
-      ],
-      "fields": {},
-      "rawText": "Uncommon Accessory+20% Movement Speed +7% Melee - Damage +16% Sword - Damage Resistance +16% Melee - Damage Resistance +16% Fruit - Damage Resistance +16% Gun - Damage Resistance +1 Instinct Dodge Boost",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Headband_(Black)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/headband-black.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d3/Headband_%28Black%29.png/revision/latest/scale-to-width-down/125?cb=20250913192944"
-    },
-    {
-      "name": "Pink Coat",
-      "slug": "pink-coat",
-      "rarity": "Uncommon",
-      "type": "Accessory",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Gun - Damage +200 Health"
-      ],
-      "fields": {},
-      "rawText": "Uncommon Accessory+10% Gun - Damage +200 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pink_Coat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/pink-coat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d9/Pink_Coat.png/revision/latest/scale-to-width-down/125?cb=20241223212836"
-    },
-    {
-      "name": "Bandanna (Black)",
-      "slug": "bandanna-black",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Energy"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Energy",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bandanna_(Black)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/bandanna-black.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/10/Bandanna_%28Black%29.png/revision/latest/scale-to-width-down/125?cb=20241223212618"
-    },
-    {
-      "name": "Bandanna (Green)",
-      "slug": "bandanna-green",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Energy"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Energy",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bandanna_(Green)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/bandanna-green.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4b/Bandanna_%28Green%29.png/revision/latest/scale-to-width-down/125?cb=20241223212623"
-    },
-    {
-      "name": "Bandanna (Red)",
-      "slug": "bandanna-red",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Energy"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Energy",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bandanna_(Red)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/bandanna-red.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/75/Bandanna_%28Red%29.png/revision/latest/scale-to-width-down/125?cb=20241223212627"
-    },
-    {
-      "name": "Bear Ears",
-      "slug": "bear-ears",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% All - Damage Resistance +500 Energy"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+10% All - Damage Resistance +500 Energy",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bear_Ears",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/bear-ears.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/13/Bear_Ears.png/revision/latest/scale-to-width-down/125?cb=20241223212632"
-    },
-    {
-      "name": "Black Cape",
-      "slug": "black-cape",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+5% All - Damage +100 Energy +100 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+5% All - Damage +100 Energy +100 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Black_Cape",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/black-cape.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/bc/Black_Cape.png/revision/latest/scale-to-width-down/125?cb=20241223212648"
-    },
-    {
-      "name": "Black Spikey Coat",
-      "slug": "black-spikey-coat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+7.5% All - Damage +200 Energy +200 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+7.5% All - Damage +200 Energy +200 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Black_Spikey_Coat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/black-spikey-coat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/89/Black_Spikey_Coat.png/revision/latest/scale-to-width-down/125?cb=20241223212653"
-    },
-    {
-      "name": "Blue Spikey Coat",
-      "slug": "blue-spikey-coat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+7.5% All - Damage +500 Energy +250 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+7.5% All - Damage +500 Energy +250 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blue_Spikey_Coat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/blue-spikey-coat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a5/Blue_Spikey_Coat.png/revision/latest/scale-to-width-down/125?cb=20241223212703"
-    },
-    {
-      "name": "Choppa",
-      "slug": "choppa",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+3% Fruit - Damage -15% Fruit - Cooldown +10% Fruit - Damage Resistance"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+3% Fruit - Damage -15% Fruit - Cooldown +10% Fruit - Damage Resistance",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Choppa",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/choppa.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/96/Choppa.png/revision/latest/scale-to-width-down/125?cb=20241223212718"
-    },
-    {
-      "name": "Coat",
-      "slug": "coat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Melee - Damage +200 Energy"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+10% Melee - Damage +200 Energy",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Coat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/coat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/72/Coat_%28Marine%29.png/revision/latest/scale-to-width-down/125?cb=20241223212733"
-    },
-    {
-      "name": "Cool Shades",
-      "slug": "cool-shades",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+7.5% All - Damage +17.5% Movement Speed +100 Energy +100 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+7.5% All - Damage +17.5% Movement Speed +100 Energy +100 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cool_Shades",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/cool-shades.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ee/Cool_Shades.png/revision/latest/scale-to-width-down/125?cb=20241223212741"
-    },
-    {
-      "name": "Dojo Belt (Black)",
-      "slug": "dojo-belt-black",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+16% Melee - Damage +80% Movement Speed +1 Instinct Dodge Boost"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+16% Melee - Damage +80% Movement Speed +1 Instinct Dodge Boost",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dojo_Belt_(Black)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dojo-belt-black.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/55/Dojo_Belt_%28Black%29.png/revision/latest/scale-to-width-down/125?cb=20241224015004"
-    },
-    {
-      "name": "Elf Hat",
-      "slug": "elf-hat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+20% Movement Speed +10% Melee - Damage +10% Sword - Damage -5% Melee - Cooldown -5% Sword - Cooldown"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+20% Movement Speed +10% Melee - Damage +10% Sword - Damage -5% Melee - Cooldown -5% Sword - Cooldown",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Elf_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/elf-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9a/Elf_Hat.png/revision/latest/scale-to-width-down/125?cb=20241223212817"
-    },
-    {
-      "name": "Ghoul Mask",
-      "slug": "ghoul-mask",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+35% Movement Speed +500 Energy +10% Melee - PvE Life Leech +2.5% Melee - PvP Life Leech"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+35% Movement Speed +500 Energy +10% Melee - PvE Life Leech +2.5% Melee - PvP Life Leech",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghoul_Mask",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/ghoul-mask.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7c/Ghoul_Mask.png/revision/latest/scale-to-width-down/125?cb=20241223212832"
-    },
-    {
-      "name": "Golden Sunhat",
-      "slug": "golden-sunhat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% All - Damage +500 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+10% All - Damage +500 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Golden_Sunhat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/golden-sunhat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/55/Golden_Sunhat.png/revision/latest/scale-to-width-down/125?cb=20241223212848"
-    },
-    {
-      "name": "Hunter Cape (Black)",
-      "slug": "hunter-cape-black",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hunter_Cape_(Black)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/hunter-cape-black.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c8/Hunter_Cape_%28Black%29.png/revision/latest/scale-to-width-down/125?cb=20241223212918"
-    },
-    {
-      "name": "Hunter Cape (Green)",
-      "slug": "hunter-cape-green",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hunter_Cape_(Green)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/hunter-cape-green.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/be/Hunter_Cape_%28Green%29.png/revision/latest/scale-to-width-down/125?cb=20241223212924"
-    },
-    {
-      "name": "Hunter Cape (Red)",
-      "slug": "hunter-cape-red",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hunter_Cape_(Red)",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/hunter-cape-red.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/57/Hunter_Cape_%28Red%29.png/revision/latest/scale-to-width-down/125?cb=20241223212929"
-    },
-    {
-      "name": "Jaw Shield",
-      "slug": "jaw-shield",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+50% Movement Speed +12.5% Melee - Damage +10% Melee - Damage Resistance +500 Energy +250 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+50% Movement Speed +12.5% Melee - Damage +10% Melee - Damage Resistance +500 Energy +250 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Jaw_Shield",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/jaw-shield.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/20/Jaw_Shield.png/revision/latest/scale-to-width-down/125?cb=20241223212705"
-    },
-    {
-      "name": "Lei",
-      "slug": "lei",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+50% Health Regeneration"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+50% Health Regeneration",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Lei",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/lei.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/45/Lei.png/revision/latest/scale-to-width-down/125?cb=20241223212720"
-    },
-    {
-      "name": "Marine Cap",
-      "slug": "marine-cap",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+7.5% Sword - Damage +7.5% Gun - Damage -10% Sword - Cooldown -10% Gun - Cooldown"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+7.5% Sword - Damage +7.5% Gun - Damage -10% Sword - Cooldown -10% Gun - Cooldown",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Cap",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/marine-cap.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5b/Marine_Cap.png/revision/latest/scale-to-width-down/125?cb=20241223212735"
-    },
-    {
-      "name": "Pilot Helmet",
-      "slug": "pilot-helmet",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+130% Movement Speed +10% Health Regeneration +250 Energy +250 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+130% Movement Speed +10% Health Regeneration +250 Energy +250 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pilot_Helmet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/pilot-helmet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6e/Pilot_Helmet.png/revision/latest/scale-to-width-down/125?cb=20241223212821"
-    },
-    {
-      "name": "Pretty Helmet",
-      "slug": "pretty-helmet",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+50% Movement Speed +10% Melee - Damage +12.5% Melee - Damage Resistance +250 Energy +500 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+50% Movement Speed +10% Melee - Damage +12.5% Melee - Damage Resistance +250 Energy +500 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pretty_Helmet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/pretty-helmet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f5/Pretty_Helmet.png/revision/latest/scale-to-width-down/125?cb=20241223212842"
-    },
-    {
-      "name": "Red Spikey Coat",
-      "slug": "red-spikey-coat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+7.5% All - Damage +250 Energy +500 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+7.5% All - Damage +250 Energy +500 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Red_Spikey_Coat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/red-spikey-coat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Red_Spikey_Coat.png/revision/latest/scale-to-width-down/125?cb=20241223212858"
-    },
-    {
-      "name": "Santa Hat",
-      "slug": "santa-hat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+30% Movement Speed +12.5% Fruit - Damage +12.5% Sword - Damage +400 Energy +400 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+30% Movement Speed +12.5% Fruit - Damage +12.5% Sword - Damage +400 Energy +400 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Santa_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/santa-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e6/Santa_Hat.png/revision/latest/scale-to-width-down/125?cb=20241223212913"
-    },
-    {
-      "name": "Shark Tooth Necklace",
-      "slug": "shark-tooth-necklace",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+50% Movement Speed +10% Dash Distance +25% All - Sea Event Damage"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+50% Movement Speed +10% Dash Distance +25% All - Sea Event Damage",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark_Tooth_Necklace",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/shark-tooth-necklace.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4a/Shark_Tooth_Necklace.png/revision/latest/scale-to-width-down/125?cb=20231226193631"
-    },
-    {
-      "name": "Swordsman Hat",
-      "slug": "swordsman-hat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Sword - Damage"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+10% Sword - Damage",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Swordsman_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/swordsman-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/87/Swordsman_Hat.png/revision/latest/scale-to-width-down/125?cb=20241223212943"
-    },
-    {
-      "name": "T-Rex Skull",
-      "slug": "t-rex-skull",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+15% Melee - Damage Resistance +15% Fruit - Damage Resistance +750 Health"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+15% Melee - Damage Resistance +15% Fruit - Damage Resistance +750 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/T-Rex_Skull",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/t-rex-skull.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4a/T-Rex_Skull.png/revision/latest/scale-to-width-down/125?cb=20241224015150"
-    },
-    {
-      "name": "Tomoe Ring",
-      "slug": "tomoe-ring",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "1",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Fruit - Damage"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+10% Fruit - Damage",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tomoe_Ring",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/tomoe-ring.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5b/Tomoe_Ring.png/revision/latest/scale-to-width-down/125?cb=20241223212958"
-    },
-    {
-      "name": "Top Hat",
-      "slug": "top-hat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+3% Melee - Damage -10% All - Cooldown +10% Sword - Damage Resistance"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+3% Melee - Damage -10% All - Cooldown +10% Sword - Damage Resistance",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Top_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/top-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8d/Top_Hat.png/revision/latest/scale-to-width-down/125?cb=20241223213014"
-    },
-    {
-      "name": "Usoap's Hat",
-      "slug": "usoap-s-hat",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "1 sea-2 sea-3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+7.5% Gun - Damage -15% Gun - Cooldown"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+7.5% Gun - Damage -15% Gun - Cooldown",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Usoap%27s_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/usoap-s-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/21/Usoap%27s_Hat.png/revision/latest/scale-to-width-down/125?cb=20241223213029"
-    },
-    {
-      "name": "Warrior Helmet",
-      "slug": "warrior-helmet",
-      "rarity": "Rare",
-      "type": "Accessory",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+12.5% Melee - Damage +12.5% Sword - Damage -5% Melee - Cooldown -5% Sword - Cooldown"
-      ],
-      "fields": {},
-      "rawText": "Rare Accessory+12.5% Melee - Damage +12.5% Sword - Damage -5% Melee - Cooldown -5% Sword - Cooldown",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Warrior_Helmet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/warrior-helmet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/68/Warrior_Helmet.png/revision/latest/scale-to-width-down/125?cb=20241223213059"
-    },
-    {
-      "name": "Cupid's Coat",
-      "slug": "cupid-s-coat",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+12.5% Fruit - Damage +12.5% Sword - Damage +8% All - Damage Resistance +400 Energy +600 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+12.5% Fruit - Damage +12.5% Sword - Damage +8% All - Damage Resistance +400 Energy +600 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cupid%27s_Coat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/cupid-s-coat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/82/Cupid%27s_Coat.png/revision/latest/scale-to-width-down/125?cb=20231224164033"
-    },
-    {
-      "name": "D.S. Coat",
-      "slug": "d-s-coat",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "admins",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+5% All - Damage +200 Energy +200 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+5% All - Damage +200 Energy +200 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/D.S._Coat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/d-s-coat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d6/D.S._Coat.png/revision/latest/scale-to-width-down/125?cb=20241223212747"
-    },
-    {
-      "name": "Dino Hood",
-      "slug": "dino-hood",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Melee - Damage +10% Fruit - Damage +50% Movement Speed +15 Dash Distance +500 Energy +500 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+10% Melee - Damage +10% Fruit - Damage +50% Movement Speed +15 Dash Distance +500 Energy +500 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dino_Hood",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dino-hood.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3f/Dino_Hood.png/revision/latest/scale-to-width-down/125?cb=20241224014949"
-    },
-    {
-      "name": "Dragon Mantle",
-      "slug": "dragon-mantle",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "admins",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+15% Sword - Damage +15% Gun - Damage +10 Air Dash Distance +2 Air Jumps -10% All - Cooldown"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+15% Sword - Damage +15% Gun - Damage +10 Air Dash Distance +2 Air Jumps -10% All - Cooldown",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Mantle",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dragon-mantle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6f/Dragon_Mantle.png/revision/latest/scale-to-width-down/125?cb=20250107233100"
-    },
-    {
-      "name": "Feathered Visage",
-      "slug": "feathered-visage",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+25% Movement Speed +25% Health Regeneration +300 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+25% Movement Speed +25% Health Regeneration +300 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Feathered_Visage",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/feathered-visage.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d7/Feathered_Visage.png/revision/latest/scale-to-width-down/125?cb=20250418063224"
-    },
-    {
-      "name": "Heart Shades",
-      "slug": "heart-shades",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+12.5% Melee - Damage +12.5% Gun - Damage +5% All - Damage Resistance +600 Energy +400 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+12.5% Melee - Damage +12.5% Gun - Damage +5% All - Damage Resistance +600 Energy +400 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Heart_Shades",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/heart-shades.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/42/Heart_Shades.png/revision/latest/scale-to-width-down/125?cb=20231224164107"
-    },
-    {
-      "name": "Holy Crown",
-      "slug": "holy-crown",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+5% All - Damage +5% All - Damage Resistance +5% Energy Regeneration +500 Energy +500 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+5% All - Damage +5% All - Damage Resistance +5% Energy Regeneration +500 Energy +500 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Holy_Crown",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/holy-crown.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/14/Holy_Crown.png/revision/latest/scale-to-width-down/125?cb=20241223212903"
-    },
-    {
-      "name": "Kitsune Mask",
-      "slug": "kitsune-mask",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Fruit - Damage +2 Instinct Dodge Boost +15% Fruit Meter Boost +50% Terror Level Vision Improvement +750 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+10% Fruit - Damage +2 Instinct Dodge Boost +15% Fruit Meter Boost +50% Terror Level Vision Improvement +750 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kitsune_Mask",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/kitsune-mask.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/45/Kitsune_Mask.png/revision/latest/scale-to-width-down/125?cb=20250103140840"
-    },
-    {
-      "name": "Kitsune Ribbon",
-      "slug": "kitsune-ribbon",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Fruit - Damage Resistance +15% Health Regeneration +30% Movement Speed +7 Dashing Speed -25% FlashStep - Cooldown +2500 Energy"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+10% Fruit - Damage Resistance +15% Health Regeneration +30% Movement Speed +7 Dashing Speed -25% FlashStep - Cooldown +2500 Energy",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kitsune_Ribbon",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/kitsune-ribbon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/29/Kitsune_Ribbon.png/revision/latest/scale-to-width-down/125?cb=20250103140825"
-    },
-    {
-      "name": "Leviathan Crown",
-      "slug": "leviathan-crown",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+12% Melee - Damage +35% All - Sea Event Damage +25% Health Regeneration +40% All - Sea Event Material Drop Rate +1 Instinct Dodge Boost"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+12% Melee - Damage +35% All - Sea Event Damage +25% Health Regeneration +40% All - Sea Event Material Drop Rate +1 Instinct Dodge Boost",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Leviathan_Crown",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/leviathan-crown.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/df/Leviathan_Crown.png/revision/latest/scale-to-width-down/125?cb=20231226193806"
-    },
-    {
-      "name": "Musketeer Hat",
-      "slug": "musketeer-hat",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+12.5% Sword - Damage +12.5% Gun - Damage -12.5% Sword - Cooldown -12.5% Gun - Cooldown"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+12.5% Sword - Damage +12.5% Gun - Damage -12.5% Sword - Cooldown -12.5% Gun - Cooldown",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Musketeer_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/musketeer-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/96/Musketeer_Hat.png/revision/latest/scale-to-width-down/125?cb=20241223212750"
-    },
-    {
-      "name": "Pale Scarf",
-      "slug": "pale-scarf",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+15% Fruit - Damage +15% Sword - Damage +2 Instinct Dodge Boost 10x Instinct Vision Range"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+15% Fruit - Damage +15% Sword - Damage +2 Instinct Dodge Boost 10x Instinct Vision Range",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pale_Scarf",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/pale-scarf.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2a/Pale_Scarf.png/revision/latest/scale-to-width-down/125?cb=20241223212805"
-    },
-    {
-      "name": "Swan Glasses",
-      "slug": "swan-glasses",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+25% Movement Speed +8% All - Damage -8% All - Cooldown +8% All - Damage Resistance +250 Energy +250 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+25% Movement Speed +8% All - Damage -8% All - Cooldown +8% All - Damage Resistance +250 Energy +250 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Swan_Glasses",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/swan-glasses.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/75/Swan_Glasses.png/revision/latest/scale-to-width-down/125?cb=20241223212928"
-    },
-    {
-      "name": "Terror Jaw",
-      "slug": "terror-jaw",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Sword - Damage -10% All - Cooldown +20% All - Sea Event Defense +200 Energy +200 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+10% Sword - Damage -10% All - Cooldown +20% All - Sea Event Defense +200 Energy +200 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Terror_Jaw",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/terror-jaw.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5d/Terror_Jaw.png/revision/latest/scale-to-width-down/125?cb=20231226193720"
-    },
-    {
-      "name": "Valkyrie Helm",
-      "slug": "valkyrie-helm",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+15% Sword - Damage +600 Energy +600 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+15% Sword - Damage +600 Energy +600 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Valkyrie_Helm",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/valkyrie-helm.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b4/Valkyrie_Helm.png/revision/latest/scale-to-width-down/125?cb=20241223213044"
-    },
-    {
-      "name": "Wyvern Helmet",
-      "slug": "wyvern-helmet",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "admins",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Melee - Damage Resistance +10% Sword - Damage Resistance +10% Gun - Damage Resistance +25% Health Regeneration +5% Energy Regeneration +750 Energy +750 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+10% Melee - Damage Resistance +10% Sword - Damage Resistance +10% Gun - Damage Resistance +25% Health Regeneration +5% Energy Regeneration +750 Energy +750 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Wyvern_Helmet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/wyvern-helmet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6d/Wyvern_Helmet.png/revision/latest/scale-to-width-down/125?cb=20250107233125"
-    },
-    {
-      "name": "Zebra Cap",
-      "slug": "zebra-cap",
-      "rarity": "Legendary",
-      "type": "Accessory",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Sword - Damage -15% Fruit - Cooldown +500 Energy +100 Health"
-      ],
-      "fields": {},
-      "rawText": "Legendary Accessory+10% Sword - Damage -15% Fruit - Cooldown +500 Energy +100 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Zebra_Cap",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/zebra-cap.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/4d/Zebra_Cap.png/revision/latest/scale-to-width-down/125?cb=20241223213107"
-    },
-    {
-      "name": "50b Party Hat",
-      "slug": "50b-party-hat",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Experience Boost +400 Energy +400 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+10% Experience Boost +400 Energy +400 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/50b_Party_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/50b-party-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/04/50b_Party_Hat.png/revision/latest/scale-to-width-down/125?cb=20250927234831"
-    },
-    {
-      "name": "Celestial Helmet",
-      "slug": "celestial-helmet",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+30% \"Summer Token\" Multiplier +10% All - Damage Resistance -5% All - Cooldown 2x Instinct Vision Range"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+30% \"Summer Token\" Multiplier +10% All - Damage Resistance -5% All - Cooldown 2x Instinct Vision Range",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Celestial_Helmet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/celestial-helmet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d6/Celestial_Helmet.png/revision/latest/scale-to-width-down/125?cb=20250913150512"
-    },
-    {
-      "name": "Coven Witch Hat",
-      "slug": "coven-witch-hat",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Fruit - Damage Resistance +7% Fruit - Damage +250 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+10% Fruit - Damage Resistance +7% Fruit - Damage +250 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Coven_Witch_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/coven-witch-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b0/Coven_Witch_Hat.png/revision/latest/scale-to-width-down/125?cb=20251031185412"
-    },
-    {
-      "name": "Cracked Egg Helmet",
-      "slug": "cracked-egg-helmet",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% All - Damage Resistance +5% All - Damage +500 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+10% All - Damage Resistance +5% All - Damage +500 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cracked_Egg_Helmet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/cracked-egg-helmet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cf/Cracked_Egg_Helmet.png/revision/latest/scale-to-width-down/125?cb=20260329210520"
-    },
-    {
-      "name": "Cupid's Top Hat",
-      "slug": "cupid-s-top-hat",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+14% Movement Speed +2% Melee - Damage +20% \"Hearts\" Multiplier +214 Energy +214 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+14% Movement Speed +2% Melee - Damage +20% \"Hearts\" Multiplier +214 Energy +214 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cupid%27s_Top_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/cupid-s-top-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f9/Cupid%27s_Top_Hat.png/revision/latest/scale-to-width-down/125?cb=20260215034742"
-    },
-    {
-      "name": "Dark Coat",
-      "slug": "dark-coat",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "2",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+15% Fruit - Damage +600 Energy +600 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+15% Fruit - Damage +600 Energy +600 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Coat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/dark-coat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/23/Dark_Coat.png/revision/latest/scale-to-width-down/125?cb=20241223212802"
-    },
-    {
-      "name": "Divine Cloak",
-      "slug": "divine-cloak",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+30% \"Summer Token\" Multiplier +30% Movement Speed +7% Melee - Damage +7% Fruit - Damage +500 Energy +500 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+30% \"Summer Token\" Multiplier +30% Movement Speed +7% Melee - Damage +7% Fruit - Damage +500 Energy +500 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Divine_Cloak",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/divine-cloak.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/63/Divine_Cloak.png/revision/latest/scale-to-width-down/125?cb=20250913150511"
-    },
-    {
-      "name": "Easter Bunny Cape",
-      "slug": "easter-bunny-cape",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+3 Air Jumps +50% Movement Speed +10% Melee - Damage"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+3 Air Jumps +50% Movement Speed +10% Melee - Damage",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Easter_Bunny_Cape",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/easter-bunny-cape.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/82/Easter_Bunny_Cape.png/revision/latest/scale-to-width-down/125?cb=20260329210522"
-    },
-    {
-      "name": "Frosty Helmet",
-      "slug": "frosty-helmet",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+50% Movement Speed +10% Gun - Damage +5% All - Damage Resistance +20% \"Candy\" Multiplier"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+50% Movement Speed +10% Gun - Damage +5% All - Damage Resistance +20% \"Candy\" Multiplier",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Frosty_Helmet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/frosty-helmet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3b/Frosty_Helmet.png/revision/latest/scale-to-width-down/125?cb=20251226173418"
-    },
-    {
-      "name": "Holiday Cloak",
-      "slug": "holiday-cloak",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Melee - Damage +10% Fruit - Damage +1 Instinct Dodge Boost"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+10% Melee - Damage +10% Fruit - Damage +1 Instinct Dodge Boost",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Holiday_Cloak",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/holiday-cloak.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/44/Holiday_Cloak.png/revision/latest/scale-to-width-down/125?cb=20250427142806"
-    },
-    {
-      "name": "Leviathan Shield",
-      "slug": "leviathan-shield",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "3",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+15% Sword - Damage Resistance +15% Melee - Damage Resistance +15% Gun - Damage Resistance +90% Sea Damage Reduction +30% All - Sea Event Defense +1000 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+15% Sword - Damage Resistance +15% Melee - Damage Resistance +15% Gun - Damage Resistance +90% Sea Damage Reduction +30% All - Sea Event Defense +1000 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Leviathan_Shield",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/leviathan-shield.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2f/Leviathan_Shield.png/revision/latest/scale-to-width-down/125?cb=20240922105617"
-    },
-    {
-      "name": "Oni Helmet",
-      "slug": "oni-helmet",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+30% \"Summer Token\" Multiplier -10% All - Cooldown +30% Health Regeneration +30% Movement Speed"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+30% \"Summer Token\" Multiplier -10% All - Cooldown +30% Health Regeneration +30% Movement Speed",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Oni_Helmet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/oni-helmet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c9/Oni_Helmet.png/revision/latest/scale-to-width-down/125?cb=20250909224121"
-    },
-    {
-      "name": "Party Hat",
-      "slug": "party-hat",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+10% Experience Boost +400 Energy +400 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+10% Experience Boost +400 Energy +400 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Party_Hat",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/party-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/69/Party_Hat.png/revision/latest/scale-to-width-down/125?cb=20230824145635"
-    },
-    {
-      "name": "Peppermint Helmet",
-      "slug": "peppermint-helmet",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+20% Movement Speed +5% All - Damage Resistance +10% Sword - Damage +20% \"Candy\" Multiplier"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+20% Movement Speed +5% All - Damage Resistance +10% Sword - Damage +20% \"Candy\" Multiplier",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Peppermint_Helmet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/peppermint-helmet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/64/Peppermint_Helmet.png/revision/latest/scale-to-width-down/125?cb=20251226173439"
-    },
-    {
-      "name": "Pumpkin Mask",
-      "slug": "pumpkin-mask",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+20% Movement Speed +5% Melee - Damage Resistance +6% Melee - Damage +6% Fruit - Damage +250 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+20% Movement Speed +5% Melee - Damage Resistance +6% Melee - Damage +6% Fruit - Damage +250 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pumpkin_Mask",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/pumpkin-mask.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/ba/Pumpkin_Mask.png/revision/latest/scale-to-width-down/125?cb=20251031185411"
-    },
-    {
-      "name": "Red Ribbon",
-      "slug": "red-ribbon",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+20% Movement Speed +20% \"Candy\" Multiplier +7% All - Damage Resistance +5% Fruit - Damage -5% Fruit - Cooldown"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+20% Movement Speed +20% \"Candy\" Multiplier +7% All - Damage Resistance +5% Fruit - Damage -5% Fruit - Cooldown",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Red_Ribbon",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/red-ribbon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/25/Red_Ribbon.png/revision/latest/scale-to-width-down/125?cb=20251226173411"
-    },
-    {
-      "name": "Romantic Bouquet",
-      "slug": "romantic-bouquet",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+14% Movement Speed +3% Melee - Damage Resistance +20% Friendship Boost +143 Energy +143 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+14% Movement Speed +3% Melee - Damage Resistance +20% Friendship Boost +143 Energy +143 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Romantic_Bouquet",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/romantic-bouquet.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fe/Romantic_Bouquet.png/revision/latest/scale-to-width-down/125?cb=20260215040227"
-    },
-    {
-      "name": "Sanguine Cloak",
-      "slug": "sanguine-cloak",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "events",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+30% \"Summer Token\" Multiplier +5% Melee - Damage Resistance +5% Melee - Damage +5% Sword - Damage +500 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+30% \"Summer Token\" Multiplier +5% Melee - Damage Resistance +5% Melee - Damage +5% Sword - Damage +500 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sanguine_Cloak",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/sanguine-cloak.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1f/Sanguine_Cloak.png/revision/latest/scale-to-width-down/125?cb=20250909224147"
-    },
-    {
-      "name": "Uzoth's Cloak",
-      "slug": "uzoth-s-cloak",
-      "rarity": "Mythical",
-      "type": "Accessory",
-      "sea": "admins",
-      "money": null,
-      "robux": null,
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [
-        "+20% Melee - Damage +5% All - Damage Resistance +750 Energy +750 Health"
-      ],
-      "fields": {},
-      "rawText": "Mythical Accessory+20% Melee - Damage +5% All - Damage Resistance +750 Energy +750 Health",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Uzoth%27s_Cloak",
-      "sourcePage": "Accessories",
-      "image": "/Blox%20Fruits/Accessories/uzoth-s-cloak.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/63/Uzoth%27s_Cloak.png/revision/latest/scale-to-width-down/125?cb=20250107233101"
+      "item": {
+        "name": "Headband (Blue)",
+        "rarity": "Common",
+        "type": "Accessory",
+        "bonuses": [
+          "+8% Fruit - Damage Resistance +8% Sword - Damage Resistance +8% Melee - Damage Resistance +8% Gun - Damage Resistance +30% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "headband-blue",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Accessories/headband-blue.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Headband (Green)",
+        "rarity": "Common",
+        "type": "Accessory",
+        "bonuses": [
+          "+7% Fruit - Damage Resistance +7% Sword - Damage Resistance +7% Melee - Damage Resistance +7% Gun - Damage Resistance +20% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "headband-green",
+        "section": "Common",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Accessories/headband-green.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Headband (Orange)",
+        "rarity": "Common",
+        "type": "Accessory",
+        "bonuses": [
+          "+5% Fruit - Damage Resistance +5% Sword - Damage Resistance +5% Melee - Damage Resistance +5% Gun - Damage Resistance +15% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "headband-orange",
+        "section": "Common",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Accessories/headband-orange.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Headband (Purple)",
+        "rarity": "Common",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Fruit - Damage Resistance +10% Sword - Damage Resistance +10% Melee - Damage Resistance +10% Gun - Damage Resistance +40% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "headband-purple",
+        "section": "Common",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Accessories/headband-purple.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Headband (Red)",
+        "rarity": "Common",
+        "type": "Accessory",
+        "bonuses": [
+          "+12% Fruit - Damage Resistance +12% Sword - Damage Resistance +12% Melee - Damage Resistance +12% Gun - Damage Resistance +60% Movement Speed +5% Melee - Damage"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "headband-red",
+        "section": "Common",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Accessories/headband-red.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Headband (White)",
+        "rarity": "Common",
+        "type": "Accessory",
+        "bonuses": [
+          "+2% Fruit - Damage Resistance +2% Sword - Damage Resistance +2% Melee - Damage Resistance +2% Gun - Damage Resistance +10% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "headband-white",
+        "section": "Common",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Accessories/headband-white.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Headband (Yellow)",
+        "rarity": "Common",
+        "type": "Accessory",
+        "bonuses": [
+          "+4% Fruit - Damage Resistance +4% Sword - Damage Resistance +4% Melee - Damage Resistance +4% Gun - Damage Resistance +15% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "headband-yellow",
+        "section": "Common",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Accessories/headband-yellow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dojo Belt (Blue)",
+        "rarity": "Uncommon",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Melee - Damage +30% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "dojo-belt-blue",
+        "section": "Uncommon",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Accessories/dojo-belt-blue.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dojo Belt (Green)",
+        "rarity": "Uncommon",
+        "type": "Accessory",
+        "bonuses": [
+          "+8% Melee - Damage +20% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "dojo-belt-green",
+        "section": "Uncommon",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Accessories/dojo-belt-green.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dojo Belt (Orange)",
+        "rarity": "Uncommon",
+        "type": "Accessory",
+        "bonuses": [
+          "+6% Melee - Damage +15% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "dojo-belt-orange",
+        "section": "Uncommon",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Accessories/dojo-belt-orange.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dojo Belt (Purple)",
+        "rarity": "Uncommon",
+        "type": "Accessory",
+        "bonuses": [
+          "+14% Melee - Damage +40% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "dojo-belt-purple",
+        "section": "Uncommon",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Accessories/dojo-belt-purple.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dojo Belt (Red)",
+        "rarity": "Uncommon",
+        "type": "Accessory",
+        "bonuses": [
+          "+12% Melee - Damage +60% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "dojo-belt-red",
+        "section": "Uncommon",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Accessories/dojo-belt-red.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dojo Belt (White)",
+        "rarity": "Uncommon",
+        "type": "Accessory",
+        "bonuses": [
+          "+2% Melee - Damage +10% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "dojo-belt-white",
+        "section": "Uncommon",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Accessories/dojo-belt-white.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dojo Belt (Yellow)",
+        "rarity": "Uncommon",
+        "type": "Accessory",
+        "bonuses": [
+          "+4% Melee - Damage +15% Movement Speed"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "dojo-belt-yellow",
+        "section": "Uncommon",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Accessories/dojo-belt-yellow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Headband (Black)",
+        "rarity": "Uncommon",
+        "type": "Accessory",
+        "bonuses": [
+          "+20% Movement Speed +7% Melee - Damage +16% Sword - Damage Resistance +16% Melee - Damage Resistance +16% Fruit - Damage Resistance +16% Gun - Damage Resistance +1 Instinct Dodge Boost"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "headband-black",
+        "section": "Uncommon",
+        "sortOrder": 15,
+        "image": "/Blox%20Fruits/Accessories/headband-black.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Coat",
+        "rarity": "Uncommon",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Gun - Damage +200 Health"
+        ],
+        "sea": "1"
+      },
+      "system": {
+        "slug": "pink-coat",
+        "section": "Uncommon",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Accessories/pink-coat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bandanna (Black)",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Energy"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "bandanna-black",
+        "section": "Rare",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Accessories/bandanna-black.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bandanna (Green)",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Energy"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "bandanna-green",
+        "section": "Rare",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Accessories/bandanna-green.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bandanna (Red)",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Energy"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "bandanna-red",
+        "section": "Rare",
+        "sortOrder": 19,
+        "image": "/Blox%20Fruits/Accessories/bandanna-red.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bear Ears",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% All - Damage Resistance +500 Energy"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "bear-ears",
+        "section": "Rare",
+        "sortOrder": 20,
+        "image": "/Blox%20Fruits/Accessories/bear-ears.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Cape",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+5% All - Damage +100 Energy +100 Health"
+        ],
+        "sea": "1"
+      },
+      "system": {
+        "slug": "black-cape",
+        "section": "Rare",
+        "sortOrder": 21,
+        "image": "/Blox%20Fruits/Accessories/black-cape.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Spikey Coat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+7.5% All - Damage +200 Energy +200 Health"
+        ],
+        "sea": "2"
+      },
+      "system": {
+        "slug": "black-spikey-coat",
+        "section": "Rare",
+        "sortOrder": 22,
+        "image": "/Blox%20Fruits/Accessories/black-spikey-coat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Spikey Coat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+7.5% All - Damage +500 Energy +250 Health"
+        ],
+        "sea": "2"
+      },
+      "system": {
+        "slug": "blue-spikey-coat",
+        "section": "Rare",
+        "sortOrder": 23,
+        "image": "/Blox%20Fruits/Accessories/blue-spikey-coat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Choppa",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+3% Fruit - Damage -15% Fruit - Cooldown +10% Fruit - Damage Resistance"
+        ],
+        "sea": "2 sea-3"
+      },
+      "system": {
+        "slug": "choppa",
+        "section": "Rare",
+        "sortOrder": 24,
+        "image": "/Blox%20Fruits/Accessories/choppa.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Melee - Damage +200 Energy"
+        ],
+        "sea": "1"
+      },
+      "system": {
+        "slug": "coat",
+        "section": "Rare",
+        "sortOrder": 25,
+        "image": "/Blox%20Fruits/Accessories/coat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cool Shades",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+7.5% All - Damage +17.5% Movement Speed +100 Energy +100 Health"
+        ],
+        "sea": "1"
+      },
+      "system": {
+        "slug": "cool-shades",
+        "section": "Rare",
+        "sortOrder": 26,
+        "image": "/Blox%20Fruits/Accessories/cool-shades.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dojo Belt (Black)",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+16% Melee - Damage +80% Movement Speed +1 Instinct Dodge Boost"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "dojo-belt-black",
+        "section": "Rare",
+        "sortOrder": 27,
+        "image": "/Blox%20Fruits/Accessories/dojo-belt-black.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elf Hat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+20% Movement Speed +10% Melee - Damage +10% Sword - Damage -5% Melee - Cooldown -5% Sword - Cooldown"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "elf-hat",
+        "section": "Rare",
+        "sortOrder": 28,
+        "image": "/Blox%20Fruits/Accessories/elf-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghoul Mask",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+35% Movement Speed +500 Energy +10% Melee - PvE Life Leech +2.5% Melee - PvP Life Leech"
+        ],
+        "sea": "2"
+      },
+      "system": {
+        "slug": "ghoul-mask",
+        "section": "Rare",
+        "sortOrder": 29,
+        "image": "/Blox%20Fruits/Accessories/ghoul-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Sunhat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% All - Damage +500 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "golden-sunhat",
+        "section": "Rare",
+        "sortOrder": 30,
+        "image": "/Blox%20Fruits/Accessories/golden-sunhat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hunter Cape (Black)",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "hunter-cape-black",
+        "section": "Rare",
+        "sortOrder": 31,
+        "image": "/Blox%20Fruits/Accessories/hunter-cape-black.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hunter Cape (Green)",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "hunter-cape-green",
+        "section": "Rare",
+        "sortOrder": 32,
+        "image": "/Blox%20Fruits/Accessories/hunter-cape-green.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hunter Cape (Red)",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+80% Movement Speed +10% Melee - Damage +10% Sword - Damage +10% Gun - Damage +750 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "hunter-cape-red",
+        "section": "Rare",
+        "sortOrder": 33,
+        "image": "/Blox%20Fruits/Accessories/hunter-cape-red.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jaw Shield",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+50% Movement Speed +12.5% Melee - Damage +10% Melee - Damage Resistance +500 Energy +250 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "jaw-shield",
+        "section": "Rare",
+        "sortOrder": 34,
+        "image": "/Blox%20Fruits/Accessories/jaw-shield.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lei",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+50% Health Regeneration"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "lei",
+        "section": "Rare",
+        "sortOrder": 35,
+        "image": "/Blox%20Fruits/Accessories/lei.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Marine Cap",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+7.5% Sword - Damage +7.5% Gun - Damage -10% Sword - Cooldown -10% Gun - Cooldown"
+        ],
+        "sea": "1 sea-2 sea-3"
+      },
+      "system": {
+        "slug": "marine-cap",
+        "section": "Rare",
+        "sortOrder": 36,
+        "image": "/Blox%20Fruits/Accessories/marine-cap.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pilot Helmet",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+130% Movement Speed +10% Health Regeneration +250 Energy +250 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "pilot-helmet",
+        "section": "Rare",
+        "sortOrder": 37,
+        "image": "/Blox%20Fruits/Accessories/pilot-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pretty Helmet",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+50% Movement Speed +10% Melee - Damage +12.5% Melee - Damage Resistance +250 Energy +500 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "pretty-helmet",
+        "section": "Rare",
+        "sortOrder": 38,
+        "image": "/Blox%20Fruits/Accessories/pretty-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Spikey Coat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+7.5% All - Damage +250 Energy +500 Health"
+        ],
+        "sea": "2"
+      },
+      "system": {
+        "slug": "red-spikey-coat",
+        "section": "Rare",
+        "sortOrder": 39,
+        "image": "/Blox%20Fruits/Accessories/red-spikey-coat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa Hat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+30% Movement Speed +12.5% Fruit - Damage +12.5% Sword - Damage +400 Energy +400 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "santa-hat",
+        "section": "Rare",
+        "sortOrder": 40,
+        "image": "/Blox%20Fruits/Accessories/santa-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shark Tooth Necklace",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+50% Movement Speed +10% Dash Distance +25% All - Sea Event Damage"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "shark-tooth-necklace",
+        "section": "Rare",
+        "sortOrder": 41,
+        "image": "/Blox%20Fruits/Accessories/shark-tooth-necklace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Swordsman Hat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Sword - Damage"
+        ],
+        "sea": "1"
+      },
+      "system": {
+        "slug": "swordsman-hat",
+        "section": "Rare",
+        "sortOrder": 42,
+        "image": "/Blox%20Fruits/Accessories/swordsman-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "T-Rex Skull",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+15% Melee - Damage Resistance +15% Fruit - Damage Resistance +750 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "t-rex-skull",
+        "section": "Rare",
+        "sortOrder": 43,
+        "image": "/Blox%20Fruits/Accessories/t-rex-skull.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tomoe Ring",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Fruit - Damage"
+        ],
+        "sea": "1"
+      },
+      "system": {
+        "slug": "tomoe-ring",
+        "section": "Rare",
+        "sortOrder": 44,
+        "image": "/Blox%20Fruits/Accessories/tomoe-ring.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Top Hat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+3% Melee - Damage -10% All - Cooldown +10% Sword - Damage Resistance"
+        ],
+        "sea": "2 sea-3"
+      },
+      "system": {
+        "slug": "top-hat",
+        "section": "Rare",
+        "sortOrder": 45,
+        "image": "/Blox%20Fruits/Accessories/top-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Usoap's Hat",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+7.5% Gun - Damage -15% Gun - Cooldown"
+        ],
+        "sea": "1 sea-2 sea-3"
+      },
+      "system": {
+        "slug": "usoap-s-hat",
+        "section": "Rare",
+        "sortOrder": 46,
+        "image": "/Blox%20Fruits/Accessories/usoap-s-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Warrior Helmet",
+        "rarity": "Rare",
+        "type": "Accessory",
+        "bonuses": [
+          "+12.5% Melee - Damage +12.5% Sword - Damage -5% Melee - Cooldown -5% Sword - Cooldown"
+        ],
+        "sea": "2"
+      },
+      "system": {
+        "slug": "warrior-helmet",
+        "section": "Rare",
+        "sortOrder": 47,
+        "image": "/Blox%20Fruits/Accessories/warrior-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid's Coat",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+12.5% Fruit - Damage +12.5% Sword - Damage +8% All - Damage Resistance +400 Energy +600 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "cupid-s-coat",
+        "section": "Legendary",
+        "sortOrder": 48,
+        "image": "/Blox%20Fruits/Accessories/cupid-s-coat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "D.S. Coat",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+5% All - Damage +200 Energy +200 Health"
+        ],
+        "sea": "admins"
+      },
+      "system": {
+        "slug": "d-s-coat",
+        "section": "Legendary",
+        "sortOrder": 49,
+        "image": "/Blox%20Fruits/Accessories/d-s-coat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dino Hood",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Melee - Damage +10% Fruit - Damage +50% Movement Speed +15 Dash Distance +500 Energy +500 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "dino-hood",
+        "section": "Legendary",
+        "sortOrder": 50,
+        "image": "/Blox%20Fruits/Accessories/dino-hood.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Mantle",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+15% Sword - Damage +15% Gun - Damage +10 Air Dash Distance +2 Air Jumps -10% All - Cooldown"
+        ],
+        "sea": "admins"
+      },
+      "system": {
+        "slug": "dragon-mantle",
+        "section": "Legendary",
+        "sortOrder": 51,
+        "image": "/Blox%20Fruits/Accessories/dragon-mantle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Feathered Visage",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+25% Movement Speed +25% Health Regeneration +300 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "feathered-visage",
+        "section": "Legendary",
+        "sortOrder": 52,
+        "image": "/Blox%20Fruits/Accessories/feathered-visage.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Shades",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+12.5% Melee - Damage +12.5% Gun - Damage +5% All - Damage Resistance +600 Energy +400 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "heart-shades",
+        "section": "Legendary",
+        "sortOrder": 53,
+        "image": "/Blox%20Fruits/Accessories/heart-shades.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Crown",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+5% All - Damage +5% All - Damage Resistance +5% Energy Regeneration +500 Energy +500 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "holy-crown",
+        "section": "Legendary",
+        "sortOrder": 54,
+        "image": "/Blox%20Fruits/Accessories/holy-crown.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kitsune Mask",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Fruit - Damage +2 Instinct Dodge Boost +15% Fruit Meter Boost +50% Terror Level Vision Improvement +750 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "kitsune-mask",
+        "section": "Legendary",
+        "sortOrder": 55,
+        "image": "/Blox%20Fruits/Accessories/kitsune-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kitsune Ribbon",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Fruit - Damage Resistance +15% Health Regeneration +30% Movement Speed +7 Dashing Speed -25% FlashStep - Cooldown +2500 Energy"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "kitsune-ribbon",
+        "section": "Legendary",
+        "sortOrder": 56,
+        "image": "/Blox%20Fruits/Accessories/kitsune-ribbon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Leviathan Crown",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+12% Melee - Damage +35% All - Sea Event Damage +25% Health Regeneration +40% All - Sea Event Material Drop Rate +1 Instinct Dodge Boost"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "leviathan-crown",
+        "section": "Legendary",
+        "sortOrder": 57,
+        "image": "/Blox%20Fruits/Accessories/leviathan-crown.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Musketeer Hat",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+12.5% Sword - Damage +12.5% Gun - Damage -12.5% Sword - Cooldown -12.5% Gun - Cooldown"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "musketeer-hat",
+        "section": "Legendary",
+        "sortOrder": 58,
+        "image": "/Blox%20Fruits/Accessories/musketeer-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pale Scarf",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+15% Fruit - Damage +15% Sword - Damage +2 Instinct Dodge Boost 10x Instinct Vision Range"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "pale-scarf",
+        "section": "Legendary",
+        "sortOrder": 59,
+        "image": "/Blox%20Fruits/Accessories/pale-scarf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Swan Glasses",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+25% Movement Speed +8% All - Damage -8% All - Cooldown +8% All - Damage Resistance +250 Energy +250 Health"
+        ],
+        "sea": "2"
+      },
+      "system": {
+        "slug": "swan-glasses",
+        "section": "Legendary",
+        "sortOrder": 60,
+        "image": "/Blox%20Fruits/Accessories/swan-glasses.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Terror Jaw",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Sword - Damage -10% All - Cooldown +20% All - Sea Event Defense +200 Energy +200 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "terror-jaw",
+        "section": "Legendary",
+        "sortOrder": 61,
+        "image": "/Blox%20Fruits/Accessories/terror-jaw.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Valkyrie Helm",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+15% Sword - Damage +600 Energy +600 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "valkyrie-helm",
+        "section": "Legendary",
+        "sortOrder": 62,
+        "image": "/Blox%20Fruits/Accessories/valkyrie-helm.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wyvern Helmet",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Melee - Damage Resistance +10% Sword - Damage Resistance +10% Gun - Damage Resistance +25% Health Regeneration +5% Energy Regeneration +750 Energy +750 Health"
+        ],
+        "sea": "admins"
+      },
+      "system": {
+        "slug": "wyvern-helmet",
+        "section": "Legendary",
+        "sortOrder": 63,
+        "image": "/Blox%20Fruits/Accessories/wyvern-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zebra Cap",
+        "rarity": "Legendary",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Sword - Damage -15% Fruit - Cooldown +500 Energy +100 Health"
+        ],
+        "sea": "2"
+      },
+      "system": {
+        "slug": "zebra-cap",
+        "section": "Legendary",
+        "sortOrder": 64,
+        "image": "/Blox%20Fruits/Accessories/zebra-cap.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "50b Party Hat",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Experience Boost +400 Energy +400 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "50b-party-hat",
+        "section": "Mythical",
+        "sortOrder": 65,
+        "image": "/Blox%20Fruits/Accessories/50b-party-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial Helmet",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+30% \"Summer Token\" Multiplier +10% All - Damage Resistance -5% All - Cooldown 2x Instinct Vision Range"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "celestial-helmet",
+        "section": "Mythical",
+        "sortOrder": 66,
+        "image": "/Blox%20Fruits/Accessories/celestial-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coven Witch Hat",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Fruit - Damage Resistance +7% Fruit - Damage +250 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "coven-witch-hat",
+        "section": "Mythical",
+        "sortOrder": 67,
+        "image": "/Blox%20Fruits/Accessories/coven-witch-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cracked Egg Helmet",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% All - Damage Resistance +5% All - Damage +500 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "cracked-egg-helmet",
+        "section": "Mythical",
+        "sortOrder": 68,
+        "image": "/Blox%20Fruits/Accessories/cracked-egg-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid's Top Hat",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+14% Movement Speed +2% Melee - Damage +20% \"Hearts\" Multiplier +214 Energy +214 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "cupid-s-top-hat",
+        "section": "Mythical",
+        "sortOrder": 69,
+        "image": "/Blox%20Fruits/Accessories/cupid-s-top-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Coat",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+15% Fruit - Damage +600 Energy +600 Health"
+        ],
+        "sea": "2"
+      },
+      "system": {
+        "slug": "dark-coat",
+        "section": "Mythical",
+        "sortOrder": 70,
+        "image": "/Blox%20Fruits/Accessories/dark-coat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Divine Cloak",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+30% \"Summer Token\" Multiplier +30% Movement Speed +7% Melee - Damage +7% Fruit - Damage +500 Energy +500 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "divine-cloak",
+        "section": "Mythical",
+        "sortOrder": 71,
+        "image": "/Blox%20Fruits/Accessories/divine-cloak.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Bunny Cape",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+3 Air Jumps +50% Movement Speed +10% Melee - Damage"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "easter-bunny-cape",
+        "section": "Mythical",
+        "sortOrder": 72,
+        "image": "/Blox%20Fruits/Accessories/easter-bunny-cape.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frosty Helmet",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+50% Movement Speed +10% Gun - Damage +5% All - Damage Resistance +20% \"Candy\" Multiplier"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "frosty-helmet",
+        "section": "Mythical",
+        "sortOrder": 73,
+        "image": "/Blox%20Fruits/Accessories/frosty-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Holiday Cloak",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Melee - Damage +10% Fruit - Damage +1 Instinct Dodge Boost"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "holiday-cloak",
+        "section": "Mythical",
+        "sortOrder": 74,
+        "image": "/Blox%20Fruits/Accessories/holiday-cloak.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Leviathan Shield",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+15% Sword - Damage Resistance +15% Melee - Damage Resistance +15% Gun - Damage Resistance +90% Sea Damage Reduction +30% All - Sea Event Defense +1000 Health"
+        ],
+        "sea": "3"
+      },
+      "system": {
+        "slug": "leviathan-shield",
+        "section": "Mythical",
+        "sortOrder": 75,
+        "image": "/Blox%20Fruits/Accessories/leviathan-shield.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Oni Helmet",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+30% \"Summer Token\" Multiplier -10% All - Cooldown +30% Health Regeneration +30% Movement Speed"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "oni-helmet",
+        "section": "Mythical",
+        "sortOrder": 76,
+        "image": "/Blox%20Fruits/Accessories/oni-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Party Hat",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+10% Experience Boost +400 Energy +400 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "party-hat",
+        "section": "Mythical",
+        "sortOrder": 77,
+        "image": "/Blox%20Fruits/Accessories/party-hat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint Helmet",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+20% Movement Speed +5% All - Damage Resistance +10% Sword - Damage +20% \"Candy\" Multiplier"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "peppermint-helmet",
+        "section": "Mythical",
+        "sortOrder": 78,
+        "image": "/Blox%20Fruits/Accessories/peppermint-helmet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Mask",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+20% Movement Speed +5% Melee - Damage Resistance +6% Melee - Damage +6% Fruit - Damage +250 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "pumpkin-mask",
+        "section": "Mythical",
+        "sortOrder": 79,
+        "image": "/Blox%20Fruits/Accessories/pumpkin-mask.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Ribbon",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+20% Movement Speed +20% \"Candy\" Multiplier +7% All - Damage Resistance +5% Fruit - Damage -5% Fruit - Cooldown"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "red-ribbon",
+        "section": "Mythical",
+        "sortOrder": 80,
+        "image": "/Blox%20Fruits/Accessories/red-ribbon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Romantic Bouquet",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+14% Movement Speed +3% Melee - Damage Resistance +20% Friendship Boost +143 Energy +143 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "romantic-bouquet",
+        "section": "Mythical",
+        "sortOrder": 81,
+        "image": "/Blox%20Fruits/Accessories/romantic-bouquet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sanguine Cloak",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+30% \"Summer Token\" Multiplier +5% Melee - Damage Resistance +5% Melee - Damage +5% Sword - Damage +500 Health"
+        ],
+        "sea": "events"
+      },
+      "system": {
+        "slug": "sanguine-cloak",
+        "section": "Mythical",
+        "sortOrder": 82,
+        "image": "/Blox%20Fruits/Accessories/sanguine-cloak.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Uzoth's Cloak",
+        "rarity": "Mythical",
+        "type": "Accessory",
+        "bonuses": [
+          "+20% Melee - Damage +5% All - Damage Resistance +750 Energy +750 Health"
+        ],
+        "sea": "admins"
+      },
+      "system": {
+        "slug": "uzoth-s-cloak",
+        "section": "Mythical",
+        "sortOrder": 83,
+        "image": "/Blox%20Fruits/Accessories/uzoth-s-cloak.webp"
+      }
     }
   ]
 }

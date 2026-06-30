@@ -2,6 +2,7 @@ import "server-only";
 import fs from "node:fs/promises";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { repoPath } from "@/lib/paths";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 
 export type WizardAlchemyPotion = {
   name: string;
@@ -42,8 +43,7 @@ export type WizardAlchemyRace = {
 
 async function readDataset<T>(fileName: string): Promise<T[]> {
   const raw = await fs.readFile(repoPath("data", "Wizard Alchemy", fileName), "utf8");
-  const parsed = JSON.parse(raw) as { items?: T[] };
-  return parsed.items ?? [];
+  return unwrapDatasetItems(JSON.parse(raw)) as T[];
 }
 
 async function readPotionPlannerData() {

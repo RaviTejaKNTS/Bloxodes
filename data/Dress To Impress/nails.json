@@ -1,558 +1,305 @@
 {
   "meta": {
-    "title": "Dress To Impress Nails",
+    "schemaVersion": 2,
     "game": "Dress To Impress",
     "gameSlug": "dress-to-impress",
     "collection": "nails",
     "route": "/wiki/dress-to-impress/nails",
     "catalogCode": "dress-to-impress-nails",
-    "universeId": 5203828273,
-    "updatedAt": "2026-06-01",
-    "publishStatus": "phase-2-dataset-images-final-copy-ready-parent-config-pending",
-    "itemCount": 16,
-    "sourceCount": 16,
-    "groupBy": "collectionSection",
-    "counts": {
-      "byCatalogSection": {
-        "Standard nails": 11,
-        "Reward nails": 1,
-        "Rank nails": 1,
-        "Code-origin nails": 1,
-        "Retired nails": 2
-      },
-      "byStatus": {
-        "Standard nail station option": 11,
-        "No longer obtainable": 1,
-        "Rank unlock": 1,
-        "Code-origin item": 1,
-        "Retired": 2
-      },
-      "images": 16,
-      "missingImages": 0,
-      "excluded": {
-        "liveCodeRows": "Excluded. KATSEYE Charm Nails is included only as a durable nail item, with no live code string or code status field.",
-        "eventOrPassTracks": "Excluded as standalone scopes. Baddie Pass appears only as row-level source context for Nails With Charms.",
-        "platformMetadata": "Excluded."
-      }
-    },
-    "imageCoverage": {
-      "present": 16,
-      "missing": 0,
-      "source": "Dress To Impress Wiki nail table images and individual nail item images",
-      "localDirectory": "apps/web/public/Dress To Impress/nails"
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "itemFields": [
       "status",
       "sourceRoute",
       "location",
       "wearableBy",
       "toggles",
-      "customization",
-      "updateSourceNote",
-      "sourcePage",
-      "secondarySourcePage",
-      "wikiUrl",
-      "sourceImageUrl",
-      "sourceImageFile",
-      "sourceCheckedAt",
-      "sourceConfidence",
-      "sourceNotes",
-      "imageStatus",
-      "imageMissingReason",
-      "rawSourceRoute",
-      "rawAvailability",
-      "sortOrder"
+      "customization"
     ],
-    "sources": [
-      {
-        "label": "Dress To Impress Wiki - Nails",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-        "accessed": "2026-06-01",
-        "usage": "Primary nails system context and transcluded table entry point."
-      },
-      {
-        "label": "Dress To Impress Wiki - Nails/Standard",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-        "accessed": "2026-06-01",
-        "usage": "Primary 11-row standard nail shape list."
-      },
-      {
-        "label": "Dress To Impress Wiki - Nails/Unlockable",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Unlockable",
-        "accessed": "2026-06-01",
-        "usage": "Primary unlockable nail table."
-      },
-      {
-        "label": "Dress To Impress Wiki - Nails/Retired",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Retired",
-        "accessed": "2026-06-01",
-        "usage": "Primary retired nail rows."
-      },
-      {
-        "label": "Dress To Impress Wiki - Lana's Salon",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/Dressing_Room/Salon",
-        "accessed": "2026-06-01",
-        "usage": "Salon location and nail station context."
-      },
-      {
-        "label": "Dress To Impress Wiki - Fashion Maven Nails",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/Fashion_Maven_Nails",
-        "accessed": "2026-06-01",
-        "usage": "Rank nail item details."
-      },
-      {
-        "label": "Dress To Impress Wiki - Nails With Charms",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/Nails_With_Charms",
-        "accessed": "2026-06-01",
-        "usage": "Baddie Pass nail item details."
-      },
-      {
-        "label": "Dress To Impress Wiki - KATSEYE Charm Nails",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/KATSEYE_Charm_Nails",
-        "accessed": "2026-06-01",
-        "usage": "Code-origin nail item details, excluding live code string and status."
-      },
-      {
-        "label": "Dress To Impress Wiki - Baddie Pass/Summer Collection",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/Baddie_Pass/Summer_Collection",
-        "accessed": "2026-06-01",
-        "usage": "Tier source for Nails With Charms."
-      },
-      {
-        "label": "Dress To Impress Wiki - Ranks",
-        "url": "https://dti-dress-to-impress.fandom.com/wiki/Ranks",
-        "accessed": "2026-06-01",
-        "usage": "Fashion Maven rank and rank item cross-check."
-      }
+    "columns": [
+      "status",
+      "sourceRoute",
+      "location",
+      "wearableBy",
+      "toggles",
+      "customization"
     ],
-    "notes": [
-      "The dataset includes KATSEYE Charm Nails as a durable nail item but intentionally stores no live code string, code status, active code count, or freshness claim.",
-      "Retired rows are included last because they have source-backed names and images and help separate old nail advice from current standard nail choices.",
-      "Standard nail rows use null wearableBy values because the checked standard table does not provide row-level body or wearable data.",
-      "Nails With Charms is the display name used by the current item page; Flower Nail Charms appears as a source/image alias.",
-      "Parent route fix needed before public render: add a dress-to-impress-nails override that groups by collectionSection and hides source/audit fields."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Standard nails",
+        "Reward nails",
+        "Rank nails",
+        "Code-origin nails",
+        "Retired nails"
+      ],
+      "badgeField": "status",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "status",
+        "sourceRoute",
+        "location",
+        "wearableBy",
+        "toggles",
+        "customization"
+      ],
+      "tableFields": [
+        "status",
+        "sourceRoute",
+        "location",
+        "wearableBy",
+        "toggles",
+        "customization"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Default Nails",
-      "slug": "default-nails",
-      "image": "/Dress%20To%20Impress/nails/default-nails.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Baseline standard nail shape",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/b/be/DefaultNails.png/revision/latest?cb=20260519145506",
-      "sourceImageFile": "DefaultNails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 1
+      "item": {
+        "name": "Default Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "default-nails",
+        "section": "Standard nails",
+        "sortOrder": 1,
+        "image": "/Dress%20To%20Impress/nails/default-nails.webp"
+      }
     },
     {
-      "name": "Short Nails",
-      "slug": "short-nails",
-      "image": "/Dress%20To%20Impress/nails/short-nails.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/2/24/Short_Nails.png/revision/latest?cb=20260519145515",
-      "sourceImageFile": "Short Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 2
+      "item": {
+        "name": "Short Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "short-nails",
+        "section": "Standard nails",
+        "sortOrder": 2,
+        "image": "/Dress%20To%20Impress/nails/short-nails.webp"
+      }
     },
     {
-      "name": "Box Nails",
-      "slug": "box-nails",
-      "image": "/Dress%20To%20Impress/nails/box-nails.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/5/55/Box_Nails.png/revision/latest?cb=20260519145458",
-      "sourceImageFile": "Box Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 3
+      "item": {
+        "name": "Box Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "box-nails",
+        "section": "Standard nails",
+        "sortOrder": 3,
+        "image": "/Dress%20To%20Impress/nails/box-nails.webp"
+      }
     },
     {
-      "name": "Long Box Nails",
-      "slug": "long-box-nails",
-      "image": "/Dress%20To%20Impress/nails/long-box-nails.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/7/77/Long_Box_Nails.png/revision/latest?cb=20260519145512",
-      "sourceImageFile": "Long Box Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 4
+      "item": {
+        "name": "Long Box Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "long-box-nails",
+        "section": "Standard nails",
+        "sortOrder": 4,
+        "image": "/Dress%20To%20Impress/nails/long-box-nails.webp"
+      }
     },
     {
-      "name": "Coffin Nails",
-      "slug": "coffin-nails",
-      "image": "/Dress%20To%20Impress/nails/coffin-nails.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/5/51/Coffin_Nails.png/revision/latest?cb=20260519145502",
-      "sourceImageFile": "Coffin Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 5
+      "item": {
+        "name": "Coffin Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "coffin-nails",
+        "section": "Standard nails",
+        "sortOrder": 5,
+        "image": "/Dress%20To%20Impress/nails/coffin-nails.webp"
+      }
     },
     {
-      "name": "Duck Nails",
-      "slug": "duck-nails",
-      "image": "/Dress%20To%20Impress/nails/duck-nails.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/3/37/Duck_Nails.png/revision/latest?cb=20260519145508",
-      "sourceImageFile": "Duck Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 6
+      "item": {
+        "name": "Duck Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "duck-nails",
+        "section": "Standard nails",
+        "sortOrder": 6,
+        "image": "/Dress%20To%20Impress/nails/duck-nails.webp"
+      }
     },
     {
-      "name": "Claws",
-      "slug": "claws",
-      "image": "/Dress%20To%20Impress/nails/claws.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/9/91/Claws.png/revision/latest?cb=20260519145501",
-      "sourceImageFile": "Claws.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 7
+      "item": {
+        "name": "Claws",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "claws",
+        "section": "Standard nails",
+        "sortOrder": 7,
+        "image": "/Dress%20To%20Impress/nails/claws.webp"
+      }
     },
     {
-      "name": "Curved Claws",
-      "slug": "curved-claws",
-      "image": "/Dress%20To%20Impress/nails/curved-claws.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/2/2c/Curved_Claws.png/revision/latest?cb=20260519145504",
-      "sourceImageFile": "Curved Claws.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 8
+      "item": {
+        "name": "Curved Claws",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "curved-claws",
+        "section": "Standard nails",
+        "sortOrder": 8,
+        "image": "/Dress%20To%20Impress/nails/curved-claws.webp"
+      }
     },
     {
-      "name": "Baddie Nails",
-      "slug": "baddie-nails",
-      "image": "/Dress%20To%20Impress/nails/baddie-nails.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/1/10/Baddie_Nails.png/revision/latest?cb=20260519145455",
-      "sourceImageFile": "Baddie Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": "Current standard Baddie Nails row. Separate from the retired Baddie Nails row.",
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 9
+      "item": {
+        "name": "Baddie Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "baddie-nails",
+        "section": "Standard nails",
+        "sortOrder": 9,
+        "image": "/Dress%20To%20Impress/nails/baddie-nails.webp"
+      }
     },
     {
-      "name": "Long Baddie Nails",
-      "slug": "long-baddie-nails",
-      "image": "/Dress%20To%20Impress/nails/long-baddie-nails.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/e/e0/Long_Baddie_Nails.png/revision/latest?cb=20260519145511",
-      "sourceImageFile": "Long Baddie Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 10
+      "item": {
+        "name": "Long Baddie Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "long-baddie-nails",
+        "section": "Standard nails",
+        "sortOrder": 10,
+        "image": "/Dress%20To%20Impress/nails/long-baddie-nails.webp"
+      }
     },
     {
-      "name": "Curved Nails",
-      "slug": "curved-nails",
-      "image": "/Dress%20To%20Impress/nails/curved-nails.webp",
-      "collectionSection": "Standard nails",
-      "status": "Standard nail station option",
-      "sourceRoute": "Lana's Salon nail station",
-      "location": "Lana's Salon nail station",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Colors, patterns, and materials in the nail menu",
-      "updateSourceNote": "Added during Halloween 2024",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Standard",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/5/56/Curved_Nails.png/revision/latest?cb=20260519145505",
-      "sourceImageFile": "Curved Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": null,
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Standard",
-      "rawAvailability": "Standard Nails",
-      "sortOrder": 11
+      "item": {
+        "name": "Curved Nails",
+        "status": "Standard nail station option",
+        "sourceRoute": "Lana's Salon nail station",
+        "location": "Lana's Salon nail station",
+        "customization": "Colors, patterns, and materials in the nail menu"
+      },
+      "system": {
+        "slug": "curved-nails",
+        "section": "Standard nails",
+        "sortOrder": 11,
+        "image": "/Dress%20To%20Impress/nails/curved-nails.webp"
+      }
     },
     {
-      "name": "Nails With Charms",
-      "slug": "nails-with-charms",
-      "image": "/Dress%20To%20Impress/nails/nails-with-charms.webp",
-      "collectionSection": "Reward nails",
-      "status": "No longer obtainable",
-      "sourceRoute": "Summer 2025 Baddie Pass tier 12",
-      "location": "Dressing Booth or Achievement Collection if owned",
-      "wearableBy": "Unisex",
-      "toggles": "Default; Long",
-      "customization": "4 color options",
-      "updateSourceNote": "Released June 28, 2025 during Summer 2025",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails_With_Charms",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Baddie_Pass/Summer_Collection",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails_With_Charms",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/6/67/Charm_Nails.png/revision/latest?cb=20260519145500",
-      "sourceImageFile": "Charm Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "medium-high",
-      "sourceNotes": "The current item page uses Nails With Charms. Flower Nail Charms appears as an image/source alias.",
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Baddie Pass",
-      "rawAvailability": "obtainable = No",
-      "sortOrder": 12
+      "item": {
+        "name": "Nails With Charms",
+        "status": "No longer obtainable",
+        "sourceRoute": "Summer 2025 Baddie Pass tier 12",
+        "location": "Dressing Booth or Achievement Collection if owned",
+        "wearableBy": "Unisex",
+        "toggles": "Default; Long",
+        "customization": "4 color options"
+      },
+      "system": {
+        "slug": "nails-with-charms",
+        "section": "Reward nails",
+        "sortOrder": 12,
+        "image": "/Dress%20To%20Impress/nails/nails-with-charms.webp"
+      }
     },
     {
-      "name": "Fashion Maven Nails",
-      "slug": "fashion-maven-nails",
-      "image": "/Dress%20To%20Impress/nails/fashion-maven-nails.webp",
-      "collectionSection": "Rank nails",
-      "status": "Rank unlock",
-      "sourceRoute": "Reach Fashion Maven rank",
-      "location": "Dressing Booth or Achievement Collection after reaching the rank",
-      "wearableBy": "Unisex",
-      "toggles": "None listed",
-      "customization": "Not listed",
-      "updateSourceNote": "Released July 5, 2025 during Summer 2025",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Fashion_Maven_Nails",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Ranks",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Fashion_Maven_Nails",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/b/b6/Rank_Nails.png/revision/latest?cb=20260519145513",
-      "sourceImageFile": "Rank Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "high",
-      "sourceNotes": "Ranks page and individual item page agree on the Fashion Maven rank source.",
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Rank",
-      "rawAvailability": "obtainable = Yes",
-      "sortOrder": 13
+      "item": {
+        "name": "Fashion Maven Nails",
+        "status": "Rank unlock",
+        "sourceRoute": "Reach Fashion Maven rank",
+        "location": "Dressing Booth or Achievement Collection after reaching the rank",
+        "wearableBy": "Unisex",
+        "toggles": "None listed",
+        "customization": "Not listed"
+      },
+      "system": {
+        "slug": "fashion-maven-nails",
+        "section": "Rank nails",
+        "sortOrder": 13,
+        "image": "/Dress%20To%20Impress/nails/fashion-maven-nails.webp"
+      }
     },
     {
-      "name": "KATSEYE Charm Nails",
-      "slug": "katseye-charm-nails",
-      "image": "/Dress%20To%20Impress/nails/katseye-charm-nails.webp",
-      "collectionSection": "Code-origin nails",
-      "status": "Code-origin item",
-      "sourceRoute": "Code collection",
-      "location": "Dressing Booth or Code Collection if redeemed",
-      "wearableBy": "Unisex",
-      "toggles": "Default; No Nails Details; No Bracelet; No Nails Charms",
-      "customization": "Customization details not listed",
-      "updateSourceNote": "Released April 18, 2026 during DTI x KATSEYE",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/KATSEYE_Charm_Nails",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Unlockable",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/KATSEYE_Charm_Nails",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/8/8b/KATSEYE_Nails.png/revision/latest?cb=20260519145509",
-      "sourceImageFile": "KATSEYE Nails.png",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "medium-high",
-      "sourceNotes": "Included as a durable nail item only. Live code string and live code status are intentionally omitted.",
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Code",
-      "rawAvailability": "Code-origin item",
-      "sortOrder": 14
+      "item": {
+        "name": "KATSEYE Charm Nails",
+        "status": "Code-origin item",
+        "sourceRoute": "Code collection",
+        "location": "Dressing Booth or Code Collection if redeemed",
+        "wearableBy": "Unisex",
+        "toggles": "Default; No Nails Details; No Bracelet; No Nails Charms",
+        "customization": "Customization details not listed"
+      },
+      "system": {
+        "slug": "katseye-charm-nails",
+        "section": "Code-origin nails",
+        "sortOrder": 14,
+        "image": "/Dress%20To%20Impress/nails/katseye-charm-nails.webp"
+      }
     },
     {
-      "name": "Baddie Nails",
-      "slug": "retired-baddie-nails",
-      "image": "/Dress%20To%20Impress/nails/retired-baddie-nails.webp",
-      "collectionSection": "Retired nails",
-      "status": "Retired",
-      "sourceRoute": "Retired nail option",
-      "location": "No current standard location listed",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Not listed",
-      "updateSourceNote": "Listed in the retired nails table",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Retired",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Retired",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/b/b5/Bandicam_2024-07-16_11-19-06-218.jpg/revision/latest?cb=20240716142141",
-      "sourceImageFile": "Bandicam 2024-07-16 11-19-06-218.jpg",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "medium",
-      "sourceNotes": "Retired Baddie Nails row. Separate from the current standard Baddie Nails row.",
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Retired",
-      "rawAvailability": "Retired Nails",
-      "sortOrder": 15
+      "item": {
+        "name": "Baddie Nails",
+        "status": "Retired",
+        "sourceRoute": "Retired nail option",
+        "location": "No current standard location listed",
+        "customization": "Not listed"
+      },
+      "system": {
+        "slug": "retired-baddie-nails",
+        "section": "Retired nails",
+        "sortOrder": 15,
+        "image": "/Dress%20To%20Impress/nails/retired-baddie-nails.webp"
+      }
     },
     {
-      "name": "Baddie Toenails",
-      "slug": "baddie-toenails",
-      "image": "/Dress%20To%20Impress/nails/baddie-toenails.webp",
-      "collectionSection": "Retired nails",
-      "status": "Retired",
-      "sourceRoute": "Retired nail option",
-      "location": "No current standard location listed",
-      "wearableBy": null,
-      "toggles": null,
-      "customization": "Not listed",
-      "updateSourceNote": "Listed in the retired nails table",
-      "sourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Retired",
-      "secondarySourcePage": "https://dti-dress-to-impress.fandom.com/wiki/Nails",
-      "wikiUrl": "https://dti-dress-to-impress.fandom.com/wiki/Nails/Retired",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/dti-dress-to-impress/images/a/ab/78597849769476.jpg/revision/latest?cb=20250525035904",
-      "sourceImageFile": "78597849769476.jpg",
-      "sourceCheckedAt": "2026-06-01",
-      "sourceConfidence": "medium",
-      "sourceNotes": "Retired toenail row included for old screenshot and old advice clarity.",
-      "imageStatus": "local-webp-from-source-image",
-      "imageMissingReason": null,
-      "rawSourceRoute": "Nails/Retired",
-      "rawAvailability": "Retired Nails",
-      "sortOrder": 16
+      "item": {
+        "name": "Baddie Toenails",
+        "status": "Retired",
+        "sourceRoute": "Retired nail option",
+        "location": "No current standard location listed",
+        "customization": "Not listed"
+      },
+      "system": {
+        "slug": "baddie-toenails",
+        "section": "Retired nails",
+        "sortOrder": 16,
+        "image": "/Dress%20To%20Impress/nails/baddie-toenails.webp"
+      }
     }
   ]
 }

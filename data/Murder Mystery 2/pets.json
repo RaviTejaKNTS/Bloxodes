@@ -1,0 +1,1222 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Murder Mystery 2",
+    "gameSlug": "murder-mystery-2",
+    "collection": "pets",
+    "route": "/wiki/murder-mystery-2/pets",
+    "catalogCode": "murder-mystery-2-pets",
+    "itemFields": [
+      "obtainGroup",
+      "rarity",
+      "value",
+      "cardSummary"
+    ],
+    "columns": [
+      "obtainGroup",
+      "rarity",
+      "value",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Source",
+      "sectionOrder": [
+        "Season 1 Pet Egg",
+        "Classic Pet Box",
+        "Halloween Event Pets",
+        "Christmas Event Pets",
+        "Other Event Pets",
+        "Item Pack Pets",
+        "Shop & Game Pass Pets"
+      ],
+      "badgeField": "obtainGroup",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "obtainGroup",
+        "rarity",
+        "value"
+      ],
+      "tableFields": [
+        "obtainGroup",
+        "rarity",
+        "value",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "obtainGroup": {
+          "kind": "chip",
+          "label": "Source"
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "value": {
+          "kind": "chip",
+          "label": "Value"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Cat",
+        "obtainGroup": "Season 1 Pet Egg",
+        "cardSummary": "Cat is a Season 1 Pet Egg pet from the Season 1 Pet Egg group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "cat",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 1,
+        "image": "/Murder%20Mystery%202/Pets/cat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dog",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Common",
+        "value": "1",
+        "cardSummary": "Dog is a Common pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 1."
+      },
+      "system": {
+        "slug": "dog",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 2,
+        "image": "/Murder%20Mystery%202/Pets/dog.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fox",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Uncommon",
+        "value": "2",
+        "cardSummary": "Fox is a Uncommon pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "fox",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 3,
+        "image": "/Murder%20Mystery%202/Pets/fox.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pig",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Uncommon",
+        "value": "2",
+        "cardSummary": "Pig is a Uncommon pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "pig",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 4,
+        "image": "/Murder%20Mystery%202/Pets/pig.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bear",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Rare",
+        "value": "2",
+        "cardSummary": "Bear is a Rare pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "bear",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 5,
+        "image": "/Murder%20Mystery%202/Pets/bear.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Common",
+        "value": "4",
+        "cardSummary": "Bunny is a Common pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 4."
+      },
+      "system": {
+        "slug": "bunny",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 6,
+        "image": "/Murder%20Mystery%202/Pets/bunny.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bat",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Legendary",
+        "value": "165",
+        "cardSummary": "Bat is a Legendary pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 165."
+      },
+      "system": {
+        "slug": "bat",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 7,
+        "image": "/Murder%20Mystery%202/Pets/bat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Cat",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "2",
+        "cardSummary": "Fire Cat is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "fire-cat",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 8,
+        "image": "/Murder%20Mystery%202/Pets/fire-cat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Dog",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "2",
+        "cardSummary": "Fire Dog is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "fire-dog",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 9,
+        "image": "/Murder%20Mystery%202/Pets/fire-dog.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Fox",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "2",
+        "cardSummary": "Fire Fox is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "fire-fox",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 10,
+        "image": "/Murder%20Mystery%202/Pets/fire-fox.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Pig",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "2",
+        "cardSummary": "Fire Pig is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "fire-pig",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 11,
+        "image": "/Murder%20Mystery%202/Pets/fire-pig.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Bear",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "2",
+        "cardSummary": "Fire Bear is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "fire-bear",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Bat",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "2",
+        "cardSummary": "Fire Bat is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "fire-bat",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 13,
+        "image": "/Murder%20Mystery%202/Pets/fire-bat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chroma Fire Cat",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "7",
+        "cardSummary": "Chroma Fire Cat is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 7."
+      },
+      "system": {
+        "slug": "chroma-fire-cat",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 14,
+        "image": "/Murder%20Mystery%202/Pets/chroma-fire-cat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chroma Fire Dog",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "7",
+        "cardSummary": "Chroma Fire Dog is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 7."
+      },
+      "system": {
+        "slug": "chroma-fire-dog",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 15,
+        "image": "/Murder%20Mystery%202/Pets/chroma-fire-dog.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chroma Fire Fox",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "7",
+        "cardSummary": "Chroma Fire Fox is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 7."
+      },
+      "system": {
+        "slug": "chroma-fire-fox",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 16,
+        "image": "/Murder%20Mystery%202/Pets/chroma-fire-fox.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chroma Fire Pig",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "7",
+        "cardSummary": "Chroma Fire Pig is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 7."
+      },
+      "system": {
+        "slug": "chroma-fire-pig",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 17,
+        "image": "/Murder%20Mystery%202/Pets/chroma-fire-pig.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chroma Fire Bear",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "7",
+        "cardSummary": "Chroma Fire Bear is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 7."
+      },
+      "system": {
+        "slug": "chroma-fire-bear",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 18,
+        "image": "/Murder%20Mystery%202/Pets/chroma-fire-bear.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chroma Fire Bat",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "7",
+        "cardSummary": "Chroma Fire Bat is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 7."
+      },
+      "system": {
+        "slug": "chroma-fire-bat",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 19,
+        "image": "/Murder%20Mystery%202/Pets/chroma-fire-bat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chroma Fire Bunny",
+        "obtainGroup": "Season 1 Pet Egg",
+        "rarity": "Godly",
+        "value": "3",
+        "cardSummary": "Chroma Fire Bunny is a Godly pet from the Season 1 Pet Egg group in Murder Mystery 2. It has a tracked community value of 3."
+      },
+      "system": {
+        "slug": "chroma-fire-bunny",
+        "section": "Season 1 Pet Egg",
+        "sortOrder": 20,
+        "image": "/Murder%20Mystery%202/Pets/chroma-fire-bunny.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dogey",
+        "obtainGroup": "Classic Pet Box",
+        "rarity": "Uncommon",
+        "value": "110",
+        "cardSummary": "Dogey is a Uncommon pet from the Classic Pet Box group in Murder Mystery 2. It has a tracked community value of 110."
+      },
+      "system": {
+        "slug": "dogey",
+        "section": "Classic Pet Box",
+        "sortOrder": 21,
+        "image": "/Murder%20Mystery%202/Pets/dogey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Piggy",
+        "obtainGroup": "Classic Pet Box",
+        "rarity": "Common",
+        "value": "15",
+        "cardSummary": "Piggy is a Common pet from the Classic Pet Box group in Murder Mystery 2. It has a tracked community value of 15."
+      },
+      "system": {
+        "slug": "piggy",
+        "section": "Classic Pet Box",
+        "sortOrder": 22,
+        "image": "/Murder%20Mystery%202/Pets/piggy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nobledragon",
+        "obtainGroup": "Classic Pet Box",
+        "cardSummary": "Nobledragon is a Classic Pet Box pet from the Classic Pet Box group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "nobledragon",
+        "section": "Classic Pet Box",
+        "sortOrder": 23,
+        "image": "/Murder%20Mystery%202/Pets/nobledragon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seahorsey",
+        "obtainGroup": "Classic Pet Box",
+        "rarity": "Uncommon",
+        "value": "8",
+        "cardSummary": "Seahorsey is a Uncommon pet from the Classic Pet Box group in Murder Mystery 2. It has a tracked community value of 8."
+      },
+      "system": {
+        "slug": "seahorsey",
+        "section": "Classic Pet Box",
+        "sortOrder": 24,
+        "image": "/Murder%20Mystery%202/Pets/seahorsey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chilly",
+        "obtainGroup": "Classic Pet Box",
+        "rarity": "Uncommon",
+        "value": "7",
+        "cardSummary": "Chilly is a Uncommon pet from the Classic Pet Box group in Murder Mystery 2. It has a tracked community value of 7."
+      },
+      "system": {
+        "slug": "chilly",
+        "section": "Classic Pet Box",
+        "sortOrder": 25,
+        "image": "/Murder%20Mystery%202/Pets/chilly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pengy",
+        "obtainGroup": "Classic Pet Box",
+        "rarity": "Common",
+        "value": "7",
+        "cardSummary": "Pengy is a Common pet from the Classic Pet Box group in Murder Mystery 2. It has a tracked community value of 7."
+      },
+      "system": {
+        "slug": "pengy",
+        "section": "Classic Pet Box",
+        "sortOrder": 26,
+        "image": "/Murder%20Mystery%202/Pets/pengy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Badger",
+        "obtainGroup": "Classic Pet Box",
+        "rarity": "Common",
+        "value": "1",
+        "cardSummary": "Badger is a Common pet from the Classic Pet Box group in Murder Mystery 2. It has a tracked community value of 1."
+      },
+      "system": {
+        "slug": "badger",
+        "section": "Classic Pet Box",
+        "sortOrder": 27,
+        "image": "/Murder%20Mystery%202/Pets/badger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO",
+        "obtainGroup": "Classic Pet Box",
+        "rarity": "Common",
+        "value": "3",
+        "cardSummary": "UFO is a Common pet from the Classic Pet Box group in Murder Mystery 2. It has a tracked community value of 3."
+      },
+      "system": {
+        "slug": "ufo",
+        "section": "Classic Pet Box",
+        "sortOrder": 28,
+        "image": "/Murder%20Mystery%202/Pets/ufo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mechbug",
+        "obtainGroup": "Classic Pet Box",
+        "cardSummary": "Mechbug is a Classic Pet Box pet from the Classic Pet Box group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "mechbug",
+        "section": "Classic Pet Box",
+        "sortOrder": 29,
+        "image": "/Murder%20Mystery%202/Pets/mechbug.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tankie",
+        "obtainGroup": "Classic Pet Box",
+        "cardSummary": "Tankie is a Classic Pet Box pet from the Classic Pet Box group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "tankie",
+        "section": "Classic Pet Box",
+        "sortOrder": 30,
+        "image": "/Murder%20Mystery%202/Pets/tankie.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Deathspeaker",
+        "obtainGroup": "Classic Pet Box",
+        "cardSummary": "Deathspeaker is a Classic Pet Box pet from the Classic Pet Box group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "deathspeaker",
+        "section": "Classic Pet Box",
+        "sortOrder": 31,
+        "image": "/Murder%20Mystery%202/Pets/deathspeaker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fairy",
+        "obtainGroup": "Classic Pet Box",
+        "rarity": "Uncommon",
+        "value": "8",
+        "cardSummary": "Fairy is a Uncommon pet from the Classic Pet Box group in Murder Mystery 2. It has a tracked community value of 8."
+      },
+      "system": {
+        "slug": "fairy",
+        "section": "Classic Pet Box",
+        "sortOrder": 32,
+        "image": "/Murder%20Mystery%202/Pets/fairy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eyeball",
+        "obtainGroup": "Classic Pet Box",
+        "cardSummary": "Eyeball is a Classic Pet Box pet from the Classic Pet Box group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "eyeball",
+        "section": "Classic Pet Box",
+        "sortOrder": 33,
+        "image": "/Murder%20Mystery%202/Pets/eyeball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jetstream",
+        "obtainGroup": "Classic Pet Box",
+        "cardSummary": "Jetstream is a Classic Pet Box pet from the Classic Pet Box group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "jetstream",
+        "section": "Classic Pet Box",
+        "sortOrder": 34,
+        "image": "/Murder%20Mystery%202/Pets/jetstream.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombie Dog",
+        "obtainGroup": "Halloween Event Pets",
+        "rarity": "Common",
+        "value": "1K",
+        "cardSummary": "Zombie Dog is a Common pet from the Halloween Event Pets group in Murder Mystery 2. It has a tracked community value of 1K."
+      },
+      "system": {
+        "slug": "zombie-dog",
+        "section": "Halloween Event Pets",
+        "sortOrder": 35,
+        "image": "/Murder%20Mystery%202/Pets/zombie-dog.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Cat",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Black Cat is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "black-cat",
+        "section": "Halloween Event Pets",
+        "sortOrder": 36,
+        "image": "/Murder%20Mystery%202/Pets/black-cat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Pumpkin (2018)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Blue Pumpkin (2018) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "blue-pumpkin-2018",
+        "section": "Halloween Event Pets",
+        "sortOrder": 37,
+        "image": "/Murder%20Mystery%202/Pets/blue-pumpkin-2018.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Pumpkin (2018)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Red Pumpkin (2018) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "red-pumpkin-2018",
+        "section": "Halloween Event Pets",
+        "sortOrder": 38,
+        "image": "/Murder%20Mystery%202/Pets/red-pumpkin-2018.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Pumpkin (2018)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Green Pumpkin (2018) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "green-pumpkin-2018",
+        "section": "Halloween Event Pets",
+        "sortOrder": 39,
+        "image": "/Murder%20Mystery%202/Pets/green-pumpkin-2018.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Pumpkin (2018)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Purple Pumpkin (2018) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "purple-pumpkin-2018",
+        "section": "Halloween Event Pets",
+        "sortOrder": 40,
+        "image": "/Murder%20Mystery%202/Pets/purple-pumpkin-2018.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin (2017)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Pumpkin (2017) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "pumpkin-2017",
+        "section": "Halloween Event Pets",
+        "sortOrder": 41,
+        "image": "/Murder%20Mystery%202/Pets/pumpkin-2017.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin (2018)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Pumpkin (2018) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "pumpkin-2018",
+        "section": "Halloween Event Pets",
+        "sortOrder": 42,
+        "image": "/Murder%20Mystery%202/Pets/pumpkin-2018.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire Bat",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Vampire Bat is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "vampire-bat",
+        "section": "Halloween Event Pets",
+        "sortOrder": 43,
+        "image": "/Murder%20Mystery%202/Pets/vampire-bat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Pumpkin (2019)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Red Pumpkin (2019) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "red-pumpkin-2019",
+        "section": "Halloween Event Pets",
+        "sortOrder": 44,
+        "image": "/Murder%20Mystery%202/Pets/red-pumpkin-2019.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Pumpkin (2019)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Green Pumpkin (2019) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "green-pumpkin-2019",
+        "section": "Halloween Event Pets",
+        "sortOrder": 45,
+        "image": "/Murder%20Mystery%202/Pets/green-pumpkin-2019.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Pumpkin (2019)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Blue Pumpkin (2019) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "blue-pumpkin-2019",
+        "section": "Halloween Event Pets",
+        "sortOrder": 46,
+        "image": "/Murder%20Mystery%202/Pets/blue-pumpkin-2019.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin (2019)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Pumpkin (2019) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "pumpkin-2019",
+        "section": "Halloween Event Pets",
+        "sortOrder": 47,
+        "image": "/Murder%20Mystery%202/Pets/pumpkin-2019.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scarecrow",
+        "obtainGroup": "Halloween Event Pets",
+        "rarity": "Rare",
+        "value": "1",
+        "cardSummary": "Scarecrow is a Rare pet from the Halloween Event Pets group in Murder Mystery 2. It has a tracked community value of 1."
+      },
+      "system": {
+        "slug": "scarecrow",
+        "section": "Halloween Event Pets",
+        "sortOrder": 48,
+        "image": "/Murder%20Mystery%202/Pets/scarecrow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Pumpkin (2020)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Red Pumpkin (2020) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "red-pumpkin-2020",
+        "section": "Halloween Event Pets",
+        "sortOrder": 49,
+        "image": "/Murder%20Mystery%202/Pets/red-pumpkin-2020.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Pumpkin (2020)",
+        "obtainGroup": "Halloween Event Pets",
+        "rarity": "Rare",
+        "value": "2",
+        "cardSummary": "Green Pumpkin (2020) is a Rare pet from the Halloween Event Pets group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "green-pumpkin-2020",
+        "section": "Halloween Event Pets",
+        "sortOrder": 50,
+        "image": "/Murder%20Mystery%202/Pets/green-pumpkin-2020.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Pumpkin (2020)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Blue Pumpkin (2020) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "blue-pumpkin-2020",
+        "section": "Halloween Event Pets",
+        "sortOrder": 51,
+        "image": "/Murder%20Mystery%202/Pets/blue-pumpkin-2020.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin (2020)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Pumpkin (2020) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "pumpkin-2020",
+        "section": "Halloween Event Pets",
+        "sortOrder": 52,
+        "image": "/Murder%20Mystery%202/Pets/pumpkin-2020.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Pumpkin (2021)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Red Pumpkin (2021) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "red-pumpkin-2021",
+        "section": "Halloween Event Pets",
+        "sortOrder": 53,
+        "image": "/Murder%20Mystery%202/Pets/red-pumpkin-2021.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Pumpkin (2021)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Green Pumpkin (2021) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "green-pumpkin-2021",
+        "section": "Halloween Event Pets",
+        "sortOrder": 54,
+        "image": "/Murder%20Mystery%202/Pets/green-pumpkin-2021.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Pumpkin",
+        "obtainGroup": "Halloween Event Pets",
+        "rarity": "Uncommon",
+        "value": "2",
+        "cardSummary": "Shadow Pumpkin is a Uncommon pet from the Halloween Event Pets group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "shadow-pumpkin",
+        "section": "Halloween Event Pets",
+        "sortOrder": 55,
+        "image": "/Murder%20Mystery%202/Pets/shadow-pumpkin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skully",
+        "obtainGroup": "Halloween Event Pets",
+        "rarity": "Legendary",
+        "value": "4",
+        "cardSummary": "Skully is a Legendary pet from the Halloween Event Pets group in Murder Mystery 2. It has a tracked community value of 4."
+      },
+      "system": {
+        "slug": "skully",
+        "section": "Halloween Event Pets",
+        "sortOrder": 56,
+        "image": "/Murder%20Mystery%202/Pets/skully.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin (2021)",
+        "obtainGroup": "Halloween Event Pets",
+        "cardSummary": "Pumpkin (2021) is a Halloween Event Pets pet from the Halloween Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "pumpkin-2021",
+        "section": "Halloween Event Pets",
+        "sortOrder": 57,
+        "image": "/Murder%20Mystery%202/Pets/pumpkin-2021.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lil' Alien",
+        "obtainGroup": "Halloween Event Pets",
+        "rarity": "Common",
+        "value": "3",
+        "cardSummary": "Lil' Alien is a Common pet from the Halloween Event Pets group in Murder Mystery 2. It has a tracked community value of 3."
+      },
+      "system": {
+        "slug": "lil-alien",
+        "section": "Halloween Event Pets",
+        "sortOrder": 58,
+        "image": "/Murder%20Mystery%202/Pets/lil-alien.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elf (2019)",
+        "obtainGroup": "Christmas Event Pets",
+        "cardSummary": "Elf (2019) is a Christmas Event Pets pet from the Christmas Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "elf-2019",
+        "section": "Christmas Event Pets",
+        "sortOrder": 59,
+        "image": "/Murder%20Mystery%202/Pets/elf-2019.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mr. Reindeer",
+        "obtainGroup": "Christmas Event Pets",
+        "cardSummary": "Mr. Reindeer is a Christmas Event Pets pet from the Christmas Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "mr-reindeer",
+        "section": "Christmas Event Pets",
+        "sortOrder": 60,
+        "image": "/Murder%20Mystery%202/Pets/mr-reindeer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elf (2016)",
+        "obtainGroup": "Christmas Event Pets",
+        "cardSummary": "Elf (2016) is a Christmas Event Pets pet from the Christmas Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "elf-2016",
+        "section": "Christmas Event Pets",
+        "sortOrder": 61,
+        "image": "/Murder%20Mystery%202/Pets/elf-2016.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reindeer",
+        "obtainGroup": "Christmas Event Pets",
+        "cardSummary": "Reindeer is a Christmas Event Pets pet from the Christmas Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "reindeer",
+        "section": "Christmas Event Pets",
+        "sortOrder": 62,
+        "image": "/Murder%20Mystery%202/Pets/reindeer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rudolph",
+        "obtainGroup": "Christmas Event Pets",
+        "cardSummary": "Rudolph is a Christmas Event Pets pet from the Christmas Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "rudolph",
+        "section": "Christmas Event Pets",
+        "sortOrder": 63,
+        "image": "/Murder%20Mystery%202/Pets/rudolph.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mr. Snowman",
+        "obtainGroup": "Christmas Event Pets",
+        "rarity": "Common",
+        "value": "2",
+        "cardSummary": "Mr. Snowman is a Common pet from the Christmas Event Pets group in Murder Mystery 2. It has a tracked community value of 2."
+      },
+      "system": {
+        "slug": "mr-snowman",
+        "section": "Christmas Event Pets",
+        "sortOrder": 64,
+        "image": "/Murder%20Mystery%202/Pets/mr-snowman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowbear",
+        "obtainGroup": "Christmas Event Pets",
+        "rarity": "Common",
+        "value": "3",
+        "cardSummary": "Snowbear is a Common pet from the Christmas Event Pets group in Murder Mystery 2. It has a tracked community value of 3."
+      },
+      "system": {
+        "slug": "snowbear",
+        "section": "Christmas Event Pets",
+        "sortOrder": 65,
+        "image": "/Murder%20Mystery%202/Pets/snowbear.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa Dog",
+        "obtainGroup": "Christmas Event Pets",
+        "cardSummary": "Santa Dog is a Christmas Event Pets pet from the Christmas Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "santa-dog",
+        "section": "Christmas Event Pets",
+        "sortOrder": 66,
+        "image": "/Murder%20Mystery%202/Pets/santa-dog.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frostbird",
+        "obtainGroup": "Christmas Event Pets",
+        "cardSummary": "Frostbird is a Christmas Event Pets pet from the Christmas Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "frostbird",
+        "section": "Christmas Event Pets",
+        "sortOrder": 67,
+        "image": "/Murder%20Mystery%202/Pets/frostbird.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowman",
+        "obtainGroup": "Christmas Event Pets",
+        "cardSummary": "Snowman is a Christmas Event Pets pet from the Christmas Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "snowman",
+        "section": "Christmas Event Pets",
+        "sortOrder": 68,
+        "image": "/Murder%20Mystery%202/Pets/snowman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa (2019)",
+        "obtainGroup": "Christmas Event Pets",
+        "cardSummary": "Santa (2019) is a Christmas Event Pets pet from the Christmas Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "santa-2019",
+        "section": "Christmas Event Pets",
+        "sortOrder": 69,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "<3",
+        "obtainGroup": "Other Event Pets",
+        "cardSummary": "<3 is a Other Event Pets pet from the Other Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "heart",
+        "section": "Other Event Pets",
+        "sortOrder": 70,
+        "image": "/Murder%20Mystery%202/Pets/heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carrot Bunny",
+        "obtainGroup": "Other Event Pets",
+        "rarity": "Common",
+        "value": "3",
+        "cardSummary": "Carrot Bunny is a Common pet from the Other Event Pets group in Murder Mystery 2. It has a tracked community value of 3."
+      },
+      "system": {
+        "slug": "carrot-bunny",
+        "section": "Other Event Pets",
+        "sortOrder": 71,
+        "image": "/Murder%20Mystery%202/Pets/carrot-bunny.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Teddy",
+        "obtainGroup": "Other Event Pets",
+        "cardSummary": "Teddy is a Other Event Pets pet from the Other Event Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "teddy",
+        "section": "Other Event Pets",
+        "sortOrder": 72,
+        "image": "/Murder%20Mystery%202/Pets/teddy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Overseer Eye",
+        "obtainGroup": "Shop & Game Pass Pets",
+        "cardSummary": "Overseer Eye is a Shop & Game Pass Pets pet from the Shop & Game Pass Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "overseer-eye",
+        "section": "Shop & Game Pass Pets",
+        "sortOrder": 73,
+        "image": "/Murder%20Mystery%202/Pets/overseer-eye.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elitey",
+        "obtainGroup": "Shop & Game Pass Pets",
+        "cardSummary": "Elitey is a Shop & Game Pass Pets pet from the Shop & Game Pass Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "elitey",
+        "section": "Shop & Game Pass Pets",
+        "sortOrder": 74,
+        "image": "/Murder%20Mystery%202/Pets/elitey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghosty",
+        "obtainGroup": "Item Pack Pets",
+        "cardSummary": "Ghosty is a Item Pack Pets pet from the Item Pack Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "ghosty",
+        "section": "Item Pack Pets",
+        "sortOrder": 75,
+        "image": "/Murder%20Mystery%202/Pets/ghosty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Traveller",
+        "obtainGroup": "Item Pack Pets",
+        "rarity": "Godly",
+        "value": "3",
+        "cardSummary": "Traveller is a Godly pet from the Item Pack Pets group in Murder Mystery 2. It has a tracked community value of 3."
+      },
+      "system": {
+        "slug": "traveller",
+        "section": "Item Pack Pets",
+        "sortOrder": 76,
+        "image": "/Murder%20Mystery%202/Pets/traveller.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Icey",
+        "obtainGroup": "Item Pack Pets",
+        "cardSummary": "Icey is a Item Pack Pets pet from the Item Pack Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "icey",
+        "section": "Item Pack Pets",
+        "sortOrder": 77,
+        "image": "/Murder%20Mystery%202/Pets/icey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skelly",
+        "obtainGroup": "Item Pack Pets",
+        "cardSummary": "Skelly is a Item Pack Pets pet from the Item Pack Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "skelly",
+        "section": "Item Pack Pets",
+        "sortOrder": 78,
+        "image": "/Murder%20Mystery%202/Pets/skelly.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phoenix",
+        "obtainGroup": "Item Pack Pets",
+        "cardSummary": "Phoenix is a Item Pack Pets pet from the Item Pack Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "phoenix",
+        "section": "Item Pack Pets",
+        "sortOrder": 79,
+        "image": "/Murder%20Mystery%202/Pets/phoenix.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sammy",
+        "obtainGroup": "Item Pack Pets",
+        "cardSummary": "Sammy is a Item Pack Pets pet from the Item Pack Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "sammy",
+        "section": "Item Pack Pets",
+        "sortOrder": 80,
+        "image": "/Murder%20Mystery%202/Pets/sammy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Electro",
+        "obtainGroup": "Item Pack Pets",
+        "cardSummary": "Electro is a Item Pack Pets pet from the Item Pack Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "electro",
+        "section": "Item Pack Pets",
+        "sortOrder": 81,
+        "image": "/Murder%20Mystery%202/Pets/electro.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Steambird",
+        "obtainGroup": "Item Pack Pets",
+        "cardSummary": "Steambird is a Item Pack Pets pet from the Item Pack Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "steambird",
+        "section": "Item Pack Pets",
+        "sortOrder": 82,
+        "image": "/Murder%20Mystery%202/Pets/steambird.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Phoenix",
+        "obtainGroup": "Item Pack Pets",
+        "cardSummary": "Ice Phoenix is a Item Pack Pets pet from the Item Pack Pets group in Murder Mystery 2."
+      },
+      "system": {
+        "slug": "ice-phoenix",
+        "section": "Item Pack Pets",
+        "sortOrder": 83,
+        "image": "/Murder%20Mystery%202/Pets/ice-phoenix.png"
+      }
+    }
+  ]
+}

@@ -1,10 +1,12 @@
 {
   "meta": {
-    "title": "Murderers VS Sheriffs Duel Modes",
-    "updatedAt": "2026-05-31",
-    "columns": [
-      "name",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Murderers VS Sheriffs",
+    "gameSlug": "murderers-vs-sheriffs",
+    "collection": "modes",
+    "route": "/wiki/murderers-vs-sheriffs/modes",
+    "catalogCode": "murderers-vs-sheriffs-modes",
+    "itemFields": [
       "teamSize",
       "queuePlace",
       "placeId",
@@ -16,120 +18,134 @@
       "partyFriendSupport",
       "notes"
     ],
-    "sources": [
-      {
-        "label": "Official Roblox universe API",
-        "url": "https://games.roblox.com/v1/games?universeIds=7219654364",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Official Roblox places API",
-        "url": "https://develop.roblox.com/v1/universes/7219654364/places?limit=100&sortOrder=Asc",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Official Roblox gamepasses API",
-        "url": "https://apis.roblox.com/game-passes/v1/universes/7219654364/game-passes?count=100",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Official Pro Servers Pass product info",
-        "url": "https://apis.roblox.com/game-passes/v1/game-passes/1220842311/product-info",
-        "accessed": "2026-05-31"
-      }
+    "columns": [
+      "teamSize",
+      "queuePlace",
+      "placeId",
+      "availability",
+      "accessRequirement",
+      "bestFor",
+      "difficulty",
+      "rewardNotes",
+      "partyFriendSupport",
+      "notes"
     ],
-    "sourceNotes": [
-      "Rows cover stable player-facing queues and places for universe 7219654364 only.",
-      "4v4 is mentioned in the official universe tags, but no active exact-universe 4v4 queue or child place was verified for this dataset.",
-      "Pro Servers is included as an official player-facing place with an official access pass. No reward, matchmaking, or difficulty difference is asserted.",
-      "No clean queue/sign screenshots were captured, so image fields are intentionally omitted."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Solo practice",
+        "Team queues",
+        "Pro access"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "bestFor",
+      "cardDescriptionField": "bestFor",
+      "cardFields": [
+        "teamSize",
+        "queuePlace",
+        "placeId",
+        "availability",
+        "accessRequirement",
+        "bestFor"
+      ],
+      "tableFields": [
+        "teamSize",
+        "queuePlace",
+        "placeId",
+        "availability",
+        "accessRequirement",
+        "bestFor",
+        "difficulty",
+        "rewardNotes"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "1v1",
-      "slug": "1v1",
-      "collectionSection": "Solo practice",
-      "teamSize": "1 per side",
-      "queuePlace": "[DUELS] 1v1",
-      "placeId": 124848751642883,
-      "availability": "Public queue",
-      "accessRequirement": "None listed",
-      "bestFor": "Solo aim practice and round timing",
-      "difficulty": "Cleanest practice because teammate noise is removed",
-      "rewardNotes": "No verified mode-specific reward difference found",
-      "partyFriendSupport": "Best for solo play or dueling one friend",
-      "notes": "Pick 1v1 when you want quick feedback on aim, dodging, and role timing.",
-      "sourceStatus": "Official child place",
-      "sourceUrls": [
-        "https://develop.roblox.com/v1/universes/7219654364/places?limit=100&sortOrder=Asc"
-      ],
-      "sourceCheckedAt": "2026-05-31",
-      "verificationNote": "Official places API returned place ID 124848751642883 with name [DUELS] 1v1."
+      "item": {
+        "name": "1v1",
+        "teamSize": "1 per side",
+        "queuePlace": "[DUELS] 1v1",
+        "placeId": 124848751642883,
+        "availability": "Public queue",
+        "accessRequirement": "None listed",
+        "bestFor": "Solo aim practice and round timing",
+        "difficulty": "Cleanest practice because teammate noise is removed",
+        "rewardNotes": "No verified mode-specific reward difference found",
+        "partyFriendSupport": "Best for solo play or dueling one friend",
+        "notes": "Pick 1v1 when you want quick feedback on aim, dodging, and role timing."
+      },
+      "system": {
+        "slug": "1v1",
+        "section": "Solo practice",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "2v2",
-      "slug": "2v2",
-      "collectionSection": "Team queues",
-      "teamSize": "2 per side",
-      "queuePlace": "[DUELS] 2v2",
-      "placeId": 92876937625630,
-      "availability": "Public queue",
-      "accessRequirement": "None listed",
-      "bestFor": "Playing with one friend and learning trades",
-      "difficulty": "More coordination than 1v1, but still readable",
-      "rewardNotes": "No verified mode-specific reward difference found",
-      "partyFriendSupport": "Good fit for a duo",
-      "notes": "Pick 2v2 when you want teammate pressure without the round becoming too crowded.",
-      "sourceStatus": "Official child place",
-      "sourceUrls": [
-        "https://develop.roblox.com/v1/universes/7219654364/places?limit=100&sortOrder=Asc"
-      ],
-      "sourceCheckedAt": "2026-05-31",
-      "verificationNote": "Official places API returned place ID 92876937625630 with name [DUELS] 2v2."
+      "item": {
+        "name": "2v2",
+        "teamSize": "2 per side",
+        "queuePlace": "[DUELS] 2v2",
+        "placeId": 92876937625630,
+        "availability": "Public queue",
+        "accessRequirement": "None listed",
+        "bestFor": "Playing with one friend and learning trades",
+        "difficulty": "More coordination than 1v1, but still readable",
+        "rewardNotes": "No verified mode-specific reward difference found",
+        "partyFriendSupport": "Good fit for a duo",
+        "notes": "Pick 2v2 when you want teammate pressure without the round becoming too crowded."
+      },
+      "system": {
+        "slug": "2v2",
+        "section": "Team queues",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "3v3",
-      "slug": "3v3",
-      "collectionSection": "Team queues",
-      "teamSize": "3 per side",
-      "queuePlace": "[DUELS] 3v3",
-      "placeId": 101617670515690,
-      "availability": "Public queue",
-      "accessRequirement": "None listed",
-      "bestFor": "Small team fights and crossfire practice",
-      "difficulty": "Crowded enough that positioning and target choice matter more",
-      "rewardNotes": "No verified mode-specific reward difference found",
-      "partyFriendSupport": "Best when you have multiple friends or want busier rounds",
-      "notes": "Pick 3v3 after you understand 1v1 timing and want to practice spacing around teammates.",
-      "sourceStatus": "Official child place",
-      "sourceUrls": [
-        "https://develop.roblox.com/v1/universes/7219654364/places?limit=100&sortOrder=Asc"
-      ],
-      "sourceCheckedAt": "2026-05-31",
-      "verificationNote": "Official places API returned place ID 101617670515690 with name [DUELS] 3v3."
+      "item": {
+        "name": "3v3",
+        "teamSize": "3 per side",
+        "queuePlace": "[DUELS] 3v3",
+        "placeId": 101617670515690,
+        "availability": "Public queue",
+        "accessRequirement": "None listed",
+        "bestFor": "Small team fights and crossfire practice",
+        "difficulty": "Crowded enough that positioning and target choice matter more",
+        "rewardNotes": "No verified mode-specific reward difference found",
+        "partyFriendSupport": "Best when you have multiple friends or want busier rounds",
+        "notes": "Pick 3v3 after you understand 1v1 timing and want to practice spacing around teammates."
+      },
+      "system": {
+        "slug": "3v3",
+        "section": "Team queues",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Pro Servers",
-      "slug": "pro-servers",
-      "collectionSection": "Pro access",
-      "teamSize": "Not listed",
-      "queuePlace": "[DUELS] Pro Servers",
-      "placeId": 74084441161738,
-      "availability": "Pass-gated place",
-      "accessRequirement": "Pro Servers Pass, 99 Robux",
-      "bestFor": "Players who already have Pro Servers access",
-      "difficulty": "Gameplay difference beyond access is not verified",
-      "rewardNotes": "No verified mode-specific reward difference found",
-      "partyFriendSupport": "Party behavior not verified",
-      "notes": "Official data confirms the Pro Servers place and pass access, but not special rewards or matchmaking rules.",
-      "sourceStatus": "Official child place and official gamepass",
-      "sourceUrls": [
-        "https://develop.roblox.com/v1/universes/7219654364/places?limit=100&sortOrder=Asc",
-        "https://apis.roblox.com/game-passes/v1/game-passes/1220842311/product-info"
-      ],
-      "sourceCheckedAt": "2026-05-31",
-      "verificationNote": "Official places API returned [DUELS] Pro Servers, and the official product info lists Pro Servers Pass at 99 Robux with description Access to Pro Servers."
+      "item": {
+        "name": "Pro Servers",
+        "teamSize": "Not listed",
+        "queuePlace": "[DUELS] Pro Servers",
+        "placeId": 74084441161738,
+        "availability": "Pass-gated place",
+        "accessRequirement": "Pro Servers Pass, 99 Robux",
+        "bestFor": "Players who already have Pro Servers access",
+        "difficulty": "Gameplay difference beyond access is not verified",
+        "rewardNotes": "No verified mode-specific reward difference found",
+        "partyFriendSupport": "Party behavior not verified",
+        "notes": "Official data confirms the Pro Servers place and pass access, but not special rewards or matchmaking rules."
+      },
+      "system": {
+        "slug": "pro-servers",
+        "section": "Pro access",
+        "sortOrder": 4,
+        "image": null
+      }
     }
   ]
 }

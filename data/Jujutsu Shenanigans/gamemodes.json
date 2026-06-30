@@ -1,37 +1,12 @@
 {
   "meta": {
-    "title": "Jujutsu Shenanigans gamemodes data",
+    "schemaVersion": 2,
     "game": "Jujutsu Shenanigans",
     "gameSlug": "jujutsu-shenanigans",
-    "universeId": 3508322461,
     "collection": "gamemodes",
     "route": "/wiki/jujutsu-shenanigans/gamemodes",
     "catalogCode": "jujutsu-shenanigans-gamemodes",
-    "updatedAt": "2026-05-31",
-    "itemCount": 14,
-    "counts": {
-      "Public Servers": 1,
-      "Duels and Ranked": 2,
-      "Roulette Minigames": 9,
-      "Custom and Private Servers": 1,
-      "Creator Clash": 1
-    },
-    "rouletteCount": {
-      "activeAccepted": 9,
-      "excludedRemoved": [
-        "Platform Clash (PFC)"
-      ],
-      "reason": "The current Gamemodes table supports 9 active Roulette minigame rows. Stale surrounding source text still mentions PFC and a 10-minigame context, so PFC is not counted without direct current-row support."
-    },
-    "imageCoverage": {
-      "present": 14,
-      "missing": 0,
-      "reason": "All 14 rows have row-specific local WebP images from the current wiki pages: screenshots for public/duel/custom/Workshop rows and mode icons/screenshots for Roulette rows."
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
+    "itemFields": [
       "modeGroup",
       "category",
       "access",
@@ -44,473 +19,441 @@
       "progressionImpact",
       "specialRules",
       "availability",
-      "sourceStatus",
-      "sourcePage",
-      "supportingSources",
-      "sourceConfidence",
-      "verificationNote",
-      "sortOrder",
-      "sourceImageUrl",
-      "imageStatus"
+      "supportingSources"
     ],
-    "sources": [
-      {
-        "label": "Roblox - Jujutsu Shenanigans",
-        "url": "https://www.roblox.com/games/9391468976/Jujutsu-Shenanigans",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Roblox games API - universe 3508322461",
-        "url": "https://games.roblox.com/v1/games?universeIds=3508322461",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Gamemodes",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Map",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Map",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Update Log",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Shop",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Shop",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Private Servers",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers",
-        "accessed": "2026-05-31"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Workshop",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop",
-        "accessed": "2026-05-31"
-      }
+    "columns": [
+      "modeGroup",
+      "category",
+      "access",
+      "objective",
+      "playersTeams",
+      "lives",
+      "mapPool",
+      "winCondition",
+      "rewardSummary",
+      "progressionImpact",
+      "specialRules",
+      "availability",
+      "supportingSources"
     ],
-    "excludedRows": [
-      {
-        "name": "Join a Friend",
-        "reason": "Menu navigation action, not a playable ruleset."
-      },
-      {
-        "name": "Roulette",
-        "reason": "Explained in section copy as a voting wrapper. It is not a separate card because active minigames carry the playable rules."
-      },
-      {
-        "name": "Platform Clash (PFC)",
-        "reason": "The current Gamemodes table supports 9 active Roulette minigame rows while stale surrounding source text still mentions PFC and a 10-minigame context, so PFC is excluded from the current count."
-      },
-      {
-        "name": "JSD x JJS / Cursed Child mode",
-        "reason": "Limited crossover/event-style mode from update notes. Excluded until parent approves a historical or event-only treatment."
-      },
-      {
-        "name": "Private server listings and Workshop uploads",
-        "reason": "Individual player servers and user-created uploads are not durable catalog rows."
-      }
-    ],
-    "notes": [
-      "Rows are current, repeatable mode comparisons only.",
-      "The route needs a parent section override because the generic renderer does not currently group by modeGroup or prioritize the approved card fields.",
-      "Images are local row-specific wiki screenshots or mode icons, saved under apps/web/public/Jujutsu Shenanigans/gamemodes/."
-    ]
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Base game",
+        "Matchmade duel",
+        "Ranked duel",
+        "Roulette kill race",
+        "Roulette team fight",
+        "Roulette boss fight",
+        "Roulette infection survival",
+        "Roulette tag",
+        "Roulette shooting mode",
+        "Roulette last-player-standing",
+        "Roulette moveset draft",
+        "Player-hosted private server",
+        "Workshop custom movesets"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "modeGroup",
+        "category",
+        "access",
+        "objective",
+        "playersTeams",
+        "lives"
+      ],
+      "tableFields": [
+        "modeGroup",
+        "category",
+        "access",
+        "objective",
+        "playersTeams",
+        "lives",
+        "mapPool",
+        "winCondition"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Public Servers",
-      "slug": "public-servers",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/public-servers.webp",
-      "modeGroup": "Public Servers",
-      "category": "Base game",
-      "access": "Join the experience normally or choose Public Servers from the gamemodes menu.",
-      "objective": "Fight in the standard Shinjuku-inspired public map with normal combat, item spawns, and public-server chaos.",
-      "playersTeams": "Public server; Roblox API lists max players as 20.",
-      "lives": "Normal respawns; no match life pool is listed.",
-      "mapPool": "Main Shinjuku-inspired public map.",
-      "winCondition": "No round win condition. Keep fighting, practicing, and building normal kill or quest progress.",
-      "rewardSummary": "Public and Ranked kills grant $5 when the kill credit rules count the damage.",
-      "progressionImpact": "Best general route for normal practice, public fights, kill credit, daily or weekly quest progress, and cash from counted kills.",
-      "specialRules": "Items spawn around the main map every 10 minutes, and most of the public map is destructible.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://games.roblox.com/v1/games?universeIds=3508322461",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Shop",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Gamemodes page confirms Public Servers and item spawn timing; Roblox API confirms 20 max players; Shop page confirms $5 public/ranked kill cash.",
-      "sortOrder": 10,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/9/92/Mapfunimage.png/revision/latest?cb=20240803190636",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Public Servers",
+        "modeGroup": "Public Servers",
+        "category": "Base game",
+        "access": "Join the experience normally or choose Public Servers from the gamemodes menu.",
+        "objective": "Fight in the standard Shinjuku-inspired public map with normal combat, item spawns, and public-server chaos.",
+        "playersTeams": "Public server; Roblox API lists max players as 20.",
+        "lives": "Normal respawns; no match life pool is listed.",
+        "mapPool": "Main Shinjuku-inspired public map.",
+        "winCondition": "No round win condition. Keep fighting, practicing, and building normal kill or quest progress.",
+        "rewardSummary": "Public and Ranked kills grant $5 when the kill credit rules count the damage.",
+        "progressionImpact": "Best general route for normal practice, public fights, kill credit, daily or weekly quest progress, and cash from counted kills.",
+        "specialRules": "Items spawn around the main map every 10 minutes, and most of the public map is destructible.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://games.roblox.com/v1/games?universeIds=3508322461",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Shop",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map"
+        ]
+      },
+      "system": {
+        "slug": "public-servers",
+        "section": "Base game",
+        "sortOrder": 10,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/public-servers.webp"
+      }
     },
     {
-      "name": "Casual Duels",
-      "slug": "casual-duels",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/casual-duels.webp",
-      "modeGroup": "Duels and Ranked",
-      "category": "Matchmade duel",
-      "access": "Choose Duels, select Casual, then press Ready to search for an opponent or party matchup.",
-      "objective": "Win a small-team duel by draining the opposing team's lives or ending the timer with more lives remaining.",
-      "playersTeams": "1v1, 2v2, and larger party duels; parties can hold up to 4 players and match same-size parties.",
-      "lives": "3 team lives in 1v1; 5 team lives in 2v2 and larger duels.",
-      "mapPool": "Randomized duel maps such as Grass Field, Gym, Sewers, and Tombs of the Star.",
-      "winCondition": "Deplete the other team's lives, or have more lives remaining when the timer ends.",
-      "rewardSummary": "Normal kill cash can apply to counted kills; Casual does not use Elo.",
-      "progressionImpact": "Best clean practice route before Ranked because it has duel structure without Elo loss.",
-      "specialRules": "Casual adds Binding Vows at match start and allows up to two rematch votes after a duel.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Shop"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Duels source confirms Casual, party size, lives, win condition, Binding Vows, and rematches.",
-      "sortOrder": 20,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/0/0b/Duel_Menu.png/revision/latest?cb=20260310155935",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Casual Duels",
+        "modeGroup": "Duels and Ranked",
+        "category": "Matchmade duel",
+        "access": "Choose Duels, select Casual, then press Ready to search for an opponent or party matchup.",
+        "objective": "Win a small-team duel by draining the opposing team's lives or ending the timer with more lives remaining.",
+        "playersTeams": "1v1, 2v2, and larger party duels; parties can hold up to 4 players and match same-size parties.",
+        "lives": "3 team lives in 1v1; 5 team lives in 2v2 and larger duels.",
+        "mapPool": "Randomized duel maps such as Grass Field, Gym, Sewers, and Tombs of the Star.",
+        "winCondition": "Deplete the other team's lives, or have more lives remaining when the timer ends.",
+        "rewardSummary": "Normal kill cash can apply to counted kills; Casual does not use Elo.",
+        "progressionImpact": "Best clean practice route before Ranked because it has duel structure without Elo loss.",
+        "specialRules": "Casual adds Binding Vows at match start and allows up to two rematch votes after a duel.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Shop"
+        ]
+      },
+      "system": {
+        "slug": "casual-duels",
+        "section": "Matchmade duel",
+        "sortOrder": 20,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/casual-duels.webp"
+      }
     },
     {
-      "name": "Ranked Duels",
-      "slug": "ranked-duels",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/ranked-duels.webp",
-      "modeGroup": "Duels and Ranked",
-      "category": "Ranked duel",
-      "access": "Choose Duels, select Ranked, then press Ready to search for an Elo-based matchup.",
-      "objective": "Win the duel under Ranked matchmaking rules and protect or gain Elo.",
-      "playersTeams": "1v1, 2v2, and larger same-size party duels through matchmaking.",
-      "lives": "3 team lives in 1v1; 5 team lives in 2v2 and larger duels.",
-      "mapPool": "Randomized duel maps; Ranked destruction has been disabled by update-log rules.",
-      "winCondition": "Deplete the other team's lives, or have more lives remaining when the timer ends.",
-      "rewardSummary": "Ranked wins and losses change Elo; counted kills can still grant $5, but winning Ranked itself does not add a separate cash reward.",
-      "progressionImpact": "Best route for competitive pressure and Elo, not for relaxed practice.",
-      "specialRules": "No Binding Vows. Players start from 0 Elo, cannot drop below 0, and matchmaking avoids opponents with a 50+ Elo gap.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Shop",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Duels source confirms Ranked Elo, no Binding Vows, life rules, and Elo gain/loss range. Shop trivia confirms no separate Ranked win cash.",
-      "sortOrder": 30,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/3/3e/EloLB.png/revision/latest?cb=20260309145948",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Ranked Duels",
+        "modeGroup": "Duels and Ranked",
+        "category": "Ranked duel",
+        "access": "Choose Duels, select Ranked, then press Ready to search for an Elo-based matchup.",
+        "objective": "Win the duel under Ranked matchmaking rules and protect or gain Elo.",
+        "playersTeams": "1v1, 2v2, and larger same-size party duels through matchmaking.",
+        "lives": "3 team lives in 1v1; 5 team lives in 2v2 and larger duels.",
+        "mapPool": "Randomized duel maps; Ranked destruction has been disabled by update-log rules.",
+        "winCondition": "Deplete the other team's lives, or have more lives remaining when the timer ends.",
+        "rewardSummary": "Ranked wins and losses change Elo; counted kills can still grant $5, but winning Ranked itself does not add a separate cash reward.",
+        "progressionImpact": "Best route for competitive pressure and Elo, not for relaxed practice.",
+        "specialRules": "No Binding Vows. Players start from 0 Elo, cannot drop below 0, and matchmaking avoids opponents with a 50+ Elo gap.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Shop",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
+        ]
+      },
+      "system": {
+        "slug": "ranked-duels",
+        "section": "Ranked duel",
+        "sortOrder": 30,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/ranked-duels.webp"
+      }
     },
     {
-      "name": "Brain Swap (SWP)",
-      "slug": "brain-swap-swp",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/brain-swap-swp.webp",
-      "modeGroup": "Roulette Minigames",
-      "category": "Roulette kill race",
-      "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
-      "objective": "Score as many kills as possible with randomized base and awakening movesets.",
-      "playersTeams": "Roulette lobby players; individual kill race.",
-      "lives": "No fixed life limit is listed; each death reshuffles the moveset.",
-      "mapPool": "Large maps.",
-      "winCondition": "Finish with the strongest kill/point performance when the round ends.",
-      "rewardSummary": "Kills grant Roulette points; round rewards are point-based and cap at $50.",
-      "progressionImpact": "Good for fast random-kit practice and Roulette cash, but kills do not count as normal kill rewards.",
-      "specialRules": "Moves come from the game's move pool with reduced damage/cooldowns, while some abilities and domain expansions are excluded.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Current Gamemodes table lists SWP as a Roulette minigame and reward table lists SWP kill points.",
-      "sortOrder": 40,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/b/b6/SWP.jpeg/revision/latest?cb=20250509202223",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Brain Swap (SWP)",
+        "modeGroup": "Roulette Minigames",
+        "category": "Roulette kill race",
+        "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
+        "objective": "Score as many kills as possible with randomized base and awakening movesets.",
+        "playersTeams": "Roulette lobby players; individual kill race.",
+        "lives": "No fixed life limit is listed; each death reshuffles the moveset.",
+        "mapPool": "Large maps.",
+        "winCondition": "Finish with the strongest kill/point performance when the round ends.",
+        "rewardSummary": "Kills grant Roulette points; round rewards are point-based and cap at $50.",
+        "progressionImpact": "Good for fast random-kit practice and Roulette cash, but kills do not count as normal kill rewards.",
+        "specialRules": "Moves come from the game's move pool with reduced damage/cooldowns, while some abilities and domain expansions are excluded.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map"
+        ]
+      },
+      "system": {
+        "slug": "brain-swap-swp",
+        "section": "Roulette kill race",
+        "sortOrder": 40,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/brain-swap-swp.webp"
+      }
     },
     {
-      "name": "Sorcery Clash (SRC)",
-      "slug": "sorcery-clash-src",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/sorcery-clash-src.webp",
-      "modeGroup": "Roulette Minigames",
-      "category": "Roulette team fight",
-      "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
-      "objective": "Win a team deathmatch as Sorcerers or Curses.",
-      "playersTeams": "Two teams: Sorcerers and Curses.",
-      "lives": "Each player has one life.",
-      "mapPool": "Large maps.",
-      "winCondition": "The round ends when one team loses all players or the timer expires.",
-      "rewardSummary": "Kills grant Roulette points; round rewards are point-based and cap at $50.",
-      "progressionImpact": "Best Roulette pick for simple team fights and quick kill-point scoring.",
-      "specialRules": "Friendly team structure is different from some Ranked team rules, where teammates may still harm each other in certain formats.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Current Gamemodes table lists SRC as team deathmatch; update log confirms SRC gives points for kills.",
-      "sortOrder": 50,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/1/1b/SRC.png/revision/latest?cb=20250311203359",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Sorcery Clash (SRC)",
+        "modeGroup": "Roulette Minigames",
+        "category": "Roulette team fight",
+        "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
+        "objective": "Win a team deathmatch as Sorcerers or Curses.",
+        "playersTeams": "Two teams: Sorcerers and Curses.",
+        "lives": "Each player has one life.",
+        "mapPool": "Large maps.",
+        "winCondition": "The round ends when one team loses all players or the timer expires.",
+        "rewardSummary": "Kills grant Roulette points; round rewards are point-based and cap at $50.",
+        "progressionImpact": "Best Roulette pick for simple team fights and quick kill-point scoring.",
+        "specialRules": "Friendly team structure is different from some Ranked team rules, where teammates may still harm each other in certain formats.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map"
+        ]
+      },
+      "system": {
+        "slug": "sorcery-clash-src",
+        "section": "Roulette team fight",
+        "sortOrder": 50,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/sorcery-clash-src.webp"
+      }
     },
     {
-      "name": "First to Twelve (FTT)",
-      "slug": "first-to-twelve-ftt",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/first-to-twelve-ftt.webp",
-      "modeGroup": "Roulette Minigames",
-      "category": "Roulette kill race",
-      "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
-      "objective": "Reach 12 kills first while rotating through shared randomized base movesets.",
-      "playersTeams": "Roulette lobby players; individual kill race.",
-      "lives": "Infinite lives.",
-      "mapPool": "Large maps.",
-      "winCondition": "First player to reach 12 kills wins.",
-      "rewardSummary": "Kills grant Roulette points; round rewards are point-based and cap at $50.",
-      "progressionImpact": "Best Roulette mode for pure base-move fighting and quick kill-race practice.",
-      "specialRules": "No Awakenings, regeneration, or burst. Each kill count changes the moveset, and 11 kills leaves Head Splitter as the only move.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Current Gamemodes table and V1.76 update log confirm FTT uses large maps and no passive regeneration, bursts, or Awakening moves.",
-      "sortOrder": 60,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/5/56/FTT.jpeg/revision/latest?cb=20250509210229",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "First to Twelve (FTT)",
+        "modeGroup": "Roulette Minigames",
+        "category": "Roulette kill race",
+        "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
+        "objective": "Reach 12 kills first while rotating through shared randomized base movesets.",
+        "playersTeams": "Roulette lobby players; individual kill race.",
+        "lives": "Infinite lives.",
+        "mapPool": "Large maps.",
+        "winCondition": "First player to reach 12 kills wins.",
+        "rewardSummary": "Kills grant Roulette points; round rewards are point-based and cap at $50.",
+        "progressionImpact": "Best Roulette mode for pure base-move fighting and quick kill-race practice.",
+        "specialRules": "No Awakenings, regeneration, or burst. Each kill count changes the moveset, and 11 kills leaves Head Splitter as the only move.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
+        ]
+      },
+      "system": {
+        "slug": "first-to-twelve-ftt",
+        "section": "Roulette kill race",
+        "sortOrder": 60,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/first-to-twelve-ftt.webp"
+      }
     },
     {
-      "name": "Final Showdown (FSD)",
-      "slug": "final-showdown-fsd",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/final-showdown-fsd.webp",
-      "modeGroup": "Roulette Minigames",
-      "category": "Roulette boss fight",
-      "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
-      "objective": "Defeat the Strongest Of History boss as Sorcerers, or drain all Sorcerer lives as the boss.",
-      "playersTeams": "One random boss against the Sorcerers team.",
-      "lives": "Sorcerers get 3 lives each. The boss has 1 life.",
-      "mapPool": "Large maps.",
-      "winCondition": "Sorcerers win by killing the boss. The boss wins by draining Sorcerer lives or surviving the 6-minute timer.",
-      "rewardSummary": "Damage dealt decides points for both Sorcerers and the boss; rewards cap at $50. The boss can earn a special Victory Flash.",
-      "progressionImpact": "Best Roulette pick for team focus and damage-based scoring instead of pure kill racing.",
-      "specialRules": "The boss's health scales with active players, and neither side regenerates health.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Current Gamemodes table and reward table list FSD role, lives, timer, no regeneration, and damage-based scoring.",
-      "sortOrder": 70,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/6/6c/FSD.jpeg/revision/latest?cb=20250509202035",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Final Showdown (FSD)",
+        "modeGroup": "Roulette Minigames",
+        "category": "Roulette boss fight",
+        "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
+        "objective": "Defeat the Strongest Of History boss as Sorcerers, or drain all Sorcerer lives as the boss.",
+        "playersTeams": "One random boss against the Sorcerers team.",
+        "lives": "Sorcerers get 3 lives each. The boss has 1 life.",
+        "mapPool": "Large maps.",
+        "winCondition": "Sorcerers win by killing the boss. The boss wins by draining Sorcerer lives or surviving the 6-minute timer.",
+        "rewardSummary": "Damage dealt decides points for both Sorcerers and the boss; rewards cap at $50. The boss can earn a special Victory Flash.",
+        "progressionImpact": "Best Roulette pick for team focus and damage-based scoring instead of pure kill racing.",
+        "specialRules": "The boss's health scales with active players, and neither side regenerates health.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map"
+        ]
+      },
+      "system": {
+        "slug": "final-showdown-fsd",
+        "section": "Roulette boss fight",
+        "sortOrder": 70,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/final-showdown-fsd.webp"
+      }
     },
     {
-      "name": "End of Journey (EOJ)",
-      "slug": "end-of-journey-eoj",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/end-of-journey-eoj.webp",
-      "modeGroup": "Roulette Minigames",
-      "category": "Roulette infection survival",
-      "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
-      "objective": "Survive as Sorcerers until the timer ends, or turn every Sorcerer into a Transfigured Human as Curses.",
-      "playersTeams": "Sorcerers versus Curses created by defeated Sorcerers.",
-      "lives": "Sorcerers have one life. Defeated Sorcerers respawn as Transfigured Humans with infinite lives.",
-      "mapPool": "Large maps.",
-      "winCondition": "Sorcerers win by surviving the timer. Curses win by converting every Sorcerer before time runs out.",
-      "rewardSummary": "Sorcerer kills grant points. Curse rewards use both kills and damage dealt. Round rewards cap at $50.",
-      "progressionImpact": "Best Roulette mode for survival pressure and team conversion rules.",
-      "specialRules": "Transfigured Humans have 20 HP, no front dash, varying movesets after death, and Locust Guy M1s. Parkour is disabled.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Current Gamemodes table lists EOJ as wave/infection survival; trivia notes older SRC/EOJ naming changes but current row is retained.",
-      "sortOrder": 80,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/c/c8/EOJ.jpeg/revision/latest?cb=20250509201930",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "End of Journey (EOJ)",
+        "modeGroup": "Roulette Minigames",
+        "category": "Roulette infection survival",
+        "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
+        "objective": "Survive as Sorcerers until the timer ends, or turn every Sorcerer into a Transfigured Human as Curses.",
+        "playersTeams": "Sorcerers versus Curses created by defeated Sorcerers.",
+        "lives": "Sorcerers have one life. Defeated Sorcerers respawn as Transfigured Humans with infinite lives.",
+        "mapPool": "Large maps.",
+        "winCondition": "Sorcerers win by surviving the timer. Curses win by converting every Sorcerer before time runs out.",
+        "rewardSummary": "Sorcerer kills grant points. Curse rewards use both kills and damage dealt. Round rewards cap at $50.",
+        "progressionImpact": "Best Roulette mode for survival pressure and team conversion rules.",
+        "specialRules": "Transfigured Humans have 20 HP, no front dash, varying movesets after death, and Locust Guy M1s. Parkour is disabled.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map"
+        ]
+      },
+      "system": {
+        "slug": "end-of-journey-eoj",
+        "section": "Roulette infection survival",
+        "sortOrder": 80,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/end-of-journey-eoj.webp"
+      }
     },
     {
-      "name": "Perfection Tag (PFT)",
-      "slug": "perfection-tag-pft",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/perfection-tag-pft.webp",
-      "modeGroup": "Roulette Minigames",
-      "category": "Roulette tag",
-      "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
-      "objective": "Run from the Perfection player as Sorcerers, or tag players as Perfection.",
-      "playersTeams": "One Perfection tagger against defenseless Sorcerers.",
-      "lives": "Sorcerers have 1 HP and combat disabled; the source does not list a normal respawn pool.",
-      "mapPool": "Small maps.",
-      "winCondition": "Sorcerers survive until the timer ends; the tagger tries to catch them before time runs out.",
-      "rewardSummary": "Runners gain points from time spent near the tagger. The tagger gains points from kills. Round rewards cap at $50.",
-      "progressionImpact": "Best Roulette mode for movement, panic routing, and nonstandard scoring.",
-      "specialRules": "Each death extends the timer by 15 seconds, capped at 3 minutes. The tagger has a faster no-cooldown Idle Transfiguration move.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Current Gamemodes table and reward table list PFT role split, timer extension, 1 HP runners, and scoring rules.",
-      "sortOrder": 90,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/6/69/PFT.png/revision/latest?cb=20250311203416",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Perfection Tag (PFT)",
+        "modeGroup": "Roulette Minigames",
+        "category": "Roulette tag",
+        "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
+        "objective": "Run from the Perfection player as Sorcerers, or tag players as Perfection.",
+        "playersTeams": "One Perfection tagger against defenseless Sorcerers.",
+        "lives": "Sorcerers have 1 HP and combat disabled; the source does not list a normal respawn pool.",
+        "mapPool": "Small maps.",
+        "winCondition": "Sorcerers survive until the timer ends; the tagger tries to catch them before time runs out.",
+        "rewardSummary": "Runners gain points from time spent near the tagger. The tagger gains points from kills. Round rewards cap at $50.",
+        "progressionImpact": "Best Roulette mode for movement, panic routing, and nonstandard scoring.",
+        "specialRules": "Each death extends the timer by 15 seconds, capped at 3 minutes. The tagger has a faster no-cooldown Idle Transfiguration move.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map"
+        ]
+      },
+      "system": {
+        "slug": "perfection-tag-pft",
+        "section": "Roulette tag",
+        "sortOrder": 90,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/perfection-tag-pft.webp"
+      }
     },
     {
-      "name": "American Shenanigans (AMS)",
-      "slug": "american-shenanigans-ams",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/american-shenanigans-ams.webp",
-      "modeGroup": "Roulette Minigames",
-      "category": "Roulette shooting mode",
-      "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
-      "objective": "Shoot crows with an infinite-ammo gun and build progress points.",
-      "playersTeams": "All players are placed on the same team with friendly fire.",
-      "lives": "One life.",
-      "mapPool": "Large maps.",
-      "winCondition": "Reach strong point progress and perform well before the round ends.",
-      "rewardSummary": "Kills and accuracy decide points. Round rewards cap at $50.",
-      "progressionImpact": "Best Roulette mode for aim-focused scoring instead of normal moveset fighting.",
-      "specialRules": "Players receive an undroppable gun. At 40 progress points, a player gets the faster God Gun that can bypass friendly fire.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Current Gamemodes table lists AMS rules; V1.74 update log says AMS was reworked with more content.",
-      "sortOrder": 100,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/d/df/Kenjaku3024.jpeg/revision/latest?cb=20250412191250",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "American Shenanigans (AMS)",
+        "modeGroup": "Roulette Minigames",
+        "category": "Roulette shooting mode",
+        "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
+        "objective": "Shoot crows with an infinite-ammo gun and build progress points.",
+        "playersTeams": "All players are placed on the same team with friendly fire.",
+        "lives": "One life.",
+        "mapPool": "Large maps.",
+        "winCondition": "Reach strong point progress and perform well before the round ends.",
+        "rewardSummary": "Kills and accuracy decide points. Round rewards cap at $50.",
+        "progressionImpact": "Best Roulette mode for aim-focused scoring instead of normal moveset fighting.",
+        "specialRules": "Players receive an undroppable gun. At 40 progress points, a player gets the faster God Gun that can bypass friendly fire.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map"
+        ]
+      },
+      "system": {
+        "slug": "american-shenanigans-ams",
+        "section": "Roulette shooting mode",
+        "sortOrder": 100,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/american-shenanigans-ams.webp"
+      }
     },
     {
-      "name": "Prison Realm (PSR)",
-      "slug": "prison-realm-psr",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/prison-realm-psr.webp",
-      "modeGroup": "Roulette Minigames",
-      "category": "Roulette last-player-standing",
-      "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
-      "objective": "Avoid being sealed by passing the Prison Realm to another player before the timer expires.",
-      "playersTeams": "All players in a free-for-all domain-clash state.",
-      "lives": "The source describes sealed players being killed; no separate respawn pool is listed.",
-      "mapPool": "Small maps.",
-      "winCondition": "Be the last player standing.",
-      "rewardSummary": "Specific PSR point scoring is not listed; treat the mode as Roulette variety rather than a planned scoring route.",
-      "progressionImpact": "Best Roulette mode for movement, tag pressure, and last-player-standing reactions, not for predictable point planning.",
-      "specialRules": "Movesets are overridden by domain clash state. The tagged player gets a 15-second Prison Realm timer, faster walk speed, double side dashes, and weaker melee.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed; reward scoring not listed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map"
-      ],
-      "sourceConfidence": "medium",
-      "verificationNote": "Current Gamemodes table lists PSR as active, and search only found the Gamemodes page for PSR points. The reward table has no PSR-specific scoring row, so scoring is intentionally left unpromised.",
-      "sortOrder": 110,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/8/85/PSR.png/revision/latest?cb=20260501192220",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Prison Realm (PSR)",
+        "modeGroup": "Roulette Minigames",
+        "category": "Roulette last-player-standing",
+        "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
+        "objective": "Avoid being sealed by passing the Prison Realm to another player before the timer expires.",
+        "playersTeams": "All players in a free-for-all domain-clash state.",
+        "lives": "The source describes sealed players being killed; no separate respawn pool is listed.",
+        "mapPool": "Small maps.",
+        "winCondition": "Be the last player standing.",
+        "rewardSummary": "Specific PSR point scoring is not listed; treat the mode as Roulette variety rather than a planned scoring route.",
+        "progressionImpact": "Best Roulette mode for movement, tag pressure, and last-player-standing reactions, not for predictable point planning.",
+        "specialRules": "Movesets are overridden by domain clash state. The tagged player gets a 15-second Prison Realm timer, faster walk speed, double side dashes, and weaker melee.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map"
+        ]
+      },
+      "system": {
+        "slug": "prison-realm-psr",
+        "section": "Roulette last-player-standing",
+        "sortOrder": 110,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/prison-realm-psr.webp"
+      }
     },
     {
-      "name": "Soul Swap (SSP)",
-      "slug": "soul-swap-ssp",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/soul-swap-ssp.webp",
-      "modeGroup": "Roulette Minigames",
-      "category": "Roulette moveset draft",
-      "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
-      "objective": "Choose from random moveset offers after spawning and score as many kills as possible.",
-      "playersTeams": "Roulette lobby players; individual kill race.",
-      "lives": "No fixed life limit is listed; each death reshuffles the moveset choices.",
-      "mapPool": "Large maps.",
-      "winCondition": "Finish with the strongest kill/point performance when the round ends.",
-      "rewardSummary": "Kills grant Roulette points; round rewards are point-based and cap at $50.",
-      "progressionImpact": "Best Roulette mode for testing random character mechanics and custom Skill Builder movesets.",
-      "specialRules": "Players choose from 3 random movesets with Common, Rare, and Legendary rarities. Some offers are custom-made through Skill Builder.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Map"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Current Gamemodes table lists SSP as active and reward table groups SSP with kill-point Roulette modes.",
-      "sortOrder": 120,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/3/3d/SSP.png/revision/latest?cb=20260501192157",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Soul Swap (SSP)",
+        "modeGroup": "Roulette Minigames",
+        "category": "Roulette moveset draft",
+        "access": "Choose Roulette, select a region, then vote in the Roulette lobby.",
+        "objective": "Choose from random moveset offers after spawning and score as many kills as possible.",
+        "playersTeams": "Roulette lobby players; individual kill race.",
+        "lives": "No fixed life limit is listed; each death reshuffles the moveset choices.",
+        "mapPool": "Large maps.",
+        "winCondition": "Finish with the strongest kill/point performance when the round ends.",
+        "rewardSummary": "Kills grant Roulette points; round rewards are point-based and cap at $50.",
+        "progressionImpact": "Best Roulette mode for testing random character mechanics and custom Skill Builder movesets.",
+        "specialRules": "Players choose from 3 random movesets with Common, Rare, and Legendary rarities. Some offers are custom-made through Skill Builder.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Map"
+        ]
+      },
+      "system": {
+        "slug": "soul-swap-ssp",
+        "section": "Roulette moveset draft",
+        "sortOrder": 120,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/soul-swap-ssp.webp"
+      }
     },
     {
-      "name": "Custom Servers",
-      "slug": "custom-servers",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/custom-servers.webp",
-      "modeGroup": "Custom and Private Servers",
-      "category": "Player-hosted private server",
-      "access": "Choose Custom Server, refresh/search the list or enter a region, then join a hosted server; hosting uses Create A Server and a server title.",
-      "objective": "Use player-hosted private servers for builds, movesets, tournaments, private commands, and controlled practice.",
-      "playersTeams": "Player-hosted server; team rules depend on private-server settings.",
-      "lives": "Depends on private-server settings and the activity being hosted.",
-      "mapPool": "Private server map with owner-controlled commands, Workshop presets, and build/custom options.",
-      "winCondition": "No single win condition. The host's rules, commands, build, or tournament format decide the goal.",
-      "rewardSummary": "Private-server rows are mainly for practice and custom play. Items and sodas are free in private servers.",
-      "progressionImpact": "Best for labbing moves, using dummies, testing builds, hosting tournaments, and practicing without normal public-server pressure.",
-      "specialRules": "Owners can adjust server settings such as destruction, friendly fire, damage, walk speed, dummies, Workshop access, free build, cooldowns, and player controls.",
-      "availability": "Current",
-      "sourceStatus": "Source-backed",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop"
-      ],
-      "sourceConfidence": "high",
-      "verificationNote": "Gamemodes page confirms custom server join/host flow; Private Servers page confirms owner commands and free items/sodas.",
-      "sortOrder": 130,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/7/78/Server.png/revision/latest?cb=20251218120116",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Custom Servers",
+        "modeGroup": "Custom and Private Servers",
+        "category": "Player-hosted private server",
+        "access": "Choose Custom Server, refresh/search the list or enter a region, then join a hosted server; hosting uses Create A Server and a server title.",
+        "objective": "Use player-hosted private servers for builds, movesets, tournaments, private commands, and controlled practice.",
+        "playersTeams": "Player-hosted server; team rules depend on private-server settings.",
+        "lives": "Depends on private-server settings and the activity being hosted.",
+        "mapPool": "Private server map with owner-controlled commands, Workshop presets, and build/custom options.",
+        "winCondition": "No single win condition. The host's rules, commands, build, or tournament format decide the goal.",
+        "rewardSummary": "Private-server rows are mainly for practice and custom play. Items and sodas are free in private servers.",
+        "progressionImpact": "Best for labbing moves, using dummies, testing builds, hosting tournaments, and practicing without normal public-server pressure.",
+        "specialRules": "Owners can adjust server settings such as destruction, friendly fire, damage, walk speed, dummies, Workshop access, free build, cooldowns, and player controls.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Private_Servers",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop"
+        ]
+      },
+      "system": {
+        "slug": "custom-servers",
+        "section": "Player-hosted private server",
+        "sortOrder": 130,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/custom-servers.webp"
+      }
     },
     {
-      "name": "Creator Clash",
-      "slug": "creator-clash",
-      "image": "/Jujutsu%20Shenanigans/gamemodes/creator-clash.webp",
-      "modeGroup": "Creator Clash",
-      "category": "Workshop custom movesets",
-      "access": "Choose Creator Clash from the gamemodes menu; no current extra access requirement is listed.",
-      "objective": "Fight on a special map using custom characters and movesets uploaded through the Workshop.",
-      "playersTeams": "Public Creator Clash match; exact team rules are not listed.",
-      "lives": "No fixed life pool is listed.",
-      "mapPool": "Special Creator Clash map.",
-      "winCondition": "Fight with custom movesets. A single exact match win condition is not listed.",
-      "rewardSummary": "No specific cash or point reward is listed for Creator Clash.",
-      "progressionImpact": "Best for custom-moveset fighting after normal combat basics and Workshop access make sense.",
-      "specialRules": "Creator Clash uses Workshop custom characters and applies limits to visual effects, abilities, damage per second, sound volume, and broken custom movesets.",
-      "availability": "Current",
-      "sourceStatus": "Current source-backed; older update-log requirement superseded by current Gamemodes wording",
-      "sourcePage": "https://jujutsu-shenanigans.fandom.com/wiki/Gamemodes",
-      "supportingSources": [
-        "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop",
-        "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
-      ],
-      "sourceConfidence": "medium-high",
-      "verificationNote": "Current Gamemodes page says Creator Clash grants access to all players. Older V1.73/V1.74 update-log notes mention a kill requirement that was later reduced to 30, but the checked current mode page does not keep that requirement.",
-      "sortOrder": 140,
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/e/e0/WorkshopMoveset.png/revision/latest?cb=20260309153826",
-      "imageStatus": "local row-specific wiki screenshot or mode icon"
+      "item": {
+        "name": "Creator Clash",
+        "modeGroup": "Creator Clash",
+        "category": "Workshop custom movesets",
+        "access": "Choose Creator Clash from the gamemodes menu; no current extra access requirement is listed.",
+        "objective": "Fight on a special map using custom characters and movesets uploaded through the Workshop.",
+        "playersTeams": "Public Creator Clash match; exact team rules are not listed.",
+        "lives": "No fixed life pool is listed.",
+        "mapPool": "Special Creator Clash map.",
+        "winCondition": "Fight with custom movesets. A single exact match win condition is not listed.",
+        "rewardSummary": "No specific cash or point reward is listed for Creator Clash.",
+        "progressionImpact": "Best for custom-moveset fighting after normal combat basics and Workshop access make sense.",
+        "specialRules": "Creator Clash uses Workshop custom characters and applies limits to visual effects, abilities, damage per second, sound volume, and broken custom movesets.",
+        "availability": "Current",
+        "supportingSources": [
+          "https://jujutsu-shenanigans.fandom.com/wiki/Build_Mode/Workshop",
+          "https://jujutsu-shenanigans.fandom.com/wiki/Update_Log"
+        ]
+      },
+      "system": {
+        "slug": "creator-clash",
+        "section": "Workshop custom movesets",
+        "sortOrder": 140,
+        "image": "/Jujutsu%20Shenanigans/gamemodes/creator-clash.webp"
+      }
     }
   ]
 }

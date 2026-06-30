@@ -1,83 +1,135 @@
 {
   "meta": {
-    "title": "Grow a Garden 2 sprinklers data",
-    "updatedAt": "2026-06-23",
-    "sources": [
-      {
-        "label": "Beebom - All Grow a Garden 2 Sprinklers Guide",
-        "url": "https://beebom.com/grow-a-garden-2-sprinklers/",
-        "accessed": "2026-06-23"
-      },
-      {
-        "label": "Beebom - All Grow a Garden 2 Gears Guide",
-        "url": "https://beebom.com/grow-a-garden-gear-shop-guide/",
-        "accessed": "2026-06-13"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Grow a Garden 2",
+    "gameSlug": "grow-a-garden-2",
+    "collection": "sprinklers",
+    "route": "/wiki/grow-a-garden-2/sprinklers",
+    "catalogCode": "grow-a-garden-2-sprinklers",
+    "itemFields": [
       "tier",
       "price",
       "duration",
       "effect",
       "whereToGet"
-    ]
+    ],
+    "columns": [
+      "tier",
+      "price",
+      "duration",
+      "effect",
+      "whereToGet"
+    ],
+    "display": {
+      "groupLabel": "tier",
+      "sectionOrder": [
+        "Basic",
+        "Uncommon",
+        "Rare",
+        "Legendary",
+        "Mythical"
+      ],
+      "badgeField": "tier",
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "tier",
+        "price",
+        "duration",
+        "effect",
+        "whereToGet"
+      ],
+      "tableFields": [
+        "tier",
+        "price",
+        "duration",
+        "effect",
+        "whereToGet"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "common-sprinkler",
-      "name": "Common Sprinkler",
-      "tier": "Basic",
-      "price": "2K Sheckles",
-      "duration": "1 minute",
-      "effect": "Speeds up plant growth and increases fruit size",
-      "image": "/Grow%20a%20Garden%202/Sprinklers/common-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Common-Sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Common Sprinkler",
+        "tier": "Basic",
+        "price": "2K Sheckles",
+        "duration": "1 minute",
+        "effect": "Speeds up plant growth and increases fruit size",
+        "whereToGet": "Gears Shop"
+      },
+      "system": {
+        "slug": "common-sprinkler",
+        "section": "Basic",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden%202/Sprinklers/common-sprinkler.webp"
+      }
     },
     {
-      "id": "uncommon-sprinkler",
-      "name": "Uncommon Sprinkler",
-      "tier": "Uncommon",
-      "price": "10K Sheckles",
-      "duration": "2 minutes",
-      "effect": "Increases plant growth, fruit size, and mutation chances",
-      "image": "/Grow%20a%20Garden%202/Sprinklers/uncommon-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Uncommon-sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Uncommon Sprinkler",
+        "tier": "Uncommon",
+        "price": "10K Sheckles",
+        "duration": "2 minutes",
+        "effect": "Increases plant growth, fruit size, and mutation chances",
+        "whereToGet": "Gears Shop"
+      },
+      "system": {
+        "slug": "uncommon-sprinkler",
+        "section": "Uncommon",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden%202/Sprinklers/uncommon-sprinkler.webp"
+      }
     },
     {
-      "id": "rare-sprinkler",
-      "name": "Rare Sprinkler",
-      "tier": "Rare",
-      "price": "80K Sheckles",
-      "duration": "2 minutes",
-      "effect": "Speeds growth, fruit size, and mutation chances",
-      "image": "/Grow%20a%20Garden%202/Sprinklers/rare-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Rare-Sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Rare Sprinkler",
+        "tier": "Rare",
+        "price": "80K Sheckles",
+        "duration": "2 minutes",
+        "effect": "Speeds growth, fruit size, and mutation chances",
+        "whereToGet": "Gears Shop"
+      },
+      "system": {
+        "slug": "rare-sprinkler",
+        "section": "Rare",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden%202/Sprinklers/rare-sprinkler.webp"
+      }
     },
     {
-      "id": "legendary-sprinkler",
-      "name": "Legendary Sprinkler",
-      "tier": "Legendary",
-      "price": "1.2M Sheckles",
-      "duration": "2 minutes",
-      "effect": "Speeds growth, increases fruit size, and improves mutation chances",
-      "image": "/Grow%20a%20Garden%202/Sprinklers/legendary-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Legendary-Sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Legendary Sprinkler",
+        "tier": "Legendary",
+        "price": "1.2M Sheckles",
+        "duration": "2 minutes",
+        "effect": "Speeds growth, increases fruit size, and improves mutation chances",
+        "whereToGet": "Gears Shop"
+      },
+      "system": {
+        "slug": "legendary-sprinkler",
+        "section": "Legendary",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden%202/Sprinklers/legendary-sprinkler.webp"
+      }
     },
     {
-      "id": "super-sprinkler",
-      "name": "Super Sprinkler",
-      "tier": "Mythical",
-      "price": "Unknown",
-      "duration": "Unknown",
-      "effect": "Speeds growth, increases fruit size, and improves mutation chances",
-      "image": "/Grow%20a%20Garden%202/Sprinklers/super-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/06/Super-Sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Super Sprinkler",
+        "tier": "Mythical",
+        "price": "Unknown",
+        "duration": "Unknown",
+        "effect": "Speeds growth, increases fruit size, and improves mutation chances",
+        "whereToGet": "Gears Shop"
+      },
+      "system": {
+        "slug": "super-sprinkler",
+        "section": "Mythical",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden%202/Sprinklers/super-sprinkler.webp"
+      }
     }
   ]
 }

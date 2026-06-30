@@ -1,3609 +1,2997 @@
 {
   "meta": {
-    "title": "Blox Fruits titles data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Titles",
-        "url": "https://blox-fruits.fandom.com/wiki/Titles",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "titles",
+    "route": "/wiki/blox-fruits/titles",
+    "catalogCode": "blox-fruits-titles",
+    "itemFields": [
       "titleNumber",
       "title",
       "obtainment"
-    ]
+    ],
+    "columns": [
+      "titleNumber",
+      "title",
+      "obtainment"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "titleNumber",
+        "title",
+        "obtainment"
+      ],
+      "tableFields": [
+        "titleNumber",
+        "title",
+        "obtainment"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "The Unleashed",
-      "slug": "the-unleashed",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Unleashed",
         "titleNumber": "#001",
-        "icon": "",
         "title": "The Unleashed",
         "obtainment": "Unlock Human V2."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Human",
-      "titleNumber": "#001",
-      "title": "The Unleashed",
-      "obtainment": "Unlock Human V2.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-unleashed",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Unmatched Speed",
-      "slug": "unmatched-speed",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Unmatched Speed",
         "titleNumber": "#002",
-        "icon": "",
         "title": "Unmatched Speed",
         "obtainment": "Unlock Rabbit V2."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rabbit",
-      "titleNumber": "#002",
-      "title": "Unmatched Speed",
-      "obtainment": "Unlock Rabbit V2.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "unmatched-speed",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Sea Monster",
-      "slug": "sea-monster",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Sea Monster",
         "titleNumber": "#003",
-        "icon": "",
         "title": "Sea Monster",
         "obtainment": "Unlock Shark V2."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark",
-      "titleNumber": "#003",
-      "title": "Sea Monster",
-      "obtainment": "Unlock Shark V2.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "sea-monster",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Sacred Warrior",
-      "slug": "sacred-warrior",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Sacred Warrior",
         "titleNumber": "#004",
-        "icon": "",
         "title": "Sacred Warrior",
         "obtainment": "Unlock Angel V2."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Angel",
-      "titleNumber": "#004",
-      "title": "Sacred Warrior",
-      "obtainment": "Unlock Angel V2.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "sacred-warrior",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "The Ghoul",
-      "slug": "the-ghoul",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Ghoul",
         "titleNumber": "#005",
-        "icon": "",
         "title": "The Ghoul",
         "obtainment": "Unlock Ghoul V2."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghoul",
-      "titleNumber": "#005",
-      "title": "The Ghoul",
-      "obtainment": "Unlock Ghoul V2.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-ghoul",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "The Cyborg",
-      "slug": "the-cyborg",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Cyborg",
         "titleNumber": "#006",
-        "icon": "",
         "title": "The Cyborg",
         "obtainment": "Unlock Cyborg V2."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cyborg",
-      "titleNumber": "#006",
-      "title": "The Cyborg",
-      "obtainment": "Unlock Cyborg V2.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-cyborg",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Elder Wyrm",
-      "slug": "elder-wyrm",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Elder Wyrm",
         "titleNumber": "#007",
-        "icon": "",
         "title": "Elder Wyrm",
         "obtainment": "Unlock Draco V2."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Draco",
-      "titleNumber": "#007",
-      "title": "Elder Wyrm",
-      "obtainment": "Unlock Draco V2.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "elder-wyrm",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Full Power",
-      "slug": "full-power",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Full Power",
         "titleNumber": "#008",
-        "icon": "",
         "title": "Full Power",
         "obtainment": "Unlock Human V3."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Human",
-      "titleNumber": "#008",
-      "title": "Full Power",
-      "obtainment": "Unlock Human V3.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "full-power",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Godspeed",
-      "slug": "godspeed",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Godspeed",
         "titleNumber": "#009",
-        "icon": "",
         "title": "Godspeed",
         "obtainment": "Unlock Rabbit V3."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rabbit",
-      "titleNumber": "#009",
-      "title": "Godspeed",
-      "obtainment": "Unlock Rabbit V3.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "godspeed",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Warrior of the Sea",
-      "slug": "warrior-of-the-sea",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Warrior of the Sea",
         "titleNumber": "#010",
-        "icon": "",
         "title": "Warrior of the Sea",
         "obtainment": "Unlock Shark V3."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark",
-      "titleNumber": "#010",
-      "title": "Warrior of the Sea",
-      "obtainment": "Unlock Shark V3.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "warrior-of-the-sea",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Perfect Being",
-      "slug": "perfect-being",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Perfect Being",
         "titleNumber": "#011",
-        "icon": "",
         "title": "Perfect Being",
         "obtainment": "Unlock Angel V3."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Angel",
-      "titleNumber": "#011",
-      "title": "Perfect Being",
-      "obtainment": "Unlock Angel V3.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "perfect-being",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Hell Hound",
-      "slug": "hell-hound",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Hell Hound",
         "titleNumber": "#012",
-        "icon": "",
         "title": "Hell Hound",
         "obtainment": "Unlock Ghoul V3."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghoul",
-      "titleNumber": "#012",
-      "title": "Hell Hound",
-      "obtainment": "Unlock Ghoul V3.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "hell-hound",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "War Machine",
-      "slug": "war-machine",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "War Machine",
         "titleNumber": "#013",
-        "icon": "",
         "title": "War Machine",
         "obtainment": "Unlock Cyborg V3."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cyborg",
-      "titleNumber": "#013",
-      "title": "War Machine",
-      "obtainment": "Unlock Cyborg V3.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "war-machine",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Berserker",
-      "slug": "berserker",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Berserker",
         "titleNumber": "#014",
-        "icon": "",
         "title": "Berserker",
         "obtainment": "Unlock Human V4."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Human",
-      "titleNumber": "#014",
-      "title": "Berserker",
-      "obtainment": "Unlock Human V4.",
-      "image": "/Blox%20Fruits/Titles/berserker.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/91/Title_Berserker.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "berserker",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Titles/berserker.webp"
+      }
     },
     {
-      "name": "Ancient Flame",
-      "slug": "ancient-flame",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Ancient Flame",
         "titleNumber": "#015",
-        "icon": "",
         "title": "Ancient Flame",
         "obtainment": "Unlock Draco V3."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Draco",
-      "titleNumber": "#015",
-      "title": "Ancient Flame",
-      "obtainment": "Unlock Draco V3.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "ancient-flame",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "Thunderbolt",
-      "slug": "thunderbolt",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Thunderbolt",
         "titleNumber": "#016",
-        "icon": "",
         "title": "Thunderbolt",
         "obtainment": "Unlock Rabbit V4."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rabbit",
-      "titleNumber": "#016",
-      "title": "Thunderbolt",
-      "obtainment": "Unlock Rabbit V4.",
-      "image": "/Blox%20Fruits/Titles/thunderbolt.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/52/Title_Thunderbolt.png/revision/latest/scale-to-width-down/50?cb=20260112223716"
+      "system": {
+        "slug": "thunderbolt",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Titles/thunderbolt.webp"
+      }
     },
     {
-      "name": "Leviathan",
-      "slug": "leviathan",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Leviathan",
         "titleNumber": "#017",
-        "icon": "",
         "title": "Leviathan",
         "obtainment": "Unlock Shark V4."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shark",
-      "titleNumber": "#017",
-      "title": "Leviathan",
-      "obtainment": "Unlock Shark V4.",
-      "image": "/Blox%20Fruits/Titles/leviathan.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c3/Title_Leviathan.png/revision/latest/scale-to-width-down/50?cb=20260112223719"
+      "system": {
+        "slug": "leviathan",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Titles/leviathan.webp"
+      }
     },
     {
-      "name": "His Majesty",
-      "slug": "his-majesty",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "His Majesty",
         "titleNumber": "#018",
-        "icon": "",
         "title": "His Majesty",
         "obtainment": "Unlock Angel V4."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Angel",
-      "titleNumber": "#018",
-      "title": "His Majesty",
-      "obtainment": "Unlock Angel V4.",
-      "image": "/Blox%20Fruits/Titles/his-majesty.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5f/Title_His_Majesty.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "his-majesty",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Titles/his-majesty.webp"
+      }
     },
     {
-      "name": "Nightwalker",
-      "slug": "nightwalker",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Nightwalker",
         "titleNumber": "#019",
-        "icon": "",
         "title": "Nightwalker",
         "obtainment": "Unlock Ghoul V4."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghoul",
-      "titleNumber": "#019",
-      "title": "Nightwalker",
-      "obtainment": "Unlock Ghoul V4.",
-      "image": "/Blox%20Fruits/Titles/nightwalker.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/de/Title_Nightwalker.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "nightwalker",
+        "section": "Items",
+        "sortOrder": 19,
+        "image": "/Blox%20Fruits/Titles/nightwalker.webp"
+      }
     },
     {
-      "name": "Genesis",
-      "slug": "genesis",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Genesis",
         "titleNumber": "#020",
-        "icon": "",
         "title": "Genesis",
         "obtainment": "Unlock Cyborg V4."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cyborg",
-      "titleNumber": "#020",
-      "title": "Genesis",
-      "obtainment": "Unlock Cyborg V4.",
-      "image": "/Blox%20Fruits/Titles/genesis.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/89/Title_Genisis.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "genesis",
+        "section": "Items",
+        "sortOrder": 20,
+        "image": "/Blox%20Fruits/Titles/genesis.webp"
+      }
     },
     {
-      "name": "Primordial Guardian",
-      "slug": "primordial-guardian",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Primordial Guardian",
         "titleNumber": "#021",
-        "icon": "",
         "title": "Primordial Guardian",
         "obtainment": "Unlock Draco V4."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Draco",
-      "titleNumber": "#021",
-      "title": "Primordial Guardian",
-      "obtainment": "Unlock Draco V4.",
-      "image": "/Blox%20Fruits/Titles/primordial-guardian.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/07/Title_Primordial_Guardian.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "primordial-guardian",
+        "section": "Items",
+        "sortOrder": 21,
+        "image": "/Blox%20Fruits/Titles/primordial-guardian.webp"
+      }
     },
     {
-      "name": "Pirate Hunter",
-      "slug": "pirate-hunter",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Pirate Hunter",
         "titleNumber": "#022",
-        "icon": "",
         "title": "Pirate Hunter",
         "obtainment": "Reach 5M+ bounty or honor."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bounty_and_Honor_System",
-      "titleNumber": "#022",
-      "title": "Pirate Hunter",
-      "obtainment": "Reach 5M+ bounty or honor.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "pirate-hunter",
+        "section": "Items",
+        "sortOrder": 22,
+        "image": null
+      }
     },
     {
-      "name": "Bounty Hunter",
-      "slug": "bounty-hunter",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Bounty Hunter",
         "titleNumber": "#023",
-        "icon": "",
         "title": "Bounty Hunter",
         "obtainment": "Reach 5M+ bounty or honor."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bounty_and_Honor_System",
-      "titleNumber": "#023",
-      "title": "Bounty Hunter",
-      "obtainment": "Reach 5M+ bounty or honor.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "bounty-hunter",
+        "section": "Items",
+        "sortOrder": 23,
+        "image": null
+      }
     },
     {
-      "name": "Warlord of the Sea",
-      "slug": "warlord-of-the-sea",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Warlord of the Sea",
         "titleNumber": "#024",
-        "icon": "",
         "title": "Warlord of the Sea",
         "obtainment": "Reach 10M+ bounty."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bounty_and_Honor_System",
-      "titleNumber": "#024",
-      "title": "Warlord of the Sea",
-      "obtainment": "Reach 10M+ bounty.",
-      "image": "/Blox%20Fruits/Titles/warlord-of-the-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/96/Title_Warlord_of_the_Sea.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "warlord-of-the-sea",
+        "section": "Items",
+        "sortOrder": 24,
+        "image": "/Blox%20Fruits/Titles/warlord-of-the-sea.webp"
+      }
     },
     {
-      "name": "Emperor of the Sea",
-      "slug": "emperor-of-the-sea",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Emperor of the Sea",
         "titleNumber": "#025",
-        "icon": "",
         "title": "Emperor of the Sea",
         "obtainment": "Reach 20M+ bounty."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bounty_and_Honor_System",
-      "titleNumber": "#025",
-      "title": "Emperor of the Sea",
-      "obtainment": "Reach 20M+ bounty.",
-      "image": "/Blox%20Fruits/Titles/emperor-of-the-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e9/Title_Emperor_of_the_Sea.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "emperor-of-the-sea",
+        "section": "Items",
+        "sortOrder": 25,
+        "image": "/Blox%20Fruits/Titles/emperor-of-the-sea.webp"
+      }
     },
     {
-      "name": "Empress of the Sea",
-      "slug": "empress-of-the-sea",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Empress of the Sea",
         "titleNumber": "#026",
-        "icon": "",
         "title": "Empress of the Sea",
         "obtainment": "Reach 20M+ bounty."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bounty_and_Honor_System",
-      "titleNumber": "#026",
-      "title": "Empress of the Sea",
-      "obtainment": "Reach 20M+ bounty.",
-      "image": "/Blox%20Fruits/Titles/empress-of-the-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/49/Title_Empress_of_the_Sea.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "empress-of-the-sea",
+        "section": "Items",
+        "sortOrder": 26,
+        "image": "/Blox%20Fruits/Titles/empress-of-the-sea.webp"
+      }
     },
     {
-      "name": "Admiral",
-      "slug": "admiral",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Admiral",
         "titleNumber": "#027",
-        "icon": "",
         "title": "Admiral",
         "obtainment": "Reach 10M+ honor."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bounty_and_Honor_System",
-      "titleNumber": "#027",
-      "title": "Admiral",
-      "obtainment": "Reach 10M+ honor.",
-      "image": "/Blox%20Fruits/Titles/admiral.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d9/Title_Admiral.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "admiral",
+        "section": "Items",
+        "sortOrder": 27,
+        "image": "/Blox%20Fruits/Titles/admiral.webp"
+      }
     },
     {
-      "name": "Fleet Admiral",
-      "slug": "fleet-admiral",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Fleet Admiral",
         "titleNumber": "#028",
-        "icon": "",
         "title": "Fleet Admiral",
         "obtainment": "Reach 20M+ honor."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bounty_and_Honor_System",
-      "titleNumber": "#028",
-      "title": "Fleet Admiral",
-      "obtainment": "Reach 20M+ honor.",
-      "image": "/Blox%20Fruits/Titles/fleet-admiral.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7d/Title_Fleet_Admiral.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "fleet-admiral",
+        "section": "Items",
+        "sortOrder": 28,
+        "image": "/Blox%20Fruits/Titles/fleet-admiral.webp"
+      }
     },
     {
-      "name": "Enlightened One",
-      "slug": "enlightened-one",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Enlightened One",
         "titleNumber": "#029",
-        "icon": "",
         "title": "Enlightened One",
         "obtainment": "Unlock any awakening."
       },
-      "wikiUrl": null,
-      "titleNumber": "#029",
-      "title": "Enlightened One",
-      "obtainment": "Unlock any awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "enlightened-one",
+        "section": "Items",
+        "sortOrder": 29,
+        "image": null
+      }
     },
     {
-      "name": "Awakened One",
-      "slug": "awakened-one",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Awakened One",
         "titleNumber": "#030",
-        "icon": "",
         "title": "Awakened One",
         "obtainment": "Unlock any awakening."
       },
-      "wikiUrl": null,
-      "titleNumber": "#030",
-      "title": "Awakened One",
-      "obtainment": "Unlock any awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "awakened-one",
+        "section": "Items",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "Over Heaven",
-      "slug": "over-heaven",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Over Heaven",
         "titleNumber": "#031",
-        "icon": "",
         "title": "Over Heaven",
         "obtainment": "Unlock any awakening."
       },
-      "wikiUrl": null,
-      "titleNumber": "#031",
-      "title": "Over Heaven",
-      "obtainment": "Unlock any awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "over-heaven",
+        "section": "Items",
+        "sortOrder": 31,
+        "image": null
+      }
     },
     {
-      "name": "Over Hell",
-      "slug": "over-hell",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Over Hell",
         "titleNumber": "#032",
-        "icon": "",
         "title": "Over Hell",
         "obtainment": "Unlock any awakening."
       },
-      "wikiUrl": null,
-      "titleNumber": "#032",
-      "title": "Over Hell",
-      "obtainment": "Unlock any awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "over-hell",
+        "section": "Items",
+        "sortOrder": 32,
+        "image": null
+      }
     },
     {
-      "name": "Flame Fist",
-      "slug": "flame-fist",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Flame Fist",
         "titleNumber": "#033",
-        "icon": "",
         "title": "Flame Fist",
         "obtainment": "Unlock Flame awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Flame",
-      "titleNumber": "#033",
-      "title": "Flame Fist",
-      "obtainment": "Unlock Flame awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "flame-fist",
+        "section": "Items",
+        "sortOrder": 33,
+        "image": null
+      }
     },
     {
-      "name": "The Ice Queen",
-      "slug": "the-ice-queen",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Ice Queen",
         "titleNumber": "#034",
-        "icon": "",
         "title": "The Ice Queen",
         "obtainment": "Unlock Ice awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice",
-      "titleNumber": "#034",
-      "title": "The Ice Queen",
-      "obtainment": "Unlock Ice awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-ice-queen",
+        "section": "Items",
+        "sortOrder": 34,
+        "image": null
+      }
     },
     {
-      "name": "The Ice King",
-      "slug": "the-ice-king",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Ice King",
         "titleNumber": "#035",
-        "icon": "",
         "title": "The Ice King",
         "obtainment": "Unlock Ice awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice",
-      "titleNumber": "#035",
-      "title": "The Ice King",
-      "obtainment": "Unlock Ice awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-ice-king",
+        "section": "Items",
+        "sortOrder": 35,
+        "image": null
+      }
     },
     {
-      "name": "The Strongest One",
-      "slug": "the-strongest-one",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Strongest One",
         "titleNumber": "#036",
-        "icon": "",
         "title": "The Strongest One",
         "obtainment": "Unlock Quake Awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Quake",
-      "titleNumber": "#036",
-      "title": "The Strongest One",
-      "obtainment": "Unlock Quake Awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-strongest-one",
+        "section": "Items",
+        "sortOrder": 36,
+        "image": null
+      }
     },
     {
-      "name": "The First Light",
-      "slug": "the-first-light",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The First Light",
         "titleNumber": "#037",
-        "icon": "",
         "title": "The First Light",
         "obtainment": "Unlock Light awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Light",
-      "titleNumber": "#037",
-      "title": "The First Light",
-      "obtainment": "Unlock Light awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-first-light",
+        "section": "Items",
+        "sortOrder": 37,
+        "image": null
+      }
     },
     {
-      "name": "Dark Lord",
-      "slug": "dark-lord",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Dark Lord",
         "titleNumber": "#038",
-        "icon": "",
         "title": "Dark Lord",
         "obtainment": "Unlock Dark awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark",
-      "titleNumber": "#038",
-      "title": "Dark Lord",
-      "obtainment": "Unlock Dark awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "dark-lord",
+        "section": "Items",
+        "sortOrder": 38,
+        "image": null
+      }
     },
     {
-      "name": "The Spider",
-      "slug": "the-spider",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Spider",
         "titleNumber": "#039",
-        "icon": "",
         "title": "The Spider",
         "obtainment": "Unlock Spider awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Spider",
-      "titleNumber": "#039",
-      "title": "The Spider",
-      "obtainment": "Unlock Spider awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-spider",
+        "section": "Items",
+        "sortOrder": 39,
+        "image": null
+      }
     },
     {
-      "name": "Thunder God",
-      "slug": "thunder-god",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Thunder God",
         "titleNumber": "#040",
-        "icon": "",
         "title": "Thunder God",
         "obtainment": "Unlock Rumble awakening. (No longer obtainable, as Rumble raids have been removed in Update 27.)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rumble",
-      "titleNumber": "#040",
-      "title": "Thunder God",
-      "obtainment": "Unlock Rumble awakening. (No longer obtainable, as Rumble raids have been removed in Update 27.)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "thunder-god",
+        "section": "Items",
+        "sortOrder": 40,
+        "image": null
+      }
     },
     {
-      "name": "The Red Dog",
-      "slug": "the-red-dog",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Red Dog",
         "titleNumber": "#041",
-        "icon": "",
         "title": "The Red Dog",
         "obtainment": "Unlock Magma awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Magma",
-      "titleNumber": "#041",
-      "title": "The Red Dog",
-      "obtainment": "Unlock Magma awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-red-dog",
+        "section": "Items",
+        "sortOrder": 41,
+        "image": null
+      }
     },
     {
-      "name": "Colossal God",
-      "slug": "colossal-god",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Colossal God",
         "titleNumber": "#042",
-        "icon": "",
         "title": "Colossal God",
         "obtainment": "Unlock Buddha awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Buddha",
-      "titleNumber": "#042",
-      "title": "Colossal God",
-      "obtainment": "Unlock Buddha awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "colossal-god",
+        "section": "Items",
+        "sortOrder": 42,
+        "image": null
+      }
     },
     {
-      "name": "Desert Prince",
-      "slug": "desert-prince",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Desert Prince",
         "titleNumber": "#043",
-        "icon": "",
         "title": "Desert Prince",
         "obtainment": "Unlock Sand awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sand",
-      "titleNumber": "#043",
-      "title": "Desert Prince",
-      "obtainment": "Unlock Sand awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "desert-prince",
+        "section": "Items",
+        "sortOrder": 43,
+        "image": null
+      }
     },
     {
-      "name": "The Phoenix",
-      "slug": "the-phoenix",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Phoenix",
         "titleNumber": "#044",
-        "icon": "",
         "title": "The Phoenix",
         "obtainment": "Unlock Phoenix awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Phoenix",
-      "titleNumber": "#044",
-      "title": "The Phoenix",
-      "obtainment": "Unlock Phoenix awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-phoenix",
+        "section": "Items",
+        "sortOrder": 44,
+        "image": null
+      }
     },
     {
-      "name": "Bread Chaser",
-      "slug": "bread-chaser",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Bread Chaser",
         "titleNumber": "#045",
-        "icon": "",
         "title": "Bread Chaser",
         "obtainment": "Unlock Dough awakening."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dough",
-      "titleNumber": "#045",
-      "title": "Bread Chaser",
-      "obtainment": "Unlock Dough awakening.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "bread-chaser",
+        "section": "Items",
+        "sortOrder": 45,
+        "image": null
+      }
     },
     {
-      "name": "Innovator",
-      "slug": "innovator",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Innovator",
         "titleNumber": "#046",
-        "icon": "",
         "title": "Innovator",
         "obtainment": "Vote at Roblox Innovation Awards 2024 Day 5 (Best Action/RPG) or Day 12 (Best Fighting)."
       },
-      "wikiUrl": null,
-      "titleNumber": "#046",
-      "title": "Innovator",
-      "obtainment": "Vote at Roblox Innovation Awards 2024 Day 5 (Best Action/RPG) or Day 12 (Best Fighting).",
-      "image": "/Blox%20Fruits/Titles/innovator.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/18/Title_Innovator.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "innovator",
+        "section": "Items",
+        "sortOrder": 46,
+        "image": "/Blox%20Fruits/Titles/innovator.webp"
+      }
     },
     {
-      "name": "Pygglor, Devourer of Worlds",
-      "slug": "pygglor-devourer-of-worlds",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Pygglor, Devourer of Worlds",
         "titleNumber": "#047",
-        "icon": "",
         "title": "Pygglor, Devourer of Worlds",
         "obtainment": "Defeat Undercovertommy."
       },
-      "wikiUrl": null,
-      "titleNumber": "#047",
-      "title": "Pygglor, Devourer of Worlds",
-      "obtainment": "Defeat Undercovertommy.",
-      "image": "/Blox%20Fruits/Titles/pygglor-devourer-of-worlds.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/39/Title_Pygglor%2C_Devourer_of_Worlds.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "pygglor-devourer-of-worlds",
+        "section": "Items",
+        "sortOrder": 47,
+        "image": "/Blox%20Fruits/Titles/pygglor-devourer-of-worlds.webp"
+      }
     },
     {
-      "name": "Wen Lord Toad",
-      "slug": "wen-lord-toad",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Wen Lord Toad",
         "titleNumber": "#048",
-        "icon": "",
         "title": "Wen Lord Toad",
         "obtainment": "Defeat Wenlocktoad."
       },
-      "wikiUrl": null,
-      "titleNumber": "#048",
-      "title": "Wen Lord Toad",
-      "obtainment": "Defeat Wenlocktoad.",
-      "image": "/Blox%20Fruits/Titles/wen-lord-toad.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5b/Title_Wen_Lord_Toad.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "wen-lord-toad",
+        "section": "Items",
+        "sortOrder": 48,
+        "image": "/Blox%20Fruits/Titles/wen-lord-toad.webp"
+      }
     },
     {
-      "name": "Big News",
-      "slug": "big-news",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Big News",
         "titleNumber": "#049",
-        "icon": "",
         "title": "Big News",
         "obtainment": "Redeem the code BIGNEWS."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Codes",
-      "titleNumber": "#049",
-      "title": "Big News",
-      "obtainment": "Redeem the code BIGNEWS.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "big-news",
+        "section": "Items",
+        "sortOrder": 49,
+        "image": null
+      }
     },
     {
-      "name": "YouTuber",
-      "slug": "youtuber",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "YouTuber",
         "titleNumber": "#050",
-        "icon": "",
         "title": "YouTuber",
         "obtainment": "Given by admins occasionally to content creators who have the YouTuber role in the Blox Fruits Discord server."
       },
-      "wikiUrl": null,
-      "titleNumber": "#050",
-      "title": "YouTuber",
-      "obtainment": "Given by admins occasionally to content creators who have the YouTuber role in the Blox Fruits Discord server.",
-      "image": "/Blox%20Fruits/Titles/youtuber.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/87/Title_YouTuber.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "youtuber",
+        "section": "Items",
+        "sortOrder": 50,
+        "image": "/Blox%20Fruits/Titles/youtuber.webp"
+      }
     },
     {
-      "name": "Ace Squad",
-      "slug": "ace-squad",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Ace Squad",
         "titleNumber": "#051",
-        "icon": "",
         "title": "Ace Squad",
         "obtainment": "Defeat the content creator TheGreatAce."
       },
-      "wikiUrl": null,
-      "titleNumber": "#051",
-      "title": "Ace Squad",
-      "obtainment": "Defeat the content creator TheGreatAce.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "ace-squad",
+        "section": "Items",
+        "sortOrder": 51,
+        "image": null
+      }
     },
     {
-      "name": "Officially a Noob",
-      "slug": "officially-a-noob",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Officially a Noob",
         "titleNumber": "#052",
-        "icon": "",
         "title": "Officially a Noob",
         "obtainment": "Defeat the content creator OfficialNoobie."
       },
-      "wikiUrl": null,
-      "titleNumber": "#052",
-      "title": "Officially a Noob",
-      "obtainment": "Defeat the content creator OfficialNoobie.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "officially-a-noob",
+        "section": "Items",
+        "sortOrder": 52,
+        "image": null
+      }
     },
     {
-      "name": "Water Gang",
-      "slug": "water-gang",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Water Gang",
         "titleNumber": "#053",
-        "icon": "",
         "title": "Water Gang",
         "obtainment": "Defeat the content creator Daigrock."
       },
-      "wikiUrl": null,
-      "titleNumber": "#053",
-      "title": "Water Gang",
-      "obtainment": "Defeat the content creator Daigrock.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "water-gang",
+        "section": "Items",
+        "sortOrder": 53,
+        "image": null
+      }
     },
     {
-      "name": "Don Axiore Familia",
-      "slug": "don-axiore-familia",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Don Axiore Familia",
         "titleNumber": "#054",
-        "icon": "",
         "title": "Don Axiore Familia",
         "obtainment": "Defeat the content creator Axiore."
       },
-      "wikiUrl": null,
-      "titleNumber": "#054",
-      "title": "Don Axiore Familia",
-      "obtainment": "Defeat the content creator Axiore.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "don-axiore-familia",
+        "section": "Items",
+        "sortOrder": 54,
+        "image": null
+      }
     },
     {
-      "name": "Mafia Gang",
-      "slug": "mafia-gang",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Mafia Gang",
         "titleNumber": "#055",
-        "icon": "",
         "title": "Mafia Gang",
         "obtainment": "Defeat the content creator Bluxxy Gaming."
       },
-      "wikiUrl": null,
-      "titleNumber": "#055",
-      "title": "Mafia Gang",
-      "obtainment": "Defeat the content creator Bluxxy Gaming.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "mafia-gang",
+        "section": "Items",
+        "sortOrder": 55,
+        "image": null
+      }
     },
     {
-      "name": "Heorua Family",
-      "slug": "heorua-family",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Heorua Family",
         "titleNumber": "#056",
-        "icon": "",
         "title": "Heorua Family",
         "obtainment": "Defeat the content creator Heorua."
       },
-      "wikiUrl": null,
-      "titleNumber": "#056",
-      "title": "Heorua Family",
-      "obtainment": "Defeat the content creator Heorua.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "heorua-family",
+        "section": "Items",
+        "sortOrder": 56,
+        "image": null
+      }
     },
     {
-      "name": "Magic Slayer",
-      "slug": "magic-slayer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Magic Slayer",
         "titleNumber": "#057",
-        "icon": "",
         "title": "Magic Slayer",
         "obtainment": "Defeat the content creator Magicbus."
       },
-      "wikiUrl": null,
-      "titleNumber": "#057",
-      "title": "Magic Slayer",
-      "obtainment": "Defeat the content creator Magicbus.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "magic-slayer",
+        "section": "Items",
+        "sortOrder": 57,
+        "image": null
+      }
     },
     {
-      "name": "Kitt Katt",
-      "slug": "kitt-katt",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Kitt Katt",
         "titleNumber": "#058",
-        "icon": "",
         "title": "Kitt Katt",
         "obtainment": "Defeat the content creator Kitt Gaming."
       },
-      "wikiUrl": null,
-      "titleNumber": "#058",
-      "title": "Kitt Katt",
-      "obtainment": "Defeat the content creator Kitt Gaming.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "kitt-katt",
+        "section": "Items",
+        "sortOrder": 58,
+        "image": null
+      }
     },
     {
-      "name": "Team JC",
-      "slug": "team-jc",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Team JC",
         "titleNumber": "#059",
-        "icon": "",
         "title": "Team JC",
         "obtainment": "Defeat the content creator JCWK."
       },
-      "wikiUrl": null,
-      "titleNumber": "#059",
-      "title": "Team JC",
-      "obtainment": "Defeat the content creator JCWK.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "team-jc",
+        "section": "Items",
+        "sortOrder": 59,
+        "image": null
+      }
     },
     {
-      "name": "El Combo God",
-      "slug": "el-combo-god",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "El Combo God",
         "titleNumber": "#060",
-        "icon": "",
         "title": "El Combo God",
         "obtainment": "Defeat the content creator fer999."
       },
-      "wikiUrl": null,
-      "titleNumber": "#060",
-      "title": "El Combo God",
-      "obtainment": "Defeat the content creator fer999.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "el-combo-god",
+        "section": "Items",
+        "sortOrder": 60,
+        "image": null
+      }
     },
     {
-      "name": "Nakama Forever",
-      "slug": "nakama-forever",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Nakama Forever",
         "titleNumber": "#061",
-        "icon": "",
         "title": "Nakama Forever",
         "obtainment": "Defeat the Youtuber MeEnyu."
       },
-      "wikiUrl": null,
-      "titleNumber": "#061",
-      "title": "Nakama Forever",
-      "obtainment": "Defeat the Youtuber MeEnyu.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "nakama-forever",
+        "section": "Items",
+        "sortOrder": 61,
+        "image": null
+      }
     },
     {
-      "name": "Endless Fantasy",
-      "slug": "endless-fantasy",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Endless Fantasy",
         "titleNumber": "#062",
-        "icon": "",
         "title": "Endless Fantasy",
         "obtainment": "Defeat the content creator Rajo_END."
       },
-      "wikiUrl": null,
-      "titleNumber": "#062",
-      "title": "Endless Fantasy",
-      "obtainment": "Defeat the content creator Rajo_END.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "endless-fantasy",
+        "section": "Items",
+        "sortOrder": 62,
+        "image": null
+      }
     },
     {
-      "name": "El Krazy Editor",
-      "slug": "el-krazy-editor",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "El Krazy Editor",
         "titleNumber": "#063",
-        "icon": "",
         "title": "El Krazy Editor",
         "obtainment": "Defeat the content editor Zioles."
       },
-      "wikiUrl": null,
-      "titleNumber": "#063",
-      "title": "El Krazy Editor",
-      "obtainment": "Defeat the content editor Zioles.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "el-krazy-editor",
+        "section": "Items",
+        "sortOrder": 63,
+        "image": null
+      }
     },
     {
-      "name": "rip_family",
-      "slug": "rip-family",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "rip_family",
         "titleNumber": "#064",
-        "icon": "",
         "title": "rip_family",
         "obtainment": "Join the Roblox group \"rip_family\" and receive a higher role."
       },
-      "wikiUrl": null,
-      "titleNumber": "#064",
-      "title": "rip_family",
-      "obtainment": "Join the Roblox group \"rip_family\" and receive a higher role.",
-      "image": "/Blox%20Fruits/Titles/rip-family.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3d/Title_rip_family.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "rip-family",
+        "section": "Items",
+        "sortOrder": 64,
+        "image": "/Blox%20Fruits/Titles/rip-family.webp"
+      }
     },
     {
-      "name": "red_legion",
-      "slug": "red-legion",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "red_legion",
         "titleNumber": "#065",
-        "icon": "",
         "title": "red_legion",
         "obtainment": "Join the Roblox group \"red_legion\" and receive a higher role (This title will reward the player in the game in the next update, it only works if they have finished the requirements needed)."
       },
-      "wikiUrl": null,
-      "titleNumber": "#065",
-      "title": "red_legion",
-      "obtainment": "Join the Roblox group \"red_legion\" and receive a higher role (This title will reward the player in the game in the next update, it only works if they have finished the requirements needed).",
-      "image": "/Blox%20Fruits/Titles/red-legion.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/89/Title_red_legion.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "red-legion",
+        "section": "Items",
+        "sortOrder": 65,
+        "image": "/Blox%20Fruits/Titles/red-legion.webp"
+      }
     },
     {
-      "name": "Justice Seeker",
-      "slug": "justice-seeker",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Justice Seeker",
         "titleNumber": "#066",
-        "icon": "",
         "title": "Justice Seeker",
         "obtainment": "Claim a bounty as a marine."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marines",
-      "titleNumber": "#066",
-      "title": "Justice Seeker",
-      "obtainment": "Claim a bounty as a marine.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "justice-seeker",
+        "section": "Items",
+        "sortOrder": 66,
+        "image": null
+      }
     },
     {
-      "name": "Empty Vessel",
-      "slug": "empty-vessel",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Empty Vessel",
         "titleNumber": "#067",
-        "icon": "",
         "title": "Empty Vessel",
         "obtainment": "Run out of energy."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Energy",
-      "titleNumber": "#067",
-      "title": "Empty Vessel",
-      "obtainment": "Run out of energy.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "empty-vessel",
+        "section": "Items",
+        "sortOrder": 67,
+        "image": null
+      }
     },
     {
-      "name": "The Unlucky",
-      "slug": "the-unlucky",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Unlucky",
         "titleNumber": "#068",
-        "icon": "",
         "title": "The Unlucky",
         "obtainment": "Die to a regular enemy."
       },
-      "wikiUrl": null,
-      "titleNumber": "#068",
-      "title": "The Unlucky",
-      "obtainment": "Die to a regular enemy.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-unlucky",
+        "section": "Items",
+        "sortOrder": 68,
+        "image": null
+      }
     },
     {
-      "name": "The Vanquished",
-      "slug": "the-vanquished",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Vanquished",
         "titleNumber": "#069",
-        "icon": "",
         "title": "The Vanquished",
         "obtainment": "Die to a boss."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bosses",
-      "titleNumber": "#069",
-      "title": "The Vanquished",
-      "obtainment": "Die to a boss.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-vanquished",
+        "section": "Items",
+        "sortOrder": 69,
+        "image": null
+      }
     },
     {
-      "name": "Fallen Hero",
-      "slug": "fallen-hero",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Fallen Hero",
         "titleNumber": "#070",
-        "icon": "",
         "title": "Fallen Hero",
         "obtainment": "Die to a raid boss."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Raid_Bosses",
-      "titleNumber": "#070",
-      "title": "Fallen Hero",
-      "obtainment": "Die to a raid boss.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "fallen-hero",
+        "section": "Items",
+        "sortOrder": 70,
+        "image": null
+      }
     },
     {
-      "name": "Iron Man",
-      "slug": "iron-man",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Iron Man",
         "titleNumber": "#071",
-        "icon": "",
         "title": "Iron Man",
         "obtainment": "Reach max Aura."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Aura",
-      "titleNumber": "#071",
-      "title": "Iron Man",
-      "obtainment": "Reach max Aura.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "iron-man",
+        "section": "Items",
+        "sortOrder": 71,
+        "image": null
+      }
     },
     {
-      "name": "Ultra Instinct",
-      "slug": "ultra-instinct",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Ultra Instinct",
         "titleNumber": "#072",
-        "icon": "",
         "title": "Ultra Instinct",
         "obtainment": "Reach max Instinct."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Instinct",
-      "titleNumber": "#072",
-      "title": "Ultra Instinct",
-      "obtainment": "Reach max Instinct.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "ultra-instinct",
+        "section": "Items",
+        "sortOrder": 72,
+        "image": null
+      }
     },
     {
-      "name": "Mad Scientist",
-      "slug": "mad-scientist",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Mad Scientist",
         "titleNumber": "#073",
-        "icon": "",
         "title": "Mad Scientist",
         "obtainment": "Buy a regular Microchip."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Microchip",
-      "titleNumber": "#073",
-      "title": "Mad Scientist",
-      "obtainment": "Buy a regular Microchip.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "mad-scientist",
+        "section": "Items",
+        "sortOrder": 73,
+        "image": null
+      }
     },
     {
-      "name": "The Professor",
-      "slug": "the-professor",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Professor",
         "titleNumber": "#074",
-        "icon": "",
         "title": "The Professor",
         "obtainment": "Buy a special Microchip."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Microchip",
-      "titleNumber": "#074",
-      "title": "The Professor",
-      "obtainment": "Buy a special Microchip.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-professor",
+        "section": "Items",
+        "sortOrder": 74,
+        "image": null
+      }
     },
     {
-      "name": "The Shadow",
-      "slug": "the-shadow",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Shadow",
         "titleNumber": "#075",
-        "icon": "",
         "title": "The Shadow",
         "obtainment": "Stay in a server for more than 1 hour."
       },
-      "wikiUrl": null,
-      "titleNumber": "#075",
-      "title": "The Shadow",
-      "obtainment": "Stay in a server for more than 1 hour.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-shadow",
+        "section": "Items",
+        "sortOrder": 75,
+        "image": null
+      }
     },
     {
-      "name": "The Vampire",
-      "slug": "the-vampire",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Vampire",
         "titleNumber": "#076",
-        "icon": "",
         "title": "The Vampire",
         "obtainment": "Stay in a server for more than 4 hours."
       },
-      "wikiUrl": null,
-      "titleNumber": "#076",
-      "title": "The Vampire",
-      "obtainment": "Stay in a server for more than 4 hours.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-vampire",
+        "section": "Items",
+        "sortOrder": 76,
+        "image": null
+      }
     },
     {
-      "name": "Dracula",
-      "slug": "dracula",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Dracula",
         "titleNumber": "#077",
-        "icon": "",
         "title": "Dracula",
         "obtainment": "Stay in a server for more than 12 hours."
       },
-      "wikiUrl": null,
-      "titleNumber": "#077",
-      "title": "Dracula",
-      "obtainment": "Stay in a server for more than 12 hours.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "dracula",
+        "section": "Items",
+        "sortOrder": 77,
+        "image": null
+      }
     },
     {
-      "name": "The Grandfather",
-      "slug": "the-grandfather",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Grandfather",
         "titleNumber": "#078",
-        "icon": "",
         "title": "The Grandfather",
         "obtainment": "Trade Fragments for a Race Reroll."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fragments",
-      "titleNumber": "#078",
-      "title": "The Grandfather",
-      "obtainment": "Trade Fragments for a Race Reroll.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-grandfather",
+        "section": "Items",
+        "sortOrder": 78,
+        "image": null
+      }
     },
     {
-      "name": "Jack of All Trades",
-      "slug": "jack-of-all-trades",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Jack of All Trades",
         "titleNumber": "#079",
-        "icon": "",
         "title": "Jack of All Trades",
         "obtainment": "Trade Fragments for a Stats Refund."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fragments",
-      "titleNumber": "#079",
-      "title": "Jack of All Trades",
-      "obtainment": "Trade Fragments for a Stats Refund.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "jack-of-all-trades",
+        "section": "Items",
+        "sortOrder": 79,
+        "image": null
+      }
     },
     {
-      "name": "The Undefeated One",
-      "slug": "the-undefeated-one",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Undefeated One",
         "titleNumber": "#080",
-        "icon": "",
         "title": "The Undefeated One",
         "obtainment": "Receive damage from a player and survive with less than 50 HP left."
       },
-      "wikiUrl": null,
-      "titleNumber": "#080",
-      "title": "The Undefeated One",
-      "obtainment": "Receive damage from a player and survive with less than 50 HP left.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-undefeated-one",
+        "section": "Items",
+        "sortOrder": 80,
+        "image": null
+      }
     },
     {
-      "name": "Immortal Being",
-      "slug": "immortal-being",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Immortal Being",
         "titleNumber": "#081",
-        "icon": "",
         "title": "Immortal Being",
         "obtainment": "Receive damage from a player and survive with 1 HP left."
       },
-      "wikiUrl": null,
-      "titleNumber": "#081",
-      "title": "Immortal Being",
-      "obtainment": "Receive damage from a player and survive with 1 HP left.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "immortal-being",
+        "section": "Items",
+        "sortOrder": 81,
+        "image": null
+      }
     },
     {
-      "name": "The Mad King",
-      "slug": "the-mad-king",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Mad King",
         "titleNumber": "#082",
-        "icon": "",
         "title": "The Mad King",
         "obtainment": "Use castling in a chess match (a simple tutorial on how to obtain this title is here)."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chess",
-      "titleNumber": "#082",
-      "title": "The Mad King",
-      "obtainment": "Use castling in a chess match (a simple tutorial on how to obtain this title is here).",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-mad-king",
+        "section": "Items",
+        "sortOrder": 82,
+        "image": null
+      }
     },
     {
-      "name": "The Mastermind",
-      "slug": "the-mastermind",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Mastermind",
         "titleNumber": "#083",
-        "icon": "",
         "title": "The Mastermind",
         "obtainment": "Defeat your opponent in the chess game."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chess",
-      "titleNumber": "#083",
-      "title": "The Mastermind",
-      "obtainment": "Defeat your opponent in the chess game.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-mastermind",
+        "section": "Items",
+        "sortOrder": 83,
+        "image": null
+      }
     },
     {
-      "name": "The Dog",
-      "slug": "the-dog",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Dog",
         "titleNumber": "#084",
-        "icon": "",
         "title": "The Dog",
         "obtainment": "Talk to the doghouse."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dog_House_(Wenlock)",
-      "titleNumber": "#084",
-      "title": "The Dog",
-      "obtainment": "Talk to the doghouse.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-dog",
+        "section": "Items",
+        "sortOrder": 84,
+        "image": null
+      }
     },
     {
-      "name": "Ship Destroyer",
-      "slug": "ship-destroyer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Ship Destroyer",
         "titleNumber": "#085",
-        "icon": "",
         "title": "Ship Destroyer",
         "obtainment": "Destroy a ship with a cannon."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Boat",
-      "titleNumber": "#085",
-      "title": "Ship Destroyer",
-      "obtainment": "Destroy a ship with a cannon.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "ship-destroyer",
+        "section": "Items",
+        "sortOrder": 85,
+        "image": null
+      }
     },
     {
-      "name": "The Explorer",
-      "slug": "the-explorer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Explorer",
         "titleNumber": "#086",
-        "icon": "",
         "title": "The Explorer",
         "obtainment": "Reach Level 800."
       },
-      "wikiUrl": null,
-      "titleNumber": "#086",
-      "title": "The Explorer",
-      "obtainment": "Reach Level 800.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-explorer",
+        "section": "Items",
+        "sortOrder": 86,
+        "image": null
+      }
     },
     {
-      "name": "The Adventurer",
-      "slug": "the-adventurer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Adventurer",
         "titleNumber": "#087",
-        "icon": "",
         "title": "The Adventurer",
         "obtainment": "Reach Level 1000."
       },
-      "wikiUrl": null,
-      "titleNumber": "#087",
-      "title": "The Adventurer",
-      "obtainment": "Reach Level 1000.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-adventurer",
+        "section": "Items",
+        "sortOrder": 87,
+        "image": null
+      }
     },
     {
-      "name": "The Mercenary",
-      "slug": "the-mercenary",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Mercenary",
         "titleNumber": "#088",
-        "icon": "",
         "title": "The Mercenary",
         "obtainment": "Reach Level 1200."
       },
-      "wikiUrl": null,
-      "titleNumber": "#088",
-      "title": "The Mercenary",
-      "obtainment": "Reach Level 1200.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-mercenary",
+        "section": "Items",
+        "sortOrder": 88,
+        "image": null
+      }
     },
     {
-      "name": "The Viking",
-      "slug": "the-viking",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Viking",
         "titleNumber": "#089",
-        "icon": "",
         "title": "The Viking",
         "obtainment": "Reach Level 1600."
       },
-      "wikiUrl": null,
-      "titleNumber": "#089",
-      "title": "The Viking",
-      "obtainment": "Reach Level 1600.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-viking",
+        "section": "Items",
+        "sortOrder": 89,
+        "image": null
+      }
     },
     {
-      "name": "The Pioneer",
-      "slug": "the-pioneer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Pioneer",
         "titleNumber": "#090",
-        "icon": "",
         "title": "The Pioneer",
         "obtainment": "Reach Level 2000."
       },
-      "wikiUrl": null,
-      "titleNumber": "#090",
-      "title": "The Pioneer",
-      "obtainment": "Reach Level 2000.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-pioneer",
+        "section": "Items",
+        "sortOrder": 90,
+        "image": null
+      }
     },
     {
-      "name": "The Glorious",
-      "slug": "the-glorious",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Glorious",
         "titleNumber": "#091",
-        "icon": "",
         "title": "The Glorious",
         "obtainment": "Reach Level 2400."
       },
-      "wikiUrl": null,
-      "titleNumber": "#091",
-      "title": "The Glorious",
-      "obtainment": "Reach Level 2400.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-glorious",
+        "section": "Items",
+        "sortOrder": 91,
+        "image": null
+      }
     },
     {
-      "name": "The Master",
-      "slug": "the-master",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Master",
         "titleNumber": "#092",
-        "icon": "",
         "title": "The Master",
         "obtainment": "Reach MAX mastery on any weapon (Blox Fruit, Sword, Gun, Fighting Style, or Fishing Rod)."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#092",
-      "title": "The Master",
-      "obtainment": "Reach MAX mastery on any weapon (Blox Fruit, Sword, Gun, Fighting Style, or Fishing Rod).",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-master",
+        "section": "Items",
+        "sortOrder": 92,
+        "image": null
+      }
     },
     {
-      "name": "Unbreakable Will",
-      "slug": "unbreakable-will",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Unbreakable Will",
         "titleNumber": "#093",
-        "icon": "",
         "title": "Unbreakable Will",
         "obtainment": "Reach MAX mastery on any weapon (Blox Fruit, Sword, Gun, Fighting Style, or Fishing Rod)."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#093",
-      "title": "Unbreakable Will",
-      "obtainment": "Reach MAX mastery on any weapon (Blox Fruit, Sword, Gun, Fighting Style, or Fishing Rod).",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "unbreakable-will",
+        "section": "Items",
+        "sortOrder": 93,
+        "image": null
+      }
     },
     {
-      "name": "Fist of Death",
-      "slug": "fist-of-death",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Fist of Death",
         "titleNumber": "#094",
-        "icon": "",
         "title": "Fist of Death",
         "obtainment": "Reach MAX mastery on a Fighting Style."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fighting_Styles",
-      "titleNumber": "#094",
-      "title": "Fist of Death",
-      "obtainment": "Reach MAX mastery on a Fighting Style.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "fist-of-death",
+        "section": "Items",
+        "sortOrder": 94,
+        "image": null
+      }
     },
     {
-      "name": "God Blade",
-      "slug": "god-blade",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "God Blade",
         "titleNumber": "#095",
-        "icon": "",
         "title": "God Blade",
         "obtainment": "Reach MAX mastery on a Sword."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Swords",
-      "titleNumber": "#095",
-      "title": "God Blade",
-      "obtainment": "Reach MAX mastery on a Sword.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "god-blade",
+        "section": "Items",
+        "sortOrder": 95,
+        "image": null
+      }
     },
     {
-      "name": "King Sniper",
-      "slug": "king-sniper",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "King Sniper",
         "titleNumber": "#096",
-        "icon": "",
         "title": "King Sniper",
         "obtainment": "Reach MAX mastery on a Gun."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Guns",
-      "titleNumber": "#096",
-      "title": "King Sniper",
-      "obtainment": "Reach MAX mastery on a Gun.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "king-sniper",
+        "section": "Items",
+        "sortOrder": 96,
+        "image": null
+      }
     },
     {
-      "name": "Beyond the Sea",
-      "slug": "beyond-the-sea",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Beyond the Sea",
         "titleNumber": "#097",
-        "icon": "",
         "title": "Beyond the Sea",
         "obtainment": "Reach MAX mastery on a Blox Fruit."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#097",
-      "title": "Beyond the Sea",
-      "obtainment": "Reach MAX mastery on a Blox Fruit.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "beyond-the-sea",
+        "section": "Items",
+        "sortOrder": 97,
+        "image": null
+      }
     },
     {
-      "name": "Broken Heart",
-      "slug": "broken-heart",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Broken Heart",
         "titleNumber": "#098",
-        "icon": "",
         "title": "Broken Heart",
         "obtainment": "Run out of time in a raid."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Raids",
-      "titleNumber": "#098",
-      "title": "Broken Heart",
-      "obtainment": "Run out of time in a raid.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "broken-heart",
+        "section": "Items",
+        "sortOrder": 98,
+        "image": null
+      }
     },
     {
-      "name": "The Conqueror",
-      "slug": "the-conqueror",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Conqueror",
         "titleNumber": "#099",
-        "icon": "",
         "title": "The Conqueror",
         "obtainment": "Complete a raid."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Raids",
-      "titleNumber": "#099",
-      "title": "The Conqueror",
-      "obtainment": "Complete a raid.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-conqueror",
+        "section": "Items",
+        "sortOrder": 99,
+        "image": null
+      }
     },
     {
-      "name": "Last Hope",
-      "slug": "last-hope",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Last Hope",
         "titleNumber": "#100",
-        "icon": "",
         "title": "Last Hope",
         "obtainment": "Be the last person standing and win a raid. (Still obtainable if the player is doing a raid alone)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Raids",
-      "titleNumber": "#100",
-      "title": "Last Hope",
-      "obtainment": "Be the last person standing and win a raid. (Still obtainable if the player is doing a raid alone)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "last-hope",
+        "section": "Items",
+        "sortOrder": 100,
+        "image": null
+      }
     },
     {
-      "name": "The Supersonic",
-      "slug": "the-supersonic",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Supersonic",
         "titleNumber": "#101",
-        "icon": "",
         "title": "The Supersonic",
         "obtainment": "Complete a raid in less than 5:00 minutes. (Still obtainable with 5:00 minutes left)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Raids",
-      "titleNumber": "#101",
-      "title": "The Supersonic",
-      "obtainment": "Complete a raid in less than 5:00 minutes. (Still obtainable with 5:00 minutes left)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-supersonic",
+        "section": "Items",
+        "sortOrder": 101,
+        "image": null
+      }
     },
     {
-      "name": "The Flash",
-      "slug": "the-flash",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Flash",
         "titleNumber": "#102",
-        "icon": "",
         "title": "The Flash",
         "obtainment": "Complete a raid in less than 3:30 minutes. (Still obtainable with 3:30 minutes left)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Raids",
-      "titleNumber": "#102",
-      "title": "The Flash",
-      "obtainment": "Complete a raid in less than 3:30 minutes. (Still obtainable with 3:30 minutes left)",
-      "image": "/Blox%20Fruits/Titles/the-flash.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6b/Title_The_Flash.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "the-flash",
+        "section": "Items",
+        "sortOrder": 102,
+        "image": "/Blox%20Fruits/Titles/the-flash.webp"
+      }
     },
     {
-      "name": "The Champion",
-      "slug": "the-champion",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Champion",
         "titleNumber": "#103",
-        "icon": "",
         "title": "The Champion",
         "obtainment": "Complete Bartilo's mission."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Colosseum_Quest",
-      "titleNumber": "#103",
-      "title": "The Champion",
-      "obtainment": "Complete Bartilo's mission.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-champion",
+        "section": "Items",
+        "sortOrder": 103,
+        "image": null
+      }
     },
     {
-      "name": "Tide Warrior",
-      "slug": "tide-warrior",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Tide Warrior",
         "titleNumber": "#104",
-        "icon": "",
         "title": "Tide Warrior",
         "obtainment": "Die to Water."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Water",
-      "titleNumber": "#104",
-      "title": "Tide Warrior",
-      "obtainment": "Die to Water.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "tide-warrior",
+        "section": "Items",
+        "sortOrder": 104,
+        "image": null
+      }
     },
     {
-      "name": "The Toxic",
-      "slug": "the-toxic",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Toxic",
         "titleNumber": "#105",
-        "icon": "",
         "title": "The Toxic",
         "obtainment": "Win a fruit from a factory event."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Factory",
-      "titleNumber": "#105",
-      "title": "The Toxic",
-      "obtainment": "Win a fruit from a factory event.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-toxic",
+        "section": "Items",
+        "sortOrder": 105,
+        "image": null
+      }
     },
     {
-      "name": "Blessed One",
-      "slug": "blessed-one",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Blessed One",
         "titleNumber": "#106",
-        "icon": "",
         "title": "Blessed One",
         "obtainment": "Find a fruit."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#106",
-      "title": "Blessed One",
-      "obtainment": "Find a fruit.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "blessed-one",
+        "section": "Items",
+        "sortOrder": 106,
+        "image": null
+      }
     },
     {
-      "name": "Equal to the Heavens",
-      "slug": "equal-to-the-heavens",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Equal to the Heavens",
         "titleNumber": "#107",
-        "icon": "",
         "title": "Equal to the Heavens",
         "obtainment": "Defeat a Blox Fruits admin."
       },
-      "wikiUrl": null,
-      "titleNumber": "#107",
-      "title": "Equal to the Heavens",
-      "obtainment": "Defeat a Blox Fruits admin.",
-      "image": "/Blox%20Fruits/Titles/equal-to-the-heavens.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/09/Title_Equal_to_the_Heavens.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "equal-to-the-heavens",
+        "section": "Items",
+        "sortOrder": 107,
+        "image": "/Blox%20Fruits/Titles/equal-to-the-heavens.webp"
+      }
     },
     {
-      "name": "The Rich",
-      "slug": "the-rich",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Rich",
         "titleNumber": "#108",
-        "icon": "",
         "title": "The Rich",
         "obtainment": "Obtain 5M+."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Money",
-      "titleNumber": "#108",
-      "title": "The Rich",
-      "obtainment": "Obtain 5M+.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-rich",
+        "section": "Items",
+        "sortOrder": 108,
+        "image": null
+      }
     },
     {
-      "name": "Unlimited Money",
-      "slug": "unlimited-money",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Unlimited Money",
         "titleNumber": "#109",
-        "icon": "",
         "title": "Unlimited Money",
         "obtainment": "Obtain 20M+."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Money",
-      "titleNumber": "#109",
-      "title": "Unlimited Money",
-      "obtainment": "Obtain 20M+.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "unlimited-money",
+        "section": "Items",
+        "sortOrder": 109,
+        "image": null
+      }
     },
     {
-      "name": "The Richest in the World",
-      "slug": "the-richest-in-the-world",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Richest in the World",
         "titleNumber": "#110",
-        "icon": "",
         "title": "The Richest in the World",
         "obtainment": "Obtain 50M+."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Money",
-      "titleNumber": "#110",
-      "title": "The Richest in the World",
-      "obtainment": "Obtain 50M+.",
-      "image": "/Blox%20Fruits/Titles/the-richest-in-the-world.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6e/Title_The_Richest_in_the_World.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "the-richest-in-the-world",
+        "section": "Items",
+        "sortOrder": 110,
+        "image": "/Blox%20Fruits/Titles/the-richest-in-the-world.webp"
+      }
     },
     {
-      "name": "The Swordsman",
-      "slug": "the-swordsman",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Swordsman",
         "titleNumber": "#111",
-        "icon": "",
         "title": "The Swordsman",
         "obtainment": "Obtain a sword from the Legendary Sword Dealer."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Swords",
-      "titleNumber": "#111",
-      "title": "The Swordsman",
-      "obtainment": "Obtain a sword from the Legendary Sword Dealer.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-swordsman",
+        "section": "Items",
+        "sortOrder": 111,
+        "image": null
+      }
     },
     {
-      "name": "The Collector",
-      "slug": "the-collector",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Collector",
         "titleNumber": "#112",
-        "icon": "",
         "title": "The Collector",
         "obtainment": "Buy something from the Legendary Sword Dealer or Master of Auras."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Legendary_Sword_Dealer",
-      "titleNumber": "#112",
-      "title": "The Collector",
-      "obtainment": "Buy something from the Legendary Sword Dealer or Master of Auras.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-collector",
+        "section": "Items",
+        "sortOrder": 112,
+        "image": null
+      }
     },
     {
-      "name": "Beast Hunter",
-      "slug": "beast-hunter",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Beast Hunter",
         "titleNumber": "#113",
-        "icon": "",
         "title": "Beast Hunter",
         "obtainment": "Defeat a Sea Beast."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sea_Beast",
-      "titleNumber": "#113",
-      "title": "Beast Hunter",
-      "obtainment": "Defeat a Sea Beast.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "beast-hunter",
+        "section": "Items",
+        "sortOrder": 113,
+        "image": null
+      }
     },
     {
-      "name": "The Beast",
-      "slug": "the-beast",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Beast",
         "titleNumber": "#114",
-        "icon": "",
         "title": "The Beast",
         "obtainment": "Defeat 25 Sea Beasts. (Currently glitched and unobtainable)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sea_Beast",
-      "titleNumber": "#114",
-      "title": "The Beast",
-      "obtainment": "Defeat 25 Sea Beasts. (Currently glitched and unobtainable)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-beast",
+        "section": "Items",
+        "sortOrder": 114,
+        "image": null
+      }
     },
     {
-      "name": "The Lost Soul",
-      "slug": "the-lost-soul",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Lost Soul",
         "titleNumber": "#115",
-        "icon": "",
         "title": "The Lost Soul",
         "obtainment": "Die to factory poison."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Factory",
-      "titleNumber": "#115",
-      "title": "The Lost Soul",
-      "obtainment": "Die to factory poison.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-lost-soul",
+        "section": "Items",
+        "sortOrder": 115,
+        "image": null
+      }
     },
     {
-      "name": "Forbidden One",
-      "slug": "forbidden-one",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Forbidden One",
         "titleNumber": "#116",
-        "icon": "",
         "title": "Forbidden One",
         "obtainment": "Find the Fist of Darkness in a chest."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fist_of_Darkness",
-      "titleNumber": "#116",
-      "title": "Forbidden One",
-      "obtainment": "Find the Fist of Darkness in a chest.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "forbidden-one",
+        "section": "Items",
+        "sortOrder": 116,
+        "image": null
+      }
     },
     {
-      "name": "The Troll",
-      "slug": "the-troll",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Troll",
         "titleNumber": "#117",
-        "icon": "",
         "title": "The Troll",
         "obtainment": "Die with a fruit in the player's hotbar."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#117",
-      "title": "The Troll",
-      "obtainment": "Die with a fruit in the player's hotbar.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-troll",
+        "section": "Items",
+        "sortOrder": 117,
+        "image": null
+      }
     },
     {
-      "name": "Hidden Power",
-      "slug": "hidden-power",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Hidden Power",
         "titleNumber": "#118",
-        "icon": "",
         "title": "Hidden Power",
         "obtainment": "Eat a physical Blox Fruit."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#118",
-      "title": "Hidden Power",
-      "obtainment": "Eat a physical Blox Fruit.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "hidden-power",
+        "section": "Items",
+        "sortOrder": 118,
+        "image": null
+      }
     },
     {
-      "name": "Heavenly Devil",
-      "slug": "heavenly-devil",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Heavenly Devil",
         "titleNumber": "#119",
-        "icon": "",
         "title": "Heavenly Devil",
         "obtainment": "Defeat Don Swan once."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Don_Swan",
-      "titleNumber": "#119",
-      "title": "Heavenly Devil",
-      "obtainment": "Defeat Don Swan once.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "heavenly-devil",
+        "section": "Items",
+        "sortOrder": 119,
+        "image": null
+      }
     },
     {
-      "name": "The Cursed One",
-      "slug": "the-cursed-one",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Cursed One",
         "titleNumber": "#120",
-        "icon": "",
         "title": "The Cursed One",
         "obtainment": "Defeat Darkbeard once."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Darkbeard",
-      "titleNumber": "#120",
-      "title": "The Cursed One",
-      "obtainment": "Defeat Darkbeard once.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-cursed-one",
+        "section": "Items",
+        "sortOrder": 120,
+        "image": null
+      }
     },
     {
-      "name": "Beyond Death",
-      "slug": "beyond-death",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Beyond Death",
         "titleNumber": "#121",
-        "icon": "",
         "title": "Beyond Death",
         "obtainment": "Defeat Order once."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Order",
-      "titleNumber": "#121",
-      "title": "Beyond Death",
-      "obtainment": "Defeat Order once.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "beyond-death",
+        "section": "Items",
+        "sortOrder": 121,
+        "image": null
+      }
     },
     {
-      "name": "Night's Edge",
-      "slug": "night-s-edge",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Night's Edge",
         "titleNumber": "#122",
-        "icon": "",
         "title": "Night's Edge",
         "obtainment": "Defeat the Cursed Captain once."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cursed_Captain",
-      "titleNumber": "#122",
-      "title": "Night's Edge",
-      "obtainment": "Defeat the Cursed Captain once.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "night-s-edge",
+        "section": "Items",
+        "sortOrder": 122,
+        "image": null
+      }
     },
     {
-      "name": "Kind-Hearted",
-      "slug": "kind-hearted",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Kind-Hearted",
         "titleNumber": "#123",
-        "icon": "",
         "title": "Kind-Hearted",
         "obtainment": "Drop a fruit."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#123",
-      "title": "Kind-Hearted",
-      "obtainment": "Drop a fruit.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "kind-hearted",
+        "section": "Items",
+        "sortOrder": 123,
+        "image": null
+      }
     },
     {
-      "name": "The Kraken",
-      "slug": "the-kraken",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Kraken",
         "titleNumber": "#124",
-        "icon": "",
         "title": "The Kraken",
         "obtainment": "Drop a fruit to the sea."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Water",
-      "titleNumber": "#124",
-      "title": "The Kraken",
-      "obtainment": "Drop a fruit to the sea.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-kraken",
+        "section": "Items",
+        "sortOrder": 124,
+        "image": null
+      }
     },
     {
-      "name": "Lavish Living",
-      "slug": "lavish-living",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Lavish Living",
         "titleNumber": "#125",
-        "icon": "",
         "title": "Lavish Living",
         "obtainment": "Buy any fruit from the Blox Fruit Dealer."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#125",
-      "title": "Lavish Living",
-      "obtainment": "Buy any fruit from the Blox Fruit Dealer.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "lavish-living",
+        "section": "Items",
+        "sortOrder": 125,
+        "image": null
+      }
     },
     {
-      "name": "Night Owl",
-      "slug": "night-owl",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Night Owl",
         "titleNumber": "#126",
-        "icon": "",
         "title": "Night Owl",
         "obtainment": "Buy a 1M+ value fruit from the Blox Fruit Dealer."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#126",
-      "title": "Night Owl",
-      "obtainment": "Buy a 1M+ value fruit from the Blox Fruit Dealer.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "night-owl",
+        "section": "Items",
+        "sortOrder": 126,
+        "image": null
+      }
     },
     {
-      "name": "Wicked Captain",
-      "slug": "wicked-captain",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Wicked Captain",
         "titleNumber": "#127",
-        "icon": "",
         "title": "Wicked Captain",
         "obtainment": "Obtain the Dark Coat."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Coat",
-      "titleNumber": "#127",
-      "title": "Wicked Captain",
-      "obtainment": "Obtain the Dark Coat.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "wicked-captain",
+        "section": "Items",
+        "sortOrder": 127,
+        "image": null
+      }
     },
     {
-      "name": "Dragonborn",
-      "slug": "dragonborn",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Dragonborn",
         "titleNumber": "#128",
-        "icon": "",
         "title": "Dragonborn",
         "obtainment": "Unlock Dragon Breath."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Breath",
-      "titleNumber": "#128",
-      "title": "Dragonborn",
-      "obtainment": "Unlock Dragon Breath.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "dragonborn",
+        "section": "Items",
+        "sortOrder": 128,
+        "image": null
+      }
     },
     {
-      "name": "Burning Leg",
-      "slug": "burning-leg",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Burning Leg",
         "titleNumber": "#129",
-        "icon": "",
         "title": "Burning Leg",
         "obtainment": "Unlock Death Step."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Death_Step",
-      "titleNumber": "#129",
-      "title": "Burning Leg",
-      "obtainment": "Unlock Death Step.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "burning-leg",
+        "section": "Items",
+        "sortOrder": 129,
+        "image": null
+      }
     },
     {
-      "name": "Sharkman",
-      "slug": "sharkman",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Sharkman",
         "titleNumber": "#130",
-        "icon": "",
         "title": "Sharkman",
         "obtainment": "Unlock Sharkman Karate."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sharkman_Karate",
-      "titleNumber": "#130",
-      "title": "Sharkman",
-      "obtainment": "Unlock Sharkman Karate.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "sharkman",
+        "section": "Items",
+        "sortOrder": 130,
+        "image": null
+      }
     },
     {
-      "name": "Samurai",
-      "slug": "samurai",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Samurai",
         "titleNumber": "#131",
-        "icon": "",
         "title": "Samurai",
         "obtainment": "Unlock Rengoku and equip it."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rengoku",
-      "titleNumber": "#131",
-      "title": "Samurai",
-      "obtainment": "Unlock Rengoku and equip it.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "samurai",
+        "section": "Items",
+        "sortOrder": 131,
+        "image": null
+      }
     },
     {
-      "name": "The Silent",
-      "slug": "the-silent",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Silent",
         "titleNumber": "#132",
-        "icon": "",
         "title": "The Silent",
         "obtainment": "Die to a player below Level 800."
       },
-      "wikiUrl": null,
-      "titleNumber": "#132",
-      "title": "The Silent",
-      "obtainment": "Die to a player below Level 800.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-silent",
+        "section": "Items",
+        "sortOrder": 132,
+        "image": null
+      }
     },
     {
-      "name": "The Executioner",
-      "slug": "the-executioner",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Executioner",
         "titleNumber": "#133",
-        "icon": "",
         "title": "The Executioner",
         "obtainment": "Die to a Max Level player. (You need to be Max Level)"
       },
-      "wikiUrl": null,
-      "titleNumber": "#133",
-      "title": "The Executioner",
-      "obtainment": "Die to a Max Level player. (You need to be Max Level)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-executioner",
+        "section": "Items",
+        "sortOrder": 133,
+        "image": null
+      }
     },
     {
-      "name": "The Stalker",
-      "slug": "the-stalker",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Stalker",
         "titleNumber": "#134",
-        "icon": "",
         "title": "The Stalker",
         "obtainment": "Defeat a player at the same level as yours."
       },
-      "wikiUrl": null,
-      "titleNumber": "#134",
-      "title": "The Stalker",
-      "obtainment": "Defeat a player at the same level as yours.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-stalker",
+        "section": "Items",
+        "sortOrder": 134,
+        "image": null
+      }
     },
     {
-      "name": "Risk Taker",
-      "slug": "risk-taker",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Risk Taker",
         "titleNumber": "#135",
-        "icon": "",
         "title": "Risk Taker",
         "obtainment": "Purchase a fruit from Blox Fruits Gacha."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#135",
-      "title": "Risk Taker",
-      "obtainment": "Purchase a fruit from Blox Fruits Gacha.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "risk-taker",
+        "section": "Items",
+        "sortOrder": 135,
+        "image": null
+      }
     },
     {
-      "name": "Luck of the Draw",
-      "slug": "luck-of-the-draw",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Luck of the Draw",
         "titleNumber": "#136",
-        "icon": "",
         "title": "Luck of the Draw",
         "obtainment": "Obtain a fruit worth more than 1M from Blox Fruits Gacha."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Money",
-      "titleNumber": "#136",
-      "title": "Luck of the Draw",
-      "obtainment": "Obtain a fruit worth more than 1M from Blox Fruits Gacha.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "luck-of-the-draw",
+        "section": "Items",
+        "sortOrder": 136,
+        "image": null
+      }
     },
     {
-      "name": "Unstoppable Force",
-      "slug": "unstoppable-force",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Unstoppable Force",
         "titleNumber": "#137",
-        "icon": "",
         "title": "Unstoppable Force",
         "obtainment": "Defeat 5 players (each kill taking bounty or honor) without dying in the same server."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bounty_and_Honor_System",
-      "titleNumber": "#137",
-      "title": "Unstoppable Force",
-      "obtainment": "Defeat 5 players (each kill taking bounty or honor) without dying in the same server.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "unstoppable-force",
+        "section": "Items",
+        "sortOrder": 137,
+        "image": null
+      }
     },
     {
-      "name": "Raging Demon",
-      "slug": "raging-demon",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Raging Demon",
         "titleNumber": "#138",
-        "icon": "",
         "title": "Raging Demon",
         "obtainment": "Defeat 20 players (each kill taking bounty or honor) without dying in the same server."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bounty_and_Honor_System",
-      "titleNumber": "#138",
-      "title": "Raging Demon",
-      "obtainment": "Defeat 20 players (each kill taking bounty or honor) without dying in the same server.",
-      "image": "/Blox%20Fruits/Titles/raging-demon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a4/Title_Raging_Demon.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "raging-demon",
+        "section": "Items",
+        "sortOrder": 138,
+        "image": "/Blox%20Fruits/Titles/raging-demon.webp"
+      }
     },
     {
-      "name": "The Protagonist",
-      "slug": "the-protagonist",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Protagonist",
         "titleNumber": "#139",
-        "icon": "",
         "title": "The Protagonist",
         "obtainment": "Defeat 2 or more players at the same time."
       },
-      "wikiUrl": null,
-      "titleNumber": "#139",
-      "title": "The Protagonist",
-      "obtainment": "Defeat 2 or more players at the same time.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-protagonist",
+        "section": "Items",
+        "sortOrder": 139,
+        "image": null
+      }
     },
     {
-      "name": "Coldblooded",
-      "slug": "coldblooded",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Coldblooded",
         "titleNumber": "#140",
-        "icon": "",
         "title": "Coldblooded",
         "obtainment": "Defeat 10 players in the same server."
       },
-      "wikiUrl": null,
-      "titleNumber": "#140",
-      "title": "Coldblooded",
-      "obtainment": "Defeat 10 players in the same server.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "coldblooded",
+        "section": "Items",
+        "sortOrder": 140,
+        "image": null
+      }
     },
     {
-      "name": "Apex Predator",
-      "slug": "apex-predator",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Apex Predator",
         "titleNumber": "#141",
-        "icon": "",
         "title": "Apex Predator",
         "obtainment": "Defeat 25 players in the same server."
       },
-      "wikiUrl": null,
-      "titleNumber": "#141",
-      "title": "Apex Predator",
-      "obtainment": "Defeat 25 players in the same server.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "apex-predator",
+        "section": "Items",
+        "sortOrder": 141,
+        "image": null
+      }
     },
     {
-      "name": "The Killer",
-      "slug": "the-killer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Killer",
         "titleNumber": "#142",
-        "icon": "",
         "title": "The Killer",
         "obtainment": "Unlock Superhuman."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Superhuman",
-      "titleNumber": "#142",
-      "title": "The Killer",
-      "obtainment": "Unlock Superhuman.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-killer",
+        "section": "Items",
+        "sortOrder": 142,
+        "image": null
+      }
     },
     {
-      "name": "Human Weapon",
-      "slug": "human-weapon",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Human Weapon",
         "titleNumber": "#143",
-        "icon": "",
         "title": "Human Weapon",
         "obtainment": "Unlock Superhuman."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Superhuman",
-      "titleNumber": "#143",
-      "title": "Human Weapon",
-      "obtainment": "Unlock Superhuman.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "human-weapon",
+        "section": "Items",
+        "sortOrder": 143,
+        "image": null
+      }
     },
     {
-      "name": "Demon Eye",
-      "slug": "demon-eye",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Demon Eye",
         "titleNumber": "#144",
-        "icon": "",
         "title": "Demon Eye",
         "obtainment": "Unlock True Triple Katana."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/True_Triple_Katana",
-      "titleNumber": "#144",
-      "title": "Demon Eye",
-      "obtainment": "Unlock True Triple Katana.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "demon-eye",
+        "section": "Items",
+        "sortOrder": 144,
+        "image": null
+      }
     },
     {
-      "name": "The Hurricane",
-      "slug": "the-hurricane",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Hurricane",
         "titleNumber": "#145",
-        "icon": "",
         "title": "The Hurricane",
         "obtainment": "Unlock True Triple Katana."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/True_Triple_Katana",
-      "titleNumber": "#145",
-      "title": "The Hurricane",
-      "obtainment": "Unlock True Triple Katana.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-hurricane",
+        "section": "Items",
+        "sortOrder": 145,
+        "image": null
+      }
     },
     {
-      "name": "The Enhancer",
-      "slug": "the-enhancer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Enhancer",
         "titleNumber": "#146",
-        "icon": "",
         "title": "The Enhancer",
         "obtainment": "Unlock any Aura color."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skins",
-      "titleNumber": "#146",
-      "title": "The Enhancer",
-      "obtainment": "Unlock any Aura color.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-enhancer",
+        "section": "Items",
+        "sortOrder": 146,
+        "image": null
+      }
     },
     {
-      "name": "True Heart",
-      "slug": "true-heart",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "True Heart",
         "titleNumber": "#147",
-        "icon": "",
         "title": "True Heart",
         "obtainment": "Unlock Snow White."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skins",
-      "titleNumber": "#147",
-      "title": "True Heart",
-      "obtainment": "Unlock Snow White.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "true-heart",
+        "section": "Items",
+        "sortOrder": 147,
+        "image": null
+      }
     },
     {
-      "name": "Bringer of Doom",
-      "slug": "bringer-of-doom",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Bringer of Doom",
         "titleNumber": "#148",
-        "icon": "",
         "title": "Bringer of Doom",
         "obtainment": "Unlock Pure Red."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skins",
-      "titleNumber": "#148",
-      "title": "Bringer of Doom",
-      "obtainment": "Unlock Pure Red.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "bringer-of-doom",
+        "section": "Items",
+        "sortOrder": 148,
+        "image": null
+      }
     },
     {
-      "name": "Realm Creator",
-      "slug": "realm-creator",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Realm Creator",
         "titleNumber": "#149",
-        "icon": "",
         "title": "Realm Creator",
         "obtainment": "Unlock Winter Sky."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skins",
-      "titleNumber": "#149",
-      "title": "Realm Creator",
-      "obtainment": "Unlock Winter Sky.",
-      "image": "/Blox%20Fruits/Titles/realm-creator.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ac/Title_Realm_Creator.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "realm-creator",
+        "section": "Items",
+        "sortOrder": 149,
+        "image": "/Blox%20Fruits/Titles/realm-creator.webp"
+      }
     },
     {
-      "name": "Hakaishin",
-      "slug": "hakaishin",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Hakaishin",
         "titleNumber": "#150",
-        "icon": "",
         "title": "Hakaishin",
         "obtainment": "Unlock every purchasable Aura color of the Barista Cousin. (Currently glitched and unobtainable)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skins",
-      "titleNumber": "#150",
-      "title": "Hakaishin",
-      "obtainment": "Unlock every purchasable Aura color of the Barista Cousin. (Currently glitched and unobtainable)",
-      "image": "/Blox%20Fruits/Titles/hakaishin.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/69/Title_Hakaishin.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "hakaishin",
+        "section": "Items",
+        "sortOrder": 150,
+        "image": "/Blox%20Fruits/Titles/hakaishin.webp"
+      }
     },
     {
-      "name": "Slayer of God",
-      "slug": "slayer-of-god",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Slayer of God",
         "titleNumber": "#151",
-        "icon": "",
         "title": "Slayer of God",
         "obtainment": "Unlock the Dark Blade's Slayer skin."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Blade",
-      "titleNumber": "#151",
-      "title": "Slayer of God",
-      "obtainment": "Unlock the Dark Blade's Slayer skin.",
-      "image": "/Blox%20Fruits/Titles/slayer-of-god.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/87/Title_Slayer_of_God.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "slayer-of-god",
+        "section": "Items",
+        "sortOrder": 151,
+        "image": "/Blox%20Fruits/Titles/slayer-of-god.webp"
+      }
     },
     {
-      "name": "The Ghost",
-      "slug": "the-ghost",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Ghost",
         "titleNumber": "#152",
-        "icon": "",
         "title": "The Ghost",
         "obtainment": "Collect 100 Ectoplasms."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ectoplasm",
-      "titleNumber": "#152",
-      "title": "The Ghost",
-      "obtainment": "Collect 100 Ectoplasms.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-ghost",
+        "section": "Items",
+        "sortOrder": 152,
+        "image": null
+      }
     },
     {
-      "name": "Ruler of Night",
-      "slug": "ruler-of-night",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Ruler of Night",
         "titleNumber": "#153",
-        "icon": "",
         "title": "Ruler of Night",
         "obtainment": "Collect 250 Ectoplasms."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ectoplasm",
-      "titleNumber": "#153",
-      "title": "Ruler of Night",
-      "obtainment": "Collect 250 Ectoplasms.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "ruler-of-night",
+        "section": "Items",
+        "sortOrder": 153,
+        "image": null
+      }
     },
     {
-      "name": "Lonely Reaper",
-      "slug": "lonely-reaper",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Lonely Reaper",
         "titleNumber": "#154",
-        "icon": "",
         "title": "Lonely Reaper",
         "obtainment": "Collect 1,000 Ectoplasms."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ectoplasm",
-      "titleNumber": "#154",
-      "title": "Lonely Reaper",
-      "obtainment": "Collect 1,000 Ectoplasms.",
-      "image": "/Blox%20Fruits/Titles/lonely-reaper.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2f/Title_Lonely_Reaper.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "lonely-reaper",
+        "section": "Items",
+        "sortOrder": 154,
+        "image": "/Blox%20Fruits/Titles/lonely-reaper.webp"
+      }
     },
     {
-      "name": "The Most Wanted",
-      "slug": "the-most-wanted",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Most Wanted",
         "titleNumber": "#155",
-        "icon": "",
         "title": "The Most Wanted",
         "obtainment": "Own a crew that is currently on the Top 100 of the leaderboard."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Crew",
-      "titleNumber": "#155",
-      "title": "The Most Wanted",
-      "obtainment": "Own a crew that is currently on the Top 100 of the leaderboard.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-most-wanted",
+        "section": "Items",
+        "sortOrder": 155,
+        "image": null
+      }
     },
     {
-      "name": "Pirate King",
-      "slug": "pirate-king",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Pirate King",
         "titleNumber": "#156",
-        "icon": "",
         "title": "Pirate King",
         "obtainment": "Be online in the game for a total of 72 hours while being the captain of a crew that is on the top 10 of the leaderboard. (The timer will not reset and will just stop if the player disconnects or if their crew is not on the Top 10 anymore.)"
       },
-      "wikiUrl": null,
-      "titleNumber": "#156",
-      "title": "Pirate King",
-      "obtainment": "Be online in the game for a total of 72 hours while being the captain of a crew that is on the top 10 of the leaderboard. (The timer will not reset and will just stop if the player disconnects or if their crew is not on the Top 10 anymore.)",
-      "image": "/Blox%20Fruits/Titles/pirate-king.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/63/Title_Pirate_King.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "pirate-king",
+        "section": "Items",
+        "sortOrder": 156,
+        "image": "/Blox%20Fruits/Titles/pirate-king.webp"
+      }
     },
     {
-      "name": "Sugar Rush",
-      "slug": "sugar-rush",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Sugar Rush",
         "titleNumber": "#157",
-        "icon": "",
         "title": "Sugar Rush",
         "obtainment": "Collect 100 Candies (Obtainable during Christmas Event.)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy",
-      "titleNumber": "#157",
-      "title": "Sugar Rush",
-      "obtainment": "Collect 100 Candies (Obtainable during Christmas Event.)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "sugar-rush",
+        "section": "Items",
+        "sortOrder": 157,
+        "image": null
+      }
     },
     {
-      "name": "Christmas Spirit",
-      "slug": "christmas-spirit",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Christmas Spirit",
         "titleNumber": "#158",
-        "icon": "",
         "title": "Christmas Spirit",
         "obtainment": "Collect 250 Candies (Obtainable during Christmas Event.)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy",
-      "titleNumber": "#158",
-      "title": "Christmas Spirit",
-      "obtainment": "Collect 250 Candies (Obtainable during Christmas Event.)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "christmas-spirit",
+        "section": "Items",
+        "sortOrder": 158,
+        "image": null
+      }
     },
     {
-      "name": "Loco Verde",
-      "slug": "loco-verde",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Loco Verde",
         "titleNumber": "#159",
-        "icon": "",
         "title": "Loco Verde",
         "obtainment": "Collect 1,000 Candies (Obtainable during Christmas Event.)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy",
-      "titleNumber": "#159",
-      "title": "Loco Verde",
-      "obtainment": "Collect 1,000 Candies (Obtainable during Christmas Event.)",
-      "image": "/Blox%20Fruits/Titles/loco-verde.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/04/Title_Loco_Verde.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "loco-verde",
+        "section": "Items",
+        "sortOrder": 159,
+        "image": "/Blox%20Fruits/Titles/loco-verde.webp"
+      }
     },
     {
-      "name": "Raid Boss",
-      "slug": "raid-boss",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Raid Boss",
         "titleNumber": "#160",
-        "icon": "",
         "title": "Raid Boss",
         "obtainment": "Get a fruit from the pirate raid event."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blox_Fruit",
-      "titleNumber": "#160",
-      "title": "Raid Boss",
-      "obtainment": "Get a fruit from the pirate raid event.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "raid-boss",
+        "section": "Items",
+        "sortOrder": 160,
+        "image": null
+      }
     },
     {
-      "name": "The Real Deal",
-      "slug": "the-real-deal",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Real Deal",
         "titleNumber": "#161",
-        "icon": "",
         "title": "The Real Deal",
         "obtainment": "Defeat an elite enemy."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Elite_Pirates",
-      "titleNumber": "#161",
-      "title": "The Real Deal",
-      "obtainment": "Defeat an elite enemy.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-real-deal",
+        "section": "Items",
+        "sortOrder": 161,
+        "image": null
+      }
     },
     {
-      "name": "Demon Mode",
-      "slug": "demon-mode",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Demon Mode",
         "titleNumber": "#162",
-        "icon": "",
         "title": "Demon Mode",
         "obtainment": "Unlock Yama."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Yama",
-      "titleNumber": "#162",
-      "title": "Demon Mode",
-      "obtainment": "Unlock Yama.",
-      "image": "/Blox%20Fruits/Titles/demon-mode.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/21/Title_Demon_Mode.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "demon-mode",
+        "section": "Items",
+        "sortOrder": 162,
+        "image": "/Blox%20Fruits/Titles/demon-mode.webp"
+      }
     },
     {
-      "name": "Celestial Swordsman",
-      "slug": "celestial-swordsman",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Celestial Swordsman",
         "titleNumber": "#163",
-        "icon": "",
         "title": "Celestial Swordsman",
         "obtainment": "Unlock Tushita."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tushita",
-      "titleNumber": "#163",
-      "title": "Celestial Swordsman",
-      "obtainment": "Unlock Tushita.",
-      "image": "/Blox%20Fruits/Titles/celestial-swordsman.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/22/Title_Celestial_Swordsman.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "celestial-swordsman",
+        "section": "Items",
+        "sortOrder": 163,
+        "image": "/Blox%20Fruits/Titles/celestial-swordsman.webp"
+      }
     },
     {
-      "name": "Raiton",
-      "slug": "raiton",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Raiton",
         "titleNumber": "#164",
-        "icon": "",
         "title": "Raiton",
         "obtainment": "Unlock Electric Claw."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Electric_Claw",
-      "titleNumber": "#164",
-      "title": "Raiton",
-      "obtainment": "Unlock Electric Claw.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "raiton",
+        "section": "Items",
+        "sortOrder": 164,
+        "image": null
+      }
     },
     {
-      "name": "Shadow Sovereign",
-      "slug": "shadow-sovereign",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Shadow Sovereign",
         "titleNumber": "#165",
-        "icon": "",
         "title": "Shadow Sovereign",
         "obtainment": "Defeat rip_Indra True Form."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rip_indra_(Raid_Boss)",
-      "titleNumber": "#165",
-      "title": "Shadow Sovereign",
-      "obtainment": "Defeat rip_Indra True Form.",
-      "image": "/Blox%20Fruits/Titles/shadow-sovereign.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e5/Title_Shadow_Sovereign.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "shadow-sovereign",
+        "section": "Items",
+        "sortOrder": 165,
+        "image": "/Blox%20Fruits/Titles/shadow-sovereign.webp"
+      }
     },
     {
-      "name": "The Chosen One",
-      "slug": "the-chosen-one",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Chosen One",
         "titleNumber": "#166",
-        "icon": "",
         "title": "The Chosen One",
         "obtainment": "Find the God's Chalice in a chest."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/God%27s_Chalice",
-      "titleNumber": "#166",
-      "title": "The Chosen One",
-      "obtainment": "Find the God's Chalice in a chest.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-chosen-one",
+        "section": "Items",
+        "sortOrder": 166,
+        "image": null
+      }
     },
     {
-      "name": "Main Character",
-      "slug": "main-character",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Main Character",
         "titleNumber": "#167",
-        "icon": "",
         "title": "Main Character",
         "obtainment": "Complete Citizen's mission."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Citizen",
-      "titleNumber": "#167",
-      "title": "Main Character",
-      "obtainment": "Complete Citizen's mission.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "main-character",
+        "section": "Items",
+        "sortOrder": 167,
+        "image": null
+      }
     },
     {
-      "name": "Final Hero",
-      "slug": "final-hero",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Final Hero",
         "titleNumber": "#168",
-        "icon": "",
         "title": "Final Hero",
         "obtainment": "Unlock Rainbow Saviour aura color."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rainbow_Saviour",
-      "titleNumber": "#168",
-      "title": "Final Hero",
-      "obtainment": "Unlock Rainbow Saviour aura color.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "final-hero",
+        "section": "Items",
+        "sortOrder": 168,
+        "image": null
+      }
     },
     {
-      "name": "Skeleton",
-      "slug": "skeleton",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Skeleton",
         "titleNumber": "#169",
-        "icon": "",
         "title": "Skeleton",
         "obtainment": "Collect 250 Bones."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bones",
-      "titleNumber": "#169",
-      "title": "Skeleton",
-      "obtainment": "Collect 250 Bones.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "skeleton",
+        "section": "Items",
+        "sortOrder": 169,
+        "image": null
+      }
     },
     {
-      "name": "Undead Lord",
-      "slug": "undead-lord",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Undead Lord",
         "titleNumber": "#170",
-        "icon": "",
         "title": "Undead Lord",
         "obtainment": "Collect 500 Bones. (Obtainable during Halloween Event.)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bones",
-      "titleNumber": "#170",
-      "title": "Undead Lord",
-      "obtainment": "Collect 500 Bones. (Obtainable during Halloween Event.)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "undead-lord",
+        "section": "Items",
+        "sortOrder": 170,
+        "image": null
+      }
     },
     {
-      "name": "Death King",
-      "slug": "death-king",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Death King",
         "titleNumber": "#171",
-        "icon": "",
         "title": "Death King",
         "obtainment": "Collect 2,000 Bones. (Obtainable during Halloween Event.)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bones",
-      "titleNumber": "#171",
-      "title": "Death King",
-      "obtainment": "Collect 2,000 Bones. (Obtainable during Halloween Event.)",
-      "image": "/Blox%20Fruits/Titles/death-king.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/24/Title_Death_King.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "death-king",
+        "section": "Items",
+        "sortOrder": 171,
+        "image": "/Blox%20Fruits/Titles/death-king.webp"
+      }
     },
     {
-      "name": "Shinigami",
-      "slug": "shinigami",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Shinigami",
         "titleNumber": "#172",
-        "icon": "",
         "title": "Shinigami",
         "obtainment": "Defeat the Soul Reaper once."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Soul_Reaper",
-      "titleNumber": "#172",
-      "title": "Shinigami",
-      "obtainment": "Defeat the Soul Reaper once.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "shinigami",
+        "section": "Items",
+        "sortOrder": 172,
+        "image": null
+      }
     },
     {
-      "name": "The Devil's Luck",
-      "slug": "the-devil-s-luck",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Devil's Luck",
         "titleNumber": "#173",
-        "icon": "",
         "title": "The Devil's Luck",
         "obtainment": "Obtain Hallow Essence and God's Chalice from \"Praying\"."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hallow_Essence",
-      "titleNumber": "#173",
-      "title": "The Devil's Luck",
-      "obtainment": "Obtain Hallow Essence and God's Chalice from \"Praying\".",
-      "image": "/Blox%20Fruits/Titles/the-devil-s-luck.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0a/Title_The_Devil%27s_Luck.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "the-devil-s-luck",
+        "section": "Items",
+        "sortOrder": 173,
+        "image": "/Blox%20Fruits/Titles/the-devil-s-luck.webp"
+      }
     },
     {
-      "name": "Dough Commander",
-      "slug": "dough-commander",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Dough Commander",
         "titleNumber": "#174",
-        "icon": "",
         "title": "Dough Commander",
         "obtainment": "Defeat the Cake Prince."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cake_Prince",
-      "titleNumber": "#174",
-      "title": "Dough Commander",
-      "obtainment": "Defeat the Cake Prince.",
-      "image": "/Blox%20Fruits/Titles/dough-commander.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8d/Title_Dough_Commander.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "dough-commander",
+        "section": "Items",
+        "sortOrder": 174,
+        "image": "/Blox%20Fruits/Titles/dough-commander.webp"
+      }
     },
     {
-      "name": "Dough King",
-      "slug": "dough-king",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Dough King",
         "titleNumber": "#175",
-        "icon": "",
         "title": "Dough King",
         "obtainment": "Defeat the Dough King."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dough_King",
-      "titleNumber": "#175",
-      "title": "Dough King",
-      "obtainment": "Defeat the Dough King.",
-      "image": "/Blox%20Fruits/Titles/dough-king.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f3/Title_Dough_King.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "dough-king",
+        "section": "Items",
+        "sortOrder": 175,
+        "image": "/Blox%20Fruits/Titles/dough-king.webp"
+      }
     },
     {
-      "name": "Terrorbringer",
-      "slug": "terrorbringer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Terrorbringer",
         "titleNumber": "#176",
-        "icon": "",
         "title": "Terrorbringer",
         "obtainment": "Defeat 10 Terrorsharks."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Terrorshark",
-      "titleNumber": "#176",
-      "title": "Terrorbringer",
-      "obtainment": "Defeat 10 Terrorsharks.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "terrorbringer",
+        "section": "Items",
+        "sortOrder": 176,
+        "image": null
+      }
     },
     {
-      "name": "Serpent Slayer",
-      "slug": "serpent-slayer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Serpent Slayer",
         "titleNumber": "#177",
-        "icon": "",
         "title": "Serpent Slayer",
         "obtainment": "Defeat the Leviathan."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Leviathan",
-      "titleNumber": "#177",
-      "title": "Serpent Slayer",
-      "obtainment": "Defeat the Leviathan.",
-      "image": "/Blox%20Fruits/Titles/serpent-slayer.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/dd/Title_Serpent_Slayer.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "serpent-slayer",
+        "section": "Items",
+        "sortOrder": 177,
+        "image": "/Blox%20Fruits/Titles/serpent-slayer.webp"
+      }
     },
     {
-      "name": "Abyss Tamer",
-      "slug": "abyss-tamer",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Abyss Tamer",
         "titleNumber": "#178",
-        "icon": "",
         "title": "Abyss Tamer",
         "obtainment": "Clear 50 Sea Events."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sea_Events",
-      "titleNumber": "#178",
-      "title": "Abyss Tamer",
-      "obtainment": "Clear 50 Sea Events.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "abyss-tamer",
+        "section": "Items",
+        "sortOrder": 178,
+        "image": null
+      }
     },
     {
-      "name": "Nautical Bane",
-      "slug": "nautical-bane",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Nautical Bane",
         "titleNumber": "#179",
-        "icon": "",
         "title": "Nautical Bane",
         "obtainment": "Clear 200 Sea Events."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sea_Events",
-      "titleNumber": "#179",
-      "title": "Nautical Bane",
-      "obtainment": "Clear 200 Sea Events.",
-      "image": "/Blox%20Fruits/Titles/nautical-bane.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d3/Title_Nautical_Bane.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "nautical-bane",
+        "section": "Items",
+        "sortOrder": 179,
+        "image": "/Blox%20Fruits/Titles/nautical-bane.webp"
+      }
     },
     {
-      "name": "Tailed Beast",
-      "slug": "tailed-beast",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Tailed Beast",
         "titleNumber": "#180",
-        "icon": "",
         "title": "Tailed Beast",
         "obtainment": "Acquire from the Kitsune Shrine."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kitsune_Shrine",
-      "titleNumber": "#180",
-      "title": "Tailed Beast",
-      "obtainment": "Acquire from the Kitsune Shrine.",
-      "image": "/Blox%20Fruits/Titles/tailed-beast.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/50/Title_Tailed_Beast.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "tailed-beast",
+        "section": "Items",
+        "sortOrder": 180,
+        "image": "/Blox%20Fruits/Titles/tailed-beast.webp"
+      }
     },
     {
-      "name": "Liberator of the Sky",
-      "slug": "liberator-of-the-sky",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Liberator of the Sky",
         "titleNumber": "#181",
-        "icon": "",
         "title": "Liberator of the Sky",
         "obtainment": "Defeat the Tyrant of the Skies."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tyrant_of_the_Skies",
-      "titleNumber": "#181",
-      "title": "Liberator of the Sky",
-      "obtainment": "Defeat the Tyrant of the Skies.",
-      "image": "/Blox%20Fruits/Titles/liberator-of-the-sky.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/09/Title_Liberator_of_the_Sky.png/revision/latest/scale-to-width-down/50?cb=20260112223718"
+      "system": {
+        "slug": "liberator-of-the-sky",
+        "section": "Items",
+        "sortOrder": 181,
+        "image": "/Blox%20Fruits/Titles/liberator-of-the-sky.webp"
+      }
     },
     {
-      "name": "(To be added.)",
-      "slug": "to-be-added",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "(To be added.)",
         "titleNumber": "#182",
-        "icon": "",
         "title": "(To be added.)",
         "obtainment": "(To be added.)"
       },
-      "wikiUrl": null,
-      "titleNumber": "#182",
-      "title": "(To be added.)",
-      "obtainment": "(To be added.)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "to-be-added",
+        "section": "Items",
+        "sortOrder": 182,
+        "image": null
+      }
     },
     {
-      "name": "Treasure Catcher",
-      "slug": "treasure-catcher",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Treasure Catcher",
         "titleNumber": "#183",
-        "icon": "",
         "title": "Treasure Catcher",
         "obtainment": "Fish up 500 treasure chests."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishing",
-      "titleNumber": "#183",
-      "title": "Treasure Catcher",
-      "obtainment": "Fish up 500 treasure chests.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "treasure-catcher",
+        "section": "Items",
+        "sortOrder": 183,
+        "image": null
+      }
     },
     {
-      "name": "Fish Wrangler",
-      "slug": "fish-wrangler",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Fish Wrangler",
         "titleNumber": "#184",
-        "icon": "",
         "title": "Fish Wrangler",
         "obtainment": "Reach fishing level 20."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishing",
-      "titleNumber": "#184",
-      "title": "Fish Wrangler",
-      "obtainment": "Reach fishing level 20.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "fish-wrangler",
+        "section": "Items",
+        "sortOrder": 184,
+        "image": null
+      }
     },
     {
-      "name": "Master Fisherman",
-      "slug": "master-fisherman",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Master Fisherman",
         "titleNumber": "#185",
-        "icon": "",
         "title": "Master Fisherman",
         "obtainment": "Reach level 100 with the fishing job."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishing",
-      "titleNumber": "#185",
-      "title": "Master Fisherman",
-      "obtainment": "Reach level 100 with the fishing job.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "master-fisherman",
+        "section": "Items",
+        "sortOrder": 185,
+        "image": null
+      }
     },
     {
-      "name": "(To be added.)",
-      "slug": "to-be-added",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "(To be added.)",
         "titleNumber": "#186",
-        "icon": "",
         "title": "(To be added.)",
         "obtainment": "(To be added.)"
       },
-      "wikiUrl": null,
-      "titleNumber": "#186",
-      "title": "(To be added.)",
-      "obtainment": "(To be added.)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "to-be-added",
+        "section": "Items",
+        "sortOrder": 186,
+        "image": null
+      }
     },
     {
-      "name": "Fisherman",
-      "slug": "fisherman",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Fisherman",
         "titleNumber": "#187",
-        "icon": "",
         "title": "Fisherman",
         "obtainment": "Obtain the Fishing Rod."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishing_Rod",
-      "titleNumber": "#187",
-      "title": "Fisherman",
-      "obtainment": "Obtain the Fishing Rod.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "fisherman",
+        "section": "Items",
+        "sortOrder": 187,
+        "image": null
+      }
     },
     {
-      "name": "true egglord",
-      "slug": "true-egglord",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "true egglord",
         "titleNumber": "#188",
-        "icon": "",
         "title": "true egglord",
         "obtainment": "Defeat the indra Egg."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Indra_Egg",
-      "titleNumber": "#188",
-      "title": "true egglord",
-      "obtainment": "Defeat the indra Egg.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "true-egglord",
+        "section": "Items",
+        "sortOrder": 188,
+        "image": null
+      }
     },
     {
-      "name": "The Debugger",
-      "slug": "the-debugger",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Debugger",
         "titleNumber": "#189",
-        "icon": "",
         "title": "The Debugger",
         "obtainment": "Defeat Luckymaxer."
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Luckymaxer_(Boss)",
-      "titleNumber": "#189",
-      "title": "The Debugger",
-      "obtainment": "Defeat Luckymaxer.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-debugger",
+        "section": "Items",
+        "sortOrder": 189,
+        "image": null
+      }
     },
     {
-      "name": "(To be added.)",
-      "slug": "to-be-added",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "(To be added.)",
         "titleNumber": "#190",
-        "icon": "",
         "title": "(To be added.)",
         "obtainment": "(To be added.)"
       },
-      "wikiUrl": null,
-      "titleNumber": "#190",
-      "title": "(To be added.)",
-      "obtainment": "(To be added.)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "to-be-added",
+        "section": "Items",
+        "sortOrder": 190,
+        "image": null
+      }
     },
     {
-      "name": "Dragon Talon Prodigy",
-      "slug": "dragon-talon-prodigy",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Dragon Talon Prodigy",
         "titleNumber": "#191",
-        "icon": "",
         "title": "Dragon Talon Prodigy",
         "obtainment": "Defeat the content creator Uzoth."
       },
-      "wikiUrl": null,
-      "titleNumber": "#191",
-      "title": "Dragon Talon Prodigy",
-      "obtainment": "Defeat the content creator Uzoth.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "dragon-talon-prodigy",
+        "section": "Items",
+        "sortOrder": 191,
+        "image": null
+      }
     },
     {
-      "name": "Brazilian Warrior",
-      "slug": "brazilian-warrior",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Brazilian Warrior",
         "titleNumber": "#192",
-        "icon": "",
         "title": "Brazilian Warrior",
         "obtainment": "Defeat the content creator luanclashwar."
       },
-      "wikiUrl": null,
-      "titleNumber": "#192",
-      "title": "Brazilian Warrior",
-      "obtainment": "Defeat the content creator luanclashwar.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "brazilian-warrior",
+        "section": "Items",
+        "sortOrder": 192,
+        "image": null
+      }
     },
     {
-      "name": "(To be added.)",
-      "slug": "to-be-added",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "(To be added.)",
         "titleNumber": "#193",
-        "icon": "",
         "title": "(To be added.)",
         "obtainment": "(To be added.)"
       },
-      "wikiUrl": null,
-      "titleNumber": "#193",
-      "title": "(To be added.)",
-      "obtainment": "(To be added.)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "to-be-added",
+        "section": "Items",
+        "sortOrder": 193,
+        "image": null
+      }
     },
     {
-      "name": "Monkey King",
-      "slug": "monkey-king",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Monkey King",
         "titleNumber": "#194",
-        "icon": "",
         "title": "Monkey King",
         "obtainment": "Defeat the content creator jinn._."
       },
-      "wikiUrl": null,
-      "titleNumber": "#194",
-      "title": "Monkey King",
-      "obtainment": "Defeat the content creator jinn._.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "monkey-king",
+        "section": "Items",
+        "sortOrder": 194,
+        "image": null
+      }
     },
     {
-      "name": "Skull Squad",
-      "slug": "skull-squad",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Skull Squad",
         "titleNumber": "#195",
-        "icon": "",
         "title": "Skull Squad",
         "obtainment": "Defeat the content creator Numberskull_."
       },
-      "wikiUrl": null,
-      "titleNumber": "#195",
-      "title": "Skull Squad",
-      "obtainment": "Defeat the content creator Numberskull_.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "skull-squad",
+        "section": "Items",
+        "sortOrder": 195,
+        "image": null
+      }
     },
     {
-      "name": "LockGod",
-      "slug": "lockgod",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "LockGod",
         "titleNumber": "#196",
-        "icon": "",
         "title": "LockGod",
         "obtainment": "Defeat the content creator imfiji."
       },
-      "wikiUrl": null,
-      "titleNumber": "#196",
-      "title": "LockGod",
-      "obtainment": "Defeat the content creator imfiji.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "lockgod",
+        "section": "Items",
+        "sortOrder": 196,
+        "image": null
+      }
     },
     {
-      "name": "Touch Grass",
-      "slug": "touch-grass",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Touch Grass",
         "titleNumber": "#197",
-        "icon": "",
         "title": "Touch Grass",
         "obtainment": "N/A; title owner wishes to keep it secret."
       },
-      "wikiUrl": null,
-      "titleNumber": "#197",
-      "title": "Touch Grass",
-      "obtainment": "N/A; title owner wishes to keep it secret.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "touch-grass",
+        "section": "Items",
+        "sortOrder": 197,
+        "image": null
+      }
     },
     {
-      "name": "Devious Bacon",
-      "slug": "devious-bacon",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Devious Bacon",
         "titleNumber": "#198",
-        "icon": "",
         "title": "Devious Bacon",
         "obtainment": "Defeat the content creator koopekool."
       },
-      "wikiUrl": null,
-      "titleNumber": "#198",
-      "title": "Devious Bacon",
-      "obtainment": "Defeat the content creator koopekool.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "devious-bacon",
+        "section": "Items",
+        "sortOrder": 198,
+        "image": null
+      }
     },
     {
-      "name": "AboveTheKloudz",
-      "slug": "abovethekloudz",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "AboveTheKloudz",
         "titleNumber": "#199",
-        "icon": "",
         "title": "AboveTheKloudz",
         "obtainment": "Defeat the content creator WinterKloudz."
       },
-      "wikiUrl": null,
-      "titleNumber": "#199",
-      "title": "AboveTheKloudz",
-      "obtainment": "Defeat the content creator WinterKloudz.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "abovethekloudz",
+        "section": "Items",
+        "sortOrder": 199,
+        "image": null
+      }
     },
     {
-      "name": "Mammoth Fan Club",
-      "slug": "mammoth-fan-club",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Mammoth Fan Club",
         "titleNumber": "#200",
-        "icon": "",
         "title": "Mammoth Fan Club",
         "obtainment": "Defeat the content creator Senpirates."
       },
-      "wikiUrl": null,
-      "titleNumber": "#200",
-      "title": "Mammoth Fan Club",
-      "obtainment": "Defeat the content creator Senpirates.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "mammoth-fan-club",
+        "section": "Items",
+        "sortOrder": 200,
+        "image": null
+      }
     },
     {
-      "name": "Dooly Gang",
-      "slug": "dooly-gang",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Dooly Gang",
         "titleNumber": "#201",
-        "icon": "",
         "title": "Dooly Gang",
         "obtainment": "Defeat the content creator Vindooly."
       },
-      "wikiUrl": null,
-      "titleNumber": "#201",
-      "title": "Dooly Gang",
-      "obtainment": "Defeat the content creator Vindooly.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "dooly-gang",
+        "section": "Items",
+        "sortOrder": 201,
+        "image": null
+      }
     },
     {
-      "name": "Baldie",
-      "slug": "baldie",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Baldie",
         "titleNumber": "#202",
-        "icon": "",
         "title": "Baldie",
         "obtainment": "Defeat the content creator Woozer."
       },
-      "wikiUrl": null,
-      "titleNumber": "#202",
-      "title": "Baldie",
-      "obtainment": "Defeat the content creator Woozer.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "baldie",
+        "section": "Items",
+        "sortOrder": 202,
+        "image": null
+      }
     },
     {
-      "name": "Light God",
-      "slug": "light-god",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Light God",
         "titleNumber": "#203",
-        "icon": "",
         "title": "Light God",
         "obtainment": "Defeat the content creator jujubotv."
       },
-      "wikiUrl": null,
-      "titleNumber": "#203",
-      "title": "Light God",
-      "obtainment": "Defeat the content creator jujubotv.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "light-god",
+        "section": "Items",
+        "sortOrder": 203,
+        "image": null
+      }
     },
     {
-      "name": "The Living Cataclysm",
-      "slug": "the-living-cataclysm",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "The Living Cataclysm",
         "titleNumber": "#204",
-        "icon": "",
         "title": "The Living Cataclysm",
         "obtainment": "Defeat the content creator HyperJay06."
       },
-      "wikiUrl": null,
-      "titleNumber": "#204",
-      "title": "The Living Cataclysm",
-      "obtainment": "Defeat the content creator HyperJay06.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "the-living-cataclysm",
+        "section": "Items",
+        "sortOrder": 204,
+        "image": null
+      }
     },
     {
-      "name": "God of Grinding",
-      "slug": "god-of-grinding",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "God of Grinding",
         "titleNumber": "#205",
-        "icon": "",
         "title": "God of Grinding",
         "obtainment": "Defeat the content creator CRBoneMillion."
       },
-      "wikiUrl": null,
-      "titleNumber": "#205",
-      "title": "God of Grinding",
-      "obtainment": "Defeat the content creator CRBoneMillion.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "god-of-grinding",
+        "section": "Items",
+        "sortOrder": 205,
+        "image": null
+      }
     },
     {
-      "name": "Pls Fruit",
-      "slug": "pls-fruit",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Pls Fruit",
         "titleNumber": "#206",
-        "icon": "",
         "title": "Pls Fruit",
         "obtainment": "Defeat the content creator jetski2saucy."
       },
-      "wikiUrl": null,
-      "titleNumber": "#206",
-      "title": "Pls Fruit",
-      "obtainment": "Defeat the content creator jetski2saucy.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "pls-fruit",
+        "section": "Items",
+        "sortOrder": 206,
+        "image": null
+      }
     },
     {
-      "name": "Meteor Lord",
-      "slug": "meteor-lord",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Meteor Lord",
         "titleNumber": "#207",
-        "icon": "",
         "title": "Meteor Lord",
         "obtainment": "Defeat the content creator MeteoricRBLX."
       },
-      "wikiUrl": null,
-      "titleNumber": "#207",
-      "title": "Meteor Lord",
-      "obtainment": "Defeat the content creator MeteoricRBLX.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "meteor-lord",
+        "section": "Items",
+        "sortOrder": 207,
+        "image": null
+      }
     },
     {
-      "name": "Divinely Inspired",
-      "slug": "divinely-inspired",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Divinely Inspired",
         "titleNumber": "#208",
-        "icon": "",
         "title": "Divinely Inspired",
         "obtainment": "Defeat the content creator divinityblox."
       },
-      "wikiUrl": null,
-      "titleNumber": "#208",
-      "title": "Divinely Inspired",
-      "obtainment": "Defeat the content creator divinityblox.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "divinely-inspired",
+        "section": "Items",
+        "sortOrder": 208,
+        "image": null
+      }
     },
     {
-      "name": "(To be added.)",
-      "slug": "to-be-added",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "(To be added.)",
         "titleNumber": "#209",
-        "icon": "",
         "title": "(To be added.)",
         "obtainment": "(To be added.)"
       },
-      "wikiUrl": null,
-      "titleNumber": "#209",
-      "title": "(To be added.)",
-      "obtainment": "(To be added.)",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "to-be-added",
+        "section": "Items",
+        "sortOrder": 209,
+        "image": null
+      }
     },
     {
-      "name": "Samurai Dorado",
-      "slug": "samurai-dorado",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Samurai Dorado",
         "titleNumber": "#210",
-        "icon": "",
         "title": "Samurai Dorado",
         "obtainment": "Defeat the content creator Bloxyy0."
       },
-      "wikiUrl": null,
-      "titleNumber": "#210",
-      "title": "Samurai Dorado",
-      "obtainment": "Defeat the content creator Bloxyy0.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "samurai-dorado",
+        "section": "Items",
+        "sortOrder": 210,
+        "image": null
+      }
     },
     {
-      "name": "Fica Frio Aí",
-      "slug": "fica-frio-ai",
-      "fields": {
-        "column1": "",
+      "item": {
+        "name": "Fica Frio Aí",
         "titleNumber": "#211",
-        "icon": "",
         "title": "Fica Frio Aí",
         "obtainment": "Defeat the content creator GeladoYT."
       },
-      "wikiUrl": null,
-      "titleNumber": "#211",
-      "title": "Fica Frio Aí",
-      "obtainment": "Defeat the content creator GeladoYT.",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "fica-frio-ai",
+        "section": "Items",
+        "sortOrder": 211,
+        "image": null
+      }
     }
   ]
 }

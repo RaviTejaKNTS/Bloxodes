@@ -25,6 +25,7 @@ export type GameCollectionViewConfig = {
   subtitleKeys?: string[];
   descriptionKey?: string;
   cardDescriptionKey?: string;
+  cardFields?: string[];
   fieldPresentation?: Record<string, CollectionFieldPresentation | CollectionFieldKind>;
   hideImages?: boolean;
 };
@@ -90,104 +91,6 @@ type BooleanishValue = {
   value: boolean;
   detail?: string;
   exact: boolean;
-};
-
-const CARD_STAT_OVERRIDES: Record<string, string[]> = {
-  "sell-lemons-income-sources": [
-    "unlock",
-    "role",
-    "managerAutomation",
-    "bestUse"
-  ],
-  "sell-lemons-powers": ["effect", "bestUse", "priority"],
-  "sell-lemons-secret-unlocks": ["type", "location", "stepType", "rewardEffect"],
-  "sell-lemons-evolution-stages": [
-    "stage",
-    "requirement",
-    "multiplierEffect",
-    "investorResetImpact"
-  ],
-  "sell-lemons-locations": [
-    "stage",
-    "unlock",
-    "connectedSystem",
-    "travelNote"
-  ],
-  "blox-fruits-accessories": ["displaySea", "bestFor", "damage", "defense", "mobility", "utility"],
-  "blox-fruits-fruits": ["displayType", "moneyPrice", "permanentPrice", "awakeningCost", "status", "baseFruit"],
-  "blox-fruits-swords": ["displaySea", "sourceRoute", "displayCost", "progressionUse"],
-  "blox-fruits-fighting-styles": [
-    "sourceTeacher",
-    "costSummary",
-    "masteryGate",
-    "extraUnlock",
-    "progressionRole",
-    "bestFor"
-  ],
-  "blox-fruits-materials": ["displaySea", "sourceRoute", "use", "farmRoute", "craftCost"],
-  "blox-fruits-races": ["unlockRoute", "rerollStatus", "bestFor", "mainStrength", "mainLimit"],
-  "blox-fruits-bosses": ["displaySea", "location", "level", "respawnAccess", "dropsRewards", "routeUse"],
-  "blox-fruits-enemies": ["seaStage", "level", "islandRegion", "questSource", "dropsRewards"],
-  "blox-fruits-locations": ["displaySea", "levelRange", "locationType", "routeRole", "accessTravel"],
-  "blox-fruits-quests": ["displaySea", "levelRequirement", "islandArea", "questGiverName", "objective"],
-  "blox-fruits-sea-events": ["dangerLevel", "displayArea", "spawnAccess", "mainReward", "requiredSetup"],
-  "blox-fruits-abilities": ["unlockRoute", "displayCost", "teacherSource", "levelMasteryRequirement", "keyUse"],
-  "blox-fruits-aura-stages": ["displayStage", "coverage", "auraExpNeeded", "bonusEffect", "progressionNote"],
-  "blox-fruits-aura-visuals": ["visualStage", "bodyCoverage", "armsVisual", "legsVisual", "statEffect", "equipUseNote"],
-  "blox-fruits-boats": ["sourceAccess", "displayPrice", "displayHealth", "displaySeats", "displaySpeed"],
-  "blox-fruits-guns": ["displaySea", "sourceRoute", "costOrDrop", "requirementMastery", "combatRole"],
-  "blox-fruits-instinct-levels": ["displayLevel", "expRange", "baseDodges", "progressNote"],
-  "blox-fruits-npcs": ["npcRole", "displaySea", "displayLocation", "purpose", "combatLevel"],
-  "blox-fruits-titles": ["displayTitleNumber", "unlockRequirement", "unlockRoute", "relatedTarget", "availabilityNote"],
-  "blox-fruits-special-titles": ["grantRoute", "holderTarget", "obtainmentNote", "normalPlayerRoute"],
-  "blox-fruits-title-colors": ["unlockRequirement", "titleCountNeeded", "unlockStage", "visualRole"],
-  "adopt-me-pets": ["source", "cost", "chance", "availability"],
-  "sailor-piece-fruits": ["bestFor", "combatRole", "mainStrength", "mainLimit", "spinChance"],
-  "sailor-piece-islands": ["bosses", "mainRole", "keyContent", "progressionUse"],
-  "sailor-piece-accessories": ["defense", "damage", "damageReduction", "sourceRoute", "dropOrCost", "bestFor"],
-  "sailor-piece-dungeons": ["runType", "level", "entryItem", "location", "mainRewards"],
-  "sailor-piece-races": ["rollRarity", "bestFor", "coreBonus", "hasV4", "requiredFor"],
-  "sailor-piece-traits": ["damageMultiplier", "defenseMultiplier", "cooldownReduction", "bestFor"],
-  "sailor-piece-bloodlines": ["damage", "hp", "luck", "weaponBonus", "sourcePity"],
-  "sailor-piece-bosses": ["difficulty", "level", "hp", "respawnAccess", "notableDrops"],
-  "sailor-piece-swords": ["baseDamage", "attackSpeed", "masteryRequired", "sourceRoute", "bestFor", "unlockNote"],
-  "sailor-piece-guilds": ["location", "encounter", "dropChance", "spawnRequirement", "maxBonus"],
-  "sailor-piece-titles": ["tier", "bonus", "unlockRoute", "requirement", "dropOrPity"],
-  "sailor-piece-melee-specs": ["statPriority", "unlockRoute", "sourceLocation", "abilityCount", "signatureMove"],
-  "sailor-piece-runes": ["displayRarity", "source", "bonusType", "baseEffect", "maxEffect"],
-  "sailor-piece-clans": ["rarity", "bestFor", "bonusSummary", "passive", "requirement"],
-  "sailor-piece-relics": ["effect", "recipe", "partRoute", "bestFor"],
-  "sailor-piece-haki": ["role", "unlockRoute", "requirements", "maxLevel", "maxEffect", "levelingRoute"],
-  "rivals-wraps": ["source", "sourceType", "appliesTo", "sourceWeapon", "availability", "motion", "specialNote"],
-  "rivals-finishers": ["source", "availability", "rarity"],
-  "rivals-ugc": ["itemType", "price", "availability", "rewardSummary", "creatorName", "robloxId"],
-  "jujutsu-shenanigans-characters": ["availability", "cost", "hp", "role"],
-  "jujutsu-shenanigans-domains": ["availability", "character", "duration", "domainType"],
-  "jujutsu-shenanigans-items": ["availability", "source", "price", "damageHeal", "location"],
-  "jujutsu-shenanigans-gamemodes": ["availability", "access", "lives", "mapPool", "rewardSummary"],
-  "jujutsu-shenanigans-maps": ["status", "modeAccess", "arenaType", "bestFor"],
-  "jujutsu-shenanigans-emotes": ["availability", "source", "costObtainment", "movement"],
-  "jujutsu-shenanigans-cosmetics": ["availability", "unlockRoute", "cost", "type", "audioStatus"],
-  "jujutsu-shenanigans-titles": ["availability", "requirement", "titleType"],
-  "jujutsu-shenanigans-interactables": ["availability", "location", "cost", "baseDamage", "type"],
-  "jujutsu-shenanigans-achievements": ["availability", "requirement", "reward", "difficulty", "modeOrCharacter"],
-  "jujutsu-shenanigans-build-blocks": ["availability", "category", "inputs", "outputs", "builderUse"],
-  "jujutsu-shenanigans-skill-builder-nodes": ["status", "nodeType", "valueType", "defaultOrRange", "usedFor"],
-  ores: ["dropChance", "multiplier", "sellPrice", "trait"],
-  weapons: ["baseDamage", "attackSpeed", "range", "sellPrice"],
-  armors: ["baseHealth", "sellPrice", "chance"],
-  pickaxes: ["power", "speed", "luck", "cost"],
-  runes: ["primaryDrop"],
-  races: ["rollChance", "damage", "health", "speed"],
-  essences: [],
-  totems: ["cost"],
-  potions: ["cost"],
-  enemies: ["health", "damage", "gold", "experience"],
-  npcs: [],
-  locations: [],
-  quests: [],
-  skills: [],
-  blueprints: []
 };
 
 function resolveImageSrc(image: string | null | undefined): string | null {
@@ -486,7 +389,7 @@ function buildFieldDefinitions(config: GameCollectionViewConfig): CollectionPres
   const seen = new Set<string>();
   const descriptionKey = getPrimaryDescriptionKey(config);
   const statMap = new Map((config.stats ?? []).map((stat) => [stat.key, stat.label]));
-  const preferredKeys = CARD_STAT_OVERRIDES[config.slug] ?? (config.stats ?? []).map((stat) => stat.key);
+  const preferredKeys = config.cardFields ?? (config.stats ?? []).map((stat) => stat.key);
 
   addUniqueField(
     fields,

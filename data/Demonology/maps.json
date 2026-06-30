@@ -1,309 +1,254 @@
 {
   "meta": {
-    "title": "Demonology Job Sites (Maps)",
-    "updatedAt": "2026-06-25",
-    "groupBy": "collectionSection",
-    "columns": [
-      "name",
-      "slug",
-      "collectionSection",
-      "image",
+    "schemaVersion": 2,
+    "game": "Demonology",
+    "gameSlug": "demonology",
+    "collection": "maps",
+    "route": "/wiki/demonology/maps",
+    "catalogCode": "demonology-maps",
+    "itemFields": [
       "cardSummary",
       "size",
       "unlockLevel",
       "floors",
       "released",
-      "notes"
+      "notes",
+      "unlockLevelDisplay"
     ],
-    "defaultCardFields": [
+    "columns": [
+      "cardSummary",
+      "size",
       "unlockLevel",
       "floors",
-      "released"
+      "released",
+      "notes",
+      "unlockLevelDisplay"
     ],
-    "sources": [
-      {
-        "label": "Demonology Wiki (Fandom) - Job Sites (canonical roster, sizes, unlock levels)",
-        "url": "https://demonology.fandom.com/wiki/Job_Sites",
-        "accessed": "2026-06-25"
-      },
-      {
-        "label": "Demonology Wiki (Fandom) - per-map pages (Fenway Drive, Juniper Road, Lincoln Street, Bodega, Lilim Lane, Cafe, Bridgewood Drive, Oakbridge Estates, Prison, School, Asylum)",
-        "url": "https://demonology.fandom.com/wiki/Category:Job_Sites",
-        "accessed": "2026-06-25"
-      },
-      {
-        "label": "Roblox - [UPD] Demonology (game identity only)",
-        "url": "https://www.roblox.com/games/6170143659",
-        "accessed": "2026-06-25"
-      }
-    ],
-    "sourceCount": 3,
-    "sectionCounts": {
-      "Small Job Sites": 4,
-      "Medium Job Sites": 4,
-      "Large Job Sites": 3
-    },
-    "sectionOrder": [
-      "Small Job Sites",
-      "Medium Job Sites",
-      "Large Job Sites"
-    ],
-    "sourceNotes": [
-      "Roster locked to the live canonical Demonology Fandom Job Sites page: 4 Small, 4 Medium, 3 Large = 11 maps total. The page's intro sentence explicitly states '4 Small Job Sites, 4 Medium Job Sites, and 3 Large Job Sites', and the per-map sections enumerate exactly those 11.",
-      "The brief's open 10-vs-11 question resolves to 11. The 11th map is Oakbridge Estates, a current 4th Medium job site (released V1.9.0, unlocked at Level 25). It is real and in the live roster, not invented.",
-      "The stale/fictional 'Office' map (from demonology.wiki) is correctly absent from the live Fandom roster and is NOT included.",
-      "Disputed unlock levels resolved against the live per-map infoboxes: Bodega = Level 6, Lilim Lane = Level 4, Prison = Level 9. All three are taken from the 'Unlocked at' infobox row on the Job Sites page.",
-      "Fenway Drive, Juniper Road, and Lincoln Street are starter maps shown as 'Level 0 (Starter)' on the wiki; represented here as unlockLevel 0 with a 'Default' display intent.",
-      "Floor counts: Fandom does not publish an explicit numeric floor field. Floors here are derived from the room/area listings on each map (e.g. F1/F2 hallway references, Basement rooms, multi-story room sets). Floors are conservative and flagged as derived; treat as best-effort, not a published stat. Where a map's storey count is not clearly derivable, floors is null.",
-      "Notes/cardSummary are written in original wording from the source facts (theme, release order, size relevance). No active-code-style or dated/freshness language is used; copy is evergreen.",
-      "Images are deferred to the image gate. Every image field is null at this stage. The Fandom Job Sites page exposes a map-select icon per site; the image gate will source/capture one clean screenshot per map and wire local paths (best-effort; a missing image for one or two maps is not a blocker)."
-    ],
-    "imageCount": 0,
-    "missingImageCount": 11,
-    "imageStatus": "deferred to image gate; null at this stage"
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Small Job Sites",
+        "Medium Job Sites",
+        "Large Job Sites"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "unlockLevel",
+        "floors",
+        "released"
+      ],
+      "tableFields": [
+        "cardSummary",
+        "size",
+        "unlockLevel",
+        "floors",
+        "released",
+        "notes",
+        "unlockLevelDisplay"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Fenway Drive",
-      "slug": "fenway-drive",
-      "collectionSection": "Small Job Sites",
-      "image": "/Demonology/maps/fenway-drive.png",
-      "cardSummary": "A small suburban listing flagged by a worried real estate agent, and one of the three starter homes available from the very beginning.",
-      "size": "Small",
-      "unlockLevel": 0,
-      "unlockLevelDisplay": "Default",
-      "floors": 1,
-      "released": "V1.0.0 (Release)",
-      "notes": "One of the original launch job sites, unlocked from the start with no level requirement. A compact single-family home that suits quick, low-risk investigations and early money runs.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Fenway_Drive",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Fenway_Drive"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Size (Small) and 'Unlocked at Level 0 (Starter)' confirmed from the live Job Sites infobox. Floors derived from single-home room set; treated as 1.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Fenway Drive",
+        "cardSummary": "A small suburban listing flagged by a worried real estate agent, and one of the three starter homes available from the very beginning.",
+        "size": "Small",
+        "unlockLevel": 0,
+        "floors": 1,
+        "released": "V1.0.0 (Release)",
+        "notes": "One of the original launch job sites, unlocked from the start with no level requirement. A compact single-family home that suits quick, low-risk investigations and early money runs.",
+        "unlockLevelDisplay": "Default"
+      },
+      "system": {
+        "slug": "fenway-drive",
+        "section": "Small Job Sites",
+        "sortOrder": 1,
+        "image": "/Demonology/maps/fenway-drive.png"
+      }
     },
     {
-      "name": "Juniper Road",
-      "slug": "juniper-road",
-      "collectionSection": "Small Job Sites",
-      "image": "/Demonology/maps/juniper-road.png",
-      "cardSummary": "A small reported-haunting house and one of the tightest maps in the game, making it a popular pick for fast, efficient runs.",
-      "size": "Small",
-      "unlockLevel": 0,
-      "unlockLevelDisplay": "Default",
-      "floors": 1,
-      "released": "V1.0.0 (Release)",
-      "notes": "A launch job site available from the start. Its small, compact layout means short walking distances between rooms, which is why many players favor it for quick investigations.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Juniper_Road",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Juniper_Road"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Size (Small) and 'Unlocked at Level 0 (Starter)' confirmed from the live Job Sites infobox. Floors derived from single-home room set; treated as 1.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Juniper Road",
+        "cardSummary": "A small reported-haunting house and one of the tightest maps in the game, making it a popular pick for fast, efficient runs.",
+        "size": "Small",
+        "unlockLevel": 0,
+        "floors": 1,
+        "released": "V1.0.0 (Release)",
+        "notes": "A launch job site available from the start. Its small, compact layout means short walking distances between rooms, which is why many players favor it for quick investigations.",
+        "unlockLevelDisplay": "Default"
+      },
+      "system": {
+        "slug": "juniper-road",
+        "section": "Small Job Sites",
+        "sortOrder": 2,
+        "image": "/Demonology/maps/juniper-road.png"
+      }
     },
     {
-      "name": "Lincoln Street",
-      "slug": "lincoln-street",
-      "collectionSection": "Small Job Sites",
-      "image": "/Demonology/maps/lincoln-street.png",
-      "cardSummary": "A small family home with a basement, called in by residents reporting paranormal activity, available from the start of the game.",
-      "size": "Small",
-      "unlockLevel": 0,
-      "unlockLevelDisplay": "Default",
-      "floors": 2,
-      "released": "V1.0.0 (Release)",
-      "notes": "An original launch job site unlocked from the start. Unlike the other starter homes it includes a basement level, giving it more spawn areas to search despite its small footprint.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Lincoln_Street",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Lincoln_Street"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Size (Small) and 'Unlocked at Level 0 (Starter)' confirmed from the live Job Sites infobox. Basement rooms appear in the spawn lists, so floors derived as 2 (ground + basement).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Lincoln Street",
+        "cardSummary": "A small family home with a basement, called in by residents reporting paranormal activity, available from the start of the game.",
+        "size": "Small",
+        "unlockLevel": 0,
+        "floors": 2,
+        "released": "V1.0.0 (Release)",
+        "notes": "An original launch job site unlocked from the start. Unlike the other starter homes it includes a basement level, giving it more spawn areas to search despite its small footprint.",
+        "unlockLevelDisplay": "Default"
+      },
+      "system": {
+        "slug": "lincoln-street",
+        "section": "Small Job Sites",
+        "sortOrder": 3,
+        "image": "/Demonology/maps/lincoln-street.png"
+      }
     },
     {
-      "name": "Bodega",
-      "slug": "bodega",
-      "collectionSection": "Small Job Sites",
-      "image": "/Demonology/maps/bodega.png",
-      "cardSummary": "An NYC corner-store bodega reported for ghostly activity, the only small job site themed as a shop rather than a home.",
-      "size": "Small",
-      "unlockLevel": 6,
-      "unlockLevelDisplay": "Level 6",
-      "floors": 2,
-      "released": "V1.4.0",
-      "notes": "A later small job site set in a New York-style corner store with a store floor plus back and upper rooms. It is the only non-residential small map and unlocks once the player reaches the required level.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Bodega",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Bodega"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "DISPUTE RESOLVED: 'Unlocked at Level 6' confirmed from the live Job Sites infobox (brief had 6 vs 7). Size Small and V1.4.0 release confirmed. Floors derived as 2 from the store/back-room and upstairs Living Room/Bedroom layout; flagged as derived.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Bodega",
+        "cardSummary": "An NYC corner-store bodega reported for ghostly activity, the only small job site themed as a shop rather than a home.",
+        "size": "Small",
+        "unlockLevel": 6,
+        "floors": 2,
+        "released": "V1.4.0",
+        "notes": "A later small job site set in a New York-style corner store with a store floor plus back and upper rooms. It is the only non-residential small map and unlocks once the player reaches the required level.",
+        "unlockLevelDisplay": "Level 6"
+      },
+      "system": {
+        "slug": "bodega",
+        "section": "Small Job Sites",
+        "sortOrder": 4,
+        "image": "/Demonology/maps/bodega.png"
+      }
     },
     {
-      "name": "Lilim Lane",
-      "slug": "lilim-lane",
-      "collectionSection": "Medium Job Sites",
-      "image": "/Demonology/maps/lilim-lane.png",
-      "cardSummary": "A traditional two-story Filipino home reported as haunted by its architect, the first medium-sized job site to unlock.",
-      "size": "Medium",
-      "unlockLevel": 4,
-      "unlockLevelDisplay": "Level 4",
-      "floors": 2,
-      "released": "V1.2.0",
-      "notes": "The earliest medium job site, themed as a traditional Filipino house spread over two floors with foyer, bedrooms, and an office. It is the natural step up once players outgrow the starter homes.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Lilim_Lane",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Lilim_Lane"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "DISPUTE RESOLVED: 'Unlocked at Level 4' confirmed from the live Job Sites infobox (brief had 4 vs 5). Size Medium and V1.2.0 release confirmed. Floors derived as 2 from F1/F2 hallway room references.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Lilim Lane",
+        "cardSummary": "A traditional two-story Filipino home reported as haunted by its architect, the first medium-sized job site to unlock.",
+        "size": "Medium",
+        "unlockLevel": 4,
+        "floors": 2,
+        "released": "V1.2.0",
+        "notes": "The earliest medium job site, themed as a traditional Filipino house spread over two floors with foyer, bedrooms, and an office. It is the natural step up once players outgrow the starter homes.",
+        "unlockLevelDisplay": "Level 4"
+      },
+      "system": {
+        "slug": "lilim-lane",
+        "section": "Medium Job Sites",
+        "sortOrder": 5,
+        "image": "/Demonology/maps/lilim-lane.png"
+      }
     },
     {
-      "name": "Cafe",
-      "slug": "cafe",
-      "collectionSection": "Medium Job Sites",
-      "image": "/Demonology/maps/cafe.png",
-      "cardSummary": "HVNLY Coffee, a medium two-floor cafe where customers were harmed by flying furniture, mixing public dining areas with back-of-house rooms.",
-      "size": "Medium",
-      "unlockLevel": 8,
-      "unlockLevelDisplay": "Level 8",
-      "floors": 2,
-      "released": "V1.3.0",
-      "notes": "A medium job site set in a coffee shop with a ground-floor coffee bar and an upper dining area plus staff rooms, an alley, and an office. Its mix of open and tight rooms makes for a varied search.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Cafe",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Cafe"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Size Medium, 'Unlocked at Level 8', and V1.3.0 release confirmed from the live Job Sites infobox. Floors derived as 2 from the 'F2 Dining Area' reference.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Cafe",
+        "cardSummary": "HVNLY Coffee, a medium two-floor cafe where customers were harmed by flying furniture, mixing public dining areas with back-of-house rooms.",
+        "size": "Medium",
+        "unlockLevel": 8,
+        "floors": 2,
+        "released": "V1.3.0",
+        "notes": "A medium job site set in a coffee shop with a ground-floor coffee bar and an upper dining area plus staff rooms, an alley, and an office. Its mix of open and tight rooms makes for a varied search.",
+        "unlockLevelDisplay": "Level 8"
+      },
+      "system": {
+        "slug": "cafe",
+        "section": "Medium Job Sites",
+        "sortOrder": 6,
+        "image": "/Demonology/maps/cafe.png"
+      }
     },
     {
-      "name": "Bridgewood Drive",
-      "slug": "bridgewood-drive",
-      "collectionSection": "Medium Job Sites",
-      "image": "/Demonology/maps/bridgewood-drive.png",
-      "cardSummary": "A high-end forest mansion reported by a wealthy client, a multi-story medium job site that is one of the larger homes in the medium tier.",
-      "size": "Medium",
-      "unlockLevel": 16,
-      "unlockLevelDisplay": "Level 16",
-      "floors": 3,
-      "released": "V1.5.0",
-      "notes": "A medium job site themed as a forest mansion, with a garage, den, multiple bedrooms, and bathrooms across more than one floor. It carries one of the higher unlock requirements in the medium tier.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Bridgewood_Drive",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Bridgewood_Drive"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Size Medium, 'Unlocked at Level 16', and V1.5.0 release confirmed from the live Job Sites infobox. Floors derived as 3 from the F2 hallway plus garage and multi-level room set; flagged as derived (brief noted three-story).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Bridgewood Drive",
+        "cardSummary": "A high-end forest mansion reported by a wealthy client, a multi-story medium job site that is one of the larger homes in the medium tier.",
+        "size": "Medium",
+        "unlockLevel": 16,
+        "floors": 3,
+        "released": "V1.5.0",
+        "notes": "A medium job site themed as a forest mansion, with a garage, den, multiple bedrooms, and bathrooms across more than one floor. It carries one of the higher unlock requirements in the medium tier.",
+        "unlockLevelDisplay": "Level 16"
+      },
+      "system": {
+        "slug": "bridgewood-drive",
+        "section": "Medium Job Sites",
+        "sortOrder": 7,
+        "image": "/Demonology/maps/bridgewood-drive.png"
+      }
     },
     {
-      "name": "Oakbridge Estates",
-      "slug": "oakbridge-estates",
-      "collectionSection": "Medium Job Sites",
-      "image": "/Demonology/maps/oakbridge-estates.png",
-      "cardSummary": "A multi-unit estate where a haunting was reported with an unknown origin, the newest and highest-unlock medium job site.",
-      "size": "Medium",
-      "unlockLevel": 25,
-      "unlockLevelDisplay": "Level 25",
-      "floors": null,
-      "released": "V1.9.0",
-      "notes": "A recent medium job site built as a cluster of estate units (rooms grouped under numbers like 561, 562, and 563), giving it a sprawling, repeated-layout feel. It has the highest unlock level of any medium map.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Oakbridge_Estates",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Oakbridge_Estates"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "This is the 11th map that resolves the brief's 10-vs-11 question. Size Medium, 'Unlocked at Level 25', and V1.9.0 release confirmed from the live Job Sites infobox. Storey count is not clearly derivable from the unit-numbered room set, so floors is null.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Oakbridge Estates",
+        "cardSummary": "A multi-unit estate where a haunting was reported with an unknown origin, the newest and highest-unlock medium job site.",
+        "size": "Medium",
+        "unlockLevel": 25,
+        "released": "V1.9.0",
+        "notes": "A recent medium job site built as a cluster of estate units (rooms grouped under numbers like 561, 562, and 563), giving it a sprawling, repeated-layout feel. It has the highest unlock level of any medium map.",
+        "unlockLevelDisplay": "Level 25"
+      },
+      "system": {
+        "slug": "oakbridge-estates",
+        "section": "Medium Job Sites",
+        "sortOrder": 8,
+        "image": "/Demonology/maps/oakbridge-estates.png"
+      }
     },
     {
-      "name": "Prison",
-      "slug": "prison",
-      "collectionSection": "Large Job Sites",
-      "image": "/Demonology/maps/prison.png",
-      "cardSummary": "A shut-down state prison where a ghost caused several injuries, the first large job site players unlock.",
-      "size": "Large",
-      "unlockLevel": 9,
-      "unlockLevelDisplay": "Level 9",
-      "floors": 2,
-      "released": "V1.0.0 (Release)",
-      "notes": "An original launch job site and the entry point into the large tier, with cells, a courtyard, an infirmary, kitchen, and library spread across multiple areas. Its long corridors make for a slower, more demanding search.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Prison",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Prison"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "DISPUTE RESOLVED: 'Unlocked at Level 9' confirmed from the live Job Sites infobox (brief had 8 vs 9). Size Large and V1.0.0 release confirmed. Floors derived as 2 from the multi-level room set; flagged as derived.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Prison",
+        "cardSummary": "A shut-down state prison where a ghost caused several injuries, the first large job site players unlock.",
+        "size": "Large",
+        "unlockLevel": 9,
+        "floors": 2,
+        "released": "V1.0.0 (Release)",
+        "notes": "An original launch job site and the entry point into the large tier, with cells, a courtyard, an infirmary, kitchen, and library spread across multiple areas. Its long corridors make for a slower, more demanding search.",
+        "unlockLevelDisplay": "Level 9"
+      },
+      "system": {
+        "slug": "prison",
+        "section": "Large Job Sites",
+        "sortOrder": 9,
+        "image": "/Demonology/maps/prison.png"
+      }
     },
     {
-      "name": "School",
-      "slug": "school",
-      "collectionSection": "Large Job Sites",
-      "image": "/Demonology/maps/school.png",
-      "cardSummary": "A school where students were hurt by objects thrown by nothing, a large multi-floor job site full of classrooms and offices.",
-      "size": "Large",
-      "unlockLevel": 13,
-      "unlockLevelDisplay": "Level 13",
-      "floors": 2,
-      "released": "V1.1.0",
-      "notes": "A large job site with classrooms, a cafeteria, library, common rooms, and offices across two floors. The many similar rooms and long hallways make it one of the more time-consuming maps to clear.",
-      "sourcePage": "https://demonology.fandom.com/wiki/School",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/School"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Size Large, 'Unlocked at Level 13', and V1.1.0 release confirmed from the live Job Sites infobox. Floors derived as 2 from 'F2 Restroom' and stairwell references.",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "School",
+        "cardSummary": "A school where students were hurt by objects thrown by nothing, a large multi-floor job site full of classrooms and offices.",
+        "size": "Large",
+        "unlockLevel": 13,
+        "floors": 2,
+        "released": "V1.1.0",
+        "notes": "A large job site with classrooms, a cafeteria, library, common rooms, and offices across two floors. The many similar rooms and long hallways make it one of the more time-consuming maps to clear.",
+        "unlockLevelDisplay": "Level 13"
+      },
+      "system": {
+        "slug": "school",
+        "section": "Large Job Sites",
+        "sortOrder": 10,
+        "image": "/Demonology/maps/school.png"
+      }
     },
     {
-      "name": "Asylum",
-      "slug": "asylum",
-      "collectionSection": "Large Job Sites",
-      "image": "/Demonology/maps/asylum.png",
-      "cardSummary": "A 20th-century lunatic asylum long rumored to be haunted, the largest job site in the game with the highest unlock level.",
-      "size": "Large",
-      "unlockLevel": 20,
-      "unlockLevelDisplay": "Level 20",
-      "floors": 3,
-      "released": "V1.7.0",
-      "notes": "The biggest job site in Demonology, themed as an old asylum with therapy rooms, an X-ray lab, sleeping halls, and a basement across multiple floors. Its size and high unlock level make it a late-game challenge.",
-      "sourcePage": "https://demonology.fandom.com/wiki/Asylum",
-      "sourceUrls": [
-        "https://demonology.fandom.com/wiki/Job_Sites",
-        "https://demonology.fandom.com/wiki/Asylum"
-      ],
-      "sourceConfidence": "high",
-      "sourceCheckedAt": "2026-06-25",
-      "verificationNote": "Size Large, 'Unlocked at Level 20', and V1.7.0 release confirmed from the live Job Sites infobox. Floors derived as 3 from F1/F2 hallway plus Basement Hallway references; flagged as derived (brief noted three-story).",
-      "imageStatus": "pending image gate"
+      "item": {
+        "name": "Asylum",
+        "cardSummary": "A 20th-century lunatic asylum long rumored to be haunted, the largest job site in the game with the highest unlock level.",
+        "size": "Large",
+        "unlockLevel": 20,
+        "floors": 3,
+        "released": "V1.7.0",
+        "notes": "The biggest job site in Demonology, themed as an old asylum with therapy rooms, an X-ray lab, sleeping halls, and a basement across multiple floors. Its size and high unlock level make it a late-game challenge.",
+        "unlockLevelDisplay": "Level 20"
+      },
+      "system": {
+        "slug": "asylum",
+        "section": "Large Job Sites",
+        "sortOrder": 11,
+        "image": "/Demonology/maps/asylum.png"
+      }
     }
   ]
 }

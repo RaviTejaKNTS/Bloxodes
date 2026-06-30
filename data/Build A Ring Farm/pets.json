@@ -1,611 +1,580 @@
 {
   "meta": {
-    "title": "Build A Ring Farm Pets",
+    "schemaVersion": 2,
     "game": "Build A Ring Farm",
     "gameSlug": "build-a-ring-farm",
     "collection": "pets",
     "route": "/wiki/build-a-ring-farm/pets",
     "catalogCode": "build-a-ring-farm-pets",
-    "updatedAt": "2026-06-27",
-    "itemCount": 30,
-    "groupBy": "collectionSection",
-    "counts": {
-      "Common": 2,
-      "Uncommon": 2,
-      "Rare": 2,
-      "Epic": 2,
-      "Legendary": 4,
-      "Secret": 8,
-      "Prismatic": 4,
-      "Divine": 4,
-      "Exotic": 2
-    },
-    "imageCoverage": {
-      "present": 30,
-      "missing": 0
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "itemFields": [
       "rarity",
       "earningsBoost",
       "source",
       "ability",
       "cardSummary",
-      "notes",
-      "sourceStatus",
-      "sourcePage",
-      "secondarySourcePage",
-      "imageStatus",
-      "sortOrder"
+      "notes"
     ],
-    "defaultCardFields": [
-      "collectionSection",
+    "columns": [
+      "rarity",
       "earningsBoost",
-      "source"
+      "source",
+      "ability",
+      "cardSummary",
+      "notes"
     ],
-    "fieldPresentation": {
-      "collectionSection": {
-        "kind": "highlight",
-        "label": "rarity"
-      },
-      "earningsBoost": {
-        "kind": "chip",
-        "label": "earnings boost"
-      },
-      "source": "normal",
-      "ability": "detail",
-      "cardSummary": "detail",
-      "notes": "detail"
-    },
-    "sources": [
-      {
-        "label": "Sportskeeda - All Build a Ring Farm pets and their abilities (primary roster, abilities, baseline earnings boost, source per pet)",
-        "url": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "TechWiser - Build a Ring Farm Eggs and How to Get Them (egg-to-pet mapping and egg costs)",
-        "url": "https://techwiser.com/build-a-ring-farm-eggs/",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Pro Game Guides - Build A Ring Farm Pets Tier List (independent corroboration of roster, rarity, abilities)",
-        "url": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "TechWiser - Build a Ring Farm Pets (independent corroboration of rarity grouping and abilities)",
-        "url": "https://techwiser.com/build-a-ring-farm-pets/",
-        "accessed": "2026-06-27"
-      },
-      {
-        "label": "Sportskeeda - Build a Ring Farm Dinosaur Egg guide (limited-pet sourcing cross-check)",
-        "url": "https://www.sportskeeda.com/roblox-news/build-a-ring-farm-dinosaur-egg-guide",
-        "accessed": "2026-06-27"
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Epic",
+        "Legendary",
+        "Secret",
+        "Prismatic",
+        "Divine",
+        "Exotic"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "rarity"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "earningsBoost",
+        "source"
+      ],
+      "tableFields": [
+        "rarity",
+        "earningsBoost",
+        "source",
+        "ability",
+        "cardSummary",
+        "notes"
+      ],
+      "fieldPresentation": {
+        "earningsBoost": {
+          "kind": "chip",
+          "label": "earnings boost"
+        },
+        "source": "normal",
+        "ability": "detail",
+        "cardSummary": "detail",
+        "notes": "detail"
       }
-    ],
-    "notes": [
-      "Rarity tiers in ascending order: Common, Uncommon, Rare, Epic, Legendary, Secret, Prismatic, Divine, Exotic. This ordering is consistent across the primary source and corroborating guides.",
-      "earningsBoost is pinned to a single baseline (Level 1 / Regular size) from the Sportskeeda primary source for consistency. Boosts scale upward with pet size (Regular, Big, Giant) and pet level (max level 50). Card/page copy must frame these as a baseline that scales, not a fixed value. Where sources disagreed on the number (size/level scaling), the primary source value is used; never mixed mid-row.",
-      "source field records where the pet originates (which egg, bundle, or Robux/pack purchase). Several pets are limited or event pets (Carnival Egg, Dinosaur Egg, Twilight/Dragon/Disco/Gummy Kingdom/Pirate Puddle bundles, Kitsune/Carnival packs). The page must state origin only and must NOT claim current availability or include event dates; availability windows for these have passed and the page is evergreen.",
-      "Section field is collectionSection holding the rarity. A CATALOG_SECTION_OVERRIDES entry keyed on 'build-a-ring-farm-pets' with sectionOrder Common->Exotic is expected at the route/writing step; without it cards may group by the wrong field.",
-      "No item images are sourced yet (0/30). Pet icons are not exposed as clean reusable URLs in the text sources. The image pass owns sourcing pet icons (game thumbnails / community references) or shipping with placeholders.",
-      "All 30 pets are confidently source-backed by at least the primary source, with most corroborated by 2+ guides. No invented pets. Pets appearing in only one source (e.g. Popcorn Phoenix) are flagged in their row notes."
-    ]
+    }
   },
   "items": [
     {
-      "name": "Capybara",
-      "slug": "capybara",
-      "image": "/Build%20A%20Ring%20Farm/pets/capybara.png",
-      "collectionSection": "Common",
-      "rarity": "Common",
-      "earningsBoost": "1.18x",
-      "source": "Basic Egg",
-      "ability": "Boosts seed luck by 1.1x.",
-      "cardSummary": "A cheap starter pet from the Basic Egg. Its seed-luck boost helps early planting while you build toward stronger pets.",
-      "notes": "Common starter. Earnings boost shown is the Level 1 baseline and rises with pet size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 1
+      "item": {
+        "name": "Capybara",
+        "rarity": "Common",
+        "earningsBoost": "1.18x",
+        "source": "Basic Egg",
+        "ability": "Boosts seed luck by 1.1x.",
+        "cardSummary": "A cheap starter pet from the Basic Egg. Its seed-luck boost helps early planting while you build toward stronger pets.",
+        "notes": "Common starter. Earnings boost shown is the Level 1 baseline and rises with pet size and level."
+      },
+      "system": {
+        "slug": "capybara",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Build%20A%20Ring%20Farm/pets/capybara.png"
+      }
     },
     {
-      "name": "Golden Retriever",
-      "slug": "golden-retriever",
-      "image": "/Build%20A%20Ring%20Farm/pets/golden-retriever.png",
-      "collectionSection": "Common",
-      "rarity": "Common",
-      "earningsBoost": "1.16x",
-      "source": "Basic Egg",
-      "ability": "Applies a Normal Fertilizer to a plant every 15 minutes.",
-      "cardSummary": "An early Basic Egg pet that drops a free Normal Fertilizer on a plant every 15 minutes for a small, steady growth nudge.",
-      "notes": "Common starter. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 2
+      "item": {
+        "name": "Golden Retriever",
+        "rarity": "Common",
+        "earningsBoost": "1.16x",
+        "source": "Basic Egg",
+        "ability": "Applies a Normal Fertilizer to a plant every 15 minutes.",
+        "cardSummary": "An early Basic Egg pet that drops a free Normal Fertilizer on a plant every 15 minutes for a small, steady growth nudge.",
+        "notes": "Common starter. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "golden-retriever",
+        "section": "Common",
+        "sortOrder": 2,
+        "image": "/Build%20A%20Ring%20Farm/pets/golden-retriever.png"
+      }
     },
     {
-      "name": "Elephant",
-      "slug": "elephant",
-      "image": "/Build%20A%20Ring%20Farm/pets/elephant.png",
-      "collectionSection": "Uncommon",
-      "rarity": "Uncommon",
-      "earningsBoost": "1.46x",
-      "source": "Basic, Rare or Epic Egg",
-      "ability": "Boosts crop yield by 1.2x.",
-      "cardSummary": "A common drop across the early eggs. Its flat 1.2x crop-yield boost makes it a reliable upgrade over the starter pets.",
-      "notes": "Uncommon. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://techwiser.com/build-a-ring-farm-eggs/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 3
+      "item": {
+        "name": "Elephant",
+        "rarity": "Uncommon",
+        "earningsBoost": "1.46x",
+        "source": "Basic, Rare or Epic Egg",
+        "ability": "Boosts crop yield by 1.2x.",
+        "cardSummary": "A common drop across the early eggs. Its flat 1.2x crop-yield boost makes it a reliable upgrade over the starter pets.",
+        "notes": "Uncommon. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "elephant",
+        "section": "Uncommon",
+        "sortOrder": 3,
+        "image": "/Build%20A%20Ring%20Farm/pets/elephant.png"
+      }
     },
     {
-      "name": "Llama",
-      "slug": "llama",
-      "image": "/Build%20A%20Ring%20Farm/pets/llama.png",
-      "collectionSection": "Uncommon",
-      "rarity": "Uncommon",
-      "earningsBoost": "1.36x",
-      "source": "Basic, Rare or Epic Egg",
-      "ability": "Boosts sprinkler power by 1.2x.",
-      "cardSummary": "An early-egg Uncommon whose 1.2x sprinkler-power boost pairs well with a sprinkler-heavy farm layout.",
-      "notes": "Uncommon. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://techwiser.com/build-a-ring-farm-eggs/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 4
+      "item": {
+        "name": "Llama",
+        "rarity": "Uncommon",
+        "earningsBoost": "1.36x",
+        "source": "Basic, Rare or Epic Egg",
+        "ability": "Boosts sprinkler power by 1.2x.",
+        "cardSummary": "An early-egg Uncommon whose 1.2x sprinkler-power boost pairs well with a sprinkler-heavy farm layout.",
+        "notes": "Uncommon. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "llama",
+        "section": "Uncommon",
+        "sortOrder": 4,
+        "image": "/Build%20A%20Ring%20Farm/pets/llama.png"
+      }
     },
     {
-      "name": "Crocodile",
-      "slug": "crocodile",
-      "image": "/Build%20A%20Ring%20Farm/pets/crocodile.png",
-      "collectionSection": "Rare",
-      "rarity": "Rare",
-      "earningsBoost": "2.33x",
-      "source": "Basic, Rare or Epic Egg",
-      "ability": "10% chance to fully grow a random plant every minute.",
-      "cardSummary": "The first pet with an instant-grow effect, with a 10% chance each minute to fully grow a random plant for faster harvest cycles.",
-      "notes": "Rare. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 5
+      "item": {
+        "name": "Crocodile",
+        "rarity": "Rare",
+        "earningsBoost": "2.33x",
+        "source": "Basic, Rare or Epic Egg",
+        "ability": "10% chance to fully grow a random plant every minute.",
+        "cardSummary": "The first pet with an instant-grow effect, with a 10% chance each minute to fully grow a random plant for faster harvest cycles.",
+        "notes": "Rare. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "crocodile",
+        "section": "Rare",
+        "sortOrder": 5,
+        "image": "/Build%20A%20Ring%20Farm/pets/crocodile.png"
+      }
     },
     {
-      "name": "Gorilla",
-      "slug": "gorilla",
-      "image": "/Build%20A%20Ring%20Farm/pets/gorilla.png",
-      "collectionSection": "Rare",
-      "rarity": "Rare",
-      "earningsBoost": "2.26x",
-      "source": "Basic, Rare or Epic Egg",
-      "ability": "Applies a Strong Fertilizer to a random plant every 15 minutes.",
-      "cardSummary": "A Rare egg pet that drops a Strong Fertilizer on a random plant every 15 minutes, an upgrade over the Golden Retriever's Normal Fertilizer.",
-      "notes": "Rare. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 6
+      "item": {
+        "name": "Gorilla",
+        "rarity": "Rare",
+        "earningsBoost": "2.26x",
+        "source": "Basic, Rare or Epic Egg",
+        "ability": "Applies a Strong Fertilizer to a random plant every 15 minutes.",
+        "cardSummary": "A Rare egg pet that drops a Strong Fertilizer on a random plant every 15 minutes, an upgrade over the Golden Retriever's Normal Fertilizer.",
+        "notes": "Rare. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "gorilla",
+        "section": "Rare",
+        "sortOrder": 6,
+        "image": "/Build%20A%20Ring%20Farm/pets/gorilla.png"
+      }
     },
     {
-      "name": "Lion",
-      "slug": "lion",
-      "image": "/Build%20A%20Ring%20Farm/pets/lion.png",
-      "collectionSection": "Epic",
-      "rarity": "Epic",
-      "earningsBoost": "3.18x",
-      "source": "Rare or Epic Egg",
-      "ability": "10% chance to apply a Super Fertilizer every 5 minutes.",
-      "cardSummary": "An Epic egg pet whose Super Fertilizer procs give a strong periodic growth push on top of a solid earnings boost.",
-      "notes": "Epic. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 7
+      "item": {
+        "name": "Lion",
+        "rarity": "Epic",
+        "earningsBoost": "3.18x",
+        "source": "Rare or Epic Egg",
+        "ability": "10% chance to apply a Super Fertilizer every 5 minutes.",
+        "cardSummary": "An Epic egg pet whose Super Fertilizer procs give a strong periodic growth push on top of a solid earnings boost.",
+        "notes": "Epic. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "lion",
+        "section": "Epic",
+        "sortOrder": 7,
+        "image": "/Build%20A%20Ring%20Farm/pets/lion.png"
+      }
     },
     {
-      "name": "Polar Bear",
-      "slug": "polar-bear",
-      "image": "/Build%20A%20Ring%20Farm/pets/polar-bear.png",
-      "collectionSection": "Epic",
-      "rarity": "Epic",
-      "earningsBoost": "3.76x",
-      "source": "Rare or Epic Egg",
-      "ability": "20% chance to fully grow a random plant every 2 minutes.",
-      "cardSummary": "One of the best egg-shop pets for instant growth, with a 20% chance every 2 minutes to fully grow a random plant.",
-      "notes": "Epic. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 8
+      "item": {
+        "name": "Polar Bear",
+        "rarity": "Epic",
+        "earningsBoost": "3.76x",
+        "source": "Rare or Epic Egg",
+        "ability": "20% chance to fully grow a random plant every 2 minutes.",
+        "cardSummary": "One of the best egg-shop pets for instant growth, with a 20% chance every 2 minutes to fully grow a random plant.",
+        "notes": "Epic. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "polar-bear",
+        "section": "Epic",
+        "sortOrder": 8,
+        "image": "/Build%20A%20Ring%20Farm/pets/polar-bear.png"
+      }
     },
     {
-      "name": "Gallimimus",
-      "slug": "gallimimus",
-      "image": "/Build%20A%20Ring%20Farm/pets/gallimimus.png",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "earningsBoost": "3.5x",
-      "source": "Dinosaur Egg",
-      "ability": "25% chance to fully grow a random plant every 2 minutes.",
-      "cardSummary": "The most common Dinosaur Egg pet, with a strong 25% instant-grow chance every 2 minutes that rivals higher-rarity pets.",
-      "notes": "Legendary, Dinosaur Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability and source confirmed by primary source and Dinosaur Egg guide; baseline boost from primary source (other guides list higher size-scaled numbers)",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/build-a-ring-farm-dinosaur-egg-guide",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 9
+      "item": {
+        "name": "Gallimimus",
+        "rarity": "Legendary",
+        "earningsBoost": "3.5x",
+        "source": "Dinosaur Egg",
+        "ability": "25% chance to fully grow a random plant every 2 minutes.",
+        "cardSummary": "The most common Dinosaur Egg pet, with a strong 25% instant-grow chance every 2 minutes that rivals higher-rarity pets.",
+        "notes": "Legendary, Dinosaur Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "gallimimus",
+        "section": "Legendary",
+        "sortOrder": 9,
+        "image": "/Build%20A%20Ring%20Farm/pets/gallimimus.png"
+      }
     },
     {
-      "name": "Mammoth",
-      "slug": "mammoth",
-      "image": "/Build%20A%20Ring%20Farm/pets/mammoth.png",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "earningsBoost": "5.52x",
-      "source": "Epic Egg",
-      "ability": "10% chance to upgrade a plant's mutation every 10 minutes.",
-      "cardSummary": "The first pet that can upgrade plant mutations, giving long-term value beyond its flat earnings boost.",
-      "notes": "Legendary. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 10
+      "item": {
+        "name": "Mammoth",
+        "rarity": "Legendary",
+        "earningsBoost": "5.52x",
+        "source": "Epic Egg",
+        "ability": "10% chance to upgrade a plant's mutation every 10 minutes.",
+        "cardSummary": "The first pet that can upgrade plant mutations, giving long-term value beyond its flat earnings boost.",
+        "notes": "Legendary. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "mammoth",
+        "section": "Legendary",
+        "sortOrder": 10,
+        "image": "/Build%20A%20Ring%20Farm/pets/mammoth.png"
+      }
     },
     {
-      "name": "Captain Puffer",
-      "slug": "captain-puffer",
-      "image": "/Build%20A%20Ring%20Farm/pets/captain-puffer.png",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "earningsBoost": "5.4x",
-      "source": "Pirate Puddle Bundle (Robux)",
-      "ability": "Waters 3 random plot plants, advancing each by 1 growth stage every 200 seconds.",
-      "cardSummary": "A bundle pet that auto-advances three random plants by a growth stage every 200 seconds, speeding up harvest pacing.",
-      "notes": "Legendary, Pirate Puddle Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 11
+      "item": {
+        "name": "Captain Puffer",
+        "rarity": "Legendary",
+        "earningsBoost": "5.4x",
+        "source": "Pirate Puddle Bundle (Robux)",
+        "ability": "Waters 3 random plot plants, advancing each by 1 growth stage every 200 seconds.",
+        "cardSummary": "A bundle pet that auto-advances three random plants by a growth stage every 200 seconds, speeding up harvest pacing.",
+        "notes": "Legendary, Pirate Puddle Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "captain-puffer",
+        "section": "Legendary",
+        "sortOrder": 11,
+        "image": "/Build%20A%20Ring%20Farm/pets/captain-puffer.png"
+      }
     },
     {
-      "name": "Bumper Snail",
-      "slug": "bumper-snail",
-      "image": "/Build%20A%20Ring%20Farm/pets/bumper-snail.png",
-      "collectionSection": "Legendary",
-      "rarity": "Legendary",
-      "earningsBoost": "6x",
-      "source": "Carnival Egg",
-      "ability": "Bumps a random plant and instantly sells it with a 5% bonus every 240 seconds.",
-      "cardSummary": "A Carnival Egg pet that auto-sells a random plant with a 5% cash bonus every 240 seconds for hands-off income.",
-      "notes": "Legendary, Carnival Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 12
+      "item": {
+        "name": "Bumper Snail",
+        "rarity": "Legendary",
+        "earningsBoost": "6x",
+        "source": "Carnival Egg",
+        "ability": "Bumps a random plant and instantly sells it with a 5% bonus every 240 seconds.",
+        "cardSummary": "A Carnival Egg pet that auto-sells a random plant with a 5% cash bonus every 240 seconds for hands-off income.",
+        "notes": "Legendary, Carnival Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "bumper-snail",
+        "section": "Legendary",
+        "sortOrder": 12,
+        "image": "/Build%20A%20Ring%20Farm/pets/bumper-snail.png"
+      }
     },
     {
-      "name": "Hydra",
-      "slug": "hydra",
-      "image": "/Build%20A%20Ring%20Farm/pets/hydra.png",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "earningsBoost": "8x",
-      "source": "Epic Egg",
-      "ability": "12% chance to upgrade a plant's mutation to a better one every 10 minutes.",
-      "cardSummary": "A Secret pet from the Epic Egg that can upgrade plant mutations, prized for long-run mutation farming.",
-      "notes": "Secret. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 13
+      "item": {
+        "name": "Hydra",
+        "rarity": "Secret",
+        "earningsBoost": "8x",
+        "source": "Epic Egg",
+        "ability": "12% chance to upgrade a plant's mutation to a better one every 10 minutes.",
+        "cardSummary": "A Secret pet from the Epic Egg that can upgrade plant mutations, prized for long-run mutation farming.",
+        "notes": "Secret. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "hydra",
+        "section": "Secret",
+        "sortOrder": 13,
+        "image": "/Build%20A%20Ring%20Farm/pets/hydra.png"
+      }
     },
     {
-      "name": "Triceratops",
-      "slug": "triceratops",
-      "image": "/Build%20A%20Ring%20Farm/pets/triceratops.png",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "earningsBoost": "5.2x",
-      "source": "Dinosaur Egg",
-      "ability": "Applies a Normal Pet Treat effect to a random pet every 3 minutes.",
-      "cardSummary": "A Dinosaur Egg Secret that buffs your other pets, periodically applying a Normal Pet Treat to a random equipped pet.",
-      "notes": "Secret, Dinosaur Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and Dinosaur Egg guide",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/build-a-ring-farm-dinosaur-egg-guide",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 14
+      "item": {
+        "name": "Triceratops",
+        "rarity": "Secret",
+        "earningsBoost": "5.2x",
+        "source": "Dinosaur Egg",
+        "ability": "Applies a Normal Pet Treat effect to a random pet every 3 minutes.",
+        "cardSummary": "A Dinosaur Egg Secret that buffs your other pets, periodically applying a Normal Pet Treat to a random equipped pet.",
+        "notes": "Secret, Dinosaur Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "triceratops",
+        "section": "Secret",
+        "sortOrder": 14,
+        "image": "/Build%20A%20Ring%20Farm/pets/triceratops.png"
+      }
     },
     {
-      "name": "Spinosaurus",
-      "slug": "spinosaurus",
-      "image": "/Build%20A%20Ring%20Farm/pets/spinosaurus.png",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "earningsBoost": "6.5x",
-      "source": "Dinosaur Egg",
-      "ability": "Applies a Strong Pet Treat effect to a random pet every 5 minutes.",
-      "cardSummary": "A Dinosaur Egg Secret that supports your pet lineup, applying a Strong Pet Treat to a random pet every 5 minutes.",
-      "notes": "Secret, Dinosaur Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and Dinosaur Egg guide",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/build-a-ring-farm-dinosaur-egg-guide",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 15
+      "item": {
+        "name": "Spinosaurus",
+        "rarity": "Secret",
+        "earningsBoost": "6.5x",
+        "source": "Dinosaur Egg",
+        "ability": "Applies a Strong Pet Treat effect to a random pet every 5 minutes.",
+        "cardSummary": "A Dinosaur Egg Secret that supports your pet lineup, applying a Strong Pet Treat to a random pet every 5 minutes.",
+        "notes": "Secret, Dinosaur Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "spinosaurus",
+        "section": "Secret",
+        "sortOrder": 15,
+        "image": "/Build%20A%20Ring%20Farm/pets/spinosaurus.png"
+      }
     },
     {
-      "name": "Gummy Gator",
-      "slug": "gummy-gator",
-      "image": "/Build%20A%20Ring%20Farm/pets/gummy-gator.png",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "earningsBoost": "6x",
-      "source": "Gummy Kingdom Bundle (Robux)",
-      "ability": "20% chance to apply Prismatic Fertilizer every 180 seconds.",
-      "cardSummary": "A bundle Secret with frequent chances to apply Prismatic Fertilizer, one of the strongest fertilizer types in the game.",
-      "notes": "Secret, Gummy Kingdom Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 16
+      "item": {
+        "name": "Gummy Gator",
+        "rarity": "Secret",
+        "earningsBoost": "6x",
+        "source": "Gummy Kingdom Bundle (Robux)",
+        "ability": "20% chance to apply Prismatic Fertilizer every 180 seconds.",
+        "cardSummary": "A bundle Secret with frequent chances to apply Prismatic Fertilizer, one of the strongest fertilizer types in the game.",
+        "notes": "Secret, Gummy Kingdom Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "gummy-gator",
+        "section": "Secret",
+        "sortOrder": 16,
+        "image": "/Build%20A%20Ring%20Farm/pets/gummy-gator.png"
+      }
     },
     {
-      "name": "Prizewheel Peacock",
-      "slug": "prizewheel-peacock",
-      "image": "/Build%20A%20Ring%20Farm/pets/prizewheel-peacock.png",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "earningsBoost": "7.8x",
-      "source": "Carnival Egg",
-      "ability": "Chooses 1 random equipped pet and reduces its next ability cooldown by 30% every 300 seconds.",
-      "cardSummary": "A Carnival Egg Secret that boosts your team by cutting a random pet's next ability cooldown by 30% every 5 minutes.",
-      "notes": "Secret, Carnival Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 17
+      "item": {
+        "name": "Prizewheel Peacock",
+        "rarity": "Secret",
+        "earningsBoost": "7.8x",
+        "source": "Carnival Egg",
+        "ability": "Chooses 1 random equipped pet and reduces its next ability cooldown by 30% every 300 seconds.",
+        "cardSummary": "A Carnival Egg Secret that boosts your team by cutting a random pet's next ability cooldown by 30% every 5 minutes.",
+        "notes": "Secret, Carnival Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "prizewheel-peacock",
+        "section": "Secret",
+        "sortOrder": 17,
+        "image": "/Build%20A%20Ring%20Farm/pets/prizewheel-peacock.png"
+      }
     },
     {
-      "name": "Jackpot Slime",
-      "slug": "jackpot-slime",
-      "image": "/Build%20A%20Ring%20Farm/pets/jackpot-slime.png",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "earningsBoost": "6x",
-      "source": "Carnival Egg",
-      "ability": "Triggers Jackpot Harvest, making all harvested plants give 2x Cash for 15 seconds every 300 seconds.",
-      "cardSummary": "A Carnival Egg Secret that periodically doubles harvest cash for 15 seconds, rewarding well-timed mass harvests.",
-      "notes": "Secret, Carnival Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 18
+      "item": {
+        "name": "Jackpot Slime",
+        "rarity": "Secret",
+        "earningsBoost": "6x",
+        "source": "Carnival Egg",
+        "ability": "Triggers Jackpot Harvest, making all harvested plants give 2x Cash for 15 seconds every 300 seconds.",
+        "cardSummary": "A Carnival Egg Secret that periodically doubles harvest cash for 15 seconds, rewarding well-timed mass harvests.",
+        "notes": "Secret, Carnival Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "jackpot-slime",
+        "section": "Secret",
+        "sortOrder": 18,
+        "image": "/Build%20A%20Ring%20Farm/pets/jackpot-slime.png"
+      }
     },
     {
-      "name": "Rhino",
-      "slug": "rhino",
-      "image": "/Build%20A%20Ring%20Farm/pets/rhino.png",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "earningsBoost": "10x",
-      "source": "Legendary Egg",
-      "ability": "Boosts the growth speed of all plants on a floor by 25% for 60 seconds every 300 seconds.",
-      "cardSummary": "A top-tier Legendary Egg Secret whose floor-wide 25% growth-speed surge and 10x earnings boost make it an endgame egg-shop target.",
-      "notes": "Secret, Legendary Egg. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by TechWiser egg guide",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://techwiser.com/build-a-ring-farm-eggs/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 19
+      "item": {
+        "name": "Rhino",
+        "rarity": "Secret",
+        "earningsBoost": "10x",
+        "source": "Legendary Egg",
+        "ability": "Boosts the growth speed of all plants on a floor by 25% for 60 seconds every 300 seconds.",
+        "cardSummary": "A top-tier Legendary Egg Secret whose floor-wide 25% growth-speed surge and 10x earnings boost make it an endgame egg-shop target.",
+        "notes": "Secret, Legendary Egg. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "rhino",
+        "section": "Secret",
+        "sortOrder": 19,
+        "image": "/Build%20A%20Ring%20Farm/pets/rhino.png"
+      }
     },
     {
-      "name": "Twilight Drake",
-      "slug": "twilight-drake",
-      "image": "/Build%20A%20Ring%20Farm/pets/twilight-drake.png",
-      "collectionSection": "Secret",
-      "rarity": "Secret",
-      "earningsBoost": "5.8x",
-      "source": "Twilight Bundle (Robux)",
-      "ability": "Gives 3 random plants +100% crop yield on their next harvest every 220 seconds.",
-      "cardSummary": "A bundle Secret that doubles the next harvest of three random plants every 220 seconds for burst income.",
-      "notes": "Secret, Twilight Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 20
+      "item": {
+        "name": "Twilight Drake",
+        "rarity": "Secret",
+        "earningsBoost": "5.8x",
+        "source": "Twilight Bundle (Robux)",
+        "ability": "Gives 3 random plants +100% crop yield on their next harvest every 220 seconds.",
+        "cardSummary": "A bundle Secret that doubles the next harvest of three random plants every 220 seconds for burst income.",
+        "notes": "Secret, Twilight Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "twilight-drake",
+        "section": "Secret",
+        "sortOrder": 20,
+        "image": "/Build%20A%20Ring%20Farm/pets/twilight-drake.png"
+      }
     },
     {
-      "name": "Red Panda",
-      "slug": "red-panda",
-      "image": "/Build%20A%20Ring%20Farm/pets/red-panda.png",
-      "collectionSection": "Prismatic",
-      "rarity": "Prismatic",
-      "earningsBoost": "11.25x",
-      "source": "Legendary Egg",
-      "ability": "15% chance to upgrade the level of a random plant every 180 seconds.",
-      "cardSummary": "The Prismatic pull from the Legendary Egg, with a strong earnings boost and a chance to level up plants every 3 minutes.",
-      "notes": "Prismatic, Legendary Egg. Boost shown is the Level 1 baseline and scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by TechWiser egg guide",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://techwiser.com/build-a-ring-farm-eggs/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 21
+      "item": {
+        "name": "Red Panda",
+        "rarity": "Prismatic",
+        "earningsBoost": "11.25x",
+        "source": "Legendary Egg",
+        "ability": "15% chance to upgrade the level of a random plant every 180 seconds.",
+        "cardSummary": "The Prismatic pull from the Legendary Egg, with a strong earnings boost and a chance to level up plants every 3 minutes.",
+        "notes": "Prismatic, Legendary Egg. Boost shown is the Level 1 baseline and scales with size and level."
+      },
+      "system": {
+        "slug": "red-panda",
+        "section": "Prismatic",
+        "sortOrder": 21,
+        "image": "/Build%20A%20Ring%20Farm/pets/red-panda.png"
+      }
     },
     {
-      "name": "Token Toad",
-      "slug": "token-toad",
-      "image": "/Build%20A%20Ring%20Farm/pets/token-toad.png",
-      "collectionSection": "Prismatic",
-      "rarity": "Prismatic",
-      "earningsBoost": "8x",
-      "source": "Carnival Egg",
-      "ability": "20% chance to apply Prismatic Fertilizer to a random plant every 300 seconds.",
-      "cardSummary": "A Carnival Egg Prismatic that periodically applies the high-end Prismatic Fertilizer to a random plant.",
-      "notes": "Prismatic, Carnival Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 22
+      "item": {
+        "name": "Token Toad",
+        "rarity": "Prismatic",
+        "earningsBoost": "8x",
+        "source": "Carnival Egg",
+        "ability": "20% chance to apply Prismatic Fertilizer to a random plant every 300 seconds.",
+        "cardSummary": "A Carnival Egg Prismatic that periodically applies the high-end Prismatic Fertilizer to a random plant.",
+        "notes": "Prismatic, Carnival Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "token-toad",
+        "section": "Prismatic",
+        "sortOrder": 22,
+        "image": "/Build%20A%20Ring%20Farm/pets/token-toad.png"
+      }
     },
     {
-      "name": "Kitsune",
-      "slug": "kitsune",
-      "image": "/Build%20A%20Ring%20Farm/pets/kitsune.png",
-      "collectionSection": "Prismatic",
-      "rarity": "Prismatic",
-      "earningsBoost": "6x",
-      "source": "Kitsune Pack (Robux)",
-      "ability": "15% chance to upgrade a plant's mutation to a better one every 5 minutes.",
-      "cardSummary": "A pack Prismatic focused on mutation farming, with a chance to upgrade a plant's mutation every 5 minutes.",
-      "notes": "Prismatic, Kitsune Pack (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and TechWiser",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://progameguides.com/roblox/build-a-ring-farm-pets-tier-list-roblox/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 23
+      "item": {
+        "name": "Kitsune",
+        "rarity": "Prismatic",
+        "earningsBoost": "6x",
+        "source": "Kitsune Pack (Robux)",
+        "ability": "15% chance to upgrade a plant's mutation to a better one every 5 minutes.",
+        "cardSummary": "A pack Prismatic focused on mutation farming, with a chance to upgrade a plant's mutation every 5 minutes.",
+        "notes": "Prismatic, Kitsune Pack (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "kitsune",
+        "section": "Prismatic",
+        "sortOrder": 23,
+        "image": "/Build%20A%20Ring%20Farm/pets/kitsune.png"
+      }
     },
     {
-      "name": "Velociraptor",
-      "slug": "velociraptor",
-      "image": "/Build%20A%20Ring%20Farm/pets/velociraptor.png",
-      "collectionSection": "Prismatic",
-      "rarity": "Prismatic",
-      "earningsBoost": "8.5x",
-      "source": "Dinosaur Egg",
-      "ability": "Gives a 5 minute time skip every 600 seconds.",
-      "cardSummary": "A Dinosaur Egg Prismatic that grants a 5-minute time skip every 10 minutes, effectively fast-forwarding plant growth.",
-      "notes": "Prismatic, Dinosaur Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by Pro Game Guides and Dinosaur Egg guide",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/build-a-ring-farm-dinosaur-egg-guide",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 24
+      "item": {
+        "name": "Velociraptor",
+        "rarity": "Prismatic",
+        "earningsBoost": "8.5x",
+        "source": "Dinosaur Egg",
+        "ability": "Gives a 5 minute time skip every 600 seconds.",
+        "cardSummary": "A Dinosaur Egg Prismatic that grants a 5-minute time skip every 10 minutes, effectively fast-forwarding plant growth.",
+        "notes": "Prismatic, Dinosaur Egg (limited Robux egg). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "velociraptor",
+        "section": "Prismatic",
+        "sortOrder": 24,
+        "image": "/Build%20A%20Ring%20Farm/pets/velociraptor.png"
+      }
     },
     {
-      "name": "Starfall Griffin",
-      "slug": "starfall-griffin",
-      "image": "/Build%20A%20Ring%20Farm/pets/starfall-griffin.png",
-      "collectionSection": "Divine",
-      "rarity": "Divine",
-      "earningsBoost": "10x",
-      "source": "Robux purchase",
-      "ability": "15% chance to apply the Starfall mutation to a random plant on the farm.",
-      "cardSummary": "A direct-purchase Divine that can apply the rare Starfall mutation, valued for unlocking a high-tier mutation route.",
-      "notes": "Divine, direct Robux purchase. State origin only; do not claim current availability. Baseline boost scales with size and level. Ability chance/interval varies slightly across sources; primary source value used.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 25
+      "item": {
+        "name": "Starfall Griffin",
+        "rarity": "Divine",
+        "earningsBoost": "10x",
+        "source": "Robux purchase",
+        "ability": "15% chance to apply the Starfall mutation to a random plant on the farm.",
+        "cardSummary": "A direct-purchase Divine that can apply the rare Starfall mutation, valued for unlocking a high-tier mutation route.",
+        "notes": "Divine, direct Robux purchase. State origin only; do not claim current availability. Baseline boost scales with size and level. Ability chance/interval varies slightly across sources; primary source value used."
+      },
+      "system": {
+        "slug": "starfall-griffin",
+        "section": "Divine",
+        "sortOrder": 25,
+        "image": "/Build%20A%20Ring%20Farm/pets/starfall-griffin.png"
+      }
     },
     {
-      "name": "T-Rex",
-      "slug": "t-rex",
-      "image": "/Build%20A%20Ring%20Farm/pets/t-rex.png",
-      "collectionSection": "Divine",
-      "rarity": "Divine",
-      "earningsBoost": "12x",
-      "source": "Dinosaur Egg",
-      "ability": "Upgrades a plant's mutation every 5 minutes.",
-      "cardSummary": "The rarest Dinosaur Egg pet and one of the strongest in the game, guaranteeing a plant mutation upgrade every 5 minutes.",
-      "notes": "Divine, Dinosaur Egg (limited Robux egg, rarest pull). State origin only; do not claim current availability. Baseline boost from primary source; other guides list higher size-scaled numbers (up to ~15.5x).",
-      "sourceStatus": "roster, rarity, ability and source confirmed by primary source, Pro Game Guides and Dinosaur Egg guide; baseline boost pinned to primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/build-a-ring-farm-dinosaur-egg-guide",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 26
+      "item": {
+        "name": "T-Rex",
+        "rarity": "Divine",
+        "earningsBoost": "12x",
+        "source": "Dinosaur Egg",
+        "ability": "Upgrades a plant's mutation every 5 minutes.",
+        "cardSummary": "The rarest Dinosaur Egg pet and one of the strongest in the game, guaranteeing a plant mutation upgrade every 5 minutes.",
+        "notes": "Divine, Dinosaur Egg (limited Robux egg, rarest pull). State origin only; do not claim current availability. Baseline boost from primary source; other guides list higher size-scaled numbers (up to ~15.5x)."
+      },
+      "system": {
+        "slug": "t-rex",
+        "section": "Divine",
+        "sortOrder": 26,
+        "image": "/Build%20A%20Ring%20Farm/pets/t-rex.png"
+      }
     },
     {
-      "name": "Disco Dodo",
-      "slug": "disco-dodo",
-      "image": "/Build%20A%20Ring%20Farm/pets/disco-dodo.png",
-      "collectionSection": "Divine",
-      "rarity": "Divine",
-      "earningsBoost": "7x",
-      "source": "Disco Bundle (Robux)",
-      "ability": "30% chance to apply Prismatic Fertilizer every 180 seconds.",
-      "cardSummary": "A bundle Divine with a high 30% chance to apply Prismatic Fertilizer every 3 minutes for strong, frequent growth boosts.",
-      "notes": "Divine, Disco Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 27
+      "item": {
+        "name": "Disco Dodo",
+        "rarity": "Divine",
+        "earningsBoost": "7x",
+        "source": "Disco Bundle (Robux)",
+        "ability": "30% chance to apply Prismatic Fertilizer every 180 seconds.",
+        "cardSummary": "A bundle Divine with a high 30% chance to apply Prismatic Fertilizer every 3 minutes for strong, frequent growth boosts.",
+        "notes": "Divine, Disco Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "disco-dodo",
+        "section": "Divine",
+        "sortOrder": 27,
+        "image": "/Build%20A%20Ring%20Farm/pets/disco-dodo.png"
+      }
     },
     {
-      "name": "Fire Loong",
-      "slug": "fire-loong",
-      "image": "/Build%20A%20Ring%20Farm/pets/fire-loong.png",
-      "collectionSection": "Divine",
-      "rarity": "Divine",
-      "earningsBoost": "6.8x",
-      "source": "Dragon Bundle (Robux)",
-      "ability": "Doubles the effect of a random active fertilizer for 60 seconds every 240 seconds.",
-      "cardSummary": "A bundle Divine that periodically doubles an active fertilizer's effect, amplifying whatever growth boost is already running.",
-      "notes": "Divine, Dragon Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 28
+      "item": {
+        "name": "Fire Loong",
+        "rarity": "Divine",
+        "earningsBoost": "6.8x",
+        "source": "Dragon Bundle (Robux)",
+        "ability": "Doubles the effect of a random active fertilizer for 60 seconds every 240 seconds.",
+        "cardSummary": "A bundle Divine that periodically doubles an active fertilizer's effect, amplifying whatever growth boost is already running.",
+        "notes": "Divine, Dragon Bundle (Robux purchase). State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "fire-loong",
+        "section": "Divine",
+        "sortOrder": 28,
+        "image": "/Build%20A%20Ring%20Farm/pets/fire-loong.png"
+      }
     },
     {
-      "name": "Popcorn Phoenix",
-      "slug": "popcorn-phoenix",
-      "image": "/Build%20A%20Ring%20Farm/pets/popcorn-phoenix.png",
-      "collectionSection": "Exotic",
-      "rarity": "Exotic",
-      "earningsBoost": "9x",
-      "source": "Carnival Pack (Robux)",
-      "ability": "Applies a Strong Pet Treat effect to a random pet every 191 seconds.",
-      "cardSummary": "An Exotic pack pet that supports your team, applying a Strong Pet Treat to a random pet roughly every 3 minutes.",
-      "notes": "Exotic, Carnival Pack (Robux purchase). Listed only in the primary source among checked guides; treat as single-source. State origin only; do not claim current availability. Baseline boost scales with size and level.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost from primary source only (single-source pet)",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 29
+      "item": {
+        "name": "Popcorn Phoenix",
+        "rarity": "Exotic",
+        "earningsBoost": "9x",
+        "source": "Carnival Pack (Robux)",
+        "ability": "Applies a Strong Pet Treat effect to a random pet every 191 seconds.",
+        "cardSummary": "An Exotic pack pet that supports your team, applying a Strong Pet Treat to a random pet roughly every 3 minutes.",
+        "notes": "Exotic, Carnival Pack (Robux purchase). Listed only in the primary source among checked guides; treat as single-source. State origin only; do not claim current availability. Baseline boost scales with size and level."
+      },
+      "system": {
+        "slug": "popcorn-phoenix",
+        "section": "Exotic",
+        "sortOrder": 29,
+        "image": "/Build%20A%20Ring%20Farm/pets/popcorn-phoenix.png"
+      }
     },
     {
-      "name": "Claw Machine Kraken",
-      "slug": "claw-machine-kraken",
-      "image": "/Build%20A%20Ring%20Farm/pets/claw-machine-kraken.png",
-      "collectionSection": "Exotic",
-      "rarity": "Exotic",
-      "earningsBoost": "11x",
-      "source": "Carnival Egg",
-      "ability": "Provides a 1.5x Seed Luck boost.",
-      "cardSummary": "The Exotic top pull from the Carnival Egg, carrying one of the highest earnings boosts plus a flat 1.5x seed-luck boost.",
-      "notes": "Exotic, Carnival Egg (limited Robux egg, rarest pull). State origin only; do not claim current availability. Baseline boost from primary source; other guides list higher size-scaled numbers.",
-      "sourceStatus": "roster, rarity, ability, source and baseline boost confirmed by primary source; corroborated by TechWiser egg guide",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/all-build-a-ring-farm-pets-abilities",
-      "secondarySourcePage": "https://techwiser.com/build-a-ring-farm-eggs/",
-      "imageStatus": "no clean per-pet image from checked text sources; image pass to source or placeholder",
-      "sortOrder": 30
+      "item": {
+        "name": "Claw Machine Kraken",
+        "rarity": "Exotic",
+        "earningsBoost": "11x",
+        "source": "Carnival Egg",
+        "ability": "Provides a 1.5x Seed Luck boost.",
+        "cardSummary": "The Exotic top pull from the Carnival Egg, carrying one of the highest earnings boosts plus a flat 1.5x seed-luck boost.",
+        "notes": "Exotic, Carnival Egg (limited Robux egg, rarest pull). State origin only; do not claim current availability. Baseline boost from primary source; other guides list higher size-scaled numbers."
+      },
+      "system": {
+        "slug": "claw-machine-kraken",
+        "section": "Exotic",
+        "sortOrder": 30,
+        "image": "/Build%20A%20Ring%20Farm/pets/claw-machine-kraken.png"
+      }
     }
   ]
 }

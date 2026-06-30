@@ -1,1066 +1,1186 @@
 {
   "meta": {
-    "title": "Adopt Me gift prize refresh data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Adopt Me Wiki - Gifts",
-        "url": "https://adoptme.fandom.com/wiki/Gifts",
-        "accessed": "2026-05-07"
-      }
+    "schemaVersion": 2,
+    "game": "Adopt Me",
+    "gameSlug": "adopt-me",
+    "collection": "gift-prizes",
+    "route": "/wiki/adopt-me/gift-prizes",
+    "catalogCode": "adopt-me-gift-prizes",
+    "itemFields": [
+      "category",
+      "rarity"
     ],
     "columns": [
-      "name",
-      "image",
       "category",
-      "rarity",
-      "wikiUrl"
-    ]
+      "rarity"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "January 2026 Gifts Refresh (Current)",
+        "August 2025 Gifts Refresh",
+        "November 2024 Gifts Refresh",
+        "May 2024 Gifts Refresh",
+        "November 2023 Gifts Refresh",
+        "April 2023 Gifts Refresh",
+        "November 2022 Gifts Refresh",
+        "March 2022 Gifts Refresh",
+        "September 2021 Gifts Refresh",
+        "March 2021 Gifts Refresh",
+        "November 2019 Gifts Refresh",
+        "Summer 2019 Gifts Refresh",
+        "January 2019 Gifts Refresh",
+        "December 2018 Gifts Refresh",
+        "September 2018 Gifts Refresh",
+        "Spring 2018 Gifts Refresh",
+        "January 2018 Gifts Refresh"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category",
+        "rarity"
+      ],
+      "tableFields": [
+        "category",
+        "rarity"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Ladybug Plush",
-      "slug": "january-2026-gifts-refresh-current-common-ladybug-plush",
-      "category": "January 2026 Gifts Refresh (Current)",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Ladybug_Plush",
-      "fields": {
+      "item": {
+        "name": "Ladybug Plush",
+        "category": "January 2026 Gifts Refresh (Current)",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/ladybug-plush.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/3/34/Ladybug_Plush.png/revision/latest?cb=20260130173106"
+      "system": {
+        "slug": "january-2026-gifts-refresh-current-common-ladybug-plush",
+        "section": "January 2026 Gifts Refresh (Current)",
+        "sortOrder": 1,
+        "image": "/Adopt%20Me/Gift%20Prizes/ladybug-plush.webp"
+      }
     },
     {
-      "name": "Bacon and Eggs Throw Toy",
-      "slug": "january-2026-gifts-refresh-current-uncommon-bacon-and-eggs-throw-toy",
-      "category": "January 2026 Gifts Refresh (Current)",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Bacon_and_Eggs_Throw_Toy",
-      "fields": {
+      "item": {
+        "name": "Bacon and Eggs Throw Toy",
+        "category": "January 2026 Gifts Refresh (Current)",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/bacon-and-eggs-throw-toy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/8/89/Bacon_and_Eggs_Throw_Toy.png/revision/latest?cb=20260130175014"
+      "system": {
+        "slug": "january-2026-gifts-refresh-current-uncommon-bacon-and-eggs-throw-toy",
+        "section": "January 2026 Gifts Refresh (Current)",
+        "sortOrder": 2,
+        "image": "/Adopt%20Me/Gift%20Prizes/bacon-and-eggs-throw-toy.webp"
+      }
     },
     {
-      "name": "Avocado Robinado Plush",
-      "slug": "january-2026-gifts-refresh-current-rare-avocado-robinado-plush",
-      "category": "January 2026 Gifts Refresh (Current)",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Avocado_Robinado_Plush",
-      "fields": {
+      "item": {
+        "name": "Avocado Robinado Plush",
+        "category": "January 2026 Gifts Refresh (Current)",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/avocado-robinado-plush.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/e/ee/Avocado_Robinado_Plush.png/revision/latest?cb=20260130181224"
+      "system": {
+        "slug": "january-2026-gifts-refresh-current-rare-avocado-robinado-plush",
+        "section": "January 2026 Gifts Refresh (Current)",
+        "sortOrder": 3,
+        "image": "/Adopt%20Me/Gift%20Prizes/avocado-robinado-plush.webp"
+      }
     },
     {
-      "name": "Donut Stroller",
-      "slug": "january-2026-gifts-refresh-current-ultra-rare-donut-stroller",
-      "category": "January 2026 Gifts Refresh (Current)",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Donut_Stroller",
-      "fields": {
+      "item": {
+        "name": "Donut Stroller",
+        "category": "January 2026 Gifts Refresh (Current)",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/donut-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/c/c9/Donut_Stroller.png/revision/latest?cb=20260130182203"
+      "system": {
+        "slug": "january-2026-gifts-refresh-current-ultra-rare-donut-stroller",
+        "section": "January 2026 Gifts Refresh (Current)",
+        "sortOrder": 4,
+        "image": "/Adopt%20Me/Gift%20Prizes/donut-stroller.webp"
+      }
     },
     {
-      "name": "Micro Car",
-      "slug": "january-2026-gifts-refresh-current-legendary-micro-car",
-      "category": "January 2026 Gifts Refresh (Current)",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Micro_Car",
-      "fields": {
+      "item": {
+        "name": "Micro Car",
+        "category": "January 2026 Gifts Refresh (Current)",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/micro-car.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/e/e8/MicrocarNew.png/revision/latest/scale-to-width-down/268?cb=20260130212811"
+      "system": {
+        "slug": "january-2026-gifts-refresh-current-legendary-micro-car",
+        "section": "January 2026 Gifts Refresh (Current)",
+        "sortOrder": 5,
+        "image": "/Adopt%20Me/Gift%20Prizes/micro-car.webp"
+      }
     },
     {
-      "name": "Fish on a Stick Chew Toy",
-      "slug": "august-2025-gifts-refresh-common-fish-on-a-stick-chew-toy",
-      "category": "August 2025 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Fish_on_a_Stick_Chew_Toy",
-      "fields": {
+      "item": {
+        "name": "Fish on a Stick Chew Toy",
+        "category": "August 2025 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/fish-on-a-stick-chew-toy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/8/81/Fish_on_a_Stick_Chew_Toy.png/revision/latest?cb=20250822164920"
+      "system": {
+        "slug": "august-2025-gifts-refresh-common-fish-on-a-stick-chew-toy",
+        "section": "August 2025 Gifts Refresh",
+        "sortOrder": 6,
+        "image": "/Adopt%20Me/Gift%20Prizes/fish-on-a-stick-chew-toy.webp"
+      }
     },
     {
-      "name": "Boba Tea Chew Toy",
-      "slug": "august-2025-gifts-refresh-uncommon-boba-tea-chew-toy",
-      "category": "August 2025 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Boba_Tea_Chew_Toy",
-      "fields": {
+      "item": {
+        "name": "Boba Tea Chew Toy",
+        "category": "August 2025 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/boba-tea-chew-toy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/d/d9/Boba_Tea_Chew_Toy.png/revision/latest?cb=20250822165300"
+      "system": {
+        "slug": "august-2025-gifts-refresh-uncommon-boba-tea-chew-toy",
+        "section": "August 2025 Gifts Refresh",
+        "sortOrder": 7,
+        "image": "/Adopt%20Me/Gift%20Prizes/boba-tea-chew-toy.webp"
+      }
     },
     {
-      "name": "Cookie Sabre",
-      "slug": "august-2025-gifts-refresh-rare-cookie-sabre",
-      "category": "August 2025 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Cookie_Sabre",
-      "fields": {
+      "item": {
+        "name": "Cookie Sabre",
+        "category": "August 2025 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/cookie-sabre.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/f/fe/Cookie_Sabre.png/revision/latest?cb=20250822171224"
+      "system": {
+        "slug": "august-2025-gifts-refresh-rare-cookie-sabre",
+        "section": "August 2025 Gifts Refresh",
+        "sortOrder": 8,
+        "image": "/Adopt%20Me/Gift%20Prizes/cookie-sabre.webp"
+      }
     },
     {
-      "name": "Chandelier Pogo Stick",
-      "slug": "august-2025-gifts-refresh-ultra-rare-chandelier-pogo-stick",
-      "category": "August 2025 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Chandelier_Pogo_Stick",
-      "fields": {
+      "item": {
+        "name": "Chandelier Pogo Stick",
+        "category": "August 2025 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/chandelier-pogo-stick.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/b/ba/Chandelier_Pogo_Stick.png/revision/latest/scale-to-width-down/268?cb=20250822172213"
+      "system": {
+        "slug": "august-2025-gifts-refresh-ultra-rare-chandelier-pogo-stick",
+        "section": "August 2025 Gifts Refresh",
+        "sortOrder": 9,
+        "image": "/Adopt%20Me/Gift%20Prizes/chandelier-pogo-stick.webp"
+      }
     },
     {
-      "name": "Hovertible",
-      "slug": "august-2025-gifts-refresh-legendary-hovertible",
-      "category": "August 2025 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Hovertible",
-      "fields": {
+      "item": {
+        "name": "Hovertible",
+        "category": "August 2025 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/hovertible.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/0f/Hovertible.png/revision/latest/scale-to-width-down/268?cb=20250820153250"
+      "system": {
+        "slug": "august-2025-gifts-refresh-legendary-hovertible",
+        "section": "August 2025 Gifts Refresh",
+        "sortOrder": 10,
+        "image": "/Adopt%20Me/Gift%20Prizes/hovertible.webp"
+      }
     },
     {
-      "name": "Angelic Pogostick",
-      "slug": "november-2024-gifts-refresh-common-angelic-pogostick",
-      "category": "November 2024 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Angelic_Pogostick",
-      "fields": {
+      "item": {
+        "name": "Angelic Pogostick",
+        "category": "November 2024 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/angelic-pogostick.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/c/c6/Angelic_Pogostick.png/revision/latest?cb=20241122194917"
+      "system": {
+        "slug": "november-2024-gifts-refresh-common-angelic-pogostick",
+        "section": "November 2024 Gifts Refresh",
+        "sortOrder": 11,
+        "image": "/Adopt%20Me/Gift%20Prizes/angelic-pogostick.webp"
+      }
     },
     {
-      "name": "Burger Plushie",
-      "slug": "november-2024-gifts-refresh-uncommon-burger-plushie",
-      "category": "November 2024 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Burger_Plushie",
-      "fields": {
+      "item": {
+        "name": "Burger Plushie",
+        "category": "November 2024 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/burger-plushie.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/02/Burger_Plushie.png/revision/latest?cb=20241122195455"
+      "system": {
+        "slug": "november-2024-gifts-refresh-uncommon-burger-plushie",
+        "section": "November 2024 Gifts Refresh",
+        "sortOrder": 12,
+        "image": "/Adopt%20Me/Gift%20Prizes/burger-plushie.webp"
+      }
     },
     {
-      "name": "Book of Binding Leash",
-      "slug": "november-2024-gifts-refresh-rare-book-of-binding-leash",
-      "category": "November 2024 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Book_of_Binding_Leash",
-      "fields": {
+      "item": {
+        "name": "Book of Binding Leash",
+        "category": "November 2024 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/book-of-binding-leash.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/e/e9/Book_of_Binding_Leash.png/revision/latest?cb=20241122214058"
+      "system": {
+        "slug": "november-2024-gifts-refresh-rare-book-of-binding-leash",
+        "section": "November 2024 Gifts Refresh",
+        "sortOrder": 13,
+        "image": "/Adopt%20Me/Gift%20Prizes/book-of-binding-leash.webp"
+      }
     },
     {
-      "name": "Claw Machine Stroller",
-      "slug": "november-2024-gifts-refresh-ultra-rare-claw-machine-stroller",
-      "category": "November 2024 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Claw_Machine_Stroller",
-      "fields": {
+      "item": {
+        "name": "Claw Machine Stroller",
+        "category": "November 2024 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/claw-machine-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/c/c5/Claw_Machine_Stroller.png/revision/latest?cb=20241122200703"
+      "system": {
+        "slug": "november-2024-gifts-refresh-ultra-rare-claw-machine-stroller",
+        "section": "November 2024 Gifts Refresh",
+        "sortOrder": 14,
+        "image": "/Adopt%20Me/Gift%20Prizes/claw-machine-stroller.webp"
+      }
     },
     {
-      "name": "Dolphin Cruiser",
-      "slug": "november-2024-gifts-refresh-legendary-dolphin-cruiser",
-      "category": "November 2024 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Dolphin_Cruiser",
-      "fields": {
+      "item": {
+        "name": "Dolphin Cruiser",
+        "category": "November 2024 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/dolphin-cruiser.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/61/Dolphin_Cruiser.png/revision/latest/scale-to-width-down/268?cb=20241123004608"
+      "system": {
+        "slug": "november-2024-gifts-refresh-legendary-dolphin-cruiser",
+        "section": "November 2024 Gifts Refresh",
+        "sortOrder": 15,
+        "image": "/Adopt%20Me/Gift%20Prizes/dolphin-cruiser.webp"
+      }
     },
     {
-      "name": "Baseball Toy",
-      "slug": "may-2024-gifts-refresh-common-baseball-toy",
-      "category": "May 2024 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Baseball_Toy",
-      "fields": {
+      "item": {
+        "name": "Baseball Toy",
+        "category": "May 2024 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/baseball-toy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/6e/Baseball_Toy.png/revision/latest?cb=20240510214127"
+      "system": {
+        "slug": "may-2024-gifts-refresh-common-baseball-toy",
+        "section": "May 2024 Gifts Refresh",
+        "sortOrder": 16,
+        "image": "/Adopt%20Me/Gift%20Prizes/baseball-toy.webp"
+      }
     },
     {
-      "name": "Disco Ball Balloon",
-      "slug": "may-2024-gifts-refresh-uncommon-disco-ball-balloon",
-      "category": "May 2024 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Disco_Ball_Balloon",
-      "fields": {
+      "item": {
+        "name": "Disco Ball Balloon",
+        "category": "May 2024 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/disco-ball-balloon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/99/Disco_Ball_Balloon.png/revision/latest?cb=20240510214032"
+      "system": {
+        "slug": "may-2024-gifts-refresh-uncommon-disco-ball-balloon",
+        "section": "May 2024 Gifts Refresh",
+        "sortOrder": 17,
+        "image": "/Adopt%20Me/Gift%20Prizes/disco-ball-balloon.webp"
+      }
     },
     {
-      "name": "Chattering Teeth Grappling Hook",
-      "slug": "may-2024-gifts-refresh-rare-chattering-teeth-grappling-hook",
-      "category": "May 2024 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Chattering_Teeth_Grappling_Hook",
-      "fields": {
+      "item": {
+        "name": "Chattering Teeth Grappling Hook",
+        "category": "May 2024 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/chattering-teeth-grappling-hook.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/b/b6/Chattering_Teeth_Grappling_Hook.png/revision/latest?cb=20240510175822"
+      "system": {
+        "slug": "may-2024-gifts-refresh-rare-chattering-teeth-grappling-hook",
+        "section": "May 2024 Gifts Refresh",
+        "sortOrder": 18,
+        "image": "/Adopt%20Me/Gift%20Prizes/chattering-teeth-grappling-hook.webp"
+      }
     },
     {
-      "name": "Dice Throw Toy",
-      "slug": "may-2024-gifts-refresh-ultra-rare-dice-throw-toy",
-      "category": "May 2024 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Dice_Throw_Toy",
-      "fields": {
+      "item": {
+        "name": "Dice Throw Toy",
+        "category": "May 2024 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/dice-throw-toy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/3/39/Dice_Throw_Toy.png/revision/latest?cb=20240510213525"
+      "system": {
+        "slug": "may-2024-gifts-refresh-ultra-rare-dice-throw-toy",
+        "section": "May 2024 Gifts Refresh",
+        "sortOrder": 19,
+        "image": "/Adopt%20Me/Gift%20Prizes/dice-throw-toy.webp"
+      }
     },
     {
-      "name": "Motorized Sofa",
-      "slug": "may-2024-gifts-refresh-legendary-motorized-sofa",
-      "category": "May 2024 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Motorized_Sofa",
-      "fields": {
+      "item": {
+        "name": "Motorized Sofa",
+        "category": "May 2024 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/motorized-sofa.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/a1/Motorized_Sofa.png/revision/latest?cb=20240510213524"
+      "system": {
+        "slug": "may-2024-gifts-refresh-legendary-motorized-sofa",
+        "section": "May 2024 Gifts Refresh",
+        "sortOrder": 20,
+        "image": "/Adopt%20Me/Gift%20Prizes/motorized-sofa.webp"
+      }
     },
     {
-      "name": "Olympian Rattle",
-      "slug": "november-2023-gifts-refresh-common-olympian-rattle",
-      "category": "November 2023 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Olympian_Rattle",
-      "fields": {
+      "item": {
+        "name": "Olympian Rattle",
+        "category": "November 2023 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/olympian-rattle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/97/Olympian_Rattle.png/revision/latest?cb=20231123024411"
+      "system": {
+        "slug": "november-2023-gifts-refresh-common-olympian-rattle",
+        "section": "November 2023 Gifts Refresh",
+        "sortOrder": 21,
+        "image": "/Adopt%20Me/Gift%20Prizes/olympian-rattle.webp"
+      }
     },
     {
-      "name": "Ray Gun Leash",
-      "slug": "november-2023-gifts-refresh-uncommon-ray-gun-leash",
-      "category": "November 2023 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Ray_Gun_Leash",
-      "fields": {
+      "item": {
+        "name": "Ray Gun Leash",
+        "category": "November 2023 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/ray-gun-leash.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/3/3a/Ray_Gun_Leash.png/revision/latest?cb=20231125010331"
+      "system": {
+        "slug": "november-2023-gifts-refresh-uncommon-ray-gun-leash",
+        "section": "November 2023 Gifts Refresh",
+        "sortOrder": 22,
+        "image": "/Adopt%20Me/Gift%20Prizes/ray-gun-leash.webp"
+      }
     },
     {
-      "name": "Love Perfume",
-      "slug": "november-2023-gifts-refresh-rare-love-perfume",
-      "category": "November 2023 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Love_Perfume",
-      "fields": {
+      "item": {
+        "name": "Love Perfume",
+        "category": "November 2023 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/love-perfume.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/d/d4/Love_Perfume.png/revision/latest?cb=20231206204012"
+      "system": {
+        "slug": "november-2023-gifts-refresh-rare-love-perfume",
+        "section": "November 2023 Gifts Refresh",
+        "sortOrder": 23,
+        "image": "/Adopt%20Me/Gift%20Prizes/love-perfume.webp"
+      }
     },
     {
-      "name": "Pea Pod Stroller",
-      "slug": "november-2023-gifts-refresh-ultra-rare-pea-pod-stroller",
-      "category": "November 2023 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Pea_Pod_Stroller",
-      "fields": {
+      "item": {
+        "name": "Pea Pod Stroller",
+        "category": "November 2023 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/pea-pod-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/c/c2/Pea_Pod_Stroller.png/revision/latest?cb=20231129002317"
+      "system": {
+        "slug": "november-2023-gifts-refresh-ultra-rare-pea-pod-stroller",
+        "section": "November 2023 Gifts Refresh",
+        "sortOrder": 24,
+        "image": "/Adopt%20Me/Gift%20Prizes/pea-pod-stroller.webp"
+      }
     },
     {
-      "name": "Dapper Friend Carrier",
-      "slug": "november-2023-gifts-refresh-legendary-dapper-friend-carrier",
-      "category": "November 2023 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Dapper_Friend_Carrier",
-      "fields": {
+      "item": {
+        "name": "Dapper Friend Carrier",
+        "category": "November 2023 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/dapper-friend-carrier.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/8/85/Dapper_Friend_Carrier.png/revision/latest?cb=20221103172023"
+      "system": {
+        "slug": "november-2023-gifts-refresh-legendary-dapper-friend-carrier",
+        "section": "November 2023 Gifts Refresh",
+        "sortOrder": 25,
+        "image": "/Adopt%20Me/Gift%20Prizes/dapper-friend-carrier.webp"
+      }
     },
     {
-      "name": "Leek Chew Toy",
-      "slug": "april-2023-gifts-refresh-common-leek-chew-toy",
-      "category": "April 2023 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Leek_Chew_Toy",
-      "fields": {
+      "item": {
+        "name": "Leek Chew Toy",
+        "category": "April 2023 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/leek-chew-toy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/a6/Leek_Chew_Toy.png/revision/latest?cb=20230420174205"
+      "system": {
+        "slug": "april-2023-gifts-refresh-common-leek-chew-toy",
+        "section": "April 2023 Gifts Refresh",
+        "sortOrder": 26,
+        "image": "/Adopt%20Me/Gift%20Prizes/leek-chew-toy.webp"
+      }
     },
     {
-      "name": "Coconut Stroller",
-      "slug": "april-2023-gifts-refresh-uncommon-coconut-stroller",
-      "category": "April 2023 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Coconut_Stroller",
-      "fields": {
+      "item": {
+        "name": "Coconut Stroller",
+        "category": "April 2023 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/coconut-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/8/8d/Coconut_Stroller.png/revision/latest?cb=20230420173931"
+      "system": {
+        "slug": "april-2023-gifts-refresh-uncommon-coconut-stroller",
+        "section": "April 2023 Gifts Refresh",
+        "sortOrder": 27,
+        "image": "/Adopt%20Me/Gift%20Prizes/coconut-stroller.webp"
+      }
     },
     {
-      "name": "Bumblebee Pogo Stick",
-      "slug": "april-2023-gifts-refresh-rare-bumblebee-pogo-stick",
-      "category": "April 2023 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Bumblebee_Pogo_Stick",
-      "fields": {
+      "item": {
+        "name": "Bumblebee Pogo Stick",
+        "category": "April 2023 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/bumblebee-pogo-stick.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/3/3e/Bumblebee_Pogo.png/revision/latest?cb=20230420174028"
+      "system": {
+        "slug": "april-2023-gifts-refresh-rare-bumblebee-pogo-stick",
+        "section": "April 2023 Gifts Refresh",
+        "sortOrder": 28,
+        "image": "/Adopt%20Me/Gift%20Prizes/bumblebee-pogo-stick.webp"
+      }
     },
     {
-      "name": "Bumblebee Grappling Hook",
-      "slug": "april-2023-gifts-refresh-ultra-rare-bumblebee-grappling-hook",
-      "category": "April 2023 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Bumblebee_Grappling_Hook",
-      "fields": {
+      "item": {
+        "name": "Bumblebee Grappling Hook",
+        "category": "April 2023 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/bumblebee-grappling-hook.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/c/c8/Bumblebee_Grappling_Hook.png/revision/latest/scale-to-width-down/268?cb=20230420173828"
+      "system": {
+        "slug": "april-2023-gifts-refresh-ultra-rare-bumblebee-grappling-hook",
+        "section": "April 2023 Gifts Refresh",
+        "sortOrder": 29,
+        "image": "/Adopt%20Me/Gift%20Prizes/bumblebee-grappling-hook.webp"
+      }
     },
     {
-      "name": "Dapper Friend Carrier",
-      "slug": "april-2023-gifts-refresh-legendary-dapper-friend-carrier",
-      "category": "April 2023 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Dapper_Friend_Carrier",
-      "fields": {
+      "item": {
+        "name": "Dapper Friend Carrier",
+        "category": "April 2023 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/dapper-friend-carrier-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/8/85/Dapper_Friend_Carrier.png/revision/latest?cb=20221103172023"
+      "system": {
+        "slug": "april-2023-gifts-refresh-legendary-dapper-friend-carrier",
+        "section": "April 2023 Gifts Refresh",
+        "sortOrder": 30,
+        "image": "/Adopt%20Me/Gift%20Prizes/dapper-friend-carrier-2.webp"
+      }
     },
     {
-      "name": "Anvil Balloon",
-      "slug": "november-2022-gifts-refresh-common-anvil-balloon",
-      "category": "November 2022 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Anvil_Balloon",
-      "fields": {
+      "item": {
+        "name": "Anvil Balloon",
+        "category": "November 2022 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/anvil-balloon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/8/8e/Anvil_Balloon.png/revision/latest?cb=20221103200019"
+      "system": {
+        "slug": "november-2022-gifts-refresh-common-anvil-balloon",
+        "section": "November 2022 Gifts Refresh",
+        "sortOrder": 31,
+        "image": "/Adopt%20Me/Gift%20Prizes/anvil-balloon.webp"
+      }
     },
     {
-      "name": "CD Throwing Disc",
-      "slug": "november-2022-gifts-refresh-uncommon-cd-throwing-disc",
-      "category": "November 2022 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/CD_Throwing_Disc",
-      "fields": {
+      "item": {
+        "name": "CD Throwing Disc",
+        "category": "November 2022 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/cd-throwing-disc.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/e/e2/CD_Throwing_Disc.png/revision/latest?cb=20221103195845"
+      "system": {
+        "slug": "november-2022-gifts-refresh-uncommon-cd-throwing-disc",
+        "section": "November 2022 Gifts Refresh",
+        "sortOrder": 32,
+        "image": "/Adopt%20Me/Gift%20Prizes/cd-throwing-disc.webp"
+      }
     },
     {
-      "name": "Apple Barrel Stroller",
-      "slug": "november-2022-gifts-refresh-rare-apple-barrel-stroller",
-      "category": "November 2022 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Apple_Barrel_Stroller",
-      "fields": {
+      "item": {
+        "name": "Apple Barrel Stroller",
+        "category": "November 2022 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/apple-barrel-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/aa/Apple_Barrel_Stroller.png/revision/latest?cb=20230903195744"
+      "system": {
+        "slug": "november-2022-gifts-refresh-rare-apple-barrel-stroller",
+        "section": "November 2022 Gifts Refresh",
+        "sortOrder": 33,
+        "image": "/Adopt%20Me/Gift%20Prizes/apple-barrel-stroller.webp"
+      }
     },
     {
-      "name": "Ancient Unicycle",
-      "slug": "november-2022-gifts-refresh-ultra-rare-ancient-unicycle",
-      "category": "November 2022 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Ancient_Unicycle",
-      "fields": {
+      "item": {
+        "name": "Ancient Unicycle",
+        "category": "November 2022 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/ancient-unicycle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/b/b4/Ancient_Unicycle.png/revision/latest?cb=20230425162504"
+      "system": {
+        "slug": "november-2022-gifts-refresh-ultra-rare-ancient-unicycle",
+        "section": "November 2022 Gifts Refresh",
+        "sortOrder": 34,
+        "image": "/Adopt%20Me/Gift%20Prizes/ancient-unicycle.webp"
+      }
     },
     {
-      "name": "Dapper Friend Carrier",
-      "slug": "november-2022-gifts-refresh-legendary-dapper-friend-carrier",
-      "category": "November 2022 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Dapper_Friend_Carrier",
-      "fields": {
+      "item": {
+        "name": "Dapper Friend Carrier",
+        "category": "November 2022 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/dapper-friend-carrier-3.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/8/85/Dapper_Friend_Carrier.png/revision/latest?cb=20221103172023"
+      "system": {
+        "slug": "november-2022-gifts-refresh-legendary-dapper-friend-carrier",
+        "section": "November 2022 Gifts Refresh",
+        "sortOrder": 35,
+        "image": "/Adopt%20Me/Gift%20Prizes/dapper-friend-carrier-3.webp"
+      }
     },
     {
-      "name": "Clover Balloon",
-      "slug": "march-2022-gifts-refresh-common-clover-balloon",
-      "category": "March 2022 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Clover_Balloon",
-      "fields": {
+      "item": {
+        "name": "Clover Balloon",
+        "category": "March 2022 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/clover-balloon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/68/Clover_Balloon.png/revision/latest?cb=20220331165048"
+      "system": {
+        "slug": "march-2022-gifts-refresh-common-clover-balloon",
+        "section": "March 2022 Gifts Refresh",
+        "sortOrder": 36,
+        "image": "/Adopt%20Me/Gift%20Prizes/clover-balloon.webp"
+      }
     },
     {
-      "name": "Anchor Balloon",
-      "slug": "march-2022-gifts-refresh-uncommon-anchor-balloon",
-      "category": "March 2022 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Anchor_Balloon",
-      "fields": {
+      "item": {
+        "name": "Anchor Balloon",
+        "category": "March 2022 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/anchor-balloon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/93/Anchor_Balloon.png/revision/latest?cb=20220331165047"
+      "system": {
+        "slug": "march-2022-gifts-refresh-uncommon-anchor-balloon",
+        "section": "March 2022 Gifts Refresh",
+        "sortOrder": 37,
+        "image": "/Adopt%20Me/Gift%20Prizes/anchor-balloon.webp"
+      }
     },
     {
-      "name": "Angelic Grappling Hook",
-      "slug": "march-2022-gifts-refresh-rare-angelic-grappling-hook",
-      "category": "March 2022 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Angelic_Grappling_Hook",
-      "fields": {
+      "item": {
+        "name": "Angelic Grappling Hook",
+        "category": "March 2022 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/angelic-grappling-hook.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/62/Angelic_Grappling_Hook.png/revision/latest?cb=20220331165048"
+      "system": {
+        "slug": "march-2022-gifts-refresh-rare-angelic-grappling-hook",
+        "section": "March 2022 Gifts Refresh",
+        "sortOrder": 38,
+        "image": "/Adopt%20Me/Gift%20Prizes/angelic-grappling-hook.webp"
+      }
     },
     {
-      "name": "Drooping Orchid Propeller",
-      "slug": "march-2022-gifts-refresh-ultra-rare-drooping-orchid-propeller",
-      "category": "March 2022 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Drooping_Orchid_Propeller",
-      "fields": {
+      "item": {
+        "name": "Drooping Orchid Propeller",
+        "category": "March 2022 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/drooping-orchid-propeller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/94/Drooping_Orchid_Propeller.png/revision/latest?cb=20220331165048"
+      "system": {
+        "slug": "march-2022-gifts-refresh-ultra-rare-drooping-orchid-propeller",
+        "section": "March 2022 Gifts Refresh",
+        "sortOrder": 39,
+        "image": "/Adopt%20Me/Gift%20Prizes/drooping-orchid-propeller.webp"
+      }
     },
     {
-      "name": "Growing Flower Hat",
-      "slug": "march-2022-gifts-refresh-legendary-growing-flower-hat",
-      "category": "March 2022 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Growing_Flower_Hat",
-      "fields": {
+      "item": {
+        "name": "Growing Flower Hat",
+        "category": "March 2022 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/growing-flower-hat.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/e/e1/Growing_Flower_Hat.png/revision/latest?cb=20220412143703"
+      "system": {
+        "slug": "march-2022-gifts-refresh-legendary-growing-flower-hat",
+        "section": "March 2022 Gifts Refresh",
+        "sortOrder": 40,
+        "image": "/Adopt%20Me/Gift%20Prizes/growing-flower-hat.webp"
+      }
     },
     {
-      "name": "Cactus Plushie Chew Toy",
-      "slug": "september-2021-gifts-refresh-common-cactus-plushie-chew-toy",
-      "category": "September 2021 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Cactus_Plushie_Chew_Toy",
-      "fields": {
+      "item": {
+        "name": "Cactus Plushie Chew Toy",
+        "category": "September 2021 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/cactus-plushie-chew-toy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/94/Cactus_Plushie_Chew_Toy.png/revision/latest?cb=20230405161839"
+      "system": {
+        "slug": "september-2021-gifts-refresh-common-cactus-plushie-chew-toy",
+        "section": "September 2021 Gifts Refresh",
+        "sortOrder": 41,
+        "image": "/Adopt%20Me/Gift%20Prizes/cactus-plushie-chew-toy.webp"
+      }
     },
     {
-      "name": "Daisy Flying Disc",
-      "slug": "september-2021-gifts-refresh-uncommon-daisy-flying-disc",
-      "category": "September 2021 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Daisy_Flying_Disc",
-      "fields": {
+      "item": {
+        "name": "Daisy Flying Disc",
+        "category": "September 2021 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/daisy-flying-disc.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/9e/Daisy_Flying_Disc.png/revision/latest?cb=20210902233304"
+      "system": {
+        "slug": "september-2021-gifts-refresh-uncommon-daisy-flying-disc",
+        "section": "September 2021 Gifts Refresh",
+        "sortOrder": 42,
+        "image": "/Adopt%20Me/Gift%20Prizes/daisy-flying-disc.webp"
+      }
     },
     {
-      "name": "Cactus Grappling Hook",
-      "slug": "september-2021-gifts-refresh-rare-cactus-grappling-hook",
-      "category": "September 2021 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Cactus_Grappling_Hook",
-      "fields": {
+      "item": {
+        "name": "Cactus Grappling Hook",
+        "category": "September 2021 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/cactus-grappling-hook.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/f/f8/Cactus_Grappling_Hook.png/revision/latest?cb=20210902233314"
+      "system": {
+        "slug": "september-2021-gifts-refresh-rare-cactus-grappling-hook",
+        "section": "September 2021 Gifts Refresh",
+        "sortOrder": 43,
+        "image": "/Adopt%20Me/Gift%20Prizes/cactus-grappling-hook.webp"
+      }
     },
     {
-      "name": "Galaxy Propeller",
-      "slug": "september-2021-gifts-refresh-ultra-rare-galaxy-propeller",
-      "category": "September 2021 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Galaxy_Propeller",
-      "fields": {
+      "item": {
+        "name": "Galaxy Propeller",
+        "category": "September 2021 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/galaxy-propeller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/f/fa/Galaxy_Propeller.png/revision/latest?cb=20210902233305"
+      "system": {
+        "slug": "september-2021-gifts-refresh-ultra-rare-galaxy-propeller",
+        "section": "September 2021 Gifts Refresh",
+        "sortOrder": 44,
+        "image": "/Adopt%20Me/Gift%20Prizes/galaxy-propeller.webp"
+      }
     },
     {
-      "name": "Dino Truck",
-      "slug": "september-2021-gifts-refresh-legendary-dino-truck",
-      "category": "September 2021 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Dino_Truck",
-      "fields": {
+      "item": {
+        "name": "Dino Truck",
+        "category": "September 2021 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/dino-truck.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/4c/DINO_TRUCK.png/revision/latest?cb=20210408181856"
+      "system": {
+        "slug": "september-2021-gifts-refresh-legendary-dino-truck",
+        "section": "September 2021 Gifts Refresh",
+        "sortOrder": 45,
+        "image": "/Adopt%20Me/Gift%20Prizes/dino-truck.webp"
+      }
     },
     {
-      "name": "Celestial Leash",
-      "slug": "march-2021-gifts-refresh-common-celestial-leash",
-      "category": "March 2021 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Celestial_Leash",
-      "fields": {
+      "item": {
+        "name": "Celestial Leash",
+        "category": "March 2021 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/celestial-leash.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/d/d6/Celestial_Leash.png/revision/latest/scale-to-width-down/268?cb=20220428053606"
+      "system": {
+        "slug": "march-2021-gifts-refresh-common-celestial-leash",
+        "section": "March 2021 Gifts Refresh",
+        "sortOrder": 46,
+        "image": "/Adopt%20Me/Gift%20Prizes/celestial-leash.webp"
+      }
     },
     {
-      "name": "Armchair Float",
-      "slug": "march-2021-gifts-refresh-uncommon-armchair-float",
-      "category": "March 2021 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Armchair_Float",
-      "fields": {
+      "item": {
+        "name": "Armchair Float",
+        "category": "March 2021 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/armchair-float.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/d/d7/Armchair_Float.png/revision/latest?cb=20210323145031"
+      "system": {
+        "slug": "march-2021-gifts-refresh-uncommon-armchair-float",
+        "section": "March 2021 Gifts Refresh",
+        "sortOrder": 47,
+        "image": "/Adopt%20Me/Gift%20Prizes/armchair-float.webp"
+      }
     },
     {
-      "name": "Butterfly Roller Skates",
-      "slug": "march-2021-gifts-refresh-rare-butterfly-roller-skates",
-      "category": "March 2021 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Butterfly_Roller_Skates",
-      "fields": {
+      "item": {
+        "name": "Butterfly Roller Skates",
+        "category": "March 2021 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/butterfly-roller-skates.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/9f/Butterfly_Roller_Skates.png/revision/latest?cb=20210318212639"
+      "system": {
+        "slug": "march-2021-gifts-refresh-rare-butterfly-roller-skates",
+        "section": "March 2021 Gifts Refresh",
+        "sortOrder": 48,
+        "image": "/Adopt%20Me/Gift%20Prizes/butterfly-roller-skates.webp"
+      }
     },
     {
-      "name": "Catapult Stroller",
-      "slug": "march-2021-gifts-refresh-ultra-rare-catapult-stroller",
-      "category": "March 2021 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Catapult_Stroller",
-      "fields": {
+      "item": {
+        "name": "Catapult Stroller",
+        "category": "March 2021 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/catapult-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/08/Catapult_Stroller.png/revision/latest?cb=20230614180711"
+      "system": {
+        "slug": "march-2021-gifts-refresh-ultra-rare-catapult-stroller",
+        "section": "March 2021 Gifts Refresh",
+        "sortOrder": 49,
+        "image": "/Adopt%20Me/Gift%20Prizes/catapult-stroller.webp"
+      }
     },
     {
-      "name": "Dino Truck",
-      "slug": "march-2021-gifts-refresh-legendary-dino-truck",
-      "category": "March 2021 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Dino_Truck",
-      "fields": {
+      "item": {
+        "name": "Dino Truck",
+        "category": "March 2021 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/dino-truck-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/4c/DINO_TRUCK.png/revision/latest?cb=20210408181856"
+      "system": {
+        "slug": "march-2021-gifts-refresh-legendary-dino-truck",
+        "section": "March 2021 Gifts Refresh",
+        "sortOrder": 50,
+        "image": "/Adopt%20Me/Gift%20Prizes/dino-truck-2.webp"
+      }
     },
     {
-      "name": "Ice Cream Rattle",
-      "slug": "november-2019-gifts-refresh-common-ice-cream-rattle",
-      "category": "November 2019 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Ice_Cream_Rattle",
-      "fields": {
+      "item": {
+        "name": "Ice Cream Rattle",
+        "category": "November 2019 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/ice-cream-rattle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/7/7b/AM_Ice_Cream_Rattle.png/revision/latest/scale-to-width-down/268?cb=20220427140734"
+      "system": {
+        "slug": "november-2019-gifts-refresh-common-ice-cream-rattle",
+        "section": "November 2019 Gifts Refresh",
+        "sortOrder": 51,
+        "image": "/Adopt%20Me/Gift%20Prizes/ice-cream-rattle.webp"
+      }
     },
     {
-      "name": "Boomerang Throw Toy",
-      "slug": "november-2019-gifts-refresh-uncommon-boomerang-throw-toy",
-      "category": "November 2019 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Boomerang_Throw_Toy",
-      "fields": {
+      "item": {
+        "name": "Boomerang Throw Toy",
+        "category": "November 2019 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/boomerang-throw-toy.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/a6/Boomerang_Throw_Toy--_transparent.png/revision/latest?cb=20210404045010"
+      "system": {
+        "slug": "november-2019-gifts-refresh-uncommon-boomerang-throw-toy",
+        "section": "November 2019 Gifts Refresh",
+        "sortOrder": 52,
+        "image": "/Adopt%20Me/Gift%20Prizes/boomerang-throw-toy.webp"
+      }
     },
     {
-      "name": "Crate Stroller",
-      "slug": "november-2019-gifts-refresh-rare-crate-stroller",
-      "category": "November 2019 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Crate_Stroller",
-      "fields": {
+      "item": {
+        "name": "Crate Stroller",
+        "category": "November 2019 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/crate-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/68/Crate_Stroller.png/revision/latest?cb=20220102165839"
+      "system": {
+        "slug": "november-2019-gifts-refresh-rare-crate-stroller",
+        "section": "November 2019 Gifts Refresh",
+        "sortOrder": 53,
+        "image": "/Adopt%20Me/Gift%20Prizes/crate-stroller.webp"
+      }
     },
     {
-      "name": "Airplane Propeller",
-      "slug": "november-2019-gifts-refresh-ultra-rare-airplane-propeller",
-      "category": "November 2019 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Airplane_Propeller",
-      "fields": {
+      "item": {
+        "name": "Airplane Propeller",
+        "category": "November 2019 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/airplane-propeller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/b/b6/AM_Airplane_Propeller.png/revision/latest/scale-to-width-down/268?cb=20220427144759"
+      "system": {
+        "slug": "november-2019-gifts-refresh-ultra-rare-airplane-propeller",
+        "section": "November 2019 Gifts Refresh",
+        "sortOrder": 54,
+        "image": "/Adopt%20Me/Gift%20Prizes/airplane-propeller.webp"
+      }
     },
     {
-      "name": "Banana Car",
-      "slug": "november-2019-gifts-refresh-legendary-banana-car",
-      "category": "November 2019 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Banana_Car",
-      "fields": {
+      "item": {
+        "name": "Banana Car",
+        "category": "November 2019 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/banana-car.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/9f/Banana_Car.png/revision/latest?cb=20220118080725"
+      "system": {
+        "slug": "november-2019-gifts-refresh-legendary-banana-car",
+        "section": "November 2019 Gifts Refresh",
+        "sortOrder": 55,
+        "image": "/Adopt%20Me/Gift%20Prizes/banana-car.webp"
+      }
     },
     {
-      "name": "Chew Ball",
-      "slug": "summer-2019-gifts-refresh-common-chew-ball",
-      "category": "Summer 2019 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Chew_Ball",
-      "fields": {
+      "item": {
+        "name": "Chew Ball",
+        "category": "Summer 2019 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/chew-ball.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/ac/AM_chew_ball.png/revision/latest?cb=20220408180353"
+      "system": {
+        "slug": "summer-2019-gifts-refresh-common-chew-ball",
+        "section": "Summer 2019 Gifts Refresh",
+        "sortOrder": 56,
+        "image": "/Adopt%20Me/Gift%20Prizes/chew-ball.webp"
+      }
     },
     {
-      "name": "Bubblegum Machine Rattle",
-      "slug": "summer-2019-gifts-refresh-uncommon-bubblegum-machine-rattle",
-      "category": "Summer 2019 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Bubblegum_Machine_Rattle",
-      "fields": {
+      "item": {
+        "name": "Bubblegum Machine Rattle",
+        "category": "Summer 2019 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/bubblegum-machine-rattle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/b/b4/AM_Bubblegum_Machine_Rattle.png/revision/latest/scale-to-width-down/268?cb=20220428053120"
+      "system": {
+        "slug": "summer-2019-gifts-refresh-uncommon-bubblegum-machine-rattle",
+        "section": "Summer 2019 Gifts Refresh",
+        "sortOrder": 57,
+        "image": "/Adopt%20Me/Gift%20Prizes/bubblegum-machine-rattle.webp"
+      }
     },
     {
-      "name": "Crown Flying Disc",
-      "slug": "summer-2019-gifts-refresh-rare-crown-flying-disc",
-      "category": "Summer 2019 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Crown_Flying_Disc",
-      "fields": {
+      "item": {
+        "name": "Crown Flying Disc",
+        "category": "Summer 2019 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/crown-flying-disc.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/9f/Crown_Frisbee_AM.png/revision/latest?cb=20201104132809"
+      "system": {
+        "slug": "summer-2019-gifts-refresh-rare-crown-flying-disc",
+        "section": "Summer 2019 Gifts Refresh",
+        "sortOrder": 58,
+        "image": "/Adopt%20Me/Gift%20Prizes/crown-flying-disc.webp"
+      }
     },
     {
-      "name": "Donut Unicycle",
-      "slug": "summer-2019-gifts-refresh-ultra-rare-donut-unicycle",
-      "category": "Summer 2019 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Donut_Unicycle",
-      "fields": {
+      "item": {
+        "name": "Donut Unicycle",
+        "category": "Summer 2019 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/donut-unicycle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/3/34/Donut_Unicycle_In_Inventory.png/revision/latest?cb=20201104181240"
+      "system": {
+        "slug": "summer-2019-gifts-refresh-ultra-rare-donut-unicycle",
+        "section": "Summer 2019 Gifts Refresh",
+        "sortOrder": 59,
+        "image": "/Adopt%20Me/Gift%20Prizes/donut-unicycle.webp"
+      }
     },
     {
-      "name": "Banana Car",
-      "slug": "summer-2019-gifts-refresh-legendary-banana-car",
-      "category": "Summer 2019 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Banana_Car",
-      "fields": {
+      "item": {
+        "name": "Banana Car",
+        "category": "Summer 2019 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/banana-car-2.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/9f/Banana_Car.png/revision/latest?cb=20220118080725"
+      "system": {
+        "slug": "summer-2019-gifts-refresh-legendary-banana-car",
+        "section": "Summer 2019 Gifts Refresh",
+        "sortOrder": 60,
+        "image": "/Adopt%20Me/Gift%20Prizes/banana-car-2.webp"
+      }
     },
     {
-      "name": "Banana Plush",
-      "slug": "january-2019-gifts-refresh-common-banana-plush",
-      "category": "January 2019 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Banana_Plush",
-      "fields": {
+      "item": {
+        "name": "Banana Plush",
+        "category": "January 2019 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/banana-plush.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/49/AM_Banana_Plush.png/revision/latest?cb=20220110203418"
+      "system": {
+        "slug": "january-2019-gifts-refresh-common-banana-plush",
+        "section": "January 2019 Gifts Refresh",
+        "sortOrder": 61,
+        "image": "/Adopt%20Me/Gift%20Prizes/banana-plush.webp"
+      }
     },
     {
-      "name": "Balloons",
-      "slug": "january-2019-gifts-refresh-uncommon-balloons",
-      "category": "January 2019 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Balloons",
-      "fields": {
+      "item": {
+        "name": "Balloons",
+        "category": "January 2019 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/balloons.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/48/AM_Balloons.png/revision/latest/scale-to-width-down/268?cb=20220428052616"
+      "system": {
+        "slug": "january-2019-gifts-refresh-uncommon-balloons",
+        "section": "January 2019 Gifts Refresh",
+        "sortOrder": 62,
+        "image": "/Adopt%20Me/Gift%20Prizes/balloons.webp"
+      }
     },
     {
-      "name": "Banana Stroller",
-      "slug": "january-2019-gifts-refresh-rare-banana-stroller",
-      "category": "January 2019 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Banana_Stroller",
-      "fields": {
+      "item": {
+        "name": "Banana Stroller",
+        "category": "January 2019 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/banana-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/d/d1/Banana_Stroller.png/revision/latest?cb=20220102165833"
+      "system": {
+        "slug": "january-2019-gifts-refresh-rare-banana-stroller",
+        "section": "January 2019 Gifts Refresh",
+        "sortOrder": 63,
+        "image": "/Adopt%20Me/Gift%20Prizes/banana-stroller.webp"
+      }
     },
     {
-      "name": "Cannon Stroller",
-      "slug": "january-2019-gifts-refresh-ultra-rare-cannon-stroller",
-      "category": "January 2019 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Cannon_Stroller",
-      "fields": {
+      "item": {
+        "name": "Cannon Stroller",
+        "category": "January 2019 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/cannon-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/68/Cannon_Stroller_in_a_player%27s_inventory..png/revision/latest?cb=20211111020957"
+      "system": {
+        "slug": "january-2019-gifts-refresh-ultra-rare-cannon-stroller",
+        "section": "January 2019 Gifts Refresh",
+        "sortOrder": 64,
+        "image": "/Adopt%20Me/Gift%20Prizes/cannon-stroller.webp"
+      }
     },
     {
-      "name": "Donut Cycle",
-      "slug": "january-2019-gifts-refresh-legendary-donut-cycle",
-      "category": "January 2019 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Donut_Cycle",
-      "fields": {
+      "item": {
+        "name": "Donut Cycle",
+        "category": "January 2019 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/donut-cycle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/11/Donut_Cycle_AM.png/revision/latest?cb=20220115094501"
+      "system": {
+        "slug": "january-2019-gifts-refresh-legendary-donut-cycle",
+        "section": "January 2019 Gifts Refresh",
+        "sortOrder": 65,
+        "image": "/Adopt%20Me/Gift%20Prizes/donut-cycle.webp"
+      }
     },
     {
-      "name": "Horse Plush",
-      "slug": "december-2018-gifts-refresh-common-horse-plush",
-      "category": "December 2018 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Horse_Plush",
-      "fields": {
+      "item": {
+        "name": "Horse Plush",
+        "category": "December 2018 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/horse-plush.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/9a/Horse_Plush.png/revision/latest?cb=20241008024509"
+      "system": {
+        "slug": "december-2018-gifts-refresh-common-horse-plush",
+        "section": "December 2018 Gifts Refresh",
+        "sortOrder": 66,
+        "image": "/Adopt%20Me/Gift%20Prizes/horse-plush.webp"
+      }
     },
     {
-      "name": "Anna Rattle",
-      "slug": "december-2018-gifts-refresh-uncommon-anna-rattle",
-      "category": "December 2018 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Anna_Rattle",
-      "fields": {
+      "item": {
+        "name": "Anna Rattle",
+        "category": "December 2018 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/anna-rattle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/92/Anna_Rattle_toy.png/revision/latest?cb=20240523204443"
+      "system": {
+        "slug": "december-2018-gifts-refresh-uncommon-anna-rattle",
+        "section": "December 2018 Gifts Refresh",
+        "sortOrder": 67,
+        "image": "/Adopt%20Me/Gift%20Prizes/anna-rattle.webp"
+      }
     },
     {
-      "name": "Balloon",
-      "slug": "december-2018-gifts-refresh-rare-balloon",
-      "category": "December 2018 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Balloon",
-      "fields": {
+      "item": {
+        "name": "Balloon",
+        "category": "December 2018 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/balloon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/48/Balloon.png/revision/latest?cb=20220226195459"
+      "system": {
+        "slug": "december-2018-gifts-refresh-rare-balloon",
+        "section": "December 2018 Gifts Refresh",
+        "sortOrder": 68,
+        "image": "/Adopt%20Me/Gift%20Prizes/balloon.webp"
+      }
     },
     {
-      "name": "Baby Basket Stroller",
-      "slug": "december-2018-gifts-refresh-ultra-rare-baby-basket-stroller",
-      "category": "December 2018 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Baby_Basket_Stroller",
-      "fields": {
+      "item": {
+        "name": "Baby Basket Stroller",
+        "category": "December 2018 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/baby-basket-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/97/Baby_Basket_in_a_player%27s_inventory..png/revision/latest/scale-to-width-down/268?cb=20211105152555"
+      "system": {
+        "slug": "december-2018-gifts-refresh-ultra-rare-baby-basket-stroller",
+        "section": "December 2018 Gifts Refresh",
+        "sortOrder": 69,
+        "image": "/Adopt%20Me/Gift%20Prizes/baby-basket-stroller.webp"
+      }
     },
     {
-      "name": "Bunny Carriage",
-      "slug": "december-2018-gifts-refresh-legendary-bunny-carriage",
-      "category": "December 2018 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Bunny_Carriage",
-      "fields": {
+      "item": {
+        "name": "Bunny Carriage",
+        "category": "December 2018 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/bunny-carriage.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/a2/Bunny_Carriage.png/revision/latest?cb=20211103230738"
+      "system": {
+        "slug": "december-2018-gifts-refresh-legendary-bunny-carriage",
+        "section": "December 2018 Gifts Refresh",
+        "sortOrder": 70,
+        "image": "/Adopt%20Me/Gift%20Prizes/bunny-carriage.webp"
+      }
     },
     {
-      "name": "Cat Plush",
-      "slug": "september-2018-gifts-refresh-common-cat-plush",
-      "category": "September 2018 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Cat_Plush",
-      "fields": {
+      "item": {
+        "name": "Cat Plush",
+        "category": "September 2018 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/cat-plush.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/c/c0/Cat_Plush_toy.png/revision/latest?cb=20240529234058"
+      "system": {
+        "slug": "september-2018-gifts-refresh-common-cat-plush",
+        "section": "September 2018 Gifts Refresh",
+        "sortOrder": 71,
+        "image": "/Adopt%20Me/Gift%20Prizes/cat-plush.webp"
+      }
     },
     {
-      "name": "Creator Rattle (Bethink)",
-      "slug": "september-2018-gifts-refresh-uncommon-creator-rattle-bethink",
-      "category": "September 2018 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Creator_Rattle_(Bethink)",
-      "fields": {
+      "item": {
+        "name": "Creator Rattle (Bethink)",
+        "category": "September 2018 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/creator-rattle-bethink.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/f/f9/Creator_Rattle_%28Bethink%29_AM_HD.png/revision/latest?cb=20201030234945"
+      "system": {
+        "slug": "september-2018-gifts-refresh-uncommon-creator-rattle-bethink",
+        "section": "September 2018 Gifts Refresh",
+        "sortOrder": 72,
+        "image": "/Adopt%20Me/Gift%20Prizes/creator-rattle-bethink.webp"
+      }
     },
     {
-      "name": "Wooden Pogo",
-      "slug": "september-2018-gifts-refresh-starpower-wand-wooden-pogo",
-      "category": "September 2018 Gifts Refresh",
-      "rarity": "Starpower Wand",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Wooden_Pogo",
-      "fields": {
+      "item": {
+        "name": "Wooden Pogo",
+        "category": "September 2018 Gifts Refresh",
         "rarity": "Starpower Wand"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/wooden-pogo.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/af/Wooden_Pogo.png/revision/latest?cb=20201114190402"
+      "system": {
+        "slug": "september-2018-gifts-refresh-starpower-wand-wooden-pogo",
+        "section": "September 2018 Gifts Refresh",
+        "sortOrder": 73,
+        "image": "/Adopt%20Me/Gift%20Prizes/wooden-pogo.webp"
+      }
     },
     {
-      "name": "Airplane Stroller",
-      "slug": "september-2018-gifts-refresh-rare-airplane-stroller",
-      "category": "September 2018 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Airplane_Stroller",
-      "fields": {
+      "item": {
+        "name": "Airplane Stroller",
+        "category": "September 2018 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/airplane-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/7/75/Airplane_Stroller.png/revision/latest?cb=20220102165834"
+      "system": {
+        "slug": "september-2018-gifts-refresh-rare-airplane-stroller",
+        "section": "September 2018 Gifts Refresh",
+        "sortOrder": 74,
+        "image": "/Adopt%20Me/Gift%20Prizes/airplane-stroller.webp"
+      }
     },
     {
-      "name": "Race Car Stroller",
-      "slug": "september-2018-gifts-refresh-ultra-rare-race-car-stroller",
-      "category": "September 2018 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Race_Car_Stroller",
-      "fields": {
+      "item": {
+        "name": "Race Car Stroller",
+        "category": "September 2018 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/race-car-stroller.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/9f/Race_Car_Stroller.png/revision/latest?cb=20220102165844"
+      "system": {
+        "slug": "september-2018-gifts-refresh-ultra-rare-race-car-stroller",
+        "section": "September 2018 Gifts Refresh",
+        "sortOrder": 75,
+        "image": "/Adopt%20Me/Gift%20Prizes/race-car-stroller.webp"
+      }
     },
     {
-      "name": "Cloud",
-      "slug": "september-2018-gifts-refresh-legendary-cloud",
-      "category": "September 2018 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Cloud",
-      "fields": {
+      "item": {
+        "name": "Cloud",
+        "category": "September 2018 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/cloud.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/3/3f/Cloud_In_Inventory.png/revision/latest?cb=20200901231157"
+      "system": {
+        "slug": "september-2018-gifts-refresh-legendary-cloud",
+        "section": "September 2018 Gifts Refresh",
+        "sortOrder": 76,
+        "image": "/Adopt%20Me/Gift%20Prizes/cloud.webp"
+      }
     },
     {
-      "name": "Black Scooter",
-      "slug": "spring-2018-gifts-refresh-common-black-scooter",
-      "category": "Spring 2018 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Black_Scooter",
-      "fields": {
+      "item": {
+        "name": "Black Scooter",
+        "category": "Spring 2018 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/black-scooter.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/6/64/Black_Scooter_vehicle.png/revision/latest/scale-to-width-down/268?cb=20240702180312"
+      "system": {
+        "slug": "spring-2018-gifts-refresh-common-black-scooter",
+        "section": "Spring 2018 Gifts Refresh",
+        "sortOrder": 77,
+        "image": "/Adopt%20Me/Gift%20Prizes/black-scooter.webp"
+      }
     },
     {
-      "name": "Glass Scooter",
-      "slug": "spring-2018-gifts-refresh-uncommon-glass-scooter",
-      "category": "Spring 2018 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Glass_Scooter",
-      "fields": {
+      "item": {
+        "name": "Glass Scooter",
+        "category": "Spring 2018 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/glass-scooter.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/17/Glass_Scooter.png/revision/latest/scale-to-width-down/268?cb=20240611013048"
+      "system": {
+        "slug": "spring-2018-gifts-refresh-uncommon-glass-scooter",
+        "section": "Spring 2018 Gifts Refresh",
+        "sortOrder": 78,
+        "image": "/Adopt%20Me/Gift%20Prizes/glass-scooter.webp"
+      }
     },
     {
-      "name": "Adopt Me Boy Scooter",
-      "slug": "spring-2018-gifts-refresh-rare-adopt-me-boy-scooter",
-      "category": "Spring 2018 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Adopt_Me_Boy_Scooter",
-      "fields": {
+      "item": {
+        "name": "Adopt Me Boy Scooter",
+        "category": "Spring 2018 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/adopt-me-boy-scooter.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/48/Adopt_Me_Boy_Scooter_vehicle.png/revision/latest/scale-to-width-down/268?cb=20240526021832"
+      "system": {
+        "slug": "spring-2018-gifts-refresh-rare-adopt-me-boy-scooter",
+        "section": "Spring 2018 Gifts Refresh",
+        "sortOrder": 79,
+        "image": "/Adopt%20Me/Gift%20Prizes/adopt-me-boy-scooter.webp"
+      }
     },
     {
-      "name": "Neon Blue Scooter",
-      "slug": "spring-2018-gifts-refresh-ultra-rare-neon-blue-scooter",
-      "category": "Spring 2018 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Neon_Blue_Scooter",
-      "fields": {
+      "item": {
+        "name": "Neon Blue Scooter",
+        "category": "Spring 2018 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/neon-blue-scooter.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/0/09/Neonbluescooter.png/revision/latest/scale-to-width-down/268?cb=20180712044607"
+      "system": {
+        "slug": "spring-2018-gifts-refresh-ultra-rare-neon-blue-scooter",
+        "section": "Spring 2018 Gifts Refresh",
+        "sortOrder": 80,
+        "image": "/Adopt%20Me/Gift%20Prizes/neon-blue-scooter.webp"
+      }
     },
     {
-      "name": "Mono-Moped",
-      "slug": "spring-2018-gifts-refresh-legendary-mono-moped",
-      "category": "Spring 2018 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Mono-Moped",
-      "fields": {
+      "item": {
+        "name": "Mono-Moped",
+        "category": "Spring 2018 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/mono-moped.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/9/9e/Mono-Moped_In_Inventory.png/revision/latest?cb=20200905001643"
+      "system": {
+        "slug": "spring-2018-gifts-refresh-legendary-mono-moped",
+        "section": "Spring 2018 Gifts Refresh",
+        "sortOrder": 81,
+        "image": "/Adopt%20Me/Gift%20Prizes/mono-moped.webp"
+      }
     },
     {
-      "name": "Black Skateboard",
-      "slug": "january-2018-gifts-refresh-common-black-skateboard",
-      "category": "January 2018 Gifts Refresh",
-      "rarity": "Common",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Black_Skateboard",
-      "fields": {
+      "item": {
+        "name": "Black Skateboard",
+        "category": "January 2018 Gifts Refresh",
         "rarity": "Common"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/black-skateboard.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/d/d8/Black_Skateboard_vehicle.png/revision/latest/scale-to-width-down/268?cb=20240611015831"
+      "system": {
+        "slug": "january-2018-gifts-refresh-common-black-skateboard",
+        "section": "January 2018 Gifts Refresh",
+        "sortOrder": 82,
+        "image": "/Adopt%20Me/Gift%20Prizes/black-skateboard.webp"
+      }
     },
     {
-      "name": "Glass Skateboard",
-      "slug": "january-2018-gifts-refresh-uncommon-glass-skateboard",
-      "category": "January 2018 Gifts Refresh",
-      "rarity": "Uncommon",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Glass_Skateboard",
-      "fields": {
+      "item": {
+        "name": "Glass Skateboard",
+        "category": "January 2018 Gifts Refresh",
         "rarity": "Uncommon"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/glass-skateboard.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/d/d7/Glass_Skateboard_In_Inventory.png/revision/latest/scale-to-width-down/268?cb=20200310213120"
+      "system": {
+        "slug": "january-2018-gifts-refresh-uncommon-glass-skateboard",
+        "section": "January 2018 Gifts Refresh",
+        "sortOrder": 83,
+        "image": "/Adopt%20Me/Gift%20Prizes/glass-skateboard.webp"
+      }
     },
     {
-      "name": "Bethink Skateboard",
-      "slug": "january-2018-gifts-refresh-rare-bethink-skateboard",
-      "category": "January 2018 Gifts Refresh",
-      "rarity": "Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Bethink_Skateboard",
-      "fields": {
+      "item": {
+        "name": "Bethink Skateboard",
+        "category": "January 2018 Gifts Refresh",
         "rarity": "Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/bethink-skateboard.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/1/1c/Bethink_Skateboard.png/revision/latest/scale-to-width-down/268?cb=20240611014013"
+      "system": {
+        "slug": "january-2018-gifts-refresh-rare-bethink-skateboard",
+        "section": "January 2018 Gifts Refresh",
+        "sortOrder": 84,
+        "image": "/Adopt%20Me/Gift%20Prizes/bethink-skateboard.webp"
+      }
     },
     {
-      "name": "Neon Black Skateboard",
-      "slug": "january-2018-gifts-refresh-ultra-rare-neon-black-skateboard",
-      "category": "January 2018 Gifts Refresh",
-      "rarity": "Ultra-Rare",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Neon_Black_Skateboard",
-      "fields": {
+      "item": {
+        "name": "Neon Black Skateboard",
+        "category": "January 2018 Gifts Refresh",
         "rarity": "Ultra-Rare"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/neon-black-skateboard.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/4/4c/Neonblackskateboard.png/revision/latest/scale-to-width-down/268?cb=20180712184939"
+      "system": {
+        "slug": "january-2018-gifts-refresh-ultra-rare-neon-black-skateboard",
+        "section": "January 2018 Gifts Refresh",
+        "sortOrder": 85,
+        "image": "/Adopt%20Me/Gift%20Prizes/neon-black-skateboard.webp"
+      }
     },
     {
-      "name": "Neon White Skateboard",
-      "slug": "january-2018-gifts-refresh-neon-red-skateboard-neon-white-skateboard",
-      "category": "January 2018 Gifts Refresh",
-      "rarity": "Neon Red Skateboard",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Neon_White_Skateboard",
-      "fields": {
+      "item": {
+        "name": "Neon White Skateboard",
+        "category": "January 2018 Gifts Refresh",
         "rarity": "Neon Red Skateboard"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/neon-white-skateboard.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/a/af/Neonwhiteskateboard.png/revision/latest/scale-to-width-down/268?cb=20180712185321"
+      "system": {
+        "slug": "january-2018-gifts-refresh-neon-red-skateboard-neon-white-skateboard",
+        "section": "January 2018 Gifts Refresh",
+        "sortOrder": 86,
+        "image": "/Adopt%20Me/Gift%20Prizes/neon-white-skateboard.webp"
+      }
     },
     {
-      "name": "Bathtub",
-      "slug": "january-2018-gifts-refresh-legendary-bathtub",
-      "category": "January 2018 Gifts Refresh",
-      "rarity": "Legendary",
-      "wikiUrl": "https://adoptme.fandom.com/wiki/Bathtub",
-      "fields": {
+      "item": {
+        "name": "Bathtub",
+        "category": "January 2018 Gifts Refresh",
         "rarity": "Legendary"
       },
-      "image": "/Adopt%20Me/Gift%20Prizes/bathtub.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/adoptme/images/5/5a/Bathtub.png/revision/latest/scale-to-width-down/268?cb=20180118230842"
+      "system": {
+        "slug": "january-2018-gifts-refresh-legendary-bathtub",
+        "section": "January 2018 Gifts Refresh",
+        "sortOrder": 87,
+        "image": "/Adopt%20Me/Gift%20Prizes/bathtub.webp"
+      }
     }
   ]
 }

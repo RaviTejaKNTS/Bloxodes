@@ -1,348 +1,470 @@
 {
   "meta": {
-    "title": "Fisch Totems List",
-    "updatedAt": "2026-06-19",
-    "sources": [
-      {
-        "label": "Official Fisch Wiki - Items Totems table",
-        "url": "https://fischipedia.org/wiki/Items#Totems",
-        "accessed": "2026-06-19"
-      },
-      {
-        "label": "Fisch Wiki Fandom - Totems",
-        "url": "https://fisch.fandom.com/wiki/Totems",
-        "accessed": "2026-06-19"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Fisch",
+    "gameSlug": "fisch",
+    "collection": "totems",
+    "route": "/wiki/fisch/totems",
+    "catalogCode": "fisch-totems",
+    "itemFields": [
       "effect",
       "price",
       "sourceLocation",
       "availability",
-      "collectionSection",
-      "cardSummary",
-      "sourcePage",
-      "sourceStatus"
+      "cardSummary"
     ],
-    "groupBy": "collectionSection",
-    "defaultCardFields": [
+    "columns": [
       "effect",
       "price",
       "sourceLocation",
-      "availability"
-    ]
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Weather Control",
+        "Special Weather and Sky Events",
+        "Location Events",
+        "Surge Totems",
+        "Hunt Summons"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "effect",
+        "price",
+        "sourceLocation",
+        "availability"
+      ],
+      "tableFields": [
+        "effect",
+        "price",
+        "sourceLocation",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Sundial Totem",
-      "effect": "Advances the daylight cycle.",
-      "price": "2,000 C$",
-      "sourceLocation": "Personal Aquarium, Sunken Chests, Daily Shop, Sunstone Cave (-1215, 195, -1040)",
-      "availability": "Current obtainable",
-      "collectionSection": "Weather Control",
-      "cardSummary": "Speeds the server through day and night cycles, which helps fish, events, and hunts tied to time.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Sundial_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/sundial-totem.webp"
+      "item": {
+        "name": "Sundial Totem",
+        "effect": "Advances the daylight cycle.",
+        "price": "2,000 C$",
+        "sourceLocation": "Personal Aquarium, Sunken Chests, Daily Shop, Sunstone Cave (-1215, 195, -1040)",
+        "availability": "Current obtainable",
+        "cardSummary": "Speeds the server through day and night cycles, which helps fish, events, and hunts tied to time."
+      },
+      "system": {
+        "slug": "sundial-totem",
+        "section": "Weather Control",
+        "sortOrder": 1,
+        "image": "/Fisch/Totems/sundial-totem.webp"
+      }
     },
     {
-      "name": "Clearcast Totem",
-      "effect": "Sets the weather to Clear.",
-      "price": "1,000 C$",
-      "sourceLocation": "Personal Aquarium, Moosewood (701, 250, 305)",
-      "availability": "Current obtainable",
-      "collectionSection": "Weather Control",
-      "cardSummary": "Forces clear weather when a catch, condition, or event setup needs the sky reset.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Clearcast_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/clearcast-totem.webp"
+      "item": {
+        "name": "Clearcast Totem",
+        "effect": "Sets the weather to Clear.",
+        "price": "1,000 C$",
+        "sourceLocation": "Personal Aquarium, Moosewood (701, 250, 305)",
+        "availability": "Current obtainable",
+        "cardSummary": "Forces clear weather when a catch, condition, or event setup needs the sky reset."
+      },
+      "system": {
+        "slug": "clearcast-totem",
+        "section": "Weather Control",
+        "sortOrder": 2,
+        "image": "/Fisch/Totems/clearcast-totem.webp"
+      }
     },
     {
-      "name": "Tempest Totem",
-      "effect": "Summons Rain.",
-      "price": "2,000 C$",
-      "sourceLocation": "Personal Aquarium, Sunken Chests, Terrapin Cave (20, 140, 1860)",
-      "availability": "Current obtainable",
-      "collectionSection": "Weather Control",
-      "cardSummary": "Forces rain for rain-preferred fish and rain-linked server activity.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Tempest_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/tempest-totem.webp"
+      "item": {
+        "name": "Tempest Totem",
+        "effect": "Summons Rain.",
+        "price": "2,000 C$",
+        "sourceLocation": "Personal Aquarium, Sunken Chests, Terrapin Cave (20, 140, 1860)",
+        "availability": "Current obtainable",
+        "cardSummary": "Forces rain for rain-preferred fish and rain-linked server activity."
+      },
+      "system": {
+        "slug": "tempest-totem",
+        "section": "Weather Control",
+        "sortOrder": 3,
+        "image": "/Fisch/Totems/tempest-totem.webp"
+      }
     },
     {
-      "name": "Windset Totem",
-      "effect": "Summons Wind.",
-      "price": "2,000 C$",
-      "sourceLocation": "Snowcap Cave (2845, 180, 2700)",
-      "availability": "Current obtainable",
-      "collectionSection": "Weather Control",
-      "cardSummary": "Forces windy weather for wind-preferred fish and wind-based rod/enchant setups.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Windset_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/windset-totem.webp"
+      "item": {
+        "name": "Windset Totem",
+        "effect": "Summons Wind.",
+        "price": "2,000 C$",
+        "sourceLocation": "Snowcap Cave (2845, 180, 2700)",
+        "availability": "Current obtainable",
+        "cardSummary": "Forces windy weather for wind-preferred fish and wind-based rod/enchant setups."
+      },
+      "system": {
+        "slug": "windset-totem",
+        "section": "Weather Control",
+        "sortOrder": 4,
+        "image": "/Fisch/Totems/windset-totem.webp"
+      }
     },
     {
-      "name": "Smokescreen Totem",
-      "effect": "Summons Fog.",
-      "price": "2,000 C$",
-      "sourceLocation": "Personal Aquarium, Sunken Chests, Mushgrove Swamp (2790, 140, -625)",
-      "availability": "Current obtainable",
-      "collectionSection": "Weather Control",
-      "cardSummary": "Forces fog for fog-preferred fish and event setups that need foggy weather.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Smokescreen_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/smokescreen-totem.webp"
+      "item": {
+        "name": "Smokescreen Totem",
+        "effect": "Summons Fog.",
+        "price": "2,000 C$",
+        "sourceLocation": "Personal Aquarium, Sunken Chests, Mushgrove Swamp (2790, 140, -625)",
+        "availability": "Current obtainable",
+        "cardSummary": "Forces fog for fog-preferred fish and event setups that need foggy weather."
+      },
+      "system": {
+        "slug": "smokescreen-totem",
+        "section": "Weather Control",
+        "sortOrder": 5,
+        "image": "/Fisch/Totems/smokescreen-totem.webp"
+      }
     },
     {
-      "name": "Aurora Totem",
-      "effect": "Summons an Aurora Borealis.",
-      "price": "500,000 C$",
-      "sourceLocation": "Daily Shop, Treasure Chests, Rare Goods Dealer",
-      "availability": "Current obtainable",
-      "collectionSection": "Special Weather and Sky Events",
-      "cardSummary": "Starts Aurora Borealis for a major server luck window.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Aurora_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/aurora-totem.webp"
+      "item": {
+        "name": "Aurora Totem",
+        "effect": "Summons an Aurora Borealis.",
+        "price": "500,000 C$",
+        "sourceLocation": "Daily Shop, Treasure Chests, Rare Goods Dealer",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts Aurora Borealis for a major server luck window."
+      },
+      "system": {
+        "slug": "aurora-totem",
+        "section": "Special Weather and Sky Events",
+        "sortOrder": 6,
+        "image": "/Fisch/Totems/aurora-totem.webp"
+      }
     },
     {
-      "name": "Eclipse Totem",
-      "effect": "Summons an Eclipse.",
-      "price": "200,000 C$",
-      "sourceLocation": "Personal Aquarium, Sunken Chests, Ancient Isle (5940, 265, 900)",
-      "availability": "Current obtainable",
-      "collectionSection": "Special Weather and Sky Events",
-      "cardSummary": "Starts the Eclipse event, mainly used when a player needs that special sky condition.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Eclipse_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/eclipse-totem.webp"
+      "item": {
+        "name": "Eclipse Totem",
+        "effect": "Summons an Eclipse.",
+        "price": "200,000 C$",
+        "sourceLocation": "Personal Aquarium, Sunken Chests, Ancient Isle (5940, 265, 900)",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts the Eclipse event, mainly used when a player needs that special sky condition."
+      },
+      "system": {
+        "slug": "eclipse-totem",
+        "section": "Special Weather and Sky Events",
+        "sortOrder": 7,
+        "image": "/Fisch/Totems/eclipse-totem.webp"
+      }
     },
     {
-      "name": "Blue Moon Totem",
-      "effect": "Summons a Blue Moon.",
-      "price": "120,000 C$",
-      "sourceLocation": "Snowcap Island Blue Moon room, Personal Aquarium (2715, 140, 2480)",
-      "availability": "Current obtainable",
-      "collectionSection": "Special Weather and Sky Events",
-      "cardSummary": "Starts Blue Moon when the season, weather, and night-cycle requirements line up.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Blue_Moon_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/blue-moon-totem.webp"
+      "item": {
+        "name": "Blue Moon Totem",
+        "effect": "Summons a Blue Moon.",
+        "price": "120,000 C$",
+        "sourceLocation": "Snowcap Island Blue Moon room, Personal Aquarium (2715, 140, 2480)",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts Blue Moon when the season, weather, and night-cycle requirements line up."
+      },
+      "system": {
+        "slug": "blue-moon-totem",
+        "section": "Special Weather and Sky Events",
+        "sortOrder": 8,
+        "image": "/Fisch/Totems/blue-moon-totem.webp"
+      }
     },
     {
-      "name": "Starfall Totem",
-      "effect": "Summons Starfall.",
-      "price": "-",
-      "sourceLocation": "Fallen Stars, Personal Aquarium, Codes, Angler's Quest, Totem Carver, Black Market",
-      "availability": "Current obtainable",
-      "collectionSection": "Special Weather and Sky Events",
-      "cardSummary": "Starts Starfall for star-linked catches and event windows.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Starfall_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/starfall-totem.webp"
+      "item": {
+        "name": "Starfall Totem",
+        "effect": "Summons Starfall.",
+        "price": "-",
+        "sourceLocation": "Fallen Stars, Personal Aquarium, Codes, Angler's Quest, Totem Carver, Black Market",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts Starfall for star-linked catches and event windows."
+      },
+      "system": {
+        "slug": "starfall-totem",
+        "section": "Special Weather and Sky Events",
+        "sortOrder": 9,
+        "image": "/Fisch/Totems/starfall-totem.webp"
+      }
     },
     {
-      "name": "Rainbow Totem",
-      "effect": "Summons Rainbow.",
-      "price": "1,000 S$",
-      "sourceLocation": "Angler's Quest, Totem Carver, Treasure Hunting, Rare Goods Dealer",
-      "availability": "Current obtainable",
-      "collectionSection": "Special Weather and Sky Events",
-      "cardSummary": "Starts Rainbow weather, one of the strongest special weather windows for fishing.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Rainbow_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/rainbow-totem.webp"
+      "item": {
+        "name": "Rainbow Totem",
+        "effect": "Summons Rainbow.",
+        "price": "1,000 S$",
+        "sourceLocation": "Angler's Quest, Totem Carver, Treasure Hunting, Rare Goods Dealer",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts Rainbow weather, one of the strongest special weather windows for fishing."
+      },
+      "system": {
+        "slug": "rainbow-totem",
+        "section": "Special Weather and Sky Events",
+        "sortOrder": 10,
+        "image": "/Fisch/Totems/rainbow-totem.webp"
+      }
     },
     {
-      "name": "Sparkling Totem",
-      "effect": "Summons a Day or Night of the Luminous.",
-      "price": "250,000 C$",
-      "sourceLocation": "Personal Aquarium, Daily Shop, Codes, Totem Carver",
-      "availability": "Current obtainable",
-      "collectionSection": "Special Weather and Sky Events",
-      "cardSummary": "Starts a luminous event, with day or night behavior depending on the current server state.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Sparkling_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/sparkling-totem.webp"
+      "item": {
+        "name": "Sparkling Totem",
+        "effect": "Summons a Day or Night of the Luminous.",
+        "price": "250,000 C$",
+        "sourceLocation": "Personal Aquarium, Daily Shop, Codes, Totem Carver",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts a luminous event, with day or night behavior depending on the current server state."
+      },
+      "system": {
+        "slug": "sparkling-totem",
+        "section": "Special Weather and Sky Events",
+        "sortOrder": 11,
+        "image": "/Fisch/Totems/sparkling-totem.webp"
+      }
     },
     {
-      "name": "Zeus Storm Totem",
-      "effect": "Summons a Zeus Storm.",
-      "price": "150,000 C$",
-      "sourceLocation": "Atlantis Zeus Trial (-4325, -625, 2685)",
-      "availability": "Current obtainable",
-      "collectionSection": "Special Weather and Sky Events",
-      "cardSummary": "Starts Zeus Storm and can trigger Zeus Trial room hazards and lightning-related rewards.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Zeus_Storm_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/zeus-storm-totem.webp"
+      "item": {
+        "name": "Zeus Storm Totem",
+        "effect": "Summons a Zeus Storm.",
+        "price": "150,000 C$",
+        "sourceLocation": "Atlantis Zeus Trial (-4325, -625, 2685)",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts Zeus Storm and can trigger Zeus Trial room hazards and lightning-related rewards."
+      },
+      "system": {
+        "slug": "zeus-storm-totem",
+        "section": "Special Weather and Sky Events",
+        "sortOrder": 12,
+        "image": "/Fisch/Totems/zeus-storm-totem.webp"
+      }
     },
     {
-      "name": "Cursed Storm Totem",
-      "effect": "Summons a Cursed Storm.",
-      "price": "600,000 C$",
-      "sourceLocation": "Daily Shop, Rare Goods Dealer",
-      "availability": "Current obtainable",
-      "collectionSection": "Special Weather and Sky Events",
-      "cardSummary": "Starts a Cursed Storm pool for Cursed mutation and XP-focused fishing.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Cursed_Storm_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/cursed-storm-totem.webp"
+      "item": {
+        "name": "Cursed Storm Totem",
+        "effect": "Summons a Cursed Storm.",
+        "price": "600,000 C$",
+        "sourceLocation": "Daily Shop, Rare Goods Dealer",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts a Cursed Storm pool for Cursed mutation and XP-focused fishing."
+      },
+      "system": {
+        "slug": "cursed-storm-totem",
+        "section": "Special Weather and Sky Events",
+        "sortOrder": 13,
+        "image": "/Fisch/Totems/cursed-storm-totem.webp"
+      }
     },
     {
-      "name": "Brine Storm Totem",
-      "effect": "Summons a Brine Storm.",
-      "price": "750 S$",
-      "sourceLocation": "Axel's quest, Rare Goods Dealer",
-      "availability": "Current limited obtainable",
-      "collectionSection": "Special Weather and Sky Events",
-      "cardSummary": "Starts a Brine Storm and is limited by quest/Rare Goods Dealer availability.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Brine_Storm_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "item": {
+        "name": "Brine Storm Totem",
+        "effect": "Summons a Brine Storm.",
+        "price": "750 S$",
+        "sourceLocation": "Axel's quest, Rare Goods Dealer",
+        "availability": "Current limited obtainable",
+        "cardSummary": "Starts a Brine Storm and is limited by quest/Rare Goods Dealer availability."
+      },
+      "system": {
+        "slug": "brine-storm-totem",
+        "section": "Special Weather and Sky Events",
+        "sortOrder": 14,
+        "image": null
+      }
     },
     {
-      "name": "Meteor Totem",
-      "effect": "Summons a Meteor.",
-      "price": "75,000 C$",
-      "sourceLocation": "Personal Aquarium, Daily Shop, Sunken Chests, Treasure Chests, Roslit Volcano (-1945, 275, 230), Maple Meadow (-447, 134, 3496)",
-      "availability": "Current obtainable",
-      "collectionSection": "Location Events",
-      "cardSummary": "Starts a meteor event from several shop, chest, and map sources.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Meteor_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/meteor-totem.webp"
+      "item": {
+        "name": "Meteor Totem",
+        "effect": "Summons a Meteor.",
+        "price": "75,000 C$",
+        "sourceLocation": "Personal Aquarium, Daily Shop, Sunken Chests, Treasure Chests, Roslit Volcano (-1945, 275, 230), Maple Meadow (-447, 134, 3496)",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts a meteor event from several shop, chest, and map sources."
+      },
+      "system": {
+        "slug": "meteor-totem",
+        "section": "Location Events",
+        "sortOrder": 15,
+        "image": "/Fisch/Totems/meteor-totem.webp"
+      }
     },
     {
-      "name": "Avalanche Totem",
-      "effect": "Starts an Avalanche.",
-      "price": "150,000 C$",
-      "sourceLocation": "Northern Expedition (19711, 468, 6059)",
-      "availability": "Current obtainable",
-      "collectionSection": "Location Events",
-      "cardSummary": "Starts the Avalanche event in Northern Summit/Northern Expedition progression.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Avalanche_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/avalanche-totem.webp"
+      "item": {
+        "name": "Avalanche Totem",
+        "effect": "Starts an Avalanche.",
+        "price": "150,000 C$",
+        "sourceLocation": "Northern Expedition (19711, 468, 6059)",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts the Avalanche event in Northern Summit/Northern Expedition progression."
+      },
+      "system": {
+        "slug": "avalanche-totem",
+        "section": "Location Events",
+        "sortOrder": 16,
+        "image": "/Fisch/Totems/avalanche-totem.webp"
+      }
     },
     {
-      "name": "Blizzard Totem",
-      "effect": "Summons a Blizzard.",
-      "price": "150,000 C$",
-      "sourceLocation": "Northern Expedition (20148, 743, 5804)",
-      "availability": "Current obtainable",
-      "collectionSection": "Location Events",
-      "cardSummary": "Starts Blizzard conditions, including mutation-focused fishing during the event.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Blizzard_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/blizzard-totem.webp"
+      "item": {
+        "name": "Blizzard Totem",
+        "effect": "Summons a Blizzard.",
+        "price": "150,000 C$",
+        "sourceLocation": "Northern Expedition (20148, 743, 5804)",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts Blizzard conditions, including mutation-focused fishing during the event."
+      },
+      "system": {
+        "slug": "blizzard-totem",
+        "section": "Location Events",
+        "sortOrder": 17,
+        "image": "/Fisch/Totems/blizzard-totem.webp"
+      }
     },
     {
-      "name": "Poseidon Wrath Totem",
-      "effect": "Summons a Poseidon Wrath.",
-      "price": "150,000 C$",
-      "sourceLocation": "Atlantis Poseidon Temple (-3955, -555, 855)",
-      "availability": "Current obtainable",
-      "collectionSection": "Location Events",
-      "cardSummary": "Starts Poseidon Wrath and ties into Atlantis/Kraken-focused progression.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Poseidon%27s_Wrath_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/poseidon-wrath-totem.webp"
+      "item": {
+        "name": "Poseidon Wrath Totem",
+        "effect": "Summons a Poseidon Wrath.",
+        "price": "150,000 C$",
+        "sourceLocation": "Atlantis Poseidon Temple (-3955, -555, 855)",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts Poseidon Wrath and ties into Atlantis/Kraken-focused progression."
+      },
+      "system": {
+        "slug": "poseidon-wrath-totem",
+        "section": "Location Events",
+        "sortOrder": 18,
+        "image": "/Fisch/Totems/poseidon-wrath-totem.webp"
+      }
     },
     {
-      "name": "Dripstone Collapse Totem",
-      "effect": "Starts Dripstone Collapse.",
-      "price": "7,500,000 C$",
-      "sourceLocation": "Personal Aquarium, Tidefall (-3158, -1105, 788)",
-      "availability": "Current obtainable",
-      "collectionSection": "Location Events",
-      "cardSummary": "Starts Dripstone Collapse, a high-cost event used for essence-focused progression.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Dripstone_Collapse_Totem",
-      "sourceStatus": "Official table plus internal page"
+      "item": {
+        "name": "Dripstone Collapse Totem",
+        "effect": "Starts Dripstone Collapse.",
+        "price": "7,500,000 C$",
+        "sourceLocation": "Personal Aquarium, Tidefall (-3158, -1105, 788)",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts Dripstone Collapse, a high-cost event used for essence-focused progression."
+      },
+      "system": {
+        "slug": "dripstone-collapse-totem",
+        "section": "Location Events",
+        "sortOrder": 19,
+        "image": null
+      }
     },
     {
-      "name": "Bloom Totem",
-      "effect": "Resets all flowers in Living Garden and Verdant Pocket.",
-      "price": "-",
-      "sourceLocation": "Living Garden NPC quests, Gardener's Exchanges (20% chance)",
-      "availability": "Current obtainable",
-      "collectionSection": "Location Events",
-      "cardSummary": "Resets flower spawns for Living Garden and Verdant Pocket progression.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Bloom_Totem",
-      "sourceStatus": "Official table plus sparse internal page"
+      "item": {
+        "name": "Bloom Totem",
+        "effect": "Resets all flowers in Living Garden and Verdant Pocket.",
+        "price": "-",
+        "sourceLocation": "Living Garden NPC quests, Gardener's Exchanges (20% chance)",
+        "availability": "Current obtainable",
+        "cardSummary": "Resets flower spawns for Living Garden and Verdant Pocket progression."
+      },
+      "system": {
+        "slug": "bloom-totem",
+        "section": "Location Events",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "Shiny Totem",
-      "effect": "Summons a Shiny Surge.",
-      "price": "250,000 C$",
-      "sourceLocation": "Personal Aquarium, Daily Shop, Codes, Totem Carver",
-      "availability": "Current obtainable",
-      "collectionSection": "Surge Totems",
-      "cardSummary": "Starts a Shiny Surge for players chasing shiny catches.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Shiny_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/shiny-totem.webp"
+      "item": {
+        "name": "Shiny Totem",
+        "effect": "Summons a Shiny Surge.",
+        "price": "250,000 C$",
+        "sourceLocation": "Personal Aquarium, Daily Shop, Codes, Totem Carver",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts a Shiny Surge for players chasing shiny catches."
+      },
+      "system": {
+        "slug": "shiny-totem",
+        "section": "Surge Totems",
+        "sortOrder": 21,
+        "image": "/Fisch/Totems/shiny-totem.webp"
+      }
     },
     {
-      "name": "Mutation Totem",
-      "effect": "Summons a Mutation Surge.",
-      "price": "200,000 C$",
-      "sourceLocation": "Personal Aquarium, Daily Shop, Codes",
-      "availability": "Current obtainable",
-      "collectionSection": "Surge Totems",
-      "cardSummary": "Starts a Mutation Surge for players chasing mutated fish.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Mutation_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/mutation-totem.webp"
+      "item": {
+        "name": "Mutation Totem",
+        "effect": "Summons a Mutation Surge.",
+        "price": "200,000 C$",
+        "sourceLocation": "Personal Aquarium, Daily Shop, Codes",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts a Mutation Surge for players chasing mutated fish."
+      },
+      "system": {
+        "slug": "mutation-totem",
+        "section": "Surge Totems",
+        "sortOrder": 22,
+        "image": "/Fisch/Totems/mutation-totem.webp"
+      }
     },
     {
-      "name": "Megalodon Hunt Totem",
-      "effect": "Summons a Megalodon Hunt.",
-      "price": "80,000 C$",
-      "sourceLocation": "Daily Shop, Personal Aquarium, Codes, Totem Carver, Mysterious Songstress's Fifth Quest",
-      "availability": "Current obtainable",
-      "collectionSection": "Hunt Summons",
-      "cardSummary": "Starts a Megalodon Hunt directly instead of waiting on natural hunt timing.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Megalodon_Hunt_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/megalodon-hunt-totem.webp"
+      "item": {
+        "name": "Megalodon Hunt Totem",
+        "effect": "Summons a Megalodon Hunt.",
+        "price": "80,000 C$",
+        "sourceLocation": "Daily Shop, Personal Aquarium, Codes, Totem Carver, Mysterious Songstress's Fifth Quest",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts a Megalodon Hunt directly instead of waiting on natural hunt timing."
+      },
+      "system": {
+        "slug": "megalodon-hunt-totem",
+        "section": "Hunt Summons",
+        "sortOrder": 23,
+        "image": "/Fisch/Totems/megalodon-hunt-totem.webp"
+      }
     },
     {
-      "name": "Kraken Hunt Totem",
-      "effect": "Summons a Kraken Hunt.",
-      "price": "80,000 C$",
-      "sourceLocation": "Daily Shop, Personal Aquarium, Codes, Totem Carver",
-      "availability": "Current obtainable",
-      "collectionSection": "Hunt Summons",
-      "cardSummary": "Starts a Kraken Hunt directly for players targeting Kraken hunt catches.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Kraken_Hunt_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/kraken-hunt-totem.webp"
+      "item": {
+        "name": "Kraken Hunt Totem",
+        "effect": "Summons a Kraken Hunt.",
+        "price": "80,000 C$",
+        "sourceLocation": "Daily Shop, Personal Aquarium, Codes, Totem Carver",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts a Kraken Hunt directly for players targeting Kraken hunt catches."
+      },
+      "system": {
+        "slug": "kraken-hunt-totem",
+        "section": "Hunt Summons",
+        "sortOrder": 24,
+        "image": "/Fisch/Totems/kraken-hunt-totem.webp"
+      }
     },
     {
-      "name": "Colossal Dragon Hunt Totem",
-      "effect": "Summons a Colossal Ethereal Dragon Hunt, Colossal Ancient Dragon Hunt, or Colossal Blue Dragon Hunt.",
-      "price": "90,000 C$",
-      "sourceLocation": "Daily Shop, Personal Aquarium, Codes",
-      "availability": "Current obtainable",
-      "collectionSection": "Hunt Summons",
-      "cardSummary": "Starts one of the Colossal Dragon hunt variants.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Colossal_Dragon_Hunt_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/colossal-dragon-hunt-totem.webp"
+      "item": {
+        "name": "Colossal Dragon Hunt Totem",
+        "effect": "Summons a Colossal Ethereal Dragon Hunt, Colossal Ancient Dragon Hunt, or Colossal Blue Dragon Hunt.",
+        "price": "90,000 C$",
+        "sourceLocation": "Daily Shop, Personal Aquarium, Codes",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts one of the Colossal Dragon hunt variants."
+      },
+      "system": {
+        "slug": "colossal-dragon-hunt-totem",
+        "section": "Hunt Summons",
+        "sortOrder": 25,
+        "image": "/Fisch/Totems/colossal-dragon-hunt-totem.webp"
+      }
     },
     {
-      "name": "Scylla Hunt Totem",
-      "effect": "Summons a Scylla Hunt.",
-      "price": "100,000 C$",
-      "sourceLocation": "Daily Shop, Personal Aquarium, Codes, Totem Carver",
-      "availability": "Current obtainable",
-      "collectionSection": "Hunt Summons",
-      "cardSummary": "Starts a Scylla Hunt directly for players targeting Scylla hunt catches.",
-      "sourcePage": "https://fisch.fandom.com/wiki/Scylla_Hunt_Totem",
-      "sourceStatus": "Official table plus internal page",
-      "image": "/Fisch/Totems/scylla-hunt-totem.webp"
+      "item": {
+        "name": "Scylla Hunt Totem",
+        "effect": "Summons a Scylla Hunt.",
+        "price": "100,000 C$",
+        "sourceLocation": "Daily Shop, Personal Aquarium, Codes, Totem Carver",
+        "availability": "Current obtainable",
+        "cardSummary": "Starts a Scylla Hunt directly for players targeting Scylla hunt catches."
+      },
+      "system": {
+        "slug": "scylla-hunt-totem",
+        "section": "Hunt Summons",
+        "sortOrder": 26,
+        "image": "/Fisch/Totems/scylla-hunt-totem.webp"
+      }
     }
   ]
 }

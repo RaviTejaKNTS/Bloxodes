@@ -1,217 +1,332 @@
 {
   "meta": {
-    "title": "Grow a Garden 2 gears data",
-    "updatedAt": "2026-06-13",
-    "sources": [
-      {
-        "label": "Beebom - All Grow a Garden 2 Gears Guide",
-        "url": "https://beebom.com/grow-a-garden-gear-shop-guide/",
-        "accessed": "2026-06-13"
-      },
-      {
-        "label": "Grow a Garden 2 Wiki - Fandom",
-        "url": "https://growagarden2.fandom.com/wiki/Grow_A_Garden_2_Wiki",
-        "accessed": "2026-06-13"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Grow a Garden 2",
+    "gameSlug": "grow-a-garden-2",
+    "collection": "gears",
+    "route": "/wiki/grow-a-garden-2/gears",
+    "catalogCode": "grow-a-garden-2-gears",
+    "itemFields": [
       "price",
       "effect",
       "whereToGet",
       "role"
-    ]
+    ],
+    "columns": [
+      "price",
+      "effect",
+      "whereToGet",
+      "role"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "price",
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "price",
+        "effect",
+        "whereToGet",
+        "role"
+      ],
+      "tableFields": [
+        "price",
+        "effect",
+        "whereToGet",
+        "role"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "id": "common-watering-can",
-      "name": "Common Watering Can",
-      "price": "2K Sheckles",
-      "effect": "Helps plants grow faster; 1 use",
-      "role": "Growth",
-      "image": "/Grow%20a%20Garden%202/Gears/common-watering-can.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Common-Watering-Can.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Common Watering Can",
+        "price": "2K Sheckles",
+        "effect": "Helps plants grow faster; 1 use",
+        "whereToGet": "Gears Shop",
+        "role": "Growth"
+      },
+      "system": {
+        "slug": "common-watering-can",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden%202/Gears/common-watering-can.webp"
+      }
     },
     {
-      "id": "hello-sign",
-      "name": "Hello Sign",
-      "price": "4K Sheckles",
-      "effect": "Cosmetic sign board",
-      "role": "Cosmetic",
-      "image": "/Grow%20a%20Garden%202/Gears/hello-sign.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Hello-Sign-board.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Hello Sign",
+        "price": "4K Sheckles",
+        "effect": "Cosmetic sign board",
+        "whereToGet": "Gears Shop",
+        "role": "Cosmetic"
+      },
+      "system": {
+        "slug": "hello-sign",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden%202/Gears/hello-sign.webp"
+      }
     },
     {
-      "id": "basic-pot",
-      "name": "Basic Pot",
-      "price": "60K Sheckles",
-      "effect": "Unknown",
-      "role": "Garden utility",
-      "image": "/Grow%20a%20Garden%202/Gears/basic-pot.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Basic-Pot.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Basic Pot",
+        "price": "60K Sheckles",
+        "effect": "Unknown",
+        "whereToGet": "Gears Shop",
+        "role": "Garden utility"
+      },
+      "system": {
+        "slug": "basic-pot",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden%202/Gears/basic-pot.webp"
+      }
     },
     {
-      "id": "trowel",
-      "name": "Trowel",
-      "price": "1K Sheckles",
-      "effect": "Moves plants from one point to another",
-      "role": "Garden editing",
-      "image": "/Grow%20a%20Garden%202/Gears/trowel.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Trowel-2.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Trowel",
+        "price": "1K Sheckles",
+        "effect": "Moves plants from one point to another",
+        "whereToGet": "Gears Shop",
+        "role": "Garden editing"
+      },
+      "system": {
+        "slug": "trowel",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden%202/Gears/trowel.webp"
+      }
     },
     {
-      "id": "common-sprinkler",
-      "name": "Common Sprinkler",
-      "price": "3K Sheckles",
-      "effect": "Runs for 1 minute; speeds growth and increases fruit size",
-      "role": "Growth",
-      "image": "/Grow%20a%20Garden%202/Gears/common-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Common-Sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Common Sprinkler",
+        "price": "3K Sheckles",
+        "effect": "Runs for 1 minute; speeds growth and increases fruit size",
+        "whereToGet": "Gears Shop",
+        "role": "Growth"
+      },
+      "system": {
+        "slug": "common-sprinkler",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden%202/Gears/common-sprinkler.webp"
+      }
     },
     {
-      "id": "uncommon-sprinkler",
-      "name": "Uncommon Sprinkler",
-      "price": "10K Sheckles",
-      "effect": "Runs for 2 minutes; increases growth and mutation chances",
-      "role": "Growth/mutations",
-      "image": "/Grow%20a%20Garden%202/Gears/uncommon-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Uncommon-sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Uncommon Sprinkler",
+        "price": "10K Sheckles",
+        "effect": "Runs for 2 minutes; increases growth and mutation chances",
+        "whereToGet": "Gears Shop",
+        "role": "Growth/mutations"
+      },
+      "system": {
+        "slug": "uncommon-sprinkler",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Grow%20a%20Garden%202/Gears/uncommon-sprinkler.webp"
+      }
     },
     {
-      "id": "rare-sprinkler",
-      "name": "Rare Sprinkler",
-      "price": "80K Sheckles",
-      "effect": "Speeds growth, increases mutation chances, and increases fruit size",
-      "role": "Growth/mutations",
-      "image": "/Grow%20a%20Garden%202/Gears/rare-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Rare-Sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Rare Sprinkler",
+        "price": "80K Sheckles",
+        "effect": "Speeds growth, increases mutation chances, and increases fruit size",
+        "whereToGet": "Gears Shop",
+        "role": "Growth/mutations"
+      },
+      "system": {
+        "slug": "rare-sprinkler",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Grow%20a%20Garden%202/Gears/rare-sprinkler.webp"
+      }
     },
     {
-      "id": "legendary-sprinkler",
-      "name": "Legendary Sprinkler",
-      "price": "100K Sheckles",
-      "effect": "Speeds growth, increases mutation chances, and increases fruit size",
-      "role": "Growth/mutations",
-      "image": "/Grow%20a%20Garden%202/Gears/legendary-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Legendary-Sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Legendary Sprinkler",
+        "price": "100K Sheckles",
+        "effect": "Speeds growth, increases mutation chances, and increases fruit size",
+        "whereToGet": "Gears Shop",
+        "role": "Growth/mutations"
+      },
+      "system": {
+        "slug": "legendary-sprinkler",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Grow%20a%20Garden%202/Gears/legendary-sprinkler.webp"
+      }
     },
     {
-      "id": "super-sprinkler",
-      "name": "Super Sprinkler",
-      "price": "Unknown",
-      "effect": "Massively speeds growth, increases mutation chances, and increases fruit size",
-      "role": "Growth/mutations",
-      "image": "/Grow%20a%20Garden%202/Gears/super-sprinkler.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Super-Sprinkler.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Super Sprinkler",
+        "price": "Unknown",
+        "effect": "Massively speeds growth, increases mutation chances, and increases fruit size",
+        "whereToGet": "Gears Shop",
+        "role": "Growth/mutations"
+      },
+      "system": {
+        "slug": "super-sprinkler",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": "/Grow%20a%20Garden%202/Gears/super-sprinkler.webp"
+      }
     },
     {
-      "id": "jump-mushroom",
-      "name": "Jump Mushroom",
-      "price": "1.8K Sheckles",
-      "effect": "Increases jump height for 1 minute",
-      "role": "Movement",
-      "image": "/Grow%20a%20Garden%202/Gears/jump-mushroom.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Jump-Mushroom.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Jump Mushroom",
+        "price": "1.8K Sheckles",
+        "effect": "Increases jump height for 1 minute",
+        "whereToGet": "Gears Shop",
+        "role": "Movement"
+      },
+      "system": {
+        "slug": "jump-mushroom",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": "/Grow%20a%20Garden%202/Gears/jump-mushroom.webp"
+      }
     },
     {
-      "id": "speed-mushroom",
-      "name": "Speed Mushroom",
-      "price": "1.5K Sheckles",
-      "effect": "Increases walking speed for 1 minute",
-      "role": "Movement",
-      "image": "/Grow%20a%20Garden%202/Gears/speed-mushroom.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Speed-Mushroom.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Speed Mushroom",
+        "price": "1.5K Sheckles",
+        "effect": "Increases walking speed for 1 minute",
+        "whereToGet": "Gears Shop",
+        "role": "Movement"
+      },
+      "system": {
+        "slug": "speed-mushroom",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": "/Grow%20a%20Garden%202/Gears/speed-mushroom.webp"
+      }
     },
     {
-      "id": "lantern",
-      "name": "Lantern",
-      "price": "12K Sheckles",
-      "effect": "Gives clearer view during the night",
-      "role": "Night visibility",
-      "image": "/Grow%20a%20Garden%202/Gears/lantern.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Lantern.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Lantern",
+        "price": "12K Sheckles",
+        "effect": "Gives clearer view during the night",
+        "whereToGet": "Gears Shop",
+        "role": "Night visibility"
+      },
+      "system": {
+        "slug": "lantern",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": "/Grow%20a%20Garden%202/Gears/lantern.webp"
+      }
     },
     {
-      "id": "shrink-mushroom",
-      "name": "Shrink Mushroom",
-      "price": "10K Sheckles",
-      "effect": "Decreases character size for 1 minute",
-      "role": "Movement/stealth",
-      "image": "/Grow%20a%20Garden%202/Gears/shrink-mushroom.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Shrink-Mushroom.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Shrink Mushroom",
+        "price": "10K Sheckles",
+        "effect": "Decreases character size for 1 minute",
+        "whereToGet": "Gears Shop",
+        "role": "Movement/stealth"
+      },
+      "system": {
+        "slug": "shrink-mushroom",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/Grow%20a%20Garden%202/Gears/shrink-mushroom.webp"
+      }
     },
     {
-      "id": "supersize-mushroom",
-      "name": "Supersize Mushroom",
-      "price": "20K Sheckles",
-      "effect": "Increases character size for 1 minute",
-      "role": "Movement/utility",
-      "image": "/Grow%20a%20Garden%202/Gears/supersize-mushroom.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Supersize-Mushroom.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Supersize Mushroom",
+        "price": "20K Sheckles",
+        "effect": "Increases character size for 1 minute",
+        "whereToGet": "Gears Shop",
+        "role": "Movement/utility"
+      },
+      "system": {
+        "slug": "supersize-mushroom",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Grow%20a%20Garden%202/Gears/supersize-mushroom.webp"
+      }
     },
     {
-      "id": "gnome",
-      "name": "Gnome",
-      "price": "100K Sheckles",
-      "effect": "Protects crops from other players",
-      "role": "Defense",
-      "image": "/Grow%20a%20Garden%202/Gears/gnome.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Gnome.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Gnome",
+        "price": "100K Sheckles",
+        "effect": "Protects crops from other players",
+        "whereToGet": "Gears Shop",
+        "role": "Defense"
+      },
+      "system": {
+        "slug": "gnome",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/Grow%20a%20Garden%202/Gears/gnome.webp"
+      }
     },
     {
-      "id": "flashbang",
-      "name": "Flashbang",
-      "price": "8K Sheckles",
-      "effect": "Blinds opponents",
-      "role": "Defense/escape",
-      "image": "/Grow%20a%20Garden%202/Gears/flashbang.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Flashbang.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Flashbang",
+        "price": "8K Sheckles",
+        "effect": "Blinds opponents",
+        "whereToGet": "Gears Shop",
+        "role": "Defense/escape"
+      },
+      "system": {
+        "slug": "flashbang",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/Grow%20a%20Garden%202/Gears/flashbang.webp"
+      }
     },
     {
-      "id": "invisibility-mushroom",
-      "name": "Invisibility Mushroom",
-      "price": "Unknown",
-      "effect": "Turns the player invisible for 1 minute",
-      "role": "Stealth",
-      "image": "/Grow%20a%20Garden%202/Gears/invisibility-mushroom.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Invisibility-Mushroom.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Invisibility Mushroom",
+        "price": "Unknown",
+        "effect": "Turns the player invisible for 1 minute",
+        "whereToGet": "Gears Shop",
+        "role": "Stealth"
+      },
+      "system": {
+        "slug": "invisibility-mushroom",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/Grow%20a%20Garden%202/Gears/invisibility-mushroom.webp"
+      }
     },
     {
-      "id": "teleporter",
-      "name": "Teleporter",
-      "price": "Unknown",
-      "effect": "Sets a clone at another player's base and lets you teleport there",
-      "role": "Night stealing",
-      "image": "/Grow%20a%20Garden%202/Gears/teleporter.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Teleporter.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Teleporter",
+        "price": "Unknown",
+        "effect": "Sets a clone at another player's base and lets you teleport there",
+        "whereToGet": "Gears Shop",
+        "role": "Night stealing"
+      },
+      "system": {
+        "slug": "teleporter",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/Grow%20a%20Garden%202/Gears/teleporter.webp"
+      }
     },
     {
-      "id": "wheelbarrow",
-      "name": "Wheelbarrow",
-      "price": "500K Sheckles",
-      "effect": "Lets you pick up players",
-      "role": "Player control",
-      "image": "/Grow%20a%20Garden%202/Gears/wheelbarrow.webp",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2025/04/Wheelbarrow.jpg",
-      "whereToGet": "Gears Shop"
+      "item": {
+        "name": "Wheelbarrow",
+        "price": "500K Sheckles",
+        "effect": "Lets you pick up players",
+        "whereToGet": "Gears Shop",
+        "role": "Player control"
+      },
+      "system": {
+        "slug": "wheelbarrow",
+        "section": "Items",
+        "sortOrder": 19,
+        "image": "/Grow%20a%20Garden%202/Gears/wheelbarrow.webp"
+      }
     }
   ]
 }

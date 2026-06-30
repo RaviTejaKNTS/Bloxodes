@@ -1,45 +1,12 @@
 {
   "meta": {
-    "title": "Animal Hospital locations data",
+    "schemaVersion": 2,
     "game": "Animal Hospital",
     "gameSlug": "animal-hospital",
-    "universeId": "10148749921",
-    "collection": "Locations",
-    "collectionSlug": "locations",
-    "code": "animal-hospital-locations",
+    "collection": "locations",
     "route": "/wiki/animal-hospital/locations",
-    "updatedAt": "2026-06-25",
-    "sourceCheckedAt": "2026-06-25",
-    "itemCount": 7,
-    "groupBy": "collectionSection",
-    "sectionOrder": [
-      "Support Areas",
-      "Medical Wing (Standard Care)",
-      "Emergency Wing (Minigame Rooms)"
-    ],
-    "sectionCounts": {
-      "Support Areas": 3,
-      "Medical Wing (Standard Care)": 1,
-      "Emergency Wing (Minigame Rooms)": 3
-    },
-    "defaultCardFields": [
-      "wing",
-      "hasMinigame",
-      "minigameType"
-    ],
-    "imageCoverage": {
-      "totalItems": 7,
-      "withLocalImage": 7,
-      "withoutLocalImage": 0,
-      "present": 7,
-      "missing": 0
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "imageStatus",
-      "collectionSection",
+    "catalogCode": "animal-hospital-locations",
+    "itemFields": [
       "wing",
       "purpose",
       "whatYouDo",
@@ -48,136 +15,169 @@
       "accessNotes",
       "cardSummary"
     ],
-    "sources": [
-      {
-        "label": "Techwiser - Animal Hospital locations",
-        "url": "https://techwiser.com/animal-hospital-locations/",
-        "accessed": "2026-06-25"
-      },
-      {
-        "label": "Animal Hospital Wiki - All 8 Treatment Rooms Explained",
-        "url": "https://animalhospital.wiki/map/rooms/",
-        "accessed": "2026-06-25"
-      },
-      {
-        "label": "Destructoid - Animal Hospital walkthrough guide",
-        "url": "https://www.destructoid.com/animal-hospital-walkthrough-guide/",
-        "accessed": "2026-06-25"
-      },
-      {
-        "label": "Roblox official game metadata",
-        "url": "https://www.roblox.com/games/78515283254292/Animal-Hospital",
-        "accessed": "2026-06-25"
-      }
+    "columns": [
+      "wing",
+      "purpose",
+      "whatYouDo",
+      "hasMinigame",
+      "minigameType",
+      "accessNotes",
+      "cardSummary"
     ],
-    "notes": [
-      "Locations are the permanent map areas a player walks through every shift: the support spaces at the front of the hospital and the two treatment wings. This is durable game geometry, separate from the timed emergencies and the disguised-patient anomalies, which have their own catalogs.",
-      "The medical wing is collapsed into a single row. All three sources treat Rooms 1-5 as interchangeable standard-care rooms ('pick the nearest empty bed'), so splitting them into five near-identical rows would add no comparative value. The room count is noted in that row's description.",
-      "Rooms 6, 7, and 8 each have a distinct minigame and player action, so each is its own row. These are the only locations where the minigame fields carry a real value; the four support areas are 'No / -' on purpose, which is the most useful distinction for a new player learning the map.",
-      "Comparable fields are descriptive, not numeric. There are no shared prices, timers, or chances across locations, so this catalog compares by role and action. Per-room timing trivia (the 45-second surgery window, the 180-second coffee cooldown) is kept inside the description text rather than as a comparable column.",
-      "Camera 1 and Camera 2 zones are intentionally not separate rows here; the cameras are monitored from the Check-In Room and the separate camera-zone rows live in the rooms catalog. Kennels and storage are mentioned by sources but have no source-backed player action, so they are excluded.",
-      "Minigame mechanics wording differs slightly between sources (colors vs squares for the X-Ray room); neutral phrasing is used here.",
-      "Each location row carries one clean in-game screenshot of that area, sourced from the Techwiser locations guide (first-person scenes with the normal game HUD; no logos, promo art, watermarks, or callout annotations). The Medical Wing row uses one representative standard-room hallway shot since Rooms 1-5 are interchangeable."
-    ]
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Support Areas",
+        "Medical Wing (Standard Care)",
+        "Emergency Wing (Minigame Rooms)"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "wing",
+        "hasMinigame",
+        "minigameType"
+      ],
+      "tableFields": [
+        "wing",
+        "purpose",
+        "whatYouDo",
+        "hasMinigame",
+        "minigameType",
+        "accessNotes",
+        "cardSummary"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Lobby",
-      "slug": "lobby",
-      "image": "/Animal%20Hospital/locations/lobby.webp",
-      "imageStatus": "present",
-      "collectionSection": "Support Areas",
-      "wing": "Main Entrance",
-      "purpose": "The front entrance and waiting area where patients arrive before they are checked in.",
-      "whatYouDo": "Watch arriving patients and keep the entrance clear, since patients can faint or even catch fire here before treatment begins.",
-      "hasMinigame": "No",
-      "minigameType": "-",
-      "accessNotes": "Open to everyone; the first space players and patients pass through.",
-      "cardSummary": "The hospital's front-of-house area. Nothing is treated here, but emergencies like a fainting or burning patient can begin at the door, so it is the first place to keep an eye on."
+      "item": {
+        "name": "Lobby",
+        "wing": "Main Entrance",
+        "purpose": "The front entrance and waiting area where patients arrive before they are checked in.",
+        "whatYouDo": "Watch arriving patients and keep the entrance clear, since patients can faint or even catch fire here before treatment begins.",
+        "hasMinigame": "No",
+        "minigameType": "-",
+        "accessNotes": "Open to everyone; the first space players and patients pass through.",
+        "cardSummary": "The hospital's front-of-house area. Nothing is treated here, but emergencies like a fainting or burning patient can begin at the door, so it is the first place to keep an eye on."
+      },
+      "system": {
+        "slug": "lobby",
+        "section": "Support Areas",
+        "sortOrder": 1,
+        "image": "/Animal%20Hospital/locations/lobby.webp"
+      }
     },
     {
-      "name": "Check-In Room",
-      "slug": "check-in-room",
-      "image": "/Animal%20Hospital/locations/check-in-room.webp",
-      "imageStatus": "present",
-      "collectionSection": "Support Areas",
-      "wing": "Reception",
-      "purpose": "The player's home base and reception desk, where patients are inspected and either admitted or rejected.",
-      "whatYouDo": "Inspect each patient at the shutter and admit or reject them, watch the security cameras, and use the coffee station to restore sanity (a single coffee, then a roughly 180-second cooldown). Later shifts add gear such as a taser here.",
-      "hasMinigame": "No",
-      "minigameType": "-",
-      "accessNotes": "Player spawn and command center; the cameras and coffee station live here.",
-      "cardSummary": "The control hub of the whole shift. You vet patients, monitor the cameras, and top up sanity from this one room, which makes it the area you return to most often."
+      "item": {
+        "name": "Check-In Room",
+        "wing": "Reception",
+        "purpose": "The player's home base and reception desk, where patients are inspected and either admitted or rejected.",
+        "whatYouDo": "Inspect each patient at the shutter and admit or reject them, watch the security cameras, and use the coffee station to restore sanity (a single coffee, then a roughly 180-second cooldown). Later shifts add gear such as a taser here.",
+        "hasMinigame": "No",
+        "minigameType": "-",
+        "accessNotes": "Player spawn and command center; the cameras and coffee station live here.",
+        "cardSummary": "The control hub of the whole shift. You vet patients, monitor the cameras, and top up sanity from this one room, which makes it the area you return to most often."
+      },
+      "system": {
+        "slug": "check-in-room",
+        "section": "Support Areas",
+        "sortOrder": 2,
+        "image": "/Animal%20Hospital/locations/check-in-room.webp"
+      }
     },
     {
-      "name": "Staff Only Room",
-      "slug": "staff-only-room",
-      "image": "/Animal%20Hospital/locations/staff-only-room.webp",
-      "imageStatus": "present",
-      "collectionSection": "Support Areas",
-      "wing": "Staff Area",
-      "purpose": "A restricted staff zone that holds the in-game shop.",
-      "whatYouDo": "Buy gear and upgrades from the shop, whose stock is randomized and changes from shift to shift.",
-      "hasMinigame": "No",
-      "minigameType": "-",
-      "accessNotes": "Staff only; the shop opens briefly around the start of each shift, so visit it early.",
-      "cardSummary": "The hospital's shop, tucked behind a staff door. Its rotating stock and short opening window make it the place to grab upgrades before the night gets busy."
+      "item": {
+        "name": "Staff Only Room",
+        "wing": "Staff Area",
+        "purpose": "A restricted staff zone that holds the in-game shop.",
+        "whatYouDo": "Buy gear and upgrades from the shop, whose stock is randomized and changes from shift to shift.",
+        "hasMinigame": "No",
+        "minigameType": "-",
+        "accessNotes": "Staff only; the shop opens briefly around the start of each shift, so visit it early.",
+        "cardSummary": "The hospital's shop, tucked behind a staff door. Its rotating stock and short opening window make it the place to grab upgrades before the night gets busy."
+      },
+      "system": {
+        "slug": "staff-only-room",
+        "section": "Support Areas",
+        "sortOrder": 3,
+        "image": "/Animal%20Hospital/locations/staff-only-room.webp"
+      }
     },
     {
-      "name": "Medical Wing (Rooms 1-5)",
-      "slug": "medical-wing",
-      "image": "/Animal%20Hospital/locations/medical-wing.webp",
-      "imageStatus": "present",
-      "collectionSection": "Medical Wing (Standard Care)",
-      "wing": "Right Wing",
-      "purpose": "The right-hand wing of five interchangeable rooms that handle standard patient care.",
-      "whatYouDo": "Take an admitted patient to the nearest empty bed, run the DNA diagnosis to find what is wrong, and administer the matching treatment. Any of the five rooms works the same way.",
-      "hasMinigame": "No",
-      "minigameType": "-",
-      "accessNotes": "Rooms 1 through 5; pick whichever bed is free.",
-      "cardSummary": "The standard-care wing where most patients are treated. Because all five rooms are identical, they are grouped here as one area: diagnose, treat, and move to the next free bed."
+      "item": {
+        "name": "Medical Wing (Rooms 1-5)",
+        "wing": "Right Wing",
+        "purpose": "The right-hand wing of five interchangeable rooms that handle standard patient care.",
+        "whatYouDo": "Take an admitted patient to the nearest empty bed, run the DNA diagnosis to find what is wrong, and administer the matching treatment. Any of the five rooms works the same way.",
+        "hasMinigame": "No",
+        "minigameType": "-",
+        "accessNotes": "Rooms 1 through 5; pick whichever bed is free.",
+        "cardSummary": "The standard-care wing where most patients are treated. Because all five rooms are identical, they are grouped here as one area: diagnose, treat, and move to the next free bed."
+      },
+      "system": {
+        "slug": "medical-wing",
+        "section": "Medical Wing (Standard Care)",
+        "sortOrder": 4,
+        "image": "/Animal%20Hospital/locations/medical-wing.webp"
+      }
     },
     {
-      "name": "Room 6 - X-Ray Room",
-      "slug": "room-6-x-ray-room",
-      "image": "/Animal%20Hospital/locations/room-6-x-ray-room.webp",
-      "imageStatus": "present",
-      "collectionSection": "Emergency Wing (Minigame Rooms)",
-      "wing": "Left Wing",
-      "purpose": "The left-wing X-Ray room, the first of the three skill-based treatment rooms.",
-      "whatYouDo": "Play a memory minigame: a sequence of colors or squares flashes, and you copy it back in the same order to complete the X-Ray.",
-      "hasMinigame": "Yes",
-      "minigameType": "Memory / sequence",
-      "accessNotes": "Part of the left-wing emergency rooms; used for patients routed to X-Ray.",
-      "cardSummary": "A treatment room built around a copy-the-sequence memory test. Watch the flashed order, repeat it correctly, and the X-Ray is done."
+      "item": {
+        "name": "Room 6 - X-Ray Room",
+        "wing": "Left Wing",
+        "purpose": "The left-wing X-Ray room, the first of the three skill-based treatment rooms.",
+        "whatYouDo": "Play a memory minigame: a sequence of colors or squares flashes, and you copy it back in the same order to complete the X-Ray.",
+        "hasMinigame": "Yes",
+        "minigameType": "Memory / sequence",
+        "accessNotes": "Part of the left-wing emergency rooms; used for patients routed to X-Ray.",
+        "cardSummary": "A treatment room built around a copy-the-sequence memory test. Watch the flashed order, repeat it correctly, and the X-Ray is done."
+      },
+      "system": {
+        "slug": "room-6-x-ray-room",
+        "section": "Emergency Wing (Minigame Rooms)",
+        "sortOrder": 5,
+        "image": "/Animal%20Hospital/locations/room-6-x-ray-room.webp"
+      }
     },
     {
-      "name": "Room 7 - Heart Monitor Room",
-      "slug": "room-7-heart-monitor-room",
-      "image": "/Animal%20Hospital/locations/room-7-heart-monitor-room.webp",
-      "imageStatus": "present",
-      "collectionSection": "Emergency Wing (Minigame Rooms)",
-      "wing": "Left Wing",
-      "purpose": "The left-wing heart monitor room, a reaction-based treatment room.",
-      "whatYouDo": "Play a clicking minigame: hit the white icons to push progress toward 100 percent while avoiding the red skull buttons, which reduce your progress.",
-      "hasMinigame": "Yes",
-      "minigameType": "Reaction / clicking",
-      "accessNotes": "Part of the left-wing emergency rooms; used for patients routed to the heart monitor.",
-      "cardSummary": "A fast clicking room where you race to 100 percent. The catch is the red skulls mixed into the targets, so accuracy matters as much as speed."
+      "item": {
+        "name": "Room 7 - Heart Monitor Room",
+        "wing": "Left Wing",
+        "purpose": "The left-wing heart monitor room, a reaction-based treatment room.",
+        "whatYouDo": "Play a clicking minigame: hit the white icons to push progress toward 100 percent while avoiding the red skull buttons, which reduce your progress.",
+        "hasMinigame": "Yes",
+        "minigameType": "Reaction / clicking",
+        "accessNotes": "Part of the left-wing emergency rooms; used for patients routed to the heart monitor.",
+        "cardSummary": "A fast clicking room where you race to 100 percent. The catch is the red skulls mixed into the targets, so accuracy matters as much as speed."
+      },
+      "system": {
+        "slug": "room-7-heart-monitor-room",
+        "section": "Emergency Wing (Minigame Rooms)",
+        "sortOrder": 6,
+        "image": "/Animal%20Hospital/locations/room-7-heart-monitor-room.webp"
+      }
     },
     {
-      "name": "Room 8 - Surgery Room",
-      "slug": "room-8-surgery-room",
-      "image": "/Animal%20Hospital/locations/room-8-surgery-room.webp",
-      "imageStatus": "present",
-      "collectionSection": "Emergency Wing (Minigame Rooms)",
-      "wing": "Left Wing",
-      "purpose": "The left-wing surgery room, the most time-pressured treatment room.",
-      "whatYouDo": "Play a timed item-delivery minigame: after you administer the IV Drop the timer starts, and you fetch and hand over the requested surgical tools across several rounds, each round on about a 45-second clock.",
-      "hasMinigame": "Yes",
-      "minigameType": "Timed action",
-      "accessNotes": "Part of the left-wing emergency rooms; the toughest of the three minigame rooms.",
-      "cardSummary": "The hospital's high-pressure surgery room. Once the IV Drop starts the clock, you have roughly 45 seconds per round to deliver the right tools, making it the area new players misjudge most often."
+      "item": {
+        "name": "Room 8 - Surgery Room",
+        "wing": "Left Wing",
+        "purpose": "The left-wing surgery room, the most time-pressured treatment room.",
+        "whatYouDo": "Play a timed item-delivery minigame: after you administer the IV Drop the timer starts, and you fetch and hand over the requested surgical tools across several rounds, each round on about a 45-second clock.",
+        "hasMinigame": "Yes",
+        "minigameType": "Timed action",
+        "accessNotes": "Part of the left-wing emergency rooms; the toughest of the three minigame rooms.",
+        "cardSummary": "The hospital's high-pressure surgery room. Once the IV Drop starts the clock, you have roughly 45 seconds per round to deliver the right tools, making it the area new players misjudge most often."
+      },
+      "system": {
+        "slug": "room-8-surgery-room",
+        "section": "Emergency Wing (Minigame Rooms)",
+        "sortOrder": 7,
+        "image": "/Animal%20Hospital/locations/room-8-surgery-room.webp"
+      }
     }
   ]
 }

@@ -1,30 +1,13 @@
 {
   "meta": {
-    "title": "Jujutsu Shenanigans interactables data",
+    "schemaVersion": 2,
     "game": "Jujutsu Shenanigans",
     "gameSlug": "jujutsu-shenanigans",
-    "universeId": 3508322461,
     "collection": "interactables",
     "route": "/wiki/jujutsu-shenanigans/interactables",
     "catalogCode": "jujutsu-shenanigans-interactables",
-    "updatedAt": "2026-06-01",
-    "itemCount": 10,
-    "counts": {
-      "Throwables": 6,
-      "Paid map interactables": 2,
-      "Map mechanisms": 1,
-      "Minigame interactables": 1
-    },
-    "imageCoverage": {
-      "present": 8,
-      "missing": 2
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
+    "itemFields": [
       "type",
-      "collectionSection",
       "location",
       "cost",
       "requirement",
@@ -34,63 +17,44 @@
       "specialInteractions",
       "relatedMoves",
       "availability",
-      "itemsPageOverlap",
-      "sourcePage",
-      "wikiUrl",
-      "sourceImageUrl",
-      "imageStatus",
-      "imageMissingReason",
-      "verificationNote",
-      "sortOrder"
+      "itemsPageOverlap"
     ],
-    "sources": [
-      {
-        "label": "Jujutsu Shenanigans Wiki - Interactables",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables",
-        "accessed": "2026-06-01"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Map",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Map",
-        "accessed": "2026-06-01"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Shop",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Shop",
-        "accessed": "2026-06-01"
-      },
-      {
-        "label": "Jujutsu Shenanigans Wiki - Items",
-        "url": "https://jujutsu-shenanigans.fandom.com/wiki/Items",
-        "accessed": "2026-06-01"
-      }
+    "columns": [
+      "type",
+      "location",
+      "cost",
+      "requirement",
+      "modeServerLimitation",
+      "effect",
+      "baseDamage",
+      "specialInteractions",
+      "relatedMoves",
+      "availability",
+      "itemsPageOverlap"
     ],
-    "notes": [
-      "The current Interactables API lists 6 throwables plus billboards, vending machines, and the Unlicensed Rhythm Game. The older Trusses source text was not present in the refreshed API check, so this dataset uses the source-backed Shinjuku Station Control Panel from the current Map page as the tenth current map interactable.",
-      "Arcade Machine is intentionally one combined row: it is both a throwable object and the source of two $1 arcade minigames.",
-      "Soda is not a separate interactable row because the item itself belongs to the items page. Vending Machines stay here because the machine route, location, and cost are interactable behavior.",
-      "Vending Machines and Unlicensed Rhythm Game are intentionally image-blank because the available source media is a map-dot image or no clean row-specific image."
-    ],
-    "routeOverrideProposal": {
-      "groupKey": "collectionSection",
-      "groupLabel": "Interactable type",
+    "display": {
+      "groupLabel": "section",
       "sectionOrder": [
         "Throwables",
         "Paid map interactables",
         "Map mechanisms",
         "Minigame interactables"
       ],
-      "hiddenKeys": [
-        "collectionSection",
-        "sourcePage",
-        "wikiUrl",
-        "sourceImageUrl",
-        "imageStatus",
-        "imageMissingReason",
-        "verificationNote",
-        "sortOrder"
+      "badgeField": "type",
+      "subtitleFields": [
+        "availability"
       ],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
       "cardFields": [
+        "type",
+        "location",
+        "cost",
+        "requirement",
+        "modeServerLimitation",
+        "effect"
+      ],
+      "tableFields": [
         "type",
         "location",
         "cost",
@@ -98,253 +62,231 @@
         "modeServerLimitation",
         "effect",
         "baseDamage",
-        "specialInteractions",
-        "relatedMoves",
-        "availability",
-        "itemsPageOverlap"
-      ]
+        "specialInteractions"
+      ],
+      "fieldPresentation": null
     }
   },
   "items": [
     {
-      "name": "Garbage Can",
-      "slug": "garbage-can",
-      "image": "/Jujutsu%20Shenanigans/interactables/garbage-can.webp",
-      "type": "Throwable map object",
-      "collectionSection": "Throwables",
-      "location": "Center Square, Shinjuku Station, Tze's, and Cafe",
-      "cost": "No cost listed",
-      "requirement": "Stand next to it and use melee to pick it up",
-      "modeServerLimitation": "Main map object",
-      "effect": "Can be picked up and thrown as an environmental projectile.",
-      "baseDamage": "15 unblockable bullet-type damage while in motion",
-      "specialInteractions": "No extra break effect listed.",
-      "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables.",
-      "availability": "Current source-backed throwable",
-      "itemsPageOverlap": "No current items-page row",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Interactables",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables#Throwables",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/7/7d/Garbage_can.png/revision/latest?cb=20260506175530",
-      "imageStatus": "local row-specific source image",
-      "imageMissingReason": null,
-      "verificationNote": "Current Interactables API lists Garbage Can as a throwable with these locations and no special effect.",
-      "sortOrder": 10
+      "item": {
+        "name": "Garbage Can",
+        "type": "Throwable map object",
+        "location": "Center Square, Shinjuku Station, Tze's, and Cafe",
+        "cost": "No cost listed",
+        "requirement": "Stand next to it and use melee to pick it up",
+        "modeServerLimitation": "Main map object",
+        "effect": "Can be picked up and thrown as an environmental projectile.",
+        "baseDamage": "15 unblockable bullet-type damage while in motion",
+        "specialInteractions": "No extra break effect listed.",
+        "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables.",
+        "availability": "Current source-backed throwable",
+        "itemsPageOverlap": "No current items-page row"
+      },
+      "system": {
+        "slug": "garbage-can",
+        "section": "Throwables",
+        "sortOrder": 10,
+        "image": "/Jujutsu%20Shenanigans/interactables/garbage-can.webp"
+      }
     },
     {
-      "name": "Fire Extinguisher",
-      "slug": "fire-extinguisher",
-      "image": "/Jujutsu%20Shenanigans/interactables/fire-extinguisher.webp",
-      "type": "Throwable map object",
-      "collectionSection": "Throwables",
-      "location": "The 2 Towers, Shinjuku Station, Cafe, and Tze's",
-      "cost": "No cost listed",
-      "requirement": "Stand next to it and use melee to pick it up",
-      "modeServerLimitation": "Main map object",
-      "effect": "Can be picked up and thrown as an environmental projectile.",
-      "baseDamage": "15 unblockable bullet-type damage while in motion",
-      "specialInteractions": "Explodes into white mist when it breaks.",
-      "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables.",
-      "availability": "Current source-backed throwable",
-      "itemsPageOverlap": "No current items-page row",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Interactables",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables#Throwables",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/3/30/Fire_extinguisher.png/revision/latest?cb=20260507191440",
-      "imageStatus": "local row-specific source image",
-      "imageMissingReason": null,
-      "verificationNote": "Current Interactables API lists Fire Extinguisher as a throwable and names the white-mist break effect.",
-      "sortOrder": 20
+      "item": {
+        "name": "Fire Extinguisher",
+        "type": "Throwable map object",
+        "location": "The 2 Towers, Shinjuku Station, Cafe, and Tze's",
+        "cost": "No cost listed",
+        "requirement": "Stand next to it and use melee to pick it up",
+        "modeServerLimitation": "Main map object",
+        "effect": "Can be picked up and thrown as an environmental projectile.",
+        "baseDamage": "15 unblockable bullet-type damage while in motion",
+        "specialInteractions": "Explodes into white mist when it breaks.",
+        "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables.",
+        "availability": "Current source-backed throwable",
+        "itemsPageOverlap": "No current items-page row"
+      },
+      "system": {
+        "slug": "fire-extinguisher",
+        "section": "Throwables",
+        "sortOrder": 20,
+        "image": "/Jujutsu%20Shenanigans/interactables/fire-extinguisher.webp"
+      }
     },
     {
-      "name": "Chair",
-      "slug": "chair",
-      "image": "/Jujutsu%20Shenanigans/interactables/chair.webp",
-      "type": "Throwable map object",
-      "collectionSection": "Throwables",
-      "location": "Cafe and Tze's",
-      "cost": "No cost listed",
-      "requirement": "Stand next to it and use melee to pick it up",
-      "modeServerLimitation": "Main map object",
-      "effect": "Can be picked up and thrown as an environmental projectile.",
-      "baseDamage": "15 unblockable bullet-type damage while in motion",
-      "specialInteractions": "Hits the target upward a little instead of normal knockback.",
-      "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables.",
-      "availability": "Current source-backed throwable",
-      "itemsPageOverlap": "No current items-page row",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Interactables",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables#Throwables",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/7/76/Chair.png/revision/latest?cb=20260507191555",
-      "imageStatus": "local row-specific source image",
-      "imageMissingReason": null,
-      "verificationNote": "Current Interactables API lists Chair as a throwable and names the upward-hit behavior.",
-      "sortOrder": 30
+      "item": {
+        "name": "Chair",
+        "type": "Throwable map object",
+        "location": "Cafe and Tze's",
+        "cost": "No cost listed",
+        "requirement": "Stand next to it and use melee to pick it up",
+        "modeServerLimitation": "Main map object",
+        "effect": "Can be picked up and thrown as an environmental projectile.",
+        "baseDamage": "15 unblockable bullet-type damage while in motion",
+        "specialInteractions": "Hits the target upward a little instead of normal knockback.",
+        "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables.",
+        "availability": "Current source-backed throwable",
+        "itemsPageOverlap": "No current items-page row"
+      },
+      "system": {
+        "slug": "chair",
+        "section": "Throwables",
+        "sortOrder": 30,
+        "image": "/Jujutsu%20Shenanigans/interactables/chair.webp"
+      }
     },
     {
-      "name": "Gravestone",
-      "slug": "gravestone",
-      "image": "/Jujutsu%20Shenanigans/interactables/gravestone.webp",
-      "type": "Throwable map object",
-      "collectionSection": "Throwables",
-      "location": "Graveyard",
-      "cost": "No cost listed",
-      "requirement": "Stand next to it and use melee to pick it up",
-      "modeServerLimitation": "Main map object",
-      "effect": "Can be picked up and thrown as an environmental projectile.",
-      "baseDamage": "15 unblockable bullet-type damage while in motion",
-      "specialInteractions": "Decreases health regeneration by 5 seconds.",
-      "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables.",
-      "availability": "Current source-backed throwable",
-      "itemsPageOverlap": "No current items-page row",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Interactables",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables#Throwables",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/6/61/Gravestone_Throwable.png/revision/latest?cb=20260507191744",
-      "imageStatus": "local row-specific source image",
-      "imageMissingReason": null,
-      "verificationNote": "Current Interactables API lists Gravestone as a throwable and names the 5-second health-regeneration delay.",
-      "sortOrder": 40
+      "item": {
+        "name": "Gravestone",
+        "type": "Throwable map object",
+        "location": "Graveyard",
+        "cost": "No cost listed",
+        "requirement": "Stand next to it and use melee to pick it up",
+        "modeServerLimitation": "Main map object",
+        "effect": "Can be picked up and thrown as an environmental projectile.",
+        "baseDamage": "15 unblockable bullet-type damage while in motion",
+        "specialInteractions": "Decreases health regeneration by 5 seconds.",
+        "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables.",
+        "availability": "Current source-backed throwable",
+        "itemsPageOverlap": "No current items-page row"
+      },
+      "system": {
+        "slug": "gravestone",
+        "section": "Throwables",
+        "sortOrder": 40,
+        "image": "/Jujutsu%20Shenanigans/interactables/gravestone.webp"
+      }
     },
     {
-      "name": "Arcade Machine",
-      "slug": "arcade-machine",
-      "image": "/Jujutsu%20Shenanigans/interactables/arcade-machine.webp",
-      "type": "Throwable and paid minigame object",
-      "collectionSection": "Throwables",
-      "location": "Unlicensed Studios",
-      "cost": "$1 to play the arcade games",
-      "requirement": "Use the interaction prompt to play, or pick it up as a throwable",
-      "modeServerLimitation": "Main map object",
-      "effect": "Can be thrown for environmental damage or operated to play Unlicensed Catch Game and Unlicensed Flight Game.",
-      "baseDamage": "15 unblockable bullet-type damage while in motion",
-      "specialInteractions": "Explodes into coins when it breaks. It can still be picked up while someone is playing it.",
-      "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables. Arcade play connects to a daily quest and related emotes.",
-      "availability": "Current source-backed throwable and arcade prompt",
-      "itemsPageOverlap": "No current items-page row",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Interactables; Shop",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables#Throwables",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/7/76/Arcade_machine.png/revision/latest?cb=20240712145328",
-      "imageStatus": "local row-specific source image",
-      "imageMissingReason": null,
-      "verificationNote": "Combined row approved in Phase 2. Interactables lists throwable and minigame behavior; Shop confirms Cash use and daily-quest context.",
-      "sortOrder": 50
+      "item": {
+        "name": "Arcade Machine",
+        "type": "Throwable and paid minigame object",
+        "location": "Unlicensed Studios",
+        "cost": "$1 to play the arcade games",
+        "requirement": "Use the interaction prompt to play, or pick it up as a throwable",
+        "modeServerLimitation": "Main map object",
+        "effect": "Can be thrown for environmental damage or operated to play Unlicensed Catch Game and Unlicensed Flight Game.",
+        "baseDamage": "15 unblockable bullet-type damage while in motion",
+        "specialInteractions": "Explodes into coins when it breaks. It can still be picked up while someone is playing it.",
+        "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables. Arcade play connects to a daily quest and related emotes.",
+        "availability": "Current source-backed throwable and arcade prompt",
+        "itemsPageOverlap": "No current items-page row"
+      },
+      "system": {
+        "slug": "arcade-machine",
+        "section": "Throwables",
+        "sortOrder": 50,
+        "image": "/Jujutsu%20Shenanigans/interactables/arcade-machine.webp"
+      }
     },
     {
-      "name": "Piano",
-      "slug": "piano",
-      "image": "/Jujutsu%20Shenanigans/interactables/piano.webp",
-      "type": "Throwable and playable instrument",
-      "collectionSection": "Throwables",
-      "location": "Stage and Karaoke",
-      "cost": "No cost listed",
-      "requirement": "Use the interaction prompt to sit and play, or pick it up as a throwable",
-      "modeServerLimitation": "Main map object",
-      "effect": "Can be thrown for environmental damage or used as a playable piano with basic and more complicated notes.",
-      "baseDamage": "15 unblockable bullet-type damage while in motion",
-      "specialInteractions": "Plays an unpleasant chord when it breaks. It can still be picked up while someone is playing it.",
-      "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables. The normal play behavior overlaps the Piano emote controls.",
-      "availability": "Current source-backed throwable and piano prompt",
-      "itemsPageOverlap": "No current items-page row; overlaps emote behavior instead",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Interactables; Map",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables#Throwables",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/b/b5/UprightPianoInteractable.png/revision/latest?cb=20260507191845",
-      "imageStatus": "local row-specific source image",
-      "imageMissingReason": null,
-      "verificationNote": "Current Interactables API lists Piano as a throwable with Stage and Karaoke locations. Map page also names an interactable piano in the Comedy Club.",
-      "sortOrder": 60
+      "item": {
+        "name": "Piano",
+        "type": "Throwable and playable instrument",
+        "location": "Stage and Karaoke",
+        "cost": "No cost listed",
+        "requirement": "Use the interaction prompt to sit and play, or pick it up as a throwable",
+        "modeServerLimitation": "Main map object",
+        "effect": "Can be thrown for environmental damage or used as a playable piano with basic and more complicated notes.",
+        "baseDamage": "15 unblockable bullet-type damage while in motion",
+        "specialInteractions": "Plays an unpleasant chord when it breaks. It can still be picked up while someone is playing it.",
+        "relatedMoves": "Combat Instincts, Lurking Shadow, Boogie Woogie, and Severance Kick can interact with throwables. The normal play behavior overlaps the Piano emote controls.",
+        "availability": "Current source-backed throwable and piano prompt",
+        "itemsPageOverlap": "No current items-page row; overlaps emote behavior instead"
+      },
+      "system": {
+        "slug": "piano",
+        "section": "Throwables",
+        "sortOrder": 60,
+        "image": "/Jujutsu%20Shenanigans/interactables/piano.webp"
+      }
     },
     {
-      "name": "Billboards",
-      "slug": "billboards",
-      "image": "/Jujutsu%20Shenanigans/interactables/billboards.webp",
-      "type": "Custom image display",
-      "collectionSection": "Paid map interactables",
-      "location": "Two towers, with editing panels on the fourth floors",
-      "cost": "$15 to change the image ID",
-      "requirement": "Kill requirement listed by the source",
-      "modeServerLimitation": "Main map tower object",
-      "effect": "Displays a custom image ID and the name of the last player who edited the billboard.",
-      "baseDamage": "No damage listed",
-      "specialInteractions": "The edit panel warns that inappropriate images can result in a ban.",
-      "relatedMoves": "No character move interaction listed",
-      "availability": "Current source-backed paid interactable",
-      "itemsPageOverlap": "No current items-page row",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Interactables; Map",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables#Billboards",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/c/c2/Billban.png/revision/latest?cb=20250926155213",
-      "imageStatus": "local row-specific source image",
-      "imageMissingReason": null,
-      "verificationNote": "Current Interactables API says there are 2 billboards, one on each tower, and Map confirms tower panels.",
-      "sortOrder": 70
+      "item": {
+        "name": "Billboards",
+        "type": "Custom image display",
+        "location": "Two towers, with editing panels on the fourth floors",
+        "cost": "$15 to change the image ID",
+        "requirement": "Kill requirement listed by the source",
+        "modeServerLimitation": "Main map tower object",
+        "effect": "Displays a custom image ID and the name of the last player who edited the billboard.",
+        "baseDamage": "No damage listed",
+        "specialInteractions": "The edit panel warns that inappropriate images can result in a ban.",
+        "relatedMoves": "No character move interaction listed",
+        "availability": "Current source-backed paid interactable",
+        "itemsPageOverlap": "No current items-page row"
+      },
+      "system": {
+        "slug": "billboards",
+        "section": "Paid map interactables",
+        "sortOrder": 70,
+        "image": "/Jujutsu%20Shenanigans/interactables/billboards.webp"
+      }
     },
     {
-      "name": "Vending Machines",
-      "slug": "vending-machines",
-      "image": null,
-      "type": "Soda purchase object",
-      "collectionSection": "Paid map interactables",
-      "location": "In or outside buildings and in Shinjuku Station",
-      "cost": "$5 for Soda",
-      "requirement": "Use the proximity prompt",
-      "modeServerLimitation": "Main map object",
-      "effect": "Lets players buy Soda from the machine.",
-      "baseDamage": "No direct damage listed",
-      "specialInteractions": "Soda is the item created by the interaction. The vending-machine object itself is the interactable row.",
-      "relatedMoves": "Soda overlaps the items page. No current source-backed character move interaction is listed for the vending-machine row.",
-      "availability": "Current source-backed paid interactable",
-      "itemsPageOverlap": "Creates Soda, which is owned by the items page",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Interactables; Items; Map",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables#Vending_Machines",
-      "sourceImageUrl": null,
-      "imageStatus": "missing",
-      "imageMissingReason": "The source image is a vending-machine dot map instead of a clean row-specific object image, so the card is intentionally left blank.",
-      "verificationNote": "Interactables confirms V1.37 proximity-prompt Soda purchase for $5. Items confirms Soda remains the held item.",
-      "sortOrder": 80
+      "item": {
+        "name": "Vending Machines",
+        "type": "Soda purchase object",
+        "location": "In or outside buildings and in Shinjuku Station",
+        "cost": "$5 for Soda",
+        "requirement": "Use the proximity prompt",
+        "modeServerLimitation": "Main map object",
+        "effect": "Lets players buy Soda from the machine.",
+        "baseDamage": "No direct damage listed",
+        "specialInteractions": "Soda is the item created by the interaction. The vending-machine object itself is the interactable row.",
+        "relatedMoves": "Soda overlaps the items page. No current source-backed character move interaction is listed for the vending-machine row.",
+        "availability": "Current source-backed paid interactable",
+        "itemsPageOverlap": "Creates Soda, which is owned by the items page"
+      },
+      "system": {
+        "slug": "vending-machines",
+        "section": "Paid map interactables",
+        "sortOrder": 80,
+        "image": null
+      }
     },
     {
-      "name": "Shinjuku Station Control Panel",
-      "slug": "shinjuku-station-control-panel",
-      "image": "/Jujutsu%20Shenanigans/interactables/shinjuku-station-control-panel.webp",
-      "type": "Station mechanism",
-      "collectionSection": "Map mechanisms",
-      "location": "Shinjuku Station control room",
-      "cost": "No cost listed",
-      "requirement": "Use one of the station control-panel buttons",
-      "modeServerLimitation": "Main map station object",
-      "effect": "One button broadcasts to the subway station, and another calls a speeding train on the rails.",
-      "baseDamage": "Train heavily damages players in its way; exact damage is not listed",
-      "specialInteractions": "The train travels along the station rails after being called.",
-      "relatedMoves": "No character move interaction listed",
-      "availability": "Current source-backed map mechanism",
-      "itemsPageOverlap": "No current items-page row",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Map",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Map#Shinjuku_Station",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/jujutsu-shenanigans/images/a/a3/Control_Panel.png/revision/latest?cb=20250926161430",
-      "imageStatus": "local row-specific source image",
-      "imageMissingReason": null,
-      "verificationNote": "Added after refreshed source review because the current Interactables API no longer includes the older Trusses section. Map source clearly describes this as an interactable station mechanism.",
-      "sortOrder": 90
+      "item": {
+        "name": "Shinjuku Station Control Panel",
+        "type": "Station mechanism",
+        "location": "Shinjuku Station control room",
+        "cost": "No cost listed",
+        "requirement": "Use one of the station control-panel buttons",
+        "modeServerLimitation": "Main map station object",
+        "effect": "One button broadcasts to the subway station, and another calls a speeding train on the rails.",
+        "baseDamage": "Train heavily damages players in its way; exact damage is not listed",
+        "specialInteractions": "The train travels along the station rails after being called.",
+        "relatedMoves": "No character move interaction listed",
+        "availability": "Current source-backed map mechanism",
+        "itemsPageOverlap": "No current items-page row"
+      },
+      "system": {
+        "slug": "shinjuku-station-control-panel",
+        "section": "Map mechanisms",
+        "sortOrder": 90,
+        "image": "/Jujutsu%20Shenanigans/interactables/shinjuku-station-control-panel.webp"
+      }
     },
     {
-      "name": "Unlicensed Rhythm Game",
-      "slug": "unlicensed-rhythm-game",
-      "image": null,
-      "type": "Karaoke rhythm minigame",
-      "collectionSection": "Minigame interactables",
-      "location": "Karaoke machine in Shenanigans Ball",
-      "cost": "No cost listed",
-      "requirement": "Interact with the karaoke machine and pick a song snippet",
-      "modeServerLimitation": "Main map Shenanigans Ball object",
-      "effect": "Starts a Yakuza-style rhythm game and displays the player's score when it ends.",
-      "baseDamage": "No damage listed",
-      "specialInteractions": "The user gains full i-frames while performing.",
-      "relatedMoves": "No character move interaction listed",
-      "availability": "Current source-backed minigame interactable",
-      "itemsPageOverlap": "No current items-page row",
-      "sourcePage": "Jujutsu Shenanigans Wiki - Interactables",
-      "wikiUrl": "https://jujutsu-shenanigans.fandom.com/wiki/Interactables#Unlicensed_Rhythm_Game",
-      "sourceImageUrl": null,
-      "imageStatus": "missing",
-      "imageMissingReason": "No clean row-specific source image was available for the karaoke machine or rhythm-game UI in this pass.",
-      "verificationNote": "Current Interactables API lists the karaoke machine route, song-snippet behavior, i-frames, and score display.",
-      "sortOrder": 100
+      "item": {
+        "name": "Unlicensed Rhythm Game",
+        "type": "Karaoke rhythm minigame",
+        "location": "Karaoke machine in Shenanigans Ball",
+        "cost": "No cost listed",
+        "requirement": "Interact with the karaoke machine and pick a song snippet",
+        "modeServerLimitation": "Main map Shenanigans Ball object",
+        "effect": "Starts a Yakuza-style rhythm game and displays the player's score when it ends.",
+        "baseDamage": "No damage listed",
+        "specialInteractions": "The user gains full i-frames while performing.",
+        "relatedMoves": "No character move interaction listed",
+        "availability": "Current source-backed minigame interactable",
+        "itemsPageOverlap": "No current items-page row"
+      },
+      "system": {
+        "slug": "unlicensed-rhythm-game",
+        "section": "Minigame interactables",
+        "sortOrder": 100,
+        "image": null
+      }
     }
   ]
 }

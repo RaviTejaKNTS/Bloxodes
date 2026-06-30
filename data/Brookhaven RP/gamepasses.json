@@ -1,464 +1,383 @@
 {
   "meta": {
-    "title": "Brookhaven RP gamepasses data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Official Brookhaven Wiki - Gamepasses",
-        "url": "https://official-brookhaven.fandom.com/wiki/Gamepasses",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
+    "schemaVersion": 2,
+    "game": "Brookhaven RP",
+    "gameSlug": "brookhaven-rp",
+    "collection": "gamepasses",
+    "route": "/wiki/brookhaven-rp/gamepasses",
+    "catalogCode": "brookhaven-rp-gamepasses",
+    "itemFields": [
       "number",
-      "image",
-      "name",
       "category",
       "cost",
       "benefits",
       "reason"
-    ]
+    ],
+    "columns": [
+      "number",
+      "category",
+      "cost",
+      "benefits",
+      "reason"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Game Passes",
+        "Off-sale Gamepasses",
+        "Robux Bundle",
+        "Developer Products",
+        "Limited Passes"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "number",
+        "category",
+        "cost",
+        "benefits",
+        "reason"
+      ],
+      "tableFields": [
+        "number",
+        "category",
+        "cost",
+        "benefits",
+        "reason"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "number": "1",
-      "name": "VIP Pack",
-      "slug": "vip-pack",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "999",
-      "benefits": "Players with the VIP Pack pass unlock VIP houses, vehicles, tools, props, emotes, access to event vehicles, exclusive Avatar Editor effects, no house cooldown on public servers, exclusive VIP job badge, gradient (slow / fast) and flash options for Character Bio name and House Signs, access to chinooks and a yellow chat tag [VIP], increased prop limit in houses and on map, ability to spawn 2 vehicles at the same time as well as a horse and a small vehicle. Access 6 hot air balloons and 3 chinooks that can be found at all Heli / Jet pads.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/VIP_Pack",
-      "image": "/Brookhaven%20RP/Gamepasses/vip-pack.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/b/bc/VIP_Pass.png/revision/latest/scale-to-width-down/175?cb=20250513174525"
+      "item": {
+        "name": "VIP Pack",
+        "number": "1",
+        "category": "Game Passes",
+        "cost": "999",
+        "benefits": "Players with the VIP Pack pass unlock VIP houses, vehicles, tools, props, emotes, access to event vehicles, exclusive Avatar Editor effects, no house cooldown on public servers, exclusive VIP job badge, gradient (slow / fast) and flash options for Character Bio name and House Signs, access to chinooks and a yellow chat tag [VIP], increased prop limit in houses and on map, ability to spawn 2 vehicles at the same time as well as a horse and a small vehicle. Access 6 hot air balloons and 3 chinooks that can be found at all Heli / Jet pads."
+      },
+      "system": {
+        "slug": "vip-pack",
+        "section": "Game Passes",
+        "sortOrder": 1,
+        "image": "/Brookhaven%20RP/Gamepasses/vip-pack.webp"
+      }
     },
     {
-      "number": "2",
-      "name": "Estate Unlocked",
-      "slug": "estate-unlocked",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "799",
-      "benefits": "Players with the Estate Unlocked pass unlock over 10 massive estates to chose from, alongside the north estate, south estate and island estate plots.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Estate_Unlocked",
-      "image": "/Brookhaven%20RP/Gamepasses/estate-unlocked.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/e/e4/Estates_Unlocked.png/revision/latest/scale-to-width-down/175?cb=20250513174556"
+      "item": {
+        "name": "Estate Unlocked",
+        "number": "2",
+        "category": "Game Passes",
+        "cost": "799",
+        "benefits": "Players with the Estate Unlocked pass unlock over 10 massive estates to chose from, alongside the north estate, south estate and island estate plots."
+      },
+      "system": {
+        "slug": "estate-unlocked",
+        "section": "Game Passes",
+        "sortOrder": 2,
+        "image": "/Brookhaven%20RP/Gamepasses/estate-unlocked.webp"
+      }
     },
     {
-      "number": "3",
-      "name": "Vehicle Pack",
-      "slug": "vehicle-pack",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "799",
-      "benefits": "Players with the Vehicle Pack pass unlock over 24 new vehicles. From electric vehicles, party trucks to motorcycles and sports cars.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Vehicle_Pack",
-      "image": "/Brookhaven%20RP/Gamepasses/vehicle-pack.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/e/e4/Vehicle_Pack.png/revision/latest/scale-to-width-down/175?cb=20250513174619"
+      "item": {
+        "name": "Vehicle Pack",
+        "number": "3",
+        "category": "Game Passes",
+        "cost": "799",
+        "benefits": "Players with the Vehicle Pack pass unlock over 24 new vehicles. From electric vehicles, party trucks to motorcycles and sports cars."
+      },
+      "system": {
+        "slug": "vehicle-pack",
+        "section": "Game Passes",
+        "sortOrder": 3,
+        "image": "/Brookhaven%20RP/Gamepasses/vehicle-pack.webp"
+      }
     },
     {
-      "number": "4",
-      "name": "Land Unlocked",
-      "slug": "land-unlocked",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "500",
-      "benefits": "Players with the Land Unlocked pass unlock 5+ new plots around the map for their houses. Plots like Lake House, Eagle View, Gold Ranch, Hidden Valley, Lake Side and Paradise Island.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Land_Unlocked",
-      "image": "/Brookhaven%20RP/Gamepasses/land-unlocked.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/f/f5/Land_Unlocked.png/revision/latest/scale-to-width-down/175?cb=20250513174641"
+      "item": {
+        "name": "Land Unlocked",
+        "number": "4",
+        "category": "Game Passes",
+        "cost": "500",
+        "benefits": "Players with the Land Unlocked pass unlock 5+ new plots around the map for their houses. Plots like Lake House, Eagle View, Gold Ranch, Hidden Valley, Lake Side and Paradise Island."
+      },
+      "system": {
+        "slug": "land-unlocked",
+        "section": "Game Passes",
+        "sortOrder": 4,
+        "image": "/Brookhaven%20RP/Gamepasses/land-unlocked.webp"
+      }
     },
     {
-      "number": "5",
-      "name": "Disaster Pack",
-      "slug": "disaster-pack",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "500",
-      "benefits": "Players with the Disaster Pack unlock the ability to start disasters in their house, estate, landmark, apartment, with over 10 disasters to choose. From fire, flood, gas leak to invasions, aliens and wind.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Disaster_Pack",
-      "image": "/Brookhaven%20RP/Gamepasses/disaster-pack.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/59/Disaster_Pack.png/revision/latest/scale-to-width-down/175?cb=20250513175334"
+      "item": {
+        "name": "Disaster Pack",
+        "number": "5",
+        "category": "Game Passes",
+        "cost": "500",
+        "benefits": "Players with the Disaster Pack unlock the ability to start disasters in their house, estate, landmark, apartment, with over 10 disasters to choose. From fire, flood, gas leak to invasions, aliens and wind."
+      },
+      "system": {
+        "slug": "disaster-pack",
+        "section": "Game Passes",
+        "sortOrder": 5,
+        "image": "/Brookhaven%20RP/Gamepasses/disaster-pack.webp"
+      }
     },
     {
-      "number": "6",
-      "name": "Vehicle Customization",
-      "slug": "vehicle-customization",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "399",
-      "benefits": "Players with the Vehicle Customization pass unlock 7+ underglow options for supported vehicles, 30+ wraps for all supported vehicles alongside wheel loss, fire, smoke, 2 new honk sounds for supported vehicles and the ability to change vehicles color.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Vehicle_Customization",
-      "image": "/Brookhaven%20RP/Gamepasses/vehicle-customization.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/e/ee/Customization_Gamepass.png/revision/latest/scale-to-width-down/175?cb=20250929113612"
+      "item": {
+        "name": "Vehicle Customization",
+        "number": "6",
+        "category": "Game Passes",
+        "cost": "399",
+        "benefits": "Players with the Vehicle Customization pass unlock 7+ underglow options for supported vehicles, 30+ wraps for all supported vehicles alongside wheel loss, fire, smoke, 2 new honk sounds for supported vehicles and the ability to change vehicles color."
+      },
+      "system": {
+        "slug": "vehicle-customization",
+        "section": "Game Passes",
+        "sortOrder": 6,
+        "image": "/Brookhaven%20RP/Gamepasses/vehicle-customization.webp"
+      }
     },
     {
-      "number": "7",
-      "name": "Boat Pack",
-      "slug": "boat-pack",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "299",
-      "benefits": "Players with the Boat Pack pass unlock over 10 new boats. From house boats, yachts, sharks, pirate ships to speed boats and military boats.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Boat_Pack",
-      "image": "/Brookhaven%20RP/Gamepasses/boat-pack.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/ac/Boat_Pack.png/revision/latest/scale-to-width-down/175?cb=20250513174503"
+      "item": {
+        "name": "Boat Pack",
+        "number": "7",
+        "category": "Game Passes",
+        "cost": "299",
+        "benefits": "Players with the Boat Pack pass unlock over 10 new boats. From house boats, yachts, sharks, pirate ships to speed boats and military boats."
+      },
+      "system": {
+        "slug": "boat-pack",
+        "section": "Game Passes",
+        "sortOrder": 7,
+        "image": "/Brookhaven%20RP/Gamepasses/boat-pack.webp"
+      }
     },
     {
-      "number": "8",
-      "name": "Theme Pack",
-      "slug": "theme-pack",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "299",
-      "benefits": "Players with the Theme Pack pass unlock over 10 map themes. From Apocalypses, City on fire, Invasion to Sky racing, Japan Town and Futuristic Town.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Theme_Pack",
-      "image": "/Brookhaven%20RP/Gamepasses/theme-pack.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/6/63/Theme_Pack.png/revision/latest/scale-to-width-down/175?cb=20250513174746"
+      "item": {
+        "name": "Theme Pack",
+        "number": "8",
+        "category": "Game Passes",
+        "cost": "299",
+        "benefits": "Players with the Theme Pack pass unlock over 10 map themes. From Apocalypses, City on fire, Invasion to Sky racing, Japan Town and Futuristic Town."
+      },
+      "system": {
+        "slug": "theme-pack",
+        "section": "Game Passes",
+        "sortOrder": 8,
+        "image": "/Brookhaven%20RP/Gamepasses/theme-pack.webp"
+      }
     },
     {
-      "number": "9",
-      "name": "Premium",
-      "slug": "premium",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "275",
-      "benefits": "Players with the Premium pass unlock all premium houses and vehicles, helicopters and jets, NPC companions, a special cyan chat tag [Premium], house pools for supported houses.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Premium",
-      "image": "/Brookhaven%20RP/Gamepasses/premium.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/1/1d/Premium_Pass.png/revision/latest/scale-to-width-down/175?cb=20250513175334"
+      "item": {
+        "name": "Premium",
+        "number": "9",
+        "category": "Game Passes",
+        "cost": "275",
+        "benefits": "Players with the Premium pass unlock all premium houses and vehicles, helicopters and jets, NPC companions, a special cyan chat tag [Premium], house pools for supported houses."
+      },
+      "system": {
+        "slug": "premium",
+        "section": "Game Passes",
+        "sortOrder": 9,
+        "image": "/Brookhaven%20RP/Gamepasses/premium.webp"
+      }
     },
     {
-      "number": "10",
-      "name": "Music Unlocked",
-      "slug": "music-unlocked",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "199",
-      "benefits": "Players with the Music Unlocked pass can choose from over 300 songs to play in houses, vehicles or anywhere on the map with the boombox, additionally players can change the sound of the song from 5 to 100.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Music_Unlocked",
-      "image": "/Brookhaven%20RP/Gamepasses/music-unlocked.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/50/Music_Unlocked.png/revision/latest/scale-to-width-down/175?cb=20250513174809"
+      "item": {
+        "name": "Music Unlocked",
+        "number": "10",
+        "category": "Game Passes",
+        "cost": "199",
+        "benefits": "Players with the Music Unlocked pass can choose from over 300 songs to play in houses, vehicles or anywhere on the map with the boombox, additionally players can change the sound of the song from 5 to 100."
+      },
+      "system": {
+        "slug": "music-unlocked",
+        "section": "Game Passes",
+        "sortOrder": 10,
+        "image": "/Brookhaven%20RP/Gamepasses/music-unlocked.webp"
+      }
     },
     {
-      "number": "11",
-      "name": "Vehicle Speed Unlocked",
-      "slug": "vehicle-speed-unlocked",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "199",
-      "benefits": "Players with the Vehicle Speed Unlocked pass unlock 2 stages of turbo on supported vehicles and 200 mph top speed (street vehicles) and 50 mph (small vehicles).",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Vehicle_Speed_Unlocked",
-      "image": "/Brookhaven%20RP/Gamepasses/vehicle-speed-unlocked.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/a/a9/Vehicles_Speed_Unlocked.png/revision/latest/scale-to-width-down/175?cb=20250513175334"
+      "item": {
+        "name": "Vehicle Speed Unlocked",
+        "number": "11",
+        "category": "Game Passes",
+        "cost": "199",
+        "benefits": "Players with the Vehicle Speed Unlocked pass unlock 2 stages of turbo on supported vehicles and 200 mph top speed (street vehicles) and 50 mph (small vehicles)."
+      },
+      "system": {
+        "slug": "vehicle-speed-unlocked",
+        "section": "Game Passes",
+        "sortOrder": 11,
+        "image": "/Brookhaven%20RP/Gamepasses/vehicle-speed-unlocked.webp"
+      }
     },
     {
-      "number": "12",
-      "name": "Penthouse",
-      "slug": "penthouse",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "150",
-      "benefits": "Players with the Penthouse pass unlock the top apartment (plot #7) and over 3 penthouses and a penthouse version of free apartments too.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Penthouse",
-      "image": "/Brookhaven%20RP/Gamepasses/penthouse.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/5/52/Penthouse.png/revision/latest/scale-to-width-down/175?cb=20210709231434"
+      "item": {
+        "name": "Penthouse",
+        "number": "12",
+        "category": "Game Passes",
+        "cost": "150",
+        "benefits": "Players with the Penthouse pass unlock the top apartment (plot #7) and over 3 penthouses and a penthouse version of free apartments too."
+      },
+      "system": {
+        "slug": "penthouse",
+        "section": "Game Passes",
+        "sortOrder": 12,
+        "image": "/Brookhaven%20RP/Gamepasses/penthouse.webp"
+      }
     },
     {
-      "number": "13",
-      "name": "Horse Upgrade",
-      "slug": "horse-upgrade",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "99",
-      "benefits": "Players with the Horse Upgrade pass unlock 6+ new horse breeds, the ability to customize the horse's saddle color, tail and mane color, skin color and texture.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Horse_Upgrade",
-      "image": "/Brookhaven%20RP/Gamepasses/horse-upgrade.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/1/16/HorseUpgrade.webp/revision/latest/scale-to-width-down/175?cb=20250902003333"
+      "item": {
+        "name": "Horse Upgrade",
+        "number": "13",
+        "category": "Game Passes",
+        "cost": "99",
+        "benefits": "Players with the Horse Upgrade pass unlock 6+ new horse breeds, the ability to customize the horse's saddle color, tail and mane color, skin color and texture."
+      },
+      "system": {
+        "slug": "horse-upgrade",
+        "section": "Game Passes",
+        "sortOrder": 13,
+        "image": "/Brookhaven%20RP/Gamepasses/horse-upgrade.webp"
+      }
     },
     {
-      "number": "14",
-      "name": "On Demand Fire",
-      "slug": "on-demand-fire",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "50",
-      "benefits": "Players with the On Demand Fire pass unlock the ability to start a fire in houses, apartments, estates, landmarks instantly.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/On_Demand_Fire",
-      "image": "/Brookhaven%20RP/Gamepasses/on-demand-fire.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/b/b5/On_Demand_Fire.png/revision/latest/scale-to-width-down/175?cb=20250513174727"
+      "item": {
+        "name": "On Demand Fire",
+        "number": "14",
+        "category": "Game Passes",
+        "cost": "50",
+        "benefits": "Players with the On Demand Fire pass unlock the ability to start a fire in houses, apartments, estates, landmarks instantly."
+      },
+      "system": {
+        "slug": "on-demand-fire",
+        "section": "Game Passes",
+        "sortOrder": 14,
+        "image": "/Brookhaven%20RP/Gamepasses/on-demand-fire.webp"
+      }
     },
     {
-      "number": "15",
-      "name": "Vehicle Upgrade",
-      "slug": "vehicle-upgrade",
-      "category": "Game Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "30",
-      "benefits": "Players with the Vehicle Upgrade pass get the ability to change the vehicles color and increased top speed.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Vehicle_Upgrade",
-      "image": "/Brookhaven%20RP/Gamepasses/vehicle-upgrade.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/b/bb/Vehicle_Upgrade.png/revision/latest/scale-to-width-down/175?cb=20250513175334"
+      "item": {
+        "name": "Vehicle Upgrade",
+        "number": "15",
+        "category": "Game Passes",
+        "cost": "30",
+        "benefits": "Players with the Vehicle Upgrade pass get the ability to change the vehicles color and increased top speed."
+      },
+      "system": {
+        "slug": "vehicle-upgrade",
+        "section": "Game Passes",
+        "sortOrder": 15,
+        "image": "/Brookhaven%20RP/Gamepasses/vehicle-upgrade.webp"
+      }
     },
     {
-      "number": "1",
-      "name": "Faces Unlocked",
-      "slug": "faces-unlocked",
-      "category": "Off-sale Gamepasses",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "Off-sale",
-      "benefits": "Players with the Faces Unlocked pass unlock over 200 custom faces in the Avatar Editor. From popular faces to unique faces only available in Brookhaven.",
-      "reason": "Gamepass has been removed from the game due to Roblox's decision to remove Classic Faces. All the players who buy this gamapass received an exclusive car.",
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Faces_Unlocked",
-      "image": "/Brookhaven%20RP/Gamepasses/faces-unlocked.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/0/0c/Faces_Unlocked.png/revision/latest/scale-to-width-down/175?cb=20250513175334"
+      "item": {
+        "name": "Faces Unlocked",
+        "number": "1",
+        "category": "Off-sale Gamepasses",
+        "cost": "Off-sale",
+        "benefits": "Players with the Faces Unlocked pass unlock over 200 custom faces in the Avatar Editor. From popular faces to unique faces only available in Brookhaven.",
+        "reason": "Gamepass has been removed from the game due to Roblox's decision to remove Classic Faces. All the players who buy this gamapass received an exclusive car."
+      },
+      "system": {
+        "slug": "faces-unlocked",
+        "section": "Off-sale Gamepasses",
+        "sortOrder": 16,
+        "image": "/Brookhaven%20RP/Gamepasses/faces-unlocked.webp"
+      }
     },
     {
-      "number": "1",
-      "name": "House & Motorcycle",
-      "slug": "house-and-motorcycle",
-      "category": "Robux Bundle",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "Robux Bonus Item",
-      "benefits": "Players with the House & Motorcycle gamepass unlock a special house and a motorcycle with a side-vehicle. The pass can only be obtained by buying a 2000+ Robux package on desktop.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/House_%26_Motorcycle",
-      "image": "/Brookhaven%20RP/Gamepasses/house-and-motorcycle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/2/24/Robux_Bundle.png/revision/latest/scale-to-width-down/175?cb=20250703204430"
+      "item": {
+        "name": "House & Motorcycle",
+        "number": "1",
+        "category": "Robux Bundle",
+        "cost": "Robux Bonus Item",
+        "benefits": "Players with the House & Motorcycle gamepass unlock a special house and a motorcycle with a side-vehicle. The pass can only be obtained by buying a 2000+ Robux package on desktop."
+      },
+      "system": {
+        "slug": "house-and-motorcycle",
+        "section": "Robux Bundle",
+        "sortOrder": 17,
+        "image": "/Brookhaven%20RP/Gamepasses/house-and-motorcycle.webp"
+      }
     },
     {
-      "number": "1",
-      "name": "Birthday Party",
-      "slug": "birthday-party",
-      "category": "Developer Products",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "25",
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Party_Feature",
-      "image": "/Brookhaven%20RP/Gamepasses/birthday-party.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/81/PartyPassIcon.webp/revision/latest?cb=20260123210708"
+      "item": {
+        "name": "Birthday Party",
+        "number": "1",
+        "category": "Developer Products",
+        "cost": "25"
+      },
+      "system": {
+        "slug": "birthday-party",
+        "section": "Developer Products",
+        "sortOrder": 18,
+        "image": "/Brookhaven%20RP/Gamepasses/birthday-party.webp"
+      }
     },
     {
-      "number": "2",
-      "name": "Dance Party",
-      "slug": "dance-party",
-      "category": "Developer Products",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "25",
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Party_Feature",
-      "image": "/Brookhaven%20RP/Gamepasses/dance-party.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/81/PartyPassIcon.webp/revision/latest?cb=20260123210708"
+      "item": {
+        "name": "Dance Party",
+        "number": "2",
+        "category": "Developer Products",
+        "cost": "25"
+      },
+      "system": {
+        "slug": "dance-party",
+        "section": "Developer Products",
+        "sortOrder": 19,
+        "image": "/Brookhaven%20RP/Gamepasses/dance-party.webp"
+      }
     },
     {
-      "number": "3",
-      "name": "Taco Party",
-      "slug": "taco-party",
-      "category": "Developer Products",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "25",
-      "benefits": null,
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Party_Feature",
-      "image": "/Brookhaven%20RP/Gamepasses/taco-party.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/8/81/PartyPassIcon.webp/revision/latest?cb=20260123210708"
+      "item": {
+        "name": "Taco Party",
+        "number": "3",
+        "category": "Developer Products",
+        "cost": "25"
+      },
+      "system": {
+        "slug": "taco-party",
+        "section": "Developer Products",
+        "sortOrder": 20,
+        "image": "/Brookhaven%20RP/Gamepasses/taco-party.webp"
+      }
     },
     {
-      "number": "1",
-      "name": "Midnight Manor",
-      "slug": "midnight-manor",
-      "category": "Limited Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "199",
-      "benefits": "Players with the Midnight Manor pass unlock a special halloween castle with unique features. Available only during the Halloween 2025 event.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Midnight_Manor_Gamepass",
-      "image": "/Brookhaven%20RP/Gamepasses/midnight-manor.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/1/11/Midnight_Manor_Pass_Icon.webp/revision/latest?cb=20260125200953"
+      "item": {
+        "name": "Midnight Manor",
+        "number": "1",
+        "category": "Limited Passes",
+        "cost": "199",
+        "benefits": "Players with the Midnight Manor pass unlock a special halloween castle with unique features. Available only during the Halloween 2025 event."
+      },
+      "system": {
+        "slug": "midnight-manor",
+        "section": "Limited Passes",
+        "sortOrder": 21,
+        "image": "/Brookhaven%20RP/Gamepasses/midnight-manor.webp"
+      }
     },
     {
-      "number": "2",
-      "name": "Frosty Manor",
-      "slug": "frosty-manor",
-      "category": "Limited Passes",
-      "type": null,
-      "requirementCost": null,
-      "costRequirement": null,
-      "requirements": null,
-      "cost": "399",
-      "benefits": "Players with the Frosty Manor bundle unlock a special winter house, with an ice-skating ring, special items, a hot tub and an off-road SUV. Available only during the Winter Festival 2025.",
-      "reason": null,
-      "notes": null,
-      "description": null,
-      "descriptionNotes": null,
-      "building": null,
-      "wikiUrl": "https://official-brookhaven.fandom.com/wiki/Frosty_Manor",
-      "image": "/Brookhaven%20RP/Gamepasses/frosty-manor.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/official-brookhaven/images/3/3f/FrostyManorGamepass.webp/revision/latest?cb=20251221195126"
+      "item": {
+        "name": "Frosty Manor",
+        "number": "2",
+        "category": "Limited Passes",
+        "cost": "399",
+        "benefits": "Players with the Frosty Manor bundle unlock a special winter house, with an ice-skating ring, special items, a hot tub and an off-road SUV. Available only during the Winter Festival 2025."
+      },
+      "system": {
+        "slug": "frosty-manor",
+        "section": "Limited Passes",
+        "sortOrder": 22,
+        "image": "/Brookhaven%20RP/Gamepasses/frosty-manor.webp"
+      }
     }
   ]
 }

@@ -1,62 +1,12 @@
 {
   "meta": {
-    "title": "Pet Simulator 99 potions data",
-    "updatedAt": "2026-06-08",
-    "sources": [
-      {
-        "label": "Pet Simulator Wiki - Potions (Pet Simulator 99)",
-        "url": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "Pet Simulator 99 Wiki - Potions (Pet Simulator 99)",
-        "url": "https://pet-simulator-99.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "Pet Simulator Wiki - XP Potion Machine",
-        "url": "https://pet-simulator.fandom.com/wiki/XP_Potion_Machine_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "Pet Simulator Wiki - Upgrade Potions Machine",
-        "url": "https://pet-simulator.fandom.com/wiki/Upgrade_Potions_Machine_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "Pet Simulator Wiki - Mastery",
-        "url": "https://pet-simulator.fandom.com/wiki/Mastery_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Nightmare Update",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-8",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Heaven Update",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-5",
-        "accessed": "2026-06-08"
-      }
-    ],
-    "sourceAudit": {
-      "finalCount": 65,
-      "standardPotionRows": 56,
-      "specialPotionRows": 3,
-      "xpPotionRows": 6,
-      "imageCoverage": "0/65",
-      "notes": [
-        "Final row count remained 65 after row-level verification: 56 standard tier rows, 3 special potions, and 6 XP or Ultra XP potions.",
-        "Exact standard potion upgrade costs and higher-tier requirements conflict between the main potions page and Upgrade Potions Machine page, so card rows use safe upgrade routing instead of exact disputed cost facts.",
-        "Lucky Eggs effects are written as normal egg luck only and should not imply exclusive eggs are affected.",
-        "Huge Hunter is limited to its stated active Huge luck boost and duration. No exact Huge odds or guarantee language should be used.",
-        "Images are intentionally blank until clean row-representative potion icons are gathered locally."
-      ]
-    },
-    "columns": [
-      "name",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "potions",
+    "route": "/wiki/pet-simulator-99/potions",
+    "catalogCode": "pet-simulator-99-potions",
+    "itemFields": [
       "type",
       "family",
       "tier",
@@ -66,1247 +16,1404 @@
       "obtainment",
       "craftOrUpgrade",
       "availability",
-      "description",
-      "sourcePage",
-      "sourceStatus",
-      "verificationNote"
-    ]
+      "description"
+    ],
+    "columns": [
+      "type",
+      "family",
+      "tier",
+      "rarity",
+      "effect",
+      "duration",
+      "obtainment",
+      "craftOrUpgrade",
+      "availability",
+      "description"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Standard boost potions",
+        "Special potions",
+        "XP potions"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "type",
+        "family",
+        "tier",
+        "rarity",
+        "effect",
+        "duration"
+      ],
+      "tableFields": [
+        "type",
+        "family",
+        "tier",
+        "rarity",
+        "effect",
+        "duration",
+        "obtainment",
+        "craftOrUpgrade"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Coins Potion I",
-      "slug": "coins-potion-i",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-i.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "I",
-      "rarity": "Basic",
-      "effect": "+20% Coins earned",
-      "duration": "10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
-      "craftOrUpgrade": "Base tier for Coins potion upgrades",
-      "availability": "Available",
-      "description": "Coins Potion I is the starter coin boost for short early farming sessions.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Coins Potion II",
-      "slug": "coins-potion-ii",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-ii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "II",
-      "rarity": "Rare",
-      "effect": "+40% Coins earned",
-      "duration": "20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Coins potions",
-      "availability": "Available",
-      "description": "Coins Potion II gives a longer coin window than the starter tier without changing the activity it supports.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Coins Potion III",
-      "slug": "coins-potion-iii",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-iii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "III",
-      "rarity": "Epic",
-      "effect": "+60% Coins earned",
-      "duration": "30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Coins potions",
-      "availability": "Available",
-      "description": "Coins Potion III fits a normal currency grind when you expect to stay in one farming route for a while.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Coins Potion IV",
-      "slug": "coins-potion-iv",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-iv.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "IV",
-      "rarity": "Legendary",
-      "effect": "+80% Coins earned",
-      "duration": "40 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Coins potions",
-      "availability": "Available",
-      "description": "Coins Potion IV is a stronger currency boost for farming areas where coin cost is slowing your next unlock.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Coins Potion V",
-      "slug": "coins-potion-v",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-v.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "V",
-      "rarity": "Mythical",
-      "effect": "+100% Coins earned",
-      "duration": "50 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Coins potions",
-      "availability": "Available",
-      "description": "Coins Potion V doubles coin earnings for a focused farming stretch.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Coins Potion VI",
-      "slug": "coins-potion-vi",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-vi.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "VI",
-      "rarity": "Exotic",
-      "effect": "+120% Coins earned",
-      "duration": "1 hour",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Coins potions",
-      "availability": "Available",
-      "description": "Coins Potion VI is a one-hour coin boost for longer area-unlock or egg-cost farming.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Coins Potion VII",
-      "slug": "coins-potion-vii",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-vii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "VII",
-      "rarity": "Divine",
-      "effect": "+140% Coins earned",
-      "duration": "1 hour 10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Coins potions",
-      "availability": "Available",
-      "description": "Coins Potion VII gives a high coin multiplier for players who are staying active through a long farm.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Coins Potion VIII",
-      "slug": "coins-potion-viii",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-viii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "VIII",
-      "rarity": "Superior",
-      "effect": "+160% Coins earned",
-      "duration": "1 hour 20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Coins potions",
-      "availability": "Available",
-      "description": "Coins Potion VIII is a strong long-duration coin boost for serious currency sessions.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Coins Potion IX",
-      "slug": "coins-potion-ix",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-ix.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "IX",
-      "rarity": "Celestial",
-      "effect": "+180% Coins earned",
-      "duration": "1 hour 30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Coins potions; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Coins Potion IX is a high-tier coin boost and should be saved for sessions where you can use most of the timer.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "Coins Potion X",
-      "slug": "coins-potion-x",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-x.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "X",
-      "rarity": "Celestial",
-      "effect": "+200% Coins earned",
-      "duration": "1 hour 40 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Coins potions; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Coins Potion X is a late coin boost for long farms where a low-tier potion would be wasteful.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "Coins Potion XI",
-      "slug": "coins-potion-xi",
-      "image": "/Pet%20Simulator%2099/Potions/coins-potion-xi.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Coins",
-      "tier": "XI",
-      "rarity": "Celestial",
-      "effect": "+220% Coins earned",
-      "duration": "1 hour 50 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Highest listed Coins potion tier; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Coins Potion XI is the strongest listed Coins potion and is best saved for a full coin-grinding session.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "Damage Potion I",
-      "slug": "damage-potion-i",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-i.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "I",
-      "rarity": "Basic",
-      "effect": "+15% pet damage",
-      "duration": "10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
-      "craftOrUpgrade": "Base tier for Damage potion upgrades",
-      "availability": "Available",
-      "description": "Damage Potion I helps pets break objects faster during a short farming push.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Damage Potion II",
-      "slug": "damage-potion-ii",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-ii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "II",
-      "rarity": "Rare",
-      "effect": "+30% pet damage",
-      "duration": "20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Damage potions",
-      "availability": "Available",
-      "description": "Damage Potion II gives pets a better break speed window for tougher areas.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Damage Potion III",
-      "slug": "damage-potion-iii",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-iii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "III",
-      "rarity": "Epic",
-      "effect": "+45% pet damage",
-      "duration": "30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Damage potions",
-      "availability": "Available",
-      "description": "Damage Potion III is useful when breakables take long enough that extra pet damage saves real time.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Damage Potion IV",
-      "slug": "damage-potion-iv",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-iv.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "IV",
-      "rarity": "Legendary",
-      "effect": "+60% pet damage",
-      "duration": "40 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Damage potions",
-      "availability": "Available",
-      "description": "Damage Potion IV fits longer chest, breakable, or area farming where speed matters.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Damage Potion V",
-      "slug": "damage-potion-v",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-v.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "V",
-      "rarity": "Mythical",
-      "effect": "+75% pet damage",
-      "duration": "50 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Damage potions",
-      "availability": "Available",
-      "description": "Damage Potion V is a strong pet-damage boost for pushing through high-health breakables.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Damage Potion VI",
-      "slug": "damage-potion-vi",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-vi.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "VI",
-      "rarity": "Exotic",
-      "effect": "+90% pet damage",
-      "duration": "1 hour",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Damage potions",
-      "availability": "Available",
-      "description": "Damage Potion VI gives a one-hour pet damage boost for a planned farming session.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Damage Potion VII",
-      "slug": "damage-potion-vii",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-vii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "VII",
-      "rarity": "Divine",
-      "effect": "+105% pet damage",
-      "duration": "1 hour 10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Damage potions",
-      "availability": "Available",
-      "description": "Damage Potion VII more than doubles pet damage for long breakable farming.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Damage Potion VIII",
-      "slug": "damage-potion-viii",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-viii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "VIII",
-      "rarity": "Superior",
-      "effect": "+120% pet damage",
-      "duration": "1 hour 20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Damage potions",
-      "availability": "Available",
-      "description": "Damage Potion VIII is a high pet-damage tier for extended farming or chest work.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Damage Potion IX",
-      "slug": "damage-potion-ix",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-ix.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "IX",
-      "rarity": "Celestial",
-      "effect": "+135% pet damage",
-      "duration": "1 hour 30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Damage potions; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Damage Potion IX is a high-tier boost for sessions where break speed is the bottleneck.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "Damage Potion X",
-      "slug": "damage-potion-x",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-x.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "X",
-      "rarity": "Celestial",
-      "effect": "+150% pet damage",
-      "duration": "1 hour 40 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Damage potions; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Damage Potion X is a late pet-damage tier worth saving for long active farms.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "Damage Potion XI",
-      "slug": "damage-potion-xi",
-      "image": "/Pet%20Simulator%2099/Potions/damage-potion-xi.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Damage",
-      "tier": "XI",
-      "rarity": "Celestial",
-      "effect": "+165% pet damage",
-      "duration": "1 hour 50 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Highest listed Damage potion tier; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Damage Potion XI is the strongest listed Damage potion and fits a full breakable-farming session.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "Diamonds Potion I",
-      "slug": "diamonds-potion-i",
-      "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-i.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Diamonds",
-      "tier": "I",
-      "rarity": "Basic",
-      "effect": "+10% Diamonds earned",
-      "duration": "10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms",
-      "craftOrUpgrade": "Base tier for Diamonds potion upgrades",
-      "availability": "Available",
-      "description": "Diamonds Potion I is the starter boost for earning more diamonds from normal play.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Diamonds Potion II",
-      "slug": "diamonds-potion-ii",
-      "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-ii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Diamonds",
-      "tier": "II",
-      "rarity": "Rare",
-      "effect": "+25% Diamonds earned",
-      "duration": "20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Diamonds potions",
-      "availability": "Available",
-      "description": "Diamonds Potion II improves short diamond farming without needing a long timer.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Diamonds Potion III",
-      "slug": "diamonds-potion-iii",
-      "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-iii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Diamonds",
-      "tier": "III",
-      "rarity": "Epic",
-      "effect": "+40% Diamonds earned",
-      "duration": "30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Diamonds potions",
-      "availability": "Available",
-      "description": "Diamonds Potion III fits a half-hour diamond grind or reward loop.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Diamonds Potion IV",
-      "slug": "diamonds-potion-iv",
-      "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-iv.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Diamonds",
-      "tier": "IV",
-      "rarity": "Legendary",
-      "effect": "+50% Diamonds earned",
-      "duration": "40 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Diamonds potions",
-      "availability": "Available",
-      "description": "Diamonds Potion IV is a stronger diamond boost for focused farming.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Diamonds Potion V",
-      "slug": "diamonds-potion-v",
-      "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-v.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Diamonds",
-      "tier": "V",
-      "rarity": "Mythical",
-      "effect": "+60% Diamonds earned",
-      "duration": "50 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Diamonds potions",
-      "availability": "Available",
-      "description": "Diamonds Potion V gives a long diamond window for players farming gems or reward drops.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Diamonds Potion VI",
-      "slug": "diamonds-potion-vi",
-      "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-vi.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Diamonds",
-      "tier": "VI",
-      "rarity": "Exotic",
-      "effect": "+70% Diamonds earned",
-      "duration": "1 hour",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Diamonds potions",
-      "availability": "Available",
-      "description": "Diamonds Potion VI is a one-hour diamond boost for planned farming.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Diamonds Potion VII",
-      "slug": "diamonds-potion-vii",
-      "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-vii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Diamonds",
-      "tier": "VII",
-      "rarity": "Divine",
-      "effect": "+80% Diamonds earned",
-      "duration": "1 hour 10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Diamonds potions",
-      "availability": "Available",
-      "description": "Diamonds Potion VII is a high diamond boost for longer gem-focused sessions.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Diamonds Potion VIII",
-      "slug": "diamonds-potion-viii",
-      "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-viii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Diamonds",
-      "tier": "VIII",
-      "rarity": "Superior",
-      "effect": "+90% Diamonds earned",
-      "duration": "1 hour 20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Diamonds potions",
-      "availability": "Available",
-      "description": "Diamonds Potion VIII is one of the strongest listed diamond boosts.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Diamonds Potion IX",
-      "slug": "diamonds-potion-ix",
-      "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-ix.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Diamonds",
-      "tier": "IX",
-      "rarity": "Celestial",
-      "effect": "+100% Diamonds earned",
-      "duration": "1 hour 30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
-      "craftOrUpgrade": "Highest listed Diamonds potion tier; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Diamonds Potion IX doubles diamond earnings and is the highest listed Diamonds tier.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "Lucky Eggs Potion I",
-      "slug": "lucky-eggs-potion-i",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "I",
-      "rarity": "Basic",
-      "effect": "+25% egg luck for non-exclusive eggs",
-      "duration": "10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
-      "craftOrUpgrade": "Base tier for Lucky Eggs potion upgrades",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion I is the starter luck boost for normal egg hatching, not exclusive eggs.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion II",
-      "slug": "lucky-eggs-potion-ii",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "II",
-      "rarity": "Rare",
-      "effect": "+50% egg luck for non-exclusive eggs",
-      "duration": "20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion II gives a short hatching boost for normal eggs only.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion III",
-      "slug": "lucky-eggs-potion-iii",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "III",
-      "rarity": "Epic",
-      "effect": "+75% egg luck for non-exclusive eggs",
-      "duration": "30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion III fits a half-hour hatch session on normal eggs.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion IV",
-      "slug": "lucky-eggs-potion-iv",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "IV",
-      "rarity": "Legendary",
-      "effect": "+100% egg luck for non-exclusive eggs",
-      "duration": "40 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion IV doubles normal egg luck during a longer hatch window.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion V",
-      "slug": "lucky-eggs-potion-v",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "V",
-      "rarity": "Mythical",
-      "effect": "+125% egg luck for non-exclusive eggs",
-      "duration": "50 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion V is a strong normal-egg hatching boost for focused sessions.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion VI",
-      "slug": "lucky-eggs-potion-vi",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "VI",
-      "rarity": "Exotic",
-      "effect": "+150% egg luck for non-exclusive eggs",
-      "duration": "1 hour",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion VI gives a one-hour hatching boost for normal eggs.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion VII",
-      "slug": "lucky-eggs-potion-vii",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "VII",
-      "rarity": "Divine",
-      "effect": "+175% egg luck for non-exclusive eggs",
-      "duration": "1 hour 10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion VII is a high normal-egg luck tier for longer hatch sessions.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion VIII",
-      "slug": "lucky-eggs-potion-viii",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "VIII",
-      "rarity": "Superior",
-      "effect": "+200% egg luck for non-exclusive eggs",
-      "duration": "1 hour 20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion VIII is a strong hatch boost when you are not opening exclusive eggs.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion IX",
-      "slug": "lucky-eggs-potion-ix",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "IX",
-      "rarity": "Celestial",
-      "effect": "+225% egg luck for non-exclusive eggs",
-      "duration": "1 hour 30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion IX is a high-tier normal egg luck boost for long hatch sessions.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion X",
-      "slug": "lucky-eggs-potion-x",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "X",
-      "rarity": "Celestial",
-      "effect": "+250% egg luck for non-exclusive eggs",
-      "duration": "1 hour 40 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion X is a late normal-egg luck tier that should be saved for a real hatch plan.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Lucky Eggs Potion XI",
-      "slug": "lucky-eggs-potion-xi",
-      "image": "/Pet%20Simulator%2099/Potions/lucky-eggs-potion-xi.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Lucky Eggs",
-      "tier": "XI",
-      "rarity": "Celestial",
-      "effect": "+275% egg luck for non-exclusive eggs",
-      "duration": "1 hour 50 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Highest listed Lucky Eggs potion tier; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Lucky Eggs Potion XI is the strongest listed Lucky Eggs tier for normal egg hatching only.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; exclusion from exclusive eggs from potion overview."
-    },
-    {
-      "name": "Speed Potion I",
-      "slug": "speed-potion-i",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Speed",
-      "tier": "I",
-      "rarity": "Basic",
-      "effect": "+25% player and pet speed",
-      "duration": "15 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
-      "craftOrUpgrade": "Base tier for Speed potion upgrades",
-      "availability": "Available",
-      "description": "Speed Potion I helps you and your pets move faster for a short route or cleanup run.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Speed Potion II",
-      "slug": "speed-potion-ii",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Speed",
-      "tier": "II",
-      "rarity": "Rare",
-      "effect": "+40% player and pet speed",
-      "duration": "30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Speed potions",
-      "availability": "Available",
-      "description": "Speed Potion II is useful when moving between machines, areas, or reward routes matters.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Speed Potion III",
-      "slug": "speed-potion-iii",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Speed",
-      "tier": "III",
-      "rarity": "Epic",
-      "effect": "+55% player and pet speed",
-      "duration": "45 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Highest listed Speed potion tier",
-      "availability": "Available",
-      "description": "Speed Potion III is the highest listed Speed tier and gives the longest movement boost in that family.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Treasure Hunter Potion I",
-      "slug": "treasure-hunter-potion-i",
-      "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-i.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "I",
-      "rarity": "Basic",
-      "effect": "+10% random item drop chance",
-      "duration": "10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
-      "craftOrUpgrade": "Base tier for Treasure Hunter potion upgrades",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion I is the starter boost for getting more random item drops.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Treasure Hunter Potion II",
-      "slug": "treasure-hunter-potion-ii",
-      "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-ii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "II",
-      "rarity": "Rare",
-      "effect": "+20% random item drop chance",
-      "duration": "20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion II improves item drops during short farming loops.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Treasure Hunter Potion III",
-      "slug": "treasure-hunter-potion-iii",
-      "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-iii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "III",
-      "rarity": "Epic",
-      "effect": "+30% random item drop chance",
-      "duration": "30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion III is useful when you are farming drops instead of only currency.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Treasure Hunter Potion IV",
-      "slug": "treasure-hunter-potion-iv",
-      "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-iv.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "IV",
-      "rarity": "Legendary",
-      "effect": "+40% random item drop chance",
-      "duration": "40 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion IV gives a stronger drop boost for longer breakable sessions.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Treasure Hunter Potion V",
-      "slug": "treasure-hunter-potion-v",
-      "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-v.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "V",
-      "rarity": "Mythical",
-      "effect": "+45% random item drop chance",
-      "duration": "50 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion V is a long drop-focused boost for farming item rewards.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Treasure Hunter Potion VI",
-      "slug": "treasure-hunter-potion-vi",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "VI",
-      "rarity": "Exotic",
-      "effect": "+50% random item drop chance",
-      "duration": "1 hour",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion VI gives a one-hour item drop boost for planned farming.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Treasure Hunter Potion VII",
-      "slug": "treasure-hunter-potion-vii",
-      "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-vii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "VII",
-      "rarity": "Divine",
-      "effect": "+55% random item drop chance",
-      "duration": "1 hour 10 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion VII is a high item-drop tier for long loot sessions.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Treasure Hunter Potion VIII",
-      "slug": "treasure-hunter-potion-viii",
-      "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-viii.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "VIII",
-      "rarity": "Superior",
-      "effect": "+60% random item drop chance",
-      "duration": "1 hour 20 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion VIII is a strong drop boost when item rewards are the goal.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table."
-    },
-    {
-      "name": "Treasure Hunter Potion IX",
-      "slug": "treasure-hunter-potion-ix",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "IX",
-      "rarity": "Celestial",
-      "effect": "+70% random item drop chance",
-      "duration": "1 hour 30 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion IX is a high-tier item-drop boost for longer loot farming.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "Treasure Hunter Potion X",
-      "slug": "treasure-hunter-potion-x",
-      "image": null,
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "X",
-      "rarity": "Celestial",
-      "effect": "+75% random item drop chance",
-      "duration": "1 hour 40 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion X is a late drop-boost tier for serious item farming.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "Treasure Hunter Potion XI",
-      "slug": "treasure-hunter-potion-xi",
-      "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-xi.webp",
-      "collectionSection": "Standard boost potions",
-      "type": "Standard boost",
-      "family": "Treasure Hunter",
-      "tier": "XI",
-      "rarity": "Celestial",
-      "effect": "+80% random item drop chance",
-      "duration": "1 hour 50 minutes",
-      "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
-      "craftOrUpgrade": "Highest listed Treasure Hunter potion tier; high-tier use depends on Potion Mastery",
-      "availability": "Available",
-      "description": "Treasure Hunter Potion XI is the strongest listed drop-boost potion for long item farms.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; mastery gating recorded from Mastery page."
-    },
-    {
-      "name": "The Cocktail",
-      "slug": "the-cocktail",
-      "image": "/Pet%20Simulator%2099/Potions/the-cocktail.webp",
-      "collectionSection": "Special potions",
-      "type": "Special boost",
-      "family": "Multi-boost",
-      "tier": null,
-      "rarity": "Superior",
-      "effect": "+200% Coins, +50% Diamonds, +100% Damage, +300% Egg luck, +100% item drops, +50% Walkspeed",
-      "duration": "30 minutes",
-      "obtainment": "Achievements, breakables, Forever Pack",
-      "craftOrUpgrade": "Special potion; not part of the standard tier ladder",
-      "availability": "Available",
-      "description": "The Cocktail combines the main farming, hatching, drops, damage, and speed boosts into one 30-minute item.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect, duration, and obtainment from current potion table."
-    },
-    {
-      "name": "The Cocktail II",
-      "slug": "the-cocktail-ii",
-      "image": null,
-      "collectionSection": "Special potions",
-      "type": "Special boost",
-      "family": "Multi-boost",
-      "tier": null,
-      "rarity": "Celestial",
-      "effect": "+300% Coins, +100% Diamonds, +150% Damage, +400% Egg luck, +150% item drops, +75% Walkspeed",
-      "duration": "30 minutes",
-      "obtainment": "Mega Potion Chest",
-      "craftOrUpgrade": "Special potion; not part of the standard tier ladder",
-      "availability": "Available",
-      "description": "The Cocktail II is the stronger multi-boost version and is best saved for a full focused session.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect, duration, and obtainment from current potion table."
-    },
-    {
-      "name": "Huge Hunter",
-      "slug": "huge-hunter",
-      "image": null,
-      "collectionSection": "Special potions",
-      "type": "Special boost",
-      "family": "Huge luck",
-      "tier": null,
-      "rarity": "Superior",
-      "effect": "+300% active Huge luck",
-      "duration": "1 hour",
-      "obtainment": "Magic Machine",
-      "craftOrUpgrade": "Special potion; not part of the standard tier ladder",
-      "availability": "Available",
-      "description": "Huge Hunter boosts active Huge luck for its timer, but it does not guarantee a Huge pet.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and duration from current potion table; no exact Huge odds were sourced."
-    },
-    {
-      "name": "Huge XP Potion",
-      "slug": "huge-xp-potion",
-      "image": null,
-      "collectionSection": "XP potions",
-      "type": "XP potion",
-      "family": "Huge XP",
-      "tier": null,
-      "rarity": "Exotic",
-      "effect": "Grants 10,000 XP to a Huge pet",
-      "duration": null,
-      "obtainment": "XP Potion Machine, Forever Pack",
-      "craftOrUpgrade": "50,000 Diamonds, 5x Magic Shard, 10x XP Charm",
-      "availability": "Available",
-      "description": "Huge XP Potion spends ingredients for direct Huge pet XP instead of a timed farming boost.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/XP_Potion_Machine_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Recipe cross-checked against potions and XP Potion Machine pages."
-    },
-    {
-      "name": "Mastery XP Potion",
-      "slug": "mastery-xp-potion",
-      "image": null,
-      "collectionSection": "XP potions",
-      "type": "XP potion",
-      "family": "Mastery XP",
-      "tier": null,
-      "rarity": "Exotic",
-      "effect": "Grants 10,000 XP to a Mastery",
-      "duration": null,
-      "obtainment": "XP Potion Machine, Forever Pack",
-      "craftOrUpgrade": "150,000 Diamonds, 12x Coins VII, 3x Tech Key",
-      "availability": "Available",
-      "description": "Mastery XP Potion is a direct mastery progress item for a mastery you choose.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/XP_Potion_Machine_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Recipe cross-checked against potions and XP Potion Machine pages."
-    },
-    {
-      "name": "Titanic XP Potion",
-      "slug": "titanic-xp-potion",
-      "image": null,
-      "collectionSection": "XP potions",
-      "type": "XP potion",
-      "family": "Titanic XP",
-      "tier": null,
-      "rarity": "Exotic",
-      "effect": "Grants 10,000 XP to a Titanic pet",
-      "duration": null,
-      "obtainment": "XP Potion Machine, Forever Pack",
-      "craftOrUpgrade": "100,000 Diamonds, 5x Bucket O' Magic, 20x XP Charm",
-      "availability": "Available",
-      "description": "Titanic XP Potion gives direct XP to a Titanic pet and uses rarer crafting materials.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/XP_Potion_Machine_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Recipe cross-checked against potions and XP Potion Machine pages."
-    },
-    {
-      "name": "Ultimate XP Potion",
-      "slug": "ultimate-xp-potion",
-      "image": null,
-      "collectionSection": "XP potions",
-      "type": "XP potion",
-      "family": "Ultimate XP",
-      "tier": null,
-      "rarity": "Exotic",
-      "effect": "Grants 10,000 XP to an Ultimate",
-      "duration": null,
-      "obtainment": "XP Potion Machine, Forever Pack",
-      "craftOrUpgrade": "50,000 Diamonds, 10x Tap Power VII, 2x Crystal Key",
-      "availability": "Available",
-      "description": "Ultimate XP Potion turns a recipe into direct progress for an Ultimate.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/XP_Potion_Machine_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Recipe cross-checked against potions and XP Potion Machine pages."
-    },
-    {
-      "name": "Ultra Huge XP Potion",
-      "slug": "ultra-huge-xp-potion",
-      "image": "/Pet%20Simulator%2099/Potions/ultra-huge-xp-potion.webp",
-      "collectionSection": "XP potions",
-      "type": "Ultra XP potion",
-      "family": "Huge XP",
-      "tier": null,
-      "rarity": "Exotic",
-      "effect": "Grants level 99 to a Huge pet",
-      "duration": null,
-      "obtainment": "Forever Pack",
-      "craftOrUpgrade": "Not listed as XP Potion Machine craft",
-      "availability": "Available",
-      "description": "Ultra Huge XP Potion skips normal Huge pet leveling and raises a chosen Huge pet to level 99.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect and obtainment from current potion table."
-    },
-    {
-      "name": "Ultra Mastery XP Potion",
-      "slug": "ultra-mastery-xp-potion",
-      "image": "/Pet%20Simulator%2099/Potions/ultra-mastery-xp-potion.webp",
-      "collectionSection": "XP potions",
-      "type": "Ultra XP potion",
-      "family": "Mastery XP",
-      "tier": null,
-      "rarity": "Celestial",
-      "effect": "Grants level 99 to a Mastery",
-      "duration": null,
-      "obtainment": "Rebirth Nine reward, Forever Pack",
-      "craftOrUpgrade": "Not listed as XP Potion Machine craft",
-      "availability": "Untradable",
-      "description": "Ultra Mastery XP Potion instantly maxes one chosen mastery and includes a one-time Rebirth Nine reward path.",
-      "sourcePage": "https://pet-simulator.fandom.com/wiki/Potions_%28Pet_Simulator_99%29",
-      "sourceStatus": "verified",
-      "verificationNote": "Effect, Rebirth Nine path, Forever Pack path, and untradable note from current potion table."
+      "item": {
+        "name": "Coins Potion I",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "I",
+        "rarity": "Basic",
+        "effect": "+20% Coins earned",
+        "duration": "10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
+        "craftOrUpgrade": "Base tier for Coins potion upgrades",
+        "availability": "Available",
+        "description": "Coins Potion I is the starter coin boost for short early farming sessions."
+      },
+      "system": {
+        "slug": "coins-potion-i",
+        "section": "Standard boost potions",
+        "sortOrder": 1,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-i.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion II",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "II",
+        "rarity": "Rare",
+        "effect": "+40% Coins earned",
+        "duration": "20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Coins potions",
+        "availability": "Available",
+        "description": "Coins Potion II gives a longer coin window than the starter tier without changing the activity it supports."
+      },
+      "system": {
+        "slug": "coins-potion-ii",
+        "section": "Standard boost potions",
+        "sortOrder": 2,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-ii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion III",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "III",
+        "rarity": "Epic",
+        "effect": "+60% Coins earned",
+        "duration": "30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Coins potions",
+        "availability": "Available",
+        "description": "Coins Potion III fits a normal currency grind when you expect to stay in one farming route for a while."
+      },
+      "system": {
+        "slug": "coins-potion-iii",
+        "section": "Standard boost potions",
+        "sortOrder": 3,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-iii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion IV",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "IV",
+        "rarity": "Legendary",
+        "effect": "+80% Coins earned",
+        "duration": "40 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Coins potions",
+        "availability": "Available",
+        "description": "Coins Potion IV is a stronger currency boost for farming areas where coin cost is slowing your next unlock."
+      },
+      "system": {
+        "slug": "coins-potion-iv",
+        "section": "Standard boost potions",
+        "sortOrder": 4,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-iv.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion V",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "V",
+        "rarity": "Mythical",
+        "effect": "+100% Coins earned",
+        "duration": "50 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Coins potions",
+        "availability": "Available",
+        "description": "Coins Potion V doubles coin earnings for a focused farming stretch."
+      },
+      "system": {
+        "slug": "coins-potion-v",
+        "section": "Standard boost potions",
+        "sortOrder": 5,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-v.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion VI",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "VI",
+        "rarity": "Exotic",
+        "effect": "+120% Coins earned",
+        "duration": "1 hour",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Coins potions",
+        "availability": "Available",
+        "description": "Coins Potion VI is a one-hour coin boost for longer area-unlock or egg-cost farming."
+      },
+      "system": {
+        "slug": "coins-potion-vi",
+        "section": "Standard boost potions",
+        "sortOrder": 6,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-vi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion VII",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "VII",
+        "rarity": "Divine",
+        "effect": "+140% Coins earned",
+        "duration": "1 hour 10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Coins potions",
+        "availability": "Available",
+        "description": "Coins Potion VII gives a high coin multiplier for players who are staying active through a long farm."
+      },
+      "system": {
+        "slug": "coins-potion-vii",
+        "section": "Standard boost potions",
+        "sortOrder": 7,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-vii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion VIII",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "VIII",
+        "rarity": "Superior",
+        "effect": "+160% Coins earned",
+        "duration": "1 hour 20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Coins potions",
+        "availability": "Available",
+        "description": "Coins Potion VIII is a strong long-duration coin boost for serious currency sessions."
+      },
+      "system": {
+        "slug": "coins-potion-viii",
+        "section": "Standard boost potions",
+        "sortOrder": 8,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-viii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion IX",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "IX",
+        "rarity": "Celestial",
+        "effect": "+180% Coins earned",
+        "duration": "1 hour 30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Coins potions; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Coins Potion IX is a high-tier coin boost and should be saved for sessions where you can use most of the timer."
+      },
+      "system": {
+        "slug": "coins-potion-ix",
+        "section": "Standard boost potions",
+        "sortOrder": 9,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-ix.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion X",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "X",
+        "rarity": "Celestial",
+        "effect": "+200% Coins earned",
+        "duration": "1 hour 40 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Coins potions; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Coins Potion X is a late coin boost for long farms where a low-tier potion would be wasteful."
+      },
+      "system": {
+        "slug": "coins-potion-x",
+        "section": "Standard boost potions",
+        "sortOrder": 10,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-x.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Potion XI",
+        "type": "Standard boost",
+        "family": "Coins",
+        "tier": "XI",
+        "rarity": "Celestial",
+        "effect": "+220% Coins earned",
+        "duration": "1 hour 50 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Highest listed Coins potion tier; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Coins Potion XI is the strongest listed Coins potion and is best saved for a full coin-grinding session."
+      },
+      "system": {
+        "slug": "coins-potion-xi",
+        "section": "Standard boost potions",
+        "sortOrder": 11,
+        "image": "/Pet%20Simulator%2099/Potions/coins-potion-xi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion I",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "I",
+        "rarity": "Basic",
+        "effect": "+15% pet damage",
+        "duration": "10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
+        "craftOrUpgrade": "Base tier for Damage potion upgrades",
+        "availability": "Available",
+        "description": "Damage Potion I helps pets break objects faster during a short farming push."
+      },
+      "system": {
+        "slug": "damage-potion-i",
+        "section": "Standard boost potions",
+        "sortOrder": 12,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-i.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion II",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "II",
+        "rarity": "Rare",
+        "effect": "+30% pet damage",
+        "duration": "20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Damage potions",
+        "availability": "Available",
+        "description": "Damage Potion II gives pets a better break speed window for tougher areas."
+      },
+      "system": {
+        "slug": "damage-potion-ii",
+        "section": "Standard boost potions",
+        "sortOrder": 13,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-ii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion III",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "III",
+        "rarity": "Epic",
+        "effect": "+45% pet damage",
+        "duration": "30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Damage potions",
+        "availability": "Available",
+        "description": "Damage Potion III is useful when breakables take long enough that extra pet damage saves real time."
+      },
+      "system": {
+        "slug": "damage-potion-iii",
+        "section": "Standard boost potions",
+        "sortOrder": 14,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-iii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion IV",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "IV",
+        "rarity": "Legendary",
+        "effect": "+60% pet damage",
+        "duration": "40 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Damage potions",
+        "availability": "Available",
+        "description": "Damage Potion IV fits longer chest, breakable, or area farming where speed matters."
+      },
+      "system": {
+        "slug": "damage-potion-iv",
+        "section": "Standard boost potions",
+        "sortOrder": 15,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-iv.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion V",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "V",
+        "rarity": "Mythical",
+        "effect": "+75% pet damage",
+        "duration": "50 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Damage potions",
+        "availability": "Available",
+        "description": "Damage Potion V is a strong pet-damage boost for pushing through high-health breakables."
+      },
+      "system": {
+        "slug": "damage-potion-v",
+        "section": "Standard boost potions",
+        "sortOrder": 16,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-v.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion VI",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "VI",
+        "rarity": "Exotic",
+        "effect": "+90% pet damage",
+        "duration": "1 hour",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Damage potions",
+        "availability": "Available",
+        "description": "Damage Potion VI gives a one-hour pet damage boost for a planned farming session."
+      },
+      "system": {
+        "slug": "damage-potion-vi",
+        "section": "Standard boost potions",
+        "sortOrder": 17,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-vi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion VII",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "VII",
+        "rarity": "Divine",
+        "effect": "+105% pet damage",
+        "duration": "1 hour 10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Damage potions",
+        "availability": "Available",
+        "description": "Damage Potion VII more than doubles pet damage for long breakable farming."
+      },
+      "system": {
+        "slug": "damage-potion-vii",
+        "section": "Standard boost potions",
+        "sortOrder": 18,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-vii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion VIII",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "VIII",
+        "rarity": "Superior",
+        "effect": "+120% pet damage",
+        "duration": "1 hour 20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Damage potions",
+        "availability": "Available",
+        "description": "Damage Potion VIII is a high pet-damage tier for extended farming or chest work."
+      },
+      "system": {
+        "slug": "damage-potion-viii",
+        "section": "Standard boost potions",
+        "sortOrder": 19,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-viii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion IX",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "IX",
+        "rarity": "Celestial",
+        "effect": "+135% pet damage",
+        "duration": "1 hour 30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Damage potions; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Damage Potion IX is a high-tier boost for sessions where break speed is the bottleneck."
+      },
+      "system": {
+        "slug": "damage-potion-ix",
+        "section": "Standard boost potions",
+        "sortOrder": 20,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-ix.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion X",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "X",
+        "rarity": "Celestial",
+        "effect": "+150% pet damage",
+        "duration": "1 hour 40 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Damage potions; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Damage Potion X is a late pet-damage tier worth saving for long active farms."
+      },
+      "system": {
+        "slug": "damage-potion-x",
+        "section": "Standard boost potions",
+        "sortOrder": 21,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-x.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Damage Potion XI",
+        "type": "Standard boost",
+        "family": "Damage",
+        "tier": "XI",
+        "rarity": "Celestial",
+        "effect": "+165% pet damage",
+        "duration": "1 hour 50 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Highest listed Damage potion tier; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Damage Potion XI is the strongest listed Damage potion and fits a full breakable-farming session."
+      },
+      "system": {
+        "slug": "damage-potion-xi",
+        "section": "Standard boost potions",
+        "sortOrder": 22,
+        "image": "/Pet%20Simulator%2099/Potions/damage-potion-xi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Potion I",
+        "type": "Standard boost",
+        "family": "Diamonds",
+        "tier": "I",
+        "rarity": "Basic",
+        "effect": "+10% Diamonds earned",
+        "duration": "10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms",
+        "craftOrUpgrade": "Base tier for Diamonds potion upgrades",
+        "availability": "Available",
+        "description": "Diamonds Potion I is the starter boost for earning more diamonds from normal play."
+      },
+      "system": {
+        "slug": "diamonds-potion-i",
+        "section": "Standard boost potions",
+        "sortOrder": 23,
+        "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-i.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Potion II",
+        "type": "Standard boost",
+        "family": "Diamonds",
+        "tier": "II",
+        "rarity": "Rare",
+        "effect": "+25% Diamonds earned",
+        "duration": "20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Diamonds potions",
+        "availability": "Available",
+        "description": "Diamonds Potion II improves short diamond farming without needing a long timer."
+      },
+      "system": {
+        "slug": "diamonds-potion-ii",
+        "section": "Standard boost potions",
+        "sortOrder": 24,
+        "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-ii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Potion III",
+        "type": "Standard boost",
+        "family": "Diamonds",
+        "tier": "III",
+        "rarity": "Epic",
+        "effect": "+40% Diamonds earned",
+        "duration": "30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Diamonds potions",
+        "availability": "Available",
+        "description": "Diamonds Potion III fits a half-hour diamond grind or reward loop."
+      },
+      "system": {
+        "slug": "diamonds-potion-iii",
+        "section": "Standard boost potions",
+        "sortOrder": 25,
+        "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-iii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Potion IV",
+        "type": "Standard boost",
+        "family": "Diamonds",
+        "tier": "IV",
+        "rarity": "Legendary",
+        "effect": "+50% Diamonds earned",
+        "duration": "40 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Diamonds potions",
+        "availability": "Available",
+        "description": "Diamonds Potion IV is a stronger diamond boost for focused farming."
+      },
+      "system": {
+        "slug": "diamonds-potion-iv",
+        "section": "Standard boost potions",
+        "sortOrder": 26,
+        "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-iv.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Potion V",
+        "type": "Standard boost",
+        "family": "Diamonds",
+        "tier": "V",
+        "rarity": "Mythical",
+        "effect": "+60% Diamonds earned",
+        "duration": "50 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Diamonds potions",
+        "availability": "Available",
+        "description": "Diamonds Potion V gives a long diamond window for players farming gems or reward drops."
+      },
+      "system": {
+        "slug": "diamonds-potion-v",
+        "section": "Standard boost potions",
+        "sortOrder": 27,
+        "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-v.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Potion VI",
+        "type": "Standard boost",
+        "family": "Diamonds",
+        "tier": "VI",
+        "rarity": "Exotic",
+        "effect": "+70% Diamonds earned",
+        "duration": "1 hour",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Diamonds potions",
+        "availability": "Available",
+        "description": "Diamonds Potion VI is a one-hour diamond boost for planned farming."
+      },
+      "system": {
+        "slug": "diamonds-potion-vi",
+        "section": "Standard boost potions",
+        "sortOrder": 28,
+        "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-vi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Potion VII",
+        "type": "Standard boost",
+        "family": "Diamonds",
+        "tier": "VII",
+        "rarity": "Divine",
+        "effect": "+80% Diamonds earned",
+        "duration": "1 hour 10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Diamonds potions",
+        "availability": "Available",
+        "description": "Diamonds Potion VII is a high diamond boost for longer gem-focused sessions."
+      },
+      "system": {
+        "slug": "diamonds-potion-vii",
+        "section": "Standard boost potions",
+        "sortOrder": 29,
+        "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-vii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Potion VIII",
+        "type": "Standard boost",
+        "family": "Diamonds",
+        "tier": "VIII",
+        "rarity": "Superior",
+        "effect": "+90% Diamonds earned",
+        "duration": "1 hour 20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Diamonds potions",
+        "availability": "Available",
+        "description": "Diamonds Potion VIII is one of the strongest listed diamond boosts."
+      },
+      "system": {
+        "slug": "diamonds-potion-viii",
+        "section": "Standard boost potions",
+        "sortOrder": 30,
+        "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-viii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Potion IX",
+        "type": "Standard boost",
+        "family": "Diamonds",
+        "tier": "IX",
+        "rarity": "Celestial",
+        "effect": "+100% Diamonds earned",
+        "duration": "1 hour 30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, Secret Rooms, upgrading",
+        "craftOrUpgrade": "Highest listed Diamonds potion tier; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Diamonds Potion IX doubles diamond earnings and is the highest listed Diamonds tier."
+      },
+      "system": {
+        "slug": "diamonds-potion-ix",
+        "section": "Standard boost potions",
+        "sortOrder": 31,
+        "image": "/Pet%20Simulator%2099/Potions/diamonds-potion-ix.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion I",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "I",
+        "rarity": "Basic",
+        "effect": "+25% egg luck for non-exclusive eggs",
+        "duration": "10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
+        "craftOrUpgrade": "Base tier for Lucky Eggs potion upgrades",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion I is the starter luck boost for normal egg hatching, not exclusive eggs."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-i",
+        "section": "Standard boost potions",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion II",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "II",
+        "rarity": "Rare",
+        "effect": "+50% egg luck for non-exclusive eggs",
+        "duration": "20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion II gives a short hatching boost for normal eggs only."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-ii",
+        "section": "Standard boost potions",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion III",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "III",
+        "rarity": "Epic",
+        "effect": "+75% egg luck for non-exclusive eggs",
+        "duration": "30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion III fits a half-hour hatch session on normal eggs."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-iii",
+        "section": "Standard boost potions",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion IV",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "IV",
+        "rarity": "Legendary",
+        "effect": "+100% egg luck for non-exclusive eggs",
+        "duration": "40 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion IV doubles normal egg luck during a longer hatch window."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-iv",
+        "section": "Standard boost potions",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion V",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "V",
+        "rarity": "Mythical",
+        "effect": "+125% egg luck for non-exclusive eggs",
+        "duration": "50 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion V is a strong normal-egg hatching boost for focused sessions."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-v",
+        "section": "Standard boost potions",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion VI",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "VI",
+        "rarity": "Exotic",
+        "effect": "+150% egg luck for non-exclusive eggs",
+        "duration": "1 hour",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion VI gives a one-hour hatching boost for normal eggs."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-vi",
+        "section": "Standard boost potions",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion VII",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "VII",
+        "rarity": "Divine",
+        "effect": "+175% egg luck for non-exclusive eggs",
+        "duration": "1 hour 10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion VII is a high normal-egg luck tier for longer hatch sessions."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-vii",
+        "section": "Standard boost potions",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion VIII",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "VIII",
+        "rarity": "Superior",
+        "effect": "+200% egg luck for non-exclusive eggs",
+        "duration": "1 hour 20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion VIII is a strong hatch boost when you are not opening exclusive eggs."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-viii",
+        "section": "Standard boost potions",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion IX",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "IX",
+        "rarity": "Celestial",
+        "effect": "+225% egg luck for non-exclusive eggs",
+        "duration": "1 hour 30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion IX is a high-tier normal egg luck boost for long hatch sessions."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-ix",
+        "section": "Standard boost potions",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion X",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "X",
+        "rarity": "Celestial",
+        "effect": "+250% egg luck for non-exclusive eggs",
+        "duration": "1 hour 40 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Lucky Eggs potions; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion X is a late normal-egg luck tier that should be saved for a real hatch plan."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-x",
+        "section": "Standard boost potions",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Eggs Potion XI",
+        "type": "Standard boost",
+        "family": "Lucky Eggs",
+        "tier": "XI",
+        "rarity": "Celestial",
+        "effect": "+275% egg luck for non-exclusive eggs",
+        "duration": "1 hour 50 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Highest listed Lucky Eggs potion tier; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Lucky Eggs Potion XI is the strongest listed Lucky Eggs tier for normal egg hatching only."
+      },
+      "system": {
+        "slug": "lucky-eggs-potion-xi",
+        "section": "Standard boost potions",
+        "sortOrder": 42,
+        "image": "/Pet%20Simulator%2099/Potions/lucky-eggs-potion-xi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Potion I",
+        "type": "Standard boost",
+        "family": "Speed",
+        "tier": "I",
+        "rarity": "Basic",
+        "effect": "+25% player and pet speed",
+        "duration": "15 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
+        "craftOrUpgrade": "Base tier for Speed potion upgrades",
+        "availability": "Available",
+        "description": "Speed Potion I helps you and your pets move faster for a short route or cleanup run."
+      },
+      "system": {
+        "slug": "speed-potion-i",
+        "section": "Standard boost potions",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Potion II",
+        "type": "Standard boost",
+        "family": "Speed",
+        "tier": "II",
+        "rarity": "Rare",
+        "effect": "+40% player and pet speed",
+        "duration": "30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Speed potions",
+        "availability": "Available",
+        "description": "Speed Potion II is useful when moving between machines, areas, or reward routes matters."
+      },
+      "system": {
+        "slug": "speed-potion-ii",
+        "section": "Standard boost potions",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Potion III",
+        "type": "Standard boost",
+        "family": "Speed",
+        "tier": "III",
+        "rarity": "Epic",
+        "effect": "+55% player and pet speed",
+        "duration": "45 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Highest listed Speed potion tier",
+        "availability": "Available",
+        "description": "Speed Potion III is the highest listed Speed tier and gives the longest movement boost in that family."
+      },
+      "system": {
+        "slug": "speed-potion-iii",
+        "section": "Standard boost potions",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion I",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "I",
+        "rarity": "Basic",
+        "effect": "+10% random item drop chance",
+        "duration": "10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds",
+        "craftOrUpgrade": "Base tier for Treasure Hunter potion upgrades",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion I is the starter boost for getting more random item drops."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-i",
+        "section": "Standard boost potions",
+        "sortOrder": 46,
+        "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-i.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion II",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "II",
+        "rarity": "Rare",
+        "effect": "+20% random item drop chance",
+        "duration": "20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion II improves item drops during short farming loops."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-ii",
+        "section": "Standard boost potions",
+        "sortOrder": 47,
+        "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-ii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion III",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "III",
+        "rarity": "Epic",
+        "effect": "+30% random item drop chance",
+        "duration": "30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion III is useful when you are farming drops instead of only currency."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-iii",
+        "section": "Standard boost potions",
+        "sortOrder": 48,
+        "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-iii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion IV",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "IV",
+        "rarity": "Legendary",
+        "effect": "+40% random item drop chance",
+        "duration": "40 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion IV gives a stronger drop boost for longer breakable sessions."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-iv",
+        "section": "Standard boost potions",
+        "sortOrder": 49,
+        "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-iv.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion V",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "V",
+        "rarity": "Mythical",
+        "effect": "+45% random item drop chance",
+        "duration": "50 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion V is a long drop-focused boost for farming item rewards."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-v",
+        "section": "Standard boost potions",
+        "sortOrder": 50,
+        "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-v.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion VI",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "VI",
+        "rarity": "Exotic",
+        "effect": "+50% random item drop chance",
+        "duration": "1 hour",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion VI gives a one-hour item drop boost for planned farming."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-vi",
+        "section": "Standard boost potions",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion VII",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "VII",
+        "rarity": "Divine",
+        "effect": "+55% random item drop chance",
+        "duration": "1 hour 10 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion VII is a high item-drop tier for long loot sessions."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-vii",
+        "section": "Standard boost potions",
+        "sortOrder": 52,
+        "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-vii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion VIII",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "VIII",
+        "rarity": "Superior",
+        "effect": "+60% random item drop chance",
+        "duration": "1 hour 20 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion VIII is a strong drop boost when item rewards are the goal."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-viii",
+        "section": "Standard boost potions",
+        "sortOrder": 53,
+        "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-viii.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion IX",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "IX",
+        "rarity": "Celestial",
+        "effect": "+70% random item drop chance",
+        "duration": "1 hour 30 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion IX is a high-tier item-drop boost for longer loot farming."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-ix",
+        "section": "Standard boost potions",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion X",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "X",
+        "rarity": "Celestial",
+        "effect": "+75% random item drop chance",
+        "duration": "1 hour 40 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Upgrade from lower Treasure Hunter potions; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion X is a late drop-boost tier for serious item farming."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-x",
+        "section": "Standard boost potions",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter Potion XI",
+        "type": "Standard boost",
+        "family": "Treasure Hunter",
+        "tier": "XI",
+        "rarity": "Celestial",
+        "effect": "+80% random item drop chance",
+        "duration": "1 hour 50 minutes",
+        "obtainment": "Drops, chests, Spinny Wheels, merchants, free potions, Daycare, vending machines, minigames, gifts, Potion Plant Seeds, upgrading",
+        "craftOrUpgrade": "Highest listed Treasure Hunter potion tier; high-tier use depends on Potion Mastery",
+        "availability": "Available",
+        "description": "Treasure Hunter Potion XI is the strongest listed drop-boost potion for long item farms."
+      },
+      "system": {
+        "slug": "treasure-hunter-potion-xi",
+        "section": "Standard boost potions",
+        "sortOrder": 56,
+        "image": "/Pet%20Simulator%2099/Potions/treasure-hunter-potion-xi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Cocktail",
+        "type": "Special boost",
+        "family": "Multi-boost",
+        "rarity": "Superior",
+        "effect": "+200% Coins, +50% Diamonds, +100% Damage, +300% Egg luck, +100% item drops, +50% Walkspeed",
+        "duration": "30 minutes",
+        "obtainment": "Achievements, breakables, Forever Pack",
+        "craftOrUpgrade": "Special potion; not part of the standard tier ladder",
+        "availability": "Available",
+        "description": "The Cocktail combines the main farming, hatching, drops, damage, and speed boosts into one 30-minute item."
+      },
+      "system": {
+        "slug": "the-cocktail",
+        "section": "Special potions",
+        "sortOrder": 57,
+        "image": "/Pet%20Simulator%2099/Potions/the-cocktail.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Cocktail II",
+        "type": "Special boost",
+        "family": "Multi-boost",
+        "rarity": "Celestial",
+        "effect": "+300% Coins, +100% Diamonds, +150% Damage, +400% Egg luck, +150% item drops, +75% Walkspeed",
+        "duration": "30 minutes",
+        "obtainment": "Mega Potion Chest",
+        "craftOrUpgrade": "Special potion; not part of the standard tier ladder",
+        "availability": "Available",
+        "description": "The Cocktail II is the stronger multi-boost version and is best saved for a full focused session."
+      },
+      "system": {
+        "slug": "the-cocktail-ii",
+        "section": "Special potions",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge Hunter",
+        "type": "Special boost",
+        "family": "Huge luck",
+        "rarity": "Superior",
+        "effect": "+300% active Huge luck",
+        "duration": "1 hour",
+        "obtainment": "Magic Machine",
+        "craftOrUpgrade": "Special potion; not part of the standard tier ladder",
+        "availability": "Available",
+        "description": "Huge Hunter boosts active Huge luck for its timer, but it does not guarantee a Huge pet."
+      },
+      "system": {
+        "slug": "huge-hunter",
+        "section": "Special potions",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Huge XP Potion",
+        "type": "XP potion",
+        "family": "Huge XP",
+        "rarity": "Exotic",
+        "effect": "Grants 10,000 XP to a Huge pet",
+        "obtainment": "XP Potion Machine, Forever Pack",
+        "craftOrUpgrade": "50,000 Diamonds, 5x Magic Shard, 10x XP Charm",
+        "availability": "Available",
+        "description": "Huge XP Potion spends ingredients for direct Huge pet XP instead of a timed farming boost."
+      },
+      "system": {
+        "slug": "huge-xp-potion",
+        "section": "XP potions",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mastery XP Potion",
+        "type": "XP potion",
+        "family": "Mastery XP",
+        "rarity": "Exotic",
+        "effect": "Grants 10,000 XP to a Mastery",
+        "obtainment": "XP Potion Machine, Forever Pack",
+        "craftOrUpgrade": "150,000 Diamonds, 12x Coins VII, 3x Tech Key",
+        "availability": "Available",
+        "description": "Mastery XP Potion is a direct mastery progress item for a mastery you choose."
+      },
+      "system": {
+        "slug": "mastery-xp-potion",
+        "section": "XP potions",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Titanic XP Potion",
+        "type": "XP potion",
+        "family": "Titanic XP",
+        "rarity": "Exotic",
+        "effect": "Grants 10,000 XP to a Titanic pet",
+        "obtainment": "XP Potion Machine, Forever Pack",
+        "craftOrUpgrade": "100,000 Diamonds, 5x Bucket O' Magic, 20x XP Charm",
+        "availability": "Available",
+        "description": "Titanic XP Potion gives direct XP to a Titanic pet and uses rarer crafting materials."
+      },
+      "system": {
+        "slug": "titanic-xp-potion",
+        "section": "XP potions",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ultimate XP Potion",
+        "type": "XP potion",
+        "family": "Ultimate XP",
+        "rarity": "Exotic",
+        "effect": "Grants 10,000 XP to an Ultimate",
+        "obtainment": "XP Potion Machine, Forever Pack",
+        "craftOrUpgrade": "50,000 Diamonds, 10x Tap Power VII, 2x Crystal Key",
+        "availability": "Available",
+        "description": "Ultimate XP Potion turns a recipe into direct progress for an Ultimate."
+      },
+      "system": {
+        "slug": "ultimate-xp-potion",
+        "section": "XP potions",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ultra Huge XP Potion",
+        "type": "Ultra XP potion",
+        "family": "Huge XP",
+        "rarity": "Exotic",
+        "effect": "Grants level 99 to a Huge pet",
+        "obtainment": "Forever Pack",
+        "craftOrUpgrade": "Not listed as XP Potion Machine craft",
+        "availability": "Available",
+        "description": "Ultra Huge XP Potion skips normal Huge pet leveling and raises a chosen Huge pet to level 99."
+      },
+      "system": {
+        "slug": "ultra-huge-xp-potion",
+        "section": "XP potions",
+        "sortOrder": 64,
+        "image": "/Pet%20Simulator%2099/Potions/ultra-huge-xp-potion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ultra Mastery XP Potion",
+        "type": "Ultra XP potion",
+        "family": "Mastery XP",
+        "rarity": "Celestial",
+        "effect": "Grants level 99 to a Mastery",
+        "obtainment": "Rebirth Nine reward, Forever Pack",
+        "craftOrUpgrade": "Not listed as XP Potion Machine craft",
+        "availability": "Untradable",
+        "description": "Ultra Mastery XP Potion instantly maxes one chosen mastery and includes a one-time Rebirth Nine reward path."
+      },
+      "system": {
+        "slug": "ultra-mastery-xp-potion",
+        "section": "XP potions",
+        "sortOrder": 65,
+        "image": "/Pet%20Simulator%2099/Potions/ultra-mastery-xp-potion.webp"
+      }
     }
   ]
 }

@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { repoPath } from "@/lib/paths";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 import type { Ore, TraitType } from "./data";
 
 export type ForgeOreDataset = {
@@ -139,7 +140,7 @@ function resolveUpdatedAt(sources: ForgeOreSource[] | null | undefined, updatedA
 
 export async function loadForgeOreDataset(): Promise<ForgeOreDataset> {
   const json = await readOresJson();
-  const items = json.items ?? [];
+  const items = unwrapDatasetItems<ForgeOreRow>(json);
   const sources = json.meta?.sources ?? null;
   const dataLastUpdatedOn = resolveUpdatedAt(sources ?? undefined, json.meta?.updatedAt ?? null);
   const source = resolveSource(sources ?? undefined);

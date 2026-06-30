@@ -1,119 +1,221 @@
 {
   "meta": {
-    "title": "Grow a Garden currencies data",
-    "updatedAt": "2026-04-22",
-    "sources": [
-      {
-        "label": "Grow a Garden Wiki - Mechanics",
-        "url": "https://growagarden.fandom.com/wiki/Mechanics",
-        "accessed": "2026-04-22"
-      },
-      {
-        "label": "Grow a Garden Wiki - Sheckles",
-        "url": "https://growagarden.fandom.com/wiki/Sheckles",
-        "accessed": "2026-04-22"
-      },
-      {
-        "label": "Grow a Garden Wiki - Garden Coins",
-        "url": "https://growagarden.fandom.com/wiki/Garden_Coins",
-        "accessed": "2026-04-22"
-      }
+    "schemaVersion": 2,
+    "game": "Grow a Garden",
+    "gameSlug": "grow-a-garden",
+    "collection": "currencies",
+    "route": "/wiki/grow-a-garden/currencies",
+    "catalogCode": "grow-a-garden-currencies",
+    "itemFields": [
+      "obtainment",
+      "obtainable"
     ],
     "columns": [
-      "name",
       "obtainment",
-      "obtainable",
-      "image"
-    ]
+      "obtainable"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "obtainment",
+        "obtainable"
+      ],
+      "tableFields": [
+        "obtainment",
+        "obtainable"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Sheckles",
-      "obtainment": "Sell crops and pets for Sheckles. Players can also earn Sheckles through pets such as the Tanuki, Pancake Mole,Crab, and Mole. NPCs also reward players Sheckles for completing a quest. Players could also get Sheckles through the Forever Pack or, when it existed, by buying them directly with Robux in the Limited Time Shop. Other players can also gift Sheckles.",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Currencies/sheckles.png"
+      "item": {
+        "name": "Sheckles",
+        "obtainment": "Sell crops and pets for Sheckles. Players can also earn Sheckles through pets such as the Tanuki, Pancake Mole,Crab, and Mole. NPCs also reward players Sheckles for completing a quest. Players could also get Sheckles through the Forever Pack or, when it existed, by buying them directly with Robux in the Limited Time Shop. Other players can also gift Sheckles.",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "sheckles",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Grow%20a%20Garden/Currencies/sheckles.png"
+      }
     },
     {
-      "name": "Garden Coins",
-      "obtainment": "Exchange 1 trillion sheckles for 10 garden coins to Orson the Coin Keeper at the corner of the map. Sheckles will increase as players exchange more.",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Currencies/garden-coins.png"
+      "item": {
+        "name": "Garden Coins",
+        "obtainment": "Exchange 1 trillion sheckles for 10 garden coins to Orson the Coin Keeper at the corner of the map. Sheckles will increase as players exchange more.",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "garden-coins",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Grow%20a%20Garden/Currencies/garden-coins.png"
+      }
     },
     {
-      "name": "Pass Points",
-      "obtainment": "Earned by completing Season Pass tasks. They can also be purchased directly with Robux.",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Currencies/pass-points.png"
+      "item": {
+        "name": "Pass Points",
+        "obtainment": "Earned by completing Season Pass tasks. They can also be purchased directly with Robux.",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "pass-points",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Grow%20a%20Garden/Currencies/pass-points.png"
+      }
     },
     {
-      "name": "Trade Token",
-      "obtainment": "Obtain by either buying with Robux in the game shop or by players purchasing their items in the Trade World.",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Currencies/trade-token.png"
+      "item": {
+        "name": "Trade Token",
+        "obtainment": "Obtain by either buying with Robux in the game shop or by players purchasing their items in the Trade World.",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "trade-token",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Grow%20a%20Garden/Currencies/trade-token.png"
+      }
     },
     {
-      "name": "Flowers",
-      "obtainment": "Automatically exchange 1 quadrillion into flowers",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Currencies/flowers.png"
+      "item": {
+        "name": "Flowers",
+        "obtainment": "Automatically exchange 1 quadrillion into flowers",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "flowers",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Grow%20a%20Garden/Currencies/flowers.png"
+      }
     },
     {
-      "name": "Honey",
-      "obtainment": "Give pollinated fruits to Onett, the honey merchant.",
-      "obtainable": "✓",
-      "image": "/Grow%20a%20Garden/Currencies/honey.png"
+      "item": {
+        "name": "Honey",
+        "obtainment": "Give pollinated fruits to Onett, the honey merchant.",
+        "obtainable": "✓"
+      },
+      "system": {
+        "slug": "honey",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Grow%20a%20Garden/Currencies/honey.png"
+      }
     },
     {
-      "name": "Lunar Points",
-      "obtainment": "Exchange moonlit crops for Lunar Points during the Lunar Glow Event, which allowed players to access certain items.",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Currencies/lunar-points.png"
+      "item": {
+        "name": "Lunar Points",
+        "obtainment": "Exchange moonlit crops for Lunar Points during the Lunar Glow Event, which allowed players to access certain items.",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "lunar-points",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Grow%20a%20Garden/Currencies/lunar-points.png"
+      }
     },
     {
-      "name": "Summer Coin",
-      "obtainment": "Once every 1,000 points earned in the Summer Harvest Event will convert to 1 Summer Coin.",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Currencies/summer-coin.png"
+      "item": {
+        "name": "Summer Coin",
+        "obtainment": "Once every 1,000 points earned in the Summer Harvest Event will convert to 1 Summer Coin.",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "summer-coin",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Grow%20a%20Garden/Currencies/summer-coin.png"
+      }
     },
     {
-      "name": "Chi",
-      "obtainment": "Exchange tranquil crops for Chi at the Tanuki NPC and give tranquil crops to the Zen Channeller until the bar is full during the Zen Event.",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Currencies/chi.png"
+      "item": {
+        "name": "Chi",
+        "obtainment": "Exchange tranquil crops for Chi at the Tanuki NPC and give tranquil crops to the Zen Channeller until the bar is full during the Zen Event.",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "chi",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": "/Grow%20a%20Garden/Currencies/chi.png"
+      }
     },
     {
-      "name": "Fairy Point",
-      "obtainment": "Submit glimmering fruits to the wishing well or interact with fairies around the map during the Fairy Event.",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Currencies/fairy-point.png"
+      "item": {
+        "name": "Fairy Point",
+        "obtainment": "Submit glimmering fruits to the wishing well or interact with fairies around the map during the Fairy Event.",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "fairy-point",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": "/Grow%20a%20Garden/Currencies/fairy-point.png"
+      }
     },
     {
-      "name": "Candy Corn",
-      "obtainment": "Submit fruits to the Witch Cauldron, the Jack O Lantern NPC and the Harvest Reaper.",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Currencies/candy-corn.png"
+      "item": {
+        "name": "Candy Corn",
+        "obtainment": "Submit fruits to the Witch Cauldron, the Jack O Lantern NPC and the Harvest Reaper.",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "candy-corn",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": "/Grow%20a%20Garden/Currencies/candy-corn.png"
+      }
     },
     {
-      "name": "Carrot Coins",
-      "obtainment": "Complete one of the Garden Games Quests from Greg during the Garden Games Event.",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Currencies/carrot-coins.png"
+      "item": {
+        "name": "Carrot Coins",
+        "obtainment": "Complete one of the Garden Games Quests from Greg during the Garden Games Event.",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "carrot-coins",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": "/Grow%20a%20Garden/Currencies/carrot-coins.png"
+      }
     },
     {
-      "name": "Buttercup Coins",
-      "obtainment": "Complete one of the Buttercup Quests from Brooklyn during the Buttercup Quest Event.",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Currencies/buttercup-coins.png"
+      "item": {
+        "name": "Buttercup Coins",
+        "obtainment": "Complete one of the Buttercup Quests from Brooklyn during the Buttercup Quest Event.",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "buttercup-coins",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/Grow%20a%20Garden/Currencies/buttercup-coins.png"
+      }
     },
     {
-      "name": "Heart Coins",
-      "obtainment": "Exchange heartstruck, cute or heartbound fruits for Heart Coins to Heather during the Valentine's Event",
-      "obtainable": "✗",
-      "image": "/Grow%20a%20Garden/Currencies/heart-coins.png"
+      "item": {
+        "name": "Heart Coins",
+        "obtainment": "Exchange heartstruck, cute or heartbound fruits for Heart Coins to Heather during the Valentine's Event",
+        "obtainable": "✗"
+      },
+      "system": {
+        "slug": "heart-coins",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Grow%20a%20Garden/Currencies/heart-coins.png"
+      }
     }
-  ],
-  "details": {
-    "sheckles": "The Limited Time Shop is a shop in Grow a Garden where a player can buy or gift another player items, seeds, and Sheckles with Robux. This shop can be found by pressing the Shop button on the left of the screen. Also the only way to obtain Super Seeds. Due to gambling laws, certain offers may be hidden if the player is in Australia, Belgium, the U.K or the Netherlands. <img style=\"\" src=\"https://static.wikia.nocookie.net/growagarden/images/1/14/Limited_Time_Shop_Icon.png/revision/latest/scale-to-width-down/185?cb=20250526044558\" title=\"Limited Time Shop Icon.png (15 KB)\" class=\"thumbimage\" alt=\"The Button itself\" height=\"74\" width=\"185\" data-image-name=\"Limited Time Shop Icon.png\" data-image-key=\"Limited_Time_Shop_Icon.png\" data-relevant=\"1\" data-caption=\"The Button itself\">The Button itself",
-    "gardenCoins": "Sheckles are the main currency of Grow a Garden."
-  }
+  ]
 }

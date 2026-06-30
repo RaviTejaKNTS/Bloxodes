@@ -12,6 +12,7 @@ import { ContentFaq } from "@/components/ContentFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { GROW_GARDEN_COLLECTIONS, type GrowGardenCollectionConfig } from "@/lib/game-collections/games/grow-a-garden";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 import type { CollectionContentHtml } from "./the-forge";
 
 const FALLBACK_IMAGE = "/og-image.png";
@@ -303,7 +304,7 @@ async function readGrowGardenDataset(
   return {
     meta: parsed.meta ?? null,
     items: uniquifyGrowGardenItemIds(
-      (parsed.items ?? [])
+      unwrapDatasetItems(parsed)
         .map((row) => normalizeGrowGardenItem(config.slug, row))
         .filter(Boolean) as GrowGardenCollectionItem[]
     )

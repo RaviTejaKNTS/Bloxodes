@@ -1,148 +1,240 @@
 {
   "meta": {
-    "title": "Steal a Brainrot mutations data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Steal a Brainrot Wiki - Mutations",
-        "url": "https://stealabrainrot.fandom.com/wiki/Mutations",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Steal a Brainrot",
+    "gameSlug": "steal-a-brainrot",
+    "collection": "mutations",
+    "route": "/wiki/steal-a-brainrot/mutations",
+    "catalogCode": "steal-a-brainrot-mutations",
+    "itemFields": [
       "category",
       "multiplier",
       "changesNotes"
-    ]
+    ],
+    "columns": [
+      "category",
+      "multiplier",
+      "changesNotes"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Permanent",
+        "Limited"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "category",
+        "multiplier",
+        "changesNotes"
+      ],
+      "tableFields": [
+        "category",
+        "multiplier",
+        "changesNotes"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Default",
-      "slug": "default",
-      "image": "/Steal%20a%20Brainrot/Mutations/default.webp",
-      "category": "Permanent",
-      "multiplier": "1x",
-      "changesNotes": "The brainrot retains its original appearance. Been in-game since the beginning.",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/5e/Default.png/revision/latest?cb=20251112160311"
+      "item": {
+        "name": "Default",
+        "category": "Permanent",
+        "multiplier": "1x",
+        "changesNotes": "The brainrot retains its original appearance. Been in-game since the beginning."
+      },
+      "system": {
+        "slug": "default",
+        "section": "Permanent",
+        "sortOrder": 1,
+        "image": "/Steal%20a%20Brainrot/Mutations/default.webp"
+      }
     },
     {
-      "name": "Gold",
-      "slug": "gold",
-      "image": "/Steal%20a%20Brainrot/Mutations/gold.webp",
-      "category": "Permanent",
-      "multiplier": "1.25×",
-      "changesNotes": "Turns the mutated brainrot yellow/gold. Been in-game since 31st May 2025. 10% chance to spawn brainrot with this mutation on the row",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b7/Gold3.png/revision/latest?cb=20251014022450"
+      "item": {
+        "name": "Gold",
+        "category": "Permanent",
+        "multiplier": "1.25×",
+        "changesNotes": "Turns the mutated brainrot yellow/gold. Been in-game since 31st May 2025. 10% chance to spawn brainrot with this mutation on the row"
+      },
+      "system": {
+        "slug": "gold",
+        "section": "Permanent",
+        "sortOrder": 2,
+        "image": "/Steal%20a%20Brainrot/Mutations/gold.webp"
+      }
     },
     {
-      "name": "Diamond",
-      "slug": "diamond",
-      "image": "/Steal%20a%20Brainrot/Mutations/diamond.webp",
-      "category": "Permanent",
-      "multiplier": "1.5×",
-      "changesNotes": "Turns the mutated brainrot cyan/diamond. Been in-game since 31st May 2025 20.4% chance to spawn brainrot with this mutation on the row",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/5d/Diamond3.png/revision/latest?cb=20251014022514"
+      "item": {
+        "name": "Diamond",
+        "category": "Permanent",
+        "multiplier": "1.5×",
+        "changesNotes": "Turns the mutated brainrot cyan/diamond. Been in-game since 31st May 2025 20.4% chance to spawn brainrot with this mutation on the row"
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Permanent",
+        "sortOrder": 3,
+        "image": "/Steal%20a%20Brainrot/Mutations/diamond.webp"
+      }
     },
     {
-      "name": "Rainbow",
-      "slug": "rainbow",
-      "image": "/Steal%20a%20Brainrot/Mutations/rainbow.webp",
-      "category": "Permanent",
-      "multiplier": "10×",
-      "changesNotes": "Makes the mutated brainrot cycle between RGB colours. Been in-game since 21st June 2025 1% chance to spawn brainrot with this mutation on the red carpet. The chance increases with the Rainbow Machine Event.",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/a/a1/Rainbow2.png/revision/latest?cb=20251014022647"
+      "item": {
+        "name": "Rainbow",
+        "category": "Permanent",
+        "multiplier": "10×",
+        "changesNotes": "Makes the mutated brainrot cycle between RGB colours. Been in-game since 21st June 2025 1% chance to spawn brainrot with this mutation on the red carpet. The chance increases with the Rainbow Machine Event."
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Permanent",
+        "sortOrder": 4,
+        "image": "/Steal%20a%20Brainrot/Mutations/rainbow.webp"
+      }
     },
     {
-      "name": "Bloodrot",
-      "slug": "bloodrot",
-      "image": "/Steal%20a%20Brainrot/Mutations/bloodrot.webp",
-      "category": "Limited",
-      "multiplier": "2.5x",
-      "changesNotes": "Turns the mutated brainrot dark red. Been in-game since Update 2 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Bloodmoon event",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2e/Bloodrot.png/revision/latest?cb=20251014022607"
+      "item": {
+        "name": "Bloodrot",
+        "category": "Limited",
+        "multiplier": "2.5x",
+        "changesNotes": "Turns the mutated brainrot dark red. Been in-game since Update 2 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Bloodmoon event"
+      },
+      "system": {
+        "slug": "bloodrot",
+        "section": "Limited",
+        "sortOrder": 5,
+        "image": "/Steal%20a%20Brainrot/Mutations/bloodrot.webp"
+      }
     },
     {
-      "name": "Candy",
-      "slug": "candy",
-      "image": "/Steal%20a%20Brainrot/Mutations/candy.webp",
-      "category": "Limited",
-      "multiplier": "4×",
-      "changesNotes": "Turns the mutated brainrot pink. Been in-game since 5th July 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Candy Aurora event",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/c/cf/Candy2.png/revision/latest?cb=20251014022832"
+      "item": {
+        "name": "Candy",
+        "category": "Limited",
+        "multiplier": "4×",
+        "changesNotes": "Turns the mutated brainrot pink. Been in-game since 5th July 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Candy Aurora event"
+      },
+      "system": {
+        "slug": "candy",
+        "section": "Limited",
+        "sortOrder": 6,
+        "image": "/Steal%20a%20Brainrot/Mutations/candy.webp"
+      }
     },
     {
-      "name": "Lava",
-      "slug": "lava",
-      "image": "/Steal%20a%20Brainrot/Mutations/lava.webp",
-      "category": "Limited",
-      "multiplier": "6×",
-      "changesNotes": "Turns the mutated brainrot neon orange. Been in-game since July 25, 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Molten event Formerly Activated every 1/3 hours",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/be/Lava2.png/revision/latest?cb=20251014022920"
+      "item": {
+        "name": "Lava",
+        "category": "Limited",
+        "multiplier": "6×",
+        "changesNotes": "Turns the mutated brainrot neon orange. Been in-game since July 25, 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Molten event Formerly Activated every 1/3 hours"
+      },
+      "system": {
+        "slug": "lava",
+        "section": "Limited",
+        "sortOrder": 7,
+        "image": "/Steal%20a%20Brainrot/Mutations/lava.webp"
+      }
     },
     {
-      "name": "Galaxy",
-      "slug": "galaxy",
-      "image": "/Steal%20a%20Brainrot/Mutations/galaxy.webp",
-      "category": "Limited",
-      "multiplier": "7×",
-      "changesNotes": "Turns the mutated brainrot neon purple. Been in-game since August 23, 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Galactic event Formerly Activated every 1/3 hours. Last mutation to do this.",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/5/5e/Galaxy2.png/revision/latest?cb=20251014023008"
+      "item": {
+        "name": "Galaxy",
+        "category": "Limited",
+        "multiplier": "7×",
+        "changesNotes": "Turns the mutated brainrot neon purple. Been in-game since August 23, 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Galactic event Formerly Activated every 1/3 hours. Last mutation to do this."
+      },
+      "system": {
+        "slug": "galaxy",
+        "section": "Limited",
+        "sortOrder": 8,
+        "image": "/Steal%20a%20Brainrot/Mutations/galaxy.webp"
+      }
     },
     {
-      "name": "Yin Yang",
-      "slug": "yin-yang",
-      "image": "/Steal%20a%20Brainrot/Mutations/yin-yang.webp",
-      "category": "Limited",
-      "multiplier": "7.5x",
-      "changesNotes": "Turns the mutated brainrot black and white. Been in-game since September 27, 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Yin Yang event Formerly Activated every 1/2 hours.",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/0/07/Yingyangicon.png/revision/latest?cb=20251014023114"
+      "item": {
+        "name": "Yin Yang",
+        "category": "Limited",
+        "multiplier": "7.5x",
+        "changesNotes": "Turns the mutated brainrot black and white. Been in-game since September 27, 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Yin Yang event Formerly Activated every 1/2 hours."
+      },
+      "system": {
+        "slug": "yin-yang",
+        "section": "Limited",
+        "sortOrder": 9,
+        "image": "/Steal%20a%20Brainrot/Mutations/yin-yang.webp"
+      }
     },
     {
-      "name": "Radioactive",
-      "slug": "radioactive",
-      "image": null,
-      "category": "Limited",
-      "multiplier": "8.5×",
-      "changesNotes": "Turns the mutated brainrot neon green and applies a hatch texture on it. Been in-game since November 15, 2025. Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Radioactive event Formerly Activated every 1/2 hours.",
-      "sourceImageUrl": null
+      "item": {
+        "name": "Radioactive",
+        "category": "Limited",
+        "multiplier": "8.5×",
+        "changesNotes": "Turns the mutated brainrot neon green and applies a hatch texture on it. Been in-game since November 15, 2025. Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Radioactive event Formerly Activated every 1/2 hours."
+      },
+      "system": {
+        "slug": "radioactive",
+        "section": "Limited",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Cursed",
-      "slug": "cursed",
-      "image": "/Steal%20a%20Brainrot/Mutations/cursed.webp",
-      "category": "Limited",
-      "multiplier": "9x",
-      "changesNotes": "Turns the mutated brainrot red and black. It gives off an \"energy source\". It also gives the brainrot red eyes, similar to the Tung Tung Attack trait. Been in-game since Jan 3, 2026. Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Cursed event Formerly Activated every 1/2 hours.",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/9/9b/Cursed_Mutation1.png/revision/latest?cb=20260314225017"
+      "item": {
+        "name": "Cursed",
+        "category": "Limited",
+        "multiplier": "9x",
+        "changesNotes": "Turns the mutated brainrot red and black. It gives off an \"energy source\". It also gives the brainrot red eyes, similar to the Tung Tung Attack trait. Been in-game since Jan 3, 2026. Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Cursed event Formerly Activated every 1/2 hours."
+      },
+      "system": {
+        "slug": "cursed",
+        "section": "Limited",
+        "sortOrder": 11,
+        "image": "/Steal%20a%20Brainrot/Mutations/cursed.webp"
+      }
     },
     {
-      "name": "Divine",
-      "slug": "divine",
-      "image": "/Steal%20a%20Brainrot/Mutations/divine.webp",
-      "category": "Limited",
-      "multiplier": "10x",
-      "changesNotes": "Turns the mutated brainrot bright yellow and white. Also applies a texture with white symbols that covers most of the brainrot's body. Been in-game since Feb. 21, 2026. Activates every 1/2 hours. Mild Chance to apply onto a brainrot during the Divine event",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/2/2c/DivineMutation.png/revision/latest?cb=20260222035304"
+      "item": {
+        "name": "Divine",
+        "category": "Limited",
+        "multiplier": "10x",
+        "changesNotes": "Turns the mutated brainrot bright yellow and white. Also applies a texture with white symbols that covers most of the brainrot's body. Been in-game since Feb. 21, 2026. Activates every 1/2 hours. Mild Chance to apply onto a brainrot during the Divine event"
+      },
+      "system": {
+        "slug": "divine",
+        "section": "Limited",
+        "sortOrder": 12,
+        "image": "/Steal%20a%20Brainrot/Mutations/divine.webp"
+      }
     },
     {
-      "name": "Cyber",
-      "slug": "cyber",
-      "image": "/Steal%20a%20Brainrot/Mutations/cyber.webp",
-      "category": "Limited",
-      "multiplier": "11x",
-      "changesNotes": "Turns the mutated brainrot Black and Blue. Also maakes the brainrot transparent or neon on some parts of the body. Will be in-game from Apr. 18, 2026. Activates every 1 hour. Mild Chance to apply onto a brainrot during the Cyber event",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/b/b2/CyberMutation.png/revision/latest?cb=20260418202157"
+      "item": {
+        "name": "Cyber",
+        "category": "Limited",
+        "multiplier": "11x",
+        "changesNotes": "Turns the mutated brainrot Black and Blue. Also maakes the brainrot transparent or neon on some parts of the body. Will be in-game from Apr. 18, 2026. Activates every 1 hour. Mild Chance to apply onto a brainrot during the Cyber event"
+      },
+      "system": {
+        "slug": "cyber",
+        "section": "Limited",
+        "sortOrder": 13,
+        "image": "/Steal%20a%20Brainrot/Mutations/cyber.webp"
+      }
     },
     {
-      "name": "Disco",
-      "slug": "disco",
-      "image": "/Steal%20a%20Brainrot/Mutations/disco.webp",
-      "category": "Limited",
-      "multiplier": "11x",
-      "changesNotes": "Makes the brainrot glow with green, purple, and cyan colors. Was going to release April 18th, 2026, but got placed with Cyber see above for more. It can release after Cyber ends. Unobtainable since it's Upcoming. Chance to make a Brainrot Disco during the Mutations Event.",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/stealabr/images/4/4e/Mutation01.png/revision/latest?cb=20260430012255"
+      "item": {
+        "name": "Disco",
+        "category": "Limited",
+        "multiplier": "11x",
+        "changesNotes": "Makes the brainrot glow with green, purple, and cyan colors. Was going to release April 18th, 2026, but got placed with Cyber see above for more. It can release after Cyber ends. Unobtainable since it's Upcoming. Chance to make a Brainrot Disco during the Mutations Event."
+      },
+      "system": {
+        "slug": "disco",
+        "section": "Limited",
+        "sortOrder": 14,
+        "image": "/Steal%20a%20Brainrot/Mutations/disco.webp"
+      }
     }
   ]
 }

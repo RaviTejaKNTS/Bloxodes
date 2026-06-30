@@ -1,1767 +1,1477 @@
 {
   "meta": {
-    "title": "RIVALS finishers data",
-    "updatedAt": "2026-05-26",
-    "sources": [
-      {
-        "label": "Roblox RIVALS Wiki - Finishers",
-        "url": "https://robloxrivals.fandom.com/wiki/Finishers",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox RIVALS Wiki - Finisher Pack",
-        "url": "https://robloxrivals.fandom.com/wiki/Finisher_Pack",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox RIVALS Wiki - Bundles",
-        "url": "https://robloxrivals.fandom.com/wiki/Bundles",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox RIVALS Wiki - Shop",
-        "url": "https://robloxrivals.fandom.com/wiki/Shop",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox - RIVALS",
-        "url": "https://www.roblox.com/games/17625359962/RIVALS",
-        "accessed": "2026-05-26"
-      },
-      {
-        "label": "Roblox games API - universe 6035872082",
-        "url": "https://games.roblox.com/v1/games?universeIds=6035872082",
-        "accessed": "2026-05-26"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "RIVALS",
+    "gameSlug": "rivals",
+    "collection": "finishers",
+    "route": "/wiki/rivals/finishers",
+    "catalogCode": "rivals-finishers",
+    "itemFields": [
       "rarity",
-      "collectionSection",
       "sourceType",
       "source",
-      "availability",
-      "sourceNote",
-      "imageStatus",
-      "sourcePage",
-      "wikiUrl",
-      "sourceFile",
-      "sourceImageUrl",
-      "sourceCheckedAt",
-      "verificationNote"
-    ]
+      "availability"
+    ],
+    "columns": [
+      "rarity",
+      "sourceType",
+      "source",
+      "availability"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Event Chest Sources",
+        "Season and Ranked Sources",
+        "Finisher Pack Sources",
+        "Contract, UGC, and Milestone Sources",
+        "Bundle and Shop Sources",
+        "Default and Unobtainable"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "sourceType",
+        "source",
+        "availability"
+      ],
+      "tableFields": [
+        "rarity",
+        "sourceType",
+        "source",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Batsplosion",
-      "slug": "batsplosion",
-      "image": "/RIVALS/Finishers/batsplosion.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Haunted Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Haunted Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Batsplosion Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/e4/Batsplosion_Finisher.png/revision/latest?cb=20260108182226",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Bite",
-      "slug": "bite",
-      "image": "/RIVALS/Finishers/bite.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Haunted Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Haunted Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Bite Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/12/Bite_Finisher.webp/revision/latest?cb=20260108182130",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Blip",
-      "slug": "blip",
-      "image": "/RIVALS/Finishers/blip.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass Season 1",
-      "availability": "Season pass source",
-      "sourceNote": "Earned from the Season Pass during Season 1",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Blip Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2e/Blip_Finisher.webp/revision/latest?cb=20260109134921",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Chalked",
-      "slug": "chalked",
-      "image": "/RIVALS/Finishers/chalked.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Chalked Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/17/Chalked_Finisher.webp/revision/latest?cb=20260108181854",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Chill Out",
-      "slug": "chill-out",
-      "image": "/RIVALS/Finishers/chill-out.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass Season 2",
-      "availability": "Season pass source",
-      "sourceNote": "Earned from the Season Pass during Season 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Chill Out Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/13/Chill_Out_Finisher.webp/revision/latest?cb=20260109134758",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Coalify",
-      "slug": "coalify",
-      "image": "/RIVALS/Finishers/coalify.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass Season 2",
-      "availability": "Season pass source",
-      "sourceNote": "Earned from the Season Pass during Season 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Coalify Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/8e/Coalify_Finisher.webp/revision/latest?cb=20260109134723",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Confetti",
-      "slug": "confetti",
-      "image": "/RIVALS/Finishers/confetti.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Confetti Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/91/Confetti_Finisher.png/revision/latest?cb=20241006162858",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Delete",
-      "slug": "delete",
-      "image": "/RIVALS/Finishers/delete.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Delete Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/8a/Delete_Finisher.webp/revision/latest?cb=20260108181342",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Digitize",
-      "slug": "digitize",
-      "image": "/RIVALS/Finishers/digitize.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Digitized Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/ab/Digitized_Finisher.webp/revision/latest?cb=20260108181234",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Faceplant",
-      "slug": "faceplant",
-      "image": "/RIVALS/Finishers/faceplant.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass Season 1",
-      "availability": "Season pass source",
-      "sourceNote": "Earned from the Season Pass during Season 1",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Faceplant Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/a1/Faceplant_Finisher.webp/revision/latest?cb=20260109134432",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Festive Confetti",
-      "slug": "festive-confetti",
-      "image": "/RIVALS/Finishers/festive-confetti.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Jolly Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Jolly Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Festive Confetti Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/6/66/Festive_Confetti_Finisher.webp/revision/latest?cb=20260108180830",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Flop",
-      "slug": "flop",
-      "image": "/RIVALS/Finishers/flop.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Flop Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/3a/Flop_Finisher.png/revision/latest?cb=20241006163236",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Folded",
-      "slug": "folded",
-      "image": "/RIVALS/Finishers/folded.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Folded Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/ad/Folded_Finisher.webp/revision/latest?cb=20260108174124",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "For Glory",
-      "slug": "for-glory",
-      "image": "/RIVALS/Finishers/for-glory.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Ranked Shop",
-      "availability": "Ranked shop source",
-      "sourceNote": "Purchased from the Ranked Shop",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "For Glory Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/74/For_Glory_Finisher.webp/revision/latest?cb=20260109134256",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Hacked",
-      "slug": "hacked",
-      "image": "/RIVALS/Finishers/hacked.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Hacked Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/ac/Hacked_Finisher.png/revision/latest?cb=20241006162922",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Northern Light Show",
-      "slug": "northern-light-show",
-      "image": "/RIVALS/Finishers/northern-light-show.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Ranked Season 2",
-      "availability": "Ranked season source",
-      "sourceNote": "Earned by playing Ranked Season 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Northern Light Show Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/f2/Northern_Light_Show_Finisher.webp/revision/latest?cb=20260109133203",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Petrify",
-      "slug": "petrify",
-      "image": "/RIVALS/Finishers/petrify.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Petrify Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/1c/Petrify_Finisher.png/revision/latest?cb=20241006162934",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Spooky Confetti",
-      "slug": "spooky-confetti",
-      "image": "/RIVALS/Finishers/spooky-confetti.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Haunted Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Haunted Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Spooky Confetti Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/bb/Spooky_Confetti_Finisher.webp/revision/latest?cb=20260108175326",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Squawk",
-      "slug": "squawk",
-      "image": "/RIVALS/Finishers/squawk.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Squawk Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/8c/Squawk_Finisher.webp/revision/latest?cb=20260108175238",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Toot",
-      "slug": "toot",
-      "image": "/RIVALS/Finishers/toot.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Toot Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/e3/Toot_Finisher.png/revision/latest?cb=20241006163159",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Very Tragic Banana Peel Accident",
-      "slug": "very-tragic-banana-peel-accident",
-      "image": "/RIVALS/Finishers/very-tragic-banana-peel-accident.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "VTBPA Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2c/VTBPA_Finisher.webp/revision/latest?cb=20260108174411",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Warped Away",
-      "slug": "warped-away",
-      "image": "/RIVALS/Finishers/warped-away.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Ranked Season 1",
-      "availability": "Ranked season source",
-      "sourceNote": "Earned by playing Ranked Season 1",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Warped Away Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/94/Warped_Away_Finisher.webp/revision/latest?cb=20260109132717",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Wrapped",
-      "slug": "wrapped",
-      "image": "/RIVALS/Finishers/wrapped.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Jolly Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Jolly Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Wrapped Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/36/Wrapped_Finisher.webp/revision/latest?cb=20260108175034",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Yoink",
-      "slug": "yoink",
-      "image": "/RIVALS/Finishers/yoink.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Common",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Yoink Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/9b/Yoink_Finisher.png/revision/latest?cb=20241006162804",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Ascend",
-      "slug": "ascend",
-      "image": "/RIVALS/Finishers/ascend.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Ascend Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2f/Ascend_Finisher.webp/revision/latest?cb=20260108182424",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Bad Mood",
-      "slug": "bad-mood",
-      "image": "/RIVALS/Finishers/bad-mood.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Bad Mood Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/39/Bad_Mood_Finisher.png/revision/latest?cb=20260108182320",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Bogey",
-      "slug": "bogey",
-      "image": "/RIVALS/Finishers/bogey.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass Season 1",
-      "availability": "Season pass source",
-      "sourceNote": "Earned from the Season Pass during Season 1",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Bogey Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/9b/Bogey_Finisher.webp/revision/latest?cb=20260109134846",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Bonesplosion",
-      "slug": "bonesplosion",
-      "image": "/RIVALS/Finishers/bonesplosion.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Haunted Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Haunted Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Bonesplosion Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/94/Bonesplosion_Finisher.webp/revision/latest?cb=20260108182033",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Collapse",
-      "slug": "collapse",
-      "image": "/RIVALS/Finishers/collapse.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Collapse Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/3f/Collapse_Finisher.png/revision/latest?cb=20241006162756",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Decorated Player",
-      "slug": "decorated-player",
-      "image": "/RIVALS/Finishers/decorated-player.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass Season 2",
-      "availability": "Season pass source",
-      "sourceNote": "Earned from the Season Pass during Season 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Decorated Player Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/8a/Decorated_Player_Finisher.webp/revision/latest?cb=20260109134643",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Flick",
-      "slug": "flick",
-      "image": "/RIVALS/Finishers/flick.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Flick Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/76/Flick_Finisher.webp/revision/latest?cb=20260108180728",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Freeze",
-      "slug": "freeze",
-      "image": "/RIVALS/Finishers/freeze.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Freeze Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/a2/Freeze_Finisher.png/revision/latest?cb=20241006163148",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Frozen",
-      "slug": "frozen",
-      "image": "/RIVALS/Finishers/frozen.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Jolly Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Jolly Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Frozen Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/b3/Frozen_Finisher.webp/revision/latest?cb=20260108174840",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Gingerbreadify",
-      "slug": "gingerbreadify",
-      "image": "/RIVALS/Finishers/gingerbreadify.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Jolly Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Jolly Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Gingerbreadify Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/7c/Gingerbreadify_Finisher.webp/revision/latest?cb=20260108180511",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Heavy Head",
-      "slug": "heavy-head",
-      "image": "/RIVALS/Finishers/heavy-head.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Heavy Head Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/ee/Heavy_Head_Finisher.webp/revision/latest?cb=20260108180315",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "High Gravity",
-      "slug": "high-gravity",
-      "image": "/RIVALS/Finishers/high-gravity.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "High Gravity Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/ed/High_Gravity_Finisher.png/revision/latest?cb=20241006163137",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Hooked",
-      "slug": "hooked",
-      "image": "/RIVALS/Finishers/hooked.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Hooked Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/6/6e/Hooked_Finisher.webp/revision/latest?cb=20260108180227",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Lost Soul",
-      "slug": "lost-soul",
-      "image": "/RIVALS/Finishers/lost-soul.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Haunted Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Haunted Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Lost Soul Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/b1/Lost_Soul_Finisher.png/revision/latest?cb=20260108180029",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Midas Touch",
-      "slug": "midas-touch",
-      "image": "/RIVALS/Finishers/midas-touch.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Contract, UGC, and Milestone Sources",
-      "sourceType": "Contract, UGC, or milestone",
-      "source": "Contracts",
-      "availability": "Contract reward",
-      "sourceNote": "Earned from contracts",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Midas Touch Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/1c/Midas_Touch_Finisher.png/revision/latest?cb=20241006163050",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Reaper",
-      "slug": "reaper",
-      "image": "/RIVALS/Finishers/reaper.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Haunted Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Haunted Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Reaper Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/d/db/Reaper_Finisher.webp/revision/latest?cb=20260108175743",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Roadrunner",
-      "slug": "roadrunner",
-      "image": "/RIVALS/Finishers/roadrunner.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Roadrunner Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/be/Roadrunner_Finisher.webp/revision/latest?cb=20260108175545",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Rush",
-      "slug": "rush",
-      "image": "/RIVALS/Finishers/rush.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Rush Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/d/d1/Rush_Finisher.png/revision/latest?cb=20241006163223",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Snowmanify",
-      "slug": "snowmanify",
-      "image": "/RIVALS/Finishers/snowmanify.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass Season 2",
-      "availability": "Season pass source",
-      "sourceNote": "Earned from the Season Pass during Season 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Snowmanify Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2a/Snowmanify_Finisher.webp/revision/latest?cb=20260109133029",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Splatter",
-      "slug": "splatter",
-      "image": "/RIVALS/Finishers/splatter.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Splatter Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/58/Splatter_Finisher.png/revision/latest?cb=20241006163115",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Tremble",
-      "slug": "tremble",
-      "image": "/RIVALS/Finishers/tremble.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Tremble Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/a/a5/Tremble_Finisher.png/revision/latest?cb=20241006163210",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Warp Sickness",
-      "slug": "warp-sickness",
-      "image": "/RIVALS/Finishers/warp-sickness.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Rare",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass Season 1",
-      "availability": "Season pass source",
-      "sourceNote": "Earned from the Season Pass during Season 1",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Warp Sickness Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/4/4c/Warp_Sickness_Finisher.webp/revision/latest?cb=20260109134344",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Balloons",
-      "slug": "balloons",
-      "image": "/RIVALS/Finishers/balloons.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Balloons Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/f5/Balloons_Finisher.png/revision/latest?cb=20241006163126",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Beacon",
-      "slug": "beacon",
-      "image": "/RIVALS/Finishers/beacon.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Energy Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Energy Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Beacon Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2a/Beacon_Finisher.webp/revision/latest?cb=20260109135001",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "BONK!",
-      "slug": "bonk",
-      "image": "/RIVALS/Finishers/bonk.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "BONK! Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/70/BONK%21_Finisher.png/revision/latest?cb=20241006162728",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Boogie",
-      "slug": "boogie",
-      "image": "/RIVALS/Finishers/boogie.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Standard Weapons Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Standard Weapons Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Boogie Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/00/Boogie_Finisher.png/revision/latest?cb=20241006163004",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Broom Ride",
-      "slug": "broom-ride",
-      "image": "/RIVALS/Finishers/broom-ride.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Haunted Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Haunted Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Broom Ride Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/b3/Broom_Ride_Finisher.png/revision/latest?cb=20260108181934",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Chark Attack",
-      "slug": "chark-attack",
-      "image": "/RIVALS/Finishers/chark-attack.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Chark Attack Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/8d/Chark_Attack_Finisher.webp/revision/latest?cb=20260108181807",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Clapped",
-      "slug": "clapped",
-      "image": "/RIVALS/Finishers/clapped.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Clapped Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/9c/Clapped_Finisher.webp/revision/latest?cb=20260108181717",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Crushed",
-      "slug": "crushed",
-      "image": "/RIVALS/Finishers/crushed.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Crushed Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/4/47/Crushed_Finisher.webp/revision/latest?cb=20260108181536",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Darkheart",
-      "slug": "darkheart",
-      "image": "/RIVALS/Finishers/darkheart.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Darkheart Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/83/Darkheart_Finisher.png/revision/latest?cb=20241006163103",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "David",
-      "slug": "david",
-      "image": "/RIVALS/Finishers/david.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Jolly Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Jolly Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "David Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/8e/David_Finisher.webp/revision/latest?cb=20260108181444",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Dematerialize",
-      "slug": "dematerialize",
-      "image": null,
-      "imageStatus": "needs capture - source uses placeholder",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Nostalgia Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Nostalgia Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Rivalswikiplaceholder.png",
-      "sourceImageUrl": null,
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Diamond Hands",
-      "slug": "diamond-hands",
-      "image": "/RIVALS/Finishers/diamond-hands.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Contract, UGC, and Milestone Sources",
-      "sourceType": "Contract, UGC, or milestone",
-      "source": "Contracts",
-      "availability": "Contract reward",
-      "sourceNote": "Earned from contracts",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Diamond Hands Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/4/4d/Diamond_Hands_Finisher.png/revision/latest?cb=20241006162827",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Disintegrate",
-      "slug": "disintegrate",
-      "image": "/RIVALS/Finishers/disintegrate.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Haunted Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Haunted Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Disintegrate Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/09/Disintegrate_Finisher.webp/revision/latest?cb=20260108181136",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "DRIP",
-      "slug": "drip",
-      "image": "/RIVALS/Finishers/drip.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Candy bundles",
-      "availability": "Bundle source",
-      "sourceNote": "Included in Candy bundles",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "DRIP Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/ff/DRIP_Finisher.webp/revision/latest?cb=20260108181036",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Electrocute",
-      "slug": "electrocute",
-      "image": "/RIVALS/Finishers/electrocute.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Electrocute Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/3e/Electrocute_Finisher.png/revision/latest?cb=20241006163040",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Enlightened",
-      "slug": "enlightened",
-      "image": "/RIVALS/Finishers/enlightened.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Enlightened Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/50/Enlightened_Finisher.webp/revision/latest?cb=20260108182553",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Erased",
-      "slug": "erased",
-      "image": "/RIVALS/Finishers/erased.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "RPG Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the RPG Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Erased Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/4/48/Erased_Finisher.png/revision/latest?cb=20260109134506",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Falling Icicles",
-      "slug": "falling-icicles",
-      "image": "/RIVALS/Finishers/falling-icicles.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Shop",
-      "availability": "Shop purchase",
-      "sourceNote": "Purchased from the Shop",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Falling Icicles Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/d/d9/Falling_Icicles_Finisher.webp/revision/latest?cb=20260108180924",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Firework Show",
-      "slug": "firework-show",
-      "image": "/RIVALS/Finishers/firework-show.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass Season 2",
-      "availability": "Season pass source",
-      "sourceNote": "Earned from the Season Pass during Season 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Firework Show Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/7/7b/Firework_Show_Finisher.webp/revision/latest?cb=20260109132818",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Giant Ice Spike",
-      "slug": "giant-ice-spike",
-      "image": "/RIVALS/Finishers/giant-ice-spike.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Crystal bundles",
-      "availability": "Bundle source",
-      "sourceNote": "Included in Crystal bundles",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Giant Ice Spike Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/b/b0/Giant_Ice_Spike_Finisher.webp/revision/latest?cb=20260108180616",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Giant Snowball",
-      "slug": "giant-snowball",
-      "image": "/RIVALS/Finishers/giant-snowball.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Contraband Bundle from Season 2",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Contraband Bundle from Season 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Giant Snowball Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/58/Giant_Snowball_Finisher.webp/revision/latest?cb=20260109134209",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "GOOAAALLLL",
-      "slug": "gooaaallll",
-      "image": "/RIVALS/Finishers/gooaaallll.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "GOOAAALLLL Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/2d/GOOAAALLLL_Finisher.webp/revision/latest?cb=20260108180423",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Heartbeat",
-      "slug": "heartbeat",
-      "image": "/RIVALS/Finishers/heartbeat.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Medkit Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Medkit Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Heartbeat Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/e3/Heartbeat_Finisher.png/revision/latest?cb=20241006163025",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Ignite",
-      "slug": "ignite",
-      "image": "/RIVALS/Finishers/ignite.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Heavy Duty Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Heavy Duty Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Ignite Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/15/Ignite_Finisher.png/revision/latest?cb=20241006162739",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Impaled",
-      "slug": "impaled",
-      "image": "/RIVALS/Finishers/impaled.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Ranked Shop",
-      "availability": "Ranked shop source",
-      "sourceNote": "Purchased from the Ranked Shop",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Impaled Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/1/14/Impaled_Finisher.webp/revision/latest?cb=20260109134110",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Inflate",
-      "slug": "inflate",
-      "image": null,
-      "imageStatus": "needs capture - source uses placeholder",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Balloon Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Balloon Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Rivalswikiplaceholder.png",
-      "sourceImageUrl": null,
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Instability",
-      "slug": "instability",
-      "image": null,
-      "imageStatus": "needs capture - source uses placeholder",
-      "rarity": "Legendary",
-      "collectionSection": "Season and Ranked Sources",
-      "sourceType": "Season or ranked",
-      "source": "Season Pass from Season 1",
-      "availability": "Season pass source",
-      "sourceNote": "Included in the Season Pass from Season 1",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Rivalswikiplaceholder.png",
-      "sourceImageUrl": null,
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Leprechaunify",
-      "slug": "leprechaunify",
-      "image": null,
-      "imageStatus": "needs capture - source uses placeholder",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Lucky Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Lucky Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Rivalswikiplaceholder.png",
-      "sourceImageUrl": null,
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Low Gravity",
-      "slug": "low-gravity",
-      "image": "/RIVALS/Finishers/low-gravity.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Exogun Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Exogun Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Low Gravity Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/24/Low_Gravity_Finisher.png/revision/latest?cb=20241006162909",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "OOF",
-      "slug": "oof",
-      "image": "/RIVALS/Finishers/oof.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Classic Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Classic Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "OOF Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/31/OOF_Finisher.png/revision/latest?cb=20241006162944",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Opulent",
-      "slug": "opulent",
-      "image": "/RIVALS/Finishers/opulent.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Key Bundles",
-      "availability": "Bundle source",
-      "sourceNote": "Included in Key Bundles",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Opulent Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/6/64/Opulent_Finisher.png/revision/latest?cb=20241006162816",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Orbital Strike",
-      "slug": "orbital-strike",
-      "image": "/RIVALS/Finishers/orbital-strike.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Orbital Strike Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/d/de/Orbital_Strike_Finisher.png/revision/latest?cb=20241006163014",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Pixel Coins",
-      "slug": "pixel-coins",
-      "image": "/RIVALS/Finishers/pixel-coins.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Pixel Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Pixel Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Pixel Coins Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/4/48/Pixel_Coins_Finisher.png/revision/latest?cb=20241006162954",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Plushify",
-      "slug": "plushify",
-      "image": null,
-      "imageStatus": "needs capture - source uses placeholder",
-      "rarity": "Legendary",
-      "collectionSection": "Contract, UGC, and Milestone Sources",
-      "sourceType": "Contract, UGC, or milestone",
-      "source": "UGC Items milestone",
-      "availability": "UGC milestone",
-      "sourceNote": "Earned from purchasing 15 UGC Items",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Rivalswikiplaceholder.png",
-      "sourceImageUrl": null,
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Poof",
-      "slug": "poof",
-      "image": null,
-      "imageStatus": "needs capture - source uses placeholder",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Lovely Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Lovely Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Rivalswikiplaceholder.png",
-      "sourceImageUrl": null,
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Rainbow Barf",
-      "slug": "rainbow-barf",
-      "image": "/RIVALS/Finishers/rainbow-barf.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack 2",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack 2",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Rainbow Barf Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/0a/Rainbow_Barf_Finisher.webp/revision/latest?cb=20260108175846",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "RIP",
-      "slug": "rip",
-      "image": "/RIVALS/Finishers/rip.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Shop",
-      "availability": "Shop purchase",
-      "sourceNote": "Purchased from the Shop",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "RIP Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/95/RIP_Finisher.webp/revision/latest?cb=20260108175636",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Sleigh Away",
-      "slug": "sleigh-away",
-      "image": "/RIVALS/Finishers/sleigh-away.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Shop",
-      "availability": "Shop purchase",
-      "sourceNote": "Purchased from the Shop",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Sleigh Away Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/8/8f/Sleigh_Away_Finisher.webp/revision/latest?cb=20260109133105",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Snowballed",
-      "slug": "snowballed",
-      "image": "/RIVALS/Finishers/snowballed.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Jolly Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Jolly Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Snowballed Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/21/Snowballed_Finisher.webp/revision/latest?cb=20260108175428",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Spaghettified",
-      "slug": "spaghettified",
-      "image": "/RIVALS/Finishers/spaghettified.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Contraband Bundle from Season 1",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Contraband Bundle from Season 1",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Spaghettified Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/3/3b/Spaghettified_Finisher.png/revision/latest?cb=20260109132941",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Stiff",
-      "slug": "stiff",
-      "image": "/RIVALS/Finishers/stiff.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Starter Bundle",
-      "availability": "Bundle source",
-      "sourceNote": "Included in the Starter Bundle",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Stiff Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/fd/Stiff_Finisher.png/revision/latest?cb=20241006162748",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Those Who Know",
-      "slug": "those-who-know",
-      "image": "/RIVALS/Finishers/those-who-know.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Shop (retired)",
-      "availability": "Retired shop source",
-      "sourceNote": "Used to be purchased from the Shop",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Those Who Know Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/d/d4/Those_Who_Know_Finisher.webp/revision/latest?cb=20260109132902",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Tough Crowd",
-      "slug": "tough-crowd",
-      "image": "/RIVALS/Finishers/tough-crowd.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Finisher Pack Sources",
-      "sourceType": "Pack",
-      "source": "Finisher Pack",
-      "availability": "Pack source",
-      "sourceNote": "Unboxed from the Finisher Pack",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Tough Crowd Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/e/e4/Tough_Crowd_Finisher.png/revision/latest?cb=20241006162838",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Zombified",
-      "slug": "zombified",
-      "image": "/RIVALS/Finishers/zombified.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Event Chest Sources",
-      "sourceType": "Event chest",
-      "source": "Haunted Chest",
-      "availability": "Event chest source",
-      "sourceNote": "Unboxed from the Haunted Chest",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Zombified Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/2/26/Zombified_Finisher.webp/revision/latest?cb=20260108174701",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "5B Visits",
-      "slug": "5b-visits",
-      "image": "/RIVALS/Finishers/5b-visits.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Contract, UGC, and Milestone Sources",
-      "sourceType": "Contract, UGC, or milestone",
-      "source": "5B Visits milestone",
-      "availability": "Visit milestone",
-      "sourceNote": "Obtained when the game (RIVALS) reaches 5 billion visits",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "5B Visits Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/f/f2/5B_Visits_Finisher.png/revision/latest?cb=20260108174938",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Director's Cut",
-      "slug": "director-s-cut",
-      "image": "/RIVALS/Finishers/director-s-cut.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Bundle and Shop Sources",
-      "sourceType": "Bundle or shop",
-      "source": "Shop video ad",
-      "availability": "Shop video reward",
-      "sourceNote": "Earned by watching a quick video ad in the Shop",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Director's Cut Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/0/0c/Director%27s_Cut_Finisher.webp/revision/latest?cb=20260109135124",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Elfify",
-      "slug": "elfify",
-      "image": "/RIVALS/Finishers/elfify.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Contract, UGC, and Milestone Sources",
-      "sourceType": "Contract, UGC, or milestone",
-      "source": "2025 Advent Calendar",
-      "availability": "Advent reward",
-      "sourceNote": "Obtained from the 2025 Advent Calendar",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Elfify Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/9/97/Elfify_Finisher.webp/revision/latest?cb=20260109134549",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Jolly Judgement",
-      "slug": "jolly-judgement",
-      "image": "/RIVALS/Finishers/jolly-judgement.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Legendary",
-      "collectionSection": "Contract, UGC, and Milestone Sources",
-      "sourceType": "Contract, UGC, or milestone",
-      "source": "2024 Advent Calendar",
-      "availability": "Advent reward",
-      "sourceNote": "Obtained from the 2024 Advent Calendar",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Jolly Judgement Finisher.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/d/d8/Jolly_Judgement_Finisher.webp/revision/latest?cb=20260108180121",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Extracted from the RIVALS Wiki Finishers table on 2026-05-26."
-    },
-    {
-      "name": "Ragdoll",
-      "slug": "ragdoll",
-      "image": "/RIVALS/Finishers/ragdoll.webp",
-      "imageStatus": "downloaded wiki image",
-      "rarity": "Unobtainable",
-      "collectionSection": "Default and Unobtainable",
-      "sourceType": "Default or unobtainable",
-      "source": "No finisher equipped",
-      "availability": "Default fallback",
-      "sourceNote": "Used when no finisher is equipped",
-      "sourcePage": "Roblox RIVALS Wiki",
-      "wikiUrl": "https://robloxrivals.fandom.com/wiki/Finishers",
-      "sourceFile": "Ragdoll Finisher.png",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/robloxrivals/images/5/59/Ragdoll_Finisher.png/revision/latest?cb=20241006162848",
-      "sourceCheckedAt": "2026-05-26",
-      "verificationNote": "Listed as unobtainable and used when no finisher is equipped; included as the approved default fallback row."
+      "item": {
+        "name": "Batsplosion",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "batsplosion",
+        "section": "Event Chest Sources",
+        "sortOrder": 1,
+        "image": "/RIVALS/Finishers/batsplosion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bite",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "bite",
+        "section": "Event Chest Sources",
+        "sortOrder": 2,
+        "image": "/RIVALS/Finishers/bite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blip",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "blip",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 3,
+        "image": "/RIVALS/Finishers/blip.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chalked",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "chalked",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 4,
+        "image": "/RIVALS/Finishers/chalked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chill Out",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "chill-out",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 5,
+        "image": "/RIVALS/Finishers/chill-out.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coalify",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "coalify",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 6,
+        "image": "/RIVALS/Finishers/coalify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Confetti",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "confetti",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 7,
+        "image": "/RIVALS/Finishers/confetti.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Delete",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "delete",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 8,
+        "image": "/RIVALS/Finishers/delete.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Digitize",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "digitize",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 9,
+        "image": "/RIVALS/Finishers/digitize.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Faceplant",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "faceplant",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 10,
+        "image": "/RIVALS/Finishers/faceplant.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Confetti",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "festive-confetti",
+        "section": "Event Chest Sources",
+        "sortOrder": 11,
+        "image": "/RIVALS/Finishers/festive-confetti.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flop",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "flop",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 12,
+        "image": "/RIVALS/Finishers/flop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Folded",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "folded",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 13,
+        "image": "/RIVALS/Finishers/folded.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "For Glory",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Ranked Shop",
+        "availability": "Ranked shop source"
+      },
+      "system": {
+        "slug": "for-glory",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 14,
+        "image": "/RIVALS/Finishers/for-glory.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hacked",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "hacked",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 15,
+        "image": "/RIVALS/Finishers/hacked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Northern Light Show",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Ranked Season 2",
+        "availability": "Ranked season source"
+      },
+      "system": {
+        "slug": "northern-light-show",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 16,
+        "image": "/RIVALS/Finishers/northern-light-show.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Petrify",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "petrify",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 17,
+        "image": "/RIVALS/Finishers/petrify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spooky Confetti",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "spooky-confetti",
+        "section": "Event Chest Sources",
+        "sortOrder": 18,
+        "image": "/RIVALS/Finishers/spooky-confetti.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Squawk",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "squawk",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 19,
+        "image": "/RIVALS/Finishers/squawk.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Toot",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "toot",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 20,
+        "image": "/RIVALS/Finishers/toot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Very Tragic Banana Peel Accident",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "very-tragic-banana-peel-accident",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 21,
+        "image": "/RIVALS/Finishers/very-tragic-banana-peel-accident.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Warped Away",
+        "rarity": "Common",
+        "sourceType": "Season or ranked",
+        "source": "Ranked Season 1",
+        "availability": "Ranked season source"
+      },
+      "system": {
+        "slug": "warped-away",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 22,
+        "image": "/RIVALS/Finishers/warped-away.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wrapped",
+        "rarity": "Common",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "wrapped",
+        "section": "Event Chest Sources",
+        "sortOrder": 23,
+        "image": "/RIVALS/Finishers/wrapped.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yoink",
+        "rarity": "Common",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "yoink",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 24,
+        "image": "/RIVALS/Finishers/yoink.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ascend",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "ascend",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 25,
+        "image": "/RIVALS/Finishers/ascend.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bad Mood",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "bad-mood",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 26,
+        "image": "/RIVALS/Finishers/bad-mood.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bogey",
+        "rarity": "Rare",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "bogey",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 27,
+        "image": "/RIVALS/Finishers/bogey.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bonesplosion",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "bonesplosion",
+        "section": "Event Chest Sources",
+        "sortOrder": 28,
+        "image": "/RIVALS/Finishers/bonesplosion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Collapse",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "collapse",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 29,
+        "image": "/RIVALS/Finishers/collapse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Decorated Player",
+        "rarity": "Rare",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "decorated-player",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 30,
+        "image": "/RIVALS/Finishers/decorated-player.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flick",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "flick",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 31,
+        "image": "/RIVALS/Finishers/flick.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Freeze",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "freeze",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 32,
+        "image": "/RIVALS/Finishers/freeze.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Event Chest Sources",
+        "sortOrder": 33,
+        "image": "/RIVALS/Finishers/frozen.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbreadify",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "gingerbreadify",
+        "section": "Event Chest Sources",
+        "sortOrder": 34,
+        "image": "/RIVALS/Finishers/gingerbreadify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heavy Head",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "heavy-head",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 35,
+        "image": "/RIVALS/Finishers/heavy-head.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "High Gravity",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "high-gravity",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 36,
+        "image": "/RIVALS/Finishers/high-gravity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hooked",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "hooked",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 37,
+        "image": "/RIVALS/Finishers/hooked.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Soul",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "lost-soul",
+        "section": "Event Chest Sources",
+        "sortOrder": 38,
+        "image": "/RIVALS/Finishers/lost-soul.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Midas Touch",
+        "rarity": "Rare",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "Contracts",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "midas-touch",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 39,
+        "image": "/RIVALS/Finishers/midas-touch.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Reaper",
+        "rarity": "Rare",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "reaper",
+        "section": "Event Chest Sources",
+        "sortOrder": 40,
+        "image": "/RIVALS/Finishers/reaper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roadrunner",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "roadrunner",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 41,
+        "image": "/RIVALS/Finishers/roadrunner.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rush",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "rush",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 42,
+        "image": "/RIVALS/Finishers/rush.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowmanify",
+        "rarity": "Rare",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "snowmanify",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 43,
+        "image": "/RIVALS/Finishers/snowmanify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Splatter",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "splatter",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 44,
+        "image": "/RIVALS/Finishers/splatter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tremble",
+        "rarity": "Rare",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "tremble",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 45,
+        "image": "/RIVALS/Finishers/tremble.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Warp Sickness",
+        "rarity": "Rare",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "warp-sickness",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 46,
+        "image": "/RIVALS/Finishers/warp-sickness.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Balloons",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "balloons",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 47,
+        "image": "/RIVALS/Finishers/balloons.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beacon",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Energy Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "beacon",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 48,
+        "image": "/RIVALS/Finishers/beacon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "BONK!",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "bonk",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 49,
+        "image": "/RIVALS/Finishers/bonk.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Boogie",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Standard Weapons Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "boogie",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 50,
+        "image": "/RIVALS/Finishers/boogie.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Broom Ride",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "broom-ride",
+        "section": "Event Chest Sources",
+        "sortOrder": 51,
+        "image": "/RIVALS/Finishers/broom-ride.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chark Attack",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "chark-attack",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 52,
+        "image": "/RIVALS/Finishers/chark-attack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Clapped",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "clapped",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 53,
+        "image": "/RIVALS/Finishers/clapped.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crushed",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "crushed",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 54,
+        "image": "/RIVALS/Finishers/crushed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Darkheart",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "darkheart",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 55,
+        "image": "/RIVALS/Finishers/darkheart.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "David",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "david",
+        "section": "Event Chest Sources",
+        "sortOrder": 56,
+        "image": "/RIVALS/Finishers/david.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dematerialize",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Nostalgia Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "dematerialize",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Hands",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "Contracts",
+        "availability": "Contract reward"
+      },
+      "system": {
+        "slug": "diamond-hands",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 58,
+        "image": "/RIVALS/Finishers/diamond-hands.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Disintegrate",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "disintegrate",
+        "section": "Event Chest Sources",
+        "sortOrder": 59,
+        "image": "/RIVALS/Finishers/disintegrate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "DRIP",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Candy bundles",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "drip",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 60,
+        "image": "/RIVALS/Finishers/drip.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Electrocute",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "electrocute",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 61,
+        "image": "/RIVALS/Finishers/electrocute.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Enlightened",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "enlightened",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 62,
+        "image": "/RIVALS/Finishers/enlightened.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Erased",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "RPG Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "erased",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 63,
+        "image": "/RIVALS/Finishers/erased.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Falling Icicles",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop",
+        "availability": "Shop purchase"
+      },
+      "system": {
+        "slug": "falling-icicles",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 64,
+        "image": "/RIVALS/Finishers/falling-icicles.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework Show",
+        "rarity": "Legendary",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass Season 2",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "firework-show",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 65,
+        "image": "/RIVALS/Finishers/firework-show.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Giant Ice Spike",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Crystal bundles",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "giant-ice-spike",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 66,
+        "image": "/RIVALS/Finishers/giant-ice-spike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Giant Snowball",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Contraband Bundle from Season 2",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "giant-snowball",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 67,
+        "image": "/RIVALS/Finishers/giant-snowball.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "GOOAAALLLL",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "gooaaallll",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 68,
+        "image": "/RIVALS/Finishers/gooaaallll.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heartbeat",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Medkit Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "heartbeat",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 69,
+        "image": "/RIVALS/Finishers/heartbeat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ignite",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Heavy Duty Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "ignite",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 70,
+        "image": "/RIVALS/Finishers/ignite.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Impaled",
+        "rarity": "Legendary",
+        "sourceType": "Season or ranked",
+        "source": "Ranked Shop",
+        "availability": "Ranked shop source"
+      },
+      "system": {
+        "slug": "impaled",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 71,
+        "image": "/RIVALS/Finishers/impaled.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Inflate",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Balloon Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "inflate",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Instability",
+        "rarity": "Legendary",
+        "sourceType": "Season or ranked",
+        "source": "Season Pass from Season 1",
+        "availability": "Season pass source"
+      },
+      "system": {
+        "slug": "instability",
+        "section": "Season and Ranked Sources",
+        "sortOrder": 73,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Leprechaunify",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Lucky Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "leprechaunify",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 74,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Low Gravity",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Exogun Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "low-gravity",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 75,
+        "image": "/RIVALS/Finishers/low-gravity.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "OOF",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Classic Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "oof",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 76,
+        "image": "/RIVALS/Finishers/oof.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Opulent",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Key Bundles",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "opulent",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 77,
+        "image": "/RIVALS/Finishers/opulent.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orbital Strike",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "orbital-strike",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 78,
+        "image": "/RIVALS/Finishers/orbital-strike.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pixel Coins",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Pixel Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "pixel-coins",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 79,
+        "image": "/RIVALS/Finishers/pixel-coins.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plushify",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "UGC Items milestone",
+        "availability": "UGC milestone"
+      },
+      "system": {
+        "slug": "plushify",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Poof",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Lovely Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "poof",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 81,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Barf",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack 2",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "rainbow-barf",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 82,
+        "image": "/RIVALS/Finishers/rainbow-barf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RIP",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop",
+        "availability": "Shop purchase"
+      },
+      "system": {
+        "slug": "rip",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 83,
+        "image": "/RIVALS/Finishers/rip.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sleigh Away",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop",
+        "availability": "Shop purchase"
+      },
+      "system": {
+        "slug": "sleigh-away",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 84,
+        "image": "/RIVALS/Finishers/sleigh-away.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowballed",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Jolly Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "snowballed",
+        "section": "Event Chest Sources",
+        "sortOrder": 85,
+        "image": "/RIVALS/Finishers/snowballed.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Spaghettified",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Contraband Bundle from Season 1",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "spaghettified",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 86,
+        "image": "/RIVALS/Finishers/spaghettified.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stiff",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Starter Bundle",
+        "availability": "Bundle source"
+      },
+      "system": {
+        "slug": "stiff",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 87,
+        "image": "/RIVALS/Finishers/stiff.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Those Who Know",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop (retired)",
+        "availability": "Retired shop source"
+      },
+      "system": {
+        "slug": "those-who-know",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 88,
+        "image": "/RIVALS/Finishers/those-who-know.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tough Crowd",
+        "rarity": "Legendary",
+        "sourceType": "Pack",
+        "source": "Finisher Pack",
+        "availability": "Pack source"
+      },
+      "system": {
+        "slug": "tough-crowd",
+        "section": "Finisher Pack Sources",
+        "sortOrder": 89,
+        "image": "/RIVALS/Finishers/tough-crowd.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombified",
+        "rarity": "Legendary",
+        "sourceType": "Event chest",
+        "source": "Haunted Chest",
+        "availability": "Event chest source"
+      },
+      "system": {
+        "slug": "zombified",
+        "section": "Event Chest Sources",
+        "sortOrder": 90,
+        "image": "/RIVALS/Finishers/zombified.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "5B Visits",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "5B Visits milestone",
+        "availability": "Visit milestone"
+      },
+      "system": {
+        "slug": "5b-visits",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 91,
+        "image": "/RIVALS/Finishers/5b-visits.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Director's Cut",
+        "rarity": "Legendary",
+        "sourceType": "Bundle or shop",
+        "source": "Shop video ad",
+        "availability": "Shop video reward"
+      },
+      "system": {
+        "slug": "director-s-cut",
+        "section": "Bundle and Shop Sources",
+        "sortOrder": 92,
+        "image": "/RIVALS/Finishers/director-s-cut.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elfify",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "2025 Advent Calendar",
+        "availability": "Advent reward"
+      },
+      "system": {
+        "slug": "elfify",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 93,
+        "image": "/RIVALS/Finishers/elfify.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly Judgement",
+        "rarity": "Legendary",
+        "sourceType": "Contract, UGC, or milestone",
+        "source": "2024 Advent Calendar",
+        "availability": "Advent reward"
+      },
+      "system": {
+        "slug": "jolly-judgement",
+        "section": "Contract, UGC, and Milestone Sources",
+        "sortOrder": 94,
+        "image": "/RIVALS/Finishers/jolly-judgement.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ragdoll",
+        "rarity": "Unobtainable",
+        "sourceType": "Default or unobtainable",
+        "source": "No finisher equipped",
+        "availability": "Default fallback"
+      },
+      "system": {
+        "slug": "ragdoll",
+        "section": "Default and Unobtainable",
+        "sortOrder": 95,
+        "image": "/RIVALS/Finishers/ragdoll.webp"
+      }
     }
   ]
 }

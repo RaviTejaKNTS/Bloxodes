@@ -1,16 +1,12 @@
 {
   "meta": {
-    "title": "Sailor Piece runes data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Sailor Piece Wiki - runes",
-        "url": "https://sailorpiece.org/wiki/runes/",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Sailor Piece",
+    "gameSlug": "sailor-piece",
+    "collection": "runes",
+    "route": "/wiki/sailor-piece/runes",
+    "catalogCode": "sailor-piece-runes",
+    "itemFields": [
       "tier",
       "displayRarity",
       "source",
@@ -18,713 +14,351 @@
       "baseEffect",
       "maxEffect",
       "bestFor",
-      "dropNote"
-    ]
+      "dropNote",
+      "rarity",
+      "description",
+      "stats"
+    ],
+    "columns": [
+      "tier",
+      "displayRarity",
+      "source",
+      "bonusType",
+      "baseEffect",
+      "maxEffect",
+      "bestFor",
+      "dropNote",
+      "rarity",
+      "description",
+      "stats"
+    ],
+    "display": {
+      "groupLabel": "tier",
+      "sectionOrder": [
+        "S+",
+        "S",
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "rarity"
+      ],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "tier",
+        "displayRarity",
+        "source",
+        "bonusType",
+        "baseEffect",
+        "maxEffect"
+      ],
+      "tableFields": [
+        "tier",
+        "displayRarity",
+        "source",
+        "bonusType",
+        "baseEffect",
+        "maxEffect",
+        "bestFor",
+        "dropNote"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Havoc Rune",
-      "slug": "havoc-rune",
-      "image": null,
-      "tier": "S+",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "The highest flat damage rune in the game. Havoc Rune provides the strongest raw damage multiplier of all runes, making it the recommended first rune for new players and endgame builds alike. Added in the Huge Update (March 10, 2026) and confirmed as the Best Rune by official Discord FAQ.",
-      "stats": {
-        "rune_dungeon": "0 Frags",
-        "damage": "top-tier",
-        "bonus_type": "Global Damage Multiplier",
-        "scaling": "Highest flat damage bonus of all runes (scales with rune level up to Lv50)",
-        "location": "Rune Dungeon — rare drop",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Global Damage Multiplier"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "Highest flat damage bonus of all runes (scales with rune level up to Lv50)"
-            },
-            {
-              "Property": "Location",
-              "Value": "Rune Dungeon — rare drop"
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Havoc Rune",
+        "tier": "S+",
+        "source": "Rune Dungeon: rare drop",
+        "bonusType": "Global Damage Multiplier",
+        "maxEffect": "Scales with rune level up to Lv. 50",
+        "bestFor": "Reliable damage rune",
+        "description": "The highest flat damage rune in the game. Havoc Rune provides the strongest raw damage multiplier of all runes, making it the recommended first rune for new players and endgame builds alike. Added in the Huge Update (March 10, 2026) and confirmed as the Best Rune by official Discord FAQ.",
+        "stats": {
+          "rune_dungeon": "0 Frags",
+          "damage": "top-tier",
+          "bonus_type": "Global Damage Multiplier",
+          "scaling": "Highest flat damage bonus of all runes (scales with rune level up to Lv50)",
+          "location": "Rune Dungeon — rare drop",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/havoc-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": null,
-      "source": "Rune Dungeon: rare drop",
-      "bonusType": "Global Damage Multiplier",
-      "baseEffect": null,
-      "maxEffect": "Scales with rune level up to Lv. 50",
-      "bestFor": "Reliable damage rune",
-      "dropNote": null
+      },
+      "system": {
+        "slug": "havoc-rune",
+        "section": "S+",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Primordial Rune",
-      "slug": "primordial-rune",
-      "image": null,
-      "tier": "S+",
-      "rarity": "secret",
-      "type": null,
-      "category": null,
-      "description": "+112% DMG max (Lv.60) — the highest damage bonus rune in Sailor Piece and the best in the S+ tier. Primordial Rune is a Secret rune added in the Massive Update (March 25, 2026), dropped exclusively from Infinite Tower floors at less than 1% chance (Level 8,500+ required). Surpasses Havoc Rune as the top DPS rune. A drop bug was fixed at launch (19:22 March 25). Source: Beebom runes guide (2026-03-26).",
-      "stats": {
-        "infinite_tower_tower_island": "0 Frags",
-        "new": "secret",
-        "bonus_type": "Global Damage Boost",
-        "scaling": "+84% DMG (base Lv.1) → +112% DMG (max Lv.60). Source: Beebom runes guide (2026-03-26).",
-        "location": "Infinite Tower (Tower Island) — less than 1% drop rate from Tower floors. Level 8,500+ required.",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Global Damage Boost"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "+84% DMG (base Lv.1) → +112% DMG (max Lv.60). Source: Beebom runes guide (2026-03-26)."
-            },
-            {
-              "Property": "Location",
-              "Value": "Infinite Tower (Tower Island) — less than 1% drop rate from Tower floors. Level 8,500+ required."
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Primordial Rune",
+        "tier": "S+",
+        "displayRarity": "Secret",
+        "source": "Infinite Tower (Tower Island): less than 1% drop rate from Tower floors. Level 8,500+ required.",
+        "bonusType": "Global Damage Boost",
+        "baseEffect": "+84% DMG at Lv. 1",
+        "maxEffect": "+112% DMG at Lv. 60",
+        "bestFor": "Top Infinite Tower damage chase",
+        "dropNote": "Less than 1% Infinite Tower drop listed locally",
+        "rarity": "secret",
+        "description": "+112% DMG max (Lv.60) — the highest damage bonus rune in Sailor Piece and the best in the S+ tier. Primordial Rune is a Secret rune added in the Massive Update (March 25, 2026), dropped exclusively from Infinite Tower floors at less than 1% chance (Level 8,500+ required). Surpasses Havoc Rune as the top DPS rune. A drop bug was fixed at launch (19:22 March 25). Source: Beebom runes guide (2026-03-26).",
+        "stats": {
+          "infinite_tower_tower_island": "0 Frags",
+          "new": "secret",
+          "bonus_type": "Global Damage Boost",
+          "scaling": "+84% DMG (base Lv.1) → +112% DMG (max Lv.60). Source: Beebom runes guide (2026-03-26).",
+          "location": "Infinite Tower (Tower Island) — less than 1% drop rate from Tower floors. Level 8,500+ required.",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-26",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/primordial-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": "Secret",
-      "source": "Infinite Tower (Tower Island): less than 1% drop rate from Tower floors. Level 8,500+ required.",
-      "bonusType": "Global Damage Boost",
-      "baseEffect": "+84% DMG at Lv. 1",
-      "maxEffect": "+112% DMG at Lv. 60",
-      "bestFor": "Top Infinite Tower damage chase",
-      "dropNote": "Less than 1% Infinite Tower drop listed locally"
+      },
+      "system": {
+        "slug": "primordial-rune",
+        "section": "S+",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Wrath Rune",
-      "slug": "wrath-rune",
-      "image": null,
-      "tier": "S",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "A powerful flat damage bonus rune. Wrath Rune scales from +40% DMG at base to +59% DMG at max level, making it a reliable and versatile damage option for all builds.",
-      "stats": {
-        "rune_dungeon": "0 Frags",
-        "damage": "reliable",
-        "bonus_type": "Flat Damage Bonus",
-        "scaling": "Base: +40% DMG → Max (Lv50): +59% DMG",
-        "location": "Rune Dungeon — rare drop",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Flat Damage Bonus"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "Base: +40% DMG → Max (Lv50): +59% DMG"
-            },
-            {
-              "Property": "Location",
-              "Value": "Rune Dungeon — rare drop"
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Wrath Rune",
+        "tier": "S",
+        "source": "Rune Dungeon: rare drop",
+        "bonusType": "Flat Damage Bonus",
+        "baseEffect": "+40% DMG",
+        "maxEffect": "Max (Lv50): +59% DMG",
+        "bestFor": "Strong practical damage",
+        "description": "A powerful flat damage bonus rune. Wrath Rune scales from +40% DMG at base to +59% DMG at max level, making it a reliable and versatile damage option for all builds.",
+        "stats": {
+          "rune_dungeon": "0 Frags",
+          "damage": "reliable",
+          "bonus_type": "Flat Damage Bonus",
+          "scaling": "Base: +40% DMG → Max (Lv50): +59% DMG",
+          "location": "Rune Dungeon — rare drop",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/wrath-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": null,
-      "source": "Rune Dungeon: rare drop",
-      "bonusType": "Flat Damage Bonus",
-      "baseEffect": "+40% DMG",
-      "maxEffect": "Max (Lv50): +59% DMG",
-      "bestFor": "Strong practical damage",
-      "dropNote": null
+      },
+      "system": {
+        "slug": "wrath-rune",
+        "section": "S",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Fortune Rune",
-      "slug": "fortune-rune",
-      "image": null,
-      "tier": "S",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "The only luck-boosting rune in the game. Fortune Rune scales from +10% Luck at base to +15% Luck at max. Essential for farming builds since Luck is a rare and hard-to-stack stat.",
-      "stats": {
-        "rune_dungeon": "0 Frags",
-        "luck": "farming",
-        "bonus_type": "Luck Multiplier",
-        "scaling": "Base: +10% Luck → Max (Lv50): +15% Luck",
-        "location": "Rune Dungeon — rare drop",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Luck Multiplier"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "Base: +10% Luck → Max (Lv50): +15% Luck"
-            },
-            {
-              "Property": "Location",
-              "Value": "Rune Dungeon — rare drop"
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Fortune Rune",
+        "tier": "S",
+        "source": "Rune Dungeon: rare drop",
+        "bonusType": "Luck Multiplier",
+        "baseEffect": "+10% Luck",
+        "maxEffect": "Max (Lv50): +15% Luck",
+        "bestFor": "Luck farming",
+        "description": "The only luck-boosting rune in the game. Fortune Rune scales from +10% Luck at base to +15% Luck at max. Essential for farming builds since Luck is a rare and hard-to-stack stat.",
+        "stats": {
+          "rune_dungeon": "0 Frags",
+          "luck": "farming",
+          "bonus_type": "Luck Multiplier",
+          "scaling": "Base: +10% Luck → Max (Lv50): +15% Luck",
+          "location": "Rune Dungeon — rare drop",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/fortune-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": null,
-      "source": "Rune Dungeon: rare drop",
-      "bonusType": "Luck Multiplier",
-      "baseEffect": "+10% Luck",
-      "maxEffect": "Max (Lv50): +15% Luck",
-      "bestFor": "Luck farming",
-      "dropNote": null
+      },
+      "system": {
+        "slug": "fortune-rune",
+        "section": "S",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Radiant Rune",
-      "slug": "radiant-rune",
-      "image": null,
-      "tier": "S",
-      "rarity": "secret",
-      "type": null,
-      "category": null,
-      "description": "A Secret rune added in the Massive Update (March 25, 2026), obtained exclusively from the Infinite Tower. The Radiant Rune provides a Luck bonus, improving drop rates for rare items across the game — complementing Primordial Rune which focuses on damage. Exact max value is +26% Luck at max level. Source: Beebom runes guide (2026-03-26, provisional).",
-      "stats": {
-        "infinite_tower_tower_island": "0 Frags",
-        "new": "secret",
-        "bonus_type": "Luck / Drop Rate Boost",
-        "scaling": "+26% Luck (max Lv.60) [Provisional — awaiting Discord confirmation]. Source: Beebom (2026-03-26).",
-        "location": "Infinite Tower (Tower Island) — rare drop from Tower floors. Level 8,500+ required.",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Luck / Drop Rate Boost"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "+26% Luck (max Lv.60) [Provisional — awaiting Discord confirmation]. Source: Beebom (2026-03-26)."
-            },
-            {
-              "Property": "Location",
-              "Value": "Infinite Tower (Tower Island) — rare drop from Tower floors. Level 8,500+ required."
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Radiant Rune",
+        "tier": "S",
+        "displayRarity": "Secret",
+        "source": "Infinite Tower (Tower Island): rare drop from Tower floors. Level 8,500+ required.",
+        "bonusType": "Luck / Drop Rate Boost",
+        "maxEffect": "+26% Luck at max Lv. 60",
+        "bestFor": "Infinite Tower luck chase",
+        "dropNote": "Infinite Tower rare drop listed locally",
+        "rarity": "secret",
+        "description": "A Secret rune added in the Massive Update (March 25, 2026), obtained exclusively from the Infinite Tower. The Radiant Rune provides a Luck bonus, improving drop rates for rare items across the game — complementing Primordial Rune which focuses on damage. Exact max value is +26% Luck at max level. Source: Beebom runes guide (2026-03-26, provisional).",
+        "stats": {
+          "infinite_tower_tower_island": "0 Frags",
+          "new": "secret",
+          "bonus_type": "Luck / Drop Rate Boost",
+          "scaling": "+26% Luck (max Lv.60) [Provisional — awaiting Discord confirmation]. Source: Beebom (2026-03-26).",
+          "location": "Infinite Tower (Tower Island) — rare drop from Tower floors. Level 8,500+ required.",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-26",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/radiant-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": "Secret",
-      "source": "Infinite Tower (Tower Island): rare drop from Tower floors. Level 8,500+ required.",
-      "bonusType": "Luck / Drop Rate Boost",
-      "baseEffect": null,
-      "maxEffect": "+26% Luck at max Lv. 60",
-      "bestFor": "Infinite Tower luck chase",
-      "dropNote": "Infinite Tower rare drop listed locally"
+      },
+      "system": {
+        "slug": "radiant-rune",
+        "section": "S",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Destruction Rune",
-      "slug": "destruction-rune",
-      "image": null,
-      "tier": "A",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "A solid damage rune providing a flat damage bonus. Destruction Rune scales from +25% DMG at base to +37% DMG at max. A strong alternative to Wrath Rune.",
-      "stats": {
-        "rune_dungeon": "0 Frags",
-        "damage": "alternative",
-        "bonus_type": "Flat Damage Bonus",
-        "scaling": "Base: +25% DMG → Max (Lv50): +37% DMG",
-        "location": "Rune Dungeon — rare drop",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Flat Damage Bonus"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "Base: +25% DMG → Max (Lv50): +37% DMG"
-            },
-            {
-              "Property": "Location",
-              "Value": "Rune Dungeon — rare drop"
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Destruction Rune",
+        "tier": "A",
+        "source": "Rune Dungeon: rare drop",
+        "bonusType": "Flat Damage Bonus",
+        "baseEffect": "+25% DMG",
+        "maxEffect": "Max (Lv50): +37% DMG",
+        "bestFor": "Mid-tier damage fallback",
+        "description": "A solid damage rune providing a flat damage bonus. Destruction Rune scales from +25% DMG at base to +37% DMG at max. A strong alternative to Wrath Rune.",
+        "stats": {
+          "rune_dungeon": "0 Frags",
+          "damage": "alternative",
+          "bonus_type": "Flat Damage Bonus",
+          "scaling": "Base: +25% DMG → Max (Lv50): +37% DMG",
+          "location": "Rune Dungeon — rare drop",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/destruction-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": null,
-      "source": "Rune Dungeon: rare drop",
-      "bonusType": "Flat Damage Bonus",
-      "baseEffect": "+25% DMG",
-      "maxEffect": "Max (Lv50): +37% DMG",
-      "bestFor": "Mid-tier damage fallback",
-      "dropNote": null
+      },
+      "system": {
+        "slug": "destruction-rune",
+        "section": "A",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Inferno Rune",
-      "slug": "inferno-rune",
-      "image": null,
-      "tier": "B",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "Applies a burning DoT to enemies on hit. At max level, Inferno Rune deals 104% of total damage over 4 seconds, a solid sustained DPS option for boss fights.",
-      "stats": {
-        "rune_dungeon": "0 Frags",
-        "burn": "dot",
-        "bonus_type": "Burn DoT Damage",
-        "scaling": "Base: 70% total DMG over 4s → Max (Lv50): 104% total DMG over 4s",
-        "location": "Rune Dungeon — rare drop",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Burn DoT Damage"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "Base: 70% total DMG over 4s → Max (Lv50): 104% total DMG over 4s"
-            },
-            {
-              "Property": "Location",
-              "Value": "Rune Dungeon — rare drop"
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Inferno Rune",
+        "tier": "B",
+        "source": "Rune Dungeon: rare drop",
+        "bonusType": "Burn DoT Damage",
+        "baseEffect": "70% total DMG over 4s",
+        "maxEffect": "Max (Lv50): 104% total DMG over 4s",
+        "bestFor": "Burn damage over time",
+        "description": "Applies a burning DoT to enemies on hit. At max level, Inferno Rune deals 104% of total damage over 4 seconds, a solid sustained DPS option for boss fights.",
+        "stats": {
+          "rune_dungeon": "0 Frags",
+          "burn": "dot",
+          "bonus_type": "Burn DoT Damage",
+          "scaling": "Base: 70% total DMG over 4s → Max (Lv50): 104% total DMG over 4s",
+          "location": "Rune Dungeon — rare drop",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/inferno-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": null,
-      "source": "Rune Dungeon: rare drop",
-      "bonusType": "Burn DoT Damage",
-      "baseEffect": "70% total DMG over 4s",
-      "maxEffect": "Max (Lv50): 104% total DMG over 4s",
-      "bestFor": "Burn damage over time",
-      "dropNote": null
+      },
+      "system": {
+        "slug": "inferno-rune",
+        "section": "B",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Blood Rune",
-      "slug": "blood-rune",
-      "image": null,
-      "tier": "B",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "Inflicts a bleed effect on enemies, dealing damage over 5 seconds. Blood Rune scales from 65% bleed damage at base to 97% at max level. Longer duration than Inferno Rune but slightly lower total damage.",
-      "stats": {
-        "rune_dungeon": "0 Frags",
-        "bleed": "dot",
-        "bonus_type": "Bleed DoT Damage",
-        "scaling": "Base: 65% total DMG over 5s → Max (Lv50): 97% total DMG over 5s",
-        "location": "Rune Dungeon — rare drop",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Bleed DoT Damage"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "Base: 65% total DMG over 5s → Max (Lv50): 97% total DMG over 5s"
-            },
-            {
-              "Property": "Location",
-              "Value": "Rune Dungeon — rare drop"
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Blood Rune",
+        "tier": "B",
+        "source": "Rune Dungeon: rare drop",
+        "bonusType": "Bleed DoT Damage",
+        "baseEffect": "65% total DMG over 5s",
+        "maxEffect": "Max (Lv50): 97% total DMG over 5s",
+        "bestFor": "Bleed damage over time",
+        "description": "Inflicts a bleed effect on enemies, dealing damage over 5 seconds. Blood Rune scales from 65% bleed damage at base to 97% at max level. Longer duration than Inferno Rune but slightly lower total damage.",
+        "stats": {
+          "rune_dungeon": "0 Frags",
+          "bleed": "dot",
+          "bonus_type": "Bleed DoT Damage",
+          "scaling": "Base: 65% total DMG over 5s → Max (Lv50): 97% total DMG over 5s",
+          "location": "Rune Dungeon — rare drop",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/blood-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": null,
-      "source": "Rune Dungeon: rare drop",
-      "bonusType": "Bleed DoT Damage",
-      "baseEffect": "65% total DMG over 5s",
-      "maxEffect": "Max (Lv50): 97% total DMG over 5s",
-      "bestFor": "Bleed damage over time",
-      "dropNote": null
+      },
+      "system": {
+        "slug": "blood-rune",
+        "section": "B",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Frost Rune",
-      "slug": "frost-rune",
-      "image": null,
-      "tier": "B",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "Freezes enemies on hit while dealing bonus impact damage. At max level, Frost Rune freezes enemies for 3 seconds and adds 44% DMG — a strong crowd-control option for PvP.",
-      "stats": {
-        "rune_dungeon": "0 Frags",
-        "freeze": "crowd-control",
-        "bonus_type": "Freeze + Impact Damage",
-        "scaling": "Base: 30% DMG + Freeze 2s → Max (Lv50): 44% DMG + Freeze 3s",
-        "location": "Rune Dungeon — rare drop",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Freeze + Impact Damage"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "Base: 30% DMG + Freeze 2s → Max (Lv50): 44% DMG + Freeze 3s"
-            },
-            {
-              "Property": "Location",
-              "Value": "Rune Dungeon — rare drop"
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Frost Rune",
+        "tier": "B",
+        "source": "Rune Dungeon: rare drop",
+        "bonusType": "Freeze + Impact Damage",
+        "baseEffect": "30% DMG + Freeze 2s",
+        "maxEffect": "Max (Lv50): 44% DMG + Freeze 3s",
+        "bestFor": "PvP control and freeze",
+        "description": "Freezes enemies on hit while dealing bonus impact damage. At max level, Frost Rune freezes enemies for 3 seconds and adds 44% DMG — a strong crowd-control option for PvP.",
+        "stats": {
+          "rune_dungeon": "0 Frags",
+          "freeze": "crowd-control",
+          "bonus_type": "Freeze + Impact Damage",
+          "scaling": "Base: 30% DMG + Freeze 2s → Max (Lv50): 44% DMG + Freeze 3s",
+          "location": "Rune Dungeon — rare drop",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/frost-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": null,
-      "source": "Rune Dungeon: rare drop",
-      "bonusType": "Freeze + Impact Damage",
-      "baseEffect": "30% DMG + Freeze 2s",
-      "maxEffect": "Max (Lv50): 44% DMG + Freeze 3s",
-      "bestFor": "PvP control and freeze",
-      "dropNote": null
+      },
+      "system": {
+        "slug": "frost-rune",
+        "section": "B",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Guardian Rune",
-      "slug": "guardian-rune",
-      "image": null,
-      "tier": "C",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "A defensive rune providing an HP bonus. Guardian Rune scales from +39% Max HP at base to +59% Max HP at max level. Useful for tank builds but outclassed by damage runes in most scenarios.",
-      "stats": {
-        "rune_dungeon": "0 Frags",
-        "defense": "hp",
-        "bonus_type": "Max HP Bonus",
-        "scaling": "Base: +39% Max HP → Max (Lv50): +59% Max HP",
-        "location": "Rune Dungeon — rare drop",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Max HP Bonus"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "Base: +39% Max HP → Max (Lv50): +59% Max HP"
-            },
-            {
-              "Property": "Location",
-              "Value": "Rune Dungeon — rare drop"
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Guardian Rune",
+        "tier": "C",
+        "source": "Rune Dungeon: rare drop",
+        "bonusType": "Max HP Bonus",
+        "baseEffect": "+39% Max HP",
+        "maxEffect": "Max (Lv50): +59% Max HP",
+        "bestFor": "Tank HP builds",
+        "description": "A defensive rune providing an HP bonus. Guardian Rune scales from +39% Max HP at base to +59% Max HP at max level. Useful for tank builds but outclassed by damage runes in most scenarios.",
+        "stats": {
+          "rune_dungeon": "0 Frags",
+          "defense": "hp",
+          "bonus_type": "Max HP Bonus",
+          "scaling": "Base: +39% Max HP → Max (Lv50): +59% Max HP",
+          "location": "Rune Dungeon — rare drop",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/guardian-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": null,
-      "source": "Rune Dungeon: rare drop",
-      "bonusType": "Max HP Bonus",
-      "baseEffect": "+39% Max HP",
-      "maxEffect": "Max (Lv50): +59% Max HP",
-      "bestFor": "Tank HP builds",
-      "dropNote": null
+      },
+      "system": {
+        "slug": "guardian-rune",
+        "section": "C",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Suppression Rune",
-      "slug": "suppression-rune",
-      "image": null,
-      "tier": "D",
-      "rarity": null,
-      "type": null,
-      "category": null,
-      "description": "The weakest rune, providing minor damage reduction. Suppression Rune scales from 10% to 15% DMG Reduction. Outclassed by all other runes for most builds.",
-      "stats": {
-        "rune_dungeon": "0 Frags",
-        "defense": "damage-reduction",
-        "bonus_type": "Damage Reduction",
-        "scaling": "Base: 10% DMG Reduction → Max (Lv50): 15% DMG Reduction",
-        "location": "Rune Dungeon — rare drop",
-        "cost_fragments": "Free (drop)"
-      },
-      "abilities": [],
-      "drops": [],
-      "pros": [],
-      "cons": [],
-      "acquisition": null,
-      "unlock": null,
-      "strategy": null,
-      "obtainment": null,
-      "usageTips": null,
-      "sections": [
-        {
-          "title": null,
-          "headers": [
-            "Property",
-            "Value"
-          ],
-          "rows": [
-            {
-              "Property": "Bonus Type",
-              "Value": "Damage Reduction"
-            },
-            {
-              "Property": "Scaling",
-              "Value": "Base: 10% DMG Reduction → Max (Lv50): 15% DMG Reduction"
-            },
-            {
-              "Property": "Location",
-              "Value": "Rune Dungeon — rare drop"
-            },
-            {
-              "Property": "Cost (Fragments)",
-              "Value": "Free (drop)"
-            }
-          ]
+      "item": {
+        "name": "Suppression Rune",
+        "tier": "D",
+        "source": "Rune Dungeon: rare drop",
+        "bonusType": "Damage Reduction",
+        "baseEffect": "10% DMG Reduction",
+        "maxEffect": "Max (Lv50): 15% DMG Reduction",
+        "bestFor": "Starter damage reduction fallback",
+        "description": "The weakest rune, providing minor damage reduction. Suppression Rune scales from 10% to 15% DMG Reduction. Outclassed by all other runes for most builds.",
+        "stats": {
+          "rune_dungeon": "0 Frags",
+          "defense": "damage-reduction",
+          "bonus_type": "Damage Reduction",
+          "scaling": "Base: 10% DMG Reduction → Max (Lv50): 15% DMG Reduction",
+          "location": "Rune Dungeon — rare drop",
+          "cost_fragments": "Free (drop)"
         }
-      ],
-      "updatedAt": "2026-03-15",
-      "wikiUrl": "https://sailorpiece.org/wiki/runes/suppression-rune/",
-      "sourceImageUrl": null,
-      "displayRarity": null,
-      "source": "Rune Dungeon: rare drop",
-      "bonusType": "Damage Reduction",
-      "baseEffect": "10% DMG Reduction",
-      "maxEffect": "Max (Lv50): 15% DMG Reduction",
-      "bestFor": "Starter damage reduction fallback",
-      "dropNote": null
+      },
+      "system": {
+        "slug": "suppression-rune",
+        "section": "D",
+        "sortOrder": 11,
+        "image": null
+      }
     }
   ]
 }

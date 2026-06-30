@@ -1,151 +1,164 @@
 {
   "meta": {
-    "title": "Slime RNG power fruits data",
-    "updatedAt": "2026-05-24",
-    "sources": [
-      {
-        "label": "Slime RNG Wiki - Power Fruits",
-        "url": "https://slime-rng.fandom.com/wiki/Power_Fruits",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Slime RNG Wiki - Lightning Fruit",
-        "url": "https://slime-rng.fandom.com/wiki/Lightning_Fruit",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Slime RNG Wiki - Fire Fruit",
-        "url": "https://slime-rng.fandom.com/wiki/Fire_Fruit",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Slime RNG Wiki - Ice Fruit",
-        "url": "https://slime-rng.fandom.com/wiki/Ice_Fruit",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Slime RNG Wiki - Sword Fruit",
-        "url": "https://slime-rng.fandom.com/wiki/Sword_Fruit",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Slime RNG Wiki - Magician Fruit",
-        "url": "https://slime-rng.fandom.com/wiki/Magician_Fruit",
-        "accessed": "2026-05-24"
-      },
-      {
-        "label": "Slime RNG Wiki - Universe Fruit",
-        "url": "https://slime-rng.fandom.com/wiki/Universe_Fruit",
-        "accessed": "2026-05-24"
-      }
-    ],
-    "columns": [
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Slime RNG",
+    "gameSlug": "slime-rng",
+    "collection": "power-fruits",
+    "route": "/wiki/slime-rng/power-fruits",
+    "catalogCode": "slime-rng-power-fruits",
+    "itemFields": [
       "spawnChance",
       "power",
       "abilityOne",
       "abilityTwo",
       "upgradeNote",
       "restrictions",
-      "image"
-    ]
+      "spawnChanceDenominator"
+    ],
+    "columns": [
+      "spawnChance",
+      "power",
+      "abilityOne",
+      "abilityTwo",
+      "upgradeNote",
+      "restrictions",
+      "spawnChanceDenominator"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "spawnChance",
+        "power",
+        "abilityOne",
+        "abilityTwo",
+        "upgradeNote",
+        "restrictions"
+      ],
+      "tableFields": [
+        "spawnChance",
+        "power",
+        "abilityOne",
+        "abilityTwo",
+        "upgradeNote",
+        "restrictions",
+        "spawnChanceDenominator"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Lightning Fruit",
-      "slug": "lightning-fruit",
-      "collectionSection": "Power Fruits",
-      "spawnChance": "1 / 1800 per second",
-      "spawnChanceDenominator": 1800,
-      "power": "Lightning",
-      "abilityOne": "Lightning Blast: Blast nearby enemies with lightning.",
-      "abilityTwo": "Chain Lightning: Chain lightning between nearby enemies.",
-      "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
-      "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
-      "image": "/Slime%20RNG/Power%20Fruits/lightning-fruit.webp",
-      "sortOrder": 1,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Lightning Fruit",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/9/95/LightningFruit.png/revision/latest?cb=20260513195532"
+      "item": {
+        "name": "Lightning Fruit",
+        "spawnChance": "1 / 1800 per second",
+        "power": "Lightning",
+        "abilityOne": "Lightning Blast: Blast nearby enemies with lightning.",
+        "abilityTwo": "Chain Lightning: Chain lightning between nearby enemies.",
+        "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
+        "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
+        "spawnChanceDenominator": 1800
+      },
+      "system": {
+        "slug": "lightning-fruit",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Slime%20RNG/Power%20Fruits/lightning-fruit.webp"
+      }
     },
     {
-      "name": "Fire Fruit",
-      "slug": "fire-fruit",
-      "collectionSection": "Power Fruits",
-      "spawnChance": "1 / 2700 per second",
-      "spawnChanceDenominator": 2700,
-      "power": "Fire",
-      "abilityOne": "Fire Blast: Massive fire explosion in a wide radius.",
-      "abilityTwo": "Fire Ball: Launch a blazing fireball.",
-      "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
-      "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
-      "image": "/Slime%20RNG/Power%20Fruits/fire-fruit.webp",
-      "sortOrder": 2,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Fire Fruit",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/3/36/FireFruit.png/revision/latest?cb=20260513195614"
+      "item": {
+        "name": "Fire Fruit",
+        "spawnChance": "1 / 2700 per second",
+        "power": "Fire",
+        "abilityOne": "Fire Blast: Massive fire explosion in a wide radius.",
+        "abilityTwo": "Fire Ball: Launch a blazing fireball.",
+        "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
+        "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
+        "spawnChanceDenominator": 2700
+      },
+      "system": {
+        "slug": "fire-fruit",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Slime%20RNG/Power%20Fruits/fire-fruit.webp"
+      }
     },
     {
-      "name": "Ice Fruit",
-      "slug": "ice-fruit",
-      "collectionSection": "Power Fruits",
-      "spawnChance": "1 / 4800 per second",
-      "spawnChanceDenominator": 4800,
-      "power": "Ice",
-      "abilityOne": "Frost Spike: Impale enemies with rising ice.",
-      "abilityTwo": "Frost Shard: Launch a sharp ice shard at the target.",
-      "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
-      "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
-      "image": "/Slime%20RNG/Power%20Fruits/ice-fruit.webp",
-      "sortOrder": 3,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Ice Fruit",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/7/74/IceFruit.png/revision/latest?cb=20260513195649"
+      "item": {
+        "name": "Ice Fruit",
+        "spawnChance": "1 / 4800 per second",
+        "power": "Ice",
+        "abilityOne": "Frost Spike: Impale enemies with rising ice.",
+        "abilityTwo": "Frost Shard: Launch a sharp ice shard at the target.",
+        "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
+        "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
+        "spawnChanceDenominator": 4800
+      },
+      "system": {
+        "slug": "ice-fruit",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Slime%20RNG/Power%20Fruits/ice-fruit.webp"
+      }
     },
     {
-      "name": "Sword Fruit",
-      "slug": "sword-fruit",
-      "collectionSection": "Power Fruits",
-      "spawnChance": "1 / 9000 per second",
-      "spawnChanceDenominator": 9000,
-      "power": "Sword",
-      "abilityOne": "Sky Sword: Call down a giant sky sword.",
-      "abilityTwo": "Sword Slash: Slash the target with a swift blade.",
-      "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
-      "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
-      "image": "/Slime%20RNG/Power%20Fruits/sword-fruit.webp",
-      "sortOrder": 4,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Sword Fruit",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/a/ab/SwordFruit.png/revision/latest?cb=20260513195717"
+      "item": {
+        "name": "Sword Fruit",
+        "spawnChance": "1 / 9000 per second",
+        "power": "Sword",
+        "abilityOne": "Sky Sword: Call down a giant sky sword.",
+        "abilityTwo": "Sword Slash: Slash the target with a swift blade.",
+        "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
+        "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
+        "spawnChanceDenominator": 9000
+      },
+      "system": {
+        "slug": "sword-fruit",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Slime%20RNG/Power%20Fruits/sword-fruit.webp"
+      }
     },
     {
-      "name": "Magician Fruit",
-      "slug": "magician-fruit",
-      "collectionSection": "Power Fruits",
-      "spawnChance": "1 / 14400 per second",
-      "spawnChanceDenominator": 14400,
-      "power": "Magician",
-      "abilityOne": "Bowling Hat: Drop a bowling ball from a top hat.",
-      "abilityTwo": "Card Throw: Throw slicing magic cards.",
-      "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
-      "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
-      "image": "/Slime%20RNG/Power%20Fruits/magician-fruit.webp",
-      "sortOrder": 5,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Magician Fruit",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/e/e7/MagicianFruit.png/revision/latest?cb=20260513195751"
+      "item": {
+        "name": "Magician Fruit",
+        "spawnChance": "1 / 14400 per second",
+        "power": "Magician",
+        "abilityOne": "Bowling Hat: Drop a bowling ball from a top hat.",
+        "abilityTwo": "Card Throw: Throw slicing magic cards.",
+        "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
+        "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
+        "spawnChanceDenominator": 14400
+      },
+      "system": {
+        "slug": "magician-fruit",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Slime%20RNG/Power%20Fruits/magician-fruit.webp"
+      }
     },
     {
-      "name": "Universe Fruit",
-      "slug": "universe-fruit",
-      "collectionSection": "Power Fruits",
-      "spawnChance": "1 / 36000 per second",
-      "spawnChanceDenominator": 36000,
-      "power": "Universe",
-      "abilityOne": null,
-      "abilityTwo": null,
-      "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
-      "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
-      "image": "/Slime%20RNG/Power%20Fruits/universe-fruit.webp",
-      "sortOrder": 6,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Universe Fruit",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/8/88/UniverseFruit.png/revision/latest?cb=20260523031722"
+      "item": {
+        "name": "Universe Fruit",
+        "spawnChance": "1 / 36000 per second",
+        "power": "Universe",
+        "upgradeNote": "Fruits unlock a power first, then upgrades use fruit copies or upgrade points where listed",
+        "restrictions": "One fruit per slime; fruited slimes cannot be used in crafting; fruit must be claimed within 2-3 minutes",
+        "spawnChanceDenominator": 36000
+      },
+      "system": {
+        "slug": "universe-fruit",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Slime%20RNG/Power%20Fruits/universe-fruit.webp"
+      }
     }
   ]
 }

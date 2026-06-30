@@ -1,340 +1,313 @@
 {
   "meta": {
-    "title": "Pet Simulator 99 mastery data",
-    "updatedAt": "2026-06-08",
-    "sources": [
-      {
-        "label": "Pet Simulator Wiki - Mastery (Pet Simulator 99)",
-        "url": "https://pet-simulator.fandom.com/wiki/Mastery_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "Pet Simulator Wiki - Mastery Capes (Pet Simulator 99)",
-        "url": "https://pet-simulator.fandom.com/wiki/Mastery_Capes_%28Pet_Simulator_99%29",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Tech World",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-6",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Electric Update",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-7",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Nightmare Update",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-8",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Olympus World",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-32",
-        "accessed": "2026-06-08"
-      },
-      {
-        "label": "BIG Games - Anniversary Gift",
-        "url": "https://www.biggames.io/post/pet-simulator-99-update-36",
-        "accessed": "2026-06-08"
-      }
-    ],
-    "sourceAudit": {
-      "finalCount": 14,
-      "masterSkillCapeRows": 0,
-      "imageCoverage": "0/14",
-      "notes": [
-        "Current source check confirmed 14 mastery skills. The Master Skill Cape is an all-masteries reward and is not counted as a mastery row.",
-        "Row fields summarize stable XP sources, player use, notable perk themes, and level 99 rewards. Full per-level perk arrays and exact grind formulas are intentionally omitted from default cards.",
-        "Images are intentionally blank until clean row-specific mastery or cape assets are gathered locally."
-      ]
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "mastery",
+    "route": "/wiki/pet-simulator-99/mastery",
+    "catalogCode": "pet-simulator-99-mastery",
+    "itemFields": [
       "activity",
-      "xpSource",
       "bestFor",
       "notablePerks",
       "level99",
       "grindStyle",
       "shortcutNote",
-      "description",
-      "sortOrder",
-      "sourcePage",
-      "sourceCheckedAt",
-      "sourceStatus",
-      "verificationNote"
-    ]
+      "description"
+    ],
+    "columns": [
+      "activity",
+      "bestFor",
+      "notablePerks",
+      "level99",
+      "grindStyle",
+      "shortcutNote",
+      "description"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Core farming and hatching",
+        "Item upgrade and consume loops",
+        "Chest, key, and gift rewards",
+        "Minigame and machine grinds"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "description",
+      "cardDescriptionField": "description",
+      "cardFields": [
+        "activity",
+        "bestFor",
+        "notablePerks",
+        "level99",
+        "grindStyle",
+        "shortcutNote"
+      ],
+      "tableFields": [
+        "activity",
+        "bestFor",
+        "notablePerks",
+        "level99",
+        "grindStyle",
+        "shortcutNote",
+        "description"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Breakables Mastery",
-      "slug": "breakables-mastery",
-      "image": null,
-      "collectionSection": "Core farming and hatching",
-      "activity": "Farming",
-      "xpSource": "Break objects in normal areas",
-      "bestFor": "Long farming sessions and loot grinding",
-      "notablePerks": "Better loot, faster respawns, longer flags, and mini-chest bonuses",
-      "level99": "+100% respawn speed, +21 flag slots, +50% mini-chest spawn chance, 2x flag duration, 5x mini-chest loot, plus Breakables Mastery Cape",
-      "grindStyle": "Natural AFK or active farming grind",
-      "shortcutNote": "Usually worth leveling through normal farming unless you need the final loot perks quickly.",
-      "description": "Breakables Mastery rewards the core PS99 loop of smashing objects for coins, diamonds, and drops. It is one of the easiest masteries to progress while you are already farming.",
-      "sortOrder": 1,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 6",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Launch mastery from Update 6. Card summarizes stable perk themes instead of full per-level table."
+      "item": {
+        "name": "Breakables Mastery",
+        "activity": "Farming",
+        "bestFor": "Long farming sessions and loot grinding",
+        "notablePerks": "Better loot, faster respawns, longer flags, and mini-chest bonuses",
+        "level99": "+100% respawn speed, +21 flag slots, +50% mini-chest spawn chance, 2x flag duration, 5x mini-chest loot, plus Breakables Mastery Cape",
+        "grindStyle": "Natural AFK or active farming grind",
+        "shortcutNote": "Usually worth leveling through normal farming unless you need the final loot perks quickly.",
+        "description": "Breakables Mastery rewards the core PS99 loop of smashing objects for coins, diamonds, and drops. It is one of the easiest masteries to progress while you are already farming."
+      },
+      "system": {
+        "slug": "breakables-mastery",
+        "section": "Core farming and hatching",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Eggs Mastery",
-      "slug": "eggs-mastery",
-      "image": null,
-      "collectionSection": "Core farming and hatching",
-      "activity": "Hatching",
-      "xpSource": "Open eggs",
-      "bestFor": "Players who hatch constantly or chase pet variants",
-      "notablePerks": "Cheaper eggs, faster hatch animation, bonus egg slots, and golden/rainbow hatch chances",
-      "level99": "+5 bonus egg slots, 30% cheaper eggs, and Eggs Mastery Cape",
-      "grindStyle": "Heavy hatch grind",
-      "shortcutNote": "A strong shortcut target for hatch-focused players because normal eggs give very slow progress.",
-      "description": "Eggs Mastery is built for players who spend long sessions hatching. Its best perks reduce hatch friction and make large hatch sessions cheaper and faster.",
-      "sortOrder": 2,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 6",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Exclusive and normal egg XP differ in source table, but default card avoids exact 1-to-99 formulas."
+      "item": {
+        "name": "Eggs Mastery",
+        "activity": "Hatching",
+        "bestFor": "Players who hatch constantly or chase pet variants",
+        "notablePerks": "Cheaper eggs, faster hatch animation, bonus egg slots, and golden/rainbow hatch chances",
+        "level99": "+5 bonus egg slots, 30% cheaper eggs, and Eggs Mastery Cape",
+        "grindStyle": "Heavy hatch grind",
+        "shortcutNote": "A strong shortcut target for hatch-focused players because normal eggs give very slow progress.",
+        "description": "Eggs Mastery is built for players who spend long sessions hatching. Its best perks reduce hatch friction and make large hatch sessions cheaper and faster."
+      },
+      "system": {
+        "slug": "eggs-mastery",
+        "section": "Core farming and hatching",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Pets Mastery",
-      "slug": "pets-mastery",
-      "image": null,
-      "collectionSection": "Core farming and hatching",
-      "activity": "Pet progression",
-      "xpSource": "Use the Gold Machine, Rainbow Machine, Fuse Machine, or Daycare",
-      "bestFor": "Players converting, fusing, or enrolling large pet stacks",
-      "notablePerks": "Faster machines, better gold/rainbow chances, lower pet requirements, and better Daycare rewards",
-      "level99": "-2 pets required for golding and rainbowing, 2x Daycare speed and diamond loot, plus Pets Mastery Cape",
-      "grindStyle": "Machine and inventory-management grind",
-      "shortcutNote": "Useful for players who hate pet conversion chores, but fusing can also train it over time.",
-      "description": "Pets Mastery improves the systems that turn pet stacks into stronger or more useful pets. It overlaps with Fuse Mastery because fusing pets can train both tracks.",
-      "sortOrder": 3,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 7",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Update 7 introduced Pets Mastery; source table states fusing can level both Pets and Fuse Mastery."
+      "item": {
+        "name": "Pets Mastery",
+        "activity": "Pet progression",
+        "bestFor": "Players converting, fusing, or enrolling large pet stacks",
+        "notablePerks": "Faster machines, better gold/rainbow chances, lower pet requirements, and better Daycare rewards",
+        "level99": "-2 pets required for golding and rainbowing, 2x Daycare speed and diamond loot, plus Pets Mastery Cape",
+        "grindStyle": "Machine and inventory-management grind",
+        "shortcutNote": "Useful for players who hate pet conversion chores, but fusing can also train it over time.",
+        "description": "Pets Mastery improves the systems that turn pet stacks into stronger or more useful pets. It overlaps with Fuse Mastery because fusing pets can train both tracks."
+      },
+      "system": {
+        "slug": "pets-mastery",
+        "section": "Core farming and hatching",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Potions Mastery",
-      "slug": "potions-mastery",
-      "image": null,
-      "collectionSection": "Item upgrade and consume loops",
-      "activity": "Potion upgrades",
-      "xpSource": "Consume potions or upgrade potions at the Upgrade Potions Machine",
-      "bestFor": "Players who use boost timers and craft higher potion tiers",
-      "notablePerks": "Longer potion duration, cheaper upgrades, higher tier access, auto-claiming, and multi-type upgrading",
-      "level99": "2x potion duration, upgrade multiple potion types at once, plus Potions Mastery Cape",
-      "grindStyle": "Resource-spending and upgrade-machine grind",
-      "shortcutNote": "Good shortcut value if you use high-tier potions often and want the duration or upgrade perks.",
-      "description": "Potions Mastery makes timed boosts easier to use and upgrade. It is strongest for players who regularly farm with potion timers active.",
-      "sortOrder": 4,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 6",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Potion XP source and level 99 perks verified; exact upgrade formulas are not used in the card."
+      "item": {
+        "name": "Potions Mastery",
+        "activity": "Potion upgrades",
+        "bestFor": "Players who use boost timers and craft higher potion tiers",
+        "notablePerks": "Longer potion duration, cheaper upgrades, higher tier access, auto-claiming, and multi-type upgrading",
+        "level99": "2x potion duration, upgrade multiple potion types at once, plus Potions Mastery Cape",
+        "grindStyle": "Resource-spending and upgrade-machine grind",
+        "shortcutNote": "Good shortcut value if you use high-tier potions often and want the duration or upgrade perks.",
+        "description": "Potions Mastery makes timed boosts easier to use and upgrade. It is strongest for players who regularly farm with potion timers active."
+      },
+      "system": {
+        "slug": "potions-mastery",
+        "section": "Item upgrade and consume loops",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Enchants Mastery",
-      "slug": "enchants-mastery",
-      "image": null,
-      "collectionSection": "Item upgrade and consume loops",
-      "activity": "Enchant upgrades",
-      "xpSource": "Upgrade enchants at the Upgrade Enchants Machine",
-      "bestFor": "Players building stronger enchant loadouts",
-      "notablePerks": "Cheaper upgrades, higher tier equip/craft access, stronger enchant power, and multi-type upgrading",
-      "level99": "25% power from enchants, upgrade multiple enchant types at once, plus Enchants Mastery Cape",
-      "grindStyle": "Upgrade-machine and book-stack grind",
-      "shortcutNote": "Strong for loadout-focused players because tier access and enchant power affect many farming setups.",
-      "description": "Enchants Mastery supports book upgrades and stronger loadouts. It matters most once your farming setup depends on higher-tier enchant books.",
-      "sortOrder": 5,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 6",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Enchant XP source and level 99 perks verified; exact book counts are omitted from default card."
+      "item": {
+        "name": "Enchants Mastery",
+        "activity": "Enchant upgrades",
+        "bestFor": "Players building stronger enchant loadouts",
+        "notablePerks": "Cheaper upgrades, higher tier equip/craft access, stronger enchant power, and multi-type upgrading",
+        "level99": "25% power from enchants, upgrade multiple enchant types at once, plus Enchants Mastery Cape",
+        "grindStyle": "Upgrade-machine and book-stack grind",
+        "shortcutNote": "Strong for loadout-focused players because tier access and enchant power affect many farming setups.",
+        "description": "Enchants Mastery supports book upgrades and stronger loadouts. It matters most once your farming setup depends on higher-tier enchant books."
+      },
+      "system": {
+        "slug": "enchants-mastery",
+        "section": "Item upgrade and consume loops",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Fruits Mastery",
-      "slug": "fruits-mastery",
-      "image": null,
-      "collectionSection": "Item upgrade and consume loops",
-      "activity": "Fruit use",
-      "xpSource": "Consume fruit or craft rainbow and shiny fruit",
-      "bestFor": "Players who keep fruit buffs active",
-      "notablePerks": "Longer fruit duration, cheaper rainbow fruit crafting, larger queues, and automatic fruit use",
-      "level99": "Auto-eat normal and shiny fruit, reduced rainbow crafting cost, 30-fruit buff cap, plus Fruit Mastery Cape",
-      "grindStyle": "Consumable and crafting grind",
-      "shortcutNote": "Better as a shortcut target if you actively use fruit buffs; casual players can train it gradually.",
-      "description": "Fruits Mastery turns fruit from a small consumable habit into a stronger passive buff system. Its late perks are mostly about longer buffs and less manual eating.",
-      "sortOrder": 6,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 7",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Update 7 introduced Fruit Mastery. Row uses normalized plural name for catalog consistency."
+      "item": {
+        "name": "Fruits Mastery",
+        "activity": "Fruit use",
+        "bestFor": "Players who keep fruit buffs active",
+        "notablePerks": "Longer fruit duration, cheaper rainbow fruit crafting, larger queues, and automatic fruit use",
+        "level99": "Auto-eat normal and shiny fruit, reduced rainbow crafting cost, 30-fruit buff cap, plus Fruit Mastery Cape",
+        "grindStyle": "Consumable and crafting grind",
+        "shortcutNote": "Better as a shortcut target if you actively use fruit buffs; casual players can train it gradually.",
+        "description": "Fruits Mastery turns fruit from a small consumable habit into a stronger passive buff system. Its late perks are mostly about longer buffs and less manual eating."
+      },
+      "system": {
+        "slug": "fruits-mastery",
+        "section": "Item upgrade and consume loops",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Economy Mastery",
-      "slug": "economy-mastery",
-      "image": null,
-      "collectionSection": "Chest, key, and gift rewards",
-      "activity": "Shops",
-      "xpSource": "Purchase items from vending machines and merchants",
-      "bestFor": "Players who use vending machines and merchants for items",
-      "notablePerks": "Buy-all vending option, lower prices, faster restocks, more vending stock, and better merchant luck",
-      "level99": "-50% merchant prices, automatic coin vending purchases, free coin vending items, plus Economy Mastery Cape",
-      "grindStyle": "Shop route and spending grind",
-      "shortcutNote": "Usually easy to train if you run merchant and vending routes often.",
-      "description": "Economy Mastery improves the value of shops and vending machines. It is a practical grind for players who already sweep the map for items.",
-      "sortOrder": 7,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 6",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Launch mastery from Update 6. Card keeps XP table hidden and focuses on stable shop benefits."
+      "item": {
+        "name": "Economy Mastery",
+        "activity": "Shops",
+        "bestFor": "Players who use vending machines and merchants for items",
+        "notablePerks": "Buy-all vending option, lower prices, faster restocks, more vending stock, and better merchant luck",
+        "level99": "-50% merchant prices, automatic coin vending purchases, free coin vending items, plus Economy Mastery Cape",
+        "grindStyle": "Shop route and spending grind",
+        "shortcutNote": "Usually easy to train if you run merchant and vending routes often.",
+        "description": "Economy Mastery improves the value of shops and vending machines. It is a practical grind for players who already sweep the map for items."
+      },
+      "system": {
+        "slug": "economy-mastery",
+        "section": "Chest, key, and gift rewards",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Keys Mastery",
-      "slug": "keys-mastery",
-      "image": null,
-      "collectionSection": "Chest, key, and gift rewards",
-      "activity": "Keys",
-      "xpSource": "Use keys and combine key halves",
-      "bestFor": "Players opening key chests or managing key stacks",
-      "notablePerks": "Chance to keep keys, better chest loot, combine-all keys, and free key chances while combining",
-      "level99": "+25% loot from Fantasy, Crystal, Tech, and Void Chests, 2x free-key chances when combining, plus Keys Mastery Cape",
-      "grindStyle": "Key spending and combining grind",
-      "shortcutNote": "Use shortcuts only if key opening is a major part of your routine or you dislike saving key stacks.",
-      "description": "Keys Mastery is for players who open key chests and combine key pieces. Its value depends on how often you actually use key-based reward routes.",
-      "sortOrder": 8,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 8",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Update 8 introduced Keys Mastery. Card summarizes key retention, chest loot, and free-key combining instead of listing every milestone."
+      "item": {
+        "name": "Keys Mastery",
+        "activity": "Keys",
+        "bestFor": "Players opening key chests or managing key stacks",
+        "notablePerks": "Chance to keep keys, better chest loot, combine-all keys, and free key chances while combining",
+        "level99": "+25% loot from Fantasy, Crystal, Tech, and Void Chests, 2x free-key chances when combining, plus Keys Mastery Cape",
+        "grindStyle": "Key spending and combining grind",
+        "shortcutNote": "Use shortcuts only if key opening is a major part of your routine or you dislike saving key stacks.",
+        "description": "Keys Mastery is for players who open key chests and combine key pieces. Its value depends on how often you actually use key-based reward routes."
+      },
+      "system": {
+        "slug": "keys-mastery",
+        "section": "Chest, key, and gift rewards",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Superior Chests Mastery",
-      "slug": "superior-chests-mastery",
-      "image": null,
-      "collectionSection": "Chest, key, and gift rewards",
-      "activity": "Superior chests",
-      "xpSource": "Break Superior Mini Chests",
-      "bestFor": "Players farming Superior Mini Chest spawns and loot",
-      "notablePerks": "Higher Superior Chest spawn chance and multiplied Superior Chest loot",
-      "level99": "+50% Superior Chest spawn chance, 5x Superior Chest loot, plus Superior Chests Mastery Cape",
-      "grindStyle": "Chest-spawn farming grind",
-      "shortcutNote": "A focused shortcut target only if Superior Chest farming is part of your setup.",
-      "description": "Superior Chests Mastery is narrow but useful for players built around mini-chest spawns. It improves both how often the chests appear and how much they pay out.",
-      "sortOrder": 9,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99)",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Source table has section-level perks around spawn chance and loot multipliers; card summarizes instead of listing every milestone."
+      "item": {
+        "name": "Superior Chests Mastery",
+        "activity": "Superior chests",
+        "bestFor": "Players farming Superior Mini Chest spawns and loot",
+        "notablePerks": "Higher Superior Chest spawn chance and multiplied Superior Chest loot",
+        "level99": "+50% Superior Chest spawn chance, 5x Superior Chest loot, plus Superior Chests Mastery Cape",
+        "grindStyle": "Chest-spawn farming grind",
+        "shortcutNote": "A focused shortcut target only if Superior Chest farming is part of your setup.",
+        "description": "Superior Chests Mastery is narrow but useful for players built around mini-chest spawns. It improves both how often the chests appear and how much they pay out."
+      },
+      "system": {
+        "slug": "superior-chests-mastery",
+        "section": "Chest, key, and gift rewards",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Gifts Mastery",
-      "slug": "gifts-mastery",
-      "image": null,
-      "collectionSection": "Chest, key, and gift rewards",
-      "activity": "Gifts",
-      "xpSource": "Open bundles, mini chest items, gift boxes, charm stones, or claim free gifts",
-      "bestFor": "Players opening reward items and collecting free gifts",
-      "notablePerks": "Double-loot chances, faster Free Gift timers, better Charm Stone loot, and auto-claiming",
-      "level99": "Faster Free Gifts, better Charm Stone loot, stronger double-loot chances, plus Gifts Mastery Cape",
-      "grindStyle": "Reward-opening and free-gift grind",
-      "shortcutNote": "Useful if you open many saved gifts; otherwise it can grow slowly through normal rewards.",
-      "description": "Gifts Mastery improves the reward items that pile up during normal play. It is especially useful when you open bundles, mini chests, and free gifts in bulk.",
-      "sortOrder": 10,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99)",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "XP source includes several gift-like item categories; default card keeps full XP table hidden."
+      "item": {
+        "name": "Gifts Mastery",
+        "activity": "Gifts",
+        "bestFor": "Players opening reward items and collecting free gifts",
+        "notablePerks": "Double-loot chances, faster Free Gift timers, better Charm Stone loot, and auto-claiming",
+        "level99": "Faster Free Gifts, better Charm Stone loot, stronger double-loot chances, plus Gifts Mastery Cape",
+        "grindStyle": "Reward-opening and free-gift grind",
+        "shortcutNote": "Useful if you open many saved gifts; otherwise it can grow slowly through normal rewards.",
+        "description": "Gifts Mastery improves the reward items that pile up during normal play. It is especially useful when you open bundles, mini chests, and free gifts in bulk."
+      },
+      "system": {
+        "slug": "gifts-mastery",
+        "section": "Chest, key, and gift rewards",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Boost Exchange Mastery",
-      "slug": "boost-exchange-mastery",
-      "image": null,
-      "collectionSection": "Chest, key, and gift rewards",
-      "activity": "Boost Exchange",
-      "xpSource": "Use the Boost Exchange machine and spend Millionaire Bucks on boosts",
-      "bestFor": "Players who regularly buy boost effects",
-      "notablePerks": "Cheaper boosts, stronger boosts, longer boost duration, and automatic boost buying",
-      "level99": "Boosts are 40% more effective plus Boost Exchange Mastery Cape",
-      "grindStyle": "Boost spending grind",
-      "shortcutNote": "Only prioritize if Boost Exchange is already part of your farming routine.",
-      "description": "Boost Exchange Mastery is tied to buying temporary boost effects with Millionaire Bucks. It is strongest for players who plan farming sessions around those boosts.",
-      "sortOrder": 11,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 32",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Update 32 introduced Boost Exchange Mastery with Fuse Mastery."
+      "item": {
+        "name": "Boost Exchange Mastery",
+        "activity": "Boost Exchange",
+        "bestFor": "Players who regularly buy boost effects",
+        "notablePerks": "Cheaper boosts, stronger boosts, longer boost duration, and automatic boost buying",
+        "level99": "Boosts are 40% more effective plus Boost Exchange Mastery Cape",
+        "grindStyle": "Boost spending grind",
+        "shortcutNote": "Only prioritize if Boost Exchange is already part of your farming routine.",
+        "description": "Boost Exchange Mastery is tied to buying temporary boost effects with Millionaire Bucks. It is strongest for players who plan farming sessions around those boosts."
+      },
+      "system": {
+        "slug": "boost-exchange-mastery",
+        "section": "Chest, key, and gift rewards",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Fishing Mastery",
-      "slug": "fishing-mastery",
-      "image": null,
-      "collectionSection": "Minigame and machine grinds",
-      "activity": "Fishing",
-      "xpSource": "Fish in the Fishing or Advanced Fishing minigames",
-      "bestFor": "Players chasing Deep Pool rewards and fishing Huge chances",
-      "notablePerks": "Faster casting and catching, Deep Pool access, better Deep Pool Huge chance, larger bobber, and rainbow rod chance",
-      "level99": "+50% chance to catch a Huge from Deep Pools, 2x rainbow rod conversion chance, plus Fishing Mastery Cape",
-      "grindStyle": "Focused minigame grind",
-      "shortcutNote": "Good shortcut candidate if you dislike fishing but want Deep Pool perks.",
-      "description": "Fishing Mastery is a focused minigame track. It does not train from every fishing-like activity, so the source minigames matter.",
-      "sortOrder": 12,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 7",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Source states Fishing World catches do not affect this mastery; row keeps that context in description."
+      "item": {
+        "name": "Fishing Mastery",
+        "activity": "Fishing",
+        "bestFor": "Players chasing Deep Pool rewards and fishing Huge chances",
+        "notablePerks": "Faster casting and catching, Deep Pool access, better Deep Pool Huge chance, larger bobber, and rainbow rod chance",
+        "level99": "+50% chance to catch a Huge from Deep Pools, 2x rainbow rod conversion chance, plus Fishing Mastery Cape",
+        "grindStyle": "Focused minigame grind",
+        "shortcutNote": "Good shortcut candidate if you dislike fishing but want Deep Pool perks.",
+        "description": "Fishing Mastery is a focused minigame track. It does not train from every fishing-like activity, so the source minigames matter."
+      },
+      "system": {
+        "slug": "fishing-mastery",
+        "section": "Minigame and machine grinds",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Digging Mastery",
-      "slug": "digging-mastery",
-      "image": null,
-      "collectionSection": "Minigame and machine grinds",
-      "activity": "Digging",
-      "xpSource": "Dig in the Digsite-style minigame route",
-      "bestFor": "Players who farm digging rewards and minigame Huge chances",
-      "notablePerks": "Better Digsite chest drops, more diamonds, better chest find odds, Mastery Chest access, Huge chance, and rainbow shovel chance",
-      "level99": "+35% Digsite chest diamonds, +50% drops, +50% Mastery Chest Huge chance, 2x rainbow shovel chance, plus Digging Mastery Cape",
-      "grindStyle": "Focused minigame grind",
-      "shortcutNote": "A shortcut makes sense only if you want digging rewards but do not enjoy the minigame loop.",
-      "description": "Digging Mastery is another focused minigame track. It is most useful when you spend real time in the digging loop instead of only passing through it.",
-      "sortOrder": 13,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 8",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Update 8 introduced Digging Mastery. Card avoids exact fastest-grind formulas."
+      "item": {
+        "name": "Digging Mastery",
+        "activity": "Digging",
+        "bestFor": "Players who farm digging rewards and minigame Huge chances",
+        "notablePerks": "Better Digsite chest drops, more diamonds, better chest find odds, Mastery Chest access, Huge chance, and rainbow shovel chance",
+        "level99": "+35% Digsite chest diamonds, +50% drops, +50% Mastery Chest Huge chance, 2x rainbow shovel chance, plus Digging Mastery Cape",
+        "grindStyle": "Focused minigame grind",
+        "shortcutNote": "A shortcut makes sense only if you want digging rewards but do not enjoy the minigame loop.",
+        "description": "Digging Mastery is another focused minigame track. It is most useful when you spend real time in the digging loop instead of only passing through it."
+      },
+      "system": {
+        "slug": "digging-mastery",
+        "section": "Minigame and machine grinds",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Fuse Mastery",
-      "slug": "fuse-mastery",
-      "image": null,
-      "collectionSection": "Minigame and machine grinds",
-      "activity": "Fuse Machine",
-      "xpSource": "Fuse pets in the Fuse Machine",
-      "bestFor": "Players turning pet stacks into better results",
-      "notablePerks": "Chance for two pets, better fuse results, faster animation, guaranteed gold/rainbow results at high levels",
-      "level99": "5% chance to get two pets and minimum fuse lowered to 2 pets, plus Fuse Mastery Cape",
-      "grindStyle": "Machine and pet-stack grind",
-      "shortcutNote": "Fusing also trains Pets Mastery, so active fusers may not need to spend a shortcut here first.",
-      "description": "Fuse Mastery improves the Fuse Machine itself. It rewards players who regularly turn extra pets into stronger results.",
-      "sortOrder": 14,
-      "sourcePage": "Pet Simulator Wiki - Mastery (Pet Simulator 99); BIG Games Update 32",
-      "sourceCheckedAt": "2026-06-08",
-      "sourceStatus": "count and perk themes verified from current public source pages",
-      "verificationNote": "Update 32 introduced Fuse Mastery; source says fusing levels both Fuse and Pets Mastery."
+      "item": {
+        "name": "Fuse Mastery",
+        "activity": "Fuse Machine",
+        "bestFor": "Players turning pet stacks into better results",
+        "notablePerks": "Chance for two pets, better fuse results, faster animation, guaranteed gold/rainbow results at high levels",
+        "level99": "5% chance to get two pets and minimum fuse lowered to 2 pets, plus Fuse Mastery Cape",
+        "grindStyle": "Machine and pet-stack grind",
+        "shortcutNote": "Fusing also trains Pets Mastery, so active fusers may not need to spend a shortcut here first.",
+        "description": "Fuse Mastery improves the Fuse Machine itself. It rewards players who regularly turn extra pets into stronger results."
+      },
+      "system": {
+        "slug": "fuse-mastery",
+        "section": "Minigame and machine grinds",
+        "sortOrder": 14,
+        "image": null
+      }
     }
   ]
 }

@@ -1,18 +1,20 @@
 {
   "meta": {
-    "title": "Catch And Tame lassos data",
-    "updatedAt": "2026-06-17",
-    "sources": [
-      {
-        "label": "Catch and Tame Wiki - Lassos",
-        "url": "https://catch-and-tame.wiki/lassos/",
-        "accessed": "2026-06-17"
-      },
-      {
-        "label": "Catch And Tame! Wiki - Shop",
-        "url": "https://catch-and-tame-rblx.fandom.com/wiki/Shop",
-        "accessed": "2026-06-17"
-      }
+    "schemaVersion": 2,
+    "game": "Catch And Tame",
+    "gameSlug": "catch-and-tame",
+    "collection": "lassos",
+    "route": "/wiki/catch-and-tame/lassos",
+    "catalogCode": "catch-and-tame-lassos",
+    "itemFields": [
+      "tier",
+      "rank",
+      "power",
+      "range",
+      "availability",
+      "cardSummary",
+      "bestUse",
+      "limitation"
     ],
     "columns": [
       "tier",
@@ -22,247 +24,291 @@
       "availability",
       "cardSummary",
       "bestUse",
-      "limitation",
-      "collectionSection"
+      "limitation"
     ],
-    "notes": "The standalone Catch and Tame wiki lists 13 lasso rows with rank, power, range, acquisition, and pros/cons. Fandom shop context confirms lassos are purchasable upgrades for taming rarer animals; the direct Fandom lasso page was blocked by a Cloudflare challenge during this pass."
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Basic",
+        "Rare",
+        "Epic",
+        "Legendary",
+        "Rainbow",
+        "Legendary+",
+        "Exclusive"
+      ],
+      "badgeField": "tier",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "tier",
+        "rank",
+        "power",
+        "range",
+        "availability",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "tier",
+        "rank",
+        "power",
+        "range",
+        "availability",
+        "cardSummary",
+        "bestUse",
+        "limitation"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Old Lasso",
-      "slug": "old-lasso",
-      "tier": "Basic",
-      "rank": "D",
-      "power": 0,
-      "range": 12,
-      "availability": "Default starter lasso",
-      "cardSummary": "Free starter option with enough reach for the first catches, but no power scaling.",
-      "bestUse": "Use only until the first affordable upgrade is available.",
-      "limitation": "No power and short range make stronger animals slow or impractical.",
-      "collectionSection": "Basic",
-      "sortOrder": 1,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Old Lasso",
+        "tier": "Basic",
+        "rank": "D",
+        "power": 0,
+        "range": 12,
+        "availability": "Default starter lasso",
+        "cardSummary": "Free starter option with enough reach for the first catches, but no power scaling.",
+        "bestUse": "Use only until the first affordable upgrade is available.",
+        "limitation": "No power and short range make stronger animals slow or impractical."
+      },
+      "system": {
+        "slug": "old-lasso",
+        "section": "Basic",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Wooden Rope",
-      "slug": "wooden-rope",
-      "tier": "Basic",
-      "rank": "D",
-      "power": 1,
-      "range": 10,
-      "availability": "Purchase from early game shop",
-      "cardSummary": "Small power step from the starter lasso, traded against the lowest listed range.",
-      "bestUse": "Buy only as a cheap bridge if range is not causing misses.",
-      "limitation": "The short reach makes it awkward once animals move farther away.",
-      "collectionSection": "Basic",
-      "sortOrder": 2,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Wooden Rope",
+        "tier": "Basic",
+        "rank": "D",
+        "power": 1,
+        "range": 10,
+        "availability": "Purchase from early game shop",
+        "cardSummary": "Small power step from the starter lasso, traded against the lowest listed range.",
+        "bestUse": "Buy only as a cheap bridge if range is not causing misses.",
+        "limitation": "The short reach makes it awkward once animals move farther away."
+      },
+      "system": {
+        "slug": "wooden-rope",
+        "section": "Basic",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Steel Lasso",
-      "slug": "steel-lasso",
-      "tier": "Rare",
-      "rank": "C",
-      "power": 1,
-      "range": 18,
-      "availability": "Shop upgrade",
-      "cardSummary": "Early upgrade that keeps the same low power while giving a more comfortable catch radius.",
-      "bestUse": "Use as the first practical range upgrade for basic farming.",
-      "limitation": "Falls behind when rare animals start needing more power.",
-      "collectionSection": "Rare",
-      "sortOrder": 3,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Steel Lasso",
+        "tier": "Rare",
+        "rank": "C",
+        "power": 1,
+        "range": 18,
+        "availability": "Shop upgrade",
+        "cardSummary": "Early upgrade that keeps the same low power while giving a more comfortable catch radius.",
+        "bestUse": "Use as the first practical range upgrade for basic farming.",
+        "limitation": "Falls behind when rare animals start needing more power."
+      },
+      "system": {
+        "slug": "steel-lasso",
+        "section": "Rare",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Hunter Loop",
-      "slug": "hunter-loop",
-      "tier": "Rare",
-      "rank": "C",
-      "power": 0,
-      "range": 20,
-      "availability": "Shop",
-      "cardSummary": "Range-focused early lasso that helps with positioning but does not improve tame power.",
-      "bestUse": "Use when reach matters more than catch strength.",
-      "limitation": "Zero power makes it unreliable for stronger animals.",
-      "collectionSection": "Rare",
-      "sortOrder": 4,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Hunter Loop",
+        "tier": "Rare",
+        "rank": "C",
+        "power": 0,
+        "range": 20,
+        "availability": "Shop",
+        "cardSummary": "Range-focused early lasso that helps with positioning but does not improve tame power.",
+        "bestUse": "Use when reach matters more than catch strength.",
+        "limitation": "Zero power makes it unreliable for stronger animals."
+      },
+      "system": {
+        "slug": "hunter-loop",
+        "section": "Rare",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Shadow Rope",
-      "slug": "shadow-rope",
-      "tier": "Epic",
-      "rank": "C",
-      "power": 1,
-      "range": 22,
-      "availability": "Shop or crafting",
-      "cardSummary": "Longer reach than earlier shop options, but its power still stays low for the tier.",
-      "bestUse": "Use as a comfort upgrade while saving for a stronger mid-game option.",
-      "limitation": "The low power makes it a weak long-term Epic choice.",
-      "collectionSection": "Epic",
-      "sortOrder": 5,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Shadow Rope",
+        "tier": "Epic",
+        "rank": "C",
+        "power": 1,
+        "range": 22,
+        "availability": "Shop or crafting",
+        "cardSummary": "Longer reach than earlier shop options, but its power still stays low for the tier.",
+        "bestUse": "Use as a comfort upgrade while saving for a stronger mid-game option.",
+        "limitation": "The low power makes it a weak long-term Epic choice."
+      },
+      "system": {
+        "slug": "shadow-rope",
+        "section": "Epic",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Dragon Loop",
-      "slug": "dragon-loop",
-      "tier": "Legendary",
-      "rank": "B",
-      "power": 4,
-      "range": 23,
-      "availability": "Shop or crafting",
-      "cardSummary": "Balanced mid-game lasso with a real power jump and slightly better reach.",
-      "bestUse": "Use for routine mid-game catching before late-biome requirements become demanding.",
-      "limitation": "Not strong enough to be the final answer for tougher late-game catches.",
-      "collectionSection": "Legendary",
-      "sortOrder": 6,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Dragon Loop",
+        "tier": "Legendary",
+        "rank": "B",
+        "power": 4,
+        "range": 23,
+        "availability": "Shop or crafting",
+        "cardSummary": "Balanced mid-game lasso with a real power jump and slightly better reach.",
+        "bestUse": "Use for routine mid-game catching before late-biome requirements become demanding.",
+        "limitation": "Not strong enough to be the final answer for tougher late-game catches."
+      },
+      "system": {
+        "slug": "dragon-loop",
+        "section": "Legendary",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Prism Lasso",
-      "slug": "prism-lasso",
-      "tier": "Rainbow",
-      "rank": "B",
-      "power": 0,
-      "range": 30,
-      "availability": "Gacha or Rainbow Shop",
-      "cardSummary": "Large range option for safer targeting, offset by having no listed power.",
-      "bestUse": "Use when reach and learning catch timing matter more than speed.",
-      "limitation": "Zero power can make each tame take longer than stronger lassos.",
-      "collectionSection": "Rainbow",
-      "sortOrder": 7,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Prism Lasso",
+        "tier": "Rainbow",
+        "rank": "B",
+        "power": 0,
+        "range": 30,
+        "availability": "Gacha or Rainbow Shop",
+        "cardSummary": "Large range option for safer targeting, offset by having no listed power.",
+        "bestUse": "Use when reach and learning catch timing matter more than speed.",
+        "limitation": "Zero power can make each tame take longer than stronger lassos."
+      },
+      "system": {
+        "slug": "prism-lasso",
+        "section": "Rainbow",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Spectral Lasso",
-      "slug": "spectral-lasso",
-      "tier": "Rainbow",
-      "rank": "A",
-      "power": 6,
-      "range": 25,
-      "availability": "Gacha or Rainbow Shop",
-      "cardSummary": "Strong mid-game power pick with less reach than the widest Rainbow option.",
-      "bestUse": "Use when catch strength matters more than maximum distance.",
-      "limitation": "Its range can feel short in wider late-game spaces.",
-      "collectionSection": "Rainbow",
-      "sortOrder": 8,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Spectral Lasso",
+        "tier": "Rainbow",
+        "rank": "A",
+        "power": 6,
+        "range": 25,
+        "availability": "Gacha or Rainbow Shop",
+        "cardSummary": "Strong mid-game power pick with less reach than the widest Rainbow option.",
+        "bestUse": "Use when catch strength matters more than maximum distance.",
+        "limitation": "Its range can feel short in wider late-game spaces."
+      },
+      "system": {
+        "slug": "spectral-lasso",
+        "section": "Rainbow",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Anchor Lasso",
-      "slug": "anchor-lasso",
-      "tier": "Rainbow",
-      "rank": "A",
-      "power": 8,
-      "range": 25,
-      "availability": "Gacha; listed with a higher drop rate than other Rainbow lassos",
-      "cardSummary": "High-power Rainbow lasso with the same mid-range reach as other strength-focused picks.",
-      "bestUse": "Use as a strong upgrade when power is the main bottleneck.",
-      "limitation": "The source notes an occasional swap miss issue.",
-      "collectionSection": "Rainbow",
-      "sortOrder": 9,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Anchor Lasso",
+        "tier": "Rainbow",
+        "rank": "A",
+        "power": 8,
+        "range": 25,
+        "availability": "Gacha; listed with a higher drop rate than other Rainbow lassos",
+        "cardSummary": "High-power Rainbow lasso with the same mid-range reach as other strength-focused picks.",
+        "bestUse": "Use as a strong upgrade when power is the main bottleneck.",
+        "limitation": "The source notes an occasional swap miss issue."
+      },
+      "system": {
+        "slug": "anchor-lasso",
+        "section": "Rainbow",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Sunforge Lasso",
-      "slug": "sunforge-lasso",
-      "tier": "Legendary+",
-      "rank": "A+",
-      "power": 9,
-      "range": 27,
-      "availability": "Shop or Traveling Merchant rotating stock",
-      "cardSummary": "High-end all-rounder with strong power and workable range.",
-      "bestUse": "Use as a reliable late-game bridge when exclusive options are not available.",
-      "limitation": "Merchant stock may rotate, and the source marks it as expensive.",
-      "collectionSection": "Legendary+",
-      "sortOrder": 10,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": "/Catch%20And%20Tame/Lassos/sunforge-lasso.webp",
-      "imageStatus": "local row image from Fandom Shop/Lassos Sunforged Lasso icon",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/catch-and-tame-rblx/images/d/d3/Lasso_Sunforged_Lasso.png/revision/latest?cb=20260211103620"
+      "item": {
+        "name": "Sunforge Lasso",
+        "tier": "Legendary+",
+        "rank": "A+",
+        "power": 9,
+        "range": 27,
+        "availability": "Shop or Traveling Merchant rotating stock",
+        "cardSummary": "High-end all-rounder with strong power and workable range.",
+        "bestUse": "Use as a reliable late-game bridge when exclusive options are not available.",
+        "limitation": "Merchant stock may rotate, and the source marks it as expensive."
+      },
+      "system": {
+        "slug": "sunforge-lasso",
+        "section": "Legendary+",
+        "sortOrder": 10,
+        "image": "/Catch%20And%20Tame/Lassos/sunforge-lasso.webp"
+      }
     },
     {
-      "name": "Trident Lasso",
-      "slug": "trident-lasso",
-      "tier": "Exclusive",
-      "rank": "S",
-      "power": 10,
-      "range": 30,
-      "availability": "Exclusive Shop with Robux or seasonal events",
-      "cardSummary": "Top power with long reach, making it one of the strongest catch-speed options.",
-      "bestUse": "Use for demanding late-game catches when both power and range matter.",
-      "limitation": "Access depends on Robux purchase or event availability.",
-      "collectionSection": "Exclusive",
-      "sortOrder": 11,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Trident Lasso",
+        "tier": "Exclusive",
+        "rank": "S",
+        "power": 10,
+        "range": 30,
+        "availability": "Exclusive Shop with Robux or seasonal events",
+        "cardSummary": "Top power with long reach, making it one of the strongest catch-speed options.",
+        "bestUse": "Use for demanding late-game catches when both power and range matter.",
+        "limitation": "Access depends on Robux purchase or event availability."
+      },
+      "system": {
+        "slug": "trident-lasso",
+        "section": "Exclusive",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Night Veil Lasso",
-      "slug": "night-veil-lasso",
-      "tier": "Exclusive",
-      "rank": "S",
-      "power": 10,
-      "range": 32,
-      "availability": "Purchase for 1,000,000 in-game coins",
-      "cardSummary": "Top power with more reach than the other high-power exclusive option.",
-      "bestUse": "Use as a coin-purchased endgame lasso when saving enough cash is realistic.",
-      "limitation": "The listed coin price is extremely high.",
-      "collectionSection": "Exclusive",
-      "sortOrder": 12,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": "/Catch%20And%20Tame/Lassos/night-veil-lasso.webp",
-      "imageStatus": "local row image from Fandom Shop/Lassos Nightveil Lasso icon",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/catch-and-tame-rblx/images/4/41/Lasso_Nightveil_Lasso.png/revision/latest?cb=20260211102747"
+      "item": {
+        "name": "Night Veil Lasso",
+        "tier": "Exclusive",
+        "rank": "S",
+        "power": 10,
+        "range": 32,
+        "availability": "Purchase for 1,000,000 in-game coins",
+        "cardSummary": "Top power with more reach than the other high-power exclusive option.",
+        "bestUse": "Use as a coin-purchased endgame lasso when saving enough cash is realistic.",
+        "limitation": "The listed coin price is extremely high."
+      },
+      "system": {
+        "slug": "night-veil-lasso",
+        "section": "Exclusive",
+        "sortOrder": 12,
+        "image": "/Catch%20And%20Tame/Lassos/night-veil-lasso.webp"
+      }
     },
     {
-      "name": "Bone Lasso",
-      "slug": "bone-lasso",
-      "tier": "Exclusive",
-      "rank": "S",
-      "power": 5,
-      "range": 40,
-      "availability": "Candy Shop",
-      "cardSummary": "Longest listed range, with less power than the main endgame strength picks.",
-      "bestUse": "Use when maximum reach is more valuable than fastest catch strength.",
-      "limitation": "Its power is lower than the strongest exclusive lassos.",
-      "collectionSection": "Exclusive",
-      "sortOrder": 13,
-      "sourcePage": "https://catch-and-tame.wiki/lassos/",
-      "sourceStatus": "Primary standalone wiki row",
-      "image": null,
-      "imageStatus": "text-only; no clean local lasso icons collected"
+      "item": {
+        "name": "Bone Lasso",
+        "tier": "Exclusive",
+        "rank": "S",
+        "power": 5,
+        "range": 40,
+        "availability": "Candy Shop",
+        "cardSummary": "Longest listed range, with less power than the main endgame strength picks.",
+        "bestUse": "Use when maximum reach is more valuable than fastest catch strength.",
+        "limitation": "Its power is lower than the strongest exclusive lassos."
+      },
+      "system": {
+        "slug": "bone-lasso",
+        "section": "Exclusive",
+        "sortOrder": 13,
+        "image": null
+      }
     }
   ]
 }

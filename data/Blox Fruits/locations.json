@@ -1,1279 +1,1504 @@
 {
   "meta": {
-    "title": "Blox Fruits locations data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Category:Locations",
-        "url": "https://blox-fruits.fandom.com/wiki/Category%3ALocations",
-        "accessed": "2026-05-07"
-      }
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "locations",
+    "route": "/wiki/blox-fruits/locations",
+    "catalogCode": "blox-fruits-locations",
+    "itemFields": [
+      "overview",
+      "type",
+      "sea",
+      "location",
+      "backgroundMusic",
+      "levelRequirement",
+      "inhabitants",
+      "level",
+      "previous",
+      "next"
     ],
     "columns": [
-      "name",
-      "image",
-      "fields",
       "overview",
-      "wikiUrl"
-    ]
+      "type",
+      "sea",
+      "location",
+      "backgroundMusic",
+      "levelRequirement",
+      "inhabitants",
+      "level",
+      "previous",
+      "next"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": "overview",
+      "cardDescriptionField": "overview",
+      "cardFields": [
+        "overview",
+        "type",
+        "sea",
+        "location",
+        "backgroundMusic",
+        "levelRequirement"
+      ],
+      "tableFields": [
+        "overview",
+        "type",
+        "sea",
+        "location",
+        "backgroundMusic",
+        "levelRequirement",
+        "inhabitants",
+        "level"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "???",
-      "slug": "item",
-      "image": "/Blox%20Fruits/Locations/item.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b2/AroweRoom.png/revision/latest/scale-to-width-down/268?cb=20240929201140",
-      "fields": {
+      "item": {
+        "name": "???",
+        "overview": "This room is located on one of the sides of the rock where Diamond is found at Kingdom of Rose, in Second Sea. This room can also be directly teleported to if the user has Portal with the [C] World Warp ability unlocked, and it will be called Doghouse.",
         "type": "Room",
         "sea": "Second Sea",
         "location": "Kingdom of Rose",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Hypnotical_Suspense.mp3Hypnotical Suspense"
       },
-      "overview": "This room is located on one of the sides of the rock where Diamond is found at Kingdom of Rose, in Second Sea. This room can also be directly teleported to if the user has Portal with the [C] World Warp ability unlocked, and it will be called Doghouse.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/%3F%3F%3F"
+      "system": {
+        "slug": "item",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Locations/item.webp"
+      }
     },
     {
-      "name": "Ancient Clock",
-      "slug": "ancient-clock",
-      "image": "/Blox%20Fruits/Locations/ancient-clock.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/63/AncientClock.png/revision/latest/scale-to-width-down/268?cb=20240104144932",
-      "fields": {
+      "item": {
+        "name": "Ancient Clock",
+        "overview": "The Ancient Clock is a structure located in the Temple of Time. It is a part of Race Awakening.",
         "type": "Location",
         "sea": "Third Sea",
         "location": "Temple of Time"
       },
-      "overview": "The Ancient Clock is a structure located in the Temple of Time. It is a part of Race Awakening.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ancient_Clock"
+      "system": {
+        "slug": "ancient-clock",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Locations/ancient-clock.webp"
+      }
     },
     {
-      "name": "Battle of the Gods",
-      "slug": "battle-of-the-gods",
-      "image": "/Blox%20Fruits/Locations/battle-of-the-gods.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/13/BattleOfTheGodsOverview.png/revision/latest/scale-to-width-down/268?cb=20250703181546",
-      "fields": {
+      "item": {
+        "name": "Battle of the Gods",
+        "overview": "The Battle of the Gods is a special event that takes place at the Castle on the Sea.",
         "sea": "Third Sea",
         "location": "Castle on the Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Lizard_Bandit_Clan.mp3Lizard Bandit Clan"
       },
-      "overview": "The Battle of the Gods is a special event that takes place at the Castle on the Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Battle_of_the_Gods"
+      "system": {
+        "slug": "battle-of-the-gods",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Locations/battle-of-the-gods.webp"
+      }
     },
     {
-      "name": "Beautiful Pirate Domain",
-      "slug": "beautiful-pirate-domain",
-      "image": "/Blox%20Fruits/Locations/beautiful-pirate-domain.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2d/Beautiful_Pirate_Domain_Entrance.png/revision/latest/scale-to-width-down/268?cb=20240519133838",
-      "fields": {
-        "levelRequirement": "1950+",
+      "item": {
+        "name": "Beautiful Pirate Domain",
+        "overview": "The Beautiful Pirate Domain is found at the center of Floating Turtle, in a gigantic tree with a door. The main room is also found inside of Hydra Island and can be easily accessed through glitches and Flash Step.",
         "location": "Floating Turtle",
+        "levelRequirement": "1950+",
         "inhabitants": "Beautiful Pirate"
       },
-      "overview": "The Beautiful Pirate Domain is found at the center of Floating Turtle, in a gigantic tree with a door. The main room is also found inside of Hydra Island and can be easily accessed through glitches and Flash Step.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Beautiful_Pirate_Domain"
+      "system": {
+        "slug": "beautiful-pirate-domain",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Locations/beautiful-pirate-domain.webp"
+      }
     },
     {
-      "name": "Bridge",
-      "slug": "bridge",
-      "image": "/Blox%20Fruits/Locations/bridge.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9f/Bridge_image.png/revision/latest/scale-to-width-down/268?cb=20220423151408",
-      "fields": {
+      "item": {
+        "name": "Bridge",
+        "overview": "The Bridge is made out of white concrete, with a dark grey concrete border on either side. Placed intermittently along its sides are red metal spikes that connect to each other with an arch. On each side, there is an additional pole going across the midsection of the spikes. Underneath the bridge are red I-beam supports that hold it up.",
         "type": "Location",
         "location": "Kingdom of Rose Green Zone",
         "level": "700+"
       },
-      "overview": "The Bridge is made out of white concrete, with a dark grey concrete border on either side. Placed intermittently along its sides are red metal spikes that connect to each other with an arch. On each side, there is an additional pole going across the midsection of the spikes. Underneath the bridge are red I-beam supports that hold it up.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bridge"
+      "system": {
+        "slug": "bridge",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Locations/bridge.webp"
+      }
     },
     {
-      "name": "Café",
-      "slug": "cafe",
-      "image": "/Blox%20Fruits/Locations/cafe.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/db/The-cafe.png/revision/latest/scale-to-width-down/268?cb=20191223152003",
-      "fields": {
+      "item": {
+        "name": "Café",
+        "overview": "There also used to be Wenlocktoad's room, which housed the Awakenings Expert, but this room has since been closed off. However, it can still be entered by going through the wall glitch using Flash Step.",
         "type": "Safe Zone",
         "sea": "Second Sea",
         "location": "Kingdom of Rose",
-        "level": "700+",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Rule_of_Rose_-_Backbiting.mp3Rule of Rose - Backbiting"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Rule_of_Rose_-_Backbiting.mp3Rule of Rose - Backbiting",
+        "level": "700+"
       },
-      "overview": "There also used to be Wenlocktoad's room, which housed the Awakenings Expert, but this room has since been closed off. However, it can still be entered by going through the wall glitch using Flash Step.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Caf%C3%A9"
+      "system": {
+        "slug": "cafe",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Locations/cafe.webp"
+      }
     },
     {
-      "name": "Campfire",
-      "slug": "campfire",
-      "image": "/Blox%20Fruits/Locations/campfire.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/55/Photo_Of_the_Campfire.png/revision/latest/scale-to-width-down/268?cb=20250922154102",
-      "fields": {
+      "item": {
+        "name": "Campfire",
+        "overview": "There are six available recipes, which include the Fish Kebab, Lava Potion, Aggro Elixir, Loot Seeker, Berserkers Elixir, and Fortune Elixir.",
         "sea": "First SeaSecond SeaThird Sea"
       },
-      "overview": "There are six available recipes, which include the Fish Kebab, Lava Potion, Aggro Elixir, Loot Seeker, Berserkers Elixir, and Fortune Elixir.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Campfire"
+      "system": {
+        "slug": "campfire",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Locations/campfire.webp"
+      }
     },
     {
-      "name": "Castle on the Sea",
-      "slug": "castle-on-the-sea",
-      "image": "/Blox%20Fruits/Locations/castle-on-the-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/06/Castle_on_the_Sea.png/revision/latest/scale-to-width-down/268?cb=20250323095424",
-      "fields": {
+      "item": {
+        "name": "Castle on the Sea",
+        "overview": "The Pirate Raid is an event only found in the Third Sea and happens every 1 hour and 15 minutes (75 minutes). During this event, a horde of non-boss enemies from First Sea and Second Sea will start spawning. A tanky enemy will spawn as the final enemy and has more HP than the other Pirates, hence the name. Whoever deals the final blow to the tanky enemy will get a random fruit. Any player that has defeated at least one Pirate, will get 100 after all enemies are defeated.",
         "type": "Island",
         "sea": "Third Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Pleasant_Dreams.mp3Pleasant Dreams"
       },
-      "overview": "The Pirate Raid is an event only found in the Third Sea and happens every 1 hour and 15 minutes (75 minutes). During this event, a horde of non-boss enemies from First Sea and Second Sea will start spawning. A tanky enemy will spawn as the final enemy and has more HP than the other Pirates, hence the name. Whoever deals the final blow to the tanky enemy will get a random fruit. Any player that has defeated at least one Pirate, will get 100 after all enemies are defeated.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Castle_on_the_Sea"
+      "system": {
+        "slug": "castle-on-the-sea",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Locations/castle-on-the-sea.webp"
+      }
     },
     {
-      "name": "Cave Island",
-      "slug": "cave-island",
-      "image": "/Blox%20Fruits/Locations/cave-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e8/Unknow_Island.png/revision/latest/scale-to-width-down/268?cb=20220120010701",
-      "fields": {
+      "item": {
+        "name": "Cave Island",
+        "overview": "The Cave Island is a tiny island in the Second Sea. It has three chests: a silver (on one side of the large main cave), a gold (on the grassy top), and a diamond (behind a partial wall in the upper room).",
         "type": "Island",
         "sea": "Second Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Explorer.mp3Explorer"
       },
-      "overview": "The Cave Island is a tiny island in the Second Sea. It has three chests: a silver (on one side of the large main cave), a gold (on the grassy top), and a diamond (behind a partial wall in the upper room).",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cave_Island"
+      "system": {
+        "slug": "cave-island",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Locations/cave-island.webp"
+      }
     },
     {
-      "name": "Celestial Domain",
-      "slug": "celestial-domain",
-      "image": "/Blox%20Fruits/Locations/celestial-domain.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f3/Celestial-Domain-Image-1.png/revision/latest/scale-to-width-down/267?cb=20250913151058",
-      "fields": {
+      "item": {
+        "name": "Celestial Domain",
+        "overview": "The Celestial Domain was an event location.",
         "type": "Location",
         "sea": "First SeaSecond SeaThird Sea",
         "location": "Event Location",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Celestial_Domain.mp3Celestial Domain"
       },
-      "overview": "The Celestial Domain was an event location.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Celestial_Domain"
+      "system": {
+        "slug": "celestial-domain",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Locations/celestial-domain.webp"
+      }
     },
     {
-      "name": "Celestial Domain (Interior)",
-      "slug": "celestial-domain-interior",
-      "image": "/Blox%20Fruits/Locations/celestial-domain-interior.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/76/Celestial_Domain_%28Interior%29.png/revision/latest/scale-to-width-down/268?cb=20251221084831",
-      "fields": {
+      "item": {
+        "name": "Celestial Domain (Interior)",
+        "overview": "Accessed through the lift in the large shrine in the center of the Celestial Domain island.",
         "type": "Location",
         "sea": "First SeaSecond SeaThird Sea",
         "location": "Celestial Domain"
       },
-      "overview": "Accessed through the lift in the large shrine in the center of the Celestial Domain island.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Celestial_Domain_(Interior)"
+      "system": {
+        "slug": "celestial-domain-interior",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Locations/celestial-domain-interior.webp"
+      }
     },
     {
-      "name": "Chest Locations",
-      "slug": "chest-locations",
-      "image": "/Blox%20Fruits/Locations/chest-locations.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a7/Silver_Chest.png/revision/latest/scale-to-width-down/268?cb=20250222203148",
-      "fields": {
+      "item": {
+        "name": "Chest Locations",
+        "overview": "Chests are hidden across the map and grant rewards such as Money , Fragments , or Bones when opened.",
         "type": "Loot Containers"
       },
-      "overview": "Chests are hidden across the map and grant rewards such as Money , Fragments , or Bones when opened.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chest_Locations"
+      "system": {
+        "slug": "chest-locations",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Locations/chest-locations.webp"
+      }
     },
     {
-      "name": "Colosseum (First Sea)",
-      "slug": "colosseum-first-sea",
-      "image": "/Blox%20Fruits/Locations/colosseum-first-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7b/Due.png/revision/latest/scale-to-width-down/268?cb=20210911135935",
-      "fields": {
+      "item": {
+        "name": "Colosseum (First Sea)",
+        "overview": "The island itself is a relatively large, grassy area with sparse trees and rocks. The outer part of the island has a lighter color of grass, while the grass near the middle is darker. In the center is a large stone colosseum with multicolored banners hanging along the sides, with the Friendly PvP area in the center. Attached to the arena with a ramp is a wide stone path leading to the dock.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "250-300",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Into_the_Arena.mp3Into the Arena",
+        "level": "250-300",
         "previous": "Prison"
       },
-      "overview": "The island itself is a relatively large, grassy area with sparse trees and rocks. The outer part of the island has a lighter color of grass, while the grass near the middle is darker. In the center is a large stone colosseum with multicolored banners hanging along the sides, with the Friendly PvP area in the center. Attached to the arena with a ramp is a wide stone path leading to the dock.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Colosseum_(First_Sea)"
+      "system": {
+        "slug": "colosseum-first-sea",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Locations/colosseum-first-sea.webp"
+      }
     },
     {
-      "name": "Colosseum (Second Sea)",
-      "slug": "colosseum-second-sea",
-      "image": "/Blox%20Fruits/Locations/colosseum-second-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/bb/Colosseum.png/revision/latest/scale-to-width-down/268?cb=20210330070919",
-      "fields": {
+      "item": {
+        "name": "Colosseum (Second Sea)",
+        "overview": "The inside has a circular shape with it being surrounded by water. It also includes four mini bridges that connect to different entrances and exits. There is no roof.",
         "type": "Location",
         "sea": "Second Sea",
         "location": "Kingdom of Rose",
-        "level": "700+",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_King%27s_Tournament.mp3The King's Tournament"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_King%27s_Tournament.mp3The King's Tournament",
+        "level": "700+"
       },
-      "overview": "The inside has a circular shape with it being surrounded by water. It also includes four mini bridges that connect to different entrances and exits. There is no roof.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Colosseum_(Second_Sea)"
+      "system": {
+        "slug": "colosseum-second-sea",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Locations/colosseum-second-sea.webp"
+      }
     },
     {
-      "name": "Crypt",
-      "slug": "crypt",
-      "image": "/Blox%20Fruits/Locations/crypt.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/91/Outside_the_crypt.png/revision/latest/scale-to-width-down/268?cb=20240118231642",
-      "fields": {
-        "level": "2200+",
+      "item": {
+        "name": "Crypt",
+        "overview": "The Crypt is located behind the Mansion on top of a mountain-like area. The inner area can be accessed by meeting the requirements of the Crypt Master. It is the area to obtain the Cursed Dual Katana, obtained by completing the Cursed Dual Katana Puzzle.",
         "location": "Floating Turtle (Third Sea)",
-        "inhabitants": "Crypt MasterCursed SkeletonCursed Skeleton Boss"
+        "inhabitants": "Crypt MasterCursed SkeletonCursed Skeleton Boss",
+        "level": "2200+"
       },
-      "overview": "The Crypt is located behind the Mansion on top of a mountain-like area. The inner area can be accessed by meeting the requirements of the Crypt Master. It is the area to obtain the Cursed Dual Katana, obtained by completing the Cursed Dual Katana Puzzle.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Crypt"
+      "system": {
+        "slug": "crypt",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/Blox%20Fruits/Locations/crypt.webp"
+      }
     },
     {
-      "name": "Cursed Ship",
-      "slug": "cursed-ship",
-      "image": "/Blox%20Fruits/Locations/cursed-ship.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f3/Cursed_Ships.png/revision/latest/scale-to-width-down/268?cb=20251020130645",
-      "fields": {
+      "item": {
+        "name": "Cursed Ship",
+        "overview": "As the player enters, they will see a room to both sides, and an entrance towards a staircase. Both rooms, left and right, are the exact same having a group of Ship Deckhands, with the left side connecting to an area with multiple rooms (one of them being occupied by El Admin), and the right connecting to El Perro's room.",
         "type": "Island",
         "sea": "Second Sea",
-        "level": "1250-1350",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Uneasy_Decision.mp3Uneasy Decision",
+        "level": "1250-1350",
         "previous": "Hot and Cold"
       },
-      "overview": "As the player enters, they will see a room to both sides, and an entrance towards a staircase. Both rooms, left and right, are the exact same having a group of Ship Deckhands, with the left side connecting to an area with multiple rooms (one of them being occupied by El Admin), and the right connecting to El Perro's room.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cursed_Ship"
+      "system": {
+        "slug": "cursed-ship",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Locations/cursed-ship.webp"
+      }
     },
     {
-      "name": "Dark Arena",
-      "slug": "dark-arena",
-      "image": "/Blox%20Fruits/Locations/dark-arena.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c6/RobloxScreenShot20210820_104327520_%282%29.png/revision/latest/scale-to-width-down/267?cb=20210820024737",
-      "fields": {
+      "item": {
+        "name": "Dark Arena",
+        "overview": "The Dark Arena is located near the Snow Mountain and the Ice Castle.",
         "type": "Island",
         "location": "Second Sea",
-        "level": "700+",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Haunted_Halls.mp3Haunted Halls"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Haunted_Halls.mp3Haunted Halls",
+        "level": "700+"
       },
-      "overview": "The Dark Arena is located near the Snow Mountain and the Ice Castle.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Arena"
+      "system": {
+        "slug": "dark-arena",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Locations/dark-arena.webp"
+      }
     },
     {
-      "name": "Desert",
-      "slug": "desert",
-      "image": "/Blox%20Fruits/Locations/desert.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6d/Desert.png/revision/latest/scale-to-width-down/268?cb=20200805235956",
-      "fields": {
+      "item": {
+        "name": "Desert",
+        "overview": "The Desert is covered almost entirely in sand, except for a few paths and courtyards. From the docks, the player will find a pathway leading to a village full of Desert Bandits. Going from the other path, the player will pass a dilapidated house and a pyramid with a Silver Chest in front of it, the path leads to a bridge leading to another section with a set of houses along with the Desert Officers.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "60-90",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Endless_Desert.mp3The Endless Desert",
+        "level": "60-90",
         "previous": "Pirate Village"
       },
-      "overview": "The Desert is covered almost entirely in sand, except for a few paths and courtyards. From the docks, the player will find a pathway leading to a village full of Desert Bandits. Going from the other path, the player will pass a dilapidated house and a pyramid with a Silver Chest in front of it, the path leads to a bridge leading to another section with a set of houses along with the Desert Officers.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Desert"
+      "system": {
+        "slug": "desert",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Locations/desert.webp"
+      }
     },
     {
-      "name": "Dimensional Rift",
-      "slug": "dimensional-rift",
-      "image": "/Blox%20Fruits/Locations/dimensional-rift.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7b/Dimensional_Rift.gif/revision/latest/scale-to-width-down/268?cb=20240601165221",
-      "fields": {
+      "item": {
+        "name": "Dimensional Rift",
+        "overview": "The Dimensional Rift is a special dimension created by the Portal [V] ability. This dimension can only be escaped through the gate above the space move in the usual way. If the player is the user of the move, they can use [V] again to escape or die. When the user enters, their energy will be consumed over time.",
         "type": "Dimension"
       },
-      "overview": "The Dimensional Rift is a special dimension created by the Portal [V] ability. This dimension can only be escaped through the gate above the space move in the usual way. If the player is the user of the move, they can use [V] again to escape or die. When the user enters, their energy will be consumed over time.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dimensional_Rift"
+      "system": {
+        "slug": "dimensional-rift",
+        "section": "Items",
+        "sortOrder": 19,
+        "image": "/Blox%20Fruits/Locations/dimensional-rift.webp"
+      }
     },
     {
-      "name": "Dimensional Shift",
-      "slug": "dimensional-shift",
-      "image": "/Blox%20Fruits/Locations/dimensional-shift.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/90/Dimensional_Shift.png/revision/latest/scale-to-width-down/268?cb=20231203044144",
-      "fields": {
-        "levelRequirement": "1500+",
+      "item": {
+        "name": "Dimensional Shift",
+        "overview": "To spawn the Dimensional Shift, a player must first satisfy drip_mama's conditions, which involves killing 500 enemies on Cake Land. After the conditions have been met, drip_mama will then say \"We have defeated enough enemies. Do you want to open the portal now?\".",
         "location": "Third Sea",
+        "levelRequirement": "1500+",
         "inhabitants": "Cake Prince/Dough King"
       },
-      "overview": "To spawn the Dimensional Shift, a player must first satisfy drip_mama's conditions, which involves killing 500 enemies on Cake Land. After the conditions have been met, drip_mama will then say \"We have defeated enough enemies. Do you want to open the portal now?\".",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dimensional_Shift"
+      "system": {
+        "slug": "dimensional-shift",
+        "section": "Items",
+        "sortOrder": 20,
+        "image": "/Blox%20Fruits/Locations/dimensional-shift.webp"
+      }
     },
     {
-      "name": "Dojo Vault",
-      "slug": "dojo-vault",
-      "image": "/Blox%20Fruits/Locations/dojo-vault.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c4/DojoPortal.png/revision/latest/scale-to-width-down/268?cb=20241216025559",
-      "fields": {
+      "item": {
+        "name": "Dojo Vault",
+        "overview": "The Dojo Vault is located at the Dragon Dojo in Hydra Island.",
         "sea": "Third Sea",
         "location": "Dragon Dojo"
       },
-      "overview": "The Dojo Vault is located at the Dragon Dojo in Hydra Island.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dojo_Vault"
+      "system": {
+        "slug": "dojo-vault",
+        "section": "Items",
+        "sortOrder": 21,
+        "image": "/Blox%20Fruits/Locations/dojo-vault.webp"
+      }
     },
     {
-      "name": "Draco Temple",
-      "slug": "draco-temple",
-      "image": "/Blox%20Fruits/Locations/draco-temple.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e2/DracoTempleV2.png/revision/latest/scale-to-width-down/268?cb=20250920071901",
-      "fields": {
+      "item": {
+        "name": "Draco Temple",
+        "overview": "The Draco Temple is located at the Dragon Dojo, Hydra Island. The entrance leading to the room is the Dojo Vault located beside Uzoth.",
         "type": "Location",
         "sea": "Third Sea",
         "location": "Dragon Dojo"
       },
-      "overview": "The Draco Temple is located at the Dragon Dojo, Hydra Island. The entrance leading to the room is the Dojo Vault located beside Uzoth.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Draco_Temple"
+      "system": {
+        "slug": "draco-temple",
+        "section": "Items",
+        "sortOrder": 22,
+        "image": "/Blox%20Fruits/Locations/draco-temple.webp"
+      }
     },
     {
-      "name": "Dragon Dojo",
-      "slug": "dragon-dojo",
-      "image": "/Blox%20Fruits/Locations/dragon-dojo.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cf/Dragon_Dojo.png/revision/latest/scale-to-width-down/268?cb=20250315124718",
-      "fields": {
+      "item": {
+        "name": "Dragon Dojo",
+        "overview": "The Dragon Dojo is on top of the mountain next to the Hydra Leader in Hydra Island.",
         "type": "Subarea",
         "sea": "Third Sea",
         "location": "Hydra Island",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Dragonic_Sanctuary.mp3Dragonic Sanctuary"
       },
-      "overview": "The Dragon Dojo is on top of the mountain next to the Hydra Leader in Hydra Island.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Dojo"
+      "system": {
+        "slug": "dragon-dojo",
+        "section": "Items",
+        "sortOrder": 23,
+        "image": "/Blox%20Fruits/Locations/dragon-dojo.webp"
+      }
     },
     {
-      "name": "Factory",
-      "slug": "factory",
-      "image": "/Blox%20Fruits/Locations/factory.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cf/Lab_2nd_sea.png/revision/latest/scale-to-width-down/268?cb=20230522155022",
-      "fields": {
+      "item": {
+        "name": "Factory",
+        "overview": "The Factory opens when a Factory Raid occurs, which happens every 1 hour and 30 minutes since the last raid ended. To complete the raid, players must destroy the Factory's core within five minutes. Otherwise, the door will close and the factory will flood with poison, killing all players who are still in the factory, unless they escape by using Flash Step.",
         "type": "Location",
         "sea": "Second Sea",
         "location": "Kingdom of Rose",
-        "level": "700+",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Pirates_(Soundtracks).mp3Pirates (Soundtracks)"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Pirates_(Soundtracks).mp3Pirates (Soundtracks)",
+        "level": "700+"
       },
-      "overview": "The Factory opens when a Factory Raid occurs, which happens every 1 hour and 30 minutes since the last raid ended. To complete the raid, players must destroy the Factory's core within five minutes. Otherwise, the door will close and the factory will flood with poison, killing all players who are still in the factory, unless they escape by using Flash Step.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Factory"
+      "system": {
+        "slug": "factory",
+        "section": "Items",
+        "sortOrder": 24,
+        "image": "/Blox%20Fruits/Locations/factory.webp"
+      }
     },
     {
-      "name": "First Sea",
-      "slug": "first-sea",
-      "image": "/Blox%20Fruits/Locations/first-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3c/First_Sea_in_Blox_Fruit_%281%29.jpg/revision/latest/scale-to-width-down/268?cb=20221227112604",
-      "fields": {
+      "item": {
+        "name": "First Sea",
+        "overview": "The First Sea is the starter sea for the game and the location that players spawn in when they join the game for the first time.",
         "level": "1-700",
         "next": "Second Sea"
       },
-      "overview": "The First Sea is the starter sea for the game and the location that players spawn in when they join the game for the first time.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/First_Sea"
+      "system": {
+        "slug": "first-sea",
+        "section": "Items",
+        "sortOrder": 25,
+        "image": "/Blox%20Fruits/Locations/first-sea.webp"
+      }
     },
     {
-      "name": "Floating Turtle",
-      "slug": "floating-turtle",
-      "image": "/Blox%20Fruits/Locations/floating-turtle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/74/Floating_Turtle_%28Outside%29.png/revision/latest/scale-to-width-down/268?cb=20210911204449",
-      "fields": {
+      "item": {
+        "name": "Floating Turtle",
+        "overview": "The Floating Turtle is a large island built upon the back of a massive turtle-shaped structure. The island features dense greenery, including numerous trees, as well as several large architectural structures. At the front of the island, the turtle’s head can be seen emerging from the surrounding waters.",
         "type": "Island",
         "sea": "Third Sea",
-        "level": "1775-1975",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Pleasant_Dreams.mp3Pleasant Dreams",
+        "level": "1775-1975",
         "previous": "Great Tree"
       },
-      "overview": "The Floating Turtle is a large island built upon the back of a massive turtle-shaped structure. The island features dense greenery, including numerous trees, as well as several large architectural structures. At the front of the island, the turtle’s head can be seen emerging from the surrounding waters.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Floating_Turtle"
+      "system": {
+        "slug": "floating-turtle",
+        "section": "Items",
+        "sortOrder": 26,
+        "image": "/Blox%20Fruits/Locations/floating-turtle.webp"
+      }
     },
     {
-      "name": "Forgotten Island",
-      "slug": "forgotten-island",
-      "image": "/Blox%20Fruits/Locations/forgotten-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6c/FImap.png/revision/latest/scale-to-width-down/268?cb=20231220012058",
-      "fields": {
+      "item": {
+        "name": "Forgotten Island",
+        "overview": "The Forgotten Island is the final island in the Second Sea.",
         "type": "Island",
         "sea": "Second Sea",
-        "level": "1425-1500",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Exploring_the_Ruins.mp3Exploring the Ruins",
+        "level": "1425-1500",
         "previous": "Ice Castle"
       },
-      "overview": "The Forgotten Island is the final island in the Second Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Forgotten_Island"
+      "system": {
+        "slug": "forgotten-island",
+        "section": "Items",
+        "sortOrder": 27,
+        "image": "/Blox%20Fruits/Locations/forgotten-island.webp"
+      }
     },
     {
-      "name": "Fountain City",
-      "slug": "fountain-city",
-      "image": "/Blox%20Fruits/Locations/fountain-city.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a3/Fountain_City.png/revision/latest/scale-to-width-down/268?cb=20240911205004",
-      "fields": {
+      "item": {
+        "name": "Fountain City",
+        "overview": "The most notable feature of the Fountain City is its massive fountain in the center, with water flowing downwards towards the island. The land around the island is slanted downwards, towards a large, arched seawall surrounding the island. There are many small rivers that flow away from the fountain, and into the ocean through granite arches in the wall. Besides this, the island has some houses and trees, and grass where it is not paved.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "625-700",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Cottage_Industry.mp3Cottage Industry",
+        "level": "625-700",
         "previous": "Upper Skylands"
       },
-      "overview": "The most notable feature of the Fountain City is its massive fountain in the center, with water flowing downwards towards the island. The land around the island is slanted downwards, towards a large, arched seawall surrounding the island. There are many small rivers that flow away from the fountain, and into the ocean through granite arches in the wall. Besides this, the island has some houses and trees, and grass where it is not paved.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fountain_City"
+      "system": {
+        "slug": "fountain-city",
+        "section": "Items",
+        "sortOrder": 28,
+        "image": "/Blox%20Fruits/Locations/fountain-city.webp"
+      }
     },
     {
-      "name": "Freezing Hydra Island",
-      "slug": "freezing-hydra-island",
-      "image": "/Blox%20Fruits/Locations/freezing-hydra-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Freezing_Hydra_Island_%28Hydra_Leader_House%29.png/revision/latest/scale-to-width-down/268?cb=20241220041129",
-      "fields": {
+      "item": {
+        "name": "Freezing Hydra Island",
+        "overview": "The Freezing Hydra Island event is required in order to gain access to the Dojo Vault, and ultimately the Draco race's Race Awakening. The player is able to light up the green and yellow lanterns in front of the vault during this event, hence unlocking said vault.",
         "sea": "Third Sea",
         "location": "Hydra Island",
-        "level": "1500+",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Curious_Shadows.mp3Curious Shadows"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Curious_Shadows.mp3Curious Shadows",
+        "level": "1500+"
       },
-      "overview": "The Freezing Hydra Island event is required in order to gain access to the Dojo Vault, and ultimately the Draco race's Race Awakening. The player is able to light up the green and yellow lanterns in front of the vault during this event, hence unlocking said vault.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Freezing_Hydra_Island"
+      "system": {
+        "slug": "freezing-hydra-island",
+        "section": "Items",
+        "sortOrder": 29,
+        "image": "/Blox%20Fruits/Locations/freezing-hydra-island.webp"
+      }
     },
     {
-      "name": "Friendly Arena",
-      "slug": "friendly-arena",
-      "image": "/Blox%20Fruits/Locations/friendly-arena.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b7/Friendly_Arena.png/revision/latest/scale-to-width-down/268?cb=20250420231830",
-      "fields": {
+      "item": {
+        "name": "Friendly Arena",
+        "overview": "The Friendly Arena is located in the opposite side of the waterfall found in Hydra Island.",
         "type": "Location",
         "location": "Hydra Island",
-        "level": "1500+",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_King%27s_Tournament.mp3The King's Tournament"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_King%27s_Tournament.mp3The King's Tournament",
+        "level": "1500+"
       },
-      "overview": "The Friendly Arena is located in the opposite side of the waterfall found in Hydra Island.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Friendly_Arena"
+      "system": {
+        "slug": "friendly-arena",
+        "section": "Items",
+        "sortOrder": 30,
+        "image": "/Blox%20Fruits/Locations/friendly-arena.webp"
+      }
     },
     {
-      "name": "Frozen Dimension",
-      "slug": "frozen-dimension",
-      "image": "/Blox%20Fruits/Locations/frozen-dimension.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b5/Frozen_Dimension.png/revision/latest/scale-to-width-down/268?cb=20231022223922",
-      "fields": {
+      "item": {
+        "name": "Frozen Dimension",
+        "overview": "The Frozen Dimension exclusively spawns in Sea Danger Level 6 (????).",
         "type": "Sea Event",
         "sea": "Third Sea",
         "location": "Sea Danger Level 6 (????)",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Courage_Of_A_Warrior_(accurate_loop).mp3The Courage Of A Warrior (in-game loop)"
       },
-      "overview": "The Frozen Dimension exclusively spawns in Sea Danger Level 6 (????).",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Frozen_Dimension"
+      "system": {
+        "slug": "frozen-dimension",
+        "section": "Items",
+        "sortOrder": 31,
+        "image": "/Blox%20Fruits/Locations/frozen-dimension.webp"
+      }
     },
     {
-      "name": "Frozen Village",
-      "slug": "frozen-village",
-      "image": "/Blox%20Fruits/Locations/frozen-village.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9e/Frozen_Village.png/revision/latest/scale-to-width-down/268?cb=20220301001028",
-      "fields": {
+      "item": {
+        "name": "Frozen Village",
+        "overview": "At Frozen Village, players can encounter the Sword Dealer of the East, the Ability Teacher to learn new skills from, and a Story NPC that is part of the Saber Expert Puzzle. The Frozen Village also has the Ice Admiral, which is part of the Second Sea quest.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "90-120",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Start_of_Winter.mp3The Start of Winter",
+        "level": "90-120",
         "previous": "Desert"
       },
-      "overview": "At Frozen Village, players can encounter the Sword Dealer of the East, the Ability Teacher to learn new skills from, and a Story NPC that is part of the Saber Expert Puzzle. The Frozen Village also has the Ice Admiral, which is part of the Second Sea quest.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Frozen_Village"
+      "system": {
+        "slug": "frozen-village",
+        "section": "Items",
+        "sortOrder": 32,
+        "image": "/Blox%20Fruits/Locations/frozen-village.webp"
+      }
     },
     {
-      "name": "Grand Colosseum",
-      "slug": "grand-colosseum",
-      "image": "/Blox%20Fruits/Locations/grand-colosseum.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b8/Grandest_Party.png/revision/latest/scale-to-width-down/268?cb=20250930080321",
-      "fields": {
+      "item": {
+        "name": "Grand Colosseum",
+        "overview": "The Grand Colosseum is a location within the Party Realm.",
         "type": "Island",
         "sea": "First SeaSecond SeaThird Sea",
         "location": "Party Realm"
       },
-      "overview": "The Grand Colosseum is a location within the Party Realm.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Grand_Colosseum"
+      "system": {
+        "slug": "grand-colosseum",
+        "section": "Items",
+        "sortOrder": 33,
+        "image": "/Blox%20Fruits/Locations/grand-colosseum.webp"
+      }
     },
     {
-      "name": "Graveyard Island",
-      "slug": "graveyard-island",
-      "image": "/Blox%20Fruits/Locations/graveyard-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d7/Graveyard_Island.png/revision/latest/scale-to-width-down/268?cb=20250322150903",
-      "fields": {
+      "item": {
+        "name": "Graveyard Island",
+        "overview": "From the docks, the player will be faced with a large spire in the center of the island surrounded by graves and Zombies. In the sea around the island are additional spikes that protrude from the ground. As the player travels around the island, they will see a large cave with an open front that contains Vampires.",
         "type": "Island",
         "sea": "Second Sea",
-        "level": "950-1000",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Deep_Mist.mp3Deep Mist",
+        "level": "950-1000",
         "previous": "Green Zone"
       },
-      "overview": "From the docks, the player will be faced with a large spire in the center of the island surrounded by graves and Zombies. In the sea around the island are additional spikes that protrude from the ground. As the player travels around the island, they will see a large cave with an open front that contains Vampires.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Graveyard_Island"
+      "system": {
+        "slug": "graveyard-island",
+        "section": "Items",
+        "sortOrder": 34,
+        "image": "/Blox%20Fruits/Locations/graveyard-island.webp"
+      }
     },
     {
-      "name": "Great Tree",
-      "slug": "great-tree",
-      "image": "/Blox%20Fruits/Locations/great-tree.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/07/Great_Tree.png/revision/latest/scale-to-width-down/268?cb=20241226182754",
-      "fields": {
+      "item": {
+        "name": "Great Tree",
         "type": "Island",
         "sea": "Third Sea",
-        "level": "1700-1775",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Lion_and_the_Lamb.mp3The Lion and the Lamb",
+        "level": "1700-1775",
         "previous": "Hydra Island"
       },
-      "overview": null,
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Great_Tree"
+      "system": {
+        "slug": "great-tree",
+        "section": "Items",
+        "sortOrder": 35,
+        "image": "/Blox%20Fruits/Locations/great-tree.webp"
+      }
     },
     {
-      "name": "Green Zone",
-      "slug": "green-zone",
-      "image": "/Blox%20Fruits/Locations/green-zone.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/49/GreenZone.jpg/revision/latest/scale-to-width-down/268?cb=20260314082012",
-      "fields": {
+      "item": {
+        "name": "Green Zone",
+        "overview": "The Green Zone is wrapped by a shallow, rocky beach, and is connected with Kingdom of Rose by the Bridge. The island is mostly covered in grass, with a small number of paths and rocks. Large amounts of vegetation can also be seen, including huge flowers and vines, some of which extend great distances into the sky.",
         "type": "Island",
         "sea": "Second Sea",
-        "level": "875-950",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Living_Forest.mp3The Living Forest",
+        "level": "875-950",
         "previous": "Kingdom of Rose"
       },
-      "overview": "The Green Zone is wrapped by a shallow, rocky beach, and is connected with Kingdom of Rose by the Bridge. The island is mostly covered in grass, with a small number of paths and rocks. Large amounts of vegetation can also be seen, including huge flowers and vines, some of which extend great distances into the sky.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Green_Zone"
+      "system": {
+        "slug": "green-zone",
+        "section": "Items",
+        "sortOrder": 36,
+        "image": "/Blox%20Fruits/Locations/green-zone.webp"
+      }
     },
     {
-      "name": "Haunted Castle",
-      "slug": "haunted-castle",
-      "image": "/Blox%20Fruits/Locations/haunted-castle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/63/Haunted_Castle.png/revision/latest/scale-to-width-down/268?cb=20241226183151",
-      "fields": {
+      "item": {
+        "name": "Haunted Castle",
+        "overview": "The Haunted Castle is the third-largest island in the game and has the tallest height of all maps because of its enormous mast. Players can find the Haunted Castle by going to the Castle on the Sea and looking around until they spot a flag surrounded by giant walls.",
         "type": "Island",
         "sea": "Third Sea",
-        "level": "1975-2075",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Pleasant_Dreams.mp3Pleasant Dreams",
+        "level": "1975-2075",
         "previous": "Floating Turtle"
       },
-      "overview": "The Haunted Castle is the third-largest island in the game and has the tallest height of all maps because of its enormous mast. Players can find the Haunted Castle by going to the Castle on the Sea and looking around until they spot a flag surrounded by giant walls.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Haunted_Castle"
+      "system": {
+        "slug": "haunted-castle",
+        "section": "Items",
+        "sortOrder": 37,
+        "image": "/Blox%20Fruits/Locations/haunted-castle.webp"
+      }
     },
     {
-      "name": "Haunted Shipwreck",
-      "slug": "haunted-shipwreck",
-      "image": "/Blox%20Fruits/Locations/haunted-shipwreck.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6a/HSW_ClearVision.png/revision/latest/scale-to-width-down/268?cb=20240409182523",
-      "fields": {
+      "item": {
+        "name": "Haunted Shipwreck",
+        "overview": "The Haunted Shipwreck may only spawn if the player is sailing a Boat in Sea Danger Level 6 (????). This island will despawn:",
         "type": "Sea Event",
         "sea": "Third Sea",
         "location": "Sea Danger Level 6 (????)",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Deep_Mist.mp3Deep Mist"
       },
-      "overview": "The Haunted Shipwreck may only spawn if the player is sailing a Boat in Sea Danger Level 6 (????). This island will despawn:",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Haunted_Shipwreck"
+      "system": {
+        "slug": "haunted-shipwreck",
+        "section": "Items",
+        "sortOrder": 38,
+        "image": "/Blox%20Fruits/Locations/haunted-shipwreck.webp"
+      }
     },
     {
-      "name": "Heavenly Dimension",
-      "slug": "heavenly-dimension",
-      "image": "/Blox%20Fruits/Locations/heavenly-dimension.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/33/Heavenly_Dimension.png/revision/latest/scale-to-width-down/268?cb=20240604163420",
-      "fields": {
+      "item": {
+        "name": "Heavenly Dimension",
+        "overview": "The Heavenly Dimension is a zone only accessible by players with Lv. 2200 and above, which is essential for the completion of the Tushita Scroll and Cursed Dual Katana Puzzle, specifically the Soulless quest.",
         "type": "Alternate Dimension",
         "sea": "Third Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Curious_Shadows.mp3Curious Shadows"
       },
-      "overview": "The Heavenly Dimension is a zone only accessible by players with Lv. 2200 and above, which is essential for the completion of the Tushita Scroll and Cursed Dual Katana Puzzle, specifically the Soulless quest.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Heavenly_Dimension"
+      "system": {
+        "slug": "heavenly-dimension",
+        "section": "Items",
+        "sortOrder": 39,
+        "image": "/Blox%20Fruits/Locations/heavenly-dimension.webp"
+      }
     },
     {
-      "name": "Hell Dimension",
-      "slug": "hell-dimension",
-      "image": "/Blox%20Fruits/Locations/hell-dimension.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c7/Hell_Dimension.png/revision/latest/scale-to-width-down/268?cb=20240604152504",
-      "fields": {
+      "item": {
+        "name": "Hell Dimension",
+        "overview": "The Hell Dimension is part of the Cursed Dual Katana/Puzzle, specifically the Fear The Reaper quest. It cannot be accessed after completing the two quests prior to Fear The Reaper and dying to the Soul Reaper without the use of glitches.",
         "type": "Alternate Dimension",
         "sea": "Third Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Curious_Shadows.mp3Curious Shadows"
       },
-      "overview": "The Hell Dimension is part of the Cursed Dual Katana/Puzzle, specifically the Fear The Reaper quest. It cannot be accessed after completing the two quests prior to Fear The Reaper and dying to the Soul Reaper without the use of glitches.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hell_Dimension"
+      "system": {
+        "slug": "hell-dimension",
+        "section": "Items",
+        "sortOrder": 40,
+        "image": "/Blox%20Fruits/Locations/hell-dimension.webp"
+      }
     },
     {
-      "name": "Hot and Cold",
-      "slug": "hot-and-cold",
-      "image": "/Blox%20Fruits/Locations/hot-and-cold.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b5/Hot_and_cold_rework.png/revision/latest/scale-to-width-down/268?cb=20260111175026",
-      "fields": {
+      "item": {
+        "name": "Hot and Cold",
+        "overview": "Hot and Cold located to the south of the Green Zone, it is a pair of tomoe (comma) shaped islands, which put together, is shaped like a Taijitu (yin-yang) circle. It has a river of water that separating it. As the name suggests, one island is cold, and the other is hot.",
         "type": "Island",
         "sea": "Second Sea",
-        "level": "1100-1250",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Acoustic_Traveller_a.mp3Acoustic Traveller a",
+        "level": "1100-1250",
         "previous": "Snow Mountain"
       },
-      "overview": "Hot and Cold located to the south of the Green Zone, it is a pair of tomoe (comma) shaped islands, which put together, is shaped like a Taijitu (yin-yang) circle. It has a river of water that separating it. As the name suggests, one island is cold, and the other is hot.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hot_and_Cold"
+      "system": {
+        "slug": "hot-and-cold",
+        "section": "Items",
+        "sortOrder": 41,
+        "image": "/Blox%20Fruits/Locations/hot-and-cold.webp"
+      }
     },
     {
-      "name": "Hydra Island",
-      "slug": "hydra-island",
-      "image": "/Blox%20Fruits/Locations/hydra-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d4/Hydra_Island.png/revision/latest/scale-to-width-down/267?cb=20250322125033",
-      "fields": {
+      "item": {
+        "name": "Hydra Island",
+        "overview": "The Hydra Island is an important area to unlocking many things in Third Sea, such as the Yama sword, starting the Tushita sword puzzle, Draco and its Race Awakening.",
         "type": "Island",
         "sea": "Third Sea",
-        "level": "1575-1700",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Curious_Notion.mp3Curious Notion",
+        "level": "1575-1700",
         "previous": "Port Town"
       },
-      "overview": "The Hydra Island is an important area to unlocking many things in Third Sea, such as the Yama sword, starting the Tushita sword puzzle, Draco and its Race Awakening.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hydra_Island"
+      "system": {
+        "slug": "hydra-island",
+        "section": "Items",
+        "sortOrder": 42,
+        "image": "/Blox%20Fruits/Locations/hydra-island.webp"
+      }
     },
     {
-      "name": "Ice Castle",
-      "slug": "ice-castle",
-      "image": "/Blox%20Fruits/Locations/ice-castle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/89/Ice_Castle.png/revision/latest/scale-to-width-down/268?cb=20250322194924",
-      "fields": {
+      "item": {
+        "name": "Ice Castle",
+        "overview": "The Ice Castle is vast, with a massive castle towering over the island. There are chunks of flat ice cubes lying around the island on the water and in front of the island.",
         "type": "Island",
         "sea": "Second Sea",
-        "level": "1350-1425",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Uneasy_Peace.mp3Uneasy Peace",
+        "level": "1350-1425",
         "previous": "Cursed Ship"
       },
-      "overview": "The Ice Castle is vast, with a massive castle towering over the island. There are chunks of flat ice cubes lying around the island on the water and in front of the island.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice_Castle"
+      "system": {
+        "slug": "ice-castle",
+        "section": "Items",
+        "sortOrder": 43,
+        "image": "/Blox%20Fruits/Locations/ice-castle.webp"
+      }
     },
     {
-      "name": "Indra Island",
-      "slug": "indra-island",
-      "image": "/Blox%20Fruits/Locations/indra-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b5/IndraIsland.jpg/revision/latest/scale-to-width-down/268?cb=20251204011335",
-      "fields": {
+      "item": {
+        "name": "Indra Island",
+        "overview": "The Indra Island can be found in the Second Sea, at about 2,500 meters away from the Forgotten Island.",
         "type": "Island",
         "sea": "Second Sea",
-        "level": "1500+",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Explorer.mp3Explorer",
+        "level": "1500+",
         "previous": "Forgotten Island"
       },
-      "overview": "The Indra Island can be found in the Second Sea, at about 2,500 meters away from the Forgotten Island.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Indra_Island"
+      "system": {
+        "slug": "indra-island",
+        "section": "Items",
+        "sortOrder": 44,
+        "image": "/Blox%20Fruits/Locations/indra-island.webp"
+      }
     },
     {
-      "name": "Jean-Luc Island",
-      "slug": "jean-luc-island",
-      "image": "/Blox%20Fruits/Locations/jean-luc-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/06/JeanLucIsland.png/revision/latest/scale-to-width-down/268?cb=20201108073447",
-      "fields": {
+      "item": {
+        "name": "Jean-Luc Island",
+        "overview": "The only purposes of the Jean-Luc Island is for the Saber Puzzle, Diamond Chest and a fruit spawn location",
         "type": "Island",
         "sea": "First Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Explorer.mp3Explorer"
       },
-      "overview": "The only purposes of the Jean-Luc Island is for the Saber Puzzle, Diamond Chest and a fruit spawn location",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Jean-Luc_Island"
+      "system": {
+        "slug": "jean-luc-island",
+        "section": "Items",
+        "sortOrder": 45,
+        "image": "/Blox%20Fruits/Locations/jean-luc-island.webp"
+      }
     },
     {
-      "name": "Jungle",
-      "slug": "jungle",
-      "image": "/Blox%20Fruits/Locations/jungle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e2/BirdseyeJungle.png/revision/latest/scale-to-width-down/268?cb=20220301001200",
-      "fields": {
+      "item": {
+        "name": "Jungle",
+        "overview": "The island hosts quests for players from levels 10-30, making it the second lowest-level island. This island also contains the Saber Expert boss that can be found by doing the Saber Puzzle for the Saber sword.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "10-30",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Forest.mp3The Forest",
+        "level": "10-30",
         "previous": "Pirate StarterMarine Starter"
       },
-      "overview": "The island hosts quests for players from levels 10-30, making it the second lowest-level island. This island also contains the Saber Expert boss that can be found by doing the Saber Puzzle for the Saber sword.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Jungle"
+      "system": {
+        "slug": "jungle",
+        "section": "Items",
+        "sortOrder": 46,
+        "image": "/Blox%20Fruits/Locations/jungle.webp"
+      }
     },
     {
-      "name": "King Toad's House",
-      "slug": "king-toad-s-house",
-      "image": "/Blox%20Fruits/Locations/king-toad-s-house.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2f/Wenlock%27s_room.png/revision/latest/scale-to-width-down/268?cb=20251102143942",
-      "fields": {
+      "item": {
+        "name": "King Toad's House",
+        "overview": "King Toad's House is a secret room located at Second Sea, specifically within Café beside Awakenings Expert. It is accessed through an area called 'CLASSIFIED'.",
         "type": "Location",
         "location": "Café",
-        "level": "700+",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Rule_of_Rose_-_Backbiting.mp3Rule of Rose - Backbiting"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Rule_of_Rose_-_Backbiting.mp3Rule of Rose - Backbiting",
+        "level": "700+"
       },
-      "overview": "King Toad's House is a secret room located at Second Sea, specifically within Café beside Awakenings Expert. It is accessed through an area called 'CLASSIFIED'.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/King_Toad's_House"
+      "system": {
+        "slug": "king-toad-s-house",
+        "section": "Items",
+        "sortOrder": 47,
+        "image": "/Blox%20Fruits/Locations/king-toad-s-house.webp"
+      }
     },
     {
-      "name": "Kingdom of Rose",
-      "slug": "kingdom-of-rose",
-      "image": "/Blox%20Fruits/Locations/kingdom-of-rose.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ae/KingdomOfRose.jpg/revision/latest/scale-to-width-down/268?cb=20260314082321",
-      "fields": {
+      "item": {
+        "name": "Kingdom of Rose",
+        "overview": "Under the black rock near the Raiders and closest to the Colosseum, there is a secret passage that leads under the whole island and goes out of an opening on the right side of the bridge. The passage is filled with water, there has a lot of chests and the Legendary Sword Dealer can spawn there sometimes.",
         "type": "Island",
         "sea": "Second Sea",
-        "level": "700-875",
         "backgroundMusic": "http://blox-fruits.fandom.com/wiki/File:Industry_(A).mp3Industry (A)",
+        "level": "700-875",
         "previous": "Fountain City"
       },
-      "overview": "Under the black rock near the Raiders and closest to the Colosseum, there is a secret passage that leads under the whole island and goes out of an opening on the right side of the bridge. The passage is filled with water, there has a lot of chests and the Legendary Sword Dealer can spawn there sometimes.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kingdom_of_Rose"
+      "system": {
+        "slug": "kingdom-of-rose",
+        "section": "Items",
+        "sortOrder": 48,
+        "image": "/Blox%20Fruits/Locations/kingdom-of-rose.webp"
+      }
     },
     {
-      "name": "Kitsune Island",
-      "slug": "kitsune-island",
-      "image": "/Blox%20Fruits/Locations/kitsune-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/74/KitsuneIsland.png/revision/latest/scale-to-width-down/268?cb=20240615124013",
-      "fields": {
+      "item": {
+        "name": "Kitsune Island",
+        "overview": "\"A mysterious shrine has appeared in the sea...\"",
         "type": "Sea Event",
         "sea": "Third Sea",
         "location": "Sea Danger Level 6",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Clever_Fox.mp3Clever Fox"
       },
-      "overview": "\"A mysterious shrine has appeared in the sea...\"",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kitsune_Island"
+      "system": {
+        "slug": "kitsune-island",
+        "section": "Items",
+        "sortOrder": 49,
+        "image": "/Blox%20Fruits/Locations/kitsune-island.webp"
+      }
     },
     {
-      "name": "L'Église de Prophétie",
-      "slug": "l-eglise-de-prophetie",
-      "image": "/Blox%20Fruits/Locations/l-eglise-de-prophetie.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/68/L%27%C3%89glise_de_Proph%C3%A9tie.png/revision/latest/scale-to-width-down/268?cb=20240523145646",
-      "fields": {
+      "item": {
+        "name": "L'Église de Prophétie",
+        "overview": "There are two ways to get inside L'Église de Prophétie:",
         "type": "Location",
         "sea": "Second SeaThird Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Church_of_Prophecy.mp3The Church of Prophecy"
       },
-      "overview": "There are two ways to get inside L'Église de Prophétie:",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/L'%C3%89glise_de_Proph%C3%A9tie"
+      "system": {
+        "slug": "l-eglise-de-prophetie",
+        "section": "Items",
+        "sortOrder": 50,
+        "image": "/Blox%20Fruits/Locations/l-eglise-de-prophetie.webp"
+      }
     },
     {
-      "name": "Laboratory",
-      "slug": "laboratory",
-      "image": "/Blox%20Fruits/Locations/laboratory.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0c/Laboratory.jpg/revision/latest/scale-to-width-down/268?cb=20260123084845",
-      "fields": {
+      "item": {
+        "name": "Laboratory",
+        "overview": "The Laboratory is an interior location found within Hot and Cold in the Second Sea . It is a technology-themed facility known for its clean, structured design and interactive elements. The Laboratory plays a limited but important role in certain game mechanics, including access to raids.",
         "type": "Location",
         "sea": "Second Sea",
         "location": "Hot and Cold",
         "level": "1100+"
       },
-      "overview": "The Laboratory is an interior location found within Hot and Cold in the Second Sea . It is a technology-themed facility known for its clean, structured design and interactive elements. The Laboratory plays a limited but important role in certain game mechanics, including access to raids.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Laboratory"
+      "system": {
+        "slug": "laboratory",
+        "section": "Items",
+        "sortOrder": 51,
+        "image": "/Blox%20Fruits/Locations/laboratory.webp"
+      }
     },
     {
-      "name": "Liberation of Tiki Outpost",
-      "slug": "liberation-of-tiki-outpost",
-      "image": "/Blox%20Fruits/Locations/liberation-of-tiki-outpost.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2b/Liberation_of_Tiki_Outpost.png/revision/latest/scale-to-width-down/268?cb=20250522115244",
-      "fields": {
+      "item": {
+        "name": "Liberation of Tiki Outpost",
+        "overview": "The Liberation of Tiki Outpost is triggered when the Tyrant of the Skies is spawned. It says \"Wings of wrath descend upon intruders.\" in the chat box/upper part of their screen.",
         "sea": "Third Sea",
         "location": "Tiki Outpost",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Lizard_Bandit_Clan.mp3Lizard Bandit Clan"
       },
-      "overview": "The Liberation of Tiki Outpost is triggered when the Tyrant of the Skies is spawned. It says \"Wings of wrath descend upon intruders.\" in the chat box/upper part of their screen.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Liberation_of_Tiki_Outpost"
+      "system": {
+        "slug": "liberation-of-tiki-outpost",
+        "section": "Items",
+        "sortOrder": 52,
+        "image": "/Blox%20Fruits/Locations/liberation-of-tiki-outpost.webp"
+      }
     },
     {
-      "name": "Magma Village",
-      "slug": "magma-village",
-      "image": "/Blox%20Fruits/Locations/magma-village.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/75/Magma_Village.png/revision/latest/scale-to-width-down/267?cb=20200712093539",
-      "fields": {
+      "item": {
+        "name": "Magma Village",
+        "overview": "The Magma Village if often distinguished by its' huge volcano in the center with smoke rings all around it (no collision hitbox). The front of the island is covered in rocky ground and red trees, with a small village near the dock. Behind the volcano is a raised stone platform that extends out from the back of the island, being able to be navigated to through a slope in front of it.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "300-375",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Calm_of_Night.mp3The Calm of Night",
+        "level": "300-375",
         "previous": "Colosseum"
       },
-      "overview": "The Magma Village if often distinguished by its' huge volcano in the center with smoke rings all around it (no collision hitbox). The front of the island is covered in rocky ground and red trees, with a small village near the dock. Behind the volcano is a raised stone platform that extends out from the back of the island, being able to be navigated to through a slope in front of it.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Magma_Village"
+      "system": {
+        "slug": "magma-village",
+        "section": "Items",
+        "sortOrder": 53,
+        "image": "/Blox%20Fruits/Locations/magma-village.webp"
+      }
     },
     {
-      "name": "Mansion (Second Sea)",
-      "slug": "mansion-second-sea",
-      "image": "/Blox%20Fruits/Locations/mansion-second-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/38/DonSwanMasion.png/revision/latest/scale-to-width-down/268?cb=20200907173128",
-      "fields": {
+      "item": {
+        "name": "Mansion (Second Sea)",
+        "overview": "The Mansion (or Don Swan's Mansion) is a sub-area located at the highest point in the Kingdom of Rose.",
         "type": "Location",
         "location": "Kingdom of Rose",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Manor_of_the_Ghostly_Spooks.mp3Manor of the Ghostly Spooks"
       },
-      "overview": "The Mansion (or Don Swan's Mansion) is a sub-area located at the highest point in the Kingdom of Rose.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mansion_(Second_Sea)"
+      "system": {
+        "slug": "mansion-second-sea",
+        "section": "Items",
+        "sortOrder": 54,
+        "image": "/Blox%20Fruits/Locations/mansion-second-sea.webp"
+      }
     },
     {
-      "name": "Mansion (Third Sea)",
-      "slug": "mansion-third-sea",
-      "image": "/Blox%20Fruits/Locations/mansion-third-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b9/Mansion_%28Third_Sea%29.png/revision/latest/scale-to-width-down/268?cb=20210911183224",
-      "fields": {
+      "item": {
+        "name": "Mansion (Third Sea)",
+        "overview": "The Mansion (also called Turtle Mansion) is a crucial building located on Floating Turtle in the Third Sea. It is a Safe Zone, and contains many important NPCS. A large amount of Third Sea players gather here to Trade or to chat. It has three trading tables.",
         "type": "Location",
         "location": "Floating Turtle, Third Sea",
-        "level": "1500+",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Rule_of_Rose_-_Backbiting.mp3Rule of Rose - Backbiting"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Rule_of_Rose_-_Backbiting.mp3Rule of Rose - Backbiting",
+        "level": "1500+"
       },
-      "overview": "The Mansion (also called Turtle Mansion) is a crucial building located on Floating Turtle in the Third Sea. It is a Safe Zone, and contains many important NPCS. A large amount of Third Sea players gather here to Trade or to chat. It has three trading tables.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mansion_(Third_Sea)"
+      "system": {
+        "slug": "mansion-third-sea",
+        "section": "Items",
+        "sortOrder": 55,
+        "image": "/Blox%20Fruits/Locations/mansion-third-sea.webp"
+      }
     },
     {
-      "name": "Marine Fortress",
-      "slug": "marine-fortress",
-      "image": "/Blox%20Fruits/Locations/marine-fortress.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/20/MarineFortress.png/revision/latest/scale-to-width-down/268?cb=20220417192425",
-      "fields": {
+      "item": {
+        "name": "Marine Fortress",
+        "overview": "The Marine Fortress is a crescent-shaped island surrounded by stone walls. The upper section of the crescent contains grassy terrain, trees, and various buildings. Four large guard towers are positioned at each corner of the structure.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "120-150",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Marshall_Strength.mp3Marshall Strength",
+        "level": "120-150",
         "previous": "Frozen Village"
       },
-      "overview": "The Marine Fortress is a crescent-shaped island surrounded by stone walls. The upper section of the crescent contains grassy terrain, trees, and various buildings. Four large guard towers are positioned at each corner of the structure.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Fortress"
+      "system": {
+        "slug": "marine-fortress",
+        "section": "Items",
+        "sortOrder": 56,
+        "image": "/Blox%20Fruits/Locations/marine-fortress.webp"
+      }
     },
     {
-      "name": "Marine Starter",
-      "slug": "marine-starter",
-      "image": "/Blox%20Fruits/Locations/marine-starter.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/83/MarineStarterBase1212.png/revision/latest/scale-to-width-down/268?cb=20221211140557",
-      "fields": {
+      "item": {
+        "name": "Marine Starter",
+        "overview": "The Marine Starter is a multi-level island. It has a dock at the front that leads up to the first level, which features a long street. The next level contains a field where Trainees can be found, along with a quest giver and several houses. At the back of the island are three large stone towers with staircases wrapping around them. Every tower has cannons on top, and the left-most one also displays a black flag.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "1-10",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Explorer.mp3Explorer",
+        "level": "1-10",
         "next": "Jungle"
       },
-      "overview": "The Marine Starter is a multi-level island. It has a dock at the front that leads up to the first level, which features a long street. The next level contains a field where Trainees can be found, along with a quest giver and several houses. At the back of the island are three large stone towers with staircases wrapping around them. Every tower has cannons on top, and the left-most one also displays a black flag.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Starter"
+      "system": {
+        "slug": "marine-starter",
+        "section": "Items",
+        "sortOrder": 57,
+        "image": "/Blox%20Fruits/Locations/marine-starter.webp"
+      }
     },
     {
-      "name": "Middle Town",
-      "slug": "middle-town",
-      "image": "/Blox%20Fruits/Locations/middle-town.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c1/Middleisland.png/revision/latest/scale-to-width-down/268?cb=20200709072309",
-      "fields": {
+      "item": {
+        "name": "Middle Town",
+        "overview": "The Middle Town is home to many shops and NPCs, one of which serves quest significance (The Son Quest for the Dark Blade Slayer Skin and also the route to the Second Sea by speaking to the Experienced Captain after defeating the Ice Admiral), although some include NPCs that sell Swords and Guns, as well as the Blox Fruit Dealer.",
         "type": "Island",
         "sea": "First Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Woodlands.mp3The Woodlands"
       },
-      "overview": "The Middle Town is home to many shops and NPCs, one of which serves quest significance (The Son Quest for the Dark Blade Slayer Skin and also the route to the Second Sea by speaking to the Experienced Captain after defeating the Ice Admiral), although some include NPCs that sell Swords and Guns, as well as the Blox Fruit Dealer.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Middle_Town"
+      "system": {
+        "slug": "middle-town",
+        "section": "Items",
+        "sortOrder": 58,
+        "image": "/Blox%20Fruits/Locations/middle-town.webp"
+      }
     },
     {
-      "name": "Mirage Island",
-      "slug": "mirage-island",
-      "image": "/Blox%20Fruits/Locations/mirage-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f9/Mirage_Clear_View.png/revision/latest/scale-to-width-down/267?cb=20230316042605",
-      "fields": {
+      "item": {
+        "name": "Mirage Island",
+        "overview": "The Mirage Island is a special island that functions differently from all the other islands. It is the place where the Advanced Fruit Dealer, and the Blue Gear for Race Awakening are located.",
         "type": "Sea Event",
         "sea": "Third Sea",
         "location": "Sea Danger Level 2-6",
         "backgroundMusic": "http://blox-fruits.fandom.com/wiki/File:Mirage_Island.mp3Echoing Realm"
       },
-      "overview": "The Mirage Island is a special island that functions differently from all the other islands. It is the place where the Advanced Fruit Dealer, and the Blue Gear for Race Awakening are located.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mirage_Island"
+      "system": {
+        "slug": "mirage-island",
+        "section": "Items",
+        "sortOrder": 59,
+        "image": "/Blox%20Fruits/Locations/mirage-island.webp"
+      }
     },
     {
-      "name": "North Pole",
-      "slug": "north-pole",
-      "image": "/Blox%20Fruits/Locations/north-pole.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/ba/NorthPole.png/revision/latest/scale-to-width-down/268?cb=20241226184038",
-      "fields": {
+      "item": {
+        "name": "North Pole",
+        "overview": "The North Pole is located next to the Frozen Village in the First Sea. Simply go to the Frozen Village, and look to the right of the Frozen Village. The player will find it there if the Christmas Event is on.",
         "type": "Island",
         "sea": "First SeaSecond SeaThird Sea"
       },
-      "overview": "The North Pole is located next to the Frozen Village in the First Sea. Simply go to the Frozen Village, and look to the right of the Frozen Village. The player will find it there if the Christmas Event is on.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/North_Pole"
+      "system": {
+        "slug": "north-pole",
+        "section": "Items",
+        "sortOrder": 60,
+        "image": "/Blox%20Fruits/Locations/north-pole.webp"
+      }
     },
     {
-      "name": "Observatory",
-      "slug": "observatory",
-      "image": "/Blox%20Fruits/Locations/observatory.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9a/Observatory.jpg/revision/latest/scale-to-width-down/268?cb=20251101061606",
-      "fields": {
+      "item": {
+        "name": "Observatory",
+        "overview": "The Observatory is a dimension in which the Unbound Werewolf resides.",
         "location": "Middle TownCaféMansion",
         "inhabitants": "Unbound Werewolf"
       },
-      "overview": "The Observatory is a dimension in which the Unbound Werewolf resides.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Observatory"
+      "system": {
+        "slug": "observatory",
+        "section": "Items",
+        "sortOrder": 61,
+        "image": "/Blox%20Fruits/Locations/observatory.webp"
+      }
     },
     {
-      "name": "Oni Realm",
-      "slug": "oni-realm",
-      "image": "/Blox%20Fruits/Locations/oni-realm.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9b/Oni_Realm.png/revision/latest/scale-to-width-down/268?cb=20250830162441",
-      "fields": {
+      "item": {
+        "name": "Oni Realm",
+        "overview": "The Oni Realm could be accessed through the Oni in all seas during the Red King Event.",
         "type": "Location",
         "sea": "First SeaSecond SeaThird Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Zen_Theme.mp3Zen Theme"
       },
-      "overview": "The Oni Realm could be accessed through the Oni in all seas during the Red King Event.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Oni_Realm"
+      "system": {
+        "slug": "oni-realm",
+        "section": "Items",
+        "sortOrder": 62,
+        "image": "/Blox%20Fruits/Locations/oni-realm.webp"
+      }
     },
     {
-      "name": "Oni Realm (Interior)",
-      "slug": "oni-realm-interior",
-      "image": "/Blox%20Fruits/Locations/oni-realm-interior.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/28/Oni_Realm_%28Interior%29.png/revision/latest/scale-to-width-down/268?cb=20250830202550",
-      "fields": {
+      "item": {
+        "name": "Oni Realm (Interior)",
+        "overview": "Could be accessed through the large building with the red roof in the center of the Oni Realm island, through the main doors.",
         "type": "Location",
         "sea": "First SeaSecond SeaThird Sea",
         "location": "Oni Realm",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:RED_KING_BOSS.mp3RED KING BOSS"
       },
-      "overview": "Could be accessed through the large building with the red roof in the center of the Oni Realm island, through the main doors.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Oni_Realm_(Interior)"
+      "system": {
+        "slug": "oni-realm-interior",
+        "section": "Items",
+        "sortOrder": 63,
+        "image": "/Blox%20Fruits/Locations/oni-realm-interior.webp"
+      }
     },
     {
-      "name": "Pakistan Dimension",
-      "slug": "pakistan-dimension",
-      "image": "/Blox%20Fruits/Locations/pakistan-dimension.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/99/Paskistan_kamui.png/revision/latest/scale-to-width-down/268?cb=20220113025835",
-      "fields": {
+      "item": {
+        "name": "Pakistan Dimension",
+        "overview": "A huge black box is outside the Pakistan Dimension. Inside, there's a Mazar-e-Quaid with a Pakistani flag on top.",
         "type": "Enclosed Space"
       },
-      "overview": "A huge black box is outside the Pakistan Dimension. Inside, there's a Mazar-e-Quaid with a Pakistani flag on top.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pakistan_Dimension"
+      "system": {
+        "slug": "pakistan-dimension",
+        "section": "Items",
+        "sortOrder": 64,
+        "image": "/Blox%20Fruits/Locations/pakistan-dimension.webp"
+      }
     },
     {
-      "name": "Party Realm",
-      "slug": "party-realm",
-      "image": "/Blox%20Fruits/Locations/party-realm.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/92/Celebration_event.png/revision/latest/scale-to-width-down/268?cb=20250928021403",
-      "fields": {
+      "item": {
+        "name": "Party Realm",
+        "overview": "Both the Celestial Domain and the Oni Realm were also located and can be accessed within the Party Realm, albeit without their respective gachas.",
         "sea": "First SeaSecond SeaThird Sea"
       },
-      "overview": "Both the Celestial Domain and the Oni Realm were also located and can be accessed within the Party Realm, albeit without their respective gachas.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Party_Realm"
+      "system": {
+        "slug": "party-realm",
+        "section": "Items",
+        "sortOrder": 65,
+        "image": "/Blox%20Fruits/Locations/party-realm.webp"
+      }
     },
     {
-      "name": "Pirate Starter",
-      "slug": "pirate-starter",
-      "image": "/Blox%20Fruits/Locations/pirate-starter.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fc/Blox_Fruits_Pirate_Starter_Island.png/revision/latest/scale-to-width-down/268?cb=20241224022246",
-      "fields": {
+      "item": {
+        "name": "Pirate Starter",
+        "overview": "The Pirate Starter features several houses arranged in a circular layout around a central grassy area. Surrounding this circle is a larger ring of green grass, bordered by a rocky beach, that which connects to a few docks. Near one of the windmills, there are two fields where the Bandits spawn.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "1-10",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Explorer.mp3Explorer",
+        "level": "1-10",
         "next": "Jungle"
       },
-      "overview": "The Pirate Starter features several houses arranged in a circular layout around a central grassy area. Surrounding this circle is a larger ring of green grass, bordered by a rocky beach, that which connects to a few docks. Near one of the windmills, there are two fields where the Bandits spawn.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pirate_Starter"
+      "system": {
+        "slug": "pirate-starter",
+        "section": "Items",
+        "sortOrder": 66,
+        "image": "/Blox%20Fruits/Locations/pirate-starter.webp"
+      }
     },
     {
-      "name": "Pirate Village",
-      "slug": "pirate-village",
-      "image": "/Blox%20Fruits/Locations/pirate-village.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fd/Bobby_SIland.png/revision/latest/scale-to-width-down/268?cb=20200805055257",
-      "fields": {
+      "item": {
+        "name": "Pirate Village",
+        "overview": "The Pirate Village is divided into two main sections: the village and the surrounding wilderness. The village area is paved with cobblestone and features several multicolored houses, including a purple-roofed mansion with a flag. The wilderness area is characterized by jagged rocks, grassy terrain, and sparsely placed trees.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "30-60",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Intensity_(b).mp3Intensity (b)",
+        "level": "30-60",
         "previous": "Jungle"
       },
-      "overview": "The Pirate Village is divided into two main sections: the village and the surrounding wilderness. The village area is paved with cobblestone and features several multicolored houses, including a purple-roofed mansion with a flag. The wilderness area is characterized by jagged rocks, grassy terrain, and sparsely placed trees.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pirate_Village"
+      "system": {
+        "slug": "pirate-village",
+        "section": "Items",
+        "sortOrder": 67,
+        "image": "/Blox%20Fruits/Locations/pirate-village.webp"
+      }
     },
     {
-      "name": "Pocket Dimension",
-      "slug": "pocket-dimension",
-      "image": "/Blox%20Fruits/Locations/pocket-dimension.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/21/Pocket_Dimension_%28Inside%29.PNG/revision/latest/scale-to-width-down/268?cb=20260404054157",
-      "fields": {
+      "item": {
+        "name": "Pocket Dimension",
+        "overview": "The Pocket Dimension is a small dimension that cannot be found normally, because it always disappears and can only be created by admins. This area can only be created via the Kamui ability.",
         "type": "Enclosed Space"
       },
-      "overview": "The Pocket Dimension is a small dimension that cannot be found normally, because it always disappears and can only be created by admins. This area can only be created via the Kamui ability.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pocket_Dimension"
+      "system": {
+        "slug": "pocket-dimension",
+        "section": "Items",
+        "sortOrder": 68,
+        "image": "/Blox%20Fruits/Locations/pocket-dimension.webp"
+      }
     },
     {
-      "name": "Port Town",
-      "slug": "port-town",
-      "image": "/Blox%20Fruits/Locations/port-town.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/50/Port_Town_Front_View.png/revision/latest/scale-to-width-down/268?cb=20241222145856",
-      "fields": {
+      "item": {
+        "name": "Port Town",
+        "overview": "Upon first entering the Third Sea, the player will be teleported to the docks of the Port Town, which is the main entrance to the island. The player can find the Port Town between Hydra Island and Haunted Castle. Going up the ramps the player will enter the main town of the island, where they will find the Pirate Millionaires and Pistol Billionaires. At the back of the island where the mountains are, the player should see some stairs along with a trail leading to the east side of the island where they will find Stone, the boss of Port Town.",
         "type": "Island",
         "sea": "Third Sea",
-        "level": "1500-1575",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Curious_Mind.mp3Curious Mind",
+        "level": "1500-1575",
         "previous": "Indra Island"
       },
-      "overview": "Upon first entering the Third Sea, the player will be teleported to the docks of the Port Town, which is the main entrance to the island. The player can find the Port Town between Hydra Island and Haunted Castle. Going up the ramps the player will enter the main town of the island, where they will find the Pirate Millionaires and Pistol Billionaires. At the back of the island where the mountains are, the player should see some stairs along with a trail leading to the east side of the island where they will find Stone, the boss of Port Town.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Port_Town"
+      "system": {
+        "slug": "port-town",
+        "section": "Items",
+        "sortOrder": 69,
+        "image": "/Blox%20Fruits/Locations/port-town.webp"
+      }
     },
     {
-      "name": "Prehistoric Island",
-      "slug": "prehistoric-island",
-      "image": "/Blox%20Fruits/Locations/prehistoric-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b1/Prehistoric_Island.png/revision/latest/scale-to-width-down/268?cb=20241229013115",
-      "fields": {
+      "item": {
+        "name": "Prehistoric Island",
+        "overview": "To spawn the Prehistoric Island, players need to sail into Sea Danger Level 6 (????) and continue exploring until the island appears. The island can spawn even if the player in the boat does not have the Volcanic Magnet, but having it increases the chances of the island spawning drastically. Thus, it is recommended for at least one player to have a Volcanic Magnet in the sea exploration group if they're hunting for the Prehistoric Island.",
         "type": "Sea Event",
         "sea": "Third Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Haunted_Halls.mp3Haunted Halls (Neutral)https://blox-fruits.fandom.com/wiki/File:PrehistoricIsland.mp3Magmatic Antiquity (Active)"
       },
-      "overview": "To spawn the Prehistoric Island, players need to sail into Sea Danger Level 6 (????) and continue exploring until the island appears. The island can spawn even if the player in the boat does not have the Volcanic Magnet, but having it increases the chances of the island spawning drastically. Thus, it is recommended for at least one player to have a Volcanic Magnet in the sea exploration group if they're hunting for the Prehistoric Island.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Prehistoric_Island"
+      "system": {
+        "slug": "prehistoric-island",
+        "section": "Items",
+        "sortOrder": 70,
+        "image": "/Blox%20Fruits/Locations/prehistoric-island.webp"
+      }
     },
     {
-      "name": "Prison",
-      "slug": "prison",
-      "image": "/Blox%20Fruits/Locations/prison.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/14/Prison_17.2.PNG/revision/latest/scale-to-width-down/268?cb=20220314115639",
-      "fields": {
+      "item": {
+        "name": "Prison",
+        "overview": "The Prison is a large, circular fortress consisting of two main walls — an inner and outer layer. The dock at the front leads to the main gate, which is flanked by two blue-roofed towers. Upon entering through the gate, players will find a spacious grassy area with several trees and a small castle located toward the back. Between the two walls lies a water-filled area covered with wooden platforms, where prisoners are found and can be fought.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "190-250",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Lonely_Dwarven_Miner.mp3Lonely Dwarven Miner",
+        "level": "190-250",
         "previous": "Skylands"
       },
-      "overview": "The Prison is a large, circular fortress consisting of two main walls — an inner and outer layer. The dock at the front leads to the main gate, which is flanked by two blue-roofed towers. Upon entering through the gate, players will find a spacious grassy area with several trees and a small castle located toward the back. Between the two walls lies a water-filled area covered with wooden platforms, where prisoners are found and can be fought.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Prison"
+      "system": {
+        "slug": "prison",
+        "section": "Items",
+        "sortOrder": 71,
+        "image": "/Blox%20Fruits/Locations/prison.webp"
+      }
     },
     {
-      "name": "Red Hideout",
-      "slug": "red-hideout",
-      "image": "/Blox%20Fruits/Locations/red-hideout.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e6/Red_Hideout.png/revision/latest/scale-to-width-down/268?cb=20251102120942",
-      "fields": {
+      "item": {
+        "name": "Red Hideout",
+        "overview": "The Red Hideout was located in the Café's basement, next to the Titles Specialist. It was accessed through an opening among the barrels behind a Chess chair.",
         "type": "Location",
         "location": "Café",
-        "level": "700+",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Rule_of_Rose_-_Backbiting.mp3Rule of Rose - Backbiting"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Rule_of_Rose_-_Backbiting.mp3Rule of Rose - Backbiting",
+        "level": "700+"
       },
-      "overview": "The Red Hideout was located in the Café's basement, next to the Titles Specialist. It was accessed through an opening among the barrels behind a Chess chair.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Red_Hideout"
+      "system": {
+        "slug": "red-hideout",
+        "section": "Items",
+        "sortOrder": 72,
+        "image": "/Blox%20Fruits/Locations/red-hideout.webp"
+      }
     },
     {
-      "name": "Red Legion Hideout",
-      "slug": "red-legion-hideout",
-      "image": "/Blox%20Fruits/Locations/red-legion-hideout.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/ba/Red_Legion_Hideout_%28Day%29.PNG/revision/latest/scale-to-width-down/268?cb=20260404054016",
-      "fields": {
+      "item": {
+        "name": "Red Legion Hideout",
+        "overview": "The Red_Legion Hideout is a giant island that only appears when an admin uses a special ability called Heaven Kamui to create it. This place is said to be the former King Red Head's hideout according to some admins. This island can only be found in the sky, although its exact location is unknown as it always disappears.",
         "type": "Flying Island"
       },
-      "overview": "The Red_Legion Hideout is a giant island that only appears when an admin uses a special ability called Heaven Kamui to create it. This place is said to be the former King Red Head's hideout according to some admins. This island can only be found in the sky, although its exact location is unknown as it always disappears.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Red_Legion_Hideout"
+      "system": {
+        "slug": "red-legion-hideout",
+        "section": "Items",
+        "sortOrder": 73,
+        "image": "/Blox%20Fruits/Locations/red-legion-hideout.webp"
+      }
     },
     {
-      "name": "Remote Island",
-      "slug": "remote-island",
-      "image": "/Blox%20Fruits/Locations/remote-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e1/UsoapIsland.png/revision/latest/scale-to-width-down/268?cb=20201211093626",
-      "fields": {
+      "item": {
+        "name": "Remote Island",
+        "overview": "The Remote Island can be found near the Kingdom of Rose, toward Jeremy. The player can also come here by using Portal's [C] World Warp.",
         "type": "Island",
         "sea": "Second Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Explorer.mp3Explorer"
       },
-      "overview": "The Remote Island can be found near the Kingdom of Rose, toward Jeremy. The player can also come here by using Portal's [C] World Warp.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Remote_Island"
+      "system": {
+        "slug": "remote-island",
+        "section": "Items",
+        "sortOrder": 74,
+        "image": "/Blox%20Fruits/Locations/remote-island.webp"
+      }
     },
     {
-      "name": "Rip Family Hideout",
-      "slug": "rip-family-hideout",
-      "image": "/Blox%20Fruits/Locations/rip-family-hideout.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ac/Rip_Indra_Hideout_%28Inside%29.jpg/revision/latest/scale-to-width-down/268?cb=20250304202542",
-      "fields": {
+      "item": {
+        "name": "Rip Family Hideout",
+        "overview": "From the teleported location, the user will start right in a room where there are 4 doors, which will each lead to other rooms. There are rooms without roofs. when the player climbs up there, they will see a giant wall surrounded by black. This area is shown as a large square block and is surrounding a small maze.",
         "type": "Dimension/Maze"
       },
-      "overview": "From the teleported location, the user will start right in a room where there are 4 doors, which will each lead to other rooms. There are rooms without roofs. when the player climbs up there, they will see a giant wall surrounded by black. This area is shown as a large square block and is surrounding a small maze.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rip_Family_Hideout"
+      "system": {
+        "slug": "rip-family-hideout",
+        "section": "Items",
+        "sortOrder": 75,
+        "image": "/Blox%20Fruits/Locations/rip-family-hideout.webp"
+      }
     },
     {
-      "name": "Rip Family x Red Legion Arena",
-      "slug": "rip-family-x-red-legion-arena",
-      "image": "/Blox%20Fruits/Locations/rip-family-x-red-legion-arena.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3c/ArenaOverview.png/revision/latest/scale-to-width-down/268?cb=20250304182201",
-      "fields": {
+      "item": {
+        "name": "Rip Family x Red Legion Arena",
+        "overview": "The Rip_Family x Red_Legion Arena is a big gray colosseum-like place with a square arena in it and snowstorm effects, which can appear even in the First Sea and Second Sea.",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:The_Courage_Of_A_Warrior_(accurate_loop).mp3The Courage Of A Warrior (in-game loop)"
       },
-      "overview": "The Rip_Family x Red_Legion Arena is a big gray colosseum-like place with a square arena in it and snowstorm effects, which can appear even in the First Sea and Second Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rip_Family_x_Red_Legion_Arena"
+      "system": {
+        "slug": "rip-family-x-red-legion-arena",
+        "section": "Items",
+        "sortOrder": 76,
+        "image": "/Blox%20Fruits/Locations/rip-family-x-red-legion-arena.webp"
+      }
     },
     {
-      "name": "Sea of Treats",
-      "slug": "sea-of-treats",
-      "image": "/Blox%20Fruits/Locations/sea-of-treats.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/01/Seen.png/revision/latest/scale-to-width-down/268?cb=20230104104539",
-      "fields": {
+      "item": {
+        "name": "Sea of Treats",
         "type": "Island",
         "sea": "Third Sea",
-        "level": "2075-2450",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Childhood_Sketches.mp3Childhood Sketches",
+        "level": "2075-2450",
         "previous": "Haunted Castle"
       },
-      "overview": null,
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sea_of_Treats"
+      "system": {
+        "slug": "sea-of-treats",
+        "section": "Items",
+        "sortOrder": 77,
+        "image": "/Blox%20Fruits/Locations/sea-of-treats.webp"
+      }
     },
     {
-      "name": "Sealed Cavern",
-      "slug": "sealed-cavern",
-      "image": "/Blox%20Fruits/Locations/sealed-cavern.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/14/SealedCavernInner.png/revision/latest/scale-to-width-down/268?cb=20250914063152",
-      "fields": {
+      "item": {
+        "name": "Sealed Cavern",
+        "overview": "The Sealed Cavern is a hidden location accessible through a destructible entrance in the Submerged Island.",
         "location": "Submerged Island",
         "inhabitants": "Sharkman Master"
       },
-      "overview": "The Sealed Cavern is a hidden location accessible through a destructible entrance in the Submerged Island.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sealed_Cavern"
+      "system": {
+        "slug": "sealed-cavern",
+        "section": "Items",
+        "sortOrder": 78,
+        "image": "/Blox%20Fruits/Locations/sealed-cavern.webp"
+      }
     },
     {
-      "name": "Second Sea",
-      "slug": "second-sea",
-      "image": "/Blox%20Fruits/Locations/second-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/25/Second_sea_map.large.jpg/revision/latest/scale-to-width-down/268?cb=20240430030122",
-      "fields": {
+      "item": {
+        "name": "Second Sea",
+        "overview": "To access the Second Sea, the player must be Level 700 or above. Once they have reached this level, they must talk to the Military Detective , and they will receive a special key. They then must travel to the Frozen Village and go to the cave where the Ability Teacher is, opening the wooden door with the previously mentioned key. Inside the cave will be the Ice Admiral, who must be defeated. Once this has been done, the player can return to the Military Detective, who will tell them to talk to the Experienced Captain located on the left side of the Middle Town. Talking to the Experienced Captain will allow the player to travel to the Second Sea.",
         "level": "700-1500",
         "previous": "First Sea"
       },
-      "overview": "To access the Second Sea, the player must be Level 700 or above. Once they have reached this level, they must talk to the Military Detective , and they will receive a special key. They then must travel to the Frozen Village and go to the cave where the Ability Teacher is, opening the wooden door with the previously mentioned key. Inside the cave will be the Ice Admiral, who must be defeated. Once this has been done, the player can return to the Military Detective, who will tell them to talk to the Experienced Captain located on the left side of the Middle Town. Talking to the Experienced Captain will allow the player to travel to the Second Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Second_Sea"
+      "system": {
+        "slug": "second-sea",
+        "section": "Items",
+        "sortOrder": 79,
+        "image": "/Blox%20Fruits/Locations/second-sea.webp"
+      }
     },
     {
-      "name": "Secret Laboratory",
-      "slug": "secret-laboratory",
-      "image": "/Blox%20Fruits/Locations/secret-laboratory.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2a/OrderLab.jpg/revision/latest/scale-to-width-down/268?cb=20260118062103",
-      "fields": {
-        "levelRequirement": "700+",
-        "location": "Second Sea"
+      "item": {
+        "name": "Secret Laboratory",
+        "overview": "The Secret Laboratory is located to the left of the building where the Smoke Admiral resides. The inner area is a safe zone and can be used to start Order raids using a Microchip bought from Arlthmetic. A secret staircase can be found after completing the Cyborg Puzzle.",
+        "location": "Second Sea",
+        "levelRequirement": "700+"
       },
-      "overview": "The Secret Laboratory is located to the left of the building where the Smoke Admiral resides. The inner area is a safe zone and can be used to start Order raids using a Microchip bought from Arlthmetic. A secret staircase can be found after completing the Cyborg Puzzle.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Secret_Laboratory"
+      "system": {
+        "slug": "secret-laboratory",
+        "section": "Items",
+        "sortOrder": 80,
+        "image": "/Blox%20Fruits/Locations/secret-laboratory.webp"
+      }
     },
     {
-      "name": "Secret Temple",
-      "slug": "secret-temple",
-      "image": "/Blox%20Fruits/Locations/secret-temple.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a6/SecretTempleRevamp.png/revision/latest/scale-to-width-down/268?cb=20241215084603",
-      "fields": {
+      "item": {
+        "name": "Secret Temple",
+        "overview": "The Secret Temple is located inside the waterfall at Hydra Island.",
         "type": "Location",
         "location": "Hydra Island",
-        "level": "+1500",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Hypnotical_Suspense.mp3Hypnotical Suspense"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Hypnotical_Suspense.mp3Hypnotical Suspense",
+        "level": "+1500"
       },
-      "overview": "The Secret Temple is located inside the waterfall at Hydra Island.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Secret_Temple"
+      "system": {
+        "slug": "secret-temple",
+        "section": "Items",
+        "sortOrder": 81,
+        "image": "/Blox%20Fruits/Locations/secret-temple.webp"
+      }
     },
     {
-      "name": "Skylands",
-      "slug": "skylands",
-      "image": "/Blox%20Fruits/Locations/skylands.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/65/Skypeia.png/revision/latest/scale-to-width-down/268?cb=20200710100259",
-      "fields": {
+      "item": {
+        "name": "Skylands",
+        "overview": "The first island of the Skylands is a crescent-shaped, grounded island. The island is mostly covered in grass and is dotted with rocks. When the player goes at the back side of the first or the base island, they will find a two big rocks and one of the two rocks has the Mad Scientist, who sells the Electric fighting style. There is also a small lake, supplied by a waterfall from higher islands.",
         "type": "Flying Island",
         "sea": "First Sea",
-        "level": "150-190",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Natural_Innovation.mp3Natural Innovation",
+        "level": "150-190",
         "previous": "Marine Fortress"
       },
-      "overview": "The first island of the Skylands is a crescent-shaped, grounded island. The island is mostly covered in grass and is dotted with rocks. When the player goes at the back side of the first or the base island, they will find a two big rocks and one of the two rocks has the Mad Scientist, who sells the Electric fighting style. There is also a small lake, supplied by a waterfall from higher islands.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skylands"
+      "system": {
+        "slug": "skylands",
+        "section": "Items",
+        "sortOrder": 82,
+        "image": "/Blox%20Fruits/Locations/skylands.webp"
+      }
     },
     {
-      "name": "Snow Mountain",
-      "slug": "snow-mountain",
-      "image": "/Blox%20Fruits/Locations/snow-mountain.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7f/Snow_Mountain.png/revision/latest/scale-to-width-down/268?cb=20250323120611",
-      "fields": {
+      "item": {
+        "name": "Snow Mountain",
+        "overview": "The island is made up of two mountains connected by a bridge. On one mountain, the player can find the Snow Quest Giver, as well as the Snow Troopers. On the other mountain, the player can find the Winter Warriors.",
         "type": "Island",
         "sea": "Second Sea",
-        "level": "1000-1100",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Winter.mp3Winter",
+        "level": "1000-1100",
         "previous": "Graveyard Island"
       },
-      "overview": "The island is made up of two mountains connected by a bridge. On one mountain, the player can find the Snow Quest Giver, as well as the Snow Troopers. On the other mountain, the player can find the Winter Warriors.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snow_Mountain"
+      "system": {
+        "slug": "snow-mountain",
+        "section": "Items",
+        "sortOrder": 83,
+        "image": "/Blox%20Fruits/Locations/snow-mountain.webp"
+      }
     },
     {
-      "name": "Submerged Island",
-      "slug": "submerged-island",
-      "image": "/Blox%20Fruits/Locations/submerged-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/db/Submerged_Island.png/revision/latest/scale-to-width-down/268?cb=20250907024930",
-      "fields": {
+      "item": {
+        "name": "Submerged Island",
+        "overview": "The Submerged Island is an island in the Third Sea.",
         "type": "Island",
         "sea": "Third Sea",
-        "level": "2600-2800 (MAX) (With Tyrant of the Skies defeated)",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Undersea_Remnants.mp3Undersea Remnants",
+        "level": "2600-2800 (MAX) (With Tyrant of the Skies defeated)",
         "previous": "Tiki Outpost"
       },
-      "overview": "The Submerged Island is an island in the Third Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Submerged_Island"
+      "system": {
+        "slug": "submerged-island",
+        "section": "Items",
+        "sortOrder": 84,
+        "image": "/Blox%20Fruits/Locations/submerged-island.webp"
+      }
     },
     {
-      "name": "Swan's Room",
-      "slug": "swan-s-room",
-      "image": "/Blox%20Fruits/Locations/swan-s-room.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cf/SwanGate.png/revision/latest/scale-to-width-down/268?cb=20250703190231",
-      "fields": {
+      "item": {
+        "name": "Swan's Room",
+        "overview": "Swan's Room is a big area with many big windows around it, a pink octagon-shaped symbol in the middle of the ground, and a big white circle on the top of the room.",
         "sea": "Second Sea",
         "location": "Mansion",
-        "level": "1000",
-        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Lizard_Bandit_Clan.mp3Lizard Bandit Clan"
+        "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Lizard_Bandit_Clan.mp3Lizard Bandit Clan",
+        "level": "1000"
       },
-      "overview": "Swan's Room is a big area with many big windows around it, a pink octagon-shaped symbol in the middle of the ground, and a big white circle on the top of the room.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Swan's_Room"
+      "system": {
+        "slug": "swan-s-room",
+        "section": "Items",
+        "sortOrder": 85,
+        "image": "/Blox%20Fruits/Locations/swan-s-room.webp"
+      }
     },
     {
-      "name": "Temple of Time",
-      "slug": "temple-of-time",
-      "image": "/Blox%20Fruits/Locations/temple-of-time.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8f/Temple_of_Time_Entrance.png/revision/latest/scale-to-width-down/268?cb=20240104213605",
-      "fields": {
+      "item": {
+        "name": "Temple of Time",
+        "overview": "The Temple of Time can be accessed after interacting with the Mysterious Force at the top of Great Tree.",
         "type": "Location",
         "sea": "Third Sea",
         "location": "Great Tree",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Hypnotical_Suspense.mp3Hypnotical Suspense"
       },
-      "overview": "The Temple of Time can be accessed after interacting with the Mysterious Force at the top of Great Tree.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Temple_of_Time"
+      "system": {
+        "slug": "temple-of-time",
+        "section": "Items",
+        "sortOrder": 86,
+        "image": "/Blox%20Fruits/Locations/temple-of-time.webp"
+      }
     },
     {
-      "name": "Third Sea",
-      "slug": "third-sea",
-      "image": "/Blox%20Fruits/Locations/third-sea.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/bc/Updatedbloxfruitsmap25.png/revision/latest/scale-to-width-down/268?cb=20250827195858",
-      "fields": {
+      "item": {
+        "name": "Third Sea",
+        "overview": "Players can get access to the Third Sea by reaching Lv. 1500, after completing the Colosseum Quest, defeating Don Swan and helping King Red Head subdue rip_indra in the Second Sea.",
         "level": "1500-2800 (MAX)",
         "previous": "Second Sea"
       },
-      "overview": "Players can get access to the Third Sea by reaching Lv. 1500, after completing the Colosseum Quest, defeating Don Swan and helping King Red Head subdue rip_indra in the Second Sea.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Third_Sea"
+      "system": {
+        "slug": "third-sea",
+        "section": "Items",
+        "sortOrder": 87,
+        "image": "/Blox%20Fruits/Locations/third-sea.webp"
+      }
     },
     {
-      "name": "Tiki Outpost",
-      "slug": "tiki-outpost",
-      "image": "/Blox%20Fruits/Locations/tiki-outpost.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5a/TikiOutpostdragonupdate.png/revision/latest/scale-to-width-down/268?cb=20241215130158",
-      "fields": {
+      "item": {
+        "name": "Tiki Outpost",
+        "overview": "At the entrance of the Tiki Outpost, a large arch constructed from white and grey stone extends around the perimeter of the island. At the center lies a massive, ornately adorned temple, partially overgrown with vines and moss. To the left of the temple, along the island’s edge, stands a similarly styled tower, exhibiting the same weathered and dilapidated condition. Further left from the center is a section with a grassier landscape and towers that house higher-level enemies along the area's edges, connected via suspended bridges. Two dock areas lie at the front and back of the island's center, with another dock located at the front of the island’s left side.\"",
         "type": "Island",
         "sea": "Third Sea",
-        "level": "2450-2800 (MAX) (Without Tyrant of the Skies defeated)2450-2600 (With Tyrant of the Skies defeated)",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Maximum_Strength.mp3Maximum Strength",
+        "level": "2450-2800 (MAX) (Without Tyrant of the Skies defeated)2450-2600 (With Tyrant of the Skies defeated)",
         "previous": "Sea of Treats"
       },
-      "overview": "At the entrance of the Tiki Outpost, a large arch constructed from white and grey stone extends around the perimeter of the island. At the center lies a massive, ornately adorned temple, partially overgrown with vines and moss. To the left of the temple, along the island’s edge, stands a similarly styled tower, exhibiting the same weathered and dilapidated condition. Further left from the center is a section with a grassier landscape and towers that house higher-level enemies along the area's edges, connected via suspended bridges. Two dock areas lie at the front and back of the island's center, with another dock located at the front of the island’s left side.\"",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tiki_Outpost"
+      "system": {
+        "slug": "tiki-outpost",
+        "section": "Items",
+        "sortOrder": 88,
+        "image": "/Blox%20Fruits/Locations/tiki-outpost.webp"
+      }
     },
     {
-      "name": "Treasure Island",
-      "slug": "treasure-island",
-      "image": "/Blox%20Fruits/Locations/treasure-island.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8c/Treasure_Island_Small.png/revision/latest/scale-to-width-down/268?cb=20240506132840",
-      "fields": {
+      "item": {
+        "name": "Treasure Island",
+        "overview": "The Treasure Island is relatively small and consists of three distinct sections, each at a different elevation. A few trees and rocks are scattered across the terrain, with a chance for Chests to spawn. Aside from these features, the island is largely barren.",
         "type": "Island",
         "sea": "Second SeaThird Sea",
         "location": "Sea Danger Levels",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Haunted_Halls.mp3Haunted Halls"
       },
-      "overview": "The Treasure Island is relatively small and consists of three distinct sections, each at a different elevation. A few trees and rocks are scattered across the terrain, with a chance for Chests to spawn. Aside from these features, the island is largely barren.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Treasure_Island"
+      "system": {
+        "slug": "treasure-island",
+        "section": "Items",
+        "sortOrder": 89,
+        "image": "/Blox%20Fruits/Locations/treasure-island.webp"
+      }
     },
     {
-      "name": "Underwater City",
-      "slug": "underwater-city",
-      "image": "/Blox%20Fruits/Locations/underwater-city.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/5f/Underwater_City.png/revision/latest/scale-to-width-down/268?cb=20250316125024",
-      "fields": {
+      "item": {
+        "name": "Underwater City",
+        "overview": "The Underwater City's entrance is located between the Frozen Village and the Prison. To access it, the player has to enter the Whirlpool surrounded by three large rocks. Since it is a relatively small area, it may be difficult to find.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "375-450",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Undersea_Life.mp3Undersea Life",
+        "level": "375-450",
         "previous": "Magma Village"
       },
-      "overview": "The Underwater City's entrance is located between the Frozen Village and the Prison. To access it, the player has to enter the Whirlpool surrounded by three large rocks. Since it is a relatively small area, it may be difficult to find.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Underwater_City"
+      "system": {
+        "slug": "underwater-city",
+        "section": "Items",
+        "sortOrder": 90,
+        "image": "/Blox%20Fruits/Locations/underwater-city.webp"
+      }
     },
     {
-      "name": "Upper Skylands",
-      "slug": "upper-skylands",
-      "image": "/Blox%20Fruits/Locations/upper-skylands.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/03/Upperyardo.png/revision/latest/scale-to-width-down/268?cb=20200711070835",
-      "fields": {
+      "item": {
+        "name": "Upper Skylands",
+        "overview": "The entrance to the Upper Skylands, found in the Skylands, is a medium-sized worn-down temple, surrounded by some grass and trees. This is also where the player will find God's Guards and the Mole. Inside the temple is a large pit filled with clouds, which when destroyed, gives access to the Upper Skylands.",
         "type": "Island",
         "sea": "First Sea",
-        "level": "450-625",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Natural_Innovation.mp3Natural Innovation",
+        "level": "450-625",
         "previous": "Underwater City"
       },
-      "overview": "The entrance to the Upper Skylands, found in the Skylands, is a medium-sized worn-down temple, surrounded by some grass and trees. This is also where the player will find God's Guards and the Mole. Inside the temple is a large pit filled with clouds, which when destroyed, gives access to the Upper Skylands.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Upper_Skylands"
+      "system": {
+        "slug": "upper-skylands",
+        "section": "Items",
+        "sortOrder": 91,
+        "image": "/Blox%20Fruits/Locations/upper-skylands.webp"
+      }
     },
     {
-      "name": "Whirlpool (Location)",
-      "slug": "whirlpool-location",
-      "image": "/Blox%20Fruits/Locations/whirlpool-location.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/2/2a/Whirlpool_%28Location%29.png/revision/latest/scale-to-width-down/268?cb=20250123212806",
-      "fields": {
+      "item": {
+        "name": "Whirlpool (Location)",
+        "overview": "The Whirlpool consists of a large whirlpool surrounded by rocks. The rocks have small amounts of grass on them, and a dock for boats.",
         "type": "Island",
         "sea": "First Sea",
         "backgroundMusic": "https://blox-fruits.fandom.com/wiki/File:Explorer.mp3Explorer"
       },
-      "overview": "The Whirlpool consists of a large whirlpool surrounded by rocks. The rocks have small amounts of grass on them, and a dock for boats.",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Whirlpool_(Location)"
+      "system": {
+        "slug": "whirlpool-location",
+        "section": "Items",
+        "sortOrder": 92,
+        "image": "/Blox%20Fruits/Locations/whirlpool-location.webp"
+      }
     }
   ]
 }

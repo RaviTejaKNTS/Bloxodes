@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { repoPath } from "@/lib/paths";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 import type { ArmorPiece, ArmorSlot, ArmorWeightClass, ArmorWeightGroup } from "./data";
 
 export type ForgeArmorDataset = {
@@ -118,7 +119,7 @@ function resolveUpdatedAt(sources: ForgeArmorSource[] | null | undefined, update
 
 export async function loadForgeArmorDataset(): Promise<ForgeArmorDataset> {
   const json = await readArmorJson();
-  const items = json.items ?? [];
+  const items = unwrapDatasetItems<ForgeArmorRow>(json);
   const sources = json.meta?.sources ?? null;
   const dataLastUpdatedOn = resolveUpdatedAt(sources ?? undefined, json.meta?.updatedAt ?? null);
   const source = resolveSource(sources ?? undefined);

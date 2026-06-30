@@ -1,17 +1,12 @@
 {
   "meta": {
-    "title": "Blox Fruits quests data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Quests",
-        "url": "https://blox-fruits.fandom.com/wiki/Quests",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "quests",
+    "route": "/wiki/blox-fruits/quests",
+    "catalogCode": "blox-fruits-quests",
+    "itemFields": [
       "sea",
       "island",
       "questGiver",
@@ -19,2662 +14,2237 @@
       "level",
       "exp",
       "money",
-      "special"
-    ]
+      "special",
+      "expexp"
+    ],
+    "columns": [
+      "sea",
+      "island",
+      "questGiver",
+      "quest",
+      "level",
+      "exp",
+      "money",
+      "special",
+      "expexp"
+    ],
+    "display": {
+      "groupLabel": "sea",
+      "sectionOrder": [
+        "First Sea",
+        "Second Sea",
+        "Third Sea"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "sea",
+        "island",
+        "questGiver",
+        "quest",
+        "level",
+        "exp"
+      ],
+      "tableFields": [
+        "sea",
+        "island",
+        "questGiver",
+        "quest",
+        "level",
+        "exp",
+        "money",
+        "special"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "First Sea - Marine Starter - Trainee",
-      "slug": "first-sea-marine-starter-trainee",
-      "fields": {
+      "item": {
+        "name": "First Sea - Marine Starter - Trainee",
+        "sea": "First Sea",
         "island": "Marine Starter",
         "questGiver": "Marine Leader",
         "quest": "Trainee",
         "level": "0",
-        "expexp": "300 EXP300 EXP",
+        "exp": "300 EXP300 EXP",
         "money": "350",
-        "special": "N/A"
+        "special": "N/A",
+        "expexp": "300 EXP300 EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Starter",
-      "sea": "First Sea",
-      "island": "Marine Starter",
-      "questGiver": "Marine Leader",
-      "quest": "Trainee",
-      "level": "0",
-      "exp": "300 EXP300 EXP",
-      "money": "350",
-      "special": "N/A",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-marine-starter-trainee",
+        "section": "First Sea",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Pirate Starter - Bandit",
-      "slug": "first-sea-pirate-starter-bandit",
-      "fields": {
+      "item": {
+        "name": "First Sea - Pirate Starter - Bandit",
+        "sea": "First Sea",
         "island": "Pirate Starter",
         "questGiver": "Bandit Quest Giver",
         "quest": "Bandit",
         "level": "0",
-        "expexp": "300 EXP300 EXP",
+        "exp": "300 EXP300 EXP",
         "money": "350",
-        "special": "N/A"
+        "special": "N/A",
+        "expexp": "300 EXP300 EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pirate_Starter",
-      "sea": "First Sea",
-      "island": "Pirate Starter",
-      "questGiver": "Bandit Quest Giver",
-      "quest": "Bandit",
-      "level": "0",
-      "exp": "300 EXP300 EXP",
-      "money": "350",
-      "special": "N/A",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-pirate-starter-bandit",
+        "section": "First Sea",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Jungle - Monkey",
-      "slug": "first-sea-jungle-monkey",
-      "fields": {
+      "item": {
+        "name": "First Sea - Jungle - Monkey",
+        "sea": "First Sea",
         "island": "Jungle",
         "questGiver": "Adventurer",
         "quest": "Monkey",
         "level": "10",
-        "expexp": "2,300 EXP2,300 EXP",
+        "exp": "2,300 EXP2,300 EXP",
         "money": "800",
-        "special": "N/A"
+        "special": "N/A",
+        "expexp": "2,300 EXP2,300 EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Jungle",
-      "sea": "First Sea",
-      "island": "Jungle",
-      "questGiver": "Adventurer",
-      "quest": "Monkey",
-      "level": "10",
-      "exp": "2,300 EXP2,300 EXP",
-      "money": "800",
-      "special": "N/A",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-jungle-monkey",
+        "section": "First Sea",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Gorilla - 4,500 EXP4,500 EXP",
-      "slug": "first-sea-gorilla-4-500-exp4-500-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Gorilla - 4,500 EXP4,500 EXP",
+        "sea": "First Sea",
         "island": "Gorilla",
         "questGiver": "15",
         "quest": "4,500 EXP4,500 EXP",
         "level": "1,200",
+        "exp": "N/A",
         "expexp": "N/A"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gorilla",
-      "sea": "First Sea",
-      "island": "Gorilla",
-      "questGiver": "15",
-      "quest": "4,500 EXP4,500 EXP",
-      "level": "1,200",
-      "exp": "N/A",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-gorilla-4-500-exp4-500-exp",
+        "section": "First Sea",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Gorilla King - 9,500 EXP9,500 EXP",
-      "slug": "first-sea-gorilla-king-9-500-exp9-500-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Gorilla King - 9,500 EXP9,500 EXP",
+        "sea": "First Sea",
         "island": "Gorilla King",
         "questGiver": "20",
         "quest": "9,500 EXP9,500 EXP",
         "level": "2,000",
+        "exp": "Boss",
         "expexp": "Boss"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gorilla_King",
-      "sea": "First Sea",
-      "island": "Gorilla King",
-      "questGiver": "20",
-      "quest": "9,500 EXP9,500 EXP",
-      "level": "2,000",
-      "exp": "Boss",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-gorilla-king-9-500-exp9-500-exp",
+        "section": "First Sea",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Pirate Village - Pirate",
-      "slug": "first-sea-pirate-village-pirate",
-      "fields": {
+      "item": {
+        "name": "First Sea - Pirate Village - Pirate",
+        "sea": "First Sea",
         "island": "Pirate Village",
         "questGiver": "Pirate Adventurer",
         "quest": "Pirate",
         "level": "30",
-        "expexp": "13,000 EXP13,000 EXP",
+        "exp": "13,000 EXP13,000 EXP",
         "money": "3,000",
-        "special": "Cutlass"
+        "special": "Cutlass",
+        "expexp": "13,000 EXP13,000 EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pirate_Village",
-      "sea": "First Sea",
-      "island": "Pirate Village",
-      "questGiver": "Pirate Adventurer",
-      "quest": "Pirate",
-      "level": "30",
-      "exp": "13,000 EXP13,000 EXP",
-      "money": "3,000",
-      "special": "Cutlass",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-pirate-village-pirate",
+        "section": "First Sea",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Brute - 22,000 EXP22,000 EXP",
-      "slug": "first-sea-brute-22-000-exp22-000-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Brute - 22,000 EXP22,000 EXP",
+        "sea": "First Sea",
         "island": "Brute",
         "questGiver": "40",
         "quest": "22,000 EXP22,000 EXP",
         "level": "3,500",
+        "exp": "Iron Mace",
         "expexp": "Iron Mace"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Brute",
-      "sea": "First Sea",
-      "island": "Brute",
-      "questGiver": "40",
-      "quest": "22,000 EXP22,000 EXP",
-      "level": "3,500",
-      "exp": "Iron Mace",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-brute-22-000-exp22-000-exp",
+        "section": "First Sea",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Chef - 45,000 EXP45,000 EXP",
-      "slug": "first-sea-chef-45-000-exp45-000-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Chef - 45,000 EXP45,000 EXP",
+        "sea": "First Sea",
         "island": "Chef",
         "questGiver": "55",
         "quest": "45,000 EXP45,000 EXP",
         "level": "8,000",
+        "exp": "Boss, Blade, Cutlass",
         "expexp": "Boss, Blade, Cutlass"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chef",
-      "sea": "First Sea",
-      "island": "Chef",
-      "questGiver": "55",
-      "quest": "45,000 EXP45,000 EXP",
-      "level": "8,000",
-      "exp": "Boss, Blade, Cutlass",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-chef-45-000-exp45-000-exp",
+        "section": "First Sea",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Desert - Desert Bandit",
-      "slug": "first-sea-desert-desert-bandit",
-      "fields": {
+      "item": {
+        "name": "First Sea - Desert - Desert Bandit",
+        "sea": "First Sea",
         "island": "Desert",
         "questGiver": "Desert Adventurer",
         "quest": "Desert Bandit",
         "level": "60",
-        "expexp": "45,000 EXP45,000 EXP",
+        "exp": "45,000 EXP45,000 EXP",
         "money": "4,000",
-        "special": "Cutlass"
+        "special": "Cutlass",
+        "expexp": "45,000 EXP45,000 EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Desert",
-      "sea": "First Sea",
-      "island": "Desert",
-      "questGiver": "Desert Adventurer",
-      "quest": "Desert Bandit",
-      "level": "60",
-      "exp": "45,000 EXP45,000 EXP",
-      "money": "4,000",
-      "special": "Cutlass",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-desert-desert-bandit",
+        "section": "First Sea",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Desert Officer - 65,000 EXP65,000 EXP",
-      "slug": "first-sea-desert-officer-65-000-exp65-000-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Desert Officer - 65,000 EXP65,000 EXP",
+        "sea": "First Sea",
         "island": "Desert Officer",
         "questGiver": "75",
         "quest": "65,000 EXP65,000 EXP",
         "level": "4,500",
+        "exp": "Cutlass",
         "expexp": "Cutlass"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Desert_Officer",
-      "sea": "First Sea",
-      "island": "Desert Officer",
-      "questGiver": "75",
-      "quest": "65,000 EXP65,000 EXP",
-      "level": "4,500",
-      "exp": "Cutlass",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-desert-officer-65-000-exp65-000-exp",
+        "section": "First Sea",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Frozen Village - Snow Bandit",
-      "slug": "first-sea-frozen-village-snow-bandit",
-      "fields": {
+      "item": {
+        "name": "First Sea - Frozen Village - Snow Bandit",
+        "sea": "First Sea",
         "island": "Frozen Village",
         "questGiver": "Villager",
         "quest": "Snow Bandit",
         "level": "90",
-        "expexp": "90,000 EXP90,000 EXP",
+        "exp": "90,000 EXP90,000 EXP",
         "money": "5,000",
-        "special": "Katana"
+        "special": "Katana",
+        "expexp": "90,000 EXP90,000 EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Frozen_Village",
-      "sea": "First Sea",
-      "island": "Frozen Village",
-      "questGiver": "Villager",
-      "quest": "Snow Bandit",
-      "level": "90",
-      "exp": "90,000 EXP90,000 EXP",
-      "money": "5,000",
-      "special": "Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-frozen-village-snow-bandit",
+        "section": "First Sea",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Snowman - 150,000 EXP150,000 EXP",
-      "slug": "first-sea-snowman-150-000-exp150-000-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Snowman - 150,000 EXP150,000 EXP",
+        "sea": "First Sea",
         "island": "Snowman",
         "questGiver": "100",
         "quest": "150,000 EXP150,000 EXP",
         "level": "5,500",
+        "exp": "N/A",
         "expexp": "N/A"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snowman",
-      "sea": "First Sea",
-      "island": "Snowman",
-      "questGiver": "100",
-      "quest": "150,000 EXP150,000 EXP",
-      "level": "5,500",
-      "exp": "N/A",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-snowman-150-000-exp150-000-exp",
+        "section": "First Sea",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Yeti - 220,000 EXP220,000 EXP",
-      "slug": "first-sea-yeti-220-000-exp220-000-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Yeti - 220,000 EXP220,000 EXP",
+        "sea": "First Sea",
         "island": "Yeti",
         "questGiver": "105",
         "quest": "220,000 EXP220,000 EXP",
         "level": "10,000",
+        "exp": "Boss",
         "expexp": "Boss"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Yeti_(Boss)",
-      "sea": "First Sea",
-      "island": "Yeti",
-      "questGiver": "105",
-      "quest": "220,000 EXP220,000 EXP",
-      "level": "10,000",
-      "exp": "Boss",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-yeti-220-000-exp220-000-exp",
+        "section": "First Sea",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Marine Fortress - Chief Petty Officer",
-      "slug": "first-sea-marine-fortress-chief-petty-officer",
-      "fields": {
+      "item": {
+        "name": "First Sea - Marine Fortress - Chief Petty Officer",
+        "sea": "First Sea",
         "island": "Marine Fortress",
         "questGiver": "Marine",
         "quest": "Chief Petty Officer",
         "level": "120",
-        "expexp": "225,000 EXP225,000 EXP",
+        "exp": "225,000 EXP225,000 EXP",
         "money": "6,000",
-        "special": "Dual Katana"
+        "special": "Dual Katana",
+        "expexp": "225,000 EXP225,000 EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Fortress",
-      "sea": "First Sea",
-      "island": "Marine Fortress",
-      "questGiver": "Marine",
-      "quest": "Chief Petty Officer",
-      "level": "120",
-      "exp": "225,000 EXP225,000 EXP",
-      "money": "6,000",
-      "special": "Dual Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-marine-fortress-chief-petty-officer",
+        "section": "First Sea",
+        "sortOrder": 14,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Vice Admiral - 415,000 EXP415,000 EXP",
-      "slug": "first-sea-vice-admiral-415-000-exp415-000-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Vice Admiral - 415,000 EXP415,000 EXP",
+        "sea": "First Sea",
         "island": "Vice Admiral",
         "questGiver": "130",
         "quest": "415,000 EXP415,000 EXP",
         "level": "15,000",
+        "exp": "Boss, Triple Katana",
         "expexp": "Boss, Triple Katana"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Vice_Admiral",
-      "sea": "First Sea",
-      "island": "Vice Admiral",
-      "questGiver": "130",
-      "quest": "415,000 EXP415,000 EXP",
-      "level": "15,000",
-      "exp": "Boss, Triple Katana",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-vice-admiral-415-000-exp415-000-exp",
+        "section": "First Sea",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Skylands - Sky Bandit",
-      "slug": "first-sea-skylands-sky-bandit",
-      "fields": {
+      "item": {
+        "name": "First Sea - Skylands - Sky Bandit",
+        "sea": "First Sea",
         "island": "Skylands",
         "questGiver": "Sky Adventurer",
         "quest": "Sky Bandit",
         "level": "150",
-        "expexp": "315,000 EXP315,000 EXP",
+        "exp": "315,000 EXP315,000 EXP",
         "money": "7,000",
-        "special": "Dual Katana"
+        "special": "Dual Katana",
+        "expexp": "315,000 EXP315,000 EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skylands",
-      "sea": "First Sea",
-      "island": "Skylands",
-      "questGiver": "Sky Adventurer",
-      "quest": "Sky Bandit",
-      "level": "150",
-      "exp": "315,000 EXP315,000 EXP",
-      "money": "7,000",
-      "special": "Dual Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-skylands-sky-bandit",
+        "section": "First Sea",
+        "sortOrder": 16,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Dark Master - 450,000 EXP450,000 EXP",
-      "slug": "first-sea-dark-master-450-000-exp450-000-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Dark Master - 450,000 EXP450,000 EXP",
+        "sea": "First Sea",
         "island": "Dark Master",
         "questGiver": "175",
         "quest": "450,000 EXP450,000 EXP",
         "level": "7,500",
+        "exp": "Iron Mace",
         "expexp": "Iron Mace"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark_Master",
-      "sea": "First Sea",
-      "island": "Dark Master",
-      "questGiver": "175",
-      "quest": "450,000 EXP450,000 EXP",
-      "level": "7,500",
-      "exp": "Iron Mace",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-dark-master-450-000-exp450-000-exp",
+        "section": "First Sea",
+        "sortOrder": 17,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Prison - Prisoner",
-      "slug": "first-sea-prison-prisoner",
-      "fields": {
+      "item": {
+        "name": "First Sea - Prison - Prisoner",
+        "sea": "First Sea",
         "island": "Prison",
         "questGiver": "Jail Keeper",
         "quest": "Prisoner",
         "level": "190",
-        "expexp": "550,000 EXP550,000 EXP",
+        "exp": "550,000 EXP550,000 EXP",
         "money": "7,000",
-        "special": "N/A"
+        "special": "N/A",
+        "expexp": "550,000 EXP550,000 EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Prison",
-      "sea": "First Sea",
-      "island": "Prison",
-      "questGiver": "Jail Keeper",
-      "quest": "Prisoner",
-      "level": "190",
-      "exp": "550,000 EXP550,000 EXP",
-      "money": "7,000",
-      "special": "N/A",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-prison-prisoner",
+        "section": "First Sea",
+        "sortOrder": 18,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Dangerous Prisoner - 780,000 EXP780,000 EXP",
-      "slug": "first-sea-dangerous-prisoner-780-000-exp780-000-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Dangerous Prisoner - 780,000 EXP780,000 EXP",
+        "sea": "First Sea",
         "island": "Dangerous Prisoner",
         "questGiver": "210",
         "quest": "780,000 EXP780,000 EXP",
         "level": "7,500",
+        "exp": "Cutlass",
         "expexp": "Cutlass"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dangerous_Prisoner",
-      "sea": "First Sea",
-      "island": "Dangerous Prisoner",
-      "questGiver": "210",
-      "quest": "780,000 EXP780,000 EXP",
-      "level": "7,500",
-      "exp": "Cutlass",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-dangerous-prisoner-780-000-exp780-000-exp",
+        "section": "First Sea",
+        "sortOrder": 19,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Head Jailer - 220",
-      "slug": "first-sea-head-jailer-220",
-      "fields": {
+      "item": {
+        "name": "First Sea - Head Jailer - 220",
+        "sea": "First Sea",
         "island": "Head Jailer",
         "questGiver": "Warden",
         "quest": "220",
         "level": "850,000 EXP850,000 EXP",
-        "expexp": "6,000",
-        "money": "Boss, Dual Katana"
+        "exp": "6,000",
+        "money": "Boss, Dual Katana",
+        "expexp": "6,000"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Head_Jailer",
-      "sea": "First Sea",
-      "island": "Head Jailer",
-      "questGiver": "Warden",
-      "quest": "220",
-      "level": "850,000 EXP850,000 EXP",
-      "exp": "6,000",
-      "money": "Boss, Dual Katana",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-head-jailer-220",
+        "section": "First Sea",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Chief Warden - 1.0M EXP1.0M EXP",
-      "slug": "first-sea-chief-warden-1-0m-exp1-0m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Chief Warden - 1.0M EXP1.0M EXP",
+        "sea": "First Sea",
         "island": "Chief Warden",
         "questGiver": "230",
         "quest": "1.0M EXP1.0M EXP",
         "level": "10,000",
+        "exp": "Boss, Wardens Sword",
         "expexp": "Boss, Wardens Sword"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chief_Warden",
-      "sea": "First Sea",
-      "island": "Chief Warden",
-      "questGiver": "230",
-      "quest": "1.0M EXP1.0M EXP",
-      "level": "10,000",
-      "exp": "Boss, Wardens Sword",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-chief-warden-1-0m-exp1-0m-exp",
+        "section": "First Sea",
+        "sortOrder": 21,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Swan - 1.6M EXP1.6M EXP",
-      "slug": "first-sea-swan-1-6m-exp1-6m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Swan - 1.6M EXP1.6M EXP",
+        "sea": "First Sea",
         "island": "Swan",
         "questGiver": "240",
         "quest": "1.6M EXP1.6M EXP",
         "level": "15,000",
+        "exp": "Boss, Spider",
         "expexp": "Boss, Spider"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Swan",
-      "sea": "First Sea",
-      "island": "Swan",
-      "questGiver": "240",
-      "quest": "1.6M EXP1.6M EXP",
-      "level": "15,000",
-      "exp": "Boss, Spider",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-swan-1-6m-exp1-6m-exp",
+        "section": "First Sea",
+        "sortOrder": 22,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Colosseum - Toga Warrior",
-      "slug": "first-sea-colosseum-toga-warrior",
-      "fields": {
+      "item": {
+        "name": "First Sea - Colosseum - Toga Warrior",
+        "sea": "First Sea",
         "island": "Colosseum",
         "questGiver": "Colosseum Quest Giver",
         "quest": "Toga Warrior",
         "level": "250",
-        "expexp": "1.1M EXP1.1M EXP",
+        "exp": "1.1M EXP1.1M EXP",
         "money": "7,000",
-        "special": "N/A"
+        "special": "N/A",
+        "expexp": "1.1M EXP1.1M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Colosseum",
-      "sea": "First Sea",
-      "island": "Colosseum",
-      "questGiver": "Colosseum Quest Giver",
-      "quest": "Toga Warrior",
-      "level": "250",
-      "exp": "1.1M EXP1.1M EXP",
-      "money": "7,000",
-      "special": "N/A",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-colosseum-toga-warrior",
+        "section": "First Sea",
+        "sortOrder": 23,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Gladiator - 1.3M EXP1.3M EXP",
-      "slug": "first-sea-gladiator-1-3m-exp1-3m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Gladiator - 1.3M EXP1.3M EXP",
+        "sea": "First Sea",
         "island": "Gladiator",
         "questGiver": "275",
         "quest": "1.3M EXP1.3M EXP",
         "level": "7,500",
+        "exp": "N/A",
         "expexp": "N/A"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gladiator",
-      "sea": "First Sea",
-      "island": "Gladiator",
-      "questGiver": "275",
-      "quest": "1.3M EXP1.3M EXP",
-      "level": "7,500",
-      "exp": "N/A",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-gladiator-1-3m-exp1-3m-exp",
+        "section": "First Sea",
+        "sortOrder": 24,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Magma Village - Military Soldier",
-      "slug": "first-sea-magma-village-military-soldier",
-      "fields": {
+      "item": {
+        "name": "First Sea - Magma Village - Military Soldier",
+        "sea": "First Sea",
         "island": "Magma Village",
         "questGiver": "The Mayor",
         "quest": "Military Soldier",
         "level": "300",
-        "expexp": "1.7M EXP1.7M EXP",
+        "exp": "1.7M EXP1.7M EXP",
         "money": "8,250",
-        "special": "Aura (50%), Katana"
+        "special": "Aura (50%), Katana",
+        "expexp": "1.7M EXP1.7M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Magma_Village",
-      "sea": "First Sea",
-      "island": "Magma Village",
-      "questGiver": "The Mayor",
-      "quest": "Military Soldier",
-      "level": "300",
-      "exp": "1.7M EXP1.7M EXP",
-      "money": "8,250",
-      "special": "Aura (50%), Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-magma-village-military-soldier",
+        "section": "First Sea",
+        "sortOrder": 25,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Military Spy - 2.0M EXP2.0M EXP",
-      "slug": "first-sea-military-spy-2-0m-exp2-0m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Military Spy - 2.0M EXP2.0M EXP",
+        "sea": "First Sea",
         "island": "Military Spy",
         "questGiver": "325",
         "quest": "2.0M EXP2.0M EXP",
         "level": "8,500",
+        "exp": "Aura, Flash Step",
         "expexp": "Aura, Flash Step"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Military_Spy",
-      "sea": "First Sea",
-      "island": "Military Spy",
-      "questGiver": "325",
-      "quest": "2.0M EXP2.0M EXP",
-      "level": "8,500",
-      "exp": "Aura, Flash Step",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-military-spy-2-0m-exp2-0m-exp",
+        "section": "First Sea",
+        "sortOrder": 26,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Magma Admiral - 3.0M EXP3.0M EXP",
-      "slug": "first-sea-magma-admiral-3-0m-exp3-0m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Magma Admiral - 3.0M EXP3.0M EXP",
+        "sea": "First Sea",
         "island": "Magma Admiral",
         "questGiver": "350",
         "quest": "3.0M EXP3.0M EXP",
         "level": "15,000",
+        "exp": "Boss, Magma, Magma Blaster",
         "expexp": "Boss, Magma, Magma Blaster"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Magma_Admiral",
-      "sea": "First Sea",
-      "island": "Magma Admiral",
-      "questGiver": "350",
-      "quest": "3.0M EXP3.0M EXP",
-      "level": "15,000",
-      "exp": "Boss, Magma, Magma Blaster",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-magma-admiral-3-0m-exp3-0m-exp",
+        "section": "First Sea",
+        "sortOrder": 27,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Underwater City - Fishman Warrior",
-      "slug": "first-sea-underwater-city-fishman-warrior",
-      "fields": {
+      "item": {
+        "name": "First Sea - Underwater City - Fishman Warrior",
+        "sea": "First Sea",
         "island": "Underwater City",
         "questGiver": "King Neptune",
         "quest": "Fishman Warrior",
         "level": "375",
-        "expexp": "3.05M EXP3.05M EXP",
+        "exp": "3.05M EXP3.05M EXP",
         "money": "8,750",
-        "special": "Katana"
+        "special": "Katana",
+        "expexp": "3.05M EXP3.05M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Underwater_City",
-      "sea": "First Sea",
-      "island": "Underwater City",
-      "questGiver": "King Neptune",
-      "quest": "Fishman Warrior",
-      "level": "375",
-      "exp": "3.05M EXP3.05M EXP",
-      "money": "8,750",
-      "special": "Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-underwater-city-fishman-warrior",
+        "section": "First Sea",
+        "sortOrder": 28,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Fishman Commando - 3.35M EXP3.35M EXP",
-      "slug": "first-sea-fishman-commando-3-35m-exp3-35m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Fishman Commando - 3.35M EXP3.35M EXP",
+        "sea": "First Sea",
         "island": "Fishman Commando",
         "questGiver": "400",
         "quest": "3.35M EXP3.35M EXP",
         "level": "9,000",
+        "exp": "Triple Katana",
         "expexp": "Triple Katana"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishman_Commando",
-      "sea": "First Sea",
-      "island": "Fishman Commando",
-      "questGiver": "400",
-      "quest": "3.35M EXP3.35M EXP",
-      "level": "9,000",
-      "exp": "Triple Katana",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-fishman-commando-3-35m-exp3-35m-exp",
+        "section": "First Sea",
+        "sortOrder": 29,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Fishman Lord - 4.25M EXP4.25M EXP",
-      "slug": "first-sea-fishman-lord-4-25m-exp4-25m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Fishman Lord - 4.25M EXP4.25M EXP",
+        "sea": "First Sea",
         "island": "Fishman Lord",
         "questGiver": "425",
         "quest": "4.25M EXP4.25M EXP",
         "level": "15,000",
+        "exp": "Boss, Trident",
         "expexp": "Boss, Trident"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishman_Lord",
-      "sea": "First Sea",
-      "island": "Fishman Lord",
-      "questGiver": "425",
-      "quest": "4.25M EXP4.25M EXP",
-      "level": "15,000",
-      "exp": "Boss, Trident",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-fishman-lord-4-25m-exp4-25m-exp",
+        "section": "First Sea",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Upper Skylands - God's Guard",
-      "slug": "first-sea-upper-skylands-god-s-guard",
-      "fields": {
+      "item": {
+        "name": "First Sea - Upper Skylands - God's Guard",
+        "sea": "First Sea",
         "island": "Upper Skylands",
         "questGiver": "Mole",
         "quest": "God's Guard",
         "level": "450",
-        "expexp": "4.25M EXP4.25M EXP",
+        "exp": "4.25M EXP4.25M EXP",
         "money": "8,750",
-        "special": "Dual-Headed Blade"
+        "special": "Dual-Headed Blade",
+        "expexp": "4.25M EXP4.25M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Upper_Skylands",
-      "sea": "First Sea",
-      "island": "Upper Skylands",
-      "questGiver": "Mole",
-      "quest": "God's Guard",
-      "level": "450",
-      "exp": "4.25M EXP4.25M EXP",
-      "money": "8,750",
-      "special": "Dual-Headed Blade",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-upper-skylands-god-s-guard",
+        "section": "First Sea",
+        "sortOrder": 31,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Shanda - 5.0M EXP5.0M EXP",
-      "slug": "first-sea-shanda-5-0m-exp5-0m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Shanda - 5.0M EXP5.0M EXP",
+        "sea": "First Sea",
         "island": "Shanda",
         "questGiver": "475",
         "quest": "5.0M EXP5.0M EXP",
         "level": "9,000",
+        "exp": "N/A",
         "expexp": "N/A"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shanda",
-      "sea": "First Sea",
-      "island": "Shanda",
-      "questGiver": "475",
-      "quest": "5.0M EXP5.0M EXP",
-      "level": "9,000",
-      "exp": "N/A",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-shanda-5-0m-exp5-0m-exp",
+        "section": "First Sea",
+        "sortOrder": 32,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Wysper - 5.7M EXP5.7M EXP",
-      "slug": "first-sea-wysper-5-7m-exp5-7m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Wysper - 5.7M EXP5.7M EXP",
+        "sea": "First Sea",
         "island": "Wysper",
         "questGiver": "500",
         "quest": "5.7M EXP5.7M EXP",
         "level": "15,000",
+        "exp": "Boss, Bazooka",
         "expexp": "Boss, Bazooka"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Wysper",
-      "sea": "First Sea",
-      "island": "Wysper",
-      "questGiver": "500",
-      "quest": "5.7M EXP5.7M EXP",
-      "level": "15,000",
-      "exp": "Boss, Bazooka",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-wysper-5-7m-exp5-7m-exp",
+        "section": "First Sea",
+        "sortOrder": 33,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Sky Quest Giver 2 - 525",
-      "slug": "first-sea-sky-quest-giver-2-525",
-      "fields": {
+      "item": {
+        "name": "First Sea - Sky Quest Giver 2 - 525",
+        "sea": "First Sea",
         "island": "Sky Quest Giver 2",
         "questGiver": "Royal Squad",
         "quest": "525",
         "level": "5.8M EXP5.8M EXP",
-        "expexp": "9,500",
-        "money": "N/A"
+        "exp": "9,500",
+        "money": "N/A",
+        "expexp": "9,500"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sky_Quest_Giver_2",
-      "sea": "First Sea",
-      "island": "Sky Quest Giver 2",
-      "questGiver": "Royal Squad",
-      "quest": "525",
-      "level": "5.8M EXP5.8M EXP",
-      "exp": "9,500",
-      "money": "N/A",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-sky-quest-giver-2-525",
+        "section": "First Sea",
+        "sortOrder": 34,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Royal Soldier - 6.3M EXP6.3M EXP",
-      "slug": "first-sea-royal-soldier-6-3m-exp6-3m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Royal Soldier - 6.3M EXP6.3M EXP",
+        "sea": "First Sea",
         "island": "Royal Soldier",
         "questGiver": "550",
         "quest": "6.3M EXP6.3M EXP",
         "level": "9,750",
+        "exp": "N/A",
         "expexp": "N/A"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Royal_Soldier",
-      "sea": "First Sea",
-      "island": "Royal Soldier",
-      "questGiver": "550",
-      "quest": "6.3M EXP6.3M EXP",
-      "level": "9,750",
-      "exp": "N/A",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-royal-soldier-6-3m-exp6-3m-exp",
+        "section": "First Sea",
+        "sortOrder": 35,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Thunder God - 8.0M EXP8.0M EXP",
-      "slug": "first-sea-thunder-god-8-0m-exp8-0m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Thunder God - 8.0M EXP8.0M EXP",
+        "sea": "First Sea",
         "island": "Thunder God",
         "questGiver": "575",
         "quest": "8.0M EXP8.0M EXP",
         "level": "20,000",
+        "exp": "Boss, Rumble, Pole (1st Form)",
         "expexp": "Boss, Rumble, Pole (1st Form)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Thunder_God",
-      "sea": "First Sea",
-      "island": "Thunder God",
-      "questGiver": "575",
-      "quest": "8.0M EXP8.0M EXP",
-      "level": "20,000",
-      "exp": "Boss, Rumble, Pole (1st Form)",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-thunder-god-8-0m-exp8-0m-exp",
+        "section": "First Sea",
+        "sortOrder": 36,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Fountain City - Galley Pirate",
-      "slug": "first-sea-fountain-city-galley-pirate",
-      "fields": {
+      "item": {
+        "name": "First Sea - Fountain City - Galley Pirate",
+        "sea": "First Sea",
         "island": "Fountain City",
         "questGiver": "Freezeburg Quest Giver",
         "quest": "Galley Pirate",
         "level": "625",
-        "expexp": "7.5M EXP7.5M EXP",
+        "exp": "7.5M EXP7.5M EXP",
         "money": "10,000",
-        "special": "Katana"
+        "special": "Katana",
+        "expexp": "7.5M EXP7.5M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fountain_City",
-      "sea": "First Sea",
-      "island": "Fountain City",
-      "questGiver": "Freezeburg Quest Giver",
-      "quest": "Galley Pirate",
-      "level": "625",
-      "exp": "7.5M EXP7.5M EXP",
-      "money": "10,000",
-      "special": "Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-fountain-city-galley-pirate",
+        "section": "First Sea",
+        "sortOrder": 37,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Galley Captain - 8.5M EXP8.5M EXP",
-      "slug": "first-sea-galley-captain-8-5m-exp8-5m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Galley Captain - 8.5M EXP8.5M EXP",
+        "sea": "First Sea",
         "island": "Galley Captain",
         "questGiver": "650",
         "quest": "8.5M EXP8.5M EXP",
         "level": "10,000",
+        "exp": "Aura, Cutlass",
         "expexp": "Aura, Cutlass"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Galley_Captain",
-      "sea": "First Sea",
-      "island": "Galley Captain",
-      "questGiver": "650",
-      "quest": "8.5M EXP8.5M EXP",
-      "level": "10,000",
-      "exp": "Aura, Cutlass",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-galley-captain-8-5m-exp8-5m-exp",
+        "section": "First Sea",
+        "sortOrder": 38,
+        "image": null
+      }
     },
     {
-      "name": "First Sea - Cyborg - 10.0M EXP10.0M EXP",
-      "slug": "first-sea-cyborg-10-0m-exp10-0m-exp",
-      "fields": {
+      "item": {
+        "name": "First Sea - Cyborg - 10.0M EXP10.0M EXP",
+        "sea": "First Sea",
         "island": "Cyborg",
         "questGiver": "675",
         "quest": "10.0M EXP10.0M EXP",
         "level": "20,000",
+        "exp": "Boss",
         "expexp": "Boss"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cyborg_(Boss)",
-      "sea": "First Sea",
-      "island": "Cyborg",
-      "questGiver": "675",
-      "quest": "10.0M EXP10.0M EXP",
-      "level": "20,000",
-      "exp": "Boss",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "first-sea-cyborg-10-0m-exp10-0m-exp",
+        "section": "First Sea",
+        "sortOrder": 39,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Kingdom of Rose - Raider",
-      "slug": "second-sea-kingdom-of-rose-raider",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Kingdom of Rose - Raider",
+        "sea": "Second Sea",
         "island": "Kingdom of Rose",
         "questGiver": "Area 1 Quest Giver",
         "quest": "Raider",
         "level": "700",
-        "expexp": "8.75M EXP8.75M EXP",
+        "exp": "8.75M EXP8.75M EXP",
         "money": "10,250",
-        "special": "N/A"
+        "special": "N/A",
+        "expexp": "8.75M EXP8.75M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kingdom_of_Rose",
-      "sea": "Second Sea",
-      "island": "Kingdom of Rose",
-      "questGiver": "Area 1 Quest Giver",
-      "quest": "Raider",
-      "level": "700",
-      "exp": "8.75M EXP8.75M EXP",
-      "money": "10,250",
-      "special": "N/A",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-kingdom-of-rose-raider",
+        "section": "Second Sea",
+        "sortOrder": 40,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Mercenary - 9.75M EXP9.75M EXP",
-      "slug": "second-sea-mercenary-9-75m-exp9-75m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Mercenary - 9.75M EXP9.75M EXP",
+        "sea": "Second Sea",
         "island": "Mercenary",
         "questGiver": "725",
         "quest": "9.75M EXP9.75M EXP",
         "level": "10,500",
+        "exp": "N/A",
         "expexp": "N/A"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mercenary",
-      "sea": "Second Sea",
-      "island": "Mercenary",
-      "questGiver": "725",
-      "quest": "9.75M EXP9.75M EXP",
-      "level": "10,500",
-      "exp": "N/A",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-mercenary-9-75m-exp9-75m-exp",
+        "section": "Second Sea",
+        "sortOrder": 41,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Diamond - 12.5M EXP12.5M EXP",
-      "slug": "second-sea-diamond-12-5m-exp12-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Diamond - 12.5M EXP12.5M EXP",
+        "sea": "Second Sea",
         "island": "Diamond",
         "questGiver": "750",
         "quest": "12.5M EXP12.5M EXP",
         "level": "25,000",
+        "exp": "Boss, Longsword",
         "expexp": "Boss, Longsword"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Diamond_(Boss)",
-      "sea": "Second Sea",
-      "island": "Diamond",
-      "questGiver": "750",
-      "quest": "12.5M EXP12.5M EXP",
-      "level": "25,000",
-      "exp": "Boss, Longsword",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-diamond-12-5m-exp12-5m-exp",
+        "section": "Second Sea",
+        "sortOrder": 42,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Area 2 Quest Giver - 775",
-      "slug": "second-sea-area-2-quest-giver-775",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Area 2 Quest Giver - 775",
+        "sea": "Second Sea",
         "island": "Area 2 Quest Giver",
         "questGiver": "Swan Pirate",
         "quest": "775",
         "level": "11.5M EXP11.5M EXP",
-        "expexp": "10,750",
-        "money": "Katana"
+        "exp": "10,750",
+        "money": "Katana",
+        "expexp": "10,750"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Area_2_Quest_Giver",
-      "sea": "Second Sea",
-      "island": "Area 2 Quest Giver",
-      "questGiver": "Swan Pirate",
-      "quest": "775",
-      "level": "11.5M EXP11.5M EXP",
-      "exp": "10,750",
-      "money": "Katana",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-area-2-quest-giver-775",
+        "section": "Second Sea",
+        "sortOrder": 43,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Factory Staff - 13.0M EXP13.0M EXP",
-      "slug": "second-sea-factory-staff-13-0m-exp13-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Factory Staff - 13.0M EXP13.0M EXP",
+        "sea": "Second Sea",
         "island": "Factory Staff",
         "questGiver": "800",
         "quest": "13.0M EXP13.0M EXP",
         "level": "11,000",
+        "exp": "Bomb, Smoke, Spike (varies)",
         "expexp": "Bomb, Smoke, Spike (varies)"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Factory_Staff",
-      "sea": "Second Sea",
-      "island": "Factory Staff",
-      "questGiver": "800",
-      "quest": "13.0M EXP13.0M EXP",
-      "level": "11,000",
-      "exp": "Bomb, Smoke, Spike (varies)",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-factory-staff-13-0m-exp13-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 44,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Jeremy - 16.0M EXP16.0M EXP",
-      "slug": "second-sea-jeremy-16-0m-exp16-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Jeremy - 16.0M EXP16.0M EXP",
+        "sea": "Second Sea",
         "island": "Jeremy",
         "questGiver": "850",
         "quest": "16.0M EXP16.0M EXP",
         "level": "25,000",
+        "exp": "Boss, Spring",
         "expexp": "Boss, Spring"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Jeremy",
-      "sea": "Second Sea",
-      "island": "Jeremy",
-      "questGiver": "850",
-      "quest": "16.0M EXP16.0M EXP",
-      "level": "25,000",
-      "exp": "Boss, Spring",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-jeremy-16-0m-exp16-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 45,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Green Zone - Marine Lieutenant",
-      "slug": "second-sea-green-zone-marine-lieutenant",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Green Zone - Marine Lieutenant",
+        "sea": "Second Sea",
         "island": "Green Zone",
         "questGiver": "Marine Quest Giver",
         "quest": "Marine Lieutenant",
         "level": "875",
-        "expexp": "15.0M EXP15.0M EXP",
+        "exp": "15.0M EXP15.0M EXP",
         "money": "11,250",
-        "special": "Katana"
+        "special": "Katana",
+        "expexp": "15.0M EXP15.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Green_Zone",
-      "sea": "Second Sea",
-      "island": "Green Zone",
-      "questGiver": "Marine Quest Giver",
-      "quest": "Marine Lieutenant",
-      "level": "875",
-      "exp": "15.0M EXP15.0M EXP",
-      "money": "11,250",
-      "special": "Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-green-zone-marine-lieutenant",
+        "section": "Second Sea",
+        "sortOrder": 46,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Marine Captain - 16.5M EXP16.5M EXP",
-      "slug": "second-sea-marine-captain-16-5m-exp16-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Marine Captain - 16.5M EXP16.5M EXP",
+        "sea": "Second Sea",
         "island": "Marine Captain",
         "questGiver": "900",
         "quest": "16.5M EXP16.5M EXP",
         "level": "11,500",
+        "exp": "Aura, Triple Katana",
         "expexp": "Aura, Triple Katana"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Captain",
-      "sea": "Second Sea",
-      "island": "Marine Captain",
-      "questGiver": "900",
-      "quest": "16.5M EXP16.5M EXP",
-      "level": "11,500",
-      "exp": "Aura, Triple Katana",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-marine-captain-16-5m-exp16-5m-exp",
+        "section": "Second Sea",
+        "sortOrder": 47,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Orbitus - 19.0M EXP19.0M EXP",
-      "slug": "second-sea-orbitus-19-0m-exp19-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Orbitus - 19.0M EXP19.0M EXP",
+        "sea": "Second Sea",
         "island": "Orbitus",
         "questGiver": "925",
         "quest": "19.0M EXP19.0M EXP",
         "level": "25,000",
+        "exp": "Boss, Gravity, Gravity Cane",
         "expexp": "Boss, Gravity, Gravity Cane"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Orbitus",
-      "sea": "Second Sea",
-      "island": "Orbitus",
-      "questGiver": "925",
-      "quest": "19.0M EXP19.0M EXP",
-      "level": "25,000",
-      "exp": "Boss, Gravity, Gravity Cane",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-orbitus-19-0m-exp19-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 48,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Graveyard Island - Zombie",
-      "slug": "second-sea-graveyard-island-zombie",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Graveyard Island - Zombie",
+        "sea": "Second Sea",
         "island": "Graveyard Island",
         "questGiver": "Graveyard Quest Giver",
         "quest": "Zombie",
         "level": "950",
-        "expexp": "19.0M EXP19.0M EXP",
+        "exp": "19.0M EXP19.0M EXP",
         "money": "11,750",
-        "special": "N/A"
+        "special": "N/A",
+        "expexp": "19.0M EXP19.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Graveyard_Island",
-      "sea": "Second Sea",
-      "island": "Graveyard Island",
-      "questGiver": "Graveyard Quest Giver",
-      "quest": "Zombie",
-      "level": "950",
-      "exp": "19.0M EXP19.0M EXP",
-      "money": "11,750",
-      "special": "N/A",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-graveyard-island-zombie",
+        "section": "Second Sea",
+        "sortOrder": 49,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Vampire - 20.5M EXP20.5M EXP",
-      "slug": "second-sea-vampire-20-5m-exp20-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Vampire - 20.5M EXP20.5M EXP",
+        "sea": "Second Sea",
         "island": "Vampire",
         "questGiver": "975",
         "quest": "20.5M EXP20.5M EXP",
         "level": "12,000",
+        "exp": "Flash Step",
         "expexp": "Flash Step"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Vampire",
-      "sea": "Second Sea",
-      "island": "Vampire",
-      "questGiver": "975",
-      "quest": "20.5M EXP20.5M EXP",
-      "level": "12,000",
-      "exp": "Flash Step",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-vampire-20-5m-exp20-5m-exp",
+        "section": "Second Sea",
+        "sortOrder": 50,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Snow Mountain - Snow Trooper",
-      "slug": "second-sea-snow-mountain-snow-trooper",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Snow Mountain - Snow Trooper",
+        "sea": "Second Sea",
         "island": "Snow Mountain",
         "questGiver": "Snow Quest Giver",
         "quest": "Snow Trooper",
         "level": "1000",
-        "expexp": "22.5M EXP22.5M EXP",
+        "exp": "22.5M EXP22.5M EXP",
         "money": "12,250",
-        "special": "Dual Katana"
+        "special": "Dual Katana",
+        "expexp": "22.5M EXP22.5M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snow_Mountain",
-      "sea": "Second Sea",
-      "island": "Snow Mountain",
-      "questGiver": "Snow Quest Giver",
-      "quest": "Snow Trooper",
-      "level": "1000",
-      "exp": "22.5M EXP22.5M EXP",
-      "money": "12,250",
-      "special": "Dual Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-snow-mountain-snow-trooper",
+        "section": "Second Sea",
+        "sortOrder": 51,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Winter Warrior - 24.0M EXP24.0M EXP",
-      "slug": "second-sea-winter-warrior-24-0m-exp24-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Winter Warrior - 24.0M EXP24.0M EXP",
+        "sea": "Second Sea",
         "island": "Winter Warrior",
         "questGiver": "1050",
         "quest": "24.0M EXP24.0M EXP",
         "level": "12,500",
+        "exp": "N/A",
         "expexp": "N/A"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Winter_Warrior",
-      "sea": "Second Sea",
-      "island": "Winter Warrior",
-      "questGiver": "1050",
-      "quest": "24.0M EXP24.0M EXP",
-      "level": "12,500",
-      "exp": "N/A",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-winter-warrior-24-0m-exp24-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 52,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Hot and Cold - Lab Subordinate",
-      "slug": "second-sea-hot-and-cold-lab-subordinate",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Hot and Cold - Lab Subordinate",
+        "sea": "Second Sea",
         "island": "Hot and Cold",
         "questGiver": "Ice Quest Giver",
         "quest": "Lab Subordinate",
         "level": "1100",
-        "expexp": "25.5M EXP25.5M EXP",
+        "exp": "25.5M EXP25.5M EXP",
         "money": "12,250",
-        "special": "Pipe"
+        "special": "Pipe",
+        "expexp": "25.5M EXP25.5M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hot_and_Cold",
-      "sea": "Second Sea",
-      "island": "Hot and Cold",
-      "questGiver": "Ice Quest Giver",
-      "quest": "Lab Subordinate",
-      "level": "1100",
-      "exp": "25.5M EXP25.5M EXP",
-      "money": "12,250",
-      "special": "Pipe",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-hot-and-cold-lab-subordinate",
+        "section": "Second Sea",
+        "sortOrder": 53,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Horned Warrior - 27.0M EXP27.0M EXP",
-      "slug": "second-sea-horned-warrior-27-0m-exp27-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Horned Warrior - 27.0M EXP27.0M EXP",
+        "sea": "Second Sea",
         "island": "Horned Warrior",
         "questGiver": "1125",
         "quest": "27.0M EXP27.0M EXP",
         "level": "12,500",
+        "exp": "Ice",
         "expexp": "Ice"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Horned_Warrior",
-      "sea": "Second Sea",
-      "island": "Horned Warrior",
-      "questGiver": "1125",
-      "quest": "27.0M EXP27.0M EXP",
-      "level": "12,500",
-      "exp": "Ice",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-horned-warrior-27-0m-exp27-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 54,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Smoke Admiral - 32.5M EXP32.5M EXP",
-      "slug": "second-sea-smoke-admiral-32-5m-exp32-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Smoke Admiral - 32.5M EXP32.5M EXP",
+        "sea": "Second Sea",
         "island": "Smoke Admiral",
         "questGiver": "1150",
         "quest": "32.5M EXP32.5M EXP",
         "level": "20,000",
+        "exp": "Boss, Smoke, Jitte",
         "expexp": "Boss, Smoke, Jitte"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Smoke_Admiral",
-      "sea": "Second Sea",
-      "island": "Smoke Admiral",
-      "questGiver": "1150",
-      "quest": "32.5M EXP32.5M EXP",
-      "level": "20,000",
-      "exp": "Boss, Smoke, Jitte",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-smoke-admiral-32-5m-exp32-5m-exp",
+        "section": "Second Sea",
+        "sortOrder": 55,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Fire Quest Giver - 1175",
-      "slug": "second-sea-fire-quest-giver-1175",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Fire Quest Giver - 1175",
+        "sea": "Second Sea",
         "island": "Fire Quest Giver",
         "questGiver": "Magma Ninja",
         "quest": "1175",
         "level": "29.0M EXP29.0M EXP",
-        "expexp": "12,250",
-        "money": "Dual-Headed Blade"
+        "exp": "12,250",
+        "money": "Dual-Headed Blade",
+        "expexp": "12,250"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fire_Quest_Giver",
-      "sea": "Second Sea",
-      "island": "Fire Quest Giver",
-      "questGiver": "Magma Ninja",
-      "quest": "1175",
-      "level": "29.0M EXP29.0M EXP",
-      "exp": "12,250",
-      "money": "Dual-Headed Blade",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-fire-quest-giver-1175",
+        "section": "Second Sea",
+        "sortOrder": 56,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Lava Pirate - 31.0M EXP31.0M EXP",
-      "slug": "second-sea-lava-pirate-31-0m-exp31-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Lava Pirate - 31.0M EXP31.0M EXP",
+        "sea": "Second Sea",
         "island": "Lava Pirate",
         "questGiver": "1200",
         "quest": "31.0M EXP31.0M EXP",
         "level": "12,500",
+        "exp": "Magma",
         "expexp": "Magma"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Lava_Pirate",
-      "sea": "Second Sea",
-      "island": "Lava Pirate",
-      "questGiver": "1200",
-      "quest": "31.0M EXP31.0M EXP",
-      "level": "12,500",
-      "exp": "Magma",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-lava-pirate-31-0m-exp31-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 57,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Cursed Ship - Ship Deckhand",
-      "slug": "second-sea-cursed-ship-ship-deckhand",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Cursed Ship - Ship Deckhand",
+        "sea": "Second Sea",
         "island": "Cursed Ship",
         "questGiver": "Rear Crew Quest Giver",
         "quest": "Ship Deckhand",
         "level": "1250",
-        "expexp": "33.0M EXP33.0M EXP",
+        "exp": "33.0M EXP33.0M EXP",
         "money": "12,250",
-        "special": "N/A"
+        "special": "N/A",
+        "expexp": "33.0M EXP33.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cursed_Ship",
-      "sea": "Second Sea",
-      "island": "Cursed Ship",
-      "questGiver": "Rear Crew Quest Giver",
-      "quest": "Ship Deckhand",
-      "level": "1250",
-      "exp": "33.0M EXP33.0M EXP",
-      "money": "12,250",
-      "special": "N/A",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-cursed-ship-ship-deckhand",
+        "section": "Second Sea",
+        "sortOrder": 58,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Ship Engineer - 35.5M EXP35.5M EXP",
-      "slug": "second-sea-ship-engineer-35-5m-exp35-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Ship Engineer - 35.5M EXP35.5M EXP",
+        "sea": "Second Sea",
         "island": "Ship Engineer",
         "questGiver": "1275",
         "quest": "35.5M EXP35.5M EXP",
         "level": "12,500",
+        "exp": "Aura, Flash Step",
         "expexp": "Aura, Flash Step"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ship_Engineer",
-      "sea": "Second Sea",
-      "island": "Ship Engineer",
-      "questGiver": "1275",
-      "quest": "35.5M EXP35.5M EXP",
-      "level": "12,500",
-      "exp": "Aura, Flash Step",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-ship-engineer-35-5m-exp35-5m-exp",
+        "section": "Second Sea",
+        "sortOrder": 59,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Front Crew Quest Giver - 1300",
-      "slug": "second-sea-front-crew-quest-giver-1300",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Front Crew Quest Giver - 1300",
+        "sea": "Second Sea",
         "island": "Front Crew Quest Giver",
         "questGiver": "Ship Steward",
         "quest": "1300",
         "level": "37.5M EXP37.5M EXP",
-        "expexp": "12,250",
-        "money": "Cutlass"
+        "exp": "12,250",
+        "money": "Cutlass",
+        "expexp": "12,250"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Front_Crew_Quest_Giver",
-      "sea": "Second Sea",
-      "island": "Front Crew Quest Giver",
-      "questGiver": "Ship Steward",
-      "quest": "1300",
-      "level": "37.5M EXP37.5M EXP",
-      "exp": "12,250",
-      "money": "Cutlass",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-front-crew-quest-giver-1300",
+        "section": "Second Sea",
+        "sortOrder": 60,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Ship Officer - 39.5M EXP39.5M EXP",
-      "slug": "second-sea-ship-officer-39-5m-exp39-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Ship Officer - 39.5M EXP39.5M EXP",
+        "sea": "Second Sea",
         "island": "Ship Officer",
         "questGiver": "1325",
         "quest": "39.5M EXP39.5M EXP",
         "level": "12,500",
+        "exp": "Aura, Cutlass",
         "expexp": "Aura, Cutlass"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ship_Officer",
-      "sea": "Second Sea",
-      "island": "Ship Officer",
-      "questGiver": "1325",
-      "quest": "39.5M EXP39.5M EXP",
-      "level": "12,500",
-      "exp": "Aura, Cutlass",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-ship-officer-39-5m-exp39-5m-exp",
+        "section": "Second Sea",
+        "sortOrder": 61,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Ice Castle - Arctic Warrior",
-      "slug": "second-sea-ice-castle-arctic-warrior",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Ice Castle - Arctic Warrior",
+        "sea": "Second Sea",
         "island": "Ice Castle",
         "questGiver": "Frost Quest Giver",
         "quest": "Arctic Warrior",
         "level": "1350",
-        "expexp": "41.0M EXP41.0M EXP",
+        "exp": "41.0M EXP41.0M EXP",
         "money": "12,250",
-        "special": "Katana"
+        "special": "Katana",
+        "expexp": "41.0M EXP41.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice_Castle",
-      "sea": "Second Sea",
-      "island": "Ice Castle",
-      "questGiver": "Frost Quest Giver",
-      "quest": "Arctic Warrior",
-      "level": "1350",
-      "exp": "41.0M EXP41.0M EXP",
-      "money": "12,250",
-      "special": "Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-ice-castle-arctic-warrior",
+        "section": "Second Sea",
+        "sortOrder": 62,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Snow Lurker - 43.0M EXP43.0M EXP",
-      "slug": "second-sea-snow-lurker-43-0m-exp43-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Snow Lurker - 43.0M EXP43.0M EXP",
+        "sea": "Second Sea",
         "island": "Snow Lurker",
         "questGiver": "1375",
         "quest": "43.0M EXP43.0M EXP",
         "level": "12,500",
+        "exp": "Aura, Ice",
         "expexp": "Aura, Ice"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snow_Lurker",
-      "sea": "Second Sea",
-      "island": "Snow Lurker",
-      "questGiver": "1375",
-      "quest": "43.0M EXP43.0M EXP",
-      "level": "12,500",
-      "exp": "Aura, Ice",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-snow-lurker-43-0m-exp43-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 63,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Awakened Ice Admiral - 45.0M EXP45.0M EXP",
-      "slug": "second-sea-awakened-ice-admiral-45-0m-exp45-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Awakened Ice Admiral - 45.0M EXP45.0M EXP",
+        "sea": "Second Sea",
         "island": "Awakened Ice Admiral",
         "questGiver": "1400",
         "quest": "45.0M EXP45.0M EXP",
         "level": "20,000",
+        "exp": "Boss, Awakened Ice",
         "expexp": "Boss, Awakened Ice"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Awakened_Ice_Admiral",
-      "sea": "Second Sea",
-      "island": "Awakened Ice Admiral",
-      "questGiver": "1400",
-      "quest": "45.0M EXP45.0M EXP",
-      "level": "20,000",
-      "exp": "Boss, Awakened Ice",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-awakened-ice-admiral-45-0m-exp45-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 64,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Forgotten Island - Sea Soldier",
-      "slug": "second-sea-forgotten-island-sea-soldier",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Forgotten Island - Sea Soldier",
+        "sea": "Second Sea",
         "island": "Forgotten Island",
         "questGiver": "Forgotten Quest Giver",
         "quest": "Sea Soldier",
         "level": "1425",
-        "expexp": "47.0M EXP47.0M EXP",
+        "exp": "47.0M EXP47.0M EXP",
         "money": "12,250",
-        "special": "Water Kung Fu"
+        "special": "Water Kung Fu",
+        "expexp": "47.0M EXP47.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Forgotten_Island",
-      "sea": "Second Sea",
-      "island": "Forgotten Island",
-      "questGiver": "Forgotten Quest Giver",
-      "quest": "Sea Soldier",
-      "level": "1425",
-      "exp": "47.0M EXP47.0M EXP",
-      "money": "12,250",
-      "special": "Water Kung Fu",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-forgotten-island-sea-soldier",
+        "section": "Second Sea",
+        "sortOrder": 65,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Water Fighter - 49.0M EXP49.0M EXP",
-      "slug": "second-sea-water-fighter-49-0m-exp49-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Water Fighter - 49.0M EXP49.0M EXP",
+        "sea": "Second Sea",
         "island": "Water Fighter",
         "questGiver": "1450",
         "quest": "49.0M EXP49.0M EXP",
         "level": "12,500",
+        "exp": "Aura, Water Kung Fu",
         "expexp": "Aura, Water Kung Fu"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Water_Fighter",
-      "sea": "Second Sea",
-      "island": "Water Fighter",
-      "questGiver": "1450",
-      "quest": "49.0M EXP49.0M EXP",
-      "level": "12,500",
-      "exp": "Aura, Water Kung Fu",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-water-fighter-49-0m-exp49-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 66,
+        "image": null
+      }
     },
     {
-      "name": "Second Sea - Tide Keeper - 51.0M EXP51.0M EXP",
-      "slug": "second-sea-tide-keeper-51-0m-exp51-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Second Sea - Tide Keeper - 51.0M EXP51.0M EXP",
+        "sea": "Second Sea",
         "island": "Tide Keeper",
         "questGiver": "1475",
         "quest": "51.0M EXP51.0M EXP",
         "level": "12,500",
+        "exp": "Boss, Dragon Trident",
         "expexp": "Boss, Dragon Trident"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tide_Keeper",
-      "sea": "Second Sea",
-      "island": "Tide Keeper",
-      "questGiver": "1475",
-      "quest": "51.0M EXP51.0M EXP",
-      "level": "12,500",
-      "exp": "Boss, Dragon Trident",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "second-sea-tide-keeper-51-0m-exp51-0m-exp",
+        "section": "Second Sea",
+        "sortOrder": 67,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Port Town - Pirate Millionaire",
-      "slug": "third-sea-port-town-pirate-millionaire",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Port Town - Pirate Millionaire",
+        "sea": "Third Sea",
         "island": "Port Town",
         "questGiver": "Pirate Port Quest Giver",
         "quest": "Pirate Millionaire",
         "level": "1500",
-        "expexp": "53.0M EXP53.0M EXP",
+        "exp": "53.0M EXP53.0M EXP",
         "money": "13,000",
-        "special": "Bisento"
+        "special": "Bisento",
+        "expexp": "53.0M EXP53.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Port_Town",
-      "sea": "Third Sea",
-      "island": "Port Town",
-      "questGiver": "Pirate Port Quest Giver",
-      "quest": "Pirate Millionaire",
-      "level": "1500",
-      "exp": "53.0M EXP53.0M EXP",
-      "money": "13,000",
-      "special": "Bisento",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-port-town-pirate-millionaire",
+        "section": "Third Sea",
+        "sortOrder": 68,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Pistol Billionaire - 55.5M EXP55.5M EXP",
-      "slug": "third-sea-pistol-billionaire-55-5m-exp55-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Pistol Billionaire - 55.5M EXP55.5M EXP",
+        "sea": "Third Sea",
         "island": "Pistol Billionaire",
         "questGiver": "1525",
         "quest": "55.5M EXP55.5M EXP",
         "level": "15,000",
+        "exp": "Refined Musket",
         "expexp": "Refined Musket"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pistol_Billionaire",
-      "sea": "Third Sea",
-      "island": "Pistol Billionaire",
-      "questGiver": "1525",
-      "quest": "55.5M EXP55.5M EXP",
-      "level": "15,000",
-      "exp": "Refined Musket",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-pistol-billionaire-55-5m-exp55-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 69,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Stone - 60.0M EXP60.0M EXP",
-      "slug": "third-sea-stone-60-0m-exp60-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Stone - 60.0M EXP60.0M EXP",
+        "sea": "Third Sea",
         "island": "Stone",
         "questGiver": "1550",
         "quest": "60.0M EXP60.0M EXP",
         "level": "25,000",
+        "exp": "Boss, Bomb",
         "expexp": "Boss, Bomb"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Stone",
-      "sea": "Third Sea",
-      "island": "Stone",
-      "questGiver": "1550",
-      "quest": "60.0M EXP60.0M EXP",
-      "level": "25,000",
-      "exp": "Boss, Bomb",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-stone-60-0m-exp60-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 70,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Hydra Island - Dragon Crew Warrior",
-      "slug": "third-sea-hydra-island-dragon-crew-warrior",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Hydra Island - Dragon Crew Warrior",
+        "sea": "Third Sea",
         "island": "Hydra Island",
         "questGiver": "Dragon Crew Quest Giver",
         "quest": "Dragon Crew Warrior",
         "level": "1575",
-        "expexp": "58.0M EXP58.0M EXP",
+        "exp": "58.0M EXP58.0M EXP",
         "money": "13,000",
-        "special": "Longsword"
+        "special": "Longsword",
+        "expexp": "58.0M EXP58.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hydra_Island",
-      "sea": "Third Sea",
-      "island": "Hydra Island",
-      "questGiver": "Dragon Crew Quest Giver",
-      "quest": "Dragon Crew Warrior",
-      "level": "1575",
-      "exp": "58.0M EXP58.0M EXP",
-      "money": "13,000",
-      "special": "Longsword",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-hydra-island-dragon-crew-warrior",
+        "section": "Third Sea",
+        "sortOrder": 71,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Dragon Crew Archer - 60.5M EXP60.5M EXP",
-      "slug": "third-sea-dragon-crew-archer-60-5m-exp60-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Dragon Crew Archer - 60.5M EXP60.5M EXP",
+        "sea": "Third Sea",
         "island": "Dragon Crew Archer",
         "questGiver": "1600",
         "quest": "60.5M EXP60.5M EXP",
         "level": "15,000",
+        "exp": "Serpent Bow",
         "expexp": "Serpent Bow"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_Crew_Archer",
-      "sea": "Third Sea",
-      "island": "Dragon Crew Archer",
-      "questGiver": "1600",
-      "quest": "60.5M EXP60.5M EXP",
-      "level": "15,000",
-      "exp": "Serpent Bow",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-dragon-crew-archer-60-5m-exp60-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 72,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Hydra Town Quest Giver - 1625",
-      "slug": "third-sea-hydra-town-quest-giver-1625",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Hydra Town Quest Giver - 1625",
+        "sea": "Third Sea",
         "island": "Hydra Town Quest Giver",
         "questGiver": "Hydra Enforcer",
         "quest": "1625",
         "level": "62.5M EXP62.5M EXP",
-        "expexp": "13,000",
-        "money": "Iron Mace"
+        "exp": "13,000",
+        "money": "Iron Mace",
+        "expexp": "13,000"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hydra_Town_Quest_Giver",
-      "sea": "Third Sea",
-      "island": "Hydra Town Quest Giver",
-      "questGiver": "Hydra Enforcer",
-      "quest": "1625",
-      "level": "62.5M EXP62.5M EXP",
-      "exp": "13,000",
-      "money": "Iron Mace",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-hydra-town-quest-giver-1625",
+        "section": "Third Sea",
+        "sortOrder": 73,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Venomous Assailant - 64.5M EXP64.5M EXP",
-      "slug": "third-sea-venomous-assailant-64-5m-exp64-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Venomous Assailant - 64.5M EXP64.5M EXP",
+        "sea": "Third Sea",
         "island": "Venomous Assailant",
         "questGiver": "1650",
         "quest": "64.5M EXP64.5M EXP",
         "level": "15,000",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Venomous_Assailant",
-      "sea": "Third Sea",
-      "island": "Venomous Assailant",
-      "questGiver": "1650",
-      "quest": "64.5M EXP64.5M EXP",
-      "level": "15,000",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-venomous-assailant-64-5m-exp64-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 74,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Hydra Leader - 70.0M EXP70.0M EXP",
-      "slug": "third-sea-hydra-leader-70-0m-exp70-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Hydra Leader - 70.0M EXP70.0M EXP",
+        "sea": "Third Sea",
         "island": "Hydra Leader",
         "questGiver": "1675",
         "quest": "70.0M EXP70.0M EXP",
         "level": "30,000",
+        "exp": "Boss, Venom",
         "expexp": "Boss, Venom"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Hydra_Leader",
-      "sea": "Third Sea",
-      "island": "Hydra Leader",
-      "questGiver": "1675",
-      "quest": "70.0M EXP70.0M EXP",
-      "level": "30,000",
-      "exp": "Boss, Venom",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-hydra-leader-70-0m-exp70-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 75,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Great Tree - Marine Commodore",
-      "slug": "third-sea-great-tree-marine-commodore",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Great Tree - Marine Commodore",
+        "sea": "Third Sea",
         "island": "Great Tree",
         "questGiver": "Marine Tree Quest Giver",
         "quest": "Marine Commodore",
         "level": "1700",
-        "expexp": "68.0M EXP68.0M EXP",
+        "exp": "68.0M EXP68.0M EXP",
         "money": "13,000",
-        "special": "Aura, Dual Katana"
+        "special": "Aura, Dual Katana",
+        "expexp": "68.0M EXP68.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Great_Tree",
-      "sea": "Third Sea",
-      "island": "Great Tree",
-      "questGiver": "Marine Tree Quest Giver",
-      "quest": "Marine Commodore",
-      "level": "1700",
-      "exp": "68.0M EXP68.0M EXP",
-      "money": "13,000",
-      "special": "Aura, Dual Katana",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-great-tree-marine-commodore",
+        "section": "Third Sea",
+        "sortOrder": 76,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Marine Rear Admiral - 70.5M EXP70.5M EXP",
-      "slug": "third-sea-marine-rear-admiral-70-5m-exp70-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Marine Rear Admiral - 70.5M EXP70.5M EXP",
+        "sea": "Third Sea",
         "island": "Marine Rear Admiral",
         "questGiver": "1725",
         "quest": "70.5M EXP70.5M EXP",
         "level": "15,000",
+        "exp": "Spin",
         "expexp": "Spin"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Marine_Rear_Admiral",
-      "sea": "Third Sea",
-      "island": "Marine Rear Admiral",
-      "questGiver": "1725",
-      "quest": "70.5M EXP70.5M EXP",
-      "level": "15,000",
-      "exp": "Spin",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-marine-rear-admiral-70-5m-exp70-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 77,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Kilo Admiral - 78.0M EXP78.0M EXP",
-      "slug": "third-sea-kilo-admiral-78-0m-exp78-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Kilo Admiral - 78.0M EXP78.0M EXP",
+        "sea": "Third Sea",
         "island": "Kilo Admiral",
         "questGiver": "1750",
         "quest": "78.0M EXP78.0M EXP",
         "level": "35,000",
+        "exp": "Boss, Kilo",
         "expexp": "Boss, Kilo"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kilo_Admiral",
-      "sea": "Third Sea",
-      "island": "Kilo Admiral",
-      "questGiver": "1750",
-      "quest": "78.0M EXP78.0M EXP",
-      "level": "35,000",
-      "exp": "Boss, Kilo",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-kilo-admiral-78-0m-exp78-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 78,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Floating Turtle - Fishman Raider",
-      "slug": "third-sea-floating-turtle-fishman-raider",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Floating Turtle - Fishman Raider",
+        "sea": "Third Sea",
         "island": "Floating Turtle",
         "questGiver": "Turtle Adventure Quest Giver",
         "quest": "Fishman Raider",
         "level": "1775",
-        "expexp": "73.0M EXP73.0M EXP",
+        "exp": "73.0M EXP73.0M EXP",
         "money": "13,000",
-        "special": "Shark Saw"
+        "special": "Shark Saw",
+        "expexp": "73.0M EXP73.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Floating_Turtle",
-      "sea": "Third Sea",
-      "island": "Floating Turtle",
-      "questGiver": "Turtle Adventure Quest Giver",
-      "quest": "Fishman Raider",
-      "level": "1775",
-      "exp": "73.0M EXP73.0M EXP",
-      "money": "13,000",
-      "special": "Shark Saw",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-floating-turtle-fishman-raider",
+        "section": "Third Sea",
+        "sortOrder": 79,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Fishman Captain - 75.5M EXP75.5M EXP",
-      "slug": "third-sea-fishman-captain-75-5m-exp75-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Fishman Captain - 75.5M EXP75.5M EXP",
+        "sea": "Third Sea",
         "island": "Fishman Captain",
         "questGiver": "1800",
         "quest": "75.5M EXP75.5M EXP",
         "level": "15,000",
+        "exp": "Trident",
         "expexp": "Trident"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fishman_Captain",
-      "sea": "Third Sea",
-      "island": "Fishman Captain",
-      "questGiver": "1800",
-      "quest": "75.5M EXP75.5M EXP",
-      "level": "15,000",
-      "exp": "Trident",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-fishman-captain-75-5m-exp75-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 80,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Deep Forest Quest Giver - 1825",
-      "slug": "third-sea-deep-forest-quest-giver-1825",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Deep Forest Quest Giver - 1825",
+        "sea": "Third Sea",
         "island": "Deep Forest Quest Giver",
         "questGiver": "Forest Pirate",
         "quest": "1825",
         "level": "78.0M EXP78.0M EXP",
-        "expexp": "13,000",
-        "money": "Aura"
+        "exp": "13,000",
+        "money": "Aura",
+        "expexp": "13,000"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Deep_Forest_Quest_Giver",
-      "sea": "Third Sea",
-      "island": "Deep Forest Quest Giver",
-      "questGiver": "Forest Pirate",
-      "quest": "1825",
-      "level": "78.0M EXP78.0M EXP",
-      "exp": "13,000",
-      "money": "Aura",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-deep-forest-quest-giver-1825",
+        "section": "Third Sea",
+        "sortOrder": 81,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Mythological Pirate - 81.0M EXP81.0M EXP",
-      "slug": "third-sea-mythological-pirate-81-0m-exp81-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Mythological Pirate - 81.0M EXP81.0M EXP",
+        "sea": "Third Sea",
         "island": "Mythological Pirate",
         "questGiver": "1850",
         "quest": "81.0M EXP81.0M EXP",
         "level": "13,000",
+        "exp": "Aura, Electric",
         "expexp": "Aura, Electric"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mythological_Pirate",
-      "sea": "Third Sea",
-      "island": "Mythological Pirate",
-      "questGiver": "1850",
-      "quest": "81.0M EXP81.0M EXP",
-      "level": "13,000",
-      "exp": "Aura, Electric",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-mythological-pirate-81-0m-exp81-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 82,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Captain Elephant - 90.0M EXP90.0M EXP",
-      "slug": "third-sea-captain-elephant-90-0m-exp90-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Captain Elephant - 90.0M EXP90.0M EXP",
+        "sea": "Third Sea",
         "island": "Captain Elephant",
         "questGiver": "1875",
         "quest": "90.0M EXP90.0M EXP",
         "level": "40,000",
+        "exp": "Boss, Twin Hooks",
         "expexp": "Boss, Twin Hooks"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Captain_Elephant",
-      "sea": "Third Sea",
-      "island": "Captain Elephant",
-      "questGiver": "1875",
-      "quest": "90.0M EXP90.0M EXP",
-      "level": "40,000",
-      "exp": "Boss, Twin Hooks",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-captain-elephant-90-0m-exp90-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 83,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Deep Forest Area 2 Quest Giver - 1900",
-      "slug": "third-sea-deep-forest-area-2-quest-giver-1900",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Deep Forest Area 2 Quest Giver - 1900",
+        "sea": "Third Sea",
         "island": "Deep Forest Area 2 Quest Giver",
         "questGiver": "Jungle Pirate",
         "quest": "1900",
         "level": "85.0M EXP85.0M EXP",
-        "expexp": "13,000",
-        "money": "Dark Step"
+        "exp": "13,000",
+        "money": "Dark Step",
+        "expexp": "13,000"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Deep_Forest_Area_2_Quest_Giver",
-      "sea": "Third Sea",
-      "island": "Deep Forest Area 2 Quest Giver",
-      "questGiver": "Jungle Pirate",
-      "quest": "1900",
-      "level": "85.0M EXP85.0M EXP",
-      "exp": "13,000",
-      "money": "Dark Step",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-deep-forest-area-2-quest-giver-1900",
+        "section": "Third Sea",
+        "sortOrder": 84,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Musketeer Pirate - 87.5M EXP87.5M EXP",
-      "slug": "third-sea-musketeer-pirate-87-5m-exp87-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Musketeer Pirate - 87.5M EXP87.5M EXP",
+        "sea": "Third Sea",
         "island": "Musketeer Pirate",
         "questGiver": "1925",
         "quest": "87.5M EXP87.5M EXP",
         "level": "15,000",
+        "exp": "Canvander, Flash Step",
         "expexp": "Canvander, Flash Step"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Musketeer_Pirate",
-      "sea": "Third Sea",
-      "island": "Musketeer Pirate",
-      "questGiver": "1925",
-      "quest": "87.5M EXP87.5M EXP",
-      "level": "15,000",
-      "exp": "Canvander, Flash Step",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-musketeer-pirate-87-5m-exp87-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 85,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Beautiful Pirate - 100.0M EXP100.0M EXP",
-      "slug": "third-sea-beautiful-pirate-100-0m-exp100-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Beautiful Pirate - 100.0M EXP100.0M EXP",
+        "sea": "Third Sea",
         "island": "Beautiful Pirate",
         "questGiver": "1950",
         "quest": "100.0M EXP100.0M EXP",
         "level": "50,000",
+        "exp": "Boss, Canvander",
         "expexp": "Boss, Canvander"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Beautiful_Pirate",
-      "sea": "Third Sea",
-      "island": "Beautiful Pirate",
-      "questGiver": "1950",
-      "quest": "100.0M EXP100.0M EXP",
-      "level": "50,000",
-      "exp": "Boss, Canvander",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-beautiful-pirate-100-0m-exp100-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 86,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Haunted Castle - Reborn Skeleton",
-      "slug": "third-sea-haunted-castle-reborn-skeleton",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Haunted Castle - Reborn Skeleton",
+        "sea": "Third Sea",
         "island": "Haunted Castle",
         "questGiver": "Haunted Castle Quest Giver 1",
         "quest": "Reborn Skeleton",
         "level": "1975",
-        "expexp": "90.0M EXP90.0M EXP",
+        "exp": "90.0M EXP90.0M EXP",
         "money": "13,000",
-        "special": "Dark Step"
+        "special": "Dark Step",
+        "expexp": "90.0M EXP90.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Haunted_Castle",
-      "sea": "Third Sea",
-      "island": "Haunted Castle",
-      "questGiver": "Haunted Castle Quest Giver 1",
-      "quest": "Reborn Skeleton",
-      "level": "1975",
-      "exp": "90.0M EXP90.0M EXP",
-      "money": "13,000",
-      "special": "Dark Step",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-haunted-castle-reborn-skeleton",
+        "section": "Third Sea",
+        "sortOrder": 87,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Living Zombie - 93.5M EXP93.5M EXP",
-      "slug": "third-sea-living-zombie-93-5m-exp93-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Living Zombie - 93.5M EXP93.5M EXP",
+        "sea": "Third Sea",
         "island": "Living Zombie",
         "questGiver": "2000",
         "quest": "93.5M EXP93.5M EXP",
         "level": "13,250",
+        "exp": "Flash Step, Superhuman M1s",
         "expexp": "Flash Step, Superhuman M1s"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Living_Zombie",
-      "sea": "Third Sea",
-      "island": "Living Zombie",
-      "questGiver": "2000",
-      "quest": "93.5M EXP93.5M EXP",
-      "level": "13,250",
-      "exp": "Flash Step, Superhuman M1s",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-living-zombie-93-5m-exp93-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 88,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Haunted Castle Quest Giver 2 - 2025",
-      "slug": "third-sea-haunted-castle-quest-giver-2-2025",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Haunted Castle Quest Giver 2 - 2025",
+        "sea": "Third Sea",
         "island": "Haunted Castle Quest Giver 2",
         "questGiver": "Demonic Soul",
         "quest": "2025",
         "level": "96.0M EXP96.0M EXP",
-        "expexp": "13,500",
-        "money": "Flame"
+        "exp": "13,500",
+        "money": "Flame",
+        "expexp": "13,500"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Haunted_Castle_Quest_Giver_2",
-      "sea": "Third Sea",
-      "island": "Haunted Castle Quest Giver 2",
-      "questGiver": "Demonic Soul",
-      "quest": "2025",
-      "level": "96.0M EXP96.0M EXP",
-      "exp": "13,500",
-      "money": "Flame",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-haunted-castle-quest-giver-2-2025",
+        "section": "Third Sea",
+        "sortOrder": 89,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Possessed Mummy - 98.5M EXP98.5M EXP",
-      "slug": "third-sea-possessed-mummy-98-5m-exp98-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Possessed Mummy - 98.5M EXP98.5M EXP",
+        "sea": "Third Sea",
         "island": "Possessed Mummy",
         "questGiver": "2050",
         "quest": "98.5M EXP98.5M EXP",
         "level": "13,750",
+        "exp": "Dark",
         "expexp": "Dark"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Possessed_Mummy",
-      "sea": "Third Sea",
-      "island": "Possessed Mummy",
-      "questGiver": "2050",
-      "quest": "98.5M EXP98.5M EXP",
-      "level": "13,750",
-      "exp": "Dark",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-possessed-mummy-98-5m-exp98-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 90,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Sea of Treats - Peanut Scout",
-      "slug": "third-sea-sea-of-treats-peanut-scout",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Sea of Treats - Peanut Scout",
+        "sea": "Third Sea",
         "island": "Sea of Treats",
         "questGiver": "Peanut Quest Giver",
         "quest": "Peanut Scout",
         "level": "2075",
-        "expexp": "100.0M EXP100.0M EXP",
+        "exp": "100.0M EXP100.0M EXP",
         "money": "14,000",
-        "special": "Cutlass"
+        "special": "Cutlass",
+        "expexp": "100.0M EXP100.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sea_of_Treats",
-      "sea": "Third Sea",
-      "island": "Sea of Treats",
-      "questGiver": "Peanut Quest Giver",
-      "quest": "Peanut Scout",
-      "level": "2075",
-      "exp": "100.0M EXP100.0M EXP",
-      "money": "14,000",
-      "special": "Cutlass",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-sea-of-treats-peanut-scout",
+        "section": "Third Sea",
+        "sortOrder": 91,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Peanut President - 102.5M EXP102.5M EXP",
-      "slug": "third-sea-peanut-president-102-5m-exp102-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Peanut President - 102.5M EXP102.5M EXP",
+        "sea": "Third Sea",
         "island": "Peanut President",
         "questGiver": "2100",
         "quest": "102.5M EXP102.5M EXP",
         "level": "14,100",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Peanut_President",
-      "sea": "Third Sea",
-      "island": "Peanut President",
-      "questGiver": "2100",
-      "quest": "102.5M EXP102.5M EXP",
-      "level": "14,100",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-peanut-president-102-5m-exp102-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 92,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Ice Cream Quest Giver - 2125",
-      "slug": "third-sea-ice-cream-quest-giver-2125",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Ice Cream Quest Giver - 2125",
+        "sea": "Third Sea",
         "island": "Ice Cream Quest Giver",
         "questGiver": "Ice Cream Chef",
         "quest": "2125",
         "level": "105.0M EXP105.0M EXP",
-        "expexp": "14,200",
-        "money": "Dark Step"
+        "exp": "14,200",
+        "money": "Dark Step",
+        "expexp": "14,200"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice_Cream_Quest_Giver",
-      "sea": "Third Sea",
-      "island": "Ice Cream Quest Giver",
-      "questGiver": "Ice Cream Chef",
-      "quest": "2125",
-      "level": "105.0M EXP105.0M EXP",
-      "exp": "14,200",
-      "money": "Dark Step",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-ice-cream-quest-giver-2125",
+        "section": "Third Sea",
+        "sortOrder": 93,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Ice Cream Commander - 107.5M EXP107.5M EXP",
-      "slug": "third-sea-ice-cream-commander-107-5m-exp107-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Ice Cream Commander - 107.5M EXP107.5M EXP",
+        "sea": "Third Sea",
         "island": "Ice Cream Commander",
         "questGiver": "2150",
         "quest": "107.5M EXP107.5M EXP",
         "level": "14,300",
+        "exp": "Aura, Dual-Headed Blade",
         "expexp": "Aura, Dual-Headed Blade"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice_Cream_Commander",
-      "sea": "Third Sea",
-      "island": "Ice Cream Commander",
-      "questGiver": "2150",
-      "quest": "107.5M EXP107.5M EXP",
-      "level": "14,300",
-      "exp": "Aura, Dual-Headed Blade",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-ice-cream-commander-107-5m-exp107-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 94,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Cake Queen - 112.5M EXP112.5M EXP",
-      "slug": "third-sea-cake-queen-112-5m-exp112-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Cake Queen - 112.5M EXP112.5M EXP",
+        "sea": "Third Sea",
         "island": "Cake Queen",
         "questGiver": "2175",
         "quest": "112.5M EXP112.5M EXP",
         "level": "30,000",
+        "exp": "Boss, Buddy Sword",
         "expexp": "Boss, Buddy Sword"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cake_Queen",
-      "sea": "Third Sea",
-      "island": "Cake Queen",
-      "questGiver": "2175",
-      "quest": "112.5M EXP112.5M EXP",
-      "level": "30,000",
-      "exp": "Boss, Buddy Sword",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-cake-queen-112-5m-exp112-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 95,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Cake Quest Giver 1 - 2200",
-      "slug": "third-sea-cake-quest-giver-1-2200",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Cake Quest Giver 1 - 2200",
+        "sea": "Third Sea",
         "island": "Cake Quest Giver 1",
         "questGiver": "Cookie Crafter",
         "quest": "2200",
         "level": "110.0M EXP110.0M EXP",
-        "expexp": "14,200",
-        "money": "Aura, Warden Sword"
+        "exp": "14,200",
+        "money": "Aura, Warden Sword",
+        "expexp": "14,200"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cake_Quest_Giver_1",
-      "sea": "Third Sea",
-      "island": "Cake Quest Giver 1",
-      "questGiver": "Cookie Crafter",
-      "quest": "2200",
-      "level": "110.0M EXP110.0M EXP",
-      "exp": "14,200",
-      "money": "Aura, Warden Sword",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-cake-quest-giver-1-2200",
+        "section": "Third Sea",
+        "sortOrder": 96,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Cake Guard - 112.5M EXP112.5M EXP",
-      "slug": "third-sea-cake-guard-112-5m-exp112-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Cake Guard - 112.5M EXP112.5M EXP",
+        "sea": "Third Sea",
         "island": "Cake Guard",
         "questGiver": "2225",
         "quest": "112.5M EXP112.5M EXP",
         "level": "14,300",
+        "exp": "Aura, Triple Katana",
         "expexp": "Aura, Triple Katana"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cake_Guard",
-      "sea": "Third Sea",
-      "island": "Cake Guard",
-      "questGiver": "2225",
-      "quest": "112.5M EXP112.5M EXP",
-      "level": "14,300",
-      "exp": "Aura, Triple Katana",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-cake-guard-112-5m-exp112-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 97,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Cake Quest Giver 2 - 2250",
-      "slug": "third-sea-cake-quest-giver-2-2250",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Cake Quest Giver 2 - 2250",
+        "sea": "Third Sea",
         "island": "Cake Quest Giver 2",
         "questGiver": "Baking Staff",
         "quest": "2250",
         "level": "115.0M EXP115.0M EXP",
-        "expexp": "14,400",
-        "money": "Aura"
+        "exp": "14,400",
+        "money": "Aura",
+        "expexp": "14,400"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Cake_Quest_Giver_2",
-      "sea": "Third Sea",
-      "island": "Cake Quest Giver 2",
-      "questGiver": "Baking Staff",
-      "quest": "2250",
-      "level": "115.0M EXP115.0M EXP",
-      "exp": "14,400",
-      "money": "Aura",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-cake-quest-giver-2-2250",
+        "section": "Third Sea",
+        "sortOrder": 98,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Head Baker - 117.5M EXP117.5M EXP",
-      "slug": "third-sea-head-baker-117-5m-exp117-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Head Baker - 117.5M EXP117.5M EXP",
+        "sea": "Third Sea",
         "island": "Head Baker",
         "questGiver": "2275",
         "quest": "117.5M EXP117.5M EXP",
         "level": "14,500",
+        "exp": "Aura, Flame",
         "expexp": "Aura, Flame"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Head_Baker",
-      "sea": "Third Sea",
-      "island": "Head Baker",
-      "questGiver": "2275",
-      "quest": "117.5M EXP117.5M EXP",
-      "level": "14,500",
-      "exp": "Aura, Flame",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-head-baker-117-5m-exp117-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 99,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Chocolate Quest Giver 1 - 2300",
-      "slug": "third-sea-chocolate-quest-giver-1-2300",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Chocolate Quest Giver 1 - 2300",
+        "sea": "Third Sea",
         "island": "Chocolate Quest Giver 1",
         "questGiver": "Cocoa Warrior",
         "quest": "2300",
         "level": "120.0M EXP120.0M EXP",
-        "expexp": "14,600",
-        "money": "Aura"
+        "exp": "14,600",
+        "money": "Aura",
+        "expexp": "14,600"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chocolate_Quest_Giver_1",
-      "sea": "Third Sea",
-      "island": "Chocolate Quest Giver 1",
-      "questGiver": "Cocoa Warrior",
-      "quest": "2300",
-      "level": "120.0M EXP120.0M EXP",
-      "exp": "14,600",
-      "money": "Aura",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-chocolate-quest-giver-1-2300",
+        "section": "Third Sea",
+        "sortOrder": 100,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Chocolate Bar Battler - 122.5M EXP122.5M EXP",
-      "slug": "third-sea-chocolate-bar-battler-122-5m-exp122-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Chocolate Bar Battler - 122.5M EXP122.5M EXP",
+        "sea": "Third Sea",
         "island": "Chocolate Bar Battler",
         "questGiver": "2325",
         "quest": "122.5M EXP122.5M EXP",
         "level": "14,700",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chocolate_Bar_Battler",
-      "sea": "Third Sea",
-      "island": "Chocolate Bar Battler",
-      "questGiver": "2325",
-      "quest": "122.5M EXP122.5M EXP",
-      "level": "14,700",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-chocolate-bar-battler-122-5m-exp122-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 101,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Chocolate Quest Giver 2 - 2350",
-      "slug": "third-sea-chocolate-quest-giver-2-2350",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Chocolate Quest Giver 2 - 2350",
+        "sea": "Third Sea",
         "island": "Chocolate Quest Giver 2",
         "questGiver": "Sweet Thief",
         "quest": "2350",
         "level": "125.0M EXP125.0M EXP",
-        "expexp": "14,800",
-        "money": "Aura"
+        "exp": "14,800",
+        "money": "Aura",
+        "expexp": "14,800"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chocolate_Quest_Giver_2",
-      "sea": "Third Sea",
-      "island": "Chocolate Quest Giver 2",
-      "questGiver": "Sweet Thief",
-      "quest": "2350",
-      "level": "125.0M EXP125.0M EXP",
-      "exp": "14,800",
-      "money": "Aura",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-chocolate-quest-giver-2-2350",
+        "section": "Third Sea",
+        "sortOrder": 102,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Candy Rebel - 127.5M EXP127.5M EXP",
-      "slug": "third-sea-candy-rebel-127-5m-exp127-5m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Candy Rebel - 127.5M EXP127.5M EXP",
+        "sea": "Third Sea",
         "island": "Candy Rebel",
         "questGiver": "2375",
         "quest": "127.5M EXP127.5M EXP",
         "level": "14,900",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy_Rebel",
-      "sea": "Third Sea",
-      "island": "Candy Rebel",
-      "questGiver": "2375",
-      "quest": "127.5M EXP127.5M EXP",
-      "level": "14,900",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-candy-rebel-127-5m-exp127-5m-exp",
+        "section": "Third Sea",
+        "sortOrder": 103,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Candy Cane Quest Giver - 2400",
-      "slug": "third-sea-candy-cane-quest-giver-2400",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Candy Cane Quest Giver - 2400",
+        "sea": "Third Sea",
         "island": "Candy Cane Quest Giver",
         "questGiver": "Candy Pirate",
         "quest": "2400",
         "level": "129.0M EXP129.0M EXP",
-        "expexp": "14,800",
-        "money": "Aura"
+        "exp": "14,800",
+        "money": "Aura",
+        "expexp": "14,800"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Candy_Cane_Quest_Giver",
-      "sea": "Third Sea",
-      "island": "Candy Cane Quest Giver",
-      "questGiver": "Candy Pirate",
-      "quest": "2400",
-      "level": "129.0M EXP129.0M EXP",
-      "exp": "14,800",
-      "money": "Aura",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-candy-cane-quest-giver-2400",
+        "section": "Third Sea",
+        "sortOrder": 104,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Snow Demon - 131.0M EXP131.0M EXP",
-      "slug": "third-sea-snow-demon-131-0m-exp131-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Snow Demon - 131.0M EXP131.0M EXP",
+        "sea": "Third Sea",
         "island": "Snow Demon",
         "questGiver": "2425",
         "quest": "131.0M EXP131.0M EXP",
         "level": "14,900",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Snow_Demon",
-      "sea": "Third Sea",
-      "island": "Snow Demon",
-      "questGiver": "2425",
-      "quest": "131.0M EXP131.0M EXP",
-      "level": "14,900",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-snow-demon-131-0m-exp131-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 105,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Tiki Outpost - Isle Outlaw",
-      "slug": "third-sea-tiki-outpost-isle-outlaw",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Tiki Outpost - Isle Outlaw",
+        "sea": "Third Sea",
         "island": "Tiki Outpost",
         "questGiver": "Tiki Quest Giver 1",
         "quest": "Isle Outlaw",
         "level": "2450",
-        "expexp": "133.0M EXP133.0M EXP",
+        "exp": "133.0M EXP133.0M EXP",
         "money": "15,100",
-        "special": "Aura"
+        "special": "Aura",
+        "expexp": "133.0M EXP133.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tiki_Outpost",
-      "sea": "Third Sea",
-      "island": "Tiki Outpost",
-      "questGiver": "Tiki Quest Giver 1",
-      "quest": "Isle Outlaw",
-      "level": "2450",
-      "exp": "133.0M EXP133.0M EXP",
-      "money": "15,100",
-      "special": "Aura",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-tiki-outpost-isle-outlaw",
+        "section": "Third Sea",
+        "sortOrder": 106,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Island Boy - 135.0M EXP135.0M EXP",
-      "slug": "third-sea-island-boy-135-0m-exp135-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Island Boy - 135.0M EXP135.0M EXP",
+        "sea": "Third Sea",
         "island": "Island Boy",
         "questGiver": "2475",
         "quest": "135.0M EXP135.0M EXP",
         "level": "15,200",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Island_Boy",
-      "sea": "Third Sea",
-      "island": "Island Boy",
-      "questGiver": "2475",
-      "quest": "135.0M EXP135.0M EXP",
-      "level": "15,200",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-island-boy-135-0m-exp135-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 107,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Tiki Quest Giver 2 - 2500",
-      "slug": "third-sea-tiki-quest-giver-2-2500",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Tiki Quest Giver 2 - 2500",
+        "sea": "Third Sea",
         "island": "Tiki Quest Giver 2",
         "questGiver": "Sun-kissed Warrior",
         "quest": "2500",
         "level": "137.0M EXP137.0M EXP",
-        "expexp": "15,250",
-        "money": "Aura"
+        "exp": "15,250",
+        "money": "Aura",
+        "expexp": "15,250"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tiki_Quest_Giver_2",
-      "sea": "Third Sea",
-      "island": "Tiki Quest Giver 2",
-      "questGiver": "Sun-kissed Warrior",
-      "quest": "2500",
-      "level": "137.0M EXP137.0M EXP",
-      "exp": "15,250",
-      "money": "Aura",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-tiki-quest-giver-2-2500",
+        "section": "Third Sea",
+        "sortOrder": 108,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Isle Champion - 139.0M EXP139.0M EXP",
-      "slug": "third-sea-isle-champion-139-0m-exp139-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Isle Champion - 139.0M EXP139.0M EXP",
+        "sea": "Third Sea",
         "island": "Isle Champion",
         "questGiver": "2525",
         "quest": "139.0M EXP139.0M EXP",
         "level": "15,500",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Isle_Champion",
-      "sea": "Third Sea",
-      "island": "Isle Champion",
-      "questGiver": "2525",
-      "quest": "139.0M EXP139.0M EXP",
-      "level": "15,500",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-isle-champion-139-0m-exp139-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 109,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Tiki Quest Giver 3 - 2550",
-      "slug": "third-sea-tiki-quest-giver-3-2550",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Tiki Quest Giver 3 - 2550",
+        "sea": "Third Sea",
         "island": "Tiki Quest Giver 3",
         "questGiver": "Serpent Hunter",
         "quest": "2550",
         "level": "141.0M EXP141.0M EXP",
-        "expexp": "15,750",
-        "money": "Aura"
+        "exp": "15,750",
+        "money": "Aura",
+        "expexp": "15,750"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tiki_Quest_Giver_3",
-      "sea": "Third Sea",
-      "island": "Tiki Quest Giver 3",
-      "questGiver": "Serpent Hunter",
-      "quest": "2550",
-      "level": "141.0M EXP141.0M EXP",
-      "exp": "15,750",
-      "money": "Aura",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-tiki-quest-giver-3-2550",
+        "section": "Third Sea",
+        "sortOrder": 110,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Skull Slayer - 143.0M EXP143.0M EXP",
-      "slug": "third-sea-skull-slayer-143-0m-exp143-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Skull Slayer - 143.0M EXP143.0M EXP",
+        "sea": "Third Sea",
         "island": "Skull Slayer",
         "questGiver": "2575",
         "quest": "143.0M EXP143.0M EXP",
         "level": "16,000",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Skull_Slayer",
-      "sea": "Third Sea",
-      "island": "Skull Slayer",
-      "questGiver": "2575",
-      "quest": "143.0M EXP143.0M EXP",
-      "level": "16,000",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-skull-slayer-143-0m-exp143-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 111,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Submerged Island - Reef Bandit",
-      "slug": "third-sea-submerged-island-reef-bandit",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Submerged Island - Reef Bandit",
+        "sea": "Third Sea",
         "island": "Submerged Island",
         "questGiver": "Submerged Quest Giver 1",
         "quest": "Reef Bandit",
         "level": "2600",
-        "expexp": "145.0M EXP145.0M EXP",
+        "exp": "145.0M EXP145.0M EXP",
         "money": "15,450",
-        "special": "Aura"
+        "special": "Aura",
+        "expexp": "145.0M EXP145.0M EXP"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Submerged_Island",
-      "sea": "Third Sea",
-      "island": "Submerged Island",
-      "questGiver": "Submerged Quest Giver 1",
-      "quest": "Reef Bandit",
-      "level": "2600",
-      "exp": "145.0M EXP145.0M EXP",
-      "money": "15,450",
-      "special": "Aura",
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-submerged-island-reef-bandit",
+        "section": "Third Sea",
+        "sortOrder": 112,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Coral Pirate - 147.0M EXP147.0M EXP",
-      "slug": "third-sea-coral-pirate-147-0m-exp147-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Coral Pirate - 147.0M EXP147.0M EXP",
+        "sea": "Third Sea",
         "island": "Coral Pirate",
         "questGiver": "2625",
         "quest": "147.0M EXP147.0M EXP",
         "level": "15,500",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Coral_Pirate",
-      "sea": "Third Sea",
-      "island": "Coral Pirate",
-      "questGiver": "2625",
-      "quest": "147.0M EXP147.0M EXP",
-      "level": "15,500",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-coral-pirate-147-0m-exp147-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 113,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Submerged Quest Giver 2 - 2650",
-      "slug": "third-sea-submerged-quest-giver-2-2650",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Submerged Quest Giver 2 - 2650",
+        "sea": "Third Sea",
         "island": "Submerged Quest Giver 2",
         "questGiver": "Sea Chanter",
         "quest": "2650",
         "level": "150.0M EXP150.0M EXP",
-        "expexp": "15,550",
-        "money": "Aura"
+        "exp": "15,550",
+        "money": "Aura",
+        "expexp": "15,550"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Submerged_Quest_Giver_2",
-      "sea": "Third Sea",
-      "island": "Submerged Quest Giver 2",
-      "questGiver": "Sea Chanter",
-      "quest": "2650",
-      "level": "150.0M EXP150.0M EXP",
-      "exp": "15,550",
-      "money": "Aura",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-submerged-quest-giver-2-2650",
+        "section": "Third Sea",
+        "sortOrder": 114,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Ocean Prophet - 152.0M EXP152.0M EXP",
-      "slug": "third-sea-ocean-prophet-152-0m-exp152-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Ocean Prophet - 152.0M EXP152.0M EXP",
+        "sea": "Third Sea",
         "island": "Ocean Prophet",
         "questGiver": "2675",
         "quest": "152.0M EXP152.0M EXP",
         "level": "15,600",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ocean_Prophet",
-      "sea": "Third Sea",
-      "island": "Ocean Prophet",
-      "questGiver": "2675",
-      "quest": "152.0M EXP152.0M EXP",
-      "level": "15,600",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-ocean-prophet-152-0m-exp152-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 115,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Submerged Quest Giver 3 - 2675",
-      "slug": "third-sea-submerged-quest-giver-3-2675",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Submerged Quest Giver 3 - 2675",
+        "sea": "Third Sea",
         "island": "Submerged Quest Giver 3",
         "questGiver": "High Disciple",
         "quest": "2675",
         "level": "154.0M EXP154.0M EXP",
-        "expexp": "15,650",
-        "money": "Aura"
+        "exp": "15,650",
+        "money": "Aura",
+        "expexp": "15,650"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Submerged_Quest_Giver_3",
-      "sea": "Third Sea",
-      "island": "Submerged Quest Giver 3",
-      "questGiver": "High Disciple",
-      "quest": "2675",
-      "level": "154.0M EXP154.0M EXP",
-      "exp": "15,650",
-      "money": "Aura",
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-submerged-quest-giver-3-2675",
+        "section": "Third Sea",
+        "sortOrder": 116,
+        "image": null
+      }
     },
     {
-      "name": "Third Sea - Grand Devotee - 156.0M EXP156.0M EXP",
-      "slug": "third-sea-grand-devotee-156-0m-exp156-0m-exp",
-      "fields": {
+      "item": {
+        "name": "Third Sea - Grand Devotee - 156.0M EXP156.0M EXP",
+        "sea": "Third Sea",
         "island": "Grand Devotee",
         "questGiver": "2700",
         "quest": "156.0M EXP156.0M EXP",
         "level": "15,700",
+        "exp": "Aura",
         "expexp": "Aura"
       },
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Grand_Devotee",
-      "sea": "Third Sea",
-      "island": "Grand Devotee",
-      "questGiver": "2700",
-      "quest": "156.0M EXP156.0M EXP",
-      "level": "15,700",
-      "exp": "Aura",
-      "money": null,
-      "special": null,
-      "image": null,
-      "sourceImageUrl": null
+      "system": {
+        "slug": "third-sea-grand-devotee-156-0m-exp156-0m-exp",
+        "section": "Third Sea",
+        "sortOrder": 117,
+        "image": null
+      }
     }
   ]
 }

@@ -25,6 +25,7 @@ import { getWikiPageBySlug, listPublishedWikiPages, loadWikiRelatedData, type Wi
 import { repoPath } from "@/lib/paths";
 import { getFieldLabel, getGameCollectionConfigByCode } from "@/lib/game-collections";
 import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { supabaseAdmin } from "@/lib/supabase";
 import { ROBUX_BUNDLES, type RobuxBundle } from "@/app/(site)/tools/robux-to-usd-calculator/robux-bundles";
 import { robuxForBundle } from "@/app/(site)/tools/robux-to-usd-calculator/robux-plans";
@@ -35,6 +36,47 @@ import { getTheForgeCollectionConfig, loadTheForgeCollectionDataset } from "@/ap
 
 const PAGE_SIZE = 20;
 const DETAIL_ITEM_LIMIT = 36;
+const MOBILE_COLLECTION_OMITTED_KEYS = new Set([
+  "id",
+  "slug",
+  "name",
+  "title",
+  "image",
+  "imageStatus",
+  "imageMissingReason",
+  "imageSource",
+  "thumbnail",
+  "thumbnail_url",
+  "imageUrl",
+  "imageCandidate",
+  "sourceImageUrl",
+  "sourceImage",
+  "sourcePage",
+  "secondarySourcePage",
+  "sourceUrl",
+  "sourceUrls",
+  "sourceFile",
+  "sourceTables",
+  "sourceStatus",
+  "sourceConfidence",
+  "sourceCheckedAt",
+  "sourceGeneratedAt",
+  "sourceNote",
+  "sourceNotes",
+  "sourceEvidence",
+  "wikiSourceStatus",
+  "verification",
+  "verificationNote",
+  "confidence",
+  "blocker",
+  "raw",
+  "rawText",
+  "fields",
+  "sections",
+  "updatedAt",
+  "collectionSection",
+  "sortOrder"
+]);
 
 export type MobileContentKind = "articles" | "catalog" | "checklists" | "events" | "quizzes" | "tools" | "wiki";
 
@@ -324,10 +366,7 @@ function firstMeaningfulValue(row: Record<string, unknown>, keys: string[]): str
 
 function datasetItemBody(row: Record<string, unknown>, keys: string[], max = 5): string | null {
   const parts = keys
-    .filter(
-      (key) =>
-        !["id", "slug", "name", "title", "image", "imageStatus", "thumbnail", "thumbnail_url", "imageUrl"].includes(key)
-    )
+    .filter((key) => !MOBILE_COLLECTION_OMITTED_KEYS.has(key))
     .map((key) => {
       const value = formatUnknownValue(row[key]);
       return value ? `${getFieldLabel(key)}: ${value}` : null;
@@ -377,8 +416,12 @@ function readRecordArrayPayload(value: unknown): Array<Record<string, unknown>> 
     return value.filter(isRecord);
   }
   if (!isRecord(value)) return [];
-  const rows = value.items ?? value.data ?? value.rows;
-  return Array.isArray(rows) ? rows.filter(isRecord) : [];
+  return unwrapDatasetItems<Record<string, unknown>>(value as {
+    meta?: unknown;
+    items?: Array<Record<string, unknown> | { item?: Record<string, unknown>; system?: Record<string, unknown> }> | null;
+    data?: Array<Record<string, unknown> | { item?: Record<string, unknown>; system?: Record<string, unknown> }> | null;
+    rows?: Array<Record<string, unknown> | { item?: Record<string, unknown>; system?: Record<string, unknown> }> | null;
+  }).filter(isRecord);
 }
 
 async function readJsonFile(path: string): Promise<unknown | null> {
@@ -534,7 +577,7 @@ async function loadGameCollectionSections(code: string, searchParams?: URLSearch
         ...nestedFields,
         ...row,
         name: normalizeText(row.name) ?? normalizeText(row.title) ?? normalizeText(row.item) ?? null,
-        image: normalizeText(row.image) ?? normalizeText(row.imageCandidate) ?? normalizeText(row.sourceImageUrl) ?? null
+        image: normalizeText(row.image) ?? null
       };
     })
     .filter((row) => normalizeText(row.name));
@@ -550,7 +593,7 @@ async function loadGameCollectionSections(code: string, searchParams?: URLSearch
   const items = detailItemsFromRows(pagedRows, {
     badgeKeys: ["rarity", "tier", "status", "type", "category", "sea", "price", "cost", "robux"],
     subtitleKeys: ["category", "type", "location", "sea", "source", "availability", "requirements"],
-    imageKeys: ["image", "sourceImageUrl", "imageCandidate"],
+    imageKeys: ["image"],
     bodyKeys: columns,
     limit: pageSize
   });

@@ -3,6 +3,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { repoPath } from "@/lib/paths";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 import {
   buildGameCollectionCopy,
   GAME_COLLECTION_GROUPS,
@@ -11,13 +12,14 @@ import {
 } from "@/lib/game-collections";
 
 type DatasetMeta = {
+  schemaVersion?: number | null;
   columns?: string[] | null;
 };
 
 type DatasetFile = {
   meta?: DatasetMeta | null;
-  items?: Record<string, unknown>[] | null;
-  data?: Record<string, unknown>[] | null;
+  items?: Array<Record<string, unknown> | { item?: Record<string, unknown>; system?: Record<string, unknown> }> | null;
+  data?: Array<Record<string, unknown> | { item?: Record<string, unknown>; system?: Record<string, unknown> }> | null;
 };
 
 type WikiCollectionPageUpsert = {
@@ -170,7 +172,7 @@ async function readDataset(config: GameCollectionConfig) {
   const datasetPath = repoPath("data", config.dataDir, config.file);
   const raw = await fs.readFile(datasetPath, "utf8");
   const parsed = JSON.parse(raw) as DatasetFile | Record<string, unknown>[];
-  const rows = Array.isArray(parsed) ? parsed : parsed.items ?? parsed.data ?? [];
+  const rows = unwrapDatasetItems<Record<string, unknown>>(parsed);
   const columns = Array.isArray(parsed) ? inferColumns(rows) : parsed.meta?.columns ?? inferColumns(rows);
   const imageUrls = Array.from(
     new Set(
@@ -315,10 +317,11 @@ async function loadUniverseIdsByGameSlug() {
   }
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) return new Map<string, number | null>();
   const rows = await loadRobloxUniverseLookupRows();
+  const existingUniverseIds = new Set(rows.map((row) => row.universe_id));
 
   return new Map(
     getTargetGroups(getTargetCollections()).map((group) => {
-      if (group.universeId) return [group.gameSlug, group.universeId];
+      if (group.universeId && existingUniverseIds.has(group.universeId)) return [group.gameSlug, group.universeId];
       const candidates = new Set([group.gameSlug, group.gameName, ...group.universeNames].map(normalizeLookup));
       const match = rows.find((row) =>
         [row.name, row.display_name].some((value) => candidates.has(normalizeLookup(value)))

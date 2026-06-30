@@ -5,12 +5,14 @@ description: Write one Bloxodes game-specific collection final.json after collec
 
 # Bloxodes Game Collection Writing
 
+> **You are a subagent. Do NOT spawn sub-agents or call other agents. Write final.json directly using the Write tool.**
+
 Use this after `brief.md`, data readiness, and image readiness are approved. Use it for one durable item or system collection inside one Roblox game.
 
 ## Workflow
 
 1. Read the approved `brief.md`.
-2. Confirm `Data readiness` says the dataset, section field, card/table field order, field presentation map, highlight/chip/detail/plain fields, field consistency, and renderer/config support are ready.
+2. Confirm `Data readiness` says the dataset uses v2 wrapped `{ meta, items[].item, items[].system }`, public game fields are separate from system fields, the grouping metadata is ready when sections exist, the section labels, card/table field order, field presentation map, highlight/chip/detail/plain fields, field consistency, and renderer/config support are ready.
 3. Confirm `Image readiness` is approved, or missing images were clearly accepted.
 4. Create or update:
 
@@ -25,13 +27,14 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/
 
 ## Voice & Tone
 
-Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful — never formal, corporate, or hyped.
+Bloxodes house voice: write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
 
 - Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
-- Playful, not loud. Drop in a light, dry touch of wit — roughly one per short paragraph — and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
-- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays — not a manual.
-- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length — not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
-- Open on the real thing — the item or mechanic. No "In this game…", "This collection…", "Welcome to…", or mood-setting warm-ups.
+- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
+- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
+- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
+- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
+- Open on the real thing: the item or mechanic. No "In this game…", "This collection…", "Welcome to…", or mood-setting warm-ups.
 - Keep functional slots clean. Card fields, table cells, and short facts stay plain and direct. Let the playful voice live in intros, descriptions, and the wiki blurb.
 - No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place.
 
@@ -78,7 +81,7 @@ Cards are the default collection view. They should feel complete, aligned, and e
 
 Explain section groups only when it adds context beyond the cards.
 This goes above each cards section and should not repeat the card copy. It should be a small paragraph that gives context to the group of items in that section.
-`description_json` keys must match the actual rendered section labels from the dataset. If the dataset sections are `Basic`, `Rare`, and `Exclusive`, use those exact keys.
+`description_json` keys must match the actual rendered section labels from `items[].system.section` and `meta.display.sectionOrder`. If the dataset sections are `Basic`, `Rare`, and `Exclusive`, use those exact keys.
 Do not create a section note for every section unless it helps. Empty `description_json` is fine when the section labels already explain enough.
 
 
@@ -119,10 +122,10 @@ Good shape: "what it is in the game" → "how it works / how you get it" → "wh
 - `seo_title`: Keep it close to the title, make it natural for search, and use the same `{count}` token when the title count appears.
 - `meta_description`: Say what the reader can compare or learn from the page.
 - `intro_md`: Explain what this collection is in the game and why players compare it.
-- `description_md`: The main body. Cover everything a reader needs to use or finish this collection (strategy, progression, trade-offs, mistakes) using whatever structure fits — short paragraphs, bullets, tables, and headings only where they help. Fluid, not a fixed two-section template; no fluff and no repeating the other fields.
+- `description_md`: The main body. Cover everything a reader needs to use or finish this collection (strategy, progression, trade-offs, mistakes) using whatever structure fits: short paragraphs, bullets, tables, and headings only where they help. Fluid, not a fixed two-section template; no fluff and no repeating the other fields.
 - `how_it_works_md`: Explain page fields only when the fields need context. Keep it short.
 - `description_json`: Explain section groups only when it adds context beyond the cards. Keys must match rendered section labels.
-- `faq_json`: Answer useful follow-up questions not already covered. Each entry MUST use the keys `q` (question) and `a` (answer): `{ "q": "...", "a": "..." }`. Do NOT use `question`/`answer` — the renderer reads `q`/`a` and wrong keys make the FAQ render blank.
+- `faq_json`: Answer useful follow-up questions not already covered. Each entry MUST use the keys `q` (question) and `a` (answer): `{ "q": "...", "a": "..." }`. Do NOT use `question`/`answer`: the renderer reads `q`/`a` and wrong keys make the FAQ render blank.
 - `wiki_md`: Explain the in-game system this collection covers in plain, simple words so the blurb is genuinely useful on the wiki hub: what it is, how a player gets or uses it, and why it matters. Be specific, 2-4 sentences, no item count.
 
 ## Output Shape

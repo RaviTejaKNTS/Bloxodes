@@ -1,13 +1,19 @@
 {
   "meta": {
-    "title": "Slime RNG items data",
-    "updatedAt": "2026-05-24",
-    "sources": [
-      {
-        "label": "Slime RNG Wiki - Items",
-        "url": "https://slime-rng.fandom.com/wiki/Items",
-        "accessed": "2026-05-24"
-      }
+    "schemaVersion": 2,
+    "game": "Slime RNG",
+    "gameSlug": "slime-rng",
+    "collection": "items",
+    "route": "/wiki/slime-rng/items",
+    "catalogCode": "slime-rng-items",
+    "itemFields": [
+      "itemType",
+      "effect",
+      "xp",
+      "buff",
+      "nextRoll",
+      "duration",
+      "rule"
     ],
     "columns": [
       "itemType",
@@ -16,280 +22,298 @@
       "buff",
       "nextRoll",
       "duration",
-      "rule",
-      "image"
-    ]
+      "rule"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "itemType",
+        "effect",
+        "xp",
+        "buff",
+        "nextRoll",
+        "duration"
+      ],
+      "tableFields": [
+        "itemType",
+        "effect",
+        "xp",
+        "buff",
+        "nextRoll",
+        "duration",
+        "rule"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Cheese",
-      "slug": "cheese",
-      "itemType": "Food",
-      "effect": "+75 XP",
-      "xp": "+75 XP",
-      "buff": null,
-      "nextRoll": null,
-      "duration": null,
-      "rule": null,
-      "image": "/Slime%20RNG/Items/cheese.webp",
-      "sortOrder": 1,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/a/a5/Cheese.png/revision/latest?cb=20260513221015"
+      "item": {
+        "name": "Cheese",
+        "itemType": "Food",
+        "effect": "+75 XP",
+        "xp": "+75 XP"
+      },
+      "system": {
+        "slug": "cheese",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": "/Slime%20RNG/Items/cheese.webp"
+      }
     },
     {
-      "name": "Egg",
-      "slug": "egg",
-      "itemType": "Food",
-      "effect": "+100 XP",
-      "xp": "+100 XP",
-      "buff": null,
-      "nextRoll": null,
-      "duration": null,
-      "rule": null,
-      "image": "/Slime%20RNG/Items/egg.webp",
-      "sortOrder": 2,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/2/26/Egg.png/revision/latest?cb=20260513221032"
+      "item": {
+        "name": "Egg",
+        "itemType": "Food",
+        "effect": "+100 XP",
+        "xp": "+100 XP"
+      },
+      "system": {
+        "slug": "egg",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": "/Slime%20RNG/Items/egg.webp"
+      }
     },
     {
-      "name": "Fries",
-      "slug": "fries",
-      "itemType": "Food",
-      "effect": "+125 XP",
-      "xp": "+125 XP",
-      "buff": null,
-      "nextRoll": null,
-      "duration": null,
-      "rule": null,
-      "image": "/Slime%20RNG/Items/fries.webp",
-      "sortOrder": 3,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/b/b6/Fries.png/revision/latest?cb=20260513221041"
+      "item": {
+        "name": "Fries",
+        "itemType": "Food",
+        "effect": "+125 XP",
+        "xp": "+125 XP"
+      },
+      "system": {
+        "slug": "fries",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": "/Slime%20RNG/Items/fries.webp"
+      }
     },
     {
-      "name": "Taco",
-      "slug": "taco",
-      "itemType": "Food",
-      "effect": "+150 XP",
-      "xp": "+150 XP",
-      "buff": null,
-      "nextRoll": null,
-      "duration": null,
-      "rule": null,
-      "image": "/Slime%20RNG/Items/taco.webp",
-      "sortOrder": 4,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/6/6d/Tacos.png/revision/latest?cb=20260513221124"
+      "item": {
+        "name": "Taco",
+        "itemType": "Food",
+        "effect": "+150 XP",
+        "xp": "+150 XP"
+      },
+      "system": {
+        "slug": "taco",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": "/Slime%20RNG/Items/taco.webp"
+      }
     },
     {
-      "name": "Hotdog",
-      "slug": "hotdog",
-      "itemType": "Food",
-      "effect": "+175 XP",
-      "xp": "+175 XP",
-      "buff": null,
-      "nextRoll": null,
-      "duration": null,
-      "rule": null,
-      "image": "/Slime%20RNG/Items/hotdog.webp",
-      "sortOrder": 5,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/0/00/Hotdog.png/revision/latest?cb=20260513221121"
+      "item": {
+        "name": "Hotdog",
+        "itemType": "Food",
+        "effect": "+175 XP",
+        "xp": "+175 XP"
+      },
+      "system": {
+        "slug": "hotdog",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": "/Slime%20RNG/Items/hotdog.webp"
+      }
     },
     {
-      "name": "Burger",
-      "slug": "burger",
-      "itemType": "Food",
-      "effect": "+200 XP",
-      "xp": "+200 XP",
-      "buff": null,
-      "nextRoll": null,
-      "duration": null,
-      "rule": null,
-      "image": "/Slime%20RNG/Items/burger.webp",
-      "sortOrder": 6,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/9/93/Burger.png/revision/latest?cb=20260513221014"
+      "item": {
+        "name": "Burger",
+        "itemType": "Food",
+        "effect": "+200 XP",
+        "xp": "+200 XP"
+      },
+      "system": {
+        "slug": "burger",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": "/Slime%20RNG/Items/burger.webp"
+      }
     },
     {
-      "name": "Pizza",
-      "slug": "pizza",
-      "itemType": "Food",
-      "effect": "+225 XP",
-      "xp": "+225 XP",
-      "buff": null,
-      "nextRoll": null,
-      "duration": null,
-      "rule": null,
-      "image": "/Slime%20RNG/Items/pizza.webp",
-      "sortOrder": 7,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/f/f4/Pizza.png/revision/latest?cb=20260513221122"
+      "item": {
+        "name": "Pizza",
+        "itemType": "Food",
+        "effect": "+225 XP",
+        "xp": "+225 XP"
+      },
+      "system": {
+        "slug": "pizza",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": "/Slime%20RNG/Items/pizza.webp"
+      }
     },
     {
-      "name": "Chicken",
-      "slug": "chicken",
-      "itemType": "Food",
-      "effect": "+250 XP",
-      "xp": "+250 XP",
-      "buff": null,
-      "nextRoll": null,
-      "duration": null,
-      "rule": null,
-      "image": "/Slime%20RNG/Items/chicken.webp",
-      "sortOrder": 8,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/a/a3/Chicken.png/revision/latest?cb=20260513221016"
+      "item": {
+        "name": "Chicken",
+        "itemType": "Food",
+        "effect": "+250 XP",
+        "xp": "+250 XP"
+      },
+      "system": {
+        "slug": "chicken",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": "/Slime%20RNG/Items/chicken.webp"
+      }
     },
     {
-      "name": "Drumstick",
-      "slug": "drumstick",
-      "itemType": "Food",
-      "effect": "+275 XP",
-      "xp": "+275 XP",
-      "buff": null,
-      "nextRoll": null,
-      "duration": null,
-      "rule": null,
-      "image": "/Slime%20RNG/Items/drumstick.webp",
-      "sortOrder": 9,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/d/dd/Drumstick.png/revision/latest?cb=20260513221029"
+      "item": {
+        "name": "Drumstick",
+        "itemType": "Food",
+        "effect": "+275 XP",
+        "xp": "+275 XP"
+      },
+      "system": {
+        "slug": "drumstick",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": "/Slime%20RNG/Items/drumstick.webp"
+      }
     },
     {
-      "name": "Luck Boost",
-      "slug": "luck-boost",
-      "itemType": "Potions",
-      "effect": "+1 Luck",
-      "xp": null,
-      "buff": "+1 Luck",
-      "nextRoll": null,
-      "duration": "3 minutes",
-      "rule": null,
-      "image": "/Slime%20RNG/Items/luck-boost.webp",
-      "sortOrder": 10,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/3/3a/Luckboost.png/revision/latest?cb=20260430125842"
+      "item": {
+        "name": "Luck Boost",
+        "itemType": "Potions",
+        "effect": "+1 Luck",
+        "buff": "+1 Luck",
+        "duration": "3 minutes"
+      },
+      "system": {
+        "slug": "luck-boost",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": "/Slime%20RNG/Items/luck-boost.webp"
+      }
     },
     {
-      "name": "Ultra Luck Boost",
-      "slug": "ultra-luck-boost",
-      "itemType": "Potions",
-      "effect": "+2 Luck",
-      "xp": null,
-      "buff": "+2 Luck",
-      "nextRoll": null,
-      "duration": "3 minutes",
-      "rule": null,
-      "image": "/Slime%20RNG/Items/ultra-luck-boost.webp",
-      "sortOrder": 11,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/5/55/Ultraluckboost.png/revision/latest?cb=20260430125904"
+      "item": {
+        "name": "Ultra Luck Boost",
+        "itemType": "Potions",
+        "effect": "+2 Luck",
+        "buff": "+2 Luck",
+        "duration": "3 minutes"
+      },
+      "system": {
+        "slug": "ultra-luck-boost",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": "/Slime%20RNG/Items/ultra-luck-boost.webp"
+      }
     },
     {
-      "name": "Roll Speed Boost",
-      "slug": "roll-speed-boost",
-      "itemType": "Potions",
-      "effect": "x2 faster rolls",
-      "xp": null,
-      "buff": "x2 faster rolls",
-      "nextRoll": null,
-      "duration": "3 minutes",
-      "rule": null,
-      "image": "/Slime%20RNG/Items/roll-speed-boost.webp",
-      "sortOrder": 12,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/c/c4/Rollspeedboost.png/revision/latest?cb=20260430125857"
+      "item": {
+        "name": "Roll Speed Boost",
+        "itemType": "Potions",
+        "effect": "x2 faster rolls",
+        "buff": "x2 faster rolls",
+        "duration": "3 minutes"
+      },
+      "system": {
+        "slug": "roll-speed-boost",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": "/Slime%20RNG/Items/roll-speed-boost.webp"
+      }
     },
     {
-      "name": "Coin Boost",
-      "slug": "coin-boost",
-      "itemType": "Potions",
-      "effect": "x2 Coins",
-      "xp": null,
-      "buff": "x2 Coins",
-      "nextRoll": null,
-      "duration": "3 minutes",
-      "rule": null,
-      "image": "/Slime%20RNG/Items/coin-boost.webp",
-      "sortOrder": 13,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/8/8c/Coinboost.png/revision/latest?cb=20260430125828"
+      "item": {
+        "name": "Coin Boost",
+        "itemType": "Potions",
+        "effect": "x2 Coins",
+        "buff": "x2 Coins",
+        "duration": "3 minutes"
+      },
+      "system": {
+        "slug": "coin-boost",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": "/Slime%20RNG/Items/coin-boost.webp"
+      }
     },
     {
-      "name": "BIG Dice",
-      "slug": "big-dice",
-      "itemType": "Dice",
-      "effect": "Guarantees a Big slime on next roll",
-      "xp": null,
-      "buff": null,
-      "nextRoll": "Guarantees a Big slime on next roll",
-      "duration": null,
-      "rule": "Mutation dice do not stack",
-      "image": "/Slime%20RNG/Items/big-dice.webp",
-      "sortOrder": 14,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/1/1c/1Big_Dice.png/revision/latest?cb=20260511021556"
+      "item": {
+        "name": "BIG Dice",
+        "itemType": "Dice",
+        "effect": "Guarantees a Big slime on next roll",
+        "nextRoll": "Guarantees a Big slime on next roll",
+        "rule": "Mutation dice do not stack"
+      },
+      "system": {
+        "slug": "big-dice",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": "/Slime%20RNG/Items/big-dice.webp"
+      }
     },
     {
-      "name": "HUGE Dice",
-      "slug": "huge-dice",
-      "itemType": "Dice",
-      "effect": "Guarantees a Huge slime on next roll",
-      "xp": null,
-      "buff": null,
-      "nextRoll": "Guarantees a Huge slime on next roll",
-      "duration": null,
-      "rule": "Mutation dice do not stack",
-      "image": "/Slime%20RNG/Items/huge-dice.webp",
-      "sortOrder": 15,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/b/b8/1Huge_Dice.png/revision/latest?cb=20260511021557"
+      "item": {
+        "name": "HUGE Dice",
+        "itemType": "Dice",
+        "effect": "Guarantees a Huge slime on next roll",
+        "nextRoll": "Guarantees a Huge slime on next roll",
+        "rule": "Mutation dice do not stack"
+      },
+      "system": {
+        "slug": "huge-dice",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": "/Slime%20RNG/Items/huge-dice.webp"
+      }
     },
     {
-      "name": "Shiny Dice",
-      "slug": "shiny-dice",
-      "itemType": "Dice",
-      "effect": "Guarantees a Shiny slime on next roll",
-      "xp": null,
-      "buff": null,
-      "nextRoll": "Guarantees a Shiny slime on next roll",
-      "duration": null,
-      "rule": "Mutation dice do not stack",
-      "image": "/Slime%20RNG/Items/shiny-dice.webp",
-      "sortOrder": 16,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/d/d4/1Shiny_Dice.png/revision/latest?cb=20260511021558"
+      "item": {
+        "name": "Shiny Dice",
+        "itemType": "Dice",
+        "effect": "Guarantees a Shiny slime on next roll",
+        "nextRoll": "Guarantees a Shiny slime on next roll",
+        "rule": "Mutation dice do not stack"
+      },
+      "system": {
+        "slug": "shiny-dice",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": "/Slime%20RNG/Items/shiny-dice.webp"
+      }
     },
     {
-      "name": "Inverted Dice",
-      "slug": "inverted-dice",
-      "itemType": "Dice",
-      "effect": "Guarantees an Inverted slime on next roll",
-      "xp": null,
-      "buff": null,
-      "nextRoll": "Guarantees an Inverted slime on next roll",
-      "duration": null,
-      "rule": "Mutation dice do not stack",
-      "image": "/Slime%20RNG/Items/inverted-dice.webp",
-      "sortOrder": 17,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/d/d9/1Inverted_Dice.png/revision/latest?cb=20260511021557"
+      "item": {
+        "name": "Inverted Dice",
+        "itemType": "Dice",
+        "effect": "Guarantees an Inverted slime on next roll",
+        "nextRoll": "Guarantees an Inverted slime on next roll",
+        "rule": "Mutation dice do not stack"
+      },
+      "system": {
+        "slug": "inverted-dice",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": "/Slime%20RNG/Items/inverted-dice.webp"
+      }
     },
     {
-      "name": "Jackpot Dice",
-      "slug": "jackpot-dice",
-      "itemType": "Dice",
-      "effect": "Guarantees 3 bonuses and a jackpot",
-      "xp": null,
-      "buff": null,
-      "nextRoll": "Guarantees 3 bonuses and a jackpot",
-      "duration": null,
-      "rule": "Grants a guaranteed Jackpot Wheel spin",
-      "image": "/Slime%20RNG/Items/jackpot-dice.webp",
-      "sortOrder": 18,
-      "sourcePage": "https://slime-rng.fandom.com/wiki/Items",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/slime-rng/images/4/48/1Jackpot_Dice.png/revision/latest?cb=20260511021558"
+      "item": {
+        "name": "Jackpot Dice",
+        "itemType": "Dice",
+        "effect": "Guarantees 3 bonuses and a jackpot",
+        "nextRoll": "Guarantees 3 bonuses and a jackpot",
+        "rule": "Grants a guaranteed Jackpot Wheel spin"
+      },
+      "system": {
+        "slug": "jackpot-dice",
+        "section": "Items",
+        "sortOrder": 18,
+        "image": "/Slime%20RNG/Items/jackpot-dice.webp"
+      }
     }
   ]
 }

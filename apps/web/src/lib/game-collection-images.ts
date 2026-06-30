@@ -4,11 +4,13 @@ import type { Dirent } from "node:fs";
 import fs from "node:fs/promises";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { getGameCollectionConfigByCode } from "@/lib/game-collections";
+import { unwrapDatasetItems } from "@/lib/local-datasets";
 import { repoPath } from "@/lib/paths";
 
 type DatasetRow = Record<string, unknown>;
 
 type DatasetFile = {
+  meta?: { schemaVersion?: number | null } | null;
   items?: DatasetRow[] | null;
   data?: DatasetRow[] | null;
 };
@@ -118,7 +120,7 @@ async function readCollectionImageUrls(code: string, limit: number): Promise<str
     const datasetPath = repoPath("data", location.dataDir, location.file);
     const raw = await fs.readFile(datasetPath, "utf8");
     const parsed = JSON.parse(raw) as DatasetFile | DatasetRow[];
-    const rows = Array.isArray(parsed) ? parsed : parsed.items ?? parsed.data ?? [];
+    const rows = unwrapDatasetItems<DatasetRow>(parsed);
     const images = new Set<string>();
 
     for (const row of rows) {

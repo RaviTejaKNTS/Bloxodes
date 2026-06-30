@@ -1,742 +1,1223 @@
 {
   "meta": {
-    "title": "Berry Avenue RP locations data",
-    "updatedAt": "2026-06-23",
-    "groupBy": "district",
-    "sources": [
-      {
-        "label": "Robloxiapedia - Berry Avenue (district list + building inventory; lore treated as fan fiction and ignored)",
-        "url": "https://robloxcities.fandom.com/wiki/Berry_Avenue",
-        "accessed": "2026-06-23"
-      },
-      {
-        "label": "Republic of ROBLOX Wiki - Berry Avenue (independent confirmation of the six districts, schools, daycare, airport)",
-        "url": "https://republic-of-roblox.fandom.com/wiki/Berry_Avenue",
-        "accessed": "2026-06-23"
-      },
-      {
-        "label": "Pro Game Guides / Playgama - Berry Avenue airport and Paris travel area",
-        "url": "https://progameguides.com/roblox/where-to-find-the-airport-in-berry-avenue-roblox/",
-        "accessed": "2026-06-23"
-      },
-      {
-        "label": "BioBlox - Berry Avenue RP Guide (roleplay function of locations)",
-        "url": "https://bioblox.fun/guides/roblox-berry-avenue-rp-guide",
-        "accessed": "2026-06-23"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "Berry Avenue RP",
+    "gameSlug": "berry-avenue-rp",
+    "collection": "locations",
+    "route": "/wiki/berry-avenue-rp/locations",
+    "catalogCode": "berry-avenue-rp-locations",
+    "itemFields": [
       "district",
       "type",
       "theme",
-      "cardSummary",
-      "image"
+      "cardSummary"
     ],
-    "notes": "Map of Berry Avenue grouped by district. Six in-game districts are confirmed by two independent wikis; the per-business names and district grouping come from Robloxiapedia and are corroborated by the broader real-game sources. Robloxiapedia lore (fictional climate, history, dates, prices, permits) is ignored. Civic anchors (schools, daycare, hospital, bank, police, fire, grocery, airport, Paris travel) are cross-confirmed by multiple real-game sources. No prices or shop inventories are stored because they are not reliably sourced. Per-location images are not reliably available, so the catalog launches image-light."
+    "columns": [
+      "district",
+      "type",
+      "theme",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "District",
+      "sectionOrder": [
+        "The Heart",
+        "Rogauliatown",
+        "Ro-Greecetown",
+        "Robloxiatown",
+        "Ro-Switzerlandtown",
+        "Neo-Korbloxiatown",
+        "Airport & Travel"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "district",
+        "type",
+        "theme",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "district",
+        "type",
+        "theme",
+        "cardSummary"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Berry High School",
-      "slug": "berry-high-school",
-      "district": "The Heart",
-      "type": "Education",
-      "theme": "Suburban American",
-      "cardSummary": "The main school in town. Roleplay as a student or teacher with classes, lockers, and after-school storylines.",
-      "image": null
-    },
-    {
-      "name": "Berry Elementary School",
-      "slug": "berry-elementary-school",
-      "district": "The Heart",
-      "type": "Education",
-      "theme": "Suburban American",
-      "cardSummary": "A separate school for younger kids, used for family roleplay where children attend class and parents do drop-off and pick-up.",
-      "image": null
-    },
-    {
-      "name": "Daycare",
-      "slug": "daycare",
-      "district": "The Heart",
-      "type": "Education",
-      "theme": "Suburban American",
-      "cardSummary": "Looks after the youngest characters. Popular for parent-and-baby roleplay and for playing a daycare worker.",
-      "image": null
-    },
-    {
-      "name": "Hospital",
-      "slug": "hospital",
-      "district": "The Heart",
-      "type": "Medical",
-      "theme": "Suburban American",
-      "cardSummary": "Where doctors and nurses treat patients. The home base for medical roleplay and emergency scenarios.",
-      "image": null
-    },
-    {
-      "name": "Fire Department",
-      "slug": "fire-department",
-      "district": "The Heart",
-      "type": "Civic",
-      "theme": "Suburban American",
-      "cardSummary": "Base for firefighter roleplay. Respond to emergencies and fire callouts around town.",
-      "image": null
-    },
-    {
-      "name": "Police Department",
-      "slug": "police-department",
-      "district": "The Heart",
-      "type": "Civic",
-      "theme": "Suburban American",
-      "cardSummary": "Home for law-enforcement roleplay. Officers patrol, respond to incidents, and arrest rule-breakers.",
-      "image": null
-    },
-    {
-      "name": "Bank",
-      "slug": "bank",
-      "district": "The Heart",
-      "type": "Civic",
-      "theme": "Suburban American",
-      "cardSummary": "The town bank, a frequent target for robbery roleplay and the matching police response.",
-      "image": null
-    },
-    {
-      "name": "Grocery Store",
-      "slug": "grocery-store",
-      "district": "The Heart",
-      "type": "Retail",
-      "theme": "Suburban American",
-      "cardSummary": "Stock up on groceries for everyday family roleplay, or work the floor as a store employee.",
-      "image": null
-    },
-    {
-      "name": "Gas Station",
-      "slug": "gas-station",
-      "district": "The Heart",
-      "type": "Civic",
-      "theme": "Suburban American",
-      "cardSummary": "Stop in to fuel up your car and add a quick beat to driving and travel roleplay.",
-      "image": null
-    },
-    {
-      "name": "Coffee House",
-      "slug": "coffee-house",
-      "district": "The Heart",
-      "type": "Dining",
-      "theme": "Suburban American",
-      "cardSummary": "A central social hub. Work as a barista or meet up with other players over drinks.",
-      "image": null
-    },
-    {
-      "name": "Bakery",
-      "slug": "bakery",
-      "district": "The Heart",
-      "type": "Dining",
-      "theme": "Suburban American",
-      "cardSummary": "Pick up baked goods or play the baker for cafe-style and small-business roleplay.",
-      "image": null
-    },
-    {
-      "name": "Restaurant",
-      "slug": "restaurant",
-      "district": "The Heart",
-      "type": "Dining",
-      "theme": "Suburban American",
-      "cardSummary": "Sit down for a meal, host a date, or work as a chef or server.",
-      "image": null
-    },
-    {
-      "name": "Juice and Smoothies",
-      "slug": "juice-and-smoothies",
-      "district": "The Heart",
-      "type": "Dining",
-      "theme": "Suburban American",
-      "cardSummary": "A small juice and smoothie spot for casual hangout and service roleplay.",
-      "image": null
-    },
-    {
-      "name": "Moonlight",
-      "slug": "moonlight",
-      "district": "The Heart",
-      "type": "Dining",
-      "theme": "Suburban American",
-      "cardSummary": "A venue in The Heart used as a gathering and hangout spot for evening roleplay.",
-      "image": null
-    },
-    {
-      "name": "Hair Salon",
-      "slug": "hair-salon",
-      "district": "The Heart",
-      "type": "Retail",
-      "theme": "Suburban American",
-      "cardSummary": "Get a new look or play a stylist running makeover and beauty roleplay.",
-      "image": null
-    },
-    {
-      "name": "Nails",
-      "slug": "nails",
-      "district": "The Heart",
-      "type": "Retail",
-      "theme": "Suburban American",
-      "cardSummary": "A nail salon for beauty and self-care roleplay alongside the hair salon.",
-      "image": null
-    },
-    {
-      "name": "Beachside Boutique",
-      "slug": "beachside-boutique",
-      "district": "The Heart",
-      "type": "Retail",
-      "theme": "Suburban American",
-      "cardSummary": "A clothing boutique near the beach area to shop for outfits and update your look.",
-      "image": null
-    },
-    {
-      "name": "Sunset Clothing",
-      "slug": "sunset-clothing",
-      "district": "The Heart",
-      "type": "Retail",
-      "theme": "Suburban American",
-      "cardSummary": "A clothing store in The Heart for browsing and changing up your character's outfit.",
-      "image": null
-    },
-    {
-      "name": "Tennis Courts",
-      "slug": "tennis-courts",
-      "district": "The Heart",
-      "type": "Recreation",
-      "theme": "Suburban American",
-      "cardSummary": "Open courts for casual sports roleplay and meeting up with friends.",
-      "image": null
-    },
-    {
-      "name": "Obstacle Course",
-      "slug": "obstacle-course",
-      "district": "The Heart",
-      "type": "Recreation",
-      "theme": "Suburban American",
-      "cardSummary": "A parkour-style course for a quick activity break away from the main roleplay.",
-      "image": null
-    },
-    {
-      "name": "Campgrounds",
-      "slug": "campgrounds",
-      "district": "The Heart",
-      "type": "Recreation",
-      "theme": "Suburban American",
-      "cardSummary": "An outdoor camping area for nature, holiday, and group getaway roleplay.",
-      "image": null
-    },
-    {
-      "name": "Berry Hotel",
-      "slug": "berry-hotel",
-      "district": "The Heart",
-      "type": "Hotel",
-      "theme": "Suburban American",
-      "cardSummary": "The main hotel in The Heart for vacation stays and away-from-home roleplay.",
-      "image": null
-    },
-    {
-      "name": "Port of Berry Avenue",
-      "slug": "port-of-berry-avenue",
-      "district": "The Heart",
-      "type": "Transport",
-      "theme": "Suburban American",
-      "cardSummary": "The town's waterfront port, a backdrop for boating and travel-themed roleplay.",
-      "image": null
-    },
-    {
-      "name": "Rogauliatown Hotel",
-      "slug": "rogauliatown-hotel",
-      "district": "Rogauliatown",
-      "type": "Hotel",
-      "theme": "French",
-      "cardSummary": "A hotel in the French-inspired district for staycations and travel roleplay.",
-      "image": null
-    },
-    {
-      "name": "Baie",
-      "slug": "baie",
-      "district": "Rogauliatown",
-      "type": "Retail",
-      "theme": "French",
-      "cardSummary": "A small French-named shop in Rogauliatown to browse while exploring the district.",
-      "image": null
-    },
-    {
-      "name": "Cafe",
-      "slug": "rogauliatown-cafe",
-      "district": "Rogauliatown",
-      "type": "Dining",
-      "theme": "French",
-      "cardSummary": "A French-style cafe for coffee, pastries, and relaxed hangout roleplay.",
-      "image": null
-    },
-    {
-      "name": "Fraise",
-      "slug": "fraise",
-      "district": "Rogauliatown",
-      "type": "Retail",
-      "theme": "French",
-      "cardSummary": "A French-named shop in Rogauliatown that fits the district's boutique feel.",
-      "image": null
-    },
-    {
-      "name": "Boulangerie",
-      "slug": "boulangerie",
-      "district": "Rogauliatown",
-      "type": "Dining",
-      "theme": "French",
-      "cardSummary": "A French-style bakery for fresh bread and pastry roleplay in Rogauliatown.",
-      "image": null
-    },
-    {
-      "name": "Banque",
-      "slug": "banque",
-      "district": "Rogauliatown",
-      "type": "Civic",
-      "theme": "French",
-      "cardSummary": "The district's French-named bank, fitting the Rogauliatown theme.",
-      "image": null
-    },
-    {
-      "name": "Truffle Tower",
-      "slug": "truffle-tower",
-      "district": "Rogauliatown",
-      "type": "Landmark",
-      "theme": "French",
-      "cardSummary": "A scaled-down tower landmark and the signature photo spot of the French district.",
-      "image": null
-    },
-    {
-      "name": "Santorini Styles",
-      "slug": "santorini-styles",
-      "district": "Ro-Greecetown",
-      "type": "Retail",
-      "theme": "Greek",
-      "cardSummary": "A clothing shop in the Greek-inspired district for outfit shopping with a coastal feel.",
-      "image": null
-    },
-    {
-      "name": "Ro-Greecetown Hotels",
-      "slug": "ro-greecetown-hotels",
-      "district": "Ro-Greecetown",
-      "type": "Hotel",
-      "theme": "Greek",
-      "cardSummary": "Hotels in the Greek district for vacation stays and getaway roleplay.",
-      "image": null
-    },
-    {
-      "name": "Fresco Cafe",
-      "slug": "fresco-cafe",
-      "district": "Ro-Greecetown",
-      "type": "Dining",
-      "theme": "Greek",
-      "cardSummary": "A cafe in Ro-Greecetown for coffee and a relaxed seaside-town atmosphere.",
-      "image": null
-    },
-    {
-      "name": "Ro-Greek Feast",
-      "slug": "ro-greek-feast",
-      "district": "Ro-Greecetown",
-      "type": "Dining",
-      "theme": "Greek",
-      "cardSummary": "A restaurant for Greek-themed dining roleplay in the district.",
-      "image": null
-    },
-    {
-      "name": "Windmill",
-      "slug": "windmill",
-      "district": "Ro-Greecetown",
-      "type": "Landmark",
-      "theme": "Greek",
-      "cardSummary": "A windmill landmark that gives the Greek district its signature scenery and photo backdrop.",
-      "image": null
-    },
-    {
-      "name": "Helipad",
-      "slug": "ro-greecetown-helipad",
-      "district": "Ro-Greecetown",
-      "type": "Transport",
-      "theme": "Greek",
-      "cardSummary": "A helipad used to fly into the Greek district, tied to helicopter travel roleplay.",
-      "image": null
-    },
-    {
-      "name": "Local Bus",
-      "slug": "ro-greecetown-local-bus",
-      "district": "Ro-Greecetown",
-      "type": "Transport",
-      "theme": "Greek",
-      "cardSummary": "The district's local bus for getting around Ro-Greecetown.",
-      "image": null
-    },
-    {
-      "name": "Robloxiatown Hotels",
-      "slug": "robloxiatown-hotels",
-      "district": "Robloxiatown",
-      "type": "Hotel",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "Hotels in the suburban-style district for stays and travel roleplay.",
-      "image": null
-    },
-    {
-      "name": "Outfitters",
-      "slug": "outfitters",
-      "district": "Robloxiatown",
-      "type": "Retail",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "A clothing store in Robloxiatown for shopping and updating your outfit.",
-      "image": null
-    },
-    {
-      "name": "Melrose Muse",
-      "slug": "melrose-muse",
-      "district": "Robloxiatown",
-      "type": "Retail",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "A fashion shop in Robloxiatown that fits the district's upscale retail feel.",
-      "image": null
-    },
-    {
-      "name": "Rodeo Regalia",
-      "slug": "rodeo-regalia",
-      "district": "Robloxiatown",
-      "type": "Retail",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "A clothing and accessories shop for dressing up your character in Robloxiatown.",
-      "image": null
-    },
-    {
-      "name": "Beverlox Boutique",
-      "slug": "beverlox-boutique",
-      "district": "Robloxiatown",
-      "type": "Retail",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "A boutique in Robloxiatown for browsing higher-end outfits.",
-      "image": null
-    },
-    {
-      "name": "Designer Bag",
-      "slug": "designer-bag",
-      "district": "Robloxiatown",
-      "type": "Retail",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "An accessories shop for designer-style bags to finish off an outfit.",
-      "image": null
-    },
-    {
-      "name": "Diamond Dish",
-      "slug": "diamond-dish",
-      "district": "Robloxiatown",
-      "type": "Dining",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "A dining spot in Robloxiatown for upscale restaurant roleplay.",
-      "image": null
-    },
-    {
-      "name": "Premier Plate",
-      "slug": "premier-plate",
-      "district": "Robloxiatown",
-      "type": "Dining",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "Another restaurant option in Robloxiatown for meals and date roleplay.",
-      "image": null
-    },
-    {
-      "name": "Photography Studio",
-      "slug": "photography-studio",
-      "district": "Robloxiatown",
-      "type": "Recreation",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "A studio for photo-shoot roleplay and capturing in-game pictures.",
-      "image": null
-    },
-    {
-      "name": "Car Rental",
-      "slug": "car-rental",
-      "district": "Robloxiatown",
-      "type": "Transport",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "Rent a vehicle here for driving and travel roleplay around town.",
-      "image": null
-    },
-    {
-      "name": "Underground Parking Garage",
-      "slug": "underground-parking-garage",
-      "district": "Robloxiatown",
-      "type": "Transport",
-      "theme": "Suburban Robloxia",
-      "cardSummary": "A covered garage for parking cars, adding a realistic touch to driving roleplay.",
-      "image": null
-    },
-    {
-      "name": "Ski School",
-      "slug": "ski-school",
-      "district": "Ro-Switzerlandtown",
-      "type": "Recreation",
-      "theme": "Swiss Alpine",
-      "cardSummary": "Learn or teach skiing in the snowy alpine district for winter-sports roleplay.",
-      "image": null
-    },
-    {
-      "name": "Ski Patrol",
-      "slug": "ski-patrol",
-      "district": "Ro-Switzerlandtown",
-      "type": "Civic",
-      "theme": "Swiss Alpine",
-      "cardSummary": "The mountain safety base for ski-patrol and rescue roleplay on the slopes.",
-      "image": null
-    },
-    {
-      "name": "Ski and Snowboard",
-      "slug": "ski-and-snowboard",
-      "district": "Ro-Switzerlandtown",
-      "type": "Recreation",
-      "theme": "Swiss Alpine",
-      "cardSummary": "The main slopes for skiing and snowboarding activity in the alpine district.",
-      "image": null
-    },
-    {
-      "name": "Hockey Rink",
-      "slug": "hockey-rink",
-      "district": "Ro-Switzerlandtown",
-      "type": "Recreation",
-      "theme": "Swiss Alpine",
-      "cardSummary": "An ice rink for skating and hockey-themed roleplay in the snowy district.",
-      "image": null
-    },
-    {
-      "name": "Polar Luxe",
-      "slug": "polar-luxe",
-      "district": "Ro-Switzerlandtown",
-      "type": "Hotel",
-      "theme": "Swiss Alpine",
-      "cardSummary": "An alpine lodge-style hotel for winter getaway and vacation roleplay.",
-      "image": null
-    },
-    {
-      "name": "Winter and Wool",
-      "slug": "winter-and-wool",
-      "district": "Ro-Switzerlandtown",
-      "type": "Retail",
-      "theme": "Swiss Alpine",
-      "cardSummary": "A clothing shop for warm winter outfits to match the snowy district.",
-      "image": null
-    },
-    {
-      "name": "Summit Brew",
-      "slug": "summit-brew",
-      "district": "Ro-Switzerlandtown",
-      "type": "Dining",
-      "theme": "Swiss Alpine",
-      "cardSummary": "A cafe for hot drinks and a cozy mountain-town hangout.",
-      "image": null
-    },
-    {
-      "name": "Snowflakes Sweet",
-      "slug": "snowflakes-sweet",
-      "district": "Ro-Switzerlandtown",
-      "type": "Dining",
-      "theme": "Swiss Alpine",
-      "cardSummary": "A sweets and dessert shop fitting the alpine district's wintry theme.",
-      "image": null
-    },
-    {
-      "name": "Say Cheese",
-      "slug": "say-cheese",
-      "district": "Ro-Switzerlandtown",
-      "type": "Dining",
-      "theme": "Swiss Alpine",
-      "cardSummary": "A cheese-themed eatery that leans into the Swiss inspiration of the district.",
-      "image": null
-    },
-    {
-      "name": "Fondue Delight",
-      "slug": "fondue-delight",
-      "district": "Ro-Switzerlandtown",
-      "type": "Dining",
-      "theme": "Swiss Alpine",
-      "cardSummary": "A fondue restaurant for cozy alpine dining roleplay.",
-      "image": null
-    },
-    {
-      "name": "Local Bus",
-      "slug": "ro-switzerlandtown-local-bus",
-      "district": "Ro-Switzerlandtown",
-      "type": "Transport",
-      "theme": "Swiss Alpine",
-      "cardSummary": "The district's local bus for getting around Ro-Switzerlandtown.",
-      "image": null
-    },
-    {
-      "name": "Ro-Seoul Style",
-      "slug": "ro-seoul-style",
-      "district": "Neo-Korbloxiatown",
-      "type": "Retail",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A clothing shop in the Korean-inspired district for trend-focused outfit roleplay.",
-      "image": null
-    },
-    {
-      "name": "Traditional Clothing Store",
-      "slug": "traditional-clothing-store",
-      "district": "Neo-Korbloxiatown",
-      "type": "Retail",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A shop for traditional Korean-style outfits in the district.",
-      "image": null
-    },
-    {
-      "name": "Skincare Store",
-      "slug": "skincare-store",
-      "district": "Neo-Korbloxiatown",
-      "type": "Retail",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A beauty and skincare shop fitting the district's modern-city styling.",
-      "image": null
-    },
-    {
-      "name": "Zero Palette",
-      "slug": "zero-palette",
-      "district": "Neo-Korbloxiatown",
-      "type": "Retail",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A shop in Neo-Korbloxiatown that suits the district's fashion-forward feel.",
-      "image": null
-    },
-    {
-      "name": "Level Now",
-      "slug": "level-now",
-      "district": "Neo-Korbloxiatown",
-      "type": "Retail",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A storefront in the Korean district for browsing while exploring the area.",
-      "image": null
-    },
-    {
-      "name": "24",
-      "slug": "neo-korbloxiatown-24",
-      "district": "Neo-Korbloxiatown",
-      "type": "Retail",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A convenience-style spot in the district for quick stops during roleplay.",
-      "image": null
-    },
-    {
-      "name": "Coffee Shop",
-      "slug": "neo-korbloxiatown-coffee-shop",
-      "district": "Neo-Korbloxiatown",
-      "type": "Dining",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A coffee spot for casual hangouts in the Korean-inspired district.",
-      "image": null
-    },
-    {
-      "name": "Moonlight Cafe",
-      "slug": "moonlight-cafe",
-      "district": "Neo-Korbloxiatown",
-      "type": "Dining",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A cafe in Neo-Korbloxiatown for drinks and relaxed social roleplay.",
-      "image": null
-    },
-    {
-      "name": "Cutesy Cafe",
-      "slug": "cutesy-cafe",
-      "district": "Neo-Korbloxiatown",
-      "type": "Dining",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A themed cafe with a cute aesthetic for hangout and date roleplay.",
-      "image": null
-    },
-    {
-      "name": "Hanok Cafe",
-      "slug": "hanok-cafe",
-      "district": "Neo-Korbloxiatown",
-      "type": "Dining",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A traditional Korean hanok-style cafe for atmosphere-driven roleplay.",
-      "image": null
-    },
-    {
-      "name": "Samgyeopsal",
-      "slug": "samgyeopsal",
-      "district": "Neo-Korbloxiatown",
-      "type": "Dining",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A Korean BBQ restaurant for group dining roleplay.",
-      "image": null
-    },
-    {
-      "name": "Noraebang",
-      "slug": "noraebang",
-      "district": "Neo-Korbloxiatown",
-      "type": "Recreation",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A private-room karaoke spot where groups can rent a room to sing and socialize.",
-      "image": null
-    },
-    {
-      "name": "Dance Studio",
-      "slug": "dance-studio",
-      "district": "Neo-Korbloxiatown",
-      "type": "Recreation",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A studio for dance practice and performance roleplay.",
-      "image": null
-    },
-    {
-      "name": "Photo Booth",
-      "slug": "photo-booth",
-      "district": "Neo-Korbloxiatown",
-      "type": "Recreation",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A photo booth for fun pictures with friends, fitting the district's social vibe.",
-      "image": null
-    },
-    {
-      "name": "Concert Arena",
-      "slug": "concert-arena",
-      "district": "Neo-Korbloxiatown",
-      "type": "Recreation",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "An arena for concert and performance roleplay in the Korean district.",
-      "image": null
-    },
-    {
-      "name": "Temple",
-      "slug": "temple",
-      "district": "Neo-Korbloxiatown",
-      "type": "Landmark",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A traditional temple landmark and quiet scenic spot in the district.",
-      "image": null
-    },
-    {
-      "name": "Neo-Korbloxiatown Hotel",
-      "slug": "neo-korbloxiatown-hotel",
-      "district": "Neo-Korbloxiatown",
-      "type": "Hotel",
-      "theme": "Korean (Seoul)",
-      "cardSummary": "A hotel in the Korean district for stays and away-from-home roleplay.",
-      "image": null
-    },
-    {
-      "name": "Berry Avenue Airport",
-      "slug": "berry-avenue-airport",
-      "district": "Airport & Travel",
-      "type": "Transport",
-      "theme": "Airport",
-      "cardSummary": "The town airport with check-in, security, and a departure board. Roleplay as a traveler, pilot, or flight attendant and fly out to the Paris area.",
-      "image": null
-    },
-    {
-      "name": "Paris Travel Area",
-      "slug": "paris-travel-area",
-      "district": "Airport & Travel",
-      "type": "Landmark",
-      "theme": "French (Paris)",
-      "cardSummary": "A Paris-themed destination reached by flight, with cafes, shops, and an Eiffel Tower viewpoint for vacation roleplay.",
-      "image": null
+      "item": {
+        "name": "Berry High School",
+        "district": "The Heart",
+        "type": "Education",
+        "theme": "Suburban American",
+        "cardSummary": "The main school in town. Roleplay as a student or teacher with classes, lockers, and after-school storylines."
+      },
+      "system": {
+        "slug": "berry-high-school",
+        "section": "The Heart",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Berry Elementary School",
+        "district": "The Heart",
+        "type": "Education",
+        "theme": "Suburban American",
+        "cardSummary": "A separate school for younger kids, used for family roleplay where children attend class and parents do drop-off and pick-up."
+      },
+      "system": {
+        "slug": "berry-elementary-school",
+        "section": "The Heart",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Daycare",
+        "district": "The Heart",
+        "type": "Education",
+        "theme": "Suburban American",
+        "cardSummary": "Looks after the youngest characters. Popular for parent-and-baby roleplay and for playing a daycare worker."
+      },
+      "system": {
+        "slug": "daycare",
+        "section": "The Heart",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hospital",
+        "district": "The Heart",
+        "type": "Medical",
+        "theme": "Suburban American",
+        "cardSummary": "Where doctors and nurses treat patients. The home base for medical roleplay and emergency scenarios."
+      },
+      "system": {
+        "slug": "hospital",
+        "section": "The Heart",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Department",
+        "district": "The Heart",
+        "type": "Civic",
+        "theme": "Suburban American",
+        "cardSummary": "Base for firefighter roleplay. Respond to emergencies and fire callouts around town."
+      },
+      "system": {
+        "slug": "fire-department",
+        "section": "The Heart",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Police Department",
+        "district": "The Heart",
+        "type": "Civic",
+        "theme": "Suburban American",
+        "cardSummary": "Home for law-enforcement roleplay. Officers patrol, respond to incidents, and arrest rule-breakers."
+      },
+      "system": {
+        "slug": "police-department",
+        "section": "The Heart",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bank",
+        "district": "The Heart",
+        "type": "Civic",
+        "theme": "Suburban American",
+        "cardSummary": "The town bank, a frequent target for robbery roleplay and the matching police response."
+      },
+      "system": {
+        "slug": "bank",
+        "section": "The Heart",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grocery Store",
+        "district": "The Heart",
+        "type": "Retail",
+        "theme": "Suburban American",
+        "cardSummary": "Stock up on groceries for everyday family roleplay, or work the floor as a store employee."
+      },
+      "system": {
+        "slug": "grocery-store",
+        "section": "The Heart",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gas Station",
+        "district": "The Heart",
+        "type": "Civic",
+        "theme": "Suburban American",
+        "cardSummary": "Stop in to fuel up your car and add a quick beat to driving and travel roleplay."
+      },
+      "system": {
+        "slug": "gas-station",
+        "section": "The Heart",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coffee House",
+        "district": "The Heart",
+        "type": "Dining",
+        "theme": "Suburban American",
+        "cardSummary": "A central social hub. Work as a barista or meet up with other players over drinks."
+      },
+      "system": {
+        "slug": "coffee-house",
+        "section": "The Heart",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bakery",
+        "district": "The Heart",
+        "type": "Dining",
+        "theme": "Suburban American",
+        "cardSummary": "Pick up baked goods or play the baker for cafe-style and small-business roleplay."
+      },
+      "system": {
+        "slug": "bakery",
+        "section": "The Heart",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Restaurant",
+        "district": "The Heart",
+        "type": "Dining",
+        "theme": "Suburban American",
+        "cardSummary": "Sit down for a meal, host a date, or work as a chef or server."
+      },
+      "system": {
+        "slug": "restaurant",
+        "section": "The Heart",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Juice and Smoothies",
+        "district": "The Heart",
+        "type": "Dining",
+        "theme": "Suburban American",
+        "cardSummary": "A small juice and smoothie spot for casual hangout and service roleplay."
+      },
+      "system": {
+        "slug": "juice-and-smoothies",
+        "section": "The Heart",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Moonlight",
+        "district": "The Heart",
+        "type": "Dining",
+        "theme": "Suburban American",
+        "cardSummary": "A venue in The Heart used as a gathering and hangout spot for evening roleplay."
+      },
+      "system": {
+        "slug": "moonlight",
+        "section": "The Heart",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hair Salon",
+        "district": "The Heart",
+        "type": "Retail",
+        "theme": "Suburban American",
+        "cardSummary": "Get a new look or play a stylist running makeover and beauty roleplay."
+      },
+      "system": {
+        "slug": "hair-salon",
+        "section": "The Heart",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Nails",
+        "district": "The Heart",
+        "type": "Retail",
+        "theme": "Suburban American",
+        "cardSummary": "A nail salon for beauty and self-care roleplay alongside the hair salon."
+      },
+      "system": {
+        "slug": "nails",
+        "section": "The Heart",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Beachside Boutique",
+        "district": "The Heart",
+        "type": "Retail",
+        "theme": "Suburban American",
+        "cardSummary": "A clothing boutique near the beach area to shop for outfits and update your look."
+      },
+      "system": {
+        "slug": "beachside-boutique",
+        "section": "The Heart",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sunset Clothing",
+        "district": "The Heart",
+        "type": "Retail",
+        "theme": "Suburban American",
+        "cardSummary": "A clothing store in The Heart for browsing and changing up your character's outfit."
+      },
+      "system": {
+        "slug": "sunset-clothing",
+        "section": "The Heart",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tennis Courts",
+        "district": "The Heart",
+        "type": "Recreation",
+        "theme": "Suburban American",
+        "cardSummary": "Open courts for casual sports roleplay and meeting up with friends."
+      },
+      "system": {
+        "slug": "tennis-courts",
+        "section": "The Heart",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Obstacle Course",
+        "district": "The Heart",
+        "type": "Recreation",
+        "theme": "Suburban American",
+        "cardSummary": "A parkour-style course for a quick activity break away from the main roleplay."
+      },
+      "system": {
+        "slug": "obstacle-course",
+        "section": "The Heart",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Campgrounds",
+        "district": "The Heart",
+        "type": "Recreation",
+        "theme": "Suburban American",
+        "cardSummary": "An outdoor camping area for nature, holiday, and group getaway roleplay."
+      },
+      "system": {
+        "slug": "campgrounds",
+        "section": "The Heart",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Berry Hotel",
+        "district": "The Heart",
+        "type": "Hotel",
+        "theme": "Suburban American",
+        "cardSummary": "The main hotel in The Heart for vacation stays and away-from-home roleplay."
+      },
+      "system": {
+        "slug": "berry-hotel",
+        "section": "The Heart",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Port of Berry Avenue",
+        "district": "The Heart",
+        "type": "Transport",
+        "theme": "Suburban American",
+        "cardSummary": "The town's waterfront port, a backdrop for boating and travel-themed roleplay."
+      },
+      "system": {
+        "slug": "port-of-berry-avenue",
+        "section": "The Heart",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rogauliatown Hotel",
+        "district": "Rogauliatown",
+        "type": "Hotel",
+        "theme": "French",
+        "cardSummary": "A hotel in the French-inspired district for staycations and travel roleplay."
+      },
+      "system": {
+        "slug": "rogauliatown-hotel",
+        "section": "Rogauliatown",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Baie",
+        "district": "Rogauliatown",
+        "type": "Retail",
+        "theme": "French",
+        "cardSummary": "A small French-named shop in Rogauliatown to browse while exploring the district."
+      },
+      "system": {
+        "slug": "baie",
+        "section": "Rogauliatown",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cafe",
+        "district": "Rogauliatown",
+        "type": "Dining",
+        "theme": "French",
+        "cardSummary": "A French-style cafe for coffee, pastries, and relaxed hangout roleplay."
+      },
+      "system": {
+        "slug": "rogauliatown-cafe",
+        "section": "Rogauliatown",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fraise",
+        "district": "Rogauliatown",
+        "type": "Retail",
+        "theme": "French",
+        "cardSummary": "A French-named shop in Rogauliatown that fits the district's boutique feel."
+      },
+      "system": {
+        "slug": "fraise",
+        "section": "Rogauliatown",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boulangerie",
+        "district": "Rogauliatown",
+        "type": "Dining",
+        "theme": "French",
+        "cardSummary": "A French-style bakery for fresh bread and pastry roleplay in Rogauliatown."
+      },
+      "system": {
+        "slug": "boulangerie",
+        "section": "Rogauliatown",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Banque",
+        "district": "Rogauliatown",
+        "type": "Civic",
+        "theme": "French",
+        "cardSummary": "The district's French-named bank, fitting the Rogauliatown theme."
+      },
+      "system": {
+        "slug": "banque",
+        "section": "Rogauliatown",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Truffle Tower",
+        "district": "Rogauliatown",
+        "type": "Landmark",
+        "theme": "French",
+        "cardSummary": "A scaled-down tower landmark and the signature photo spot of the French district."
+      },
+      "system": {
+        "slug": "truffle-tower",
+        "section": "Rogauliatown",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Santorini Styles",
+        "district": "Ro-Greecetown",
+        "type": "Retail",
+        "theme": "Greek",
+        "cardSummary": "A clothing shop in the Greek-inspired district for outfit shopping with a coastal feel."
+      },
+      "system": {
+        "slug": "santorini-styles",
+        "section": "Ro-Greecetown",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ro-Greecetown Hotels",
+        "district": "Ro-Greecetown",
+        "type": "Hotel",
+        "theme": "Greek",
+        "cardSummary": "Hotels in the Greek district for vacation stays and getaway roleplay."
+      },
+      "system": {
+        "slug": "ro-greecetown-hotels",
+        "section": "Ro-Greecetown",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fresco Cafe",
+        "district": "Ro-Greecetown",
+        "type": "Dining",
+        "theme": "Greek",
+        "cardSummary": "A cafe in Ro-Greecetown for coffee and a relaxed seaside-town atmosphere."
+      },
+      "system": {
+        "slug": "fresco-cafe",
+        "section": "Ro-Greecetown",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ro-Greek Feast",
+        "district": "Ro-Greecetown",
+        "type": "Dining",
+        "theme": "Greek",
+        "cardSummary": "A restaurant for Greek-themed dining roleplay in the district."
+      },
+      "system": {
+        "slug": "ro-greek-feast",
+        "section": "Ro-Greecetown",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Windmill",
+        "district": "Ro-Greecetown",
+        "type": "Landmark",
+        "theme": "Greek",
+        "cardSummary": "A windmill landmark that gives the Greek district its signature scenery and photo backdrop."
+      },
+      "system": {
+        "slug": "windmill",
+        "section": "Ro-Greecetown",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Helipad",
+        "district": "Ro-Greecetown",
+        "type": "Transport",
+        "theme": "Greek",
+        "cardSummary": "A helipad used to fly into the Greek district, tied to helicopter travel roleplay."
+      },
+      "system": {
+        "slug": "ro-greecetown-helipad",
+        "section": "Ro-Greecetown",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Local Bus",
+        "district": "Ro-Greecetown",
+        "type": "Transport",
+        "theme": "Greek",
+        "cardSummary": "The district's local bus for getting around Ro-Greecetown."
+      },
+      "system": {
+        "slug": "ro-greecetown-local-bus",
+        "section": "Ro-Greecetown",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Robloxiatown Hotels",
+        "district": "Robloxiatown",
+        "type": "Hotel",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "Hotels in the suburban-style district for stays and travel roleplay."
+      },
+      "system": {
+        "slug": "robloxiatown-hotels",
+        "section": "Robloxiatown",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Outfitters",
+        "district": "Robloxiatown",
+        "type": "Retail",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "A clothing store in Robloxiatown for shopping and updating your outfit."
+      },
+      "system": {
+        "slug": "outfitters",
+        "section": "Robloxiatown",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Melrose Muse",
+        "district": "Robloxiatown",
+        "type": "Retail",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "A fashion shop in Robloxiatown that fits the district's upscale retail feel."
+      },
+      "system": {
+        "slug": "melrose-muse",
+        "section": "Robloxiatown",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rodeo Regalia",
+        "district": "Robloxiatown",
+        "type": "Retail",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "A clothing and accessories shop for dressing up your character in Robloxiatown."
+      },
+      "system": {
+        "slug": "rodeo-regalia",
+        "section": "Robloxiatown",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Beverlox Boutique",
+        "district": "Robloxiatown",
+        "type": "Retail",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "A boutique in Robloxiatown for browsing higher-end outfits."
+      },
+      "system": {
+        "slug": "beverlox-boutique",
+        "section": "Robloxiatown",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Designer Bag",
+        "district": "Robloxiatown",
+        "type": "Retail",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "An accessories shop for designer-style bags to finish off an outfit."
+      },
+      "system": {
+        "slug": "designer-bag",
+        "section": "Robloxiatown",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Dish",
+        "district": "Robloxiatown",
+        "type": "Dining",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "A dining spot in Robloxiatown for upscale restaurant roleplay."
+      },
+      "system": {
+        "slug": "diamond-dish",
+        "section": "Robloxiatown",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Premier Plate",
+        "district": "Robloxiatown",
+        "type": "Dining",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "Another restaurant option in Robloxiatown for meals and date roleplay."
+      },
+      "system": {
+        "slug": "premier-plate",
+        "section": "Robloxiatown",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Photography Studio",
+        "district": "Robloxiatown",
+        "type": "Recreation",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "A studio for photo-shoot roleplay and capturing in-game pictures."
+      },
+      "system": {
+        "slug": "photography-studio",
+        "section": "Robloxiatown",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Car Rental",
+        "district": "Robloxiatown",
+        "type": "Transport",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "Rent a vehicle here for driving and travel roleplay around town."
+      },
+      "system": {
+        "slug": "car-rental",
+        "section": "Robloxiatown",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Underground Parking Garage",
+        "district": "Robloxiatown",
+        "type": "Transport",
+        "theme": "Suburban Robloxia",
+        "cardSummary": "A covered garage for parking cars, adding a realistic touch to driving roleplay."
+      },
+      "system": {
+        "slug": "underground-parking-garage",
+        "section": "Robloxiatown",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ski School",
+        "district": "Ro-Switzerlandtown",
+        "type": "Recreation",
+        "theme": "Swiss Alpine",
+        "cardSummary": "Learn or teach skiing in the snowy alpine district for winter-sports roleplay."
+      },
+      "system": {
+        "slug": "ski-school",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ski Patrol",
+        "district": "Ro-Switzerlandtown",
+        "type": "Civic",
+        "theme": "Swiss Alpine",
+        "cardSummary": "The mountain safety base for ski-patrol and rescue roleplay on the slopes."
+      },
+      "system": {
+        "slug": "ski-patrol",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ski and Snowboard",
+        "district": "Ro-Switzerlandtown",
+        "type": "Recreation",
+        "theme": "Swiss Alpine",
+        "cardSummary": "The main slopes for skiing and snowboarding activity in the alpine district."
+      },
+      "system": {
+        "slug": "ski-and-snowboard",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hockey Rink",
+        "district": "Ro-Switzerlandtown",
+        "type": "Recreation",
+        "theme": "Swiss Alpine",
+        "cardSummary": "An ice rink for skating and hockey-themed roleplay in the snowy district."
+      },
+      "system": {
+        "slug": "hockey-rink",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Polar Luxe",
+        "district": "Ro-Switzerlandtown",
+        "type": "Hotel",
+        "theme": "Swiss Alpine",
+        "cardSummary": "An alpine lodge-style hotel for winter getaway and vacation roleplay."
+      },
+      "system": {
+        "slug": "polar-luxe",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Winter and Wool",
+        "district": "Ro-Switzerlandtown",
+        "type": "Retail",
+        "theme": "Swiss Alpine",
+        "cardSummary": "A clothing shop for warm winter outfits to match the snowy district."
+      },
+      "system": {
+        "slug": "winter-and-wool",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Summit Brew",
+        "district": "Ro-Switzerlandtown",
+        "type": "Dining",
+        "theme": "Swiss Alpine",
+        "cardSummary": "A cafe for hot drinks and a cozy mountain-town hangout."
+      },
+      "system": {
+        "slug": "summit-brew",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snowflakes Sweet",
+        "district": "Ro-Switzerlandtown",
+        "type": "Dining",
+        "theme": "Swiss Alpine",
+        "cardSummary": "A sweets and dessert shop fitting the alpine district's wintry theme."
+      },
+      "system": {
+        "slug": "snowflakes-sweet",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Say Cheese",
+        "district": "Ro-Switzerlandtown",
+        "type": "Dining",
+        "theme": "Swiss Alpine",
+        "cardSummary": "A cheese-themed eatery that leans into the Swiss inspiration of the district."
+      },
+      "system": {
+        "slug": "say-cheese",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fondue Delight",
+        "district": "Ro-Switzerlandtown",
+        "type": "Dining",
+        "theme": "Swiss Alpine",
+        "cardSummary": "A fondue restaurant for cozy alpine dining roleplay."
+      },
+      "system": {
+        "slug": "fondue-delight",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Local Bus",
+        "district": "Ro-Switzerlandtown",
+        "type": "Transport",
+        "theme": "Swiss Alpine",
+        "cardSummary": "The district's local bus for getting around Ro-Switzerlandtown."
+      },
+      "system": {
+        "slug": "ro-switzerlandtown-local-bus",
+        "section": "Ro-Switzerlandtown",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ro-Seoul Style",
+        "district": "Neo-Korbloxiatown",
+        "type": "Retail",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A clothing shop in the Korean-inspired district for trend-focused outfit roleplay."
+      },
+      "system": {
+        "slug": "ro-seoul-style",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Traditional Clothing Store",
+        "district": "Neo-Korbloxiatown",
+        "type": "Retail",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A shop for traditional Korean-style outfits in the district."
+      },
+      "system": {
+        "slug": "traditional-clothing-store",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Skincare Store",
+        "district": "Neo-Korbloxiatown",
+        "type": "Retail",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A beauty and skincare shop fitting the district's modern-city styling."
+      },
+      "system": {
+        "slug": "skincare-store",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Zero Palette",
+        "district": "Neo-Korbloxiatown",
+        "type": "Retail",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A shop in Neo-Korbloxiatown that suits the district's fashion-forward feel."
+      },
+      "system": {
+        "slug": "zero-palette",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Level Now",
+        "district": "Neo-Korbloxiatown",
+        "type": "Retail",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A storefront in the Korean district for browsing while exploring the area."
+      },
+      "system": {
+        "slug": "level-now",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "24",
+        "district": "Neo-Korbloxiatown",
+        "type": "Retail",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A convenience-style spot in the district for quick stops during roleplay."
+      },
+      "system": {
+        "slug": "neo-korbloxiatown-24",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 65,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coffee Shop",
+        "district": "Neo-Korbloxiatown",
+        "type": "Dining",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A coffee spot for casual hangouts in the Korean-inspired district."
+      },
+      "system": {
+        "slug": "neo-korbloxiatown-coffee-shop",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 66,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Moonlight Cafe",
+        "district": "Neo-Korbloxiatown",
+        "type": "Dining",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A cafe in Neo-Korbloxiatown for drinks and relaxed social roleplay."
+      },
+      "system": {
+        "slug": "moonlight-cafe",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 67,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cutesy Cafe",
+        "district": "Neo-Korbloxiatown",
+        "type": "Dining",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A themed cafe with a cute aesthetic for hangout and date roleplay."
+      },
+      "system": {
+        "slug": "cutesy-cafe",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 68,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hanok Cafe",
+        "district": "Neo-Korbloxiatown",
+        "type": "Dining",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A traditional Korean hanok-style cafe for atmosphere-driven roleplay."
+      },
+      "system": {
+        "slug": "hanok-cafe",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 69,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Samgyeopsal",
+        "district": "Neo-Korbloxiatown",
+        "type": "Dining",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A Korean BBQ restaurant for group dining roleplay."
+      },
+      "system": {
+        "slug": "samgyeopsal",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Noraebang",
+        "district": "Neo-Korbloxiatown",
+        "type": "Recreation",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A private-room karaoke spot where groups can rent a room to sing and socialize."
+      },
+      "system": {
+        "slug": "noraebang",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dance Studio",
+        "district": "Neo-Korbloxiatown",
+        "type": "Recreation",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A studio for dance practice and performance roleplay."
+      },
+      "system": {
+        "slug": "dance-studio",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Photo Booth",
+        "district": "Neo-Korbloxiatown",
+        "type": "Recreation",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A photo booth for fun pictures with friends, fitting the district's social vibe."
+      },
+      "system": {
+        "slug": "photo-booth",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 73,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Concert Arena",
+        "district": "Neo-Korbloxiatown",
+        "type": "Recreation",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "An arena for concert and performance roleplay in the Korean district."
+      },
+      "system": {
+        "slug": "concert-arena",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 74,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Temple",
+        "district": "Neo-Korbloxiatown",
+        "type": "Landmark",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A traditional temple landmark and quiet scenic spot in the district."
+      },
+      "system": {
+        "slug": "temple",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 75,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Neo-Korbloxiatown Hotel",
+        "district": "Neo-Korbloxiatown",
+        "type": "Hotel",
+        "theme": "Korean (Seoul)",
+        "cardSummary": "A hotel in the Korean district for stays and away-from-home roleplay."
+      },
+      "system": {
+        "slug": "neo-korbloxiatown-hotel",
+        "section": "Neo-Korbloxiatown",
+        "sortOrder": 76,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Berry Avenue Airport",
+        "district": "Airport & Travel",
+        "type": "Transport",
+        "theme": "Airport",
+        "cardSummary": "The town airport with check-in, security, and a departure board. Roleplay as a traveler, pilot, or flight attendant and fly out to the Paris area."
+      },
+      "system": {
+        "slug": "berry-avenue-airport",
+        "section": "Airport & Travel",
+        "sortOrder": 77,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Paris Travel Area",
+        "district": "Airport & Travel",
+        "type": "Landmark",
+        "theme": "French (Paris)",
+        "cardSummary": "A Paris-themed destination reached by flight, with cafes, shops, and an Eiffel Tower viewpoint for vacation roleplay."
+      },
+      "system": {
+        "slug": "paris-travel-area",
+        "section": "Airport & Travel",
+        "sortOrder": 78,
+        "image": null
+      }
     }
   ]
 }

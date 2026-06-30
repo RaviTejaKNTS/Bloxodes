@@ -1,532 +1,470 @@
 {
   "meta": {
-    "title": "Evomon items data",
-    "updatedAt": "2026-06-28",
-    "groupBy": "collectionSection",
-    "sectionOrder": [
-      "Consumables",
-      "Evolution materials",
-      "Food",
-      "Utility tools"
-    ],
-    "defaultCardFields": [
-      "type",
-      "effect",
-      "howToGet",
-      "hungerRestored",
-      "element"
-    ],
-    "fieldPresentation": {
-      "type": {
-        "kind": "plain",
-        "label": "type"
-      },
-      "effect": {
-        "kind": "highlight",
-        "label": "effect"
-      },
-      "howToGet": {
-        "kind": "detail",
-        "label": "how to get"
-      },
-      "hungerRestored": {
-        "kind": "chip",
-        "label": "restores"
-      },
-      "element": {
-        "kind": "plain",
-        "label": "element"
-      },
-      "cardSummary": {
-        "kind": "detail",
-        "label": "card summary"
-      }
-    },
-    "columns": [
-      "name",
-      "slug",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Evomon",
+    "gameSlug": "evomon",
+    "collection": "items",
+    "route": "/wiki/evomon/items",
+    "catalogCode": "evomon-items",
+    "itemFields": [
       "category",
       "type",
       "cardSummary",
       "effect",
       "howToGet",
       "hungerRestored",
-      "element",
-      "sortOrder",
-      "sourceStatus",
-      "sourcePage",
-      "secondarySourcePage",
-      "imageStatus"
+      "element"
     ],
-    "sources": [
-      {
-        "label": "EvoMon Wiki (wiki.gg) - Items",
-        "url": "https://evomon.wiki.gg/wiki/Items",
-        "accessed": "2026-06-28"
-      },
-      {
-        "label": "Pro Game Guides - Complete Evomon Farming Guide",
-        "url": "https://progameguides.com/roblox/complete-evomon-farming-guide/",
-        "accessed": "2026-06-28"
-      },
-      {
-        "label": "Pro Game Guides - Evomon Codes",
-        "url": "https://progameguides.com/roblox/evomon-codes/",
-        "accessed": "2026-06-28"
-      },
-      {
-        "label": "Sportskeeda - Evomon Season Battle Pass guide",
-        "url": "https://www.sportskeeda.com/roblox-news/evomon-season-battle-pass-guide",
-        "accessed": "2026-06-28"
-      },
-      {
-        "label": "Sportskeeda - How to get Evolution Stones in Evomon",
-        "url": "https://www.sportskeeda.com/roblox-news/how-get-evolution-stones-evomon",
-        "accessed": "2026-06-28"
-      },
-      {
-        "label": "Sportskeeda - How to get and use Omni Stone in Evomon",
-        "url": "https://www.sportskeeda.com/roblox-news/how-get-use-omni-stone-evomon",
-        "accessed": "2026-06-28"
-      },
-      {
-        "label": "Nerdschalk - How to Get Evolution, Element, and Omni Stones in Evomon",
-        "url": "https://nerdschalk.com/how-to-get-evolution-element-omni-stones-evomon-roblox/",
-        "accessed": "2026-06-28"
+    "columns": [
+      "category",
+      "type",
+      "cardSummary",
+      "effect",
+      "howToGet",
+      "hungerRestored",
+      "element"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Consumables",
+        "Evolution materials",
+        "Food",
+        "Utility tools"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [
+        "category"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "type",
+        "effect",
+        "howToGet",
+        "hungerRestored",
+        "element"
+      ],
+      "tableFields": [
+        "category",
+        "type",
+        "cardSummary",
+        "effect",
+        "howToGet",
+        "hungerRestored",
+        "element"
+      ],
+      "fieldPresentation": {
+        "type": {
+          "kind": "plain",
+          "label": "type"
+        },
+        "effect": {
+          "kind": "highlight",
+          "label": "effect"
+        },
+        "howToGet": {
+          "kind": "detail",
+          "label": "how to get"
+        },
+        "hungerRestored": {
+          "kind": "chip",
+          "label": "restores"
+        },
+        "element": {
+          "kind": "plain",
+          "label": "element"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "card summary"
+        }
       }
-    ],
-    "notes": "Non-ball consumables and materials only. Capture balls are a separate collection and are excluded here. Fusion items (Pitaya, Evofossils, Evodisks, Evostatues, Ancestral Blade, etc.) and equipment materials (Enhance Stone, Refine Stone) are out of scope for this consumables-and-materials collection. Food items and Tools (Shovel, XPNATOR) come from the authoritative EvoMon Wiki (wiki.gg) Items page with exact effect wording. EXP Fruit sizes, the reroll potions, and the evolution stones are not listed on the wiki.gg Items page; their existence and effects are corroborated across Pro Game Guides, Sportskeeda, and Nerdschalk. SOURCE CAUTION: evomon-world.wiki is an AI-embellished source that fabricates items/tiers; it was NOT used as a sole source for any row. Its claim that only four element stones (Fire/Water/Leaf/Thunder) exist is contradicted by reliable sources, which describe a large Pokemon-style element set. Element Stones are therefore modeled as a single family row rather than per-element rows to avoid inventing an unverified roster. Effect wording is paraphrased in our own words, not copied verbatim from sources. No active code names, dates, or freshness claims are stored."
+    }
   },
   "items": [
     {
-      "name": "EXP Fruit (Small)",
-      "slug": "exp-fruit-small",
-      "category": "Consumable",
-      "type": "EXP consumable",
-      "cardSummary": "The entry-tier EXP fruit, fed to an Evomon for a small amount of experience without battling.",
-      "effect": "Grants a small amount of EXP",
-      "howToGet": "Earned from battles, quests, daily play, and redeemed codes.",
-      "hungerRestored": null,
-      "element": null,
-      "collectionSection": "Consumables",
-      "sortOrder": 1,
-      "sourceStatus": "Existence and EXP tiering corroborated by Pro Game Guides; effect paraphrased",
-      "sourcePage": "https://progameguides.com/roblox/complete-evomon-farming-guide/",
-      "secondarySourcePage": "https://progameguides.com/roblox/evomon-codes/",
-      "image": null,
-      "imageStatus": "accepted-missing: EXP Fruit sizes are not catalogued with an icon on the EvoMon Wiki (wiki.gg) Items page; no clean per-item sprite found."
+      "item": {
+        "name": "EXP Fruit (Small)",
+        "category": "Consumable",
+        "type": "EXP consumable",
+        "cardSummary": "The entry-tier EXP fruit, fed to an Evomon for a small amount of experience without battling.",
+        "effect": "Grants a small amount of EXP",
+        "howToGet": "Earned from battles, quests, daily play, and redeemed codes."
+      },
+      "system": {
+        "slug": "exp-fruit-small",
+        "section": "Consumables",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "EXP Fruit (Medium)",
-      "slug": "exp-fruit-medium",
-      "category": "Consumable",
-      "type": "EXP consumable",
-      "cardSummary": "A mid-tier EXP fruit that gives more experience than the Small fruit, handy for leveling without grinding.",
-      "effect": "Grants a moderate amount of EXP",
-      "howToGet": "Earned from battles, quests, daily play, and redeemed codes.",
-      "hungerRestored": null,
-      "element": null,
-      "collectionSection": "Consumables",
-      "sortOrder": 2,
-      "sourceStatus": "Corroborated by Pro Game Guides (codes reward and farming guide); effect paraphrased",
-      "sourcePage": "https://progameguides.com/roblox/evomon-codes/",
-      "secondarySourcePage": "https://progameguides.com/roblox/complete-evomon-farming-guide/",
-      "image": null,
-      "imageStatus": "accepted-missing: EXP Fruit sizes are not catalogued with an icon on the EvoMon Wiki (wiki.gg) Items page; no clean per-item sprite found."
+      "item": {
+        "name": "EXP Fruit (Medium)",
+        "category": "Consumable",
+        "type": "EXP consumable",
+        "cardSummary": "A mid-tier EXP fruit that gives more experience than the Small fruit, handy for leveling without grinding.",
+        "effect": "Grants a moderate amount of EXP",
+        "howToGet": "Earned from battles, quests, daily play, and redeemed codes."
+      },
+      "system": {
+        "slug": "exp-fruit-medium",
+        "section": "Consumables",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "EXP Fruit (Large)",
-      "slug": "exp-fruit-large",
-      "category": "Consumable",
-      "type": "EXP consumable",
-      "cardSummary": "The highest-tier EXP fruit, giving the most experience per fruit for fast leveling.",
-      "effect": "Grants a large amount of EXP",
-      "howToGet": "Earned from EXP Dungeons, weekly quests, beating or releasing Evomon, and redeemed codes.",
-      "hungerRestored": null,
-      "element": null,
-      "collectionSection": "Consumables",
-      "sortOrder": 3,
-      "sourceStatus": "Corroborated by Pro Game Guides farming guide; effect paraphrased",
-      "sourcePage": "https://progameguides.com/roblox/complete-evomon-farming-guide/",
-      "secondarySourcePage": "https://progameguides.com/roblox/evomon-codes/",
-      "image": null,
-      "imageStatus": "accepted-missing: EXP Fruit sizes are not catalogued with an icon on the EvoMon Wiki (wiki.gg) Items page; no clean per-item sprite found."
+      "item": {
+        "name": "EXP Fruit (Large)",
+        "category": "Consumable",
+        "type": "EXP consumable",
+        "cardSummary": "The highest-tier EXP fruit, giving the most experience per fruit for fast leveling.",
+        "effect": "Grants a large amount of EXP",
+        "howToGet": "Earned from EXP Dungeons, weekly quests, beating or releasing Evomon, and redeemed codes."
+      },
+      "system": {
+        "slug": "exp-fruit-large",
+        "section": "Consumables",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Talent Vector Potion",
-      "slug": "talent-vector-potion",
-      "category": "Consumable",
-      "type": "Reroll potion",
-      "cardSummary": "Rerolls a captured Evomon's Talent, shuffling its boosted stats without changing the talent rank itself.",
-      "effect": "Rerolls Talent stat distribution",
-      "howToGet": "Earned from the Season Battle Pass, Tower Ascent floor rewards, and redeemed codes.",
-      "hungerRestored": null,
-      "element": null,
-      "collectionSection": "Consumables",
-      "sortOrder": 4,
-      "sourceStatus": "Confirmed as a real item by Sportskeeda Battle Pass and Tower Ascent guides; effect paraphrased",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/evomon-season-battle-pass-guide",
-      "secondarySourcePage": "https://www.sportskeeda.com/roblox-news/evomon-tower-ascent-guide",
-      "image": null,
-      "imageStatus": "accepted-missing: reroll potions are not catalogued with an icon on wiki.gg; no clean per-item sprite found."
+      "item": {
+        "name": "Talent Vector Potion",
+        "category": "Consumable",
+        "type": "Reroll potion",
+        "cardSummary": "Rerolls a captured Evomon's Talent, shuffling its boosted stats without changing the talent rank itself.",
+        "effect": "Rerolls Talent stat distribution",
+        "howToGet": "Earned from the Season Battle Pass, Tower Ascent floor rewards, and redeemed codes."
+      },
+      "system": {
+        "slug": "talent-vector-potion",
+        "section": "Consumables",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Trait Reroll Potion",
-      "slug": "trait-reroll-potion",
-      "category": "Consumable",
-      "type": "Reroll potion",
-      "cardSummary": "Changes the Trait of a captured Evomon to a different randomly rolled trait.",
-      "effect": "Rerolls a captured Evomon's Trait",
-      "howToGet": "Earned from the Season Battle Pass and redeemed codes.",
-      "hungerRestored": null,
-      "element": null,
-      "collectionSection": "Consumables",
-      "sortOrder": 5,
-      "sourceStatus": "Confirmed as a real item by Sportskeeda Battle Pass guide; effect paraphrased",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/evomon-season-battle-pass-guide",
-      "secondarySourcePage": null,
-      "image": null,
-      "imageStatus": "accepted-missing: reroll potions are not catalogued with an icon on wiki.gg; no clean per-item sprite found."
+      "item": {
+        "name": "Trait Reroll Potion",
+        "category": "Consumable",
+        "type": "Reroll potion",
+        "cardSummary": "Changes the Trait of a captured Evomon to a different randomly rolled trait.",
+        "effect": "Rerolls a captured Evomon's Trait",
+        "howToGet": "Earned from the Season Battle Pass and redeemed codes."
+      },
+      "system": {
+        "slug": "trait-reroll-potion",
+        "section": "Consumables",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Nature Reroll Potion",
-      "slug": "nature-reroll-potion",
-      "category": "Consumable",
-      "type": "Reroll potion",
-      "cardSummary": "Changes the Nature of a captured Evomon, the third reroll potion alongside the Talent and Trait potions.",
-      "effect": "Rerolls a captured Evomon's Nature",
-      "howToGet": "Earned from the Season Battle Pass and redeemed codes.",
-      "hungerRestored": null,
-      "element": null,
-      "collectionSection": "Consumables",
-      "sortOrder": 6,
-      "sourceStatus": "Confirmed as a real item by Sportskeeda Battle Pass guide; effect paraphrased",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/evomon-season-battle-pass-guide",
-      "secondarySourcePage": null,
-      "image": null,
-      "imageStatus": "accepted-missing: reroll potions are not catalogued with an icon on wiki.gg; no clean per-item sprite found."
+      "item": {
+        "name": "Nature Reroll Potion",
+        "category": "Consumable",
+        "type": "Reroll potion",
+        "cardSummary": "Changes the Nature of a captured Evomon, the third reroll potion alongside the Talent and Trait potions.",
+        "effect": "Rerolls a captured Evomon's Nature",
+        "howToGet": "Earned from the Season Battle Pass and redeemed codes."
+      },
+      "system": {
+        "slug": "nature-reroll-potion",
+        "section": "Consumables",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Evolution Stone",
-      "slug": "evolution-stone",
-      "category": "Evolution material",
-      "type": "Evolution material",
-      "cardSummary": "The universal evolution material every Evomon needs, spent alongside the matching Element Stones at a level milestone.",
-      "effect": "Required for every evolution",
-      "howToGet": "Buy from the Exchange Merchant (5 stones for 10 Exchange Tokens, weekly refresh), earn from island and Summon Ruins bosses, player level-up rewards, and Battle Pass rewards.",
-      "hungerRestored": null,
-      "element": "Universal",
-      "collectionSection": "Evolution materials",
-      "sortOrder": 7,
-      "sourceStatus": "Confirmed distinct universal item by Sportskeeda, Nerdschalk, and Pro Game Guides; effect paraphrased",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/how-get-evolution-stones-evomon",
-      "secondarySourcePage": "https://nerdschalk.com/how-to-get-evolution-element-omni-stones-evomon-roblox/",
-      "image": null,
-      "imageStatus": "accepted-missing: the generic Evolution Stone is not catalogued with an icon on wiki.gg; only fusion evofossil sprites exist, which are a different item."
+      "item": {
+        "name": "Evolution Stone",
+        "category": "Evolution material",
+        "type": "Evolution material",
+        "cardSummary": "The universal evolution material every Evomon needs, spent alongside the matching Element Stones at a level milestone.",
+        "effect": "Required for every evolution",
+        "howToGet": "Buy from the Exchange Merchant (5 stones for 10 Exchange Tokens, weekly refresh), earn from island and Summon Ruins bosses, player level-up rewards, and Battle Pass rewards.",
+        "element": "Universal"
+      },
+      "system": {
+        "slug": "evolution-stone",
+        "section": "Evolution materials",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Element Stones",
-      "slug": "element-stones",
-      "category": "Evolution material",
-      "type": "Evolution material",
-      "cardSummary": "Type-locked stones that match an Evomon's element, spent with Evolution Stones to evolve. Each element has its own stone, such as the Fire, Water, Grass, and Electric stones.",
-      "effect": "Type-matched evolution requirement",
-      "howToGet": "First-time wins against NPC Trainers (one-time, area-themed), island and Summon Ruins bosses, and regional bosses matching the element.",
-      "hungerRestored": null,
-      "element": "Type-locked",
-      "collectionSection": "Evolution materials",
-      "sortOrder": 8,
-      "sourceStatus": "Confirmed by Sportskeeda and Nerdschalk; modeled as one family row because reliable sources list a large element set rather than four; effect paraphrased",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/how-get-evolution-stones-evomon",
-      "secondarySourcePage": "https://nerdschalk.com/how-to-get-evolution-element-omni-stones-evomon-roblox/",
-      "image": null,
-      "imageStatus": "accepted-missing: no clean representative element-stone icon catalogued on wiki.gg; family row stays text-first."
+      "item": {
+        "name": "Element Stones",
+        "category": "Evolution material",
+        "type": "Evolution material",
+        "cardSummary": "Type-locked stones that match an Evomon's element, spent with Evolution Stones to evolve. Each element has its own stone, such as the Fire, Water, Grass, and Electric stones.",
+        "effect": "Type-matched evolution requirement",
+        "howToGet": "First-time wins against NPC Trainers (one-time, area-themed), island and Summon Ruins bosses, and regional bosses matching the element.",
+        "element": "Type-locked"
+      },
+      "system": {
+        "slug": "element-stones",
+        "section": "Evolution materials",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Omni Stone",
-      "slug": "omni-stone",
-      "category": "Evolution material",
-      "type": "Evolution material",
-      "cardSummary": "A flexible substitute that fills in for any missing Element Stone during an evolution, with one Omni Stone counting as one Element Stone.",
-      "effect": "Substitutes for missing Element Stones",
-      "howToGet": "Buy from the Exchange Merchant and Traveling Merchant, earn from Tower rewards, and claim from Battle Pass rewards.",
-      "hungerRestored": null,
-      "element": "Universal",
-      "collectionSection": "Evolution materials",
-      "sortOrder": 9,
-      "sourceStatus": "Confirmed by Sportskeeda and Nerdschalk; effect paraphrased",
-      "sourcePage": "https://www.sportskeeda.com/roblox-news/how-get-use-omni-stone-evomon",
-      "secondarySourcePage": "https://nerdschalk.com/how-to-get-evolution-element-omni-stones-evomon-roblox/",
-      "image": null,
-      "imageStatus": "accepted-missing: Omni Stone is not catalogued with an icon on wiki.gg; no clean per-item sprite found."
+      "item": {
+        "name": "Omni Stone",
+        "category": "Evolution material",
+        "type": "Evolution material",
+        "cardSummary": "A flexible substitute that fills in for any missing Element Stone during an evolution, with one Omni Stone counting as one Element Stone.",
+        "effect": "Substitutes for missing Element Stones",
+        "howToGet": "Buy from the Exchange Merchant and Traveling Merchant, earn from Tower rewards, and claim from Battle Pass rewards.",
+        "element": "Universal"
+      },
+      "system": {
+        "slug": "omni-stone",
+        "section": "Evolution materials",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Apple",
-      "slug": "apple",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A basic food item that restores a small amount of an Evomon's Hunger.",
-      "effect": "Restores Hunger",
-      "howToGet": "Buy from the EvoStore or pull from the Gacha.",
-      "hungerRestored": "5 Hunger",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 10,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/apple.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Apple",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A basic food item that restores a small amount of an Evomon's Hunger.",
+        "effect": "Restores Hunger",
+        "howToGet": "Buy from the EvoStore or pull from the Gacha.",
+        "hungerRestored": "5 Hunger"
+      },
+      "system": {
+        "slug": "apple",
+        "section": "Food",
+        "sortOrder": 10,
+        "image": "/Evomon/items/apple.png"
+      }
     },
     {
-      "name": "Fish",
-      "slug": "fish",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A basic food item that restores a little Hunger.",
-      "effect": "Restores Hunger",
-      "howToGet": "Buy from the EvoStore or pull from the Gacha.",
-      "hungerRestored": "3 Hunger",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 11,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/fish.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Fish",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A basic food item that restores a little Hunger.",
+        "effect": "Restores Hunger",
+        "howToGet": "Buy from the EvoStore or pull from the Gacha.",
+        "hungerRestored": "3 Hunger"
+      },
+      "system": {
+        "slug": "fish",
+        "section": "Food",
+        "sortOrder": 11,
+        "image": "/Evomon/items/fish.png"
+      }
     },
     {
-      "name": "Meat",
-      "slug": "meat",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A basic food item that restores a small amount of Hunger.",
-      "effect": "Restores Hunger",
-      "howToGet": "Buy from the EvoStore or pull from the Gacha.",
-      "hungerRestored": "6 Hunger",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 12,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/meat.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Meat",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A basic food item that restores a small amount of Hunger.",
+        "effect": "Restores Hunger",
+        "howToGet": "Buy from the EvoStore or pull from the Gacha.",
+        "hungerRestored": "6 Hunger"
+      },
+      "system": {
+        "slug": "meat",
+        "section": "Food",
+        "sortOrder": 12,
+        "image": "/Evomon/items/meat.png"
+      }
     },
     {
-      "name": "Cherry",
-      "slug": "cherry",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A basic food item that restores a small amount of Hunger.",
-      "effect": "Restores Hunger",
-      "howToGet": "Buy from the EvoStore or pull from the Gacha.",
-      "hungerRestored": "5 Hunger",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 13,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/cherry.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Cherry",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A basic food item that restores a small amount of Hunger.",
+        "effect": "Restores Hunger",
+        "howToGet": "Buy from the EvoStore or pull from the Gacha.",
+        "hungerRestored": "5 Hunger"
+      },
+      "system": {
+        "slug": "cherry",
+        "section": "Food",
+        "sortOrder": 13,
+        "image": "/Evomon/items/cherry.png"
+      }
     },
     {
-      "name": "Clover",
-      "slug": "clover",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A basic food item that restores a small amount of Hunger.",
-      "effect": "Restores Hunger",
-      "howToGet": "Buy from the EvoStore or pull from the Gacha.",
-      "hungerRestored": "5 Hunger",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 14,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/clover.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Clover",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A basic food item that restores a small amount of Hunger.",
+        "effect": "Restores Hunger",
+        "howToGet": "Buy from the EvoStore or pull from the Gacha.",
+        "hungerRestored": "5 Hunger"
+      },
+      "system": {
+        "slug": "clover",
+        "section": "Food",
+        "sortOrder": 14,
+        "image": "/Evomon/items/clover.png"
+      }
     },
     {
-      "name": "Banana",
-      "slug": "banana",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A mid-tier food item that restores a larger amount of Hunger.",
-      "effect": "Restores Hunger",
-      "howToGet": "Earn from Expeditions or pull from the Gacha.",
-      "hungerRestored": "15 Hunger",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 15,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/banana.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Banana",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A mid-tier food item that restores a larger amount of Hunger.",
+        "effect": "Restores Hunger",
+        "howToGet": "Earn from Expeditions or pull from the Gacha.",
+        "hungerRestored": "15 Hunger"
+      },
+      "system": {
+        "slug": "banana",
+        "section": "Food",
+        "sortOrder": 15,
+        "image": "/Evomon/items/banana.png"
+      }
     },
     {
-      "name": "Ginger",
-      "slug": "ginger",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A mid-tier food item that restores a larger amount of Hunger.",
-      "effect": "Restores Hunger",
-      "howToGet": "Earn from Expeditions or pull from the Gacha.",
-      "hungerRestored": "15 Hunger",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 16,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/ginger.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Ginger",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A mid-tier food item that restores a larger amount of Hunger.",
+        "effect": "Restores Hunger",
+        "howToGet": "Earn from Expeditions or pull from the Gacha.",
+        "hungerRestored": "15 Hunger"
+      },
+      "system": {
+        "slug": "ginger",
+        "section": "Food",
+        "sortOrder": 16,
+        "image": "/Evomon/items/ginger.png"
+      }
     },
     {
-      "name": "Ice Cream",
-      "slug": "ice-cream",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A mid-tier food item that restores a larger amount of Hunger.",
-      "effect": "Restores Hunger",
-      "howToGet": "Earn from Expeditions or pull from the Gacha.",
-      "hungerRestored": "15 Hunger",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 17,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/ice-cream.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Ice Cream",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A mid-tier food item that restores a larger amount of Hunger.",
+        "effect": "Restores Hunger",
+        "howToGet": "Earn from Expeditions or pull from the Gacha.",
+        "hungerRestored": "15 Hunger"
+      },
+      "system": {
+        "slug": "ice-cream",
+        "section": "Food",
+        "sortOrder": 17,
+        "image": "/Evomon/items/ice-cream.png"
+      }
     },
     {
-      "name": "Hot Pepper",
-      "slug": "hot-pepper",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A mid-tier food item that restores a larger amount of Hunger.",
-      "effect": "Restores Hunger",
-      "howToGet": "Earn from Expeditions or pull from the Gacha.",
-      "hungerRestored": "15 Hunger",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 18,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/hot-pepper.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Hot Pepper",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A mid-tier food item that restores a larger amount of Hunger.",
+        "effect": "Restores Hunger",
+        "howToGet": "Earn from Expeditions or pull from the Gacha.",
+        "hungerRestored": "15 Hunger"
+      },
+      "system": {
+        "slug": "hot-pepper",
+        "section": "Food",
+        "sortOrder": 18,
+        "image": "/Evomon/items/hot-pepper.png"
+      }
     },
     {
-      "name": "Jackfruit",
-      "slug": "jackfruit",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A food item that restores Hunger and also restores a little Life Points.",
-      "effect": "Restores Hunger and Life Points",
-      "howToGet": "Earn from Expeditions or pull from the Gacha.",
-      "hungerRestored": "9 Hunger & 1 Life Point",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 19,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/jackfruit.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Jackfruit",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A food item that restores Hunger and also restores a little Life Points.",
+        "effect": "Restores Hunger and Life Points",
+        "howToGet": "Earn from Expeditions or pull from the Gacha.",
+        "hungerRestored": "9 Hunger & 1 Life Point"
+      },
+      "system": {
+        "slug": "jackfruit",
+        "section": "Food",
+        "sortOrder": 19,
+        "image": "/Evomon/items/jackfruit.png"
+      }
     },
     {
-      "name": "Dino Meat",
-      "slug": "dino-meat",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "A food item that restores Hunger and some Life Points.",
-      "effect": "Restores Hunger and Life Points",
-      "howToGet": "Earn from Expeditions or pull from the Gacha.",
-      "hungerRestored": "12 Hunger & 2 Life Points",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 20,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/dino-meat.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Dino Meat",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "A food item that restores Hunger and some Life Points.",
+        "effect": "Restores Hunger and Life Points",
+        "howToGet": "Earn from Expeditions or pull from the Gacha.",
+        "hungerRestored": "12 Hunger & 2 Life Points"
+      },
+      "system": {
+        "slug": "dino-meat",
+        "section": "Food",
+        "sortOrder": 20,
+        "image": "/Evomon/items/dino-meat.png"
+      }
     },
     {
-      "name": "Strawberries",
-      "slug": "strawberries",
-      "category": "Food",
-      "type": "Food",
-      "cardSummary": "The top food item, restoring a large amount of Hunger and the most Life Points.",
-      "effect": "Restores Hunger and Life Points",
-      "howToGet": "Earn from Expeditions or pull from the Gacha.",
-      "hungerRestored": "15 Hunger & 3 Life Points",
-      "element": null,
-      "collectionSection": "Food",
-      "sortOrder": 21,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/strawberries.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Strawberries",
+        "category": "Food",
+        "type": "Food",
+        "cardSummary": "The top food item, restoring a large amount of Hunger and the most Life Points.",
+        "effect": "Restores Hunger and Life Points",
+        "howToGet": "Earn from Expeditions or pull from the Gacha.",
+        "hungerRestored": "15 Hunger & 3 Life Points"
+      },
+      "system": {
+        "slug": "strawberries",
+        "section": "Food",
+        "sortOrder": 21,
+        "image": "/Evomon/items/strawberries.png"
+      }
     },
     {
-      "name": "Shovel",
-      "slug": "shovel",
-      "category": "Utility tool",
-      "type": "Tool",
-      "cardSummary": "A utility tool used to scoop up EvoMon poop while keeping your area tidy.",
-      "effect": "Scoops up EvoMon poop",
-      "howToGet": "Standard utility tool available in game.",
-      "hungerRestored": null,
-      "element": null,
-      "collectionSection": "Utility tools",
-      "sortOrder": 22,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/shovel.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "Shovel",
+        "category": "Utility tool",
+        "type": "Tool",
+        "cardSummary": "A utility tool used to scoop up EvoMon poop while keeping your area tidy.",
+        "effect": "Scoops up EvoMon poop",
+        "howToGet": "Standard utility tool available in game."
+      },
+      "system": {
+        "slug": "shovel",
+        "section": "Utility tools",
+        "sortOrder": 22,
+        "image": "/Evomon/items/shovel.png"
+      }
     },
     {
-      "name": "XPNATOR",
-      "slug": "xpnator",
-      "category": "Utility tool",
-      "type": "Tool",
-      "cardSummary": "A utility tool that stores experience for future use, letting you bank XP and apply it later.",
-      "effect": "Stores experience for later use",
-      "howToGet": "Standard utility tool available in game.",
-      "hungerRestored": null,
-      "element": null,
-      "collectionSection": "Utility tools",
-      "sortOrder": 23,
-      "sourceStatus": "Authoritative wiki.gg Items page; exact effect",
-      "sourcePage": "https://evomon.wiki.gg/wiki/Items",
-      "secondarySourcePage": null,
-      "image": "/Evomon/items/xpnator.png",
-      "imageStatus": "local item sprite from EvoMon Wiki (wiki.gg)",
-      "sourceImageUrl": "https://evomon.wiki.gg/wiki/Items"
+      "item": {
+        "name": "XPNATOR",
+        "category": "Utility tool",
+        "type": "Tool",
+        "cardSummary": "A utility tool that stores experience for future use, letting you bank XP and apply it later.",
+        "effect": "Stores experience for later use",
+        "howToGet": "Standard utility tool available in game."
+      },
+      "system": {
+        "slug": "xpnator",
+        "section": "Utility tools",
+        "sortOrder": 23,
+        "image": "/Evomon/items/xpnator.png"
+      }
     }
   ]
 }

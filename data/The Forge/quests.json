@@ -1,720 +1,1192 @@
 {
   "meta": {
-    "title": "The Forge Quests",
-    "updatedAt": "2026-04-10",
-    "sources": [
-      {
-        "label": "Game8 quest list",
-        "url": "https://game8.co/games/The-Forge/archives/573379",
-        "accessed": "2026-04-10"
-      }
-    ],
-    "columns": [
-      "name",
+    "schemaVersion": 2,
+    "game": "The Forge",
+    "gameSlug": "the-forge",
+    "collection": "quests",
+    "route": "/wiki/the-forge/quests",
+    "catalogCode": "the-forge-quests",
+    "itemFields": [
       "world",
       "npc",
       "objectives",
-      "status",
-      "sourceUrl"
-    ]
+      "status"
+    ],
+    "columns": [
+      "world",
+      "npc",
+      "objectives",
+      "status"
+    ],
+    "display": {
+      "groupLabel": "status",
+      "sectionOrder": [
+        "Listed",
+        "TBD"
+      ],
+      "badgeField": "status",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "world",
+        "npc",
+        "objectives",
+        "status"
+      ],
+      "tableFields": [
+        "world",
+        "npc",
+        "objectives",
+        "status"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Getting Started!",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Talk to Sensei Moro: 0/1"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "First Pickaxe!",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Open Equipments",
-        "Equip Stone Pickaxe",
-        "Get Ore: 0/6"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Learning to Forge!",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Forge Weapon: 0/2"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Getting Equipped!",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Equip Weapon",
-        "Sell Weapon"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "New Pickaxe!",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Purchase 'Bronze Pickaxe'",
-        "Get Ore: 0/10",
-        "Kill Zombie: 0/1"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Preparing For Battle",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Forge Armor: 0/2"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Forging Under Pressure",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Purchase 'Iron Pickaxe'",
-        "Kill Zombie: 0/3",
-        "Forge Any: 0/3",
-        "Get Ore: 0/35"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Reporting In",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [],
-      "status": "TBD",
-      "sourceUrl": null
-    },
-    {
-      "name": "The First Upgrade",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [],
-      "status": "TBD",
-      "sourceUrl": null
-    },
-    {
-      "name": "Runes of Power",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [],
-      "status": "TBD",
-      "sourceUrl": null
-    },
-    {
-      "name": "End of the Beginning",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [],
-      "status": "TBD",
-      "sourceUrl": null
-    },
-    {
-      "name": "Everything Starts Now",
-      "world": "Stonewake's Cross",
-      "npc": "Sensei Moro",
-      "objectives": [],
-      "status": "TBD",
-      "sourceUrl": null
-    },
-    {
-      "name": "Rotten Depths",
-      "world": "Stonewake's Cross",
-      "npc": "Umut The Brave",
-      "objectives": [
-        "Clear out the zombies infesting the cave."
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "The Basics of Mining",
-      "world": "Stonewake's Cross",
-      "npc": "Nord",
-      "objectives": [
-        "Collect various resources through mining."
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Lost Guitar",
-      "world": "Stonewake's Cross",
-      "npc": "Bard",
-      "objectives": [
-        "Bring the Guitar."
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573478"
-    },
-    {
-      "name": "Lost Cat",
-      "world": "Stonewake's Cross",
-      "npc": "Tomo the Explorist",
-      "objectives": [
-        "Bring the Cat."
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573521"
-    },
-    {
-      "name": "Getting to Forgotten Kingdom",
-      "world": "Stonewake's Cross",
-      "npc": "Wizard",
-      "objectives": [],
-      "status": "TBD",
-      "sourceUrl": null
-    },
-    {
-      "name": "New Island",
-      "world": "Forgotten Kingdom",
-      "npc": "Sensei Moro",
-      "objectives": [],
-      "status": "TBD",
-      "sourceUrl": null
-    },
-    {
-      "name": "Captain Rowan 1",
-      "world": "Forgotten Kingdom",
-      "npc": "Captain Rowan",
-      "objectives": [],
-      "status": "TBD",
-      "sourceUrl": null
-    },
-    {
-      "name": "Cure for Isaac",
-      "world": "Forgotten Kingdom",
-      "npc": "Isaac",
-      "objectives": [
-        "Bring 1 Health Potion to Isaac"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573653"
-    },
-    {
-      "name": "Monke Need Bananite",
-      "world": "Forgotten Kingdom",
-      "npc": "Monke",
-      "objectives": [
-        "Bring Monke 30 Bananite."
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573652"
-    },
-    {
-      "name": "Goblin King 1",
-      "world": "Forgotten Kingdom",
-      "npc": "Goblin King",
-      "objectives": [
-        "Donate $5,000"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573659"
-    },
-    {
-      "name": "Goblin King 2",
-      "world": "Forgotten Kingdom",
-      "npc": "Goblin King",
-      "objectives": [
-        "Donate $10,000",
-        "Bring 1 Topaz"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573659"
-    },
-    {
-      "name": "Goblin King 3",
-      "world": "Forgotten Kingdom",
-      "npc": "Goblin King",
-      "objectives": [
-        "Donate $15,000",
-        "Bring 5 Diamonds"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573659"
-    },
-    {
-      "name": "Goblin King 4",
-      "world": "Forgotten Kingdom",
-      "npc": "Goblin King",
-      "objectives": [
-        "Donate $20,000",
-        "Bring 5 Emeralds"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573659"
-    },
-    {
-      "name": "Goblin King 5",
-      "world": "Forgotten Kingdom",
-      "npc": "Goblin King",
-      "objectives": [
-        "Donate $25,000",
-        "Bring 5 Rubies"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573659"
-    },
-    {
-      "name": "Line's Needs",
-      "world": "Forgotten Kingdom",
-      "npc": "Line",
-      "objectives": [
-        "Bring 3 Fireite"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574337"
-    },
-    {
-      "name": "Skeletal Threat",
-      "world": "Forgotten Kingdom",
-      "npc": "Masked Stranger",
-      "objectives": [
-        "Kill Skeleton Rogue: 0/50",
-        "Kill Axe Skeleton: 0/30",
-        "Kill Deathaxe Skeleton: 0/15",
-        "Kill Bomber: 0/5"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Basalt Extraction",
-      "world": "Forgotten Kingdom",
-      "npc": "Barakkulf",
-      "objectives": [
-        "Mine Basalt Rock: 0/150",
-        "Mine Basalt Core: 0/50"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Raven Quest 1",
-      "world": "Frostspire Expanse",
-      "npc": "Raven",
-      "objectives": [
-        "Kill Crystal Spider: 0/5",
-        "Mine Icy Pebble: 0/10",
-        "Bring 1 Aetherit."
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573689"
-    },
-    {
-      "name": "Raven Quest 2",
-      "world": "Frostspire Expanse",
-      "npc": "Raven",
-      "objectives": [
-        "Kill Diamond Spider: 0/10",
-        "Kill Prismarine Spider: 0/1",
-        "Bring 1 Snowite."
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573689"
-    },
-    {
-      "name": "Raven Quest 3",
-      "world": "Frostspire Expanse",
-      "npc": "Raven",
-      "objectives": [
-        "Kill Mini Demonic Spider: 0/25",
-        "Kill Demonic Spider: 0/10",
-        "Kill Demonic Queen Spider: 0/1",
-        "Bring 1 Stolen Heart."
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573689"
-    },
-    {
-      "name": "Goblin Lord 1",
-      "world": "Frostspire Expanse",
-      "npc": "Goblin Lord",
-      "objectives": [
-        "Do 5 quests for the Goblin Lord"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573416"
-    },
-    {
-      "name": "Goblin Lord 2",
-      "world": "Frostspire Expanse",
-      "npc": "Goblin Lord",
-      "objectives": [
-        "Donate $50,000",
-        "Bring 1 Velchire"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573416"
-    },
-    {
-      "name": "Goblin Lord 3",
-      "world": "Frostspire Expanse",
-      "npc": "Goblin Lord",
-      "objectives": [
-        "Donate $75,000",
-        "Bring 2 Sanctis"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573416"
-    },
-    {
-      "name": "Goblin Lord 4",
-      "world": "Frostspire Expanse",
-      "npc": "Goblin Lord",
-      "objectives": [
-        "Donate $150,000",
-        "Bring 3 Snowite"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573416"
-    },
-    {
-      "name": "Goblin Lord 5",
-      "world": "Frostspire Expanse",
-      "npc": "Goblin Lord",
-      "objectives": [
-        "Donate $250,000",
-        "Bring 3 Iceite"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573416"
-    },
-    {
-      "name": "LocalModuled Cat",
-      "world": "Frostspire Expanse",
-      "npc": "LocalModuled",
-      "objectives": [
-        "Find LocalModuled's Cat"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/573683"
-    },
-    {
-      "name": "Maze Quest 1",
-      "world": "Frostspire Expanse",
-      "npc": "Zarall",
-      "objectives": [
-        "Kill 0/20 Skeleton Pirate",
-        "Kill 0/2 Cthulhu"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574278"
-    },
-    {
-      "name": "Maze Quest 2",
-      "world": "Frostspire Expanse",
-      "npc": "Zarall",
-      "objectives": [
-        "Kill 0/25 Skeleton Pirate",
-        "Kill 0/7 Cthulhu"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574278"
-    },
-    {
-      "name": "Maze Quest 3",
-      "world": "Frostspire Expanse",
-      "npc": "Zarall",
-      "objectives": [
-        "Kill 0/50 Skeleton Pirate",
-        "Kill 0/15 Cthulhu"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574278"
-    },
-    {
-      "name": "Pirate Raid",
-      "world": "Frostspire Expanse",
-      "npc": "Masked Stranger",
-      "objectives": [
-        "Kill 0/25 Skeleton Pirate",
-        "Kill 0/7 Cthulhu"
-      ],
-      "status": "Listed",
-      "sourceUrl": "https://game8.co/games/The-Forge/archives/574278"
-    },
-    {
-      "name": "Water and Wood - 1",
-      "world": "Crimson Sakura Isles",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Get Root Spire: 0/5",
-        "Get Water Stone: 0/5",
-        "Mine Bamboo Pebble: 0/10"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Earth and Stone - 2",
-      "world": "Crimson Sakura Isles",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Get Earthite: 0/5",
-        "Get Rock Seed: 0/5",
-        "Mine Bamboo Pebble: 0/25"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Wraith - 3",
-      "world": "Crimson Sakura Isles",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Get Melonite: 0/5",
-        "Get Wraith: 0/5",
-        "Mine Bamboo Pebble: 0/35",
-        "Mine Bamboo Rock: 0/15"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Tiger's Gaze - 4",
-      "world": "Crimson Sakura Isles",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Get Melonite: 0/5",
-        "Get Tiger's Eye: 0/2",
-        "Mine Bamboo Rock: 0/30"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Cyanite Jade - 5",
-      "world": "Crimson Sakura Isles",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Get Wraith: 0/5",
-        "Get Cyanite Jade: 0/3",
-        "Mine Bamboo Rock: 0/25",
-        "Mine Bamboo Boulder: 0/10"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Magical Core - 6",
-      "world": "Crimson Sakura Isles",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Get Magit: 0/1",
-        "Mine Bamboo Boulder: 0/20"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Blossom Gathering - 7",
-      "world": "Crimson Sakura Isles",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Get Fruite: 0/3",
-        "Get Blue Gem Quill: 0/2",
-        "Mine Hana Pebble: 0/35"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Glowing Rocks - 8",
-      "world": "Crimson Sakura Isles",
-      "npc": "Sensei Moro",
-      "objectives": [
-        "Get Sakuranite: 0/3",
-        "Get Heat Steel: 0/5",
-        "Mine Hana Pebble: 0/25",
-        "Mine Glowy Rock: 0/50"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Ape Menace - 1",
-      "world": "Crimson Sakura Isles",
-      "npc": "Shogun",
-      "objectives": [
-        "Kill Mountain Ape: 0/5"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Savage Lands - 2",
-      "world": "Crimson Sakura Isles",
-      "npc": "Shogun",
-      "objectives": [
-        "Kill Mountain Ape: 0/15",
-        "Kill Savage Ape: 0/5"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Fallen Warriors - 3",
-      "world": "Crimson Sakura Isles",
-      "npc": "Shogun",
-      "objectives": [
-        "Kill Monk Panda: 0/10",
-        "Kill Samurai Ape: 0/20"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Securing the Surface - 4",
-      "world": "Crimson Sakura Isles",
-      "npc": "Shogun",
-      "objectives": [
-        "Kill Samurai Ape: 0/35",
-        "Kill Monk Panda: 0/20"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "The Cave's Maw - 5",
-      "world": "Crimson Sakura Isles",
-      "npc": "Shogun",
-      "objectives": [
-        "Kill Brute Oni: 0/15"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "The Demonic Generals - 6",
-      "world": "Crimson Sakura Isles",
-      "npc": "Shogun",
-      "objectives": [
-        "Kill Brute Oni: 0/30",
-        "Kill Frostburn Oni: 0/25"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Bamboo Mining",
-      "world": "Crimson Sakura Isles",
-      "npc": "Daichi",
-      "objectives": [
-        "Mine Bamboo Pebble: 0/50",
-        "Mine Bamboo Rock: 0/30",
-        "Mine Bamboo Boulder: 0/15"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Warlord's Guard - 7",
-      "world": "Crimson Sakura Isles",
-      "npc": "Shogun",
-      "objectives": [
-        "Kill Frostburn Oni: 0/25",
-        "Kill Warlord Oni: 0/10"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Purging the Depths - 8",
-      "world": "Crimson Sakura Isles",
-      "npc": "Shogun",
-      "objectives": [
-        "Kill Warlord Oni: 0/15",
-        "Kill Hellflame Oni: 0/4"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "The Asura Threat - 9",
-      "world": "Crimson Sakura Isles",
-      "npc": "Shogun",
-      "objectives": [
-        "Kill Asura's Incarnate: 0/1"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Wild Monsters",
-      "world": "Crimson Sakura Isles",
-      "npc": "Akane",
-      "objectives": [
-        "Kill Mountain Ape: 0/50",
-        "Kill Savage Ape: 0/30"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Warrior Beasts",
-      "world": "Crimson Sakura Isles",
-      "npc": "Merfarukier",
-      "objectives": [
-        "Kill Samurai Ape: 0/30",
-        "Kill Monk Panda: 0/15"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Blossom Mining",
-      "world": "Crimson Sakura Isles",
-      "npc": "Tsukiyo",
-      "objectives": [
-        "Mine Hana Pebble: 0/50",
-        "Mine Glowy Rock: 0/30",
-        "Mine Blossom Boulder: 0/15"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Oni Threat",
-      "world": "Crimson Sakura Isles",
-      "npc": "Tetsuya",
-      "objectives": [
-        "Kill Brute Oni: 0/50",
-        "Kill Frostburn Oni: 0/30"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
-    },
-    {
-      "name": "Elite Oni Threat",
-      "world": "Crimson Sakura Isles",
-      "npc": "Inverted",
-      "objectives": [
-        "Kill Hellflame Oni: 0/15",
-        "Kill Warlord Oni: 0/5"
-      ],
-      "status": "Listed",
-      "sourceUrl": null
+      "item": {
+        "name": "Getting Started!",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Talk to Sensei Moro: 0/1"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "getting-started",
+        "section": "Listed",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "First Pickaxe!",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Open Equipments",
+          "Equip Stone Pickaxe",
+          "Get Ore: 0/6"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "first-pickaxe",
+        "section": "Listed",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Learning to Forge!",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Forge Weapon: 0/2"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "learning-to-forge",
+        "section": "Listed",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Getting Equipped!",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Equip Weapon",
+          "Sell Weapon"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "getting-equipped",
+        "section": "Listed",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "New Pickaxe!",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Purchase 'Bronze Pickaxe'",
+          "Get Ore: 0/10",
+          "Kill Zombie: 0/1"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "new-pickaxe",
+        "section": "Listed",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Preparing For Battle",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Forge Armor: 0/2"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "preparing-for-battle",
+        "section": "Listed",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Forging Under Pressure",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Purchase 'Iron Pickaxe'",
+          "Kill Zombie: 0/3",
+          "Forge Any: 0/3",
+          "Get Ore: 0/35"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "forging-under-pressure",
+        "section": "Listed",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Reporting In",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "status": "TBD"
+      },
+      "system": {
+        "slug": "reporting-in",
+        "section": "TBD",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The First Upgrade",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "status": "TBD"
+      },
+      "system": {
+        "slug": "the-first-upgrade",
+        "section": "TBD",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Runes of Power",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "status": "TBD"
+      },
+      "system": {
+        "slug": "runes-of-power",
+        "section": "TBD",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "End of the Beginning",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "status": "TBD"
+      },
+      "system": {
+        "slug": "end-of-the-beginning",
+        "section": "TBD",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Everything Starts Now",
+        "world": "Stonewake's Cross",
+        "npc": "Sensei Moro",
+        "status": "TBD"
+      },
+      "system": {
+        "slug": "everything-starts-now",
+        "section": "TBD",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rotten Depths",
+        "world": "Stonewake's Cross",
+        "npc": "Umut The Brave",
+        "objectives": [
+          "Clear out the zombies infesting the cave."
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "rotten-depths",
+        "section": "Listed",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Basics of Mining",
+        "world": "Stonewake's Cross",
+        "npc": "Nord",
+        "objectives": [
+          "Collect various resources through mining."
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "the-basics-of-mining",
+        "section": "Listed",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Guitar",
+        "world": "Stonewake's Cross",
+        "npc": "Bard",
+        "objectives": [
+          "Bring the Guitar."
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "lost-guitar",
+        "section": "Listed",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Cat",
+        "world": "Stonewake's Cross",
+        "npc": "Tomo the Explorist",
+        "objectives": [
+          "Bring the Cat."
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "lost-cat",
+        "section": "Listed",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Getting to Forgotten Kingdom",
+        "world": "Stonewake's Cross",
+        "npc": "Wizard",
+        "status": "TBD"
+      },
+      "system": {
+        "slug": "getting-to-forgotten-kingdom",
+        "section": "TBD",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "New Island",
+        "world": "Forgotten Kingdom",
+        "npc": "Sensei Moro",
+        "status": "TBD"
+      },
+      "system": {
+        "slug": "new-island",
+        "section": "TBD",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Captain Rowan 1",
+        "world": "Forgotten Kingdom",
+        "npc": "Captain Rowan",
+        "status": "TBD"
+      },
+      "system": {
+        "slug": "captain-rowan-1",
+        "section": "TBD",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cure for Isaac",
+        "world": "Forgotten Kingdom",
+        "npc": "Isaac",
+        "objectives": [
+          "Bring 1 Health Potion to Isaac"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "cure-for-isaac",
+        "section": "Listed",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Monke Need Bananite",
+        "world": "Forgotten Kingdom",
+        "npc": "Monke",
+        "objectives": [
+          "Bring Monke 30 Bananite."
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "monke-need-bananite",
+        "section": "Listed",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin King 1",
+        "world": "Forgotten Kingdom",
+        "npc": "Goblin King",
+        "objectives": [
+          "Donate $5,000"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-king-1",
+        "section": "Listed",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin King 2",
+        "world": "Forgotten Kingdom",
+        "npc": "Goblin King",
+        "objectives": [
+          "Donate $10,000",
+          "Bring 1 Topaz"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-king-2",
+        "section": "Listed",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin King 3",
+        "world": "Forgotten Kingdom",
+        "npc": "Goblin King",
+        "objectives": [
+          "Donate $15,000",
+          "Bring 5 Diamonds"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-king-3",
+        "section": "Listed",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin King 4",
+        "world": "Forgotten Kingdom",
+        "npc": "Goblin King",
+        "objectives": [
+          "Donate $20,000",
+          "Bring 5 Emeralds"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-king-4",
+        "section": "Listed",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin King 5",
+        "world": "Forgotten Kingdom",
+        "npc": "Goblin King",
+        "objectives": [
+          "Donate $25,000",
+          "Bring 5 Rubies"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-king-5",
+        "section": "Listed",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Line's Needs",
+        "world": "Forgotten Kingdom",
+        "npc": "Line",
+        "objectives": [
+          "Bring 3 Fireite"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "line-s-needs",
+        "section": "Listed",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Skeletal Threat",
+        "world": "Forgotten Kingdom",
+        "npc": "Masked Stranger",
+        "objectives": [
+          "Kill Skeleton Rogue: 0/50",
+          "Kill Axe Skeleton: 0/30",
+          "Kill Deathaxe Skeleton: 0/15",
+          "Kill Bomber: 0/5"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "skeletal-threat",
+        "section": "Listed",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Basalt Extraction",
+        "world": "Forgotten Kingdom",
+        "npc": "Barakkulf",
+        "objectives": [
+          "Mine Basalt Rock: 0/150",
+          "Mine Basalt Core: 0/50"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "basalt-extraction",
+        "section": "Listed",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Raven Quest 1",
+        "world": "Frostspire Expanse",
+        "npc": "Raven",
+        "objectives": [
+          "Kill Crystal Spider: 0/5",
+          "Mine Icy Pebble: 0/10",
+          "Bring 1 Aetherit."
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "raven-quest-1",
+        "section": "Listed",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Raven Quest 2",
+        "world": "Frostspire Expanse",
+        "npc": "Raven",
+        "objectives": [
+          "Kill Diamond Spider: 0/10",
+          "Kill Prismarine Spider: 0/1",
+          "Bring 1 Snowite."
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "raven-quest-2",
+        "section": "Listed",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Raven Quest 3",
+        "world": "Frostspire Expanse",
+        "npc": "Raven",
+        "objectives": [
+          "Kill Mini Demonic Spider: 0/25",
+          "Kill Demonic Spider: 0/10",
+          "Kill Demonic Queen Spider: 0/1",
+          "Bring 1 Stolen Heart."
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "raven-quest-3",
+        "section": "Listed",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin Lord 1",
+        "world": "Frostspire Expanse",
+        "npc": "Goblin Lord",
+        "objectives": [
+          "Do 5 quests for the Goblin Lord"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-lord-1",
+        "section": "Listed",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin Lord 2",
+        "world": "Frostspire Expanse",
+        "npc": "Goblin Lord",
+        "objectives": [
+          "Donate $50,000",
+          "Bring 1 Velchire"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-lord-2",
+        "section": "Listed",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin Lord 3",
+        "world": "Frostspire Expanse",
+        "npc": "Goblin Lord",
+        "objectives": [
+          "Donate $75,000",
+          "Bring 2 Sanctis"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-lord-3",
+        "section": "Listed",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin Lord 4",
+        "world": "Frostspire Expanse",
+        "npc": "Goblin Lord",
+        "objectives": [
+          "Donate $150,000",
+          "Bring 3 Snowite"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-lord-4",
+        "section": "Listed",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin Lord 5",
+        "world": "Frostspire Expanse",
+        "npc": "Goblin Lord",
+        "objectives": [
+          "Donate $250,000",
+          "Bring 3 Iceite"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "goblin-lord-5",
+        "section": "Listed",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "LocalModuled Cat",
+        "world": "Frostspire Expanse",
+        "npc": "LocalModuled",
+        "objectives": [
+          "Find LocalModuled's Cat"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "localmoduled-cat",
+        "section": "Listed",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Maze Quest 1",
+        "world": "Frostspire Expanse",
+        "npc": "Zarall",
+        "objectives": [
+          "Kill 0/20 Skeleton Pirate",
+          "Kill 0/2 Cthulhu"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "maze-quest-1",
+        "section": "Listed",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Maze Quest 2",
+        "world": "Frostspire Expanse",
+        "npc": "Zarall",
+        "objectives": [
+          "Kill 0/25 Skeleton Pirate",
+          "Kill 0/7 Cthulhu"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "maze-quest-2",
+        "section": "Listed",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Maze Quest 3",
+        "world": "Frostspire Expanse",
+        "npc": "Zarall",
+        "objectives": [
+          "Kill 0/50 Skeleton Pirate",
+          "Kill 0/15 Cthulhu"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "maze-quest-3",
+        "section": "Listed",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Raid",
+        "world": "Frostspire Expanse",
+        "npc": "Masked Stranger",
+        "objectives": [
+          "Kill 0/25 Skeleton Pirate",
+          "Kill 0/7 Cthulhu"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "pirate-raid",
+        "section": "Listed",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Water and Wood - 1",
+        "world": "Crimson Sakura Isles",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Get Root Spire: 0/5",
+          "Get Water Stone: 0/5",
+          "Mine Bamboo Pebble: 0/10"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "water-and-wood-1",
+        "section": "Listed",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Earth and Stone - 2",
+        "world": "Crimson Sakura Isles",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Get Earthite: 0/5",
+          "Get Rock Seed: 0/5",
+          "Mine Bamboo Pebble: 0/25"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "earth-and-stone-2",
+        "section": "Listed",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wraith - 3",
+        "world": "Crimson Sakura Isles",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Get Melonite: 0/5",
+          "Get Wraith: 0/5",
+          "Mine Bamboo Pebble: 0/35",
+          "Mine Bamboo Rock: 0/15"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "wraith-3",
+        "section": "Listed",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tiger's Gaze - 4",
+        "world": "Crimson Sakura Isles",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Get Melonite: 0/5",
+          "Get Tiger's Eye: 0/2",
+          "Mine Bamboo Rock: 0/30"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "tiger-s-gaze-4",
+        "section": "Listed",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cyanite Jade - 5",
+        "world": "Crimson Sakura Isles",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Get Wraith: 0/5",
+          "Get Cyanite Jade: 0/3",
+          "Mine Bamboo Rock: 0/25",
+          "Mine Bamboo Boulder: 0/10"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "cyanite-jade-5",
+        "section": "Listed",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Magical Core - 6",
+        "world": "Crimson Sakura Isles",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Get Magit: 0/1",
+          "Mine Bamboo Boulder: 0/20"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "magical-core-6",
+        "section": "Listed",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blossom Gathering - 7",
+        "world": "Crimson Sakura Isles",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Get Fruite: 0/3",
+          "Get Blue Gem Quill: 0/2",
+          "Mine Hana Pebble: 0/35"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "blossom-gathering-7",
+        "section": "Listed",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glowing Rocks - 8",
+        "world": "Crimson Sakura Isles",
+        "npc": "Sensei Moro",
+        "objectives": [
+          "Get Sakuranite: 0/3",
+          "Get Heat Steel: 0/5",
+          "Mine Hana Pebble: 0/25",
+          "Mine Glowy Rock: 0/50"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "glowing-rocks-8",
+        "section": "Listed",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ape Menace - 1",
+        "world": "Crimson Sakura Isles",
+        "npc": "Shogun",
+        "objectives": [
+          "Kill Mountain Ape: 0/5"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "ape-menace-1",
+        "section": "Listed",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Savage Lands - 2",
+        "world": "Crimson Sakura Isles",
+        "npc": "Shogun",
+        "objectives": [
+          "Kill Mountain Ape: 0/15",
+          "Kill Savage Ape: 0/5"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "savage-lands-2",
+        "section": "Listed",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fallen Warriors - 3",
+        "world": "Crimson Sakura Isles",
+        "npc": "Shogun",
+        "objectives": [
+          "Kill Monk Panda: 0/10",
+          "Kill Samurai Ape: 0/20"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "fallen-warriors-3",
+        "section": "Listed",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Securing the Surface - 4",
+        "world": "Crimson Sakura Isles",
+        "npc": "Shogun",
+        "objectives": [
+          "Kill Samurai Ape: 0/35",
+          "Kill Monk Panda: 0/20"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "securing-the-surface-4",
+        "section": "Listed",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Cave's Maw - 5",
+        "world": "Crimson Sakura Isles",
+        "npc": "Shogun",
+        "objectives": [
+          "Kill Brute Oni: 0/15"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "the-cave-s-maw-5",
+        "section": "Listed",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Demonic Generals - 6",
+        "world": "Crimson Sakura Isles",
+        "npc": "Shogun",
+        "objectives": [
+          "Kill Brute Oni: 0/30",
+          "Kill Frostburn Oni: 0/25"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "the-demonic-generals-6",
+        "section": "Listed",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bamboo Mining",
+        "world": "Crimson Sakura Isles",
+        "npc": "Daichi",
+        "objectives": [
+          "Mine Bamboo Pebble: 0/50",
+          "Mine Bamboo Rock: 0/30",
+          "Mine Bamboo Boulder: 0/15"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "bamboo-mining",
+        "section": "Listed",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Warlord's Guard - 7",
+        "world": "Crimson Sakura Isles",
+        "npc": "Shogun",
+        "objectives": [
+          "Kill Frostburn Oni: 0/25",
+          "Kill Warlord Oni: 0/10"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "warlord-s-guard-7",
+        "section": "Listed",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Purging the Depths - 8",
+        "world": "Crimson Sakura Isles",
+        "npc": "Shogun",
+        "objectives": [
+          "Kill Warlord Oni: 0/15",
+          "Kill Hellflame Oni: 0/4"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "purging-the-depths-8",
+        "section": "Listed",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Asura Threat - 9",
+        "world": "Crimson Sakura Isles",
+        "npc": "Shogun",
+        "objectives": [
+          "Kill Asura's Incarnate: 0/1"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "the-asura-threat-9",
+        "section": "Listed",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wild Monsters",
+        "world": "Crimson Sakura Isles",
+        "npc": "Akane",
+        "objectives": [
+          "Kill Mountain Ape: 0/50",
+          "Kill Savage Ape: 0/30"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "wild-monsters",
+        "section": "Listed",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Warrior Beasts",
+        "world": "Crimson Sakura Isles",
+        "npc": "Merfarukier",
+        "objectives": [
+          "Kill Samurai Ape: 0/30",
+          "Kill Monk Panda: 0/15"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "warrior-beasts",
+        "section": "Listed",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blossom Mining",
+        "world": "Crimson Sakura Isles",
+        "npc": "Tsukiyo",
+        "objectives": [
+          "Mine Hana Pebble: 0/50",
+          "Mine Glowy Rock: 0/30",
+          "Mine Blossom Boulder: 0/15"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "blossom-mining",
+        "section": "Listed",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Oni Threat",
+        "world": "Crimson Sakura Isles",
+        "npc": "Tetsuya",
+        "objectives": [
+          "Kill Brute Oni: 0/50",
+          "Kill Frostburn Oni: 0/30"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "oni-threat",
+        "section": "Listed",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Elite Oni Threat",
+        "world": "Crimson Sakura Isles",
+        "npc": "Inverted",
+        "objectives": [
+          "Kill Hellflame Oni: 0/15",
+          "Kill Warlord Oni: 0/5"
+        ],
+        "status": "Listed"
+      },
+      "system": {
+        "slug": "elite-oni-threat",
+        "section": "Listed",
+        "sortOrder": 65,
+        "image": null
+      }
     }
   ]
 }

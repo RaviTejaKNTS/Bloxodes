@@ -1,675 +1,939 @@
 {
   "meta": {
-    "title": "The Forge NPCs",
-    "updatedAt": "2026-04-10",
-    "sources": [
-      {
-        "label": "Game8 NPC list",
-        "url": "https://game8.co/games/The-Forge/archives/572939",
-        "accessed": "2026-04-10"
-      },
-      {
-        "label": "Game8 quest list",
-        "url": "https://game8.co/games/The-Forge/archives/573379",
-        "accessed": "2026-04-10"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "The Forge",
+    "gameSlug": "the-forge",
+    "collection": "npcs",
+    "route": "/wiki/the-forge/npcs",
+    "catalogCode": "the-forge-npcs",
+    "itemFields": [
       "area",
       "location",
       "role",
       "quests",
-      "services",
-      "link"
-    ]
+      "services"
+    ],
+    "columns": [
+      "area",
+      "location",
+      "role",
+      "quests",
+      "services"
+    ],
+    "display": {
+      "groupLabel": "location",
+      "sectionOrder": [
+        "Marbles's Shop",
+        "The Cave",
+        "Bard Area",
+        "Enhancing Area",
+        "Runemaker Area",
+        "Wizard's Tower",
+        "Greedy Cey's Shop",
+        "Miner Fred's Shop",
+        "Maria's Potion Shop",
+        "Captain Rowan's Camp",
+        "Volcanic Depths",
+        "Ashen Passage",
+        "Captain Rowan's Camp; Secret Maze",
+        "Goblin Village",
+        "Raven Cave",
+        "Secret Maze",
+        "Items"
+      ],
+      "badgeField": "role",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "area",
+        "location",
+        "role",
+        "quests",
+        "services"
+      ],
+      "tableFields": [
+        "area",
+        "location",
+        "role",
+        "quests",
+        "services"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Marbles",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "Marbles's Shop",
-      "role": "Shop",
-      "quests": [],
-      "services": [
-        "Buys forged weapons and armor"
-      ],
-      "link": null
+      "item": {
+        "name": "Marbles",
+        "area": "Stonewake's Cross",
+        "location": "Marbles's Shop",
+        "role": "Shop",
+        "services": [
+          "Buys forged weapons and armor"
+        ]
+      },
+      "system": {
+        "slug": "marbles",
+        "section": "Marbles's Shop",
+        "sortOrder": 1,
+        "image": null
+      }
     },
     {
-      "name": "Tomo the Explorist",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Lost Cat"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Tomo the Explorist",
+        "area": "Stonewake's Cross",
+        "role": "Quest giver",
+        "quests": [
+          "Lost Cat"
+        ]
+      },
+      "system": {
+        "slug": "tomo-the-explorist",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
+      }
     },
     {
-      "name": "Umut The Brave",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "The Cave",
-      "role": "Quest giver",
-      "quests": [
-        "Rotten Depths"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Umut The Brave",
+        "area": "Stonewake's Cross",
+        "location": "The Cave",
+        "role": "Quest giver",
+        "quests": [
+          "Rotten Depths"
+        ]
+      },
+      "system": {
+        "slug": "umut-the-brave",
+        "section": "The Cave",
+        "sortOrder": 3,
+        "image": null
+      }
     },
     {
-      "name": "Nord",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "The Cave",
-      "role": "Quest giver",
-      "quests": [
-        "The Basics of Mining"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Nord",
+        "area": "Stonewake's Cross",
+        "location": "The Cave",
+        "role": "Quest giver",
+        "quests": [
+          "The Basics of Mining"
+        ]
+      },
+      "system": {
+        "slug": "nord",
+        "section": "The Cave",
+        "sortOrder": 4,
+        "image": null
+      }
     },
     {
-      "name": "Bard",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "Bard Area",
-      "role": "Quest giver",
-      "quests": [
-        "Lost Guitar"
-      ],
-      "services": [
-        "Sells a lantern"
-      ],
-      "link": null
+      "item": {
+        "name": "Bard",
+        "area": "Stonewake's Cross",
+        "location": "Bard Area",
+        "role": "Quest giver",
+        "quests": [
+          "Lost Guitar"
+        ],
+        "services": [
+          "Sells a lantern"
+        ]
+      },
+      "system": {
+        "slug": "bard",
+        "section": "Bard Area",
+        "sortOrder": 5,
+        "image": null
+      }
     },
     {
-      "name": "Enhancer",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "Enhancing Area",
-      "role": "Service",
-      "quests": [],
-      "services": [
-        "Enhances weapons and armor"
-      ],
-      "link": null
+      "item": {
+        "name": "Enhancer",
+        "area": "Stonewake's Cross",
+        "location": "Enhancing Area",
+        "role": "Service",
+        "services": [
+          "Enhances weapons and armor"
+        ]
+      },
+      "system": {
+        "slug": "enhancer",
+        "section": "Enhancing Area",
+        "sortOrder": 6,
+        "image": null
+      }
     },
     {
-      "name": "Runemaker",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "Runemaker Area",
-      "role": "Service",
-      "quests": [],
-      "services": [
-        "Applies runes to gear"
-      ],
-      "link": null
+      "item": {
+        "name": "Runemaker",
+        "area": "Stonewake's Cross",
+        "location": "Runemaker Area",
+        "role": "Service",
+        "services": [
+          "Applies runes to gear"
+        ]
+      },
+      "system": {
+        "slug": "runemaker",
+        "section": "Runemaker Area",
+        "sortOrder": 7,
+        "image": null
+      }
     },
     {
-      "name": "Wizard",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "Wizard's Tower",
-      "role": "Service",
-      "quests": [
-        "Getting to Forgotten Kingdom"
-      ],
-      "services": [
-        "Race rerolls"
-      ],
-      "link": null
+      "item": {
+        "name": "Wizard",
+        "area": "Stonewake's Cross",
+        "location": "Wizard's Tower",
+        "role": "Service",
+        "quests": [
+          "Getting to Forgotten Kingdom"
+        ],
+        "services": [
+          "Race rerolls"
+        ]
+      },
+      "system": {
+        "slug": "wizard",
+        "section": "Wizard's Tower",
+        "sortOrder": 8,
+        "image": null
+      }
     },
     {
-      "name": "Greedy Cey",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "Greedy Cey's Shop",
-      "role": "Shop",
-      "quests": [],
-      "services": [
-        "Buys ores, runes, and essences"
-      ],
-      "link": null
+      "item": {
+        "name": "Greedy Cey",
+        "area": "Stonewake's Cross",
+        "location": "Greedy Cey's Shop",
+        "role": "Shop",
+        "services": [
+          "Buys ores, runes, and essences"
+        ]
+      },
+      "system": {
+        "slug": "greedy-cey",
+        "section": "Greedy Cey's Shop",
+        "sortOrder": 9,
+        "image": null
+      }
     },
     {
-      "name": "Miner Fred",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "Miner Fred's Shop",
-      "role": "Shop",
-      "quests": [],
-      "services": [
-        "Sells pickaxes"
-      ],
-      "link": null
+      "item": {
+        "name": "Miner Fred",
+        "area": "Stonewake's Cross",
+        "location": "Miner Fred's Shop",
+        "role": "Shop",
+        "services": [
+          "Sells pickaxes"
+        ]
+      },
+      "system": {
+        "slug": "miner-fred",
+        "section": "Miner Fred's Shop",
+        "sortOrder": 10,
+        "image": null
+      }
     },
     {
-      "name": "Maria",
-      "image": null,
-      "area": "Stonewake's Cross",
-      "location": "Maria's Potion Shop",
-      "role": "Shop",
-      "quests": [],
-      "services": [
-        "Sells potions"
-      ],
-      "link": null
+      "item": {
+        "name": "Maria",
+        "area": "Stonewake's Cross",
+        "location": "Maria's Potion Shop",
+        "role": "Shop",
+        "services": [
+          "Sells potions"
+        ]
+      },
+      "system": {
+        "slug": "maria",
+        "section": "Maria's Potion Shop",
+        "sortOrder": 11,
+        "image": null
+      }
     },
     {
-      "name": "Sensei Moro",
-      "image": null,
-      "area": "Multiple",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Getting Started!",
-        "First Pickaxe!",
-        "Learning to Forge!",
-        "Getting Equipped!",
-        "New Pickaxe!",
-        "Preparing For Battle",
-        "Forging Under Pressure",
-        "Reporting In",
-        "The First Upgrade",
-        "Runes of Power",
-        "End of the Beginning",
-        "Everything Starts Now",
-        "New Island",
-        "Water and Wood - 1",
-        "Earth and Stone - 2",
-        "Wraith - 3",
-        "Tiger's Gaze - 4",
-        "Cyanite Jade - 5",
-        "Magical Core - 6",
-        "Blossom Gathering - 7",
-        "Glowing Rocks - 8"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Sensei Moro",
+        "area": "Multiple",
+        "role": "Quest giver",
+        "quests": [
+          "Getting Started!",
+          "First Pickaxe!",
+          "Learning to Forge!",
+          "Getting Equipped!",
+          "New Pickaxe!",
+          "Preparing For Battle",
+          "Forging Under Pressure",
+          "Reporting In",
+          "The First Upgrade",
+          "Runes of Power",
+          "End of the Beginning",
+          "Everything Starts Now",
+          "New Island",
+          "Water and Wood - 1",
+          "Earth and Stone - 2",
+          "Wraith - 3",
+          "Tiger's Gaze - 4",
+          "Cyanite Jade - 5",
+          "Magical Core - 6",
+          "Blossom Gathering - 7",
+          "Glowing Rocks - 8"
+        ]
+      },
+      "system": {
+        "slug": "sensei-moro",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": null
+      }
     },
     {
-      "name": "Isaac",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Captain Rowan's Camp",
-      "role": "Quest giver",
-      "quests": [
-        "Cure for Isaac"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Isaac",
+        "area": "Forgotten Kingdom",
+        "location": "Captain Rowan's Camp",
+        "role": "Quest giver",
+        "quests": [
+          "Cure for Isaac"
+        ]
+      },
+      "system": {
+        "slug": "isaac",
+        "section": "Captain Rowan's Camp",
+        "sortOrder": 13,
+        "image": null
+      }
     },
     {
-      "name": "Farmer",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": null,
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Farmer",
+        "area": "Forgotten Kingdom",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "farmer",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": null
+      }
     },
     {
-      "name": "Fisher",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": null,
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Fisher",
+        "area": "Forgotten Kingdom",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "fisher",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": null
+      }
     },
     {
-      "name": "Skal",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Volcanic Depths",
-      "role": "Quest giver",
-      "quests": [
-        "TBD"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Skal",
+        "area": "Forgotten Kingdom",
+        "location": "Volcanic Depths",
+        "role": "Quest giver",
+        "quests": [
+          "TBD"
+        ]
+      },
+      "system": {
+        "slug": "skal",
+        "section": "Volcanic Depths",
+        "sortOrder": 16,
+        "image": null
+      }
     },
     {
-      "name": "Amber",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Ashen Passage",
-      "role": "Quest giver",
-      "quests": [
-        "TBD"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Amber",
+        "area": "Forgotten Kingdom",
+        "location": "Ashen Passage",
+        "role": "Quest giver",
+        "quests": [
+          "TBD"
+        ]
+      },
+      "system": {
+        "slug": "amber",
+        "section": "Ashen Passage",
+        "sortOrder": 17,
+        "image": null
+      }
     },
     {
-      "name": "Masked Stranger",
-      "image": null,
-      "area": "Multiple",
-      "location": "Captain Rowan's Camp; Secret Maze",
-      "role": "Quest giver",
-      "quests": [
-        "Skeletal Threat",
-        "Pirate Raid"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Masked Stranger",
+        "area": "Multiple",
+        "location": "Captain Rowan's Camp; Secret Maze",
+        "role": "Quest giver",
+        "quests": [
+          "Skeletal Threat",
+          "Pirate Raid"
+        ]
+      },
+      "system": {
+        "slug": "masked-stranger",
+        "section": "Captain Rowan's Camp; Secret Maze",
+        "sortOrder": 18,
+        "image": null
+      }
     },
     {
-      "name": "Malik",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Captain Rowan's Camp",
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Malik",
+        "area": "Forgotten Kingdom",
+        "location": "Captain Rowan's Camp",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "malik",
+        "section": "Captain Rowan's Camp",
+        "sortOrder": 19,
+        "image": null
+      }
     },
     {
-      "name": "Henry",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Captain Rowan's Camp",
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Henry",
+        "area": "Forgotten Kingdom",
+        "location": "Captain Rowan's Camp",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "henry",
+        "section": "Captain Rowan's Camp",
+        "sortOrder": 20,
+        "image": null
+      }
     },
     {
-      "name": "Line",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Line's Needs"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Line",
+        "area": "Forgotten Kingdom",
+        "role": "Quest giver",
+        "quests": [
+          "Line's Needs"
+        ]
+      },
+      "system": {
+        "slug": "line",
+        "section": "Items",
+        "sortOrder": 21,
+        "image": null
+      }
     },
     {
-      "name": "Goblin King",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Goblin Village",
-      "role": "Quest giver",
-      "quests": [
-        "Goblin King 1",
-        "Goblin King 2",
-        "Goblin King 3",
-        "Goblin King 4",
-        "Goblin King 5"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Goblin King",
+        "area": "Forgotten Kingdom",
+        "location": "Goblin Village",
+        "role": "Quest giver",
+        "quests": [
+          "Goblin King 1",
+          "Goblin King 2",
+          "Goblin King 3",
+          "Goblin King 4",
+          "Goblin King 5"
+        ]
+      },
+      "system": {
+        "slug": "goblin-king",
+        "section": "Goblin Village",
+        "sortOrder": 22,
+        "image": null
+      }
     },
     {
-      "name": "Gurak",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Goblin Village",
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Gurak",
+        "area": "Forgotten Kingdom",
+        "location": "Goblin Village",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "gurak",
+        "section": "Goblin Village",
+        "sortOrder": 23,
+        "image": null
+      }
     },
     {
-      "name": "Azuk",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Goblin Village",
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Azuk",
+        "area": "Forgotten Kingdom",
+        "location": "Goblin Village",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "azuk",
+        "section": "Goblin Village",
+        "sortOrder": 24,
+        "image": null
+      }
     },
     {
-      "name": "Barakkulf",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Basalt Extraction"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Barakkulf",
+        "area": "Forgotten Kingdom",
+        "role": "Quest giver",
+        "quests": [
+          "Basalt Extraction"
+        ]
+      },
+      "system": {
+        "slug": "barakkulf",
+        "section": "Items",
+        "sortOrder": 25,
+        "image": null
+      }
     },
     {
-      "name": "Captain Rowan",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Captain Rowan's Camp",
-      "role": "Quest giver",
-      "quests": [
-        "Captain Rowan 1"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Captain Rowan",
+        "area": "Forgotten Kingdom",
+        "location": "Captain Rowan's Camp",
+        "role": "Quest giver",
+        "quests": [
+          "Captain Rowan 1"
+        ]
+      },
+      "system": {
+        "slug": "captain-rowan",
+        "section": "Captain Rowan's Camp",
+        "sortOrder": 26,
+        "image": null
+      }
     },
     {
-      "name": "Monke",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Monke Need Bananite"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Monke",
+        "area": "Forgotten Kingdom",
+        "role": "Quest giver",
+        "quests": [
+          "Monke Need Bananite"
+        ]
+      },
+      "system": {
+        "slug": "monke",
+        "section": "Items",
+        "sortOrder": 27,
+        "image": null
+      }
     },
     {
-      "name": "Walter",
-      "image": null,
-      "area": "Forgotten Kingdom",
-      "location": "Captain Rowan's Camp",
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Walter",
+        "area": "Forgotten Kingdom",
+        "location": "Captain Rowan's Camp",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "walter",
+        "section": "Captain Rowan's Camp",
+        "sortOrder": 28,
+        "image": null
+      }
     },
     {
-      "name": "Aida",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": "Raven Cave",
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Aida",
+        "area": "Frostspire Expanse",
+        "location": "Raven Cave",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "aida",
+        "section": "Raven Cave",
+        "sortOrder": 29,
+        "image": null
+      }
     },
     {
-      "name": "Wo",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": null,
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Wo",
+        "area": "Frostspire Expanse",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "wo",
+        "section": "Items",
+        "sortOrder": 30,
+        "image": null
+      }
     },
     {
-      "name": "Fungi",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": "Secret Maze",
-      "role": "Merchant",
-      "quests": [],
-      "services": [
-        "Sells Hidden Maze blueprint items"
-      ],
-      "link": null
+      "item": {
+        "name": "Fungi",
+        "area": "Frostspire Expanse",
+        "location": "Secret Maze",
+        "role": "Merchant",
+        "services": [
+          "Sells Hidden Maze blueprint items"
+        ]
+      },
+      "system": {
+        "slug": "fungi",
+        "section": "Secret Maze",
+        "sortOrder": 31,
+        "image": null
+      }
     },
     {
-      "name": "Zachariel",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": "Secret Maze",
-      "role": "Quest giver",
-      "quests": [
-        "TBD"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Zachariel",
+        "area": "Frostspire Expanse",
+        "location": "Secret Maze",
+        "role": "Quest giver",
+        "quests": [
+          "TBD"
+        ]
+      },
+      "system": {
+        "slug": "zachariel",
+        "section": "Secret Maze",
+        "sortOrder": 32,
+        "image": null
+      }
     },
     {
-      "name": "Zarall",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": "Secret Maze",
-      "role": "Quest giver",
-      "quests": [
-        "Maze Quest 1",
-        "Maze Quest 2",
-        "Maze Quest 3"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Zarall",
+        "area": "Frostspire Expanse",
+        "location": "Secret Maze",
+        "role": "Quest giver",
+        "quests": [
+          "Maze Quest 1",
+          "Maze Quest 2",
+          "Maze Quest 3"
+        ]
+      },
+      "system": {
+        "slug": "zarall",
+        "section": "Secret Maze",
+        "sortOrder": 33,
+        "image": null
+      }
     },
     {
-      "name": "Ferry Operator",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": null,
-      "role": "Travel",
-      "quests": [],
-      "services": [
-        "Transports players between areas"
-      ],
-      "link": null
+      "item": {
+        "name": "Ferry Operator",
+        "area": "Frostspire Expanse",
+        "role": "Travel",
+        "services": [
+          "Transports players between areas"
+        ]
+      },
+      "system": {
+        "slug": "ferry-operator",
+        "section": "Items",
+        "sortOrder": 34,
+        "image": null
+      }
     },
     {
-      "name": "Bjorn",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "TBD"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Bjorn",
+        "area": "Frostspire Expanse",
+        "role": "Quest giver",
+        "quests": [
+          "TBD"
+        ]
+      },
+      "system": {
+        "slug": "bjorn",
+        "section": "Items",
+        "sortOrder": 35,
+        "image": null
+      }
     },
     {
-      "name": "LocalModuled",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "LocalModuled Cat"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "LocalModuled",
+        "area": "Frostspire Expanse",
+        "role": "Quest giver",
+        "quests": [
+          "LocalModuled Cat"
+        ]
+      },
+      "system": {
+        "slug": "localmoduled",
+        "section": "Items",
+        "sortOrder": 36,
+        "image": null
+      }
     },
     {
-      "name": "Goblin Lord",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Goblin Lord 1",
-        "Goblin Lord 2",
-        "Goblin Lord 3",
-        "Goblin Lord 4",
-        "Goblin Lord 5"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Goblin Lord",
+        "area": "Frostspire Expanse",
+        "role": "Quest giver",
+        "quests": [
+          "Goblin Lord 1",
+          "Goblin Lord 2",
+          "Goblin Lord 3",
+          "Goblin Lord 4",
+          "Goblin Lord 5"
+        ]
+      },
+      "system": {
+        "slug": "goblin-lord",
+        "section": "Items",
+        "sortOrder": 37,
+        "image": null
+      }
     },
     {
-      "name": "Agurak",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": null,
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Agurak",
+        "area": "Frostspire Expanse",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "agurak",
+        "section": "Items",
+        "sortOrder": 38,
+        "image": null
+      }
     },
     {
-      "name": "Ozuk",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": null,
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Ozuk",
+        "area": "Frostspire Expanse",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "ozuk",
+        "section": "Items",
+        "sortOrder": 39,
+        "image": null
+      }
     },
     {
-      "name": "Auron",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": "Raven Cave",
-      "role": "Quest giver",
-      "quests": [
-        "TBD"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Auron",
+        "area": "Frostspire Expanse",
+        "location": "Raven Cave",
+        "role": "Quest giver",
+        "quests": [
+          "TBD"
+        ]
+      },
+      "system": {
+        "slug": "auron",
+        "section": "Raven Cave",
+        "sortOrder": 40,
+        "image": null
+      }
     },
     {
-      "name": "Mjelatkhan",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": "Raven Cave",
-      "role": "Quest giver",
-      "quests": [
-        "TBD"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Mjelatkhan",
+        "area": "Frostspire Expanse",
+        "location": "Raven Cave",
+        "role": "Quest giver",
+        "quests": [
+          "TBD"
+        ]
+      },
+      "system": {
+        "slug": "mjelatkhan",
+        "section": "Raven Cave",
+        "sortOrder": 41,
+        "image": null
+      }
     },
     {
-      "name": "Morveth",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": "Raven Cave",
-      "role": "Quest giver",
-      "quests": [
-        "TBD"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Morveth",
+        "area": "Frostspire Expanse",
+        "location": "Raven Cave",
+        "role": "Quest giver",
+        "quests": [
+          "TBD"
+        ]
+      },
+      "system": {
+        "slug": "morveth",
+        "section": "Raven Cave",
+        "sortOrder": 42,
+        "image": null
+      }
     },
     {
-      "name": "Raven",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": "Raven Cave",
-      "role": "Quest giver",
-      "quests": [
-        "Raven Quest 1",
-        "Raven Quest 2",
-        "Raven Quest 3"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Raven",
+        "area": "Frostspire Expanse",
+        "location": "Raven Cave",
+        "role": "Quest giver",
+        "quests": [
+          "Raven Quest 1",
+          "Raven Quest 2",
+          "Raven Quest 3"
+        ]
+      },
+      "system": {
+        "slug": "raven",
+        "section": "Raven Cave",
+        "sortOrder": 43,
+        "image": null
+      }
     },
     {
-      "name": "Ice Man",
-      "image": null,
-      "area": "Frostspire Expanse",
-      "location": null,
-      "role": "NPC",
-      "quests": [],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Ice Man",
+        "area": "Frostspire Expanse",
+        "role": "NPC"
+      },
+      "system": {
+        "slug": "ice-man",
+        "section": "Items",
+        "sortOrder": 44,
+        "image": null
+      }
     },
     {
-      "name": "Santa",
-      "image": null,
-      "area": "Event",
-      "location": null,
-      "role": "Event NPC",
-      "quests": [
-        "TBD"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Santa",
+        "area": "Event",
+        "role": "Event NPC",
+        "quests": [
+          "TBD"
+        ]
+      },
+      "system": {
+        "slug": "santa",
+        "section": "Items",
+        "sortOrder": 45,
+        "image": null
+      }
     },
     {
-      "name": "Shogun",
-      "image": null,
-      "area": "Crimson Sakura Isles",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Ape Menace - 1",
-        "Savage Lands - 2",
-        "Fallen Warriors - 3",
-        "Securing the Surface - 4",
-        "The Cave's Maw - 5",
-        "The Demonic Generals - 6",
-        "Warlord's Guard - 7",
-        "Purging the Depths - 8",
-        "The Asura Threat - 9"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Shogun",
+        "area": "Crimson Sakura Isles",
+        "role": "Quest giver",
+        "quests": [
+          "Ape Menace - 1",
+          "Savage Lands - 2",
+          "Fallen Warriors - 3",
+          "Securing the Surface - 4",
+          "The Cave's Maw - 5",
+          "The Demonic Generals - 6",
+          "Warlord's Guard - 7",
+          "Purging the Depths - 8",
+          "The Asura Threat - 9"
+        ]
+      },
+      "system": {
+        "slug": "shogun",
+        "section": "Items",
+        "sortOrder": 46,
+        "image": null
+      }
     },
     {
-      "name": "Daichi",
-      "image": null,
-      "area": "Crimson Sakura Isles",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Bamboo Mining"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Daichi",
+        "area": "Crimson Sakura Isles",
+        "role": "Quest giver",
+        "quests": [
+          "Bamboo Mining"
+        ]
+      },
+      "system": {
+        "slug": "daichi",
+        "section": "Items",
+        "sortOrder": 47,
+        "image": null
+      }
     },
     {
-      "name": "Akane",
-      "image": null,
-      "area": "Crimson Sakura Isles",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Wild Monsters"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Akane",
+        "area": "Crimson Sakura Isles",
+        "role": "Quest giver",
+        "quests": [
+          "Wild Monsters"
+        ]
+      },
+      "system": {
+        "slug": "akane",
+        "section": "Items",
+        "sortOrder": 48,
+        "image": null
+      }
     },
     {
-      "name": "Merfarukier",
-      "image": null,
-      "area": "Crimson Sakura Isles",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Warrior Beasts"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Merfarukier",
+        "area": "Crimson Sakura Isles",
+        "role": "Quest giver",
+        "quests": [
+          "Warrior Beasts"
+        ]
+      },
+      "system": {
+        "slug": "merfarukier",
+        "section": "Items",
+        "sortOrder": 49,
+        "image": null
+      }
     },
     {
-      "name": "Tsukiyo",
-      "image": null,
-      "area": "Crimson Sakura Isles",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Blossom Mining"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Tsukiyo",
+        "area": "Crimson Sakura Isles",
+        "role": "Quest giver",
+        "quests": [
+          "Blossom Mining"
+        ]
+      },
+      "system": {
+        "slug": "tsukiyo",
+        "section": "Items",
+        "sortOrder": 50,
+        "image": null
+      }
     },
     {
-      "name": "Tetsuya",
-      "image": null,
-      "area": "Crimson Sakura Isles",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Oni Threat"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Tetsuya",
+        "area": "Crimson Sakura Isles",
+        "role": "Quest giver",
+        "quests": [
+          "Oni Threat"
+        ]
+      },
+      "system": {
+        "slug": "tetsuya",
+        "section": "Items",
+        "sortOrder": 51,
+        "image": null
+      }
     },
     {
-      "name": "Inverted",
-      "image": null,
-      "area": "Crimson Sakura Isles",
-      "location": null,
-      "role": "Quest giver",
-      "quests": [
-        "Elite Oni Threat"
-      ],
-      "services": [],
-      "link": null
+      "item": {
+        "name": "Inverted",
+        "area": "Crimson Sakura Isles",
+        "role": "Quest giver",
+        "quests": [
+          "Elite Oni Threat"
+        ]
+      },
+      "system": {
+        "slug": "inverted",
+        "section": "Items",
+        "sortOrder": 52,
+        "image": null
+      }
     }
   ]
 }

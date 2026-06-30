@@ -1,58 +1,12 @@
 {
   "meta": {
-    "title": "Wizard Alchemy potions data",
-    "updatedAt": "2026-05-23",
-    "sources": [
-      {
-        "label": "BloxInformer - Wizard Alchemy Potions",
-        "url": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "Beebom - Wizard Alchemy Potions (Spells) Guide",
-        "url": "https://beebom.com/wizard-alchemy-potions-spells-guide/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "Pro Game Guides - All Wands, Hats & Potions in Wizard Alchemy",
-        "url": "https://progameguides.com/roblox/all-wands-hats-potions-in-wizard-alchemy/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "Destructoid - All Potions & Materials in Wizard Alchemy",
-        "url": "https://www.destructoid.com/all-potions-and-materials-in-wizard-alchemy/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "Gamezebo - How to Brew Wizard Alchemy Potions",
-        "url": "https://www.gamezebo.com/walkthroughs/wizard-alchemy-potions/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "Roblox - Wizard Alchemy",
-        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
-        "accessed": "2026-05-23"
-      }
-    ],
-    "sourceAudit": {
-      "primaryCount": 26,
-      "primaryCountSource": "BloxInformer current New Mainland page",
-      "olderSourceCounts": {
-        "Beebom": 15,
-        "Destructoid": 15,
-        "Gamezebo": 15,
-        "Pro Game Guides": 14
-      },
-      "notes": [
-        "BloxInformer lists 15 Departure Isle potions and 11 Sea of Oblivion potions after the New Mainland update.",
-        "Older guide pages mostly stop at the pre-New Mainland potion list and miss the Sea of Oblivion potion rows.",
-        "Night Wraith threshold disagrees across sources: BloxInformer lists 130 Magic, Beebom and Destructoid list 129 Magic, and Gamezebo has a likely stale 105 Magic row. Use 130 from the current BloxInformer table until in-game UI verification confirms otherwise.",
-        "BloxInformer spells Lithe as Iithe in the table, while Beebom, Pro Game Guides, and Gamezebo spell it Lithe."
-      ]
-    },
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Wizard Alchemy",
+    "gameSlug": "wizard-alchemy",
+    "collection": "potions",
+    "route": "/wiki/wizard-alchemy/potions",
+    "catalogCode": "wizard-alchemy-potions",
+    "itemFields": [
       "category",
       "minMagic",
       "power",
@@ -60,428 +14,505 @@
       "sellPrice",
       "spellRole",
       "recommendedShard",
-      "compatibleRace",
-      "sourcePage",
-      "sourceImageUrl",
-      "rawText"
-    ]
+      "compatibleRace"
+    ],
+    "columns": [
+      "category",
+      "minMagic",
+      "power",
+      "effect",
+      "sellPrice",
+      "spellRole",
+      "recommendedShard",
+      "compatibleRace"
+    ],
+    "display": {
+      "groupLabel": "category",
+      "sectionOrder": [
+        "Departure Isle potions",
+        "Sea of Oblivion potions"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "category",
+        "minMagic",
+        "power",
+        "effect",
+        "sellPrice",
+        "spellRole"
+      ],
+      "tableFields": [
+        "category",
+        "minMagic",
+        "power",
+        "effect",
+        "sellPrice",
+        "spellRole",
+        "recommendedShard",
+        "compatibleRace"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Wind Blade Potion",
-      "slug": "wind-blade-potion",
-      "image": "/Wizard%20Alchemy/Potions/wind-blade-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 6,
-      "power": 24,
-      "effect": "Starter wind attack for the first farming route.",
-      "sellPrice": "12 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Wind Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Wind-Blade-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Wind Blade Potion, 6 Magic, Power 24, 12 Gold."
+      "item": {
+        "name": "Wind Blade Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 6,
+        "power": 24,
+        "effect": "Starter wind attack for the first farming route.",
+        "sellPrice": "12 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Wind Shard"
+      },
+      "system": {
+        "slug": "wind-blade-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 1,
+        "image": "/Wizard%20Alchemy/Potions/wind-blade-potion.png"
+      }
     },
     {
-      "name": "Rock Blast Potion",
-      "slug": "rock-blast-potion",
-      "image": "/Wizard%20Alchemy/Potions/rock-blast-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 8,
-      "power": 28,
-      "effect": "Starter rock attack that arrives just above Wind Blade.",
-      "sellPrice": "16 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Earth Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Rock-Blast-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Rock Blast Potion, 8 Magic, Power 28, 16 Gold."
+      "item": {
+        "name": "Rock Blast Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 8,
+        "power": 28,
+        "effect": "Starter rock attack that arrives just above Wind Blade.",
+        "sellPrice": "16 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Earth Shard"
+      },
+      "system": {
+        "slug": "rock-blast-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 2,
+        "image": "/Wizard%20Alchemy/Potions/rock-blast-potion.png"
+      }
     },
     {
-      "name": "Ice Spike Potion",
-      "slug": "ice-spike-potion",
-      "image": "/Wizard%20Alchemy/Potions/ice-spike-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 10,
-      "power": 28,
-      "effect": "Starter ice attack before the large jump to 40 Magic.",
-      "sellPrice": "20 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Ice Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Ice-Spike-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Ice Spike Potion, 10 Magic, Power 28, 20 Gold."
+      "item": {
+        "name": "Ice Spike Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 10,
+        "power": 28,
+        "effect": "Starter ice attack before the large jump to 40 Magic.",
+        "sellPrice": "20 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Ice Shard"
+      },
+      "system": {
+        "slug": "ice-spike-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 3,
+        "image": "/Wizard%20Alchemy/Potions/ice-spike-potion.png"
+      }
     },
     {
-      "name": "Lithe Potion",
-      "slug": "lithe-potion",
-      "image": "/Wizard%20Alchemy/Potions/lithe-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 40,
-      "power": null,
-      "effect": "Movement-speed utility spell for travel and repositioning.",
-      "sellPrice": "80 Gold",
-      "spellRole": "Movement utility",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Iithe-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row spells the name as Iithe Potion; Beebom, Pro Game Guides, and Gamezebo spell it Lithe Potion. BloxInformer row: 40 Magic, movement speed effect, 80 Gold."
+      "item": {
+        "name": "Lithe Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 40,
+        "effect": "Movement-speed utility spell for travel and repositioning.",
+        "sellPrice": "80 Gold",
+        "spellRole": "Movement utility"
+      },
+      "system": {
+        "slug": "lithe-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 4,
+        "image": "/Wizard%20Alchemy/Potions/lithe-potion.png"
+      }
     },
     {
-      "name": "Fire Arrow Potion",
-      "slug": "fire-arrow-potion",
-      "image": "/Wizard%20Alchemy/Potions/fire-arrow-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 45,
-      "power": 34,
-      "effect": "Early fire attack for stronger Departure Isle farming.",
-      "sellPrice": "88 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Fire Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Fire-Arrow-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Fire Arrow Potion, 45 Magic, Power 34, 88 Gold."
+      "item": {
+        "name": "Fire Arrow Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 45,
+        "power": 34,
+        "effect": "Early fire attack for stronger Departure Isle farming.",
+        "sellPrice": "88 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Fire Shard"
+      },
+      "system": {
+        "slug": "fire-arrow-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 5,
+        "image": "/Wizard%20Alchemy/Potions/fire-arrow-potion.png"
+      }
     },
     {
-      "name": "Earth Shield Potion",
-      "slug": "earth-shield-potion",
-      "image": "/Wizard%20Alchemy/Potions/earth-shield-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 48,
-      "power": 42,
-      "effect": "Earth defense spell for safer fights.",
-      "sellPrice": "98 Gold",
-      "spellRole": "Defense spell",
-      "recommendedShard": "Earth Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Earth-Shield-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Earth Shield Potion, 48 Magic, Power 42, 98 Gold."
+      "item": {
+        "name": "Earth Shield Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 48,
+        "power": 42,
+        "effect": "Earth defense spell for safer fights.",
+        "sellPrice": "98 Gold",
+        "spellRole": "Defense spell",
+        "recommendedShard": "Earth Shard"
+      },
+      "system": {
+        "slug": "earth-shield-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 6,
+        "image": "/Wizard%20Alchemy/Potions/earth-shield-potion.png"
+      }
     },
     {
-      "name": "Ice Turtle Potion",
-      "slug": "ice-turtle-potion",
-      "image": "/Wizard%20Alchemy/Potions/ice-turtle-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 52,
-      "power": null,
-      "effect": "Counter-style armor spell that deals damage when enemies hit you.",
-      "sellPrice": "104 Gold",
-      "spellRole": "Counter defense",
-      "recommendedShard": "Ice Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Ice-Turtle-Armor-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Ice Turtle Potion, 52 Magic, deal damage whenever you get hit, 104 Gold."
+      "item": {
+        "name": "Ice Turtle Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 52,
+        "effect": "Counter-style armor spell that deals damage when enemies hit you.",
+        "sellPrice": "104 Gold",
+        "spellRole": "Counter defense",
+        "recommendedShard": "Ice Shard"
+      },
+      "system": {
+        "slug": "ice-turtle-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 7,
+        "image": "/Wizard%20Alchemy/Potions/ice-turtle-potion.png"
+      }
     },
     {
-      "name": "Tornado Potion",
-      "slug": "tornado-potion",
-      "image": "/Wizard%20Alchemy/Potions/tornado-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 70,
-      "power": 45,
-      "effect": "Wind attack spell for the first 70-Magic tier.",
-      "sellPrice": "140 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Wind Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Tornado-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Tornado Potion, 70 Magic, Power 45, 140 Gold. Beebom describes it as a short-cooldown spell."
+      "item": {
+        "name": "Tornado Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 70,
+        "power": 45,
+        "effect": "Wind attack spell for the first 70-Magic tier.",
+        "sellPrice": "140 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Wind Shard"
+      },
+      "system": {
+        "slug": "tornado-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 8,
+        "image": "/Wizard%20Alchemy/Potions/tornado-potion.png"
+      }
     },
     {
-      "name": "Meteorite Potion",
-      "slug": "meteorite-potion",
-      "image": "/Wizard%20Alchemy/Potions/meteorite-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 74,
-      "power": 50,
-      "effect": "Mid-tier attack spell with higher listed Power than Tornado.",
-      "sellPrice": "148 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Meteorite-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Meteorite Potion, 74 Magic, Power 50, 148 Gold."
+      "item": {
+        "name": "Meteorite Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 74,
+        "power": 50,
+        "effect": "Mid-tier attack spell with higher listed Power than Tornado.",
+        "sellPrice": "148 Gold",
+        "spellRole": "Attack spell"
+      },
+      "system": {
+        "slug": "meteorite-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 9,
+        "image": "/Wizard%20Alchemy/Potions/meteorite-potion.png"
+      }
     },
     {
-      "name": "Earth Spike Potion",
-      "slug": "earth-spike-potion",
-      "image": "/Wizard%20Alchemy/Potions/earth-spike-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 77,
-      "power": 61,
-      "effect": "Earth attack spell with one of the stronger pre-80 Power values.",
-      "sellPrice": "154 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Earth Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Earth-Spike-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Earth Spike Potion, 77 Magic, Power 61, 154 Gold."
+      "item": {
+        "name": "Earth Spike Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 77,
+        "power": 61,
+        "effect": "Earth attack spell with one of the stronger pre-80 Power values.",
+        "sellPrice": "154 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Earth Shard"
+      },
+      "system": {
+        "slug": "earth-spike-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 10,
+        "image": "/Wizard%20Alchemy/Potions/earth-spike-potion.png"
+      }
     },
     {
-      "name": "Frost Thorns Potion",
-      "slug": "frost-thorns-potion",
-      "image": "/Wizard%20Alchemy/Potions/frost-thorns-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 80,
-      "power": 48,
-      "effect": "Ice attack spell that older guides call a practical late-game farming pick.",
-      "sellPrice": "160 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Ice Shard",
-      "compatibleRace": "Ice Crystal",
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Frost-Thorns-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Frost Thorns Potion, 80 Magic, Power 48, 160 Gold. Beebom lists Ice Crystal as the compatible race."
+      "item": {
+        "name": "Frost Thorns Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 80,
+        "power": 48,
+        "effect": "Ice attack spell that older guides call a practical late-game farming pick.",
+        "sellPrice": "160 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Ice Shard",
+        "compatibleRace": "Ice Crystal"
+      },
+      "system": {
+        "slug": "frost-thorns-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 11,
+        "image": "/Wizard%20Alchemy/Potions/frost-thorns-potion.png"
+      }
     },
     {
-      "name": "Dragon Breath Potion",
-      "slug": "dragon-breath-potion",
-      "image": "/Wizard%20Alchemy/Potions/dragon-breath-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 99,
-      "power": 76,
-      "effect": "Fire attack spell for the first high-90s threshold.",
-      "sellPrice": "198 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Fire Shard",
-      "compatibleRace": "Fiendish Demon",
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Dragon-Breath-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Dragon Breath Potion, 99 Magic, Power 76, 198 Gold. Beebom lists Fiendish Demon as the compatible race."
+      "item": {
+        "name": "Dragon Breath Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 99,
+        "power": 76,
+        "effect": "Fire attack spell for the first high-90s threshold.",
+        "sellPrice": "198 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Fire Shard",
+        "compatibleRace": "Fiendish Demon"
+      },
+      "system": {
+        "slug": "dragon-breath-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 12,
+        "image": "/Wizard%20Alchemy/Potions/dragon-breath-potion.png"
+      }
     },
     {
-      "name": "Lotus Bloom Potion",
-      "slug": "lotus-bloom-potion",
-      "image": "/Wizard%20Alchemy/Potions/lotus-bloom-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 100,
-      "power": 78,
-      "effect": "High-threshold attack spell that older guides describe as strong but slower to use.",
-      "sellPrice": "200 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Lotus-Bloom-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Lotus Bloom Potion, 100 Magic, Power 78, 200 Gold."
+      "item": {
+        "name": "Lotus Bloom Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 100,
+        "power": 78,
+        "effect": "High-threshold attack spell that older guides describe as strong but slower to use.",
+        "sellPrice": "200 Gold",
+        "spellRole": "Attack spell"
+      },
+      "system": {
+        "slug": "lotus-bloom-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 13,
+        "image": "/Wizard%20Alchemy/Potions/lotus-bloom-potion.png"
+      }
     },
     {
-      "name": "Radiant Sword Potion",
-      "slug": "radiant-sword-potion",
-      "image": "/Wizard%20Alchemy/Potions/radiant-sword-potion.png",
-      "category": "Departure Isle potions",
-      "minMagic": 105,
-      "power": 89,
-      "effect": "Light attack spell and the strongest 105-Magic Departure Isle row.",
-      "sellPrice": "210 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Light Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Radiant-Sword-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer row: Radiant Sword Potion, 105 Magic, Power 89, 210 Gold. Pro Game Guides calls Radiant Sword the best potion in its older 14-potion list."
+      "item": {
+        "name": "Radiant Sword Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 105,
+        "power": 89,
+        "effect": "Light attack spell and the strongest 105-Magic Departure Isle row.",
+        "sellPrice": "210 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Light Shard"
+      },
+      "system": {
+        "slug": "radiant-sword-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 14,
+        "image": "/Wizard%20Alchemy/Potions/radiant-sword-potion.png"
+      }
     },
     {
-      "name": "Night Wraith Potion",
-      "slug": "night-wraith-potion",
-      "image": "/Wizard%20Alchemy/Potions/night-wraith-potion.jpg",
-      "category": "Departure Isle potions",
-      "minMagic": 130,
-      "power": 148,
-      "effect": "Dark endgame attack spell with the highest Departure Isle Power value listed.",
-      "sellPrice": "258 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Dark Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/wizard-alchemy-night-wraith-potion.jpg",
-      "rawText": "BloxInformer row names it Night Wraith and lists 130 Magic, Power 148, 258 Gold. Beebom and Destructoid list Night Wraith Potion at 129 Magic. Gamezebo has a likely stale 105 Magic row."
+      "item": {
+        "name": "Night Wraith Potion",
+        "category": "Departure Isle potions",
+        "minMagic": 130,
+        "power": 148,
+        "effect": "Dark endgame attack spell with the highest Departure Isle Power value listed.",
+        "sellPrice": "258 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Dark Shard"
+      },
+      "system": {
+        "slug": "night-wraith-potion",
+        "section": "Departure Isle potions",
+        "sortOrder": 15,
+        "image": "/Wizard%20Alchemy/Potions/night-wraith-potion.jpg"
+      }
     },
     {
-      "name": "Wood Splinter Potion",
-      "slug": "wood-splinter-potion",
-      "image": "/Wizard%20Alchemy/Potions/wood-splinter-potion.png",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 30,
-      "power": 27,
-      "effect": "First listed Sea of Oblivion attack spell.",
-      "sellPrice": "60 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Wood-Splinter-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer Sea of Oblivion row: Wood Splinter Potion, 30 Magic, Power 27, 60 Gold."
+      "item": {
+        "name": "Wood Splinter Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 30,
+        "power": 27,
+        "effect": "First listed Sea of Oblivion attack spell.",
+        "sellPrice": "60 Gold",
+        "spellRole": "Attack spell"
+      },
+      "system": {
+        "slug": "wood-splinter-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 16,
+        "image": "/Wizard%20Alchemy/Potions/wood-splinter-potion.png"
+      }
     },
     {
-      "name": "Thunder Strike Potion",
-      "slug": "thunder-strike-potion",
-      "image": "/Wizard%20Alchemy/Potions/thunder-strike-potion.png",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 40,
-      "power": 24,
-      "effect": "Sea of Oblivion thunder attack spell at the 40-Magic threshold.",
-      "sellPrice": "80 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Thunder-Strike-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer Sea of Oblivion row: Thunder Strike Potion, 40 Magic, Power 24, 80 Gold."
+      "item": {
+        "name": "Thunder Strike Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 40,
+        "power": 24,
+        "effect": "Sea of Oblivion thunder attack spell at the 40-Magic threshold.",
+        "sellPrice": "80 Gold",
+        "spellRole": "Attack spell"
+      },
+      "system": {
+        "slug": "thunder-strike-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 17,
+        "image": "/Wizard%20Alchemy/Potions/thunder-strike-potion.png"
+      }
     },
     {
-      "name": "Twisting Potion",
-      "slug": "twisting-potion",
-      "image": "/Wizard%20Alchemy/Potions/twisting-potion.png",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 60,
-      "power": 39,
-      "effect": "Sea of Oblivion attack spell between the 40 and 75 Magic rows.",
-      "sellPrice": "120 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Twisting-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer Sea of Oblivion row: Twisting Potion, 60 Magic, Power 39, 120 Gold."
+      "item": {
+        "name": "Twisting Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 60,
+        "power": 39,
+        "effect": "Sea of Oblivion attack spell between the 40 and 75 Magic rows.",
+        "sellPrice": "120 Gold",
+        "spellRole": "Attack spell"
+      },
+      "system": {
+        "slug": "twisting-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 18,
+        "image": "/Wizard%20Alchemy/Potions/twisting-potion.png"
+      }
     },
     {
-      "name": "Twin Currents Potion",
-      "slug": "twin-currents-potion",
-      "image": "/Wizard%20Alchemy/Potions/twin-currents-potion.png",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 75,
-      "power": null,
-      "effect": "Damage-buff potion that increases damage by 30%.",
-      "sellPrice": "150 Gold",
-      "spellRole": "Damage buff",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Twin-Current-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer Sea of Oblivion row: Twin Currents Potion, 75 Magic, increase damage by 30%, 150 Gold."
+      "item": {
+        "name": "Twin Currents Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 75,
+        "effect": "Damage-buff potion that increases damage by 30%.",
+        "sellPrice": "150 Gold",
+        "spellRole": "Damage buff"
+      },
+      "system": {
+        "slug": "twin-currents-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 19,
+        "image": "/Wizard%20Alchemy/Potions/twin-currents-potion.png"
+      }
     },
     {
-      "name": "Wood Thorn Potion",
-      "slug": "wood-thorn-potion",
-      "image": "/Wizard%20Alchemy/Potions/wood-thorn-potion.webp",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 105,
-      "power": 52,
-      "effect": "Sea of Oblivion wood attack spell at the 105-Magic threshold.",
-      "sellPrice": "210 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/wizard-alchemy-wood-thorn-potion.webp",
-      "rawText": "BloxInformer Sea of Oblivion row: Wood Thorn Potion, 105 Magic, Power 52, 210 Gold."
+      "item": {
+        "name": "Wood Thorn Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 105,
+        "power": 52,
+        "effect": "Sea of Oblivion wood attack spell at the 105-Magic threshold.",
+        "sellPrice": "210 Gold",
+        "spellRole": "Attack spell"
+      },
+      "system": {
+        "slug": "wood-thorn-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 20,
+        "image": "/Wizard%20Alchemy/Potions/wood-thorn-potion.webp"
+      }
     },
     {
-      "name": "Thunder Ball Potion",
-      "slug": "thunder-ball-potion",
-      "image": "/Wizard%20Alchemy/Potions/thunder-ball-potion.webp",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 112,
-      "power": 45,
-      "effect": "Sea of Oblivion thunder attack spell above Wood Thorn.",
-      "sellPrice": "224 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/wizard-alchemy-thunder-ball-potion.webp",
-      "rawText": "BloxInformer Sea of Oblivion row: Thunder Ball Potion, 112 Magic, Power 45, 224 Gold."
+      "item": {
+        "name": "Thunder Ball Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 112,
+        "power": 45,
+        "effect": "Sea of Oblivion thunder attack spell above Wood Thorn.",
+        "sellPrice": "224 Gold",
+        "spellRole": "Attack spell"
+      },
+      "system": {
+        "slug": "thunder-ball-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 21,
+        "image": "/Wizard%20Alchemy/Potions/thunder-ball-potion.webp"
+      }
     },
     {
-      "name": "Bolide Potion",
-      "slug": "bolide-potion",
-      "image": "/Wizard%20Alchemy/Potions/bolide-potion.webp",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 120,
-      "power": 52,
-      "effect": "Sea of Oblivion meteor-style attack spell.",
-      "sellPrice": "240 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/wizard-alchemy-bolide-potion.webp",
-      "rawText": "BloxInformer Sea of Oblivion row: Bolide Potion, 120 Magic, Power 52, 240 Gold."
+      "item": {
+        "name": "Bolide Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 120,
+        "power": 52,
+        "effect": "Sea of Oblivion meteor-style attack spell.",
+        "sellPrice": "240 Gold",
+        "spellRole": "Attack spell"
+      },
+      "system": {
+        "slug": "bolide-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 22,
+        "image": "/Wizard%20Alchemy/Potions/bolide-potion.webp"
+      }
     },
     {
-      "name": "Thunder Revenge Potion",
-      "slug": "thunder-revenge-potion",
-      "image": "/Wizard%20Alchemy/Potions/thunder-revenge-potion.webp",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 150,
-      "power": 70,
-      "effect": "Higher Sea of Oblivion thunder attack spell.",
-      "sellPrice": "300 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": null,
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/wizard-alchemy-thunder-revenge-potion.webp",
-      "rawText": "BloxInformer Sea of Oblivion row: Thunder Revenge Potion, 150 Magic, Power 70, 300 Gold."
+      "item": {
+        "name": "Thunder Revenge Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 150,
+        "power": 70,
+        "effect": "Higher Sea of Oblivion thunder attack spell.",
+        "sellPrice": "300 Gold",
+        "spellRole": "Attack spell"
+      },
+      "system": {
+        "slug": "thunder-revenge-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 23,
+        "image": "/Wizard%20Alchemy/Potions/thunder-revenge-potion.webp"
+      }
     },
     {
-      "name": "Incendies Potion",
-      "slug": "incendies-potion",
-      "image": "/Wizard%20Alchemy/Potions/incendies-potion.webp",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 160,
-      "power": 78,
-      "effect": "High Sea of Oblivion fire attack spell.",
-      "sellPrice": "320 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Fire Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/wizard-alchemy-incendies-potion.webp",
-      "rawText": "BloxInformer Sea of Oblivion row: Incendies Potion, 160 Magic, Power 78, 320 Gold."
+      "item": {
+        "name": "Incendies Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 160,
+        "power": 78,
+        "effect": "High Sea of Oblivion fire attack spell.",
+        "sellPrice": "320 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Fire Shard"
+      },
+      "system": {
+        "slug": "incendies-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 24,
+        "image": "/Wizard%20Alchemy/Potions/incendies-potion.webp"
+      }
     },
     {
-      "name": "Molten Core Potion",
-      "slug": "molten-core-potion",
-      "image": "/Wizard%20Alchemy/Potions/molten-core-potion.png",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 230,
-      "power": 140,
-      "effect": "Late Sea of Oblivion fire attack spell with 140 listed Power.",
-      "sellPrice": "450 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Fire Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Molten-Core-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer Sea of Oblivion row: Molten Core Potion, 230 Magic, Power 140, 450 Gold."
+      "item": {
+        "name": "Molten Core Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 230,
+        "power": 140,
+        "effect": "Late Sea of Oblivion fire attack spell with 140 listed Power.",
+        "sellPrice": "450 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Fire Shard"
+      },
+      "system": {
+        "slug": "molten-core-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 25,
+        "image": "/Wizard%20Alchemy/Potions/molten-core-potion.png"
+      }
     },
     {
-      "name": "Solar Flare Potion",
-      "slug": "solar-flare-potion",
-      "image": "/Wizard%20Alchemy/Potions/solar-flare-potion.png",
-      "category": "Sea of Oblivion potions",
-      "minMagic": 245,
-      "power": 160,
-      "effect": "Highest Magic and Power potion currently listed.",
-      "sellPrice": "490 Gold",
-      "spellRole": "Attack spell",
-      "recommendedShard": "Light Shard",
-      "compatibleRace": null,
-      "sourcePage": "https://bloxinformer.com/wikis/wizard-alchemy/potions/",
-      "sourceImageUrl": "https://bloxinformer.com/wp-content/uploads/2026/05/Solar-Flare-Potion-Wizard-Alchemy.png",
-      "rawText": "BloxInformer Sea of Oblivion row: Solar Flare Potion, 245 Magic, Power 160, 490 Gold. BloxInformer also links a Solar Flare Potion detail page."
+      "item": {
+        "name": "Solar Flare Potion",
+        "category": "Sea of Oblivion potions",
+        "minMagic": 245,
+        "power": 160,
+        "effect": "Highest Magic and Power potion currently listed.",
+        "sellPrice": "490 Gold",
+        "spellRole": "Attack spell",
+        "recommendedShard": "Light Shard"
+      },
+      "system": {
+        "slug": "solar-flare-potion",
+        "section": "Sea of Oblivion potions",
+        "sortOrder": 26,
+        "image": "/Wizard%20Alchemy/Potions/solar-flare-potion.png"
+      }
     }
   ]
 }

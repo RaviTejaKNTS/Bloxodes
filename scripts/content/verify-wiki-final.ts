@@ -79,10 +79,10 @@ async function findFile(candidates: string[]) {
   throw new Error(`Could not find wiki final.json. Checked: ${candidates.join(", ")}`);
 }
 
-async function readWikiFinal(file: string): Promise<WikiFinal> {
+async function readWikiFinal(file: string, expectedGame: string): Promise<WikiFinal> {
   const parsed = JSON.parse(await readFile(file, "utf8")) as WikiFinal;
   validateWikiControlsJson(parsed.controls_json, "final.json controls_json");
-  if (parsed.slug && parsed.slug.trim().toLowerCase() !== path.basename(path.dirname(path.dirname(file)))) {
+  if (parsed.slug && parsed.slug.trim().toLowerCase() !== expectedGame) {
     // The seed script also checks this; this warning keeps verifier output direct when the path shape is different.
     console.warn(`Warning: final.json slug is ${parsed.slug}`);
   }
@@ -150,11 +150,12 @@ async function main() {
     : path.resolve(process.cwd(), options.finalJsonRoot);
   const finalJsonPath = await findFile([
     path.join(root, options.game, "wiki", "final.json"),
+    path.join(root, "wiki", options.game, "final.json"),
     path.join(root, options.game, "final.json"),
     path.join(root, "wiki", "final.json"),
     path.join(root, "final.json"),
   ]);
-  const finalJson = await readWikiFinal(finalJsonPath);
+  const finalJson = await readWikiFinal(finalJsonPath, options.game);
 
   await runCommand("npm", ["run", "content:check-copy", "--", finalJsonPath]);
   await runCommand("npm", [

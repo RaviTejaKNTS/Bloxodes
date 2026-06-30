@@ -1,28 +1,12 @@
 {
   "meta": {
-    "title": "Wizard Alchemy brooms data",
-    "updatedAt": "2026-05-23",
-    "sources": [
-      {
-        "label": "Beebom - All Wizard Alchemy Brooms and How to Get Them",
-        "url": "https://beebom.com/wizard-alchemy-brooms-guide/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "BloxInformer - Wizard Alchemy Wiki",
-        "url": "https://bloxinformer.com/wikis/wizard-alchemy/",
-        "accessed": "2026-05-23"
-      },
-      {
-        "label": "Roblox - Wizard Alchemy",
-        "url": "https://www.roblox.com/games/118821269826806/Wizard-Alchemy",
-        "accessed": "2026-05-23"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
-      "collectionSection",
+    "schemaVersion": 2,
+    "game": "Wizard Alchemy",
+    "gameSlug": "wizard-alchemy",
+    "collection": "brooms",
+    "route": "/wiki/wizard-alchemy/brooms",
+    "catalogCode": "wizard-alchemy-brooms",
+    "itemFields": [
       "rarity",
       "price",
       "priceCoins",
@@ -33,42 +17,94 @@
       "availability",
       "obtainment",
       "notes"
-    ]
+    ],
+    "columns": [
+      "rarity",
+      "price",
+      "priceCoins",
+      "location",
+      "acceleration",
+      "maxAcceleration",
+      "progressionRole",
+      "availability",
+      "obtainment",
+      "notes"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Common",
+        "Epic"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": "notes",
+      "cardDescriptionField": "notes",
+      "cardFields": [
+        "rarity",
+        "price",
+        "priceCoins",
+        "location",
+        "acceleration",
+        "maxAcceleration"
+      ],
+      "tableFields": [
+        "rarity",
+        "price",
+        "priceCoins",
+        "location",
+        "acceleration",
+        "maxAcceleration",
+        "progressionRole",
+        "availability"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Apprentice Broom",
-      "slug": "apprentice-broom",
-      "image": "/Wizard%20Alchemy/Brooms/apprentice-broom.png",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/05/image_ff4152.png?quality=75&w=227",
-      "collectionSection": "Brooms",
-      "rarity": "Common",
-      "price": "3K Coins",
-      "priceCoins": 3000,
-      "location": "Under the portal at Departure Island beach",
-      "acceleration": 10,
-      "maxAcceleration": 35,
-      "progressionRole": "Starter travel",
-      "availability": "Current",
-      "obtainment": "Buy from its map purchase spot",
-      "notes": "Entry broom for early map travel before the Sea of Oblivion upgrade."
+      "item": {
+        "name": "Apprentice Broom",
+        "rarity": "Common",
+        "price": "3K Coins",
+        "priceCoins": 3000,
+        "location": "Under the portal at Departure Island beach",
+        "acceleration": 10,
+        "maxAcceleration": 35,
+        "progressionRole": "Starter travel",
+        "availability": "Current",
+        "obtainment": "Buy from its map purchase spot",
+        "notes": "Entry broom for early map travel before the Sea of Oblivion upgrade."
+      },
+      "system": {
+        "slug": "apprentice-broom",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Wizard%20Alchemy/Brooms/apprentice-broom.png"
+      }
     },
     {
-      "name": "Lava Broom",
-      "slug": "lava-broom",
-      "image": "/Wizard%20Alchemy/Brooms/lava-broom.png",
-      "sourceImageUrl": "https://static.beebom.com/wp-content/uploads/2026/05/image_987fee.png?quality=75&w=208",
-      "collectionSection": "Brooms",
-      "rarity": "Epic",
-      "price": "50K Coins",
-      "priceCoins": 50000,
-      "location": "Right of Alchemy in Sea of Oblivion",
-      "acceleration": 25,
-      "maxAcceleration": 50,
-      "progressionRole": "Faster Sea of Oblivion travel",
-      "availability": "Current",
-      "obtainment": "Buy from its map purchase spot",
-      "notes": "Current top broom by listed acceleration and max acceleration."
+      "item": {
+        "name": "Lava Broom",
+        "rarity": "Epic",
+        "price": "50K Coins",
+        "priceCoins": 50000,
+        "location": "Right of Alchemy in Sea of Oblivion",
+        "acceleration": 25,
+        "maxAcceleration": 50,
+        "progressionRole": "Faster Sea of Oblivion travel",
+        "availability": "Current",
+        "obtainment": "Buy from its map purchase spot",
+        "notes": "Current top broom by listed acceleration and max acceleration."
+      },
+      "system": {
+        "slug": "lava-broom",
+        "section": "Epic",
+        "sortOrder": 2,
+        "image": "/Wizard%20Alchemy/Brooms/lava-broom.png"
+      }
     }
   ]
 }

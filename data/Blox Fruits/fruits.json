@@ -1,1338 +1,999 @@
 {
   "meta": {
-    "title": "Blox Fruits fruits data",
-    "updatedAt": "2026-05-07",
-    "sources": [
-      {
-        "label": "Blox Fruits Wiki - Blox_Fruits",
-        "url": "https://blox-fruits.fandom.com/wiki/Blox_Fruits",
-        "accessed": "2026-05-07"
-      }
-    ],
-    "columns": [
-      "name",
-      "image",
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "fruits",
+    "route": "/wiki/blox-fruits/fruits",
+    "catalogCode": "blox-fruits-fruits",
+    "itemFields": [
       "rarity",
       "type",
       "money",
       "robux",
-      "obtainment",
       "upgrading",
-      "wikiUrl"
-    ]
+      "price",
+      "awakening",
+      "unavailableReason"
+    ],
+    "columns": [
+      "rarity",
+      "type",
+      "money",
+      "robux",
+      "upgrading",
+      "price",
+      "awakening",
+      "unavailableReason"
+    ],
+    "display": {
+      "groupLabel": "type",
+      "sectionOrder": [
+        "Natural",
+        "Elemental",
+        "Beast",
+        "N/A"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": null,
+      "cardFields": [
+        "rarity",
+        "type",
+        "money",
+        "robux",
+        "upgrading",
+        "price"
+      ],
+      "tableFields": [
+        "rarity",
+        "type",
+        "money",
+        "robux",
+        "upgrading",
+        "price",
+        "awakening",
+        "unavailableReason"
+      ],
+      "fieldPresentation": null
+    }
   },
   "items": [
     {
-      "name": "Rocket",
-      "slug": "rocket",
-      "rarity": "Common",
-      "type": "Natural",
-      "sea": null,
-      "money": "5,000",
-      "robux": "50",
-      "source": null,
-      "price": "5,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Common Natural 5,000 50",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rocket",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/rocket.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/fb/Rocket.png/revision/latest/scale-to-width-down/150?cb=20231025151449"
+      "item": {
+        "name": "Rocket",
+        "rarity": "Common",
+        "type": "Natural",
+        "money": "5,000",
+        "robux": "50",
+        "price": "5,000"
+      },
+      "system": {
+        "slug": "rocket",
+        "section": "Natural",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Fruits/rocket.webp"
+      }
     },
     {
-      "name": "Spin",
-      "slug": "spin",
-      "rarity": "Common",
-      "type": "Natural",
-      "sea": null,
-      "money": "7,500",
-      "robux": "75",
-      "source": null,
-      "price": "7,500",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Common Natural 7,500 75",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Spin",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/spin.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/45/Spin.png/revision/latest/scale-to-width-down/150?cb=20231106233530"
+      "item": {
+        "name": "Spin",
+        "rarity": "Common",
+        "type": "Natural",
+        "money": "7,500",
+        "robux": "75",
+        "price": "7,500"
+      },
+      "system": {
+        "slug": "spin",
+        "section": "Natural",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Fruits/spin.webp"
+      }
     },
     {
-      "name": "Blade",
-      "slug": "blade",
-      "rarity": "Common",
-      "type": "Natural",
-      "sea": null,
-      "money": "30,000",
-      "robux": "100",
-      "source": null,
-      "price": "30,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Common Natural 30,000 100",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blade",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/blade.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ad/Blade.png/revision/latest/scale-to-width-down/150?cb=20241231125837"
+      "item": {
+        "name": "Blade",
+        "rarity": "Common",
+        "type": "Natural",
+        "money": "30,000",
+        "robux": "100",
+        "price": "30,000"
+      },
+      "system": {
+        "slug": "blade",
+        "section": "Natural",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Fruits/blade.webp"
+      }
     },
     {
-      "name": "Spring",
-      "slug": "spring",
-      "rarity": "Common",
-      "type": "Natural",
-      "sea": null,
-      "money": "60,000",
-      "robux": "180",
-      "source": null,
-      "price": "60,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Common Natural 60,000 180",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Spring",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/spring.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9c/Spring.png/revision/latest/scale-to-width-down/150?cb=20220228200326"
+      "item": {
+        "name": "Spring",
+        "rarity": "Common",
+        "type": "Natural",
+        "money": "60,000",
+        "robux": "180",
+        "price": "60,000"
+      },
+      "system": {
+        "slug": "spring",
+        "section": "Natural",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Fruits/spring.webp"
+      }
     },
     {
-      "name": "Bomb",
-      "slug": "bomb",
-      "rarity": "Common",
-      "type": "Natural",
-      "sea": null,
-      "money": "80,000",
-      "robux": "220",
-      "source": null,
-      "price": "80,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Common Natural 80,000 220",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Bomb",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/bomb.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/3b/Bomb.png/revision/latest/scale-to-width-down/150?cb=20220228200530"
+      "item": {
+        "name": "Bomb",
+        "rarity": "Common",
+        "type": "Natural",
+        "money": "80,000",
+        "robux": "220",
+        "price": "80,000"
+      },
+      "system": {
+        "slug": "bomb",
+        "section": "Natural",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Fruits/bomb.webp"
+      }
     },
     {
-      "name": "Smoke",
-      "slug": "smoke",
-      "rarity": "Common",
-      "type": "Elemental",
-      "sea": null,
-      "money": "100,000",
-      "robux": "250",
-      "source": null,
-      "price": "100,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Common Elemental 100,000 250",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Smoke",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/smoke.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c6/Smoke.png/revision/latest/scale-to-width-down/150?cb=20220228200228"
+      "item": {
+        "name": "Smoke",
+        "rarity": "Common",
+        "type": "Elemental",
+        "money": "100,000",
+        "robux": "250",
+        "price": "100,000"
+      },
+      "system": {
+        "slug": "smoke",
+        "section": "Elemental",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Fruits/smoke.webp"
+      }
     },
     {
-      "name": "Spike",
-      "slug": "spike",
-      "rarity": "Common",
-      "type": "Natural",
-      "sea": null,
-      "money": "180,000",
-      "robux": "380",
-      "source": null,
-      "price": "180,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Common Natural 180,000 380",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Spike",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/spike.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/de/Spike.png/revision/latest/scale-to-width-down/150?cb=20241215195702"
+      "item": {
+        "name": "Spike",
+        "rarity": "Common",
+        "type": "Natural",
+        "money": "180,000",
+        "robux": "380",
+        "price": "180,000"
+      },
+      "system": {
+        "slug": "spike",
+        "section": "Natural",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Fruits/spike.webp"
+      }
     },
     {
-      "name": "Flame",
-      "slug": "flame",
-      "rarity": "Uncommon",
-      "type": "Elemental",
-      "sea": null,
-      "money": "250,000",
-      "robux": "550",
-      "source": null,
-      "price": "250,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Flame",
+        "rarity": "Uncommon",
+        "type": "Elemental",
+        "money": "250,000",
+        "robux": "550",
+        "price": "250,000",
         "awakening": "14,500"
       },
-      "rawText": "Uncommon Elemental 250,000 550Awakening 14,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Flame",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/flame.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9f/Flame.png/revision/latest/scale-to-width-down/150?cb=20241215195738"
+      "system": {
+        "slug": "flame",
+        "section": "Elemental",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Fruits/flame.webp"
+      }
     },
     {
-      "name": "Ice",
-      "slug": "ice",
-      "rarity": "Uncommon",
-      "type": "Elemental",
-      "sea": null,
-      "money": "350,000",
-      "robux": "750",
-      "source": null,
-      "price": "350,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Ice",
+        "rarity": "Uncommon",
+        "type": "Elemental",
+        "money": "350,000",
+        "robux": "750",
+        "price": "350,000",
         "awakening": "14,500"
       },
-      "rawText": "Uncommon Elemental 350,000 750Awakening 14,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ice",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/ice.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/77/Ice.png/revision/latest/scale-to-width-down/150?cb=20220228195831"
+      "system": {
+        "slug": "ice",
+        "section": "Elemental",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Fruits/ice.webp"
+      }
     },
     {
-      "name": "Sand",
-      "slug": "sand",
-      "rarity": "Uncommon",
-      "type": "Elemental",
-      "sea": null,
-      "money": "420,000",
-      "robux": "850",
-      "source": null,
-      "price": "420,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Sand",
+        "rarity": "Uncommon",
+        "type": "Elemental",
+        "money": "420,000",
+        "robux": "850",
+        "price": "420,000",
         "awakening": "14,500"
       },
-      "rawText": "Uncommon Elemental 420,000 850Awakening 14,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sand",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/sand.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a7/Sand.png/revision/latest/scale-to-width-down/150?cb=20220228200150"
+      "system": {
+        "slug": "sand",
+        "section": "Elemental",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Fruits/sand.webp"
+      }
     },
     {
-      "name": "Dark",
-      "slug": "dark",
-      "rarity": "Uncommon",
-      "type": "Elemental",
-      "sea": null,
-      "money": "500,000",
-      "robux": "950",
-      "source": null,
-      "price": "500,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dark",
+        "rarity": "Uncommon",
+        "type": "Elemental",
+        "money": "500,000",
+        "robux": "950",
+        "price": "500,000",
         "awakening": "14,500"
       },
-      "rawText": "Uncommon Elemental 500,000 950Awakening 14,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dark",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/dark.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/0e/Dark.png/revision/latest/scale-to-width-down/150?cb=20241215195905"
+      "system": {
+        "slug": "dark",
+        "section": "Elemental",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Fruits/dark.webp"
+      }
     },
     {
-      "name": "Eagle",
-      "slug": "eagle",
-      "rarity": "Uncommon",
-      "type": "Beast",
-      "sea": null,
-      "money": "550,000",
-      "robux": "975",
-      "source": null,
-      "price": "550,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": "2,600 3 5 2 16",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
-        "upgrading": "2,600 3 5 2 16"
+      "item": {
+        "name": "Eagle",
+        "rarity": "Uncommon",
+        "type": "Beast",
+        "money": "550,000",
+        "robux": "975",
+        "upgrading": "2,600 3 5 2 16",
+        "price": "550,000"
       },
-      "rawText": "Uncommon Beast 550,000 975Upgrading 2,600 3 5 2 16",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Eagle",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/eagle.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8b/Eagle.png/revision/latest/scale-to-width-down/150?cb=20250418030854"
+      "system": {
+        "slug": "eagle",
+        "section": "Beast",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Fruits/eagle.webp"
+      }
     },
     {
-      "name": "Diamond",
-      "slug": "diamond",
-      "rarity": "Uncommon",
-      "type": "Natural",
-      "sea": null,
-      "money": "600,000",
-      "robux": "1,000",
-      "source": null,
-      "price": "600,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Uncommon Natural 600,000 1,000",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Diamond",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/diamond.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ea/Diamond.png/revision/latest/scale-to-width-down/150?cb=20241215195944"
+      "item": {
+        "name": "Diamond",
+        "rarity": "Uncommon",
+        "type": "Natural",
+        "money": "600,000",
+        "robux": "1,000",
+        "price": "600,000"
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Natural",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Fruits/diamond.webp"
+      }
     },
     {
-      "name": "Light",
-      "slug": "light",
-      "rarity": "Rare",
-      "type": "Elemental",
-      "sea": null,
-      "money": "650,000",
-      "robux": "1,100",
-      "source": null,
-      "price": "650,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Light",
+        "rarity": "Rare",
+        "type": "Elemental",
+        "money": "650,000",
+        "robux": "1,100",
+        "price": "650,000",
         "awakening": "14,500"
       },
-      "rawText": "Rare Elemental 650,000 1,100Awakening 14,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Light",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/light.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a6/Light.png/revision/latest/scale-to-width-down/150?cb=20241215195403"
+      "system": {
+        "slug": "light",
+        "section": "Elemental",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Fruits/light.webp"
+      }
     },
     {
-      "name": "Rubber",
-      "slug": "rubber",
-      "rarity": "Rare",
-      "type": "Natural",
-      "sea": null,
-      "money": "750,000",
-      "robux": "1,200",
-      "source": null,
-      "price": "750,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Rare Natural 750,000 1,200",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rubber",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/rubber.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8e/Rubber.png/revision/latest/scale-to-width-down/150?cb=20231027040620"
+      "item": {
+        "name": "Rubber",
+        "rarity": "Rare",
+        "type": "Natural",
+        "money": "750,000",
+        "robux": "1,200",
+        "price": "750,000"
+      },
+      "system": {
+        "slug": "rubber",
+        "section": "Natural",
+        "sortOrder": 15,
+        "image": "/Blox%20Fruits/Fruits/rubber.webp"
+      }
     },
     {
-      "name": "Ghost",
-      "slug": "ghost",
-      "rarity": "Rare",
-      "type": "Natural",
-      "sea": null,
-      "money": "940,000",
-      "robux": "1,275",
-      "source": null,
-      "price": "940,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Rare Natural 940,000 1,275",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Ghost",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/ghost.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ab/Ghost.png/revision/latest/scale-to-width-down/150?cb=20231103021436"
+      "item": {
+        "name": "Ghost",
+        "rarity": "Rare",
+        "type": "Natural",
+        "money": "940,000",
+        "robux": "1,275",
+        "price": "940,000"
+      },
+      "system": {
+        "slug": "ghost",
+        "section": "Natural",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Fruits/ghost.webp"
+      }
     },
     {
-      "name": "Magma",
-      "slug": "magma",
-      "rarity": "Rare",
-      "type": "Elemental",
-      "sea": null,
-      "money": "960,000",
-      "robux": "1,300",
-      "source": null,
-      "price": "960,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Magma",
+        "rarity": "Rare",
+        "type": "Elemental",
+        "money": "960,000",
+        "robux": "1,300",
+        "price": "960,000",
         "awakening": "14,500"
       },
-      "rawText": "Rare Elemental 960,000 1,300Awakening 14,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Magma",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/magma.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f9/Magma.png/revision/latest/scale-to-width-down/150?cb=20241215195626"
+      "system": {
+        "slug": "magma",
+        "section": "Elemental",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Fruits/magma.webp"
+      }
     },
     {
-      "name": "Quake",
-      "slug": "quake",
-      "rarity": "Legendary",
-      "type": "Natural",
-      "sea": null,
-      "money": "1,000,000",
-      "robux": "1,500",
-      "source": null,
-      "price": "1,000,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Quake",
+        "rarity": "Legendary",
+        "type": "Natural",
+        "money": "1,000,000",
+        "robux": "1,500",
+        "price": "1,000,000",
         "awakening": "17,000"
       },
-      "rawText": "Legendary Natural 1,000,000 1,500Awakening 17,000",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Quake",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/quake.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b4/Quake.png/revision/latest/scale-to-width-down/150?cb=20241215195532"
+      "system": {
+        "slug": "quake",
+        "section": "Natural",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Fruits/quake.webp"
+      }
     },
     {
-      "name": "Buddha",
-      "slug": "buddha",
-      "rarity": "Legendary",
-      "type": "Beast",
-      "sea": null,
-      "money": "1,200,000",
-      "robux": "1,650",
-      "source": null,
-      "price": "1,200,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Buddha",
+        "rarity": "Legendary",
+        "type": "Beast",
+        "money": "1,200,000",
+        "robux": "1,650",
+        "price": "1,200,000",
         "awakening": "14,500"
       },
-      "rawText": "Legendary Beast 1,200,000 1,650Awakening 14,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Buddha",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/buddha.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/88/Buddha.png/revision/latest/scale-to-width-down/150?cb=20241215200050"
+      "system": {
+        "slug": "buddha",
+        "section": "Beast",
+        "sortOrder": 19,
+        "image": "/Blox%20Fruits/Fruits/buddha.webp"
+      }
     },
     {
-      "name": "Love",
-      "slug": "love",
-      "rarity": "Legendary",
-      "type": "Natural",
-      "sea": null,
-      "money": "1,300,000",
-      "robux": "1,700",
-      "source": null,
-      "price": "1,300,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Legendary Natural 1,300,000 1,700",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Love",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/love.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ac/Love.png/revision/latest/scale-to-width-down/150?cb=20220228195938"
+      "item": {
+        "name": "Love",
+        "rarity": "Legendary",
+        "type": "Natural",
+        "money": "1,300,000",
+        "robux": "1,700",
+        "price": "1,300,000"
+      },
+      "system": {
+        "slug": "love",
+        "section": "Natural",
+        "sortOrder": 20,
+        "image": "/Blox%20Fruits/Fruits/love.webp"
+      }
     },
     {
-      "name": "Creation",
-      "slug": "creation",
-      "rarity": "Legendary",
-      "type": "Natural",
-      "sea": null,
-      "money": "1,400,000",
-      "robux": "1,750",
-      "source": null,
-      "price": "1,400,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Legendary Natural 1,400,000 1,750",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Creation",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/creation.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/45/Creation.png/revision/latest/scale-to-width-down/150?cb=20250418030855"
+      "item": {
+        "name": "Creation",
+        "rarity": "Legendary",
+        "type": "Natural",
+        "money": "1,400,000",
+        "robux": "1,750",
+        "price": "1,400,000"
+      },
+      "system": {
+        "slug": "creation",
+        "section": "Natural",
+        "sortOrder": 21,
+        "image": "/Blox%20Fruits/Fruits/creation.webp"
+      }
     },
     {
-      "name": "Spider",
-      "slug": "spider",
-      "rarity": "Legendary",
-      "type": "Natural",
-      "sea": null,
-      "money": "1,500,000",
-      "robux": "1,800",
-      "source": null,
-      "price": "1,500,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Spider",
+        "rarity": "Legendary",
+        "type": "Natural",
+        "money": "1,500,000",
+        "robux": "1,800",
+        "price": "1,500,000",
         "awakening": "17,300"
       },
-      "rawText": "Legendary Natural 1,500,000 1,800Awakening 17,300",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Spider",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/spider.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/84/Spider.png/revision/latest/scale-to-width-down/150?cb=20230225172239"
+      "system": {
+        "slug": "spider",
+        "section": "Natural",
+        "sortOrder": 22,
+        "image": "/Blox%20Fruits/Fruits/spider.webp"
+      }
     },
     {
-      "name": "Sound",
-      "slug": "sound",
-      "rarity": "Legendary",
-      "type": "Natural",
-      "sea": null,
-      "money": "1,700,000",
-      "robux": "1,900",
-      "source": null,
-      "price": "1,700,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Legendary Natural 1,700,000 1,900",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Sound",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/sound.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/ee/Sound.png/revision/latest/scale-to-width-down/150?cb=20231027080952"
+      "item": {
+        "name": "Sound",
+        "rarity": "Legendary",
+        "type": "Natural",
+        "money": "1,700,000",
+        "robux": "1,900",
+        "price": "1,700,000"
+      },
+      "system": {
+        "slug": "sound",
+        "section": "Natural",
+        "sortOrder": 23,
+        "image": "/Blox%20Fruits/Fruits/sound.webp"
+      }
     },
     {
-      "name": "Phoenix",
-      "slug": "phoenix",
-      "rarity": "Legendary",
-      "type": "Beast",
-      "sea": null,
-      "money": "1,800,000",
-      "robux": "2,000",
-      "source": null,
-      "price": "1,800,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Phoenix",
+        "rarity": "Legendary",
+        "type": "Beast",
+        "money": "1,800,000",
+        "robux": "2,000",
+        "price": "1,800,000",
         "awakening": "18,500"
       },
-      "rawText": "Legendary Beast 1,800,000 2,000Awakening 18,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Phoenix",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/phoenix.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c1/Phoenix.png/revision/latest/scale-to-width-down/150?cb=20220228200053"
+      "system": {
+        "slug": "phoenix",
+        "section": "Beast",
+        "sortOrder": 24,
+        "image": "/Blox%20Fruits/Fruits/phoenix.webp"
+      }
     },
     {
-      "name": "Portal",
-      "slug": "portal",
-      "rarity": "Legendary",
-      "type": "Natural",
-      "sea": null,
-      "money": "1,900,000",
-      "robux": "2,000",
-      "source": null,
-      "price": "1,900,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Legendary Natural 1,900,000 2,000",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Portal",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/portal.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9d/Portal.png/revision/latest/scale-to-width-down/150?cb=20230404120616"
-    },
-    {
-      "name": "Lightning",
-      "slug": "lightning",
-      "rarity": "Legendary",
-      "type": "Elemental",
-      "sea": null,
-      "money": "2,100,000",
-      "robux": "2,100",
-      "source": null,
-      "price": "2,100,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": "21,500 4 13 3",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
-        "upgrading": "21,500 4 13 3"
+      "item": {
+        "name": "Portal",
+        "rarity": "Legendary",
+        "type": "Natural",
+        "money": "1,900,000",
+        "robux": "2,000",
+        "price": "1,900,000"
       },
-      "rawText": "Legendary Elemental 2,100,000 2,100Upgrading 21,500 4 13 3",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Lightning",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/lightning.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/86/Lightning.png/revision/latest/scale-to-width-down/150?cb=20241215195447"
+      "system": {
+        "slug": "portal",
+        "section": "Natural",
+        "sortOrder": 25,
+        "image": "/Blox%20Fruits/Fruits/portal.webp"
+      }
     },
     {
-      "name": "Pain",
-      "slug": "pain",
-      "rarity": "Legendary",
-      "type": "Natural",
-      "sea": null,
-      "money": "2,300,000",
-      "robux": "2,200",
-      "source": null,
-      "price": "2,300,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": "19,000 4 16 3",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
-        "upgrading": "19,000 4 16 3"
+      "item": {
+        "name": "Lightning",
+        "rarity": "Legendary",
+        "type": "Elemental",
+        "money": "2,100,000",
+        "robux": "2,100",
+        "upgrading": "21,500 4 13 3",
+        "price": "2,100,000"
       },
-      "rawText": "Legendary Natural 2,300,000 2,200Upgrading 19,000 4 16 3",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Pain",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/pain.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/5/54/Pain.png/revision/latest/scale-to-width-down/150?cb=20250906183017"
+      "system": {
+        "slug": "lightning",
+        "section": "Elemental",
+        "sortOrder": 26,
+        "image": "/Blox%20Fruits/Fruits/lightning.webp"
+      }
     },
     {
-      "name": "Blizzard",
-      "slug": "blizzard",
-      "rarity": "Legendary",
-      "type": "Elemental",
-      "sea": null,
-      "money": "2,400,000",
-      "robux": "2,250",
-      "source": null,
-      "price": "2,400,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Legendary Elemental 2,400,000 2,250",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Blizzard",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/blizzard.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/39/Blizzard.png/revision/latest/scale-to-width-down/150?cb=20230404120544"
-    },
-    {
-      "name": "Gravity",
-      "slug": "gravity",
-      "rarity": "Mythical",
-      "type": "Natural",
-      "sea": null,
-      "money": "2,500,000",
-      "robux": "2,300",
-      "source": null,
-      "price": "2,500,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": "19,000 3 2 15 12",
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
-        "upgrading": "19,000 3 2 15 12"
+      "item": {
+        "name": "Pain",
+        "rarity": "Legendary",
+        "type": "Natural",
+        "money": "2,300,000",
+        "robux": "2,200",
+        "upgrading": "19,000 4 16 3",
+        "price": "2,300,000"
       },
-      "rawText": "Mythical Natural 2,500,000 2,300Upgrading 19,000 3 2 15 12",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gravity",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/gravity.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/1a/Gravity.png/revision/latest/scale-to-width-down/150?cb=20250418030954"
+      "system": {
+        "slug": "pain",
+        "section": "Natural",
+        "sortOrder": 27,
+        "image": "/Blox%20Fruits/Fruits/pain.webp"
+      }
     },
     {
-      "name": "Mammoth",
-      "slug": "mammoth",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": "2,700,000",
-      "robux": "2,350",
-      "source": null,
-      "price": "2,700,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Beast 2,700,000 2,350",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Mammoth",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/mammoth.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a5/Mammoth.png/revision/latest/scale-to-width-down/150?cb=20231025103552"
+      "item": {
+        "name": "Blizzard",
+        "rarity": "Legendary",
+        "type": "Elemental",
+        "money": "2,400,000",
+        "robux": "2,250",
+        "price": "2,400,000"
+      },
+      "system": {
+        "slug": "blizzard",
+        "section": "Elemental",
+        "sortOrder": 28,
+        "image": "/Blox%20Fruits/Fruits/blizzard.webp"
+      }
     },
     {
-      "name": "T-Rex",
-      "slug": "t-rex",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": "2,700,000",
-      "robux": "2,350",
-      "source": null,
-      "price": "2,700,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Beast 2,700,000 2,350",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/T-Rex",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/t-rex.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f8/T-Rex.png/revision/latest/scale-to-width-down/150?cb=20231225184743"
+      "item": {
+        "name": "Gravity",
+        "rarity": "Mythical",
+        "type": "Natural",
+        "money": "2,500,000",
+        "robux": "2,300",
+        "upgrading": "19,000 3 2 15 12",
+        "price": "2,500,000"
+      },
+      "system": {
+        "slug": "gravity",
+        "section": "Natural",
+        "sortOrder": 29,
+        "image": "/Blox%20Fruits/Fruits/gravity.webp"
+      }
     },
     {
-      "name": "Dough",
-      "slug": "dough",
-      "rarity": "Mythical",
-      "type": "Elemental",
-      "sea": null,
-      "money": "2,800,000",
-      "robux": "2,400",
-      "source": null,
-      "price": "2,800,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Mammoth",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "money": "2,700,000",
+        "robux": "2,350",
+        "price": "2,700,000"
+      },
+      "system": {
+        "slug": "mammoth",
+        "section": "Beast",
+        "sortOrder": 30,
+        "image": "/Blox%20Fruits/Fruits/mammoth.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "T-Rex",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "money": "2,700,000",
+        "robux": "2,350",
+        "price": "2,700,000"
+      },
+      "system": {
+        "slug": "t-rex",
+        "section": "Beast",
+        "sortOrder": 31,
+        "image": "/Blox%20Fruits/Fruits/t-rex.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dough",
+        "rarity": "Mythical",
+        "type": "Elemental",
+        "money": "2,800,000",
+        "robux": "2,400",
+        "price": "2,800,000",
         "awakening": "18,500"
       },
-      "rawText": "Mythical Elemental 2,800,000 2,400Awakening 18,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dough",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/dough.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/08/Dough.png/revision/latest/scale-to-width-down/150?cb=20241215200019"
+      "system": {
+        "slug": "dough",
+        "section": "Elemental",
+        "sortOrder": 32,
+        "image": "/Blox%20Fruits/Fruits/dough.webp"
+      }
     },
     {
-      "name": "Shadow",
-      "slug": "shadow",
-      "rarity": "Mythical",
-      "type": "Natural",
-      "sea": null,
-      "money": "2,900,000",
-      "robux": "2,425",
-      "source": null,
-      "price": "2,900,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Natural 2,900,000 2,425",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Shadow",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/shadow.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8e/Shadow.png/revision/latest/scale-to-width-down/150?cb=20231102205642"
+      "item": {
+        "name": "Shadow",
+        "rarity": "Mythical",
+        "type": "Natural",
+        "money": "2,900,000",
+        "robux": "2,425",
+        "price": "2,900,000"
+      },
+      "system": {
+        "slug": "shadow",
+        "section": "Natural",
+        "sortOrder": 33,
+        "image": "/Blox%20Fruits/Fruits/shadow.webp"
+      }
     },
     {
-      "name": "Venom",
-      "slug": "venom",
-      "rarity": "Mythical",
-      "type": "Natural",
-      "sea": null,
-      "money": "3,000,000",
-      "robux": "2,450",
-      "source": null,
-      "price": "3,000,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Natural 3,000,000 2,450",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Venom",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/venom.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/8a/Venom.png/revision/latest/scale-to-width-down/150?cb=20220228200352"
+      "item": {
+        "name": "Venom",
+        "rarity": "Mythical",
+        "type": "Natural",
+        "money": "3,000,000",
+        "robux": "2,450",
+        "price": "3,000,000"
+      },
+      "system": {
+        "slug": "venom",
+        "section": "Natural",
+        "sortOrder": 34,
+        "image": "/Blox%20Fruits/Fruits/venom.webp"
+      }
     },
     {
-      "name": "Gas",
-      "slug": "gas",
-      "rarity": "Mythical",
-      "type": "Elemental",
-      "sea": null,
-      "money": "3,200,000",
-      "robux": "2,500",
-      "source": null,
-      "price": "3,200,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Elemental 3,200,000 2,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Gas",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/gas.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/78/Gas.png/revision/latest/scale-to-width-down/150?cb=20241215063640"
+      "item": {
+        "name": "Gas",
+        "rarity": "Mythical",
+        "type": "Elemental",
+        "money": "3,200,000",
+        "robux": "2,500",
+        "price": "3,200,000"
+      },
+      "system": {
+        "slug": "gas",
+        "section": "Elemental",
+        "sortOrder": 35,
+        "image": "/Blox%20Fruits/Fruits/gas.webp"
+      }
     },
     {
-      "name": "Spirit",
-      "slug": "spirit",
-      "rarity": "Mythical",
-      "type": "Natural",
-      "sea": null,
-      "money": "3,400,000",
-      "robux": "2,550",
-      "source": null,
-      "price": "3,400,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Natural 3,400,000 2,550",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Spirit",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/spirit.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/97/Spirit.png/revision/latest/scale-to-width-down/150?cb=20230404120635"
+      "item": {
+        "name": "Spirit",
+        "rarity": "Mythical",
+        "type": "Natural",
+        "money": "3,400,000",
+        "robux": "2,550",
+        "price": "3,400,000"
+      },
+      "system": {
+        "slug": "spirit",
+        "section": "Natural",
+        "sortOrder": 36,
+        "image": "/Blox%20Fruits/Fruits/spirit.webp"
+      }
     },
     {
-      "name": "Tiger",
-      "slug": "tiger",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": "5,000,000",
-      "robux": "3,000",
-      "source": null,
-      "price": "5,000,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Beast 5,000,000 3,000",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Tiger",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/tiger.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/ae/Tiger.png/revision/latest/scale-to-width-down/150?cb=20251031162046"
+      "item": {
+        "name": "Tiger",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "money": "5,000,000",
+        "robux": "3,000",
+        "price": "5,000,000"
+      },
+      "system": {
+        "slug": "tiger",
+        "section": "Beast",
+        "sortOrder": 37,
+        "image": "/Blox%20Fruits/Fruits/tiger.webp"
+      }
     },
     {
-      "name": "Yeti",
-      "slug": "yeti",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": "5,000,000",
-      "robux": "3,000",
-      "source": null,
-      "price": "5,000,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Beast 5,000,000 3,000",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Yeti",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/yeti.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7d/Yeti.png/revision/latest/scale-to-width-down/150?cb=20250907144703"
+      "item": {
+        "name": "Yeti",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "money": "5,000,000",
+        "robux": "3,000",
+        "price": "5,000,000"
+      },
+      "system": {
+        "slug": "yeti",
+        "section": "Beast",
+        "sortOrder": 38,
+        "image": "/Blox%20Fruits/Fruits/yeti.webp"
+      }
     },
     {
-      "name": "Kitsune",
-      "slug": "kitsune",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": "8,000,000",
-      "robux": "4,000",
-      "source": null,
-      "price": "8,000,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Beast 8,000,000 4,000",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kitsune",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/kitsune.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/04/Kitsune.png/revision/latest/scale-to-width-down/150?cb=20240511195324"
+      "item": {
+        "name": "Kitsune",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "money": "8,000,000",
+        "robux": "4,000",
+        "price": "8,000,000"
+      },
+      "system": {
+        "slug": "kitsune",
+        "section": "Beast",
+        "sortOrder": 39,
+        "image": "/Blox%20Fruits/Fruits/kitsune.webp"
+      }
     },
     {
-      "name": "Control",
-      "slug": "control",
-      "rarity": "Mythical",
-      "type": "Natural",
-      "sea": null,
-      "money": "9,000,000",
-      "robux": "4,000",
-      "source": null,
-      "price": "9,000,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Natural 9,000,000 4,000",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Control",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/control.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e5/Control.png/revision/latest/scale-to-width-down/150?cb=20260226235721"
+      "item": {
+        "name": "Control",
+        "rarity": "Mythical",
+        "type": "Natural",
+        "money": "9,000,000",
+        "robux": "4,000",
+        "price": "9,000,000"
+      },
+      "system": {
+        "slug": "control",
+        "section": "Natural",
+        "sortOrder": 40,
+        "image": "/Blox%20Fruits/Fruits/control.webp"
+      }
     },
     {
-      "name": "Dragon",
-      "slug": "dragon",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": "15,000,000",
-      "robux": "5,000",
-      "source": null,
-      "price": "15,000,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical Beast 15,000,000 5,000",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/dragon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c7/Dragon.png/revision/latest/scale-to-width-down/150?cb=20241231011212"
+      "item": {
+        "name": "Dragon",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "money": "15,000,000",
+        "robux": "5,000",
+        "price": "15,000,000"
+      },
+      "system": {
+        "slug": "dragon",
+        "section": "Beast",
+        "sortOrder": 41,
+        "image": "/Blox%20Fruits/Fruits/dragon.webp"
+      }
     },
     {
-      "name": "Empyrean (Kitsune)",
-      "slug": "empyrean-kitsune",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": null,
-      "robux": "199",
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical BeastGacha Cost 100 or 199Shop Cost 2,000",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Empyrean",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/empyrean-kitsune.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/35/Empyrean.png/revision/latest/scale-to-width-down/150?cb=20260226234144"
+      "item": {
+        "name": "Empyrean (Kitsune)",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "robux": "199"
+      },
+      "system": {
+        "slug": "empyrean-kitsune",
+        "section": "Beast",
+        "sortOrder": 42,
+        "image": "/Blox%20Fruits/Fruits/empyrean-kitsune.webp"
+      }
     },
     {
-      "name": "Fiend (Yeti)",
-      "slug": "fiend-yeti",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": null,
-      "robux": "1,500",
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical BeastGacha Cost 250Shop Cost 1,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Fiend",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/fiend-yeti.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6e/Fiend.png/revision/latest/scale-to-width-down/150?cb=20260226234335"
+      "item": {
+        "name": "Fiend (Yeti)",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "robux": "1,500"
+      },
+      "system": {
+        "slug": "fiend-yeti",
+        "section": "Beast",
+        "sortOrder": 43,
+        "image": "/Blox%20Fruits/Fruits/fiend-yeti.webp"
+      }
     },
     {
-      "name": "Werewolf (Tiger)",
-      "slug": "werewolf-tiger",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": null,
-      "robux": "1,500",
-      "source": null,
-      "price": null,
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {},
-      "rawText": "Mythical BeastGacha Cost 500Shop Cost 1,500",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Werewolf",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/werewolf-tiger.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f5/Werewolf.png/revision/latest/scale-to-width-down/150?cb=20260226234029"
+      "item": {
+        "name": "Werewolf (Tiger)",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "robux": "1,500"
+      },
+      "system": {
+        "slug": "werewolf-tiger",
+        "section": "Beast",
+        "sortOrder": 44,
+        "image": "/Blox%20Fruits/Fruits/werewolf-tiger.webp"
+      }
     },
     {
-      "name": "Kilo",
-      "slug": "kilo",
-      "rarity": "Common",
-      "type": "Natural",
-      "sea": null,
-      "money": "5,000",
-      "robux": "50",
-      "source": null,
-      "price": "5,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Kilo",
+        "rarity": "Common",
+        "type": "Natural",
+        "money": "5,000",
+        "robux": "50",
+        "price": "5,000",
         "unavailableReason": "Replaced by Rocket"
       },
-      "rawText": "Common Natural 5,000 50Unavailable Reason Replaced by Rocket",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Kilo",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/kilo.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/85/Kilo.png/revision/latest/scale-to-width-down/150?cb=20220228195845"
+      "system": {
+        "slug": "kilo",
+        "section": "Natural",
+        "sortOrder": 45,
+        "image": "/Blox%20Fruits/Fruits/kilo.webp"
+      }
     },
     {
-      "name": "Chop",
-      "slug": "chop",
-      "rarity": "Common",
-      "type": "Natural",
-      "sea": null,
-      "money": "30,000",
-      "robux": "100",
-      "source": null,
-      "price": "30,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Chop",
+        "rarity": "Common",
+        "type": "Natural",
+        "money": "30,000",
+        "robux": "100",
+        "price": "30,000",
         "unavailableReason": "Replaced by Blade"
       },
-      "rawText": "Common Natural 30,000 100Unavailable Reason Replaced by Blade",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Chop",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/chop.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/e/e3/Chop.png/revision/latest/scale-to-width-down/150?cb=20220228200458"
+      "system": {
+        "slug": "chop",
+        "section": "Natural",
+        "sortOrder": 46,
+        "image": "/Blox%20Fruits/Fruits/chop.webp"
+      }
     },
     {
-      "name": "Falcon",
-      "slug": "falcon",
-      "rarity": "Uncommon",
-      "type": "Beast",
-      "sea": null,
-      "money": "300,000",
-      "robux": "650",
-      "source": null,
-      "price": "300,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Falcon",
+        "rarity": "Uncommon",
+        "type": "Beast",
+        "money": "300,000",
+        "robux": "650",
+        "price": "300,000",
         "unavailableReason": "Replaced by Eagle"
       },
-      "rawText": "Uncommon Beast 300,000 650Unavailable Reason Replaced by Eagle",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Falcon",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/falcon.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/06/Falcon.png/revision/latest/scale-to-width-down/150?cb=20220228195642"
+      "system": {
+        "slug": "falcon",
+        "section": "Beast",
+        "sortOrder": 47,
+        "image": "/Blox%20Fruits/Fruits/falcon.webp"
+      }
     },
     {
-      "name": "Revive",
-      "slug": "revive",
-      "rarity": "Uncommon",
-      "type": "Natural",
-      "sea": null,
-      "money": "550,000",
-      "robux": "975",
-      "source": null,
-      "price": "550,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Revive",
+        "rarity": "Uncommon",
+        "type": "Natural",
+        "money": "550,000",
+        "robux": "975",
+        "price": "550,000",
         "unavailableReason": "Replaced by Ghost"
       },
-      "rawText": "Uncommon Natural 550,000 975Unavailable Reason Replaced by Ghost",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Revive",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/revive.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/1/13/Revive.png/revision/latest/scale-to-width-down/150?cb=20220228200126"
+      "system": {
+        "slug": "revive",
+        "section": "Natural",
+        "sortOrder": 48,
+        "image": "/Blox%20Fruits/Fruits/revive.webp"
+      }
     },
     {
-      "name": "Barrier",
-      "slug": "barrier",
-      "rarity": "Rare",
-      "type": "Natural",
-      "sea": null,
-      "money": "800,000",
-      "robux": "1,250",
-      "source": null,
-      "price": "800,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Barrier",
+        "rarity": "Rare",
+        "type": "Natural",
+        "money": "800,000",
+        "robux": "1,250",
+        "price": "800,000",
         "unavailableReason": "Replaced by Creation"
       },
-      "rawText": "Rare Natural 800,000 1,250Unavailable Reason Replaced by Creation",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Barrier",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/barrier.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/cc/Barrier.png/revision/latest/scale-to-width-down/150?cb=20220228200641"
+      "system": {
+        "slug": "barrier",
+        "section": "Natural",
+        "sortOrder": 49,
+        "image": "/Blox%20Fruits/Fruits/barrier.webp"
+      }
     },
     {
-      "name": "Door",
-      "slug": "door",
-      "rarity": "Rare",
-      "type": "Natural",
-      "sea": null,
-      "money": "950,000",
-      "robux": "1,400",
-      "source": null,
-      "price": "950,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Door",
+        "rarity": "Rare",
+        "type": "Natural",
+        "money": "950,000",
+        "robux": "1,400",
+        "price": "950,000",
         "unavailableReason": "Replaced by Portal"
       },
-      "rawText": "Rare Natural 950,000 1,400Unavailable Reason Replaced by Portal",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Door",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/door.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/3/36/Door.png/revision/latest/scale-to-width-down/150?cb=20220228200410"
+      "system": {
+        "slug": "door",
+        "section": "Natural",
+        "sortOrder": 50,
+        "image": "/Blox%20Fruits/Fruits/door.webp"
+      }
     },
     {
-      "name": "String",
-      "slug": "string",
-      "rarity": "Legendary",
-      "type": "Natural",
-      "sea": null,
-      "money": "1,500,000",
-      "robux": "1,800",
-      "source": null,
-      "price": "1,500,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "String",
+        "rarity": "Legendary",
+        "type": "Natural",
+        "money": "1,500,000",
+        "robux": "1,800",
+        "price": "1,500,000",
         "awakening": "17,300",
         "unavailableReason": "Renamed to Spider"
       },
-      "rawText": "Legendary Natural 1,500,000 1,800Awakening 17,300Unavailable Reason Renamed to Spider",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/String",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/string.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/a/a0/String.png/revision/latest/scale-to-width-down/150?cb=20220228200338"
+      "system": {
+        "slug": "string",
+        "section": "Natural",
+        "sortOrder": 51,
+        "image": "/Blox%20Fruits/Fruits/string.webp"
+      }
     },
     {
-      "name": "Rumble",
-      "slug": "rumble",
-      "rarity": "Legendary",
-      "type": "Elemental",
-      "sea": null,
-      "money": "2,100,000",
-      "robux": "2,100",
-      "source": null,
-      "price": "2,100,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Rumble",
+        "rarity": "Legendary",
+        "type": "Elemental",
+        "money": "2,100,000",
+        "robux": "2,100",
+        "price": "2,100,000",
         "awakening": "14,500",
         "unavailableReason": "Renamed to Lightning"
       },
-      "rawText": "Legendary Elemental 2,100,000 2,100Awakening 14,500Unavailable Reason Renamed to Lightning",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Rumble",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/rumble.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/86/Lightning.png/revision/latest/scale-to-width-down/150?cb=20241215195447"
+      "system": {
+        "slug": "rumble",
+        "section": "Elemental",
+        "sortOrder": 52,
+        "image": "/Blox%20Fruits/Fruits/rumble.webp"
+      }
     },
     {
-      "name": "Paw",
-      "slug": "paw",
-      "rarity": "Legendary",
-      "type": "Natural",
-      "sea": null,
-      "money": "2,300,000",
-      "robux": "2,200",
-      "source": null,
-      "price": "2,300,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Paw",
+        "rarity": "Legendary",
+        "type": "Natural",
+        "money": "2,300,000",
+        "robux": "2,200",
+        "price": "2,300,000",
         "unavailableReason": "Renamed to Pain"
       },
-      "rawText": "Legendary Natural 2,300,000 2,200Unavailable Reason Renamed to Pain",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Paw",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/paw.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/8/83/Paw.png/revision/latest/scale-to-width-down/150?cb=20231103155458"
+      "system": {
+        "slug": "paw",
+        "section": "Natural",
+        "sortOrder": 53,
+        "image": "/Blox%20Fruits/Fruits/paw.webp"
+      }
     },
     {
-      "name": "Soul",
-      "slug": "soul",
-      "rarity": "Mythical",
-      "type": "Natural",
-      "sea": null,
-      "money": "3,400,000",
-      "robux": "2,550",
-      "source": null,
-      "price": "3,400,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Soul",
+        "rarity": "Mythical",
+        "type": "Natural",
+        "money": "3,400,000",
+        "robux": "2,550",
+        "price": "3,400,000",
         "unavailableReason": "Replaced by Spirit"
       },
-      "rawText": "Mythical Natural 3,400,000 2,550Unavailable Reason Replaced by Spirit",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Soul",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/soul.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d5/Soul.png/revision/latest/scale-to-width-down/150?cb=20211231213810"
+      "system": {
+        "slug": "soul",
+        "section": "Natural",
+        "sortOrder": 54,
+        "image": "/Blox%20Fruits/Fruits/soul.webp"
+      }
     },
     {
-      "name": "Dragon (Classic)",
-      "slug": "dragon-classic",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": "3,500,000",
-      "robux": "2,600",
-      "source": null,
-      "price": "3,500,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Dragon (Classic)",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "money": "3,500,000",
+        "robux": "2,600",
+        "price": "3,500,000",
         "unavailableReason": "Reworked"
       },
-      "rawText": "Mythical Beast 3,500,000 2,600Unavailable Reason Reworked",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Dragon_(Classic)",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/dragon-classic.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/9/9d/Dragon_%28Classic%29.png/revision/latest/scale-to-width-down/150?cb=20220228195629"
+      "system": {
+        "slug": "dragon-classic",
+        "section": "Beast",
+        "sortOrder": 55,
+        "image": "/Blox%20Fruits/Fruits/dragon-classic.webp"
+      }
     },
     {
-      "name": "Leopard",
-      "slug": "leopard",
-      "rarity": "Mythical",
-      "type": "Beast",
-      "sea": null,
-      "money": "5,000,000",
-      "robux": "3,000",
-      "source": null,
-      "price": "5,000,000",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Leopard",
+        "rarity": "Mythical",
+        "type": "Beast",
+        "money": "5,000,000",
+        "robux": "3,000",
+        "price": "5,000,000",
         "unavailableReason": "Replaced by Tiger"
       },
-      "rawText": "Mythical Beast 5,000,000 3,000Unavailable Reason Replaced by Tiger",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Leopard",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/leopard.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/f/f5/Leopard.png/revision/latest/scale-to-width-down/150?cb=20231027035936"
+      "system": {
+        "slug": "leopard",
+        "section": "Beast",
+        "sortOrder": 56,
+        "image": "/Blox%20Fruits/Fruits/leopard.webp"
+      }
     },
     {
-      "name": "Meme",
-      "slug": "meme",
-      "rarity": "Mythical",
-      "type": "N/A",
-      "sea": null,
-      "money": "inf",
-      "robux": null,
-      "source": null,
-      "price": "inf",
-      "requirements": null,
-      "obtainment": null,
-      "upgrading": null,
-      "purpose": null,
-      "bonuses": [],
-      "fields": {
+      "item": {
+        "name": "Meme",
+        "rarity": "Mythical",
+        "type": "N/A",
+        "money": "inf",
+        "price": "inf",
         "unavailableReason": "Admin-Exclusive"
       },
-      "rawText": "Mythical N/A infUnavailable Reason Admin-Exclusive",
-      "wikiUrl": "https://blox-fruits.fandom.com/wiki/Meme",
-      "sourcePage": "Blox_Fruits",
-      "image": "/Blox%20Fruits/Fruits/meme.webp",
-      "sourceImageUrl": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/b9/Meme_Fruit.png/revision/latest/scale-to-width-down/150?cb=20230825025419"
+      "system": {
+        "slug": "meme",
+        "section": "N/A",
+        "sortOrder": 57,
+        "image": "/Blox%20Fruits/Fruits/meme.webp"
+      }
     }
   ]
 }
