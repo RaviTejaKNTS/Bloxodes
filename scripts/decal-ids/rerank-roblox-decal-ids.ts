@@ -5,11 +5,14 @@ import {
   normalizeDecalCategorySlugs
 } from "@/lib/decal-id-categories";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { chunkArray, normalizeNumber, normalizeText, toBoolean } from "./decal-id-utils";
+import { chunkArray, clampNumber, normalizeNumber, normalizeText, sleep, toBoolean } from "./decal-id-utils";
 
 const DRY_RUN = toBoolean(process.env.ROBLOX_DECAL_RERANK_DRY_RUN, false);
-const PAGE_SIZE = 250;
-const UPDATE_CHUNK_SIZE = 200;
+const PAGE_SIZE = clampNumber(process.env.ROBLOX_DECAL_RERANK_PAGE_SIZE, 250, 50, 1000);
+const SOURCE_PAGE_SIZE = clampNumber(process.env.ROBLOX_DECAL_RERANK_SOURCE_PAGE_SIZE, 1000, 100, 5000);
+const UPDATE_CHUNK_SIZE = clampNumber(process.env.ROBLOX_DECAL_RERANK_UPDATE_CHUNK_SIZE, 75, 25, 200);
+const UPDATE_MAX_ATTEMPTS = clampNumber(process.env.ROBLOX_DECAL_RERANK_UPDATE_MAX_ATTEMPTS, 6, 1, 10);
+const UPDATE_DELAY_MS = clampNumber(process.env.ROBLOX_DECAL_RERANK_UPDATE_DELAY_MS, 500, 0, 10000);
 
 type DecalRow = {
   asset_id: number;
@@ -400,27 +403,36 @@ async function loadRows(): Promise<DecalRow[]> {
 
 async function loadSourceRows(assetIds: number[]): Promise<Map<number, SourceRow[]>> {
   const sb = supabaseAdmin();
+  const activeAssetIds = new Set(assetIds);
   const rowsByAssetId = new Map<number, SourceRow[]>();
-  const chunks = chunkArray(assetIds, 500);
-  for (let index = 0; index < chunks.length; index += 1) {
-    const chunk = chunks[index];
+  let from = 0;
+  let pageCount = 0;
+
+  while (true) {
     const { data, error } = await sb
       .from("roblox_decal_id_sources")
       .select("asset_id, source_kind, source_url, source_query, source_page, source_rank, raw_payload")
-      .in("asset_id", chunk);
+      .order("asset_id", { ascending: true })
+      .range(from, from + SOURCE_PAGE_SIZE - 1);
     if (error) throw new Error(`Failed to load decal source rows: ${error.message}`);
-    for (const source of (data ?? []) as SourceRow[]) {
+
+    const page = (data ?? []) as SourceRow[];
+    for (const source of page) {
       const assetId = normalizeNumber(source.asset_id);
-      if (!assetId) continue;
+      if (!assetId || !activeAssetIds.has(assetId)) continue;
       const rows = rowsByAssetId.get(assetId) ?? [];
       rows.push(source);
       rowsByAssetId.set(assetId, rows);
     }
-    if ((index + 1) % 10 === 0 || index === chunks.length - 1) {
-      console.log(`Loaded source rows for ${index + 1}/${chunks.length} decal chunks...`);
+
+    pageCount += 1;
+    if (pageCount % 10 === 0) {
+      console.log(`Scanned ${pageCount} decal source pages; matched ${rowsByAssetId.size} active decal IDs...`);
     }
+    if (page.length < SOURCE_PAGE_SIZE) break;
+    from += SOURCE_PAGE_SIZE;
   }
-  console.log(`Loaded source rows for ${rowsByAssetId.size} decal IDs.`);
+  console.log(`Loaded source rows for ${rowsByAssetId.size} active decal IDs after scanning ${pageCount} source pages.`);
   return rowsByAssetId;
 }
 
@@ -502,8 +514,7 @@ where target.asset_id = payload.asset_id;
 }
 
 async function updateRankingChunk(sb: ReturnType<typeof supabaseAdmin>, chunk: ScorePayload[], chunkNumber: number) {
-  const maxAttempts = 3;
-  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+  for (let attempt = 1; attempt <= UPDATE_MAX_ATTEMPTS; attempt += 1) {
     let errorMessage: string | null = null;
     try {
       if (shouldUsePgQueryBulkUpdate()) {
@@ -523,12 +534,12 @@ async function updateRankingChunk(sb: ReturnType<typeof supabaseAdmin>, chunk: S
     } catch (error) {
       errorMessage = error instanceof Error ? error.message : String(error);
     }
-    if (attempt === maxAttempts) {
+    if (attempt === UPDATE_MAX_ATTEMPTS) {
       throw new Error(`Failed to update ranking chunk ${chunkNumber}: ${errorMessage}`);
     }
-    const waitMs = 750 * attempt;
+    const waitMs = 1000 * attempt * attempt;
     console.warn(`Retrying ranking chunk ${chunkNumber} after error: ${errorMessage}`);
-    await new Promise((resolve) => setTimeout(resolve, waitMs));
+    await sleep(waitMs);
   }
 }
 
@@ -557,6 +568,9 @@ async function main() {
   for (let index = 0; index < chunks.length; index += 1) {
     const chunk = chunks[index];
     await updateRankingChunk(sb, chunk, index + 1);
+    if (UPDATE_DELAY_MS > 0 && index < chunks.length - 1) {
+      await sleep(UPDATE_DELAY_MS);
+    }
     if ((index + 1) % 10 === 0 || index === chunks.length - 1) {
       console.log(`Updated ranking chunks ${index + 1}/${chunks.length}...`);
     }

@@ -167,7 +167,7 @@ That manifest owns these recurring jobs on the VPS worker:
 
 The matching GitHub Actions workflows are manual fallback only. Keep `Draft Code Page Generation` and `Discover Beebom Code Pages` scheduled in GitHub unless the user explicitly moves those too.
 
-Known follow-up: the decal ID rerank path recently failed in GitHub with `URI too long` while loading source rows. Moving the job to VPS improves schedule reliability but does not by itself fix that script bug.
+Decal ID rerank source loading uses paginated reads instead of a large `asset_id=in.(...)` filter, so the old `URI too long` failure should not return as the source table grows. Ranking writes are also throttled into smaller chunks with retry/backoff to avoid transient Supabase connection-pool failures during full reranks.
 
 First proof after worker changes should be a targeted one-off run:
 
