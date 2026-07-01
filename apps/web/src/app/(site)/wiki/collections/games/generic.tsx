@@ -630,6 +630,7 @@ const gameDatasetPreparedCollectionCache = new Map<string, Promise<GameDatasetPr
 // the HTML size gate even though the text-weight stays under the default target. Only the
 // listed codes are affected; everything else uses the default.
 const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
+  "driving-empire-vehicles": 30_000,
   "evomon-monsters": 30_000
 };
 
