@@ -1,8 +1,8 @@
 name: Roblox Universe Stats Maintenance
 
 on:
-  schedule:
-    - cron: "35 0 * * *"
+  # Scheduled universe stats maintenance runs on the VPS stats worker.
+  # Keep this workflow manual-only as an emergency fallback.
   workflow_dispatch:
     inputs:
       rollup_date:

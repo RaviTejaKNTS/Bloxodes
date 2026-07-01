@@ -2,8 +2,8 @@ name: Google Indexing API
 
 on:
   workflow_dispatch: {}
-  schedule:
-    - cron: "17 */6 * * *"
+  # Scheduled Google Indexing API submissions run on the VPS stats worker.
+  # Keep this workflow manual-only as an emergency fallback.
 
 concurrency:
   group: google-indexing-api

@@ -148,6 +148,27 @@ Active item stats cron lines installed on the VPS worker after the item stats mi
 
 GitHub item refresh and catalog discovery workflows are manual fallback only. Recurring item discovery, item refresh, item rollup, and item audit should run through the VPS worker to avoid GitHub runner IP limits on Roblox item APIs.
 
+Additional scheduled automation moved off GitHub Actions should be installed from the checked-in manifest:
+
+```txt
+scripts/ops/vps-scheduled-automation.crontab
+```
+
+That manifest owns these recurring jobs on the VPS worker:
+
+- daily universe stats rollup, hourly prune, and stats audit
+- platform stats aggregate refresh
+- Roblox codes refresh
+- Google Indexing API submissions
+- virtual events collection and event detail seeding
+- daily puzzle sync, including the old NYT/Beebom/LinkedIn staggered windows
+- Roblox music ID collection/reranking
+- Roblox decal ID refresh
+
+The matching GitHub Actions workflows are manual fallback only. Keep `Draft Code Page Generation` and `Discover Beebom Code Pages` scheduled in GitHub unless the user explicitly moves those too.
+
+Known follow-up: the decal ID rerank path recently failed in GitHub with `URI too long` while loading source rows. Moving the job to VPS improves schedule reliability but does not by itself fix that script bug.
+
 First proof after worker changes should be a targeted one-off run:
 
 ```txt
@@ -371,7 +392,14 @@ npm run enrich:universes:deep -- --tier HOT
 | Search discovery | VPS worker `stats-discovery-search` | Daily `03:20` UTC, `08:50` IST |
 | Creator/group discovery | VPS worker `stats-discovery-creators` | Daily `04:10` UTC, `09:40` IST |
 | Deep enrichment | VPS worker `stats-deep-enrichment` | Daily `05:05` UTC, `10:35` IST |
-| Daily rollup + hourly prune | Supabase cron/RPC | Daily after UTC day boundary |
+| Daily rollup + hourly prune | VPS worker `stats-daily-rollup` | Daily `00:35` UTC, `06:05` IST |
+| Platform aggregates | VPS worker `stats-platform-refresh` | Daily `01:05` UTC, `06:35` IST |
+| Codes refresh | VPS worker `codes-refresh` | Every 6 hours at `:00` UTC |
+| Google Indexing API | VPS worker `google-indexing` | Every 6 hours at `:17` UTC |
+| Event detail refresh | VPS worker `events-refresh` | Daily `00:15` UTC, `05:45` IST |
+| Puzzle sync | VPS worker `puzzles-*` | Staggered daily UTC windows from `04:10` through `08:30` |
+| Roblox music IDs | VPS worker `music-ids-refresh` | Daily `06:20` UTC, `11:50` IST |
+| Roblox decal IDs | VPS worker `decal-ids-refresh` | Daily `06:55` UTC, `12:25` IST |
 
 ## Schema
 

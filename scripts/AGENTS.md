@@ -81,9 +81,11 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `rebuild-stats-item-indexes.ts` calls `refresh_stats_item_current_indexes()` and queues `/stats/items` revalidation; run it after bulk item refreshes.
   - `audit-item-stats-workflow.ts` reports item stats freshness, index coverage, hourly/daily rows, resale coverage, and broken media counts.
   - Recurring item stats refresh should run on the VPS stats worker beside games stats. GitHub Actions are a manual fallback only because Roblox item endpoints rate-limit shared GitHub runner IPs aggressively.
+- `ops/`: checked-in operational manifests and server runbooks.
+  - `vps-scheduled-automation.crontab` is the source manifest for scheduled jobs moved off GitHub Actions onto the VPS stats worker. It covers daily universe rollup/prune/audit, platform aggregates, code refresh, Google Indexing, events, puzzle sync, music IDs, and decal IDs. Install it into the marked VPS crontab block rather than re-enabling GitHub schedules.
 - `posts/`: outbound posting jobs.
 - `puzzles/`: daily puzzle answer collectors for `/puzzles`, writing durable answer rows into `puzzle_answers`.
-  - `sync-puzzles.ts` syncs Wordle, Connections, Strands, Spelling Bee, Letter Boxed, NYT Sudoku, NYT Pips, Contexto, Letroso, and LinkedIn puzzle answers. Use `npm run sync:puzzles -- --dry-run` before writing. Pass `-- --skip-linkedin` when `LINKEDIN_LI_AT` is unavailable or stale.
+  - `sync-puzzles.ts` syncs Wordle, Connections, Strands, Spelling Bee, Letter Boxed, NYT Sudoku, NYT Pips, Contexto, Letroso, and LinkedIn puzzle answers. Use `npm run sync:puzzles -- --dry-run` before writing. Pass `-- --group early-nyt|beebom|beebom-with-early|late-nyt|linkedin|late-nyt-and-linkedin|all` for recurring grouped runs. Pass `-- --skip-linkedin` when `LINKEDIN_LI_AT` is unavailable or stale, or `-- --skip-linkedin-if-missing` for VPS cron runs that should continue without LinkedIn credentials.
 - `shared/`: helpers reused by multiple scripts.
 - `trading/`: trading-related collection.
 - `universes/`: universe collection, enrichment, stats route slugs, tiered stats, media, and descriptions.
@@ -114,6 +116,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - Treat scripts as data pipelines: know whether the job reads only, mutates Supabase, writes local files, calls external APIs, or triggers revalidation.
 - If a script creates or updates publishable content, review `/api/revalidate` coverage and any relevant Supabase revalidation trigger flow.
 - If a job becomes part of the normal workflow, add a package script and update `agents/scripts/agents.md`.
+- Scheduled production jobs that do not need GitHub checkout state should run through the VPS stats worker and stay manual-only in GitHub Actions. Keep Draft Code Page Generation and Discover Beebom Code Pages scheduled in GitHub unless the product direction changes.
 - Keep editorial page slugs separate from stats slugs. `roblox_universes.slug` belongs to `/stats/games/*`; scripts must not copy it into `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_collection_pages.wiki_slug`.
 
 ## Script Authoring Checklist

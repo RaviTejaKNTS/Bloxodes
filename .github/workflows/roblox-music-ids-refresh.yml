@@ -1,10 +1,9 @@
 name: Roblox Music IDs Refresh
 
 on:
-  schedule:
-    # Top 500 songs + Week/Month/Year Creator Store charts daily.
-    - cron: '20 6 * * *'
   workflow_dispatch:
+  # Scheduled Roblox music ID refresh runs on the VPS stats worker.
+  # Keep this workflow manual-only as an emergency fallback.
 
 jobs:
   top-songs:

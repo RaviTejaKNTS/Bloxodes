@@ -1,10 +1,9 @@
 name: Roblox Decal IDs Refresh
 
 on:
-  schedule:
-    # Bounded Roblox-first decal discovery + verification once per day.
-    - cron: '55 6 * * *'
   workflow_dispatch:
+  # Scheduled Roblox decal ID refresh runs on the VPS stats worker.
+  # Keep this workflow manual-only as an emergency fallback.
 
 jobs:
   discover:

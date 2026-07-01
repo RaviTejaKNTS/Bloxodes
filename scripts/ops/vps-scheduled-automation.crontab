@@ -1,0 +1,33 @@
+# Bloxodes scheduled automation moved off GitHub Actions.
+#
+# Install these lines in the codex-admin crontab on the VPS, beside the
+# existing BLOXODES_STATS_WORKER and BLOXODES_ITEM_STATS_WORKER blocks.
+# The worker wrapper is expected at:
+# /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh
+#
+# Required env lives in /home/codex-admin/bloxodes-stats-worker/env.stats-worker.
+# It must include Supabase service-role env plus job-specific secrets such as
+# Google Indexing, OpenAI/Tavily for event details, and LINKEDIN_LI_AT for
+# LinkedIn puzzles when available.
+
+# BLOXODES_SCHEDULED_AUTOMATION_START
+35 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-daily-rollup "npm run stats:rollup-daily -- --date yesterday --finalize && npm run stats:prune-hourly -- --days 90 --apply && npm run stats:audit"
+5 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-platform-refresh "npm run stats:platform:refresh -- --hourly-days 90 --daily-days 180"
+
+0 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh codes-refresh "export REFRESH_CONCURRENCY=6 REFRESH_BATCH_DELAY_MS=750; npm run refresh:codes"
+17 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh google-indexing "export GOOGLE_INDEXING_STATE_BACKEND=supabase; npm run indexing:google -- --apply"
+
+15 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh events-refresh "export ROBLOX_VIRTUAL_EVENTS_LIMIT=200; npm run collect:virtual-events && npm run seed:event-details -- --all"
+
+10 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-early-nyt "npm run sync:puzzles -- --group early-nyt --skip-linkedin-if-missing"
+45 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-beebom-with-early "npm run sync:puzzles -- --group beebom-with-early --skip-linkedin-if-missing"
+0 5 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-beebom-with-early "npm run sync:puzzles -- --group beebom-with-early --skip-linkedin-if-missing"
+30 5 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-beebom-with-early "npm run sync:puzzles -- --group beebom-with-early --skip-linkedin-if-missing"
+10 7 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-late-nyt-linkedin "npm run sync:puzzles -- --group late-nyt-and-linkedin --skip-linkedin-if-missing"
+10 8 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-late-nyt-linkedin "npm run sync:puzzles -- --group late-nyt-and-linkedin --skip-linkedin-if-missing"
+30 8 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-full-sweep "npm run sync:puzzles -- --group all --skip-linkedin-if-missing"
+
+20 6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh music-ids-refresh "export ROBLOX_TOP_SONGS_TARGET=500 ROBLOX_TOP_SONGS_PAGE_LIMIT=50 ROBLOX_TOP_SONGS_MAX_PAGES=10 ROBLOX_CURATED_INCLUDE_TOP_SONGS=false ROBLOX_CURATED_TOOLBOX_CHART_TYPES=Week,Month,Year ROBLOX_CURATED_TOOLBOX_INCLUDE_TRENDING=false ROBLOX_CURATED_TOOLBOX_MAX_PAGES=10 ROBLOX_CURATED_MAX_ASSETS=3000; npm run collect:top-songs && npm run collect:music-ids-curated && npm run rerank:music-ids"
+
+55 6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh decal-ids-refresh "export ROBLOX_DECAL_COLLECT_MAX_ASSETS=3000 ROBLOX_DECAL_TOOLBOX_MAX_PAGES=4 ROBLOX_DECAL_TOOLBOX_PAGE_SIZE=100 ROBLOX_DECAL_TOOLBOX_DELAY_MS=125 ROBLOX_DECAL_TOOLBOX_MAX_RETRIES=3 ROBLOX_DECAL_VERIFY_MAX_TOTAL=5000 ROBLOX_DECAL_VERIFY_BATCH=100 ROBLOX_DECAL_VERIFY_CONCURRENCY=8 ROBLOX_DECAL_VERIFY_ORDER=asset_id ROBLOX_DECAL_VERIFY_REFRESH_HOURS=168 ROBLOX_DECAL_VERIFY_REQUEST_DELAY_MS=80 ROBLOX_DECAL_VERIFY_BATCH_DELAY_MS=300; npm run refresh:decal-ids"
+# BLOXODES_SCHEDULED_AUTOMATION_END

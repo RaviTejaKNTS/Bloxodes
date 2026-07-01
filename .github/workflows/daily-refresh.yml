@@ -1,9 +1,9 @@
 name: Daily Codes Refresh
 
 on:
-  schedule:
-    - cron: '0 */6 * * *'
   workflow_dispatch:
+  # Scheduled code refresh runs on the VPS stats worker.
+  # Keep this workflow manual-only as an emergency fallback.
 
 jobs:
   refresh:

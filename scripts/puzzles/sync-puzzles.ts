@@ -19,6 +19,14 @@ type PuzzleSlug =
   | "linkedin-queens"
   | "linkedin-tango"
   | "linkedin-mini-sudoku";
+type PuzzleGroup =
+  | "early-nyt"
+  | "beebom"
+  | "beebom-with-early"
+  | "late-nyt"
+  | "linkedin"
+  | "late-nyt-and-linkedin"
+  | "all";
 
 type PuzzleAnswerResult = {
   puzzleSlug: PuzzleSlug;
@@ -62,6 +70,16 @@ const ALL_PUZZLES: PuzzleSlug[] = [
   "linkedin-mini-sudoku"
 ];
 
+const PUZZLE_GROUPS: Record<PuzzleGroup, PuzzleSlug[]> = {
+  "early-nyt": ["wordle", "connections", "strands", "sudoku", "pips"],
+  beebom: ["contexto", "letroso"],
+  "beebom-with-early": ["contexto", "letroso", "wordle", "connections", "strands", "sudoku", "pips"],
+  "late-nyt": ["spelling-bee", "letter-boxed"],
+  linkedin: ["linkedin-zip", "linkedin-crossclimb", "linkedin-queens", "linkedin-tango", "linkedin-mini-sudoku"],
+  "late-nyt-and-linkedin": ["spelling-bee", "letter-boxed", "linkedin-zip", "linkedin-crossclimb", "linkedin-queens", "linkedin-tango", "linkedin-mini-sudoku"],
+  all: ALL_PUZZLES
+};
+
 const LINKEDIN_GAME_CONFIG: Record<Extract<PuzzleSlug, `linkedin-${string}`>, { gameTypeId: number; gamePageUrl: string; gameName: string }> = {
   "linkedin-zip": { gameTypeId: 6, gamePageUrl: "https://www.linkedin.com/games/view/zip/desktop/", gameName: "Zip" },
   "linkedin-crossclimb": { gameTypeId: 2, gamePageUrl: "https://www.linkedin.com/games/view/crossclimb/desktop/", gameName: "Crossclimb" },
@@ -73,10 +91,12 @@ const LINKEDIN_GAME_CONFIG: Record<Extract<PuzzleSlug, `linkedin-${string}`>, { 
 function parseArgs() {
   const args = process.argv.slice(2);
   const puzzles: PuzzleSlug[] = [];
+  let group: PuzzleGroup | undefined;
   let answerDate: string | undefined;
   let dryRun = false;
   let backfillDays = 0;
   let skipLinkedIn = false;
+  let skipLinkedInIfMissing = false;
 
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
@@ -87,6 +107,11 @@ function parseArgs() {
       index += 1;
     } else if (arg.startsWith("--puzzle=")) {
       puzzles.push(parsePuzzleSlug(arg.slice("--puzzle=".length)));
+    } else if (arg === "--group") {
+      group = parsePuzzleGroup(requireNextArg(args, index, "--group"));
+      index += 1;
+    } else if (arg.startsWith("--group=")) {
+      group = parsePuzzleGroup(arg.slice("--group=".length));
     } else if (arg === "--date") {
       answerDate = requireNextArg(args, index, "--date");
       index += 1;
@@ -101,14 +126,16 @@ function parseArgs() {
       dryRun = true;
     } else if (arg === "--skip-linkedin") {
       skipLinkedIn = true;
+    } else if (arg === "--skip-linkedin-if-missing") {
+      skipLinkedInIfMissing = true;
     }
   }
 
   if (answerDate) validateAnswerDate(answerDate);
   if (!Number.isFinite(backfillDays) || backfillDays < 0) backfillDays = 0;
 
-  const targetPuzzles = puzzles.length ? Array.from(new Set(puzzles)) : [...ALL_PUZZLES];
-  return { puzzles: targetPuzzles, answerDate, dryRun, backfillDays: Math.floor(backfillDays), skipLinkedIn };
+  const targetPuzzles = puzzles.length ? puzzles : group ? PUZZLE_GROUPS[group] : ALL_PUZZLES;
+  return { puzzles: Array.from(new Set(targetPuzzles)), answerDate, dryRun, backfillDays: Math.floor(backfillDays), skipLinkedIn, skipLinkedInIfMissing };
 }
 
 function requireNextArg(args: string[], index: number, name: string) {
@@ -121,6 +148,14 @@ function parsePuzzleSlug(value: string): PuzzleSlug {
   const normalized = value.trim().toLowerCase() as PuzzleSlug;
   if (!ALL_PUZZLES.includes(normalized)) {
     throw new Error(`Unsupported puzzle: ${value}. Expected one of ${ALL_PUZZLES.join(", ")}`);
+  }
+  return normalized;
+}
+
+function parsePuzzleGroup(value: string): PuzzleGroup {
+  const normalized = value.trim().toLowerCase() as PuzzleGroup;
+  if (!(normalized in PUZZLE_GROUPS)) {
+    throw new Error(`Unsupported puzzle group: ${value}. Expected one of ${Object.keys(PUZZLE_GROUPS).join(", ")}`);
   }
   return normalized;
 }
@@ -662,6 +697,7 @@ async function recordRun(puzzleSlug: string, status: string, issue: string | nul
 
 async function main() {
   const args = parseArgs();
+  const skipLinkedIn = args.skipLinkedIn || (args.skipLinkedInIfMissing && !process.env.LINKEDIN_LI_AT);
   const baseDate = getRequestedDate(args.answerDate);
   const dates = args.backfillDays > 0
     ? Array.from({ length: args.backfillDays }, (_, index) => addDays(baseDate, -index))
@@ -669,7 +705,7 @@ async function main() {
 
   for (const date of dates) {
     for (const puzzle of args.puzzles) {
-      if (args.skipLinkedIn && puzzle.startsWith("linkedin-")) continue;
+      if (skipLinkedIn && puzzle.startsWith("linkedin-")) continue;
       if ((puzzle === "contexto" || puzzle === "letroso") && date) {
         console.log(`[skip] ${puzzle} does not support historical date fetch from Beebom source`);
         continue;

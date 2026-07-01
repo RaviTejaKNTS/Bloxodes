@@ -74,7 +74,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 
 `enrich-roblox-universes.ts` should not be the normal source for `roblox_universe_stats_daily` now that public stats use hourly rollups. It writes same-day daily stat rows only when `ROBLOX_ENRICH_WRITE_DAILY_STATS=true` is set for a legacy one-off.
 
-| Sync daily puzzle answers | `scripts/puzzles/sync-puzzles.ts` | `npm run sync:puzzles`; use `-- --puzzle wordle`, `-- --date YYYY-MM-DD`, `-- --backfill-days 30`, `-- --dry-run`, or `-- --skip-linkedin` as needed. LinkedIn puzzle sync requires `LINKEDIN_LI_AT` in local/production env. GitHub runs `.github/workflows/daily-puzzle-sync.yml` at staggered UTC windows for NYT early games, Beebom fallbacks, NYT 3 AM ET games, LinkedIn midnight PT games, and a final 2:00 PM IST full sweep. |
+| Sync daily puzzle answers | `scripts/puzzles/sync-puzzles.ts` | `npm run sync:puzzles`; use `-- --group early-nyt`, `-- --group beebom-with-early`, `-- --group late-nyt-and-linkedin`, `-- --group all`, `-- --puzzle wordle`, `-- --date YYYY-MM-DD`, `-- --backfill-days 30`, `-- --dry-run`, `-- --skip-linkedin`, or `-- --skip-linkedin-if-missing` as needed. LinkedIn puzzle sync requires `LINKEDIN_LI_AT` unless the skip flag is set. Recurring puzzle sync now belongs on the VPS stats worker; GitHub is manual fallback only. |
 | Fix code pages with article content but missing Roblox link/universe ID | `scripts/codes/fix-missing-code-page-roblox-links-and-universes.ts` | `npm run fix:code-page-links` local dry run, `npm run fix:code-page-links -- --prod --apply` to write prod |
 | Backfill social links | `scripts/backfill/backfill-social-links.ts` | `npm run links:backfill` |
 | Backfill missing cover images | `scripts/backfill/backfill-missing-cover-images.ts` | `npm run cover:backfill` |
@@ -149,6 +149,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Automation reporting | `scripts/automation/report-automation.mjs` | direct `node scripts/automation/report-automation.mjs` |
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |
+| VPS scheduled automation manifest | `scripts/ops/vps-scheduled-automation.crontab` | Install into the VPS `codex-admin` crontab beside existing stats-worker blocks. This is the scheduled source for universe daily rollup/prune/audit, platform aggregate refresh, codes refresh, Google Indexing, events refresh, puzzle sync, music IDs, and decal IDs. GitHub workflows for those jobs are manual fallback only. |
 
 ### Wiki And Game Collection Production Publish
 
