@@ -174,6 +174,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Push Rock for Brainrots/*.json`
   - Local Push Rock for Brainrots datasets for wiki/collection page work, including Brainrots, rocks/gates, and upgrades.
   - Matching row or system images live under `apps/web/public/Push Rock for Brainrots/` by collection folder. Keep gamepasses, badges, developer products, and generic Hunter mentions out of the datasets unless the row-level facts are source-backed and useful to players.
+- `data/Restaurant Tycoon 3/*.json`
+  - Local Restaurant Tycoon 3 datasets for wiki/collection page work, including food, drinks, ingredients, customers, workers, upgrades, build items, milestones, and locations.
+  - Matching source-backed images live under `apps/web/public/Restaurant Tycoon 3/` by collection folder where useful row images are available.
 - `data/Wizard Alchemy/quiz.json`
   - Local Wizard Alchemy quiz question pool for `/quizzes/wizard-alchemy`.
   - Quiz pools use `QuizData` shape with `easy`, `medium`, and `hard` arrays. Keep easy questions beginner-friendly, make hard questions pro-level, and vary question rhythm naturally.

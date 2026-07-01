@@ -1,0 +1,520 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Restaurant Tycoon 3",
+    "gameSlug": "restaurant-tycoon-3",
+    "collection": "ingredients",
+    "route": "/wiki/restaurant-tycoon-3/ingredients",
+    "catalogCode": "restaurant-tycoon-3-ingredients",
+    "itemFields": [
+      "stores",
+      "price",
+      "totalRequired",
+      "farmable",
+      "growthTime",
+      "amountGrown",
+      "cardSummary"
+    ],
+    "columns": [
+      "stores",
+      "price",
+      "totalRequired",
+      "farmable",
+      "growthTime",
+      "amountGrown",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "farmable",
+      "sectionOrder": [
+        "Farmable ingredients",
+        "Shop-only staples",
+        "Meat and fish"
+      ],
+      "badgeField": "farmable",
+      "subtitleFields": [
+        "stores"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "stores",
+        "price",
+        "totalRequired",
+        "farmable",
+        "growthTime",
+        "amountGrown"
+      ],
+      "tableFields": [
+        "stores",
+        "price",
+        "totalRequired",
+        "farmable",
+        "growthTime",
+        "amountGrown",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "stores": "normal",
+        "price": "chip",
+        "totalRequired": "chip",
+        "farmable": "highlight",
+        "growthTime": "chip",
+        "amountGrown": "chip",
+        "cardSummary": "detail"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Onion",
+        "stores": "Farm",
+        "price": "20 Cash",
+        "totalRequired": 88,
+        "farmable": "Yes",
+        "growthTime": "15 Minutes",
+        "amountGrown": "x3",
+        "cardSummary": "Onion is a farmable Farm ingredient with a short 15 minute crop cycle and high listed food and drink demand."
+      },
+      "system": {
+        "slug": "onion",
+        "section": "Farmable ingredients",
+        "sortOrder": 1,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/onion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flour",
+        "stores": "Bakery",
+        "price": "20 Cash",
+        "totalRequired": 118,
+        "farmable": "Yes",
+        "growthTime": "25 Minutes",
+        "amountGrown": "x5",
+        "cardSummary": "Flour is the Ingredients-table row tied to the Wheat farming crop, with a 25 minute grow time and one of the highest listed demand totals."
+      },
+      "system": {
+        "slug": "flour",
+        "section": "Farmable ingredients",
+        "sortOrder": 2,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/flour.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sugar",
+        "stores": "Bakery, Supermarket",
+        "price": "20 Cash (Bakery); 30 Cash (Supermarket)",
+        "totalRequired": 168,
+        "farmable": "Yes",
+        "growthTime": "45 Minutes",
+        "amountGrown": "x6",
+        "cardSummary": "Sugar maps to the Sugarcane crop in the Farming table and has the highest listed total requirement in the Ingredients table."
+      },
+      "system": {
+        "slug": "sugar",
+        "section": "Farmable ingredients",
+        "sortOrder": 3,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/sugar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tomato",
+        "stores": "Farm",
+        "price": "25 Cash",
+        "totalRequired": 50,
+        "farmable": "Yes",
+        "growthTime": "1 Hour",
+        "amountGrown": "x8",
+        "cardSummary": "Tomato can be bought from the Farm or grown in one hour, producing x8 per harvest."
+      },
+      "system": {
+        "slug": "tomato",
+        "section": "Farmable ingredients",
+        "sortOrder": 4,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/tomato.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pepper",
+        "stores": "Farm",
+        "price": "40 Cash",
+        "totalRequired": 17,
+        "farmable": "Yes",
+        "growthTime": "1 Hour",
+        "amountGrown": "x6",
+        "cardSummary": "Pepper is a Farm ingredient that can also be grown in one hour for x6, with a lower listed recipe demand than most staples."
+      },
+      "system": {
+        "slug": "pepper",
+        "section": "Farmable ingredients",
+        "sortOrder": 5,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/pepper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Potato",
+        "stores": "Farm",
+        "price": "20 Cash",
+        "totalRequired": 71,
+        "farmable": "Yes",
+        "growthTime": "1 Hour 15 Minutes",
+        "amountGrown": "x6",
+        "cardSummary": "Potato is a farmable Farm ingredient with a 1 hour 15 minute grow time and a high listed total requirement."
+      },
+      "system": {
+        "slug": "potato",
+        "section": "Farmable ingredients",
+        "sortOrder": 6,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/potato.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carrot",
+        "stores": "Farm",
+        "price": "25 Cash",
+        "totalRequired": 45,
+        "farmable": "Yes",
+        "growthTime": "1 Hour 30 Minutes",
+        "amountGrown": "x7",
+        "cardSummary": "Carrot is a Farm ingredient with a 1 hour 30 minute crop route and x7 per harvest."
+      },
+      "system": {
+        "slug": "carrot",
+        "section": "Farmable ingredients",
+        "sortOrder": 7,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/carrot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Banana",
+        "stores": "Supermarket",
+        "price": "40 Cash",
+        "totalRequired": 22,
+        "farmable": "Yes",
+        "growthTime": "1 Hour 40 Minutes",
+        "amountGrown": "x3",
+        "cardSummary": "Banana is sold at the Supermarket and can be grown through the Banana Tree crop, which takes 1 hour 40 minutes for x3."
+      },
+      "system": {
+        "slug": "banana",
+        "section": "Farmable ingredients",
+        "sortOrder": 8,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/banana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Berries",
+        "stores": "Farm, Supermarket",
+        "price": "80 Cash",
+        "totalRequired": 51,
+        "farmable": "Yes",
+        "growthTime": "2 Hours",
+        "amountGrown": "x8",
+        "cardSummary": "Berries can be bought from Farm or Supermarket and grown as a Berry Bush crop for x8 after two hours."
+      },
+      "system": {
+        "slug": "berries",
+        "section": "Farmable ingredients",
+        "sortOrder": 9,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/berries.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin",
+        "stores": "Farm",
+        "price": "40 Cash",
+        "totalRequired": 8,
+        "farmable": "Yes",
+        "growthTime": "2 Hours",
+        "amountGrown": "x3",
+        "cardSummary": "Pumpkin is a Farm ingredient and a two hour crop, but its listed food and drink requirement is low compared with other farmable staples."
+      },
+      "system": {
+        "slug": "pumpkin",
+        "section": "Farmable ingredients",
+        "sortOrder": 10,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/pumpkin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lettuce",
+        "stores": "Farm",
+        "price": "30 Cash",
+        "totalRequired": 26,
+        "farmable": "Yes",
+        "growthTime": "2 Hours 30 Minutes",
+        "amountGrown": "x7",
+        "cardSummary": "Lettuce is a Farm ingredient with a longer 2 hour 30 minute crop timer and x7 per harvest."
+      },
+      "system": {
+        "slug": "lettuce",
+        "section": "Farmable ingredients",
+        "sortOrder": 11,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/lettuce.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apple",
+        "stores": "Farm, Supermarket",
+        "price": "120 Cash",
+        "totalRequired": 38,
+        "farmable": "Yes",
+        "growthTime": "3 Hours",
+        "amountGrown": "x7",
+        "cardSummary": "Apple is the longest farmable crop route in the Farming table, taking three hours as an Apple Tree for x7."
+      },
+      "system": {
+        "slug": "apple",
+        "section": "Farmable ingredients",
+        "sortOrder": 12,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/apple.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Milk",
+        "stores": "Farm, Supermarket",
+        "price": "45 Cash (Farm); 70 Cash (Supermarket)",
+        "totalRequired": 76,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Milk is bought from Farm or Supermarket and has a high listed food and drink requirement."
+      },
+      "system": {
+        "slug": "milk",
+        "section": "Shop-only staples",
+        "sortOrder": 13,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/milk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Egg",
+        "stores": "Bakery, Supermarket",
+        "price": "20 Cash (Bakery); 30 Cash (Supermarket)",
+        "totalRequired": 69,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Egg is a Bakery or Supermarket staple with one of the larger listed food and drink totals."
+      },
+      "system": {
+        "slug": "egg",
+        "section": "Shop-only staples",
+        "sortOrder": 14,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/egg.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cheese",
+        "stores": "Farm, Supermarket",
+        "price": "40 Cash (Farm); 60 Cash (Supermarket)",
+        "totalRequired": 50,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Cheese is available from Farm or Supermarket, with different listed prices depending on the shop."
+      },
+      "system": {
+        "slug": "cheese",
+        "section": "Shop-only staples",
+        "sortOrder": 15,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/cheese.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bread",
+        "stores": "Bakery, Supermarket",
+        "price": "25 Cash (Bakery); 40 Cash (Supermarket)",
+        "totalRequired": 47,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Bread is sold by Bakery and Supermarket, with the Bakery price listed lower in the source table."
+      },
+      "system": {
+        "slug": "bread",
+        "section": "Shop-only staples",
+        "sortOrder": 16,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/bread.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice",
+        "stores": "Supermarket",
+        "price": "25 Cash",
+        "totalRequired": 39,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Ice is a Supermarket ingredient with a mid-range listed demand total."
+      },
+      "system": {
+        "slug": "ice",
+        "section": "Shop-only staples",
+        "sortOrder": 17,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/ice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate",
+        "stores": "Supermarket",
+        "price": "90 Cash",
+        "totalRequired": 36,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Chocolate is a Supermarket-only ingredient with a listed price of 90 Cash."
+      },
+      "system": {
+        "slug": "chocolate",
+        "section": "Shop-only staples",
+        "sortOrder": 18,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/chocolate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pasta",
+        "stores": "Supermarket",
+        "price": "25 Cash",
+        "totalRequired": 36,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Pasta is a Supermarket ingredient with the same listed total requirement as Chocolate."
+      },
+      "system": {
+        "slug": "pasta",
+        "section": "Shop-only staples",
+        "sortOrder": 19,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/pasta.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mushroom",
+        "stores": "Farm, Campsite",
+        "price": "25 Cash",
+        "totalRequired": 18,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Mushroom is bought from Farm or Campsite and has a lower listed food and drink total."
+      },
+      "system": {
+        "slug": "mushroom",
+        "section": "Shop-only staples",
+        "sortOrder": 20,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/mushroom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fish",
+        "stores": "Fishmonger",
+        "price": "50 Cash",
+        "totalRequired": 82,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Fish is bought from the Fishmonger and has the highest listed total among the meat and fish group."
+      },
+      "system": {
+        "slug": "fish",
+        "section": "Meat and fish",
+        "sortOrder": 21,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/fish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chicken",
+        "stores": "Butcher",
+        "price": "35 Cash",
+        "totalRequired": 77,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Chicken is a Butcher ingredient with a high listed food and drink requirement."
+      },
+      "system": {
+        "slug": "chicken",
+        "section": "Meat and fish",
+        "sortOrder": 22,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/chicken.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beef",
+        "stores": "Butcher",
+        "price": "65 Cash",
+        "totalRequired": 75,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Beef is a Butcher ingredient with a high listed requirement and a 65 Cash source price."
+      },
+      "system": {
+        "slug": "beef",
+        "section": "Meat and fish",
+        "sortOrder": 23,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/beef.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pork",
+        "stores": "Butcher",
+        "price": "45 Cash",
+        "totalRequired": 46,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Pork is a Butcher ingredient with a mid-range listed total requirement."
+      },
+      "system": {
+        "slug": "pork",
+        "section": "Meat and fish",
+        "sortOrder": 24,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/pork.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lamb",
+        "stores": "Butcher",
+        "price": "75 Cash",
+        "totalRequired": 24,
+        "farmable": "No",
+        "growthTime": null,
+        "amountGrown": null,
+        "cardSummary": "Lamb is a Butcher ingredient with a 75 Cash listed price and lower total requirement than the other meat entries."
+      },
+      "system": {
+        "slug": "lamb",
+        "section": "Meat and fish",
+        "sortOrder": 25,
+        "image": "/Restaurant%20Tycoon%203/Ingredients/lamb.png"
+      }
+    }
+  ]
+}

@@ -1,0 +1,302 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Restaurant Tycoon 3",
+    "gameSlug": "restaurant-tycoon-3",
+    "collection": "milestones",
+    "route": "/wiki/restaurant-tycoon-3/milestones",
+    "catalogCode": "restaurant-tycoon-3-milestones",
+    "itemFields": [
+      "name",
+      "activityType",
+      "levelCount",
+      "xpSources",
+      "xpRate",
+      "maxProgress",
+      "levelRewards",
+      "notableUnlocks",
+      "trophy",
+      "comingSoonRewards",
+      "recommendedFoods",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "activityType",
+      "levelCount",
+      "xpSources",
+      "xpRate",
+      "maxProgress",
+      "levelRewards",
+      "notableUnlocks",
+      "trophy",
+      "comingSoonRewards",
+      "recommendedFoods",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Cooking actions",
+        "Restaurant service",
+        "Menu and ingredients",
+        "Build and decor",
+        "Staff and management"
+      ],
+      "badgeField": "levelCount",
+      "subtitleFields": [
+        "activityType",
+        "xpRate"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "activityType",
+        "xpRate",
+        "maxProgress",
+        "notableUnlocks",
+        "trophy",
+        "comingSoonRewards",
+        "recommendedFoods"
+      ],
+      "tableFields": [
+        "activityType",
+        "levelCount",
+        "xpSources",
+        "xpRate",
+        "maxProgress",
+        "levelRewards",
+        "notableUnlocks",
+        "trophy",
+        "comingSoonRewards",
+        "recommendedFoods",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "activityType": {
+          "kind": "highlight",
+          "label": "Activity"
+        },
+        "levelCount": {
+          "kind": "chip",
+          "label": "Levels"
+        },
+        "xpSources": "detail",
+        "xpRate": {
+          "kind": "chip",
+          "label": "XP"
+        },
+        "maxProgress": "detail",
+        "levelRewards": "detail",
+        "notableUnlocks": "detail",
+        "trophy": {
+          "kind": "highlight",
+          "label": "Level 10"
+        },
+        "comingSoonRewards": "normal",
+        "recommendedFoods": "detail",
+        "cardSummary": "detail"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Chopping",
+        "activityType": "Cooking action",
+        "levelCount": "10 levels",
+        "xpSources": "Chop while cooking dishes.",
+        "xpRate": "50 XP per chop",
+        "maxProgress": "1,000 chops to reach max level.",
+        "levelRewards": "Levels 2, 4, 6, 7, 8, and 9 add chopping speed. Level 3 unlocks Butcher Access, level 5 unlocks Burger Stand Access, and level 10 gives the Chopping Trophy.",
+        "notableUnlocks": "Butcher Access, Burger Stand Access, chopping speed boosts.",
+        "trophy": "Chopping Trophy",
+        "comingSoonRewards": "None listed",
+        "recommendedFoods": "Source table highlights Guacamole and Irish Stew as 100% chopping-step foods, with Coleslaw, Papaya Salad, and Salmon Soup also listed near the top.",
+        "cardSummary": "Chopping is the cooking milestone for repeated chopping steps. Push it when you want stand access and faster chopping from normal dish prep."
+      },
+      "system": {
+        "slug": "chopping",
+        "section": "Cooking actions",
+        "sortOrder": 1,
+        "image": "/Restaurant%20Tycoon%203/Milestones/chopping.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Baking",
+        "activityType": "Cooking action",
+        "levelCount": "10 levels",
+        "xpSources": "Bake while cooking dishes.",
+        "xpRate": "75 XP per bake",
+        "maxProgress": "About 667 bakes to reach max level.",
+        "levelRewards": "Levels 2, 4, 6, 7, 8, and 9 add mixing speed. Level 3 unlocks Bakery Access, level 5 unlocks Cake Stand Access, and level 10 gives the Baking Trophy.",
+        "notableUnlocks": "Bakery Access, Cake Stand Access, mixing speed boosts.",
+        "trophy": "Baking Trophy",
+        "comingSoonRewards": "None listed",
+        "recommendedFoods": "Source table examples include Mac and Cheese, Sweet Potato Pie, Nachos, Profiteroles, and Creme Caramel as foods with one listed baking-related step out of two.",
+        "cardSummary": "Baking levels through bake steps and pays off with bakery-style access plus mixing speed rewards."
+      },
+      "system": {
+        "slug": "baking",
+        "section": "Cooking actions",
+        "sortOrder": 2,
+        "image": "/Restaurant%20Tycoon%203/Milestones/baking.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frying",
+        "activityType": "Cooking action",
+        "levelCount": "10 levels",
+        "xpSources": "Fry while cooking dishes.",
+        "xpRate": "25 XP per fry",
+        "maxProgress": "2,000 fries to reach max level.",
+        "levelRewards": "Levels 2, 4, 6, 7, 8, and 9 add frying speed. Level 3 unlocks Fishmonger Access, level 5 unlocks Sushi Stand Access, and level 10 gives the Frying Trophy.",
+        "notableUnlocks": "Fishmonger Access, Sushi Stand Access, frying speed boosts.",
+        "trophy": "Frying Trophy",
+        "comingSoonRewards": "None listed",
+        "recommendedFoods": "Source table highlights Steak Frites as a 100% frying-step food, with Chow Mein, Kung Pao Chicken, Soto, and Pad Thai also listed near the top.",
+        "cardSummary": "Frying is slower per action than chopping or baking in the source rates, so food choice matters when pushing its speed and stand unlocks."
+      },
+      "system": {
+        "slug": "frying",
+        "section": "Cooking actions",
+        "sortOrder": 3,
+        "image": "/Restaurant%20Tycoon%203/Milestones/frying.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Serving",
+        "activityType": "Restaurant service",
+        "levelCount": "10 levels",
+        "xpSources": "Take orders, serve dishes, and collect dishes.",
+        "xpRate": "10 XP per order; 20 XP per served or collected dish",
+        "maxProgress": "Capped source pools: 2,500 orders, 1,250 served dishes, and 1,250 collected dishes for max XP.",
+        "levelRewards": "Levels 2, 3, 4, 6, 7, and 8 increase tip chance. Level 5 gives 10 Diamonds, level 9 lists Ice Cream Stand Access as coming soon, and level 10 gives the Serving Trophy.",
+        "notableUnlocks": "Tip chance boosts, 10 Diamonds, Ice Cream Stand Access.",
+        "trophy": "Serving Trophy",
+        "comingSoonRewards": "Ice Cream Stand Access is marked coming soon.",
+        "recommendedFoods": "Not applicable",
+        "cardSummary": "Serving rewards front-of-house work: orders, delivered dishes, and cleared dishes. It is the milestone to push when service flow is your main grind."
+      },
+      "system": {
+        "slug": "serving",
+        "section": "Restaurant service",
+        "sortOrder": 4,
+        "image": "/Restaurant%20Tycoon%203/Milestones/serving.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Food Mastery",
+        "activityType": "Menu mastery",
+        "levelCount": "10 levels",
+        "xpSources": "Buy organic ingredients, buy advanced kitchen items, and unlock food.",
+        "xpRate": "100 XP per ingredient purchase; 100 XP per advanced kitchen item; food unlock XP uses Food Level x 5",
+        "maxProgress": "Ingredient and advanced kitchen item sources each cap at 5,000 XP. Food unlocks cap at 45,000 XP, but the source says food levels are unknown.",
+        "levelRewards": "Levels 2, 3, 4, 5, 7, and 8 increase Food Critic chance. Level 6 unlocks Pizza Stand Access, level 9 gives 15 Diamonds, and level 10 gives the Food Mastery Trophy.",
+        "notableUnlocks": "Food Critic chance boosts, Pizza Stand Access, 15 Diamonds.",
+        "trophy": "Food Mastery Trophy",
+        "comingSoonRewards": "None listed",
+        "recommendedFoods": "Not applicable",
+        "cardSummary": "Food Mastery is the menu and ingredient milestone. It is best tracked around ingredient purchases, advanced kitchen items, and food unlock progress."
+      },
+      "system": {
+        "slug": "food-mastery",
+        "section": "Menu and ingredients",
+        "sortOrder": 5,
+        "image": "/Restaurant%20Tycoon%203/Milestones/food-mastery.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Building",
+        "activityType": "Build mode",
+        "levelCount": "10 levels",
+        "xpSources": "Buy items from the Build Menu.",
+        "xpRate": "100 XP per build item",
+        "maxProgress": "Category caps vary: walls and roofs cap at 7,000 XP each, art caps at 4,000 XP, several utility categories cap at 3,000 XP, and many furniture/build categories cap at 5,000 XP.",
+        "levelRewards": "Levels 2, 3, 4, 6, 7, and 8 increase Celebrity chance. Level 5 gives the Sakura Hut starter restaurant, level 9 gives the Tatami Restaurant starter restaurant, and level 10 gives the Building Trophy.",
+        "notableUnlocks": "Celebrity chance boosts, Sakura Hut starter restaurant, Tatami Restaurant starter restaurant.",
+        "trophy": "Building Trophy",
+        "comingSoonRewards": "None listed",
+        "recommendedFoods": "Not applicable",
+        "cardSummary": "Building is the milestone for decorating and expanding through Build Mode purchases. Its standout rewards are celebrity chance and exclusive starter restaurants."
+      },
+      "system": {
+        "slug": "building",
+        "section": "Build and decor",
+        "sortOrder": 6,
+        "image": "/Restaurant%20Tycoon%203/Milestones/building.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leadership",
+        "activityType": "Worker management",
+        "levelCount": "10 levels",
+        "xpSources": "Customize workers, create worker outfits, upgrade workers, and hire workers.",
+        "xpRate": "100 XP per customization or outfit; upgrade XP equals upgrade price up to 1,000 XP; hire XP equals worker price up to 2,000 XP",
+        "maxProgress": "Customization and outfit sources each cap at 2,000 XP. Worker upgrades cap at 30,000 XP and worker hiring caps at 20,000 XP.",
+        "levelRewards": "Levels 2, 3, 4, 6, 7, and 8 increase tip amounts. Levels 5 and 9 give Diamonds, and level 10 gives the Leadership Trophy.",
+        "notableUnlocks": "Tip amount boosts, 10 Diamonds, 15 Diamonds.",
+        "trophy": "Leadership Trophy",
+        "comingSoonRewards": "None listed",
+        "recommendedFoods": "Not applicable",
+        "cardSummary": "Leadership is the worker milestone. It grows through hiring, upgrading, outfits, and customization rather than through direct cooking or building alone."
+      },
+      "system": {
+        "slug": "leadership",
+        "section": "Staff and management",
+        "sortOrder": 7,
+        "image": "/Restaurant%20Tycoon%203/Milestones/leadership.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Management",
+        "activityType": "Restaurant progress",
+        "levelCount": "10 levels",
+        "xpSources": "Reach restaurant stars and buy upgrades.",
+        "xpRate": "5,000 XP per star; upgrade XP equals half the upgrade price up to 2,500 XP",
+        "maxProgress": "Star progress caps at 25,000 XP and upgrade purchases cap at 30,000 XP.",
+        "levelRewards": "Levels 2, 3, 4, 6, 7, and 8 increase VIP chance. Level 5 unlocks Supermarket Access, level 9 lists Sandwich Stand Access as coming soon, and level 10 gives the Management Trophy.",
+        "notableUnlocks": "VIP chance boosts, Supermarket Access, Sandwich Stand Access.",
+        "trophy": "Management Trophy",
+        "comingSoonRewards": "Sandwich Stand Access is marked coming soon.",
+        "recommendedFoods": "Not applicable",
+        "cardSummary": "Management rewards overall restaurant progress through stars and upgrade purchases. Track it when you are buying upgrades or pushing star milestones."
+      },
+      "system": {
+        "slug": "management",
+        "section": "Staff and management",
+        "sortOrder": 8,
+        "image": "/Restaurant%20Tycoon%203/Milestones/management.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gardening",
+        "activityType": "Farming and decor",
+        "levelCount": "10 levels",
+        "xpSources": "Buy nature items, buy outdoor items, and harvest crops.",
+        "xpRate": "100 XP per nature or outdoor item; crop harvest XP equals Grow Time x 4 up to 2,000 XP",
+        "maxProgress": "Nature items cap at 15,000 XP, outdoor items cap at 10,000 XP, and crop harvests cap at 35,000 XP.",
+        "levelRewards": "Levels 2, 3, 4, 6, 7, and 8 add farm slots. Level 5 unlocks Farm Access, level 9 lists Smoothie Stand Access as coming soon, and level 10 gives the Gardening Trophy.",
+        "notableUnlocks": "Farm slots, Farm Access, Smoothie Stand Access.",
+        "trophy": "Gardening Trophy",
+        "comingSoonRewards": "Smoothie Stand Access is marked coming soon.",
+        "recommendedFoods": "Not applicable",
+        "cardSummary": "Gardening mixes build-mode nature purchases with crop harvesting. It is the milestone to follow when farm slots and farming unlocks matter."
+      },
+      "system": {
+        "slug": "gardening",
+        "section": "Build and decor",
+        "sortOrder": 9,
+        "image": "/Restaurant%20Tycoon%203/Milestones/gardening.png"
+      }
+    }
+  ]
+}

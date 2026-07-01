@@ -37,6 +37,7 @@ import { cleanTheSupermarketCollectionGroup } from "./clean-the-supermarket";
 import { murderMystery2CollectionGroup } from "./murder-mystery-2";
 import { lifetogetherRpCollectionGroup } from "./lifetogether-rp";
 import { catalogAvatarCreatorCollectionGroup } from "./catalog-avatar-creator";
+import { restaurantTycoon3CollectionGroup } from "./restaurant-tycoon-3";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -78,5 +79,6 @@ export const GAME_COLLECTION_GROUPS = [
   cleanTheSupermarketCollectionGroup,
   murderMystery2CollectionGroup,
   lifetogetherRpCollectionGroup,
-  catalogAvatarCreatorCollectionGroup
+  catalogAvatarCreatorCollectionGroup,
+  restaurantTycoon3CollectionGroup
 ] satisfies GameCollectionGroup[];

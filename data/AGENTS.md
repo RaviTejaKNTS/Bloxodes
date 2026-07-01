@@ -64,6 +64,9 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 - `data/Push Rock for Brainrots/*`
   - Dataset-backed Push Rock for Brainrots wiki/collection content, including Brainrots, rocks/gates, and upgrades.
   - Matching source-backed images live under `apps/web/public/Push Rock for Brainrots/` by collection folder. Keep gamepasses and generic Hunter mentions out of these datasets unless row-level, player-useful facts are available.
+- `data/Restaurant Tycoon 3/*`
+  - Dataset-backed Restaurant Tycoon 3 wiki/collection content, including food, drinks, ingredients, customers, workers, upgrades, build items, milestones, and locations.
+  - Matching source-backed images live under `apps/web/public/Restaurant Tycoon 3/` by collection folder where useful row images are available.
 - `data/Fisch/fish.json`
   - Fisch collection content.
 - `data/Color Codes/roblox-color-codes.json`

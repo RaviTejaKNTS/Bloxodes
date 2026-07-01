@@ -50,6 +50,7 @@ type ResolvedWikiCopy = {
   metaDescription: string;
   descriptionMd: string;
   tipsMd: string;
+  universeId?: number | null;
   controlsJson: Array<Record<string, string>>;
   coverImage?: string | null;
 };
@@ -170,6 +171,7 @@ async function resolveWikiCopy(group: GameCollectionGroup): Promise<ResolvedWiki
     metaDescription,
     descriptionMd,
     tipsMd,
+    universeId: finalJson && "universe_id" in finalJson ? finalJson.universe_id ?? null : undefined,
     controlsJson,
     coverImage:
       finalJson && "cover_image" in finalJson
@@ -923,7 +925,7 @@ async function buildRows(existingPublishedAt: Map<string, string | null>, univer
       seo_title: copy.seoTitle,
       meta_description: copy.metaDescription,
       description_md: copy.descriptionMd,
-      universe_id: universeIdsByGameSlug.get(group.gameSlug) ?? null,
+      universe_id: copy.universeId ?? universeIdsByGameSlug.get(group.gameSlug) ?? null,
       controls_json: copy.controlsJson,
       tips_md: copy.tipsMd,
       is_published: !draft,
