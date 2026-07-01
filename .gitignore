@@ -8,6 +8,7 @@ node_modules
 
 # Next.js
 .next/
+apps/web/.next-prod-preview*/
 out/
 
 # Production

@@ -37,8 +37,10 @@ import { cleanTheSupermarketCollectionGroup } from "./clean-the-supermarket";
 import { murderMystery2CollectionGroup } from "./murder-mystery-2";
 import { lifetogetherRpCollectionGroup } from "./lifetogether-rp";
 import { catalogAvatarCreatorCollectionGroup } from "./catalog-avatar-creator";
-import { restaurantTycoon3CollectionGroup } from "./restaurant-tycoon-3";
 import { drivingEmpireCollectionGroup } from "./driving-empire";
+import { restaurantTycoon3CollectionGroup } from "./restaurant-tycoon-3";
+import { theStrongestBattlegroundsCollectionGroup } from "./the-strongest-battlegrounds";
+import { storageHuntersOpenWorldCollectionGroup } from "./storage-hunters-open-world";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -81,6 +83,8 @@ export const GAME_COLLECTION_GROUPS = [
   murderMystery2CollectionGroup,
   lifetogetherRpCollectionGroup,
   catalogAvatarCreatorCollectionGroup,
+  drivingEmpireCollectionGroup,
   restaurantTycoon3CollectionGroup,
-  drivingEmpireCollectionGroup
+  theStrongestBattlegroundsCollectionGroup,
+  storageHuntersOpenWorldCollectionGroup
 ] satisfies GameCollectionGroup[];

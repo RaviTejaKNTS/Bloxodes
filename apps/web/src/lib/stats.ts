@@ -2,7 +2,9 @@ import "server-only";
 import { formatAgeRating } from "@/lib/age-rating";
 import { supabaseAdmin } from "@/lib/supabase";
 import { slugify, statsUniverseSlug } from "@/lib/slug";
+import { getStatsVisitShareChart, type StatsVisitShareChartData } from "@/lib/stats-visit-share";
 export { formatCompactNumber, formatFullNumber, formatPercent } from "@/lib/stats-format";
+export type { StatsVisitShareChartData, StatsVisitSharePoint, StatsVisitShareSeries } from "@/lib/stats-visit-share";
 
 export const STATS_PAGE_SIZE = 50;
 const STATS_HOME_TOP_GAMES_LIMIT = 10;
@@ -304,6 +306,7 @@ export type StatsHomeData = {
   recentGames: StatsGame[];
   platformTrend: StatsChartPoint[];
   platformChart: StatsGameChartData;
+  visitShareChart: StatsVisitShareChartData;
 };
 
 export type StatsPlatformTotals = {
@@ -590,6 +593,23 @@ type PlatformAggregateRow = {
   tracked_games: number | string | null;
   samples: number | string | null;
   recorded_at: string | null;
+};
+
+type PlatformDailyFallbackRow = {
+  stat_date: string;
+  playing: number | string | null;
+  avg_playing: number | string | null;
+  peak_playing: number | string | null;
+  visits: number | string | null;
+  visits_end: number | string | null;
+  favorites: number | string | null;
+  favorites_end: number | string | null;
+  likes: number | string | null;
+  likes_end: number | string | null;
+  dislikes: number | string | null;
+  dislikes_end: number | string | null;
+  rating_end: number | string | null;
+  sample_count: number | string | null;
 };
 
 type RankSnapshotRow = {
@@ -970,6 +990,10 @@ function toFiniteNumber(value: unknown): number | null {
     return Number.isFinite(parsed) ? parsed : null;
   }
   return null;
+}
+
+function isMissingPostgrestRelationError(error: { code?: string; message?: string }) {
+  return error.code === "42P01" || error.code === "PGRST205" || error.message?.includes("Could not find the table");
 }
 
 function toJsonStringArray(value: unknown): string[] {
@@ -1936,13 +1960,14 @@ function mapPlatformTrendRow(row: PlatformTrendRow): StatsChartPoint {
 }
 
 export async function getStatsHome(): Promise<StatsHomeData> {
-  const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres, riserBase, platformTotals] = await Promise.all([
+  const [{ rows: topBase }, { rows: visitedBase }, { total: trackedGames }, genres, riserBase, platformTotals, visitShareChart] = await Promise.all([
     listBaseGames({ limit: STATS_HOME_TOP_GAMES_LIMIT, sort: "playing" }),
     listBaseGames({ limit: 10, sort: "visits" }),
     listBaseGames({ limit: 1, sort: "playing", count: "exact" }),
     listStatsGenres(STATS_HOME_GENRES_LIMIT),
     listCurrentRisers(STATS_HOME_RISERS_LIMIT),
-    getStatsPlatformTotals()
+    getStatsPlatformTotals(),
+    getStatsVisitShareChart("30d")
   ]);
   const [topGames, mostVisited, activeRisers] = await Promise.all([
     Promise.resolve(topBase),
@@ -1963,7 +1988,7 @@ export async function getStatsHome(): Promise<StatsHomeData> {
     .sort((a, b) => (a.growth24h ?? 0) - (b.growth24h ?? 0))
     .slice(0, 6);
   const { rows: recentGames } = await listBaseGames({ limit: 8, sort: "updated" });
-  const platformChart = await getStatsPlatformChart("1d", "hourly");
+  const platformChart = await getStatsPlatformChart("14d", "daily");
   const platformTrend = platformChart.points.length ? platformChart.points : await getPlatformTrend(topGames);
   const livePlayers = platformTotals?.livePlayers ?? topGames.reduce((sum, game) => sum + (game.playing ?? 0), 0);
   const totalVisits = platformTotals?.totalVisits ?? mostVisited.reduce((sum, game) => sum + (game.visits ?? 0), 0);
@@ -1995,7 +2020,8 @@ export async function getStatsHome(): Promise<StatsHomeData> {
           requestedResolution: "hourly",
           resolution: "hourly",
           points: platformTrend
-        }
+        },
+    visitShareChart
   };
 }
 
@@ -2621,6 +2647,7 @@ const RESOLUTION_HOURS: Record<StatsChartResolution, number> = {
   weekly: 24 * 7,
   monthly: 24 * 30
 };
+const PLATFORM_DAILY_FALLBACK_GAME_LIMIT = 1000;
 
 function chartRangeStart(range: StatsTimeRange) {
   return hoursAgo(RANGE_DAYS[range] * 24);
@@ -2882,6 +2909,134 @@ function bucketPlatformPoints(
     });
 }
 
+function platformDailyFallbackResolution(range: StatsTimeRange, resolution: StatsChartResolution): StatsChartResolution {
+  if (resolution === "hourly" && range !== "1d") return "daily";
+  return resolution;
+}
+
+async function getPlatformDailyFallbackChart(
+  range: StatsTimeRange,
+  resolution: StatsChartResolution,
+  window = chartWindow(range)
+): Promise<{ points: StatsChartPoint[]; resolution: StatsChartResolution } | null> {
+  const { rows: games } = await listBaseGames({
+    limit: PLATFORM_DAILY_FALLBACK_GAME_LIMIT,
+    sort: "playing"
+  });
+  const universeIds = games.map((game) => game.universeId);
+  if (!universeIds.length) return null;
+
+  const rows: PlatformDailyFallbackRow[] = [];
+  const sb = supabaseAdmin();
+  const pageSize = 1000;
+  const idPageSize = 100;
+  const startDate = window.start.toISOString().slice(0, 10);
+  const endDate = window.end.toISOString().slice(0, 10);
+
+  for (let idOffset = 0; idOffset < universeIds.length; idOffset += idPageSize) {
+    const idChunk = universeIds.slice(idOffset, idOffset + idPageSize);
+    let offset = 0;
+
+    while (true) {
+      const { data, error } = await sb
+        .from("roblox_universe_stats_daily")
+        .select("stat_date, playing, avg_playing, peak_playing, visits, visits_end, favorites, favorites_end, likes, likes_end, dislikes, dislikes_end, rating_end, sample_count")
+        .in("universe_id", idChunk)
+        .gte("stat_date", startDate)
+        .lte("stat_date", endDate)
+        .order("stat_date", { ascending: true })
+        .order("universe_id", { ascending: true })
+        .range(offset, offset + pageSize - 1);
+
+      if (error) {
+        if (!isMissingPostgrestRelationError(error)) {
+          console.warn("Failed to load daily platform fallback stats", error.message);
+        }
+        return null;
+      }
+
+      const chunk = (data ?? []) as PlatformDailyFallbackRow[];
+      rows.push(...chunk);
+      if (chunk.length < pageSize) break;
+      offset += pageSize;
+    }
+  }
+
+  const byDate = new Map<
+    string,
+    {
+      players: number;
+      peakPlayers: number;
+      visits: number;
+      favorites: number;
+      ratingTotal: number;
+      ratingWeight: number;
+      samples: number;
+    }
+  >();
+
+  for (const row of rows) {
+    const date = row.stat_date;
+    if (!date) continue;
+    const current = byDate.get(date) ?? {
+      players: 0,
+      peakPlayers: 0,
+      visits: 0,
+      favorites: 0,
+      ratingTotal: 0,
+      ratingWeight: 0,
+      samples: 0
+    };
+    const avgPlaying = toFiniteNumber(row.avg_playing);
+    const playing = toFiniteNumber(row.playing);
+    const peakPlaying = toFiniteNumber(row.peak_playing);
+    const visits = toFiniteNumber(row.visits_end) ?? toFiniteNumber(row.visits) ?? 0;
+    const favorites = toFiniteNumber(row.favorites_end) ?? toFiniteNumber(row.favorites) ?? 0;
+    const likes = toFiniteNumber(row.likes_end) ?? toFiniteNumber(row.likes);
+    const dislikes = toFiniteNumber(row.dislikes_end) ?? toFiniteNumber(row.dislikes);
+    const rating = hasEnoughRatingVotes(likes, dislikes) ? getRatingPercent(likes, dislikes) : toFiniteNumber(row.rating_end);
+    const sampleCount = Math.max(toFiniteNumber(row.sample_count) ?? 1, 1);
+
+    current.players += avgPlaying ?? playing ?? 0;
+    current.peakPlayers += peakPlaying ?? playing ?? 0;
+    current.visits += visits;
+    current.favorites += favorites;
+    current.samples += sampleCount;
+    if (rating != null) {
+      current.ratingTotal += rating * sampleCount;
+      current.ratingWeight += sampleCount;
+    }
+    byDate.set(date, current);
+  }
+
+  const dailyPoints = Array.from(byDate.entries())
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([dateValue, total]) => {
+      const date = new Date(`${dateValue}T00:00:00.000Z`);
+      return {
+        label: Number.isFinite(date.getTime()) ? formatChartDate(date) : dateValue,
+        tooltipLabel: Number.isFinite(date.getTime()) ? formatChartDate(date, true) : dateValue,
+        sampledAt: `${dateValue}T00:00:00.000Z`,
+        players: total.players,
+        peakPlayers: total.peakPlayers,
+        avgPlayers: total.players,
+        visits: total.visits,
+        favorites: total.favorites,
+        rating: total.ratingWeight > 0 ? Math.round((total.ratingTotal / total.ratingWeight) * 10) / 10 : null,
+        samples: total.samples
+      } satisfies StatsChartPoint;
+    })
+    .filter((point) => (point.players ?? 0) > 0);
+
+  if (!dailyPoints.length) return null;
+
+  const fallbackResolution = platformDailyFallbackResolution(range, resolution);
+  return {
+    points: fallbackResolution === "daily" ? dailyPoints : bucketPlatformPoints(dailyPoints, range, fallbackResolution, window),
+    resolution: fallbackResolution
+  };
+}
+
 async function getStoredPlatformChart(
   range: StatsTimeRange,
   resolution: StatsChartResolution,
@@ -2900,7 +3055,7 @@ async function getStoredPlatformChart(
     .order(timeColumn, { ascending: true });
 
   if (error) {
-    if (error.code !== "42P01") {
+    if (!isMissingPostgrestRelationError(error)) {
       console.warn("Failed to load stored platform stats", error.message);
     }
     return null;
@@ -2924,19 +3079,24 @@ export async function getStatsPlatformChart(
     getStoredPlatformChart(range, resolution, window),
     options.includePrevious ? getStoredPlatformChart(range, resolution, previousWindow) : Promise.resolve(undefined)
   ]);
-  const fallbackPoints =
-    storedPoints ??
-    (resolution === "hourly" && range === "1d" ? await getPlatformTrendFromRpc(window.start.toISOString()) : null) ??
-    [];
-  const fallbackPreviousPoints =
-    options.includePrevious && !storedPreviousPoints && resolution === "hourly"
-      ? undefined
-      : storedPreviousPoints ?? undefined;
+  const hourlyRpcPoints = storedPoints == null && resolution === "hourly" && range === "1d"
+    ? await getPlatformTrendFromRpc(window.start.toISOString())
+    : null;
+  const dailyFallback = storedPoints == null && hourlyRpcPoints == null
+    ? await getPlatformDailyFallbackChart(range, resolution, window)
+    : null;
+  const resolvedResolution = storedPoints || hourlyRpcPoints ? resolution : dailyFallback?.resolution ?? resolution;
+  const fallbackPoints = storedPoints ?? hourlyRpcPoints ?? dailyFallback?.points ?? [];
+  const previousDailyFallback =
+    options.includePrevious && !storedPreviousPoints
+      ? await getPlatformDailyFallbackChart(range, resolvedResolution, previousWindow)
+      : null;
+  const fallbackPreviousPoints = storedPreviousPoints ?? previousDailyFallback?.points ?? undefined;
 
   return {
     range,
     requestedResolution: resolution,
-    resolution,
+    resolution: resolvedResolution,
     points: fallbackPoints,
     previousPoints: fallbackPreviousPoints
   };

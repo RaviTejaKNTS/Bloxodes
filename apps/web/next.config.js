@@ -40,6 +40,7 @@ if (cspMode !== "off" && (!publicCsp || !secureCsp)) {
 const nextConfig = {
   poweredByHeader: false,
   devIndicators: false,
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   output: "standalone",
   outputFileTracingRoot: repoRoot,
   staticPageGenerationTimeout: 120,

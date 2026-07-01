@@ -36,6 +36,7 @@ import { StatsChartPanel } from "@/app/(site)/stats/components/StatsChartPanel";
 import { StatsItemImage } from "@/app/(site)/stats/components/StatsItemImage";
 import { StatsItemChartPanel } from "@/app/(site)/stats/components/StatsItemChartPanel";
 import { StatsRankChartPanel } from "@/app/(site)/stats/components/StatsRankChartPanel";
+import { StatsVisitShareChartPanel } from "@/app/(site)/stats/components/StatsVisitShareChartPanel";
 import {
   DEFAULT_STATS_GAME_COLUMNS,
   STATS_CREATOR_SORT_OPTIONS,
@@ -661,11 +662,14 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           initialChart={data.platformChart}
           chartEndpoint="/api/stats/platform/chart"
           defaultMetric="players"
-          defaultRange="1d"
+          defaultRange="14d"
+          autoDailyForMultiDayRange
           compact={false}
           area
         />
       </div>
+
+      <StatsVisitShareChartPanel initialChart={data.visitShareChart} />
 
       <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
         <Card className="rounded-lg border-border/70 bg-surface/80 shadow-none">

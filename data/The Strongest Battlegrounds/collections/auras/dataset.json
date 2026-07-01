@@ -1,0 +1,272 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "The Strongest Battlegrounds",
+    "gameSlug": "the-strongest-battlegrounds",
+    "collection": "auras",
+    "route": "/wiki/the-strongest-battlegrounds/auras",
+    "catalogCode": "the-strongest-battlegrounds-auras",
+    "itemFields": [
+      "name",
+      "killsRequired",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "killsRequired",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Starter Auras",
+        "Mid Auras",
+        "Advanced Auras"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": null,
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "killsRequired"
+      ],
+      "tableFields": [
+        "killsRequired",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "killsRequired": {
+          "kind": "chip",
+          "label": "Kills Required"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "How to unlock"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Ki",
+        "killsRequired": 4000,
+        "cardSummary": "Reach 4,000 lifetime kills to unlock the Ki aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "ki",
+        "section": "Starter Auras",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning",
+        "killsRequired": 4600,
+        "cardSummary": "Reach 4,600 lifetime kills to unlock the Lightning aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "lightning",
+        "section": "Starter Auras",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dark",
+        "killsRequired": 5600,
+        "cardSummary": "Reach 5,600 lifetime kills to unlock the Dark aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "dark",
+        "section": "Starter Auras",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stench",
+        "killsRequired": 5900,
+        "cardSummary": "Reach 5,900 lifetime kills to unlock the Stench aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "stench",
+        "section": "Starter Auras",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Error",
+        "killsRequired": 6700,
+        "cardSummary": "Reach 6,700 lifetime kills to unlock the Error aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "error",
+        "section": "Starter Auras",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Colorful",
+        "killsRequired": 7500,
+        "cardSummary": "Reach 7,500 lifetime kills to unlock the Colorful aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "colorful",
+        "section": "Mid Auras",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glitch",
+        "killsRequired": 8250,
+        "cardSummary": "Reach 8,250 lifetime kills to unlock the Glitch aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "glitch",
+        "section": "Mid Auras",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Graceful",
+        "killsRequired": 9000,
+        "cardSummary": "Reach 9,000 lifetime kills to unlock the Graceful aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "graceful",
+        "section": "Mid Auras",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson",
+        "killsRequired": 9500,
+        "cardSummary": "Reach 9,500 lifetime kills to unlock the Crimson aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "crimson",
+        "section": "Mid Auras",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Burning",
+        "killsRequired": 10000,
+        "cardSummary": "Reach 10,000 lifetime kills to unlock the Burning aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "burning",
+        "section": "Mid Auras",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow",
+        "killsRequired": 20000,
+        "cardSummary": "Reach 20,000 lifetime kills to unlock the Shadow aura. The first aura in the Advanced tier — there is no aura unlock between 10,000 and 20,000 kills. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "shadow",
+        "section": "Advanced Auras",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Midnight",
+        "killsRequired": 25000,
+        "cardSummary": "Reach 25,000 lifetime kills to unlock the Midnight aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "midnight",
+        "section": "Advanced Auras",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gold",
+        "killsRequired": 30000,
+        "cardSummary": "Reach 30,000 lifetime kills to unlock the Gold aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "gold",
+        "section": "Advanced Auras",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Love",
+        "killsRequired": 32750,
+        "cardSummary": "Reach 32,750 lifetime kills to unlock the Love aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "love",
+        "section": "Advanced Auras",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flower",
+        "killsRequired": 33500,
+        "cardSummary": "Reach 33,500 lifetime kills to unlock the Flower aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "flower",
+        "section": "Advanced Auras",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen",
+        "killsRequired": 33500,
+        "cardSummary": "Reach 33,500 lifetime kills to unlock the Frozen aura. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Advanced Auras",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Void",
+        "killsRequired": 35700,
+        "cardSummary": "Reach 35,700 lifetime kills to unlock the Void aura, the highest kill-threshold aura in the game. Can also be obtained through the Robux cosmetic spin."
+      },
+      "system": {
+        "slug": "void",
+        "section": "Advanced Auras",
+        "sortOrder": 17,
+        "image": null
+      }
+    }
+  ]
+}

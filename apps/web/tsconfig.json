@@ -23,6 +23,8 @@
   ],
   "exclude": [
     "node_modules",
-    ".next"
+    ".next",
+    ".next-prod-preview",
+    ".next-prod-preview-platform"
   ]
 }

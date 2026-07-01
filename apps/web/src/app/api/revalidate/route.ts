@@ -229,7 +229,7 @@ function revalidateForStats(slug: string) {
             : ["/stats", "/stats/roblox-platform", "/stats/games", "/stats/creators", "/stats/items"];
   const detailSlug = normalized.startsWith("games/") ? normalized.replace(/^games\//, "") : null;
   return applyRevalidation(
-    [...scopedPaths, "/api/stats/platform/chart", "/api/stats/games", "/api/stats/creators", "/api/stats/items", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
+    [...scopedPaths, "/api/stats/platform/chart", "/api/stats/visit-share", "/api/stats/games", "/api/stats/creators", "/api/stats/items", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
     ["stats", "stats-home", "stats-platform", "stats-games", "stats-creators", "stats-items", detailSlug ? `stats-game:${detailSlug}` : "", "home"]
   );
 }

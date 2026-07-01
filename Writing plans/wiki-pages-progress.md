@@ -6,5 +6,7 @@
 | Neo Tennis | neo-tennis | 8181391950 | 20,619 | 17,429 | ✅ | No | Pending | Pending | Pending | Pending | tmp/content-workspace/neo-tennis |
 | Paint Or Seek | paint-or-seek | 10278774552 | 66,304 | 34,178 | ✅ | No | Pending | Pending | Pending | Pending | tmp/content-workspace/paint-or-seek |
 | Drag Drive Simulator | drag-drive-simulator | 7089588429 | 44,311 | 39,798 | ✅ | No | Pending | Pending | Pending | Pending | tmp/content-workspace/drag-drive-simulator |
-| Power Blast Lucky Blocks | power-blast-lucky-blocks | 10184247393 | 25,368 | 12,290 | ✅ | Pending | Pending | Pending | Pending | Pending | tmp/content-workspace/power-blast-lucky-blocks |
-| Mukbang Game | mukbang-game | 9978329815 | 81,853 | 15,452 | ✅ | Pending | Pending | Pending | Pending | Pending | tmp/content-workspace/mukbang-game |
+| Power Blast Lucky Blocks | power-blast-lucky-blocks | 10184247393 | 25,368 | 12,290 | ✅ | No | Pending | Pending | Pending | Pending | tmp/content-workspace/power-blast-lucky-blocks |
+| Mukbang Game | mukbang-game | 9978329815 | 81,853 | 15,452 | ✅ | No | Pending | Pending | Pending | Pending | tmp/content-workspace/mukbang-game |
+| The Strongest Battlegrounds | the-strongest-battlegrounds | 3808081382 | 84,986 | 21,730 | ✅ | ✅ | WIP | Pending | Pending | Pending | tmp/content-workspace/the-strongest-battlegrounds |
+| Paint To Hide | paint-to-hide | 10188394289 | 47,392 | 16,985 | ✅ | Pending | Pending | Pending | Pending | Pending | tmp/content-workspace/paint-to-hide |

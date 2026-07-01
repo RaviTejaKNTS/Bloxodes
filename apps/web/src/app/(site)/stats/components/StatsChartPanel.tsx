@@ -241,6 +241,7 @@ export function StatsChartPanel({
   chartEndpoint,
   defaultMetric = "players",
   defaultRange,
+  autoDailyForMultiDayRange = false,
   compact = false,
   area = false
 }: {
@@ -252,6 +253,7 @@ export function StatsChartPanel({
   chartEndpoint?: string;
   defaultMetric?: MetricKey;
   defaultRange?: RangeKey;
+  autoDailyForMultiDayRange?: boolean;
   compact?: boolean;
   area?: boolean;
 }) {
@@ -294,6 +296,7 @@ export function StatsChartPanel({
   const Chart = area ? AreaChart : LineChart;
   const resolvedResolution = displayChart?.resolution ?? resolution;
   const activePointCount = usablePointCount(points, metric);
+  const resolutionOptions: ResolutionKey[] = autoDailyForMultiDayRange && range !== "1d" ? ["daily", "weekly", "monthly"] : ["hourly", "daily", "weekly", "monthly"];
   const chartPoints = useMemo<ChartPointForRender[]>(
     () =>
       points.map((point, index) => ({
@@ -309,6 +312,17 @@ export function StatsChartPanel({
   const isLoading = loadingKey === activeKey;
   const isShowingPreviousChart = Boolean(isLoading && !loadedChart && hasRenderableData);
   const yDomain = useMemo(() => chartDomain(chartPoints, metric, startsAtZero), [chartPoints, metric, startsAtZero]);
+
+  function handleRangeChange(value: string) {
+    const nextRange = value as RangeKey;
+    setRange(nextRange);
+    if (!autoDailyForMultiDayRange) return;
+    if (nextRange !== "1d" && resolution === "hourly") {
+      setResolution("daily");
+    } else if (nextRange === "1d" && resolution === "daily") {
+      setResolution("hourly");
+    }
+  }
 
   useEffect(() => {
     if (loadedChart) {
@@ -427,7 +441,7 @@ export function StatsChartPanel({
             </Tabs>
           ) : null}
           {initialChart ? (
-            <Tabs value={range} onValueChange={(value) => setRange(value as RangeKey)}>
+            <Tabs value={range} onValueChange={handleRangeChange}>
               <TabsList className={chartTabsListClass}>
                 {(["1d", "7d", "14d", "30d", "90d"] as RangeKey[]).map((item) => (
                   <TabsTrigger key={item} value={item} className={chartTabsTriggerClass}>
@@ -728,7 +742,7 @@ export function StatsChartPanel({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {(["hourly", "daily", "weekly", "monthly"] as ResolutionKey[]).map((item) => (
+                {resolutionOptions.map((item) => (
                   <SelectItem key={item} value={item}>
                     {resolutionLabels[item]}
                   </SelectItem>
