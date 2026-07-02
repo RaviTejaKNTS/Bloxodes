@@ -59,6 +59,7 @@ async function buildCatalogContent(): Promise<{ contentHtml: CatalogContentHtml 
       howHtml,
       descriptionHtml,
       faqHtml,
+      publishedAt: catalog.published_at ?? catalog.created_at ?? null,
       updatedAt: catalog.content_updated_at ?? catalog.updated_at ?? catalog.published_at ?? catalog.created_at ?? null
     }
   };

@@ -60,7 +60,7 @@ export default async function MusicIdGenresPage() {
       description,
       image: `${SITE_URL}/og-image.png`,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: null,
       updatedAt: updatedIso
     })
   );

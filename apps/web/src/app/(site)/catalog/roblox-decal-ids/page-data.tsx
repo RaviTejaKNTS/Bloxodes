@@ -564,6 +564,7 @@ export function renderRobloxDecalIdsPage({
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml?.howHtml : "";
   const faqHtml = contentHtml?.faqHtml ?? [];
   const baseTitle = pageTitleOverride ?? (contentHtml?.title?.trim() ? contentHtml.title.trim() : "Roblox Decal IDs");
+  const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
   const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : latest;
   const basePath =
     section === "curated" ? buildDecalCuratedPath() :
@@ -574,6 +575,7 @@ export function renderRobloxDecalIdsPage({
   const pageTitle = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
   const description = pageDescription ?? CATALOG_DESCRIPTION;
   const image = `${SITE_URL}/og-image.png`;
+  const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : undefined;
   const updatedIso = updatedDate && !Number.isNaN(updatedDate.getTime()) ? updatedDate.toISOString() : undefined;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const searchQueryString = buildSearchQueryString({ query: search, sort });
@@ -637,7 +639,7 @@ export function renderRobloxDecalIdsPage({
       description,
       image,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: publishedIso,
       updatedAt: updatedIso
     })
   );

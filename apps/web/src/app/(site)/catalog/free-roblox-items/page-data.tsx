@@ -515,10 +515,12 @@ export async function renderRobloxFreeItemsPage({
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const faqHtml = contentHtml?.faqHtml ?? [];
+  const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
   const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : null;
   const canonicalPath = currentPage > 1 ? `${basePath}/page/${currentPage}` : basePath;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const updatedIso = updatedDate?.toISOString() ?? null;
+  const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
+  const updatedIso = updatedDate && !Number.isNaN(updatedDate.getTime()) ? updatedDate.toISOString() : null;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const searchQueryString = buildSearchQueryString({ query: search, sort });
   const hasDetails =
@@ -539,7 +541,7 @@ export async function renderRobloxFreeItemsPage({
       description,
       image: `${SITE_URL}/og-image.png`,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: publishedIso,
       updatedAt: updatedIso
     })
   );

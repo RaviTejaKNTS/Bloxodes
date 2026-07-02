@@ -597,8 +597,10 @@ export async function renderAvatarCatalogPage({
   const contentHtml = await buildAvatarCatalogContentHtml(catalog);
   const pageTitle = contentHtml?.title?.trim() ? contentHtml.title.trim() : route.config.title;
   const description = catalog?.meta_description ?? route.config.description;
+  const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
+  const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
   const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : null;
-  const updatedIso = updatedDate?.toISOString() ?? null;
+  const updatedIso = updatedDate && !Number.isNaN(updatedDate.getTime()) ? updatedDate.toISOString() : null;
   const showHero = route.page === 1;
   const canonicalPath = route.page > 1 ? `${route.config.basePath}/page/${route.page}` : route.config.basePath;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
@@ -620,7 +622,7 @@ export async function renderAvatarCatalogPage({
       description,
       image: `${SITE_URL}/og-image.png`,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: publishedIso,
       updatedAt: updatedIso
     })
   );

@@ -34,6 +34,7 @@ export type CatalogContentHtml = {
   howHtml?: string;
   descriptionHtml?: Array<{ key: string; html: string }>;
   faqHtml?: Array<{ q: string; a: string }>;
+  publishedAt?: string | null;
   updatedAt?: string | null;
 };
 
@@ -134,6 +135,8 @@ export function renderRobloxColorCodesPage({
   }));
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
   const description = "Browse every official Roblox BrickColor in one catalog with exact swatches, numbers, RGB values, and copy-ready color data.";
+  const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
+  const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : undefined;
   const updatedIso = updatedDate?.toISOString();
   const pageSchema = JSON.stringify(
     webPageJsonLd({
@@ -143,7 +146,7 @@ export function renderRobloxColorCodesPage({
       description,
       image: `${SITE_URL}/og-image.png`,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: publishedIso,
       updatedAt: updatedIso
     })
   );

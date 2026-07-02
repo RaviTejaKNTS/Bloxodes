@@ -126,7 +126,7 @@ export async function MusicChartsPage({
       description: config.description,
       image: `${SITE_URL}/og-image.png`,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: null,
       updatedAt: updatedIso
     })
   );

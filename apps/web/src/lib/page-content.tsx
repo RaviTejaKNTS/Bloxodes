@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { processHtmlLinks } from "@/lib/link-utils";
 import { renderHtmlAsReactNodes } from "@/lib/html-to-react";
 import { renderMarkdown } from "@/lib/markdown";
-import { resolveModifiedAt, type ContentDateSource } from "@/lib/content-dates";
+import { resolveModifiedAt, resolvePublishedAt, type ContentDateSource } from "@/lib/content-dates";
 
 export type PageFaqEntry = { q: string; a: string };
 
@@ -25,6 +25,7 @@ export type PageContentHtml = {
   howHtml: string;
   descriptionHtml: Array<{ key: string; html: string }>;
   faqHtml: Array<{ q: string; a: string }>;
+  publishedAt: string | null;
   updatedAt: string | null;
   ctaLabel: string | null;
   ctaUrl: string | null;
@@ -81,6 +82,7 @@ export async function buildPageContentHtml(source: PageContentSource | null): Pr
     howHtml,
     descriptionHtml,
     faqHtml,
+    publishedAt: resolvePublishedAt(source),
     updatedAt: resolveModifiedAt(source),
     ctaLabel: source.cta_label ?? null,
     ctaUrl: source.cta_url ?? null

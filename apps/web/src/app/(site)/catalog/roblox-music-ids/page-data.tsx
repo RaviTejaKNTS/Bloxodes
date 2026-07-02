@@ -938,6 +938,7 @@ export function renderRobloxMusicIdsPage({
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml?.howHtml : "";
   const faqHtml = contentHtml?.faqHtml ?? [];
   const baseTitle = contentHtml?.title?.trim() ? contentHtml.title.trim() : "Roblox music IDs";
+  const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
   const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : latest;
   const formattedUpdated = updatedDate
     ? updatedDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
@@ -948,6 +949,7 @@ export function renderRobloxMusicIdsPage({
   const pageTitle = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
   const description = CATALOG_DESCRIPTION;
   const image = `${SITE_URL}/og-image.png`;
+  const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
   const updatedIso = updatedDate?.toISOString() ?? null;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
   const searchQueryString = buildSearchQueryString({ query: search, sort });
@@ -990,7 +992,7 @@ export function renderRobloxMusicIdsPage({
       description,
       image,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: publishedIso,
       updatedAt: updatedIso
     })
   );

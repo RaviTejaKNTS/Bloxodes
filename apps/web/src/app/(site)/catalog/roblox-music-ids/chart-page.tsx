@@ -87,7 +87,7 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
       description: config.description,
       image: `${SITE_URL}/og-image.png`,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: null,
       updatedAt: updatedIso
     })
   );
