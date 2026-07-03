@@ -177,6 +177,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Restaurant Tycoon 3/*.json`
   - Local Restaurant Tycoon 3 datasets for wiki/collection page work, including food, drinks, ingredients, customers, workers, upgrades, build items, milestones, and locations.
   - Matching source-backed images live under `apps/web/public/Restaurant Tycoon 3/` by collection folder where useful row images are available.
+- `data/Storage Hunters Open World/*.json`
+  - Local Storage Hunters: Open World datasets for wiki/collection page work, including accessories, shop upgrades, titles, achievements, and auction zones.
+  - Matching row images live under `apps/web/public/Storage Hunters Open World/` where clean item or achievement art exists. Titles and auction zones stay text-only until clean row-level images are available.
 - `data/Wizard Alchemy/quiz.json`
   - Local Wizard Alchemy quiz question pool for `/quizzes/wizard-alchemy`.
   - Quiz pools use `QuizData` shape with `easy`, `medium`, and `hard` arrays. Keep easy questions beginner-friendly, make hard questions pro-level, and vary question rhythm naturally.
