@@ -4,23 +4,21 @@ Expo React Native app for the Bloxodes Android and iOS clients.
 
 ## Current Scope
 
-V1 is intentionally small and database-like:
+An expo-router app with a bottom tab bar (Home, Codes, Browse, Stats, Account) and native screens for the main Bloxodes sections:
 
-- Codes index
-- Code detail page
-- Active and expired codes
-- Copy code action
-- Native index cards for Catalog, Tools, Wiki, Quizzes, Lists, Checklists, Events, and Articles
-- Search powered by the website search endpoint
-- Bloxodes-style left navigation
-- Sign-in handoff to the existing Bloxodes Roblox OAuth web flow
+- Home feed with codes, events, catalog, wiki, tools, quiz, and checklist rails
+- Codes index and detail with copy actions and used-code tracking
+- Catalog pages, wiki hubs, and game collection pages rendered natively with per-section pagination
+- Tools and events detail pages
+- Native quiz player with difficulty selection and scoring
+- Interactive checklists with progress tracking
+- Live game stats with sortable lists and player-count charts
+- Global search powered by the website search endpoint
+- Optional Roblox sign-in: progress is stored locally first and merges with the Bloxodes account when signed in
 
-The app reads public JSON from the web app:
+Articles and puzzles intentionally open on bloxodes.com instead of rendering natively.
 
-- `GET /api/mobile/codes`
-- `GET /api/mobile/codes/[slug]`
-- `GET /api/mobile/content/[kind]`
-- `GET /api/search/all`
+The app reads JSON from the web app's `/api/mobile/*` routes (see `AGENTS.md` for the full contract) plus `GET /api/search/all`.
 
 ## Run Locally
 

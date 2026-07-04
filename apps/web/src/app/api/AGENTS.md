@@ -15,10 +15,18 @@ These routes back interactive site features, search, tool data, session/progress
   - `roblox-id-extractor`
 - Platform clients:
   - `extension/roblox-game-codes`
+  - `mobile/home`
   - `mobile/codes`
   - `mobile/codes/[slug]`
   - `mobile/content/[kind]`
   - `mobile/content/[kind]/[slug]`
+  - `mobile/quizzes/[code]/play`
+  - `mobile/stats/games`, `mobile/stats/games/[universeId]`, `mobile/stats/games/[universeId]/chart`
+- Mobile auth and progress (bearer token first, cookie fallback):
+  - `mobile/auth/complete`, `mobile/auth/exchange`, `mobile/auth/session`, `mobile/auth/logout`
+  - `mobile/codes/session`, `mobile/codes/progress`
+  - `mobile/checklists/progress`
+  - `mobile/quizzes/progress`
 - User/session state:
   - `codes/session`, `codes/progress`
   - `checklists/session`, `checklists/progress`
@@ -62,10 +70,15 @@ These routes back interactive site features, search, tool data, session/progress
 ## Extension And Mobile APIs
 
 - `/api/extension/roblox-game-codes` resolves Roblox place/game context to a published Bloxodes codes page and returns a three-code preview plus the full page URL.
+- `/api/mobile/home` aggregates the codes index plus per-kind section rails for the app home screen.
 - `/api/mobile/codes` returns the paginated mobile codes index.
 - `/api/mobile/codes/[slug]` returns active and expired codes for a mobile detail screen.
-- `/api/mobile/content/[kind]` returns paginated mobile index cards for `tools`, `quizzes`, `checklists`, and `events`.
-- `/api/mobile/content/[kind]/[slug]` returns mobile detail sections and passes query/page controls through to native catalog sections.
+- `/api/mobile/content/[kind]` returns paginated mobile index cards for `catalog`, `wiki`, `tools`, `quizzes`, `checklists`, `events`, and `articles`.
+- `/api/mobile/content/[kind]/[slug]` returns mobile detail sections and passes query/page controls through to native catalog sections. For `kind=catalog`, codes that match a published `wiki_collection_pages` row fall back to that collection so game wiki collections render natively.
+- `/api/mobile/quizzes/[code]/play` returns the full `QuizData` (questions, options, correct option ids) for the native quiz player.
+- `/api/mobile/stats/games` and its `[universeId]` + `[universeId]/chart` children wrap `apps/web/src/lib/stats.ts` with CORS headers for the app; the web `/api/stats/*` routes are unchanged.
+- Mobile auth: the app opens `/api/mobile/auth/complete` in an auth browser session; after web Roblox login it redirects to `bloxodes://auth?code=<short-lived signed code>`. `/api/mobile/auth/exchange` swaps that code for an `app_sessions` bearer token. `/api/mobile/auth/session` and `/api/mobile/auth/logout` accept `Authorization: Bearer`.
+- Mobile progress routes (`mobile/codes/progress`, `mobile/checklists/progress`, `mobile/quizzes/progress`) accept bearer tokens with a cookie fallback via `apps/web/src/lib/auth/mobile-session.ts`; they write the same `user_*_progress` tables as the web routes.
 - Shared payload logic lives in `apps/web/src/lib/extension-codes.ts`, `apps/web/src/lib/mobile-codes.ts`, and `apps/web/src/lib/mobile-content.ts`.
 - Keep freshness badges aligned with the website by using `apps/web/src/lib/code-utils.ts` helpers instead of adding client-specific `is_new` rules.
 

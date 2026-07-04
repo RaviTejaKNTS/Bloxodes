@@ -31,6 +31,14 @@
     },
     "extra": {
       "apiBaseUrl": "https://bloxodes.com"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "tsconfigPaths": false
     }
   }
 }

@@ -143,10 +143,143 @@ export type MobileHomeResponse = {
   sections: MobileContentIndexResponse[];
 };
 
-export type CodeSessionResponse = {
-  userId: string | null;
+export type SessionUser = {
+  id: string;
+  role: "admin" | "user";
+  display_name: string | null;
+  roblox_user_id: number | null;
+  roblox_username: string | null;
+  roblox_display_name: string | null;
+  roblox_avatar_url: string | null;
+  roblox_profile_url: string | null;
+};
+
+export type MobileAuthSessionResponse = {
+  ok: true;
+  user: SessionUser | null;
+};
+
+export type MobileAuthExchangeResponse = {
+  ok: true;
+  token: string;
+  expiresAt: string;
+  user: SessionUser;
 };
 
 export type CodeProgressResponse = {
   usedCodes: string[];
+};
+
+export type ChecklistProgressResponse = {
+  checkedIds: string[];
+};
+
+export type ChecklistProgressSummary = {
+  slug: string;
+  checkedCount: number;
+};
+
+export type QuizProgressResponse = {
+  seenQuestionIds: string[];
+  lastScore: number | null;
+  lastTotal: number | null;
+  lastBreakdown: Record<string, { correct: number; total: number }>;
+  lastAttemptAt: string | null;
+};
+
+export type QuizProgressSummary = {
+  code: string;
+  seenCount: number;
+  lastScore: number | null;
+  lastTotal: number | null;
+};
+
+export type QuizOption = {
+  id: string;
+  text: string;
+};
+
+export type QuizQuestion = {
+  id: string;
+  question: string;
+  options: QuizOption[];
+  correctOptionId: string;
+  image?: string | null;
+};
+
+export type QuizData = {
+  easy: QuizQuestion[];
+  medium: QuizQuestion[];
+  hard: QuizQuestion[];
+};
+
+export type QuizPlayResponse = {
+  ok: true;
+  code: string;
+  title: string;
+  description: string | null;
+  universeName: string | null;
+  coverImage: string | null;
+  quizData: QuizData;
+};
+
+export type StatsGame = {
+  universeId: number;
+  slug: string;
+  rootPlaceId: number | null;
+  name: string;
+  displayName: string;
+  description: string | null;
+  creatorName: string | null;
+  creatorType: string | null;
+  creatorId: number | null;
+  genre: string | null;
+  subgenre: string | null;
+  ageRating: string | null;
+  iconUrl: string | null;
+  thumbnailUrls: string[];
+  playing: number | null;
+  visits: number | null;
+  favorites: number | null;
+  likes: number | null;
+  dislikes: number | null;
+  ratingPercent: number | null;
+  statsTier: "NEW" | "HOT" | "WARM" | "COLD" | null;
+  createdAtApi: string | null;
+  updatedAtApi: string | null;
+  rank?: number | null;
+  growth24hPercent?: number | null;
+  growth7dPercent?: number | null;
+  peakPlaying24h?: number | null;
+  peakPlaying7d?: number | null;
+};
+
+export type StatsGamesResponse = {
+  games: StatsGame[];
+  total: number;
+  page: number;
+  totalPages: number;
+};
+
+export type StatsGameDetailResponse = {
+  game: (StatsGame & { rank: number | null }) | null;
+};
+
+export type StatsChartPoint = {
+  label: string;
+  tooltipLabel?: string;
+  sampledAt: string;
+  players: number | null;
+  peakPlayers: number | null;
+  avgPlayers: number | null;
+  visits: number | null;
+  favorites: number | null;
+  rating: number | null;
+  samples: number | null;
+};
+
+export type StatsGameChartResponse = {
+  range: string;
+  resolution: string;
+  points: StatsChartPoint[];
 };

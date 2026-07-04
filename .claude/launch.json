@@ -12,6 +12,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev:prod"],
       "port": 5000
+    },
+    {
+      "name": "mobile-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "web:local", "-w", "@bloxodes/mobile"],
+      "port": 8081
     }
   ]
 }

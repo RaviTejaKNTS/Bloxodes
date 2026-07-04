@@ -1,29 +1,12 @@
 import { NextResponse } from "next/server";
-import { getSessionUser } from "@/lib/auth/session-user";
+import { getMobileSessionUser } from "@/lib/auth/mobile-session";
+import { mobileCredentialedFallbackHeaders, mobileCredentialedHeaders } from "@/lib/mobile-api-cors";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export const dynamic = "force-dynamic";
 
 const MAX_USED_CODES = 1000;
-
-function responseHeaders(request: Request) {
-  const origin = request.headers.get("origin") ?? "*";
-  return {
-    "Access-Control-Allow-Origin": origin,
-    "Access-Control-Allow-Credentials": "true",
-    "Vary": "Origin",
-    "Access-Control-Allow-Methods": "GET, PUT, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Cache-Control": "private, no-store, max-age=0"
-  };
-}
-
-const FALLBACK_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, PUT, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Cache-Control": "private, no-store, max-age=0"
-};
+const METHODS = "GET, PUT, OPTIONS";
 
 function normalizeSlug(value: string | null): string {
   if (!value) return "";
@@ -53,20 +36,21 @@ function normalizeUsedCodes(value: unknown): string[] {
 export async function OPTIONS(request: Request) {
   return new Response(null, {
     status: 204,
-    headers: responseHeaders(request)
+    headers: mobileCredentialedHeaders(request, METHODS)
   });
 }
 
 export async function GET(request: Request) {
+  const headers = mobileCredentialedHeaders(request, METHODS);
   try {
-    const user = await getSessionUser();
+    const user = await getMobileSessionUser(request);
     if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: responseHeaders(request) });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers });
     }
 
     const slug = normalizeSlug(new URL(request.url).searchParams.get("slug"));
     if (!slug) {
-      return NextResponse.json({ error: "Game slug is required." }, { status: 400, headers: responseHeaders(request) });
+      return NextResponse.json({ error: "Game slug is required." }, { status: 400, headers });
     }
 
     const admin = supabaseAdmin();
@@ -78,26 +62,30 @@ export async function GET(request: Request) {
       .maybeSingle();
 
     if (error) {
-      return NextResponse.json({ error: "Unable to load code progress." }, { status: 500, headers: responseHeaders(request) });
+      return NextResponse.json({ error: "Unable to load code progress." }, { status: 500, headers });
     }
 
     return NextResponse.json(
       {
         usedCodes: normalizeUsedCodes((data as { used_code_ids?: unknown } | null)?.used_code_ids)
       },
-      { headers: responseHeaders(request) }
+      { headers }
     );
   } catch (error) {
     console.error("Failed to load mobile code progress", error);
-    return NextResponse.json({ error: "Unable to load code progress." }, { status: 500, headers: FALLBACK_HEADERS });
+    return NextResponse.json(
+      { error: "Unable to load code progress." },
+      { status: 500, headers: mobileCredentialedFallbackHeaders(METHODS) }
+    );
   }
 }
 
 export async function PUT(request: Request) {
+  const headers = mobileCredentialedHeaders(request, METHODS);
   try {
-    const user = await getSessionUser();
+    const user = await getMobileSessionUser(request);
     if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers: responseHeaders(request) });
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers });
     }
 
     const payload = await request.json().catch(() => ({}));
@@ -105,7 +93,7 @@ export async function PUT(request: Request) {
     const usedCodes = normalizeUsedCodes(payload?.usedCodes);
 
     if (!slug) {
-      return NextResponse.json({ error: "Game slug is required." }, { status: 400, headers: responseHeaders(request) });
+      return NextResponse.json({ error: "Game slug is required." }, { status: 400, headers });
     }
 
     const admin = supabaseAdmin();
@@ -118,10 +106,10 @@ export async function PUT(request: Request) {
         .eq("game_slug", slug);
 
       if (error) {
-        return NextResponse.json({ error: "Unable to clear code progress." }, { status: 500, headers: responseHeaders(request) });
+        return NextResponse.json({ error: "Unable to clear code progress." }, { status: 500, headers });
       }
 
-      return NextResponse.json({ usedCodes: [] }, { headers: responseHeaders(request) });
+      return NextResponse.json({ usedCodes: [] }, { headers });
     }
 
     const { error } = await admin
@@ -136,12 +124,15 @@ export async function PUT(request: Request) {
       );
 
     if (error) {
-      return NextResponse.json({ error: "Unable to save code progress." }, { status: 500, headers: responseHeaders(request) });
+      return NextResponse.json({ error: "Unable to save code progress." }, { status: 500, headers });
     }
 
-    return NextResponse.json({ usedCodes }, { headers: responseHeaders(request) });
+    return NextResponse.json({ usedCodes }, { headers });
   } catch (error) {
     console.error("Failed to save mobile code progress", error);
-    return NextResponse.json({ error: "Unable to save code progress." }, { status: 500, headers: FALLBACK_HEADERS });
+    return NextResponse.json(
+      { error: "Unable to save code progress." },
+      { status: 500, headers: mobileCredentialedFallbackHeaders(METHODS) }
+    );
   }
 }

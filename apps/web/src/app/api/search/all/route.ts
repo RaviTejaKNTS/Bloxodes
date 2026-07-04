@@ -198,6 +198,21 @@ function mergeAndRankRows(query: string, rows: SearchRow[], entityTypes: string[
   });
 }
 
+// Permissive CORS so the mobile app's web build can reuse the same search
+// endpoint; the website itself is unaffected by these headers.
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type"
+};
+
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: CORS_HEADERS
+  });
+}
+
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -208,7 +223,7 @@ export async function GET(request: Request) {
     const safeLimit = clamp(Number.isFinite(requestedLimit) ? requestedLimit : DEFAULT_LIMIT, 1, MAX_LIMIT);
 
     if (!rawQuery || rawQuery.length < MIN_QUERY_LENGTH) {
-      return NextResponse.json({ items: [] });
+      return NextResponse.json({ items: [] }, { headers: CORS_HEADERS });
     }
 
     const sb = supabaseAdmin();
@@ -243,9 +258,9 @@ export async function GET(request: Request) {
       };
     });
 
-    return NextResponse.json({ items });
+    return NextResponse.json({ items }, { headers: CORS_HEADERS });
   } catch (error) {
     console.error("Failed to load search data", error);
-    return NextResponse.json({ error: "Failed to load search data" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to load search data" }, { status: 500, headers: CORS_HEADERS });
   }
 }

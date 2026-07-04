@@ -22,6 +22,7 @@ import { SITE_URL } from "@/lib/seo";
 import { getToolContentWithDevFallback, listPublishedToolsPage, type ToolListEntry } from "@/lib/tools";
 import { resolveModifiedAt } from "@/lib/content-dates";
 import { getWikiPageBySlug, listPublishedWikiPages, loadWikiRelatedData, type WikiListEntry } from "@/lib/wiki";
+import { getWikiCollectionPageByCode } from "@/lib/wiki-collections";
 import { repoPath } from "@/lib/paths";
 import { getFieldLabel, getGameCollectionConfigByCode } from "@/lib/game-collections";
 import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
@@ -1208,7 +1209,39 @@ export async function getMobileContentDetail(
       listPublishedCatalogPagesByCodePrefix(normalizedSlug, 24),
       loadCatalogNativeSections(normalizedSlug, searchParams)
     ]);
-    if (!page) return null;
+    if (!page) {
+      // Game wiki collections live in wiki_collection_pages with catalog-style
+      // codes, so serve them through the same catalog detail contract.
+      const collection = await getWikiCollectionPageByCode(normalizedSlug);
+      if (!collection || !collection.is_published) return null;
+      const collectionUpdatedAt =
+        collection.content_updated_at || collection.updated_at || collection.published_at || collection.created_at || null;
+      const collectionSections = [
+        section("overview", "Overview", { body: toPlainText(collection.intro_md) ?? collection.meta_description }),
+        section("collection-wiki", "Collection notes", { body: toPlainText(collection.wiki_md) }),
+        ...nativeSections,
+        section("how-it-works", "How it works", { body: toPlainText(collection.how_it_works_md) }),
+        section("details", "Details", { items: keyValueItems(collection.description_json ?? {}) }),
+        section("faq", "FAQ", {
+          items: (collection.faq_json ?? []).slice(0, 12).map((entry, index) => detailItem(`faq-${index}`, entry.q, { body: entry.a }))
+        })
+      ].filter(Boolean) as MobileContentDetailSection[];
+
+      return {
+        ok: true,
+        kind,
+        title: collection.title,
+        subtitle: collection.display_name ?? null,
+        summary: collection.meta_description,
+        coverImage: absoluteAssetUrl(collection.thumb_url || "/og-image.png"),
+        updatedAt: collectionUpdatedAt,
+        url: `${SITE_URL}/wiki/${collection.wiki_slug}/${collection.collection_slug}`,
+        badge: typeof collection.item_count === "number" && collection.item_count > 0
+          ? `${collection.item_count.toLocaleString("en-US")} items`
+          : "Collection",
+        sections: collectionSections
+      };
+    }
     const updatedAt = page.content_updated_at || page.updated_at || page.published_at || page.created_at || null;
     const childCatalogItems = childPages.length
       ? await Promise.all(

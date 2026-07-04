@@ -240,6 +240,10 @@ export function clearAppSessionCookieOnResponse(response: NextResponse) {
   response.cookies.set(APP_SESSION_COOKIE, "", getSessionCookieOptions(0));
 }
 
+export async function getAppSessionFromToken(token: string | null | undefined): Promise<AppSession | null> {
+  return loadValidSession(token);
+}
+
 export async function getAppSessionFromRequest(request: NextRequest): Promise<AppSession | null> {
   const token = request.cookies.get(APP_SESSION_COOKIE)?.value ?? null;
   return loadValidSession(token);

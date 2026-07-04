@@ -23,10 +23,23 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/extension/roblox-game-codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-codes/route.ts` | Public Chrome extension lookup for a Roblox game page, returning a three-code preview and full Bloxodes URL. |
 | `/api/feedback` | `POST` | `src/app/api/feedback/route.ts` | Same-origin site feedback submissions from the header drawer with optional contact email. |
 | `/api/health` | `GET` | `src/app/api/health/route.ts` | Runtime health endpoint. |
+| `/api/mobile/auth/complete` | `GET` | `apps/web/src/app/api/mobile/auth/complete/route.ts` | Mobile login completion: reads the web session cookie and redirects to `bloxodes://auth` with a short-lived signed handoff code (or to web login when signed out). |
+| `/api/mobile/auth/exchange` | `POST`, `OPTIONS` | `apps/web/src/app/api/mobile/auth/exchange/route.ts` | Exchanges a mobile handoff code for an `app_sessions` bearer token plus the user profile. |
+| `/api/mobile/auth/session` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/auth/session/route.ts` | Current mobile user via `Authorization: Bearer` with cookie fallback. |
+| `/api/mobile/auth/logout` | `POST`, `OPTIONS` | `apps/web/src/app/api/mobile/auth/logout/route.ts` | Revokes the bearer session. |
+| `/api/mobile/home` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/home/route.ts` | Aggregated home feed: codes index plus events, catalog, wiki, tools, quizzes, and checklists rails. |
 | `/api/mobile/codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/codes/route.ts` | Public mobile app payload for the paginated codes index. |
 | `/api/mobile/codes/[slug]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/codes/[slug]/route.ts` | Public mobile app payload for a code detail page with active and expired codes. |
-| `/api/mobile/content/[kind]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/content/[kind]/route.ts` | Public mobile app payload for paginated tools, quizzes, checklists, and events index cards. |
-| `/api/mobile/content/[kind]/[slug]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/content/[kind]/[slug]/route.ts` | Public mobile app payload for a content detail page, including queryable native catalog sections. |
+| `/api/mobile/codes/session` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/codes/session/route.ts` | Mobile session snapshot; bearer token first, cookie fallback. |
+| `/api/mobile/codes/progress` | `GET`, `PUT`, `OPTIONS` | `apps/web/src/app/api/mobile/codes/progress/route.ts` | Per-user used-code progress for the app; bearer token first, cookie fallback. |
+| `/api/mobile/checklists/progress` | `GET`, `PUT`, `OPTIONS` | `apps/web/src/app/api/mobile/checklists/progress/route.ts` | Per-user checklist progress for the app (bearer/cookie), same `user_checklist_progress` table as the web route. |
+| `/api/mobile/quizzes/progress` | `GET`, `PUT`, `OPTIONS` | `apps/web/src/app/api/mobile/quizzes/progress/route.ts` | Per-user quiz progress for the app (bearer/cookie), same `user_quiz_progress` table as the web route. |
+| `/api/mobile/quizzes/[code]/play` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/quizzes/[code]/play/route.ts` | Full quiz play payload (questions, options, correct option ids) for the native quiz player. |
+| `/api/mobile/content/[kind]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/content/[kind]/route.ts` | Public mobile app payload for paginated catalog, wiki, tools, quizzes, checklists, events, and articles index cards. |
+| `/api/mobile/content/[kind]/[slug]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/content/[kind]/[slug]/route.ts` | Public mobile app payload for a content detail page, including queryable native catalog sections; catalog codes fall back to published wiki collection pages. |
+| `/api/mobile/stats/games` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/stats/games/route.ts` | CORS-enabled stats games table wrapper for the app. |
+| `/api/mobile/stats/games/[universeId]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/stats/games/[universeId]/route.ts` | CORS-enabled stats game summary with latest rank for the app. |
+| `/api/mobile/stats/games/[universeId]/chart` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/stats/games/[universeId]/chart/route.ts` | CORS-enabled player-count chart wrapper for the app. |
 | `/api/quizzes/progress` | `GET`, `PUT` | `src/app/api/quizzes/progress/route.ts` | Per-user quiz progress and last score state. |
 | `/api/quizzes/session` | `GET` | `src/app/api/quizzes/session/route.ts` | Session snapshot for quiz UI. |
 | `/api/revalidate` | `POST` | `src/app/api/revalidate/route.ts` | Publish-triggered ISR and Cloudflare purge entrypoint. |

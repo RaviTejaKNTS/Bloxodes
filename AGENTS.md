@@ -27,7 +27,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - npm workspaces are enabled at the repo root. `npm run build` remains the production web build and delegates to `npm run build:web`.
 - Next.js App Router application in `apps/web`, with public content in `apps/web/src/app/(site)` and account/auth flows in `apps/web/src/app/(secure)` plus `apps/web/src/app/auth`.
 - Chrome extension source lives in `apps/extension`. It builds a Chrome MV3 upload package and calls Bloxodes web APIs; it is not part of Dokploy deployment.
-- Expo React Native mobile source lives in `apps/mobile`. The current mobile V1 is a codes index/detail client backed by `/api/mobile/*` web routes.
+- Expo React Native mobile source lives in `apps/mobile`. The app is an expo-router client with native codes, catalog, wiki/collection, tools, events, quiz, checklist, and stats screens, all backed by `/api/mobile/*` web routes plus optional bearer-token Roblox login.
 - Supabase is the primary content and product data store. Production now uses the self-hosted Supabase stack on the same Hostinger VPS as the web app, with API at `https://database.bloxodes.com`, Studio at `https://studio.bloxodes.com`, and public storage/media URLs at `https://media.bloxodes.com`; the old managed Supabase project is rollback/source-of-truth fallback only until deletion.
 - Local datasets in `data/` and `apps/web/src/data/` back a few tools/catalog sections where structured content does not live in Supabase.
 - Operational work happens through root `scripts/` and Supabase edge functions in `supabase/functions/`.
@@ -100,7 +100,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 1. Work under `apps/mobile` and follow `apps/mobile/AGENTS.md`.
 2. Keep mobile data access behind `apps/web/src/app/api/mobile/*`.
-3. Keep V1 focused on codes index/detail until the shared client and auth model mature.
+3. Keep progress features local-first with optional account sync through the mobile bearer-session routes; articles and puzzles stay web-only.
 4. Run `npm run typecheck:mobile`.
 
 ### Database or content model
