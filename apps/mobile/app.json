@@ -30,7 +30,11 @@
       "permissions": []
     },
     "extra": {
-      "apiBaseUrl": "https://bloxodes.com"
+      "apiBaseUrl": "https://bloxodes.com",
+      "router": {},
+      "eas": {
+        "projectId": "9f7f5ffc-1093-42f7-a007-8e56f02045db"
+      }
     },
     "plugins": [
       "expo-router",
