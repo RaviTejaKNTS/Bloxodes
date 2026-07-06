@@ -1,21 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { evaluateFallbackCommentRisk, evaluateModerationResponse } from "@/lib/comment-moderation";
+import { evaluateModerationResponse } from "@/lib/comment-moderation";
 
 describe("comment moderation helpers", () => {
-  it("approves a clean fallback comment", () => {
-    expect(evaluateFallbackCommentRisk("This page helped me find the item fast.")).toEqual({
-      approved: true,
-      ruleHits: []
-    });
-  });
-
-  it("blocks obvious spam links in fallback moderation", () => {
-    expect(evaluateFallbackCommentRisk("join my server https://discord.gg/test now")).toEqual({
-      approved: false,
-      ruleHits: ["external_link"]
-    });
-  });
-
   it("approves a safe OpenAI moderation response", () => {
     expect(
       evaluateModerationResponse({
@@ -42,5 +28,27 @@ describe("comment moderation helpers", () => {
         ]
       })
     ).toBe(false);
+  });
+
+  it("blocks suggestive OpenAI moderation scores for Roblox pages", () => {
+    expect(
+      evaluateModerationResponse({
+        results: [
+          {
+            flagged: false,
+            categories: { sexual: false },
+            category_scores: { sexual: 0.11 }
+          }
+        ]
+      })
+    ).toBe(false);
+  });
+
+  it("blocks missing OpenAI moderation responses", () => {
+    expect(evaluateModerationResponse(null)).toBe(false);
+  });
+
+  it("blocks malformed OpenAI moderation responses", () => {
+    expect(evaluateModerationResponse({ results: [] })).toBe(false);
   });
 });

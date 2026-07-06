@@ -20,7 +20,7 @@ export type CommentModerationDecision = {
 };
 
 const CATEGORY_SCORE_THRESHOLDS: Record<string, number> = {
-  sexual: 0.2,
+  sexual: 0.1,
   "sexual/minors": 0.01,
   harassment: 0.5,
   "harassment/threatening": 0.2,
@@ -34,16 +34,6 @@ const CATEGORY_SCORE_THRESHOLDS: Record<string, number> = {
   illicit: 0.5,
   "illicit/violent": 0.2
 };
-
-const FALLBACK_BLOCK_RULES: Array<{ key: string; pattern: RegExp }> = [
-  { key: "external_link", pattern: /\b(?:https?:\/\/|www\.|discord\.gg\/|bit\.ly\/|tinyurl\.com\/)\S+/i },
-  { key: "contact_handle", pattern: /\b(?:telegram|whatsapp|snapchat|dm me on)\b/i },
-  { key: "robux_scam", pattern: /\b(?:free|cheap|buy)\s+robux\b/i },
-  { key: "self_harm", pattern: /\b(?:kill myself|kys|suicide|hurt myself|self harm)\b/i },
-  { key: "sexual_minors", pattern: /\b(?:child porn|cp|minor sex|underage sex)\b/i },
-  { key: "violent_threat", pattern: /\b(?:i will kill you|shoot you|stab you|bomb)\b/i },
-  { key: "hate_slur", pattern: /\b(?:nigg(?:a|er)|faggot|kike)\b/i }
-];
 
 function isCategoryHit(categories?: Record<string, boolean>): boolean {
   if (!categories) return false;
@@ -61,27 +51,14 @@ function isScoreHit(scores?: Record<string, number>): boolean {
   return false;
 }
 
-export function evaluateModerationResponse(moderation: ModerationResponse | null): boolean | null {
-  if (!moderation) return null;
+export function evaluateModerationResponse(moderation: ModerationResponse | null): boolean {
+  if (!moderation) return false;
   const result = moderation.results?.[0];
-  if (!result) return null;
+  if (!result) return false;
   const flagged = result.flagged === true;
   const categoryHit = isCategoryHit(result.categories);
   const scoreHit = isScoreHit(result.category_scores);
   return !(flagged || categoryHit || scoreHit);
-}
-
-export function evaluateFallbackCommentRisk(input: string): { approved: boolean; ruleHits: string[] } {
-  const normalized = input.trim();
-  if (!normalized) {
-    return { approved: false, ruleHits: ["empty_body"] };
-  }
-
-  const ruleHits = FALLBACK_BLOCK_RULES.filter(({ pattern }) => pattern.test(normalized)).map(({ key }) => key);
-  return {
-    approved: ruleHits.length === 0,
-    ruleHits
-  };
 }
 
 async function runOpenAiModeration(input: string): Promise<ModerationRequestResult> {
@@ -133,28 +110,16 @@ async function runOpenAiModeration(input: string): Promise<ModerationRequestResu
 
 export async function moderateCommentBody(input: string): Promise<CommentModerationDecision> {
   const openAiResult = await runOpenAiModeration(input);
-  const remoteApproved = evaluateModerationResponse(openAiResult.moderation);
+  const approved = evaluateModerationResponse(openAiResult.moderation);
 
-  if (typeof remoteApproved === "boolean") {
-    return {
-      approved: remoteApproved,
-      moderation: {
-        provider: "openai",
-        approved: remoteApproved,
-        response: openAiResult.moderation
-      }
-    };
-  }
-
-  const fallback = evaluateFallbackCommentRisk(input);
   return {
-    approved: fallback.approved,
+    approved,
     moderation: {
-      provider: "fallback",
-      approved: fallback.approved,
-      failure_reason: openAiResult.failureReason ?? "invalid_openai_response",
+      provider: "openai",
+      approved,
+      failure_reason: approved ? null : (openAiResult.failureReason ?? "unsafe_or_invalid_openai_response"),
       http_status: openAiResult.httpStatus,
-      rule_hits: fallback.ruleHits
+      response: openAiResult.moderation
     }
   };
 }
