@@ -442,12 +442,60 @@ No production changes were made for the Bing/music IDs concern.
 - Direct-origin Cloudflare-only lock: no longer the active live posture after rollback.
 - Cloudflare public HTML caching: intended to remain active.
 - Cloudflare exploit/scanner path block: intended to remain active.
-- Cloudflare scraper-user-agent challenge: intended to remain active.
+- Cloudflare scraper-user-agent challenge: narrowed on `2026-07-06` to scanner-style clients only.
 - Cloudflare exact observed SG bot IP block: intended to remain active.
 - Cloudflare SG ASN `132203` managed challenge: intended to remain active.
 - Cloudflare SG high-threat challenge: intended to remain active unless later removed.
 - Search engines and known AI crawlers: intended to remain allowed.
 - Stats worker: intended to use `https://database.bloxodes.com`, normal Docker networking, and the VPS HOT cron left in place unless another scheduler is confirmed.
+
+## 2026-07-06 Curl / Agentic Fetch Rollback
+
+After Bing and citation-quality concerns, the generic scraper user-agent rule was loosened.
+
+- Read current Cloudflare WAF state from the VPS because the Cloudflare token is IP-filtered.
+- Confirmed `http_ratelimit` still had `0` active rules.
+- Changed custom WAF rule:
+  - from `Bloxodes challenge generic scraper user agents`;
+  - to `Bloxodes challenge scanner user agents`.
+- Removed these generic/tool user agents from the custom managed-challenge expression:
+  - `curl`;
+  - `wget`;
+  - `python-requests`;
+  - `go-http-client`;
+  - `httpclient`;
+  - `libwww-perl`;
+  - `scrapy`.
+- Kept managed challenges for:
+  - empty user agent;
+  - `masscan`;
+  - `zgrab`;
+  - `sqlmap`;
+  - `nikto`;
+  - `nuclei`;
+  - `acunetix`;
+  - `nessus`;
+  - `wpscan`.
+- Left these protections unchanged:
+  - exact observed Singapore bot IP block;
+  - Singapore ASN `132203` managed challenge;
+  - Singapore high-threat managed challenge;
+  - exploit/scanner path block;
+  - Browser Integrity Check;
+  - public HTML and top-nav cache rules.
+- Live verification after the change:
+  - default `curl`: `200`;
+  - `python-requests`: `200`;
+  - `go-http-client`: `200`;
+  - browser user agent: `200`;
+  - Bingbot user agent: `200`;
+  - `ChatGPT-User`: `200`;
+  - `masscan`: `403`;
+  - `zgrab`: `403`;
+  - `sqlmap`: `403`;
+  - empty user agent: `403`;
+  - `/.env`: `403`.
+- Note: `wget` still returned `403` after the custom WAF rule was narrowed, likely due to Cloudflare Browser Integrity Check or another product-level bot protection. It was not loosened in this pass.
 
 ## Follow-Up Checks Recommended
 
