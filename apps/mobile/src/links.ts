@@ -54,8 +54,7 @@ export function routeForWebUrl(url: string): string | null {
     return `/section/wiki/${encodeURIComponent(rest[0])}`;
   }
   if (head === "wiki" && rest.length === 2) {
-    // Game collection pages use `<game-slug>-<collection-slug>` catalog codes.
-    return `/section/catalog/${encodeURIComponent(`${rest[0]}-${rest[1]}`)}`;
+    return `/collections/${encodeURIComponent(`${rest[0]}-${rest[1]}`)}`;
   }
   if (head === "tools" && rest.length >= 1) {
     return `/section/tools/${encodeURIComponent(rest.join("/"))}`;

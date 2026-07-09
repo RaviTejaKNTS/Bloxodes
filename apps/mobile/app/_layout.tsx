@@ -20,6 +20,7 @@ function ThemedStack() {
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="codes/[slug]" options={{ title: "Codes" }} />
+        <Stack.Screen name="collections/[slug]" options={{ title: "Collection" }} />
         <Stack.Screen name="section/[kind]/index" options={{ title: "Browse" }} />
         <Stack.Screen name="section/[kind]/[slug]" options={{ title: "" }} />
         <Stack.Screen name="quiz/[code]" options={{ title: "Quiz" }} />

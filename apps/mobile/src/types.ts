@@ -83,6 +83,12 @@ export type MobileContentDetailItem = {
   body: string | null;
   badge: string | null;
   image: string | null;
+  fields?: Array<{
+    key: string;
+    label: string;
+    value: string;
+    kind: "chip" | "detail" | "text";
+  }>;
 };
 
 export type MobileContentDetailSection = {
@@ -91,6 +97,7 @@ export type MobileContentDetailSection = {
   subtitle: string | null;
   body: string | null;
   items: MobileContentDetailItem[];
+  variant?: "collection-items" | "faq" | "links" | "prose";
   page?: number;
   pageSize?: number;
   total?: number;
@@ -108,6 +115,7 @@ export type MobileContentDetailResponse = {
   updatedAt: string | null;
   url: string;
   badge: string | null;
+  layout?: "default" | "wiki_collection";
   sections: MobileContentDetailSection[];
 };
 

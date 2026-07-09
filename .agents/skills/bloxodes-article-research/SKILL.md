@@ -31,15 +31,45 @@ If the article belongs to a game:
 
 2. Do fan out queries to fill up any gaps, do not speculate anything, confirm all the info you have researched.
 
-3. You can also check trusted websites like Beebom, Pro Game Guides, game specific wiki pages, fandom, TechWiser, IGN, Game Rant and Eurogamer. Does not have to stick with the provided sources, use all the info you can gather.
+3. For Roblox micro-topics, do not conclude "few sources" from one search tool or one query style. Run multiple query shapes before deciding source coverage is thin:
+   - exact topic: `"<game name>" "<mechanic/item/boss>"`.
+   - broad topic: `<game name> <mechanic/item/boss> Roblox guide`.
+   - component facts: combine boss/NPC/item/location/drop names from the lead source with the game name.
+   - variant names: try common spelling/capitalization differences, abbreviations, and "fruit", "V2", "quest", "awakening", "boss", "drop", "location", or other player terms that fit the topic.
 
-4. Do not stop at first indexed results, dig deeper, click though internal links of the sources to get a holistic understanding.
+4. Check multiple discovery surfaces when exact web results look sparse, polluted, blocked, or repetitive:
+   - general web search results and snippets
+   - the provided lead source and its internal links
+   - trusted sites like Beebom, Pro Game Guides, game-specific wiki pages, Fandom, TechWiser, IGN, Game Rant, and Eurogamer
+   - YouTube/video search results or transcripts when players are likely to document the mechanic there
+   - official or semi-official game surfaces when accessible, such as the Roblox experience page, group, Discord, Trello, wiki, community server notes, or social posts
+   - Bloxodes local data, production rows, and related Bloxodes pages
 
-5. Once done, understand what will be useful for people reading this article and what can be skipped. We write simple, clean and easy to understand and quick to read kind of articles. So make sure our research is helpful for that.
+5. If a search tool returns irrelevant results, empty quoted results, Cloudflare blocks, or only duplicate copies of one article, record that as a search limitation. Do not phrase it as "there are not many sources" unless the fallback surfaces above were also checked.
 
-6. Only one you have searched all the sources and only when you think there are no gaps in the info, then continue and write `brief.md`.
+6. Do not stop at first indexed results, dig deeper, click though internal links of the sources to get a holistic understanding.
 
-7. Note useful FAQ questions only when they answer real follow-up points that do not fit naturally inside the article body.
+7. Once done, understand what will be useful for people reading this article and what can be skipped. We write simple, clean and easy to understand and quick to read kind of articles. So make sure our research is helpful for that.
+
+8. Only once you have searched all the sources and only when you think there are no gaps in the info, then continue and write `brief.md`.
+
+9. Note useful FAQ questions only when they answer real follow-up points that do not fit naturally inside the article body.
+
+## Source Coverage Gate
+
+For gameplay how-to articles, the brief should normally have at least two independent sources for exact mechanic facts. If only one source gives the exact requirements, the brief can still proceed only when:
+
+1. the user-provided lead is clearly the source of the article idea,
+2. broader discovery was documented across multiple surfaces,
+3. the one-source facts are marked as a risk instead of being overstated, and
+4. no unsupported extra claims are added to make the article feel fuller.
+
+When sources disagree, list the disagreement and recommend the safer fact set. When sources are thin, separate these ideas clearly:
+
+- `Sources found`: sources discovered during fan-out.
+- `Sources used for exact facts`: sources strong enough to support requirements, steps, drops, locations, or numbers.
+- `Sources checked but not usable`: blocked, outdated, duplicate, vague, AI-spun, or unrelated results.
+- `Search limitations`: search-tool pollution, empty exact queries, blocked pages, missing transcripts, or inaccessible community surfaces.
 
 ## Article Outline
 
@@ -67,6 +97,10 @@ Evidence checked:
 - Game universe_id (if game-specific):
 - Internal link candidates (existing same-game/related pages with slugs, 2+):
 - Source/competitor coverage:
+- Sources found:
+- Sources used for exact facts:
+- Sources checked but not usable:
+- Search limitations:
 - Related page-type overlap:
 - Useful uncovered angle:
 

@@ -5,7 +5,7 @@ description: Run one or many approved Bloxodes game collection pages with parent
 
 # Bloxodes Game Collection Workflow Runner
 
-Use subagents and give each subagent one game collection. The same subagent should research, prepare data, prepare images, wait for parent approval at each gate, then write `final.json`.
+Use subagents and give each subagent one game collection. The same subagent should research, prepare data, prepare images, and wait for parent approval at each gate. The writing gate is handed to Claude, then the parent resumes final review and verification.
 
 If there are more collections than subagent slots, queue the extras. Do not write from the parent role.
 
@@ -26,7 +26,30 @@ For later gates, send the same subagent the exact next skill and repeat the no-s
 
 - Data gate: `/bloxodes-game-collection-data`; skill file `.agents/skills/bloxodes-game-collection-data/SKILL.md`. **Do NOT spawn sub-agents. Write the dataset JSON directly using the Write tool.**
 - Image gate: `/bloxodes-game-collection-images`; skill file `.agents/skills/bloxodes-game-collection-images/SKILL.md`. **Do NOT spawn sub-agents. Download images and edit dataset files directly using Bash and Edit/Write tools.**
-- Writing gate: `/bloxodes-game-collection-writing`; skill file `.agents/skills/bloxodes-game-collection-writing/SKILL.md`. **Do NOT spawn sub-agents. Write final.json directly using the Write tool.**
+
+## Claude Writing Gate
+
+After image readiness is approved, stop using the collection subagent for writing. Use Claude for `final.json`:
+
+```bash
+npm run write:game-collection:claude -- --game <game-slug> --collection <collection-slug>
+```
+
+This writes a Claude handoff prompt to:
+
+```text
+tmp/content-workspace/<game-slug>/collections/<collection-slug>/claude-writing-prompt.md
+```
+
+If the Claude CLI is available in the current environment, run:
+
+```bash
+npm run write:game-collection:claude -- --game <game-slug> --collection <collection-slug> --run
+```
+
+The script invokes Claude with the symlinked Claude writing skill at `.claude/skills/bloxodes-game-collection-writing/SKILL.md`, tells Claude to write `final.json`, and requires Claude to reopen and revise its output once for human-friendly voice, concrete usefulness, no generic filler, valid JSON, no prose counts, no public source/dataset/workflow/page wording, correct `faq_json` keys, and useful `wiki_md`.
+
+If the CLI is not available, paste the generated handoff prompt into Claude manually and continue after Claude writes the same `final.json` path. Do not let the previous Codex subagent write the page unless the user explicitly overrides this workflow.
 
 ## Workspace
 
@@ -49,8 +72,8 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/
 7. Review item count, missing items, dataset metadata, section plan, useful fields, grouping, image field planning, and route assumptions.
 8. If approved, ask the same subagent to use `/bloxodes-game-collection-images` and update image notes.
 9. Review image coverage, image quality, local paths, dataset wiring, missing images, and checker result.
-10. If approved, ask the same subagent to use `/bloxodes-game-collection-writing` and create `final.json`.
-11. Review final copy and JSON. Send fixes back to the same subagent.
+10. If approved, run `npm run write:game-collection:claude -- --game <game-slug> --collection <collection-slug>` to prepare the Claude handoff, then run it with `--run` when the Claude CLI is available or paste the generated prompt into Claude manually.
+11. After Claude writes `final.json`, review final copy and JSON. Send fixes back to Claude using the same handoff prompt context, not to the previous Codex data/image subagent.
 12. Start or reuse localhost with `npm run dev:local`.
 13. Run:
 
@@ -131,7 +154,7 @@ Before approving any final.json, make sure all the following are met:
 - No public copy mentions research, datasets, workflow, or page usage.
 - No prose copy states an item or collection count (no "all X items", "over X", section counts, totals). The only count allowed is the automated `{count}` token in `title`/`seo_title`.
 - `wiki_md` is specific and useful: it explains the in-game system in plain words (what it is, how a player gets/uses it, why it matters), not a generic "this collection lists the items" blurb, and carries no item count.
-- Check if the title follows the pattern `All N <Collection> in <Game>`.
+- Check if the title follows the pattern `All {count} <Collection> in <Game>`.
 - Check if the paragraphs add context beyond the cards.
 - Check if `final.json` parses.
 - Check if the verifier, HTML size gate, pagination checks, and Browser preview look good before calling it done.
@@ -144,7 +167,7 @@ Before approving any final.json, make sure all the following are met:
 - `display_name` is present and uses the clean reusable collection label, not a slug/title-derived phrase
 - image gaps are fixed, accepted, or blocked
 - card fields help players compare items
-- title follows `All N <Collection> in <Game>`
+- title follows `All {count} <Collection> in <Game>`
 - paragraphs add context beyond the cards
 - no prose copy states an item or collection count (only the `{count}` token is allowed)
 - `wiki_md` clearly explains the in-game system and is useful, not generic, with no item count

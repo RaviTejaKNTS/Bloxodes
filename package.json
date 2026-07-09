@@ -58,6 +58,8 @@
     "verify:game-collection-finals": "tsx scripts/content/verify-game-collection-finals.ts",
     "verify:simple-page-finals": "tsx scripts/content/verify-simple-page-finals.ts",
     "verify:wiki-final": "tsx scripts/content/verify-wiki-final.ts",
+    "write:article:claude": "tsx scripts/content/write-article-final-with-claude.ts",
+    "write:game-collection:claude": "tsx scripts/content/write-game-collection-final-with-claude.ts",
     "sync:local-public-sample": "tsx scripts/content/sync-prod-public-sample-to-local.ts",
     "import:code-pages": "tsx scripts/codes/import-code-pages.ts",
     "upsert:code-page": "tsx scripts/codes/upsert-code-page.ts",
