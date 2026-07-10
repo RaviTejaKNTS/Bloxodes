@@ -7,346 +7,418 @@
     "route": "/wiki/animal-hospital/anomalies",
     "catalogCode": "animal-hospital-anomalies",
     "itemFields": [
-      "threatType",
-      "variant",
-      "shift",
-      "location",
+      "detectBy",
       "warningSigns",
       "bestAction",
-      "consequence",
-      "cardSummary",
-      "aliases"
+      "ifAdmitted",
+      "cardSummary"
     ],
     "columns": [
-      "threatType",
-      "variant",
-      "shift",
-      "location",
+      "detectBy",
       "warningSigns",
       "bestAction",
-      "consequence",
-      "cardSummary",
-      "aliases"
+      "ifAdmitted",
+      "cardSummary"
     ],
     "display": {
       "groupLabel": "section",
       "sectionOrder": [
-        "Camera and surveillance anomalies",
-        "Patient and room hazards",
-        "Choice and ritual events",
-        "Chase and hostile encounters"
+        "Appearance Anomalies",
+        "Photo Anomalies",
+        "CCTV Anomalies",
+        "Special Threats"
       ],
       "badgeField": null,
       "subtitleFields": [],
       "descriptionField": "cardSummary",
       "cardDescriptionField": "cardSummary",
       "cardFields": [
-        "threatType",
-        "variant",
-        "shift",
-        "location",
+        "detectBy",
         "warningSigns",
         "bestAction"
       ],
       "tableFields": [
-        "threatType",
-        "variant",
-        "shift",
-        "location",
+        "detectBy",
         "warningSigns",
         "bestAction",
-        "consequence",
+        "ifAdmitted",
         "cardSummary"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "detectBy": {
+          "kind": "chip",
+          "label": "Detect by"
+        },
+        "warningSigns": {
+          "kind": "detail",
+          "label": "Warning signs"
+        },
+        "bestAction": {
+          "kind": "highlight",
+          "label": "Best action"
+        },
+        "ifAdmitted": {
+          "kind": "detail",
+          "label": "If admitted"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
-        "name": "Camera 1",
-        "threatType": "Camera event",
-        "variant": "First camera event",
-        "shift": "Camera sequence",
-        "location": "Security camera",
-        "warningSigns": "The threat is seen through the camera feed instead of normal room treatment.",
-        "bestAction": "Stay focused on the camera clue and stop treating the moment like a normal patient task.",
-        "consequence": "Ignoring the camera event lets the threat keep advancing through the run.",
-        "cardSummary": "Camera 1 is the first surveillance-style anomaly. It matters because the clue comes from the camera view, not from a patient standing in front of you.",
-        "aliases": [
-          "Camera Anomalies"
-        ]
+        "name": "Twitching",
+        "detectBy": "Appearance",
+        "warningSigns": "Arms, head, or neck jerk while the patient is standing still. The back often hunches, and the neck can stretch longer than normal. Some variants only twitch on CCTV, so wait a few seconds before you decide.",
+        "bestAction": "Close the shutters.",
+        "ifAdmitted": "Often becomes a Shapeshifter during recovery, or can lead into a death ritual when paired with hollow eyes.",
+        "cardSummary": "A patient that looks almost normal until the body starts twitching. Watch for a few seconds at the window before you stamp them in."
       },
       "system": {
-        "slug": "camera-1",
-        "section": "Camera and surveillance anomalies",
+        "slug": "twitching",
+        "section": "Appearance Anomalies",
         "sortOrder": 10,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/twitching.webp"
       }
     },
     {
       "item": {
-        "name": "Camera 2",
-        "threatType": "Camera event",
-        "variant": "Second camera event",
-        "shift": "Camera sequence",
-        "location": "Security camera",
-        "warningSigns": "A second abnormal camera moment appears after the first camera event.",
-        "bestAction": "Check the camera feed carefully and react before returning to normal treatment.",
-        "consequence": "Missing the second camera clue can turn the camera sequence into a run-ending threat.",
-        "cardSummary": "Camera 2 is the follow-up surveillance anomaly. Treat it as a separate warning because it appears after the first camera scare.",
-        "aliases": [
-          "Camera Anomalies"
-        ]
+        "name": "Three Eyes",
+        "detectBy": "Appearance",
+        "warningSigns": "Three slightly mismatched glowing red eyes sit where two normal eyes should be. The real eyes can still show underneath.",
+        "bestAction": "Close the shutters.",
+        "ifAdmitted": "Can trigger death rituals, monster events, or later transform into a Shapeshifter.",
+        "cardSummary": "One of the easiest window checks. Extra glowing eyes mean this is not a real patient."
       },
       "system": {
-        "slug": "camera-2",
-        "section": "Camera and surveillance anomalies",
+        "slug": "three-eyes",
+        "section": "Appearance Anomalies",
         "sortOrder": 20,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/three-eyes.webp"
       }
     },
     {
       "item": {
-        "name": "Bed Monster",
-        "threatType": "Bed hazard",
-        "variant": "Monster under or around bed",
-        "shift": "Hospital treatment sequence",
-        "location": "Patient bed",
-        "warningSigns": "The patient bed becomes the center of the threat instead of a normal treatment spot.",
-        "bestAction": "Back away from the bed threat and avoid standing close while the anomaly is active.",
-        "consequence": "Treating the bed like a normal patient station can put the player inside the danger zone.",
-        "cardSummary": "Bed Monster turns a normal treatment bed into the threat. The useful clue is the bed itself changing from safe station to hazard."
+        "name": "Hollow Face",
+        "detectBy": "Appearance",
+        "warningSigns": "Dark hollow eye sockets, often with a hunched posture and twitching. Looks drained and empty rather than injured.",
+        "bestAction": "Close the shutters.",
+        "ifAdmitted": "Strongly linked to death rituals during recovery. Not every hollow-eyed visitor is instantly hostile, but treating them as safe is a bad bet.",
+        "cardSummary": "Empty sockets are the main tell. Do not confuse a normal sad face with fully hollowed eyes."
       },
       "system": {
-        "slug": "bed-monster",
-        "section": "Patient and room hazards",
+        "slug": "hollow-face",
+        "section": "Appearance Anomalies",
         "sortOrder": 30,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/hollow-face.webp"
       }
     },
     {
       "item": {
-        "name": "Fire",
-        "threatType": "Room hazard",
-        "variant": "Fire outbreak",
-        "shift": "Hospital treatment sequence",
-        "location": "Hospital room",
-        "warningSigns": "A room hazard starts burning instead of behaving like a normal patient event.",
-        "bestAction": "Move away from the flames and avoid staying in the burning area.",
-        "consequence": "Standing in the fire hazard can punish the player before the shift continues.",
-        "cardSummary": "Fire is a direct room hazard. It is easier to read than a hidden monster because the danger is the burning area itself."
+        "name": "Realistic Face",
+        "detectBy": "Appearance",
+        "warningSigns": "Large eyes with black pupils, heavy under-eye bags, and a big drawn-on smile. The voice is often low and distorted.",
+        "bestAction": "Close the shutters.",
+        "ifAdmitted": "Can lead to death rituals, monster events, or a Shapeshifter transformation after check-in.",
+        "cardSummary": "A fake face that looks hand-drawn or too human for a regular animal patient. The smile is usually the first thing that feels wrong."
       },
       "system": {
-        "slug": "fire",
-        "section": "Patient and room hazards",
+        "slug": "realistic-face",
+        "section": "Appearance Anomalies",
         "sortOrder": 40,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/realistic-face.webp"
       }
     },
     {
       "item": {
-        "name": "Slime",
-        "threatType": "Room hazard",
-        "variant": "Slime spread",
-        "shift": "Hospital treatment sequence",
-        "location": "Hospital room",
-        "warningSigns": "Slime appears as the abnormal object or surface in the room.",
-        "bestAction": "Keep clear of the slime and avoid walking into the hazard while handling the room.",
-        "consequence": "Touching or ignoring the slime can turn a simple room check into a danger moment.",
-        "cardSummary": "Slime is a floor or room hazard style anomaly. Watch the room surface before rushing back into treatment."
+        "name": "Crooked Face",
+        "detectBy": "Appearance",
+        "warningSigns": "A crooked, distorted smile with sharp teeth and large mismatched eyes set high on the face. Eyes can look popped out.",
+        "bestAction": "Close the shutters.",
+        "ifAdmitted": "Can lead to death rituals, monster events, or a Shapeshifter transformation after check-in.",
+        "cardSummary": "Uneven eyes and a sharp, crooked grin make this one stand out once you know what a normal patient face looks like."
       },
       "system": {
-        "slug": "slime",
-        "section": "Patient and room hazards",
+        "slug": "crooked-face",
+        "section": "Appearance Anomalies",
         "sortOrder": 50,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/crooked-face.webp"
       }
     },
     {
       "item": {
-        "name": "Eyes",
-        "threatType": "Visual anomaly",
-        "variant": "Eye appearance",
-        "shift": "Shift 2",
-        "location": "Hospital room",
-        "warningSigns": "Eyes appear where the room or patient should look normal.",
-        "bestAction": "Stop rushing the treatment and respond to the visual clue before moving on.",
-        "consequence": "Overlooking the eyes can leave the player reacting late to the anomaly.",
-        "cardSummary": "Eyes is a visual warning anomaly. It is the kind of threat players can miss if they only focus on the next treatment prompt.",
-        "aliases": [
-          "Eyes Anomaly"
-        ]
+        "name": "X-rayed Face",
+        "detectBy": "Appearance",
+        "warningSigns": "Small but wide circular eyes with black pupils, paired with realistic human-looking teeth.",
+        "bestAction": "Close the shutters.",
+        "ifAdmitted": "Can lead to death rituals, monster events, or a Shapeshifter transformation after check-in.",
+        "cardSummary": "The human teeth are the giveaway. A regular animal patient should not flash a full human smile at the desk."
       },
       "system": {
-        "slug": "eyes",
-        "section": "Patient and room hazards",
+        "slug": "x-rayed-face",
+        "section": "Appearance Anomalies",
         "sortOrder": 60,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/x-rayed-face.webp"
       }
     },
     {
       "item": {
-        "name": "Tentacles Monster",
-        "threatType": "Monster hazard",
-        "variant": "Tentacles",
-        "shift": "Hospital treatment sequence",
-        "location": "Hospital room",
-        "warningSigns": "Tentacles appear as the main abnormal shape in the room.",
-        "bestAction": "Keep distance from the tentacles and avoid treating the room like a safe station.",
-        "consequence": "Standing too close to the monster hazard can turn the encounter into a fail state.",
-        "cardSummary": "Tentacles Monster is a body-horror room threat. The tentacles are the warning that the room has stopped being safe."
+        "name": "Staring",
+        "detectBy": "Appearance",
+        "warningSigns": "The patient tracks your movement with their head, or locks onto a camera. The head can turn more than a normal patient should.",
+        "bestAction": "Close the shutters.",
+        "ifAdmitted": "Often turns into a Shapeshifter during recovery, so do not treat the intense eye contact as harmless.",
+        "cardSummary": "If a patient keeps staring you down while you move around the desk, treat that as a hard reject."
       },
       "system": {
-        "slug": "tentacles-monster",
-        "section": "Patient and room hazards",
+        "slug": "staring",
+        "section": "Appearance Anomalies",
         "sortOrder": 70,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/staring.webp"
       }
     },
     {
       "item": {
-        "name": "Death Ritual: Remove Candles",
-        "threatType": "Ritual choice",
-        "variant": "Remove all candles",
-        "shift": "Ritual sequence",
-        "location": "Ritual room",
-        "warningSigns": "A ritual setup appears with candles that can be removed.",
-        "bestAction": "Remove all candles when you want the intervention path.",
-        "consequence": "Removing the candles changes the ritual outcome instead of letting the patient die.",
-        "cardSummary": "This Death Ritual variant is the active intervention path. The key action is removing every candle before accepting the outcome.",
-        "aliases": [
-          "Ritual Anomaly"
-        ]
+        "name": "Incorrect Photo",
+        "detectBy": "Photo",
+        "warningSigns": "The finished polaroid does not match the patient at the window. The photo can swap features, markings, or show a face that is clearly not the same animal standing there.",
+        "bestAction": "Wait for the photo to finish, compare it to the patient, then close the shutters if anything is wrong.",
+        "ifAdmitted": "Admitting a photo mismatch can start a death ritual or later hostile transformation.",
+        "cardSummary": "General photo mismatch. If the printed picture and the patient are not the same look, reject before you dig into which detail is wrong."
       },
       "system": {
-        "slug": "death-ritual-remove-candles",
-        "section": "Choice and ritual events",
+        "slug": "incorrect-photo",
+        "section": "Photo Anomalies",
         "sortOrder": 80,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/incorrect-photo.webp"
       }
     },
     {
       "item": {
-        "name": "Death Ritual: Let Patient Die",
-        "threatType": "Ritual choice",
-        "variant": "Let him die",
-        "shift": "Ritual sequence",
-        "location": "Ritual room",
-        "warningSigns": "The same candle ritual appears, but the player allows the death outcome.",
-        "bestAction": "Let the ritual finish only when you want to see the death-path outcome.",
-        "consequence": "The patient dies and the ritual path resolves differently from the candle-removal route.",
-        "cardSummary": "This Death Ritual variant is the non-intervention path. It is useful to track separately because the choice changes the outcome.",
-        "aliases": [
-          "Ritual Anomaly"
-        ]
+        "name": "Different Eyes",
+        "detectBy": "Photo",
+        "warningSigns": "The eyes in the photograph do not match the eyes on the living patient. Pupils, lids, shape, or eye style can all be wrong while the rest of the face looks close.",
+        "bestAction": "Compare the photo to the patient before opening the shutters, then reject on any mismatch.",
+        "ifAdmitted": "Same risk as other photo anomalies: ritual events or hostile forms later in the shift.",
+        "cardSummary": "A common photo trap focused on the eyes. Side-by-side the window patient and the polaroid, and check the eyes first."
       },
       "system": {
-        "slug": "death-ritual-let-patient-die",
-        "section": "Choice and ritual events",
+        "slug": "different-eyes",
+        "section": "Photo Anomalies",
         "sortOrder": 90,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/different-eyes.webp"
       }
     },
     {
       "item": {
-        "name": "Eyeless: Talk",
-        "threatType": "Dialogue choice",
-        "variant": "Talk to him",
-        "shift": "Eyeless sequence",
-        "location": "Hospital encounter",
-        "warningSigns": "An eyeless character appears and can be approached as a dialogue choice.",
-        "bestAction": "Talk to Eyeless when you want the dialogue-path outcome.",
-        "consequence": "Talking triggers one branch of the Eyeless encounter.",
-        "cardSummary": "This Eyeless variant tracks the talk choice. It belongs apart from the ignore route because the player action is different.",
-        "aliases": [
-          "Eyeless"
-        ]
+        "name": "Different Ears",
+        "detectBy": "Photo",
+        "warningSigns": "Ear shape, size, or animal type changes between the patient and the photo, such as bear ears on a rabbit patient.",
+        "bestAction": "Check ear shape on both the patient and the finished photo before you admit them.",
+        "ifAdmitted": "Same risk as other photo anomalies: ritual events or hostile forms later in the shift.",
+        "cardSummary": "One of the sneakiest photo checks. Always look at the ears, not only the face."
       },
       "system": {
-        "slug": "eyeless-talk",
-        "section": "Choice and ritual events",
+        "slug": "different-ears",
+        "section": "Photo Anomalies",
         "sortOrder": 100,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/different-ears.webp"
       }
     },
     {
       "item": {
-        "name": "Eyeless: Ignore",
-        "threatType": "Dialogue choice",
-        "variant": "Ignore him",
-        "shift": "Eyeless sequence",
-        "location": "Hospital encounter",
-        "warningSigns": "Eyeless appears, but the player can choose not to talk.",
-        "bestAction": "Ignore Eyeless when you want the alternate no-dialogue outcome.",
-        "consequence": "Ignoring him triggers the alternate Eyeless branch.",
-        "cardSummary": "This Eyeless variant tracks the ignore choice. It is separate because the same encounter can play out differently.",
-        "aliases": [
-          "Eyeless"
-        ]
+        "name": "Static Photo",
+        "detectBy": "Photo",
+        "warningSigns": "The photograph has a grainy static overlay. It can appear alone or with other cursed photo details.",
+        "bestAction": "Close the shutters when static covers the photo. Do not rely on tasing alone, especially on later shifts.",
+        "ifAdmitted": "A static-only photo can still lead into a death ritual during recovery, even when it does not always become a Shapeshifter.",
+        "cardSummary": "If the polaroid looks like a broken TV channel, do not stamp them in just because the window face looks normal."
       },
       "system": {
-        "slug": "eyeless-ignore",
-        "section": "Choice and ritual events",
+        "slug": "static-photo",
+        "section": "Photo Anomalies",
         "sortOrder": 110,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/static-photo.webp"
       }
     },
     {
       "item": {
-        "name": "Black Bunny",
-        "threatType": "Hostile creature",
-        "variant": "Black bunny",
-        "shift": "Late anomaly sequence",
-        "location": "Hospital route",
-        "warningSigns": "A dark bunny-like threat appears instead of a normal patient.",
-        "bestAction": "Keep distance and treat the encounter as a chase or threat moment.",
-        "consequence": "Letting the bunny close the gap can force a failure or escape panic.",
-        "cardSummary": "Black Bunny is a hostile creature-style anomaly. It is less about diagnosis and more about recognizing the threat quickly."
+        "name": "Cursed Photo",
+        "detectBy": "Photo",
+        "warningSigns": "The polaroid shows a heavily distorted or horrific face, such as a melted grin, wrong eyes, or other cursed face variants. Picking the photo up too early can also drain sanity.",
+        "bestAction": "Let the photo fully develop, inspect it without rushing, then close the shutters.",
+        "ifAdmitted": "A clear cursed face means a bad patient. Letting them through risks rituals and hostile forms.",
+        "cardSummary": "These are the nasty polaroids. Wait for the print, check it on the desk, and shut the window if the face looks cursed."
       },
       "system": {
-        "slug": "black-bunny",
-        "section": "Chase and hostile encounters",
+        "slug": "cursed-photo",
+        "section": "Photo Anomalies",
         "sortOrder": 120,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/cursed-photo.webp"
       }
     },
     {
       "item": {
-        "name": "Infector",
-        "threatType": "Infection threat",
-        "variant": "Infector",
-        "shift": "Late anomaly sequence",
-        "location": "Hospital route",
-        "warningSigns": "The encounter centers on an infection-style threat instead of normal treatment.",
-        "bestAction": "Avoid direct contact and handle the encounter as a spread or infection hazard.",
-        "consequence": "Getting too close can let the infection threat punish the player or route.",
-        "cardSummary": "Infector is the anomaly to treat as a contact danger. The name points to a threat that spreads or punishes close interaction."
+        "name": "Black Eyes",
+        "detectBy": "CCTV",
+        "warningSigns": "On the security camera, a black bar covers the face and realistic eyes stare back at you. The patient looks normal at the window and in the photo.",
+        "bestAction": "Check CCTV before admission, then close the shutters.",
+        "ifAdmitted": "Camera-only anomalies still count as real threats once they get past the desk.",
+        "cardSummary": "A face that only looks wrong on the security feed. Window and photo can both be clean, so skip cameras at your own risk."
       },
       "system": {
-        "slug": "infector",
-        "section": "Patient and room hazards",
+        "slug": "black-eyes",
+        "section": "CCTV Anomalies",
         "sortOrder": 130,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/black-eyes.webp"
       }
     },
     {
       "item": {
-        "name": "T-Pose",
-        "threatType": "Abnormal pose",
-        "variant": "T-pose figure",
-        "shift": "Late anomaly sequence",
-        "location": "Hospital route",
-        "warningSigns": "A character or patient appears frozen in an unnatural T-pose.",
-        "bestAction": "Do not ignore the pose change; keep space until the encounter resolves.",
-        "consequence": "Treating the T-pose as harmless can leave the player open to the final threat.",
-        "cardSummary": "T-Pose looks simple at first, but the abnormal pose is the warning. It belongs with the late hostile encounters because players may dismiss it too quickly."
+        "name": "Unnatural Body",
+        "detectBy": "CCTV",
+        "warningSigns": "On CCTV the body looks stretched, warped, or detached, sometimes nicknamed boneless. Reopening the feed can change the shape again.",
+        "bestAction": "Use lobby and check-in cameras, then close the shutters on any stretched body.",
+        "ifAdmitted": "Camera-only body distortion is still an anomaly and can lead to later hostile outcomes.",
+        "cardSummary": "If the limbs look longer than the hallway allows, reject them. Normal patients do not stretch like melted plastic."
       },
       "system": {
-        "slug": "t-pose",
-        "section": "Chase and hostile encounters",
+        "slug": "unnatural-body",
+        "section": "CCTV Anomalies",
         "sortOrder": 140,
-        "image": null
+        "image": "/Animal%20Hospital/anomalies/unnatural-body.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Staring at Cameras",
+        "detectBy": "CCTV",
+        "warningSigns": "The patient keeps looking straight into the CCTV lens while walking or waiting, even when a normal patient would face the desk.",
+        "bestAction": "Sweep the security cameras before admission and reject constant camera contact.",
+        "ifAdmitted": "Camera-stare patients are still anomalies and can escalate after check-in.",
+        "cardSummary": "Normal patients face the counter. Anomalies that live on camera feed keep staring into the lens instead."
+      },
+      "system": {
+        "slug": "staring-at-cameras",
+        "section": "CCTV Anomalies",
+        "sortOrder": 150,
+        "image": "/Animal%20Hospital/anomalies/staring-at-cameras.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Body",
+        "detectBy": "CCTV",
+        "warningSigns": "On the security camera the patient is a fully black silhouette with no normal color or detail.",
+        "bestAction": "Close the shutters as soon as the feed shows a black void body.",
+        "ifAdmitted": "A void silhouette is a clear anomaly and should never be treated as a normal patient.",
+        "cardSummary": "If the camera turns the patient into a pure black figure, that is enough. No extra face check needed."
+      },
+      "system": {
+        "slug": "void-body",
+        "section": "CCTV Anomalies",
+        "sortOrder": 160,
+        "image": "/Animal%20Hospital/anomalies/void-body.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Camera Twitching",
+        "detectBy": "CCTV",
+        "warningSigns": "The patient only twitches on the security feed. At the window they may look completely still and normal.",
+        "bestAction": "Leave the CCTV feed open for a few seconds before deciding the patient is safe.",
+        "ifAdmitted": "Like other camera-only tells, this can still become a Shapeshifter or ritual problem after recovery.",
+        "cardSummary": "Twitching that only shows on CCTV is easy to miss if you flick through cameras too fast."
+      },
+      "system": {
+        "slug": "camera-twitching",
+        "section": "CCTV Anomalies",
+        "sortOrder": 170,
+        "image": "/Animal%20Hospital/anomalies/camera-twitching.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Disguised Shapeshifter",
+        "detectBy": "CCTV",
+        "warningSigns": "Looks normal at the window, but security cameras show the true Shapeshifter form after the patient reaches the check-in spot. Lobby camera side views help. Twitching can appear only in that form.",
+        "bestAction": "Check both lobby and check-in cameras once the patient reaches the window, then close the shutters.",
+        "ifAdmitted": "You are letting a Shapeshifter into the hospital in disguise. It can attack patients and players after it drops the act.",
+        "cardSummary": "The hard mode check-in. In person it looks fine. On camera it is already a monster waiting for a stamp."
+      },
+      "system": {
+        "slug": "disguised-shapeshifter",
+        "section": "CCTV Anomalies",
+        "sortOrder": 180,
+        "image": "/Animal%20Hospital/anomalies/disguised-shapeshifter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mismatching Ears",
+        "detectBy": "CCTV",
+        "warningSigns": "Ears or horns on the security camera do not match the ears you see at the window.",
+        "bestAction": "Compare window ears to CCTV ears before admission, then reject any mismatch.",
+        "ifAdmitted": "Subtle camera mismatches still count as anomalies and can escalate later.",
+        "cardSummary": "A small ear change on CCTV is still a reject. This is one of the easiest tells to overlook when you rush."
+      },
+      "system": {
+        "slug": "mismatching-ears",
+        "section": "CCTV Anomalies",
+        "sortOrder": 190,
+        "image": "/Animal%20Hospital/anomalies/mismatching-ears.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mismatching Eyes",
+        "detectBy": "CCTV",
+        "warningSigns": "Eye shape or style differs between the patient at the window and the same patient on CCTV.",
+        "bestAction": "Zoom the lobby or check-in camera onto the face and reject any eye mismatch.",
+        "ifAdmitted": "Subtle camera mismatches still count as anomalies and can escalate later.",
+        "cardSummary": "Window eyes and camera eyes should match. If they do not, the patient is not real."
+      },
+      "system": {
+        "slug": "mismatching-eyes",
+        "section": "CCTV Anomalies",
+        "sortOrder": 200,
+        "image": "/Animal%20Hospital/anomalies/mismatching-eyes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Head Banger",
+        "detectBy": "Special",
+        "warningSigns": "A hollow-eyed visitor smashes their head against the check-in glass and can block the shutters. This is not a normal queue patient.",
+        "bestAction": "Offer coffee so they drink and leave. Avoid tasing, shooting, or forcing them out the hard way, which costs a large sanity hit.",
+        "ifAdmitted": "Not a normal admit target. Handled at the window with coffee, not by treating them like a medical patient.",
+        "cardSummary": "The window pest that wants coffee, not treatment. Feed it a cup and it calms down instead of wrecking your sanity."
+      },
+      "system": {
+        "slug": "head-banger",
+        "section": "Special Threats",
+        "sortOrder": 210,
+        "image": "/Animal%20Hospital/anomalies/head-banger.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shapeshifter",
+        "detectBy": "Special",
+        "warningSigns": "A patient that has already dropped the disguise. Expect a huge mouth, sharp teeth, and an attack on nearby patients or players. Heavy breathing and copycat patients are early clues.",
+        "bestAction": "Tase it, shoot it, or hold the interaction to pull it off a victim. If it grabs you, spam the struggle input.",
+        "ifAdmitted": "This is the hostile form after a bad admit or transformation. It is already inside and needs a weapon response.",
+        "cardSummary": "The end stage of a missed anomaly. Once the disguise drops, stop diagnosis mode and fight it before it eats a patient."
+      },
+      "system": {
+        "slug": "shapeshifter",
+        "section": "Special Threats",
+        "sortOrder": 220,
+        "image": "/Animal%20Hospital/anomalies/shapeshifter.webp"
       }
     }
   ]
