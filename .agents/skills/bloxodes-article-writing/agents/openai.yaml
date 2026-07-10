@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Article Writing"
   short_description: "Write Bloxodes articles"
-  default_prompt: "Use $bloxodes-article-writing to write one Bloxodes article final.json from an approved brief.md. Include game name in title/slug for game articles, add useful faq_json only for follow-up questions, avoid self-referential wording, then parse-check final.json."
+  default_prompt: "Use $bloxodes-article-writing as a writing subagent to write one article final.json from an approved brief.md. Read top to bottom like a calm gaming guide: full sentences, simple words, clean story flow, real player moments, no hype and no research voice. Include the game name in title/slug for game pieces, match FAQ voice to body, self-review once for flow, then parse-check final.json."

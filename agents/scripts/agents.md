@@ -23,8 +23,8 @@ This file is the quick reference for what exists today and how to invoke it.
 | Universe description generation | `scripts/universes/generate-universe-description.ts` | `npm run generate:universe-description` |
 | Queue event guides | `scripts/events/queue-event-guides.ts` | `npm run queue:event-guides` |
 | Public copy quality check | `scripts/content/check-public-copy.ts` | `npm run content:check-copy -- <final.json>` |
-| Claude article final writer handoff | `scripts/content/write-article-final-with-claude.ts` | `npm run write:article:claude -- --topic <game-or-topic-slug> --article <article-slug>`; add `--tech` for platform/troubleshooting articles and `--run` when the Claude CLI is available |
-| Claude game collection final writer handoff | `scripts/content/write-game-collection-final-with-claude.ts` | `npm run write:game-collection:claude -- --game <game-slug> --collection <collection-slug>`; add `--run` when the Claude CLI is available |
+| Article final writing | `.agents/skills/bloxodes-article-workflow-runner` | Research subagent → brief approval → writing subagent (`bloxodes-article-writing` or tech skill) → `verify:article-finals` |
+| Game collection final writing | `.agents/skills/bloxodes-game-collection-workflow-runner` | Collection subagent (research → data → images) → writing subagent (`bloxodes-game-collection-writing`) → `verify:game-collection-finals` |
 | Import reviewed tool final JSON into Supabase | `scripts/content/import-tool-finals.ts` | `npm run import:tool-finals -- --file tmp/content-workspace/<topic-slug>/tools/<tool-code>/final.json --dry-run`; production writes require `NODE_ENV=production` plus `--allow-prod` and verify the saved `tools` row |
 ### Code Page Workflow Hard Rules
 
@@ -118,8 +118,8 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Seed broad catalog pages into Supabase | `scripts/catalog/seed-catalog-pages.ts` | `npm run seed:catalog-pages -- --file tmp/content-workspace/<topic>/catalogs/<batch>/final.json --dry-run`; writes to local Supabase by default and refuses production unless `--allow-prod` is supplied |
 | Seed gathered game wiki pages into Supabase | `scripts/catalog/seed-game-wiki-pages.ts` | `npm run seed:game-wiki-pages`, add `-- --dry-run` to preview |
 | Import reviewed content final JSON into Supabase | `scripts/content/import-content-final.ts` | `npm run import:content-final -- --file tmp/content-workspace/<game-or-topic-slug>/<page-folder>/final.json --dry-run`; article imports write only to `articles`, fill missing authors randomly, create edited game-thumbnail covers when needed, inject the feature image before the first H2, and require `/articles` plus `/articles/<slug>` verification against the same saved row |
-| Write one article final with Claude | `scripts/content/write-article-final-with-claude.ts` | `npm run write:article:claude -- --topic <game-or-topic-slug> --article <article-slug>` writes the handoff prompt; add `--tech` for tech articles and `--run` to invoke `claude -p` and sanity-check the resulting `final.json` |
-| Write one game collection final with Claude | `scripts/content/write-game-collection-final-with-claude.ts` | `npm run write:game-collection:claude -- --game <game-slug> --collection <collection-slug>` writes the handoff prompt; add `--run` to invoke `claude -p` and sanity-check the resulting `final.json` |
+| Write one article final | `.agents/skills/bloxodes-article-writing` via workflow runner | After brief approval, spawn a writing subagent; use tech skill for platform/troubleshooting |
+| Write one game collection final | `.agents/skills/bloxodes-game-collection-writing` via workflow runner | After image approval, spawn a writing subagent for `final.json` |
 | Collect all catalog item families | multiple catalog collectors | `npm run collect:catalog-items` |
 | Enrich catalog items | `scripts/catalog/enrich-roblox-catalog-items.ts` | `npm run enrich:catalog-items` |
 | Assign public item stats tiers | `scripts/items/assign-item-stats-tier.ts` | `npm run stats:items:tier -- --apply`; dry-run by default without `--apply` |

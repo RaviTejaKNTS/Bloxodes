@@ -5,55 +5,24 @@ description: Run one or many approved Bloxodes game collection pages with parent
 
 # Bloxodes Game Collection Workflow Runner
 
-Use subagents and give each subagent one game collection. The same subagent should research, prepare data, prepare images, and wait for parent approval at each gate. The writing gate is handed to Claude, then the parent resumes final review and verification.
+This is the parent workflow for one collection or a list of collections.
 
-If there are more collections than subagent slots, queue the extras. Do not write from the parent role.
+You are the parent. You judge. You do not take over the writing voice unless the fix is tiny.
 
-The parent owns judgment: approve scope, data readiness, image readiness, final copy, and verification. The parent should not take over unless the fix is tiny.
+## How the work splits
 
-## Subagent Handoff
+1. A **collection subagent** owns research, data, and images for one collection, and waits at each gate.
+2. You approve, refine, or block at research, data, and image gates.
+3. A **writing subagent** writes `final.json` after image readiness is approved.
+4. You review the final copy, run verification, and preview the local page.
 
-Every subagent message must set the role and exact skill:
+Give each collection subagent one collection only. If you have more collections than open slots, queue the rest. Do not write collections from the parent seat.
 
-- You are the subagent for one game collection only.
-- Do not run `/bloxodes-game-collection-workflow-runner`.
-- **Do NOT spawn sub-agents or call other agents at any phase. Write and edit all files directly using your own tools.**
-- Start with `/bloxodes-game-collection-research`.
-- Skill file: `.agents/skills/bloxodes-game-collection-research/SKILL.md`.
-- Return `brief.md` only and wait for parent approval.
+If subagents are not available, run the same gates yourself in order: research → data → images → writing. Keep writing as its own pass.
 
-For later gates, send the same subagent the exact next skill and repeat the no-sub-agents rule in every message:
-
-- Data gate: `/bloxodes-game-collection-data`; skill file `.agents/skills/bloxodes-game-collection-data/SKILL.md`. **Do NOT spawn sub-agents. Write the dataset JSON directly using the Write tool.**
-- Image gate: `/bloxodes-game-collection-images`; skill file `.agents/skills/bloxodes-game-collection-images/SKILL.md`. **Do NOT spawn sub-agents. Download images and edit dataset files directly using Bash and Edit/Write tools.**
-
-## Claude Writing Gate
-
-After image readiness is approved, stop using the collection subagent for writing. Use Claude for `final.json`:
-
-```bash
-npm run write:game-collection:claude -- --game <game-slug> --collection <collection-slug>
-```
-
-This writes a Claude handoff prompt to:
-
-```text
-tmp/content-workspace/<game-slug>/collections/<collection-slug>/claude-writing-prompt.md
-```
-
-If the Claude CLI is available in the current environment, run:
-
-```bash
-npm run write:game-collection:claude -- --game <game-slug> --collection <collection-slug> --run
-```
-
-The script invokes Claude with the symlinked Claude writing skill at `.claude/skills/bloxodes-game-collection-writing/SKILL.md`, tells Claude to write `final.json`, and requires Claude to reopen and revise its output once for human-friendly voice, concrete usefulness, no generic filler, valid JSON, no prose counts, no public source/dataset/workflow/page wording, correct `faq_json` keys, and useful `wiki_md`.
-
-If the CLI is not available, paste the generated handoff prompt into Claude manually and continue after Claude writes the same `final.json` path. Do not let the previous Codex subagent write the page unless the user explicitly overrides this workflow.
+The parent may fix tiny non-content metadata or JSON issues (slug, code, IDs, null fields, broken JSON, wrong `faq_json` key names). Anything about tone, body, structure, FAQ wording, or real claims goes back to the writing subagent. Data and image problems go back to the collection subagent.
 
 ## Workspace
-
-For each approved game collection:
 
 ```text
 tmp/content-workspace/<game-slug>/collections/<collection-slug>/
@@ -61,19 +30,58 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/
   final.json
 ```
 
+## Collection subagent handoff (research → data → images)
+
+Every collection-subagent message should set:
+
+- You own one game collection only.
+- Do not run `/bloxodes-game-collection-workflow-runner`.
+- Do not spawn other subagents. Do the work yourself with your own tools.
+- Start with research, then wait for parent approval at each gate.
+
+Skills by gate:
+
+- Research: `.agents/skills/bloxodes-game-collection-research/SKILL.md` → return `brief.md` only
+- Data: `.agents/skills/bloxodes-game-collection-data/SKILL.md` → update dataset and brief data notes
+- Images: `.agents/skills/bloxodes-game-collection-images/SKILL.md` → save images, wire paths, update brief image notes
+
+Repeat the no-nested-subagents rule when you send each next gate.
+
+## Writing subagent handoff (after image approval)
+
+After image readiness is approved, start a **new** writing subagent. Do not hand writing back to the research/data/image subagent unless the user says to.
+
+Tell the writing subagent:
+
+- You own one collection only.
+- Do not run this workflow runner.
+- Do not spawn other subagents.
+- Skill: `.agents/skills/bloxodes-game-collection-writing/SKILL.md` — read it fully
+- Read the approved `brief.md` first, including data and image readiness notes
+- Write only:
+  `tmp/content-workspace/<game-slug>/collections/<collection-slug>/final.json`
+- After drafting, reread once for simple player voice, concrete usefulness, valid JSON, no prose counts, no source/dataset/workflow/page wording, correct `faq_json` keys (`q` / `a`), and a useful `wiki_md`
+
+Also give the writing subagent:
+
+- game slug and collection slug
+- path to `brief.md`
+- path for `final.json`
+- any parent approval notes (soft facts, accepted image gaps, section label risks)
+
 ## Workflow
 
 1. Confirm the approved game, universe ID, and collection list.
-2. Give each subagent exactly one collection.
-3. Ask the subagent to use `/bloxodes-game-collection-research` and return `brief.md`. Subagents will create their workspace.
-4. Review source proof, scope, existing Bloxodes coverage, and whether the collection is worth publishing.
-5. Provide feedback, approve, or block the collection according to the checks.
-6. If approved, ask the same subagent to use `/bloxodes-game-collection-data` and update data notes.
-7. Review item count, missing items, dataset metadata, section plan, useful fields, grouping, image field planning, and route assumptions.
-8. If approved, ask the same subagent to use `/bloxodes-game-collection-images` and update image notes.
-9. Review image coverage, image quality, local paths, dataset wiring, missing images, and checker result.
-10. If approved, run `npm run write:game-collection:claude -- --game <game-slug> --collection <collection-slug>` to prepare the Claude handoff, then run it with `--run` when the Claude CLI is available or paste the generated prompt into Claude manually.
-11. After Claude writes `final.json`, review final copy and JSON. Send fixes back to Claude using the same handoff prompt context, not to the previous Codex data/image subagent.
+2. Give each collection subagent exactly one collection.
+3. Research gate: subagent returns `brief.md`.
+4. Review source proof, scope, coverage, and whether the collection is worth publishing.
+5. Approve, refine, or block.
+6. Data gate: same subagent prepares the dataset and updates brief notes.
+7. Review item count, missing items, v2 shape, sections, fields, image planning, and route assumptions.
+8. Image gate: same subagent gathers and wires images, then updates brief notes.
+9. Review image coverage, quality, paths, dataset wiring, and checker result.
+10. Writing gate: spawn a writing subagent with `bloxodes-game-collection-writing`.
+11. Review `final.json`. Send copy/tone/structure/FAQ fixes to the writing subagent. Send data/image gaps back to the collection subagent.
 12. Start or reuse localhost with `npm run dev:local`.
 13. Run:
 
@@ -89,7 +97,7 @@ Use one `--collection` for each approved collection.
 npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug>/<collection-slug> --fail-on-limit
 ```
 
-15. If the verifier and size gate pass, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Codex Browser.
+15. If the verifier and size gate pass, open each verified `/wiki/<game-slug>/<collection-slug>` link in the Browser (or fetch/preview the live local route when Browser is unavailable).
 16. For large collections with pagination, verify:
 - the section dropdown lists all real sections, not only the current page section
 - choosing a section on another page opens that page at the correct section anchor
@@ -97,18 +105,20 @@ npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug>/<colle
 - paginated collection URLs are not listed in `/sitemaps/wiki.xml`
 17. Return paths, localhost links, blocked collections, size-gate results, pagination checks, and remaining risks.
 
-## Research Checks
+## Research checks
 
 Once the research subagent returns `brief.md`, check that:
+
 - source proof is strong and complete
 - collection is durable, useful, and source-backed
 - item fields are useful for players to compare items
 - section plan is clear and useful for players
 - section labels are not source-table noise
 
-## Data Checks
+## Data checks
 
-Once the data subagent completes the process and updates the `brief.md`, check that:
+Once the data subagent updates the brief, check that:
+
 - Data is complete, accurate, and matches the approved brief.
 - Dataset uses v2 wrapped `{ meta, items[].item, items[].system }`, not a bare array.
 - Public game fields live only in `items[].item`; system fields live only in `items[].system`.
@@ -130,9 +140,10 @@ Once the data subagent completes the process and updates the `brief.md`, check t
 - `npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <collection-slug>` reports no blocking metadata issue.
 - If the data is not ready, send it back to the subagent for fixes.
 
-## Image Checks
+## Image checks
 
 Once the image subagent updates `brief.md`, check that:
+
 - Images are complete and accurate, or missing images are accepted with a clear reason.
 - Images clearly show the item and are not thumbnails, logos, page screenshots, or unrelated art.
 - Public image paths exist under the expected folder.
@@ -140,31 +151,32 @@ Once the image subagent updates `brief.md`, check that:
 - `npm run check:game-collection-data -- --require-images` passed when images are required.
 - If images are not ready, send it back to the subagent for fixes before writing.
 
-## Final Checks
+## Final checks
 
-Before approving any final.json, make sure all the following are met:
-- Check if item count and title count agree.
-- Check if `display_name` is the short reusable collection label, such as `Units`, `Food Items`, `NPCs`, or `UGC Items`; it must not include counts, game names, colons, or title/SEO phrasing.
-- All the writing is simple and easy for everyone to read.
-- Check if card fields help players compare items.
-- Check if card/list details follow the new presentation contract: description, highlight where natural, chip values for compact numbers, detail values for prose, and no label-stuffed values.
-- Check if image readiness is approved or missing images were clearly accepted.
-- Check if sections are useful and labels are easy to understand.
-- Check if `description_json` keys match actual rendered section labels.
-- No public copy mentions research, datasets, workflow, or page usage.
-- No prose copy states an item or collection count (no "all X items", "over X", section counts, totals). The only count allowed is the automated `{count}` token in `title`/`seo_title`.
-- `wiki_md` is specific and useful: it explains the in-game system in plain words (what it is, how a player gets/uses it, why it matters), not a generic "this collection lists the items" blurb, and carries no item count.
-- Check if the title follows the pattern `All {count} <Collection> in <Game>`.
-- Check if the paragraphs add context beyond the cards.
-- Check if `final.json` parses.
-- Check if the verifier, HTML size gate, pagination checks, and Browser preview look good before calling it done.
+Before approving any `final.json`, make sure:
 
-## Parent Checks
+- item count and title count agree
+- `display_name` is the short reusable collection label, such as `Units`, `Food Items`, `NPCs`, or `UGC Items`; it must not include counts, game names, colons, or title/SEO phrasing
+- writing is simple and easy for everyone to read
+- card fields help players compare items
+- card/list details follow the presentation contract: description, highlight where natural, chip values for compact numbers, detail values for prose, and no label-stuffed values
+- image readiness is approved or missing images were clearly accepted
+- sections are useful and labels are easy to understand
+- `description_json` keys match actual rendered section labels
+- no public copy mentions research, datasets, workflow, or page usage
+- no prose copy states an item or collection count (no "all X items", "over X", section counts, totals); the only count allowed is the automated `{count}` token in `title` / `seo_title`
+- `wiki_md` is specific and useful: it explains the in-game system in plain words, not a generic list blurb, and carries no item count
+- title follows `All {count} <Collection> in <Game>`
+- paragraphs add context beyond the cards
+- `final.json` parses
+- verifier, HTML size gate, pagination checks, and Browser preview look good before calling it done
+
+## Parent checks
 
 - production duplicate check is recorded
 - source proof supports the collection and important fields
 - item count and title count agree
-- `display_name` is present and uses the clean reusable collection label, not a slug/title-derived phrase
+- `display_name` is present and uses the clean reusable collection label
 - image gaps are fixed, accepted, or blocked
 - card fields help players compare items
 - title follows `All {count} <Collection> in <Game>`
