@@ -1,0 +1,20 @@
+import type { GameCollectionGroup } from "../types";
+
+export const fishItCollectionGroup = {
+  gameSlug: "fish-it",
+  gameName: "Fish It",
+  universeId: 6701277882,
+  dataDir: "Fish It",
+  universeNames: ["Fish It", "Fish It!", "[☄️UPD] Fish It! 🐟"],
+  collections: [
+    "locations",
+    "boats",
+    "charms",
+    "mutations",
+    "enchantments",
+    "bobbers",
+    "pets",
+    "rods",
+    "fish"
+  ]
+} satisfies GameCollectionGroup;

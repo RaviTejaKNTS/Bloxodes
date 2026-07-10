@@ -1,0 +1,386 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Fish It!",
+    "gameSlug": "fish-it",
+    "collection": "charms",
+    "route": "/wiki/fish-it/charms",
+    "catalogCode": "fish-it-charms",
+    "itemFields": [
+      "name",
+      "effect",
+      "targetFish",
+      "levelRequired",
+      "cost",
+      "location",
+      "uses",
+      "obtainMethod",
+      "availability",
+      "notes",
+      "cardSummary"
+    ],
+    "columns": [
+      "effect",
+      "targetFish",
+      "levelRequired",
+      "cost",
+      "location",
+      "uses",
+      "obtainMethod",
+      "availability",
+      "notes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Secret fish charms",
+        "Crafted charms",
+        "Mutation charms",
+        "Luck and event charms"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "effect",
+        "levelRequired",
+        "cost",
+        "location",
+        "uses",
+        "targetFish",
+        "availability"
+      ],
+      "tableFields": [
+        "effect",
+        "targetFish",
+        "levelRequired",
+        "cost",
+        "location",
+        "uses",
+        "obtainMethod",
+        "availability",
+        "notes",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "effect": {
+          "kind": "plain",
+          "label": "Effect"
+        },
+        "targetFish": {
+          "kind": "plain",
+          "label": "Target fish"
+        },
+        "levelRequired": {
+          "kind": "chip",
+          "label": "Level"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "location": {
+          "kind": "plain",
+          "label": "Location"
+        },
+        "uses": {
+          "kind": "chip",
+          "label": "Uses"
+        },
+        "obtainMethod": {
+          "kind": "plain",
+          "label": "How to get"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Algae Charm",
+        "effect": "1.5\u00d7 chance to catch Cryoshade Glider",
+        "targetFish": "Cryoshade Glider",
+        "levelRequired": "50",
+        "cost": "40,000 coins",
+        "location": "Lost Isle (Element / Deep Sea quest board)",
+        "uses": "50",
+        "obtainMethod": "Shop",
+        "availability": "Available",
+        "notes": "",
+        "cardSummary": "Shop charm that raises your odds of catching Cryoshade Glider. Buy it on Lost Isle near the deep-sea quest board once you are level 50."
+      },
+      "system": {
+        "slug": "algae-charm",
+        "section": "Secret fish charms",
+        "sortOrder": 1,
+        "image": "/Fish%20It/Charms/algae-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magma Charm",
+        "effect": "Boosts Magma Shark catch odds",
+        "targetFish": "Magma Shark",
+        "levelRequired": "75",
+        "cost": "20,000 coins",
+        "location": "Kohana Volcano",
+        "uses": "30",
+        "obtainMethod": "Shop",
+        "availability": "Available",
+        "notes": "Does not help catch Ancient Magma Whale. Magma Shark fishing is deeper in the Volcanic Cavern area.",
+        "cardSummary": "Buy this at Kohana Volcano when hunting Magma Shark. It only helps that fish and lasts 30 uses per purchase."
+      },
+      "system": {
+        "slug": "magma-charm",
+        "section": "Secret fish charms",
+        "sortOrder": 2,
+        "image": "/Fish%20It/Charms/magma-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteor Charm",
+        "effect": "1.1\u00d7 chance to catch Cosmic Hammerhead Shark",
+        "targetFish": "Cosmic Hammerhead Shark",
+        "levelRequired": "75",
+        "cost": "20,000 coins",
+        "location": "Planetary Observatory (Aquatic Research Lab)",
+        "uses": "30",
+        "obtainMethod": "Shop",
+        "availability": "Available",
+        "notes": "Requires the Submarine Operator quest: catch 20 Cosmic Tailfish at the Planetary Observatory before the lab shop unlocks.",
+        "cardSummary": "Quest-gated shop charm for Cosmic Hammerhead Shark hunting. Finish the observatory submarine quest, then buy it in the underwater lab for 20,000 coins."
+      },
+      "system": {
+        "slug": "meteor-charm",
+        "section": "Secret fish charms",
+        "sortOrder": 3,
+        "image": "/Fish%20It/Charms/meteor-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bone Charm",
+        "effect": "1.5\u00d7 chance to catch Bone Whale",
+        "targetFish": "Bone Whale",
+        "levelRequired": "100",
+        "cost": "70,000 coins",
+        "location": "Sacred Temple (Ancient Jungle)",
+        "uses": "50",
+        "obtainMethod": "Shop",
+        "availability": "Available",
+        "notes": "",
+        "cardSummary": "High-level shop charm for Bone Whale. Buy it at the Sacred Temple entrance in Ancient Jungle once you hit level 100."
+      },
+      "system": {
+        "slug": "bone-charm",
+        "section": "Secret fish charms",
+        "sortOrder": 4,
+        "image": "/Fish%20It/Charms/bone-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hook Charm",
+        "effect": "50% luck boost",
+        "targetFish": "",
+        "levelRequired": "25",
+        "cost": "Craft: 3\u00d7 Rope",
+        "location": "Lava Basin (Charm Crafting table)",
+        "uses": "100",
+        "obtainMethod": "Craft",
+        "availability": "Available",
+        "notes": "Effect uses multi-source consensus (main roster guides). One craft guide lists 15% luck instead; prefer in-game check if values differ.",
+        "cardSummary": "Entry craft charm made from three Rope at the Lava Basin table. It gives a flat luck boost and is the cheapest craftable charm to start with."
+      },
+      "system": {
+        "slug": "hook-charm",
+        "section": "Crafted charms",
+        "sortOrder": 5,
+        "image": "/Fish%20It/Charms/hook-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Winged Charm",
+        "effect": "1.1\u00d7 reel speed and 10% luck",
+        "targetFish": "",
+        "levelRequired": "50",
+        "cost": "Craft: 2\u00d7 Rope, 1\u00d7 Driftwood",
+        "location": "Lava Basin (Charm Crafting table)",
+        "uses": "200",
+        "obtainMethod": "Craft",
+        "availability": "Available",
+        "notes": "",
+        "cardSummary": "Crafted Lava Basin charm that speeds reeling and adds a small luck boost. Needs Rope and Driftwood and lasts a long 200 uses."
+      },
+      "system": {
+        "slug": "winged-charm",
+        "section": "Crafted charms",
+        "sortOrder": 6,
+        "image": "/Fish%20It/Charms/winged-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Anchor Charm",
+        "effect": "1.1\u00d7 reel speed and 1.1\u00d7 fish size",
+        "targetFish": "",
+        "levelRequired": "75",
+        "cost": "Craft: 1\u00d7 Pyrafruit Relic, 1\u00d7 Ember Crux",
+        "location": "Lava Basin (Charm Crafting table)",
+        "uses": "150",
+        "obtainMethod": "Craft",
+        "availability": "Available",
+        "notes": "",
+        "cardSummary": "Mid-late craft charm for bigger fish and faster reels. Make it at Lava Basin with a Pyrafruit Relic and Ember Crux."
+      },
+      "system": {
+        "slug": "anchor-charm",
+        "section": "Crafted charms",
+        "sortOrder": 7,
+        "image": "/Fish%20It/Charms/anchor-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oculus Charm",
+        "effect": "1.1\u00d7 reel speed, size, and mutation chance, plus 5% luck",
+        "targetFish": "",
+        "levelRequired": "100",
+        "cost": "Craft: 1\u00d7 Cave Crystal, 1\u00d7 Ember Crux, 1\u00d7 Pyrafruit Relic, 2\u00d7 Veil Shard",
+        "location": "Lava Basin (Charm Crafting table)",
+        "uses": "",
+        "obtainMethod": "Craft",
+        "availability": "Available",
+        "notes": "Also used as a crafting material in the early Withering Rod questline.",
+        "cardSummary": "Top craftable charm with a broad stat package. Expensive materials, level 100 required, and it also feeds the Withering Rod quest."
+      },
+      "system": {
+        "slug": "oculus-charm",
+        "section": "Crafted charms",
+        "sortOrder": 8,
+        "image": "/Fish%20It/Charms/oculus-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pastel Egg Charm",
+        "effect": "1.5\u00d7 Pastel mutation chance",
+        "targetFish": "",
+        "levelRequired": "None",
+        "cost": "10,000 coins",
+        "location": "Easter Cave",
+        "uses": "",
+        "obtainMethod": "Event shop",
+        "availability": "Limited event",
+        "notes": "Sold after unlocking Easter Cave through the Golden Egg scavenger hunt during Easter content.",
+        "cardSummary": "Easter-area charm that multiplies Pastel mutation odds. Buy it in Easter Cave when that event space is open."
+      },
+      "system": {
+        "slug": "pastel-egg-charm",
+        "section": "Mutation charms",
+        "sortOrder": 9,
+        "image": "/Fish%20It/Charms/pastel-egg-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Radioactive Charm",
+        "effect": "1.3\u00d7 Radioactive mutation chance",
+        "targetFish": "",
+        "levelRequired": "75",
+        "cost": "20,000 coins",
+        "location": "Sewers (Underwater City)",
+        "uses": "",
+        "obtainMethod": "Shop",
+        "availability": "Available",
+        "notes": "Useful when farming Radioactive mutations in the Sewers.",
+        "cardSummary": "Shop charm for Radioactive mutation grinding. Found in the Sewers under the Underwater City for 20,000 coins at level 75."
+      },
+      "system": {
+        "slug": "radioactive-charm",
+        "section": "Mutation charms",
+        "sortOrder": 10,
+        "image": "/Fish%20It/Charms/radioactive-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boombox Charm",
+        "effect": "20% bonus luck",
+        "targetFish": "",
+        "levelRequired": "None",
+        "cost": "5,000 coins",
+        "location": "Classic Island",
+        "uses": "",
+        "obtainMethod": "Shop",
+        "availability": "Available",
+        "notes": "",
+        "cardSummary": "Cheap general luck charm from Classic Island. No level lock and a low coin cost make it easy to keep stocked for casual grinding."
+      },
+      "system": {
+        "slug": "boombox-charm",
+        "section": "Luck and event charms",
+        "sortOrder": 11,
+        "image": "/Fish%20It/Charms/boombox-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate Charm",
+        "effect": "15% Easter luck",
+        "targetFish": "",
+        "levelRequired": "None",
+        "cost": "6,000 coins",
+        "location": "Easter Island",
+        "uses": "100",
+        "obtainMethod": "Event shop",
+        "availability": "Limited event",
+        "notes": "Bought near the Easter Island charm shop / pond area while Easter content is active.",
+        "cardSummary": "Easter luck charm with no level requirement. Purchase on Easter Island for 6,000 coins and use it while farming event fish."
+      },
+      "system": {
+        "slug": "chocolate-charm",
+        "section": "Luck and event charms",
+        "sortOrder": 12,
+        "image": "/Fish%20It/Charms/chocolate-charm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Charm",
+        "effect": "20% luck and 50% Valentine luck",
+        "targetFish": "",
+        "levelRequired": "None",
+        "cost": "20,000 coins",
+        "location": "Heartfelt Island",
+        "uses": "200",
+        "obtainMethod": "Event shop",
+        "availability": "Limited event",
+        "notes": "Sold during Valentine\u2019s event content on Heartfelt Island.",
+        "cardSummary": "Valentine event charm with both general luck and Valentine-specific luck. High use count (200) and no level requirement."
+      },
+      "system": {
+        "slug": "heart-charm",
+        "section": "Luck and event charms",
+        "sortOrder": 13,
+        "image": "/Fish%20It/Charms/heart-charm.png"
+      }
+    }
+  ]
+}

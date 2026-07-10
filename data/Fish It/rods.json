@@ -1,0 +1,618 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Fish It",
+    "gameSlug": "fish-it",
+    "collection": "rods",
+    "route": "/wiki/fish-it/rods",
+    "catalogCode": "fish-it-rods",
+    "itemFields": [
+      "rarity",
+      "luck",
+      "speed",
+      "weight",
+      "price",
+      "howToGet",
+      "location",
+      "availability",
+      "notes",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "luck",
+      "speed",
+      "weight",
+      "price",
+      "howToGet",
+      "location",
+      "availability",
+      "notes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Rare",
+        "Epic",
+        "Legendary",
+        "Mythic",
+        "Secret",
+        "Gamepass"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "luck",
+        "speed",
+        "weight",
+        "price",
+        "howToGet",
+        "location",
+        "availability",
+        "notes"
+      ],
+      "tableFields": [
+        "rarity",
+        "luck",
+        "speed",
+        "weight",
+        "price",
+        "howToGet",
+        "location",
+        "availability",
+        "notes",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "luck": {
+          "kind": "chip",
+          "label": "Luck"
+        },
+        "speed": {
+          "kind": "chip",
+          "label": "Speed"
+        },
+        "weight": {
+          "kind": "chip",
+          "label": "Weight"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "howToGet": {
+          "kind": "normal",
+          "label": "How to get"
+        },
+        "location": {
+          "kind": "normal",
+          "label": "Location"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Starter Rod",
+        "rarity": "Common",
+        "luck": "0%",
+        "speed": "0%",
+        "weight": "10 kg",
+        "price": "Free",
+        "howToGet": "Default starter",
+        "location": "Given on join",
+        "availability": "Available",
+        "notes": "Base rod with no Luck or Speed bonus.",
+        "cardSummary": "The free starter rod every player begins with. Replace it quickly once you can buy a shop upgrade or claim the free Lava Rod."
+      },
+      "system": {
+        "slug": "starter-rod",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Fish%20It/Rods/starter-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Luck Rod",
+        "rarity": "Common",
+        "luck": "50%",
+        "speed": "2%",
+        "weight": "15 kg",
+        "price": "$250",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": "Cheapest paid Luck upgrade for new players.",
+        "cardSummary": "A $250 shop rod that adds early Luck. Useful only until free Lava or stronger Uncommon rods are available."
+      },
+      "system": {
+        "slug": "luck-rod",
+        "section": "Common",
+        "sortOrder": 2,
+        "image": "/Fish%20It/Rods/luck-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Carbon Rod",
+        "rarity": "Common",
+        "luck": "30%",
+        "speed": "4%",
+        "weight": "20 kg",
+        "price": "$900",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": "Slightly faster Common option with modest Luck.",
+        "cardSummary": "A $900 Common shop rod with a bit more Speed than the Luck Rod. Still an early-game stopgap before Uncommon gear."
+      },
+      "system": {
+        "slug": "carbon-rod",
+        "section": "Common",
+        "sortOrder": 3,
+        "image": "/Fish%20It/Rods/carbon-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Toy Rod",
+        "rarity": "Common",
+        "luck": "30%",
+        "speed": "3%",
+        "weight": "18 kg",
+        "price": "Free",
+        "howToGet": "Like the game and join the Fish Atelier group",
+        "location": "Group reward",
+        "availability": "Available",
+        "notes": "Free social reward; no coin cost.",
+        "cardSummary": "A free Common rod earned by liking the experience and joining the Fish Atelier Roblox group. Better than the bare starter, then replace it as you earn coins."
+      },
+      "system": {
+        "slug": "toy-rod",
+        "section": "Common",
+        "sortOrder": 4,
+        "image": "/Fish%20It/Rods/toy-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Lava Rod",
+        "rarity": "Uncommon",
+        "luck": "30%",
+        "speed": "2%",
+        "weight": "100 kg",
+        "price": "Free",
+        "howToGet": "Talk to the Lava Fisherman NPC",
+        "location": "Kohana Volcano",
+        "availability": "Available",
+        "notes": "Best free early upgrade for most new players.",
+        "cardSummary": "Free Uncommon rod from the Lava Fisherman inside Kohana Volcano. Strong early weight for a no-cost pickup before you farm for shop rods."
+      },
+      "system": {
+        "slug": "lava-rod",
+        "section": "Uncommon",
+        "sortOrder": 5,
+        "image": "/Fish%20It/Rods/lava-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Grass Rod",
+        "rarity": "Uncommon",
+        "luck": "55%",
+        "speed": "5%",
+        "weight": "250 kg",
+        "price": "$1,500",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": null,
+        "cardSummary": "A $1,500 Uncommon shop rod with solid early Luck and a 250 kg weight cap for heavier beginner fish."
+      },
+      "system": {
+        "slug": "grass-rod",
+        "section": "Uncommon",
+        "sortOrder": 6,
+        "image": "/Fish%20It/Rods/grass-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Damascus Rod",
+        "rarity": "Uncommon",
+        "luck": "80%",
+        "speed": "4%",
+        "weight": "400 kg",
+        "price": "$3,000",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": "Also listed as Demascus Rod in some guides.",
+        "cardSummary": "A $3,000 Uncommon shop rod with the highest early Luck in its tier. Slow Speed, so it is mainly a Luck step before Rare rods."
+      },
+      "system": {
+        "slug": "damascus-rod",
+        "section": "Uncommon",
+        "sortOrder": 7,
+        "image": "/Fish%20It/Rods/damascus-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Rod",
+        "rarity": "Uncommon",
+        "luck": "60%",
+        "speed": "7%",
+        "weight": "750 kg",
+        "price": "$5,000",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": "Highest Uncommon weight for heavy early fish.",
+        "cardSummary": "A $5,000 Uncommon shop rod built around weight capacity. Good when you need to land heavier fish before Rare upgrades."
+      },
+      "system": {
+        "slug": "ice-rod",
+        "section": "Uncommon",
+        "sortOrder": 8,
+        "image": "/Fish%20It/Rods/ice-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Rod",
+        "rarity": "Rare",
+        "luck": "130%",
+        "speed": "7%",
+        "weight": "5,000 kg",
+        "price": "$10,000",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": "Common early-money grind pick after Lava Rod.",
+        "cardSummary": "A $10,000 Rare shop rod with a big Luck jump for its stage. A standard early-to-mid farming upgrade after free Lava progress."
+      },
+      "system": {
+        "slug": "lucky-rod",
+        "section": "Rare",
+        "sortOrder": 9,
+        "image": "/Fish%20It/Rods/lucky-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Midnight Rod",
+        "rarity": "Rare",
+        "luck": "100%",
+        "speed": "10%",
+        "weight": "10,000 kg",
+        "price": "$50,000",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": "More weight and Speed than Lucky Rod, less Luck.",
+        "cardSummary": "A $50,000 Rare shop rod that trades some Luck for higher Speed and a 10,000 kg weight cap. Useful when heavier fish matter more than raw Luck."
+      },
+      "system": {
+        "slug": "midnight-rod",
+        "section": "Rare",
+        "sortOrder": 10,
+        "image": "/Fish%20It/Rods/midnight-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Steampunk Rod",
+        "rarity": "Epic",
+        "luck": "175%",
+        "speed": "19%",
+        "weight": "25,000 kg",
+        "price": "$215,000",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": null,
+        "cardSummary": "A $215,000 Epic mid-game shop rod with balanced Luck and Speed for coin farming before Legendary options."
+      },
+      "system": {
+        "slug": "steampunk-rod",
+        "section": "Epic",
+        "sortOrder": 11,
+        "image": "/Fish%20It/Rods/steampunk-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Chrome Rod",
+        "rarity": "Epic",
+        "luck": "229%",
+        "speed": "23%",
+        "weight": "190,000 kg",
+        "price": "$437,000",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": "Strong mid-game weight for heavy rare fish.",
+        "cardSummary": "A $437,000 Epic shop rod with high Luck and a large weight limit. A common mid-game purchase before Legendary merchant and shop rods."
+      },
+      "system": {
+        "slug": "chrome-rod",
+        "section": "Epic",
+        "sortOrder": 12,
+        "image": "/Fish%20It/Rods/chrome-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Fluorescent Rod",
+        "rarity": "Legendary",
+        "luck": "300%",
+        "speed": "23%",
+        "weight": "160,000 kg",
+        "price": "$715,000",
+        "howToGet": "Rod store or Traveling Merchant",
+        "location": "Island rod shops / Traveling Merchant",
+        "availability": "Available",
+        "notes": "Cheapest Legendary by coin price; relatively slow Speed.",
+        "cardSummary": "A $715,000 Legendary rod sold in shops or by the Traveling Merchant. Strong Luck for its price, but slower than other Legendaries."
+      },
+      "system": {
+        "slug": "fluorescent-rod",
+        "section": "Legendary",
+        "sortOrder": 13,
+        "image": "/Fish%20It/Rods/fluorescent-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Astral Rod",
+        "rarity": "Legendary",
+        "luck": "350%",
+        "speed": "43%",
+        "weight": "150,000 kg",
+        "price": "$1,000,000",
+        "howToGet": "Rod store",
+        "location": "Island rod shops",
+        "availability": "Available",
+        "notes": "Has been nerfed across updates; treat as a mid-late step, not endgame.",
+        "cardSummary": "A $1,000,000 Legendary shop rod with high Speed for its tier. Often used as a temporary step toward Hazmat, Ares, or quest rods."
+      },
+      "system": {
+        "slug": "astral-rod",
+        "section": "Legendary",
+        "sortOrder": 14,
+        "image": "/Fish%20It/Rods/astral-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Hazmat Rod",
+        "rarity": "Legendary",
+        "luck": "380%",
+        "speed": "32%",
+        "weight": "300,000 kg",
+        "price": "$1,300,000",
+        "howToGet": "Traveling Merchant",
+        "location": "Traveling Merchant (Fisherman Island rotation)",
+        "availability": "Merchant rotation",
+        "notes": "Stock rotates; check the merchant when it visits.",
+        "cardSummary": "A $1,300,000 Legendary rod from the Traveling Merchant with top Legendary Luck and 300,000 kg weight. A key mid-to-late grind stick before Mythic and Secret rods."
+      },
+      "system": {
+        "slug": "hazmat-rod",
+        "section": "Legendary",
+        "sortOrder": 15,
+        "image": "/Fish%20It/Rods/hazmat-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghostfinn Rod",
+        "rarity": "Mythic",
+        "luck": "610%",
+        "speed": "118%",
+        "weight": "600,000 kg",
+        "price": "Free (quest)",
+        "howToGet": "Complete the Deep Sea Quest",
+        "location": "Lost Isle (Deep Sea / Sisyphus area)",
+        "availability": "Quest unlock",
+        "notes": "Quest tasks: catch 300 Rare/Epic fish in the Treasure Room, catch 3 Mythic and 1 Secret at Sisyphus Statue, and earn 1M coins.",
+        "cardSummary": "Free Mythic quest rod from the Deep Sea Quest on Lost Isle. High Luck, very high Speed, and enough weight for late-game rarities without a huge coin buy-in."
+      },
+      "system": {
+        "slug": "ghostfinn-rod",
+        "section": "Mythic",
+        "sortOrder": 16,
+        "image": "/Fish%20It/Rods/ghostfinn-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Ares Rod",
+        "rarity": "Mythic",
+        "luck": "455%",
+        "speed": "56%",
+        "weight": "400,000 kg",
+        "price": "$3,000,000",
+        "howToGet": "Location rod shop",
+        "location": "Tropical Grove",
+        "availability": "Available",
+        "notes": "Cheapest Mythic shop rod; often outclassed by Ghostfinn for pure value.",
+        "cardSummary": "A $3,000,000 Mythic rod sold at Tropical Grove. Solid all-around stats, but Ghostfinn usually offers better free value for the same progression stage."
+      },
+      "system": {
+        "slug": "ares-rod",
+        "section": "Mythic",
+        "sortOrder": 17,
+        "image": "/Fish%20It/Rods/ares-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Angler Rod",
+        "rarity": "Mythic",
+        "luck": "530%",
+        "speed": "71%",
+        "weight": "500,000 kg",
+        "price": "$8,000,000",
+        "howToGet": "Location rod shop",
+        "location": "Lost Isle",
+        "availability": "Available",
+        "notes": null,
+        "cardSummary": "An $8,000,000 Mythic rod from Lost Isle with strong Luck and Speed. A paid alternative when you want shop progress without finishing the Ghostfinn quest yet."
+      },
+      "system": {
+        "slug": "angler-rod",
+        "section": "Mythic",
+        "sortOrder": 18,
+        "image": "/Fish%20It/Rods/angler-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Bamboo Rod",
+        "rarity": "Mythic",
+        "luck": "760%",
+        "speed": "98%",
+        "weight": "500,000 kg",
+        "price": "$12,000,000",
+        "howToGet": "Location rod shop",
+        "location": "Ancient Jungle (Sacred Temple)",
+        "availability": "Available",
+        "notes": "Highest Luck among standard paid Mythic shop rods.",
+        "cardSummary": "A $12,000,000 Mythic rod from Ancient Jungle’s Sacred Temple area. Top shop Luck before the free Element and Diamond quest rods."
+      },
+      "system": {
+        "slug": "bamboo-rod",
+        "section": "Mythic",
+        "sortOrder": 19,
+        "image": "/Fish%20It/Rods/bamboo-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Element Rod",
+        "rarity": "Secret",
+        "luck": "1111%",
+        "speed": "130%",
+        "weight": "900,000 kg",
+        "price": "Free (quest)",
+        "howToGet": "Complete the Element Quest",
+        "location": "Ancient Jungle (Underground Cellar / Element Quest)",
+        "availability": "Quest unlock",
+        "notes": "Requires Ghostfinn Rod in major guides. Tasks include catching Secrets in Ancient Jungle and Sacred Temple, then creating 3 Transcended Stones.",
+        "cardSummary": "Secret quest rod with 1111% Luck and 130% Speed. Unlocked after the Element Quest chain in Ancient Jungle and used as the bridge into Diamond."
+      },
+      "system": {
+        "slug": "element-rod",
+        "section": "Secret",
+        "sortOrder": 20,
+        "image": "/Fish%20It/Rods/element-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Rod",
+        "rarity": "Secret",
+        "luck": "1300%",
+        "speed": "167%",
+        "weight": "1,000,000 kg",
+        "price": "Free (quest)",
+        "howToGet": "Complete the Diamond Researcher quest",
+        "location": "Fisherman Island Mutation Cellar",
+        "availability": "Quest unlock",
+        "notes": "Requires Element Rod in major guides. Tasks include Secrets at Coral Reefs and Tropical Grove, delivering special fish/items to Larry, and 1,000 perfect throws.",
+        "cardSummary": "Current top Secret rod with 1300% Luck, 167% Speed, and a 1,000,000 kg weight cap. Earned from the Diamond Researcher after the Element path."
+      },
+      "system": {
+        "slug": "diamond-rod",
+        "section": "Secret",
+        "sortOrder": 21,
+        "image": "/Fish%20It/Rods/diamond-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Angelic Rod",
+        "rarity": "Gamepass",
+        "luck": "180%",
+        "speed": "29%",
+        "weight": "75,000 kg",
+        "price": "399 Robux",
+        "howToGet": "Gamepass purchase",
+        "location": "Robux shop / gamepass",
+        "availability": "Gamepass",
+        "notes": "Premium purchase; generally weaker than late F2P Mythic and Secret rods.",
+        "cardSummary": "A 399 Robux gamepass rod with mid-tier stats. Optional paid shortcut that free progression rods eventually outclass."
+      },
+      "system": {
+        "slug": "angelic-rod",
+        "section": "Gamepass",
+        "sortOrder": 22,
+        "image": "/Fish%20It/Rods/angelic-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Rod",
+        "rarity": "Gamepass",
+        "luck": "110%",
+        "speed": "7%",
+        "weight": "800 kg",
+        "price": "445 Robux",
+        "howToGet": "Gamepass purchase",
+        "location": "Robux shop / gamepass",
+        "availability": "Gamepass",
+        "notes": "Low stats for the Robux cost compared with free shop progression.",
+        "cardSummary": "A 445 Robux gamepass rod with modest Luck and low weight. Skip for most players who can buy or earn in-game rods instead."
+      },
+      "system": {
+        "slug": "gold-rod",
+        "section": "Gamepass",
+        "sortOrder": 23,
+        "image": "/Fish%20It/Rods/gold-rod.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Hyper Rod",
+        "rarity": "Gamepass",
+        "luck": "130%",
+        "speed": "13%",
+        "weight": "1,000 kg",
+        "price": "999 Robux",
+        "howToGet": "Gamepass purchase",
+        "location": "Robux shop / gamepass",
+        "availability": "Gamepass",
+        "notes": "Most expensive gamepass rod; still far below Mythic and Secret F2P options.",
+        "cardSummary": "A 999 Robux gamepass rod with Rare-range Luck. Not worth the cost once shop and quest rods are in reach."
+      },
+      "system": {
+        "slug": "hyper-rod",
+        "section": "Gamepass",
+        "sortOrder": 24,
+        "image": "/Fish%20It/Rods/hyper-rod.jpg"
+      }
+    }
+  ]
+}

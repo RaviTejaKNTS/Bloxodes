@@ -42,6 +42,7 @@ import { restaurantTycoon3CollectionGroup } from "./restaurant-tycoon-3";
 import { theStrongestBattlegroundsCollectionGroup } from "./the-strongest-battlegrounds";
 import { storageHuntersOpenWorldCollectionGroup } from "./storage-hunters-open-world";
 import { drainTheLakeCollectionGroup } from "./drain-the-lake";
+import { fishItCollectionGroup } from "./fish-it";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -88,5 +89,6 @@ export const GAME_COLLECTION_GROUPS = [
   restaurantTycoon3CollectionGroup,
   theStrongestBattlegroundsCollectionGroup,
   storageHuntersOpenWorldCollectionGroup,
-  drainTheLakeCollectionGroup
+  drainTheLakeCollectionGroup,
+  fishItCollectionGroup
 ] satisfies GameCollectionGroup[];
