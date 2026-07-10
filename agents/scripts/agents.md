@@ -154,6 +154,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |
 | VPS scheduled automation manifest | `scripts/ops/vps-scheduled-automation.crontab` | Install into the VPS `codex-admin` crontab beside existing stats-worker blocks. This is the scheduled source for universe daily rollup/prune/audit, platform aggregate refresh, codes refresh, Google Indexing, events refresh, puzzle sync, music IDs, and decal IDs. GitHub workflows for those jobs are manual fallback only. |
+| Check production data before Docker build | `scripts/ops/check-production-data-readiness.mjs` | `node --env-file-if-exists=.env scripts/ops/check-production-data-readiness.mjs`; read-only Supabase HEAD probe with five attempts, used by the root Dockerfile before `npm run build` |
 
 ### Wiki And Game Collection Production Publish
 

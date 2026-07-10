@@ -88,16 +88,25 @@ function pickThumbnail(value: unknown): string | null {
   return null;
 }
 
+async function loadHomeData<T>(label: string, loader: () => Promise<T>): Promise<T> {
+  try {
+    return await loader();
+  } catch (error) {
+    console.error(`Home data loader failed: ${label}`, error);
+    throw error;
+  }
+}
+
 export default async function HomePage() {
   const [statsHome, codeGames, wikiPages, eventsPayload, quizzes, tools, counts, musicMeta] = await Promise.all([
-    getStatsHome(),
-    listCodePagesWithActiveCounts(),
-    listPublishedWikiPages(),
-    buildEventsCards(6),
-    listPublishedQuizzes(),
-    listPublishedTools(),
-    getContentCounts(),
-    resolveCatalogCardMeta("roblox-music-ids")
+    loadHomeData("stats home", () => getStatsHome()),
+    loadHomeData("code pages", () => listCodePagesWithActiveCounts()),
+    loadHomeData("wiki pages", () => listPublishedWikiPages()),
+    loadHomeData("events", () => buildEventsCards(6)),
+    loadHomeData("quizzes", () => listPublishedQuizzes()),
+    loadHomeData("tools", () => listPublishedTools()),
+    loadHomeData("content counts", () => getContentCounts()),
+    loadHomeData("music catalog metadata", () => resolveCatalogCardMeta("roblox-music-ids"))
   ]);
 
   const topGames = statsHome.topGames.slice(0, 5);
@@ -131,7 +140,7 @@ export default async function HomePage() {
 
   // Quiz of the day.
   const quizPick = quizzes[0] ?? null;
-  const quizData = quizPick ? await loadQuizData(quizPick.code) : null;
+  const quizData = quizPick ? await loadHomeData("featured quiz", () => loadQuizData(quizPick.code)) : null;
   const firstQuestion = quizData ? buildServerQuizAttempt(quizData, quizPick!.code)[0] : null;
   const quizOfDay =
     quizPick && firstQuestion
@@ -159,7 +168,9 @@ export default async function HomePage() {
   const hubGame = hubCandidate
     ? { universeId: hubCandidate.universeId, name: hubCandidate.displayName || hubCandidate.name, playing: hubCandidate.playing }
     : null;
-  const hubData = hubGame ? await getGameSidebarData(hubGame.universeId) : null;
+  const hubData = hubGame
+    ? await loadHomeData("game sidebar", () => getGameSidebarData(hubGame.universeId))
+    : null;
   const hubLinks = hubData
     ? [
         hubData.wiki ? { href: `/wiki/${hubData.wiki.slug}`, icon: BookOpen, label: "Wiki", tone: "wiki" } : null,
