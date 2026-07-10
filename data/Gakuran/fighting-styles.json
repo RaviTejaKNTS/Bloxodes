@@ -1,0 +1,223 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Gakuran",
+    "gameSlug": "gakuran",
+    "collection": "fighting-styles",
+    "route": "/wiki/gakuran/fighting-styles",
+    "catalogCode": "gakuran-fighting-styles",
+    "sourceItemCount": 8,
+    "itemFields": [
+      "name",
+      "rarity",
+      "chance",
+      "obtainment",
+      "passives",
+      "recommendedHeight",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "rarity",
+      "chance",
+      "obtainment",
+      "passives",
+      "recommendedHeight",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Common",
+        "Uncommon",
+        "Epic",
+        "Legendary"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "chance"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "chance",
+        "obtainment",
+        "passives",
+        "recommendedHeight"
+      ],
+      "tableFields": [
+        "rarity",
+        "chance",
+        "obtainment",
+        "passives",
+        "recommendedHeight",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "chance": {
+          "kind": "chip",
+          "label": "Chance"
+        },
+        "obtainment": {
+          "kind": "plain",
+          "label": "How to get"
+        },
+        "passives": {
+          "kind": "detail",
+          "label": "Passives"
+        },
+        "recommendedHeight": {
+          "kind": "highlight",
+          "label": "Height fit"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Basic",
+        "rarity": "Common",
+        "chance": "59%",
+        "obtainment": "Reroll Fight Style in Stats using free rerolls from codes or Robux",
+        "passives": "Counterstrike gives +5% damage on your next attack after a Perfect Block. Swift Recovery raises posture regeneration by 15%. Guard Pierce II deals 15% block chip damage. Resilience II gives a 25% chance for a clash to become a grapple.",
+        "recommendedHeight": "Short or mid (works on any height)",
+        "cardSummary": "The Common starter style (59% listed chance) with Perfect Block rewards, posture regen, and light chip damage. Strong baseline for learning combat before chasing rarer rolls."
+      },
+      "system": {
+        "slug": "basic",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": "/Gakuran/Fighting%20Styles/basic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Slugger",
+        "rarity": "Uncommon",
+        "chance": "30%",
+        "obtainment": "Reroll Fight Style in Stats using free rerolls from codes or Robux",
+        "passives": "Unstable makes you deal 10% more damage and take 20% more damage. Guard Pierce V deals 30% block chip damage. Resilience III gives a 45% chance for a clash to become a grapple.",
+        "recommendedHeight": "Tall",
+        "cardSummary": "An Uncommon style (30% listed chance) that boosts damage output at the cost of taking more hits, with strong block chip and grapple clash odds."
+      },
+      "system": {
+        "slug": "slugger",
+        "section": "Uncommon",
+        "sortOrder": 2,
+        "image": "/Gakuran/Fighting%20Styles/slugger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Muay Thai",
+        "rarity": "Uncommon",
+        "chance": "30%",
+        "obtainment": "Reroll Fight Style in Stats using free rerolls from codes or Robux",
+        "passives": "Powerful makes heavy attacks ragdoll on hit. Crushing Force II adds +15% posture damage. Guard Pierce V deals 30% block chip damage. Resilience V gives a 55% chance for a clash to become a grapple.",
+        "recommendedHeight": "Tall",
+        "cardSummary": "An Uncommon pressure style (30% listed chance) built for close-range aggression with ragdoll heavies, high posture and chip damage, and strong grapple clash odds."
+      },
+      "system": {
+        "slug": "muay-thai",
+        "section": "Uncommon",
+        "sortOrder": 3,
+        "image": "/Gakuran/Fighting%20Styles/muay-thai.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Karate",
+        "rarity": "Uncommon",
+        "chance": "30%",
+        "obtainment": "Reroll Fight Style in Stats using free rerolls from codes or Robux",
+        "passives": "Steady Nerves raises posture regeneration by 15% for 3 seconds after a Perfect Block. Balanced Strike refunds 25% of your posture when an M2 lands. Guard Pierce II deals 15% block chip damage. Resilience II gives a 25% chance for a clash to become a grapple.",
+        "recommendedHeight": "Short or mid",
+        "cardSummary": "An Uncommon defensive style (30% listed chance) focused on posture recovery and Perfect Block sustain rather than a big offensive win condition."
+      },
+      "system": {
+        "slug": "karate",
+        "section": "Uncommon",
+        "sortOrder": 4,
+        "image": "/Gakuran/Fighting%20Styles/karate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boxing",
+        "rarity": "Epic",
+        "chance": "10%",
+        "obtainment": "Reroll Fight Style in Stats using free rerolls from codes or Robux",
+        "passives": "Untouchable gives heavy attacks iFrames and makes them uninterruptible. Perfect Reflex reduces your current M2 cooldown by 1 second after a Perfect Block. Guard Pierce III deals 20% block chip damage.",
+        "recommendedHeight": "Short or mid",
+        "cardSummary": "An Epic style (10% listed chance) known for uninterruptible heavy attacks with iFrames, Perfect Block M2 cooldown cuts, and solid block chip damage."
+      },
+      "system": {
+        "slug": "boxing",
+        "section": "Epic",
+        "sortOrder": 5,
+        "image": "/Gakuran/Fighting%20Styles/boxing.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hakari",
+        "rarity": "Epic",
+        "chance": "10%",
+        "obtainment": "Reroll Fight Style in Stats using free rerolls from codes or Robux",
+        "passives": "Powerful makes heavy attacks ragdoll on hit. Momentum Rush grants a 7-second window where your M2 deals 3x damage after you land a full M1 combo without being stunned. Guard Pierce II deals 15% block chip damage.",
+        "recommendedHeight": "Short or mid",
+        "cardSummary": "An Epic burst style (10% listed chance) that rewards landing a full light combo with a short window of massively amplified heavy damage and ragdoll M2s."
+      },
+      "system": {
+        "slug": "hakari",
+        "section": "Epic",
+        "sortOrder": 6,
+        "image": "/Gakuran/Fighting%20Styles/hakari.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Capoeira",
+        "rarity": "Legendary",
+        "chance": "1%",
+        "obtainment": "Reroll Fight Style in Stats using free rerolls from codes or Robux",
+        "passives": "Powerful makes heavy attacks ragdoll on hit. Heavy Hitter I adds +5% guardbreak damage on light and heavy attacks. Guard Pierce II deals 15% block chip damage. Ginga shortens dash cooldown by 25%.",
+        "recommendedHeight": "Short or mid (works on any height)",
+        "cardSummary": "A Legendary mobility style (1% listed chance) with faster dashes, ragdoll heavies, and modest guardbreak and chip bonuses rather than raw damage dominance."
+      },
+      "system": {
+        "slug": "capoeira",
+        "section": "Legendary",
+        "sortOrder": 7,
+        "image": "/Gakuran/Fighting%20Styles/capoeira.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wrestling",
+        "rarity": "Legendary",
+        "chance": "1%",
+        "obtainment": "Reroll Fight Style in Stats using free rerolls from codes or Robux",
+        "passives": "Takedown turns the heavy attack into a grab that slams the opponent for 1.5x damage. Heavy Hitter III adds +15% guardbreak damage on light and heavy attacks. Guard Pierce II deals 15% block chip damage. Resilience V gives a 55% chance for a clash to become a grapple.",
+        "recommendedHeight": "Tall",
+        "cardSummary": "A Legendary grab style (1% listed chance) built around a slam heavy attack, high guardbreak damage, block chip, and strong odds to turn clashes into grapples."
+      },
+      "system": {
+        "slug": "wrestling",
+        "section": "Legendary",
+        "sortOrder": 8,
+        "image": "/Gakuran/Fighting%20Styles/wrestling.png"
+      }
+    }
+  ]
+}

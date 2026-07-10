@@ -1,0 +1,227 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Gakuran",
+    "gameSlug": "gakuran",
+    "collection": "ethnicities",
+    "route": "/wiki/gakuran/ethnicities",
+    "catalogCode": "gakuran-ethnicities",
+    "sourceItemCount": 6,
+    "itemFields": [
+      "name",
+      "rollChance",
+      "rollPool",
+      "maleHeight",
+      "femaleHeight",
+      "heightNote",
+      "combatTradeoff",
+      "howToObtain",
+      "cosmeticNotes",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "rollChance",
+      "rollPool",
+      "maleHeight",
+      "femaleHeight",
+      "heightNote",
+      "combatTradeoff",
+      "howToObtain",
+      "cosmeticNotes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Roll pool",
+      "sectionOrder": [
+        "Common",
+        "Rare foreign"
+      ],
+      "badgeField": "rollPool",
+      "subtitleFields": [
+        "rollChance",
+        "maleHeight"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rollChance",
+        "maleHeight",
+        "femaleHeight",
+        "combatTradeoff",
+        "howToObtain"
+      ],
+      "tableFields": [
+        "rollChance",
+        "rollPool",
+        "maleHeight",
+        "femaleHeight",
+        "heightNote",
+        "combatTradeoff",
+        "howToObtain",
+        "cosmeticNotes",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rollChance": {
+          "kind": "chip",
+          "label": "Roll chance"
+        },
+        "rollPool": {
+          "kind": "highlight",
+          "label": "Roll pool"
+        },
+        "maleHeight": {
+          "kind": "chip",
+          "label": "Male height (avg)"
+        },
+        "femaleHeight": {
+          "kind": "chip",
+          "label": "Female height (avg)"
+        },
+        "heightNote": {
+          "kind": "detail",
+          "label": "Height note"
+        },
+        "combatTradeoff": {
+          "kind": "detail",
+          "label": "Combat trade-off"
+        },
+        "howToObtain": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "cosmeticNotes": {
+          "kind": "detail",
+          "label": "Cosmetic notes"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Japanese",
+        "rollChance": "~95%",
+        "rollPool": "Common",
+        "maleHeight": "171 cm (5'7\") avg",
+        "femaleHeight": "159 cm (5'3\") avg",
+        "heightNote": "Height is rolled around this ethnicity and gender average, not a fixed spawn.",
+        "combatTradeoff": "Mid-pack average height. Near baseline combat stats with balanced HP, damage, hitbox size, and speed.",
+        "howToObtain": "Rolled at character creation. Reroll from the Stats menu using free code rerolls or Robux.",
+        "cosmeticNotes": "Also shapes hairstyle and hair-color pools. Hair is cosmetic only.",
+        "cardSummary": "Japanese is the common ~95% ethnicity roll, with mid-pack average heights around 171 cm male and 159 cm female and a balanced combat profile."
+      },
+      "system": {
+        "slug": "japanese",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "European",
+        "rollChance": "Rare (shares ~5% foreign pool)",
+        "rollPool": "Rare foreign",
+        "maleHeight": "178 cm (5'10\") avg",
+        "femaleHeight": "165 cm (5'5\") avg",
+        "heightNote": "Height is rolled around this ethnicity and gender average, not a fixed spawn.",
+        "combatTradeoff": "Tallest average heights. Tends toward more HP and damage with a larger hitbox and slower movement and attacks.",
+        "howToObtain": "Rolled at character creation. Reroll from the Stats menu using free code rerolls or Robux.",
+        "cosmeticNotes": "Also shapes hairstyle and hair-color pools. Hair is cosmetic only.",
+        "cardSummary": "European is a rare foreign ethnicity with the tallest averages (about 178 cm male / 165 cm female), favoring tankier, slower combat."
+      },
+      "system": {
+        "slug": "european",
+        "section": "Rare foreign",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "African",
+        "rollChance": "Rare (shares ~5% foreign pool)",
+        "rollPool": "Rare foreign",
+        "maleHeight": "175 cm (5'9\") avg",
+        "femaleHeight": "162 cm (5'4\") avg",
+        "heightNote": "Height is rolled around this ethnicity and gender average, not a fixed spawn.",
+        "combatTradeoff": "Second-tallest averages. Tends toward higher HP and damage with a larger hitbox and slower pace than mid-pack rolls.",
+        "howToObtain": "Rolled at character creation. Reroll from the Stats menu using free code rerolls or Robux.",
+        "cosmeticNotes": "Also shapes hairstyle and hair-color pools. Hair is cosmetic only.",
+        "cardSummary": "African is a rare foreign ethnicity with tall averages (about 175 cm male / 162 cm female), leaning toward stronger, slower fights."
+      },
+      "system": {
+        "slug": "african",
+        "section": "Rare foreign",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Middle Eastern",
+        "rollChance": "Rare (shares ~5% foreign pool)",
+        "rollPool": "Rare foreign",
+        "maleHeight": "173 cm (5'8\") avg",
+        "femaleHeight": "160 cm (5'3\") avg",
+        "heightNote": "Height is rolled around this ethnicity and gender average, not a fixed spawn.",
+        "combatTradeoff": "Upper mid-pack averages. Slightly more bulk than baseline mid heights without the extreme tall trade-offs.",
+        "howToObtain": "Rolled at character creation. Reroll from the Stats menu using free code rerolls or Robux.",
+        "cosmeticNotes": "Also shapes hairstyle and hair-color pools. Hair is cosmetic only.",
+        "cardSummary": "Middle Eastern is a rare foreign ethnicity with upper mid averages (about 173 cm male / 160 cm female) and a near-balanced combat feel."
+      },
+      "system": {
+        "slug": "middle-eastern",
+        "section": "Rare foreign",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Latino",
+        "rollChance": "Rare (shares ~5% foreign pool)",
+        "rollPool": "Rare foreign",
+        "maleHeight": "170 cm (5'7\") avg",
+        "femaleHeight": "158 cm (5'2\") avg",
+        "heightNote": "Height is rolled around this ethnicity and gender average, not a fixed spawn.",
+        "combatTradeoff": "Lower mid-pack averages. Slightly closer to the faster, lower-bulk side of the mid range.",
+        "howToObtain": "Rolled at character creation. Reroll from the Stats menu using free code rerolls or Robux.",
+        "cosmeticNotes": "Also shapes hairstyle and hair-color pools. Hair is cosmetic only.",
+        "cardSummary": "Latino is a rare foreign ethnicity with lower mid averages (about 170 cm male / 158 cm female) and a balanced-to-speedy combat tilt."
+      },
+      "system": {
+        "slug": "latino",
+        "section": "Rare foreign",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Indian",
+        "rollChance": "Rare (shares ~5% foreign pool)",
+        "rollPool": "Rare foreign",
+        "maleHeight": "167 cm (5'6\") avg",
+        "femaleHeight": "155 cm (5'1\") avg",
+        "heightNote": "Height is rolled around this ethnicity and gender average, not a fixed spawn.",
+        "combatTradeoff": "Shortest averages. Tends toward less HP and damage with a smaller hitbox and faster movement and attacks.",
+        "howToObtain": "Rolled at character creation. Reroll from the Stats menu using free code rerolls or Robux.",
+        "cosmeticNotes": "Also shapes hairstyle and hair-color pools. Hair is cosmetic only.",
+        "cardSummary": "Indian is a rare foreign ethnicity with the shortest averages (about 167 cm male / 155 cm female), favoring faster, slipperier combat."
+      },
+      "system": {
+        "slug": "indian",
+        "section": "Rare foreign",
+        "sortOrder": 6,
+        "image": null
+      }
+    }
+  ]
+}

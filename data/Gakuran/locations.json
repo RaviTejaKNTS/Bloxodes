@@ -1,0 +1,221 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Gakuran",
+    "gameSlug": "gakuran",
+    "collection": "locations",
+    "route": "/wiki/gakuran/locations",
+    "catalogCode": "gakuran-locations",
+    "sourceItemCount": 9,
+    "itemFields": [
+      "name",
+      "zone",
+      "mainUse",
+      "activities",
+      "notableFeatures",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "zone",
+      "mainUse",
+      "activities",
+      "notableFeatures",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Zone",
+      "sectionOrder": [
+        "School Campus",
+        "Town District"
+      ],
+      "badgeField": "zone",
+      "subtitleFields": [
+        "mainUse"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "zone",
+        "mainUse",
+        "activities",
+        "notableFeatures"
+      ],
+      "tableFields": [
+        "zone",
+        "mainUse",
+        "activities",
+        "notableFeatures",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "zone": {
+          "kind": "chip",
+          "label": "Zone"
+        },
+        "mainUse": {
+          "kind": "plain",
+          "label": "Main use"
+        },
+        "activities": {
+          "kind": "plain",
+          "label": "Activities"
+        },
+        "notableFeatures": {
+          "kind": "detail",
+          "label": "Notable features"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Nishikata Highschool",
+        "zone": "School Campus",
+        "mainUse": "Main school hub",
+        "activities": "Hangout, studying, rivalries, music, reading",
+        "notableFeatures": "Hallways and classrooms where most student life and fights start. Music Rooms sit by the stairwells on 1F and 2F as combat green zones with playable instruments and a rhythm minigame. The Library is on the second floor at the end of the left hallway and has readable books. Chalkboards and vending machines appear around the building.",
+        "cardSummary": "The large public high school at the center of Gakuran. Students gather here to socialize, study, and start rivalries, and it also holds the Music Rooms and Library as indoor school activities."
+      },
+      "system": {
+        "slug": "nishikata-highschool",
+        "section": "School Campus",
+        "sortOrder": 1,
+        "image": "/Gakuran/Locations/nishikata-highschool.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Courtyard",
+        "zone": "School Campus",
+        "mainUse": "Outdoor campus hangout",
+        "activities": "Hangout, meetups, open fights",
+        "notableFeatures": "Open outdoor yard attached to Nishikata Highschool. Easier to dash and reposition than tight hallways, so it often becomes a social or fight spillover spot between classes.",
+        "cardSummary": "The outdoor yard of Nishikata Highschool. Players use it to hang out between classes, meet friends, and watch or join rivalries in open space."
+      },
+      "system": {
+        "slug": "courtyard",
+        "section": "School Campus",
+        "sortOrder": 2,
+        "image": "/Gakuran/Locations/courtyard.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Basketball Court",
+        "zone": "School Campus",
+        "mainUse": "Sports and campus competition",
+        "activities": "Basketball, hangout, rivalries",
+        "notableFeatures": "Playable basketball with a hold-F shot meter. Timing zones decide shot quality, and defenders can pressure the shot. Used for casual games as well as competitive or fight-adjacent campus scenes.",
+        "cardSummary": "A busy campus sports court where students play games, practice skills, and settle rivalries. Basketball is fully interactable, not just scenery."
+      },
+      "system": {
+        "slug": "basketball-court",
+        "section": "School Campus",
+        "sortOrder": 3,
+        "image": "/Gakuran/Locations/basketball-court.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nishikata Coffee Shop",
+        "zone": "Town District",
+        "mainUse": "Cafe hangout",
+        "activities": "Hangout, drinks, social RP",
+        "notableFeatures": "Neighborhood cafe where players buy drinks, sit, and spend time with friends. A common quieter town meet-up compared with the club or gym. Community job guides also treat it as a work site.",
+        "cardSummary": "A local cafe in the Nishikata district. Students stop here for drinks, calmer hangouts, and social roleplay away from the school halls."
+      },
+      "system": {
+        "slug": "nishikata-coffee-shop",
+        "section": "Town District",
+        "sortOrder": 4,
+        "image": "/Gakuran/Locations/nishikata-coffee-shop.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kobayashi Ramen",
+        "zone": "Town District",
+        "mainUse": "Restaurant hangout",
+        "activities": "Hangout, food RP, social RP",
+        "notableFeatures": "Popular ramen shop for students and locals. Used mainly as a sit-down hangout and roleplay restaurant rather than a combat landmark.",
+        "cardSummary": "A well-known ramen shop in town. Players come here to eat, relax, and roleplay school-life scenes with friends."
+      },
+      "system": {
+        "slug": "kobayashi-ramen",
+        "section": "Town District",
+        "sortOrder": 5,
+        "image": "/Gakuran/Locations/kobayashi-ramen.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "7-Eleven Gas Station",
+        "zone": "Town District",
+        "mainUse": "Convenience store and street landmark",
+        "activities": "Shopping, hangout, street meetups",
+        "notableFeatures": "One combined convenience-store and gas-station landmark, not two separate map places. Stock snacks, drinks, and everyday items. A visible town meeting point and a community-reported job site.",
+        "cardSummary": "The district’s convenience store and gas station stop. Grab snacks or drinks, meet up on the street side of town, and treat it as a single named landmark."
+      },
+      "system": {
+        "slug": "7-eleven-gas-station",
+        "section": "Town District",
+        "sortOrder": 6,
+        "image": "/Gakuran/Locations/7-eleven-gas-station.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Laundromat Laundry",
+        "zone": "Town District",
+        "mainUse": "Quiet neighborhood hangout",
+        "activities": "Hangout, private RP",
+        "notableFeatures": "Neighborhood laundromat for washing and drying clothes. Quieter than the club or convenience store, and often used for lower-traffic or more private hangouts rather than loud public scenes.",
+        "cardSummary": "A small town laundromat that fits Gakuran’s everyday school-life map. Useful as a calmer neighborhood stop when busier hangouts feel crowded."
+      },
+      "system": {
+        "slug": "laundromat-laundry",
+        "section": "Town District",
+        "sortOrder": 7,
+        "image": "/Gakuran/Locations/laundromat-laundry.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nishikata Fitness Center",
+        "zone": "Town District",
+        "mainUse": "Training and sparring gym",
+        "activities": "Workouts, PvP practice, sparring, hangout",
+        "notableFeatures": "Training gym used to work out, warm up, and practice PvP away from the school halls. A natural stop for combat-focused players who want sparring space.",
+        "cardSummary": "The town fitness center. Players come here to train, practice combos, and spar before taking fights back into the school or streets."
+      },
+      "system": {
+        "slug": "nishikata-fitness-center",
+        "section": "Town District",
+        "sortOrder": 8,
+        "image": "/Gakuran/Locations/nishikata-fitness-center.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Club Akuma",
+        "zone": "Town District",
+        "mainUse": "Nightlife hangout",
+        "activities": "Hangout, nightlife RP, music, sparring",
+        "notableFeatures": "Underground club with intense music, bright red lights, and a rough crowd. Players gather at night to hang out, listen to performers, test strength, or stay away from the public school eye. Not part of the school campus.",
+        "cardSummary": "An underground nightlife club off campus. Expect loud music, red lighting, and a tougher social crowd than the cafe or ramen shop."
+      },
+      "system": {
+        "slug": "club-akuma",
+        "section": "Town District",
+        "sortOrder": 9,
+        "image": "/Gakuran/Locations/club-akuma.webp"
+      }
+    }
+  ]
+}

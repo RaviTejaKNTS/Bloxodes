@@ -1,0 +1,430 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Gakuran",
+    "gameSlug": "gakuran",
+    "collection": "accessories",
+    "route": "/wiki/gakuran/accessories",
+    "catalogCode": "gakuran-accessories",
+    "sourceItemCount": 22,
+    "itemFields": [
+      "name",
+      "slot",
+      "howToGet",
+      "function",
+      "rollNote",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "slot",
+      "howToGet",
+      "function",
+      "rollNote",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Category",
+      "sectionOrder": [
+        "Functional Accessories",
+        "Cosmetic Wearables",
+        "Purchased Consumables"
+      ],
+      "badgeField": "function",
+      "subtitleFields": [
+        "slot"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "slot",
+        "howToGet",
+        "function",
+        "rollNote"
+      ],
+      "tableFields": [
+        "slot",
+        "howToGet",
+        "function",
+        "rollNote",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "slot": {
+          "kind": "normal",
+          "label": "Slot"
+        },
+        "howToGet": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "function": {
+          "kind": "highlight",
+          "label": "Function"
+        },
+        "rollNote": {
+          "kind": "chip",
+          "label": "Roll note"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Standard Black Headphones",
+        "slot": "Head",
+        "howToGet": "Head accessory roll on the Stats menu",
+        "function": "Private music",
+        "rollNote": "17% among 5 head accessories",
+        "cardSummary": "Standard black head-slot headphones that link to the phone Music app for private listening. A strong punch can knock them off, making the music audible to nearby players until you pick them up and put them back on."
+      },
+      "system": {
+        "slug": "standard-black-headphones",
+        "section": "Functional Accessories",
+        "sortOrder": 1,
+        "image": "/Gakuran/Accessories/standard-black-headphones.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Thinner Brown Headphones",
+        "slot": "Head",
+        "howToGet": "Head accessory roll on the Stats menu",
+        "function": "Private music",
+        "rollNote": "17% among 5 head accessories",
+        "cardSummary": "A thinner brown headphone style with the same Music app private-listen use as the standard black pair. Knock-offs in combat also drop them and broadcast the track until re-equipped."
+      },
+      "system": {
+        "slug": "thinner-brown-headphones",
+        "section": "Functional Accessories",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thick Black Glasses",
+        "slot": "Face",
+        "howToGet": "Face accessory roll on the Stats menu",
+        "function": "Combat vision blur",
+        "rollNote": null,
+        "cardSummary": "Thick black frames for the face slot. In a fight, a hard hit can knock them off and blur your screen until you find them on the ground and re-equip them."
+      },
+      "system": {
+        "slug": "thick-black-glasses",
+        "section": "Functional Accessories",
+        "sortOrder": 3,
+        "image": "/Gakuran/Accessories/thick-black-glasses.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Thin Black Glasses",
+        "slot": "Face",
+        "howToGet": "Face accessory roll on the Stats menu",
+        "function": "Combat vision blur",
+        "rollNote": null,
+        "cardSummary": "Slimmer black frames with the same combat knock-off rule as the thick pair: lose them mid-fight and vision stays blurred until recovered."
+      },
+      "system": {
+        "slug": "thin-black-glasses",
+        "section": "Functional Accessories",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Piercing",
+        "slot": "Face",
+        "howToGet": "Face accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "A subtle face piercing rolled in the face accessory pool. Looks only—no combat or phone effect."
+      },
+      "system": {
+        "slug": "piercing",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 5,
+        "image": "/Gakuran/Accessories/piercing.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Eye Patch",
+        "slot": "Face",
+        "howToGet": "Face accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "A worn-looking eye patch from the face accessory roll pool. Pure style customization with no gameplay effect."
+      },
+      "system": {
+        "slug": "eye-patch",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bandaid",
+        "slot": "Face",
+        "howToGet": "Face accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "A face-slot bandaid that suggests a minor injury look. Cosmetic only; no combat interaction."
+      },
+      "system": {
+        "slug": "bandaid",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 7,
+        "image": "/Gakuran/Accessories/bandaid.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Scarf",
+        "slot": "Neck",
+        "howToGet": "Neck accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Bright pink neck scarf for outfit layering. Rolled separately from other scarf colors; no combat or system bonus."
+      },
+      "system": {
+        "slug": "pink-scarf",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 8,
+        "image": "/Gakuran/Accessories/pink-scarf.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Scarf",
+        "slot": "Neck",
+        "howToGet": "Neck accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Simple black neck scarf that pairs with most outfits. Cosmetic neck-slot item from accessory rolls."
+      },
+      "system": {
+        "slug": "black-scarf",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grey Scarf",
+        "slot": "Neck",
+        "howToGet": "Neck accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Neutral grey scarf variant for low-key outfits. Neck accessory roll only; no gameplay effect."
+      },
+      "system": {
+        "slug": "grey-scarf",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Scarf",
+        "slot": "Neck",
+        "howToGet": "Neck accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Cool-toned blue scarf for the neck slot. One of four named scarf colors from accessory rolls."
+      },
+      "system": {
+        "slug": "blue-scarf",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Cross Necklace",
+        "slot": "Neck",
+        "howToGet": "Neck accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Silver cross necklace style for the neck slot. Cosmetic detail only—no combat or phone interaction."
+      },
+      "system": {
+        "slug": "silver-cross-necklace",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 12,
+        "image": "/Gakuran/Accessories/silver-cross-necklace.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Key Necklace",
+        "slot": "Neck",
+        "howToGet": "Neck accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Delicate silver key necklace for personal style on the neck slot. Appearance only."
+      },
+      "system": {
+        "slug": "silver-key-necklace",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Bracelet",
+        "slot": "Arm",
+        "howToGet": "Arm accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Gold bracelet style for the arm accessory slot. Fashion-only roll; no combat bonus."
+      },
+      "system": {
+        "slug": "gold-bracelet",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 14,
+        "image": "/Gakuran/Accessories/gold-bracelet.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Clover Charm",
+        "slot": "Arm",
+        "howToGet": "Arm accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Silver clover charm worn on the arm slot. Cosmetic wrist accessory from accessory rolls."
+      },
+      "system": {
+        "slug": "silver-clover-charm",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Watch",
+        "slot": "Arm",
+        "howToGet": "Arm accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Classic watch-style arm accessory. Purely cosmetic; rolled on the arm slot."
+      },
+      "system": {
+        "slug": "watch",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Friendship Bracelet",
+        "slot": "Arm",
+        "howToGet": "Arm accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Colorful friendship bracelet for the arm slot. Cosmetic collectible with no system effect."
+      },
+      "system": {
+        "slug": "friendship-bracelet",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Tomodachi-Style Keychain",
+        "slot": "Waist",
+        "howToGet": "Waist accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Bright pink friendship-style keychain charm for the waist slot. Cosmetic collectible only."
+      },
+      "system": {
+        "slug": "pink-tomodachi-style-keychain",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 18,
+        "image": "/Gakuran/Accessories/pink-tomodachi-style-keychain.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Chain Keychain",
+        "slot": "Waist",
+        "howToGet": "Waist accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Minimal silver chain keychain for the waist slot. Style detail with no combat use."
+      },
+      "system": {
+        "slug": "silver-chain-keychain",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "8-Ball Car Keychain",
+        "slot": "Waist",
+        "howToGet": "Waist accessory roll on the Stats menu",
+        "function": "Cosmetic only",
+        "rollNote": null,
+        "cardSummary": "Black-and-white 8-ball car key charm for the waist slot. Cosmetic only."
+      },
+      "system": {
+        "slug": "8-ball-car-keychain",
+        "section": "Cosmetic Wearables",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vending Machine Drinks",
+        "slot": "Consumable",
+        "howToGet": "Vending machines at Nishikata High School and city streets",
+        "function": "Holdable consumable",
+        "rollNote": null,
+        "cardSummary": "Purchased drinks from school and street vending machines. Not part of accessory rolls. You can hold a drink while walking or sip it; machine stock can differ by location. Exact brand list and prices are not published."
+      },
+      "system": {
+        "slug": "vending-machine-drinks",
+        "section": "Purchased Consumables",
+        "sortOrder": 21,
+        "image": "/Gakuran/Accessories/vending-machine-drinks.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Coffee Shop Coffee",
+        "slot": "Consumable",
+        "howToGet": "Nishikata Coffee Shop counter",
+        "function": "Holdable consumable",
+        "rollNote": null,
+        "cardSummary": "Coffee bought at the Nishikata Coffee Shop counter—not from accessory rolls. Order at the counter for a holdable drink in a social hangout space. Full menu names and prices are not published."
+      },
+      "system": {
+        "slug": "coffee-shop-coffee",
+        "section": "Purchased Consumables",
+        "sortOrder": 22,
+        "image": null
+      }
+    }
+  ]
+}
