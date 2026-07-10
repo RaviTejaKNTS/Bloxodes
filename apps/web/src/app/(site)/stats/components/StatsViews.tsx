@@ -1438,15 +1438,30 @@ export function StatsGamesView({ data }: { data: StatsGamesPageData }) {
   const activeGenres = data.filters.genres;
   const activeSubgenres = data.filters.subgenres;
   const activeGenre = activeGenres.length === 1 ? activeGenres[0] : null;
-  const title = activeGenre ? `${activeGenre} Roblox game stats` : "Roblox game stats table";
-  const description = activeGenre
-    ? `Sort ${activeGenre} Roblox games by current players, growth, visits, rating, and tracked peaks.`
-    : "Sort public Roblox games by current players, growth, visits, rating, and tracked peaks.";
+  const activeSubgenre = activeGenre && activeSubgenres.length === 1 ? activeSubgenres[0] : null;
+  const genreParams = new URLSearchParams();
+  if (activeGenre) genreParams.set("genre", activeGenre);
+  const genreHref = activeGenre ? `/stats/games?${genreParams.toString()}` : null;
+  const title = activeSubgenre
+    ? `${activeSubgenre} Roblox game stats`
+    : activeGenre
+      ? `${activeGenre} Roblox game stats`
+      : "Roblox game stats table";
+  const description = activeSubgenre
+    ? `Compare ${activeSubgenre} Roblox games in the ${activeGenre} genre by current players, visits, rating, and tracked peaks.`
+    : activeGenre
+      ? `Sort ${activeGenre} Roblox games by current players, growth, visits, rating, and tracked peaks.`
+      : "Sort public Roblox games by current players, growth, visits, rating, and tracked peaks.";
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Stats", href: "/stats" },
     { label: "Games", href: activeGenres.length ? "/stats/games" : null },
-    ...(activeGenre ? [{ label: activeGenre, href: null }] : activeGenres.length ? [{ label: `${activeGenres.length} genres`, href: null }] : [])
+    ...(activeGenre
+      ? [{ label: activeGenre, href: activeSubgenre ? genreHref : null }]
+      : activeGenres.length
+        ? [{ label: `${activeGenres.length} genres`, href: null }]
+        : []),
+    ...(activeSubgenre ? [{ label: activeSubgenre, href: null }] : [])
   ];
   const activeGenreSet = new Set(activeGenres);
   const showSubgenreFilter = activeGenres.length > 0;

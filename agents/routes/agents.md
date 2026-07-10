@@ -81,6 +81,6 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/sitemaps/events.xml` | `GET` | `src/app/sitemaps/events.xml/route.ts` | Events sitemap. |
 | `/sitemaps/puzzles.xml` | `GET` | `src/app/sitemaps/puzzles.xml/route.ts` | Indexable current puzzle-answer pages sitemap. Dated puzzle archives are excluded because they are noindex reference pages. |
 | `/sitemaps/quizzes.xml` | `GET` | `src/app/sitemaps/quizzes.xml/route.ts` | Quizzes sitemap. |
-| `/sitemaps/stats.xml` | `GET` | `src/app/sitemaps/stats.xml/route.ts` | Stats sitemap for `/stats`, `/stats/games`, `/stats/creators`, `/stats/items`, selected quality game stat pages, and selected quality item stat pages. |
+| `/sitemaps/stats.xml` | `GET` | `src/app/sitemaps/stats.xml/route.ts` | Sole sitemap owner for stats routes, with real index-refresh `lastmod` values, the approved games-list SEO matrix, and the top 1,000 eligible individual game pages. |
 | `/sitemaps/tools.xml` | `GET` | `src/app/sitemaps/tools.xml/route.ts` | Tools sitemap. |
 | `/sitemaps/wiki.xml` | `GET` | `src/app/sitemaps/wiki.xml/route.ts` | Wiki sitemap. |
