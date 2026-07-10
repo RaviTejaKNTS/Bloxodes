@@ -85,6 +85,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - Recurring item stats refresh should run on the VPS stats worker beside games stats. GitHub Actions are a manual fallback only because Roblox item endpoints rate-limit shared GitHub runner IPs aggressively.
 - `ops/`: checked-in operational manifests and server runbooks.
   - `check-production-data-readiness.mjs` performs a read-only PostgREST HEAD request before a production Docker build. It requires `SUPABASE_URL` (or `NEXT_PUBLIC_SUPABASE_URL`) plus a service-role or anon key, retries transient failures five times, prints no secrets, and refuses to continue when production data is unavailable.
+  - `run-with-production-build-env.mjs` loads build-only variables from the BuildKit `production_env` secret and runs the requested command without copying that secret into an image layer. The existing local `.env` path remains a fallback for direct operator/Dokploy builds; neither path prints secret values.
   - `vps-scheduled-automation.crontab` is the source manifest for scheduled jobs moved off GitHub Actions onto the VPS stats worker. It covers daily universe rollup/prune/audit, platform aggregates, code refresh, Google Indexing, events, puzzle sync, music IDs, and decal IDs. Install it into the marked VPS crontab block rather than re-enabling GitHub schedules.
 - `posts/`: outbound posting jobs.
 - `puzzles/`: daily puzzle answer collectors for `/puzzles`, writing durable answer rows into `puzzle_answers`.

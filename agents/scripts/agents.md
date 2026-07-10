@@ -155,6 +155,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |
 | VPS scheduled automation manifest | `scripts/ops/vps-scheduled-automation.crontab` | Install into the VPS `codex-admin` crontab beside existing stats-worker blocks. This is the scheduled source for universe daily rollup/prune/audit, platform aggregate refresh, codes refresh, Google Indexing, events refresh, puzzle sync, music IDs, and decal IDs. GitHub workflows for those jobs are manual fallback only. |
 | Check production data before Docker build | `scripts/ops/check-production-data-readiness.mjs` | `node --env-file-if-exists=.env scripts/ops/check-production-data-readiness.mjs`; read-only Supabase HEAD probe with five attempts, used by the root Dockerfile before `npm run build` |
+| Run a command with production build variables | `scripts/ops/run-with-production-build-env.mjs` | Loads `/run/secrets/production_env` from BuildKit, falling back to local `.env`, then executes the supplied command without printing secret values |
 
 ### Wiki And Game Collection Production Publish
 
