@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { MoreCatalogs } from "@/components/more-content";
@@ -60,6 +61,18 @@ function firstSearchParam(value: string | string[] | undefined): string | null {
 
 function formatCount(value: number): string {
   return value.toLocaleString("en-US");
+}
+
+function formatCompactCount(value: number): string {
+  return new Intl.NumberFormat("en-US", {
+    notation: "compact",
+    maximumFractionDigits: 1
+  }).format(value);
+}
+
+function buildCompactNavTitle(title: string, isAll: boolean): string {
+  if (isAll) return "All";
+  return title.replace(/^Roblox\s+/i, "");
 }
 
 function hasActiveAvatarFilters(filters: AvatarCatalogResolvedSearch): boolean {
@@ -291,67 +304,50 @@ function AvatarCatalogNav({
     {
       code: parent.code,
       title: buildAllNavTitle(parent),
-      description: parent.description,
       href: parent.basePath
     },
     ...children.map((child) => ({
       code: child.code,
       title: child.title,
-      description: child.description,
       href: buildChildHref(parent, child)
     }))
   ];
 
   return (
-    <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      {navItems.map((item) => {
-        const isActive = item.code === activeCode;
-        const count = navCounts.get(item.code) ?? 0;
-        const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${
-          isActive
-            ? "border-accent/60 bg-accent/10"
-            : "border-border/70 bg-surface/80 hover:border-accent/55"
-        }`;
-        const card = (
-          <article className={cardClasses} aria-current={isActive ? "page" : undefined}>
-            <span
-              aria-hidden
-              className={`absolute inset-x-0 top-0 h-1 ${
-                isActive ? "bg-accent" : "bg-accent/30 group-hover:bg-accent/60"
-              }`}
-            />
-            <div className="flex h-full flex-col gap-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="text-lg font-semibold text-foreground">{item.title}</p>
-                {isActive ? (
-                  <span className="rounded-md bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
-                    Active
-                  </span>
-                ) : null}
-              </div>
-              <p className="text-sm text-muted">{item.description}</p>
-              <p className="mt-auto text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-                {formatCount(count)} {count === 1 ? "item" : "items"}
-              </p>
-            </div>
-          </article>
-        );
-
-        if (isActive) {
-          return (
-            <div key={item.code} className="h-full" aria-current="page">
-              {card}
-            </div>
+    <nav aria-label="Items and bundles categories" className="-mx-1 overflow-x-auto px-1 pb-1">
+      <div className="flex min-w-max gap-2">
+        {navItems.map((item) => {
+          const isActive = item.code === activeCode;
+          const count = navCounts.get(item.code) ?? 0;
+          const label = buildCompactNavTitle(item.title, item.code === parent.code);
+          const classes = `inline-flex h-10 items-center gap-2 whitespace-nowrap rounded-md border px-3 text-sm font-medium transition ${
+            isActive
+              ? "border-accent/60 bg-accent/10 text-foreground"
+              : "border-border/70 bg-surface/60 text-muted hover:border-accent/55 hover:text-foreground"
+          }`;
+          const content = (
+            <>
+              <span>{label}</span>
+              <span className="text-xs tabular-nums text-muted">{formatCompactCount(count)}</span>
+            </>
           );
-        }
 
-        return (
-          <Link key={item.code} href={item.href} className="block h-full">
-            {card}
-          </Link>
-        );
-      })}
-    </section>
+          if (isActive) {
+            return (
+              <span key={item.code} className={classes} aria-current="page" aria-label={`${item.title}, ${formatCount(count)} items`}>
+                {content}
+              </span>
+            );
+          }
+
+          return (
+            <Link key={item.code} href={item.href} className={classes} aria-label={`${item.title}, ${formatCount(count)} items`}>
+              {content}
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
   );
 }
 
@@ -379,25 +375,29 @@ function AvatarCatalogSubnav({
   ];
 
   return (
-    <section className="flex flex-wrap gap-2">
-      {navItems.map((item) => {
-        const isActive = item.code === activeCode;
-        return (
-          <Link
-            key={item.code}
-            href={item.href}
-            className={`rounded-md border px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition ${
-              isActive
-                ? "border-accent/70 bg-accent/10 text-accent"
-                : "border-border/70 bg-background/70 text-muted hover:border-accent/70 hover:text-accent"
-            }`}
-            aria-current={isActive ? "page" : undefined}
-          >
-            {item.title}
-          </Link>
-        );
-      })}
-    </section>
+    <nav aria-label={`${parent.title} categories`} className="-mx-1 overflow-x-auto px-1 pb-1">
+      <div className="flex min-w-max gap-2">
+        {navItems.map((item) => {
+          const isActive = item.code === activeCode;
+          const label = buildCompactNavTitle(item.title, item.code === parent.code);
+          return (
+            <Link
+              key={item.code}
+              href={item.href}
+              className={`inline-flex h-9 items-center whitespace-nowrap rounded-md border px-3 text-sm font-medium transition ${
+                isActive
+                  ? "border-accent/60 bg-accent/10 text-foreground"
+                  : "border-border/70 bg-background/60 text-muted hover:border-accent/55 hover:text-foreground"
+              }`}
+              aria-current={isActive ? "page" : undefined}
+              aria-label={item.title}
+            >
+              {label}
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
   );
 }
 
@@ -409,10 +409,11 @@ function AvatarCatalogFilterForm({
   filters: AvatarCatalogResolvedSearch;
 }) {
   const hasFilters = hasActiveAvatarFilters(filters);
+  const advancedFilterCount = Number(filters.sale !== "all") + Number(filters.creator !== "all");
 
   return (
-    <form action={basePath} method="get" className="grid gap-3 rounded-lg border border-border/70 bg-surface p-4 md:grid-cols-[1fr_180px_170px_170px_auto] md:items-end">
-      <div className="space-y-2">
+    <form action={basePath} method="get" className="flex flex-col gap-3 md:flex-row md:items-end">
+      <div className="min-w-0 flex-1 space-y-2">
         <label htmlFor="avatar-catalog-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           Search
         </label>
@@ -422,11 +423,11 @@ function AvatarCatalogFilterForm({
           type="search"
           defaultValue={filters.search}
           placeholder="Search item, creator, or ID"
-          className="w-full rounded-md border border-border/60 bg-background/70 px-3 py-2 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-accent/40"
+          className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-accent/40"
         />
       </div>
 
-      <div className="space-y-2">
+      <div className="w-full space-y-2 md:w-52">
         <label htmlFor="avatar-catalog-sort" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
           Sort
         </label>
@@ -434,7 +435,7 @@ function AvatarCatalogFilterForm({
           id="avatar-catalog-sort"
           name="sort"
           defaultValue={filters.sort}
-          className="w-full rounded-md border border-border/60 bg-background/70 px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
+          className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
         >
           {AVATAR_CATALOG_SORT_OPTIONS.map((option) => (
             <option key={option.value} value={option.value}>
@@ -444,51 +445,67 @@ function AvatarCatalogFilterForm({
         </select>
       </div>
 
-      <div className="space-y-2">
-        <label htmlFor="avatar-catalog-sale" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          Sale
-        </label>
-        <select
-          id="avatar-catalog-sale"
-          name="sale"
-          defaultValue={filters.sale}
-          className="w-full rounded-md border border-border/60 bg-background/70 px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
-        >
-          {AVATAR_CATALOG_SALE_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
+      <details className="group relative md:self-end">
+        <summary className="flex h-10 cursor-pointer list-none items-center justify-between gap-2 rounded-md border border-border/70 bg-surface/60 px-3 text-sm font-medium text-foreground transition hover:border-accent/55 marker:hidden">
+          <span className="inline-flex items-center gap-2">
+            <SlidersHorizontal className="h-4 w-4 text-muted" aria-hidden />
+            Filters
+            {advancedFilterCount ? (
+              <span className="rounded-md bg-accent/15 px-1.5 py-0.5 text-xs font-semibold text-accent">
+                {advancedFilterCount}
+              </span>
+            ) : null}
+          </span>
+          <ChevronDown className="h-4 w-4 text-muted transition group-open:rotate-180" aria-hidden />
+        </summary>
+        <div className="z-20 mt-2 grid gap-3 rounded-md border border-border/80 bg-popover p-3 text-popover-foreground shadow-xl md:absolute md:right-0 md:w-72">
+          <div className="space-y-2">
+            <label htmlFor="avatar-catalog-sale" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+              Sale
+            </label>
+            <select
+              id="avatar-catalog-sale"
+              name="sale"
+              defaultValue={filters.sale}
+              className="w-full rounded-md border border-border/60 bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
+            >
+              {AVATAR_CATALOG_SALE_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
-      <div className="space-y-2">
-        <label htmlFor="avatar-catalog-creator" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          Creator
-        </label>
-        <select
-          id="avatar-catalog-creator"
-          name="creator"
-          defaultValue={filters.creator}
-          className="w-full rounded-md border border-border/60 bg-background/70 px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
-        >
-          {AVATAR_CATALOG_CREATOR_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
+          <div className="space-y-2">
+            <label htmlFor="avatar-catalog-creator" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
+              Creator
+            </label>
+            <select
+              id="avatar-catalog-creator"
+              name="creator"
+              defaultValue={filters.creator}
+              className="w-full rounded-md border border-border/60 bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
+            >
+              {AVATAR_CATALOG_CREATOR_OPTIONS.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </details>
 
-      <div className="flex gap-3">
+      <div className="flex items-center gap-3 md:self-end">
         <button
           type="submit"
-          className="inline-flex min-h-10 items-center justify-center rounded-md bg-accent px-4 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+          className="inline-flex h-10 items-center justify-center rounded-md bg-accent px-5 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
         >
           Apply
         </button>
         {hasFilters ? (
-          <Link href={basePath} className="inline-flex min-h-10 items-center justify-center text-sm font-semibold text-muted transition hover:text-accent">
+          <Link href={basePath} className="inline-flex h-10 items-center justify-center text-sm font-semibold text-muted transition hover:text-accent">
             Clear
           </Link>
         ) : null}
@@ -653,9 +670,7 @@ export async function renderAvatarCatalogPage({
   }));
   const resultSummary = total > 0
     ? `${formatCount(total)} ${total === 1 ? "item" : "items"}`
-    : hasFilters
-      ? "No items match these filters"
-      : "No items available yet";
+    : null;
 
   return (
     <div className="catalog-surface space-y-10">
@@ -676,7 +691,7 @@ export async function renderAvatarCatalogPage({
         <AvatarCatalogSubnav parent={secondaryNavParent} activeCode={route.config.code} />
 
         <div className="catalog-surface space-y-6">
-          <p className="text-sm text-muted">{resultSummary}</p>
+          {resultSummary ? <p className="text-sm text-muted">{resultSummary}</p> : null}
           <AvatarCatalogFilterForm basePath={route.config.basePath} filters={filters} />
           <AvatarCatalogGrid items={items} pageTitle={pageTitle} hasFilters={hasFilters} />
           <PagePagination
