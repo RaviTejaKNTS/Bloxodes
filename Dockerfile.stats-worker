@@ -6,6 +6,10 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends python3 \
+  && rm -rf /var/lib/apt/lists/*
+
 COPY package.json package-lock.json tsconfig.json ./
 COPY apps/web/package.json ./apps/web/package.json
 COPY apps/extension/package.json ./apps/extension/package.json
