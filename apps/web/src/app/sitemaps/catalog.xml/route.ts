@@ -32,6 +32,7 @@ export async function GET() {
     for (const row of rows) {
       const code = row.code?.trim();
       if (!code) continue;
+      if (code.startsWith("free-roblox-items/") || code.startsWith("roblox-free-items/")) continue;
 
       const path = isAvatarCatalogCode(code) ? buildAvatarCatalogPath(code) : `/catalog/${code}`;
       const updated = row.content_updated_at ?? row.updated_at ?? row.published_at;

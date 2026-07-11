@@ -23,6 +23,7 @@ export type RobloxCatalogItemCardItem = {
 
 type Props = {
   item: RobloxCatalogItemCardItem;
+  categoryLabelMode?: "avatar" | "taxonomy";
 };
 
 function formatCount(value: number): string {
@@ -76,7 +77,7 @@ function buildFallbackRobloxUrl(item: Pick<RobloxCatalogItemCardItem, "asset_id"
   return `https://www.roblox.com/catalog/${item.asset_id}`;
 }
 
-export function RobloxCatalogItemCard({ item }: Props) {
+export function RobloxCatalogItemCard({ item, categoryLabelMode = "avatar" }: Props) {
   const hasThumbnail = Boolean(item.thumbnail_url);
   const creatorName = item.creator_name?.trim() || "Unknown creator";
   const favoriteCount = typeof item.favorite_count === "number" ? item.favorite_count : 0;
@@ -131,7 +132,7 @@ export function RobloxCatalogItemCard({ item }: Props) {
 
           <div className="flex flex-wrap gap-1.5">
             <span className="inline-flex items-center rounded-md border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
-              {prettyCategoryLabel(item)}
+              {categoryLabelMode === "taxonomy" ? prettyLabel(item.category) : prettyCategoryLabel(item)}
             </span>
             <span className="inline-flex items-center rounded-md border border-border/60 bg-background/50 px-2.5 py-1 text-[10px] font-medium text-foreground/85">
               {prettyLabel(item.subcategory)}

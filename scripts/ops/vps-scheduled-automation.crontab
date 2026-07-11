@@ -30,4 +30,7 @@
 20 6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh music-ids-refresh "export ROBLOX_TOP_SONGS_TARGET=500 ROBLOX_TOP_SONGS_PAGE_LIMIT=50 ROBLOX_TOP_SONGS_MAX_PAGES=10 ROBLOX_CURATED_INCLUDE_TOP_SONGS=false ROBLOX_CURATED_TOOLBOX_CHART_TYPES=Week,Month,Year ROBLOX_CURATED_TOOLBOX_INCLUDE_TRENDING=false ROBLOX_CURATED_TOOLBOX_MAX_PAGES=10 ROBLOX_CURATED_MAX_ASSETS=3000; npm run collect:top-songs && npm run collect:music-ids-curated && npm run rerank:music-ids"
 
 55 6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh decal-ids-refresh "export ROBLOX_DECAL_COLLECT_MAX_ASSETS=3000 ROBLOX_DECAL_TOOLBOX_MAX_PAGES=4 ROBLOX_DECAL_TOOLBOX_PAGE_SIZE=100 ROBLOX_DECAL_TOOLBOX_DELAY_MS=125 ROBLOX_DECAL_TOOLBOX_MAX_RETRIES=3 ROBLOX_DECAL_VERIFY_MAX_TOTAL=5000 ROBLOX_DECAL_VERIFY_BATCH=100 ROBLOX_DECAL_VERIFY_CONCURRENCY=8 ROBLOX_DECAL_VERIFY_ORDER=asset_id ROBLOX_DECAL_VERIFY_REFRESH_HOURS=168 ROBLOX_DECAL_VERIFY_REQUEST_DELAY_MS=80 ROBLOX_DECAL_VERIFY_BATCH_DELAY_MS=300; npm run refresh:decal-ids"
+
+0 7 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh free-items-candidate-refresh "export ALLOW_PROD_FREE_ITEMS_IMPORT=true ROBLOXDEN_SKIP_FAVORITE_BACKFILL=true; npm run import:free-item-candidates"
+30 7 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh free-items-refresh "export ROBLOX_FREE_ITEMS_DELAY_MS=650 ROBLOX_FREE_ITEMS_MAX_RETRIES=6; npm run collect:free-items -- --apply --allow-prod"
 # BLOXODES_SCHEDULED_AUTOMATION_END

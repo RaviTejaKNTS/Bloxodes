@@ -51,6 +51,30 @@ def load_env(path: str) -> Dict[str, str]:
     return env
 
 
+def resolve_env_path() -> str:
+    explicit_path = os.environ.get("BLOXODES_ENV_FILE")
+    if explicit_path:
+        return os.path.abspath(explicit_path)
+
+    repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    node_env = os.environ.get("NODE_ENV", "development")
+    candidates = (
+        [".env.production.local", ".env.production", ".env"]
+        if node_env == "production"
+        else [".env.local", f".env.{node_env}.local", f".env.{node_env}", ".env"]
+    )
+    for relative_path in candidates:
+        candidate = os.path.join(repo_root, relative_path)
+        if os.path.exists(candidate):
+            return candidate
+    raise FileNotFoundError(f"No Bloxodes env file found under {repo_root}")
+
+
+def is_local_supabase_url(value: str) -> bool:
+    hostname = urllib.parse.urlparse(value).hostname
+    return hostname in {"localhost", "127.0.0.1", "::1"}
+
+
 def now_iso() -> str:
     return time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
@@ -256,8 +280,11 @@ def fetch_asset_details(asset_ids: List[int]) -> Dict[int, Dict[str, Any]]:
 def fetch_bundle_details(bundle_ids: List[int]) -> Dict[int, Dict[str, Any]]:
     bundle_details: Dict[int, Dict[str, Any]] = {}
     for bundle_id in sorted(set(bundle_ids)):
-        detail = http_json(BUNDLE_DETAILS_API.format(bundle_id=bundle_id))
-        bundle_details[bundle_id] = detail
+        try:
+            detail = http_json(BUNDLE_DETAILS_API.format(bundle_id=bundle_id), retry_count=0)
+            bundle_details[bundle_id] = detail
+        except RuntimeError as error:
+            print(f"Warning: failed to enrich bundle {bundle_id}: {error}", file=sys.stderr)
         sleep_brief(0.1)
     return bundle_details
 
@@ -274,7 +301,11 @@ def fetch_asset_thumbnails(asset_ids: List[int]) -> Dict[int, Dict[str, Any]]:
                 "isCircular": "false",
             }
         )
-        response = http_json(f"{ASSET_THUMBNAILS_API}?{params}")
+        try:
+            response = http_json(f"{ASSET_THUMBNAILS_API}?{params}", retry_count=1)
+        except RuntimeError as error:
+            print(f"Warning: failed to load asset thumbnails: {error}", file=sys.stderr)
+            continue
         for row in response.get("data", []) or []:
             target_id = normalize_int(row.get("targetId"))
             if target_id is not None:
@@ -295,7 +326,11 @@ def fetch_bundle_thumbnails(bundle_ids: List[int]) -> Dict[int, Dict[str, Any]]:
                 "isCircular": "false",
             }
         )
-        response = http_json(f"{BUNDLE_THUMBNAILS_API}?{params}")
+        try:
+            response = http_json(f"{BUNDLE_THUMBNAILS_API}?{params}", retry_count=1)
+        except RuntimeError as error:
+            print(f"Warning: failed to load bundle thumbnails: {error}", file=sys.stderr)
+            continue
         for row in response.get("data", []) or []:
             target_id = normalize_int(row.get("targetId"))
             if target_id is not None:
@@ -728,10 +763,17 @@ def print_summary(rows: List[Dict[str, Any]], stale_count: int) -> None:
 
 
 def main() -> int:
-    env_path = os.path.join(os.path.dirname(__file__), "..", ".env")
-    env = load_env(os.path.abspath(env_path))
+    env_path = resolve_env_path()
+    env = load_env(env_path)
     if "SUPABASE_URL" not in env or "SUPABASE_SERVICE_ROLE" not in env:
         print("Missing Supabase credentials in .env", file=sys.stderr)
+        return 1
+    if not is_local_supabase_url(env["SUPABASE_URL"]) and os.environ.get("ALLOW_PROD_FREE_ITEMS_IMPORT") != "true":
+        print(
+            "Refusing to import RobloxDen candidates into non-local Supabase. "
+            "Set ALLOW_PROD_FREE_ITEMS_IMPORT=true only after a local review.",
+            file=sys.stderr,
+        )
         return 1
 
     entries = scrape_entries()
@@ -786,7 +828,9 @@ def main() -> int:
         if thumbnail:
             thumbnails.append(thumbnail)
 
-    favorite_backfills = backfill_missing_favorites(rows)
+    favorite_backfills = 0
+    if os.environ.get("ROBLOXDEN_SKIP_FAVORITE_BACKFILL") != "true":
+        favorite_backfills = backfill_missing_favorites(rows)
 
     imported_ids = {row["asset_id"] for row in rows}
     stale_ids = sorted(set(existing_source_rows.keys()) - imported_ids)

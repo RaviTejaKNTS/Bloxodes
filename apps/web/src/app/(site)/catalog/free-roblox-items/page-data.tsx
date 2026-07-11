@@ -32,8 +32,8 @@ export const CANONICAL = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
 
 export function buildFreeItemCatalogCodeCandidates(...segments: string[]): string[] {
   const normalizedSegments = segments.map((segment) => segment.trim()).filter(Boolean);
-  return FREE_ITEMS_CATALOG_CODES.flatMap((code) =>
-    normalizedSegments.length ? [`${code}/${normalizedSegments.join("/")}`, code] : [code]
+  return FREE_ITEMS_CATALOG_CODES.map((code) =>
+    normalizedSegments.length ? `${code}/${normalizedSegments.join("/")}` : code
   );
 }
 
@@ -120,6 +120,14 @@ function buildRobloxUrl(item: Pick<FreeItem, "asset_id" | "item_type" | "roblox_
 
 function formatCount(value: number): string {
   return value.toLocaleString("en-US");
+}
+
+function formatItemCount(value: number): string {
+  return `${formatCount(value)} ${value === 1 ? "item" : "items"}`;
+}
+
+function formatTaxonomyLabel(value: string): string {
+  return value.replace(/([a-z])([A-Z])/g, "$1 $2").trim();
 }
 
 export function appendItemCountToSeoTitle(title: string, count: number): string {
@@ -209,14 +217,14 @@ export function FreeItemsNav({ active, categories }: { active: string; categorie
     {
       id: "all",
       title: "All Free Items",
-      description: "Every free Roblox catalog item we track.",
+      description: "All directly claimable items.",
       href: BASE_PATH,
       count: null
     },
     ...categories.map((category) => ({
       id: category.slug,
-      title: category.label,
-      description: `${formatCount(category.count)} items`,
+      title: formatTaxonomyLabel(category.label),
+      description: formatItemCount(category.count),
       href: buildFreeItemCategoryPath(category.slug),
       count: category.count
     }))
@@ -382,9 +390,9 @@ export function buildCategoryCards(categories: CategoryOption[]) {
             />
             <div className="relative space-y-3">
               <div className="text-[10px] font-semibold uppercase tracking-[0.25em] text-muted">Category</div>
-              <h2 className="text-xl font-semibold text-foreground">{category.label}</h2>
+              <h2 className="text-xl font-semibold text-foreground">{formatTaxonomyLabel(category.label)}</h2>
               <div className="flex items-center justify-between text-sm text-muted">
-                <span>{formatCount(category.count)} items</span>
+                <span>{formatItemCount(category.count)}</span>
                 <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent/80">Explore</span>
               </div>
             </div>
@@ -467,7 +475,7 @@ function FreeItemsGrid({ items }: { items: FreeItem[] }) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {items.map((item) => (
-        <RobloxCatalogItemCard key={item.asset_id} item={item} />
+        <RobloxCatalogItemCard key={item.asset_id} item={item} categoryLabelMode="taxonomy" />
       ))}
     </div>
   );

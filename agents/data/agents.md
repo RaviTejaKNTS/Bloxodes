@@ -70,7 +70,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `roblox_music_genres_view`, `roblox_music_artists_view`
   - Music filters and taxonomy views.
 - `roblox_catalog_items`
-  - Free-item and broad Roblox item and bundle ingestion data. Broad `/catalog/roblox-*` Marketplace pages use category/subcategory, item type, sale status, price, creator, favorite, limited, resale, and thumbnail rows from this table.
+  - Free-item and broad Roblox item and bundle ingestion data. Broad `/catalog/roblox-*` Marketplace pages use category/subcategory, item type, sale status, price, creator, favorite, limited, resale, and thumbnail rows from this table. Free-item candidates may originate from Roblox search, RobloxDen, or another source tagged in `raw_economy_json`; candidate origin does not control publication. `/catalog/free-roblox-items` requires a current Roblox verification result, `free_claimability = 'direct'`, and a `free_verified_at` value from the last 72 hours; zero-price experience rewards and resale-only rows remain excluded.
 - `roblox_catalog_item_images`, `roblox_catalog_categories`, `roblox_catalog_subcategories`, `roblox_catalog_refresh_queue`
   - Avatar marketplace thumbnail cache, taxonomy cache, and enrichment queue for Roblox catalog item routes. Bundle thumbnails must come from the Roblox bundle thumbnail endpoint, while asset thumbnails use the asset endpoint.
 

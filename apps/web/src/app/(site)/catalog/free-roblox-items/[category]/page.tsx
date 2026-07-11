@@ -52,6 +52,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${title} | ${SITE_NAME}`,
     description,
+    robots: {
+      index: false,
+      follow: true,
+      googleBot: {
+        index: false,
+        follow: true
+      }
+    },
     alternates: buildAlternates(canonical),
     openGraph: {
       type: "website",

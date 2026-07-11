@@ -1421,13 +1421,22 @@ function extractFreeItemRobloxUrl(row: { asset_id: number; item_type?: string | 
   return `https://www.roblox.com/catalog/${row.asset_id}`;
 }
 
-function applyFreeItemLibraryFilters<TQuery extends { eq: Function; not: Function; contains: Function }>(query: TQuery): TQuery {
+const FREE_ITEM_VERIFICATION_MAX_AGE_MS = 72 * 60 * 60 * 1000;
+
+function getFreeItemVerificationCutoff(): string {
+  return new Date(Date.now() - FREE_ITEM_VERIFICATION_MAX_AGE_MS).toISOString();
+}
+
+function applyFreeItemLibraryFilters<TQuery extends { eq: Function; not: Function; gte: Function }>(query: TQuery): TQuery {
   return query
     .eq('price_robux', 0)
     .eq('is_deleted', false)
-    .contains('raw_economy_json', { free_item_source: 'robloxden' })
+    .eq('is_for_sale', true)
     .eq('has_resellers', false)
     .eq('lowest_resale_price_robux', 0)
+    .eq('free_claimability', 'direct')
+    .eq('free_verification_source', 'roblox')
+    .gte('free_verified_at', getFreeItemVerificationCutoff())
     .not('name', 'is', null)
     .not('category', 'is', null)
     .not('subcategory', 'is', null)
@@ -1694,7 +1703,7 @@ export async function listFreeItems(
 
   const cached = publicContentCache(
     () => fetchFreeItems(safePage, safeLimit, filters),
-    [`listFreeItems:v6:${safePage}:${safeLimit}:${JSON.stringify(filters)}`],
+    [`listFreeItems:v7:${safePage}:${safeLimit}:${JSON.stringify(filters)}`],
     {
       revalidate: 3600, // 1 hour
       tags: ['free-items-catalog']
@@ -1740,7 +1749,7 @@ export async function getFreeItemsCount(filters: FreeItemsFilters = {}): Promise
       if (error) throw error;
       return count ?? 0;
     },
-    [`getFreeItemsCount:v3:${JSON.stringify(filters)}`],
+    [`getFreeItemsCount:v4:${JSON.stringify(filters)}`],
     {
       revalidate: 3600, // 1 hour
       tags: ['free-items-catalog']
@@ -1801,7 +1810,7 @@ export async function getFreeItemCategories(): Promise<Array<{ category: string;
         .map(([category, count]) => ({ category, count }))
         .sort((a, b) => b.count - a.count);
     },
-    ['getFreeItemCategories:v4'],
+    ['getFreeItemCategories:v5'],
     {
       revalidate: 7200, // 2 hours
       tags: ['free-items-catalog']
@@ -1828,7 +1837,7 @@ export async function getFreeItemSubcategories(category?: string): Promise<Array
         .map(([subcategory, count]) => ({ subcategory, count }))
         .sort((a, b) => b.count - a.count);
     },
-    [`getFreeItemSubcategories:v4:${category ?? 'all'}`],
+    [`getFreeItemSubcategories:v5:${category ?? 'all'}`],
     {
       revalidate: 7200, // 2 hours
       tags: ['free-items-catalog']

@@ -128,7 +128,9 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Roll up item daily stats | `scripts/items/rollup-item-daily-stats.ts` | `npm run stats:items:rollup-daily -- --date yesterday --finalize` |
 | Rebuild item stats indexes | `scripts/items/rebuild-stats-item-indexes.ts` | `npm run stats:items:index:refresh`; rebuilds `/stats/items` read indexes and queues stats revalidation |
 | Audit item stats workflow | `scripts/items/audit-item-stats-workflow.ts` | `npm run stats:items:audit`; reports current index, hourly, daily, resale, stale, due, and broken-media counts |
-| Import RobloxDen free items | `scripts/catalog/import-robloxden-free-items.py` | direct `python scripts/catalog/import-robloxden-free-items.py` |
+| Import RobloxDen free-item candidates | `scripts/catalog/import-robloxden-free-items.py` | `npm run import:free-item-candidates`; defaults to local env, non-local writes require `ALLOW_PROD_FREE_ITEMS_IMPORT=true`, and rows still require the Roblox verification collector before publication |
+| Collect and verify free items from all candidate sources | `scripts/catalog/collect-roblox-free-items.ts` | `npm run collect:free-items` merges live Roblox search, source-tagged table rows (including RobloxDen), and prior candidates, then verifies claimability through Roblox; dry run by default, add `-- --apply` to write |
+| Keep Free Items main page only | `scripts/catalog/set-free-items-main-only.ts` | `npm run catalog:free-items-main-only` (dry run; add `-- --apply` to unpublish subpages) |
 | Trading limiteds collection | `scripts/trading/collect-all-limiteds.ts` | `npm run trading:collect` |
 | Collect Roblox decal IDs | `scripts/decal-ids/collect-roblox-decal-ids.ts` | `npm run collect:decal-ids`; primary Roblox Toolbox/Creator Store discovery into `roblox_decal_ids` |
 | Import decal ID candidates | `scripts/decal-ids/import-decal-id-candidates.ts` | `npm run import:decal-id-candidates`; imports legacy JSON/files/external-page candidates before Roblox verification |
