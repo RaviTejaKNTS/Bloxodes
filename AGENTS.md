@@ -20,6 +20,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-game-collection-images/SKILL.md`: game collection image collection, local image paths, and image readiness.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
+- `docs/analytics/README.md`: Umami/GA4 ownership, access, event taxonomy, verification, and the home for future analytics reports.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
 
 ## Architecture Snapshot
