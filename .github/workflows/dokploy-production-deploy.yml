@@ -94,6 +94,8 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: ${{ vars.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID }}
+          NEXT_PUBLIC_UMAMI_HOST_URL: ${{ vars.NEXT_PUBLIC_UMAMI_HOST_URL }}
+          NEXT_PUBLIC_UMAMI_WEBSITE_ID: ${{ vars.NEXT_PUBLIC_UMAMI_WEBSITE_ID }}
           NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || vars.PRODUCTION_SITE_URL || 'https://bloxodes.com' }}
           SITE_URL: ${{ secrets.SITE_URL }}
         run: |
@@ -105,6 +107,8 @@ jobs:
             printf 'NEXT_PUBLIC_SUPABASE_URL=%s\n' "$NEXT_PUBLIC_SUPABASE_URL"
             printf 'NEXT_PUBLIC_SUPABASE_ANON_KEY=%s\n' "$NEXT_PUBLIC_SUPABASE_ANON_KEY"
             printf 'NEXT_PUBLIC_GOOGLE_ANALYTICS_ID=%s\n' "$NEXT_PUBLIC_GOOGLE_ANALYTICS_ID"
+            printf 'NEXT_PUBLIC_UMAMI_HOST_URL=%s\n' "$NEXT_PUBLIC_UMAMI_HOST_URL"
+            printf 'NEXT_PUBLIC_UMAMI_WEBSITE_ID=%s\n' "$NEXT_PUBLIC_UMAMI_WEBSITE_ID"
             printf 'NEXT_PUBLIC_SITE_URL=%s\n' "$NEXT_PUBLIC_SITE_URL"
             printf 'SITE_URL=%s\n' "${SITE_URL:-$NEXT_PUBLIC_SITE_URL}"
           } > "$RUNNER_TEMP/bloxodes-production-build.env"

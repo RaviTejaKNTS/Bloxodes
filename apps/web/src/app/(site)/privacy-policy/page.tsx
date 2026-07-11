@@ -144,6 +144,11 @@ export default function PrivacyPolicyPage() {
             cookies to generate anonymous usage stats. We enable IP anonymization where possible and do not link this data to identities.
           </p>
           <p>
+            <strong>Umami Analytics:</strong> our self-hosted, cookie-free analytics service. It records anonymous page, device, referrer,
+            approximate country, performance, and selected interaction data without tracking visitors across websites or collecting account
+            identifiers.
+          </p>
+          <p>
             <strong>Infrastructure telemetry:</strong> our hosting, CDN, and reverse-proxy providers may process aggregate request and
             performance data to help us keep the site fast, secure, and reliable. This data is not used for advertising or profiling.
           </p>
@@ -181,6 +186,7 @@ export default function PrivacyPolicyPage() {
           <p>We do not sell personal data. We share technical data only with providers that help run the site:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Google Analytics for usage measurement.</li>
+            <li>Our self-hosted Umami service for anonymous usage and performance measurement.</li>
             <li>Mediavine Journey and other ad partners for advertising delivery and measurement.</li>
             <li>Hosting, CDN, and reverse-proxy providers for secure delivery, caching, TLS, and performance monitoring.</li>
             <li>Supabase for authentication, database storage, and account management.</li>

@@ -9,6 +9,7 @@ import {
   type QuizAttemptQuestion,
   type QuizDifficulty
 } from "@/lib/quiz-attempts";
+import { trackUmamiEvent } from "@/lib/umami";
 
 const STORAGE_VERSION = 1;
 
@@ -361,6 +362,12 @@ export function QuizRunner(props: QuizRunnerProps) {
     setSeenQuestionIds(merged);
     lastSavedAttempt.current = attemptKey || "saved";
     setSavedAttemptKey(attemptKey || "saved");
+
+    trackUmamiEvent("quiz_finished", {
+      quiz_code: quizCode,
+      score: totalCorrect,
+      total: totalQuestions
+    });
 
     if (!session.userId) return;
 

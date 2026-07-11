@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 import Script from "next/script";
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { UmamiAnalytics } from "@/components/UmamiAnalytics";
+import { UmamiEngagementTracker } from "@/components/UmamiEngagementTracker";
 import { ConsentBanner } from "@/components/consent/ConsentBanner";
 import { ConsentGate } from "@/components/consent/ConsentGate";
 import { ConsentMode } from "@/components/consent/ConsentMode";
@@ -16,6 +18,8 @@ type PublicSiteProvidersProps = {
   enableJourney?: boolean;
   enableLocalConsent?: boolean;
   googleAnalyticsId?: string;
+  umamiHostUrl?: string;
+  umamiWebsiteId?: string;
 };
 
 function JourneyScript() {
@@ -34,8 +38,18 @@ export function PublicSiteProviders({
   children,
   enableJourney = false,
   enableLocalConsent = false,
-  googleAnalyticsId
+  googleAnalyticsId,
+  umamiHostUrl,
+  umamiWebsiteId
 }: PublicSiteProvidersProps) {
+  const umamiAnalytics =
+    umamiHostUrl && umamiWebsiteId ? (
+      <>
+        <UmamiAnalytics hostUrl={umamiHostUrl} websiteId={umamiWebsiteId} />
+        <UmamiEngagementTracker />
+      </>
+    ) : null;
+
   return (
     <ConsentProvider>
       {enableLocalConsent ? <ConsentMode /> : null}
@@ -52,6 +66,9 @@ export function PublicSiteProviders({
         ) : (
           <GoogleAnalytics measurementId={googleAnalyticsId} />
         )
+      ) : null}
+      {umamiAnalytics ? (
+        enableLocalConsent ? <ConsentGate category="analytics">{umamiAnalytics}</ConsentGate> : umamiAnalytics
       ) : null}
       <AnalyticsTracker />
       {children}
