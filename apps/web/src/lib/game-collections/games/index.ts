@@ -44,6 +44,7 @@ import { storageHuntersOpenWorldCollectionGroup } from "./storage-hunters-open-w
 import { drainTheLakeCollectionGroup } from "./drain-the-lake";
 import { fishItCollectionGroup } from "./fish-it";
 import { gakuranCollectionGroup } from "./gakuran";
+import { catchABrainrotCollectionGroup } from "./catch-a-brainrot";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -92,5 +93,6 @@ export const GAME_COLLECTION_GROUPS = [
   storageHuntersOpenWorldCollectionGroup,
   drainTheLakeCollectionGroup,
   fishItCollectionGroup,
-  gakuranCollectionGroup
+  gakuranCollectionGroup,
+  catchABrainrotCollectionGroup
 ] satisfies GameCollectionGroup[];

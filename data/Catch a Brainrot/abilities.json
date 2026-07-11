@@ -1,0 +1,323 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Catch a Brainrot",
+    "gameSlug": "catch-a-brainrot",
+    "collection": "abilities",
+    "route": "/wiki/catch-a-brainrot/abilities",
+    "catalogCode": "catch-a-brainrot-abilities",
+    "itemFields": [
+      "energyCost",
+      "role",
+      "effect",
+      "cardSummary"
+    ],
+    "columns": [
+      "energyCost",
+      "role",
+      "effect",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Role",
+      "sectionOrder": [
+        "Resource",
+        "Defense and Healing",
+        "Light Attacks",
+        "Medium Attacks",
+        "Heavy Attacks",
+        "Ultimate Moves"
+      ],
+      "badgeField": "role",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "energyCost",
+        "role",
+        "effect"
+      ],
+      "tableFields": [
+        "energyCost",
+        "role",
+        "effect",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "energyCost": {
+          "kind": "chip",
+          "label": "Energy"
+        },
+        "role": {
+          "kind": "normal",
+          "label": "Role"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Charge",
+        "energyCost": "Free",
+        "role": "Resource",
+        "effect": "Builds 1 Energy so you can spend it on later moves.",
+        "cardSummary": "Free resource move that banks 1 Energy for higher-cost abilities on later turns."
+      },
+      "system": {
+        "slug": "charge",
+        "section": "Resource",
+        "sortOrder": 1,
+        "image": "/Catch%20a%20Brainrot/Abilities/charge.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Heal",
+        "energyCost": "2",
+        "role": "Healing",
+        "effect": "Restores health to your Brainrot.",
+        "cardSummary": "2-Energy heal that tops up your Brainrot during longer fights."
+      },
+      "system": {
+        "slug": "heal",
+        "section": "Defense and Healing",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shield",
+        "energyCost": "2",
+        "role": "Defense",
+        "effect": "Blocks all incoming damage for one round.",
+        "cardSummary": "2-Energy full-round block that nullifies the next wave of damage."
+      },
+      "system": {
+        "slug": "shield",
+        "section": "Defense and Healing",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Feathers",
+        "energyCost": "2",
+        "role": "Attack",
+        "effect": "Sends a feather tornado along a path that damages enemies it hits.",
+        "cardSummary": "2-Energy path attack that hurls a feather tornado into enemies."
+      },
+      "system": {
+        "slug": "feathers",
+        "section": "Light Attacks",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shoot",
+        "energyCost": "2",
+        "role": "Attack",
+        "effect": "Fires a gun shot at the enemy Brainrot.",
+        "cardSummary": "2-Energy gun shot for light single-target damage."
+      },
+      "system": {
+        "slug": "shoot",
+        "section": "Light Attacks",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Splash",
+        "energyCost": "2",
+        "role": "Attack",
+        "effect": "Throws a splash that deals light area damage.",
+        "cardSummary": "2-Energy splash for light area damage around the target."
+      },
+      "system": {
+        "slug": "splash",
+        "section": "Light Attacks",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bite",
+        "energyCost": "3",
+        "role": "Attack",
+        "effect": "Summons giant teeth that bite the enemy Brainrot.",
+        "cardSummary": "3-Energy bite that clamps giant teeth on the enemy for solid damage."
+      },
+      "system": {
+        "slug": "bite",
+        "section": "Medium Attacks",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fry",
+        "energyCost": "3",
+        "role": "Attack",
+        "effect": "Smacks the enemy Brainrot with a frying pan.",
+        "cardSummary": "3-Energy frying-pan smack for medium single-target damage."
+      },
+      "system": {
+        "slug": "fry",
+        "section": "Medium Attacks",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mr Beast",
+        "energyCost": "3",
+        "role": "Attack",
+        "effect": "Summons Mr Beast, who attacks with showers of cash.",
+        "cardSummary": "3-Energy cash-shower summon that hits the enemy for medium damage."
+      },
+      "system": {
+        "slug": "mr-beast",
+        "section": "Medium Attacks",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sword",
+        "energyCost": "3",
+        "role": "Attack",
+        "effect": "Swings a sword for solid melee damage.",
+        "cardSummary": "3-Energy sword swing for solid melee pressure."
+      },
+      "system": {
+        "slug": "sword",
+        "section": "Medium Attacks",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wheel Attack",
+        "energyCost": "3",
+        "role": "Attack",
+        "effect": "Throws a spinning tire that hits hard on impact.",
+        "cardSummary": "3-Energy spinning-tire throw with heavy impact damage for its cost."
+      },
+      "system": {
+        "slug": "wheel-attack",
+        "section": "Medium Attacks",
+        "sortOrder": 11,
+        "image": "/Catch%20a%20Brainrot/Abilities/wheel-attack.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zap",
+        "energyCost": "3",
+        "role": "Attack",
+        "effect": "Calls down a lightning strike on the target.",
+        "cardSummary": "3-Energy lightning strike for medium single-target damage."
+      },
+      "system": {
+        "slug": "zap",
+        "section": "Medium Attacks",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bomb",
+        "energyCost": "4",
+        "role": "Attack",
+        "effect": "Throws a bomb that explodes for massive damage.",
+        "cardSummary": "4-Energy bomb burst for massive single-hit damage."
+      },
+      "system": {
+        "slug": "bomb",
+        "section": "Heavy Attacks",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Blast",
+        "energyCost": "4",
+        "role": "Attack",
+        "effect": "Unleashes a stream of fire that burns the enemy Brainrot.",
+        "cardSummary": "4-Energy fire stream that burns the enemy for heavy damage."
+      },
+      "system": {
+        "slug": "fire-blast",
+        "section": "Heavy Attacks",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Firework",
+        "energyCost": "4",
+        "role": "Attack",
+        "effect": "Launches a firework rocket that explodes after hitting the enemy.",
+        "cardSummary": "4-Energy firework rocket that explodes for heavy damage on impact."
+      },
+      "system": {
+        "slug": "firework",
+        "section": "Heavy Attacks",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grow a Garden",
+        "energyCost": "5",
+        "role": "Hybrid",
+        "effect": "Grows flowers that drain the enemy’s health and restore it to your Brainrot.",
+        "cardSummary": "5-Energy hybrid that drains enemy HP and heals your Brainrot at the same time."
+      },
+      "system": {
+        "slug": "grow-a-garden",
+        "section": "Ultimate Moves",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Whirlpool",
+        "energyCost": "6",
+        "role": "Attack",
+        "effect": "Summons a water tornado that deals massive damage and launches the enemy into the air.",
+        "cardSummary": "6-Energy water tornado that deals massive damage and launches the enemy."
+      },
+      "system": {
+        "slug": "whirlpool",
+        "section": "Ultimate Moves",
+        "sortOrder": 17,
+        "image": null
+      }
+    }
+  ]
+}
