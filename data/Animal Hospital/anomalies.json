@@ -75,7 +75,7 @@
         "detectBy": "Appearance",
         "warningSigns": "Arms, head, or neck jerk while the patient is standing still. The back often hunches, and the neck can stretch longer than normal. Some variants only twitch on CCTV, so wait a few seconds before you decide.",
         "bestAction": "Close the shutters.",
-        "ifAdmitted": "Often becomes a Shapeshifter during recovery, or can lead into a death ritual when paired with hollow eyes.",
+        "ifAdmitted": "Guaranteed to transform into a Shapeshifter during recovery. Close the shutters at the desk instead of hoping treatment will fix it.",
         "cardSummary": "A patient that looks almost normal until the body starts twitching. Watch for a few seconds at the window before you stamp them in."
       },
       "system": {
@@ -107,7 +107,7 @@
         "detectBy": "Appearance",
         "warningSigns": "Dark hollow eye sockets, often with a hunched posture and twitching. Looks drained and empty rather than injured.",
         "bestAction": "Close the shutters.",
-        "ifAdmitted": "Strongly linked to death rituals during recovery. Not every hollow-eyed visitor is instantly hostile, but treating them as safe is a bad bet.",
+        "ifAdmitted": "Guaranteed to start a death ritual during recovery. Hollow eyes can also appear on the Head Banger at the glass, which is handled with coffee instead of a normal admit.",
         "cardSummary": "Empty sockets are the main tell. Do not confuse a normal sad face with fully hollowed eyes."
       },
       "system": {
@@ -171,7 +171,7 @@
         "detectBy": "Appearance",
         "warningSigns": "The patient tracks your movement with their head, or locks onto a camera. The head can turn more than a normal patient should.",
         "bestAction": "Close the shutters.",
-        "ifAdmitted": "Often turns into a Shapeshifter during recovery, so do not treat the intense eye contact as harmless.",
+        "ifAdmitted": "Guaranteed to transform into a Shapeshifter during recovery, so do not treat the intense eye contact as harmless.",
         "cardSummary": "If a patient keeps staring you down while you move around the desk, treat that as a hard reject."
       },
       "system": {
@@ -234,8 +234,8 @@
         "name": "Static Photo",
         "detectBy": "Photo",
         "warningSigns": "The photograph has a grainy static overlay. It can appear alone or with other cursed photo details.",
-        "bestAction": "Close the shutters when static covers the photo. Do not rely on tasing alone, especially on later shifts.",
-        "ifAdmitted": "A static-only photo can still lead into a death ritual during recovery, even when it does not always become a Shapeshifter.",
+        "bestAction": "Close the shutters when static covers the photo. Prefer the shutters over tasing or shooting when you are unsure.",
+        "ifAdmitted": "Still an anomaly even when static is the only photo tell. Admitting them can start a death ritual during recovery, and static alone does not always mean a Shapeshifter.",
         "cardSummary": "If the polaroid looks like a broken TV channel, do not stamp them in just because the window face looks normal."
       },
       "system": {
@@ -249,7 +249,7 @@
       "item": {
         "name": "Cursed Photo",
         "detectBy": "Photo",
-        "warningSigns": "The polaroid shows a heavily distorted or horrific face, such as a melted grin, wrong eyes, or other cursed face variants. Picking the photo up too early can also drain sanity.",
+        "warningSigns": "The polaroid shows a heavily distorted or horrific face, such as a melted grin, wrong eyes, or other cursed face variants. Picking the photo up drains about 10 sanity, so check it on the desk first.",
         "bestAction": "Let the photo fully develop, inspect it without rushing, then close the shutters.",
         "ifAdmitted": "A clear cursed face means a bad patient. Letting them through risks rituals and hostile forms.",
         "cardSummary": "These are the nasty polaroids. Wait for the print, check it on the desk, and shut the window if the face looks cursed."
@@ -394,7 +394,7 @@
         "name": "Head Banger",
         "detectBy": "Special",
         "warningSigns": "A hollow-eyed visitor smashes their head against the check-in glass and can block the shutters. This is not a normal queue patient.",
-        "bestAction": "Offer coffee so they drink and leave. Avoid tasing, shooting, or forcing them out the hard way, which costs a large sanity hit.",
+        "bestAction": "Offer coffee so they drink and leave. Avoid tasing, shooting, or forcing them out the hard way, which costs a large sanity hit and can leave the shutters blocked until they crack the glass or leave.",
         "ifAdmitted": "Not a normal admit target. Handled at the window with coffee, not by treating them like a medical patient.",
         "cardSummary": "The window pest that wants coffee, not treatment. Feed it a cup and it calms down instead of wrecking your sanity."
       },
@@ -409,7 +409,7 @@
       "item": {
         "name": "Shapeshifter",
         "detectBy": "Special",
-        "warningSigns": "A patient that has already dropped the disguise. Expect a huge mouth, sharp teeth, and an attack on nearby patients or players. Heavy breathing and copycat patients are early clues.",
+        "warningSigns": "A patient that has already dropped the disguise (some guides call this a Skinwalker). Expect a huge mouth, sharp teeth, and an attack on nearby patients or players.",
         "bestAction": "Tase it, shoot it, or hold the interaction to pull it off a victim. If it grabs you, spam the struggle input.",
         "ifAdmitted": "This is the hostile form after a bad admit or transformation. It is already inside and needs a weapon response.",
         "cardSummary": "The end stage of a missed anomaly. Once the disguise drops, stop diagnosis mode and fight it before it eats a patient."

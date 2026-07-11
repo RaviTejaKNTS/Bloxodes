@@ -10,6 +10,10 @@ export const animalHospitalCollectionGroup = {
       "anomalies",
       "rooms",
       "emergencies",
-      "locations"
+      "locations",
+      "classes",
+      "items",
+      "enemies",
+      "characters"
     ]
   } satisfies GameCollectionGroup;

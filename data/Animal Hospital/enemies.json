@@ -1,0 +1,216 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Animal Hospital",
+    "gameSlug": "animal-hospital",
+    "collection": "enemies",
+    "route": "/wiki/animal-hospital/enemies",
+    "catalogCode": "animal-hospital-enemies",
+    "itemFields": [
+      "location",
+      "damage",
+      "counter",
+      "warningSigns",
+      "cardSummary"
+    ],
+    "columns": [
+      "location",
+      "damage",
+      "counter",
+      "warningSigns",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Roaming Threats",
+        "Room Threats",
+        "Reception and Camera Threats"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "location",
+        "damage",
+        "counter"
+      ],
+      "tableFields": [
+        "location",
+        "damage",
+        "counter",
+        "warningSigns",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "location": {
+          "kind": "plain",
+          "label": "Location"
+        },
+        "damage": {
+          "kind": "chip",
+          "label": "Damage"
+        },
+        "counter": {
+          "kind": "highlight",
+          "label": "Counter"
+        },
+        "warningSigns": {
+          "kind": "detail",
+          "label": "Warning signs"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Stalker",
+        "location": "Hallway corners",
+        "damage": "-10 sanity on direct eye contact",
+        "counter": "Avoid looking directly at it; take corners carefully with the camera angled low",
+        "warningSigns": "Tall black bunny-like figure peeks around corners, may flicker lights, then retreats when spotted",
+        "cardSummary": "A peeking shadow that punishes direct eye contact. Angle your camera low and keep walking."
+      },
+      "system": {
+        "slug": "stalker",
+        "section": "Roaming Threats",
+        "sortOrder": 10,
+        "image": "/Animal%20Hospital/enemies/stalker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hiders",
+        "location": "Patient rooms and both hospital wings",
+        "damage": "-10 sanity if empty-handed, or steals held item and stuns",
+        "counter": "Taser, gun, fire extinguisher, fire, outrun, or lure into the Bed Monster red zone",
+        "warningSigns": "Flat paper-like figures camouflaged on walls; heavy breathing before they leap off and chase",
+        "cardSummary": "Wall camouflage hunters. Listen for breathing, then stun or run before they steal your tool."
+      },
+      "system": {
+        "slug": "hiders",
+        "section": "Roaming Threats",
+        "sortOrder": 20,
+        "image": "/Animal%20Hospital/enemies/hiders.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost",
+        "location": "Whole hospital after patient deaths",
+        "damage": "About -2 sanity per second while close",
+        "counter": "Reveal with fire extinguisher spray, then tase, shoot, or use fire",
+        "warningSigns": "Doors open alone, floating white particles, ghostly sounds; can turn invisible",
+        "cardSummary": "Death aftermath. Find the invisible presence, spray it visible, then finish it with a weapon."
+      },
+      "system": {
+        "slug": "ghost",
+        "section": "Roaming Threats",
+        "sortOrder": 30,
+        "image": "/Animal%20Hospital/enemies/ghost.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shapeshifter",
+        "location": "Rooms 1-8 and reception after bad admits or transforms",
+        "damage": "About -6 sanity every half second while attacking",
+        "counter": "Taser, gun, or struggle/punch inputs if grabbed",
+        "warningSigns": "Starts as a copy of a known patient, then drops into a white toothy form with heavy breathing and attack alerts",
+        "cardSummary": "The hostile form of a missed anomaly. Drop tools-on-hand and clear it before it eats a patient."
+      },
+      "system": {
+        "slug": "shapeshifter",
+        "section": "Roaming Threats",
+        "sortOrder": 40,
+        "image": "/Animal%20Hospital/enemies/shapeshifter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bed Monster",
+        "location": "Under beds in rooms 1-5 and 7",
+        "damage": "Grab hits -10 sanity, then about -5 every 2 seconds; kills grabbed patients in about 30 seconds",
+        "counter": "Feed maple syrup, a transplant, or an organ; avoid the red zone empty-handed",
+        "warningSigns": "Red line under the bed, black hands, and red eyes under the frame",
+        "cardSummary": "A bed trap for players and patients. Carry maple syrup and never stand in the red zone empty-handed."
+      },
+      "system": {
+        "slug": "bed-monster",
+        "section": "Room Threats",
+        "sortOrder": 50,
+        "image": "/Animal%20Hospital/enemies/bed-monster.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mass of Eyes",
+        "location": "Ceilings in facilities 1-8 and reception",
+        "damage": "About -2 to -5 sanity every half second while staring",
+        "counter": "Do not look up, or use eye drops",
+        "warningSigns": "On-screen “Don’t look up” style warnings, odd lighting, saliva drips, ceiling flesh mass",
+        "cardSummary": "Ceiling horror that melts sanity if you look. Keep eyes down and treat the patient, or use drops."
+      },
+      "system": {
+        "slug": "mass-of-eyes",
+        "section": "Room Threats",
+        "sortOrder": 60,
+        "image": "/Animal%20Hospital/enemies/mass-of-eyes.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tendril",
+        "location": "Room 8 surgery patients",
+        "damage": "Kills the patient if the surgery timer fails or wrong tools are used",
+        "counter": "Complete the surgery mini-game; do not tase or shoot it",
+        "warningSigns": "Purple tentacles from the surgery patient and a Room 8 emergency prompt",
+        "cardSummary": "Surgery-only enemy. Weapons kill the patient; only the mini-game sequence saves them."
+      },
+      "system": {
+        "slug": "tendril",
+        "section": "Room Threats",
+        "sortOrder": 70,
+        "image": "/Animal%20Hospital/enemies/tendril.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Head Banger",
+        "location": "Check-in window",
+        "damage": "-20 sanity if forced out the hard way without coffee",
+        "counter": "Offer coffee; wait for it to leave; shooting is a last resort",
+        "warningSigns": "Hollow-eyed visitor smashing the glass and blocking shutters, often between shifts 2 and 5",
+        "cardSummary": "Reception pest, not a hallway chase. Coffee is the clean clear; hard rejects cost a big sanity hit."
+      },
+      "system": {
+        "slug": "head-banger",
+        "section": "Reception and Camera Threats",
+        "sortOrder": 80,
+        "image": "/Animal%20Hospital/enemies/head-banger.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Camera Figure",
+        "location": "Broken CCTV feeds",
+        "damage": "-20 sanity on jumpscare",
+        "counter": "Switch camera or repair the feed before it zooms in",
+        "warningSigns": "Demonic cat-like figure on a broken camera that slowly approaches the screen",
+        "cardSummary": "Only lives on security screens. Leave the feed or fix the camera before the zoom-in scare hits."
+      },
+      "system": {
+        "slug": "camera-figure",
+        "section": "Reception and Camera Threats",
+        "sortOrder": 90,
+        "image": "/Animal%20Hospital/enemies/camera-figure.webp"
+      }
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Animal Hospital",
+    "gameSlug": "animal-hospital",
+    "collection": "characters",
+    "route": "/wiki/animal-hospital/characters",
+    "catalogCode": "animal-hospital-characters",
+    "itemFields": [
+      "role",
+      "whenAppears",
+      "interaction",
+      "rewardOrUse",
+      "cardSummary"
+    ],
+    "columns": [
+      "role",
+      "whenAppears",
+      "interaction",
+      "rewardOrUse",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Hospital Staff",
+        "Story Visitors",
+        "Special Guests"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "role",
+        "whenAppears",
+        "rewardOrUse"
+      ],
+      "tableFields": [
+        "role",
+        "whenAppears",
+        "interaction",
+        "rewardOrUse",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "role": {
+          "kind": "plain",
+          "label": "Role"
+        },
+        "whenAppears": {
+          "kind": "chip",
+          "label": "When"
+        },
+        "interaction": {
+          "kind": "detail",
+          "label": "Interaction"
+        },
+        "rewardOrUse": {
+          "kind": "highlight",
+          "label": "Why it matters"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Dr. Harlow",
+        "role": "Hospital doctor / intern supervisor",
+        "whenAppears": "After early patients; end of each shift",
+        "interaction": "Grades your shift, unlocks shutters and cameras after shift 1, opens the shop and rooms 6-8 on shift 2, and unlocks the taser on shift 3. Later lore talks happen if you walk up to him in the lobby.",
+        "rewardOrUse": "Unlocks check-in tools, the shop, emergency rooms, and the taser",
+        "cardSummary": "The hospital doctor who runs your early unlocks and grades each shift. When Harlow shows up, a new tool or facility is usually about to open."
+      },
+      "system": {
+        "slug": "dr-harlow",
+        "section": "Hospital Staff",
+        "sortOrder": 10,
+        "image": "/Animal%20Hospital/characters/dr-harlow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shop Nurse",
+        "role": "Supplies shopkeeper",
+        "whenAppears": "Shop unlocked on shift 3",
+        "interaction": "Runs the Supplies Shop after Dr. Harlow unlocks it. Buy tools, consumables, and support items with in-game currency.",
+        "rewardOrUse": "Buy extinguishers, tasers, upgrades, and support items",
+        "cardSummary": "The face of the staff shop. Once Harlow opens the store, this is where you stock gear between patient rushes."
+      },
+      "system": {
+        "slug": "shop-nurse",
+        "section": "Hospital Staff",
+        "sortOrder": 20,
+        "image": "/Animal%20Hospital/characters/shop-nurse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ron from Accounting",
+        "role": "Staff visitor / monster tip giver",
+        "whenAppears": "From around shift 2 onward",
+        "interaction": "Talks about hospital threats, past intern deaths, and Animal Corporation secrets. Shares practical survival notes on enemies like the Bed Monster, Mass of Eyes, and Stalker.",
+        "rewardOrUse": "Survival tips for anomalies, room threats, and hospital lore",
+        "cardSummary": "A calm blue rabbit with a TOP SECRET suitcase and a long memory. Talk to Ron when you want monster advice more than a treatment item."
+      },
+      "system": {
+        "slug": "ron-from-accounting",
+        "section": "Hospital Staff",
+        "sortOrder": 30,
+        "image": "/Animal%20Hospital/characters/ron-from-accounting.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ratthew",
+        "role": "Recurring visitor / key route",
+        "whenAppears": "Recurring visits; key often near shifts 8-10",
+        "interaction": "Serve him through a short dialogue chain. He starts cautious, warns you not to trust anyone, talks about his missing twin Rattina, then leaves a key after enough visits.",
+        "rewardOrUse": "Key for the Room 5 safe (Rattina photo and TOP SECRET suitcase)",
+        "cardSummary": "A small black rat who looks anomaly-adjacent but is a real visitor. Keep serving him if you want the key that opens the Room 5 lore safe."
+      },
+      "system": {
+        "slug": "ratthew",
+        "section": "Story Visitors",
+        "sortOrder": 40,
+        "image": "/Animal%20Hospital/characters/ratthew.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Barney",
+        "role": "Favor visitor / wanted serial killer",
+        "whenAppears": "Shifts 2-7 (up to three times in one shift)",
+        "interaction": "Asks for coffee, a briefcase hold, a photo, a scalpel, and later a place to hide. Refusing coffee too long can draw threats. His photo shows a sharp-toothed anomaly face.",
+        "rewardOrUse": "Extra coffee machine (300s cooldown) if you hide him and do not turn him in",
+        "cardSummary": "A polite guest with a long favor chain and a wanted poster waiting later. Coffee and patience matter more than treatment tools."
+      },
+      "system": {
+        "slug": "barney",
+        "section": "Story Visitors",
+        "sortOrder": 50,
+        "image": "/Animal%20Hospital/characters/barney.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Officer Duckman",
+        "role": "Police officer",
+        "whenAppears": "After you accept Barney's hide request",
+        "interaction": "Shows a photo of Barney and asks if you have seen him. You can turn Barney in or stay quiet. Turning him in triggers a fight that can leave Duckman fainted and needing treatment.",
+        "rewardOrUse": "Story choice during Barney's ending; no special gift for turning Barney in",
+        "cardSummary": "The law side of Barney's route. He only shows up once you hide Barney, and the choice is whether you talk or keep quiet."
+      },
+      "system": {
+        "slug": "officer-duckman",
+        "section": "Special Guests",
+        "sortOrder": 60,
+        "image": "/Animal%20Hospital/characters/officer-duckman.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rattina",
+        "role": "Missing lore character",
+        "whenAppears": "Photo and safe contents only (not a live visitor)",
+        "interaction": "Learned through Ratthew's later talks and the Room 5 safe. She looks like Ratthew with eyelashes and a purple bow, and worked for Animal Corporation before vanishing.",
+        "rewardOrUse": "Lore for the key safe and Animal Corporation mystery",
+        "cardSummary": "Ratthew's twin and the smart one of the family. You meet her story through the key route, not as a check-in patient."
+      },
+      "system": {
+        "slug": "rattina",
+        "section": "Special Guests",
+        "sortOrder": 70,
+        "image": "/Animal%20Hospital/characters/rattina.webp"
+      }
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Animal Hospital",
+    "gameSlug": "animal-hospital",
+    "collection": "classes",
+    "route": "/wiki/animal-hospital/classes",
+    "catalogCode": "animal-hospital-classes",
+    "itemFields": [
+      "cost",
+      "currency",
+      "role",
+      "level1Perk",
+      "level2Perk",
+      "level3Perk",
+      "starterItem",
+      "bestFor",
+      "cardSummary"
+    ],
+    "columns": [
+      "cost",
+      "currency",
+      "role",
+      "level1Perk",
+      "level2Perk",
+      "level3Perk",
+      "starterItem",
+      "bestFor",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Starter and Support",
+        "Sanity Specialists",
+        "Combat and Utility",
+        "Premium Classes"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "cost",
+        "currency",
+        "role",
+        "starterItem",
+        "bestFor"
+      ],
+      "tableFields": [
+        "cost",
+        "currency",
+        "role",
+        "level1Perk",
+        "level2Perk",
+        "level3Perk",
+        "starterItem",
+        "bestFor",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "currency": {
+          "kind": "chip",
+          "label": "Currency"
+        },
+        "role": {
+          "kind": "plain",
+          "label": "Role"
+        },
+        "level1Perk": {
+          "kind": "detail",
+          "label": "Level 1"
+        },
+        "level2Perk": {
+          "kind": "detail",
+          "label": "Level 2"
+        },
+        "level3Perk": {
+          "kind": "detail",
+          "label": "Level 3"
+        },
+        "starterItem": {
+          "kind": "highlight",
+          "label": "Starter item"
+        },
+        "bestFor": {
+          "kind": "highlight",
+          "label": "Best for"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Intern",
+        "cost": "Free",
+        "currency": "None",
+        "role": "Beginner",
+        "level1Perk": "Start with 10 bonus sanity",
+        "level2Perk": "Start with 15 bonus sanity",
+        "level3Perk": "Start with 20 bonus sanity",
+        "starterItem": "None",
+        "bestFor": "Learning the hospital loop",
+        "cardSummary": "The free starter class. Extra opening sanity is the whole perk, so it is ideal while you learn check-ins and treatment routes."
+      },
+      "system": {
+        "slug": "intern",
+        "section": "Starter and Support",
+        "sortOrder": 10,
+        "image": "/Animal%20Hospital/classes/intern.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nurse",
+        "cost": "20",
+        "currency": "Animal Coins",
+        "role": "Support",
+        "level1Perk": "+1 max inventory capacity",
+        "level2Perk": "+2 max inventory capacity",
+        "level3Perk": "+3 max inventory capacity",
+        "starterItem": "None",
+        "bestFor": "Carrying more tools for the team",
+        "cardSummary": "A cheap support pick that expands how many items you can hold. Strong for players who ferry treatments, coffee, and extinguishers."
+      },
+      "system": {
+        "slug": "nurse",
+        "section": "Starter and Support",
+        "sortOrder": 20,
+        "image": "/Animal%20Hospital/classes/nurse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Secretary",
+        "cost": "120",
+        "currency": "Animal Coins",
+        "role": "Reception",
+        "level1Perk": "Recover 1 sanity when checking in patients",
+        "level2Perk": "Recover sanity on check-in, plus 5 bonus starting sanity",
+        "level3Perk": "Recover sanity on check-in, plus 10 bonus starting sanity",
+        "starterItem": "None",
+        "bestFor": "Desk-focused players",
+        "cardSummary": "Rewards staying on reception. Every clean check-in tops up sanity, so it fits desk mains more than hallway runners."
+      },
+      "system": {
+        "slug": "secretary",
+        "section": "Starter and Support",
+        "sortOrder": 30,
+        "image": "/Animal%20Hospital/classes/secretary.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Doctor",
+        "cost": "900",
+        "currency": "Animal Coins",
+        "role": "Healer",
+        "level1Perk": "Recover 1 sanity when healing patients",
+        "level2Perk": "Recover sanity when healing, plus 15 bonus starting sanity",
+        "level3Perk": "Recover sanity when healing, plus 20 bonus starting sanity",
+        "starterItem": "None",
+        "bestFor": "Treatment-room mains",
+        "cardSummary": "Sanity comes back when you finish healing. Best for players who live in patient rooms more than at the window."
+      },
+      "system": {
+        "slug": "doctor",
+        "section": "Sanity Specialists",
+        "sortOrder": 40,
+        "image": "/Animal%20Hospital/classes/doctor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Psychologist",
+        "cost": "500",
+        "currency": "Animal Coins",
+        "role": "High risk / high reward",
+        "level1Perk": "All sanity gains and losses are doubled",
+        "level2Perk": "Doubled sanity effects, plus 7.5% chance to ignore sanity loss",
+        "level3Perk": "Doubled sanity effects, plus 15% chance to ignore sanity loss",
+        "starterItem": "None",
+        "bestFor": "Experienced sanity management",
+        "cardSummary": "Every sanity hit and heal hits harder. Strong when you control coffee and threats well, rough when you take random damage."
+      },
+      "system": {
+        "slug": "psychologist",
+        "section": "Sanity Specialists",
+        "sortOrder": 50,
+        "image": "/Animal%20Hospital/classes/psychologist.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Surgeon",
+        "cost": "2500",
+        "currency": "Animal Coins",
+        "role": "Healer / mobility",
+        "level1Perk": "Gain sanity and a short speed boost after healing a patient",
+        "level2Perk": "Gain sanity and a longer (8s) speed boost after healing",
+        "level3Perk": "Double sanity recovery and a longer (8s) speed boost after healing, plus 10 bonus starting sanity",
+        "starterItem": "None",
+        "bestFor": "Fast treatment loops",
+        "cardSummary": "Healing patients pays you back with sanity and speed. A top late-game coin class for players who clear rooms nonstop."
+      },
+      "system": {
+        "slug": "surgeon",
+        "section": "Sanity Specialists",
+        "sortOrder": 60,
+        "image": "/Animal%20Hospital/classes/surgeon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Paramedic",
+        "cost": "250",
+        "currency": "Animal Coins",
+        "role": "Mobility",
+        "level1Perk": "Start with Large Speed Cola (6 uses)",
+        "level2Perk": "Start with Large Speed Cola (9 uses)",
+        "level3Perk": "Start with Large Speed Cola (9 uses) that regenerates 1 use each round",
+        "starterItem": "Large Speed Cola",
+        "bestFor": "Covering the whole hospital fast",
+        "cardSummary": "Built for emergencies that spawn across the map. The cola starter lets you reach fires, faints, and rituals before the timer ends."
+      },
+      "system": {
+        "slug": "paramedic",
+        "section": "Combat and Utility",
+        "sortOrder": 70,
+        "image": "/Animal%20Hospital/classes/paramedic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Security",
+        "cost": "1250",
+        "currency": "Animal Coins",
+        "role": "Threat control",
+        "level1Perk": "Start with X-Taser (5 uses)",
+        "level2Perk": "Start with X-Taser (6 uses)",
+        "level3Perk": "Start with X-Taser (6 uses) that regenerates 1 use each round",
+        "starterItem": "X-Taser",
+        "bestFor": "Stopping shapeshifters and bad admits",
+        "cardSummary": "Opens the shift armed. The multi-use taser is perfect for clearing hostiles without sprinting back to the shop box."
+      },
+      "system": {
+        "slug": "security",
+        "section": "Combat and Utility",
+        "sortOrder": 80,
+        "image": "/Animal%20Hospital/classes/security.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Head Nurse",
+        "cost": "190",
+        "currency": "Robux",
+        "role": "Premium support",
+        "level1Perk": "+3 max inventory capacity",
+        "level2Perk": "+3 max inventory capacity and +10 bonus starting sanity",
+        "level3Perk": "+3 max inventory capacity and start each round with the Special Technique upgrade",
+        "starterItem": "None",
+        "bestFor": "Flexible support on every shift",
+        "cardSummary": "A Robux support class with big inventory and later-round utility. Sources list the Robux price slightly differently, so check the lobby shop before buying."
+      },
+      "system": {
+        "slug": "head-nurse",
+        "section": "Premium Classes",
+        "sortOrder": 90,
+        "image": "/Animal%20Hospital/classes/head-nurse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Secret Agent",
+        "cost": "890",
+        "currency": "Robux",
+        "role": "Premium combat",
+        "level1Perk": "Start with a gun (20 uses)",
+        "level2Perk": "Start with a gun (30 uses) and +10 bonus starting sanity",
+        "level3Perk": "Start with a gun (30 uses) that regenerates 1 use each round, plus 20 bonus starting sanity",
+        "starterItem": "Gun",
+        "bestFor": "Deleting hostiles at range",
+        "cardSummary": "The premium combat pick. A loaded gun makes shapeshifters, ghosts, and other threats much safer to handle. Confirm the current Robux price in the class shop."
+      },
+      "system": {
+        "slug": "secret-agent",
+        "section": "Premium Classes",
+        "sortOrder": 100,
+        "image": "/Animal%20Hospital/classes/secret-agent.webp"
+      }
+    }
+  ]
+}

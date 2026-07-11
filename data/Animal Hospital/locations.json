@@ -49,7 +49,36 @@
         "accessNotes",
         "cardSummary"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "wing": {
+          "kind": "plain",
+          "label": "Wing"
+        },
+        "purpose": {
+          "kind": "detail",
+          "label": "Purpose"
+        },
+        "whatYouDo": {
+          "kind": "detail",
+          "label": "What you do"
+        },
+        "hasMinigame": {
+          "kind": "chip",
+          "label": "Minigame"
+        },
+        "minigameType": {
+          "kind": "highlight",
+          "label": "Minigame type"
+        },
+        "accessNotes": {
+          "kind": "detail",
+          "label": "Access"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
     }
   },
   "items": [
@@ -93,12 +122,12 @@
       "item": {
         "name": "Staff Only Room",
         "wing": "Staff Area",
-        "purpose": "A restricted staff zone that holds the in-game shop.",
+        "purpose": "The staff shop area next to restricted staff doors, where the supplies store opens each shift.",
         "whatYouDo": "Buy gear and upgrades from the shop, whose stock is randomized and changes from shift to shift.",
         "hasMinigame": "No",
         "minigameType": "-",
-        "accessNotes": "Staff only; the shop opens briefly around the start of each shift, so visit it early.",
-        "cardSummary": "The hospital's shop, tucked behind a staff door. Its rotating stock and short opening window make it the place to grab upgrades before the night gets busy."
+        "accessNotes": "Shop stock is randomized and the store only opens for a short window near the start of each shift, so visit it early. Nearby NO ACCESS doors are not the shop itself.",
+        "cardSummary": "The hospital's supplies shop in the staff area. Rotating stock and a short opening window make it the place to grab upgrades before the night gets busy."
       },
       "system": {
         "slug": "staff-only-room",
@@ -111,12 +140,12 @@
       "item": {
         "name": "Medical Wing (Rooms 1-5)",
         "wing": "Right Wing",
-        "purpose": "The right-hand wing of five interchangeable rooms that handle standard patient care.",
+        "purpose": "The right-hand wing of five standard patient rooms that all run the same DNA diagnosis and treatment flow.",
         "whatYouDo": "Take an admitted patient to the nearest empty bed, run the DNA diagnosis to find what is wrong, and administer the matching treatment. Any of the five rooms works the same way.",
         "hasMinigame": "No",
         "minigameType": "-",
         "accessNotes": "Rooms 1 through 5; pick whichever bed is free.",
-        "cardSummary": "The standard-care wing where most patients are treated. Because all five rooms are identical, they are grouped here as one area: diagnose, treat, and move to the next free bed."
+        "cardSummary": "The standard-care wing where most patients are treated. Rooms 1-5 share the same care steps even if the furniture layout differs slightly, so pick any free bed."
       },
       "system": {
         "slug": "medical-wing",
@@ -130,7 +159,7 @@
         "name": "Room 6 - X-Ray Room",
         "wing": "Left Wing",
         "purpose": "The left-wing X-Ray room, the first of the three skill-based treatment rooms.",
-        "whatYouDo": "Play a memory minigame: a sequence of colors or squares flashes, and you copy it back in the same order to complete the X-Ray.",
+        "whatYouDo": "Play a memory minigame: about four colors flash in order, and you copy the sequence back to complete the X-Ray. A wrong sequence rolls a new one.",
         "hasMinigame": "Yes",
         "minigameType": "Memory / sequence",
         "accessNotes": "Part of the left-wing emergency rooms; used for patients routed to X-Ray.",
@@ -166,11 +195,11 @@
         "name": "Room 8 - Surgery Room",
         "wing": "Left Wing",
         "purpose": "The left-wing surgery room, the most time-pressured treatment room.",
-        "whatYouDo": "Play a timed item-delivery minigame: after you administer the IV Drop the timer starts, and you fetch and hand over the requested surgical tools across several rounds, each round on about a 45-second clock.",
+        "whatYouDo": "Play a timed surgery minigame: after you give the IV Drop, a single roughly 45-second clock starts for the whole procedure. Deliver the requested tools across several turns (later turns can ask for multiple items at once).",
         "hasMinigame": "Yes",
         "minigameType": "Timed action",
         "accessNotes": "Part of the left-wing emergency rooms; the toughest of the three minigame rooms.",
-        "cardSummary": "The hospital's high-pressure surgery room. Once the IV Drop starts the clock, you have roughly 45 seconds per round to deliver the right tools, making it the area new players misjudge most often."
+        "cardSummary": "The hospital's high-pressure surgery room. Once the IV Drop starts the clock, you have about 45 seconds for the full tool sequence, making it the area new players misjudge most often."
       },
       "system": {
         "slug": "room-8-surgery-room",
