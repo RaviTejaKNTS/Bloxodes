@@ -694,7 +694,7 @@ function ForgeItemCard({
           <h3 className="line-clamp-2 text-lg font-semibold leading-snug text-foreground [word-break:normal] [overflow-wrap:break-word] [hyphens:none] [text-wrap:balance]">
             {presentation.title}
           </h3>
-          <p className="line-clamp-2 text-sm leading-relaxed text-muted [overflow-wrap:anywhere]">
+          <p className="text-sm leading-relaxed text-muted [overflow-wrap:anywhere]">
             {presentation.description || "-"}
           </p>
         </div>

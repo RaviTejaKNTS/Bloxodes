@@ -1,0 +1,368 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "The Strongest Battlegrounds",
+    "gameSlug": "the-strongest-battlegrounds",
+    "collection": "characters",
+    "route": "/wiki/the-strongest-battlegrounds/characters",
+    "catalogCode": "the-strongest-battlegrounds-characters",
+    "sourceItemCount": 14,
+    "itemFields": [
+      "name",
+      "availability",
+      "inspiredBy",
+      "awakeningName",
+      "playstyle",
+      "baseMoves",
+      "ultimateMoves",
+      "unlockNote",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "availability",
+      "inspiredBy",
+      "awakeningName",
+      "playstyle",
+      "baseMoves",
+      "ultimateMoves",
+      "unlockNote",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Availability",
+      "sectionOrder": [
+        "Free Characters",
+        "Early Access Characters",
+        "Exclusive & Limited Characters"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "inspiredBy"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "availability",
+        "inspiredBy",
+        "awakeningName",
+        "playstyle",
+        "baseMoves",
+        "ultimateMoves",
+        "unlockNote"
+      ],
+      "tableFields": [
+        "availability",
+        "inspiredBy",
+        "awakeningName",
+        "playstyle",
+        "baseMoves",
+        "ultimateMoves",
+        "unlockNote",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "inspiredBy": {
+          "kind": "plain",
+          "label": "Inspired By"
+        },
+        "awakeningName": {
+          "kind": "chip",
+          "label": "Awakening"
+        },
+        "playstyle": {
+          "kind": "detail",
+          "label": "Playstyle"
+        },
+        "baseMoves": {
+          "kind": "detail",
+          "label": "Base Moves"
+        },
+        "ultimateMoves": {
+          "kind": "detail",
+          "label": "Ultimate Moves"
+        },
+        "unlockNote": {
+          "kind": "detail",
+          "label": "How to Unlock"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "The Strongest Hero",
+        "availability": "Free",
+        "inspiredBy": "Saitama (One Punch Man)",
+        "awakeningName": "Serious Mode",
+        "playstyle": "Balanced all-rounder with fast M1s, simple-to-advanced combos, and low range or mobility.",
+        "baseMoves": "Normal Punch, Consecutive Punches, Shove, Uppercut",
+        "ultimateMoves": "Death Counter, Table Flip, Serious Punch, Omni-Directional Punch",
+        "unlockNote": "Free for all players.",
+        "cardSummary": "Beginner-friendly free fighter with a mix of fast and heavy hits. Serious Mode lasts until you spend a move or die, trading healing for one-shot ultimate tools."
+      },
+      "system": {
+        "slug": "the-strongest-hero",
+        "section": "Free Characters",
+        "sortOrder": 1,
+        "image": "/The%20Strongest%20Battlegrounds/characters/the-strongest-hero.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hero Hunter",
+        "availability": "Free",
+        "inspiredBy": "Garou (One Punch Man)",
+        "awakeningName": "Rampage",
+        "playstyle": "Close-range grab and burst fighter with a strong counter, but no dedicated mobility tools.",
+        "baseMoves": "Flowing Water, Lethal Whirlwind Stream, Hunter's Grasp, Prey's Peril",
+        "ultimateMoves": "Water Stream Cutting Fist, The Final Hunt, Rock Splitting Fist, Crushed Rock",
+        "unlockNote": "Free for all players.",
+        "cardSummary": "Free martial-arts kit built around grabs, burst damage, and Prey's Peril counters. Best for players comfortable staying in close range during Rampage."
+      },
+      "system": {
+        "slug": "hero-hunter",
+        "section": "Free Characters",
+        "sortOrder": 2,
+        "image": "/The%20Strongest%20Battlegrounds/characters/hero-hunter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hero Hunter (Monster Form)",
+        "availability": "Free",
+        "inspiredBy": "Monster Garou (One Punch Man)",
+        "awakeningName": "Limit Breaker",
+        "playstyle": "Aggressive alternate Garou kit with better range options and high-skill mix-ups.",
+        "baseMoves": "Doom Dive, Crowd Buster, Hammer Heel, Binding Cloth",
+        "ultimateMoves": "Hunter's Mark, Great Fajin, God Slayer, Sky Ripping Fist",
+        "unlockNote": "Free alternate moveset. Open the star next to Hero Hunter and choose Monster Form. No mastery requirement.",
+        "cardSummary": "Free Hero Hunter alternate kit focused on monster-form pressure and Limit Breaker. Also opens a Cosmic Form path after the marked God Slayer route."
+      },
+      "system": {
+        "slug": "hero-hunter-monster-form",
+        "section": "Free Characters",
+        "sortOrder": 3,
+        "image": "/The%20Strongest%20Battlegrounds/characters/hero-hunter-monster-form.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Destructive Cyborg",
+        "availability": "Free",
+        "inspiredBy": "Genos (One Punch Man)",
+        "awakeningName": "Maximum Energy Output",
+        "playstyle": "Mid-to-long range zoning fighter with chip damage and strong gap closers.",
+        "baseMoves": "Machine Gun Blows, Ignition Burst, Blitz Shot, Jet Dive",
+        "ultimateMoves": "Thunder Kick, Speedblitz Dropkick, Flamewave Cannon, Incinerate",
+        "unlockNote": "Free for all players.",
+        "cardSummary": "Free cyborg moveset for players who want mid-range pressure and chip tools. Maximum Energy Output rewards clean spacing more than reckless close-range trades."
+      },
+      "system": {
+        "slug": "destructive-cyborg",
+        "section": "Free Characters",
+        "sortOrder": 4,
+        "image": "/The%20Strongest%20Battlegrounds/characters/destructive-cyborg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Deadly Ninja",
+        "availability": "Free",
+        "inspiredBy": "Speed-o'-Sound Sonic (One Punch Man)",
+        "awakeningName": "Can You Even See Me?",
+        "playstyle": "High-mobility hit-and-run fighter with strong whiff punish tools.",
+        "baseMoves": "Flash Strike, Whirlwind Kick, Scatter, Explosive Shuriken",
+        "ultimateMoves": "Twinblade Rush, Straight On, Carnage, Fourfold Flashstrike",
+        "unlockNote": "Free for all players.",
+        "cardSummary": "Free ninja kit for players who like speed, repositioning, and short engagements. The ultimate keeps reusable tools instead of one-and-done finishers."
+      },
+      "system": {
+        "slug": "deadly-ninja",
+        "section": "Free Characters",
+        "sortOrder": 5,
+        "image": "/The%20Strongest%20Battlegrounds/characters/deadly-ninja.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brutal Demon",
+        "availability": "Free",
+        "inspiredBy": "Metal Bat (One Punch Man)",
+        "awakeningName": "Pumped Up",
+        "playstyle": "Aggressive bat fighter with strong block-breakers and slower M1 speed.",
+        "baseMoves": "Homerun, Beatdown, Grand Slam, Foul Ball",
+        "ultimateMoves": "Savage Tornado, Brutal Beatdown, Strength Difference, Death Blow",
+        "unlockNote": "Free for all players.",
+        "cardSummary": "Free power-focused kit built around bat swings that open blocks and start combos. Pumped Up adds heavy splash tools and a rare instant-kill counter option."
+      },
+      "system": {
+        "slug": "brutal-demon",
+        "section": "Free Characters",
+        "sortOrder": 6,
+        "image": "/The%20Strongest%20Battlegrounds/characters/brutal-demon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blade Master",
+        "availability": "Free",
+        "inspiredBy": "Atomic Samurai (One Punch Man)",
+        "awakeningName": "Scorching Blade",
+        "playstyle": "Technical swordsman with mobility tools, combo extenders, and a base counter.",
+        "baseMoves": "Quick Slice, Atmos Cleave, Pinpoint Cut, Split Second Counter",
+        "ultimateMoves": "Sunset, Solar Cleave, Sunrise, Atomic Slash",
+        "unlockNote": "Free for all players.",
+        "cardSummary": "Free sword kit that rewards tech and timing more than raw button mashing. Split Second Counter turns defense into a combo start when you read the opponent."
+      },
+      "system": {
+        "slug": "blade-master",
+        "section": "Free Characters",
+        "sortOrder": 7,
+        "image": "/The%20Strongest%20Battlegrounds/characters/blade-master.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wild Psychic",
+        "availability": "Free",
+        "inspiredBy": "Tatsumaki (One Punch Man)",
+        "awakeningName": "Berserk",
+        "playstyle": "Grab and multi-target controller with strong keepout and combo extension tools.",
+        "baseMoves": "Crushing Pull, Windstorm Fury, Stone Coffin, Expulsive Push",
+        "ultimateMoves": "Cosmic Strike, Psychic Ricochet, Terrible Tornado, Sky Snatcher",
+        "unlockNote": "Free for all players.",
+        "cardSummary": "Free esper kit for crowd control and keepout. Lower individual hit damage is traded for grabs, multi-target tools, and Berserk pressure."
+      },
+      "system": {
+        "slug": "wild-psychic",
+        "section": "Free Characters",
+        "sortOrder": 8,
+        "image": "/The%20Strongest%20Battlegrounds/characters/wild-psychic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Martial Artist",
+        "availability": "Free",
+        "inspiredBy": "Suiryu (One Punch Man)",
+        "awakeningName": "Dragon's Descent",
+        "playstyle": "Flexible close fighter with strong mobility mix-ups and safer neutral tools.",
+        "baseMoves": "Bullet Barrage, Vanishing Kick, Whirlwind Drop, Head First",
+        "ultimateMoves": "Grand Fissure, Twin Fangs, Earth Splitting Strike, Last Breath",
+        "unlockNote": "Free for all players.",
+        "cardSummary": "Free martial kit built for unpredictable approaches and escapes. Vanishing Kick and Whirlwind Drop give more neutral flexibility than raw damage."
+      },
+      "system": {
+        "slug": "martial-artist",
+        "section": "Free Characters",
+        "sortOrder": 9,
+        "image": "/The%20Strongest%20Battlegrounds/characters/martial-artist.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tech Prodigy",
+        "availability": "Free",
+        "inspiredBy": "Child Emperor (One Punch Man)",
+        "awakeningName": "Iron Giant",
+        "playstyle": "Zoning and AoE pressure kit that forces opponents to respect long windups.",
+        "baseMoves": "Weboom, Plasma Cannon, Trinity Tear, Twin Burst",
+        "ultimateMoves": "Photon Edge, Photon Dive, Conquest, Missiles",
+        "unlockNote": "Free for all players. Formerly Early Access before the kit finished.",
+        "cardSummary": "Free gadget fighter for zoning and team-fight AoE. Slow startups make it punishable, but the kit can lock down space once the pressure sticks."
+      },
+      "system": {
+        "slug": "tech-prodigy",
+        "section": "Free Characters",
+        "sortOrder": 10,
+        "image": "/The%20Strongest%20Battlegrounds/characters/tech-prodigy.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Undying Hero",
+        "availability": "Early Access",
+        "inspiredBy": "Zombieman (One Punch Man)",
+        "awakeningName": "Unkillable",
+        "playstyle": "Weapon-swapping hybrid with axe and pistol tools, strong multi-target hits, and limited mobility.",
+        "baseMoves": "Grave Maker, Blast Breaker, Point Blank, Crossfire",
+        "ultimateMoves": null,
+        "unlockNote": "Requires the Early Access gamepass while unfinished. Becomes free after the character is finished.",
+        "cardSummary": "Current Early Access fighter based on Zombieman. Base kit is complete with four weapon-driven moves, while the Unkillable ultimate move list is still unfinished in public sources."
+      },
+      "system": {
+        "slug": "undying-hero",
+        "section": "Early Access Characters",
+        "sortOrder": 11,
+        "image": "/The%20Strongest%20Battlegrounds/characters/undying-hero.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sorcerer",
+        "availability": "Exclusive",
+        "inspiredBy": "Satoru Gojo (Jujutsu Kaisen)",
+        "awakeningName": null,
+        "playstyle": "Private-server power fantasy with Infinity defense and multi-one-shot tools.",
+        "baseMoves": "Infinity, Attract, Repulse, Erase",
+        "ultimateMoves": null,
+        "unlockNote": "Private Server+ exclusive. Usable by the private server owner with the Private Server+ gamepass. Not a normal public-server competitive pick.",
+        "cardSummary": "Exclusive Gojo-inspired kit locked behind Private Server+. Infinity toggles defense and empowered tools, and the kit has no standard Awakening mode."
+      },
+      "system": {
+        "slug": "sorcerer",
+        "section": "Exclusive & Limited Characters",
+        "sortOrder": 12,
+        "image": "/The%20Strongest%20Battlegrounds/characters/sorcerer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "KJ",
+        "availability": "Limited",
+        "inspiredBy": "KJ Final Ride parody",
+        "awakeningName": "20 Series",
+        "playstyle": "Overpowered limited joke kit with high damage and special private-server access rules.",
+        "baseMoves": "Ravage, Swift Sweep, Collateral Ruin, Spiraling Storm",
+        "ultimateMoves": "Stoic Bomb, 20-20-20 Dropkick, Five Seasons, Unlimited Flex Works",
+        "unlockNote": "Limited exclusive access. Typically private-server only, with occasional temporary unlocks or donation-leaderboard access. Not a normal free public pick.",
+        "cardSummary": "Limited parody moveset with intentionally broken damage tools and the 20 Series ultimate. Treat it as a special-access character, not part of the free public roster."
+      },
+      "system": {
+        "slug": "kj",
+        "section": "Exclusive & Limited Characters",
+        "sortOrder": 13,
+        "image": "/The%20Strongest%20Battlegrounds/characters/kj.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Frozen Soul",
+        "availability": "Limited",
+        "inspiredBy": "Winter event boss",
+        "awakeningName": null,
+        "playstyle": "Juggernaut ice boss kit with heavy AoE pressure and high durability.",
+        "baseMoves": "Permafrost, Frost Forge, Freezing Path, Judgement Chain",
+        "ultimateMoves": "Sub-Zero Slash Storm",
+        "unlockNote": "No longer a standard public character pick. Can still be spawned or used through the Fractal of Tundra path with Private Server+.",
+        "cardSummary": "Limited winter-boss moveset kept as a special-access kit rather than a free public fighter. Sources document the full base ice kit and at least one ultimate tool."
+      },
+      "system": {
+        "slug": "the-frozen-soul",
+        "section": "Exclusive & Limited Characters",
+        "sortOrder": 14,
+        "image": "/The%20Strongest%20Battlegrounds/characters/the-frozen-soul.webp"
+      }
+    }
+  ]
+}

@@ -6,5 +6,11 @@ export const theStrongestBattlegroundsCollectionGroup = {
     universeId: 3808081382,
     dataDir: "The Strongest Battlegrounds",
     universeNames: ["The Strongest Battlegrounds"],
-    collections: ["accessories"]
+    collections: [
+      "accessories",
+      "auras",
+      "titles",
+      "limited-emotes",
+      "characters"
+    ]
   } satisfies GameCollectionGroup;

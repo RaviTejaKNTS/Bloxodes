@@ -80,14 +80,14 @@
         "unlockMethod": "Free",
         "killsRequired": null,
         "inspiredBy": null,
-        "cardSummary": "A default cosmetic available to all players from the start with no unlock needed.",
+        "cardSummary": "Default accessory available to every player with no kill requirement.",
         "notes": null
       },
       "system": {
         "slug": "blocky-body",
         "section": "Free Accessories",
         "sortOrder": 1,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/blocky-body.webp"
       }
     },
     {
@@ -96,14 +96,14 @@
         "unlockMethod": "Free",
         "killsRequired": null,
         "inspiredBy": "Monster Form Hero Hunter",
-        "cardSummary": "A free default accessory worn as a cloth wrap, inspired by Monster Form Hero Hunter's spiral-patterned appearance.",
+        "cardSummary": "Free starter accessory matched to Monster Form Hero Hunter.",
         "notes": null
       },
       "system": {
         "slug": "spiral-cloth",
         "section": "Free Accessories",
         "sortOrder": 2,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/spiral-cloth.webp"
       }
     },
     {
@@ -112,14 +112,14 @@
         "unlockMethod": "25 Kills",
         "killsRequired": 25,
         "inspiredBy": "The Strongest Hero",
-        "cardSummary": "Red fighting gloves with detailed finger sculpting, inspired by The Strongest Hero's iconic look. The first kill-milestone reward.",
+        "cardSummary": "Unlocks at 25 lifetime kills. Matched to The Strongest Hero.",
         "notes": null
       },
       "system": {
         "slug": "red-gloves",
         "section": "Kill Milestone Accessories",
         "sortOrder": 3,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/red-gloves.webp"
       }
     },
     {
@@ -128,14 +128,14 @@
         "unlockMethod": "75 Kills",
         "killsRequired": 75,
         "inspiredBy": "Hero Hunter",
-        "cardSummary": "A short waist sash referencing Hero Hunter's martial arts style.",
+        "cardSummary": "Unlocks at 75 lifetime kills. Matched to Hero Hunter.",
         "notes": null
       },
       "system": {
         "slug": "short-sash",
         "section": "Kill Milestone Accessories",
         "sortOrder": 4,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/short-sash.webp"
       }
     },
     {
@@ -144,14 +144,14 @@
         "unlockMethod": "150 Kills",
         "killsRequired": 150,
         "inspiredBy": "Hero Hunter",
-        "cardSummary": "A longer waist sash, continuing the Hero Hunter aesthetic at the next kill tier.",
+        "cardSummary": "Unlocks at 150 lifetime kills. Matched to Hero Hunter.",
         "notes": null
       },
       "system": {
         "slug": "long-sash",
         "section": "Kill Milestone Accessories",
         "sortOrder": 5,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/long-sash.webp"
       }
     },
     {
@@ -160,14 +160,14 @@
         "unlockMethod": "300 Kills",
         "killsRequired": 300,
         "inspiredBy": "Hero Hunter",
-        "cardSummary": "Wrapped bandages across the body, mirroring Hero Hunter's battle-worn look after intense fights.",
-        "notes": null
+        "cardSummary": "Unlocks at 300 lifetime kills. Matched to Hero Hunter.",
+        "notes": "Takes a blood-soaked damaged form as the wearer loses hit points."
       },
       "system": {
         "slug": "bandages",
         "section": "Kill Milestone Accessories",
         "sortOrder": 6,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/bandages.webp"
       }
     },
     {
@@ -176,14 +176,14 @@
         "unlockMethod": "600 Kills",
         "killsRequired": 600,
         "inspiredBy": "Deadly Ninja",
-        "cardSummary": "A purple scarf that flutters backwards when worn, matching Deadly Ninja's signature color and style.",
+        "cardSummary": "Unlocks at 600 lifetime kills. Matched to Deadly Ninja.",
         "notes": null
       },
       "system": {
         "slug": "purple-scarf",
         "section": "Kill Milestone Accessories",
         "sortOrder": 7,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/purple-scarf.webp"
       }
     },
     {
@@ -192,7 +192,7 @@
         "unlockMethod": "900 Kills",
         "killsRequired": 900,
         "inspiredBy": null,
-        "cardSummary": "A plain white scarf cosmetic unlocked at 900 lifetime kills.",
+        "cardSummary": "Unlocks at 900 lifetime kills.",
         "notes": null
       },
       "system": {
@@ -208,14 +208,14 @@
         "unlockMethod": "1,200 Kills",
         "killsRequired": 1200,
         "inspiredBy": "Deep Sea King",
-        "cardSummary": "A regal cape drawn from Deep Sea King's imposing appearance, unlocked at 1,200 kills.",
+        "cardSummary": "Unlocks at 1,200 lifetime kills. Matched to Deep Sea King.",
         "notes": null
       },
       "system": {
         "slug": "royal-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 9,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/royal-cape.webp"
       }
     },
     {
@@ -224,14 +224,14 @@
         "unlockMethod": "2,000 Kills",
         "killsRequired": 2000,
         "inspiredBy": null,
-        "cardSummary": "A cape with an uneven, jagged hem unlocked at 2,000 kills.",
+        "cardSummary": "Unlocks at 2,000 lifetime kills.",
         "notes": null
       },
       "system": {
         "slug": "jagged-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 10,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/jagged-cape.webp"
       }
     },
     {
@@ -240,14 +240,14 @@
         "unlockMethod": "2,800 Kills",
         "killsRequired": 2800,
         "inspiredBy": "Blade Master / Lord Boros",
-        "cardSummary": "A dominant cape inspired by both Blade Master and Lord Boros, signaling a high kill count to opponents.",
+        "cardSummary": "Unlocks at 2,800 lifetime kills. Matched to Blade Master and Lord Boros.",
         "notes": null
       },
       "system": {
         "slug": "conqueror-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 11,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/conqueror-cape.webp"
       }
     },
     {
@@ -256,14 +256,14 @@
         "unlockMethod": "3,200 Kills",
         "killsRequired": 3200,
         "inspiredBy": "The Strongest Hero",
-        "cardSummary": "The classic white cape worn by The Strongest Hero, earned at 3,200 kills.",
+        "cardSummary": "Unlocks at 3,200 lifetime kills. Matched to The Strongest Hero.",
         "notes": null
       },
       "system": {
         "slug": "white-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 12,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/white-cape.webp"
       }
     },
     {
@@ -272,14 +272,14 @@
         "unlockMethod": "3,600 Kills",
         "killsRequired": 3600,
         "inspiredBy": "The Strongest Hero",
-        "cardSummary": "A tattered version of The Strongest Hero's cape, showing signs of battle at 3,600 kills.",
+        "cardSummary": "Unlocks at 3,600 lifetime kills. Matched to The Strongest Hero.",
         "notes": null
       },
       "system": {
         "slug": "torn-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 13,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/torn-cape.webp"
       }
     },
     {
@@ -288,14 +288,14 @@
         "unlockMethod": "4,300 Kills",
         "killsRequired": 4300,
         "inspiredBy": "Death Gatling",
-        "cardSummary": "A heavily worn cape referencing Death Gatling's look, unlocked at 4,300 kills.",
+        "cardSummary": "Unlocks at 4,300 lifetime kills. Matched to Death Gatling.",
         "notes": null
       },
       "system": {
         "slug": "tattered-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 14,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/tattered-cape.webp"
       }
     },
     {
@@ -304,14 +304,14 @@
         "unlockMethod": "5,200 Kills",
         "killsRequired": 5200,
         "inspiredBy": null,
-        "cardSummary": "A faded, well-used cape cosmetic earned after reaching 5,200 lifetime kills.",
+        "cardSummary": "Unlocks at 5,200 lifetime kills.",
         "notes": null
       },
       "system": {
         "slug": "worn-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 15,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/worn-cape.webp"
       }
     },
     {
@@ -320,14 +320,14 @@
         "unlockMethod": "6,200 Kills",
         "killsRequired": 6200,
         "inspiredBy": "Puri-Puri Prisoner",
-        "cardSummary": "A shackle worn on the leg, inspired by Puri-Puri Prisoner's incarcerated look. Unlocked at 6,200 kills.",
+        "cardSummary": "Unlocks at 6,200 lifetime kills. Matched to Puri-Puri Prisoner.",
         "notes": null
       },
       "system": {
         "slug": "leg-iron",
         "section": "Kill Milestone Accessories",
         "sortOrder": 16,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/leg-iron.webp"
       }
     },
     {
@@ -336,14 +336,14 @@
         "unlockMethod": "6,600 Kills",
         "killsRequired": 6600,
         "inspiredBy": null,
-        "cardSummary": "A sash tied around the waist, unlocked at 6,600 kills.",
+        "cardSummary": "Unlocks at 6,600 lifetime kills.",
         "notes": null
       },
       "system": {
         "slug": "waist-sash",
         "section": "Kill Milestone Accessories",
         "sortOrder": 17,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/waist-sash.webp"
       }
     },
     {
@@ -352,14 +352,14 @@
         "unlockMethod": "7,000 Kills",
         "killsRequired": 7000,
         "inspiredBy": "Hero Hunter",
-        "cardSummary": "An additional layer of bandage wrapping inspired by Hero Hunter's heavily-bandaged post-battle form.",
+        "cardSummary": "Unlocks at 7,000 lifetime kills. Matched to Hero Hunter.",
         "notes": null
       },
       "system": {
         "slug": "bandage-wrap",
         "section": "Kill Milestone Accessories",
         "sortOrder": 18,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/bandage-wrap.webp"
       }
     },
     {
@@ -368,7 +368,7 @@
         "unlockMethod": "7,500 Kills",
         "killsRequired": 7500,
         "inspiredBy": null,
-        "cardSummary": "A simple headband cosmetic unlocked at 7,500 kills.",
+        "cardSummary": "Unlocks at 7,500 lifetime kills.",
         "notes": null
       },
       "system": {
@@ -384,7 +384,7 @@
         "unlockMethod": "8,000 Kills",
         "killsRequired": 8000,
         "inspiredBy": null,
-        "cardSummary": "A frayed, damaged headband showing wear from battle, earned at 8,000 kills.",
+        "cardSummary": "Unlocks at 8,000 lifetime kills.",
         "notes": null
       },
       "system": {
@@ -400,7 +400,7 @@
         "unlockMethod": "8,500 Kills",
         "killsRequired": 8500,
         "inspiredBy": null,
-        "cardSummary": "A dark scarf with a bloodied appearance, unlocked at 8,500 kills.",
+        "cardSummary": "Unlocks at 8,500 lifetime kills.",
         "notes": null
       },
       "system": {
@@ -416,7 +416,7 @@
         "unlockMethod": "9,000 Kills",
         "killsRequired": 9000,
         "inspiredBy": null,
-        "cardSummary": "A cape trimmed with fur, earned at 9,000 lifetime kills.",
+        "cardSummary": "Unlocks at 9,000 lifetime kills.",
         "notes": null
       },
       "system": {
@@ -432,7 +432,7 @@
         "unlockMethod": "9,500 Kills",
         "killsRequired": 9500,
         "inspiredBy": null,
-        "cardSummary": "A cape with sharp, protruding spikes along the edge, unlocked at 9,500 kills.",
+        "cardSummary": "Unlocks at 9,500 lifetime kills.",
         "notes": null
       },
       "system": {
@@ -448,14 +448,14 @@
         "unlockMethod": "10,000 Kills",
         "killsRequired": 10000,
         "inspiredBy": "Mahoraga",
-        "cardSummary": "A large rotating wheel cosmetic inspired by Mahoraga from Jujutsu Kaisen, earned at the 10,000 kill milestone.",
+        "cardSummary": "Unlocks at 10,000 lifetime kills. Matched to Mahoraga.",
         "notes": "Rotates and plays a sound when the wearer ragdoll cancels, dies, emotes, or awakens."
       },
       "system": {
         "slug": "divine-wheel",
         "section": "Kill Milestone Accessories",
         "sortOrder": 24,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/divine-wheel.webp"
       }
     },
     {
@@ -464,14 +464,14 @@
         "unlockMethod": "10,500 Kills",
         "killsRequired": 10500,
         "inspiredBy": null,
-        "cardSummary": "A sand-colored cape with a desert aesthetic, unlocked at 10,500 kills.",
+        "cardSummary": "Unlocks at 10,500 lifetime kills.",
         "notes": null
       },
       "system": {
         "slug": "desert-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 25,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/desert-cape.webp"
       }
     },
     {
@@ -480,14 +480,14 @@
         "unlockMethod": "12,500 Kills",
         "killsRequired": 12500,
         "inspiredBy": null,
-        "cardSummary": "An authoritative-looking cape earned at 12,500 kills.",
+        "cardSummary": "Unlocks at 12,500 lifetime kills.",
         "notes": null
       },
       "system": {
         "slug": "warden-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 26,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/warden-cape.webp"
       }
     },
     {
@@ -496,14 +496,14 @@
         "unlockMethod": "15,000 Kills",
         "killsRequired": 15000,
         "inspiredBy": null,
-        "cardSummary": "A cape with a web-like pattern, earned at the 15,000 kill milestone.",
+        "cardSummary": "Unlocks at 15,000 lifetime kills.",
         "notes": null
       },
       "system": {
         "slug": "webbed-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 27,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/webbed-cape.webp"
       }
     },
     {
@@ -512,14 +512,14 @@
         "unlockMethod": "17,500 Kills",
         "killsRequired": 17500,
         "inspiredBy": null,
-        "cardSummary": "A regal cape befitting a ruler, unlocked at 17,500 kills.",
+        "cardSummary": "Unlocks at 17,500 lifetime kills.",
         "notes": null
       },
       "system": {
         "slug": "ruler-cape",
         "section": "Kill Milestone Accessories",
         "sortOrder": 28,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/ruler-cape.webp"
       }
     },
     {
@@ -528,14 +528,14 @@
         "unlockMethod": "20,000 Kills",
         "killsRequired": 20000,
         "inspiredBy": "Serpent Hashira",
-        "cardSummary": "The highest kill-milestone accessory at 20,000 kills, inspired by the Serpent Hashira from Demon Slayer.",
+        "cardSummary": "Highest kill-milestone accessory. Unlocks at 20,000 lifetime kills. Matched to Serpent Hashira.",
         "notes": null
       },
       "system": {
         "slug": "slinky",
         "section": "Kill Milestone Accessories",
         "sortOrder": 29,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/slinky.webp"
       }
     },
     {
@@ -544,14 +544,14 @@
         "unlockMethod": "VIP Gamepass",
         "killsRequired": null,
         "inspiredBy": null,
-        "cardSummary": "A cape that VIP Gamepass holders can personalize with any Roblox Decal ID. Requires the VIP Gamepass (299 Robux). Also grants a VIP chat tag and the ability to hide your kill count.",
-        "notes": "VIP Gamepass costs 299 Robux. Cape appearance is set using a Roblox Decal ID of the player's choosing."
+        "cardSummary": "Unlocked only with the VIP Gamepass. Appearance can be set with a Roblox Decal ID.",
+        "notes": "VIP Gamepass is listed at 299 Robux on the fan wiki. Cannot be unlocked by kill grinding."
       },
       "system": {
         "slug": "custom-cape",
         "section": "Special Unlock Accessories",
         "sortOrder": 30,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/custom-cape.webp"
       }
     },
     {
@@ -560,14 +560,14 @@
         "unlockMethod": "Roblox Group",
         "killsRequired": null,
         "inspiredBy": null,
-        "cardSummary": "A cape exclusive to members of the official The Strongest Battlegrounds Roblox group. Free to obtain for group members.",
-        "notes": "Join the official TSB Roblox group to unlock this cape at no Robux cost."
+        "cardSummary": "Unlocked by joining the official The Strongest Battlegrounds Roblox group.",
+        "notes": "Group membership only; no kill requirement and no Robux cost for the cape itself."
       },
       "system": {
         "slug": "guild-cape",
         "section": "Special Unlock Accessories",
         "sortOrder": 31,
-        "image": null
+        "image": "/The%20Strongest%20Battlegrounds/Accessories/guild-cape.webp"
       }
     }
   ]
