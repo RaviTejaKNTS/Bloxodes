@@ -174,6 +174,70 @@ body {
     transform: none;
   }
 
+  /*
+   * Journey scans direct children of #article-body. Keep catalog cards as
+   * direct block-level children, while allowing every non-card child
+   * (including ad elements inserted at runtime) to span the full grid.
+   */
+  .journey-content-stream {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .journey-content-stream > * {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+
+  .journey-content-stream > [data-journey-item] {
+    grid-column: auto;
+  }
+
+  @media (min-width: 420px) {
+    .journey-content-stream--decals {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 640px) {
+    .journey-content-stream--options {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .journey-content-stream--music {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--decals {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .journey-content-stream--options {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .journey-content-stream--decals {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .journey-content-stream--music {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .journey-content-stream--decals {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
   .stats-surface {
     font-size: 0.95rem;
     letter-spacing: 0;

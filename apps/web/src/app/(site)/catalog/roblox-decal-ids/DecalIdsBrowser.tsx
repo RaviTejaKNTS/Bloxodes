@@ -228,7 +228,7 @@ export function DecalIdsBrowser({
   }
 
   return (
-    <div className="catalog-surface space-y-6">
+    <>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:flex-row md:items-end">
         <div className="flex-1 space-y-2">
           <label htmlFor="decal-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
@@ -289,11 +289,13 @@ export function DecalIdsBrowser({
           No decal IDs have been collected yet. Check back soon.
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-4 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+        <>
           {decals.map((decal) => (
-            <DecalCard key={decal.asset_id} decal={decal} />
+            <div key={decal.asset_id} data-journey-item className="h-full">
+              <DecalCard decal={decal} />
+            </div>
           ))}
-        </div>
+        </>
       )}
 
       <PagePagination
@@ -302,6 +304,6 @@ export function DecalIdsBrowser({
         totalPages={totalPages}
         query={searchQueryString || undefined}
       />
-    </div>
+    </>
   );
 }

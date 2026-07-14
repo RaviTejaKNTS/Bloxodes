@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd } from "@/lib/seo";
@@ -9,7 +8,7 @@ import {
   BASE_PATH,
   MusicBreadcrumb,
   MusicCatalogNav,
-  MusicIdGrid,
+  MusicIdItems,
   buildMusicItemListSchema,
   loadArtistMusicIdsPageData,
   loadArtistOptionBySlug
@@ -107,19 +106,15 @@ export default async function ArtistMusicIdsPage({ params }: PageProps) {
         />
       </header>
 
-      <CatalogAdSlot />
-
-      <MusicCatalogNav active="artists" />
-
-      <MusicIdGrid songs={songs} />
-
-      <PagePagination
-        basePath={`${BASE_PATH}/artists/${artist.slug}`}
-        currentPage={1}
-        totalPages={totalPages}
-      />
-
-      <CatalogAdSlot />
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--music">
+        <MusicCatalogNav active="artists" />
+        <MusicIdItems songs={songs} />
+        <PagePagination
+          basePath={`${BASE_PATH}/artists/${artist.slug}`}
+          currentPage={1}
+          totalPages={totalPages}
+        />
+      </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

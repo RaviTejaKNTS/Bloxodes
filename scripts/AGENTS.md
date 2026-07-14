@@ -16,6 +16,8 @@ These files are operational jobs, imports, backfills, collectors, and automation
 
 - `dev/`: local development launch guards. `start-local-dev.ts` powers `npm run dev:local`, loads `.env.local` through the shared env loader, and refuses to start if `SUPABASE_URL` is not local.
 - `ads/`: build-time ad and policy helpers.
+  - `audit-journey-catalog-dom.ts` is the read-only local DOM guard for every Music IDs and Decal IDs route shape. Start the local web app, then run `npm run audit:journey-dom -- --base-url http://127.0.0.1:<port>`; it requires exactly one `#article-body`, direct block-level `data-journey-item` children, and no manual Mediavine content hints.
+  - `audit-journey-catalog-browser.ts` verifies the hydrated content stream at desktop and mobile widths and inserts a synthetic direct child to prove an in-content placement spans the full lane. Run `npm run audit:journey-browser -- --base-url http://127.0.0.1:<port>`.
 - `articles/`: article generation and article refresh.
 - `automation/`: queue runners, IndexNow/bootstrap helpers, Google Indexing API submitter, cache warming, reporting.
   - `google-indexing-submit.ts` is a guarded Google Indexing API job. It loads `.env.indexing*`, requires `--apply` plus `GOOGLE_INDEXING_API_ENABLED=true` before calling Google, and should use Supabase state in recurring production/GitHub runs so the daily cap and URL rotation persist.

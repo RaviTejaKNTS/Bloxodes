@@ -24,6 +24,8 @@
     "supabase:push:local": "supabase db push --local",
     "supabase:push:dry": "supabase db push --dry-run",
     "ads:update": "tsx scripts/ads/update-ads-txt.ts",
+    "audit:journey-dom": "tsx scripts/ads/audit-journey-catalog-dom.ts",
+    "audit:journey-browser": "tsx scripts/ads/audit-journey-catalog-browser.ts",
     "indexnow:bootstrap": "tsx scripts/automation/indexnow-bootstrap.ts",
     "cache:warm": "node scripts/automation/warm-cloudflare-cache.mjs",
     "cloudflare:emergency-cache": "node scripts/automation/cloudflare-emergency-cache.mjs",

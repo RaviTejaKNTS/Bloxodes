@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ContentFaq } from "@/components/ContentFaq";
 import { MoreCatalogs } from "@/components/more-content";
@@ -444,23 +443,28 @@ export function renderRobloxDecalCategoriesPage({
         <p className="max-w-3xl text-base leading-7 text-muted">{description}</p>
       </header>
 
-      <DecalCatalogNav active="categories" />
+      <section
+        id="article-body"
+        itemProp="articleBody"
+        className="journey-content-stream journey-content-stream--options"
+      >
+        <DecalCatalogNav active="categories" />
 
-      <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {categories.map((category) => (
-          <a
-            key={category.slug}
-            href={buildDecalCategoryPath(category.slug)}
-            className="rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/60"
-          >
-            <div className="flex items-start justify-between gap-4">
-              <h2 className="text-xl font-semibold text-foreground">{category.label}</h2>
-              <span className="rounded-md border border-border/70 bg-background/60 px-2 py-1 text-xs font-semibold text-muted">
-                {formatCount(category.count)}
-              </span>
-            </div>
-            <p className="mt-3 text-sm leading-6 text-muted">{category.description}</p>
-          </a>
+          <div key={category.slug} data-journey-item className="h-full">
+            <a
+              href={buildDecalCategoryPath(category.slug)}
+              className="block h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-accent/60"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h2 className="text-xl font-semibold text-foreground">{category.label}</h2>
+                <span className="rounded-md border border-border/70 bg-background/60 px-2 py-1 text-xs font-semibold text-muted">
+                  {formatCount(category.count)}
+                </span>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-muted">{category.description}</p>
+            </a>
+          </div>
         ))}
       </section>
 
@@ -665,10 +669,8 @@ export function renderRobloxDecalIdsPage({
         </header>
       )}
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--decals">
         {introNodes ? introNodes : null}
-
-        <CatalogAdSlot />
 
         <DecalCatalogNav active={activeNav} />
 
@@ -680,8 +682,6 @@ export function renderRobloxDecalIdsPage({
           section={section}
           category={category?.slug ?? null}
         />
-
-        <CatalogAdSlot />
 
         {showHero && hasDetails ? (
           <>

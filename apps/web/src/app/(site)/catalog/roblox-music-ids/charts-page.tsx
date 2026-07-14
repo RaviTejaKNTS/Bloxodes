@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
@@ -152,8 +151,6 @@ export async function MusicChartsPage({
         />
       </header>
 
-      <CatalogAdSlot />
-
       <MusicCatalogNav active="charts" />
 
       <nav className="flex flex-wrap gap-2" aria-label="Music chart range">
@@ -184,8 +181,6 @@ export async function MusicChartsPage({
         totalPages={totalPages}
         query={`range=${range}`}
       />
-
-      <CatalogAdSlot />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
@@ -111,15 +110,11 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
         />
       </header>
 
-      <CatalogAdSlot />
-
       <MusicCatalogNav active={config.activeNav} />
 
       <TrendingMusicList songs={songs} startIndex={(pageNumber - 1) * PAGE_SIZE} />
 
       <PagePagination basePath={config.path} currentPage={pageNumber} totalPages={totalPages} />
-
-      <CatalogAdSlot />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

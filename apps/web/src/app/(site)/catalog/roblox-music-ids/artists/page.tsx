@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
@@ -78,15 +77,11 @@ export default async function MusicIdArtistsPage() {
         />
       </header>
 
-      <CatalogAdSlot />
-
-      <MusicCatalogNav active="artists" />
-
-      {buildArtistCards(artists)}
-
-      <PagePagination basePath={`${BASE_PATH}/artists`} currentPage={1} totalPages={totalPages} />
-
-      <CatalogAdSlot />
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--options">
+        <MusicCatalogNav active="artists" />
+        {buildArtistCards(artists)}
+        <PagePagination basePath={`${BASE_PATH}/artists`} currentPage={1} totalPages={totalPages} />
+      </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />
