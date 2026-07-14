@@ -3,6 +3,7 @@ import sanitizeHtml from "sanitize-html";
 import type { IOptions } from "sanitize-html";
 import { load, type CheerioAPI, type Cheerio } from "cheerio";
 import type { Element } from "domhandler";
+import { injectYouTubeEmbeds, stripArticleMediaForPlainText } from "@/lib/article-media";
 
 // Configure marked with basic options
 marked.setOptions({
@@ -75,6 +76,8 @@ const sanitizeOptions: IOptions = {
     img: ["http", "https", "data"]
   },
   allowProtocolRelative: false,
+  // Only privacy-friendly YouTube embeds from our markdown directive.
+  allowedIframeHostnames: ["www.youtube-nocookie.com", "youtube-nocookie.com"],
   selfClosing: ["img", "br", "hr"],
   disallowedTagsMode: "discard"
 };
@@ -84,63 +87,6 @@ const BLANK_LINE_MARKER = '<p class="md-spacer"></p>';
 type RenderMarkdownOptions = {
   paragraphizeLineBreaks?: boolean;
 };
-
-const YOUTUBE_DIRECTIVE = /\{\{\s*youtube\s*:\s*([^\}]+?)\s*\}\}/gi;
-
-function extractYouTubeId(raw: string): string | null {
-  const value = raw.trim();
-  if (!value) return null;
-
-  if (/^[a-zA-Z0-9_-]{6,}$/.test(value)) {
-    return value;
-  }
-
-  try {
-    const url = new URL(value);
-    const host = url.hostname.replace(/^www\./, "");
-
-    if (host === "youtu.be") {
-      return url.pathname.replace(/^\/+/, "").split("/")[0] || null;
-    }
-
-    if (host === "youtube.com" || host === "m.youtube.com" || host === "music.youtube.com") {
-      const id = url.searchParams.get("v");
-      if (id) return id;
-      const pathParts = url.pathname.split("/").filter(Boolean);
-      const embedIndex = pathParts.indexOf("embed");
-      if (embedIndex >= 0 && pathParts[embedIndex + 1]) return pathParts[embedIndex + 1];
-      const shortsIndex = pathParts.indexOf("shorts");
-      if (shortsIndex >= 0 && pathParts[shortsIndex + 1]) return pathParts[shortsIndex + 1];
-    }
-  } catch {
-    return null;
-  }
-
-  return null;
-}
-
-function injectYouTubeEmbeds(markdown: string): string {
-  if (!markdown || !markdown.includes("youtube")) {
-    return markdown;
-  }
-
-  return markdown.replace(YOUTUBE_DIRECTIVE, (_match, rawValue) => {
-    const videoId = extractYouTubeId(String(rawValue));
-    if (!videoId) return _match;
-
-    return [
-      '<div class="video-embed">',
-      `<iframe src="https://www.youtube-nocookie.com/embed/${videoId}"`,
-      'title="YouTube video player"',
-      'frameborder="0"',
-      'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"',
-      'allowfullscreen',
-      'loading="lazy"',
-      'referrerpolicy="strict-origin-when-cross-origin"></iframe>',
-      "</div>"
-    ].join(" ");
-  });
-}
 
 function preserveBlankLineSpacing(markdown: string): string {
   const lines = markdown.split(/\r?\n/);
@@ -570,14 +516,12 @@ export async function renderMarkdown(markdown: string, options: RenderMarkdownOp
  */
 export function markdownToPlainText(markdown: string): string {
   if (!markdown) return '';
-  
-  return markdown
+
+  return stripArticleMediaForPlainText(markdown)
     // Remove HTML tags
     .replace(/<[^>]*>?/gm, '')
     // Remove markdown links
     .replace(/\[(.*?)\]\(.*?\)/g, '$1')
-    // Remove markdown images
-    .replace(/!\[.*?\]\(.*?\)/g, '')
     // Remove markdown formatting
     .replace(/[#*_~`>]/g, '')
     // Remove multiple spaces and line breaks

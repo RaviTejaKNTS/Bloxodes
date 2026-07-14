@@ -50,6 +50,7 @@
     "upsert:puzzle-pages": "tsx scripts/puzzles/upsert-puzzle-page-copy.ts",
     "rewrite:codes": "tsx scripts/codes/rewrite-codes-articles.ts",
     "content:check-copy": "tsx scripts/content/check-public-copy.ts",
+    "content:save-article-image": "tsx scripts/content/save-article-image.ts",
     "import:content-final": "tsx scripts/content/import-content-final.ts",
     "import:tool-finals": "tsx scripts/content/import-tool-finals.ts",
     "verify:article-finals": "tsx scripts/content/verify-article-finals.ts",

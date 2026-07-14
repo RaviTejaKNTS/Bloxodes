@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Article Workflow Runner"
-  short_description: "Run article research, subagent writing, and QA"
-  default_prompt: "Use /bloxodes-article-workflow-runner for approved article ideas. One research subagent per article, then parent brief approval, then a separate writing subagent. Approve briefs only when facts and player texture are solid. Review finals for calm gaming-site flow, simple language, and accuracy. Run verify:article-finals, preview localhost pages, and return links."
+  short_description: "Run subagent article research, writing, and QA"
+  default_prompt: "Use $bloxodes-article-workflow-runner to run approved article ideas with separate research and writing subagents, verify each final, and preview it in an available real browser such as Chrome."

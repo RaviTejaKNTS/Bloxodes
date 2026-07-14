@@ -1,11 +1,11 @@
 ---
 name: bloxodes-article-research
-description: Research one approved Bloxodes article idea and create brief.md before writing. Use for article evidence checks, source coverage, production overlap, related page-type overlap, title promise, outline, player texture, facts to use, facts to avoid, and open gaps. Do not write final.json.
+description: Research one approved Bloxodes article idea and create brief.md before writing. Use for article evidence checks, source coverage, production overlap, related page-type overlap, title promise, outline, facts to use, facts to avoid, and open gaps. Do not write final.json.
 ---
 
 # Bloxodes Article Research
 
-Research one approved article idea. Stop at `brief.md`. Do not write the article. Do not create `final.json`.
+Use this for one approved article idea. Research only. Do not write the article and do not create `final.json`.
 
 ## Workspace
 
@@ -14,97 +14,125 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
   brief.md
 ```
 
-## Start with Bloxodes itself
+## Start
 
-Check production first so we do not rewrite something we already have.
+Start by checking if we have already covered this article on the production db. This is to make sure we are not writing an existing article.
 
-If the idea is about a game:
+If the article belongs to a game:
 
-1. Find the `roblox_universes` row (try name and slug variations). Save `universe_id` for the writer.
-2. List published `articles` for that `universe_id`. Do not rely only on a loose title search.
-3. Note those same-game pages as internal link candidates (with slugs). The writer needs at least two real ones.
-4. Confirm nothing already covers this exact topic.
+1. Find the game's `roblox_universes` row first (match on `name`/`slug`; the visible game name may differ from the prompt's wording, so try variations). Record its `universe_id` — the writing step needs it.
+2. List the game's existing published articles by querying `articles` on that `universe_id` (do not rely only on a loose `ilike '%keyword%'` on title — that misses articles whose slug or title spells the game differently).
+3. Treat those same-game articles as internal-link candidates and list them in the brief, with slugs, so the writing step can link to at least 2 real pages.
+4. Confirm none of them already cover this exact topic before continuing.
 
-Also note related page types when they exist: codes, wiki, collections, checklists, events, quizzes.
+## Research
 
-## Dig into the topic
+1. Do a deep dive into the topic and the game if the topic is about a specific game. Try to get a good understanding of what will be useful for people in this topic.
 
-Get a real feel for what the player is trying to do. If it is a game piece, learn enough of the loop that the brief can explain *why* the mechanic matters, not only the numbers.
+2. Do fan out queries to fill up any gaps, do not speculate anything, confirm all the info you have researched.
 
-Confirm facts. Do not guess.
+3. For Roblox micro-topics, do not conclude "few sources" from one search tool or one query style. Run multiple query shapes before deciding source coverage is thin:
+   - exact topic: `"<game name>" "<mechanic/item/boss>"`.
+   - broad topic: `<game name> <mechanic/item/boss> Roblox guide`.
+   - component facts: combine boss/NPC/item/location/drop names from the lead source with the game name.
+   - variant names: try common spelling/capitalization differences, abbreviations, and "fruit", "V2", "quest", "awakening", "boss", "drop", "location", or other player terms that fit the topic.
 
-For small Roblox topics, run more than one kind of search before you say sources are thin:
+4. Check multiple discovery surfaces when exact web results look sparse, polluted, blocked, or repetitive:
+   - general web search results and snippets
+   - the provided lead source and its internal links
+   - trusted sites like Beebom, Pro Game Guides, game-specific wiki pages, Fandom, TechWiser, IGN, Game Rant, and Eurogamer
+   - YouTube/video search results or transcripts when players are likely to document the mechanic there
+   - official or semi-official game surfaces when accessible, such as the Roblox experience page, group, Discord, Trello, wiki, community server notes, or social posts
+   - Bloxodes local data, production rows, and related Bloxodes pages
 
-- exact: `"Game Name" "Mechanic"`
-- broad: `Game Name Mechanic Roblox guide`
-- pieces from the lead source plus the game name
-- common spelling and slang variants
+5. If a search tool returns irrelevant results, empty quoted results, Cloudflare blocks, or only duplicate copies of one article, record that as a search limitation. Do not phrase it as "there are not many sources" unless the fallback surfaces above were also checked.
 
-Look in more than one place when the first results are empty, blocked, or all copies of one post:
+6. Do not stop at first indexed results, dig deeper, click though internal links of the sources to get a holistic understanding.
 
-- web results and the lead page’s own links
-- trusted guide sites and wikis (Beebom, Pro Game Guides, Fandom, TechWiser, IGN, Game Rant, Eurogamer, and similar)
-- YouTube or transcripts when players document the steps there
-- official or community surfaces when you can reach them (Roblox page, group, Discord, Trello, patch notes)
-- Bloxodes data and related pages
+7. Once done, understand what will be useful for people reading this article and what can be skipped. We write simple, clean and easy to understand and quick to read kind of articles. So make sure our research is helpful for that.
 
-If a tool blocks you or only returns junk, say that under search limitations. Do not call the whole web empty unless you actually checked the fallbacks.
+8. Only once you have searched all the sources and only when you think there are no gaps in the info, then continue and write `brief.md`.
 
-Keep going past the first page of results. Follow useful internal links. Then decide what a stuck player actually needs tonight, and what they can skip.
+9. Note useful FAQ questions only when they answer real follow-up points that do not fit naturally inside the article body.
 
-## What the brief must give the writer
+## Source Coverage Gate
 
-A good brief is a care package, not a pile of links.
+For gameplay how-to articles, the brief should normally have at least two independent sources for exact mechanic facts. If only one source gives the exact requirements, the brief can still proceed only when:
 
-**Mechanic facts** — unlocks, requirements, steps, rewards, limits, disagreements between sources.
+1. the user-provided lead is clearly the source of the article idea,
+2. broader discovery was documented across multiple surfaces,
+3. the one-source facts are marked as a risk instead of being overstated, and
+4. no unsupported extra claims are added to make the article feel fuller.
 
-**Player texture** — how it feels to be stuck, what people get wrong, what words they use, what order of work helps. Numbers alone make manuals. Texture makes guides.
+When sources disagree, list the disagreement and recommend the safer fact set. When sources are thin, separate these ideas clearly:
 
-Gather texture while you research:
+- `Sources found`: sources discovered during fan-out.
+- `Sources used for exact facts`: sources strong enough to support requirements, steps, drops, locations, or numbers.
+- `Sources checked but not usable`: blocked, outdated, duplicate, vague, AI-spun, or unrelated results.
+- `Search limitations`: search-tool pollution, empty exact queries, blocked pages, missing transcripts, or inaccessible community surfaces.
 
-- common wrong assumptions (2–4 when you can)
-- stuck-player scenes a reader will recognize (2–3)
-- player-facing words from search, comments, or Discord-style talk
-- decisions that are not a new chart: what to do first, what not to grind, what to do next session
-- UI feel notes only when known (where the menu lives, when the button is ready)
-- honest gaps when later stages are poorly documented
+## Article Outline
 
-Do not invent lore, fake quotes, or stage tables to look complete. If texture is thin, say so and still leave safe recognition beats that follow from confirmed facts.
+In the `brief.md`, you need to include the article outline. Follow these rules:
 
-## Sources
+1. We keep the structure of the article simple to scan through. If two headings are good enough, we just roll with them.
+2. A article should not have more than 3 H2s unless very much needed for the topic. For example, a listicle may need more headings which is fine, but a casual explainer or how to, having 2 headings can be more than good enough.
+3. So use fewer headings that are simple to read and almost sentence like (not generic SEO headings).
+4. Headings can give away the info without people needing to dig into the text.
+5. In outline, you just need to provide headings and a small one to two lines of what needs to be included under it.
+6. If required, you can suggest to include table, lists or numbered lists that can go into any section when it makes sense.
+7. For example, when writing how to, do not write "What it is" headings when it is obvious. Things can simply go into intro, directly to point without any fluff. So your outline should respect that.
 
-For gameplay how-tos, aim for two independent sources on exact mechanic numbers.
+Title need to be in simple human language, small but full sentence, people seeing this title on search should understand and open our page.
 
-One-source facts can still ship when:
+For game-specific articles, include the game name in the working title and suggested slug so readers know which game the guide is about. You can use `Roblox` wording when it helps search or clarity.
 
-1. the user’s lead is clearly the idea source
-2. you checked broader surfaces and wrote that down
-3. you mark the risk
-4. you do not pad with extra guesses
+## Media Research
 
-When sources disagree, name the split and pick the safer set.
+Media is optional. Use it only when it removes friction for the reader.
 
-Keep these buckets separate:
+### YouTube
 
-- sources found
-- sources used for exact facts
-- sources checked but not usable
-- search limitations
+Search for a walkthrough that closely matches the article promise: the same game system, error, or procedure.
 
-## Outline
+Record:
 
-Keep the outline simple enough to read as a story.
+- candidate URL
+- match quality: `perfect`, `near`, or `none`
+- why it matches or why it should be skipped
+- whether the channel is official, known, or unknown
 
-- Prefer two clear H2s for a normal how-to. Use more only when the topic needs it (listicles can go longer).
-- Headings should sound like plain sentences and give the info away.
-- Under each heading, write one or two lines on what belongs there.
-- Suggest a table or list only when it helps.
-- Skip empty “What is it?” sections when the intro can cover that in a few sentences.
-- Under each main section, note one texture beat to land so the writer does not ship pure definitions.
+Only a `perfect` match may be embedded. A `near` match is research only. If nothing fits, record `none` and continue without a video.
 
-Title style: short full sentence in human language. Put the game name in the title and slug for game pieces. “Roblox” is fine when it helps search or clarity.
+### Images
 
-## Brief shape
+Look for images only when they clarify a menu, panel, UI state, map region, or other step that prose cannot show cleanly.
+
+Accept images only when they:
+
+- show the useful detail clearly
+- have no watermarks, large arrows, subscribe overlays, or competitor branding
+- have a defensible source or usage basis, preferably an official asset or our own capture
+
+Do not assume a wiki or competitor image is free to reuse. Record the source URL, what the image shows, cleanliness result, rights/source note, and whether it should be hosted.
+
+Hosted body images belong at:
+
+```text
+apps/web/public/articles/<article-slug>/<descriptive-name>.webp
+```
+
+Save a suitable image with:
+
+```bash
+npm run content:save-article-image -- --slug <article-slug> --url <source-url> --name <file-stem> --alt "useful UI fact"
+```
+
+Prefer zero to three body images. Cover images are separate and may remain null for the import flow to generate.
+
+## Brief Shape
+
+For `brief.md` Use this shape:
 
 ```text
 Evidence checked:
@@ -119,13 +147,12 @@ Evidence checked:
 - Related page-type overlap:
 - Useful uncovered angle:
 
-Player texture:
-- Common wrong assumptions:
-- Stuck-player scenes:
-- Player-facing words:
-- Decision-level depth (order, tradeoffs, what not to waste time on):
-- UI / feel notes (only if known):
-- Texture gaps:
+Media plan:
+- YouTube match quality (perfect / near / none):
+- YouTube candidate URL and reason:
+- Image candidates (source URL, what it shows, clean yes/no, rights note):
+- Images to host (0-3, with planned file stems):
+- Cover image plan (null / generated / hosted cover.webp):
 
 Article plan:
 - Working title:
@@ -138,20 +165,20 @@ Article plan:
 - Open gaps or risks:
 
 Outline:
-- list the outline here (each H2 notes one texture beat)
+- cleanly list out the outline here and mark useful media placement when applicable.
 
 ```
 
-If the research is weak, say what is missing. Do not pretend the article is ready.
+If research is weak, say what is missing. Do not pretend the article is ready.
 
-## Good briefs feel like this
+## Good Briefs
 
-- You can see what was checked.
-- Links are real and useful.
-- Overlap with existing Bloxodes pages is honest.
-- `universe_id` and 2+ internal link candidates are present for game pieces.
-- It is clear why this is an article, not another page type.
-- The outline answers the title.
-- Facts to use and facts to avoid are split.
-- Player texture is filled enough that a writer can sound human without inventing.
-- Gaps are easy for the parent to spot.
+- show what was checked
+- include useful links
+- name existing Bloxodes overlap clearly
+- list the game's `universe_id` and 2+ existing same-game/related pages (with slugs) as internal-link candidates
+- explain why this should be an article, not another page type
+- give an outline that answers the title promise
+- separate facts to use from facts to avoid
+- keep the media plan optional and evidence-based
+- make gaps obvious so the parent can approve, refine, or block the article

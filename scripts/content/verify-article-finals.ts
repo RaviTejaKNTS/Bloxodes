@@ -5,6 +5,11 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import {
+  assertNoArticleMediaErrors,
+  checkArticleMedia,
+  logArticleMediaFindings,
+} from "./check-article-media";
 
 type ArticleFinal = {
   title: string;
@@ -55,10 +60,12 @@ function printUsage() {
       "",
       "Checks:",
       "  - parse article final.json files",
+      "  - YouTube directive + hosted image media checks",
       "  - run content:check-copy",
       "  - import into local Supabase",
       "  - read back saved article rows",
       "  - request every /articles/<slug> route",
+      "  - confirm YouTube embeds and local images appear in HTML when present",
     ].join("\n")
   );
 }
@@ -257,7 +264,7 @@ function bodyIncludesTitle(body: string, title: string): boolean {
   return Array.from(variants).some((candidate) => body.includes(candidate));
 }
 
-async function verifyRoute(url: string, title: string) {
+async function verifyRoute(url: string, title: string, finalJson: ArticleFinal) {
   let lastError: unknown = null;
 
   for (let attempt = 1; attempt <= 3; attempt += 1) {
@@ -270,6 +277,33 @@ async function verifyRoute(url: string, title: string) {
       if (!bodyIncludesTitle(body, title)) {
         throw new Error(`${url} returned 200 but did not include the article title`);
       }
+
+      // End-to-end media checks on the rendered page when the final claims media.
+      const { findYouTubeDirectives, findMarkdownImages } = await import("@/lib/article-media");
+      const youtube = findYouTubeDirectives(finalJson.content_md);
+      for (const directive of youtube) {
+        if (!directive.videoId) continue;
+        if (!body.includes(`youtube-nocookie.com/embed/${directive.videoId}`)) {
+          throw new Error(
+            `${url} is missing rendered YouTube embed for ${directive.videoId}`
+          );
+        }
+        if (!body.includes("video-embed")) {
+          throw new Error(`${url} is missing video-embed container for YouTube`);
+        }
+      }
+
+      const images = findMarkdownImages(finalJson.content_md);
+      for (const image of images) {
+        if (image.src.startsWith("/articles/")) {
+          // Next may encode paths; check the path segment at least.
+          const fileName = image.src.split("/").pop() ?? "";
+          if (fileName && !body.includes(fileName) && !body.includes(image.src)) {
+            throw new Error(`${url} is missing rendered image for ${image.src}`);
+          }
+        }
+      }
+
       return;
     } catch (error) {
       lastError = error;
@@ -284,15 +318,33 @@ async function verifyRoutes(baseUrl: string, finals: ArticleFinal[]) {
   const urls = finals.map((finalJson) => ({
     slug: finalJson.slug,
     title: finalJson.title,
+    finalJson,
     url: articleUrl(baseUrl, finalJson.slug),
   }));
 
   for (const entry of urls) {
-    await verifyRoute(entry.url, entry.title);
+    await verifyRoute(entry.url, entry.title, entry.finalJson);
     console.log(`Route passed: ${entry.url}`);
   }
 
   return urls.map((entry) => entry.url);
+}
+
+async function verifyArticleMedia(finals: Array<ArticleFinal & { label?: string }>, fileLabels: string[]) {
+  for (let i = 0; i < finals.length; i += 1) {
+    const finalJson = finals[i]!;
+    const findings = await checkArticleMedia({
+      slug: finalJson.slug,
+      content_md: finalJson.content_md,
+      cover_image: finalJson.cover_image,
+      label: fileLabels[i] ?? finalJson.slug,
+      requireLocalFiles: true,
+      requireImageAlt: true,
+    });
+    logArticleMediaFindings(findings);
+    assertNoArticleMediaErrors(findings);
+  }
+  console.log(`Article media checks passed for ${finals.length} article${finals.length === 1 ? "" : "s"}.`);
 }
 
 async function main() {
@@ -302,6 +354,7 @@ async function main() {
 
   console.log(`Parsed ${finals.length} article final file${finals.length === 1 ? "" : "s"}.`);
 
+  await verifyArticleMedia(finals, options.files);
   await runCommand("npm", ["run", "content:check-copy", "--", ...options.files]);
 
   const importArgs = options.files.flatMap((file) => ["--file", file]);

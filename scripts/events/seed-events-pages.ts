@@ -413,7 +413,7 @@ Write 1 to 2 short paragraphs, around 90 to 120 words total. But keep things det
 
 Return ONLY JSON with:
 
- - content_md: the intro in Markdown, starting directly with in-game context and naturally leading into a line like “Here are the upcoming events for ${gameName}.”
+ - content_md: the intro in Markdown, starting directly with in-game context. Do not end with or include a line like “Here are the upcoming events for ${gameName}.” The page already lists events below the intro.
  - meta_description: 140–170 characters, one sentence, mention upcoming events, start dates and times, countdown timers, and the game name. No hype words.
 
 Research notes:
