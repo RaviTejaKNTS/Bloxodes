@@ -1,6 +1,6 @@
 import type { MobileContentKind } from "./types";
 
-export const SECTION_KINDS: MobileContentKind[] = ["catalog", "wiki", "tools", "quizzes", "checklists", "events"];
+export const SECTION_KINDS: MobileContentKind[] = ["catalog", "wiki", "quizzes", "checklists", "events"];
 
 export const SECTION_LABELS: Record<MobileContentKind, string> = {
   articles: "Articles",
@@ -15,7 +15,6 @@ export const SECTION_LABELS: Record<MobileContentKind, string> = {
 export const SECTION_DESCRIPTIONS: Partial<Record<MobileContentKind, string>> = {
   catalog: "Item IDs, decals, music codes, and databases",
   wiki: "Game guides, stats, and collections",
-  tools: "Calculators and planners",
   quizzes: "Test your Roblox game knowledge",
   checklists: "Progression task lists",
   events: "In-game event coverage"
@@ -55,9 +54,6 @@ export function routeForWebUrl(url: string): string | null {
   }
   if (head === "wiki" && rest.length === 2) {
     return `/collections/${encodeURIComponent(`${rest[0]}-${rest[1]}`)}`;
-  }
-  if (head === "tools" && rest.length >= 1) {
-    return `/section/tools/${encodeURIComponent(rest.join("/"))}`;
   }
   if (head === "events" && rest.length === 1) {
     return `/section/events/${encodeURIComponent(rest[0])}`;

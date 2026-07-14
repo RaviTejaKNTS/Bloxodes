@@ -57,6 +57,7 @@ type EventBucket = "upcoming" | "current" | "past";
 
 export type EventsPageCardData = {
   id: string;
+  universeId: number;
   slug: string;
   title: string;
   summary: string;
@@ -403,6 +404,7 @@ export async function buildEventsCards(
 
       return {
         id: page.id,
+        universeId: page.universe_id,
         slug: page.slug,
         title: page.title,
         summary,

@@ -83,6 +83,9 @@ export type MobileContentDetailItem = {
   body: string | null;
   badge: string | null;
   image: string | null;
+  startAt?: string | null;
+  endAt?: string | null;
+  status?: "upcoming" | "current" | "past" | null;
   fields?: Array<{
     key: string;
     label: string;
@@ -97,7 +100,7 @@ export type MobileContentDetailSection = {
   subtitle: string | null;
   body: string | null;
   items: MobileContentDetailItem[];
-  variant?: "collection-items" | "faq" | "links" | "prose";
+  variant?: "collection-items" | "collection-details" | "faq" | "links" | "markdown" | "prose" | "stats" | "timeline";
   page?: number;
   pageSize?: number;
   total?: number;
@@ -115,7 +118,7 @@ export type MobileContentDetailResponse = {
   updatedAt: string | null;
   url: string;
   badge: string | null;
-  layout?: "default" | "wiki_collection";
+  layout?: "default" | "events" | "wiki" | "wiki_collection";
   sections: MobileContentDetailSection[];
 };
 

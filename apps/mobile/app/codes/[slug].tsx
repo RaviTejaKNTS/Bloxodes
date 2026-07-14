@@ -232,6 +232,12 @@ export default function CodeDetailScreen() {
                 onPress={() => void Linking.openURL(detail.game.robloxUrl!)}
               />
             ) : null}
+            <Button
+              icon="external-link"
+              label="View full codes page on bloxodes.com"
+              variant="secondary"
+              onPress={() => void Linking.openURL(detail.game.url)}
+            />
           </>
         ) : null}
       </ScrollView>

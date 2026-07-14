@@ -2,7 +2,7 @@
 
 Scope: `apps/mobile`.
 
-This workspace contains the Expo React Native app for Bloxodes Android and iOS builds. It uses expo-router with a bottom tab bar and native screens for codes, catalog, wiki + collections, tools, quizzes, checklists, events, stats, and search.
+This workspace contains the Expo React Native app for Bloxodes Android and iOS builds. It uses expo-router with a bottom tab bar and native screens for codes, catalog, wiki + collections, quizzes, checklists, events, stats, and search. Tools remain web-only for now.
 
 ## Defaults
 
@@ -20,7 +20,7 @@ This workspace contains the Expo React Native app for Bloxodes Android and iOS b
 - `app/_layout.tsx`: providers (SafeArea, Theme, Auth) plus the themed root stack.
 - `app/(tabs)/`: bottom tabs — Home (`index`), Codes, Browse, Stats, Account.
 - `app/codes/[slug].tsx`: code detail with copy actions and synced used-code checkboxes.
-- `app/section/[kind]/index.tsx`: generic section index (catalog, wiki, tools, quizzes, checklists, events) with search and infinite scroll.
+- `app/section/[kind]/index.tsx`: generic section index (catalog, wiki, quizzes, checklists, events) with search and infinite scroll.
 - `app/section/[kind]/[slug].tsx`: generic detail renderer with per-section pagination; wiki hub sections deep-link to codes/quiz/checklist/collection screens.
 - `app/quiz/[code].tsx`: native quiz player (difficulty picker, scoring, account sync).
 - `app/checklist/[slug].tsx`: interactive checklist with progress bar and account sync.

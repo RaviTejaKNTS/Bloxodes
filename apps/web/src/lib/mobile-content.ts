@@ -23,6 +23,7 @@ import { getToolContentWithDevFallback, listPublishedToolsPage, type ToolListEnt
 import { resolveModifiedAt } from "@/lib/content-dates";
 import { getWikiPageBySlug, listPublishedWikiPages, loadWikiRelatedData, type WikiListEntry } from "@/lib/wiki";
 import { getWikiCollectionPageByCode } from "@/lib/wiki-collections";
+import { listUniverseEventTimeline } from "@/lib/events-summary";
 import { repoPath } from "@/lib/paths";
 import { GAME_COLLECTIONS, getFieldLabel, getGameCollectionConfigByCode } from "@/lib/game-collections";
 import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
@@ -118,6 +119,9 @@ export type MobileContentDetailItem = {
   body: string | null;
   badge: string | null;
   image: string | null;
+  startAt?: string | null;
+  endAt?: string | null;
+  status?: "upcoming" | "current" | "past" | null;
   fields?: MobileContentDetailField[];
 };
 
@@ -127,7 +131,7 @@ export type MobileContentDetailSection = {
   subtitle: string | null;
   body: string | null;
   items: MobileContentDetailItem[];
-  variant?: "collection-items" | "faq" | "links" | "prose";
+  variant?: "collection-items" | "collection-details" | "faq" | "links" | "markdown" | "prose" | "stats" | "timeline";
   page?: number;
   pageSize?: number;
   total?: number;
@@ -145,7 +149,7 @@ export type MobileContentDetailPayload = {
   updatedAt: string | null;
   url: string;
   badge: string | null;
-  layout?: "default" | "wiki_collection";
+  layout?: "default" | "events" | "wiki" | "wiki_collection";
   sections: MobileContentDetailSection[];
 };
 
@@ -302,8 +306,13 @@ function detailItem(
   options: {
     badge?: string | null;
     body?: string | null;
+    bodyMax?: number;
     fields?: MobileContentDetailField[];
     image?: string | null;
+    preserveMarkdown?: boolean;
+    startAt?: string | null;
+    endAt?: string | null;
+    status?: "upcoming" | "current" | "past" | null;
     subtitle?: string | null;
   } = {}
 ): MobileContentDetailItem {
@@ -311,11 +320,84 @@ function detailItem(
     id,
     title,
     subtitle: options.subtitle ?? null,
-    body: truncate(toPlainText(options.body) ?? options.body ?? null, 420),
+    body: truncate(
+      options.preserveMarkdown ? options.body ?? null : toPlainText(options.body) ?? options.body ?? null,
+      options.bodyMax ?? 420
+    ),
     badge: options.badge ?? null,
     image: absoluteAssetUrl(options.image ?? null),
+    startAt: options.startAt ?? null,
+    endAt: options.endAt ?? null,
+    status: options.status ?? null,
     fields: options.fields?.length ? options.fields : undefined
   };
+}
+
+const MOBILE_CONTROL_ALIASES = {
+  desktop: ["desktop", "pc", "computer", "keyboard", "keyboard_mouse", "keyboardMouse"],
+  mobile: ["mobile", "phone"],
+  tablet: ["tablet"],
+  console: ["console", "controller", "xbox", "playstation"],
+  vr: ["vr", "virtual_reality", "virtualReality"]
+} as const;
+
+function controlValue(value: unknown): string | null {
+  if (typeof value === "string") return normalizeText(value);
+  if (typeof value === "number" || typeof value === "boolean") return String(value);
+  if (Array.isArray(value)) {
+    const parts = value.map(controlValue).filter(Boolean);
+    return parts.length ? parts.join(", ") : null;
+  }
+  if (isRecord(value)) {
+    const parts = Object.entries(value)
+      .map(([key, entry]) => {
+        const formatted = controlValue(entry);
+        return formatted ? `${humanizeKey(key)}: ${formatted}` : null;
+      })
+      .filter(Boolean);
+    return parts.length ? parts.join("; ") : null;
+  }
+  return null;
+}
+
+function mobileControlItems(raw: unknown): MobileContentDetailItem[] {
+  const entries = Array.isArray(raw) ? raw.map((value, index) => [`control-${index + 1}`, value] as const) : isRecord(raw) ? Object.entries(raw) : [];
+  return entries
+    .map(([fallback, value], index): MobileContentDetailItem | null => {
+      if (!isRecord(value)) return null;
+      const title =
+        controlValue(value.action) ??
+        controlValue(value.move) ??
+        controlValue(value.label) ??
+        controlValue(value.title) ??
+        controlValue(value.name) ??
+        humanizeKey(fallback || `Control ${index + 1}`);
+      const fields = Object.entries(MOBILE_CONTROL_ALIASES)
+        .map(([device, aliases]): MobileContentDetailField | null => {
+          const matched = aliases.map((alias) => controlValue(value[alias])).find(Boolean) ?? null;
+          return matched ? { key: device, label: humanizeKey(device), value: matched, kind: "text" } : null;
+        })
+        .filter(Boolean) as MobileContentDetailField[];
+      return fields.length ? detailItem(fallback || `control-${index + 1}`, title, { fields }) : null;
+    })
+    .filter(Boolean) as MobileContentDetailItem[];
+}
+
+function deviceSupportLabel(page: {
+  desktop_enabled?: boolean | null;
+  mobile_enabled?: boolean | null;
+  tablet_enabled?: boolean | null;
+  console_enabled?: boolean | null;
+  vr_enabled?: boolean | null;
+}): string | null {
+  const devices = [
+    ["Desktop", page.desktop_enabled],
+    ["Mobile", page.mobile_enabled],
+    ["Tablet", page.tablet_enabled],
+    ["Console", page.console_enabled],
+    ["VR", page.vr_enabled]
+  ].filter((entry): entry is [string, true] => entry[1] === true);
+  return devices.length ? devices.map(([label]) => label).join(", ") : null;
 }
 
 function keyValueItems(values: Record<string, unknown>): MobileContentDetailItem[] {
@@ -793,6 +875,7 @@ async function loadGrowGardenCatalogSections(code: string, searchParams?: URLSea
   const query = detailQuery(searchParams);
   const filteredRows = filterRowsByQuery(rows, query);
   const columns = Array.from(new Set(filteredRows.flatMap((row) => Object.keys(row))));
+  const { badgeKey, descriptionKey, fieldKeys, subtitleKeys } = collectionDisplayKeys(dataset, columns);
   const page = sectionPage(searchParams, "catalog-dataset");
   const pageSize = sectionPageSize(searchParams);
   const pagedRows = paginateRows(filteredRows, page, pageSize);
@@ -801,17 +884,18 @@ async function loadGrowGardenCatalogSections(code: string, searchParams?: URLSea
     section("catalog-dataset", `${config.label} database`, {
       subtitle: `${filteredRows.length.toLocaleString("en-US")} entries`,
       body: `${config.description} Page ${page} of ${Math.max(1, Math.ceil(filteredRows.length / pageSize))}.`,
-      items: detailItemsFromRows(pagedRows, {
-        badgeKeys: [config.badgeKey ?? "", "tier", "rarity", "category", "type", "availability", "price", "value"],
-        subtitleKeys: [...(config.subtitleKeys ?? []), "category", "tier", "location", "source", "availability"],
-        imageKeys: ["image"],
-        bodyKeys: columns,
-        limit: pageSize
-      }),
+      items: pagedRows.map((row) =>
+        mobileCollectionItem(row, fieldKeys, {
+          badgeKey: config.badgeKey ?? badgeKey,
+          descriptionKey,
+          subtitleKeys: uniqueStrings([...(config.subtitleKeys ?? []), ...subtitleKeys])
+        })
+      ),
       page,
       pageSize,
       query,
-      total: filteredRows.length
+      total: filteredRows.length,
+      variant: "collection-items"
     })
   ].filter(Boolean) as MobileContentDetailSection[];
 }
@@ -826,6 +910,7 @@ async function loadForgeCatalogSections(code: string, searchParams?: URLSearchPa
   const query = detailQuery(searchParams);
   const filteredRows = filterRowsByQuery(rows, query);
   const columns = Array.from(new Set(filteredRows.flatMap((row) => Object.keys(row))));
+  const { badgeKey, descriptionKey, fieldKeys, subtitleKeys } = collectionDisplayKeys(dataset, columns);
   const page = sectionPage(searchParams, "catalog-dataset");
   const pageSize = sectionPageSize(searchParams);
   const pagedRows = paginateRows(filteredRows, page, pageSize);
@@ -834,17 +919,18 @@ async function loadForgeCatalogSections(code: string, searchParams?: URLSearchPa
     section("catalog-dataset", `${config.label} database`, {
       subtitle: `${filteredRows.length.toLocaleString("en-US")} entries`,
       body: `${config.description} Page ${page} of ${Math.max(1, Math.ceil(filteredRows.length / pageSize))}.`,
-      items: detailItemsFromRows(pagedRows, {
-        badgeKeys: [config.badgeKey ?? "", "rarity", "class", "region", "type", "chance"],
-        subtitleKeys: [...(config.subtitleKeys ?? []), config.groupKey, "location", "rarity", "class"],
-        imageKeys: ["image"],
-        bodyKeys: columns,
-        limit: pageSize
-      }),
+      items: pagedRows.map((row) =>
+        mobileCollectionItem(row, fieldKeys, {
+          badgeKey: config.badgeKey ?? badgeKey,
+          descriptionKey,
+          subtitleKeys: uniqueStrings([...(config.subtitleKeys ?? []), config.groupKey, ...subtitleKeys])
+        })
+      ),
       page,
       pageSize,
       query,
-      total: filteredRows.length
+      total: filteredRows.length,
+      variant: "collection-items"
     })
   ].filter(Boolean) as MobileContentDetailSection[];
 }
@@ -1387,7 +1473,7 @@ export async function getMobileContentDetail(
         }),
         section("details", "Details", {
           items: keyValueItems(collection.description_json ?? {}),
-          variant: "prose"
+          variant: "collection-details"
         }),
         section("faq", "FAQ", {
           items: (collection.faq_json ?? []).slice(0, 12).map((entry, index) => detailItem(`faq-${index}`, entry.q, { body: entry.a })),
@@ -1495,14 +1581,20 @@ export async function getMobileContentDetail(
     const { cards } = await buildEventsCards();
     const card = cards.find((entry) => entry.slug === normalizedSlug);
     if (!card) return null;
+    const timeline = await listUniverseEventTimeline(card.universeId, 20);
     const sections = [
-      section("overview", "Overview", { body: card.summary }),
-      section("status", "Event status", {
-        items: [
-          detailItem("event", "Featured event", { body: card.eventName ?? "Event coverage" }),
-          detailItem("time", "Timing", { body: card.eventTimeLabel ?? "Timing updates appear when available." }),
-          detailItem("state", "State", { body: card.status })
-        ]
+      section("timeline", "Event timeline", {
+        subtitle: `${timeline.length} ${timeline.length === 1 ? "event" : "events"}`,
+        items: timeline.map((event) =>
+          detailItem(event.eventId, event.name, {
+            badge: event.status,
+            body: event.description,
+            startAt: event.startUtc,
+            endAt: event.endUtc,
+            status: event.status
+          })
+        ),
+        variant: "timeline"
       })
     ].filter(Boolean) as MobileContentDetailSection[];
 
@@ -1516,6 +1608,7 @@ export async function getMobileContentDetail(
       updatedAt: card.eventStartUtc || card.eventEndUtc,
       url: `${SITE_URL}/events/${card.slug}`,
       badge: card.eventTimeLabel ?? "Event",
+      layout: "events",
       sections
     };
   }
@@ -1616,14 +1709,35 @@ export async function getMobileContentDetail(
           return detailItem(entry.code, entry.title, {
             badge: "Catalog",
             body: entry.wiki_md ?? entry.meta_description,
+            bodyMax: 12_000,
+            preserveMarkdown: Boolean(entry.wiki_md),
             image: entry.thumb_url ?? previewImage ?? null
           });
         })
       )
     : [];
+  const wikiGameDetails = [
+    page.universe_creator_name ? detailItem("creator", "Creator", { body: page.universe_creator_name }) : null,
+    page.created_at_api ? detailItem("created", "Game created", { body: page.created_at_api }) : null,
+    page.updated_at_api ? detailItem("game-updated", "Last updated", { body: page.updated_at_api }) : null,
+    page.universe_age_rating ? detailItem("age", "Age requirement", { body: page.universe_age_rating }) : null,
+    (page.universe_genre_l1 ?? page.universe_genre)
+      ? detailItem("genre", "Genre", { body: page.universe_genre_l1 ?? page.universe_genre })
+      : null,
+    page.universe_genre_l2 ? detailItem("subgenre", "Subgenre", { body: page.universe_genre_l2 }) : null,
+    typeof page.max_players === "number"
+      ? detailItem("max-players", "Max players", { body: page.max_players.toLocaleString("en-US") })
+      : null,
+    deviceSupportLabel(page) ? detailItem("devices", "Supported devices", { body: deviceSupportLabel(page) }) : null,
+    typeof page.private_server_price_robux === "number"
+      ? detailItem("private-server", "Private server", { body: `${page.private_server_price_robux.toLocaleString("en-US")} Robux` })
+      : null
+  ].filter(Boolean) as MobileContentDetailItem[];
   const sections = [
     section("overview", "Overview", {
-      body: toPlainText(page.description_md)
+      body: page.description_md,
+      bodyMax: 24_000,
+      variant: "markdown"
     }),
     section("stats", "Game stats", {
       items: [
@@ -1632,16 +1746,10 @@ export async function getMobileContentDetail(
         detailItem("favorites", "Favorites", { body: compactNumber(page.favorites) }),
         detailItem("max-players", "Max players", { body: compactNumber(page.max_players) }),
         detailItem("genre", "Genre", { body: page.universe_genre_l2 ?? page.universe_genre_l1 ?? page.universe_genre })
-      ].filter((item) => item.body) as MobileContentDetailItem[]
+      ].filter((item) => item.body) as MobileContentDetailItem[],
+      variant: "stats"
     }),
-    section("controls", "Controls", { items: keyValueItems((page.controls_json ?? {}) as Record<string, unknown>) }),
-    section("tips", "Tips", { body: toPlainText(page.tips_md) }),
-    related.catalogPages.length
-      ? section("catalog", "Catalog data", {
-          subtitle: `${related.catalogPages.length} catalogs`,
-          items: relatedCatalogItems
-        })
-      : null,
+    section("game-details", "Game details", { items: wikiGameDetails, variant: "collection-details" }),
     related.codes.length
       ? section("codes", "Codes", {
           items: related.codes.map((game) =>
@@ -1658,26 +1766,38 @@ export async function getMobileContentDetail(
           )
         })
       : null,
-    related.articles.length
-      ? section("articles", "Related articles", {
-          items: related.articles.slice(0, 8).map((article) =>
-            detailItem(article.slug, article.title, {
-              badge: "Article",
-              body: article.meta_description,
-              image: article.cover_image ?? article.universe?.icon_url ?? null
-            })
-          )
+    related.catalogPages.length
+      ? section("catalog", "Catalog data", {
+          subtitle: `${related.catalogPages.length} catalogs`,
+          items: relatedCatalogItems
         })
       : null,
-    related.tools.length
-      ? section("tools", "Tools", {
-          items: related.tools.map((tool) =>
-            detailItem(tool.code, tool.title, {
-              badge: "Tool",
-              body: tool.meta_description,
-              image: tool.thumb_url ?? tool.universe?.icon_url ?? null
+    section("controls", `${page.universe_display_name ?? page.universe_name ?? page.title} Controls`, {
+      items: mobileControlItems(page.controls_json)
+    }),
+    section("tips", `${page.universe_display_name ?? page.universe_name ?? page.title} Gameplay Tips`, {
+      body: page.tips_md,
+      bodyMax: 24_000,
+      variant: "markdown"
+    }),
+    related.eventsPage
+      ? section("events", "Event guide", {
+          body: related.eventsPage.meta_description ?? null,
+          items: [detailItem(related.eventsPage.slug, related.eventsPage.title, { badge: "Event" })]
+        })
+      : null,
+    related.eventTimeline.length
+      ? section("event-timeline", "Event timeline", {
+          items: related.eventTimeline.map((event) =>
+            detailItem(event.eventId, event.name, {
+              badge: event.status,
+              body: event.description,
+              startAt: event.startUtc,
+              endAt: event.endUtc,
+              status: event.status
             })
-          )
+          ),
+          variant: "timeline"
         })
       : null,
     related.checklists.length
@@ -1701,10 +1821,15 @@ export async function getMobileContentDetail(
           )
         })
       : null,
-    related.eventsPage
-      ? section("events", "Event guide", {
-          body: related.eventsPage.meta_description ?? null,
-          items: [detailItem(related.eventsPage.slug, related.eventsPage.title, { badge: "Event" })]
+    related.articles.length
+      ? section("articles", "Related articles", {
+          items: related.articles.slice(0, 8).map((article) =>
+            detailItem(article.slug, article.title, {
+              badge: "Article",
+              body: article.meta_description,
+              image: article.cover_image ?? article.universe?.icon_url ?? null
+            })
+          )
         })
       : null,
     related.media.length
@@ -1778,6 +1903,7 @@ export async function getMobileContentDetail(
     updatedAt,
     url: `${SITE_URL}/wiki/${page.slug}`,
     badge: "Wiki",
+    layout: "wiki",
     sections
   };
 }

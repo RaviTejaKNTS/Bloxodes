@@ -6,7 +6,7 @@ Expo React Native app for the Bloxodes Android and iOS clients.
 
 An expo-router app with a bottom tab bar (Home, Codes, Browse, Stats, Account) and native screens for the main Bloxodes sections:
 
-- Home feed with codes, events, catalog, wiki, tools, quiz, and checklist rails
+- Home feed with codes, events, catalog, wiki, quiz, and checklist rails
 - Codes index and detail with copy actions and used-code tracking
 - Catalog pages, wiki hubs, and game collection pages rendered natively with per-section pagination
 - Tools and events detail pages

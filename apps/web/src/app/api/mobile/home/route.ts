@@ -5,7 +5,7 @@ import { getMobileContentIndex, type MobileContentKind } from "@/lib/mobile-cont
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const HOME_SECTION_KINDS: MobileContentKind[] = ["events", "catalog", "wiki", "tools", "quizzes", "checklists"];
+const HOME_SECTION_KINDS: MobileContentKind[] = ["events", "catalog", "wiki", "quizzes", "checklists"];
 const HOME_SECTION_SIZE = 8;
 
 const RESPONSE_HEADERS = {

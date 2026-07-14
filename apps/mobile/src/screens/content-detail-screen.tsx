@@ -2,7 +2,7 @@ import { Stack, useRouter } from "expo-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Linking, ScrollView, Text, View } from "react-native";
 import { fetchContentDetail } from "../api";
-import { CollectionDetailView, DetailSectionCard } from "../components/content";
+import { CollectionDetailView, DetailSectionCard, EventsDetailView, WikiDetailView } from "../components/content";
 import { Badge, Button, Card, CoverImage, EmptyState, ErrorState, LoadingState, MetaText } from "../components/ui";
 import { formatUpdatedLabel } from "../format";
 import { spacing } from "../theme";
@@ -15,7 +15,6 @@ function routeForSectionItem(kind: MobileContentKind, sectionId: string, item: M
     if (sectionId === "quizzes") return `/quiz/${encodeURIComponent(item.id)}`;
     if (sectionId === "checklists") return `/checklist/${encodeURIComponent(item.id)}`;
     if (sectionId === "catalog") return `/collections/${encodeURIComponent(item.id)}`;
-    if (sectionId === "tools") return `/section/tools/${encodeURIComponent(item.id)}`;
     if (sectionId === "events") return `/section/events/${encodeURIComponent(item.id)}`;
   }
   if (kind === "catalog" && sectionId === "related-catalogs") {
@@ -140,8 +139,14 @@ export function ContentDetailScreen({
             <CollectionDetailView
               detail={detail}
               itemPressHandler={itemPressHandler}
+              loadingSectionId={loadingSectionId}
+              onLoadMore={loadMoreSection}
               onOpenWeb={() => void Linking.openURL(detail.url)}
             />
+          ) : detail.layout === "wiki" ? (
+            <WikiDetailView detail={detail} itemPressHandler={itemPressHandler} onOpenWeb={() => void Linking.openURL(detail.url)} />
+          ) : detail.layout === "events" ? (
+            <EventsDetailView detail={detail} onOpenWeb={() => void Linking.openURL(detail.url)} />
           ) : (
             <>
               <Card>
