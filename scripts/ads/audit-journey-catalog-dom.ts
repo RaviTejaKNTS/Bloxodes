@@ -1,6 +1,10 @@
 import { load } from "cheerio";
 
 const DEFAULT_BASE_URL = "http://127.0.0.1:3000";
+const INDEXABLE_PATHS = new Set([
+  "/catalog/roblox-music-ids",
+  "/catalog/roblox-decal-ids"
+]);
 
 type PageSnapshot = {
   html: string;
@@ -56,6 +60,60 @@ function auditPage(snapshot: PageSnapshot) {
     failures.push("manual Mediavine content hints are present and would disable automatic placement");
   }
 
+  const title = $("head title").text().trim();
+  const description = $('head meta[name="description"]').attr("content")?.trim() ?? "";
+  const canonical = $('head link[rel="canonical"]');
+  const h1Count = $("main h1").length;
+  const robots = $('head meta[name="robots"]').attr("content")?.toLowerCase() ?? "";
+  const responsePathname = new URL(snapshot.responseUrl).pathname;
+  const shouldIndex = INDEXABLE_PATHS.has(responsePathname);
+  if (!title) failures.push("SEO title is missing");
+  if (!description) failures.push("meta description is missing");
+  if (shouldIndex && (canonical.length !== 1 || !canonical.attr("href"))) {
+    failures.push(`expected one populated canonical on the primary page, found ${canonical.length}`);
+  }
+  if (canonical.length > 1) failures.push(`found ${canonical.length} canonical links`);
+  if (h1Count !== 1) failures.push(`expected one main h1, found ${h1Count}`);
+  if (shouldIndex && robots.includes("noindex")) failures.push("primary catalog page is unexpectedly noindex");
+  if (!shouldIndex && !robots.includes("noindex")) failures.push("secondary catalog route is unexpectedly indexable");
+
+  const canonicalHref = canonical.attr("href");
+  if (canonicalHref) {
+    try {
+      const canonicalUrl = new URL(canonicalHref);
+      if (canonicalUrl.protocol !== "https:" || canonicalUrl.hostname !== "bloxodes.com") {
+        failures.push(`canonical points outside the production HTTPS origin: ${canonicalHref}`);
+      }
+    } catch {
+      failures.push(`canonical is not an absolute URL: ${canonicalHref}`);
+    }
+  }
+
+  const jsonLdScripts = $('script[type="application/ld+json"]');
+  if (!jsonLdScripts.length) failures.push("JSON-LD is missing");
+  jsonLdScripts.each((index, element) => {
+    try {
+      JSON.parse($(element).text());
+    } catch {
+      failures.push(`JSON-LD script ${index + 1} is invalid JSON`);
+    }
+  });
+
+  const ids = content
+    .find("[id]")
+    .map((_, element) => $(element).attr("id"))
+    .get()
+    .filter(Boolean);
+  const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
+  if (duplicateIds.length) {
+    failures.push(`duplicate IDs found: ${[...new Set(duplicateIds)].join(", ")}`);
+  }
+
+  const imagesWithoutAlt = $("img").filter((_, element) => $(element).attr("alt") === undefined);
+  if (imagesWithoutAlt.length) {
+    failures.push(`${imagesWithoutAlt.length} images are missing alt attributes`);
+  }
+
   directItems.each((index, element) => {
     const classNames = ($(element).attr("class") ?? "").split(/\s+/);
     if (classNames.includes("flex") || classNames.includes("inline-flex")) {
@@ -70,9 +128,12 @@ function auditPage(snapshot: PageSnapshot) {
   return {
     directChildren: content.children().length,
     directItems: directItems.length,
+    jsonLdScripts: jsonLdScripts.length,
+    indexable: shouldIndex,
     requestedPath: snapshot.requestedPath,
     responsePath: new URL(snapshot.responseUrl).pathname + new URL(snapshot.responseUrl).search,
-    selectorTag: content.get(0)?.tagName ?? "unknown"
+    selectorTag: content.get(0)?.tagName ?? "unknown",
+    titleLength: title.length
   };
 }
 

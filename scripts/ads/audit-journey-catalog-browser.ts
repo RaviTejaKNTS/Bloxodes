@@ -1,4 +1,4 @@
-import { chromium, type Page } from "playwright";
+import { chromium, type BrowserContext, type Page } from "playwright";
 
 const DEFAULT_BASE_URL = "http://127.0.0.1:3000";
 
@@ -22,6 +22,21 @@ const VIEWPORTS = [
   { name: "mobile", width: 390, height: 844 }
 ] as const;
 
+const GRID_BREAKPOINTS = [
+  { name: "decal-two-column", width: 500, height: 900, routes: ["/catalog/roblox-decal-ids"] },
+  {
+    name: "tablet",
+    width: 900,
+    height: 1000,
+    routes: [
+      "/catalog/roblox-music-ids",
+      "/catalog/roblox-decal-ids",
+      "/catalog/roblox-music-ids/genres"
+    ]
+  },
+  { name: "decal-five-column", width: 1600, height: 1000, routes: ["/catalog/roblox-decal-ids"] }
+] as const;
+
 function readArg(name: string): string | null {
   const index = process.argv.indexOf(name);
   return index >= 0 ? process.argv[index + 1] ?? null : null;
@@ -31,10 +46,38 @@ function normalizeBaseUrl(value: string): string {
   return value.endsWith("/") ? value : `${value}/`;
 }
 
+async function installClsObserver(context: BrowserContext) {
+  await context.addInitScript(() => {
+    const observedWindow = window as typeof window & { __journeyAuditCls?: number };
+    observedWindow.__journeyAuditCls = 0;
+    new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        const shift = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+        if (!shift.hadRecentInput) {
+          observedWindow.__journeyAuditCls =
+            (observedWindow.__journeyAuditCls ?? 0) + (shift.value ?? 0);
+        }
+      }
+    }).observe({ type: "layout-shift", buffered: true });
+  });
+}
+
+async function waitForHydration(page: Page) {
+  await page.waitForLoadState("load");
+  await page.evaluate(() => {
+    return new Promise<void>((resolve) => {
+      requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
+    });
+  });
+}
+
 async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
   const url = new URL(route.replace(/^\//, ""), baseUrl);
   await page.goto(url.href, { waitUntil: "domcontentloaded" });
   await page.waitForSelector("#article-body [data-journey-item]");
+  await waitForHydration(page);
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(250);
 
   return page.evaluate(() => {
     const selectors = document.querySelectorAll<HTMLElement>("#article-body");
@@ -54,19 +97,105 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
     });
     if (flexItems.length) throw new Error(`${flexItems.length} direct Journey items render as flex containers`);
 
+    if (content.tagName !== "SECTION") {
+      throw new Error(`Journey selector uses ${content.tagName.toLowerCase()} instead of a neutral section`);
+    }
+    if (document.querySelector(".content_hint,.content_mobile_hint,.content_desktop_hint")) {
+      throw new Error("manual Mediavine content hints are present after hydration");
+    }
+
+    const duplicateIds = [...content.querySelectorAll<HTMLElement>("[id]")]
+      .map((element) => element.id)
+      .filter((id, index, ids) => ids.indexOf(id) !== index);
+    if (duplicateIds.length) {
+      throw new Error(`duplicate IDs found: ${[...new Set(duplicateIds)].join(", ")}`);
+    }
+
+    const positiveTabIndexes = [...document.querySelectorAll<HTMLElement>("[tabindex]")].filter(
+      (element) => element.tabIndex > 0
+    );
+    if (positiveTabIndexes.length) {
+      throw new Error(`${positiveTabIndexes.length} elements use a positive tabindex`);
+    }
+
+    const interactiveElements = [...content.querySelectorAll<HTMLElement>(
+      'a[href],button,input:not([type="hidden"]),select,textarea'
+    )];
+    const unnamedInteractiveElements = interactiveElements.filter((element) => {
+      const labelledBy = element.getAttribute("aria-labelledby")
+        ?.split(/\s+/)
+        .map((id) => document.getElementById(id)?.textContent?.trim() ?? "")
+        .join(" ")
+        .trim();
+      const controlLabels = "labels" in element
+        ? [...((element as HTMLInputElement).labels ?? [])]
+            .map((label) => label.textContent?.trim() ?? "")
+            .join(" ")
+            .trim()
+        : "";
+      const imageAlt = element.querySelector("img")?.getAttribute("alt")?.trim() ?? "";
+      const name =
+        element.getAttribute("aria-label")?.trim() ||
+        labelledBy ||
+        controlLabels ||
+        element.textContent?.trim() ||
+        imageAlt ||
+        element.getAttribute("title")?.trim();
+      return !name;
+    });
+    if (unnamedInteractiveElements.length) {
+      throw new Error(`${unnamedInteractiveElements.length} interactive elements have no accessible name`);
+    }
+
+    const contentStyle = getComputedStyle(content);
+    const isJourneyGrid = content.classList.contains("journey-content-stream");
+    const directChildren = [...content.children] as HTMLElement[];
+    const paragraphGaps = directChildren.flatMap((element, index) => {
+      const next = directChildren[index + 1];
+      if (!next || !element.matches("p[data-md-copy]") || !next.matches("p[data-md-copy]")) return [];
+      return [Math.round(next.getBoundingClientRect().top - element.getBoundingClientRect().bottom)];
+    });
+    if (isJourneyGrid && paragraphGaps.some((gap) => gap < 26 || gap > 30)) {
+      throw new Error(`direct paragraph gap is ${paragraphGaps.join(", ")}px instead of about 28px`);
+    }
+
+    const observedWindow = window as typeof window & { __journeyAuditCls?: number };
+    const clsBeforeSynthetic = observedWindow.__journeyAuditCls ?? 0;
+    if (clsBeforeSynthetic > 0.01) {
+      throw new Error(`application CLS reached ${clsBeforeSynthetic.toFixed(4)} before ad simulation`);
+    }
+
     document.querySelector("[data-journey-audit-ad]")?.remove();
     const syntheticAd = document.createElement("div");
     syntheticAd.dataset.journeyAuditAd = "true";
     syntheticAd.style.height = "90px";
     syntheticAd.style.display = "block";
     syntheticAd.textContent = "Journey placement audit";
-    const insertionAnchor = directItems[Math.min(5, directItems.length - 1)];
-    insertionAnchor.after(syntheticAd);
 
     const contentRect = content.getBoundingClientRect();
-    const adRect = syntheticAd.getBoundingClientRect();
+    const columnCount = contentStyle.gridTemplateColumns.split(/\s+/).filter(Boolean).length;
+    const incompleteRowAnchor = directItems[Math.min(columnCount, directItems.length - 1)];
+    incompleteRowAnchor.after(syntheticAd);
     const adStyle = getComputedStyle(syntheticAd);
-    const widthDelta = Math.abs(contentRect.width - adRect.width);
+
+    const incompleteRowTop = incompleteRowAnchor.getBoundingClientRect().top;
+    const rowFillers = directItems.slice(columnCount + 1, columnCount * 2);
+    const incompleteRowGap = rowFillers.find(
+      (item) => Math.abs(item.getBoundingClientRect().top - incompleteRowTop) > 2
+    );
+    if (columnCount > 1 && incompleteRowGap) {
+      throw new Error(
+        `dense placement left an incomplete ${columnCount}-column row before the synthetic ad`
+      );
+    }
+    if (isJourneyGrid && !contentStyle.gridAutoFlow.includes("dense")) {
+      throw new Error(
+        `Journey content grid uses ${contentStyle.gridAutoFlow} auto-flow instead of dense placement`
+      );
+    }
+
+    const finalAdRect = syntheticAd.getBoundingClientRect();
+    const widthDelta = Math.abs(contentRect.width - finalAdRect.width);
     if (widthDelta > 2) {
       throw new Error(`synthetic ad is ${widthDelta.toFixed(1)}px narrower than its content lane`);
     }
@@ -74,11 +203,16 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
 
     return {
       adGridColumn: `${adStyle.gridColumnStart} / ${adStyle.gridColumnEnd}`,
-      adWidth: Math.round(adRect.width),
-      contentDisplay: getComputedStyle(content).display,
+      adWidth: Math.round(finalAdRect.width),
+      clsBeforeSynthetic: Number(clsBeforeSynthetic.toFixed(4)),
+      columns: columnCount,
+      contentDisplay: contentStyle.display,
       contentWidth: Math.round(contentRect.width),
       directChildren: content.children.length,
       directItems: directItems.length,
+      gridAutoFlow: contentStyle.gridAutoFlow,
+      isJourneyGrid,
+      paragraphGap: paragraphGaps[0] ?? null,
       selectorTag: content.tagName.toLowerCase()
     };
   });
@@ -87,13 +221,14 @@ async function auditHydratedPage(page: Page, baseUrl: string, route: string) {
 async function auditDecalClientUpdate(page: Page, baseUrl: string) {
   await page.goto(new URL("catalog/roblox-decal-ids", baseUrl).href, { waitUntil: "domcontentloaded" });
   await page.waitForSelector("#article-body [data-journey-item]");
+  await waitForHydration(page);
   await page.selectOption("#decal-sort", "popular");
   const responsePromise = page.waitForResponse((response) =>
     response.url().includes("/api/roblox-decal-ids?") && response.status() === 200
   );
   await page.getByRole("button", { name: "Apply" }).click();
   await responsePromise;
-  await page.waitForURL(/\?sort=popular$/);
+  await page.waitForFunction(() => new URL(window.location.href).searchParams.get("sort") === "popular");
   await page.getByText("Updating results...").waitFor({ state: "hidden" });
 
   return page.evaluate(() => {
@@ -116,6 +251,7 @@ async function main() {
   try {
     for (const viewport of VIEWPORTS) {
       const context = await browser.newContext({ viewport });
+      await installClsObserver(context);
       const baseHostname = new URL(baseUrl).hostname;
       await context.route("**/*", async (route) => {
         const requestUrl = new URL(route.request().url());
@@ -125,13 +261,42 @@ async function main() {
       const page = await context.newPage();
 
       for (const route of ROUTES) {
-        const snapshot = await auditHydratedPage(page, baseUrl, route);
-        results.push({ route, viewport: viewport.name, ...snapshot });
+        try {
+          const snapshot = await auditHydratedPage(page, baseUrl, route);
+          results.push({ route, viewport: viewport.name, ...snapshot });
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          throw new Error(`${viewport.name} ${route}: ${message}`);
+        }
       }
 
       if (viewport.name === "desktop") {
         const directItems = await auditDecalClientUpdate(page, baseUrl);
         console.log(`Decal client-side sort retained ${directItems} direct Journey items.`);
+      }
+
+      await context.close();
+    }
+
+    for (const breakpoint of GRID_BREAKPOINTS) {
+      const context = await browser.newContext({ viewport: breakpoint });
+      await installClsObserver(context);
+      const baseHostname = new URL(baseUrl).hostname;
+      await context.route("**/*", async (route) => {
+        const requestUrl = new URL(route.request().url());
+        if (requestUrl.hostname === baseHostname) await route.continue();
+        else await route.abort();
+      });
+      const page = await context.newPage();
+
+      for (const route of breakpoint.routes) {
+        try {
+          const snapshot = await auditHydratedPage(page, baseUrl, route);
+          results.push({ route, viewport: breakpoint.name, ...snapshot });
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          throw new Error(`${breakpoint.name} ${route}: ${message}`);
+        }
       }
 
       await context.close();

@@ -182,6 +182,8 @@ body {
   .journey-content-stream {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
+    /* Backfill incomplete card rows without toggling layout after first paint. */
+    grid-auto-flow: row dense;
     gap: 1.5rem;
   }
 
@@ -192,6 +194,32 @@ body {
 
   .journey-content-stream > [data-journey-item] {
     grid-column: auto;
+  }
+
+  /*
+   * Markdown margins normally provide the article rhythm. Direct markdown
+   * nodes in this grid already receive the stream gap, so reset those margins
+   * and add back only the small text/heading offsets needed for the standard
+   * article spacing. This keeps Journey insertion boundaries flat.
+   */
+  #article-body.journey-content-stream > [data-md-copy] {
+    margin-block: 0 !important;
+  }
+
+  #article-body.journey-content-stream > [data-md-copy] + [data-md-copy] {
+    margin-top: 0.25rem !important;
+  }
+
+  #article-body.journey-content-stream > h2.md-copy-node[data-md-copy] {
+    margin-top: 1rem !important;
+  }
+
+  #article-body.journey-content-stream > h3.md-copy-node[data-md-copy] {
+    margin-top: 0.5rem !important;
+  }
+
+  #article-body.journey-content-stream > h4.md-copy-node[data-md-copy] {
+    margin-top: 0.25rem !important;
   }
 
   @media (min-width: 420px) {

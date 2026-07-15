@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Journey DOM"
+  short_description: "Flatten page DOM for Journey auto ads"
+  default_prompt: "Use $bloxodes-simplify-journey-dom to audit and simplify this Bloxodes page family for Journey auto-ad insertion, then verify it locally."
