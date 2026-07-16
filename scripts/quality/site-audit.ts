@@ -101,6 +101,7 @@ type Options = {
   expectedSha: string | null;
   timeoutMs: number;
   retries: number;
+  concurrency: number;
 };
 
 type AuditReport = {
@@ -167,6 +168,10 @@ function parsePositiveInt(value: string, flag: string): number {
   return parsed;
 }
 
+function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function parseOptions(): Options {
   const args = process.argv.slice(2);
   const modeArg = args.shift() ?? "seo";
@@ -182,6 +187,7 @@ function parseOptions(): Options {
   let expectedSha = process.env.EXPECTED_BUILD_SHA?.trim() || null;
   let timeoutMs = 20_000;
   let retries = 1;
+  let concurrency = 6;
 
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
@@ -197,10 +203,11 @@ function parseOptions(): Options {
     else if (arg === "--expected-sha") expectedSha = next();
     else if (arg === "--timeout-ms") timeoutMs = parsePositiveInt(next(), arg);
     else if (arg === "--retries") retries = Math.min(5, parsePositiveInt(next(), arg));
+    else if (arg === "--concurrency") concurrency = Math.min(12, parsePositiveInt(next(), arg));
     else if (arg === "--limit") limit = parsePositiveInt(next(), arg);
     else if (arg === "--all") all = true;
     else if (arg === "--help") {
-      console.log(`Usage: tsx scripts/quality/site-audit.ts <sitemaps|seo|routes|smoke|postdeploy> [options]\n\nOptions:\n  --fetch-origin <origin>      Origin to request (default http://127.0.0.1:3000)\n  --canonical-origin <origin>  Public canonical origin (default https://bloxodes.com)\n  --all                        Fetch every sitemap page URL\n  --limit <n>                  Cap selected page URLs\n  --expected-sha <sha>         Require /api/health build SHA\n  --report-dir <path>          Default tmp/test-reports\n  --timeout-ms <n>\n  --retries <n>`);
+      console.log(`Usage: tsx scripts/quality/site-audit.ts <sitemaps|seo|routes|smoke|postdeploy> [options]\n\nOptions:\n  --fetch-origin <origin>      Origin to request (default http://127.0.0.1:3000)\n  --canonical-origin <origin>  Public canonical origin (default https://bloxodes.com)\n  --all                        Fetch every sitemap page URL\n  --limit <n>                  Cap selected page URLs\n  --expected-sha <sha>         Require /api/health build SHA\n  --report-dir <path>          Default tmp/test-reports\n  --timeout-ms <n>\n  --retries <n>\n  --concurrency <n>            Sitemap page workers (default 6, maximum 12)`);
       process.exit(0);
     } else throw new Error(`Unknown option: ${arg}`);
   }
@@ -214,7 +221,8 @@ function parseOptions(): Options {
     limit,
     expectedSha,
     timeoutMs,
-    retries
+    retries,
+    concurrency
   };
 }
 
@@ -257,11 +265,15 @@ async function fetchWithTimeout(
         signal: AbortSignal.timeout(options.timeoutMs)
       });
       const body = await response.text();
-      if ((response.status === 429 || response.status >= 500) && attempt < options.retries) continue;
+      if ((response.status === 429 || response.status >= 500) && attempt < options.retries) {
+        await wait(Math.min(2_000, 500 * (attempt + 1)));
+        continue;
+      }
       return { response, body, durationMs: Date.now() - started };
     } catch (error) {
       lastError = error;
       if (attempt >= options.retries) throw error;
+      await wait(Math.min(2_000, 500 * (attempt + 1)));
     }
   }
   throw lastError;
@@ -1138,45 +1150,77 @@ async function runPageChecks(entries: SitemapEntry[], options: Options, issues: 
 
 async function runSitemapUrlStatusChecks(entries: SitemapEntry[], options: Options, issues: AuditIssue[]) {
   const targets = options.limit ? entries.slice(0, options.limit) : entries;
-  const pages: PageResult[] = [];
+  const pages = new Array<PageResult>(targets.length);
   let cursor = 0;
   async function worker() {
     while (cursor < targets.length) {
-      const entry = targets[cursor++];
-      const result = await fetchPage(entry.loc, "browser", options);
-      pages.push(result);
-      if (result.error) issue(issues, "error", "route", "fetch-error", entry.loc, result.error, "browser");
-      if (result.status !== 200) {
-        issue(issues, "error", "route", "sitemap-url-status", entry.loc, `Expected 200, received ${result.status}`, "browser");
-      }
-      if (result.redirectCount) {
-        issue(issues, "error", "route", "sitemap-url-redirect", entry.loc, `${result.redirectCount} redirects`, "browser");
-      }
-      if (!result.contentType.includes("html")) {
-        issue(issues, "error", "route", "sitemap-url-non-html", entry.loc, result.contentType || "missing", "browser");
-      }
-      if (result.seo.challengePage || result.seo.internalErrorPage) {
-        issue(issues, "error", "route", "sitemap-url-error-html", entry.loc, "Challenge or internal error HTML", "browser");
-      }
-      if (result.seo.robots.some((value) => /(^|[,\s])(noindex|none)([,\s]|$)/.test(value))) {
-        issue(issues, "error", "route", "sitemap-url-noindex", entry.loc, result.seo.robots.join("; "), "browser");
-      }
-      if (result.seo.canonical) {
-        try {
-          if (normalizeComparableUrl(new URL(result.seo.canonical, options.canonicalOrigin).toString()) !== normalizeComparableUrl(entry.loc)) {
-            issue(issues, "error", "route", "sitemap-url-canonical", entry.loc, result.seo.canonical, "browser");
-          }
-        } catch {
-          issue(issues, "error", "route", "sitemap-url-canonical", entry.loc, "Invalid canonical", "browser");
-        }
-      } else {
-        issue(issues, "error", "route", "sitemap-url-canonical", entry.loc, "Missing canonical", "browser");
-      }
+      const index = cursor++;
+      const entry = targets[index];
+      pages[index] = await fetchPage(entry.loc, "browser", options);
     }
   }
-  // Keep the exhaustive crawl below the local Supabase/Docker saturation point.
-  // Six workers still finish quickly while avoiding a burst of hundreds of SSR reads.
-  await Promise.all(Array.from({ length: Math.min(6, targets.length) }, worker));
+  await Promise.all(Array.from({ length: Math.min(options.concurrency, targets.length) }, worker));
+
+  const needsRetry = (result: PageResult, entry: SitemapEntry) => {
+    if (result.error || result.status !== 200 || result.redirectCount) return true;
+    if (!result.contentType.includes("html")) return true;
+    if (result.seo.challengePage || result.seo.internalErrorPage) return true;
+    if (result.seo.robots.some((value) => /(^|[,\s])(noindex|none)([,\s]|$)/.test(value))) return true;
+    if (!result.seo.canonical) return true;
+    try {
+      return normalizeComparableUrl(new URL(result.seo.canonical, options.canonicalOrigin).toString()) !== normalizeComparableUrl(entry.loc);
+    } catch {
+      return true;
+    }
+  };
+
+  const retryIndexes = pages
+    .map((result, index) => (needsRetry(result, targets[index]) ? index : -1))
+    .filter((index) => index >= 0);
+  if (retryIndexes.length) {
+    console.log(`Retrying ${retryIndexes.length} sitemap page contract failure(s) after a 15s origin cooldown`);
+    await wait(15_000);
+    let retryCursor = 0;
+    async function retryWorker() {
+      while (retryCursor < retryIndexes.length) {
+        const index = retryIndexes[retryCursor++];
+        pages[index] = await fetchPage(targets[index].loc, "browser", options);
+      }
+    }
+    await Promise.all(Array.from({ length: Math.min(2, retryIndexes.length) }, retryWorker));
+  }
+
+  for (let index = 0; index < targets.length; index += 1) {
+    const entry = targets[index];
+    const result = pages[index];
+    if (result.error) issue(issues, "error", "route", "fetch-error", entry.loc, result.error, "browser");
+    if (result.status !== 200) {
+      issue(issues, "error", "route", "sitemap-url-status", entry.loc, `Expected 200, received ${result.status}`, "browser");
+    }
+    if (result.redirectCount) {
+      issue(issues, "error", "route", "sitemap-url-redirect", entry.loc, `${result.redirectCount} redirects`, "browser");
+    }
+    if (!result.contentType.includes("html")) {
+      issue(issues, "error", "route", "sitemap-url-non-html", entry.loc, result.contentType || "missing", "browser");
+    }
+    if (result.seo.challengePage || result.seo.internalErrorPage) {
+      issue(issues, "error", "route", "sitemap-url-error-html", entry.loc, "Challenge or internal error HTML", "browser");
+    }
+    if (result.seo.robots.some((value) => /(^|[,\s])(noindex|none)([,\s]|$)/.test(value))) {
+      issue(issues, "error", "route", "sitemap-url-noindex", entry.loc, result.seo.robots.join("; "), "browser");
+    }
+    if (result.seo.canonical) {
+      try {
+        if (normalizeComparableUrl(new URL(result.seo.canonical, options.canonicalOrigin).toString()) !== normalizeComparableUrl(entry.loc)) {
+          issue(issues, "error", "route", "sitemap-url-canonical", entry.loc, result.seo.canonical, "browser");
+        }
+      } catch {
+        issue(issues, "error", "route", "sitemap-url-canonical", entry.loc, "Invalid canonical", "browser");
+      }
+    } else {
+      issue(issues, "error", "route", "sitemap-url-canonical", entry.loc, "Missing canonical", "browser");
+    }
+  }
   return pages;
 }
 

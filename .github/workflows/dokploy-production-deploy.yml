@@ -179,7 +179,7 @@ jobs:
           PLAYWRIGHT_SKIP_WEBSERVER: "1"
           SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || vars.PRODUCTION_SITE_URL || 'https://bloxodes.com' }}
         run: |
-          npm run test:sitemaps
+          npm run test:sitemaps -- --concurrency 4 --retries 2
           npm run test:seo
           npm run test:routes
           npm run test:render
