@@ -8,16 +8,16 @@ This file is the quick reference for what exists today and how to invoke it.
 - Prefer `npm run <name>` when a package script exists.
 - Fall back to direct `tsx scripts/...` or `python scripts/...` only for scripts that do not have a package alias yet.
 
-## Stability and SEO quality gates
+## Stability and SEO verification
 
 | Purpose | Preferred command |
 | --- | --- |
-| Source-only pull-request gate | `npm run verify:deterministic` |
-| Local data contracts and production build | `npm run verify:build` |
-| Exact local candidate crawl and Chromium verification | `npm run verify:predeploy` |
-| Explicit live read-only verification | `TEST_BASE_URL=https://bloxodes.com EXPECTED_BUILD_SHA=<sha> npm run verify:postdeploy` |
+| Fast source-only check | `npm run verify:deterministic` |
+| Verify one published or intentionally absent route | `npm run verify:published-url -- --path /wiki/<game>/<collection>` |
+| Manual local candidate crawl and Chromium verification | `npm run verify:predeploy` |
+| Manual live read-only audit | `TEST_BASE_URL=https://bloxodes.com EXPECTED_BUILD_SHA=<sha> npm run verify:postdeploy` |
 
-The implementation and thresholds are documented in `docs/testing/stability-and-seo.md`. Reports belong under ignored `tmp/test-reports/`.
+Automatic daily workflows use fast code/build/dataset checks and tiny targeted smoke requests only. Broad crawls are manual. The implementation is documented in `docs/testing/stability-and-seo.md`; reports belong under ignored `tmp/test-reports/`.
 
 ## Content Generation And Editing
 
@@ -170,7 +170,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |
 | VPS scheduled automation manifest | `scripts/ops/vps-scheduled-automation.crontab` | Install into the VPS `codex-admin` crontab beside existing stats-worker blocks. This is the scheduled source for universe daily rollup/prune/audit, platform aggregate refresh, codes refresh, Google Indexing, events refresh, puzzle sync, music IDs, and decal IDs. GitHub workflows for those jobs are manual fallback only. |
-| Check production data before Docker build | `scripts/ops/check-production-data-readiness.mjs` | `node --env-file-if-exists=.env scripts/ops/check-production-data-readiness.mjs`; read-only Supabase HEAD probe with five attempts, used by the root Dockerfile before `npm run build` |
+| Check production data explicitly | `scripts/ops/check-production-data-readiness.mjs` | `node --env-file-if-exists=.env scripts/ops/check-production-data-readiness.mjs`; manual read-only Supabase HEAD probe with five attempts, not part of the daily Docker build |
 | Run a command with production build variables | `scripts/ops/run-with-production-build-env.mjs` | Loads `/run/secrets/production_env` from BuildKit, falling back to local `.env`, then executes the supplied command without printing secret values |
 
 ### Wiki And Game Collection Production Publish

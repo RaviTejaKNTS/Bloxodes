@@ -63,6 +63,12 @@ describe("stats games SEO policy", () => {
     expect(seo({ genre: ["Action", "Action"] }).indexable).toBe(false);
   });
 
+  it("ignores the internal live-edge verification key for SEO state", () => {
+    const verified = seo({ __bloxodes_verify: "22fe3961.12345" });
+    expect(verified.indexable).toBe(true);
+    expect(verified.canonicalPath).toBe("/stats/games");
+  });
+
   it("builds only the approved sitemap matrix", () => {
     const paths = listStatsGamesIndexPaths(taxonomy.genres, taxonomy.subgenres);
     expect(paths).toHaveLength(12);

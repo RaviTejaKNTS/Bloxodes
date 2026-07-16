@@ -2129,7 +2129,17 @@ export function parseStatsSearchParams(searchParams?: Record<string, string | st
   const pageValue = Number(first(values.page) ?? "1");
   const minValue = Number(first(values.minPlaying) ?? first(values.minPlayers) ?? "");
   const rawSort = first(values.sort)?.trim() ?? "";
-  const knownParams = new Set(["page", "q", "genre", "subgenre", "sort", "minPlaying", "minPlayers", "column"]);
+  const knownParams = new Set([
+    "page",
+    "q",
+    "genre",
+    "subgenre",
+    "sort",
+    "minPlaying",
+    "minPlayers",
+    "column",
+    "__bloxodes_verify"
+  ]);
   return {
     page: Number.isFinite(pageValue) && pageValue > 0 ? Math.floor(pageValue) : 1,
     q: first(values.q)?.trim() ?? "",

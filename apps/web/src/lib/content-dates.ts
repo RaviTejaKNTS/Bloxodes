@@ -129,13 +129,31 @@ export function resolvePublishedAt(source: ContentDateSource): string | null {
 }
 
 export function resolveModifiedAt(source: ContentDateSource): string | null {
-  return source.content_updated_at ?? source.updated_at ?? source.published_at ?? source.created_at ?? null;
+  const candidates = [
+    source.content_updated_at,
+    source.updated_at,
+    source.published_at,
+    source.created_at
+  ].filter((value): value is string => typeof value === "string" && Boolean(value.trim()));
+  const validCandidates = candidates
+    .map((value) => ({ value, date: parseContentDate(value) }))
+    .filter((candidate): candidate is { value: string; date: Date } => Boolean(candidate.date));
+
+  if (!validCandidates.length) return candidates[0] ?? null;
+  return validCandidates.reduce((latest, candidate) =>
+    candidate.date.getTime() > latest.date.getTime() ? candidate : latest
+  ).value;
 }
 
 export function formatExactDate(value: string | Date | null | undefined): string | null {
   const date = parseContentDate(value);
   if (!date) return null;
-  return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC"
+  });
 }
 
 export function formatRelativeDate(value: string | Date | null | undefined): string | null {

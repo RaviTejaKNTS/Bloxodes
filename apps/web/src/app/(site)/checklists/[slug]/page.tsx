@@ -9,6 +9,7 @@ import { getChecklistPageBySlug, listPublishedChecklistsPage } from "@/lib/db";
 import { renderMarkdown, markdownToPlainText } from "@/lib/markdown";
 import { CHECKLISTS_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 
 export const revalidate = 21600;
 const MAX_STATIC_CHECKLIST_SLUGS = 120;
@@ -129,6 +130,10 @@ export default async function ChecklistPage({ params }: PageProps) {
           </h1>
           <ChecklistProgressHeader title={page.title} slug={page.slug} totalItems={leafItems.length} />
         </div>
+        <UpdatedTimestamp
+          value={updatedDateSource}
+          className="inline-flex items-center gap-1.5 text-sm text-foreground/80"
+        />
       </header>
       <ChecklistServerSnapshot items={items} />
       <div className={boardContainerClass} data-checklist-scroll>

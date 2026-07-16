@@ -1,0 +1,91 @@
+name: Manual Web Audit
+
+on:
+  workflow_dispatch:
+    inputs:
+      audit:
+        description: "Audit to run"
+        required: true
+        default: "sample"
+        type: choice
+        options:
+          - sample
+          - full-sitemap-crawl
+          - render
+          - published-content
+      site_url:
+        description: "Site origin to inspect"
+        required: true
+        default: "https://bloxodes.com"
+        type: string
+      concurrency:
+        description: "Request workers for HTTP audits"
+        required: true
+        default: "1"
+        type: choice
+        options:
+          - "1"
+          - "2"
+      full_confirmation:
+        description: "For a full sitemap crawl, enter RUN FULL AUDIT"
+        required: false
+        default: ""
+        type: string
+
+concurrency:
+  group: manual-web-audit
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      TEST_BASE_URL: ${{ inputs.site_url }}
+      SEO_AUDIT_FETCH_ORIGIN: ${{ inputs.site_url }}
+      SITE_URL: ${{ inputs.site_url }}
+      PLAYWRIGHT_SKIP_WEBSERVER: "1"
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
+      SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Require explicit full-crawl confirmation
+        if: ${{ inputs.audit == 'full-sitemap-crawl' }}
+        run: |
+          if [ "${{ inputs.full_confirmation }}" != "RUN FULL AUDIT" ]; then
+            echo "Full sitemap crawl requires the exact confirmation: RUN FULL AUDIT"
+            exit 1
+          fi
+      - name: Install Chromium
+        if: ${{ inputs.audit == 'render' }}
+        run: npx playwright install --with-deps chromium
+      - name: Run representative SEO and route sample
+        if: ${{ inputs.audit == 'sample' }}
+        run: |
+          npm run test:seo -- --concurrency "${{ inputs.concurrency }}"
+          npm run test:routes -- --concurrency "${{ inputs.concurrency }}"
+      - name: Run full sitemap crawl
+        if: ${{ inputs.audit == 'full-sitemap-crawl' }}
+        run: npm run test:sitemaps -- --concurrency "${{ inputs.concurrency }}" --retries 1
+      - name: Run browser rendering audit
+        if: ${{ inputs.audit == 'render' }}
+        run: npm run test:render
+      - name: Run published-content data audit
+        if: ${{ inputs.audit == 'published-content' }}
+        run: npm run validate:published-content -- --allow-remote-read
+      - name: Upload audit reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: manual-web-audit-${{ inputs.audit }}-${{ github.run_id }}
+          path: tmp/test-reports
+          if-no-files-found: ignore
