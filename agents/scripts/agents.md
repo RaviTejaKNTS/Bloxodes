@@ -25,6 +25,7 @@ The implementation and thresholds are documented in `docs/testing/stability-and-
 | --- | --- | --- |
 | Batch article generation | `scripts/articles/generate-articles.ts` | `npm run generate:articles` |
 | Draft code page generation | `scripts/codes/generate-code-page-copy.ts` | `npm run generate` |
+| Reviewed code page upsert with provider-owned source fields | `scripts/codes/upsert-code-page.ts` | `npm run upsert:code-page -- --file <payload.json> --dry-run` before the approved write |
 | Beebom code-page discovery and immediate draft generation | `scripts/codes/discover-beebom-code-pages.ts` | `npm run discover:beebom-codes -- --apply` |
 | Event guide generation | `scripts/events/generate-events-articles.ts` | `npm run generate:events-articles` |
 | Article generation queue worker | `scripts/automation/run-article-generation-queue.ts` | `npm run articles:queue` |

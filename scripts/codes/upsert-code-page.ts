@@ -125,9 +125,7 @@ async function loadPayload(filePath: string): Promise<CodePagePayload> {
 
 function mapSourceUrls(sourceUrls: string[] | undefined): SourceUrlFields {
   const fields: SourceUrlFields = {};
-  const keys: Array<keyof SourceUrlFields> = [
-    "source_url",
-    "source_url_2",
+  const overflowKeys: Array<keyof SourceUrlFields> = [
     "source_url_3",
     "source_url_4",
     "source_url_5",
@@ -144,10 +142,24 @@ function mapSourceUrls(sourceUrls: string[] | undefined): SourceUrlFields {
         .map((url) => (typeof url === "string" ? url.trim() : ""))
         .filter(Boolean)
     )
-  ).slice(0, keys.length);
+  ).slice(0, 10);
 
-  for (let i = 0; i < keys.length; i += 1) {
-    fields[keys[i]] = normalized[i] ?? null;
+  const hostname = (value: string) => {
+    try {
+      return new URL(value).hostname.replace(/^www\./i, "").toLowerCase();
+    } catch {
+      return "";
+    }
+  };
+  const robloxDenUrl = normalized.find((url) => hostname(url) === "robloxden.com") ?? null;
+  const beebomUrl = normalized.find((url) => hostname(url) === "beebom.com") ?? null;
+  const overflowUrls = normalized.filter((url) => url !== robloxDenUrl && url !== beebomUrl);
+
+  fields.source_url = robloxDenUrl;
+  fields.source_url_2 = beebomUrl;
+
+  for (let i = 0; i < overflowKeys.length; i += 1) {
+    fields[overflowKeys[i]] = overflowUrls[i] ?? null;
   }
 
   return fields;
