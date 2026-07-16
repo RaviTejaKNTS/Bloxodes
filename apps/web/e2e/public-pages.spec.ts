@@ -183,7 +183,7 @@ test.describe("public rendering contracts", () => {
     await expect(robuxResult).not.toHaveText("—");
 
     await page.getByRole("button", { name: "USD → Robux" }).click();
-    await expect(page.getByRole("heading", { name: "USD to Robux" })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "USD to Robux", exact: true })).toBeVisible();
     await expect(page.getByText(/Approx Robux for exactly/)).toBeVisible();
   });
 });
