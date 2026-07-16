@@ -573,7 +573,7 @@ export async function generateAvatarCatalogMetadata({
   const baseTitle = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? route.config.title;
   const title = count > 0 ? `${baseTitle} (${formatCount(count)} items)` : baseTitle;
   const description = catalog?.meta_description ?? route.config.description;
-  const image = catalog?.thumb_url || `${SITE_URL}/og-image.png`;
+  const image = catalog?.thumb_url || `${SITE_URL}/Bloxodes.png`;
 
   return {
     title,
@@ -637,7 +637,7 @@ export async function renderAvatarCatalogPage({
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitle,
       description,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
       publishedAt: publishedIso,
       updatedAt: updatedIso

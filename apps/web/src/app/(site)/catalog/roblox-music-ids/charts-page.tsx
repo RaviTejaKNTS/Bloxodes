@@ -123,7 +123,7 @@ export async function MusicChartsPage({
       slug: `${canonicalPath.replace(/^\//, "")}?range=${range}`,
       title: pageTitle,
       description: config.description,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
       publishedAt: null,
       updatedAt: updatedIso

@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? `Roblox Catalogs | ${SITE_NAME}`;
   const description = catalog.meta_description ?? CATALOG_DESCRIPTION;
-  const image = catalog.thumb_url || `${SITE_URL}/og-image.png`;
+  const image = catalog.thumb_url || `${SITE_URL}/Bloxodes.png`;
 
   return {
     title,

@@ -8,6 +8,17 @@ This file is the quick reference for what exists today and how to invoke it.
 - Prefer `npm run <name>` when a package script exists.
 - Fall back to direct `tsx scripts/...` or `python scripts/...` only for scripts that do not have a package alias yet.
 
+## Stability and SEO quality gates
+
+| Purpose | Preferred command |
+| --- | --- |
+| Source-only pull-request gate | `npm run verify:deterministic` |
+| Local data contracts and production build | `npm run verify:build` |
+| Exact local candidate crawl and Chromium verification | `npm run verify:predeploy` |
+| Explicit live read-only verification | `TEST_BASE_URL=https://bloxodes.com EXPECTED_BUILD_SHA=<sha> npm run verify:postdeploy` |
+
+The implementation and thresholds are documented in `docs/testing/stability-and-seo.md`. Reports belong under ignored `tmp/test-reports/`.
+
 ## Content Generation And Editing
 
 | Purpose | File | Preferred command |

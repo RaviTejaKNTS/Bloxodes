@@ -824,7 +824,7 @@ export async function renderEventsPage({ slug }: { slug: string }) {
   const updatedIso = typeof updatedTimestamp === "number" ? new Date(updatedTimestamp).toISOString() : publishedIso;
   const heroImageCandidate =
     upcomingEvents.find((event) => event.primary_thumbnail_url)?.primary_thumbnail_url ?? page.universe?.icon_url ?? null;
-  const coverImage = resolveImageUrl(heroImageCandidate) ?? `${SITE_URL}/og-image.png`;
+  const coverImage = resolveImageUrl(heroImageCandidate) ?? `${SITE_URL}/Bloxodes.png`;
 
   const schemaEvents = [...upcomingEvents, ...currentEvents, ...pastEvents]
     .map((event) => {

@@ -6,7 +6,7 @@ const title = "Terms of Service";
 const description =
   "Terms of Service for Bloxodes: account responsibilities, acceptable use, Roblox linking, and site policies.";
 const canonical = `${SITE_URL.replace(/\/$/, "")}/terms-of-service`;
-const ogImage = `${SITE_URL}/og-image.png`;
+const ogImage = `${SITE_URL}/Bloxodes.png`;
 
 export const metadata: Metadata = {
   title,

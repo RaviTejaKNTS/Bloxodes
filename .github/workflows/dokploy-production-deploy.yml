@@ -66,6 +66,13 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
+          cache: npm
+
+      - name: Install quality dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Install candidate browser
+        run: npx playwright install --with-deps chromium
 
       - name: Validate production build environment
         if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
@@ -125,23 +132,80 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and publish production image
+      - name: Build candidate production image
         if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
         uses: docker/build-push-action@v7
         with:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64
-          push: true
+          load: true
+          push: false
           tags: |
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
-            ${{ env.IMAGE_NAME }}:production
           build-args: |
             BLOXODES_BUILD_SHA=${{ github.sha }}
           secret-files: |
             production_env=${{ runner.temp }}/bloxodes-production-build.env
           cache-from: type=gha,scope=bloxodes-production-web
           cache-to: type=gha,mode=max,scope=bloxodes-production-web
+
+      - name: Start candidate image
+        if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
+        run: |
+          docker run --detach --rm \
+            --name bloxodes-candidate \
+            --env-file "$RUNNER_TEMP/bloxodes-production-build.env" \
+            --publish 127.0.0.1:3100:3000 \
+            "${IMAGE_NAME}:${GITHUB_SHA}"
+
+          for attempt in $(seq 1 120); do
+            if curl --fail --silent http://127.0.0.1:3100/api/health >/dev/null; then
+              exit 0
+            fi
+            if ! docker inspect bloxodes-candidate >/dev/null 2>&1; then
+              echo "Candidate container exited before becoming healthy"
+              exit 1
+            fi
+            sleep 1
+          done
+          echo "Candidate container did not become healthy"
+          exit 1
+
+      - name: Verify candidate image
+        if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
+        env:
+          TEST_BASE_URL: http://127.0.0.1:3100
+          PLAYWRIGHT_SKIP_WEBSERVER: "1"
+          SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || vars.PRODUCTION_SITE_URL || 'https://bloxodes.com' }}
+        run: |
+          npm run test:sitemaps
+          npm run test:seo
+          npm run test:routes
+          npm run test:render
+
+      - name: Stop candidate image
+        if: ${{ always() && (github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '')) }}
+        run: |
+          docker logs bloxodes-candidate > "$RUNNER_TEMP/bloxodes-candidate.log" 2>&1 || true
+          docker stop bloxodes-candidate || true
+
+      - name: Publish verified production image
+        if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
+        run: |
+          docker tag "${IMAGE_NAME}:${GITHUB_SHA}" "${IMAGE_NAME}:production"
+          docker push "${IMAGE_NAME}:${GITHUB_SHA}"
+          docker push "${IMAGE_NAME}:production"
+
+      - name: Upload candidate reports
+        if: ${{ always() && (github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '')) }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: candidate-quality-reports-${{ github.sha }}
+          path: |
+            tmp/test-reports
+            ${{ runner.temp }}/bloxodes-candidate.log
+          if-no-files-found: ignore
 
       - name: Validate Dokploy configuration
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.trigger_dokploy == 'true' }}
@@ -279,6 +343,15 @@ jobs:
           cat /tmp/dokploy-health.json || true
           exit 1
 
+      - name: Verify deployed build before cache changes
+        env:
+          TEST_BASE_URL: ${{ env.PRODUCTION_SITE_URL }}
+          POSTDEPLOY_BASE_URL: ${{ env.PRODUCTION_SITE_URL }}
+          SITE_URL: ${{ env.PRODUCTION_SITE_URL }}
+          EXPECTED_BUILD_SHA: ${{ env.DEPLOY_IMAGE_SHA }}
+          PLAYWRIGHT_SKIP_WEBSERVER: "1"
+        run: npm run verify:postdeploy
+
       - name: Purge Cloudflare cache
         if: ${{ github.event_name != 'workflow_dispatch' || inputs.purge_cloudflare == 'true' }}
         env:
@@ -317,3 +390,11 @@ jobs:
           CACHE_WARM_REQUEST_DELAY_MS: ${{ vars.CACHE_WARM_REQUEST_DELAY_MS }}
         run: |
           CACHE_WARM_SITE_URL="$PRODUCTION_SITE_URL" npm run cache:warm
+
+      - name: Upload postdeploy reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: postdeploy-quality-reports-${{ github.sha }}
+          path: tmp/test-reports
+          if-no-files-found: ignore

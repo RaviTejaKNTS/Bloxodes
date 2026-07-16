@@ -33,7 +33,7 @@ function summarize(descriptionMd: string | null | undefined, fallback: string): 
 function mapRowToCard(row: QuizListEntry) {
   const universeName = row.universe?.display_name ?? row.universe?.name ?? null;
   const thumb = pickThumbnail(row.universe?.thumbnail_urls);
-  const coverImage = row.universe?.icon_url || thumb || `${SITE_URL}/og-image.png`;
+  const coverImage = row.universe?.icon_url || thumb || `${SITE_URL}/Bloxodes.png`;
   const updatedAt = row.content_updated_at || row.updated_at || row.published_at || row.created_at || null;
   const summary = summarize(row.seo_description ?? row.description_md ?? null, QUIZZES_DESCRIPTION);
 

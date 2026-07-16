@@ -2,6 +2,8 @@
 
 Created: 2026-07-02
 
+Local implementation status: complete on 2026-07-16. GitHub workflow activation, branch-protection changes, image publication, Dokploy deployment, and live postdeploy verification are intentionally pending explicit approval.
+
 ## Why this exists
 
 Bloxodes is now large enough that manual checking is not enough. A small code or data change can affect search indexing, structured data, sitemap output, page rendering, page speed, Cloudflare behavior, Supabase reads, and production availability.
@@ -500,12 +502,14 @@ Start with the highest traffic and highest risk routes:
 
 ## Open decisions
 
-- Decide final hard thresholds for response time.
-- Decide final HTML size limits by page family.
-- Decide whether all sitemap URLs should be checked on every PR or only nightly.
-- Decide how much production smoke testing should run immediately after each deploy.
-- Decide whether Cloudflare challenge checks should be blocking for all public pages or only SEO-critical pages.
-- Decide how strict metadata length checks should be.
+Resolved for the first enforceable version:
+
+- Response time over 2 seconds is a warning; availability, status, and contract failures block.
+- Uncompressed HTML over 1 MB warns and over 2 MB blocks.
+- Pull requests run deterministic checks and a production build. Candidate and postdeploy gates request every sitemap URL.
+- Postdeploy runs full sitemap status plus representative SEO, four-user-agent route checks, critical APIs, RSS/robots, and desktop/mobile Chromium before cache changes.
+- Challenge or internal-error HTML blocks on every sitemap URL and every audited public page.
+- Titles outside 20–65 characters and descriptions outside 50–170 characters warn initially; missing or duplicate metadata blocks.
 
 ## Definition of done
 

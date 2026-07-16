@@ -59,13 +59,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description,
       url: canonical,
       siteName: SITE_NAME,
-      images: [avatar || `${SITE_URL}/og-image.png`]
+      images: [avatar || `${SITE_URL}/Bloxodes.png`]
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [avatar || `${SITE_URL}/og-image.png`]
+      images: [avatar || `${SITE_URL}/Bloxodes.png`]
     }
   };
 }

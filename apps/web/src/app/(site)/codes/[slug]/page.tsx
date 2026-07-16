@@ -358,7 +358,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     ? game.cover_image
     : game.cover_image
       ? `${SITE_URL.replace(/\/$/, "")}/${game.cover_image.replace(/^\//, "")}`
-      : `${SITE_URL}/og-image.png`;
+      : `${SITE_URL}/Bloxodes.png`;
   const otherMeta: Record<string, string> = {};
   return {
     title,
@@ -609,7 +609,7 @@ export default async function GamePage({ params }: Params) {
     ? game.cover_image
     : game.cover_image
       ? `${SITE_URL.replace(/\/$/, "")}/${game.cover_image.replace(/^\//, "")}`
-      : `${SITE_URL}/og-image.png`;
+      : `${SITE_URL}/Bloxodes.png`;
   const metaDescriptionRaw = markdownToPlainText(
     game.seo_description ||
     `Get the latest ${game.name} codes for ${monthYear()} and redeem them for free in-game rewards. Updated daily with only active and working codes.`

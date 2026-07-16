@@ -5,7 +5,7 @@ import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 const title = "Contact Us";
 const description = "Find the best way to reach the Bloxodes.com team.";
 const canonical = `${SITE_URL.replace(/\/$/, "")}/contact`;
-const ogImage = `${SITE_URL}/og-image.png`;
+const ogImage = `${SITE_URL}/Bloxodes.png`;
 
 export const metadata: Metadata = {
   title,

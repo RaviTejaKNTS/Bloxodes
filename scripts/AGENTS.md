@@ -15,6 +15,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
 ## Folder Map
 
 - `dev/`: local development launch guards. `start-local-dev.ts` powers `npm run dev:local`, loads `.env.local` through the shared env loader, and refuses to start if `SUPABASE_URL` is not local.
+- `quality/`: read-only content contracts, sitemap/SEO/route/API crawls, candidate orchestration, and report generation. Use `verify:deterministic`, `verify:build`, `verify:predeploy`, and `verify:postdeploy`; see `docs/testing/stability-and-seo.md`.
 - `ads/`: build-time ad and policy helpers.
   - `audit-journey-catalog-dom.ts` is the read-only local DOM guard for every Music IDs and Decal IDs route shape. Start the local web app, then run `npm run audit:journey-dom -- --base-url http://127.0.0.1:<port>`; it requires exactly one `#article-body`, direct block-level `data-journey-item` children, and no manual Mediavine content hints.
   - `audit-journey-catalog-browser.ts` verifies the hydrated content stream at desktop and mobile widths and inserts a synthetic direct child to prove an in-content placement spans the full lane. Run `npm run audit:journey-browser -- --base-url http://127.0.0.1:<port>`.
@@ -121,6 +122,8 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `backfill-clean-display-names.ts` cleans `roblox_universes.display_name` from raw Roblox titles while leaving `name` as the raw source value. It is dry-run by default; use `--apply` locally, and pair `NODE_ENV=production` with `--allow-prod` only after a clean production dry-run.
 
 ## Operational Expectations
+
+- Quality scripts may write only ignored reports under `tmp/test-reports/`. `validate:published-content` is read-only and refuses remote Supabase unless `--allow-remote-read` is explicit. `verify:postdeploy` is read-only but requires an explicit HTTP target.
 
 - Treat scripts as data pipelines: know whether the job reads only, mutates Supabase, writes local files, calls external APIs, or triggers revalidation.
 - If a script creates or updates publishable content, review `/api/revalidate` coverage and any relevant Supabase revalidation trigger flow.

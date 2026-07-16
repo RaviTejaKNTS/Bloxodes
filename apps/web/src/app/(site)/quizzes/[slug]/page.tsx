@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     (page.description_md ? markdownToPlainText(page.description_md).slice(0, 160) : QUIZZES_DESCRIPTION);
   const canonical = `${SITE_URL}/quizzes/${page.code}`;
   const thumb = pickThumbnail(page.universe?.thumbnail_urls);
-  const image = thumb || page.universe?.icon_url || `${SITE_URL}/og-image.png`;
+  const image = thumb || page.universe?.icon_url || `${SITE_URL}/Bloxodes.png`;
 
   return {
     title: `${titleBase} | ${SITE_NAME}`,

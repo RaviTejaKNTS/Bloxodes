@@ -13,8 +13,9 @@ import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { THE_FORGE_COLLECTIONS, type GameCollectionViewConfig } from "@/lib/game-collections/games/the-forge";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
+import { toIsoContentDate } from "@/lib/content-dates";
 
-const FALLBACK_IMAGE = "/og-image.png";
+const FALLBACK_IMAGE = "/Bloxodes.png";
 
 
 export type CollectionContentHtml = {
@@ -24,6 +25,7 @@ export type CollectionContentHtml = {
   howHtml?: string;
   descriptionHtml?: Array<{ key: string; html: string }>;
   faqHtml?: Array<{ q: string; a: string }>;
+  publishedAt?: string | null;
   updatedAt?: string | null;
 };
 
@@ -383,6 +385,7 @@ export function renderTheForgeCollectionPage({
       ? pageDescription
       : `${pageDescription} Page ${pagination.info.currentPage} of ${pagination.info.totalPages}.`;
   const updatedIso = updatedDate?.toISOString() ?? null;
+  const publishedIso = toIsoContentDate(contentHtml?.publishedAt) ?? updatedIso;
   const sectionNav = pagination.sectionLinks;
   const hasDetails = pagination.info.currentPage === 1 && (Boolean(descriptionHtml.length) || Boolean(faqHtml.length));
 
@@ -420,9 +423,9 @@ export function renderTheForgeCollectionPage({
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitleWithPage,
       description: pageDescriptionWithPage,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: publishedIso,
       updatedAt: updatedIso
     })
   );

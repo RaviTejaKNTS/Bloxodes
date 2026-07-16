@@ -13,9 +13,10 @@ import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
 import { GROW_GARDEN_COLLECTIONS, type GrowGardenCollectionConfig } from "@/lib/game-collections/games/grow-a-garden";
 import { unwrapDatasetItems } from "@/lib/local-datasets";
+import { toIsoContentDate } from "@/lib/content-dates";
 import type { CollectionContentHtml } from "./the-forge";
 
-const FALLBACK_IMAGE = "/og-image.png";
+const FALLBACK_IMAGE = "/Bloxodes.png";
 
 type GrowGardenDatasetSource = {
   label?: string | null;
@@ -577,6 +578,7 @@ export function renderGrowGardenCollectionPage({
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
   const basePath = buildGrowGardenCollectionPath(config.slug);
   const updatedIso = updatedDate?.toISOString() ?? null;
+  const publishedIso = toIsoContentDate(contentHtml?.publishedAt) ?? updatedIso;
   const pagination = buildCollectionPagination({
     sections: preparedCollection.groupedSections,
     currentPage,
@@ -630,9 +632,9 @@ export function renderGrowGardenCollectionPage({
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitleWithPage,
       description: pageDescriptionWithPage,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: publishedIso,
       updatedAt: updatedIso
     })
   );

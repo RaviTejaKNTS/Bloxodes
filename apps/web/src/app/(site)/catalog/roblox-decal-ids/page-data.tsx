@@ -409,7 +409,7 @@ export function renderRobloxDecalCategoriesPage({
   const description = "Browse Roblox decal IDs by image style, theme, and common decal search intent.";
   const canonicalPath = buildDecalCategoriesPath();
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const image = `${SITE_URL}/og-image.png`;
+  const image = `${SITE_URL}/Bloxodes.png`;
   const breadcrumbNavItems: BreadcrumbItem[] = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },
@@ -578,7 +578,7 @@ export function renderRobloxDecalIdsPage({
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
   const description = pageDescription ?? CATALOG_DESCRIPTION;
-  const image = `${SITE_URL}/og-image.png`;
+  const image = `${SITE_URL}/Bloxodes.png`;
   const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : undefined;
   const updatedIso = updatedDate && !Number.isNaN(updatedDate.getTime()) ? updatedDate.toISOString() : undefined;
   const startIndex = (currentPage - 1) * PAGE_SIZE;

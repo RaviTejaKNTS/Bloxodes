@@ -452,7 +452,7 @@ type UniverseRow = {
   favorites: number | null;
   likes: number | null;
   dislikes: number | null;
-  stats_tier: "NEW" | "HOT" | "WARM" | "COLD" | null;
+  stats_tier?: "NEW" | "HOT" | "WARM" | "COLD" | null;
   created_at_api: string | null;
   updated_at_api: string | null;
   last_stats_refreshed_at: string | null;
@@ -946,6 +946,11 @@ type StatsGameDetailIndexBoundary = {
   playing: number | null;
 };
 
+const ALL_ELIGIBLE_GAMES_FIT_INDEX: StatsGameDetailIndexBoundary = {
+  universe_id: Number.MAX_SAFE_INTEGER,
+  playing: -1
+};
+
 function isStatsGameSitemapEligible(game: Pick<StatsGame, "playing" | "visits" | "statsTier">) {
   return (
     game.statsTier === "HOT" ||
@@ -967,9 +972,22 @@ async function loadStatsGameDetailIndexBoundary(): Promise<StatsGameDetailIndexB
     .maybeSingle();
   if (error) {
     console.warn("Failed to load stats game detail index boundary", error.message);
-    return null;
+    const fallback = await supabaseAdmin()
+      .from("roblox_universes")
+      .select("universe_id, playing")
+      .not("slug", "is", null)
+      .or("playing.gte.100,visits.gte.10000000")
+      .order("playing", { ascending: false, nullsFirst: false })
+      .order("universe_id", { ascending: true })
+      .range(STATS_GAME_DETAIL_INDEX_LIMIT - 1, STATS_GAME_DETAIL_INDEX_LIMIT - 1)
+      .maybeSingle();
+    if (fallback.error) {
+      console.warn("Failed to load fallback stats game detail index boundary", fallback.error.message);
+      return null;
+    }
+    return (fallback.data as StatsGameDetailIndexBoundary | null) ?? ALL_ELIGIBLE_GAMES_FIT_INDEX;
   }
-  return data as StatsGameDetailIndexBoundary | null;
+  return (data as StatsGameDetailIndexBoundary | null) ?? ALL_ELIGIBLE_GAMES_FIT_INDEX;
 }
 
 export async function isStatsGameDetailIndexable(game: Pick<StatsGame, "universeId" | "playing" | "visits" | "statsTier">) {
@@ -1238,7 +1256,7 @@ function mapUniverse(row: UniverseRow): StatsGame {
     likes: toNumber(row.likes),
     dislikes: toNumber(row.dislikes),
     ratingPercent,
-    statsTier: row.stats_tier,
+    statsTier: row.stats_tier ?? null,
     createdAtApi: row.created_at_api,
     updatedAtApi: row.updated_at_api,
     lastStatsRefreshedAt: row.last_stats_refreshed_at,
@@ -3690,7 +3708,7 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
     universe_id, root_place_id, name, display_name, slug, description,
     creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
     icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-    stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+    created_at_api, updated_at_api, last_stats_refreshed_at,
     last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
     console_enabled, vr_enabled
   `;
@@ -3791,7 +3809,7 @@ export async function getStatsGameSummaryByUniverseId(universeId: number): Promi
       universe_id, root_place_id, name, display_name, slug, description,
       creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
       icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-      stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+      created_at_api, updated_at_api, last_stats_refreshed_at,
       last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
       console_enabled, vr_enabled
     `)

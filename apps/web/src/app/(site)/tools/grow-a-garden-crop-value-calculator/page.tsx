@@ -18,7 +18,7 @@ export const revalidate = 21600;
 
 const TOOL_CODE = "grow-a-garden-crop-value-calculator";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/${TOOL_CODE}`;
-const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 const TOOL_AD_SLOT = "3529946151";
 
 export async function generateMetadata(): Promise<Metadata> {

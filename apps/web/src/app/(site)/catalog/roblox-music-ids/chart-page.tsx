@@ -84,7 +84,7 @@ export async function MusicChartPage({ chart, pageNumber = 1 }: { chart: MusicCh
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitle,
       description: config.description,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
       publishedAt: null,
       updatedAt: updatedIso

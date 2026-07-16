@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       siteName: SITE_NAME,
-      images: [`${SITE_URL}/og-image.png`]
+      images: [`${SITE_URL}/Bloxodes.png`]
     }
   };
 }

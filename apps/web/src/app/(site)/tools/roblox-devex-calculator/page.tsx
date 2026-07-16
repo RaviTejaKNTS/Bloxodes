@@ -21,7 +21,7 @@ export const revalidate = 3600;
 
 const TOOL_CODE = "roblox-devex-calculator";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/roblox-devex-calculator`;
-const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 const TOOL_AD_SLOT = "3529946151";
 
 export async function generateMetadata(): Promise<Metadata> {

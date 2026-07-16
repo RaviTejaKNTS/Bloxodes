@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getStatsPlatformChart, normalizeStatsRange, normalizeStatsResolution } from "@/lib/stats";
+import { CACHE_TAG_HEADER, serializeCacheTags } from "@/lib/public-cache-tags";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +14,8 @@ export async function GET(request: Request) {
     });
     return NextResponse.json(chart, {
       headers: {
-        "cache-control": "public, max-age=300, stale-while-revalidate=1800"
+        "cache-control": "public, max-age=300, stale-while-revalidate=1800",
+        [CACHE_TAG_HEADER]: serializeCacheTags(["site", "stats", "stats-platform"])
       }
     });
   } catch (error) {

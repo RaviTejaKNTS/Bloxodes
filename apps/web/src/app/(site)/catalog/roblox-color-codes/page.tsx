@@ -13,7 +13,7 @@ import {
 export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-color-codes"];
-const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 function sortDescriptionEntries(description: Record<string, string> | null | undefined) {
   return Object.entries(description ?? {}).sort((a, b) => {

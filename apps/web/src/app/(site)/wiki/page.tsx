@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     description: WIKI_DESCRIPTION,
     url: `${SITE_URL}/wiki`,
     siteName: SITE_NAME,
-    images: [`${SITE_URL}/og-image.png`]
+    images: [`${SITE_URL}/Bloxodes.png`]
   },
   twitter: {
     card: "summary_large_image",
     title: `Roblox Wiki | ${SITE_NAME}`,
     description: WIKI_DESCRIPTION,
-    images: [`${SITE_URL}/og-image.png`]
+    images: [`${SITE_URL}/Bloxodes.png`]
   }
 };
 

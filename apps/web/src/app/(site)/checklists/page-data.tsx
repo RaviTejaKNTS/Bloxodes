@@ -51,7 +51,7 @@ function mapRowToCard(row: ChecklistSummaryRow): ChecklistCardData {
     (row as any).cover_image ||
     (row as any).universe?.icon_url ||
     thumb ||
-    `${SITE_URL}/og-image.png`;
+    `${SITE_URL}/Bloxodes.png`;
   const updatedAt = row.updated_at || row.published_at || row.created_at || null;
   const itemsCount =
     typeof (row as any).leaf_item_count === "number"
