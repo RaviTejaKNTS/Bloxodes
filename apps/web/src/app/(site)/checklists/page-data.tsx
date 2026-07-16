@@ -5,6 +5,7 @@ import { CHECKLISTS_DESCRIPTION, SITE_URL } from "@/lib/seo";
 import { ChecklistCard } from "@/components/ChecklistCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
+import { formatUpdatedLabel } from "@/lib/updated-label";
 
 export const PAGE_SIZE = 20;
 
@@ -16,6 +17,7 @@ type ChecklistCardData = {
   universeName: string | null;
   coverImage: string | null;
   updatedAt: string | null;
+  updatedLabel: string | null;
   itemsCount: number | null;
 };
 
@@ -69,6 +71,7 @@ function mapRowToCard(row: ChecklistSummaryRow): ChecklistCardData {
     universeName,
     coverImage,
     updatedAt,
+    updatedLabel: formatUpdatedLabel(updatedAt),
     itemsCount
   };
 }

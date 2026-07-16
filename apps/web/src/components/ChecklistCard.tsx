@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { formatDistanceToNow } from "date-fns";
 import { FiClock } from "react-icons/fi";
 import { ProgressBar } from "@/components/ProgressBar";
 import {
@@ -19,26 +18,17 @@ type ChecklistCardProps = {
   universeName: string | null;
   coverImage: string | null;
   updatedAt: string | null;
+  updatedLabel: string | null;
   itemsCount: number | null;
 };
 
 type Progress = { done: number; total: number; percent: number };
 
-function formatUpdatedLabel(updatedAt: string | null): string | null {
-  if (!updatedAt) return null;
-  try {
-    return formatDistanceToNow(new Date(updatedAt), { addSuffix: true });
-  } catch {
-    return null;
-  }
-}
-
-export function ChecklistCard({ slug, title, coverImage, universeName, updatedAt, itemsCount }: ChecklistCardProps) {
+export function ChecklistCard({ slug, title, coverImage, universeName, updatedLabel, itemsCount }: ChecklistCardProps) {
   const session = useChecklistSession();
   const progressIndex = useChecklistProgressIndex(session.status === "ready" ? session.userId : null);
   const accountDone =
     session.userId && progressIndex.userId === session.userId ? (progressIndex.counts[slug] ?? 0) : 0;
-  const updatedLabel = formatUpdatedLabel(updatedAt);
   const totalItems = typeof itemsCount === "number" ? itemsCount : 0;
   const [localVersion, setLocalVersion] = useState(0);
 

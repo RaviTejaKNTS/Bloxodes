@@ -151,6 +151,7 @@ export default async function ToolFallbackPage({ params }: PageProps) {
     "this game";
   const relatedChecklistCards = relatedChecklists.map((row) => {
     const summary = summarize(row.seo_description ?? row.description_md ?? null, CHECKLISTS_DESCRIPTION);
+    const updatedAt = row.updated_at || row.published_at || row.created_at || null;
     const itemsCount =
       typeof row.leaf_item_count === "number"
         ? row.leaf_item_count
@@ -164,7 +165,8 @@ export default async function ToolFallbackPage({ params }: PageProps) {
       summary,
       universeName: row.universe?.display_name ?? row.universe?.name ?? null,
       coverImage: row.universe?.icon_url ?? `${SITE_URL}/Bloxodes.png`,
-      updatedAt: row.updated_at || row.published_at || row.created_at || null,
+      updatedAt,
+      updatedLabel: formatUpdatedLabel(updatedAt),
       itemsCount
     };
   });

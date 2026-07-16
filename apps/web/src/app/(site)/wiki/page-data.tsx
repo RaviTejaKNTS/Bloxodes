@@ -55,6 +55,7 @@ import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
 import { buildWikiCollectionPath } from "@/lib/wiki-collections";
 import { statsUniverseSlug } from "@/lib/slug";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
+import { formatUpdatedLabel } from "@/lib/updated-label";
 
 const ROBLOX_BASE_URL = "https://www.roblox.com";
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
@@ -127,6 +128,7 @@ type ChecklistCardData = {
   universeName: string | null;
   coverImage: string | null;
   updatedAt: string | null;
+  updatedLabel: string | null;
   itemsCount: number | null;
 };
 
@@ -137,6 +139,7 @@ type QuizCardData = {
   universeName: string | null;
   coverImage: string | null;
   updatedAt: string | null;
+  updatedLabel: string | null;
 };
 
 function normalizeText(value?: string | null): string | null {
@@ -884,6 +887,7 @@ function buildCreatorUrl(page: WikiPageContent): string | null {
 
 function buildChecklistCards(page: WikiPageContent, related: WikiRelatedData): ChecklistCardData[] {
   return related.checklists.map((row) => {
+    const updatedAt = row.content_updated_at ?? row.updated_at ?? row.published_at ?? row.created_at ?? null;
     const itemsCount =
       typeof row.leaf_item_count === "number"
         ? row.leaf_item_count
@@ -898,21 +902,27 @@ function buildChecklistCards(page: WikiPageContent, related: WikiRelatedData): C
       summary: summarizeCardText(row.seo_description ?? row.description_md, CHECKLISTS_DESCRIPTION),
       universeName: row.universe?.display_name ?? row.universe?.name ?? getUniverseLabel(page),
       coverImage: row.universe?.icon_url ?? normalizeImageSrc(page.icon_url) ?? `${SITE_URL}/Bloxodes.png`,
-      updatedAt: row.content_updated_at ?? row.updated_at ?? row.published_at ?? row.created_at ?? null,
+      updatedAt,
+      updatedLabel: formatUpdatedLabel(updatedAt),
       itemsCount
     };
   });
 }
 
 function buildQuizCards(page: WikiPageContent, related: WikiRelatedData): QuizCardData[] {
-  return related.quizzes.map((quiz) => ({
-    code: quiz.code,
-    title: quiz.title,
-    summary: summarizeCardText(quiz.seo_description ?? quiz.description_md, QUIZZES_DESCRIPTION),
-    universeName: quiz.universe?.display_name ?? quiz.universe?.name ?? getUniverseLabel(page),
-    coverImage: quiz.universe?.icon_url ?? pickThumbnail(quiz.universe?.thumbnail_urls) ?? normalizeImageSrc(page.icon_url) ?? `${SITE_URL}/Bloxodes.png`,
-    updatedAt: quiz.content_updated_at ?? quiz.updated_at ?? quiz.published_at ?? quiz.created_at ?? null
-  }));
+  return related.quizzes.map((quiz) => {
+    const updatedAt = quiz.content_updated_at ?? quiz.updated_at ?? quiz.published_at ?? quiz.created_at ?? null;
+
+    return {
+      code: quiz.code,
+      title: quiz.title,
+      summary: summarizeCardText(quiz.seo_description ?? quiz.description_md, QUIZZES_DESCRIPTION),
+      universeName: quiz.universe?.display_name ?? quiz.universe?.name ?? getUniverseLabel(page),
+      coverImage: quiz.universe?.icon_url ?? pickThumbnail(quiz.universe?.thumbnail_urls) ?? normalizeImageSrc(page.icon_url) ?? `${SITE_URL}/Bloxodes.png`,
+      updatedAt,
+      updatedLabel: formatUpdatedLabel(updatedAt)
+    };
+  });
 }
 
 function getWikiCollectionBlockHeading(page: WikiRelatedData["catalogPages"][number]): string {

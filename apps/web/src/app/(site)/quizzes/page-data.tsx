@@ -4,6 +4,7 @@ import { IndexPageStats } from "@/components/IndexPageStats";
 import { QuizCard } from "@/components/QuizCard";
 import { listPublishedQuizzes, type QuizListEntry } from "@/lib/quizzes";
 import { QUIZZES_DESCRIPTION, SITE_URL } from "@/lib/seo";
+import { formatUpdatedLabel } from "@/lib/updated-label";
 
 function pickThumbnail(value: unknown): string | null {
   if (!value) return null;
@@ -43,7 +44,8 @@ function mapRowToCard(row: QuizListEntry) {
     summary,
     universeName,
     coverImage,
-    updatedAt
+    updatedAt,
+    updatedLabel: formatUpdatedLabel(updatedAt)
   };
 }
 
