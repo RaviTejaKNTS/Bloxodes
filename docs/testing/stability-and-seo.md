@@ -31,7 +31,7 @@ Warnings remain visible but do not block for title outside 20–65 characters, d
 
 ## Coverage and sampling
 
-- Predeploy sitemap verification requests every URL in every sitemap. The current site is small enough for this to be the safer default.
+- Predeploy sitemap verification requests every URL in every sitemap with four workers, response backoff, and a low-pressure retry pass after an origin cooldown. This keeps full coverage without turning the release gate into sustained load against the shared production database.
 - SEO verification covers every critical index and representative detail pages from every public route family.
 - Route verification repeats those pages as a browser, Googlebot, Bingbot, and curl, then checks redirect, pagination, private-route, API, robots, and feed contracts.
 - Chromium renders every critical index on desktop and mobile, plus one detail page per sitemap family and explicit navigation/control tests.
@@ -61,6 +61,6 @@ GitHub workflows upload these files even when a check fails.
 5. The workflow waits for `/api/health` to return the expected SHA and healthy database state.
 6. Live postdeploy verification must pass before Cloudflare purge and warming.
 
-The production job has a 90-minute fail-closed budget so the full candidate crawl and the full live postdeploy crawl can both complete on the production-sized sitemap without bypassing either gate.
+The production job has a 90-minute fail-closed budget so the full candidate crawl and the full live postdeploy crawl can both complete on the production-sized sitemap without bypassing either gate. Stats detail metadata uses one lightweight row read plus a short-lived shared top-1000 index boundary instead of loading charts and repeating the same boundary query for every crawled page.
 
 Repository workflow files and branch-protection settings do not become active until the local changes are approved, pushed, and the required GitHub checks are configured.

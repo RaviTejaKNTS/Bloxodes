@@ -946,10 +946,16 @@ type StatsGameDetailIndexBoundary = {
   playing: number | null;
 };
 
+const STATS_GAME_DETAIL_INDEX_BOUNDARY_TTL_MS = 5 * 60 * 1000;
 const ALL_ELIGIBLE_GAMES_FIT_INDEX: StatsGameDetailIndexBoundary = {
   universe_id: Number.MAX_SAFE_INTEGER,
   playing: -1
 };
+let statsGameDetailIndexBoundaryCache: {
+  value: StatsGameDetailIndexBoundary;
+  expiresAt: number;
+} | null = null;
+let statsGameDetailIndexBoundaryRequest: Promise<StatsGameDetailIndexBoundary | null> | null = null;
 
 function isStatsGameSitemapEligible(game: Pick<StatsGame, "playing" | "visits" | "statsTier">) {
   return (
@@ -960,7 +966,7 @@ function isStatsGameSitemapEligible(game: Pick<StatsGame, "playing" | "visits" |
   );
 }
 
-async function loadStatsGameDetailIndexBoundary(): Promise<StatsGameDetailIndexBoundary | null> {
+async function queryStatsGameDetailIndexBoundary(): Promise<StatsGameDetailIndexBoundary | null> {
   const { data, error } = await supabaseAdmin()
     .from("stats_game_current_index")
     .select("universe_id, playing")
@@ -988,6 +994,27 @@ async function loadStatsGameDetailIndexBoundary(): Promise<StatsGameDetailIndexB
     return (fallback.data as StatsGameDetailIndexBoundary | null) ?? ALL_ELIGIBLE_GAMES_FIT_INDEX;
   }
   return (data as StatsGameDetailIndexBoundary | null) ?? ALL_ELIGIBLE_GAMES_FIT_INDEX;
+}
+
+async function loadStatsGameDetailIndexBoundary(): Promise<StatsGameDetailIndexBoundary | null> {
+  if (statsGameDetailIndexBoundaryCache && statsGameDetailIndexBoundaryCache.expiresAt > Date.now()) {
+    return statsGameDetailIndexBoundaryCache.value;
+  }
+  if (statsGameDetailIndexBoundaryRequest) return statsGameDetailIndexBoundaryRequest;
+
+  statsGameDetailIndexBoundaryRequest = queryStatsGameDetailIndexBoundary();
+  try {
+    const value = await statsGameDetailIndexBoundaryRequest;
+    if (value) {
+      statsGameDetailIndexBoundaryCache = {
+        value,
+        expiresAt: Date.now() + STATS_GAME_DETAIL_INDEX_BOUNDARY_TTL_MS
+      };
+    }
+    return value;
+  } finally {
+    statsGameDetailIndexBoundaryRequest = null;
+  }
 }
 
 export async function isStatsGameDetailIndexable(game: Pick<StatsGame, "universeId" | "playing" | "visits" | "statsTier">) {
@@ -3690,51 +3717,52 @@ export async function getStatsGameRankChartByUniverseId(
   );
 }
 
-export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailData | null> {
+const STATS_GAME_INDEX_FIELDS = `
+  universe_id, root_place_id, name, display_name, slug, description,
+  creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
+  icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
+  rating_percent, stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+  last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
+  console_enabled, vr_enabled, baseline_playing_24h, baseline_playing_7d,
+  growth_24h, growth_24h_percent, growth_7d, growth_7d_percent, peak_24h,
+  peak_7d, global_playing_rank, indexed_at
+`;
+const STATS_GAME_FIELDS = `
+  universe_id, root_place_id, name, display_name, slug, description,
+  creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
+  icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
+  created_at_api, updated_at_api, last_stats_refreshed_at,
+  last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
+  console_enabled, vr_enabled
+`;
+
+async function loadStatsGameRowBySlug(slug: string): Promise<UniverseRow | StatsGameIndexRow | null> {
   const sb = supabaseAdmin();
   const parsedUniverseId = parseStatsUniverseIdSlug(slug);
   const numericSlug = Number(slug);
-  const indexFields = `
-    universe_id, root_place_id, name, display_name, slug, description,
-    creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
-    icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-    rating_percent, stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
-    last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
-    console_enabled, vr_enabled, baseline_playing_24h, baseline_playing_7d,
-    growth_24h, growth_24h_percent, growth_7d, growth_7d_percent, peak_24h,
-    peak_7d, global_playing_rank, indexed_at
-  `;
-  const fields = `
-    universe_id, root_place_id, name, display_name, slug, description,
-    creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
-    icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-    created_at_api, updated_at_api, last_stats_refreshed_at,
-    last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
-    console_enabled, vr_enabled
-  `;
 
   if (parsedUniverseId || Number.isFinite(numericSlug)) {
     const indexed = await sb
       .from("stats_game_current_index")
-      .select(indexFields)
+      .select(STATS_GAME_INDEX_FIELDS)
       .eq("universe_id", parsedUniverseId ?? numericSlug)
       .limit(1)
       .maybeSingle();
-    if (!indexed.error && indexed.data) return buildStatsGameDetail(indexed.data as StatsGameIndexRow);
+    if (!indexed.error && indexed.data) return indexed.data as StatsGameIndexRow;
 
     const { data, error } = await sb
       .from("roblox_universes")
-      .select(fields)
+      .select(STATS_GAME_FIELDS)
       .eq("universe_id", parsedUniverseId ?? numericSlug)
       .limit(1)
       .maybeSingle();
     if (error) throw error;
-    if (data) return buildStatsGameDetail(data as UniverseRow);
+    if (data) return data as UniverseRow;
   }
 
   const indexed = await sb
     .from("stats_game_current_index")
-    .select(indexFields)
+    .select(STATS_GAME_INDEX_FIELDS)
     .eq("slug", slug)
     .order("visits", { ascending: false, nullsFirst: false })
     .order("playing", { ascending: false, nullsFirst: false })
@@ -3742,11 +3770,11 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
     .order("universe_id", { ascending: true })
     .limit(1)
     .maybeSingle();
-  if (!indexed.error && indexed.data) return buildStatsGameDetail(indexed.data as StatsGameIndexRow);
+  if (!indexed.error && indexed.data) return indexed.data as StatsGameIndexRow;
 
   const { data, error } = await sb
     .from("roblox_universes")
-    .select(fields)
+    .select(STATS_GAME_FIELDS)
     .eq("slug", slug)
     .order("visits", { ascending: false, nullsFirst: false })
     .order("playing", { ascending: false, nullsFirst: false })
@@ -3757,7 +3785,18 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
   if (error) throw error;
   if (!data) return null;
 
-  return buildStatsGameDetail(data as UniverseRow);
+  return data as UniverseRow;
+}
+
+export async function getStatsGameSummaryBySlug(slug: string): Promise<StatsGame | null> {
+  const row = await loadStatsGameRowBySlug(slug);
+  if (!row) return null;
+  return "indexed_at" in row ? mapIndexedGame(row) : mapUniverse(row);
+}
+
+export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailData | null> {
+  const row = await loadStatsGameRowBySlug(slug);
+  return row ? buildStatsGameDetail(row) : null;
 }
 
 async function buildStatsGameDetail(row: UniverseRow | StatsGameIndexRow): Promise<StatsGameDetailData> {
