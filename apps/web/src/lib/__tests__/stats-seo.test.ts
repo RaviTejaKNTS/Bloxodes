@@ -4,6 +4,7 @@ vi.mock("server-only", () => ({}));
 
 import {
   getStatsGamesSeoState,
+  isStatsGameDetailIndexable,
   listStatsGamesIndexPaths,
   parseStatsSearchParams,
   statsGameSeoDescription,
@@ -84,5 +85,14 @@ describe("individual stats game metadata", () => {
     expect(statsGameSeoDescription({ displayName: "Brookhaven RP", rank: 1, playing: 511_500 })).toBe(
       "Brookhaven RP ranks #1 among tracked Roblox games with 511.5K players now. See visits, favorites, rating, growth, and historical charts."
     );
+  });
+
+  it("uses the stable hourly global rank for detail indexability", () => {
+    const eligible = { playing: 100, visits: 10_000_000, statsTier: "WARM" as const };
+    expect(isStatsGameDetailIndexable({ ...eligible, rank: 1 })).toBe(true);
+    expect(isStatsGameDetailIndexable({ ...eligible, rank: 1000 })).toBe(true);
+    expect(isStatsGameDetailIndexable({ ...eligible, rank: 1001 })).toBe(false);
+    expect(isStatsGameDetailIndexable({ ...eligible, rank: null })).toBe(false);
+    expect(isStatsGameDetailIndexable({ playing: 0, visits: 0, statsTier: "COLD", rank: 1 })).toBe(false);
   });
 });
