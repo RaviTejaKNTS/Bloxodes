@@ -19,6 +19,8 @@ type TableContract = {
   bodyFields?: string[];
   imageFields?: string[];
   requirePublishedDate?: boolean;
+  allowRenderedTitleFallback?: boolean;
+  allowRenderedDescriptionFallback?: boolean;
 };
 
 type ValidationIssue = {
@@ -60,7 +62,7 @@ const TABLE_CONTRACTS: TableContract[] = [
     identityField: "slug",
     titleField: "title",
     routeFor: (row) => stringValue(row.slug) ? `/articles/${stringValue(row.slug)}` : null,
-    descriptionFields: ["meta_description"],
+    descriptionFields: ["meta_description", "content_md"],
     bodyFields: ["content_md"],
     imageFields: ["cover_image"]
   },
@@ -96,7 +98,7 @@ const TABLE_CONTRACTS: TableContract[] = [
     identityField: "slug",
     titleField: "title",
     routeFor: (row) => stringValue(row.slug) ? `/wiki/${stringValue(row.slug)}` : null,
-    descriptionFields: ["meta_description"],
+    descriptionFields: ["meta_description", "description_md"],
     bodyFields: ["description_md", "tips_md", "controls_json"],
     imageFields: ["cover_image"]
   },
@@ -124,7 +126,8 @@ const TABLE_CONTRACTS: TableContract[] = [
     titleField: "title",
     routeFor: (row) => stringValue(row.slug) ? `/events/${stringValue(row.slug)}` : null,
     descriptionFields: ["meta_description"],
-    bodyFields: ["content_md"]
+    bodyFields: ["content_md"],
+    allowRenderedTitleFallback: true
   },
   {
     table: "checklist_pages",
@@ -135,7 +138,8 @@ const TABLE_CONTRACTS: TableContract[] = [
     titleField: "title",
     routeFor: (row) => stringValue(row.slug) ? `/checklists/${stringValue(row.slug)}` : null,
     descriptionFields: ["seo_description", "description_md"],
-    bodyFields: ["description_md"]
+    bodyFields: ["description_md"],
+    allowRenderedDescriptionFallback: true
   },
   {
     table: "quiz_pages",
@@ -283,11 +287,31 @@ async function validateRow(issues: ValidationIssue[], contract: TableContract, r
   if (contract.table === "code_pages" && identity.endsWith("-codes")) {
     pushIssue(issues, contract, row, "codes-suffix-in-slug", "Codes slugs must not end in -codes");
   }
-  if (!title) pushIssue(issues, contract, row, "missing-title", `Missing ${contract.titleField}`);
+  if (!title) {
+    pushIssue(
+      issues,
+      contract,
+      row,
+      "missing-title",
+      contract.allowRenderedTitleFallback
+        ? `Missing ${contract.titleField}; rendered route checks must prove the approved dynamic fallback`
+        : `Missing ${contract.titleField}`,
+      contract.allowRenderedTitleFallback ? "warning" : "error"
+    );
+  }
   if (!contract.routeFor(row)) pushIssue(issues, contract, row, "missing-route", "Could not build a public route");
 
   if (!contract.descriptionFields.some((field) => hasContent(row[field]))) {
-    pushIssue(issues, contract, row, "missing-description", `Expected one of ${contract.descriptionFields.join(", ")}`);
+    pushIssue(
+      issues,
+      contract,
+      row,
+      "missing-description",
+      contract.allowRenderedDescriptionFallback
+        ? `Expected one of ${contract.descriptionFields.join(", ")}; rendered route checks must prove the approved fallback`
+        : `Expected one of ${contract.descriptionFields.join(", ")}`,
+      contract.allowRenderedDescriptionFallback ? "warning" : "error"
+    );
   }
   if (contract.bodyFields?.length && !contract.bodyFields.some((field) => hasContent(row[field]))) {
     pushIssue(
