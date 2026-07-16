@@ -2,6 +2,8 @@
 
 Bloxodes uses a fast automatic release path for daily publishing and keeps broad crawl/render tools available for explicit manual audits.
 
+Agents and operators should follow `docs/testing/content-release-runbook.md` for the release decision tree, exact publishing order, testing choices, and failure handling. This document describes the underlying stability and SEO implementation.
+
 ## Automatic pull-request checks
 
 `.github/workflows/web-quality.yml` runs for every pull request so the required status is always reported.

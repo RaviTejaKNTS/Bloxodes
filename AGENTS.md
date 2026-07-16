@@ -12,6 +12,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `apps/web/src/app/api/AGENTS.md`: JSON endpoints, mutation safety, session/progress flows, and revalidation behavior.
 - `apps/web/src/lib/AGENTS.md`: shared data access, caching, SEO helpers, auth/security utilities, and domain modules.
 - `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
+- `docs/testing/content-release-runbook.md`: required daily release decision tree, code-first/DB-second publishing order, automatic checks, targeted verification, manual audit options, and failure handling.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
