@@ -52,7 +52,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     env:
       PRODUCTION_SITE_URL: ${{ inputs.site_url || vars.PRODUCTION_SITE_URL || 'https://bloxodes.com' }}
       IMAGE_NAME: ghcr.io/ravitejaknts/bloxodes-web
