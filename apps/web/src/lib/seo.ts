@@ -94,7 +94,7 @@ export function breadcrumbJsonLd(items: {name:string, url:string}[]) {
 export function gameJsonLd({siteUrl, game}:{siteUrl:string, game:{name:string, slug:string, image?:string}}) {
   const image = game.image
     ? (game.image.startsWith("http") ? game.image : `${siteUrl.replace(/\/$/, "")}/${game.image.replace(/^\//, "")}`)
-    : `${siteUrl}/og-image.png`;
+    : `${siteUrl}/Bloxodes.png`;
   return {
     "@context": "https://schema.org",
     "@type": "VideoGame",

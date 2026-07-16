@@ -251,7 +251,7 @@ export async function renderPuzzleDetail(data: NonNullable<Awaited<ReturnType<ty
     description: page.meta_description || PUZZLES_DESCRIPTION,
     slug: `/puzzles/${page.slug}`,
     siteUrl: baseUrl,
-    image: "/og-image.png",
+    image: "/Bloxodes.png",
     author: null,
     publishedAt: page.published_at,
     updatedAt: page.content_updated_at ?? page.updated_at

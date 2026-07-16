@@ -137,7 +137,7 @@ export async function generateWikiCollectionMetadata({
   const page = await getWikiCollectionPageByPath(context.wikiSlug, context.collectionSlug);
   let fallbackTitle = page?.title ?? `${context.collectionSlug} Wiki Collection`;
   let fallbackDescription = page?.meta_description ?? WIKI_DESCRIPTION;
-  let image = page?.thumb_url ?? `${SITE_URL}/og-image.png`;
+  let image = page?.thumb_url ?? `${SITE_URL}/Bloxodes.png`;
 
   if (context.kind === "generic") {
     if (!page) {

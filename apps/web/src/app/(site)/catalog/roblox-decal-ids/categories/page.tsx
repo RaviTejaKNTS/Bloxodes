@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       title: SEO_TITLE,
       description: DESCRIPTION,
       siteName: SITE_NAME,
-      images: [`${SITE_URL}/og-image.png`]
+      images: [`${SITE_URL}/Bloxodes.png`]
     }
   };
 }

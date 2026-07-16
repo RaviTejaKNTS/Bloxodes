@@ -37,6 +37,13 @@ RUN set -eu; \
     esac; \
   fi; \
   printf '%s\n' "$sha" > /app/build-sha
+RUN npm run lint \
+  && npm run typecheck:web \
+  && npm run test:unit:web \
+  && npm run test:coverage:web \
+  && npm run audit:game-collection-datasets
+RUN --mount=type=secret,id=production_env,required=false \
+  node scripts/ops/run-with-production-build-env.mjs npm run validate:published-content -- --allow-remote-read
 RUN --mount=type=secret,id=production_env,required=false \
   node scripts/ops/run-with-production-build-env.mjs node scripts/ops/check-production-data-readiness.mjs
 RUN --mount=type=secret,id=production_env,required=false \

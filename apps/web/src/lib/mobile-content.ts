@@ -705,7 +705,7 @@ function collectionNavItemsForCode(code: string): MobileContentDetailItem[] {
 function mapQuiz(row: QuizListEntry): MobileContentItem {
   const universeName = row.universe?.display_name ?? row.universe?.name ?? null;
   const thumbnail = pickThumbnail(row.universe?.thumbnail_urls);
-  const coverImage = absoluteAssetUrl(row.universe?.icon_url || thumbnail || "/og-image.png");
+  const coverImage = absoluteAssetUrl(row.universe?.icon_url || thumbnail || "/Bloxodes.png");
   const updatedAt = row.content_updated_at || row.updated_at || row.published_at || row.created_at || null;
 
   return {
@@ -723,7 +723,7 @@ function mapQuiz(row: QuizListEntry): MobileContentItem {
 function mapChecklist(row: ChecklistSummaryRow): MobileContentItem {
   const universeName = row.universe?.display_name ?? row.universe?.name ?? null;
   const thumbnail = pickThumbnail(row.universe?.thumbnail_urls);
-  const coverImage = absoluteAssetUrl(row.universe?.icon_url || thumbnail || "/og-image.png");
+  const coverImage = absoluteAssetUrl(row.universe?.icon_url || thumbnail || "/Bloxodes.png");
   const updatedAt = row.content_updated_at || row.updated_at || row.published_at || row.created_at || null;
   const itemCount = typeof row.leaf_item_count === "number" ? row.leaf_item_count : typeof row.item_count === "number" ? row.item_count : null;
 
@@ -741,7 +741,7 @@ function mapChecklist(row: ChecklistSummaryRow): MobileContentItem {
 
 function mapTool(row: ToolListEntry): MobileContentItem {
   const updatedAt = resolveModifiedAt(row);
-  const coverImage = absoluteAssetUrl(row.thumb_url || row.universe?.icon_url || "/og-image.png");
+  const coverImage = absoluteAssetUrl(row.thumb_url || row.universe?.icon_url || "/Bloxodes.png");
 
   return {
     id: row.id ?? row.code,
@@ -765,7 +765,7 @@ function mapArticle(row: ArticleWithRelations): MobileContentItem {
     title: row.title,
     subtitle: universeName ?? authorName,
     summary: summarize(row.meta_description ?? null, "Latest Roblox guide from Bloxodes."),
-    coverImage: absoluteAssetUrl(row.cover_image || row.universe?.icon_url || "/og-image.png"),
+    coverImage: absoluteAssetUrl(row.cover_image || row.universe?.icon_url || "/Bloxodes.png"),
     updatedAt,
     url: `${SITE_URL}/articles/${row.slug}`,
     badge: authorName ? `By ${authorName}` : "Article"
@@ -780,7 +780,7 @@ function mapCatalog(row: CatalogIndexEntry): MobileContentItem {
     title: row.title,
     subtitle: row.universe_name ?? null,
     summary: summarize(row.meta_description ?? row.intro_md ?? null, "Roblox catalog page from Bloxodes."),
-    coverImage: absoluteAssetUrl(row.thumb_url || "/og-image.png"),
+    coverImage: absoluteAssetUrl(row.thumb_url || "/Bloxodes.png"),
     updatedAt,
     url: `${SITE_URL}/catalog/${row.code}`,
     badge: "Catalog"
@@ -796,7 +796,7 @@ function mapWiki(row: WikiListEntry): MobileContentItem {
     title: row.title,
     subtitle: "Roblox wiki",
     summary: summarize(row.meta_description ?? null, "Roblox wiki page from Bloxodes."),
-    coverImage: absoluteAssetUrl(row.cover_image || row.icon_url || thumbnail || "/og-image.png"),
+    coverImage: absoluteAssetUrl(row.cover_image || row.icon_url || thumbnail || "/Bloxodes.png"),
     updatedAt,
     url: `${SITE_URL}/wiki/${row.slug}`,
     badge: "Wiki"
@@ -1380,7 +1380,7 @@ export async function getMobileContentIndex(kind: MobileContentKind, searchParam
     title: card.title || (card.universeName ? `${card.universeName} Events` : "Roblox Event"),
     subtitle: card.universeName,
     summary: card.summary,
-    coverImage: absoluteAssetUrl(card.coverImage || card.fallbackIcon || "/og-image.png"),
+    coverImage: absoluteAssetUrl(card.coverImage || card.fallbackIcon || "/Bloxodes.png"),
     updatedAt: card.eventStartUtc || card.eventEndUtc,
     url: `${SITE_URL}/events/${card.slug}`,
     badge: card.eventTimeLabel ?? (card.status === "none" ? "Event" : card.status)
@@ -1434,7 +1434,7 @@ export async function getMobileContentDetail(
       title: article.title,
       subtitle: universeName ?? authorName,
       summary: intro,
-      coverImage: absoluteAssetUrl(article.cover_image || article.universe?.icon_url || "/og-image.png"),
+      coverImage: absoluteAssetUrl(article.cover_image || article.universe?.icon_url || "/Bloxodes.png"),
       updatedAt,
       url: `${SITE_URL}/articles/${article.slug}`,
       badge: "Article",
@@ -1487,7 +1487,7 @@ export async function getMobileContentDetail(
         title: collection.title,
         subtitle: collection.display_name ?? null,
         summary: collection.meta_description,
-        coverImage: absoluteAssetUrl(collection.thumb_url || "/og-image.png"),
+        coverImage: absoluteAssetUrl(collection.thumb_url || "/Bloxodes.png"),
         updatedAt: collectionUpdatedAt,
         url: `${SITE_URL}/wiki/${collection.wiki_slug}/${collection.collection_slug}`,
         badge:
@@ -1536,7 +1536,7 @@ export async function getMobileContentDetail(
       title: page.title,
       subtitle: null,
       summary: page.meta_description,
-      coverImage: absoluteAssetUrl(page.thumb_url || "/og-image.png"),
+      coverImage: absoluteAssetUrl(page.thumb_url || "/Bloxodes.png"),
       updatedAt,
       url: `${SITE_URL}/catalog/${page.code}`,
       badge: "Catalog",
@@ -1569,7 +1569,7 @@ export async function getMobileContentDetail(
       title: page.title,
       subtitle: page.universe?.display_name ?? page.universe?.name ?? null,
       summary: toPlainText(page.seo_description) ?? toPlainText(page.description_md),
-      coverImage: absoluteAssetUrl(page.universe?.icon_url || "/og-image.png"),
+      coverImage: absoluteAssetUrl(page.universe?.icon_url || "/Bloxodes.png"),
       updatedAt,
       url: `${SITE_URL}/checklists/${page.slug}`,
       badge: `${items.length} tasks`,
@@ -1604,7 +1604,7 @@ export async function getMobileContentDetail(
       title: card.title || (card.universeName ? `${card.universeName} Events` : "Roblox Event"),
       subtitle: card.universeName,
       summary: card.summary,
-      coverImage: absoluteAssetUrl(card.coverImage || card.fallbackIcon || "/og-image.png"),
+      coverImage: absoluteAssetUrl(card.coverImage || card.fallbackIcon || "/Bloxodes.png"),
       updatedAt: card.eventStartUtc || card.eventEndUtc,
       url: `${SITE_URL}/events/${card.slug}`,
       badge: card.eventTimeLabel ?? "Event",
@@ -1632,7 +1632,7 @@ export async function getMobileContentDetail(
       title: page.title,
       subtitle: page.universe?.display_name ?? page.universe?.name ?? null,
       summary: toPlainText(page.seo_description) ?? toPlainText(page.description_md),
-      coverImage: absoluteAssetUrl(page.universe?.icon_url || pickThumbnail(page.universe?.thumbnail_urls) || "/og-image.png"),
+      coverImage: absoluteAssetUrl(page.universe?.icon_url || pickThumbnail(page.universe?.thumbnail_urls) || "/Bloxodes.png"),
       updatedAt,
       url: `${SITE_URL}/quizzes/${page.code}`,
       badge: questions.length ? `${questions.length} questions` : "Quiz",
@@ -1654,7 +1654,7 @@ export async function getMobileContentDetail(
         title: entry.title,
         subtitle: entry.universe?.display_name ?? entry.universe?.name ?? null,
         summary,
-        coverImage: absoluteAssetUrl(entry.thumb_url || entry.universe?.icon_url || "/og-image.png"),
+        coverImage: absoluteAssetUrl(entry.thumb_url || entry.universe?.icon_url || "/Bloxodes.png"),
         updatedAt,
         url: `${SITE_URL}/tools/${entry.code}`,
         badge: "Tool",
@@ -1689,7 +1689,7 @@ export async function getMobileContentDetail(
       title: tool.title,
       subtitle: null,
       summary: tool.meta_description,
-      coverImage: absoluteAssetUrl(tool.thumb_url || "/og-image.png"),
+      coverImage: absoluteAssetUrl(tool.thumb_url || "/Bloxodes.png"),
       updatedAt,
       url: `${SITE_URL}/tools/${tool.code}`,
       badge: "Tool",
@@ -1899,7 +1899,7 @@ export async function getMobileContentDetail(
     title: page.title,
     subtitle: page.universe_display_name ?? page.universe_name ?? null,
     summary: toPlainText(page.description_md) ?? page.meta_description ?? null,
-    coverImage: absoluteAssetUrl(page.cover_image || page.icon_url || pickThumbnail(page.thumbnail_urls) || "/og-image.png"),
+    coverImage: absoluteAssetUrl(page.cover_image || page.icon_url || pickThumbnail(page.thumbnail_urls) || "/Bloxodes.png"),
     updatedAt,
     url: `${SITE_URL}/wiki/${page.slug}`,
     badge: "Wiki",

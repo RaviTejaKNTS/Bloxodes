@@ -5,7 +5,7 @@ import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 const title = "How We Gather and Verify Codes";
 const description = "Learn how Bloxodes finds, verifies, and keeps Roblox codes accurate for players.";
 const canonical = `${SITE_URL.replace(/\/$/, "")}/how-we-gather-and-verify-codes`;
-const ogImage = `${SITE_URL}/og-image.png`;
+const ogImage = `${SITE_URL}/Bloxodes.png`;
 
 export const metadata: Metadata = {
   title,

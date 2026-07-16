@@ -15,7 +15,7 @@ import {
 export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-decal-ids"];
-const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 type PageProps = {
     searchParams?: Promise<Record<string, string | string[] | undefined>>;

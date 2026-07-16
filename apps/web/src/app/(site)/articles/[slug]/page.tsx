@@ -73,7 +73,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     ? article.cover_image
     : article.cover_image
     ? `${SITE_URL.replace(/\/$/, "")}/${article.cover_image.replace(/^\//, "")}`
-    : `${SITE_URL}/og-image.png`;
+    : `${SITE_URL}/Bloxodes.png`;
   const description =
     (article.meta_description || markdownToPlainText(article.content_md)).trim() || ARTICLES_DESCRIPTION;
   const title = resolveSeoTitle(article.seo_title) ?? article.title;
@@ -213,7 +213,7 @@ async function renderArticlePage(article: ArticleWithRelations) {
     description: descriptionPlain,
     datePublished: publishedIso,
     dateModified: updatedIso,
-    image: coverImage ?? `${SITE_URL}/og-image.png`,
+    image: coverImage ?? `${SITE_URL}/Bloxodes.png`,
     author: article.author
       ? {
           '@type': 'Person',

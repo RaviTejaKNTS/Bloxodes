@@ -13,7 +13,7 @@ import {
 export const revalidate = 21600;
 export const dynamic = "force-dynamic";
 
-const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 type PageProps = {
     params: Promise<{ page: string }>;

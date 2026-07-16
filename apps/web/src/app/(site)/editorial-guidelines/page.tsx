@@ -5,7 +5,7 @@ import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 const title = "Editorial Guidelines";
 const description = "How Bloxodes.com researches, verifies, and updates Roblox code coverage.";
 const canonical = `${SITE_URL.replace(/\/$/, "")}/editorial-guidelines`;
-const ogImage = `${SITE_URL}/og-image.png`;
+const ogImage = `${SITE_URL}/Bloxodes.png`;
 
 export const metadata: Metadata = {
   title,

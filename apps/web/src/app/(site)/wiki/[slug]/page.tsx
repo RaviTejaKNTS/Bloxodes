@@ -23,11 +23,11 @@ function normalizeDescription(value?: string | null): string | null {
 }
 
 function normalizeMetadataImage(value?: string | null): string {
-  if (!value) return `${SITE_URL}/og-image.png`;
+  if (!value) return `${SITE_URL}/Bloxodes.png`;
   try {
     return new URL(value, SITE_URL).toString();
   } catch {
-    return `${SITE_URL}/og-image.png`;
+    return `${SITE_URL}/Bloxodes.png`;
   }
 }
 

@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import type { IconType } from "react-icons";
 import {
   FiCalendar,
-  FiClock,
   FiEye,
   FiMonitor,
   FiRefreshCw,
@@ -55,9 +54,10 @@ import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
 import { listGameCollectionImageUrls } from "@/lib/game-collection-images";
 import { buildWikiCollectionPath } from "@/lib/wiki-collections";
 import { statsUniverseSlug } from "@/lib/slug";
+import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 
 const ROBLOX_BASE_URL = "https://www.roblox.com";
-const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 const compactNumberFormatter = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 });
 const PT_TIME_ZONE = "America/Los_Angeles";
 const ptDateTimeFormatter = new Intl.DateTimeFormat("en-US", {
@@ -224,33 +224,6 @@ function formatUpdated(value?: string | null): string | null {
   }
 }
 
-function toValidTime(value?: string | null): number | null {
-  if (!value) return null;
-  const time = Date.parse(value);
-  return Number.isNaN(time) ? null : time;
-}
-
-function latestTimestamp(values: Array<string | null | undefined>): string | null {
-  const now = Date.now();
-  const latest = values.reduce<number | null>((current, value) => {
-    const time = toValidTime(value);
-    if (time === null) return current;
-    if (time > now + 86_400_000) return current;
-    return current === null || time > current ? time : current;
-  }, null);
-  return latest === null ? null : new Date(latest).toISOString();
-}
-
-function formatRelativeUpdated(value?: string | null): string | null {
-  const time = toValidTime(value);
-  if (time === null) return null;
-  try {
-    return formatDistanceToNow(new Date(time), { addSuffix: true });
-  } catch {
-    return null;
-  }
-}
-
 function formatShortDate(value?: string | null): string | null {
   if (!value) return null;
   const date = new Date(value);
@@ -314,65 +287,6 @@ function buildDeviceBadges(page: WikiPageContent): DeviceBadgeItem[] {
     { icon: TbAugmentedReality, label: "VR", enabled: page.vr_enabled }
   ];
   return items.some((item) => typeof item.enabled === "boolean") ? items : [];
-}
-
-function resolveWikiHubUpdatedAt(page: WikiPageContent, related: WikiRelatedData): string | null {
-  return latestTimestamp([
-    page.content_updated_at,
-    page.updated_at,
-    page.published_at,
-    page.created_at,
-    page.universe_updated_at,
-    page.updated_at_api,
-    ...related.codes.flatMap((game) => [
-      game.content_updated_at,
-      game.latest_code_first_seen_at,
-      game.updated_at,
-      game.created_at
-    ]),
-    ...related.activeCodes.flatMap((code) => [
-      code.last_seen_at,
-      code.first_seen_at
-    ]),
-    ...related.tools.flatMap((tool) => [
-      tool.content_updated_at,
-      tool.updated_at,
-      tool.published_at,
-      tool.created_at
-    ]),
-    ...related.articles.flatMap((article) => [
-      article.updated_at,
-      article.published_at,
-      article.created_at
-    ]),
-    ...related.checklists.flatMap((checklist) => [
-      checklist.content_updated_at,
-      checklist.updated_at,
-      checklist.published_at,
-      checklist.created_at
-    ]),
-    ...related.catalogPages.flatMap((catalogPage) => [
-      catalogPage.content_updated_at,
-      catalogPage.updated_at,
-      catalogPage.published_at,
-      catalogPage.created_at
-    ]),
-    ...related.quizzes.flatMap((quiz) => [
-      quiz.content_updated_at,
-      quiz.updated_at,
-      quiz.published_at,
-      quiz.created_at
-    ]),
-    related.eventsPage?.updated_at,
-    related.eventsPage?.published_at,
-    related.eventsPage?.created_at,
-    ...related.eventTimeline.flatMap((event) => [
-      event.updatedUtc,
-      event.createdUtc
-    ]),
-    ...related.media.map((item) => item.fetched_at),
-    ...related.servers.map((server) => server.fetched_at)
-  ]);
 }
 
 function WikiDeviceBadge({ label, icon: Icon, enabled }: DeviceBadgeItem) {
@@ -983,7 +897,7 @@ function buildChecklistCards(page: WikiPageContent, related: WikiRelatedData): C
       title: row.title,
       summary: summarizeCardText(row.seo_description ?? row.description_md, CHECKLISTS_DESCRIPTION),
       universeName: row.universe?.display_name ?? row.universe?.name ?? getUniverseLabel(page),
-      coverImage: row.universe?.icon_url ?? normalizeImageSrc(page.icon_url) ?? `${SITE_URL}/og-image.png`,
+      coverImage: row.universe?.icon_url ?? normalizeImageSrc(page.icon_url) ?? `${SITE_URL}/Bloxodes.png`,
       updatedAt: row.content_updated_at ?? row.updated_at ?? row.published_at ?? row.created_at ?? null,
       itemsCount
     };
@@ -996,7 +910,7 @@ function buildQuizCards(page: WikiPageContent, related: WikiRelatedData): QuizCa
     title: quiz.title,
     summary: summarizeCardText(quiz.seo_description ?? quiz.description_md, QUIZZES_DESCRIPTION),
     universeName: quiz.universe?.display_name ?? quiz.universe?.name ?? getUniverseLabel(page),
-    coverImage: quiz.universe?.icon_url ?? pickThumbnail(quiz.universe?.thumbnail_urls) ?? normalizeImageSrc(page.icon_url) ?? `${SITE_URL}/og-image.png`,
+    coverImage: quiz.universe?.icon_url ?? pickThumbnail(quiz.universe?.thumbnail_urls) ?? normalizeImageSrc(page.icon_url) ?? `${SITE_URL}/Bloxodes.png`,
     updatedAt: quiz.content_updated_at ?? quiz.updated_at ?? quiz.published_at ?? quiz.created_at ?? null
   }));
 }
@@ -1452,8 +1366,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
   const creatorLabel = normalizeText(page.universe_creator_name) ?? "Developer";
   const socialLinks = buildSocialLinkButtons(extractSocialLinks(page.social_links), creatorLabel);
   const published = page.published_at ?? page.created_at ?? null;
-  const hubUpdatedAt = resolveWikiHubUpdatedAt(page, related) ?? page.content_updated_at ?? page.updated_at ?? published;
-  const hubUpdatedRelativeLabel = formatRelativeUpdated(hubUpdatedAt);
+  const hubUpdatedAt = page.content_updated_at ?? page.updated_at ?? published;
   const publishedIso = formatIsoDate(published);
   const updatedIso = formatIsoDate(hubUpdatedAt);
   const canonicalUrl = `${SITE_URL}/wiki/${page.slug}`;
@@ -1548,12 +1461,7 @@ export async function renderWikiDetailPage({ page, related }: WikiDetailPageData
 
             <div className="min-w-0 max-w-3xl space-y-3">
               <h1 className="mb-0 text-4xl font-semibold leading-tight text-foreground md:text-5xl">{page.title}</h1>
-              {hubUpdatedRelativeLabel ? (
-                <p className="inline-flex items-center gap-1.5 text-sm leading-5 text-muted">
-                  <FiClock className="h-4 w-4 shrink-0" aria-hidden />
-                  <span>Updated {hubUpdatedRelativeLabel}</span>
-                </p>
-              ) : null}
+              <UpdatedTimestamp value={hubUpdatedAt} className="inline-flex items-center gap-1.5 text-sm leading-5 text-muted" />
               {robloxGameUrl ? (
                 <div className="pt-2 lg:hidden">
                   <a

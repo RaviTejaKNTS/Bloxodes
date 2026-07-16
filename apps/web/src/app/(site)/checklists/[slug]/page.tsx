@@ -70,7 +70,7 @@ export default async function ChecklistPage({ params }: PageProps) {
   const descriptionPlain =
     page.seo_description ||
     (page.description_md ? markdownToPlainText(page.description_md).slice(0, 160) : CHECKLISTS_DESCRIPTION);
-  const coverImage = page.universe?.icon_url || `${SITE_URL}/og-image.png`;
+  const coverImage = page.universe?.icon_url || `${SITE_URL}/Bloxodes.png`;
   const descriptionHtml = page.description_md ? await renderMarkdown(page.description_md) : null;
   const leafItems = items.filter((item) => item.section_code.split(".").filter(Boolean).length === 3);
   const publishedDate = new Date(resolvePublishedAt(page) ?? page.created_at);

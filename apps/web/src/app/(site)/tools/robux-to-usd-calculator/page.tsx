@@ -26,7 +26,7 @@ export const revalidate = 21600;
 
 const TOOL_CODE = "robux-to-usd-calculator";
 const CANONICAL = `${SITE_URL.replace(/\/$/, "")}/tools/robux-to-usd-calculator`;
-const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 const TOOL_AD_SLOT = "3529946151";
 
 export async function generateMetadata(): Promise<Metadata> {

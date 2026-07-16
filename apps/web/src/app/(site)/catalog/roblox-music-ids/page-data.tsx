@@ -959,7 +959,7 @@ export function renderRobloxMusicIdsPage({
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
   const description = CATALOG_DESCRIPTION;
-  const image = `${SITE_URL}/og-image.png`;
+  const image = `${SITE_URL}/Bloxodes.png`;
   const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
   const updatedIso = updatedDate?.toISOString() ?? null;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
