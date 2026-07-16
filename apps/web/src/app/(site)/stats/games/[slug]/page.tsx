@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = `${statsGameSeoTitle(game.displayName)} | ${SITE_NAME}`;
   const description = statsGameSeoDescription(game);
-  const indexable = await isStatsGameDetailIndexable(game);
+  const indexable = isStatsGameDetailIndexable(game);
   return {
     title,
     description,

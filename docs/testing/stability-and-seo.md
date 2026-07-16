@@ -61,6 +61,6 @@ GitHub workflows upload these files even when a check fails.
 5. The workflow waits for `/api/health` to return the expected SHA and healthy database state.
 6. Live postdeploy verification must pass before Cloudflare purge and warming.
 
-The production job has a 90-minute fail-closed budget so the full candidate crawl and the full live postdeploy crawl can both complete on the production-sized sitemap without bypassing either gate. Stats detail metadata uses one lightweight row read plus a short-lived shared top-1000 index boundary instead of loading charts and repeating the same boundary query for every crawled page.
+The production job has a 90-minute fail-closed budget so the full candidate crawl and the full live postdeploy crawl can both complete on the production-sized sitemap without bypassing either gate. Stats detail metadata uses one lightweight row read instead of loading charts, and both the stats sitemap and page robots policy use the same hourly `global_playing_rank` top-1000 cutoff so ranking churn cannot make a sitemap URL turn `noindex` mid-crawl.
 
 Repository workflow files and branch-protection settings do not become active until the local changes are approved, pushed, and the required GitHub checks are configured.

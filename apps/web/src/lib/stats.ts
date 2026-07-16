@@ -941,22 +941,6 @@ export function statsGameLastModifiedAt(
   return game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt ?? game.updatedAtApi ?? null;
 }
 
-type StatsGameDetailIndexBoundary = {
-  universe_id: number;
-  playing: number | null;
-};
-
-const STATS_GAME_DETAIL_INDEX_BOUNDARY_TTL_MS = 5 * 60 * 1000;
-const ALL_ELIGIBLE_GAMES_FIT_INDEX: StatsGameDetailIndexBoundary = {
-  universe_id: Number.MAX_SAFE_INTEGER,
-  playing: -1
-};
-let statsGameDetailIndexBoundaryCache: {
-  value: StatsGameDetailIndexBoundary;
-  expiresAt: number;
-} | null = null;
-let statsGameDetailIndexBoundaryRequest: Promise<StatsGameDetailIndexBoundary | null> | null = null;
-
 function isStatsGameSitemapEligible(game: Pick<StatsGame, "playing" | "visits" | "statsTier">) {
   return (
     game.statsTier === "HOT" ||
@@ -966,68 +950,9 @@ function isStatsGameSitemapEligible(game: Pick<StatsGame, "playing" | "visits" |
   );
 }
 
-async function queryStatsGameDetailIndexBoundary(): Promise<StatsGameDetailIndexBoundary | null> {
-  const { data, error } = await supabaseAdmin()
-    .from("stats_game_current_index")
-    .select("universe_id, playing")
-    .not("slug", "is", null)
-    .or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000")
-    .order("playing", { ascending: false, nullsFirst: false })
-    .order("universe_id", { ascending: true })
-    .range(STATS_GAME_DETAIL_INDEX_LIMIT - 1, STATS_GAME_DETAIL_INDEX_LIMIT - 1)
-    .maybeSingle();
-  if (error) {
-    console.warn("Failed to load stats game detail index boundary", error.message);
-    const fallback = await supabaseAdmin()
-      .from("roblox_universes")
-      .select("universe_id, playing")
-      .not("slug", "is", null)
-      .or("playing.gte.100,visits.gte.10000000")
-      .order("playing", { ascending: false, nullsFirst: false })
-      .order("universe_id", { ascending: true })
-      .range(STATS_GAME_DETAIL_INDEX_LIMIT - 1, STATS_GAME_DETAIL_INDEX_LIMIT - 1)
-      .maybeSingle();
-    if (fallback.error) {
-      console.warn("Failed to load fallback stats game detail index boundary", fallback.error.message);
-      return null;
-    }
-    return (fallback.data as StatsGameDetailIndexBoundary | null) ?? ALL_ELIGIBLE_GAMES_FIT_INDEX;
-  }
-  return (data as StatsGameDetailIndexBoundary | null) ?? ALL_ELIGIBLE_GAMES_FIT_INDEX;
-}
-
-async function loadStatsGameDetailIndexBoundary(): Promise<StatsGameDetailIndexBoundary | null> {
-  if (statsGameDetailIndexBoundaryCache && statsGameDetailIndexBoundaryCache.expiresAt > Date.now()) {
-    return statsGameDetailIndexBoundaryCache.value;
-  }
-  if (statsGameDetailIndexBoundaryRequest) return statsGameDetailIndexBoundaryRequest;
-
-  statsGameDetailIndexBoundaryRequest = queryStatsGameDetailIndexBoundary();
-  try {
-    const value = await statsGameDetailIndexBoundaryRequest;
-    if (value) {
-      statsGameDetailIndexBoundaryCache = {
-        value,
-        expiresAt: Date.now() + STATS_GAME_DETAIL_INDEX_BOUNDARY_TTL_MS
-      };
-    }
-    return value;
-  } finally {
-    statsGameDetailIndexBoundaryRequest = null;
-  }
-}
-
-export async function isStatsGameDetailIndexable(game: Pick<StatsGame, "universeId" | "playing" | "visits" | "statsTier">) {
+export function isStatsGameDetailIndexable(game: Pick<StatsGame, "rank" | "playing" | "visits" | "statsTier">) {
   if (!isStatsGameSitemapEligible(game)) return false;
-
-  const boundary = await loadStatsGameDetailIndexBoundary();
-  if (!boundary) return false;
-
-  const playing = game.playing ?? 0;
-  const boundaryPlaying = toNumber(boundary.playing) ?? 0;
-  if (playing > boundaryPlaying) return true;
-  if (playing < boundaryPlaying) return false;
-  return game.universeId <= boundary.universe_id;
+  return typeof game.rank === "number" && game.rank > 0 && game.rank <= STATS_GAME_DETAIL_INDEX_LIMIT;
 }
 
 export const STATS_CREATOR_SORT_OPTIONS: Array<{ value: StatsCreatorSortKey; label: string }> = [
@@ -3915,10 +3840,22 @@ export async function loadLatestRank(universeId: number): Promise<number | null>
 }
 
 export async function listStatsSitemapGames(limit = 200): Promise<Array<{ slug: string; updatedAt: string | null }>> {
-  const { rows } = await listBaseGames({ limit, sort: "playing", tierForSitemap: true });
-  return rows.map((game) => ({
-    slug: game.slug,
-    updatedAt: game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt ?? game.updatedAtApi
+  const safeLimit = Math.min(Math.max(1, Math.floor(limit)), STATS_GAME_DETAIL_INDEX_LIMIT);
+  const { data, error } = await supabaseAdmin()
+    .from("stats_game_current_index")
+    .select("slug, updated_at_api, last_stats_refreshed_at, last_playing_refreshed_at, global_playing_rank")
+    .not("slug", "is", null)
+    .not("global_playing_rank", "is", null)
+    .lte("global_playing_rank", STATS_GAME_DETAIL_INDEX_LIMIT)
+    .or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000")
+    .order("global_playing_rank", { ascending: true })
+    .order("universe_id", { ascending: true })
+    .limit(safeLimit);
+  if (error) throw error;
+
+  return (data ?? []).map((game) => ({
+    slug: game.slug as string,
+    updatedAt: game.last_stats_refreshed_at ?? game.last_playing_refreshed_at ?? game.updated_at_api
   }));
 }
 
