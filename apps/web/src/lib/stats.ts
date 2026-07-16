@@ -3843,7 +3843,7 @@ export async function listStatsSitemapGames(limit = 200): Promise<Array<{ slug: 
   const safeLimit = Math.min(Math.max(1, Math.floor(limit)), STATS_GAME_DETAIL_INDEX_LIMIT);
   const { data, error } = await supabaseAdmin()
     .from("stats_game_current_index")
-    .select("slug, updated_at_api, last_stats_refreshed_at, last_playing_refreshed_at, global_playing_rank")
+    .select("universe_id, slug, updated_at_api, last_stats_refreshed_at, last_playing_refreshed_at, global_playing_rank")
     .not("slug", "is", null)
     .not("global_playing_rank", "is", null)
     .lte("global_playing_rank", STATS_GAME_DETAIL_INDEX_LIMIT)
@@ -3854,7 +3854,7 @@ export async function listStatsSitemapGames(limit = 200): Promise<Array<{ slug: 
   if (error) throw error;
 
   return (data ?? []).map((game) => ({
-    slug: game.slug as string,
+    slug: statsUniverseSlug(game.slug, game.universe_id),
     updatedAt: game.last_stats_refreshed_at ?? game.last_playing_refreshed_at ?? game.updated_at_api
   }));
 }
