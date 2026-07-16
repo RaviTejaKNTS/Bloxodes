@@ -25,6 +25,25 @@ describe("content date contracts", () => {
     expect(resolveModifiedAt(source)).toBe(source.updated_at);
   });
 
+  it("uses the latest valid modification value instead of a stale derived timestamp", () => {
+    const source = {
+      published_at: "2026-01-10T00:00:00Z",
+      created_at: "2026-01-01T00:00:00Z",
+      updated_at: "2026-06-04T00:00:00Z",
+      content_updated_at: "2025-12-11T00:00:00Z"
+    };
+    expect(resolveModifiedAt(source)).toBe(source.updated_at);
+  });
+
+  it("ignores an invalid derived modification value when a valid fallback exists", () => {
+    expect(
+      resolveModifiedAt({
+        content_updated_at: "invalid",
+        updated_at: "2026-06-04T00:00:00Z"
+      })
+    ).toBe("2026-06-04T00:00:00Z");
+  });
+
   it("uses created_at when published_at is absent", () => {
     const result = resolveContentDates({ created_at: "2026-01-01T00:00:00Z" }, { now });
     expect(result.publishedField).toBe("created_at");
@@ -86,6 +105,7 @@ describe("content date contracts", () => {
     vi.useFakeTimers();
     vi.setSystemTime(now);
     expect(formatExactDate("2026-07-15T12:00:00Z")).toBe("July 15, 2026");
+    expect(formatExactDate("2026-07-15T23:30:00-07:00")).toBe("July 16, 2026");
     expect(formatRelativeDate("2026-07-15T12:00:00Z")).toBe("1 day ago");
     expect(buildUpdatedDisplay("2026-07-15T12:00:00Z")).toEqual({
       exact: "July 15, 2026",

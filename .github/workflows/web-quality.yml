@@ -2,16 +2,7 @@ name: Web Quality
 
 on:
   pull_request:
-    paths:
-      - "apps/web/**"
-      - "scripts/quality/**"
-      - "Dockerfile"
-      - "eslint.config.mjs"
-      - "playwright.config.ts"
-      - "package.json"
-      - "package-lock.json"
-      - ".github/workflows/web-quality.yml"
-      - ".github/workflows/dokploy-production-deploy.yml"
+  merge_group:
   workflow_dispatch:
 
 permissions:
@@ -22,48 +13,164 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deterministic:
+  changes:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    outputs:
+      code: ${{ steps.classify.outputs.code }}
+      build: ${{ steps.classify.outputs.build }}
+      dataset: ${{ steps.classify.outputs.dataset }}
     steps:
       - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - id: classify
+        name: Classify changed files
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || '' }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha || github.sha }}
+        run: |
+          base_sha="$BASE_SHA"
+          if [ -z "$base_sha" ]; then
+            base_sha="$(git rev-parse "${HEAD_SHA}^")"
+          fi
+
+          code=false
+          build=false
+          dataset=false
+
+          while IFS= read -r -d '' file; do
+            case "$file" in
+              data/*|apps/web/src/data/*|apps/web/public/*)
+                dataset=true
+                build=true
+                ;;
+              apps/web/*|Dockerfile|package.json|package-lock.json)
+                code=true
+                build=true
+                ;;
+              scripts/quality/*|eslint.config.mjs|playwright.config.ts|.github/workflows/web-quality.yml|.github/workflows/manual-web-audit.yml)
+                code=true
+                ;;
+            esac
+          done < <(git diff --name-only -z "$base_sha" "$HEAD_SHA")
+
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "build=$build" >> "$GITHUB_OUTPUT"
+          echo "dataset=$dataset" >> "$GITHUB_OUTPUT"
+          echo "code=$code build=$build dataset=$dataset"
+
+  deterministic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: changes
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Check patch formatting
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || '' }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha || github.sha }}
+        run: |
+          base_sha="$BASE_SHA"
+          if [ -z "$base_sha" ]; then
+            base_sha="$(git rev-parse "${HEAD_SHA}^")"
+          fi
+          git diff --check "$base_sha" "$HEAD_SHA"
       - uses: actions/setup-node@v6
+        if: ${{ needs.changes.outputs.code == 'true' }}
         with:
           node-version: 24
           cache: npm
-      - run: npm ci --ignore-scripts
-      - run: npm run verify:deterministic
-      - name: Upload deterministic reports
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: deterministic-quality-reports
-          path: tmp/test-reports
-          if-no-files-found: ignore
+      - name: Install dependencies
+        if: ${{ needs.changes.outputs.code == 'true' }}
+        run: npm ci --ignore-scripts
+      - name: Run fast code checks
+        if: ${{ needs.changes.outputs.code == 'true' }}
+        run: |
+          npm run lint
+          npm run typecheck:web
+          npm run test:coverage:web
+      - name: No web code checks required
+        if: ${{ needs.changes.outputs.code != 'true' }}
+        run: echo "No web code or quality tooling changed."
 
   production-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-    needs: deterministic
+    timeout-minutes: 15
+    needs: changes
     env:
       NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
       SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
       SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-      # Public page loaders still read this legacy variable name. PR builds are
-      # read-only, so use the anon key instead of exposing the service-role secret.
       SUPABASE_SERVICE_ROLE: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
       NEXT_PUBLIC_SITE_URL: https://bloxodes.com
       SITE_URL: https://bloxodes.com
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
+        if: ${{ needs.changes.outputs.build == 'true' }}
         with:
           node-version: 24
           cache: npm
-      - run: npm ci --ignore-scripts
+      - name: Install dependencies
+        if: ${{ needs.changes.outputs.build == 'true' }}
+        run: npm ci --ignore-scripts
       - name: Validate public build settings
+        if: ${{ needs.changes.outputs.build == 'true' }}
         run: |
           test -n "$NEXT_PUBLIC_SUPABASE_URL"
           test -n "$NEXT_PUBLIC_SUPABASE_ANON_KEY"
-      - run: npm run build:web
+      - name: Build the web app
+        if: ${{ needs.changes.outputs.build == 'true' }}
+        run: npm run build:web
+      - name: No web build required
+        if: ${{ needs.changes.outputs.build != 'true' }}
+        run: echo "No image-shipped web files changed."
+
+  datasets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: changes
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        if: ${{ needs.changes.outputs.dataset == 'true' }}
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        if: ${{ needs.changes.outputs.dataset == 'true' }}
+        run: npm ci --ignore-scripts
+      - name: Validate bundled datasets and assets
+        if: ${{ needs.changes.outputs.dataset == 'true' }}
+        run: npm run audit:game-collection-datasets
+      - name: No dataset validation required
+        if: ${{ needs.changes.outputs.dataset != 'true' }}
+        run: echo "No bundled datasets or public assets changed."
+
+  quality:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs:
+      - changes
+      - deterministic
+      - production-build
+      - datasets
+    steps:
+      - name: Require every selected fast check
+        env:
+          CHANGES_RESULT: ${{ needs.changes.result }}
+          DETERMINISTIC_RESULT: ${{ needs.deterministic.result }}
+          BUILD_RESULT: ${{ needs.production-build.result }}
+          DATASET_RESULT: ${{ needs.datasets.result }}
+        run: |
+          for result in "$CHANGES_RESULT" "$DETERMINISTIC_RESULT" "$BUILD_RESULT" "$DATASET_RESULT"; do
+            if [ "$result" != "success" ]; then
+              echo "A required fast quality job did not succeed: $result"
+              exit 1
+            fi
+          done

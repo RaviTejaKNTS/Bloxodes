@@ -17,6 +17,11 @@ import {
   validateStructuredData,
   type StructuredDataIssue
 } from "../../apps/web/src/lib/structured-data";
+import {
+  addVerificationCacheBust,
+  isCloudflareChallengePage,
+  requiresOriginCacheTag
+} from "./edge-contracts";
 
 type AuditMode = "sitemaps" | "seo" | "routes" | "smoke" | "postdeploy";
 type Severity = "error" | "warning";
@@ -99,6 +104,7 @@ type Options = {
   all: boolean;
   limit: number | null;
   expectedSha: string | null;
+  verificationToken: string | null;
   timeoutMs: number;
   retries: number;
   concurrency: number;
@@ -212,6 +218,15 @@ function parseOptions(): Options {
     } else throw new Error(`Unknown option: ${arg}`);
   }
 
+  const liveEdgeMode = modeArg === "smoke" || modeArg === "postdeploy";
+  const verificationToken = liveEdgeMode
+    ? [
+        expectedSha?.slice(0, 12),
+        process.env.GITHUB_RUN_ID?.trim(),
+        String(Date.now())
+      ].filter(Boolean).join(".")
+    : null;
+
   return {
     mode: modeArg as AuditMode,
     fetchOrigin: normalizeOrigin(fetchOrigin),
@@ -220,6 +235,7 @@ function parseOptions(): Options {
     all,
     limit,
     expectedSha,
+    verificationToken,
     timeoutMs,
     retries,
     concurrency
@@ -228,7 +244,10 @@ function parseOptions(): Options {
 
 function canonicalToFetchUrl(canonicalUrl: string, options: Options): string {
   const url = new URL(canonicalUrl);
-  return `${options.fetchOrigin}${url.pathname}${url.search}`;
+  return addVerificationCacheBust(
+    `${options.fetchOrigin}${url.pathname}${url.search}`,
+    options.verificationToken
+  );
 }
 
 function normalizeComparableUrl(raw: string): string {
@@ -495,6 +514,9 @@ function analyzeHtml(body: string, expectedOrigin: string): PageSeo {
   const titleNodes = $("title");
   const descriptionNodes = $('meta[name="description"]');
   const canonicalNodes = $('link[rel~="canonical"]');
+  const title = htmlText(titleNodes.first().text()) || null;
+  const canonical = canonicalNodes.first().attr("href")?.trim() || null;
+  const hasMain = $("main").length === 1 && htmlText($("main").text()).length > 0;
   const robots = $('meta[name="robots"], meta[name="googlebot"], meta[name="bingbot"]')
     .toArray()
     .map((element) => htmlText($(element).attr("content") ?? "").toLowerCase())
@@ -502,11 +524,11 @@ function analyzeHtml(body: string, expectedOrigin: string): PageSeo {
   const lowerBody = body.toLowerCase();
 
   return {
-    title: htmlText(titleNodes.first().text()) || null,
+    title,
     titleCount: titleNodes.length,
     description: htmlText(descriptionNodes.first().attr("content") ?? "") || null,
     descriptionCount: descriptionNodes.length,
-    canonical: canonicalNodes.first().attr("href")?.trim() || null,
+    canonical,
     canonicalCount: canonicalNodes.length,
     robots,
     h1s: $("h1").toArray().map((element) => htmlText($(element).text())).filter(Boolean),
@@ -520,12 +542,13 @@ function analyzeHtml(body: string, expectedOrigin: string): PageSeo {
     invalidJsonLd,
     visibleDates,
     bodyTextLength: bodyText.length,
-    hasMain: $("main").length === 1 && htmlText($("main").text()).length > 0,
-    challengePage:
-      lowerBody.includes("cf-chl-") ||
-      lowerBody.includes("challenge-platform") ||
-      lowerBody.includes("just a moment...") ||
-      lowerBody.includes("attention required! | cloudflare"),
+    hasMain,
+    challengePage: isCloudflareChallengePage({
+      body,
+      title,
+      hasCanonical: canonicalNodes.length > 0,
+      hasMain
+    }),
     internalErrorPage:
       lowerBody.includes("internal server error") ||
       lowerBody.includes("application error: a server-side exception") ||
@@ -670,7 +693,9 @@ function validatePage(result: PageResult, options: Options, issues: AuditIssue[]
   }
   if (seo.h1s.length !== 1) issue(issues, "error", "page", "h1-count", result.canonicalUrl, `Found ${seo.h1s.length}`, agent);
   if (!seo.hasMain) issue(issues, "error", "page", "missing-main", result.canonicalUrl, "Expected one nonempty main element", agent);
-  if (!result.cacheTag) issue(issues, "error", "page", "missing-cache-tag", result.canonicalUrl, "Public HTML has no Cache-Tag", agent);
+  if (!result.cacheTag && requiresOriginCacheTag(options.mode)) {
+    issue(issues, "error", "page", "missing-cache-tag", result.canonicalUrl, "Public HTML has no Cache-Tag", agent);
+  }
   if (options.mode === "postdeploy") {
     const cacheStatus = result.cfCacheStatus?.toUpperCase() ?? "";
     if (!cacheStatus || ["BYPASS", "DYNAMIC"].includes(cacheStatus)) {
@@ -897,7 +922,7 @@ function addUserAgentParityIssues(pages: PageResult[], issues: AuditIssue[]) {
 
 async function checkHealth(options: Options, issues: AuditIssue[]) {
   const canonicalUrl = `${options.canonicalOrigin}/api/health`;
-  const fetchUrl = `${options.fetchOrigin}/api/health`;
+  const fetchUrl = canonicalToFetchUrl(canonicalUrl, options);
   try {
     const { response, body } = await fetchWithTimeout(fetchUrl, options, { headers: { "user-agent": USER_AGENTS.browser } });
     if (response.status !== 200) issue(issues, "error", "health", "health-status", canonicalUrl, String(response.status));
@@ -963,7 +988,7 @@ async function checkCriticalApis(options: Options, issues: AuditIssue[]) {
   for (const target of targets) {
     const canonicalUrl = `${options.canonicalOrigin}${target.path}`;
     try {
-      const fetched = await fetchWithTimeout(`${options.fetchOrigin}${target.path}`, options, {
+      const fetched = await fetchWithTimeout(canonicalToFetchUrl(canonicalUrl, options), options, {
         headers: { accept: "application/json", "user-agent": USER_AGENTS.browser }
       });
       const cacheControl = fetched.response.headers.get("cache-control") ?? "";
@@ -983,7 +1008,9 @@ async function checkCriticalApis(options: Options, issues: AuditIssue[]) {
       if (!/\bpublic\b/i.test(cacheControl) || /\b(?:private|no-store)\b/i.test(cacheControl)) {
         issue(issues, "error", "route", "api-cache-control", canonicalUrl, cacheControl || "missing Cache-Control");
       }
-      if (!cacheTag) issue(issues, "error", "route", "api-cache-tag", canonicalUrl, "Missing Cache-Tag");
+      if (!cacheTag && requiresOriginCacheTag(options.mode)) {
+        issue(issues, "error", "route", "api-cache-tag", canonicalUrl, "Missing Cache-Tag");
+      }
       if (fetched.durationMs > 2_000) {
         issue(issues, "warning", "route", "api-slow-response", canonicalUrl, `${fetched.durationMs}ms`);
       }
@@ -1000,10 +1027,11 @@ async function checkCriticalApis(options: Options, issues: AuditIssue[]) {
 
 async function checkDiscoveryRoutes(entries: SitemapEntry[], options: Options, issues: AuditIssue[]) {
   const sitemapRoutes = new Set(entries.map((entry) => normalizeComparableUrl(entry.loc)));
-  const robotsUrl = `${options.fetchOrigin}/robots.txt`;
+  const canonicalRobotsUrl = `${options.canonicalOrigin}/robots.txt`;
+  const robotsUrl = canonicalToFetchUrl(canonicalRobotsUrl, options);
   try {
     const fetched = await fetchWithTimeout(robotsUrl, options, { headers: { "user-agent": USER_AGENTS.googlebot } });
-    const canonicalUrl = `${options.canonicalOrigin}/robots.txt`;
+    const canonicalUrl = canonicalRobotsUrl;
     if (fetched.response.status !== 200) {
       issue(issues, "error", "route", "robots-status", canonicalUrl, String(fetched.response.status));
     }
@@ -1019,7 +1047,7 @@ async function checkDiscoveryRoutes(entries: SitemapEntry[], options: Options, i
 
   const canonicalFeedUrl = `${options.canonicalOrigin}/feed.xml`;
   try {
-    const fetched = await fetchWithTimeout(`${options.fetchOrigin}/feed.xml`, options, {
+    const fetched = await fetchWithTimeout(canonicalToFetchUrl(canonicalFeedUrl, options), options, {
       headers: { accept: "application/rss+xml,application/xml,text/xml", "user-agent": USER_AGENTS.browser }
     });
     if (fetched.response.status !== 200) {
@@ -1066,7 +1094,7 @@ async function runPageChecks(entries: SitemapEntry[], options: Options, issues: 
   const jobs = canonicalUrls.flatMap((url) => agentNames.map((agent) => ({ url, agent })));
   const pages: PageResult[] = [];
   let cursor = 0;
-  const concurrency = Math.min(8, jobs.length);
+  const concurrency = Math.min(options.concurrency, jobs.length);
 
   async function worker() {
     while (cursor < jobs.length) {
@@ -1091,6 +1119,7 @@ async function runPageChecks(entries: SitemapEntry[], options: Options, issues: 
         const result = await fetchPage(canonicalUrl, agent, options);
         pages.push(result);
         const final = new URL(result.finalUrl);
+        final.searchParams.delete("__bloxodes_verify");
         const actualDestination = `${final.pathname}${final.search}`;
         if (!result.redirectCount || result.status !== 200 || actualDestination !== redirect.destination) {
           issue(

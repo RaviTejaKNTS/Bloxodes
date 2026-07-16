@@ -1,5 +1,6 @@
 import { buildSitemapUrlSetXml, toIsoDate, type SitemapUrlSetEntry, withSiteUrl } from "@/lib/sitemap";
 import { supabaseAdmin } from "@/lib/supabase";
+import { resolveModifiedAt } from "@/lib/content-dates";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -29,12 +30,11 @@ export async function GET() {
     const pages: SitemapUrlSetEntry[] = [];
     for (const row of rows) {
       if (!row.slug) continue;
-      const updated = row.content_updated_at ?? row.updated_at ?? row.published_at;
       pages.push({
         loc: withSiteUrl(`/checklists/${row.slug}`),
         changefreq: "weekly",
         priority: "0.9",
-        lastmod: toIsoDate(updated)
+        lastmod: toIsoDate(resolveModifiedAt(row))
       });
     }
 

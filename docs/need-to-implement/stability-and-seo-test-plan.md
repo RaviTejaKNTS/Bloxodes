@@ -2,7 +2,16 @@
 
 Created: 2026-07-02
 
-Implementation status: complete on 2026-07-16. The protected `production` branch now requires deterministic and production-build checks, while the production workflow fails closed on candidate sitemap, SEO, route, rendering, and published-content defects before image publication. Successful candidates deploy as immutable images through Dokploy, verify the live SHA and postdeploy contracts, then purge and warm Cloudflare.
+Implementation status: revised on 2026-07-16 for the Bloxodes content-publishing workflow. Fast code/build/dataset checks protect daily pull requests, while broad sitemap, SEO, route, rendering, and published-content audits are manual tools rather than automatic deployment gates. Code and bundled data deploy before database publication; published rows then use targeted revalidation and single-URL verification.
+
+## Operating decision
+
+- Automatic checks must finish quickly and must not crawl the production-sized site.
+- Dataset/assets changes receive local validation and a normal image build, not a full website audit.
+- Database-only content publication never requires a web build.
+- New route-family code deploys before its database row so unpublished URLs remain absent from sitemaps.
+- Full crawls and browser audits run only when explicitly requested for investigation or periodic manual review.
+- The concrete active workflow is documented in `docs/testing/stability-and-seo.md`. The detailed phases below remain the manual audit specification and test inventory.
 
 ## Why this exists
 
@@ -502,7 +511,7 @@ Start with the highest traffic and highest risk routes:
 
 ## Open decisions
 
-Resolved for the first enforceable version:
+Historical first-version decisions below are retained as the inventory for optional manual audits. They are superseded for daily automation by the operating decision at the top of this document.
 
 - Response time over 2 seconds is a warning; availability, status, and contract failures block.
 - Uncompressed HTML over 1 MB warns and over 2 MB blocks.
