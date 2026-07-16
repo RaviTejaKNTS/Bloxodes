@@ -61,4 +61,6 @@ GitHub workflows upload these files even when a check fails.
 5. The workflow waits for `/api/health` to return the expected SHA and healthy database state.
 6. Live postdeploy verification must pass before Cloudflare purge and warming.
 
+The production job has a 90-minute fail-closed budget so the full candidate crawl and the full live postdeploy crawl can both complete on the production-sized sitemap without bypassing either gate.
+
 Repository workflow files and branch-protection settings do not become active until the local changes are approved, pushed, and the required GitHub checks are configured.
