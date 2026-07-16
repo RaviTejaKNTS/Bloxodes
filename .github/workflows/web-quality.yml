@@ -50,6 +50,9 @@ jobs:
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
       SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
       SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      # Public page loaders still read this legacy variable name. PR builds are
+      # read-only, so use the anon key instead of exposing the service-role secret.
+      SUPABASE_SERVICE_ROLE: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
       NEXT_PUBLIC_SITE_URL: https://bloxodes.com
       SITE_URL: https://bloxodes.com
     steps:
