@@ -4,7 +4,7 @@ Created: 2026-07-06
 
 ## Current Decision
 
-We are not rolling back the Roblox Music IDs page right now.
+We are not rolling back the Roblox Music IDs page right now. No need to work on this anymore.
 
 The current working theory is that Bing may have reacted to risky user-generated comments that were visible on the Roblox Music IDs page, including at least one vulgar adult phrase posted around 2026-07-01. That timing is close to the Bing indexing drop, and the comment text is more directly aligned with a Bing quality or safety violation than the recent technical music page changes.
 
