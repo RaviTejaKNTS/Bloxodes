@@ -11,6 +11,7 @@ import {
   statsGameSeoTitle,
   type StatsGamesSeoTaxonomy
 } from "@/lib/stats";
+import { statsUniverseSlug } from "@/lib/slug";
 
 const taxonomy: StatsGamesSeoTaxonomy = {
   genres: ["Action", "Simulation"],
@@ -94,5 +95,11 @@ describe("individual stats game metadata", () => {
     expect(isStatsGameDetailIndexable({ ...eligible, rank: 1001 })).toBe(false);
     expect(isStatsGameDetailIndexable({ ...eligible, rank: null })).toBe(false);
     expect(isStatsGameDetailIndexable({ playing: 0, visits: 0, statsTier: "COLD", rank: 1 })).toBe(false);
+  });
+
+  it("uses universe IDs to make stats detail slugs canonical and unique", () => {
+    expect(statsUniverseSlug("Chameleon", 10397566868)).toBe("chameleon-10397566868");
+    expect(statsUniverseSlug("chameleon-10397566868", 10397566868)).toBe("chameleon-10397566868");
+    expect(statsUniverseSlug("Chameleon", 42)).not.toBe(statsUniverseSlug("Chameleon", 43));
   });
 });
