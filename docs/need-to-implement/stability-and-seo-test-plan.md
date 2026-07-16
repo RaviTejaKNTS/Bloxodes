@@ -2,7 +2,7 @@
 
 Created: 2026-07-02
 
-Local implementation status: complete on 2026-07-16. GitHub workflow activation, branch-protection changes, image publication, Dokploy deployment, and live postdeploy verification are intentionally pending explicit approval.
+Implementation status: complete on 2026-07-16. The protected `production` branch now requires deterministic and production-build checks, while the production workflow fails closed on candidate sitemap, SEO, route, rendering, and published-content defects before image publication. Successful candidates deploy as immutable images through Dokploy, verify the live SHA and postdeploy contracts, then purge and warm Cloudflare.
 
 ## Why this exists
 
