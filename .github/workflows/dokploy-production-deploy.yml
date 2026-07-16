@@ -228,7 +228,9 @@ jobs:
           secret-files: |
             production_env=${{ runner.temp }}/bloxodes-production-build.env
           cache-from: type=gha,scope=bloxodes-production-web
-          cache-to: type=gha,mode=max,scope=bloxodes-production-web
+          # The full intermediate cache took longer to upload than the app took
+          # to build. Keep only the minimum reusable image cache.
+          cache-to: type=gha,mode=min,scope=bloxodes-production-web
 
       - name: Validate Dokploy configuration
         if: ${{ steps.freshness.outputs.fresh == 'true' }}
