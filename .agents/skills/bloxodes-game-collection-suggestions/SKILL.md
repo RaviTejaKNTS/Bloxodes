@@ -17,7 +17,15 @@ This step is needed so that you do not recommend collections that already exist 
 
 ## Source Check
 
-Search broadly. Use stronger sources when available: game-specific Fandom or wiki pages, official game pages, update logs, creator posts, BloxInformer, Beebom, Game8, Pro Game Guides, and similar Roblox guide sites.
+Search broadly. Use stronger sources when available: game-specific Fandom or wiki pages, official game pages, update logs, creator posts, BloxInformer, Beebom, TechWiser, Game8, Pro Game Guides, and similar Roblox guide sites.
+
+Explicitly search for competitor wiki coverage before deciding:
+
+- Beebom wiki coverage: search Beebom for the game plus `wiki`, `items`, `units`, `weapons`, `pets`, or the likely collection nouns. Open any relevant Beebom wiki/guide page and record what collections or item systems it covers.
+- TechWiser wiki coverage: search TechWiser the same way. Open any relevant TechWiser wiki/guide page and record what collections or item systems it covers.
+- BloxInformer wiki coverage: search BloxInformer the same way. Open any relevant BloxInformer wiki/guide page and record what collections or item systems it covers.
+
+If one of these sites has no relevant page, say `none found` and include the search query or result URL checked. If one has relevant wiki content, treat its covered item/system collections as strong evidence; recommend `[create]` for any collection that fits Bloxodes criteria and is not already covered.
 
 Do not stop at the first search result or homepage. Open relevant source pages, follow useful internal links, and use them to understand the game's item systems before deciding what Bloxodes can cover.
 
@@ -50,8 +58,9 @@ Start with `Evidence checked`,
 ```text
 Evidence checked:
 - Bloxodes existing pages:
-- BloxInformer:
-- Beebom:
+- BloxInformer wiki/guide pages:
+- Beebom wiki/guide pages:
+- TechWiser wiki/guide pages:
 - Game8:
 - Pro Game Guides:
 - Fandom/game wiki:
