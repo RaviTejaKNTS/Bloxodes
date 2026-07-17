@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Release E2E"
+  short_description: "Release a worktree safely through production"
+  default_prompt: "Use $bloxodes-release-e2e to release this completed worktree through PR, production deployment, local sync, and cleanup."
