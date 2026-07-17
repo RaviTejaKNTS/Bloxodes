@@ -8,6 +8,10 @@ This file is the quick reference for what exists today and how to invoke it.
 - Prefer `npm run <name>` when a package script exists.
 - Fall back to direct `tsx scripts/...` or `python scripts/...` only for scripts that do not have a package alias yet.
 
+## Worktree setup
+
+`npm run setup:worktree` prepares an existing linked worktree; it never creates another worktree. It symlinks ignored root `.env*` files or directories from the main checkout without replacing worktree-specific paths, installs dependencies only when needed for the current `package-lock.json`, and creates ignored temp/report directories. It exits immediately in the main checkout. Codex invokes it through `.codex/environments/environment.toml`; Claude and Grok share the `.claude/settings.json` `SessionStart` hook.
+
 ## Stability and SEO verification
 
 | Purpose | Preferred command |
