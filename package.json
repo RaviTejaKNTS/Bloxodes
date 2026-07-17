@@ -9,6 +9,7 @@
     "react-native": "0.83.6"
   },
   "scripts": {
+    "setup:worktree": "bash scripts/dev/setup-worktree.sh",
     "dev": "npm run dev:web",
     "dev:local": "tsx scripts/dev/start-local-dev.ts",
     "dev:prod": "tsx scripts/dev/start-prod-dev.ts",
