@@ -10,6 +10,8 @@ export const YOUTUBE_DIRECTIVE_PATTERN = /\{\{\s*youtube\s*:\s*([^\}]+?)\s*\}\}/
 /** Public path prefix for article-owned files under apps/web/public/articles/<slug>/ */
 export const ARTICLE_PUBLIC_PATH_PREFIX = "/articles/";
 
+const YOUTUBE_VIDEO_ID_PATTERN = /^[a-zA-Z0-9_-]{11}$/;
+
 const ALLOWED_REMOTE_IMAGE_HOST_SUFFIXES = [
   "media.bloxodes.com",
   "bloxodes.com",
@@ -56,7 +58,7 @@ export function extractYouTubeId(raw: string): string | null {
   if (!value) return null;
 
   // Bare video id (watch?v= style). Shorts/embed paths use the same charset.
-  if (/^[a-zA-Z0-9_-]{6,}$/.test(value)) {
+  if (YOUTUBE_VIDEO_ID_PATTERN.test(value)) {
     return value;
   }
 
@@ -66,23 +68,23 @@ export function extractYouTubeId(raw: string): string | null {
 
     if (host === "youtu.be") {
       const id = url.pathname.replace(/^\/+/, "").split("/")[0] || null;
-      return id && /^[a-zA-Z0-9_-]{6,}$/.test(id) ? id : null;
+      return id && YOUTUBE_VIDEO_ID_PATTERN.test(id) ? id : null;
     }
 
     if (host === "youtube.com" || host === "m.youtube.com" || host === "music.youtube.com") {
       const id = url.searchParams.get("v");
-      if (id && /^[a-zA-Z0-9_-]{6,}$/.test(id)) return id;
+      if (id && YOUTUBE_VIDEO_ID_PATTERN.test(id)) return id;
 
       const pathParts = url.pathname.split("/").filter(Boolean);
       const embedIndex = pathParts.indexOf("embed");
       if (embedIndex >= 0 && pathParts[embedIndex + 1]) {
         const embedId = pathParts[embedIndex + 1];
-        return /^[a-zA-Z0-9_-]{6,}$/.test(embedId) ? embedId : null;
+        return YOUTUBE_VIDEO_ID_PATTERN.test(embedId) ? embedId : null;
       }
       const shortsIndex = pathParts.indexOf("shorts");
       if (shortsIndex >= 0 && pathParts[shortsIndex + 1]) {
         const shortsId = pathParts[shortsIndex + 1];
-        return /^[a-zA-Z0-9_-]{6,}$/.test(shortsId) ? shortsId : null;
+        return YOUTUBE_VIDEO_ID_PATTERN.test(shortsId) ? shortsId : null;
       }
     }
 
@@ -91,7 +93,7 @@ export function extractYouTubeId(raw: string): string | null {
       const embedIndex = pathParts.indexOf("embed");
       if (embedIndex >= 0 && pathParts[embedIndex + 1]) {
         const embedId = pathParts[embedIndex + 1];
-        return /^[a-zA-Z0-9_-]{6,}$/.test(embedId) ? embedId : null;
+        return YOUTUBE_VIDEO_ID_PATTERN.test(embedId) ? embedId : null;
       }
     }
   } catch {
@@ -197,6 +199,10 @@ export function findRawHtmlArticleImages(markdown: string): RawHtmlImageRef[] {
 export function articlePublicDir(slug: string): string {
   const clean = slug.trim().toLowerCase().replace(/^\/+|\/+$/g, "");
   return `${ARTICLE_PUBLIC_PATH_PREFIX}${clean}/`;
+}
+
+export function isValidArticleSlug(slug: string): boolean {
+  return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug);
 }
 
 function safeSiteRelativePath(src: string): string | null {

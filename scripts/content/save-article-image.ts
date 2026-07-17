@@ -13,7 +13,7 @@ import path from "node:path";
 
 import sharp from "sharp";
 
-import { articlePublicDir, suggestArticleImageMarkdown } from "@/lib/article-media";
+import { articlePublicDir, isValidArticleSlug, suggestArticleImageMarkdown } from "@/lib/article-media";
 
 type CliOptions = {
   slug: string;
@@ -87,6 +87,9 @@ function parseArgs(argv: string[]): CliOptions {
   }
 
   if (!options.slug) throw new Error("--slug is required");
+  if (!isValidArticleSlug(options.slug)) {
+    throw new Error("--slug must be a simple editorial slug (lowercase letters, numbers, hyphens)");
+  }
   if (!options.url && !options.file) throw new Error("Provide --url or --file");
   if (options.url && options.file) throw new Error("Use only one of --url or --file");
   if (options.cover) {

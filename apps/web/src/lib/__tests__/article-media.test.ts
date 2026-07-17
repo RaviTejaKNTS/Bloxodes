@@ -7,6 +7,7 @@ import {
   findRawHtmlArticleImages,
   findYouTubeDirectives,
   injectYouTubeEmbeds,
+  isValidArticleSlug,
   suggestArticleImageMarkdown,
   stripArticleMediaForPlainText,
 } from "../article-media";
@@ -26,6 +27,7 @@ describe("extractYouTubeId", () => {
     expect(extractYouTubeId("")).toBeNull();
     expect(extractYouTubeId("https://example.com/watch?v=dQw4w9WgXcQ")).toBeNull();
     expect(extractYouTubeId("not a video")).toBeNull();
+    expect(extractYouTubeId("abcdef")).toBeNull();
   });
 });
 
@@ -35,14 +37,14 @@ describe("youtube directives", () => {
       "Intro",
       "{{ youtube: https://www.youtube.com/watch?v=dQw4w9WgXcQ }}",
       "{{ youtube: https://example.com/v/nope }}",
-      "{{youtube:abc123XYZ}}",
+      "{{youtube:abc123XYZ_0}}",
     ].join("\n");
 
     const found = findYouTubeDirectives(md);
     expect(found).toHaveLength(3);
     expect(found[0]?.videoId).toBe("dQw4w9WgXcQ");
     expect(found[1]?.videoId).toBeNull();
-    expect(found[2]?.videoId).toBe("abc123XYZ");
+    expect(found[2]?.videoId).toBe("abc123XYZ_0");
   });
 
   it("injects privacy-friendly embeds", () => {
@@ -65,6 +67,12 @@ describe("youtube directives", () => {
 });
 
 describe("article images", () => {
+  it("accepts only simple editorial slugs", () => {
+    expect(isValidArticleSlug("my-article-2")).toBe(true);
+    expect(isValidArticleSlug("../../tmp")).toBe(false);
+    expect(isValidArticleSlug("My-Article")).toBe(false);
+  });
+
   it("parses markdown images", () => {
     const images = findMarkdownImages('Hello ![Menu panel](/articles/foo/menu.webp) and ![x](https://media.bloxodes.com/a.webp)');
     expect(images).toHaveLength(2);
