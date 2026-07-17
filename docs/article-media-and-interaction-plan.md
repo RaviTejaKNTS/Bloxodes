@@ -1,6 +1,6 @@
 # Article Media & Interaction Plan
 
-Status: **Planning / not started**. Implement in phases; tick items as they ship.
+Status: **Phase 0 + Phase 1 implemented** (YouTube + images end-to-end). Later phases (inline checklists, account sync) still open. Tick remaining items as they ship.
 Scope: make `/articles` pages less bland with **selective** YouTube embeds, **inline trackable checklists**, and **useful clean images**. Do not force any of these onto every article.
 
 Related existing systems:
@@ -49,13 +49,14 @@ The goal is usefulness and texture, not decoration. Wrong or forced media makes 
 
 | Capability | Status | Notes |
 |---|---|---|
-| YouTube embed in articles | **Renderer ready** | `{{ youtube: id-or-url }}` → `youtube-nocookie` iframe in `markdown.ts`. `html-to-react` preserves `.video-embed`. |
-| Writing skill guidance for YouTube | Missing | Article research/writing skills never mention finding or embedding video. |
-| Inline article checklist UI | Missing | GFM task lists are not a productized interactive component. |
+| YouTube embed in articles | **Done** | `{{ youtube: id-or-url }}` → `youtube-nocookie` iframe via `article-media.ts` + `markdown.ts`. `html-to-react` preserves `.video-embed`. Iframe host allowlist applied. |
+| Writing skill guidance for YouTube | **Done** | Research / writing / tech / workflow runner skills include perfect-or-skip rules. |
+| Inline article checklist UI | Missing | Phase 2+. GFM task lists are not a productized interactive component. |
 | Article checklist progress API/DB | Missing | Only `user_checklist_progress` for full checklist pages. |
-| Article images in markdown | **Renderer ready** | `img` allowed; galleries + lightbox exist. |
-| Image sourcing standards in skills | Missing | No consistent “clean non-annotated image” research/writing bar. |
-| Selective-use rules | Informal | Tables/lists already selective; media/interaction not documented. |
+| Article images in markdown | **Done** | Host under `apps/web/public/articles/<slug>/`; markdown `![alt](/articles/<slug>/….webp)`. Galleries + lightbox remain. |
+| Image sourcing standards in skills | **Done** | Clean non-annotated bar, rights notes, save script, verifier path checks. |
+| Selective-use rules | **Done** | Documented in skills and plan; verifier warns on too many embeds/images. |
+| Media verification | **Done** | `check-article-media.ts` + `verify:article-finals` (directive validity, local files, alt, rendered HTML). |
 
 ---
 
@@ -187,46 +188,40 @@ Security/product defaults:
 
 ## Phased rollout
 
-### Phase 0 — Content rules only (no product work)
+### Phase 0 — Content rules + YouTube end-to-end
 
-**Goal:** start using capabilities that already exist, and stop models from forcing media.
+**Goal:** use perfect-match YouTube embeds safely and stop models from forcing media.
 
-- [ ] Update `bloxodes-article-research` brief template with optional fields:
-  - YouTube candidate(s) + match quality note (`perfect` / `near` / `none`)
-  - Image candidates + cleanliness/license notes
-  - Whether an inline checklist would help (and draft items)
-- [ ] Update `bloxodes-article-writing` (and tech article skill) with:
-  - `{{ youtube: ... }}` usage
-  - when to skip video/images/checklist
-  - image placement near the step it explains
-  - checklist syntax placeholder once Phase 2 lands (until then: draft as normal list labeled for later upgrade, or skip)
-- [ ] Update `bloxodes-article-workflow-runner` parent QA:
-  - perfect-or-skip media check
-  - no forced checklist on explainers
-  - no research language leaking into public copy
-- [ ] Pilot on 3 article types without new UI:
+- [x] Update `bloxodes-article-research` brief template with Media plan fields (`perfect` / `near` / `none`, image candidates, rights notes).
+- [x] Update `bloxodes-article-writing` and `bloxodes-tech-article-writing` with `{{ youtube: ... }}` usage and skip rules.
+- [x] Update `bloxodes-article-workflow-runner` parent QA for perfect-or-skip media.
+- [x] Shared helpers in `apps/web/src/lib/article-media.ts` + unit tests.
+- [x] Markdown renderer uses shared inject; iframe host allowlist for youtube-nocookie only.
+- [x] `verify:article-finals` fails on invalid YouTube directives and checks rendered embeds.
+- [ ] Pilot on 3 article types on real content batches (ongoing with next article jobs):
   1. tech fix / error
   2. game how-to / system
-  3. comparison or explainer (expect little/no checklist)
+  3. comparison or explainer
 - [ ] Parent review after pilot: more useful, or just busier?
 
-**Exit criteria:** writers/models can embed YouTube correctly when a perfect match exists; research briefs explicitly record media decisions; no new DB/API required.
+**Exit criteria:** writers/models can embed YouTube correctly when a perfect match exists; research briefs explicitly record media decisions; no new DB/API required. *(Implementation exit met; content pilots continue.)*
 
 ---
 
 ### Phase 1 — Image sourcing standards + hosting habit
 
-**Goal:** make useful images a normal research output without a big pipeline rewrite.
+**Goal:** make useful images a normal research output with hosted paths and verification.
 
-- [ ] Document image acceptance bar in skills (clean, non-annotated, non-watermarked, step-relevant).
-- [ ] Prefer download + host under a stable public path convention, e.g. `public/images/articles/<article-slug>/...` or existing media host patterns.
-- [ ] Require alt text that describes the useful UI fact, not keyword stuffing.
-- [ ] Record source URL + rights note in research brief / workspace notes (not in public article body).
-- [ ] Avoid hotlinking Fandom/wiki/CDN URLs long-term.
-- [ ] Optional: small image QA step in workflow runner (count, path exists, no obvious watermark language in filename/alt).
-- [ ] Revisit cover images separately from in-body step images (cover can stay sparse).
+- [x] Document image acceptance bar in skills (clean, non-annotated, non-watermarked, step-relevant).
+- [x] Host under `apps/web/public/articles/<article-slug>/…` (matches existing article public tree).
+- [x] Require alt text that describes the useful UI fact, not keyword stuffing.
+- [x] Record source URL + rights note in research brief / optional workspace `media.md` (not public body).
+- [x] Block hotlinked Fandom/wiki/competitor CDNs in media checks.
+- [x] Image QA in `check-article-media.ts` / `verify:article-finals` (path exists, alt, src policy).
+- [x] `npm run content:save-article-image` downloads/converts to webp and prints markdown snippet.
+- [x] Cover images remain separate (`cover_image` / import-generated covers vs body step images).
 
-**Exit criteria:** pilot articles use 0–3 hosted clean images only where they earn placement; research notes include source/rights.
+**Exit criteria:** new articles can ship 0–3 hosted clean images with verifier coverage; research notes include source/rights. *(Implementation exit met; content pilots continue.)*
 
 **Legal note:** “found on Fandom” is not automatic permission. Prefer official/Roblox-permitted captures, assets we create, or sources with clear reuse terms. When unsure, skip the image.
 
@@ -365,6 +360,7 @@ After pilots, score each page:
 | 2026-07-10 | YouTube uses existing `{{ youtube: ... }}` renderer; focus early work on content rules. |
 | 2026-07-10 | Inline article checklists are separate from full `/checklists` pages and progress table. |
 | 2026-07-10 | Selective use is a hard product rule for video, checklist, and images. |
+| 2026-07-10 | Phase 0+1 shipped: shared `article-media` helpers, skill updates, `content:save-article-image`, media checks in `verify:article-finals`, public path `apps/web/public/articles/<slug>/`. |
 
 Add rows here when we lock syntax, table name, merge strategy, or hosting path.
 

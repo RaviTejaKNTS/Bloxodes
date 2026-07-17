@@ -5,142 +5,153 @@ description: Run one or many Bloxodes article writing jobs with parent review. U
 
 # Bloxodes Article Workflow Runner
 
-This is the parent workflow for one article or a list of articles.
+Use this as the parent review workflow for one article or a list of articles.
 
-You are the parent. You judge. You do not take over the writing voice.
+Use separate research and writing subagents. Give each subagent one article only. The parent model orchestrates the work, approves briefs, reviews finals, runs verification, and previews the rendered pages.
 
-## How the work splits
+If there are more article ideas than available subagent slots, queue the extra articles. Do not write them from the parent role. Start the next article with a new subagent only after another subagent finishes or becomes available.
 
-1. A **research subagent** builds `brief.md` and waits.
-2. You approve, refine, or block the brief.
-3. A **writing subagent** writes `final.json` from the approved brief.
-4. You review the article, run verification, and preview the local page.
+The parent owns judgment but not article prose. It may make tiny non-content metadata or JSON fixes, such as correcting a slug, source URL, tag, `universe_id`, `author_id`, `cover_image`, missing/null field, or malformed JSON wrapper. Send changes to tone, structure, body copy, FAQ copy, or substantive claims back to the writing subagent.
 
-Give each subagent one article only. If you have more ideas than open slots, queue the rest. Do not write articles from the parent seat.
+## Research Subagent Handoff
 
-If subagents are not available, run the same two passes yourself: research first, then writing. Keep them separate.
+Tell the research subagent:
 
-The parent may fix tiny non-content metadata or JSON issues (slug, source URL, tag, IDs, null fields, broken JSON). Anything about tone, body, structure, FAQ wording, or real claims goes back to the right subagent.
+- You are the subagent for one article only.
+- Do not run `/bloxodes-article-workflow-runner`.
+- Do not create or call other subagents.
+- Start with `/bloxodes-article-research`.
+- Skill file: `.agents/skills/bloxodes-article-research/SKILL.md`.
+- Return `brief.md` only and wait for parent approval.
+
+## Writing Subagent Handoff
+
+After the parent approves `brief.md`, start a new writing subagent. Do not reuse the research subagent for writing.
+
+For normal gameplay and general articles, tell it:
+
+- Use `/bloxodes-article-writing`.
+- Skill file: `.agents/skills/bloxodes-article-writing/SKILL.md`.
+- Read the approved `brief.md`.
+- Write only the matching `final.json`.
+- Reopen the draft once and revise it for the skill's voice, clarity, usefulness, and valid JSON.
+
+For Roblox tech, platform, or troubleshooting articles, replace the writing skill with `/bloxodes-tech-article-writing` and apply its rules on top of the base article-writing rules.
+
+Pass the writing subagent the paths to `brief.md` and `final.json`, the topic and article slugs, whether the article is normal or tech, and any parent approval notes. Resume that writing subagent when copy changes are needed so it retains the article context.
+
+If subagents are unavailable, report the article as blocked instead of silently taking over its research or writing.
 
 ## Workspace
+
+For each article:
 
 ```text
 tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
   brief.md
   final.json
+  media.md          # optional source and rights notes, not public copy
 ```
 
-## Research subagent handoff
+Hosted article images live at:
 
-Tell the research subagent:
+```text
+apps/web/public/articles/<article-slug>/
+  cover.webp
+  <descriptive-name>.webp
+```
 
-- You own one article only.
-- Do not run this workflow runner.
-- Do not create other subagents.
-- Skill: `.agents/skills/bloxodes-article-research/SKILL.md`
-- Return `brief.md` only.
-- Do not write `final.json`.
-
-## Writing subagent handoff
-
-After the brief is approved, start a **new** writing subagent. Do not reuse the research subagent for writing unless the user says to.
-
-For normal gameplay and general articles:
-
-- Skill: `.agents/skills/bloxodes-article-writing/SKILL.md`
-- Read the approved brief first.
-- Write only:
-  `tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/final.json`
-- After drafting, reread once as a stuck player and fix flow, voice, and clarity.
-
-For Roblox tech / platform / troubleshooting pieces (errors, won’t open, crash, lag, install, settings):
-
-- Skill: `.agents/skills/bloxodes-tech-article-writing/SKILL.md`
-- That skill sits on top of the normal writing skill. Apply both.
-
-Also give the writing subagent:
-
-- path to `brief.md`
-- path for `final.json`
-- topic and article slugs
-- whether it is tech or normal
-- any approval notes (soft facts, preferred links, risks)
+Save approved images with `npm run content:save-article-image` before final verification.
 
 ## Workflow
 
-1. Confirm the approved idea or list.
-2. Start one research subagent per article (queue the rest).
-3. Review each brief carefully.
-4. Send research feedback to the same research subagent, or approve.
-5. Start a writing subagent with the right skill.
-6. Review `final.json`.
-7. Start or reuse local web with `npm run dev:local`.
-8. Run `verify:article-finals` on ready files.
-9. If verification fails, send writing issues to the writing subagent and research gaps to the research subagent.
-10. Preview each passed `/articles/<slug>` page.
-11. Return paths, localhost links, blocks, and risks.
+1. Confirm the approved article idea or list of ideas.
+2. Start one research subagent per article and queue extras when slots are full.
+3. Require each research subagent to use `/bloxodes-article-research` and return `brief.md` only.
+4. Review each brief. Do not approve weak research just because the angle sounds good.
+5. Send research feedback to the same research subagent, or approve the brief.
+6. After approval, start a new writing subagent with the normal or tech writing skill.
+7. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; send copy and content changes back to the writing subagent.
+8. Start or reuse the local web server with `npm run dev:local`.
+9. Run the batch verifier on reviewed final files. Send copy failures to the writing subagent and research gaps to the research subagent.
+10. Open each verified localhost article in an available real browser and inspect the rendered page.
+11. Return approved paths, localhost article links, blocked articles, and remaining risks.
 
-## Brief review
-
-A brief is ready when:
-
-- Bloxodes coverage was actually checked
-- page-type overlap is clear
-- sources support the angle
-- thin-source claims show real fallback checks
-- source buckets are separated (found / used / unusable / limits)
-- game titles and slugs include the game name
-- the title promise is clear and the outline answers it
-- facts to avoid and open gaps are honest
-- **player texture is usable**: wrong assumptions, stuck scenes, player words, decisions, and where that texture should land in the outline
-
-Weak research does not become strong just because the angle sounds fun. Ask for more work or block it.
-
-## Final article review
-
-Read the piece top to bottom like a player who is stuck and a little impatient.
+## Brief Review
 
 Check:
 
-- Matches `bloxodes-article-writing` (and the tech skill when needed)
-- JSON parses
-- title, slug, meta, tags, sources, and `universe_id` make sense
-- game pieces include the game name in title and slug
-- body answers the brief
-- FAQs help without repeating the body, in the same voice
-- opens on the real problem or answer
-- reads as one clean story with full sentences and natural flow
-- simple enough for a younger Roblox player
-- sounds like a calm friend who plays, not a manual and not a hype ad
-- each main section has at least one real player moment, mistake, or decision
-- no research leaks in public copy
-- no empty hype words
-- steps and lists stay short and clear
-- fix articles use one H3 per fix
-- facts are solid; never tell people to play Roblox in a browser
-- links help
+- existing Bloxodes coverage is actually checked
+- related page-type overlap is handled
+- sources support the angle
+- source discovery used more than one query style and more than one surface when the topic is a Roblox micro-guide
+- "few sources" claims are backed by documented fallback checks, not just one polluted or empty search
+- the brief separates sources found, sources used for exact facts, unusable sources, and search limitations
+- game-specific article titles and slugs include the game name
+- the title promise is clear
+- the outline answers the title
+- facts to avoid are named
+- open gaps are honest
+- the media plan uses only perfect-match video candidates and clean, source-checked images, without forcing media
 
-Then run the verifier on files that look ready. Only fix tiny metadata or JSON issues yourself.
+If the brief is weak, ask for more research or mark the article blocked.
 
-## Local preview
+Do not rewrite the article from the parent role. The parent may only make tiny non-content metadata or JSON repairs itself, such as slug, source URL, tag, ID, null field, or syntax fixes. Send writing, tone, body, FAQ, and content feedback to the writing subagent, and send research-gap feedback to the research subagent.
 
-1. Start or reuse `npm run dev:local`.
-2. Run:
+## Final Article Review
+
+Check:
+
+- Check against the Writing Rules in `bloxodes-article-writing/SKILL.md`
+- `final.json` parses
+- title, slug, meta, tags, sources, and universe ID make sense
+- game-specific article titles and slugs include the game name; use `Roblox` wording when it helps readers understand the topic
+- `content_md` answers the approved brief
+- `faq_json` answers useful follow-up questions without repeating the article body
+- the opening starts with the topic, action, or problem
+- every section adds value
+- language is simple enough for Roblox players
+- copy reads in the Bloxodes house voice: calm, playful gamer-buddy, with a light dry touch of wit wrapped around real facts (wit dialed down on error/troubleshooting pieces), and no hype words like ultimate, insane, amazing, epic, must-have, or game-changer
+- paragraphs are short (1-3 sentences, one idea each) with no wall-of-text blocks
+- sentences are short and plain; long run-on sentences are split
+- list and step items are short (one action/fact each), not paragraphs crammed into a bullet
+- for fix/troubleshooting articles, each fix has its own H3 heading (not one long nested-bullet list); no deep bullet-in-bullet hierarchies
+- no repeated fixes, causes, or explanations across sections
+- facts are verified and accurate: no invented menu paths, no impossible actions, and never tells readers to play Roblox in a web browser (the in-browser player is discontinued)
+- no public copy mentions research workflow, source gathering, database checks, or internal notes
+- no unsupported claims, vague wording, or page-type overlap
+- links are useful, not decorative
+- videos are perfect matches and use `{{ youtube: ... }}` rather than leftover raw links
+- body images are clean, hosted under `/articles/<slug>/`, have useful alt text, and sit beside the relevant step
+- media is omitted when it does not make the article easier to understand
+
+After this review, run the batch verifier on the files that look ready. Treat writing, copy, tone, body, and FAQ failures as feedback for the writing subagent, and research or accuracy gaps as feedback for the research subagent. The parent may directly fix verifier failures only when they are small non-content metadata or JSON issues, such as a wrong slug, malformed JSON, source URL typo, tag cleanup, missing `universe_id`, or an import-required null/default field.
+
+## Local Preview
+
+Before final output, the parent model must preview every approved article on the real local route in an actual browser.
+
+Use any browser control or automation available in the current environment. Prefer Chrome or Chromium. When only terminal tools are available, use the repository's Playwright package with an installed Chrome or Chromium executable. Do not depend on a product-specific browser name.
+
+1. Start or reuse the local web server with `npm run dev:local`.
+2. If body images are planned, confirm the files exist under `apps/web/public/articles/<slug>/`.
+3. Run:
 
 ```bash
-npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json>
+npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json> --file <final.json>
 ```
 
-Use the real port and one `--file` per article.
+Use one `--file` for each approved article and the actual localhost port shown by the dev server.
 
-3. On failure, send writing problems to the writing subagent and research gaps to research.
-4. On pass, open or fetch each `/articles/<slug>` page.
-5. Check title, body, author/cover, and whether the story still feels good on the real page.
-6. Return the localhost links.
+4. If the verifier fails, send writing, JSON, or copy output to the writing subagent. Send source or brief gaps to the research subagent.
+5. If the verifier passes, open every verified `/articles/<slug>` link in Chrome, Chromium, or another available real browser.
+6. Check the page title, article body, author/cover behavior, and obvious layout issues.
+7. Confirm embeds render as players instead of raw syntax and that body images load beside the correct content.
+8. Return the localhost links for every completed article.
 
-If a piece cannot import or preview, mark it blocked with the reason.
+If no real browser can be controlled, or an article cannot be imported or previewed, mark it blocked with the reason. Do not claim browser verification from an HTML fetch alone.
 
-## Final output
+## Final Output
 
 Return:
 
@@ -149,5 +160,5 @@ Return:
 - localhost article links
 - approved articles
 - blocked articles and why
-- verification done
+- verification done, including `verify:article-finals` and the browser used for rendered-page preview
 - remaining risks

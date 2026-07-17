@@ -35,7 +35,9 @@ Automatic daily workflows use fast code/build/dataset checks and tiny targeted s
 | Universe description generation | `scripts/universes/generate-universe-description.ts` | `npm run generate:universe-description` |
 | Queue event guides | `scripts/events/queue-event-guides.ts` | `npm run queue:event-guides` |
 | Public copy quality check | `scripts/content/check-public-copy.ts` | `npm run content:check-copy -- <final.json>` |
-| Article final writing | `.agents/skills/bloxodes-article-workflow-runner` | Research subagent → brief approval → writing subagent (`bloxodes-article-writing` or tech skill) → `verify:article-finals` |
+| Save hosted article image (webp) | `scripts/content/save-article-image.ts` | `npm run content:save-article-image -- --slug <slug> --url <url> --name <stem> --alt "..."` |
+| Article media checks (YouTube + images) | `scripts/content/check-article-media.ts` | used by `npm run verify:article-finals` |
+| Article final writing | `.agents/skills/bloxodes-article-workflow-runner` | Research subagent → brief approval → writing subagent (`bloxodes-article-writing` or tech skill) → host images if needed → `verify:article-finals` |
 | Game collection final writing | `.agents/skills/bloxodes-game-collection-workflow-runner` | Collection subagent (research → data → images) → writing subagent (`bloxodes-game-collection-writing`) → `verify:game-collection-finals` |
 | Import reviewed tool final JSON into Supabase | `scripts/content/import-tool-finals.ts` | `npm run import:tool-finals -- --file tmp/content-workspace/<topic-slug>/tools/<tool-code>/final.json --dry-run`; production writes require `NODE_ENV=production` plus `--allow-prod` and verify the saved `tools` row |
 ### Code Page Workflow Hard Rules

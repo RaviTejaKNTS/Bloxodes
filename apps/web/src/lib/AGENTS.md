@@ -15,6 +15,8 @@ Most application behavior should flow through this folder before it reaches page
 - `security/*`: request origin checks, IP extraction, CSP, and rate limiting.
 - `comments.ts` and `comment-moderation.ts`: comment formatting, tags, and moderation decisions.
 - `code-utils.ts`: shared code reward cleanup, sorting, and "new code" freshness rules used by website, extension API, and mobile API.
+- `article-media.ts`: YouTube directive parsing/embeds and article image path rules for `/articles` content; used by `markdown.ts` and content verification.
+- `markdown.ts`: GFM markdown → sanitized HTML, including `{{ youtube: ... }}` embeds.
 - `extension-codes.ts` and `extension-codes-utils.ts`: public Chrome extension payload building and Roblox page-context normalization.
 - `mobile-codes.ts`: public mobile app payload building for codes index/detail screens.
 - Domain helpers:

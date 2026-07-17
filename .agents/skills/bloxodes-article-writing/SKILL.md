@@ -5,9 +5,9 @@ description: Write one Bloxodes article final.json from an approved brief.md. Us
 
 # Bloxodes Article Writing
 
-Write one article after the brief is approved. Research belongs in `bloxodes-article-research`. Batches belong in `bloxodes-article-workflow-runner`.
+Use this after `brief.md` is approved. Do not use this for first-pass research; use `bloxodes-article-research`.
 
-A writing subagent runs this skill. Do not call other subagents.
+Use this for one article only. Do not handle batches here; use `bloxodes-article-workflow-runner`.
 
 ## Workspace
 
@@ -17,156 +17,114 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
   final.json
 ```
 
-## Before you write
+## Before Writing
 
 Read the approved `brief.md`.
 
-If the brief is weak, missing, or still has big open gaps, stop and send it back for research.
+If the brief is missing, weak, unapproved, or has unresolved source gaps, stop and ask for the article research step to be fixed first.
 
-Use the brief’s player texture (stuck moments, mistakes, real player words). That is how the piece stays human. If texture is thin, stick to confirmed facts and stay honest. Do not invent drama.
+## Writing Rules
 
-## What good writing feels like
+**Voice & tone (Bloxodes house voice)**
+- Write like a player who knows the game well, telling a friend how it works. Calm, warm, and a little playful, never formal, corporate, or hyped.
+- Simple English first. Short sentences, everyday words a younger player gets instantly. Explain any game term in plain words right where it appears.
+- Do not use em dashes. Replace any em dash with a colon, comma, parentheses, or two short sentences. This applies to every output field: title, metadata, body, FAQ, and all JSON values.
+- Playful, not loud. Drop in a light, dry touch of wit (roughly one per short paragraph) and always wrap it around a real fact, like "protection that overstays its welcome." The fact leads; the wit rides along. Never force a joke, stack puns, or let a quip hide the info.
+- Gamer-buddy warmth. Talk to the player as "you," use real in-game nouns, and sound like someone who actually plays, not a manual.
+- Spark from rhythm, not adjectives. Energy comes from concrete detail, a strong first line, and varied sentence length, not from words like *ultimate, insane, amazing, epic, must-have, game-changer*. Ban those.
+- Open on the real thing: the change, action, problem, or answer. No mood-setting, no suspense, no warm-up lines, no "Welcome to" or "In this game".
+- Read the room. Keep the wit lighter, or drop it, when the reader is stressed: error fixes, "won't open", crashes, anything troubleshooting. Help first.
+- Keep functional slots clean. Steps, table cells, and labels stay plain and direct. Let the playful voice live in intros, explanations, and blurbs.
+- No filler or AI tics. Cut "Additionally", "Furthermore", "It's important to note", and "not just… but". Every sentence earns its place. Also ban vague filler like "this is a big change" or "this matters".
 
-Write like a good gaming website guide, not a support ticket and not a hyped landing page.
+**Length and density**
+- Every sentence must add value. No padding, no repetition, ever.
+- If 300 words covers it fully, stop at 300. There's no minimum or maximum: the only test is whether more words add real depth.
+- Never restate something already said elsewhere in the article, even in different phrasing.
+- However, do not skip on any info. Do not asssume people already know something, make it clear for everyone to understand.
+- We may not need an what it is headings, but definitely need to cover all such info in the article. We need to make a detailed article that can rank better than all competitors. If the article is missing any info, run a fan-out research query and fill it, never leave a gap.
 
-Think of sites that talk to you as a player: calm, clear, a little warm, full sentences, easy top-to-bottom reading. The reader should feel like someone who already beat the wall is sitting next to them and explaining what actually helps.
+**Readability and formatting**
+- This sits on top of the value rule: every sentence must add value, and every sentence must also be easy to read.
+- One idea per paragraph. Each paragraph covers a single point clearly, then stops. Never write a wall of text.
+- Keep paragraphs short: aim for 1-3 short sentences. If a paragraph is growing past that, split it into two.
+- Write short, plain sentences. Prefer one simple sentence over one long sentence with commas and "and"s. If a sentence runs long, break it in two.
+- Use everyday words a younger Roblox player understands. Explain any necessary technical term in plain language right where it appears.
+- Keep list and step items short: one action or fact per item, ideally one line. Never cram a paragraph into a single bullet or numbered step.
+- If a step needs a little detail, use a short bolded lead (the action) followed by one short sentence of explanation, not a dense block.
+- Put each distinct action on its own step. Do not chain several actions into one point.
+- Leave white space between ideas so the page is easy to scan, not a dense block of text.
 
-### The story shape
+**Structure**
+- Follow the provided outline, but adjust it if a different flow serves the reader better.
+- Use fewer headings so the article stays scannable. If 2 headings can help the user, we can just use 2.
+- However keep each section also small, do not cramp a lot of info into one section making it hard to read.
+- Headings should read like sentences and reveal the core info, not tease it. Keep them short.
+- Each section must build on the last, not re-explain it.
+- One structured element per section, never a table and a list together. Keep it simple.
+- Use tables and lists only for core, structured info (stats, steps, comparisons). Otherwise default to plain prose.
+- Use numbered lists for step-by-step instructions.
 
-Most how-to pieces should read as one clean story:
+**YouTube embeds and images (optional)**
+- Embed a video only when the approved brief marks it as a perfect match. Skip near matches and filler videos.
+- Put an embed on its own line with `{{ youtube: https://www.youtube.com/watch?v=VIDEO_ID }}`. Do not invent IDs or leave a raw YouTube URL when an embed is intended.
+- One embed is normally enough. Place it near the step or explanation it demonstrates.
+- Use body images only when they are already hosted under `/articles/<article-slug>/` and clarify a real step or UI detail.
+- Write images as `![useful alt text](/articles/<article-slug>/<descriptive-name>.webp)` and place them beside the relevant explanation.
+- Do not hotlink wiki, Discord, Imgur, competitor CDN, or other random remote images in `content_md`.
+- Do not use images with watermarks, large arrows, subscribe overlays, or competitor branding.
+- Prefer zero to three body images. Set `cover_image` to `/articles/<slug>/cover.webp` only when that file is hosted; otherwise leave it null for the import flow.
+- Treat media like tables and lists: use the one structured element that best explains the point instead of stacking several versions of the same information.
 
-1. **The stuck moment** — what the player is feeling right now
-2. **What is going on** — the simple truth behind it
-3. **What to do** — steps or path, in order
-4. **How to make it smoother** — habits, mistakes, next goal
+**How-to-fix and troubleshooting articles**
+- Give each fix its own `###` (H3) heading, grouped under one `##` (H2) like "How to fix it". This beats a long numbered list with nested sub-bullets, which gets hard to scan.
+- The H3 is a short action ("Restart your device", "Update your graphics drivers"). Under it, write 1-3 short sentences, or a short numbered list only if the fix has ordered steps.
+- Do not stack deep bullet hierarchies (bullets inside bullets inside steps). Keep each fix flat and simple.
+- Order fixes easiest-first.
+- Never repeat the same fix, cause, or explanation across sections. Each H3 covers one distinct thing. If two fixes overlap, merge them.
+- Keep one short intro before the fixes, and an optional short closing section (e.g. when the problem is on Roblox's side and waiting is the answer). Do not pad with a separate "what is this error" section unless it adds real value.
 
-Headings break that story into scanable chunks. They should not shatter it into disconnected fact cards.
+**Accuracy (never ship wrong info)**
+- Verify every platform claim before writing. Do real research; do not guess menu paths, toggles, limits, or behavior. If a label or path is uncertain, keep the wording generic instead of inventing specifics.
+- Roblox experiences cannot be played in a web browser. The in-browser player was discontinued; roblox.com only launches the installed app. Never tell readers to "play in the browser" or "try the browser instead of the app" as a fix.
+- Do not suggest actions that are not actually possible (e.g. disabling a system that cannot be disabled). Do not claim a fix works for a platform you have not verified it on.
+- When unsure whether something is true, leave it out rather than risk misinformation.
 
-### Full sentences and flow
+**Game-specific pages**
+- Include the game name in the title and slug. Use "Roblox" when it aids search or clarity.
 
-- Write real sentences people can speak out loud.
-- Prefer plain words a younger Roblox player gets on first read.
-- Keep paragraphs short, usually 1–3 sentences, so the page can breathe.
-- Let one idea finish before the next starts.
-- Connect ideas with natural flow (“Once that is done…”, “That is why…”, “If you are stuck on the 35 count…”).
-- Mix sentence length a little. A longer line is fine when it carries a thought. Then land a short one.
-- Do not write like a telegram: claim. claim. claim.
-- Do not write walls of text either.
+**Gaps and links**
+- If info is missing, run a fan-out research query and fill it, never leave a gap.
+- Add at least 2 relevant internal links to existing Bloxodes pages. Use the same-game articles and related pages the brief listed; if the brief has none, query the production DB for other published articles on the same `universe_id` before writing.
+- Link only to pages that actually exist. Use real, current slugs (article links are `/articles/<slug>`). Never invent a slug or link to a page you have not confirmed exists.
+- Weave each internal link naturally, mid-sentence, as part of the flow. No "read this" or similar call-outs. Pick anchor text that matches what the reader gets, and place links where they genuinely help (related mechanic, income, next goal), not as filler.
 
-### Voice
+**What never appears in copy**
+- No mentions of research, sources, competitors, databases, or internal notes.
+- No self-referential words: "this article," "this guide," "this page," "this catalog," "this dataset," "this database." Just talk about the game.
 
-- Talk to the reader as **you**.
-- Sound like a friend who plays the game.
-- Stay calm and warm. A light bit of wit is welcome when it sits on a real fact.
-- Never force jokes. Never stack puns. Never yell with hype words like *ultimate, insane, amazing, epic, must-have, game-changer* (unless that is the real in-game name).
-- Use player words: level lock, hard wall, checklist, menu, grind. Avoid design-doc words: objective-based system, quest track, progression framework.
-- Open on the real problem or answer. No “Welcome to…” and no slow mood setting.
-- On error / crash / won’t-open pieces, drop the wit and help first.
+**Final pass**
+- Re-read as a reader, not the writer. Cut anything that doesn't earn its place. Confirm the article actually solves what the reader came for.
+- If media is present, confirm each video is a perfect match and each hosted image path, placement, and alt text is useful. Remove media that does not help.
 
-### Steps, tables, and labels
+## Writing and Field Jobs
 
-Keep the functional bits plain. Numbered steps should be one clear action each. Tables stay for clean comparisons or checklists. Save the personality for the prose around them.
+Write `final.json` only.
 
-### How long should it be?
+- `title`: State the exact reader question, action, story, or guide promise in human search language. Include the game name for game-specific articles.
+- `slug`: Use a short stable editorial slug for the article topic. Include the game name for game-specific articles.
+- `meta_description`: Summarize the answer or reader outcome in one specific search snippet.
+- `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy. Include optional YouTube embeds and hosted body images only when the brief supports them.
+- `faq_json`: Add 2-4 useful questions only when they cover follow-up points not already answered in the article. Keep answers short, clear, and source-backed. Use `[]` if FAQs would repeat the body.
+- `cover_image`: `/articles/<slug>/cover.webp` when a cover is hosted, otherwise null so the import path can generate one.
+- `author_id`: Set when known, or let the import path assign it if that is the project flow.
+- `universe_id`: Set whenever the article belongs to one Roblox game and that game has a `roblox_universes` row. Look it up (by name/slug, or reuse the id other same-game articles use) instead of leaving it null. Only leave it null if no universe row exists for the game.
+- `tags`: Use specific reusable labels, not loose keyword stuffing.
+- `sources`: Keep the URLs that support important facts. Do not pad with weak repeats.
 
-As long as the reader needs, and not one sentence more.
+Parse-check JSON before returning.
 
-Cover everything useful. Explain things a new player would not already know. Do not pad. Do not repeat the same fact in three outfits. If a later-stage chart does not exist, go deeper on decisions and habits instead of inventing numbers.
-
-## Examples (study these shapes)
-
-These are style models. Copy the *feel*, not the topics.
-
-**Good open (problem → truth):**
-
-> If your Evomons keep earning EXP but the level number will not budge, you are not broken. You hit a hard level cap. Ascension is the checklist that raises that cap for your player level and your whole team.
-
-Why it works: plain words, full sentences, names the fear, gives the answer right away.
-
-**Good middle (recognition + fact):**
-
-> Dumping every EXP fruit into one favorite feels smart until the first Ascension asks for a second mon at Level 25. Level two team members early, and catch while you clear islands so the 35-count is not a second grind at the end.
-
-Why it works: a real mistake, a clear fix, no hype.
-
-**Good soft caution (no research voice):**
-
-> Later stages get harder, and public charts for every stage are thin. When a new Ascension pops up, trust the in-game menu more than your memory.
-
-Why it works: honest without saying “sources” or “verified.”
-
-**Bad (choppy manual):**
-
-> Ascension is a multi-stage objective-based system. It raises caps. It unlocks at level 20. Complete the quests. Press Ascend.
-
-Why it fails: true, but no flow, no face, no story.
-
-**Bad (cringe hype):**
-
-> This INSANE Ascension system is a total game-changer you must complete ASAP!!!
-
-Why it fails: loud, empty, not helpful.
-
-**Bad (research leak):**
-
-> According to multiple public writeups, there is no verified Robux fee for stage one.
-
-Why it fails: sounds like a brief, not a player.
-
-**FAQ voice should match the body:**
-
-> **Why do my Evomons still gain EXP but not levels?**  
-> That is the cap doing its job. EXP can still fill while the level freezes. Finish the active Ascension and press Ascend, and levels can climb again.
-
-## Structure
-
-- Follow the brief outline when it serves the reader. Adjust if a cleaner story order is obvious.
-- Use few headings. Two good H2s beat five thin ones for a simple how-to.
-- Headings should sound like plain sentences and give the answer away.
-- Each section should move the story forward, not restate the last one.
-- One structured block per section (a list *or* a table, not both stacked for the same idea).
-- Numbered lists for real step-by-step work.
-
-## Fix / troubleshooting extras
-
-- Group fixes under one H2 like “How to fix it”.
-- Give each fix its own H3 with a clear action name.
-- Easiest fixes first.
-- Keep each fix flat: a short lead, then steps if needed. No deep bullet trees.
-- Do not repeat the same fix in two sections.
-
-## Accuracy
-
-- Only write what you can stand behind. Do not invent menu paths, drops, or requirements.
-- If a label is unsure, keep the wording soft instead of guessing.
-- Roblox does not play in a web browser anymore. Never tell readers to “try the browser.”
-- If you are not sure, leave it out.
-
-## Game pages, links, and public-copy bans
-
-- Game articles need the game name in the title and slug. “Roblox” is fine when it helps.
-- Add at least two real internal links from the brief (or confirmed same-game pages). Weave them mid-sentence where they help.
-- Never invent slugs.
-- Do not mention research, sources, competitors, databases, or internal notes in the public copy.
-- Do not say “this article,” “this guide,” or “this page.” Just talk about the game.
-- No em dashes anywhere in the JSON fields. Use a comma, colon, parentheses, or two sentences.
-
-## After the first draft
-
-Read it top to bottom like a player who is stuck and impatient.
-
-Ask:
-
-- Does this make sense if I only skim headings?
-- Does it still make sense if I read every line in order?
-- Would a friend talk like this?
-- Did I land at least one real player moment in each main section?
-- Did I leak any research language?
-- Did I answer the title fully?
-
-Then revise once for flow and voice. Keep the facts. Fix the music.
-
-## Write `final.json` only
+## Output Shape
 
 ```json
 {
@@ -184,19 +142,10 @@ Then revise once for flow and voice. Keep the facts. Fix the music.
 }
 ```
 
-Field notes:
+Do not include `seo_title`; the articles table does not use it.
 
-- `title`: clear human search language. Include the game name when the piece is about one game.
-- `slug`: short, stable, includes the game name for game pieces. Do not use `roblox_universes.slug`.
-- `meta_description`: one specific outcome the reader gets.
-- `content_md`: the full story in markdown.
-- `faq_json`: 2–4 follow-ups that are not already answered in the body. Same warm voice. Use `[]` if FAQs would only repeat.
-- `cover_image` / `author_id`: set when known, else null.
-- `universe_id`: required when the piece belongs to one game with a universe row.
-- `tags`: a few useful labels, not keyword stuffing.
-- `sources`: real URLs that support the important facts.
-- `is_published`: true when ready.
+For game-linked articles, use the article topic and game name for the slug. Do not use `roblox_universes.slug`.
 
-Do not include `seo_title`.
+If the article topic is about some specific roblox game, then you must include universe id.
 
-Parse-check the JSON before you return.
+Before returning final.json, run or mentally apply the public-copy rules: avoid self-referential phrases like "this article/guide/page/catalog", avoid "row-by-row/full reference" framing, avoid "not just" contrast filler, and write the copy as direct player help.
