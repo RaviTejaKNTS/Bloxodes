@@ -2,6 +2,10 @@
 
 This is the source of truth for accessing, extending, verifying, and reporting on Bloxodes analytics.
 
+## Advertising implementation records
+
+- [`journey-auto-ads-dom-refactor-2026-07-14.md`](journey-auto-ads-dom-refactor-2026-07-14.md): root cause, DOM contract, route coverage, code changes, local/browser audits, production release evidence, and the reuse checklist for Journey automatic in-content placement.
+
 ## Current setup
 
 As of 2026-07-11, Bloxodes runs two web analytics systems:

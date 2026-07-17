@@ -49,7 +49,7 @@ describe("security CSP routing", () => {
   });
 
   it("adds permissions policy and only sends HSTS when enabled", () => {
-    const localHeaders = buildSecurityHeaders("/", "off");
+    const localHeaders = buildSecurityHeaders("/", "off", { enableHsts: false });
     const productionHeaders = buildSecurityHeaders("/", "off", { enableHsts: true });
 
     expect(headerValue(localHeaders, "Permissions-Policy")).toContain("camera=()");

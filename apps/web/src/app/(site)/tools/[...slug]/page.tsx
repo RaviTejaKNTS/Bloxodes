@@ -36,7 +36,7 @@ import { ContentFaq } from "@/components/ContentFaq";
 
 export const revalidate = 21600;
 
-const FALLBACK_IMAGE = `${SITE_URL}/og-image.png`;
+const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 const TOOL_AD_SLOT = "3529946151";
 const RESERVED_TOOL_CODES = new Set([
   "grow-a-garden-crop-value-calculator",
@@ -151,6 +151,7 @@ export default async function ToolFallbackPage({ params }: PageProps) {
     "this game";
   const relatedChecklistCards = relatedChecklists.map((row) => {
     const summary = summarize(row.seo_description ?? row.description_md ?? null, CHECKLISTS_DESCRIPTION);
+    const updatedAt = row.updated_at || row.published_at || row.created_at || null;
     const itemsCount =
       typeof row.leaf_item_count === "number"
         ? row.leaf_item_count
@@ -163,8 +164,9 @@ export default async function ToolFallbackPage({ params }: PageProps) {
       title: row.title,
       summary,
       universeName: row.universe?.display_name ?? row.universe?.name ?? null,
-      coverImage: row.universe?.icon_url ?? `${SITE_URL}/og-image.png`,
-      updatedAt: row.updated_at || row.published_at || row.created_at || null,
+      coverImage: row.universe?.icon_url ?? `${SITE_URL}/Bloxodes.png`,
+      updatedAt,
+      updatedLabel: formatUpdatedLabel(updatedAt),
       itemsCount
     };
   });

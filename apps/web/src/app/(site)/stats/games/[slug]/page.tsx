@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { StatsGameDetailView, StatsPageShell } from "../../components/StatsViews";
 import {
   getStatsGameBySlug,
+  getStatsGameSummaryBySlug,
   isStatsGameDetailIndexable,
   robloxGameUrl,
   statsGameLastModifiedAt,
@@ -19,13 +20,13 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const data = await getStatsGameBySlug(slug);
-  const canonical = `${SITE_URL}/stats/games/${data?.game.slug ?? slug}`;
-  if (!data) return { alternates: buildAlternates(canonical), robots: { index: false, follow: false } };
+  const game = await getStatsGameSummaryBySlug(slug);
+  const canonical = `${SITE_URL}/stats/games/${game?.slug ?? slug}`;
+  if (!game) return { alternates: buildAlternates(canonical), robots: { index: false, follow: false } };
 
-  const title = `${statsGameSeoTitle(data.game.displayName)} | ${SITE_NAME}`;
-  const description = statsGameSeoDescription(data.game);
-  const indexable = await isStatsGameDetailIndexable(data.game);
+  const title = `${statsGameSeoTitle(game.displayName)} | ${SITE_NAME}`;
+  const description = statsGameSeoDescription(game);
+  const indexable = isStatsGameDetailIndexable(game);
   return {
     title,
     description,
@@ -36,13 +37,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description,
       url: canonical,
       siteName: SITE_NAME,
-      images: data.game.iconUrl ? [data.game.iconUrl] : undefined
+      images: game.iconUrl ? [game.iconUrl] : undefined
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: data.game.iconUrl ? [data.game.iconUrl] : undefined
+      images: game.iconUrl ? [game.iconUrl] : undefined
     }
   };
 }

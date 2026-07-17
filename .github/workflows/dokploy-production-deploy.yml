@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       trigger_dokploy:
-        description: "Build/publish an image and deploy it through Dokploy before purge/warm"
+        description: "Build/publish an image and deploy it through Dokploy"
         required: true
         default: "true"
         type: choice
@@ -15,60 +15,147 @@ on:
           - "true"
           - "false"
       image_sha:
-        description: "Existing GHCR commit SHA to deploy without rebuilding (leave blank for current SHA)"
+        description: "Existing GHCR commit SHA to deploy without rebuilding"
         required: false
         default: ""
         type: string
       site_url:
-        description: "Production site URL to health-check and warm"
+        description: "Production site URL"
         required: true
         default: "https://bloxodes.com"
         type: string
       purge_cloudflare:
-        description: "Purge Cloudflare after deploy"
+        description: "Force a full Cloudflare purge"
         required: true
         default: "true"
         type: choice
         options:
           - "true"
           - "false"
-      warm_cloudflare:
-        description: "Warm Cloudflare from the sitemap after purge"
-        required: true
-        default: "true"
-        type: choice
-        options:
-          - "true"
-          - "false"
-
-concurrency:
-  group: dokploy-production
-  cancel-in-progress: true
 
 permissions:
   contents: read
   packages: write
 
 jobs:
+  classify:
+    runs-on: ubuntu-latest
+    outputs:
+      deploy: ${{ steps.scope.outputs.deploy }}
+      runtime_code: ${{ steps.scope.outputs.runtime_code }}
+      dataset: ${{ steps.scope.outputs.dataset }}
+      smoke_paths: ${{ steps.scope.outputs.smoke_paths }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - id: scope
+        name: Classify production change
+        shell: bash
+        env:
+          BEFORE_SHA: ${{ github.event.before || '' }}
+          HEAD_SHA: ${{ github.sha }}
+          EVENT_NAME: ${{ github.event_name }}
+          DISPATCH_DEPLOY: ${{ inputs.trigger_dokploy || 'true' }}
+        run: |
+          deploy=false
+          runtime_code=false
+          dataset=false
+          printf '/\n' > /tmp/smoke-paths.txt
+
+          add_path() {
+            if ! grep -Fxq "$1" /tmp/smoke-paths.txt; then
+              printf '%s\n' "$1" >> /tmp/smoke-paths.txt
+            fi
+          }
+
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$DISPATCH_DEPLOY" = "true" ]; then
+              deploy=true
+              runtime_code=true
+            fi
+          else
+            if [ -z "$BEFORE_SHA" ] || [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
+              BEFORE_SHA="$(git rev-parse "${HEAD_SHA}^")"
+            fi
+            while IFS= read -r -d '' file; do
+              case "$file" in
+                data/*|apps/web/src/data/*|apps/web/public/*)
+                  deploy=true
+                  dataset=true
+                  add_path "/wiki"
+                  case "$file" in
+                    */quiz.json) add_path "/quizzes" ;;
+                  esac
+                  ;;
+                apps/web/*|Dockerfile|package.json|package-lock.json)
+                  deploy=true
+                  runtime_code=true
+                  case "$file" in
+                    *"/codes/"*) add_path "/codes" ;;
+                    *"/wiki/"*|*game-collection*) add_path "/wiki" ;;
+                    *"/catalog/"*) add_path "/catalog" ;;
+                    *"/tools/"*) add_path "/tools" ;;
+                    *"/checklists/"*|*Checklist*) add_path "/checklists" ;;
+                    *"/quizzes/"*|*Quiz*) add_path "/quizzes" ;;
+                    *"/events/"*) add_path "/events" ;;
+                    *"/articles/"*) add_path "/articles" ;;
+                    *"/stats/"*|*/stats.ts) add_path "/stats" ;;
+                  esac
+                  ;;
+              esac
+            done < <(git diff --name-only -z "$BEFORE_SHA" "$HEAD_SHA")
+          fi
+
+          if [ "$runtime_code" = "true" ] && [ "$(wc -l < /tmp/smoke-paths.txt)" -eq 1 ]; then
+            add_path "/codes"
+            add_path "/wiki"
+            add_path "/catalog"
+            add_path "/tools"
+          fi
+
+          smoke_paths="$(head -n 5 /tmp/smoke-paths.txt | jq -R -s -c 'split("\n") | map(select(length > 0))')"
+          echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
+          echo "runtime_code=$runtime_code" >> "$GITHUB_OUTPUT"
+          echo "dataset=$dataset" >> "$GITHUB_OUTPUT"
+          echo "smoke_paths=$smoke_paths" >> "$GITHUB_OUTPUT"
+          echo "deploy=$deploy runtime_code=$runtime_code dataset=$dataset smoke_paths=$smoke_paths"
+
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
+    needs: classify
+    if: ${{ needs.classify.outputs.deploy == 'true' }}
+    concurrency:
+      group: dokploy-production
+      cancel-in-progress: false
     env:
       PRODUCTION_SITE_URL: ${{ inputs.site_url || vars.PRODUCTION_SITE_URL || 'https://bloxodes.com' }}
       IMAGE_NAME: ghcr.io/ravitejaknts/bloxodes-web
       DEPLOY_IMAGE_SHA: ${{ inputs.image_sha || github.sha }}
-
+      SMOKE_PATHS: ${{ needs.classify.outputs.smoke_paths }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
         with:
-          node-version: 24
+          fetch-depth: 0
+
+      - id: freshness
+        name: Skip superseded production pushes
+        shell: bash
+        run: |
+          fresh=true
+          if [ "${{ github.event_name }}" = "push" ]; then
+            current_sha="$(git ls-remote origin refs/heads/production | awk '{print $1}')"
+            if [ "$current_sha" != "$GITHUB_SHA" ]; then
+              echo "Skipping superseded SHA $GITHUB_SHA; production now points to $current_sha"
+              fresh=false
+            fi
+          fi
+          echo "fresh=$fresh" >> "$GITHUB_OUTPUT"
 
       - name: Validate production build environment
-        if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' && (github.event_name != 'workflow_dispatch' || inputs.image_sha == '') }}
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
@@ -86,7 +173,7 @@ jobs:
           exit "$missing"
 
       - name: Create production build environment file
-        if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' && (github.event_name != 'workflow_dispatch' || inputs.image_sha == '') }}
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
@@ -114,11 +201,11 @@ jobs:
           } > "$RUNNER_TEMP/bloxodes-production-build.env"
 
       - name: Set up Docker Buildx
-        if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' && (github.event_name != 'workflow_dispatch' || inputs.image_sha == '') }}
         uses: docker/setup-buildx-action@v4
 
       - name: Log in to GitHub Container Registry
-        if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' && (github.event_name != 'workflow_dispatch' || inputs.image_sha == '') }}
         uses: docker/login-action@v4
         with:
           registry: ghcr.io
@@ -126,7 +213,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and publish production image
-        if: ${{ github.event_name != 'workflow_dispatch' || (inputs.trigger_dokploy == 'true' && inputs.image_sha == '') }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' && (github.event_name != 'workflow_dispatch' || inputs.image_sha == '') }}
         uses: docker/build-push-action@v7
         with:
           context: .
@@ -141,10 +228,12 @@ jobs:
           secret-files: |
             production_env=${{ runner.temp }}/bloxodes-production-build.env
           cache-from: type=gha,scope=bloxodes-production-web
-          cache-to: type=gha,mode=max,scope=bloxodes-production-web
+          # The full intermediate cache took longer to upload than the app took
+          # to build. Keep only the minimum reusable image cache.
+          cache-to: type=gha,mode=min,scope=bloxodes-production-web
 
       - name: Validate Dokploy configuration
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.trigger_dokploy == 'true' }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' }}
         env:
           DOKPLOY_API_TOKEN: ${{ secrets.DOKPLOY_API_TOKEN || secrets.DOKPLOY_AUTH_TOKEN }}
           DOKPLOY_API_URL: ${{ vars.DOKPLOY_API_URL || secrets.DOKPLOY_API_URL || vars.DOKPLOY_URL || secrets.DOKPLOY_URL }}
@@ -162,7 +251,7 @@ jobs:
           exit "$missing"
 
       - name: Point Dokploy at the immutable production image
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.trigger_dokploy == 'true' }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' }}
         env:
           DOKPLOY_API_TOKEN: ${{ secrets.DOKPLOY_API_TOKEN || secrets.DOKPLOY_AUTH_TOKEN }}
           DOKPLOY_API_URL: ${{ vars.DOKPLOY_API_URL || secrets.DOKPLOY_API_URL || vars.DOKPLOY_URL || secrets.DOKPLOY_URL }}
@@ -171,13 +260,13 @@ jobs:
           GHCR_DOKPLOY_TOKEN: ${{ secrets.GHCR_DOKPLOY_TOKEN }}
         run: |
           docker_image="${IMAGE_NAME}:${DEPLOY_IMAGE_SHA}"
-          payload=$(jq -n \
+          payload="$(jq -n \
             --arg applicationId "$DOKPLOY_APPLICATION_ID" \
             --arg dockerImage "$docker_image" \
             --arg username "$GHCR_DOKPLOY_USERNAME" \
             --arg password "$GHCR_DOKPLOY_TOKEN" \
-            '{applicationId:$applicationId,dockerImage:$dockerImage,username:$username,password:$password,registryUrl:"ghcr.io"}')
-          status_code=$(curl --silent --show-error \
+            '{applicationId:$applicationId,dockerImage:$dockerImage,username:$username,password:$password,registryUrl:"ghcr.io"}')"
+          status_code="$(curl --silent --show-error \
             --write-out '%{http_code}' \
             --output /tmp/dokploy-provider-response.json \
             --request POST \
@@ -185,24 +274,20 @@ jobs:
             --header 'accept: application/json' \
             --header 'Content-Type: application/json' \
             --header "x-api-key: $DOKPLOY_API_TOKEN" \
-            --data "$payload")
-
+            --data "$payload")"
           if [ "$status_code" -lt 200 ] || [ "$status_code" -ge 300 ]; then
-            echo "Dokploy image-source update failed with status $status_code"
             cat /tmp/dokploy-provider-response.json
             exit 1
           fi
 
-          echo "Dokploy now targets $docker_image"
-
       - name: Trigger Dokploy image deployment
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.trigger_dokploy == 'true' }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' }}
         env:
           DOKPLOY_API_TOKEN: ${{ secrets.DOKPLOY_API_TOKEN || secrets.DOKPLOY_AUTH_TOKEN }}
           DOKPLOY_API_URL: ${{ vars.DOKPLOY_API_URL || secrets.DOKPLOY_API_URL || vars.DOKPLOY_URL || secrets.DOKPLOY_URL }}
           DOKPLOY_APPLICATION_ID: ${{ vars.DOKPLOY_APPLICATION_ID || secrets.DOKPLOY_APPLICATION_ID }}
         run: |
-          status_code=$(curl --silent --show-error \
+          status_code="$(curl --silent --show-error \
             --write-out '%{http_code}' \
             --output /tmp/dokploy-response.json \
             --request POST \
@@ -210,110 +295,112 @@ jobs:
             --header 'accept: application/json' \
             --header 'Content-Type: application/json' \
             --header "x-api-key: $DOKPLOY_API_TOKEN" \
-            --data "{\"applicationId\":\"$DOKPLOY_APPLICATION_ID\"}")
-
+            --data "{\"applicationId\":\"$DOKPLOY_APPLICATION_ID\"}")"
           if [ "$status_code" -lt 200 ] || [ "$status_code" -ge 300 ]; then
-            echo "Dokploy deployment trigger failed with status $status_code"
             cat /tmp/dokploy-response.json
             exit 1
           fi
 
-          cat /tmp/dokploy-response.json
-
       - name: Allow Dokploy deploy to start
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.trigger_dokploy == 'true' }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' }}
         env:
           DOKPLOY_DEPLOY_SETTLE_SECONDS: ${{ vars.DOKPLOY_DEPLOY_SETTLE_SECONDS || '30' }}
         run: |
           case "$DOKPLOY_DEPLOY_SETTLE_SECONDS" in
-            ''|*[!0-9]*)
-              DOKPLOY_DEPLOY_SETTLE_SECONDS=120
-              ;;
+            ''|*[!0-9]*) DOKPLOY_DEPLOY_SETTLE_SECONDS=30 ;;
           esac
+          sleep "$DOKPLOY_DEPLOY_SETTLE_SECONDS"
 
-          if [ "$DOKPLOY_DEPLOY_SETTLE_SECONDS" -gt 0 ]; then
-            echo "Waiting ${DOKPLOY_DEPLOY_SETTLE_SECONDS}s before health checks."
-            sleep "$DOKPLOY_DEPLOY_SETTLE_SECONDS"
-          fi
-
-      - name: Validate optional Cloudflare configuration
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.purge_cloudflare == 'true' || inputs.warm_cloudflare == 'true' }}
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
-        run: |
-          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -z "$CLOUDFLARE_ZONE_ID" ]; then
-            echo "CLOUDFLARE_ZONE_ID is required when CLOUDFLARE_API_TOKEN is set"
-            exit 1
-          fi
-
-          if [ -n "$CLOUDFLARE_ZONE_ID" ] && [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "CLOUDFLARE_API_TOKEN is required when CLOUDFLARE_ZONE_ID is set"
-            exit 1
-          fi
-
-      - name: Wait for site health
+      - name: Wait for exact live SHA and healthy database
+        if: ${{ steps.freshness.outputs.fresh == 'true' }}
         run: |
           health_url="${PRODUCTION_SITE_URL%/}/api/health"
-
-          for attempt in $(seq 1 90); do
-            status_code=$(curl --silent --show-error \
+          for attempt in $(seq 1 60); do
+            status_code="$(curl --silent --show-error \
               --output /tmp/dokploy-health.json \
               --write-out '%{http_code}' \
-              "$health_url" || true)
-
-            if [ "$status_code" -eq 200 ]; then
-              echo "Health endpoint responded on attempt $attempt"
+              "$health_url" || true)"
+            if [ "$status_code" -eq 200 ] && node -e '
+              const fs = require("fs");
+              const health = JSON.parse(fs.readFileSync("/tmp/dokploy-health.json", "utf8"));
+              const expected = process.env.DEPLOY_IMAGE_SHA || "";
+              const sha = health.build && health.build.sha;
+              if (health.ok !== true || !health.checks || health.checks.database?.ok !== true) process.exit(1);
+              if (!sha || (!expected.startsWith(sha) && !sha.startsWith(expected))) process.exit(1);
+            '; then
               cat /tmp/dokploy-health.json
-              if node -e 'const fs=require("fs"); const health=JSON.parse(fs.readFileSync("/tmp/dokploy-health.json","utf8")); if (!health.features || health.features.cacheTags !== true) { console.error("Health endpoint is live, but cacheTags feature flag is missing. Dokploy may still be serving an old build."); process.exit(1); } if (!health.features.cacheHeaderVersion || health.features.cacheHeaderVersion < 2) { console.error("Health endpoint is live, but cacheHeaderVersion is missing or old. Dokploy may still be serving an old build."); process.exit(1); } const sha=health.build&&health.build.sha; const expected=process.env.DEPLOY_IMAGE_SHA || ""; if (!sha || sha === "unknown") { console.error("Health build sha is unknown. Refusing to purge/warm Cloudflare because the workflow cannot prove Dokploy is serving the new build yet."); process.exit(1); } if (expected && !expected.startsWith(sha) && !sha.startsWith(expected)) { console.error("Health build sha " + sha + " does not match deployed image sha " + expected + "."); process.exit(1); }'; then
-                echo "Health check passed on attempt $attempt"
-                exit 0
-              fi
+              exit 0
             fi
-
-            echo "Health check not ready yet (attempt $attempt, status $status_code)"
-            sleep 10
+            sleep 5
           done
-
-          echo "Timed out waiting for deployed site health"
           cat /tmp/dokploy-health.json || true
           exit 1
 
-      - name: Purge Cloudflare cache
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.purge_cloudflare == 'true' }}
+      - name: Validate optional Cloudflare configuration
+        if: ${{ steps.freshness.outputs.fresh == 'true' && ((github.event_name == 'push' && needs.classify.outputs.runtime_code == 'true') || (github.event_name == 'workflow_dispatch' && inputs.purge_cloudflare == 'true')) }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ZONE_ID" ]; then
-            echo "Skipping Cloudflare purge because token or zone id is not configured"
-            exit 0
-          fi
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ZONE_ID"
 
-          status_code=$(curl --silent --show-error \
+      - name: Purge Cloudflare after shared runtime changes
+        if: ${{ steps.freshness.outputs.fresh == 'true' && ((github.event_name == 'push' && needs.classify.outputs.runtime_code == 'true') || (github.event_name == 'workflow_dispatch' && inputs.purge_cloudflare == 'true')) }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          status_code="$(curl --silent --show-error \
             --write-out '%{http_code}' \
             --output /tmp/cloudflare-purge.json \
             --request POST \
             "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
             --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
             --header 'Content-Type: application/json' \
-            --data '{"purge_everything":true}')
-
+            --data '{"purge_everything":true}')"
           if [ "$status_code" -ne 200 ]; then
-            echo "Cloudflare purge failed with status $status_code"
             cat /tmp/cloudflare-purge.json
             exit 1
           fi
 
-          cat /tmp/cloudflare-purge.json
-
-      - name: Warm Cloudflare cache from sitemap
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.warm_cloudflare == 'true' }}
-        env:
-          CACHE_WARM_MODE: ${{ vars.CACHE_WARM_MODE }}
-          CACHE_WARM_CONCURRENCY: ${{ vars.CACHE_WARM_CONCURRENCY }}
-          CACHE_WARM_MAX_URLS: ${{ vars.CACHE_WARM_MAX_URLS }}
-          CACHE_WARM_RECENT_PER_SITEMAP: ${{ vars.CACHE_WARM_RECENT_PER_SITEMAP }}
-          CACHE_WARM_REQUEST_DELAY_MS: ${{ vars.CACHE_WARM_REQUEST_DELAY_MS }}
+      - name: Run tiny targeted live smoke
+        if: ${{ steps.freshness.outputs.fresh == 'true' }}
+        shell: bash
         run: |
-          CACHE_WARM_SITE_URL="$PRODUCTION_SITE_URL" npm run cache:warm
+          site="${PRODUCTION_SITE_URL%/}"
+          sha_key="${DEPLOY_IMAGE_SHA:0:12}"
+          mapfile -t paths < <(printf '%s' "$SMOKE_PATHS" | jq -r '.[]')
+          paths+=("/sitemap.xml")
+
+          for path in "${paths[@]}"; do
+            separator="?"
+            case "$path" in *\?*) separator="&" ;; esac
+            url="${site}${path}${separator}__bloxodes_deploy=${sha_key}"
+            headers="$(mktemp)"
+            body="$(mktemp)"
+            status_code="$(curl --silent --show-error --location \
+              --max-time 20 \
+              --dump-header "$headers" \
+              --output "$body" \
+              --write-out '%{http_code}' \
+              "$url")"
+            if [ "$status_code" -ne 200 ]; then
+              echo "$path returned $status_code"
+              exit 1
+            fi
+            if grep -Eqi 'internal server error|application error: a server-side exception|gateway time-out|bad gateway' "$body"; then
+              echo "$path returned error HTML"
+              exit 1
+            fi
+            if [ "$path" = "/sitemap.xml" ]; then
+              grep -Eqi 'content-type: .*xml' "$headers"
+              grep -q '<sitemapindex' "$body"
+            else
+              grep -Eqi 'content-type: .*html' "$headers"
+              grep -qi '<title' "$body"
+              grep -qi '<main' "$body"
+            fi
+            rm -f "$headers" "$body"
+            echo "Passed $path"
+          done

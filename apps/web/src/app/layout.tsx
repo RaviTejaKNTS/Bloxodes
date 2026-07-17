@@ -44,7 +44,7 @@ export const metadata = {
     locale: "en_US",
     images: [
       {
-        url: `${SITE_URL}/og-image.png`,
+        url: `${SITE_URL}/Bloxodes.png`,
         width: 1200,
         height: 630,
         alt: `${SITE_NAME} — Roblox Codes`
@@ -57,7 +57,7 @@ export const metadata = {
     description: SITE_DESCRIPTION,
     creator: "@bloxodes",
     site: "@bloxodes",
-    images: [`${SITE_URL}/og-image.png`]
+    images: [`${SITE_URL}/Bloxodes.png`]
   },
   alternates: {
     types: alternatesTypes

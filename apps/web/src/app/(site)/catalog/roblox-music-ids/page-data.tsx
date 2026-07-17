@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
 import { MusicCoverImage } from "@/components/MusicCoverImage";
 import { PagePagination } from "@/components/PagePagination";
@@ -646,106 +645,114 @@ export function buildSimpleItemListSchema({
   });
 }
 
-export function MusicIdGrid({ songs }: { songs: MusicRow[] }) {
-  if (!songs.length) {
-    return (
-      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-        No music IDs have been collected yet. Check back soon.
+function MusicIdEmptyState() {
+  return (
+    <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      No music IDs have been collected yet. Check back soon.
+    </div>
+  );
+}
+
+function MusicIdCard({ song }: { song: MusicRow }) {
+  const durationLabel = formatDuration(song.duration_seconds);
+
+  return (
+    <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
+      <div className="flex flex-1 flex-col gap-4 p-4">
+        <div className="flex items-start gap-4">
+          <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60">
+            <MusicCoverImage
+              src={buildThumbnailUrl(song)}
+              alt={`${song.title} Roblox music`}
+              sizes="80px"
+              className="object-cover transition duration-500 group-hover:scale-105"
+            />
+          </div>
+          <div className="min-w-0 flex-1 space-y-1">
+            <h2 className="text-lg font-semibold leading-snug text-foreground line-clamp-2">{song.title}</h2>
+            <div className="space-y-1 text-xs text-muted">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Artist</span>
+                <Link
+                  href={buildArtistPath(song.artist)}
+                  className="font-semibold text-foreground transition hover:text-accent"
+                >
+                  {song.artist}
+                </Link>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Album</span>
+                <span className="text-foreground">{song.album ?? "Single / Unknown"}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-foreground">
+            <span>Music ID</span>
+            <span className="font-mono text-[0.82rem]">{song.asset_id}</span>
+            <CopyCodeButton
+              code={String(song.asset_id)}
+              tone="surface"
+              size="sm"
+              analytics={{
+                event: "music_id_copy",
+                params: {
+                  asset_id: song.asset_id,
+                  artist: song.artist,
+                  genre: song.genre ?? ""
+                }
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
+          <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
+            <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
+            <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
+          </span>
+          <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
+            <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
+            {song.genre ? (
+              <Link href={buildGenrePath(song.genre)} className="font-semibold text-foreground transition hover:text-accent">
+                {song.genre}
+              </Link>
+            ) : (
+              <span className="font-semibold text-foreground">—</span>
+            )}
+          </span>
+        </div>
+
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-3">
+          <a
+            href={buildRobloxUrl(song.asset_id)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+          >
+            Play on Roblox
+          </a>
+        </div>
       </div>
-    );
+    </article>
+  );
+}
+
+export function MusicIdItems({ songs }: { songs: MusicRow[] }) {
+  if (!songs.length) {
+    return <MusicIdEmptyState />;
   }
 
   return (
-    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
-      {songs.map((song) => {
-        const durationLabel = formatDuration(song.duration_seconds);
-        return (
-          <article
-            key={song.asset_id}
-            className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
-          >
-            <div className="flex flex-1 flex-col gap-4 p-4">
-              <div className="flex items-start gap-4">
-                <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60">
-                  <MusicCoverImage
-                    src={buildThumbnailUrl(song)}
-                    alt={`${song.title} Roblox music`}
-                    sizes="80px"
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="min-w-0 flex-1 space-y-1">
-                  <h2 className="text-lg font-semibold leading-snug text-foreground line-clamp-2">{song.title}</h2>
-                  <div className="space-y-1 text-xs text-muted">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Artist</span>
-                      <Link
-                        href={buildArtistPath(song.artist)}
-                        className="font-semibold text-foreground transition hover:text-accent"
-                      >
-                        {song.artist}
-                      </Link>
-                    </div>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Album</span>
-                      <span className="text-foreground">{song.album ?? "Single / Unknown"}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-foreground">
-                  <span>Music ID</span>
-                  <span className="font-mono text-[0.82rem]">{song.asset_id}</span>
-                  <CopyCodeButton
-                    code={String(song.asset_id)}
-                    tone="surface"
-                    size="sm"
-                    analytics={{
-                      event: "music_id_copy",
-                      params: {
-                        asset_id: song.asset_id,
-                        artist: song.artist,
-                        genre: song.genre ?? ""
-                      }
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
-                <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
-                  <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
-                  <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
-                </span>
-                <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
-                  <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
-                  {song.genre ? (
-                    <Link href={buildGenrePath(song.genre)} className="font-semibold text-foreground transition hover:text-accent">
-                      {song.genre}
-                    </Link>
-                  ) : (
-                    <span className="font-semibold text-foreground">—</span>
-                  )}
-                </span>
-              </div>
-
-              <div className="mt-auto flex flex-wrap items-center justify-between gap-3">
-                <a
-                  href={buildRobloxUrl(song.asset_id)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
-                >
-                  Play on Roblox
-                </a>
-              </div>
-            </div>
-          </article>
-        );
-      })}
-    </div>
+    <>
+      {songs.map((song) => (
+        <div key={song.asset_id} data-journey-item className="h-full">
+          <MusicIdCard song={song} />
+        </div>
+      ))}
+    </>
   );
 }
 
@@ -812,97 +819,101 @@ function MusicIdsFilterForm({
 export function TrendingMusicList({ songs, startIndex = 0 }: { songs: MusicRow[]; startIndex?: number }) {
   if (!songs.length) {
     return (
-      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
+      <div id="article-body" itemProp="articleBody" className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
         No trending music IDs are available yet. Check back soon.
       </div>
     );
   }
 
   return (
-    <ol className="space-y-4">
+    <section id="article-body" itemProp="articleBody" role="list" className="space-y-4">
       {songs.map((song, index) => {
         const durationLabel = formatDuration(song.duration_seconds);
         const rank = song.rank ?? startIndex + index + 1;
         return (
-          <li
+          <article
             key={song.asset_id}
-            className="group flex flex-col gap-4 rounded-lg border border-border/70 bg-surface p-4 transition hover:border-accent/55 sm:p-5"
+            data-journey-item
+            role="listitem"
+            className="block"
           >
-            <div className="space-y-4">
-              <div className="flex min-w-0 items-start gap-3 sm:gap-4">
-                <div className="flex h-11 w-12 flex-shrink-0 items-center justify-center rounded-md border border-accent/20 bg-accent/10 px-2 text-base font-semibold text-accent sm:h-12 sm:w-14 sm:text-xl">
-                  #{rank}
-                </div>
-                <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60 sm:h-14 sm:w-14">
-                  <MusicCoverImage
-                    src={buildThumbnailUrl(song)}
-                    alt={`${song.title} Roblox music`}
-                    sizes="56px"
-                    className="object-cover transition duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="min-w-0 flex-1 space-y-1">
-                  <p className="break-words text-base font-semibold leading-snug text-foreground line-clamp-2 sm:text-lg">
-                    {song.title}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
-                    <Link
-                      href={buildArtistPath(song.artist)}
-                      className="font-semibold text-foreground transition hover:text-accent"
-                    >
-                      {song.artist}
-                    </Link>
-                    <span className="min-w-0 truncate">{song.album ?? "Single / Unknown"}</span>
+            <div className="group flex flex-col gap-4 rounded-lg border border-border/70 bg-surface p-4 transition hover:border-accent/55 sm:p-5">
+              <div className="space-y-4">
+                <div className="flex min-w-0 items-start gap-3 sm:gap-4">
+                  <div className="flex h-11 w-12 flex-shrink-0 items-center justify-center rounded-md border border-accent/20 bg-accent/10 px-2 text-base font-semibold text-accent sm:h-12 sm:w-14 sm:text-xl">
+                    #{rank}
+                  </div>
+                  <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60 sm:h-14 sm:w-14">
+                    <MusicCoverImage
+                      src={buildThumbnailUrl(song)}
+                      alt={`${song.title} Roblox music`}
+                      sizes="56px"
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1 space-y-1">
+                    <p className="break-words text-base font-semibold leading-snug text-foreground line-clamp-2 sm:text-lg">
+                      {song.title}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
+                      <Link
+                        href={buildArtistPath(song.artist)}
+                        className="font-semibold text-foreground transition hover:text-accent"
+                      >
+                        {song.artist}
+                      </Link>
+                      <span className="min-w-0 truncate">{song.album ?? "Single / Unknown"}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
-                  <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
-                  <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
-                </span>
-                {song.genre ? (
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
-                    <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
-                    <Link href={buildGenrePath(song.genre)} className="font-semibold text-foreground transition hover:text-accent">
-                      {song.genre}
-                    </Link>
+                    <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
+                    <span className="font-semibold text-foreground">{durationLabel ?? "—"}</span>
                   </span>
-                ) : null}
+                  {song.genre ? (
+                    <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted">
+                      <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Genre</span>
+                      <Link href={buildGenrePath(song.genre)} className="font-semibold text-foreground transition hover:text-accent">
+                        {song.genre}
+                      </Link>
+                    </span>
+                  ) : null}
+                </div>
+              </div>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-2 rounded-md border border-border/50 bg-surface px-3 py-1 text-xs font-semibold text-foreground">
+                  <span>Music ID</span>
+                  <span className="font-mono text-[0.85rem]">{song.asset_id}</span>
+                  <CopyCodeButton
+                    code={String(song.asset_id)}
+                    tone="surface"
+                    size="sm"
+                    analytics={{
+                      event: "music_id_copy",
+                      params: {
+                        asset_id: song.asset_id,
+                        artist: song.artist,
+                        genre: song.genre ?? ""
+                      }
+                    }}
+                  />
+                </div>
+                <a
+                  href={buildRobloxUrl(song.asset_id)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+                >
+                  Play on Roblox
+                </a>
               </div>
             </div>
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-2 rounded-md border border-border/50 bg-surface px-3 py-1 text-xs font-semibold text-foreground">
-                <span>Music ID</span>
-                <span className="font-mono text-[0.85rem]">{song.asset_id}</span>
-                <CopyCodeButton
-                  code={String(song.asset_id)}
-                  tone="surface"
-                  size="sm"
-                  analytics={{
-                    event: "music_id_copy",
-                    params: {
-                      asset_id: song.asset_id,
-                      artist: song.artist,
-                      genre: song.genre ?? ""
-                    }
-                  }}
-                />
-              </div>
-              <a
-                href={buildRobloxUrl(song.asset_id)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
-              >
-                Play on Roblox
-              </a>
-            </div>
-          </li>
+          </article>
         );
       })}
-    </ol>
+    </section>
   );
 }
 
@@ -948,7 +959,7 @@ export function renderRobloxMusicIdsPage({
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
   const pageTitle = currentPage > 1 ? `${baseTitle} - Page ${currentPage}` : baseTitle;
   const description = CATALOG_DESCRIPTION;
-  const image = `${SITE_URL}/og-image.png`;
+  const image = `${SITE_URL}/Bloxodes.png`;
   const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
   const updatedIso = updatedDate?.toISOString() ?? null;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
@@ -1025,25 +1036,19 @@ export function renderRobloxMusicIdsPage({
         </header>
       )}
 
-      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+      <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--music">
         {introNodes ? introNodes : null}
-
-        <CatalogAdSlot />
 
         <MusicCatalogNav active={activeNav} />
 
-        <div className="catalog-surface space-y-6">
-          <MusicIdsFilterForm basePath={BASE_PATH} search={search} sort={sort} />
-          <MusicIdGrid songs={songs} />
-          <PagePagination
-            basePath={BASE_PATH}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            query={searchQueryString || undefined}
-          />
-        </div>
-
-        <CatalogAdSlot />
+        <MusicIdsFilterForm basePath={BASE_PATH} search={search} sort={sort} />
+        <MusicIdItems songs={songs} />
+        <PagePagination
+          basePath={BASE_PATH}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          query={searchQueryString || undefined}
+        />
 
         {showHero && hasDetails ? (
           <>
@@ -1086,26 +1091,24 @@ export function buildGenreCards(genres: ValueOption[]) {
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <>
       {genres.map((genre) => (
-        <Link
-          key={genre.slug}
-          href={`${BASE_PATH}/genres/${genre.slug}`}
-          className="group block h-full"
-        >
-          <article className="h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-border hover:bg-muted/20">
-            <div className="space-y-3">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Genre</div>
-              <h2 className="text-lg font-semibold leading-snug text-foreground">{genre.label}</h2>
-              <div className="flex items-center justify-between gap-4 text-sm text-muted">
-                <span>{formatCount(genre.count)} songs</span>
-                <span className="text-xs font-semibold text-accent transition group-hover:text-accent">Explore</span>
+        <div key={genre.slug} data-journey-item className="h-full">
+          <Link href={`${BASE_PATH}/genres/${genre.slug}`} className="group block h-full">
+            <article className="h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-border hover:bg-muted/20">
+              <div className="space-y-3">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Genre</div>
+                <h2 className="text-lg font-semibold leading-snug text-foreground">{genre.label}</h2>
+                <div className="flex items-center justify-between gap-4 text-sm text-muted">
+                  <span>{formatCount(genre.count)} songs</span>
+                  <span className="text-xs font-semibold text-accent transition group-hover:text-accent">Explore</span>
+                </div>
               </div>
-            </div>
-          </article>
-        </Link>
+            </article>
+          </Link>
+        </div>
       ))}
-    </div>
+    </>
   );
 }
 
@@ -1119,25 +1122,23 @@ export function buildArtistCards(artists: ValueOption[]) {
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+    <>
       {artists.map((artist) => (
-        <Link
-          key={artist.slug}
-          href={`${BASE_PATH}/artists/${artist.slug}`}
-          className="group block h-full"
-        >
-          <article className="h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-border hover:bg-muted/20">
-            <div className="space-y-3">
-              <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Artist</div>
-              <h2 className="text-lg font-semibold leading-snug text-foreground">{artist.label}</h2>
-              <div className="flex items-center justify-between gap-4 text-sm text-muted">
-                <span>{formatCount(artist.count)} songs</span>
-                <span className="text-xs font-semibold text-accent transition group-hover:text-accent">Browse</span>
+        <div key={artist.slug} data-journey-item className="h-full">
+          <Link href={`${BASE_PATH}/artists/${artist.slug}`} className="group block h-full">
+            <article className="h-full rounded-lg border border-border/70 bg-surface p-5 transition hover:border-border hover:bg-muted/20">
+              <div className="space-y-3">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">Artist</div>
+                <h2 className="text-lg font-semibold leading-snug text-foreground">{artist.label}</h2>
+                <div className="flex items-center justify-between gap-4 text-sm text-muted">
+                  <span>{formatCount(artist.count)} songs</span>
+                  <span className="text-xs font-semibold text-accent transition group-hover:text-accent">Browse</span>
+                </div>
               </div>
-            </div>
-          </article>
-        </Link>
+            </article>
+          </Link>
+        </div>
       ))}
-    </div>
+    </>
   );
 }

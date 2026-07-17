@@ -12,6 +12,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `apps/web/src/app/api/AGENTS.md`: JSON endpoints, mutation safety, session/progress flows, and revalidation behavior.
 - `apps/web/src/lib/AGENTS.md`: shared data access, caching, SEO helpers, auth/security utilities, and domain modules.
 - `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
+- `docs/testing/content-release-runbook.md`: required daily release decision tree, code-first/DB-second publishing order, automatic checks, targeted verification, manual audit options, and failure handling.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
@@ -20,6 +21,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-game-collection-images/SKILL.md`: game collection image collection, local image paths, and image readiness.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
+- `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Journey automatic in-content ad placement, including pagination and hydrated DOM verification.
 - `docs/analytics/README.md`: Umami/GA4 ownership, access, event taxonomy, verification, and the home for future analytics reports.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
 

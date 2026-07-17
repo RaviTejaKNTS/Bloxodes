@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
@@ -58,7 +57,7 @@ export default async function MusicIdGenresPage() {
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitle,
       description,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
       publishedAt: null,
       updatedAt: updatedIso
@@ -78,15 +77,11 @@ export default async function MusicIdGenresPage() {
         />
       </header>
 
-      <CatalogAdSlot />
-
-      <MusicCatalogNav active="genres" />
-
-      {buildGenreCards(genres)}
-
-      <PagePagination basePath={`${BASE_PATH}/genres`} currentPage={1} totalPages={totalPages} />
-
-      <CatalogAdSlot />
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--options">
+        <MusicCatalogNav active="genres" />
+        {buildGenreCards(genres)}
+        <PagePagination basePath={`${BASE_PATH}/genres`} currentPage={1} totalPages={totalPages} />
+      </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

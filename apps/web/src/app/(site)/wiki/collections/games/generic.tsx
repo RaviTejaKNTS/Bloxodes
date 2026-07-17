@@ -12,6 +12,7 @@ import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 import { renderPageContentNodes } from "@/lib/page-content";
 import { buildCollectionPagination } from "@/components/game-collections/collection-pagination";
+import { toIsoContentDate } from "@/lib/content-dates";
 import {
   buildGameCollectionPath,
   GAME_COLLECTIONS,
@@ -29,6 +30,7 @@ export type GameCollectionContentHtml = {
   howHtml?: string;
   descriptionHtml?: Array<{ key: string; html: string }>;
   faqHtml?: Array<{ q: string; a: string }>;
+  publishedAt?: string | null;
   updatedAt?: string | null;
 };
 
@@ -838,6 +840,7 @@ export function renderGameCollectionPage({
   const updatedDate = updatedAt ? new Date(updatedAt) : null;
   const basePath = buildGameCollectionPath(config.code);
   const updatedIso = updatedDate?.toISOString() ?? null;
+  const publishedIso = toIsoContentDate(contentHtml?.publishedAt) ?? updatedIso;
   const pagination = buildCollectionPagination({
     sections: preparedCollection.groupedSections,
     currentPage,
@@ -927,7 +930,7 @@ export function renderGameCollectionPage({
       description: pageDescriptionWithPage,
       image: `${SITE_URL}${FALLBACK_IMAGE}`,
       author: null,
-      publishedAt: updatedIso,
+      publishedAt: publishedIso,
       updatedAt: updatedIso
     })
   );

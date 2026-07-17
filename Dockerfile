@@ -38,8 +38,6 @@ RUN set -eu; \
   fi; \
   printf '%s\n' "$sha" > /app/build-sha
 RUN --mount=type=secret,id=production_env,required=false \
-  node scripts/ops/run-with-production-build-env.mjs node scripts/ops/check-production-data-readiness.mjs
-RUN --mount=type=secret,id=production_env,required=false \
   node scripts/ops/run-with-production-build-env.mjs npm run build
 
 FROM node:24-bookworm-slim AS runner

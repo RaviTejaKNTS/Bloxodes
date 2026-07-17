@@ -140,6 +140,21 @@ export function cacheTagsForPath(pathname: string) {
     return unique([...tags, "feed"]);
   }
 
+  if (
+    [
+      "/about",
+      "/contact",
+      "/privacy-policy",
+      "/terms-of-service",
+      "/editorial-guidelines",
+      "/disclaimer",
+      "/how-we-gather-and-verify-codes",
+      "/cookie-settings"
+    ].includes(pathnameOnly)
+  ) {
+    return unique([...tags, "main"]);
+  }
+
   if (pathnameOnly === "/sitemap.xml") {
     return sitemapTags();
   }

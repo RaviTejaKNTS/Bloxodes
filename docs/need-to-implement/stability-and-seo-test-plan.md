@@ -2,6 +2,17 @@
 
 Created: 2026-07-02
 
+Implementation status: revised on 2026-07-16 for the Bloxodes content-publishing workflow. Fast code/build/dataset checks protect daily pull requests, while broad sitemap, SEO, route, rendering, and published-content audits are manual tools rather than automatic deployment gates. Code and bundled data deploy before database publication; published rows then use targeted revalidation and single-URL verification.
+
+## Operating decision
+
+- Automatic checks must finish quickly and must not crawl the production-sized site.
+- Dataset/assets changes receive local validation and a normal image build, not a full website audit.
+- Database-only content publication never requires a web build.
+- New route-family code deploys before its database row so unpublished URLs remain absent from sitemaps.
+- Full crawls and browser audits run only when explicitly requested for investigation or periodic manual review.
+- The concrete active workflow is documented in `docs/testing/stability-and-seo.md`. The detailed phases below remain the manual audit specification and test inventory.
+
 ## Why this exists
 
 Bloxodes is now large enough that manual checking is not enough. A small code or data change can affect search indexing, structured data, sitemap output, page rendering, page speed, Cloudflare behavior, Supabase reads, and production availability.
@@ -500,12 +511,14 @@ Start with the highest traffic and highest risk routes:
 
 ## Open decisions
 
-- Decide final hard thresholds for response time.
-- Decide final HTML size limits by page family.
-- Decide whether all sitemap URLs should be checked on every PR or only nightly.
-- Decide how much production smoke testing should run immediately after each deploy.
-- Decide whether Cloudflare challenge checks should be blocking for all public pages or only SEO-critical pages.
-- Decide how strict metadata length checks should be.
+Historical first-version decisions below are retained as the inventory for optional manual audits. They are superseded for daily automation by the operating decision at the top of this document.
+
+- Response time over 2 seconds is a warning; availability, status, and contract failures block.
+- Uncompressed HTML over 1 MB warns and over 2 MB blocks.
+- Pull requests run deterministic checks and a production build. Candidate and postdeploy gates request every sitemap URL.
+- Postdeploy runs full sitemap status plus representative SEO, four-user-agent route checks, critical APIs, RSS/robots, and desktop/mobile Chromium before cache changes.
+- Challenge or internal-error HTML blocks on every sitemap URL and every audited public page.
+- Titles outside 20–65 characters and descriptions outside 50–170 characters warn initially; missing or duplicate metadata blocks.
 
 ## Definition of done
 

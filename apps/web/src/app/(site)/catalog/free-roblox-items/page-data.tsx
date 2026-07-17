@@ -547,7 +547,7 @@ export async function renderRobloxFreeItemsPage({
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitle,
       description,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
       publishedAt: publishedIso,
       updatedAt: updatedIso

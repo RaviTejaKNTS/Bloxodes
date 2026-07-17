@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { formatDistanceToNow } from "date-fns";
 import { FiCheck, FiClock } from "react-icons/fi";
 import { ContentCard } from "@/components/ContentCard";
 
@@ -12,6 +11,7 @@ type QuizCardProps = {
   universeName: string | null;
   coverImage: string | null;
   updatedAt: string | null;
+  updatedLabel: string | null;
 };
 
 type QuizProgress = {
@@ -27,15 +27,6 @@ type QuizProgressState =
   | { status: "error" };
 
 let quizProgressPromise: Promise<QuizProgressState> | null = null;
-
-function formatUpdatedLabel(updatedAt: string | null): string | null {
-  if (!updatedAt) return null;
-  try {
-    return formatDistanceToNow(new Date(updatedAt), { addSuffix: true });
-  } catch {
-    return null;
-  }
-}
 
 async function loadQuizProgressIndex(): Promise<QuizProgressState> {
   if (!quizProgressPromise) {
@@ -63,8 +54,7 @@ async function loadQuizProgressIndex(): Promise<QuizProgressState> {
   return quizProgressPromise;
 }
 
-export function QuizCard({ code, title, universeName, coverImage, updatedAt }: QuizCardProps) {
-  const updatedLabel = formatUpdatedLabel(updatedAt);
+export function QuizCard({ code, title, universeName, coverImage, updatedLabel }: QuizCardProps) {
   const [progressState, setProgressState] = useState<QuizProgressState>({ status: "loading" });
   const normalizedCode = code.trim().toLowerCase();
 

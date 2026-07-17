@@ -6,7 +6,7 @@ const title = "Privacy Policy";
 const description =
   "Privacy policy for Bloxodes: account data, cookies, analytics, ads, and your rights.";
 const canonical = `${SITE_URL.replace(/\/$/, "")}/privacy-policy`;
-const ogImage = `${SITE_URL}/og-image.png`;
+const ogImage = `${SITE_URL}/Bloxodes.png`;
 
 export const metadata: Metadata = {
   title,

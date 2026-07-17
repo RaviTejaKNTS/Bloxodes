@@ -144,7 +144,7 @@ export function renderRobloxColorCodesPage({
       slug: BASE_PATH.replace(/^\//, ""),
       title: baseTitle,
       description,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
       publishedAt: publishedIso,
       updatedAt: updatedIso

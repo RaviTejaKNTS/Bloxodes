@@ -20,7 +20,9 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
+- `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: flat direct-child DOM workflow and local/live verification for Journey automatic in-content ads.
 - `DESIGN.md`: public live-database design direction, shadcn component usage, design tokens, and readable content rules.
+- `docs/analytics/journey-auto-ads-dom-refactor-2026-07-14.md`: Music IDs and Decal IDs Journey refactor record, validation evidence, and reusable DOM contract.
 - `docs/platform-monorepo-extension-mobile-plan.md`: current platform snapshot plus longer-term admin, extension, and mobile roadmap.
 
 ## Reference Docs In This Folder

@@ -5,6 +5,7 @@ import { CHECKLISTS_DESCRIPTION, SITE_URL } from "@/lib/seo";
 import { ChecklistCard } from "@/components/ChecklistCard";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
+import { formatUpdatedLabel } from "@/lib/updated-label";
 
 export const PAGE_SIZE = 20;
 
@@ -16,6 +17,7 @@ type ChecklistCardData = {
   universeName: string | null;
   coverImage: string | null;
   updatedAt: string | null;
+  updatedLabel: string | null;
   itemsCount: number | null;
 };
 
@@ -51,7 +53,7 @@ function mapRowToCard(row: ChecklistSummaryRow): ChecklistCardData {
     (row as any).cover_image ||
     (row as any).universe?.icon_url ||
     thumb ||
-    `${SITE_URL}/og-image.png`;
+    `${SITE_URL}/Bloxodes.png`;
   const updatedAt = row.updated_at || row.published_at || row.created_at || null;
   const itemsCount =
     typeof (row as any).leaf_item_count === "number"
@@ -69,6 +71,7 @@ function mapRowToCard(row: ChecklistSummaryRow): ChecklistCardData {
     universeName,
     coverImage,
     updatedAt,
+    updatedLabel: formatUpdatedLabel(updatedAt),
     itemsCount
   };
 }

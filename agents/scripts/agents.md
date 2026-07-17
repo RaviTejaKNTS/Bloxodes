@@ -8,12 +8,24 @@ This file is the quick reference for what exists today and how to invoke it.
 - Prefer `npm run <name>` when a package script exists.
 - Fall back to direct `tsx scripts/...` or `python scripts/...` only for scripts that do not have a package alias yet.
 
+## Stability and SEO verification
+
+| Purpose | Preferred command |
+| --- | --- |
+| Fast source-only check | `npm run verify:deterministic` |
+| Verify one published or intentionally absent route | `npm run verify:published-url -- --path /wiki/<game>/<collection>` |
+| Manual local candidate crawl and Chromium verification | `npm run verify:predeploy` |
+| Manual live read-only audit | `TEST_BASE_URL=https://bloxodes.com EXPECTED_BUILD_SHA=<sha> npm run verify:postdeploy` |
+
+Automatic daily workflows use fast code/build/dataset checks and tiny targeted smoke requests only. Broad crawls are manual. The implementation is documented in `docs/testing/stability-and-seo.md`; reports belong under ignored `tmp/test-reports/`.
+
 ## Content Generation And Editing
 
 | Purpose | File | Preferred command |
 | --- | --- | --- |
 | Batch article generation | `scripts/articles/generate-articles.ts` | `npm run generate:articles` |
 | Draft code page generation | `scripts/codes/generate-code-page-copy.ts` | `npm run generate` |
+| Reviewed code page upsert with provider-owned source fields | `scripts/codes/upsert-code-page.ts` | `npm run upsert:code-page -- --file <payload.json> --dry-run` before the approved write |
 | Beebom code-page discovery and immediate draft generation | `scripts/codes/discover-beebom-code-pages.ts` | `npm run discover:beebom-codes -- --apply` |
 | Event guide generation | `scripts/events/generate-events-articles.ts` | `npm run generate:events-articles` |
 | Article generation queue worker | `scripts/automation/run-article-generation-queue.ts` | `npm run articles:queue` |
@@ -148,6 +160,8 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Purpose | File | Preferred command |
 | --- | --- | --- |
 | Update `ads.txt` | `scripts/ads/update-ads-txt.ts` | `npm run ads:update` |
+| Audit Journey catalog DOM | `scripts/ads/audit-journey-catalog-dom.ts` | Start the local web app, then run `npm run audit:journey-dom -- --base-url http://127.0.0.1:<port>`; read-only guard for one `#article-body`, direct Music/Decal item children, redirects, pagination, charts, and no manual content hints |
+| Audit hydrated Journey catalog DOM | `scripts/ads/audit-journey-catalog-browser.ts` | Run `npm run audit:journey-browser -- --base-url http://127.0.0.1:<port>` against a local build; checks desktop/mobile hydration and a synthetic full-width in-content placement |
 | IndexNow bootstrap | `scripts/automation/indexnow-bootstrap.ts` | `npm run indexnow:bootstrap` |
 | Google Indexing API submitter | `scripts/automation/google-indexing-submit.ts` | `npm run indexing:google -- --dry-run`, live only with `--apply` and `GOOGLE_INDEXING_API_ENABLED=true` |
 | Warm Cloudflare cache | `scripts/automation/warm-cloudflare-cache.mjs` | `CACHE_WARM_SITE_URL=https://bloxodes.com npm run cache:warm`; default deploy mode warms main/index/legal URLs, all wiki/catalog/tool URLs, sitemap files, and a recent slice from DB-backed detail sitemaps; use `CACHE_WARM_MODE=full` only for intentional full-site warming |
@@ -158,7 +172,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Report redeem markdown image gaps | `scripts/backfill/report-redeem-md-missing-images.ts` | direct `tsx scripts/backfill/report-redeem-md-missing-images.ts` |
 | Shared Tavily helper | `scripts/shared/tavily.ts` | imported helper |
 | VPS scheduled automation manifest | `scripts/ops/vps-scheduled-automation.crontab` | Install into the VPS `codex-admin` crontab beside existing stats-worker blocks. This is the scheduled source for universe daily rollup/prune/audit, platform aggregate refresh, codes refresh, Google Indexing, events refresh, puzzle sync, music IDs, and decal IDs. GitHub workflows for those jobs are manual fallback only. |
-| Check production data before Docker build | `scripts/ops/check-production-data-readiness.mjs` | `node --env-file-if-exists=.env scripts/ops/check-production-data-readiness.mjs`; read-only Supabase HEAD probe with five attempts, used by the root Dockerfile before `npm run build` |
+| Check production data explicitly | `scripts/ops/check-production-data-readiness.mjs` | `node --env-file-if-exists=.env scripts/ops/check-production-data-readiness.mjs`; manual read-only Supabase HEAD probe with five attempts, not part of the daily Docker build |
 | Run a command with production build variables | `scripts/ops/run-with-production-build-env.mjs` | Loads `/run/secrets/production_env` from BuildKit, falling back to local `.env`, then executes the supplied command without printing secret values |
 
 ### Wiki And Game Collection Production Publish

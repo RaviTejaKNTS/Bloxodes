@@ -56,6 +56,7 @@ export type CodePage = {
   re_rewritten_at?: string | null;
   created_at: string;
   updated_at: string;
+  content_updated_at?: string | null;
 };
 
 export type RobloxUniverseInfo = {
@@ -1260,14 +1261,54 @@ export async function getCodePageBySlug(slug: string): Promise<CodePage | null> 
     async () => {
       const sb = supabaseAdmin();
       const { data, error } = await sb
-        .from("code_pages_view")
-        .select("*")
+        .from("code_pages")
+        .select(`
+          *,
+          universe:roblox_universes(
+            universe_id,
+            slug,
+            display_name,
+            name,
+            creator_name,
+            creator_id,
+            creator_type,
+            social_links,
+            icon_url,
+            genre_l1,
+            genre_l2,
+            playing,
+            visits,
+            favorites,
+            likes,
+            dislikes,
+            age_rating,
+            desktop_enabled,
+            mobile_enabled,
+            tablet_enabled,
+            console_enabled,
+            vr_enabled,
+            updated_at,
+            description,
+            game_description_md
+          ),
+          codes(*)
+        `)
         .eq("slug", normalizedSlug)
         .maybeSingle();
       if (error) throw error;
       if (!data) return null;
 
-      return data as CodePage;
+      const codes = Array.isArray(data.codes) ? data.codes as Code[] : [];
+      const latestActiveCodeAt = codes.reduce<string | null>((latest, code) => {
+        if (code.status !== "active" || !code.first_seen_at) return latest;
+        return latestTimestamp(latest, code.first_seen_at);
+      }, null);
+
+      return {
+        ...data,
+        codes,
+        content_updated_at: latestTimestamp(data.updated_at, latestActiveCodeAt)
+      } as CodePage;
     },
     [`getCodePageBySlug:${normalizedSlug}`],
     {

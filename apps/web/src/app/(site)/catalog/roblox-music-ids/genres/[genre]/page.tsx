@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd } from "@/lib/seo";
@@ -9,7 +8,7 @@ import {
   BASE_PATH,
   MusicBreadcrumb,
   MusicCatalogNav,
-  MusicIdGrid,
+  MusicIdItems,
   buildMusicItemListSchema,
   loadGenreMusicIdsPageData,
   loadGenreOptionBySlug
@@ -81,7 +80,7 @@ export default async function GenreMusicIdsPage({ params }: PageProps) {
       slug: canonicalPath.replace(/^\//, ""),
       title: pageTitle,
       description,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
       publishedAt: null,
       updatedAt: updatedIso
@@ -107,19 +106,15 @@ export default async function GenreMusicIdsPage({ params }: PageProps) {
         />
       </header>
 
-      <CatalogAdSlot />
-
-      <MusicCatalogNav active="genres" />
-
-      <MusicIdGrid songs={songs} />
-
-      <PagePagination
-        basePath={`${BASE_PATH}/genres/${genre.slug}`}
-        currentPage={1}
-        totalPages={totalPages}
-      />
-
-      <CatalogAdSlot />
+      <section id="article-body" itemProp="articleBody" className="journey-content-stream journey-content-stream--music">
+        <MusicCatalogNav active="genres" />
+        <MusicIdItems songs={songs} />
+        <PagePagination
+          basePath={`${BASE_PATH}/genres/${genre.slug}`}
+          currentPage={1}
+          totalPages={totalPages}
+        />
+      </section>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

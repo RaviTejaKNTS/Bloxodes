@@ -9,7 +9,7 @@ const title = "Bloxodes Authors";
 const description = "Meet the editors and contributors who verify Roblox codes for Bloxodes.";
 const baseUrl = SITE_URL.replace(/\/$/, "");
 const canonical = `${baseUrl}/authors`;
-const ogImage = `${SITE_URL}/og-image.png`;
+const ogImage = `${SITE_URL}/Bloxodes.png`;
 
 export const metadata: Metadata = {
   title,

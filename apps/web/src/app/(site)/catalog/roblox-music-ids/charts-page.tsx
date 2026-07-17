@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { formatDistanceToNow } from "date-fns";
 import { notFound } from "next/navigation";
-import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { IndexPageStats } from "@/components/IndexPageStats";
 import { PagePagination } from "@/components/PagePagination";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL, webPageJsonLd, buildAlternates } from "@/lib/seo";
@@ -124,7 +123,7 @@ export async function MusicChartsPage({
       slug: `${canonicalPath.replace(/^\//, "")}?range=${range}`,
       title: pageTitle,
       description: config.description,
-      image: `${SITE_URL}/og-image.png`,
+      image: `${SITE_URL}/Bloxodes.png`,
       author: null,
       publishedAt: null,
       updatedAt: updatedIso
@@ -151,8 +150,6 @@ export async function MusicChartsPage({
           ]}
         />
       </header>
-
-      <CatalogAdSlot />
 
       <MusicCatalogNav active="charts" />
 
@@ -184,8 +181,6 @@ export async function MusicChartsPage({
         totalPages={totalPages}
         query={`range=${range}`}
       />
-
-      <CatalogAdSlot />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: listSchema }} />

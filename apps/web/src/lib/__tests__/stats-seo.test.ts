@@ -4,12 +4,14 @@ vi.mock("server-only", () => ({}));
 
 import {
   getStatsGamesSeoState,
+  isStatsGameDetailIndexable,
   listStatsGamesIndexPaths,
   parseStatsSearchParams,
   statsGameSeoDescription,
   statsGameSeoTitle,
   type StatsGamesSeoTaxonomy
 } from "@/lib/stats";
+import { statsUniverseSlug } from "@/lib/slug";
 
 const taxonomy: StatsGamesSeoTaxonomy = {
   genres: ["Action", "Simulation"],
@@ -61,6 +63,12 @@ describe("stats games SEO policy", () => {
     expect(seo({ genre: ["Action", "Action"] }).indexable).toBe(false);
   });
 
+  it("ignores the internal live-edge verification key for SEO state", () => {
+    const verified = seo({ __bloxodes_verify: "22fe3961.12345" });
+    expect(verified.indexable).toBe(true);
+    expect(verified.canonicalPath).toBe("/stats/games");
+  });
+
   it("builds only the approved sitemap matrix", () => {
     const paths = listStatsGamesIndexPaths(taxonomy.genres, taxonomy.subgenres);
     expect(paths).toHaveLength(12);
@@ -84,5 +92,20 @@ describe("individual stats game metadata", () => {
     expect(statsGameSeoDescription({ displayName: "Brookhaven RP", rank: 1, playing: 511_500 })).toBe(
       "Brookhaven RP ranks #1 among tracked Roblox games with 511.5K players now. See visits, favorites, rating, growth, and historical charts."
     );
+  });
+
+  it("uses the stable hourly global rank for detail indexability", () => {
+    const eligible = { playing: 100, visits: 10_000_000, statsTier: "WARM" as const };
+    expect(isStatsGameDetailIndexable({ ...eligible, rank: 1 })).toBe(true);
+    expect(isStatsGameDetailIndexable({ ...eligible, rank: 1000 })).toBe(true);
+    expect(isStatsGameDetailIndexable({ ...eligible, rank: 1001 })).toBe(false);
+    expect(isStatsGameDetailIndexable({ ...eligible, rank: null })).toBe(false);
+    expect(isStatsGameDetailIndexable({ playing: 0, visits: 0, statsTier: "COLD", rank: 1 })).toBe(false);
+  });
+
+  it("uses universe IDs to make stats detail slugs canonical and unique", () => {
+    expect(statsUniverseSlug("Chameleon", 10397566868)).toBe("chameleon-10397566868");
+    expect(statsUniverseSlug("chameleon-10397566868", 10397566868)).toBe("chameleon-10397566868");
+    expect(statsUniverseSlug("Chameleon", 42)).not.toBe(statsUniverseSlug("Chameleon", 43));
   });
 });

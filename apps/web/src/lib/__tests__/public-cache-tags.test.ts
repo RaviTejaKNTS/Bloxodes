@@ -49,6 +49,12 @@ describe("public cache tags", () => {
     expect(cacheTagsForPath("/sitemaps/codes.xml")).not.toContain("sitemap");
   });
 
+  it("tags public informational pages without tagging unknown routes", () => {
+    expect(cacheTagsForPath("/about")).toEqual(["site", "main"]);
+    expect(cacheTagsForPath("/privacy-policy")).toEqual(["site", "main"]);
+    expect(cacheTagsForPath("/api/private")).toEqual([]);
+  });
+
   it("tags stats creators separately from games", () => {
     expect(cacheTagsForPath("/stats/creators")).toEqual(expect.arrayContaining(["site", "stats", "stats-creators"]));
     expect(cacheTagsForEvent("stats", "creators")).toEqual(expect.arrayContaining(["stats", "stats-creators", "sitemap:stats"]));

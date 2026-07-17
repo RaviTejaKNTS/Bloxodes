@@ -4,6 +4,7 @@ import { IndexPageStats } from "@/components/IndexPageStats";
 import { QuizCard } from "@/components/QuizCard";
 import { listPublishedQuizzes, type QuizListEntry } from "@/lib/quizzes";
 import { QUIZZES_DESCRIPTION, SITE_URL } from "@/lib/seo";
+import { formatUpdatedLabel } from "@/lib/updated-label";
 
 function pickThumbnail(value: unknown): string | null {
   if (!value) return null;
@@ -33,7 +34,7 @@ function summarize(descriptionMd: string | null | undefined, fallback: string): 
 function mapRowToCard(row: QuizListEntry) {
   const universeName = row.universe?.display_name ?? row.universe?.name ?? null;
   const thumb = pickThumbnail(row.universe?.thumbnail_urls);
-  const coverImage = row.universe?.icon_url || thumb || `${SITE_URL}/og-image.png`;
+  const coverImage = row.universe?.icon_url || thumb || `${SITE_URL}/Bloxodes.png`;
   const updatedAt = row.content_updated_at || row.updated_at || row.published_at || row.created_at || null;
   const summary = summarize(row.seo_description ?? row.description_md ?? null, QUIZZES_DESCRIPTION);
 
@@ -43,7 +44,8 @@ function mapRowToCard(row: QuizListEntry) {
     summary,
     universeName,
     coverImage,
-    updatedAt
+    updatedAt,
+    updatedLabel: formatUpdatedLabel(updatedAt)
   };
 }
 

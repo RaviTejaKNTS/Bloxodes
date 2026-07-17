@@ -23,6 +23,7 @@ import { EventsPageCard } from "@/components/EventsPageCard";
 import { CardImage } from "@/components/CardImage";
 import { CatalogCard } from "@/components/CatalogCard";
 import { buildEventsCards } from "@/app/(site)/events/page-data";
+import { formatUpdatedLabel } from "@/lib/updated-label";
 
 function time(value: string | null | undefined): number {
   if (!value) return 0;
@@ -145,17 +146,22 @@ export async function MoreQuizzes({ excludeCode }: { excludeCode: string }) {
   if (!items.length) return null;
   return (
     <MoreSection title="More Roblox quizzes" viewAllHref="/quizzes">
-      {items.map((quiz) => (
-        <QuizCard
-          key={quiz.code}
-          code={quiz.code}
-          title={quiz.title}
-          summary=""
-          universeName={quiz.universe?.display_name ?? quiz.universe?.name ?? null}
-          coverImage={pickThumbnail(quiz.universe?.thumbnail_urls) ?? quiz.universe?.icon_url ?? null}
-          updatedAt={quiz.content_updated_at ?? quiz.updated_at ?? null}
-        />
-      ))}
+      {items.map((quiz) => {
+        const updatedAt = quiz.content_updated_at ?? quiz.updated_at ?? null;
+
+        return (
+          <QuizCard
+            key={quiz.code}
+            code={quiz.code}
+            title={quiz.title}
+            summary=""
+            universeName={quiz.universe?.display_name ?? quiz.universe?.name ?? null}
+            coverImage={pickThumbnail(quiz.universe?.thumbnail_urls) ?? quiz.universe?.icon_url ?? null}
+            updatedAt={updatedAt}
+            updatedLabel={formatUpdatedLabel(updatedAt)}
+          />
+        );
+      })}
     </MoreSection>
   );
 }

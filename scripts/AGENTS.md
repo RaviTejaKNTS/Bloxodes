@@ -15,11 +15,14 @@ These files are operational jobs, imports, backfills, collectors, and automation
 ## Folder Map
 
 - `dev/`: local development launch guards. `start-local-dev.ts` powers `npm run dev:local`, loads `.env.local` through the shared env loader, and refuses to start if `SUPABASE_URL` is not local.
+- `quality/`: fast source/build contracts, targeted post-publish URL verification, and explicit manual sitemap/SEO/route/render audits. Daily workflows must not run broad crawls. Use `verify:published-url` after one database page is published; reserve `verify:predeploy`, `verify:postdeploy`, and the crawl commands for intentional manual diagnostics. See `docs/testing/stability-and-seo.md`.
 - `ads/`: build-time ad and policy helpers.
+  - `audit-journey-catalog-dom.ts` is the read-only local DOM guard for every Music IDs and Decal IDs route shape. Start the local web app, then run `npm run audit:journey-dom -- --base-url http://127.0.0.1:<port>`; it requires exactly one `#article-body`, direct block-level `data-journey-item` children, and no manual Mediavine content hints.
+  - `audit-journey-catalog-browser.ts` verifies the hydrated content stream at desktop and mobile widths and inserts a synthetic direct child to prove an in-content placement spans the full lane. Run `npm run audit:journey-browser -- --base-url http://127.0.0.1:<port>`.
 - `articles/`: article generation and article refresh.
 - `automation/`: queue runners, IndexNow/bootstrap helpers, Google Indexing API submitter, cache warming, reporting.
   - `google-indexing-submit.ts` is a guarded Google Indexing API job. It loads `.env.indexing*`, requires `--apply` plus `GOOGLE_INDEXING_API_ENABLED=true` before calling Google, and should use Supabase state in recurring production/GitHub runs so the daily cap and URL rotation persist.
-  - `warm-cloudflare-cache.mjs` warms public pages from the sitemap after deploy. Default `CACHE_WARM_MODE=deploy` warms the sitemap files, main/index/legal pages, all wiki/catalog/tool URLs, and a recent slice from DB-backed detail sitemaps. Use `CACHE_WARM_MODE=full` only for an intentional full-site warm. Use `CACHE_WARM_DRY_RUN=true` to inspect selection without page requests. Do not send cache-bypass request headers because the goal is to fill Cloudflare.
+  - `warm-cloudflare-cache.mjs` is an explicit manual cache-warming tool. It is not part of the daily deployment path. Default `CACHE_WARM_MODE=deploy` warms the sitemap files, main/index/legal pages, all wiki/catalog/tool URLs, and a recent slice from DB-backed detail sitemaps. Use `CACHE_WARM_MODE=full` only for an intentional full-site warm. Use `CACHE_WARM_DRY_RUN=true` to inspect selection without page requests. Do not send cache-bypass request headers because the goal is to fill Cloudflare.
   - `cloudflare-emergency-cache.mjs` toggles a temporary Cloudflare Cache Rule for anonymous public HTML when origin/Supabase is unhealthy. It uses the local operator token `CLOUDFLARE_BLOXODES_API`, not the runtime purge token. Use `npm run cloudflare:emergency-cache:status`, `npm run cloudflare:emergency-cache:on`, and `npm run cloudflare:emergency-cache:off`; keep it off during normal operations.
   - `audit-sitemap-seo.ts` crawls the sitemap index, checks each page response, and writes SEO/indexability reports to `tmp/seo-audits/`. It is read-only, uses live HTTP requests only, and can be limited with `npm run audit:seo -- --limit 100` for smoke tests.
   - `audit-html-size.ts` measures uncompressed HTML bytes for explicit URLs or sitemap URLs and writes reports to `tmp/html-size-audits/`. Use `npm run audit:html-size -- --url <url> --fail-on-limit` as a pre-publish guard for large catalog pages; add `--rewrite-origin https://bloxodes.com http://127.0.0.1:<port>` when testing a production sitemap against localhost.
@@ -68,6 +71,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `verify-simple-page-finals.ts` locally verifies simple tool and events page `final.json` rows by copy checking, upserting to `tools` or `events_pages`, reading back the row, and checking `/tools/<code>` or `/events/<slug>`.
 - `codes/`: code refresh and code-article rewrite jobs.
   - Code rows must come from `scripts/codes/update-codes.ts`, not from manual JSON, SQL, Supabase edits, or hand-written script payloads.
+  - `upsert-code-page.ts` writes reviewed page payloads only. Run `--dry-run` first. It reserves `source_url` for RobloxDen, `source_url_2` for Beebom, and places any other approved sources in `source_url_3` onward, including when only one of the two primary providers exists.
   - `discover-beebom-code-pages.ts` scans Beebom's Roblox codes tag page, inserts only unpublished draft `code_pages` rows with resolved Roblox universe IDs, stores Beebom in `source_url_2`, and then runs the copy generator for the exact new row IDs. Use `--apply` for writes; without it the script is a dry run.
   - For a code page, insert or update the `code_pages` row first: `slug` is the editorial game slug only, not `roblox_universes.slug`; `roblox_link` is the Roblox experience URL, `source_url` is the RobloxDen codes page, `source_url_2` is the Beebom codes page, and `seo_title` stays empty or null unless the user explicitly asks otherwise.
   - After source URLs are set, run `npm run refresh:codes -- --slug <game-slug>` so the scraper reads RobloxDen and Beebom, upserts active codes, and expires missing codes.
@@ -90,7 +94,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `audit-item-stats-workflow.ts` reports item stats freshness, index coverage, hourly/daily rows, resale coverage, and broken media counts.
   - Recurring item stats refresh should run on the VPS stats worker beside games stats. GitHub Actions are a manual fallback only because Roblox item endpoints rate-limit shared GitHub runner IPs aggressively.
 - `ops/`: checked-in operational manifests and server runbooks.
-  - `check-production-data-readiness.mjs` performs a read-only PostgREST HEAD request before a production Docker build. It requires `SUPABASE_URL` (or `NEXT_PUBLIC_SUPABASE_URL`) plus a service-role or anon key, retries transient failures five times, prints no secrets, and refuses to continue when production data is unavailable.
+  - `check-production-data-readiness.mjs` is an explicit read-only PostgREST HEAD diagnostic. It requires `SUPABASE_URL` (or `NEXT_PUBLIC_SUPABASE_URL`) plus a service-role or anon key, retries transient failures five times, and prints no secrets. It is not part of the daily Docker build.
   - `run-with-production-build-env.mjs` loads build-only variables from the BuildKit `production_env` secret and runs the requested command without copying that secret into an image layer. The existing local `.env` path remains a fallback for direct operator/Dokploy builds; neither path prints secret values.
   - `vps-scheduled-automation.crontab` is the source manifest for scheduled jobs moved off GitHub Actions onto the VPS stats worker. It covers daily universe rollup/prune/audit, platform aggregates, code refresh, Google Indexing, events, puzzle sync, music IDs, and decal IDs. Install it into the marked VPS crontab block rather than re-enabling GitHub schedules.
 - `posts/`: outbound posting jobs.
@@ -122,6 +126,8 @@ These files are operational jobs, imports, backfills, collectors, and automation
   - `backfill-clean-display-names.ts` cleans `roblox_universes.display_name` from raw Roblox titles while leaving `name` as the raw source value. It is dry-run by default; use `--apply` locally, and pair `NODE_ENV=production` with `--allow-prod` only after a clean production dry-run.
 
 ## Operational Expectations
+
+- Quality scripts may write only ignored reports under `tmp/test-reports/`. `validate:published-content` is read-only and refuses remote Supabase unless `--allow-remote-read` is explicit. `verify:postdeploy` is read-only but requires an explicit HTTP target.
 
 - Treat scripts as data pipelines: know whether the job reads only, mutates Supabase, writes local files, calls external APIs, or triggers revalidation.
 - If a script creates or updates publishable content, review `/api/revalidate` coverage and any relevant Supabase revalidation trigger flow.

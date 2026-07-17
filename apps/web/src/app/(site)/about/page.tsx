@@ -6,7 +6,7 @@ const title = "About Bloxodes.com";
 const description =
   "Learn how Bloxodes.com grew from a Robux calculator into a Roblox hub for tools, checklists, live stats, codes, guides, and optional accounts.";
 const canonical = `${SITE_URL.replace(/\/$/, "")}/about`;
-const ogImage = `${SITE_URL}/og-image.png`;
+const ogImage = `${SITE_URL}/Bloxodes.png`;
 
 export const metadata: Metadata = {
   title,

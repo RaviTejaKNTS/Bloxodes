@@ -452,7 +452,7 @@ type UniverseRow = {
   favorites: number | null;
   likes: number | null;
   dislikes: number | null;
-  stats_tier: "NEW" | "HOT" | "WARM" | "COLD" | null;
+  stats_tier?: "NEW" | "HOT" | "WARM" | "COLD" | null;
   created_at_api: string | null;
   updated_at_api: string | null;
   last_stats_refreshed_at: string | null;
@@ -941,11 +941,6 @@ export function statsGameLastModifiedAt(
   return game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt ?? game.updatedAtApi ?? null;
 }
 
-type StatsGameDetailIndexBoundary = {
-  universe_id: number;
-  playing: number | null;
-};
-
 function isStatsGameSitemapEligible(game: Pick<StatsGame, "playing" | "visits" | "statsTier">) {
   return (
     game.statsTier === "HOT" ||
@@ -955,34 +950,9 @@ function isStatsGameSitemapEligible(game: Pick<StatsGame, "playing" | "visits" |
   );
 }
 
-async function loadStatsGameDetailIndexBoundary(): Promise<StatsGameDetailIndexBoundary | null> {
-  const { data, error } = await supabaseAdmin()
-    .from("stats_game_current_index")
-    .select("universe_id, playing")
-    .not("slug", "is", null)
-    .or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000")
-    .order("playing", { ascending: false, nullsFirst: false })
-    .order("universe_id", { ascending: true })
-    .range(STATS_GAME_DETAIL_INDEX_LIMIT - 1, STATS_GAME_DETAIL_INDEX_LIMIT - 1)
-    .maybeSingle();
-  if (error) {
-    console.warn("Failed to load stats game detail index boundary", error.message);
-    return null;
-  }
-  return data as StatsGameDetailIndexBoundary | null;
-}
-
-export async function isStatsGameDetailIndexable(game: Pick<StatsGame, "universeId" | "playing" | "visits" | "statsTier">) {
+export function isStatsGameDetailIndexable(game: Pick<StatsGame, "rank" | "playing" | "visits" | "statsTier">) {
   if (!isStatsGameSitemapEligible(game)) return false;
-
-  const boundary = await loadStatsGameDetailIndexBoundary();
-  if (!boundary) return false;
-
-  const playing = game.playing ?? 0;
-  const boundaryPlaying = toNumber(boundary.playing) ?? 0;
-  if (playing > boundaryPlaying) return true;
-  if (playing < boundaryPlaying) return false;
-  return game.universeId <= boundary.universe_id;
+  return typeof game.rank === "number" && game.rank > 0 && game.rank <= STATS_GAME_DETAIL_INDEX_LIMIT;
 }
 
 export const STATS_CREATOR_SORT_OPTIONS: Array<{ value: StatsCreatorSortKey; label: string }> = [
@@ -1238,7 +1208,7 @@ function mapUniverse(row: UniverseRow): StatsGame {
     likes: toNumber(row.likes),
     dislikes: toNumber(row.dislikes),
     ratingPercent,
-    statsTier: row.stats_tier,
+    statsTier: row.stats_tier ?? null,
     createdAtApi: row.created_at_api,
     updatedAtApi: row.updated_at_api,
     lastStatsRefreshedAt: row.last_stats_refreshed_at,
@@ -2159,7 +2129,17 @@ export function parseStatsSearchParams(searchParams?: Record<string, string | st
   const pageValue = Number(first(values.page) ?? "1");
   const minValue = Number(first(values.minPlaying) ?? first(values.minPlayers) ?? "");
   const rawSort = first(values.sort)?.trim() ?? "";
-  const knownParams = new Set(["page", "q", "genre", "subgenre", "sort", "minPlaying", "minPlayers", "column"]);
+  const knownParams = new Set([
+    "page",
+    "q",
+    "genre",
+    "subgenre",
+    "sort",
+    "minPlaying",
+    "minPlayers",
+    "column",
+    "__bloxodes_verify"
+  ]);
   return {
     page: Number.isFinite(pageValue) && pageValue > 0 ? Math.floor(pageValue) : 1,
     q: first(values.q)?.trim() ?? "",
@@ -3672,51 +3652,52 @@ export async function getStatsGameRankChartByUniverseId(
   );
 }
 
-export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailData | null> {
+const STATS_GAME_INDEX_FIELDS = `
+  universe_id, root_place_id, name, display_name, slug, description,
+  creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
+  icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
+  rating_percent, stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+  last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
+  console_enabled, vr_enabled, baseline_playing_24h, baseline_playing_7d,
+  growth_24h, growth_24h_percent, growth_7d, growth_7d_percent, peak_24h,
+  peak_7d, global_playing_rank, indexed_at
+`;
+const STATS_GAME_FIELDS = `
+  universe_id, root_place_id, name, display_name, slug, description,
+  creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
+  icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
+  created_at_api, updated_at_api, last_stats_refreshed_at,
+  last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
+  console_enabled, vr_enabled
+`;
+
+async function loadStatsGameRowBySlug(slug: string): Promise<UniverseRow | StatsGameIndexRow | null> {
   const sb = supabaseAdmin();
   const parsedUniverseId = parseStatsUniverseIdSlug(slug);
   const numericSlug = Number(slug);
-  const indexFields = `
-    universe_id, root_place_id, name, display_name, slug, description,
-    creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
-    icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-    rating_percent, stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
-    last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
-    console_enabled, vr_enabled, baseline_playing_24h, baseline_playing_7d,
-    growth_24h, growth_24h_percent, growth_7d, growth_7d_percent, peak_24h,
-    peak_7d, global_playing_rank, indexed_at
-  `;
-  const fields = `
-    universe_id, root_place_id, name, display_name, slug, description,
-    creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
-    icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-    stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
-    last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
-    console_enabled, vr_enabled
-  `;
 
   if (parsedUniverseId || Number.isFinite(numericSlug)) {
     const indexed = await sb
       .from("stats_game_current_index")
-      .select(indexFields)
+      .select(STATS_GAME_INDEX_FIELDS)
       .eq("universe_id", parsedUniverseId ?? numericSlug)
       .limit(1)
       .maybeSingle();
-    if (!indexed.error && indexed.data) return buildStatsGameDetail(indexed.data as StatsGameIndexRow);
+    if (!indexed.error && indexed.data) return indexed.data as StatsGameIndexRow;
 
     const { data, error } = await sb
       .from("roblox_universes")
-      .select(fields)
+      .select(STATS_GAME_FIELDS)
       .eq("universe_id", parsedUniverseId ?? numericSlug)
       .limit(1)
       .maybeSingle();
     if (error) throw error;
-    if (data) return buildStatsGameDetail(data as UniverseRow);
+    if (data) return data as UniverseRow;
   }
 
   const indexed = await sb
     .from("stats_game_current_index")
-    .select(indexFields)
+    .select(STATS_GAME_INDEX_FIELDS)
     .eq("slug", slug)
     .order("visits", { ascending: false, nullsFirst: false })
     .order("playing", { ascending: false, nullsFirst: false })
@@ -3724,11 +3705,11 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
     .order("universe_id", { ascending: true })
     .limit(1)
     .maybeSingle();
-  if (!indexed.error && indexed.data) return buildStatsGameDetail(indexed.data as StatsGameIndexRow);
+  if (!indexed.error && indexed.data) return indexed.data as StatsGameIndexRow;
 
   const { data, error } = await sb
     .from("roblox_universes")
-    .select(fields)
+    .select(STATS_GAME_FIELDS)
     .eq("slug", slug)
     .order("visits", { ascending: false, nullsFirst: false })
     .order("playing", { ascending: false, nullsFirst: false })
@@ -3739,7 +3720,18 @@ export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailD
   if (error) throw error;
   if (!data) return null;
 
-  return buildStatsGameDetail(data as UniverseRow);
+  return data as UniverseRow;
+}
+
+export async function getStatsGameSummaryBySlug(slug: string): Promise<StatsGame | null> {
+  const row = await loadStatsGameRowBySlug(slug);
+  if (!row) return null;
+  return "indexed_at" in row ? mapIndexedGame(row) : mapUniverse(row);
+}
+
+export async function getStatsGameBySlug(slug: string): Promise<StatsGameDetailData | null> {
+  const row = await loadStatsGameRowBySlug(slug);
+  return row ? buildStatsGameDetail(row) : null;
 }
 
 async function buildStatsGameDetail(row: UniverseRow | StatsGameIndexRow): Promise<StatsGameDetailData> {
@@ -3791,7 +3783,7 @@ export async function getStatsGameSummaryByUniverseId(universeId: number): Promi
       universe_id, root_place_id, name, display_name, slug, description,
       creator_id, creator_name, creator_type, genre, genre_l1, genre_l2, age_rating,
       icon_url, thumbnail_urls, playing, visits, favorites, likes, dislikes,
-      stats_tier, created_at_api, updated_at_api, last_stats_refreshed_at,
+      created_at_api, updated_at_api, last_stats_refreshed_at,
       last_playing_refreshed_at, desktop_enabled, mobile_enabled, tablet_enabled,
       console_enabled, vr_enabled
     `)
@@ -3858,10 +3850,22 @@ export async function loadLatestRank(universeId: number): Promise<number | null>
 }
 
 export async function listStatsSitemapGames(limit = 200): Promise<Array<{ slug: string; updatedAt: string | null }>> {
-  const { rows } = await listBaseGames({ limit, sort: "playing", tierForSitemap: true });
-  return rows.map((game) => ({
-    slug: game.slug,
-    updatedAt: game.lastStatsRefreshedAt ?? game.lastPlayingRefreshedAt ?? game.updatedAtApi
+  const safeLimit = Math.min(Math.max(1, Math.floor(limit)), STATS_GAME_DETAIL_INDEX_LIMIT);
+  const { data, error } = await supabaseAdmin()
+    .from("stats_game_current_index")
+    .select("universe_id, slug, updated_at_api, last_stats_refreshed_at, last_playing_refreshed_at, global_playing_rank")
+    .not("slug", "is", null)
+    .not("global_playing_rank", "is", null)
+    .lte("global_playing_rank", STATS_GAME_DETAIL_INDEX_LIMIT)
+    .or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000")
+    .order("global_playing_rank", { ascending: true })
+    .order("universe_id", { ascending: true })
+    .limit(safeLimit);
+  if (error) throw error;
+
+  return (data ?? []).map((game) => ({
+    slug: statsUniverseSlug(game.slug, game.universe_id),
+    updatedAt: game.last_stats_refreshed_at ?? game.last_playing_refreshed_at ?? game.updated_at_api
   }));
 }
 

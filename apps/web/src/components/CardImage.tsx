@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const DEFAULT_FALLBACK = "/og-image.png";
+const DEFAULT_FALLBACK = "/Bloxodes.png";
 
 function resolveSrc(src?: string | null): string | null {
   if (!src) return null;
