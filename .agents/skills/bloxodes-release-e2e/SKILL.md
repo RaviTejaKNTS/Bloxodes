@@ -26,7 +26,7 @@ Treat explicit invocation as authorization to complete the normal release operat
 - perform an explicitly prepared database publication when it is part of the task;
 - verify production;
 - synchronize the local `production` worktree; and
-- delete only the released temporary branch and current worktree when safe.
+- delete only the released temporary branch and temporary release worktree when safe.
 
 Do not pause for confirmation between those routine steps. Do not expand the task, publish unrelated queued content, weaken a check, force a merge, or make unrelated infrastructure changes.
 
@@ -167,7 +167,7 @@ git -C <production-worktree> merge --ff-only origin/production
 
 4. Verify local `production` and `origin/production` resolve to the same SHA. If unrelated local changes remain, verify their path list is unchanged from the preflight snapshot.
 
-For a database-only release without a repository merge, still confirm local `production` is clean and synchronized before cleanup.
+For a database-only release without a repository merge, still confirm local `production` is synchronized before cleanup without altering unrelated local work.
 
 ## 8. Preserve Work And Clean Up
 
@@ -193,7 +193,7 @@ Stop and ask the user with the exact blocker when any of these occurs:
 - `quality` fails or the PR cannot merge normally;
 - the selected deployment does not reach the expected healthy SHA;
 - a production database dry-run/readback differs from the expected scope;
-- local `production` is dirty, divergent, or cannot fast-forward; or
+- release-owned changes remain on local `production`, or it cannot safely fast-forward without touching unrelated local work; or
 - worktree cleanup could discard unfinished or unknown files.
 
 ## Final Report
