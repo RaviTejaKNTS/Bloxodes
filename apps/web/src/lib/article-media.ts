@@ -3,12 +3,12 @@
  * Used by markdown rendering, tests, and content verification.
  */
 
+import { lexer, walkTokens, type Token } from "marked";
+
 export const YOUTUBE_DIRECTIVE_PATTERN = /\{\{\s*youtube\s*:\s*([^\}]+?)\s*\}\}/gi;
 
 /** Public path prefix for article-owned files under apps/web/public/articles/<slug>/ */
 export const ARTICLE_PUBLIC_PATH_PREFIX = "/articles/";
-
-const MARKDOWN_IMAGE_PATTERN = /!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
 
 const ALLOWED_REMOTE_IMAGE_HOST_SUFFIXES = [
   "media.bloxodes.com",
@@ -42,6 +42,12 @@ export type YouTubeDirectiveMatch = {
 export type MarkdownImageRef = {
   alt: string;
   src: string;
+  raw: string;
+  index: number;
+};
+
+export type RawHtmlImageRef = {
+  raw: string;
   index: number;
 };
 
@@ -96,7 +102,7 @@ export function extractYouTubeId(raw: string): string | null {
 }
 
 export function findYouTubeDirectives(markdown: string): YouTubeDirectiveMatch[] {
-  if (!markdown || !markdown.includes("youtube")) return [];
+  if (!markdown || !/youtube/i.test(markdown)) return [];
 
   const matches: YouTubeDirectiveMatch[] = [];
   const pattern = new RegExp(YOUTUBE_DIRECTIVE_PATTERN.source, "gi");
@@ -130,7 +136,7 @@ export function buildYouTubeEmbedHtml(videoId: string): string {
 }
 
 export function injectYouTubeEmbeds(markdown: string): string {
-  if (!markdown || !markdown.includes("youtube")) {
+  if (!markdown || !/youtube/i.test(markdown)) {
     return markdown;
   }
 
@@ -145,16 +151,45 @@ export function findMarkdownImages(markdown: string): MarkdownImageRef[] {
   if (!markdown || !markdown.includes("![")) return [];
 
   const images: MarkdownImageRef[] = [];
-  const pattern = new RegExp(MARKDOWN_IMAGE_PATTERN.source, "g");
-  let match: RegExpExecArray | null;
+  const tokens = lexer(markdown);
+  let searchFrom = 0;
 
-  while ((match = pattern.exec(markdown)) !== null) {
+  walkTokens(tokens, (token: Token) => {
+    if (token.type !== "image") return;
+    const index = markdown.indexOf(token.raw, searchFrom);
     images.push({
-      alt: String(match[1] ?? "").trim(),
-      src: String(match[2] ?? "").trim(),
-      index: match.index,
+      alt: token.text.trim(),
+      src: token.href.trim(),
+      raw: token.raw,
+      index: index >= 0 ? index : searchFrom,
     });
-  }
+    if (index >= 0) searchFrom = index + token.raw.length;
+  });
+
+  return images;
+}
+
+/** Raw HTML images render through marked but are intentionally unsupported by article verification. */
+export function findRawHtmlArticleImages(markdown: string): RawHtmlImageRef[] {
+  if (!markdown || !/<img\b/i.test(markdown)) return [];
+
+  const images: RawHtmlImageRef[] = [];
+  const tokens = lexer(markdown);
+  let searchFrom = 0;
+
+  walkTokens(tokens, (token: Token) => {
+    if (token.type !== "html" || !/<img\b/i.test(token.raw)) return;
+    const tokenIndex = markdown.indexOf(token.raw, searchFrom);
+    const pattern = /<img\b[^>]*>/gi;
+    let match: RegExpExecArray | null;
+    while ((match = pattern.exec(token.raw)) !== null) {
+      images.push({
+        raw: match[0],
+        index: (tokenIndex >= 0 ? tokenIndex : searchFrom) + match.index,
+      });
+    }
+    if (tokenIndex >= 0) searchFrom = tokenIndex + token.raw.length;
+  });
 
   return images;
 }
@@ -164,10 +199,30 @@ export function articlePublicDir(slug: string): string {
   return `${ARTICLE_PUBLIC_PATH_PREFIX}${clean}/`;
 }
 
+function safeSiteRelativePath(src: string): string | null {
+  if (!src.startsWith("/") || src.startsWith("//") || /[?#]/.test(src)) return null;
+
+  let decoded = src;
+  try {
+    for (let i = 0; i < 4; i += 1) {
+      const next = decodeURIComponent(decoded);
+      if (next === decoded) break;
+      decoded = next;
+    }
+  } catch {
+    return null;
+  }
+
+  if (decoded.includes("\\") || decoded.includes("\0")) return null;
+  if (decoded.split("/").some((segment) => segment === "." || segment === "..")) return null;
+  return decoded;
+}
+
 export function isLocalArticleImagePath(src: string, slug?: string): boolean {
-  if (!src.startsWith(ARTICLE_PUBLIC_PATH_PREFIX)) return false;
+  const safePath = safeSiteRelativePath(src);
+  if (!safePath?.startsWith(ARTICLE_PUBLIC_PATH_PREFIX)) return false;
   if (!slug) return true;
-  return src.startsWith(articlePublicDir(slug));
+  return safePath.startsWith(articlePublicDir(slug));
 }
 
 export function isAllowedRemoteArticleImageUrl(src: string): boolean {
@@ -244,9 +299,12 @@ export function classifyArticleImageSrc(
 
 export function stripArticleMediaForPlainText(markdown: string): string {
   if (!markdown) return "";
-  return markdown
-    .replace(YOUTUBE_DIRECTIVE_PATTERN, " ")
-    .replace(MARKDOWN_IMAGE_PATTERN, " ");
+  let stripped = markdown.replace(YOUTUBE_DIRECTIVE_PATTERN, " ");
+  const images = findMarkdownImages(stripped).sort((a, b) => b.index - a.index);
+  for (const image of images) {
+    stripped = `${stripped.slice(0, image.index)} ${stripped.slice(image.index + image.raw.length)}`;
+  }
+  return stripped;
 }
 
 export function suggestArticleImageMarkdown(params: {

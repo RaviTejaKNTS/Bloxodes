@@ -4,6 +4,7 @@ import {
   classifyArticleImageSrc,
   extractYouTubeId,
   findMarkdownImages,
+  findRawHtmlArticleImages,
   findYouTubeDirectives,
   injectYouTubeEmbeds,
   suggestArticleImageMarkdown,
@@ -51,6 +52,12 @@ describe("youtube directives", () => {
     expect(html).not.toContain("{{ youtube");
   });
 
+  it("finds and injects directives case-insensitively", () => {
+    const raw = "See {{ YouTube: dQw4w9WgXcQ }} now";
+    expect(findYouTubeDirectives(raw)).toHaveLength(1);
+    expect(injectYouTubeEmbeds(raw)).toContain("youtube-nocookie.com/embed/dQw4w9WgXcQ");
+  });
+
   it("leaves invalid directives untouched for verifier to catch", () => {
     const raw = "{{ youtube: https://example.com/v/1 }}";
     expect(injectYouTubeEmbeds(raw)).toBe(raw);
@@ -65,11 +72,31 @@ describe("article images", () => {
     expect(images[0]?.src).toBe("/articles/foo/menu.webp");
   });
 
+  it("parses reference-style images through the renderer lexer", () => {
+    const images = findMarkdownImages(
+      "![Menu panel][shot]\n\n[shot]: /articles/foo/menu.webp"
+    );
+    expect(images).toHaveLength(1);
+    expect(images[0]).toMatchObject({
+      alt: "Menu panel",
+      src: "/articles/foo/menu.webp",
+      raw: "![Menu panel][shot]",
+    });
+  });
+
+  it("detects raw HTML images but ignores examples inside code fences", () => {
+    expect(findRawHtmlArticleImages('<img src="https://example.com/x.png" alt="x">')).toHaveLength(1);
+    expect(findRawHtmlArticleImages('```html\n<img src="https://example.com/x.png">\n```')).toHaveLength(0);
+  });
+
   it("classifies allowed and blocked image srcs", () => {
     expect(classifyArticleImageSrc("/articles/foo/menu.webp", "foo")).toEqual({ ok: true, kind: "local" });
     expect(classifyArticleImageSrc("https://media.bloxodes.com/x.webp", "foo").ok).toBe(true);
     expect(classifyArticleImageSrc("https://static.wikia.nocookie.net/x.png", "foo").ok).toBe(false);
     expect(classifyArticleImageSrc("/articles/other/menu.webp", "foo").ok).toBe(false);
+    expect(classifyArticleImageSrc("/articles/foo/../other/menu.webp", "foo").ok).toBe(false);
+    expect(classifyArticleImageSrc("/articles/foo/%2e%2e/other/menu.webp", "foo").ok).toBe(false);
+    expect(classifyArticleImageSrc("/articles/foo/%252e%252e/other/menu.webp", "foo").ok).toBe(false);
     expect(classifyArticleImageSrc("https://example.com/x.png", "foo").ok).toBe(false);
   });
 
@@ -89,6 +116,13 @@ describe("plain text and render", () => {
     expect(text).not.toContain("articles/foo");
     expect(markdownToPlainText("A {{ youtube: dQw4w9WgXcQ }} B")).toContain("A");
     expect(markdownToPlainText("A {{ youtube: dQw4w9WgXcQ }} B")).not.toContain("youtube");
+  });
+
+  it("strips reference-style images for plain text", () => {
+    const text = stripArticleMediaForPlainText(
+      "A ![Menu panel][shot] B\n\n[shot]: /articles/foo/menu.webp"
+    );
+    expect(text).not.toContain("![Menu panel][shot]");
   });
 
   it("renders youtube embed through sanitize path", async () => {

@@ -5,6 +5,7 @@ import {
   articlePublicDir,
   classifyArticleImageSrc,
   findMarkdownImages,
+  findRawHtmlArticleImages,
   findYouTubeDirectives,
   type MarkdownImageRef,
 } from "@/lib/article-media";
@@ -41,7 +42,10 @@ function labelOf(input: ArticleMediaInput): string {
 
 async function localFileExists(publicPath: string): Promise<boolean> {
   const relative = publicPath.replace(/^\/+/, "");
-  const absolute = path.join(REPO_PUBLIC_ROOT, relative);
+  const absolute = path.resolve(REPO_PUBLIC_ROOT, relative);
+  if (absolute !== REPO_PUBLIC_ROOT && !absolute.startsWith(`${REPO_PUBLIC_ROOT}${path.sep}`)) {
+    return false;
+  }
   try {
     await access(absolute);
     return true;
@@ -91,6 +95,14 @@ export async function checkArticleMedia(input: ArticleMediaInput): Promise<Artic
       requireLocalFiles,
       requireImageAlt,
       context: "body",
+    });
+  }
+
+  for (const image of findRawHtmlArticleImages(content)) {
+    findings.push({
+      level: "error",
+      rule: "unsupported-html-image",
+      message: `${label}: raw HTML image syntax is not supported (${image.raw}). Use ![alt](/articles/${input.slug}/file.webp) so source, alt text, and file ownership can be verified.`,
     });
   }
 
