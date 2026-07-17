@@ -11,6 +11,7 @@ export const YOUTUBE_DIRECTIVE_PATTERN = /\{\{\s*youtube\s*:\s*([^\}]+?)\s*\}\}/
 export const ARTICLE_PUBLIC_PATH_PREFIX = "/articles/";
 
 const YOUTUBE_VIDEO_ID_PATTERN = /^[a-zA-Z0-9_-]{11}$/;
+const MARKDOWN_REFERENCE_DEFINITION_PATTERN = /^[ \t]{0,3}\[[^\]\n]+\]:[ \t]*(?:<[^>\n]+>|\S+)(?:[ \t]+(?:"[^"\n]*"|'[^'\n]*'|\([^\)\n]*\)))?[ \t]*$/gm;
 
 const ALLOWED_REMOTE_IMAGE_HOST_SUFFIXES = [
   "media.bloxodes.com",
@@ -310,7 +311,7 @@ export function stripArticleMediaForPlainText(markdown: string): string {
   for (const image of images) {
     stripped = `${stripped.slice(0, image.index)} ${stripped.slice(image.index + image.raw.length)}`;
   }
-  return stripped;
+  return stripped.replace(MARKDOWN_REFERENCE_DEFINITION_PATTERN, " ");
 }
 
 export function suggestArticleImageMarkdown(params: {

@@ -131,6 +131,8 @@ describe("plain text and render", () => {
       "A ![Menu panel][shot] B\n\n[shot]: /articles/foo/menu.webp"
     );
     expect(text).not.toContain("![Menu panel][shot]");
+    expect(text).not.toContain("[shot]:");
+    expect(text).not.toContain("/articles/foo/menu.webp");
   });
 
   it("renders youtube embed through sanitize path", async () => {

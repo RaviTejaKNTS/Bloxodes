@@ -1,4 +1,4 @@
-import { access } from "node:fs/promises";
+import { stat } from "node:fs/promises";
 import path from "node:path";
 
 import {
@@ -42,13 +42,13 @@ function labelOf(input: ArticleMediaInput): string {
 
 async function localFileExists(publicPath: string): Promise<boolean> {
   const relative = publicPath.replace(/^\/+/, "");
+  if (!relative || relative.endsWith("/")) return false;
   const absolute = path.resolve(REPO_PUBLIC_ROOT, relative);
   if (absolute !== REPO_PUBLIC_ROOT && !absolute.startsWith(`${REPO_PUBLIC_ROOT}${path.sep}`)) {
     return false;
   }
   try {
-    await access(absolute);
-    return true;
+    return (await stat(absolute)).isFile();
   } catch {
     return false;
   }
