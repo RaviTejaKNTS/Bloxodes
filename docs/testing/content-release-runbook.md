@@ -7,6 +7,7 @@ Use this runbook for normal content publishing, code releases, dataset releases,
 - Never run a full sitemap crawl, broad production SEO scan, Playwright suite, published-content audit, or sitemap-wide cache warm as part of a normal push.
 - Use the required `quality` result as the pull-request gate.
 - For a new DB-backed page, deploy its code, renderer, dataset, and images before publishing its database row.
+- Treat schema dependencies separately: apply and verify a backward-compatible expansion migration before deploying web code that requires it.
 - After publishing a database row, verify the exact page and its family sitemap.
 - A future unpublished page returning `404` and remaining absent from its sitemap is correct.
 - Do not publish a database row first when its route needs new bundled code or data.
@@ -22,6 +23,8 @@ Use this runbook for normal content publishing, code releases, dataset releases,
 | React, Next.js, route, renderer, shared library, SEO, sitemap, or Docker change | Pull request, `quality`, merge, deployment verification | Yes |
 | Bundled `data/`, `apps/web/src/data/`, or `apps/web/public/` change | Pull request, dataset/build checks, merge, then targeted DB revalidation when applicable | Yes |
 | New collection, catalog, quiz, or tool needing bundled code/data | Code and data PR first, database publication second | Yes, before DB publication |
+| Supabase schema migration with no dependent web code | Migration-only PR, `quality`, merge, production dry-run, exact migration apply and verification | No |
+| Supabase migration plus dependent web code | Expansion migration PR and production apply first; dependent code PR and deployment second | Only for the code phase |
 | Docs, mobile, extension, scripts, workflow, or Supabase-only repository change | Pull request and `quality`; use the domain-specific release process if one exists | No web image deployment |
 
 ## Database-only content publication
@@ -50,6 +53,22 @@ npm run verify:published-url -- \
 ```
 
 Do not start a web build or full crawl for a DB-only publication.
+
+## Schema migration release
+
+The normal code-first/database-second order applies to content rows. When runtime code needs a new column, table, view, function, policy, or constraint, use schema-first expansion instead:
+
+1. Create a forward-only, backward-compatible expansion migration. The currently live app must continue working after it is applied.
+2. Put the migration in its own PR, pass `quality`, merge it, and confirm the Supabase-only change did not deploy a web image.
+3. Compare local and production migration history and run the production dry-run.
+4. Continue only when the dry-run shows exactly the migration versions approved for this release. Never use `--include-all` to sweep in unrelated pending migrations.
+5. Have only one operator apply the reviewed migration.
+6. Verify the migration-history entry, resulting schema, RLS/permissions, a representative query or API call, and database health.
+7. Create the dependent code PR from updated `production`, then merge, deploy, and verify its exact image SHA.
+8. If old schema must be removed, renamed, restricted, or made non-null, do that in a later contract migration after all live code has stopped relying on it.
+9. Regenerate `supabase/schema.sql` from live production through a controlled follow-up; never hand-edit the snapshot.
+
+Stop if histories differ unexpectedly, another migration is pending, the old app would break, or the change cannot be made backward-compatible. Get an explicit maintenance/rollout decision instead of guessing.
 
 ## Code or renderer release
 
@@ -185,6 +204,12 @@ These commands are investigation tools. Do not add them to normal PR or producti
 - Treat this as a release-order error.
 - Prevent the broken URL from remaining published or in the sitemap until its required web image is live.
 - Restore the normal code-first, DB-second sequence.
+
+### Dependent code released before its schema migration
+
+- Stop the rollout or restore compatibility; do not keep retrying a code deployment against missing schema.
+- Verify the exact production migration history and schema before taking another release action.
+- Resume with the split expansion-migration-first sequence above.
 
 ## Expected operating speed
 
