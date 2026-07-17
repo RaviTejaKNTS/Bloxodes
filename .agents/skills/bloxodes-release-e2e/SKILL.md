@@ -37,6 +37,7 @@ Do not call the release complete until every applicable statement is true:
 - GitHub `production` contains the intended repository changes.
 - The selected production deployment completed and the live SHA/database health are correct, or the change was correctly classified as requiring no web image deployment.
 - Every intended database write was read back and its exact public URL was verified.
+- Every applied schema migration appears exactly once in production migration history, and its schema, permissions, and representative query were verified.
 - The main local `production` worktree matches `origin/production` without altering unrelated local work.
 - The released temporary branch and release worktree are removed; the main production worktree is retained.
 - No intended work was discarded and no unrelated file was released.
@@ -92,7 +93,17 @@ Use when production already has the renderer, data, and assets and the only inte
 
 Use when a database page depends on new code, bundled data, or assets. Complete the repository PR and verify the exact deployed SHA first. Only then publish the database row and verify the URL. Never reverse this order.
 
-A new migration file is a repository change even when its runtime effect is database-only. Merge its PR before applying the controlled production migration.
+This code-first, database-second rule is for content rows. Do not use it for schema that the new web code requires.
+
+### Schema migration release
+
+A migration file is a repository change and always requires a PR with `quality`.
+
+- Migration only: require a forward-only migration that is compatible with the currently live app. Merge the migration-only PR, confirm the web deploy classifier skipped it, then dry-run, apply, and verify that exact migration in production.
+- Migration plus dependent web code: split the release into at least two scoped phases. First merge and apply a backward-compatible expansion migration. After production verification, create the dependent web-code PR from updated `production`, merge it, and verify its deployed SHA.
+- Destructive contract change: remove or rename old schema, tighten constraints, or revoke old access only in a later migration after every live caller has stopped using it. This can require a third release.
+
+Do not put a required migration and its dependent runtime code into one normally deployed PR. Production could deploy the code before the migration is applied. If the schema cannot be changed compatibly while the old app remains live, stop and request an explicit maintenance or rollout decision.
 
 ## 3. Run Proportional Checks
 
@@ -102,6 +113,7 @@ Reuse valid checks already run against the current commit. Run missing checks se
 - Bundled datasets/public assets: relevant dataset verification; let PR `quality` run the dataset audit and production build.
 - Extension or mobile: run their domain-specific typecheck/package checks.
 - Database content: run the content script's dry-run before any production write.
+- Schema migration: test the migration against the repository's representative local schema, verify the currently live app remains compatible after an expansion, and run the narrow schema/query/RLS or permission checks required by `supabase/AGENTS.md`.
 
 Do not run a full sitemap crawl, broad production SEO scan, broad cache warm, Playwright suite, or published-content audit merely because this skill was invoked. Those remain explicit manual diagnostics.
 
@@ -143,13 +155,27 @@ Do not continue to a dependent database publication when the required web deploy
 
 Run this section only when the completed task explicitly includes a prepared database change.
 
-1. Use the matching content or database workflow instead of inventing SQL or payloads.
+### Content rows
+
+1. Use the matching content workflow instead of inventing SQL or payloads.
 2. Confirm the production target and exact slug/row scope.
 3. Run the production dry-run and review create/update behavior.
-4. Apply only the approved idempotent write or forward-only migration.
+4. Apply only the approved idempotent write.
 5. Read the affected production rows back.
 6. Let normal targeted revalidation purge and warm affected paths.
 7. Run `npm run verify:published-url -- --path <exact-path>` for each published page, or the equivalent domain-specific verifier.
+
+### Schema migrations
+
+1. Re-read `supabase/AGENTS.md` and check the installed Supabase CLI version and current `--help` before choosing commands.
+2. Confirm the migration PR is merged and that any dependent code is still unreleased.
+3. Compare local and production migration history, then run a production dry-run.
+4. Require the dry-run to contain only the explicitly allowlisted migration version or versions for this release. Stop on an unrelated pending migration, duplicate version, history divergence, or unexpected schema state.
+5. Do not use `--include-all` to bypass history differences. Do not use `migration repair` as a substitute for applying SQL; repair history only after schema truth is independently verified and the need is explicit.
+6. Ensure only one operator or process applies the migration. Apply the exact reviewed, forward-only migration.
+7. Verify its production migration-history entry, created/changed schema, permissions or RLS, representative API/query behavior, and database health.
+8. Follow the repository rule to regenerate `supabase/schema.sql` from live production in a controlled follow-up; never hand-edit the snapshot.
+9. Only after a successful expansion migration may the dependent runtime-code phase proceed.
 
 The invocation does not authorize publishing unrelated drafts, queued pages, or ambiguous rows. Stop if the database target is not explicit from the completed task.
 
@@ -193,6 +219,7 @@ Stop and ask the user with the exact blocker when any of these occurs:
 - `quality` fails or the PR cannot merge normally;
 - the selected deployment does not reach the expected healthy SHA;
 - a production database dry-run/readback differs from the expected scope;
+- migration history, dry-run scope, compatibility, permissions, or production schema verification is ambiguous;
 - release-owned changes remain on local `production`, or it cannot safely fast-forward without touching unrelated local work; or
 - worktree cleanup could discard unfinished or unknown files.
 
