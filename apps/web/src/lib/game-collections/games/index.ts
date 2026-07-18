@@ -45,6 +45,10 @@ import { drainTheLakeCollectionGroup } from "./drain-the-lake";
 import { fishItCollectionGroup } from "./fish-it";
 import { gakuranCollectionGroup } from "./gakuran";
 import { catchABrainrotCollectionGroup } from "./catch-a-brainrot";
+import { animeExpeditionsCollectionGroup } from "./anime-expeditions";
+import { forsakenCollectionGroup } from "./forsaken";
+import { daysAtSeaCollectionGroup } from "./100-days-at-sea";
+import { evadeCollectionGroup } from "./evade";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -94,5 +98,9 @@ export const GAME_COLLECTION_GROUPS = [
   drainTheLakeCollectionGroup,
   fishItCollectionGroup,
   gakuranCollectionGroup,
-  catchABrainrotCollectionGroup
+  catchABrainrotCollectionGroup,
+  animeExpeditionsCollectionGroup,
+  forsakenCollectionGroup,
+  daysAtSeaCollectionGroup,
+  evadeCollectionGroup
 ] satisfies GameCollectionGroup[];

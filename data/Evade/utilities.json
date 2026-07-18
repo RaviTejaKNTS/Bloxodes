@@ -1,0 +1,294 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Evade",
+    "gameSlug": "evade",
+    "collection": "utilities",
+    "route": "/wiki/evade/utilities",
+    "catalogCode": "evade-utilities",
+    "itemFields": [
+      "slot",
+      "price",
+      "levelRequired",
+      "effect",
+      "duration",
+      "cooldown",
+      "uses",
+      "packSize",
+      "availability",
+      "cardSummary",
+      "notes"
+    ],
+    "columns": [
+      "slot",
+      "price",
+      "levelRequired",
+      "effect",
+      "duration",
+      "cooldown",
+      "uses",
+      "packSize",
+      "availability",
+      "cardSummary",
+      "notes"
+    ],
+    "display": {
+      "groupLabel": "slot",
+      "sectionOrder": [
+        "Utilities",
+        "Powers"
+      ],
+      "badgeField": "slot",
+      "subtitleFields": [
+        "levelRequired"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "slot",
+        "price",
+        "levelRequired",
+        "effect",
+        "duration",
+        "cooldown"
+      ],
+      "tableFields": [
+        "slot",
+        "price",
+        "levelRequired",
+        "effect",
+        "duration",
+        "cooldown",
+        "uses",
+        "packSize",
+        "availability",
+        "cardSummary",
+        "notes"
+      ],
+      "fieldPresentation": {
+        "slot": {
+          "kind": "highlight",
+          "label": "Slot"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "levelRequired": {
+          "kind": "chip",
+          "label": "Level"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "duration": {
+          "kind": "chip",
+          "label": "Duration"
+        },
+        "cooldown": {
+          "kind": "chip",
+          "label": "Cooldown"
+        },
+        "uses": {
+          "kind": "chip",
+          "label": "Uses"
+        },
+        "packSize": {
+          "kind": "chip",
+          "label": "Pack size"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Compass",
+        "slot": "Utility",
+        "price": "$20",
+        "levelRequired": "0+",
+        "effect": "Points toward the nearest objective, or north when no objectives are available.",
+        "duration": null,
+        "cooldown": null,
+        "uses": null,
+        "packSize": "3",
+        "availability": "Public shop",
+        "cardSummary": "Cheap early utility that steers you toward map objectives when you are lost.",
+        "notes": "Can briefly aim at a closer saferoom door instead of its lever until you move away."
+      },
+      "system": {
+        "slug": "compass",
+        "section": "Utilities",
+        "sortOrder": 1,
+        "image": "/Evade/Utilities/compass.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Timer",
+        "slot": "Utility",
+        "price": "$20",
+        "levelRequired": "0+",
+        "effect": "Shows remaining time in the current round on a HUD timer.",
+        "duration": null,
+        "cooldown": null,
+        "uses": null,
+        "packSize": "3",
+        "availability": "Public shop",
+        "cardSummary": "Low-cost info tool for pacing rounds and planning when to hide or push objectives.",
+        "notes": "Does not improve survivability by itself."
+      },
+      "system": {
+        "slug": "timer",
+        "section": "Utilities",
+        "sortOrder": 2,
+        "image": "/Evade/Utilities/timer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Radio",
+        "slot": "Utility",
+        "price": "$45",
+        "levelRequired": "2+",
+        "effect": "Marks a nextbot location on use when the target is in sight, and applies a 5% slow while the Radio is selected.",
+        "duration": null,
+        "cooldown": null,
+        "uses": null,
+        "packSize": "3",
+        "availability": "Public shop",
+        "cardSummary": "Budget awareness tool for tagging hard-to-see nextbots and taking a small slow passive.",
+        "notes": "Marks are personal and are not shared with other players who also equip a Radio."
+      },
+      "system": {
+        "slug": "radio",
+        "section": "Utilities",
+        "sortOrder": 3,
+        "image": "/Evade/Utilities/radio.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Radar",
+        "slot": "Utility",
+        "price": "$145",
+        "levelRequired": "5+",
+        "effect": "Plays a ping that speeds up as a nextbot gets closer, with a matching HUD pulse.",
+        "duration": null,
+        "cooldown": null,
+        "uses": null,
+        "packSize": "3",
+        "availability": "Public shop",
+        "cardSummary": "Proximity warning utility that helps on dark or maze maps where nextbots are hard to see.",
+        "notes": "Does not show exact direction, only how close the threat is."
+      },
+      "system": {
+        "slug": "radar",
+        "section": "Utilities",
+        "sortOrder": 4,
+        "image": "/Evade/Utilities/radar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Decoy Panel",
+        "slot": "Utility",
+        "price": "$160",
+        "levelRequired": "10",
+        "effect": "Spawns a transparent clone that walks forward and can draw nextbot attention.",
+        "duration": "5 seconds",
+        "cooldown": "15 seconds",
+        "uses": null,
+        "packSize": "3",
+        "availability": "Public shop",
+        "cardSummary": "Active distraction tool for buying escape or revive windows when a nextbot is locked on you.",
+        "notes": "Place in open space so barriers do not stop the decoy. Some nextbots may still ignore it. Duration uses Fandom post-Overhaul values (older guides still list about 30 seconds)."
+      },
+      "system": {
+        "slug": "decoy-panel",
+        "section": "Utilities",
+        "sortOrder": 5,
+        "image": "/Evade/Utilities/decoy-panel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stun Baton",
+        "slot": "Power",
+        "price": "$120",
+        "levelRequired": "15",
+        "effect": "Melee power tool that can temporarily stun nextbots on hit, and can kill some weaker 3D nextbots.",
+        "duration": null,
+        "cooldown": null,
+        "uses": null,
+        "packSize": "3",
+        "availability": "Public shop",
+        "cardSummary": "Mid-level Power option for stopping chase pressure when you can land a clean hit.",
+        "notes": "Misses leave you exposed. Exact stun timings are not fully sourced."
+      },
+      "system": {
+        "slug": "stun-baton",
+        "section": "Powers",
+        "sortOrder": 6,
+        "image": "/Evade/Utilities/stun-baton.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grapple",
+        "slot": "Power",
+        "price": "$360",
+        "levelRequired": "50+",
+        "effect": "Hooks onto surfaces and launches you toward the attach point for high mobility escapes.",
+        "duration": "6 rounds",
+        "cooldown": "2 seconds",
+        "uses": "24 hooks",
+        "packSize": "3",
+        "availability": "Public shop",
+        "cardSummary": "Core Power mobility tool for vertical routes and hard disengages once you reach level 50.",
+        "notes": "Failed out-of-range hooks do not spend a use. Boost Pack and emotes are disabled while Grapple is equipped."
+      },
+      "system": {
+        "slug": "grapple",
+        "section": "Powers",
+        "sortOrder": 7,
+        "image": "/Evade/Utilities/grapple.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Breacher",
+        "slot": "Power",
+        "price": "$1050",
+        "levelRequired": "100",
+        "effect": "Places a blue and yellow portal pair for instant travel while conserving momentum.",
+        "duration": null,
+        "cooldown": null,
+        "uses": null,
+        "packSize": "3",
+        "availability": "Public shop",
+        "cardSummary": "Endgame Power for pre-placed portal routes and long-range escapes on large maps.",
+        "notes": "Most expensive public equipment. Price uses Fandom $1050 after the Christmas 2025 increase (older guides still list $950). Unequipping clears active portals."
+      },
+      "system": {
+        "slug": "breacher",
+        "section": "Powers",
+        "sortOrder": 8,
+        "image": "/Evade/Utilities/breacher.png"
+      }
+    }
+  ]
+}

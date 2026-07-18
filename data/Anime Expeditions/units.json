@@ -1,0 +1,815 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "units",
+    "route": "/wiki/anime-expeditions/units",
+    "catalogCode": "anime-expeditions-units",
+    "universeId": 7613921865,
+    "itemFields": [
+      "rarity",
+      "element",
+      "damageType",
+      "role",
+      "obtainment",
+      "passive",
+      "activeAbility",
+      "evolution",
+      "cardSummary",
+      "alternateSpellings"
+    ],
+    "columns": [
+      "rarity",
+      "element",
+      "damageType",
+      "role",
+      "obtainment",
+      "passive",
+      "activeAbility",
+      "evolution",
+      "cardSummary",
+      "alternateSpellings"
+    ],
+    "display": {
+      "groupLabel": "rarity",
+      "sectionOrder": [
+        "Secret",
+        "Exclusive",
+        "Mythic",
+        "Legendary",
+        "Epic",
+        "Rare"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "element",
+        "damageType"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "element",
+        "damageType",
+        "role",
+        "obtainment",
+        "passive",
+        "activeAbility",
+        "evolution"
+      ],
+      "tableFields": [
+        "rarity",
+        "element",
+        "damageType",
+        "role",
+        "obtainment",
+        "passive",
+        "activeAbility",
+        "evolution",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": "chip",
+        "element": "chip",
+        "damageType": "chip",
+        "role": "normal",
+        "obtainment": "detail",
+        "passive": "detail",
+        "activeAbility": "detail",
+        "evolution": "detail",
+        "cardSummary": "normal",
+        "alternateSpellings": "normal"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "8th Sword (Berserker)",
+        "rarity": "Secret",
+        "element": "Neutral",
+        "damageType": "Physical",
+        "role": "DPS",
+        "obtainment": "Standard or Mini banner after Secret summons unlock around account level 10.",
+        "passive": "Builds permanent damage from takedowns and deals steady burn damage to enemies in the inner part of its range. Cleanses its own stun with a follow-up cut, punishes low-health enemies with another follow-up, and after 25 takedowns enters Berserk for a short damage, SPA, and Dismembered window.",
+        "activeAbility": "",
+        "evolution": "Listed as this Secret form in unit tables. Not shown as a separate base-to-evo recipe in the nine-row evolution guides.",
+        "cardSummary": "Secret Physical carry that ramps through takedowns and spikes hard once Berserk is online.",
+        "alternateSpellings": [
+          "8th Sword (Berserk)",
+          "8th Sword"
+        ]
+      },
+      "system": {
+        "slug": "8th-sword-berserker",
+        "section": "Secret",
+        "sortOrder": 100,
+        "image": "/Anime%20Expeditions/Units/8th-sword-berserker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow (Divine)",
+        "rarity": "Secret",
+        "element": "Dark",
+        "damageType": "Magical",
+        "role": "Summoner / Support",
+        "obtainment": "Standard or Mini banner after Secret summons unlock around account level 10.",
+        "passive": "Unlocks a circling Winged Spirit at upgrade 3 and an independently upgradeable Wolf Spirit at upgrade 5 for extra damage and stun pressure.",
+        "activeAbility": "Shadow Realm rewinds enemies in range and grants Magical units a 25% damage buff for 30 seconds (global cooldown). Divine Spirit summons a permanent spirit equal to base damage while stunning Shadow itself.",
+        "evolution": "Evolved form of Shadow. Requires blue, green, and red Evolution Sprites, 3 Rainbow Sprites, and 10,000 gold.",
+        "cardSummary": "Secret Magical summoner that buffs allied Magical units and adds lasting spirit damage.",
+        "alternateSpellings": [
+          "Shadow",
+          "Shadow (Devine)"
+        ]
+      },
+      "system": {
+        "slug": "shadow-divine",
+        "section": "Secret",
+        "sortOrder": 110,
+        "image": "/Anime%20Expeditions/Units/shadow-divine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson (Brother)",
+        "rarity": "Exclusive",
+        "element": "Dark",
+        "damageType": "Magical",
+        "role": "DPS",
+        "obtainment": "Exclusive route through Battle Pass, tournaments, or other limited activities rather than the open banner pool.",
+        "passive": "Regular attacks apply Crimson Mark so marked enemies explode after a few seconds. Explosions leave crimson pools that keep damaging enemies standing in them.",
+        "activeAbility": "Piercing Crimson channels toward a chosen point for about 10 seconds, dealing repeated damage and applying Crimson Mark while this unit cannot use regular attacks.",
+        "evolution": "Evolved form of Crimson. Requires red and pink Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
+        "cardSummary": "Exclusive Magical DoT unit that marks enemies, detonates them, and leaves damaging pools.",
+        "alternateSpellings": [
+          "Crimson"
+        ]
+      },
+      "system": {
+        "slug": "crimson-brother",
+        "section": "Exclusive",
+        "sortOrder": 200,
+        "image": "/Anime%20Expeditions/Units/crimson-brother.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Toy Maker",
+        "rarity": "Exclusive",
+        "element": "Dark",
+        "damageType": "Psychic",
+        "role": "Summoner",
+        "obtainment": "Exclusive rewards such as tournaments or limited-time activities rather than the standard banner pool.",
+        "passive": "Summons toys on paths in range instead of normal attacking. Toys scale from this unit\u2019s damage, can gain speed and death AoE as upgrades progress, and later cycles can create tougher mutated toys. Health is split when covering multiple paths.",
+        "activeAbility": "",
+        "evolution": "Listed as this Exclusive form in unit tables. No separate base-to-evo recipe found in the nine-row evolution guides.",
+        "cardSummary": "Exclusive summoner that floods paths with toys instead of using a standard attack loop.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "toy-maker",
+        "section": "Exclusive",
+        "sortOrder": 210,
+        "image": "/Anime%20Expeditions/Units/toy-maker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "True Saint (Holy)",
+        "rarity": "Exclusive",
+        "element": "Light",
+        "damageType": "Magical",
+        "role": "Support / DPS",
+        "obtainment": "Beginner Path and exclusive progression rewards. Often one of the first strong limited units new accounts can secure.",
+        "passive": "Regular attacks apply True Saint Mark to a small group of enemies. Critical attacks spend all marks to deal bonus damage to each marked target, and upgrades raise critical chance.",
+        "activeAbility": "Seize steals a portion of damage from the three strongest allies in range for a long window, concentrating power on this unit.",
+        "evolution": "Evolved form of True Saint. Requires a Holy Pendant, multi-color Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
+        "cardSummary": "Beginner-friendly Exclusive that marks targets and can steal ally damage for a burst window.",
+        "alternateSpellings": [
+          "True Saint"
+        ]
+      },
+      "system": {
+        "slug": "true-saint-holy",
+        "section": "Exclusive",
+        "sortOrder": 220,
+        "image": "/Anime%20Expeditions/Units/true-saint-holy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Student (True Love)",
+        "rarity": "Mythic",
+        "element": "Dark",
+        "damageType": "Physical",
+        "role": "DPS / Summoner",
+        "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
+        "passive": "Every third regular attack copies a follow-up based on the closest ally in range, mixing this unit\u2019s damage with a share of that ally\u2019s damage. Enough total Bleed stacks in range also spawn Bat Spirits that attack a few times before despawning.",
+        "activeAbility": "",
+        "evolution": "Evolved form of Cursed Student. Requires a Student ID, blue and purple Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
+        "cardSummary": "Mythic Physical carry that mimics nearby ally attacks and summons bats from Bleed stacks.",
+        "alternateSpellings": [
+          "Cursed Student"
+        ]
+      },
+      "system": {
+        "slug": "cursed-student-true-love",
+        "section": "Mythic",
+        "sortOrder": 300,
+        "image": "/Anime%20Expeditions/Units/cursed-student-true-love.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elf Mage (Unleashed)",
+        "rarity": "Mythic",
+        "element": "Wind",
+        "damageType": "Magical",
+        "role": "DPS",
+        "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
+        "passive": "Gains Arcane Charges on regular attacks up to a small capacity. Thresholds cast line, circle, and full AoE follow-up spells, and each charge reset permanently boosts Arcane Spell damage up to a stack cap.",
+        "activeAbility": "",
+        "evolution": "Evolved form of Elf Mage. Requires Cosmic Magic, blue and purple Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
+        "cardSummary": "Mythic Magical caster that stacks charges into stronger AoE follow-up spells over a fight.",
+        "alternateSpellings": [
+          "Elf Mage"
+        ]
+      },
+      "system": {
+        "slug": "elf-mage-unleashed",
+        "section": "Mythic",
+        "sortOrder": 310,
+        "image": "/Anime%20Expeditions/Units/elf-mage-unleashed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flame Emperor (Reincarnate)",
+        "rarity": "Mythic",
+        "element": "Flame",
+        "damageType": "Magical",
+        "role": "DPS / Support",
+        "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
+        "passive": "When this unit applies Burn, the burn spreads to several nearest non-burning enemies for extra wave pressure.",
+        "activeAbility": "Wall of Fire places a burning wall on a path in range so enemies that pass through are inflicted with Burn.",
+        "evolution": "Evolved form of Flame Emperor. Requires a Burning Fruit, red and yellow Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
+        "cardSummary": "Mythic Flame unit that spreads Burn and can seal a path with a fire wall.",
+        "alternateSpellings": [
+          "Flame Emperor"
+        ]
+      },
+      "system": {
+        "slug": "flame-emperor-reincarnate",
+        "section": "Mythic",
+        "sortOrder": 320,
+        "image": "/Anime%20Expeditions/Units/flame-emperor-reincarnate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hollow (Blaze)",
+        "rarity": "Mythic",
+        "element": "Flame",
+        "damageType": "Physical",
+        "role": "DPS",
+        "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
+        "passive": "Converts Burn applications on enemies in range into Austere Flames when burn ticks end or when this unit attacks a burning target, dealing a large share of current damage as follow-up flame damage. Works best with burn partners.",
+        "activeAbility": "",
+        "evolution": "Listed as this form in unit tables. No separate base-to-evo recipe found in the nine-row evolution guides.",
+        "cardSummary": "Mythic Physical flame unit that converts Burn into extra Austere Flames damage.",
+        "alternateSpellings": [
+          "Hollow"
+        ]
+      },
+      "system": {
+        "slug": "hollow-blaze",
+        "section": "Mythic",
+        "sortOrder": 330,
+        "image": "/Anime%20Expeditions/Units/hollow-blaze.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lady Giant (Envy)",
+        "rarity": "Mythic",
+        "element": "Terra",
+        "damageType": "Physical",
+        "role": "DPS / Support",
+        "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
+        "passive": "Regular attacks build Rock Chunks that become a rock follow-up throw. Can also summon Stone Walls with health based on current damage, and Giant form changes wall and rock values.",
+        "activeAbility": "Size Control transforms this unit into Giant form for a timed window, greatly raising damage and range while slowing attack speed.",
+        "evolution": "Listed as this form in unit tables. No separate base-to-evo recipe found in the nine-row evolution guides.",
+        "cardSummary": "Mythic Terra bruiser that throws rock follow-ups, raises walls, and can transform into a giant.",
+        "alternateSpellings": [
+          "Lady Giant"
+        ]
+      },
+      "system": {
+        "slug": "lady-giant-envy",
+        "section": "Mythic",
+        "sortOrder": 340,
+        "image": "/Anime%20Expeditions/Units/lady-giant-envy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Puppet (Telekinetic)",
+        "rarity": "Mythic",
+        "element": "Light",
+        "damageType": "Psychic",
+        "role": "DPS / Support",
+        "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
+        "passive": "Periodically marks the strongest unmarked enemy in range so that target takes increased incoming damage. When a marked enemy dies, summons a durable Doll based on this unit\u2019s damage.",
+        "activeAbility": "Complete Control rewinds all enemies in range by a short time window after it unlocks at a later upgrade.",
+        "evolution": "Evolved form of Puppet. Requires a Puppet Heart, pink and purple Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
+        "cardSummary": "Mythic Psychic hybrid that amplifies a marked target, summons a doll, and can rewind waves.",
+        "alternateSpellings": [
+          "Puppet"
+        ]
+      },
+      "system": {
+        "slug": "puppet-telekinetic",
+        "section": "Mythic",
+        "sortOrder": 350,
+        "image": "/Anime%20Expeditions/Units/puppet-telekinetic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reaper (Released)",
+        "rarity": "Mythic",
+        "element": "Light",
+        "damageType": "Physical",
+        "role": "DPS",
+        "obtainment": "Standard or Mini banner and other Mythic pools during progression summons.",
+        "passive": "Permanently gains damage and critical chance after attacking different enemy types. Critical hits can temporarily lower SPA, and stun interactions can swap with a Mirage clone when one exists.",
+        "activeAbility": "Mirage Step relocates this unit within range and leaves a Mirage clone that deals a share of base damage.",
+        "evolution": "Listed as this form in unit tables. No separate base-to-evo recipe found in the nine-row evolution guides.",
+        "cardSummary": "Mythic Physical carry that self-buffs from enemy variety and repositions with Mirage Step.",
+        "alternateSpellings": [
+          "Soul Reaper (Released)",
+          "Reaper",
+          "Soul Reaper"
+        ]
+      },
+      "system": {
+        "slug": "reaper-released",
+        "section": "Mythic",
+        "sortOrder": 360,
+        "image": "/Anime%20Expeditions/Units/reaper-released.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Salmon Sorcerer (Grade 1)",
+        "rarity": "Mythic",
+        "element": "Gale",
+        "damageType": "Magical",
+        "role": "Crowd Control",
+        "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
+        "passive": "Applies a 20% Slow through upgrades. When enemies enter the inner half of range, Plummet applies Stagger for a short stun-style interrupt.",
+        "activeAbility": "",
+        "evolution": "Evolved form of Salmon Sorcerer. Requires a Salmon item, green and blue Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
+        "cardSummary": "Mythic control unit built around Slow and Stagger so damage dealers get more uptime.",
+        "alternateSpellings": [
+          "Salmon Sorcerer"
+        ]
+      },
+      "system": {
+        "slug": "salmon-sorcerer-grade-1",
+        "section": "Mythic",
+        "sortOrder": 370,
+        "image": "/Anime%20Expeditions/Units/salmon-sorcerer-grade-1.png"
+      }
+    },
+    {
+      "item": {
+        "name": "String Demon (Awakened)",
+        "rarity": "Mythic",
+        "element": "Neutral",
+        "damageType": "Magical",
+        "role": "Crowd Control / DPS",
+        "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
+        "passive": "Regular attacks can cocoon hit enemies so they stay stunned until the cocoon is broken or times out, with a bonus damage payout if broken. String Sync also links nearby allies so their attacks can trigger follow-ups that deal this unit\u2019s damage before the strings break.",
+        "activeAbility": "",
+        "evolution": "Evolved form of String Demon. Requires Joker of the Nonsensical Pirates, yellow and pink Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
+        "cardSummary": "Mythic Magical hybrid that cocoons enemies for stall and links allies into follow-up attacks.",
+        "alternateSpellings": [
+          "String Demon"
+        ]
+      },
+      "system": {
+        "slug": "string-demon-awakened",
+        "section": "Mythic",
+        "sortOrder": 380,
+        "image": "/Anime%20Expeditions/Units/string-demon-awakened.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forbidden Teacher",
+        "rarity": "Legendary",
+        "element": "No Element",
+        "damageType": "Magical",
+        "role": "Support",
+        "obtainment": "Standard banner Legendary pool and general progression summons.",
+        "passive": "Teacher Blessing buffs damage for Magical units in range, and the aura grows stronger with each upgrade.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Legendary Magical support that scales an in-range damage buff for Magical allies.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "forbidden-teacher",
+        "section": "Legendary",
+        "sortOrder": 400,
+        "image": "/Anime%20Expeditions/Units/forbidden-teacher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Greed",
+        "rarity": "Legendary",
+        "element": "Dark",
+        "damageType": "Physical",
+        "role": "DPS",
+        "obtainment": "Standard banner Legendary pool and general progression summons.",
+        "passive": "Fox Hunt deals 20% more damage to Boss enemy types.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Legendary Physical unit that hits harder against Boss enemies.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "greed",
+        "section": "Legendary",
+        "sortOrder": 410,
+        "image": "/Anime%20Expeditions/Units/greed.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Queen",
+        "rarity": "Legendary",
+        "element": "Hydro",
+        "damageType": "Magical",
+        "role": "Crowd Control / DPS",
+        "obtainment": "Standard banner Legendary pool and general progression summons.",
+        "passive": "Soul Rend deals 20% more damage to enemies below 20% health. Attacks can Freeze a target for a short window that prevents movement and actions, with an application cooldown, and Freeze counts as stun-style control.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Legendary Hydro unit that freezes targets and finishes low-health enemies harder.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "ice-queen",
+        "section": "Legendary",
+        "sortOrder": 420,
+        "image": "/Anime%20Expeditions/Units/ice-queen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ramen Guy",
+        "rarity": "Legendary",
+        "element": "No Element",
+        "damageType": "Physical",
+        "role": "Economy",
+        "obtainment": "Standard banner Legendary pool and general progression summons.",
+        "passive": "Donbori increases Yen earned from kills by 50%. Capital Lock refunds only 10% of total cost if this unit is sold.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Legendary economy unit that boosts Yen from kills at the cost of a weak sell refund.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "ramen-guy",
+        "section": "Legendary",
+        "sortOrder": 430,
+        "image": "/Anime%20Expeditions/Units/ramen-guy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scissor",
+        "rarity": "Legendary",
+        "element": "Terra",
+        "damageType": "Physical",
+        "role": "DPS",
+        "obtainment": "Standard banner Legendary pool and general progression summons.",
+        "passive": "Stacking Cuts raises damage by 5% on each consecutive regular attack against the same enemy, up to a 20% bonus.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Legendary Physical unit that ramps damage while staying locked onto one target.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "scissor",
+        "section": "Legendary",
+        "sortOrder": 440,
+        "image": "/Anime%20Expeditions/Units/scissor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Hero",
+        "rarity": "Legendary",
+        "element": "No Element",
+        "damageType": "Physical",
+        "role": "Support",
+        "obtainment": "Standard banner Legendary pool and general progression summons.",
+        "passive": "Hero Blessing buffs damage for Physical units in range, and the aura grows stronger with each upgrade.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Legendary Physical support that scales an in-range damage buff for Physical allies.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "the-hero",
+        "section": "Legendary",
+        "sortOrder": 450,
+        "image": "/Anime%20Expeditions/Units/the-hero.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Water Princess",
+        "rarity": "Legendary",
+        "element": "Hydro",
+        "damageType": "Magical",
+        "role": "Support",
+        "obtainment": "Standard banner Legendary pool and general progression summons.",
+        "passive": "Debuff Shield grants a shield to the nearest ally that breaks after blocking one debuff, then regenerates after a short cooldown.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Legendary Hydro support that protects a nearby ally from one debuff at a time.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "water-princess",
+        "section": "Legendary",
+        "sortOrder": 460,
+        "image": "/Anime%20Expeditions/Units/water-princess.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bounty Hunter",
+        "rarity": "Epic",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Epic pool and early progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Early Epic filler damage unit without a documented passive kit.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "bounty-hunter",
+        "section": "Epic",
+        "sortOrder": 500,
+        "image": "/Anime%20Expeditions/Units/bounty-hunter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corps Captain",
+        "rarity": "Epic",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Epic pool and early progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Early Epic filler unit used before Mythic and Legendary options replace it.",
+        "alternateSpellings": [
+          "Corps Captian"
+        ]
+      },
+      "system": {
+        "slug": "corps-captain",
+        "section": "Epic",
+        "sortOrder": 510,
+        "image": "/Anime%20Expeditions/Units/corps-captain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Cyborg",
+        "rarity": "Epic",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Epic pool and early progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Early Epic physical-style filler without a documented passive kit.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "demon-cyborg",
+        "section": "Epic",
+        "sortOrder": 520,
+        "image": "/Anime%20Expeditions/Units/demon-cyborg.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Mage",
+        "rarity": "Epic",
+        "element": "",
+        "damageType": "",
+        "role": "Crowd Control",
+        "obtainment": "Standard banner Epic pool and early progression summons.",
+        "passive": "Beebom lists a movement-speed reduction on hit for a few seconds. BloxInformer groups Epic units as having no passives, so treat this as the only Epic with a claimed control effect until in-game confirmation.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Early Epic control option that may slow enemies before stronger Mythic stalls are available.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "ice-mage",
+        "section": "Epic",
+        "sortOrder": 530,
+        "image": "/Anime%20Expeditions/Units/ice-mage.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nen Hunter",
+        "rarity": "Epic",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Epic pool and early progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Early Epic filler unit without a documented passive kit.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "nen-hunter",
+        "section": "Epic",
+        "sortOrder": 540,
+        "image": "/Anime%20Expeditions/Units/nen-hunter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stone Alchemist",
+        "rarity": "Epic",
+        "element": "",
+        "damageType": "",
+        "role": "Economy",
+        "obtainment": "Standard banner Epic pool and early progression summons.",
+        "passive": "No passive abilities listed in unit guides. Tier guides still treat it as an early farm or income-style placeholder before Ramen Guy.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Early Epic economy-style filler that is usually replaced by stronger farm options.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "stone-alchemist",
+        "section": "Epic",
+        "sortOrder": 550,
+        "image": "/Anime%20Expeditions/Units/stone-alchemist.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carrot",
+        "rarity": "Rare",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Rare pool and the earliest progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Starter Rare filler with no documented passive kit.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "carrot",
+        "section": "Rare",
+        "sortOrder": 600,
+        "image": "/Anime%20Expeditions/Units/carrot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Curly Brow",
+        "rarity": "Rare",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Rare pool and the earliest progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Starter Rare filler used only for the first story stages.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "curly-brow",
+        "section": "Rare",
+        "sortOrder": 610,
+        "image": "/Anime%20Expeditions/Units/curly-brow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kid Assassin",
+        "rarity": "Rare",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Rare pool and the earliest progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Starter Rare filler without a documented passive kit.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "kid-assassin",
+        "section": "Rare",
+        "sortOrder": 620,
+        "image": "/Anime%20Expeditions/Units/kid-assassin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reishi Archer",
+        "rarity": "Rare",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Rare pool and the earliest progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Starter Rare ranged filler for the opening story stages.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "reishi-archer",
+        "section": "Rare",
+        "sortOrder": 630,
+        "image": "/Anime%20Expeditions/Units/reishi-archer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rubber Boy",
+        "rarity": "Rare",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Rare pool and the earliest progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Starter Rare filler without a documented passive kit.",
+        "alternateSpellings": []
+      },
+      "system": {
+        "slug": "rubber-boy",
+        "section": "Rare",
+        "sortOrder": 640,
+        "image": "/Anime%20Expeditions/Units/rubber-boy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thunder Shinobi",
+        "rarity": "Rare",
+        "element": "",
+        "damageType": "",
+        "role": "Starter",
+        "obtainment": "Standard banner Rare pool and the earliest progression summons.",
+        "passive": "No passive abilities listed in unit guides.",
+        "activeAbility": "",
+        "evolution": "No evolution recipe listed in the main evolution guides.",
+        "cardSummary": "Starter Rare filler that is usually replaced as soon as Epic or Legendary pulls arrive.",
+        "alternateSpellings": [
+          "Thunder Shonobi"
+        ]
+      },
+      "system": {
+        "slug": "thunder-shinobi",
+        "section": "Rare",
+        "sortOrder": 650,
+        "image": "/Anime%20Expeditions/Units/thunder-shinobi.png"
+      }
+    }
+  ]
+}

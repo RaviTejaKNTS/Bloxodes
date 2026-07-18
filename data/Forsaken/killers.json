@@ -1,0 +1,282 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Forsaken",
+    "gameSlug": "forsaken",
+    "collection": "killers",
+    "route": "/wiki/forsaken/killers",
+    "catalogCode": "forsaken-killers",
+    "sourceItemCount": 7,
+    "itemFields": [
+      "name",
+      "price",
+      "difficulty",
+      "health",
+      "walkSpeed",
+      "sprintSpeed",
+      "terrorRadius",
+      "playstyle",
+      "passives",
+      "abilities",
+      "signatureAbility",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "price",
+      "difficulty",
+      "health",
+      "walkSpeed",
+      "sprintSpeed",
+      "terrorRadius",
+      "playstyle",
+      "passives",
+      "abilities",
+      "signatureAbility",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Rushdown",
+        "Control",
+        "Deception",
+        "Attrition"
+      ],
+      "badgeField": "difficulty",
+      "subtitleFields": [
+        "price",
+        "playstyle"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "price",
+        "difficulty",
+        "health",
+        "walkSpeed",
+        "sprintSpeed",
+        "terrorRadius",
+        "playstyle",
+        "passives",
+        "abilities",
+        "signatureAbility"
+      ],
+      "tableFields": [
+        "price",
+        "difficulty",
+        "health",
+        "walkSpeed",
+        "sprintSpeed",
+        "terrorRadius",
+        "playstyle",
+        "passives",
+        "abilities",
+        "signatureAbility",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "price": {
+          "kind": "chip",
+          "label": "Price (Player Points)"
+        },
+        "difficulty": {
+          "kind": "chip",
+          "label": "Difficulty"
+        },
+        "health": {
+          "kind": "chip",
+          "label": "Health"
+        },
+        "walkSpeed": {
+          "kind": "chip",
+          "label": "Walk speed"
+        },
+        "sprintSpeed": {
+          "kind": "chip",
+          "label": "Sprint speed"
+        },
+        "terrorRadius": {
+          "kind": "chip",
+          "label": "Terror radius"
+        },
+        "playstyle": {
+          "kind": "plain",
+          "label": "Playstyle"
+        },
+        "passives": {
+          "kind": "detail",
+          "label": "Passives"
+        },
+        "abilities": {
+          "kind": "detail",
+          "label": "Abilities"
+        },
+        "signatureAbility": {
+          "kind": "highlight",
+          "label": "Signature"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Slasher",
+        "price": "Free",
+        "difficulty": "2/5",
+        "health": "1,250",
+        "walkSpeed": "9",
+        "sprintSpeed": "28",
+        "terrorRadius": "45 studs",
+        "playstyle": "Rushdown",
+        "passives": "None listed",
+        "abilities": "Slash, Behead, Gashing Wound, Raging Pace",
+        "signatureAbility": "Raging Pace",
+        "cardSummary": "The free starter killer and Jason redesign. Close-range machete pressure with bleeding, a helpless-inflicting Behead, a heavy Gashing Wound combo, and Raging Pace for burst chase speed and aura reads."
+      },
+      "system": {
+        "slug": "slasher",
+        "section": "Rushdown",
+        "sortOrder": 1,
+        "image": "/Forsaken/Killers/slasher.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "c00lkidd",
+        "price": "900",
+        "difficulty": "3/5",
+        "health": "800",
+        "walkSpeed": "7.75",
+        "sprintSpeed": "28",
+        "terrorRadius": "60 studs",
+        "playstyle": "Aggressive rushdown",
+        "passives": "None listed",
+        "abilities": "Punch, Corrupt Nature, Walkspeed Override, Pizza Delivery",
+        "signatureAbility": "Walkspeed Override",
+        "cardSummary": "A fast, aggressive unlock built around wall-piercing Corrupt Nature shots, a burning Walkspeed Override lunge, and Pizza Delivery bots that chase and reveal survivors. Low health, high tempo."
+      },
+      "system": {
+        "slug": "c00lkidd",
+        "section": "Rushdown",
+        "sortOrder": 2,
+        "image": "/Forsaken/Killers/c00lkidd.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "John Doe",
+        "price": "1,000",
+        "difficulty": "5/5",
+        "health": "1,500",
+        "walkSpeed": "9",
+        "sprintSpeed": "27.25",
+        "terrorRadius": "60 studs",
+        "playstyle": "Map control and traps",
+        "passives": "Natural Malevolence, Unstoppable",
+        "abilities": "Slash, Corrupt Energy, Digital Footprint, 404 Error",
+        "signatureAbility": "Digital Footprint",
+        "cardSummary": "A tanky trapper who reshapes routes with Corrupt Energy spikes, Digital Footprint shadows, and a corruption trail passive. 404 Error reveals living survivors so pressure can be redirected cleanly."
+      },
+      "system": {
+        "slug": "john-doe",
+        "section": "Control",
+        "sortOrder": 3,
+        "image": "/Forsaken/Killers/john-doe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Noli",
+        "price": "1,100",
+        "difficulty": "5/5",
+        "health": "1,111",
+        "walkSpeed": "8",
+        "sprintSpeed": "27.5",
+        "terrorRadius": "80 studs",
+        "playstyle": "Trickster ambush",
+        "passives": "Hallucinations, Prankster",
+        "abilities": "Stab, Void Rush, Nova, Observant",
+        "signatureAbility": "Void Rush",
+        "cardSummary": "A high-difficulty trickster who stacks Hallucination, plants fake generators, curves Void Rush dashes, pulls with Nova, and teleports to generators with Observant to force disoriented survivors into bad fights."
+      },
+      "system": {
+        "slug": "noli",
+        "section": "Deception",
+        "sortOrder": 4,
+        "image": "/Forsaken/Killers/noli.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "1x1x1x1",
+        "price": "1,250",
+        "difficulty": "4/5",
+        "health": "1,100",
+        "walkSpeed": "8",
+        "sprintSpeed": "27",
+        "terrorRadius": "60 studs",
+        "playstyle": "Zoner and snowballer",
+        "passives": "None listed",
+        "abilities": "Slash, Mass Infection, Entanglement, Unstable Eye, Rejuvenate the Rotten",
+        "signatureAbility": "Mass Infection",
+        "cardSummary": "A zoner who applies Poison and Glitched through Daemonshanks, pulls targets with Entanglement, scouts with Unstable Eye, and can reanimate downed survivors as hostile minions with Rejuvenate the Rotten."
+      },
+      "system": {
+        "slug": "1x1x1x1",
+        "section": "Control",
+        "sortOrder": 5,
+        "image": "/Forsaken/Killers/1x1x1x1.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Guest 666",
+        "price": "1,666",
+        "difficulty": "3/5",
+        "health": "2,500",
+        "walkSpeed": "9",
+        "sprintSpeed": "27",
+        "terrorRadius": "80 studs",
+        "playstyle": "Attrition and snowball",
+        "passives": "Manic Fixation, Bloodhound, Hellforged Will",
+        "abilities": "Carving Slash, Eviscerate, Demonic Pursuit, Infernal Cry, Blood Rush / Blood Hunt",
+        "signatureAbility": "Blood Hunt",
+        "cardSummary": "Also called Sixer. Spreads Hemorrhage, farms Blood Orbs to cut cooldowns, then converts a full Blood meter into Blood Hunt darkness that amplifies the kit and highlights survivors across the map."
+      },
+      "system": {
+        "slug": "guest-666",
+        "section": "Attrition",
+        "sortOrder": 6,
+        "image": "/Forsaken/Killers/guest-666.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nosferatu",
+        "price": "1,922",
+        "difficulty": "4/5",
+        "health": "1,750",
+        "walkSpeed": "7.5",
+        "sprintSpeed": "27.5",
+        "terrorRadius": "60 studs",
+        "playstyle": "Stealth and mobility",
+        "passives": "Levitation",
+        "abilities": "Lacerate, Bloodhook, Cataclysm, Hunter's Feast, Ascension",
+        "signatureAbility": "Ascension",
+        "cardSummary": "The most expensive public killer. Silent levitation, invisibility tools, a Bloodhook reel minigame, blood-trail Cataclysm paths, and Ascension bat flight into a diving Dismount finish define a high skill-ceiling stealth kit."
+      },
+      "system": {
+        "slug": "nosferatu",
+        "section": "Deception",
+        "sortOrder": 7,
+        "image": "/Forsaken/Killers/nosferatu.webp"
+      }
+    }
+  ]
+}

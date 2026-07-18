@@ -635,7 +635,10 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "driving-empire-vehicles": 30_000,
   "evomon-monsters": 30_000,
   // Image-dense bestiary: many fish icons push page HTML over the size gate at default weight.
-  "fish-it-fish": 30_000
+  "fish-it-fish": 30_000,
+  // Image-dense Evade nextbots/maps: 262 and 88 image cards exceed the HTML size gate at default weight.
+  "evade-nextbots": 18_000,
+  "evade-maps": 22_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {

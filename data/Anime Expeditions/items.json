@@ -1,0 +1,770 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "items",
+    "route": "/wiki/anime-expeditions/items",
+    "catalogCode": "anime-expeditions-items",
+    "itemFields": [
+      "name",
+      "source",
+      "use",
+      "usedFor",
+      "craftRecipe",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "source",
+      "use",
+      "usedFor",
+      "craftRecipe",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Currencies",
+        "Rerolls & Locks",
+        "Sprites",
+        "Crafting Materials",
+        "Food",
+        "Evolution Materials",
+        "Summon Items",
+        "Raid & Event Utility"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "use"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "source",
+        "use",
+        "usedFor",
+        "craftRecipe",
+        "availability"
+      ],
+      "tableFields": [
+        "source",
+        "use",
+        "usedFor",
+        "craftRecipe",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "source": {
+          "kind": "normal",
+          "label": "Source"
+        },
+        "use": {
+          "kind": "normal",
+          "label": "Use"
+        },
+        "usedFor": {
+          "kind": "chip",
+          "label": "Used for"
+        },
+        "craftRecipe": {
+          "kind": "chip",
+          "label": "Craft recipe"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Gems",
+        "source": "Story mode, challenges, quests, achievements, codes, events, and Beginner Path",
+        "use": "Main summon currency for unit banners",
+        "usedFor": "Summoning",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Primary premium-style currency spent on banners to pull units."
+      },
+      "system": {
+        "slug": "gems",
+        "section": "Currencies",
+        "sortOrder": 1,
+        "image": "/Anime%20Expeditions/Items/gems.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold",
+        "source": "Story mode, challenges, quests, daily activities, events, and selling shiny units",
+        "use": "Buy Gold Shop goods, cosmetics, and other shop items",
+        "usedFor": "Gold Shop",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Soft currency used for the Gold Shop, cosmetics, and many upgrade costs."
+      },
+      "system": {
+        "slug": "gold",
+        "section": "Currencies",
+        "sortOrder": 2,
+        "image": "/Anime%20Expeditions/Items/gold.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Event Coins",
+        "source": "Completing events",
+        "use": "Spend in the event shop",
+        "usedFor": "Event shop",
+        "craftRecipe": "",
+        "availability": "Event",
+        "cardSummary": "Limited event currency for buying progression items from the event shop."
+      },
+      "system": {
+        "slug": "event-coins",
+        "section": "Currencies",
+        "sortOrder": 3,
+        "image": "/Anime%20Expeditions/Items/event-coins.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Expedition Coins",
+        "source": "Limited-time expedition events",
+        "use": "Spend in the Expedition Shop",
+        "usedFor": "Expedition Shop",
+        "craftRecipe": "",
+        "availability": "Event",
+        "cardSummary": "Expedition event currency for the Expedition Shop progression track."
+      },
+      "system": {
+        "slug": "expedition-coins",
+        "section": "Currencies",
+        "sortOrder": 4,
+        "image": "/Anime%20Expeditions/Items/expedition-coins.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Crown",
+        "source": "Tournaments",
+        "use": "Spend in the tournament shop",
+        "usedFor": "Tournament shop",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Tournament reward currency used in the tournament shop."
+      },
+      "system": {
+        "slug": "crown",
+        "section": "Currencies",
+        "sortOrder": 5,
+        "image": "/Anime%20Expeditions/Items/crown.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Fuel Cells",
+        "source": "Limited-time events",
+        "use": "Expedition-exclusive resource earned from event nodes",
+        "usedFor": "Expeditions",
+        "craftRecipe": "",
+        "availability": "Event",
+        "cardSummary": "Expedition event resource gained by completing event nodes."
+      },
+      "system": {
+        "slug": "fuel-cells",
+        "section": "Currencies",
+        "sortOrder": 6,
+        "image": "/Anime%20Expeditions/Items/fuel-cells.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit Tokens",
+        "source": "Completing Raids",
+        "use": "Buy items from the Spirit Society raid shop",
+        "usedFor": "Spirit City raid shop",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Raid token currency for the Spirit Society / Spirit City raid shop."
+      },
+      "system": {
+        "slug": "spirit-tokens",
+        "section": "Currencies",
+        "sortOrder": 7,
+        "image": "/Anime%20Expeditions/Items/spirit-tokens.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Raid Tokens",
+        "source": "Completing Raids",
+        "use": "Buy items from the general raid shop",
+        "usedFor": "General raid shop",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "General raid token currency for the main raid shop."
+      },
+      "system": {
+        "slug": "raid-tokens",
+        "section": "Currencies",
+        "sortOrder": 8,
+        "image": "/Anime%20Expeditions/Items/raid-tokens.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Trait Crystal",
+        "source": "Quests, star missions, challenges, tournaments, achievements, codes, bundles, shops, and Time Chamber",
+        "use": "Reroll a unit's trait for stronger passive bonuses",
+        "usedFor": "Trait reroll",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Consumable used at the Trait Reroll stand to roll a new trait on a unit."
+      },
+      "system": {
+        "slug": "trait-crystal",
+        "section": "Rerolls & Locks",
+        "sortOrder": 9,
+        "image": "/Anime%20Expeditions/Items/trait-crystal.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Stat Reroll",
+        "source": "Quests, rewards, event shop, challenges, bundles, and Gold Shop",
+        "use": "Reroll a unit's damage, range, and SPA potential stats",
+        "usedFor": "Stat potential",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Consumable that rerolls a unit's potential tiers for damage, SPA, and range."
+      },
+      "system": {
+        "slug": "stat-reroll",
+        "section": "Rerolls & Locks",
+        "sortOrder": 10,
+        "image": "/Anime%20Expeditions/Items/stat-reroll.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Stat Lock",
+        "source": "Event shop, Gold Shop, challenges, bundles, and other shops",
+        "use": "Lock one unit stat potential while rerolling the rest",
+        "usedFor": "Stat potential",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Protects a chosen potential stat so it stays fixed during a Stat Reroll."
+      },
+      "system": {
+        "slug": "stat-lock",
+        "section": "Rerolls & Locks",
+        "sortOrder": 11,
+        "image": "/Anime%20Expeditions/Items/stat-lock.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Equipment Reroll",
+        "source": "Challenges, event shop, Gold Shop (about 2500 Gold), raid shops, and bundles",
+        "use": "Reroll an equipment piece's potential stats",
+        "usedFor": "Equipment potential",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Consumable that randomizes potential rolls on equipped gear. Available from challenges and the Gold Shop."
+      },
+      "system": {
+        "slug": "equipment-reroll",
+        "section": "Rerolls & Locks",
+        "sortOrder": 12,
+        "image": "/Anime%20Expeditions/Items/equipment-reroll.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Equipment Lock",
+        "source": "Event shop, Gold Shop, challenges, raid shops, and bundles",
+        "use": "Lock one equipment potential stat while rerolling",
+        "usedFor": "Equipment potential",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Keeps a chosen equipment potential locked so other stats can be rerolled safely."
+      },
+      "system": {
+        "slug": "equipment-lock",
+        "section": "Rerolls & Locks",
+        "sortOrder": 13,
+        "image": "/Anime%20Expeditions/Items/equipment-lock.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Grey Sprites",
+        "source": "Story stages, farming, challenges, and rewards",
+        "use": "Base craft material for higher-tier colored and rainbow sprites",
+        "usedFor": "Crafting sprites",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Core sprite material farmed from content and converted into color sprites at the Crafting Station."
+      },
+      "system": {
+        "slug": "grey-sprites",
+        "section": "Sprites",
+        "sortOrder": 14,
+        "image": "/Anime%20Expeditions/Items/grey-sprites.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Sprites",
+        "source": "Crafted at the Crafting Station from Grey Sprites; also challenges",
+        "use": "Unit evolution, equipment crafting",
+        "usedFor": "Evolution and craft",
+        "craftRecipe": "5 Grey Sprites",
+        "availability": "Permanent",
+        "cardSummary": "Blue craft sprite used in many unit evolutions and equipment crafts."
+      },
+      "system": {
+        "slug": "blue-sprites",
+        "section": "Sprites",
+        "sortOrder": 15,
+        "image": "/Anime%20Expeditions/Items/blue-sprites.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Sprites",
+        "source": "Crafted at the Crafting Station from Grey Sprites; also challenges",
+        "use": "Unit evolution, equipment crafting, and ascension",
+        "usedFor": "Evolution, craft, and ascension",
+        "craftRecipe": "5 Grey Sprites",
+        "availability": "Permanent",
+        "cardSummary": "Green craft sprite spent on evolutions, equipment crafts, and ascension costs."
+      },
+      "system": {
+        "slug": "green-sprites",
+        "section": "Sprites",
+        "sortOrder": 16,
+        "image": "/Anime%20Expeditions/Items/green-sprites.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Sprites",
+        "source": "Crafted at the Crafting Station from Grey Sprites; also challenges",
+        "use": "Unit evolution",
+        "usedFor": "Evolution",
+        "craftRecipe": "5 Grey Sprites",
+        "availability": "Permanent",
+        "cardSummary": "Pink craft sprite required for several unit evolution recipes."
+      },
+      "system": {
+        "slug": "pink-sprites",
+        "section": "Sprites",
+        "sortOrder": 17,
+        "image": "/Anime%20Expeditions/Items/pink-sprites.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Sprites",
+        "source": "Crafted at the Crafting Station from Grey Sprites; also challenges",
+        "use": "Unit evolution",
+        "usedFor": "Evolution",
+        "craftRecipe": "5 Grey Sprites",
+        "availability": "Permanent",
+        "cardSummary": "Purple craft sprite used in unit evolution recipes."
+      },
+      "system": {
+        "slug": "purple-sprites",
+        "section": "Sprites",
+        "sortOrder": 18,
+        "image": "/Anime%20Expeditions/Items/purple-sprites.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Sprites",
+        "source": "Crafted from Grey Sprites at the Crafting Station",
+        "use": "Unit evolution and equipment crafting",
+        "usedFor": "Evolution and craft",
+        "craftRecipe": "Grey Sprites",
+        "availability": "Permanent",
+        "cardSummary": "Red craft sprite used for unit evolutions and some equipment crafts."
+      },
+      "system": {
+        "slug": "red-sprites",
+        "section": "Sprites",
+        "sortOrder": 19,
+        "image": "/Anime%20Expeditions/Items/red-sprites.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Yellow Sprites",
+        "source": "Crafted from Grey Sprites at the Crafting Station",
+        "use": "Unit evolution and equipment crafting",
+        "usedFor": "Evolution and craft",
+        "craftRecipe": "Grey Sprites",
+        "availability": "Permanent",
+        "cardSummary": "Yellow craft sprite used for unit evolutions and some equipment crafts."
+      },
+      "system": {
+        "slug": "yellow-sprites",
+        "section": "Sprites",
+        "sortOrder": 20,
+        "image": "/Anime%20Expeditions/Items/yellow-sprites.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Sprites",
+        "source": "Crafted at the Crafting Station from Grey Sprites; also challenges",
+        "use": "High-value unit evolution material",
+        "usedFor": "Evolution",
+        "craftRecipe": "30 Grey Sprites",
+        "availability": "Permanent",
+        "cardSummary": "Premium sprite used in most evolution recipes. Crafted from a large Grey Sprite cost."
+      },
+      "system": {
+        "slug": "rainbow-sprites",
+        "section": "Sprites",
+        "sortOrder": 21,
+        "image": "/Anime%20Expeditions/Items/rainbow-sprites.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Mana Flask",
+        "source": "Gold Shop",
+        "use": "Crafting ingredient",
+        "usedFor": "Crafting",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Shop-bought flask used as a crafting ingredient."
+      },
+      "system": {
+        "slug": "mana-flask",
+        "section": "Crafting Materials",
+        "sortOrder": 22,
+        "image": "/Anime%20Expeditions/Items/mana-flask.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Timber",
+        "source": "Limited-time events",
+        "use": "Crafting material",
+        "usedFor": "Crafting",
+        "craftRecipe": "",
+        "availability": "Event",
+        "cardSummary": "Event-earned timber used as a crafting material."
+      },
+      "system": {
+        "slug": "cursed-timber",
+        "section": "Crafting Materials",
+        "sortOrder": 23,
+        "image": "/Anime%20Expeditions/Items/cursed-timber.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Equipment Scrap",
+        "source": "Limited-time events",
+        "use": "Expedition-exclusive crafting or event resource",
+        "usedFor": "Expeditions",
+        "craftRecipe": "",
+        "availability": "Event",
+        "cardSummary": "Event expedition resource tied to completing event nodes."
+      },
+      "system": {
+        "slug": "equipment-scrap",
+        "section": "Crafting Materials",
+        "sortOrder": 24,
+        "image": "/Anime%20Expeditions/Items/equipment-scrap.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny Candy",
+        "source": "Completing raids",
+        "use": "Feed to units for XP",
+        "usedFor": "Unit XP",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Raid-earned food item that grants unit experience when fed."
+      },
+      "system": {
+        "slug": "bunny-candy",
+        "section": "Food",
+        "sortOrder": 25,
+        "image": "/Anime%20Expeditions/Items/bunny-candy.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Boba",
+        "source": "Gold Shop and story modes",
+        "use": "Feed to units for XP",
+        "usedFor": "Unit XP",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Food item from the Gold Shop and story content that levels units with XP."
+      },
+      "system": {
+        "slug": "cursed-boba",
+        "section": "Food",
+        "sortOrder": 26,
+        "image": "/Anime%20Expeditions/Items/cursed-boba.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Delicious Pie",
+        "source": "Gold Shop",
+        "use": "Feed to units for XP",
+        "usedFor": "Unit XP",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Gold Shop food item that grants unit experience when fed."
+      },
+      "system": {
+        "slug": "delicious-pie",
+        "section": "Food",
+        "sortOrder": 27,
+        "image": "/Anime%20Expeditions/Items/delicious-pie.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Frown Fruit",
+        "source": "Gold Shop",
+        "use": "Feed to units for XP",
+        "usedFor": "Unit XP",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Gold Shop food item used to level units with XP."
+      },
+      "system": {
+        "slug": "frown-fruit",
+        "section": "Food",
+        "sortOrder": 28,
+        "image": "/Anime%20Expeditions/Items/frown-fruit.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Flower",
+        "source": "Gold Shop",
+        "use": "Feed to units for XP",
+        "usedFor": "Unit XP",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Gold Shop food item that grants unit experience when fed."
+      },
+      "system": {
+        "slug": "red-flower",
+        "section": "Food",
+        "sortOrder": 29,
+        "image": "/Anime%20Expeditions/Items/red-flower.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Burning Fruit",
+        "source": "Flame Emperor unit quest",
+        "use": "Required material to evolve Flame Emperor",
+        "usedFor": "Flame Emperor (Reincarnate)",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Special evolution material earned from Flame Emperor's unit quest trial."
+      },
+      "system": {
+        "slug": "burning-fruit",
+        "section": "Evolution Materials",
+        "sortOrder": 30,
+        "image": "/Anime%20Expeditions/Items/burning-fruit.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmic Magic",
+        "source": "Elf Mage unit quest",
+        "use": "Required material to evolve Elf Mage",
+        "usedFor": "Elf Mage (Unleashed)",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Special evolution material from Elf Mage's unit quest, used with sprites and gold to evolve."
+      },
+      "system": {
+        "slug": "cosmic-magic",
+        "section": "Evolution Materials",
+        "sortOrder": 31,
+        "image": "/Anime%20Expeditions/Items/cosmic-magic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Pendant",
+        "source": "True Saint evolution requirements (full obtainment still incomplete in guides)",
+        "use": "Required material to evolve True Saint",
+        "usedFor": "True Saint (Holy)",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Special evolution material for True Saint. Public guides still list obtainment details as incomplete."
+      },
+      "system": {
+        "slug": "holy-pendant",
+        "section": "Evolution Materials",
+        "sortOrder": 32,
+        "image": "/Anime%20Expeditions/Items/holy-pendant.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Joker of the Nonsensical Pirates",
+        "source": "String Demon unit quest",
+        "use": "Required material to evolve String Demon",
+        "usedFor": "String Demon (Awakened)",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Special evolution material earned from String Demon's unit quest trial."
+      },
+      "system": {
+        "slug": "joker-of-the-nonsensical-pirates",
+        "section": "Evolution Materials",
+        "sortOrder": 33,
+        "image": "/Anime%20Expeditions/Items/joker-of-the-nonsensical-pirates.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Puppet Heart",
+        "source": "Puppet unit quest",
+        "use": "Required material to evolve Puppet",
+        "usedFor": "Puppet (Telekinetic)",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Special evolution material from Puppet's unit quest, used with sprites and gold to evolve."
+      },
+      "system": {
+        "slug": "puppet-heart",
+        "section": "Evolution Materials",
+        "sortOrder": 34,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Salmon",
+        "source": "Salmon Sorcerer unit quest",
+        "use": "Required material to evolve Salmon Sorcerer",
+        "usedFor": "Salmon Sorcerer (Grade 1)",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Special evolution material earned from Salmon Sorcerer's unit quest trial."
+      },
+      "system": {
+        "slug": "salmon",
+        "section": "Evolution Materials",
+        "sortOrder": 35,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Student ID",
+        "source": "Cursed Student unit quest",
+        "use": "Required material to evolve Cursed Student",
+        "usedFor": "Cursed Student (True Love)",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Special evolution material earned from Cursed Student's unit quest trial."
+      },
+      "system": {
+        "slug": "student-id",
+        "section": "Evolution Materials",
+        "sortOrder": 36,
+        "image": "/Anime%20Expeditions/Items/student-id.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Beginner Tickets",
+        "source": "Complete Beginner Path chapters",
+        "use": "Summon on the Beginner Banner",
+        "usedFor": "Beginner Banner",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Beginner Path tickets used on the Beginner Banner, which guarantees Mythic units after enough pulls."
+      },
+      "system": {
+        "slug": "beginner-tickets",
+        "section": "Summon Items",
+        "sortOrder": 37,
+        "image": "/Anime%20Expeditions/Items/beginner-tickets.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Luck Potion",
+        "source": "Robux shop",
+        "use": "Raises the chance of summoning a higher-tier unit",
+        "usedFor": "Summoning boost",
+        "craftRecipe": "",
+        "availability": "Robux",
+        "cardSummary": "Paid summon boost potion that increases odds of higher-tier unit pulls."
+      },
+      "system": {
+        "slug": "luck-potion",
+        "section": "Summon Items",
+        "sortOrder": 38,
+        "image": "/Anime%20Expeditions/Items/luck-potion.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Super Luck Potion",
+        "source": "Robux shop",
+        "use": "Strongly raises the chance of summoning a higher-tier unit",
+        "usedFor": "Summoning boost",
+        "craftRecipe": "",
+        "availability": "Robux",
+        "cardSummary": "Stronger paid summon boost potion for higher-tier unit odds."
+      },
+      "system": {
+        "slug": "super-luck-potion",
+        "section": "Summon Items",
+        "sortOrder": 39,
+        "image": "/Anime%20Expeditions/Items/super-luck-potion.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit City Totem",
+        "source": "Spirit City raid shop",
+        "use": "Increases unit damage in Spirit City raids by 10%",
+        "usedFor": "Spirit City raids",
+        "craftRecipe": "",
+        "availability": "Permanent",
+        "cardSummary": "Raid shop buff item that grants a 10% damage boost during Spirit City raids."
+      },
+      "system": {
+        "slug": "spirit-city-totem",
+        "section": "Raid & Event Utility",
+        "sortOrder": 40,
+        "image": "/Anime%20Expeditions/Items/spirit-city-totem.jpg"
+      }
+    }
+  ]
+}

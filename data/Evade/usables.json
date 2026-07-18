@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Evade",
+    "gameSlug": "evade",
+    "collection": "usables",
+    "route": "/wiki/evade/usables",
+    "catalogCode": "evade-usables",
+    "sourceItemCount": 13,
+    "itemFields": [
+      "name",
+      "category",
+      "role",
+      "price",
+      "unlockLevel",
+      "effect",
+      "notes",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "category",
+      "role",
+      "price",
+      "unlockLevel",
+      "effect",
+      "notes",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Consumables",
+        "Deployables"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [
+        "role"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "category",
+        "role",
+        "price",
+        "unlockLevel",
+        "effect",
+        "notes"
+      ],
+      "tableFields": [
+        "category",
+        "role",
+        "price",
+        "unlockLevel",
+        "effect",
+        "notes",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "category": {
+          "kind": "highlight",
+          "label": "Type"
+        },
+        "role": {
+          "kind": "plain",
+          "label": "Role"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "unlockLevel": {
+          "kind": "chip",
+          "label": "Level"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Cola",
+        "category": "Consumable",
+        "role": "Mobility",
+        "price": "$70",
+        "unlockLevel": "Level 0+",
+        "effect": "Raises max speed and acceleration by roughly 50% for 6 seconds after a short drink animation.",
+        "notes": "Stacks with Speed Pad for a much stronger boost. Cannot be drunk while carrying a downed player.",
+        "availability": "Public shop",
+        "cardSummary": "Cheap personal speed drink for breaking chases, super jumps, and short reposition bursts. Best early usable when you need a reliable self-boost."
+      },
+      "system": {
+        "slug": "cola",
+        "section": "Consumables",
+        "sortOrder": 1,
+        "image": "/Evade/Usables/cola.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Defibrillator",
+        "category": "Consumable",
+        "role": "Revive",
+        "price": "$50",
+        "unlockLevel": "Level 10+",
+        "effect": "Instantly revives one selected downed player on use.",
+        "notes": "Targeted revive instead of an area throw. Safer when only one ally is down and nextbots are close.",
+        "availability": "Public shop",
+        "cardSummary": "Point-and-revive tool for picking up a single teammate without stopping for a full manual revive. Strong when you need a clean rescue under pressure."
+      },
+      "system": {
+        "slug": "defibrillator",
+        "section": "Consumables",
+        "sortOrder": 2,
+        "image": "/Evade/Usables/defibrillator.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Decoy Grenade",
+        "category": "Consumable",
+        "role": "Control",
+        "price": "$115",
+        "unlockLevel": "Level 10+",
+        "effect": "Throwable grenade that spawns a stationary decoy projection for about 5 seconds to distract nextbots.",
+        "notes": "Maximum of 3 throws per round before the wheel shows TOO MANY. Decoy is stationary unlike Decoy Panel.",
+        "availability": "Public shop",
+        "cardSummary": "Throw-and-forget bait for peeling nextbots off your path or a revive. Pricier than basic tools, so save it for tight escapes."
+      },
+      "system": {
+        "slug": "decoy-grenade",
+        "section": "Consumables",
+        "sortOrder": 3,
+        "image": "/Evade/Usables/decoy-grenade.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Smoke Grenade",
+        "category": "Consumable",
+        "role": "Control",
+        "price": "$130",
+        "unlockLevel": "Level 20+",
+        "effect": "Throwable smoke that hides players inside it from nearby nextbots for about 7 seconds in a moderate radius.",
+        "notes": "Maximum of 3 throws per round. Duration and radius were reduced in a February 2026 balance pass.",
+        "availability": "Public shop",
+        "cardSummary": "Expensive concealment grenade for buying a short window to revive, hide, or cut line of sight. Best when the team needs a shared safe pocket."
+      },
+      "system": {
+        "slug": "smoke-grenade",
+        "section": "Consumables",
+        "sortOrder": 4,
+        "image": "/Evade/Usables/smoke-grenade.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Revive Grenade",
+        "category": "Consumable",
+        "role": "Revive",
+        "price": "$40",
+        "unlockLevel": "Level 50+",
+        "effect": "Throwable grenade that revives downed players within about 20 studs of the blast after a short fuse.",
+        "notes": "High level unlock. Useful for clustered downs or places too dangerous to stop and revive manually.",
+        "availability": "Public shop",
+        "cardSummary": "Late unlock that mass-revives nearby downed allies with a throw. Ideal for group saves when standing still would get you killed."
+      },
+      "system": {
+        "slug": "revive-grenade",
+        "section": "Consumables",
+        "sortOrder": 5,
+        "image": "/Evade/Usables/revive-grenade.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Floodlight",
+        "category": "Deployable",
+        "role": "Vision",
+        "price": "$30",
+        "unlockLevel": "Level 0+",
+        "effect": "Places a large light source that illuminates a wide dark area.",
+        "notes": "Counts toward the deployable placement limit. Especially useful on dark maps and darkness-style special rounds.",
+        "availability": "Public shop",
+        "cardSummary": "Cheapest deployable for lighting dark maps and special rounds. Place it where the team will actually pass so the light pays off."
+      },
+      "system": {
+        "slug": "floodlight",
+        "section": "Deployables",
+        "sortOrder": 6,
+        "image": "/Evade/Usables/floodlight.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Beacon",
+        "category": "Deployable",
+        "role": "Support",
+        "price": "$30",
+        "unlockLevel": "Level 5+",
+        "effect": "Lets teammates see outlined players from anywhere on the map while the beacon is active.",
+        "notes": "Team location tool. Counts toward the deployable placement limit.",
+        "availability": "Public shop",
+        "cardSummary": "Low-cost team marker that keeps friends visible across the map, including when someone is downed. Strong for coordinated groups."
+      },
+      "system": {
+        "slug": "beacon",
+        "section": "Deployables",
+        "sortOrder": 7,
+        "image": "/Evade/Usables/beacon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Barrier",
+        "category": "Deployable",
+        "role": "Control",
+        "price": "$60",
+        "unlockLevel": "Level 5+",
+        "effect": "Places a semi-permeable barricade that blocks nextbots while players can still pass through.",
+        "notes": "Nextbot contact shortens how long it holds. Leave no gaps in doorways or bots may path around it.",
+        "availability": "Public shop",
+        "cardSummary": "Core stall tool for sealing chokepoints while you revive or escape. Place carefully so nextbots hit the wall instead of a gap."
+      },
+      "system": {
+        "slug": "barrier",
+        "section": "Deployables",
+        "sortOrder": 8,
+        "image": "/Evade/Usables/barrier.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sensor",
+        "category": "Deployable",
+        "role": "Detection",
+        "price": "$60",
+        "unlockLevel": "Level 5+",
+        "effect": "Plays a ping that speeds up as nextbots get closer.",
+        "notes": "Static placement version of Radar-style awareness. Cheaper per use than carrying Radar as a utility, but it does not move with you.",
+        "availability": "Public shop",
+        "cardSummary": "Placed proximity alarm for maze layouts and blind corners. Drop it near high-traffic routes so the team hears threats early."
+      },
+      "system": {
+        "slug": "sensor",
+        "section": "Deployables",
+        "sortOrder": 9,
+        "image": "/Evade/Usables/sensor.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Landmine",
+        "category": "Deployable",
+        "role": "Control",
+        "price": "$80",
+        "unlockLevel": "Level 10+",
+        "effect": "Arms after a short deploy delay, then stuns nextbots that step on it.",
+        "notes": "Does not harm normal players. Good on narrow paths and nextbot spawns for a short escape window.",
+        "availability": "Public shop",
+        "cardSummary": "Deployable stun trap for buying a few seconds when a nextbot commits through a choke. Place where bots must path."
+      },
+      "system": {
+        "slug": "landmine",
+        "section": "Deployables",
+        "sortOrder": 10,
+        "image": "/Evade/Usables/landmine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Pad",
+        "category": "Deployable",
+        "role": "Mobility",
+        "price": "$100",
+        "unlockLevel": "Level 15+",
+        "effect": "Grants a brief +50% speed boost to players who walk over it.",
+        "notes": "Does not stack with other Speed Pads. Stacks with Cola for a much larger combined boost.",
+        "availability": "Public shop",
+        "cardSummary": "Shared team speed plate for escape lanes and regroup routes. Place where allies will actually step during chases."
+      },
+      "system": {
+        "slug": "speed-pad",
+        "section": "Deployables",
+        "sortOrder": 11,
+        "image": "/Evade/Usables/speed-pad.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Teleporter",
+        "category": "Deployable",
+        "role": "Mobility",
+        "price": "$80",
+        "unlockLevel": "Level 25+",
+        "effect": "Links to other teleporters on the map so players can beam between pads, with a 30 second cooldown after use.",
+        "notes": "Needs at least two pads to be useful. Placement can fail pathfinding checks if bots cannot reach the spot or height is invalid.",
+        "availability": "Public shop",
+        "cardSummary": "Map-link deployable for long escapes and saferoom routes once you can field a pair. Plan both ends before you rely on it mid-chase."
+      },
+      "system": {
+        "slug": "teleporter",
+        "section": "Deployables",
+        "sortOrder": 12,
+        "image": "/Evade/Usables/teleporter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jump Pad",
+        "category": "Deployable",
+        "role": "Mobility",
+        "price": "$80",
+        "unlockLevel": "Level 30+",
+        "effect": "Launches players who walk over it high into the air after a short delay.",
+        "notes": "Crouch-sliding over it launches higher. Needs a relatively flat surface to place.",
+        "availability": "Public shop",
+        "cardSummary": "High-unlock launch pad for rooftops, hard-to-reach ledges, and emergency vertical escapes. Place on flat ground in your escape line."
+      },
+      "system": {
+        "slug": "jump-pad",
+        "section": "Deployables",
+        "sortOrder": 13,
+        "image": "/Evade/Usables/jump-pad.webp"
+      }
+    }
+  ]
+}

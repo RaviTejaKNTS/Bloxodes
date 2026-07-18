@@ -1,0 +1,345 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "100 Days At Sea",
+    "gameSlug": "100-days-at-sea",
+    "collection": "islands",
+    "route": "/wiki/100-days-at-sea/islands",
+    "catalogCode": "100-days-at-sea-islands",
+    "itemFields": [
+      "locationKind",
+      "whenToVisit",
+      "threats",
+      "lootOrNpc",
+      "linkedBoss",
+      "howToFind",
+      "cardSummary"
+    ],
+    "columns": [
+      "locationKind",
+      "whenToVisit",
+      "threats",
+      "lootOrNpc",
+      "linkedBoss",
+      "howToFind",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Visit priority",
+      "sectionOrder": [
+        "Early & low risk",
+        "Combat & rescue",
+        "Hard key islands",
+        "Special regions",
+        "Structures & objectives"
+      ],
+      "badgeField": "whenToVisit",
+      "subtitleFields": [
+        "locationKind"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "locationKind",
+        "whenToVisit",
+        "threats",
+        "lootOrNpc",
+        "linkedBoss"
+      ],
+      "tableFields": [
+        "locationKind",
+        "whenToVisit",
+        "threats",
+        "lootOrNpc",
+        "linkedBoss",
+        "howToFind",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "locationKind": {
+          "kind": "plain",
+          "label": "kind"
+        },
+        "whenToVisit": {
+          "kind": "chip",
+          "label": "when to visit"
+        },
+        "threats": {
+          "kind": "detail",
+          "label": "threats"
+        },
+        "lootOrNpc": {
+          "kind": "detail",
+          "label": "loot / NPC"
+        },
+        "linkedBoss": {
+          "kind": "plain",
+          "label": "linked boss"
+        },
+        "howToFind": {
+          "kind": "detail",
+          "label": "how to find"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "Narrowed islands and regions collection: named POIs, island types, and major regions. Not an exhaustive unique-island roster.",
+      "rejectedSources": [
+        "SuperCheats 8-island biome list (Starter/Jungle/Desert/Shipwreck/Volcano/Ice/Kraken/Bermuda and associated fabricated bosses)."
+      ],
+      "watchlist": [
+        "Buku Buku Island (single Rival Rigs video mention)",
+        "Cargo Ship (boss showcase; may not be a land island)",
+        "Individual Ice sub-island proper names",
+        "Magellan total island count"
+      ],
+      "imagePolicy": "text-first",
+      "imageAcceptedMissing": true,
+      "imageAcceptedMissingReason": "No clean per-location in-game stills found. Guide-site images blocked by CDN; YouTube maxres thumbnails are edited collages with heavy title text; Roblox universe thumbs are raft/marketing art, not location-specific. Parent approved text-first when clean location screenshots cannot be sourced.",
+      "imageSourcesSearched": [
+        "Pro Game Guides beginner guide (Cloudflare 403 on wp-content screenshots)",
+        "YouTube location showcase maxresdefault (Ice Region, Volcano, Rival Rigs, Strongholds) \u2014 edited thumbnails rejected",
+        "Roblox place/universe thumbnails \u2014 not per-island",
+        "BloxInformer wiki shell \u2014 no location image pack",
+        "100daysatsea.com \u2014 no row-level location art",
+        "Fandom wiki shell \u2014 no usable location gallery"
+      ],
+      "imageMissingByItem": {
+        "fisherman-island": "accepted-missing: no clean location still",
+        "mini-islands": "accepted-missing: no clean location still",
+        "survivor-islands": "accepted-missing: no clean location still",
+        "alien-island": "accepted-missing: no clean location still",
+        "tower-island": "accepted-missing: no clean location still",
+        "fortress-islands": "accepted-missing: no clean location still",
+        "ice-region": "accepted-missing: no clean location still",
+        "volcano-region": "accepted-missing: no clean location still",
+        "rival-rigs": "accepted-missing: no clean location still",
+        "radio-towers": "accepted-missing: no clean location still",
+        "ghost-galleon": "accepted-missing: no clean location still",
+        "strongholds": "accepted-missing: no clean location still"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Fisherman Island",
+        "locationKind": "Named island",
+        "whenToVisit": "Early",
+        "threats": "Usually light compared with later key islands; still watch water predators while approaching.",
+        "lootOrNpc": "Often two chests (one commonly holds a Dinghy). Fisherman NPC trades food for higher-tier gear and buildings.",
+        "linkedBoss": null,
+        "howToFind": "Nearest useful landfall after spawn for most runs. Build Map Radar soon so later islands are easier to mark.",
+        "cardSummary": "Best first island stop. Secure the early chests and Dinghy when they appear, then use food trades with the Fisherman to upgrade loadout before longer sails."
+      },
+      "system": {
+        "slug": "fisherman-island",
+        "section": "Early & low risk",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Islands",
+        "locationKind": "Island type",
+        "whenToVisit": "Early",
+        "threats": "Low combat pressure; main risk is over-sailing without a return plan.",
+        "lootOrNpc": "One or two chests plus loose ground loot on many of these small stops.",
+        "linkedBoss": null,
+        "howToFind": "Scattered around the open sea. Check them while traveling between larger targets once Map Radar is up.",
+        "cardSummary": "A type of small island, not a single unique pin. Scoop chests and loose loot whenever you pass one; they are easy filler value between bigger objectives."
+      },
+      "system": {
+        "slug": "mini-islands",
+        "section": "Early & low risk",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Survivor Islands",
+        "locationKind": "Island type",
+        "whenToVisit": "Mid",
+        "threats": "Ghost Pirate waves (melee and gunner) before you can free anyone. Undergeared visits often fail.",
+        "lootOrNpc": "Rescued survivors act like long-term helpers for the run after you clear the fight.",
+        "linkedBoss": null,
+        "howToFind": "Radio building marks survivor locations on the map. Prepare weapons and healing before committing.",
+        "cardSummary": "An island type focused on rescue combat, not one fixed island name. Clear Ghost Pirate defenses, free survivors, and treat these as mid-run power spikes rather than day-one stops."
+      },
+      "system": {
+        "slug": "survivor-islands",
+        "section": "Combat & rescue",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Alien Island",
+        "locationKind": "Named island",
+        "whenToVisit": "Mid",
+        "threats": "Alien invasion pressure around nights 6\u20137 before the island becomes a clean loot target.",
+        "lootOrNpc": "High-tier loot after the invasion is handled. Transponder item is used to pin the island location.",
+        "linkedBoss": null,
+        "howToFind": "Survive or repel the early alien invasion event, then use the Transponder to locate Alien Island.",
+        "cardSummary": "Mid-run destination after the alien invasion window. Once you have the Transponder path, treat it as a high-value loot island rather than a blind early sail."
+      },
+      "system": {
+        "slug": "alien-island",
+        "section": "Combat & rescue",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tower Island",
+        "locationKind": "Named island",
+        "whenToVisit": "Late",
+        "threats": "Heavy guards. Solo early attempts are a common wipe.",
+        "lootOrNpc": "Key-related progression and strong guarded rewards once you can clear the defenders.",
+        "linkedBoss": null,
+        "howToFind": "Identify the tower landmark once Map Radar coverage is solid. Delay until weapons and defenses are ready.",
+        "cardSummary": "Late hard island tied to keys and elite guards. Save it for co-op or well-geared solo runs; it is not an early exploration target."
+      },
+      "system": {
+        "slug": "tower-island",
+        "section": "Hard key islands",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fortress islands",
+        "locationKind": "Island type",
+        "whenToVisit": "Late",
+        "threats": "Dense enemy defense similar to Tower Island. Underprepared solo crews usually die.",
+        "lootOrNpc": "Key islands with high-tier guarded loot after the clear.",
+        "linkedBoss": null,
+        "howToFind": "Marked as key fortresses on exploration routes. Group them with Tower Island in late-run planning.",
+        "cardSummary": "A type of heavily guarded key island, not a single map pin. Treat fortress stops as late or co-op content after you have real weapons and a retreat plan."
+      },
+      "system": {
+        "slug": "fortress-islands",
+        "section": "Hard key islands",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Region",
+        "locationKind": "Region",
+        "whenToVisit": "Mid\u2013late",
+        "threats": "Cold-region enemies across multiple ice islands, plus the Ice Biome boss path (community videos often call the boss Yeti).",
+        "lootOrNpc": "Penguin rescues for Arctic Rescue progress, Ice Mage unlock path after the region objectives, and other cold-region rewards.",
+        "linkedBoss": "Yeti / King Of The Snow",
+        "howToFind": "Sail into the ice biome once the raft is stable. Map Radar and mid-run gear matter more than day-one scouting.",
+        "cardSummary": "One region card for the whole Ice Biome, which spans multiple ice islands without publicly stable unique names. Focus on penguin rescues and the Ice Biome boss rather than inventing sub-island labels."
+      },
+      "system": {
+        "slug": "ice-region",
+        "section": "Special regions",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Volcano Region",
+        "locationKind": "Region",
+        "whenToVisit": "Mid\u2013late",
+        "threats": "Fire Golems and high combat pressure on the volcano route before the boss fight.",
+        "lootOrNpc": "Magma-route rewards after clearing the chain (community leads include Magma Chest and Magma Staff; verify in-run).",
+        "linkedBoss": "Lord of Lava",
+        "howToFind": "Locate the volcano area mid-run with Map Radar and combat prep. Common route: defeat three Fire Golems, throw their bodies into the volcano, then fight below.",
+        "cardSummary": "Single region card for the volcano chain. Prep weapons and healing, clear Fire Golems, open the volcano, then face Lord of Lava without treating this as an early loot island."
+      },
+      "system": {
+        "slug": "volcano-region",
+        "section": "Special regions",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rival Rigs",
+        "locationKind": "Structure set",
+        "whenToVisit": "Mid\u2013late",
+        "threats": "Defended rival platforms. Size and pressure scale across the three rigs in a session.",
+        "lootOrNpc": "Combat loot and structure rewards from clearing each rig. Session badge goal for defeating all three.",
+        "linkedBoss": null,
+        "howToFind": "Use Radio Towers and map markers to track the three rival rigs in one run. Badge wording confirms exactly three.",
+        "cardSummary": "One card for the full set of three Rival Rigs, not three invent-named platforms. Clear all three in a single session for the badge objective and treat them as mid-to-late combat POIs."
+      },
+      "system": {
+        "slug": "rival-rigs",
+        "section": "Structures & objectives",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Radio Towers",
+        "locationKind": "Structure set",
+        "whenToVisit": "Mid",
+        "threats": "Usually lighter than full rig assaults, but still treat travel and night pressure seriously.",
+        "lootOrNpc": "Progresses the Rival Rigs route by helping you locate or unlock the next rig targets.",
+        "linkedBoss": null,
+        "howToFind": "Sail to tower landmarks tied to the Rival Rigs chain. Multiple towers appear across a full clear.",
+        "cardSummary": "Support structures for the Rival Rigs objective chain. Visit towers as you hunt the three rigs rather than treating them as a separate endgame region."
+      },
+      "system": {
+        "slug": "radio-towers",
+        "section": "Structures & objectives",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Galleon",
+        "locationKind": "Ship dungeon",
+        "whenToVisit": "Mid\u2013late",
+        "threats": "Ship-board combat and dungeon pressure. Repeatable enough that multi-clear badges exist.",
+        "lootOrNpc": "Combat rewards from clearing the galleon. Strongholds videos show it as part of the key/structure loop.",
+        "linkedBoss": "Ghost Galleon",
+        "howToFind": "Appears as a major combat ship objective. Bring a full weapon and healing plan before boarding.",
+        "cardSummary": "Repeatable ghost-ship dungeon objective rather than a starter land island. Soft-links to the bosses collection for fight detail; this card only flags why and when to sail to it."
+      },
+      "system": {
+        "slug": "ghost-galleon",
+        "section": "Structures & objectives",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Strongholds",
+        "locationKind": "Structure set",
+        "whenToVisit": "Late",
+        "threats": "Ghost Pirate stronghold defenses and multi-key progression pressure.",
+        "lootOrNpc": "Key progression (multiple stronghold keys) and high-end structure loot after the clear.",
+        "linkedBoss": null,
+        "howToFind": "Track key drops and stronghold landmarks once mid-run combat is stable. Often grouped with Ghost Galleon in showcases.",
+        "cardSummary": "Late structure chain for keys and heavy ghost-pirate combat. Plan it after early islands and basic gear; leave deep fight steps to the bosses or combat pages."
+      },
+      "system": {
+        "slug": "strongholds",
+        "section": "Structures & objectives",
+        "sortOrder": 12,
+        "image": null
+      }
+    }
+  ]
+}

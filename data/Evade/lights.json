@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Evade",
+    "gameSlug": "evade",
+    "collection": "lights",
+    "route": "/wiki/evade/lights",
+    "catalogCode": "evade-lights",
+    "sourceItemCount": 4,
+    "itemFields": [
+      "name",
+      "cost",
+      "levelRequirement",
+      "howToObtain",
+      "lightStyle",
+      "teamVisibility",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "cost",
+      "levelRequirement",
+      "howToObtain",
+      "lightStyle",
+      "teamVisibility",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Lights"
+      ],
+      "badgeField": null,
+      "subtitleFields": [
+        "howToObtain"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "cost",
+        "levelRequirement",
+        "lightStyle",
+        "teamVisibility",
+        "howToObtain"
+      ],
+      "tableFields": [
+        "cost",
+        "levelRequirement",
+        "howToObtain",
+        "lightStyle",
+        "teamVisibility",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "levelRequirement": {
+          "kind": "chip",
+          "label": "Level"
+        },
+        "howToObtain": {
+          "kind": "plain",
+          "label": "How to get"
+        },
+        "lightStyle": {
+          "kind": "plain",
+          "label": "Light style"
+        },
+        "teamVisibility": {
+          "kind": "highlight",
+          "label": "Visibility"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Flashlight",
+        "cost": "Free",
+        "levelRequirement": "Level 0+",
+        "howToObtain": "Unlocked free on first join",
+        "lightStyle": "Aimed cone beam",
+        "teamVisibility": "Casts light others can see",
+        "cardSummary": "The free starter light. Equip it in your light slot and press F (or the mobile light icon) to shine a cone of white light toward your aim. Solid for early dark rounds before you buy a shop light."
+      },
+      "system": {
+        "slug": "flashlight",
+        "section": "Lights",
+        "sortOrder": 1,
+        "image": "/Evade/lights/flashlight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lantern",
+        "cost": "$1500",
+        "levelRequirement": "Level 3+",
+        "howToObtain": "Equipment shop",
+        "lightStyle": "Omni radius glow",
+        "teamVisibility": "Casts light others can see",
+        "cardSummary": "Shop light that glows in a wide radius around you instead of a narrow cone. Buy it at Level 3 or higher for broad area lighting that is easier to keep active while moving."
+      },
+      "system": {
+        "slug": "lantern",
+        "section": "Lights",
+        "sortOrder": 2,
+        "image": "/Evade/lights/lantern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headlamp",
+        "cost": "$2000",
+        "levelRequirement": "Level 15+",
+        "howToObtain": "Equipment shop",
+        "lightStyle": "Head-mounted hands-free light",
+        "teamVisibility": "Personal wearable light",
+        "cardSummary": "A headband light worn on your character. It frees your hands compared with a held Flashlight and works as a weaker personal vision-style light than Night Vision. Unlocks at Level 15 for $2000."
+      },
+      "system": {
+        "slug": "headlamp",
+        "section": "Lights",
+        "sortOrder": 3,
+        "image": "/Evade/lights/headlamp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Night Vision",
+        "cost": "$2500",
+        "levelRequirement": "Level 25+",
+        "howToObtain": "Equipment shop",
+        "lightStyle": "Personal green night-vision overlay",
+        "teamVisibility": "Self-only; does not cast light for others",
+        "cardSummary": "Wearable night-vision goggles that tint your view green and cover a very large personal radius. Other players cannot see your light. Strong for dark special rounds, but much less effective in extreme ambient darkness such as Maze during Darkness."
+      },
+      "system": {
+        "slug": "night-vision",
+        "section": "Lights",
+        "sortOrder": 4,
+        "image": "/Evade/lights/night-vision.png"
+      }
+    }
+  ]
+}

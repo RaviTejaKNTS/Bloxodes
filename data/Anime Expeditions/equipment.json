@@ -1,0 +1,468 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "equipment",
+    "route": "/wiki/anime-expeditions/equipment",
+    "catalogCode": "anime-expeditions-equipment",
+    "itemFields": [
+      "equipmentType",
+      "boundUnit",
+      "statBonuses",
+      "passiveName",
+      "passiveEffect",
+      "source",
+      "dropChance",
+      "craftLocation",
+      "notes",
+      "cardSummary"
+    ],
+    "columns": [
+      "equipmentType",
+      "boundUnit",
+      "statBonuses",
+      "passiveName",
+      "passiveEffect",
+      "source",
+      "dropChance",
+      "craftLocation",
+      "notes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Standard Equipment",
+        "Unit-Specific Equipment"
+      ],
+      "badgeField": "equipmentType",
+      "subtitleFields": [
+        "boundUnit"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "equipmentType",
+        "boundUnit",
+        "statBonuses",
+        "passiveName",
+        "source",
+        "dropChance",
+        "craftLocation"
+      ],
+      "tableFields": [
+        "equipmentType",
+        "boundUnit",
+        "statBonuses",
+        "passiveName",
+        "passiveEffect",
+        "source",
+        "dropChance",
+        "craftLocation",
+        "notes"
+      ],
+      "fieldPresentation": {
+        "equipmentType": {
+          "kind": "highlight",
+          "label": "Type"
+        },
+        "boundUnit": {
+          "kind": "plain",
+          "label": "Unit"
+        },
+        "statBonuses": {
+          "kind": "plain",
+          "label": "Stats"
+        },
+        "passiveName": {
+          "kind": "chip",
+          "label": "Passive"
+        },
+        "passiveEffect": {
+          "kind": "detail",
+          "label": "Passive effect"
+        },
+        "source": {
+          "kind": "plain",
+          "label": "Source"
+        },
+        "dropChance": {
+          "kind": "chip",
+          "label": "Drop chance"
+        },
+        "craftLocation": {
+          "kind": "plain",
+          "label": "Craft"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Kunai",
+        "equipmentType": "Standard",
+        "boundUnit": "Any unit",
+        "statBonuses": "+1% to +10% Damage; -1% to -5% SPA",
+        "passiveName": "",
+        "passiveEffect": "",
+        "source": "School Grounds",
+        "dropChance": "",
+        "craftLocation": "",
+        "notes": "",
+        "cardSummary": "Early standard piece from School Grounds that rolls damage and SPA for any unit."
+      },
+      "system": {
+        "slug": "kunai",
+        "section": "Standard Equipment",
+        "sortOrder": 1,
+        "image": "/Anime%20Expeditions/equipment/kunai.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Katana",
+        "equipmentType": "Standard",
+        "boundUnit": "Any unit",
+        "statBonuses": "+1% to +10% Physical DMG Dealt; +1% to +5% Damage",
+        "passiveName": "",
+        "passiveEffect": "",
+        "source": "Flower Forest",
+        "dropChance": "",
+        "craftLocation": "",
+        "notes": "",
+        "cardSummary": "Flower Forest standard gear that pads physical damage and overall damage for any unit."
+      },
+      "system": {
+        "slug": "katana",
+        "section": "Standard Equipment",
+        "sortOrder": 2,
+        "image": "/Anime%20Expeditions/equipment/katana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magic Orb",
+        "equipmentType": "Standard",
+        "boundUnit": "Any unit",
+        "statBonuses": "+1% to +10% Range; +1% to +5% Damage",
+        "passiveName": "",
+        "passiveEffect": "",
+        "source": "Rose Kingdom",
+        "dropChance": "",
+        "craftLocation": "",
+        "notes": "",
+        "cardSummary": "Rose Kingdom standard piece for range and damage rolls on any unit."
+      },
+      "system": {
+        "slug": "magic-orb",
+        "section": "Standard Equipment",
+        "sortOrder": 3,
+        "image": "/Anime%20Expeditions/equipment/magic-orb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Warrior's Axe",
+        "equipmentType": "Standard",
+        "boundUnit": "Any unit",
+        "statBonuses": "+1% to +10% Physical DMG Dealt; -1% to -5% SPA",
+        "passiveName": "",
+        "passiveEffect": "",
+        "source": "Fairy King Forest",
+        "dropChance": "",
+        "craftLocation": "",
+        "notes": "",
+        "cardSummary": "Fairy King Forest standard axe that boosts physical damage and SPA for any unit."
+      },
+      "system": {
+        "slug": "warriors-axe",
+        "section": "Standard Equipment",
+        "sortOrder": 4,
+        "image": "/Anime%20Expeditions/equipment/warriors-axe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magic Book",
+        "equipmentType": "Standard",
+        "boundUnit": "Any unit",
+        "statBonuses": "+5% to +20% Magical DMG Dealt",
+        "passiveName": "",
+        "passiveEffect": "",
+        "source": "King's Tomb",
+        "dropChance": "",
+        "craftLocation": "",
+        "notes": "",
+        "cardSummary": "King's Tomb standard book with a wide magical damage roll for any unit."
+      },
+      "system": {
+        "slug": "magic-book",
+        "section": "Standard Equipment",
+        "sortOrder": 5,
+        "image": "/Anime%20Expeditions/equipment/magic-book.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shinigami Sword",
+        "equipmentType": "Standard",
+        "boundUnit": "Any unit",
+        "statBonuses": "+5.41% Critical Chance; +3.28% Damage",
+        "passiveName": "Shinigami Sword",
+        "passiveEffect": "Increase Damage by 0.84% for each enemy in range (Capacity: 15).",
+        "source": "Spirit City Raid Hard (reported); exact drop route still listed TBA on some guides",
+        "dropChance": "~3.5% on Hard (reported)",
+        "craftLocation": "",
+        "notes": "Usable by any unit. One guide notes it pairs well with 8th Sword. Published crit and damage values may reflect a sample roll rather than a full range.",
+        "cardSummary": "Standard raid sword with crit and a stacking damage passive per enemy in range; drop details are still incomplete across guides."
+      },
+      "system": {
+        "slug": "shinigami-sword",
+        "section": "Standard Equipment",
+        "sortOrder": 6,
+        "image": "/Anime%20Expeditions/equipment/shinigami-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Promise Ring",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "Cursed Student (True Love)",
+        "statBonuses": "+1% to +10% Damage; -1% to -5% SPA",
+        "passiveName": "Spirit Bats",
+        "passiveEffect": "Every 20 total stacks of Bleed in this unit's range: summon a Bat Spirit at this unit's position (Capacity: 3). Bat Spirits deal 25% of this unit's current damage per attack and despawn after 3 attacks.",
+        "source": "School Grounds (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped.",
+        "cardSummary": "Cursed Student exclusive that turns stacked Bleed in range into short-lived Bat Spirit summons."
+      },
+      "system": {
+        "slug": "promise-ring",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 7,
+        "image": "/Anime%20Expeditions/equipment/promise-ring.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Technique Amplifier",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "Salmon Sorcerer (Grade 1)",
+        "statBonuses": "-1% to -5% SPA; +1% to +5% Range",
+        "passiveName": "Crumble Away",
+        "passiveEffect": "Apply Slow based on the current attack: Explode 20%, Blast Away 35%, Twist 50%, Crush 65%.",
+        "source": "School Grounds (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped.",
+        "cardSummary": "Salmon Sorcerer exclusive that adds attack-linked Slow values on top of SPA and range rolls."
+      },
+      "system": {
+        "slug": "technique-amplifier",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 8,
+        "image": "/Anime%20Expeditions/equipment/technique-amplifier.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hell's Flower",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "Hollow (Blaze)",
+        "statBonuses": "+1% to +10% Damage; -1% to -5% SPA",
+        "passiveName": "Radial Flames",
+        "passiveEffect": "If an enemy with Burn stops ticking within this unit's range, convert 1 burn application into Austere Flames dealing 85% of this unit's current damage. Austere Flames instances from Radial Flames do not stack.",
+        "source": "Flower Forest (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped.",
+        "cardSummary": "Hollow exclusive that converts ending Burn ticks in range into a single Austere Flames burst."
+      },
+      "system": {
+        "slug": "hells-flower",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 9,
+        "image": "/Anime%20Expeditions/equipment/hells-flower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Emperor's Attire",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "Flame Emperor (Reincarnate)",
+        "statBonuses": "+1% to +10% Damage; +1% to +5% Range",
+        "passiveName": "Wildfire",
+        "passiveEffect": "On applying Burn, spread Burn to the 5 nearest enemies that do not already have Burn.",
+        "source": "Rose Kingdom (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped.",
+        "cardSummary": "Flame Emperor exclusive that spreads new Burn applications to nearby unburned enemies."
+      },
+      "system": {
+        "slug": "emperors-attire",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 10,
+        "image": "/Anime%20Expeditions/equipment/emperors-attire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Webbed Fruit",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "String Demon (Awakened)",
+        "statBonuses": "+1% to +10% Range; -1% to -5% SPA",
+        "passiveName": "Cocoon of Carnage",
+        "passiveEffect": "Every 5 regular attacks cocoon enemies. Cocooned enemies are stunned for 10 hits or 5 seconds. If the cocoon breaks after 10 hits, deal 125% of this unit's current damage. If it is not broken before 5 seconds, the cocoon despawns.",
+        "source": "Rose Kingdom (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped.",
+        "cardSummary": "String Demon exclusive that cocoons enemies every few attacks for control or a break burst."
+      },
+      "system": {
+        "slug": "webbed-fruit",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 11,
+        "image": "/Anime%20Expeditions/equipment/webbed-fruit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boulder",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "Lady Giant (Envy)",
+        "statBonuses": "-1% to -5% SPA; +1% to +5% Range",
+        "passiveName": "Stone Wall",
+        "passiveEffect": "Summon a Stone Wall every 12 seconds (Capacity: 2). In Base Form the wall has 75% of this unit's current damage as health. In Giant Form the wall has 50% of this unit's current damage as health.",
+        "source": "Fairy King Forest (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped.",
+        "cardSummary": "Lady Giant exclusive that periodically spawns Stone Walls with form-based health scaling."
+      },
+      "system": {
+        "slug": "boulder",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 12,
+        "image": "/Anime%20Expeditions/equipment/boulder.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Calamity's Eye",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "Puppet (Telekinetic)",
+        "statBonuses": "+1% to +10% Damage; +1% to +5% Range",
+        "passiveName": "Puppet Creation",
+        "passiveEffect": "When an enemy with Puppet Mark from this unit dies, summon a Doll in front of the killed enemy (Capacity: 1). Dolls have 200% of this unit's current damage as health.",
+        "source": "Fairy King Forest (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped.",
+        "cardSummary": "Puppet exclusive that spawns a durable Doll when marked enemies die."
+      },
+      "system": {
+        "slug": "calamitys-eye",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 13,
+        "image": "/Anime%20Expeditions/equipment/calamitys-eye.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elven Battle Staff",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "Elf Mage (Unleashed)",
+        "statBonuses": "-1% to -5% SPA; +1% to +5% Damage",
+        "passiveName": "Arcane Spells",
+        "passiveEffect": "Arcane Spells count as Follow-Up Attacks. At 3 charges cast Old Magic (line AoE at 100% current damage). At 5 charges cast Eruption (circle AoE at 125% current damage and Mana Burn). At 7 charges cast Storm (full AoE at 150% current damage).",
+        "source": "King's Tomb (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped.",
+        "cardSummary": "Elf Mage exclusive that turns charge thresholds into stronger follow-up Arcane Spells."
+      },
+      "system": {
+        "slug": "elven-battle-staff",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 14,
+        "image": "/Anime%20Expeditions/equipment/elven-battle-staff.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit of the Moonblade",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "Reaper (Released)",
+        "statBonuses": "+2.8% Critical Chance; +3.7% Critical Damage",
+        "passiveName": "Adaptation",
+        "passiveEffect": "This unit gains permanent buffs after attacking different enemy types. For each enemy type attacked: increase Damage by 10% and Critical Chance by 10%.",
+        "source": "Spirit City Raid Act 1 (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped. Published crit values may reflect a sample roll rather than a full range.",
+        "cardSummary": "Reaper exclusive that stacks permanent damage and crit chance by hitting different enemy types."
+      },
+      "system": {
+        "slug": "spirit-of-the-moonblade",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 15,
+        "image": "/Anime%20Expeditions/equipment/spirit-of-the-moonblade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hair Bells",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "8th Sword (Berserk)",
+        "statBonuses": "+2.26% Damage; +1.04% Range",
+        "passiveName": "Demonic Presence / Savage Rebound",
+        "passiveEffect": "Demonic Presence: enemies within 50% of this unit's range take 15% of this unit's current damage every 1 second. Savage Rebound: when this unit is stunned, immediately cleanse the stun and perform a Follow-Up Attack (Thunderclap Cut) at 125% of current damage. All of this unit's Follow-Up Attacks apply Dismembered.",
+        "source": "Spirit City Raid Act 1 (Mastery)",
+        "dropChance": "5% (20 pity)",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped. Published damage and range values may reflect a sample roll rather than a full range.",
+        "cardSummary": "8th Sword exclusive with a damage aura plus stun cleanse and a strong follow-up attack."
+      },
+      "system": {
+        "slug": "hair-bells",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 16,
+        "image": "/Anime%20Expeditions/equipment/hair-bells.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hexed Blade",
+        "equipmentType": "Unit-specific",
+        "boundUnit": "Shadow (Divine)",
+        "statBonuses": "+1% to +10% Damage; +1% to +5% Range",
+        "passiveName": "Winged Spirit",
+        "passiveEffect": "On Upgrade 3, summon a Winged Spirit at this unit's position that circles at 50% of this unit's range. The Winged Spirit deals 75% of this unit's current damage every 5 seconds at its current location and applies Stun.",
+        "source": "Crafting Station",
+        "dropChance": "",
+        "craftLocation": "Armory Forge (Expedition Hub)",
+        "notes": "Unit-locked. Most exclusive gear requires the unit's evolved form before it can be equipped. No Story map drop is listed; craft-focused.",
+        "cardSummary": "Shadow exclusive craft piece that summons a circling Winged Spirit after Upgrade 3."
+      },
+      "system": {
+        "slug": "hexed-blade",
+        "section": "Unit-Specific Equipment",
+        "sortOrder": 17,
+        "image": "/Anime%20Expeditions/equipment/hexed-blade.png"
+      }
+    }
+  ]
+}
