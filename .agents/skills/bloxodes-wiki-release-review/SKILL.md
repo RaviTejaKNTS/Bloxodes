@@ -1,20 +1,13 @@
 ---
 name: bloxodes-wiki-release-review
-description: Review and release Codex-prepared or agent-prepared Bloxodes wiki batches after both collection pages and the wiki hub are complete. Use when the user asks Codex to review ready rows in Writing plans/wiki-pages-progress.md, open localhost pages, wait for per-game approval, then git-push approved game files and seed approved wiki/collection pages to production.
+description: Review and release Codex-prepared or agent-prepared Bloxodes wiki batches after both collection pages and the wiki hub are complete. Use when the user asks Codex to review completed wiki artifacts, open localhost pages, wait for per-game approval, then release approved game files and seed approved wiki/collection pages to production.
 ---
 
 # Bloxodes Wiki Release Review
 
-Use this as the Codex release gate after Codex agents finish a game wiki batch. This skill reviews all eligible games, waits for explicit per-game approval, then releases only the approved games.
+Use this after agents finish a game wiki batch. Readiness comes from the actual wiki and collection artifacts, not a planning tracker. Review the requested games, wait for explicit per-game approval, then release only the approved games.
 
-## Hard Gate
-
-Only review or publish a game when its row in `Writing plans/wiki-pages-progress.md` has both:
-
-- `Collections` = `✅`
-- `Wiki` = `✅`
-
-Do not review, publish, stage, or seed collection-only work. A game without a checked wiki page is not eligible.
+Do not publish collection-only work. Require the actual wiki `final.json` and at least one completed collection `final.json`; a missing or stale planning-row/checkmark is never a blocker.
 
 ## Read First
 
@@ -22,13 +15,12 @@ Do not review, publish, stage, or seed collection-only work. A game without a ch
 2. `scripts/AGENTS.md`
 3. `.agents/skills/bloxodes-game-collection-workflow-runner/SKILL.md`
 4. `.agents/skills/bloxodes-wiki-workflow-runner/SKILL.md`
-5. `Writing plans/wiki-pages-progress.md`
 
 ## Review Phase
 
-1. Parse the progress table and list every eligible row where `Collections` and `Wiki` are both `✅`.
-2. Exclude rows already marked `Prod` = `✅` unless the user explicitly asks to recheck them.
-3. If the user named specific games, restrict to those games, but still require both checkmarks.
+1. Use the games named by the user. If the user asks for all completed games, discover candidates from `tmp/content-workspace/*/wiki/*/final.json` and matching collection finals.
+2. Check production rows to avoid republishing an already-live game unless the user explicitly asks to update or recheck it.
+3. Never create or edit a planning-tracker row merely to make a game eligible.
 4. For each eligible game, inspect:
 - `tmp/content-workspace/<game-slug>/wiki/<game-slug>/final.json`
 - `tmp/content-workspace/<game-slug>/collections/*/final.json`
@@ -93,14 +85,7 @@ For shared files, do not stage the whole file if it includes unapproved games. S
 ## Git And Deploy
 
 1. Show `git status --short` and confirm the staged file list contains only approved game files.
-2. Run the relevant checks before commit. At minimum:
-
-```bash
-npm run typecheck:web
-npm run build:web
-```
-
-If the repo has known unrelated TypeScript/script failures, report them clearly and rely on the narrower checks already run only when the failure is demonstrably unrelated.
+2. Reuse the wiki, collection, dataset, Browser, and HTML-size checks completed above. Do not add a separate full typecheck or local production build: run only targeted changed-source checks, and let the production workflow perform the one deployable build before changing the live container.
 
 3. Commit with a message naming the approved game(s).
 4. Push the current branch only after the staged scope is correct.
@@ -148,13 +133,7 @@ Do not manually enqueue revalidation by default. Poll live pages first; inspect 
 
 ## Finish
 
-Only after production readback and live URL checks pass:
-
-1. Update the approved game rows in `Writing plans/wiki-pages-progress.md`:
-- `Codex Review` = `✅`
-- `Prod` = `✅`
-2. Do not stage the progress file unless the user explicitly asks.
-3. Return:
+Only after production readback and live URL checks pass, return:
 - approved games released
 - commit and push proof
 - deploy proof

@@ -27,7 +27,7 @@ on:
       purge_cloudflare:
         description: "Force a full Cloudflare purge"
         required: true
-        default: "true"
+        default: "false"
         type: choice
         options:
           - "true"
@@ -45,6 +45,7 @@ jobs:
       runtime_code: ${{ steps.scope.outputs.runtime_code }}
       dataset: ${{ steps.scope.outputs.dataset }}
       smoke_paths: ${{ steps.scope.outputs.smoke_paths }}
+      purge_tags: ${{ steps.scope.outputs.purge_tags }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -61,7 +62,8 @@ jobs:
           deploy=false
           runtime_code=false
           dataset=false
-          printf '/\n' > /tmp/smoke-paths.txt
+          : > /tmp/smoke-paths.txt
+          : > /tmp/purge-tags.txt
 
           add_path() {
             if ! grep -Fxq "$1" /tmp/smoke-paths.txt; then
@@ -69,10 +71,18 @@ jobs:
             fi
           }
 
+          add_tag() {
+            if ! grep -Fxq "$1" /tmp/purge-tags.txt; then
+              printf '%s\n' "$1" >> /tmp/purge-tags.txt
+            fi
+          }
+
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
             if [ "$DISPATCH_DEPLOY" = "true" ]; then
               deploy=true
               runtime_code=true
+              add_path "/"
+              add_tag "site"
             fi
           else
             if [ -z "$BEFORE_SHA" ] || [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ]; then
@@ -80,7 +90,7 @@ jobs:
             fi
             while IFS= read -r -d '' file; do
               case "$file" in
-                data/*|apps/web/src/data/*|apps/web/public/*)
+                data/*)
                   deploy=true
                   dataset=true
                   add_path "/wiki"
@@ -88,38 +98,51 @@ jobs:
                     */quiz.json) add_path "/quizzes" ;;
                   esac
                   ;;
+                apps/web/src/data/*)
+                  deploy=true
+                  dataset=true
+                  add_path "/"
+                  ;;
+                apps/web/public/*)
+                  deploy=true
+                  dataset=true
+                  ;;
                 apps/web/*|Dockerfile|package.json|package-lock.json)
                   deploy=true
                   runtime_code=true
                   case "$file" in
-                    *"/codes/"*) add_path "/codes" ;;
-                    *"/wiki/"*|*game-collection*) add_path "/wiki" ;;
-                    *"/catalog/"*) add_path "/catalog" ;;
-                    *"/tools/"*) add_path "/tools" ;;
-                    *"/checklists/"*|*Checklist*) add_path "/checklists" ;;
-                    *"/quizzes/"*|*Quiz*) add_path "/quizzes" ;;
-                    *"/events/"*) add_path "/events" ;;
-                    *"/articles/"*) add_path "/articles" ;;
-                    *"/stats/"*|*/stats.ts) add_path "/stats" ;;
+                    apps/web/src/app/sitemap.xml/*|apps/web/src/app/sitemaps/*|apps/web/src/app/feed.xml/*)
+                      add_path "/sitemap.xml"
+                      add_tag "sitemap"
+                      ;;
+                    *"/codes/"*) add_path "/codes"; add_tag "codes-index"; add_tag "codes" ;;
+                    *"/wiki/"*|*game-collection*) add_path "/wiki"; add_tag "wiki-index"; add_tag "wiki"; add_tag "wiki-collection-index" ;;
+                    *"/catalog/"*) add_path "/catalog"; add_tag "catalog-index"; add_tag "catalog" ;;
+                    *"/tools/"*) add_path "/tools"; add_tag "tools-index"; add_tag "tools" ;;
+                    *"/checklists/"*|*Checklist*) add_path "/checklists"; add_tag "checklists-index"; add_tag "checklists" ;;
+                    *"/quizzes/"*|*Quiz*) add_path "/quizzes"; add_tag "quizzes-index"; add_tag "quizzes" ;;
+                    *"/events/"*) add_path "/events"; add_tag "events-index"; add_tag "events" ;;
+                    *"/articles/"*) add_path "/articles"; add_tag "articles-index"; add_tag "articles" ;;
+                    *"/stats/"*|*/stats.ts) add_path "/stats"; add_tag "stats" ;;
                   esac
                   ;;
               esac
             done < <(git diff --name-only -z "$BEFORE_SHA" "$HEAD_SHA")
           fi
 
-          if [ "$runtime_code" = "true" ] && [ "$(wc -l < /tmp/smoke-paths.txt)" -eq 1 ]; then
-            add_path "/codes"
-            add_path "/wiki"
-            add_path "/catalog"
-            add_path "/tools"
+          if [ "$runtime_code" = "true" ] && [ "$(wc -l < /tmp/smoke-paths.txt)" -eq 0 ]; then
+            add_path "/"
+            add_tag "site"
           fi
 
           smoke_paths="$(head -n 5 /tmp/smoke-paths.txt | jq -R -s -c 'split("\n") | map(select(length > 0))')"
+          purge_tags="$(jq -R -s -c 'split("\n") | map(select(length > 0))' /tmp/purge-tags.txt)"
           echo "deploy=$deploy" >> "$GITHUB_OUTPUT"
           echo "runtime_code=$runtime_code" >> "$GITHUB_OUTPUT"
           echo "dataset=$dataset" >> "$GITHUB_OUTPUT"
           echo "smoke_paths=$smoke_paths" >> "$GITHUB_OUTPUT"
-          echo "deploy=$deploy runtime_code=$runtime_code dataset=$dataset smoke_paths=$smoke_paths"
+          echo "purge_tags=$purge_tags" >> "$GITHUB_OUTPUT"
+          echo "deploy=$deploy runtime_code=$runtime_code dataset=$dataset smoke_paths=$smoke_paths purge_tags=$purge_tags"
 
   deploy:
     runs-on: ubuntu-latest
@@ -134,6 +157,7 @@ jobs:
       IMAGE_NAME: ghcr.io/ravitejaknts/bloxodes-web
       DEPLOY_IMAGE_SHA: ${{ inputs.image_sha || github.sha }}
       SMOKE_PATHS: ${{ needs.classify.outputs.smoke_paths }}
+      PURGE_TAGS: ${{ needs.classify.outputs.purge_tags }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
@@ -336,7 +360,7 @@ jobs:
           cat /tmp/dokploy-health.json || true
           exit 1
 
-      - name: Validate optional Cloudflare configuration
+      - name: Validate selected Cloudflare configuration
         if: ${{ steps.freshness.outputs.fresh == 'true' && ((github.event_name == 'push' && needs.classify.outputs.runtime_code == 'true') || (github.event_name == 'workflow_dispatch' && inputs.purge_cloudflare == 'true')) }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -345,22 +369,43 @@ jobs:
           test -n "$CLOUDFLARE_API_TOKEN"
           test -n "$CLOUDFLARE_ZONE_ID"
 
-      - name: Purge Cloudflare after shared runtime changes
-        if: ${{ steps.freshness.outputs.fresh == 'true' && ((github.event_name == 'push' && needs.classify.outputs.runtime_code == 'true') || (github.event_name == 'workflow_dispatch' && inputs.purge_cloudflare == 'true')) }}
+      - name: Purge targeted Cloudflare tags after runtime changes
+        if: ${{ steps.freshness.outputs.fresh == 'true' && github.event_name == 'push' && needs.classify.outputs.runtime_code == 'true' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          tags="$(printf '%s' "$PURGE_TAGS" | jq -c '.')"
+          payload="$(jq -n --argjson tags "$tags" '{tags:$tags}')"
+          status_code="$(curl --silent --show-error \
+            --write-out '%{http_code}' \
+            --output /tmp/cloudflare-targeted-purge.json \
+            --request POST \
+            "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
+            --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            --header 'Content-Type: application/json' \
+            --data "$payload")"
+          if [ "$status_code" -ne 200 ]; then
+            cat /tmp/cloudflare-targeted-purge.json
+            exit 1
+          fi
+
+      - name: Run explicitly requested full Cloudflare purge
+        if: ${{ steps.freshness.outputs.fresh == 'true' && github.event_name == 'workflow_dispatch' && inputs.purge_cloudflare == 'true' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
         run: |
           status_code="$(curl --silent --show-error \
             --write-out '%{http_code}' \
-            --output /tmp/cloudflare-purge.json \
+            --output /tmp/cloudflare-full-purge.json \
             --request POST \
             "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
             --header "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
             --header 'Content-Type: application/json' \
             --data '{"purge_everything":true}')"
           if [ "$status_code" -ne 200 ]; then
-            cat /tmp/cloudflare-purge.json
+            cat /tmp/cloudflare-full-purge.json
             exit 1
           fi
 
@@ -371,7 +416,11 @@ jobs:
           site="${PRODUCTION_SITE_URL%/}"
           sha_key="${DEPLOY_IMAGE_SHA:0:12}"
           mapfile -t paths < <(printf '%s' "$SMOKE_PATHS" | jq -r '.[]')
-          paths+=("/sitemap.xml")
+
+          if [ "${#paths[@]}" -eq 0 ]; then
+            echo "No HTML or sitemap smoke path was mapped for this deployment."
+            exit 0
+          fi
 
           for path in "${paths[@]}"; do
             separator="?"
