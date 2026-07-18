@@ -1,0 +1,350 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Forsaken",
+    "gameSlug": "forsaken",
+    "collection": "survivors",
+    "route": "/wiki/forsaken/survivors",
+    "catalogCode": "forsaken-survivors",
+    "sourceItemCount": 12,
+    "itemFields": [
+      "name",
+      "type",
+      "typeNote",
+      "price",
+      "health",
+      "difficulty",
+      "playstyle",
+      "passives",
+      "abilities",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "type",
+      "typeNote",
+      "price",
+      "health",
+      "difficulty",
+      "playstyle",
+      "passives",
+      "abilities",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Survivalist",
+        "Sentinel",
+        "Support"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [
+        "price",
+        "playstyle"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "type",
+        "price",
+        "health",
+        "difficulty",
+        "playstyle",
+        "passives",
+        "abilities"
+      ],
+      "tableFields": [
+        "type",
+        "typeNote",
+        "price",
+        "health",
+        "difficulty",
+        "playstyle",
+        "passives",
+        "abilities",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "type": {
+          "kind": "plain",
+          "label": "Role"
+        },
+        "typeNote": {
+          "kind": "plain",
+          "label": "Role note"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Unlock (Player Points)"
+        },
+        "health": {
+          "kind": "chip",
+          "label": "Health"
+        },
+        "difficulty": {
+          "kind": "chip",
+          "label": "Difficulty"
+        },
+        "playstyle": {
+          "kind": "highlight",
+          "label": "Playstyle"
+        },
+        "passives": {
+          "kind": "detail",
+          "label": "Passives"
+        },
+        "abilities": {
+          "kind": "detail",
+          "label": "Abilities"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Noob",
+        "type": "Survivalist",
+        "typeNote": "",
+        "price": "Free",
+        "health": "100",
+        "difficulty": "3/5",
+        "playstyle": "Self-preservation",
+        "passives": "None listed",
+        "abilities": "Bloxy Cola, Slateskin Potion, Ghostburger",
+        "cardSummary": "Free starter Survivalist built around consumables. Bloxy Cola clears slows and adds speed, Slateskin Potion trades mobility for temporary overhealth, and Ghostburger grants a short undetectable or invisible window to break chase."
+      },
+      "system": {
+        "slug": "noob",
+        "section": "Survivalist",
+        "sortOrder": 1,
+        "image": "/Forsaken/survivors/noob.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "007n7",
+        "type": "Survivalist",
+        "typeNote": "",
+        "price": "500",
+        "health": "100",
+        "difficulty": "4/5",
+        "playstyle": "Deception",
+        "passives": "Dex",
+        "abilities": "Clone, Inject, c00lgui",
+        "cardSummary": "Stealth Survivalist who misdirects the killer with clones. Dex helps track the farthest survivor spawn, Clone drops a decoy while you go hard to read, Inject steers the clone, and c00lgui teleports you to a distant spawn after a risky channel."
+      },
+      "system": {
+        "slug": "007n7",
+        "section": "Survivalist",
+        "sortOrder": 2,
+        "image": "/Forsaken/survivors/007n7.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Veeronica",
+        "type": "Survivalist",
+        "typeNote": "",
+        "price": "750",
+        "health": "100",
+        "difficulty": "3/5",
+        "playstyle": "Mobility",
+        "passives": "Metal Frame",
+        "abilities": "Vandalism, SK8, SK8 - Trick, Broadcast, Activate Battery",
+        "cardSummary": "Robot Survivalist with skateboard mobility and self-heal only. Metal Frame blocks external healing, Vandalism paints graffiti paths for SK8, tricks restore stamina and battery, Broadcast changes collision modes, and Activate Battery converts charge into HP."
+      },
+      "system": {
+        "slug": "veeronica",
+        "section": "Survivalist",
+        "sortOrder": 3,
+        "image": "/Forsaken/survivors/veeronica.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shedletsky",
+        "type": "Sentinel",
+        "typeNote": "",
+        "price": "Free",
+        "health": "100",
+        "difficulty": "2/5",
+        "playstyle": "Stun pressure",
+        "passives": "None listed",
+        "abilities": "Slash, Fried Chicken",
+        "cardSummary": "Free Sentinel with a prediction sword stun and self-heal. Slash is the main stun tool and punishes misses, while Fried Chicken restores health when you create space. Simple kit with high timing skill ceiling."
+      },
+      "system": {
+        "slug": "shedletsky",
+        "section": "Sentinel",
+        "sortOrder": 4,
+        "image": "/Forsaken/survivors/shedletsky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Guest 1337",
+        "type": "Sentinel",
+        "typeNote": "",
+        "price": "500",
+        "health": "110",
+        "difficulty": "4/5",
+        "playstyle": "Frontline tank",
+        "passives": "Made to Last, Self Sacrifice",
+        "abilities": "Block, Charge, Punch",
+        "cardSummary": "Frontline Sentinel built to take hits for the team. Made to Last raises base HP to 110, Self Sacrifice gives him hit priority over other entities, Block absorbs attacks, Charge knocks the killer, and Punch converts defense into stuns."
+      },
+      "system": {
+        "slug": "guest-1337",
+        "section": "Sentinel",
+        "sortOrder": 5,
+        "image": "/Forsaken/survivors/guest-1337.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Two Time",
+        "type": "Sentinel",
+        "typeNote": "Also listed as Survivalist on some character pages",
+        "price": "500",
+        "health": "80",
+        "difficulty": "4/5",
+        "playstyle": "Second life",
+        "passives": "Oblation",
+        "abilities": "Sacrificial Dagger, Crouch, Ritual",
+        "cardSummary": "Fragile Sentinel who earns a second life through Oblation. Sacrificial Dagger deals damage to build that meter, Crouch supports stealth movement, and Ritual places a respawn beacon so a charged rebirth can bring you back with reduced health and an escape window."
+      },
+      "system": {
+        "slug": "two-time",
+        "section": "Sentinel",
+        "sortOrder": 6,
+        "image": "/Forsaken/survivors/two-time.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chance",
+        "type": "Sentinel",
+        "typeNote": "",
+        "price": "777",
+        "health": "55\u2013130 (RNG)",
+        "difficulty": "Gamble",
+        "playstyle": "High risk",
+        "passives": "Unpredictable Fate",
+        "abilities": "Coin Flip, One Shot, Reroll, Hat Fix",
+        "cardSummary": "RNG Sentinel whose max health and tools change every round. Unpredictable Fate randomizes starting health, Coin Flip can recharge abilities or stack weakness, One Shot is an unreliable stun gun, Reroll reshuffles stats, and Hat Fix resets a bad string of tails."
+      },
+      "system": {
+        "slug": "chance",
+        "section": "Sentinel",
+        "sortOrder": 7,
+        "image": "/Forsaken/survivors/chance.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jane Doe",
+        "type": "Sentinel",
+        "typeNote": "Sentinel / Support hybrid kit",
+        "price": "Quest unlock",
+        "health": "60 + Shatterpoint (up to +30)",
+        "difficulty": "3/5",
+        "playstyle": "Tracking setup",
+        "passives": "Till Death Do Us Part, Digital Footprint, Shatterpoint",
+        "abilities": "Crystal Pitch, Hatchet",
+        "cardSummary": "Quest-unlocked hybrid who tracks the killer and converts setup into long stuns. Digital Footprint shows killer trail marks, Shatterpoint is a separate damage-reduced health pool restored by landing abilities, Crystal Pitch builds Resonance, and Hatchet stuns harder as Resonance stacks climb."
+      },
+      "system": {
+        "slug": "jane-doe",
+        "section": "Sentinel",
+        "sortOrder": 8,
+        "image": "/Forsaken/survivors/jane-doe.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Elliot",
+        "type": "Support",
+        "typeNote": "",
+        "price": "Free",
+        "health": "80",
+        "difficulty": "2/5",
+        "playstyle": "Team healing",
+        "passives": "Order Up!, Deliverer's Resolve",
+        "abilities": "Pizza Throw, Rush Hour",
+        "cardSummary": "Free starter Support medic. Order Up! boosts healing as you complete objectives, Deliverer's Resolve reveals critically hurt teammates, Pizza Throw is the main heal projectile, and Rush Hour turns pizza picks into a short speed boost for escapes."
+      },
+      "system": {
+        "slug": "elliot",
+        "section": "Support",
+        "sortOrder": 9,
+        "image": "/Forsaken/survivors/elliot.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Builderman",
+        "type": "Support",
+        "typeNote": "",
+        "price": "500",
+        "health": "90",
+        "difficulty": "3/5",
+        "playstyle": "Area control",
+        "passives": "None listed",
+        "abilities": "Sentry Construction, Dispenser Construction",
+        "cardSummary": "Area-control Support who builds map tools. Sentry Construction places a turret that slows the killer, and Dispenser Construction creates a healing zone for teammates. Strong when you set up early and defend your buildings."
+      },
+      "system": {
+        "slug": "builderman",
+        "section": "Support",
+        "sortOrder": 10,
+        "image": "/Forsaken/survivors/builderman.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dusekkar",
+        "type": "Support",
+        "typeNote": "",
+        "price": "600",
+        "health": "90",
+        "difficulty": "5/5",
+        "playstyle": "Shield support",
+        "passives": "Levitation",
+        "abilities": "Spawn Protection, Plasma Beam",
+        "cardSummary": "High-difficulty Support who shields allies and controls tempo from range. Levitation quiets footsteps, Spawn Protection channels a resistance shield onto a targeted teammate, and Plasma Beam slows killers or speeds survivors depending on who it hits."
+      },
+      "system": {
+        "slug": "dusekkar",
+        "section": "Support",
+        "sortOrder": 11,
+        "image": "/Forsaken/survivors/dusekkar.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Taph",
+        "type": "Support",
+        "typeNote": "",
+        "price": "600",
+        "health": "100",
+        "difficulty": "2/5",
+        "playstyle": "Trap control",
+        "passives": "None listed",
+        "abilities": "Tripwire, Subspace Tripmine",
+        "cardSummary": "Low-difficulty trap Support. Tripwire slows the killer and reveals their aura when crossed, and Subspace Tripmine is a placement bomb that punishes killers who walk into its range. Placement and sightline control matter more than raw aim."
+      },
+      "system": {
+        "slug": "taph",
+        "section": "Support",
+        "sortOrder": 12,
+        "image": "/Forsaken/survivors/taph.webp"
+      }
+    }
+  ]
+}

@@ -1,0 +1,440 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "itemFields": [
+      "cardSummary",
+      "layout",
+      "objective",
+      "hazards",
+      "keyAreas",
+      "variants",
+      "survivorNotes",
+      "killerNotes",
+      "basedOn"
+    ],
+    "columns": [
+      "cardSummary",
+      "layout",
+      "objective",
+      "hazards",
+      "keyAreas",
+      "variants",
+      "survivorNotes",
+      "killerNotes",
+      "basedOn"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Open outdoor maps",
+        "Mixed structure maps",
+        "Dense compact maps",
+        "Multi-level maps"
+      ],
+      "badgeField": "layout",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "layout",
+        "objective",
+        "hazards",
+        "keyAreas",
+        "variants",
+        "survivorNotes",
+        "killerNotes"
+      ],
+      "tableFields": [
+        "cardSummary",
+        "layout",
+        "objective",
+        "hazards",
+        "keyAreas",
+        "variants",
+        "survivorNotes",
+        "killerNotes",
+        "basedOn"
+      ],
+      "fieldPresentation": {
+        "layout": {
+          "kind": "chip",
+          "label": "Layout"
+        },
+        "objective": {
+          "kind": "chip",
+          "label": "Objective"
+        },
+        "hazards": {
+          "kind": "highlight",
+          "label": "Hazards"
+        },
+        "keyAreas": {
+          "kind": "plain",
+          "label": "Key areas"
+        },
+        "variants": {
+          "kind": "plain",
+          "label": "Variants"
+        },
+        "survivorNotes": {
+          "kind": "detail",
+          "label": "Survivor notes"
+        },
+        "killerNotes": {
+          "kind": "detail",
+          "label": "Killer notes"
+        },
+        "basedOn": {
+          "kind": "plain",
+          "label": "Based on"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Beach House Paradise",
+        "cardSummary": "A mostly outdoor resort map with a central fountain, hotel, shops, and art gallery, built from Beach House Roleplay geometry.",
+        "layout": "Open outdoor",
+        "objective": "5 generators",
+        "hazards": "Fountain water applies Slowness I",
+        "keyAreas": "Hotel, Fountain, Shops, Art Gallery",
+        "variants": "None",
+        "survivorNotes": "Loops are scarce on the open layout. The hotel interior-to-exterior route and fountain rails are the main chase tools.",
+        "killerNotes": "Open sightlines help tracking. Reset chase pressure if survivors hug fountain rails, and watch hotel loops closely.",
+        "basedOn": "Beach House Roleplay"
+      },
+      "system": {
+        "slug": "beach-house-paradise",
+        "section": "Open outdoor maps",
+        "sortOrder": 10,
+        "image": "/Forsaken/maps/beach-house-paradise.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brandon6875935's Place",
+        "cardSummary": "A large open outdoor map with maze-like wooden walls, a castle end, central stone structure, and under-construction Brandon World.",
+        "layout": "Open outdoor",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Castle, Cave Slope, White CTF corners, Brandon World",
+        "variants": "None",
+        "survivorNotes": "Use castle and cave-slope height drops to create distance, then break line of sight on wooden wall loops. Avoid lingering in open ground while repairing.",
+        "killerNotes": "Survivors often cluster near the castle and cave slope. Cut off open generators and save stamina for long intercept sprints across the large footprint.",
+        "basedOn": "Brandonworks / Brandon6875935 place builds"
+      },
+      "system": {
+        "slug": "brandon6875935s-place",
+        "section": "Open outdoor maps",
+        "sortOrder": 20,
+        "image": "/Forsaken/maps/brandon6875935s-place.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glass Houses",
+        "cardSummary": "A lightly forested outdoor map with two glass-topped mountains linked by a red glass bridge, plus scattered walls and an L-shaped concrete structure.",
+        "layout": "Open outdoor",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Jail Mountain, Glass House, Big Mountain, Small Mountain",
+        "variants": "New Glass Houses",
+        "survivorNotes": "Stay near mountains, the L-shaped concrete structure, and red glass bridge pillars to break sightlines. Keep moving between solid cover.",
+        "killerNotes": "Open terrain favors traps and slowdown tools. Mind map edges and force survivors off strong structure loops.",
+        "basedOn": "Classic Roblox Glass Houses"
+      },
+      "system": {
+        "slug": "glass-houses",
+        "section": "Open outdoor maps",
+        "sortOrder": 30,
+        "image": "/Forsaken/maps/glass-houses.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Natural Disaster Island",
+        "cardSummary": "An outdoor island that combines Natural Disaster Survival landmarks into one abandoned stage with meteor debris and industrial buildings.",
+        "layout": "Open outdoor",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Petrol Station, Supermarket, The Factory",
+        "variants": "None",
+        "survivorNotes": "Use building interiors and construction cover to break long outdoor sightlines while rotating generators across the island.",
+        "killerNotes": "Patrol petrol station, supermarket, and factory routes. Force survivors out of building pockets into open ground between landmarks.",
+        "basedOn": "Natural Disaster Survival"
+      },
+      "system": {
+        "slug": "natural-disaster-island",
+        "section": "Open outdoor maps",
+        "sortOrder": 40,
+        "image": "/Forsaken/maps/natural-disaster-island.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Planet Voss",
+        "cardSummary": "A mostly flat outdoor map with a center crater, colored fortresses and spaceships, and scattered walls for short loops.",
+        "layout": "Open outdoor",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Center Crater, Mini Fortresses, Colored Spaceships",
+        "variants": "Aurora Planet Voss",
+        "survivorNotes": "Loop around fortresses, spaceships, and crater walls. Use small elevation changes to create distance when the killer commits.",
+        "killerNotes": "Open sightlines make spotting easier. Camp key generator pockets around the fortresses and crater rather than over-chasing across the flat ground.",
+        "basedOn": "Planet Voss: Gateway Park"
+      },
+      "system": {
+        "slug": "planet-voss",
+        "section": "Open outdoor maps",
+        "sortOrder": 50,
+        "image": "/Forsaken/maps/planet-voss.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Tempest",
+        "cardSummary": "A very open Noli-themed map defined by temples, a center statue, towers, and scattered pillars and walls.",
+        "layout": "Open outdoor",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Black temple, Big Temple, Center Statue, Large Tower, Smaller Temple",
+        "variants": "None",
+        "survivorNotes": "Use pillars, walls, and temple interiors to break line of sight. Take elevation when available instead of repairing all generators in one push.",
+        "killerNotes": "Survivors are easier to spot in the open. Block temple entrances and pressure the center statue routes to cut map rotations.",
+        "basedOn": "Noli-themed original map"
+      },
+      "system": {
+        "slug": "the-tempest",
+        "section": "Open outdoor maps",
+        "sortOrder": 60,
+        "image": "/Forsaken/maps/the-tempest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloodfell Manor",
+        "cardSummary": "A Victorian-style manor and yard themed as Nosferatu\u2019s lair, with library, kitchen, living spaces, and statue-filled grounds.",
+        "layout": "Mixed structures",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Manor, Yard, Library, Stairs, Kitchen, Living room, Piano",
+        "variants": "None",
+        "survivorNotes": "Use multi-room indoor paths and the yard statue area to break chase lines. Avoid getting pinned on stair choke points.",
+        "killerNotes": "Indoor corridors and stair access favor cutoffs. Check library and living-room loops when survivors leave the yard.",
+        "basedOn": "Nosferatu-themed original manor"
+      },
+      "system": {
+        "slug": "bloodfell-manor",
+        "section": "Mixed structure maps",
+        "sortOrder": 100,
+        "image": "/Forsaken/maps/bloodfell-manor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Familiar Ruins",
+        "cardSummary": "Flood Escape 2 collab ruins with a multiplayer main building, hill ramp, lava lake edge, and broken lobby structures.",
+        "layout": "Mixed structures",
+        "objective": "5 generators",
+        "hazards": "Lava cracks and fire apply Burning I for 4s",
+        "keyAreas": "Main Building (Multiplayer), Hill, Lava lake, Black structure",
+        "variants": "Classic Familiar Ruins",
+        "survivorNotes": "Use the multi-entrance main building and hill drop-offs for chase control. Avoid lava cracks while looping.",
+        "killerNotes": "Pressure the main building doors and hill ramp entrance. Hazards punish careless survivor paths around lava gaps.",
+        "basedOn": "Flood Escape 2 \u2014 Familiar Ruins"
+      },
+      "system": {
+        "slug": "familiar-ruins",
+        "section": "Mixed structure maps",
+        "sortOrder": 110,
+        "image": "/Forsaken/maps/familiar-ruins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Horror Hotel",
+        "cardSummary": "A compact hotel layout mixing an outdoor field with indoor halls, kitchen, play area, well, and many small rooms.",
+        "layout": "Mixed structures",
+        "objective": "5 generators",
+        "hazards": "Field hands apply short Slowness effects",
+        "keyAreas": "Outdoor Field, Halls, Play Area, Kitchen, Well, Small Rooms",
+        "variants": "None",
+        "survivorNotes": "Indoor rooms and the play area create strong evasion options. Repair with teammates and learn hall connections for long survival.",
+        "killerNotes": "Ranged pressure and checking the play area help clear hides. Punish solo survivors moving between halls and the outdoor field.",
+        "basedOn": null
+      },
+      "system": {
+        "slug": "horror-hotel",
+        "section": "Mixed structure maps",
+        "sortOrder": 120,
+        "image": "/Forsaken/maps/horror-hotel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Bay",
+        "cardSummary": "A stormy mixed map of shore structures, rock stands, a two-story house, and boat landmarks with limited generator spawn spots.",
+        "layout": "Mixed structures",
+        "objective": "5 generators",
+        "hazards": "Water puddles apply Bleeding I",
+        "keyAreas": "Center Structure, Rock Stand, Two-Story House, Boat",
+        "variants": "None",
+        "survivorNotes": "Loop structures and elevated stands rather than hard-hiding. Use building geometry to reset chase angles.",
+        "killerNotes": "Push survivors into water puddles for Bleeding pressure and place traps on common structure loops.",
+        "basedOn": null
+      },
+      "system": {
+        "slug": "pirate-bay",
+        "section": "Mixed structure maps",
+        "sortOrder": 130,
+        "image": "/Forsaken/maps/pirate-bay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ultimate Assassin Grounds",
+        "cardSummary": "A mixed dojo-and-lake arena with caves, houses, a gate, and obstacle routes above water that slow movement.",
+        "layout": "Mixed structures",
+        "objective": "5 generators",
+        "hazards": "Lake and waterfall water apply Slowness II",
+        "keyAreas": "Cave, Big dojo, Run-down dojo, Target practice area, Lake, Obstacle course above water, Connected brown houses, Gate",
+        "variants": "Sakura Ultimate Assassin Grounds",
+        "survivorNotes": "Strong loops include the cave and gate areas. Lure chases through slow water when you can cross safely and use elevation to avoid some attacks.",
+        "killerNotes": "Cut off house and lake routes with abilities that block escapes. Elevated spots are often not high enough to fully avoid pressure.",
+        "basedOn": null
+      },
+      "system": {
+        "slug": "ultimate-assassin-grounds",
+        "section": "Mixed structure maps",
+        "sortOrder": 140,
+        "image": "/Forsaken/maps/ultimate-assassin-grounds.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Work at a Pizza Place",
+        "cardSummary": "A ruined Main Island take on Work at a Pizza Place with Builder Brothers' Pizza, dump, housing, and supplier areas under a dark red sky.",
+        "layout": "Mixed structures",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Builder Brothers' Pizza, The Dump, Two Story House, Supplier Area",
+        "variants": "None",
+        "survivorNotes": "Loop the dining and counter areas, including broken-wall paths. Avoid isolation because evasion is the main defense.",
+        "killerNotes": "Do not let survivors settle in the supply room loops. Trap common pizza-building routes and force open-ground rotations.",
+        "basedOn": "Work at a Pizza Place"
+      },
+      "system": {
+        "slug": "work-at-a-pizza-place",
+        "section": "Mixed structure maps",
+        "sortOrder": 150,
+        "image": "/Forsaken/maps/work-at-a-pizza-place.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yorick's Resting Place",
+        "cardSummary": "A dark forest and cliff map with Yorick\u2019s house, a graveyard, temple ridge, and purple acid rivers that damage both sides.",
+        "layout": "Mixed structures",
+        "objective": "5 generators",
+        "hazards": "Acid rivers apply Poisoned or Corrupted and Slowness effects",
+        "keyAreas": "Yorick's house, Graveyard, Cliff with temple, Acid rivers",
+        "variants": "Halloween Yorick's Resting Place",
+        "survivorNotes": "The large footprint helps evasion if you avoid open ground and acid rivers. Cross on bridges and work as a team on generators.",
+        "killerNotes": "Use river crossings as risky shortcuts, force cliff mistakes, and favor tools that punish long forest pathing.",
+        "basedOn": null
+      },
+      "system": {
+        "slug": "yoricks-resting-place",
+        "section": "Mixed structure maps",
+        "sortOrder": 160,
+        "image": "/Forsaken/maps/yoricks-resting-place.png"
+      }
+    },
+    {
+      "item": {
+        "name": "C00l Carnival",
+        "cardSummary": "A dense carnival map with packed attractions, an exhibit, entrance, and Ferris Wheel, themed around c00lkidd\u2019s takeover of a party layout.",
+        "layout": "Dense compact",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Entrance, Exhibit, Attractions, Ferris Wheel",
+        "variants": "Bluuworld",
+        "survivorNotes": "Terror radius is frequent because the map is small and dense. Stick near teammates and use Ferris Wheel and van-side loops to reset chases.",
+        "killerNotes": "Tight geometry favors cornering. Force survivors off the Ferris Wheel and pizza-van loops with unpredictable pathing.",
+        "basedOn": "Natural Disaster Survival Party Palace"
+      },
+      "system": {
+        "slug": "c00l-carnival",
+        "section": "Dense compact maps",
+        "sortOrder": 200,
+        "image": "/Forsaken/maps/c00l-carnival.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cake Factory",
+        "cardSummary": "A mostly indoor factory map with cramped floors, incineration rooms, management lounge, and Giant Noob area based on Make a Cake.",
+        "layout": "Dense compact",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Plaza and Garage, Incineration Room, Main Factory Floor, Management and The Lounge, The Giant Noob Area",
+        "variants": "None",
+        "survivorNotes": "Loop incineration rooms, shaping-station cover, and management or lounge paths. Use Gertrude\u2019s Shelf near the rising station to break line of sight.",
+        "killerNotes": "Cramped indoor routes help trapping. Cut off factory-floor loops and deny safe repair pockets in incineration and lounge areas.",
+        "basedOn": "Make a Cake"
+      },
+      "system": {
+        "slug": "cake-factory",
+        "section": "Dense compact maps",
+        "sortOrder": 210,
+        "image": "/Forsaken/maps/cake-factory.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic Battlegrounds",
+        "cardSummary": "A small two-segment map with elevated buildings, street tunnels, sewers, temple grounds, waterfall, and a golden-hammer statue.",
+        "layout": "Dense compact",
+        "objective": "5 generators",
+        "hazards": null,
+        "keyAreas": "Cave, Sewer grates, Library, Temple, Empty store, Sewers, Golden hammer statue, Waterfall",
+        "variants": "None",
+        "survivorNotes": "Use elevation and tight structure paths to create distance. Expect frequent terror-radius pressure in the compact layout.",
+        "killerNotes": "Trap cramped cave, sewer, and store routes. Clear sewer grates and cave pockets when survivors disappear.",
+        "basedOn": "Catalog Heaven battlegrounds"
+      },
+      "system": {
+        "slug": "classic-battlegrounds",
+        "section": "Dense compact maps",
+        "sortOrder": 220,
+        "image": "/Forsaken/maps/classic-battlegrounds.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Underground War",
+        "cardSummary": "A two-layer fortress map with open red and blue surface halves plus a semi-enclosed underground level and killer-only lower entrances.",
+        "layout": "Multi-level",
+        "objective": "5 generators",
+        "hazards": "Vertical layers can hide audio cues between floors",
+        "keyAreas": "Surface, Underground, Red Half, Blue Half",
+        "variants": "Memories Underground War",
+        "survivorNotes": "You may not hear a killer on the other floor, so check vertical pressure constantly. Avoid underground dead ends and use entrance loops to create distance.",
+        "killerNotes": "The lower layer is strong for trapping, and killer-only underground entrances can catch survivors off-guard. Abuse vertical audio separation while rotating floors.",
+        "basedOn": "Underground War"
+      },
+      "system": {
+        "slug": "underground-war",
+        "section": "Multi-level maps",
+        "sortOrder": 300,
+        "image": "/Forsaken/maps/underground-war.png"
+      }
+    }
+  ]
+}
