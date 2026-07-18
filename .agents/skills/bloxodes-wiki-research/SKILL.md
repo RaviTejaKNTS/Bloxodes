@@ -18,7 +18,7 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/brief.md
 ## Research
 
 1. Resolve the exact Roblox game: universe ID, root place ID, creator, official URL, and editorial slug.
-2. Check existing Bloxodes wiki, codes, catalogs, events, tools, articles, checklists, and quizzes for the universe.
+2. Check the exact production wiki route and matching universe/slug for an existing or conflicting wiki. Consult other Bloxodes page families only when they provide useful writing context; do not turn a broad cross-family inventory into a readiness gate.
 3. Research the normal player loop, main systems, progression, controls, and what related pages should be linked.
 4. Verify controls from reliable sources or record that controls should stay empty.
 5. Do not turn catalog facts into a wiki rewrite. The wiki should explain the game, not duplicate item lists.

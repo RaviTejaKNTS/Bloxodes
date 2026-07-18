@@ -4,8 +4,8 @@ Use this runbook for normal content publishing, code releases, dataset releases,
 
 ## Non-negotiable rules
 
-- Never run a full sitemap crawl, broad production SEO scan, Playwright suite, published-content audit, or sitemap-wide cache warm as part of a normal push.
-- Use the required `quality` result as the pull-request gate.
+- Do not run a full sitemap crawl, broad production SEO/route scan, Playwright suite, published-content audit, deep pre/postdeploy suite, or sitemap-wide cache warm as part of a normal push. Use them deliberately when troubleshooting evidence justifies their time and VPS/origin load.
+- Pull requests are optional for focused routine work in this solo-maintainer repository. Use one when the user requests it or review isolation materially helps a high-risk change.
 - For a new DB-backed page, deploy its code, renderer, dataset, and images before publishing its database row.
 - Treat schema dependencies separately: apply and verify a backward-compatible expansion migration before deploying web code that requires it.
 - After publishing a database row, verify the exact page and its family sitemap.
@@ -20,12 +20,19 @@ Use this runbook for normal content publishing, code releases, dataset releases,
 | --- | --- | --- |
 | Existing DB content, prose, metadata, FAQ, codes refresh, or database-owned page update | Production dry-run, approved DB write, exact URL verification | No |
 | New DB-backed page using code and data already live | Production dry-run, approved DB write, exact URL verification | No |
-| React, Next.js, route, renderer, shared library, SEO, sitemap, or Docker change | Pull request, `quality`, merge, deployment verification | Yes |
-| Bundled `data/`, `apps/web/src/data/`, or `apps/web/public/` change | Pull request, dataset/build checks, merge, then targeted DB revalidation when applicable | Yes |
-| New collection, catalog, quiz, or tool needing bundled code/data | Code and data PR first, database publication second | Yes, before DB publication |
-| Supabase schema migration with no dependent web code | Migration-only PR, `quality`, merge, production dry-run, exact migration apply and verification | No |
+| React, Next.js, route, renderer, shared library, SEO, sitemap, or Docker change | Changed-file lint/related tests, optional PR by risk, production build and deployment verification | Yes |
+| Bundled `data/`, `apps/web/src/data/`, or `apps/web/public/` change | Existing dataset checks, optional PR by risk, production build, then targeted DB revalidation when applicable | Yes |
+| New collection, catalog, quiz, or tool needing bundled code/data | Release code and data first, database publication second | Yes, before DB publication |
+| Supabase schema migration with no dependent web code | Migration-only PR, focused migration validation, merge, production dry-run, exact migration apply and verification | No |
 | Supabase migration plus dependent web code | Expansion migration PR and production apply first; dependent code PR and deployment second | Only for the code phase |
-| Docs, mobile, extension, scripts, workflow, or Supabase-only repository change | Pull request and `quality`; use the domain-specific release process if one exists | No web image deployment |
+| Docs, skills, mobile, extension, scripts, or Supabase-only repository change | Focused commit; use an optional PR or domain-specific process when risk justifies it | No web image deployment |
+
+## Repository publication policy
+
+- Focused routine changes may push a reviewed commit directly to `production` without force.
+- Use a PR when the user requests one or review isolation materially helps migrations, security/auth, deployment workflows, or broad shared-runtime changes.
+- Do not require one global status check for every tracked file. When a relevant PR starts targeted checks, do not merge it while those selected checks are failing.
+- Continue to prohibit force pushes and branch deletion.
 
 ## Database-only content publication
 
@@ -59,7 +66,7 @@ Do not start a web build or full crawl for a DB-only publication.
 The normal code-first/database-second order applies to content rows. When runtime code needs a new column, table, view, function, policy, or constraint, use schema-first expansion instead:
 
 1. Create a forward-only, backward-compatible expansion migration. The currently live app must continue working after it is applied.
-2. Put the migration in its own PR, pass `quality`, merge it, and confirm the Supabase-only change did not deploy a web image.
+2. Put the migration in its own PR, complete its focused migration validation, merge it, and confirm the Supabase-only change did not deploy a web image.
 3. Compare local and production migration history and run the production dry-run.
 4. Continue only when the dry-run shows exactly the migration versions approved for this release. Never use `--include-all` to sweep in unrelated pending migrations.
 5. Have only one operator apply the reviewed migration.
@@ -72,24 +79,23 @@ Stop if histories differ unexpectedly, another migration is pending, the old app
 
 ## Code or renderer release
 
-1. Create a focused branch and pull request.
-2. Wait for the required `quality` check.
-3. Do not merge when `quality` fails.
-4. Merge to `production`.
-5. The production workflow builds and publishes one immutable image.
-6. Dokploy switches to that image.
-7. The workflow requires the exact deployed image SHA and a healthy database.
-8. Runtime code changes receive one Cloudflare purge.
-9. Only affected page-family indexes and `/sitemap.xml` receive lightweight smoke requests.
+1. Work on a focused branch/worktree and select only the intended files.
+2. Lint changed source files and run related tests. Use a PR when requested or justified by risk.
+3. Publish the reviewed commit to `production` without force.
+4. The production workflow performs the one deployable build and publishes one immutable image.
+5. Dokploy switches to that image only after the build succeeds.
+6. The workflow requires the exact deployed image SHA and a healthy database.
+7. Runtime code changes receive targeted Cloudflare cache-tag invalidation; a full purge is an explicit manual action.
+8. Only the affected page-family smoke paths are requested. The sitemap is checked only when sitemap-related files changed.
 
 The automatic path does not install Chromium, start a candidate container, crawl every sitemap URL, or run broad production data validation.
 
 ## Dataset and public asset release
 
 1. Add only the required dataset, configuration, and public assets.
-2. Open a pull request and wait for `quality`.
-3. Dataset contracts and the production build run automatically when selected.
-4. Merge and wait for the exact deployed SHA and healthy database.
+2. Run the existing dataset checks. Use a PR only when requested or justified by risk.
+3. Publish the reviewed commit and let the production workflow perform the single deployable build.
+4. Wait for the exact deployed SHA and healthy database.
 5. Do not publish a new database page until this deployment is live.
 6. Run the relevant idempotent seed/upsert so normal revalidation targets the exact page.
 7. Verify the exact page URL.
@@ -102,7 +108,7 @@ Use this order for new collections, catalogs, tools, quizzes, or other pages tha
 
 1. Validate the content, dataset, images, and renderer locally.
 2. Optionally confirm the future URL is absent.
-3. Merge and deploy the code/data PR.
+3. Publish and deploy the selected code/data release.
 4. Confirm the exact image SHA and healthy database.
 5. Run the production DB dry-run.
 6. Publish the database row.
@@ -115,21 +121,19 @@ Until step 6, the route may return `404` and must not appear in its sitemap.
 
 ### Pull requests
 
-`.github/workflows/web-quality.yml` always reports a result so branch protection never waits on a workflow that did not start.
+`.github/workflows/web-quality.yml` starts only for web, dataset, dependency, Docker, or quality-tooling changes. Docs and skills do not start it.
 
-- Web code: lint, web TypeScript, coverage, and production build.
-- Dataset/public assets: dataset audit and production build.
-- Quality tooling: lint, TypeScript, and coverage as applicable.
-- Unrelated repository changes: fast successful no-op jobs.
-- Final required result: `quality`.
-
-Code checks and the production build run in parallel.
+- Web code: lint only changed JavaScript/TypeScript files and run Vitest tests related to changed web source.
+- Dataset/public assets: retain the existing dataset audit.
+- Formatting: check changed non-Markdown patches.
+- Production build, full typecheck, full lint, and full coverage are not repeated in normal PR checks.
+- There is one `quality` job, not a fan-out plus aggregation job.
 
 ### Production pushes
 
-`.github/workflows/dokploy-production-deploy.yml` classifies the merged change.
+`.github/workflows/dokploy-production-deploy.yml` classifies each published `production` change.
 
-- Web code or bundled data/assets: build and deploy.
+- Web code or bundled data/assets: build one deployable image and deploy it.
 - Docs, workflow, mobile, extension, scripts, and Supabase-only changes: classifier succeeds and the deploy job is skipped.
 - Superseded queued web deployments exit before building.
 
@@ -140,7 +144,7 @@ A docs/workflow-only merge can make the `production` Git commit newer than the S
 | Test | Use it when | Normal daily gate |
 | --- | --- | --- |
 | `verify:published-url` | After every DB publication or targeted content update | Yes, targeted |
-| PR `quality` | Every repository pull request | Yes |
+| Targeted PR `quality` | Relevant PRs when the PR path is selected | Yes for that PR |
 | Automatic deploy smoke | Every selected web image deployment | Yes |
 | Manual `sample` audit | Investigating a route-family or SEO concern | No |
 | Manual `render` audit | Changing interactive UI, hydration, responsive behavior, or calculators | No |
@@ -173,15 +177,14 @@ EXPECTED_BUILD_SHA=<sha> \
 npm run verify:postdeploy
 ```
 
-These commands are investigation tools. Do not add them to normal PR or production workflows.
+These commands are investigation tools. Do not add them to normal PR or production workflows. Agents may use them when troubleshooting makes them useful, but should start with the narrowest diagnostic, account for time/origin/VPS load, and expand only when the evidence warrants it.
 
 ## Failure handling
 
 ### Pull-request failure
 
 - Read the failing selected job.
-- Fix only the relevant code, type, coverage, build, or dataset problem.
-- Do not compensate by weakening the `quality` gate.
+- Fix only the selected changed-file, related-test, migration, or dataset problem.
 - Do not start a production crawl.
 
 ### Deployment failure
@@ -213,8 +216,8 @@ These commands are investigation tools. Do not add them to normal PR or producti
 
 ## Expected operating speed
 
-- Docs/workflow-only pull request: normally about one minute.
-- Web-code pull request: normally about two to three minutes.
+- Docs/skill release: no GitHub test workflow or web build.
+- Relevant pull request: targeted lint/tests or dataset validation only.
 - Database-only publication: normally a few minutes, with no image build.
 - Web deployment: dominated by Docker build and image transfer, not tests or crawling.
 
@@ -225,7 +228,7 @@ The Docker workflow uses the minimum GitHub Actions cache export because the pre
 Before declaring a release complete, report:
 
 - which release path was used;
-- the passing `quality` result when a PR was required;
+- the passing targeted result when a relevant PR was used;
 - the merge commit or deployed image SHA when code/data changed;
 - database health for a web deployment;
 - the exact published URL verification result for DB content;
