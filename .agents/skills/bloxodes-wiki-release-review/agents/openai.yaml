@@ -1,4 +1,4 @@
 interface:
   display_name: "Bloxodes Wiki Release Review"
-  short_description: "Review and release ready wiki batches"
-  default_prompt: "Use $bloxodes-wiki-release-review to review completed wiki artifacts, open localhost pages, and wait for per-game approval before release."
+  short_description: "Release final-checked wiki batches"
+  default_prompt: "Use $bloxodes-wiki-release-review to release already-final-checked wiki artifacts after per-game approval without rerunning content QA."

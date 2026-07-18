@@ -1,242 +1,100 @@
 ---
 name: bloxodes-release-e2e
-description: Release completed Bloxodes work from the current worktree through the smallest correct production path, including scoped checks, direct publication or an optional risk-based PR, deployment or database publication, live verification, local production synchronization, and safe cleanup. Use only when the user explicitly invokes `$bloxodes-release-e2e` or explicitly asks for an `e2e` or `end-to-end` production release. Do not use for ordinary requests to push, commit, open a PR, deploy, or publish unless the user explicitly says e2e/end-to-end.
+description: Quickly publish already-completed and user-approved Bloxodes work from the current task worktree directly to production, wait only for the required deployment or database publication, verify the exact live result, synchronize local production, and leave the task worktree open for immediate follow-up changes. Use only when the user explicitly invokes `$bloxodes-release-e2e` or asks for an e2e/end-to-end production release.
 ---
 
 # Bloxodes Release E2E
 
-Finish one completed worktree without making the user manage Git, GitHub, deployment, local synchronization, or cleanup. Select the smallest correct release path and preserve every intended change while excluding secrets and disposable files.
+Publish completed work. Do not restart its creation, review, or testing workflow.
 
-## Read First
+## Authority
 
-1. Read `AGENTS.md` and every closer `AGENTS.md` that governs changed files.
-2. Read `docs/testing/content-release-runbook.md`.
-3. For database publication, read and follow the relevant Bloxodes content skill. Also read `supabase/AGENTS.md` for schema or migration work.
-4. Treat those sources as authoritative when commands or release requirements differ from this orchestration skill.
+An explicit invocation means:
 
-## Invocation And Authority
+- the user considers the current task complete and approved;
+- its normal final checks have already passed;
+- publish only the current task's intended files;
+- use a direct non-force push to `production` by default;
+- deploy or publish the prepared database change when applicable; and
+- keep the task worktree and branch after release for immediate fixes.
 
-Treat explicit invocation as authorization to complete the normal release operations for the already-scoped work:
+Do not search for tracker rows, old logs, approval files, or ignored/temp output. Do not open a PR unless the user explicitly asks for one.
 
-- commit the intended files;
-- publish a focused routine change directly to `production`, or use a pull request when the user requests one or the change is high-risk;
-- wait for selected checks and merge when a pull request is used;
-- let the existing production workflow deploy when selected;
-- perform an explicitly prepared database publication when it is part of the task;
-- verify production;
-- synchronize the local `production` worktree; and
-- delete only the released temporary branch and temporary release worktree when safe.
+## 1. Confirm Scope
 
-Do not pause for confirmation between those routine steps. Do not expand the task, publish unrelated queued content, weaken a check, force a merge, or make unrelated infrastructure changes.
+1. Record the current worktree, branch, HEAD, status, and registered worktrees.
+2. Stay in the current task worktree. Never create a second worktree when already in one.
+3. If invoked from the main `production` worktree with changes, create one temporary task worktree from `origin/production` and transfer only the explicit release allowlist.
+4. Build the allowlist from the work completed in this chat. Ignore unrelated files, worktrees, branches, `.env*`, `node_modules`, build output, reports, caches, and `tmp/` unless a specific database payload in `tmp/` is part of this release.
+5. Stop only for an unclear allowlisted file, a staged secret, an overlapping change, or a real merge conflict.
 
-## Completion Contract
+Never use `git add .`, `git add -A`, a broad stash, force push, or another agent's branch.
 
-Do not call the release complete until every applicable statement is true:
+## 2. Fast Release Check
 
-- GitHub `production` contains the intended repository changes through the selected direct or pull-request path.
-- The selected production deployment completed and the live SHA/database health are correct, or the change was correctly classified as requiring no web image deployment.
-- Every intended database write was read back and its exact public URL was verified.
-- Every applied schema migration appears exactly once in production migration history, and its schema, permissions, and representative query were verified.
-- The main local `production` worktree matches `origin/production` without altering unrelated local work.
-- The released temporary branch and release worktree are removed; the main production worktree is retained.
-- No intended work was discarded and no unrelated file was released.
+Treat the invocation as confirmation that content and code final checks passed.
 
-## 1. Establish The Worktree And Scope
+1. Review the allowlisted diff.
+2. Run `git diff --check`.
+3. Run at most one tiny change-specific syntax or smoke check only if the release process itself changed a file after final approval.
 
-1. Record the current root, branch, HEAD, status, and all registered worktrees:
+Do not rerun content verifiers, dataset validation, Browser inspection, HTML-size checks, pagination checks, lint, typecheck, coverage, builds, Playwright, crawls, SEO audits, or database-wide audits.
 
-```bash
-git rev-parse --show-toplevel
-git branch --show-current
-git rev-parse HEAD
-git status --short
-git worktree list --porcelain
-```
+## 3. Publish Repository Files
 
-2. Locate the worktree whose branch is `refs/heads/production`. This is the main local production worktree to synchronize after merging. If it cannot be identified, stop.
-3. If the current worktree is already a temporary task worktree, use it. Never create a nested or second worktree for the same task.
-4. If the current worktree is the main `production` worktree, create one temporary release branch and worktree before staging or committing:
-   - build and record the explicit release allowlist first;
-   - fetch `origin` and use `origin/production` as the clean branch/worktree base;
-   - create the temporary branch with the repository's required branch prefix;
-   - transfer only allowlisted tracked changes, new files, directories, and symlinks into the temporary worktree;
-   - preserve file modes and symlink targets;
-   - compare the transferred paths with their source versions before removing them from local production;
-   - restore or move only the transferred allowlisted paths out of the production worktree, leaving every unrelated local change untouched; and
-   - continue the release from the temporary worktree.
+Skip this section for a true database-only publication.
 
-Do not use a stash, whole-repository copy, broad patch, or another agent's branch to perform this transfer. Other worktrees and branches may contain unfinished changes; they must not enter the release branch unless they are explicitly on the allowlist.
-5. Inspect tracked changes, staged changes, commits ahead of `origin/production`, and untracked paths that are candidates for the explicit release allowlist. Do not inventory unrelated ignored/temp output.
-6. Build an explicit release allowlist. Never use `git add .` or `git add -A`.
-7. Treat `.env*`, `node_modules`, `.next`, coverage, logs, test reports, and generated caches as local-only. Never commit them.
-8. Inspect `tmp/` only when the requested release uses a payload there. Never commit it merely to preserve it.
-9. Ignore unrelated changes outside the allowlist. Stop only when an unknown staged path, secret, overlapping change, or unclear allowlisted path could enter the release or prevent a safe production fast-forward.
-
-If the worktree has a detached HEAD, create one appropriately named temporary branch for the current task. Do not create a second worktree.
-
-## 2. Classify The Release
-
-Choose one path from the actual changes and task outcome:
-
-### Repository release
-
-Use for tracked code, bundled datasets, public assets, scripts, docs, workflows, mobile, extension, or Supabase migration files.
-
-Use a direct production release for focused routine work in this solo-maintainer repository. Use a pull request when the user requests one or when review isolation materially helps: migrations, authentication/security, deployment/workflow changes, broad shared-runtime refactors, or ambiguous multi-area changes. Docs and skill files do not require a pull request merely because they are tracked.
-
-Only web code, `data/`, `apps/web/src/data/`, `apps/web/public/`, Docker, or dependency changes select a web image deployment. For docs or other non-web changes, confirm the deploy classifier skipped the web deployment; do not force a meaningless deploy.
-
-### Database-only publication
-
-Use when production already has the renderer, data, and assets and the only intended live change is database-owned content. Follow the existing content skill: production dry-run, scoped write, readback, targeted revalidation, and exact URL verification. Do not create an empty PR.
-
-### Mixed release
-
-Use when a database page depends on new code, bundled data, or assets. Complete the selected repository release and verify the exact deployed SHA first. Only then publish the database row and verify the URL. Never reverse this order.
-
-This code-first, database-second rule is for content rows. Do not use it for schema that the new web code requires.
-
-### Schema migration release
-
-A migration file is a high-risk repository change and uses the PR path with its selected checks.
-
-- Migration only: require a forward-only migration that is compatible with the currently live app. Merge the migration-only PR, confirm the web deploy classifier skipped it, then dry-run, apply, and verify that exact migration in production.
-- Migration plus dependent web code: split the release into at least two scoped phases. First merge and apply a backward-compatible expansion migration. After production verification, create the dependent web-code PR from updated `production`, merge it, and verify its deployed SHA.
-- Destructive contract change: remove or rename old schema, tighten constraints, or revoke old access only in a later migration after every live caller has stopped using it. This can require a third release.
-
-Do not put a required migration and its dependent runtime code into one normally deployed PR. Production could deploy the code before the migration is applied. If the schema cannot be changed compatibly while the old app remains live, stop and request an explicit maintenance or rollout decision.
-
-## 3. Run Proportional Checks
-
-Reuse valid checks already run against the current commit. Run missing checks selected by the changed files and closest `AGENTS.md`.
-
-- Web code: lint changed source files and run related tests. Do not add full-project lint, typecheck, coverage, or a local production build to every release; the production workflow performs the single deployable build before switching the live container.
-- Bundled datasets/public assets: run the existing relevant dataset verification. The production workflow performs the single deployable build.
-- Extension or mobile: run their domain-specific typecheck/package checks.
-- Database content: run the content script's dry-run before any production write.
-- Schema migration: test the migration against the repository's representative local schema, verify the currently live app remains compatible after an expansion, and run the narrow schema/query/RLS or permission checks required by `supabase/AGENTS.md`.
-
-Do not run a full sitemap crawl, broad production SEO/route scan, broad cache warm, Playwright suite, published-content audit, or deep pre/postdeploy suite as part of a normal release. These remain useful diagnostics when concrete evidence or troubleshooting scope justifies their time and origin/VPS load. Start targeted, state the tradeoff, and expand only as needed.
-
-Stop on a relevant failure. Do not weaken checks or label a failure unrelated without concrete evidence.
-
-## 4. Commit And Publish Repository Work
-
-Skip this section only for a true database-only publication with no intended repository changes.
-
-1. Fetch `origin` and confirm the release branch is based on the intended `production` history. Resolve divergence before release; stop on ambiguous conflicts.
-2. Stage only the allowlisted paths or hunks.
-3. Review `git diff --cached --stat` and `git diff --cached`.
-4. Commit with a focused message. Do not amend unrelated existing commits.
-5. Choose the direct or PR path using the classification above.
-
-For a direct release:
-
-6. Reconfirm `origin/production` has not moved since the branch base and the targeted checks passed.
-7. Push the reviewed commit to `production` without force. Capture the published SHA.
-
-For a pull request:
-
-6. Push the temporary branch and create or reuse a ready PR targeting `production`.
-7. Wait for the selected checks, fix relevant failures, and confirm the PR contains only intended changes.
-8. Merge normally and capture the PR URL and merge SHA. Never bypass a failing selected check.
-
-## 5. Verify Deployment
-
-For a selected web image deployment:
-
-1. Follow `.github/workflows/dokploy-production-deploy.yml` for the published production commit.
-2. Wait until Dokploy reports that exact image SHA live.
-3. Require `/api/health` to report application health and a healthy database.
-4. Require the workflow's targeted smoke checks to pass.
-5. Confirm the expected Cloudflare behavior: targeted cache-tag invalidation for runtime code, no automatic full purge, and no broad crawl or warm.
-6. Verify any task-specific live URL or asset narrowly.
-
-For a correctly skipped web deployment, record why it was skipped. GitHub `production` may be newer than the SHA shown by `/api/health`; that is expected for non-web changes.
-
-Do not continue to a dependent database publication when the required web deployment is not healthy.
-
-## 6. Publish Database Work
-
-Run this section only when the completed task explicitly includes a prepared database change.
-
-### Content rows
-
-1. Use the matching content workflow instead of inventing SQL or payloads.
-2. Confirm the production target and exact slug/row scope.
-3. Run the production dry-run and review create/update behavior.
-4. Apply only the approved idempotent write.
-5. Read the affected production rows back.
-6. Let normal targeted revalidation purge and warm affected paths.
-7. Run `npm run verify:published-url -- --path <exact-path>` for each published page, or the equivalent domain-specific verifier.
-
-### Schema migrations
-
-1. Re-read `supabase/AGENTS.md` and check the installed Supabase CLI version and current `--help` before choosing commands.
-2. Confirm the migration PR is merged and that any dependent code is still unreleased.
-3. Compare local and production migration history, then run a production dry-run.
-4. Require the dry-run to contain only the explicitly allowlisted migration version or versions for this release. Stop on an unrelated pending migration, duplicate version, history divergence, or unexpected schema state.
-5. Do not use `--include-all` to bypass history differences. Do not use `migration repair` as a substitute for applying SQL; repair history only after schema truth is independently verified and the need is explicit.
-6. Ensure only one operator or process applies the migration. Apply the exact reviewed, forward-only migration.
-7. Verify its production migration-history entry, created/changed schema, permissions or RLS, representative API/query behavior, and database health.
-8. Follow the repository rule to regenerate `supabase/schema.sql` from live production in a controlled follow-up; never hand-edit the snapshot.
-9. Only after a successful expansion migration may the dependent runtime-code phase proceed.
-
-The invocation does not authorize publishing unrelated drafts, queued pages, or ambiguous rows. Stop if the database target is not explicit from the completed task.
-
-## 7. Synchronize Local Production
-
-After GitHub publication, operate from the identified main production worktree:
-
-1. Reinspect it. Never stash, reset, overwrite, commit, or transfer unrelated local production changes.
-2. Fetch `origin production`.
-3. Fast-forward local `production` to `origin/production` only when Git can do so without touching unrelated local changes:
+1. Fetch `origin production` and confirm the task commit can update it without force. Rebase the clean task branch when needed; stop on conflicts.
+2. Stage only the allowlist and review the staged file list and diff.
+3. Commit with a focused message when uncommitted work remains.
+4. Push the task HEAD directly to GitHub production without force:
 
 ```bash
-git -C <production-worktree> merge --ff-only origin/production
+git push origin HEAD:production
 ```
 
-4. Verify local `production` and `origin/production` resolve to the same SHA. If unrelated local changes remain, verify their path list is unchanged from the preflight snapshot.
+5. Use a PR only when the user explicitly requests one. Do not choose a PR merely because the change touches workflows, many files, or content.
 
-For a database-only release without a repository publication, still confirm local `production` is synchronized before cleanup without altering unrelated local work.
+If GitHub protection rejects the direct push, report that exact configuration blocker. Do not silently start a slower PR workflow.
 
-## 8. Preserve Work And Clean Up
+## 4. Wait For The Required Live Change
 
-Cleanup is the final mutation.
+- Docs, skills, scripts, mobile, extension, and Supabase-only repository changes: confirm the production classifier skipped the web deploy.
+- Web code, bundled data, or public assets: wait for the production workflow to build and deploy the published SHA, then require `/api/health` to report that SHA and a healthy database.
+- Database-only content: do not trigger a web build.
+- Mixed code/content: deploy code, data, and assets first; publish the database row second.
+- Schema required by new code: apply a backward-compatible migration before dependent code. Stop instead of guessing when ordering is unclear.
 
-1. Reinspect tracked/staged changes and release allowlisted payloads. Do not pre-enumerate unrelated ignored/temp output.
-2. Confirm every intended source/data change is in the published production commit or every intended database payload has been successfully published and read back.
-3. Treat environment symlinks created by `npm run setup:worktree`, installed dependencies, build output, caches, logs, and test reports as disposable.
-4. Treat content workspace files as disposable only after their production write and verification succeeded and no unfinished work depends on them.
-5. Never use `git clean -fdx`.
-6. From the main production worktree, remove only the temporary release worktree. Never remove the main production worktree. Try normal `git worktree remove` before investigating ignored files. Only if removal fails, inspect the paths that prevent cleanup; use force only when those paths are known disposable setup/output files. Stop if cleanup would discard unfinished tracked work or an unpublished allowlisted payload.
-7. Delete the integrated local branch with safe deletion (`git branch -d`). Delete the remote temporary branch if the PR path used one and GitHub did not already remove it.
-8. Never remove or modify another worktree or branch, including preserved infrastructure work.
+Do not add a broad crawl, cache warm, full Cloudflare purge, or extra route-family scan. The deployment workflow owns its small mapped health/smoke checks.
 
-## Stop Conditions
+## 5. Publish Prepared Database Work
 
-Stop and ask the user with the exact blocker when any of these occurs:
+Run only when the completed task explicitly includes a prepared database change.
 
-- an unknown staged/allowlisted path or overlapping change could enter the release;
-- a secret or environment file appears staged;
-- a relevant check fails;
-- the branch has unresolved conflicts or unexpected commits;
-- a selected targeted check fails, or a chosen PR cannot merge normally;
-- the selected deployment does not reach the expected healthy SHA;
-- a production database dry-run/readback differs from the expected scope;
-- migration history, dry-run scope, compatibility, permissions, or production schema verification is ambiguous;
-- release-owned changes remain on local `production`, or it cannot safely fast-forward without touching unrelated local work; or
-- worktree cleanup could discard unfinished or unknown files.
+1. Use the existing page-type seed/import command.
+2. Run its production dry-run.
+3. Apply only the named idempotent rows or migration.
+4. Read back the affected production rows.
+5. Verify each exact public URL with `verify:published-url` or the page-type equivalent.
 
-## Final Report
+Do not publish unrelated drafts or queued content.
 
-Return a compact release receipt containing:
+## 6. Synchronize And Stay Available
 
-- release path used;
-- local checks and any selected PR result;
-- publication path, PR URL when applicable, and production commit SHA;
-- deployed image SHA and database health, or the reason deployment was correctly skipped;
-- database readback and verified URLs, when applicable;
-- local `production` synchronization SHA;
-- deleted worktree and branch; and
-- confirmation that no broad crawl/warm ran automatically.
+1. Fast-forward the main local `production` worktree to `origin/production` without touching unrelated work.
+2. Verify both resolve to the same SHA.
+3. Keep the current task worktree and local task branch intact, even when clean and fully published.
+4. Return the task to the user for immediate follow-up changes in the same chat and worktree.
+
+Remove the task worktree or branch only when the user explicitly says the task is finished and asks for cleanup. Never remove another agent's worktree.
+
+## Final Receipt
+
+Report only:
+
+- published scope and production SHA;
+- whether deployment was skipped or the deployed SHA/health;
+- database rows and exact URLs when applicable;
+- local production synchronization SHA;
+- current task worktree/branch retained for follow-up; and
+- any real blocker.

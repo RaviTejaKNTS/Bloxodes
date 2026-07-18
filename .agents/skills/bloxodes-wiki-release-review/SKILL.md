@@ -1,11 +1,11 @@
 ---
 name: bloxodes-wiki-release-review
-description: Review and release Codex-prepared or agent-prepared Bloxodes wiki batches after both collection pages and the wiki hub are complete. Use when the user asks Codex to review completed wiki artifacts, open localhost pages, wait for per-game approval, then release approved game files and seed approved wiki/collection pages to production.
+description: Release Codex-prepared or agent-prepared Bloxodes wiki batches after their wiki and collection workflow final checks and Browser review are complete. Use when the user asks Codex to publish already-reviewed wiki artifacts, wait for per-game release approval, then release approved game files and seed approved wiki/collection pages to production without rerunning content QA.
 ---
 
 # Bloxodes Wiki Release Review
 
-Use this after agents finish a game wiki batch. Readiness comes from the actual wiki and collection artifacts, not a planning tracker. Review the requested games, wait for explicit per-game approval, then release only the approved games.
+Use this after agents finish and final-check a game wiki batch. Readiness comes from the actual wiki and collection artifacts plus their completed final review, not a planning tracker. Confirm release scope, wait for explicit per-game approval, then release only the approved games.
 
 Do not publish collection-only work. Require the actual wiki `final.json` and at least one completed collection `final.json`; a missing or stale planning-row/checkmark is never a blocker.
 
@@ -16,37 +16,22 @@ Do not publish collection-only work. Require the actual wiki `final.json` and at
 3. `.agents/skills/bloxodes-game-collection-workflow-runner/SKILL.md`
 4. `.agents/skills/bloxodes-wiki-workflow-runner/SKILL.md`
 
-## Review Phase
+## Release Intake
 
 1. Use the games named by the user. If the user asks for all completed games, discover candidates from `tmp/content-workspace/*/wiki/*/final.json` and matching collection finals.
 2. Check production rows to avoid republishing an already-live game unless the user explicitly asks to update or recheck it.
 3. Never create or edit a planning-tracker row merely to make a game eligible.
-4. For each eligible game, inspect:
+4. For each eligible game, confirm the release allowlist from:
 - `tmp/content-workspace/<game-slug>/wiki/<game-slug>/final.json`
 - `tmp/content-workspace/<game-slug>/collections/*/final.json`
 - `data/<Game Data Dir>/`
 - `apps/web/public/<Game Name>/`
 - `apps/web/src/lib/game-collections/games/<game-slug>.ts`
 - shared renderer/config files changed for that game
-5. Check that each collection final has a matching local dataset/config and that the wiki final exists.
-6. Start or reuse localhost with `npm run dev:local`.
-7. Run local verification:
-
-```bash
-npm run verify:wiki-final -- --base-url http://localhost:<port> --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>
-npm run verify:game-collection-finals -- --base-url http://localhost:<port> --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections
-```
-
-8. Run the HTML size gate for the wiki URL and each verified collection URL:
-
-```bash
-npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug> --fail-on-limit
-npm run audit:html-size -- --url http://localhost:<port>/wiki/<game-slug>/<collection-slug> --fail-on-limit
-```
-
-9. Open the local wiki and collection URLs in the Codex Browser for the user to inspect. If browser tooling is unavailable, provide the localhost links.
-10. Report one line per game: `Ready`, `Needs fixes`, or `Blocked`, with the exact local links and failed checks.
-11. Stop. Do not stage, commit, push, or write production until the user explicitly approves one or more games.
+5. Treat the user's explicit per-game release approval as confirmation that the normal verifier, dataset validation, HTML-size gate, pagination checks when applicable, and Browser preview already passed. Do not search for separate proof or tracker state.
+6. Do not rerun those checks during release. Return an artifact to the appropriate workflow's final-check stage only if the user says checks are incomplete or the release process changes it after approval.
+7. Report one line per game: `Ready to release` or `Needs final checks`, with the exact reason when not ready.
+8. Stop. Do not stage, commit, push, or write production until the user explicitly approves one or more games.
 
 ## Approval Gate
 
@@ -85,10 +70,10 @@ For shared files, do not stage the whole file if it includes unapproved games. S
 ## Git And Deploy
 
 1. Show `git status --short` and confirm the staged file list contains only approved game files.
-2. Reuse the wiki, collection, dataset, Browser, and HTML-size checks completed above. Do not add a separate full typecheck or local production build: run only targeted changed-source checks, and let the production workflow perform the one deployable build before changing the live container.
+2. Reuse the final workflow results. Do not rerun wiki/collection verifiers, dataset validation, Browser inspection, HTML-size checks, typecheck, or a local production build. Run `git diff --check` and any genuinely necessary tiny release-scope syntax check; let the production workflow perform the one deployable build before changing the live container.
 
 3. Commit with a message naming the approved game(s).
-4. Push the current branch only after the staged scope is correct.
+4. Push the task HEAD directly to `production` without force after the staged scope is correct. Do not open a PR unless the user explicitly requests one.
 5. Wait for deployment proof before production DB writes:
 - check deploy status when available
 - check `https://bloxodes.com/api/health`
@@ -141,3 +126,5 @@ Only after production readback and live URL checks pass, return:
 - live URLs
 - games reviewed but not approved
 - blocked games and exact reason
+
+Keep the current task worktree and branch available for immediate follow-up. Remove them only when the user explicitly asks for cleanup.

@@ -22,7 +22,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Journey automatic in-content ad placement, including pagination and hydrated DOM verification.
-- `.agents/skills/bloxodes-release-e2e/SKILL.md`: explicit-only end-to-end release orchestration for the current worktree, including direct or risk-based PR publication, deployment or database publication, local production sync, and safe cleanup.
+- `.agents/skills/bloxodes-release-e2e/SKILL.md`: explicit-only fast publication of completed work directly to production, including required deployment or database publication, local production sync, and retaining the task worktree for follow-up.
 - `docs/analytics/README.md`: Umami/GA4 ownership, access, event taxonomy, verification, and the home for future analytics reports.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
 
@@ -47,7 +47,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - For mutations, keep origin validation, rate limiting, and tag revalidation explicit.
 - Prefer `npm run ...` aliases over direct `tsx path/to/script.ts` when an alias already exists.
 - Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_collection_pages.wiki_slug`.
-- Invoke `bloxodes-release-e2e` only when the user explicitly names `$bloxodes-release-e2e` or asks for an `e2e`/`end-to-end` production release. Ordinary requests to commit, push, open a PR, deploy, or publish do not trigger the full release-and-cleanup workflow. When invoked from the main `production` worktree, create a temporary release worktree from `origin/production` and transfer only the explicit release allowlist; ignore unrelated temp/ignored files and never include changes from other branches, worktrees, or unrelated local files. Use direct production publication for focused routine work and a PR when requested or materially useful for high-risk review.
+- Invoke `bloxodes-release-e2e` only when the user explicitly names `$bloxodes-release-e2e` or asks for an `e2e`/`end-to-end` production release. Treat that invocation as confirmation that final checks passed. Publish the explicit allowlist directly to `production` without force; use a PR only when the user explicitly requests one. Never include another branch/worktree's changes. After release, synchronize local `production` but keep the current task worktree and branch for immediate follow-up until the user asks for cleanup.
 
 ## Design Direction
 
