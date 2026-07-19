@@ -37,6 +37,8 @@ type SupabaseAdminClient = ReturnType<typeof supabaseAdmin>;
 
 const DEFAULT_ARTICLE_AUTHOR_ID = process.env.ARTICLE_AUTHOR_ID ?? "4fc99a58-83da-46f6-9621-7816e36b4088";
 const SUPABASE_MEDIA_BUCKET = process.env.SUPABASE_MEDIA_BUCKET;
+const PRODUCTION_MEDIA_ORIGIN = "https://media.bloxodes.com";
+const LOCAL_URL_PATTERN = /https?:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?(?:\/|$)/i;
 
 let cachedAuthorIds: string[] | null = null;
 
@@ -299,6 +301,98 @@ function isEditedArticleCover(value: string | null | undefined, slug: string): b
   return value.includes(`/articles/${slug}/`) || value.includes(`/article-covers/`);
 }
 
+function normalizeArticleCover(value: string | null | undefined): string | null {
+  const normalized = toMediaPublicUrl(value?.trim() || null);
+  return normalized?.trim() || null;
+}
+
+function assertProductionArticleMedia(params: {
+  slug: string;
+  coverImage: string | null;
+  contentMd: string;
+  isPublished: boolean;
+}) {
+  if (process.env.NODE_ENV !== "production" || !params.isPublished) return;
+
+  const configuredMediaBase = process.env.SUPABASE_MEDIA_PUBLIC_URL?.trim();
+  if (!configuredMediaBase) {
+    throw new Error(
+      `Refusing to publish article ${params.slug}: SUPABASE_MEDIA_PUBLIC_URL must be ${PRODUCTION_MEDIA_ORIGIN}`
+    );
+  }
+
+  let configuredOrigin: string;
+  try {
+    configuredOrigin = new URL(configuredMediaBase).origin;
+  } catch {
+    throw new Error(
+      `Refusing to publish article ${params.slug}: SUPABASE_MEDIA_PUBLIC_URL is not a valid URL`
+    );
+  }
+
+  if (configuredOrigin !== PRODUCTION_MEDIA_ORIGIN) {
+    throw new Error(
+      `Refusing to publish article ${params.slug}: SUPABASE_MEDIA_PUBLIC_URL must use ${PRODUCTION_MEDIA_ORIGIN}`
+    );
+  }
+
+  if (!params.coverImage) {
+    throw new Error(`Refusing to publish article ${params.slug}: cover_image is required`);
+  }
+  if (LOCAL_URL_PATTERN.test(params.coverImage) || LOCAL_URL_PATTERN.test(params.contentMd)) {
+    throw new Error(`Refusing to publish article ${params.slug}: local URLs cannot be saved to production`);
+  }
+
+  let coverUrl: URL;
+  try {
+    coverUrl = new URL(params.coverImage);
+  } catch {
+    throw new Error(`Refusing to publish article ${params.slug}: cover_image must be an absolute URL`);
+  }
+  if (coverUrl.protocol !== "https:") {
+    throw new Error(`Refusing to publish article ${params.slug}: cover_image must use HTTPS`);
+  }
+}
+
+async function verifyProductionArticleMedia(params: {
+  slug: string;
+  sb: SupabaseAdminClient;
+}) {
+  if (process.env.NODE_ENV !== "production") return;
+
+  const { data, error } = await params.sb
+    .from("articles")
+    .select("cover_image,content_md,is_published")
+    .eq("slug", params.slug)
+    .single();
+  if (error || !data) {
+    throw new Error(`Failed to read back article ${params.slug}: ${error?.message ?? "no row returned"}`);
+  }
+
+  const row = data as { cover_image?: string | null; content_md?: string | null; is_published?: boolean | null };
+  if (row.is_published !== true) return;
+  const coverImage = normalizeArticleCover(row.cover_image);
+  assertProductionArticleMedia({
+    slug: params.slug,
+    coverImage,
+    contentMd: row.content_md ?? "",
+    isPublished: true,
+  });
+
+  // The assertion above guarantees a published production article has a cover.
+  if (!coverImage) return;
+  const response = await fetch(coverImage, {
+    headers: {
+      Range: "bytes=0-0",
+      "User-Agent": "Bloxodes article release check",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`Article ${params.slug} cover returned HTTP ${response.status}: ${coverImage}`);
+  }
+  await response.body?.cancel();
+}
+
 async function uploadEditedArticleCover(params: {
   imageUrl: string;
   slug: string;
@@ -393,10 +487,13 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
     finalJson.author_id ??
     ((existing as { author_id?: string | null } | null)?.author_id || null) ??
     (await pickAuthorId(sb));
-  const existingCover = ((existing as { cover_image?: string | null } | null)?.cover_image || null) ?? null;
+  const suppliedCover = normalizeArticleCover(finalJson.cover_image);
+  const existingCover = normalizeArticleCover(
+    ((existing as { cover_image?: string | null } | null)?.cover_image || null) ?? null
+  );
   const universeCover = await pickUniverseCoverImage(sb, universeId);
   const coverImage =
-    finalJson.cover_image ??
+    suppliedCover ??
     (isEditedArticleCover(existingCover, slug) ? existingCover : null) ??
     (!dryRun && universeCover
       ? await uploadEditedArticleCover({
@@ -411,6 +508,8 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
   const contentMd = coverImage
     ? injectCoverImageBeforeFirstH2(finalJson.content_md, coverImage, finalJson.title)
     : finalJson.content_md;
+
+  assertProductionArticleMedia({ slug, coverImage, contentMd, isPublished });
 
   const payload = {
     title: finalJson.title.trim(),
@@ -442,6 +541,7 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
     : sb.from("articles").insert(payload);
   const { error } = await query;
   if (error) throw new Error(`Failed to save article ${slug}: ${error.message}`);
+  await verifyProductionArticleMedia({ slug, sb });
   console.log(existing ? `Updated article ${slug}` : `Created article ${slug}`);
 }
 

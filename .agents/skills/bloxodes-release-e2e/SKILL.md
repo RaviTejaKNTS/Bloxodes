@@ -77,6 +77,8 @@ Run only when the completed task explicitly includes a prepared database change.
 4. Read back the affected production rows.
 5. Verify each exact public URL with `verify:published-url` or the page-type equivalent.
 
+For article imports, rely on `import:content-final` for the small release-time media check: it reads back each saved article, rejects a missing or local feature image, and fetches that exact cover once. Then verify only the exact published article URL; do not rerun article final checks.
+
 Do not publish unrelated drafts or queued content.
 
 ## 6. Synchronize And Stay Available
