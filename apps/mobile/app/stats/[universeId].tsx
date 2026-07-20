@@ -139,7 +139,7 @@ export default function StatsGameScreen() {
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                   <View style={{ gap: 2 }}>
                     <MetaText>Playing now</MetaText>
-                    <Text style={{ color: colors.foreground, fontSize: 26, fontWeight: "900" }}>{playersNow ?? "—"}</Text>
+                    <Text style={{ color: colors.foreground, fontSize: 26, fontWeight: "700" }}>{playersNow ?? "—"}</Text>
                   </View>
                   <View style={{ flexDirection: "row", gap: spacing.xs }}>
                     {CHART_RANGES.map((option) => {

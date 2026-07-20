@@ -21,6 +21,7 @@ import { getQuizPageByCode, listPublishedQuizzes, loadQuizData, type QuizListEnt
 import { SITE_URL } from "@/lib/seo";
 import { getToolContentWithDevFallback, listPublishedToolsPage, type ToolListEntry } from "@/lib/tools";
 import { resolveModifiedAt } from "@/lib/content-dates";
+import { cleanRewardsText, isCodeNew } from "@/lib/code-utils";
 import { getWikiPageBySlug, listPublishedWikiPages, loadWikiRelatedData, type WikiListEntry } from "@/lib/wiki";
 import { getWikiCollectionPageByCode } from "@/lib/wiki-collections";
 import { listUniverseEventTimeline } from "@/lib/events-summary";
@@ -105,11 +106,14 @@ export type MobileContentIndexPayload = {
   items: MobileContentItem[];
 };
 
+export type MobileContentDetailFieldTone = "positive" | "negative" | "warning" | "neutral";
+
 export type MobileContentDetailField = {
   key: string;
   label: string;
   value: string;
   kind: "chip" | "detail" | "text";
+  tone?: MobileContentDetailFieldTone | null;
 };
 
 export type MobileContentDetailItem = {
@@ -119,6 +123,10 @@ export type MobileContentDetailItem = {
   body: string | null;
   badge: string | null;
   image: string | null;
+  images?: string[];
+  url?: string | null;
+  copyValue?: string | null;
+  color?: string | null;
   startAt?: string | null;
   endAt?: string | null;
   status?: "upcoming" | "current" | "past" | null;
@@ -131,7 +139,19 @@ export type MobileContentDetailSection = {
   subtitle: string | null;
   body: string | null;
   items: MobileContentDetailItem[];
-  variant?: "collection-items" | "collection-details" | "faq" | "links" | "markdown" | "prose" | "stats" | "timeline";
+  variant?:
+    | "collection-items"
+    | "collection-details"
+    | "codes"
+    | "cta"
+    | "faq"
+    | "links"
+    | "markdown"
+    | "prose"
+    | "social"
+    | "stats"
+    | "timeline";
+  sourceId?: string | null;
   page?: number;
   pageSize?: number;
   total?: number;
@@ -149,6 +169,8 @@ export type MobileContentDetailPayload = {
   updatedAt: string | null;
   url: string;
   badge: string | null;
+  robloxUrl?: string | null;
+  universeId?: number | null;
   layout?: "default" | "events" | "wiki" | "wiki_collection";
   sections: MobileContentDetailSection[];
 };
@@ -229,35 +251,6 @@ function toPlainText(value: unknown): string | null {
   return cleaned || null;
 }
 
-function toReadableProse(value: unknown): string | null {
-  if (typeof value !== "string") return null;
-  const cleaned = value
-    .replace(/```[\s\S]*?```/g, " ")
-    .replace(/!\[[^\]]*]\([^)]*\)/g, " ")
-    .replace(/\[([^\]]+)]\([^)]*\)/g, "$1")
-    .replace(/<br\s*\/?>/gi, "\n")
-    .replace(/<[^>]+>/g, " ")
-    .split(/\n{2,}/)
-    .map((block) =>
-      block
-        .split(/\n/)
-        .map((line) =>
-          line
-            .replace(/^\s{0,3}#{1,6}\s+/, "")
-            .replace(/^\s*[-*+]\s+/, "")
-            .replace(/[#>*_`~|]/g, " ")
-            .replace(/\s+/g, " ")
-            .trim()
-        )
-        .filter(Boolean)
-        .join(" ")
-    )
-    .filter(Boolean)
-    .join("\n\n")
-    .trim();
-  return cleaned || null;
-}
-
 function truncate(value: string | null, max = 900): string | null {
   if (!value || value.length <= max) return value;
   const slice = value.slice(0, max - 3);
@@ -275,6 +268,7 @@ function section(
     page?: number;
     pageSize?: number;
     query?: string | null;
+    sourceId?: string | null;
     subtitle?: string | null;
     total?: number;
     variant?: MobileContentDetailSection["variant"];
@@ -292,6 +286,7 @@ function section(
     body,
     items,
     variant: options.variant,
+    sourceId: options.sourceId ?? null,
     page: options.page,
     pageSize,
     query: options.query ?? null,
@@ -307,13 +302,17 @@ function detailItem(
     badge?: string | null;
     body?: string | null;
     bodyMax?: number;
+    color?: string | null;
+    copyValue?: string | null;
     fields?: MobileContentDetailField[];
     image?: string | null;
+    images?: string[];
     preserveMarkdown?: boolean;
     startAt?: string | null;
     endAt?: string | null;
     status?: "upcoming" | "current" | "past" | null;
     subtitle?: string | null;
+    url?: string | null;
   } = {}
 ): MobileContentDetailItem {
   return {
@@ -326,6 +325,12 @@ function detailItem(
     ),
     badge: options.badge ?? null,
     image: absoluteAssetUrl(options.image ?? null),
+    images: options.images?.length
+      ? (options.images.map((entry) => absoluteAssetUrl(entry)).filter(Boolean) as string[])
+      : undefined,
+    url: options.url ?? undefined,
+    copyValue: options.copyValue ?? undefined,
+    color: options.color ?? undefined,
     startAt: options.startAt ?? null,
     endAt: options.endAt ?? null,
     status: options.status ?? null,
@@ -398,6 +403,49 @@ function deviceSupportLabel(page: {
     ["VR", page.vr_enabled]
   ].filter((entry): entry is [string, true] => entry[1] === true);
   return devices.length ? devices.map(([label]) => label).join(", ") : null;
+}
+
+const MOBILE_SOCIAL_LABELS: Record<string, string> = {
+  twitter: "Twitter / X",
+  x: "Twitter / X",
+  youtube: "YouTube",
+  discord: "Discord",
+  twitch: "Twitch",
+  facebook: "Facebook",
+  roblox_group: "Roblox Group",
+  roblox: "Roblox Group",
+  guilded: "Guilded"
+};
+
+function mobileSocialItems(raw: unknown): MobileContentDetailItem[] {
+  if (!isRecord(raw)) return [];
+  const seen = new Set<string>();
+  const items: MobileContentDetailItem[] = [];
+  for (const [platform, value] of Object.entries(raw)) {
+    const normalizedPlatform = platform.trim().toLowerCase();
+    const entries = Array.isArray(value) ? value : [value];
+    for (const entry of entries) {
+      const url =
+        typeof entry === "string"
+          ? normalizeText(entry)
+          : isRecord(entry) && typeof entry.url === "string"
+            ? normalizeText(entry.url)
+            : null;
+      if (!url || !/^https?:\/\//i.test(url)) continue;
+      const dedupeKey = url.replace(/[?#].*$/, "").replace(/\/+$/, "").toLowerCase();
+      if (seen.has(dedupeKey)) continue;
+      seen.add(dedupeKey);
+      const title = isRecord(entry) && typeof entry.title === "string" ? normalizeText(entry.title) : null;
+      items.push(
+        detailItem(
+          `${normalizedPlatform}-${items.length}`,
+          title ?? MOBILE_SOCIAL_LABELS[normalizedPlatform] ?? humanizeKey(normalizedPlatform),
+          { badge: normalizedPlatform, url }
+        )
+      );
+    }
+  }
+  return items.slice(0, 10);
 }
 
 function keyValueItems(values: Record<string, unknown>): MobileContentDetailItem[] {
@@ -504,12 +552,23 @@ function datasetItemBody(row: Record<string, unknown>, keys: string[], max = 5):
   return parts.length ? parts.join(" | ") : null;
 }
 
+function normalizeHexColor(value: string | null): string | null {
+  if (!value) return null;
+  const trimmed = value.trim();
+  if (/^#[0-9a-f]{6}$/i.test(trimmed)) return trimmed;
+  if (/^[0-9a-f]{6}$/i.test(trimmed)) return `#${trimmed}`;
+  return null;
+}
+
 function detailItemsFromRows(
   rows: Array<Record<string, unknown>>,
   options: {
     badgeKeys?: string[];
     bodyKeys?: string[];
+    colorKey?: string;
+    copyKeys?: string[];
     fallbackBadge?: string | null;
+    fieldKeys?: string[];
     imageKeys?: string[];
     limit?: number;
     subtitleKeys?: string[];
@@ -529,11 +588,29 @@ function detailItemsFromRows(
     const image = firstMeaningfulValue(row, imageKeys);
     const body = datasetItemBody(row, options.bodyKeys ?? Object.keys(row));
     const id = firstMeaningfulValue(row, ["id", "asset_id", "code", "slug", "name", "title"]) ?? `${index}`;
+    const copyValue = options.copyKeys ? firstMeaningfulValue(row, options.copyKeys)?.replace(/,/g, "") ?? null : null;
+    const color = options.colorKey ? normalizeHexColor(formatUnknownValue(row[options.colorKey])) : null;
+    const fields = (options.fieldKeys ?? [])
+      .map((key): MobileContentDetailField | null => {
+        const value = formatUnknownValue(row[key]);
+        if (!value) return null;
+        return {
+          key,
+          label: getFieldLabel(key),
+          value,
+          kind: mobileCollectionFieldKind(value),
+          tone: mobileFieldTone(key, value)
+        };
+      })
+      .filter(Boolean) as MobileContentDetailField[];
     return detailItem(String(id), title, {
       subtitle,
       badge,
       image,
-      body
+      body: fields.length ? null : body,
+      copyValue,
+      color,
+      fields: fields.length ? fields : undefined
     });
   });
 }
@@ -625,6 +702,65 @@ function mobileCollectionFieldKind(value: string): MobileContentDetailField["kin
   return "text";
 }
 
+const MOBILE_STATUS_FIELD_KEYS = ["availability", "available", "status", "obtainable", "obtainability", "tradable", "tradeable"];
+
+function mobileFieldTone(key: string, value: string): MobileContentDetailFieldTone | null {
+  const loweredKey = key.toLowerCase();
+  const lowered = value.toLowerCase();
+  if (MOBILE_STATUS_FIELD_KEYS.some((entry) => loweredKey.includes(entry))) {
+    if (/\b(retired|removed|unavailable|not available|trade only|unobtainable|not obtainable|disabled|inactive)\b/.test(lowered)) {
+      return "negative";
+    }
+    if (/\b(event|limited|seasonal|early access|exclusive|shop pool|random roll)\b/.test(lowered)) {
+      return "warning";
+    }
+    if (/\b(available|current|free|default|public|private server|obtainable|complete)\b/.test(lowered)) {
+      return "positive";
+    }
+  }
+  if (lowered === "yes" || lowered === "true") return "positive";
+  if (lowered === "no" || lowered === "false") return "negative";
+  return null;
+}
+
+type MobileFieldPresentation = {
+  kind?: MobileContentDetailField["kind"];
+  label?: string;
+  tone?: MobileContentDetailFieldTone;
+};
+
+function normalizePresentationKind(value: unknown): MobileContentDetailField["kind"] | null {
+  if (value === "chip" || value === "highlight") return "chip";
+  if (value === "detail") return "detail";
+  if (value === "normal" || value === "text") return "text";
+  return null;
+}
+
+function normalizePresentationTone(value: unknown): MobileContentDetailFieldTone | null {
+  return value === "positive" || value === "negative" || value === "warning" || value === "neutral" ? value : null;
+}
+
+function collectionFieldPresentation(payload: unknown): Record<string, MobileFieldPresentation> {
+  const { meta, display } = collectionDisplayConfig(payload);
+  const raw = getRecordProperty(display, "fieldPresentation") ?? getRecordProperty(meta, "fieldPresentation");
+  if (!isRecord(raw)) return {};
+  const result: Record<string, MobileFieldPresentation> = {};
+  for (const [key, entry] of Object.entries(raw)) {
+    if (typeof entry === "string") {
+      const kind = normalizePresentationKind(entry);
+      if (kind) result[key] = { kind };
+      continue;
+    }
+    if (!isRecord(entry)) continue;
+    result[key] = {
+      kind: normalizePresentationKind(entry.kind) ?? undefined,
+      label: normalizeText(entry.label) ?? undefined,
+      tone: normalizePresentationTone(entry.tone) ?? undefined
+    };
+  }
+  return result;
+}
+
 function collectionDisplayConfig(payload: unknown) {
   const meta = isRecord(payload) && isRecord(payload.meta) ? payload.meta : null;
   const display = meta && isRecord(meta.display) ? meta.display : null;
@@ -664,6 +800,7 @@ function collectionDisplayKeys(payload: unknown, columns: string[]) {
 function mobileCollectionItem(row: Record<string, unknown>, fieldKeys: string[], options: {
   badgeKey: string | null;
   descriptionKey: string | null;
+  presentation?: Record<string, MobileFieldPresentation>;
   subtitleKeys: string[];
 }): MobileContentDetailItem {
   const title = firstMeaningfulValue(row, ["name", "title", "label", "id"]) ?? "Item";
@@ -673,11 +810,13 @@ function mobileCollectionItem(row: Record<string, unknown>, fieldKeys: string[],
     .map((key): MobileContentDetailField | null => {
       const value = formatUnknownValue(row[key]);
       if (!value) return null;
+      const presentation = options.presentation?.[key];
       return {
         key,
-        label: getFieldLabel(key),
+        label: presentation?.label ?? getFieldLabel(key),
         value,
-        kind: mobileCollectionFieldKind(value)
+        kind: presentation?.kind ?? mobileCollectionFieldKind(value),
+        tone: presentation?.tone ?? mobileFieldTone(key, value)
       };
     })
     .filter(Boolean) as MobileContentDetailField[];
@@ -827,6 +966,7 @@ async function loadGameCollectionSections(code: string, searchParams?: URLSearch
   const filteredRows = filterRowsByQuery(normalized, query);
   const columns = Array.from(new Set(normalized.flatMap((row) => Object.keys(row))));
   const { badgeKey, descriptionKey, fieldKeys, sectionOrder, subtitleKeys } = collectionDisplayKeys(payload, columns);
+  const presentation = collectionFieldPresentation(payload);
   const groupKey =
     columns.includes("collectionSection")
       ? "collectionSection"
@@ -854,6 +994,7 @@ async function loadGameCollectionSections(code: string, searchParams?: URLSearch
           mobileCollectionItem(row, fieldKeys, {
             badgeKey,
             descriptionKey,
+            presentation,
             subtitleKeys
           })
         ),
@@ -888,6 +1029,7 @@ async function loadGrowGardenCatalogSections(code: string, searchParams?: URLSea
         mobileCollectionItem(row, fieldKeys, {
           badgeKey: config.badgeKey ?? badgeKey,
           descriptionKey,
+          presentation: collectionFieldPresentation(dataset),
           subtitleKeys: uniqueStrings([...(config.subtitleKeys ?? []), ...subtitleKeys])
         })
       ),
@@ -923,6 +1065,7 @@ async function loadForgeCatalogSections(code: string, searchParams?: URLSearchPa
         mobileCollectionItem(row, fieldKeys, {
           badgeKey: config.badgeKey ?? badgeKey,
           descriptionKey,
+          presentation: collectionFieldPresentation(dataset),
           subtitleKeys: uniqueStrings([...(config.subtitleKeys ?? []), config.groupKey, ...subtitleKeys])
         })
       ),
@@ -954,7 +1097,7 @@ async function loadFreeItemsCatalogSections(searchParams?: URLSearchParams): Pro
         badgeKeys: ["price_robux", "item_type"],
         subtitleKeys: ["category", "subcategory", "creator_name"],
         imageKeys: ["thumbnail_url"],
-        bodyKeys: ["description", "creator_name", "category", "subcategory", "favorite_count", "last_seen_at"],
+        fieldKeys: ["item_type", "creator_name", "favorite_count"],
         limit: pageSize
       }),
       page,
@@ -1013,10 +1156,11 @@ async function loadMusicCatalogSections(searchParams?: URLSearchParams): Promise
       body: `Ranked Roblox music IDs with artist, genre, duration, and asset IDs. Page ${page} of ${Math.max(1, Math.ceil((count ?? rows.length) / pageSize))}.`,
       items: detailItemsFromRows(rows, {
         titleKeys: ["title", "asset_id"],
-        subtitleKeys: ["artist", "genre", "album"],
-        badgeKeys: ["asset_id", "rank"],
+        subtitleKeys: ["artist"],
+        badgeKeys: ["rank"],
         imageKeys: ["thumbnail_url"],
-        bodyKeys: ["artist", "album", "genre", "duration", "source", "last_seen_at"],
+        copyKeys: ["asset_id"],
+        fieldKeys: ["asset_id", "genre", "album", "duration"],
         limit: pageSize
       }),
       page,
@@ -1042,9 +1186,11 @@ async function loadColorCodeCatalogSections(searchParams?: URLSearchParams): Pro
       body: `Official Roblox BrickColor names with numeric IDs, hex values, and RGB formats. Page ${page} of ${Math.max(1, Math.ceil(rows.length / pageSize))}.`,
       items: detailItemsFromRows(pagedRows, {
         titleKeys: ["name"],
-        subtitleKeys: ["hex", "rgb255"],
+        subtitleKeys: [],
         badgeKeys: ["number"],
-        bodyKeys: ["hex", "rgb255", "rgb01", "number"],
+        colorKey: "hex",
+        copyKeys: ["hex"],
+        fieldKeys: ["number", "hex", "rgb255", "rgb01"],
         limit: pageSize
       }),
       page,
@@ -1099,9 +1245,10 @@ async function loadDecalCatalogSections(searchParams?: URLSearchParams): Promise
       items: detailItemsFromRows(rows, {
         titleKeys: ["name", "asset_id"],
         subtitleKeys: ["creator_name"],
-        badgeKeys: ["asset_id", "price_in_robux"],
+        badgeKeys: ["price_in_robux"],
         imageKeys: ["thumbnail_url"],
-        bodyKeys: ["description", "creator_name", "roblox_created_at", "sales", "upvote_percent", "source_count"],
+        copyKeys: ["asset_id"],
+        fieldKeys: ["asset_id", "sales", "upvote_percent"],
         limit: pageSize
       }),
       page,
@@ -1114,19 +1261,22 @@ async function loadDecalCatalogSections(searchParams?: URLSearchParams): Promise
 
 async function loadCatalogNativeSections(code: string, searchParams?: URLSearchParams): Promise<MobileContentDetailSection[]> {
   const normalized = code.trim().toLowerCase();
-  const loaders: Array<() => Promise<MobileContentDetailSection[]>> = [];
 
+  // Game-specific dataset loaders overlap (a forge code also resolves through
+  // the generic registry), so take the first loader that yields sections
+  // instead of concatenating duplicate item lists.
+  const datasetSections: MobileContentDetailSection[] = [];
   if (normalized.startsWith("grow-a-garden-")) {
-    loaders.push(() => loadGrowGardenCatalogSections(normalized, searchParams));
+    datasetSections.push(...(await loadGrowGardenCatalogSections(normalized, searchParams)));
+  }
+  if (!datasetSections.length && normalized.startsWith("the-forge-")) {
+    datasetSections.push(...(await loadForgeCatalogSections(normalized, searchParams)));
+  }
+  if (!datasetSections.length && getGameCollectionConfigByCode(normalized)) {
+    datasetSections.push(...(await loadGameCollectionSections(normalized, searchParams)));
   }
 
-  if (normalized.startsWith("the-forge-")) {
-    loaders.push(() => loadForgeCatalogSections(normalized, searchParams));
-  }
-
-  if (getGameCollectionConfigByCode(normalized)) {
-    loaders.push(() => loadGameCollectionSections(normalized, searchParams));
-  }
+  const loaders: Array<() => Promise<MobileContentDetailSection[]>> = [];
 
   if (normalized === "free-roblox-items" || normalized === "roblox-free-items") {
     loaders.push(() => loadFreeItemsCatalogSections(searchParams));
@@ -1145,7 +1295,7 @@ async function loadCatalogNativeSections(code: string, searchParams?: URLSearchP
   }
 
   const groups = await Promise.all(loaders.map((loader) => loader()));
-  return groups.flat();
+  return [...datasetSections, ...groups.flat()];
 }
 
 function robuxBundleItems(): MobileContentDetailItem[] {
@@ -1461,22 +1611,24 @@ export async function getMobileContentDetail(
           variant: "links"
         }),
         section("overview", "Overview", {
-          body: toReadableProse(collection.intro_md) ?? collection.meta_description,
-          bodyMax: 1800,
-          variant: "prose"
+          body: collection.intro_md ?? collection.meta_description,
+          bodyMax: 6000,
+          variant: "markdown"
         }),
         ...nativeSections,
         section("how-it-works", "How it works", {
-          body: toReadableProse(collection.how_it_works_md),
-          bodyMax: 2400,
-          variant: "prose"
+          body: collection.how_it_works_md,
+          bodyMax: 8000,
+          variant: "markdown"
         }),
         section("details", "Details", {
           items: keyValueItems(collection.description_json ?? {}),
           variant: "collection-details"
         }),
         section("faq", "FAQ", {
-          items: (collection.faq_json ?? []).slice(0, 12).map((entry, index) => detailItem(`faq-${index}`, entry.q, { body: entry.a })),
+          items: (collection.faq_json ?? []).slice(0, 12).map((entry, index) =>
+            detailItem(`faq-${index}`, entry.q, { body: entry.a, preserveMarkdown: true })
+          ),
           variant: "faq"
         })
       ].filter(Boolean) as MobileContentDetailSection[];
@@ -1514,8 +1666,12 @@ export async function getMobileContentDetail(
         )
       : [];
     const sections = [
-      section("overview", "Overview", { body: toPlainText(page.intro_md) ?? page.meta_description }),
-      section("catalog-wiki", "Catalog notes", { body: toPlainText(page.wiki_md) }),
+      section("overview", "Overview", {
+        body: page.intro_md ?? page.meta_description,
+        bodyMax: 6000,
+        variant: "markdown"
+      }),
+      section("catalog-wiki", "Catalog notes", { body: page.wiki_md, bodyMax: 8000, variant: "markdown" }),
       ...nativeSections,
       childPages.length
         ? section("related-catalogs", "Related catalog pages", {
@@ -1523,10 +1679,13 @@ export async function getMobileContentDetail(
             items: childCatalogItems
           })
         : null,
-      section("how-it-works", "How it works", { body: toPlainText(page.how_it_works_md) }),
-      section("details", "Details", { items: keyValueItems(page.description_json ?? {}) }),
+      section("how-it-works", "How it works", { body: page.how_it_works_md, bodyMax: 8000, variant: "markdown" }),
+      section("details", "Details", { items: keyValueItems(page.description_json ?? {}), variant: "collection-details" }),
       section("faq", "FAQ", {
-        items: (page.faq_json ?? []).slice(0, 12).map((entry, index) => detailItem(`faq-${index}`, entry.q, { body: entry.a }))
+        items: (page.faq_json ?? []).slice(0, 12).map((entry, index) =>
+          detailItem(`faq-${index}`, entry.q, { body: entry.a, preserveMarkdown: true })
+        ),
+        variant: "faq"
       })
     ].filter(Boolean) as MobileContentDetailSection[];
 
@@ -1549,18 +1708,47 @@ export async function getMobileContentDetail(
     if (!data) return null;
     const { page, items } = data;
     const updatedAt = page.content_updated_at || page.updated_at || page.published_at || page.created_at || null;
-    const required = items.filter((item) => item.is_required);
-    const optional = items.filter((item) => !item.is_required);
+    const sectionParts = (code: string) => code.split(".").filter(Boolean);
+    const leafItems = items.filter((item) => sectionParts(item.section_code).length === 3);
+    const sectionTitles = new Map<string, string>();
+    for (const item of items) {
+      const parts = sectionParts(item.section_code);
+      if (parts.length < 3) sectionTitles.set(parts.join("."), item.title);
+    }
+    const checklistTaskItem = (item: (typeof items)[number]) =>
+      detailItem(item.id, item.title, { body: item.description, badge: item.is_required ? null : "Optional" });
+    let taskSections: MobileContentDetailSection[];
+    if (leafItems.length) {
+      const grouped = new Map<string, typeof items>();
+      for (const item of leafItems) {
+        const prefix = sectionParts(item.section_code).slice(0, 2).join(".");
+        grouped.set(prefix, [...(grouped.get(prefix) ?? []), item]);
+      }
+      taskSections = Array.from(grouped.entries())
+        .map(([prefix, groupItems]) =>
+          section(`tasks-${prefix.replace(/\./g, "-")}`, sectionTitles.get(prefix) ?? sectionTitles.get(prefix.split(".")[0]) ?? "Tasks", {
+            subtitle: `${groupItems.length} ${groupItems.length === 1 ? "task" : "tasks"}`,
+            items: groupItems.map(checklistTaskItem)
+          })
+        )
+        .filter(Boolean) as MobileContentDetailSection[];
+    } else {
+      const required = items.filter((item) => item.is_required);
+      const optional = items.filter((item) => !item.is_required);
+      taskSections = [
+        section("required", "Required tasks", {
+          subtitle: `${required.length} tasks`,
+          items: required.map(checklistTaskItem)
+        }),
+        section("optional", "Optional tasks", {
+          subtitle: `${optional.length} tasks`,
+          items: optional.map(checklistTaskItem)
+        })
+      ].filter(Boolean) as MobileContentDetailSection[];
+    }
     const sections = [
       section("overview", "Overview", { body: toPlainText(page.seo_description) ?? toPlainText(page.description_md) }),
-      section("required", "Required tasks", {
-        subtitle: `${required.length} tasks`,
-        items: required.map((item) => detailItem(item.id, item.title, { body: item.description, badge: item.section_code }))
-      }),
-      section("optional", "Optional tasks", {
-        subtitle: `${optional.length} tasks`,
-        items: optional.map((item) => detailItem(item.id, item.title, { body: item.description, badge: item.section_code }))
-      })
+      ...taskSections
     ].filter(Boolean) as MobileContentDetailSection[];
 
     return {
@@ -1572,7 +1760,7 @@ export async function getMobileContentDetail(
       coverImage: absoluteAssetUrl(page.universe?.icon_url || "/Bloxodes.png"),
       updatedAt,
       url: `${SITE_URL}/checklists/${page.slug}`,
-      badge: `${items.length} tasks`,
+      badge: `${leafItems.length || items.length} tasks`,
       sections
     };
   }
@@ -1674,12 +1862,19 @@ export async function getMobileContentDetail(
     }
     const updatedAt = tool.content_updated_at || tool.updated_at || tool.published_at || tool.created_at || null;
     const sections = [
-      section("overview", "Overview", { body: toPlainText(tool.intro_md) ?? tool.meta_description }),
+      section("overview", "Overview", {
+        body: tool.intro_md ?? tool.meta_description,
+        bodyMax: 6000,
+        variant: "markdown"
+      }),
       ...toolNativeSections(tool.code),
-      section("how-it-works", "How it works", { body: toPlainText(tool.how_it_works_md) }),
-      section("details", "Details", { items: keyValueItems(tool.description_json ?? {}) }),
+      section("how-it-works", "How it works", { body: tool.how_it_works_md, bodyMax: 8000, variant: "markdown" }),
+      section("details", "Details", { items: keyValueItems(tool.description_json ?? {}), variant: "collection-details" }),
       section("faq", "FAQ", {
-        items: (tool.faq_json ?? []).slice(0, 12).map((entry, index) => detailItem(`faq-${index}`, entry.q, { body: entry.a }))
+        items: (tool.faq_json ?? []).slice(0, 12).map((entry, index) =>
+          detailItem(`faq-${index}`, entry.q, { body: entry.a, preserveMarkdown: true })
+        ),
+        variant: "faq"
       })
     ].filter(Boolean) as MobileContentDetailSection[];
 
@@ -1701,17 +1896,19 @@ export async function getMobileContentDetail(
   if (!page) return null;
   const related = await loadWikiRelatedData(page);
   const updatedAt = page.content_updated_at || page.updated_at || page.published_at || page.created_at || null;
+  const nowMs = Date.now();
   const relatedCatalogItems = related.catalogPages.length
     ? await Promise.all(
         related.catalogPages.slice(0, DETAIL_ITEM_LIMIT).map(async (entry) => {
-          const [previewImage] = await listGameCollectionImageUrls(entry.code, 1);
+          const previewImages = await listGameCollectionImageUrls(entry.code, 6);
 
           return detailItem(entry.code, entry.title, {
             badge: "Catalog",
             body: entry.wiki_md ?? entry.meta_description,
             bodyMax: 12_000,
             preserveMarkdown: Boolean(entry.wiki_md),
-            image: entry.thumb_url ?? previewImage ?? null
+            image: entry.thumb_url ?? previewImages[0] ?? null,
+            images: previewImages
           });
         })
       )
@@ -1750,17 +1947,34 @@ export async function getMobileContentDetail(
       variant: "stats"
     }),
     section("game-details", "Game details", { items: wikiGameDetails, variant: "collection-details" }),
+    mobileSocialItems(page.social_links).length
+      ? section("social", `${page.universe_creator_name ?? "Creator"} Social Accounts`, {
+          items: mobileSocialItems(page.social_links),
+          variant: "social"
+        })
+      : null,
+    related.activeCodes.length && related.codes[0]
+      ? section("active-codes", `Active ${page.universe_display_name ?? page.universe_name ?? page.title} Codes`, {
+          subtitle: `${related.codes[0].active_count ?? related.activeCodes.length} active`,
+          sourceId: related.codes[0].slug,
+          items: related.activeCodes.slice(0, 8).map((code) =>
+            detailItem(code.id, code.code, {
+              badge: isCodeNew(code, nowMs) ? "New" : null,
+              body: cleanRewardsText(code.rewards_text),
+              subtitle: code.level_requirement != null ? `Level ${code.level_requirement}+` : null,
+              copyValue: code.code,
+              startAt: code.first_seen_at
+            })
+          ),
+          variant: "codes"
+        })
+      : null,
     related.codes.length
       ? section("codes", "Codes", {
           items: related.codes.map((game) =>
             detailItem(game.slug, `${game.name} Codes`, {
               badge: `${game.active_count ?? 0} active`,
-              body: [
-                game.genre_l2 ?? game.genre_l1 ? `Genre: ${game.genre_l2 ?? game.genre_l1}` : null,
-                game.content_updated_at ? `Updated: ${game.content_updated_at}` : null
-              ]
-                .filter(Boolean)
-                .join(" | "),
+              body: (game.genre_l2 ?? game.genre_l1) ? `Genre: ${game.genre_l2 ?? game.genre_l1}` : "Working codes list with rewards.",
               image: game.cover_image ?? null
             })
           )
@@ -1846,9 +2060,16 @@ export async function getMobileContentDetail(
       ? section("badges", "Badges", {
           items: related.badges.map((badge) =>
             detailItem(`${badge.badge_id}`, badge.name, {
-              badge: badge.rarity_percent ? `${percent(badge.rarity_percent)}%` : null,
               body: badge.description,
-              image: badge.icon_image_url
+              image: badge.icon_image_url,
+              fields: [
+                compactNumber(badge.awarded_count)
+                  ? { key: "awards", label: "Awards", value: compactNumber(badge.awarded_count)!, kind: "text" as const }
+                  : null,
+                badge.rarity_percent != null
+                  ? { key: "rarity", label: "Rarity", value: `${percent(badge.rarity_percent)}%`, kind: "text" as const }
+                  : null
+              ].filter(Boolean) as MobileContentDetailField[]
             })
           )
         })
@@ -1857,25 +2078,39 @@ export async function getMobileContentDetail(
       ? section("game-passes", "Game passes", {
           items: related.gamePasses.map((pass) =>
             detailItem(`${pass.pass_id}`, pass.name, {
-              badge: typeof pass.price === "number" ? `${pass.price.toLocaleString("en-US")} Robux` : null,
               body: pass.description,
-              image: pass.icon_image_url
+              image: pass.icon_image_url,
+              fields: [
+                {
+                  key: "price",
+                  label: "Price",
+                  value: pass.price === 0 ? "Free" : typeof pass.price === "number" ? `${pass.price.toLocaleString("en-US")} Robux` : "Price hidden",
+                  kind: "text" as const
+                },
+                typeof pass.is_for_sale === "boolean"
+                  ? { key: "sale", label: "Sale", value: pass.is_for_sale ? "Yes" : "No", kind: "text" as const }
+                  : null,
+                { key: "sales", label: "Sales", value: compactNumber(pass.sales) ?? "No public sales", kind: "text" as const }
+              ].filter(Boolean) as MobileContentDetailField[]
             })
           )
         })
       : null,
     related.servers.length
       ? section("servers", "Recent servers", {
-          items: related.servers.map((server) =>
-            detailItem(server.id, server.region ?? server.server_id, {
-              badge: numberLabel(server.player_count) ? `${numberLabel(server.player_count)} players` : null,
-              body: [
-                server.ping_ms ? `${server.ping_ms} ms ping` : null,
-                server.fps ? `${server.fps} FPS` : null,
-                server.max_players ? `${server.max_players} max players` : null
+          items: related.servers.map((server, index) =>
+            detailItem(server.id, `Public server ${index + 1}`, {
+              subtitle: server.region ?? null,
+              fields: [
+                {
+                  key: "players",
+                  label: "Players",
+                  value: `${numberLabel(server.player_count) ?? "0"} / ${numberLabel(server.max_players) ?? "?"}`,
+                  kind: "text" as const
+                },
+                { key: "ping", label: "Ping", value: server.ping_ms != null ? `${server.ping_ms} ms` : "Ping hidden", kind: "text" as const },
+                { key: "fps", label: "FPS", value: server.fps != null ? `${server.fps.toFixed(1)} FPS` : "FPS hidden", kind: "text" as const }
               ]
-                .filter(Boolean)
-                .join(" | ")
             })
           )
         })
@@ -1903,6 +2138,8 @@ export async function getMobileContentDetail(
     updatedAt,
     url: `${SITE_URL}/wiki/${page.slug}`,
     badge: "Wiki",
+    robloxUrl: page.universe_root_place_id ? `https://www.roblox.com/games/${page.universe_root_place_id}` : null,
+    universeId: typeof page.universe_id === "number" ? page.universe_id : null,
     layout: "wiki",
     sections
   };

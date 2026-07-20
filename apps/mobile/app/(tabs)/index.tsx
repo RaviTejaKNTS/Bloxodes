@@ -149,7 +149,7 @@ export default function HomeScreen() {
         }
       >
         <View style={{ gap: spacing.xs, paddingHorizontal: spacing.lg }}>
-          <Text style={{ color: colors.accent, fontSize: 12, fontWeight: "900", textTransform: "uppercase" }}>
+          <Text style={{ color: colors.accent, fontSize: 12, fontWeight: "700", textTransform: "uppercase" }}>
             Roblox Live Database
           </Text>
           <Text style={{ color: colors.foreground, fontSize: 26, lineHeight: 32, fontWeight: "800" }}>

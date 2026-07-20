@@ -17,7 +17,7 @@ function CodesGridCard({ game, onPress, width }: { game: CodesIndexItem; onPress
       <CoverImage source={game.coverImage} label={game.name} />
       <View style={{ gap: spacing.xs, padding: spacing.md }}>
         {game.genre ? (
-          <Text style={{ color: colors.muted, fontSize: 10.5, fontWeight: "900", textTransform: "uppercase" }} numberOfLines={1}>
+          <Text style={{ color: colors.muted, fontSize: 10.5, fontWeight: "700", textTransform: "uppercase" }} numberOfLines={1}>
             {game.genre}
           </Text>
         ) : null}

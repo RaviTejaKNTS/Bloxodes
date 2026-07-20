@@ -131,11 +131,16 @@ export function fetchContentIndex(
 export function fetchContentDetail(
   kind: MobileContentKind,
   slug: string,
-  sectionPages?: Record<string, number>
+  sectionPages?: Record<string, number>,
+  query?: string
 ): Promise<MobileContentDetailResponse> {
-  const pageParams: Record<string, number> = {};
+  const pageParams: Record<string, number | string> = {};
   for (const [sectionId, page] of Object.entries(sectionPages ?? {})) {
     pageParams[`sectionPage.${sectionId}`] = page;
+  }
+  const trimmedQuery = query?.trim();
+  if (trimmedQuery) {
+    pageParams.q = trimmedQuery;
   }
   const queryString = buildQuery(pageParams);
   const suffix = queryString ? `?${queryString}` : "";

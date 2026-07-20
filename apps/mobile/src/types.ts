@@ -76,6 +76,16 @@ export type MobileContentIndexResponse = {
   items: MobileContentItem[];
 };
 
+export type MobileContentDetailFieldTone = "positive" | "negative" | "warning" | "neutral";
+
+export type MobileContentDetailField = {
+  key: string;
+  label: string;
+  value: string;
+  kind: "chip" | "detail" | "text";
+  tone?: MobileContentDetailFieldTone | null;
+};
+
 export type MobileContentDetailItem = {
   id: string;
   title: string;
@@ -83,15 +93,14 @@ export type MobileContentDetailItem = {
   body: string | null;
   badge: string | null;
   image: string | null;
+  images?: string[];
+  url?: string | null;
+  copyValue?: string | null;
+  color?: string | null;
   startAt?: string | null;
   endAt?: string | null;
   status?: "upcoming" | "current" | "past" | null;
-  fields?: Array<{
-    key: string;
-    label: string;
-    value: string;
-    kind: "chip" | "detail" | "text";
-  }>;
+  fields?: MobileContentDetailField[];
 };
 
 export type MobileContentDetailSection = {
@@ -100,7 +109,19 @@ export type MobileContentDetailSection = {
   subtitle: string | null;
   body: string | null;
   items: MobileContentDetailItem[];
-  variant?: "collection-items" | "collection-details" | "faq" | "links" | "markdown" | "prose" | "stats" | "timeline";
+  variant?:
+    | "collection-items"
+    | "collection-details"
+    | "codes"
+    | "cta"
+    | "faq"
+    | "links"
+    | "markdown"
+    | "prose"
+    | "social"
+    | "stats"
+    | "timeline";
+  sourceId?: string | null;
   page?: number;
   pageSize?: number;
   total?: number;
@@ -118,6 +139,8 @@ export type MobileContentDetailResponse = {
   updatedAt: string | null;
   url: string;
   badge: string | null;
+  robloxUrl?: string | null;
+  universeId?: number | null;
   layout?: "default" | "events" | "wiki" | "wiki_collection";
   sections: MobileContentDetailSection[];
 };

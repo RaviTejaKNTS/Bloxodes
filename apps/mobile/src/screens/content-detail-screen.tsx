@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Linking, ScrollView, Text, View } from "react-native";
 import { fetchContentDetail } from "../api";
 import { CollectionDetailView, DetailSectionCard, EventsDetailView, WikiDetailView } from "../components/content";
-import { Badge, Button, Card, CoverImage, EmptyState, ErrorState, LoadingState, MetaText } from "../components/ui";
+import { Badge, Button, Card, CoverImage, EmptyState, ErrorState, LoadingState, MetaText, SearchBar } from "../components/ui";
 import { formatUpdatedLabel } from "../format";
 import { spacing } from "../theme";
 import { useTheme } from "../theme-context";
@@ -37,15 +37,18 @@ export function ContentDetailScreen({
 }) {
   const { colors } = useTheme();
   const router = useRouter();
+  const scrollRef = useRef<ScrollView | null>(null);
   const [detail, setDetail] = useState<MobileContentDetailResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [sectionPages, setSectionPages] = useState<Record<string, number>>({});
   const [loadingSectionId, setLoadingSectionId] = useState<string | null>(null);
+  const [searchText, setSearchText] = useState("");
+  const [query, setQuery] = useState("");
   const accumulated = useRef<Record<string, MobileContentDetailItem[]>>({});
 
   const load = useCallback(
-    async (pages: Record<string, number>, appendSectionId: string | null) => {
+    async (pages: Record<string, number>, appendSectionId: string | null, nextQuery: string) => {
       if (!kind || !slug) return;
       if (appendSectionId) {
         setLoadingSectionId(appendSectionId);
@@ -55,7 +58,7 @@ export function ContentDetailScreen({
       }
       setError(null);
       try {
-        const response = await fetchContentDetail(kind, slug, pages);
+        const response = await fetchContentDetail(kind, slug, pages, nextQuery);
         const merged = {
           ...response,
           sections: response.sections.map((section) => {
@@ -91,8 +94,19 @@ export function ContentDetailScreen({
   );
 
   useEffect(() => {
-    void load({}, null);
+    void load({}, null, "");
   }, [load]);
+
+  useEffect(() => {
+    const handle = setTimeout(() => {
+      const trimmed = searchText.trim();
+      if (trimmed === query) return;
+      setQuery(trimmed);
+      setSectionPages({});
+      void load({}, null, trimmed);
+    }, 400);
+    return () => clearTimeout(handle);
+  }, [searchText, query, load]);
 
   useEffect(() => {
     if (redirectLegacyCollectionUrl && detail?.layout === "wiki_collection" && slug) {
@@ -109,6 +123,11 @@ export function ContentDetailScreen({
     };
   }, [kind, detail, router]);
 
+  const hasSearchableSections = useMemo(
+    () => Boolean(detail?.sections.some((section) => typeof section.page === "number")),
+    [detail]
+  );
+
   if (!kind || !slug) {
     return (
       <View style={{ flex: 1, backgroundColor: colors.background }}>
@@ -121,18 +140,19 @@ export function ContentDetailScreen({
     const nextPage = (section.page ?? 1) + 1;
     const nextPages = { ...sectionPages, [section.id]: nextPage };
     setSectionPages(nextPages);
-    void load(nextPages, section.id);
+    void load(nextPages, section.id, query);
   }
 
   return (
     <>
       <Stack.Screen options={{ title: detail?.title ?? "" }} />
       <ScrollView
+        ref={scrollRef}
         style={{ backgroundColor: colors.background }}
         contentContainerStyle={{ gap: spacing.lg, padding: spacing.lg, paddingBottom: spacing.xxl }}
       >
         {loading ? <LoadingState label="Loading page" /> : null}
-        {error && !detail ? <ErrorState message={error} onRetry={() => void load(sectionPages, null)} /> : null}
+        {error && !detail ? <ErrorState message={error} onRetry={() => void load(sectionPages, null, query)} /> : null}
 
         {detail ? (
           detail.layout === "wiki_collection" ? (
@@ -142,9 +162,17 @@ export function ContentDetailScreen({
               loadingSectionId={loadingSectionId}
               onLoadMore={loadMoreSection}
               onOpenWeb={() => void Linking.openURL(detail.url)}
+              onQueryChange={hasSearchableSections ? setSearchText : undefined}
+              query={searchText}
+              scrollRef={scrollRef}
             />
           ) : detail.layout === "wiki" ? (
-            <WikiDetailView detail={detail} itemPressHandler={itemPressHandler} onOpenWeb={() => void Linking.openURL(detail.url)} />
+            <WikiDetailView
+              detail={detail}
+              itemPressHandler={itemPressHandler}
+              onOpenWeb={() => void Linking.openURL(detail.url)}
+              scrollRef={scrollRef}
+            />
           ) : detail.layout === "events" ? (
             <EventsDetailView detail={detail} onOpenWeb={() => void Linking.openURL(detail.url)} />
           ) : (
@@ -153,13 +181,17 @@ export function ContentDetailScreen({
                 <CoverImage source={detail.coverImage} label={detail.title} />
                 <View style={{ gap: spacing.sm, padding: spacing.lg }}>
                   {detail.badge ? <Badge label={detail.badge} tone="accent" /> : null}
-                  <Text style={{ color: colors.foreground, fontSize: 22, lineHeight: 28, fontWeight: "800" }}>{detail.title}</Text>
+                  <Text style={{ color: colors.foreground, fontSize: 22, lineHeight: 28, fontWeight: "700" }}>{detail.title}</Text>
                   {detail.subtitle ? (
                     <Text style={{ color: colors.mutedStrong, fontSize: 14, fontWeight: "600" }}>{detail.subtitle}</Text>
                   ) : null}
                   {detail.updatedAt ? <MetaText>Updated {formatUpdatedLabel(detail.updatedAt)}</MetaText> : null}
                 </View>
               </Card>
+
+              {hasSearchableSections ? (
+                <SearchBar value={searchText} onChangeText={setSearchText} placeholder={`Search ${detail.title}`} />
+              ) : null}
 
               {detail.sections
                 .filter((section) => section.body || section.items.length)

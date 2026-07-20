@@ -5,11 +5,15 @@ import { fetchContentIndex } from "../../../src/api";
 import { isSectionKind, routeForWebUrl, SECTION_LABELS } from "../../../src/links";
 import { spacing } from "../../../src/theme";
 import { useTheme } from "../../../src/theme-context";
-import { ContentCard } from "../../../src/components/content";
+import { ContentCard, ContentRow } from "../../../src/components/content";
 import { EmptyState, ErrorState, LoadingState, MetaText, SearchBar } from "../../../src/components/ui";
-import type { MobileContentItem } from "../../../src/types";
+import type { MobileContentItem, MobileContentKind } from "../../../src/types";
 
 const PAGE_SIZE = 24;
+
+// These kinds use square game icons as covers, which crop badly in 16:9 grid
+// cards; render them as list rows with square thumbnails instead.
+const LIST_KINDS: MobileContentKind[] = ["wiki", "quizzes", "checklists"];
 
 export default function SectionIndexScreen() {
   const params = useLocalSearchParams<{ kind: string }>();
@@ -29,9 +33,10 @@ export default function SectionIndexScreen() {
   const [error, setError] = useState<string | null>(null);
   const requestId = useRef(0);
 
-  const columns = width >= 700 ? 3 : 2;
-  const cardGap = spacing.md;
-  const cardWidth = (width - spacing.lg * 2 - cardGap * (columns - 1)) / columns;
+  const asList = kind ? LIST_KINDS.includes(kind) : false;
+  const columns = asList ? 1 : width >= 700 ? 3 : 2;
+  const cardGap = asList ? 0 : spacing.md;
+  const cardWidth = (width - spacing.lg * 2 - spacing.md * (columns - 1)) / columns;
 
   const load = useCallback(
     async (nextPage: number, nextQuery: string, append: boolean) => {
@@ -106,7 +111,7 @@ export default function SectionIndexScreen() {
           key={columns}
           numColumns={columns}
           keyExtractor={(item) => item.id}
-          columnWrapperStyle={{ gap: cardGap }}
+          columnWrapperStyle={columns > 1 ? { gap: cardGap } : undefined}
           contentContainerStyle={{ gap: cardGap, padding: spacing.lg, paddingBottom: spacing.xxl }}
           ListHeaderComponent={
             <View style={{ gap: spacing.md, paddingBottom: spacing.sm }}>
@@ -123,7 +128,20 @@ export default function SectionIndexScreen() {
               ) : null}
             </View>
           }
-          renderItem={({ item }) => <ContentCard item={item} width={cardWidth} onPress={() => openItem(item)} />}
+          renderItem={({ item, index }) =>
+            asList ? (
+              <View
+                style={{
+                  borderTopWidth: index > 0 ? 1 : 0,
+                  borderTopColor: colors.borderMuted
+                }}
+              >
+                <ContentRow item={item} onPress={() => openItem(item)} />
+              </View>
+            ) : (
+              <ContentCard item={item} width={cardWidth} onPress={() => openItem(item)} />
+            )
+          }
           onEndReachedThreshold={0.4}
           onEndReached={() => {
             if (canLoadMore) {

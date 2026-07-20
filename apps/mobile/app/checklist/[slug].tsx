@@ -41,17 +41,21 @@ function ChecklistItemRow({
         {checked ? <AppIcon name="check" size={14} color={colors.white} /> : null}
       </View>
       <View style={{ flex: 1, minWidth: 0, gap: 3 }}>
-        <Text
-          style={{
-            color: colors.foreground,
-            fontSize: 15,
-            lineHeight: 21,
-            fontWeight: "700",
-            textDecorationLine: checked ? "line-through" : "none"
-          }}
-        >
-          {item.title}
-        </Text>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm, flexWrap: "wrap" }}>
+          <Text
+            style={{
+              flexShrink: 1,
+              color: colors.foreground,
+              fontSize: 15,
+              lineHeight: 21,
+              fontWeight: "600",
+              textDecorationLine: checked ? "line-through" : "none"
+            }}
+          >
+            {item.title}
+          </Text>
+          {item.badge ? <Badge label={item.badge} /> : null}
+        </View>
         {item.body ? (
           <Text style={{ color: colors.muted, fontSize: 13, lineHeight: 19 }}>{item.body}</Text>
         ) : null}

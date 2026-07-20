@@ -15,6 +15,13 @@ export type ThemeColors = {
   scrim: string;
   white: string;
   danger: string;
+  success: string;
+  successSoft: string;
+  warning: string;
+  warningSoft: string;
+  info: string;
+  infoSoft: string;
+  dangerSoft: string;
 };
 
 export const lightColors: ThemeColors = {
@@ -33,7 +40,14 @@ export const lightColors: ThemeColors = {
   accentDark: "#4338ca",
   scrim: "rgba(15, 23, 42, 0.32)",
   white: "#ffffff",
-  danger: "#b42318"
+  danger: "#b42318",
+  success: "#047857",
+  successSoft: "rgba(16, 185, 129, 0.12)",
+  warning: "#b45309",
+  warningSoft: "rgba(217, 119, 6, 0.12)",
+  info: "#0369a1",
+  infoSoft: "rgba(14, 165, 233, 0.12)",
+  dangerSoft: "rgba(180, 35, 24, 0.1)"
 };
 
 export const darkColors: ThemeColors = {
@@ -52,7 +66,14 @@ export const darkColors: ThemeColors = {
   accentDark: "#6366f1",
   scrim: "rgba(0, 0, 0, 0.58)",
   white: "#ffffff",
-  danger: "#fca5a5"
+  danger: "#fca5a5",
+  success: "#34d399",
+  successSoft: "rgba(52, 211, 153, 0.14)",
+  warning: "#fbbf24",
+  warningSoft: "rgba(251, 191, 36, 0.14)",
+  info: "#38bdf8",
+  infoSoft: "rgba(56, 189, 248, 0.14)",
+  dangerSoft: "rgba(252, 165, 165, 0.14)"
 };
 
 export const spacing = {

@@ -96,7 +96,7 @@ export function Badge({ label, tone = "default" }: { label: string; tone?: "defa
         paddingVertical: 3
       }}
     >
-      <Text style={{ color: textColor, fontSize: 11, fontWeight: "800", textTransform: "uppercase" }}>{label}</Text>
+      <Text style={{ color: textColor, fontSize: 11, fontWeight: "700", textTransform: "uppercase" }}>{label}</Text>
     </View>
   );
 }
@@ -125,7 +125,7 @@ export function Button({
     paddingHorizontal: spacing.lg,
     opacity: disabled ? 0.5 : 1
   };
-  const text: TextStyle = { fontSize: 14, fontWeight: "800" };
+  const text: TextStyle = { fontSize: 14, fontWeight: "700" };
 
   if (variant === "primary") {
     container.backgroundColor = colors.accentDark;
@@ -163,12 +163,12 @@ export function SectionHeader({
   return (
     <View style={{ flexDirection: "row", alignItems: "flex-end", justifyContent: "space-between", gap: spacing.md }}>
       <View style={{ flex: 1, gap: 2 }}>
-        <Text style={{ color: colors.foreground, fontSize: 18, fontWeight: "800" }}>{title}</Text>
+        <Text style={{ color: colors.foreground, fontSize: 18, fontWeight: "700" }}>{title}</Text>
         {subtitle ? <Text style={{ color: colors.muted, fontSize: 13 }}>{subtitle}</Text> : null}
       </View>
       {action && onAction ? (
         <TouchableOpacity onPress={onAction} activeOpacity={0.8} style={{ flexDirection: "row", alignItems: "center", gap: 4 }}>
-          <Text style={{ color: colors.accent, fontSize: 13, fontWeight: "800" }}>{action}</Text>
+          <Text style={{ color: colors.accent, fontSize: 13, fontWeight: "700" }}>{action}</Text>
           <AppIcon name="chevron-right" size={14} color={colors.accent} />
         </TouchableOpacity>
       ) : null}
@@ -202,7 +202,7 @@ export function CoverImage({
           style
         ]}
       >
-        <Text style={{ color: colors.muted, fontSize: 30, fontWeight: "900" }}>{label.slice(0, 1).toUpperCase()}</Text>
+        <Text style={{ color: colors.muted, fontSize: 30, fontWeight: "700" }}>{label.slice(0, 1).toUpperCase()}</Text>
       </View>
     );
   }
@@ -276,7 +276,7 @@ export function ErrorState({ message, onRetry }: { message: string; onRetry?: ()
   return (
     <View style={{ alignItems: "center", gap: spacing.md, padding: spacing.xxl }}>
       <AppIcon name="cloud-off" size={28} color={colors.muted} />
-      <Text style={{ color: colors.foreground, fontSize: 15, fontWeight: "800" }}>Bloxodes did not respond</Text>
+      <Text style={{ color: colors.foreground, fontSize: 15, fontWeight: "700" }}>Bloxodes did not respond</Text>
       <Text style={{ color: colors.muted, fontSize: 13, textAlign: "center" }}>{message}</Text>
       {onRetry ? <Button label="Try again" onPress={onRetry} variant="secondary" /> : null}
     </View>
@@ -288,7 +288,7 @@ export function EmptyState({ body, title }: { body?: string; title: string }) {
   return (
     <View style={{ alignItems: "center", gap: spacing.sm, padding: spacing.xxl }}>
       <AppIcon name="inbox" size={26} color={colors.muted} />
-      <Text style={{ color: colors.foreground, fontSize: 15, fontWeight: "800" }}>{title}</Text>
+      <Text style={{ color: colors.foreground, fontSize: 15, fontWeight: "700" }}>{title}</Text>
       {body ? <Text style={{ color: colors.muted, fontSize: 13, textAlign: "center" }}>{body}</Text> : null}
     </View>
   );

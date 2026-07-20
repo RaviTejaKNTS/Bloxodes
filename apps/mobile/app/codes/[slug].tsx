@@ -51,7 +51,7 @@ function CodeRow({
             style={{
               color: used ? colors.muted : colors.foreground,
               fontSize: 16,
-              fontWeight: "900",
+              fontWeight: "700",
               letterSpacing: 0.8,
               textDecorationLine: used ? "line-through" : "none"
             }}
@@ -82,7 +82,7 @@ function CodeRow({
         }}
       >
         <AppIcon name={copied ? "check" : "copy"} size={13} color={copied ? colors.white : colors.accent} />
-        <Text style={{ color: copied ? colors.white : colors.accent, fontSize: 12, fontWeight: "900" }}>
+        <Text style={{ color: copied ? colors.white : colors.accent, fontSize: 12, fontWeight: "700" }}>
           {copied ? "Copied" : "Copy"}
         </Text>
       </TouchableOpacity>
