@@ -38,7 +38,9 @@ For normal gameplay and general articles, tell it:
 
 For Roblox tech, platform, or troubleshooting articles, replace the writing skill with `/bloxodes-tech-article-writing` and apply its rules on top of the base article-writing rules.
 
-Pass the writing subagent the paths to `brief.md` and `final.json`, the topic and article slugs, whether the article is normal or tech, and any parent approval notes. Resume that writing subagent when copy changes are needed so it retains the article context.
+For articles whose primary job is ranking a complete set of units, classes, weapons, abilities, items, characters, or similar entities, replace the writing skill with `/bloxodes-tier-list-writing`. Require the visual overview block, reusable exact-match images, and one matching detail table per tier.
+
+Pass the writing subagent the paths to `brief.md` and `final.json`, the topic and article slugs, whether the article is normal, tech, or tier-list content, and any parent approval notes. Resume that writing subagent when copy changes are needed so it retains the article context.
 
 If subagents are unavailable, report the article as blocked instead of silently taking over its research or writing.
 
@@ -70,7 +72,7 @@ Save approved images with `npm run content:save-article-image` before final veri
 3. Require each research subagent to use `/bloxodes-article-research` and return `brief.md` only.
 4. Review each brief. Do not approve weak research just because the angle sounds good.
 5. Send research feedback to the same research subagent, or approve the brief.
-6. After approval, start a new writing subagent with the normal or tech writing skill.
+6. After approval, start a new writing subagent with the normal, tech, or tier-list writing skill.
 7. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; send copy and content changes back to the writing subagent.
 8. Start or reuse the local web server with `npm run dev:local`.
 9. Run the batch verifier on reviewed final files. Send copy failures to the writing subagent and research gaps to the research subagent.
@@ -122,7 +124,7 @@ Check:
 - no unsupported claims, vague wording, or page-type overlap
 - links are useful, not decorative
 - videos are perfect matches and use `{{ youtube: ... }}` rather than leftover raw links
-- body images are clean, hosted under `/articles/<slug>/`, have useful alt text, and sit beside the relevant step
+- body images are clean, use verified Bloxodes-hosted paths, have useful alt text, and sit beside the relevant content; tier-list articles may reuse canonical game/collection assets under `apps/web/public`
 - media is omitted when it does not make the article easier to understand
 
 After this review, run the batch verifier on the files that look ready. Treat writing, copy, tone, body, and FAQ failures as feedback for the writing subagent, and research or accuracy gaps as feedback for the research subagent. The parent may directly fix verifier failures only when they are small non-content metadata or JSON issues, such as a wrong slug, malformed JSON, source URL typo, tag cleanup, missing `universe_id`, or an import-required null/default field.
@@ -134,7 +136,7 @@ Before final output, the parent model must preview every approved article on the
 Use any browser control or automation available in the current environment. Prefer Chrome or Chromium. When only terminal tools are available, use the repository's Playwright package with an installed Chrome or Chromium executable. Do not depend on a product-specific browser name.
 
 1. Start or reuse the local web server with `npm run dev:local`.
-2. If body images are planned, confirm the files exist under `apps/web/public/articles/<slug>/`.
+2. If body images are planned, confirm every referenced local file exists under `apps/web/public`; article-owned images should remain under `apps/web/public/articles/<slug>/`, while tier lists may reuse canonical game/collection assets.
 3. Run:
 
 ```bash

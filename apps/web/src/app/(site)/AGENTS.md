@@ -23,6 +23,7 @@ Scoped route-family guides:
 - Prefer a sibling `page-data.tsx` when a route family has multiple pages, shared metadata helpers, or both index and detail views.
 - Keep heavy data work out of the page file. Route files should mostly compose helpers and present metadata.
 - Reuse shared components such as `GameCard`, `ArticleCard`, `PagePagination`, `CommentsSection`, and route-specific client widgets.
+- Article Markdown may include validated `tier-list` and `article-checklist` fenced blocks. Keep their schemas in `apps/web/src/lib/article-blocks.ts` and render them through the article detail route rather than allowing raw HTML components in content.
 - When interactive UI is required, keep a server wrapper page and isolate client logic in a colocated client component.
 - For catalog and tool routes, prefer the shared page primitives for breadcrumb, freshness, FAQ, and rich-content rendering.
 - Public pages should feel like readable content inside a clean live-database shell. Keep strong titles and comfortable prose.

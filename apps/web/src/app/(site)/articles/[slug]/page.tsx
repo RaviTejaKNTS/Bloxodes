@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatDistanceToNow } from "date-fns";
@@ -34,14 +35,41 @@ import {
 import { extractHowToSteps } from "@/lib/how-to";
 import { ContentSlot } from "@/components/ContentSlot";
 import { ArticleImageLightbox } from "@/components/ArticleImageLightbox";
+import { ArticleTierList } from "@/components/ArticleTierList";
+import { ArticleChecklist } from "@/components/ArticleChecklist";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { resolveModifiedAt, resolvePublishedAt } from "@/lib/content-dates";
 import { ROBLOX_ARTICLE_GAME_SLUG, articleGameSlugFromUniverse } from "@/lib/slug";
+import { parseArticleContentBlocks } from "@/lib/article-blocks";
 
 export const revalidate = 86400;
 const MAX_STATIC_ARTICLE_SLUGS = 150;
 
 type Params = { params: Promise<{ slug: string }> };
+
+type RenderedArticleBlock =
+  | { kind: "markdown"; html: string }
+  | { kind: "tier-list"; data: Parameters<typeof ArticleTierList>[0]["data"] }
+  | { kind: "article-checklist"; data: Parameters<typeof ArticleChecklist>[0]["data"] }
+  | { kind: "invalid" };
+
+async function renderArticleContent(contentMd: string): Promise<RenderedArticleBlock[]> {
+  const blocks = parseArticleContentBlocks(contentMd);
+  return Promise.all(
+    blocks.map(async (block) => {
+      if (block.kind === "markdown") {
+        const html = await renderMarkdown(block.markdown);
+        const processed = processHtmlLinks(html);
+        return { kind: "markdown" as const, html: buildImageGalleries(processed.__html) };
+      }
+      if (block.kind === "invalid") {
+        console.error(`Invalid ${block.language} article block: ${block.message}`);
+        return { kind: "invalid" as const };
+      }
+      return block;
+    })
+  );
+}
 
 export async function generateStaticParams() {
   return [];
@@ -125,8 +153,8 @@ async function renderArticlePage(article: ArticleWithRelations) {
     : null;
   const descriptionPlain = (article.meta_description || markdownToPlainText(article.content_md)).trim();
   const faqEntries = normalizeArticleFaqEntries(article.faq_json);
-  const [articleHtml, authorBioHtml, faqHtml] = await Promise.all([
-    renderMarkdown(article.content_md),
+  const [articleBlocks, authorBioHtml, faqHtml] = await Promise.all([
+    renderArticleContent(article.content_md),
     article.author?.bio_md ? renderMarkdown(article.author.bio_md) : Promise.resolve(""),
     Promise.all(faqEntries.map((entry) => renderMarkdown(entry.a, { paragraphizeLineBreaks: true })))
   ]);
@@ -236,8 +264,6 @@ async function renderArticlePage(article: ArticleWithRelations) {
     }
   };
 
-  const processedArticleHtml = processHtmlLinks(articleHtml);
-  const articleHtmlWithGalleries = buildImageGalleries(processedArticleHtml.__html);
   const processedAuthorBioHtml = authorBioHtml ? processHtmlLinks(authorBioHtml) : null;
 
   return (
@@ -318,8 +344,38 @@ async function renderArticlePage(article: ArticleWithRelations) {
           id="article-body"
           itemProp="articleBody"
           className="article-content prose dark:prose-invert max-w-none game-copy"
-          dangerouslySetInnerHTML={{ __html: articleHtmlWithGalleries }}
-        />
+        >
+          {articleBlocks.map((block, index) => {
+            if (block.kind === "markdown") {
+              return (
+                <Fragment key={`markdown-${index}`}>
+                  {renderHtmlAsReactNodes(block.html, { keyPrefix: `article-${index}` })}
+                </Fragment>
+              );
+            }
+            if (block.kind === "tier-list") {
+              return <ArticleTierList key={`tier-list-${block.data.id}`} data={block.data} />;
+            }
+            if (block.kind === "article-checklist") {
+              return (
+                <ArticleChecklist
+                  key={`article-checklist-${block.data.id}`}
+                  articleSlug={article.slug}
+                  data={block.data}
+                />
+              );
+            }
+            return (
+              <div
+                key={`invalid-${index}`}
+                role="status"
+                className="my-6 rounded-xl border border-border/70 bg-surface/60 px-4 py-3 text-sm text-muted-foreground"
+              >
+                Embedded article content is temporarily unavailable.
+              </div>
+            );
+          })}
+        </section>
         <ArticleImageLightbox />
 
         {faqItems.length ? <ContentFaq items={faqItems} className="mt-10 border-t border-border/60 pt-6" /> : null}

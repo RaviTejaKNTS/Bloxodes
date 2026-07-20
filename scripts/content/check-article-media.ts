@@ -9,6 +9,11 @@ import {
   findYouTubeDirectives,
   type MarkdownImageRef,
 } from "@/lib/article-media";
+import {
+  articleBlockErrors,
+  extractArticleBlockImageRefs,
+  validateTierListArticleDetails,
+} from "@/lib/article-blocks";
 
 export type ArticleMediaInput = {
   slug: string;
@@ -41,7 +46,12 @@ function labelOf(input: ArticleMediaInput): string {
 }
 
 async function localFileExists(publicPath: string): Promise<boolean> {
-  const relative = publicPath.replace(/^\/+/, "");
+  let relative = publicPath.replace(/^\/+/, "");
+  try {
+    relative = decodeURIComponent(relative);
+  } catch {
+    return false;
+  }
   if (!relative || relative.endsWith("/")) return false;
   const absolute = path.resolve(REPO_PUBLIC_ROOT, relative);
   if (absolute !== REPO_PUBLIC_ROOT && !absolute.startsWith(`${REPO_PUBLIC_ROOT}${path.sep}`)) {
@@ -98,11 +108,41 @@ export async function checkArticleMedia(input: ArticleMediaInput): Promise<Artic
     });
   }
 
+  for (const error of articleBlockErrors(content)) {
+    findings.push({
+      level: "error",
+      rule: "invalid-article-block",
+      message: `${label}: ${error}`,
+    });
+  }
+
+  for (const error of validateTierListArticleDetails(content)) {
+    findings.push({
+      level: "error",
+      rule: "invalid-tier-list-details",
+      message: `${label}: ${error}`,
+    });
+  }
+
+  for (const image of extractArticleBlockImageRefs(content)) {
+    await collectImageFindings(
+      findings,
+      { alt: image.alt, src: image.src, raw: image.src, index: 0 },
+      input.slug,
+      `${label} tier-list ${image.blockId} item ${image.itemName}`,
+      {
+        requireLocalFiles,
+        requireImageAlt,
+        context: "body",
+      }
+    );
+  }
+
   for (const image of findRawHtmlArticleImages(content)) {
     findings.push({
       level: "error",
       rule: "unsupported-html-image",
-      message: `${label}: raw HTML image syntax is not supported (${image.raw}). Use ![alt](/articles/${input.slug}/file.webp) so source, alt text, and file ownership can be verified.`,
+      message: `${label}: raw HTML image syntax is not supported (${image.raw}). Use Markdown image syntax with a verified Bloxodes-hosted path.`,
     });
   }
 
@@ -152,8 +192,12 @@ export async function checkArticleMedia(input: ArticleMediaInput): Promise<Artic
   }
 
   // Prefer not stacking many body images without alt / purpose.
-  const bodyOnly = images.filter((image) => !isCoverPath(image.src, input.slug));
-  if (bodyOnly.length > 6) {
+  const tierImages = extractArticleBlockImageRefs(content);
+  const bodyOnly = [
+    ...images.filter((image) => !isCoverPath(image.src, input.slug)),
+    ...tierImages,
+  ];
+  if (bodyOnly.length > 6 && tierImages.length === 0) {
     findings.push({
       level: "warning",
       rule: "many-body-images",

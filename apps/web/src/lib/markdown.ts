@@ -4,6 +4,7 @@ import type { IOptions } from "sanitize-html";
 import { load, type CheerioAPI, type Cheerio } from "cheerio";
 import type { Element } from "domhandler";
 import { injectYouTubeEmbeds, stripArticleMediaForPlainText } from "@/lib/article-media";
+import { stripArticleContentBlocks } from "@/lib/article-blocks";
 
 // Configure marked with basic options
 marked.setOptions({
@@ -517,7 +518,7 @@ export async function renderMarkdown(markdown: string, options: RenderMarkdownOp
 export function markdownToPlainText(markdown: string): string {
   if (!markdown) return '';
 
-  return stripArticleMediaForPlainText(markdown)
+  return stripArticleMediaForPlainText(stripArticleContentBlocks(markdown))
     // Remove HTML tags
     .replace(/<[^>]*>?/gm, '')
     // Remove markdown links

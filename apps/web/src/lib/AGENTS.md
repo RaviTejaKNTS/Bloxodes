@@ -16,6 +16,7 @@ Most application behavior should flow through this folder before it reaches page
 - `comments.ts` and `comment-moderation.ts`: comment formatting, tags, and moderation decisions.
 - `code-utils.ts`: shared code reward cleanup, sorting, and "new code" freshness rules used by website, extension API, and mobile API.
 - `article-media.ts`: YouTube directive parsing/embeds and article image path rules for `/articles` content; used by `markdown.ts` and content verification.
+- `article-blocks.ts`: versioned parsing and validation for fenced `tier-list` and `article-checklist` blocks embedded in article Markdown.
 - `markdown.ts`: GFM markdown → sanitized HTML, including `{{ youtube: ... }}` embeds.
 - `extension-codes.ts` and `extension-codes-utils.ts`: public Chrome extension payload building and Roblox page-context normalization.
 - `mobile-codes.ts`: public mobile app payload building for codes index/detail screens.

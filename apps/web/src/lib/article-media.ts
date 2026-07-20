@@ -225,6 +225,10 @@ function safeSiteRelativePath(src: string): string | null {
   return decoded;
 }
 
+export function isSafeSiteRelativePath(src: string): boolean {
+  return safeSiteRelativePath(src) !== null;
+}
+
 export function isLocalArticleImagePath(src: string, slug?: string): boolean {
   const safePath = safeSiteRelativePath(src);
   if (!safePath?.startsWith(ARTICLE_PUBLIC_PATH_PREFIX)) return false;
@@ -259,7 +263,7 @@ export function isBlockedHotlinkImageUrl(src: string): boolean {
 
 /**
  * Body/cover images in finals should be:
- * - site-relative under /articles/<slug>/...
+ * - a safe site-relative public asset (article-owned or a reusable game asset)
  * - or already on Bloxodes media hosts
  * Remote hotlinks from wikis/competitors are rejected.
  */
@@ -271,20 +275,21 @@ export function classifyArticleImageSrc(
   if (!value) return { ok: false, reason: "empty image src" };
 
   if (value.startsWith("/")) {
+    if (!isSafeSiteRelativePath(value)) {
+      return { ok: false, reason: `unsafe local image path (got ${value})` };
+    }
     if (isLocalArticleImagePath(value, slug)) {
       return { ok: true, kind: "local" };
     }
-    // Allow other local public assets only if clearly under /articles/ for a different slug naming slip.
+    // Keep article-owned assets scoped to their article, while allowing canonical
+    // game/collection assets elsewhere in apps/web/public to be reused.
     if (value.startsWith(ARTICLE_PUBLIC_PATH_PREFIX)) {
       return {
         ok: false,
         reason: `local image path must live under ${articlePublicDir(slug)} (got ${value})`,
       };
     }
-    return {
-      ok: false,
-      reason: `local body images must use ${articlePublicDir(slug)}… (got ${value})`,
-    };
+    return { ok: true, kind: "local" };
   }
 
   if (isAllowedRemoteArticleImageUrl(value)) {
@@ -300,7 +305,7 @@ export function classifyArticleImageSrc(
 
   return {
     ok: false,
-    reason: `image src must be a hosted /articles/${slug}/… path or Bloxodes media URL (got ${value})`,
+    reason: `image src must be a safe local public path or Bloxodes media URL (got ${value})`,
   };
 }
 

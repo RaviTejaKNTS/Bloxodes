@@ -5,13 +5,13 @@
   line-height: 1.85;
 }
 
-.prose>*+*,
-.game-copy>*+* {
+.prose>*+*:where(:not(.not-prose, .not-prose *)),
+.game-copy>*+*:where(:not(.not-prose, .not-prose *)) {
   margin-top: 1.75rem;
 }
 
-.prose > :is(div, section) > * + *,
-.game-copy > :is(div, section) > * + * {
+.prose > :is(div, section) > * + *:where(:not(.not-prose, .not-prose *)),
+.game-copy > :is(div, section) > * + *:where(:not(.not-prose, .not-prose *)) {
   margin-top: 1.75rem;
 }
 
@@ -35,8 +35,8 @@
   padding: 0;
 }
 
-.prose img,
-.game-copy img {
+.prose img:where(:not(.not-prose, .not-prose *)),
+.game-copy img:where(:not(.not-prose, .not-prose *)) {
   border-radius: var(--radius-sm);
   display: block;
   width: 100%;
@@ -138,6 +138,10 @@
   cursor: zoom-in;
 }
 
+#article-body [data-article-lightbox="off"] img {
+  cursor: default;
+}
+
 @media (min-width: 640px) {
   .article-gallery[data-count="2"],
   .article-gallery[data-count="3"],
@@ -174,8 +178,8 @@
 
 @media (min-width: 768px) {
 
-  .prose img,
-  .game-copy img {
+  .prose img:where(:not(.not-prose, .not-prose *)),
+  .game-copy img:where(:not(.not-prose, .not-prose *)) {
     width: 80%;
   }
 }
@@ -383,57 +387,51 @@
   }
 }
 
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.game-copy h1,
-.game-copy h2,
-.game-copy h3,
-.game-copy h4 {
+.prose :is(h1, h2, h3, h4):where(:not(.not-prose, .not-prose *)),
+.game-copy :is(h1, h2, h3, h4):where(:not(.not-prose, .not-prose *)) {
   color: rgb(var(--color-foreground));
   margin-top: 0;
   font-weight: 600;
 }
 
-.prose h1,
-.game-copy h1 {
+.prose h1:where(:not(.not-prose, .not-prose *)),
+.game-copy h1:where(:not(.not-prose, .not-prose *)) {
   font-size: 2.5rem;
   line-height: 1.1;
   margin-bottom: 1.5rem;
 }
 
-.prose h2,
-.game-copy h2 {
+.prose h2:where(:not(.not-prose, .not-prose *)),
+.game-copy h2:where(:not(.not-prose, .not-prose *)) {
   font-size: 2.35rem;
   line-height: 1.12;
   margin: 2.5rem 0 1rem;
 }
 
-.prose h3,
-.game-copy h3 {
+.prose h3:where(:not(.not-prose, .not-prose *)),
+.game-copy h3:where(:not(.not-prose, .not-prose *)) {
   font-size: 1.6rem;
   line-height: 1.2;
   margin: 2rem 0 0.75rem;
 }
 
-.prose h4,
-.game-copy h4 {
+.prose h4:where(:not(.not-prose, .not-prose *)),
+.game-copy h4:where(:not(.not-prose, .not-prose *)) {
   font-size: 1.35rem;
   line-height: 1.25;
   margin: 1.75rem 0 0.5rem;
 }
 
-.prose p,
-.game-copy p {
+.prose p:where(:not(.not-prose, .not-prose *)),
+.game-copy p:where(:not(.not-prose, .not-prose *)) {
   color: rgba(var(--color-foreground), 0.9);
   font-size: 1.08rem;
   letter-spacing: 0.012em;
 }
 
 @media (min-width: 768px) {
-  .prose p,
-  .game-copy p {
+  .prose p:where(:not(.not-prose, .not-prose *)),
+  .game-copy p:where(:not(.not-prose, .not-prose *)) {
     font-size: 1.14rem;
     line-height: 1.95;
     letter-spacing: 0.014em;
@@ -451,57 +449,53 @@
   font-style: italic;
 }
 
-.prose ul,
-.prose ol,
-.game-copy ul,
-.game-copy ol {
+.prose :is(ul, ol):where(:not(.not-prose, .not-prose *)),
+.game-copy :is(ul, ol):where(:not(.not-prose, .not-prose *)) {
   margin: 1.5rem 0;
   padding-left: 1.75rem;
   list-style-position: outside;
 }
 
-.prose ul,
-.game-copy ul {
+.prose ul:where(:not(.not-prose, .not-prose *)),
+.game-copy ul:where(:not(.not-prose, .not-prose *)) {
   list-style-type: disc;
 }
 
-.prose ol,
-.game-copy ol {
+.prose ol:where(:not(.not-prose, .not-prose *)),
+.game-copy ol:where(:not(.not-prose, .not-prose *)) {
   list-style-type: decimal;
 }
 
-.prose li,
-.game-copy li {
+.prose li:where(:not(.not-prose, .not-prose *)),
+.game-copy li:where(:not(.not-prose, .not-prose *)) {
   line-height: 1.85;
 }
 
-.prose li+li,
-.game-copy li+li {
+.prose li+li:where(:not(.not-prose, .not-prose *)),
+.game-copy li+li:where(:not(.not-prose, .not-prose *)) {
   margin-top: 0.6rem;
 }
 
-.prose li>ul,
-.prose li>ol,
-.game-copy li>ul,
-.game-copy li>ol {
+.prose li>:is(ul, ol):where(:not(.not-prose, .not-prose *)),
+.game-copy li>:is(ul, ol):where(:not(.not-prose, .not-prose *)) {
   margin-top: 0.75rem;
 }
 
-.prose a,
-.game-copy a {
+.prose a:where(:not(.not-prose, .not-prose *)),
+.game-copy a:where(:not(.not-prose, .not-prose *)) {
   color: rgb(var(--color-accent));
   font-weight: 600;
   text-underline-offset: 6px;
   transition: color 0.2s ease;
 }
 
-.prose a:hover,
-.game-copy a:hover {
+.prose a:hover:where(:not(.not-prose, .not-prose *)),
+.game-copy a:hover:where(:not(.not-prose, .not-prose *)) {
   color: rgb(var(--color-accent-dark));
 }
 
-.dark .prose a:hover,
-.dark .game-copy a:hover {
+.dark .prose a:hover:where(:not(.not-prose, .not-prose *)),
+.dark .game-copy a:hover:where(:not(.not-prose, .not-prose *)) {
   color: rgb(var(--color-accent));
 }
 

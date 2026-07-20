@@ -87,6 +87,31 @@ Title need to be in simple human language, small but full sentence, people seein
 
 For game-specific articles, include the game name in the working title and suggested slug so readers know which game the guide is about. You can use `Roblox` wording when it helps search or clarity.
 
+## Tier-List Research
+
+When the approved idea is a tier-list article, add a dedicated readiness pass:
+
+1. Define one ranking scope and the criteria that matter inside it. Do not mix PvP, PvE, beginner value, and endgame value without explaining how they are weighted.
+2. Build the complete expected item inventory before assigning tiers.
+3. Record placement evidence, disagreements, update/version boundaries, and uncertain items. A community consensus may inform a placement but does not replace exact game facts.
+4. Check `data/<Game>/` and `apps/web/public/<Game>/` for canonical existing item rows and images. Record the exact public image path for every expected item.
+5. Mark the brief blocked if important item coverage, placement evidence, or exact-match images are weak.
+
+Add this to `brief.md` for tier-list work:
+
+```text
+Tier-list readiness:
+- Ranking scope:
+- Ranking criteria:
+- Expected items and count:
+- Proposed tiers and placement evidence:
+- Disagreements or mode-dependent placements:
+- Existing local dataset:
+- Existing public image paths:
+- Images found / missing:
+- Ready for tier-list writing: yes/no
+```
+
 ## Media Research
 
 Media is optional. Use it only when it removes friction for the reader.

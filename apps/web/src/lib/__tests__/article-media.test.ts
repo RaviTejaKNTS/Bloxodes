@@ -99,6 +99,10 @@ describe("article images", () => {
 
   it("classifies allowed and blocked image srcs", () => {
     expect(classifyArticleImageSrc("/articles/foo/menu.webp", "foo")).toEqual({ ok: true, kind: "local" });
+    expect(classifyArticleImageSrc("/Gakuran/Fighting%20Styles/hakari.png", "foo")).toEqual({
+      ok: true,
+      kind: "local",
+    });
     expect(classifyArticleImageSrc("https://media.bloxodes.com/x.webp", "foo").ok).toBe(true);
     expect(classifyArticleImageSrc("https://static.wikia.nocookie.net/x.png", "foo").ok).toBe(false);
     expect(classifyArticleImageSrc("/articles/other/menu.webp", "foo").ok).toBe(false);

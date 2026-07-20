@@ -280,6 +280,7 @@ async function verifyRoute(url: string, title: string, finalJson: ArticleFinal) 
 
       // End-to-end media checks on the rendered page when the final claims media.
       const { findYouTubeDirectives, findMarkdownImages } = await import("@/lib/article-media");
+      const { extractArticleBlockImageRefs, parseArticleContentBlocks } = await import("@/lib/article-blocks");
       const youtube = findYouTubeDirectives(finalJson.content_md);
       for (const directive of youtube) {
         if (!directive.videoId) continue;
@@ -293,15 +294,34 @@ async function verifyRoute(url: string, title: string, finalJson: ArticleFinal) 
         }
       }
 
-      const images = findMarkdownImages(finalJson.content_md);
+      const images = [
+        ...findMarkdownImages(finalJson.content_md),
+        ...extractArticleBlockImageRefs(finalJson.content_md).map((image) => ({
+          alt: image.alt,
+          src: image.src,
+          raw: image.src,
+          index: 0,
+        })),
+      ];
       for (const image of images) {
-        if (image.src.startsWith("/articles/")) {
+        if (image.src.startsWith("/")) {
           // Next may encode paths; check the path segment at least.
           const fileName = image.src.split("/").pop() ?? "";
           if (fileName && !body.includes(fileName) && !body.includes(image.src)) {
             throw new Error(`${url} is missing rendered image for ${image.src}`);
           }
         }
+      }
+
+      const contentBlocks = parseArticleContentBlocks(finalJson.content_md);
+      if (contentBlocks.some((block) => block.kind === "tier-list") && !body.includes('data-article-block="tier-list"')) {
+        throw new Error(`${url} is missing the rendered tier-list component`);
+      }
+      if (
+        contentBlocks.some((block) => block.kind === "article-checklist") &&
+        !body.includes('data-article-block="checklist"')
+      ) {
+        throw new Error(`${url} is missing the rendered article checklist component`);
       }
 
       return;

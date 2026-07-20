@@ -70,6 +70,14 @@ If the brief is missing, weak, unapproved, or has unresolved source gaps, stop a
 - Put an embed on its own line with `{{ youtube: https://www.youtube.com/watch?v=VIDEO_ID }}`. Do not invent IDs or leave a raw YouTube URL when an embed is intended.
 - One embed is normally enough. Place it near the step or explanation it demonstrates.
 
+**Embedded article checklists (optional)**
+- Use a fenced `article-checklist` YAML block only when a short actionable list materially helps inside the article. Full standalone checklist jobs still use `bloxodes-checklist-writing`.
+- Use `schema: 1`, a unique lowercase hyphenated block `id`, a short `title`, and unique lowercase hyphenated item IDs. Each item needs a direct `label`; `description` and `href` are optional.
+- Keep the embedded checklist compact. Use `sections` only when the items have meaningful groups. The renderer adds progress and local persistence.
+- Do not use raw HTML checkboxes or manually add progress copy.
+
+Use `bloxodes-tier-list-writing` instead of this skill when the article's primary job is ranking a complete item set. It owns the visual overview and matching per-tier detail-table contract.
+
 **Source-provided article images**
 - Actively inspect the approved lead source for genuine gameplay screenshots, item or character panels, maps, menus, raid screens, and collection-style images. Use them when they explain an article fact, step, item, or table row better than prose alone.
 - A source article containing useful images is a candidate, not automatic permission. Reuse only images covered by the approved brief's rights/source note or an explicit user approval. Prefer genuine in-game captures over a publisher's custom illustrations or branded composites.

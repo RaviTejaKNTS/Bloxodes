@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Tier List Writing"
+  short_description: "Write image-backed Bloxodes tier-list articles"
+  default_prompt: "Use $bloxodes-tier-list-writing to write one source-backed Bloxodes tier-list article from an approved brief, including the visual overview block and matching per-tier detail tables."

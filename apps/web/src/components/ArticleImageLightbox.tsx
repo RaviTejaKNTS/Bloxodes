@@ -36,6 +36,7 @@ export function ArticleImageLightbox({ containerId = "article-body" }: ArticleIm
       const img = target.closest("img");
       if (!img || !(img instanceof HTMLImageElement)) return;
       if (!container.contains(img)) return;
+      if (img.closest('[data-article-lightbox="off"]')) return;
 
       const link = img.closest("a");
       if (link) {
