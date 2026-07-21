@@ -18,6 +18,7 @@ This `agents/` folder remains as a quick-reference inventory for repo-wide disco
 - `data/AGENTS.md`: local datasets and their consumers.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
 - `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
+- `.agents/skills/bloxodes-game-collection-refresh/SKILL.md`: collection-only maintenance for one dataset, one game, or all registered games, including affected wiki collection page review and wider-scope suggestions.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: flat direct-child DOM workflow and local/live verification for Journey automatic in-content ads.

@@ -127,6 +127,8 @@
     "collect:grow-a-garden-images": "tsx scripts/catalog/collect-grow-a-garden-images.ts",
     "collect:slime-rng-data": "tsx scripts/collections/collect-slime-rng-data.ts",
     "collect:collection-images": "tsx scripts/collections/collect-collection-images.ts",
+    "plan:game-collection-refresh": "tsx scripts/collections/plan-game-collection-refresh.ts",
+    "export:game-collection-final": "tsx scripts/collections/export-game-collection-final.ts",
     "check:game-collection-data": "tsx scripts/collections/check-game-collection-data.ts",
     "audit:game-collection-datasets": "tsx scripts/collections/audit-game-collection-datasets-v2.ts",
     "audit:game-collection-datasets:v2": "tsx scripts/collections/audit-game-collection-datasets-v2.ts",

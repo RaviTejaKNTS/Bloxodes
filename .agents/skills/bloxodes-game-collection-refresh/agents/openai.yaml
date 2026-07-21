@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Game Collection Refresh"
+  short_description: "Refresh game collection datasets and wiki pages"
+  default_prompt: "Use $bloxodes-game-collection-refresh to refresh the requested game collection datasets, update affected wiki collection pages, verify the result locally, and report new collection opportunities when the scope is a game or all games."

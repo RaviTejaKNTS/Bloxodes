@@ -4,7 +4,7 @@ Scope: `data/` plus related static data under `src/data/`.
 
 These files back tools, game collections, and broad catalog sections that are not fully modeled in Supabase.
 
-When turning a game dataset into public wiki or collection pages, use `agents/content-writing/agents.md` and the matching wiki or game collection skill.
+When turning a game dataset into public wiki or collection pages, use `agents/content-writing/agents.md` and the matching wiki or game collection skill. Use `bloxodes-game-collection-refresh` when checking and refreshing one existing collection dataset, one game's collection datasets, or every registered game collection.
 
 ## Dataset Map
 
@@ -84,6 +84,7 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 ## Rules
 
 - Treat local data files as content sources, not ad hoc dumps. Keep filenames and object shapes stable once routes depend on them.
+- Collection refresh scope is defined by registered game collection config plus unregistered v2 collection-shaped files in that registered game's data directory. Non-collection files are outside the collection refresh workflow.
 - Game wiki collection datasets must use the v2 separated shape: `{ "meta": {...}, "items": [{ "item": {...}, "system": {...} }] }`.
 - In v2 game collection datasets, `items[].item` is public game data only. Do not put `collectionSection`, `section`, `sortOrder`, `slug`, `image`, source URLs, source pages, verification notes, raw text, image status, or workflow/debug fields there.
 - In v2 game collection datasets, `items[].system` may contain only `slug`, `section`, `sortOrder`, and `image`. Use these for Bloxodes routing, grouping, ordering, and image rendering without interfering with real game fields that may have similar names.

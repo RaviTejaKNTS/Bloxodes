@@ -19,6 +19,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
 - `.agents/skills/bloxodes-game-collection-data/SKILL.md`: game collection dataset, fields, sections, and renderer readiness.
 - `.agents/skills/bloxodes-game-collection-images/SKILL.md`: game collection image collection, local image paths, and image readiness.
+- `.agents/skills/bloxodes-game-collection-refresh/SKILL.md`: refresh one collection dataset, one game's collection datasets, or all registered game collections, with affected wiki page review and collection suggestions for wider scopes.
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Journey automatic in-content ad placement, including pagination and hydrated DOM verification.
@@ -69,7 +70,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ### Game wiki and collection pages
 
-1. Use the matching `.agents/skills/bloxodes-*` skill directly. For full jobs, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-collection-workflow-runner`.
+1. Use the matching `.agents/skills/bloxodes-*` skill directly. For new pages, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-collection-workflow-runner`. For source-backed maintenance of existing local collection datasets and their wiki pages, use `bloxodes-game-collection-refresh`.
 2. Gather game collection item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a collection because an API does not expose item rows.
 3. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
 4. Seed and preview `wiki_pages` and `wiki_collection_pages` locally before production.
