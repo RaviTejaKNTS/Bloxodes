@@ -47,7 +47,9 @@ Use topic-specific detail columns. Examples include role, cost, stats, strengths
 schema: 1
 id: fighting-styles
 title: Fighting styles ranked
-scope: General combat
+collection:
+  href: /wiki/gakuran/fighting-styles
+  label: Fighting styles collection
 tiers:
   - rank: S
     label: Best overall
@@ -55,7 +57,6 @@ tiers:
       - name: Hakari
         image: /Gakuran/Fighting%20Styles/hakari.png
         alt: Hakari fighting style icon in Gakuran
-        href: /wiki/gakuran/fighting-styles#hakari
   - rank: A
     items:
       - name: Boxing
@@ -71,8 +72,10 @@ Block rules:
 - Use each tier rank once and each item name once.
 - Include factual alt text for every image.
 - Use a verified site-relative public path or Bloxodes media URL. Never hotlink.
+- Add `collection` with the verified Bloxodes collection page when one exists; omit it otherwise. Do not add per-item `href` links; items render as plain images.
+- Ranks color from green downward: `S` renders as the recommended green tier and low ranks shade toward red, so order tiers best-first.
 - Keep reasons, stats, pros, and cons out of the overview block.
-- Use the article update timestamp for date freshness. Add a game version to `scope` only when verified.
+- Skip `scope` unless the ranking needs a disambiguating context such as PvP; it only shows when no collection link exists. Add a game version to `scope` only when verified.
 
 ## Detail Tables
 

@@ -143,7 +143,7 @@ export function ArticleChecklist({
       data-checklist-id={data.id}
     >
       <div className="space-y-1.5 px-1">
-        <h2 className="text-lg font-extrabold leading-snug text-foreground">{data.title}</h2>
+        <h2 className="m-0 text-lg font-extrabold leading-snug text-foreground">{data.title}</h2>
         {data.description ? <p className="text-sm leading-6 text-muted-foreground">{data.description}</p> : null}
         <div className="flex flex-wrap items-center gap-2.5">
           <ProgressBar percent={percent} className="h-2.5 flex-1" label={`Progress for ${data.title}`} />

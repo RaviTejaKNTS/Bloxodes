@@ -31,6 +31,13 @@ const linkedItemFields = {
 
 const tierListItemSchema = z.object(linkedItemFields).strict();
 
+const collectionLinkSchema = z
+  .object({
+    href: articleHrefSchema,
+    label: z.string().trim().min(1).max(60).optional(),
+  })
+  .strict();
+
 const tierSchema = z
   .object({
     rank: z.string().trim().regex(TIER_RANK_PATTERN),
@@ -45,6 +52,7 @@ export const tierListBlockSchema = z
     id: z.string().trim().regex(BLOCK_ID_PATTERN),
     title: z.string().trim().min(1).max(120),
     scope: z.string().trim().min(1).max(80).optional(),
+    collection: collectionLinkSchema.optional(),
     tiers: z.array(tierSchema).min(1).max(12),
   })
   .strict()

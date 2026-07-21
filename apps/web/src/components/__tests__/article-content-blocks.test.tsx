@@ -34,6 +34,65 @@ describe("article content block components", () => {
     expect(html).toContain("General combat");
   });
 
+  it("renders one derived collection link instead of per-item links", () => {
+    const html = renderToStaticMarkup(
+      <ArticleTierList
+        data={{
+          schema: 1,
+          id: "pets",
+          title: "Pets ranked",
+          tiers: [
+            {
+              rank: "S",
+              items: [
+                {
+                  name: "Unicorn",
+                  image: "/Grow%20a%20Garden%202/Pets/unicorn.webp",
+                  alt: "Unicorn pet icon",
+                  href: "/wiki/grow-a-garden-2/pets#item-unicorn-row",
+                },
+                {
+                  name: "Raccoon",
+                  image: "/Grow%20a%20Garden%202/Pets/raccoon.webp",
+                  alt: "Raccoon pet icon",
+                  href: "/wiki/grow-a-garden-2/pets#item-raccoon-row",
+                },
+              ],
+            },
+          ],
+        }}
+      />
+    );
+
+    expect(html).toContain('href="/wiki/grow-a-garden-2/pets"');
+    expect(html).toContain("Pets collection");
+    expect(html).not.toContain("#item-unicorn-row");
+  });
+
+  it("prefers an explicit collection link over the scope label", () => {
+    const html = renderToStaticMarkup(
+      <ArticleTierList
+        data={{
+          schema: 1,
+          id: "units",
+          title: "Units ranked",
+          scope: "Story mode",
+          collection: { href: "/wiki/anime-squadron/units", label: "All units" },
+          tiers: [
+            {
+              rank: "S",
+              items: [{ name: "Shin", image: "/Anime%20Squadron/units/shin.png", alt: "Shin unit icon" }],
+            },
+          ],
+        }}
+      />
+    );
+
+    expect(html).toContain('href="/wiki/anime-squadron/units"');
+    expect(html).toContain("All units");
+    expect(html).not.toContain("Story mode");
+  });
+
   it("server-renders an unchecked checklist with progress semantics", () => {
     const html = renderToStaticMarkup(
       <ArticleChecklist
