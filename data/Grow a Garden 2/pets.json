@@ -225,7 +225,7 @@
         "slug": "bear",
         "section": "Mythic",
         "sortOrder": 11,
-        "image": null
+        "image": "/Grow%20a%20Garden%202/Pets/bear.webp"
       }
     },
     {
@@ -241,7 +241,7 @@
         "slug": "black-dragon",
         "section": "Super",
         "sortOrder": 12,
-        "image": null
+        "image": "/Grow%20a%20Garden%202/Pets/black-dragon.webp"
       }
     },
     {
@@ -258,6 +258,22 @@
         "section": "Super",
         "sortOrder": 13,
         "image": "/Grow%20a%20Garden%202/Pets/ice-serpent.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Turtle",
+        "price": "70K Sheckles",
+        "rarity": "Rare",
+        "ability": "Adds +10 backpack space but slows walk speed by 2",
+        "whereToGet": "Lobby pet spawn",
+        "role": "Inventory"
+      },
+      "system": {
+        "slug": "turtle",
+        "section": "Rare",
+        "sortOrder": 14,
+        "image": "/Grow%20a%20Garden%202/Pets/turtle.webp"
       }
     }
   ]
