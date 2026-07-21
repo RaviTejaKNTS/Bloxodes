@@ -1,11 +1,11 @@
-# Bloxodes Chrome Extension
+# Bloxodes Browser Extension
 
-Chrome MV3 extension for showing a small Bloxodes codes preview on Roblox game pages.
+Chromium MV3 extension for showing a small Bloxodes codes preview on Roblox game pages. The same package supports Google Chrome and Microsoft Edge.
 
 ## What It Does
 
 - Runs on `www.roblox.com/games/*` and `web.roblox.com/games/*`.
-- Reads the Roblox place ID, visible game name, and current Roblox URL.
+- Reads the public Roblox place ID and visible game name.
 - Asks the background service worker to call `https://bloxodes.com/api/extension/roblox-game-codes`.
 - Injects a Bloxodes-styled active-codes card into the Roblox page.
 - Shows up to 3 active codes and links to the full Bloxodes codes page.
@@ -24,7 +24,7 @@ apps/extension/
   scripts/package.mjs
 ```
 
-Generated files are written to `apps/extension/dist/` and the Chrome Web Store archive is written to `apps/extension/bloxodes-extension-v4.0.0.zip`.
+Generated files are written to `apps/extension/dist/` and the store archive is written to `apps/extension/bloxodes-extension-v4.0.1.zip`.
 Do not edit `dist/` directly.
 
 ## Commands
@@ -37,24 +37,26 @@ npm run build:extension
 npm run package:extension
 ```
 
-## Local Test In Chrome
+## Local Test In Chrome Or Edge
 
 1. Run `npm run package:extension`.
-2. Open `chrome://extensions`.
+2. Open `chrome://extensions` in Chrome or `edge://extensions` in Edge.
 3. Enable Developer Mode.
 4. Click "Load unpacked".
 5. Select `apps/extension/dist`.
 6. Open a Roblox game page such as Blox Fruits.
 7. Test with only the unpacked extension enabled, then optionally enable the live store extension to check for style isolation.
 
-The Chrome Web Store upload archive is:
+The store upload archive is:
 
 ```text
-apps/extension/bloxodes-extension-v4.0.0.zip
+apps/extension/bloxodes-extension-v4.0.1.zip
 ```
 
 ## Store Notes
 
-Upload this archive as an update to the existing Chrome Web Store item so the extension ID stays the same.
+Upload this archive as an update to the existing Chrome Web Store item or as a package for the Microsoft Edge Add-ons listing. Each store manages its own extension identity and update history.
 Keep permissions limited to Roblox game pages and the Bloxodes extension API.
-Before upload, confirm the Chrome Web Store dashboard's current live version and keep `manifest.json`/`package.json` greater than that version.
+Before uploading an update, confirm that store's current live version and keep `manifest.json`/`package.json` greater than it.
+
+Store identities and submission history are recorded in [`STORE_RELEASES.md`](./STORE_RELEASES.md).

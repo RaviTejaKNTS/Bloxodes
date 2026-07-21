@@ -1,7 +1,6 @@
 type BloxodesContentRequest = {
   type: "BLOXODES_GET_CODES";
   placeId: number | null;
-  robloxUrl: string;
   gameName: string | null;
 };
 
@@ -382,7 +381,6 @@ async function run(): Promise<void> {
   const response = await requestCodes({
     type: "BLOXODES_GET_CODES",
     placeId,
-    robloxUrl: location.href,
     gameName
   });
 

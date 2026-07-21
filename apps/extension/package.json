@@ -1,8 +1,8 @@
 {
   "name": "@bloxodes/extension",
   "private": true,
-  "version": "4.0.0",
-  "description": "Bloxodes Chrome extension for Roblox game codes.",
+  "version": "4.0.1",
+  "description": "Bloxodes browser extension for Roblox game codes.",
   "scripts": {
     "clean": "node scripts/clean.mjs",
     "build": "npm run clean && tsc -p tsconfig.json && node scripts/build.mjs",

@@ -9,11 +9,13 @@ const distDir = path.join(appDir, "dist");
 const iconSource = path.join(repoRoot, "apps/web/public/android-chrome-192x192.png");
 const iconDir = path.join(distDir, "icons");
 const brandDir = path.join(distDir, "brand");
+const manifestPath = path.join(appDir, "manifest.json");
+const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
 
 await mkdir(iconDir, { recursive: true });
 await mkdir(brandDir, { recursive: true });
 
-await copyFile(path.join(appDir, "manifest.json"), path.join(distDir, "manifest.json"));
+await copyFile(manifestPath, path.join(distDir, "manifest.json"));
 await copyFile(path.join(appDir, "styles.css"), path.join(distDir, "styles.css"));
 await copyFile(path.join(repoRoot, "apps/web/public/Bloxodes-dark.png"), path.join(brandDir, "Bloxodes-dark.png"));
 await copyFile(path.join(repoRoot, "apps/web/public/Bloxodes-light.png"), path.join(brandDir, "Bloxodes-light.png"));
@@ -33,9 +35,9 @@ for (const file of filesToCheck) {
 await writeFile(
   path.join(distDir, "README.txt"),
   [
-    "Bloxodes Chrome Extension v4.0.0",
+    `Bloxodes Browser Extension v${manifest.version}`,
     "",
-    "Upload the contents of this dist directory to the existing Chrome Web Store item.",
+    "This Chromium extension package can be submitted to the Chrome Web Store or Microsoft Edge Add-ons.",
     "Only the first three active codes are shown on Roblox game pages.",
     "The full list opens on Bloxodes.com."
   ].join("\n")

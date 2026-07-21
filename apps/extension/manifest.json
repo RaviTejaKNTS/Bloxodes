@@ -1,16 +1,13 @@
 {
   "manifest_version": 3,
   "name": "Bloxodes - Roblox Game Codes",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "See the latest active Roblox game codes directly on Roblox game pages.",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  },
-  "action": {
-    "default_title": "Bloxodes - Roblox Codes"
   },
   "background": {
     "service_worker": "background.js"

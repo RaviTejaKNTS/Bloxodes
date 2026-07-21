@@ -69,7 +69,7 @@ These routes back interactive site features, search, tool data, session/progress
 
 ## Extension And Mobile APIs
 
-- `/api/extension/roblox-game-codes` resolves Roblox place/game context to a published Bloxodes codes page and returns a three-code preview plus the full page URL.
+- `/api/extension/roblox-game-codes` resolves the public Roblox place ID and game name to a published Bloxodes codes page and returns a three-code preview plus the full page URL. `robloxUrl` remains an input only as a compatibility fallback for older installed extension clients; current clients must not send the full page URL.
 - `/api/mobile/home` aggregates the codes index plus per-kind section rails for the app home screen.
 - `/api/mobile/codes` returns the paginated mobile codes index.
 - `/api/mobile/codes/[slug]` returns active and expired codes for a mobile detail screen.

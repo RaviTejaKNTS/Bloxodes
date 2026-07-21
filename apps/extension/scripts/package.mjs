@@ -1,11 +1,12 @@
 import { spawn } from "node:child_process";
-import { access } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 const appDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const distDir = path.join(appDir, "dist");
-const archivePath = path.join(appDir, "bloxodes-extension-v4.0.0.zip");
+const manifest = JSON.parse(await readFile(path.join(appDir, "manifest.json"), "utf8"));
+const archivePath = path.join(appDir, `bloxodes-extension-v${manifest.version}.zip`);
 
 await access(path.join(distDir, "manifest.json"));
 

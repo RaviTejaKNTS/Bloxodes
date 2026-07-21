@@ -1,7 +1,6 @@
 type BloxodesBackgroundRequest = {
   type?: string;
   placeId?: number | null;
-  robloxUrl?: string | null;
   gameName?: string | null;
 };
 
@@ -50,9 +49,6 @@ function buildCodesUrl(message: BloxodesBackgroundRequest): string {
   const url = new URL(BLOXODES_EXTENSION_API_URL);
   if (typeof message.placeId === "number" && Number.isFinite(message.placeId)) {
     url.searchParams.set("placeId", String(message.placeId));
-  }
-  if (message.robloxUrl) {
-    url.searchParams.set("robloxUrl", message.robloxUrl);
   }
   if (message.gameName) {
     url.searchParams.set("gameName", message.gameName);

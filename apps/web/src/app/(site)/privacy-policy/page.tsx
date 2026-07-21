@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
           <p>
             <strong>Effective Date:</strong> January 31, 2026
             <br />
-            <strong>Last Updated:</strong> January 31, 2026
+            <strong>Last Updated:</strong> July 21, 2026
           </p>
           <p>
             Bloxodes.com ("Bloxodes," "we," "our," or "us") publishes Roblox guides, checklists, and tools. We designed this site to
@@ -254,10 +254,23 @@ export default function PrivacyPolicyPage() {
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">10. Bloxodes Chrome Extension</h2>
+          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">10. Bloxodes Browser Extensions</h2>
           <p>
-            The Bloxodes Chrome Extension does not collect, store, transmit, or share personal data. It only retrieves publicly available
-            Roblox game data (codes) and displays them. It contains no analytics or tracking code.
+            The Bloxodes extensions for Microsoft Edge and Google Chrome run only on supported Roblox game pages. To identify the game and
+            retrieve a matching codes preview, an extension reads the public Roblox place ID and game title and sends those values to the
+            Bloxodes extension API. Microsoft Edge releases and Google Chrome version 4.0.1 or later do not send the full page URL, URL query
+            parameters, private-server links, Roblox credentials, or unrelated browsing history.
+          </p>
+          <p>
+            Earlier Google Chrome releases may also send the current Roblox game URL as a fallback for identifying the public place ID. That
+            URL is used only to match the game with a Bloxodes codes page, not to build a browsing profile or track activity on other pages.
+            Updating to version 4.0.1 or later removes this legacy URL transmission.
+          </p>
+          <p>
+            Extension API requests are not tied to a Bloxodes or Roblox account and do not include cookies or authentication credentials.
+            As with normal web requests, our hosting, CDN, and security providers may process routine technical data such as IP address,
+            browser type, request time, and requested endpoint for delivery, security, abuse prevention, and operational reliability. The
+            extensions contain no advertising, analytics, or user-tracking code.
           </p>
         </section>
 
