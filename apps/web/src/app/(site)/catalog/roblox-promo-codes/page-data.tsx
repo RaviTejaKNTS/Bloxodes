@@ -221,8 +221,6 @@ export function renderPromoRewardsPage({
 
         {descriptionNodes.length ? descriptionNodes : null}
         {howNodes}
-        {faqNodes.length ? <ContentFaq items={faqNodes} /> : null}
-        <CatalogAdSlot />
 
         <section aria-labelledby="free-roblox-items" className="space-y-5">
           <div className="space-y-2">
@@ -259,6 +257,9 @@ export function renderPromoRewardsPage({
             </Link>
           </div>
         </section>
+
+        {faqNodes.length ? <ContentFaq items={faqNodes} /> : null}
+        <CatalogAdSlot />
       </section>
 
       {contentHtml?.id ? <CommentsSection entityType="catalog" entityId={contentHtml.id} /> : null}

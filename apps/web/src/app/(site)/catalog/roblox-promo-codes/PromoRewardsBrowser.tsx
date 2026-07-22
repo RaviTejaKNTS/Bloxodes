@@ -25,12 +25,6 @@ export type PromoRewardItem = {
   sortOrder: number;
 };
 
-function typeLabel(item: PromoRewardItem) {
-  if (item.claimType === "web_promo_code") return "Roblox promo code";
-  if (item.claimType === "experience_code") return "In-game code";
-  return "Reward item";
-}
-
 function actionLabel(item: PromoRewardItem) {
   if (item.claimType === "web_promo_code") return "Redeem on Roblox";
   if (item.claimType === "experience_code") return "Play on Roblox";
@@ -60,20 +54,19 @@ function PromoRewardRow({
 }) {
   const displayName = item.rewardName || `Roblox reward ${item.assetId}`;
   const isPast = item.status === "expired" || item.status === "unavailable";
-  const experience = experienceName(item);
   const destinationUrl = actionUrl(item);
   const ItemHeading = headingLevel;
 
   return (
-    <article className="flex gap-4 rounded-lg border border-border/70 bg-surface/60 p-3 sm:items-center sm:p-4">
-      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md bg-background/70 sm:h-28 sm:w-28">
+    <article className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-3 rounded-lg border border-border/70 bg-surface/60 p-3">
+      <div className="relative h-[4.5rem] w-[4.5rem] overflow-hidden rounded-md bg-background/70">
         {item.thumbnailUrl ? (
           <Image
             src={item.thumbnailUrl}
             alt={`${displayName} Roblox item`}
             fill
-            sizes="112px"
-            className="object-contain p-2"
+            sizes="72px"
+            className="object-contain p-1.5"
             priority={eager}
             unoptimized
           />
@@ -82,9 +75,9 @@ function PromoRewardRow({
         )}
       </div>
 
-      <div className="min-w-0 flex-1 space-y-2.5">
+      <div className="min-w-0 space-y-2">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold text-muted">{typeLabel(item)}</span>
+          <ItemHeading className="text-base font-semibold leading-snug text-foreground">{displayName}</ItemHeading>
           {isPast ? (
             <span className="rounded-full border border-border/70 bg-background px-2 py-0.5 text-[11px] font-semibold text-muted">
               {item.status === "expired" ? "Expired" : "Unavailable"}
@@ -92,13 +85,8 @@ function PromoRewardRow({
           ) : null}
         </div>
 
-        <div>
-          <ItemHeading className="text-base font-semibold leading-snug text-foreground sm:text-lg">{displayName}</ItemHeading>
-          {experience ? <p className="mt-0.5 text-sm text-muted">Use in {experience}</p> : null}
-        </div>
-
         {item.promoCode ? (
-          <div className="flex max-w-md items-center justify-between gap-3 rounded-md border border-border/60 bg-background/70 px-3 py-2">
+          <div className="flex items-center justify-between gap-2 rounded-md border border-border/60 bg-background/70 px-2.5 py-1.5">
             <code className="min-w-0 truncate text-sm font-semibold text-foreground">{item.promoCode}</code>
             <CopyCodeButton
               code={item.promoCode}
@@ -122,7 +110,7 @@ function PromoRewardRow({
               href={destinationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md bg-accent px-3 py-2 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+              className="inline-flex items-center justify-center rounded-md bg-accent px-2.5 py-1.5 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
             >
               {actionLabel(item)}
             </a>
@@ -132,7 +120,7 @@ function PromoRewardRow({
               href={item.robloxItemUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-md border border-border/70 bg-background px-3 py-2 text-xs font-semibold text-foreground transition hover:border-accent/40 hover:text-accent"
+              className="inline-flex items-center justify-center rounded-md border border-border/70 bg-background px-2.5 py-1.5 text-xs font-semibold text-foreground transition hover:border-accent/40 hover:text-accent"
             >
               View item
             </a>
@@ -169,7 +157,7 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
           </p>
         </div>
         {availablePromoCodes.length ? (
-          <div className="space-y-3">
+          <div className="grid gap-3 md:grid-cols-2">
             {availablePromoCodes.map((item, index) => (
               <PromoRewardRow key={item.id} item={item} eager={index < 3} />
             ))}
@@ -190,17 +178,15 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
             {inGameCodes.length} {inGameCodes.length === 1 ? "item" : "items"}
           </p>
         </div>
-        <p className="text-sm leading-relaxed text-muted">
-          Enter these codes inside the named Roblox experience, not on the website redeem page.
-        </p>
+        <p>Enter these codes inside the named Roblox experience, not on the website redeem page.</p>
 
         {islandOfMoveCodes.length ? (
           <div className="space-y-4">
             <div className="space-y-1">
               <h3 className="text-xl font-semibold text-foreground">Island of Move codes</h3>
-              <p className="text-sm text-muted">Launch Island of Move, select Play It, then choose Redeem Code.</p>
+              <p>Launch Island of Move, select Play It, then choose Redeem Code.</p>
             </div>
-            <div className="space-y-3">
+            <div className="grid gap-3 md:grid-cols-2">
               {islandOfMoveCodes.map((item) => (
                 <PromoRewardRow key={item.id} item={item} headingLevel="h4" />
               ))}
@@ -212,11 +198,9 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
           <div className="space-y-4">
             <div className="space-y-1">
               <h3 className="text-xl font-semibold text-foreground">Mansion of Wonder codes</h3>
-              <p className="text-sm text-muted">
-                Launch Mansion of Wonder, open Get Swag at the Swag Booth, then choose Redeem Code.
-              </p>
+              <p>Launch Mansion of Wonder, open Get Swag at the Swag Booth, then choose Redeem Code.</p>
             </div>
-            <div className="space-y-3">
+            <div className="grid gap-3 md:grid-cols-2">
               {mansionOfWonderCodes.map((item) => (
                 <PromoRewardRow key={item.id} item={item} headingLevel="h4" />
               ))}
@@ -225,7 +209,7 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
         ) : null}
 
         {otherInGameCodes.length ? (
-          <div className="space-y-3">
+          <div className="grid gap-3 md:grid-cols-2">
             {otherInGameCodes.map((item) => (
               <PromoRewardRow key={item.id} item={item} headingLevel="h3" />
             ))}
@@ -249,7 +233,7 @@ export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
           </p>
         </div>
         {pastRewards.length ? (
-          <div className="space-y-3">
+          <div className="grid gap-3 md:grid-cols-2">
             {pastRewards.map((item) => (
               <PromoRewardRow key={item.id} item={item} />
             ))}
