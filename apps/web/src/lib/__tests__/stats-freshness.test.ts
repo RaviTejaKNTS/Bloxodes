@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { currentPlayingValue, isPlayingTimestampFresh, STATS_PLAYING_FRESHNESS_MS } from "../stats-freshness";
+import {
+  currentPlayingRankValue,
+  currentPlayingValue,
+  isPlayingRankSnapshotWithinFreshnessWindow,
+  isPlayingTimestampFresh,
+  STATS_PLAYING_FRESHNESS_MS
+} from "../stats-freshness";
 
 describe("stats player freshness", () => {
   const now = Date.parse("2026-07-22T12:00:00.000Z");
@@ -21,5 +27,31 @@ describe("stats player freshness", () => {
     expect(currentPlayingValue(null, fresh, now)).toBeNull();
     expect(currentPlayingValue(10, null, now)).toBeNull();
     expect(currentPlayingValue(-1, fresh, now)).toBeNull();
+  });
+
+  it("expires current playing ranks with the player observation", () => {
+    const fresh = new Date(now - 60_000).toISOString();
+    const stale = new Date(now - STATS_PLAYING_FRESHNESS_MS - 1).toISOString();
+    expect(currentPlayingRankValue(39, fresh, now)).toBe(39);
+    expect(currentPlayingRankValue(39, stale, now)).toBeNull();
+    expect(currentPlayingRankValue(0, fresh, now)).toBeNull();
+  });
+
+  it("keeps historical rank snapshots only through the 24-hour grace window", () => {
+    const refreshedAt = new Date(now - 2 * STATS_PLAYING_FRESHNESS_MS).toISOString();
+    expect(
+      isPlayingRankSnapshotWithinFreshnessWindow(
+        new Date(Date.parse(refreshedAt) + STATS_PLAYING_FRESHNESS_MS).toISOString(),
+        refreshedAt,
+        now
+      )
+    ).toBe(true);
+    expect(
+      isPlayingRankSnapshotWithinFreshnessWindow(
+        new Date(Date.parse(refreshedAt) + STATS_PLAYING_FRESHNESS_MS + 1).toISOString(),
+        refreshedAt,
+        now
+      )
+    ).toBe(false);
   });
 });

@@ -1659,7 +1659,7 @@ function RelatedLinks({ links }: { links: StatsRelatedLink[] }) {
 export function StatsGameDetailView({ data }: { data: StatsGameDetailData }) {
   const { game } = data;
   const wikiLink = data.relatedLinks.find((link) => link.type === "wiki");
-  const globalRank = data.initialRankChart.summaries.find((summary) => summary.key === "global")?.currentRank ?? game.rank;
+  const globalRank = game.rank;
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Stats", href: "/stats" },

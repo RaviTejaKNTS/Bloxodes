@@ -4,7 +4,9 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { slugify, statsUniverseSlug } from "@/lib/slug";
 import { formatCompactNumber } from "@/lib/stats-format";
 import {
+  currentPlayingRankValue,
   currentPlayingValue,
+  isPlayingRankSnapshotWithinFreshnessWindow,
   isPlayingTimestampFresh,
   STATS_PLAYING_FRESHNESS_MS,
   STATS_PLAYING_INDEX_GRACE_MS
@@ -3370,12 +3372,15 @@ async function getStatsRankChartComparisons(
   for (const game of games) {
     if (!game || !rankComparisonMatchesScope(game, baseGame, scope)) continue;
     const rows = await getRankRows(game.universeId, range, window);
+    const publishableRows = rows.filter((row) =>
+      isPlayingRankSnapshotWithinFreshnessWindow(row.sampled_at, game.lastPlayingRefreshedAt)
+    );
     comparisons.push({
       universeId: game.universeId,
       name: game.name,
       slug: game.slug,
       iconUrl: game.iconUrl,
-      points: bucketRankRows(rows, range, resolution, window)
+      points: bucketRankRows(publishableRows, range, resolution, window)
     });
   }
   return comparisons;
@@ -3539,7 +3544,10 @@ function bucketRankRows(
     });
 }
 
-function summarizeRankRows(rows: RankSnapshotRow[], game: Pick<StatsGame, "genre" | "subgenre">): StatsRankSummary[] {
+function summarizeRankRows(
+  rows: RankSnapshotRow[],
+  game: Pick<StatsGame, "genre" | "subgenre" | "lastPlayingRefreshedAt">
+): StatsRankSummary[] {
   const labels: Record<StatsRankKey, { label: string; scopeLabel: string | null }> = {
     global: { label: "Global", scopeLabel: null },
     genre: { label: "Genre", scopeLabel: game.genre },
@@ -3552,6 +3560,7 @@ function summarizeRankRows(rows: RankSnapshotRow[], game: Pick<StatsGame, "genre
       .filter((row) => row.rank_type === rankType && typeof row.rank_value === "number")
       .sort((a, b) => Date.parse(a.sampled_at) - Date.parse(b.sampled_at));
     const current = scopedRows[scopedRows.length - 1];
+    const currentRank = currentPlayingRankValue(current?.rank_value, game.lastPlayingRefreshedAt);
     const best = scopedRows.reduce<RankSnapshotRow | null>(
       (candidate, row) => (!candidate || row.rank_value < candidate.rank_value ? row : candidate),
       null
@@ -3574,8 +3583,8 @@ function summarizeRankRows(rows: RankSnapshotRow[], game: Pick<StatsGame, "genre
       key,
       label: labels[key].label,
       scopeLabel: labels[key].scopeLabel,
-      currentRank: current?.rank_value ?? null,
-      currentAt: current?.sampled_at ?? null,
+      currentRank,
+      currentAt: currentRank == null ? null : (current?.sampled_at ?? null),
       bestRank: best?.rank_value ?? null,
       bestAt: best?.sampled_at ?? null,
       firstTop1At: firstTop1?.sampled_at ?? null,
@@ -3623,7 +3632,7 @@ async function getRankRows(universeId: number, range: StatsTimeRange, window = c
 }
 
 export async function getStatsGameRankChart(
-  game: Pick<StatsGame, "universeId" | "genre" | "subgenre">,
+  game: Pick<StatsGame, "universeId" | "genre" | "subgenre" | "lastPlayingRefreshedAt">,
   range: StatsTimeRange = DEFAULT_STATS_CHART_RANGE,
   resolution: StatsChartResolution = DEFAULT_STATS_CHART_RESOLUTION,
   options: { includePrevious?: boolean; includeAnnotations?: boolean; compareUniverseIds?: number[]; compareScope?: StatsRankKey } = {}
@@ -3636,15 +3645,21 @@ export async function getStatsGameRankChart(
     getStatsRankChartComparisons(options.compareUniverseIds ?? [], game, options.compareScope ?? "global", range, resolution, window),
     options.includeAnnotations ? getStatsChartAnnotations(game.universeId, window.start, window.end) : Promise.resolve(undefined)
   ]);
+  const publishableRows = rows.filter((row) =>
+    isPlayingRankSnapshotWithinFreshnessWindow(row.sampled_at, game.lastPlayingRefreshedAt)
+  );
+  const publishablePreviousRows = previousRows?.filter((row) =>
+    isPlayingRankSnapshotWithinFreshnessWindow(row.sampled_at, game.lastPlayingRefreshedAt)
+  );
   return {
     range,
     requestedResolution: resolution,
     resolution,
-    points: bucketRankRows(rows, range, resolution, window),
-    previousPoints: previousRows ? bucketRankRows(previousRows, range, resolution, previousWindow) : undefined,
+    points: bucketRankRows(publishableRows, range, resolution, window),
+    previousPoints: publishablePreviousRows ? bucketRankRows(publishablePreviousRows, range, resolution, previousWindow) : undefined,
     comparisons,
     annotations,
-    summaries: summarizeRankRows(rows, game)
+    summaries: summarizeRankRows(publishableRows, game)
   };
 }
 
@@ -3659,7 +3674,8 @@ export async function getStatsGameRankChartByUniverseId(
     {
       universeId,
       genre: game?.genre ?? null,
-      subgenre: game?.subgenre ?? null
+      subgenre: game?.subgenre ?? null,
+      lastPlayingRefreshedAt: game?.lastPlayingRefreshedAt ?? null
     },
     range,
     resolution,
