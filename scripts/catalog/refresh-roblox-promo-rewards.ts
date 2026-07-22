@@ -5,6 +5,7 @@ import { createHash } from "node:crypto";
 import {
   parseRobloxDenPromoRewards,
   planPromoRewardMissingState,
+  planPromoRewardSeenStatus,
   robloxPromoItemUrl,
   ROBLOXDEN_PROMO_SOURCE_URL,
   type ParsedRobloxDenPromoReward,
@@ -405,13 +406,6 @@ function asNullableNumber(value: unknown): number | null {
   return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
-function restoredStatus(existing: StoredRewardRow | undefined): { status: string; statusReason: string | null } {
-  if (!existing || ["inactive", "unavailable", "error"].includes(existing.status)) {
-    return { status: "source_listed_unverified", statusReason: null };
-  }
-  return { status: existing.status, statusReason: existing.status_reason };
-}
-
 function prepareSeenRow(
   item: ParsedRobloxDenPromoReward,
   existing: StoredRewardRow | undefined,
@@ -420,7 +414,7 @@ function prepareSeenRow(
   thumbnailFailure: FetchFailure | undefined,
   checkedAt: string,
 ): Record<string, unknown> {
-  const restored = restoredStatus(existing);
+  const restored = planPromoRewardSeenStatus(existing?.status, existing?.status_reason, assetResult.kind);
   const existingItemType: RobloxPromoItemType = existing?.roblox_item_type === "Bundle" ? "Bundle" : "Asset";
   const row: Record<string, unknown> = {
     source_provider: "robloxden",
@@ -471,10 +465,7 @@ function prepareSeenRow(
     row.creator_name = assetResult.detail.creatorName ?? existing?.creator_name ?? null;
     row.verified_at = checkedAt;
     row.raw_roblox_json = assetResult.detail.raw;
-  } else if (assetResult.kind === "permanent") {
-    row.status = "unavailable";
-    row.status_reason = "official_asset_unavailable";
-  } else if (!existing) {
+  } else if (assetResult.kind === "transient" && !existing) {
     row.status_reason = "official_metadata_temporarily_unavailable";
   }
 

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   parseRobloxDenPromoRewards,
   planPromoRewardMissingState,
+  planPromoRewardSeenStatus,
   robloxPromoItemUrl,
 } from "../robloxden-promo-rewards";
 
@@ -190,5 +191,24 @@ describe("RobloxDen promo reward parsing", () => {
   it("builds distinct official item URLs for assets and bundles", () => {
     expect(robloxPromoItemUrl(123, "Asset")).toBe("https://www.roblox.com/catalog/123");
     expect(robloxPromoItemUrl(456, "Bundle")).toBe("https://www.roblox.com/bundles/456");
+  });
+
+  it("preserves status on transient enrichment failures and only restores official unavailability after success", () => {
+    expect(planPromoRewardSeenStatus("unavailable", "official_asset_unavailable", "transient")).toEqual({
+      status: "unavailable",
+      statusReason: "official_asset_unavailable",
+    });
+    expect(planPromoRewardSeenStatus("unavailable", "official_asset_unavailable", "success")).toEqual({
+      status: "source_listed_unverified",
+      statusReason: null,
+    });
+    expect(planPromoRewardSeenStatus("inactive", "missing_from_complete_source", "transient")).toEqual({
+      status: "source_listed_unverified",
+      statusReason: null,
+    });
+    expect(planPromoRewardSeenStatus("source_listed_unverified", null, "permanent")).toEqual({
+      status: "unavailable",
+      statusReason: "official_asset_unavailable",
+    });
   });
 });

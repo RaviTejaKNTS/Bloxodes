@@ -50,6 +50,32 @@ export type PromoRewardMissingPlan = {
   consecutiveMisses: number;
 };
 
+export type PromoRewardSeenStatus = {
+  status: string;
+  statusReason: string | null;
+};
+
+export function planPromoRewardSeenStatus(
+  existingStatus: string | undefined,
+  existingStatusReason: string | null | undefined,
+  enrichmentState: "success" | "transient" | "permanent",
+): PromoRewardSeenStatus {
+  if (enrichmentState === "permanent") {
+    return { status: "unavailable", statusReason: "official_asset_unavailable" };
+  }
+  if (!existingStatus || existingStatus === "inactive") {
+    return { status: "source_listed_unverified", statusReason: null };
+  }
+  if (
+    enrichmentState === "success" &&
+    existingStatus === "unavailable" &&
+    existingStatusReason === "official_asset_unavailable"
+  ) {
+    return { status: "source_listed_unverified", statusReason: null };
+  }
+  return { status: existingStatus, statusReason: existingStatusReason ?? null };
+}
+
 const SOURCE_TYPE_SET = new Set<string>(ROBLOXDEN_PROMO_SOURCE_TYPES);
 const DETAIL_PATH = /^\/promo-codes\/([a-z0-9]+(?:-[a-z0-9]+)*)\/?$/i;
 
