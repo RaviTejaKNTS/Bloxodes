@@ -1,9 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { useMemo, useState } from "react";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
-import { trackEvent } from "@/lib/analytics";
 
 export type PromoRewardClaimType =
   | "web_promo_code"
@@ -29,30 +25,6 @@ export type PromoRewardItem = {
   sortOrder: number;
 };
 
-type FilterKey = "promo" | "experience" | "past";
-
-const FILTERS: Array<{ key: FilterKey; label: string }> = [
-  { key: "promo", label: "Promo codes" },
-  { key: "experience", label: "In-game codes" },
-  { key: "past", label: "Past rewards" }
-];
-
-function matchesFilter(item: PromoRewardItem, filter: FilterKey) {
-  if (filter === "promo") {
-    return item.claimType === "web_promo_code" && item.status === "verified_claimable";
-  }
-  if (filter === "experience") {
-    return item.claimType === "experience_code" && !["expired", "unavailable"].includes(item.status);
-  }
-  return ["expired", "unavailable"].includes(item.status);
-}
-
-function matchesQuery(item: PromoRewardItem, query: string) {
-  return [item.rewardName, item.promoCode, item.eventName, item.requirementText].some((value) =>
-    value?.toLowerCase().includes(query)
-  );
-}
-
 function typeLabel(item: PromoRewardItem) {
   if (item.claimType === "web_promo_code") return "Roblox promo code";
   if (item.claimType === "experience_code") return "In-game code";
@@ -65,6 +37,11 @@ function actionLabel(item: PromoRewardItem) {
   return "Open on Roblox";
 }
 
+function actionUrl(item: PromoRewardItem) {
+  if (item.claimType === "web_promo_code") return "https://www.roblox.com/redeem";
+  return item.destinationUrl;
+}
+
 function experienceName(item: PromoRewardItem) {
   if (item.eventName) return item.eventName;
   if (item.destinationUrl?.includes("/6901029464/")) return "Mansion of Wonder";
@@ -72,15 +49,20 @@ function experienceName(item: PromoRewardItem) {
   return null;
 }
 
-function resultLabel(filter: FilterKey, count: number) {
-  const noun = filter === "promo" ? "promo code" : filter === "experience" ? "in-game code" : "past reward";
-  return `${count} ${noun}${count === 1 ? "" : "s"}`;
-}
-
-function PromoRewardRow({ item, eager = false }: { item: PromoRewardItem; eager?: boolean }) {
+function PromoRewardRow({
+  item,
+  eager = false,
+  headingLevel = "h3"
+}: {
+  item: PromoRewardItem;
+  eager?: boolean;
+  headingLevel?: "h3" | "h4";
+}) {
   const displayName = item.rewardName || `Roblox reward ${item.assetId}`;
   const isPast = item.status === "expired" || item.status === "unavailable";
   const experience = experienceName(item);
+  const destinationUrl = actionUrl(item);
+  const ItemHeading = headingLevel;
 
   return (
     <article className="flex gap-4 rounded-lg border border-border/70 bg-surface/60 p-3 sm:items-center sm:p-4">
@@ -111,7 +93,7 @@ function PromoRewardRow({ item, eager = false }: { item: PromoRewardItem; eager?
         </div>
 
         <div>
-          <h3 className="text-base font-semibold leading-snug text-foreground sm:text-lg">{displayName}</h3>
+          <ItemHeading className="text-base font-semibold leading-snug text-foreground sm:text-lg">{displayName}</ItemHeading>
           {experience ? <p className="mt-0.5 text-sm text-muted">Use in {experience}</p> : null}
         </div>
 
@@ -135,17 +117,11 @@ function PromoRewardRow({ item, eager = false }: { item: PromoRewardItem; eager?
         ) : null}
 
         <div className="flex flex-wrap gap-2">
-          {!isPast && item.destinationUrl ? (
+          {!isPast && destinationUrl ? (
             <a
-              href={item.destinationUrl}
+              href={destinationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() =>
-                trackEvent("promo_reward_destination_open", {
-                  asset_id: item.assetId,
-                  claim_type: item.claimType
-                })
-              }
               className="inline-flex items-center justify-center rounded-md bg-accent px-3 py-2 text-xs font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
             >
               {actionLabel(item)}
@@ -167,73 +143,123 @@ function PromoRewardRow({ item, eager = false }: { item: PromoRewardItem; eager?
   );
 }
 
-export function PromoRewardsBrowser({ items }: { items: PromoRewardItem[] }) {
-  const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<FilterKey>("promo");
-  const normalizedQuery = query.trim().toLowerCase();
-  const availableItems = useMemo(() => items.filter((item) => matchesFilter(item, filter)), [filter, items]);
-
-  const filteredItems = useMemo(
-    () =>
-      availableItems.filter((item) => !normalizedQuery || matchesQuery(item, normalizedQuery)),
-    [availableItems, normalizedQuery]
+export function PromoRewardSections({ items }: { items: PromoRewardItem[] }) {
+  const availablePromoCodes = items.filter(
+    (item) => item.claimType === "web_promo_code" && item.status === "verified_claimable"
   );
+  const inGameCodes = items.filter(
+    (item) => item.claimType === "experience_code" && !["expired", "unavailable"].includes(item.status)
+  );
+  const islandOfMoveCodes = inGameCodes.filter((item) => experienceName(item) === "Island of Move");
+  const mansionOfWonderCodes = inGameCodes.filter((item) => experienceName(item) === "Mansion of Wonder");
+  const otherInGameCodes = inGameCodes.filter(
+    (item) => !["Island of Move", "Mansion of Wonder"].includes(experienceName(item) ?? "")
+  );
+  const pastRewards = items.filter((item) => ["expired", "unavailable"].includes(item.status));
 
   return (
-    <section aria-label="Roblox promo codes and reward items" className="catalog-surface space-y-5">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex flex-wrap gap-2" aria-label="Choose reward type">
-          {FILTERS.map((option) => (
-            <button
-              key={option.key}
-              type="button"
-              onClick={() => {
-                setFilter(option.key);
-                setQuery("");
-              }}
-              aria-pressed={filter === option.key}
-              className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
-                filter === option.key
-                  ? "border-accent/50 bg-accent/10 text-accent"
-                  : "border-border/60 bg-surface/60 text-muted hover:border-accent/30 hover:text-foreground"
-              }`}
-            >
-              {option.label}
-            </button>
-          ))}
+    <div className="space-y-10">
+      <section aria-labelledby="available-promo-codes" className="catalog-surface space-y-4">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 id="available-promo-codes" className="text-2xl font-semibold text-foreground">
+            Available Roblox promo codes
+          </h2>
+          <p className="text-sm text-muted">
+            {availablePromoCodes.length} {availablePromoCodes.length === 1 ? "item" : "items"}
+          </p>
         </div>
-        <p className="text-sm text-muted" aria-live="polite">
-          {resultLabel(filter, filteredItems.length)}
+        {availablePromoCodes.length ? (
+          <div className="space-y-3">
+            {availablePromoCodes.map((item, index) => (
+              <PromoRewardRow key={item.id} item={item} eager={index < 3} />
+            ))}
+          </div>
+        ) : (
+          <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
+            There are no available website promo codes right now.
+          </p>
+        )}
+      </section>
+
+      <section aria-labelledby="in-game-codes" className="catalog-surface space-y-7">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 id="in-game-codes" className="text-2xl font-semibold text-foreground">
+            Roblox codes redeemed in experiences
+          </h2>
+          <p className="text-sm text-muted">
+            {inGameCodes.length} {inGameCodes.length === 1 ? "item" : "items"}
+          </p>
+        </div>
+        <p className="text-sm leading-relaxed text-muted">
+          Enter these codes inside the named Roblox experience, not on the website redeem page.
         </p>
-      </div>
 
-      {availableItems.length >= 8 ? (
-        <>
-          <label htmlFor="promo-reward-search" className="sr-only">
-            Search codes and rewards
-          </label>
-          <input
-            id="promo-reward-search"
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search codes and rewards"
-            className="w-full rounded-md border border-border/60 bg-background px-4 py-2.5 text-base text-foreground outline-none transition placeholder:text-muted focus:border-accent/50 focus:ring-2 focus:ring-accent/15"
-          />
-        </>
-      ) : null}
+        {islandOfMoveCodes.length ? (
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <h3 className="text-xl font-semibold text-foreground">Island of Move codes</h3>
+              <p className="text-sm text-muted">Launch Island of Move, select Play It, then choose Redeem Code.</p>
+            </div>
+            <div className="space-y-3">
+              {islandOfMoveCodes.map((item) => (
+                <PromoRewardRow key={item.id} item={item} headingLevel="h4" />
+              ))}
+            </div>
+          </div>
+        ) : null}
 
-      {filteredItems.length ? (
-        <div className="space-y-3">
-          {filteredItems.map((item, index) => (
-            <PromoRewardRow key={item.id} item={item} eager={index < 3} />
-          ))}
+        {mansionOfWonderCodes.length ? (
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <h3 className="text-xl font-semibold text-foreground">Mansion of Wonder codes</h3>
+              <p className="text-sm text-muted">
+                Launch Mansion of Wonder, open Get Swag at the Swag Booth, then choose Redeem Code.
+              </p>
+            </div>
+            <div className="space-y-3">
+              {mansionOfWonderCodes.map((item) => (
+                <PromoRewardRow key={item.id} item={item} headingLevel="h4" />
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        {otherInGameCodes.length ? (
+          <div className="space-y-3">
+            {otherInGameCodes.map((item) => (
+              <PromoRewardRow key={item.id} item={item} headingLevel="h3" />
+            ))}
+          </div>
+        ) : null}
+
+        {!inGameCodes.length ? (
+          <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
+            There are no available in-game codes right now.
+          </p>
+        ) : null}
+      </section>
+
+      <section aria-labelledby="expired-promo-codes" className="catalog-surface space-y-4">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 id="expired-promo-codes" className="text-2xl font-semibold text-foreground">
+            Expired Roblox promo codes
+          </h2>
+          <p className="text-sm text-muted">
+            {pastRewards.length} {pastRewards.length === 1 ? "item" : "items"}
+          </p>
         </div>
-      ) : (
-        <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-          {normalizedQuery ? "No codes or rewards match that search." : "Nothing is available in this section right now."}
-        </div>
-      )}
-    </section>
+        {pastRewards.length ? (
+          <div className="space-y-3">
+            {pastRewards.map((item) => (
+              <PromoRewardRow key={item.id} item={item} />
+            ))}
+          </div>
+        ) : (
+          <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
+            There are no expired promo codes listed.
+          </p>
+        )}
+      </section>
+    </div>
   );
 }

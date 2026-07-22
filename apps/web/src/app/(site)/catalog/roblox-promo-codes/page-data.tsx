@@ -1,14 +1,17 @@
+import Link from "next/link";
 import { CatalogAdSlot } from "@/components/CatalogAdSlot";
 import { CommentsSection } from "@/components/comments/CommentsSection";
 import { ContentFaq } from "@/components/ContentFaq";
 import { MoreCatalogs } from "@/components/more-content";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
+import { RobloxCatalogItemCard } from "@/components/RobloxCatalogItemCard";
 import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
+import { listFreeItems, type FreeItem } from "@/lib/db";
 import { renderPageContentNodes, type PageContentHtml } from "@/lib/page-content";
 import { publicContentCache } from "@/lib/public-content-cache";
 import { breadcrumbJsonLd, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { supabaseAdmin } from "@/lib/supabase";
-import { PromoRewardsBrowser, type PromoRewardClaimType, type PromoRewardItem } from "./PromoRewardsBrowser";
+import { PromoRewardSections, type PromoRewardClaimType, type PromoRewardItem } from "./PromoRewardsBrowser";
 
 export const BASE_PATH = "/catalog/roblox-promo-codes";
 export const CANONICAL = `${SITE_URL.replace(/\/$/, "")}${BASE_PATH}`;
@@ -78,6 +81,16 @@ export async function loadPromoRewards() {
   return loadCachedPromoRewards();
 }
 
+export async function loadFreeItemsPreview(): Promise<FreeItem[]> {
+  try {
+    const { items } = await listFreeItems(1, 20, { sort: "featured" });
+    return items;
+  } catch (error) {
+    console.error("Failed to load promo page free-item preview", error);
+    return [];
+  }
+}
+
 function serializeJsonLd(value: unknown) {
   return JSON.stringify(value)
     .replace(/</g, "\\u003c")
@@ -86,14 +99,27 @@ function serializeJsonLd(value: unknown) {
 }
 
 function buildItemListSchema(title: string, description: string, items: PromoRewardItem[]) {
+  const visibleItems = [...items].sort((left, right) => {
+    const sectionRank = (item: PromoRewardItem) => {
+      if (item.claimType === "web_promo_code" && item.status === "verified_claimable") return 0;
+      if (item.claimType === "experience_code") {
+        if (item.destinationUrl?.includes("/5306359293/")) return 1;
+        if (item.destinationUrl?.includes("/6901029464/")) return 2;
+        return 3;
+      }
+      return 4;
+    };
+    return sectionRank(left) - sectionRank(right) || left.sortOrder - right.sortOrder;
+  });
+
   return serializeJsonLd({
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: title,
     description,
     url: CANONICAL,
-    numberOfItems: items.length,
-    itemListElement: items.map((item, index) => ({
+    numberOfItems: visibleItems.length,
+    itemListElement: visibleItems.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       item: {
@@ -107,11 +133,33 @@ function buildItemListSchema(title: string, description: string, items: PromoRew
   });
 }
 
+function buildFreeItemsSchema(items: FreeItem[]) {
+  return serializeJsonLd({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "More free Roblox items",
+    url: `${SITE_URL.replace(/\/$/, "")}/catalog/free-roblox-items`,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Thing",
+        name: item.name,
+        url: item.roblox_url,
+        ...(item.thumbnail_url ? { image: item.thumbnail_url } : {})
+      }
+    }))
+  });
+}
+
 export function renderPromoRewardsPage({
   items,
+  freeItems,
   contentHtml
 }: {
   items: PromoRewardItem[];
+  freeItems: FreeItem[];
   contentHtml: PageContentHtml | null;
 }) {
   const title = contentHtml?.title?.trim() || "Roblox Promo Codes and Free Items";
@@ -168,13 +216,49 @@ export function renderPromoRewardsPage({
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
         {introNodes}
-        <PromoRewardsBrowser items={items} />
+        <PromoRewardSections items={items} />
         <CatalogAdSlot />
 
         {descriptionNodes.length ? descriptionNodes : null}
         {howNodes}
         {faqNodes.length ? <ContentFaq items={faqNodes} /> : null}
         <CatalogAdSlot />
+
+        <section aria-labelledby="free-roblox-items" className="space-y-5">
+          <div className="space-y-2">
+            <h2 id="free-roblox-items" className="text-2xl font-semibold text-foreground">
+              More free Roblox items
+            </h2>
+            <p>
+              Promo codes are not the only way to dress up your avatar for free. Browse these free Marketplace items,
+              or <Link href="/catalog/free-roblox-items">see all free Roblox items</Link>.
+            </p>
+          </div>
+          {freeItems.length ? (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {freeItems.map((item) => (
+                <RobloxCatalogItemCard
+                  key={item.asset_id}
+                  item={item}
+                  categoryLabelMode="taxonomy"
+                  nameHeadingLevel="h3"
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-6 text-muted">
+              Free Marketplace items are temporarily unavailable here.
+            </p>
+          )}
+          <div>
+            <Link
+              href="/catalog/free-roblox-items"
+              className="inline-flex items-center justify-center rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
+            >
+              View all free Roblox items
+            </Link>
+          </div>
+        </section>
       </section>
 
       {contentHtml?.id ? <CommentsSection entityType="catalog" entityId={contentHtml.id} /> : null}
@@ -182,6 +266,9 @@ export function renderPromoRewardsPage({
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: pageSchema }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: buildItemListSchema(title, description, items) }} />
+      {freeItems.length ? (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: buildFreeItemsSchema(freeItems) }} />
+      ) : null}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbSchema }} />
     </div>
   );

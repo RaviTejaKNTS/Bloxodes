@@ -24,6 +24,7 @@ export type RobloxCatalogItemCardItem = {
 type Props = {
   item: RobloxCatalogItemCardItem;
   categoryLabelMode?: "avatar" | "taxonomy";
+  nameHeadingLevel?: "h2" | "h3";
 };
 
 function formatCount(value: number): string {
@@ -77,12 +78,17 @@ function buildFallbackRobloxUrl(item: Pick<RobloxCatalogItemCardItem, "asset_id"
   return `https://www.roblox.com/catalog/${item.asset_id}`;
 }
 
-export function RobloxCatalogItemCard({ item, categoryLabelMode = "avatar" }: Props) {
+export function RobloxCatalogItemCard({
+  item,
+  categoryLabelMode = "avatar",
+  nameHeadingLevel = "h2"
+}: Props) {
   const hasThumbnail = Boolean(item.thumbnail_url);
   const creatorName = item.creator_name?.trim() || "Unknown creator";
   const favoriteCount = typeof item.favorite_count === "number" ? item.favorite_count : 0;
   const isLimited = item.is_limited || item.is_limited_unique;
   const hasResale = item.has_resellers || Boolean(item.lowest_resale_price_robux && item.lowest_resale_price_robux > 0);
+  const NameHeading = nameHeadingLevel;
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
@@ -123,7 +129,7 @@ export function RobloxCatalogItemCard({ item, categoryLabelMode = "avatar" }: Pr
 
         <div className="flex flex-1 flex-col gap-4 p-3">
           <div>
-            <h2 className="text-sm font-semibold leading-4 text-foreground line-clamp-2">{item.name}</h2>
+            <NameHeading className="text-sm font-semibold leading-4 text-foreground line-clamp-2">{item.name}</NameHeading>
             <p className="-mt-0.5 block truncate text-xs leading-none text-muted">
               by <span className="font-semibold text-foreground">{creatorName}</span>
               {item.creator_has_verified_badge ? <span className="ml-1 text-accent">Verified</span> : null}

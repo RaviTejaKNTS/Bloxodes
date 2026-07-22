@@ -3,7 +3,7 @@ import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { buildPageContentHtml } from "@/lib/page-content";
 import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL } from "@/lib/seo";
-import { CANONICAL, loadPromoRewards, renderPromoRewardsPage } from "./page-data";
+import { CANONICAL, loadFreeItemsPreview, loadPromoRewards, renderPromoRewardsPage } from "./page-data";
 
 export const revalidate = 21600;
 
@@ -35,14 +35,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RobloxPromoCodesPage() {
-  const [catalog, rewards] = await Promise.all([
+  const [catalog, rewards, freeItems] = await Promise.all([
     getCatalogPageContentByCodes([CATALOG_CODE]),
-    loadPromoRewards()
+    loadPromoRewards(),
+    loadFreeItemsPreview()
   ]);
   const contentHtml = await buildPageContentHtml(catalog);
 
   return renderPromoRewardsPage({
     items: rewards.items,
+    freeItems,
     contentHtml
   });
 }
