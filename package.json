@@ -64,6 +64,7 @@
     "articles:queue": "tsx scripts/automation/run-article-generation-queue.ts",
     "articles:update": "tsx scripts/articles/update-articles.ts",
     "refresh:codes": "tsx scripts/codes/update-codes.ts",
+    "refresh:promo-rewards": "tsx scripts/catalog/refresh-roblox-promo-rewards.ts",
     "discover:beebom-codes": "tsx scripts/codes/discover-beebom-code-pages.ts",
     "sync:puzzles": "tsx scripts/puzzles/sync-puzzles.ts",
     "upload:puzzle-icons": "tsx scripts/puzzles/upload-puzzle-icons.ts",

@@ -40,6 +40,7 @@ const GENERAL_CATALOG_ORDER = [
   AVATAR_CATALOG_MASTER_CODE,
   "roblox-music-ids",
   "free-roblox-items",
+  "roblox-promo-codes",
   "roblox-decal-ids",
   "roblox-color-codes",
   "admin-commands"

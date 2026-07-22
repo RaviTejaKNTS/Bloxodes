@@ -34,6 +34,7 @@ type CountSource =
   | { kind: "avatar"; code: string; sale?: AvatarCatalogSaleFilter }
   | { kind: "music" }
   | { kind: "decal" }
+  | { kind: "promo" }
   | null;
 
 type CatalogConfig = {
@@ -107,6 +108,12 @@ const CATALOG_CONFIG: Record<string, CatalogConfig> = {
   },
   "roblox-color-codes": { shortLabel: "Color Codes", unit: "color codes", icon: "palette", source: null },
   "roblox-errors-and-fixes": { shortLabel: "Errors & Fixes", unit: "errors", icon: "wrench", source: null },
+  "roblox-promo-codes": {
+    shortLabel: "Promo Codes & Rewards",
+    unit: "rewards",
+    icon: "gift",
+    source: { kind: "promo" }
+  },
   "roblox-decal-ids": { shortLabel: "Decal IDs", unit: "decal IDs", icon: "image", source: { kind: "decal" } },
   "admin-commands": { shortLabel: "Admin Commands", unit: "commands", icon: "terminal", source: null }
 };
@@ -140,6 +147,20 @@ const countDecalIds = publicContentCache(
   { revalidate: 3600, tags: ["catalog-index", "decal-ids"] }
 );
 
+const countPromoRewards = publicContentCache(
+  async (): Promise<number | null> => {
+    const sb = supabaseAdmin();
+    const { count, error } = await sb
+      .from("roblox_promo_rewards")
+      .select("id", { count: "exact", head: true })
+      .in("status", ["source_listed_unverified", "verified_claimable", "unavailable", "expired"]);
+    if (error) throw error;
+    return count ?? null;
+  },
+  ["catalogCardMeta:promoRewardsCount"],
+  { revalidate: 3600, tags: ["catalog-index", "catalog:roblox-promo-codes"] }
+);
+
 async function resolveCount(source: CountSource): Promise<number | null> {
   if (!source) return null;
   try {
@@ -148,6 +169,9 @@ async function resolveCount(source: CountSource): Promise<number | null> {
     }
     if (source.kind === "decal") {
       return await countDecalIds();
+    }
+    if (source.kind === "promo") {
+      return await countPromoRewards();
     }
     const config = resolveAvatarCatalogTopLevelConfig(source.code);
     if (!config) return null;

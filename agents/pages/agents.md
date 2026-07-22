@@ -54,6 +54,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Roblox decal IDs | `/catalog/roblox-decal-ids`, `/catalog/roblox-decal-ids/page/[page]` | `src/app/(site)/catalog/roblox-decal-ids/*`, helpers in `page-data.tsx` |
 | Admin commands | `/catalog/admin-commands`, `/catalog/admin-commands/[system]` | `src/app/(site)/catalog/admin-commands/*`, backed by `data/Admin commands/*.md` |
 | Roblox errors and fixes | `/catalog/roblox-errors-and-fixes` | `src/app/(site)/catalog/roblox-errors-and-fixes/*`, with the searchable error reference in `data/roblox-errors/roblox-errors.json` and long-form copy in `catalog_pages` |
+| Roblox promo codes and reward items | `/catalog/roblox-promo-codes` | `src/app/(site)/catalog/roblox-promo-codes/*`, with server-rendered rows from `roblox_promo_rewards`, client-side search/type filters, explicit source-listed versus verified claimability states, and long-form copy in `catalog_pages` |
 | The Forge collections | `/wiki/the-forge/[collection]` | `src/app/(site)/wiki/collections/games/the-forge.tsx` |
 | Grow a Garden collections | `/wiki/grow-a-garden/[collection]` | `src/app/(site)/wiki/collections/games/grow-a-garden.tsx` |
 | Generic catalog fallback | `/catalog/[...slug]` | `src/app/(site)/catalog/[...slug]/page.tsx`, backed by Supabase catalog copy |
@@ -95,6 +96,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `src/app/(site)/catalog/roblox-color-codes/page-data.tsx`
 - `src/app/(site)/catalog/roblox-decal-ids/page-data.tsx`
 - `src/app/(site)/catalog/roblox-music-ids/page-data.tsx`
+- `src/app/(site)/catalog/roblox-promo-codes/page-data.tsx`
 - `src/app/(site)/wiki/collections/games/grow-a-garden.tsx`
 - `src/app/(site)/wiki/collections/games/the-forge.tsx`
 - `src/app/(site)/checklists/page-data.tsx`
