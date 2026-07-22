@@ -3,6 +3,7 @@ import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 import { isStatsTier, type StatsTier } from "./stats-tier";
+import { STATS_PLAYING_FRESHNESS_MS } from "@/lib/stats-freshness";
 
 const DEFAULT_LIMIT = readNonNegativeInteger("UNIVERSE_RANK_LIMIT", 0);
 const PAGE_SIZE = readNonNegativeInteger("UNIVERSE_RANK_PAGE_SIZE", 1000);
@@ -115,6 +116,10 @@ async function fetchRankRows(rankType: RankType, options: Options): Promise<Univ
       query = query.eq("stats_tier", options.tier);
     } else {
       query = query.or("stats_tier.neq.NEW,stats_tier.is.null");
+    }
+
+    if (PLAYING_RANK_TYPES.includes(rankType as (typeof PLAYING_RANK_TYPES)[number])) {
+      query = query.gte("last_playing_refreshed_at", new Date(Date.now() - STATS_PLAYING_FRESHNESS_MS).toISOString());
     }
 
     if (lastOrderValue != null && lastUniverseId != null) {

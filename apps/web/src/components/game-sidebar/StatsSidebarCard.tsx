@@ -33,8 +33,8 @@ export function StatsSidebarCard({ universeId, gameName, slug, initialRank, init
         const payload = await res.json().catch(() => null);
         const game = payload?.game;
         if (cancelled || !game) return;
-        if (typeof game.playing === "number") setPlaying(game.playing);
-        if (typeof game.rank === "number") setRank(game.rank);
+        setPlaying(typeof game.playing === "number" ? game.playing : null);
+        setRank(typeof game.rank === "number" ? game.rank : null);
       } catch {
         // keep cached values
       }
@@ -50,9 +50,9 @@ export function StatsSidebarCard({ universeId, gameName, slug, initialRank, init
   const body = (
     <>
       <p className="text-xs text-muted">Current Players on {gameName}</p>
-      <p className="mt-1 inline-flex items-center justify-center gap-2 text-4xl font-bold leading-none text-foreground">
+      <p className={`mt-1 inline-flex items-center justify-center gap-2 font-bold leading-none text-foreground ${typeof playing === "number" ? "text-4xl" : "text-lg"}`}>
         <span className="h-2.5 w-2.5 rounded-full bg-green-400" aria-hidden />
-        {typeof playing === "number" ? abbreviateCount(playing) : "—"}
+        {typeof playing === "number" ? abbreviateCount(playing) : "Unavailable"}
       </p>
       {typeof rank === "number" ? (
         <p className="mt-2 text-xs text-muted">Global rank #{rank.toLocaleString("en-US")}</p>

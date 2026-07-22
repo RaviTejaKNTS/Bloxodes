@@ -95,12 +95,35 @@ describe("individual stats game metadata", () => {
   });
 
   it("uses the stable hourly global rank for detail indexability", () => {
-    const eligible = { playing: 100, visits: 10_000_000, statsTier: "WARM" as const };
+    const now = Date.parse("2026-07-22T12:00:00.000Z");
+    const eligible = {
+      playing: 100,
+      visits: 10_000_000,
+      statsTier: "WARM" as const,
+      lastPlayingRefreshedAt: "2026-07-22T11:00:00.000Z"
+    };
     expect(isStatsGameDetailIndexable({ ...eligible, rank: 1 })).toBe(true);
     expect(isStatsGameDetailIndexable({ ...eligible, rank: 1000 })).toBe(true);
     expect(isStatsGameDetailIndexable({ ...eligible, rank: 1001 })).toBe(false);
-    expect(isStatsGameDetailIndexable({ ...eligible, rank: null })).toBe(false);
-    expect(isStatsGameDetailIndexable({ playing: 0, visits: 0, statsTier: "COLD", rank: 1 })).toBe(false);
+    expect(isStatsGameDetailIndexable({ ...eligible, rank: null }, now)).toBe(false);
+    expect(
+      isStatsGameDetailIndexable(
+        { ...eligible, rank: null, playing: null, lastPlayingRefreshedAt: "2026-07-20T11:00:00.000Z" },
+        now
+      )
+    ).toBe(true);
+    expect(
+      isStatsGameDetailIndexable(
+        { ...eligible, rank: null, playing: null, lastPlayingRefreshedAt: "2026-07-14T11:00:00.000Z" },
+        now
+      )
+    ).toBe(false);
+    expect(
+      isStatsGameDetailIndexable(
+        { playing: 0, visits: 0, statsTier: "COLD", rank: 1, lastPlayingRefreshedAt: eligible.lastPlayingRefreshedAt },
+        now
+      )
+    ).toBe(false);
   });
 
   it("uses universe IDs to make stats detail slugs canonical and unique", () => {

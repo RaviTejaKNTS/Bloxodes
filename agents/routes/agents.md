@@ -38,7 +38,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/mobile/content/[kind]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/content/[kind]/route.ts` | Public mobile app payload for paginated catalog, wiki, tools, quizzes, checklists, events, and articles index cards. |
 | `/api/mobile/content/[kind]/[slug]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/content/[kind]/[slug]/route.ts` | Public mobile app payload for a content detail page, including queryable native catalog sections; catalog codes fall back to published wiki collection pages. |
 | `/api/mobile/stats/games` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/stats/games/route.ts` | CORS-enabled stats games table wrapper for the app. |
-| `/api/mobile/stats/games/[universeId]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/stats/games/[universeId]/route.ts` | CORS-enabled stats game summary with latest rank for the app. |
+| `/api/mobile/stats/games/[universeId]` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/stats/games/[universeId]/route.ts` | CORS-enabled stats game summary with latest rank for the app; player count and playing rank are null after 24 hours without a player refresh. |
 | `/api/mobile/stats/games/[universeId]/chart` | `GET`, `OPTIONS` | `apps/web/src/app/api/mobile/stats/games/[universeId]/chart/route.ts` | CORS-enabled player-count chart wrapper for the app. |
 | `/api/quizzes/progress` | `GET`, `PUT` | `src/app/api/quizzes/progress/route.ts` | Per-user quiz progress and last score state. |
 | `/api/quizzes/session` | `GET` | `src/app/api/quizzes/session/route.ts` | Session snapshot for quiz UI. |
@@ -54,7 +54,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/stats/items` | `GET` | `src/app/api/stats/items/route.ts` | Public stats item table payload with search, sort, category, sale-state, creator, and resale filters. |
 | `/api/stats/platform/chart` | `GET` | `src/app/api/stats/platform/chart/route.ts` | Public platform stats chart payload for lazy-loaded range and resolution changes. |
 | `/api/stats/visit-share` | `GET` | `src/app/api/stats/visit-share/route.ts` | Public top-game daily visit-share chart payload for lazy-loaded range changes on `/stats`. |
-| `/api/stats/games/[universeId]` | `GET` | `src/app/api/stats/games/[universeId]/route.ts` | Public stats summary for one Roblox universe. |
+| `/api/stats/games/[universeId]` | `GET` | `src/app/api/stats/games/[universeId]/route.ts` | Public stats summary for one Roblox universe; player count and playing rank are null after 24 hours without a player refresh. |
 | `/api/stats/games/[universeId]/chart` | `GET` | `src/app/api/stats/games/[universeId]/chart/route.ts` | Public chart payload for lazy-loaded hourly, daily, and monthly stats views. |
 
 ## Auth Routes

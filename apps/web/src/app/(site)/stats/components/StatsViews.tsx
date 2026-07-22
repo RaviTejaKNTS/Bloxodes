@@ -233,7 +233,7 @@ function GameDetailStatCard({
 
 function GameDetailStatsRow({ game }: { game: StatsGame }) {
   const stats = [
-    { icon: Users, label: "Playing now", value: formatCompactNumber(game.playing) },
+    { icon: Users, label: game.playing == null ? "Current players" : "Playing now", value: game.playing == null ? "Unavailable" : formatCompactNumber(game.playing) },
     { icon: Eye, label: "Total visits", value: formatCompactNumber(game.visits) },
     { icon: Star, label: "Favorites", value: formatCompactNumber(game.favorites) }
   ];

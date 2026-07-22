@@ -70,11 +70,22 @@ async function main() {
       withSlug: await countRows("with slug", (query) => query.not("slug", "is", null)),
       withIcon: await countRows("with icon", (query) => query.not("icon_url", "is", null)),
       neverStatsRefreshed: await countRows("never stats refreshed", (query) => query.is("last_stats_refreshed_at", null)),
+      neverPlayingRefreshed: await countRows("never playing refreshed", (query) => query.is("last_playing_refreshed_at", null)),
       staleOver24h: await countRows("stale over 24h", (query) =>
         query.or(`last_stats_refreshed_at.is.null,last_stats_refreshed_at.lt.${stale24h}`)
       ),
       staleOver7d: await countRows("stale over 7d", (query) =>
         query.or(`last_stats_refreshed_at.is.null,last_stats_refreshed_at.lt.${stale7d}`)
+      ),
+      stalePlayerValuesOver24h: await countRows("stale player values over 24h", (query) =>
+        query
+          .not("playing", "is", null)
+          .or(`last_playing_refreshed_at.is.null,last_playing_refreshed_at.lt.${stale24h}`)
+      ),
+      stalePlayerValuesOver7d: await countRows("stale player values over 7d", (query) =>
+        query
+          .not("playing", "is", null)
+          .or(`last_playing_refreshed_at.is.null,last_playing_refreshed_at.lt.${stale7d}`)
       ),
       missingIconHot: await countRows("missing HOT icons", (query) => query.eq("stats_tier", "HOT").is("icon_url", null)),
       missingIconWarm: await countRows("missing WARM icons", (query) => query.eq("stats_tier", "WARM").is("icon_url", null)),

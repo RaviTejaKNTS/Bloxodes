@@ -119,8 +119,8 @@ async function searchStatsGames(query: string, limit: number, entityTypes: strin
   const sb = supabaseAdmin();
   const pattern = `%${escapeLike(query)}%`;
   const { data, error } = await sb
-    .from("roblox_universes")
-    .select("universe_id, slug, name, display_name, creator_name, genre_l1, genre, updated_at, last_stats_refreshed_at, playing")
+    .from("stats_game_current_index")
+    .select("universe_id, slug, name, display_name, creator_name, genre_l1, genre, indexed_at, last_stats_refreshed_at, playing")
     .not("icon_url", "is", null)
     .or(`name.ilike.${pattern},display_name.ilike.${pattern},creator_name.ilike.${pattern}`)
     .order("playing", { ascending: false, nullsFirst: false })
@@ -139,7 +139,7 @@ async function searchStatsGames(query: string, limit: number, entityTypes: strin
     creator_name: string | null;
     genre_l1: string | null;
     genre: string | null;
-    updated_at: string | null;
+    indexed_at: string | null;
     last_stats_refreshed_at: string | null;
     playing: number | null;
   }>)
@@ -153,7 +153,7 @@ async function searchStatsGames(query: string, limit: number, entityTypes: strin
         title: `${row.display_name ?? row.name ?? row.slug} Stats`,
         subtitle: [row.creator_name, row.genre_l1].filter(Boolean).join(" · ") || "Roblox game stats",
         url: `/stats/games/${statsSlug}`,
-        updated_at: row.last_stats_refreshed_at ?? row.updated_at,
+        updated_at: row.last_stats_refreshed_at ?? row.indexed_at,
         active_code_count: null,
         search_text: [row.display_name, row.name, row.creator_name, row.genre_l1].filter(Boolean).join(" ")
       };

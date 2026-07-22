@@ -37,6 +37,7 @@ function readBuildSha() {
 
 export async function GET() {
   const supabase = supabaseAdmin();
+  const playingCutoff = new Date(Date.now() - 24 * 60 * 60 * 1_000).toISOString();
   const databaseCheck = await supabase.from("code_pages").select("id", { head: true, count: "exact" }).limit(1);
   const databaseOk = !databaseCheck.error;
 
@@ -63,6 +64,19 @@ export async function GET() {
       : null;
   }
 
+  const [freshPlayers, stalePlayerValues] = await Promise.all([
+    supabase
+      .from("stats_game_current_index")
+      .select("universe_id", { head: true, count: "exact" })
+      .not("playing", "is", null)
+      .gte("last_playing_refreshed_at", playingCutoff),
+    supabase
+      .from("roblox_universes")
+      .select("universe_id", { head: true, count: "exact" })
+      .not("playing", "is", null)
+      .or(`last_playing_refreshed_at.is.null,last_playing_refreshed_at.lt.${playingCutoff}`)
+  ]);
+
   const ok = databaseOk;
   return NextResponse.json(
     {
@@ -87,6 +101,12 @@ export async function GET() {
           source: statsSource,
           latestAt: statsLatestAt,
           stale: isStaleTimestamp(statsLatestAt)
+        },
+        statsPlayers: {
+          freshnessHours: 24,
+          freshCurrentValues: freshPlayers.count ?? null,
+          staleStoredValues: stalePlayerValues.count ?? null,
+          error: freshPlayers.error?.message ?? stalePlayerValues.error?.message ?? null
         }
       }
     },

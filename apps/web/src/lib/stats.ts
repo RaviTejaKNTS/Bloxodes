@@ -3,6 +3,12 @@ import { formatAgeRating } from "@/lib/age-rating";
 import { supabaseAdmin } from "@/lib/supabase";
 import { slugify, statsUniverseSlug } from "@/lib/slug";
 import { formatCompactNumber } from "@/lib/stats-format";
+import {
+  currentPlayingValue,
+  isPlayingTimestampFresh,
+  STATS_PLAYING_FRESHNESS_MS,
+  STATS_PLAYING_INDEX_GRACE_MS
+} from "@/lib/stats-freshness";
 import { getStatsVisitShareChart, type StatsVisitShareChartData } from "@/lib/stats-visit-share";
 export { formatCompactNumber, formatFullNumber, formatPercent } from "@/lib/stats-format";
 export type { StatsVisitShareChartData, StatsVisitSharePoint, StatsVisitShareSeries } from "@/lib/stats-visit-share";
@@ -950,9 +956,15 @@ function isStatsGameSitemapEligible(game: Pick<StatsGame, "playing" | "visits" |
   );
 }
 
-export function isStatsGameDetailIndexable(game: Pick<StatsGame, "rank" | "playing" | "visits" | "statsTier">) {
+export function isStatsGameDetailIndexable(
+  game: Pick<StatsGame, "rank" | "playing" | "visits" | "statsTier" | "lastPlayingRefreshedAt">,
+  now = Date.now()
+) {
   if (!isStatsGameSitemapEligible(game)) return false;
-  return typeof game.rank === "number" && game.rank > 0 && game.rank <= STATS_GAME_DETAIL_INDEX_LIMIT;
+  if (typeof game.rank === "number") {
+    return game.rank > 0 && game.rank <= STATS_GAME_DETAIL_INDEX_LIMIT;
+  }
+  return game.playing == null && isPlayingTimestampFresh(game.lastPlayingRefreshedAt, now, STATS_PLAYING_INDEX_GRACE_MS);
 }
 
 export const STATS_CREATOR_SORT_OPTIONS: Array<{ value: StatsCreatorSortKey; label: string }> = [
@@ -1202,7 +1214,7 @@ function mapUniverse(row: UniverseRow): StatsGame {
     ageRating: formatAgeRating(row.age_rating),
     iconUrl: row.icon_url,
     thumbnailUrls: toJsonStringArray(row.thumbnail_urls),
-    playing: toNumber(row.playing),
+    playing: currentPlayingValue(toNumber(row.playing), row.last_playing_refreshed_at),
     visits: toNumber(row.visits),
     favorites: toNumber(row.favorites),
     likes: toNumber(row.likes),
@@ -1231,15 +1243,16 @@ function mapUniverse(row: UniverseRow): StatsGame {
 
 function mapIndexedGame(row: StatsGameIndexRow): StatsGame {
   const base = mapUniverse(row);
+  const hasCurrentPlaying = base.playing != null;
   const hydrated = {
     ...base,
     ratingPercent: hasEnoughRatingVotes(row.likes, row.dislikes) ? (toNumber(row.rating_percent) ?? base.ratingPercent) : null,
-    rank: toNumber(row.global_playing_rank),
-    growth24h: toNumber(row.growth_24h),
-    growth24hPercent: toNumber(row.growth_24h_percent),
-    growth7d: toNumber(row.growth_7d),
-    growth7dPercent: toNumber(row.growth_7d_percent),
-    peak24h: toNumber(row.peak_24h),
+    rank: hasCurrentPlaying ? toNumber(row.global_playing_rank) : null,
+    growth24h: hasCurrentPlaying ? toNumber(row.growth_24h) : null,
+    growth24hPercent: hasCurrentPlaying ? toNumber(row.growth_24h_percent) : null,
+    growth7d: hasCurrentPlaying ? toNumber(row.growth_7d) : null,
+    growth7dPercent: hasCurrentPlaying ? toNumber(row.growth_7d_percent) : null,
+    peak24h: hasCurrentPlaying ? toNumber(row.peak_24h) : null,
     peak7d: toNumber(row.peak_7d)
   };
   return { ...hydrated, trendScore: trendScore(hydrated) };
@@ -1672,6 +1685,11 @@ async function listBaseGames(options: {
   }
 
   const indexSort = options.sort ?? "playing";
+  if (["playing", "growth_24h", "growth_7d", "peak"].includes(indexSort)) {
+    indexQuery = indexQuery
+      .not("playing", "is", null)
+      .gte("last_playing_refreshed_at", new Date(Date.now() - STATS_PLAYING_FRESHNESS_MS).toISOString());
+  }
   if (indexSort === "rating") {
     indexQuery = indexQuery.gte("likes", STATS_GAME_MIN_RATING_VOTES);
   }
@@ -1707,6 +1725,10 @@ async function listBaseGames(options: {
     .from("roblox_universes")
     .select(select, { count: options.count ?? undefined })
     .not("slug", "is", null);
+  const fallbackSort = options.sort ?? "playing";
+  if (["playing", "growth_24h", "growth_7d", "peak"].includes(fallbackSort)) {
+    query = query.gte("last_playing_refreshed_at", new Date(Date.now() - STATS_PLAYING_FRESHNESS_MS).toISOString());
+  }
 
   if (options.q?.trim()) {
     const pattern = `%${options.q.trim().replace(/[\\%_]/g, (char) => `\\${char}`)}%`;
@@ -1733,7 +1755,6 @@ async function listBaseGames(options: {
     query = query.or("playing.gte.100,visits.gte.10000000");
   }
 
-  const fallbackSort = options.sort ?? "playing";
   if (fallbackSort === "rating") {
     query = query.gte("likes", STATS_GAME_MIN_RATING_VOTES);
   }
@@ -1819,19 +1840,19 @@ export async function getUniverseStatsSummary(
     const [{ data, error }, latestRank] = await Promise.all([
       supabaseAdmin()
         .from("stats_game_current_index")
-        .select("playing, slug, icon_url")
+        .select("playing, slug, icon_url, last_playing_refreshed_at")
         .eq("universe_id", universeId)
         .limit(1),
       loadLatestRank(universeId)
     ]);
     if (error) throw error;
     const row = (data ?? [])[0] as
-      | { playing?: number | null; slug?: string | null; icon_url?: string | null }
+      | { playing?: number | null; slug?: string | null; icon_url?: string | null; last_playing_refreshed_at?: string | null }
       | undefined;
     if (!row) return null;
     return {
       rank: latestRank ?? null,
-      playing: row.playing ?? null,
+      playing: currentPlayingValue(row.playing, row.last_playing_refreshed_at),
       slug: row.slug ?? null,
       iconUrl: row.icon_url ?? null
     };
@@ -1918,36 +1939,30 @@ export async function listStatsGenres(limit = 12): Promise<StatsGenreSummary[]> 
 }
 
 async function getStatsPlatformTotals(): Promise<Omit<StatsPlatformTotals, "trackedGames"> | null> {
-  const { data, error } = await supabaseAdmin()
-    .from("stats_genre_current_index")
-    .select("playing, visits, indexed_at")
-    .limit(1000);
+  const { data, error } = await supabaseAdmin().rpc("get_stats_platform_current_summary");
 
   if (error) {
-    if (error.code !== "42P01") {
+    if (error.code !== "42883" && error.code !== "PGRST202") {
       console.warn("Failed to load platform CCU totals", error.message);
     }
     return null;
   }
 
-  const rows = (data ?? []) as Array<{ playing: number | string | null; visits: number | string | null; indexed_at: string | null }>;
-  if (!rows.length) return null;
-
-  const livePlayers = rows.reduce((sum, row) => sum + (toFiniteNumber(row.playing) ?? 0), 0);
-  const totalVisits = rows.reduce((sum, row) => sum + (toFiniteNumber(row.visits) ?? 0), 0);
-  const lastUpdatedAt = rows
-    .map((row) => row.indexed_at)
-    .filter((value): value is string => Boolean(value))
-    .sort();
+  const row = ((data ?? []) as Array<{
+    live_players: number | string | null;
+    total_visits: number | string | null;
+    last_updated_at: string | null;
+  }>)[0];
+  if (!row) return null;
 
   return {
-    livePlayers,
-    totalVisits,
+    livePlayers: toFiniteNumber(row.live_players) ?? 0,
+    totalVisits: toFiniteNumber(row.total_visits) ?? 0,
     totalFavorites: 0,
     totalLikes: 0,
     totalDislikes: 0,
     ratingPercent: null,
-    lastUpdatedAt: lastUpdatedAt[lastUpdatedAt.length - 1] ?? null
+    lastUpdatedAt: row.last_updated_at ?? null
   };
 }
 
@@ -3834,18 +3849,38 @@ async function loadSimilarGames(game: StatsGame): Promise<StatsGame[]> {
 
 export async function loadLatestRank(universeId: number): Promise<number | null> {
   const sb = supabaseAdmin();
-  const { data, error } = await sb
+  const indexed = await sb
+    .from("stats_game_current_index")
+    .select("global_playing_rank, last_playing_refreshed_at")
+    .eq("universe_id", universeId)
+    .limit(1)
+    .maybeSingle();
+  if (!indexed.error && indexed.data) {
+    if (!isPlayingTimestampFresh(indexed.data.last_playing_refreshed_at)) return null;
+    return toNumber(indexed.data.global_playing_rank);
+  }
+
+  const [{ data, error }, universe] = await Promise.all([
+    sb
     .from("roblox_universe_rank_snapshots_hourly")
     .select("rank_value")
     .eq("universe_id", universeId)
     .eq("rank_type", "global_playing")
     .order("hour_start", { ascending: false })
     .limit(1)
-    .maybeSingle();
+    .maybeSingle(),
+    sb
+      .from("roblox_universes")
+      .select("last_playing_refreshed_at")
+      .eq("universe_id", universeId)
+      .limit(1)
+      .maybeSingle()
+  ]);
   if (error) {
     console.warn("Failed to load stats rank", error.message);
     return null;
   }
+  if (universe.error || !isPlayingTimestampFresh(universe.data?.last_playing_refreshed_at)) return null;
   return toNumber((data as { rank_value?: unknown } | null)?.rank_value);
 }
 
@@ -3856,6 +3891,7 @@ export async function listStatsSitemapGames(limit = 200): Promise<Array<{ slug: 
     .select("universe_id, slug, updated_at_api, last_stats_refreshed_at, last_playing_refreshed_at, global_playing_rank")
     .not("slug", "is", null)
     .not("global_playing_rank", "is", null)
+    .gte("last_playing_refreshed_at", new Date(Date.now() - STATS_PLAYING_FRESHNESS_MS).toISOString())
     .lte("global_playing_rank", STATS_GAME_DETAIL_INDEX_LIMIT)
     .or("stats_tier.in.(HOT,WARM),playing.gte.100,visits.gte.10000000")
     .order("global_playing_rank", { ascending: true })

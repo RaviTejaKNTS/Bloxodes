@@ -22,11 +22,12 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { listPublishedToolsByUniverseId, type ToolListEntry } from "@/lib/tools";
 import type { QuizListEntry } from "@/lib/quizzes";
 import { sortCodesByFirstSeenDesc } from "@/lib/code-utils";
+import { currentPlayingValue } from "@/lib/stats-freshness";
 
 const WIKI_REVALIDATE_SECONDS = 3600;
 const BYPASS_WIKI_CACHE = process.env.NODE_ENV === "development";
 const WIKI_SELECT_FIELDS =
-  "id, slug, title, seo_title, meta_description, description_md, cover_image, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at, content_updated_at, universe_root_place_id, universe_name, universe_display_name, universe_slug, universe_description, universe_creator_id, universe_creator_name, universe_creator_type, universe_creator_has_verified_badge, universe_group_id, universe_group_name, universe_group_has_verified_badge, universe_genre, universe_genre_l1, universe_genre_l2, universe_age_rating, universe_avatar_type, desktop_enabled, mobile_enabled, tablet_enabled, console_enabled, vr_enabled, voice_chat_enabled, price, private_server_price_robux, create_vip_servers_allowed, max_players, server_size, playing, visits, favorites, likes, dislikes, icon_url, thumbnail_urls, social_links, created_at_api, updated_at_api, universe_updated_at";
+  "id, slug, title, seo_title, meta_description, description_md, cover_image, universe_id, controls_json, tips_md, is_published, published_at, created_at, updated_at, content_updated_at, universe_root_place_id, universe_name, universe_display_name, universe_slug, universe_description, universe_creator_id, universe_creator_name, universe_creator_type, universe_creator_has_verified_badge, universe_group_id, universe_group_name, universe_group_has_verified_badge, universe_genre, universe_genre_l1, universe_genre_l2, universe_age_rating, universe_avatar_type, desktop_enabled, mobile_enabled, tablet_enabled, console_enabled, vr_enabled, voice_chat_enabled, price, private_server_price_robux, create_vip_servers_allowed, max_players, server_size, playing, visits, favorites, likes, dislikes, icon_url, thumbnail_urls, social_links, created_at_api, updated_at_api, universe_updated_at, last_playing_refreshed_at";
 
 export type WikiPageContent = {
   id: string;
@@ -83,6 +84,7 @@ export type WikiPageContent = {
   created_at_api?: string | null;
   updated_at_api?: string | null;
   universe_updated_at?: string | null;
+  last_playing_refreshed_at?: string | null;
 };
 
 export type WikiListEntry = Pick<
@@ -153,6 +155,7 @@ export type WikiDeveloperGame = {
   icon_url: string | null;
   playing: number | null;
   visits: number | null;
+  last_playing_refreshed_at: string | null;
 };
 
 export type WikiRelatedData = {
@@ -494,14 +497,17 @@ async function listOtherWikiDeveloperGames(
       const supabase = supabaseAdmin();
       const { data, error } = await supabase
         .from("roblox_universes")
-        .select("universe_id, root_place_id, name, display_name, slug, icon_url, playing, visits")
+        .select("universe_id, root_place_id, name, display_name, slug, icon_url, playing, visits, last_playing_refreshed_at")
         .eq("creator_id", creatorId)
         .neq("universe_id", universeId)
         .order("visits", { ascending: false, nullsFirst: false })
         .limit(limit);
 
       if (error) throw error;
-      return (data ?? []) as WikiDeveloperGame[];
+      return ((data ?? []) as WikiDeveloperGame[]).map((game) => ({
+        ...game,
+        playing: currentPlayingValue(game.playing, game.last_playing_refreshed_at)
+      }));
     },
     [`wiki-developer-games:${universeId}:${creatorId}:${limit}`],
     {
