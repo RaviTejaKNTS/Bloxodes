@@ -1,0 +1,1773 @@
+{
+  "meta": {
+    "title": "Roblox errors and fixes",
+    "updatedAt": "2026-07-22",
+    "itemCount": 115,
+    "sources": [
+      {
+        "label": "Official Roblox Help Center",
+        "url": "https://en.help.roblox.com/hc/en-us/articles/36639955031060-Roblox-Error-Codes",
+        "accessed": "2026-07-21"
+      },
+      {
+        "label": "Pro Game Guides roundup",
+        "url": "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/",
+        "accessed": "2026-07-21"
+      }
+    ],
+    "columns": [
+      "name",
+      "slug",
+      "errorCode",
+      "surface",
+      "message",
+      "reasonSummary",
+      "quickFix",
+      "articleSlug",
+      "sourceUrls",
+      "lastVerifiedAt",
+      "sortOrder"
+    ]
+  },
+  "items": [
+    {
+      "name": "Error Code 0",
+      "slug": "client-0",
+      "errorCode": "0",
+      "surface": "client",
+      "message": "An error was encountered during authentication. Please try again. (Error Code: 0)",
+      "reasonSummary": "Roblox received the join request but failed to authenticate it, usually from a VPN or proxy, corrupted cookies or local auth data, or an unstable connection.",
+      "quickFix": "Disable any VPN, log fully out of Roblox and back in, and clear your cache and cookies. Reinstall Roblox if the error keeps returning.",
+      "articleSlug": "how-to-fix-roblox-error-code-0",
+      "sourceUrls": [
+        "https://windowsreport.com/error-code-0-roblox/",
+        "https://www.pcrisk.com/blog/windows/13977-roblox-error-code-0"
+      ],
+      "sortOrder": 1,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 103",
+      "slug": "client-103",
+      "errorCode": "103",
+      "surface": "client",
+      "message": "The Roblox game you are trying to join is currently not available.",
+      "reasonSummary": "This appears mainly on Xbox when the account tries to join an experience that is available only on PC or mobile.",
+      "quickFix": "Open the experience on a supported platform or choose a console-compatible experience.",
+      "articleSlug": "how-to-fix-roblox-error-code-103",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/115001279786",
+        "https://en.help.roblox.com/hc/en-us/articles/30428310121620"
+      ],
+      "sortOrder": 2,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 110",
+      "slug": "client-110",
+      "errorCode": "110",
+      "surface": "client",
+      "message": "The Roblox experience you are trying to join is currently not available.",
+      "reasonSummary": "This can appear during a Roblox-side service problem or outage that makes an experience temporarily unavailable.",
+      "quickFix": "Retry later and verify server health before reinstalling the client.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 3,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 256",
+      "slug": "client-256",
+      "errorCode": "256",
+      "surface": "client",
+      "message": "Developer has shut down all game servers or the game server has shut down.",
+      "reasonSummary": "The current server was closed intentionally by the developer, a VIP server owner, or an in-game moderation flow.",
+      "quickFix": "Reconnect to a different live server or wait until the developer brings servers back.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 4,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 260",
+      "slug": "client-260",
+      "errorCode": "260",
+      "surface": "client",
+      "message": "There was a problem receiving data, please reconnect.",
+      "reasonSummary": "The client stopped receiving the data stream it expected from Roblox services.",
+      "quickFix": "Reconnect, restart Roblox, and test the connection on another network if this repeats.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 5,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 261",
+      "slug": "client-261",
+      "errorCode": "261",
+      "surface": "client",
+      "message": "Error while receiving data or problem streaming data, please reconnect.",
+      "reasonSummary": "The session stream broke because of network instability, Roblox downtime, or another transport problem.",
+      "quickFix": "Reconnect, switch networks if available, and retry after checking whether Roblox is down.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 6,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 262",
+      "slug": "client-262",
+      "errorCode": "262",
+      "surface": "client",
+      "message": "There was a problem sending data, please reconnect.",
+      "reasonSummary": "The client could not upload session data back to Roblox, so the experience failed to keep loading.",
+      "quickFix": "Reconnect and retry after stabilizing the network path.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 7,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 264",
+      "slug": "client-264",
+      "errorCode": "264",
+      "surface": "client",
+      "message": "Same account launched experience from a different device (Error Code: 264)",
+      "reasonSummary": "The same Roblox account tried to join an experience from more than one device at the same time. It can also fire after a crash leaves a ghost session running, or when someone else has access to the account.",
+      "quickFix": "Wait a minute for the old session to expire, make sure the account is not in a game on another device, then rejoin. If it happens with no second device, change your password and log out of all sessions.",
+      "articleSlug": "how-to-fix-roblox-error-code-264",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/36665660855700-Error-Code-264-Same-account-launched-experience-from-different-devices"
+      ],
+      "sortOrder": 8,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 266",
+      "slug": "client-266",
+      "errorCode": "266",
+      "surface": "client",
+      "message": "Your connection timed out. Check your internet connection and try again.",
+      "reasonSummary": "The connection between your device and the game server timed out, usually from low bandwidth or an unstable internet connection.",
+      "quickFix": "Restart your router, close bandwidth-heavy apps and downloads, and rejoin. Switch to a wired or stronger connection if it keeps happening.",
+      "articleSlug": "how-to-fix-roblox-error-code-266",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/36791931809812-Error-Code-266-Connection-Timed-Out"
+      ],
+      "sortOrder": 9,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 267",
+      "slug": "client-267",
+      "errorCode": "267",
+      "surface": "client",
+      "message": "You were kicked from this game.",
+      "reasonSummary": "You were banned from that specific experience by its creator's systems, not by Roblox. Roblox Support cannot remove creator-issued bans.",
+      "quickFix": "Wait out a temporary ban or contact the experience's creator through their game page, group, or social channels to appeal. Do not rejoin on alt accounts, which can extend the ban.",
+      "articleSlug": "how-to-fix-roblox-error-code-267",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/39673275045140-Error-Code-267-Banned-from-an-Experience"
+      ],
+      "sortOrder": 10,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 268",
+      "slug": "client-268",
+      "errorCode": "268",
+      "surface": "client",
+      "message": "You have been kicked due to unexpected client behavior.",
+      "reasonSummary": "Network issues between your device and Roblox servers, or another app such as antivirus software interfering with Roblox's permissions.",
+      "quickFix": "Restart Roblox and your router, allow Roblox through your antivirus and firewall, and reinstall the app if the kick keeps repeating.",
+      "articleSlug": "how-to-fix-roblox-error-code-268",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/36793498799380-Error-Code-268-Disconnected-from-the-Game"
+      ],
+      "sortOrder": 11,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 271",
+      "slug": "client-271",
+      "errorCode": "271",
+      "surface": "client",
+      "message": "Server was shut down due to no active players / you have been kicked by the server / unable to find instance.",
+      "reasonSummary": "Several shutdown-style variants use 271 when a server is closing or no longer accepting the connection.",
+      "quickFix": "Reconnect to a fresh server and avoid retrying the same instance if it is already shutting down.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 12,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 272",
+      "slug": "client-272",
+      "errorCode": "272",
+      "surface": "client",
+      "message": "Disconnected due to the Security Key Mismatch.",
+      "reasonSummary": "A security key mismatch can indicate a modified client, exploit detection, or another security-validation failure.",
+      "quickFix": "Close any modified clients or exploit tools, relaunch the official client, and reconnect.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 13,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 273",
+      "slug": "client-273",
+      "errorCode": "273",
+      "surface": "client",
+      "message": "Disconnected from the game, possibly because the game was joined from another device.",
+      "reasonSummary": "This is another multi-device session conflict and is often described as a close relative of 264.",
+      "quickFix": "Close the other Roblox session, sign out elsewhere, and reconnect from a single device.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 14,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 274",
+      "slug": "client-274",
+      "errorCode": "274",
+      "surface": "client",
+      "message": "The game developer has temporarily shut down the server. Please try again.",
+      "reasonSummary": "The server was closed intentionally by the developer or VIP server owner, or the player hit a moderation case during play.",
+      "quickFix": "Reconnect to a different live server or wait until the developer reopens the experience.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 15,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 275",
+      "slug": "client-275",
+      "errorCode": "275",
+      "surface": "client",
+      "message": "Roblox has shut down the server for maintenance. Please try again.",
+      "reasonSummary": "The active server was taken offline for maintenance or because the underlying game state changed.",
+      "quickFix": "Wait for maintenance to finish and then reconnect to a new server.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 16,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 277",
+      "slug": "client-277",
+      "errorCode": "277",
+      "surface": "client",
+      "message": "Lost connection to the game server, please reconnect. (Error Code: 277)",
+      "reasonSummary": "Your device and the game server failed to keep a network connection, from an unstable connection on your side or a server-side interruption.",
+      "quickFix": "Rejoin the experience, restart your router, and disable any VPN. If every game disconnects, clear the local Roblox app data and reinstall.",
+      "articleSlug": "how-to-fix-roblox-error-code-277",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/36795858515860-Error-Code-277-Lost-Connection"
+      ],
+      "sortOrder": 17,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 278",
+      "slug": "client-278",
+      "errorCode": "278",
+      "surface": "client",
+      "message": "You were disconnected for being idle 20 minutes.",
+      "reasonSummary": "Roblox automatically ends sessions when the player stays AFK for too long.",
+      "quickFix": "Reconnect and keep the session active if you need to remain in the experience.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 18,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 279",
+      "slug": "client-279",
+      "errorCode": "279",
+      "surface": "client",
+      "message": "Failed to connect to the game. (ID = 17: Connection attempt failed) (Error Code: 279)",
+      "reasonSummary": "Your device reached Roblox but could not establish a connection to the game server, usually from a firewall blocking Roblox, blocked UDP ports, a slow network, or a server-side issue.",
+      "quickFix": "Allow Roblox through your firewall and antivirus, restart your router, and disable any VPN. Roblox needs UDP ports 49152-65535 open.",
+      "articleSlug": "how-to-fix-roblox-error-code-279",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/36794291921684-Error-Code-279-ID-17-Failed-to-connect-to-the-Game"
+      ],
+      "sortOrder": 19,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 280",
+      "slug": "client-280",
+      "errorCode": "280",
+      "surface": "client",
+      "message": "Your version of Roblox may be out of date. Please update Roblox and try again. (Error Code: 280)",
+      "reasonSummary": "The Roblox version on your device is out of date and can no longer join current game servers.",
+      "quickFix": "Update Roblox from the official site or your app store, or fully close and relaunch the app so it can update itself.",
+      "articleSlug": "how-to-fix-roblox-error-code-280",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/36792120219284-Error-Code-280-Version-Out-of-Date"
+      ],
+      "sortOrder": 20,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 282",
+      "slug": "client-282",
+      "errorCode": "282",
+      "surface": "client",
+      "message": "Disconnected. Please reconnect. (Error Code: 282)",
+      "reasonSummary": "The connection to the game server was lost mid-session due to a server-side interruption or network instability.",
+      "quickFix": "Rejoin the experience. If it recurs, restart your router and check the Roblox status page for incidents.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://www.thespike.gg/roblox/all-error-codes"
+      ],
+      "sortOrder": 21,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 284",
+      "slug": "client-284",
+      "errorCode": "284",
+      "surface": "client",
+      "message": "A fatal error occurred during gameplay. (Error Code: 284)",
+      "reasonSummary": "The client hit an unrecoverable state during play, often tied to UI overload or a client-side crash condition in that experience.",
+      "quickFix": "Relaunch Roblox and rejoin. If one game consistently triggers it, lower graphics settings or wait for the developer to patch it.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://www.thespike.gg/roblox/all-error-codes"
+      ],
+      "sortOrder": 22,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 285",
+      "slug": "client-285",
+      "errorCode": "285",
+      "surface": "client",
+      "message": "Client initiated disconnect. (Error Code: 285)",
+      "reasonSummary": "Your device lost its connection to the game server mid-session, from server instability, an unstable or slow network, or VPN interference.",
+      "quickFix": "Check the Roblox status page, restart your router, and disable any VPN before rejoining.",
+      "articleSlug": "how-to-fix-roblox-error-code-285",
+      "sourceUrls": [
+        "https://www.fdaytalk.com/roblox-error-code-285/",
+        "https://noping.com/blog/how-to-fix-error-code-285-on-roblox"
+      ],
+      "sortOrder": 23,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 288",
+      "slug": "client-288",
+      "errorCode": "288",
+      "surface": "client",
+      "message": "The server has shut down. (Error Code: 288)",
+      "reasonSummary": "The game server instance you were on was shut down, usually because the developer pushed an update or restarted servers; everyone on that server is disconnected at once.",
+      "quickFix": "Rejoin the experience so Roblox places you on a fresh server. If an update is rolling out, wait a few minutes first; nothing on your side is broken.",
+      "articleSlug": "how-to-fix-roblox-error-code-288",
+      "sourceUrls": [
+        "https://www.fdaytalk.com/roblox-error-code-288/",
+        "https://www.purevpn.com/blog/how-to-fix-error-code-288-roblox/"
+      ],
+      "sortOrder": 24,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 291",
+      "slug": "client-291",
+      "errorCode": "291",
+      "surface": "client",
+      "message": "Player has been removed from the DataModel. (Error Code: 291)",
+      "reasonSummary": "The game's own scripts removed your player, a common scripted kick method, or a server-side script error destroyed your player object.",
+      "quickFix": "Rejoin the experience; a new server usually resolves it. If it repeats in one specific game, the bug is in that game's scripts.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://playgama.com/blog/game-faqs/what-does-roblox-error-code-291-mean/"
+      ],
+      "sortOrder": 25,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 517",
+      "slug": "client-517",
+      "errorCode": "517",
+      "surface": "client",
+      "message": "This game is currently unavailable or the game has ended.",
+      "reasonSummary": "The target server is closing, already closed, or no longer available to the client.",
+      "quickFix": "Join a different live server instead of retrying the same closing one.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 26,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 522",
+      "slug": "client-522",
+      "errorCode": "522",
+      "surface": "client",
+      "message": "The user you attempted to join has left the game.",
+      "reasonSummary": "The follow-join target exited the experience before the join request completed.",
+      "quickFix": "Ask the player to rejoin or pick another active server.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 27,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 523",
+      "slug": "client-523",
+      "errorCode": "523",
+      "surface": "client",
+      "message": "The status of the game has changed and you no longer have access.",
+      "reasonSummary": "The experience or server became restricted, private, or unavailable while the join flow was happening.",
+      "quickFix": "Retry later or use an account that still has permission to access the experience.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 28,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 524",
+      "slug": "client-524",
+      "errorCode": "524",
+      "surface": "client",
+      "message": "You do not have permission to join this game.",
+      "reasonSummary": "You tried to join a private or VIP server you do not have permission for. The most common cause is restrictive private-server privacy settings or a missing invite; accounts under 13 can only join private servers created by friends.",
+      "quickFix": "Check your privacy settings for who can invite you to private servers, confirm you are on the server's invite list, then restart Roblox and retry.",
+      "articleSlug": "how-to-fix-roblox-error-code-524",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/41933144508180-Error-Code-524-Not-Authorized-to-Join-This-Game"
+      ],
+      "sortOrder": 29,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 525",
+      "slug": "client-525",
+      "errorCode": "525",
+      "surface": "client",
+      "message": "The server is busy. Please try again later. (Error Code: 525)",
+      "reasonSummary": "The server instance you tried to join is overloaded and cannot accept the join request.",
+      "quickFix": "Wait a moment and retry, or pick a different server of the same experience from the game's server list.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://www.thespike.gg/roblox/all-error-codes"
+      ],
+      "sortOrder": 30,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 528",
+      "slug": "client-528",
+      "errorCode": "528",
+      "surface": "client",
+      "message": "Unable to join with your party because it exceeds the maximum player count. (Error Code: 528)",
+      "reasonSummary": "A party or group join exceeded the destination server's remaining player slots.",
+      "quickFix": "Split the party into smaller groups or join a fresher, emptier server, then regroup in-game.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://www.thespike.gg/roblox/all-error-codes"
+      ],
+      "sortOrder": 31,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 529",
+      "slug": "client-529",
+      "errorCode": "529",
+      "surface": "client",
+      "message": "An HTTP error has occurred. We are experiencing technical difficulties.",
+      "reasonSummary": "This usually indicates Roblox-side slowdown or partial outage rather than a local gameplay setting issue.",
+      "quickFix": "Close the client, wait, and retry after verifying whether Roblox is under heavy load.",
+      "articleSlug": "how-to-fix-roblox-error-code-529",
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/error-code-529/2160025",
+        "https://www.thespike.gg/roblox/all-error-codes/529"
+      ],
+      "sortOrder": 32,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 533",
+      "slug": "client-533",
+      "errorCode": "533",
+      "surface": "client",
+      "message": "Your privacy settings prevent you from joining this server. (Error Code: 533)",
+      "reasonSummary": "Private-server visibility, communication settings, or linked-parent controls block the account from joining that server, especially on child accounts and private-server links.",
+      "quickFix": "Open Privacy and content restrictions, check Visibility & private servers, and loosen the relevant join setting. A linked parent must make the change for a managed child account.",
+      "articleSlug": "how-to-fix-roblox-error-code-533",
+      "sourceUrls": [
+        "https://www.sportskeeda.com/roblox-news/how-to-fix-error-code-533-in-roblox"
+      ],
+      "sortOrder": 33,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 600",
+      "slug": "client-600",
+      "errorCode": "600",
+      "surface": "client",
+      "message": "Banned from an Experience.",
+      "reasonSummary": "You were banned from that experience by its creator's moderation systems, the same creator-ban family as error 267. Roblox Support cannot lift creator bans.",
+      "quickFix": "Wait out a temporary ban or appeal directly to the experience's creator. Roblox Support cannot remove bans issued by a game's own systems.",
+      "articleSlug": "how-to-fix-roblox-error-code-600",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/39673241220116-Error-Code-600-Banned-from-an-Experience"
+      ],
+      "sortOrder": 34,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 610",
+      "slug": "client-610",
+      "errorCode": "610",
+      "surface": "client",
+      "message": "Unable to join game. Please try again later. (Error Code: 610)",
+      "reasonSummary": "Roblox could not authenticate the join request, most often from corrupted DNS cache, a stale login session, or a Roblox server issue. Also appears when joining a private server that no longer exists.",
+      "quickFix": "Log out of Roblox and back in to refresh your session, flush your DNS cache, and restart your router. If it hits every account on your network, wait out the server-side issue.",
+      "articleSlug": "how-to-fix-roblox-error-code-610",
+      "sourceUrls": [
+        "https://progameguides.com/roblox/how-to-fix-roblox-error-code-610/",
+        "https://beebom.com/how-fix-roblox-error-code-610/"
+      ],
+      "sortOrder": 35,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "An unexpected error occurred and Roblox needs to quit",
+      "slug": "client-unexpected-error-quit",
+      "errorCode": null,
+      "surface": "client",
+      "message": "An unexpected error occurred and Roblox needs to quit. We're sorry!",
+      "reasonSummary": "A crash in Roblox's Hyperion anti-cheat layer on Windows, usually triggered by overlay and monitoring apps, aggressive antivirus, corrupted install files, outdated GPU drivers, or Windows 11 Memory Integrity conflicts.",
+      "quickFix": "Close overlay and hardware-monitoring apps, update GPU drivers, and whitelist Roblox in your antivirus. If it persists, delete the local Roblox folder and reinstall.",
+      "articleSlug": "how-to-fix-an-unexpected-error-occurred-and-roblox-needs-to-quit",
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/an-unexpected-error-occurred-and-roblox-needs-to-quit-sorry/2878623",
+        "https://www.howtogeek.com/how-to-fix-an-unexpected-error-occurred-and-roblox-needs-to-quit/"
+      ],
+      "sortOrder": 36,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "An error occurred and Roblox cannot continue",
+      "slug": "client-crash",
+      "errorCode": null,
+      "surface": "client",
+      "message": "An error occurred and Roblox cannot continue. Expected channel name when using -channel, use \"\" for empty value.",
+      "reasonSummary": "The Windows Player failed during its launch or update handoff. A damaged or obsolete install, blocked local files, or interfering launcher software can make the message return.",
+      "quickFix": "Restart Windows, replace the old Store app with Roblox - Windows or cleanly reinstall the website Player, then allowlist Roblox and close interfering launchers.",
+      "articleSlug": "how-to-fix-an-error-occurred-and-roblox-cannot-continue",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203312870-General-Desktop-Roblox-Issues",
+        "https://devforum.roblox.com/t/roblox-error-when-launching-a-game/2639663"
+      ],
+      "sortOrder": 37,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Critical system files are corrupt",
+      "slug": "client-debug-mode-block",
+      "errorCode": null,
+      "surface": "client",
+      "message": "Critical system files are corrupt. Roblox cannot run. Please repair or reset your Windows installation.",
+      "reasonSummary": "Windows is booting in debug mode or boot integrity is compromised; Roblox refuses to run in that state.",
+      "quickFix": "Open msconfig, go to the Boot tab, open Advanced options, uncheck Debug, apply, and restart the computer.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/24275616578708-Anti-cheat-Messages"
+      ],
+      "sortOrder": 38,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Emulator detected",
+      "slug": "client-emulator-detected",
+      "errorCode": null,
+      "surface": "client",
+      "message": "We don't allow emulators for accounts without place edit access.",
+      "reasonSummary": "Roblox's anti-cheat closes the game when it detects an Android or iOS emulator on an account without Edit access to the experience.",
+      "quickFix": "Play on a physical device instead. If you are testing your own experience, give your account Edit permission via Collaborate in Studio.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/24275616578708-Anti-cheat-Messages"
+      ],
+      "sortOrder": 39,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Modified version of Roblox detected",
+      "slug": "client-modified-version",
+      "errorCode": null,
+      "surface": "client",
+      "message": "We noticed a modified version of Roblox was used on a device you recently played on.",
+      "reasonSummary": "A modified or unofficial Roblox app was used on one of the account's devices; continued use can lead to suspension or a permanent ban.",
+      "quickFix": "Uninstall any unofficial versions on all devices and reinstall the official app from roblox.com or official app stores.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/24275616578708-Anti-cheat-Messages"
+      ],
+      "sortOrder": 40,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "OBS in-game capture conflict",
+      "slug": "client-obs-capture-conflict",
+      "errorCode": null,
+      "surface": "client",
+      "message": "OBS in-game capture is known to have issues with Roblox. Please use window or desktop capture instead.",
+      "reasonSummary": "Roblox's anti-cheat does not support OBS's Game Capture mode.",
+      "quickFix": "In OBS, use a Display Capture or Window Capture source instead of Game Capture, then stream or record as usual.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/24275616578708-Anti-cheat-Messages"
+      ],
+      "sortOrder": 41,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox cannot run inside a virtual machine",
+      "slug": "client-virtual-machine",
+      "errorCode": null,
+      "surface": "client",
+      "message": "Roblox cannot run inside of a virtual machine.",
+      "reasonSummary": "Roblox blocks unsupported virtual machines; running inside a VM requires GPU passthrough.",
+      "quickFix": "Play outside the VM, or enable virtualization extensions in BIOS and configure GPU passthrough in the VM software if you must use one.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/24275616578708-Anti-cheat-Messages"
+      ],
+      "sortOrder": 42,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox crashed due to incompatible software",
+      "slug": "client-incompatible-software",
+      "errorCode": null,
+      "surface": "client",
+      "message": "Roblox has crashed due to incompatible software: <path to offending software>",
+      "reasonSummary": "The program at the file path shown in the message is hooking into Roblox, and the anti-cheat shuts the game down to protect itself.",
+      "quickFix": "Close or uninstall the flagged program. If crashes continue, perform a Windows clean boot so only essential software runs while playing.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/24275616578708-Anti-cheat-Messages"
+      ],
+      "sortOrder": 43,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox has timed out",
+      "slug": "client-timed-out",
+      "errorCode": null,
+      "surface": "client",
+      "message": "Roblox has timed out. Please restart your client.",
+      "reasonSummary": "The Roblox app hit an internal anti-cheat timeout and needs a restart.",
+      "quickFix": "Restart the Roblox client. Contact Roblox support if it keeps happening during normal play.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/24275616578708-Anti-cheat-Messages"
+      ],
+      "sortOrder": 44,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox stuck on the loading screen",
+      "slug": "client-stuck-on-loading-screen",
+      "errorCode": null,
+      "surface": "client",
+      "message": null,
+      "reasonSummary": "The join or asset download stalls from an unstable or filtered connection, a VPN, strict firewall or antivirus, corrupted local cache, or a heavy experience streaming assets on a slow connection.",
+      "quickFix": "Fully close Roblox, clear its cache, restart your router, and disable any VPN. Check the Roblox status page first to rule out an outage.",
+      "articleSlug": "how-to-fix-roblox-stuck-on-the-loading-screen",
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/roblox-game-is-taking-ages-to-load-and-gets-stuck-on-the-loading-screen/3187633"
+      ],
+      "sortOrder": 45,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox was stopped by third-party software",
+      "slug": "client-stopped-by-third-party",
+      "errorCode": null,
+      "surface": "client",
+      "message": "Roblox was stopped. Please ensure third-party software does not interfere with Roblox.",
+      "reasonSummary": "Another program on the computer suspended or crashed the Roblox process through interference.",
+      "quickFix": "Shut down other software while playing. If you cannot find the culprit, perform a Windows clean boot to disable non-essential startup programs.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/24275616578708-Anti-cheat-Messages"
+      ],
+      "sortOrder": 46,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox white or gray screen on launch",
+      "slug": "client-white-screen",
+      "errorCode": null,
+      "surface": "client",
+      "message": null,
+      "reasonSummary": "The Roblox window opens but never draws anything, most often from GPU driver problems, Windows using the wrong GPU, or the windowed-games optimization setting being off.",
+      "quickFix": "Update your GPU drivers, enable Windows' windowed-games graphics optimization, and force Roblox onto your dedicated GPU. End all Roblox processes in Task Manager before relaunching.",
+      "articleSlug": "how-to-fix-roblox-white-screen-on-launch",
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/roblox-player-and-studio-not-loadinghanging-on-white-screen/3279529"
+      ],
+      "sortOrder": 47,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Rooted or jailbroken device detected",
+      "slug": "client-rooted-device-detected",
+      "errorCode": null,
+      "surface": "client",
+      "message": "We don't allow rooted devices.",
+      "reasonSummary": "Roblox does not support rooted Android or jailbroken iOS devices; the anti-cheat closes the game when it detects one.",
+      "quickFix": "Unroot the Android device or restore iOS to factory settings. Contact Roblox support if your device is not actually rooted.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/24275616578708-Anti-cheat-Messages"
+      ],
+      "sortOrder": 48,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Textures and assets not loading",
+      "slug": "client-textures-not-loading",
+      "errorCode": null,
+      "surface": "client",
+      "message": null,
+      "reasonSummary": "Game assets fail to stream from Roblox's servers, leaving gray characters and maps, from a slow or filtered connection, corrupted cache, or a Roblox-side asset delivery problem.",
+      "quickFix": "Clear the Roblox cache and rejoin, try another network, and disable VPN or DNS filtering. If everyone in the server sees gray assets, it is on Roblox's side and passes on its own.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/texture-slow-loading-not-loading-at-all-and-result-in-grey-blank-character-constantly/2338035"
+      ],
+      "sortOrder": 49,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 6",
+      "slug": "client-6",
+      "errorCode": "6",
+      "surface": "launcher",
+      "message": "An error occurred while starting Roblox. Error Code: 6.",
+      "reasonSummary": "The launcher timed out while downloading an update or opening a game, often because of weak internet or antivirus interference.",
+      "quickFix": "Retry on a stable network, allow Roblox through antivirus or firewall tools, and relaunch the installer if needed.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 50,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 403",
+      "slug": "client-403",
+      "errorCode": "403",
+      "surface": "launcher",
+      "message": "Access to www.roblox.com has been denied. You are not authorized to view this page.",
+      "reasonSummary": "The Roblox client launched from the website failed to initialize properly on your PC, so the join request was rejected. Despite the access-denied wording, it is usually a local client problem, not an account block.",
+      "quickFix": "Fully close Roblox, clear the local Roblox app data, and reinstall the client. Disable any VPN before retrying.",
+      "articleSlug": "how-to-fix-roblox-error-code-403",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/36798133077524-Error-Code-403-Access-Denied"
+      ],
+      "sortOrder": 51,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Connection Fail",
+      "slug": "client-connection-fail",
+      "errorCode": null,
+      "surface": "launcher",
+      "message": "Failed to download or apply critical settings.",
+      "reasonSummary": "Roblox cannot communicate with its servers, most frequently because a firewall is blocking it. Roblox needs UDP ports 49152-65535 open to connect to game servers.",
+      "quickFix": "Allow Roblox through your firewall and security software, restart your router, and retry. On managed networks, ask the administrator to unblock Roblox.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203312880-General-Connection-Problems"
+      ],
+      "sortOrder": 52,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Starting Game",
+      "slug": "client-error-starting-game",
+      "errorCode": null,
+      "surface": "launcher",
+      "message": "An error occurred trying to launch the game.",
+      "reasonSummary": "This usually traces back to maintenance, unstable connectivity, or an account that cannot currently enter the experience.",
+      "quickFix": "Retry later, confirm the account is in good standing, and test from another network if needed.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 53,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "HttpSendRequest Failed",
+      "slug": "client-httpsendrequest-failed",
+      "errorCode": null,
+      "surface": "launcher",
+      "message": "A connection with the server could not be established.",
+      "reasonSummary": "Your computer's clock is wrong (err=0x2f05 variant) or a firewall is blocking Roblox's connection to its servers (HRESULT 0x80072efd variant), so secure requests fail.",
+      "quickFix": "Set the correct date, time, and time zone and turn on automatic time sync. If the clock is right, allow Roblox through your firewall.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203312830-Clock-Reset-or-Failed-to-get-URL-Httpsendrequest-failed-err-0x2f05"
+      ],
+      "sortOrder": 54,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Microsoft Store Roblox won't open",
+      "slug": "launcher-microsoft-store-not-opening",
+      "errorCode": null,
+      "surface": "launcher",
+      "message": null,
+      "reasonSummary": "The Microsoft Store build of Roblox opens then silently closes or crashes seconds after startup, from corrupted app state, a stale Store build, or Store licensing failures.",
+      "quickFix": "Reset the app in Windows app settings, apply pending Microsoft Store updates, or reinstall. If it keeps failing, install the standard desktop client from roblox.com instead.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/roblox-uwp-app-crashing-10-15-seconds-after-startup/2715993"
+      ],
+      "sortOrder": 55,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox won't update",
+      "slug": "launcher-wont-update",
+      "errorCode": null,
+      "surface": "launcher",
+      "message": "Upgrading Roblox...",
+      "reasonSummary": "The updater hangs when the connection drops mid-download, the device clock is wrong, antivirus blocks the new build's files, or the store app fails to push the update.",
+      "quickFix": "Fully close Roblox, check your date and time settings and connection, and relaunch. On PC, delete the local Roblox folder and reinstall to force a clean current build.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/roblox-wont-update/8994"
+      ],
+      "sortOrder": 56,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "You do not have permission to use this app",
+      "slug": "launcher-no-permission-windows",
+      "errorCode": null,
+      "surface": "launcher",
+      "message": "You do not have permission to use this application. Ask an administrator for access.",
+      "reasonSummary": "Windows blocks Roblox for the current user, usually from Microsoft Family Safety app restrictions or a standard Windows account being denied.",
+      "quickFix": "Have the family organizer allow Roblox in Microsoft Family Safety, or reset the app in Windows app settings. Running the desktop version as administrator also works.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://mundobytes.com/en/You-do-not-have-permissions-to-use-this-Roblox-application/"
+      ],
+      "sortOrder": 57,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Your system time is incorrect",
+      "slug": "launcher-system-time-incorrect",
+      "errorCode": null,
+      "surface": "launcher",
+      "message": "Your system time is incorrect",
+      "reasonSummary": "The system clock is set to the wrong time, date, or time zone, which breaks Roblox's secure connections.",
+      "quickFix": "Set the correct date, time, and time zone, and turn on automatic time synchronization.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203312830-Clock-Reset-or-Failed-to-get-URL-Httpsendrequest-failed-err-0x2f05"
+      ],
+      "sortOrder": 58,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Failed to Load Library",
+      "slug": "installation-failed-to-load-library",
+      "errorCode": null,
+      "surface": "installation",
+      "message": "Roblox Error: Failed to Load Library.",
+      "reasonSummary": "Windows is missing or has corrupted system libraries Roblox needs (commonly MFPlat.dll or urlmon.dll), antivirus quarantined Roblox files, or the install itself is corrupted. Windows N/KN editions without the Media Feature Pack hit this often.",
+      "quickFix": "Do a clean reinstall of Roblox, run DISM and sfc /scannow to repair system files, and install the Media Feature Pack on Windows N/KN editions. Add Roblox to your antivirus exclusions.",
+      "articleSlug": "how-to-fix-roblox-failed-to-load-library",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/41932984382356-Failed-to-Load-Library-Error"
+      ],
+      "sortOrder": 59,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Infinite install loop (Getting Latest Roblox)",
+      "slug": "installation-install-loop",
+      "errorCode": null,
+      "surface": "installation",
+      "message": "Getting the latest Roblox...",
+      "reasonSummary": "The installer repeats forever because antivirus or firewall blocks it from writing files, leftover corrupted files sit in the local Roblox folder, or the download keeps getting interrupted.",
+      "quickFix": "End all Roblox processes, delete the local Roblox app folders, then run the installer as administrator with antivirus temporarily paused.",
+      "articleSlug": "how-to-fix-the-roblox-infinite-install-loop",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203312940-Infinite-Getting-Latest-Roblox-Loop"
+      ],
+      "sortOrder": 60,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Mac Upgrade Failed message",
+      "slug": "installation-mac-upgrade-failed",
+      "errorCode": null,
+      "surface": "installation",
+      "message": "Upgrade Failed",
+      "reasonSummary": "Appears on some Macs when launching Roblox from the installed app while the player is out of date.",
+      "quickFix": "Launch from the browser instead by clicking Play on an experience's page, which installs the newest Roblox player.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203313000-Mac-Upgrade-Fail-Message"
+      ],
+      "sortOrder": 61,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Bad Request 400",
+      "slug": "website-400-bad-request",
+      "errorCode": "400",
+      "surface": "website",
+      "message": "There was a problem with your request.",
+      "reasonSummary": "The browser sent a malformed or stale request to Roblox, often because of bad cached state or an invalid URL.",
+      "quickFix": "Refresh, clear Roblox cookies for the page, and retry with a clean link.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 62,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Access Denied 403",
+      "slug": "website-403-access-denied",
+      "errorCode": "403",
+      "surface": "website",
+      "message": "You do not have permission to view this page.",
+      "reasonSummary": "The requested Roblox page is restricted, unavailable to the current account, or blocked by the access path being used.",
+      "quickFix": "Sign in with the correct account, open a public page instead, and avoid restricted or moderation-only URLs.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 63,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Page Not Found 404",
+      "slug": "website-404-page-not-found",
+      "errorCode": "404",
+      "surface": "website",
+      "message": "Page cannot be found or no longer exists.",
+      "reasonSummary": "The URL is wrong, the page has moved, or the profile or asset behind it was removed.",
+      "quickFix": "Check the URL spelling and try navigating from Roblox search instead of a saved old link.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 64,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 429",
+      "slug": "website-429",
+      "errorCode": "429",
+      "surface": "website",
+      "message": "429 Too Many Requests",
+      "reasonSummary": "Roblox rate-limited your IP or account after too many requests in a short window, such as repeated login attempts or rapid page refreshing.",
+      "quickFix": "Wait a few minutes for the limit to reset, clear Roblox cookies, and restart your router to pick up a new IP if the block lingers.",
+      "articleSlug": "how-to-fix-roblox-error-code-429",
+      "sourceUrls": [
+        "https://noping.com/blog/how-to-fix-roblox-error-code-429"
+      ],
+      "sortOrder": 65,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Internal Server Error 500",
+      "slug": "website-500-internal-server-error",
+      "errorCode": "500",
+      "surface": "website",
+      "message": "An unexpected error occurred.",
+      "reasonSummary": "Roblox hit a server-side problem while processing the page or action.",
+      "quickFix": "Retry later, and if the same action repeatedly fails, use Roblox support instead of repeated retries.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 66,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "503 The request could not be satisfied",
+      "slug": "website-503",
+      "errorCode": "503",
+      "surface": "website",
+      "message": "The request could not be satisfied.",
+      "reasonSummary": "Usually appears during a Roblox outage or broader downtime rather than a local gameplay issue.",
+      "quickFix": "Wait a few minutes, retry, and check Roblox server status before changing browser or network settings.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 67,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "504 roblox.com took too long to respond",
+      "slug": "website-504",
+      "errorCode": "504",
+      "surface": "website",
+      "message": "roblox.com took too long to respond.",
+      "reasonSummary": "This is typically a web timeout caused by Roblox downtime, heavy load, or a flaky local connection.",
+      "quickFix": "Retry on a stable connection and confirm whether Roblox is having a wider outage.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 68,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 9007",
+      "slug": "website-9007",
+      "errorCode": "9007",
+      "surface": "website",
+      "message": "Service Instances Unavailable (Error Code: 9007)",
+      "reasonSummary": "Roblox servers are reachable but cannot provide a required backend service, seen platform-wide during Roblox outages and occasionally from blocked connections or corrupted session data.",
+      "quickFix": "Check the Roblox status page first; during an outage the only fix is waiting. If servers are fine, close all Roblox processes, restart your device, and disable any VPN.",
+      "articleSlug": "how-to-fix-roblox-error-code-9007",
+      "sourceUrls": [
+        "https://gamedaily.com/guides/what-is-error-code-9007-in-roblox",
+        "https://www.exitlag.com/blog/service-instances-unavailable-roblox/"
+      ],
+      "sortOrder": 69,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "An error occurred, please try again",
+      "slug": "website-invalid-ip-vpn",
+      "errorCode": null,
+      "surface": "website",
+      "message": "An error occurred, please try again.",
+      "reasonSummary": "A VPN, proxy, or connection that Roblox does not accept can trigger this website message.",
+      "quickFix": "Disable VPN or proxy software, refresh the page, and try a normal home or mobile network.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 70,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Avatar Page Error",
+      "slug": "website-avatar-page-error",
+      "errorCode": null,
+      "surface": "website",
+      "message": "The avatar page is temporarily unavailable.",
+      "reasonSummary": "This usually points to a temporary Roblox-side issue with the avatar editor or related services.",
+      "quickFix": "Retry later, reload the page, and avoid making repeated outfit changes until the page recovers.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 71,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Down For Maintenance",
+      "slug": "website-down-for-maintenance",
+      "errorCode": null,
+      "surface": "website",
+      "message": "We are making things more awesome. Be back soon.",
+      "reasonSummary": "Roblox has taken part of the site or payments flow offline for maintenance or emergency work.",
+      "quickFix": "Wait for maintenance to finish instead of reinstalling the client or changing device settings.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 72,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Game Pass Loading Error",
+      "slug": "website-game-pass-loading-error",
+      "errorCode": null,
+      "surface": "website",
+      "message": "Failed to load Game Passes. Please try again later.",
+      "reasonSummary": "The game pass service is not responding cleanly, or the local connection is dropping requests.",
+      "quickFix": "Retry later, refresh the experience page, and test from another network if it keeps failing.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 73,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Item Owned",
+      "slug": "website-item-owned",
+      "errorCode": null,
+      "surface": "website",
+      "message": "You already own this item.",
+      "reasonSummary": "The purchase flow is blocked because the account already owns the catalog item.",
+      "quickFix": "Check inventory before retrying the purchase; no technical fix is needed.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 74,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Library Error",
+      "slug": "website-library-error",
+      "errorCode": null,
+      "surface": "website",
+      "message": "Library temporarily unavailable, please try again later.",
+      "reasonSummary": "An invalid category value in the URL or a temporary library service problem can make this page unavailable.",
+      "quickFix": "Retry from a normal library link and remove any invalid category or search parameters from the URL.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 75,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Maximum Friends Error",
+      "slug": "website-maximum-friends-error",
+      "errorCode": null,
+      "surface": "website",
+      "message": "That user currently has the max number of friends allowed.",
+      "reasonSummary": "The friend request fails because the target account has reached the platform limit.",
+      "quickFix": "Wait for the other user to free a slot or use followers instead of retrying the same request.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 76,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Registration Error",
+      "slug": "website-registration-error",
+      "errorCode": null,
+      "surface": "website",
+      "message": "Sorry, an error occurred.",
+      "reasonSummary": "Account creation failed because of Roblox-side signup issues or a bad local network state.",
+      "quickFix": "Retry later, change networks if needed, and avoid reusing obviously invalid username or email inputs.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 77,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Something Went Wrong Error",
+      "slug": "website-something-went-wrong",
+      "errorCode": null,
+      "surface": "website",
+      "message": "An unexpected error occurred. Please try again later.",
+      "reasonSummary": "This can appear when a page points at a missing Roblox target or the browser holds a stale page state.",
+      "quickFix": "Reload from a clean URL and retry the action from the normal navigation flow.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 78,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Too Many Redirects",
+      "slug": "website-too-many-redirects",
+      "errorCode": null,
+      "surface": "website",
+      "message": "The page is redirecting improperly or too many times.",
+      "reasonSummary": "The account or browser session is bouncing between conflicting Roblox routes, often because cookies or saved session state disagree.",
+      "quickFix": "Clear Roblox cookies, sign in again, and test from a fresh browser profile.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 79,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Unable to Join Private VIP Server",
+      "slug": "website-unable-to-join-private-vip",
+      "errorCode": null,
+      "surface": "website",
+      "message": "You cannot join this VIP server because this game is private.",
+      "reasonSummary": "The target VIP server belongs to a private or review-locked experience that the current account cannot access.",
+      "quickFix": "Join a public server, wait for the experience to reopen, or use an allowed account.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 80,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Updating Avatar Error",
+      "slug": "website-updating-avatar-error",
+      "errorCode": null,
+      "surface": "website",
+      "message": "Items you do not own are in this outfit.",
+      "reasonSummary": "The saved outfit references traded, sold, deleted, or otherwise unavailable avatar items.",
+      "quickFix": "Remove the unavailable item from the outfit and rebuild the look from currently owned pieces.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 81,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 769",
+      "slug": "teleport-769",
+      "errorCode": "769",
+      "surface": "teleport",
+      "message": "Teleport failed due to an unexpected error.",
+      "reasonSummary": "An in-experience teleport step failed for a general server or destination reason.",
+      "quickFix": "Retry the teleport flow or rejoin the experience from scratch.",
+      "articleSlug": "how-to-fix-roblox-teleport-failed-errors",
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 82,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 770",
+      "slug": "teleport-770",
+      "errorCode": "770",
+      "surface": "teleport",
+      "message": "Teleport failed because the root place is inactive, missing, or otherwise invalid.",
+      "reasonSummary": "The destination place is not live, was deleted, or cannot currently accept teleports.",
+      "quickFix": "Retry only after the destination place is active again, or send players to a valid place ID.",
+      "articleSlug": "how-to-fix-roblox-teleport-failed-errors",
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 83,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 771",
+      "slug": "teleport-771",
+      "errorCode": "771",
+      "surface": "teleport",
+      "message": "Teleport failed because the server is no longer available.",
+      "reasonSummary": "The target teleport server disappeared before the client could enter it.",
+      "quickFix": "Retry the teleport and choose a fresh server target.",
+      "articleSlug": "how-to-fix-roblox-teleport-failed-errors",
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 84,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 772",
+      "slug": "teleport-772",
+      "errorCode": "772",
+      "surface": "teleport",
+      "message": "Teleport failed because the server is full.",
+      "reasonSummary": "The destination instance has no open player slots.",
+      "quickFix": "Retry later or teleport to a different server instance.",
+      "articleSlug": "how-to-fix-roblox-teleport-failed-errors",
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 85,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 773",
+      "slug": "teleport-773",
+      "errorCode": "773",
+      "surface": "teleport",
+      "message": "Teleport failed because the destination game is unapproved or restricted.",
+      "reasonSummary": "The destination place has not been approved, is restricted, or the current player is not allowed to join it.",
+      "quickFix": "Send players to an approved public destination or adjust access permissions before retrying.",
+      "articleSlug": "how-to-fix-roblox-teleport-failed-errors",
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 86,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 774",
+      "slug": "teleport-774",
+      "errorCode": "774",
+      "surface": "teleport",
+      "message": null,
+      "reasonSummary": "The experience fired more teleport requests than Roblox's rate limits allow in a short window, which Roblox's teleport system reports as Flooded.",
+      "quickFix": "Wait a few seconds and retry the teleport. If it keeps failing, the game's developer needs to stagger their teleport requests.",
+      "articleSlug": "how-to-fix-roblox-teleport-failed-errors",
+      "sourceUrls": [
+        "https://create.roblox.com/docs/reference/engine/enums/TeleportResult"
+      ],
+      "sortOrder": 87,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Account suspended or moderation notice",
+      "slug": "account-moderation-notice",
+      "errorCode": null,
+      "surface": "account",
+      "message": "Your account has been suspended...",
+      "reasonSummary": "Not a technical failure: the login screen shows a moderation notice after a warning, temporary suspension, or termination for a Community Standards violation.",
+      "quickFix": "Read the notice and the email Roblox sends for the reason and duration; temporary suspensions lift automatically. To dispute, file a moderation appeal with Roblox Support.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/roblox-improving-their-support-general-enforcement-bans/4555192"
+      ],
+      "sortOrder": 88,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Age verification not working",
+      "slug": "account-age-verification-failed",
+      "errorCode": null,
+      "surface": "account",
+      "message": "Verification failed. Please try again.",
+      "reasonSummary": "Roblox's ID or facial age check rejects the submission because of photo glare, cropped ID corners, poor lighting, blocked pop-ups, or a backend failure; repeated failures trigger a cooldown.",
+      "quickFix": "Retake the selfie or ID in clear light, keep the whole document visible, and remove camera, pop-up, or network blockers. If Roblox shows a retry cooldown, wait for the displayed period before trying again.",
+      "articleSlug": "how-to-fix-roblox-age-verification-not-working",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4407282410644-ID-Verification"
+      ],
+      "sortOrder": 89,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox captcha or security check loop",
+      "slug": "account-captcha-loop",
+      "errorCode": null,
+      "surface": "account",
+      "message": "Verification failed. Please try again.",
+      "reasonSummary": "The login puzzle repeats endlessly when cookies are blocked, an ad blocker or privacy extension interferes, or the IP looks suspicious to Roblox, such as a VPN or shared school network.",
+      "quickFix": "Enable cookies, disable ad blockers and VPN, and try a different browser or device. Switching between the website and the app often breaks the loop.",
+      "articleSlug": "how-to-fix-the-roblox-captcha-loop",
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/account-login-page-endlessly-prompts-for-verification-after-captcha-is-solved/578989"
+      ],
+      "sortOrder": 90,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "This experience is unavailable due to your account settings",
+      "slug": "account-experience-unavailable-settings",
+      "errorCode": null,
+      "surface": "account",
+      "message": "This experience is unavailable due to your account settings.",
+      "reasonSummary": "The game's maturity label is above the account's allowance, the game was specifically blocked, or the account does not meet a Restricted game's age-check requirement.",
+      "quickFix": "A linked parent can change Content maturity or approve an eligible game under Allowed games. Restricted games require an age-checked account aged 18 or older.",
+      "articleSlug": "how-to-fix-this-experience-is-unavailable-due-to-your-account-settings",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/8863284850196-Content-Maturity-FAQ",
+        "https://en.help.roblox.com/hc/en-us/articles/30428310121620-Parental-Controls-Overview"
+      ],
+      "sortOrder": 91,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Credit card declined or pending charges",
+      "slug": "purchase-card-declined",
+      "errorCode": null,
+      "surface": "purchase",
+      "message": null,
+      "reasonSummary": "An incorrect billing address, the bank's fraud prevention, or Roblox's own fraud checks decline the charge; declined or verification charges can sit as pending for up to 10 business days.",
+      "quickFix": "Enter billing details exactly as the bank has them, or switch to another payment method such as PayPal or a Roblox gift card.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/360000359923-Credit-Card-Declined-or-Pending-Charges"
+      ],
+      "sortOrder": 92,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Prepaid card error",
+      "slug": "purchase-prepaid-card-error",
+      "errorCode": null,
+      "surface": "purchase",
+      "message": null,
+      "reasonSummary": "The prepaid card has not been registered, or the billing information entered at checkout does not match the details registered with the card.",
+      "quickFix": "Register correct billing information with the card provider and enter matching details on Roblox. Do not retry a failing charge; pending holds can lock the balance for days.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203312680-Prepaid-Credit-Card-Errors"
+      ],
+      "sortOrder": 93,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Purchase Error",
+      "slug": "purchase-error",
+      "errorCode": null,
+      "surface": "purchase",
+      "message": "A purchase failed because the item is offsale, the account lacks Robux, or Roblox hit a temporary checkout issue.",
+      "reasonSummary": "This family covers storefront failures caused by an offsale item, insufficient Robux, or a temporary checkout problem.",
+      "quickFix": "Confirm the item is still on sale, make sure enough Robux are available, and retry later if Roblox checkout is unstable.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://progameguides.com/roblox/roblox-error-codes-list-and-how-to-fix-them/"
+      ],
+      "sortOrder": 94,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 103 (Xbox)",
+      "slug": "console-103",
+      "errorCode": "103",
+      "surface": "console",
+      "message": "The Roblox game you are trying to join is currently not available for your account. (Error Code: 103)",
+      "reasonSummary": "Xbox parental controls or the Roblox account's age settings block the experience, or the game is not available on console. Child accounts with restricted content settings hit this most.",
+      "quickFix": "In Xbox privacy settings, allow the account to see community content and join multiplayer, and check the Roblox account's content maturity settings. Confirm the game supports console.",
+      "articleSlug": "how-to-fix-roblox-error-code-103",
+      "sourceUrls": [
+        "https://www.thespike.gg/roblox/all-error-codes/103",
+        "https://learn.microsoft.com/en-us/answers/questions/1303651/roblox-error-code-103"
+      ],
+      "sortOrder": 95,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 106",
+      "slug": "console-106",
+      "errorCode": "106",
+      "surface": "console",
+      "message": "Unable to join your friend's game. (Error Code: 106)",
+      "reasonSummary": "Friend-join failed because the two accounts are not friends on both Xbox Live and Roblox, or Xbox privacy settings block joining multiplayer games.",
+      "quickFix": "Add each other as friends on both Xbox and Roblox, allow multiplayer joins in Xbox privacy settings, then retry from the friends list.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://www.thespike.gg/roblox/all-error-codes/106"
+      ],
+      "sortOrder": 96,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 112",
+      "slug": "console-112",
+      "errorCode": "112",
+      "surface": "console",
+      "message": "Could not connect. (Error Code: 112)",
+      "reasonSummary": "Network issues, Roblox server downtime, or corrupted app data block the connection on console.",
+      "quickFix": "Check Roblox server status, restart the console and router, and reinstall the app if needed. During Roblox-side incidents it resolves on its own.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://windowsreport.com/roblox-error-code-112/"
+      ],
+      "sortOrder": 97,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 116",
+      "slug": "console-116",
+      "errorCode": "116",
+      "surface": "console",
+      "message": "Error Code: 116",
+      "reasonSummary": "The Xbox account's privacy settings block user-generated content, so every Roblox experience fails to launch.",
+      "quickFix": "In Xbox privacy settings, allow the account to see and share community creations, then restart the console and Roblox.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://www.thewindowsclub.com/roblox-error-codes-106-116-110"
+      ],
+      "sortOrder": 98,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 901",
+      "slug": "console-901",
+      "errorCode": "901",
+      "surface": "console",
+      "message": "There was a problem signing you in. Please try again. (Error Code: 901)",
+      "reasonSummary": "Xbox sign-in to Roblox failed: the gamertag violates Roblox naming rules, the Xbox-Roblox account link is broken, the linked account is moderated, or Roblox and Xbox Live are having server problems.",
+      "quickFix": "Restart the app and console, log into the Roblox account from another device on the same network, then retry. Unlink and re-link the account if it persists; progress is cloud-saved.",
+      "articleSlug": "how-to-fix-roblox-error-code-901",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4412614080532-Xbox-Error-901",
+        "https://beebom.com/how-fix-roblox-error-code-901-xbox/"
+      ],
+      "sortOrder": 99,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 905",
+      "slug": "console-905",
+      "errorCode": "905",
+      "surface": "console",
+      "message": "Error Code: 905",
+      "reasonSummary": "An account or connectivity problem after linking Xbox Live and Roblox accounts prevents Roblox from starting a session.",
+      "quickFix": "Check Xbox Live and Roblox server status, restart the console, and reinstall the Roblox app. Re-link the Xbox and Roblox accounts if the error continues.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://windowsreport.com/xbox-error-code-905-roblox/"
+      ],
+      "sortOrder": 100,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 912",
+      "slug": "console-912",
+      "errorCode": "912",
+      "surface": "console",
+      "message": "Your Xbox Live account is already linked to a Roblox account. (Error Code: 912)",
+      "reasonSummary": "The Xbox Live account is already tied to a different Roblox account, so a second link attempt is rejected.",
+      "quickFix": "Sign in with the Roblox account originally linked to that gamertag, or unlink it from the old Roblox account before linking the new one.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://tech-tips-now.com/fix-roblox-error-code-912/"
+      ],
+      "sortOrder": 101,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "PlayStation: Unable to connect to Roblox",
+      "slug": "console-playstation-unable-to-connect",
+      "errorCode": null,
+      "surface": "console",
+      "message": "Unable to connect to the Roblox server",
+      "reasonSummary": "Console network issues, DNS resolution problems, or a Roblox outage block the PS4 or PS5 app from connecting or loading experiences.",
+      "quickFix": "Force-quit and relaunch the app, restart the console and router, and set manual DNS in the PlayStation network settings. Check Roblox server status first.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://itemlevel.net/roblox-ps4-ps5-how-to-fix-unable-to-connect-to-roblox-server/"
+      ],
+      "sortOrder": 102,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 286",
+      "slug": "mobile-286",
+      "errorCode": "286",
+      "surface": "mobile",
+      "message": "Your device does not have enough memory to run this experience. (Error Code: 286)",
+      "reasonSummary": "Your device ran out of RAM while loading a heavy experience, common on older phones and tablets or with many background apps open.",
+      "quickFix": "Close all background apps, restart the device, and clear the Roblox app cache before rejoining. Some heavy experiences simply need a device with more memory.",
+      "articleSlug": "how-to-fix-roblox-error-code-286",
+      "sourceUrls": [
+        "https://www.pocketgamer.com/roblox/fixing-error-286/"
+      ],
+      "sortOrder": 103,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 292",
+      "slug": "mobile-292",
+      "errorCode": "292",
+      "surface": "mobile",
+      "message": "Your device's memory is low. Leaving now will preserve your state and prevent Roblox from crashing. (Error Code: 292)",
+      "reasonSummary": "Roblox is close to running out of RAM, mostly on iPhone, iPad, and lower-end Android devices in memory-heavy experiences.",
+      "quickFix": "Leave the experience, close Roblox and all background apps, then relaunch Roblox alone and lower graphics quality. Restarting the device frees the most memory.",
+      "articleSlug": "how-to-fix-roblox-error-code-292",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203313540-iOS-App-Low-Memory-Warning-Error-Code-292",
+        "https://progameguides.com/roblox/how-to-fix-error-code-292-on-roblox/"
+      ],
+      "sortOrder": 104,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Android hardware security requirement failures",
+      "slug": "mobile-android-attestation",
+      "errorCode": null,
+      "surface": "mobile",
+      "message": "This place has enabled additional hardware security requirements. Please run Roblox on a supported device.",
+      "reasonSummary": "The experience requires Android remote attestation checks the device cannot pass: rooted device, unlocked bootloader, custom ROM, emulator, or older hardware without attestation support.",
+      "quickFix": "Reinstall Roblox from an official store, update Android, remove root or custom firmware and re-lock the bootloader, or play on a supported device.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/49648939984916-Android-Remote-Attestation"
+      ],
+      "sortOrder": 105,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Device or OS no longer supported",
+      "slug": "mobile-device-not-supported",
+      "errorCode": null,
+      "surface": "mobile",
+      "message": "Your device is not compatible with this version",
+      "reasonSummary": "Roblox raised its minimum requirements, so older phones and tablets cannot install the current app or can no longer connect with the version they have.",
+      "quickFix": "Update the device OS if an update exists; otherwise the only fix is playing on a supported device.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203313470-iOS-App-Technical-Issues"
+      ],
+      "sortOrder": 106,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "iOS App Store update loop",
+      "slug": "mobile-ios-update-loop",
+      "errorCode": null,
+      "surface": "mobile",
+      "message": null,
+      "reasonSummary": "The app pushes you to the App Store to update, but the store shows Open instead of Update, bouncing you back and forth; an App Store cache issue.",
+      "quickFix": "Clear the App Store cache by tapping the same bottom tab ten times, force-close and reopen the App Store, then update the app.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/360000361586-iOS-App-Update-Loop"
+      ],
+      "sortOrder": 107,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "No Network error on iOS",
+      "slug": "mobile-no-network-ios",
+      "errorCode": null,
+      "surface": "mobile",
+      "message": "No Network. Please retry when connected to the internet.",
+      "reasonSummary": "An outdated version of the Roblox iOS app can show this error over WiFi even when the connection works.",
+      "quickFix": "Update the Roblox app from the App Store, then reopen it and try again.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/25436587788948-Error-message-No-Network-Please-retry-when-connected-to-the-internet-on-iOS"
+      ],
+      "sortOrder": 108,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox keeps crashing on iOS or Android",
+      "slug": "mobile-app-keeps-crashing",
+      "errorCode": null,
+      "surface": "mobile",
+      "message": null,
+      "reasonSummary": "The app closes to the home screen mid-game or on load, usually from low RAM, nearly full storage, graphics quality set too high for the device, corrupted app data, or an outdated app or OS.",
+      "quickFix": "Restart the device, close background apps, free up storage, and lower in-game graphics quality. On Android clear the app's cache; on iOS reinstall the app.",
+      "articleSlug": "how-to-fix-roblox-crashing-on-mobile",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203313470-iOS-App-Technical-Issues"
+      ],
+      "sortOrder": 109,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Unable to contact server",
+      "slug": "mobile-unable-to-contact-server",
+      "errorCode": null,
+      "surface": "mobile",
+      "message": "Unable to contact server. Please check your internet connection.",
+      "reasonSummary": "The app cannot reach Roblox's services, from a dropped or switching connection, DNS problems, a restrictive school or work network, a VPN, or a Roblox-side outage.",
+      "quickFix": "Toggle airplane mode or switch between Wi-Fi and mobile data, disable any VPN, and restart the app. Check the Roblox status page if it hits every game.",
+      "articleSlug": "how-to-fix-roblox-unable-to-contact-server",
+      "sourceUrls": [
+        "https://devforum.roblox.com/t/android-connection-error-unable-to-contact-server-intrusive-popups-despite-functioning-connection/2697028"
+      ],
+      "sortOrder": 110,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Voice chat not working",
+      "slug": "voice-chat-not-working",
+      "errorCode": null,
+      "surface": "voice-chat",
+      "message": null,
+      "reasonSummary": "Voice requires an eligible age-checked account and a supported experience. If the controls appear but audio fails, microphone permission, mute state, or the selected input device is usually responsible.",
+      "quickFix": "Complete Roblox's age check, join voice inside an experience that supports it, then unmute and grant Roblox microphone access in the device settings.",
+      "articleSlug": "how-to-fix-roblox-voice-chat-not-working",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/34506487801364-How-do-I-turn-on-Voice-Chat",
+        "https://en.help.roblox.com/hc/en-us/articles/4405807645972-Voice-FAQ"
+      ],
+      "sortOrder": 111,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Error Code 270",
+      "slug": "studio-270",
+      "errorCode": "270",
+      "surface": "studio",
+      "message": "Lost connection to Team Create. Please reconnect. (Error Code: 270)",
+      "reasonSummary": "Roblox Studio lost its connection to the Team Create session, usually from de-synchronization of the editing place or a dropped connection.",
+      "quickFix": "Reconnect to the Team Create session, check your connection, and restart Studio if the session will not resync.",
+      "articleSlug": "how-to-fix-roblox-error-code-270",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/36674588848276-Error-Code-270-Lost-Connection-to-Team-Create"
+      ],
+      "sortOrder": 112,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Roblox Studio won't open",
+      "slug": "studio-wont-open",
+      "errorCode": null,
+      "surface": "studio",
+      "message": null,
+      "reasonSummary": "Studio hangs on its splash screen or never appears, from corrupted Studio files, blocked network access during startup, security software interference, or leftover Roblox processes.",
+      "quickFix": "End all Roblox processes, delete the local Roblox app folders, and reinstall Studio from create.roblox.com. Make sure your firewall allows Roblox Studio.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203552894-General-Roblox-Studio-Issues"
+      ],
+      "sortOrder": 113,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Studio: Too many logins attempted from this network",
+      "slug": "studio-too-many-logins",
+      "errorCode": null,
+      "surface": "studio",
+      "message": "Too many logins were attempted from this network. You must log in through a web browser.",
+      "reasonSummary": "A security layer that appears when logging into Studio on shared networks, commonly school networks.",
+      "quickFix": "Open a web browser, log into your Roblox account there first, then log into Studio.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/115005744663-Troubleshooting-Education-Networks"
+      ],
+      "sortOrder": 114,
+      "lastVerifiedAt": "2026-07-21"
+    },
+    {
+      "name": "Studio: Upload Failed / Place Too Big",
+      "slug": "studio-upload-failed",
+      "errorCode": null,
+      "surface": "studio",
+      "message": null,
+      "reasonSummary": "A Studio publish or upload fails, usually because the place is too big or has too many items and scripts.",
+      "quickFix": "Save the place locally, test-publish a blank place to confirm the slot works, then reduce the place's size or revert to an earlier version.",
+      "articleSlug": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203312890-Upload-Failed-Place-Too-Big"
+      ],
+      "sortOrder": 115,
+      "lastVerifiedAt": "2026-07-21"
+    }
+  ]
+}

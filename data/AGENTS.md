@@ -76,8 +76,9 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Color code catalog for the color-code pages.
 - `data/decal-ids/*`
   - Decal ID datasets produced by the scrape/enrich scripts.
-- `data/roblox errros/roblox-errors.json`
-  - Static Roblox error reference data.
+- `data/roblox-errors/roblox-errors.json`
+  - Roblox error reference data behind `/catalog/roblox-errors-and-fixes`.
+  - Loaded by `apps/web/src/app/(site)/catalog/roblox-errors-and-fixes/page-data.tsx`. `articleSlug` links a card to its `/articles/<slug>` fix guide; `surface` must match a section in that route's `ERROR_SECTIONS`.
 - `src/data/slug_oldslugs.json`
   - Legacy slug redirect map for the public fallback route.
 

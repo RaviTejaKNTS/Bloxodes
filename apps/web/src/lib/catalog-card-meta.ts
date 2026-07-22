@@ -17,7 +17,8 @@ export type CatalogIconKey =
   | "palette"
   | "terminal"
   | "smile"
-  | "sparkles";
+  | "sparkles"
+  | "wrench";
 
 export type CatalogCardMeta = {
   /** Clean, short display name for the card (full title still used on the page). */
@@ -105,6 +106,7 @@ const CATALOG_CONFIG: Record<string, CatalogConfig> = {
     source: { kind: "avatar", code: "roblox-makeup" }
   },
   "roblox-color-codes": { shortLabel: "Color Codes", unit: "color codes", icon: "palette", source: null },
+  "roblox-errors-and-fixes": { shortLabel: "Errors & Fixes", unit: "errors", icon: "wrench", source: null },
   "roblox-decal-ids": { shortLabel: "Decal IDs", unit: "decal IDs", icon: "image", source: { kind: "decal" } },
   "admin-commands": { shortLabel: "Admin Commands", unit: "commands", icon: "terminal", source: null }
 };

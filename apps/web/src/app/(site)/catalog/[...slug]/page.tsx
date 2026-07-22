@@ -27,6 +27,7 @@ const RESERVED_CATALOG_PREFIXES = [
   "roblox-emotes",
   "roblox-animations",
   "roblox-makeup",
+  "roblox-errors-and-fixes",
   "the-forge",
   "grow-a-garden"
 ];
