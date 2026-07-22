@@ -22,7 +22,6 @@ export type PromoRewardItem = {
   promoCode: string | null;
   eventName: string | null;
   requirementText: string | null;
-  claimInstructions: string | null;
   destinationUrl: string | null;
   robloxItemUrl: string | null;
   thumbnailUrl: string | null;
@@ -30,123 +29,94 @@ export type PromoRewardItem = {
   sortOrder: number;
 };
 
-type FilterKey = "all" | "web" | "experience" | "event" | "challenge";
+type FilterKey = "promo" | "experience" | "past";
 
 const FILTERS: Array<{ key: FilterKey; label: string }> = [
-  { key: "all", label: "All rewards" },
-  { key: "web", label: "Web codes" },
-  { key: "experience", label: "Experience codes" },
-  { key: "event", label: "Event rewards" },
-  { key: "challenge", label: "Creator challenges" }
+  { key: "promo", label: "Promo codes" },
+  { key: "experience", label: "In-game codes" },
+  { key: "past", label: "Past rewards" }
 ];
 
-function claimTypeLabel(claimType: PromoRewardClaimType) {
-  switch (claimType) {
-    case "web_promo_code":
-      return "Web promo code";
-    case "experience_code":
-      return "Experience code";
-    case "event_task":
-      return "Event reward";
-    case "creator_challenge":
-      return "Creator challenge";
-    case "catalog_claim":
-      return "Catalog claim";
-    case "collaboration":
-      return "Collaboration";
-    case "gift_card_promotion":
-      return "Gift card promotion";
-  }
-}
-
 function matchesFilter(item: PromoRewardItem, filter: FilterKey) {
-  if (filter === "all") return true;
-  if (filter === "web") return item.claimType === "web_promo_code";
-  if (filter === "experience") return item.claimType === "experience_code";
-  if (filter === "challenge") return item.claimType === "creator_challenge";
-  return ["event_task", "catalog_claim", "collaboration", "gift_card_promotion"].includes(item.claimType);
+  if (filter === "promo") {
+    return item.claimType === "web_promo_code" && item.status === "verified_claimable";
+  }
+  if (filter === "experience") {
+    return item.claimType === "experience_code" && !["expired", "unavailable"].includes(item.status);
+  }
+  return ["expired", "unavailable"].includes(item.status);
 }
 
 function matchesQuery(item: PromoRewardItem, query: string) {
-  return [
-    item.rewardName,
-    item.promoCode,
-    item.eventName,
-    item.requirementText,
-    item.claimInstructions,
-    String(item.assetId)
-  ].some((value) => value?.toLowerCase().includes(query));
+  return [item.rewardName, item.promoCode, item.eventName, item.requirementText].some((value) =>
+    value?.toLowerCase().includes(query)
+  );
+}
+
+function typeLabel(item: PromoRewardItem) {
+  if (item.claimType === "web_promo_code") return "Roblox promo code";
+  if (item.claimType === "experience_code") return "In-game code";
+  return "Reward item";
 }
 
 function actionLabel(item: PromoRewardItem) {
-  if (item.claimType === "web_promo_code") return "Open Roblox redemption";
-  if (item.claimType === "experience_code") return "Open the experience";
+  if (item.claimType === "web_promo_code") return "Redeem on Roblox";
+  if (item.claimType === "experience_code") return "Play on Roblox";
   return "Open on Roblox";
 }
 
-function statusDisplay(status: PromoRewardItem["status"]) {
-  switch (status) {
-    case "verified_claimable":
-      return {
-        label: "Verified claimable",
-        className: "border-emerald-500/35 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
-      };
-    case "unavailable":
-      return {
-        label: "Item unavailable",
-        className: "border-rose-500/35 bg-rose-500/10 text-rose-700 dark:text-rose-300"
-      };
-    case "expired":
-      return {
-        label: "Expired",
-        className: "border-rose-500/35 bg-rose-500/10 text-rose-700 dark:text-rose-300"
-      };
-    default:
-      return {
-        label: "Source listed",
-        className: "border-amber-500/35 bg-amber-500/10 text-amber-700 dark:text-amber-300"
-      };
-  }
+function experienceName(item: PromoRewardItem) {
+  if (item.eventName) return item.eventName;
+  if (item.destinationUrl?.includes("/6901029464/")) return "Mansion of Wonder";
+  if (item.destinationUrl?.includes("/5306359293/")) return "Island of Move";
+  return null;
 }
 
-function PromoRewardCard({ item, eager = false }: { item: PromoRewardItem; eager?: boolean }) {
-  const displayName = item.rewardName || `Roblox item ${item.assetId}`;
-  const status = statusDisplay(item.status);
+function resultLabel(filter: FilterKey, count: number) {
+  const noun = filter === "promo" ? "promo code" : filter === "experience" ? "in-game code" : "past reward";
+  return `${count} ${noun}${count === 1 ? "" : "s"}`;
+}
+
+function PromoRewardRow({ item, eager = false }: { item: PromoRewardItem; eager?: boolean }) {
+  const displayName = item.rewardName || `Roblox reward ${item.assetId}`;
+  const isPast = item.status === "expired" || item.status === "unavailable";
+  const experience = experienceName(item);
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface/60 transition hover:border-accent/40">
-      <div className="relative aspect-square w-full border-b border-border/50 bg-background/70">
+    <article className="flex gap-4 rounded-lg border border-border/70 bg-surface/60 p-3 sm:items-center sm:p-4">
+      <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-md bg-background/70 sm:h-28 sm:w-28">
         {item.thumbnailUrl ? (
           <Image
             src={item.thumbnailUrl}
-            alt={`${displayName} Roblox reward`}
+            alt={`${displayName} Roblox item`}
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-contain p-3"
+            sizes="112px"
+            className="object-contain p-2"
             priority={eager}
             unoptimized
           />
         ) : (
-          <div className="flex h-full items-center justify-center px-4 text-center text-sm text-muted">
-            Roblox thumbnail unavailable
-          </div>
+          <div className="flex h-full items-center justify-center px-2 text-center text-xs text-muted">No image</div>
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-4">
-        <div className="flex flex-wrap gap-2">
-          <span className="rounded-full border border-border/60 bg-background/70 px-2.5 py-1 text-[11px] font-semibold text-foreground">
-            {claimTypeLabel(item.claimType)}
-          </span>
-          <span className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${status.className}`}>
-            {status.label}
-          </span>
+      <div className="min-w-0 flex-1 space-y-2.5">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-semibold text-muted">{typeLabel(item)}</span>
+          {isPast ? (
+            <span className="rounded-full border border-border/70 bg-background px-2 py-0.5 text-[11px] font-semibold text-muted">
+              {item.status === "expired" ? "Expired" : "Unavailable"}
+            </span>
+          ) : null}
         </div>
 
-        <h3 className="text-lg font-semibold leading-snug text-foreground">{displayName}</h3>
+        <div>
+          <h3 className="text-base font-semibold leading-snug text-foreground sm:text-lg">{displayName}</h3>
+          {experience ? <p className="mt-0.5 text-sm text-muted">Use in {experience}</p> : null}
+        </div>
 
         {item.promoCode ? (
-          <div className="flex items-center justify-between gap-3 rounded-md border border-border/60 bg-background/70 px-3 py-2">
+          <div className="flex max-w-md items-center justify-between gap-3 rounded-md border border-border/60 bg-background/70 px-3 py-2">
             <code className="min-w-0 truncate text-sm font-semibold text-foreground">{item.promoCode}</code>
             <CopyCodeButton
               code={item.promoCode}
@@ -157,24 +127,15 @@ function PromoRewardCard({ item, eager = false }: { item: PromoRewardItem; eager
               }}
             />
           </div>
-        ) : null}
-
-        {item.eventName ? (
+        ) : item.requirementText ? (
           <p className="text-sm leading-relaxed text-muted">
-            <span className="font-semibold text-foreground">Source event: </span>
-            {item.eventName}
+            <span className="font-semibold text-foreground">How to get it: </span>
+            {item.requirementText}
           </p>
         ) : null}
 
-        {item.requirementText || item.claimInstructions ? (
-          <p className="text-sm leading-relaxed text-muted">
-            <span className="font-semibold text-foreground">How it was listed: </span>
-            {item.requirementText || item.claimInstructions}
-          </p>
-        ) : null}
-
-        <div className="mt-auto flex flex-wrap gap-2 pt-1">
-          {item.destinationUrl ? (
+        <div className="flex flex-wrap gap-2">
+          {!isPast && item.destinationUrl ? (
             <a
               href={item.destinationUrl}
               target="_blank"
@@ -197,7 +158,7 @@ function PromoRewardCard({ item, eager = false }: { item: PromoRewardItem; eager
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-md border border-border/70 bg-background px-3 py-2 text-xs font-semibold text-foreground transition hover:border-accent/40 hover:text-accent"
             >
-              View reward
+              View item
             </a>
           ) : null}
         </div>
@@ -208,47 +169,30 @@ function PromoRewardCard({ item, eager = false }: { item: PromoRewardItem; eager
 
 export function PromoRewardsBrowser({ items }: { items: PromoRewardItem[] }) {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<FilterKey>("all");
+  const [filter, setFilter] = useState<FilterKey>("promo");
   const normalizedQuery = query.trim().toLowerCase();
+  const availableItems = useMemo(() => items.filter((item) => matchesFilter(item, filter)), [filter, items]);
 
   const filteredItems = useMemo(
     () =>
-      items.filter(
-        (item) => matchesFilter(item, filter) && (!normalizedQuery || matchesQuery(item, normalizedQuery))
-      ),
-    [filter, items, normalizedQuery]
+      availableItems.filter((item) => !normalizedQuery || matchesQuery(item, normalizedQuery)),
+    [availableItems, normalizedQuery]
   );
 
-  if (!items.length) {
-    return (
-      <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-        No promotional rewards are available yet. Check back after the next source refresh.
-      </div>
-    );
-  }
-
   return (
-    <section aria-label="Roblox promotional rewards browser" className="catalog-surface space-y-6">
-      <div className="space-y-3">
-        <label htmlFor="promo-reward-search" className="sr-only">
-          Search promotional rewards
-        </label>
-        <input
-          id="promo-reward-search"
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search reward, code, event, or asset ID"
-          className="w-full rounded-md border border-border/60 bg-background px-4 py-3 text-base text-foreground outline-none transition placeholder:text-muted focus:border-accent/50 focus:ring-2 focus:ring-accent/15"
-        />
-        <div className="flex flex-wrap gap-2" aria-label="Filter promotional rewards">
+    <section aria-label="Roblox promo codes and reward items" className="catalog-surface space-y-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap gap-2" aria-label="Choose reward type">
           {FILTERS.map((option) => (
             <button
               key={option.key}
               type="button"
-              onClick={() => setFilter(option.key)}
+              onClick={() => {
+                setFilter(option.key);
+                setQuery("");
+              }}
               aria-pressed={filter === option.key}
-              className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+              className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
                 filter === option.key
                   ? "border-accent/50 bg-accent/10 text-accent"
                   : "border-border/60 bg-surface/60 text-muted hover:border-accent/30 hover:text-foreground"
@@ -259,19 +203,35 @@ export function PromoRewardsBrowser({ items }: { items: PromoRewardItem[] }) {
           ))}
         </div>
         <p className="text-sm text-muted" aria-live="polite">
-          Showing {filteredItems.length} of {items.length} rewards
+          {resultLabel(filter, filteredItems.length)}
         </p>
       </div>
 
+      {availableItems.length >= 8 ? (
+        <>
+          <label htmlFor="promo-reward-search" className="sr-only">
+            Search codes and rewards
+          </label>
+          <input
+            id="promo-reward-search"
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search codes and rewards"
+            className="w-full rounded-md border border-border/60 bg-background px-4 py-2.5 text-base text-foreground outline-none transition placeholder:text-muted focus:border-accent/50 focus:ring-2 focus:ring-accent/15"
+          />
+        </>
+      ) : null}
+
       {filteredItems.length ? (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="space-y-3">
           {filteredItems.map((item, index) => (
-            <PromoRewardCard key={item.id} item={item} eager={index < 4} />
+            <PromoRewardRow key={item.id} item={item} eager={index < 3} />
           ))}
         </div>
       ) : (
         <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center text-muted">
-          No rewards matched that search and filter.
+          {normalizedQuery ? "No codes or rewards match that search." : "Nothing is available in this section right now."}
         </div>
       )}
     </section>

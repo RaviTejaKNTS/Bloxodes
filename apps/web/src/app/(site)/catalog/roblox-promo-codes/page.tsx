@@ -8,9 +8,9 @@ import { CANONICAL, loadPromoRewards, renderPromoRewardsPage } from "./page-data
 export const revalidate = 21600;
 
 const CATALOG_CODE = "roblox-promo-codes";
-const FALLBACK_TITLE = `Roblox Promo Codes and Reward Items | ${SITE_NAME}`;
+const FALLBACK_TITLE = `Roblox Promo Codes and Free Items | ${SITE_NAME}`;
 const FALLBACK_DESCRIPTION =
-  "Browse Roblox promotional codes, experience codes, event rewards, and creator challenge items with their listed claim details.";
+  "Find Roblox promo codes and in-game codes for free items, with direct links to the correct Roblox redemption page or experience.";
 
 export async function generateMetadata(): Promise<Metadata> {
   const catalog = await getCatalogPageContentByCodes([CATALOG_CODE]);
@@ -43,7 +43,6 @@ export default async function RobloxPromoCodesPage() {
 
   return renderPromoRewardsPage({
     items: rewards.items,
-    sourceUpdatedAt: rewards.updatedAt,
     contentHtml
   });
 }

@@ -22,13 +22,11 @@ type PromoRewardRow = {
   promo_code: string | null;
   event_name: string | null;
   requirement_text: string | null;
-  claim_instructions: string | null;
   destination_url: string | null;
   roblox_item_url: string | null;
   thumbnail_url: string | null;
   status: "source_listed_unverified" | "verified_claimable" | "unavailable" | "expired";
   sort_order: number;
-  last_checked_at: string;
 };
 
 function mapPromoReward(row: PromoRewardRow): PromoRewardItem {
@@ -40,7 +38,6 @@ function mapPromoReward(row: PromoRewardRow): PromoRewardItem {
     promoCode: row.promo_code,
     eventName: row.event_name,
     requirementText: row.requirement_text,
-    claimInstructions: row.claim_instructions,
     destinationUrl: row.destination_url,
     robloxItemUrl: row.roblox_item_url,
     thumbnailUrl: row.thumbnail_url,
@@ -50,12 +47,12 @@ function mapPromoReward(row: PromoRewardRow): PromoRewardItem {
 }
 
 const loadCachedPromoRewards = publicContentCache(
-  async (): Promise<{ items: PromoRewardItem[]; updatedAt: string | null }> => {
+  async (): Promise<{ items: PromoRewardItem[] }> => {
     const supabase = supabaseAdmin();
     const { data, error } = await supabase
       .from("roblox_promo_rewards")
       .select(
-        "id, asset_id, reward_name, official_name, claim_type, promo_code, event_name, requirement_text, claim_instructions, destination_url, roblox_item_url, thumbnail_url, status, sort_order, last_checked_at"
+        "id, asset_id, reward_name, official_name, claim_type, promo_code, event_name, requirement_text, destination_url, roblox_item_url, thumbnail_url, status, sort_order"
       )
       .in("status", ["source_listed_unverified", "verified_claimable", "unavailable", "expired"])
       .order("sort_order", { ascending: true })
@@ -63,12 +60,15 @@ const loadCachedPromoRewards = publicContentCache(
 
     if (error) throw error;
     const rows = (data ?? []) as PromoRewardRow[];
-    const updatedAt = rows.reduce<string | null>((latest, row) => {
-      if (!latest) return row.last_checked_at;
-      return Date.parse(row.last_checked_at) > Date.parse(latest) ? row.last_checked_at : latest;
-    }, null);
+    const publicRows = rows.filter(
+      (row) =>
+        row.status === "verified_claimable" ||
+        row.status === "expired" ||
+        row.status === "unavailable" ||
+        row.claim_type === "experience_code"
+    );
 
-    return { items: rows.map(mapPromoReward), updatedAt };
+    return { items: publicRows.map(mapPromoReward) };
   },
   ["catalog:roblox-promo-codes:items"],
   { revalidate: 21600, tags: ["catalog-index", "catalog:roblox-promo-codes"] }
@@ -109,17 +109,15 @@ function buildItemListSchema(title: string, description: string, items: PromoRew
 
 export function renderPromoRewardsPage({
   items,
-  contentHtml,
-  sourceUpdatedAt
+  contentHtml
 }: {
   items: PromoRewardItem[];
   contentHtml: PageContentHtml | null;
-  sourceUpdatedAt: string | null;
 }) {
-  const title = contentHtml?.title?.trim() || "Roblox Promo Codes and Reward Items";
+  const title = contentHtml?.title?.trim() || "Roblox Promo Codes and Free Items";
   const description =
-    "Browse Roblox promotional codes, experience codes, event rewards, and creator challenge items with their listed claim details.";
-  const updatedAt = sourceUpdatedAt ?? contentHtml?.updatedAt ?? null;
+    "Find Roblox promo codes and in-game codes for free items, with direct links to the correct Roblox redemption page or experience.";
+  const updatedAt = contentHtml?.updatedAt ?? null;
   const introNodes = contentHtml?.introHtml
     ? renderPageContentNodes(contentHtml.introHtml, "promo-rewards-intro")
     : null;
@@ -170,19 +168,13 @@ export function renderPromoRewardsPage({
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
         {introNodes}
-
-        <aside className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm leading-relaxed text-foreground">
-          <span className="font-semibold">Availability note: </span>
-          A source listing records how a reward was offered. It does not guarantee that an older code, event, or challenge can still be claimed. Check the status label and the linked Roblox page before spending time on it.
-        </aside>
-
-        <CatalogAdSlot />
         <PromoRewardsBrowser items={items} />
         <CatalogAdSlot />
 
         {descriptionNodes.length ? descriptionNodes : null}
         {howNodes}
         {faqNodes.length ? <ContentFaq items={faqNodes} /> : null}
+        <CatalogAdSlot />
       </section>
 
       {contentHtml?.id ? <CommentsSection entityType="catalog" entityId={contentHtml.id} /> : null}
