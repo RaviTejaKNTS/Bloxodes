@@ -8,21 +8,21 @@
     "catalogCode": "steal-a-brainrot-gears",
     "itemFields": [
       "cash",
+      "cardSummary",
       "description",
       "use",
       "rebirthsRequired",
       "simplifiedUse",
-      "cooldown",
-      "sound"
+      "cooldown"
     ],
     "columns": [
       "cash",
+      "cardSummary",
       "description",
       "use",
       "rebirthsRequired",
       "simplifiedUse",
-      "cooldown",
-      "sound"
+      "cooldown"
     ],
     "display": {
       "groupLabel": "Group",
@@ -32,38 +32,67 @@
       "badgeField": null,
       "subtitleFields": [],
       "descriptionField": "description",
-      "cardDescriptionField": "description",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
+        "cardSummary",
         "cash",
-        "description",
-        "use",
-        "rebirthsRequired",
-        "simplifiedUse",
-        "cooldown"
-      ],
-      "tableFields": [
-        "cash",
-        "description",
-        "use",
         "rebirthsRequired",
         "simplifiedUse",
         "cooldown",
-        "sound"
+        "use"
       ],
-      "fieldPresentation": null
+      "tableFields": [
+        "cash",
+        "rebirthsRequired",
+        "simplifiedUse",
+        "cooldown",
+        "cardSummary",
+        "description",
+        "use"
+      ],
+      "fieldPresentation": {
+        "cash": {
+          "kind": "chip",
+          "label": "Cash"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "description": {
+          "kind": "detail",
+          "label": "Description"
+        },
+        "use": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "rebirthsRequired": {
+          "kind": "chip",
+          "label": "Rebirth Requirement"
+        },
+        "simplifiedUse": {
+          "kind": "normal",
+          "label": "Role"
+        },
+        "cooldown": {
+          "kind": "chip",
+          "label": "Cooldown"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
         "name": "Slap",
+        "cardSummary": "Longer-reach starter slap for knocking back thieves and recovering stolen Brainrots.",
         "cash": "$500",
         "description": "An average hand to slap thieves and send them flying!",
-        "use": "A stronger alternative to the default Baseball Bat - allows you to smack thieves and return your brainrots. It has longer range than the bat.",
+        "use": "A stronger alternative to the default Bat that lets you knock back thieves and return stolen Brainrots. It has more reach than the Bat.",
         "rebirthsRequired": "No rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "slap",
@@ -75,13 +104,13 @@
     {
       "item": {
         "name": "Speed Coil",
+        "cardSummary": "A held coil that raises move speed by 50% for chasing or escaping.",
         "cash": "$750",
         "description": "Zoom around the map with additional speed.",
         "use": "While equipped, increases your move speed by 50% (from 34 to 51).",
         "rebirthsRequired": "No rebirths required",
         "simplifiedUse": "Improves mobility",
-        "cooldown": "N/A",
-        "sound": "When the player equips in hand: https://stealabrainrot.fandom.com/wiki/File:Speed_coil_sound.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "speed-coil",
@@ -93,13 +122,13 @@
     {
       "item": {
         "name": "Trap",
+        "cardSummary": "Place up to five traps that freeze thieves for 7 seconds when triggered.",
         "cash": "$1K",
         "description": "Place traps that freeze thieves for 7 seconds",
         "use": "They can be placed on the ground anywhere on the map and can trigger as soon as they are placed. Each player can have up to 5 Traps in the combined space of the map and/or their inventory (for example, there can be a maximum of 5 only on the map, 5 only in the inventory, or anywhere in between such as 2 on the map and 3 in the inventory). If the maximum has been reached, the player will not be able to buy any more Traps until one gets triggered. Note that other players can move around or over placed Traps.",
         "rebirthsRequired": "No rebirths required",
         "simplifiedUse": "Traps players",
-        "cooldown": "N/A",
-        "sound": "When the player gets stuck: https://stealabrainrot.fandom.com/wiki/File:Trap_sound.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "trap",
@@ -111,13 +140,13 @@
     {
       "item": {
         "name": "Iron Slap",
+        "cardSummary": "A Rebirth 1 slap upgrade with more knockback than the basic Slap.",
         "cash": "$2.5K",
         "description": "Heavy iron slap that knocks players flying!",
         "use": "Stronger version of the Slap.",
         "rebirthsRequired": "1 rebirth required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "iron-slap",
@@ -129,13 +158,13 @@
     {
       "item": {
         "name": "Gravity Coil",
+        "cardSummary": "A held coil that doubles jump height and slows your fall.",
         "cash": "$3K",
         "description": "Reduced gravity coil lets you jump extra high!",
         "use": "While equipped, increases your jump height by 100% (from 7.2 to 14.4). Also reduces your gravity, making you fall slower.",
         "rebirthsRequired": "1 rebirth required",
         "simplifiedUse": "Increases mobility",
-        "cooldown": "N/A",
-        "sound": "When the player equips it in the hand: https://stealabrainrot.fandom.com/wiki/File:Gravity_coil_sound.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "gravity-coil",
@@ -147,13 +176,13 @@
     {
       "item": {
         "name": "Bee Launcher",
-        "cash": "$ 10K",
+        "cardSummary": "A ranged bee attack that disrupts a target's controls and vision for 5 seconds.",
+        "cash": "$10K",
         "description": "Release bees to attack your opponent and invert their controls!",
         "use": "Reverses affected player's controls, zooms their FOV, and applies a yellow tint to their vision. Bees can be seen flying around the affected player. The effect lasts 5 seconds.",
         "rebirthsRequired": "1 rebirth required",
         "simplifiedUse": "Ranged weapon",
-        "cooldown": "10s",
-        "sound": "The sound of the player affected by the Bee Launcher: https://stealabrainrot.fandom.com/wiki/File:Bee_launcher_sound.mp3"
+        "cooldown": "10s"
       },
       "system": {
         "slug": "bee-launcher",
@@ -165,13 +194,13 @@
     {
       "item": {
         "name": "Gold Slap",
+        "cardSummary": "A Rebirth 2 slap upgrade that hits harder than Iron Slap.",
         "cash": "$15K",
         "description": "Powerful golden slap that knocks enemies farther back.",
         "use": "Stronger version of the Iron Slap.",
         "rebirthsRequired": "2 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "gold-slap",
@@ -183,13 +212,13 @@
     {
       "item": {
         "name": "Coil Combo",
+        "cardSummary": "Combines the Speed Coil and Gravity Coil boosts in one held item.",
         "cash": "$20K",
         "description": "Speed and jump coil combined for a double boost.",
         "use": "Provides the effects of the Speed and Gravity Coils at the same time.",
         "rebirthsRequired": "2 rebirths required",
         "simplifiedUse": "Increases mobility",
-        "cooldown": "N/A",
-        "sound": "When the player equips: https://stealabrainrot.fandom.com/wiki/File:Coil_combo_sound.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "coil-combo",
@@ -201,13 +230,13 @@
     {
       "item": {
         "name": "Rage Table",
+        "cardSummary": "Throws a short-range table that ragdolls players it touches.",
         "cash": "$25K",
         "description": "Throw a table to fling players and return your Brainrots.",
         "use": "When used, a screaming sound is made and a table spawns in front of the player. After a short delay, the table moves in the direction the item was used and goes a short distance. Other players who touch the table will be ragdolled.",
         "rebirthsRequired": "2 rebirths required",
         "simplifiedUse": "Ranged weapon",
-        "cooldown": "4s",
-        "sound": "The sound when the table is thrown: https://stealabrainrot.fandom.com/wiki/File:Rage_table_sound.mp3"
+        "cooldown": "4s"
       },
       "system": {
         "slug": "rage-table",
@@ -219,13 +248,13 @@
     {
       "item": {
         "name": "Diamond Slap",
+        "cardSummary": "A stronger Gold Slap; its charge-up description is misleading because it cannot charge.",
         "cash": "$50K",
         "description": "Charge up* a diamond slap to knock others away. *This text is misleading because it cannot actually be charged.",
         "use": "Stronger version of the Gold Slap.",
         "rebirthsRequired": "3 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "diamond-slap",
@@ -237,13 +266,13 @@
     {
       "item": {
         "name": "Grapple Gun",
+        "cardSummary": "Fires a hook that pulls you to the point it hits.",
         "cash": "$75K",
         "description": "Swing across the map with speed!",
         "use": "Shoots a grappling hook that pulls the player to the point where the hook collided with an object, which can be used to efficiently reach certain places.",
         "rebirthsRequired": "3 rebirths required",
         "simplifiedUse": "Ranged weapon",
-        "cooldown": "3s",
-        "sound": "When the hook hits something: https://stealabrainrot.fandom.com/wiki/File:Grapple-hook-sound.mp3"
+        "cooldown": "3s"
       },
       "system": {
         "slug": "grapple-gun",
@@ -255,13 +284,13 @@
     {
       "item": {
         "name": "Taser",
+        "cardSummary": "A ranged stun that ragdolls the target for 3 seconds.",
         "cash": "$100K",
         "description": "Stun enemies with a taser to fling them and return your Brainrots.",
         "use": "Forces affected player into ragdoll mode for 3 seconds.",
         "rebirthsRequired": "3 rebirths required",
         "simplifiedUse": "Ranged weapon",
-        "cooldown": "5s",
-        "sound": "When the taser gun hits a player: https://stealabrainrot.fandom.com/wiki/File:Taser-gun-sound.mp3"
+        "cooldown": "5s"
       },
       "system": {
         "slug": "taser",
@@ -273,13 +302,13 @@
     {
       "item": {
         "name": "Emerald Slap",
+        "cardSummary": "A Rebirth 4 slap upgrade with more force than Diamond Slap.",
         "cash": "$200K",
         "description": "Gem-infused slap that sends enemies flying with extra force.",
         "use": "Stronger version of the Diamond Slap.",
         "rebirthsRequired": "4 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "emerald-slap",
@@ -291,13 +320,13 @@
     {
       "item": {
         "name": "Invisibility Cloak",
+        "cardSummary": "Turns you invisible and doubles move speed until reused or unequipped.",
         "cash": "$300K",
         "description": "Cloak yourself to vanish and sprint at super speed.",
         "use": "When used, turns you invisible and increases your speed by 100% (from 34 to 68). The effect lasts until the item is used again or unequipped.",
-        "rebirthsRequired": "4 rebirths required Invisibility/Increases mobility",
+        "rebirthsRequired": "4 rebirths required",
         "simplifiedUse": "Increases mobility",
-        "cooldown": "N/A",
-        "sound": "When it makes the player invisible: https://stealabrainrot.fandom.com/wiki/File:Invisibility-cloak-sound.mp3 When it makes the player visible: https://stealabrainrot.fandom.com/wiki/File:Invisibility-cloak-sound-2.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "invisibility-cloak",
@@ -309,13 +338,13 @@
     {
       "item": {
         "name": "Boogie Bomb",
+        "cardSummary": "An area bomb that makes nearby players drop Brainrots and dance for 10 seconds.",
         "cash": "$500K",
         "description": "Throw this at thieves to make them dance!",
         "use": "When touched by another player, it explodes, causing all players in the area of effect to drop any held Brainrots and start dancing (more specifically, performing Fortnite's \"Take the L\" dance) for 10 seconds. The affected players's FOV also constantly changes.",
         "rebirthsRequired": "4 rebirths required",
         "simplifiedUse": "Area weapon",
-        "cooldown": "10s",
-        "sound": "When the player is affected by the boogie bomb: https://stealabrainrot.fandom.com/wiki/File:Boogie-Bomb_sound.mp3"
+        "cooldown": "10s"
       },
       "system": {
         "slug": "boogie-bomb",
@@ -327,13 +356,13 @@
     {
       "item": {
         "name": "Ruby Slap",
+        "cardSummary": "A Rebirth 5 slap upgrade with more force than Emerald Slap.",
         "cash": "$1M",
         "description": "Ultimate ruby-powered slap sends enemies flying far.",
         "use": "Stronger version of the Emerald Slap.",
         "rebirthsRequired": "5 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "ruby-slap",
@@ -345,31 +374,31 @@
     {
       "item": {
         "name": "Medusa’s Head",
+        "cardSummary": "Petrifies nearby players for 3 seconds, then leaves them ragdolled.",
         "cash": "$5M",
-        "description": "Turn enemies into stone and recover stolen brainrots. Turns all other players in the area of effect into stone, making them immobile and unable to use some gears for 3 seconds. Players enter ragdoll mode when the effect ends.",
-        "use": "5 rebirths required",
-        "rebirthsRequired": "Melee weapon",
-        "simplifiedUse": "25s",
-        "cooldown": "Area weapon",
-        "sound": "When Medusa's head is used: https://stealabrainrot.fandom.com/wiki/File:Medusa_s-head-sound.mp3"
+        "description": "Petrifies nearby players so you can interrupt thieves and recover stolen Brainrots.",
+        "use": "Turns other players in its area to stone for 3 seconds, preventing movement and some gear use. Affected players ragdoll when the effect ends.",
+        "rebirthsRequired": "5 rebirths required",
+        "simplifiedUse": "Area weapon",
+        "cooldown": "25s"
       },
       "system": {
         "slug": "medusa-s-head",
         "section": "Items",
         "sortOrder": 17,
-        "image": null
+        "image": "/Steal%20a%20Brainrot/Gears/medusa-s-head.webp"
       }
     },
     {
       "item": {
         "name": "Dark Matter Slap",
+        "cardSummary": "A Rebirth 6 slap upgrade with more force than Ruby Slap.",
         "cash": "$1.5M",
         "description": "Send enemies flying with the power of dark matter.",
         "use": "Stronger version of the Ruby Slap.",
         "rebirthsRequired": "6 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "dark-matter-slap",
@@ -381,13 +410,13 @@
     {
       "item": {
         "name": "Web Slinger",
+        "cardSummary": "Traps a player in a web for 10 seconds so you can pull them closer.",
         "cash": "$2M",
         "description": "Pull enemies and trap them close to you! Use this in many ways to your advantage..",
         "use": "Shoots out a web, which tangles hit players. The tangled players are immobile for 10 seconds, and can be pulled by you. Players caught in the web will not be able to use gears.",
         "rebirthsRequired": "6 rebirths required",
         "simplifiedUse": "Ranged Weapon",
-        "cooldown": "12s",
-        "sound": "When the Web Slinger is used: https://stealabrainrot.fandom.com/wiki/File:Web_slinger_sound.mp3 When the Web Slinger hits a player: https://stealabrainrot.fandom.com/wiki/File:Web-slinger-sound-2.mp3 When the Web Slinger cooldown ends: https://stealabrainrot.fandom.com/wiki/File:Web_slinger_sound_3.mp3"
+        "cooldown": "12s"
       },
       "system": {
         "slug": "web-slinger",
@@ -399,13 +428,13 @@
     {
       "item": {
         "name": "Flame Slap",
+        "cardSummary": "A Rebirth 7 slap upgrade with more force than Dark Matter Slap.",
         "cash": "$2.5M",
         "description": "Burn your enemies while sending them flying.",
         "use": "Stronger version of the Dark Matter Slap.",
         "rebirthsRequired": "7 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "flame-slap",
@@ -417,13 +446,13 @@
     {
       "item": {
         "name": "Quantum Cloner",
+        "cardSummary": "Creates a moving decoy that you can swap positions with after its cooldown.",
         "cash": "$3.5M",
         "description": "Clone yourself and use this tool as a decoy or for other reasons.",
         "use": "Creates an NPC clone of your character that occasionally moves around short distances. You can swap places with the NPC at any time. The cooldown for swapping positions with the clone and placing it is 10 seconds.",
         "rebirthsRequired": "7 rebirths required",
         "simplifiedUse": "Teleports the player",
-        "cooldown": "10s",
-        "sound": "When the clone is summoned: https://stealabrainrot.fandom.com/wiki/File:Quantum_cloner_sound.mp3 When the player switches positions with the clone: https://stealabrainrot.fandom.com/wiki/File:Quantum_cloner_sound_2.mp3"
+        "cooldown": "10s"
       },
       "system": {
         "slug": "quantum-cloner",
@@ -435,13 +464,13 @@
     {
       "item": {
         "name": "All-Seeing Sentry",
+        "cardSummary": "Deploys an automated defender that can detect players through walls or invisibility.",
         "cash": "$5M",
         "description": "Use this sentry turret as means of automated protection for you and your items.",
         "use": "Creates a sentry, which after 5 seconds of preparation will start automatically shooting other players that get in its range (even through walls or invisible players). It lasts for up to 1 minute and can be destroyed using Slap tools.",
         "rebirthsRequired": "7 rebirths required",
         "simplifiedUse": "Ranged weapon",
-        "cooldown": "5s",
-        "sound": "When the sentry is placed: https://stealabrainrot.fandom.com/wiki/File:All_seeing_sentry_sound.mp3 When the sentry is ready: https://stealabrainrot.fandom.com/wiki/File:All_seeing_sentry_2_sound.mp3 When the sentry shoots: https://stealabrainrot.fandom.com/wiki/File:All_seeing_sentry_3_sound.mp3"
+        "cooldown": "5s"
       },
       "system": {
         "slug": "all-seeing-sentry",
@@ -453,13 +482,13 @@
     {
       "item": {
         "name": "Nuclear Slap",
+        "cardSummary": "A Rebirth 8 slap upgrade with more force than Flame Slap.",
         "cash": "$6M",
         "description": "A radioactive slap that explodes with nuclear force.",
         "use": "Stronger version of the Flame Slap.",
         "rebirthsRequired": "8 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "nuclear-slap",
@@ -471,13 +500,13 @@
     {
       "item": {
         "name": "Rainbowrath Sword",
+        "cardSummary": "A melee sword whose third swing lunges forward and flings players.",
         "cash": "$10M",
         "description": "It may shine like a rainbow, but it strikes like thunder.",
         "use": "The Rainbowrath Sword has a higher swing cooldown than the slaps, however every third swing, you lunge forward, flinging any player in the way. Sometimes may glitch and kill the player hit.",
         "rebirthsRequired": "8 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When the player equips the sword in their hand: https://stealabrainrot.fandom.com/wiki/File:Rainbowrath-Sword-sound.mp3 When the player uses the sword: https://stealabrainrot.fandom.com/wiki/File:Rainbowrath-Sword-sound-2.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "rainbowrath-sword",
@@ -489,13 +518,13 @@
     {
       "item": {
         "name": "Galaxy Slap",
+        "cardSummary": "A Rebirth 9 slap upgrade with more force than Nuclear Slap.",
         "cash": "$15M",
         "description": "Slap on every hit with star power. Cosmic blasts on every hit.",
         "use": "Stronger version of the Nuclear Slap.",
         "rebirthsRequired": "9 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "galaxy-slap",
@@ -507,13 +536,13 @@
     {
       "item": {
         "name": "Laser Cape",
+        "cardSummary": "Combines invisibility detection, eye lasers, and a movement-speed boost.",
         "cash": "$20M",
         "description": "Puts on cape. Shoots laser from eyes. X-ray vision.",
         "use": "While equipped, you can see invisible players and shoot lasers from your eyes. The shooting ability has a 1 second cooldown and the lasers have somewhat limited range. Also increases your move speed by approximately 50%.",
         "rebirthsRequired": "9 rebirths required",
         "simplifiedUse": "Ranged weapon and x-ray vision",
-        "cooldown": "1s",
-        "sound": "When the laser cape is used: https://stealabrainrot.fandom.com/wiki/File:Laser-cape-sound.mp3"
+        "cooldown": "1s"
       },
       "system": {
         "slug": "laser-cape",
@@ -525,13 +554,13 @@
     {
       "item": {
         "name": "Glitched Slap",
+        "cardSummary": "A Rebirth 10 slap upgrade with more force than Galaxy Slap.",
         "cash": "$25M",
         "description": "Corrupt reality. Unleash chaotic glitches with every step.",
         "use": "Stronger version of the Galaxy Slap.",
         "rebirthsRequired": "10 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "glitched-slap",
@@ -543,13 +572,13 @@
     {
       "item": {
         "name": "Body Swap Potion",
+        "cardSummary": "Swaps places with a target and makes them drop any Brainrot they are carrying.",
         "cash": "$50M",
         "description": "Switch souls. Trade bodies and confuse your foes.",
-        "use": "Swaps your position with the affected player.",
+        "use": "Swaps your position with the targeted player and makes them drop any Brainrot they are holding.",
         "rebirthsRequired": "10 rebirths required",
         "simplifiedUse": "Teleports the player",
-        "cooldown": "30s",
-        "sound": "When the position is swapped with another player: https://stealabrainrot.fandom.com/wiki/File:Body_Swap_potion_sound.mp3"
+        "cooldown": "30s"
       },
       "system": {
         "slug": "body-swap-potion",
@@ -561,13 +590,13 @@
     {
       "item": {
         "name": "Splatter Slap",
+        "cardSummary": "A stronger Glitched Slap that briefly splatters the target's screen with paint.",
         "cash": "$75M",
         "description": "Slap. Splash. Style.",
         "use": "Stronger version of the Glitch Slap. Splatters the slapped player's screen with paint for a short time.",
         "rebirthsRequired": "11 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Hit_sound.mp3 When it hits a player: https://stealabrainrot.fandom.com/wiki/File:Hits_a_player.mp3|"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "splatter-slap",
@@ -579,13 +608,13 @@
     {
       "item": {
         "name": "Paintball Gun",
+        "cardSummary": "Slows targets, obscures their view, and briefly ragdolls them after five hits.",
         "cash": "$100M",
         "description": "A colorful weapon for playful defense and friendly battles.",
-        "use": "Shoots paintball bullets that can travel far distances. When a paintball bullet hits a player, their speed is redcued by 60% (from 34 to 13.6) and a paint splatter appears on their screen, slightly limiting their view. If a player is hit 5 times in a row, they briefly go into ragdoll mode. The splatter stays on the player's screen for 5 seconds.",
+        "use": "Shoots paintball bullets that can travel long distances. A hit reduces the target's speed by 60% (from 34 to 13.6) and leaves a paint splatter on their screen for 5 seconds. Five consecutive hits briefly ragdoll the target.",
         "rebirthsRequired": "11 rebirths required",
         "simplifiedUse": "Ranged weapon",
-        "cooldown": "0.3s",
-        "sound": "When the player uses the paintball gun: https://stealabrainrot.fandom.com/wiki/File:Paintball_gun_sound.mp3"
+        "cooldown": "0.3s"
       },
       "system": {
         "slug": "paintball-gun",
@@ -597,13 +626,13 @@
     {
       "item": {
         "name": "Heart Balloon",
+        "cardSummary": "Floats you upward for up to 10 seconds while reducing gravity.",
         "cash": "$150M",
         "description": "Press and hold to inflate the balloon and float higher in the sky.",
-        "use": "Allows you to float upwards, lasting 10 seconds. (Note: There is a height limit for the balloon; when it reaches the map’s height limit, the balloon will burst and the cooldown will start)",
+        "use": "Lets you float upward for up to 10 seconds. It pops at the map's height limit, then starts its cooldown. While active, it also reduces gravity so you fall more slowly.",
         "rebirthsRequired": "12 rebirths required",
         "simplifiedUse": "Increases mobility",
-        "cooldown": "15s",
-        "sound": "When the player uses the balloon: https://stealabrainrot.fandom.com/wiki/File:Heart_balloon_sound.mp3 When the player uses the balloon for more than 2 seconds and then stops using it: https://stealabrainrot.fandom.com/wiki/File:Heart_balloon_sound_2.mp3 When the balloon pops: https://stealabrainrot.fandom.com/wiki/File:Heart_balloon_sound_3.mp3"
+        "cooldown": "15s"
       },
       "system": {
         "slug": "heart-balloon",
@@ -615,13 +644,13 @@
     {
       "item": {
         "name": "Magnet",
+        "cardSummary": "Pulls a targeted player toward you and makes movement difficult.",
         "cash": "$200M",
         "description": "Use a magnetic force to throw your enemies off or to help your allies!",
         "use": "When used on a player, a yellow energy emerges from the magnet to the player affected by it, and a type of \"circle\" will appear around the player. The player affected by the magnet will have difficulty moving and will be pulled toward the magnet in the player's hand.",
         "rebirthsRequired": "12 rebirths required",
         "simplifiedUse": "Ranged weapon",
-        "cooldown": "15s",
-        "sound": "When the magnet attracts a person to it: https://stealabrainrot.fandom.com/wiki/File:Magnet_sound.mp3"
+        "cooldown": "15s"
       },
       "system": {
         "slug": "magnet",
@@ -633,13 +662,13 @@
     {
       "item": {
         "name": "Megaphone",
+        "cardSummary": "Ragdolls every player within range with a loud area blast.",
         "cash": "$250M",
         "description": "Jumpscare other players and ragdoll them!",
         "use": "Plays a loud sound, and ragdolls all players in the area of effect.",
         "rebirthsRequired": "13 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "20s",
-        "sound": "When it is used: https://stealabrainrot.fandom.com/wiki/File:Megaphone_sound.mp3"
+        "cooldown": "20s"
       },
       "system": {
         "slug": "megaphone",
@@ -651,13 +680,13 @@
     {
       "item": {
         "name": "Beehive",
+        "cardSummary": "Deploys an indestructible hive that disrupts nearby enemies for 5 seconds.",
         "cash": "$300M",
         "description": "Place this near your base for some extra defense",
         "use": "The player can therefore place it on the ground, and it lasts 60 seconds. The player who placed it on the ground cannot remove it until it ends. It works similarly to the Bee Launcher and the Sentinel. When placed, all nearby enemy players will have bees on their bodies, their controls become inverted (for example: you move to the right, but go to the left), their screen takes on a yellow tint, and their FOV zooms in. The effect lasts 5 seconds, and the hive cannot be destroyed by any player.",
         "rebirthsRequired": "13 rebirths required",
         "simplifiedUse": "Ranged weapon",
-        "cooldown": "60s",
-        "sound": "Sound of the player affected by the beehive: https://stealabrainrot.fandom.com/wiki/File:Bee_launcher_sound.mp3"
+        "cooldown": "60s"
       },
       "system": {
         "slug": "beehive",
@@ -669,13 +698,13 @@
     {
       "item": {
         "name": "Gummy Slap",
+        "cardSummary": "A slap that traps the target in a gummy bear for 3 seconds.",
         "cash": "$400M",
         "description": "Slap other players with a gummy bear, freezing them inside one on impact!",
         "use": "Improved version of the Splatter Slap. Also freezes the hit player inside of a gummy bear for 3 seconds, preventing them from moving or using Gears.",
         "rebirthsRequired": "14 rebirths required",
         "simplifiedUse": "Melee weapon",
-        "cooldown": "N/A",
-        "sound": "TBA"
+        "cooldown": "N/A"
       },
       "system": {
         "slug": "gummy-slap",
@@ -687,13 +716,13 @@
     {
       "item": {
         "name": "Subspace Mine",
+        "cardSummary": "Place up to two hidden mines that throw and ragdoll players in their blast.",
         "cash": "$500M",
-        "description": "Hide these around our* base for extra defense on your best Brainrots! Place a max of 2 at once.*Typo, likely meant to say \"your\".",
-        "use": "They can be placed on the groud, becoming invisible shortly after (though the particles can still be seen). Up to a maximum of 2 mines from the same player can exist at the same time. If the player attempts to place a third one, the one placed earliest will disappear. If another player comes into contact with it when it is fully invisible, the mine explodes in an area. All players affected by the explosion will get a purple aura, have an item unqeuipped from their hand, thrown far away, and ragdolled for 9 seconds. The cooldown is 15 seconds for the first mine and 20 seconds for the second one.",
+        "description": "Hide up to two mines near your base to defend valuable Brainrots.",
+        "use": "Mines become invisible shortly after being placed, though their particles remain visible. A player can keep up to two active; placing a third removes the oldest. Contact with a hidden mine triggers an area explosion that unequips affected players, throws them away, adds a purple aura, and ragdolls them for 9 seconds. The first mine has a 15-second cooldown and the second has a 20-second cooldown.",
         "rebirthsRequired": "14 rebirths required",
         "simplifiedUse": "Trap",
-        "cooldown": "15/20s",
-        "sound": "When the mine is placed: https://stealabrainrot.fandom.com/wiki/File:Subspace_mine_sound.mp3 When the player steps on the mine: https://stealabrainrot.fandom.com/wiki/File:Subspace_mine_sound_2.mp3"
+        "cooldown": "15/20s"
       },
       "system": {
         "slug": "subspace-mine",
@@ -705,13 +734,13 @@
     {
       "item": {
         "name": "Heatseeker",
+        "cardSummary": "Locks onto the nearest player and fires a guided missile that detects invisibility.",
         "cash": "$700M",
         "description": "Auto lock on opponents and fire a missile to chase them down",
         "use": "When equipped, when the nearest player enters the missile's range, a red square will appear over the nearest player. When used, fires a guided missile at the target that explodes on impact. If the missile does not hit the target within 5 seconds, it disappears. The weapon can detect invisible players within its range, and the player holding the weapon can enter ragdoll mode even if it's their own weapon.",
         "rebirthsRequired": "15 rebirths required",
         "simplifiedUse": "Ranged weapon",
-        "cooldown": "10s",
-        "sound": "When it doesn't detect the player (loop):https://stealabrainrot.fandom.com/wiki/File:Heatseeker_sound.mp3 When it detects the player (loop): https://stealabrainrot.fandom.com/wiki/File:Heatseeker_sound_2.mp3 When the missile hits the player: https://stealabrainrot.fandom.com/wiki/File:Heatseeker_sound_3.mp3"
+        "cooldown": "10s"
       },
       "system": {
         "slug": "heatseeker",
@@ -723,13 +752,13 @@
     {
       "item": {
         "name": "Attack Doge",
+        "cardSummary": "Summons a temporary dog companion that chases and ragdolls nearby players.",
         "cash": "$1B",
         "description": "Unleash your attack doge to defend you from your enemies",
         "use": "When used, it spawns a companion dog by your side. If the dog doesn't see any player within its range, it follows the owner. When a different player comes within the dog's range, the dog runs to that player, and if the player touches the dog, the player will go into ragdoll mode. The other player can destroy the dog by hitting it with some gear (like a slap or another gear). The dog disappears after 11 seconds if no one destroys it.",
         "rebirthsRequired": "16 rebirths required",
         "simplifiedUse": "Summon ability",
-        "cooldown": "30s",
-        "sound": "When the doge is summoned: https://stealabrainrot.fandom.com/wiki/File:Attack_doge_sound.mp3 When the doge chases the player: https://stealabrainrot.fandom.com/wiki/File:Attack_doge_sound_2.mp3"
+        "cooldown": "30s"
       },
       "system": {
         "slug": "attack-doge",
@@ -741,19 +770,37 @@
     {
       "item": {
         "name": "Giant potion",
+        "cardSummary": "Makes you roughly four times larger, immune to ragdoll, and able to jump higher for 20 seconds.",
         "cash": "$1.5B",
         "description": "Tower over your opponents!",
         "use": "When used, the player drinks the potion and becomes huge (about 4x bigger), the player will have light green particles around them and most of the gears will also become huge. The huge player becomes immune to ragdoll and has a higher jump, and the giant effect lasts 20 seconds. After 20 seconds, the player returns to normal size.",
         "rebirthsRequired": "17 rebirths required",
         "simplifiedUse": "Increases the player's size",
-        "cooldown": "40s",
-        "sound": "TBA"
+        "cooldown": "40s"
       },
       "system": {
         "slug": "giant-potion",
         "section": "Items",
         "sortOrder": 39,
         "image": "/Steal%20a%20Brainrot/Gears/giant-potion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flash Teleport",
+        "cardSummary": "Teleports you a short distance to a marked landing point, including higher ground when aimed up.",
+        "cash": "$3B",
+        "description": "Teleports you a short distance toward a chosen landing point.",
+        "use": "Shows a ghost landing marker, then teleports you a short distance to the marked spot. Aiming upward can help you reach higher ground.",
+        "rebirthsRequired": "18 rebirths required",
+        "simplifiedUse": "Teleportation",
+        "cooldown": "20s"
+      },
+      "system": {
+        "slug": "flash-teleport",
+        "section": "Items",
+        "sortOrder": 40,
+        "image": "/Steal%20a%20Brainrot/Gears/flash-teleport.webp"
       }
     }
   ]

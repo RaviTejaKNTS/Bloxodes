@@ -7,27 +7,27 @@
     "route": "/wiki/pet-simulator-99/booths",
     "catalogCode": "pet-simulator-99-booths",
     "itemFields": [
+      "cardSummary",
       "rarity",
       "source",
       "sourceType",
       "availability",
       "tradeStatus",
-      "description",
       "requirement",
       "originalCost"
     ],
     "columns": [
+      "cardSummary",
       "rarity",
       "source",
       "sourceType",
       "availability",
       "tradeStatus",
-      "description",
       "requirement",
       "originalCost"
     ],
     "display": {
-      "groupLabel": "section",
+      "groupLabel": "Acquisition route",
       "sectionOrder": [
         "Untradable account unlocks",
         "Gift, pack, and event booths",
@@ -37,40 +37,76 @@
       ],
       "badgeField": "rarity",
       "subtitleFields": [],
-      "descriptionField": "description",
-      "cardDescriptionField": "description",
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
+        "cardSummary",
         "rarity",
         "source",
         "sourceType",
         "availability",
         "tradeStatus",
-        "description"
-      ],
-      "tableFields": [
-        "rarity",
-        "source",
-        "sourceType",
-        "availability",
-        "tradeStatus",
-        "description",
         "requirement",
         "originalCost"
       ],
-      "fieldPresentation": null
+      "tableFields": [
+        "cardSummary",
+        "rarity",
+        "source",
+        "sourceType",
+        "availability",
+        "tradeStatus",
+        "requirement",
+        "originalCost"
+      ],
+      "fieldPresentation": {
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "source": {
+          "kind": "normal",
+          "label": "Source"
+        },
+        "sourceType": {
+          "kind": "chip",
+          "label": "Source Type"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "tradeStatus": {
+          "kind": "chip",
+          "label": "Trade Status"
+        },
+        "requirement": {
+          "kind": "detail",
+          "label": "Requirement"
+        },
+        "originalCost": {
+          "kind": "chip",
+          "label": "Original Cost"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
         "name": "Default Booth",
+        "cardSummary": "Default Booth is an account-bound Trading Plaza booth skin, so players need its unlock route instead of a trade offer.",
         "rarity": "Basic",
         "source": "Automatically given to all players.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable, but untradable",
         "tradeStatus": "Untradable",
-        "description": "Default Booth is an account-bound Trading Plaza booth skin, so players need its unlock route instead of a trade offer.",
-        "requirement": "Given to all players"
+        "requirement": "Given to all players",
+        "originalCost": null
       },
       "system": {
         "slug": "default-booth",
@@ -82,12 +118,14 @@
     {
       "item": {
         "name": "Pls Donate Booth",
+        "cardSummary": "Pls Donate Booth is an account-bound Trading Plaza booth skin, so players need its unlock route instead of a trade offer.",
         "rarity": "Rare",
         "source": "Play PLS DONATE.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable, but untradable",
         "tradeStatus": "Untradable",
-        "description": "Pls Donate Booth is an account-bound Trading Plaza booth skin, so players need its unlock route instead of a trade offer."
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "pls-donate-booth",
@@ -99,13 +137,14 @@
     {
       "item": {
         "name": "Maskot Booth",
+        "cardSummary": "Maskot Booth is an account-bound Trading Plaza booth skin, so players need its unlock route instead of a trade offer.",
         "rarity": "Rare",
         "source": "Join the BIG Games Pets group.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable, but untradable",
         "tradeStatus": "Untradable",
-        "description": "Maskot Booth is an account-bound Trading Plaza booth skin, so players need its unlock route instead of a trade offer.",
-        "requirement": "Join BIG Games Pets group"
+        "requirement": "Join BIG Games Pets group",
+        "originalCost": null
       },
       "system": {
         "slug": "maskot-booth",
@@ -117,12 +156,14 @@
     {
       "item": {
         "name": "Christmas Booth",
+        "cardSummary": "Christmas Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Epic",
         "source": "Day 3 reward in the 2023 Christmas Advent Calendar event.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Christmas Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "christmas-booth",
@@ -134,12 +175,14 @@
     {
       "item": {
         "name": "Panda Booth",
+        "cardSummary": "Panda Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Legendary",
         "source": "Purchasing in the Adventurer Store.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Panda Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "panda-booth",
@@ -151,13 +194,14 @@
     {
       "item": {
         "name": "Corgi Booth",
+        "cardSummary": "Corgi Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Legendary",
         "source": "Rewarded after completing the Mini Chest Insanity achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Corgi Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "Mini Chest Insanity achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "Mini Chest Insanity achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "corgi-booth",
@@ -169,12 +213,13 @@
     {
       "item": {
         "name": "Cat Booth",
+        "cardSummary": "Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Legendary",
         "source": "Purchasing in the Trading Plaza for 100,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "100,000 Diamonds"
       },
       "system": {
@@ -187,12 +232,14 @@
     {
       "item": {
         "name": "School Booth",
+        "cardSummary": "School Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Mythical",
         "source": "Found in the School Gift.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "School Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "school-booth",
@@ -204,13 +251,14 @@
     {
       "item": {
         "name": "Merchant Booth",
+        "cardSummary": "Merchant Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Mythical",
         "source": "Rewarded after completing the Loyal Customer achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Merchant Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "Loyal Customer achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "Loyal Customer achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "merchant-booth",
@@ -222,13 +270,14 @@
     {
       "item": {
         "name": "Lightning Booth",
+        "cardSummary": "Lightning Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Mythical",
         "source": "Rewarded after completing the Code Cracker achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Lightning Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "Code Cracker achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "Code Cracker achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "lightning-booth",
@@ -240,13 +289,14 @@
     {
       "item": {
         "name": "Hippomelon Booth",
+        "cardSummary": "Hippomelon Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Mythical",
         "source": "Rewarded after completing the Fruit Fiesta achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Hippomelon Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "Fruit Fiesta achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "Fruit Fiesta achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "hippomelon-booth",
@@ -258,13 +308,14 @@
     {
       "item": {
         "name": "Dragon Booth",
+        "cardSummary": "Dragon Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Mythical",
         "source": "Rewarded after completing the Wrecking Ball achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Dragon Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "Wrecking Ball achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "Wrecking Ball achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "dragon-booth",
@@ -276,13 +327,14 @@
     {
       "item": {
         "name": "Fire Booth",
+        "cardSummary": "Fire Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Obtainable after becoming a BIG Games Partner.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Fire Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "BIG Games Partner"
+        "tradeStatus": "Tradable",
+        "requirement": "BIG Games Partner",
+        "originalCost": null
       },
       "system": {
         "slug": "fire-booth",
@@ -294,13 +346,14 @@
     {
       "item": {
         "name": "Wyvern of Hades Booth",
+        "cardSummary": "Wyvern of Hades Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Wyvern Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Wyvern of Hades Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "wyvern-of-hades-booth",
@@ -312,13 +365,14 @@
     {
       "item": {
         "name": "Wicked Booth",
+        "cardSummary": "Wicked Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Wicked Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Wicked Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "wicked-booth",
@@ -330,12 +384,14 @@
     {
       "item": {
         "name": "Valentine's Booth",
+        "cardSummary": "Valentine's Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Found in the Love Gift.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Valentine's Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "valentine-s-booth",
@@ -347,13 +403,14 @@
     {
       "item": {
         "name": "Sphinx Booth",
+        "cardSummary": "Sphinx Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2025 Egyptian Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Sphinx Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "sphinx-booth",
@@ -365,13 +422,14 @@
     {
       "item": {
         "name": "Silver Booth",
+        "cardSummary": "Silver Booth is a clan reward booth skin tied to leaderboard-style competition.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during a Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Silver Booth is a clan reward booth skin tied to leaderboard-style competition.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "silver-booth",
@@ -383,13 +441,14 @@
     {
       "item": {
         "name": "Safety Booth",
+        "cardSummary": "Safety Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Safety Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Safety Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "safety-booth",
@@ -401,13 +460,14 @@
     {
       "item": {
         "name": "Reversed Booth",
+        "cardSummary": "Reversed Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Upside Down Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Reversed Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "reversed-booth",
@@ -419,13 +479,14 @@
     {
       "item": {
         "name": "Reaper Booth",
+        "cardSummary": "Reaper Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the Halloween Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Reaper Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "reaper-booth",
@@ -437,13 +498,14 @@
     {
       "item": {
         "name": "Rave Crab Booth",
+        "cardSummary": "Rave Crab Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Rave Crab Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Rave Crab Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "rave-crab-booth",
@@ -455,13 +517,14 @@
     {
       "item": {
         "name": "Rainbow Booth",
+        "cardSummary": "Rainbow Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Rewarded after completing the Refraction achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Rainbow Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "Refraction achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "Refraction achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "rainbow-booth",
@@ -473,13 +536,14 @@
     {
       "item": {
         "name": "Present Booth",
+        "cardSummary": "Present Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2023 Christmas Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Present Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "present-booth",
@@ -491,12 +555,14 @@
     {
       "item": {
         "name": "Pot of Gold Booth",
+        "cardSummary": "Pot of Gold Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Found in the Horseshoe Gift.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Pot of Gold Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "pot-of-gold-booth",
@@ -508,13 +574,14 @@
     {
       "item": {
         "name": "Abstract Booth",
+        "cardSummary": "Abstract Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2026 Abstract Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Abstract Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "abstract-booth",
@@ -526,12 +593,14 @@
     {
       "item": {
         "name": "Blossom Booth",
+        "cardSummary": "Blossom Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Found in the Blossom Gift.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Blossom Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "blossom-booth",
@@ -543,13 +612,14 @@
     {
       "item": {
         "name": "Pixel Booth",
+        "cardSummary": "Pixel Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Pixel Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Pixel Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "pixel-booth",
@@ -561,12 +631,14 @@
     {
       "item": {
         "name": "Parrot Booth",
+        "cardSummary": "Parrot Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Purchasing from Index Rewards.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Parrot Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "parrot-booth",
@@ -578,13 +650,14 @@
     {
       "item": {
         "name": "M-10 Booth",
+        "cardSummary": "M-10 Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Pet Collecting Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "M-10 Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "m-10-booth",
@@ -596,13 +669,14 @@
     {
       "item": {
         "name": "Mushroom Booth",
+        "cardSummary": "Mushroom Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2025 Mushroom Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Mushroom Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "mushroom-booth",
@@ -614,13 +688,14 @@
     {
       "item": {
         "name": "Ice Cream Booth",
+        "cardSummary": "Ice Cream Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Ice Cream Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Ice Cream Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "ice-cream-booth",
@@ -632,13 +707,14 @@
     {
       "item": {
         "name": "Holographic Booth",
+        "cardSummary": "Holographic Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2025 Holographic Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Holographic Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "holographic-booth",
@@ -650,13 +726,14 @@
     {
       "item": {
         "name": "Gold Booth",
+        "cardSummary": "Gold Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Rewarded after completing the Midas Touch achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Gold Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "Midas Touch achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "Midas Touch achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "gold-booth",
@@ -668,13 +745,14 @@
     {
       "item": {
         "name": "Gingerbread Booth",
+        "cardSummary": "Gingerbread Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Gingerbread Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Gingerbread Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "gingerbread-booth",
@@ -686,12 +764,14 @@
     {
       "item": {
         "name": "Glowy Booth",
+        "cardSummary": "Glowy Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Reward for completing quests during the Halloween Event 2025.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Glowy Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "glowy-booth",
@@ -703,13 +783,14 @@
     {
       "item": {
         "name": "Ghost Cat Booth",
+        "cardSummary": "Ghost Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Ghost Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Ghost Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "ghost-cat-booth",
@@ -721,13 +802,14 @@
     {
       "item": {
         "name": "Galaxy Booth",
+        "cardSummary": "Galaxy Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Raid Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Galaxy Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "galaxy-booth",
@@ -739,13 +821,14 @@
     {
       "item": {
         "name": "Fragmented Booth",
+        "cardSummary": "Fragmented Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Fragmented Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Fragmented Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "fragmented-booth",
@@ -757,13 +840,14 @@
     {
       "item": {
         "name": "Fishing Booth",
+        "cardSummary": "Fishing Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Rewarded after completing the The Codfather achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Fishing Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "The Codfather achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "The Codfather achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "fishing-booth",
@@ -775,13 +859,14 @@
     {
       "item": {
         "name": "Evil Booth",
+        "cardSummary": "Evil Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2025 Evil Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Evil Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "evil-booth",
@@ -793,13 +878,14 @@
     {
       "item": {
         "name": "Empyrean Booth",
+        "cardSummary": "Empyrean Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Achievements Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Empyrean Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "empyrean-booth",
@@ -811,12 +897,14 @@
     {
       "item": {
         "name": "Elf Booth",
+        "cardSummary": "Elf Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Found in the Santa Gift.",
         "sourceType": "Gift, pack, or event",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Elf Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "elf-booth",
@@ -828,13 +916,14 @@
     {
       "item": {
         "name": "Egg Booth",
+        "cardSummary": "Egg Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Rewarded after completing the Eggstravaganza achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Egg Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "Eggstravaganza achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "Eggstravaganza achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "egg-booth",
@@ -846,13 +935,14 @@
     {
       "item": {
         "name": "Diamond Booth",
+        "cardSummary": "Diamond Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Diamond Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Diamond Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "diamond-booth",
@@ -864,13 +954,14 @@
     {
       "item": {
         "name": "Cupcake Booth",
+        "cardSummary": "Cupcake Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 New Year Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Cupcake Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "cupcake-booth",
@@ -882,13 +973,14 @@
     {
       "item": {
         "name": "Clown Booth",
+        "cardSummary": "Clown Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Clown Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Clown Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "clown-booth",
@@ -900,13 +992,14 @@
     {
       "item": {
         "name": "Clover Booth",
+        "cardSummary": "Clover Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during a Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Clover Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "clover-booth",
@@ -918,13 +1011,14 @@
     {
       "item": {
         "name": "Bubble Booth",
+        "cardSummary": "Bubble Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Bubble Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Bubble Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "bubble-booth",
@@ -936,13 +1030,14 @@
     {
       "item": {
         "name": "Blurred Booth",
+        "cardSummary": "Blurred Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Blurred Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Blurred Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "blurred-booth",
@@ -954,13 +1049,14 @@
     {
       "item": {
         "name": "Blimp Dragon Booth",
+        "cardSummary": "Blimp Dragon Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Blimp Dragon Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Blimp Dragon Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "blimp-dragon-booth",
@@ -972,13 +1068,14 @@
     {
       "item": {
         "name": "Bee Booth",
+        "cardSummary": "Bee Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Bee Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Bee Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "bee-booth",
@@ -990,13 +1087,14 @@
     {
       "item": {
         "name": "Balloon Booth",
+        "cardSummary": "Balloon Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Rewarded after completing the The Orb God achievement.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Balloon Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
-        "requirement": "The Orb God achievement"
+        "tradeStatus": "Tradable",
+        "requirement": "The Orb God achievement",
+        "originalCost": null
       },
       "system": {
         "slug": "balloon-booth",
@@ -1008,13 +1106,14 @@
     {
       "item": {
         "name": "Alien Booth",
+        "cardSummary": "Alien Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the 2024 Quest Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Alien Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "alien-booth",
@@ -1026,12 +1125,14 @@
     {
       "item": {
         "name": "Easter Booth",
+        "cardSummary": "Easter Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Found in the Easter Secret Room.",
         "sourceType": "Gift, pack, or event",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Easter Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "easter-booth",
@@ -1043,12 +1144,14 @@
     {
       "item": {
         "name": "Basketball Booth",
+        "cardSummary": "Basketball Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Found in the Basketball Season Calendar.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Basketball Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "basketball-booth",
@@ -1060,12 +1163,14 @@
     {
       "item": {
         "name": "Barbell Booth",
+        "cardSummary": "Barbell Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Found in the Buff Gym Gift.",
         "sourceType": "Gift, pack, or event",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Barbell Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "barbell-booth",
@@ -1077,13 +1182,14 @@
     {
       "item": {
         "name": "Sun Angelus Booth",
+        "cardSummary": "Sun Angelus Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded to all members in the top 50 clans during the Sun Angelus Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Sun Angelus Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "sun-angelus-booth",
@@ -1095,12 +1201,14 @@
     {
       "item": {
         "name": "Sandcastle Booth",
+        "cardSummary": "Sandcastle Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exotic",
         "source": "Found in the Tropical Gift.",
         "sourceType": "Gift, pack, or event",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Sandcastle Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "sandcastle-booth",
@@ -1112,12 +1220,14 @@
     {
       "item": {
         "name": "Vampire Booth",
+        "cardSummary": "Vampire Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Spider Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Vampire Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "vampire-booth",
@@ -1129,12 +1239,14 @@
     {
       "item": {
         "name": "Turkey Booth",
+        "cardSummary": "Turkey Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Turkey Gift and Turkey Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Turkey Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "turkey-booth",
@@ -1146,12 +1258,14 @@
     {
       "item": {
         "name": "Summer Booth",
+        "cardSummary": "Summer Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Superior",
         "source": "Found in the Summer Gift and Summer Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Summer Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "summer-booth",
@@ -1163,12 +1277,14 @@
     {
       "item": {
         "name": "Strawberry Booth",
+        "cardSummary": "Strawberry Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Kawaii Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Strawberry Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "strawberry-booth",
@@ -1180,12 +1296,14 @@
     {
       "item": {
         "name": "Snowflake Booth",
+        "cardSummary": "Snowflake Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Christmas Event 2024 Advent Calendar and Snowflake Gifts.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Snowflake Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "snowflake-booth",
@@ -1197,12 +1315,14 @@
     {
       "item": {
         "name": "Rave Booth",
+        "cardSummary": "Rave Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Rave Gift and Rave Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Rave Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "rave-booth",
@@ -1214,12 +1334,14 @@
     {
       "item": {
         "name": "Pumpkin Cat Booth",
+        "cardSummary": "Pumpkin Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Pumpkin Gift.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Pumpkin Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "pumpkin-cat-booth",
@@ -1231,12 +1353,14 @@
     {
       "item": {
         "name": "Pet Games Booth",
+        "cardSummary": "Pet Games Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Pet Games Gift and Player Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Pet Games Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "pet-games-booth",
@@ -1248,12 +1372,14 @@
     {
       "item": {
         "name": "Night Terror Booth",
+        "cardSummary": "Night Terror Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Backrooms Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Night Terror Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "night-terror-booth",
@@ -1265,12 +1391,14 @@
     {
       "item": {
         "name": "Millionaire Booth",
+        "cardSummary": "Millionaire Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Millionaire Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Millionaire Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "millionaire-booth",
@@ -1282,12 +1410,14 @@
     {
       "item": {
         "name": "Hellfire Booth",
+        "cardSummary": "Hellfire Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Hellfire Gift and Rocketeer Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Hellfire Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "hellfire-booth",
@@ -1299,12 +1429,14 @@
     {
       "item": {
         "name": "Haunted Booth",
+        "cardSummary": "Haunted Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Obtained after completing the third Halloween Event 2024 quest.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Haunted Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "haunted-booth",
@@ -1316,12 +1448,14 @@
     {
       "item": {
         "name": "Hacker Booth",
+        "cardSummary": "Hacker Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Virus Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Hacker Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "hacker-booth",
@@ -1333,12 +1467,14 @@
     {
       "item": {
         "name": "Good vs. Evil Booth",
+        "cardSummary": "Good vs. Evil Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Good vs Evil Gift and Angels vs. Demons Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Good vs. Evil Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "good-vs-evil-booth",
@@ -1350,12 +1486,14 @@
     {
       "item": {
         "name": "Forcefield Booth",
+        "cardSummary": "Forcefield Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Forcefield Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Forcefield Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "forcefield-booth",
@@ -1367,12 +1505,14 @@
     {
       "item": {
         "name": "Elemental Booth",
+        "cardSummary": "Elemental Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Superior",
         "source": "Found in the Elemental Gift and Elemental Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Elemental Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "elemental-booth",
@@ -1384,12 +1524,14 @@
     {
       "item": {
         "name": "Dino Booth",
+        "cardSummary": "Dino Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Dino Gift and Dino Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Dino Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "dino-booth",
@@ -1401,12 +1543,14 @@
     {
       "item": {
         "name": "Daycare Booth",
+        "cardSummary": "Daycare Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Paw Print Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Daycare Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "daycare-booth",
@@ -1418,12 +1562,14 @@
     {
       "item": {
         "name": "Crayon Booth",
+        "cardSummary": "Crayon Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Paper Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Crayon Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "crayon-booth",
@@ -1435,12 +1581,14 @@
     {
       "item": {
         "name": "Cauldron Booth",
+        "cardSummary": "Cauldron Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Candy Corn Gift.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Cauldron Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "cauldron-booth",
@@ -1452,12 +1600,14 @@
     {
       "item": {
         "name": "Candy Cane Booth",
+        "cardSummary": "Candy Cane Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Christmas Event 2024 Advent Calendar and Candy Cane Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Candy Cane Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "candy-cane-booth",
@@ -1469,12 +1619,14 @@
     {
       "item": {
         "name": "Booster Booth",
+        "cardSummary": "Booster Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Card Index Rewards during the Trading Cards Event 2025.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Booster Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "booster-booth",
@@ -1486,12 +1638,14 @@
     {
       "item": {
         "name": "Autumn Booth",
+        "cardSummary": "Autumn Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Autumn Gift and Crimson Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Autumn Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "autumn-booth",
@@ -1503,12 +1657,14 @@
     {
       "item": {
         "name": "Aura Booth",
+        "cardSummary": "Aura Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Aura Pack and Fire Aura Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Aura Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "aura-booth",
@@ -1520,12 +1676,14 @@
     {
       "item": {
         "name": "Art Booth",
+        "cardSummary": "Art Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Found in the Art Pack.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Art Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "art-booth",
@@ -1537,13 +1695,14 @@
     {
       "item": {
         "name": "Tie Dye Booth",
+        "cardSummary": "Tie Dye Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Superior",
         "source": "Rewarded to all members in the top 50 clans during the 2025 Tie Dye Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Tie Dye Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
-        "requirement": "Top 50 clan battle member reward"
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
       },
       "system": {
         "slug": "tie-dye-booth",
@@ -1555,12 +1714,13 @@
     {
       "item": {
         "name": "VIP Booth",
+        "cardSummary": "VIP Booth is an account-bound Trading Plaza booth skin, so players need its unlock route instead of a trade offer.",
         "rarity": "Exclusive",
         "source": "Purchase the VIP Gamepass for 400 Robux.",
         "sourceType": "Direct unlock",
         "availability": "Obtainable, but untradable",
         "tradeStatus": "Untradable",
-        "description": "VIP Booth is an account-bound Trading Plaza booth skin, so players need its unlock route instead of a trade offer.",
+        "requirement": null,
         "originalCost": "400 Robux"
       },
       "system": {
@@ -1573,12 +1733,13 @@
     {
       "item": {
         "name": "Unicorn Booth",
+        "cardSummary": "Unicorn Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 1,000,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Unicorn Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "1,000,000 Diamonds"
       },
       "system": {
@@ -1591,12 +1752,13 @@
     {
       "item": {
         "name": "UFO Booth",
+        "cardSummary": "UFO Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exclusive",
         "source": "Purchasing for 400 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "UFO Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "400 Robux"
       },
       "system": {
@@ -1609,12 +1771,13 @@
     {
       "item": {
         "name": "Throne Booth",
+        "cardSummary": "Throne Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 400 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Throne Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "400 Robux"
       },
       "system": {
@@ -1627,12 +1790,13 @@
     {
       "item": {
         "name": "TNT Booth",
+        "cardSummary": "TNT Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 1,000,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "TNT Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "1,000,000 Diamonds"
       },
       "system": {
@@ -1645,12 +1809,13 @@
     {
       "item": {
         "name": "Pop Cat Booth",
+        "cardSummary": "Pop Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 1,000,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Pop Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "1,000,000 Diamonds"
       },
       "system": {
@@ -1663,12 +1828,13 @@
     {
       "item": {
         "name": "Police Booth",
+        "cardSummary": "Police Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exclusive",
         "source": "Purchasing for 200 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Police Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "200 Robux"
       },
       "system": {
@@ -1681,12 +1847,13 @@
     {
       "item": {
         "name": "Pizza Booth",
+        "cardSummary": "Pizza Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 600,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Pizza Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "600,000 Diamonds"
       },
       "system": {
@@ -1699,12 +1866,13 @@
     {
       "item": {
         "name": "Pirate Booth",
+        "cardSummary": "Pirate Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 400 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Pirate Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "400 Robux"
       },
       "system": {
@@ -1717,12 +1885,13 @@
     {
       "item": {
         "name": "Nuclear Booth",
+        "cardSummary": "Nuclear Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 300 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Nuclear Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "300 Robux"
       },
       "system": {
@@ -1735,12 +1904,13 @@
     {
       "item": {
         "name": "Nightmare Cat Booth",
+        "cardSummary": "Nightmare Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 200 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Nightmare Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "200 Robux"
       },
       "system": {
@@ -1753,12 +1923,13 @@
     {
       "item": {
         "name": "Nightfall Booth",
+        "cardSummary": "Nightfall Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exclusive",
         "source": "Purchasing for 300 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Nightfall Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "300 Robux"
       },
       "system": {
@@ -1771,12 +1942,13 @@
     {
       "item": {
         "name": "Neon Twilight Booth",
+        "cardSummary": "Neon Twilight Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 200 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Neon Twilight Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "200 Robux"
       },
       "system": {
@@ -1789,12 +1961,13 @@
     {
       "item": {
         "name": "Monkey Booth",
+        "cardSummary": "Monkey Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 150,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Monkey Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "150,000 Diamonds"
       },
       "system": {
@@ -1807,12 +1980,13 @@
     {
       "item": {
         "name": "Money Booth",
+        "cardSummary": "Money Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 200 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Money Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "200 Robux"
       },
       "system": {
@@ -1825,12 +1999,13 @@
     {
       "item": {
         "name": "Lucky Block Booth",
+        "cardSummary": "Lucky Block Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 600,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Lucky Block Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "600,000 Diamonds"
       },
       "system": {
@@ -1843,12 +2018,13 @@
     {
       "item": {
         "name": "Lemonade Stand",
+        "cardSummary": "Lemonade Stand is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 300 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Lemonade Stand is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "300 Robux"
       },
       "system": {
@@ -1861,12 +2037,13 @@
     {
       "item": {
         "name": "Kawaii Booth",
+        "cardSummary": "Kawaii Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 600,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Kawaii Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "600,000 Diamonds"
       },
       "system": {
@@ -1879,12 +2056,13 @@
     {
       "item": {
         "name": "Jelly Booth",
+        "cardSummary": "Jelly Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 200 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Jelly Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "200 Robux"
       },
       "system": {
@@ -1897,12 +2075,13 @@
     {
       "item": {
         "name": "Hotdog Booth",
+        "cardSummary": "Hotdog Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 200 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Hotdog Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "200 Robux"
       },
       "system": {
@@ -1915,12 +2094,13 @@
     {
       "item": {
         "name": "Glitched Booth",
+        "cardSummary": "Glitched Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 200 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Glitched Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "200 Robux"
       },
       "system": {
@@ -1933,12 +2113,13 @@
     {
       "item": {
         "name": "Giraffe Booth",
+        "cardSummary": "Giraffe Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 300,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Giraffe Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "300,000 Diamonds"
       },
       "system": {
@@ -1951,12 +2132,13 @@
     {
       "item": {
         "name": "Fruit Booth",
+        "cardSummary": "Fruit Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 300,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Fruit Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "300,000 Diamonds"
       },
       "system": {
@@ -1969,12 +2151,13 @@
     {
       "item": {
         "name": "Error Booth",
+        "cardSummary": "Error Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 600,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Error Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "600,000 Diamonds"
       },
       "system": {
@@ -1987,12 +2170,13 @@
     {
       "item": {
         "name": "Enchant Booth",
+        "cardSummary": "Enchant Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 1,000,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Enchant Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "1,000,000 Diamonds"
       },
       "system": {
@@ -2005,12 +2189,13 @@
     {
       "item": {
         "name": "Dino Cat Booth",
+        "cardSummary": "Dino Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 600,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Dino Cat Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "600,000 Diamonds"
       },
       "system": {
@@ -2023,12 +2208,13 @@
     {
       "item": {
         "name": "Cow Booth",
+        "cardSummary": "Cow Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 300,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Cow Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "300,000 Diamonds"
       },
       "system": {
@@ -2041,12 +2227,13 @@
     {
       "item": {
         "name": "Comet Booth",
+        "cardSummary": "Comet Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 200 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Comet Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "200 Robux"
       },
       "system": {
@@ -2059,12 +2246,13 @@
     {
       "item": {
         "name": "Cardboard Booth",
+        "cardSummary": "Cardboard Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 200 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Cardboard Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "200 Robux"
       },
       "system": {
@@ -2077,12 +2265,13 @@
     {
       "item": {
         "name": "Black Hole Booth",
+        "cardSummary": "Black Hole Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 400 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Black Hole Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "400 Robux"
       },
       "system": {
@@ -2095,12 +2284,13 @@
     {
       "item": {
         "name": "Axolotl Booth",
+        "cardSummary": "Axolotl Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 300,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Axolotl Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "300,000 Diamonds"
       },
       "system": {
@@ -2113,12 +2303,13 @@
     {
       "item": {
         "name": "Arcade Booth",
+        "cardSummary": "Arcade Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza for 1,000,000 diamonds.",
         "sourceType": "Shop purchase",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Arcade Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "1,000,000 Diamonds"
       },
       "system": {
@@ -2131,12 +2322,13 @@
     {
       "item": {
         "name": "Abyssal Booth",
+        "cardSummary": "Abyssal Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing for 400 Robux.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Abyssal Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
+        "tradeStatus": "Tradable",
+        "requirement": null,
         "originalCost": "400 Robux"
       },
       "system": {
@@ -2149,154 +2341,286 @@
     {
       "item": {
         "name": "Starry Booth",
+        "cardSummary": "Starry Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Top 50 clan reward during the 2026 Starry Clan Battle.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Starry Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "starry-booth",
         "section": "Clan battle reward booths",
         "sortOrder": 119,
-        "image": null
+        "image": "/Pet%20Simulator%2099/Booths/starry-booth.webp"
       }
     },
     {
       "item": {
         "name": "Patchwork Booth",
+        "cardSummary": "Patchwork Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza during the Spring Boss Chest update.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Patchwork Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "patchwork-booth",
         "section": "Trade-only and retired storefront booths",
         "sortOrder": 120,
-        "image": null
+        "image": "/Pet%20Simulator%2099/Booths/patchwork-booth.webp"
       }
     },
     {
       "item": {
         "name": "Dog Booth",
+        "cardSummary": "Dog Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza during the Spring Boss Chest update.",
         "sourceType": "Shop purchase",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Dog Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "dog-booth",
         "section": "Direct unlocks and shop booths",
         "sortOrder": 121,
-        "image": null
+        "image": "/Pet%20Simulator%2099/Booths/dog-booth.webp"
       }
     },
     {
       "item": {
         "name": "Midnight Booth",
+        "cardSummary": "Midnight Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza during the Spring Boss Chest update.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Midnight Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "midnight-booth",
         "section": "Trade-only and retired storefront booths",
         "sortOrder": 122,
-        "image": null
+        "image": "/Pet%20Simulator%2099/Booths/midnight-booth.webp"
       }
     },
     {
       "item": {
         "name": "Bunny Booth",
+        "cardSummary": "Bunny Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza during the Spring Boss Chest update.",
         "sourceType": "Shop purchase",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Bunny Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "bunny-booth",
         "section": "Direct unlocks and shop booths",
         "sortOrder": 123,
-        "image": null
+        "image": "/Pet%20Simulator%2099/Booths/bunny-booth.webp"
       }
     },
     {
       "item": {
         "name": "Coral Booth",
+        "cardSummary": "Coral Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza during the Spring Boss Chest update.",
         "sourceType": "Shop purchase",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Coral Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "coral-booth",
         "section": "Trade-only and retired storefront booths",
         "sortOrder": 124,
-        "image": null
+        "image": "/Pet%20Simulator%2099/Booths/coral-booth.webp"
       }
     },
     {
       "item": {
         "name": "Noob Booth",
+        "cardSummary": "Noob Booth is a Trading Plaza booth skin with a direct unlock route players can still chase.",
         "rarity": "Exclusive",
         "source": "Purchasing in the Trading Plaza during the Spring Boss Chest update.",
         "sourceType": "Shop purchase",
         "availability": "Obtainable",
-        "tradeStatus": "Directly obtainable",
-        "description": "Noob Booth is a Trading Plaza booth skin with a direct unlock route players can still chase."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "noob-booth",
         "section": "Direct unlocks and shop booths",
         "sortOrder": 125,
-        "image": null
+        "image": "/Pet%20Simulator%2099/Booths/noob-booth.webp"
       }
     },
     {
       "item": {
         "name": "Angel Booth",
+        "cardSummary": "Angel Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exotic",
         "source": "Rewarded from the 2026 Angel Clan Battle during the Void RNG Event.",
         "sourceType": "Clan battle",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Angel Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "angel-booth",
         "section": "Clan battle reward booths",
         "sortOrder": 126,
-        "image": null
+        "image": "/Pet%20Simulator%2099/Booths/angel-booth.webp"
       }
     },
     {
       "item": {
         "name": "Void Booth",
+        "cardSummary": "Void Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history.",
         "rarity": "Exclusive",
         "source": "Included with the Halo Forever Pack during Void RNG Part 2.",
         "sourceType": "Gift, pack, or event",
         "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade only",
-        "description": "Void Booth is a retired Trading Plaza booth skin, so the original source matters mostly for collection history."
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
       },
       "system": {
         "slug": "void-booth",
         "section": "Gift, pack, and event booths",
         "sortOrder": 127,
-        "image": null
+        "image": "/Pet%20Simulator%2099/Booths/void-booth.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidian Booth",
+        "cardSummary": "Obsidian Booth is an Exotic Trading Plaza skin found in Obsidian Gifts during Tap Gauntlet.",
+        "rarity": "Exotic",
+        "source": "Found in the Obsidian Gift, which drops from Tap Gauntlet Chest Bosses.",
+        "sourceType": "Gift, pack, or event",
+        "availability": "Obtainable",
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
+      },
+      "system": {
+        "slug": "obsidian-booth",
+        "section": "Gift, pack, and event booths",
+        "sortOrder": 128,
+        "image": "/Pet%20Simulator%2099/Booths/obsidian-booth.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar Booth",
+        "cardSummary": "Lunar Booth is a retired Exotic Trading Plaza skin from the Lunar Clan Battle and now depends on trading.",
+        "rarity": "Exotic",
+        "source": "Rewarded to all members of clans that finished in the top 50 during the Lunar Clan Battle.",
+        "sourceType": "Clan battle",
+        "availability": "Unobtainable outside of trading",
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
+      },
+      "system": {
+        "slug": "lunar-booth",
+        "section": "Clan battle reward booths",
+        "sortOrder": 129,
+        "image": "/Pet%20Simulator%2099/Booths/lunar-booth.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Marble Booth",
+        "cardSummary": "Marble Booth is a retired Exotic Trading Plaza skin from Marble Gifts and now depends on trading.",
+        "rarity": "Exotic",
+        "source": "Found in the Marble Gift dropped by Tap Heroes Chest Bosses.",
+        "sourceType": "Gift, pack, or event",
+        "availability": "Unobtainable outside of trading",
+        "tradeStatus": "Tradable",
+        "requirement": null,
+        "originalCost": null
+      },
+      "system": {
+        "slug": "marble-booth",
+        "section": "Gift, pack, and event booths",
+        "sortOrder": 130,
+        "image": "/Pet%20Simulator%2099/Booths/marble-booth.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Soccer Booth",
+        "cardSummary": "Soccer Booth is a retired Exotic Trading Plaza skin from the Soccer Season Calendar and now depends on trading.",
+        "rarity": "Exotic",
+        "source": "Rewarded through the Soccer Season Calendar during Soccer Shootout.",
+        "sourceType": "Gift, pack, or event",
+        "availability": "Unobtainable outside of trading",
+        "tradeStatus": "Tradable",
+        "requirement": "Soccer Season Calendar reward",
+        "originalCost": null
+      },
+      "system": {
+        "slug": "soccer-booth",
+        "section": "Gift, pack, and event booths",
+        "sortOrder": 131,
+        "image": "/Pet%20Simulator%2099/Booths/soccer-booth.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Thunderstorm Booth",
+        "cardSummary": "Thunderstorm Booth is a retired Exotic Trading Plaza skin from its clan battle and now depends on trading.",
+        "rarity": "Exotic",
+        "source": "Rewarded to all members of clans that finished in the top 50 during the World Cup Clan Battle.",
+        "sourceType": "Clan battle",
+        "availability": "Unobtainable outside of trading",
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
+      },
+      "system": {
+        "slug": "thunderstorm-booth",
+        "section": "Clan battle reward booths",
+        "sortOrder": 132,
+        "image": "/Pet%20Simulator%2099/Booths/thunderstorm-booth.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Daydream Booth",
+        "cardSummary": "Daydream Booth is a retired Superior Trading Plaza skin from its clan battle and now depends on trading.",
+        "rarity": "Superior",
+        "source": "Rewarded to all members of clans that finished in the top 50 during the Daydream Clan Battle.",
+        "sourceType": "Clan battle",
+        "availability": "Unobtainable outside of trading",
+        "tradeStatus": "Tradable",
+        "requirement": "Top 50 clan battle member reward",
+        "originalCost": null
+      },
+      "system": {
+        "slug": "daydream-booth",
+        "section": "Clan battle reward booths",
+        "sortOrder": 133,
+        "image": "/Pet%20Simulator%2099/Booths/daydream-booth.webp"
       }
     }
   ]

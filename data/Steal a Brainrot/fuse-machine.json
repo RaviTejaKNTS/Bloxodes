@@ -7,75 +7,76 @@
     "route": "/wiki/steal-a-brainrot/fuse-machine",
     "catalogCode": "steal-a-brainrot-fuse-machine",
     "itemFields": [
+      "cardSummary",
       "machine",
       "rarity",
       "maxChance",
-      "income",
-      "brainrotLinks"
+      "income"
     ],
     "columns": [
+      "cardSummary",
       "machine",
       "rarity",
       "maxChance",
-      "income",
-      "brainrotLinks"
+      "income"
     ],
     "display": {
-      "groupLabel": "rarity",
+      "groupLabel": "Machine run",
       "sectionOrder": [
-        "Common",
-        "Rare",
-        "Epic",
-        "Legendary",
-        "Mythic",
-        "Brainrot God",
-        "Secret"
+        "2025 Fuse Machine",
+        "2026 Fuse Machine"
       ],
       "badgeField": "rarity",
       "subtitleFields": [],
-      "descriptionField": null,
-      "cardDescriptionField": null,
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
-        "machine",
-        "rarity",
         "maxChance",
-        "income",
-        "brainrotLinks"
+        "income"
       ],
       "tableFields": [
-        "machine",
+        "cardSummary",
         "rarity",
         "maxChance",
-        "income",
-        "brainrotLinks"
+        "income"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "machine": {
+          "kind": "normal",
+          "label": "Machine Run"
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "maxChance": {
+          "kind": "detail",
+          "label": "Documented Max Chance"
+        },
+        "income": {
+          "kind": "chip",
+          "label": "Base Income"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
         "name": "Pipi Corni",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Common",
         "maxChance": "67% (4 Noobini Pizzanini)",
-        "income": "$14/s",
-        "brainrotLinks": [
-          {
-            "name": "Pipi Corni",
-            "page": "Pipi Corni",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Corni"
-          },
-          {
-            "name": "Pipi Corni",
-            "page": "Pipi Corni",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Corni"
-          }
-        ]
+        "income": "$14/s"
       },
       "system": {
-        "slug": "pipi-corni",
-        "section": "Common",
+        "slug": "pipi-corni-2025",
+        "section": "2025 Fuse Machine",
         "sortOrder": 1,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pipi-corni.webp"
       }
@@ -83,26 +84,15 @@
     {
       "item": {
         "name": "Pipi Avocado",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Rare",
         "maxChance": "54% (2 Pipi Kiwi and 2 Bandito Bobritto)",
-        "income": "$70/s",
-        "brainrotLinks": [
-          {
-            "name": "Pipi Avocado",
-            "page": "Pipi Avocado",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Avocado"
-          },
-          {
-            "name": "Pipi Avocado",
-            "page": "Pipi Avocado",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Avocado"
-          }
-        ]
+        "income": "$70/s"
       },
       "system": {
-        "slug": "pipi-avocado",
-        "section": "Rare",
+        "slug": "pipi-avocado-2025",
+        "section": "2025 Fuse Machine",
         "sortOrder": 2,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pipi-avocado.webp"
       }
@@ -110,26 +100,15 @@
     {
       "item": {
         "name": "Ti Ti Ti Sahur",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Epic",
         "maxChance": "71% (3 Perochello Lemonchello and 1 Trulimero Trulicina)",
-        "income": "$225/s",
-        "brainrotLinks": [
-          {
-            "name": "Ti Ti Ti Sahur",
-            "page": "Ti Ti Ti Sahur",
-            "url": "https://stealabrainrot.fandom.com/wiki/Ti_Ti_Ti_Sahur"
-          },
-          {
-            "name": "Ti Ti Ti Sahur",
-            "page": "Ti Ti Ti Sahur",
-            "url": "https://stealabrainrot.fandom.com/wiki/Ti_Ti_Ti_Sahur"
-          }
-        ]
+        "income": "$225/s"
       },
       "system": {
-        "slug": "ti-ti-ti-sahur",
-        "section": "Epic",
+        "slug": "ti-ti-ti-sahur-2025",
+        "section": "2025 Fuse Machine",
         "sortOrder": 3,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/ti-ti-ti-sahur.webp"
       }
@@ -137,26 +116,15 @@
     {
       "item": {
         "name": "Penguino Cocosino",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Epic",
-        "maxChance": "43% (4 Brr Brr Patapim or 4 Brri Brri Bicus Dicus Bombicus",
-        "income": "$300/s",
-        "brainrotLinks": [
-          {
-            "name": "Penguino Cocosino",
-            "page": "Penguino Cocosino",
-            "url": "https://stealabrainrot.fandom.com/wiki/Penguino_Cocosino"
-          },
-          {
-            "name": "Penguino Cocosino",
-            "page": "Penguino Cocosino",
-            "url": "https://stealabrainrot.fandom.com/wiki/Penguino_Cocosino"
-          }
-        ]
+        "maxChance": "43% (4 Brr Brr Patapim or 4 Brri Brri Bicus Dicus Bombicus)",
+        "income": "$300/s"
       },
       "system": {
-        "slug": "penguino-cocosino",
-        "section": "Epic",
+        "slug": "penguino-cocosino-2025",
+        "section": "2025 Fuse Machine",
         "sortOrder": 4,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/penguino-cocosino.webp"
       }
@@ -164,26 +132,15 @@
     {
       "item": {
         "name": "Cocosini Mama",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Legendary",
         "maxChance": "62% (4 Burbaloni Lolilolis)",
-        "income": "$1.2K/s",
-        "brainrotLinks": [
-          {
-            "name": "Cocosini Mama",
-            "page": "Cocosini Mama",
-            "url": "https://stealabrainrot.fandom.com/wiki/Cocosini_Mama"
-          },
-          {
-            "name": "Cocosini Mama",
-            "page": "Cocosini Mama",
-            "url": "https://stealabrainrot.fandom.com/wiki/Cocosini_Mama"
-          }
-        ]
+        "income": "$1.2K/s"
       },
       "system": {
-        "slug": "cocosini-mama",
-        "section": "Legendary",
+        "slug": "cocosini-mama-2025",
+        "section": "2025 Fuse Machine",
         "sortOrder": 5,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/cocosini-mama.webp"
       }
@@ -191,26 +148,15 @@
     {
       "item": {
         "name": "Pi Pi Watermelon",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Legendary",
         "maxChance": "41% (4 Ballerina Cappuccina)",
-        "income": "$1.3K/s",
-        "brainrotLinks": [
-          {
-            "name": "Pi Pi Watermelon",
-            "page": "Pi Pi Watermelon",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pi_Pi_Watermelon"
-          },
-          {
-            "name": "Pi Pi Watermelon",
-            "page": "Pi Pi Watermelon",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pi_Pi_Watermelon"
-          }
-        ]
+        "income": "$1.3K/s"
       },
       "system": {
-        "slug": "pi-pi-watermelon",
-        "section": "Legendary",
+        "slug": "pi-pi-watermelon-2025",
+        "section": "2025 Fuse Machine",
         "sortOrder": 6,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pi-pi-watermelon.webp"
       }
@@ -218,26 +164,15 @@
     {
       "item": {
         "name": "Avocadorilla",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Mythic",
         "maxChance": "69% (3 Chef Cabracadabra and 1 Frigo Camelo)",
-        "income": "$7K/s",
-        "brainrotLinks": [
-          {
-            "name": "Avocadorilla",
-            "page": "Avocadorilla",
-            "url": "https://stealabrainrot.fandom.com/wiki/Avocadorilla"
-          },
-          {
-            "name": "Avocadorilla",
-            "page": "Avocadorilla",
-            "url": "https://stealabrainrot.fandom.com/wiki/Avocadorilla"
-          }
-        ]
+        "income": "$7K/s"
       },
       "system": {
         "slug": "avocadorilla",
-        "section": "Mythic",
+        "section": "2025 Fuse Machine",
         "sortOrder": 7,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/avocadorilla.webp"
       }
@@ -245,26 +180,15 @@
     {
       "item": {
         "name": "Tob Tobi Tobi",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Mythic",
         "maxChance": "43% (3 Frigo Camelo and 1 Sigma Boy)",
-        "income": "$8.5K/s",
-        "brainrotLinks": [
-          {
-            "name": "Tob Tobi Tobi",
-            "page": "Tob Tobi Tobi",
-            "url": "https://stealabrainrot.fandom.com/wiki/Tob_Tobi_Tobi"
-          },
-          {
-            "name": "Tob Tobi Tobi",
-            "page": "Tob Tobi Tobi",
-            "url": "https://stealabrainrot.fandom.com/wiki/Tob_Tobi_Tobi"
-          }
-        ]
+        "income": "$8.5K/s"
       },
       "system": {
         "slug": "tob-tobi-tobi",
-        "section": "Mythic",
+        "section": "2025 Fuse Machine",
         "sortOrder": 8,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/tob-tobi-tobi.webp"
       }
@@ -272,26 +196,15 @@
     {
       "item": {
         "name": "Ganganzelli Trulala",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Mythic",
         "maxChance": "26% (3 Bombardiro Crocodilo and 1 Blueberrinni Octopusini)",
-        "income": "$9K/s",
-        "brainrotLinks": [
-          {
-            "name": "Ganganzelli Trulala",
-            "page": "Ganganzelli Trulala",
-            "url": "https://stealabrainrot.fandom.com/wiki/Ganganzelli_Trulala"
-          },
-          {
-            "name": "Ganganzelli Trulala",
-            "page": "Ganganzelli Trulala",
-            "url": "https://stealabrainrot.fandom.com/wiki/Ganganzelli_Trulala"
-          }
-        ]
+        "income": "$9K/s"
       },
       "system": {
         "slug": "ganganzelli-trulala",
-        "section": "Mythic",
+        "section": "2025 Fuse Machine",
         "sortOrder": 9,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/ganganzelli-trulala.webp"
       }
@@ -299,26 +212,15 @@
     {
       "item": {
         "name": "Tukanno Bananno",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Brainrot God",
         "maxChance": "60% (4 Girafa Celestre)",
-        "income": "$100K/s",
-        "brainrotLinks": [
-          {
-            "name": "Tukanno Bananno",
-            "page": "Tukanno Bananno",
-            "url": "https://stealabrainrot.fandom.com/wiki/Tukanno_Bananno"
-          },
-          {
-            "name": "Tukanno Bananno",
-            "page": "Tukanno Bananno",
-            "url": "https://stealabrainrot.fandom.com/wiki/Tukanno_Bananno"
-          }
-        ]
+        "income": "$100K/s"
       },
       "system": {
         "slug": "tukanno-bananno",
-        "section": "Brainrot God",
+        "section": "2025 Fuse Machine",
         "sortOrder": 10,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/tukanno-bananno.webp"
       }
@@ -326,26 +228,15 @@
     {
       "item": {
         "name": "Brr es Teh Patipum",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Brainrot God",
         "maxChance": "44% (3 Tralalero Tralala and 1 Cocofanto Elefanto)",
-        "income": "$225K/s",
-        "brainrotLinks": [
-          {
-            "name": "Brr es Teh Patipum",
-            "page": "Brr es Teh Patipum",
-            "url": "https://stealabrainrot.fandom.com/wiki/Brr_es_Teh_Patipum"
-          },
-          {
-            "name": "Brr es Teh Patipum",
-            "page": "Brr es Teh Patipum",
-            "url": "https://stealabrainrot.fandom.com/wiki/Brr_es_Teh_Patipum"
-          }
-        ]
+        "income": "$225K/s"
       },
       "system": {
         "slug": "brr-es-teh-patipum",
-        "section": "Brainrot God",
+        "section": "2025 Fuse Machine",
         "sortOrder": 11,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/brr-es-teh-patipum.webp"
       }
@@ -353,26 +244,15 @@
     {
       "item": {
         "name": "Los Orcalitos",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Brainrot God",
-        "maxChance": "?%",
-        "income": "$235K/s",
-        "brainrotLinks": [
-          {
-            "name": "Los Orcalitos",
-            "page": "Los Orcalitos",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Orcalitos"
-          },
-          {
-            "name": "Los Orcalitos",
-            "page": "Los Orcalitos",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Orcalitos"
-          }
-        ]
+        "maxChance": "TBA",
+        "income": "$235K/s"
       },
       "system": {
         "slug": "los-orcalitos",
-        "section": "Brainrot God",
+        "section": "2025 Fuse Machine",
         "sortOrder": 12,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-orcalitos.webp"
       }
@@ -380,26 +260,15 @@
     {
       "item": {
         "name": "Los Tungtungtungcitos",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Brainrot God",
         "maxChance": "76% (3 Odin Din Din Dun and 1 Piccione Macchina)",
-        "income": "$210K/s",
-        "brainrotLinks": [
-          {
-            "name": "Los Tungtungtungcitos",
-            "page": "Los Tungtungtungcitos",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Tungtungtungcitos"
-          },
-          {
-            "name": "Los Tungtungtungcitos",
-            "page": "Los Tungtungtungcitos",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Tungtungtungcitos"
-          }
-        ]
+        "income": "$210K/s"
       },
       "system": {
         "slug": "los-tungtungtungcitos",
-        "section": "Brainrot God",
+        "section": "2025 Fuse Machine",
         "sortOrder": 13,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-tungtungtungcitos.webp"
       }
@@ -407,26 +276,15 @@
     {
       "item": {
         "name": "Agarrini la Palini",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "96% (4 Graipuss Medussi)",
-        "income": "$425K/s",
-        "brainrotLinks": [
-          {
-            "name": "Agarrini la Palini",
-            "page": "Agarrini la Palini",
-            "url": "https://stealabrainrot.fandom.com/wiki/Agarrini_la_Palini"
-          },
-          {
-            "name": "Agarrini la Palini",
-            "page": "Agarrini la Palini",
-            "url": "https://stealabrainrot.fandom.com/wiki/Agarrini_la_Palini"
-          }
-        ]
+        "income": "$425K/s"
       },
       "system": {
         "slug": "agarrini-la-palini",
-        "section": "Secret",
+        "section": "2025 Fuse Machine",
         "sortOrder": 14,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/agarrini-la-palini.webp"
       }
@@ -434,26 +292,15 @@
     {
       "item": {
         "name": "Los Combinasionas",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "6% (4 Graipuss Medussi or 4 Chicleteira Bicicleteira)",
-        "income": "$15M/s",
-        "brainrotLinks": [
-          {
-            "name": "Los Combinasionas",
-            "page": "Los Combinasionas",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Combinasionas"
-          },
-          {
-            "name": "Los Combinasionas",
-            "page": "Los Combinasionas",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Combinasionas"
-          }
-        ]
+        "income": "$15M/s"
       },
       "system": {
         "slug": "los-combinasionas",
-        "section": "Secret",
+        "section": "2025 Fuse Machine",
         "sortOrder": 15,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-combinasionas.webp"
       }
@@ -461,26 +308,15 @@
     {
       "item": {
         "name": "Los Hotspotsitos",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "3% (4 La Grande Combinasion or 4 Los Combinasionas)",
-        "income": "$20M/s",
-        "brainrotLinks": [
-          {
-            "name": "Los Hotspotsitos",
-            "page": "Los Hotspotsitos",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Hotspotsitos"
-          },
-          {
-            "name": "Los Hotspotsitos",
-            "page": "Los Hotspotsitos",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Hotspotsitos"
-          }
-        ]
+        "income": "$20M/s"
       },
       "system": {
         "slug": "los-hotspotsitos",
-        "section": "Secret",
+        "section": "2025 Fuse Machine",
         "sortOrder": 16,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-hotspotsitos.webp"
       }
@@ -488,26 +324,15 @@
     {
       "item": {
         "name": "La Supreme Combinasion",
+        "cardSummary": "A result from the original 2025 Fuse Machine run.",
         "machine": "2025 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "7%",
-        "income": "$200M/s",
-        "brainrotLinks": [
-          {
-            "name": "La Supreme Combinasion",
-            "page": "La Supreme Combinasion",
-            "url": "https://stealabrainrot.fandom.com/wiki/La_Supreme_Combinasion"
-          },
-          {
-            "name": "La Supreme Combinasion",
-            "page": "La Supreme Combinasion",
-            "url": "https://stealabrainrot.fandom.com/wiki/La_Supreme_Combinasion"
-          }
-        ]
+        "income": "$200M/s"
       },
       "system": {
         "slug": "la-supreme-combinasion",
-        "section": "Secret",
+        "section": "2025 Fuse Machine",
         "sortOrder": 17,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/la-supreme-combinasion.webp"
       }
@@ -515,26 +340,15 @@
     {
       "item": {
         "name": "Pipi Corni",
+        "cardSummary": "A returning result in the 2026 Fuse Machine run with its own run-specific documented chance.",
         "machine": "2026 Fuse Machine",
         "rarity": "Common",
         "maxChance": "67% (4 Noobinis)",
-        "income": "$14/s",
-        "brainrotLinks": [
-          {
-            "name": "Pipi Corni",
-            "page": "Pipi Corni",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Corni"
-          },
-          {
-            "name": "Pipi Corni",
-            "page": "Pipi Corni",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Corni"
-          }
-        ]
+        "income": "$14/s"
       },
       "system": {
-        "slug": "pipi-corni",
-        "section": "Common",
+        "slug": "pipi-corni-2026",
+        "section": "2026 Fuse Machine",
         "sortOrder": 18,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pipi-corni-2.webp"
       }
@@ -542,26 +356,15 @@
     {
       "item": {
         "name": "Pipi Avocado",
+        "cardSummary": "A returning result in the 2026 Fuse Machine run with its own run-specific documented chance.",
         "machine": "2026 Fuse Machine",
         "rarity": "Rare",
         "maxChance": "95%",
-        "income": "$70/s",
-        "brainrotLinks": [
-          {
-            "name": "Pipi Avocado",
-            "page": "Pipi Avocado",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Avocado"
-          },
-          {
-            "name": "Pipi Avocado",
-            "page": "Pipi Avocado",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pipi_Avocado"
-          }
-        ]
+        "income": "$70/s"
       },
       "system": {
-        "slug": "pipi-avocado",
-        "section": "Rare",
+        "slug": "pipi-avocado-2026",
+        "section": "2026 Fuse Machine",
         "sortOrder": 19,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pipi-avocado-2.webp"
       }
@@ -569,26 +372,15 @@
     {
       "item": {
         "name": "Ti Ti Ti Sahur",
+        "cardSummary": "A returning result in the 2026 Fuse Machine run with its own run-specific documented chance.",
         "machine": "2026 Fuse Machine",
         "rarity": "Epic",
         "maxChance": "62%",
-        "income": "$225/s",
-        "brainrotLinks": [
-          {
-            "name": "Ti Ti Ti Sahur",
-            "page": "Ti Ti Ti Sahur",
-            "url": "https://stealabrainrot.fandom.com/wiki/Ti_Ti_Ti_Sahur"
-          },
-          {
-            "name": "Ti Ti Ti Sahur",
-            "page": "Ti Ti Ti Sahur",
-            "url": "https://stealabrainrot.fandom.com/wiki/Ti_Ti_Ti_Sahur"
-          }
-        ]
+        "income": "$225/s"
       },
       "system": {
-        "slug": "ti-ti-ti-sahur",
-        "section": "Epic",
+        "slug": "ti-ti-ti-sahur-2026",
+        "section": "2026 Fuse Machine",
         "sortOrder": 20,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/ti-ti-ti-sahur-2.webp"
       }
@@ -596,26 +388,15 @@
     {
       "item": {
         "name": "Penguino Cocosino",
+        "cardSummary": "A returning result in the 2026 Fuse Machine run with its own run-specific documented chance.",
         "machine": "2026 Fuse Machine",
         "rarity": "Epic",
         "maxChance": "31%",
-        "income": "$300/s",
-        "brainrotLinks": [
-          {
-            "name": "Penguino Cocosino",
-            "page": "Penguino Cocosino",
-            "url": "https://stealabrainrot.fandom.com/wiki/Penguino_Cocosino"
-          },
-          {
-            "name": "Penguino Cocosino",
-            "page": "Penguino Cocosino",
-            "url": "https://stealabrainrot.fandom.com/wiki/Penguino_Cocosino"
-          }
-        ]
+        "income": "$300/s"
       },
       "system": {
-        "slug": "penguino-cocosino",
-        "section": "Epic",
+        "slug": "penguino-cocosino-2026",
+        "section": "2026 Fuse Machine",
         "sortOrder": 21,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/penguino-cocosino-2.webp"
       }
@@ -623,26 +404,15 @@
     {
       "item": {
         "name": "Cocosini Mama",
+        "cardSummary": "A returning result in the 2026 Fuse Machine run with its own run-specific documented chance.",
         "machine": "2026 Fuse Machine",
         "rarity": "Legendary",
         "maxChance": "61%",
-        "income": "$1.2K/s",
-        "brainrotLinks": [
-          {
-            "name": "Cocosini Mama",
-            "page": "Cocosini Mama",
-            "url": "https://stealabrainrot.fandom.com/wiki/Cocosini_Mama"
-          },
-          {
-            "name": "Cocosini Mama",
-            "page": "Cocosini Mama",
-            "url": "https://stealabrainrot.fandom.com/wiki/Cocosini_Mama"
-          }
-        ]
+        "income": "$1.2K/s"
       },
       "system": {
-        "slug": "cocosini-mama",
-        "section": "Legendary",
+        "slug": "cocosini-mama-2026",
+        "section": "2026 Fuse Machine",
         "sortOrder": 22,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/cocosini-mama-2.webp"
       }
@@ -650,26 +420,15 @@
     {
       "item": {
         "name": "Pi Pi Watermelon",
+        "cardSummary": "A returning result in the 2026 Fuse Machine run with its own run-specific documented chance.",
         "machine": "2026 Fuse Machine",
         "rarity": "Legendary",
         "maxChance": "47%",
-        "income": "$1.3K/s",
-        "brainrotLinks": [
-          {
-            "name": "Pi Pi Watermelon",
-            "page": "Pi Pi Watermelon",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pi_Pi_Watermelon"
-          },
-          {
-            "name": "Pi Pi Watermelon",
-            "page": "Pi Pi Watermelon",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pi_Pi_Watermelon"
-          }
-        ]
+        "income": "$1.3K/s"
       },
       "system": {
-        "slug": "pi-pi-watermelon",
-        "section": "Legendary",
+        "slug": "pi-pi-watermelon-2026",
+        "section": "2026 Fuse Machine",
         "sortOrder": 23,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/pi-pi-watermelon-2.webp"
       }
@@ -677,26 +436,15 @@
     {
       "item": {
         "name": "Spongini Quackini",
+        "cardSummary": "A result from the returned 2026 Fuse Machine run.",
         "machine": "2026 Fuse Machine",
         "rarity": "Mythic",
         "maxChance": "73%",
-        "income": "$13K/s",
-        "brainrotLinks": [
-          {
-            "name": "Spongini Quackini",
-            "page": "Spongini Quackini",
-            "url": "https://stealabrainrot.fandom.com/wiki/Spongini_Quackini"
-          },
-          {
-            "name": "Spongini Quackini",
-            "page": "Spongini Quackini",
-            "url": "https://stealabrainrot.fandom.com/wiki/Spongini_Quackini"
-          }
-        ]
+        "income": "$13K/s"
       },
       "system": {
         "slug": "spongini-quackini",
-        "section": "Mythic",
+        "section": "2026 Fuse Machine",
         "sortOrder": 24,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/spongini-quackini.webp"
       }
@@ -704,26 +452,15 @@
     {
       "item": {
         "name": "Fizzy Soda",
+        "cardSummary": "A result from the returned 2026 Fuse Machine run.",
         "machine": "2026 Fuse Machine",
         "rarity": "Mythic",
         "maxChance": "41% (3 Cocofanto Elefantos and 1 high tier Mythic or Mythic Lucky Block)",
-        "income": "$17.2K/s",
-        "brainrotLinks": [
-          {
-            "name": "Fizzy Soda",
-            "page": "Fizzy Soda",
-            "url": "https://stealabrainrot.fandom.com/wiki/Fizzy_Soda"
-          },
-          {
-            "name": "Fizzy Soda",
-            "page": "Fizzy Soda",
-            "url": "https://stealabrainrot.fandom.com/wiki/Fizzy_Soda"
-          }
-        ]
+        "income": "$17.2K/s"
       },
       "system": {
         "slug": "fizzy-soda",
-        "section": "Mythic",
+        "section": "2026 Fuse Machine",
         "sortOrder": 25,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/fizzy-soda.webp"
       }
@@ -731,26 +468,15 @@
     {
       "item": {
         "name": "Boba Panda",
+        "cardSummary": "A result from the returned 2026 Fuse Machine run.",
         "machine": "2026 Fuse Machine",
         "rarity": "Brainrot God",
         "maxChance": "60%",
-        "income": "$270K/s",
-        "brainrotLinks": [
-          {
-            "name": "Boba Panda",
-            "page": "Boba Panda",
-            "url": "https://stealabrainrot.fandom.com/wiki/Boba_Panda"
-          },
-          {
-            "name": "Boba Panda",
-            "page": "Boba Panda",
-            "url": "https://stealabrainrot.fandom.com/wiki/Boba_Panda"
-          }
-        ]
+        "income": "$270K/s"
       },
       "system": {
         "slug": "boba-panda",
-        "section": "Brainrot God",
+        "section": "2026 Fuse Machine",
         "sortOrder": 26,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/boba-panda.webp"
       }
@@ -758,26 +484,15 @@
     {
       "item": {
         "name": "Dolphini Jetskini",
+        "cardSummary": "A result from the returned 2026 Fuse Machine run.",
         "machine": "2026 Fuse Machine",
         "rarity": "Brainrot God",
         "maxChance": "46%",
-        "income": "$294.5K/s",
-        "brainrotLinks": [
-          {
-            "name": "Dolphini Jetskini",
-            "page": "Dolphini Jetskini",
-            "url": "https://stealabrainrot.fandom.com/wiki/Dolphini_Jetskini"
-          },
-          {
-            "name": "Dolphini Jetskini",
-            "page": "Dolphini Jetskini",
-            "url": "https://stealabrainrot.fandom.com/wiki/Dolphini_Jetskini"
-          }
-        ]
+        "income": "$294.5K/s"
       },
       "system": {
         "slug": "dolphini-jetskini",
-        "section": "Brainrot God",
+        "section": "2026 Fuse Machine",
         "sortOrder": 27,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/dolphini-jetskini.webp"
       }
@@ -785,31 +500,15 @@
     {
       "item": {
         "name": "Los Trios",
+        "cardSummary": "A 2026 Fuse Machine result that Fishboard temporarily replaced during Admin Abuse.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "92%",
-        "income": "$700K/s",
-        "brainrotLinks": [
-          {
-            "name": "Los Trios",
-            "page": "Los Trios",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Trios"
-          },
-          {
-            "name": "Los Trios",
-            "page": "Los Trios",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Trios"
-          },
-          {
-            "name": "Fishboard",
-            "page": "Fishboard",
-            "url": "https://stealabrainrot.fandom.com/wiki/Fishboard"
-          }
-        ]
+        "income": "$700K/s"
       },
       "system": {
         "slug": "los-trios",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 28,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-trios.webp"
       }
@@ -817,31 +516,15 @@
     {
       "item": {
         "name": "Fishboard",
+        "cardSummary": "A temporary Admin Abuse replacement for Los Trios in the 2026 Fuse Machine.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "92%",
-        "income": "$825K/s",
-        "brainrotLinks": [
-          {
-            "name": "Fishboard",
-            "page": "Fishboard",
-            "url": "https://stealabrainrot.fandom.com/wiki/Fishboard"
-          },
-          {
-            "name": "Fishboard",
-            "page": "Fishboard",
-            "url": "https://stealabrainrot.fandom.com/wiki/Fishboard"
-          },
-          {
-            "name": "Los Trios",
-            "page": "Los Trios",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Trios"
-          }
-        ]
+        "income": "$825K/s"
       },
       "system": {
         "slug": "fishboard",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 29,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/fishboard.webp"
       }
@@ -849,26 +532,15 @@
     {
       "item": {
         "name": "Chill Puppy",
+        "cardSummary": "A result from the returned 2026 Fuse Machine run.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "37%",
-        "income": "$4M/s",
-        "brainrotLinks": [
-          {
-            "name": "Chill Puppy",
-            "page": "Chill Puppy",
-            "url": "https://stealabrainrot.fandom.com/wiki/Chill_Puppy"
-          },
-          {
-            "name": "Chill Puppy",
-            "page": "Chill Puppy",
-            "url": "https://stealabrainrot.fandom.com/wiki/Chill_Puppy"
-          }
-        ]
+        "income": "$4M/s"
       },
       "system": {
         "slug": "chill-puppy",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 30,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/chill-puppy.webp"
       }
@@ -876,26 +548,15 @@
     {
       "item": {
         "name": "Los Sweethearts",
+        "cardSummary": "A result from the returned 2026 Fuse Machine run.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "50% (Los Tralaleritos Las Tralaleritas, Cupid Hotspot, and Noo my Heart)",
-        "income": "$16.5M/s",
-        "brainrotLinks": [
-          {
-            "name": "Los Sweethearts",
-            "page": "Los Sweethearts",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Sweethearts"
-          },
-          {
-            "name": "Los Sweethearts",
-            "page": "Los Sweethearts",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Sweethearts"
-          }
-        ]
+        "income": "$16.5M/s"
       },
       "system": {
         "slug": "los-sweethearts",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 31,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-sweethearts.webp"
       }
@@ -903,31 +564,15 @@
     {
       "item": {
         "name": "Spinny Hammy",
+        "cardSummary": "A 2026 Fuse Machine result that DJ Panda temporarily replaced during Admin Abuse.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "49%",
-        "income": "$17M/s",
-        "brainrotLinks": [
-          {
-            "name": "Spinny Hammy",
-            "page": "Spinny Hammy",
-            "url": "https://stealabrainrot.fandom.com/wiki/Spinny_Hammy"
-          },
-          {
-            "name": "Spinny Hammy",
-            "page": "Spinny Hammy",
-            "url": "https://stealabrainrot.fandom.com/wiki/Spinny_Hammy"
-          },
-          {
-            "name": "DJ Panda",
-            "page": "DJ Panda",
-            "url": "https://stealabrainrot.fandom.com/wiki/DJ_Panda"
-          }
-        ]
+        "income": "$17M/s"
       },
       "system": {
         "slug": "spinny-hammy",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 32,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/spinny-hammy.webp"
       }
@@ -935,31 +580,15 @@
     {
       "item": {
         "name": "DJ Panda",
+        "cardSummary": "A temporary Admin Abuse replacement for Spinny Hammy in the 2026 Fuse Machine.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "49%",
-        "income": "$17.5M/s",
-        "brainrotLinks": [
-          {
-            "name": "DJ Panda",
-            "page": "DJ Panda",
-            "url": "https://stealabrainrot.fandom.com/wiki/DJ_Panda"
-          },
-          {
-            "name": "DJ Panda",
-            "page": "DJ Panda",
-            "url": "https://stealabrainrot.fandom.com/wiki/DJ_Panda"
-          },
-          {
-            "name": "Spinny Hammy",
-            "page": "Spinny Hammy",
-            "url": "https://stealabrainrot.fandom.com/wiki/Spinny_Hammy"
-          }
-        ]
+        "income": "$17.5M/s"
       },
       "system": {
         "slug": "dj-panda",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 33,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/dj-panda.webp"
       }
@@ -967,26 +596,15 @@
     {
       "item": {
         "name": "Bacuru and Egguru",
+        "cardSummary": "A 2026 Fuse Machine result that Los 67 temporarily replaced during Admin Abuse.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "48%",
-        "income": "$24M/s",
-        "brainrotLinks": [
-          {
-            "name": "Bacuru and Egguru",
-            "page": "Bacuru and Egguru",
-            "url": "https://stealabrainrot.fandom.com/wiki/Bacuru_and_Egguru"
-          },
-          {
-            "name": "Bacuru and Egguru",
-            "page": "Bacuru and Egguru",
-            "url": "https://stealabrainrot.fandom.com/wiki/Bacuru_and_Egguru"
-          }
-        ]
+        "income": "$24M/s"
       },
       "system": {
         "slug": "bacuru-and-egguru",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 34,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/bacuru-and-egguru.webp"
       }
@@ -994,31 +612,15 @@
     {
       "item": {
         "name": "Los 67",
+        "cardSummary": "A temporary Admin Abuse replacement for Bacuru and Egguru in the 2026 Fuse Machine.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "48%",
-        "income": "$22.5M/s",
-        "brainrotLinks": [
-          {
-            "name": "Los 67",
-            "page": "Los 67",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_67"
-          },
-          {
-            "name": "Los 67",
-            "page": "Los 67",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_67"
-          },
-          {
-            "name": "Bacuru and Egguru",
-            "page": "Bacuru and Egguru",
-            "url": "https://stealabrainrot.fandom.com/wiki/Bacuru_and_Egguru"
-          }
-        ]
+        "income": "$22.5M/s"
       },
       "system": {
         "slug": "los-67",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 35,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/los-67.webp"
       }
@@ -1026,31 +628,15 @@
     {
       "item": {
         "name": "Garama and Madundung",
+        "cardSummary": "An Admin Abuse replacement for Popcuru and Fizzuru in the 2026 Fuse Machine.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "16% (required OGs)",
-        "income": "$50M/s",
-        "brainrotLinks": [
-          {
-            "name": "Garama and Madundung",
-            "page": "Garama and Madundung",
-            "url": "https://stealabrainrot.fandom.com/wiki/Garama_and_Madundung"
-          },
-          {
-            "name": "Garama and Madundung",
-            "page": "Garama and Madundung",
-            "url": "https://stealabrainrot.fandom.com/wiki/Garama_and_Madundung"
-          },
-          {
-            "name": "Popcuru and Fizzuru",
-            "page": "Popcuru and Fizzuru",
-            "url": "https://stealabrainrot.fandom.com/wiki/Popcuru_and_Fizzuru"
-          }
-        ]
+        "income": "$50M/s"
       },
       "system": {
         "slug": "garama-and-madundung",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 36,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/garama-and-madundung.webp"
       }
@@ -1058,58 +644,31 @@
     {
       "item": {
         "name": "Capitano Moby",
+        "cardSummary": "A brief Admin Abuse replacement for Popcuru and Fizzuru in the 2026 Fuse Machine.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "16% (required OGs)",
-        "income": "$160M/s",
-        "brainrotLinks": [
-          {
-            "name": "Capitano Moby",
-            "page": "Capitano Moby",
-            "url": "https://stealabrainrot.fandom.com/wiki/Capitano_Moby"
-          },
-          {
-            "name": "Capitano Moby",
-            "page": "Capitano Moby",
-            "url": "https://stealabrainrot.fandom.com/wiki/Capitano_Moby"
-          },
-          {
-            "name": "Popcuru and Fizzuru",
-            "page": "Popcuru and Fizzuru",
-            "url": "https://stealabrainrot.fandom.com/wiki/Popcuru_and_Fizzuru"
-          }
-        ]
+        "income": "$160M/s"
       },
       "system": {
         "slug": "capitano-moby",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 37,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/capitano-moby.webp"
       }
     },
     {
       "item": {
-        "name": "Popcuru And Fizzuru",
+        "name": "Popcuru and Fizzuru",
+        "cardSummary": "A 2026 Fuse Machine result temporarily replaced by other outcomes during Admin Abuse.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "16% (required OGs)",
-        "income": "$170M/s",
-        "brainrotLinks": [
-          {
-            "name": "Popcuru And Fizzuru",
-            "page": "Popcuru And Fizzuru",
-            "url": "https://stealabrainrot.fandom.com/wiki/Popcuru_And_Fizzuru"
-          },
-          {
-            "name": "Popcuru and Fizzuru",
-            "page": "Popcuru and Fizzuru",
-            "url": "https://stealabrainrot.fandom.com/wiki/Popcuru_and_Fizzuru"
-          }
-        ]
+        "income": "$170M/s"
       },
       "system": {
         "slug": "popcuru-and-fizzuru",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 38,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/popcuru-and-fizzuru.webp"
       }
@@ -1117,26 +676,15 @@
     {
       "item": {
         "name": "Ketupat Bros",
+        "cardSummary": "A result from the returned 2026 Fuse Machine run.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
-        "maxChance": "100% (1 Ketupat Kepat and 1 Ginger Gerat)",
-        "income": "$145M/s",
-        "brainrotLinks": [
-          {
-            "name": "Ketupat Bros",
-            "page": "Ketupat Bros",
-            "url": "https://stealabrainrot.fandom.com/wiki/Ketupat_Bros"
-          },
-          {
-            "name": "Ketupat Bros",
-            "page": "Ketupat Bros",
-            "url": "https://stealabrainrot.fandom.com/wiki/Ketupat_Bros"
-          }
-        ]
+        "maxChance": "100% (1 Ketupat Kepat, 1 Ginger Gerat, and 2 Secrets)",
+        "income": "$145M/s"
       },
       "system": {
         "slug": "ketupat-bros",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 39,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/ketupat-bros.webp"
       }
@@ -1144,26 +692,15 @@
     {
       "item": {
         "name": "Hydra Dragon Cannelloni",
+        "cardSummary": "A 2026 Fuse Machine result that Celestial Pegasus temporarily replaced during Admin Abuse.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "10% (4 Strawberry Elephants)",
-        "income": "$300M/s",
-        "brainrotLinks": [
-          {
-            "name": "Hydra Dragon Cannelloni",
-            "page": "Hydra Dragon Cannelloni",
-            "url": "https://stealabrainrot.fandom.com/wiki/Hydra_Dragon_Cannelloni"
-          },
-          {
-            "name": "Hydra Dragon Cannelloni",
-            "page": "Hydra Dragon Cannelloni",
-            "url": "https://stealabrainrot.fandom.com/wiki/Hydra_Dragon_Cannelloni"
-          }
-        ]
+        "income": "$300M/s"
       },
       "system": {
         "slug": "hydra-dragon-cannelloni",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 40,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/hydra-dragon-cannelloni.webp"
       }
@@ -1171,31 +708,15 @@
     {
       "item": {
         "name": "Celestial Pegasus",
+        "cardSummary": "A temporary Admin Abuse replacement for Hydra Dragon Cannelloni in the 2026 Fuse Machine.",
         "machine": "2026 Fuse Machine",
         "rarity": "Secret",
         "maxChance": "10% (4 Strawberry Elephants)",
-        "income": "$175M/s",
-        "brainrotLinks": [
-          {
-            "name": "Celestial Pegasus",
-            "page": "Celestial Pegasus",
-            "url": "https://stealabrainrot.fandom.com/wiki/Celestial_Pegasus"
-          },
-          {
-            "name": "Celestial Pegasus",
-            "page": "Celestial Pegasus",
-            "url": "https://stealabrainrot.fandom.com/wiki/Celestial_Pegasus"
-          },
-          {
-            "name": "Hydra Dragon Cannelloni",
-            "page": "Hydra Dragon Cannelloni",
-            "url": "https://stealabrainrot.fandom.com/wiki/Hydra_Dragon_Cannelloni"
-          }
-        ]
+        "income": "$175M/s"
       },
       "system": {
         "slug": "celestial-pegasus",
-        "section": "Secret",
+        "section": "2026 Fuse Machine",
         "sortOrder": 41,
         "image": "/Steal%20a%20Brainrot/Fuse%20Machine/celestial-pegasus.webp"
       }

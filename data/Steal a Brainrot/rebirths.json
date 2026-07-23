@@ -14,7 +14,8 @@
       "cashBonus",
       "lockBaseBonus",
       "slotBonus",
-      "specialItemsAbilities"
+      "specialItemsAbilities",
+      "cardSummary"
     ],
     "columns": [
       "level",
@@ -24,24 +25,26 @@
       "cashBonus",
       "lockBaseBonus",
       "slotBonus",
-      "specialItemsAbilities"
+      "specialItemsAbilities",
+      "cardSummary"
     ],
     "display": {
-      "groupLabel": "Group",
-      "sectionOrder": [
-        "Items"
-      ],
-      "badgeField": null,
-      "subtitleFields": [],
-      "descriptionField": null,
-      "cardDescriptionField": null,
+      "groupLabel": "Rebirths",
+      "sectionOrder": ["Items"],
+      "badgeField": "multiplier",
+      "subtitleFields": ["requiredCash"],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
         "level",
         "requiredCash",
         "requiredBrainrots",
         "multiplier",
         "cashBonus",
-        "lockBaseBonus"
+        "lockBaseBonus",
+        "slotBonus",
+        "specialItemsAbilities",
+        "cardSummary"
       ],
       "tableFields": [
         "level",
@@ -51,9 +54,20 @@
         "cashBonus",
         "lockBaseBonus",
         "slotBonus",
-        "specialItemsAbilities"
+        "specialItemsAbilities",
+        "cardSummary"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "level": { "kind": "chip", "label": "Level" },
+        "requiredCash": { "kind": "chip", "label": "Cash Required" },
+        "requiredBrainrots": { "kind": "detail", "label": "Brainrots Required" },
+        "multiplier": { "kind": "highlight", "label": "Money Multiplier" },
+        "cashBonus": { "kind": "chip", "label": "Starting Cash" },
+        "lockBaseBonus": { "kind": "chip", "label": "Base Lock Bonus" },
+        "slotBonus": { "kind": "chip", "label": "Slot Bonus" },
+        "specialItemsAbilities": { "kind": "detail", "label": "Unlocks" },
+        "cardSummary": { "kind": "detail", "label": "Summary" }
+      }
     }
   },
   "items": [
@@ -61,521 +75,271 @@
       "item": {
         "name": "Rebirth 1",
         "level": 1,
-        "requiredCash": "$ 500K (Formerly 1M",
-        "requiredBrainrots": [
-          {
-            "name": "Trippi Troppi",
-            "page": "Trippi Troppi",
-            "url": "https://stealabrainrot.fandom.com/wiki/Trippi_Troppi"
-          },
-          {
-            "name": "Gangster Footera",
-            "page": "Gangster Footera",
-            "url": "https://stealabrainrot.fandom.com/wiki/Gangster_Footera"
-          },
-          {
-            "name": "Tung Tung Tung Sahur",
-            "page": "Tung Tung Tung Sahur",
-            "url": "https://stealabrainrot.fandom.com/wiki/Tung_Tung_Tung_Sahur"
-          }
-        ],
+        "requiredCash": "$500K",
+        "requiredBrainrots": "Trippi Troppi, Gangster Footera",
         "multiplier": "x0.5",
         "cashBonus": "$5K",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "None",
-        "specialItemsAbilities": "Friend Controller Unlock, Iron Slap, Gravity Coil, Bee Launcher"
+        "specialItemsAbilities": "Friend Controller Unlock, Iron Slap, Gravity Coil, Bee Launcher",
+        "cardSummary": "The first rebirth requires two Brainrots and unlocks the Friend Controller plus three gear items."
       },
-      "system": {
-        "slug": "rebirth-1",
-        "section": "Items",
-        "sortOrder": 1,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-1.webp"
-      }
+      "system": { "slug": "rebirth-1", "section": "Items", "sortOrder": 1, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 2",
         "level": 2,
-        "requiredCash": "$1.5M (Formerly 3M)",
-        "requiredBrainrots": [
-          {
-            "name": "Boneca Ambalabu",
-            "page": "Boneca Ambalabu",
-            "url": "https://stealabrainrot.fandom.com/wiki/Boneca_Ambalabu"
-          },
-          {
-            "name": "Brr Brr Patapim",
-            "page": "Brr Brr Patapim",
-            "url": "https://stealabrainrot.fandom.com/wiki/Brr_Brr_Patapim"
-          }
-        ],
+        "requiredCash": "$1.5M",
+        "requiredBrainrots": "Boneca Ambalabu, Brr Brr Patapim",
         "multiplier": "x1",
         "cashBonus": "$10K",
-        "lockBaseBonus": "+10 Sec",
-        "slotBonus": "+1 (2nd floor)",
-        "specialItemsAbilities": "Gold Slap, Coil Combo, Rage Table"
+        "lockBaseBonus": "+10 sec",
+        "slotBonus": "+1 and second floor",
+        "specialItemsAbilities": "Gold Slap, Coil Combo, Rage Table",
+        "cardSummary": "This rebirth adds a Brainrot slot, opens the second floor, and unlocks three gear items."
       },
-      "system": {
-        "slug": "rebirth-2",
-        "section": "Items",
-        "sortOrder": 2,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-2.webp"
-      }
+      "system": { "slug": "rebirth-2", "section": "Items", "sortOrder": 2, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 3",
         "level": 3,
-        "requiredCash": "$12.5M (Formerly 7.5M)",
-        "requiredBrainrots": [
-          {
-            "name": "Trulimero Trulicina",
-            "page": "Trulimero Trulicina",
-            "url": "https://stealabrainrot.fandom.com/wiki/Trulimero_Trulicina"
-          },
-          {
-            "name": "Chimpanzini Bananini",
-            "page": "Chimpanzini Bananini",
-            "url": "https://stealabrainrot.fandom.com/wiki/Chimpanzini_Bananini"
-          }
-        ],
+        "requiredCash": "$12.5M",
+        "requiredBrainrots": "Trulimero Trulicina, Chimpanzini Bananini",
         "multiplier": "x2",
         "cashBonus": "$25K",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Diamond Slap, Grapple Hook, Taser Gun"
+        "specialItemsAbilities": "Diamond Slap, Grapple Hook, Taser Gun",
+        "cardSummary": "This level requires two Brainrots and unlocks the Diamond Slap, Grapple Hook, and Taser Gun."
       },
-      "system": {
-        "slug": "rebirth-3",
-        "section": "Items",
-        "sortOrder": 3,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-3.webp"
-      }
+      "system": { "slug": "rebirth-3", "section": "Items", "sortOrder": 3, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 4",
         "level": 4,
-        "requiredCash": "$ 35M (Formerly 25M)",
-        "requiredBrainrots": [
-          {
-            "name": "Chef Crabracadabra",
-            "page": "Chef Crabracadabra",
-            "url": "https://stealabrainrot.fandom.com/wiki/Chef_Crabracadabra"
-          },
-          {
-            "name": "Glorbo Fruttodrillo",
-            "page": "Glorbo Fruttodrillo",
-            "url": "https://stealabrainrot.fandom.com/wiki/Glorbo_Fruttodrillo"
-          }
-        ],
+        "requiredCash": "$35M",
+        "requiredBrainrots": "Chef Crabracadabra, Glorbo Fruttodrillo",
         "multiplier": "x3",
         "cashBonus": "$50K",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Emerald Slap, Invisibility Cloak, Boogie Bomb"
+        "specialItemsAbilities": "Emerald Slap, Invisibility Cloak, Boogie Bomb",
+        "cardSummary": "This level unlocks the Emerald Slap, Invisibility Cloak, and Boogie Bomb."
       },
-      "system": {
-        "slug": "rebirth-4",
-        "section": "Items",
-        "sortOrder": 4,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-4.webp"
-      }
+      "system": { "slug": "rebirth-4", "section": "Items", "sortOrder": 4, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 5",
         "level": 5,
         "requiredCash": "$100M",
-        "requiredBrainrots": [
-          {
-            "name": "Frigo Camelo",
-            "page": "Frigo Camelo",
-            "url": "https://stealabrainrot.fandom.com/wiki/Frigo_Camelo"
-          },
-          {
-            "name": "Orangutini Ananassini",
-            "page": "Orangutini Ananassini",
-            "url": "https://stealabrainrot.fandom.com/wiki/Orangutini_Ananassini"
-          }
-        ],
+        "requiredBrainrots": "Frigo Camelo, Orangutini Ananassini",
         "multiplier": "x4",
         "cashBonus": "$100K",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Ruby Slap, Medusa's Head"
+        "specialItemsAbilities": "Ruby Slap, Medusa's Head",
+        "cardSummary": "This level unlocks the Ruby Slap and Medusa's Head after turning in two required Brainrots."
       },
-      "system": {
-        "slug": "rebirth-5",
-        "section": "Items",
-        "sortOrder": 5,
-        "image": null
-      }
+      "system": { "slug": "rebirth-5", "section": "Items", "sortOrder": 5, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 6",
         "level": 6,
         "requiredCash": "$350M",
-        "requiredBrainrots": [
-          {
-            "name": "Bombardiro Crocodilo",
-            "page": "Bombardiro Crocodilo",
-            "url": "https://stealabrainrot.fandom.com/wiki/Bombardiro_Crocodilo"
-          }
-        ],
+        "requiredBrainrots": "Bombardiro Crocodilo",
         "multiplier": "x5",
         "cashBonus": "$250K",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Dark Matter Slap, Web Slinger"
+        "specialItemsAbilities": "Dark Matter Slap, Web Slinger",
+        "cardSummary": "This level requires Bombardiro Crocodilo and unlocks the Dark Matter Slap and Web Slinger."
       },
-      "system": {
-        "slug": "rebirth-6",
-        "section": "Items",
-        "sortOrder": 6,
-        "image": null
-      }
+      "system": { "slug": "rebirth-6", "section": "Items", "sortOrder": 6, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 7",
         "level": 7,
         "requiredCash": "$1B",
-        "requiredBrainrots": [
-          {
-            "name": "Bombombini Gusini",
-            "page": "Bombombini Gusini",
-            "url": "https://stealabrainrot.fandom.com/wiki/Bombombini_Gusini"
-          }
-        ],
+        "requiredBrainrots": "Bombombini Gusini",
         "multiplier": "x6",
         "cashBonus": "$500K",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Flame Slap, Quantum Cloner, All Seeing Sentry"
+        "specialItemsAbilities": "Flame Slap, Quantum Cloner, All Seeing Sentry",
+        "cardSummary": "This level requires Bombombini Gusini and unlocks three more gear options."
       },
-      "system": {
-        "slug": "rebirth-7",
-        "section": "Items",
-        "sortOrder": 7,
-        "image": null
-      }
+      "system": { "slug": "rebirth-7", "section": "Items", "sortOrder": 7, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 8",
         "level": 8,
         "requiredCash": "$5B",
-        "requiredBrainrots": [
-          {
-            "name": "Te Te Te Sahur",
-            "page": "Te Te Te Sahur",
-            "url": "https://stealabrainrot.fandom.com/wiki/Te_Te_Te_Sahur"
-          },
-          {
-            "name": "Cocofanto Elefanto",
-            "page": "Cocofanto Elefanto",
-            "url": "https://stealabrainrot.fandom.com/wiki/Cocofanto_Elefanto"
-          }
-        ],
+        "requiredBrainrots": "Te Te Te Sahur",
         "multiplier": "x7",
         "cashBonus": "$1M",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Nuclear Slap, Rainbowrath Sword"
+        "specialItemsAbilities": "Nuclear Slap, Rainbowrath Sword",
+        "cardSummary": "This level requires Te Te Te Sahur and unlocks the Nuclear Slap and Rainbowrath Sword."
       },
-      "system": {
-        "slug": "rebirth-8",
-        "section": "Items",
-        "sortOrder": 8,
-        "image": null
-      }
+      "system": { "slug": "rebirth-8", "section": "Items", "sortOrder": 8, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 9",
         "level": 9,
-        "requiredCash": "$12.5B (Formerly 25B)",
-        "requiredBrainrots": [
-          {
-            "name": "Cocofanto Elefanto",
-            "page": "Cocofanto Elefanto",
-            "url": "https://stealabrainrot.fandom.com/wiki/Cocofanto_Elefanto"
-          },
-          {
-            "name": "Girafa Celestre",
-            "page": "Girafa Celestre",
-            "url": "https://stealabrainrot.fandom.com/wiki/Girafa_Celestre"
-          },
-          {
-            "name": "Tralalero Tralala",
-            "page": "Tralalero Tralala",
-            "url": "https://stealabrainrot.fandom.com/wiki/Tralalero_Tralala"
-          }
-        ],
+        "requiredCash": "$12.5B",
+        "requiredBrainrots": "Cocofanto Elefanto",
         "multiplier": "x8",
         "cashBonus": "$5M",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Galaxy Slap, Laser Cape"
+        "specialItemsAbilities": "Galaxy Slap, Laser Cape",
+        "cardSummary": "This level requires Cocofanto Elefanto and unlocks the Galaxy Slap and Laser Cape."
       },
-      "system": {
-        "slug": "rebirth-9",
-        "section": "Items",
-        "sortOrder": 9,
-        "image": null
-      }
+      "system": { "slug": "rebirth-9", "section": "Items", "sortOrder": 9, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 10",
         "level": 10,
-        "requiredCash": "$125B (Formerly 250B)",
-        "requiredBrainrots": [
-          {
-            "name": "Girafa Celestre",
-            "page": "Girafa Celestre",
-            "url": "https://stealabrainrot.fandom.com/wiki/Girafa_Celestre"
-          },
-          {
-            "name": "Tralalero Tralala",
-            "page": "Tralalero Tralala",
-            "url": "https://stealabrainrot.fandom.com/wiki/Tralalero_Tralala"
-          }
-        ],
+        "requiredCash": "$125B",
+        "requiredBrainrots": "Girafa Celestre",
         "multiplier": "x9",
         "cashBonus": "$25M",
-        "lockBaseBonus": "+10 Sec",
-        "slotBonus": "+1 (3rd floor)",
-        "specialItemsAbilities": "Glitched Slap, Body Swap Potion"
+        "lockBaseBonus": "+10 sec",
+        "slotBonus": "+1 and third floor",
+        "specialItemsAbilities": "Glitched Slap, Body Swap Potion",
+        "cardSummary": "This rebirth opens the third floor and unlocks the Glitched Slap and Body Swap Potion."
       },
-      "system": {
-        "slug": "rebirth-10",
-        "section": "Items",
-        "sortOrder": 10,
-        "image": null
-      }
+      "system": { "slug": "rebirth-10", "section": "Items", "sortOrder": 10, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 11",
         "level": 11,
-        "requiredCash": "$800B (Formerly 1T)",
-        "requiredBrainrots": [
-          {
-            "name": "Tralalero Tralala",
-            "page": "Tralalero Tralala",
-            "url": "https://stealabrainrot.fandom.com/wiki/Tralalero_Tralala"
-          },
-          {
-            "name": "Odin Din Din Dun",
-            "page": "Odin Din Din Dun",
-            "url": "https://stealabrainrot.fandom.com/wiki/Odin_Din_Din_Dun"
-          }
-        ],
+        "requiredCash": "$800B",
+        "requiredBrainrots": "Tralalero Tralala",
         "multiplier": "x10",
         "cashBonus": "$100M",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Splatter Slap, Paintball Gun"
+        "specialItemsAbilities": "Splatter Slap, Paintball Gun",
+        "cardSummary": "This level requires Tralalero Tralala and unlocks the Splatter Slap and Paintball Gun."
       },
-      "system": {
-        "slug": "rebirth-11",
-        "section": "Items",
-        "sortOrder": 11,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-11.webp"
-      }
+      "system": { "slug": "rebirth-11", "section": "Items", "sortOrder": 11, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 12",
         "level": 12,
-        "requiredCash": "$3.5T (Formerly 7T)",
-        "requiredBrainrots": [
-          {
-            "name": "Odin Din Din Dun",
-            "page": "Odin Din Din Dun",
-            "url": "https://stealabrainrot.fandom.com/wiki/Odin_Din_Din_Dun"
-          },
-          {
-            "name": "Trenostruzzo Turbo 3000",
-            "page": "Trenostruzzo Turbo 3000",
-            "url": "https://stealabrainrot.fandom.com/wiki/Trenostruzzo_Turbo_3000"
-          }
-        ],
+        "requiredCash": "$3.5T",
+        "requiredBrainrots": "Odin Din Din Dun",
         "multiplier": "x11",
         "cashBonus": "$500M",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Heart Balloon, Magnet"
+        "specialItemsAbilities": "Heart Balloon, Magnet",
+        "cardSummary": "This level requires Odin Din Din Dun and unlocks the Heart Balloon and Magnet."
       },
-      "system": {
-        "slug": "rebirth-12",
-        "section": "Items",
-        "sortOrder": 12,
-        "image": null
-      }
+      "system": { "slug": "rebirth-12", "section": "Items", "sortOrder": 12, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 13",
         "level": 13,
         "requiredCash": "$14T",
-        "requiredBrainrots": [
-          {
-            "name": "Trenostruzzo Turbo 3000",
-            "page": "Trenostruzzo Turbo 3000",
-            "url": "https://stealabrainrot.fandom.com/wiki/Trenostruzzo_Turbo_3000"
-          },
-          {
-            "name": "Ballerino Lololo",
-            "page": "Ballerino Lololo",
-            "url": "https://stealabrainrot.fandom.com/wiki/Ballerino_Lololo"
-          }
-        ],
+        "requiredBrainrots": "Trenostruzzo Turbo 3000",
         "multiplier": "x12",
         "cashBonus": "$1B",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Megaphone, BeeHive"
+        "specialItemsAbilities": "Megaphone, Beehive",
+        "cardSummary": "This level requires Trenostruzzo Turbo 3000 and unlocks the Megaphone and Beehive."
       },
-      "system": {
-        "slug": "rebirth-13",
-        "section": "Items",
-        "sortOrder": 13,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-13.webp"
-      }
+      "system": { "slug": "rebirth-13", "section": "Items", "sortOrder": 13, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 14",
         "level": 14,
-        "requiredCash": "$40T (Formerly 100T)",
-        "requiredBrainrots": [
-          {
-            "name": "Trippi Troppi Troppa Trippa",
-            "page": "Trippi Troppi Troppa Trippa",
-            "url": "https://stealabrainrot.fandom.com/wiki/Trippi_Troppi_Troppa_Trippa"
-          }
-        ],
+        "requiredCash": "$40T",
+        "requiredBrainrots": "Trippi Troppi Troppa Trippa",
         "multiplier": "x13",
         "cashBonus": "$2.5T",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Gummy Bear, Subspace Mine"
+        "specialItemsAbilities": "Gummy Bear, Subspace Mine",
+        "cardSummary": "This level requires Trippi Troppi Troppa Trippa and unlocks the Gummy Bear and Subspace Mine."
       },
-      "system": {
-        "slug": "rebirth-14",
-        "section": "Items",
-        "sortOrder": 14,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-14.webp"
-      }
+      "system": { "slug": "rebirth-14", "section": "Items", "sortOrder": 14, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 15",
         "level": 15,
-        "requiredCash": "$100T (Formerly 500T)",
-        "requiredBrainrots": [
-          {
-            "name": "Pakrahmatmamat",
-            "page": "Pakrahmatmamat",
-            "url": "https://stealabrainrot.fandom.com/wiki/Pakrahmatmamat"
-          }
-        ],
+        "requiredCash": "$100T",
+        "requiredBrainrots": "Pakrahmatmamat",
         "multiplier": "x15",
         "cashBonus": "$10T",
-        "lockBaseBonus": "+10 Sec",
+        "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Heatseeker (750M)"
+        "specialItemsAbilities": "Heatseeker",
+        "cardSummary": "This level requires Pakrahmatmamat, raises the multiplier to x15, and unlocks the Heatseeker."
       },
-      "system": {
-        "slug": "rebirth-15",
-        "section": "Items",
-        "sortOrder": 15,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-15.webp"
-      }
+      "system": { "slug": "rebirth-15", "section": "Items", "sortOrder": 15, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 16",
         "level": 16,
         "requiredCash": "$1Qa",
-        "requiredBrainrots": [
-          {
-            "name": "Los Tralaleritos",
-            "page": "Los Tralaleritos",
-            "url": "https://stealabrainrot.fandom.com/wiki/Los_Tralaleritos"
-          }
-        ],
+        "requiredBrainrots": "Los Tralaleritos",
         "multiplier": "x16",
         "cashBonus": "$25T",
         "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Attack Doge (1B)"
+        "specialItemsAbilities": "Attack Doge",
+        "cardSummary": "This level requires Los Tralaleritos and unlocks Attack Doge."
       },
-      "system": {
-        "slug": "rebirth-16",
-        "section": "Items",
-        "sortOrder": 16,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-16.webp"
-      }
+      "system": { "slug": "rebirth-16", "section": "Items", "sortOrder": 16, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 17",
         "level": 17,
         "requiredCash": "$2Qa",
-        "requiredBrainrots": [
-          {
-            "name": "Job Job Job Sahur",
-            "page": "Job Job Job Sahur",
-            "url": "https://stealabrainrot.fandom.com/wiki/Job_Job_Job_Sahur"
-          },
-          {
-            "name": "Chicleteira Bicicleteira",
-            "page": "Chicleteira Bicicleteira",
-            "url": "https://stealabrainrot.fandom.com/wiki/Chicleteira_Bicicleteira"
-          }
-        ],
+        "requiredBrainrots": "Job Job Job Sahur, Chicleteira Bicicleteira",
         "multiplier": "x17",
         "cashBonus": "$50T",
         "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Giant Potion (1.5B)"
+        "specialItemsAbilities": "Giant Potion",
+        "cardSummary": "This level requires two Secret Brainrots and unlocks the Giant Potion."
       },
-      "system": {
-        "slug": "rebirth-17",
-        "section": "Items",
-        "sortOrder": 17,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-17.webp"
-      }
+      "system": { "slug": "rebirth-17", "section": "Items", "sortOrder": 17, "image": null }
     },
     {
       "item": {
         "name": "Rebirth 18",
         "level": 18,
         "requiredCash": "$10Qa",
-        "requiredBrainrots": [
-          {
-            "name": "Graipuss Medussi",
-            "page": "Graipuss Medussi",
-            "url": "https://stealabrainrot.fandom.com/wiki/Graipuss_Medussi"
-          }
-        ],
-        "multiplier": "18x",
+        "requiredBrainrots": "Graipuss Medussi",
+        "multiplier": "x18",
         "cashBonus": "$100T",
         "lockBaseBonus": "+10 sec",
         "slotBonus": "+1",
-        "specialItemsAbilities": "Flash Teleport (3B)"
+        "specialItemsAbilities": "Flash Teleport",
+        "cardSummary": "This level requires Graipuss Medussi and unlocks Flash Teleport."
       },
-      "system": {
-        "slug": "rebirth-18",
-        "section": "Items",
-        "sortOrder": 18,
-        "image": "/Steal%20a%20Brainrot/Rebirths/rebirth-18.webp"
-      }
+      "system": { "slug": "rebirth-18", "section": "Items", "sortOrder": 18, "image": null }
     }
   ]
 }

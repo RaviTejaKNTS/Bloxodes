@@ -20,10 +20,11 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/brief.md
 1. Resolve the exact game, universe ID, official Roblox URL, and editorial game slug.
 2. Check existing `wiki_collection_pages` on production db for that universe so we do not duplicate a collection.
 3. Research online for the collection. Use broad search and stronger sources when available: game wiki, Fandom, BloxInformer, Beebom, Game8, Pro Game Guides, official pages, update logs, and useful creator/community references.
-4. Do not stop at one result. Open useful internal links and understand how the game system works.
-5. Decide whether the collection is durable, useful, and source-backed.
-6. Identify the item fields players need, such as source, location, price, rarity, chance, requirement, damage, role, availability, or effect. These are examples; pick fields based on that game and collection.
-7. Decide how the collection should be divided into sections before data work starts. Use sections that help players compare items, not sections that only mirror source tables.
+4. Check strong competitor pages to understand player search intent, common questions, and expected coverage. Do not copy their wording or treat unverified claims as facts.
+5. Do not stop at one result. Open useful internal links and understand how the game system works.
+6. Decide whether the collection is durable, useful, and source-backed.
+7. Identify the item fields players need, such as source, location, price, rarity, chance, requirement, damage, role, availability, or effect. These are examples; pick fields based on that game and collection.
+8. Decide how the collection should be divided into sections before data work starts. Use sections that help players compare items, not sections that only mirror source tables.
 
 ## Gather Sources
 

@@ -90,7 +90,7 @@ Use `bloxodes-game-collection-writing` to update `final.json` when any of these 
 - representative thumbnail or other stored page metadata changed
 - an approved unregistered dataset is becoming a new collection page
 
-Do not rewrite evergreen copy merely because a value changed, an image was replaced, fields were completed, or items were reordered. Still record whether the database `item_count` or stored thumbnail needs synchronization.
+Preserve the existing page copy, headings, and structure by default. Change only passages made inaccurate or outdated by verified collection changes; do not rewrite unaffected copy merely because a value changed, an image was replaced, fields were completed, or items were reordered. Still record whether the database `item_count` or stored thumbnail needs synchronization.
 
 Send factual/data/image problems back to the collection worker. Send tone, structure, FAQ, or public-copy problems to a separate writing worker as required by the collection workflow runner.
 

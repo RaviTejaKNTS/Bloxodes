@@ -7,23 +7,23 @@
     "route": "/wiki/pet-simulator-99/hoverboards",
     "catalogCode": "pet-simulator-99-hoverboards",
     "itemFields": [
+      "cardSummary",
       "rarity",
       "source",
       "acquiredBy",
       "availability",
-      "tradeStatus",
-      "description"
+      "tradeStatus"
     ],
     "columns": [
+      "cardSummary",
       "rarity",
       "source",
       "acquiredBy",
       "availability",
-      "tradeStatus",
-      "description"
+      "tradeStatus"
     ],
     "display": {
-      "groupLabel": "section",
+      "groupLabel": "Acquisition route",
       "sectionOrder": [
         "Free and gameplay unlocks",
         "Clan, leaderboard, and partner rewards",
@@ -33,37 +33,62 @@
       ],
       "badgeField": "rarity",
       "subtitleFields": [],
-      "descriptionField": "description",
-      "cardDescriptionField": "description",
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
+        "cardSummary",
         "rarity",
         "source",
         "acquiredBy",
         "availability",
-        "tradeStatus",
-        "description"
+        "tradeStatus"
       ],
       "tableFields": [
+        "cardSummary",
         "rarity",
         "source",
         "acquiredBy",
         "availability",
-        "tradeStatus",
-        "description"
+        "tradeStatus"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "source": {
+          "kind": "normal",
+          "label": "Source"
+        },
+        "acquiredBy": {
+          "kind": "detail",
+          "label": "How to Get"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "tradeStatus": {
+          "kind": "chip",
+          "label": "Trade Status"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
         "name": "Hoverboard",
+        "cardSummary": "The standard board unlocked early in normal area progression.",
         "rarity": "Basic",
         "source": "Gameplay unlock",
         "acquiredBy": "Obtained by unlocking Area 2 (Colorful Forest).",
-        "availability": "Obtainable, but untradable",
-        "tradeStatus": "Untradable",
-        "description": "Hoverboard is one of the more direct hoverboard unlocks, so it belongs on a normal progression checklist before old limited cosmetics."
+        "availability": "Permanent",
+        "tradeStatus": "Untradable"
       },
       "system": {
         "slug": "hoverboard",
@@ -74,1886 +99,2110 @@
     },
     {
       "item": {
-        "name": "Red Flying Carpet",
-        "rarity": "Mythical",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Achieve top 100 on the Top Power/RAP leaderboard.",
-        "availability": "Obtainable, but untradable",
-        "tradeStatus": "Untradable",
-        "description": "Red Flying Carpet is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "red-flying-carpet",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 2,
-        "image": "/Pet%20Simulator%2099/Hoverboards/red-flying-carpet.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Blue Flying Carpet",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Achieve top 10 on the Top Power/RAP leaderboard.",
-        "availability": "Obtainable, but untradable",
-        "tradeStatus": "Untradable",
-        "description": "Blue Flying Carpet is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "blue-flying-carpet",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 3,
-        "image": "/Pet%20Simulator%2099/Hoverboards/blue-flying-carpet.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Bling Hoverboard",
-        "rarity": "Exotic",
-        "source": "Shop or pack",
-        "acquiredBy": "Spend 100,000 Robux in the game in total.",
-        "availability": "Obtainable, but untradable",
-        "tradeStatus": "Untradable",
-        "description": "Bling Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "bling-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 4,
-        "image": "/Pet%20Simulator%2099/Hoverboards/bling-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Axolotl Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Purchasing the VIP Gamepass (400 Robux).",
-        "availability": "Obtainable, but untradable",
-        "tradeStatus": "Untradable",
-        "description": "Axolotl Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "axolotl-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 5,
-        "image": "/Pet%20Simulator%2099/Hoverboards/axolotl-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Rudolph Hoverboard",
-        "rarity": "Legendary",
-        "source": "Shop or pack",
-        "acquiredBy": "Obtained by completing the Day 8 Advent Calendar quest, or from the Holiday Pack in the first week of the Christmas 2023 Event.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Rudolph Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "rudolph-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 6,
-        "image": "/Pet%20Simulator%2099/Hoverboards/rudolph-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Piñata Hoverboard",
-        "rarity": "Legendary",
-        "source": "Achievement",
-        "acquiredBy": "Rewarded after completing the Code Cracker achievement (Redeem 1 Merch Code).",
-        "availability": "Obtainable",
-        "description": "Piñata Hoverboard is a milestone cosmetic for players working through account achievements or merch-code goals."
-      },
-      "system": {
-        "slug": "pinata-hoverboard",
-        "section": "Achievement and merch-code rewards",
-        "sortOrder": 7,
-        "image": "/Pet%20Simulator%2099/Hoverboards/pinata-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Witch Cat Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in Candy Corn Gifts.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Witch Cat Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "witch-cat-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 8,
-        "image": "/Pet%20Simulator%2099/Hoverboards/witch-cat-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Web Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Spider Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Web Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "web-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 9,
-        "image": "/Pet%20Simulator%2099/Hoverboards/web-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Vampire Bat Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Rewarded after completing the fourth Halloween Event 2024 quest.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Vampire Bat Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "vampire-bat-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 10,
-        "image": "/Pet%20Simulator%2099/Hoverboards/vampire-bat-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Valentine's Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in Love Gifts.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Valentine's Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "valentine-s-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 11,
-        "image": "/Pet%20Simulator%2099/Hoverboards/valentine-s-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Unicorn Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gameplay unlock",
-        "acquiredBy": "Reward for finding all eggs in the 2025 Easter Egg Hunt.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Unicorn Hoverboard is one of the more direct hoverboard unlocks, so it belongs on a normal progression checklist before old limited cosmetics."
-      },
-      "system": {
-        "slug": "unicorn-hoverboard",
-        "section": "Free and gameplay unlocks",
-        "sortOrder": 12,
-        "image": "/Pet%20Simulator%2099/Hoverboards/unicorn-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Turkey Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in Turkey Gifts.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Turkey Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "turkey-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 13,
-        "image": "/Pet%20Simulator%2099/Hoverboards/turkey-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Surfboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "🌴 Found in Summer Gifts.",
-        "availability": "Obtainable",
-        "description": "Surfboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "surfboard",
-        "section": "Gift and event boards",
-        "sortOrder": 14,
-        "image": "/Pet%20Simulator%2099/Hoverboards/surfboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Sun Angelus Hoverboard",
-        "rarity": "Mythical",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Sun Angelus Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Sun Angelus Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "sun-angelus-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 15,
-        "image": "/Pet%20Simulator%2099/Hoverboards/sun-angelus-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Strawberry Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Kawaii Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Strawberry Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "strawberry-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 16,
-        "image": "/Pet%20Simulator%2099/Hoverboards/strawberry-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Steampunk Hoverboard",
-        "rarity": "Mythical",
-        "source": "Achievement",
-        "acquiredBy": "Rewarded after completing the Mad Scientist achievement (Create 4,000 Pets in the Fuse Machine).",
-        "availability": "Obtainable",
-        "description": "Steampunk Hoverboard is a milestone cosmetic for players working through account achievements or merch-code goals."
-      },
-      "system": {
-        "slug": "steampunk-hoverboard",
-        "section": "Achievement and merch-code rewards",
-        "sortOrder": 17,
-        "image": "/Pet%20Simulator%2099/Hoverboards/steampunk-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Snowflake Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in the Christmas Event 2024 Advent Calendar and Snowflake Gifts.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Snowflake Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "snowflake-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 18,
-        "image": "/Pet%20Simulator%2099/Hoverboards/snowflake-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Sleigh Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Possible loot from opening 2023 Titanic Christmas Presents.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Sleigh Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "sleigh-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 19,
-        "image": "/Pet%20Simulator%2099/Hoverboards/sleigh-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Silver Hoverboard",
-        "rarity": "Mythical",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Silver Clan Battle.",
-        "availability": "Obtainable",
-        "description": "Silver Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "silver-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 20,
-        "image": "/Pet%20Simulator%2099/Hoverboards/silver-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Sandcastle Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in Tropical Gifts.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Sandcastle Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "sandcastle-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 21,
-        "image": "/Pet%20Simulator%2099/Hoverboards/sandcastle-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Ruler Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in School Gifts.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Ruler Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "ruler-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 22,
-        "image": "/Pet%20Simulator%2099/Hoverboards/ruler-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Rave Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in Rave Gifts.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Rave Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "rave-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 23,
-        "image": "/Pet%20Simulator%2099/Hoverboards/rave-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Pumpkin Cat Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in Pumpkin Gifts.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Pumpkin Cat Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "pumpkin-cat-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 24,
-        "image": "/Pet%20Simulator%2099/Hoverboards/pumpkin-cat-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Pot of Gold Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in the Horseshoe Gift.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Pot of Gold Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "pot-of-gold-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 25,
-        "image": "/Pet%20Simulator%2099/Hoverboards/pot-of-gold-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Pet Games Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in Pet Games Gift and in the Player Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Pet Games Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "pet-games-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 26,
-        "image": "/Pet%20Simulator%2099/Hoverboards/pet-games-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Paw Print Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Paw Print Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Paw Print Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "paw-print-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 27,
-        "image": "/Pet%20Simulator%2099/Hoverboards/paw-print-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Patchwork Hoverboard",
-        "rarity": "Mythical",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Halloween Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Patchwork Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "patchwork-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 28,
-        "image": "/Pet%20Simulator%2099/Hoverboards/patchwork-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Millionaire Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Millionaire Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Millionaire Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "millionaire-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 29,
-        "image": "/Pet%20Simulator%2099/Hoverboards/millionaire-hoverboard.png"
-      }
-    },
-    {
-      "item": {
         "name": "M-10 Hoverboard",
+        "cardSummary": "A permanent quest-medal board from the Adventurer Merchant.",
         "rarity": "Mythical",
-        "source": "Gameplay unlock",
+        "source": "Quest merchant",
         "acquiredBy": "Purchasing from the Adventurer Merchant for 200 Quest Medals.",
-        "availability": "Obtainable",
-        "description": "M-10 Hoverboard is one of the more direct hoverboard unlocks, so it belongs on a normal progression checklist before old limited cosmetics."
+        "availability": "Permanent",
+        "tradeStatus": "Tradable"
       },
       "system": {
         "slug": "m-10-hoverboard",
         "section": "Free and gameplay unlocks",
-        "sortOrder": 30,
+        "sortOrder": 2,
         "image": "/Pet%20Simulator%2099/Hoverboards/m-10-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Hellfire Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Hellfire Gift and in the Rocketeer Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Hellfire Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "hellfire-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 31,
-        "image": "/Pet%20Simulator%2099/Hoverboards/hellfire-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Hacker Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Hacker Pack and Hacker Chest.",
-        "availability": "Obtainable",
-        "description": "Hacker Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "hacker-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 32,
-        "image": "/Pet%20Simulator%2099/Hoverboards/hacker-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Good vs. Evil Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Good vs Evil Gift and in the Angels vs. Demons Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Good vs. Evil Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "good-vs-evil-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 33,
-        "image": "/Pet%20Simulator%2099/Hoverboards/good-vs-evil-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Glitched Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "A possible reward from opening Glitched Gifts.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Glitched Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "glitched-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 34,
-        "image": "/Pet%20Simulator%2099/Hoverboards/glitched-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Forcefield Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Forcefield Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Forcefield Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "forcefield-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 35,
-        "image": "/Pet%20Simulator%2099/Hoverboards/forcefield-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Elf Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in the Santa Gift.",
-        "availability": "Obtainable",
-        "description": "Elf Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "elf-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 36,
-        "image": "/Pet%20Simulator%2099/Hoverboards/elf-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Elemental Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Elemental Gift and in the Elemental Pack.",
-        "availability": "Obtainable",
-        "description": "Elemental Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "elemental-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 37,
-        "image": "/Pet%20Simulator%2099/Hoverboards/elemental-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Easter Bunny Hoverboard",
-        "rarity": "Mythical",
-        "source": "Unknown original source",
-        "acquiredBy": "Original source not listed",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Easter Bunny Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "easter-bunny-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 38,
-        "image": "/Pet%20Simulator%2099/Hoverboards/easter-bunny-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Doodle Hoverboard",
-        "rarity": "Mythical",
-        "source": "Achievement",
-        "acquiredBy": "Rewarded after completing the Vend and Repeat achievement (Buy 8,000 items from Vending Machines).",
-        "availability": "Obtainable",
-        "description": "Doodle Hoverboard is a milestone cosmetic for players working through account achievements or merch-code goals."
-      },
-      "system": {
-        "slug": "doodle-hoverboard",
-        "section": "Achievement and merch-code rewards",
-        "sortOrder": 39,
-        "image": "/Pet%20Simulator%2099/Hoverboards/doodle-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Dino Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Dino Gift and in the Dino Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Dino Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "dino-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 40,
-        "image": "/Pet%20Simulator%2099/Hoverboards/dino-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Crayon Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Paper Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Crayon Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "crayon-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 41,
-        "image": "/Pet%20Simulator%2099/Hoverboards/crayon-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Cosmic Basketball Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in the Cosmic Basketball Gift.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Cosmic Basketball Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "cosmic-basketball-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 42,
-        "image": "/Pet%20Simulator%2099/Hoverboards/cosmic-basketball-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Clover Hoverboard",
-        "rarity": "Mythical",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Clover Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Clover Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "clover-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 43,
-        "image": "/Pet%20Simulator%2099/Hoverboards/clover-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Candy Cane Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Christmas Event 2024 Advent Calendar and in the Candy Cane Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Candy Cane Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "candy-cane-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 44,
-        "image": "/Pet%20Simulator%2099/Hoverboards/candy-cane-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Broomstick",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Reward from completing quests in the Halloween Event 2025.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Broomstick is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "broomstick",
-        "section": "Gift and event boards",
-        "sortOrder": 45,
-        "image": "/Pet%20Simulator%2099/Hoverboards/broomstick.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Basketball Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in the Basketball Gift.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Basketball Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "basketball-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 46,
-        "image": "/Pet%20Simulator%2099/Hoverboards/basketball-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Barbell Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in the Buff Gym Gift.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Barbell Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "barbell-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 47,
-        "image": "/Pet%20Simulator%2099/Hoverboards/barbell-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Autumn Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Autumn Gift and in the Crimson Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Autumn Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "autumn-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 48,
-        "image": "/Pet%20Simulator%2099/Hoverboards/autumn-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Aura Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Aura Pack and Fire Aura Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Aura Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "aura-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 49,
-        "image": "/Pet%20Simulator%2099/Hoverboards/aura-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Art Hoverboard",
-        "rarity": "Mythical",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Art Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Art Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "art-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 50,
-        "image": "/Pet%20Simulator%2099/Hoverboards/art-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Blossom Hoverboard",
-        "rarity": "Mythical",
-        "source": "Gift or event",
-        "acquiredBy": "Found in the Blossom Gift.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Blossom Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "blossom-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 51,
-        "image": "/Pet%20Simulator%2099/Hoverboards/blossom-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Wyvern of Hades",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Wyvern Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Wyvern of Hades is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "wyvern-of-hades",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 52,
-        "image": "/Pet%20Simulator%2099/Hoverboards/wyvern-of-hades.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Wicked Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Wicked Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Wicked Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "wicked-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 53,
-        "image": "/Pet%20Simulator%2099/Hoverboards/wicked-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Watermelon Hoverboard",
-        "rarity": "Exotic",
-        "source": "Achievement",
-        "acquiredBy": "Rewarded after completing the Fruit Fever achievement (Eat 10,000 Fruit).",
-        "availability": "Obtainable",
-        "description": "Watermelon Hoverboard is a milestone cosmetic for players working through account achievements or merch-code goals."
-      },
-      "system": {
-        "slug": "watermelon-hoverboard",
-        "section": "Achievement and merch-code rewards",
-        "sortOrder": 54,
-        "image": "/Pet%20Simulator%2099/Hoverboards/watermelon-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Tie Dye Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Tie Dye Clan Battle.",
-        "availability": "Obtainable",
-        "description": "Tie Dye Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "tie-dye-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 55,
-        "image": "/Pet%20Simulator%2099/Hoverboards/tie-dye-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Sphinx Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Egyptian Clan Battle.",
-        "availability": "Obtainable",
-        "description": "Sphinx Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "sphinx-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 56,
-        "image": "/Pet%20Simulator%2099/Hoverboards/sphinx-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Safety Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Safety Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Safety Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "safety-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 57,
-        "image": "/Pet%20Simulator%2099/Hoverboards/safety-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Reversed Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Upside Down Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Reversed Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "reversed-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 58,
-        "image": "/Pet%20Simulator%2099/Hoverboards/reversed-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Rave Crab Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Rave Crab Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Rave Crab Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "rave-crab-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 59,
-        "image": "/Pet%20Simulator%2099/Hoverboards/rave-crab-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Rainbow Hoverboard",
-        "rarity": "Exotic",
-        "source": "Achievement",
-        "acquiredBy": "Rewarded after completing the Super Haul achievement (Redeem 5 Merch Codes).",
-        "availability": "Obtainable",
-        "description": "Rainbow Hoverboard is a milestone cosmetic for players working through account achievements or merch-code goals."
-      },
-      "system": {
-        "slug": "rainbow-hoverboard",
-        "section": "Achievement and merch-code rewards",
-        "sortOrder": 60,
-        "image": "/Pet%20Simulator%2099/Hoverboards/rainbow-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Present Hoverboard",
-        "rarity": "Exotic",
-        "source": "Gift or event",
-        "acquiredBy": "Rewarded to all members in the top 3 clans in the Christmas Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Present Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "present-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 61,
-        "image": "/Pet%20Simulator%2099/Hoverboards/present-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Pixel Dragon Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Pixel Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Pixel Dragon Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "pixel-dragon-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 62,
-        "image": "/Pet%20Simulator%2099/Hoverboards/pixel-dragon-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Pegasus Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 3 clans in the Pet Collecting Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Pegasus Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "pegasus-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 63,
-        "image": "/Pet%20Simulator%2099/Hoverboards/pegasus-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Mushroom Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Mushroom Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Mushroom Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "mushroom-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 64,
-        "image": "/Pet%20Simulator%2099/Hoverboards/mushroom-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Jelly Hoverboard",
-        "rarity": "Exotic",
-        "source": "Gift or event",
-        "acquiredBy": "Rewarded by inviting friends during the Slime Factory Event 2025.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Jelly Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "jelly-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 65,
-        "image": "/Pet%20Simulator%2099/Hoverboards/jelly-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Ice Cream Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Ice Cream Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Ice Cream Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "ice-cream-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 66,
-        "image": "/Pet%20Simulator%2099/Hoverboards/ice-cream-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Holographic Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Holographic Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Holographic Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "holographic-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 67,
-        "image": "/Pet%20Simulator%2099/Hoverboards/holographic-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Gingerbread Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Gingerbread Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Gingerbread Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "gingerbread-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 68,
-        "image": "/Pet%20Simulator%2099/Hoverboards/gingerbread-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Ghost Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Ghost Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Ghost Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "ghost-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 69,
-        "image": "/Pet%20Simulator%2099/Hoverboards/ghost-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Fragmented Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Fragmented Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Fragmented Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "fragmented-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 70,
-        "image": "/Pet%20Simulator%2099/Hoverboards/fragmented-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Evil Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Evil Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Evil Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "evil-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 71,
-        "image": "/Pet%20Simulator%2099/Hoverboards/evil-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Ducky Hoverboard",
-        "rarity": "Exotic",
-        "source": "Achievement",
-        "acquiredBy": "Rewarded to all members in the top 3 clans in the Achievements Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Ducky Hoverboard is a milestone cosmetic for players working through account achievements or merch-code goals."
-      },
-      "system": {
-        "slug": "ducky-hoverboard",
-        "section": "Achievement and merch-code rewards",
-        "sortOrder": 72,
-        "image": "/Pet%20Simulator%2099/Hoverboards/ducky-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Diamond Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Diamond Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Diamond Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "diamond-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 73,
-        "image": "/Pet%20Simulator%2099/Hoverboards/diamond-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Cosmic Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 3 clans in the Raid Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Cosmic Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "cosmic-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 74,
-        "image": "/Pet%20Simulator%2099/Hoverboards/cosmic-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Clown Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Clown Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Clown Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "clown-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 75,
-        "image": "/Pet%20Simulator%2099/Hoverboards/clown-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Bubble Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Bubble Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Bubble Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "bubble-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 76,
-        "image": "/Pet%20Simulator%2099/Hoverboards/bubble-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Booster Hoverboard",
-        "rarity": "Exotic",
-        "source": "Gift or event",
-        "acquiredBy": "Found in Card Index Rewards during Trading Cards Event 2025.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Booster Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "booster-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 77,
-        "image": "/Pet%20Simulator%2099/Hoverboards/booster-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Blurred Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Blurred Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Blurred Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "blurred-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 78,
-        "image": "/Pet%20Simulator%2099/Hoverboards/blurred-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Blobfish Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 3 clans in the New Year Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Blobfish Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "blobfish-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 79,
-        "image": "/Pet%20Simulator%2099/Hoverboards/blobfish-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Blimp Dragon Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 10 clans in the Blimp Dragon Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Blimp Dragon Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "blimp-dragon-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 80,
-        "image": "/Pet%20Simulator%2099/Hoverboards/blimp-dragon-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Bleebo The Alien Hoverboard",
-        "rarity": "Exotic",
-        "source": "Gift or event",
-        "acquiredBy": "Rewarded to all members in the top 3 clans in the Quest Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Bleebo The Alien Hoverboard is a gift or event-origin hoverboard, which usually makes replacement harder once the original source is gone."
-      },
-      "system": {
-        "slug": "bleebo-the-alien-hoverboard",
-        "section": "Gift and event boards",
-        "sortOrder": 81,
-        "image": "/Pet%20Simulator%2099/Hoverboards/bleebo-the-alien-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Bee Hoverboard",
-        "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
-        "acquiredBy": "Rewarded to all members in the top 3 clans in the Bee Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Bee Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
-      },
-      "system": {
-        "slug": "bee-hoverboard",
-        "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 82,
-        "image": "/Pet%20Simulator%2099/Hoverboards/bee-hoverboard.png"
-      }
-    },
-    {
-      "item": {
         "name": "Abstract Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
         "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
+        "source": "Clan Battle",
         "acquiredBy": "Rewarded to all members in the top 30 clans in the Abstract Clan Battle.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Abstract Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
         "slug": "abstract-hoverboard",
         "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 83,
+        "sortOrder": 3,
         "image": "/Pet%20Simulator%2099/Hoverboards/abstract-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Oversized Hoverboard",
-        "rarity": "Superior",
-        "source": "Achievement",
-        "acquiredBy": "Rewarded after completing the Unboxing Pro achievement (Redeem 20 Merch Codes).",
-        "availability": "Obtainable",
-        "description": "Oversized Hoverboard is a milestone cosmetic for players working through account achievements or merch-code goals."
+        "name": "Angel Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Awarded to members of clans that placed in the top 30 of the Angel Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "oversized-hoverboard",
-        "section": "Achievement and merch-code rewards",
-        "sortOrder": 84,
-        "image": "/Pet%20Simulator%2099/Hoverboards/oversized-hoverboard.png"
+        "slug": "angel-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 4,
+        "image": "/Pet%20Simulator%2099/Hoverboards/angel-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Night Terror Hoverboard",
-        "rarity": "Superior",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in The Backrooms Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Night Terror Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Bee Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 3 clans in the Bee Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "night-terror-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 85,
-        "image": "/Pet%20Simulator%2099/Hoverboards/night-terror-hoverboard.png"
+        "slug": "bee-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 5,
+        "image": "/Pet%20Simulator%2099/Hoverboards/bee-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "UFO",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "UFO is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Bleebo The Alien Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 3 clans in the Quest Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "ufo",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 86,
-        "image": "/Pet%20Simulator%2099/Hoverboards/ufo.png"
+        "slug": "bleebo-the-alien-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 6,
+        "image": "/Pet%20Simulator%2099/Hoverboards/bleebo-the-alien-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Toilet",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Toilet is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Blimp Dragon Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Blimp Dragon Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "toilet",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 87,
-        "image": "/Pet%20Simulator%2099/Hoverboards/toilet.png"
+        "slug": "blimp-dragon-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 7,
+        "image": "/Pet%20Simulator%2099/Hoverboards/blimp-dragon-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Tiger Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in The Forever Pack.",
-        "availability": "Obtainable",
-        "description": "Tiger Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Blobfish Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 3 clans in the New Year Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "tiger-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 88,
-        "image": "/Pet%20Simulator%2099/Hoverboards/tiger-hoverboard.png"
+        "slug": "blobfish-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 8,
+        "image": "/Pet%20Simulator%2099/Hoverboards/blobfish-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Throne Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Throne Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Blue Flying Carpet",
+        "cardSummary": "An untradable Exotic reward for reaching the global Power or RAP leaderboard.",
+        "rarity": "Exotic",
+        "source": "World leaderboard",
+        "acquiredBy": "Achieve top 10 on the Top Power/RAP leaderboard.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Untradable"
       },
       "system": {
-        "slug": "throne-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 89,
-        "image": "/Pet%20Simulator%2099/Hoverboards/throne-hoverboard.png"
+        "slug": "blue-flying-carpet",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 9,
+        "image": "/Pet%20Simulator%2099/Hoverboards/blue-flying-carpet.png"
       }
     },
     {
       "item": {
-        "name": "Tank",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Tank is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Blurred Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Blurred Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "tank",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 90,
-        "image": "/Pet%20Simulator%2099/Hoverboards/tank.png"
+        "slug": "blurred-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 10,
+        "image": "/Pet%20Simulator%2099/Hoverboards/blurred-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Supercar",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Supercar is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Bubble Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Bubble Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "supercar",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 91,
-        "image": "/Pet%20Simulator%2099/Hoverboards/supercar.png"
+        "slug": "bubble-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 11,
+        "image": "/Pet%20Simulator%2099/Hoverboards/bubble-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Rocket",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Rocket is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Clover Hoverboard",
+        "cardSummary": "A limited Mythical board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Mythical",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Clover Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "rocket",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 92,
-        "image": "/Pet%20Simulator%2099/Hoverboards/rocket.png"
+        "slug": "clover-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 12,
+        "image": "/Pet%20Simulator%2099/Hoverboards/clover-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Rich Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Rich Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Clown Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Clown Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "rich-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 93,
-        "image": "/Pet%20Simulator%2099/Hoverboards/rich-hoverboard.png"
+        "slug": "clown-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 13,
+        "image": "/Pet%20Simulator%2099/Hoverboards/clown-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Popcat Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Popcat Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Cosmic Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 3 clans in the Raid Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "popcat-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 94,
-        "image": "/Pet%20Simulator%2099/Hoverboards/popcat-hoverboard.png"
+        "slug": "cosmic-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 14,
+        "image": "/Pet%20Simulator%2099/Hoverboards/cosmic-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Police Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in Cops vs. Robbers Pack.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Police Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Daydream Hoverboard",
+        "cardSummary": "A limited Mythical board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Mythical",
+        "source": "Clan Battle",
+        "acquiredBy": "Awarded to members of clans that placed in the top 30 of the Daydream Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "police-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 95,
-        "image": "/Pet%20Simulator%2099/Hoverboards/police-hoverboard.png"
+        "slug": "daydream-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 15,
+        "image": "/Pet%20Simulator%2099/Hoverboards/daydream-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Pizza Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Pizza Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Diamond Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Diamond Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "pizza-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 96,
-        "image": "/Pet%20Simulator%2099/Hoverboards/pizza-hoverboard.png"
+        "slug": "diamond-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 16,
+        "image": "/Pet%20Simulator%2099/Hoverboards/diamond-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Pencil",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Pencil is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Ducky Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 3 clans in the Achievements Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "pencil",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 97,
-        "image": "/Pet%20Simulator%2099/Hoverboards/pencil.png"
+        "slug": "ducky-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 17,
+        "image": "/Pet%20Simulator%2099/Hoverboards/ducky-hoverboard.png"
       }
     },
     {
       "item": {
-        "name": "Noob Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Noob Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
+        "name": "Evil Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Evil Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
       },
       "system": {
-        "slug": "noob-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 98,
-        "image": "/Pet%20Simulator%2099/Hoverboards/noob-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Nightmare Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Nightmare Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "nightmare-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 99,
-        "image": "/Pet%20Simulator%2099/Hoverboards/nightmare-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Mosaic Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Mosaic Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "mosaic-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 100,
-        "image": "/Pet%20Simulator%2099/Hoverboards/mosaic-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Kitsune Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
-        "availability": "Obtainable",
-        "description": "Kitsune Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "kitsune-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 101,
-        "image": "/Pet%20Simulator%2099/Hoverboards/kitsune-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Hotdog Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Hotdog Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "hotdog-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 102,
-        "image": "/Pet%20Simulator%2099/Hoverboards/hotdog-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Hologram Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Hologram Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "hologram-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 103,
-        "image": "/Pet%20Simulator%2099/Hoverboards/hologram-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "High-Tech Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "High-Tech Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "high-tech-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 104,
-        "image": "/Pet%20Simulator%2099/Hoverboards/high-tech-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Helicopter",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Helicopter is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "helicopter",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 105,
-        "image": "/Pet%20Simulator%2099/Hoverboards/helicopter.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Fire Dragon Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Fire Dragon Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "fire-dragon-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 106,
-        "image": "/Pet%20Simulator%2099/Hoverboards/fire-dragon-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Electric Guitar Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Electric Guitar Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "electric-guitar-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 107,
-        "image": "/Pet%20Simulator%2099/Hoverboards/electric-guitar-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Corrupt Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
-        "availability": "Obtainable",
-        "description": "Corrupt Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "corrupt-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 108,
-        "image": "/Pet%20Simulator%2099/Hoverboards/corrupt-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Cat Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Obtainable by purchasing the Super Starter Pack for 240 Robux (once per account).",
-        "availability": "Obtainable",
-        "description": "Cat Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "cat-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 109,
-        "image": "/Pet%20Simulator%2099/Hoverboards/cat-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Banana Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Banana Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "banana-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 110,
-        "image": "/Pet%20Simulator%2099/Hoverboards/banana-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Balloon Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
-        "availability": "Unobtainable outside of trading",
-        "tradeStatus": "Trade-only",
-        "description": "Balloon Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "balloon-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 111,
-        "image": "/Pet%20Simulator%2099/Hoverboards/balloon-hoverboard.png"
-      }
-    },
-    {
-      "item": {
-        "name": "Astra Hoverboard",
-        "rarity": "Exclusive",
-        "source": "Shop or pack",
-        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
-        "availability": "Obtainable",
-        "description": "Astra Hoverboard is a paid-shop or pack-route cosmetic, so its direct path depends on that offer being available."
-      },
-      "system": {
-        "slug": "astra-hoverboard",
-        "section": "Shop, pack, and VIP boards",
-        "sortOrder": 112,
-        "image": "/Pet%20Simulator%2099/Hoverboards/astra-hoverboard.png"
+        "slug": "evil-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 18,
+        "image": "/Pet%20Simulator%2099/Hoverboards/evil-hoverboard.png"
       }
     },
     {
       "item": {
         "name": "Flame Hoverboard",
+        "cardSummary": "An eligibility reward reserved for approved BIG Games Partners.",
         "rarity": "Exotic",
-        "source": "Clan, leaderboard, or partner",
+        "source": "Partner program",
         "acquiredBy": "Obtainable after becoming a BIG Games Partner.",
-        "availability": "Obtainable",
-        "description": "Flame Hoverboard is a status hoverboard tied to clans, leaderboards, or partner eligibility instead of normal area progression."
+        "availability": "Eligibility-gated",
+        "tradeStatus": "Not documented"
       },
       "system": {
         "slug": "flame-hoverboard",
         "section": "Clan, leaderboard, and partner rewards",
-        "sortOrder": 113,
+        "sortOrder": 19,
         "image": "/Pet%20Simulator%2099/Hoverboards/flame-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fragmented Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Fragmented Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "fragmented-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 20,
+        "image": "/Pet%20Simulator%2099/Hoverboards/fragmented-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Ghost Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "ghost-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 21,
+        "image": "/Pet%20Simulator%2099/Hoverboards/ghost-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Gingerbread Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "gingerbread-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 22,
+        "image": "/Pet%20Simulator%2099/Hoverboards/gingerbread-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holographic Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Holographic Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "holographic-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 23,
+        "image": "/Pet%20Simulator%2099/Hoverboards/holographic-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Cream Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Ice Cream Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "ice-cream-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 24,
+        "image": "/Pet%20Simulator%2099/Hoverboards/ice-cream-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Awarded to members of clans that placed in the top 30 of the Lunar Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "lunar-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 25,
+        "image": "/Pet%20Simulator%2099/Hoverboards/lunar-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mushroom Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Mushroom Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "mushroom-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 26,
+        "image": "/Pet%20Simulator%2099/Hoverboards/mushroom-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Patchwork Hoverboard",
+        "cardSummary": "A limited Mythical board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Mythical",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Halloween Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "patchwork-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 27,
+        "image": "/Pet%20Simulator%2099/Hoverboards/patchwork-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pegasus Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 3 clans in the Pet Collecting Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "pegasus-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 28,
+        "image": "/Pet%20Simulator%2099/Hoverboards/pegasus-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pixel Dragon Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Pixel Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "pixel-dragon-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 29,
+        "image": "/Pet%20Simulator%2099/Hoverboards/pixel-dragon-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Present Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 3 clans in the Christmas Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "present-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 30,
+        "image": "/Pet%20Simulator%2099/Hoverboards/present-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rave Crab Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Rave Crab Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "rave-crab-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 31,
+        "image": "/Pet%20Simulator%2099/Hoverboards/rave-crab-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Flying Carpet",
+        "cardSummary": "An untradable Mythical reward for reaching the global Power or RAP leaderboard.",
+        "rarity": "Mythical",
+        "source": "World leaderboard",
+        "acquiredBy": "Achieve top 100 on the Top Power/RAP leaderboard.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Untradable"
+      },
+      "system": {
+        "slug": "red-flying-carpet",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 32,
+        "image": "/Pet%20Simulator%2099/Hoverboards/red-flying-carpet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reversed Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Upside Down Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "reversed-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 33,
+        "image": "/Pet%20Simulator%2099/Hoverboards/reversed-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safety Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Safety Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "safety-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 34,
+        "image": "/Pet%20Simulator%2099/Hoverboards/safety-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Hoverboard",
+        "cardSummary": "A limited Mythical board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Mythical",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Silver Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "silver-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 35,
+        "image": "/Pet%20Simulator%2099/Hoverboards/silver-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sphinx Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Egyptian Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "sphinx-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 36,
+        "image": "/Pet%20Simulator%2099/Hoverboards/sphinx-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Starry Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Awarded to members of clans that placed in the top 30 of the Starry Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "starry-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 37,
+        "image": "/Pet%20Simulator%2099/Hoverboards/starry-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sun Angelus Hoverboard",
+        "cardSummary": "A limited Mythical board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Mythical",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Sun Angelus Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "sun-angelus-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 38,
+        "image": "/Pet%20Simulator%2099/Hoverboards/sun-angelus-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Thunderstorm Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Awarded to members of clans that placed in the top 30 of the Thunderstorm Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "thunderstorm-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 39,
+        "image": "/Pet%20Simulator%2099/Hoverboards/thunderstorm-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tie Dye Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Tie Dye Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "tie-dye-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 40,
+        "image": "/Pet%20Simulator%2099/Hoverboards/tie-dye-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wicked Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Wicked Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "wicked-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 41,
+        "image": "/Pet%20Simulator%2099/Hoverboards/wicked-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wyvern of Hades Hoverboard",
+        "cardSummary": "A limited Exotic board awarded through a competitive clan or leaderboard placement.",
+        "rarity": "Exotic",
+        "source": "Clan Battle",
+        "acquiredBy": "Rewarded to all members in the top 10 clans in the Wyvern Clan Battle.",
+        "availability": "Leaderboard reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "wyvern-of-hades-hoverboard",
+        "section": "Clan, leaderboard, and partner rewards",
+        "sortOrder": 42,
+        "image": "/Pet%20Simulator%2099/Hoverboards/wyvern-of-hades.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Art Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Art Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "art-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 43,
+        "image": "/Pet%20Simulator%2099/Hoverboards/art-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Astra Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "astra-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 44,
+        "image": "/Pet%20Simulator%2099/Hoverboards/astra-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aura Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Aura Pack and Fire Aura Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "aura-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 45,
+        "image": "/Pet%20Simulator%2099/Hoverboards/aura-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Autumn Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Autumn Gift and in the Crimson Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "autumn-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 46,
+        "image": "/Pet%20Simulator%2099/Hoverboards/autumn-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Axolotl Hoverboard",
+        "cardSummary": "The untradable hoverboard included with the permanent VIP gamepass.",
+        "rarity": "Exclusive",
+        "source": "VIP gamepass",
+        "acquiredBy": "Purchasing the VIP Gamepass (400 Robux).",
+        "availability": "Permanent",
+        "tradeStatus": "Untradable"
+      },
+      "system": {
+        "slug": "axolotl-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 47,
+        "image": "/Pet%20Simulator%2099/Hoverboards/axolotl-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Balloon Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "balloon-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 48,
+        "image": "/Pet%20Simulator%2099/Hoverboards/balloon-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Banana Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "banana-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 49,
+        "image": "/Pet%20Simulator%2099/Hoverboards/banana-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bling Hoverboard",
+        "cardSummary": "An untradable account milestone for players who reach the in-game spending requirement.",
+        "rarity": "Exotic",
+        "source": "Spending milestone",
+        "acquiredBy": "Spend 100,000 Robux in the game in total.",
+        "availability": "Permanent",
+        "tradeStatus": "Untradable"
+      },
+      "system": {
+        "slug": "bling-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 50,
+        "image": "/Pet%20Simulator%2099/Hoverboards/bling-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Christmas Event 2024 Advent Calendar and in the Candy Cane Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "candy-cane-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 51,
+        "image": "/Pet%20Simulator%2099/Hoverboards/candy-cane-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cat Hoverboard",
+        "cardSummary": "A Exclusive cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Exclusive",
+        "source": "Pack or bundle",
+        "acquiredBy": "Obtainable by purchasing the Super Starter Pack for 240 Robux (once per account).",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "cat-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 52,
+        "image": "/Pet%20Simulator%2099/Hoverboards/cat-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupt Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "corrupt-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 53,
+        "image": "/Pet%20Simulator%2099/Hoverboards/corrupt-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crayon Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Paper Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "crayon-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 54,
+        "image": "/Pet%20Simulator%2099/Hoverboards/crayon-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dino Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Dino Gift and in the Dino Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "dino-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 55,
+        "image": "/Pet%20Simulator%2099/Hoverboards/dino-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Electric Guitar Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "electric-guitar-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 56,
+        "image": "/Pet%20Simulator%2099/Hoverboards/electric-guitar-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elemental Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Elemental Gift and in the Elemental Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "elemental-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 57,
+        "image": "/Pet%20Simulator%2099/Hoverboards/elemental-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Dragon Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "fire-dragon-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 58,
+        "image": "/Pet%20Simulator%2099/Hoverboards/fire-dragon-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forcefield Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Forcefield Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "forcefield-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 59,
+        "image": "/Pet%20Simulator%2099/Hoverboards/forcefield-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Good vs. Evil Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Good vs Evil Gift and in the Angels vs. Demons Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "good-vs-evil-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 60,
+        "image": "/Pet%20Simulator%2099/Hoverboards/good-vs-evil-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hacker Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Hacker Pack and Hacker Chest.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "hacker-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 61,
+        "image": "/Pet%20Simulator%2099/Hoverboards/hacker-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Helicopter",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "helicopter",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 62,
+        "image": "/Pet%20Simulator%2099/Hoverboards/helicopter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hellfire Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Hellfire Gift and in the Rocketeer Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "hellfire-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 63,
+        "image": "/Pet%20Simulator%2099/Hoverboards/hellfire-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "High-Tech Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "high-tech-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 64,
+        "image": "/Pet%20Simulator%2099/Hoverboards/high-tech-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hologram Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "hologram-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 65,
+        "image": "/Pet%20Simulator%2099/Hoverboards/hologram-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hotdog Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "hotdog-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 66,
+        "image": "/Pet%20Simulator%2099/Hoverboards/hotdog-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kitsune Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "kitsune-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 67,
+        "image": "/Pet%20Simulator%2099/Hoverboards/kitsune-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Block Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Released through the rotating Exclusive Shop.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "lucky-block-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 68,
+        "image": "/Pet%20Simulator%2099/Hoverboards/lucky-block-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Millionaire Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Millionaire Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "millionaire-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 69,
+        "image": "/Pet%20Simulator%2099/Hoverboards/millionaire-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mosaic Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "mosaic-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 70,
+        "image": "/Pet%20Simulator%2099/Hoverboards/mosaic-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Night Terror Hoverboard",
+        "cardSummary": "A Superior cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Superior",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in The Backrooms Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "night-terror-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 71,
+        "image": "/Pet%20Simulator%2099/Hoverboards/night-terror-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nightmare Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "nightmare-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 72,
+        "image": "/Pet%20Simulator%2099/Hoverboards/nightmare-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Noob Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "noob-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 73,
+        "image": "/Pet%20Simulator%2099/Hoverboards/noob-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nyan Cat Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Released through the rotating Exclusive Shop.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "nyan-cat-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 74,
+        "image": "/Pet%20Simulator%2099/Hoverboards/nyan-cat-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Paw Print Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Paw Print Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "paw-print-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 75,
+        "image": "/Pet%20Simulator%2099/Hoverboards/paw-print-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pencil Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "pencil-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 76,
+        "image": "/Pet%20Simulator%2099/Hoverboards/pencil.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pet Games Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in Pet Games Gift and in the Player Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "pet-games-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 77,
+        "image": "/Pet%20Simulator%2099/Hoverboards/pet-games-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pizza Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "pizza-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 78,
+        "image": "/Pet%20Simulator%2099/Hoverboards/pizza-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Police Hoverboard",
+        "cardSummary": "A Exclusive cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Exclusive",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in Cops vs. Robbers Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "police-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 79,
+        "image": "/Pet%20Simulator%2099/Hoverboards/police-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Popcat Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "popcat-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 80,
+        "image": "/Pet%20Simulator%2099/Hoverboards/popcat-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rich Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "rich-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 81,
+        "image": "/Pet%20Simulator%2099/Hoverboards/rich-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rocket",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "rocket",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 82,
+        "image": "/Pet%20Simulator%2099/Hoverboards/rocket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rudolph Hoverboard",
+        "cardSummary": "A Legendary cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Legendary",
+        "source": "Pack or bundle",
+        "acquiredBy": "Obtained by completing the Day 8 Advent Calendar quest, or from the Holiday Pack in the first week of the Christmas 2023 Event.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "rudolph-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 83,
+        "image": "/Pet%20Simulator%2099/Hoverboards/rudolph-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Samurai Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Released through the rotating Exclusive Shop.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "samurai-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 84,
+        "image": "/Pet%20Simulator%2099/Hoverboards/samurai-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strawberry Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Kawaii Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "strawberry-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 85,
+        "image": "/Pet%20Simulator%2099/Hoverboards/strawberry-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Supercar",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "supercar",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 86,
+        "image": "/Pet%20Simulator%2099/Hoverboards/supercar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tank",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "tank",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 87,
+        "image": "/Pet%20Simulator%2099/Hoverboards/tank.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Throne Hoverboard",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "throne-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 88,
+        "image": "/Pet%20Simulator%2099/Hoverboards/throne-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tiger Hoverboard",
+        "cardSummary": "A Exclusive cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Exclusive",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in The Forever Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "tiger-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 89,
+        "image": "/Pet%20Simulator%2099/Hoverboards/tiger-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Toilet",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 400 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "toilet",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 90,
+        "image": "/Pet%20Simulator%2099/Hoverboards/toilet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO",
+        "cardSummary": "A Exclusive cosmetic released through the rotating Exclusive Shop.",
+        "rarity": "Exclusive",
+        "source": "Exclusive Shop",
+        "acquiredBy": "Found in the Exclusive Shop for 1,200 Robux.",
+        "availability": "Rotating offer",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "ufo",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 91,
+        "image": "/Pet%20Simulator%2099/Hoverboards/ufo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Forever Pack",
+        "acquiredBy": "Distributed through the Void-themed Forever Pack during the Void RNG event.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "void-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 92,
+        "image": "/Pet%20Simulator%2099/Hoverboards/void-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Web Hoverboard",
+        "cardSummary": "A Mythical cosmetic distributed through a paid shop, pack, bundle, or VIP route.",
+        "rarity": "Mythical",
+        "source": "Pack or bundle",
+        "acquiredBy": "Found in the Spider Pack.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "web-hoverboard",
+        "section": "Shop, pack, and VIP boards",
+        "sortOrder": 93,
+        "image": "/Pet%20Simulator%2099/Hoverboards/web-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Doodle Hoverboard",
+        "cardSummary": "A persistent Mythical milestone reward tied to an achievement or merch-code goal.",
+        "rarity": "Mythical",
+        "source": "Achievement",
+        "acquiredBy": "Rewarded after completing the Vend and Repeat achievement (Buy 8,000 items from Vending Machines).",
+        "availability": "Achievement",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "doodle-hoverboard",
+        "section": "Achievement and merch-code rewards",
+        "sortOrder": 94,
+        "image": "/Pet%20Simulator%2099/Hoverboards/doodle-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oversized Hoverboard",
+        "cardSummary": "A persistent Superior milestone reward tied to an achievement or merch-code goal.",
+        "rarity": "Superior",
+        "source": "Merch-code achievement",
+        "acquiredBy": "Rewarded after completing the Unboxing Pro achievement (Redeem 20 Merch Codes).",
+        "availability": "Achievement",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "oversized-hoverboard",
+        "section": "Achievement and merch-code rewards",
+        "sortOrder": 95,
+        "image": "/Pet%20Simulator%2099/Hoverboards/oversized-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Piñata Hoverboard",
+        "cardSummary": "A persistent Legendary milestone reward tied to an achievement or merch-code goal.",
+        "rarity": "Legendary",
+        "source": "Merch-code achievement",
+        "acquiredBy": "Rewarded after completing the Code Cracker achievement (Redeem 1 Merch Code).",
+        "availability": "Achievement",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "pinata-hoverboard",
+        "section": "Achievement and merch-code rewards",
+        "sortOrder": 96,
+        "image": "/Pet%20Simulator%2099/Hoverboards/pinata-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Hoverboard",
+        "cardSummary": "A persistent Exotic milestone reward tied to an achievement or merch-code goal.",
+        "rarity": "Exotic",
+        "source": "Merch-code achievement",
+        "acquiredBy": "Rewarded after completing the Super Haul achievement (Redeem 5 Merch Codes).",
+        "availability": "Achievement",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "rainbow-hoverboard",
+        "section": "Achievement and merch-code rewards",
+        "sortOrder": 97,
+        "image": "/Pet%20Simulator%2099/Hoverboards/rainbow-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Steampunk Hoverboard",
+        "cardSummary": "A persistent Mythical milestone reward tied to an achievement or merch-code goal.",
+        "rarity": "Mythical",
+        "source": "Achievement",
+        "acquiredBy": "Rewarded after completing the Mad Scientist achievement (Create 4,000 Pets in the Fuse Machine).",
+        "availability": "Achievement",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "steampunk-hoverboard",
+        "section": "Achievement and merch-code rewards",
+        "sortOrder": 98,
+        "image": "/Pet%20Simulator%2099/Hoverboards/steampunk-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Watermelon Hoverboard",
+        "cardSummary": "A persistent Exotic milestone reward tied to an achievement or merch-code goal.",
+        "rarity": "Exotic",
+        "source": "Achievement",
+        "acquiredBy": "Rewarded after completing the Fruit Fever achievement (Eat 10,000 Fruit).",
+        "availability": "Achievement",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "watermelon-hoverboard",
+        "section": "Achievement and merch-code rewards",
+        "sortOrder": 99,
+        "image": "/Pet%20Simulator%2099/Hoverboards/watermelon-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Barbell Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in the Buff Gym Gift.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "barbell-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 100,
+        "image": "/Pet%20Simulator%2099/Hoverboards/barbell-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Basketball Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in the Basketball Gift.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "basketball-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 101,
+        "image": "/Pet%20Simulator%2099/Hoverboards/basketball-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blossom Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in the Blossom Gift.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "blossom-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 102,
+        "image": "/Pet%20Simulator%2099/Hoverboards/blossom-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Booster Hoverboard",
+        "cardSummary": "A limited Exotic cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Exotic",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in Card Index Rewards during Trading Cards Event 2025.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "booster-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 103,
+        "image": "/Pet%20Simulator%2099/Hoverboards/booster-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Broomstick",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Reward from completing quests in the Halloween Event 2025.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "broomstick",
+        "section": "Gift and event boards",
+        "sortOrder": 104,
+        "image": "/Pet%20Simulator%2099/Hoverboards/broomstick.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmic Basketball Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in the Cosmic Basketball Gift.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "cosmic-basketball-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 105,
+        "image": "/Pet%20Simulator%2099/Hoverboards/cosmic-basketball-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Bunny Hoverboard",
+        "cardSummary": "A legacy Mythical board whose original acquisition source is not documented.",
+        "rarity": "Mythical",
+        "source": "Unknown original source",
+        "acquiredBy": "Original source not listed",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "easter-bunny-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 106,
+        "image": "/Pet%20Simulator%2099/Hoverboards/easter-bunny-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elf Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in the Santa Gift.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "elf-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 107,
+        "image": "/Pet%20Simulator%2099/Hoverboards/elf-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glitched Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "A possible reward from opening Glitched Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "glitched-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 108,
+        "image": "/Pet%20Simulator%2099/Hoverboards/glitched-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jelly Hoverboard",
+        "cardSummary": "A limited Exotic cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Exotic",
+        "source": "Event gift or reward",
+        "acquiredBy": "Rewarded by inviting friends during the Slime Factory Event 2025.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "jelly-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 109,
+        "image": "/Pet%20Simulator%2099/Hoverboards/jelly-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marble Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift",
+        "acquiredBy": "Dropped from Marble Gifts earned from Tap Heroes chest bosses.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "marble-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 110,
+        "image": "/Pet%20Simulator%2099/Hoverboards/marble-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Obsidian Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift",
+        "acquiredBy": "Dropped from Obsidian Gifts earned from Tap Gauntlet chest bosses.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "obsidian-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 111,
+        "image": "/Pet%20Simulator%2099/Hoverboards/obsidian-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pot of Gold Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in the Horseshoe Gift.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "pot-of-gold-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 112,
+        "image": "/Pet%20Simulator%2099/Hoverboards/pot-of-gold-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Cat Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in Pumpkin Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "pumpkin-cat-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 113,
+        "image": "/Pet%20Simulator%2099/Hoverboards/pumpkin-cat-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rave Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in Rave Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "rave-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 114,
+        "image": "/Pet%20Simulator%2099/Hoverboards/rave-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruler Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in School Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "ruler-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 115,
+        "image": "/Pet%20Simulator%2099/Hoverboards/ruler-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sandcastle Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in Tropical Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "sandcastle-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 116,
+        "image": "/Pet%20Simulator%2099/Hoverboards/sandcastle-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sleigh Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event reward",
+        "acquiredBy": "Possible loot from opening 2023 Titanic Christmas Presents.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "sleigh-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 117,
+        "image": "/Pet%20Simulator%2099/Hoverboards/sleigh-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowflake Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in the Christmas Event 2024 Advent Calendar and Snowflake Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "snowflake-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 118,
+        "image": "/Pet%20Simulator%2099/Hoverboards/snowflake-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Soccer Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event calendar",
+        "acquiredBy": "Rewarded through the Soccer Season Calendar daily quest track.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "soccer-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 119,
+        "image": "/Pet%20Simulator%2099/Hoverboards/soccer-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Surfboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in Summer Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "surfboard",
+        "section": "Gift and event boards",
+        "sortOrder": 120,
+        "image": "/Pet%20Simulator%2099/Hoverboards/surfboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Turkey Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in Turkey Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "turkey-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 121,
+        "image": "/Pet%20Simulator%2099/Hoverboards/turkey-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unicorn Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Reward for finding all eggs in the 2025 Easter Egg Hunt.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "unicorn-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 122,
+        "image": "/Pet%20Simulator%2099/Hoverboards/unicorn-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine's Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in Love Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "valentine-s-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 123,
+        "image": "/Pet%20Simulator%2099/Hoverboards/valentine-s-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire Bat Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Rewarded after completing the fourth Halloween Event 2024 quest.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "vampire-bat-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 124,
+        "image": "/Pet%20Simulator%2099/Hoverboards/vampire-bat-hoverboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Witch Cat Hoverboard",
+        "cardSummary": "A limited Mythical cosmetic originally distributed through an event, gift, or calendar reward.",
+        "rarity": "Mythical",
+        "source": "Event gift or reward",
+        "acquiredBy": "Found in Candy Corn Gifts.",
+        "availability": "Limited reward",
+        "tradeStatus": "Tradable"
+      },
+      "system": {
+        "slug": "witch-cat-hoverboard",
+        "section": "Gift and event boards",
+        "sortOrder": 125,
+        "image": "/Pet%20Simulator%2099/Hoverboards/witch-cat-hoverboard.png"
       }
     }
   ]

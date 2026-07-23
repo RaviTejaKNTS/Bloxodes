@@ -7,246 +7,476 @@
     "route": "/wiki/steal-a-brainrot/machines",
     "catalogCode": "steal-a-brainrot-machines",
     "itemFields": [
-      "howToUse",
-      "whatItDoes",
-      "inGameRightNow"
+      "name",
+      "cardSummary",
+      "machineFamily",
+      "availability",
+      "introduced",
+      "location",
+      "inputsOrCost",
+      "resultOrEffect",
+      "howToUse"
     ],
     "columns": [
-      "howToUse",
-      "whatItDoes",
-      "inGameRightNow"
+      "name",
+      "cardSummary",
+      "machineFamily",
+      "availability",
+      "introduced",
+      "location",
+      "inputsOrCost",
+      "resultOrEffect",
+      "howToUse"
     ],
     "display": {
-      "groupLabel": "Group",
+      "groupLabel": "Machine type",
       "sectionOrder": [
-        "Items"
+        "Fusion and Crafting",
+        "Traders, Shops, and Exchange",
+        "Player Systems and Utility",
+        "Seasonal and Admin Event Machines"
       ],
-      "badgeField": null,
-      "subtitleFields": [],
-      "descriptionField": null,
-      "cardDescriptionField": null,
+      "badgeField": "availability",
+      "subtitleFields": [
+        "machineFamily"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
+        "machineFamily",
+        "availability",
+        "introduced",
+        "location",
+        "inputsOrCost",
+        "resultOrEffect",
         "howToUse",
-        "whatItDoes",
-        "inGameRightNow"
+        "cardSummary"
       ],
       "tableFields": [
+        "machineFamily",
+        "availability",
+        "introduced",
+        "location",
+        "inputsOrCost",
+        "resultOrEffect",
         "howToUse",
-        "whatItDoes",
-        "inGameRightNow"
+        "cardSummary"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "machineFamily": {
+          "kind": "normal",
+          "label": "Machine family"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "introduced": {
+          "kind": "chip",
+          "label": "Introduced"
+        },
+        "location": {
+          "kind": "normal",
+          "label": "Location"
+        },
+        "inputsOrCost": {
+          "kind": "detail",
+          "label": "Inputs or cost"
+        },
+        "resultOrEffect": {
+          "kind": "detail",
+          "label": "Result or effect"
+        },
+        "howToUse": {
+          "kind": "detail",
+          "label": "How to use"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
-        "name": "Rainbow Machine",
-        "howToUse": "You put in 25 Gold brainrots in it",
-        "whatItDoes": "It will start the rainbow event giving brainrots a higher chance for Rainbow mutation",
-        "inGameRightNow": "No"
-      },
-      "system": {
-        "slug": "rainbow-machine",
-        "section": "Items",
-        "sortOrder": 1,
-        "image": "/Steal%20a%20Brainrot/Machines/rainbow-machine.webp"
-      }
-    },
-    {
-      "item": {
-        "name": "Bubblegum Machine",
-        "howToUse": "You put 10 Candy brainrots in it",
-        "whatItDoes": "It will activate and it can give the Bubblegum trait to brainrots",
-        "inGameRightNow": "Yes, but only if Sammy activates it. and you do not have put 10 Candy brainrots in it as it would be filled."
-      },
-      "system": {
-        "slug": "bubblegum-machine",
-        "section": "Items",
-        "sortOrder": 2,
-        "image": "/Steal%20a%20Brainrot/Machines/bubblegum-machine.webp"
-      }
-    },
-    {
-      "item": {
         "name": "Fuse Machine",
-        "howToUse": "You put 4 brainrots in it",
-        "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
-        "inGameRightNow": "No"
+        "cardSummary": "The original fusion system combined a set of Brainrots into one result, with the output shaped by the submitted rarities and values. Its 2026 return belongs to this same machine lineage.",
+        "machineFamily": "Fuse machine",
+        "availability": "Removed after its 2026 return",
+        "introduced": "August 1, 2025",
+        "location": "Beside the Coin Shop",
+        "inputsOrCost": "Four Brainrots plus a cash fee calculated after the inputs were placed",
+        "resultOrEffect": "Produced one fusion-pool Brainrot after a rarity-based timer, with a chance to inherit input traits or mutations.",
+        "howToUse": "Place four Brainrots, review the displayed outcomes and fee, start the fuse, then collect the result when the timer ends."
       },
       "system": {
         "slug": "fuse-machine",
-        "section": "Items",
-        "sortOrder": 3,
+        "section": "Fusion and Crafting",
+        "sortOrder": 1,
         "image": "/Steal%20a%20Brainrot/Machines/fuse-machine.webp"
       }
     },
     {
       "item": {
         "name": "Craft Machine",
-        "howToUse": "You put 2-4 brainrots in it, depending on the recipe.",
-        "whatItDoes": "You can craft a brainrot with a 100% chance of getting, but it required the brainrots for the recipe.",
-        "inGameRightNow": "No"
+        "cardSummary": "The base crafting system exchanged exact recipe ingredients for a guaranteed listed Brainrot. It replaced the first Fuse Machine before the Halloween rotation.",
+        "machineFamily": "Craft machine",
+        "availability": "Removed",
+        "introduced": "September 6, 2025",
+        "location": "Beside the Coin Shop",
+        "inputsOrCost": "Two to four recipe-specific Brainrots",
+        "resultOrEffect": "Crafted the selected recipe's Brainrot instead of rolling a random fusion result.",
+        "howToUse": "Choose a recipe, place every required Brainrot, start the craft, and collect the result after its timer."
       },
       "system": {
         "slug": "craft-machine",
-        "section": "Items",
-        "sortOrder": 4,
+        "section": "Fusion and Crafting",
+        "sortOrder": 2,
         "image": "/Steal%20a%20Brainrot/Machines/craft-machine.webp"
       }
     },
     {
       "item": {
         "name": "Witch Fuse",
-        "howToUse": "You put 4 brainrots in it",
-        "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
-        "inGameRightNow": "No"
+        "cardSummary": "This Halloween fuse variant replaced the Craft Machine with a spooky reward pool and revised fusion rules. It was later replaced by the Brainrot Dealer.",
+        "machineFamily": "Seasonal fuse",
+        "availability": "Removed Halloween machine",
+        "introduced": "October 11, 2025",
+        "location": null,
+        "inputsOrCost": "Four Brainrots",
+        "resultOrEffect": "Produced one Witch Fuse Brainrot after a timed fusion, with possible trait or mutation inheritance.",
+        "howToUse": "Place four Brainrots, check the possible outcomes, start the fuse, and return when the timer finishes."
       },
       "system": {
         "slug": "witch-fuse",
-        "section": "Items",
-        "sortOrder": 5,
+        "section": "Fusion and Crafting",
+        "sortOrder": 3,
         "image": "/Steal%20a%20Brainrot/Machines/witch-fuse.webp"
       }
     },
     {
       "item": {
+        "name": "Santa's Fuse",
+        "cardSummary": "The Christmas fuse used the familiar four-input format with its own festive reward pool. It followed the Brainrot Trader during the holiday update sequence.",
+        "machineFamily": "Seasonal fuse",
+        "availability": "Removed Christmas machine",
+        "introduced": "December 6, 2025",
+        "location": null,
+        "inputsOrCost": "Four Brainrots",
+        "resultOrEffect": "Produced one Brainrot from the Santa's Fuse pool after a timed fusion.",
+        "howToUse": "Place four Brainrots, start the festive fuse, and reveal the resulting Brainrot after the timer."
+      },
+      "system": {
+        "slug": "santa-s-fuse",
+        "section": "Fusion and Crafting",
+        "sortOrder": 4,
+        "image": "/Steal%20a%20Brainrot/Machines/santa-s-fuse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Divine Fuse",
+        "cardSummary": "The Update 41 fuse variant replaced the returning Fuse Machine with a separate Divine-themed outcome pool. Its results remain historical after the machine's removal.",
+        "machineFamily": "Themed fuse",
+        "availability": "Removed",
+        "introduced": "March 7, 2026",
+        "location": null,
+        "inputsOrCost": "Four Brainrots",
+        "resultOrEffect": "Produced one Brainrot from the Divine Fuse lineup after a timed fusion.",
+        "howToUse": "Place four Brainrots, review the possible Divine Fuse outcomes, start the process, and collect the result after the timer."
+      },
+      "system": {
+        "slug": "divine-fuse",
+        "section": "Fusion and Crafting",
+        "sortOrder": 5,
+        "image": "/Steal%20a%20Brainrot/Machines/divine-fuse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cyber Craft Machine",
+        "cardSummary": "The Cyber update brought back recipe crafting with a themed machine and a dedicated lineup. Better output rarities used longer crafting timers.",
+        "machineFamily": "Themed craft machine",
+        "availability": "Removed",
+        "introduced": "April 18, 2026",
+        "location": null,
+        "inputsOrCost": "Recipe-specific Brainrots",
+        "resultOrEffect": "Crafted the chosen Cyber recipe after a rarity-based timer.",
+        "howToUse": "Select a recipe, submit every required Brainrot, wait for the craft timer, and reveal the finished Brainrot."
+      },
+      "system": {
+        "slug": "cyber-craft-machine",
+        "section": "Fusion and Crafting",
+        "sortOrder": 6,
+        "image": "/Steal%20a%20Brainrot/Machines/cyber-craft-machine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Summer Fuse",
+        "cardSummary": "The Update 52 seasonal fuse reused the core fusion loop with a beach-themed lineup. Its detailed result roster belongs on the separate Fuse Machine collection.",
+        "machineFamily": "Seasonal fuse",
+        "availability": "Seasonal summer machine",
+        "introduced": "May 23, 2026",
+        "location": "Middle of the map near the Shop",
+        "inputsOrCost": "Four Brainrots",
+        "resultOrEffect": "Produced one Summer Fuse Brainrot, with the possible result influenced by the submitted Brainrots.",
+        "howToUse": "Place four Brainrots, review the possible result, start the fuse, and carry the finished Brainrot back to your base."
+      },
+      "system": {
+        "slug": "summer-fuse",
+        "section": "Fusion and Crafting",
+        "sortOrder": 7,
+        "image": "/Steal%20a%20Brainrot/Machines/summer-fuse.webp"
+      }
+    },
+    {
+      "item": {
         "name": "Brainrot Dealer",
-        "howToUse": "You spend the in game cash",
-        "whatItDoes": "You can buy brainrots and it will spawn with a 100% chance, but only if the brainrot was in stock.",
-        "inGameRightNow": "No"
+        "cardSummary": "This short-lived shop sold a globally shared stock of special Brainrots for in-game cash. Fast sellouts led to its replacement by the server-based Brainrot Trader.",
+        "machineFamily": "Stock dealer",
+        "availability": "Removed",
+        "introduced": "November 8, 2025",
+        "location": null,
+        "inputsOrCost": "In-game cash; some stock also had Robux purchase options",
+        "resultOrEffect": "Purchased the selected in-stock Brainrot and sent it toward the buyer's base.",
+        "howToUse": "Open the dealer during a stock window and buy an available Brainrot before the shared supply sells out."
       },
       "system": {
         "slug": "brainrot-dealer",
-        "section": "Items",
-        "sortOrder": 6,
+        "section": "Traders, Shops, and Exchange",
+        "sortOrder": 8,
         "image": "/Steal%20a%20Brainrot/Machines/brainrot-dealer.webp"
       }
     },
     {
       "item": {
         "name": "Brainrot Trader",
-        "howToUse": "You put 1-5 brainrots in it, depending on the recipe.",
-        "whatItDoes": "You can trade for a brainrot with a 100% chance of getting, but it required the brainrots for the recipe.",
-        "inGameRightNow": "No"
+        "cardSummary": "This server-based exchange replaced the global-stock Dealer. Its rotating offers asked for existing Brainrots in return for a listed machine-exclusive result.",
+        "machineFamily": "Recipe trader",
+        "availability": "Removed",
+        "introduced": "November 15, 2025",
+        "location": "Raised trader pedestal",
+        "inputsOrCost": "Offer-specific sets of existing Brainrots",
+        "resultOrEffect": "Exchanged the required inputs for the Brainrot shown in a server-side offer.",
+        "howToUse": "Check the rotating offers, choose a target, submit one complete requirement set, and confirm the exchange."
       },
       "system": {
         "slug": "brainrot-trader",
-        "section": "Items",
-        "sortOrder": 7,
+        "section": "Traders, Shops, and Exchange",
+        "sortOrder": 9,
         "image": "/Steal%20a%20Brainrot/Machines/brainrot-trader.webp"
       }
     },
     {
       "item": {
-        "name": "Santa's Fuse",
-        "howToUse": "You put 4 brainrots in it",
-        "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
-        "inGameRightNow": "No"
-      },
-      "system": {
-        "slug": "santa-s-fuse",
-        "section": "Items",
-        "sortOrder": 8,
-        "image": "/Steal%20a%20Brainrot/Machines/santa-s-fuse.webp"
-      }
-    },
-    {
-      "item": {
         "name": "Santa's Shop",
-        "howToUse": "You spend the in game gold elves or robux",
-        "whatItDoes": "It will give you a brainrot if you buy it with robux or gold elves. but only if the brainrot was in stock.",
-        "inGameRightNow": "No"
+        "cardSummary": "The Christmas shop sold holiday Brainrots from a limited stock using event currency or Robux. It belongs to the retired seasonal shop rotation.",
+        "machineFamily": "Seasonal stock shop",
+        "availability": "Removed Christmas shop",
+        "introduced": "Christmas 2025",
+        "location": null,
+        "inputsOrCost": "Gold Elves or Robux, depending on the offer",
+        "resultOrEffect": "Purchased the chosen holiday Brainrot when that offer was in stock.",
+        "howToUse": "Open the shop, choose an available Brainrot, and pay with the currency shown on its offer."
       },
       "system": {
         "slug": "santa-s-shop",
-        "section": "Items",
-        "sortOrder": 9,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "New Year's Machine",
-        "howToUse": "You put brainrots that is brainrot god rarity or higher in it",
-        "whatItDoes": "It will start the New Years Event and also spawn a 2026 brainrot",
-        "inGameRightNow": "No"
-      },
-      "system": {
-        "slug": "new-year-s-machine",
-        "section": "Items",
+        "section": "Traders, Shops, and Exchange",
         "sortOrder": 10,
         "image": null
       }
     },
     {
       "item": {
-        "name": "Cupid's Machine",
-        "howToUse": "Insert a specific combination of Two Brainrots to get a different reward.",
-        "whatItDoes": "45% Heart Lucky Block 40.25% Nothing 14.50% Cupid Cupid Sahur 0.25% Lovin Rose 0.0625% Love Love Bear",
-        "inGameRightNow": "No"
+        "name": "Los Traders",
+        "cardSummary": "The Update 57 trader system exchanges older Brainrots and cash for a rotating pool of Secret rewards. Stock is shared and refreshes on a regular cycle.",
+        "machineFamily": "Rotating recipe trader",
+        "availability": "Rotating trader system",
+        "introduced": "July 11, 2026",
+        "location": "Middle of the map beside Summer Fuse",
+        "inputsOrCost": "Offer-specific Brainrots plus the listed in-game cash cost",
+        "resultOrEffect": "Exchanged the submitted requirements for the listed Los Traders Brainrot while stock remained.",
+        "howToUse": "Check each stock refresh, choose an available offer, submit its Brainrots and cash, then protect the result as it travels to your base."
       },
       "system": {
-        "slug": "cupid-s-machine",
-        "section": "Items",
+        "slug": "los-traders",
+        "section": "Traders, Shops, and Exchange",
         "sortOrder": 11,
+        "image": "/Steal%20a%20Brainrot/Machines/los-traders.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Duels Machine",
+        "cardSummary": "The duel system let two players wager Brainrots and fight in a separate match. The winner received the Brainrot placed at stake by the opponent.",
+        "machineFamily": "PvP wager machine",
+        "availability": "Limited-time machine",
+        "introduced": "January 10, 2026",
+        "location": "Near the Gears Shop",
+        "inputsOrCost": "A Brainrot wager from each player",
+        "resultOrEffect": "Started a private duel and transferred the losing player's wager to the winner.",
+        "howToUse": "Challenge another player, choose a Brainrot to wager, accept the matchup, and win the duel to claim the opponent's stake."
+      },
+      "system": {
+        "slug": "duels-machine",
+        "section": "Player Systems and Utility",
+        "sortOrder": 12,
         "image": null
       }
     },
     {
       "item": {
         "name": "Trade Machine",
-        "howToUse": "You choose brainrot(s) to trade with the other player, and press accept after all players have pressed ready, and once all players have pressed accept, the brainrot the other player had will go into your base, same with the other one.",
-        "whatItDoes": "You can trade brainrots.",
-        "inGameRightNow": "Yes"
+        "cardSummary": "The official trade system replaced trust-based swaps with a two-sided confirmation flow. The physical machine was later removed when trading moved to a permanent menu button.",
+        "machineFamily": "Player trade system",
+        "availability": "Trading moved to a menu",
+        "introduced": "February 21, 2026",
+        "location": "Center of the map beside the conveyor belt",
+        "inputsOrCost": "Brainrots offered by both players",
+        "resultOrEffect": "Transferred the accepted offers between the two players after both confirmed the trade.",
+        "howToUse": "Find or search for a player, add Brainrots to each side, mark the offer ready, and complete the final confirmation."
       },
       "system": {
         "slug": "trade-machine",
-        "section": "Items",
-        "sortOrder": 12,
+        "section": "Player Systems and Utility",
+        "sortOrder": 13,
         "image": "/Steal%20a%20Brainrot/Machines/trade-machine.webp"
       }
     },
     {
       "item": {
-        "name": "Divine Fuse",
-        "howToUse": "You put 4 brainrots in it",
-        "whatItDoes": "It can give you one brainrot and that brainrot has a chance to get the traits or mutation from the 4 brainrots you put it in. It's by chance/luck.",
-        "inGameRightNow": "No"
-      },
-      "system": {
-        "slug": "divine-fuse",
-        "section": "Items",
-        "sortOrder": 13,
-        "image": "/Steal%20a%20Brainrot/Machines/divine-fuse.webp"
-      }
-    },
-    {
-      "item": {
         "name": "Egg Incubator",
-        "howToUse": "You put Egg Lucky Blocks in it",
-        "whatItDoes": "You can still get traits even if it's not on the track.",
-        "inGameRightNow": "Yes"
+        "cardSummary": "The Easter incubator held an Egg or Egg Lucky Block while trait events ran. It offered a passive, lower-chance route for adding active traits to the stored egg.",
+        "machineFamily": "Trait incubator",
+        "availability": "Seasonal Easter system",
+        "introduced": "April 4, 2026",
+        "location": null,
+        "inputsOrCost": "One Egg or Egg Lucky Block",
+        "resultOrEffect": "Gave the stored egg a small chance to receive traits that were active during events.",
+        "howToUse": "Place an Egg or Egg Lucky Block in the incubator and leave it stored while eligible trait events are active."
       },
       "system": {
         "slug": "egg-incubator",
-        "section": "Items",
+        "section": "Player Systems and Utility",
         "sortOrder": 14,
         "image": "/Steal%20a%20Brainrot/Machines/egg-incubator.webp"
       }
     },
     {
       "item": {
-        "name": "Cyber Craft Machine",
-        "howToUse": "You put specific Brainrots to craft another specific Brainrot",
-        "whatItDoes": "Once you give it the required Brainrots, it will start crafting for a certain amount of time (the better the Brainrot the longer it takes). Once the timer is over (or Sammy skips the craft timer), you can reveal the Brainrot.",
-        "inGameRightNow": "Yes"
+        "name": "Rainbow Machine",
+        "cardSummary": "The game's first machine consumed Gold Brainrots to start a temporary Rainbow event. The original machine was removed, although admins can still trigger the event without it.",
+        "machineFamily": "Event activation machine",
+        "availability": "Machine removed; event can return",
+        "introduced": "June 21, 2025",
+        "location": null,
+        "inputsOrCost": "Twenty-five Gold Brainrots",
+        "resultOrEffect": "Started a timed event that increased the chance of Rainbow-mutated Brainrots appearing.",
+        "howToUse": "Submit the required Gold Brainrots to fill the machine and activate the Rainbow event."
       },
       "system": {
-        "slug": "cyber-craft-machine",
-        "section": "Items",
+        "slug": "rainbow-machine",
+        "section": "Seasonal and Admin Event Machines",
         "sortOrder": 15,
-        "image": "/Steal%20a%20Brainrot/Machines/cyber-craft-machine.webp"
+        "image": "/Steal%20a%20Brainrot/Machines/rainbow-machine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bubblegum Machine",
+        "cardSummary": "This event machine accepted Candy Brainrots to trigger the Bubblegum event. The machine was retired, but the event can still appear through admin-controlled rotations.",
+        "machineFamily": "Trait event machine",
+        "availability": "Machine removed; event can return",
+        "introduced": "July 18, 2025",
+        "location": "In front of the Brainrot spawn",
+        "inputsOrCost": "Ten Candy Brainrots",
+        "resultOrEffect": "Activated an event that could apply the Bubblegum trait to Brainrots.",
+        "howToUse": "Submit the required Candy Brainrots to activate the Bubblegum event when the machine was available."
+      },
+      "system": {
+        "slug": "bubblegum-machine",
+        "section": "Seasonal and Admin Event Machines",
+        "sortOrder": 16,
+        "image": "/Steal%20a%20Brainrot/Machines/bubblegum-machine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Advent Calendar",
+        "cardSummary": "The Christmas calendar awarded daily gifts and streak rewards to eligible players. Missed daily rewards could be recovered before the event ended.",
+        "machineFamily": "Seasonal reward machine",
+        "availability": "Removed Christmas machine",
+        "introduced": "November 29, 2025",
+        "location": null,
+        "inputsOrCost": "At least one rebirth; missed rewards could be recovered for Robux",
+        "resultOrEffect": "Granted the day's gift and tracked holiday login-streak rewards.",
+        "howToUse": "Join during the event, open the calendar, and claim each unlocked daily reward before the seasonal window closed."
+      },
+      "system": {
+        "slug": "advent-calendar",
+        "section": "Seasonal and Admin Event Machines",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Admin Machine",
+        "cardSummary": "The original Admin Machine was an hourly event board that rolled a reward, event, and luck multiplier. Later themed Admin Machines reused this same system.",
+        "machineFamily": "Admin event board",
+        "availability": "Base version removed; variants recur",
+        "introduced": "November 29, 2025",
+        "location": "Main event board",
+        "inputsOrCost": "No player input; rolls followed the admin or hourly event schedule",
+        "resultOrEffect": "Selected Brainrots or Lucky Blocks, a map event, and a server luck multiplier.",
+        "howToUse": "Watch the board's countdown and event result, then react to the reward, event, and luck effects it activates."
+      },
+      "system": {
+        "slug": "admin-machine",
+        "section": "Seasonal and Admin Event Machines",
+        "sortOrder": 18,
+        "image": "/Steal%20a%20Brainrot/Machines/admin-machine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "New Year's Machine",
+        "cardSummary": "The New Year's Eve machine consumed earning power from submitted Brainrots to fill an event meter. A completed meter launched the 2026 event and its reward spawn.",
+        "machineFamily": "Event activation machine",
+        "availability": "Removed New Year's machine",
+        "introduced": "December 31, 2025",
+        "location": null,
+        "inputsOrCost": "A Brainrot earning more than $50K/s, followed by more Brainrots until the meter filled",
+        "resultOrEffect": "Started the 2026 event and spawned one of its New Year's Brainrots.",
+        "howToUse": "Insert an eligible Brainrot, continue adding Brainrots until the progress meter reaches full, and collect the event spawn."
+      },
+      "system": {
+        "slug": "new-year-s-machine",
+        "section": "Seasonal and Admin Event Machines",
+        "sortOrder": 19,
+        "image": "/Steal%20a%20Brainrot/Machines/new-years-machine.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid's Machine",
+        "cardSummary": "The Valentine's machine matched pairs of Brainrots for a chance at themed rewards. Its pool included Heart Lucky Blocks and exclusive Valentine Brainrots.",
+        "machineFamily": "Seasonal exchange machine",
+        "availability": "Removed Valentine's machine",
+        "introduced": "February 7, 2026",
+        "location": null,
+        "inputsOrCost": "A supported pair of Brainrots and the displayed cash requirement",
+        "resultOrEffect": "Rolled a Valentine's reward from the eligible pair, with a possible no-reward result.",
+        "howToUse": "Place a valid matching Brainrot in each tube, confirm the exchange, and reveal the machine's result."
+      },
+      "system": {
+        "slug": "cupid-s-machine",
+        "section": "Seasonal and Admin Event Machines",
+        "sortOrder": 20,
+        "image": "/Steal%20a%20Brainrot/Machines/cupids-machine.webp"
       }
     }
   ]

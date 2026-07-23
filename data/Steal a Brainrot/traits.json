@@ -7,323 +7,381 @@
     "route": "/wiki/steal-a-brainrot/traits",
     "catalogCode": "steal-a-brainrot-traits",
     "itemFields": [
+      "cardSummary",
       "category",
       "multiplier",
+      "availability",
       "obtainment",
-      "visuals",
-      "notes"
+      "visuals"
     ],
     "columns": [
+      "cardSummary",
       "category",
       "multiplier",
+      "availability",
       "obtainment",
-      "visuals",
-      "notes"
+      "visuals"
     ],
     "display": {
-      "groupLabel": "category",
+      "groupLabel": "Trait category",
       "sectionOrder": [
+        "OG",
         "Seasonal Event",
         "Ritual Event",
         "Country Event",
-        "Admin-Only Event",
+        "Admin Abuse Exclusive",
         "Natural Event"
       ],
       "badgeField": "category",
-      "subtitleFields": [],
-      "descriptionField": "notes",
-      "cardDescriptionField": "notes",
+      "subtitleFields": [
+        "multiplier",
+        "availability"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
+        "cardSummary",
         "category",
         "multiplier",
+        "availability",
         "obtainment",
-        "visuals",
-        "notes"
+        "visuals"
       ],
       "tableFields": [
+        "cardSummary",
         "category",
         "multiplier",
+        "availability",
         "obtainment",
-        "visuals",
-        "notes"
+        "visuals"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "cardSummary": {
+          "kind": "normal",
+          "label": "Summary"
+        },
+        "category": {
+          "kind": "chip",
+          "label": "Category"
+        },
+        "multiplier": {
+          "kind": "chip",
+          "label": "Income multiplier"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "visuals": {
+          "kind": "detail",
+          "label": "Visual effect"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
+        "name": "Strawberry",
+        "cardSummary": "Strawberry is a OG trait with a 8× multiplier.",
+        "category": "OG",
+        "multiplier": "8×",
+        "availability": "Rare OG spawn or Admin Abuse",
+        "obtainment": "The Strawberry Elephant event can apply this trait to Brainrots on the Red Carpet, including during Admin Abuse.",
+        "visuals": "A strawberry texture covers the Brainrot and adds a leafy stem cap."
+      },
+      "system": {
+        "slug": "strawberry",
+        "section": "OG",
+        "sortOrder": 1,
+        "image": "/Steal%20a%20Brainrot/Traits/strawberry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meowl",
+        "cardSummary": "Meowl is a OG trait with a 7× multiplier.",
+        "category": "OG",
+        "multiplier": "7×",
+        "availability": "Rare OG spawn or Admin Abuse",
+        "obtainment": "When Meowl's event runs, a smaller Meowl approaches a Brainrot on the Red Carpet and applies the trait.",
+        "visuals": "Cat ears and a tail appear on the Brainrot."
+      },
+      "system": {
+        "slug": "meowl",
+        "section": "OG",
+        "sortOrder": 2,
+        "image": "/Steal%20a%20Brainrot/Traits/meowl.png"
+      }
+    },
+    {
+      "item": {
+        "name": "John Pork",
+        "cardSummary": "John Pork is a OG trait with a 6.5× multiplier.",
+        "category": "OG",
+        "multiplier": "6.5×",
+        "availability": "Rare OG spawn or Admin Abuse",
+        "obtainment": "The John Pork event can mark a Brainrot on or away from the Red Carpet during its call-themed sequence.",
+        "visuals": "Call and decline icons appear near the face, with an Is Calling message above the name."
+      },
+      "system": {
+        "slug": "john-pork",
+        "section": "OG",
+        "sortOrder": 3,
+        "image": "/Steal%20a%20Brainrot/Traits/john-pork.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Skibidi",
+        "cardSummary": "Skibidi is a OG trait with a 6× multiplier.",
+        "category": "OG",
+        "multiplier": "6×",
+        "availability": "Rare OG spawn or Admin Abuse",
+        "obtainment": "The Skibidi Toilet event randomly applies this trait to a Brainrot while the event is active.",
+        "visuals": "A Skibidi Toilet head sits on top of the Brainrot."
+      },
+      "system": {
+        "slug": "skibidi",
+        "section": "OG",
+        "sortOrder": 4,
+        "image": "/Steal%20a%20Brainrot/Traits/skibidi.png"
+      }
+    },
+    {
+      "item": {
         "name": "Reindeer Pet",
-        "category": "Seasonal Event",
-        "multiplier": "6x",
-        "obtainment": "Hourly Event on the Event Board. The map turns into a Ginger Bread world, with a deer on a helicopter landing pad. You can ride this. Mini Reindeers walk up to a Brainrot and hit it, thus giving it the trait.",
-        "visuals": "A Mini Reindeer accompanies the Brainrot.",
-        "notes": "It is from an event that happens every so often."
+        "cardSummary": "Reindeer Pet is a Christmas trait with a 5× multiplier.",
+        "category": "Christmas",
+        "multiplier": "5×",
+        "availability": "Limited Christmas event",
+        "obtainment": "During the Christmas Event Board rotation, a mini reindeer approaches a Brainrot and applies the trait.",
+        "visuals": "A small reindeer companion appears beside the Brainrot."
       },
       "system": {
         "slug": "reindeer-pet",
         "section": "Seasonal Event",
-        "sortOrder": 1,
+        "sortOrder": 5,
         "image": "/Steal%20a%20Brainrot/Traits/reindeer-pet.webp"
       }
     },
     {
       "item": {
-        "name": "Chocolate",
-        "category": "Seasonal Event",
-        "multiplier": "5.5x",
-        "obtainment": "Admin Abuse. A pink and vibrant environment covers the map, a chocolate heart box appears above the Brainrot Spawn. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A chocolate aura similar to Paint will be shown below the Brainrot, the Brainrot will appear to be covered in chocolate.",
-        "notes": "This event was limited to a Seasonal Event related to Valentines Day."
-      },
-      "system": {
-        "slug": "chocolate",
-        "section": "Seasonal Event",
-        "sortOrder": 2,
-        "image": "/Steal%20a%20Brainrot/Traits/chocolate.webp"
-      }
-    },
-    {
-      "item": {
-        "name": "26",
-        "category": "Seasonal Event",
-        "multiplier": "6x",
-        "obtainment": "Admin Abuse. Randomly applied to any Brainrots.",
-        "visuals": "Text that says \"26\" will appear on top of the Brainrot.",
-        "notes": "This trait was used to celebrate New Years for 2026 and was activated on Taco Tuesday 2/24/2026 to celebrate Sammy's birthday, but it might NEVER be activated ever again..."
-      },
-      "system": {
-        "slug": "26",
-        "section": "Seasonal Event",
-        "sortOrder": 3,
-        "image": "/Steal%20a%20Brainrot/Traits/26.webp"
-      }
-    },
-    {
-      "item": {
-        "name": "Halo",
-        "category": "Seasonal Event",
-        "multiplier": "6x",
-        "obtainment": "Divine Event. The map is designed in elegant and heavenly embroidery, distinguishable symbols can be found. Randomly applied to Brainrots that have the Divine Mutation.",
-        "visuals": "A visible halo appears above the Brainrots head.",
-        "notes": "Only available during the Divine Event."
-      },
-      "system": {
-        "slug": "halo",
-        "section": "Seasonal Event",
-        "sortOrder": 4,
-        "image": "/Steal%20a%20Brainrot/Traits/halo.webp"
-      }
-    },
-    {
-      "item": {
-        "name": "Lucky",
-        "category": "Seasonal Event",
-        "multiplier": "6x",
-        "obtainment": "Lucky Pot. No notable environment changes. Randomly applied to any Brainrots.",
-        "visuals": "A green overlay appears over the Brainrot, with coins coming out from it.",
-        "notes": "Part of a Seasonal Event."
-      },
-      "system": {
-        "slug": "lucky",
-        "section": "Seasonal Event",
-        "sortOrder": 5,
-        "image": "/Steal%20a%20Brainrot/Traits/lucky.webp"
-      }
-    },
-    {
-      "item": {
-        "name": "Jack O'Lantern Pet",
-        "category": "Seasonal Event",
-        "multiplier": "5.5x",
-        "obtainment": "Spawns during an hourly rotation of Halloween Events. A rollercoaster goes around the map, with houses place between bases. Randomly applied to any brainrots walking on the map.",
-        "visuals": "An orange pumpkin with green neon lights illuminating inside of it.",
-        "notes": "The Event Board was removed on November 2, 2025 at 11:00AM EST."
-      },
-      "system": {
-        "slug": "jack-o-lantern-pet",
-        "section": "Seasonal Event",
-        "sortOrder": 6,
-        "image": null
-      }
-    },
-    {
-      "item": {
-        "name": "Bunny Ears",
-        "category": "Seasonal Event",
-        "multiplier": "5.5x",
-        "obtainment": "Easter Hour Bunny's appear around the map. Randomly applied to any brainrots walking on the map.",
-        "visuals": "Bunny ears appear on top of the Brainrots head."
-      },
-      "system": {
-        "slug": "bunny-ears",
-        "section": "Seasonal Event",
-        "sortOrder": 7,
-        "image": "/Steal%20a%20Brainrot/Traits/bunny-ears.webp"
-      }
-    },
-    {
-      "item": {
         "name": "Santa Hat",
-        "category": "Seasonal Event",
-        "multiplier": "5x",
-        "obtainment": "Similarly to the Witching Hour, a Christmas Sammy will be at the side every Winter Hour. There is snow everywhere and a Christmas Sammy resides near the red carpet. At the beginning of this event, a Christmas Brainrot spawns. (Please add more detail) Sammy, dressed in a Festive costume, goes to a random brainrot on the red carpet. Once this happens, the brainrot gets this trait.",
-        "visuals": "A Santa Hat appears on top of the Brainrots head(s).",
-        "notes": "It is from an event that happens every so often."
+        "cardSummary": "Santa Hat is a Christmas trait with a 4× multiplier.",
+        "category": "Christmas",
+        "multiplier": "4×",
+        "availability": "Limited Winter Hour event",
+        "obtainment": "During Winter Hour, festive Sammy visits a random Brainrot on the Red Carpet and applies the trait.",
+        "visuals": "A Santa hat appears on the Brainrot's head."
       },
       "system": {
         "slug": "santa-hat",
         "section": "Seasonal Event",
-        "sortOrder": 8,
+        "sortOrder": 6,
         "image": "/Steal%20a%20Brainrot/Traits/santa-hat.webp"
       }
     },
     {
       "item": {
-        "name": "RIP Tombstone",
-        "category": "Seasonal Event",
-        "multiplier": "4.5x",
-        "obtainment": "Spawns during an hourly rotation of Halloween Events. A dark and veiny environment appears, with graves in the surroundings. Randomly applied to any brainrots walking on the map.",
-        "visuals": "A Tombstone appears on top of the specified Brainrot.",
-        "notes": "The Event Board was removed on November 2, 2025 at 11:00AM EST."
+        "name": "Jack O' Lantern Pet",
+        "cardSummary": "Jack O' Lantern Pet is a Halloween trait with a 4.5× multiplier.",
+        "category": "Halloween",
+        "multiplier": "4.5×",
+        "availability": "Limited Halloween event",
+        "obtainment": "A Halloween event rotation can apply the trait to Brainrots moving through the map.",
+        "visuals": "A glowing orange jack-o'-lantern companion appears beside the Brainrot."
       },
       "system": {
-        "slug": "rip-tombstone",
+        "slug": "jack-o-lantern-pet",
         "section": "Seasonal Event",
-        "sortOrder": 9,
+        "sortOrder": 7,
+        "image": "/Steal%20a%20Brainrot/Traits/jack-o-lantern-pet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "RIP Gravestone",
+        "cardSummary": "RIP Gravestone is a Halloween trait with a 3.5× multiplier.",
+        "category": "Halloween",
+        "multiplier": "3.5×",
+        "availability": "Limited Grave Digger event",
+        "obtainment": "The Grave Digger event randomly applies this trait to Brainrots moving through the map.",
+        "visuals": "A gravestone appears above the Brainrot."
+      },
+      "system": {
+        "slug": "rip-gravestone",
+        "section": "Seasonal Event",
+        "sortOrder": 8,
         "image": "/Steal%20a%20Brainrot/Traits/rip-tombstone.webp"
       }
     },
     {
       "item": {
-        "name": "Witching Hour",
-        "category": "Seasonal Event",
-        "multiplier": "4x",
-        "obtainment": "Spawns during an hourly rotation of Halloween Events. A purple environment appears, with pumpkins in the surroundings. Randomly applied to brainrots on the red carpet (possibly obtainable if it is anywhere on the map)",
-        "visuals": "A Witch hat appears on top of the Brainrots head(s).",
-        "notes": "The Event Board was removed on November 2, 2025 at 11:00AM EST."
+        "name": "Witch Hat",
+        "cardSummary": "Witch Hat is a Halloween trait with a 3× multiplier.",
+        "category": "Halloween",
+        "multiplier": "3×",
+        "availability": "Limited Witching Hour event",
+        "obtainment": "Witching Hour can randomly apply the trait to Brainrots on the Red Carpet.",
+        "visuals": "A witch hat appears on the Brainrot's head."
       },
       "system": {
-        "slug": "witching-hour",
+        "slug": "witch-hat",
         "section": "Seasonal Event",
-        "sortOrder": 10,
+        "sortOrder": 9,
         "image": "/Steal%20a%20Brainrot/Traits/witching-hour.webp"
       }
     },
     {
       "item": {
-        "name": "Skeleton",
-        "category": "Seasonal Event",
-        "multiplier": "4x",
-        "obtainment": "Spawned every two hours during the Extinct Event. A dried out environment covered with fossils. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "Ribs comes out of the Brainrots chest.",
-        "notes": "The Extinct Event used to occur every hour or so, but is now removed."
+        "name": "Bunny Ears",
+        "cardSummary": "Bunny Ears is a Easter trait with a 4.5× multiplier.",
+        "category": "Easter",
+        "multiplier": "4.5×",
+        "availability": "Limited Easter Hour event",
+        "obtainment": "Easter Hour can randomly apply this trait to Brainrots moving through the map.",
+        "visuals": "Bunny ears appear on top of the Brainrot."
       },
       "system": {
-        "slug": "skeleton",
+        "slug": "bunny-ears",
+        "section": "Seasonal Event",
+        "sortOrder": 10,
+        "image": "/Steal%20a%20Brainrot/Traits/bunny-ears.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink Egg",
+        "cardSummary": "Pink Egg is a Easter trait with a 6.5× multiplier.",
+        "category": "Easter",
+        "multiplier": "6.5×",
+        "availability": "Limited Egg City event",
+        "obtainment": "Egg City randomly applies one of its egg traits to spawned Brainrots.",
+        "visuals": "A shocked pink egg appears beside the Brainrot."
+      },
+      "system": {
+        "slug": "pink-egg",
         "section": "Seasonal Event",
         "sortOrder": 11,
-        "image": "/Steal%20a%20Brainrot/Traits/skeleton.webp"
+        "image": "/Steal%20a%20Brainrot/Traits/pink-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Egg",
+        "cardSummary": "Blue Egg is a Easter trait with a 5× multiplier.",
+        "category": "Easter",
+        "multiplier": "5×",
+        "availability": "Limited Egg City event",
+        "obtainment": "Egg City randomly applies one of its egg traits to spawned Brainrots.",
+        "visuals": "A happy blue egg appears beside the Brainrot."
+      },
+      "system": {
+        "slug": "blue-egg",
+        "section": "Seasonal Event",
+        "sortOrder": 12,
+        "image": "/Steal%20a%20Brainrot/Traits/blue-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Egg",
+        "cardSummary": "Green Egg is a Easter trait with a 4× multiplier.",
+        "category": "Easter",
+        "multiplier": "4×",
+        "availability": "Limited Egg City event",
+        "obtainment": "Egg City randomly applies one of its egg traits to spawned Brainrots.",
+        "visuals": "An angry green egg appears beside the Brainrot."
+      },
+      "system": {
+        "slug": "green-egg",
+        "section": "Seasonal Event",
+        "sortOrder": 13,
+        "image": "/Steal%20a%20Brainrot/Traits/green-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Egg",
+        "cardSummary": "Orange Egg is a Easter trait with a 3× multiplier.",
+        "category": "Easter",
+        "multiplier": "3×",
+        "availability": "Limited Egg City event",
+        "obtainment": "Egg City randomly applies one of its egg traits to spawned Brainrots.",
+        "visuals": "A frightened orange egg appears beside the Brainrot."
+      },
+      "system": {
+        "slug": "orange-egg",
+        "section": "Seasonal Event",
+        "sortOrder": 14,
+        "image": "/Steal%20a%20Brainrot/Traits/orange-egg.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "1 Year",
+        "cardSummary": "1 Year is a Milestone trait with a 5.5× multiplier.",
+        "category": "Milestone",
+        "multiplier": "5.5×",
+        "availability": "Limited anniversary event",
+        "obtainment": "The first-anniversary event randomly applied this milestone trait to spawned Brainrots.",
+        "visuals": "Blue 1YR text appears above the Brainrot."
+      },
+      "system": {
+        "slug": "1-year",
+        "section": "Seasonal Event",
+        "sortOrder": 15,
+        "image": "/Steal%20a%20Brainrot/Traits/1-year.png"
+      }
+    },
+    {
+      "item": {
+        "name": "26",
+        "cardSummary": "26 is a Milestone trait with a 5× multiplier.",
+        "category": "Milestone",
+        "multiplier": "5×",
+        "availability": "Limited New Year's event",
+        "obtainment": "The New Year's Machine event randomly applied this milestone trait to spawned Brainrots.",
+        "visuals": "The number 26 appears above the Brainrot."
+      },
+      "system": {
+        "slug": "26",
+        "section": "Seasonal Event",
+        "sortOrder": 16,
+        "image": "/Steal%20a%20Brainrot/Traits/26.webp"
       }
     },
     {
       "item": {
         "name": "10B",
-        "category": "Seasonal Event",
-        "multiplier": "4x",
-        "obtainment": "Admin Abuse. The map will be lined up with firework launchers which will shoot rainbow fireworks. Randomly applied to any Brainrots hit by a firework.",
-        "visuals": "Text that says \"10B\" will appear on top of the Brainrot.",
-        "notes": "This trait was used to celebrate Steal a Brainrot's 10B visit milestone, and has NEVER been activated again since that milestone."
+        "cardSummary": "10B is a Milestone trait with a 3× multiplier.",
+        "category": "Milestone",
+        "multiplier": "3×",
+        "availability": "Limited visit milestone event",
+        "obtainment": "The visit-milestone event applied this trait to Brainrots hit by its rainbow fireworks.",
+        "visuals": "Rainbow-colored 10B text appears above the Brainrot."
       },
       "system": {
         "slug": "10b",
         "section": "Seasonal Event",
-        "sortOrder": 12,
+        "sortOrder": 17,
         "image": "/Steal%20a%20Brainrot/Traits/10b.webp"
       }
     },
     {
       "item": {
-        "name": "Orange Balloon",
-        "category": "Seasonal Event",
-        "multiplier": "4x",
-        "obtainment": "Eid Celebration Eid designed marquees fill the map, giving the walls and floor a blue tint. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A balloon appears to the left of the Brainrot."
-      },
-      "system": {
-        "slug": "orange-balloon",
-        "section": "Seasonal Event",
-        "sortOrder": 13,
-        "image": "/Steal%20a%20Brainrot/Traits/orange-balloon.webp"
-      }
-    },
-    {
-      "item": {
-        "name": "Green Balloon",
-        "category": "Seasonal Event",
-        "multiplier": "4.5x",
-        "obtainment": "Eid Celebration Eid designed marquees fill the map, giving the walls and floor a blue tint. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A balloon appears to the left of the Brainrot."
-      },
-      "system": {
-        "slug": "green-balloon",
-        "section": "Seasonal Event",
-        "sortOrder": 14,
-        "image": "/Steal%20a%20Brainrot/Traits/green-balloon.webp"
-      }
-    },
-    {
-      "item": {
-        "name": "Blue Balloon",
-        "category": "Seasonal Event",
-        "multiplier": "5x",
-        "obtainment": "Eid Celebration Eid designed marquees fill the map, giving the walls and floor a blue tint. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A balloon appears to the left of the Brainrot."
-      },
-      "system": {
-        "slug": "blue-balloon",
-        "section": "Seasonal Event",
-        "sortOrder": 15,
-        "image": "/Steal%20a%20Brainrot/Traits/blue-balloon.webp"
-      }
-    },
-    {
-      "item": {
-        "name": "Red Balloon",
-        "category": "Seasonal Event",
-        "multiplier": "6x",
-        "obtainment": "Eid Celebration Eid designed marquees fill the map, giving the walls and floor a blue tint. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A balloon appears to the left of the Brainrot."
-      },
-      "system": {
-        "slug": "red-balloon",
-        "section": "Seasonal Event",
-        "sortOrder": 16,
-        "image": "/Steal%20a%20Brainrot/Traits/red-balloon.webp"
-      }
-    },
-    {
-      "item": {
-        "name": "Pink Balloon",
-        "category": "Seasonal Event",
-        "multiplier": "6.5x",
-        "obtainment": "Eid Celebration Eid designed marquees fill the map, giving the walls and floor a blue tint. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A balloon appears to the left of the Brainrot."
-      },
-      "system": {
-        "slug": "pink-balloon",
-        "section": "Seasonal Event",
-        "sortOrder": 17,
-        "image": "/Steal%20a%20Brainrot/Traits/pink-balloon.webp"
-      }
-    },
-    {
-      "item": {
         "name": "Rainbow Balloon",
-        "category": "Seasonal Event",
-        "multiplier": "7.5x",
-        "obtainment": "Eid Celebration Eid designed marquees fill the map, giving the walls and floor a blue tint. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A balloon appears to the left of the Brainrot."
+        "cardSummary": "Rainbow Balloon is a Eid trait with a 6.5× multiplier.",
+        "category": "Eid",
+        "multiplier": "6.5×",
+        "availability": "Limited Eid Celebration",
+        "obtainment": "The Eid Celebration randomly applies balloon traits to spawned Brainrots.",
+        "visuals": "A rainbow balloon floats beside the Brainrot."
       },
       "system": {
         "slug": "rainbow-balloon",
@@ -334,513 +392,1480 @@
     },
     {
       "item": {
-        "name": "Orange Egg",
-        "category": "Seasonal Event",
-        "multiplier": "4x",
-        "obtainment": "Egg City. The map displays houses on the borders, easter decorations are visible in the maps environment. Randomly applied to any Brainrots.",
-        "visuals": "A scared egg is visible to the right of the Brainrot.",
-        "notes": "It's one of 4 possible egg variants."
+        "name": "Pink Balloon",
+        "cardSummary": "Pink Balloon is a Eid trait with a 5.5× multiplier.",
+        "category": "Eid",
+        "multiplier": "5.5×",
+        "availability": "Limited Eid Celebration",
+        "obtainment": "The Eid Celebration randomly applies balloon traits to spawned Brainrots.",
+        "visuals": "A pink balloon floats beside the Brainrot."
       },
       "system": {
-        "slug": "orange-egg",
+        "slug": "pink-balloon",
         "section": "Seasonal Event",
         "sortOrder": 19,
-        "image": "/Steal%20a%20Brainrot/Traits/orange-egg.webp"
+        "image": "/Steal%20a%20Brainrot/Traits/pink-balloon.webp"
       }
     },
     {
       "item": {
-        "name": "Green Egg",
-        "category": "Seasonal Event",
-        "multiplier": "5x",
-        "obtainment": "Egg City. The map displays houses on the borders, easter decorations are visible in the maps environment. Randomly applied to any Brainrots.",
-        "visuals": "A mad egg is visible to the right of the Brainrot.",
-        "notes": "It's one of 4 possible egg variants."
+        "name": "Red Balloon",
+        "cardSummary": "Red Balloon is a Eid trait with a 5× multiplier.",
+        "category": "Eid",
+        "multiplier": "5×",
+        "availability": "Limited Eid Celebration",
+        "obtainment": "The Eid Celebration randomly applies balloon traits to spawned Brainrots.",
+        "visuals": "A red balloon floats beside the Brainrot."
       },
       "system": {
-        "slug": "green-egg",
+        "slug": "red-balloon",
         "section": "Seasonal Event",
         "sortOrder": 20,
-        "image": "/Steal%20a%20Brainrot/Traits/green-egg.webp"
+        "image": "/Steal%20a%20Brainrot/Traits/red-balloon.webp"
       }
     },
     {
       "item": {
-        "name": "Blue Egg",
-        "category": "Seasonal Event",
-        "multiplier": "5.5x",
-        "obtainment": "Egg City. The map displays houses on the borders, easter decorations are visible in the maps environment. Randomly applied to any Brainrots.",
-        "visuals": "A happy egg is visible to the right of the Brainrot.",
-        "notes": "It's one of 4 possible egg variants."
+        "name": "Blue Balloon",
+        "cardSummary": "Blue Balloon is a Eid trait with a 4× multiplier.",
+        "category": "Eid",
+        "multiplier": "4×",
+        "availability": "Limited Eid Celebration",
+        "obtainment": "The Eid Celebration randomly applies balloon traits to spawned Brainrots.",
+        "visuals": "A blue balloon floats beside the Brainrot."
       },
       "system": {
-        "slug": "blue-egg",
+        "slug": "blue-balloon",
         "section": "Seasonal Event",
         "sortOrder": 21,
-        "image": "/Steal%20a%20Brainrot/Traits/blue-egg.webp"
+        "image": "/Steal%20a%20Brainrot/Traits/blue-balloon.webp"
       }
     },
     {
       "item": {
-        "name": "Pink Egg",
-        "category": "Seasonal Event",
-        "multiplier": "7.7x",
-        "obtainment": "Egg City. The map displays houses on the borders, easter decorations are visible in the maps environment. Randomly applied to any Brainrots.",
-        "visuals": "A shocked egg is visible to the right of the Brainrot.",
-        "notes": "It's one of 4 possible egg variants."
+        "name": "Green Balloon",
+        "cardSummary": "Green Balloon is a Eid trait with a 3.5× multiplier.",
+        "category": "Eid",
+        "multiplier": "3.5×",
+        "availability": "Limited Eid Celebration",
+        "obtainment": "The Eid Celebration randomly applies balloon traits to spawned Brainrots.",
+        "visuals": "A green balloon floats beside the Brainrot."
       },
       "system": {
-        "slug": "pink-egg",
+        "slug": "green-balloon",
         "section": "Seasonal Event",
         "sortOrder": 22,
-        "image": "/Steal%20a%20Brainrot/Traits/pink-egg.webp"
+        "image": "/Steal%20a%20Brainrot/Traits/green-balloon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Balloon",
+        "cardSummary": "Orange Balloon is a Eid trait with a 3× multiplier.",
+        "category": "Eid",
+        "multiplier": "3×",
+        "availability": "Limited Eid Celebration",
+        "obtainment": "The Eid Celebration randomly applies balloon traits to spawned Brainrots.",
+        "visuals": "An orange balloon floats beside the Brainrot."
+      },
+      "system": {
+        "slug": "orange-balloon",
+        "section": "Seasonal Event",
+        "sortOrder": 23,
+        "image": "/Steal%20a%20Brainrot/Traits/orange-balloon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Halo",
+        "cardSummary": "Halo is a Mutation Event trait with a 5× multiplier.",
+        "category": "Mutation Event",
+        "multiplier": "5×",
+        "availability": "Divine Event",
+        "obtainment": "The Divine Event can apply Halo to Brainrots that already have the Divine mutation.",
+        "visuals": "A bright halo appears above the Brainrot's head."
+      },
+      "system": {
+        "slug": "halo",
+        "section": "Seasonal Event",
+        "sortOrder": 24,
+        "image": "/Steal%20a%20Brainrot/Traits/halo.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky",
+        "cardSummary": "Lucky is a Seasonal trait with a 5× multiplier.",
+        "category": "Seasonal",
+        "multiplier": "5×",
+        "availability": "Lucky Pot event",
+        "obtainment": "The Lucky Pot event randomly applies this trait to spawned Brainrots.",
+        "visuals": "A green overlay and coin particles surround the Brainrot."
+      },
+      "system": {
+        "slug": "lucky",
+        "section": "Seasonal Event",
+        "sortOrder": 25,
+        "image": "/Steal%20a%20Brainrot/Traits/lucky.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sun",
+        "cardSummary": "Sun is a Seasonal trait with a 5× multiplier.",
+        "category": "Seasonal",
+        "multiplier": "5×",
+        "availability": "Summer Hour event",
+        "obtainment": "Summer Hour randomly applies this trait to spawned Brainrots.",
+        "visuals": "A small sun appears beside the Brainrot."
+      },
+      "system": {
+        "slug": "sun",
+        "section": "Seasonal Event",
+        "sortOrder": 26,
+        "image": "/Steal%20a%20Brainrot/Traits/sun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ball",
+        "cardSummary": "Ball is a Seasonal trait with a 5× multiplier.",
+        "category": "Seasonal",
+        "multiplier": "5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events can apply this trait when a Brainrot is struck by a football.",
+        "visuals": "A football appears beside the Brainrot."
+      },
+      "system": {
+        "slug": "ball",
+        "section": "Seasonal Event",
+        "sortOrder": 27,
+        "image": "/Steal%20a%20Brainrot/Traits/ball.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chocolate",
+        "cardSummary": "Chocolate is a Seasonal trait with a 4.5× multiplier.",
+        "category": "Seasonal",
+        "multiplier": "4.5×",
+        "availability": "Limited Valentine's event",
+        "obtainment": "A Valentine's Admin Abuse event randomly applied this trait to spawned Brainrots.",
+        "visuals": "Chocolate coats the Brainrot while a chocolate-colored aura appears beneath it."
+      },
+      "system": {
+        "slug": "chocolate",
+        "section": "Seasonal Event",
+        "sortOrder": 28,
+        "image": "/Steal%20a%20Brainrot/Traits/chocolate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Skeleton",
+        "cardSummary": "Skeleton is a Seasonal trait with a 3× multiplier.",
+        "category": "Seasonal",
+        "multiplier": "3×",
+        "availability": "Limited Extinct event",
+        "obtainment": "The Extinct event randomly applied this trait to spawned Brainrots.",
+        "visuals": "Exposed ribs appear across the Brainrot's chest."
+      },
+      "system": {
+        "slug": "skeleton",
+        "section": "Seasonal Event",
+        "sortOrder": 29,
+        "image": "/Steal%20a%20Brainrot/Traits/skeleton.webp"
       }
     },
     {
       "item": {
         "name": "Paint",
-        "category": "Ritual Event",
-        "multiplier": "6x",
-        "obtainment": "Chicleteira Bicicleteira ritual / Admin Abuse. The Red Carpet is designed to look like a highway. Randomly applied to any Brainrots on the Red Carpet.",
-        "visuals": "A graffiti aura appears under the Brainrot.",
-        "notes": "If done with the ritual, a Los Chicleteiras(Link) spawns."
+        "cardSummary": "Paint is a Ritual trait with a 5× multiplier.",
+        "category": "Ritual",
+        "multiplier": "5×",
+        "availability": "Chicleteira Bicicleteira ritual or Admin Abuse",
+        "obtainment": "The Chicleteira Bicicleteira ritual can apply Paint to Brainrots on the Red Carpet; Admin Abuse can also trigger it.",
+        "visuals": "A graffiti-style aura appears under the Brainrot."
       },
       "system": {
         "slug": "paint",
         "section": "Ritual Event",
-        "sortOrder": 23,
+        "sortOrder": 30,
         "image": "/Steal%20a%20Brainrot/Traits/paint.webp"
       }
     },
     {
       "item": {
         "name": ":3",
-        "category": "Ritual Event",
-        "multiplier": "5.5x",
-        "obtainment": "Admin Abuse. A playful environment amasses the map, leaving cats from Los Mi Gatitos roaming around. Randomly applied to Brainrots that are currently spawned in.",
-        "visuals": "The Brainrot will have a speech bubble with \":3\" appear on their right side.",
-        "notes": "This trait was released with Mi Gatito, only ever being spawned three times."
+        "cardSummary": ":3 is a Ritual trait with a 4.5× multiplier.",
+        "category": "Ritual",
+        "multiplier": "4.5×",
+        "availability": "Mi Gatito ritual or Admin Abuse",
+        "obtainment": "The Mi Gatito ritual or Admin Abuse can randomly apply this trait to spawned Brainrots.",
+        "visuals": "A speech bubble containing :3 appears beside the Brainrot."
       },
       "system": {
         "slug": "3",
         "section": "Ritual Event",
-        "sortOrder": 24,
+        "sortOrder": 31,
         "image": "/Steal%20a%20Brainrot/Traits/3.webp"
       }
     },
     {
       "item": {
         "name": "Tie",
-        "category": "Ritual Event",
-        "multiplier": "4.75x",
-        "obtainment": "Dul Dul Dul ritual / Admin Abuse. A graduation platform appears at the beginning of the Red Carpet, along with a Brainrot School in the background. Randomly applied to any Brainrots that step on the graduation platform.",
-        "visuals": "A tie appears, depending on the Brainrot.",
-        "notes": "If done with the ritual, a Yess my examine(Link) or Noo my examine(Link) spawns."
+        "cardSummary": "Tie is a Ritual trait with a 3.75× multiplier.",
+        "category": "Ritual",
+        "multiplier": "3.75×",
+        "availability": "Dul Dul Dul ritual or Admin Abuse",
+        "obtainment": "During the Dul Dul Dul ritual, Brainrots that cross the graduation platform can receive the trait; Admin Abuse can also trigger it.",
+        "visuals": "A necktie appears on the Brainrot."
       },
       "system": {
         "slug": "tie",
         "section": "Ritual Event",
-        "sortOrder": 25,
+        "sortOrder": 32,
         "image": "/Steal%20a%20Brainrot/Traits/tie.webp"
       }
     },
     {
       "item": {
         "name": "Spider",
-        "category": "Ritual Event",
-        "multiplier": "4.5x",
-        "obtainment": "Sammyni Spyderini ritual / Admin Abuse. A giant cobweb spawns on the ground and spreads across the map, along with Spiders roaming around. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A spider covers the right eye of the Brainrot.",
-        "notes": "If done with the ritual, a Los Spyderinis(Link) spawns."
+        "cardSummary": "Spider is a Ritual trait with a 3.5× multiplier.",
+        "category": "Ritual",
+        "multiplier": "3.5×",
+        "availability": "Sammyni Spyderini ritual or Admin Abuse",
+        "obtainment": "The Sammyni Spyderini ritual or Admin Abuse can randomly apply this trait to spawned Brainrots.",
+        "visuals": "A spider covers the Brainrot's right eye."
       },
       "system": {
         "slug": "spider",
         "section": "Ritual Event",
-        "sortOrder": 26,
+        "sortOrder": 33,
         "image": "/Steal%20a%20Brainrot/Traits/spider.webp"
       }
     },
     {
       "item": {
         "name": "Matteo Hat",
-        "category": "Ritual Event",
-        "multiplier": "4.5x",
-        "obtainment": "Matteo ritual / Admin Abuse. A tree sprouts from the middle of the Red Carpet, followed by lightning. Randomly applied to any Brainrots that walk into the tree or by being struck by lightning.",
-        "visuals": "A bowler hat, or Matteo's Hat, appears on the Brainrots head(s).",
-        "notes": "If done with the ritual, a Los Matteos(Link) spawns."
+        "cardSummary": "Matteo Hat is a Ritual trait with a 3.5× multiplier.",
+        "category": "Ritual",
+        "multiplier": "3.5×",
+        "availability": "Matteo ritual or Admin Abuse",
+        "obtainment": "During the Matteo ritual, touching the tree or its lightning can apply the trait; Admin Abuse can also trigger it.",
+        "visuals": "A bowler-style Matteo hat appears on the Brainrot's head."
       },
       "system": {
         "slug": "matteo-hat",
         "section": "Ritual Event",
-        "sortOrder": 27,
+        "sortOrder": 34,
         "image": "/Steal%20a%20Brainrot/Traits/matteo-hat.webp"
       }
     },
     {
       "item": {
         "name": "Galactic",
-        "category": "Ritual Event",
-        "multiplier": "4x",
-        "obtainment": "La Vacca Saturno Saturnita ritual / Admin Abuse. The sky become galaxy like, shooting down comets. Randomly applied to any Brainrots that are struck by a comet.",
-        "visuals": "A purple aura is added onto the Brainrot.",
-        "notes": "If done with the ritual, a Las Vaquitas Saturnitas(Link) spawns."
+        "cardSummary": "Galactic is a Ritual trait with a 3× multiplier.",
+        "category": "Ritual",
+        "multiplier": "3×",
+        "availability": "La Vacca Saturno Saturnita ritual or Admin Abuse",
+        "obtainment": "The La Vacca Saturno Saturnita ritual can apply Galactic when a comet strikes a Brainrot; Admin Abuse can also trigger it.",
+        "visuals": "A purple galactic aura surrounds the Brainrot."
       },
       "system": {
         "slug": "galactic",
         "section": "Ritual Event",
-        "sortOrder": 28,
+        "sortOrder": 35,
         "image": "/Steal%20a%20Brainrot/Traits/galactic.webp"
       }
     },
     {
       "item": {
         "name": "Explosive",
-        "category": "Ritual Event",
-        "multiplier": "4x",
-        "obtainment": "Bombardiro Crocodilo ritual / Admin Abuse. A dark sky is overshadowed by multiple Bombardiro Crocodilo's flying in the sky, dropping Svinina Bombardino's. Randomly applied to any Brainrots that are struck by a Svinina Bombardino.",
-        "visuals": "A explosion aura is applied onto the Brainrot.",
-        "notes": "If done with the ritual, a Los Crocodillitos(Link) spawns."
+        "cardSummary": "Explosive is a Ritual trait with a 3× multiplier.",
+        "category": "Ritual",
+        "multiplier": "3×",
+        "availability": "Bombardiro Crocodilo ritual or Admin Abuse",
+        "obtainment": "The Bombardiro Crocodilo ritual can apply Explosive when a falling Svinina Bombardino hits a Brainrot; Admin Abuse can also trigger it.",
+        "visuals": "An explosion-like aura surrounds the Brainrot."
       },
       "system": {
         "slug": "explosive",
         "section": "Ritual Event",
-        "sortOrder": 29,
+        "sortOrder": 36,
         "image": "/Steal%20a%20Brainrot/Traits/explosive.webp"
       }
     },
     {
       "item": {
         "name": "Shark Fin",
-        "category": "Ritual Event",
-        "multiplier": "4x",
-        "obtainment": "Orcalero Orcala ritual / Admin Abuse. The map swalloed in water, having Orcalero Orcala's and Tralalero Tralala's swimming around. Randomly applied to any Brainrots that are hit by Orcalero Orcala or Tralalero Tralala.",
-        "visuals": "A shark fin is applied onto the Brainrots back.",
-        "notes": "If done with the ritual, a Los Orcalitos(Link) spawns."
+        "cardSummary": "Shark Fin is a Ritual trait with a 3× multiplier.",
+        "category": "Ritual",
+        "multiplier": "3×",
+        "availability": "Orcalero Orcala ritual or Admin Abuse",
+        "obtainment": "The Orcalero Orcala ritual can apply Shark Fin when an Orcalero or Tralalero hits a Brainrot; Admin Abuse can also trigger it.",
+        "visuals": "A shark fin appears on the Brainrot's back."
       },
       "system": {
         "slug": "shark-fin",
         "section": "Ritual Event",
-        "sortOrder": 30,
+        "sortOrder": 37,
         "image": "/Steal%20a%20Brainrot/Traits/shark-fin.webp"
       }
     },
     {
       "item": {
         "name": "Brazil",
+        "cardSummary": "Brazil is a Country Event trait with a 5× multiplier.",
         "category": "Country Event",
-        "multiplier": "6x",
-        "obtainment": "Admin Abuse. The screen will go dark and then clear after the map adds favelas, along with a giant speaker behind the Brainrots spawn. Randomly applied to any Brainrots that are struck by the laser beams.",
-        "visuals": "A Brazillian Flag particle effect is added onto the Brainrot.",
-        "notes": "Plays the song below. https://stealabrainrot.fandom.com/wiki/File:BrazilianConcertSlowed.mp3 When will Brazil's cube apply the trait to brainrot: https://stealabrainrot.fandom.com/wiki/File:Cube_riser.mp3 When Brazil's cube applies the trait to the brainrot: https://stealabrainrot.fandom.com/wiki/File:Cube_aplies.mp3"
+        "multiplier": "5×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Brazil Admin Abuse event applies this trait to Brainrots struck by its laser beams.",
+        "visuals": "Brazilian flag-colored particles surround the Brainrot."
       },
       "system": {
         "slug": "brazil",
         "section": "Country Event",
-        "sortOrder": 31,
+        "sortOrder": 38,
         "image": "/Steal%20a%20Brainrot/Traits/brazil.webp"
       }
     },
     {
       "item": {
-        "name": "Indonesia",
+        "name": "Indonesian",
+        "cardSummary": "Indonesian is a Country Event trait with a 4× multiplier.",
         "category": "Country Event",
-        "multiplier": "5x",
-        "obtainment": "Admin Abuse. The map will turn into an Indonesian city. An 'Aura Boat' spawns shortly after the event starts. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "An Indonesian Flag pulses in the center of the Brainrot, which is usually covered by the Brainrot itself.",
-        "notes": "Plays the songs below. https://stealabrainrot.fandom.com/wiki/File:IndonesiaEventLoop1.mp3 https://stealabrainrot.fandom.com/wiki/File:IndonesiaEventLoop2.mp3"
+        "multiplier": "4×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Indonesia Admin Abuse event randomly applies this trait to spawned Brainrots.",
+        "visuals": "An Indonesian flag pulses through the center of the Brainrot."
       },
       "system": {
-        "slug": "indonesia",
+        "slug": "indonesian",
         "section": "Country Event",
-        "sortOrder": 32,
+        "sortOrder": 39,
         "image": "/Steal%20a%20Brainrot/Traits/indonesia.webp"
       }
     },
     {
       "item": {
         "name": "Sombrero",
+        "cardSummary": "Sombrero is a Country Event trait with a 4× multiplier.",
         "category": "Country Event",
-        "multiplier": "5x",
-        "obtainment": "Admin Abuse. The map will have Hacienda styled building on the sides, along with a Pinata that spawns in the middle. Cockroaches can be seen roaming around. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A Sombrero will appear on top of the Brainrots head(s).",
-        "notes": "Plays the songs below. https://stealabrainrot.fandom.com/wiki/File:Mexicomusic.mp3 When the cockroach puts the hat on the brainrot/player: https://stealabrainrot.fandom.com/wiki/File:Sombrero_sound.mp3"
+        "multiplier": "4×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Mexico-themed Admin Abuse event randomly applies this trait to spawned Brainrots.",
+        "visuals": "A sombrero appears on the Brainrot's head."
       },
       "system": {
         "slug": "sombrero",
         "section": "Country Event",
-        "sortOrder": 33,
+        "sortOrder": 40,
         "image": "/Steal%20a%20Brainrot/Traits/sombrero.webp"
       }
     },
     {
       "item": {
+        "name": "Algeria",
+        "cardSummary": "Algeria is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Algeria country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Algeria flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "algeria",
+        "section": "Country Event",
+        "sortOrder": 41,
+        "image": "/Steal%20a%20Brainrot/Traits/algeria.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Argentina",
+        "cardSummary": "Argentina is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Argentina country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Argentina flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "argentina",
+        "section": "Country Event",
+        "sortOrder": 42,
+        "image": "/Steal%20a%20Brainrot/Traits/argentina.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Australia",
+        "cardSummary": "Australia is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Australia country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Australia flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "australia",
+        "section": "Country Event",
+        "sortOrder": 43,
+        "image": "/Steal%20a%20Brainrot/Traits/australia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Austria",
+        "cardSummary": "Austria is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Austria country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Austria flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "austria",
+        "section": "Country Event",
+        "sortOrder": 44,
+        "image": "/Steal%20a%20Brainrot/Traits/austria.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Belgium",
+        "cardSummary": "Belgium is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Belgium country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Belgium flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "belgium",
+        "section": "Country Event",
+        "sortOrder": 45,
+        "image": "/Steal%20a%20Brainrot/Traits/belgium.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bosnia and Herzegovina",
+        "cardSummary": "Bosnia and Herzegovina is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Bosnia and Herzegovina country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Bosnia and Herzegovina flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "bosnia-and-herzegovina",
+        "section": "Country Event",
+        "sortOrder": 46,
+        "image": "/Steal%20a%20Brainrot/Traits/bosnia-and-herzegovina.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Canada",
+        "cardSummary": "Canada is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Canada country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Canada flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "canada",
+        "section": "Country Event",
+        "sortOrder": 47,
+        "image": "/Steal%20a%20Brainrot/Traits/canada.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cape Verde",
+        "cardSummary": "Cape Verde is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Cape Verde country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Cape Verde flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "cape-verde",
+        "section": "Country Event",
+        "sortOrder": 48,
+        "image": "/Steal%20a%20Brainrot/Traits/cape-verde.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Croatia",
+        "cardSummary": "Croatia is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Croatia country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Croatia flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "croatia",
+        "section": "Country Event",
+        "sortOrder": 49,
+        "image": "/Steal%20a%20Brainrot/Traits/croatia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Curacao",
+        "cardSummary": "Curacao is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Curacao country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Curacao flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "curacao",
+        "section": "Country Event",
+        "sortOrder": 50,
+        "image": "/Steal%20a%20Brainrot/Traits/curacao.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Czechia",
+        "cardSummary": "Czechia is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Czechia country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Czechia flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "czechia",
+        "section": "Country Event",
+        "sortOrder": 51,
+        "image": "/Steal%20a%20Brainrot/Traits/czechia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "DR Congo",
+        "cardSummary": "DR Congo is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the DR Congo country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the DR Congo flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "dr-congo",
+        "section": "Country Event",
+        "sortOrder": 52,
+        "image": "/Steal%20a%20Brainrot/Traits/dr-congo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ecuador",
+        "cardSummary": "Ecuador is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Ecuador country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Ecuador flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "ecuador",
+        "section": "Country Event",
+        "sortOrder": 53,
+        "image": "/Steal%20a%20Brainrot/Traits/ecuador.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Egypt",
+        "cardSummary": "Egypt is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Egypt country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Egypt flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "egypt",
+        "section": "Country Event",
+        "sortOrder": 54,
+        "image": "/Steal%20a%20Brainrot/Traits/egypt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "England",
+        "cardSummary": "England is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the England country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the England flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "england",
+        "section": "Country Event",
+        "sortOrder": 55,
+        "image": "/Steal%20a%20Brainrot/Traits/england.png"
+      }
+    },
+    {
+      "item": {
+        "name": "France",
+        "cardSummary": "France is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the France country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the France flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "france",
+        "section": "Country Event",
+        "sortOrder": 56,
+        "image": "/Steal%20a%20Brainrot/Traits/france.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Germany",
+        "cardSummary": "Germany is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Germany country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Germany flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "germany",
+        "section": "Country Event",
+        "sortOrder": 57,
+        "image": "/Steal%20a%20Brainrot/Traits/germany.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghana",
+        "cardSummary": "Ghana is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Ghana country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Ghana flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "ghana",
+        "section": "Country Event",
+        "sortOrder": 58,
+        "image": "/Steal%20a%20Brainrot/Traits/ghana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Haiti",
+        "cardSummary": "Haiti is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Haiti country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Haiti flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "haiti",
+        "section": "Country Event",
+        "sortOrder": 59,
+        "image": "/Steal%20a%20Brainrot/Traits/haiti.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Iran",
+        "cardSummary": "Iran is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Iran country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Iran flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "iran",
+        "section": "Country Event",
+        "sortOrder": 60,
+        "image": "/Steal%20a%20Brainrot/Traits/iran.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Iraq",
+        "cardSummary": "Iraq is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Iraq country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Iraq flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "iraq",
+        "section": "Country Event",
+        "sortOrder": 61,
+        "image": "/Steal%20a%20Brainrot/Traits/iraq.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ivory Coast",
+        "cardSummary": "Ivory Coast is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Ivory Coast country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Ivory Coast flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "ivory-coast",
+        "section": "Country Event",
+        "sortOrder": 62,
+        "image": "/Steal%20a%20Brainrot/Traits/ivory-coast.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Japan",
+        "cardSummary": "Japan is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Japan country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Japan flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "japan",
+        "section": "Country Event",
+        "sortOrder": 63,
+        "image": "/Steal%20a%20Brainrot/Traits/japan.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jordan",
+        "cardSummary": "Jordan is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Jordan country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Jordan flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "jordan",
+        "section": "Country Event",
+        "sortOrder": 64,
+        "image": "/Steal%20a%20Brainrot/Traits/jordan.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mexico",
+        "cardSummary": "Mexico is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Mexico country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Mexico flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "mexico",
+        "section": "Country Event",
+        "sortOrder": 65,
+        "image": "/Steal%20a%20Brainrot/Traits/mexico.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Morocco",
+        "cardSummary": "Morocco is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Morocco country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Morocco flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "morocco",
+        "section": "Country Event",
+        "sortOrder": 66,
+        "image": "/Steal%20a%20Brainrot/Traits/morocco.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Netherlands",
+        "cardSummary": "Netherlands is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Netherlands country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Netherlands flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "netherlands",
+        "section": "Country Event",
+        "sortOrder": 67,
+        "image": "/Steal%20a%20Brainrot/Traits/netherlands.png"
+      }
+    },
+    {
+      "item": {
+        "name": "New Zealand",
+        "cardSummary": "New Zealand is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the New Zealand country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the New Zealand flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "new-zealand",
+        "section": "Country Event",
+        "sortOrder": 68,
+        "image": "/Steal%20a%20Brainrot/Traits/new-zealand.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Norway",
+        "cardSummary": "Norway is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Norway country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Norway flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "norway",
+        "section": "Country Event",
+        "sortOrder": 69,
+        "image": "/Steal%20a%20Brainrot/Traits/norway.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Panama",
+        "cardSummary": "Panama is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Panama country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Panama flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "panama",
+        "section": "Country Event",
+        "sortOrder": 70,
+        "image": "/Steal%20a%20Brainrot/Traits/panama.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Paraguay",
+        "cardSummary": "Paraguay is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Paraguay country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Paraguay flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "paraguay",
+        "section": "Country Event",
+        "sortOrder": 71,
+        "image": "/Steal%20a%20Brainrot/Traits/paraguay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Portugal",
+        "cardSummary": "Portugal is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Portugal country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Portugal flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "portugal",
+        "section": "Country Event",
+        "sortOrder": 72,
+        "image": "/Steal%20a%20Brainrot/Traits/portugal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Qatar",
+        "cardSummary": "Qatar is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Qatar country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Qatar flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "qatar",
+        "section": "Country Event",
+        "sortOrder": 73,
+        "image": "/Steal%20a%20Brainrot/Traits/qatar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Saudi Arabia",
+        "cardSummary": "Saudi Arabia is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Saudi Arabia country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Saudi Arabia flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "saudi-arabia",
+        "section": "Country Event",
+        "sortOrder": 74,
+        "image": "/Steal%20a%20Brainrot/Traits/saudi-arabia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scotland",
+        "cardSummary": "Scotland is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Scotland country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Scotland flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "scotland",
+        "section": "Country Event",
+        "sortOrder": 75,
+        "image": "/Steal%20a%20Brainrot/Traits/scotland.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Senegal",
+        "cardSummary": "Senegal is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Senegal country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Senegal flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "senegal",
+        "section": "Country Event",
+        "sortOrder": 76,
+        "image": "/Steal%20a%20Brainrot/Traits/senegal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "South Africa",
+        "cardSummary": "South Africa is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the South Africa country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the South Africa flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "south-africa",
+        "section": "Country Event",
+        "sortOrder": 77,
+        "image": "/Steal%20a%20Brainrot/Traits/south-africa.png"
+      }
+    },
+    {
+      "item": {
+        "name": "South Korea",
+        "cardSummary": "South Korea is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the South Korea country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the South Korea flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "south-korea",
+        "section": "Country Event",
+        "sortOrder": 78,
+        "image": "/Steal%20a%20Brainrot/Traits/south-korea.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spain",
+        "cardSummary": "Spain is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Spain country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Spain flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "spain",
+        "section": "Country Event",
+        "sortOrder": 79,
+        "image": "/Steal%20a%20Brainrot/Traits/spain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sweden",
+        "cardSummary": "Sweden is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Sweden country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Sweden flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "sweden",
+        "section": "Country Event",
+        "sortOrder": 80,
+        "image": "/Steal%20a%20Brainrot/Traits/sweden.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Switzerland",
+        "cardSummary": "Switzerland is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Switzerland country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Switzerland flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "switzerland",
+        "section": "Country Event",
+        "sortOrder": 81,
+        "image": "/Steal%20a%20Brainrot/Traits/switzerland.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tunisia",
+        "cardSummary": "Tunisia is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Tunisia country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Tunisia flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "tunisia",
+        "section": "Country Event",
+        "sortOrder": 82,
+        "image": "/Steal%20a%20Brainrot/Traits/tunisia.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Turkey",
+        "cardSummary": "Turkey is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Turkey country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Turkey flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "turkey",
+        "section": "Country Event",
+        "sortOrder": 83,
+        "image": "/Steal%20a%20Brainrot/Traits/turkey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "United States",
+        "cardSummary": "United States is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the United States country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the United States flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "united-states",
+        "section": "Country Event",
+        "sortOrder": 84,
+        "image": "/Steal%20a%20Brainrot/Traits/united-states.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uruguay",
+        "cardSummary": "Uruguay is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Uruguay country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Uruguay flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "uruguay",
+        "section": "Country Event",
+        "sortOrder": 85,
+        "image": "/Steal%20a%20Brainrot/Traits/uruguay.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uzbekistan",
+        "cardSummary": "Uzbekistan is a FIFA 2026 trait with a 4.5× multiplier.",
+        "category": "FIFA 2026",
+        "multiplier": "4.5×",
+        "availability": "Live Match Events",
+        "obtainment": "Live Match Events randomly apply the Uzbekistan country trait to spawned Brainrots while the matching event is active.",
+        "visuals": "Country-colored sparkles, the Uzbekistan flag, and a football surround the Brainrot."
+      },
+      "system": {
+        "slug": "uzbekistan",
+        "section": "Country Event",
+        "sortOrder": 86,
+        "image": "/Steal%20a%20Brainrot/Traits/uzbekistan.png"
+      }
+    },
+    {
+      "item": {
         "name": "Granny",
-        "category": "Admin-Only Event",
-        "multiplier": "6.5x",
-        "obtainment": "Admin Abuse. The map turns into church visionaries, having a resting place for Granny by the Brainrot spawn. Randomly applied to any Brainrots spawned in.",
-        "visuals": "Granny is visible to the right of the Brainrot.",
-        "notes": "This event was only obtainable during 21/3/2026 - 22/3/2026."
+        "cardSummary": "Granny is a Admin Abuse Exclusive trait with a 5.5× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "5.5×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Granny Admin Abuse event randomly applies this trait to spawned Brainrots.",
+        "visuals": "Granny appears beside the Brainrot."
       },
       "system": {
         "slug": "granny",
-        "section": "Admin-Only Event",
-        "sortOrder": 34,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 87,
         "image": "/Steal%20a%20Brainrot/Traits/granny.webp"
       }
     },
     {
       "item": {
         "name": "Fire",
-        "category": "Admin-Only Event",
-        "multiplier": "6x",
-        "obtainment": "Admin Abuse. A sun appears above the map and shoots out solar flares that move along the map. Randomly applied to any Brainrots that are struck by the solar flare.",
-        "visuals": "The Brainrot will appear to be burning, as multiple bursts of fire occur on the Brainrot.",
-        "notes": "The solar flares can also hit players, ragdolling them. This may be a refrence to the fire visual effect in the original Italian Brainrot memes."
+        "cardSummary": "Fire is a Admin Abuse Exclusive trait with a 5× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "5×",
+        "availability": "Admin Abuse",
+        "obtainment": "Solar flares in the Fire Admin Abuse event apply the trait when they hit a Brainrot.",
+        "visuals": "Flames and repeated fire bursts cover the Brainrot."
       },
       "system": {
         "slug": "fire",
-        "section": "Admin-Only Event",
-        "sortOrder": 35,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 88,
         "image": "/Steal%20a%20Brainrot/Traits/fire.webp"
       }
     },
     {
       "item": {
         "name": "Rose",
-        "category": "Admin-Only Event",
-        "multiplier": "6x",
-        "obtainment": "Admin Abuse. A concert like area with cool looks. Randomly applied to any Brainrots that are hit by a falling rose.",
-        "visuals": "The Brainrot will appear to have little roses around them.",
-        "notes": "This trait isn't obtainable anymore."
+        "cardSummary": "Rose is a Admin Abuse Exclusive trait with a 5× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "5×",
+        "availability": "Admin Abuse",
+        "obtainment": "Falling roses in the Rose Admin Abuse event apply the trait when they hit a Brainrot.",
+        "visuals": "Small roses appear around the Brainrot."
       },
       "system": {
         "slug": "rose",
-        "section": "Admin-Only Event",
-        "sortOrder": 36,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 89,
         "image": "/Steal%20a%20Brainrot/Traits/rose.webp"
       }
     },
     {
       "item": {
         "name": "Fireworks",
-        "category": "Admin-Only Event",
-        "multiplier": "6x",
-        "obtainment": "Admin Abuse. The map is lined with firework launchers that shoot fireworks. Randomly applied to any Brainrots that are struck by fireworks.",
-        "visuals": "A firework particle effect will be applied to the Brainrot.",
-        "notes": "Introduced for Independence Day in the USA. Doesn't show up often during Admin Abuse's. Firework launcher shoots a firework: https://stealabrainrot.fandom.com/wiki/File:Firework_Shot.mp3 Fireworks exploding: https://stealabrainrot.fandom.com/wiki/File:Firework_explodes.mp3 Firework applying trait to brainrot: https://stealabrainrot.fandom.com/wiki/File:Firework_hit.mp3"
+        "cardSummary": "Fireworks is a Admin Abuse Exclusive trait with a 5× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "5×",
+        "availability": "Admin Abuse",
+        "obtainment": "Fireworks in the Fireworks Admin Abuse event apply the trait when they hit a Brainrot.",
+        "visuals": "Firework particles burst around the Brainrot."
       },
       "system": {
         "slug": "fireworks",
-        "section": "Admin-Only Event",
-        "sortOrder": 37,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 90,
         "image": "/Steal%20a%20Brainrot/Traits/fireworks.webp"
       }
     },
     {
       "item": {
         "name": "Nyan",
-        "category": "Admin-Only Event",
-        "multiplier": "6x",
-        "obtainment": "Admin Abuse. The map will be circled by a plethora of Nyan Cats. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A rainbow trail will be added onto the Brainrot.",
-        "notes": "Plays the song below. https://stealabrainrot.fandom.com/wiki/File:NyanLoop.mp3 Nyan cat hitting a brainrot: https://stealabrainrot.fandom.com/wiki/File:Nyan_Cat_Hit_2.mp3"
+        "cardSummary": "Nyan is a Admin Abuse Exclusive trait with a 5× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "5×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Nyan Admin Abuse event randomly applies this trait to spawned Brainrots.",
+        "visuals": "A rainbow trail follows the Brainrot."
       },
       "system": {
         "slug": "nyan",
-        "section": "Admin-Only Event",
-        "sortOrder": 38,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 91,
         "image": "/Steal%20a%20Brainrot/Traits/nyan.webp"
       }
     },
     {
       "item": {
         "name": "Lightning",
-        "category": "Admin-Only Event",
-        "multiplier": "6x",
-        "obtainment": "Admin Abuse. The sky turns galaxy-themed with mygame43 behind the Brainrot Spawn. Randomly applied to Brainrots struck by lightning.",
-        "visuals": "A dragon will be beside the Brainrot or on their right shoulder.",
-        "notes": "This event has a BloxFruit creator in it."
+        "cardSummary": "Lightning is a Admin Abuse Exclusive trait with a 5× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "5×",
+        "availability": "Admin Abuse",
+        "obtainment": "Lightning strikes in the Lightning Admin Abuse event apply the trait when they hit a Brainrot.",
+        "visuals": "A small lightning dragon appears beside or on the Brainrot's shoulder."
       },
       "system": {
         "slug": "lightning",
-        "section": "Admin-Only Event",
-        "sortOrder": 39,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 92,
         "image": "/Steal%20a%20Brainrot/Traits/lightning.webp"
       }
     },
     {
       "item": {
+        "name": "Burger",
+        "cardSummary": "Burger is a Admin Abuse Exclusive trait with a 4.5× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "4.5×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Burger Admin Abuse event randomly applies this trait to spawned Brainrots.",
+        "visuals": "A small burger character appears beside the Brainrot."
+      },
+      "system": {
+        "slug": "burger",
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 93,
+        "image": "/Steal%20a%20Brainrot/Traits/burger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aura Shades",
+        "cardSummary": "Aura Shades is a Admin Abuse Exclusive trait with a 4.5× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "4.5×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Aura Shades Admin Abuse event randomly applies this trait to spawned Brainrots.",
+        "visuals": "Pixelated deal-with-it sunglasses appear on the Brainrot."
+      },
+      "system": {
+        "slug": "aura-shades",
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 94,
+        "image": "/Steal%20a%20Brainrot/Traits/aura-shades.png"
+      }
+    },
+    {
+      "item": {
         "name": "Disco",
-        "category": "Admin-Only Event",
-        "multiplier": "5x",
-        "obtainment": "Admin Abuse. The screen goes dark with neon lights and music turning on shortly after. DJs Tralalero Tralala(Link) and Chimpanzini Bananini(Link) will appear behind the Brainrot Spawn. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "A glowing aura will appear on the Brainrot.",
-        "notes": "This event used to feature Tung Tung Tung Sahur(Link) behind the Brainrot Spawn."
+        "cardSummary": "Disco is a Admin Abuse Exclusive trait with a 4× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "4×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Disco Admin Abuse event randomly applies this trait to spawned Brainrots.",
+        "visuals": "A bright disco glow surrounds the Brainrot."
       },
       "system": {
         "slug": "disco",
-        "section": "Admin-Only Event",
-        "sortOrder": 40,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 95,
         "image": "/Steal%20a%20Brainrot/Traits/disco.webp"
       }
     },
     {
       "item": {
         "name": "Glitched",
-        "category": "Admin-Only Event",
-        "multiplier": "5x",
-        "obtainment": "Admin Abuse. The sky turns dark and the map will appear glitchy. Randomly applied to Brainrots on the Red Carpet.",
-        "visuals": "A glitchy aura will be added onto the Brainrot.",
-        "notes": "This event was recently updated for the 1x1x1x1 Ritual Event."
+        "cardSummary": "Glitched is a Admin Abuse Exclusive trait with a 4× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "4×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Glitch Admin Abuse event randomly applies this trait to Brainrots on the Red Carpet.",
+        "visuals": "A flickering glitch aura surrounds the Brainrot."
       },
       "system": {
         "slug": "glitched",
-        "section": "Admin-Only Event",
-        "sortOrder": 41,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 96,
         "image": "/Steal%20a%20Brainrot/Traits/glitched.webp"
       }
     },
     {
       "item": {
-        "name": "Crab Claw",
-        "category": "Admin-Only Event",
-        "multiplier": "5x",
-        "obtainment": "Admin Abuse. A seashore will be visible with water being on the sides of the Red Carpet, Crab Rave will play with crabs dancing. Crabs will occasionally pinch players. Randomly applied to Brainrots pinched by the crabs.",
-        "visuals": "Crab arms will be added onto the Brainrot.",
-        "notes": "Plays the song below. https://stealabrainrot.fandom.com/wiki/File:CrabRave.mp3"
+        "name": "Claws",
+        "cardSummary": "Claws is a Admin Abuse Exclusive trait with a 4× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "4×",
+        "availability": "Admin Abuse",
+        "obtainment": "Crabs in the Crab Rave Admin Abuse event apply the trait when they pinch a Brainrot.",
+        "visuals": "Crab claws replace or extend the Brainrot's arms."
       },
       "system": {
-        "slug": "crab-claw",
-        "section": "Admin-Only Event",
-        "sortOrder": 42,
+        "slug": "claws",
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 97,
         "image": "/Steal%20a%20Brainrot/Traits/crab-claw.webp"
       }
     },
     {
       "item": {
         "name": "Zombie",
-        "category": "Admin-Only Event",
-        "multiplier": "5x",
-        "obtainment": "Admin Abuse. Evil Los Tung Tung's will come out of the caves to attack players. A huge Tung Tung Tung Sahur(Link) will appear behind the Brainrot Spawn. Randomly applied to Brainrots struck by the Evil Tung Tung's.",
-        "visuals": "Glowing red eyes will be added onto the Brainrot.",
-        "notes": "The event returned on November 29, the evil tung tungs can rarely go after players to knock them to the ground. The sound the Tung Tung Tung sahurs make: https://stealabrainrot.fandom.com/wiki/File:TungEffect3_1.mp3"
+        "cardSummary": "Zombie is a Admin Abuse Exclusive trait with a 4× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "4×",
+        "availability": "Admin Abuse",
+        "obtainment": "Evil Tung Tung attackers in the Zombie Admin Abuse event apply the trait when they hit a Brainrot.",
+        "visuals": "The Brainrot gains glowing red eyes."
       },
       "system": {
         "slug": "zombie",
-        "section": "Admin-Only Event",
-        "sortOrder": 43,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 98,
         "image": "/Steal%20a%20Brainrot/Traits/zombie.webp"
       }
     },
     {
       "item": {
         "name": "Bubblegum",
-        "category": "Admin-Only Event",
-        "multiplier": "4x",
-        "obtainment": "Admin Abuse. A bubblegum machine will spawn in front of the Brainrot Spawn. Randomly applied to Brainrots in the Bubblegum Machine.",
-        "visuals": "A bubblegum bubble will appear on their head.",
-        "notes": "Previously an Event, it was activated by putting 10 Candy Brainrots inside the Bubblegum Machine."
+        "cardSummary": "Bubblegum is a Admin Abuse Exclusive trait with a 3× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "3×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Bubblegum Machine in Admin Abuse applies this trait to Brainrots placed inside it.",
+        "visuals": "A bubblegum bubble appears on the Brainrot's head."
       },
       "system": {
         "slug": "bubblegum",
-        "section": "Admin-Only Event",
-        "sortOrder": 44,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 99,
         "image": "/Steal%20a%20Brainrot/Traits/bubblegum.webp"
       }
     },
     {
       "item": {
         "name": "UFO",
-        "category": "Admin-Only Event",
-        "multiplier": "3x",
-        "obtainment": "Admin Abuse. The sky turns galaxy-themed and UFO's will appear. Randomly applied to Brainrots hit by the UFO's beam.",
-        "visuals": "A mini UFO will appear above the Brainrots head.",
-        "notes": "Plays the song below. https://stealabrainrot.fandom.com/wiki/File:AlienLoop.mp3"
+        "cardSummary": "UFO is a Admin Abuse Exclusive trait with a 2× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "2×",
+        "availability": "Admin Abuse",
+        "obtainment": "UFO beams in the Alien Admin Abuse event apply the trait when they hit a Brainrot.",
+        "visuals": "A miniature UFO floats above the Brainrot."
       },
       "system": {
         "slug": "ufo",
-        "section": "Admin-Only Event",
-        "sortOrder": 45,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 100,
         "image": "/Steal%20a%20Brainrot/Traits/ufo.webp"
       }
     },
     {
       "item": {
         "name": "Taco",
-        "category": "Admin-Only Event",
-        "multiplier": "3x",
-        "obtainment": "Admin Abuse. Tacos start falling out of the sky and a cannon will appear above the Brainrot Spawn. Randomly applied to Brainrots hit by the Taco Cannon.",
-        "visuals": "A Taco will appear on the Brainrots head(s).",
-        "notes": "Added for Sammy's love of tacos, it's guaranteed to happen every Taco Tuesday. Cannon shooting a taco: https://stealabrainrot.fandom.com/wiki/File:Taco_Cannon_Shot.mp3 Taco hitting a brainrot: https://stealabrainrot.fandom.com/wiki/File:Taco_Cannon_Hit.mp3"
+        "cardSummary": "Taco is a Admin Abuse Exclusive trait with a 2× multiplier.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": "2×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Taco Cannon applies this trait when one of its tacos hits a Brainrot during Admin Abuse.",
+        "visuals": "A taco appears on the Brainrot's head."
       },
       "system": {
         "slug": "taco",
-        "section": "Admin-Only Event",
-        "sortOrder": 46,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 101,
         "image": "/Steal%20a%20Brainrot/Traits/taco.webp"
       }
     },
     {
       "item": {
         "name": "Sleepy",
-        "category": "Admin-Only Event",
-        "multiplier": "0.5x (multiplied by brainrot's final value)",
-        "obtainment": "Admin Abuse. Beanstalks appear scattered across the map and a skull emoji will appear. \"YOU FELL ASLEEP\" will also pop up. Brainrots will become sleepy.",
-        "visuals": "Z's appear coming from the top and start vanishing off from the left of the Brainrot.",
-        "notes": "The worst trait in the game as it decreases Brainrot values by half. Sleepy Burst: https://stealabrainrot.fandom.com/wiki/File:SleepyBurst.mp3"
+        "cardSummary": "Sleepy is the negative Admin Abuse trait, reducing a Brainrot's final income value by half.",
+        "category": "Admin Abuse Exclusive",
+        "multiplier": ".5×",
+        "availability": "Admin Abuse",
+        "obtainment": "The Sleepy Admin Abuse event can put Brainrots to sleep and apply this negative trait.",
+        "visuals": "Fading Z particles rise from the Brainrot."
       },
       "system": {
         "slug": "sleepy",
-        "section": "Admin-Only Event",
-        "sortOrder": 47,
+        "section": "Admin Abuse Exclusive",
+        "sortOrder": 102,
         "image": "/Steal%20a%20Brainrot/Traits/sleepy.webp"
       }
     },
     {
       "item": {
         "name": "Comet-struck",
+        "cardSummary": "Comet-struck is a Natural Event trait with a 2.5× multiplier.",
         "category": "Natural Event",
-        "multiplier": "3.5x",
-        "obtainment": "Randomized. Stars will begin to fall out the sky. Randomly applied to Brainrots hit by the star fall.",
-        "visuals": "A Comet-struck aura of yellow and blue sparks will be added to Brainrots.",
-        "notes": "A natural event commonly confused in the Community Server as a 'Admin Event.'"
+        "multiplier": "2.5×",
+        "availability": "Random natural event",
+        "obtainment": "Falling stars during the Comet event apply this trait when they strike a Brainrot.",
+        "visuals": "Yellow and blue comet sparks surround the Brainrot."
       },
       "system": {
         "slug": "comet-struck",
         "section": "Natural Event",
-        "sortOrder": 48,
+        "sortOrder": 103,
         "image": "/Steal%20a%20Brainrot/Traits/comet-struck.webp"
       }
     },
     {
       "item": {
         "name": "Snowy",
+        "cardSummary": "Snowy is a Natural Event trait with a 2× multiplier.",
         "category": "Natural Event",
-        "multiplier": "3x",
-        "obtainment": "Randomized. Piles of snow are visible on the now white grass. Snow can visibly be seen falling from the sky. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "Snowflakes will be added to the Brainrot.",
-        "notes": "Plays the song below. https://stealabrainrot.fandom.com/wiki/File:SnowLoop.mp3"
+        "multiplier": "2×",
+        "availability": "Random natural event",
+        "obtainment": "The Snow event randomly applies this trait to spawned Brainrots.",
+        "visuals": "Snowflakes gather around the Brainrot."
       },
       "system": {
         "slug": "snowy",
         "section": "Natural Event",
-        "sortOrder": 49,
+        "sortOrder": 104,
         "image": "/Steal%20a%20Brainrot/Traits/snowy.webp"
       }
     },
     {
       "item": {
         "name": "Wet",
+        "cardSummary": "Wet is a Natural Event trait with a 1.5× multiplier.",
         "category": "Natural Event",
-        "multiplier": "2.5x",
-        "obtainment": "' The sky turns cloudy and rain starts to pour; It begins to rain. There is a myth that rain is activated if it's raining where Sammy is at the moment. Randomly applied to any spawned-in Brainrots.",
-        "visuals": "Water droplets will be applied to the Brainrot.",
-        "notes": "The game time turns rainy and raindrops fall all over the map. The ambient sound of the map when it's raining: https://stealabrainrot.fandom.com/wiki/File:Rain_ambience_sound_loop.mp3 When the brainrot gets the trait: https://stealabrainrot.fandom.com/wiki/File:Rain_burst.mp3"
+        "multiplier": "1.5×",
+        "availability": "Random natural event",
+        "obtainment": "The Rain event randomly applies this trait to spawned Brainrots.",
+        "visuals": "Water droplets cover the Brainrot."
       },
       "system": {
         "slug": "wet",
         "section": "Natural Event",
-        "sortOrder": 50,
+        "sortOrder": 105,
         "image": "/Steal%20a%20Brainrot/Traits/wet.webp"
       }
     }

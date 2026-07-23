@@ -7,29 +7,31 @@
     "route": "/wiki/pet-simulator-99/minigames",
     "catalogCode": "pet-simulator-99-minigames",
     "itemFields": [
+      "name",
       "world",
       "location",
       "type",
+      "cardSummary",
+      "objective",
       "entryRule",
       "rewards",
       "hugeTitanicNote",
-      "description",
-      "areaNumber",
-      "areaName"
+      "areaNumber"
     ],
     "columns": [
+      "name",
       "world",
       "location",
       "type",
+      "cardSummary",
+      "objective",
       "entryRule",
       "rewards",
       "hugeTitanicNote",
-      "description",
-      "areaNumber",
-      "areaName"
+      "areaNumber"
     ],
     "display": {
-      "groupLabel": "section",
+      "groupLabel": "World",
       "sectionOrder": [
         "Spawn World",
         "Tech World",
@@ -37,28 +39,72 @@
         "Fantasy World"
       ],
       "badgeField": "type",
-      "subtitleFields": [],
-      "descriptionField": "description",
-      "cardDescriptionField": "description",
+      "subtitleFields": [
+        "world",
+        "location"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
         "world",
         "location",
         "type",
+        "cardSummary",
+        "objective",
         "entryRule",
         "rewards",
-        "hugeTitanicNote"
+        "hugeTitanicNote",
+        "areaNumber"
       ],
       "tableFields": [
         "world",
         "location",
         "type",
+        "cardSummary",
+        "objective",
         "entryRule",
         "rewards",
         "hugeTitanicNote",
-        "description",
         "areaNumber"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "world": {
+          "kind": "normal",
+          "label": "World"
+        },
+        "location": {
+          "kind": "normal",
+          "label": "Location"
+        },
+        "type": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "objective": {
+          "kind": "detail",
+          "label": "Objective"
+        },
+        "entryRule": {
+          "kind": "highlight",
+          "label": "Entry Rule"
+        },
+        "rewards": {
+          "kind": "detail",
+          "label": "Rewards"
+        },
+        "hugeTitanicNote": {
+          "kind": "highlight",
+          "label": "Huge / Titanic Note"
+        },
+        "areaNumber": {
+          "kind": "chip",
+          "label": "Area #"
+        }
+      }
     }
   },
   "items": [
@@ -68,11 +114,12 @@
         "world": "Spawn World",
         "location": "Area #5 - Autumn",
         "type": "Obby",
+        "cardSummary": "Classic Obby is an early obstacle course with a simple jump-and-clear objective.",
+        "objective": "Jump across the obstacle course and reach the finish.",
         "entryRule": "1 hour 15 minute cooldown",
         "rewards": "Completion rewards",
-        "description": "Classic Obby is an early obstacle course with a simple jump-and-clear objective.",
-        "areaNumber": 5,
-        "areaName": "Autumn"
+        "hugeTitanicNote": "",
+        "areaNumber": 5
       },
       "system": {
         "slug": "classic-obby",
@@ -87,11 +134,12 @@
         "world": "Spawn World",
         "location": "Area #11 - Crystal Caverns",
         "type": "Trial-and-error path",
+        "cardSummary": "Minefield asks players to cross safely by testing the route and avoiding failed tiles.",
+        "objective": "Cross the minefield by testing tiles and finding a safe path.",
         "entryRule": "2 hour 30 minute cooldown",
         "rewards": "Completion rewards",
-        "description": "Minefield asks players to cross safely by testing the route and avoiding failed tiles.",
-        "areaNumber": 11,
-        "areaName": "Crystal Caverns"
+        "hugeTitanicNote": "",
+        "areaNumber": 11
       },
       "system": {
         "slug": "minefield",
@@ -106,11 +154,12 @@
         "world": "Spawn World",
         "location": "Area #18 - Jungle Temple",
         "type": "Obby",
+        "cardSummary": "Jungle Obby is another obstacle route built around jumping through the temple course.",
+        "objective": "Clear the jungle-themed obstacle course and reach the finish.",
         "entryRule": "1 hour 15 minute cooldown",
         "rewards": "Completion rewards",
-        "description": "Jungle Obby is another obstacle route built around jumping through the temple course.",
-        "areaNumber": 18,
-        "areaName": "Jungle Temple"
+        "hugeTitanicNote": "",
+        "areaNumber": 18
       },
       "system": {
         "slug": "jungle-obby",
@@ -125,11 +174,12 @@
         "world": "Spawn World",
         "location": "Area #23 - Atlantis",
         "type": "Swimming course",
+        "cardSummary": "Atlantis sends players through an underwater hoop route that must be cleared in order.",
+        "objective": "Swim through all 31 hoops in order.",
         "entryRule": "1 hour 15 minute cooldown",
         "rewards": "Completion rewards",
-        "description": "Atlantis sends players through an underwater hoop route that must be cleared in order.",
-        "areaNumber": 23,
-        "areaName": "Atlantis"
+        "hugeTitanicNote": "",
+        "areaNumber": 23
       },
       "system": {
         "slug": "atlantis",
@@ -144,12 +194,12 @@
         "world": "Spawn World",
         "location": "Area #27 - Pirate Tavern",
         "type": "Fishing",
+        "cardSummary": "Fishing is a repeatable activity where players cast for reward pulls instead of clearing a timed course.",
+        "objective": "Cast for fish and item rewards as a repeatable activity.",
         "entryRule": "No cooldown",
         "rewards": "Fishing rewards",
         "hugeTitanicNote": "Chance for Huge Poseidon Dog",
-        "description": "Fishing is a repeatable activity where players cast for reward pulls instead of clearing a timed course.",
-        "areaNumber": 27,
-        "areaName": "Pirate Tavern"
+        "areaNumber": 27
       },
       "system": {
         "slug": "fishing",
@@ -164,12 +214,12 @@
         "world": "Spawn World",
         "location": "Area #30 - Fossil Digsite",
         "type": "Digging",
+        "cardSummary": "Digsite lets players dig through the ground to uncover chests and reward spots.",
+        "objective": "Dig through the ground and uncover reward chests.",
         "entryRule": "No cooldown",
         "rewards": "Chest and dig rewards",
         "hugeTitanicNote": "Chance for Huge Sand Turtle",
-        "description": "Digsite lets players dig through the ground to uncover chests and reward spots.",
-        "areaNumber": 30,
-        "areaName": "Fossil Digsite"
+        "areaNumber": 30
       },
       "system": {
         "slug": "digsite-fossil",
@@ -184,11 +234,12 @@
         "world": "Spawn World",
         "location": "Area #31 - Desert Pyramids",
         "type": "Obby",
+        "cardSummary": "Pyramid Obby is a desert obstacle course that fits the same short-run replay pattern as the early obbies.",
+        "objective": "Clear the desert-themed obstacle course and reach the finish.",
         "entryRule": "1 hour 15 minute cooldown",
         "rewards": "Completion rewards",
-        "description": "Pyramid Obby is a desert obstacle course that fits the same short-run replay pattern as the early obbies.",
-        "areaNumber": 31,
-        "areaName": "Desert Pyramids"
+        "hugeTitanicNote": "",
+        "areaNumber": 31
       },
       "system": {
         "slug": "pyramid-obby",
@@ -203,11 +254,12 @@
         "world": "Spawn World",
         "location": "Area #38 - Icy Peaks",
         "type": "Obby",
+        "cardSummary": "Ice Obby is a cold-area obstacle course for another quick completion reward run.",
+        "objective": "Clear the ice-themed obstacle course and reach the finish.",
         "entryRule": "1 hour 15 minute cooldown",
         "rewards": "Completion rewards",
-        "description": "Ice Obby is a cold-area obstacle course for another quick completion reward run.",
-        "areaNumber": 38,
-        "areaName": "Icy Peaks"
+        "hugeTitanicNote": "",
+        "areaNumber": 38
       },
       "system": {
         "slug": "ice-obby",
@@ -222,11 +274,12 @@
         "world": "Spawn World",
         "location": "Area #40 - Ski Town",
         "type": "Race",
+        "cardSummary": "Sled Race is a downhill run where players steer past obstacles to reach the finish.",
+        "objective": "Steer down the course, avoid obstacles, and reach the finish.",
         "entryRule": "No cooldown",
         "rewards": "Race rewards",
-        "description": "Sled Race is a downhill run where players steer past obstacles to reach the finish.",
-        "areaNumber": 40,
-        "areaName": "Ski Town"
+        "hugeTitanicNote": "",
+        "areaNumber": 40
       },
       "system": {
         "slug": "sled-race",
@@ -241,12 +294,12 @@
         "world": "Spawn World",
         "location": "Area #45 - Lava Forest",
         "type": "Chest break",
+        "cardSummary": "Chest Rush has players break through five stronger chests before reaching the reward zone.",
+        "objective": "Break five increasingly durable chests to reach the end reward zone.",
         "entryRule": "2 hour cooldown",
         "rewards": "End-zone rewards",
         "hugeTitanicNote": "Chance for Huge Fire Horse",
-        "description": "Chest Rush has players break through five stronger chests before reaching the reward zone.",
-        "areaNumber": 45,
-        "areaName": "Lava Forest"
+        "areaNumber": 45
       },
       "system": {
         "slug": "chest-rush",
@@ -261,11 +314,12 @@
         "world": "Spawn World",
         "location": "Under the map",
         "type": "Climb",
+        "cardSummary": "Stairway to Heaven is a hidden climb under the map with a rare reward chance at the end.",
+        "objective": "Climb the stairway for its extremely rare top reward chance.",
         "entryRule": "No cooldown",
         "rewards": "Climb reward chance",
         "hugeTitanicNote": "Extremely low chance for Golden Huge Angel Dog",
-        "description": "Stairway to Heaven is a hidden climb under the map with a rare reward chance at the end.",
-        "areaName": "Under the map"
+        "areaNumber": null
       },
       "system": {
         "slug": "stairway-to-heaven",
@@ -280,11 +334,12 @@
         "world": "Spawn World",
         "location": "Area #54 - Flower Field",
         "type": "Planting",
+        "cardSummary": "Flower Garden uses planted seeds and grown pots to turn garden time into item rewards.",
+        "objective": "Plant seeds in pots and collect their rewards after they grow.",
         "entryRule": "No cooldown",
         "rewards": "Diamonds, coins, potions, and gift bags",
-        "description": "Flower Garden uses planted seeds and grown pots to turn garden time into item rewards.",
-        "areaNumber": 54,
-        "areaName": "Flower Field"
+        "hugeTitanicNote": "",
+        "areaNumber": 54
       },
       "system": {
         "slug": "flower-garden",
@@ -299,11 +354,12 @@
         "world": "Spawn World",
         "location": "Area #61 - Colorful Mines",
         "type": "Cart ride",
+        "cardSummary": "Cart Ride into Preston has players control cart speed with arrows while riding to the end.",
+        "objective": "Control the cart speed and reach the end of the rail course.",
         "entryRule": "1 hour 15 minute cooldown",
         "rewards": "Completion rewards",
-        "description": "Cart Ride into Preston has players control cart speed with arrows while riding to the end.",
-        "areaNumber": 61,
-        "areaName": "Colorful Mines"
+        "hugeTitanicNote": "",
+        "areaNumber": 61
       },
       "system": {
         "slug": "cart-ride-into-preston",
@@ -318,11 +374,12 @@
         "world": "Spawn World",
         "location": "Area #79 - Dungeon",
         "type": "Digging",
+        "cardSummary": "The Dungeon Digsite is a later digging room with the same chest-hunting loop in a different area.",
+        "objective": "Dig through the dungeon ground and uncover reward chests.",
         "entryRule": "No cooldown",
         "rewards": "Chest and dig rewards",
-        "description": "The Dungeon Digsite is a later digging room with the same chest-hunting loop in a different area.",
-        "areaNumber": 79,
-        "areaName": "Dungeon"
+        "hugeTitanicNote": "",
+        "areaNumber": 79
       },
       "system": {
         "slug": "digsite-dungeon",
@@ -337,11 +394,12 @@
         "world": "Spawn World",
         "location": "Area #87 - Toys And Blocks",
         "type": "Block break",
+        "cardSummary": "Lucky Blocks is a timed breakable room where players destroy blocks to spawn stronger black lucky blocks.",
+        "objective": "Break Lucky Blocks during the 15-minute run or until six black blocks are cleared.",
         "entryRule": "3 hour cooldown",
         "rewards": "Lucky block item rewards",
-        "description": "Lucky Blocks is a timed breakable room where players destroy blocks to spawn stronger black lucky blocks.",
-        "areaNumber": 87,
-        "areaName": "Toys And Blocks"
+        "hugeTitanicNote": "",
+        "areaNumber": 87
       },
       "system": {
         "slug": "lucky-blocks",
@@ -356,12 +414,12 @@
         "world": "Spawn World",
         "location": "Area #92 - Cloud Forest",
         "type": "Fishing",
+        "cardSummary": "Advanced Fishing adds Deep Pools to the fishing loop, giving later players extra reward targets.",
+        "objective": "Fish for rewards and use Deep Pools for the advanced reward pool.",
         "entryRule": "No cooldown",
         "rewards": "Fishing rewards and Deep Pool rewards",
         "hugeTitanicNote": "Chance for Huge Poseidon Dog and Huge Whale Shark",
-        "description": "Advanced Fishing adds Deep Pools to the fishing loop, giving later players extra reward targets.",
-        "areaNumber": 92,
-        "areaName": "Cloud Forest"
+        "areaNumber": 92
       },
       "system": {
         "slug": "advanced-fishing",
@@ -376,11 +434,12 @@
         "world": "Tech World",
         "location": "Area #105 - Neon Mine",
         "type": "Hoverboard obby",
+        "cardSummary": "Hoverboard Obby uses a randomly generated obstacle course built around hoverboard movement.",
+        "objective": "Ride through a randomly generated hoverboard obstacle course.",
         "entryRule": "1 hour 15 minute cooldown",
         "rewards": "Completion rewards",
-        "description": "Hoverboard Obby uses a randomly generated obstacle course built around hoverboard movement.",
-        "areaNumber": 105,
-        "areaName": "Neon Mine"
+        "hugeTitanicNote": "",
+        "areaNumber": 105
       },
       "system": {
         "slug": "hoverboard-obby",
@@ -395,12 +454,12 @@
         "world": "Tech World",
         "location": "Area #109 - Tech Jungle",
         "type": "Wheel",
+        "cardSummary": "Diamond Wheel is a diamond-spending spin activity instead of a timed course.",
+        "objective": "Pay for a spin and collect the reward where the wheel stops.",
         "entryRule": "Spend 100k diamonds per spin",
         "rewards": "Diamond Wheel rewards",
         "hugeTitanicNote": "Chance for Huge Hi-Tech Tiger",
-        "description": "Diamond Wheel is a diamond-spending spin activity instead of a timed course.",
-        "areaNumber": 109,
-        "areaName": "Tech Jungle"
+        "areaNumber": 109
       },
       "system": {
         "slug": "diamond-wheel",
@@ -415,12 +474,12 @@
         "world": "Tech World",
         "location": "Area #124 - Cyber Base Camp",
         "type": "Chest raid",
+        "cardSummary": "Chest Raid gives players 10 minutes to clear chest rooms and push deeper for rewards.",
+        "objective": "Break chests and clear as many rooms as possible within 10 minutes.",
         "entryRule": "Opens at 2pm and 10pm CST",
         "rewards": "Chest room rewards",
         "hugeTitanicNote": "Low chance for Huge Glitched Cat",
-        "description": "Chest Raid gives players 10 minutes to clear chest rooms and push deeper for rewards.",
-        "areaNumber": 124,
-        "areaName": "Cyber Base Camp"
+        "areaNumber": 124
       },
       "system": {
         "slug": "chest-raid",
@@ -435,11 +494,12 @@
         "world": "Tech World",
         "location": "Area #143 - Arcade Town",
         "type": "Token machine",
+        "cardSummary": "Claw Machine spends tokens to grab Arcade Eggs from the arcade machine.",
+        "objective": "Spend a Claw Machine token and guide the claw toward a prize.",
         "entryRule": "Requires Claw Machine tokens",
         "rewards": "Arcade Eggs",
-        "description": "Claw Machine spends tokens to grab Arcade Eggs from the arcade machine.",
-        "areaNumber": 143,
-        "areaName": "Arcade Town"
+        "hugeTitanicNote": "",
+        "areaNumber": 143
       },
       "system": {
         "slug": "claw-machine",
@@ -454,12 +514,12 @@
         "world": "Tech World",
         "location": "Area #159 - Mothership Circuit Board",
         "type": "Timed loot room",
+        "cardSummary": "Treasure Hideout is a 30-minute loot room where players break through reward drops before the entry closes.",
+        "objective": "Break targets and collect drops during a 30-minute Hideout run.",
         "entryRule": "6 hour cooldown; 30 minute run",
         "rewards": "Coins and item rewards",
         "hugeTitanicNote": "Chance for Huge Electric Cat",
-        "description": "Treasure Hideout is a 30-minute loot room where players break through reward drops before the entry closes.",
-        "areaNumber": 159,
-        "areaName": "Mothership Circuit Board"
+        "areaNumber": 159
       },
       "system": {
         "slug": "treasure-hideout",
@@ -474,11 +534,12 @@
         "world": "Tech World",
         "location": "Area #188 - Hacker Error",
         "type": "Stealth obby",
+        "cardSummary": "Hacker Obby mixes obstacle movement with a Titanic Cat sightline that can send players back.",
+        "objective": "Clear the laser course while moving only when the Titanic Cat is not watching.",
         "entryRule": "1 hour 15 minute cooldown",
         "rewards": "Completion rewards",
-        "description": "Hacker Obby mixes obstacle movement with a Titanic Cat sightline that can send players back.",
-        "areaNumber": 188,
-        "areaName": "Hacker Error"
+        "hugeTitanicNote": "",
+        "areaNumber": 188
       },
       "system": {
         "slug": "hacker-obby",
@@ -493,12 +554,12 @@
         "world": "Void World",
         "location": "Area #204 - Prison HQ",
         "type": "Obstacle route",
+        "cardSummary": "Bank Heist has players clear obstacles like laser barriers before reaching the reward zone.",
+        "objective": "Disable barriers, clear obstacles, and reach the end reward zone.",
         "entryRule": "2 hour cooldown",
         "rewards": "End-zone rewards",
         "hugeTitanicNote": "Chance for Huge Police Cat",
-        "description": "Bank Heist has players clear obstacles like laser barriers before reaching the reward zone.",
-        "areaNumber": 204,
-        "areaName": "Prison HQ"
+        "areaNumber": 204
       },
       "system": {
         "slug": "bank-heist",
@@ -513,12 +574,12 @@
         "world": "Void World",
         "location": "Area #207 - Tiki Island",
         "type": "Egg hunt",
+        "cardSummary": "Tiki Egg Hunt is a scheduled search for eggs with boosted Huge chances.",
+        "objective": "Find boosted eggs hidden around the islands during the scheduled hunt.",
         "entryRule": "Starts every 4 hours",
         "rewards": "Eggs with boosted Huge chances",
         "hugeTitanicNote": "Chance for Huge Pineapple Monkey",
-        "description": "Tiki Egg Hunt is a scheduled search for eggs with boosted Huge chances.",
-        "areaNumber": 207,
-        "areaName": "Tiki Island"
+        "areaNumber": 207
       },
       "system": {
         "slug": "tiki-egg-hunt",
@@ -533,12 +594,12 @@
         "world": "Void World",
         "location": "Area #208 - Jungle Island",
         "type": "Boss fight",
+        "cardSummary": "Jungle Boss Fight has players break high-HP boss chests while dodging attacks.",
+        "objective": "Break high-health boss chests while avoiding their attacks.",
         "entryRule": "Starts every 4 hours",
         "rewards": "Boss chest rewards",
         "hugeTitanicNote": "Chance for Huge Pineapple Monkey",
-        "description": "Jungle Boss Fight has players break high-HP boss chests while dodging attacks.",
-        "areaNumber": 208,
-        "areaName": "Jungle Island"
+        "areaNumber": 208
       },
       "system": {
         "slug": "jungle-boss-fight",
@@ -553,12 +614,12 @@
         "world": "Void World",
         "location": "Area #219 - Diamond Mega City",
         "type": "Risk race",
+        "cardSummary": "Millionaire Race sends players through 20 rooms where prizes improve while the chance of getting nothing rises.",
+        "objective": "Choose through 20 rooms where rewards improve but failure risk rises.",
         "entryRule": "10 plays per day",
         "rewards": "Room rewards that improve as risk rises",
         "hugeTitanicNote": "End reward includes Shiny Rainbow Huge Treasure Turtle",
-        "description": "Millionaire Race sends players through 20 rooms where prizes improve while the chance of getting nothing rises.",
-        "areaNumber": 219,
-        "areaName": "Diamond Mega City"
+        "areaNumber": 219
       },
       "system": {
         "slug": "millionaire-race",
@@ -573,11 +634,12 @@
         "world": "Void World",
         "location": "Area #220 - Kawaii Tokyo",
         "type": "Chest search",
+        "cardSummary": "Tokyo Alley Minigame sends players through alley chests while searching for the Tokyo Alley Egg.",
+        "objective": "Break alley chests until the Tokyo Alley Egg is found.",
         "entryRule": "1 hour after finding the egg",
         "rewards": "Tokyo Alley Egg chance",
-        "description": "Tokyo Alley Minigame sends players through alley chests while searching for the Tokyo Alley Egg.",
-        "areaNumber": 220,
-        "areaName": "Kawaii Tokyo"
+        "hugeTitanicNote": "",
+        "areaNumber": 220
       },
       "system": {
         "slug": "tokyo-alley-minigame",
@@ -592,12 +654,12 @@
         "world": "Void World",
         "location": "Area #233 - Nebula Forest",
         "type": "Gathering",
+        "cardSummary": "Woodcutting has players chop trees and finish quests to earn Wooden Gifts.",
+        "objective": "Chop trees, complete woodcutting quests, and earn Wooden Gifts.",
         "entryRule": "No cooldown",
         "rewards": "Wooden Gifts",
         "hugeTitanicNote": "Wooden Gifts contain Huge Trojan Horse",
-        "description": "Woodcutting has players chop trees and finish quests to earn Wooden Gifts.",
-        "areaNumber": 233,
-        "areaName": "Nebula Forest"
+        "areaNumber": 233
       },
       "system": {
         "slug": "woodcutting",
@@ -612,11 +674,12 @@
         "world": "Void World",
         "location": "Area #239 - Doodle Oasis",
         "type": "Drawing battle",
+        "cardSummary": "Doodle Battle is a drawing contest against Doodle Dragon that resets drawing points after a win.",
+        "objective": "Build drawing points, challenge the Doodle Dragon, and win a Doodle Gift.",
         "entryRule": "No cooldown",
         "rewards": "Doodle Gift",
-        "description": "Doodle Battle is a drawing contest against Doodle Dragon that resets drawing points after a win.",
-        "areaNumber": 239,
-        "areaName": "Doodle Oasis"
+        "hugeTitanicNote": "",
+        "areaNumber": 239
       },
       "system": {
         "slug": "doodle-battle",
@@ -631,12 +694,12 @@
         "world": "Fantasy World",
         "location": "Area #279 - Hollow Veil Castle",
         "type": "Timed trial",
+        "cardSummary": "Time Trials is a daily-limited breakable race where faster clears build points for three reward-chest tiers.",
+        "objective": "Race through five breakable zones with ten waves each, then defeat the boss chest.",
         "entryRule": "10 plays per day",
         "rewards": "Points for Time Trial Chests",
         "hugeTitanicNote": "Chests can reward Huge Totem Cub, Huge Ancestor Eagle, and Titanic Scroll Dragon",
-        "description": "Time Trials is a daily-limited breakable race where players clear waves quickly to earn chest points.",
-        "areaNumber": 279,
-        "areaName": "Hollow Veil Castle"
+        "areaNumber": 279
       },
       "system": {
         "slug": "time-trials",

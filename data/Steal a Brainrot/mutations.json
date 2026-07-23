@@ -7,45 +7,97 @@
     "route": "/wiki/steal-a-brainrot/mutations",
     "catalogCode": "steal-a-brainrot-mutations",
     "itemFields": [
+      "cardSummary",
       "category",
       "multiplier",
-      "changesNotes"
+      "availability",
+      "introduced",
+      "acquisition",
+      "visualEffect"
     ],
     "columns": [
+      "cardSummary",
       "category",
       "multiplier",
-      "changesNotes"
+      "availability",
+      "introduced",
+      "acquisition",
+      "visualEffect"
     ],
     "display": {
-      "groupLabel": "category",
+      "groupLabel": "Mutation family",
       "sectionOrder": [
         "Permanent",
         "Limited"
       ],
       "badgeField": "category",
-      "subtitleFields": [],
-      "descriptionField": null,
-      "cardDescriptionField": null,
+      "subtitleFields": [
+        "multiplier",
+        "availability"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
+        "cardSummary",
         "category",
         "multiplier",
-        "changesNotes"
+        "availability",
+        "introduced",
+        "acquisition",
+        "visualEffect"
       ],
       "tableFields": [
+        "cardSummary",
         "category",
         "multiplier",
-        "changesNotes"
+        "availability",
+        "introduced",
+        "acquisition",
+        "visualEffect"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "cardSummary": {
+          "kind": "normal",
+          "label": "Summary"
+        },
+        "category": {
+          "kind": "chip",
+          "label": "Category"
+        },
+        "multiplier": {
+          "kind": "chip",
+          "label": "Income multiplier"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "introduced": {
+          "kind": "chip",
+          "label": "Introduced"
+        },
+        "acquisition": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "visualEffect": {
+          "kind": "detail",
+          "label": "Visual effect"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
         "name": "Default",
+        "cardSummary": "The unmutated Brainrot form with its normal income rate.",
         "category": "Permanent",
-        "multiplier": "1x",
-        "changesNotes": "The brainrot retains its original appearance. Been in-game since the beginning."
+        "multiplier": "1×",
+        "availability": "Base form",
+        "introduced": "Launch",
+        "acquisition": "Any Brainrot without another mutation uses the Default form.",
+        "visualEffect": "Keeps the Brainrot's original colors and effects."
       },
       "system": {
         "slug": "default",
@@ -57,9 +109,13 @@
     {
       "item": {
         "name": "Gold",
+        "cardSummary": "A permanent gold variant that raises the Brainrot's income by 25%.",
         "category": "Permanent",
         "multiplier": "1.25×",
-        "changesNotes": "Turns the mutated brainrot yellow/gold. Been in-game since 31st May 2025. 10% chance to spawn brainrot with this mutation on the row"
+        "availability": "Permanent",
+        "introduced": "May 31, 2025",
+        "acquisition": "Has a 10% chance to appear on a Brainrot spawning on the Red Carpet.",
+        "visualEffect": "Changes the Brainrot to a yellow-gold color."
       },
       "system": {
         "slug": "gold",
@@ -71,9 +127,13 @@
     {
       "item": {
         "name": "Diamond",
+        "cardSummary": "A permanent cyan variant with a 1.5× income multiplier.",
         "category": "Permanent",
         "multiplier": "1.5×",
-        "changesNotes": "Turns the mutated brainrot cyan/diamond. Been in-game since 31st May 2025 20.4% chance to spawn brainrot with this mutation on the row"
+        "availability": "Permanent",
+        "introduced": "May 31, 2025",
+        "acquisition": "Has a 5% chance to appear on a Brainrot spawning on the Red Carpet.",
+        "visualEffect": "Gives the Brainrot a cyan, diamond-like appearance."
       },
       "system": {
         "slug": "diamond",
@@ -85,9 +145,13 @@
     {
       "item": {
         "name": "Rainbow",
+        "cardSummary": "A permanent color-cycling mutation with a 10× income multiplier.",
         "category": "Permanent",
         "multiplier": "10×",
-        "changesNotes": "Makes the mutated brainrot cycle between RGB colours. Been in-game since 21st June 2025 1% chance to spawn brainrot with this mutation on the red carpet. The chance increases with the Rainbow Machine Event."
+        "availability": "Permanent",
+        "introduced": "June 21, 2025",
+        "acquisition": "Has a 1% Red Carpet spawn chance, with improved odds during the Rainbow Machine event.",
+        "visualEffect": "Cycles the Brainrot through red, green, and blue colors."
       },
       "system": {
         "slug": "rainbow",
@@ -99,9 +163,13 @@
     {
       "item": {
         "name": "Bloodrot",
+        "cardSummary": "The dark-red mutation introduced with the Bloodmoon event.",
         "category": "Limited",
-        "multiplier": "2.5x",
-        "changesNotes": "Turns the mutated brainrot dark red. Been in-game since Update 2 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Bloodmoon event"
+        "multiplier": "2×",
+        "availability": "Admin Abuse / reruns",
+        "introduced": "June 7, 2025",
+        "acquisition": "Was applied during the Bloodmoon event and now depends on Admin Abuse or special reruns.",
+        "visualEffect": "Changes the Brainrot to a dark-red color."
       },
       "system": {
         "slug": "bloodrot",
@@ -113,9 +181,13 @@
     {
       "item": {
         "name": "Candy",
+        "cardSummary": "A pink event mutation with a 4× income multiplier.",
         "category": "Limited",
         "multiplier": "4×",
-        "changesNotes": "Turns the mutated brainrot pink. Been in-game since 5th July 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Candy Aurora event"
+        "availability": "Admin Abuse / reruns",
+        "introduced": "July 5, 2025",
+        "acquisition": "Was applied during the Candy Aurora event and now depends on Admin Abuse or special reruns.",
+        "visualEffect": "Changes the Brainrot to a bright pink color."
       },
       "system": {
         "slug": "candy",
@@ -127,9 +199,13 @@
     {
       "item": {
         "name": "Lava",
+        "cardSummary": "A molten orange event mutation with a 6× income multiplier.",
         "category": "Limited",
         "multiplier": "6×",
-        "changesNotes": "Turns the mutated brainrot neon orange. Been in-game since July 25, 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Molten event Formerly Activated every 1/3 hours"
+        "availability": "Admin Abuse / reruns",
+        "introduced": "July 25, 2025",
+        "acquisition": "Was applied during the Molten event and now depends on Admin Abuse or special reruns.",
+        "visualEffect": "Changes the Brainrot to a neon orange, molten color."
       },
       "system": {
         "slug": "lava",
@@ -141,9 +217,13 @@
     {
       "item": {
         "name": "Galaxy",
+        "cardSummary": "A neon-purple seasonal mutation with a 7× income multiplier.",
         "category": "Limited",
         "multiplier": "7×",
-        "changesNotes": "Turns the mutated brainrot neon purple. Been in-game since August 23, 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Galactic event Formerly Activated every 1/3 hours. Last mutation to do this."
+        "availability": "Admin Abuse / reruns",
+        "introduced": "August 23, 2025",
+        "acquisition": "Was applied during the Galactic event and now depends on Admin Abuse or special reruns.",
+        "visualEffect": "Changes the Brainrot to a neon purple color."
       },
       "system": {
         "slug": "galaxy",
@@ -155,9 +235,13 @@
     {
       "item": {
         "name": "Yin Yang",
+        "cardSummary": "A black-and-white event mutation with a 7.5× income multiplier.",
         "category": "Limited",
-        "multiplier": "7.5x",
-        "changesNotes": "Turns the mutated brainrot black and white. Been in-game since September 27, 2025 Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Yin Yang event Formerly Activated every 1/2 hours."
+        "multiplier": "7.5×",
+        "availability": "Admin Abuse / reruns",
+        "introduced": "September 27, 2025",
+        "acquisition": "Was applied during the Yin-Yang event and now depends on Admin Abuse or special reruns.",
+        "visualEffect": "Splits the Brainrot's appearance into black and white colors."
       },
       "system": {
         "slug": "yin-yang",
@@ -169,23 +253,31 @@
     {
       "item": {
         "name": "Radioactive",
+        "cardSummary": "A neon-green event mutation with an 8.5× income multiplier.",
         "category": "Limited",
         "multiplier": "8.5×",
-        "changesNotes": "Turns the mutated brainrot neon green and applies a hatch texture on it. Been in-game since November 15, 2025. Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Radioactive event Formerly Activated every 1/2 hours."
+        "availability": "Admin Abuse / reruns",
+        "introduced": "November 15, 2025",
+        "acquisition": "Was applied during the Radioactive event and now depends on Admin Abuse or special reruns.",
+        "visualEffect": "Adds neon-green coloring and a hatched radioactive texture."
       },
       "system": {
         "slug": "radioactive",
         "section": "Limited",
         "sortOrder": 10,
-        "image": null
+        "image": "/Steal%20a%20Brainrot/Mutations/radioactive.webp"
       }
     },
     {
       "item": {
         "name": "Cursed",
+        "cardSummary": "A red-and-black mutation from the Cursed event with a 9× multiplier.",
         "category": "Limited",
-        "multiplier": "9x",
-        "changesNotes": "Turns the mutated brainrot red and black. It gives off an \"energy source\". It also gives the brainrot red eyes, similar to the Tung Tung Attack trait. Been in-game since Jan 3, 2026. Unobtainable without Admin Abuse. Mild Chance to apply onto a brainrot during the Cursed event Formerly Activated every 1/2 hours."
+        "multiplier": "9×",
+        "availability": "Admin Abuse / reruns",
+        "introduced": "January 3, 2026",
+        "acquisition": "Was applied during the Cursed event and now depends on Admin Abuse or special reruns.",
+        "visualEffect": "Adds red-and-black coloring, red symbols, glowing eyes, and matching effects."
       },
       "system": {
         "slug": "cursed",
@@ -197,9 +289,13 @@
     {
       "item": {
         "name": "Divine",
+        "cardSummary": "A bright celestial mutation that shares Rainbow's 10× multiplier.",
         "category": "Limited",
-        "multiplier": "10x",
-        "changesNotes": "Turns the mutated brainrot bright yellow and white. Also applies a texture with white symbols that covers most of the brainrot's body. Been in-game since Feb. 21, 2026. Activates every 1/2 hours. Mild Chance to apply onto a brainrot during the Divine event"
+        "multiplier": "10×",
+        "availability": "Admin Abuse / reruns",
+        "introduced": "February 21, 2026",
+        "acquisition": "Was applied during the Divine event and now depends on Admin Abuse or special reruns.",
+        "visualEffect": "Adds bright yellow-white coloring and a layer of white symbols."
       },
       "system": {
         "slug": "divine",
@@ -211,9 +307,13 @@
     {
       "item": {
         "name": "Cyber",
+        "cardSummary": "A black-and-blue cybernetic mutation with an 11× income multiplier.",
         "category": "Limited",
-        "multiplier": "11x",
-        "changesNotes": "Turns the mutated brainrot Black and Blue. Also maakes the brainrot transparent or neon on some parts of the body. Will be in-game from Apr. 18, 2026. Activates every 1 hour. Mild Chance to apply onto a brainrot during the Cyber event"
+        "multiplier": "11×",
+        "availability": "Admin Abuse / reruns",
+        "introduced": "April 18, 2026",
+        "acquisition": "Was applied during the Cyber event and now depends on Admin Abuse or special reruns.",
+        "visualEffect": "Adds black-and-blue coloring with transparent, neon, and cybernetic-patterned areas."
       },
       "system": {
         "slug": "cyber",
@@ -224,16 +324,20 @@
     },
     {
       "item": {
-        "name": "Disco",
+        "name": "Phantom",
+        "cardSummary": "A dark spectral mutation with the highest listed mutation multiplier.",
         "category": "Limited",
-        "multiplier": "11x",
-        "changesNotes": "Makes the brainrot glow with green, purple, and cyan colors. Was going to release April 18th, 2026, but got placed with Cyber see above for more. It can release after Cyber ends. Unobtainable since it's Upcoming. Chance to make a Brainrot Disco during the Mutations Event."
+        "multiplier": "12×",
+        "availability": "Seasonal rotation",
+        "introduced": "June 13, 2026",
+        "acquisition": "Can be applied to Brainrots spawning while the Phantom event is active.",
+        "visualEffect": "Makes the Brainrot translucent black, with flickering transparency and rapidly flashing white features."
       },
       "system": {
-        "slug": "disco",
+        "slug": "phantom",
         "section": "Limited",
         "sortOrder": 14,
-        "image": "/Steal%20a%20Brainrot/Mutations/disco.webp"
+        "image": "/Steal%20a%20Brainrot/Mutations/phantom.webp"
       }
     }
   ]

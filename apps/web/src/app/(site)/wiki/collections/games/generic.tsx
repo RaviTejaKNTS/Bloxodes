@@ -634,6 +634,18 @@ const gameDatasetPreparedCollectionCache = new Map<string, Promise<GameDatasetPr
 const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "driving-empire-vehicles": 30_000,
   "evomon-monsters": 30_000,
+  // Area cards carry several unlock and facility fields; the default keeps too many
+  // image cards on one page and pushes the rendered HTML beyond the release limit.
+  "pet-simulator-99-areas": 60_000,
+  // Egg cards combine artwork with several acquisition and pet-pool fields; the
+  // default grouping produces pages above the HTML release-size ceiling.
+  "pet-simulator-99-eggs": 60_000,
+  // Potion cards include effect, duration, acquisition, crafting, and icon data;
+  // a lower target keeps every rendered section below the release-size ceiling.
+  "pet-simulator-99-potions": 60_000,
+  // The large pet index combines art with source, class, availability, and date
+  // fields; smaller pages keep its rendered payload safely under the limit.
+  "pet-simulator-99-pets": 60_000,
   // Image-dense bestiary: many fish icons push page HTML over the size gate at default weight.
   "fish-it-fish": 30_000,
   // Image-dense Evade nextbots/maps: 262 and 88 image cards exceed the HTML size gate at default weight.

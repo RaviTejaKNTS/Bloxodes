@@ -7,6 +7,7 @@
     "route": "/wiki/pet-simulator-99/shiny-relics",
     "catalogCode": "pet-simulator-99-shiny-relics",
     "itemFields": [
+      "cardSummary",
       "world",
       "area",
       "locationHint",
@@ -14,6 +15,7 @@
       "progressNote"
     ],
     "columns": [
+      "cardSummary",
       "world",
       "area",
       "locationHint",
@@ -29,10 +31,13 @@
         "World 3 - Void World",
         "World 4 - Fantasy World"
       ],
-      "badgeField": null,
-      "subtitleFields": [],
-      "descriptionField": null,
-      "cardDescriptionField": null,
+      "badgeField": "world",
+      "subtitleFields": [
+        "area",
+        "space"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
         "world",
         "area",
@@ -47,13 +52,35 @@
         "space",
         "progressNote"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "world": {
+          "kind": "normal",
+          "label": "World"
+        },
+        "area": {
+          "kind": "normal",
+          "label": "Area"
+        },
+        "locationHint": {
+          "kind": "detail",
+          "label": "Location hint"
+        },
+        "space": {
+          "kind": "normal",
+          "label": "Space"
+        },
+        "progressNote": {
+          "kind": "detail",
+          "label": "Progress note"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
         "name": "Shiny Relic #1",
+        "cardSummary": "A Trading Plaza route stop outside the numbered worlds, using one of the hub's hidden landmarks.",
         "world": "Trading Plaza",
         "area": "Trading Plaza",
         "locationHint": "Underneath the bridge to the VIP Only area.",
@@ -70,6 +97,7 @@
     {
       "item": {
         "name": "Shiny Relic #2",
+        "cardSummary": "A Trading Plaza route stop outside the numbered worlds, using one of the hub's hidden landmarks.",
         "world": "Trading Plaza",
         "area": "Trading Plaza",
         "locationHint": "Behind the fanart poster.",
@@ -86,6 +114,7 @@
     {
       "item": {
         "name": "Shiny Relic #3",
+        "cardSummary": "A Trading Plaza route stop outside the numbered worlds, using one of the hub's hidden landmarks.",
         "world": "Trading Plaza",
         "area": "Trading Plaza",
         "locationHint": "Behind the tree next to the Trading Terminal.",
@@ -102,6 +131,7 @@
     {
       "item": {
         "name": "Shiny Relic #4",
+        "cardSummary": "A World 1 route relic hidden in Area 1 - Spawn; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 1 - Spawn",
         "locationHint": "Behind a bush near the orange building.",
@@ -118,6 +148,7 @@
     {
       "item": {
         "name": "Shiny Relic #5",
+        "cardSummary": "A World 1 route relic hidden in Area 1 - Spawn; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 1 - Spawn",
         "locationHint": "Near the \"Like The Game\" board and purple flower.",
@@ -134,6 +165,7 @@
     {
       "item": {
         "name": "Shiny Relic #6",
+        "cardSummary": "A World 1 route relic hidden in Area 1 - Spawn; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 1 - Spawn",
         "locationHint": "Behind the Social Rewards sign at Spawn.",
@@ -150,6 +182,7 @@
     {
       "item": {
         "name": "Shiny Relic #7",
+        "cardSummary": "A World 1 route relic hidden in Area 3 - Castle; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 3 - Castle",
         "locationHint": "Behind the Free Diamond rewards.",
@@ -166,6 +199,7 @@
     {
       "item": {
         "name": "Shiny Relic #8",
+        "cardSummary": "A World 1 route relic hidden in Area 5 - Autumn; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 5 - Autumn",
         "locationHint": "Behind the entrance to the Classic Obby mini-game.",
@@ -182,6 +216,7 @@
     {
       "item": {
         "name": "Shiny Relic #9",
+        "cardSummary": "A World 1 route relic hidden in Area 6 - Cherry Blossom; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 6 - Cherry Blossom",
         "locationHint": "To the left of the Potions vending machine, leaning on the Japanese torii gate.",
@@ -198,6 +233,7 @@
     {
       "item": {
         "name": "Shiny Relic #10",
+        "cardSummary": "A World 1 route relic hidden in Area 7 - Farm; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 7 - Farm",
         "locationHint": "Inside the box to the left of the Windmill.",
@@ -214,6 +250,7 @@
     {
       "item": {
         "name": "Shiny Relic #11",
+        "cardSummary": "A World 1 route relic hidden in Area 8 - Backyard; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 8 - Backyard",
         "locationHint": "In a crack in the wall, on the right side of the area as soon as you enter.",
@@ -230,6 +267,7 @@
     {
       "item": {
         "name": "Shiny Relic #12",
+        "cardSummary": "A World 1 route relic hidden in Area 9 - Misty Falls; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 9 - Misty Falls",
         "locationHint": "In the pond near the Enchants vending machine.",
@@ -246,6 +284,7 @@
     {
       "item": {
         "name": "Shiny Relic #13",
+        "cardSummary": "A World 1 route relic hidden in Area 12 - Dead Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 12 - Dead Forest",
         "locationHint": "In a bush near the right entrance pillar.",
@@ -262,6 +301,7 @@
     {
       "item": {
         "name": "Shiny Relic #14",
+        "cardSummary": "A World 1 route relic hidden in Area 13 - Dark Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 13 - Dark Forest",
         "locationHint": "On the cover of the 3rd tombstone.",
@@ -278,6 +318,7 @@
     {
       "item": {
         "name": "Shiny Relic #15",
+        "cardSummary": "A World 1 route relic hidden in Area 13 - Dark Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 13 - Dark Forest",
         "locationHint": "Behind a tombstone to the left of the Potions Upgrade station.",
@@ -294,6 +335,7 @@
     {
       "item": {
         "name": "Shiny Relic #16",
+        "cardSummary": "A World 1 route relic hidden in Area 15 - Enchanted Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 15 - Enchanted Forest",
         "locationHint": "Behind the tree and bush directly to the left as you enter the area.",
@@ -310,6 +352,7 @@
     {
       "item": {
         "name": "Shiny Relic #17",
+        "cardSummary": "A World 1 route relic hidden in Area 15 - Enchanted Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 15 - Enchanted Forest",
         "locationHint": "In a log to the left of the big tree.",
@@ -326,6 +369,7 @@
     {
       "item": {
         "name": "Shiny Relic #18",
+        "cardSummary": "A World 1 route relic hidden in Area 18 - Jungle Temple; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 18 - Jungle Temple",
         "locationHint": "On the temple across from the portal for the Jungle Obby mini-game.",
@@ -342,6 +386,7 @@
     {
       "item": {
         "name": "Shiny Relic #19",
+        "cardSummary": "A World 1 side-space relic inside Area 18 - Jungle Obby, separate from the main numbered-area sweep.",
         "world": "World 1",
         "area": "Area 18 - Jungle Obby",
         "locationHint": "Right after the axes, pass through the arch and follow the secret path behind the pillar to the right.",
@@ -358,6 +403,7 @@
     {
       "item": {
         "name": "Shiny Relic #20",
+        "cardSummary": "A World 1 route relic hidden in Area 20 - Beach; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 20 - Beach",
         "locationHint": "In a bucket in the top left corner of the zone, near the chest.",
@@ -374,6 +420,7 @@
     {
       "item": {
         "name": "Shiny Relic #21",
+        "cardSummary": "A World 1 route relic hidden in Area 20 - Beach; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 20 - Beach",
         "locationHint": "In a bucket behind the daycare.",
@@ -390,6 +437,7 @@
     {
       "item": {
         "name": "Shiny Relic #22",
+        "cardSummary": "A World 1 route relic hidden in Area 21 - Coral Reef; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 21 - Coral Reef",
         "locationHint": "Inside the yellow coral/plants on the right side.",
@@ -406,6 +454,7 @@
     {
       "item": {
         "name": "Shiny Relic #23",
+        "cardSummary": "A World 1 route relic hidden in Area 23 - Atlantis; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 23 - Atlantis",
         "locationHint": "On top of the pillar to the left of the Atlantis minigame entrance.",
@@ -422,6 +471,7 @@
     {
       "item": {
         "name": "Shiny Relic #24",
+        "cardSummary": "A World 1 side-space relic inside Area 23 - Atlantis Minigame, separate from the main numbered-area sweep.",
         "world": "World 1",
         "area": "Area 23 - Atlantis Minigame",
         "locationHint": "From the start, go around the entrance to the right. It's behind the large rock in front of you, next to the pillar leaning on the wall.",
@@ -438,6 +488,7 @@
     {
       "item": {
         "name": "Shiny Relic #25",
+        "cardSummary": "A World 1 route relic hidden in Area 24 - Palm Beach; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 24 - Palm Beach",
         "locationHint": "On top of the Tunnel connecting Area 16 and 24.",
@@ -454,6 +505,7 @@
     {
       "item": {
         "name": "Shiny Relic #26",
+        "cardSummary": "A World 1 route relic hidden in Area 24 - Palm Beach (Area 16-24 Tunnel); check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 24 - Palm Beach (Area 16-24 Tunnel)",
         "locationHint": "In the Tunnel connecting Area 16 and 24.",
@@ -470,6 +522,7 @@
     {
       "item": {
         "name": "Shiny Relic #27",
+        "cardSummary": "A World 1 route relic hidden in Area 25 - Tiki; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 25 - Tiki",
         "locationHint": "Behind the Tiki totem directly to the left of the Rebirth 1 statue.",
@@ -486,6 +539,7 @@
     {
       "item": {
         "name": "Shiny Relic #28",
+        "cardSummary": "A World 1 route relic hidden in Area 26 - Pirate Cove; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 26 - Pirate Cove",
         "locationHint": "In a coin pile directly to the left as you enter the area.",
@@ -502,6 +556,7 @@
     {
       "item": {
         "name": "Shiny Relic #29",
+        "cardSummary": "A World 1 route relic hidden in Area 26 - Pirate Cove; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 26 - Pirate Cove",
         "locationHint": "In a coin pile to the right of the Fruits II vending machine.",
@@ -518,6 +573,7 @@
     {
       "item": {
         "name": "Shiny Relic #30",
+        "cardSummary": "A World 1 route relic hidden in Area 27 - Pirate Tavern; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 27 - Pirate Tavern",
         "locationHint": "In the boat beside the Fishing minigame entrance dock.",
@@ -534,6 +590,7 @@
     {
       "item": {
         "name": "Shiny Relic #31",
+        "cardSummary": "A World 1 side-space relic inside Area 27 - Fishing, separate from the main numbered-area sweep.",
         "world": "World 1",
         "area": "Area 27 - Fishing",
         "locationHint": "Behind a starfish to the left of the map.",
@@ -550,6 +607,7 @@
     {
       "item": {
         "name": "Shiny Relic #32",
+        "cardSummary": "A World 1 route relic hidden in Area 30 - Fossil Digsite; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 30 - Fossil Digsite",
         "locationHint": "Behind a fossil to the right of the portal.",
@@ -566,6 +624,7 @@
     {
       "item": {
         "name": "Shiny Relic #33",
+        "cardSummary": "A World 1 side-space relic inside Area 30 - Digsite, separate from the main numbered-area sweep.",
         "world": "World 1",
         "area": "Area 30 - Digsite",
         "locationHint": "At the back of the Digsite map.",
@@ -582,6 +641,7 @@
     {
       "item": {
         "name": "Shiny Relic #34",
+        "cardSummary": "A World 1 route relic hidden in Area 31 - Desert Pyramids; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 31 - Desert Pyramids",
         "locationHint": "Behind some cacti to the right of the pyramid.",
@@ -598,6 +658,7 @@
     {
       "item": {
         "name": "Shiny Relic #35",
+        "cardSummary": "A World 1 route relic hidden in Area 33 - Wild West; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 33 - Wild West",
         "locationHint": "In the window of the shortest building on the right side of the area.",
@@ -614,6 +675,7 @@
     {
       "item": {
         "name": "Shiny Relic #36",
+        "cardSummary": "A World 1 route relic hidden in Area 34 - Grand Canyons; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 34 - Grand Canyons",
         "locationHint": "In the right side of the area in the cliff beside a yellow rock.",
@@ -630,6 +692,7 @@
     {
       "item": {
         "name": "Shiny Relic #37",
+        "cardSummary": "A World 1 route relic hidden in Area 36 - Mountains; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 36 - Mountains",
         "locationHint": "In a tree on the left side of the area.",
@@ -646,6 +709,7 @@
     {
       "item": {
         "name": "Shiny Relic #38",
+        "cardSummary": "A World 1 route relic hidden in Area 37 - Snow Village; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 37 - Snow Village",
         "locationHint": "On top the cabin closest to the Lucky Eggs upgrade.",
@@ -662,6 +726,7 @@
     {
       "item": {
         "name": "Shiny Relic #39",
+        "cardSummary": "A World 1 route relic hidden in Area 37 - Snow Village; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 37 - Snow Village",
         "locationHint": "Behind the building furthest to the left.",
@@ -678,6 +743,7 @@
     {
       "item": {
         "name": "Shiny Relic #40",
+        "cardSummary": "A World 1 route relic hidden in Area 39 - Ice Rink; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 39 - Ice Rink",
         "locationHint": "Being held by a snowman on the right side.",
@@ -694,6 +760,7 @@
     {
       "item": {
         "name": "Shiny Relic #41",
+        "cardSummary": "A World 1 route relic hidden in Area 40 - Ski Town; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 40 - Ski Town",
         "locationHint": "Behind the house furthest to the left of the ski lift.",
@@ -710,6 +777,7 @@
     {
       "item": {
         "name": "Shiny Relic #42",
+        "cardSummary": "A World 1 route relic hidden in Area 41 - Hot Springs; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 41 - Hot Springs",
         "locationHint": "In the waterfall closest to Area 42.",
@@ -726,6 +794,7 @@
     {
       "item": {
         "name": "Shiny Relic #43",
+        "cardSummary": "A World 1 route relic hidden in Area 42 - Fire and Ice; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 42 - Fire and Ice",
         "locationHint": "Inside of an ice pillar, before the black stone on the left.",
@@ -742,6 +811,7 @@
     {
       "item": {
         "name": "Shiny Relic #44",
+        "cardSummary": "A World 1 route relic hidden in Area 43 - Volcano; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 43 - Volcano",
         "locationHint": "The right of the entrance, beside a fossil in the lava.",
@@ -758,6 +828,7 @@
     {
       "item": {
         "name": "Shiny Relic #45",
+        "cardSummary": "A World 1 route relic hidden in Area 44 - Obsidian Cave; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 44 - Obsidian Cave",
         "locationHint": "To the right of the tunnel.",
@@ -774,6 +845,7 @@
     {
       "item": {
         "name": "Shiny Relic #46",
+        "cardSummary": "A World 1 route relic hidden in Area 45 - Lava Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 45 - Lava Forest",
         "locationHint": "To the left of Chest Rush in the lava.",
@@ -790,6 +862,7 @@
     {
       "item": {
         "name": "Shiny Relic #47",
+        "cardSummary": "A World 1 route relic hidden in Area 46 - Underworld; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 46 - Underworld",
         "locationHint": "To the left of the entrance in a skull.",
@@ -806,6 +879,7 @@
     {
       "item": {
         "name": "Shiny Relic #48",
+        "cardSummary": "A World 1 route relic hidden in Area 47 - Underworld Bridge; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 47 - Underworld Bridge",
         "locationHint": "To the left of the Rare Potions machine over the half-wall.",
@@ -822,6 +896,7 @@
     {
       "item": {
         "name": "Shiny Relic #49",
+        "cardSummary": "A World 1 route relic hidden in Area 50 - Fire Dojo; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 50 - Fire Dojo",
         "locationHint": "On the Japanese torii gate before the tunnel to Area 44.",
@@ -838,6 +913,7 @@
     {
       "item": {
         "name": "Shiny Relic #50",
+        "cardSummary": "A World 1 route relic hidden in Area 50 - Fire Dojo; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 50 - Fire Dojo",
         "locationHint": "Behind the right pillar of the Rebirth Statue.",
@@ -854,6 +930,7 @@
     {
       "item": {
         "name": "Shiny Relic #51",
+        "cardSummary": "A World 1 route relic hidden in Area 51 - Samurai Village; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 51 - Samurai Village",
         "locationHint": "In a crack to the temple in which you entered, to the left.",
@@ -870,6 +947,7 @@
     {
       "item": {
         "name": "Shiny Relic #52",
+        "cardSummary": "A World 1 route relic hidden in Area 52 - Bamboo Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 52 - Bamboo Forest",
         "locationHint": "In the hut closest to the Upgrade Fruits station.",
@@ -886,6 +964,7 @@
     {
       "item": {
         "name": "Shiny Relic #53",
+        "cardSummary": "A World 1 side-space relic inside Area 54 - Flower Garden, separate from the main numbered-area sweep.",
         "world": "World 1",
         "area": "Area 54 - Flower Garden",
         "locationHint": "To the left of the flower garden exit.",
@@ -902,6 +981,7 @@
     {
       "item": {
         "name": "Shiny Relic #54",
+        "cardSummary": "A World 1 route relic hidden in Area 56 - Fairytale Castle; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 56 - Fairytale Castle",
         "locationHint": "Behind the clan ticket sign.",
@@ -918,6 +998,7 @@
     {
       "item": {
         "name": "Shiny Relic #55",
+        "cardSummary": "A World 1 route relic hidden in Area 58 - Fairy Castle; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 58 - Fairy Castle",
         "locationHint": "In a space between the stones on the left side of the castle.",
@@ -934,6 +1015,7 @@
     {
       "item": {
         "name": "Shiny Relic #56",
+        "cardSummary": "A World 1 route relic hidden in Area 59 - Cozy Village; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 59 - Cozy Village",
         "locationHint": "Behind the 4th house in the left group of houses.",
@@ -950,6 +1032,7 @@
     {
       "item": {
         "name": "Shiny Relic #57",
+        "cardSummary": "A World 1 route relic hidden in Area 63 - Frost Mountains; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 63 - Frost Mountains",
         "locationHint": "In the ice diamond to the right of the snow merchant.",
@@ -966,6 +1049,7 @@
     {
       "item": {
         "name": "Shiny Relic #58",
+        "cardSummary": "A World 1 route relic hidden in Area 64 - Ice Sculptures; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 64 - Ice Sculptures",
         "locationHint": "Behind the ice formation next to the frozen pond.",
@@ -982,6 +1066,7 @@
     {
       "item": {
         "name": "Shiny Relic #59",
+        "cardSummary": "A World 1 route relic hidden in Area 65 - Snowman Town; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 65 - Snowman Town",
         "locationHint": "Behind the large snowman at the top of the slope.",
@@ -998,6 +1083,7 @@
     {
       "item": {
         "name": "Shiny Relic #60",
+        "cardSummary": "A World 1 route relic hidden in Area 67 - Polar Express; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 67 - Polar Express",
         "locationHint": "On the backside of the train carriage.",
@@ -1014,6 +1100,7 @@
     {
       "item": {
         "name": "Shiny Relic #61",
+        "cardSummary": "A World 1 route relic hidden in Area 68 - Firefly Cold Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 68 - Firefly Cold Forest",
         "locationHint": "On the cabin's back window.",
@@ -1030,6 +1117,7 @@
     {
       "item": {
         "name": "Shiny Relic #62",
+        "cardSummary": "A World 1 route relic hidden in Area 71 - Ancient Ruins; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 71 - Ancient Ruins",
         "locationHint": "To the right of the entrance, on the 2nd pillar.",
@@ -1046,6 +1134,7 @@
     {
       "item": {
         "name": "Shiny Relic #63",
+        "cardSummary": "A World 1 route relic hidden in Area 72 - Runic Altar; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 72 - Runic Altar",
         "locationHint": "Towards the end of the location, on a pillar next to a stone.",
@@ -1062,6 +1151,7 @@
     {
       "item": {
         "name": "Shiny Relic #64",
+        "cardSummary": "A World 1 route relic hidden in Area 73 - Wizard Tower; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 73 - Wizard Tower",
         "locationHint": "To the left of the castle, in the waterfall.",
@@ -1078,6 +1168,7 @@
     {
       "item": {
         "name": "Shiny Relic #65",
+        "cardSummary": "A World 1 route relic hidden in Area 74 - Witch Marsh; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 74 - Witch Marsh",
         "locationHint": "To the left of the entrance, on the 2nd tombstone.",
@@ -1094,6 +1185,7 @@
     {
       "item": {
         "name": "Shiny Relic #66",
+        "cardSummary": "A World 1 route relic hidden in Area 75 - Haunted Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 75 - Haunted Forest",
         "locationHint": "On top of the rock formation in the purple water.",
@@ -1110,6 +1202,7 @@
     {
       "item": {
         "name": "Shiny Relic #67",
+        "cardSummary": "A World 1 route relic hidden in Area 77 - Haunted Mansion; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 77 - Haunted Mansion",
         "locationHint": "On the right window of the mansion.",
@@ -1126,6 +1219,7 @@
     {
       "item": {
         "name": "Shiny Relic #68",
+        "cardSummary": "A World 1 route relic hidden in Area 78 - Dungeon Entrance; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 78 - Dungeon Entrance",
         "locationHint": "In the direct left corner as you enter, before the Free Diamonds claim.",
@@ -1142,6 +1236,7 @@
     {
       "item": {
         "name": "Shiny Relic #69",
+        "cardSummary": "A World 1 route relic hidden in Area 79 - Dungeon; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 79 - Dungeon",
         "locationHint": "Behind the singular banner on the wall, will need to tilt your camera.",
@@ -1158,6 +1253,7 @@
     {
       "item": {
         "name": "Shiny Relic #70",
+        "cardSummary": "A World 1 side-space relic inside Area 79 - Advanced Digsite, separate from the main numbered-area sweep.",
         "world": "World 1",
         "area": "Area 79 - Advanced Digsite",
         "locationHint": "On the right far top side of the advanced digsite.",
@@ -1174,6 +1270,7 @@
     {
       "item": {
         "name": "Shiny Relic #71",
+        "cardSummary": "A World 1 route relic hidden in Area 80 - Treasure Dungeon; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 80 - Treasure Dungeon",
         "locationHint": "Behind the first chest on the right.",
@@ -1190,6 +1287,7 @@
     {
       "item": {
         "name": "Shiny Relic #72",
+        "cardSummary": "A World 1 route relic hidden in Area 81 - Empyrean Dungeon; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 81 - Empyrean Dungeon",
         "locationHint": "On the wall to the right of the area.",
@@ -1206,6 +1304,7 @@
     {
       "item": {
         "name": "Shiny Relic #73",
+        "cardSummary": "A World 1 route relic hidden in Area 83 - Cotton Candy Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 83 - Cotton Candy Forest",
         "locationHint": "Inside the blue colored cotton candy tree across from the Free Potions claim.",
@@ -1222,6 +1321,7 @@
     {
       "item": {
         "name": "Shiny Relic #74",
+        "cardSummary": "A World 1 route relic hidden in Area 84 - Gummy Forest; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 84 - Gummy Forest",
         "locationHint": "On top of the only orange tree with a ladder on the left side of the area.",
@@ -1238,6 +1338,7 @@
     {
       "item": {
         "name": "Shiny Relic #75",
+        "cardSummary": "A World 1 route relic hidden in Area 85 - Chocolate Waterfall; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 85 - Chocolate Waterfall",
         "locationHint": "Inside the waterwall, left of the entrance to the area.",
@@ -1254,6 +1355,7 @@
     {
       "item": {
         "name": "Shiny Relic #76",
+        "cardSummary": "A World 1 route relic hidden in Area 86 - Sweets; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 86 - Sweets",
         "locationHint": "On top of the Ice Cream pillar directly to the right of the entrance of the area.",
@@ -1270,6 +1372,7 @@
     {
       "item": {
         "name": "Shiny Relic #77",
+        "cardSummary": "A World 1 route relic hidden in Area 87 - Toys and Blocks; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 87 - Toys and Blocks",
         "locationHint": "Behind the stacked blocks to the left of the stairway entrance into Lucky Blocks.",
@@ -1286,6 +1389,7 @@
     {
       "item": {
         "name": "Shiny Relic #78",
+        "cardSummary": "A World 1 side-space relic inside Area 87 - Lucky Blocks, separate from the main numbered-area sweep.",
         "world": "World 1",
         "area": "Area 87 - Lucky Blocks",
         "locationHint": "In the far left corner of the minigame area behind some bushes.",
@@ -1302,6 +1406,7 @@
     {
       "item": {
         "name": "Shiny Relic #79",
+        "cardSummary": "A World 1 route relic hidden in Area 88 - Carnival; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 88 - Carnival",
         "locationHint": "Inside the orange tent to the left of the ferris wheel.",
@@ -1318,6 +1423,7 @@
     {
       "item": {
         "name": "Shiny Relic #80",
+        "cardSummary": "A World 1 route relic hidden in Area 89 - Theme Park; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 89 - Theme Park",
         "locationHint": "Inside the only red house in the area, inside the popcorn machine.",
@@ -1334,6 +1440,7 @@
     {
       "item": {
         "name": "Shiny Relic #81",
+        "cardSummary": "A World 1 route relic hidden in Area 91 - Cloud Garden; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 91 - Cloud Garden",
         "locationHint": "Behind the furthest left purple stone pillar in the Garden's gazebo.",
@@ -1350,6 +1457,7 @@
     {
       "item": {
         "name": "Shiny Relic #82",
+        "cardSummary": "A World 1 side-space relic inside Area 92 - Advanced Fishing, separate from the main numbered-area sweep.",
         "world": "World 1",
         "area": "Area 92 - Advanced Fishing",
         "locationHint": "Behind the Fishing Merchant store, to the left, behind a tree.",
@@ -1366,6 +1474,7 @@
     {
       "item": {
         "name": "Shiny Relic #83",
+        "cardSummary": "A World 1 route relic hidden in Area 93 - Cotton Cloud Houses; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 93 - Cotton Cloud Houses",
         "locationHint": "On top of house closest to the Pet Damage upgrade in the left of the area.",
@@ -1382,6 +1491,7 @@
     {
       "item": {
         "name": "Shiny Relic #84",
+        "cardSummary": "A World 1 route relic hidden in Area 95 - Heaven's Gate; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 95 - Heaven's Gate",
         "locationHint": "Behind the right gate.",
@@ -1398,6 +1508,7 @@
     {
       "item": {
         "name": "Shiny Relic #85",
+        "cardSummary": "A World 1 route relic hidden in Area 97 - Heaven Golden Castle; check it before moving to the next zone.",
         "world": "World 1",
         "area": "Area 97 - Heaven Golden Castle",
         "locationHint": "To the left of the stairs leading up to the castle.",
@@ -1414,6 +1525,7 @@
     {
       "item": {
         "name": "Shiny Relic #86",
+        "cardSummary": "A World 2 route relic hidden in Area 100 - Tech Spawn; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 100 - Tech Spawn",
         "locationHint": "In the wall left of the Pet Index screen.",
@@ -1430,6 +1542,7 @@
     {
       "item": {
         "name": "Shiny Relic #87",
+        "cardSummary": "A World 2 route relic hidden in Area 102 - Hologram forest; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 102 - Hologram forest",
         "locationHint": "Behind and on the right of the Warp Portal.",
@@ -1446,6 +1559,7 @@
     {
       "item": {
         "name": "Shiny Relic #88",
+        "cardSummary": "A World 2 route relic hidden in Area 103 - Robot Farm; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 103 - Robot Farm",
         "locationHint": "Behind the top hay bale on the right side.",
@@ -1462,6 +1576,7 @@
     {
       "item": {
         "name": "Shiny Relic #89",
+        "cardSummary": "A World 2 route relic hidden in Area 104 - Bit Stream; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 104 - Bit Stream",
         "locationHint": "Behind the left rock on the left side of the area.",
@@ -1478,6 +1593,7 @@
     {
       "item": {
         "name": "Shiny Relic #90",
+        "cardSummary": "A World 2 route relic hidden in Area 106 - Mushroom Lab; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 106 - Mushroom Lab",
         "locationHint": "Behind the tree left of the Warp Portal.",
@@ -1494,6 +1610,7 @@
     {
       "item": {
         "name": "Shiny Relic #91",
+        "cardSummary": "A World 2 route relic hidden in Area 108 - Data Tree Farm; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 108 - Data Tree Farm",
         "locationHint": "Behind the bushes on the left side.",
@@ -1510,6 +1627,7 @@
     {
       "item": {
         "name": "Shiny Relic #92",
+        "cardSummary": "A World 2 route relic hidden in Area 109 - Tech Jungle; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 109 - Tech Jungle",
         "locationHint": "Top of middle tree on the right side.",
@@ -1526,6 +1644,7 @@
     {
       "item": {
         "name": "Shiny Relic #93",
+        "cardSummary": "A World 2 route relic hidden in Area 111 - Oasis Ruins; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 111 - Oasis Ruins",
         "locationHint": "Behind the control panel on the left side.",
@@ -1542,6 +1661,7 @@
     {
       "item": {
         "name": "Shiny Relic #94",
+        "cardSummary": "A World 2 route relic hidden in Area 112 - Future Beach; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 112 - Future Beach",
         "locationHint": "Between the rocks on the left on the right side of the area.",
@@ -1558,6 +1678,7 @@
     {
       "item": {
         "name": "Shiny Relic #95",
+        "cardSummary": "A World 2 route relic hidden in Area 113 - Tech Reef; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 113 - Tech Reef",
         "locationHint": "On a yellow Coral pipe in the far corner above water level.",
@@ -1574,6 +1695,7 @@
     {
       "item": {
         "name": "Shiny Relic #96",
+        "cardSummary": "A World 2 route relic hidden in Area 114 - Robo Pirates; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 114 - Robo Pirates",
         "locationHint": "Behind the shipwreck pillar on the left side.",
@@ -1590,6 +1712,7 @@
     {
       "item": {
         "name": "Shiny Relic #97",
+        "cardSummary": "A World 2 route relic hidden in Area 114 - Robo Pirates; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 114 - Robo Pirates",
         "locationHint": "On top of the shipwreck pillar on the right side.",
@@ -1606,6 +1729,7 @@
     {
       "item": {
         "name": "Shiny Relic #98",
+        "cardSummary": "A World 2 route relic hidden in Area 119 - Tech Wild West; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 119 - Tech Wild West",
         "locationHint": "On the building on the left behind the \"The Water Hole\" sign.",
@@ -1622,6 +1746,7 @@
     {
       "item": {
         "name": "Shiny Relic #99",
+        "cardSummary": "A World 2 route relic hidden in Area 122 - Frostbyte Forest; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 122 - Frostbyte Forest",
         "locationHint": "Between the ice rocks left of the Free Enchants chest.",
@@ -1638,6 +1763,7 @@
     {
       "item": {
         "name": "Shiny Relic #100",
+        "cardSummary": "A World 2 route relic hidden in Area 123 - Forcefield Mine; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 123 - Forcefield Mine",
         "locationHint": "On the ledge in the snow on the right side.",
@@ -1654,6 +1780,7 @@
     {
       "item": {
         "name": "Shiny Relic #101",
+        "cardSummary": "A World 2 route relic hidden in Area 126 - Cracked Iceberg; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 126 - Cracked Iceberg",
         "locationHint": "Between the ice sheets on the left side.",
@@ -1670,6 +1797,7 @@
     {
       "item": {
         "name": "Shiny Relic #102",
+        "cardSummary": "A World 2 route relic hidden in Area 128 - Nexus; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 128 - Nexus",
         "locationHint": "On the building on the right side.",
@@ -1686,6 +1814,7 @@
     {
       "item": {
         "name": "Shiny Relic #103",
+        "cardSummary": "A World 2 route relic hidden in Area 129 - Secure Coast; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 129 - Secure Coast",
         "locationHint": "In the ticket booth on the left side.",
@@ -1702,6 +1831,7 @@
     {
       "item": {
         "name": "Shiny Relic #104",
+        "cardSummary": "A World 2 route relic hidden in Area 131 - Radiation Mine; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 131 - Radiation Mine",
         "locationHint": "Behind the left grate on the left side.",
@@ -1718,6 +1848,7 @@
     {
       "item": {
         "name": "Shiny Relic #105",
+        "cardSummary": "A World 2 route relic hidden in Area 132 - Exploded Reactor; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 132 - Exploded Reactor",
         "locationHint": "Behind the rock on the left side.",
@@ -1734,6 +1865,7 @@
     {
       "item": {
         "name": "Shiny Relic #106",
+        "cardSummary": "A World 2 route relic hidden in Area 133 - Spaceship Dock; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 133 - Spaceship Dock",
         "locationHint": "Left of the rocket on the right side.",
@@ -1750,6 +1882,7 @@
     {
       "item": {
         "name": "Shiny Relic #107",
+        "cardSummary": "A World 2 route relic hidden in Area 135 - Lunar Planet; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 135 - Lunar Planet",
         "locationHint": "Behind the big satellite dish on the left side.",
@@ -1766,6 +1899,7 @@
     {
       "item": {
         "name": "Shiny Relic #108",
+        "cardSummary": "A World 2 route relic hidden in Area 137 - Saturn Planet; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 137 - Saturn Planet",
         "locationHint": "On the stone pillar behind the satellite dish on the right.",
@@ -1782,6 +1916,7 @@
     {
       "item": {
         "name": "Shiny Relic #109",
+        "cardSummary": "A World 2 route relic hidden in Area 138 - Comet Planet; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 138 - Comet Planet",
         "locationHint": "On the back of the big comet on the left side.",
@@ -1798,6 +1933,7 @@
     {
       "item": {
         "name": "Shiny Relic #110",
+        "cardSummary": "A World 2 route relic hidden in Area 140 - Electric Garden; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 140 - Electric Garden",
         "locationHint": "Between the pointy bush behind the stand on the left side.",
@@ -1814,6 +1950,7 @@
     {
       "item": {
         "name": "Shiny Relic #111",
+        "cardSummary": "A World 2 route relic hidden in Area 142 - Neon City; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 142 - Neon City",
         "locationHint": "In the electrical box behind the portal on the right side.",
@@ -1830,6 +1967,7 @@
     {
       "item": {
         "name": "Shiny Relic #112",
+        "cardSummary": "A World 2 route relic hidden in Area 144 - Robot Factory; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 144 - Robot Factory",
         "locationHint": "Behind the pipes in the far end of the right side.",
@@ -1846,6 +1984,7 @@
     {
       "item": {
         "name": "Shiny Relic #113",
+        "cardSummary": "A World 2 route relic hidden in Area 145 - Egg Incubator; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 145 - Egg Incubator",
         "locationHint": "On the electrical box left of the Exclusive Daycare on the left side.",
@@ -1862,6 +2001,7 @@
     {
       "item": {
         "name": "Shiny Relic #114",
+        "cardSummary": "A World 2 route relic hidden in Area 147 - Spore Garden; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 147 - Spore Garden",
         "locationHint": "In between rocks on the left side of the entrance.",
@@ -1878,6 +2018,7 @@
     {
       "item": {
         "name": "Shiny Relic #115",
+        "cardSummary": "A World 2 route relic hidden in Area 149 - Alien Lab; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 149 - Alien Lab",
         "locationHint": "On the control panel between the second and third incubator on the right side.",
@@ -1894,6 +2035,7 @@
     {
       "item": {
         "name": "Shiny Relic #116",
+        "cardSummary": "A World 2 route relic hidden in Area 151 - Space Forge; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 151 - Space Forge",
         "locationHint": "Behind the first curved pillar on the right side.",
@@ -1910,6 +2052,7 @@
     {
       "item": {
         "name": "Shiny Relic #117",
+        "cardSummary": "A World 2 route relic hidden in Area 153 - Space Junkyard; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 153 - Space Junkyard",
         "locationHint": "In the satellite dish behind the Warp Portal.",
@@ -1926,6 +2069,7 @@
     {
       "item": {
         "name": "Shiny Relic #118",
+        "cardSummary": "A World 2 route relic hidden in Area 155 - Steampunk Town; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 155 - Steampunk Town",
         "locationHint": "In the golden cog left of the Enchants V Vending machine.",
@@ -1942,6 +2086,7 @@
     {
       "item": {
         "name": "Shiny Relic #119",
+        "cardSummary": "A World 2 route relic hidden in Area 157 - Steampunk Airship; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 157 - Steampunk Airship",
         "locationHint": "Behind the rocks behind the free items.",
@@ -1958,6 +2103,7 @@
     {
       "item": {
         "name": "Shiny Relic #120",
+        "cardSummary": "A World 2 route relic hidden in Area 159 - Mothership Circuit Board; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 159 - Mothership Circuit Board",
         "locationHint": "In the yellow lightbox behind the Treasure Hideout entry gate.",
@@ -1974,6 +2120,7 @@
     {
       "item": {
         "name": "Shiny Relic #121",
+        "cardSummary": "A World 2 route relic hidden in Area 160 - Wizard Ruins; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 160 - Wizard Ruins",
         "locationHint": "Inside of the ruined tower to your right when you enter.",
@@ -1990,6 +2137,7 @@
     {
       "item": {
         "name": "Shiny Relic #122",
+        "cardSummary": "A World 2 route relic hidden in Area 161 - Wizard Forest; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 161 - Wizard Forest",
         "locationHint": "The stone to the right of the altar, behind it.",
@@ -2006,6 +2154,7 @@
     {
       "item": {
         "name": "Shiny Relic #123",
+        "cardSummary": "A World 2 route relic hidden in Area 162 - Wizard Tech Forest; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 162 - Wizard Tech Forest",
         "locationHint": "On top of the stone structure to your right when you enter.",
@@ -2022,6 +2171,7 @@
     {
       "item": {
         "name": "Shiny Relic #124",
+        "cardSummary": "A World 2 route relic hidden in Area 164 - Wizard Dungeon; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 164 - Wizard Dungeon",
         "locationHint": "When you enter, on your right, behind the pole in the middle at the back.",
@@ -2038,6 +2188,7 @@
     {
       "item": {
         "name": "Shiny Relic #125",
+        "cardSummary": "A World 2 route relic hidden in Area 165 - Cyberpunk Undercity; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 165 - Cyberpunk Undercity",
         "locationHint": "On the left, behind the rock wall near the back of the area.",
@@ -2054,6 +2205,7 @@
     {
       "item": {
         "name": "Shiny Relic #126",
+        "cardSummary": "A World 2 route relic hidden in Area 168 - Cyberpunk Road; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 168 - Cyberpunk Road",
         "locationHint": "When you enter, next to the tunnel closest to you on the right.",
@@ -2070,6 +2222,7 @@
     {
       "item": {
         "name": "Shiny Relic #127",
+        "cardSummary": "A World 2 route relic hidden in Area 169 - Tech Ninja Kyoto; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 169 - Tech Ninja Kyoto",
         "locationHint": "When you enter, next to a support beam of the house on the right.",
@@ -2086,6 +2239,7 @@
     {
       "item": {
         "name": "Shiny Relic #128",
+        "cardSummary": "A World 2 route relic hidden in Area 171 - Tech Ninja Village; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 171 - Tech Ninja Village",
         "locationHint": "When you enter, behind the farthest house on the right.",
@@ -2102,6 +2256,7 @@
     {
       "item": {
         "name": "Shiny Relic #129",
+        "cardSummary": "A World 2 route relic hidden in Area 172 - Tech Ninja City; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 172 - Tech Ninja City",
         "locationHint": "Up the stairs behind a railing at the top on the right.",
@@ -2118,6 +2273,7 @@
     {
       "item": {
         "name": "Shiny Relic #130",
+        "cardSummary": "A World 2 route relic hidden in Area 173 - Dominus Dungeon; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 173 - Dominus Dungeon",
         "locationHint": "When you enter, inside a big pile of gold closest to the entrance on the left.",
@@ -2134,6 +2290,7 @@
     {
       "item": {
         "name": "Shiny Relic #131",
+        "cardSummary": "A World 2 route relic hidden in Area 176 - Holographic Powerplant; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 176 - Holographic Powerplant",
         "locationHint": "When you enter, inside the building on the right, between the blue and green pumps.",
@@ -2150,6 +2307,7 @@
     {
       "item": {
         "name": "Shiny Relic #132",
+        "cardSummary": "A World 2 route relic hidden in Area 181 - Dark Tech Ruins; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 181 - Dark Tech Ruins",
         "locationHint": "When you enter, behind the stone building in the pool of water on your left.",
@@ -2166,6 +2324,7 @@
     {
       "item": {
         "name": "Shiny Relic #133",
+        "cardSummary": "A World 2 route relic hidden in Area 182 - Dark Tech Castle; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 182 - Dark Tech Castle",
         "locationHint": "Behind the left pillar of the castle.",
@@ -2182,6 +2341,7 @@
     {
       "item": {
         "name": "Shiny Relic #134",
+        "cardSummary": "A World 2 route relic hidden in Area 184 - Dark Tech Forest; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 184 - Dark Tech Forest",
         "locationHint": "When you enter, behind the closest wall on the left (you will have to go in behind the wall).",
@@ -2198,6 +2358,7 @@
     {
       "item": {
         "name": "Shiny Relic #135",
+        "cardSummary": "A World 2 route relic hidden in Area 185 - Hacker Powerplant; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 185 - Hacker Powerplant",
         "locationHint": "When you enter, behind the building on the far left, next to a pipe.",
@@ -2214,6 +2375,7 @@
     {
       "item": {
         "name": "Shiny Relic #136",
+        "cardSummary": "A World 2 route relic hidden in Area 185 - Hacker Powerplant; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 185 - Hacker Powerplant",
         "locationHint": "Behind the back left beam of the right tower.",
@@ -2230,6 +2392,7 @@
     {
       "item": {
         "name": "Shiny Relic #137",
+        "cardSummary": "A World 2 route relic hidden in Area 186 - Hacker Compound; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 186 - Hacker Compound",
         "locationHint": "When you enter, inside the back right truss like structure.",
@@ -2246,6 +2409,7 @@
     {
       "item": {
         "name": "Shiny Relic #138",
+        "cardSummary": "A World 2 route relic hidden in Area 188 - Hacker Error; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 188 - Hacker Error",
         "locationHint": "When you enter, on top of things on wall to the right. Behind the 'Zone 188 Quest'.",
@@ -2262,6 +2426,7 @@
     {
       "item": {
         "name": "Shiny Relic #139",
+        "cardSummary": "A World 2 route relic hidden in Area 189 - Glitch Forest; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 189 - Glitch Forest",
         "locationHint": "When you enter, behind the closest tree at the front on your left.",
@@ -2278,6 +2443,7 @@
     {
       "item": {
         "name": "Shiny Relic #140",
+        "cardSummary": "A World 2 route relic hidden in Area 192 - Glitch Town; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 192 - Glitch Town",
         "locationHint": "When you enter, above the doorway on the far right.",
@@ -2294,6 +2460,7 @@
     {
       "item": {
         "name": "Shiny Relic #141",
+        "cardSummary": "A World 2 route relic hidden in Area 193 - Glitch Quantum; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 193 - Glitch Quantum",
         "locationHint": "When you enter, to the left is open area. Go to back of open area and look towards the entrance. You should see the shiny relic.",
@@ -2310,6 +2477,7 @@
     {
       "item": {
         "name": "Shiny Relic #142",
+        "cardSummary": "A World 2 route relic hidden in Area 194 - Quantum Forest; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 194 - Quantum Forest",
         "locationHint": "When you enter, to the left is a field with trees. The shiny relic is floating in the centre.",
@@ -2326,6 +2494,7 @@
     {
       "item": {
         "name": "Shiny Relic #143",
+        "cardSummary": "A World 2 route relic hidden in Area 195 - Quantum Space Base; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 195 - Quantum Space Base",
         "locationHint": "When you enter, on the far left is a rocket ship half visible. Behind it is the shiny relic.",
@@ -2342,6 +2511,7 @@
     {
       "item": {
         "name": "Shiny Relic #144",
+        "cardSummary": "A World 2 route relic hidden in Area 197 - Void Atomic; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 197 - Void Atomic",
         "locationHint": "When you enter, on the far left is a shelter. Behind the electrical box to its left.",
@@ -2358,6 +2528,7 @@
     {
       "item": {
         "name": "Shiny Relic #145",
+        "cardSummary": "A World 2 route relic hidden in Area 198 - Void Fracture; check it before moving to the next zone.",
         "world": "World 2",
         "area": "Area 198 - Void Fracture",
         "locationHint": "When you enter, to your right is an open area. In the far right of that area, at the back is a white stone crystal. behind it is the shiny relic.",
@@ -2374,6 +2545,7 @@
     {
       "item": {
         "name": "Shiny Relic #146",
+        "cardSummary": "A World 3 hub relic at Void Spawn, outside the numbered Void World area route.",
         "world": "World 3",
         "area": "Void Spawn",
         "locationHint": "To the left of the Prison World cannon.",
@@ -2390,6 +2562,7 @@
     {
       "item": {
         "name": "Shiny Relic #147",
+        "cardSummary": "A World 3 hub relic at Void Spawn, outside the numbered Void World area route.",
         "world": "World 3",
         "area": "Void Spawn",
         "locationHint": "Behind the Super Computer, to the right.",
@@ -2406,6 +2579,7 @@
     {
       "item": {
         "name": "Shiny Relic #148",
+        "cardSummary": "A World 3 route relic hidden in Area 200 - Prison Tower; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 200 - Prison Tower",
         "locationHint": "Next to the building to the right.",
@@ -2422,6 +2596,7 @@
     {
       "item": {
         "name": "Shiny Relic #149",
+        "cardSummary": "A World 3 route relic hidden in Area 201 - Prison Block; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 201 - Prison Block",
         "locationHint": "To the left of Prisoner 001's cell. Behind the big beam on your left when you enter.",
@@ -2438,6 +2613,7 @@
     {
       "item": {
         "name": "Shiny Relic #150",
+        "cardSummary": "A World 3 route relic hidden in Area 203 - Prison Yard; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 203 - Prison Yard",
         "locationHint": "Towards the next zone next to the pillar to the left.",
@@ -2454,6 +2630,7 @@
     {
       "item": {
         "name": "Shiny Relic #151",
+        "cardSummary": "A World 3 route relic hidden in Area 203 - Prison Yard; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 203 - Prison Yard",
         "locationHint": "When you enter, behind the basketball court on the right are 2 chairs. Behind the tree behind the right chair.",
@@ -2470,6 +2647,7 @@
     {
       "item": {
         "name": "Shiny Relic #152",
+        "cardSummary": "A World 3 route relic hidden in Area 205 - Beach Island; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 205 - Beach Island",
         "locationHint": "Next to the far left tree. (Obtainable after unlocking area 206).",
@@ -2486,6 +2664,7 @@
     {
       "item": {
         "name": "Shiny Relic #153",
+        "cardSummary": "A World 3 route relic hidden in Area 206 - Ocean Island; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 206 - Ocean Island",
         "locationHint": "Behind the purple coral left of the egg.",
@@ -2502,6 +2681,7 @@
     {
       "item": {
         "name": "Shiny Relic #154",
+        "cardSummary": "A World 3 route relic hidden in Area 207 - Tiki Island; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 207 - Tiki Island",
         "locationHint": "Behind the house left of the egg.",
@@ -2518,6 +2698,7 @@
     {
       "item": {
         "name": "Shiny Relic #155",
+        "cardSummary": "A World 3 route relic hidden in Area 207 - Tiki Island; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 207 - Tiki Island",
         "locationHint": "Under the cliff next to the 2 houses.",
@@ -2534,6 +2715,7 @@
     {
       "item": {
         "name": "Shiny Relic #156",
+        "cardSummary": "A World 3 route relic hidden in Area 209 - Volcano Island; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 209 - Volcano Island",
         "locationHint": "On the stern of the boat.",
@@ -2550,6 +2732,7 @@
     {
       "item": {
         "name": "Shiny Relic #157",
+        "cardSummary": "A World 3 route relic hidden in Area 209 - Volcano Island; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 209 - Volcano Island",
         "locationHint": "Under the boat near the back of the boat.",
@@ -2566,6 +2749,7 @@
     {
       "item": {
         "name": "Shiny Relic #158",
+        "cardSummary": "A World 3 route relic hidden in Area 210 - Hacker Matrix; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 210 - Hacker Matrix",
         "locationHint": "Behind the pillar right of the hacker chest.",
@@ -2582,6 +2766,7 @@
     {
       "item": {
         "name": "Shiny Relic #159",
+        "cardSummary": "A World 3 route relic hidden in Area 212 - Hacker Cave; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 212 - Hacker Cave",
         "locationHint": "Hidden behind the wall next to the Free Potions machine.",
@@ -2598,6 +2783,7 @@
     {
       "item": {
         "name": "Shiny Relic #160",
+        "cardSummary": "A World 3 route relic hidden in Area 213 - Hacker Lab; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 213 - Hacker Lab",
         "locationHint": "Behind the pillar behind the egg.",
@@ -2614,6 +2800,7 @@
     {
       "item": {
         "name": "Shiny Relic #161",
+        "cardSummary": "A World 3 route relic hidden in Area 214 - Hacker Mainframe; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 214 - Hacker Mainframe",
         "locationHint": "Behind the pillar left of the egg.",
@@ -2630,6 +2817,7 @@
     {
       "item": {
         "name": "Shiny Relic #162",
+        "cardSummary": "A World 3 route relic hidden in Area 215 - Dirt Village; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 215 - Dirt Village",
         "locationHint": "Behind the house on your right when you enter.",
@@ -2646,6 +2834,7 @@
     {
       "item": {
         "name": "Shiny Relic #163",
+        "cardSummary": "A World 3 route relic hidden in Area 216 - Stone Forts; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 216 - Stone Forts",
         "locationHint": "Behind the rock on your left.",
@@ -2662,6 +2851,7 @@
     {
       "item": {
         "name": "Shiny Relic #164",
+        "cardSummary": "A World 3 route relic hidden in Area 218 - Golden Netropolis; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 218 - Golden Netropolis",
         "locationHint": "Next to the building on your right when you enter.",
@@ -2678,6 +2868,7 @@
     {
       "item": {
         "name": "Shiny Relic #165",
+        "cardSummary": "A World 3 route relic hidden in Area 219 - Diamond Mega City; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 219 - Diamond Mega City",
         "locationHint": "Right side of the building.",
@@ -2694,6 +2885,7 @@
     {
       "item": {
         "name": "Shiny Relic #166",
+        "cardSummary": "A World 3 route relic hidden in Area 220 - Kawaii Tokyo; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 220 - Kawaii Tokyo",
         "locationHint": "On the left, before exiting the area, on the window sill of the building.",
@@ -2710,6 +2902,7 @@
     {
       "item": {
         "name": "Shiny Relic #167",
+        "cardSummary": "A World 3 route relic hidden in Area 221 - Kawaii Village; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 221 - Kawaii Village",
         "locationHint": "Behind a rock next to the purple house.",
@@ -2726,6 +2919,7 @@
     {
       "item": {
         "name": "Shiny Relic #168",
+        "cardSummary": "A World 3 route relic hidden in Area 222 - Kawaii Grove; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 222 - Kawaii Grove",
         "locationHint": "To the left, beside the pink tree, and against the cliff side.",
@@ -2742,6 +2936,7 @@
     {
       "item": {
         "name": "Shiny Relic #169",
+        "cardSummary": "A World 3 route relic hidden in Area 223 - Kawaii Dreamland; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 223 - Kawaii Dreamland",
         "locationHint": "Behind a white chocolate bar to the right of where you enter.",
@@ -2758,6 +2953,7 @@
     {
       "item": {
         "name": "Shiny Relic #170",
+        "cardSummary": "A World 3 route relic hidden in Area 226 - Rocky Ridge; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 226 - Rocky Ridge",
         "locationHint": "Directly on the left as you enter, behind the biggest tree of the three.",
@@ -2774,6 +2970,7 @@
     {
       "item": {
         "name": "Shiny Relic #171",
+        "cardSummary": "A World 3 route relic hidden in Area 227 - Crystal Lake; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 227 - Crystal Lake",
         "locationHint": "On the right as you enter, in the opening of one of the pink corals.",
@@ -2790,6 +2987,7 @@
     {
       "item": {
         "name": "Shiny Relic #172",
+        "cardSummary": "A World 3 route relic hidden in Area 227 - Crystal Lake; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 227 - Crystal Lake",
         "locationHint": "On the left, before exiting the area, in the opening of one of the pink corals.",
@@ -2806,6 +3004,7 @@
     {
       "item": {
         "name": "Shiny Relic #173",
+        "cardSummary": "A World 3 route relic hidden in Area 229 - Elemental Realm; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 229 - Elemental Realm",
         "locationHint": "Left of Trainer Preston, past the edge of the building platform, in the lava.",
@@ -2822,6 +3021,7 @@
     {
       "item": {
         "name": "Shiny Relic #174",
+        "cardSummary": "A World 3 route relic hidden in Area 230 - Elysium Fields; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 230 - Elysium Fields",
         "locationHint": "To the left as you enter, behind the left of the building.",
@@ -2838,6 +3038,7 @@
     {
       "item": {
         "name": "Shiny Relic #175",
+        "cardSummary": "A World 3 route relic hidden in Area 231 - Ocean Paradise; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 231 - Ocean Paradise",
         "locationHint": "To the farthest left, to the tall part of the other island, In between the yellow corals.",
@@ -2854,6 +3055,7 @@
     {
       "item": {
         "name": "Shiny Relic #176",
+        "cardSummary": "A World 3 route relic hidden in Area 233 - Nebula Forest; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 233 - Nebula Forest",
         "locationHint": "To the left as you enter, behind the big blue tall rocks.",
@@ -2870,6 +3072,7 @@
     {
       "item": {
         "name": "Shiny Relic #177",
+        "cardSummary": "A World 3 route relic hidden in Area 234 - Aether Colosseum; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 234 - Aether Colosseum",
         "locationHint": "Behind the 5th pillar in the colosseum behind the big chest.",
@@ -2886,6 +3089,7 @@
     {
       "item": {
         "name": "Shiny Relic #178",
+        "cardSummary": "A World 3 route relic hidden in Area 235 - Doodle Meadow; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 235 - Doodle Meadow",
         "locationHint": "To the right of the egg, behind the fence.",
@@ -2902,6 +3106,7 @@
     {
       "item": {
         "name": "Shiny Relic #179",
+        "cardSummary": "A World 3 route relic hidden in Area 236 - Doodle Safari; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 236 - Doodle Safari",
         "locationHint": "Directly to the left as you enter, behind the 3rd bush.",
@@ -2918,6 +3123,7 @@
     {
       "item": {
         "name": "Shiny Relic #180",
+        "cardSummary": "A World 3 route relic hidden in Area 239 - Doodle Oasis; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 239 - Doodle Oasis",
         "locationHint": "To the left of the Doodle Jar Upgrade, behind the green bush on the right side.",
@@ -2934,6 +3140,7 @@
     {
       "item": {
         "name": "Shiny Relic #181",
+        "cardSummary": "A World 3 route relic hidden in Area 239 - Doodle Oasis; check it before moving to the next zone.",
         "world": "World 3",
         "area": "Area 239 - Doodle Oasis",
         "locationHint": "To the left of the Doodle Jar Upgrade, behind the \"Submit Your Drawings On X\" Sign. Behind the blue-yellow bush.",
@@ -2950,6 +3157,7 @@
     {
       "item": {
         "name": "Shiny Relic #182",
+        "cardSummary": "A World 4 route relic hidden in Area 240 - Fantasy Spawn; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 240 - Fantasy Spawn",
         "locationHint": "At the start of the area to the right next to the 2nd arch behind some rocks.",
@@ -2966,6 +3174,7 @@
     {
       "item": {
         "name": "Shiny Relic #183",
+        "cardSummary": "A World 4 route relic hidden in Area 241 - Flora Falls; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 241 - Flora Falls",
         "locationHint": "At the start of the area to the right in the waterfall on the rocks.",
@@ -2982,6 +3191,7 @@
     {
       "item": {
         "name": "Shiny Relic #184",
+        "cardSummary": "A World 4 route relic hidden in Area 243 - Honeycomb Hollow; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 243 - Honeycomb Hollow",
         "locationHint": "To the right midway through the area in the gap in the rock and then behind the honey above.",
@@ -2998,6 +3208,7 @@
     {
       "item": {
         "name": "Shiny Relic #185",
+        "cardSummary": "A World 4 route relic hidden in Area 245 - Windmill Point; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 245 - Windmill Point",
         "locationHint": "Near the end of the area to the left behind the windmill at the top.",
@@ -3014,6 +3225,7 @@
     {
       "item": {
         "name": "Shiny Relic #186",
+        "cardSummary": "A World 4 route relic hidden in Area 248 - Rune Graveyard; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 248 - Rune Graveyard",
         "locationHint": "At the start of the area to the left behind the stone arch at the top.",
@@ -3030,6 +3242,7 @@
     {
       "item": {
         "name": "Shiny Relic #187",
+        "cardSummary": "A World 4 route relic hidden in Area 250 - Twilight Grove; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 250 - Twilight Grove",
         "locationHint": "Right when you enter, behind the second arch on the right side.",
@@ -3046,6 +3259,7 @@
     {
       "item": {
         "name": "Shiny Relic #188",
+        "cardSummary": "A World 4 route relic hidden in Area 252 - Starroot Highlands; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 252 - Starroot Highlands",
         "locationHint": "Right when you enter on the wall, on a star on the right side.",
@@ -3062,6 +3276,7 @@
     {
       "item": {
         "name": "Shiny Relic #189",
+        "cardSummary": "A World 4 route relic hidden in Area 253 - Aether Archways; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 253 - Aether Archways",
         "locationHint": "Right when you enter behind the first arch on the left.",
@@ -3078,6 +3293,7 @@
     {
       "item": {
         "name": "Shiny Relic #190",
+        "cardSummary": "A World 4 route relic hidden in Area 256 - Runestone Bluff; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 256 - Runestone Bluff",
         "locationHint": "As you enter, behind the arch on the right.",
@@ -3094,6 +3310,7 @@
     {
       "item": {
         "name": "Shiny Relic #191",
+        "cardSummary": "A World 4 route relic hidden in Area 258 - Wyrmwatch Ridge; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 258 - Wyrmwatch Ridge",
         "locationHint": "As you enter, inside the dragon mouth on the left.",
@@ -3110,6 +3327,7 @@
     {
       "item": {
         "name": "Shiny Relic #192",
+        "cardSummary": "A World 4 route relic hidden in Area 261 - Charred Canyon; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 261 - Charred Canyon",
         "locationHint": "In dragon's skull on the right.",
@@ -3126,6 +3344,7 @@
     {
       "item": {
         "name": "Shiny Relic #193",
+        "cardSummary": "A World 4 route relic hidden in Area 263 - Molten Nest; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 263 - Molten Nest",
         "locationHint": "Behind free items, in lava.",
@@ -3142,6 +3361,7 @@
     {
       "item": {
         "name": "Shiny Relic #194",
+        "cardSummary": "A World 4 route relic hidden in Area 264 - Obsidian Spire; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 264 - Obsidian Spire",
         "locationHint": "Behind dragon's skull near the end.",
@@ -3158,6 +3378,7 @@
     {
       "item": {
         "name": "Shiny Relic #195",
+        "cardSummary": "A World 4 route relic hidden in Area 266 - Glimmer Grottos; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 266 - Glimmer Grottos",
         "locationHint": "Behind first crystal on the right.",
@@ -3174,6 +3395,7 @@
     {
       "item": {
         "name": "Shiny Relic #196",
+        "cardSummary": "A World 4 route relic hidden in Area 268 - Scribes Terrace; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 268 - Scribes Terrace",
         "locationHint": "Behind a tree on the left.",
@@ -3190,6 +3412,7 @@
     {
       "item": {
         "name": "Shiny Relic #197",
+        "cardSummary": "A World 4 route relic hidden in Area 269 - Archivists Tower; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 269 - Archivists Tower",
         "locationHint": "Behind a tree in the corner.",
@@ -3206,6 +3429,7 @@
     {
       "item": {
         "name": "Shiny Relic #198",
+        "cardSummary": "A World 4 route relic hidden in Area 270 - Mystmire Bloom; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 270 - Mystmire Bloom",
         "locationHint": "On the left behind a cliff.",
@@ -3222,6 +3446,7 @@
     {
       "item": {
         "name": "Shiny Relic #199",
+        "cardSummary": "A World 4 route relic hidden in Area 272 - Faerie Hex Glade; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 272 - Faerie Hex Glade",
         "locationHint": "Behind an arch on the right.",
@@ -3238,6 +3463,7 @@
     {
       "item": {
         "name": "Shiny Relic #200",
+        "cardSummary": "A World 4 route relic hidden in Area 273 - Bloomcourt Terrace; check it before moving to the next zone.",
         "world": "World 4",
         "area": "Area 273 - Bloomcourt Terrace",
         "locationHint": "In the corner on the right of Bundles V.",

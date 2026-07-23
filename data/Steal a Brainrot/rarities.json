@@ -7,57 +7,92 @@
     "route": "/wiki/steal-a-brainrot/rarities",
     "catalogCode": "steal-a-brainrot-rarities",
     "itemFields": [
-      "brainrotCount",
-      "incomeRange",
-      "costRange",
-      "spawnChance",
-      "description"
+      "cardSummary",
+      "tierType",
+      "tierOrder",
+      "color",
+      "catalogScope",
+      "availability"
     ],
     "columns": [
-      "brainrotCount",
-      "incomeRange",
-      "costRange",
-      "spawnChance",
-      "description"
+      "cardSummary",
+      "tierType",
+      "tierOrder",
+      "color",
+      "catalogScope",
+      "availability"
     ],
     "display": {
-      "groupLabel": "Group",
+      "groupLabel": "Rarity group",
       "sectionOrder": [
-        "Items"
+        "Core Rarities",
+        "Special Labels"
       ],
-      "badgeField": null,
-      "subtitleFields": [],
-      "descriptionField": "description",
-      "cardDescriptionField": "description",
+      "badgeField": "tierType",
+      "subtitleFields": [
+        "tierOrder",
+        "color"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
       "cardFields": [
-        "brainrotCount",
-        "incomeRange",
-        "costRange",
-        "spawnChance",
-        "description"
+        "cardSummary",
+        "tierType",
+        "tierOrder",
+        "color",
+        "catalogScope",
+        "availability"
       ],
       "tableFields": [
-        "brainrotCount",
-        "incomeRange",
-        "costRange",
-        "spawnChance",
-        "description"
+        "cardSummary",
+        "tierType",
+        "tierOrder",
+        "color",
+        "catalogScope",
+        "availability"
       ],
-      "fieldPresentation": null
+      "fieldPresentation": {
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "tierType": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "tierOrder": {
+          "kind": "chip",
+          "label": "Order"
+        },
+        "color": {
+          "kind": "chip",
+          "label": "Label color"
+        },
+        "catalogScope": {
+          "kind": "normal",
+          "label": "Catalog scope"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        }
+      }
     }
   },
   "items": [
     {
       "item": {
         "name": "Common",
-        "brainrotCount": 11,
-        "incomeRange": "$1/s to $14/s",
-        "spawnChance": "55%",
-        "description": "Common is the least expensive rarity. Including 11 brainrots, they range from Noobini Pizzanini to Pipi Corni. It's the most common rarity to spawn on the red carpet. It can produce from $1/s to $14/s. Price range can go from $25 to $1.7K. 55% of the time it will spawn."
+        "cardSummary": "The entry-level core tier, with the least expensive and lowest-income Brainrots.",
+        "tierType": "Core rarity",
+        "tierOrder": "1 of 8",
+        "color": "Green",
+        "catalogScope": "12 Brainrots in the current catalogue",
+        "availability": "Regular Red Carpet, although some entries are limited or retired"
       },
       "system": {
         "slug": "common",
-        "section": "Items",
+        "section": "Core Rarities",
         "sortOrder": 1,
         "image": null
       }
@@ -65,14 +100,16 @@
     {
       "item": {
         "name": "Rare",
-        "brainrotCount": 11,
-        "incomeRange": "$15/s to $75/s",
-        "costRange": "$2K to $9",
-        "description": "Rare is still a common rarity. Including 11 brainrots, this rarity ranges from Trippi Troppi to Pinealotto Fruttarino. It is still very common to spawn, less often than Common. It can produce from $15/s to $75/s, and cost $2K to $9.7K."
+        "cardSummary": "The second core tier, above Common in the usual cost and income progression.",
+        "tierType": "Core rarity",
+        "tierOrder": "2 of 8",
+        "color": "Cyan / blue",
+        "catalogScope": "12 Brainrots in the current catalogue",
+        "availability": "Regular Red Carpet, although some entries are limited or retired"
       },
       "system": {
         "slug": "rare",
-        "section": "Items",
+        "section": "Core Rarities",
         "sortOrder": 2,
         "image": null
       }
@@ -80,14 +117,16 @@
     {
       "item": {
         "name": "Epic",
-        "brainrotCount": 20,
-        "incomeRange": "$75/s to $325/s",
-        "costRange": "$10K to $47",
-        "description": "Epic is an early game rarity. Including 20 Brainrots, it is one of the smaller rarites. These Brainrots range from Cappuccino Assassino to Mummio Rappitto. These Brainrots are more rare than Rare, as they often appear, but slightly less. It can produce from $75/s to $325/s, and cost $10K to $47.5K."
+        "cardSummary": "An early progression tier between Rare and Legendary.",
+        "tierType": "Core rarity",
+        "tierOrder": "3 of 8",
+        "color": "Purple",
+        "catalogScope": "20 Brainrots in the current catalogue",
+        "availability": "Red Carpet and special sources"
       },
       "system": {
         "slug": "epic",
-        "section": "Items",
+        "section": "Core Rarities",
         "sortOrder": 3,
         "image": null
       }
@@ -95,13 +134,16 @@
     {
       "item": {
         "name": "Legendary",
-        "brainrotCount": 24,
-        "incomeRange": "$200/s to $1",
-        "description": "Legendary is an intermediate rarity including 24 brainrots, ranging from Burbaloni Loliloli to Seraphino Gruyero. Brainrots in this tier are harder to spawn. It can produce from $200/s to $1.9K/s, and $35K to $347.5K."
+        "cardSummary": "A mid-progression tier that sits above Epic and below Mythic.",
+        "tierType": "Core rarity",
+        "tierOrder": "4 of 8",
+        "color": "Yellow",
+        "catalogScope": "26 Brainrots in the current catalogue",
+        "availability": "Red Carpet and special sources"
       },
       "system": {
         "slug": "legendary",
-        "section": "Items",
+        "section": "Core Rarities",
         "sortOrder": 4,
         "image": null
       }
@@ -109,15 +151,16 @@
     {
       "item": {
         "name": "Mythic",
-        "brainrotCount": 33,
-        "incomeRange": "$2K/s to $18K/s",
-        "costRange": "up to $5",
-        "spawnChance": "10%",
-        "description": "Mythic is an intermediate rarity including 33 brainrots (including the Mythic Lucky Block). Brainrots from this rarity spawn way less often than Legendary Brainrots. It goes to Frigo Camelo to Berenjello Angello but Los Noobinis and Tob Tobi Tobi are 2 examples of unobtainable Mythics. They can cost up to $5.5M. They can produce up to $18K/s, which is almost good (not now) as the Brainrot God: Cocofanto Elefanto which does $19K/s (formerly $17.5K/s). A mythic (depends on which Mythic spawns) can have approximately a 10% chance to spawn. It can produce from $2K/s to $18K/s, and cost $350K to $5.5M."
+        "cardSummary": "A high core tier with stronger income than the lower progression rarities.",
+        "tierType": "Core rarity",
+        "tierOrder": "5 of 8",
+        "color": "Red",
+        "catalogScope": "40 Brainrots in the current catalogue",
+        "availability": "Red Carpet, Lucky Blocks, machines, and event sources"
       },
       "system": {
         "slug": "mythic",
-        "section": "Items",
+        "section": "Core Rarities",
         "sortOrder": 5,
         "image": null
       }
@@ -125,13 +168,16 @@
     {
       "item": {
         "name": "Brainrot God",
-        "brainrotCount": 74,
-        "costRange": "$5M to $75M",
-        "description": "Brainrot God is a semi rare rarity including 74 brainrots. It ranges from Cocofanto Elefanto to Dumborino Miracello. Whenever a Brainrot from this tier spawns, its name is said out loud. It can produce $19K/s (formerly $17.5K/s) to $315K/s, and cost $5M to $75M."
+        "cardSummary": "A high core tier whose Red Carpet spawns are announced by name.",
+        "tierType": "Core rarity",
+        "tierOrder": "6 of 8",
+        "color": "Animated rainbow",
+        "catalogScope": "99 Brainrots in the current catalogue",
+        "availability": "Rare Red Carpet spawns and special sources"
       },
       "system": {
         "slug": "brainrot-god",
-        "section": "Items",
+        "section": "Core Rarities",
         "sortOrder": 6,
         "image": null
       }
@@ -139,12 +185,16 @@
     {
       "item": {
         "name": "Secret",
-        "costRange": "$50M to $400B",
-        "description": "Secret is a hard to obtain rarity. It ranges from Jackorilla (formerly La Vacca Saturno Saturnita) to Griffin, These Brainrots have a VERY LOW chance to spawn. The most common secret, La Vacca Saturno Saturnita, is still extremely rare without Server Luck or Admin Abuse, which is a Core Feature. People who have these Brainrots are highly invested in this game. These Brainrots can produce $315K/s to $400M/s, and can cost $50M to $400B. This rarity has the most brainrots in it, being 100+ brainrots (including the Secret Lucky Block. Coffin Tung Tung Tung Sahur and the Gold Elf)"
+        "cardSummary": "The near-top core tier, covering very scarce Brainrots from the Red Carpet and special systems.",
+        "tierType": "Core rarity",
+        "tierOrder": "7 of 8",
+        "color": "Animated white / black",
+        "catalogScope": "285 Brainrots in the current catalogue",
+        "availability": "Very rare Red Carpet spawns and special sources"
       },
       "system": {
         "slug": "secret",
-        "section": "Items",
+        "section": "Core Rarities",
         "sortOrder": 7,
         "image": null
       }
@@ -152,11 +202,16 @@
     {
       "item": {
         "name": "OG",
-        "description": "OG OG is by far the rarest rarity. There are 5 OG Brainrots, the Strawberry Elephant, which costs $750B and produces $750M/s, the Meowl, which produces $600M/s and costs $600B, Headless Horseman, which costs $550B and produces $550M/s, John Pork, which costs $500B and produces $500M/s and Skibidi Toilet which costs $450B. and produces $450M/s These Brainrots can be spawned by admins although Sammy stated he never will. They can spawn on the red carpet with an EXTREMELY LOW CHANCE, even with Server Luck. This also makes the OG rarity to have the least amount of Brainrots. Sammy wants to keep the OG rarity extremely unique. Headless Horseman was buffed to OG on February 28th, or the Divine Admin Machine update."
+        "cardSummary": "The rarest core tier, reserved for exceptionally scarce Brainrots.",
+        "tierType": "Core rarity",
+        "tierOrder": "8 of 8",
+        "color": "Animated yellow / black",
+        "catalogScope": "7 Brainrots in the current catalogue",
+        "availability": "Extremely rare Red Carpet spawns or stealing"
       },
       "system": {
         "slug": "og",
-        "section": "Items",
+        "section": "Core Rarities",
         "sortOrder": 8,
         "image": null
       }
@@ -164,11 +219,16 @@
     {
       "item": {
         "name": "Admin",
-        "description": "Admin Is a limited Admin Abuse rarity, and has only two obtainable Lucky Blocks, which are the Admin Lucky Block and the Los Lucky Blocks and NO obtainable brainrots, however, previously there was Developini Braziliaspidini and Kings Coleslaw with admin rarity, but they are NOT obtainable now"
+        "cardSummary": "A limited Lucky Block label used during Admin Abuse, not a ninth core rarity tier.",
+        "tierType": "Special label",
+        "tierOrder": "Outside core order",
+        "color": "Animated red / gold",
+        "catalogScope": "Admin Lucky Block and Los Lucky Blocks",
+        "availability": "Limited Admin Abuse label"
       },
       "system": {
         "slug": "admin",
-        "section": "Items",
+        "section": "Special Labels",
         "sortOrder": 9,
         "image": null
       }
@@ -176,11 +236,16 @@
     {
       "item": {
         "name": "Taco",
-        "description": "Taco is a limited Admin Abuse rarity and has only two Brainrots, which are the Taco Lucky Block and the Los Taco Blocks."
+        "cardSummary": "A limited Admin Abuse label used by the two Taco-themed Lucky Blocks.",
+        "tierType": "Special label",
+        "tierOrder": "Outside core order",
+        "color": "Animated red / gold",
+        "catalogScope": "Taco Lucky Block and Los Taco Blocks",
+        "availability": "Limited Admin Abuse label"
       },
       "system": {
         "slug": "taco",
-        "section": "Items",
+        "section": "Special Labels",
         "sortOrder": 10,
         "image": null
       }
@@ -188,11 +253,16 @@
     {
       "item": {
         "name": "Spooky",
-        "description": "Spooky is a limited Halloween rarity and has only one Brainrot, which is the Spooky Lucky Block"
+        "cardSummary": "A Halloween-limited label attached to the Spooky Lucky Block.",
+        "tierType": "Special label",
+        "tierOrder": "Outside core order",
+        "color": "Animated red / gold",
+        "catalogScope": "Spooky Lucky Block",
+        "availability": "Limited Halloween label"
       },
       "system": {
         "slug": "spooky",
-        "section": "Items",
+        "section": "Special Labels",
         "sortOrder": 11,
         "image": null
       }
@@ -200,11 +270,16 @@
     {
       "item": {
         "name": "Festive",
-        "description": "Festive is a limited Christmas rarity and has only one Brainrot, which is the Festive Lucky Block Valentines Valentines is a limited Valentines Day rarity and has only one Brainrot, which is the Heart Lucky Block St Patrick St Patrick is a limited St Patricks Day rarity and has only one Brainrot, which is the Leprechaun Lucky Block Easter Easter is a limited Easter rarity and has only one Brainrot, which is the Egg Lucky Block"
+        "cardSummary": "A Christmas-limited label attached to the Festive Lucky Block.",
+        "tierType": "Special label",
+        "tierOrder": "Outside core order",
+        "color": "Animated red / green",
+        "catalogScope": "Festive Lucky Block",
+        "availability": "Limited Christmas label"
       },
       "system": {
         "slug": "festive",
-        "section": "Items",
+        "section": "Special Labels",
         "sortOrder": 12,
         "image": null
       }

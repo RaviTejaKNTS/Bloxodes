@@ -14,7 +14,8 @@ Use this after `brief.md`, data readiness, and image readiness are approved. Use
 1. Read the approved `brief.md`.
 2. Confirm `Data readiness` says the dataset uses v2 wrapped `{ meta, items[].item, items[].system }`, public game fields are separate from system fields, the grouping metadata is ready when sections exist, the section labels, card/table field order, field presentation map, highlight/chip/detail/plain fields, field consistency, and renderer/config support are ready.
 3. Confirm `Image readiness` is approved, or missing images were clearly accepted.
-4. Create or update:
+4. When updating an existing page, preserve its copy, headings, and structure unless the approved brief shows that a specific passage is inaccurate or outdated. Change only the affected passages.
+5. Create or update:
 
 ```text
 tmp/content-workspace/<game-slug>/collections/<collection-slug>/
@@ -22,8 +23,8 @@ tmp/content-workspace/<game-slug>/collections/<collection-slug>/
   final.json
 ```
 
-5. Write `final.json`.
-6. Parse JSON before returning.
+6. Write `final.json`.
+7. Parse JSON before returning.
 
 ## Voice & Tone
 
@@ -89,12 +90,12 @@ Do not create a section note for every section unless it helps. Empty `descripti
 
 This is the main body of the page. Its job is to cover everything a reader actually needs to use or finish this collection: strategy, how to progress, the key decisions and trade-offs between items, common mistakes, and any rules the cards alone do not make obvious. Cover what is genuinely useful for this specific collection, then stop. The goal is a page that feels complete, not a page that hits a fixed template.
 
-Let the content decide the structure. Do not force a set number of sections or headings, and do not default to the same two-heading shape on every page. Match the shape to how much there is to say:
+Let the content decide the structure. Use the fewest sections needed to cover the player questions and expected coverage identified in the brief. Do not force a set number of sections or default to the same shape on every page.
 
 - Short paragraphs, around 2-3 sentences each, so they are easy to read. Break a long paragraph into smaller ones instead of writing a wall of text.
 - Bullet points for steps, tips, quick comparisons, or short lists.
 - A markdown table when you are comparing a few things across the same dimensions (for example, which option to pick for which situation). Use tables when they read more cleanly than prose, not for decoration.
-- Headings only when they genuinely help the reader scan. A short body needs none; a deeper one might use a few. Heading text can read almost like a sentence.
+- Use a few clear, search-friendly headings that state what each section answers. A short body may need none. Avoid vague, clever, or sentence-like headings and unnecessary subsections.
 
 Rules:
 
