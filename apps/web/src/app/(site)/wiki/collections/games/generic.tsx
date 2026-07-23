@@ -650,11 +650,24 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "fish-it-fish": 30_000,
   // Image-dense Evade nextbots/maps: 262 and 88 image cards exceed the HTML size gate at default weight.
   "evade-nextbots": 18_000,
-  "evade-maps": 22_000
+  "evade-maps": 22_000,
+  // FTAP Toy Shop: large Furniture section + dual card/table + many portraits inflate RSC HTML
+  // past the release size gate when packed at the default text-weight target.
+  "fling-things-and-people-shop-items": 32_000
+};
+
+// When a collection needs large single sections (e.g. Furniture) split across pages, lower
+// max section weight together with the target weight. Defaults stay unchanged for others.
+const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
+  "fling-things-and-people-shop-items": 32_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {
   return COLLECTION_PAGINATION_TARGET_WEIGHT[code];
+}
+
+function resolvePaginationMaxSectionWeight(code: string): number | undefined {
+  return COLLECTION_PAGINATION_MAX_SECTION_WEIGHT[code];
 }
 
 function buildGameDatasetPreparedCollection(
@@ -671,7 +684,8 @@ function buildGameDatasetPreparedCollection(
     sections: groupedSections,
     currentPage: 1,
     basePath: buildGameCollectionPath(config.code),
-    targetWeight: resolvePaginationTargetWeight(config.code)
+    targetWeight: resolvePaginationTargetWeight(config.code),
+    maxSectionWeight: resolvePaginationMaxSectionWeight(config.code)
   }).info.totalPages;
 
   return {
@@ -860,7 +874,8 @@ export function renderGameCollectionPage({
     sections: preparedCollection.groupedSections,
     currentPage,
     basePath,
-    targetWeight: resolvePaginationTargetWeight(config.code)
+    targetWeight: resolvePaginationTargetWeight(config.code),
+    maxSectionWeight: resolvePaginationMaxSectionWeight(config.code)
   });
   const pageSections = pagination.sections;
   const pageItems = pageSections.flatMap((section) => section.items);

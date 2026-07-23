@@ -50,6 +50,7 @@ import { forsakenCollectionGroup } from "./forsaken";
 import { daysAtSeaCollectionGroup } from "./100-days-at-sea";
 import { evadeCollectionGroup } from "./evade";
 import { mergeANukeCollectionGroup } from "./merge-a-nuke";
+import { flingThingsAndPeopleCollectionGroup } from "./fling-things-and-people";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -105,4 +106,5 @@ export const GAME_COLLECTION_GROUPS = [
   daysAtSeaCollectionGroup,
   evadeCollectionGroup,
   mergeANukeCollectionGroup,
+  flingThingsAndPeopleCollectionGroup
 ] satisfies GameCollectionGroup[];
