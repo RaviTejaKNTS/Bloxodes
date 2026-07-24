@@ -1,0 +1,232 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Build a Base and Steal",
+    "gameSlug": "build-a-base-and-steal",
+    "collection": "gear",
+    "route": "/wiki/build-a-base-and-steal/gear",
+    "catalogCode": "build-a-base-and-steal-gear",
+    "itemFields": [
+      "role",
+      "source",
+      "availability",
+      "rebirthRequired",
+      "cost",
+      "effect",
+      "cardSummary",
+      "description"
+    ],
+    "columns": [
+      "role",
+      "source",
+      "availability",
+      "rebirthRequired",
+      "cost",
+      "effect",
+      "cardSummary",
+      "description"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Melee weapons",
+        "Mobility coils",
+        "Fishing gear"
+      ],
+      "badgeField": null,
+      "subtitleFields": [
+        "role"
+      ],
+      "descriptionField": "description",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "role",
+        "source",
+        "availability",
+        "rebirthRequired",
+        "cost",
+        "effect",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "role",
+        "source",
+        "availability",
+        "rebirthRequired",
+        "cost",
+        "effect",
+        "cardSummary",
+        "description"
+      ],
+      "fieldPresentation": {
+        "role": {
+          "kind": "chip",
+          "label": "Role"
+        },
+        "source": {
+          "kind": "normal",
+          "label": "Source"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "rebirthRequired": {
+          "kind": "chip",
+          "label": "Rebirth"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "description": {
+          "kind": "detail",
+          "label": "Description"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Wooden Bat",
+        "role": "Melee weapon",
+        "source": "Gear shop",
+        "availability": "Early gear shop / starter tutorial bat",
+        "rebirthRequired": null,
+        "cost": null,
+        "effect": "Basic held bat used to fight off intruders, knock players during chases, and break into bases. Exact damage and hit timing are not published.",
+        "cardSummary": "Starter-tier bat for early defense and first raids. Tutorial and beginner guides treat buying a bat as the first combat gear step.",
+        "description": "Early melee gear in Build a Base and Steal. Hands-on guides and gameplay show a wood/wooden bat as the first bat players use to knock raiders, chase thieves, and open weak walls. Public sources do not publish cash price or damage values. UI label may appear as Bat, Wood Bat, or Wooden Bat depending on the client version—Wooden Bat matches the Steel/Cobalt naming pattern used in higher tiers."
+      },
+      "system": {
+        "slug": "wooden-bat",
+        "section": "Melee weapons",
+        "sortOrder": 10,
+        "image": "/Build%20a%20Base%20and%20Steal/gear/wooden-bat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Steel Bat",
+        "role": "Melee weapon",
+        "source": "Gear shop",
+        "availability": "Gear shop (mid progression)",
+        "rebirthRequired": null,
+        "cost": null,
+        "effect": "Stronger bat tier used with mobility gear when raiding or defending. Break power and knockback vs Wooden Bat are not published as numbers.",
+        "cardSummary": "Mid-tier gear-shop bat named in gameplay as a cash shop upgrade alongside coils.",
+        "description": "Named gear-shop bat from multi-player gameplay coverage. Players buy it from the gear shop during mid-session progression, often together with a speed coil. No official damage table or cash price is published in first-party sources checked for this dataset."
+      },
+      "system": {
+        "slug": "steel-bat",
+        "section": "Melee weapons",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cobalt Bat",
+        "role": "Melee weapon",
+        "source": "Gear shop",
+        "availability": "Gear shop (later unlock in shop progression)",
+        "rebirthRequired": null,
+        "cost": null,
+        "effect": "Later bat tier used for combat and base-breaking. Exact stats versus Steel Bat are not published.",
+        "cardSummary": "Higher bat tier players set as auto-buy once it becomes the newest accessible shop bat.",
+        "description": "Named in gear-shop gameplay as a newer or higher bat option than earlier tiers. Creators treat it as an auto-buy target once unlocked in the shop list. Cash price and damage values are not confirmed in public first-party sources."
+      },
+      "system": {
+        "slug": "cobalt-bat",
+        "section": "Melee weapons",
+        "sortOrder": 30,
+        "image": "/Build%20a%20Base%20and%20Steal/gear/cobalt-bat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Speed Coil",
+        "role": "Mobility coil",
+        "source": "Gear shop",
+        "availability": "Gear shop",
+        "rebirthRequired": null,
+        "cost": null,
+        "effect": "Held coil that improves movement speed for chasing raiders or escaping with a stolen pet. Exact speed bonus is not published.",
+        "cardSummary": "Gear-shop coil for horizontal speed during raids and chases.",
+        "description": "Movement coil sold in the in-game gear shop. Gameplay coverage pairs buying a speed coil with upgrading melee bats when preparing to raid or defend. Public sources do not list the cash price or a confirmed percentage speed buff for this experience."
+      },
+      "system": {
+        "slug": "speed-coil",
+        "section": "Mobility coils",
+        "sortOrder": 10,
+        "image": "/Build%20a%20Base%20and%20Steal/gear/speed-coil.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gravity Coil",
+        "role": "Mobility coil",
+        "source": "Gear shop",
+        "availability": "Gear shop; may be gated behind rebirths",
+        "rebirthRequired": "Reported rebirth unlock (verify live)",
+        "cost": null,
+        "effect": "Raises jump height enough to clear multi-block walls that block normal jumps. Exact jump values are not published.",
+        "cardSummary": "Jump coil for vaulting tall walls and exiting enclosed bases during steals.",
+        "description": "Gear-shop coil that increases jump height. Guides show it letting players clear three-block-high walls that block normal movement, and several creators link access to rebirth progression. Treat the rebirth gate as reported until the live shop tooltip is rechecked after updates. Cash price is not published in first-party sources."
+      },
+      "system": {
+        "slug": "gravity-coil",
+        "section": "Mobility coils",
+        "sortOrder": 20,
+        "image": "/Build%20a%20Base%20and%20Steal/gear/gravity-coil.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dual Coil",
+        "role": "Mobility coil",
+        "source": "Insane Pack (Robux pack)",
+        "availability": "Permanent Dual Coil gear from Insane Pack; pack currently not for sale",
+        "rebirthRequired": null,
+        "cost": null,
+        "effect": "Permanent dual-coil mobility gear named in first-party pack text. Exact speed/jump values are not published.",
+        "cardSummary": "First-party permanent coil gear from the Insane Pack—not a cash shop bat.",
+        "description": "Developer-authored Insane Pack description for this universe lists permanent Dual Coil gear among pack contents. The pack was not for sale when the universe gamepass catalog was checked for this dataset. Treat Dual Coil as first-party named gear; do not invent combat stats. Gameplay also refers to dual coils in the gear shop context—confirm whether cash shop Dual Coil and pack Dual Coil are the same tool when capturing the live UI."
+      },
+      "system": {
+        "slug": "dual-coil",
+        "section": "Mobility coils",
+        "sortOrder": 30,
+        "image": "/Build%20a%20Base%20and%20Steal/gear/dual-coil.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Rod",
+        "role": "Fishing tool",
+        "source": "Robux gamepass",
+        "availability": "For sale as a Robux gamepass",
+        "rebirthRequired": null,
+        "cost": "499 Robux",
+        "effect": "Gives 36x fishing luck per the official pass description. Not a wall-breaking or raid weapon.",
+        "cardSummary": "Robux fishing rod with 36x fishing luck. Not used to destroy bases.",
+        "description": "Official universe gamepass named Void Rod (36x Fishing Luck). First-party description states the rod gives 36x fishing luck. Listed for sale at 499 Robux when the catalog was checked. Include it under fishing gear only—it is not destroy-and-enter raid gear despite being a held tool in the broader gear system."
+      },
+      "system": {
+        "slug": "void-rod",
+        "section": "Fishing gear",
+        "sortOrder": 10,
+        "image": "/Build%20a%20Base%20and%20Steal/gear/void-rod.webp"
+      }
+    }
+  ]
+}
