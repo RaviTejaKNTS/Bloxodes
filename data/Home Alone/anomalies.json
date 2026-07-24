@@ -1,0 +1,488 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Home Alone",
+    "gameSlug": "home-alone",
+    "collection": "anomalies",
+    "route": "/wiki/home-alone/anomalies",
+    "catalogCode": "home-alone-anomalies",
+    "itemFields": [
+      "appearance",
+      "request",
+      "detectBy",
+      "anomalySigns",
+      "safeSigns",
+      "bestAction",
+      "cardSummary"
+    ],
+    "columns": [
+      "appearance",
+      "request",
+      "detectBy",
+      "anomalySigns",
+      "safeSigns",
+      "bestAction",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "House Checks",
+        "Camera Checks",
+        "Night Vision Checks",
+        "Voice Checks",
+        "Outside Checks",
+        "Appearance Checks",
+        "Always Anomaly",
+        "House Scares"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "detectBy",
+        "request",
+        "anomalySigns",
+        "bestAction"
+      ],
+      "tableFields": [
+        "appearance",
+        "request",
+        "detectBy",
+        "anomalySigns",
+        "safeSigns",
+        "bestAction",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "appearance": {
+          "kind": "normal",
+          "label": "Appearance"
+        },
+        "request": {
+          "kind": "normal",
+          "label": "Request"
+        },
+        "detectBy": {
+          "kind": "chip",
+          "label": "Detect by"
+        },
+        "anomalySigns": {
+          "kind": "detail",
+          "label": "Anomaly signs"
+        },
+        "safeSigns": {
+          "kind": "detail",
+          "label": "Safe signs"
+        },
+        "bestAction": {
+          "kind": "highlight",
+          "label": "Best action"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Cat Lady",
+        "appearance": "Girl with black hair and a cropped tee.",
+        "request": "Wants her missing black cat back from your parents' bedroom.",
+        "detectBy": "House check",
+        "anomalySigns": "Before you open up, check the parents' bedroom. A white cat next to the bed means she is lying about a black cat.",
+        "safeSigns": "A black cat is waiting next to the bed, matching her story.",
+        "bestAction": "Open the door and return the black cat if it matches. Turn the porch light off if the cat is white.",
+        "cardSummary": "House check first. Black cat by the bed is safe; white cat means reject with the porch light."
+      },
+      "system": {
+        "slug": "cat-lady",
+        "section": "House Checks",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Firefighter",
+        "appearance": "Tall man in full firefighter gear.",
+        "request": "Claims smoke is coming from your oven and needs to put the fire out.",
+        "detectBy": "House check",
+        "anomalySigns": "Check the oven. No smoke means the firefighter story is fake.",
+        "safeSigns": "Smoke is actually coming from the oven, matching the claim.",
+        "bestAction": "Open the door if the oven is smoking. Turn the porch light off if there is no smoke.",
+        "cardSummary": "Always verify the oven before you trust a firefighter at the door."
+      },
+      "system": {
+        "slug": "firefighter",
+        "section": "House Checks",
+        "sortOrder": 20,
+        "image": "/Home%20Alone/anomalies/firefighter.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Plumber",
+        "appearance": "Man with a moustache in a black shirt, carrying a red toolbox.",
+        "request": "Says he was called to fix a leaky bath faucet.",
+        "detectBy": "House check",
+        "anomalySigns": "Check the bath faucet. If nothing is leaking, he is an Anomaly.",
+        "safeSigns": "The bath faucet is leaking water, matching the repair story.",
+        "bestAction": "Open the door if the faucet is leaking. Turn the porch light off if it is dry.",
+        "cardSummary": "Confirm the leaky bath faucet before you let the plumber in."
+      },
+      "system": {
+        "slug": "plumber",
+        "section": "House Checks",
+        "sortOrder": 30,
+        "image": "/Home%20Alone/anomalies/plumber.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "City Maintenance",
+        "appearance": "Man in overalls and a hard hat.",
+        "request": "Claims the water has turned brown and needs to fix it.",
+        "detectBy": "House check",
+        "anomalySigns": "Run the sink. No water at all means he is an Anomaly.",
+        "safeSigns": "Running water comes out brown, matching his warning.",
+        "bestAction": "Open the door if the sink water is brown. Turn the porch light off if nothing comes out.",
+        "cardSummary": "Sink check decides this one: brown water is real, no water is fake."
+      },
+      "system": {
+        "slug": "city-maintenance",
+        "section": "House Checks",
+        "sortOrder": 40,
+        "image": "/Home%20Alone/anomalies/city-maintenance.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dumped Girl",
+        "appearance": "Crying woman in a black jacket and camo pants.",
+        "request": "Asks for tissues to wipe her tears.",
+        "detectBy": "Cameras",
+        "anomalySigns": "On the laptop cameras she is smiling and staring straight at you instead of crying.",
+        "safeSigns": "Camera view still shows her crying normally without the fake smile stare.",
+        "bestAction": "Turn the porch light off if the camera shows a smile and stare. Open the door if she still looks upset on cam.",
+        "cardSummary": "Camera check for a false smile and direct stare before you trust the crying act."
+      },
+      "system": {
+        "slug": "dumped-girl",
+        "section": "Camera Checks",
+        "sortOrder": 50,
+        "image": "/Home%20Alone/anomalies/dumped-girl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ballerina",
+        "appearance": "Blonde girl in a ballerina outfit.",
+        "request": "Wants to dance for you.",
+        "detectBy": "Cameras",
+        "anomalySigns": "Laptop cameras show her dancing on the doorstep.",
+        "safeSigns": "On camera she is standing still and normal on the porch.",
+        "bestAction": "Turn the porch light off if she is dancing on cam. Open the door if she is standing normally.",
+        "cardSummary": "Use the door camera: dancing on the porch means Anomaly, standing still is safe."
+      },
+      "system": {
+        "slug": "ballerina",
+        "section": "Camera Checks",
+        "sortOrder": 60,
+        "image": "/Home%20Alone/anomalies/ballerina.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Homeless Man",
+        "appearance": "Man with scraggly hair and a long coat.",
+        "request": "Asks you for food.",
+        "detectBy": "Cameras",
+        "anomalySigns": "He does not appear on the laptop cameras at all.",
+        "safeSigns": "He is visible on the cameras like a normal visitor.",
+        "bestAction": "Turn the porch light off if he is missing from the cams. Open the door if he shows up on camera.",
+        "cardSummary": "If the door visitor is invisible on the laptop cameras, reject him."
+      },
+      "system": {
+        "slug": "homeless-man",
+        "section": "Camera Checks",
+        "sortOrder": 70,
+        "image": "/Home%20Alone/anomalies/homeless-man.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dog Owner",
+        "appearance": "Man in a black polo shirt.",
+        "request": "Wants to collect his dog from your backyard.",
+        "detectBy": "Cameras",
+        "anomalySigns": "Backyard camera shows the dog owner hunched on all fours and barking instead of a dog.",
+        "safeSigns": "Backyard camera shows a dog sitting there, matching his request.",
+        "bestAction": "Turn the porch light off if the owner is the one barking in the yard. Open the door if a real dog is on the backyard cam.",
+        "cardSummary": "Check the backyard camera before you believe the dog story."
+      },
+      "system": {
+        "slug": "dog-owner",
+        "section": "Camera Checks",
+        "sortOrder": 80,
+        "image": "/Home%20Alone/anomalies/dog-owner.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wifi Kid",
+        "appearance": "Kid in a red hoodie holding a tablet.",
+        "request": "Wants the wifi password.",
+        "detectBy": "Cameras",
+        "anomalySigns": "Opening the cameras triggers a glitchy shutter-click noise repeating over the feed.",
+        "safeSigns": "Camera audio stays normal with no shutter glitch loop.",
+        "bestAction": "Turn the porch light off if the camera audio glitches. Open the door if the feed sounds normal.",
+        "cardSummary": "Listen for camera shutter glitches when this kid is at the door."
+      },
+      "system": {
+        "slug": "wifi-kid",
+        "section": "Camera Checks",
+        "sortOrder": 90,
+        "image": "/Home%20Alone/anomalies/wifi-kid.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Obby Player",
+        "appearance": "Bald middle-aged man in a black shirt.",
+        "request": "Wants to play Roblox with you.",
+        "detectBy": "Cameras",
+        "anomalySigns": "The camera on your mum's car shows him smashing the car with his fist.",
+        "safeSigns": "The mum's-car camera view looks normal with no attack on the vehicle.",
+        "bestAction": "Turn the porch light off if he is wrecking the car on cam. Open the door if that camera stays normal.",
+        "cardSummary": "Switch to the car camera. Fist-smashing the car means Anomaly."
+      },
+      "system": {
+        "slug": "obby-player",
+        "section": "Camera Checks",
+        "sortOrder": 100,
+        "image": "/Home%20Alone/anomalies/obby-player.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "New Neighbour",
+        "appearance": "Very tall man in a shirt and tie.",
+        "request": "Introduces himself as your new neighbour and wants to meet you.",
+        "detectBy": "Night vision",
+        "anomalySigns": "On night vision his face is pressed up against the camera screen.",
+        "safeSigns": "Night vision still shows a normal stance with no face pressed into the lens.",
+        "bestAction": "Turn the porch light off if night vision shows a face on the screen. Open the door if he stays normal.",
+        "cardSummary": "Toggle night vision. A face mashed into the camera means reject."
+      },
+      "system": {
+        "slug": "new-neighbour",
+        "section": "Night Vision Checks",
+        "sortOrder": 110,
+        "image": "/Home%20Alone/anomalies/new-neighbour.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Guy Who Needs To Pee",
+        "appearance": "Man in a hoodie clutching his stomach.",
+        "request": "Needs to use your bathroom.",
+        "detectBy": "Night vision",
+        "anomalySigns": "Night vision makes him look noticeably taller than the normal camera view.",
+        "safeSigns": "Night vision height matches the regular camera view.",
+        "bestAction": "Turn the porch light off if night vision stretches him taller. Open the door if his size stays consistent.",
+        "cardSummary": "Compare normal cam to night vision. A sudden height jump is the Anomaly tell."
+      },
+      "system": {
+        "slug": "guy-who-needs-to-pee",
+        "section": "Night Vision Checks",
+        "sortOrder": 120,
+        "image": "/Home%20Alone/anomalies/guy-who-needs-to-pee.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Secret Agent",
+        "appearance": "Man in a full suit and sunglasses.",
+        "request": "Wants to warn you about an alien threat in the neighbourhood.",
+        "detectBy": "Night vision",
+        "anomalySigns": "Night vision turns him into a roughly 7-foot alien.",
+        "safeSigns": "Night vision still shows a suited man, not an alien form.",
+        "bestAction": "Turn the porch light off if night vision shows an alien. Open the door if he stays human on night vision.",
+        "cardSummary": "Night vision is the whole test: alien form means Anomaly."
+      },
+      "system": {
+        "slug": "secret-agent",
+        "section": "Night Vision Checks",
+        "sortOrder": 130,
+        "image": "/Home%20Alone/anomalies/secret-agent.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Girl",
+        "appearance": "Little girl with long hair and a grey jacket.",
+        "request": "Asks to use your phone.",
+        "detectBy": "Night vision",
+        "anomalySigns": "Night vision shows her as giant compared with the normal camera view.",
+        "safeSigns": "She looks the same size on normal cameras and night vision.",
+        "bestAction": "Turn the porch light off if night vision makes her giant. Open the door if both views match.",
+        "cardSummary": "If night vision turns a small visitor huge, keep the porch light off."
+      },
+      "system": {
+        "slug": "lost-girl",
+        "section": "Night Vision Checks",
+        "sortOrder": 140,
+        "image": "/Home%20Alone/anomalies/lost-girl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sleepy Woman",
+        "appearance": "Girl in a pink jumper and grey sweats.",
+        "request": "Wants to lie down in your bed for a short rest.",
+        "detectBy": "Night vision",
+        "anomalySigns": "On night vision her head snaps forward unnaturally.",
+        "safeSigns": "Night vision does not change her head pose or posture.",
+        "bestAction": "Turn the porch light off if her head snaps on night vision. Open the door if nothing changes.",
+        "cardSummary": "Watch the night-vision feed for a sudden head snap before you decide."
+      },
+      "system": {
+        "slug": "sleepy-woman",
+        "section": "Night Vision Checks",
+        "sortOrder": 150,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Classmate",
+        "appearance": "Child with red hair, glasses, and a chequered shirt.",
+        "request": "Wants to work on homework together.",
+        "detectBy": "Voice",
+        "anomalySigns": "Voice flips between a normal kid tone and a gravelly demonic voice.",
+        "safeSigns": "Voice stays a consistent normal tone the whole conversation.",
+        "bestAction": "Turn the porch light off if the voice turns demonic. Open the door if the tone stays steady.",
+        "cardSummary": "Listen through the whole line. A demonic voice swap means Anomaly."
+      },
+      "system": {
+        "slug": "classmate",
+        "section": "Voice Checks",
+        "sortOrder": 160,
+        "image": "/Home%20Alone/anomalies/classmate.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Party Girl",
+        "appearance": "Dancing girl in a tank top and baggy jeans.",
+        "request": "Invites you to a party.",
+        "detectBy": "Voice",
+        "anomalySigns": "Her voice echoes in a melodic, unnatural way.",
+        "safeSigns": "She speaks in a normal, non-echoing voice.",
+        "bestAction": "Turn the porch light off if the voice echoes melodically. Open the door if she sounds normal.",
+        "cardSummary": "A melodic echo on her voice is the reject signal."
+      },
+      "system": {
+        "slug": "party-girl",
+        "section": "Voice Checks",
+        "sortOrder": 170,
+        "image": "/Home%20Alone/anomalies/party-girl.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gym Bro",
+        "appearance": "Large muscular man in a white shirt.",
+        "request": "Needs water for a protein shake.",
+        "detectBy": "Voice",
+        "anomalySigns": "Voice is extremely high-pitched instead of matching his build.",
+        "safeSigns": "Voice sounds normal for the character.",
+        "bestAction": "Turn the porch light off if the voice is high-pitched. Open the door if he sounds normal.",
+        "cardSummary": "Trust your ears: an ultra-high voice on a huge gym visitor is the Anomaly."
+      },
+      "system": {
+        "slug": "gym-bro",
+        "section": "Voice Checks",
+        "sortOrder": 180,
+        "image": "/Home%20Alone/anomalies/gym-bro.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Police Man",
+        "appearance": "Tall man in a police uniform.",
+        "request": "Wants to come inside to check for a roaming criminal.",
+        "detectBy": "Outside view",
+        "anomalySigns": "A beat-up van is parked in front of the house instead of a police car.",
+        "safeSigns": "A police car is parked out front, matching a real officer visit.",
+        "bestAction": "Turn the porch light off if you see a beat-up van. Open the door if a police car is parked outside.",
+        "cardSummary": "Look outside first: police car is safe, beat-up van is Anomaly."
+      },
+      "system": {
+        "slug": "police-man",
+        "section": "Outside Checks",
+        "sortOrder": 190,
+        "image": "/Home%20Alone/anomalies/police-man.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Streamer",
+        "appearance": "Child in a video-game shirt, Adidas trackies, and very shiny white crocs.",
+        "request": "Wants to feature you on a livestream.",
+        "detectBy": "Appearance",
+        "anomalySigns": "No phone in hand while claiming to stream.",
+        "safeSigns": "Holding up a giant phone, matching the livestream setup.",
+        "bestAction": "Turn the porch light off if there is no phone. Open the door if the giant phone is out.",
+        "cardSummary": "Check the hands. Giant phone is real streamer energy; empty hands mean Anomaly."
+      },
+      "system": {
+        "slug": "streamer",
+        "section": "Appearance Checks",
+        "sortOrder": 200,
+        "image": "/Home%20Alone/anomalies/streamer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire",
+        "appearance": "Tall pale man with a flared collar.",
+        "request": "Asks to be invited inside.",
+        "detectBy": "Always anomaly",
+        "anomalySigns": "No confirmed safe form is documented. Treat any vampire invitation as an Anomaly.",
+        "safeSigns": null,
+        "bestAction": "Turn the porch light off. Do not invite the vampire inside.",
+        "cardSummary": "No documented safe version. Keep the porch light off and refuse the invitation."
+      },
+      "system": {
+        "slug": "vampire",
+        "section": "Always Anomaly",
+        "sortOrder": 210,
+        "image": "/Home%20Alone/anomalies/vampire.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin Stalker",
+        "appearance": "Small pale-skinned demon goblin that can appear around the house.",
+        "request": "Jumpscares you inside the house. Not a door visitor.",
+        "detectBy": "House scare",
+        "anomalySigns": "A permanent house jumpscare figure that can appear while you move around.",
+        "safeSigns": null,
+        "bestAction": "Ignore it. It cannot harm you.",
+        "cardSummary": "House scare only. Spooky, not deadly\u2014keep working the door checks and chores."
+      },
+      "system": {
+        "slug": "goblin-stalker",
+        "section": "House Scares",
+        "sortOrder": 220,
+        "image": "/Home%20Alone/anomalies/goblin-stalker.webp"
+      }
+    }
+  ]
+}
