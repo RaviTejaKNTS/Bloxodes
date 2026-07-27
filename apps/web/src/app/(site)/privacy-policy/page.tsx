@@ -268,7 +268,7 @@ export default function PrivacyPolicyPage() {
           </p>
           <p>
             Extension sign-in is optional. In version 6.0.0 or later, choosing to sign in opens Bloxodes and Roblox&apos;s official OAuth flow;
-            the extension never sees your Roblox password. After you confirm the connection, Bloxodes gives the extension an app-session
+            the extension never sees your Roblox password. After sign-in completes, Bloxodes gives the extension an app-session
             token that is stored only in that browser&apos;s local extension storage, not Chrome Sync. While signed in, the extension sends the
             game slug and codes you mark used or restore so the same state can appear on Bloxodes and your other signed-in devices. Signing
             out revokes the extension session.

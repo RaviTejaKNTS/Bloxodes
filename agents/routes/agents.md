@@ -22,7 +22,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/consent` | `GET` | `src/app/api/consent/route.ts` | Consent state resolution. |
 | `/api/extension/roblox-game-codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-codes/route.ts` | Public Chrome extension lookup for a Roblox game page, returning a three-code preview and full Bloxodes URL. |
 | `/api/extension/roblox-game-stats` | `GET`, `POST`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-stats/route.ts` | Seven-day player-history lookup by Roblox place ID; rate-limited POST verifies and enrolls unknown games in the existing universe stats pipeline. |
-| `/api/extension/auth/complete` | `GET`, `POST` | `apps/web/src/app/api/extension/auth/complete/route.ts` | Browser-mediated Roblox sign-in confirmation and short-lived handoff to the Chromium identity callback. |
+| `/api/extension/auth/complete` | `GET` | `apps/web/src/app/api/extension/auth/complete/route.ts` | Browser-mediated Roblox sign-in and automatic short-lived handoff to the Chromium identity callback. |
 | `/api/extension/auth/exchange` | `POST`, `OPTIONS` | `apps/web/src/app/api/extension/auth/exchange/route.ts` | Exchanges a redirect-bound, one-time extension handoff for an `app_sessions` bearer token. |
 | `/api/extension/auth/session` | `GET`, `OPTIONS` | `apps/web/src/app/api/extension/auth/session/route.ts` | Returns the extension user for a valid bearer session. |
 | `/api/extension/auth/logout` | `POST`, `OPTIONS` | `apps/web/src/app/api/extension/auth/logout/route.ts` | Revokes the current extension bearer session. |
