@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@/styles/article-content.css";
 import { renderMarkdown } from "@/lib/markdown";
-import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, resolveSeoTitle, buildAlternates } from "@/lib/seo";
+import { CATALOG_DESCRIPTION, SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import {
   CANONICAL,
@@ -66,19 +66,17 @@ async function buildCatalogContent(): Promise<{ contentHtml: CatalogContentHtml 
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
-  if (!catalog) {
-    return {
-      title: `Roblox Errors and Fixes | ${SITE_NAME}`,
-      description:
-        "Browse every common Roblox error in one place with what it means, why it happens, and the fastest way to fix it.",
-      alternates: buildAlternates(CANONICAL)
-    };
-  }
-
-  const title = resolveSeoTitle(catalog.seo_title) ?? catalog.title ?? `Roblox Errors and Fixes | ${SITE_NAME}`;
-  const description = catalog.meta_description ?? CATALOG_DESCRIPTION;
-  const image = catalog.thumb_url || FALLBACK_IMAGE;
+  const [catalog, { items }] = await Promise.all([
+    getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES),
+    loadRobloxErrorsPageData()
+  ]);
+  const title = `${items.length} Roblox error codes: full list and fixes`;
+  const description =
+    catalog?.meta_description ??
+    (catalog
+      ? CATALOG_DESCRIPTION
+      : "Browse every common Roblox error in one place with what it means, why it happens, and the fastest way to fix it.");
+  const image = catalog?.thumb_url || FALLBACK_IMAGE;
 
   return {
     title,
