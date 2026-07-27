@@ -9,6 +9,7 @@ type CodeSessionState = {
 
 const SESSION_ENDPOINT = "/api/codes/session";
 const PROGRESS_ENDPOINT = "/api/codes/progress";
+const PROGRESS_OWNER_KEY = "code-progress-account-owner";
 
 let sessionState: CodeSessionState = { status: "loading", userId: null };
 let sessionPromise: Promise<void> | null = null;
@@ -94,6 +95,59 @@ export function getLegacyCodeProgressStorageKey(gameName: string) {
   return `roblox-codes-checked-${slug}`;
 }
 
+function getCodeProgressMigrationStorageKey(userId: string, gameSlug: string) {
+  return `code-progress-migrated:${userId.trim()}:${gameSlug.trim().toLowerCase()}`;
+}
+
+export function canMigrateLocalCodeProgress(userId: string): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const owner = window.localStorage.getItem(PROGRESS_OWNER_KEY);
+    return !owner || owner === userId;
+  } catch {
+    return false;
+  }
+}
+
+export function claimLocalCodeProgressOwner(userId: string) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(PROGRESS_OWNER_KEY, userId);
+  } catch {
+    // ignore storage errors
+  }
+}
+
+export function prepareAnonymousCodeProgress(gameSlug: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const owner = window.localStorage.getItem(PROGRESS_OWNER_KEY);
+    if (owner) {
+      window.localStorage.removeItem(getCodeProgressMigrationStorageKey(owner, gameSlug));
+    }
+  } catch {
+    // ignore storage errors
+  }
+}
+
+export function hasMigratedLocalCodeProgress(userId: string, gameSlug: string): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.localStorage.getItem(getCodeProgressMigrationStorageKey(userId, gameSlug)) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function markLocalCodeProgressMigrated(userId: string, gameSlug: string) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(getCodeProgressMigrationStorageKey(userId, gameSlug), "1");
+  } catch {
+    // ignore storage errors
+  }
+}
+
 export function readLocalCodeProgress(gameSlug: string, gameName: string): string[] {
   if (typeof window === "undefined") return [];
 
@@ -125,19 +179,19 @@ export function writeLocalCodeProgress(gameSlug: string, gameName: string, usedC
   }
 }
 
-export async function loadAccountCodeProgress(gameSlug: string): Promise<string[]> {
+export async function loadAccountCodeProgress(gameSlug: string): Promise<string[] | null> {
   const trimmed = gameSlug.trim();
-  if (!trimmed) return [];
+  if (!trimmed) return null;
 
   try {
     const res = await fetch(`${PROGRESS_ENDPOINT}?slug=${encodeURIComponent(trimmed)}`, {
       credentials: "include"
     });
-    if (!res.ok) return [];
+    if (!res.ok) return null;
     const payload = await res.json().catch(() => ({}));
     return normalizeUsedCodes(payload?.usedCodes);
   } catch {
-    return [];
+    return null;
   }
 }
 
@@ -158,5 +212,33 @@ export async function saveAccountCodeProgress(gameSlug: string, usedCodes: strin
     return res.ok;
   } catch {
     return false;
+  }
+}
+
+export async function updateAccountCodeProgress(
+  gameSlug: string,
+  code: string,
+  used: boolean
+): Promise<string[] | null> {
+  const trimmedSlug = gameSlug.trim();
+  const trimmedCode = code.trim();
+  if (!trimmedSlug || !trimmedCode) return null;
+
+  try {
+    const res = await fetch(PROGRESS_ENDPOINT, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        slug: trimmedSlug,
+        code: trimmedCode,
+        used
+      })
+    });
+    if (!res.ok) return null;
+    const payload = await res.json().catch(() => ({}));
+    return normalizeUsedCodes(payload?.usedCodes);
+  } catch {
+    return null;
   }
 }

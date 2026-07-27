@@ -14,7 +14,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/account/avatar` | `GET` | `src/app/api/account/avatar/route.ts` | Signed-in avatar/display-name payload for account UI. |
 | `/api/checklists/progress` | `GET`, `PUT` | `src/app/api/checklists/progress/route.ts` | Per-user checklist progress read/write. |
 | `/api/checklists/session` | `GET` | `src/app/api/checklists/session/route.ts` | Session snapshot for checklist UI. |
-| `/api/codes/progress` | `GET`, `PUT` | `src/app/api/codes/progress/route.ts` | Per-user used-code progress read/write. |
+| `/api/codes/progress` | `GET`, `PUT`, `PATCH` | `src/app/api/codes/progress/route.ts` | Per-user used-code progress read/write; PATCH applies one used/restored action without overwriting concurrent progress. |
 | `/api/codes/session` | `GET` | `src/app/api/codes/session/route.ts` | Session snapshot for code pages. |
 | `/api/comments` | `POST` | `src/app/api/comments/route.ts` | Create moderated comments with guest or signed-in author support. |
 | `/api/comments/[id]` | `PATCH`, `DELETE` | `src/app/api/comments/[id]/route.ts` | Edit or delete the current user's comments. |
@@ -22,6 +22,11 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/consent` | `GET` | `src/app/api/consent/route.ts` | Consent state resolution. |
 | `/api/extension/roblox-game-codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-codes/route.ts` | Public Chrome extension lookup for a Roblox game page, returning a three-code preview and full Bloxodes URL. |
 | `/api/extension/roblox-game-stats` | `GET`, `POST`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-stats/route.ts` | Seven-day player-history lookup by Roblox place ID; rate-limited POST verifies and enrolls unknown games in the existing universe stats pipeline. |
+| `/api/extension/auth/complete` | `GET`, `POST` | `apps/web/src/app/api/extension/auth/complete/route.ts` | Browser-mediated Roblox sign-in confirmation and short-lived handoff to the Chromium identity callback. |
+| `/api/extension/auth/exchange` | `POST`, `OPTIONS` | `apps/web/src/app/api/extension/auth/exchange/route.ts` | Exchanges a redirect-bound, one-time extension handoff for an `app_sessions` bearer token. |
+| `/api/extension/auth/session` | `GET`, `OPTIONS` | `apps/web/src/app/api/extension/auth/session/route.ts` | Returns the extension user for a valid bearer session. |
+| `/api/extension/auth/logout` | `POST`, `OPTIONS` | `apps/web/src/app/api/extension/auth/logout/route.ts` | Revokes the current extension bearer session. |
+| `/api/extension/codes/progress` | `GET`, `PUT`, `PATCH`, `OPTIONS` | `apps/web/src/app/api/extension/codes/progress/route.ts` | Reads and incrementally updates the signed-in user's used-code progress shared with the website. |
 | `/api/feedback` | `POST` | `src/app/api/feedback/route.ts` | Same-origin site feedback submissions from the header drawer with optional contact email. |
 | `/api/health` | `GET` | `src/app/api/health/route.ts` | Runtime health endpoint. |
 | `/api/mobile/auth/complete` | `GET` | `apps/web/src/app/api/mobile/auth/complete/route.ts` | Mobile login completion: reads the web session cookie and redirects to `bloxodes://auth` with a short-lived signed handoff code (or to web login when signed out). |

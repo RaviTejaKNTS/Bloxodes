@@ -9,9 +9,15 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
+  canMigrateLocalCodeProgress,
+  claimLocalCodeProgressOwner,
+  hasMigratedLocalCodeProgress,
   loadAccountCodeProgress,
+  markLocalCodeProgressMigrated,
+  prepareAnonymousCodeProgress,
   readLocalCodeProgress,
   saveAccountCodeProgress,
+  updateAccountCodeProgress,
   useCodeProgressSession,
   writeLocalCodeProgress
 } from "@/lib/code-progress-client";
@@ -54,28 +60,66 @@ export function ActiveCodes({
 
     let cancelled = false;
 
-    async function loadProgress() {
+    async function loadProgress(allowLocalMigration: boolean) {
       const localUsedCodes = readLocalCodeProgress(gameSlug, gameName);
 
       if (!session.userId) {
         if (cancelled) return;
+        prepareAnonymousCodeProgress(gameSlug);
         setUsedCodes(new Set(localUsedCodes));
         setProgressReady(true);
         return;
       }
 
       const accountUsedCodes = await loadAccountCodeProgress(gameSlug);
-      if (cancelled) return;
+      if (cancelled || accountUsedCodes === null) {
+        if (!cancelled) {
+          setUsedCodes(new Set(localUsedCodes));
+          setProgressReady(true);
+        }
+        return;
+      }
 
-      const mergedUsedCodes = Array.from(new Set([...accountUsedCodes, ...localUsedCodes]));
-      setUsedCodes(new Set(mergedUsedCodes));
+      const shouldMigrate =
+        allowLocalMigration &&
+        canMigrateLocalCodeProgress(session.userId) &&
+        !hasMigratedLocalCodeProgress(session.userId, gameSlug);
+      if (shouldMigrate) {
+        const mergedUsedCodes = Array.from(new Set([...accountUsedCodes, ...localUsedCodes]));
+        const needsSave =
+          mergedUsedCodes.length !== accountUsedCodes.length ||
+          mergedUsedCodes.some((code) => !accountUsedCodes.includes(code));
+        const migrated = !needsSave || (await saveAccountCodeProgress(gameSlug, mergedUsedCodes));
+        if (cancelled) return;
+        if (migrated) {
+          markLocalCodeProgressMigrated(session.userId, gameSlug);
+        }
+        claimLocalCodeProgressOwner(session.userId);
+        setUsedCodes(new Set(mergedUsedCodes));
+        setProgressReady(true);
+        return;
+      }
+
+      claimLocalCodeProgressOwner(session.userId);
+      markLocalCodeProgressMigrated(session.userId, gameSlug);
+      setUsedCodes(new Set(accountUsedCodes));
       setProgressReady(true);
     }
 
-    void loadProgress();
+    void loadProgress(true);
+
+    const refresh = () => {
+      if (document.visibilityState === "visible") {
+        void loadProgress(false);
+      }
+    };
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", refresh);
 
     return () => {
       cancelled = true;
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", refresh);
     };
   }, [gameName, gameSlug, session.status, session.userId]);
 
@@ -86,11 +130,7 @@ export function ActiveCodes({
 
     const serializedCodes = Array.from(usedCodes);
     writeLocalCodeProgress(gameSlug, gameName, serializedCodes);
-
-    if (session.userId) {
-      void saveAccountCodeProgress(gameSlug, serializedCodes);
-    }
-  }, [gameName, gameSlug, progressReady, session.userId, usedCodes]);
+  }, [gameName, gameSlug, progressReady, usedCodes]);
 
   const enriched = useMemo<EnrichedCode[]>(() => {
     return codes.map((code) => {
@@ -115,6 +155,13 @@ export function ActiveCodes({
       next.add(code);
       return next;
     });
+    if (session.userId) {
+      void updateAccountCodeProgress(gameSlug, code, true).then((savedCodes) => {
+        if (savedCodes) {
+          setUsedCodes(new Set(savedCodes));
+        }
+      });
+    }
     trackEvent("code_mark_used", { game_slug: gameSlug, code, used: true });
   }
 
@@ -128,6 +175,13 @@ export function ActiveCodes({
       next.delete(code);
       return next;
     });
+    if (session.userId) {
+      void updateAccountCodeProgress(gameSlug, code, false).then((savedCodes) => {
+        if (savedCodes) {
+          setUsedCodes(new Set(savedCodes));
+        }
+      });
+    }
     trackEvent("code_mark_used", { game_slug: gameSlug, code, used: false });
   }
 

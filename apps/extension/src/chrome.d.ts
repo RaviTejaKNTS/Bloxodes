@@ -11,7 +11,25 @@ declare const chrome: {
       message?: string;
     };
   };
+  identity: {
+    getRedirectURL(path?: string): string;
+    launchWebAuthFlow(
+      details: {
+        url: string;
+        interactive?: boolean;
+      },
+      callback: (redirectUrl?: string) => void
+    ): void;
+  };
   storage: {
+    local: {
+      get(
+        keys: string | string[] | Record<string, unknown> | null,
+        callback: (items: Record<string, unknown>) => void
+      ): void;
+      set(items: Record<string, unknown>, callback?: () => void): void;
+      remove(keys: string | string[], callback?: () => void): void;
+    };
     sync: {
       get(
         keys: string | string[] | Record<string, unknown> | null,

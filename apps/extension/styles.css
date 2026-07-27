@@ -134,6 +134,15 @@
   border-top: 1px solid var(--bloxodes-border-muted);
 }
 
+#bloxodes-codes-extension .bloxodes-code-row.is-used {
+  opacity: 0.7;
+}
+
+#bloxodes-codes-extension code.is-used,
+#bloxodes-codes-extension .bloxodes-code-main p.is-used {
+  text-decoration: line-through;
+}
+
 :is(#bloxodes-codes-extension, #bloxodes-stats-extension) .bloxodes-code-index {
   align-items: center;
   background: var(--bloxodes-surface-muted-soft);
@@ -197,6 +206,36 @@
   gap: 6px;
 }
 
+#bloxodes-codes-extension .bloxodes-code-action-row {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+}
+
+#bloxodes-codes-extension .bloxodes-unuse-button {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--bloxodes-border);
+  border-radius: 999px;
+  color: var(--bloxodes-muted);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  height: 30px;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  transition: border-color 140ms ease, color 140ms ease;
+  width: 30px;
+}
+
+#bloxodes-codes-extension .bloxodes-unuse-button:hover {
+  border-color: var(--bloxodes-accent-border-strong);
+  color: var(--bloxodes-accent);
+}
+
 :is(#bloxodes-codes-extension, #bloxodes-stats-extension) .bloxodes-copy-button,
 :is(#bloxodes-codes-extension, #bloxodes-stats-extension) .bloxodes-retry-button {
   align-items: center;
@@ -228,6 +267,11 @@
   background: var(--bloxodes-accent-dark);
   border-color: var(--bloxodes-accent-border-strong);
   color: var(--bloxodes-white);
+}
+
+#bloxodes-codes-extension .bloxodes-copy-button.is-error {
+  border-color: #dc6262;
+  color: #b42318;
 }
 
 :is(#bloxodes-codes-extension, #bloxodes-stats-extension) .bloxodes-copy-icon {

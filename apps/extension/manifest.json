@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Bloxodes - Roblox Game Codes",
-  "version": "5.0.0",
-  "description": "See active Roblox game codes and seven-day player history directly on Roblox game pages.",
+  "version": "6.0.0",
+  "description": "See Roblox game codes and player history, and sync used codes with your Bloxodes account.",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -23,6 +23,7 @@
     }
   },
   "permissions": [
+    "identity",
     "storage"
   ],
   "host_permissions": [

@@ -10,8 +10,35 @@
     <main class="popup-shell">
       <header class="popup-header">
         <img src="brand/Bloxodes-dark.png" alt="Bloxodes" />
-        <p>Game-page widgets</p>
+        <p>Roblox game companion</p>
       </header>
+
+      <section class="account-card" aria-label="Bloxodes account">
+        <div id="auth-loading" class="account-loading">Checking account…</div>
+
+        <div id="signed-out" hidden>
+          <div class="account-copy">
+            <strong>Sync used codes</strong>
+            <small>Sign in to keep copied and checked codes in sync across devices.</small>
+          </div>
+          <button id="sign-in" class="primary-button" type="button">Sign in with Roblox</button>
+        </div>
+
+        <div id="signed-in" hidden>
+          <div class="account-profile">
+            <img id="account-avatar" alt="" hidden />
+            <span id="account-avatar-fallback" aria-hidden="true">B</span>
+            <span class="account-copy">
+              <small>Signed in</small>
+              <strong id="account-name">Bloxodes user</strong>
+              <small id="account-username"></small>
+            </span>
+          </div>
+          <button id="sign-out" class="secondary-button" type="button">Sign out</button>
+        </div>
+
+        <p id="auth-status" class="auth-status" aria-live="polite"></p>
+      </section>
 
       <section class="widget-list" aria-label="Bloxodes widget settings">
         <label class="widget-setting" for="show-codes">

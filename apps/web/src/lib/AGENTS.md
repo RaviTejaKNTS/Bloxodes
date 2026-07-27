@@ -12,13 +12,16 @@ Most application behavior should flow through this folder before it reaches page
 - `catalog.ts`, `tools.ts`, and `wiki.ts`: Supabase-backed content helpers, related-content aggregators, and index readers.
 - `seo.ts`, `site-config.ts`, `sitemap.ts`, `content-dates.ts`, `updated-label.ts`: metadata, canonical URLs, sitemap shaping, and freshness labels.
 - `auth/*`: session cookies, Roblox OAuth helpers, navigation safety, and current-user lookup.
+- `auth/extension-session.ts`: validated Chromium identity callback handling and short-lived, redirect-bound extension login handoffs.
 - `security/*`: request origin checks, IP extraction, CSP, and rate limiting.
 - `comments.ts` and `comment-moderation.ts`: comment formatting, tags, and moderation decisions.
 - `code-utils.ts`: shared code reward cleanup, sorting, and "new code" freshness rules used by website, extension API, and mobile API.
+- `code-progress.ts` and `code-progress-client.ts`: server-authoritative used-code persistence plus safe website migration and incremental sync.
 - `article-media.ts`: YouTube directive parsing/embeds and article image path rules for `/articles` content; used by `markdown.ts` and content verification.
 - `article-blocks.ts`: versioned parsing and validation for fenced `tier-list` and `article-checklist` blocks embedded in article Markdown.
 - `markdown.ts`: GFM markdown → sanitized HTML, including `{{ youtube: ... }}` embeds.
 - `extension-codes.ts` and `extension-codes-utils.ts`: public Chrome extension payload building and Roblox page-context normalization.
+- `extension-api.ts`: extension request validation and private CORS/no-store response helpers.
 - `mobile-codes.ts`: public mobile app payload building for codes index/detail screens.
 - Domain helpers:
   - `forge/*`

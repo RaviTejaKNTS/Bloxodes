@@ -267,10 +267,17 @@ export default function PrivacyPolicyPage() {
             Updating to version 4.0.1 or later removes this legacy URL transmission.
           </p>
           <p>
-            Extension API requests are not tied to a Bloxodes or Roblox account and do not include cookies or authentication credentials.
-            As with normal web requests, our hosting, CDN, and security providers may process routine technical data such as IP address,
-            browser type, request time, and requested endpoint for delivery, security, abuse prevention, and operational reliability. The
-            extensions contain no advertising, analytics, or user-tracking code.
+            Extension sign-in is optional. In version 6.0.0 or later, choosing to sign in opens Bloxodes and Roblox&apos;s official OAuth flow;
+            the extension never sees your Roblox password. After you confirm the connection, Bloxodes gives the extension an app-session
+            token that is stored only in that browser&apos;s local extension storage, not Chrome Sync. While signed in, the extension sends the
+            game slug and codes you mark used or restore so the same state can appear on Bloxodes and your other signed-in devices. Signing
+            out revokes the extension session.
+          </p>
+          <p>
+            Signed-out extension requests remain anonymous and do not include Bloxodes cookies or account credentials. As with normal web
+            requests, our hosting, CDN, and security providers may process routine technical data such as IP address, browser type, request
+            time, and requested endpoint for delivery, security, abuse prevention, and operational reliability. The extensions contain no
+            advertising, analytics, or user-tracking code.
           </p>
         </section>
 

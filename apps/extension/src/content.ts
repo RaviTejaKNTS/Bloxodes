@@ -9,6 +9,13 @@ type BloxodesHistoryRequest = {
   placeId: number;
 };
 
+type BloxodesCodeProgressRequest = {
+  type: "BLOXODES_SAVE_CODE_PROGRESS";
+  gameSlug: string;
+  code: string;
+  used: boolean;
+};
+
 type BloxodesContentCode = {
   code: string;
   rewardText: string | null;
@@ -28,6 +35,8 @@ type BloxodesContentPayload = {
     coverImage: string | null;
   };
   codes?: BloxodesContentCode[];
+  usedCodes?: string[];
+  signedIn?: boolean;
   totalActive?: number;
   shown?: number;
   hasMore?: boolean;
@@ -106,11 +115,13 @@ const BLOXODES_CODES_HUB_URL = "https://bloxodes.com/codes";
 const BLOXODES_LOGO_DARK_URL = chrome.runtime.getURL("brand/Bloxodes-dark.png");
 const BLOXODES_LOGO_LIGHT_URL = chrome.runtime.getURL("brand/Bloxodes-light.png");
 const BLOXODES_SETTINGS_KEY = "widgetSettings";
+const BLOXODES_AUTH_STORAGE_KEY = "authSession";
 const BLOXODES_DEFAULT_SETTINGS: BloxodesWidgetSettings = {
   showCodes: true,
   showHistory: true
 };
 const BLOXODES_STATE = {
+  copiedCode: "",
   lastHiddenRequestKey: "",
   lastMatchedPayload: null as BloxodesContentPayload | null,
   lastRequestKey: "",
@@ -520,12 +531,15 @@ function renderStatsPayload(payload: BloxodesHistoryPayload): void {
 function renderCodes(payload: BloxodesContentPayload): void {
   const gameName = payload.game?.name ?? "Roblox";
   const codes = payload.codes ?? [];
+  const usedCodes = new Set(payload.usedCodes ?? []);
   const totalActive = payload.totalActive ?? codes.length;
   const fullListUrl = payload.fullListUrl ?? payload.game?.url ?? BLOXODES_CODES_HUB_URL;
   const body = codes.length
     ? `<div class="bloxodes-code-list">
         ${codes
           .map((code, index) => {
+            const isUsed = usedCodes.has(code.code);
+            const isCopied = BLOXODES_STATE.copiedCode === code.code;
             const reward = code.rewardText
               ? /this code gives you/i.test(code.rewardText)
                 ? code.rewardText
@@ -533,18 +547,24 @@ function renderCodes(payload: BloxodesContentPayload): void {
               : "No reward listed yet.";
             const addedAt = formatAddedAt(code.addedAt);
             return `
-              <article class="bloxodes-code-row">
+              <article class="bloxodes-code-row${isUsed ? " is-used" : ""}">
                 <span class="bloxodes-code-index">${index + 1}</span>
                 <div class="bloxodes-code-main">
                   <div class="bloxodes-code-line">
-                    <code>${escapeHtml(code.code)}</code>
+                    <code class="${isUsed ? "is-used" : ""}">${escapeHtml(code.code)}</code>
                     ${code.isNew ? `<span class="bloxodes-mini-badge">New</span>` : ""}
                     ${code.levelRequirement != null ? `<span class="bloxodes-mini-badge">Level ${code.levelRequirement}+</span>` : ""}
                   </div>
-                  <p>${escapeHtml(reward)}</p>
+                  <p class="${isUsed ? "is-used" : ""}">${escapeHtml(reward)}</p>
                 </div>
                 <div class="bloxodes-code-actions">
-                  <button class="bloxodes-copy-button" type="button" data-code="${escapeHtml(code.code)}" aria-label="Copy code ${escapeHtml(code.code)}">
+                  <div class="bloxodes-code-action-row">
+                    ${
+                      isUsed
+                        ? `<button class="bloxodes-unuse-button" type="button" data-action="unuse" data-code="${escapeHtml(code.code)}" aria-label="Mark code ${escapeHtml(code.code)} as unused" title="Mark as unused">↺</button>`
+                        : ""
+                    }
+                    <button class="bloxodes-copy-button${isCopied ? " is-copied" : ""}" type="button" data-action="copy" data-code="${escapeHtml(code.code)}" aria-label="Copy code ${escapeHtml(code.code)}">
                     <svg aria-hidden="true" class="bloxodes-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                       <g class="bloxodes-copy-icon-copy">
                         <rect x="9" y="9" width="13" height="13" rx="2"></rect>
@@ -552,8 +572,9 @@ function renderCodes(payload: BloxodesContentPayload): void {
                       </g>
                       <path class="bloxodes-copy-icon-check" d="m5 13 4 4L19 7"></path>
                     </svg>
-                    <span class="bloxodes-copy-label">Copy</span>
-                  </button>
+                    <span class="bloxodes-copy-label">${isCopied ? "Copied" : "Copy"}</span>
+                    </button>
+                  </div>
                   ${addedAt ? `<span class="bloxodes-added">Added ${escapeHtml(addedAt)}</span>` : ""}
                 </div>
               </article>
@@ -569,15 +590,16 @@ function renderCodes(payload: BloxodesContentPayload): void {
     `;
 
   const shownCopy = totalActive > codes.length ? `Showing ${codes.length} of ${totalActive} active codes` : `${totalActive} active codes`;
+  const syncCopy = payload.signedIn ? " · Synced" : " · Sign in from the popup to sync";
   renderShell(
     `Active ${gameName} Codes`,
     `Checked and verified on ${formatLastChecked(payload.lastCheckedAt)}`,
     `${totalActive} active`,
     body,
-    `<span>${escapeHtml(shownCopy)}</span>${renderFullListLink(fullListUrl)}`
+    `<span>${escapeHtml(`${shownCopy}${syncCopy}`)}</span>${renderFullListLink(fullListUrl)}`
   );
 
-  attachCopyHandlers();
+  attachCodeHandlers(payload);
 }
 
 async function copyText(value: string): Promise<void> {
@@ -596,26 +618,76 @@ async function copyText(value: string): Promise<void> {
   textarea.remove();
 }
 
-function attachCopyHandlers(): void {
-  document.querySelectorAll<HTMLButtonElement>(".bloxodes-copy-button").forEach((button) => {
-    button.addEventListener("click", async () => {
-      const code = button.dataset.code;
-      if (!code) return;
-      try {
-        await copyText(code);
-        button.classList.add("is-copied");
-        const label = button.querySelector("span:last-child");
-        if (label) label.textContent = "Copied";
-        window.setTimeout(() => {
-          button.classList.remove("is-copied");
-          if (label) label.textContent = "Copy";
-        }, 1800);
-      } catch {
-        const label = button.querySelector("span:last-child");
-        if (label) label.textContent = "Copy failed";
-      }
-    });
+async function updateCodeUsage(
+  payload: BloxodesContentPayload,
+  code: string,
+  used: boolean
+): Promise<void> {
+  const gameSlug = payload.game?.slug;
+  if (!gameSlug) return;
+
+  const previousUsedCodes = payload.usedCodes ?? [];
+  const nextUsedCodes = new Set(previousUsedCodes);
+  if (used) {
+    nextUsedCodes.add(code);
+  } else {
+    nextUsedCodes.delete(code);
+  }
+  payload.usedCodes = Array.from(nextUsedCodes);
+  renderCodes(payload);
+
+  const response = await requestCodeProgress({
+    type: "BLOXODES_SAVE_CODE_PROGRESS",
+    gameSlug,
+    code,
+    used
   });
+  if (!response.ok || !response.payload.ok) {
+    payload.usedCodes = previousUsedCodes;
+    renderCodes(payload);
+    return;
+  }
+
+  payload.usedCodes = response.payload.usedCodes ?? payload.usedCodes;
+  payload.signedIn = response.payload.signedIn ?? payload.signedIn;
+  renderCodes(payload);
+}
+
+function attachCodeHandlers(payload: BloxodesContentPayload): void {
+  document
+    .querySelectorAll<HTMLButtonElement>(
+      `#${BLOXODES_PANEL_ID} [data-action="copy"], #${BLOXODES_PANEL_ID} [data-action="unuse"]`
+    )
+    .forEach((button) => {
+      button.addEventListener("click", async () => {
+        const code = button.dataset.code;
+        const action = button.dataset.action;
+        if (!code || !action) return;
+
+        if (action === "unuse") {
+          await updateCodeUsage(payload, code, false);
+          return;
+        }
+
+        try {
+          await copyText(code);
+          BLOXODES_STATE.copiedCode = code;
+          renderCodes(payload);
+          await updateCodeUsage(payload, code, true);
+          window.setTimeout(() => {
+            if (BLOXODES_STATE.copiedCode !== code) return;
+            BLOXODES_STATE.copiedCode = "";
+            if (BLOXODES_STATE.lastMatchedPayload === payload) {
+              renderCodes(payload);
+            }
+          }, 1800);
+        } catch {
+          button.classList.add("is-error");
+          const label = button.querySelector(".bloxodes-copy-label");
+          if (label) label.textContent = "Copy failed";
+        }
+      });
+    });
 }
 
 function requestCodes(message: BloxodesContentRequest): Promise<BloxodesContentResponse> {
@@ -623,6 +695,23 @@ function requestCodes(message: BloxodesContentRequest): Promise<BloxodesContentR
     chrome.runtime.sendMessage(message, (response?: BloxodesContentResponse) => {
       if (chrome.runtime.lastError) {
         resolve({ ok: false, error: chrome.runtime.lastError.message ?? "Extension request failed" });
+        return;
+      }
+      resolve(response ?? { ok: false, error: "No response from Bloxodes extension" });
+    });
+  });
+}
+
+function requestCodeProgress(
+  message: BloxodesCodeProgressRequest
+): Promise<BloxodesContentResponse> {
+  return new Promise((resolve) => {
+    chrome.runtime.sendMessage(message, (response?: BloxodesContentResponse) => {
+      if (chrome.runtime.lastError) {
+        resolve({
+          ok: false,
+          error: chrome.runtime.lastError.message ?? "Extension request failed"
+        });
         return;
       }
       resolve(response ?? { ok: false, error: "No response from Bloxodes extension" });
@@ -842,7 +931,20 @@ async function start(): Promise<void> {
     }
   }, 1000);
 
+  window.addEventListener("focus", () => {
+    BLOXODES_STATE.lastRequestKey = "";
+    scheduleRun();
+  });
+
   chrome.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName === "local" && changes[BLOXODES_AUTH_STORAGE_KEY]) {
+      BLOXODES_STATE.lastHiddenRequestKey = "";
+      BLOXODES_STATE.lastMatchedPayload = null;
+      BLOXODES_STATE.lastRequestKey = "";
+      scheduleRun();
+      return;
+    }
+
     if (areaName !== "sync") return;
     const change = changes[BLOXODES_SETTINGS_KEY];
     if (!change) return;

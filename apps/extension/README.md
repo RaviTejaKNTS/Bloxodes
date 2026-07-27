@@ -12,6 +12,8 @@ Chromium MV3 extension for showing Bloxodes codes and seven-day player history o
 - Shows a seven-day player-count graph immediately below Roblox's native game statistics.
 - Verifies unknown games through the Bloxodes backend and starts the normal universe tracking workflow.
 - Provides toolbar toggles for the Active codes and Player history widgets.
+- Provides optional Roblox sign-in from the toolbar popup.
+- Marks copied codes as used, supports restoring them, and syncs used-code state with the Bloxodes website when signed in.
 - Hides only the codes widget when Bloxodes has no published matching codes page for that game.
 - Follows Roblox light/dark mode and uses packaged Bloxodes logo assets in the footer CTA.
 
@@ -30,7 +32,7 @@ apps/extension/
   scripts/package.mjs
 ```
 
-Generated files are written to `apps/extension/dist/` and the store archive is written to `apps/extension/bloxodes-extension-v5.0.0.zip`.
+Generated files are written to `apps/extension/dist/` and the store archive is written to `apps/extension/bloxodes-extension-v6.0.0.zip`.
 Do not edit `dist/` directly.
 
 ## Commands
@@ -51,14 +53,17 @@ npm run package:extension
 4. Click "Load unpacked".
 5. Select `apps/extension/dist`.
 6. Click the toolbar icon and verify both widget toggles are enabled.
-7. Open a tracked Roblox game and confirm the history card appears directly below the native statistics list.
-8. Toggle each widget off and on and confirm the page updates without a reload.
-9. Test with only the unpacked extension enabled, then optionally enable the live store extension to check for style isolation.
+7. Sign in with Roblox and verify the connected account appears in the popup.
+8. Open a tracked Roblox game and confirm the history card appears directly below the native statistics list.
+9. Copy a code, confirm it is struck through, and confirm the same used state appears on its Bloxodes codes page.
+10. Restore the code on either surface, refocus the other surface, and confirm it becomes active again.
+11. Toggle each widget off and on and confirm the page updates without a reload.
+12. Test with only the unpacked extension enabled, then optionally enable the live store extension to check for style isolation.
 
 The store upload archive is:
 
 ```text
-apps/extension/bloxodes-extension-v5.0.0.zip
+apps/extension/bloxodes-extension-v6.0.0.zip
 ```
 
 ## Store Notes

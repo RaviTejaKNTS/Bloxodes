@@ -49,6 +49,7 @@ await writeFile(
     "",
     "This Chromium extension package can be submitted to the Chrome Web Store or Microsoft Edge Add-ons.",
     "Shows active code previews and seven-day player history on Roblox game pages.",
-    "Use the toolbar popup to enable or disable either widget."
+    "Use the toolbar popup to sign in with Roblox or enable and disable either widget.",
+    "Signed-in users can sync copied and restored code progress with the Bloxodes website."
   ].join("\n")
 );
