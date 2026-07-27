@@ -1,0 +1,169 @@
+:root {
+  color-scheme: light dark;
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f6f7fb;
+  color: #20263c;
+  margin: 0;
+  min-width: 320px;
+}
+
+.popup-shell {
+  padding: 18px;
+}
+
+.popup-header {
+  border-bottom: 1px solid #dfe2ee;
+  padding-bottom: 14px;
+}
+
+.popup-header img {
+  display: block;
+  height: 24px;
+  object-fit: contain;
+  object-position: left center;
+  width: auto;
+}
+
+.popup-header p {
+  color: #6e7692;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin: 8px 0 0;
+  text-transform: uppercase;
+}
+
+.widget-list {
+  display: grid;
+  gap: 10px;
+  padding: 14px 0;
+}
+
+.widget-setting {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #dfe2ee;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  gap: 14px;
+  justify-content: space-between;
+  padding: 13px;
+}
+
+.widget-setting > span:first-child {
+  min-width: 0;
+}
+
+.widget-setting strong,
+.widget-setting small {
+  display: block;
+}
+
+.widget-setting strong {
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.widget-setting small {
+  color: #6e7692;
+  font-size: 12px;
+  line-height: 1.35;
+  margin-top: 4px;
+}
+
+.toggle {
+  flex: 0 0 auto;
+  height: 24px;
+  position: relative;
+  width: 42px;
+}
+
+.toggle input {
+  height: 1px;
+  opacity: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.toggle span {
+  background: #b8bfd3;
+  border-radius: 999px;
+  inset: 0;
+  position: absolute;
+  transition: background 150ms ease;
+}
+
+.toggle span::after {
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgb(32 38 60 / 25%);
+  content: "";
+  height: 18px;
+  left: 3px;
+  position: absolute;
+  top: 3px;
+  transition: transform 150ms ease;
+  width: 18px;
+}
+
+.toggle input:checked + span {
+  background: #4f46e5;
+}
+
+.toggle input:checked + span::after {
+  transform: translateX(18px);
+}
+
+.toggle input:focus-visible + span {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+
+.save-status {
+  color: #6e7692;
+  font-size: 12px;
+  margin: 0;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #1f2127;
+    color: #f1f3f7;
+  }
+
+  .popup-header {
+    border-color: rgb(255 255 255 / 14%);
+  }
+
+  .popup-header img {
+    content: url("brand/Bloxodes-light.png");
+  }
+
+  .popup-header p,
+  .widget-setting small,
+  .save-status {
+    color: #b8becd;
+  }
+
+  .widget-setting {
+    background: #2f323b;
+    border-color: rgb(255 255 255 / 14%);
+  }
+
+  .toggle span {
+    background: #616879;
+  }
+
+  .toggle input:checked + span {
+    background: #84a9ff;
+  }
+}

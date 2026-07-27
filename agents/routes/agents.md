@@ -21,6 +21,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/comments/session` | `GET` | `src/app/api/comments/session/route.ts` | Signed-in user payload for comment forms. |
 | `/api/consent` | `GET` | `src/app/api/consent/route.ts` | Consent state resolution. |
 | `/api/extension/roblox-game-codes` | `GET`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-codes/route.ts` | Public Chrome extension lookup for a Roblox game page, returning a three-code preview and full Bloxodes URL. |
+| `/api/extension/roblox-game-stats` | `GET`, `POST`, `OPTIONS` | `apps/web/src/app/api/extension/roblox-game-stats/route.ts` | Seven-day player-history lookup by Roblox place ID; rate-limited POST verifies and enrolls unknown games in the existing universe stats pipeline. |
 | `/api/feedback` | `POST` | `src/app/api/feedback/route.ts` | Same-origin site feedback submissions from the header drawer with optional contact email. |
 | `/api/health` | `GET` | `src/app/api/health/route.ts` | Runtime health endpoint. |
 | `/api/mobile/auth/complete` | `GET` | `apps/web/src/app/api/mobile/auth/complete/route.ts` | Mobile login completion: reads the web session cookie and redirects to `bloxodes://auth` with a short-lived signed handoff code (or to web login when signed out). |

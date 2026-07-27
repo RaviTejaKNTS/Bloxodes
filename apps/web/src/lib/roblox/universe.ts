@@ -217,7 +217,12 @@ export async function ensureUniverseForRobloxLink(
     }
   };
 
-  const { error: insertError } = await supabase.from("roblox_universes").insert(insertPayload);
+  const { error: insertError } = await supabase
+    .from("roblox_universes")
+    .upsert(insertPayload, {
+      onConflict: "universe_id",
+      ignoreDuplicates: true
+    });
   if (insertError) {
     throw new Error(`Failed to insert universe ${universeId}: ${insertError.message}`);
   }

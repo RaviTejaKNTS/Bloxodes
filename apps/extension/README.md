@@ -1,15 +1,18 @@
 # Bloxodes Browser Extension
 
-Chromium MV3 extension for showing a small Bloxodes codes preview on Roblox game pages. The same package supports Google Chrome and Microsoft Edge.
+Chromium MV3 extension for showing Bloxodes codes and seven-day player history on Roblox game pages. The same package supports Google Chrome and Microsoft Edge.
 
 ## What It Does
 
 - Runs on `www.roblox.com/games/*` and `web.roblox.com/games/*`.
 - Reads the public Roblox place ID and visible game name.
-- Asks the background service worker to call `https://bloxodes.com/api/extension/roblox-game-codes`.
+- Asks the background service worker to call Bloxodes extension API routes for codes and player history.
 - Injects a Bloxodes-styled active-codes card into the Roblox page.
 - Shows up to 3 active codes and links to the full Bloxodes codes page.
-- Does not show anything when Bloxodes has no published matching codes page for that game.
+- Shows a seven-day player-count graph immediately below Roblox's native game statistics.
+- Verifies unknown games through the Bloxodes backend and starts the normal universe tracking workflow.
+- Provides toolbar toggles for the Active codes and Player history widgets.
+- Hides only the codes widget when Bloxodes has no published matching codes page for that game.
 - Follows Roblox light/dark mode and uses packaged Bloxodes logo assets in the footer CTA.
 
 ## Source Shape
@@ -17,14 +20,17 @@ Chromium MV3 extension for showing a small Bloxodes codes preview on Roblox game
 ```txt
 apps/extension/
   manifest.json
+  popup.html
+  popup.css
   src/background.ts
   src/content.ts
+  src/popup.ts
   styles.css
   scripts/build.mjs
   scripts/package.mjs
 ```
 
-Generated files are written to `apps/extension/dist/` and the store archive is written to `apps/extension/bloxodes-extension-v4.0.1.zip`.
+Generated files are written to `apps/extension/dist/` and the store archive is written to `apps/extension/bloxodes-extension-v5.0.0.zip`.
 Do not edit `dist/` directly.
 
 ## Commands
@@ -44,13 +50,15 @@ npm run package:extension
 3. Enable Developer Mode.
 4. Click "Load unpacked".
 5. Select `apps/extension/dist`.
-6. Open a Roblox game page such as Blox Fruits.
-7. Test with only the unpacked extension enabled, then optionally enable the live store extension to check for style isolation.
+6. Click the toolbar icon and verify both widget toggles are enabled.
+7. Open a tracked Roblox game and confirm the history card appears directly below the native statistics list.
+8. Toggle each widget off and on and confirm the page updates without a reload.
+9. Test with only the unpacked extension enabled, then optionally enable the live store extension to check for style isolation.
 
 The store upload archive is:
 
 ```text
-apps/extension/bloxodes-extension-v4.0.1.zip
+apps/extension/bloxodes-extension-v5.0.0.zip
 ```
 
 ## Store Notes

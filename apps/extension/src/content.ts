@@ -4,6 +4,11 @@ type BloxodesContentRequest = {
   gameName: string | null;
 };
 
+type BloxodesHistoryRequest = {
+  type: "BLOXODES_GET_HISTORY";
+  placeId: number;
+};
+
 type BloxodesContentCode = {
   code: string;
   rewardText: string | null;
@@ -43,15 +48,78 @@ type BloxodesContentResponse =
       error: string;
     };
 
+type BloxodesHistoryPoint = {
+  sampledAt: string;
+  players: number;
+};
+
+type BloxodesHistoryPayload =
+  | {
+      ok: true;
+      state: "ready";
+      game: {
+        universeId: number;
+        name: string;
+      };
+      range: "7d";
+      points: BloxodesHistoryPoint[];
+      lastUpdatedAt: string | null;
+      fullStatsUrl: string;
+    }
+  | {
+      ok: true;
+      state: "pending";
+      reason: "collecting-history";
+      game: {
+        universeId: number;
+        name: string;
+      };
+      range: "7d";
+      points: BloxodesHistoryPoint[];
+      lastUpdatedAt: string | null;
+      fullStatsUrl: string;
+    }
+  | {
+      ok: true;
+      state: "untracked" | "unavailable";
+      reason: "not-tracked" | "not-found";
+    };
+
+type BloxodesHistoryResponse =
+  | {
+      ok: true;
+      payload: BloxodesHistoryPayload;
+    }
+  | {
+      ok: false;
+      error: string;
+    };
+
+type BloxodesWidgetSettings = {
+  showCodes: boolean;
+  showHistory: boolean;
+};
+
 const BLOXODES_PANEL_ID = "bloxodes-codes-extension";
+const BLOXODES_STATS_PANEL_ID = "bloxodes-stats-extension";
 const BLOXODES_CODES_HUB_URL = "https://bloxodes.com/codes";
 const BLOXODES_LOGO_DARK_URL = chrome.runtime.getURL("brand/Bloxodes-dark.png");
 const BLOXODES_LOGO_LIGHT_URL = chrome.runtime.getURL("brand/Bloxodes-light.png");
+const BLOXODES_SETTINGS_KEY = "widgetSettings";
+const BLOXODES_DEFAULT_SETTINGS: BloxodesWidgetSettings = {
+  showCodes: true,
+  showHistory: true
+};
 const BLOXODES_STATE = {
   lastHiddenRequestKey: "",
   lastMatchedPayload: null as BloxodesContentPayload | null,
   lastRequestKey: "",
+  lastStatsHiddenRequestKey: "",
+  lastStatsPayload: null as BloxodesHistoryPayload | null,
+  lastStatsRequestKey: "",
   observer: null as MutationObserver | null,
+  runTimer: 0,
+  settings: { ...BLOXODES_DEFAULT_SETTINGS },
   urlPoll: 0
 };
 
@@ -111,8 +179,19 @@ function findInsertionTarget(): Element | null {
   return document.body;
 }
 
+function findStatsInsertionTarget(): Element | null {
+  return (
+    document.querySelector("ul.game-stat-container") ??
+    document.querySelector(".game-stat-container")
+  );
+}
+
 function removePanel(): void {
   document.getElementById(BLOXODES_PANEL_ID)?.remove();
+}
+
+function removeStatsPanel(): void {
+  document.getElementById(BLOXODES_STATS_PANEL_ID)?.remove();
 }
 
 function getRgbFromColor(value: string): [number, number, number] | null {
@@ -146,7 +225,7 @@ function detectRobloxTheme(): BloxodesTheme {
   return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-function syncPanelTheme(panel = document.getElementById(BLOXODES_PANEL_ID)): void {
+function syncPanelTheme(panel: Element | null = document.getElementById(BLOXODES_PANEL_ID)): void {
   panel?.setAttribute("data-bloxodes-theme", detectRobloxTheme());
 }
 
@@ -170,6 +249,28 @@ function ensurePanel(): HTMLElement {
     document.body.prepend(panel);
   }
 
+  return panel;
+}
+
+function ensureStatsPanel(): HTMLElement | null {
+  const target = findStatsInsertionTarget();
+  if (!target) return null;
+
+  const existing = document.getElementById(BLOXODES_STATS_PANEL_ID);
+  if (existing) {
+    if (existing.previousElementSibling !== target) {
+      target.insertAdjacentElement("afterend", existing);
+    }
+    syncPanelTheme(existing);
+    return existing;
+  }
+
+  const panel = document.createElement("section");
+  panel.id = BLOXODES_STATS_PANEL_ID;
+  panel.className = "Bloxodes-stats-panel";
+  panel.setAttribute("aria-label", "Bloxodes Roblox player history");
+  syncPanelTheme(panel);
+  target.insertAdjacentElement("afterend", panel);
   return panel;
 }
 
@@ -236,6 +337,184 @@ function renderFullListLink(fullListUrl: string): string {
       </span>
     </a>
   `;
+}
+
+function formatPlayers(value: number): string {
+  return new Intl.NumberFormat("en-US").format(Math.max(0, Math.round(value)));
+}
+
+function formatAxisPlayers(value: number): string {
+  return new Intl.NumberFormat("en-US", {
+    notation: "compact",
+    maximumFractionDigits: value >= 100_000 ? 0 : 1
+  }).format(Math.max(0, Math.round(value)));
+}
+
+function formatChartDate(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric"
+  }).format(date);
+}
+
+function formatChartTooltip(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit"
+  }).format(date);
+}
+
+function renderHistoryChart(points: BloxodesHistoryPoint[]): string {
+  const width = 760;
+  const height = 210;
+  const padding = {
+    top: 18,
+    right: 16,
+    bottom: 34,
+    left: 54
+  };
+  const plotWidth = width - padding.left - padding.right;
+  const plotHeight = height - padding.top - padding.bottom;
+  const values = points.map((point) => point.players);
+  const rawMin = Math.min(...values);
+  const rawMax = Math.max(...values);
+  const spread = Math.max(rawMax - rawMin, rawMax * 0.08, 1);
+  const minValue = Math.max(0, rawMin - spread * 0.08);
+  const maxValue = rawMax + spread * 0.08;
+  const valueRange = Math.max(maxValue - minValue, 1);
+
+  const coordinates = points.map((point, index) => {
+    const x =
+      padding.left +
+      (points.length === 1 ? plotWidth / 2 : (index / (points.length - 1)) * plotWidth);
+    const y =
+      padding.top +
+      (1 - (point.players - minValue) / valueRange) * plotHeight;
+    return { ...point, x, y };
+  });
+
+  const line = coordinates
+    .map((point) => `${point.x.toFixed(2)},${point.y.toFixed(2)}`)
+    .join(" ");
+  const area = [
+    `${padding.left},${padding.top + plotHeight}`,
+    line,
+    `${padding.left + plotWidth},${padding.top + plotHeight}`
+  ].join(" ");
+  const middleValue = minValue + valueRange / 2;
+  const gridRows = [maxValue, middleValue, minValue]
+    .map((value, index) => {
+      const y = padding.top + (index / 2) * plotHeight;
+      return `
+        <line class="bloxodes-chart-grid" x1="${padding.left}" y1="${y}" x2="${padding.left + plotWidth}" y2="${y}"></line>
+        <text class="bloxodes-chart-axis" x="${padding.left - 10}" y="${y + 4}" text-anchor="end">${escapeHtml(formatAxisPlayers(value))}</text>
+      `;
+    })
+    .join("");
+  const pointTargets = coordinates
+    .map(
+      (point) => `
+        <circle class="bloxodes-chart-point" cx="${point.x}" cy="${point.y}" r="3.5">
+          <title>${escapeHtml(`${formatChartTooltip(point.sampledAt)}: ${formatPlayers(point.players)} players`)}</title>
+        </circle>
+        <circle class="bloxodes-chart-hit" cx="${point.x}" cy="${point.y}" r="9">
+          <title>${escapeHtml(`${formatChartTooltip(point.sampledAt)}: ${formatPlayers(point.players)} players`)}</title>
+        </circle>
+      `
+    )
+    .join("");
+
+  return `
+    <div class="bloxodes-chart-wrap">
+      <svg class="bloxodes-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="Player count history for the last seven days">
+        <polygon class="bloxodes-chart-area" points="${area}"></polygon>
+        ${gridRows}
+        <polyline class="bloxodes-chart-line" points="${line}"></polyline>
+        ${pointTargets}
+        <text class="bloxodes-chart-axis" x="${padding.left}" y="${height - 8}" text-anchor="start">${escapeHtml(formatChartDate(points[0]?.sampledAt ?? ""))}</text>
+        <text class="bloxodes-chart-axis" x="${padding.left + plotWidth}" y="${height - 8}" text-anchor="end">${escapeHtml(formatChartDate(points[points.length - 1]?.sampledAt ?? ""))}</text>
+      </svg>
+    </div>
+  `;
+}
+
+function renderStatsFooter(lastUpdatedAt: string | null, fullStatsUrl: string): string {
+  const lastUpdated = formatChartTooltip(lastUpdatedAt ?? "");
+  return `
+    <span>${escapeHtml(lastUpdated ? `Last tracked ${lastUpdated}` : "Bloxodes player tracking")}</span>
+    <a class="bloxodes-link" href="${escapeHtml(fullStatsUrl)}" target="_blank" rel="noopener noreferrer">
+      <span>View full history on</span>
+      <span class="bloxodes-logo-wrap" aria-label="Bloxodes">
+        <img class="bloxodes-logo bloxodes-logo-light" src="${escapeHtml(BLOXODES_LOGO_LIGHT_URL)}" alt="Bloxodes" />
+        <img class="bloxodes-logo bloxodes-logo-dark" src="${escapeHtml(BLOXODES_LOGO_DARK_URL)}" alt="" aria-hidden="true" />
+      </span>
+    </a>
+  `;
+}
+
+function renderHistory(payload: Extract<BloxodesHistoryPayload, { state: "ready" }>): void {
+  const panel = ensureStatsPanel();
+  if (!panel) return;
+  panel.innerHTML = `
+    <div class="bloxodes-card">
+      <div class="bloxodes-card-header">
+        <div class="bloxodes-heading-group">
+          <h2 class="bloxodes-title">${escapeHtml(`${payload.game.name} Player History`)}</h2>
+          <p class="bloxodes-status">
+            <span class="bloxodes-check" aria-hidden="true">✓</span>
+            <span>Player activity over the last 7 days</span>
+          </p>
+        </div>
+        <span class="bloxodes-badge">7 days</span>
+      </div>
+      <div class="bloxodes-card-body">${renderHistoryChart(payload.points)}</div>
+      <div class="bloxodes-card-footer">${renderStatsFooter(payload.lastUpdatedAt, payload.fullStatsUrl)}</div>
+    </div>
+  `;
+}
+
+function renderHistoryPending(payload: Extract<BloxodesHistoryPayload, { state: "pending" }>): void {
+  const panel = ensureStatsPanel();
+  if (!panel) return;
+  panel.innerHTML = `
+    <div class="bloxodes-card">
+      <div class="bloxodes-card-header">
+        <div class="bloxodes-heading-group">
+          <h2 class="bloxodes-title">${escapeHtml(`${payload.game.name} Player History`)}</h2>
+          <p class="bloxodes-status">
+            <span class="bloxodes-check" aria-hidden="true">✓</span>
+            <span>Bloxodes has started tracking this game</span>
+          </p>
+        </div>
+        <span class="bloxodes-badge">Tracking</span>
+      </div>
+      <div class="bloxodes-card-body">
+        <div class="bloxodes-empty">
+          <p class="bloxodes-empty-title">Building player history</p>
+          <p>The graph will appear after Bloxodes has collected enough player-count samples.</p>
+        </div>
+      </div>
+      <div class="bloxodes-card-footer">${renderStatsFooter(payload.lastUpdatedAt, payload.fullStatsUrl)}</div>
+    </div>
+  `;
+}
+
+function renderStatsPayload(payload: BloxodesHistoryPayload): void {
+  if (payload.state === "ready") {
+    renderHistory(payload);
+    return;
+  }
+  if (payload.state === "pending") {
+    renderHistoryPending(payload);
+    return;
+  }
+  removeStatsPanel();
 }
 
 function renderCodes(payload: BloxodesContentPayload): void {
@@ -351,15 +630,57 @@ function requestCodes(message: BloxodesContentRequest): Promise<BloxodesContentR
   });
 }
 
-async function run(): Promise<void> {
-  const placeId = parsePlaceId(location.href);
-  if (!placeId) {
-    document.getElementById(BLOXODES_PANEL_ID)?.remove();
+function requestHistory(message: BloxodesHistoryRequest): Promise<BloxodesHistoryResponse> {
+  return new Promise((resolve) => {
+    chrome.runtime.sendMessage(message, (response?: BloxodesHistoryResponse) => {
+      if (chrome.runtime.lastError) {
+        resolve({ ok: false, error: chrome.runtime.lastError.message ?? "Extension request failed" });
+        return;
+      }
+      resolve(response ?? { ok: false, error: "No response from Bloxodes extension" });
+    });
+  });
+}
+
+function normalizeWidgetSettings(value: unknown): BloxodesWidgetSettings {
+  const settings =
+    value && typeof value === "object"
+      ? (value as Partial<BloxodesWidgetSettings>)
+      : {};
+  return {
+    showCodes:
+      typeof settings.showCodes === "boolean"
+        ? settings.showCodes
+        : BLOXODES_DEFAULT_SETTINGS.showCodes,
+    showHistory:
+      typeof settings.showHistory === "boolean"
+        ? settings.showHistory
+        : BLOXODES_DEFAULT_SETTINGS.showHistory
+  };
+}
+
+function readWidgetSettings(): Promise<BloxodesWidgetSettings> {
+  return new Promise((resolve) => {
+    chrome.storage.sync.get(BLOXODES_SETTINGS_KEY, (items) => {
+      if (chrome.runtime.lastError) {
+        resolve({ ...BLOXODES_DEFAULT_SETTINGS });
+        return;
+      }
+      resolve(normalizeWidgetSettings(items[BLOXODES_SETTINGS_KEY]));
+    });
+  });
+}
+
+async function runCodes(
+  placeId: number,
+  gameName: string | null,
+  requestKey: string
+): Promise<void> {
+  if (!BLOXODES_STATE.settings.showCodes) {
+    removePanel();
     return;
   }
 
-  const gameName = readGameName();
-  const requestKey = `${placeId}:${gameName ?? ""}:${location.pathname}`;
   if (BLOXODES_STATE.lastRequestKey === requestKey) {
     const panel = document.getElementById(BLOXODES_PANEL_ID);
     if (panel) {
@@ -383,6 +704,7 @@ async function run(): Promise<void> {
     placeId,
     gameName
   });
+  if (BLOXODES_STATE.lastRequestKey !== requestKey) return;
 
   if (!response.ok) {
     BLOXODES_STATE.lastHiddenRequestKey = requestKey;
@@ -403,22 +725,109 @@ async function run(): Promise<void> {
   renderCodes(response.payload);
 }
 
+async function runHistory(placeId: number, requestKey: string): Promise<void> {
+  if (!BLOXODES_STATE.settings.showHistory) {
+    removeStatsPanel();
+    return;
+  }
+
+  if (BLOXODES_STATE.lastStatsRequestKey === requestKey) {
+    const panel = document.getElementById(BLOXODES_STATS_PANEL_ID);
+    if (panel) {
+      syncPanelTheme(panel);
+      return;
+    }
+    if (BLOXODES_STATE.lastStatsPayload) {
+      renderStatsPayload(BLOXODES_STATE.lastStatsPayload);
+      return;
+    }
+    if (BLOXODES_STATE.lastStatsHiddenRequestKey === requestKey) {
+      removeStatsPanel();
+      return;
+    }
+    return;
+  }
+  BLOXODES_STATE.lastStatsRequestKey = requestKey;
+
+  const response = await requestHistory({
+    type: "BLOXODES_GET_HISTORY",
+    placeId
+  });
+  if (BLOXODES_STATE.lastStatsRequestKey !== requestKey) return;
+
+  if (!response.ok) {
+    BLOXODES_STATE.lastStatsHiddenRequestKey = requestKey;
+    BLOXODES_STATE.lastStatsPayload = null;
+    removeStatsPanel();
+    return;
+  }
+
+  if (response.payload.state !== "ready" && response.payload.state !== "pending") {
+    BLOXODES_STATE.lastStatsHiddenRequestKey = requestKey;
+    BLOXODES_STATE.lastStatsPayload = null;
+    removeStatsPanel();
+    return;
+  }
+
+  BLOXODES_STATE.lastStatsHiddenRequestKey = "";
+  BLOXODES_STATE.lastStatsPayload = response.payload;
+  renderStatsPayload(response.payload);
+}
+
+async function run(): Promise<void> {
+  const placeId = parsePlaceId(location.href);
+  if (!placeId) {
+    removePanel();
+    removeStatsPanel();
+    return;
+  }
+
+  const gameName = readGameName();
+  const requestKey = `${placeId}:${gameName ?? ""}:${location.pathname}`;
+  await Promise.all([
+    runCodes(placeId, gameName, requestKey),
+    runHistory(placeId, requestKey)
+  ]);
+}
+
 function scheduleRun(): void {
-  window.setTimeout(() => {
+  window.clearTimeout(BLOXODES_STATE.runTimer);
+  BLOXODES_STATE.runTimer = window.setTimeout(() => {
     void run();
   }, 250);
 }
 
-function start(): void {
+function resetWidgetRequestState(): void {
+  BLOXODES_STATE.lastHiddenRequestKey = "";
+  BLOXODES_STATE.lastMatchedPayload = null;
+  BLOXODES_STATE.lastRequestKey = "";
+  BLOXODES_STATE.lastStatsHiddenRequestKey = "";
+  BLOXODES_STATE.lastStatsPayload = null;
+  BLOXODES_STATE.lastStatsRequestKey = "";
+}
+
+async function start(): Promise<void> {
+  BLOXODES_STATE.settings = await readWidgetSettings();
   scheduleRun();
 
   BLOXODES_STATE.observer?.disconnect();
   BLOXODES_STATE.observer = new MutationObserver(() => {
-    const panel = document.getElementById(BLOXODES_PANEL_ID);
-    if (!panel) {
+    const codesPanel = document.getElementById(BLOXODES_PANEL_ID);
+    const statsPanel = document.getElementById(BLOXODES_STATS_PANEL_ID);
+    const missingExpectedCodes =
+      BLOXODES_STATE.settings.showCodes &&
+      BLOXODES_STATE.lastMatchedPayload != null &&
+      !codesPanel;
+    const missingExpectedStats =
+      BLOXODES_STATE.settings.showHistory &&
+      BLOXODES_STATE.lastStatsPayload != null &&
+      !statsPanel;
+
+    if (missingExpectedCodes || missingExpectedStats) {
       scheduleRun();
     } else {
-      syncPanelTheme(panel);
+      syncPanelTheme(codesPanel);
+      syncPanelTheme(statsPanel);
     }
   });
   BLOXODES_STATE.observer.observe(document.documentElement, { childList: true, subtree: true });
@@ -428,16 +837,26 @@ function start(): void {
   BLOXODES_STATE.urlPoll = window.setInterval(() => {
     if (location.href !== lastUrl) {
       lastUrl = location.href;
-      BLOXODES_STATE.lastHiddenRequestKey = "";
-      BLOXODES_STATE.lastMatchedPayload = null;
-      BLOXODES_STATE.lastRequestKey = "";
+      resetWidgetRequestState();
       scheduleRun();
     }
   }, 1000);
+
+  chrome.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName !== "sync") return;
+    const change = changes[BLOXODES_SETTINGS_KEY];
+    if (!change) return;
+
+    BLOXODES_STATE.settings = normalizeWidgetSettings(change.newValue);
+    resetWidgetRequestState();
+    if (!BLOXODES_STATE.settings.showCodes) removePanel();
+    if (!BLOXODES_STATE.settings.showHistory) removeStatsPanel();
+    scheduleRun();
+  });
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", start, { once: true });
+  document.addEventListener("DOMContentLoaded", () => void start(), { once: true });
 } else {
-  start();
+  void start();
 }

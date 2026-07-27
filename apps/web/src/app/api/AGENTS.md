@@ -15,6 +15,7 @@ These routes back interactive site features, search, tool data, session/progress
   - `roblox-id-extractor`
 - Platform clients:
   - `extension/roblox-game-codes`
+  - `extension/roblox-game-stats`
   - `mobile/home`
   - `mobile/codes`
   - `mobile/codes/[slug]`
@@ -70,6 +71,7 @@ These routes back interactive site features, search, tool data, session/progress
 ## Extension And Mobile APIs
 
 - `/api/extension/roblox-game-codes` resolves the public Roblox place ID and game name to a published Bloxodes codes page and returns a three-code preview plus the full page URL. `robloxUrl` remains an input only as a compatibility fallback for older installed extension clients; current clients must not send the full page URL.
+- `/api/extension/roblox-game-stats` resolves a public Roblox place ID to a tracked universe and returns a compact seven-day player-history payload. `GET` is read-only; rate-limited `POST` verifies an unknown place with Roblox and idempotently adds it to the existing `NEW` stats workflow.
 - `/api/mobile/home` aggregates the codes index plus per-kind section rails for the app home screen.
 - `/api/mobile/codes` returns the paginated mobile codes index.
 - `/api/mobile/codes/[slug]` returns active and expired codes for a mobile detail screen.
@@ -79,7 +81,7 @@ These routes back interactive site features, search, tool data, session/progress
 - `/api/mobile/stats/games` and its `[universeId]` + `[universeId]/chart` children wrap `apps/web/src/lib/stats.ts` with CORS headers for the app; the web `/api/stats/*` routes are unchanged.
 - Mobile auth: the app opens `/api/mobile/auth/complete` in an auth browser session; after web Roblox login it redirects to `bloxodes://auth?code=<short-lived signed code>`. `/api/mobile/auth/exchange` swaps that code for an `app_sessions` bearer token. `/api/mobile/auth/session` and `/api/mobile/auth/logout` accept `Authorization: Bearer`.
 - Mobile progress routes (`mobile/codes/progress`, `mobile/checklists/progress`, `mobile/quizzes/progress`) accept bearer tokens with a cookie fallback via `apps/web/src/lib/auth/mobile-session.ts`; they write the same `user_*_progress` tables as the web routes.
-- Shared payload logic lives in `apps/web/src/lib/extension-codes.ts`, `apps/web/src/lib/mobile-codes.ts`, and `apps/web/src/lib/mobile-content.ts`.
+- Shared payload logic lives in `apps/web/src/lib/extension-codes.ts`, `apps/web/src/lib/extension-stats.ts`, `apps/web/src/lib/mobile-codes.ts`, and `apps/web/src/lib/mobile-content.ts`.
 - Keep freshness badges aligned with the website by using `apps/web/src/lib/code-utils.ts` helpers instead of adding client-specific `is_new` rules.
 
 ## When Adding an Endpoint

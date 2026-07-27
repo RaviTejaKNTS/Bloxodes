@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bloxodes widgets</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup-shell">
+      <header class="popup-header">
+        <img src="brand/Bloxodes-dark.png" alt="Bloxodes" />
+        <p>Game-page widgets</p>
+      </header>
+
+      <section class="widget-list" aria-label="Bloxodes widget settings">
+        <label class="widget-setting" for="show-codes">
+          <span>
+            <strong>Active codes</strong>
+            <small>Show verified codes on supported games.</small>
+          </span>
+          <span class="toggle">
+            <input id="show-codes" type="checkbox" />
+            <span aria-hidden="true"></span>
+          </span>
+        </label>
+
+        <label class="widget-setting" for="show-history">
+          <span>
+            <strong>Player history</strong>
+            <small>Show the seven-day player-count graph.</small>
+          </span>
+          <span class="toggle">
+            <input id="show-history" type="checkbox" />
+            <span aria-hidden="true"></span>
+          </span>
+        </label>
+      </section>
+
+      <p id="save-status" class="save-status" aria-live="polite">Changes apply immediately.</p>
+    </main>
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>
