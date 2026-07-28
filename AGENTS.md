@@ -122,3 +122,30 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 2. Add or update the `package.json` command if the script is part of the normal workflow.
 3. Keep shared helpers in `scripts/shared/`.
 4. Document side effects, required env, and purpose in `scripts/AGENTS.md` and `agents/scripts/agents.md`.
+
+## Cursor Cloud specific instructions
+
+These notes cover the non-obvious parts of running this repo in a Cursor Cloud VM. The startup update script only runs `npm ci`; everything else below (Docker, local Supabase, dev server) is a service you must start yourself and is NOT started automatically.
+
+### Node version
+- CI and the Docker image use Node 24. `nvm` has Node 24 installed as the default alias, so login shells resolve to it automatically. If a shell falls back to the platform's Node 22 (`/exec-daemon/node`), run `nvm use 24`.
+
+### Main product (Next.js web app)
+- Standard commands live in the root `package.json`. Key ones: `npm run lint`, `npm run test:web` (Vitest, no services needed), `npm run dev:local` (dev server on port 3000, guarded to refuse a non-local `SUPABASE_URL`).
+- `dev:local` loads `.env.local`. A working local `.env.local` points `SUPABASE_URL` at `http://127.0.0.1:54321` with the local anon/service keys from `supabase status -o env`, plus `NEXT_PUBLIC_SITE_URL=http://localhost:3000` and any non-empty `AUTH_SESSION_SECRET`.
+
+### Local Supabase is required and NON-OBVIOUS to bootstrap
+- The app reads/writes Supabase. Start Docker, then the Supabase stack:
+  - `sudo dockerd > /tmp/dockerd.log 2>&1 &` then `sudo chmod 666 /var/run/docker.sock` (lets `ubuntu` use Docker without sudo). Docker here uses the `fuse-overlayfs` storage driver with the containerd snapshotter disabled (see `/etc/docker/daemon.json`).
+  - `supabase start` (project id `roblox-codes`; API 54321, DB 54322, Studio 54323).
+- CRITICAL: The migration chain in `supabase/migrations/` does NOT build from an empty database. The earliest tracked migrations reference tables (e.g. `article_categories`) that existed before the tracked history and were later dropped, so `supabase start`/`supabase db reset` fail while applying migrations from scratch. Do NOT rely on `supabase db reset` for local content dev.
+- Instead, bootstrap from the snapshot and overlay only the newer migrations:
+  1. Temporarily empty the migrations dir so `supabase start` brings up the stack without applying them: `mv supabase/migrations /tmp/mig && mkdir supabase/migrations && supabase start && rmdir supabase/migrations && mv /tmp/mig supabase/migrations`.
+  2. Load the current snapshot: `docker exec -i supabase_db_roblox-codes psql -U postgres -d postgres < supabase/schema.sql` (a few "must be owner"/grant errors are benign).
+  3. Enable extensions the snapshot needs: `create extension if not exists pg_trgm with schema extensions;` and `create extension if not exists pg_cron;`.
+  4. `schema.sql` is a STALE snapshot (still has the old `games` and `wiki_catalog_pages` tables). Overlay the migrations newer than the snapshot — currently every file with a version `>= 20260915000001` — in filename order via `psql`. These include the `games` -> `code_pages` and `wiki_catalog_pages` -> `wiki_collection_pages` renames the app requires. Applying older migrations on top of the snapshot will fail (already-present/dropped objects), so overlay only the newer set.
+- After this, the public schema matches app expectations (`code_pages`, `wiki_collection_pages`, `code_pages_index_view`, etc.).
+
+### Content data
+- `supabase/seed.sql` only creates the `bloxodes-media` storage bucket; the local DB has NO editorial content. All content pages/index routes return 200 but render empty until you seed rows (insert directly, or use the `scripts/` importers). The `sync:local-public-sample` script needs production Supabase credentials in `.env` and is not usable without them.
+- Self-contained tools render without any DB row (e.g. `/tools/robux-to-usd-calculator`, `/tools/roblox-id-extractor`), which makes them a quick way to sanity-check the running app.
