@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bloxodes - Roblox Game Codes",
-  "version": "6.0.0",
+  "version": "4.1",
   "description": "See Roblox game codes and player history, and sync used codes with your Bloxodes account.",
   "icons": {
     "16": "icons/icon16.png",

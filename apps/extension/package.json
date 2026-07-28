@@ -1,7 +1,7 @@
 {
   "name": "@bloxodes/extension",
   "private": true,
-  "version": "6.0.0",
+  "version": "4.1.0",
   "description": "Bloxodes browser extension for Roblox game codes, synced progress, and player history.",
   "scripts": {
     "clean": "node scripts/clean.mjs",

@@ -515,7 +515,12 @@ export function CommentsClient({ entityType, entityId, initialComments }: Commen
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground">
-                We&apos;ll show your name publicly. Your email stays private and is only used for moderation.
+                We&apos;ll show your name publicly. Your email stays private and is used for moderation and requests about your comment.
+                Comment text is automatically screened before publication. Read our{" "}
+                <Link href="/privacy-policy" className="text-foreground underline-offset-4 hover:underline">
+                  Privacy Policy
+                </Link>
+                .
               </p>
             </div>
           )}

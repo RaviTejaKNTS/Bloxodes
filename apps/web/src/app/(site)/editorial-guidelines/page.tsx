@@ -47,7 +47,7 @@ export default function EditorialGuidelinesPage() {
         <header className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">Editorial Guidelines of Bloxodes.com</h1>
           <p className="text-base text-muted sm:text-lg">
-            Effective Date: October 3, 2025 · Last Updated: October 3, 2025
+            Effective Date: October 3, 2025 · Last Updated: July 28, 2026
           </p>
           <p className="text-base text-muted sm:text-lg">
             At Bloxodes.com, our commitment is to deliver clear, accurate, and trustworthy information to Roblox players worldwide. Our
@@ -128,10 +128,10 @@ export default function EditorialGuidelinesPage() {
         <section className="space-y-4">
           <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">Reader Engagement</h2>
           <p>
-            While we do not have comments or forums on Bloxodes.com, we value our readers’ input. Players can always reach us at{' '}
+            Readers can leave moderated comments on supported pages, use the website feedback tool, or email{" "}
             <a href="mailto:getbloxodes@gmail.com">getbloxodes@gmail.com</a> to report an expired code, suggest improvements, or ask
-            questions. Every email is reviewed, and where necessary, we update our content based on user feedback. In this way, our readers
-            directly help us maintain accuracy and completeness.
+            questions. Comments are reviewed before publication and can be removed when they violate our content rules. We review useful
+            corrections and update our coverage when the evidence supports a change.
           </p>
           <p>We also encourage users to include details when contacting us, such as the game name and the specific code, to speed up our verification process.</p>
         </section>
@@ -144,9 +144,9 @@ export default function EditorialGuidelinesPage() {
             players enjoy their games, not to exploit them.
           </p>
           <p>
-            We also comply with global privacy and child-safety laws, including GDPR (EU), CCPA (California), COPPA (U.S. children’s
-            protection), and India’s DPDP Act. These rules are built into our editorial process, ensuring that players’ rights and safety are
-            respected at all times.
+            Reader submissions are handled under our <a href="/terms-of-service">Terms of Service</a> and{" "}
+            <a href="/privacy-policy">Privacy Policy</a>. We moderate comments for safety, abuse, privacy, and relevance, and we do not ask
+            readers to share Roblox passwords or sensitive personal information.
           </p>
         </section>
 

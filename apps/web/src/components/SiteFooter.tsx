@@ -3,11 +3,13 @@ import Link from "next/link";
 
 const companyLinks = [
   { href: "/about", label: "About Us" },
+  { href: "/browser-extension", label: "Browser Extension" },
   { href: "/contact", label: "Contact Us" },
   { href: "/how-we-gather-and-verify-codes", label: "How We Verify Codes" },
   { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/editorial-guidelines", label: "Editorial Guidelines" },
   { href: "/terms-of-service", label: "Terms of Service" },
+  { href: "/account-deletion", label: "Account Deletion" },
   { href: "/disclaimer", label: "Disclaimer" }
 ];
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Image, Linking, ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { fetchChecklistProgressSummary, fetchQuizProgressSummary } from "../../src/api";
 import { useAuth } from "../../src/auth";
 import { radii, spacing } from "../../src/theme";
@@ -170,6 +170,30 @@ export default function AccountScreen() {
         <View style={{ gap: spacing.md, padding: spacing.lg }}>
           <Text style={{ color: colors.foreground, fontSize: 17, fontWeight: "800" }}>Appearance</Text>
           <ThemeRow />
+        </View>
+      </Card>
+
+      <Card>
+        <View style={{ gap: spacing.sm, padding: spacing.lg }}>
+          <Text style={{ color: colors.foreground, fontSize: 17, fontWeight: "800" }}>Privacy and account</Text>
+          <Button
+            label="Privacy policy"
+            icon="shield"
+            variant="secondary"
+            onPress={() => void Linking.openURL("https://bloxodes.com/privacy-policy")}
+          />
+          <Button
+            label="Terms of service"
+            icon="file-text"
+            variant="secondary"
+            onPress={() => void Linking.openURL("https://bloxodes.com/terms-of-service")}
+          />
+          <Button
+            label="Delete account and data"
+            icon="trash-2"
+            variant="ghost"
+            onPress={() => void Linking.openURL("https://bloxodes.com/account-deletion")}
+          />
         </View>
       </Card>
     </ScrollView>

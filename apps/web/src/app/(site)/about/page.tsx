@@ -4,7 +4,7 @@ import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 
 const title = "About Bloxodes.com";
 const description =
-  "Learn how Bloxodes.com grew from a Robux calculator into a Roblox hub for tools, checklists, live stats, codes, guides, and optional accounts.";
+  "Learn how Bloxodes grew from a Robux calculator into a Roblox companion across the web, mobile apps, and browser extensions.";
 const canonical = `${SITE_URL.replace(/\/$/, "")}/about`;
 const ogImage = `${SITE_URL}/Bloxodes.png`;
 
@@ -48,8 +48,8 @@ export default function AboutPage() {
         <header className="space-y-4">
           <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">About Bloxodes.com</h1>
           <p className="text-base text-muted sm:text-lg">
-            Today, Bloxodes is a growing Roblox hub with tools, checklists, live stats, codes, reference pages, and optional accounts to help
-            players stay informed and connected.
+            Today, Bloxodes is a growing Roblox companion across the web, mobile apps, and browser extensions, with tools, checklists,
+            statistics, codes, reference pages, and optional accounts.
           </p>
         </header>
 
@@ -90,12 +90,23 @@ export default function AboutPage() {
                 <a href="/checklists">Interactive checklists</a>
               </strong>
               : Some Roblox games get chaotic fast. Checklists turn that chaos into a path. Our checklists help you track progress across
-              quests, items, upgrades, regions, and milestones, so you always know what you have done and what is next. Currently, we are
-              storing these directly on your browser.
+                quests, items, upgrades, regions, and milestones, so you always know what you have done and what is next. Progress stays on
+              your device when signed out and can sync to your Bloxodes account when signed in.
             </li>
             <li>
-              <strong>Accounts &amp; profiles</strong>: Optional sign-in lets you comment, manage preferences, and link a Roblox account to
-              unlock Roblox-specific features and personalization.
+              <strong>Accounts &amp; profiles</strong>: Optional Roblox sign-in lets you comment with your account identity and synchronize
+              supported code, checklist, and quiz progress across devices.
+            </li>
+            <li>
+              <strong>
+                <a href="/browser-extension">Browser extension</a>
+              </strong>
+              : Our Chrome and Edge extension adds verified active-code previews and seven-day player-history charts to supported Roblox
+              game pages, with simple widget controls and optional used-code synchronization.
+            </li>
+            <li>
+              <strong>Mobile app</strong>: The Bloxodes mobile app brings codes, game references, tools, events, quizzes, checklists, search,
+              statistics, and optional account synchronization into a native companion.
             </li>
             <li>
               <strong>

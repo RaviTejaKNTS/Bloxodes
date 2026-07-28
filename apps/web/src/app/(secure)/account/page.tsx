@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ExternalLink, LogOut, ShieldCheck, UserRound } from "lucide-react";
+import { ExternalLink, LogOut, ShieldCheck, Trash2, UserRound } from "lucide-react";
 import { getCurrentAppUser } from "@/lib/auth/app-session";
 import { cn } from "@/lib/utils";
 import { signOut } from "../login/actions";
@@ -121,6 +121,21 @@ export default async function AccountPage({ searchParams }: AccountPageProps) {
             </Link>
           </div>
         ) : null}
+      </section>
+
+      <section className="space-y-3 border-t border-border/60 pt-6">
+        <h2 className="text-lg font-semibold text-foreground">Account and data</h2>
+        <p className="max-w-2xl text-sm leading-6 text-muted">
+          You can initiate deletion of your Bloxodes account, synchronized progress, sessions, and associated account data. This does not
+          delete your Roblox account.
+        </p>
+        <Link
+          href="/account-deletion"
+          className="inline-flex h-9 items-center justify-center gap-2 border border-border/70 px-3 text-sm font-semibold text-foreground transition hover:border-destructive hover:text-destructive"
+        >
+          <Trash2 className="h-4 w-4" aria-hidden />
+          Request account deletion
+        </Link>
       </section>
     </div>
   );

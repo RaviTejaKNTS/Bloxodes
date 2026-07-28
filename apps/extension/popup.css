@@ -248,6 +248,28 @@ body {
   text-align: center;
 }
 
+.legal-links {
+  align-items: center;
+  color: #6e7692;
+  display: flex;
+  font-size: 11px;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 9px;
+}
+
+.legal-links a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.legal-links a:hover,
+.legal-links a:focus-visible {
+  color: #4f46e5;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background: #1f2127;
@@ -269,6 +291,15 @@ body {
   .widget-setting small,
   .save-status {
     color: #b8becd;
+  }
+
+  .legal-links {
+    color: #b8becd;
+  }
+
+  .legal-links a:hover,
+  .legal-links a:focus-visible {
+    color: #84a9ff;
   }
 
   .account-card,

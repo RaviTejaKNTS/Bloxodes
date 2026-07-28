@@ -32,7 +32,7 @@ apps/extension/
   scripts/package.mjs
 ```
 
-Generated files are written to `apps/extension/dist/` and the store archive is written to `apps/extension/bloxodes-extension-v6.0.0.zip`.
+Generated files are written to `apps/extension/dist/` and the store archive is written to `apps/extension/bloxodes-extension-v4.1.zip`.
 Do not edit `dist/` directly.
 
 ## Commands
@@ -63,7 +63,7 @@ npm run package:extension
 The store upload archive is:
 
 ```text
-apps/extension/bloxodes-extension-v6.0.0.zip
+apps/extension/bloxodes-extension-v4.1.zip
 ```
 
 ## Store Notes

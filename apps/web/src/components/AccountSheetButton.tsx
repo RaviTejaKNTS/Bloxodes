@@ -182,6 +182,10 @@ export function AccountSheetButton({ account, className }: AccountSheetButtonPro
 
             <p className="text-xs leading-5 text-muted">
               We never ask for your Roblox password. By continuing, you agree to the{" "}
+              <Link href="/terms-of-service" className="text-foreground hover:text-accent">
+                Terms of Service
+              </Link>{" "}
+              and{" "}
               <Link href="/privacy-policy" className="text-foreground hover:text-accent">
                 Privacy Policy
               </Link>

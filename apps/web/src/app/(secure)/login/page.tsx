@@ -86,6 +86,10 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
 
         <p className="text-xs leading-5 text-muted">
           By continuing, you agree to our{" "}
+          <Link href="/terms-of-service" className="text-foreground transition hover:text-accent">
+            Terms of Service
+          </Link>{" "}
+          and{" "}
           <Link href="/privacy-policy" className="text-foreground transition hover:text-accent">
             Privacy Policy
           </Link>

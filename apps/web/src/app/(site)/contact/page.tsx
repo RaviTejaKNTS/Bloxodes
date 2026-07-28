@@ -3,7 +3,7 @@ import "@/styles/article-content.css";
 import { SITE_NAME, SITE_URL, buildAlternates } from "@/lib/seo";
 
 const title = "Contact Us";
-const description = "Find the best way to reach the Bloxodes.com team.";
+const description = "Contact Bloxodes about content, accounts, comments, privacy, the mobile app, or the browser extension.";
 const canonical = `${SITE_URL.replace(/\/$/, "")}/contact`;
 const ogImage = `${SITE_URL}/Bloxodes.png`;
 
@@ -50,77 +50,61 @@ export default function ContactPage() {
     <div className="grid gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(0,1.25fr)]">
       <article className="article-content prose dark:prose-invert max-w-none game-copy">
         <header className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">Contact Us: Bloxodes.com</h1>
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">Contact Bloxodes</h1>
           <p className="text-base text-muted sm:text-lg">
-            At Bloxodes.com, we aim to make it easy for you to reach out whenever you need. Since our website is built to be simple and
-            does not require accounts, comments, or sign-ups, the main way to get in touch with us is directly via email.
+            Contact us about Bloxodes content, your account, a comment, privacy, the mobile app, or the browser extension.
           </p>
         </header>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">How to Contact Us</h2>
-          <ul className="list-disc pl-6">
-            <li>
-              <strong>Email:</strong>{' '}
-              <a href="mailto:getbloxodes@gmail.com">getbloxodes@gmail.com</a>
-              <br />
-              This is our official contact address. Whether you have a question, want to report an error in one of our Roblox code pages, or
-              have feedback on our site, drop us an email and we’ll get back to you as soon as possible.
-            </li>
-            <li>
-              <strong>Website:</strong>{' '}
-              <a href="https://bloxodes.com" rel="noopener noreferrer" target="_blank">
-                https://bloxodes.com
-              </a>
-              <br />
-              You can always visit our site for the latest updates. Important policy and legal pages such as the Privacy Policy and Terms of
-              Service are always available at the bottom of our site.
-            </li>
-          </ul>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">What You Can Contact Us For</h2>
-          <p>You are welcome to email us regarding:</p>
-          <ul className="list-disc pl-6">
-            <li>Reporting non-working or outdated Roblox codes.</li>
-            <li>Suggestions for improving our coverage of Roblox games.</li>
-            <li>Privacy questions or requests under GDPR, CCPA, India’s DPDP Act, or other laws.</li>
-            <li>General feedback or inquiries about our site.</li>
-          </ul>
+          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">How to Reach Us</h2>
           <p>
-            We do not run newsletters or promotional emails, so you will never be automatically subscribed to anything. When you email us, we
-            only use your information to reply to your query.
+            Email us at <a href="mailto:getbloxodes@gmail.com">getbloxodes@gmail.com</a>. You can also use the Give feedback button on the
+            website for product suggestions and page-specific feedback.
+          </p>
+          <p>
+            We do not subscribe you to marketing messages when you contact us. We use your contact details to review and respond to your
+            request, protect the service, and keep any record required to resolve the matter.
           </p>
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">Response Time</h2>
-          <p>
-            We try to respond to all genuine messages within <strong>3–5 business days</strong>. Some requests, especially legal or
-            data-related ones, may take longer but will always be handled within legally required timeframes.
-          </p>
-        </section>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">Important Notes</h2>
-          <ul className="list-disc pl-6">
-            <li>Please do not send sensitive personal information (like passwords or payment details). We will never ask for them.</li>
-            <li>
-              For privacy and data rights requests, make sure you email us from the same address you used to contact us previously so we can
-              verify your identity.
-            </li>
-            <li>
-              For faster handling of Roblox code corrections, include the game name and the code in question.
-            </li>
+          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">What to Include</h2>
+          <ul className="list-disc space-y-2 pl-6">
+            <li>For code or content corrections: the game, page link, code or claim, and the correction.</li>
+            <li>For extension issues: your browser, extension version, Roblox game link, and what you expected to see.</li>
+            <li>For mobile issues: your platform, app version, affected screen, and any visible error.</li>
+            <li>For signed-in account issues: your Roblox username or user ID. Never send your Roblox password or session token.</li>
+            <li>For guest-comment requests: the page and the same email address submitted with the comment.</li>
           </ul>
         </section>
 
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">Final Assurance</h2>
+          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">Privacy and Account Requests</h2>
           <p>
-            Your trust is important to us. Contacting us will always be straightforward, safe, and private. We handle every message with
-            respect and will never share your information beyond what is necessary to respond to your request.
+            For access, correction, deletion, or another privacy request, use our{" "}
+            <a href="/account-deletion">account deletion and data request page</a>. We may ask for information needed to verify that the
+            account, comment, or submission belongs to you.
+          </p>
+          <p>
+            Read our <a href="/privacy-policy">Privacy Policy</a> for the information involved and available choices.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">Response Times</h2>
+          <p>
+            We aim to respond within 5–7 business days. Legal, safety, account, and data requests can take longer while we verify the request,
+            but will be handled within any timeframe required by applicable law.
+          </p>
+        </section>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">Please Keep Your Message Safe</h2>
+          <p>
+            Do not send passwords, authentication tokens, payment details, government identification, or other sensitive information unless
+            we specifically explain why it is required through a verified support exchange. Bloxodes will never ask for your Roblox
+            password.
           </p>
         </section>
 

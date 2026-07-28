@@ -31,10 +31,12 @@ export const MAIN_SITEMAP_ROUTES: MainSitemapRoute[] = [
   { path: "/authors", changefreq: "monthly", priority: "0.3" },
   { path: "/catalog", changefreq: "weekly", priority: "0.9" },
   { path: "/about", changefreq: "monthly", priority: "0.6" },
+  { path: "/browser-extension", changefreq: "monthly", priority: "0.7" },
   { path: "/how-we-gather-and-verify-codes", changefreq: "monthly", priority: "0.6" },
   { path: "/contact", changefreq: "monthly", priority: "0.6" },
   { path: "/privacy-policy", changefreq: "yearly", priority: "0.5" },
   { path: "/terms-of-service", changefreq: "yearly", priority: "0.5" },
+  { path: "/account-deletion", changefreq: "yearly", priority: "0.4" },
   { path: "/editorial-guidelines", changefreq: "monthly", priority: "0.5" },
   { path: "/disclaimer", changefreq: "monthly", priority: "0.5" }
 ];

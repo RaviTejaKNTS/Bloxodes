@@ -80,9 +80,11 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Area | Routes | Files / Notes |
 | --- | --- | --- |
 | About | `/about` | `src/app/(site)/about/page.tsx` |
+| Browser extension | `/browser-extension` | `src/app/(site)/browser-extension/page.tsx`; minimal public landing page with Chrome Web Store link and current product screenshots. |
 | Contact | `/contact` | `src/app/(site)/contact/page.tsx` |
 | Privacy policy | `/privacy-policy` | `src/app/(site)/privacy-policy/page.tsx` |
 | Terms of service | `/terms-of-service` | `src/app/(site)/terms-of-service/page.tsx` |
+| Account deletion | `/account-deletion` | `src/app/(site)/account-deletion/page.tsx`; public account and data deletion request instructions with signed-in Roblox identity prefill. |
 | Editorial guidelines | `/editorial-guidelines` | `src/app/(site)/editorial-guidelines/page.tsx` |
 | Disclaimer | `/disclaimer` | `src/app/(site)/disclaimer/page.tsx` |
 | Verification policy | `/how-we-gather-and-verify-codes` | `src/app/(site)/how-we-gather-and-verify-codes/page.tsx` |

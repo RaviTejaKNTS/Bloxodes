@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { Heart, Send } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -127,6 +128,15 @@ export function SiteFeedbackButton({ className, labelClassName }: SiteFeedbackBu
               placeholder="you@example.com"
             />
           </label>
+
+          <p className="text-xs leading-5 text-muted-foreground">
+            We also receive this page&apos;s URL, basic device details, and request information so we can understand and protect this
+            feedback channel. Read our{" "}
+            <Link href="/privacy-policy" className="text-foreground underline-offset-4 hover:underline">
+              Privacy Policy
+            </Link>
+            .
+          </p>
 
           {message ? (
             <p
