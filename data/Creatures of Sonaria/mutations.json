@@ -1,0 +1,1147 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Creatures of Sonaria",
+    "gameSlug": "creatures-of-sonaria",
+    "collection": "mutations",
+    "route": "/wiki/creatures-of-sonaria/mutations",
+    "catalogCode": "creatures-of-sonaria-mutations",
+    "itemFields": [
+      "appearanceEffect",
+      "obtainmentTypes",
+      "obtainmentDetail",
+      "rarityLabel",
+      "chanceNote",
+      "availability",
+      "realmExclusive",
+      "plushie",
+      "stacksVisually",
+      "cardSummary"
+    ],
+    "columns": [
+      "appearanceEffect",
+      "obtainmentTypes",
+      "obtainmentDetail",
+      "rarityLabel",
+      "chanceNote",
+      "availability",
+      "realmExclusive",
+      "plushie",
+      "stacksVisually",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "availability",
+      "sectionOrder": [
+        "Natural Mutations",
+        "Monthly Birthstones",
+        "Event Mutations",
+        "Plushie Mutations",
+        "Content Creator Mutations"
+      ],
+      "badgeField": "rarityLabel",
+      "subtitleFields": [
+        "obtainmentTypes",
+        "availability"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "obtainmentTypes",
+        "rarityLabel",
+        "availability",
+        "realmExclusive",
+        "appearanceEffect",
+        "obtainmentDetail",
+        "chanceNote",
+        "plushie",
+        "stacksVisually"
+      ],
+      "tableFields": [
+        "cardSummary",
+        "appearanceEffect",
+        "obtainmentTypes",
+        "obtainmentDetail",
+        "rarityLabel",
+        "chanceNote",
+        "availability",
+        "realmExclusive",
+        "plushie",
+        "stacksVisually"
+      ],
+      "fieldPresentation": {
+        "appearanceEffect": {
+          "kind": "detail",
+          "label": "Appearance"
+        },
+        "obtainmentTypes": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "obtainmentDetail": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "rarityLabel": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "chanceNote": {
+          "kind": "chip",
+          "label": "Chance note"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "realmExclusive": {
+          "kind": "highlight",
+          "label": "Realm"
+        },
+        "plushie": {
+          "kind": "normal",
+          "label": "Plushie"
+        },
+        "stacksVisually": {
+          "kind": "highlight",
+          "label": "Visual stack"
+        },
+        "cardSummary": {
+          "kind": "normal",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Albinism",
+        "appearanceEffect": "Turns a creature's entire body white and its eyes red. Based on real world albinism.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest.",
+        "rarityLabel": "Common",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Classic white-body mutation with red eyes, available whenever you hatch from another player's nest."
+      },
+      "system": {
+        "slug": "albinism",
+        "section": "Natural Mutations",
+        "sortOrder": 1,
+        "image": "/Creatures%20of%20Sonaria/Mutations/albinism.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glimmer",
+        "appearanceEffect": "Changes several different parts of a creature's body into neon, giving it glowing markings.",
+        "obtainmentTypes": "Growth",
+        "obtainmentDetail": "Growth path: 5% at age 100 (Glimmer tokens can also apply it). Growth tokens prevent growth mutations, but Glimmer tokens can still target Glimmer specifically.",
+        "rarityLabel": "",
+        "chanceNote": "5% at age 100 (Glimmer tokens can also apply it)",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "Yes",
+        "cardSummary": "Signature growth mutation that adds neon glowing markings and is the only mutation that visually stacks with one other."
+      },
+      "system": {
+        "slug": "glimmer",
+        "section": "Natural Mutations",
+        "sortOrder": 2,
+        "image": "/Creatures%20of%20Sonaria/Mutations/glimmer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond",
+        "appearanceEffect": "Gives a creature a smooth, reflective texture and bright turquoise coloration.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Year-round nesting mutation with bright turquoise reflective texture."
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Natural Mutations",
+        "sortOrder": 3,
+        "image": "/Creatures%20of%20Sonaria/Mutations/diamond.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dwarfism",
+        "appearanceEffect": "Gives a slight reduction in the creature's default size. Its mutation icon is in fact smaller than its peers in-game.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Natural size mutation that slightly shrinks the creature model and hitbox."
+      },
+      "system": {
+        "slug": "dwarfism",
+        "section": "Natural Mutations",
+        "sortOrder": 4,
+        "image": "/Creatures%20of%20Sonaria/Mutations/dwarfism.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gigantism",
+        "appearanceEffect": "Gives a slight increase in the creature's default size.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Natural size mutation that slightly enlarges the creature model and hitbox."
+      },
+      "system": {
+        "slug": "gigantism",
+        "section": "Natural Mutations",
+        "sortOrder": 5,
+        "image": "/Creatures%20of%20Sonaria/Mutations/gigantism.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gilded",
+        "appearanceEffect": "Makes the creature appear like its made out of stone with gold highlights",
+        "obtainmentTypes": "Nesting, Growth",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: Rarely when nested or growing to age 67 in Hardcore Realm. Only obtainable while playing in the Hardcore Realm.",
+        "rarityLabel": "",
+        "chanceNote": "Rarely when nested or growing to age 67 in Hardcore Realm",
+        "availability": "Year-round",
+        "realmExclusive": "Hardcore",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Hardcore Realm exclusive mutation with stone body and gold highlights."
+      },
+      "system": {
+        "slug": "gilded",
+        "section": "Natural Mutations",
+        "sortOrder": 6,
+        "image": "/Creatures%20of%20Sonaria/Mutations/gilded.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glow Tail",
+        "appearanceEffect": "Changes the tail of the creature, making it glow.",
+        "obtainmentTypes": "Growth",
+        "obtainmentDetail": "Growth path: Very rarely when growing to age 67.",
+        "rarityLabel": "",
+        "chanceNote": "Very rarely when growing to age 67",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Growth milestone mutation that makes the creature's tail glow."
+      },
+      "system": {
+        "slug": "glow-tail",
+        "section": "Natural Mutations",
+        "sortOrder": 7,
+        "image": "/Creatures%20of%20Sonaria/Mutations/glow-tail.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leucistic",
+        "appearanceEffect": "Turns the creature's body a stony dark blue, with light blue glowing eyes and claws. Aquatic Realm exclusive.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest.",
+        "rarityLabel": "Common",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Common nesting mutation with off-white, beige, and tan tones plus white eyes."
+      },
+      "system": {
+        "slug": "leucistic",
+        "section": "Natural Mutations",
+        "sortOrder": 8,
+        "image": "/Creatures%20of%20Sonaria/Mutations/leucistic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Melanism",
+        "appearanceEffect": "Turns a creature's entire body black and its eyes yellow. Based on real world melanism.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest.",
+        "rarityLabel": "Common",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Common nesting mutation with all-black body and yellow eyes."
+      },
+      "system": {
+        "slug": "melanism",
+        "section": "Natural Mutations",
+        "sortOrder": 9,
+        "image": "/Creatures%20of%20Sonaria/Mutations/melanism.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Marine",
+        "appearanceEffect": "Aquatic-themed visual mutation (wiki still marks details as work-in-progress).",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Aquatic Realm exclusive and unobtainable on non-swimming species.",
+        "rarityLabel": "",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "Aquatic",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Aquatic Realm exclusive nesting mutation with aquatic-themed visual changes; unobtainable on non-swimming species."
+      },
+      "system": {
+        "slug": "marine",
+        "section": "Natural Mutations",
+        "sortOrder": 10,
+        "image": "/Creatures%20of%20Sonaria/Mutations/marine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Overgrown",
+        "appearanceEffect": "Changes a creature's material and color, giving it a gray, stony appearance with mossy green markings. Claws and eyes turn a bright, glowing green.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Nesting mutation with stony grey body, mossy green markings, and glowing green claws or eyes."
+      },
+      "system": {
+        "slug": "overgrown",
+        "section": "Natural Mutations",
+        "sortOrder": 11,
+        "image": "/Creatures%20of%20Sonaria/Mutations/overgrown.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Piebald",
+        "appearanceEffect": "Turns a creature white with stark, brown markings and blue eyes. Based on real world piebaldism.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Nesting mutation with white body, brown markings, and blue eyes."
+      },
+      "system": {
+        "slug": "piebald",
+        "section": "Natural Mutations",
+        "sortOrder": 12,
+        "image": "/Creatures%20of%20Sonaria/Mutations/piebald.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow",
+        "appearanceEffect": "Internally known as \"Light\", it turns a creature's whole body a light grey with the neon material, making the color a solid white. The creature also receives solid neon black eyes and/or teeth, and white smoke/particles.",
+        "obtainmentTypes": "Growth",
+        "obtainmentDetail": "Growth path: Rarely when growing to age 67.",
+        "rarityLabel": "",
+        "chanceNote": "Rarely when growing to age 67",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Growth mutation with solid black neon body, white glowing eyes or teeth, and dark smoke."
+      },
+      "system": {
+        "slug": "shadow",
+        "section": "Natural Mutations",
+        "sortOrder": 13,
+        "image": "/Creatures%20of%20Sonaria/Mutations/shadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shimmer",
+        "appearanceEffect": "Changes several different parts of a creature's body into neon, making it glow. Glowing patches are different from that of Glimmer creatures.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Year-round",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Nesting mutation with neon glowing patches distinct from Glimmer's patterning."
+      },
+      "system": {
+        "slug": "shimmer",
+        "section": "Natural Mutations",
+        "sortOrder": 14,
+        "image": "/Creatures%20of%20Sonaria/Mutations/shimmer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Garnet",
+        "appearanceEffect": "Gives a creature a smooth, reflective texture with pinkish-purple hues, a deep, nearly black shade with subtle reddish tones, and white coloration.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Most commonly hunted during its (January) monthly window.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Monthly (January)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "January birthstone nesting mutation with pink-purple and deep red-black reflective tones."
+      },
+      "system": {
+        "slug": "garnet",
+        "section": "Monthly Birthstones",
+        "sortOrder": 1,
+        "image": "/Creatures%20of%20Sonaria/Mutations/garnet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Amethyst",
+        "appearanceEffect": "Gives a creature a smooth, reflective texture and purple and white coloration.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Most commonly hunted during its (February) monthly window.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Monthly (February)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "February birthstone mutation with smooth reflective purple and white coloring."
+      },
+      "system": {
+        "slug": "amethyst",
+        "section": "Monthly Birthstones",
+        "sortOrder": 2,
+        "image": "/Creatures%20of%20Sonaria/Mutations/amethyst.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rose Quartz",
+        "appearanceEffect": "Gives a creature a smooth, reflective texture and pink coloration.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Most commonly hunted during its (April) monthly window.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Monthly (April)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "April birthstone nesting mutation with smooth reflective pink coloration."
+      },
+      "system": {
+        "slug": "rose-quartz",
+        "section": "Monthly Birthstones",
+        "sortOrder": 3,
+        "image": "/Creatures%20of%20Sonaria/Mutations/rose-quartz.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Emerald",
+        "appearanceEffect": "Gives a creature a smooth, reflective texture and green coloration.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Most commonly hunted during its (May) monthly window.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Monthly (May)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "May birthstone nesting mutation with smooth reflective green coloration."
+      },
+      "system": {
+        "slug": "emerald",
+        "section": "Monthly Birthstones",
+        "sortOrder": 4,
+        "image": "/Creatures%20of%20Sonaria/Mutations/emerald.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pearl",
+        "appearanceEffect": "Gives a creature a smooth, reflective texture and pale pink pearl-like coloration.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Most commonly hunted during its (June) monthly window.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Monthly (June)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "June birthstone nesting mutation with smooth pearl-like reflective coloration."
+      },
+      "system": {
+        "slug": "pearl",
+        "section": "Monthly Birthstones",
+        "sortOrder": 5,
+        "image": "/Creatures%20of%20Sonaria/Mutations/pearl.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruby",
+        "appearanceEffect": "",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Most commonly hunted during its (July) monthly window.",
+        "rarityLabel": "",
+        "chanceNote": "",
+        "availability": "Monthly (July)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "July birthstone nesting mutation with darker reflective red shades."
+      },
+      "system": {
+        "slug": "ruby",
+        "section": "Monthly Birthstones",
+        "sortOrder": 6,
+        "image": "/Creatures%20of%20Sonaria/Mutations/ruby.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Peridot",
+        "appearanceEffect": "Gives the creature a smooth, reflective surface and a coloration of various shades of green ranging from lime green to dark green.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Most commonly hunted during its (August) monthly window.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Monthly (August)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "August birthstone nesting mutation with lime-to-dark-green reflective tones."
+      },
+      "system": {
+        "slug": "peridot",
+        "section": "Monthly Birthstones",
+        "sortOrder": 7,
+        "image": "/Creatures%20of%20Sonaria/Mutations/peridot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sapphire",
+        "appearanceEffect": "Gives a creature a smooth, reflective texture and blue coloration.",
+        "obtainmentTypes": "Nesting, Growth",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: Rarely when nesting or growing to age 67 during September. Most commonly hunted during its (September) monthly window.",
+        "rarityLabel": "",
+        "chanceNote": "Rarely when nesting or growing to age 67 during September",
+        "availability": "Monthly (September)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "September birthstone mutation with smooth reflective blue coloration."
+      },
+      "system": {
+        "slug": "sapphire",
+        "section": "Monthly Birthstones",
+        "sortOrder": 8,
+        "image": "/Creatures%20of%20Sonaria/Mutations/sapphire.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Opal",
+        "appearanceEffect": "Gives a creature a smooth surface, with various shades of pastel.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Most commonly hunted during its (October) monthly window.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Monthly (October)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "October birthstone nesting mutation with smooth pastel coloration."
+      },
+      "system": {
+        "slug": "opal",
+        "section": "Monthly Birthstones",
+        "sortOrder": 9,
+        "image": "/Creatures%20of%20Sonaria/Mutations/opal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blossom",
+        "appearanceEffect": "Partially changes a creature's body to display a flowery material with a pink and hot-pink color scheme. Regions unaffected by the mutation will display the colors of the creature, whether default or custom.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (February) event windows.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Event (February)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Spring event nesting mutation that adds flowery pink materials to parts of the body."
+      },
+      "system": {
+        "slug": "blossom",
+        "section": "Event Mutations",
+        "sortOrder": 1,
+        "image": "/Creatures%20of%20Sonaria/Mutations/blossom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Petal",
+        "appearanceEffect": "Turns the creature shades of red and dark pink, with a primarily foil texture, and a few metallic and forcefield sections.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Can roll at growth milestones such as age 67 or 100. Tied to (Valentine's) event windows.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Event (Valentine's)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Valentine's event mutation with reflective light and dark red petal tones."
+      },
+      "system": {
+        "slug": "shiny-petal",
+        "section": "Event Mutations",
+        "sortOrder": 2,
+        "image": "/Creatures%20of%20Sonaria/Mutations/shiny-petal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clover",
+        "appearanceEffect": "Partially changes a creature's body to display a clover-like material with a green color scheme. Regions unaffected by the mutation will display the colors of the creature, whether default or custom.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (March / Spring Meadow) event windows.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Event (March / Spring Meadow)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Spring Meadow event mutation with clover-like green patterning on parts of the body."
+      },
+      "system": {
+        "slug": "clover",
+        "section": "Event Mutations",
+        "sortOrder": 3,
+        "image": "/Creatures%20of%20Sonaria/Mutations/clover.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fools Error",
+        "appearanceEffect": "Gives the creature a pink and black checkered texture and coloration.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (April Fools) event windows.",
+        "rarityLabel": "Unknown",
+        "chanceNote": "",
+        "availability": "Event (April Fools)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "April Fools event nesting mutation with pink and black checkered texture."
+      },
+      "system": {
+        "slug": "fools-error",
+        "section": "Event Mutations",
+        "sortOrder": 4,
+        "image": "/Creatures%20of%20Sonaria/Mutations/fools-error.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Heart",
+        "appearanceEffect": "Changes a creature's entire body to display shades of pink and very dark garnet and fandango, with some pink-cream bright spots and lilac areas, in what a developer called \"blazing void-magma\" pattern.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (LSS) event windows.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Event (LSS)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "LSS team Blade event mutation with dark garnet and void-magma patterning."
+      },
+      "system": {
+        "slug": "dark-heart",
+        "section": "Event Mutations",
+        "sortOrder": 5,
+        "image": "/Creatures%20of%20Sonaria/Mutations/dark-heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pure Heart",
+        "appearanceEffect": "Changes a creature's entire body to display shades of blue, lilac, turquoise and black very dark garnet and fandango, with some spots of warmer artificial-grape purple shades.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (LSS) event windows.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Event (LSS)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "LSS team Bastion event mutation with blue, lilac, and turquoise heart-themed colors."
+      },
+      "system": {
+        "slug": "pure-heart",
+        "section": "Event Mutations",
+        "sortOrder": 6,
+        "image": "/Creatures%20of%20Sonaria/Mutations/pure-heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Souls Blessing",
+        "appearanceEffect": "An upgraded version of the Pure Heart mutation, with transparent elements and darker blues.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (LSS) event windows.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Event (LSS)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Upgraded Pure Heart LSS mutation with transparent elements and darker blues."
+      },
+      "system": {
+        "slug": "souls-blessing",
+        "section": "Event Mutations",
+        "sortOrder": 7,
+        "image": "/Creatures%20of%20Sonaria/Mutations/souls-blessing.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Souls Fracture",
+        "appearanceEffect": "An upgraded version of the Dark Heart mutation, with the occasionally transparent element and much darker, more abyssal colors.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (LSS) event windows.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Event (LSS)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Upgraded Dark Heart LSS mutation with darker abyssal colors and occasional transparency."
+      },
+      "system": {
+        "slug": "souls-fracture",
+        "section": "Event Mutations",
+        "sortOrder": 8,
+        "image": "/Creatures%20of%20Sonaria/Mutations/souls-fracture.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghosty",
+        "appearanceEffect": "Changes several different parts of a creature's body into green slime aspect and some areas into forcefield. The forcefield areas retain their original/custom colors.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (October / Halloween) event windows.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Event (October / Halloween)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Halloween event nesting mutation with green slime and forcefield areas."
+      },
+      "system": {
+        "slug": "ghosty",
+        "section": "Event Mutations",
+        "sortOrder": 9,
+        "image": "/Creatures%20of%20Sonaria/Mutations/ghosty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headless",
+        "appearanceEffect": "Changes a creature's head into dark forcefield material.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (October / Halloween) event windows.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Event (October / Halloween)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Halloween event nesting mutation that turns the head and neck into dark forcefield material."
+      },
+      "system": {
+        "slug": "headless",
+        "section": "Event Mutations",
+        "sortOrder": 10,
+        "image": "/Creatures%20of%20Sonaria/Mutations/headless.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombified",
+        "appearanceEffect": "Applies a zombie-themed color scheme to the creature, consisting of dark reds, greens, black, bone white, and glowing yellow eyes (if the creature has eyes).",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (October / Halloween) event windows.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Event (October / Halloween)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Halloween event nesting mutation with zombie reds, greens, bone white, and yellow eyes."
+      },
+      "system": {
+        "slug": "zombified",
+        "section": "Event Mutations",
+        "sortOrder": 11,
+        "image": "/Creatures%20of%20Sonaria/Mutations/zombified.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Harvest",
+        "appearanceEffect": "Changes a creature's body to feature orange and tan grassy tones, smooth beige/yellowy and brown/mud coloration, and, in some cases, greener grasses and layers of leather.",
+        "obtainmentTypes": "Nesting, Growth",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: Can also roll on growth at age 67 during the event window. Tied to (November) event windows.",
+        "rarityLabel": "",
+        "chanceNote": "Can also roll on growth at age 67 during the event window",
+        "availability": "Event (November)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Autumn event mutation with grassy orange, tan, and brown harvest tones."
+      },
+      "system": {
+        "slug": "harvest",
+        "section": "Event Mutations",
+        "sortOrder": 12,
+        "image": "/Creatures%20of%20Sonaria/Mutations/harvest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coal Chunk",
+        "appearanceEffect": "Turns a creature's entire body shades of black with the glass material.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (December) event windows.",
+        "rarityLabel": "Rare",
+        "chanceNote": "",
+        "availability": "Event (December)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Winter event nesting mutation that turns the body black with glass material."
+      },
+      "system": {
+        "slug": "coal-chunk",
+        "section": "Event Mutations",
+        "sortOrder": 13,
+        "image": "/Creatures%20of%20Sonaria/Mutations/coal-chunk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frostburn",
+        "appearanceEffect": "Partially changes a creature's body to display layers of ice, with pale glowing eyes and claws. Regions unaffected by the mutation will display the colors of the creature, whether default or custom.",
+        "obtainmentTypes": "Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Tied to (December) event windows.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "",
+        "availability": "Event (December)",
+        "realmExclusive": "",
+        "plushie": "",
+        "stacksVisually": "No",
+        "cardSummary": "Winter event nesting mutation with layered ice textures and pale glowing eyes or claws."
+      },
+      "system": {
+        "slug": "frostburn",
+        "section": "Event Mutations",
+        "sortOrder": 14,
+        "image": "/Creatures%20of%20Sonaria/Mutations/frostburn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bewitched",
+        "appearanceEffect": "Turns a creature's entire body shades of slimy purple and dark blue, as well as neon sky blues and electric greens.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: +10% at age 67 and +10% for your hatchlings with Magic Frog equipped. Boosted or guaranteed with the Magic Frog plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "+10% at age 67 and +10% for your hatchlings with Magic Frog equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Magic Frog",
+        "stacksVisually": "No",
+        "cardSummary": "Premium plushie mutation that shifts creatures into purple, blue, and neon green tones."
+      },
+      "system": {
+        "slug": "bewitched",
+        "section": "Plushie Mutations",
+        "sortOrder": 1,
+        "image": "/Creatures%20of%20Sonaria/Mutations/bewitched.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blood Moon",
+        "appearanceEffect": "Turns a creature's entire body shades of red and dark red.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: +10% for hatchlings and growth with Catalyst equipped (non-stackable). Boosted or guaranteed with the Catalyst plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "+10% for hatchlings and growth with Catalyst equipped (non-stackable)",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Catalyst",
+        "stacksVisually": "No",
+        "cardSummary": "Catalyst plushie mutation that covers the body in deep red shades."
+      },
+      "system": {
+        "slug": "blood-moon",
+        "section": "Plushie Mutations",
+        "sortOrder": 2,
+        "image": "/Creatures%20of%20Sonaria/Mutations/blood-moon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clownfish",
+        "appearanceEffect": "Turns a creature's entire body into an array of orange, black, and white.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: +6% for hatchlings and growth with Clownfish plushie equipped. Boosted or guaranteed with the Clownfish plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "Uncommon",
+        "chanceNote": "+6% for hatchlings and growth with Clownfish plushie equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Clownfish",
+        "stacksVisually": "No",
+        "cardSummary": "Clownfish plushie mutation with orange, black, and white color blocking."
+      },
+      "system": {
+        "slug": "clownfish",
+        "section": "Plushie Mutations",
+        "sortOrder": 3,
+        "image": "/Creatures%20of%20Sonaria/Mutations/clownfish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elemental",
+        "appearanceEffect": "Changes a creature's body to feature mossy dark green, light green, foil \"water\" light blue, stone grey, and earthy dark brown colors, with some blue transparent parts. In some cases, unaffected regions retain their default or custom colors.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: +10% to hatch or grow with Elemental plushie equipped. Boosted or guaranteed with the Elemental plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "+10% to hatch or grow with Elemental plushie equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Elemental",
+        "stacksVisually": "No",
+        "cardSummary": "Elemental plushie mutation mixing mossy greens, blues, greys, and transparent parts."
+      },
+      "system": {
+        "slug": "elemental",
+        "section": "Plushie Mutations",
+        "sortOrder": 4,
+        "image": "/Creatures%20of%20Sonaria/Mutations/elemental.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ethereal Land",
+        "appearanceEffect": "Changes the creature's body to be neon blue, stony dark grey and forcefield green, with glowing blue eyes.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: +25% to hatch or grow with Ethereal Fae plushie equipped. Boosted or guaranteed with the Ethereal Fae plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "+25% to hatch or grow with Ethereal Fae plushie equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Ethereal Fae",
+        "stacksVisually": "No",
+        "cardSummary": "Ethereal Fae plushie mutation with neon blue, stony grey, and forcefield green accents."
+      },
+      "system": {
+        "slug": "ethereal-land",
+        "section": "Plushie Mutations",
+        "sortOrder": 5,
+        "image": "/Creatures%20of%20Sonaria/Mutations/ethereal-land.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fool's Gold",
+        "appearanceEffect": "Gives a creature a smooth, reflective texture and goldish brown coloration.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: +10% at age 67 and +10% for hatchlings with Golden Bulb equipped. Boosted or guaranteed with the Golden Bulb plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "+10% at age 67 and +10% for hatchlings with Golden Bulb equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Golden Bulb",
+        "stacksVisually": "No",
+        "cardSummary": "Golden Bulb plushie mutation with reflective gold-brown coloration."
+      },
+      "system": {
+        "slug": "fools-gold",
+        "section": "Plushie Mutations",
+        "sortOrder": 6,
+        "image": "/Creatures%20of%20Sonaria/Mutations/fool-s-gold.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Smore",
+        "appearanceEffect": "Applies a smore-themed color scheme to the creature, consisting of browns, black, and white. The creature also receives red/yellow eyes.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: +10% at age 67 and +10% for hatchlings with Smore Cat equipped. Boosted or guaranteed with the Smore Cat plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "+10% at age 67 and +10% for hatchlings with Smore Cat equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Smore Cat",
+        "stacksVisually": "No",
+        "cardSummary": "Smore Cat plushie mutation with toasted brown, black, and white smore colors."
+      },
+      "system": {
+        "slug": "smore",
+        "section": "Plushie Mutations",
+        "sortOrder": 7,
+        "image": "/Creatures%20of%20Sonaria/Mutations/smore.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stitch",
+        "appearanceEffect": "Applies a red and grey coloring to the creature, with stone and gemlike textures, as well as blue eyes with a yellow pupil.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: 100% at age 67 and for hatchlings with Stitch Head equipped. Boosted or guaranteed with the Stitch Head plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "100% at age 67 and for hatchlings with Stitch Head equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Stitch Head",
+        "stacksVisually": "No",
+        "cardSummary": "Stitch Head plushie mutation with red-grey stone and gemlike textures plus blue-yellow eyes."
+      },
+      "system": {
+        "slug": "stitch",
+        "section": "Plushie Mutations",
+        "sortOrder": 8,
+        "image": "/Creatures%20of%20Sonaria/Mutations/stitch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valcor",
+        "appearanceEffect": "Turns the creature metallic gold and bronze, with blue foil shades and glowing blue eyes.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: 25% at age 66 and for hatchlings with Valcorwings plushie equipped. Boosted or guaranteed with the Valcorwings plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "25% at age 66 and for hatchlings with Valcorwings plushie equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Valcorwings",
+        "stacksVisually": "No",
+        "cardSummary": "Valcorwings plushie mutation with metallic gold, bronze, and blue foil accents."
+      },
+      "system": {
+        "slug": "valcor",
+        "section": "Plushie Mutations",
+        "sortOrder": 9,
+        "image": "/Creatures%20of%20Sonaria/Mutations/valcor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vile Bloom",
+        "appearanceEffect": "Applies a primarily dark pink and purple coloring with smooth and foil textures, with some smooth black and black forcefield sections. The eyes glow red, the inside of the mouth white and the tongue is black.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: +10% at age 67 and +10% for hatchlings with Vile Thorn equipped. Boosted or guaranteed with the Vile Thorn plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "+10% at age 67 and +10% for hatchlings with Vile Thorn equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Vile Thorn",
+        "stacksVisually": "No",
+        "cardSummary": "Vile Thorn plushie mutation with dark pink, purple, foil, and forcefield accents."
+      },
+      "system": {
+        "slug": "vile-bloom",
+        "section": "Plushie Mutations",
+        "sortOrder": 10,
+        "image": "/Creatures%20of%20Sonaria/Mutations/vile-bloom.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Woolborne",
+        "appearanceEffect": "Applies a primarily soft textured white and periwinkle color to the creature, with metallic gold sections, a few greyish forcefield parts and glowing blue and white eyes.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: +10% at age 67 and +10% for hatchlings with Lucky Lamb equipped. Boosted or guaranteed with the Lucky Lamb plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "+10% at age 67 and +10% for hatchlings with Lucky Lamb equipped",
+        "availability": "Plushie-boosted",
+        "realmExclusive": "",
+        "plushie": "Lucky Lamb",
+        "stacksVisually": "No",
+        "cardSummary": "Lucky Lamb plushie mutation with soft white, periwinkle, and metallic gold sections."
+      },
+      "system": {
+        "slug": "woolborne",
+        "section": "Plushie Mutations",
+        "sortOrder": 11,
+        "image": "/Creatures%20of%20Sonaria/Mutations/woolborne.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Creator Star",
+        "appearanceEffect": "Changes a creature's entire body to display gold or golden brown, black, and white colors, with some glowing body parts.",
+        "obtainmentTypes": "Growth, Nesting",
+        "obtainmentDetail": "Can roll when hatching from another player's nest. Growth path: 75% when nesting or growing to age 67 with Creator Star plushie equipped. Boosted or guaranteed with the Creator Star plushie equipped on the nesting parent or growing creature.",
+        "rarityLabel": "",
+        "chanceNote": "75% when nesting or growing to age 67 with Creator Star plushie equipped",
+        "availability": "Content Creator",
+        "realmExclusive": "",
+        "plushie": "Creator Star",
+        "stacksVisually": "No",
+        "cardSummary": "Content-creator exclusive mutation with gold, brown, black, and glowing accents."
+      },
+      "system": {
+        "slug": "creator-star",
+        "section": "Content Creator Mutations",
+        "sortOrder": 1,
+        "image": "/Creatures%20of%20Sonaria/Mutations/creator-star.png"
+      }
+    }
+  ]
+}

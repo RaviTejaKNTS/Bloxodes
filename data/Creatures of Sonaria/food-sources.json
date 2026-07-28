@@ -1,0 +1,499 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Creatures of Sonaria",
+    "gameSlug": "creatures-of-sonaria",
+    "collection": "food-sources",
+    "route": "/wiki/creatures-of-sonaria/food-sources",
+    "catalogCode": "creatures-of-sonaria-food-sources",
+    "itemFields": [
+      "category",
+      "habitat",
+      "baseFoodValue",
+      "dietAccess",
+      "survivalBuff",
+      "mobility",
+      "refillOrRegen",
+      "rottingBehavior",
+      "chunkRules",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "category",
+      "habitat",
+      "baseFoodValue",
+      "dietAccess",
+      "survivalBuff",
+      "mobility",
+      "refillOrRegen",
+      "rottingBehavior",
+      "chunkRules",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Section",
+      "sectionOrder": [
+        "Permanent Sources",
+        "Plant Sources",
+        "Meat Sources",
+        "Mobile & Dropped Sources",
+        "Drinkable Water",
+        "Event Food"
+      ],
+      "badgeField": "survivalBuff",
+      "subtitleFields": [
+        "habitat",
+        "availability"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "habitat",
+        "baseFoodValue",
+        "dietAccess",
+        "survivalBuff",
+        "mobility",
+        "refillOrRegen",
+        "rottingBehavior",
+        "chunkRules"
+      ],
+      "tableFields": [
+        "category",
+        "habitat",
+        "baseFoodValue",
+        "dietAccess",
+        "survivalBuff",
+        "mobility",
+        "refillOrRegen",
+        "rottingBehavior",
+        "chunkRules",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "category": {
+          "kind": "plain",
+          "label": "Category"
+        },
+        "habitat": {
+          "kind": "plain",
+          "label": "Habitat"
+        },
+        "baseFoodValue": {
+          "kind": "chip",
+          "label": "Base food"
+        },
+        "dietAccess": {
+          "kind": "plain",
+          "label": "Diets"
+        },
+        "survivalBuff": {
+          "kind": "highlight",
+          "label": "Survival buff"
+        },
+        "mobility": {
+          "kind": "plain",
+          "label": "Mobility"
+        },
+        "refillOrRegen": {
+          "kind": "chip",
+          "label": "Refill / regen"
+        },
+        "rottingBehavior": {
+          "kind": "detail",
+          "label": "Rotting"
+        },
+        "chunkRules": {
+          "kind": "detail",
+          "label": "Chunk rules"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Grass",
+        "category": "Permanent",
+        "habitat": "Terrestrial",
+        "baseFoodValue": "∞",
+        "dietAccess": "Herbivore, omnivore",
+        "survivalBuff": "None",
+        "mobility": "Static",
+        "refillOrRegen": "Permanent",
+        "rottingBehavior": "Does not rot",
+        "chunkRules": "Chunks can be picked up but have limited food value",
+        "availability": "Always",
+        "cardSummary": "The always-available terrestrial staple with infinite bites and no growth or stamina buff, meant for emergency hunger rather than efficient growth."
+      },
+      "system": {
+        "slug": "grass",
+        "section": "Permanent Sources",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Algae Patches",
+        "category": "Permanent",
+        "habitat": "Aquatic",
+        "baseFoodValue": "∞",
+        "dietAccess": "Herbivore, omnivore",
+        "survivalBuff": "None",
+        "mobility": "Static",
+        "refillOrRegen": "Permanent",
+        "rottingBehavior": "Does not rot",
+        "chunkRules": "Chunks can be picked up but have limited food value",
+        "availability": "Always",
+        "cardSummary": "The underwater equivalent of grass: unlimited food with no satiation or enrichment tradeoff, useful when land plants are out of reach."
+      },
+      "system": {
+        "slug": "algae-patches",
+        "section": "Permanent Sources",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fruit / Cherry Tree",
+        "category": "Long-lasting Plant",
+        "habitat": "Terrestrial",
+        "baseFoodValue": "50",
+        "dietAccess": "Herbivore, omnivore",
+        "survivalBuff": "Enriched (tree); cherries inherit",
+        "mobility": "Static",
+        "refillOrRegen": "180s after full depletion",
+        "rottingBehavior": "Detached cherries rot; green miasma when spoiled",
+        "chunkRules": "Cherries transfer 30% of current tree food; grab blocked at 4 points or less; rounds to nearest whole number",
+        "availability": "Always",
+        "cardSummary": "A high-value bush or small tree that grants Enriched on direct bites and lets you carry cherry chunks that keep the same buff until they spoil."
+      },
+      "system": {
+        "slug": "fruit-cherry-tree",
+        "section": "Plant Sources",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sea Grapes",
+        "category": "Long-lasting Plant",
+        "habitat": "Aquatic",
+        "baseFoodValue": "50",
+        "dietAccess": "Herbivore, omnivore",
+        "survivalBuff": "Enriched",
+        "mobility": "Static",
+        "refillOrRegen": "Regenerates when depleted",
+        "rottingBehavior": "Does not rot while static",
+        "chunkRules": "Fragments cannot be picked up",
+        "availability": "Always",
+        "cardSummary": "An aquatic Enriched plant whose glowing bulb structures stay on the map after you eat through the food, making it easy to revisit."
+      },
+      "system": {
+        "slug": "sea-grapes",
+        "section": "Plant Sources",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Berries",
+        "category": "Long-lasting Plant",
+        "habitat": "Terrestrial",
+        "baseFoodValue": "35",
+        "dietAccess": "Herbivore, omnivore",
+        "survivalBuff": "Satiated",
+        "mobility": "Static",
+        "refillOrRegen": "Regenerates when depleted",
+        "rottingBehavior": "Does not rot while static",
+        "chunkRules": "Fragments cannot be picked up",
+        "availability": "Always",
+        "cardSummary": "A common bush whose pink tips provide Satiated at a lower bite budget than enriched plants, with no carryable fragments."
+      },
+      "system": {
+        "slug": "berries",
+        "section": "Plant Sources",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Seaweed Pods",
+        "category": "Long-lasting Plant",
+        "habitat": "Aquatic",
+        "baseFoodValue": "50",
+        "dietAccess": "Herbivore, omnivore",
+        "survivalBuff": "Satiated",
+        "mobility": "Static",
+        "refillOrRegen": "Regenerates when depleted",
+        "rottingBehavior": "Does not rot while static",
+        "chunkRules": "Fragments cannot be picked up",
+        "availability": "Always",
+        "cardSummary": "A taller aquatic bush that grants Satiated and removes its pod structures once the food is fully eaten."
+      },
+      "system": {
+        "slug": "seaweed-pods",
+        "section": "Plant Sources",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Grass",
+        "category": "Long-lasting Plant",
+        "habitat": "Terrestrial",
+        "baseFoodValue": "50",
+        "dietAccess": "Herbivore, omnivore",
+        "survivalBuff": "Satiated",
+        "mobility": "Static",
+        "refillOrRegen": "Regenerates when depleted",
+        "rottingBehavior": "Does not rot while static",
+        "chunkRules": "Chunks can be picked up with limited food value",
+        "availability": "Always",
+        "cardSummary": "Looks like ordinary grass but actually grants Satiated, making it a stealth upgrade over infinite grass for growth-focused herbivores."
+      },
+      "system": {
+        "slug": "shadow-grass",
+        "section": "Plant Sources",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Natural Ribs",
+        "category": "Long-lasting Meat",
+        "habitat": "Terrestrial",
+        "baseFoodValue": "50",
+        "dietAccess": "Carnivore, omnivore",
+        "survivalBuff": "Enriched",
+        "mobility": "Static",
+        "refillOrRegen": "Regenerates when depleted",
+        "rottingBehavior": "Does not rot while static",
+        "chunkRules": "Fragments cannot be picked up",
+        "availability": "Always",
+        "cardSummary": "A small static meat node that gives carnivores Enriched without the chunk mechanics of larger carcasses."
+      },
+      "system": {
+        "slug": "natural-ribs",
+        "section": "Meat Sources",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Node Carcass",
+        "category": "Long-lasting Meat",
+        "habitat": "Both",
+        "baseFoodValue": "300",
+        "dietAccess": "Carnivore, omnivore",
+        "survivalBuff": "None",
+        "mobility": "Static",
+        "refillOrRegen": "300s after full depletion",
+        "rottingBehavior": "Detached meat chunks rot; pre-rot orange stage is cosmetic on meat",
+        "chunkRules": "Meat chunks transfer 30% of current carcass food; grab blocked at 4 points or less; rounds to nearest whole number; chunks inherit no buff",
+        "availability": "Always",
+        "cardSummary": "The large map-spawned carcass labeled Carcass on land or Sea Carcass underwater—high yield with no buff, but excellent for chunk farming if you manage rot timers."
+      },
+      "system": {
+        "slug": "node-carcass",
+        "section": "Meat Sources",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Creature Carcass",
+        "category": "Mobile",
+        "habitat": "Both",
+        "baseFoodValue": "Varies by tier and diet",
+        "dietAccess": "Carnivore, omnivore, herbivore, or plant carcass diets",
+        "survivalBuff": "Satiated",
+        "mobility": "Drops on death",
+        "refillOrRegen": "None",
+        "rottingBehavior": "Rots over time; orange pre-rot still gives normal buff; rotten applies Sickly (120 stacks)",
+        "chunkRules": "Can be eaten whole, picked up at proper tier, or chunked at 30%; player chunks keep Satiated; chunk rot timer resets when detached",
+        "availability": "Always",
+        "cardSummary": "Player or ability drops whose label reveals diet type—carnivore, omnivore, herbivore, or plant carcass—and grant Satiated until they spoil."
+      },
+      "system": {
+        "slug": "creature-carcass",
+        "section": "Mobile & Dropped Sources",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Egg",
+        "category": "Mobile",
+        "habitat": "Terrestrial",
+        "baseFoodValue": "35",
+        "dietAccess": "Egg Stealer to extract; any creature with appetite can eat scrambled form",
+        "survivalBuff": "Satiated",
+        "mobility": "Nest pickup",
+        "refillOrRegen": "None",
+        "rottingBehavior": "Stolen eggs may rot; rotten applies Sickly (120 stacks)",
+        "chunkRules": "Broken into scrambled egg by repeated bites; not the same as Abandoned Eggs",
+        "availability": "Always",
+        "cardSummary": "Nest eggs stolen with Egg Stealer become portable Satiated food once broken open, separate from the Abandoned Egg mechanic."
+      },
+      "system": {
+        "slug": "egg",
+        "section": "Mobile & Dropped Sources",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Meat Chunk",
+        "category": "Mobile",
+        "habitat": "Both",
+        "baseFoodValue": "30% of parent",
+        "dietAccess": "Inherits parent carcass diet",
+        "survivalBuff": "Inherits parent (node: none; player: Satiated)",
+        "mobility": "Chunkable",
+        "refillOrRegen": "None",
+        "rottingBehavior": "Rots over time; orange pre-rot still gives normal buff; rotten applies Sickly (120 stacks)",
+        "chunkRules": "Value rounds to nearest whole number; grab requires parent above 4 food points; node chunks grant no buff",
+        "availability": "Always",
+        "cardSummary": "Portable meat torn from a carcass—buff depends entirely on whether it came from a node carcass or a player drop."
+      },
+      "system": {
+        "slug": "meat-chunk",
+        "section": "Mobile & Dropped Sources",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Plant Chunk",
+        "category": "Mobile",
+        "habitat": "Both",
+        "baseFoodValue": "30% of parent",
+        "dietAccess": "Herbivore and omnivore when treated as plant; may become normal meat",
+        "survivalBuff": "Satiated when from plant carcass",
+        "mobility": "Chunkable",
+        "refillOrRegen": "None",
+        "rottingBehavior": "Rots over time; rotten applies Sickly (120 stacks)",
+        "chunkRules": "May be counted as normal meat chunk, causing herbivores to lose access; inherits Satiated from plant carcass parent",
+        "availability": "Always",
+        "cardSummary": "Chunks from photovore or photocarnivore plant carcasses can still Satiated, but the game may reclassify them as meat and block herbivores."
+      },
+      "system": {
+        "slug": "plant-chunk",
+        "section": "Mobile & Dropped Sources",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Drinkable Water Node",
+        "category": "Water",
+        "habitat": "Both",
+        "baseFoodValue": "N/A",
+        "dietAccess": "All creatures with thirst",
+        "survivalBuff": "Clean Water above 90% quality",
+        "mobility": "Static",
+        "refillOrRegen": "Quality degrades with use; rain restores +50%; flood restores 100%; larger ponds degrade slower",
+        "rottingBehavior": "Below 90% quality: neutral between 20–90%; dirty water inflicts Sickly (120 stacks) and slows drinking",
+        "chunkRules": null,
+        "availability": "Always",
+        "cardSummary": "Map ponds and lakes that refill thirst and grant Clean Water only while quality stays above 90%; seawater is not drinkable."
+      },
+      "system": {
+        "slug": "drinkable-water-node",
+        "section": "Drinkable Water",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Pie",
+        "category": "Event",
+        "habitat": "Terrestrial",
+        "baseFoodValue": "Event",
+        "dietAccess": "All diets except photocarnivore",
+        "survivalBuff": "Satiated",
+        "mobility": "Static",
+        "refillOrRegen": "Event spawn only",
+        "rottingBehavior": "Disappears when fully eaten",
+        "chunkRules": "Cannot be picked up or grabbed",
+        "availability": "Halloween event",
+        "cardSummary": "A Halloween-only static slice that refills hunger with Satiated for most diets but cannot be carried away from the spawn."
+      },
+      "system": {
+        "slug": "pumpkin-pie",
+        "section": "Event Food",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spicy Candy",
+        "category": "Event",
+        "habitat": "Terrestrial",
+        "baseFoodValue": "Event",
+        "dietAccess": "All diets except photocarnivore",
+        "survivalBuff": "Spicy (+1 burn stack per bite, 30s)",
+        "mobility": "Static",
+        "refillOrRegen": "Event spawn only",
+        "rottingBehavior": "Stick remains after food is eaten",
+        "chunkRules": "Cannot be picked up or grabbed",
+        "availability": "Halloween event",
+        "cardSummary": "Halloween candy that feeds most creatures and adds a short Spicy combat buff instead of satiation or enrichment."
+      },
+      "system": {
+        "slug": "spicy-candy",
+        "section": "Event Food",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane",
+        "category": "Event",
+        "habitat": "Terrestrial",
+        "baseFoodValue": "Event",
+        "dietAccess": "All diets except photovore",
+        "survivalBuff": "Minty (+1 frostbite stack per bite)",
+        "mobility": "Static",
+        "refillOrRegen": "Event spawn only",
+        "rottingBehavior": "Disappears when fully eaten",
+        "chunkRules": "Cannot be picked up or grabbed",
+        "availability": "Winter event",
+        "cardSummary": "A winter event treat that grants Minty frostbite stacks on bite rather than the usual growth-focused survival buffs."
+      },
+      "system": {
+        "slug": "candy-cane",
+        "section": "Event Food",
+        "sortOrder": 17,
+        "image": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,2086 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Creatures of Sonaria",
+    "gameSlug": "creatures-of-sonaria",
+    "collection": "color-palettes",
+    "route": "/wiki/creatures-of-sonaria/color-palettes",
+    "catalogCode": "creatures-of-sonaria-color-palettes",
+    "itemFields": [
+      "paletteType",
+      "obtainment",
+      "price",
+      "currency",
+      "event",
+      "availability",
+      "tradable",
+      "colorSummary",
+      "cardSummary"
+    ],
+    "columns": [
+      "paletteType",
+      "obtainment",
+      "price",
+      "currency",
+      "event",
+      "availability",
+      "tradable",
+      "colorSummary",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Color Palette",
+      "sectionOrder": [
+        "Standard",
+        "Daily Missions",
+        "Event",
+        "Redeem Code",
+        "Merchandise"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "price",
+        "currency",
+        "event"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "obtainment",
+        "price",
+        "currency",
+        "event",
+        "availability",
+        "tradable",
+        "colorSummary"
+      ],
+      "tableFields": [
+        "cardSummary",
+        "paletteType",
+        "obtainment",
+        "price",
+        "currency",
+        "event",
+        "availability",
+        "tradable",
+        "colorSummary"
+      ],
+      "fieldPresentation": {
+        "paletteType": {
+          "kind": "normal",
+          "label": "Type"
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "currency": {
+          "kind": "chip",
+          "label": "Currency"
+        },
+        "event": {
+          "kind": "normal",
+          "label": "Event"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "tradable": {
+          "kind": "normal",
+          "label": "Tradable"
+        },
+        "colorSummary": {
+          "kind": "detail",
+          "label": "Colors"
+        },
+        "cardSummary": {
+          "kind": "normal",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Blighted Shadow Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Donate to any Shadow Shrine for a random chance to receive this palette.",
+        "price": "Random drop",
+        "currency": null,
+        "event": null,
+        "availability": "Shrine reward",
+        "tradable": "Yes",
+        "colorSummary": "Purples, corrupt hues, and shadowy tones",
+        "cardSummary": "Random reward from donating at a Sonaria shrine."
+      },
+      "system": {
+        "slug": "blighted-shadow-palette",
+        "section": "Standard",
+        "sortOrder": 1
+      }
+    },
+    {
+      "item": {
+        "name": "Dune Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 15 Shooms.",
+        "price": "Shooms 15 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Yellows",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "dune-palette",
+        "section": "Standard",
+        "sortOrder": 2
+      }
+    },
+    {
+      "item": {
+        "name": "Forest Camo Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 30 Shooms.",
+        "price": "Shooms 30 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Greens",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "forest-camo-palette",
+        "section": "Standard",
+        "sortOrder": 3
+      }
+    },
+    {
+      "item": {
+        "name": "Forest Walk Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 500 Shooms.",
+        "price": "Shooms 500 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Greens, reds, and moody greens",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "forest-walk-palette",
+        "section": "Standard",
+        "sortOrder": 4
+      }
+    },
+    {
+      "item": {
+        "name": "Fruit Salad Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 750 Shooms.\n\nOpen a Christmas Present Token (Winter Event 2023-2024).",
+        "price": "Open a Christmas Present Token (Winter Event 2023-2024).",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Vibrant pinks and greens",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "fruit-salad-palette",
+        "section": "Standard",
+        "sortOrder": 5
+      }
+    },
+    {
+      "item": {
+        "name": "Furry Coat Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 85 Shooms. \n\nOpen a Christmas Present Token (Winter Event 2023-2024).",
+        "price": "Open a Christmas Present Token (Winter Event 2023-2024).",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Rich browns",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "furry-coat-palette",
+        "section": "Standard",
+        "sortOrder": 6
+      }
+    },
+    {
+      "item": {
+        "name": "Kawaii Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 150 Shooms.",
+        "price": "Shooms 150 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Pinks and yellows",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "kawaii-palette",
+        "section": "Standard",
+        "sortOrder": 7
+      }
+    },
+    {
+      "item": {
+        "name": "Misty Rose Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 75 Shooms.",
+        "price": "Shooms 75 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Light greens and pinks",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "misty-rose-palette",
+        "section": "Standard",
+        "sortOrder": 8
+      }
+    },
+    {
+      "item": {
+        "name": "Nature Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 25 Shooms.",
+        "price": "Shooms 25 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Low tone browns/blues",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "nature-palette",
+        "section": "Standard",
+        "sortOrder": 9
+      }
+    },
+    {
+      "item": {
+        "name": "Oceanic Beach Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 100 Shooms.",
+        "price": "Shooms 100 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Light blues and yellows",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "oceanic-beach-palette",
+        "section": "Standard",
+        "sortOrder": 10
+      }
+    },
+    {
+      "item": {
+        "name": "Pastel Rainbow Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Tikits 2 Tikits.",
+        "price": "Tikits 2 Tikits.",
+        "currency": "Tikits",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Light pastel rainbow",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "pastel-rainbow-palette",
+        "section": "Standard",
+        "sortOrder": 11
+      }
+    },
+    {
+      "item": {
+        "name": "Seashell Fragments Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 50 Shooms.",
+        "price": "Shooms 50 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Light creams and reds",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "seashell-fragments-palette",
+        "section": "Standard",
+        "sortOrder": 12
+      }
+    },
+    {
+      "item": {
+        "name": "Sunset Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 400 Shooms.",
+        "price": "Shooms 400 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Gradient purple to yellow",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "sunset-palette",
+        "section": "Standard",
+        "sortOrder": 13
+      }
+    },
+    {
+      "item": {
+        "name": "Twilight Grove Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 250 Shooms.\n\nOpen a Trick or Treat Token.",
+        "price": "Open a Trick or Treat Token.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Vibrant greens, purple, and white",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "twilight-grove-palette",
+        "section": "Standard",
+        "sortOrder": 14
+      }
+    },
+    {
+      "item": {
+        "name": "Twilight Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Tikits 1 Tikit.\nOpen a Trick or Treat Token.",
+        "price": "Open a Trick or Treat Token.",
+        "currency": "Tikits",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Gloomy pinks and purples",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "twilight-palette",
+        "section": "Standard",
+        "sortOrder": 15
+      }
+    },
+    {
+      "item": {
+        "name": "Vibrance Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 850 Shooms.",
+        "price": "Shooms 850 Shooms.",
+        "currency": "Shooms",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Vibrant red, yellow to blue tones",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "vibrance-palette",
+        "section": "Standard",
+        "sortOrder": 16
+      }
+    },
+    {
+      "item": {
+        "name": "Vivid Rainbow Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Tikits 5 Tikits.",
+        "price": "Tikits 5 Tikits.",
+        "currency": "Tikits",
+        "event": null,
+        "availability": "Always available",
+        "tradable": "Yes",
+        "colorSummary": "Vibrant rainbows",
+        "cardSummary": "Always available from the Palettes shop."
+      },
+      "system": {
+        "slug": "vivid-rainbow-palette",
+        "section": "Standard",
+        "sortOrder": 17
+      }
+    },
+    {
+      "item": {
+        "name": "Warden's Blessing Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Donate to any Warden Shrine for a random chance to receive this palette.",
+        "price": "Random drop",
+        "currency": null,
+        "event": null,
+        "availability": "Shrine reward",
+        "tradable": "Yes",
+        "colorSummary": "Radiant red, blooming blues, and lilacs",
+        "cardSummary": "Random reward from donating at a Sonaria shrine."
+      },
+      "system": {
+        "slug": "wardens-blessing-palette",
+        "section": "Standard",
+        "sortOrder": 18
+      }
+    },
+    {
+      "item": {
+        "name": "Warden's Curse Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Donate to any Warden Shrine for a random chance to receive this palette.",
+        "price": "Random drop",
+        "currency": null,
+        "event": null,
+        "availability": "Shrine reward",
+        "tradable": "Yes",
+        "colorSummary": "Grays, deep greens, and stone-like blues",
+        "cardSummary": "Random reward from donating at a Sonaria shrine."
+      },
+      "system": {
+        "slug": "wardens-curse-palette",
+        "section": "Standard",
+        "sortOrder": 19
+      }
+    },
+    {
+      "item": {
+        "name": "Matcha Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Complete 10 region tasks and survive 30 minutes, then claim the palette from the Missions window.",
+        "price": "Daily mission reward",
+        "currency": "Mission reward",
+        "event": null,
+        "availability": "Daily mission",
+        "tradable": "Yes",
+        "colorSummary": "Cool greens, darker fern tones and matcha hues",
+        "cardSummary": "Earned by completing the rotating daily mission palette reward."
+      },
+      "system": {
+        "slug": "matcha-palette",
+        "section": "Daily Missions",
+        "sortOrder": 1
+      }
+    },
+    {
+      "item": {
+        "name": "Sweet Dream Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Complete 10 region tasks and survive 30 minutes, then claim the palette from the Missions window.",
+        "price": "Daily mission reward",
+        "currency": "Mission reward",
+        "event": null,
+        "availability": "Daily mission",
+        "tradable": "Yes",
+        "colorSummary": "Pastel yellows and greens, paired with some dream-like pink hues",
+        "cardSummary": "Earned by completing the rotating daily mission palette reward."
+      },
+      "system": {
+        "slug": "sweet-dream-palette",
+        "section": "Daily Missions",
+        "sortOrder": 2
+      }
+    },
+    {
+      "item": {
+        "name": "Tinted Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Complete 10 region tasks and survive 30 minutes, then claim the palette from the Missions window.",
+        "price": "Daily mission reward",
+        "currency": "Mission reward",
+        "event": null,
+        "availability": "Daily mission",
+        "tradable": "Yes",
+        "colorSummary": "}",
+        "cardSummary": "Earned by completing the rotating daily mission palette reward."
+      },
+      "system": {
+        "slug": "tinted-palette",
+        "section": "Daily Missions",
+        "sortOrder": 3
+      }
+    },
+    {
+      "item": {
+        "name": "Metallic Medal Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Complete The Master Clipper mission (Medal TV Quest 2025)",
+        "price": "Complete The Master Clipper mission (Medal TV Quest 2025)",
+        "currency": null,
+        "event": "Medal TV Quest",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Metallic golds, silver and bronzes",
+        "cardSummary": "Earned during the Medal TV Quest event through missions or activities."
+      },
+      "system": {
+        "slug": "metallic-medal-palette",
+        "section": "Event",
+        "sortOrder": 1
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Night Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "\"Free\": Destroy enough crystal eggs during the Daidarabotchi fight (COS X LEGO® Ninjago Legends: Monstrosity 2025).",
+        "price": "\"Free\": Destroy enough crystal eggs during the Daidarabotchi fight (COS X LEGO® Ninjago Legends: Monstrosity 2025).",
+        "currency": "Eggs",
+        "event": "Land of Monsters",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Monstrous reds, abyssal greys and fading bronzes",
+        "cardSummary": "Earned during the Land of Monsters event through missions or activities."
+      },
+      "system": {
+        "slug": "cursed-night-palette",
+        "section": "Event",
+        "sortOrder": 2
+      }
+    },
+    {
+      "item": {
+        "name": "Enlightened Flame Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "\"Free\": Protect enough crystal eggs during the Daidarabotchi fight (COS X LEGO® Ninjago Legends: Monstrosity 2025).",
+        "price": "\"Free\": Protect enough crystal eggs during the Daidarabotchi fight (COS X LEGO® Ninjago Legends: Monstrosity 2025).",
+        "currency": "Eggs",
+        "event": "Land of Monsters",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Righteous greens, pure golds and light tones",
+        "cardSummary": "Earned during the Land of Monsters event through missions or activities."
+      },
+      "system": {
+        "slug": "enlightened-flame-palette",
+        "section": "Event",
+        "sortOrder": 3
+      }
+    },
+    {
+      "item": {
+        "name": "Bolt Strike Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 25 Shooms (Disaster Event 2024)\n\nShooms 125 Shooms (Disaster Event 2025)",
+        "price": "Shooms 125 Shooms (Disaster Event 2025)",
+        "currency": "Shooms",
+        "event": "Disaster",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Stormy greys, shocking blues, and electric yellows",
+        "cardSummary": "Sold in the Disaster event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "bolt-strike-palette",
+        "section": "Event",
+        "sortOrder": 4
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar Tide Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 50 Shooms (Disaster Event 2024)\n\nShooms 150 Shooms (Disaster Event 2025)\n\nShooms 1,000 Shooms (Disaster Event 2026)",
+        "price": "Shooms 1,000 Shooms (Disaster Event 2026)",
+        "currency": "Shooms",
+        "event": "Disaster",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Deep reds and lunar hues",
+        "cardSummary": "Sold in the Disaster event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "lunar-tide-palette",
+        "section": "Event",
+        "sortOrder": 5
+      }
+    },
+    {
+      "item": {
+        "name": "Maelstrom Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 500 Shooms (Disaster Event 2025)",
+        "price": "Shooms 500 Shooms (Disaster Event 2025)",
+        "currency": "Shooms",
+        "event": "Disaster",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Hues found in the deepest underwater ravines, and the largest storms",
+        "cardSummary": "Sold in the Disaster event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "maelstrom-palette",
+        "section": "Event",
+        "sortOrder": 6
+      }
+    },
+    {
+      "item": {
+        "name": "Storm Shard Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 500 Shooms (Disaster Event 2025)\n\nShooms 1,000 Shooms (Disaster Event 2026)",
+        "price": "Shooms 1,000 Shooms (Disaster Event 2026)",
+        "currency": "Shooms",
+        "event": "Disaster",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Shocking reds, stormy hues and surprising pigments",
+        "cardSummary": "Sold in the Disaster event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "storm-shard-palette",
+        "section": "Event",
+        "sortOrder": 7
+      }
+    },
+    {
+      "item": {
+        "name": "Moon Gleam Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 3,000 Shooms (Disaster Event 2026)",
+        "price": "Shooms 3,000 Shooms (Disaster Event 2026)",
+        "currency": "Shooms",
+        "event": "Disaster",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Blue moon hues, sparkling galactic pigments and milky star shades",
+        "cardSummary": "Sold in the Disaster event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "moon-gleam-palette",
+        "section": "Event",
+        "sortOrder": 8
+      }
+    },
+    {
+      "item": {
+        "name": "Shadowed Sky Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 1,000 Shooms (Disaster Event 2026)",
+        "price": "Shooms 1,000 Shooms (Disaster Event 2026)",
+        "currency": "Shooms",
+        "event": "Disaster",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Electric hues, typhoon greys and shocking shades",
+        "cardSummary": "Sold in the Disaster event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "shadowed-sky-palette",
+        "section": "Event",
+        "sortOrder": 9
+      }
+    },
+    {
+      "item": {
+        "name": "Cracked Egg Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Eggs 375 Eggs (Easter Event 2026).",
+        "price": "Eggs 375 Eggs (Easter Event 2026).",
+        "currency": "Eggs",
+        "event": "Easter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Stinky broken egg browns, oranges and greens",
+        "cardSummary": "Sold in the Easter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "cracked-egg-palette",
+        "section": "Event",
+        "sortOrder": 10
+      }
+    },
+    {
+      "item": {
+        "name": "Charcuterie Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Eggs 50 Eggs (Easter Event 2022).\n\nEggs 150 Eggs (Easter Event 2024).\n\nEggs 375 Eggs (Easter Event 2026).",
+        "price": "Eggs 375 Eggs (Easter Event 2026).",
+        "currency": "Eggs",
+        "event": "Easter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Ochres, browns, creams, and whites",
+        "cardSummary": "Sold in the Easter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "charcuterie-palette",
+        "section": "Event",
+        "sortOrder": 11
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Egg Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Eggs 225 Eggs (Easter Event 2026).\nEggs 225 Eggs OR Easter Points 40 Easter Points (Easter Event 2025).\nEggs 200 Eggs (Easter Event 2024).\nEggs 200 Eggs (Easter Event 2023).",
+        "price": "Eggs 225 Eggs (Easter Event 2026).",
+        "currency": "Mixed",
+        "event": "Easter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Natural pastels, light sky blues, bright creams",
+        "cardSummary": "Sold in the Easter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "easter-egg-palette",
+        "section": "Event",
+        "sortOrder": 12
+      }
+    },
+    {
+      "item": {
+        "name": "Enchanted Hatchery Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Eggs 225 Eggs (Easter Event 2026).\nEggs 225 Eggs (Easter Event 2025).",
+        "price": "Eggs 225 Eggs (Easter Event 2026).",
+        "currency": "Eggs",
+        "event": "Easter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Gentle pinks, bright greens, chocolate browns",
+        "cardSummary": "Sold in the Easter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "enchanted-hatchery-palette",
+        "section": "Event",
+        "sortOrder": 13
+      }
+    },
+    {
+      "item": {
+        "name": "Forget-Me-Not Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Eggs 150 Eggs (Easter Event 2022).\n\nEggs 300 Eggs (Easter Event 2024).\n\nEggs 112 Eggs OR Easter Points 250 Easter Points (Easter Event 2025).",
+        "price": "Eggs 112 Eggs OR Easter Points 250 Easter Points (Easter Event 2025).",
+        "currency": "Mixed",
+        "event": "Easter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Strong teals, midnight blues, light grays, and pink",
+        "cardSummary": "Sold in the Easter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "forget-me-not-palette",
+        "section": "Event",
+        "sortOrder": 14
+      }
+    },
+    {
+      "item": {
+        "name": "Scrambled Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Eggs 250 Eggs (Easter Event 2022).\n\nEggs 500 Eggs (Easter Event 2024).\n\nEggs 225 Eggs (Easter Event 2025).",
+        "price": "Eggs 225 Eggs (Easter Event 2025).",
+        "currency": "Eggs",
+        "event": "Easter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Bright pinks and purples, yellows and dark mahogany",
+        "cardSummary": "Sold in the Easter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "scrambled-palette",
+        "section": "Event",
+        "sortOrder": 15
+      }
+    },
+    {
+      "item": {
+        "name": "Shell Bloom Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Eggs 225 Eggs OR Reward from Easter Event 2025's Chocolate Egg Delivery minigame OR Easter Points 2,200 Easter Points (Easter Event 2025).",
+        "price": "Eggs 225 Eggs OR Reward from Easter Event 2025's Chocolate Egg Delivery minigame OR Easter Points 2,200 Easter Points (Easter Event 2025).",
+        "currency": "Mixed",
+        "event": "Easter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Peach creams, opalescent swatches, and warm nutmegs",
+        "cardSummary": "Earned during the Easter event through missions or activities."
+      },
+      "system": {
+        "slug": "shell-bloom-palette",
+        "section": "Event",
+        "sortOrder": 16
+      }
+    },
+    {
+      "item": {
+        "name": "Tulip Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Eggs 100 Eggs (Easter Event 2023).\n\nEggs 175 Eggs (Easter Event 2024).\n\nEggs 45 Eggs OR Easter Points 30 Easter Points (Easter Event 2025).",
+        "price": "Eggs 45 Eggs OR Easter Points 30 Easter Points (Easter Event 2025).",
+        "currency": "Mixed",
+        "event": "Easter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Fiery petal reds, sweet pinks and purple, and greens",
+        "cardSummary": "Sold in the Easter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "tulip-palette",
+        "section": "Event",
+        "sortOrder": 17
+      }
+    },
+    {
+      "item": {
+        "name": "Whimsy Wool Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Eggs 250 Eggs (Easter Event 2026).",
+        "price": "Eggs 250 Eggs (Easter Event 2026).",
+        "currency": "Eggs",
+        "event": "Easter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Woolen purples, lavenders and creams",
+        "cardSummary": "Sold in the Easter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "whimsy-wool-palette",
+        "section": "Event",
+        "sortOrder": 18
+      }
+    },
+    {
+      "item": {
+        "name": "Firework Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Collect 50 Fireworks (Fourth of July Event 2023). \n\nComplete the Firework Mission (Fireworks Event 2024). \n\nFree as a small chance from detonating a firework, Shooms 100 from the Shop, or 1,199 Robux from the Shimmering Sparks Limited Time Premium Bundle (Fireworks Event 2025). \nSparklers 150 Sparklers in the event Shop  (Fireworks Event 2026).",
+        "price": "Sparklers 150 Sparklers in the event Shop  (Fireworks Event 2026).",
+        "currency": "Mixed",
+        "event": "Fireworks",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Bursting reds, vibrant corals, and sky blues",
+        "cardSummary": "Earned during the Fireworks event through missions or activities."
+      },
+      "system": {
+        "slug": "firework-palette",
+        "section": "Event",
+        "sortOrder": 19
+      }
+    },
+    {
+      "item": {
+        "name": "Colorful Fire Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 200 (Fireworks Event 2025)",
+        "price": "Shooms 200 (Fireworks Event 2025)",
+        "currency": "Shooms",
+        "event": "Fireworks",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Spark-like hues of reds, greens and blues",
+        "cardSummary": "Sold in the Fireworks event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "colorful-fire-palette",
+        "section": "Event",
+        "sortOrder": 20
+      }
+    },
+    {
+      "item": {
+        "name": "Sparkling Skies Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "1,599 Robux from the Sparkling Sky Limited Time Premium Bundle during week 1, or Shooms 250 during week 2 (Fireworks Event 2025).",
+        "price": "1,599 Robux from the Sparkling Sky Limited Time Premium Bundle during week 1, or Shooms 250 during week 2 (Fireworks Event 2025).",
+        "currency": "Mixed",
+        "event": "Fireworks",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Explosive red, dark sky blues and brilliant hues",
+        "cardSummary": "Sold in the Fireworks event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "sparkling-skies-palette",
+        "section": "Event",
+        "sortOrder": 21
+      }
+    },
+    {
+      "item": {
+        "name": "Ember Heart Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Sparklers 100 Sparklers in the event Shop, or 999 Robux from the Spirafie Pack bundle (Fireworks Event 2026).",
+        "price": "Sparklers 100 Sparklers in the event Shop, or 999 Robux from the Spirafie Pack bundle (Fireworks Event 2026).",
+        "currency": "Mixed",
+        "event": "Fireworks",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Firey reds, pinks and ember hues",
+        "cardSummary": "Sold in the Fireworks event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "ember-heart-palette",
+        "section": "Event",
+        "sortOrder": 22
+      }
+    },
+    {
+      "item": {
+        "name": "Cloud Strike Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Sparklers 300 Sparklers in the event Shop (Fireworks Event 2026)",
+        "price": "Sparklers 300 Sparklers in the event Shop (Fireworks Event 2026)",
+        "currency": "Sparklers",
+        "event": "Fireworks",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Cloud-like rays of pastel yellow, pink and red",
+        "cardSummary": "Sold in the Fireworks event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "cloud-strike-palette",
+        "section": "Event",
+        "sortOrder": 23
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Corn Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Wisps 100 Wisps (Halloween Event 2021).\n\nWisps 500 Wisps (Halloween Event 2022).\n\nCandy 100 Candy (Halloween Event 2023).\n\nCandy 300 Candy (Halloween Event 2024).\n\nCandy 20 Candy (Halloween Event 2025).",
+        "price": "Candy 20 Candy (Halloween Event 2025).",
+        "currency": "Mixed",
+        "event": "Halloween",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Light yellow, orange, and white",
+        "cardSummary": "Sold in the Halloween event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "candy-corn-palette",
+        "section": "Event",
+        "sortOrder": 24
+      }
+    },
+    {
+      "item": {
+        "name": "Clown Crest Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Candy 40 Candy (Halloween Event 2025).",
+        "price": "Candy 40 Candy (Halloween Event 2025).",
+        "currency": "Candy",
+        "event": "Halloween",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Creepy clown reds, yellows, and blues",
+        "cardSummary": "Sold in the Halloween event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "clown-crest-palette",
+        "section": "Event",
+        "sortOrder": 25
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Wisps 25 Wisps (Halloween Event 2021).\n\nWisps 1,000 Wisps (Halloween Event 2022).\n\nCandy 300 Candy (Halloween Event 2023).\n\nCandy 500 Candy (Halloween Event 2024).\n\nCandy 15 Candy (Halloween Event 2025).",
+        "price": "Candy 15 Candy (Halloween Event 2025).",
+        "currency": "Mixed",
+        "event": "Halloween",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Dark reds, purples, and grey",
+        "cardSummary": "Sold in the Halloween event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "demon-palette",
+        "section": "Event",
+        "sortOrder": 26
+      }
+    },
+    {
+      "item": {
+        "name": "Graveyard Ruins Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Candy 500 Candy (Halloween Event 2023).\n\nCandy 400 Candy (Halloween Event 2024).\n\nCandy 20 Candy (Halloween Event 2025).",
+        "price": "Candy 20 Candy (Halloween Event 2025).",
+        "currency": "Candy",
+        "event": "Halloween",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Dark blues, browns, and greens",
+        "cardSummary": "Sold in the Halloween event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "graveyard-ruins-palette",
+        "section": "Event",
+        "sortOrder": 27
+      }
+    },
+    {
+      "item": {
+        "name": "Mothman Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Complete the Maze mission (Halloween Event 2025)",
+        "price": "Complete the Maze mission (Halloween Event 2025)",
+        "currency": null,
+        "event": "Halloween",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Crypted hues of browns, grays and bright reds!",
+        "cardSummary": "Earned during the Halloween event through missions or activities."
+      },
+      "system": {
+        "slug": "mothman-palette",
+        "section": "Event",
+        "sortOrder": 28
+      }
+    },
+    {
+      "item": {
+        "name": "Undead Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Reward from Halloween Event 2023 Jerry's Trick-or-Treat minigame.\nOpen a Trick or Treat Token (Halloween Event 2024).\n\nCandy 45 Candy (Halloween Event 2025).",
+        "price": "Candy 45 Candy (Halloween Event 2025).",
+        "currency": "Candy",
+        "event": "Halloween",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Greens and reds",
+        "cardSummary": "Earned during the Halloween event through missions or activities."
+      },
+      "system": {
+        "slug": "undead-palette",
+        "section": "Event",
+        "sortOrder": 29
+      }
+    },
+    {
+      "item": {
+        "name": "Witch's Brew Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Wisps 1,000 Wisps (Halloween Event 2021).\n\nWisps 1,500 Wisps (Halloween Event 2022).\n\nCandy 1,000 Candy (Halloween Event 2023).\n\nCandy 350 Candy (Halloween Event 2024).\n\nCandy 55 Candy (Halloween Event 2025).",
+        "price": "Candy 55 Candy (Halloween Event 2025).",
+        "currency": "Mixed",
+        "event": "Halloween",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Vibrant greens, purples, and dark black",
+        "cardSummary": "Sold in the Halloween event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "witchs-brew-palette",
+        "section": "Event",
+        "sortOrder": 30
+      }
+    },
+    {
+      "item": {
+        "name": "Wraith Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Wisps 3,000 Wisps (Halloween Event 2022).\n\nCandy 2,500 Candy (Halloween Event 2023).\n\nCandy 500 Candy (Halloween Event 2024).",
+        "price": "Candy 500 Candy (Halloween Event 2024).",
+        "currency": "Mixed",
+        "event": "Halloween",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Blue hues, whites, and blacks",
+        "cardSummary": "Sold in the Halloween event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "wraith-palette",
+        "section": "Event",
+        "sortOrder": 31
+      }
+    },
+    {
+      "item": {
+        "name": "Cornucopia Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Tikits 5 Tikits (Harvest Event 2023). \n\nTikits 5 Tikits after reaching 75 Harvest Points (Harvest Event 2024). \n\nHarvest Stamps 100 Harvest Stamps (Harvest Event 2025)",
+        "price": "Harvest Stamps 100 Harvest Stamps (Harvest Event 2025)",
+        "currency": "Mixed",
+        "event": "Harvest",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Warm reds, Harvest yellows, and earth tones",
+        "cardSummary": "Sold in the Harvest event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "cornucopia-palette",
+        "section": "Event",
+        "sortOrder": 32
+      }
+    },
+    {
+      "item": {
+        "name": "Cranberry Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 75 Shooms (Harvest Event 2023). \n\nShooms 75 Shooms after reaching 25 Harvest Points (Harvest Event 2024). \n\nHarvest Stamps 150 Harvest Stamps (Harvest Event 2025)",
+        "price": "Harvest Stamps 150 Harvest Stamps (Harvest Event 2025)",
+        "currency": "Mixed",
+        "event": "Harvest",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Berry red, pinks, and natural foliage tones",
+        "cardSummary": "Sold in the Harvest event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "cranberry-palette",
+        "section": "Event",
+        "sortOrder": 33
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Spice Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 350 Shooms (Harvest Event 2023). \n\nShooms 350 Shooms after reaching 50 Harvest Points (Harvest Event 2024). \n\nHarvest Stamps 150 Harvest Stamps (Harvest Event 2025)",
+        "price": "Harvest Stamps 150 Harvest Stamps (Harvest Event 2025)",
+        "currency": "Mixed",
+        "event": "Harvest",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Warm ochres, spice browns, and white",
+        "cardSummary": "Sold in the Harvest event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "pumpkin-spice-palette",
+        "section": "Event",
+        "sortOrder": 34
+      }
+    },
+    {
+      "item": {
+        "name": "Farmers Fortune Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Harvest Stamps 100 Harvest Stamps (Harvest Event 2025)",
+        "price": "Harvest Stamps 100 Harvest Stamps (Harvest Event 2025)",
+        "currency": "Harvest Stamps",
+        "event": "Harvest",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Leaf shades of green, yellow, orange and reds",
+        "cardSummary": "Sold in the Harvest event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "farmers-fortune-palette",
+        "section": "Event",
+        "sortOrder": 35
+      }
+    },
+    {
+      "item": {
+        "name": "Nebula Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Complete the Mystery of the Keys 2023: Mysterious Clues mission.\nAs a drop from a Lore event token (Lore Event 2025).",
+        "price": "As a drop from a Lore event token (Lore Event 2025).",
+        "currency": null,
+        "event": "Lore",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Galaxy hues of purples, pinks, blues, and teal",
+        "cardSummary": "Earned during the Lore event through missions or activities."
+      },
+      "system": {
+        "slug": "nebula-palette",
+        "section": "Event",
+        "sortOrder": 36
+      }
+    },
+    {
+      "item": {
+        "name": "Nucleic Acid Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "From the Lore Event 2025 Bundles or completing the Sparkling Core mission in the Lore event 2025.",
+        "price": "From the Lore Event 2025 Bundles or completing the Sparkling Core mission in the Lore event 2025.",
+        "currency": null,
+        "event": "Lore",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Acidic green hues, strange blues, and alien-like shades",
+        "cardSummary": "Earned during the Lore event through missions or activities."
+      },
+      "system": {
+        "slug": "nucleic-acid-palette",
+        "section": "Event",
+        "sortOrder": 37
+      }
+    },
+    {
+      "item": {
+        "name": "Armored Wish Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Stars 75 Stars after reaching 5,000,000 Global Stars (LSS Event 2025).",
+        "price": "Stars 75 Stars after reaching 5,000,000 Global Stars (LSS Event 2025).",
+        "currency": "Stars",
+        "event": "LSS",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Contrasting hues of blues and steel-like greys",
+        "cardSummary": "Sold in the LSS event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "armored-wish-palette",
+        "section": "Event",
+        "sortOrder": 38
+      }
+    },
+    {
+      "item": {
+        "name": "Burning Blade Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Stars 75 Stars after reaching 5,000,000 Global Stars (LSS Event 2025).",
+        "price": "Stars 75 Stars after reaching 5,000,000 Global Stars (LSS Event 2025).",
+        "currency": "Stars",
+        "event": "LSS",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Contrasting hues of magma-like reds and dark brimstone shades",
+        "cardSummary": "Sold in the LSS event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "burning-blade-palette",
+        "section": "Event",
+        "sortOrder": 39
+      }
+    },
+    {
+      "item": {
+        "name": "Fabled Feather Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Corrupted Shooms 125 Corrupted Shooms after reaching 43 Global Restorations (LSS Event 2026)",
+        "price": "Corrupted Shooms 125 Corrupted Shooms after reaching 43 Global Restorations (LSS Event 2026)",
+        "currency": "Mixed",
+        "event": "LSS",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Browns, beak-like ochres and oranges",
+        "cardSummary": "Sold in the LSS event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "fabled-feather-palette",
+        "section": "Event",
+        "sortOrder": 40
+      }
+    },
+    {
+      "item": {
+        "name": "Land Sea Sky Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Donate Shooms 1,000 Shooms (LSS Event 2023).\nStars 25 Points and selected team reaches 5,625,000 Points goal (LSS Event 2024).\n\nPoints 25 Points from individual progress as part of any team; or Stars 30 Stars after reaching 1,000,000 total global points (LSS Event 2025).\n\nCorrupted Shooms 40 Corrupted Shooms after reaching 6 Global Restorations (LSS Event 2026).",
+        "price": "Corrupted Shooms 40 Corrupted Shooms after reaching 6 Global Restorations (LSS Event 2026).",
+        "currency": "Mixed",
+        "event": "LSS",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Sonarian earth browns, sky whites and ocean blues",
+        "cardSummary": "Sold in the LSS event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "land-sea-sky-palette",
+        "section": "Event",
+        "sortOrder": 41
+      }
+    },
+    {
+      "item": {
+        "name": "Paradox Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Stars 250 Points and you reaching 500 total Points earned (LSS Event 2024).\n\nPoints 95 Points from individual progress as part of Team Bastion; or Stars 40 Stars after reaching 2,000,000 total global points (LSS Event 2025).",
+        "price": "Points 95 Points from individual progress as part of Team Bastion; or Stars 40 Stars after reaching 2,000,000 total global points (LSS Event 2025).",
+        "currency": "Mixed",
+        "event": "LSS",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Light and dark tones",
+        "cardSummary": "Sold in the LSS event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "paradox-palette",
+        "section": "Event",
+        "sortOrder": 42
+      }
+    },
+    {
+      "item": {
+        "name": "Volcanic Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Donate Shooms 25,000 Shooms (LSS Event 2023).\nStars 80 Points and selected team reaches 16,875,000 Points goal (LSS Event 2024).\n\nPoints 95 Points from individual progress as part of Team Blade; or Stars 40 Stars after reaching 2,000,000 total global points (LSS Event 2025).\n\nCorrupted Shooms 50 Corrupted Shooms after reaching 4 Global Restorations (LSS Event 2026).",
+        "price": "Corrupted Shooms 50 Corrupted Shooms after reaching 4 Global Restorations (LSS Event 2026).",
+        "currency": "Mixed",
+        "event": "LSS",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Molten oranges, ember yellows and rich browns",
+        "cardSummary": "Sold in the LSS event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "volcanic-palette",
+        "section": "Event",
+        "sortOrder": 43
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Shoal Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Corrupted Shooms 100 Corrupted Shooms after reaching 20 Global Restorations (LSS Event 2026).",
+        "price": "Corrupted Shooms 100 Corrupted Shooms after reaching 20 Global Restorations (LSS Event 2026).",
+        "currency": "Mixed",
+        "event": "LSS",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Contrasting hues of pearlescent and soft shades",
+        "cardSummary": "Sold in the LSS event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "shiny-shoal-palette",
+        "section": "Event",
+        "sortOrder": 44
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny Burrow Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 500 Shooms (Spring Meadows Event 2024).\nShooms 300 Shooms + having found at least 4 Spring Meadows Tokens 2025 (Spring Meadows Event 2025).\nClovers 250 (Spring Meadows Event 2026).",
+        "price": "Clovers 250 (Spring Meadows Event 2026).",
+        "currency": "Mixed",
+        "event": "Spring Meadows",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Egg whites, pastel pinks, and bunny grays",
+        "cardSummary": "Sold in the Spring Meadows event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "bunny-burrow-palette",
+        "section": "Event",
+        "sortOrder": 45
+      }
+    },
+    {
+      "item": {
+        "name": "Daisy Field Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Clovers 250 (Spring Meadows Event 2026).",
+        "price": "Clovers 250 (Spring Meadows Event 2026).",
+        "currency": "Clovers",
+        "event": "Spring Meadows",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Daisy yellows and green flowery hues",
+        "cardSummary": "Sold in the Spring Meadows event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "daisy-field-palette",
+        "section": "Event",
+        "sortOrder": 46
+      }
+    },
+    {
+      "item": {
+        "name": "Gilded Clover Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 2000 Shooms + having found at least 50 Spring Meadows Tokens 2025 (Spring Meadows Event 2025).",
+        "price": "Shooms 2000 Shooms + having found at least 50 Spring Meadows Tokens 2025 (Spring Meadows Event 2025).",
+        "currency": "Shooms",
+        "event": "Spring Meadows",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Bronzes, mossy speckles, and streams of green",
+        "cardSummary": "Sold in the Spring Meadows event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "gilded-clover-palette",
+        "section": "Event",
+        "sortOrder": 47
+      }
+    },
+    {
+      "item": {
+        "name": "Glowing Leaf Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Clovers 250 (Spring Meadows Event 2026).",
+        "price": "Clovers 250 (Spring Meadows Event 2026).",
+        "currency": "Clovers",
+        "event": "Spring Meadows",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Neon limes, greens and shiny verdants",
+        "cardSummary": "Sold in the Spring Meadows event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "glowing-leaf-palette",
+        "section": "Event",
+        "sortOrder": 48
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 250 Shooms (Spring Meadows Event 2024).\nShooms 150 Shooms + having found at least 1 Spring Meadows Token 2025 (Spring Meadows Event 2025).\nClovers 250 (Spring Meadows Event 2026).",
+        "price": "Clovers 250 (Spring Meadows Event 2026).",
+        "currency": "Mixed",
+        "event": "Spring Meadows",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Clover greens, bright teals, and golden yellows",
+        "cardSummary": "Sold in the Spring Meadows event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "lucky-palette",
+        "section": "Event",
+        "sortOrder": 49
+      }
+    },
+    {
+      "item": {
+        "name": "Mylo And Jerry Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Complete Jerry's Eggventure Hunt mission (Spring Meadows Event 2024).\nShooms 750 Shooms + having found at least 24 Spring Meadows Tokens 2025 (Spring Meadows Event 2025).\nClovers 250 (Spring Meadows Event 2026).",
+        "price": "Clovers 250 (Spring Meadows Event 2026).",
+        "currency": "Mixed",
+        "event": "Spring Meadows",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "The awesome color selections of our mascot Mylo, and the shadow beast Jerry!",
+        "cardSummary": "Earned during the Spring Meadows event through missions or activities."
+      },
+      "system": {
+        "slug": "mylo-and-jerry-palette",
+        "section": "Event",
+        "sortOrder": 50
+      }
+    },
+    {
+      "item": {
+        "name": "Pot'O Gold Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 777 Shooms (Spring Meadows Event 2024).\nShooms 500 Shooms + having found at least 12 Spring Meadows Tokens 2025 (Spring Meadows Event 2025).",
+        "price": "Shooms 500 Shooms + having found at least 12 Spring Meadows Tokens 2025 (Spring Meadows Event 2025).",
+        "currency": "Shooms",
+        "event": "Spring Meadows",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Golds, grays, browns, and greens",
+        "cardSummary": "Sold in the Spring Meadows event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "poto-gold-palette",
+        "section": "Event",
+        "sortOrder": 51
+      }
+    },
+    {
+      "item": {
+        "name": "The Hunt Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Complete Mylo's Eggstravaganza mission (Spring Meadows Event 2024).\nShooms 900 Shooms + having found at least 45 Spring Meadows Tokens 2025 (Spring Meadows Event 2025).\nClovers 250 Clovers (Spring Meadows Event 2026)",
+        "price": "Clovers 250 Clovers (Spring Meadows Event 2026)",
+        "currency": "Mixed",
+        "event": "Spring Meadows",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Vibrant galactic blues, mesmerizing purples and a hint of multiversal midnight hues",
+        "cardSummary": "Earned during the Spring Meadows event through missions or activities."
+      },
+      "system": {
+        "slug": "the-hunt-palette",
+        "section": "Event",
+        "sortOrder": 52
+      }
+    },
+    {
+      "item": {
+        "name": "Charming Pearl Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Pearls 500 Pearls (Summer Paradise Event 2025).",
+        "price": "Pearls 500 Pearls (Summer Paradise Event 2025).",
+        "currency": "Pearls",
+        "event": "Summer Paradise",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Pearlescent hues, cream and pink gradients",
+        "cardSummary": "Sold in the Summer Paradise event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "charming-pearl-palette",
+        "section": "Event",
+        "sortOrder": 53
+      }
+    },
+    {
+      "item": {
+        "name": "Coral Reef Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shells 500 Shells (Summer Paradise Event 2023).\nPearls 120 Pearls after reaching 4,000,000 Pearls globally (Summer Paradise Event 2024).",
+        "price": "Pearls 120 Pearls after reaching 4,000,000 Pearls globally (Summer Paradise Event 2024).",
+        "currency": "Mixed",
+        "event": "Summer Paradise",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Beach yellows, terrific teals, and rosy pinks",
+        "cardSummary": "Sold in the Summer Paradise event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "coral-reef-palette",
+        "section": "Event",
+        "sortOrder": 54
+      }
+    },
+    {
+      "item": {
+        "name": "Ocean Depths Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shells 100 Shells (Summer Paradise Event 2023).\nPearls 75 Pearls after reaching 2,500,000 Pearls globally (Summer Paradise Event 2024).\nPearls 150 Pearls (Summer Paradise Event 2025).",
+        "price": "Pearls 150 Pearls (Summer Paradise Event 2025).",
+        "currency": "Mixed",
+        "event": "Summer Paradise",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Deep blues, green hues, and algae turquoise",
+        "cardSummary": "Sold in the Summer Paradise event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "ocean-depths-palette",
+        "section": "Event",
+        "sortOrder": 55
+      }
+    },
+    {
+      "item": {
+        "name": "Peachy Sands Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Pearls 500 Pearls (Summer Paradise Event 2025).",
+        "price": "Pearls 500 Pearls (Summer Paradise Event 2025).",
+        "currency": "Pearls",
+        "event": "Summer Paradise",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Peachy tones, sandy hues and ocean blues",
+        "cardSummary": "Sold in the Summer Paradise event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "peachy-sands-palette",
+        "section": "Event",
+        "sortOrder": 56
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Hearts 400 Hearts (Valentines Event 2023)\n\nRoses 400 Roses (Valentines Event 2024)\n\nRoses 100 Roses (Valentines Event 2025)\n\nRoses 225 Roses (Valentines Event 2026)",
+        "price": "Roses 225 Roses (Valentines Event 2026)",
+        "currency": "Mixed",
+        "event": "Valentine's",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Pastel peaches, pinks, and rosey pastels",
+        "cardSummary": "Sold in the Valentine's event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "cupid-palette",
+        "section": "Event",
+        "sortOrder": 57
+      }
+    },
+    {
+      "item": {
+        "name": "Heartless Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Hearts 500 Hearts (Valentines Event 2023)\n\nRoses 500 Roses (Valentines Event 2024)\n\nRoses 250 Roses (Valentines Event 2025)\n\nRoses 225 Roses (Valentines Event 2026)",
+        "price": "Roses 225 Roses (Valentines Event 2026)",
+        "currency": "Mixed",
+        "event": "Valentine's",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Heartbroken grays, ruined reds and deep purple",
+        "cardSummary": "Sold in the Valentine's event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "heartless-palette",
+        "section": "Event",
+        "sortOrder": 58
+      }
+    },
+    {
+      "item": {
+        "name": "Heartmail Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Roses 375 Roses (Valentines Event 2025)\n\nRoses 225 Roses (Valentines Event 2026)",
+        "price": "Roses 225 Roses (Valentines Event 2026)",
+        "currency": "Roses",
+        "event": "Valentine's",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Cherry hues, representing the warmest of embraces",
+        "cardSummary": "Sold in the Valentine's event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "heartmail-palette",
+        "section": "Event",
+        "sortOrder": 59
+      }
+    },
+    {
+      "item": {
+        "name": "Heartstruck Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 100 Shooms (Valentines Event 2022)\n\nHearts 200 Hearts (Valentines Event 2023)\n\nRoses 200 Roses (Valentines Event 2024)\n\nRoses 150 Roses (Valentines Event 2025)\n\nRoses 225 Roses (Valentines Event 2026)",
+        "price": "Roses 225 Roses (Valentines Event 2026)",
+        "currency": "Mixed",
+        "event": "Valentine's",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Bright rosy peaches, pure neon pinks, and whites",
+        "cardSummary": "Sold in the Valentine's event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "heartstruck-palette",
+        "section": "Event",
+        "sortOrder": 60
+      }
+    },
+    {
+      "item": {
+        "name": "Honey-Eyed Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Roses 225 Roses (Valentines Event 2026)\n\nReward from Valentine Event 2024's Heart Brewery minigame.\n \nReaching 550 Points on Valentines Event 2025 Event Progression Missions.",
+        "price": "Roses 225 Roses (Valentines Event 2026)",
+        "currency": "Mixed",
+        "event": "Valentine's",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Yellows and browns resembling honey and bees",
+        "cardSummary": "Earned during the Valentine's event through missions or activities."
+      },
+      "system": {
+        "slug": "honey-eyed-palette",
+        "section": "Event",
+        "sortOrder": 61
+      }
+    },
+    {
+      "item": {
+        "name": "Moonlit Rose Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Roses 315 Roses (Valentines Event 2026)",
+        "price": "Roses 315 Roses (Valentines Event 2026)",
+        "currency": "Roses",
+        "event": "Valentine's",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Ethereal silvery blue & pink hues, sparkling like a wish on a shooting star",
+        "cardSummary": "Sold in the Valentine's event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "moonlit-rose-palette",
+        "section": "Event",
+        "sortOrder": 62
+      }
+    },
+    {
+      "item": {
+        "name": "Shattered Bond Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Roses 225 Roses (Valentines Event 2026)",
+        "price": "Roses 225 Roses (Valentines Event 2026)",
+        "currency": "Roses",
+        "event": "Valentine's",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Sorrowful reds and shattered pale blues, representing hearbreak and many tears",
+        "cardSummary": "Sold in the Valentine's event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "shattered-bond-palette",
+        "section": "Event",
+        "sortOrder": 63
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine's Bouquet Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Shooms 600 Shooms (Valentines Event 2022)\n\nHearts 350 Hearts (Valentines Event 2023)\n\nRoses 350 Roses (Valentines Event 2024)\n\nRoses 250 Roses (Valentines Event 2025)\n\nRoses 225 Roses (Valentines Event 2026)",
+        "price": "Roses 225 Roses (Valentines Event 2026)",
+        "currency": "Mixed",
+        "event": "Valentine's",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Reds and greens resembling a bouqet",
+        "cardSummary": "Sold in the Valentine's event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "valentines-bouquet-palette",
+        "section": "Event",
+        "sortOrder": 64
+      }
+    },
+    {
+      "item": {
+        "name": "Candlelight Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "20 Robux (Winter Event 2022-2023).\n\n20 Robux (Winter Event 2023-2024).\n\nReward from Winter Event 2024-2025's Advent Calendar (Day 6).\n\nWinter Yeti Gacha (Winter Event 2025-2026)",
+        "price": "Winter Yeti Gacha (Winter Event 2025-2026)",
+        "currency": "Robux",
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Gentle greens, pastel creams, and warm ochres",
+        "cardSummary": "Earned during the Winter event through missions or activities."
+      },
+      "system": {
+        "slug": "candlelight-palette",
+        "section": "Event",
+        "sortOrder": 65
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Surprise Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Reward from all Winter Event 2023-2024's minigames.\n\nOpen a Christmas Present Token. \n\nWinter Yeti Gacha (Winter Event 2025-2026)",
+        "price": "Winter Yeti Gacha (Winter Event 2025-2026)",
+        "currency": null,
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Ribbon reds, sparkling yellows, and gorgeous greens",
+        "cardSummary": "Earned during the Winter event through missions or activities."
+      },
+      "system": {
+        "slug": "festive-surprise-palette",
+        "section": "Event",
+        "sortOrder": 66
+      }
+    },
+    {
+      "item": {
+        "name": "Fir Tree Forest Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Reward from all Winter Event 2023-2024's minigames.\n\nOpen a Christmas Present Token. \n\nWinter Yeti Gacha (Winter Event 2025-2026)",
+        "price": "Winter Yeti Gacha (Winter Event 2025-2026)",
+        "currency": null,
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Fir greens, wood-type browns, and pleasant pastels",
+        "cardSummary": "Earned during the Winter event through missions or activities."
+      },
+      "system": {
+        "slug": "fir-tree-forest-palette",
+        "section": "Event",
+        "sortOrder": 67
+      }
+    },
+    {
+      "item": {
+        "name": "Foul Frigid Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Candy Canes 500 Candy Canes (Winter Event 2025-2026).",
+        "price": "Candy Canes 500 Candy Canes (Winter Event 2025-2026).",
+        "currency": "Mixed",
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Steel-like icey hues, dark frozen shades and deep frost colors",
+        "cardSummary": "Sold in the Winter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "foul-frigid-palette",
+        "section": "Event",
+        "sortOrder": 68
+      }
+    },
+    {
+      "item": {
+        "name": "Frostbitten Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Candy Canes 450 Candy Canes (Winter Event 2025-2026).",
+        "price": "Candy Canes 450 Candy Canes (Winter Event 2025-2026).",
+        "currency": "Mixed",
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Freezing ice-like shades and colors of the coldest winters",
+        "cardSummary": "Sold in the Winter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "frostbitten-palette",
+        "section": "Event",
+        "sortOrder": 69
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen Flame Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Candy Canes 500 Candy Canes (Winter Event 2025-2026).",
+        "price": "Candy Canes 500 Candy Canes (Winter Event 2025-2026).",
+        "currency": "Mixed",
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Contrasting burning reds and the coolest of blue hues",
+        "cardSummary": "Sold in the Winter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "frozen-flame-palette",
+        "section": "Event",
+        "sortOrder": 70
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Gift Wrap Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Bells 200 Bells (Winter Event 2021-2022).\n\nGifts 300 Gifts (Winter Event 2022-2023).\n\nCandy Canes 350 Candy Canes (Winter Event 2023-2024).\n\nCandy Canes 200 Candy Canes (Winter Event 2024-2025).\n\nCandy Canes 250 Candy Canes (Winter Event 2025-2026).\n\nWinter Yeti Gacha (Winter Event 2025-2026)",
+        "price": "Winter Yeti Gacha (Winter Event 2025-2026)",
+        "currency": "Mixed",
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Rich reds, striking oranges, and bright yellows",
+        "cardSummary": "Sold in the Winter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "golden-gift-wrap-palette",
+        "section": "Event",
+        "sortOrder": 71
+      }
+    },
+    {
+      "item": {
+        "name": "Holiday Cheer Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Bells 1,000 Bells (Winter Event 2021-2022).\n\nGifts 500 Gifts (Winter Event 2022-2023).\n\nCandy Canes 500 Candy Canes (Winter Event 2023-2024).\n\nWinter Yeti Gacha (Winter Event 2025-2026)",
+        "price": "Winter Yeti Gacha (Winter Event 2025-2026)",
+        "currency": "Mixed",
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Cold teals, soft browns and bright festive tones",
+        "cardSummary": "Sold in the Winter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "holiday-cheer-palette",
+        "section": "Event",
+        "sortOrder": 72
+      }
+    },
+    {
+      "item": {
+        "name": "Holly Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Gifts 300 Gifts (Winter Event 2022-2023).\n\nCandy Canes 300 Candy Canes (Winter Event 2023-2024).\n\nWinter Yeti Gacha (Winter Event 2025-2026)",
+        "price": "Winter Yeti Gacha (Winter Event 2025-2026)",
+        "currency": "Mixed",
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Fir greens, wood-type browns, and pleasant pastels",
+        "cardSummary": "Sold in the Winter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "holly-palette",
+        "section": "Event",
+        "sortOrder": 73
+      }
+    },
+    {
+      "item": {
+        "name": "Icicle Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Bells 30 Bells (Winter Event 2021-2022).\n\nGifts 150 Gifts (Winter Event 2022-2023).\n\nCandy Canes 150 Candy Canes (Winter Event 2023-2024).\n\nCandy Canes 100 Candy Canes (Winter Event 2024-2025).\n\nCandy Canes 250 Candy Canes (Winter Event 2025-2026).",
+        "price": "Candy Canes 250 Candy Canes (Winter Event 2025-2026).",
+        "currency": "Mixed",
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Cold whites, frozen blues, and steel grays",
+        "cardSummary": "Sold in the Winter event shop during its seasonal window."
+      },
+      "system": {
+        "slug": "icicle-palette",
+        "section": "Event",
+        "sortOrder": 74
+      }
+    },
+    {
+      "item": {
+        "name": "Sleighbell Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Reward from Winter Event 2024-2025's Costume Clash minigame.\n\nCandy Canes 250 Candy Canes (Winter Event 2025-2026).",
+        "price": "Candy Canes 250 Candy Canes (Winter Event 2025-2026).",
+        "currency": "Mixed",
+        "event": "Winter",
+        "availability": "Seasonal event",
+        "tradable": "Yes",
+        "colorSummary": "Sparkling golds, woodlike browns, and beautiful winter bell hues",
+        "cardSummary": "Earned during the Winter event through missions or activities."
+      },
+      "system": {
+        "slug": "sleighbell-palette",
+        "section": "Event",
+        "sortOrder": 75
+      }
+    },
+    {
+      "item": {
+        "name": "Campfire Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Redeem code CAMPFIREASHES during official Discord Campfire Campout events.",
+        "price": "CAMPFIREASHES",
+        "currency": "Redeem code",
+        "event": null,
+        "availability": "Redeem code",
+        "tradable": "Yes",
+        "colorSummary": "Dark grays, natural tones, and blazing oranges",
+        "cardSummary": "Unlocked with a limited-time Discord redeem code during Campfire Campout events."
+      },
+      "system": {
+        "slug": "campfire-palette",
+        "section": "Redeem Code",
+        "sortOrder": 1
+      }
+    },
+    {
+      "item": {
+        "name": "Broken Hex Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Purchase the related Lithumbra Hoodie merch item ($69.99 USD) through the in-game Premium Store merch section.",
+        "price": "$69.99 USD",
+        "currency": "USD",
+        "event": null,
+        "availability": "Merch unlock",
+        "tradable": "Yes",
+        "colorSummary": "Colors from a hexxed beast!",
+        "cardSummary": "Bundled with official Twin Atlas merchandise via the in-game Premium Store."
+      },
+      "system": {
+        "slug": "broken-hex-palette",
+        "section": "Merchandise",
+        "sortOrder": 1
+      }
+    },
+    {
+      "item": {
+        "name": "Super Felifaux Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Purchase the related enamel pin bundle ($14.99 USD) through the in-game Premium Store merch section.",
+        "price": "$14.99 USD",
+        "currency": "USD",
+        "event": null,
+        "availability": "Merch unlock",
+        "tradable": "Yes",
+        "colorSummary": "Upgraded colors of the Felifaux Species!",
+        "cardSummary": "Bundled with the limited-edition Felifaux enamel pin merch purchase."
+      },
+      "system": {
+        "slug": "super-felifaux-palette",
+        "section": "Merchandise",
+        "sortOrder": 2
+      }
+    },
+    {
+      "item": {
+        "name": "Super Hygos Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Purchase the related enamel pin bundle ($14.99 USD) through the in-game Premium Store merch section.",
+        "price": "$14.99 USD",
+        "currency": "USD",
+        "event": null,
+        "availability": "Merch unlock",
+        "tradable": "Yes",
+        "colorSummary": "Upgraded colors of the Hygos Species!",
+        "cardSummary": "Bundled with the limited-edition Hygos enamel pin merch purchase."
+      },
+      "system": {
+        "slug": "super-hygos-palette",
+        "section": "Merchandise",
+        "sortOrder": 3
+      }
+    },
+    {
+      "item": {
+        "name": "Super Ikoran Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Purchase the related enamel pin bundle ($14.99 USD) through the in-game Premium Store merch section.",
+        "price": "$14.99 USD",
+        "currency": "USD",
+        "event": null,
+        "availability": "Merch unlock",
+        "tradable": "Yes",
+        "colorSummary": "Upgraded colors of the Ikoran Species!",
+        "cardSummary": "Bundled with the limited-edition Ikoran enamel pin merch purchase."
+      },
+      "system": {
+        "slug": "super-ikoran-palette",
+        "section": "Merchandise",
+        "sortOrder": 4
+      }
+    },
+    {
+      "item": {
+        "name": "Super Korathos Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Purchase the related enamel pin bundle ($14.99 USD) through the in-game Premium Store merch section.",
+        "price": "$14.99 USD",
+        "currency": "USD",
+        "event": null,
+        "availability": "Merch unlock",
+        "tradable": "Yes",
+        "colorSummary": "Upgraded colors of the Korathos Species!",
+        "cardSummary": "Bundled with the limited-edition Korathos enamel pin merch purchase."
+      },
+      "system": {
+        "slug": "super-korathos-palette",
+        "section": "Merchandise",
+        "sortOrder": 5
+      }
+    },
+    {
+      "item": {
+        "name": "Super Starlit Palette",
+        "paletteType": "Color Palette",
+        "obtainment": "Purchase the related enamel pin bundle ($14.99 USD) through the in-game Premium Store merch section.",
+        "price": "$14.99 USD",
+        "currency": "USD",
+        "event": null,
+        "availability": "Merch unlock",
+        "tradable": "Yes",
+        "colorSummary": "Upgraded colors of the Starlit Species!",
+        "cardSummary": "Bundled with the limited-edition Starlit enamel pin merch purchase."
+      },
+      "system": {
+        "slug": "super-starlit-palette",
+        "section": "Merchandise",
+        "sortOrder": 6
+      }
+    }
+  ]
+}
