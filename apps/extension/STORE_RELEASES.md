@@ -2,6 +2,17 @@
 
 This file records durable browser-store identities and point-in-time submission history. Check the relevant store dashboard for the current review or publication status.
 
+## Chrome Web Store
+
+- Store ID: `mammkedlehmpechknaicfakljaogcmhc`
+- Public listing URL: `https://chromewebstore.google.com/detail/mammkedlehmpechknaicfakljaogcmhc`
+
+### Submission history
+
+| Submitted | Version | Status when recorded | Publication | Category | Locale | Package |
+| --- | --- | --- | --- | --- | --- | --- |
+| July 28, 2026 | `4.1` | Pending review | Automatic after approval | Tools | English | `bloxodes-extension-v4.1.zip` |
+
 ## Microsoft Edge Add-ons
 
 - Store ID: `0RDCKBVSG6LW`
