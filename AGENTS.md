@@ -147,5 +147,28 @@ These notes cover the non-obvious parts of running this repo in a Cursor Cloud V
 - After this, the public schema matches app expectations (`code_pages`, `wiki_collection_pages`, `code_pages_index_view`, etc.).
 
 ### Content data
-- `supabase/seed.sql` only creates the `bloxodes-media` storage bucket; the local DB has NO editorial content. All content pages/index routes return 200 but render empty until you seed rows (insert directly, or use the `scripts/` importers). The `sync:local-public-sample` script needs production Supabase credentials in `.env` and is not usable without them.
+- `supabase/seed.sql` only creates the `bloxodes-media` storage bucket; the local DB has NO editorial content until you seed or sync. Run `npm run setup:content-agent` after prod secrets are configured (see below).
 - Self-contained tools render without any DB row (e.g. `/tools/robux-to-usd-calculator`, `/tools/roblox-id-extractor`), which makes them a quick way to sanity-check the running app.
+
+### Content-agent env (articles, wiki, collections)
+- **Local** (`.env.local`): `SUPABASE_URL=http://127.0.0.1:54321`, local keys from `npm run supabase:status:env`, `NEXT_PUBLIC_SITE_URL=http://localhost:3000`, `SUPABASE_MEDIA_BUCKET=bloxodes-media`, `SUPABASE_MEDIA_PUBLIC_URL` pointing at local storage, and `AUTH_SESSION_SECRET`.
+- **Production** (`.env`): copy `.env.production.example` to `.env`, or run `npm run setup:content-agent` after setting Cursor Cloud secrets (names below). Production overlap checks use `NODE_ENV=production` so `.env.local` does not override prod reads.
+- **Cursor Cloud secrets** (inject as env vars; do not set a global `SUPABASE_URL` secret or it shadows local dev):
+  - `BLOXODES_PROD_SUPABASE_URL` → `https://database.bloxodes.com`
+  - `BLOXODES_PROD_SUPABASE_ANON_KEY`
+  - `BLOXODES_PROD_SUPABASE_SERVICE_ROLE`
+  - Optional: `BLOXODES_PROD_SUPABASE_MEDIA_PUBLIC_URL` (default `https://media.bloxodes.com`), `BLOXODES_PROD_SUPABASE_MEDIA_BUCKET` (default `bloxodes-media`), `BLOXODES_PROD_SITE_URL` (default `https://bloxodes.com`)
+- **One-shot content-agent setup** (writes `.env`, verifies prod read, seeds local default author, syncs prod sample to local):
+  ```bash
+  npm run setup:content-agent
+  ```
+  Use `--skip-sync` to only write/verify `.env`. Use `--dry-run` to print planned writes.
+- **Local DB bootstrap** (when `code_pages` is missing after `supabase start`):
+  ```bash
+  npm run supabase:bootstrap:local-db
+  ```
+- **Workflow commands** (after env + `npm run dev:local`):
+  - Articles: `npm run verify:article-finals -- --base-url http://localhost:3000 --file <final.json>`
+  - Wiki: `npm run verify:wiki-final -- --base-url http://localhost:3000 --game <slug> --final-json-root tmp/content-workspace/<game>`
+  - Collections: `npm run verify:game-collection-finals -- --base-url http://localhost:3000 --game <slug> --final-json-root tmp/content-workspace/<game>/collections --collection <slug>`
+- Invoke skills: `$bloxodes-article-workflow-runner`, `$bloxodes-wiki-workflow-runner`, `$bloxodes-game-collection-workflow-runner`. Production publish stays explicit (`--allow-prod`, `$bloxodes-wiki-release-review`, or `$bloxodes-release-e2e`).

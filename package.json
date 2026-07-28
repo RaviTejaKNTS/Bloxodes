@@ -10,6 +10,8 @@
   },
   "scripts": {
     "setup:worktree": "bash scripts/dev/setup-worktree.sh",
+    "setup:content-agent": "tsx scripts/dev/setup-content-agent-env.ts",
+    "supabase:bootstrap:local-db": "bash scripts/dev/bootstrap-local-supabase-db.sh",
     "dev": "npm run dev:web",
     "dev:local": "tsx scripts/dev/start-local-dev.ts",
     "dev:prod": "tsx scripts/dev/start-prod-dev.ts",
