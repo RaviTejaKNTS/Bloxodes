@@ -86,9 +86,9 @@
       }
     },
     "notes": {
-      "imagePolicy": "text-first",
-      "imageAcceptedMissing": true,
-      "imageAcceptedMissingReason": "No free official or wiki-hosted per-companion pet icons/renders found. Guide pages only publish Companion Shop UI screenshots, full-scene stills, or promo art — not isolatable companion models. Per-companion resource pages on 100daysatsea.app are text-only. Fandom wiki has no companion image files. Cropping multi-pet shop screenshots would violate image skill rules (no page screenshots / non-clear item images). Parent approved accepting partial/zero coverage when clean pet art is unavailable.",
+      "imagePolicy": "in-game companion shop icons",
+      "imageAcceptedMissing": false,
+      "imageAcceptedMissingReason": null,
       "imageSourcesSearched": [
         "https://www.sportskeeda.com/roblox-news/all-companions-100-days-sea (banner + Companion Shop screenshot only)",
         "https://progameguides.com/roblox/complete-100-days-at-sea-beginners-guide/ (Companions section screenshot; CDN hotlink blocked)",
@@ -100,31 +100,11 @@
         "https://100-days-at-sea-roblox.fandom.com/ (allimages API: 19 files, none companion pets)",
         "Roblox badge/thumbnail CDN — no companion-identifying badge art analogous to boss badges"
       ],
-      "imageMissingByItem": {
-        "crab": "accepted-missing: no clean public companion icon/render for Crab",
-        "frog": "accepted-missing: no clean public companion icon/render for Frog",
-        "turtle": "accepted-missing: no clean public companion icon/render for Turtle",
-        "dolphin": "accepted-missing: no clean public companion icon/render for Dolphin",
-        "shark": "accepted-missing: no clean public companion icon/render for Shark",
-        "cat": "accepted-missing: no clean public companion icon/render for Cat",
-        "snorf": "accepted-missing: no clean public companion icon/render for Snorf",
-        "octopus": "accepted-missing: no clean public companion icon/render for Octopus",
-        "swordfish": "accepted-missing: no clean public companion icon/render for Swordfish",
-        "arctic-wolf": "accepted-missing: no clean public companion icon/render for Arctic Wolf",
-        "orca": "accepted-missing: no clean public companion icon/render for Orca",
-        "polar-bear": "accepted-missing: no clean public companion icon/render for Polar Bear",
-        "penguin": "accepted-missing: no clean public companion icon/render for Penguin",
-        "snowman": "accepted-missing: no clean public companion icon/render for Snowman",
-        "parrot": "accepted-missing: no clean public companion icon/render for Parrot",
-        "seagull": "accepted-missing: no clean public companion icon/render for Seagull",
-        "whale": "accepted-missing: no clean public companion icon/render for Whale",
-        "pirate-gunner": "accepted-missing: no clean public companion icon/render for Pirate Gunner",
-        "crow": "accepted-missing: no clean public companion icon/render for Crow",
-        "lava-snail": "accepted-missing: no clean public companion icon/render for Lava Snail",
-        "magma-golem": "accepted-missing: no clean public companion icon/render for Magma Golem",
-        "salamander": "accepted-missing: no clean public companion icon/render for Salamander"
-      },
-      "publicImagePathDeferred": "apps/web/public/100 Days At Sea/Companions/ (not created until clean row art exists)"
+      "imageMissingByItem": {},
+      "imageSourcesUsed": [
+        "https://bo3.gg/games/articles/all-companions-in-100-days-at-sea — Companion Shop CHANCES UI screenshots (Fisherman's, Warrior, Ice, Pirate, Magma); each named companion icon tile extracted 1:1 from the official in-game icon art shown in that UI."
+      ],
+      "publicImagePath": "apps/web/public/100 Days At Sea/Companions/"
     }
   },
   "items": [
@@ -143,7 +123,7 @@
         "slug": "crab",
         "section": "Fisherman's Chest",
         "sortOrder": 1,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/crab.png"
       }
     },
     {
@@ -161,7 +141,7 @@
         "slug": "frog",
         "section": "Fisherman's Chest",
         "sortOrder": 2,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/frog.png"
       }
     },
     {
@@ -179,7 +159,7 @@
         "slug": "turtle",
         "section": "Fisherman's Chest",
         "sortOrder": 3,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/turtle.png"
       }
     },
     {
@@ -197,7 +177,7 @@
         "slug": "dolphin",
         "section": "Fisherman's Chest",
         "sortOrder": 4,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/dolphin.png"
       }
     },
     {
@@ -215,7 +195,7 @@
         "slug": "shark",
         "section": "Fisherman's Chest",
         "sortOrder": 5,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/shark.png"
       }
     },
     {
@@ -233,7 +213,7 @@
         "slug": "cat",
         "section": "Warrior Chest",
         "sortOrder": 6,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/cat.png"
       }
     },
     {
@@ -251,7 +231,7 @@
         "slug": "snorf",
         "section": "Warrior Chest",
         "sortOrder": 7,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/snorf.png"
       }
     },
     {
@@ -269,7 +249,7 @@
         "slug": "octopus",
         "section": "Warrior Chest",
         "sortOrder": 8,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/octopus.png"
       }
     },
     {
@@ -287,7 +267,7 @@
         "slug": "swordfish",
         "section": "Warrior Chest",
         "sortOrder": 9,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/swordfish.png"
       }
     },
     {
@@ -305,7 +285,7 @@
         "slug": "arctic-wolf",
         "section": "Ice Chest",
         "sortOrder": 10,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/arctic-wolf.png"
       }
     },
     {
@@ -323,7 +303,7 @@
         "slug": "orca",
         "section": "Ice Chest",
         "sortOrder": 11,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/orca.png"
       }
     },
     {
@@ -341,7 +321,7 @@
         "slug": "polar-bear",
         "section": "Ice Chest",
         "sortOrder": 12,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/polar-bear.png"
       }
     },
     {
@@ -359,7 +339,7 @@
         "slug": "penguin",
         "section": "Ice Chest",
         "sortOrder": 13,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/penguin.png"
       }
     },
     {
@@ -377,7 +357,7 @@
         "slug": "snowman",
         "section": "Ice Chest",
         "sortOrder": 14,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/snowman.png"
       }
     },
     {
@@ -395,7 +375,7 @@
         "slug": "parrot",
         "section": "Pirate Chest",
         "sortOrder": 15,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/parrot.png"
       }
     },
     {
@@ -413,7 +393,7 @@
         "slug": "seagull",
         "section": "Pirate Chest",
         "sortOrder": 16,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/seagull.png"
       }
     },
     {
@@ -431,7 +411,7 @@
         "slug": "whale",
         "section": "Pirate Chest",
         "sortOrder": 17,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/whale.png"
       }
     },
     {
@@ -449,7 +429,7 @@
         "slug": "pirate-gunner",
         "section": "Pirate Chest",
         "sortOrder": 18,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/pirate-gunner.png"
       }
     },
     {
@@ -467,7 +447,7 @@
         "slug": "crow",
         "section": "Magma Chest",
         "sortOrder": 19,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/crow.png"
       }
     },
     {
@@ -485,7 +465,7 @@
         "slug": "lava-snail",
         "section": "Magma Chest",
         "sortOrder": 20,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/lava-snail.png"
       }
     },
     {
@@ -503,7 +483,7 @@
         "slug": "magma-golem",
         "section": "Magma Chest",
         "sortOrder": 21,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/magma-golem.png"
       }
     },
     {
@@ -521,7 +501,7 @@
         "slug": "salamander",
         "section": "Magma Chest",
         "sortOrder": 22,
-        "image": null
+        "image": "/100%20Days%20At%20Sea/Companions/salamander.png"
       }
     }
   ]
