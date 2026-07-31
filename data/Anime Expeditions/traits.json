@@ -89,10 +89,10 @@
         "chance": "0.1%",
         "chanceNumeric": 0.1,
         "pity": "1,500",
-        "effect": "+350% DMG, -5% SPA, +10% Range",
+        "effect": "+350% DMG, -5% SPA, +10% Range, Single Placement",
         "role": "Main carry",
         "acquisitionNote": "Reroll with 1 Trait Crystal at the Trait Reroll stand between Crafting and Evolving in the lobby upgrade zone.",
-        "cardSummary": "The rarest chase trait, built around a massive damage boost with small SPA and range bonuses for a long-term carry unit."
+        "cardSummary": "The rarest chase trait: huge damage plus small SPA and range bonuses, but the unit is limited to a single placement, so it fits long-term carries you only field once."
       },
       "system": {
         "slug": "unbound",
@@ -161,10 +161,10 @@
         "chance": "2%",
         "chanceNumeric": 2,
         "pity": "",
-        "effect": "+25% Income",
+        "effect": "+25% Money Farm Income",
         "role": "Farm",
         "acquisitionNote": "Reroll with 1 Trait Crystal at the Trait Reroll stand between Crafting and Evolving in the lobby upgrade zone.",
-        "cardSummary": "The economy trait for farm units, raising income so the rest of the team can scale faster."
+        "cardSummary": "The economy trait for farm units, raising money-farm income so the rest of the team can scale faster."
       },
       "system": {
         "slug": "investor",

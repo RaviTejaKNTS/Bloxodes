@@ -209,11 +209,11 @@
     {
       "item": {
         "name": "King's Tomb",
-        "cardSummary": "Current final Story map in the launch chain. Farm Mana Flash, Magic Book, and Elven Battle Staff exclusive gear for Elf Mage.",
+        "cardSummary": "Current final Story map in the launch chain. Farm Mana Flask, Magic Book, and Elven Battle Staff exclusive gear for Elf Mage.",
         "progressionOrder": "5",
         "unlockRequirement": "Clear all acts on Fairy King Forest",
         "modes": "Story Mode, Challenge Mode",
-        "foodDrop": "Mana Flash",
+        "foodDrop": "Mana Flask",
         "standardEquipment": "Magic Book",
         "unitEquipment": "Elven Battle Staff",
         "targetUnits": "Elf Mage",
