@@ -1,0 +1,210 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "elements",
+    "route": "/wiki/anime-expeditions/elements",
+    "catalogCode": "anime-expeditions-elements",
+    "universeId": 7613921865,
+    "sourceItemCount": 9,
+    "itemFields": [
+      "name",
+      "description",
+      "stageInteractions",
+      "exampleUnits",
+      "role",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "role",
+      "description",
+      "stageInteractions",
+      "exampleUnits",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Elements",
+      "sectionOrder": [
+        "Elements"
+      ],
+      "badgeField": "role",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "role",
+        "description",
+        "stageInteractions",
+        "exampleUnits"
+      ],
+      "tableFields": [
+        "role",
+        "description",
+        "stageInteractions",
+        "exampleUnits",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "role": {
+          "kind": "chip",
+          "label": "Role"
+        },
+        "description": {
+          "kind": "plain",
+          "label": "Description"
+        },
+        "stageInteractions": {
+          "kind": "detail",
+          "label": "Stage interactions"
+        },
+        "exampleUnits": {
+          "kind": "detail",
+          "label": "Example units"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Hydro",
+        "description": "Units with this Element deal Hydro Element damage.",
+        "stageInteractions": "Hydro is one of the seven Elements in the Resistance game modifier cycle (Flame > Hydro > Gale > Terra > Light > Storm > Dark every 30s). Mirror and Enemy Resistances can cut damage from this Element. Stage buffs and debuffs can also target Elements.",
+        "exampleUnits": "Dark Mage, Dark Mage (Sovereign), Ice Queen, Water Princess, Ice Mage",
+        "role": "Combat",
+        "cardSummary": "Hydro combat Element for water and ice damage dealers; keep a Hydro unit ready when Resistance is cycling other Elements."
+      },
+      "system": {
+        "slug": "hydro",
+        "section": "Elements",
+        "sortOrder": 1
+      }
+    },
+    {
+      "item": {
+        "name": "Gale",
+        "description": "Units with this Element deal Gale Element damage.",
+        "stageInteractions": "Gale is one of the seven Elements in the Resistance game modifier cycle (Flame > Hydro > Gale > Terra > Light > Storm > Dark every 30s). Mirror and Enemy Resistances can cut damage from this Element. Stage buffs and debuffs can also target Elements.",
+        "exampleUnits": "Salmon Sorcerer, Salmon Sorcerer (Grade 1), Carrot",
+        "role": "Combat",
+        "cardSummary": "Gale combat Element for wind-style damage; mix it into teams so Resistance rotations do not shut down your whole roster."
+      },
+      "system": {
+        "slug": "gale",
+        "section": "Elements",
+        "sortOrder": 2
+      }
+    },
+    {
+      "item": {
+        "name": "Terra",
+        "description": "Units with this Element deal Terra Element damage.",
+        "stageInteractions": "Terra is one of the seven Elements in the Resistance game modifier cycle (Flame > Hydro > Gale > Terra > Light > Storm > Dark every 30s). Mirror and Enemy Resistances can cut damage from this Element. Stage buffs and debuffs can also target Elements.",
+        "exampleUnits": "Lady Giant, Lady Giant (Envy), Scissor",
+        "role": "Combat",
+        "cardSummary": "Terra combat Element for earth-style damage; useful coverage when Resistance moves off Flame, Hydro, or Gale."
+      },
+      "system": {
+        "slug": "terra",
+        "section": "Elements",
+        "sortOrder": 3
+      }
+    },
+    {
+      "item": {
+        "name": "Flame",
+        "description": "Units with this Element deal Flame Element damage.",
+        "stageInteractions": "Flame is one of the seven Elements in the Resistance game modifier cycle (Flame > Hydro > Gale > Terra > Light > Storm > Dark every 30s). Mirror and Enemy Resistances can cut damage from this Element. Stage buffs and debuffs can also target Elements.",
+        "exampleUnits": "Flame Emperor, Flame Emperor (Reincarnate), Hollow, Hollow (Blaze), Demon Cyborg, Nen Hunter, Curly Brow, Rubber Boy",
+        "role": "Combat",
+        "cardSummary": "Flame combat Element with a large unit pool; still diversify, because Resistance starts on Flame every cycle."
+      },
+      "system": {
+        "slug": "flame",
+        "section": "Elements",
+        "sortOrder": 4
+      }
+    },
+    {
+      "item": {
+        "name": "Storm",
+        "description": "Units with this Element deal Storm Element damage.",
+        "stageInteractions": "Storm is one of the seven Elements in the Resistance game modifier cycle (Flame > Hydro > Gale > Terra > Light > Storm > Dark every 30s). Mirror and Enemy Resistances can cut damage from this Element. Stage buffs and debuffs can also target Elements.",
+        "exampleUnits": "Elf Mage, Elf Mage (Unleashed), Kid Assassin, Thunder Shinobi",
+        "role": "Combat",
+        "cardSummary": "Storm combat Element for lightning-style damage; covers the late part of the Resistance rotation with Light and Dark."
+      },
+      "system": {
+        "slug": "storm",
+        "section": "Elements",
+        "sortOrder": 5
+      }
+    },
+    {
+      "item": {
+        "name": "Light",
+        "description": "Units with this Element deal Light Element damage.",
+        "stageInteractions": "Light is one of the seven Elements in the Resistance game modifier cycle (Flame > Hydro > Gale > Terra > Light > Storm > Dark every 30s). Mirror and Enemy Resistances can cut damage from this Element. Stage buffs and debuffs can also target Elements.",
+        "exampleUnits": "True Saint, True Saint (Holy), Puppet, Puppet (Telekinetic), Reaper (Released), Reaper, Reishi Archer",
+        "role": "Combat",
+        "cardSummary": "Light combat Element spanning Magical, Physical, and Psychic units; strong mid-to-late Resistance coverage."
+      },
+      "system": {
+        "slug": "light",
+        "section": "Elements",
+        "sortOrder": 6
+      }
+    },
+    {
+      "item": {
+        "name": "Dark",
+        "description": "Units with this Element deal Dark Element damage.",
+        "stageInteractions": "Dark is one of the seven Elements in the Resistance game modifier cycle (Flame > Hydro > Gale > Terra > Light > Storm > Dark every 30s). Mirror and Enemy Resistances can cut damage from this Element. Stage buffs and debuffs can also target Elements.",
+        "exampleUnits": "Crow, Crow (Black Fire), Shadow, Shadow (Divine), Crimson, Crimson (Brother), Toy Maker, Cursed Immortal, Cursed Immortal (Black Sun), Cursed Student, Cursed Student (True Love), Greed",
+        "role": "Combat",
+        "cardSummary": "Dark combat Element with the largest Miraheze roster; ends the Resistance cycle, so pair it with other Elements for Mirror and Resistance stages."
+      },
+      "system": {
+        "slug": "dark",
+        "section": "Elements",
+        "sortOrder": 7
+      }
+    },
+    {
+      "item": {
+        "name": "Neutral",
+        "description": "Units with this Element deal Neutral Element damage.",
+        "stageInteractions": "Neutral deals Neutral Element damage and is not listed in the Resistance rotation (Flame > Hydro > Gale > Terra > Light > Storm > Dark). Mirror can still copy deployed Elements as enemy resistances. Stage buffs and debuffs can still interact with Elements in general.",
+        "exampleUnits": "8th Sword, 8th Sword (Berserk), Razorjaw, Razorjaw (Hunter), String Demon, String Demon (Awakened), Bounty Hunter, Corps Captain",
+        "role": "Combat",
+        "cardSummary": "Neutral combat Element outside the seven-step Resistance cycle; still useful for Mirror planning because enemies can copy your deployed Elements."
+      },
+      "system": {
+        "slug": "neutral",
+        "section": "Elements",
+        "sortOrder": 8
+      }
+    },
+    {
+      "item": {
+        "name": "Farm",
+        "description": "Farm units generate Yen at the end of every wave instead of focusing on combat.",
+        "stageInteractions": "Farm is an economy Element, not a combat damage type in the Resistance cycle. The No Farms game modifier disables Farm units. Farm is not listed in the Resistance rotation.",
+        "exampleUnits": "Ramen Guy, Stone Alchemist",
+        "role": "Economy",
+        "cardSummary": "Economy Element that earns Yen each wave; bring Farm for income stages, and drop them when No Farms is active."
+      },
+      "system": {
+        "slug": "farm",
+        "section": "Elements",
+        "sortOrder": 9
+      }
+    }
+  ]
+}
