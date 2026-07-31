@@ -86,25 +86,49 @@
   "items": [
     {
       "item": {
-        "name": "8th Sword (Berserker)",
+        "name": "Crow (Black Fire)",
+        "rarity": "Secret",
+        "element": "Dark",
+        "damageType": "Magical",
+        "role": "DPS",
+        "obtainment": "Limited Villain Banner summons (about 0.01% rate, pity around 10,000 pulls), then evolve from Crow.",
+        "passive": "Regular attacks apply Illusion for a short window. While Illusion lasts, damage this unit deals is stored and released at reduced strength in a small AoE when Illusion ends. Searing Flames lets Black Fire chew through shields and stacks Black Fire on shielded enemies in range.",
+        "activeAbility": "",
+        "evolution": "Evolved form of Crow. Requires Crow's Ring, red, yellow, and purple Evolution Sprites, 3 Rainbow Sprites, and 10,000 gold.",
+        "cardSummary": "Limited Secret Magical carry that stores Illusion damage and pressures shields with Black Fire.",
+        "alternateSpellings": [
+          "Crow",
+          "Itachi"
+        ]
+      },
+      "system": {
+        "slug": "crow-black-fire",
+        "section": "Secret",
+        "sortOrder": 100,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "8th Sword (Berserk)",
         "rarity": "Secret",
         "element": "Neutral",
         "damageType": "Physical",
         "role": "DPS",
-        "obtainment": "Standard or Mini banner after Secret summons unlock around account level 10.",
-        "passive": "Builds permanent damage from takedowns and deals steady burn damage to enemies in the inner part of its range. Cleanses its own stun with a follow-up cut, punishes low-health enemies with another follow-up, and after 25 takedowns enters Berserk for a short damage, SPA, and Dismembered window.",
+        "obtainment": "Evolve from 8th Sword. Base form drops from Spirit City Raid Act 3 (about 1% chance, pity around 35 clears), then evolve in the Upgrades room.",
+        "passive": "Shinigami Sword raises damage for each enemy in range up to a cap. Demonic Presence deals steady burn-style damage to enemies in the inner part of its range. Savage Rebound cleanses its own stun with a Thunderclap Cut follow-up that applies Dismembered. Dismemberer's Rush punishes enemies below 10% health with another follow-up. After 25 takedowns, The Nameless Demon enters Berserk for a short damage, SPA, and Dismembered window.",
         "activeAbility": "",
-        "evolution": "Listed as this Secret form in unit tables. Not shown as a separate base-to-evo recipe in the nine-row evolution guides.",
+        "evolution": "Evolved form of 8th Sword. Requires red, blue, and green Evolution Sprites, 3 Rainbow Sprites, and 10,000 gold.",
         "cardSummary": "Secret Physical carry that ramps through takedowns and spikes hard once Berserk is online.",
         "alternateSpellings": [
-          "8th Sword (Berserk)",
+          "8th Sword (Berserker)",
           "8th Sword"
         ]
       },
       "system": {
-        "slug": "8th-sword-berserker",
+        "slug": "8th-sword-berserk",
         "section": "Secret",
-        "sortOrder": 100,
+        "sortOrder": 110,
         "image": "/Anime%20Expeditions/Units/8th-sword-berserker.png"
       }
     },
@@ -115,7 +139,7 @@
         "element": "Dark",
         "damageType": "Magical",
         "role": "Summoner / Support",
-        "obtainment": "Standard or Mini banner after Secret summons unlock around account level 10.",
+        "obtainment": "Evolve from Shadow. Base form comes from Standard or Mini banner after Secret summons unlock around account level 10.",
         "passive": "Unlocks a circling Winged Spirit at upgrade 3 and an independently upgradeable Wolf Spirit at upgrade 5 for extra damage and stun pressure.",
         "activeAbility": "Shadow Realm rewinds enemies in range and grants Magical units a 25% damage buff for 30 seconds (global cooldown). Divine Spirit summons a permanent spirit equal to base damage while stunning Shadow itself.",
         "evolution": "Evolved form of Shadow. Requires blue, green, and red Evolution Sprites, 3 Rainbow Sprites, and 10,000 gold.",
@@ -128,7 +152,7 @@
       "system": {
         "slug": "shadow-divine",
         "section": "Secret",
-        "sortOrder": 110,
+        "sortOrder": 120,
         "image": "/Anime%20Expeditions/Units/shadow-divine.png"
       }
     },
@@ -163,7 +187,7 @@
         "damageType": "Psychic",
         "role": "Summoner",
         "obtainment": "Exclusive rewards such as tournaments or limited-time activities rather than the standard banner pool.",
-        "passive": "Summons toys on paths in range instead of normal attacking. Toys scale from this unit\u2019s damage, can gain speed and death AoE as upgrades progress, and later cycles can create tougher mutated toys. Health is split when covering multiple paths.",
+        "passive": "Summons toys on paths in range instead of normal attacking. Toys scale from this unit’s damage, can gain speed and death AoE as upgrades progress, and later cycles can create tougher mutated toys. Health is split when covering multiple paths.",
         "activeAbility": "",
         "evolution": "Listed as this Exclusive form in unit tables. No separate base-to-evo recipe found in the nine-row evolution guides.",
         "cardSummary": "Exclusive summoner that floods paths with toys instead of using a standard attack loop.",
@@ -201,13 +225,87 @@
     },
     {
       "item": {
+        "name": "Cursed Immortal (Black Sun)",
+        "rarity": "Mythic",
+        "element": "Dark",
+        "damageType": "Magical",
+        "role": "DPS",
+        "obtainment": "Limited Villain Banner summons (about 0.25% rate, pity around 400 pulls), then evolve from Cursed Immortal.",
+        "passive": "Walks the path without trading collision damage and instead damages enemies inside an aura. A Black Magic meter swings between Caring State (wider, lower tick damage) and Cold State (tighter, higher tick damage). Changing state also raises critical chance up to a cap.",
+        "activeAbility": "",
+        "evolution": "Evolved form of Cursed Immortal. Requires a Cursed Book, purple and blue Evolution Sprites, 1 Rainbow Sprite, and 10,000 gold.",
+        "cardSummary": "Limited Mythic path-walker that pulses aura damage while flipping between Caring and Cold Black Magic states.",
+        "alternateSpellings": [
+          "Cursed Immortal",
+          "Zeref"
+        ]
+      },
+      "system": {
+        "slug": "cursed-immortal-black-sun",
+        "section": "Mythic",
+        "sortOrder": 285,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Mage (Sovereign)",
+        "rarity": "Mythic",
+        "element": "Hydro",
+        "damageType": "Magical",
+        "role": "DPS / Crowd Control",
+        "obtainment": "Limited Villain Banner summons (about 0.25% rate, pity around 400 pulls), then evolve from Dark Mage.",
+        "passive": "After several regular attacks, cycles between Ice Magic (circle AoE with Freeze buildup) and Lightning Magic (cone AoE). Switching to Lightning places a damaging arc on the path; switching to Ice enables Freeze on attack and Frostbite stacks that can shatter frozen targets for bonus AoE damage.",
+        "activeAbility": "",
+        "evolution": "Evolved form of Dark Mage. Requires a Magical Amulet, red and yellow Evolution Sprites, 1 Rainbow Sprite, and 10,000 gold.",
+        "cardSummary": "Limited Mythic Magical hybrid that swaps Ice Freeze pressure with Lightning path DoT.",
+        "alternateSpellings": [
+          "Dark Mage"
+        ]
+      },
+      "system": {
+        "slug": "dark-mage-sovereign",
+        "section": "Mythic",
+        "sortOrder": 290,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Razorjaw (Hunter)",
+        "rarity": "Mythic",
+        "element": "Neutral",
+        "damageType": "Physical",
+        "role": "DPS / Crowd Control",
+        "obtainment": "Limited Villain Banner summons (about 0.25% rate, pity around 400 pulls), then evolve from Razorjaw.",
+        "passive": "Periodically unleashes a full-AoE Roar that damages enemies, applies Stagger, and permanently raises critical chance per enemy hit up to a cap.",
+        "activeAbility": "Endless Slashes (unlocks on a late upgrade) teleports this unit to base and slashes down the whole path with rising damage per slash, then returns to its placement.",
+        "evolution": "Evolved form of Razorjaw. Requires a Jaw Skull, blue and green Evolution Sprites, 1 Rainbow Sprite, and 10,000 gold.",
+        "cardSummary": "Limited Mythic Physical unit that staggers with Roar and can clear a lane with Endless Slashes.",
+        "alternateSpellings": [
+          "Razorjaw",
+          "Razerjaw (Hunter)",
+          "Razerjaw",
+          "Grim Jaw",
+          "RazorJaw"
+        ]
+      },
+      "system": {
+        "slug": "razorjaw-hunter",
+        "section": "Mythic",
+        "sortOrder": 295,
+        "image": ""
+      }
+    },
+    {
+      "item": {
         "name": "Cursed Student (True Love)",
         "rarity": "Mythic",
         "element": "Dark",
         "damageType": "Physical",
         "role": "DPS / Summoner",
         "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
-        "passive": "Every third regular attack copies a follow-up based on the closest ally in range, mixing this unit\u2019s damage with a share of that ally\u2019s damage. Enough total Bleed stacks in range also spawn Bat Spirits that attack a few times before despawning.",
+        "passive": "Every third regular attack copies a follow-up based on the closest unit in range, mixing this unit's damage with a share of that unit's damage. Enough total Bleed stacks in range also spawn Bat Spirits that attack a few times before despawning.",
         "activeAbility": "",
         "evolution": "Evolved form of Cursed Student. Requires a Student ID, blue and purple Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
         "cardSummary": "Mythic Physical carry that mimics nearby ally attacks and summons bats from Bleed stacks.",
@@ -226,7 +324,7 @@
       "item": {
         "name": "Elf Mage (Unleashed)",
         "rarity": "Mythic",
-        "element": "Wind",
+        "element": "Storm",
         "damageType": "Magical",
         "role": "DPS",
         "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
@@ -322,7 +420,7 @@
         "damageType": "Psychic",
         "role": "DPS / Support",
         "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
-        "passive": "Periodically marks the strongest unmarked enemy in range so that target takes increased incoming damage. When a marked enemy dies, summons a durable Doll based on this unit\u2019s damage.",
+        "passive": "Periodically marks the strongest unmarked enemy in range so that target takes increased incoming damage. When a marked enemy dies, summons a durable Doll based on this unit’s damage.",
         "activeAbility": "Complete Control rewinds all enemies in range by a short time window after it unlocks at a later upgrade.",
         "evolution": "Evolved form of Puppet. Requires a Puppet Heart, pink and purple Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
         "cardSummary": "Mythic Psychic hybrid that amplifies a marked target, summons a doll, and can rewind waves.",
@@ -393,7 +491,7 @@
         "damageType": "Magical",
         "role": "Crowd Control / DPS",
         "obtainment": "Beginner Banner and other Mythic banner pools during progression summons.",
-        "passive": "Regular attacks can cocoon hit enemies so they stay stunned until the cocoon is broken or times out, with a bonus damage payout if broken. String Sync also links nearby allies so their attacks can trigger follow-ups that deal this unit\u2019s damage before the strings break.",
+        "passive": "Regular attacks can cocoon hit enemies so they stay stunned until the cocoon is broken or times out, with a bonus damage payout if broken. String Sync also links nearby allies so their attacks can trigger follow-ups that deal this unit’s damage before the strings break.",
         "activeAbility": "",
         "evolution": "Evolved form of String Demon. Requires Joker of the Nonsensical Pirates, yellow and pink Evolution Sprites, 1 Rainbow Sprite, and 5,000 gold.",
         "cardSummary": "Mythic Magical hybrid that cocoons enemies for stall and links allies into follow-up attacks.",
@@ -458,7 +556,7 @@
         "damageType": "Magical",
         "role": "Crowd Control / DPS",
         "obtainment": "Standard banner Legendary pool and general progression summons.",
-        "passive": "Soul Rend deals 20% more damage to enemies below 20% health. Attacks can Freeze a target for a short window that prevents movement and actions, with an application cooldown, and Freeze counts as stun-style control.",
+        "passive": "Soul Rend deals 20% more damage to enemies below 20% health. Some guides also describe a Freeze application that briefly stops movement and actions; confirm Freeze timing in-game because not every unit table lists it.",
         "activeAbility": "",
         "evolution": "No evolution recipe listed in the main evolution guides.",
         "cardSummary": "Legendary Hydro unit that freezes targets and finishes low-health enemies harder.",
@@ -542,7 +640,7 @@
         "damageType": "Magical",
         "role": "Support",
         "obtainment": "Standard banner Legendary pool and general progression summons.",
-        "passive": "Debuff Shield grants a shield to the nearest ally that breaks after blocking one debuff, then regenerates after a short cooldown.",
+        "passive": "Grants a regenerating shield to the nearest ally that breaks after blocking a debuff or hits. Exact shield timing varies by source, so treat the kit as a nearby debuff/hit shield rather than a fixed number.",
         "activeAbility": "",
         "evolution": "No evolution recipe listed in the main evolution guides.",
         "cardSummary": "Legendary Hydro support that protects a nearby ally from one debuff at a time.",
@@ -559,8 +657,8 @@
       "item": {
         "name": "Bounty Hunter",
         "rarity": "Epic",
-        "element": "",
-        "damageType": "",
+        "element": "Neutral",
+        "damageType": "Physical",
         "role": "Starter",
         "obtainment": "Standard banner Epic pool and early progression summons.",
         "passive": "No passive abilities listed in unit guides.",
@@ -580,8 +678,8 @@
       "item": {
         "name": "Corps Captain",
         "rarity": "Epic",
-        "element": "",
-        "damageType": "",
+        "element": "Neutral",
+        "damageType": "Physical",
         "role": "Starter",
         "obtainment": "Standard banner Epic pool and early progression summons.",
         "passive": "No passive abilities listed in unit guides.",
@@ -589,7 +687,8 @@
         "evolution": "No evolution recipe listed in the main evolution guides.",
         "cardSummary": "Early Epic filler unit used before Mythic and Legendary options replace it.",
         "alternateSpellings": [
-          "Corps Captian"
+          "Corps Captian",
+          "Crops Captain"
         ]
       },
       "system": {
@@ -603,8 +702,8 @@
       "item": {
         "name": "Demon Cyborg",
         "rarity": "Epic",
-        "element": "",
-        "damageType": "",
+        "element": "Flame",
+        "damageType": "Physical",
         "role": "Starter",
         "obtainment": "Standard banner Epic pool and early progression summons.",
         "passive": "No passive abilities listed in unit guides.",
@@ -624,11 +723,11 @@
       "item": {
         "name": "Ice Mage",
         "rarity": "Epic",
-        "element": "",
-        "damageType": "",
+        "element": "Hydro",
+        "damageType": "Magical",
         "role": "Crowd Control",
         "obtainment": "Standard banner Epic pool and early progression summons.",
-        "passive": "Beebom lists a movement-speed reduction on hit for a few seconds. BloxInformer groups Epic units as having no passives, so treat this as the only Epic with a claimed control effect until in-game confirmation.",
+        "passive": "TechWiser lists a Slow application on hit with a short cooldown. BloxInformer groups Epic units as having no passives, so treat this as the only Epic with a claimed control effect until in-game confirmation.",
         "activeAbility": "",
         "evolution": "No evolution recipe listed in the main evolution guides.",
         "cardSummary": "Early Epic control option that may slow enemies before stronger Mythic stalls are available.",
@@ -645,8 +744,8 @@
       "item": {
         "name": "Nen Hunter",
         "rarity": "Epic",
-        "element": "",
-        "damageType": "",
+        "element": "Flame",
+        "damageType": "Physical",
         "role": "Starter",
         "obtainment": "Standard banner Epic pool and early progression summons.",
         "passive": "No passive abilities listed in unit guides.",
@@ -666,8 +765,8 @@
       "item": {
         "name": "Stone Alchemist",
         "rarity": "Epic",
-        "element": "",
-        "damageType": "",
+        "element": "Farm",
+        "damageType": "Physical",
         "role": "Economy",
         "obtainment": "Standard banner Epic pool and early progression summons.",
         "passive": "No passive abilities listed in unit guides. Tier guides still treat it as an early farm or income-style placeholder before Ramen Guy.",
@@ -687,8 +786,8 @@
       "item": {
         "name": "Carrot",
         "rarity": "Rare",
-        "element": "",
-        "damageType": "",
+        "element": "Gale",
+        "damageType": "Physical",
         "role": "Starter",
         "obtainment": "Standard banner Rare pool and the earliest progression summons.",
         "passive": "No passive abilities listed in unit guides.",
@@ -708,8 +807,8 @@
       "item": {
         "name": "Curly Brow",
         "rarity": "Rare",
-        "element": "",
-        "damageType": "",
+        "element": "Flame",
+        "damageType": "Physical",
         "role": "Starter",
         "obtainment": "Standard banner Rare pool and the earliest progression summons.",
         "passive": "No passive abilities listed in unit guides.",
@@ -729,8 +828,8 @@
       "item": {
         "name": "Kid Assassin",
         "rarity": "Rare",
-        "element": "",
-        "damageType": "",
+        "element": "Storm",
+        "damageType": "Magical",
         "role": "Starter",
         "obtainment": "Standard banner Rare pool and the earliest progression summons.",
         "passive": "No passive abilities listed in unit guides.",
@@ -750,8 +849,8 @@
       "item": {
         "name": "Reishi Archer",
         "rarity": "Rare",
-        "element": "",
-        "damageType": "",
+        "element": "Light",
+        "damageType": "Magical",
         "role": "Starter",
         "obtainment": "Standard banner Rare pool and the earliest progression summons.",
         "passive": "No passive abilities listed in unit guides.",
@@ -771,8 +870,8 @@
       "item": {
         "name": "Rubber Boy",
         "rarity": "Rare",
-        "element": "",
-        "damageType": "",
+        "element": "Flame",
+        "damageType": "Physical",
         "role": "Starter",
         "obtainment": "Standard banner Rare pool and the earliest progression summons.",
         "passive": "No passive abilities listed in unit guides.",
@@ -792,8 +891,8 @@
       "item": {
         "name": "Thunder Shinobi",
         "rarity": "Rare",
-        "element": "",
-        "damageType": "",
+        "element": "Storm",
+        "damageType": "Magical",
         "role": "Starter",
         "obtainment": "Standard banner Rare pool and the earliest progression summons.",
         "passive": "No passive abilities listed in unit guides.",
