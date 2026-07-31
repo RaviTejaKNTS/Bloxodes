@@ -235,7 +235,7 @@
         "slug": "villain-coins",
         "section": "Currencies",
         "sortOrder": 8,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/villain-coins.png"
       }
     },
     {
@@ -253,7 +253,7 @@
         "slug": "research-point",
         "section": "Currencies",
         "sortOrder": 9,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/research-point.png"
       }
     },
     {
@@ -523,7 +523,7 @@
         "slug": "lush-dirt",
         "section": "Crafting Materials",
         "sortOrder": 24,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/lush-dirt.webp"
       }
     },
     {
@@ -541,7 +541,7 @@
         "slug": "aqua-shard",
         "section": "Crafting Materials",
         "sortOrder": 25,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/aqua-shard.webp"
       }
     },
     {
@@ -577,7 +577,7 @@
         "slug": "fuel-cell",
         "section": "Crafting Materials",
         "sortOrder": 27,
-        "image": "/Anime%20Expeditions/Items/fuel-cells.jpg"
+        "image": "/Anime%20Expeditions/Items/fuel-cell.webp"
       }
     },
     {
@@ -595,7 +595,7 @@
         "slug": "geode",
         "section": "Crafting Materials",
         "sortOrder": 28,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/geode.webp"
       }
     },
     {
@@ -721,7 +721,7 @@
         "slug": "hollowed-visor",
         "section": "Evolution Materials",
         "sortOrder": 35,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/hollowed-visor.png"
       }
     },
     {
@@ -739,7 +739,7 @@
         "slug": "8ths-sword",
         "section": "Evolution Materials",
         "sortOrder": 36,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/8ths-sword.png"
       }
     },
     {
@@ -757,7 +757,7 @@
         "slug": "giant-hammer",
         "section": "Evolution Materials",
         "sortOrder": 37,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/giant-hammer.png"
       }
     },
     {
@@ -775,7 +775,7 @@
         "slug": "elixir-of-life",
         "section": "Evolution Materials",
         "sortOrder": 38,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/elixir-of-life.png"
       }
     },
     {
@@ -865,7 +865,7 @@
         "slug": "puppet-heart",
         "section": "Evolution Materials",
         "sortOrder": 43,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/puppet-heart.png"
       }
     },
     {
@@ -883,7 +883,7 @@
         "slug": "salmon",
         "section": "Evolution Materials",
         "sortOrder": 44,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/salmon.png"
       }
     },
     {
@@ -919,7 +919,7 @@
         "slug": "crows-ring",
         "section": "Evolution Materials",
         "sortOrder": 46,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/crows-ring.png"
       }
     },
     {
@@ -937,7 +937,7 @@
         "slug": "magical-amulet",
         "section": "Evolution Materials",
         "sortOrder": 47,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/magical-amulet.png"
       }
     },
     {
@@ -955,7 +955,7 @@
         "slug": "jaw-skull",
         "section": "Evolution Materials",
         "sortOrder": 48,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/jaw-skull.png"
       }
     },
     {
@@ -973,7 +973,7 @@
         "slug": "cursed-book",
         "section": "Evolution Materials",
         "sortOrder": 49,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/cursed-book.png"
       }
     },
     {
@@ -1063,7 +1063,7 @@
         "slug": "crow-relic",
         "section": "Raid & Event Utility",
         "sortOrder": 54,
-        "image": ""
+        "image": "/Anime%20Expeditions/Items/crow-relic.png"
       }
     }
   ]
