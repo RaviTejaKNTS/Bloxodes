@@ -83,7 +83,8 @@
       "system": {
         "slug": "hydro",
         "section": "Elements",
-        "sortOrder": 1
+        "sortOrder": 1,
+        "image": "/Anime%20Expeditions/elements/hydro.webp"
       }
     },
     {
@@ -98,7 +99,8 @@
       "system": {
         "slug": "gale",
         "section": "Elements",
-        "sortOrder": 2
+        "sortOrder": 2,
+        "image": "/Anime%20Expeditions/elements/gale.webp"
       }
     },
     {
@@ -113,7 +115,8 @@
       "system": {
         "slug": "terra",
         "section": "Elements",
-        "sortOrder": 3
+        "sortOrder": 3,
+        "image": "/Anime%20Expeditions/elements/terra.webp"
       }
     },
     {
@@ -128,7 +131,8 @@
       "system": {
         "slug": "flame",
         "section": "Elements",
-        "sortOrder": 4
+        "sortOrder": 4,
+        "image": "/Anime%20Expeditions/elements/flame.webp"
       }
     },
     {
@@ -143,7 +147,8 @@
       "system": {
         "slug": "storm",
         "section": "Elements",
-        "sortOrder": 5
+        "sortOrder": 5,
+        "image": "/Anime%20Expeditions/elements/storm.webp"
       }
     },
     {
@@ -158,7 +163,8 @@
       "system": {
         "slug": "light",
         "section": "Elements",
-        "sortOrder": 6
+        "sortOrder": 6,
+        "image": "/Anime%20Expeditions/elements/light.webp"
       }
     },
     {
@@ -173,7 +179,8 @@
       "system": {
         "slug": "dark",
         "section": "Elements",
-        "sortOrder": 7
+        "sortOrder": 7,
+        "image": "/Anime%20Expeditions/elements/dark.webp"
       }
     },
     {
@@ -188,7 +195,8 @@
       "system": {
         "slug": "neutral",
         "section": "Elements",
-        "sortOrder": 8
+        "sortOrder": 8,
+        "image": "/Anime%20Expeditions/elements/neutral.webp"
       }
     },
     {
@@ -203,7 +211,8 @@
       "system": {
         "slug": "farm",
         "section": "Elements",
-        "sortOrder": 9
+        "sortOrder": 9,
+        "image": "/Anime%20Expeditions/elements/farm.webp"
       }
     }
   ]
