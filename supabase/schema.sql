@@ -590,33 +590,6 @@ $$;
 ALTER FUNCTION "public"."enqueue_free_items_catalog_scope"("p_category" "text", "p_subcategory" "text", "p_source" "text") OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") RETURNS "void"
-    LANGUAGE "plpgsql"
-    AS $$
-begin
-  if p_universe_id is null then
-    return;
-  end if;
-
-  insert into public.revalidation_events (entity_type, slug, source)
-  select distinct 'list', lower(gl.slug), p_source
-  from public.game_lists gl
-  join public.game_list_entries gle on gle.list_id = gl.id
-  where gle.universe_id = p_universe_id
-    and gl.is_published = true
-    and gl.slug is not null
-    and trim(gl.slug) <> ''
-  on conflict (entity_type, slug)
-  do update set
-    created_at = now(),
-    source = excluded.source;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") OWNER TO "postgres";
-
-
 CREATE OR REPLACE FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "text", "p_value" "text", "p_source" "text") RETURNS "void"
     LANGUAGE "plpgsql"
     AS $$
@@ -659,32 +632,6 @@ $$;
 
 
 ALTER FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") RETURNS "void"
-    LANGUAGE "plpgsql"
-    AS $$
-declare
-  target_universe_id bigint;
-begin
-  if p_list_id is null then
-    return;
-  end if;
-
-  for target_universe_id in
-    select distinct gle.universe_id
-    from public.game_list_entries gle
-    where gle.list_id = p_list_id
-      and gle.rank between 1 and 3
-      and gle.universe_id is not null
-  loop
-    perform public.enqueue_wiki_revalidation_for_universe(target_universe_id, p_source);
-  end loop;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."enqueue_wiki_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") RETURNS "void"
@@ -785,6 +732,283 @@ COMMENT ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "
 
 
 
+CREATE OR REPLACE FUNCTION "public"."get_stats_platform_ccu_trend"("p_since" timestamp with time zone DEFAULT ("now"() - '24:00:00'::interval)) RETURNS TABLE("hour_start" timestamp with time zone, "players" bigint, "peak_players" bigint, "avg_players" numeric, "visits" bigint, "favorites" bigint, "rating" numeric, "samples" bigint)
+    LANGUAGE "sql" STABLE
+    SET "search_path" TO ''
+    AS $$
+  with hourly as (
+    select
+      h.hour_start,
+      coalesce(h.avg_playing, h.playing::numeric) as avg_player_value,
+      h.peak_playing,
+      h.visits_end,
+      h.favorites_end,
+      h.rating_percent,
+      greatest(h.sample_count, 1) as sample_count
+    from public.roblox_universe_stats_hourly h
+    inner join public.stats_game_current_index g
+      on g.universe_id = h.universe_id
+    where h.hour_start >= p_since
+  )
+  select
+    h.hour_start,
+    coalesce(round(sum(h.avg_player_value))::bigint, 0::bigint) as players,
+    coalesce(sum(coalesce(h.peak_playing, 0))::bigint, 0::bigint) as peak_players,
+    coalesce(sum(h.avg_player_value), 0::numeric) as avg_players,
+    coalesce(sum(coalesce(h.visits_end, 0))::bigint, 0::bigint) as visits,
+    coalesce(sum(coalesce(h.favorites_end, 0))::bigint, 0::bigint) as favorites,
+    case
+      when sum(h.sample_count) filter (where h.rating_percent is not null) > 0 then
+        round(
+          sum(h.rating_percent * h.sample_count) filter (where h.rating_percent is not null)
+          / sum(h.sample_count) filter (where h.rating_percent is not null),
+          1
+        )
+      else null
+    end as rating,
+    coalesce(sum(h.sample_count)::bigint, 0::bigint) as samples
+  from hourly h
+  group by h.hour_start
+  order by h.hour_start asc;
+$$;
+
+
+ALTER FUNCTION "public"."get_stats_platform_ccu_trend"("p_since" timestamp with time zone) OWNER TO "supabase_admin";
+
+
+CREATE OR REPLACE FUNCTION "public"."get_stats_platform_current_summary"() RETURNS TABLE("live_players" bigint, "total_visits" bigint, "fresh_games" integer, "last_updated_at" timestamp with time zone)
+    LANGUAGE "sql" STABLE
+    SET "search_path" TO ''
+    AS $$
+  select
+    coalesce(sum(u.playing) filter (
+      where u.last_playing_refreshed_at >= now() - interval '24 hours'
+    ), 0)::bigint as live_players,
+    coalesce(sum(u.visits), 0)::bigint as total_visits,
+    count(*) filter (
+      where u.playing is not null
+        and u.last_playing_refreshed_at >= now() - interval '24 hours'
+    )::integer as fresh_games,
+    max(u.last_playing_refreshed_at) filter (
+      where u.last_playing_refreshed_at >= now() - interval '24 hours'
+    ) as last_updated_at
+  from public.roblox_universes u
+  where u.slug is not null;
+$$;
+
+
+ALTER FUNCTION "public"."get_stats_platform_current_summary"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."get_stats_subgenre_options"() RETURNS TABLE("genre" "text", "subgenre" "text", "games" integer, "playing" bigint)
+    LANGUAGE "sql" STABLE
+    SET "search_path" TO ''
+    AS $$
+  select
+    btrim(genre_l1) as genre,
+    btrim(genre_l2) as subgenre,
+    count(*)::integer as games,
+    coalesce(sum(playing), 0)::bigint as playing
+  from public.stats_game_current_index
+  where genre_l1 is not null
+    and btrim(genre_l1) <> ''
+    and lower(btrim(genre_l1)) not in ('all', 'uncategorized')
+    and genre_l2 is not null
+    and btrim(genre_l2) <> ''
+    and lower(btrim(genre_l2)) not in ('all', 'uncategorized')
+  group by btrim(genre_l1), btrim(genre_l2)
+  order by btrim(genre_l1) asc, coalesce(sum(playing), 0) desc, btrim(genre_l2) asc;
+$$;
+
+
+ALTER FUNCTION "public"."get_stats_subgenre_options"() OWNER TO "supabase_admin";
+
+
+CREATE OR REPLACE FUNCTION "public"."get_stats_visit_share_chart"("p_since" "date", "p_until" "date", "p_top_games" integer DEFAULT 8, "p_top_group" integer DEFAULT 100, "p_wide_group" integer DEFAULT 1000) RETURNS TABLE("stat_date" "date", "bucket_key" "text", "bucket_name" "text", "universe_id" bigint, "slug" "text", "icon_url" "text", "bucket_rank_start" integer, "bucket_rank_end" integer, "is_group" boolean, "visit_delta" bigint, "denominator_visit_delta" bigint, "denominator_game_count" integer)
+    LANGUAGE "sql" SECURITY DEFINER
+    SET "search_path" TO ''
+    AS $$
+  with daily_source as (
+    select
+      d.universe_id,
+      d.stat_date,
+      greatest(
+        coalesce(d.visit_delta, d.visits_end - d.visits_start, 0),
+        0
+      )::bigint as visit_delta
+    from public.roblox_universe_stats_daily d
+    where d.stat_date >= p_since
+      and d.stat_date <= p_until
+  ),
+  positive_daily as (
+    select *
+    from daily_source
+    where visit_delta > 0
+  ),
+  game_totals as (
+    select
+      universe_id,
+      sum(visit_delta)::bigint as total_visits
+    from positive_daily
+    group by universe_id
+  ),
+  ranked_games as (
+    select
+      gt.universe_id,
+      row_number() over (order by gt.total_visits desc, gt.universe_id asc)::integer as visit_rank,
+      gt.total_visits,
+      coalesce(nullif(u.display_name, ''), u.name) as game_name,
+      u.slug,
+      u.icon_url
+    from game_totals gt
+    left join public.roblox_universes u
+      on u.universe_id = gt.universe_id
+  ),
+  daily_denominator as (
+    select
+      stat_date,
+      sum(visit_delta)::bigint as denominator_visit_delta,
+      count(distinct universe_id)::integer as denominator_game_count
+    from positive_daily
+    group by stat_date
+  ),
+  top_bucketed as (
+    select
+      d.stat_date,
+      case
+        when rg.visit_rank <= p_top_games then 'g' || rg.universe_id::text
+        when rg.visit_rank <= p_top_group then 'rank_' || (p_top_games + 1)::text || '_' || p_top_group::text
+        when rg.visit_rank <= p_wide_group then 'rank_' || (p_top_group + 1)::text || '_' || p_wide_group::text
+      end as bucket_key,
+      case
+        when rg.visit_rank <= p_top_games then coalesce(rg.game_name, rg.universe_id::text)
+        when rg.visit_rank <= p_top_group then 'Ranks ' || (p_top_games + 1)::text || '-' || p_top_group::text
+        when rg.visit_rank <= p_wide_group then 'Ranks ' || (p_top_group + 1)::text || '-' || p_wide_group::text
+      end as bucket_name,
+      case when rg.visit_rank <= p_top_games then rg.universe_id else null end as universe_id,
+      case when rg.visit_rank <= p_top_games then rg.slug else null end as slug,
+      case when rg.visit_rank <= p_top_games then rg.icon_url else null end as icon_url,
+      case
+        when rg.visit_rank <= p_top_games then rg.visit_rank
+        when rg.visit_rank <= p_top_group then p_top_games + 1
+        when rg.visit_rank <= p_wide_group then p_top_group + 1
+      end as bucket_rank_start,
+      case
+        when rg.visit_rank <= p_top_games then rg.visit_rank
+        when rg.visit_rank <= p_top_group then p_top_group
+        when rg.visit_rank <= p_wide_group then p_wide_group
+      end as bucket_rank_end,
+      rg.visit_rank > p_top_games as is_group,
+      sum(d.visit_delta)::bigint as visit_delta
+    from positive_daily d
+    inner join ranked_games rg
+      on rg.universe_id = d.universe_id
+    where rg.visit_rank <= p_wide_group
+    group by
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+  ),
+  top_totals_by_date as (
+    select
+      stat_date,
+      sum(visit_delta)::bigint as top_visit_delta
+    from top_bucketed
+    group by stat_date
+  ),
+  other_bucket as (
+    select
+      dd.stat_date,
+      'other_tracked'::text as bucket_key,
+      'Other tracked games'::text as bucket_name,
+      null::bigint as universe_id,
+      null::text as slug,
+      null::text as icon_url,
+      p_wide_group + 1 as bucket_rank_start,
+      dd.denominator_game_count as bucket_rank_end,
+      true as is_group,
+      greatest(dd.denominator_visit_delta - coalesce(tt.top_visit_delta, 0), 0)::bigint as visit_delta
+    from daily_denominator dd
+    left join top_totals_by_date tt
+      on tt.stat_date = dd.stat_date
+    where greatest(dd.denominator_visit_delta - coalesce(tt.top_visit_delta, 0), 0) > 0
+  )
+  select
+    b.stat_date,
+    b.bucket_key,
+    b.bucket_name,
+    b.universe_id,
+    b.slug,
+    b.icon_url,
+    b.bucket_rank_start,
+    b.bucket_rank_end,
+    b.is_group,
+    b.visit_delta,
+    dd.denominator_visit_delta,
+    dd.denominator_game_count
+  from (
+    select * from top_bucketed
+    union all
+    select * from other_bucket
+  ) b
+  inner join daily_denominator dd
+    on dd.stat_date = b.stat_date
+  order by
+    b.stat_date asc,
+    b.bucket_rank_start asc,
+    b.bucket_rank_end asc,
+    b.bucket_key asc;
+$$;
+
+
+ALTER FUNCTION "public"."get_stats_visit_share_chart"("p_since" "date", "p_until" "date", "p_top_games" integer, "p_top_group" integer, "p_wide_group" integer) OWNER TO "supabase_admin";
+
+
+CREATE OR REPLACE FUNCTION "public"."invoke_cache_warm_worker"() RETURNS bigint
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'net', 'vault'
+    AS $$
+declare
+  cache_warm_jwt text;
+  request_id bigint;
+begin
+  select decrypted_secret
+  into cache_warm_jwt
+  from vault.decrypted_secrets
+  where name = 'revalidate_cron_jwt'
+  limit 1;
+
+  if nullif(trim(coalesce(cache_warm_jwt, '')), '') is null then
+    raise exception 'Missing Vault secret revalidate_cron_jwt for cache warm cron';
+  end if;
+
+  select net.http_post(
+    url := 'https://bloxodesdb.ravitejaknts.com/functions/v1/cache-warm',
+    body := '{}'::jsonb,
+    params := '{}'::jsonb,
+    headers := jsonb_build_object(
+      'Authorization', 'Bearer ' || cache_warm_jwt,
+      'apikey', cache_warm_jwt,
+      'Content-Type', 'application/json'
+    ),
+    timeout_milliseconds := 60000
+  )
+  into request_id;
+
+  return request_id;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."invoke_cache_warm_worker"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."invoke_revalidation_worker"() RETURNS bigint
     LANGUAGE "plpgsql" SECURITY DEFINER
     SET "search_path" TO 'public', 'net', 'vault'
@@ -804,7 +1028,7 @@ begin
   end if;
 
   select net.http_post(
-    url := 'https://bmwksaykcsndsvgspapz.supabase.co/functions/v1/revalidate',
+    url := 'https://database.bloxodes.com/functions/v1/revalidate',
     body := '{}'::jsonb,
     params := '{}'::jsonb,
     headers := jsonb_build_object(
@@ -859,25 +1083,406 @@ $_$;
 ALTER FUNCTION "public"."normalize_section_code"("raw" "text") OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) RETURNS boolean
+CREATE OR REPLACE FUNCTION "public"."percent_delta"("p_current" numeric, "p_previous" numeric) RETURNS numeric
+    LANGUAGE "sql" IMMUTABLE
+    AS $$
+  select case
+    when p_current is null or p_previous is null or p_previous <= 0 then null
+    else round(((p_current - p_previous) / p_previous) * 1000) / 10
+  end;
+$$;
+
+
+ALTER FUNCTION "public"."percent_delta"("p_current" numeric, "p_previous" numeric) OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."prune_roblox_universe_hourly_history"("p_cutoff" timestamp with time zone, "p_batch_size" integer DEFAULT 5000) RETURNS "jsonb"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public'
+    AS $$
+declare
+  stats_deleted integer := 0;
+  rank_deleted integer := 0;
+begin
+  with doomed as (
+    select ctid
+    from public.roblox_universe_stats_hourly
+    where hour_start < p_cutoff
+    limit greatest(p_batch_size, 1)
+  ),
+  deleted as (
+    delete from public.roblox_universe_stats_hourly h
+    using doomed
+    where h.ctid = doomed.ctid
+    returning 1
+  )
+  select count(*) into stats_deleted from deleted;
+
+  with doomed as (
+    select ctid
+    from public.roblox_universe_rank_snapshots_hourly
+    where hour_start < p_cutoff
+    limit greatest(p_batch_size, 1)
+  ),
+  deleted as (
+    delete from public.roblox_universe_rank_snapshots_hourly h
+    using doomed
+    where h.ctid = doomed.ctid
+    returning 1
+  )
+  select count(*) into rank_deleted from deleted;
+
+  return jsonb_build_object(
+    'stats_deleted', stats_deleted,
+    'rank_deleted', rank_deleted,
+    'cutoff', p_cutoff
+  );
+end;
+$$;
+
+
+ALTER FUNCTION "public"."prune_roblox_universe_hourly_history"("p_cutoff" timestamp with time zone, "p_batch_size" integer) OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_is_for_sale" boolean, "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint, "p_free_claimability" "text", "p_free_verified_at" timestamp with time zone, "p_free_verification_source" "text") RETURNS boolean
     LANGUAGE "sql" IMMUTABLE
     AS $$
   select coalesce(
     p_price_robux = 0
     and p_is_deleted = false
-    and coalesce(p_raw_economy_json ->> 'free_item_source', '') = 'robloxden'
+    and p_is_for_sale = true
     and p_has_resellers = false
     and p_lowest_resale_price_robux = 0
     and p_name is not null
     and p_category is not null
     and p_subcategory is not null
-    and p_favorite_count is not null,
+    and p_favorite_count is not null
+    and p_free_claimability = 'direct'
+    and p_free_verified_at is not null
+    and p_free_verification_source = 'roblox',
     false
   );
 $$;
 
 
-ALTER FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) OWNER TO "postgres";
+ALTER FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_is_for_sale" boolean, "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint, "p_free_claimability" "text", "p_free_verified_at" timestamp with time zone, "p_free_verification_source" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."record_stats_health_check"() RETURNS "uuid"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public'
+    AS $$
+declare
+  run_id uuid;
+  payload jsonb;
+begin
+  select jsonb_build_object(
+    'checked_at', now(),
+    'tier_counts', (
+      select coalesce(jsonb_object_agg(stats_tier, count), '{}'::jsonb)
+      from (
+        select coalesce(stats_tier, 'UNKNOWN') as stats_tier, count(*)::integer as count
+        from public.roblox_universes
+        where root_place_id is not null
+        group by coalesce(stats_tier, 'UNKNOWN')
+      ) counts
+    ),
+    'stale', jsonb_build_object(
+      'hot_over_90m', (
+        select count(*)::integer
+        from public.roblox_universes
+        where root_place_id is not null
+          and stats_tier = 'HOT'
+          and (last_stats_refreshed_at is null or last_stats_refreshed_at < now() - interval '90 minutes')
+      ),
+      'warm_over_14h', (
+        select count(*)::integer
+        from public.roblox_universes
+        where root_place_id is not null
+          and stats_tier = 'WARM'
+          and (last_stats_refreshed_at is null or last_stats_refreshed_at < now() - interval '14 hours')
+      ),
+      'cold_over_7d', (
+        select count(*)::integer
+        from public.roblox_universes
+        where root_place_id is not null
+          and stats_tier = 'COLD'
+          and (last_stats_refreshed_at is null or last_stats_refreshed_at < now() - interval '7 days')
+      ),
+      'new_total', (
+        select count(*)::integer
+        from public.roblox_universes
+        where root_place_id is not null
+          and stats_tier = 'NEW'
+      )
+    ),
+    'latest_hourly_sample', (
+      select max(hour_start)
+      from public.roblox_universe_stats_hourly
+    ),
+    'latest_hourly_rank', (
+      select max(hour_start)
+      from public.roblox_universe_rank_snapshots_hourly
+    ),
+    'latest_daily_rollup', (
+      select max(stat_date)
+      from public.roblox_universe_stats_daily
+    ),
+    'latest_daily_rank', (
+      select max(stat_date)
+      from public.roblox_universe_rank_snapshots_daily
+    )
+  )
+  into payload;
+
+  insert into public.stats_job_runs (
+    job_name,
+    worker_id,
+    started_at,
+    finished_at,
+    status,
+    metadata
+  )
+  values (
+    'stats-health-check',
+    'supabase-cron',
+    now(),
+    now(),
+    'success',
+    payload
+  )
+  returning id into run_id;
+
+  return run_id;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."record_stats_health_check"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."refresh_roblox_promo_rewards"("p_seen_rows" "jsonb", "p_checked_at" timestamp with time zone, "p_retire_after_misses" integer, "p_touch_catalog" boolean) RETURNS "jsonb"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+declare
+  v_seen_count bigint := 0;
+  v_missing_updated bigint := 0;
+  v_retired bigint := 0;
+  v_catalog_touched bigint := 0;
+begin
+  if jsonb_typeof(p_seen_rows) is distinct from 'array' then
+    raise exception 'p_seen_rows must be a JSON array';
+  end if;
+  if p_checked_at is null then
+    raise exception 'p_checked_at is required';
+  end if;
+  if p_retire_after_misses is null or p_retire_after_misses < 2 then
+    raise exception 'p_retire_after_misses must be at least 2';
+  end if;
+
+  select jsonb_array_length(p_seen_rows) into v_seen_count;
+  if v_seen_count = 0 then
+    raise exception 'p_seen_rows must not be empty';
+  end if;
+
+  perform pg_catalog.pg_advisory_xact_lock(73724570123456789);
+
+  insert into public.roblox_promo_rewards (
+    source_provider,
+    source_key,
+    source_list_url,
+    source_url,
+    asset_id,
+    roblox_item_type,
+    reward_name,
+    source_type,
+    claim_type,
+    promo_code,
+    promo_code_normalized,
+    event_name,
+    requirement_text,
+    claim_instructions,
+    destination_url,
+    roblox_item_url,
+    official_name,
+    asset_type_id,
+    creator_id,
+    creator_name,
+    thumbnail_url,
+    thumbnail_state,
+    thumbnail_checked_at,
+    status,
+    status_reason,
+    consecutive_misses,
+    sort_order,
+    source_hash,
+    last_seen_at,
+    last_checked_at,
+    verified_at,
+    retired_at,
+    raw_source_json,
+    raw_roblox_json
+  )
+  select
+    input_row.source_provider,
+    input_row.source_key,
+    input_row.source_list_url,
+    input_row.source_url,
+    input_row.asset_id,
+    input_row.roblox_item_type,
+    input_row.reward_name,
+    input_row.source_type,
+    input_row.claim_type,
+    input_row.promo_code,
+    input_row.promo_code_normalized,
+    input_row.event_name,
+    input_row.requirement_text,
+    input_row.claim_instructions,
+    input_row.destination_url,
+    input_row.roblox_item_url,
+    input_row.official_name,
+    input_row.asset_type_id,
+    input_row.creator_id,
+    input_row.creator_name,
+    input_row.thumbnail_url,
+    input_row.thumbnail_state,
+    input_row.thumbnail_checked_at,
+    input_row.status,
+    input_row.status_reason,
+    input_row.consecutive_misses,
+    input_row.sort_order,
+    input_row.source_hash,
+    input_row.last_seen_at,
+    input_row.last_checked_at,
+    input_row.verified_at,
+    input_row.retired_at,
+    input_row.raw_source_json,
+    input_row.raw_roblox_json
+  from jsonb_to_recordset(p_seen_rows) as input_row (
+    source_provider text,
+    source_key text,
+    source_list_url text,
+    source_url text,
+    asset_id bigint,
+    roblox_item_type text,
+    reward_name text,
+    source_type text,
+    claim_type text,
+    promo_code text,
+    promo_code_normalized text,
+    event_name text,
+    requirement_text text,
+    claim_instructions text,
+    destination_url text,
+    roblox_item_url text,
+    official_name text,
+    asset_type_id integer,
+    creator_id bigint,
+    creator_name text,
+    thumbnail_url text,
+    thumbnail_state text,
+    thumbnail_checked_at timestamptz,
+    status text,
+    status_reason text,
+    consecutive_misses integer,
+    sort_order integer,
+    source_hash text,
+    last_seen_at timestamptz,
+    last_checked_at timestamptz,
+    verified_at timestamptz,
+    retired_at timestamptz,
+    raw_source_json jsonb,
+    raw_roblox_json jsonb
+  )
+  on conflict (source_provider, source_key) do update set
+    source_list_url = excluded.source_list_url,
+    source_url = excluded.source_url,
+    asset_id = excluded.asset_id,
+    roblox_item_type = excluded.roblox_item_type,
+    reward_name = excluded.reward_name,
+    source_type = excluded.source_type,
+    claim_type = excluded.claim_type,
+    promo_code = excluded.promo_code,
+    promo_code_normalized = excluded.promo_code_normalized,
+    event_name = excluded.event_name,
+    requirement_text = excluded.requirement_text,
+    claim_instructions = excluded.claim_instructions,
+    destination_url = excluded.destination_url,
+    roblox_item_url = excluded.roblox_item_url,
+    official_name = excluded.official_name,
+    asset_type_id = excluded.asset_type_id,
+    creator_id = excluded.creator_id,
+    creator_name = excluded.creator_name,
+    thumbnail_url = excluded.thumbnail_url,
+    thumbnail_state = excluded.thumbnail_state,
+    thumbnail_checked_at = excluded.thumbnail_checked_at,
+    status = excluded.status,
+    status_reason = excluded.status_reason,
+    consecutive_misses = 0,
+    sort_order = excluded.sort_order,
+    source_hash = excluded.source_hash,
+    last_seen_at = excluded.last_seen_at,
+    last_checked_at = excluded.last_checked_at,
+    verified_at = excluded.verified_at,
+    retired_at = null,
+    raw_source_json = excluded.raw_source_json,
+    raw_roblox_json = excluded.raw_roblox_json;
+
+  with seen_keys as (
+    select value ->> 'source_key' as source_key
+    from jsonb_array_elements(p_seen_rows)
+  ),
+  missing_candidates as (
+    select
+      reward.id,
+      reward.consecutive_misses + 1 as next_misses,
+      reward.consecutive_misses + 1 >= p_retire_after_misses as will_retire
+    from public.roblox_promo_rewards as reward
+    where reward.source_provider = 'robloxden'
+      and reward.status <> 'inactive'
+      and not exists (
+        select 1 from seen_keys where seen_keys.source_key = reward.source_key
+      )
+  ),
+  updated_missing as (
+    update public.roblox_promo_rewards as reward
+    set
+      consecutive_misses = candidate.next_misses,
+      last_checked_at = p_checked_at,
+      status = case when candidate.will_retire then 'inactive' else reward.status end,
+      status_reason = case
+        when candidate.will_retire
+          then 'missing_from_' || p_retire_after_misses::text || '_complete_source_refreshes'
+        else reward.status_reason
+      end,
+      retired_at = case when candidate.will_retire then p_checked_at else reward.retired_at end
+    from missing_candidates as candidate
+    where reward.id = candidate.id
+    returning candidate.will_retire
+  )
+  select count(*), count(*) filter (where will_retire)
+  into v_missing_updated, v_retired
+  from updated_missing;
+
+  if p_touch_catalog then
+    update public.catalog_pages
+    set updated_at = p_checked_at
+    where code = 'roblox-promo-codes';
+    get diagnostics v_catalog_touched = row_count;
+  end if;
+
+  return jsonb_build_object(
+    'seen_count', v_seen_count,
+    'missing_updated', v_missing_updated,
+    'retired', v_retired,
+    'catalog_touched', v_catalog_touched
+  );
+end;
+$$;
+
+
+ALTER FUNCTION "public"."refresh_roblox_promo_rewards"("p_seen_rows" "jsonb", "p_checked_at" timestamp with time zone, "p_retire_after_misses" integer, "p_touch_catalog" boolean) OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."refresh_search_index_music"() RETURNS "void"
@@ -909,6 +1514,740 @@ $$;
 
 
 ALTER FUNCTION "public"."refresh_search_index_music"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."refresh_stats_creator_current_index"() RETURNS "jsonb"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'extensions'
+    SET "statement_timeout" TO '120s'
+    AS $$
+declare
+  refreshed_at timestamptz := now();
+  creator_count integer := 0;
+begin
+  perform set_config('statement_timeout', '120000', true);
+
+  delete from public.stats_creator_current_index where true;
+
+  with base as (
+    select
+      lower(g.creator_type) as creator_type,
+      g.creator_id,
+      btrim(g.creator_name) as creator_name,
+      g.universe_id,
+      g.slug,
+      g.name,
+      g.display_name,
+      g.icon_url,
+      coalesce(g.playing, 0) as playing,
+      coalesce(g.visits, 0) as visits,
+      coalesce(g.favorites, 0) as favorites,
+      coalesce(g.likes, 0) as likes,
+      coalesce(g.dislikes, 0) as dislikes,
+      g.stats_tier,
+      g.last_stats_refreshed_at,
+      u.creator_has_verified_badge,
+      groups.name as group_name,
+      groups.member_count,
+      groups.has_verified_badge as group_has_verified_badge
+    from public.stats_game_current_index g
+    left join public.roblox_universes u on u.universe_id = g.universe_id
+    left join public.roblox_groups groups
+      on lower(g.creator_type) = 'group'
+     and groups.group_id = g.creator_id
+    where g.creator_id is not null
+      and g.creator_name is not null
+      and btrim(g.creator_name) <> ''
+      and lower(g.creator_type) in ('group', 'user')
+  ),
+  ranked as (
+    select
+      *,
+      row_number() over (
+        partition by creator_type, creator_id
+        order by playing desc nulls last, visits desc nulls last, universe_id asc
+      ) as rn
+    from base
+  )
+  insert into public.stats_creator_current_index (
+    creator_key,
+    creator_type,
+    creator_id,
+    creator_name,
+    creator_slug,
+    game_count,
+    hot_game_count,
+    warm_game_count,
+    new_game_count,
+    cold_game_count,
+    playing,
+    visits,
+    favorites,
+    likes,
+    dislikes,
+    rating_percent,
+    top_universe_id,
+    top_slug,
+    top_name,
+    top_display_name,
+    top_icon_url,
+    top_playing,
+    top_visits,
+    top_favorites,
+    member_count,
+    has_verified_badge,
+    last_stats_refreshed_at,
+    indexed_at
+  )
+  select
+    creator_type || ':' || creator_id::text,
+    creator_type,
+    creator_id,
+    coalesce(max(group_name), max(creator_name) filter (where rn = 1), max(creator_name)),
+    public.slugify_stats_label(coalesce(max(group_name), max(creator_name) filter (where rn = 1), max(creator_name))) || '-' || creator_type || '-' || creator_id::text,
+    count(*)::integer,
+    count(*) filter (where stats_tier = 'HOT')::integer,
+    count(*) filter (where stats_tier = 'WARM')::integer,
+    count(*) filter (where stats_tier = 'NEW')::integer,
+    count(*) filter (where stats_tier = 'COLD')::integer,
+    coalesce(sum(playing), 0)::bigint,
+    coalesce(sum(visits), 0)::bigint,
+    coalesce(sum(favorites), 0)::bigint,
+    coalesce(sum(likes), 0)::bigint,
+    coalesce(sum(dislikes), 0)::bigint,
+    case
+      when coalesce(sum(likes), 0) + coalesce(sum(dislikes), 0) <= 0 then null
+      else round((coalesce(sum(likes), 0)::numeric / (coalesce(sum(likes), 0) + coalesce(sum(dislikes), 0))::numeric) * 1000) / 10
+    end,
+    max(universe_id) filter (where rn = 1),
+    max(slug) filter (where rn = 1),
+    max(name) filter (where rn = 1),
+    max(display_name) filter (where rn = 1),
+    max(icon_url) filter (where rn = 1),
+    max(playing) filter (where rn = 1),
+    max(visits) filter (where rn = 1),
+    max(favorites) filter (where rn = 1),
+    max(member_count),
+    case
+      when creator_type = 'group' then bool_or(coalesce(group_has_verified_badge, false))
+      else bool_or(coalesce(creator_has_verified_badge, false))
+    end,
+    max(last_stats_refreshed_at),
+    refreshed_at
+  from ranked
+  group by creator_type, creator_id;
+
+  get diagnostics creator_count = row_count;
+
+  return jsonb_build_object(
+    'indexed_at', refreshed_at,
+    'creators', creator_count
+  );
+end;
+$$;
+
+
+ALTER FUNCTION "public"."refresh_stats_creator_current_index"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."refresh_stats_current_indexes"() RETURNS "jsonb"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'extensions'
+    SET "statement_timeout" TO '120s'
+    AS $$
+declare
+  refreshed_at timestamptz := now();
+  target_24h timestamptz := date_trunc('hour', now() - interval '24 hours');
+  target_7d timestamptz := date_trunc('hour', now() - interval '7 days');
+  game_count integer := 0;
+  genre_count integer := 0;
+  riser_count integer := 0;
+begin
+  perform set_config('statement_timeout', '120000', true);
+
+  delete from public.stats_risers_current_index where true;
+  delete from public.stats_genre_current_index where true;
+  delete from public.stats_game_current_index where true;
+
+  with baseline_24h as (
+    select distinct on (h.universe_id)
+      h.universe_id,
+      h.playing
+    from public.roblox_universe_stats_hourly h
+    where h.playing is not null
+      and h.hour_start between target_24h - interval '90 minutes' and target_24h + interval '90 minutes'
+    order by h.universe_id, abs(extract(epoch from (h.hour_start - target_24h)))
+  ),
+  baseline_7d as (
+    select distinct on (h.universe_id)
+      h.universe_id,
+      h.playing
+    from public.roblox_universe_stats_hourly h
+    where h.playing is not null
+      and h.hour_start between target_7d - interval '90 minutes' and target_7d + interval '90 minutes'
+    order by h.universe_id, abs(extract(epoch from (h.hour_start - target_7d)))
+  ),
+  peak_24h as (
+    select h.universe_id, max(h.peak_playing)::bigint as peak_playing
+    from public.roblox_universe_stats_hourly h
+    where h.hour_start >= refreshed_at - interval '24 hours'
+    group by h.universe_id
+  ),
+  peak_7d as (
+    select h.universe_id, max(h.peak_playing)::bigint as peak_playing
+    from public.roblox_universe_stats_hourly h
+    where h.hour_start >= refreshed_at - interval '7 days'
+    group by h.universe_id
+  ),
+  latest_rank_hour as (
+    select max(hour_start) as hour_start
+    from public.roblox_universe_rank_snapshots_hourly
+  ),
+  latest_global_rank as (
+    select universe_id, rank_value
+    from public.roblox_universe_rank_snapshots_hourly
+    where rank_type = 'global_playing'
+      and hour_start = (select hour_start from latest_rank_hour)
+  ),
+  latest_genre_rank as (
+    select universe_id, rank_value
+    from public.roblox_universe_rank_snapshots_hourly
+    where rank_type = 'genre_playing'
+      and hour_start = (select hour_start from latest_rank_hour)
+  ),
+  latest_subgenre_rank as (
+    select universe_id, rank_value
+    from public.roblox_universe_rank_snapshots_hourly
+    where rank_type = 'subgenre_playing'
+      and hour_start = (select hour_start from latest_rank_hour)
+  )
+  insert into public.stats_game_current_index (
+    universe_id,
+    root_place_id,
+    slug,
+    name,
+    display_name,
+    description,
+    creator_id,
+    creator_name,
+    creator_type,
+    genre,
+    genre_l1,
+    genre_l2,
+    age_rating,
+    icon_url,
+    thumbnail_urls,
+    playing,
+    visits,
+    favorites,
+    likes,
+    dislikes,
+    rating_percent,
+    stats_tier,
+    created_at_api,
+    updated_at_api,
+    last_stats_refreshed_at,
+    last_playing_refreshed_at,
+    desktop_enabled,
+    mobile_enabled,
+    tablet_enabled,
+    console_enabled,
+    vr_enabled,
+    baseline_playing_24h,
+    baseline_playing_7d,
+    growth_24h,
+    growth_24h_percent,
+    growth_7d,
+    growth_7d_percent,
+    peak_24h,
+    peak_7d,
+    global_playing_rank,
+    genre_playing_rank,
+    subgenre_playing_rank,
+    indexed_at
+  )
+  select
+    u.universe_id,
+    u.root_place_id,
+    u.slug,
+    u.name,
+    u.display_name,
+    u.description,
+    u.creator_id,
+    u.creator_name,
+    u.creator_type,
+    u.genre,
+    u.genre_l1,
+    u.genre_l2,
+    u.age_rating,
+    u.icon_url,
+    coalesce(u.thumbnail_urls, '[]'::jsonb),
+    u.playing,
+    u.visits,
+    u.favorites,
+    u.likes,
+    u.dislikes,
+    case
+      when coalesce(u.likes, 0) + coalesce(u.dislikes, 0) <= 0 then null
+      else round((coalesce(u.likes, 0)::numeric / (coalesce(u.likes, 0) + coalesce(u.dislikes, 0))::numeric) * 1000) / 10
+    end,
+    u.stats_tier,
+    u.created_at_api,
+    u.updated_at_api,
+    u.last_stats_refreshed_at,
+    u.last_playing_refreshed_at,
+    u.desktop_enabled,
+    u.mobile_enabled,
+    u.tablet_enabled,
+    u.console_enabled,
+    u.vr_enabled,
+    baseline_24h.playing,
+    baseline_7d.playing,
+    case when u.playing is not null and baseline_24h.playing is not null then u.playing - baseline_24h.playing else null end,
+    public.percent_delta(u.playing::numeric, baseline_24h.playing::numeric),
+    case when u.playing is not null and baseline_7d.playing is not null then u.playing - baseline_7d.playing else null end,
+    public.percent_delta(u.playing::numeric, baseline_7d.playing::numeric),
+    peak_24h.peak_playing,
+    peak_7d.peak_playing,
+    latest_global_rank.rank_value,
+    latest_genre_rank.rank_value,
+    latest_subgenre_rank.rank_value,
+    refreshed_at
+  from public.roblox_universes u
+  left join baseline_24h on baseline_24h.universe_id = u.universe_id
+  left join baseline_7d on baseline_7d.universe_id = u.universe_id
+  left join peak_24h on peak_24h.universe_id = u.universe_id
+  left join peak_7d on peak_7d.universe_id = u.universe_id
+  left join latest_global_rank on latest_global_rank.universe_id = u.universe_id
+  left join latest_genre_rank on latest_genre_rank.universe_id = u.universe_id
+  left join latest_subgenre_rank on latest_subgenre_rank.universe_id = u.universe_id
+  where u.slug is not null;
+
+  get diagnostics game_count = row_count;
+
+  with ranked as (
+    select
+      public.slugify_stats_label(coalesce(nullif(btrim(genre_l1), ''), 'Uncategorized')) as genre_slug,
+      coalesce(nullif(btrim(genre_l1), ''), 'Uncategorized') as genre,
+      universe_id,
+      name,
+      slug,
+      icon_url,
+      playing,
+      visits,
+      row_number() over (
+        partition by coalesce(nullif(btrim(genre_l1), ''), 'Uncategorized')
+        order by playing desc nulls last, universe_id asc
+      ) as rn
+    from public.stats_game_current_index
+  )
+  insert into public.stats_genre_current_index (
+    genre_slug,
+    genre,
+    games,
+    playing,
+    visits,
+    top_universe_id,
+    top_name,
+    top_slug,
+    top_icon_url,
+    top_playing,
+    indexed_at
+  )
+  select
+    genre_slug,
+    min(genre) as genre,
+    count(*)::integer as games,
+    coalesce(sum(playing), 0)::bigint as playing,
+    coalesce(sum(visits), 0)::bigint as visits,
+    max(universe_id) filter (where rn = 1) as top_universe_id,
+    max(name) filter (where rn = 1) as top_name,
+    max(slug) filter (where rn = 1) as top_slug,
+    max(icon_url) filter (where rn = 1) as top_icon_url,
+    max(playing) filter (where rn = 1) as top_playing,
+    refreshed_at
+  from ranked
+  group by genre_slug;
+
+  get diagnostics genre_count = row_count;
+
+  with eligible as (
+    select
+      universe_id,
+      slug,
+      name,
+      icon_url,
+      nullif(btrim(genre_l1), '') as genre,
+      playing,
+      baseline_playing_24h,
+      growth_24h,
+      growth_24h_percent,
+      (
+        least(greatest(coalesce(growth_24h, 0), 0), 50000)::numeric / 50000 * 55
+        + least(greatest(coalesce(growth_24h_percent, 0), 0), 300)::numeric / 300 * 30
+        + least(log(greatest(coalesce(playing, 1), 1)::numeric) / log(1000000::numeric), 1) * 15
+      ) as riser_score
+    from public.stats_game_current_index
+    where playing >= 1000
+      and baseline_playing_24h is not null
+      and growth_24h is not null
+      and growth_24h > 0
+      and growth_24h_percent is not null
+  ),
+  ranked as (
+    select
+      *,
+      row_number() over (order by riser_score desc, growth_24h desc, playing desc, universe_id asc) as rank_value
+    from eligible
+  )
+  insert into public.stats_risers_current_index (
+    universe_id,
+    slug,
+    name,
+    icon_url,
+    genre,
+    playing,
+    baseline_playing_24h,
+    growth_24h,
+    growth_24h_percent,
+    riser_score,
+    eligibility_threshold,
+    rank_value,
+    indexed_at
+  )
+  select
+    universe_id,
+    slug,
+    name,
+    icon_url,
+    genre,
+    playing,
+    baseline_playing_24h,
+    growth_24h,
+    growth_24h_percent,
+    riser_score,
+    1000,
+    rank_value,
+    refreshed_at
+  from ranked;
+
+  get diagnostics riser_count = row_count;
+
+  return jsonb_build_object(
+    'indexed_at', refreshed_at,
+    'games', game_count,
+    'genres', genre_count,
+    'risers', riser_count
+  );
+end;
+$$;
+
+
+ALTER FUNCTION "public"."refresh_stats_current_indexes"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."refresh_stats_item_current_indexes"() RETURNS "jsonb"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public', 'extensions'
+    AS $$
+declare
+  refreshed_at timestamptz := now();
+  item_count integer := 0;
+  mover_count integer := 0;
+begin
+  delete from public.stats_item_price_movers_current_index where true;
+  delete from public.stats_item_current_index where true;
+
+  with source_items_base as (
+    select
+      item.*,
+      image.image_url as thumbnail_url,
+      image.state as thumbnail_state,
+      image.updated_at as thumbnail_updated_at
+    from public.roblox_catalog_items item
+    left join lateral (
+      select i.image_url, i.state, i.updated_at
+      from public.roblox_catalog_item_images i
+      where i.asset_id = item.asset_id
+        and i.image_url is not null
+      order by
+        case when i.size = '420x420' then 0 else 1 end,
+        case when i.format = 'Png' then 0 else 1 end,
+        i.updated_at desc
+      limit 1
+    ) image on true
+    where item.is_deleted = false
+      and item.name is not null
+      and item.category is not null
+      and item.subcategory is not null
+      and item.favorite_count is not null
+  ),
+  source_items as (
+    select distinct on (
+      case
+        when item_type = 'Bundle' then 'Bundle:' || abs(asset_id)::text
+        else 'Asset:' || asset_id::text
+      end
+    )
+      *
+    from source_items_base
+    order by
+      case
+        when item_type = 'Bundle' then 'Bundle:' || abs(asset_id)::text
+        else 'Asset:' || asset_id::text
+      end,
+      favorite_count desc nulls last,
+      last_item_stats_refreshed_at desc nulls last,
+      case when item_type = 'Bundle' and asset_id < 0 then 0 else 1 end,
+      asset_id asc
+  ),
+  enriched as (
+    select
+      item.*,
+      baseline_24h.price_robux as baseline_price_24h,
+      baseline_24h.lowest_resale_price_robux as baseline_resale_24h,
+      baseline_24h.favorite_count as baseline_favorites_24h,
+      baseline_7d.price_robux as baseline_price_7d,
+      baseline_7d.lowest_resale_price_robux as baseline_resale_7d,
+      baseline_7d.favorite_count as baseline_favorites_7d
+    from source_items item
+    left join lateral (
+      select h.price_robux, h.lowest_resale_price_robux, h.favorite_count
+      from public.roblox_catalog_item_stats_hourly h
+      where h.asset_id = item.asset_id
+        and h.hour_start between refreshed_at - interval '25 hours 30 minutes' and refreshed_at - interval '22 hours 30 minutes'
+      order by abs(extract(epoch from (h.hour_start - (refreshed_at - interval '24 hours'))))
+      limit 1
+    ) baseline_24h on true
+    left join lateral (
+      select h.price_robux, h.lowest_resale_price_robux, h.favorite_count
+      from public.roblox_catalog_item_stats_hourly h
+      where h.asset_id = item.asset_id
+        and h.hour_start between refreshed_at - interval '7 days 90 minutes' and refreshed_at - interval '7 days' + interval '90 minutes'
+      order by abs(extract(epoch from (h.hour_start - (refreshed_at - interval '7 days'))))
+      limit 1
+    ) baseline_7d on true
+  ),
+  ranked as (
+    select
+      enriched.*,
+      row_number() over (order by favorite_count desc nulls last, asset_id asc)::integer as global_favorites_rank,
+      case
+        when has_resellers = true and lowest_resale_price_robux > 0
+          then row_number() over (
+            partition by (has_resellers = true and lowest_resale_price_robux > 0)
+            order by lowest_resale_price_robux asc nulls last, favorite_count desc nulls last, asset_id asc
+          )::integer
+        else null
+      end as global_resale_rank,
+      row_number() over (partition by category order by favorite_count desc nulls last, asset_id asc)::integer as category_favorites_rank,
+      case
+        when has_resellers = true and lowest_resale_price_robux > 0
+          then row_number() over (
+            partition by category, (has_resellers = true and lowest_resale_price_robux > 0)
+            order by lowest_resale_price_robux asc nulls last, favorite_count desc nulls last, asset_id asc
+          )::integer
+        else null
+      end as category_resale_rank
+    from enriched
+  )
+  insert into public.stats_item_current_index (
+    asset_id,
+    item_type,
+    asset_type_id,
+    name,
+    description,
+    category,
+    subcategory,
+    creator_id,
+    creator_target_id,
+    creator_name,
+    creator_type,
+    creator_has_verified_badge,
+    price_robux,
+    price_status,
+    lowest_price_robux,
+    lowest_resale_price_robux,
+    is_for_sale,
+    has_resellers,
+    is_limited,
+    is_limited_unique,
+    remaining,
+    total_quantity,
+    units_available_for_consumption,
+    quantity_limit_per_user,
+    sale_location_type,
+    off_sale_deadline,
+    collectible_item_id,
+    favorite_count,
+    item_stats_tier,
+    first_seen_at,
+    created_at,
+    last_seen_at,
+    last_item_stats_refreshed_at,
+    last_resale_data_fetched_at,
+    last_thumbnail_health_checked_at,
+    thumbnail_http_status,
+    thumbnail_state,
+    thumbnail_url,
+    thumbnail_updated_at,
+    roblox_url,
+    baseline_price_24h,
+    baseline_resale_24h,
+    baseline_favorites_24h,
+    price_change_24h,
+    price_change_24h_percent,
+    resale_change_24h,
+    resale_change_24h_percent,
+    favorite_change_24h,
+    favorite_change_24h_percent,
+    baseline_price_7d,
+    baseline_resale_7d,
+    baseline_favorites_7d,
+    price_change_7d,
+    price_change_7d_percent,
+    resale_change_7d,
+    resale_change_7d_percent,
+    favorite_change_7d,
+    favorite_change_7d_percent,
+    global_favorites_rank,
+    global_resale_rank,
+    category_favorites_rank,
+    category_resale_rank,
+    indexed_at
+  )
+  select
+    asset_id,
+    item_type,
+    asset_type_id,
+    name,
+    description,
+    category,
+    subcategory,
+    creator_id,
+    creator_target_id,
+    creator_name,
+    creator_type,
+    creator_has_verified_badge,
+    price_robux,
+    price_status,
+    lowest_price_robux,
+    lowest_resale_price_robux,
+    is_for_sale,
+    has_resellers,
+    is_limited,
+    is_limited_unique,
+    remaining,
+    total_quantity,
+    units_available_for_consumption,
+    quantity_limit_per_user,
+    sale_location_type,
+    off_sale_deadline,
+    collectible_item_id,
+    favorite_count,
+    item_stats_tier,
+    first_seen_at,
+    created_at,
+    last_seen_at,
+    last_item_stats_refreshed_at,
+    last_resale_data_fetched_at,
+    last_thumbnail_health_checked_at,
+    thumbnail_http_status,
+    thumbnail_state,
+    thumbnail_url,
+    thumbnail_updated_at,
+    public.stats_item_roblox_url(asset_id, item_type, raw_catalog_json),
+    baseline_price_24h,
+    baseline_resale_24h,
+    baseline_favorites_24h,
+    case when price_robux is not null and baseline_price_24h is not null then price_robux - baseline_price_24h else null end,
+    public.stats_item_percent_delta(price_robux::numeric, baseline_price_24h::numeric),
+    case when lowest_resale_price_robux is not null and baseline_resale_24h is not null then lowest_resale_price_robux - baseline_resale_24h else null end,
+    public.stats_item_percent_delta(lowest_resale_price_robux::numeric, baseline_resale_24h::numeric),
+    case when favorite_count is not null and baseline_favorites_24h is not null then favorite_count - baseline_favorites_24h else null end,
+    public.stats_item_percent_delta(favorite_count::numeric, baseline_favorites_24h::numeric),
+    baseline_price_7d,
+    baseline_resale_7d,
+    baseline_favorites_7d,
+    case when price_robux is not null and baseline_price_7d is not null then price_robux - baseline_price_7d else null end,
+    public.stats_item_percent_delta(price_robux::numeric, baseline_price_7d::numeric),
+    case when lowest_resale_price_robux is not null and baseline_resale_7d is not null then lowest_resale_price_robux - baseline_resale_7d else null end,
+    public.stats_item_percent_delta(lowest_resale_price_robux::numeric, baseline_resale_7d::numeric),
+    case when favorite_count is not null and baseline_favorites_7d is not null then favorite_count - baseline_favorites_7d else null end,
+    public.stats_item_percent_delta(favorite_count::numeric, baseline_favorites_7d::numeric),
+    global_favorites_rank,
+    global_resale_rank,
+    category_favorites_rank,
+    category_resale_rank,
+    refreshed_at
+  from ranked;
+
+  get diagnostics item_count = row_count;
+
+  insert into public.stats_item_price_movers_current_index (
+    asset_id,
+    name,
+    item_type,
+    category,
+    subcategory,
+    creator_name,
+    thumbnail_url,
+    price_robux,
+    lowest_resale_price_robux,
+    resale_change_24h,
+    resale_change_24h_percent,
+    price_change_24h,
+    price_change_24h_percent,
+    favorite_change_24h,
+    mover_score,
+    rank_value,
+    indexed_at
+  )
+  select
+    asset_id,
+    name,
+    item_type,
+    category,
+    subcategory,
+    creator_name,
+    thumbnail_url,
+    price_robux,
+    lowest_resale_price_robux,
+    resale_change_24h,
+    resale_change_24h_percent,
+    price_change_24h,
+    price_change_24h_percent,
+    favorite_change_24h,
+    (
+      coalesce(abs(resale_change_24h_percent), 0) * 10
+      + coalesce(abs(price_change_24h_percent), 0) * 5
+      + least(coalesce(abs(favorite_change_24h), 0), 100000)::numeric / 1000
+    ) as mover_score,
+    row_number() over (
+      order by (
+        coalesce(abs(resale_change_24h_percent), 0) * 10
+        + coalesce(abs(price_change_24h_percent), 0) * 5
+        + least(coalesce(abs(favorite_change_24h), 0), 100000)::numeric / 1000
+      ) desc, asset_id asc
+    )::integer as rank_value,
+    refreshed_at
+  from public.stats_item_current_index
+  where coalesce(abs(resale_change_24h_percent), abs(price_change_24h_percent), abs(favorite_change_24h)) is not null
+  order by mover_score desc nulls last, asset_id asc
+  limit 500;
+
+  get diagnostics mover_count = row_count;
+
+  return jsonb_build_object(
+    'items', item_count,
+    'price_movers', mover_count,
+    'indexed_at', refreshed_at
+  );
+end;
+$$;
+
+
+ALTER FUNCTION "public"."refresh_stats_item_current_indexes"() OWNER TO "supabase_admin";
 
 
 CREATE OR REPLACE FUNCTION "public"."revalidation_slugify"("p_value" "text") RETURNS "text"
@@ -1080,38 +2419,114 @@ $$;
 ALTER FUNCTION "public"."rollup_roblox_universe_stats_daily"("p_stat_date" "date", "p_finalize" boolean, "p_universe_ids" bigint[]) OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer DEFAULT NULL::integer) RETURNS TABLE("universe_id" bigint, "rank" integer, "metric_value" numeric, "reason" "text", "extra" "jsonb", "game_id" "uuid", "playing" bigint, "visits" bigint, "favorites" bigint, "likes" bigint, "dislikes" bigint)
-    LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
+CREATE OR REPLACE FUNCTION "public"."run_roblox_universe_hourly_prune"("p_days" integer DEFAULT 90, "p_batch_size" integer DEFAULT 5000, "p_max_batches" integer DEFAULT 200) RETURNS "jsonb"
+    LANGUAGE "plpgsql" SECURITY DEFINER
+    SET "search_path" TO 'public'
     AS $$
 declare
-  trimmed text;
-  capped_limit int;
+  cutoff timestamptz := date_trunc('hour', now() - make_interval(days => greatest(p_days, 1)));
+  batch integer;
+  result jsonb;
+  stats_deleted integer;
+  rank_deleted integer;
+  total_stats_deleted integer := 0;
+  total_rank_deleted integer := 0;
 begin
-  if sql_text is null or length(trim(sql_text)) = 0 then
-    raise exception 'sql_text is required';
-  end if;
+  for batch in 1..greatest(p_max_batches, 1) loop
+    result := public.prune_roblox_universe_hourly_history(cutoff, greatest(p_batch_size, 1));
+    stats_deleted := coalesce((result->>'stats_deleted')::integer, 0);
+    rank_deleted := coalesce((result->>'rank_deleted')::integer, 0);
+    total_stats_deleted := total_stats_deleted + stats_deleted;
+    total_rank_deleted := total_rank_deleted + rank_deleted;
+    exit when stats_deleted < greatest(p_batch_size, 1)
+      and rank_deleted < greatest(p_batch_size, 1);
+  end loop;
 
-  trimmed := ltrim(sql_text);
-  if lower(left(trimmed, 6)) <> 'select' then
-    raise exception 'sql_text must start with SELECT';
-  end if;
+  insert into public.stats_job_runs (
+    job_name,
+    worker_id,
+    started_at,
+    finished_at,
+    status,
+    rows_succeeded,
+    metadata
+  )
+  values (
+    'hourly-history-prune',
+    'supabase-cron',
+    now(),
+    now(),
+    'success',
+    total_stats_deleted + total_rank_deleted,
+    jsonb_build_object(
+      'cutoff', cutoff,
+      'days', p_days,
+      'batch_size', p_batch_size,
+      'max_batches', p_max_batches,
+      'stats_deleted', total_stats_deleted,
+      'rank_deleted', total_rank_deleted
+    )
+  );
 
-  capped_limit := nullif(limit_count, 0);
-
-  return query execute format(
-    'select * from (%s) as src(universe_id, rank, metric_value, reason, extra, game_id, playing, visits, favorites, likes, dislikes) %s',
-    sql_text,
-    case
-      when capped_limit is null then ''
-      else format('limit %s', capped_limit)
-    end
+  return jsonb_build_object(
+    'cutoff', cutoff,
+    'stats_deleted', total_stats_deleted,
+    'rank_deleted', total_rank_deleted
   );
 end;
 $$;
 
 
-ALTER FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer) OWNER TO "postgres";
+ALTER FUNCTION "public"."run_roblox_universe_hourly_prune"("p_days" integer, "p_batch_size" integer, "p_max_batches" integer) OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."sanitize_stats_creator_top_player"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO 'public'
+    AS $$
+begin
+  if new.top_universe_id is not null and not exists (
+    select 1
+    from public.stats_game_current_index g
+    where g.universe_id = new.top_universe_id
+      and g.playing is not null
+  ) then
+    new.top_playing := null;
+  end if;
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."sanitize_stats_creator_top_player"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."sanitize_stats_game_current_player"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO 'public'
+    AS $$
+begin
+  if new.last_playing_refreshed_at is null
+    or new.last_playing_refreshed_at < now() - interval '24 hours'
+  then
+    new.playing := null;
+    new.baseline_playing_24h := null;
+    new.baseline_playing_7d := null;
+    new.growth_24h := null;
+    new.growth_24h_percent := null;
+    new.growth_7d := null;
+    new.growth_7d_percent := null;
+    new.peak_24h := null;
+    new.global_playing_rank := null;
+    new.genre_playing_rank := null;
+    new.subgenre_playing_rank := null;
+  end if;
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."sanitize_stats_game_current_player"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."search_site"("p_query" "text", "p_limit" integer DEFAULT 120, "p_offset" integer DEFAULT 0) RETURNS TABLE("entity_type" "text", "entity_id" "text", "slug" "text", "title" "text", "subtitle" "text", "url" "text", "updated_at" timestamp with time zone, "active_code_count" bigint)
@@ -1138,13 +2553,13 @@ begin
     si.title,
     si.subtitle,
     si.url,
-    coalesce(g.content_updated_at, si.updated_at) as updated_at,
-    case when si.entity_type = 'code' then g.active_code_count else null end as active_code_count
+    coalesce(cp.content_updated_at, si.updated_at) as updated_at,
+    case when si.entity_type = 'code' then cp.active_code_count else null end as active_code_count
   from public.search_index si
   cross join q
-  left join public.game_pages_index_view g
+  left join public.code_pages_index_view cp
     on si.entity_type = 'code'
-    and g.id::text = si.entity_id
+    and cp.id::text = si.entity_id
   where si.is_published = true
     and (
       si.search_vector @@ q.tsq
@@ -1233,22 +2648,22 @@ $$;
 ALTER FUNCTION "public"."set_checklist_published_at"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."set_game_published_at"() RETURNS "trigger"
+CREATE OR REPLACE FUNCTION "public"."set_code_page_published_at"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 begin
-  if NEW.is_published = true
-     and (OLD.is_published is distinct from true)
-     and NEW.published_at is null then
-    NEW.published_at := now();
+  if new.is_published = true
+     and (old.is_published is distinct from true)
+     and new.published_at is null then
+    new.published_at := now();
   end if;
-  return NEW;
+  return new;
 end;
 $$;
 
 
-ALTER FUNCTION "public"."set_game_published_at"() OWNER TO "postgres";
+ALTER FUNCTION "public"."set_code_page_published_at"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."set_google_indexing_url_state_updated_at"() RETURNS "trigger"
@@ -1350,6 +2765,129 @@ $$;
 ALTER FUNCTION "public"."set_wiki_page_published_at"() OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."slugify_stats_label"("p_value" "text") RETURNS "text"
+    LANGUAGE "sql" IMMUTABLE
+    AS $$
+  select coalesce(nullif(regexp_replace(lower(coalesce(p_value, 'uncategorized')), '[^a-z0-9]+', '-', 'g'), ''), 'uncategorized');
+$$;
+
+
+ALTER FUNCTION "public"."slugify_stats_label"("p_value" "text") OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."stats_item_percent_delta"("p_current" numeric, "p_previous" numeric) RETURNS numeric
+    LANGUAGE "sql" IMMUTABLE
+    AS $$
+  select case
+    when p_current is null or p_previous is null or p_previous = 0 then null
+    else round(((p_current - p_previous) / p_previous) * 100, 2)
+  end;
+$$;
+
+
+ALTER FUNCTION "public"."stats_item_percent_delta"("p_current" numeric, "p_previous" numeric) OWNER TO "supabase_admin";
+
+
+CREATE OR REPLACE FUNCTION "public"."stats_item_roblox_url"("p_asset_id" bigint, "p_item_type" "text", "p_raw_catalog_json" "jsonb") RETURNS "text"
+    LANGUAGE "sql" IMMUTABLE
+    AS $$
+  select coalesce(
+    nullif(p_raw_catalog_json ->> 'roblox_url', ''),
+    case
+      when p_item_type = 'Bundle' then 'https://www.roblox.com/bundles/' || abs(p_asset_id)::text
+      else 'https://www.roblox.com/catalog/' || p_asset_id::text
+    end
+  );
+$$;
+
+
+ALTER FUNCTION "public"."stats_item_roblox_url"("p_asset_id" bigint, "p_item_type" "text", "p_raw_catalog_json" "jsonb") OWNER TO "supabase_admin";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_canonicalize_article_media"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+begin
+  new.cover_image := replace(replace(new.cover_image,
+    'https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/'),
+    'https://database.bloxodes.com/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/');
+  new.content_md := replace(replace(new.content_md,
+    'https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/'),
+    'https://database.bloxodes.com/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/');
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_canonicalize_article_media"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_canonicalize_article_source_media"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+begin
+  new.public_url := replace(replace(new.public_url,
+    'https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/'),
+    'https://database.bloxodes.com/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/');
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_canonicalize_article_source_media"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_canonicalize_code_page_media"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    SET "search_path" TO ''
+    AS $$
+begin
+  new.cover_image := replace(replace(new.cover_image,
+    'https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/'),
+    'https://database.bloxodes.com/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/');
+  new.intro_md := replace(replace(new.intro_md,
+    'https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/'),
+    'https://database.bloxodes.com/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/');
+  new.redeem_md := replace(replace(new.redeem_md,
+    'https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/'),
+    'https://database.bloxodes.com/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/');
+  new.rewards_md := replace(replace(new.rewards_md,
+    'https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/'),
+    'https://database.bloxodes.com/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/');
+  new.troubleshoot_md := replace(replace(new.troubleshoot_md,
+    'https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/'),
+    'https://database.bloxodes.com/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/');
+  new.find_codes_md := replace(replace(new.find_codes_md,
+    'https://bmwksaykcsndsvgspapz.supabase.co/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/'),
+    'https://database.bloxodes.com/storage/v1/object/public/',
+    'https://media.bloxodes.com/storage/v1/object/public/');
+  return new;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_canonicalize_code_page_media"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."trg_comments_revalidate_code"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
@@ -1357,9 +2895,9 @@ CREATE OR REPLACE FUNCTION "public"."trg_comments_revalidate_code"() RETURNS "tr
 begin
   if new.entity_type = 'code' and new.status = 'approved' and (tg_op = 'INSERT' or old.status is distinct from new.status) then
     insert into public.revalidation_events (entity_type, slug, source)
-    select 'code', g.slug, 'comment'
-    from public.games g
-    where g.id = new.entity_id
+    select 'code', cp.slug, 'comment'
+    from public.code_pages cp
+    where cp.id = new.entity_id
     on conflict (entity_type, slug)
     do update set
       source = excluded.source,
@@ -1379,91 +2917,53 @@ CREATE OR REPLACE FUNCTION "public"."trg_comments_revalidate_entity"() RETURNS "
 declare
   target_entity_type text;
   target_entity_id uuid;
-  should_revalidate boolean := false;
+  event_source text;
 begin
   if tg_op = 'DELETE' then
     target_entity_type := old.entity_type;
     target_entity_id := old.entity_id;
-    should_revalidate := old.status = 'approved';
-  elsif tg_op = 'INSERT' then
-    target_entity_type := new.entity_type;
-    target_entity_id := new.entity_id;
-    should_revalidate := new.status = 'approved';
+    event_source := 'comments_delete';
   else
     target_entity_type := new.entity_type;
     target_entity_id := new.entity_id;
-    should_revalidate :=
-      old.status = 'approved'
-      or new.status = 'approved'
-      or old.body_md is distinct from new.body_md
-      or old.entity_type is distinct from new.entity_type
-      or old.entity_id is distinct from new.entity_id;
-  end if;
-
-  if not should_revalidate or target_entity_id is null then
-    return null;
+    event_source := 'comments_' || lower(tg_op);
   end if;
 
   if target_entity_type = 'code' then
-    insert into public.revalidation_events (entity_type, slug, source)
-    select 'code', lower(g.slug), 'comments_code_' || lower(tg_op)
-    from public.games g
-    where g.id = target_entity_id
-      and g.is_published = true
-      and g.slug is not null
-      and trim(g.slug) <> ''
-    on conflict (entity_type, slug)
-    do update set created_at = now(), source = excluded.source;
+    insert into public.revalidation_events(entity_type, slug, source)
+    select 'code', lower(g.slug), event_source
+    from public.code_pages g
+    where g.id = target_entity_id;
   elsif target_entity_type = 'article' then
-    insert into public.revalidation_events (entity_type, slug, source)
-    select 'article', lower(a.slug), 'comments_article_' || lower(tg_op)
+    insert into public.revalidation_events(entity_type, slug, source)
+    select 'article', lower(a.slug), event_source
     from public.articles a
-    where a.id = target_entity_id
-      and a.is_published = true
-      and a.slug is not null
-      and trim(a.slug) <> ''
-    on conflict (entity_type, slug)
-    do update set created_at = now(), source = excluded.source;
+    where a.id = target_entity_id;
   elsif target_entity_type = 'catalog' then
-    insert into public.revalidation_events (entity_type, slug, source)
-    select 'catalog', lower(c.code), 'comments_catalog_' || lower(tg_op)
+    insert into public.revalidation_events(entity_type, slug, source)
+    select 'catalog', lower(c.code), event_source
     from public.catalog_pages c
-    where c.id = target_entity_id
-      and c.is_published = true
-      and c.code is not null
-      and trim(c.code) <> ''
-    on conflict (entity_type, slug)
-    do update set created_at = now(), source = excluded.source;
+    where c.id = target_entity_id;
   elsif target_entity_type = 'event' then
-    insert into public.revalidation_events (entity_type, slug, source)
-    select 'event', lower(e.slug), 'comments_event_' || lower(tg_op)
+    insert into public.revalidation_events(entity_type, slug, source)
+    select 'event', lower(e.slug), event_source
     from public.events_pages e
-    where e.id = target_entity_id
-      and e.is_published = true
-      and e.slug is not null
-      and trim(e.slug) <> ''
-    on conflict (entity_type, slug)
-    do update set created_at = now(), source = excluded.source;
-  elsif target_entity_type = 'list' then
-    insert into public.revalidation_events (entity_type, slug, source)
-    select 'list', lower(gl.slug), 'comments_list_' || lower(tg_op)
-    from public.game_lists gl
-    where gl.id = target_entity_id
-      and gl.is_published = true
-      and gl.slug is not null
-      and trim(gl.slug) <> ''
-    on conflict (entity_type, slug)
-    do update set created_at = now(), source = excluded.source;
+    where e.id = target_entity_id;
   elsif target_entity_type = 'tool' then
-    insert into public.revalidation_events (entity_type, slug, source)
-    select 'tool', lower(t.code), 'comments_tool_' || lower(tg_op)
+    insert into public.revalidation_events(entity_type, slug, source)
+    select 'tool', lower(t.code), event_source
     from public.tools t
-    where t.id = target_entity_id
-      and t.is_published = true
-      and t.code is not null
-      and trim(t.code) <> ''
-    on conflict (entity_type, slug)
-    do update set created_at = now(), source = excluded.source;
+    where t.id = target_entity_id;
+  elsif target_entity_type = 'wiki' then
+    insert into public.revalidation_events(entity_type, slug, source)
+    select 'wiki', lower(w.slug), event_source
+    from public.wiki_pages w
+    where w.id = target_entity_id;
+  elsif target_entity_type = 'wiki_collection' then
+    insert into public.revalidation_events(entity_type, slug, source)
+    select 'wiki_collection', lower(wcp.wiki_slug || '/' || wcp.collection_slug), event_source
+    from public.wiki_collection_pages wcp
+    where wcp.id = target_entity_id;
   end if;
 
   return null;
@@ -1725,31 +3225,64 @@ $$;
 ALTER FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_code_pages"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  if tg_op = 'DELETE' then
+    if old.is_published = true then
+      perform public.enqueue_revalidation('code', old.slug, 'code_pages_delete');
+      perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'code_pages_wiki_delete');
+    end if;
+    return null;
+  end if;
+
+  if new.is_published = true then
+    perform public.enqueue_revalidation('code', new.slug, 'code_pages_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'code_pages_wiki_' || lower(tg_op));
+  end if;
+
+  if tg_op = 'UPDATE' and old.is_published = true then
+    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'code_pages_wiki_update_old');
+
+    if old.slug is distinct from new.slug or new.is_published is distinct from true then
+      perform public.enqueue_revalidation('code', old.slug, 'code_pages_old_slug_or_unpublish');
+    end if;
+  end if;
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_code_pages"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_codes"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     AS $$
 declare
-  target_game_ids uuid[];
-  game_record record;
+  target_code_page_ids uuid[];
+  code_page_record record;
 begin
   if tg_op = 'DELETE' then
-    target_game_ids := array_remove(array[old.game_id], null);
+    target_code_page_ids := array_remove(array[old.code_page_id], null);
   elsif tg_op = 'INSERT' then
-    target_game_ids := array_remove(array[new.game_id], null);
+    target_code_page_ids := array_remove(array[new.code_page_id], null);
   else
-    target_game_ids := array_remove(array[old.game_id, new.game_id], null);
+    target_code_page_ids := array_remove(array[old.code_page_id, new.code_page_id], null);
   end if;
 
-  for game_record in
-    select distinct g.id, g.slug, g.universe_id
-    from public.games g
-    where g.id = any(target_game_ids)
-      and g.is_published = true
-      and g.slug is not null
-      and trim(g.slug) <> ''
+  for code_page_record in
+    select distinct cp.id, cp.slug, cp.universe_id
+    from public.code_pages cp
+    where cp.id = any(target_code_page_ids)
+      and cp.is_published = true
+      and cp.slug is not null
+      and trim(cp.slug) <> ''
   loop
-    perform public.enqueue_revalidation('code', game_record.slug, 'codes_' || lower(tg_op));
-    perform public.enqueue_list_revalidation_for_universe(game_record.universe_id, 'codes_lists_' || lower(tg_op));
+    perform public.enqueue_revalidation('code', code_page_record.slug, 'codes_' || lower(tg_op));
+    perform public.enqueue_wiki_revalidation_for_universe(code_page_record.universe_id, 'codes_wiki_' || lower(tg_op));
   end loop;
 
   return null;
@@ -1758,6 +3291,19 @@ $$;
 
 
 ALTER FUNCTION "public"."trg_enqueue_revalidation_codes"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_decal_ids"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  perform public.enqueue_revalidation('catalog', 'roblox-decal-ids', 'roblox_decal_ids_' || lower(tg_op));
+  return coalesce(new, old);
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_decal_ids"() OWNER TO "supabase_admin";
 
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_events_pages"() RETURNS "trigger"
@@ -1809,13 +3355,16 @@ begin
   if public.qualifies_for_free_items_catalog(
     item_record.price_robux,
     item_record.is_deleted,
-    item_record.raw_economy_json,
+    item_record.is_for_sale,
     item_record.has_resellers,
     item_record.lowest_resale_price_robux,
     item_record.name,
     item_record.category,
     item_record.subcategory,
-    item_record.favorite_count
+    item_record.favorite_count,
+    item_record.free_claimability,
+    item_record.free_verified_at,
+    item_record.free_verification_source
   ) then
     perform public.enqueue_revalidation('catalog', 'free-roblox-items', 'roblox_catalog_item_images_' || lower(tg_op));
     perform public.enqueue_free_items_catalog_scope(
@@ -1844,13 +3393,16 @@ begin
     old_qualifies := public.qualifies_for_free_items_catalog(
       old.price_robux,
       old.is_deleted,
-      old.raw_economy_json,
+      old.is_for_sale,
       old.has_resellers,
       old.lowest_resale_price_robux,
       old.name,
       old.category,
       old.subcategory,
-      old.favorite_count
+      old.favorite_count,
+      old.free_claimability,
+      old.free_verified_at,
+      old.free_verification_source
     );
   end if;
 
@@ -1858,13 +3410,16 @@ begin
     new_qualifies := public.qualifies_for_free_items_catalog(
       new.price_robux,
       new.is_deleted,
-      new.raw_economy_json,
+      new.is_for_sale,
       new.has_resellers,
       new.lowest_resale_price_robux,
       new.name,
       new.category,
       new.subcategory,
-      new.favorite_count
+      new.favorite_count,
+      new.free_claimability,
+      new.free_verified_at,
+      new.free_verification_source
     );
   end if;
 
@@ -1896,126 +3451,6 @@ $$;
 ALTER FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() RETURNS "trigger"
-    LANGUAGE "plpgsql"
-    AS $$
-declare
-  target_list_ids uuid[];
-  list_slug text;
-begin
-  if tg_op = 'DELETE' then
-    target_list_ids := array_remove(array[old.list_id], null);
-    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'game_list_entries_wiki_delete');
-  elsif tg_op = 'INSERT' then
-    target_list_ids := array_remove(array[new.list_id], null);
-    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'game_list_entries_wiki_insert');
-  else
-    target_list_ids := array_remove(array[old.list_id, new.list_id], null);
-    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'game_list_entries_wiki_update_old');
-    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'game_list_entries_wiki_update');
-  end if;
-
-  for list_slug in
-    select distinct gl.slug
-    from public.game_lists gl
-    where gl.id = any(target_list_ids)
-      and gl.is_published = true
-      and gl.slug is not null
-      and trim(gl.slug) <> ''
-  loop
-    perform public.enqueue_revalidation('list', list_slug, 'game_list_entries_' || lower(tg_op));
-  end loop;
-
-  return null;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_game_lists"() RETURNS "trigger"
-    LANGUAGE "plpgsql"
-    AS $$
-begin
-  if tg_op = 'DELETE' then
-    if old.is_published = true then
-      perform public.enqueue_revalidation('list', old.slug, 'game_lists_delete');
-      perform public.enqueue_wiki_revalidation_for_list(old.id, 'game_lists_wiki_delete');
-    end if;
-    return null;
-  end if;
-
-  if new.is_published = true then
-    perform public.enqueue_revalidation('list', new.slug, 'game_lists_' || lower(tg_op));
-    perform public.enqueue_wiki_revalidation_for_list(new.id, 'game_lists_wiki_' || lower(tg_op));
-  end if;
-
-  if tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_wiki_revalidation_for_list(old.id, 'game_lists_wiki_update_old');
-
-    if old.slug is distinct from new.slug or new.is_published is distinct from true then
-      perform public.enqueue_revalidation('list', old.slug, 'game_lists_old_slug_or_unpublish');
-    end if;
-  end if;
-
-  return null;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."trg_enqueue_revalidation_game_lists"() OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_games"() RETURNS "trigger"
-    LANGUAGE "plpgsql"
-    AS $$
-begin
-  if tg_op = 'DELETE' then
-    if old.is_published = true then
-      perform public.enqueue_revalidation('code', old.slug, 'games_delete');
-      perform public.enqueue_list_revalidation_for_universe(old.universe_id, 'games_lists_delete');
-      perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'games_wiki_delete');
-    end if;
-    return null;
-  end if;
-
-  if new.is_published = true then
-    perform public.enqueue_revalidation('code', new.slug, 'games_' || lower(tg_op));
-    perform public.enqueue_list_revalidation_for_universe(new.universe_id, 'games_lists_' || lower(tg_op));
-    perform public.enqueue_wiki_revalidation_for_universe(new.universe_id, 'games_wiki_' || lower(tg_op));
-  end if;
-
-  if tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_list_revalidation_for_universe(old.universe_id, 'games_lists_update_old');
-    perform public.enqueue_wiki_revalidation_for_universe(old.universe_id, 'games_wiki_update_old');
-
-    if old.slug is distinct from new.slug or new.is_published is distinct from true then
-      perform public.enqueue_revalidation('code', old.slug, 'games_old_slug_or_unpublish');
-    end if;
-  end if;
-
-  return null;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."trg_enqueue_revalidation_games"() OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() RETURNS "trigger"
-    LANGUAGE "plpgsql"
-    AS $$
-begin
-  perform public.enqueue_list_revalidation_for_universe(new.universe_id, 'roblox_universes_lists_update');
-  return null;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() OWNER TO "postgres";
-
-
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_music_ids"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     AS $$
@@ -2038,6 +3473,23 @@ $$;
 
 
 ALTER FUNCTION "public"."trg_enqueue_revalidation_music_ids"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_promo_rewards"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  perform public.enqueue_revalidation(
+    'catalog',
+    'roblox-promo-codes',
+    'roblox_promo_rewards_' || lower(tg_op)
+  );
+  return coalesce(new, old);
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_promo_rewards"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_puzzle_answers"() RETURNS "trigger"
@@ -2115,6 +3567,19 @@ $$;
 
 
 ALTER FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() OWNER TO "postgres";
+
+
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_stats_items"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+begin
+  perform public.enqueue_revalidation('stats', 'items', tg_table_name || '_' || lower(tg_op));
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_enqueue_revalidation_stats_items"() OWNER TO "supabase_admin";
 
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_tools"() RETURNS "trigger"
@@ -2217,7 +3682,7 @@ $$;
 ALTER FUNCTION "public"."trg_enqueue_revalidation_virtual_events"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() RETURNS "trigger"
+CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_wiki_collection_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -2228,26 +3693,26 @@ begin
   if tg_op = 'DELETE' then
     if old.is_published = true then
       old_slug := old.wiki_slug || '/' || old.collection_slug;
-      perform public.enqueue_revalidation('wiki_catalog', old_slug, 'wiki_catalog_pages_delete');
-      perform public.enqueue_revalidation('wiki', old.wiki_slug, 'wiki_catalog_pages_wiki_delete');
+      perform public.enqueue_revalidation('wiki_collection', old_slug, 'wiki_collection_pages_delete');
+      perform public.enqueue_revalidation('wiki', old.wiki_slug, 'wiki_collection_pages_wiki_delete');
     end if;
     return null;
   end if;
 
   if new.is_published = true then
     new_slug := new.wiki_slug || '/' || new.collection_slug;
-    perform public.enqueue_revalidation('wiki_catalog', new_slug, 'wiki_catalog_pages_' || lower(tg_op));
-    perform public.enqueue_revalidation('wiki', new.wiki_slug, 'wiki_catalog_pages_wiki_' || lower(tg_op));
+    perform public.enqueue_revalidation('wiki_collection', new_slug, 'wiki_collection_pages_' || lower(tg_op));
+    perform public.enqueue_revalidation('wiki', new.wiki_slug, 'wiki_collection_pages_wiki_' || lower(tg_op));
   end if;
 
   if tg_op = 'UPDATE' and old.is_published = true then
-    perform public.enqueue_revalidation('wiki', old.wiki_slug, 'wiki_catalog_pages_wiki_update_old');
+    perform public.enqueue_revalidation('wiki', old.wiki_slug, 'wiki_collection_pages_wiki_update_old');
 
     if old.wiki_slug is distinct from new.wiki_slug
       or old.collection_slug is distinct from new.collection_slug
       or new.is_published is distinct from true then
       old_slug := old.wiki_slug || '/' || old.collection_slug;
-      perform public.enqueue_revalidation('wiki_catalog', old_slug, 'wiki_catalog_pages_old_slug_or_unpublish');
+      perform public.enqueue_revalidation('wiki_collection', old_slug, 'wiki_collection_pages_old_slug_or_unpublish');
     end if;
   end if;
 
@@ -2256,7 +3721,7 @@ end;
 $$;
 
 
-ALTER FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() OWNER TO "postgres";
+ALTER FUNCTION "public"."trg_enqueue_revalidation_wiki_collection_pages"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."trg_enqueue_revalidation_wiki_pages"() RETURNS "trigger"
@@ -2527,6 +3992,56 @@ $$;
 ALTER FUNCTION "public"."trg_search_index_checklists"() OWNER TO "postgres";
 
 
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_code_pages"() RETURNS "trigger"
+    LANGUAGE "plpgsql"
+    AS $$
+declare
+  v_search text;
+begin
+  if tg_op = 'DELETE' then
+    delete from public.search_index
+    where entity_type = 'code'
+      and entity_id = old.id::text;
+    return null;
+  end if;
+
+  v_search := left(
+    concat_ws(
+      ' ',
+      new.name,
+      new.slug,
+      array_to_string(new.old_slugs, ' '),
+      new.seo_title,
+      new.seo_description,
+      new.intro_md,
+      new.redeem_md,
+      new.rewards_md,
+      new.troubleshoot_md,
+      new.find_codes_md
+    ),
+    4000
+  );
+
+  perform public.upsert_search_index(
+    'code',
+    new.id::text,
+    new.slug,
+    new.name,
+    'Codes',
+    '/codes/' || new.slug,
+    new.updated_at,
+    new.is_published,
+    v_search
+  );
+
+  return null;
+end;
+$$;
+
+
+ALTER FUNCTION "public"."trg_search_index_code_pages"() OWNER TO "postgres";
+
+
 CREATE OR REPLACE FUNCTION "public"."trg_search_index_events_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
@@ -2574,108 +4089,6 @@ $$;
 
 
 ALTER FUNCTION "public"."trg_search_index_events_pages"() OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."trg_search_index_game_lists"() RETURNS "trigger"
-    LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
-    AS $$
-declare
-  v_title text;
-  v_search text;
-begin
-  if (tg_op = 'DELETE') then
-    delete from public.search_index
-    where entity_type = 'list'
-      and entity_id = old.id::text;
-    return null;
-  end if;
-
-  v_title := coalesce(new.display_name, new.title);
-  v_search := left(
-    concat_ws(
-      ' ',
-      v_title,
-      new.title,
-      new.slug,
-      new.meta_title,
-      new.meta_description,
-      new.hero_md,
-      new.intro_md,
-      new.outro_md
-    ),
-    3000
-  );
-
-  perform public.upsert_search_index(
-    'list',
-    new.id::text,
-    new.slug,
-    v_title,
-    'List',
-    '/lists/' || new.slug,
-    new.updated_at,
-    new.is_published,
-    v_search
-  );
-
-  return null;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."trg_search_index_game_lists"() OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."trg_search_index_games"() RETURNS "trigger"
-    LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
-    AS $$
-declare
-  v_search text;
-begin
-  if (tg_op = 'DELETE') then
-    delete from public.search_index
-    where entity_type = 'code'
-      and entity_id = old.id::text;
-    return null;
-  end if;
-
-  v_search := left(
-    concat_ws(
-      ' ',
-      new.name,
-      new.slug,
-      array_to_string(new.old_slugs, ' '),
-      new.seo_title,
-      new.seo_description,
-      new.intro_md,
-      new.redeem_md,
-      new.rewards_md,
-      new.troubleshoot_md,
-      new.find_codes_md
-    ),
-    4000
-  );
-
-  perform public.upsert_search_index(
-    'code',
-    new.id::text,
-    new.slug,
-    new.name,
-    'Codes',
-    '/codes/' || new.slug,
-    new.updated_at,
-    new.is_published,
-    v_search
-  );
-
-  return null;
-end;
-$$;
-
-
-ALTER FUNCTION "public"."trg_search_index_games"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."trg_search_index_puzzle_pages"() RETURNS "trigger"
@@ -2821,7 +4234,7 @@ $$;
 ALTER FUNCTION "public"."trg_search_index_tools"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."trg_search_index_wiki_catalog_pages"() RETURNS "trigger"
+CREATE OR REPLACE FUNCTION "public"."trg_search_index_wiki_collection_pages"() RETURNS "trigger"
     LANGUAGE "plpgsql"
     SET "search_path" TO 'pg_catalog', 'public'
     AS $$
@@ -2831,7 +4244,7 @@ declare
 begin
   if (tg_op = 'DELETE') then
     delete from public.search_index
-    where entity_type = 'wiki_catalog'
+    where entity_type = 'wiki_collection'
       and entity_id = old.id::text;
     return null;
   end if;
@@ -2841,6 +4254,7 @@ begin
     concat_ws(
       ' ',
       new.title,
+      new.display_name,
       new.code,
       new.wiki_slug,
       new.collection_slug,
@@ -2855,11 +4269,11 @@ begin
   );
 
   perform public.upsert_search_index(
-    'wiki_catalog',
+    'wiki_collection',
     new.id::text,
     v_slug,
     new.title,
-    'Wiki catalog',
+    'Wiki collection',
     '/wiki/' || v_slug,
     new.updated_at,
     new.is_published,
@@ -2871,7 +4285,7 @@ end;
 $$;
 
 
-ALTER FUNCTION "public"."trg_search_index_wiki_catalog_pages"() OWNER TO "postgres";
+ALTER FUNCTION "public"."trg_search_index_wiki_collection_pages"() OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."trg_search_index_wiki_pages"() RETURNS "trigger"
@@ -2919,87 +4333,51 @@ $$;
 ALTER FUNCTION "public"."trg_search_index_wiki_pages"() OWNER TO "postgres";
 
 
-CREATE OR REPLACE FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) RETURNS "void"
+CREATE OR REPLACE FUNCTION "public"."upsert_code"("p_code_page_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer DEFAULT 0) RETURNS "void"
     LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
-    AS $$
-begin
-  insert into public.codes (game_id, code, status, rewards_text, level_requirement, is_new)
-  values (p_game_id, p_code, p_status, p_rewards_text, p_level_requirement, p_is_new)
-  on conflict (game_id, code) do update
-    set status = excluded.status,
-        rewards_text = excluded.rewards_text,
-        level_requirement = excluded.level_requirement,
-        is_new = excluded.is_new,
-        last_seen_at = now();
-end;
-$$;
-
-
-ALTER FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) OWNER TO "postgres";
-
-
-CREATE OR REPLACE FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer DEFAULT 0) RETURNS "void"
-    LANGUAGE "plpgsql"
-    SET "search_path" TO 'pg_catalog', 'public'
     AS $$
 declare
-  v_code text;
-  v_existing_id uuid;
+  v_code text := trim(p_code);
+  v_provider_priority integer := coalesce(p_provider_priority, 0);
 begin
-  v_code := nullif(btrim(p_code), '');
-  if v_code is null then
+  if v_code is null or v_code = '' then
     return;
   end if;
 
-  select id
-  into v_existing_id
-  from public.codes
-  where game_id = p_game_id
-    and upper(code) = upper(v_code)
-  limit 1;
-
-  if v_existing_id is null then
-    begin
-      insert into public.codes (game_id, code, status, rewards_text, level_requirement, is_new, provider_priority)
-      values (p_game_id, v_code, p_status, p_rewards_text, p_level_requirement, p_is_new, p_provider_priority)
-      on conflict (game_id, code) do update
-        set status = excluded.status,
-            rewards_text = excluded.rewards_text,
-            level_requirement = excluded.level_requirement,
-            is_new = excluded.is_new,
-            provider_priority = excluded.provider_priority,
-            last_seen_at = now(),
-            code = excluded.code;
-    exception
-      when unique_violation then
-        update public.codes
-        set code = v_code,
-            status = p_status,
-            rewards_text = p_rewards_text,
-            level_requirement = p_level_requirement,
-            is_new = p_is_new,
-            provider_priority = p_provider_priority,
-            last_seen_at = now()
-        where game_id = p_game_id
-          and upper(code) = upper(v_code);
-    end;
-  else
+  if exists (
+    select 1
+    from public.codes
+    where code_page_id = p_code_page_id
+      and upper(code) = upper(v_code)
+      and provider_priority > v_provider_priority
+  ) then
     update public.codes
-    set code = v_code,
-        status = p_status,
-        rewards_text = p_rewards_text,
-        level_requirement = p_level_requirement,
-        is_new = p_is_new,
-        provider_priority = p_provider_priority,
-        last_seen_at = now()
-    where id = v_existing_id;
+    set last_seen_at = now()
+    where code_page_id = p_code_page_id
+      and upper(code) = upper(v_code)
+      and provider_priority > v_provider_priority;
+    return;
   end if;
+
+  insert into public.codes (code_page_id, code, status, rewards_text, level_requirement, is_new, provider_priority)
+  values (p_code_page_id, v_code, p_status, p_rewards_text, p_level_requirement, p_is_new, v_provider_priority)
+  on conflict (code_page_id, code) do update
+  set
+    status = excluded.status,
+    rewards_text = excluded.rewards_text,
+    level_requirement = excluded.level_requirement,
+    is_new = excluded.is_new,
+    provider_priority = greatest(public.codes.provider_priority, excluded.provider_priority),
+    last_seen_at = now(),
+    first_seen_at = case
+      when public.codes.status = 'expired' and excluded.status = 'active' then now()
+      else public.codes.first_seen_at
+    end;
 end;
 $$;
 
 
-ALTER FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) OWNER TO "postgres";
+ALTER FUNCTION "public"."upsert_code"("p_code_page_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."upsert_roblox_universe_stats_hourly"("p_universe_id" bigint, "p_sampled_at" timestamp with time zone, "p_playing" bigint DEFAULT NULL::bigint, "p_visits" bigint DEFAULT NULL::bigint, "p_favorites" bigint DEFAULT NULL::bigint, "p_likes" bigint DEFAULT NULL::bigint, "p_dislikes" bigint DEFAULT NULL::bigint, "p_snapshot" "jsonb" DEFAULT '{}'::"jsonb") RETURNS "void"
@@ -3194,11 +4572,23 @@ CREATE TABLE IF NOT EXISTS "public"."app_sessions" (
     "expires_at" timestamp with time zone NOT NULL,
     "revoked_at" timestamp with time zone,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "login_source_path" "text",
+    "login_return_path" "text",
+    CONSTRAINT "app_sessions_login_return_path_check" CHECK ((("login_return_path" IS NULL) OR (("login_return_path" ~~ '/%'::"text") AND ("login_return_path" !~~ '//%'::"text") AND (POSITION(('\'::"text") IN ("login_return_path")) = 0) AND ("login_return_path" !~~ '/auth/%'::"text")))),
+    CONSTRAINT "app_sessions_login_source_path_check" CHECK ((("login_source_path" IS NULL) OR (("login_source_path" ~~ '/%'::"text") AND ("login_source_path" !~~ '//%'::"text") AND (POSITION(('\'::"text") IN ("login_source_path")) = 0) AND ("login_source_path" !~~ '/auth/%'::"text"))))
 );
 
 
 ALTER TABLE "public"."app_sessions" OWNER TO "postgres";
+
+
+COMMENT ON COLUMN "public"."app_sessions"."login_source_path" IS 'Sanitized same-origin path where the user initiated login.';
+
+
+
+COMMENT ON COLUMN "public"."app_sessions"."login_return_path" IS 'Sanitized same-origin path used after login completes.';
+
 
 
 CREATE TABLE IF NOT EXISTS "public"."app_users" (
@@ -3349,18 +4739,22 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_universes" (
     "game_description_md" "text",
     "created_at_api" timestamp with time zone,
     "updated_at_api" timestamp with time zone,
-    "discovery_score" numeric,
-    "quality_score" numeric,
-    "quality_tier" "text",
-    "quality_reasons" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
-    "last_quality_scored_at" timestamp with time zone,
     "last_light_enriched_at" timestamp with time zone,
     "last_deep_enriched_at" timestamp with time zone,
     "last_stats_refreshed_at" timestamp with time zone,
     "last_playing_refreshed_at" timestamp with time zone,
     "discovery_sources" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
-    "is_quality_candidate" boolean,
-    CONSTRAINT "roblox_universes_quality_tier_check" CHECK ((("quality_tier" IS NULL) OR ("quality_tier" = ANY (ARRAY['A'::"text", 'B'::"text", 'C'::"text", 'D'::"text", 'archive'::"text"]))))
+    "stats_tier" "text" DEFAULT 'NEW'::"text" NOT NULL,
+    "stats_tier_updated_at" timestamp with time zone,
+    "stats_tier_reason" "text",
+    "next_stats_refresh_at" timestamp with time zone,
+    "stats_refresh_locked_at" timestamp with time zone,
+    "stats_refresh_locked_by" "text",
+    "stats_refresh_attempt_count" integer DEFAULT 0 NOT NULL,
+    "last_stats_refresh_error" "text",
+    "stats_ingest_status" "text",
+    "stats_ingest_status_updated_at" timestamp with time zone,
+    CONSTRAINT "roblox_universes_stats_tier_check" CHECK (("stats_tier" = ANY (ARRAY['NEW'::"text", 'HOT'::"text", 'WARM'::"text", 'COLD'::"text"])))
 );
 
 
@@ -3441,7 +4835,7 @@ CREATE OR REPLACE VIEW "public"."article_pages_view" WITH ("security_invoker"='t
      LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "art"."universe_id")));
 
 
-ALTER VIEW "public"."article_pages_view" OWNER TO "postgres";
+ALTER VIEW "public"."article_pages_view" OWNER TO "supabase_admin";
 
 
 CREATE TABLE IF NOT EXISTS "public"."article_source_images" (
@@ -3466,6 +4860,43 @@ CREATE TABLE IF NOT EXISTS "public"."article_source_images" (
 
 
 ALTER TABLE "public"."article_source_images" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."cache_warm_events" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "path" "text" NOT NULL,
+    "source" "text" DEFAULT 'revalidate'::"text" NOT NULL,
+    "priority" integer DEFAULT 100 NOT NULL,
+    "attempts" integer DEFAULT 0 NOT NULL,
+    "last_error" "text",
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "cache_warm_events_attempts_check" CHECK (("attempts" >= 0)),
+    CONSTRAINT "cache_warm_events_path_check" CHECK (("path" ~ '^/[^?#]*$'::"text"))
+);
+
+
+ALTER TABLE "public"."cache_warm_events" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."cache_warm_worker_runs" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "status" "text" DEFAULT 'running'::"text" NOT NULL,
+    "batch_size" integer NOT NULL,
+    "fetched_count" integer DEFAULT 0 NOT NULL,
+    "warmed_count" integer DEFAULT 0 NOT NULL,
+    "failed_count" integer DEFAULT 0 NOT NULL,
+    "dropped_count" integer DEFAULT 0 NOT NULL,
+    "duration_ms" integer,
+    "paths" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "error" "text",
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "finished_at" timestamp with time zone,
+    CONSTRAINT "cache_warm_worker_runs_status_check" CHECK (("status" = ANY (ARRAY['running'::"text", 'success'::"text", 'failed'::"text", 'skipped'::"text"])))
+);
+
+
+ALTER TABLE "public"."cache_warm_worker_runs" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."catalog_pages" (
@@ -3589,26 +5020,7 @@ CREATE OR REPLACE VIEW "public"."checklist_pages_view" WITH ("security_invoker"=
 ALTER VIEW "public"."checklist_pages_view" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."codes" (
-    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
-    "game_id" "uuid" NOT NULL,
-    "code" "text" NOT NULL,
-    "status" "text" NOT NULL,
-    "rewards_text" "text",
-    "level_requirement" integer,
-    "is_new" boolean,
-    "first_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "last_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "posted_online" boolean DEFAULT false NOT NULL,
-    "provider_priority" integer DEFAULT 0 NOT NULL,
-    CONSTRAINT "codes_status_check" CHECK (("status" = ANY (ARRAY['active'::"text", 'expired'::"text", 'check'::"text"])))
-);
-
-
-ALTER TABLE "public"."codes" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."games" (
+CREATE TABLE IF NOT EXISTS "public"."code_pages" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "name" "text" NOT NULL,
     "slug" "text" NOT NULL,
@@ -3649,72 +5061,143 @@ CREATE TABLE IF NOT EXISTS "public"."games" (
 );
 
 
-ALTER TABLE "public"."games" OWNER TO "postgres";
+ALTER TABLE "public"."code_pages" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."codes" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "code_page_id" "uuid" NOT NULL,
+    "code" "text" NOT NULL,
+    "status" "text" NOT NULL,
+    "rewards_text" "text",
+    "level_requirement" integer,
+    "is_new" boolean,
+    "first_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "last_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "posted_online" boolean DEFAULT false NOT NULL,
+    "provider_priority" integer DEFAULT 0 NOT NULL,
+    CONSTRAINT "codes_status_check" CHECK (("status" = ANY (ARRAY['active'::"text", 'expired'::"text", 'check'::"text"])))
+);
+
+
+ALTER TABLE "public"."codes" OWNER TO "postgres";
+
+
+CREATE OR REPLACE VIEW "public"."code_page_code_stats" WITH ("security_invoker"='true') AS
+ SELECT "cp"."id",
+    "cp"."name",
+    "cp"."slug",
+    "cp"."cover_image",
+    "cp"."created_at",
+    "cp"."updated_at",
+    COALESCE("stats"."active_count", (0)::bigint) AS "active_count",
+    "stats"."latest_code_first_seen_at",
+        CASE
+            WHEN (("stats"."latest_code_first_seen_at" IS NOT NULL) AND ("stats"."latest_code_first_seen_at" > "cp"."updated_at")) THEN "stats"."latest_code_first_seen_at"
+            ELSE "cp"."updated_at"
+        END AS "content_updated_at"
+   FROM ("public"."code_pages" "cp"
+     LEFT JOIN LATERAL ( SELECT "count"(*) FILTER (WHERE ("c"."status" = 'active'::"text")) AS "active_count",
+            "max"("c"."first_seen_at") FILTER (WHERE ("c"."status" = 'active'::"text")) AS "latest_code_first_seen_at"
+           FROM "public"."codes" "c"
+          WHERE ("c"."code_page_id" = "cp"."id")) "stats" ON (true))
+  WHERE ("cp"."is_published" = true);
+
+
+ALTER VIEW "public"."code_page_code_stats" OWNER TO "postgres";
+
+
+CREATE OR REPLACE VIEW "public"."code_pages_index_view" WITH ("security_invoker"='true') AS
+ SELECT "cp"."id",
+    "cp"."slug",
+    "cp"."name",
+    "cp"."is_published",
+    "cp"."cover_image",
+    "cp"."updated_at",
+    "cp"."created_at",
+    "cp"."universe_id",
+    "cp"."internal_links",
+    COALESCE("cs"."active_code_count", (0)::bigint) AS "active_code_count",
+    "cs"."latest_code_first_seen_at",
+    GREATEST(COALESCE("cs"."latest_code_first_seen_at", "cp"."updated_at"), "cp"."updated_at") AS "content_updated_at",
+    "u"."genre_l1",
+    "u"."genre_l2"
+   FROM (("public"."code_pages" "cp"
+     LEFT JOIN ( SELECT "codes"."code_page_id",
+            "count"(*) FILTER (WHERE ("codes"."status" = 'active'::"text")) AS "active_code_count",
+            "max"("codes"."first_seen_at") FILTER (WHERE ("codes"."status" = 'active'::"text")) AS "latest_code_first_seen_at"
+           FROM "public"."codes"
+          GROUP BY "codes"."code_page_id") "cs" ON (("cs"."code_page_id" = "cp"."id")))
+     LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "cp"."universe_id")))
+  WHERE ("cp"."is_published" IS NOT NULL);
+
+
+ALTER VIEW "public"."code_pages_index_view" OWNER TO "postgres";
 
 
 CREATE OR REPLACE VIEW "public"."code_pages_view" WITH ("security_invoker"='true') AS
  WITH "code_stats" AS (
-         SELECT "c"."game_id",
+         SELECT "c"."code_page_id",
             "jsonb_agg"("c".* ORDER BY "c"."status", "c"."last_seen_at" DESC) FILTER (WHERE ("c"."id" IS NOT NULL)) AS "codes",
             "count"(*) FILTER (WHERE ("c"."status" = 'active'::"text")) AS "active_code_count",
             "max"("c"."first_seen_at") FILTER (WHERE ("c"."status" = 'active'::"text")) AS "latest_code_first_seen_at"
            FROM "public"."codes" "c"
-          GROUP BY "c"."game_id"
+          GROUP BY "c"."code_page_id"
         )
- SELECT "g"."id",
-    "g"."name",
-    "g"."slug",
-    "g"."old_slugs",
-    "g"."roblox_link",
-    "g"."universe_id",
-    "g"."community_link",
-    "g"."discord_link",
-    "g"."twitter_link",
-    "g"."youtube_link",
-    "g"."expired_codes",
-    "g"."cover_image",
-    "g"."seo_title",
-    "g"."seo_description",
-    "g"."intro_md",
-    "g"."redeem_md",
-    "g"."find_codes_md",
-    "g"."troubleshoot_md",
-    "g"."rewards_md",
-    "g"."internal_links",
-    "g"."is_published",
-    "g"."re_rewritten_at",
-    "g"."created_at",
-    "g"."updated_at",
+ SELECT "cp"."id",
+    "cp"."name",
+    "cp"."slug",
+    "cp"."old_slugs",
+    "cp"."roblox_link",
+    "cp"."universe_id",
+    "cp"."community_link",
+    "cp"."discord_link",
+    "cp"."twitter_link",
+    "cp"."youtube_link",
+    "cp"."expired_codes",
+    "cp"."cover_image",
+    "cp"."seo_title",
+    "cp"."seo_description",
+    "cp"."intro_md",
+    "cp"."redeem_md",
+    "cp"."find_codes_md",
+    "cp"."troubleshoot_md",
+    "cp"."rewards_md",
+    "cp"."internal_links",
+    "cp"."is_published",
+    "cp"."re_rewritten_at",
+    "cp"."created_at",
+    "cp"."updated_at",
     "u"."genre_l1",
     "u"."genre_l2",
     COALESCE("cs"."codes", '[]'::"jsonb") AS "codes",
     COALESCE("cs"."active_code_count", (0)::bigint) AS "active_code_count",
     "cs"."latest_code_first_seen_at",
-    GREATEST(COALESCE("cs"."latest_code_first_seen_at", "g"."updated_at"), "g"."updated_at") AS "content_updated_at",
+    GREATEST(COALESCE("cs"."latest_code_first_seen_at", "cp"."updated_at"), "cp"."updated_at") AS "content_updated_at",
         CASE
             WHEN ("u"."universe_id" IS NULL) THEN NULL::"jsonb"
             ELSE "jsonb_build_object"('universe_id', "u"."universe_id", 'slug', "u"."slug", 'display_name', "u"."display_name", 'name', "u"."name", 'creator_name', "u"."creator_name", 'creator_id', "u"."creator_id", 'creator_type', "u"."creator_type", 'social_links', "u"."social_links", 'icon_url', "u"."icon_url", 'genre_l1', "u"."genre_l1", 'genre_l2', "u"."genre_l2", 'playing', "u"."playing", 'visits', "u"."visits", 'favorites', "u"."favorites", 'likes', "u"."likes", 'dislikes', "u"."dislikes", 'age_rating', "u"."age_rating", 'desktop_enabled', "u"."desktop_enabled", 'mobile_enabled', "u"."mobile_enabled", 'tablet_enabled', "u"."tablet_enabled", 'console_enabled', "u"."console_enabled", 'vr_enabled', "u"."vr_enabled", 'updated_at', "u"."updated_at", 'description', "u"."description", 'game_description_md', "u"."game_description_md")
         END AS "universe",
     ( SELECT COALESCE("jsonb_agg"("rec".* ORDER BY "rec"."active_code_count" DESC, "rec"."updated_at" DESC), '[]'::"jsonb") AS "coalesce"
-           FROM ( SELECT "g2"."id",
-                    "g2"."name",
-                    "g2"."slug",
-                    "g2"."cover_image",
+           FROM ( SELECT "cp2"."id",
+                    "cp2"."name",
+                    "cp2"."slug",
+                    "cp2"."cover_image",
                     COALESCE("cs2"."active_code_count", (0)::bigint) AS "active_code_count",
-                    GREATEST(COALESCE("cs2"."latest_code_first_seen_at", "g2"."updated_at"), "g2"."updated_at") AS "content_updated_at",
-                    "g2"."updated_at",
+                    GREATEST(COALESCE("cs2"."latest_code_first_seen_at", "cp2"."updated_at"), "cp2"."updated_at") AS "content_updated_at",
+                    "cp2"."updated_at",
                     "u2"."genre_l1",
                     "u2"."genre_l2"
-                   FROM (("public"."games" "g2"
-                     LEFT JOIN "code_stats" "cs2" ON (("cs2"."game_id" = "g2"."id")))
-                     LEFT JOIN "public"."roblox_universes" "u2" ON (("u2"."universe_id" = "g2"."universe_id")))
-                  WHERE (("g2"."is_published" = true) AND ("g2"."id" <> "g"."id"))
-                  ORDER BY COALESCE("cs2"."active_code_count", (0)::bigint) DESC, "g2"."updated_at" DESC
+                   FROM (("public"."code_pages" "cp2"
+                     LEFT JOIN "code_stats" "cs2" ON (("cs2"."code_page_id" = "cp2"."id")))
+                     LEFT JOIN "public"."roblox_universes" "u2" ON (("u2"."universe_id" = "cp2"."universe_id")))
+                  WHERE (("cp2"."is_published" = true) AND ("cp2"."id" <> "cp"."id"))
+                  ORDER BY COALESCE("cs2"."active_code_count", (0)::bigint) DESC, "cp2"."updated_at" DESC
                  LIMIT 6) "rec") AS "recommended_games",
-    "g"."interlinking_ai_copy_md"
-   FROM (("public"."games" "g"
-     LEFT JOIN "code_stats" "cs" ON (("cs"."game_id" = "g"."id")))
-     LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "g"."universe_id")));
+    "cp"."interlinking_ai_copy_md"
+   FROM (("public"."code_pages" "cp"
+     LEFT JOIN "code_stats" "cs" ON (("cs"."code_page_id" = "cp"."id")))
+     LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "cp"."universe_id")));
 
 
 ALTER VIEW "public"."code_pages_view" OWNER TO "postgres";
@@ -3733,7 +5216,9 @@ CREATE TABLE IF NOT EXISTS "public"."comments" (
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "guest_name" "text",
     "guest_email" "text",
-    CONSTRAINT "comments_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'catalog'::"text", 'event'::"text", 'list'::"text", 'tool'::"text"]))),
+    "page_type" "text",
+    "page_url" "text",
+    CONSTRAINT "comments_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'catalog'::"text", 'event'::"text", 'tool'::"text", 'wiki'::"text", 'wiki_collection'::"text"]))),
     CONSTRAINT "comments_status_check" CHECK (("status" = ANY (ARRAY['pending'::"text", 'approved'::"text", 'rejected'::"text", 'deleted'::"text"])))
 );
 
@@ -3779,30 +5264,6 @@ CREATE TABLE IF NOT EXISTS "public"."events_pages" (
 ALTER TABLE "public"."events_pages" OWNER TO "postgres";
 
 
-CREATE OR REPLACE VIEW "public"."game_code_stats" WITH ("security_invoker"='true') AS
- SELECT "g"."id",
-    "g"."name",
-    "g"."slug",
-    "g"."cover_image",
-    "g"."created_at",
-    "g"."updated_at",
-    COALESCE("stats"."active_count", (0)::bigint) AS "active_count",
-    "stats"."latest_code_first_seen_at",
-        CASE
-            WHEN (("stats"."latest_code_first_seen_at" IS NOT NULL) AND ("stats"."latest_code_first_seen_at" > "g"."updated_at")) THEN "stats"."latest_code_first_seen_at"
-            ELSE "g"."updated_at"
-        END AS "content_updated_at"
-   FROM ("public"."games" "g"
-     LEFT JOIN LATERAL ( SELECT "count"(*) FILTER (WHERE ("c"."status" = 'active'::"text")) AS "active_count",
-            "max"("c"."first_seen_at") FILTER (WHERE ("c"."status" = 'active'::"text")) AS "latest_code_first_seen_at"
-           FROM "public"."codes" "c"
-          WHERE ("c"."game_id" = "g"."id")) "stats" ON (true))
-  WHERE ("g"."is_published" = true);
-
-
-ALTER VIEW "public"."game_code_stats" OWNER TO "postgres";
-
-
 CREATE TABLE IF NOT EXISTS "public"."game_generation_queue" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "game_name" "text" NOT NULL,
@@ -3817,131 +5278,6 @@ CREATE TABLE IF NOT EXISTS "public"."game_generation_queue" (
 
 
 ALTER TABLE "public"."game_generation_queue" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."game_list_entries" (
-    "list_id" "uuid" NOT NULL,
-    "game_id" "uuid",
-    "rank" integer NOT NULL,
-    "metric_value" numeric,
-    "reason" "text",
-    "extra" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
-    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "universe_id" bigint NOT NULL
-);
-
-
-ALTER TABLE "public"."game_list_entries" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."game_lists" (
-    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
-    "slug" "text" NOT NULL,
-    "title" "text" NOT NULL,
-    "hero_md" "text",
-    "intro_md" "text",
-    "outro_md" "text",
-    "meta_title" "text",
-    "meta_description" "text",
-    "cover_image" "text",
-    "list_type" "text" DEFAULT 'sql'::"text" NOT NULL,
-    "filter_config" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
-    "limit_count" integer DEFAULT 50 NOT NULL,
-    "is_published" boolean DEFAULT false NOT NULL,
-    "refreshed_at" timestamp with time zone,
-    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "display_name" "text",
-    "primary_metric_key" "text",
-    "primary_metric_label" "text",
-    CONSTRAINT "game_lists_limit_count_check" CHECK (("limit_count" > 0)),
-    CONSTRAINT "game_lists_list_type_check" CHECK (("list_type" = ANY (ARRAY['sql'::"text", 'manual'::"text", 'hybrid'::"text"])))
-);
-
-
-ALTER TABLE "public"."game_lists" OWNER TO "postgres";
-
-
-CREATE OR REPLACE VIEW "public"."game_lists_index_view" WITH ("security_invoker"='true') AS
- SELECT "id",
-    "slug",
-    "title",
-    "display_name",
-    "cover_image",
-    "limit_count",
-    "refreshed_at",
-    "updated_at",
-    "created_at",
-    "is_published",
-    COALESCE(( SELECT COALESCE("g3"."cover_image", "u3"."icon_url") AS "coalesce"
-           FROM (("public"."game_list_entries" "gle3"
-             LEFT JOIN "public"."games" "g3" ON (("g3"."id" = "gle3"."game_id")))
-             LEFT JOIN "public"."roblox_universes" "u3" ON (("u3"."universe_id" = "gle3"."universe_id")))
-          WHERE ("gle3"."list_id" = "l"."id")
-          ORDER BY "gle3"."rank"
-         LIMIT 1), NULL::"text") AS "top_entry_image"
-   FROM "public"."game_lists" "l"
-  WHERE ("is_published" = true);
-
-
-ALTER VIEW "public"."game_lists_index_view" OWNER TO "postgres";
-
-
-CREATE OR REPLACE VIEW "public"."game_lists_view" AS
-SELECT
-    NULL::"uuid" AS "id",
-    NULL::"text" AS "slug",
-    NULL::"text" AS "title",
-    NULL::"text" AS "hero_md",
-    NULL::"text" AS "intro_md",
-    NULL::"text" AS "outro_md",
-    NULL::"text" AS "meta_title",
-    NULL::"text" AS "meta_description",
-    NULL::"text" AS "cover_image",
-    NULL::"text" AS "list_type",
-    NULL::"jsonb" AS "filter_config",
-    NULL::integer AS "limit_count",
-    NULL::boolean AS "is_published",
-    NULL::timestamp with time zone AS "refreshed_at",
-    NULL::timestamp with time zone AS "created_at",
-    NULL::timestamp with time zone AS "updated_at",
-    NULL::"text" AS "display_name",
-    NULL::"text" AS "primary_metric_key",
-    NULL::"text" AS "primary_metric_label",
-    NULL::"jsonb" AS "entries",
-    NULL::"jsonb" AS "other_lists";
-
-
-ALTER VIEW "public"."game_lists_view" OWNER TO "postgres";
-
-
-CREATE OR REPLACE VIEW "public"."game_pages_index_view" WITH ("security_invoker"='true') AS
- SELECT "g"."id",
-    "g"."slug",
-    "g"."name",
-    "g"."is_published",
-    "g"."cover_image",
-    "g"."updated_at",
-    "g"."created_at",
-    "g"."universe_id",
-    "g"."internal_links",
-    COALESCE("cs"."active_code_count", (0)::bigint) AS "active_code_count",
-    "cs"."latest_code_first_seen_at",
-    GREATEST(COALESCE("cs"."latest_code_first_seen_at", "g"."updated_at"), "g"."updated_at") AS "content_updated_at",
-    "u"."genre_l1",
-    "u"."genre_l2"
-   FROM (("public"."games" "g"
-     LEFT JOIN ( SELECT "codes"."game_id",
-            "count"(*) FILTER (WHERE ("codes"."status" = 'active'::"text")) AS "active_code_count",
-            "max"("codes"."first_seen_at") FILTER (WHERE ("codes"."status" = 'active'::"text")) AS "latest_code_first_seen_at"
-           FROM "public"."codes"
-          GROUP BY "codes"."game_id") "cs" ON (("cs"."game_id" = "g"."id")))
-     LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "g"."universe_id")))
-  WHERE ("g"."is_published" IS NOT NULL);
-
-
-ALTER VIEW "public"."game_pages_index_view" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."google_indexing_attempts" (
@@ -4055,9 +5391,26 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_items" (
     "projected_reason" "text",
     "trading_metrics_calculated_at" timestamp with time zone,
     "limited_type" "text",
+    "item_stats_tier" "text" DEFAULT 'NEW'::"text" NOT NULL,
+    "next_item_stats_refresh_at" timestamp with time zone,
+    "item_stats_refresh_locked_at" timestamp with time zone,
+    "item_stats_refresh_locked_by" "text",
+    "item_stats_refresh_attempt_count" integer DEFAULT 0 NOT NULL,
+    "last_item_stats_refresh_error" "text",
+    "last_item_stats_refreshed_at" timestamp with time zone,
+    "last_resale_data_fetched_at" timestamp with time zone,
+    "last_thumbnail_health_checked_at" timestamp with time zone,
+    "thumbnail_http_status" integer,
+    "thumbnail_last_error" "text",
+    "free_claimability" "text",
+    "free_verified_at" timestamp with time zone,
+    "free_verification_source" "text",
+    "free_restriction_reason" "text",
     CONSTRAINT "roblox_catalog_items_demand_consistency_check" CHECK ((("demand_consistency" >= 0) AND ("demand_consistency" <= 100))),
     CONSTRAINT "roblox_catalog_items_demand_level_check" CHECK (("demand_level" = ANY (ARRAY['amazing'::"text", 'popular'::"text", 'normal'::"text", 'terrible'::"text"]))),
     CONSTRAINT "roblox_catalog_items_demand_score_check" CHECK ((("demand_score" >= 0) AND ("demand_score" <= 100))),
+    CONSTRAINT "roblox_catalog_items_free_claimability_check" CHECK ((("free_claimability" IS NULL) OR ("free_claimability" = ANY (ARRAY['direct'::"text", 'experience'::"text", 'unavailable'::"text"])))),
+    CONSTRAINT "roblox_catalog_items_item_stats_tier_check" CHECK (("item_stats_tier" = ANY (ARRAY['NEW'::"text", 'HOT'::"text", 'WARM'::"text", 'COLD'::"text", 'TRADE'::"text", 'STALE'::"text", 'BROKEN_MEDIA'::"text"]))),
     CONSTRAINT "roblox_catalog_items_limited_type_check" CHECK (("limited_type" = ANY (ARRAY['classic'::"text", 'ugc'::"text"]))),
     CONSTRAINT "roblox_catalog_items_projected_confidence_check" CHECK ((("projected_confidence" >= 0) AND ("projected_confidence" <= 100))),
     CONSTRAINT "roblox_catalog_items_trading_value_confidence_check" CHECK ((("trading_value_confidence" >= 0) AND ("trading_value_confidence" <= 100))),
@@ -4154,6 +5507,22 @@ COMMENT ON COLUMN "public"."roblox_catalog_items"."trading_metrics_calculated_at
 
 
 COMMENT ON COLUMN "public"."roblox_catalog_items"."limited_type" IS 'Type of Limited: classic (old system) or ugc (new collectibles)';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."free_claimability" IS 'Official Roblox verification result: direct, experience, or unavailable.';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."free_verified_at" IS 'When free-item claimability was last checked against an official Roblox API.';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."free_verification_source" IS 'Source used for the final free-item availability check. Candidate discovery may come from any source; public rows require a current Roblox verification.';
+
+
+
+COMMENT ON COLUMN "public"."roblox_catalog_items"."free_restriction_reason" IS 'Machine-readable reason an item is not directly claimable from the Roblox shop.';
 
 
 
@@ -4270,7 +5639,7 @@ CREATE TABLE IF NOT EXISTS "public"."puzzle_pages" (
 ALTER TABLE "public"."puzzle_pages" OWNER TO "postgres";
 
 
-CREATE OR REPLACE VIEW "public"."puzzle_pages_view" AS
+CREATE OR REPLACE VIEW "public"."puzzle_pages_view" WITH ("security_invoker"='on') AS
  SELECT "pp"."id",
     "pp"."slug",
     "pp"."provider",
@@ -4367,11 +5736,33 @@ CREATE TABLE IF NOT EXISTS "public"."revalidation_events" (
     "slug" "text" NOT NULL,
     "source" "text",
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    CONSTRAINT "revalidation_events_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'list'::"text", 'author'::"text", 'event'::"text", 'checklist'::"text", 'tool'::"text", 'catalog'::"text", 'music'::"text", 'quiz'::"text", 'wiki'::"text", 'wiki_catalog'::"text", 'stats'::"text", 'puzzle'::"text"])))
+    CONSTRAINT "revalidation_events_entity_type_check" CHECK (("entity_type" = ANY (ARRAY['code'::"text", 'article'::"text", 'author'::"text", 'event'::"text", 'checklist'::"text", 'tool'::"text", 'catalog'::"text", 'music'::"text", 'quiz'::"text", 'wiki'::"text", 'wiki_collection'::"text", 'stats'::"text", 'puzzle'::"text"])))
 );
 
 
 ALTER TABLE "public"."revalidation_events" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."revalidation_worker_runs" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "started_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "finished_at" timestamp with time zone,
+    "status" "text" DEFAULT 'running'::"text" NOT NULL,
+    "batch_size" integer DEFAULT 0 NOT NULL,
+    "fetched_count" integer DEFAULT 0 NOT NULL,
+    "processed_count" integer DEFAULT 0 NOT NULL,
+    "failed_count" integer DEFAULT 0 NOT NULL,
+    "status_code" integer,
+    "duration_ms" integer,
+    "error" "text",
+    "events" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "response_body" "text",
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "revalidation_worker_runs_status_check" CHECK (("status" = ANY (ARRAY['running'::"text", 'success'::"text", 'failed'::"text", 'skipped'::"text"])))
+);
+
+
+ALTER TABLE "public"."revalidation_worker_runs" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_categories" (
@@ -4442,6 +5833,82 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_item_images" (
 ALTER TABLE "public"."roblox_catalog_item_images" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_item_resale_points" (
+    "asset_id" bigint NOT NULL,
+    "point_date" "date" NOT NULL,
+    "resale_price_robux" bigint,
+    "resale_volume" integer,
+    "fetched_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "source" "text" DEFAULT 'roblox_resale_data'::"text" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."roblox_catalog_item_resale_points" OWNER TO "supabase_admin";
+
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_item_stats_daily" (
+    "asset_id" bigint NOT NULL,
+    "stat_date" "date" NOT NULL,
+    "sample_count" integer DEFAULT 0 NOT NULL,
+    "price_open" bigint,
+    "price_close" bigint,
+    "price_min" bigint,
+    "price_max" bigint,
+    "resale_open" bigint,
+    "resale_close" bigint,
+    "resale_min" bigint,
+    "resale_max" bigint,
+    "favorites_open" bigint,
+    "favorites_close" bigint,
+    "favorites_delta" bigint,
+    "units_available_min" bigint,
+    "units_available_close" bigint,
+    "last_sampled_at" timestamp with time zone,
+    "finalized" boolean DEFAULT false NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."roblox_catalog_item_stats_daily" OWNER TO "supabase_admin";
+
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_item_stats_hourly" (
+    "asset_id" bigint NOT NULL,
+    "hour_start" timestamp with time zone NOT NULL,
+    "sampled_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "item_type" "text",
+    "price_robux" bigint,
+    "lowest_price_robux" bigint,
+    "lowest_resale_price_robux" bigint,
+    "favorite_count" bigint,
+    "is_for_sale" boolean,
+    "has_resellers" boolean,
+    "is_limited" boolean,
+    "is_limited_unique" boolean,
+    "remaining" bigint,
+    "total_quantity" bigint,
+    "units_available_for_consumption" bigint,
+    "quantity_limit_per_user" bigint,
+    "sale_location_type" "text",
+    "off_sale_deadline" timestamp with time zone,
+    "collectible_item_id" "text",
+    "rap" bigint,
+    "rap_sales" integer,
+    "rap_stock" integer,
+    "thumbnail_state" "text",
+    "thumbnail_url" "text",
+    "source" "text" DEFAULT 'item_stats_refresh'::"text" NOT NULL,
+    "raw_snapshot_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."roblox_catalog_item_stats_hourly" OWNER TO "supabase_admin";
+
+
 CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_items_history" (
     "asset_id" bigint NOT NULL,
     "recorded_at" timestamp with time zone DEFAULT "now"() NOT NULL,
@@ -4501,6 +5968,145 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_catalog_subcategories" (
 
 
 ALTER TABLE "public"."roblox_catalog_subcategories" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_decal_ids" (
+    "asset_id" bigint NOT NULL,
+    "texture_id" bigint,
+    "name" "text" NOT NULL,
+    "description" "text",
+    "creator_id" bigint,
+    "creator_type" "text",
+    "creator_name" "text",
+    "creator_verified" boolean,
+    "roblox_created_at" timestamp with time zone,
+    "roblox_updated_at" timestamp with time zone,
+    "is_public_domain" boolean,
+    "is_for_sale" boolean,
+    "price_in_robux" integer,
+    "sales" bigint,
+    "purchasable" boolean,
+    "vote_count" bigint,
+    "upvote_percent" integer,
+    "thumbnail_url" "text",
+    "thumbnail_state" "text",
+    "thumbnail_checked_at" timestamp with time zone,
+    "status" "text" DEFAULT 'pending'::"text" NOT NULL,
+    "status_reason" "text",
+    "source" "text" DEFAULT 'roblox_toolbox_decal_search'::"text" NOT NULL,
+    "raw_payload" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "first_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "last_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "verified_at" timestamp with time zone,
+    "popularity_score" double precision DEFAULT 0 NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "categories" "text"[] DEFAULT '{}'::"text"[] NOT NULL,
+    "primary_category" "text",
+    "curated_score" double precision DEFAULT 0 NOT NULL,
+    "curated_rank" integer,
+    "curated_tier" "text",
+    "curated_reason" "text",
+    CONSTRAINT "roblox_decal_ids_creator_type_check" CHECK ((("creator_type" IS NULL) OR ("creator_type" = ANY (ARRAY['User'::"text", 'Group'::"text"])))),
+    CONSTRAINT "roblox_decal_ids_status_check" CHECK (("status" = ANY (ARRAY['pending'::"text", 'active'::"text", 'inactive'::"text", 'deleted'::"text", 'private'::"text", 'moderated'::"text", 'not_decal'::"text", 'error'::"text"]))),
+    CONSTRAINT "roblox_decal_ids_upvote_percent_check" CHECK ((("upvote_percent" IS NULL) OR (("upvote_percent" >= 0) AND ("upvote_percent" <= 100))))
+);
+
+
+ALTER TABLE "public"."roblox_decal_ids" OWNER TO "supabase_admin";
+
+
+CREATE OR REPLACE VIEW "public"."roblox_decal_categories_view" WITH ("security_invoker"='true') AS
+ SELECT "category"."slug",
+    ("count"(*))::integer AS "item_count",
+    "max"("rd"."verified_at") AS "latest_verified_at",
+    "max"("rd"."curated_score") AS "top_curated_score"
+   FROM ("public"."roblox_decal_ids" "rd"
+     CROSS JOIN LATERAL "unnest"("rd"."categories") "category"("slug"))
+  WHERE (("rd"."status" = 'active'::"text") AND ("rd"."thumbnail_state" = 'Completed'::"text") AND ("rd"."thumbnail_url" IS NOT NULL))
+  GROUP BY "category"."slug";
+
+
+ALTER VIEW "public"."roblox_decal_categories_view" OWNER TO "supabase_admin";
+
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_decal_id_sources" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "asset_id" bigint NOT NULL,
+    "source_kind" "text" NOT NULL,
+    "source_url" "text",
+    "source_query" "text",
+    "source_page" integer,
+    "source_rank" integer,
+    "raw_payload" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "first_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "last_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."roblox_decal_id_sources" OWNER TO "supabase_admin";
+
+
+CREATE OR REPLACE VIEW "public"."roblox_decal_ids_ranked_view" WITH ("security_invoker"='true') AS
+ SELECT "rd"."asset_id",
+    "rd"."texture_id",
+    "rd"."name",
+    "rd"."description",
+    "rd"."creator_id",
+    "rd"."creator_type",
+    "rd"."creator_name",
+    "rd"."creator_verified",
+    "rd"."roblox_created_at",
+    "rd"."roblox_updated_at",
+    "rd"."is_public_domain",
+    "rd"."is_for_sale",
+    "rd"."price_in_robux",
+    "rd"."sales",
+    "rd"."purchasable",
+    "rd"."vote_count",
+    "rd"."upvote_percent",
+    "rd"."thumbnail_url",
+    "rd"."thumbnail_state",
+    "rd"."thumbnail_checked_at",
+    "rd"."status",
+    "rd"."status_reason",
+    "rd"."source",
+    "rd"."raw_payload",
+    "rd"."first_seen_at",
+    "rd"."last_seen_at",
+    "rd"."verified_at",
+    "rd"."popularity_score",
+    "rd"."categories",
+    "rd"."primary_category",
+    "rd"."curated_score",
+    "rd"."curated_rank",
+    "rd"."curated_tier",
+    "rd"."curated_reason",
+    "rd"."created_at",
+    "rd"."updated_at",
+        CASE
+            WHEN (("rd"."thumbnail_state" = 'Completed'::"text") AND ("rd"."thumbnail_url" IS NOT NULL)) THEN true
+            ELSE false
+        END AS "thumbnail_ready",
+        CASE
+            WHEN ("rd"."roblox_created_at" IS NULL) THEN 999
+            WHEN ("rd"."roblox_created_at" >= ("now"() - '30 days'::interval)) THEN 0
+            WHEN ("rd"."roblox_created_at" >= ("now"() - '180 days'::interval)) THEN 1
+            WHEN ("rd"."roblox_created_at" >= ("now"() - '1 year'::interval)) THEN 2
+            ELSE 3
+        END AS "age_bucket",
+    (COALESCE("src"."source_count", (0)::bigint))::integer AS "source_count"
+   FROM ("public"."roblox_decal_ids" "rd"
+     LEFT JOIN ( SELECT "roblox_decal_id_sources"."asset_id",
+            "count"(*) AS "source_count"
+           FROM "public"."roblox_decal_id_sources"
+          GROUP BY "roblox_decal_id_sources"."asset_id") "src" ON (("src"."asset_id" = "rd"."asset_id")))
+  WHERE ("rd"."status" = 'active'::"text");
+
+
+ALTER VIEW "public"."roblox_decal_ids_ranked_view" OWNER TO "supabase_admin";
 
 
 CREATE TABLE IF NOT EXISTS "public"."roblox_groups" (
@@ -4655,6 +6261,72 @@ CREATE OR REPLACE VIEW "public"."roblox_music_ids_ranked_view" WITH ("security_i
 ALTER VIEW "public"."roblox_music_ids_ranked_view" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."roblox_promo_rewards" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "source_provider" "text" DEFAULT 'robloxden'::"text" NOT NULL,
+    "source_key" "text" NOT NULL,
+    "source_list_url" "text" NOT NULL,
+    "source_url" "text" NOT NULL,
+    "asset_id" bigint NOT NULL,
+    "roblox_item_type" "text" DEFAULT 'Asset'::"text" NOT NULL,
+    "reward_name" "text" NOT NULL,
+    "source_type" "text" NOT NULL,
+    "claim_type" "text" NOT NULL,
+    "promo_code" "text",
+    "promo_code_normalized" "text",
+    "event_name" "text",
+    "requirement_text" "text",
+    "claim_instructions" "text",
+    "destination_url" "text",
+    "roblox_item_url" "text",
+    "official_name" "text",
+    "asset_type_id" integer,
+    "creator_id" bigint,
+    "creator_name" "text",
+    "thumbnail_url" "text",
+    "thumbnail_state" "text",
+    "thumbnail_checked_at" timestamp with time zone,
+    "status" "text" DEFAULT 'source_listed_unverified'::"text" NOT NULL,
+    "status_reason" "text",
+    "consecutive_misses" integer DEFAULT 0 NOT NULL,
+    "sort_order" integer DEFAULT 0 NOT NULL,
+    "source_hash" "text" NOT NULL,
+    "first_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "last_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "last_checked_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "verified_at" timestamp with time zone,
+    "retired_at" timestamp with time zone,
+    "raw_source_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "raw_roblox_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "roblox_promo_rewards_claim_type_check" CHECK (("claim_type" = ANY (ARRAY['web_promo_code'::"text", 'experience_code'::"text", 'event_task'::"text", 'creator_challenge'::"text", 'catalog_claim'::"text", 'collaboration'::"text", 'gift_card_promotion'::"text"]))),
+    CONSTRAINT "roblox_promo_rewards_code_check" CHECK ((("claim_type" <> ALL (ARRAY['web_promo_code'::"text", 'experience_code'::"text"])) OR (("promo_code" IS NOT NULL) AND ("length"("btrim"("promo_code")) > 0)))),
+    CONSTRAINT "roblox_promo_rewards_code_normalized_check" CHECK (((("promo_code" IS NULL) AND ("promo_code_normalized" IS NULL)) OR (("promo_code" IS NOT NULL) AND ("promo_code_normalized" = "upper"("btrim"("promo_code")))))),
+    CONSTRAINT "roblox_promo_rewards_item_type_check" CHECK (("roblox_item_type" = ANY (ARRAY['Asset'::"text", 'Bundle'::"text"]))),
+    CONSTRAINT "roblox_promo_rewards_misses_check" CHECK (("consecutive_misses" >= 0)),
+    CONSTRAINT "roblox_promo_rewards_sort_order_check" CHECK (("sort_order" >= 0)),
+    CONSTRAINT "roblox_promo_rewards_source_key_check" CHECK (("length"("btrim"("source_key")) > 0)),
+    CONSTRAINT "roblox_promo_rewards_source_type_check" CHECK (("source_type" = ANY (ARRAY['code'::"text", 'event'::"text", 'creator-challenge'::"text", 'catalog-claim'::"text", 'collaboration'::"text"]))),
+    CONSTRAINT "roblox_promo_rewards_status_check" CHECK (("status" = ANY (ARRAY['source_listed_unverified'::"text", 'verified_claimable'::"text", 'unavailable'::"text", 'expired'::"text", 'inactive'::"text", 'error'::"text"])))
+);
+
+
+ALTER TABLE "public"."roblox_promo_rewards" OWNER TO "postgres";
+
+
+COMMENT ON TABLE "public"."roblox_promo_rewards" IS 'Roblox-wide promotional codes and reward offers discovered from RobloxDen and enriched with official Roblox asset metadata.';
+
+
+
+COMMENT ON COLUMN "public"."roblox_promo_rewards"."status" IS 'Claimability state. Source listing alone is source_listed_unverified and must not be presented as official proof that an old reward is still earnable.';
+
+
+
+COMMENT ON COLUMN "public"."roblox_promo_rewards"."raw_source_json" IS 'Private audit evidence from the discovery source. Never render this field publicly.';
+
+
+
 CREATE TABLE IF NOT EXISTS "public"."roblox_universe_badges" (
     "badge_id" bigint NOT NULL,
     "universe_id" bigint NOT NULL,
@@ -4676,36 +6348,6 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_universe_badges" (
 
 
 ALTER TABLE "public"."roblox_universe_badges" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."roblox_universe_discovery_jobs" (
-    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
-    "job_key" "text" NOT NULL,
-    "source" "text" NOT NULL,
-    "strategy" "text" NOT NULL,
-    "query" "text",
-    "params" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
-    "status" "text" DEFAULT 'pending'::"text" NOT NULL,
-    "priority" integer DEFAULT 0 NOT NULL,
-    "attempts" integer DEFAULT 0 NOT NULL,
-    "max_attempts" integer DEFAULT 5 NOT NULL,
-    "result_count" integer DEFAULT 0 NOT NULL,
-    "new_universe_count" integer DEFAULT 0 NOT NULL,
-    "cursor" "text",
-    "cooldown_until" timestamp with time zone,
-    "next_run_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "locked_at" timestamp with time zone,
-    "locked_by" "text",
-    "last_error" "text",
-    "last_run_at" timestamp with time zone,
-    "completed_at" timestamp with time zone,
-    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    CONSTRAINT "roblox_universe_discovery_jobs_status_check" CHECK (("status" = ANY (ARRAY['pending'::"text", 'in_progress'::"text", 'completed'::"text", 'failed'::"text", 'paused'::"text"])))
-);
-
-
-ALTER TABLE "public"."roblox_universe_discovery_jobs" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."roblox_universe_gamepasses" (
@@ -4739,6 +6381,9 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_universe_media" (
     "approved" boolean,
     "extra" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
     "fetched_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "first_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "last_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "source" "text",
     CONSTRAINT "roblox_universe_media_media_type_check" CHECK (("media_type" = ANY (ARRAY['icon'::"text", 'screenshot'::"text", 'video'::"text"])))
 );
 
@@ -4777,23 +6422,32 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_universe_rank_snapshots" (
 ALTER TABLE "public"."roblox_universe_rank_snapshots" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."roblox_universe_search_snapshots" (
-    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
-    "query" "text" NOT NULL,
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_rank_snapshots_daily" (
     "universe_id" bigint NOT NULL,
-    "place_id" bigint,
-    "position" integer,
-    "session_id" "uuid" NOT NULL,
-    "relevance_score" numeric,
-    "has_verified_badge" boolean,
-    "is_sponsored" boolean,
-    "source" "text" DEFAULT 'omni-search'::"text" NOT NULL,
-    "raw_payload" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
-    "fetched_at" timestamp with time zone DEFAULT "now"() NOT NULL
+    "rank_type" "text" NOT NULL,
+    "stat_date" "date" NOT NULL,
+    "rank_value" integer NOT NULL,
+    "metric_value" numeric,
+    "sampled_at" timestamp with time zone NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
 );
 
 
-ALTER TABLE "public"."roblox_universe_search_snapshots" OWNER TO "postgres";
+ALTER TABLE "public"."roblox_universe_rank_snapshots_daily" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_rank_snapshots_hourly" (
+    "universe_id" bigint NOT NULL,
+    "rank_type" "text" NOT NULL,
+    "hour_start" timestamp with time zone NOT NULL,
+    "rank_value" integer NOT NULL,
+    "metric_value" numeric,
+    "sampled_at" timestamp with time zone NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."roblox_universe_rank_snapshots_hourly" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."roblox_universe_social_links" (
@@ -4808,50 +6462,6 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_universe_social_links" (
 
 
 ALTER TABLE "public"."roblox_universe_social_links" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."roblox_universe_sort_definitions" (
-    "sort_id" "text" NOT NULL,
-    "title" "text",
-    "description" "text",
-    "layout" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
-    "experiments" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
-    "last_seen_at" timestamp with time zone DEFAULT "now"() NOT NULL
-);
-
-
-ALTER TABLE "public"."roblox_universe_sort_definitions" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."roblox_universe_sort_entries" (
-    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
-    "sort_id" "text" NOT NULL,
-    "universe_id" bigint NOT NULL,
-    "place_id" bigint,
-    "rank" integer,
-    "session_id" "uuid" NOT NULL,
-    "run_id" "uuid",
-    "device" "text",
-    "country" "text",
-    "source" "text" DEFAULT 'explore'::"text" NOT NULL,
-    "is_sponsored" boolean,
-    "fetched_at" timestamp with time zone DEFAULT "now"() NOT NULL
-);
-
-
-ALTER TABLE "public"."roblox_universe_sort_entries" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."roblox_universe_sort_runs" (
-    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
-    "session_id" "uuid" NOT NULL,
-    "device" "text" NOT NULL,
-    "country" "text" NOT NULL,
-    "retrieved_at" timestamp with time zone DEFAULT "now"() NOT NULL
-);
-
-
-ALTER TABLE "public"."roblox_universe_sort_runs" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."roblox_universe_stats_daily" (
@@ -4932,6 +6542,31 @@ CREATE TABLE IF NOT EXISTS "public"."roblox_universe_stats_hourly" (
 ALTER TABLE "public"."roblox_universe_stats_hourly" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."roblox_universe_update_events" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "universe_id" bigint NOT NULL,
+    "previous_updated_at_api" timestamp with time zone,
+    "updated_at_api" timestamp with time zone NOT NULL,
+    "detected_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "sampled_at" timestamp with time zone NOT NULL,
+    "source" "text" DEFAULT 'update-universe-hourly-stats'::"text" NOT NULL,
+    "label" "text",
+    "description" "text",
+    "stats_tier" "text",
+    "playing" bigint,
+    "visits" bigint,
+    "favorites" bigint,
+    "likes" bigint,
+    "dislikes" bigint,
+    "rating_percent" numeric,
+    "raw_game_json" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."roblox_universe_update_events" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."roblox_virtual_event_categories" (
     "event_id" "text" NOT NULL,
     "category" "text" NOT NULL,
@@ -5002,6 +6637,265 @@ CREATE TABLE IF NOT EXISTS "public"."search_index" (
 
 
 ALTER TABLE "public"."search_index" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."site_feedback" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "body" "text" NOT NULL,
+    "email" "text",
+    "page_url" "text",
+    "page_path" "text",
+    "viewport_width" integer,
+    "viewport_height" integer,
+    "user_agent" "text",
+    "ip_address" "text",
+    "status" "text" DEFAULT 'new'::"text" NOT NULL,
+    "metadata" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "site_feedback_body_not_blank" CHECK (("length"("btrim"("body")) > 0)),
+    CONSTRAINT "site_feedback_status_check" CHECK (("status" = ANY (ARRAY['new'::"text", 'reviewed'::"text", 'closed'::"text", 'spam'::"text"])))
+);
+
+
+ALTER TABLE "public"."site_feedback" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."stats_creator_current_index" (
+    "creator_key" "text" NOT NULL,
+    "creator_type" "text" NOT NULL,
+    "creator_id" bigint NOT NULL,
+    "creator_name" "text" NOT NULL,
+    "creator_slug" "text" NOT NULL,
+    "game_count" integer DEFAULT 0 NOT NULL,
+    "hot_game_count" integer DEFAULT 0 NOT NULL,
+    "warm_game_count" integer DEFAULT 0 NOT NULL,
+    "new_game_count" integer DEFAULT 0 NOT NULL,
+    "cold_game_count" integer DEFAULT 0 NOT NULL,
+    "playing" bigint DEFAULT 0 NOT NULL,
+    "visits" bigint DEFAULT 0 NOT NULL,
+    "favorites" bigint DEFAULT 0 NOT NULL,
+    "likes" bigint DEFAULT 0 NOT NULL,
+    "dislikes" bigint DEFAULT 0 NOT NULL,
+    "rating_percent" numeric,
+    "top_universe_id" bigint,
+    "top_slug" "text",
+    "top_name" "text",
+    "top_display_name" "text",
+    "top_icon_url" "text",
+    "top_playing" bigint,
+    "top_visits" bigint,
+    "top_favorites" bigint,
+    "member_count" bigint,
+    "has_verified_badge" boolean,
+    "last_stats_refreshed_at" timestamp with time zone,
+    "indexed_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."stats_creator_current_index" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."stats_game_current_index" (
+    "universe_id" bigint NOT NULL,
+    "root_place_id" bigint,
+    "slug" "text" NOT NULL,
+    "name" "text" NOT NULL,
+    "display_name" "text",
+    "description" "text",
+    "creator_id" bigint,
+    "creator_name" "text",
+    "creator_type" "text",
+    "genre" "text",
+    "genre_l1" "text",
+    "genre_l2" "text",
+    "age_rating" "text",
+    "icon_url" "text",
+    "thumbnail_urls" "jsonb" DEFAULT '[]'::"jsonb" NOT NULL,
+    "playing" bigint,
+    "visits" bigint,
+    "favorites" bigint,
+    "likes" bigint,
+    "dislikes" bigint,
+    "rating_percent" numeric,
+    "stats_tier" "text",
+    "created_at_api" timestamp with time zone,
+    "updated_at_api" timestamp with time zone,
+    "last_stats_refreshed_at" timestamp with time zone,
+    "last_playing_refreshed_at" timestamp with time zone,
+    "desktop_enabled" boolean,
+    "mobile_enabled" boolean,
+    "tablet_enabled" boolean,
+    "console_enabled" boolean,
+    "vr_enabled" boolean,
+    "baseline_playing_24h" bigint,
+    "baseline_playing_7d" bigint,
+    "growth_24h" bigint,
+    "growth_24h_percent" numeric,
+    "growth_7d" bigint,
+    "growth_7d_percent" numeric,
+    "peak_24h" bigint,
+    "peak_7d" bigint,
+    "global_playing_rank" integer,
+    "genre_playing_rank" integer,
+    "subgenre_playing_rank" integer,
+    "indexed_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."stats_game_current_index" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."stats_genre_current_index" (
+    "genre_slug" "text" NOT NULL,
+    "genre" "text" NOT NULL,
+    "games" integer DEFAULT 0 NOT NULL,
+    "playing" bigint DEFAULT 0 NOT NULL,
+    "visits" bigint DEFAULT 0 NOT NULL,
+    "top_universe_id" bigint,
+    "top_name" "text",
+    "top_slug" "text",
+    "top_icon_url" "text",
+    "top_playing" bigint,
+    "indexed_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."stats_genre_current_index" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."stats_item_current_index" (
+    "asset_id" bigint NOT NULL,
+    "item_type" "text" NOT NULL,
+    "asset_type_id" integer,
+    "name" "text" NOT NULL,
+    "description" "text",
+    "category" "text",
+    "subcategory" "text",
+    "creator_id" bigint,
+    "creator_target_id" bigint,
+    "creator_name" "text",
+    "creator_type" "text",
+    "creator_has_verified_badge" boolean,
+    "price_robux" bigint,
+    "price_status" "text",
+    "lowest_price_robux" bigint,
+    "lowest_resale_price_robux" bigint,
+    "is_for_sale" boolean,
+    "has_resellers" boolean,
+    "is_limited" boolean,
+    "is_limited_unique" boolean,
+    "remaining" bigint,
+    "total_quantity" bigint,
+    "units_available_for_consumption" bigint,
+    "quantity_limit_per_user" bigint,
+    "sale_location_type" "text",
+    "off_sale_deadline" timestamp with time zone,
+    "collectible_item_id" "text",
+    "favorite_count" bigint,
+    "item_stats_tier" "text",
+    "first_seen_at" timestamp with time zone,
+    "created_at" timestamp with time zone,
+    "last_seen_at" timestamp with time zone,
+    "last_item_stats_refreshed_at" timestamp with time zone,
+    "last_resale_data_fetched_at" timestamp with time zone,
+    "last_thumbnail_health_checked_at" timestamp with time zone,
+    "thumbnail_http_status" integer,
+    "thumbnail_state" "text",
+    "thumbnail_url" "text",
+    "thumbnail_updated_at" timestamp with time zone,
+    "roblox_url" "text",
+    "baseline_price_24h" bigint,
+    "baseline_resale_24h" bigint,
+    "baseline_favorites_24h" bigint,
+    "price_change_24h" bigint,
+    "price_change_24h_percent" numeric,
+    "resale_change_24h" bigint,
+    "resale_change_24h_percent" numeric,
+    "favorite_change_24h" bigint,
+    "favorite_change_24h_percent" numeric,
+    "baseline_price_7d" bigint,
+    "baseline_resale_7d" bigint,
+    "baseline_favorites_7d" bigint,
+    "price_change_7d" bigint,
+    "price_change_7d_percent" numeric,
+    "resale_change_7d" bigint,
+    "resale_change_7d_percent" numeric,
+    "favorite_change_7d" bigint,
+    "favorite_change_7d_percent" numeric,
+    "global_favorites_rank" integer,
+    "global_resale_rank" integer,
+    "category_favorites_rank" integer,
+    "category_resale_rank" integer,
+    "indexed_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."stats_item_current_index" OWNER TO "supabase_admin";
+
+
+CREATE TABLE IF NOT EXISTS "public"."stats_item_price_movers_current_index" (
+    "asset_id" bigint NOT NULL,
+    "name" "text" NOT NULL,
+    "item_type" "text" NOT NULL,
+    "category" "text",
+    "subcategory" "text",
+    "creator_name" "text",
+    "thumbnail_url" "text",
+    "price_robux" bigint,
+    "lowest_resale_price_robux" bigint,
+    "resale_change_24h" bigint,
+    "resale_change_24h_percent" numeric,
+    "price_change_24h" bigint,
+    "price_change_24h_percent" numeric,
+    "favorite_change_24h" bigint,
+    "mover_score" numeric DEFAULT 0 NOT NULL,
+    "rank_value" integer NOT NULL,
+    "indexed_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."stats_item_price_movers_current_index" OWNER TO "supabase_admin";
+
+
+CREATE TABLE IF NOT EXISTS "public"."stats_job_runs" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "job_name" "text" NOT NULL,
+    "worker_id" "text",
+    "started_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "finished_at" timestamp with time zone,
+    "status" "text" DEFAULT 'running'::"text" NOT NULL,
+    "rows_claimed" integer DEFAULT 0 NOT NULL,
+    "rows_succeeded" integer DEFAULT 0 NOT NULL,
+    "rows_failed" integer DEFAULT 0 NOT NULL,
+    "error" "text",
+    "metadata" "jsonb" DEFAULT '{}'::"jsonb" NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    CONSTRAINT "stats_job_runs_status_check" CHECK (("status" = ANY (ARRAY['running'::"text", 'success'::"text", 'failed'::"text", 'partial'::"text", 'skipped'::"text"])))
+);
+
+
+ALTER TABLE "public"."stats_job_runs" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."stats_risers_current_index" (
+    "universe_id" bigint NOT NULL,
+    "slug" "text" NOT NULL,
+    "name" "text" NOT NULL,
+    "icon_url" "text",
+    "genre" "text",
+    "playing" bigint NOT NULL,
+    "baseline_playing_24h" bigint NOT NULL,
+    "growth_24h" bigint NOT NULL,
+    "growth_24h_percent" numeric NOT NULL,
+    "riser_score" numeric NOT NULL,
+    "eligibility_threshold" integer DEFAULT 1000 NOT NULL,
+    "rank_value" integer NOT NULL,
+    "indexed_at" timestamp with time zone DEFAULT "now"() NOT NULL
+);
+
+
+ALTER TABLE "public"."stats_risers_current_index" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."tools" (
@@ -5095,7 +6989,7 @@ CREATE TABLE IF NOT EXISTS "public"."user_quiz_progress" (
 ALTER TABLE "public"."user_quiz_progress" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "public"."wiki_catalog_pages" (
+CREATE TABLE IF NOT EXISTS "public"."wiki_collection_pages" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "wiki_page_id" "uuid",
     "universe_id" bigint,
@@ -5118,16 +7012,20 @@ CREATE TABLE IF NOT EXISTS "public"."wiki_catalog_pages" (
     "published_at" timestamp with time zone,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    CONSTRAINT "wiki_catalog_pages_code_not_blank" CHECK (("length"("btrim"("code")) > 0)),
-    CONSTRAINT "wiki_catalog_pages_collection_slug_not_blank" CHECK (("length"("btrim"("collection_slug")) > 0)),
-    CONSTRAINT "wiki_catalog_pages_wiki_slug_not_blank" CHECK (("length"("btrim"("wiki_slug")) > 0))
+    "display_name" "text",
+    "item_count" integer,
+    CONSTRAINT "wiki_collection_pages_code_not_blank" CHECK (("length"("btrim"("code")) > 0)),
+    CONSTRAINT "wiki_collection_pages_collection_slug_not_blank" CHECK (("length"("btrim"("collection_slug")) > 0)),
+    CONSTRAINT "wiki_collection_pages_display_name_not_blank" CHECK ((("display_name" IS NULL) OR ("length"("btrim"("display_name")) > 0))),
+    CONSTRAINT "wiki_collection_pages_item_count_nonnegative" CHECK ((("item_count" IS NULL) OR ("item_count" >= 0))),
+    CONSTRAINT "wiki_collection_pages_wiki_slug_not_blank" CHECK (("length"("btrim"("wiki_slug")) > 0))
 );
 
 
-ALTER TABLE "public"."wiki_catalog_pages" OWNER TO "postgres";
+ALTER TABLE "public"."wiki_collection_pages" OWNER TO "postgres";
 
 
-CREATE OR REPLACE VIEW "public"."wiki_catalog_pages_view" WITH ("security_invoker"='true') AS
+CREATE OR REPLACE VIEW "public"."wiki_collection_pages_view" WITH ("security_invoker"='true') AS
  SELECT "id",
     "wiki_page_id",
     "universe_id",
@@ -5135,6 +7033,8 @@ CREATE OR REPLACE VIEW "public"."wiki_catalog_pages_view" WITH ("security_invoke
     "collection_slug",
     "code",
     "title",
+    "display_name",
+    "item_count",
     "seo_title",
     "meta_description",
     "intro_md",
@@ -5151,10 +7051,10 @@ CREATE OR REPLACE VIEW "public"."wiki_catalog_pages_view" WITH ("security_invoke
     "created_at",
     "updated_at",
     GREATEST("updated_at", COALESCE("published_at", "updated_at")) AS "content_updated_at"
-   FROM "public"."wiki_catalog_pages" "wcp";
+   FROM "public"."wiki_collection_pages" "wcp";
 
 
-ALTER VIEW "public"."wiki_catalog_pages_view" OWNER TO "postgres";
+ALTER VIEW "public"."wiki_collection_pages_view" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."wiki_pages" (
@@ -5171,6 +7071,7 @@ CREATE TABLE IF NOT EXISTS "public"."wiki_pages" (
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "updated_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "cover_image" "text",
+    "description_md" "text",
     CONSTRAINT "wiki_pages_slug_not_empty" CHECK (("length"(TRIM(BOTH FROM "slug")) > 0))
 );
 
@@ -5192,6 +7093,7 @@ CREATE OR REPLACE VIEW "public"."wiki_pages_view" WITH ("security_invoker"='true
     "wp"."created_at",
     "wp"."updated_at",
     "wp"."cover_image",
+    "wp"."description_md",
     GREATEST("wp"."updated_at", COALESCE("wp"."published_at", "wp"."updated_at")) AS "content_updated_at",
     "u"."root_place_id" AS "universe_root_place_id",
     "u"."name" AS "universe_name",
@@ -5222,7 +7124,10 @@ CREATE OR REPLACE VIEW "public"."wiki_pages_view" WITH ("security_invoker"='true
     "u"."create_vip_servers_allowed",
     "u"."max_players",
     "u"."server_size",
-    "u"."playing",
+        CASE
+            WHEN ("u"."last_playing_refreshed_at" >= ("now"() - '24:00:00'::interval)) THEN "u"."playing"
+            ELSE NULL::bigint
+        END AS "playing",
     "u"."visits",
     "u"."favorites",
     "u"."likes",
@@ -5232,7 +7137,8 @@ CREATE OR REPLACE VIEW "public"."wiki_pages_view" WITH ("security_invoker"='true
     "u"."social_links",
     "u"."created_at_api",
     "u"."updated_at_api",
-    "u"."updated_at" AS "universe_updated_at"
+    "u"."updated_at" AS "universe_updated_at",
+    "u"."last_playing_refreshed_at"
    FROM ("public"."wiki_pages" "wp"
      LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "wp"."universe_id")));
 
@@ -5289,6 +7195,21 @@ ALTER TABLE ONLY "public"."authors"
 
 
 
+ALTER TABLE ONLY "public"."cache_warm_events"
+    ADD CONSTRAINT "cache_warm_events_path_key" UNIQUE ("path");
+
+
+
+ALTER TABLE ONLY "public"."cache_warm_events"
+    ADD CONSTRAINT "cache_warm_events_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."cache_warm_worker_runs"
+    ADD CONSTRAINT "cache_warm_worker_runs_pkey" PRIMARY KEY ("id");
+
+
+
 ALTER TABLE ONLY "public"."catalog_pages"
     ADD CONSTRAINT "catalog_pages_code_key" UNIQUE ("code");
 
@@ -5319,8 +7240,18 @@ ALTER TABLE ONLY "public"."checklist_pages"
 
 
 
+ALTER TABLE ONLY "public"."code_pages"
+    ADD CONSTRAINT "code_pages_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."code_pages"
+    ADD CONSTRAINT "code_pages_slug_key" UNIQUE ("slug");
+
+
+
 ALTER TABLE ONLY "public"."codes"
-    ADD CONSTRAINT "codes_game_id_code_key" UNIQUE ("game_id", "code");
+    ADD CONSTRAINT "codes_code_page_id_code_key" UNIQUE ("code_page_id", "code");
 
 
 
@@ -5351,31 +7282,6 @@ ALTER TABLE ONLY "public"."events_pages"
 
 ALTER TABLE ONLY "public"."game_generation_queue"
     ADD CONSTRAINT "game_generation_queue_pkey" PRIMARY KEY ("id");
-
-
-
-ALTER TABLE ONLY "public"."game_list_entries"
-    ADD CONSTRAINT "game_list_entries_pkey" PRIMARY KEY ("list_id", "universe_id");
-
-
-
-ALTER TABLE ONLY "public"."game_lists"
-    ADD CONSTRAINT "game_lists_pkey" PRIMARY KEY ("id");
-
-
-
-ALTER TABLE ONLY "public"."game_lists"
-    ADD CONSTRAINT "game_lists_slug_key" UNIQUE ("slug");
-
-
-
-ALTER TABLE ONLY "public"."games"
-    ADD CONSTRAINT "games_pkey" PRIMARY KEY ("id");
-
-
-
-ALTER TABLE ONLY "public"."games"
-    ADD CONSTRAINT "games_slug_key" UNIQUE ("slug");
 
 
 
@@ -5434,6 +7340,11 @@ ALTER TABLE ONLY "public"."revalidation_events"
 
 
 
+ALTER TABLE ONLY "public"."revalidation_worker_runs"
+    ADD CONSTRAINT "revalidation_worker_runs_pkey" PRIMARY KEY ("id");
+
+
+
 ALTER TABLE ONLY "public"."roblox_catalog_categories"
     ADD CONSTRAINT "roblox_catalog_categories_pkey" PRIMARY KEY ("category");
 
@@ -5451,6 +7362,21 @@ ALTER TABLE ONLY "public"."roblox_catalog_discovery_runs"
 
 ALTER TABLE ONLY "public"."roblox_catalog_item_images"
     ADD CONSTRAINT "roblox_catalog_item_images_pkey" PRIMARY KEY ("asset_id", "size", "format");
+
+
+
+ALTER TABLE ONLY "public"."roblox_catalog_item_resale_points"
+    ADD CONSTRAINT "roblox_catalog_item_resale_points_pkey" PRIMARY KEY ("asset_id", "point_date");
+
+
+
+ALTER TABLE ONLY "public"."roblox_catalog_item_stats_daily"
+    ADD CONSTRAINT "roblox_catalog_item_stats_daily_pkey" PRIMARY KEY ("asset_id", "stat_date");
+
+
+
+ALTER TABLE ONLY "public"."roblox_catalog_item_stats_hourly"
+    ADD CONSTRAINT "roblox_catalog_item_stats_hourly_pkey" PRIMARY KEY ("asset_id", "hour_start");
 
 
 
@@ -5474,6 +7400,21 @@ ALTER TABLE ONLY "public"."roblox_catalog_subcategories"
 
 
 
+ALTER TABLE ONLY "public"."roblox_decal_id_sources"
+    ADD CONSTRAINT "roblox_decal_id_sources_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."roblox_decal_id_sources"
+    ADD CONSTRAINT "roblox_decal_id_sources_unique_source" UNIQUE ("asset_id", "source_kind", "source_url", "source_query", "source_page", "source_rank");
+
+
+
+ALTER TABLE ONLY "public"."roblox_decal_ids"
+    ADD CONSTRAINT "roblox_decal_ids_pkey" PRIMARY KEY ("asset_id");
+
+
+
 ALTER TABLE ONLY "public"."roblox_groups"
     ADD CONSTRAINT "roblox_groups_pkey" PRIMARY KEY ("group_id");
 
@@ -5484,18 +7425,18 @@ ALTER TABLE ONLY "public"."roblox_music_ids"
 
 
 
+ALTER TABLE ONLY "public"."roblox_promo_rewards"
+    ADD CONSTRAINT "roblox_promo_rewards_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."roblox_promo_rewards"
+    ADD CONSTRAINT "roblox_promo_rewards_source_unique" UNIQUE ("source_provider", "source_key");
+
+
+
 ALTER TABLE ONLY "public"."roblox_universe_badges"
     ADD CONSTRAINT "roblox_universe_badges_pkey" PRIMARY KEY ("badge_id");
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_discovery_jobs"
-    ADD CONSTRAINT "roblox_universe_discovery_jobs_job_key_key" UNIQUE ("job_key");
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_discovery_jobs"
-    ADD CONSTRAINT "roblox_universe_discovery_jobs_pkey" PRIMARY KEY ("id");
 
 
 
@@ -5519,13 +7460,18 @@ ALTER TABLE ONLY "public"."roblox_universe_place_servers"
 
 
 
+ALTER TABLE ONLY "public"."roblox_universe_rank_snapshots_daily"
+    ADD CONSTRAINT "roblox_universe_rank_snapshots_daily_pkey" PRIMARY KEY ("universe_id", "rank_type", "stat_date");
+
+
+
+ALTER TABLE ONLY "public"."roblox_universe_rank_snapshots_hourly"
+    ADD CONSTRAINT "roblox_universe_rank_snapshots_hourly_pkey" PRIMARY KEY ("universe_id", "rank_type", "hour_start");
+
+
+
 ALTER TABLE ONLY "public"."roblox_universe_rank_snapshots"
     ADD CONSTRAINT "roblox_universe_rank_snapshots_pkey" PRIMARY KEY ("universe_id", "rank_type", "sampled_at");
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_search_snapshots"
-    ADD CONSTRAINT "roblox_universe_search_snapshots_pkey" PRIMARY KEY ("id");
 
 
 
@@ -5536,26 +7482,6 @@ ALTER TABLE ONLY "public"."roblox_universe_social_links"
 
 ALTER TABLE ONLY "public"."roblox_universe_social_links"
     ADD CONSTRAINT "roblox_universe_social_links_universe_id_platform_url_key" UNIQUE ("universe_id", "platform", "url");
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_sort_definitions"
-    ADD CONSTRAINT "roblox_universe_sort_definitions_pkey" PRIMARY KEY ("sort_id");
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
-    ADD CONSTRAINT "roblox_universe_sort_entries_pkey" PRIMARY KEY ("id");
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
-    ADD CONSTRAINT "roblox_universe_sort_entries_sort_id_universe_id_session_id_key" UNIQUE ("sort_id", "universe_id", "session_id", "fetched_at");
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_sort_runs"
-    ADD CONSTRAINT "roblox_universe_sort_runs_pkey" PRIMARY KEY ("id");
 
 
 
@@ -5571,6 +7497,16 @@ ALTER TABLE ONLY "public"."roblox_universe_stats_daily"
 
 ALTER TABLE ONLY "public"."roblox_universe_stats_hourly"
     ADD CONSTRAINT "roblox_universe_stats_hourly_pkey" PRIMARY KEY ("universe_id", "hour_start");
+
+
+
+ALTER TABLE ONLY "public"."roblox_universe_update_events"
+    ADD CONSTRAINT "roblox_universe_update_events_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."roblox_universe_update_events"
+    ADD CONSTRAINT "roblox_universe_update_events_universe_id_updated_at_api_key" UNIQUE ("universe_id", "updated_at_api");
 
 
 
@@ -5599,6 +7535,51 @@ ALTER TABLE ONLY "public"."search_index"
 
 
 
+ALTER TABLE ONLY "public"."site_feedback"
+    ADD CONSTRAINT "site_feedback_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."stats_creator_current_index"
+    ADD CONSTRAINT "stats_creator_current_index_creator_type_creator_id_key" UNIQUE ("creator_type", "creator_id");
+
+
+
+ALTER TABLE ONLY "public"."stats_creator_current_index"
+    ADD CONSTRAINT "stats_creator_current_index_pkey" PRIMARY KEY ("creator_key");
+
+
+
+ALTER TABLE ONLY "public"."stats_game_current_index"
+    ADD CONSTRAINT "stats_game_current_index_pkey" PRIMARY KEY ("universe_id");
+
+
+
+ALTER TABLE ONLY "public"."stats_genre_current_index"
+    ADD CONSTRAINT "stats_genre_current_index_pkey" PRIMARY KEY ("genre_slug");
+
+
+
+ALTER TABLE ONLY "public"."stats_item_current_index"
+    ADD CONSTRAINT "stats_item_current_index_pkey" PRIMARY KEY ("asset_id");
+
+
+
+ALTER TABLE ONLY "public"."stats_item_price_movers_current_index"
+    ADD CONSTRAINT "stats_item_price_movers_current_index_pkey" PRIMARY KEY ("asset_id");
+
+
+
+ALTER TABLE ONLY "public"."stats_job_runs"
+    ADD CONSTRAINT "stats_job_runs_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."stats_risers_current_index"
+    ADD CONSTRAINT "stats_risers_current_index_pkey" PRIMARY KEY ("universe_id");
+
+
+
 ALTER TABLE ONLY "public"."tools"
     ADD CONSTRAINT "tools_code_key" UNIQUE ("code");
 
@@ -5624,18 +7605,18 @@ ALTER TABLE ONLY "public"."user_quiz_progress"
 
 
 
-ALTER TABLE ONLY "public"."wiki_catalog_pages"
-    ADD CONSTRAINT "wiki_catalog_pages_code_key" UNIQUE ("code");
+ALTER TABLE ONLY "public"."wiki_collection_pages"
+    ADD CONSTRAINT "wiki_collection_pages_code_key" UNIQUE ("code");
 
 
 
-ALTER TABLE ONLY "public"."wiki_catalog_pages"
-    ADD CONSTRAINT "wiki_catalog_pages_path_key" UNIQUE ("wiki_slug", "collection_slug");
+ALTER TABLE ONLY "public"."wiki_collection_pages"
+    ADD CONSTRAINT "wiki_collection_pages_path_key" UNIQUE ("wiki_slug", "collection_slug");
 
 
 
-ALTER TABLE ONLY "public"."wiki_catalog_pages"
-    ADD CONSTRAINT "wiki_catalog_pages_pkey" PRIMARY KEY ("id");
+ALTER TABLE ONLY "public"."wiki_collection_pages"
+    ADD CONSTRAINT "wiki_collection_pages_pkey" PRIMARY KEY ("id");
 
 
 
@@ -5716,6 +7697,22 @@ CREATE INDEX "idx_articles_universe" ON "public"."articles" USING "btree" ("univ
 
 
 
+CREATE INDEX "idx_cache_warm_events_priority_created" ON "public"."cache_warm_events" USING "btree" ("priority", "created_at");
+
+
+
+CREATE INDEX "idx_cache_warm_events_updated" ON "public"."cache_warm_events" USING "btree" ("updated_at" DESC);
+
+
+
+CREATE INDEX "idx_cache_warm_worker_runs_created" ON "public"."cache_warm_worker_runs" USING "btree" ("created_at" DESC);
+
+
+
+CREATE INDEX "idx_cache_warm_worker_runs_status_created" ON "public"."cache_warm_worker_runs" USING "btree" ("status", "created_at" DESC);
+
+
+
 CREATE INDEX "idx_catalog_pages_is_published" ON "public"."catalog_pages" USING "btree" ("is_published");
 
 
@@ -5744,19 +7741,43 @@ CREATE INDEX "idx_checklist_pages_universe_slug" ON "public"."checklist_pages" U
 
 
 
-CREATE UNIQUE INDEX "idx_codes_game_code_upper" ON "public"."codes" USING "btree" ("game_id", "upper"("code"));
+CREATE INDEX "idx_code_pages_old_slugs" ON "public"."code_pages" USING "gin" ("old_slugs");
 
 
 
-CREATE INDEX "idx_codes_game_first_seen" ON "public"."codes" USING "btree" ("game_id", "first_seen_at" DESC);
+CREATE INDEX "idx_code_pages_published" ON "public"."code_pages" USING "btree" ("is_published");
 
 
 
-CREATE INDEX "idx_codes_game_status_seen" ON "public"."codes" USING "btree" ("game_id", "status", "last_seen_at" DESC);
+CREATE INDEX "idx_code_pages_published_name" ON "public"."code_pages" USING "btree" ("is_published", "name");
 
 
 
-CREATE INDEX "idx_codes_status_game" ON "public"."codes" USING "btree" ("status", "game_id");
+CREATE INDEX "idx_code_pages_published_updated" ON "public"."code_pages" USING "btree" ("is_published", "updated_at" DESC);
+
+
+
+CREATE INDEX "idx_code_pages_slug" ON "public"."code_pages" USING "btree" ("lower"("slug"));
+
+
+
+CREATE INDEX "idx_code_pages_universe_id" ON "public"."code_pages" USING "btree" ("universe_id");
+
+
+
+CREATE UNIQUE INDEX "idx_codes_code_page_code_upper" ON "public"."codes" USING "btree" ("code_page_id", "upper"("code"));
+
+
+
+CREATE INDEX "idx_codes_code_page_first_seen" ON "public"."codes" USING "btree" ("code_page_id", "first_seen_at" DESC);
+
+
+
+CREATE INDEX "idx_codes_code_page_status_seen" ON "public"."codes" USING "btree" ("code_page_id", "status", "last_seen_at" DESC);
+
+
+
+CREATE INDEX "idx_codes_status_code_page" ON "public"."codes" USING "btree" ("status", "code_page_id");
 
 
 
@@ -5765,6 +7786,10 @@ CREATE INDEX "idx_comments_author" ON "public"."comments" USING "btree" ("author
 
 
 CREATE INDEX "idx_comments_entity_created" ON "public"."comments" USING "btree" ("entity_type", "entity_id", "created_at" DESC);
+
+
+
+CREATE INDEX "idx_comments_page_type_created" ON "public"."comments" USING "btree" ("page_type", "created_at" DESC);
 
 
 
@@ -5792,50 +7817,6 @@ CREATE INDEX "idx_game_generation_queue_status_created" ON "public"."game_genera
 
 
 
-CREATE INDEX "idx_game_list_entries_game" ON "public"."game_list_entries" USING "btree" ("game_id");
-
-
-
-CREATE INDEX "idx_game_list_entries_rank" ON "public"."game_list_entries" USING "btree" ("list_id", "rank");
-
-
-
-CREATE INDEX "idx_game_list_entries_universe" ON "public"."game_list_entries" USING "btree" ("universe_id");
-
-
-
-CREATE INDEX "idx_game_lists_published" ON "public"."game_lists" USING "btree" ("is_published", "updated_at" DESC);
-
-
-
-CREATE INDEX "idx_game_lists_slug" ON "public"."game_lists" USING "btree" ("lower"("slug"));
-
-
-
-CREATE INDEX "idx_games_old_slugs" ON "public"."games" USING "gin" ("old_slugs");
-
-
-
-CREATE INDEX "idx_games_published" ON "public"."games" USING "btree" ("is_published");
-
-
-
-CREATE INDEX "idx_games_published_name" ON "public"."games" USING "btree" ("is_published", "name");
-
-
-
-CREATE INDEX "idx_games_published_updated" ON "public"."games" USING "btree" ("is_published", "updated_at" DESC);
-
-
-
-CREATE INDEX "idx_games_slug" ON "public"."games" USING "btree" ("lower"("slug"));
-
-
-
-CREATE INDEX "idx_games_universe_id" ON "public"."games" USING "btree" ("universe_id");
-
-
-
 CREATE INDEX "idx_google_indexing_attempts_submitted_at" ON "public"."google_indexing_attempts" USING "btree" ("submitted_at" DESC);
 
 
@@ -5849,6 +7830,34 @@ CREATE INDEX "idx_google_indexing_attempts_url" ON "public"."google_indexing_att
 
 
 CREATE INDEX "idx_google_indexing_url_state_last_submitted_at" ON "public"."google_indexing_url_state" USING "btree" ("notification_type", "last_submitted_at" NULLS FIRST);
+
+
+
+CREATE INDEX "idx_item_resale_points_asset_date" ON "public"."roblox_catalog_item_resale_points" USING "btree" ("asset_id", "point_date" DESC);
+
+
+
+CREATE INDEX "idx_item_resale_points_date" ON "public"."roblox_catalog_item_resale_points" USING "btree" ("point_date" DESC);
+
+
+
+CREATE INDEX "idx_item_stats_daily_asset_date" ON "public"."roblox_catalog_item_stats_daily" USING "btree" ("asset_id", "stat_date" DESC);
+
+
+
+CREATE INDEX "idx_item_stats_daily_date" ON "public"."roblox_catalog_item_stats_daily" USING "btree" ("stat_date" DESC);
+
+
+
+CREATE INDEX "idx_item_stats_hourly_asset_hour" ON "public"."roblox_catalog_item_stats_hourly" USING "btree" ("asset_id", "hour_start" DESC);
+
+
+
+CREATE INDEX "idx_item_stats_hourly_hour" ON "public"."roblox_catalog_item_stats_hourly" USING "btree" ("hour_start" DESC);
+
+
+
+CREATE INDEX "idx_item_stats_hourly_resale" ON "public"."roblox_catalog_item_stats_hourly" USING "btree" ("lowest_resale_price_robux" DESC NULLS LAST, "hour_start" DESC);
 
 
 
@@ -5885,6 +7894,14 @@ CREATE INDEX "idx_revalidation_events_created" ON "public"."revalidation_events"
 
 
 CREATE INDEX "idx_revalidation_events_type_slug" ON "public"."revalidation_events" USING "btree" ("entity_type", "slug");
+
+
+
+CREATE INDEX "idx_revalidation_worker_runs_started" ON "public"."revalidation_worker_runs" USING "btree" ("started_at" DESC);
+
+
+
+CREATE INDEX "idx_revalidation_worker_runs_status_started" ON "public"."revalidation_worker_runs" USING "btree" ("status", "started_at" DESC);
 
 
 
@@ -5976,6 +7993,18 @@ CREATE INDEX "idx_roblox_catalog_items_rap_last_fetched" ON "public"."roblox_cat
 
 
 
+CREATE INDEX "idx_roblox_catalog_items_resale_candidates" ON "public"."roblox_catalog_items" USING "btree" ("last_resale_data_fetched_at" NULLS FIRST, "lowest_resale_price_robux" DESC NULLS LAST, "asset_id") WHERE (("is_deleted" = false) AND (("has_resellers" = true) OR ("lowest_resale_price_robux" > 0) OR ("collectible_item_id" IS NOT NULL)));
+
+
+
+CREATE INDEX "idx_roblox_catalog_items_stats_refresh_lease" ON "public"."roblox_catalog_items" USING "btree" ("item_stats_tier", "next_item_stats_refresh_at" NULLS FIRST, "item_stats_refresh_locked_at" NULLS FIRST, "last_item_stats_refreshed_at" NULLS FIRST, "asset_id") WHERE ("is_deleted" = false);
+
+
+
+CREATE INDEX "idx_roblox_catalog_items_stats_tier_value" ON "public"."roblox_catalog_items" USING "btree" ("item_stats_tier", "favorite_count" DESC NULLS LAST, "lowest_resale_price_robux" DESC NULLS LAST, "asset_id") WHERE ("is_deleted" = false);
+
+
+
 CREATE INDEX "idx_roblox_catalog_items_subcategory" ON "public"."roblox_catalog_items" USING "btree" ("subcategory");
 
 
@@ -5988,6 +8017,10 @@ CREATE INDEX "idx_roblox_catalog_items_trend_direction" ON "public"."roblox_cata
 
 
 
+CREATE INDEX "idx_roblox_catalog_items_verified_free" ON "public"."roblox_catalog_items" USING "btree" ("free_verified_at" DESC, "category", "subcategory", "favorite_count" DESC NULLS LAST) WHERE (("free_claimability" = 'direct'::"text") AND ("free_verification_source" = 'roblox'::"text") AND ("price_robux" = 0) AND ("is_for_sale" = true) AND ("is_deleted" = false));
+
+
+
 CREATE INDEX "idx_roblox_catalog_refresh_queue_next_run_at" ON "public"."roblox_catalog_refresh_queue" USING "btree" ("next_run_at");
 
 
@@ -5997,6 +8030,90 @@ CREATE INDEX "idx_roblox_catalog_refresh_queue_priority" ON "public"."roblox_cat
 
 
 CREATE INDEX "idx_roblox_catalog_subcategories_category" ON "public"."roblox_catalog_subcategories" USING "btree" ("category");
+
+
+
+CREATE INDEX "idx_roblox_decal_id_sources_asset_id" ON "public"."roblox_decal_id_sources" USING "btree" ("asset_id");
+
+
+
+CREATE INDEX "idx_roblox_decal_id_sources_kind" ON "public"."roblox_decal_id_sources" USING "btree" ("source_kind");
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_categories" ON "public"."roblox_decal_ids" USING "gin" ("categories");
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_creator" ON "public"."roblox_decal_ids" USING "btree" ("creator_type", "creator_id");
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_curated_rank" ON "public"."roblox_decal_ids" USING "btree" ("curated_rank");
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_curated_score" ON "public"."roblox_decal_ids" USING "btree" ("curated_score" DESC);
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_last_seen" ON "public"."roblox_decal_ids" USING "btree" ("last_seen_at" DESC);
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_popularity_score" ON "public"."roblox_decal_ids" USING "btree" ("popularity_score" DESC);
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_primary_category" ON "public"."roblox_decal_ids" USING "btree" ("primary_category");
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_public_categories" ON "public"."roblox_decal_ids" USING "gin" ("categories") WHERE (("status" = 'active'::"text") AND ("thumbnail_state" = 'Completed'::"text") AND ("thumbnail_url" IS NOT NULL));
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_public_creator" ON "public"."roblox_decal_ids" USING "btree" ("creator_name") WHERE (("status" = 'active'::"text") AND ("thumbnail_state" = 'Completed'::"text") AND ("thumbnail_url" IS NOT NULL));
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_public_curated" ON "public"."roblox_decal_ids" USING "btree" ("curated_rank", "curated_score" DESC NULLS LAST, "popularity_score" DESC NULLS LAST) WHERE (("status" = 'active'::"text") AND ("thumbnail_state" = 'Completed'::"text") AND ("thumbnail_url" IS NOT NULL) AND ("curated_rank" IS NOT NULL));
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_public_name" ON "public"."roblox_decal_ids" USING "btree" ("name") WHERE (("status" = 'active'::"text") AND ("thumbnail_state" = 'Completed'::"text") AND ("thumbnail_url" IS NOT NULL));
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_public_newest" ON "public"."roblox_decal_ids" USING "btree" ("roblox_created_at" DESC NULLS LAST) WHERE (("status" = 'active'::"text") AND ("thumbnail_state" = 'Completed'::"text") AND ("thumbnail_url" IS NOT NULL));
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_public_oldest" ON "public"."roblox_decal_ids" USING "btree" ("roblox_created_at") WHERE (("status" = 'active'::"text") AND ("thumbnail_state" = 'Completed'::"text") AND ("thumbnail_url" IS NOT NULL));
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_public_popular_votes" ON "public"."roblox_decal_ids" USING "btree" ("vote_count" DESC NULLS LAST, "popularity_score" DESC NULLS LAST, "last_seen_at" DESC NULLS LAST) WHERE (("status" = 'active'::"text") AND ("thumbnail_state" = 'Completed'::"text") AND ("thumbnail_url" IS NOT NULL));
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_public_recommended" ON "public"."roblox_decal_ids" USING "btree" ("curated_score" DESC NULLS LAST, "popularity_score" DESC NULLS LAST, "last_seen_at" DESC NULLS LAST, "verified_at" DESC NULLS LAST) WHERE (("status" = 'active'::"text") AND ("thumbnail_state" = 'Completed'::"text") AND ("thumbnail_url" IS NOT NULL));
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_public_recommended_rank" ON "public"."roblox_decal_ids" USING "btree" ("curated_rank", "curated_score" DESC NULLS LAST, "popularity_score" DESC NULLS LAST, "last_seen_at" DESC NULLS LAST) WHERE (("status" = 'active'::"text") AND ("thumbnail_state" = 'Completed'::"text") AND ("thumbnail_url" IS NOT NULL));
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_status" ON "public"."roblox_decal_ids" USING "btree" ("status");
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_thumbnail_checked_at" ON "public"."roblox_decal_ids" USING "btree" ("thumbnail_checked_at");
+
+
+
+CREATE INDEX "idx_roblox_decal_ids_verified_at" ON "public"."roblox_decal_ids" USING "btree" ("verified_at");
 
 
 
@@ -6020,19 +8137,47 @@ CREATE INDEX "idx_roblox_music_ids_verified_at" ON "public"."roblox_music_ids" U
 
 
 
+CREATE INDEX "idx_roblox_promo_rewards_asset_id" ON "public"."roblox_promo_rewards" USING "btree" ("asset_id");
+
+
+
+CREATE INDEX "idx_roblox_promo_rewards_promo_code" ON "public"."roblox_promo_rewards" USING "btree" ("promo_code_normalized") WHERE ("promo_code_normalized" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_promo_rewards_sort_order" ON "public"."roblox_promo_rewards" USING "btree" ("sort_order", "reward_name");
+
+
+
+CREATE INDEX "idx_roblox_promo_rewards_status_type_seen" ON "public"."roblox_promo_rewards" USING "btree" ("status", "claim_type", "last_seen_at" DESC);
+
+
+
+CREATE INDEX "idx_roblox_rank_daily_universe_type_date_v2" ON "public"."roblox_universe_rank_snapshots_daily" USING "btree" ("universe_id", "rank_type", "stat_date" DESC);
+
+
+
+CREATE INDEX "idx_roblox_rank_hourly_hour_v2" ON "public"."roblox_universe_rank_snapshots_hourly" USING "btree" ("hour_start");
+
+
+
+CREATE INDEX "idx_roblox_rank_hourly_universe_type_hour_v2" ON "public"."roblox_universe_rank_snapshots_hourly" USING "btree" ("universe_id", "rank_type", "hour_start" DESC);
+
+
+
 CREATE INDEX "idx_roblox_universe_badges" ON "public"."roblox_universe_badges" USING "btree" ("universe_id");
 
 
 
-CREATE INDEX "idx_roblox_universe_discovery_jobs_query" ON "public"."roblox_universe_discovery_jobs" USING "btree" ("source", "strategy", "query");
-
-
-
-CREATE INDEX "idx_roblox_universe_discovery_jobs_ready" ON "public"."roblox_universe_discovery_jobs" USING "btree" ("status", "next_run_at", "priority" DESC) WHERE ("status" = ANY (ARRAY['pending'::"text", 'failed'::"text"]));
-
-
-
 CREATE INDEX "idx_roblox_universe_gamepasses" ON "public"."roblox_universe_gamepasses" USING "btree" ("universe_id");
+
+
+
+CREATE UNIQUE INDEX "idx_roblox_universe_media_unique_image" ON "public"."roblox_universe_media" USING "btree" ("universe_id", "media_type", "image_url") WHERE ("image_url" IS NOT NULL);
+
+
+
+CREATE UNIQUE INDEX "idx_roblox_universe_media_unique_video" ON "public"."roblox_universe_media" USING "btree" ("universe_id", "media_type", "video_url") WHERE ("video_url" IS NOT NULL);
 
 
 
@@ -6056,22 +8201,6 @@ CREATE INDEX "idx_roblox_universe_rank_snapshots_universe" ON "public"."roblox_u
 
 
 
-CREATE INDEX "idx_roblox_universe_search_snapshots_query" ON "public"."roblox_universe_search_snapshots" USING "btree" ("query", "fetched_at" DESC);
-
-
-
-CREATE INDEX "idx_roblox_universe_search_snapshots_universe" ON "public"."roblox_universe_search_snapshots" USING "btree" ("universe_id", "fetched_at" DESC);
-
-
-
-CREATE INDEX "idx_roblox_universe_sort_entries_sort" ON "public"."roblox_universe_sort_entries" USING "btree" ("sort_id", "fetched_at" DESC);
-
-
-
-CREATE INDEX "idx_roblox_universe_sort_entries_universe" ON "public"."roblox_universe_sort_entries" USING "btree" ("universe_id", "fetched_at" DESC);
-
-
-
 CREATE INDEX "idx_roblox_universe_stats_daily" ON "public"."roblox_universe_stats_daily" USING "btree" ("universe_id", "stat_date" DESC);
 
 
@@ -6092,11 +8221,31 @@ CREATE INDEX "idx_roblox_universe_stats_hourly_universe_hour" ON "public"."roblo
 
 
 
+CREATE INDEX "idx_roblox_universe_update_events_detected" ON "public"."roblox_universe_update_events" USING "btree" ("detected_at" DESC);
+
+
+
+CREATE INDEX "idx_roblox_universe_update_events_universe_updated" ON "public"."roblox_universe_update_events" USING "btree" ("universe_id", "updated_at_api" DESC);
+
+
+
+CREATE INDEX "idx_roblox_universe_update_events_updated" ON "public"."roblox_universe_update_events" USING "btree" ("updated_at_api" DESC);
+
+
+
 CREATE INDEX "idx_roblox_universes_creator" ON "public"."roblox_universes" USING "btree" ("creator_id");
 
 
 
-CREATE INDEX "idx_roblox_universes_deep_enriched" ON "public"."roblox_universes" USING "btree" ("last_deep_enriched_at" NULLS FIRST, "quality_score" DESC NULLS LAST);
+CREATE INDEX "idx_roblox_universes_deep_enriched_stats_tier" ON "public"."roblox_universes" USING "btree" ("last_deep_enriched_at" NULLS FIRST, "stats_tier", "playing" DESC NULLS LAST, "visits" DESC NULLS LAST);
+
+
+
+CREATE INDEX "idx_roblox_universes_display_name_trgm" ON "public"."roblox_universes" USING "gin" ("display_name" "extensions"."gin_trgm_ops");
+
+
+
+CREATE INDEX "idx_roblox_universes_genre_playing_rank_v2" ON "public"."roblox_universes" USING "btree" ("genre_l1", "playing" DESC NULLS LAST, "universe_id") WHERE (("genre_l1" IS NOT NULL) AND ("playing" IS NOT NULL) AND (("stats_tier" IS NULL) OR ("stats_tier" <> 'NEW'::"text")));
 
 
 
@@ -6104,7 +8253,23 @@ CREATE INDEX "idx_roblox_universes_light_enriched" ON "public"."roblox_universes
 
 
 
-CREATE INDEX "idx_roblox_universes_quality" ON "public"."roblox_universes" USING "btree" ("quality_tier", "quality_score" DESC NULLS LAST);
+CREATE INDEX "idx_roblox_universes_new_refresh_v2" ON "public"."roblox_universes" USING "btree" ("last_stats_refreshed_at" NULLS FIRST, "universe_id") WHERE (("root_place_id" IS NOT NULL) AND (("stats_tier" = 'NEW'::"text") OR ("last_stats_refreshed_at" IS NULL) OR ("playing" IS NULL) OR ("visits" IS NULL)));
+
+
+
+CREATE INDEX "idx_roblox_universes_rank_favorites_v2" ON "public"."roblox_universes" USING "btree" ("favorites" DESC NULLS LAST, "universe_id") WHERE (("favorites" IS NOT NULL) AND (("stats_tier" IS NULL) OR ("stats_tier" <> 'NEW'::"text")));
+
+
+
+CREATE INDEX "idx_roblox_universes_rank_playing_v2" ON "public"."roblox_universes" USING "btree" ("playing" DESC NULLS LAST, "universe_id") WHERE (("playing" IS NOT NULL) AND (("stats_tier" IS NULL) OR ("stats_tier" <> 'NEW'::"text")));
+
+
+
+CREATE INDEX "idx_roblox_universes_rank_rating_seed_v2" ON "public"."roblox_universes" USING "btree" ("likes" DESC NULLS LAST, "universe_id") WHERE (("likes" IS NOT NULL) AND (("stats_tier" IS NULL) OR ("stats_tier" <> 'NEW'::"text")));
+
+
+
+CREATE INDEX "idx_roblox_universes_rank_visits_v2" ON "public"."roblox_universes" USING "btree" ("visits" DESC NULLS LAST, "universe_id") WHERE (("visits" IS NOT NULL) AND (("stats_tier" IS NULL) OR ("stats_tier" <> 'NEW'::"text")));
 
 
 
@@ -6113,6 +8278,82 @@ CREATE INDEX "idx_roblox_universes_seen" ON "public"."roblox_universes" USING "b
 
 
 CREATE INDEX "idx_roblox_universes_slug" ON "public"."roblox_universes" USING "btree" ("lower"("slug"));
+
+
+
+CREATE INDEX "idx_roblox_universes_slug_trgm" ON "public"."roblox_universes" USING "gin" ("slug" "extensions"."gin_trgm_ops");
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_created" ON "public"."roblox_universes" USING "btree" ("created_at_api", "universe_id") WHERE ("slug" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_favorites" ON "public"."roblox_universes" USING "btree" ("favorites" DESC NULLS LAST, "universe_id") WHERE ("slug" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_genre_l1" ON "public"."roblox_universes" USING "btree" ("genre_l1", "genre") WHERE ("slug" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_genre_l1_playing" ON "public"."roblox_universes" USING "btree" ("genre_l1", "playing" DESC NULLS LAST, "universe_id") WHERE ("slug" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_genre_playing" ON "public"."roblox_universes" USING "btree" ("genre", "playing" DESC NULLS LAST, "universe_id") WHERE ("slug" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_ingest_status" ON "public"."roblox_universes" USING "btree" ("stats_ingest_status", "stats_ingest_status_updated_at" DESC) WHERE ("stats_tier" = 'NEW'::"text");
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_playing" ON "public"."roblox_universes" USING "btree" ("playing" DESC NULLS LAST, "universe_id") WHERE ("slug" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_refresh_lease" ON "public"."roblox_universes" USING "btree" ("stats_tier", "next_stats_refresh_at" NULLS FIRST, "stats_refresh_locked_at" NULLS FIRST, "last_stats_refreshed_at" NULLS FIRST, "universe_id") WHERE ("root_place_id" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_slug_universe" ON "public"."roblox_universes" USING "btree" ("universe_id") WHERE ("slug" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_tier_playing" ON "public"."roblox_universes" USING "btree" ("stats_tier", "playing" DESC NULLS LAST);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_tier_refresh" ON "public"."roblox_universes" USING "btree" ("stats_tier", "last_stats_refreshed_at" NULLS FIRST, "playing" DESC NULLS LAST, "visits" DESC NULLS LAST);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_tier_refresh_v2" ON "public"."roblox_universes" USING "btree" ("stats_tier", "last_stats_refreshed_at" NULLS FIRST, "last_playing_refreshed_at" NULLS FIRST, "playing" DESC NULLS LAST, "visits" DESC NULLS LAST, "universe_id") WHERE ("root_place_id" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_tier_visits" ON "public"."roblox_universes" USING "btree" ("stats_tier", "visits" DESC NULLS LAST);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_updated" ON "public"."roblox_universes" USING "btree" ("updated_at_api" DESC NULLS LAST, "universe_id") WHERE ("slug" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_stats_visits" ON "public"."roblox_universes" USING "btree" ("visits" DESC NULLS LAST, "universe_id") WHERE ("slug" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_subgenre_playing_rank_v2" ON "public"."roblox_universes" USING "btree" ("genre_l2", "playing" DESC NULLS LAST, "universe_id") WHERE (("genre_l2" IS NOT NULL) AND ("playing" IS NOT NULL) AND (("stats_tier" IS NULL) OR ("stats_tier" <> 'NEW'::"text")));
+
+
+
+CREATE INDEX "idx_roblox_universes_tier_deep_enrichment_v2" ON "public"."roblox_universes" USING "btree" ("stats_tier", "last_deep_enriched_at" NULLS FIRST, "universe_id") WHERE ("root_place_id" IS NOT NULL);
+
+
+
+CREATE INDEX "idx_roblox_universes_tier_light_enrichment_v2" ON "public"."roblox_universes" USING "btree" ("stats_tier", "last_light_enriched_at" NULLS FIRST, "universe_id") WHERE ("root_place_id" IS NOT NULL);
 
 
 
@@ -6129,6 +8370,10 @@ CREATE INDEX "idx_roblox_virtual_events_start_utc" ON "public"."roblox_virtual_e
 
 
 CREATE INDEX "idx_roblox_virtual_events_universe_id" ON "public"."roblox_virtual_events" USING "btree" ("universe_id");
+
+
+
+CREATE INDEX "idx_roblox_virtual_events_universe_range_v2" ON "public"."roblox_virtual_events" USING "btree" ("universe_id", "start_utc", "end_utc");
 
 
 
@@ -6152,6 +8397,166 @@ CREATE INDEX "idx_search_index_vector" ON "public"."search_index" USING "gin" ("
 
 
 
+CREATE INDEX "idx_site_feedback_created_at" ON "public"."site_feedback" USING "btree" ("created_at" DESC);
+
+
+
+CREATE INDEX "idx_site_feedback_status_created_at" ON "public"."site_feedback" USING "btree" ("status", "created_at" DESC);
+
+
+
+CREATE INDEX "idx_stats_creator_current_favorites" ON "public"."stats_creator_current_index" USING "btree" ("favorites" DESC, "creator_key");
+
+
+
+CREATE INDEX "idx_stats_creator_current_games" ON "public"."stats_creator_current_index" USING "btree" ("game_count" DESC, "playing" DESC, "creator_key");
+
+
+
+CREATE INDEX "idx_stats_creator_current_hot_games" ON "public"."stats_creator_current_index" USING "btree" ("hot_game_count" DESC, "playing" DESC, "creator_key");
+
+
+
+CREATE INDEX "idx_stats_creator_current_members" ON "public"."stats_creator_current_index" USING "btree" ("member_count" DESC NULLS LAST, "playing" DESC, "creator_key");
+
+
+
+CREATE INDEX "idx_stats_creator_current_name_trgm" ON "public"."stats_creator_current_index" USING "gin" ("creator_name" "extensions"."gin_trgm_ops");
+
+
+
+CREATE INDEX "idx_stats_creator_current_playing" ON "public"."stats_creator_current_index" USING "btree" ("playing" DESC, "creator_key");
+
+
+
+CREATE INDEX "idx_stats_creator_current_visits" ON "public"."stats_creator_current_index" USING "btree" ("visits" DESC, "creator_key");
+
+
+
+CREATE INDEX "idx_stats_game_current_created" ON "public"."stats_game_current_index" USING "btree" ("created_at_api", "universe_id");
+
+
+
+CREATE INDEX "idx_stats_game_current_creator_name_trgm" ON "public"."stats_game_current_index" USING "gin" ("creator_name" "extensions"."gin_trgm_ops");
+
+
+
+CREATE INDEX "idx_stats_game_current_display_name_trgm" ON "public"."stats_game_current_index" USING "gin" ("display_name" "extensions"."gin_trgm_ops");
+
+
+
+CREATE INDEX "idx_stats_game_current_favorites" ON "public"."stats_game_current_index" USING "btree" ("favorites" DESC NULLS LAST, "universe_id");
+
+
+
+CREATE INDEX "idx_stats_game_current_genre" ON "public"."stats_game_current_index" USING "btree" ("genre_l1", "playing" DESC NULLS LAST, "universe_id");
+
+
+
+CREATE INDEX "idx_stats_game_current_growth_24h" ON "public"."stats_game_current_index" USING "btree" ("growth_24h" DESC NULLS LAST, "playing" DESC NULLS LAST, "universe_id");
+
+
+
+CREATE INDEX "idx_stats_game_current_growth_7d" ON "public"."stats_game_current_index" USING "btree" ("growth_7d" DESC NULLS LAST, "playing" DESC NULLS LAST, "universe_id");
+
+
+
+CREATE INDEX "idx_stats_game_current_name_trgm" ON "public"."stats_game_current_index" USING "gin" ("name" "extensions"."gin_trgm_ops");
+
+
+
+CREATE INDEX "idx_stats_game_current_peak_24h" ON "public"."stats_game_current_index" USING "btree" ("peak_24h" DESC NULLS LAST, "playing" DESC NULLS LAST, "universe_id");
+
+
+
+CREATE INDEX "idx_stats_game_current_playing" ON "public"."stats_game_current_index" USING "btree" ("playing" DESC NULLS LAST, "universe_id");
+
+
+
+CREATE INDEX "idx_stats_game_current_rating" ON "public"."stats_game_current_index" USING "btree" ("rating_percent" DESC NULLS LAST, "playing" DESC NULLS LAST, "universe_id");
+
+
+
+CREATE INDEX "idx_stats_game_current_updated" ON "public"."stats_game_current_index" USING "btree" ("updated_at_api" DESC NULLS LAST, "universe_id");
+
+
+
+CREATE INDEX "idx_stats_game_current_visits" ON "public"."stats_game_current_index" USING "btree" ("visits" DESC NULLS LAST, "universe_id");
+
+
+
+CREATE INDEX "idx_stats_genre_current_playing" ON "public"."stats_genre_current_index" USING "btree" ("playing" DESC, "genre");
+
+
+
+CREATE INDEX "idx_stats_item_current_category" ON "public"."stats_item_current_index" USING "btree" ("category", "subcategory", "favorite_count" DESC NULLS LAST, "asset_id");
+
+
+
+CREATE INDEX "idx_stats_item_current_creator" ON "public"."stats_item_current_index" USING "btree" ("creator_name", "favorite_count" DESC NULLS LAST, "asset_id");
+
+
+
+CREATE INDEX "idx_stats_item_current_creator_name_trgm" ON "public"."stats_item_current_index" USING "gin" ("creator_name" "extensions"."gin_trgm_ops");
+
+
+
+CREATE INDEX "idx_stats_item_current_description_trgm" ON "public"."stats_item_current_index" USING "gin" ("description" "extensions"."gin_trgm_ops");
+
+
+
+CREATE INDEX "idx_stats_item_current_favorites" ON "public"."stats_item_current_index" USING "btree" ("favorite_count" DESC NULLS LAST, "asset_id");
+
+
+
+CREATE INDEX "idx_stats_item_current_name_trgm" ON "public"."stats_item_current_index" USING "gin" ("name" "extensions"."gin_trgm_ops");
+
+
+
+CREATE INDEX "idx_stats_item_current_price_high" ON "public"."stats_item_current_index" USING "btree" ("price_robux" DESC NULLS LAST, "favorite_count" DESC NULLS LAST, "asset_id");
+
+
+
+CREATE INDEX "idx_stats_item_current_price_low" ON "public"."stats_item_current_index" USING "btree" ("price_robux", "favorite_count" DESC NULLS LAST, "asset_id");
+
+
+
+CREATE INDEX "idx_stats_item_current_resale_low" ON "public"."stats_item_current_index" USING "btree" ("lowest_resale_price_robux", "favorite_count" DESC NULLS LAST, "asset_id") WHERE (("has_resellers" = true) AND ("lowest_resale_price_robux" > 0));
+
+
+
+CREATE INDEX "idx_stats_item_current_seen" ON "public"."stats_item_current_index" USING "btree" ("last_seen_at" DESC NULLS LAST, "asset_id");
+
+
+
+CREATE INDEX "idx_stats_item_current_tier" ON "public"."stats_item_current_index" USING "btree" ("item_stats_tier", "last_item_stats_refreshed_at" DESC NULLS LAST, "asset_id");
+
+
+
+CREATE INDEX "idx_stats_item_price_movers_rank" ON "public"."stats_item_price_movers_current_index" USING "btree" ("rank_value");
+
+
+
+CREATE INDEX "idx_stats_item_price_movers_score" ON "public"."stats_item_price_movers_current_index" USING "btree" ("mover_score" DESC, "asset_id");
+
+
+
+CREATE INDEX "idx_stats_job_runs_job_started" ON "public"."stats_job_runs" USING "btree" ("job_name", "started_at" DESC);
+
+
+
+CREATE INDEX "idx_stats_job_runs_status_started" ON "public"."stats_job_runs" USING "btree" ("status", "started_at" DESC);
+
+
+
+CREATE INDEX "idx_stats_risers_current_rank" ON "public"."stats_risers_current_index" USING "btree" ("rank_value");
+
+
+
+CREATE INDEX "idx_stats_risers_current_score" ON "public"."stats_risers_current_index" USING "btree" ("riser_score" DESC, "growth_24h" DESC, "playing" DESC);
+
+
+
 CREATE INDEX "idx_tools_is_published" ON "public"."tools" USING "btree" ("is_published");
 
 
@@ -6168,15 +8573,15 @@ CREATE INDEX "idx_user_quiz_progress_code" ON "public"."user_quiz_progress" USIN
 
 
 
-CREATE INDEX "idx_wiki_catalog_pages_is_published" ON "public"."wiki_catalog_pages" USING "btree" ("is_published");
+CREATE INDEX "idx_wiki_collection_pages_is_published" ON "public"."wiki_collection_pages" USING "btree" ("is_published");
 
 
 
-CREATE INDEX "idx_wiki_catalog_pages_universe_id" ON "public"."wiki_catalog_pages" USING "btree" ("universe_id");
+CREATE INDEX "idx_wiki_collection_pages_universe_id" ON "public"."wiki_collection_pages" USING "btree" ("universe_id");
 
 
 
-CREATE INDEX "idx_wiki_catalog_pages_wiki_sort" ON "public"."wiki_catalog_pages" USING "btree" ("wiki_slug", "wiki_sort_order") WHERE ("is_published" = true);
+CREATE INDEX "idx_wiki_collection_pages_wiki_sort" ON "public"."wiki_collection_pages" USING "btree" ("wiki_slug", "wiki_sort_order") WHERE ("is_published" = true);
 
 
 
@@ -6189,71 +8594,6 @@ CREATE UNIQUE INDEX "idx_wiki_pages_slug_lower" ON "public"."wiki_pages" USING "
 
 
 CREATE INDEX "idx_wiki_pages_universe_id" ON "public"."wiki_pages" USING "btree" ("universe_id");
-
-
-
-CREATE OR REPLACE VIEW "public"."game_lists_view" WITH ("security_invoker"='true') AS
- WITH "code_stats" AS (
-         SELECT "c"."game_id",
-            "count"(*) FILTER (WHERE ("c"."status" = 'active'::"text")) AS "active_code_count",
-            "max"("c"."first_seen_at") FILTER (WHERE ("c"."status" = 'active'::"text")) AS "latest_code_first_seen_at"
-           FROM "public"."codes" "c"
-          GROUP BY "c"."game_id"
-        )
- SELECT "l"."id",
-    "l"."slug",
-    "l"."title",
-    "l"."hero_md",
-    "l"."intro_md",
-    "l"."outro_md",
-    "l"."meta_title",
-    "l"."meta_description",
-    "l"."cover_image",
-    "l"."list_type",
-    "l"."filter_config",
-    "l"."limit_count",
-    "l"."is_published",
-    "l"."refreshed_at",
-    "l"."created_at",
-    "l"."updated_at",
-    "l"."display_name",
-    "l"."primary_metric_key",
-    "l"."primary_metric_label",
-    COALESCE("jsonb_agg"("jsonb_build_object"('universe_id', "e"."universe_id", 'list_id', "e"."list_id", 'rank', "e"."rank", 'metric_value', "e"."metric_value", 'reason', "e"."reason", 'extra', "e"."extra", 'game_id', "e"."game_id", 'game',
-        CASE
-            WHEN ("g"."id" IS NULL) THEN NULL::"jsonb"
-            ELSE "jsonb_build_object"('id', "g"."id", 'name', "g"."name", 'slug', "g"."slug", 'cover_image', "g"."cover_image", 'universe_id', "g"."universe_id", 'active_count', COALESCE("cs"."active_code_count", (0)::bigint), 'active_code_count', COALESCE("cs"."active_code_count", (0)::bigint), 'content_updated_at', GREATEST(COALESCE("cs"."latest_code_first_seen_at", "g"."updated_at"), "g"."updated_at"))
-        END, 'universe',
-        CASE
-            WHEN ("u"."universe_id" IS NULL) THEN NULL::"jsonb"
-            ELSE "jsonb_build_object"('universe_id', "u"."universe_id", 'slug', "u"."slug", 'display_name', "u"."display_name", 'name', "u"."name", 'icon_url', "u"."icon_url", 'playing', "u"."playing", 'visits', "u"."visits", 'favorites', "u"."favorites", 'likes', "u"."likes", 'dislikes', "u"."dislikes", 'age_rating', "u"."age_rating", 'desktop_enabled', "u"."desktop_enabled", 'mobile_enabled', "u"."mobile_enabled", 'tablet_enabled', "u"."tablet_enabled", 'console_enabled', "u"."console_enabled", 'vr_enabled', "u"."vr_enabled", 'updated_at', "u"."updated_at", 'description', COALESCE("u"."game_description_md", "u"."description"), 'game_description_md', "u"."game_description_md")
-        END, 'badges', ( SELECT COALESCE("jsonb_agg"("rec".* ORDER BY "rec"."rank"), '[]'::"jsonb") AS "coalesce"
-           FROM ( SELECT "gle2"."list_id",
-                    "gl2"."slug" AS "list_slug",
-                    "gl2"."title" AS "list_title",
-                    "gl2"."display_name" AS "list_display_name",
-                    "gle2"."rank"
-                   FROM ("public"."game_list_entries" "gle2"
-                     JOIN "public"."game_lists" "gl2" ON ((("gl2"."id" = "gle2"."list_id") AND ("gl2"."is_published" = true))))
-                  WHERE (("gle2"."universe_id" = "e"."universe_id") AND ("gl2"."id" <> "l"."id") AND (("gle2"."rank" >= 1) AND ("gle2"."rank" <= 3)))
-                  ORDER BY "gle2"."rank"
-                 LIMIT 3) "rec")) ORDER BY "e"."rank") FILTER (WHERE ("e"."universe_id" IS NOT NULL)), '[]'::"jsonb") AS "entries",
-    ( SELECT COALESCE("jsonb_agg"("rec".* ORDER BY "rec"."updated_at" DESC), '[]'::"jsonb") AS "coalesce"
-           FROM ( SELECT "l2"."id",
-                    "l2"."slug",
-                    "l2"."title",
-                    "l2"."display_name",
-                    "l2"."updated_at"
-                   FROM "public"."game_lists" "l2"
-                  WHERE (("l2"."is_published" = true) AND ("l2"."id" <> "l"."id"))
-                  ORDER BY "l2"."updated_at" DESC
-                 LIMIT 6) "rec") AS "other_lists"
-   FROM (((("public"."game_lists" "l"
-     LEFT JOIN "public"."game_list_entries" "e" ON (("e"."list_id" = "l"."id")))
-     LEFT JOIN "public"."roblox_universes" "u" ON (("u"."universe_id" = "e"."universe_id")))
-     LEFT JOIN "public"."games" "g" ON (("g"."id" = "e"."game_id")))
-     LEFT JOIN "code_stats" "cs" ON (("cs"."game_id" = "g"."id")))
-  GROUP BY "l"."id";
 
 
 
@@ -6285,6 +8625,18 @@ CREATE OR REPLACE TRIGGER "trg_authors_updated_at" BEFORE UPDATE ON "public"."au
 
 
 
+CREATE OR REPLACE TRIGGER "trg_canonicalize_article_media" BEFORE INSERT OR UPDATE ON "public"."articles" FOR EACH ROW EXECUTE FUNCTION "public"."trg_canonicalize_article_media"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_canonicalize_article_source_media" BEFORE INSERT OR UPDATE ON "public"."article_source_images" FOR EACH ROW EXECUTE FUNCTION "public"."trg_canonicalize_article_source_media"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_canonicalize_code_page_media" BEFORE INSERT OR UPDATE ON "public"."code_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_canonicalize_code_page_media"();
+
+
+
 CREATE OR REPLACE TRIGGER "trg_catalog_pages_updated_at" BEFORE UPDATE ON "public"."catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
@@ -6298,6 +8650,10 @@ CREATE OR REPLACE TRIGGER "trg_checklist_items_updated_at" BEFORE UPDATE ON "pub
 
 
 CREATE OR REPLACE TRIGGER "trg_checklist_pages_updated_at" BEFORE UPDATE ON "public"."checklist_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_code_pages_updated_at" BEFORE UPDATE ON "public"."code_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
 
@@ -6333,7 +8689,15 @@ CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_checklist_pages" AFTER INSER
 
 
 
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_code_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."code_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_code_pages"();
+
+
+
 CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_codes" AFTER INSERT OR DELETE OR UPDATE ON "public"."codes" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_codes"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_decal_ids" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_decal_ids" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_decal_ids"();
 
 
 
@@ -6349,23 +8713,11 @@ CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_free_items_catalog" AFTER IN
 
 
 
-CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_game_list_entries" AFTER INSERT OR DELETE OR UPDATE ON "public"."game_list_entries" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"();
-
-
-
-CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_game_lists" AFTER INSERT OR DELETE OR UPDATE ON "public"."game_lists" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_game_lists"();
-
-
-
-CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_games" AFTER INSERT OR DELETE OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_games"();
-
-
-
-CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_lists_roblox_universes" AFTER UPDATE OF "root_place_id", "name", "display_name", "slug", "description", "game_description_md", "age_rating", "desktop_enabled", "mobile_enabled", "tablet_enabled", "console_enabled", "vr_enabled", "playing", "visits", "favorites", "likes", "dislikes", "icon_url", "updated_at", "updated_at_api" ON "public"."roblox_universes" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"();
-
-
-
 CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_music_ids" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_music_ids" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_music_ids"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_promo_rewards" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_promo_rewards" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_promo_rewards"();
 
 
 
@@ -6378,6 +8730,14 @@ CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_puzzle_pages" AFTER INSERT O
 
 
 CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_quiz_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."quiz_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_stats_items_catalog_images" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_catalog_item_images" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_stats_items"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_stats_items_catalog_items" AFTER INSERT OR DELETE OR UPDATE ON "public"."roblox_catalog_items" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_stats_items"();
 
 
 
@@ -6397,7 +8757,7 @@ CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_virtual_events" AFTER INSERT
 
 
 
-CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_catalog_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"();
+CREATE OR REPLACE TRIGGER "trg_enqueue_revalidation_wiki_collection_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_enqueue_revalidation_wiki_collection_pages"();
 
 
 
@@ -6438,18 +8798,6 @@ CREATE OR REPLACE TRIGGER "trg_events_pages_updated_at" BEFORE UPDATE ON "public
 
 
 CREATE OR REPLACE TRIGGER "trg_game_generation_queue_updated_at" BEFORE UPDATE ON "public"."game_generation_queue" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
-
-
-
-CREATE OR REPLACE TRIGGER "trg_game_list_entries_updated_at" BEFORE UPDATE ON "public"."game_list_entries" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
-
-
-
-CREATE OR REPLACE TRIGGER "trg_game_lists_updated_at" BEFORE UPDATE ON "public"."game_lists" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
-
-
-
-CREATE OR REPLACE TRIGGER "trg_games_updated_at" BEFORE UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
 
@@ -6497,11 +8845,19 @@ CREATE OR REPLACE TRIGGER "trg_roblox_catalog_subcategories_updated_at" BEFORE U
 
 
 
+CREATE OR REPLACE TRIGGER "trg_roblox_decal_id_sources_updated_at" BEFORE UPDATE ON "public"."roblox_decal_id_sources" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_roblox_decal_ids_updated_at" BEFORE UPDATE ON "public"."roblox_decal_ids" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
 CREATE OR REPLACE TRIGGER "trg_roblox_music_ids_updated_at" BEFORE UPDATE ON "public"."roblox_music_ids" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
 
-CREATE OR REPLACE TRIGGER "trg_roblox_universe_discovery_jobs_updated_at" BEFORE UPDATE ON "public"."roblox_universe_discovery_jobs" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_roblox_promo_rewards_updated_at" BEFORE UPDATE ON "public"."roblox_promo_rewards" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
 
@@ -6510,6 +8866,14 @@ CREATE OR REPLACE TRIGGER "trg_roblox_universe_stats_hourly_updated_at" BEFORE U
 
 
 CREATE OR REPLACE TRIGGER "trg_roblox_universes_updated_at" BEFORE UPDATE ON "public"."roblox_universes" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_sanitize_stats_creator_top_player" BEFORE INSERT OR UPDATE ON "public"."stats_creator_current_index" FOR EACH ROW EXECUTE FUNCTION "public"."sanitize_stats_creator_top_player"();
+
+
+
+CREATE OR REPLACE TRIGGER "trg_sanitize_stats_game_current_player" BEFORE INSERT OR UPDATE ON "public"."stats_game_current_index" FOR EACH ROW EXECUTE FUNCTION "public"."sanitize_stats_game_current_player"();
 
 
 
@@ -6529,15 +8893,11 @@ CREATE OR REPLACE TRIGGER "trg_search_index_checklists" AFTER INSERT OR DELETE O
 
 
 
+CREATE OR REPLACE TRIGGER "trg_search_index_code_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."code_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_code_pages"();
+
+
+
 CREATE OR REPLACE TRIGGER "trg_search_index_events_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_events_pages"();
-
-
-
-CREATE OR REPLACE TRIGGER "trg_search_index_game_lists" AFTER INSERT OR DELETE OR UPDATE ON "public"."game_lists" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_game_lists"();
-
-
-
-CREATE OR REPLACE TRIGGER "trg_search_index_games" AFTER INSERT OR DELETE OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_games"();
 
 
 
@@ -6553,7 +8913,7 @@ CREATE OR REPLACE TRIGGER "trg_search_index_tools" AFTER INSERT OR DELETE OR UPD
 
 
 
-CREATE OR REPLACE TRIGGER "trg_search_index_wiki_catalog_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_wiki_catalog_pages"();
+CREATE OR REPLACE TRIGGER "trg_search_index_wiki_collection_pages" AFTER INSERT OR DELETE OR UPDATE ON "public"."wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."trg_search_index_wiki_collection_pages"();
 
 
 
@@ -6573,11 +8933,11 @@ CREATE OR REPLACE TRIGGER "trg_set_checklist_published_at" BEFORE INSERT OR UPDA
 
 
 
+CREATE OR REPLACE TRIGGER "trg_set_code_page_published_at" BEFORE INSERT OR UPDATE ON "public"."code_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_code_page_published_at"();
+
+
+
 CREATE OR REPLACE TRIGGER "trg_set_events_pages_published_at" BEFORE INSERT OR UPDATE ON "public"."events_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_catalog_page_published_at"();
-
-
-
-CREATE OR REPLACE TRIGGER "trg_set_game_published_at" BEFORE INSERT OR UPDATE ON "public"."games" FOR EACH ROW EXECUTE FUNCTION "public"."set_game_published_at"();
 
 
 
@@ -6593,7 +8953,7 @@ CREATE OR REPLACE TRIGGER "trg_set_tool_published_at" BEFORE INSERT OR UPDATE ON
 
 
 
-CREATE OR REPLACE TRIGGER "trg_set_wiki_catalog_page_published_at" BEFORE INSERT OR UPDATE ON "public"."wiki_catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_catalog_page_published_at"();
+CREATE OR REPLACE TRIGGER "trg_set_wiki_collection_page_published_at" BEFORE INSERT OR UPDATE ON "public"."wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_catalog_page_published_at"();
 
 
 
@@ -6617,7 +8977,7 @@ CREATE OR REPLACE TRIGGER "trg_user_quiz_progress_updated_at" BEFORE UPDATE ON "
 
 
 
-CREATE OR REPLACE TRIGGER "trg_wiki_catalog_pages_updated_at" BEFORE UPDATE ON "public"."wiki_catalog_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
+CREATE OR REPLACE TRIGGER "trg_wiki_collection_pages_updated_at" BEFORE UPDATE ON "public"."wiki_collection_pages" FOR EACH ROW EXECUTE FUNCTION "public"."set_updated_at"();
 
 
 
@@ -6685,8 +9045,13 @@ ALTER TABLE ONLY "public"."checklist_pages"
 
 
 
+ALTER TABLE ONLY "public"."code_pages"
+    ADD CONSTRAINT "code_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id");
+
+
+
 ALTER TABLE ONLY "public"."codes"
-    ADD CONSTRAINT "codes_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id") ON DELETE CASCADE;
+    ADD CONSTRAINT "codes_code_page_id_fkey" FOREIGN KEY ("code_page_id") REFERENCES "public"."code_pages"("id") ON DELETE CASCADE;
 
 
 
@@ -6720,26 +9085,6 @@ ALTER TABLE ONLY "public"."events_pages"
 
 
 
-ALTER TABLE ONLY "public"."game_list_entries"
-    ADD CONSTRAINT "game_list_entries_game_id_fkey" FOREIGN KEY ("game_id") REFERENCES "public"."games"("id") ON DELETE SET NULL;
-
-
-
-ALTER TABLE ONLY "public"."game_list_entries"
-    ADD CONSTRAINT "game_list_entries_list_id_fkey" FOREIGN KEY ("list_id") REFERENCES "public"."game_lists"("id") ON DELETE CASCADE;
-
-
-
-ALTER TABLE ONLY "public"."game_list_entries"
-    ADD CONSTRAINT "game_list_entries_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
-
-
-
-ALTER TABLE ONLY "public"."games"
-    ADD CONSTRAINT "games_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id");
-
-
-
 ALTER TABLE ONLY "public"."puzzle_answers"
     ADD CONSTRAINT "puzzle_answers_puzzle_slug_fkey" FOREIGN KEY ("puzzle_slug") REFERENCES "public"."puzzle_pages"("slug") ON UPDATE CASCADE ON DELETE CASCADE;
 
@@ -6765,6 +9110,21 @@ ALTER TABLE ONLY "public"."roblox_catalog_item_images"
 
 
 
+ALTER TABLE ONLY "public"."roblox_catalog_item_resale_points"
+    ADD CONSTRAINT "roblox_catalog_item_resale_points_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."roblox_catalog_item_stats_daily"
+    ADD CONSTRAINT "roblox_catalog_item_stats_daily_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."roblox_catalog_item_stats_hourly"
+    ADD CONSTRAINT "roblox_catalog_item_stats_hourly_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
+
+
+
 ALTER TABLE ONLY "public"."roblox_catalog_items_history"
     ADD CONSTRAINT "roblox_catalog_items_history_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
 
@@ -6777,6 +9137,11 @@ ALTER TABLE ONLY "public"."roblox_catalog_refresh_queue"
 
 ALTER TABLE ONLY "public"."roblox_catalog_subcategories"
     ADD CONSTRAINT "roblox_catalog_subcategories_category_fkey" FOREIGN KEY ("category") REFERENCES "public"."roblox_catalog_categories"("category") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."roblox_decal_id_sources"
+    ADD CONSTRAINT "roblox_decal_id_sources_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_decal_ids"("asset_id") ON DELETE CASCADE;
 
 
 
@@ -6800,33 +9165,23 @@ ALTER TABLE ONLY "public"."roblox_universe_place_servers"
 
 
 
+ALTER TABLE ONLY "public"."roblox_universe_rank_snapshots_daily"
+    ADD CONSTRAINT "roblox_universe_rank_snapshots_daily_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."roblox_universe_rank_snapshots_hourly"
+    ADD CONSTRAINT "roblox_universe_rank_snapshots_hourly_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
+
+
+
 ALTER TABLE ONLY "public"."roblox_universe_rank_snapshots"
     ADD CONSTRAINT "roblox_universe_rank_snapshots_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."roblox_universe_search_snapshots"
-    ADD CONSTRAINT "roblox_universe_search_snapshots_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
-
-
-
 ALTER TABLE ONLY "public"."roblox_universe_social_links"
     ADD CONSTRAINT "roblox_universe_social_links_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
-    ADD CONSTRAINT "roblox_universe_sort_entries_run_id_fkey" FOREIGN KEY ("run_id") REFERENCES "public"."roblox_universe_sort_runs"("id") ON DELETE CASCADE;
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
-    ADD CONSTRAINT "roblox_universe_sort_entries_sort_id_fkey" FOREIGN KEY ("sort_id") REFERENCES "public"."roblox_universe_sort_definitions"("sort_id") ON DELETE CASCADE;
-
-
-
-ALTER TABLE ONLY "public"."roblox_universe_sort_entries"
-    ADD CONSTRAINT "roblox_universe_sort_entries_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
 
@@ -6837,6 +9192,11 @@ ALTER TABLE ONLY "public"."roblox_universe_stats_daily"
 
 ALTER TABLE ONLY "public"."roblox_universe_stats_hourly"
     ADD CONSTRAINT "roblox_universe_stats_hourly_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."roblox_universe_update_events"
+    ADD CONSTRAINT "roblox_universe_update_events_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
 
@@ -6852,6 +9212,36 @@ ALTER TABLE ONLY "public"."roblox_virtual_event_thumbnails"
 
 ALTER TABLE ONLY "public"."roblox_virtual_events"
     ADD CONSTRAINT "roblox_virtual_events_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE RESTRICT;
+
+
+
+ALTER TABLE ONLY "public"."stats_creator_current_index"
+    ADD CONSTRAINT "stats_creator_current_index_top_universe_id_fkey" FOREIGN KEY ("top_universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
+
+
+
+ALTER TABLE ONLY "public"."stats_game_current_index"
+    ADD CONSTRAINT "stats_game_current_index_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."stats_genre_current_index"
+    ADD CONSTRAINT "stats_genre_current_index_top_universe_id_fkey" FOREIGN KEY ("top_universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
+
+
+
+ALTER TABLE ONLY "public"."stats_item_current_index"
+    ADD CONSTRAINT "stats_item_current_index_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."stats_item_price_movers_current_index"
+    ADD CONSTRAINT "stats_item_price_movers_current_index_asset_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "public"."roblox_catalog_items"("asset_id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."stats_risers_current_index"
+    ADD CONSTRAINT "stats_risers_current_index_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE CASCADE;
 
 
 
@@ -6875,13 +9265,13 @@ ALTER TABLE ONLY "public"."user_quiz_progress"
 
 
 
-ALTER TABLE ONLY "public"."wiki_catalog_pages"
-    ADD CONSTRAINT "wiki_catalog_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
+ALTER TABLE ONLY "public"."wiki_collection_pages"
+    ADD CONSTRAINT "wiki_collection_pages_universe_id_fkey" FOREIGN KEY ("universe_id") REFERENCES "public"."roblox_universes"("universe_id") ON DELETE SET NULL;
 
 
 
-ALTER TABLE ONLY "public"."wiki_catalog_pages"
-    ADD CONSTRAINT "wiki_catalog_pages_wiki_page_id_fkey" FOREIGN KEY ("wiki_page_id") REFERENCES "public"."wiki_pages"("id") ON DELETE SET NULL;
+ALTER TABLE ONLY "public"."wiki_collection_pages"
+    ADD CONSTRAINT "wiki_collection_pages_wiki_page_id_fkey" FOREIGN KEY ("wiki_page_id") REFERENCES "public"."wiki_pages"("id") ON DELETE SET NULL;
 
 
 
@@ -6923,6 +9313,116 @@ ALTER TABLE "public"."articles" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."authors" ENABLE ROW LEVEL SECURITY;
 
 
+CREATE POLICY "basebuddy_editor_insert" ON "public"."revalidation_events" FOR INSERT TO "basebuddy_editor" WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_insert" ON "public"."search_index" FOR INSERT TO "basebuddy_editor" WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."articles" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."authors" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."catalog_pages" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."checklist_pages" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."code_pages" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."events_pages" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."quiz_pages" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."revalidation_events" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."roblox_universes" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."search_index" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."tools" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."wiki_collection_pages" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_select" ON "public"."wiki_pages" FOR SELECT TO "basebuddy_editor" USING (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."articles" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."catalog_pages" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."checklist_pages" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."code_pages" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."events_pages" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."quiz_pages" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."revalidation_events" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."search_index" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."tools" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."wiki_collection_pages" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+CREATE POLICY "basebuddy_editor_update" ON "public"."wiki_pages" FOR UPDATE TO "basebuddy_editor" USING (true) WITH CHECK (true);
+
+
+
+ALTER TABLE "public"."cache_warm_events" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."cache_warm_worker_runs" ENABLE ROW LEVEL SECURITY;
+
+
 ALTER TABLE "public"."catalog_pages" ENABLE ROW LEVEL SECURITY;
 
 
@@ -6930,6 +9430,9 @@ ALTER TABLE "public"."checklist_items" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."checklist_pages" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."code_pages" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."codes" ENABLE ROW LEVEL SECURITY;
@@ -6957,15 +9460,6 @@ ALTER TABLE "public"."events_pages" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."game_generation_queue" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."game_list_entries" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."game_lists" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."games" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."google_indexing_attempts" ENABLE ROW LEVEL SECURITY;
@@ -7019,6 +9513,9 @@ CREATE POLICY "quiz_pages_public_read" ON "public"."quiz_pages" FOR SELECT TO "a
 ALTER TABLE "public"."revalidation_events" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."revalidation_worker_runs" ENABLE ROW LEVEL SECURITY;
+
+
 ALTER TABLE "public"."roblox_catalog_categories" ENABLE ROW LEVEL SECURITY;
 
 
@@ -7029,6 +9526,15 @@ ALTER TABLE "public"."roblox_catalog_discovery_runs" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."roblox_catalog_item_images" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."roblox_catalog_item_resale_points" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."roblox_catalog_item_stats_daily" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."roblox_catalog_item_stats_hourly" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."roblox_catalog_items" ENABLE ROW LEVEL SECURITY;
@@ -7043,16 +9549,34 @@ ALTER TABLE "public"."roblox_catalog_refresh_queue" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."roblox_catalog_subcategories" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."roblox_decal_id_sources" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "roblox_decal_id_sources_admin_full_access" ON "public"."roblox_decal_id_sources" TO "authenticated" USING ("public"."is_admin"("auth"."uid"())) WITH CHECK ("public"."is_admin"("auth"."uid"()));
+
+
+
+ALTER TABLE "public"."roblox_decal_ids" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "roblox_decal_ids_admin_full_access" ON "public"."roblox_decal_ids" TO "authenticated" USING ("public"."is_admin"("auth"."uid"())) WITH CHECK ("public"."is_admin"("auth"."uid"()));
+
+
+
+CREATE POLICY "roblox_decal_ids_public_read" ON "public"."roblox_decal_ids" FOR SELECT TO "authenticated", "anon" USING (("status" = 'active'::"text"));
+
+
+
 ALTER TABLE "public"."roblox_groups" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."roblox_music_ids" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."roblox_promo_rewards" ENABLE ROW LEVEL SECURITY;
+
+
 ALTER TABLE "public"."roblox_universe_badges" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."roblox_universe_discovery_jobs" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."roblox_universe_gamepasses" ENABLE ROW LEVEL SECURITY;
@@ -7067,23 +9591,25 @@ ALTER TABLE "public"."roblox_universe_place_servers" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."roblox_universe_rank_snapshots" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."roblox_universe_rank_snapshots_daily" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "roblox_universe_rank_snapshots_daily_select" ON "public"."roblox_universe_rank_snapshots_daily" FOR SELECT USING (true);
+
+
+
+ALTER TABLE "public"."roblox_universe_rank_snapshots_hourly" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "roblox_universe_rank_snapshots_hourly_select" ON "public"."roblox_universe_rank_snapshots_hourly" FOR SELECT USING (true);
+
+
+
 CREATE POLICY "roblox_universe_rank_snapshots_select" ON "public"."roblox_universe_rank_snapshots" FOR SELECT USING (true);
 
 
 
-ALTER TABLE "public"."roblox_universe_search_snapshots" ENABLE ROW LEVEL SECURITY;
-
-
 ALTER TABLE "public"."roblox_universe_social_links" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."roblox_universe_sort_definitions" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."roblox_universe_sort_entries" ENABLE ROW LEVEL SECURITY;
-
-
-ALTER TABLE "public"."roblox_universe_sort_runs" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."roblox_universe_stats_daily" ENABLE ROW LEVEL SECURITY;
@@ -7093,6 +9619,13 @@ ALTER TABLE "public"."roblox_universe_stats_hourly" ENABLE ROW LEVEL SECURITY;
 
 
 CREATE POLICY "roblox_universe_stats_hourly_select" ON "public"."roblox_universe_stats_hourly" FOR SELECT USING (true);
+
+
+
+ALTER TABLE "public"."roblox_universe_update_events" ENABLE ROW LEVEL SECURITY;
+
+
+CREATE POLICY "roblox_universe_update_events_select" ON "public"."roblox_universe_update_events" FOR SELECT USING (true);
 
 
 
@@ -7109,6 +9642,30 @@ ALTER TABLE "public"."roblox_virtual_events" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."search_index" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."site_feedback" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."stats_creator_current_index" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."stats_game_current_index" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."stats_genre_current_index" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."stats_item_current_index" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."stats_item_price_movers_current_index" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."stats_job_runs" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."stats_risers_current_index" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."tools" ENABLE ROW LEVEL SECURITY;
@@ -7171,7 +9728,10 @@ CREATE POLICY "user_quiz_progress_update_own" ON "public"."user_quiz_progress" F
 
 
 
-ALTER TABLE "public"."wiki_catalog_pages" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "public"."wiki_collection_pages" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."wiki_pages" ENABLE ROW LEVEL SECURITY;
 
 
 GRANT USAGE ON SCHEMA "extensions" TO "anon";
@@ -7181,10 +9741,12 @@ GRANT ALL ON SCHEMA "extensions" TO "dashboard_user";
 
 
 
+REVOKE USAGE ON SCHEMA "public" FROM PUBLIC;
 GRANT USAGE ON SCHEMA "public" TO "postgres";
 GRANT USAGE ON SCHEMA "public" TO "anon";
 GRANT USAGE ON SCHEMA "public" TO "authenticated";
 GRANT USAGE ON SCHEMA "public" TO "service_role";
+GRANT USAGE ON SCHEMA "public" TO "basebuddy_editor";
 
 
 
@@ -7258,12 +9820,6 @@ GRANT ALL ON FUNCTION "public"."enqueue_free_items_catalog_scope"("p_category" "
 
 
 
-GRANT ALL ON FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") TO "anon";
-GRANT ALL ON FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "public"."enqueue_list_revalidation_for_universe"("p_universe_id" bigint, "p_source" "text") TO "service_role";
-
-
-
 GRANT ALL ON FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "text", "p_value" "text", "p_source" "text") TO "anon";
 GRANT ALL ON FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "text", "p_value" "text", "p_source" "text") TO "authenticated";
 GRANT ALL ON FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "text", "p_value" "text", "p_source" "text") TO "service_role";
@@ -7273,12 +9829,6 @@ GRANT ALL ON FUNCTION "public"."enqueue_music_revalidation_scope"("p_section" "t
 GRANT ALL ON FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") TO "anon";
 GRANT ALL ON FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") TO "authenticated";
 GRANT ALL ON FUNCTION "public"."enqueue_revalidation"("p_entity_type" "text", "p_slug" "text", "p_source" "text") TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") TO "anon";
-GRANT ALL ON FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") TO "authenticated";
-GRANT ALL ON FUNCTION "public"."enqueue_wiki_revalidation_for_list"("p_list_id" "uuid", "p_source" "text") TO "service_role";
 
 
 
@@ -7297,6 +9847,36 @@ GRANT ALL ON FUNCTION "public"."get_items_needing_metrics_calculation"("p_limit"
 GRANT ALL ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) TO "anon";
 GRANT ALL ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) TO "authenticated";
 GRANT ALL ON FUNCTION "public"."get_items_needing_rap_update"("p_limit" integer, "p_max_age_hours" integer) TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."get_stats_platform_ccu_trend"("p_since" timestamp with time zone) FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."get_stats_platform_ccu_trend"("p_since" timestamp with time zone) TO "postgres";
+GRANT ALL ON FUNCTION "public"."get_stats_platform_ccu_trend"("p_since" timestamp with time zone) TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."get_stats_platform_current_summary"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."get_stats_platform_current_summary"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."get_stats_subgenre_options"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."get_stats_subgenre_options"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."get_stats_subgenre_options"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."get_stats_visit_share_chart"("p_since" "date", "p_until" "date", "p_top_games" integer, "p_top_group" integer, "p_wide_group" integer) FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."get_stats_visit_share_chart"("p_since" "date", "p_until" "date", "p_top_games" integer, "p_top_group" integer, "p_wide_group" integer) TO "postgres";
+GRANT ALL ON FUNCTION "public"."get_stats_visit_share_chart"("p_since" "date", "p_until" "date", "p_top_games" integer, "p_top_group" integer, "p_wide_group" integer) TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."invoke_cache_warm_worker"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."invoke_cache_warm_worker"() TO "anon";
+GRANT ALL ON FUNCTION "public"."invoke_cache_warm_worker"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."invoke_cache_warm_worker"() TO "service_role";
 
 
 
@@ -7319,15 +9899,52 @@ GRANT ALL ON FUNCTION "public"."normalize_section_code"("raw" "text") TO "servic
 
 
 
-GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) TO "anon";
-GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) TO "authenticated";
-GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_raw_economy_json" "jsonb", "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint) TO "service_role";
+GRANT ALL ON FUNCTION "public"."percent_delta"("p_current" numeric, "p_previous" numeric) TO "anon";
+GRANT ALL ON FUNCTION "public"."percent_delta"("p_current" numeric, "p_previous" numeric) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."percent_delta"("p_current" numeric, "p_previous" numeric) TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."prune_roblox_universe_hourly_history"("p_cutoff" timestamp with time zone, "p_batch_size" integer) FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."prune_roblox_universe_hourly_history"("p_cutoff" timestamp with time zone, "p_batch_size" integer) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_is_for_sale" boolean, "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint, "p_free_claimability" "text", "p_free_verified_at" timestamp with time zone, "p_free_verification_source" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_is_for_sale" boolean, "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint, "p_free_claimability" "text", "p_free_verified_at" timestamp with time zone, "p_free_verification_source" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."qualifies_for_free_items_catalog"("p_price_robux" bigint, "p_is_deleted" boolean, "p_is_for_sale" boolean, "p_has_resellers" boolean, "p_lowest_resale_price_robux" bigint, "p_name" "text", "p_category" "text", "p_subcategory" "text", "p_favorite_count" bigint, "p_free_claimability" "text", "p_free_verified_at" timestamp with time zone, "p_free_verification_source" "text") TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."record_stats_health_check"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."record_stats_health_check"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."refresh_roblox_promo_rewards"("p_seen_rows" "jsonb", "p_checked_at" timestamp with time zone, "p_retire_after_misses" integer, "p_touch_catalog" boolean) FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."refresh_roblox_promo_rewards"("p_seen_rows" "jsonb", "p_checked_at" timestamp with time zone, "p_retire_after_misses" integer, "p_touch_catalog" boolean) TO "service_role";
 
 
 
 GRANT ALL ON FUNCTION "public"."refresh_search_index_music"() TO "anon";
 GRANT ALL ON FUNCTION "public"."refresh_search_index_music"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."refresh_search_index_music"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."refresh_stats_creator_current_index"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."refresh_stats_creator_current_index"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."refresh_stats_current_indexes"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."refresh_stats_current_indexes"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."refresh_stats_item_current_indexes"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."refresh_stats_item_current_indexes"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."refresh_stats_item_current_indexes"() TO "service_role";
 
 
 
@@ -7342,9 +9959,18 @@ GRANT ALL ON FUNCTION "public"."rollup_roblox_universe_stats_daily"("p_stat_date
 
 
 
-GRANT ALL ON FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer) TO "anon";
-GRANT ALL ON FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer) TO "authenticated";
-GRANT ALL ON FUNCTION "public"."run_game_list_sql"("sql_text" "text", "limit_count" integer) TO "service_role";
+REVOKE ALL ON FUNCTION "public"."run_roblox_universe_hourly_prune"("p_days" integer, "p_batch_size" integer, "p_max_batches" integer) FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."run_roblox_universe_hourly_prune"("p_days" integer, "p_batch_size" integer, "p_max_batches" integer) TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."sanitize_stats_creator_top_player"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."sanitize_stats_creator_top_player"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."sanitize_stats_game_current_player"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."sanitize_stats_game_current_player"() TO "service_role";
 
 
 
@@ -7378,9 +10004,9 @@ GRANT ALL ON FUNCTION "public"."set_checklist_published_at"() TO "service_role";
 
 
 
-GRANT ALL ON FUNCTION "public"."set_game_published_at"() TO "anon";
-GRANT ALL ON FUNCTION "public"."set_game_published_at"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."set_game_published_at"() TO "service_role";
+GRANT ALL ON FUNCTION "public"."set_code_page_published_at"() TO "anon";
+GRANT ALL ON FUNCTION "public"."set_code_page_published_at"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."set_code_page_published_at"() TO "service_role";
 
 
 
@@ -7417,6 +10043,47 @@ GRANT ALL ON FUNCTION "public"."set_updated_at"() TO "service_role";
 GRANT ALL ON FUNCTION "public"."set_wiki_page_published_at"() TO "anon";
 GRANT ALL ON FUNCTION "public"."set_wiki_page_published_at"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."set_wiki_page_published_at"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."slugify_stats_label"("p_value" "text") TO "anon";
+GRANT ALL ON FUNCTION "public"."slugify_stats_label"("p_value" "text") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."slugify_stats_label"("p_value" "text") TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."stats_item_percent_delta"("p_current" numeric, "p_previous" numeric) TO "postgres";
+GRANT ALL ON FUNCTION "public"."stats_item_percent_delta"("p_current" numeric, "p_previous" numeric) TO "anon";
+GRANT ALL ON FUNCTION "public"."stats_item_percent_delta"("p_current" numeric, "p_previous" numeric) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."stats_item_percent_delta"("p_current" numeric, "p_previous" numeric) TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."stats_item_roblox_url"("p_asset_id" bigint, "p_item_type" "text", "p_raw_catalog_json" "jsonb") TO "postgres";
+GRANT ALL ON FUNCTION "public"."stats_item_roblox_url"("p_asset_id" bigint, "p_item_type" "text", "p_raw_catalog_json" "jsonb") TO "anon";
+GRANT ALL ON FUNCTION "public"."stats_item_roblox_url"("p_asset_id" bigint, "p_item_type" "text", "p_raw_catalog_json" "jsonb") TO "authenticated";
+GRANT ALL ON FUNCTION "public"."stats_item_roblox_url"("p_asset_id" bigint, "p_item_type" "text", "p_raw_catalog_json" "jsonb") TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."trg_canonicalize_article_media"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."trg_canonicalize_article_media"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_canonicalize_article_media"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_canonicalize_article_media"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."trg_canonicalize_article_source_media"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."trg_canonicalize_article_source_media"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_canonicalize_article_source_media"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_canonicalize_article_source_media"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."trg_canonicalize_code_page_media"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."trg_canonicalize_code_page_media"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_canonicalize_code_page_media"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_canonicalize_code_page_media"() TO "service_role";
 
 
 
@@ -7474,9 +10141,22 @@ GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_checklist_pages"() TO "
 
 
 
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_code_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_code_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_code_pages"() TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_codes"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_codes"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_codes"() TO "service_role";
+
+
+
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_decal_ids"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_decal_ids"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_decal_ids"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_decal_ids"() TO "service_role";
 
 
 
@@ -7498,33 +10178,14 @@ GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_free_items_catalog"() T
 
 
 
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() TO "anon";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_list_entries"() TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_lists"() TO "anon";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_lists"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_game_lists"() TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_games"() TO "anon";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_games"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_games"() TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() TO "anon";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_lists_roblox_universe"() TO "service_role";
-
-
-
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_music_ids"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_music_ids"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_music_ids"() TO "service_role";
+
+
+
+REVOKE ALL ON FUNCTION "public"."trg_enqueue_revalidation_promo_rewards"() FROM PUBLIC;
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_promo_rewards"() TO "service_role";
 
 
 
@@ -7546,6 +10207,13 @@ GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_quiz_pages"() TO "servi
 
 
 
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_stats_items"() TO "postgres";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_stats_items"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_stats_items"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_stats_items"() TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_tools"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_tools"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_tools"() TO "service_role";
@@ -7564,9 +10232,9 @@ GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_virtual_events"() TO "s
 
 
 
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() TO "anon";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_catalog_pages"() TO "service_role";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_collection_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_collection_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_enqueue_revalidation_wiki_collection_pages"() TO "service_role";
 
 
 
@@ -7618,21 +10286,15 @@ GRANT ALL ON FUNCTION "public"."trg_search_index_checklists"() TO "service_role"
 
 
 
+GRANT ALL ON FUNCTION "public"."trg_search_index_code_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_code_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_code_pages"() TO "service_role";
+
+
+
 GRANT ALL ON FUNCTION "public"."trg_search_index_events_pages"() TO "anon";
 GRANT ALL ON FUNCTION "public"."trg_search_index_events_pages"() TO "authenticated";
 GRANT ALL ON FUNCTION "public"."trg_search_index_events_pages"() TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."trg_search_index_game_lists"() TO "anon";
-GRANT ALL ON FUNCTION "public"."trg_search_index_game_lists"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."trg_search_index_game_lists"() TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."trg_search_index_games"() TO "anon";
-GRANT ALL ON FUNCTION "public"."trg_search_index_games"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."trg_search_index_games"() TO "service_role";
 
 
 
@@ -7654,9 +10316,9 @@ GRANT ALL ON FUNCTION "public"."trg_search_index_tools"() TO "service_role";
 
 
 
-GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_catalog_pages"() TO "anon";
-GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_catalog_pages"() TO "authenticated";
-GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_catalog_pages"() TO "service_role";
+GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_collection_pages"() TO "anon";
+GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_collection_pages"() TO "authenticated";
+GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_collection_pages"() TO "service_role";
 
 
 
@@ -7666,15 +10328,9 @@ GRANT ALL ON FUNCTION "public"."trg_search_index_wiki_pages"() TO "service_role"
 
 
 
-GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) TO "anon";
-GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) TO "authenticated";
-GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean) TO "service_role";
-
-
-
-GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "anon";
-GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "authenticated";
-GRANT ALL ON FUNCTION "public"."upsert_code"("p_game_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "service_role";
+GRANT ALL ON FUNCTION "public"."upsert_code"("p_code_page_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "anon";
+GRANT ALL ON FUNCTION "public"."upsert_code"("p_code_page_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "authenticated";
+GRANT ALL ON FUNCTION "public"."upsert_code"("p_code_page_id" "uuid", "p_code" "text", "p_status" "text", "p_rewards_text" "text", "p_level_requirement" integer, "p_is_new" boolean, "p_provider_priority" integer) TO "service_role";
 
 
 
@@ -7710,18 +10366,65 @@ GRANT ALL ON TABLE "public"."article_generation_artifacts" TO "service_role";
 GRANT ALL ON TABLE "public"."articles" TO "anon";
 GRANT ALL ON TABLE "public"."articles" TO "authenticated";
 GRANT ALL ON TABLE "public"."articles" TO "service_role";
+GRANT SELECT ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("title") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("slug") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("content_md") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("cover_image") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("author_id") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("is_published") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("published_at") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("meta_description") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("universe_id") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("tags") ON TABLE "public"."articles" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("sources") ON TABLE "public"."articles" TO "basebuddy_editor";
 
 
 
 GRANT ALL ON TABLE "public"."authors" TO "anon";
 GRANT ALL ON TABLE "public"."authors" TO "authenticated";
 GRANT ALL ON TABLE "public"."authors" TO "service_role";
+GRANT SELECT ON TABLE "public"."authors" TO "basebuddy_editor";
 
 
 
 GRANT ALL ON TABLE "public"."roblox_universes" TO "anon";
 GRANT ALL ON TABLE "public"."roblox_universes" TO "authenticated";
 GRANT ALL ON TABLE "public"."roblox_universes" TO "service_role";
+GRANT SELECT ON TABLE "public"."roblox_universes" TO "basebuddy_editor";
 
 
 
@@ -7731,6 +10434,7 @@ GRANT ALL ON TABLE "public"."article_pages_index_view" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."article_pages_view" TO "postgres";
 GRANT ALL ON TABLE "public"."article_pages_view" TO "anon";
 GRANT ALL ON TABLE "public"."article_pages_view" TO "authenticated";
 GRANT ALL ON TABLE "public"."article_pages_view" TO "service_role";
@@ -7743,9 +10447,74 @@ GRANT ALL ON TABLE "public"."article_source_images" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."cache_warm_events" TO "anon";
+GRANT ALL ON TABLE "public"."cache_warm_events" TO "authenticated";
+GRANT ALL ON TABLE "public"."cache_warm_events" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."cache_warm_worker_runs" TO "anon";
+GRANT ALL ON TABLE "public"."cache_warm_worker_runs" TO "authenticated";
+GRANT ALL ON TABLE "public"."cache_warm_worker_runs" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."catalog_pages" TO "anon";
 GRANT ALL ON TABLE "public"."catalog_pages" TO "authenticated";
 GRANT ALL ON TABLE "public"."catalog_pages" TO "service_role";
+GRANT SELECT ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("title") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_title") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("meta_description") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("intro_md") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("how_it_works_md") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("description_json") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("faq_json") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("thumb_url") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("is_published") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("published_at") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("wiki_md") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("wiki_sort_order") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("description_md") ON TABLE "public"."catalog_pages" TO "basebuddy_editor";
 
 
 
@@ -7764,6 +10533,31 @@ GRANT ALL ON TABLE "public"."checklist_items" TO "service_role";
 GRANT ALL ON TABLE "public"."checklist_pages" TO "anon";
 GRANT ALL ON TABLE "public"."checklist_pages" TO "authenticated";
 GRANT ALL ON TABLE "public"."checklist_pages" TO "service_role";
+GRANT SELECT ON TABLE "public"."checklist_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("title") ON TABLE "public"."checklist_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_title") ON TABLE "public"."checklist_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_description") ON TABLE "public"."checklist_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("published_at") ON TABLE "public"."checklist_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("is_public") ON TABLE "public"."checklist_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("description_md") ON TABLE "public"."checklist_pages" TO "basebuddy_editor";
 
 
 
@@ -7773,15 +10567,128 @@ GRANT ALL ON TABLE "public"."checklist_pages_view" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."code_pages" TO "anon";
+GRANT ALL ON TABLE "public"."code_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."code_pages" TO "service_role";
+GRANT SELECT ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("name") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("cover_image") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_description") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("is_published") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("intro_md") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("redeem_md") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url_2") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url_3") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("roblox_link") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("twitter_link") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("discord_link") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("community_link") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("youtube_link") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("rewards_md") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("troubleshoot_md") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("published_at") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("find_codes_md") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url_4") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url_5") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url_6") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url_7") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url_8") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url_9") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("source_url_10") ON TABLE "public"."code_pages" TO "basebuddy_editor";
+
+
+
 GRANT ALL ON TABLE "public"."codes" TO "anon";
 GRANT ALL ON TABLE "public"."codes" TO "authenticated";
 GRANT ALL ON TABLE "public"."codes" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."games" TO "anon";
-GRANT ALL ON TABLE "public"."games" TO "authenticated";
-GRANT ALL ON TABLE "public"."games" TO "service_role";
+GRANT ALL ON TABLE "public"."code_page_code_stats" TO "anon";
+GRANT ALL ON TABLE "public"."code_page_code_stats" TO "authenticated";
+GRANT ALL ON TABLE "public"."code_page_code_stats" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."code_pages_index_view" TO "anon";
+GRANT ALL ON TABLE "public"."code_pages_index_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."code_pages_index_view" TO "service_role";
 
 
 
@@ -7806,48 +10713,41 @@ GRANT ALL ON TABLE "public"."event_guide_generation_queue" TO "service_role";
 GRANT ALL ON TABLE "public"."events_pages" TO "anon";
 GRANT ALL ON TABLE "public"."events_pages" TO "authenticated";
 GRANT ALL ON TABLE "public"."events_pages" TO "service_role";
+GRANT SELECT ON TABLE "public"."events_pages" TO "basebuddy_editor";
 
 
 
-GRANT ALL ON TABLE "public"."game_code_stats" TO "anon";
-GRANT ALL ON TABLE "public"."game_code_stats" TO "authenticated";
-GRANT ALL ON TABLE "public"."game_code_stats" TO "service_role";
+GRANT UPDATE("title") ON TABLE "public"."events_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("content_md") ON TABLE "public"."events_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_title") ON TABLE "public"."events_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("meta_description") ON TABLE "public"."events_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("is_published") ON TABLE "public"."events_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("published_at") ON TABLE "public"."events_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("slug") ON TABLE "public"."events_pages" TO "basebuddy_editor";
 
 
 
 GRANT ALL ON TABLE "public"."game_generation_queue" TO "anon";
 GRANT ALL ON TABLE "public"."game_generation_queue" TO "authenticated";
 GRANT ALL ON TABLE "public"."game_generation_queue" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."game_list_entries" TO "anon";
-GRANT ALL ON TABLE "public"."game_list_entries" TO "authenticated";
-GRANT ALL ON TABLE "public"."game_list_entries" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."game_lists" TO "anon";
-GRANT ALL ON TABLE "public"."game_lists" TO "authenticated";
-GRANT ALL ON TABLE "public"."game_lists" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."game_lists_index_view" TO "anon";
-GRANT ALL ON TABLE "public"."game_lists_index_view" TO "authenticated";
-GRANT ALL ON TABLE "public"."game_lists_index_view" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."game_lists_view" TO "anon";
-GRANT ALL ON TABLE "public"."game_lists_view" TO "authenticated";
-GRANT ALL ON TABLE "public"."game_lists_view" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."game_pages_index_view" TO "anon";
-GRANT ALL ON TABLE "public"."game_pages_index_view" TO "authenticated";
-GRANT ALL ON TABLE "public"."game_pages_index_view" TO "service_role";
 
 
 
@@ -7908,6 +10808,35 @@ GRANT ALL ON TABLE "public"."puzzle_sync_runs" TO "service_role";
 GRANT ALL ON TABLE "public"."quiz_pages" TO "anon";
 GRANT ALL ON TABLE "public"."quiz_pages" TO "authenticated";
 GRANT ALL ON TABLE "public"."quiz_pages" TO "service_role";
+GRANT SELECT ON TABLE "public"."quiz_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("title") ON TABLE "public"."quiz_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("description_md") ON TABLE "public"."quiz_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_title") ON TABLE "public"."quiz_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_description") ON TABLE "public"."quiz_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("is_published") ON TABLE "public"."quiz_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("published_at") ON TABLE "public"."quiz_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("about_md") ON TABLE "public"."quiz_pages" TO "basebuddy_editor";
 
 
 
@@ -7920,6 +10849,29 @@ GRANT ALL ON TABLE "public"."quiz_pages_view" TO "service_role";
 GRANT ALL ON TABLE "public"."revalidation_events" TO "anon";
 GRANT ALL ON TABLE "public"."revalidation_events" TO "authenticated";
 GRANT ALL ON TABLE "public"."revalidation_events" TO "service_role";
+GRANT SELECT,INSERT,UPDATE ON TABLE "public"."revalidation_events" TO "basebuddy_editor";
+
+
+
+GRANT SELECT("entity_type"),INSERT("entity_type") ON TABLE "public"."revalidation_events" TO "basebuddy_editor";
+
+
+
+GRANT SELECT("slug"),INSERT("slug") ON TABLE "public"."revalidation_events" TO "basebuddy_editor";
+
+
+
+GRANT INSERT("source"),UPDATE("source") ON TABLE "public"."revalidation_events" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("created_at") ON TABLE "public"."revalidation_events" TO "basebuddy_editor";
+
+
+
+GRANT ALL ON TABLE "public"."revalidation_worker_runs" TO "anon";
+GRANT ALL ON TABLE "public"."revalidation_worker_runs" TO "authenticated";
+GRANT ALL ON TABLE "public"."revalidation_worker_runs" TO "service_role";
 
 
 
@@ -7947,6 +10899,27 @@ GRANT ALL ON TABLE "public"."roblox_catalog_item_images" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."roblox_catalog_item_resale_points" TO "postgres";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_resale_points" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_resale_points" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_resale_points" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_item_stats_daily" TO "postgres";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_stats_daily" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_stats_daily" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_stats_daily" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_catalog_item_stats_hourly" TO "postgres";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_stats_hourly" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_stats_hourly" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_catalog_item_stats_hourly" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."roblox_catalog_items_history" TO "anon";
 GRANT ALL ON TABLE "public"."roblox_catalog_items_history" TO "authenticated";
 GRANT ALL ON TABLE "public"."roblox_catalog_items_history" TO "service_role";
@@ -7962,6 +10935,34 @@ GRANT ALL ON TABLE "public"."roblox_catalog_refresh_queue" TO "service_role";
 GRANT ALL ON TABLE "public"."roblox_catalog_subcategories" TO "anon";
 GRANT ALL ON TABLE "public"."roblox_catalog_subcategories" TO "authenticated";
 GRANT ALL ON TABLE "public"."roblox_catalog_subcategories" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_decal_ids" TO "postgres";
+GRANT ALL ON TABLE "public"."roblox_decal_ids" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_decal_ids" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_decal_ids" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_decal_categories_view" TO "postgres";
+GRANT ALL ON TABLE "public"."roblox_decal_categories_view" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_decal_categories_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_decal_categories_view" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_decal_id_sources" TO "postgres";
+GRANT ALL ON TABLE "public"."roblox_decal_id_sources" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_decal_id_sources" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_decal_id_sources" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_decal_ids_ranked_view" TO "postgres";
+GRANT ALL ON TABLE "public"."roblox_decal_ids_ranked_view" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_decal_ids_ranked_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_decal_ids_ranked_view" TO "service_role";
 
 
 
@@ -8001,15 +11002,13 @@ GRANT ALL ON TABLE "public"."roblox_music_ids_ranked_view" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."roblox_promo_rewards" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."roblox_universe_badges" TO "anon";
 GRANT ALL ON TABLE "public"."roblox_universe_badges" TO "authenticated";
 GRANT ALL ON TABLE "public"."roblox_universe_badges" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."roblox_universe_discovery_jobs" TO "anon";
-GRANT ALL ON TABLE "public"."roblox_universe_discovery_jobs" TO "authenticated";
-GRANT ALL ON TABLE "public"."roblox_universe_discovery_jobs" TO "service_role";
 
 
 
@@ -8037,33 +11036,21 @@ GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."roblox_universe_search_snapshots" TO "anon";
-GRANT ALL ON TABLE "public"."roblox_universe_search_snapshots" TO "authenticated";
-GRANT ALL ON TABLE "public"."roblox_universe_search_snapshots" TO "service_role";
+GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots_daily" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots_daily" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots_daily" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots_hourly" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots_hourly" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_rank_snapshots_hourly" TO "service_role";
 
 
 
 GRANT ALL ON TABLE "public"."roblox_universe_social_links" TO "anon";
 GRANT ALL ON TABLE "public"."roblox_universe_social_links" TO "authenticated";
 GRANT ALL ON TABLE "public"."roblox_universe_social_links" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."roblox_universe_sort_definitions" TO "anon";
-GRANT ALL ON TABLE "public"."roblox_universe_sort_definitions" TO "authenticated";
-GRANT ALL ON TABLE "public"."roblox_universe_sort_definitions" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."roblox_universe_sort_entries" TO "anon";
-GRANT ALL ON TABLE "public"."roblox_universe_sort_entries" TO "authenticated";
-GRANT ALL ON TABLE "public"."roblox_universe_sort_entries" TO "service_role";
-
-
-
-GRANT ALL ON TABLE "public"."roblox_universe_sort_runs" TO "anon";
-GRANT ALL ON TABLE "public"."roblox_universe_sort_runs" TO "authenticated";
-GRANT ALL ON TABLE "public"."roblox_universe_sort_runs" TO "service_role";
 
 
 
@@ -8076,6 +11063,12 @@ GRANT ALL ON TABLE "public"."roblox_universe_stats_daily" TO "service_role";
 GRANT ALL ON TABLE "public"."roblox_universe_stats_hourly" TO "anon";
 GRANT ALL ON TABLE "public"."roblox_universe_stats_hourly" TO "authenticated";
 GRANT ALL ON TABLE "public"."roblox_universe_stats_hourly" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."roblox_universe_update_events" TO "anon";
+GRANT ALL ON TABLE "public"."roblox_universe_update_events" TO "authenticated";
+GRANT ALL ON TABLE "public"."roblox_universe_update_events" TO "service_role";
 
 
 
@@ -8100,12 +11093,148 @@ GRANT ALL ON TABLE "public"."roblox_virtual_events" TO "service_role";
 GRANT ALL ON TABLE "public"."search_index" TO "anon";
 GRANT ALL ON TABLE "public"."search_index" TO "authenticated";
 GRANT ALL ON TABLE "public"."search_index" TO "service_role";
+GRANT SELECT,INSERT,UPDATE ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT SELECT("entity_type"),INSERT("entity_type") ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT SELECT("entity_id"),INSERT("entity_id") ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT INSERT("slug"),UPDATE("slug") ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT INSERT("title"),UPDATE("title") ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT INSERT("subtitle"),UPDATE("subtitle") ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT INSERT("url"),UPDATE("url") ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT INSERT("updated_at"),UPDATE("updated_at") ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT INSERT("is_published"),UPDATE("is_published") ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT INSERT("search_text"),UPDATE("search_text") ON TABLE "public"."search_index" TO "basebuddy_editor";
+
+
+
+GRANT ALL ON TABLE "public"."site_feedback" TO "anon";
+GRANT ALL ON TABLE "public"."site_feedback" TO "authenticated";
+GRANT ALL ON TABLE "public"."site_feedback" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."stats_creator_current_index" TO "anon";
+GRANT ALL ON TABLE "public"."stats_creator_current_index" TO "authenticated";
+GRANT ALL ON TABLE "public"."stats_creator_current_index" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."stats_game_current_index" TO "anon";
+GRANT ALL ON TABLE "public"."stats_game_current_index" TO "authenticated";
+GRANT ALL ON TABLE "public"."stats_game_current_index" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."stats_genre_current_index" TO "anon";
+GRANT ALL ON TABLE "public"."stats_genre_current_index" TO "authenticated";
+GRANT ALL ON TABLE "public"."stats_genre_current_index" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."stats_item_current_index" TO "postgres";
+GRANT ALL ON TABLE "public"."stats_item_current_index" TO "anon";
+GRANT ALL ON TABLE "public"."stats_item_current_index" TO "authenticated";
+GRANT ALL ON TABLE "public"."stats_item_current_index" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."stats_item_price_movers_current_index" TO "postgres";
+GRANT ALL ON TABLE "public"."stats_item_price_movers_current_index" TO "anon";
+GRANT ALL ON TABLE "public"."stats_item_price_movers_current_index" TO "authenticated";
+GRANT ALL ON TABLE "public"."stats_item_price_movers_current_index" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."stats_job_runs" TO "anon";
+GRANT ALL ON TABLE "public"."stats_job_runs" TO "authenticated";
+GRANT ALL ON TABLE "public"."stats_job_runs" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."stats_risers_current_index" TO "anon";
+GRANT ALL ON TABLE "public"."stats_risers_current_index" TO "authenticated";
+GRANT ALL ON TABLE "public"."stats_risers_current_index" TO "service_role";
 
 
 
 GRANT ALL ON TABLE "public"."tools" TO "anon";
 GRANT ALL ON TABLE "public"."tools" TO "authenticated";
 GRANT ALL ON TABLE "public"."tools" TO "service_role";
+GRANT SELECT ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("title") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_title") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("meta_description") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("intro_md") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("how_it_works_md") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("description_json") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("faq_json") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("cta_label") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("cta_url") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("thumb_url") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("is_published") ON TABLE "public"."tools" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("published_at") ON TABLE "public"."tools" TO "basebuddy_editor";
 
 
 
@@ -8133,21 +11262,107 @@ GRANT ALL ON TABLE "public"."user_quiz_progress" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."wiki_catalog_pages" TO "anon";
-GRANT ALL ON TABLE "public"."wiki_catalog_pages" TO "authenticated";
-GRANT ALL ON TABLE "public"."wiki_catalog_pages" TO "service_role";
+GRANT ALL ON TABLE "public"."wiki_collection_pages" TO "anon";
+GRANT ALL ON TABLE "public"."wiki_collection_pages" TO "authenticated";
+GRANT ALL ON TABLE "public"."wiki_collection_pages" TO "service_role";
+GRANT SELECT ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
 
 
 
-GRANT ALL ON TABLE "public"."wiki_catalog_pages_view" TO "anon";
-GRANT ALL ON TABLE "public"."wiki_catalog_pages_view" TO "authenticated";
-GRANT ALL ON TABLE "public"."wiki_catalog_pages_view" TO "service_role";
+GRANT UPDATE("title") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_title") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("meta_description") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("intro_md") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("how_it_works_md") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("description_md") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("description_json") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("faq_json") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("thumb_url") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("wiki_md") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("wiki_sort_order") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("is_published") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("published_at") ON TABLE "public"."wiki_collection_pages" TO "basebuddy_editor";
+
+
+
+GRANT ALL ON TABLE "public"."wiki_collection_pages_view" TO "anon";
+GRANT ALL ON TABLE "public"."wiki_collection_pages_view" TO "authenticated";
+GRANT ALL ON TABLE "public"."wiki_collection_pages_view" TO "service_role";
 
 
 
 GRANT ALL ON TABLE "public"."wiki_pages" TO "anon";
 GRANT ALL ON TABLE "public"."wiki_pages" TO "authenticated";
 GRANT ALL ON TABLE "public"."wiki_pages" TO "service_role";
+GRANT SELECT ON TABLE "public"."wiki_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("title") ON TABLE "public"."wiki_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("seo_title") ON TABLE "public"."wiki_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("meta_description") ON TABLE "public"."wiki_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("controls_json") ON TABLE "public"."wiki_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("tips_md") ON TABLE "public"."wiki_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("is_published") ON TABLE "public"."wiki_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("published_at") ON TABLE "public"."wiki_pages" TO "basebuddy_editor";
+
+
+
+GRANT UPDATE("cover_image") ON TABLE "public"."wiki_pages" TO "basebuddy_editor";
 
 
 

@@ -6,6 +6,7 @@ import { slugify, stripCodesSuffix } from "@/lib/slug";
 import { ensureUniverseForRobloxLink } from "@/lib/roblox/universe";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
+import { assertCanonicalMediaUrls } from "../shared/storage-public-url";
 
 type SourceUrlFields = Partial<Record<`source_url${"" | "_2" | "_3" | "_4" | "_5" | "_6" | "_7" | "_8" | "_9" | "_10"}`, string | null>>;
 
@@ -251,6 +252,7 @@ async function upsertCodePage(payload: CodePagePayload, options: CliOptions) {
     universe_id: universeId,
     ...mapSourceUrls(payload.sourceUrls),
   };
+  assertCanonicalMediaUrls(codePagePayload, `Code page ${slug}`);
 
   if (publish && !existing?.published_at) {
     codePagePayload.published_at = new Date().toISOString();

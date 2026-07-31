@@ -29,6 +29,7 @@ jobs:
       GOOGLE_SEARCH_KEY: ${{ secrets.GOOGLE_SEARCH_KEY }}
       GOOGLE_SEARCH_CX: ${{ secrets.GOOGLE_SEARCH_CX }}
       SUPABASE_MEDIA_BUCKET: ${{ secrets.SUPABASE_MEDIA_BUCKET }}
+      SUPABASE_MEDIA_PUBLIC_URL: https://media.bloxodes.com
     steps:
       - name: Checkout
         uses: actions/checkout@v6

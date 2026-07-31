@@ -55,6 +55,8 @@
     "test:production-smoke": "tsx scripts/quality/site-audit.ts smoke",
     "verify:published-url": "tsx scripts/quality/verify-published-url.ts",
     "validate:published-content": "tsx scripts/quality/validate-published-content.ts",
+    "audit:legacy-media": "tsx scripts/backfill/repair-legacy-supabase-media.ts",
+    "repair:legacy-media": "tsx scripts/backfill/repair-legacy-supabase-media.ts",
     "verify:deterministic": "tsx scripts/quality/run-quality-suite.ts deterministic",
     "verify:build": "tsx scripts/quality/run-quality-suite.ts build",
     "verify:predeploy": "tsx scripts/quality/verify-candidate.ts",

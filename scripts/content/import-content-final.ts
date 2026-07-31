@@ -6,7 +6,7 @@ import sharp from "sharp";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
-import { toMediaPublicUrl } from "../shared/storage-public-url";
+import { assertCanonicalMediaUrls, toMediaPublicUrl } from "../shared/storage-public-url";
 
 type CliOptions = {
   files: string[];
@@ -654,6 +654,7 @@ async function main() {
 
   for (const file of options.files) {
     const value = await readJson(file);
+    assertCanonicalMediaUrls(value, file);
     if (isArticleFinal(value)) {
       await importArticle(value, options.dryRun);
     } else if (isChecklistFinal(value) || isLegacyChecklistFinal(value)) {

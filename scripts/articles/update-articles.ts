@@ -695,8 +695,9 @@ async function uploadSourceImagesForArticle(params: {
   } else {
     for (const row of existingRows ?? []) {
       if (row?.original_url) {
+        const publicUrl = toMediaPublicUrl(row.public_url ?? null);
         existingMap.set(row.original_url, {
-          public_url: row.public_url ?? null,
+          public_url: publicUrl,
           name: row.name ?? null,
           table_key: row.table_key ?? null,
           context: (row as { context?: string | null }).context ?? null,

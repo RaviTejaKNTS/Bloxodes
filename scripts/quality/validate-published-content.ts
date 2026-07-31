@@ -5,6 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { resolveContentDates } from "../../apps/web/src/lib/content-dates";
+import { findNonCanonicalMediaUrls } from "../shared/storage-public-url";
 
 type Row = Record<string, unknown>;
 
@@ -300,6 +301,18 @@ async function validateRow(issues: ValidationIssue[], contract: TableContract, r
     );
   }
   if (!contract.routeFor(row)) pushIssue(issues, contract, row, "missing-route", "Could not build a public route");
+
+  for (const [field, value] of Object.entries(row)) {
+    const nonCanonicalUrls = findNonCanonicalMediaUrls(value);
+    if (!nonCanonicalUrls.length) continue;
+    pushIssue(
+      issues,
+      contract,
+      row,
+      "non-canonical-supabase-media",
+      `${field} contains ${nonCanonicalUrls.length} non-canonical Supabase media URL${nonCanonicalUrls.length === 1 ? "" : "s"}`
+    );
+  }
 
   if (!contract.descriptionFields.some((field) => hasContent(row[field]))) {
     pushIssue(

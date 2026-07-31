@@ -101,6 +101,7 @@ Code-page article copy must be long-term. Metadata and prose should explain rewa
 | Backfill social links | `scripts/backfill/backfill-social-links.ts` | `npm run links:backfill` |
 | Backfill missing cover images | `scripts/backfill/backfill-missing-cover-images.ts` | `npm run cover:backfill` |
 | Backfill interlinking copy | `scripts/backfill/backfill-interlinking.ts` | `npm run backfill:interlinking` |
+| Audit or repair non-canonical Supabase media | `scripts/backfill/repair-legacy-supabase-media.ts` | Scans both the retired managed origin and `database.bloxodes.com` Storage URLs. `npm run audit:legacy-media` is read-only and requires `-- --allow-remote-read` for a remote target. Use `npm run repair:legacy-media -- --recovery-root <path> --remove-unrecoverable-body-images --replace-missing-covers-from-roblox --apply --allow-prod` only after a clean dry run; uploads and verifies media before updating rows and writes an ignored rollback snapshot under `tmp/legacy-media-repair/`. |
 
 ## Events
 
