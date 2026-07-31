@@ -117,7 +117,7 @@
         "slug": "black-fire",
         "section": "Damage-over-Time Effects",
         "sortOrder": 1,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/black-fire.png"
       }
     },
     {
@@ -136,7 +136,7 @@
         "slug": "bleed",
         "section": "Damage-over-Time Effects",
         "sortOrder": 2,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/bleed.png"
       }
     },
     {
@@ -155,7 +155,7 @@
         "slug": "burn",
         "section": "Damage-over-Time Effects",
         "sortOrder": 3,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/burn.png"
       }
     },
     {
@@ -174,7 +174,7 @@
         "slug": "austere-flames",
         "section": "Damage-over-Time Effects",
         "sortOrder": 4,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/austere-flames.png"
       }
     },
     {
@@ -193,7 +193,7 @@
         "slug": "mana-burn",
         "section": "Damage-over-Time Effects",
         "sortOrder": 5,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/mana-burn.png"
       }
     },
     {
@@ -212,7 +212,7 @@
         "slug": "slow",
         "section": "Soft Crowd-Control Effects",
         "sortOrder": 6,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/slow.png"
       }
     },
     {
@@ -231,7 +231,7 @@
         "slug": "stagger",
         "section": "Soft Crowd-Control Effects",
         "sortOrder": 7,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/stagger.png"
       }
     },
     {
@@ -250,7 +250,7 @@
         "slug": "dismembered",
         "section": "Soft Crowd-Control Effects",
         "sortOrder": 8,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/dismembered.png"
       }
     },
     {
@@ -269,7 +269,7 @@
         "slug": "freeze",
         "section": "Hard Crowd-Control Effects",
         "sortOrder": 9,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/freeze.png"
       }
     },
     {
@@ -288,7 +288,7 @@
         "slug": "rewind",
         "section": "Hard Crowd-Control Effects",
         "sortOrder": 10,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/rewind.png"
       }
     },
     {
@@ -307,7 +307,7 @@
         "slug": "stun",
         "section": "Hard Crowd-Control Effects",
         "sortOrder": 11,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/stun.png"
       }
     },
     {
@@ -345,7 +345,7 @@
         "slug": "illusion",
         "section": "Mark Effects",
         "sortOrder": 13,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/illusion.png"
       }
     },
     {
@@ -364,7 +364,7 @@
         "slug": "true-saint-mark",
         "section": "Mark Effects",
         "sortOrder": 14,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/true-saint-mark.png"
       }
     },
     {
@@ -383,7 +383,7 @@
         "slug": "puppet-mark",
         "section": "Mark Effects",
         "sortOrder": 15,
-        "image": null
+        "image": "/Anime%20Expeditions/status-effects/puppet-mark.png"
       }
     },
     {
