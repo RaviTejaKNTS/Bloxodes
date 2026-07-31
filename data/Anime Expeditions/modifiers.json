@@ -1,0 +1,874 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "modifiers",
+    "route": "/wiki/anime-expeditions/modifiers",
+    "catalogCode": "anime-expeditions-modifiers",
+    "sourceItemCount": 50,
+    "itemFields": [
+      "name",
+      "type",
+      "effect",
+      "counters",
+      "notes",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "type",
+      "effect",
+      "counters",
+      "notes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Game Modifiers",
+        "Enemy Modifiers"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "type",
+        "effect",
+        "counters"
+      ],
+      "tableFields": [
+        "type",
+        "effect",
+        "counters",
+        "notes",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "type": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "effect": {
+          "kind": "plain",
+          "label": "Effect"
+        },
+        "counters": {
+          "kind": "highlight",
+          "label": "Counters"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Boss Waves",
+        "type": "Game Modifier",
+        "effect": "All enemies are bosses.",
+        "counters": "Shadow (Divine), 8th Sword (Berserk), Cursed Student (True Love), Puppet (Telekinetic)",
+        "notes": "",
+        "cardSummary": "Every enemy counts as a boss, so bring high single-target and boss-ready damage."
+      },
+      "system": {
+        "slug": "boss-waves",
+        "section": "Game Modifiers",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cards Disabled",
+        "type": "Game Modifier",
+        "effect": "Blood Money and Bounty Hunter Cards are disabled.",
+        "counters": "",
+        "notes": "Disables Blood Money and Bounty Hunter cards rather than changing enemy stats.",
+        "cardSummary": "Blood Money and Bounty Hunter cards are turned off for the stage."
+      },
+      "system": {
+        "slug": "cards-disabled",
+        "section": "Game Modifiers",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mirror",
+        "type": "Game Modifier",
+        "effect": "Enemies copy all units' elements as resistances.",
+        "counters": "8th Sword (Berserk), Puppet (Telekinetic), Toy Maker",
+        "notes": "Element copy applies as resistances on enemies, so mono-element teams struggle.",
+        "cardSummary": "Enemies gain resistances matching your units' elements, punishing mono-element teams."
+      },
+      "system": {
+        "slug": "mirror",
+        "section": "Game Modifiers",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "No Anvils",
+        "type": "Game Modifier",
+        "effect": "Stat Anvils are disabled.",
+        "counters": "",
+        "notes": "Turns off Stat Anvils for the stage; there is no unit counterpick.",
+        "cardSummary": "Stat Anvils cannot be used, so plan around base unit stats and upgrades only."
+      },
+      "system": {
+        "slug": "no-anvils",
+        "section": "Game Modifiers",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "No Farms",
+        "type": "Game Modifier",
+        "effect": "Farm units are disabled.",
+        "counters": "",
+        "notes": "Blocks Farm unit deployment for the whole stage.",
+        "cardSummary": "Farm units cannot be placed, forcing economy from other sources."
+      },
+      "system": {
+        "slug": "no-farms",
+        "section": "Game Modifiers",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "No Repair",
+        "type": "Game Modifier",
+        "effect": "The Repair Hammer is disabled.",
+        "counters": "",
+        "notes": "Blocks the Repair Hammer for the stage.",
+        "cardSummary": "The Repair Hammer is unavailable, so damaged setups stay damaged."
+      },
+      "system": {
+        "slug": "no-repair",
+        "section": "Game Modifiers",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "No Research Tree",
+        "type": "Game Modifier",
+        "effect": "Research Tree Upgrades are disabled.",
+        "counters": "",
+        "notes": "Locks Research Tree upgrades for the stage.",
+        "cardSummary": "Research Tree upgrades are locked for the run."
+      },
+      "system": {
+        "slug": "no-research-tree",
+        "section": "Game Modifiers",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "No Tomes",
+        "type": "Game Modifier",
+        "effect": "Trait Tomes are disabled.",
+        "counters": "",
+        "notes": "Blocks Trait Tomes for the stage.",
+        "cardSummary": "Trait Tomes cannot be used during the stage."
+      },
+      "system": {
+        "slug": "no-tomes",
+        "section": "Game Modifiers",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Resistance",
+        "type": "Game Modifier",
+        "effect": "Resistances cycle from Flame > Hydro > Gale > Terra > Light > Storm > Dark every 30s.",
+        "counters": "Bring multiple Elements such as Shadow (Dark), Flame Emperor (Flame), Elf Mage (Storm), Water Princess (Hydro), Lady Giant (Terra)",
+        "notes": "Related to Enemy Resistances shown above enemies; cycle order is Flame → Hydro → Gale → Terra → Light → Storm → Dark.",
+        "cardSummary": "Enemy elemental resistances rotate every 30 seconds through the full element cycle."
+      },
+      "system": {
+        "slug": "resistance",
+        "section": "Game Modifiers",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shielded",
+        "type": "Game Modifier",
+        "effect": "All enemies spawn with 10 shields.",
+        "counters": "Shadow (Divine), 8th Sword (Berserk), String Demon (Awakened)",
+        "notes": "",
+        "cardSummary": "All enemies spawn with ten shields, favoring shield-break and heavy DPS picks."
+      },
+      "system": {
+        "slug": "shielded",
+        "section": "Game Modifiers",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Short Range",
+        "type": "Game Modifier",
+        "effect": "All ally units' ranges are decreased by -25%.",
+        "counters": "Elf Mage (Unleashed), Shadow (Divine), String Demon (Awakened), Flame Emperor",
+        "notes": "",
+        "cardSummary": "Allied units lose 25% attack range, so favor naturally long-range damage."
+      },
+      "system": {
+        "slug": "short-range",
+        "section": "Game Modifiers",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Speedy",
+        "type": "Game Modifier",
+        "effect": "Enemies are 50% faster.",
+        "counters": "Puppet (Telekinetic), Toy Maker, Reaper (Released), True Saint (Holy)",
+        "notes": "",
+        "cardSummary": "Enemies move 50% faster, so crowd control and slows matter more than usual."
+      },
+      "system": {
+        "slug": "speedy",
+        "section": "Game Modifiers",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Traitless",
+        "type": "Game Modifier",
+        "effect": "All traits are disabled.",
+        "counters": "",
+        "notes": "Unit traits do not apply while this stage rule is active.",
+        "cardSummary": "Unit traits are disabled, so builds rely on base kits and equipment."
+      },
+      "system": {
+        "slug": "traitless",
+        "section": "Game Modifiers",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Upgrade Cap",
+        "type": "Game Modifier",
+        "effect": "Only 25 upgrades are allowed across all units.",
+        "counters": "Shadow (Divine), 8th Sword (Berserk), Cursed Student (True Love)",
+        "notes": "",
+        "cardSummary": "The team can buy only 25 total unit upgrades for the whole stage."
+      },
+      "system": {
+        "slug": "upgrade-cap",
+        "section": "Game Modifiers",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sprinter",
+        "type": "Enemy Modifier",
+        "effect": "Moves 45% faster but has 20% less health.",
+        "counters": "Puppet (Telekinetic), Toy Maker, Reaper (Released)",
+        "notes": "",
+        "cardSummary": "Fast, lower-HP enemy that rushes lanes and needs slows or early damage."
+      },
+      "system": {
+        "slug": "sprinter",
+        "section": "Enemy Modifiers",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tank",
+        "type": "Enemy Modifier",
+        "effect": "Moves 20% slower but has 20% increased health.",
+        "counters": "Shadow (Divine), 8th Sword (Berserk), Cursed Student (True Love)",
+        "notes": "",
+        "cardSummary": "Slower enemy with extra health that soaks damage and stalls fights."
+      },
+      "system": {
+        "slug": "tank",
+        "section": "Enemy Modifiers",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Summoner",
+        "type": "Enemy Modifier",
+        "effect": "Every 5 seconds, summons enemies at its location (up to 5 enemies).",
+        "counters": "Shadow (Divine), String Demon (Awakened), Flame Emperor (Reincarnate)",
+        "notes": "",
+        "cardSummary": "Periodically spawns extra enemies at its position until removed."
+      },
+      "system": {
+        "slug": "summoner",
+        "section": "Enemy Modifiers",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Explosive",
+        "type": "Enemy Modifier",
+        "effect": "On death, explodes in a 10 range radius and stuns units for 2 seconds.",
+        "counters": "Long-range Units like Elf Mage (Unleashed) and Shadow (Divine)",
+        "notes": "",
+        "cardSummary": "Dies into a short stun blast, so keep key units out of the explosion radius."
+      },
+      "system": {
+        "slug": "explosive",
+        "section": "Enemy Modifiers",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Splitter",
+        "type": "Enemy Modifier",
+        "effect": "On death, splits into 3 enemies, each having 33% of its health.",
+        "counters": "Flame Emperor (Reincarnate), Hollow (Blaze), String Demon (Awakened)",
+        "notes": "",
+        "cardSummary": "Splits into three weaker enemies on death, multiplying pressure if ignored."
+      },
+      "system": {
+        "slug": "splitter",
+        "section": "Enemy Modifiers",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Armored",
+        "type": "Enemy Modifier",
+        "effect": "Takes 33% less damage from full AoE attacks.",
+        "counters": "Shadow (Divine), 8th Sword (Berserk), Cursed Student (True Love)",
+        "notes": "",
+        "cardSummary": "Takes much less damage from full AoE attacks, so mix in focused damage."
+      },
+      "system": {
+        "slug": "armored",
+        "section": "Enemy Modifiers",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Reinforced",
+        "type": "Enemy Modifier",
+        "effect": "Takes 30% less damage from all sources.",
+        "counters": "Shadow (Divine), Puppet (Telekinetic), 8th Sword (Berserk)",
+        "notes": "",
+        "cardSummary": "Takes 30% less damage from every source and needs sustained high DPS."
+      },
+      "system": {
+        "slug": "reinforced",
+        "section": "Enemy Modifiers",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Regen I",
+        "type": "Enemy Modifier",
+        "effect": "Regenerates 1% maximum health per second.",
+        "counters": "Shadow (Divine), Cursed Student (True Love), Crimson (Brother)",
+        "notes": "",
+        "cardSummary": "Slow self-heal at 1% max HP per second."
+      },
+      "system": {
+        "slug": "regen-i",
+        "section": "Enemy Modifiers",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Regen II",
+        "type": "Enemy Modifier",
+        "effect": "Regenerates 3% maximum health per second.",
+        "counters": "Shadow (Divine), Cursed Student (True Love), Crimson (Brother)",
+        "notes": "",
+        "cardSummary": "Moderate self-heal at 3% max HP per second."
+      },
+      "system": {
+        "slug": "regen-ii",
+        "section": "Enemy Modifiers",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Regen III",
+        "type": "Enemy Modifier",
+        "effect": "Regenerates 5% maximum health per second.",
+        "counters": "Shadow (Divine), Cursed Student (True Love), Crimson (Brother)",
+        "notes": "",
+        "cardSummary": "Strong self-heal at 5% max HP per second."
+      },
+      "system": {
+        "slug": "regen-iii",
+        "section": "Enemy Modifiers",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Regen IV",
+        "type": "Enemy Modifier",
+        "effect": "Regenerates 8% maximum health per second.",
+        "counters": "Shadow (Divine), Cursed Student (True Love), Crimson (Brother)",
+        "notes": "",
+        "cardSummary": "Very strong self-heal at 8% max HP per second; burn it down quickly."
+      },
+      "system": {
+        "slug": "regen-iv",
+        "section": "Enemy Modifiers",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shield",
+        "type": "Enemy Modifier",
+        "effect": "Protected by an attack-absorbing shield.",
+        "counters": "String Demon (Awakened), Shadow (Divine), 8th Sword (Berserk)",
+        "notes": "",
+        "cardSummary": "Carries an attack-absorbing shield until broken."
+      },
+      "system": {
+        "slug": "shield",
+        "section": "Enemy Modifiers",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Immunity",
+        "type": "Enemy Modifier",
+        "effect": "Immune to all soft and hard crowd control effects.",
+        "counters": "Shadow (Divine), 8th Sword (Berserk), Flame Emperor (Reincarnate)",
+        "notes": "",
+        "cardSummary": "Cannot be affected by soft or hard crowd control."
+      },
+      "system": {
+        "slug": "immunity",
+        "section": "Enemy Modifiers",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Momentum",
+        "type": "Enemy Modifier",
+        "effect": "Gains 2% movement speed per second up to a maximum of 50%.",
+        "counters": "Puppet (Telekinetic), Toy Maker, Reaper (Released)",
+        "notes": "",
+        "cardSummary": "Ramps movement speed over time up to a large bonus if left free."
+      },
+      "system": {
+        "slug": "momentum",
+        "section": "Enemy Modifiers",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Burrowing",
+        "type": "Enemy Modifier",
+        "effect": "Every 8 seconds, burrows underground for 2 seconds, becoming untargetable.",
+        "counters": "Shadow (Divine), 8th Sword (Berserk)",
+        "notes": "",
+        "cardSummary": "Briefly becomes untargetable on a short burrow cycle."
+      },
+      "system": {
+        "slug": "burrowing",
+        "section": "Enemy Modifiers",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Zombie",
+        "type": "Enemy Modifier",
+        "effect": "On death, revives with 50% health, and drops 50% less Yen when killed.",
+        "counters": "Hollow (Blaze), Flame Emperor (Reincarnate), String Demon (Awakened)",
+        "notes": "",
+        "cardSummary": "Revives once at half health and pays less Yen on kill."
+      },
+      "system": {
+        "slug": "zombie",
+        "section": "Enemy Modifiers",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Zombify",
+        "type": "Enemy Modifier",
+        "effect": "Periodically converts nearby enemies within 10 range into zombified enemies.",
+        "counters": "Shadow (Divine), Flame Emperor (Reincarnate), String Demon (Awakened)",
+        "notes": "",
+        "cardSummary": "Turns nearby enemies into Zombified copies over time."
+      },
+      "system": {
+        "slug": "zombify",
+        "section": "Enemy Modifiers",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Zombified",
+        "type": "Enemy Modifier",
+        "effect": "Revived enemy that drops no Yen when killed.",
+        "counters": "Any strong AoE Unit, such as String Demon (Awakened) or Hollow (Blaze)",
+        "notes": "Usually created by Zombie or Zombify rather than spawning as a primary tag alone.",
+        "cardSummary": "Revived enemy form that drops no Yen when killed."
+      },
+      "system": {
+        "slug": "zombified",
+        "section": "Enemy Modifiers",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Commander",
+        "type": "Enemy Modifier",
+        "effect": "Grants nearby enemies within 5 range +20% movement speed and +20% health.",
+        "counters": "Shadow (Divine), Cursed Student (True Love), 8th Sword (Berserk)",
+        "notes": "",
+        "cardSummary": "Buffs nearby enemies with more speed and health."
+      },
+      "system": {
+        "slug": "commander",
+        "section": "Enemy Modifiers",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Research Project",
+        "type": "Enemy Modifier",
+        "effect": "Grants progress towards your active Expedition Project.",
+        "counters": "Any high-DPS Unit to eliminate it quickly.",
+        "notes": "A beneficial enemy tag that advances your Expedition Project when handled.",
+        "cardSummary": "Killing or handling it advances your active Expedition Project."
+      },
+      "system": {
+        "slug": "research-project",
+        "section": "Enemy Modifiers",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Soldier",
+        "type": "Enemy Modifier",
+        "effect": "Gains +20% movement speed while near a Commander.",
+        "counters": "Flame Emperor (Reincarnate), Hollow (Blaze), String Demon (Awakened)",
+        "notes": "Speed bonus only applies while a Commander is nearby.",
+        "cardSummary": "Gains a movement speed bonus while near a Commander."
+      },
+      "system": {
+        "slug": "soldier",
+        "section": "Enemy Modifiers",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Veil",
+        "type": "Enemy Modifier",
+        "effect": "Grants a 200% damage-absorbing AoE shield based on the host's health to all nearby enemies within 5 range.",
+        "counters": "Shadow (Divine), String Demon (Awakened), 8th Sword (Berserk)",
+        "notes": "",
+        "cardSummary": "Gives nearby enemies a large damage-absorbing AoE shield tied to the host."
+      },
+      "system": {
+        "slug": "veil",
+        "section": "Enemy Modifiers",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tartaros",
+        "type": "Enemy Modifier",
+        "effect": "Every 10 seconds, consume a nearby Basic enemy and gain \"Regen I\" for 10 seconds.",
+        "counters": "Shadow (Divine), Puppet (Telekinetic)",
+        "notes": "",
+        "cardSummary": "Eats a nearby Basic enemy for temporary Regen I."
+      },
+      "system": {
+        "slug": "tartaros",
+        "section": "Enemy Modifiers",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Death",
+        "type": "Enemy Modifier",
+        "effect": "Grants nearby enemies a stacking +20% permanent speed boost. Applying soft cc will reset the stack to zero.",
+        "counters": "Puppet (Telekinetic), Toy Maker, Reaper (Released)",
+        "notes": "Soft crowd control clears the stacking speed buff.",
+        "cardSummary": "Stacks permanent speed on nearby enemies until soft CC resets it."
+      },
+      "system": {
+        "slug": "death",
+        "section": "Enemy Modifiers",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sword",
+        "type": "Enemy Modifier",
+        "effect": "Respawns up to 2 times unless killed while affected by a DoT effect.",
+        "counters": "Hollow (Blaze), Flame Emperor (Reincarnate)",
+        "notes": "DoT-based kills prevent the extra respawns.",
+        "cardSummary": "Can respawn twice unless finished while under a DoT."
+      },
+      "system": {
+        "slug": "sword",
+        "section": "Enemy Modifiers",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dawn",
+        "type": "Enemy Modifier",
+        "effect": "Enemies spawned by Splitter or Summoner have 99% reduced health and 5 Shield.",
+        "counters": "String Demon (Awakened), Hollow (Blaze), Flame Emperor (Reincarnate)",
+        "notes": "Changes enemies spawned by Splitter or Summoner specifically.",
+        "cardSummary": "Splitter and Summoner spawns become frail but start with five shields."
+      },
+      "system": {
+        "slug": "dawn",
+        "section": "Enemy Modifiers",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stunner",
+        "type": "Enemy Modifier",
+        "effect": "Every 15 seconds, stuns the 3 nearest units for 5 seconds.",
+        "counters": "Elf Mage (Unleashed), Shadow (Divine), spread out your Unit placements.",
+        "notes": "",
+        "cardSummary": "Periodically stuns the three nearest units for a long lockout."
+      },
+      "system": {
+        "slug": "stunner",
+        "section": "Enemy Modifiers",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Zone Debuff",
+        "type": "Enemy Modifier",
+        "effect": "Applies a debuff within a specific area.",
+        "counters": "Long-range Units and strategic Unit placement.",
+        "notes": "All listed sources only say a debuff applies in an area; the exact debuff name is not documented.",
+        "cardSummary": "Applies an unspecified debuff in a local area around the tagged enemy."
+      },
+      "system": {
+        "slug": "zone-debuff",
+        "section": "Enemy Modifiers",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Transformer",
+        "type": "Enemy Modifier",
+        "effect": "At 50% health, transforms into a second phase at full health.",
+        "counters": "Shadow (Divine), 8th Sword (Berserk), Cursed Student (True Love)",
+        "notes": "",
+        "cardSummary": "At half health, shifts into a second full-health phase."
+      },
+      "system": {
+        "slug": "transformer",
+        "section": "Enemy Modifiers",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bulwark",
+        "type": "Enemy Modifier",
+        "effect": "Every 10 seconds, becomes immune to damage for 3 seconds.",
+        "counters": "Shadow (Divine), String Demon (Awakened)",
+        "notes": "",
+        "cardSummary": "Briefly becomes damage-immune on a repeating timer."
+      },
+      "system": {
+        "slug": "bulwark",
+        "section": "Enemy Modifiers",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Status Cleanse",
+        "type": "Enemy Modifier",
+        "effect": "Every 10 seconds, removes all crowd control effects from enemies on the map.",
+        "counters": "Shadow (Divine), Cursed Student (True Love), 8th Sword (Berserk)",
+        "notes": "",
+        "cardSummary": "Periodically strips crowd control from enemies across the map."
+      },
+      "system": {
+        "slug": "status-cleanse",
+        "section": "Enemy Modifiers",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Retaliation Counter",
+        "type": "Enemy Modifier",
+        "effect": "After every 20 hits, stuns all units for 2 seconds.",
+        "counters": "Shadow (Divine), Cursed Student (True Love), Crimson (Brother)",
+        "notes": "",
+        "cardSummary": "Every 20 hits, stuns every unit for two seconds."
+      },
+      "system": {
+        "slug": "retaliation-counter",
+        "section": "Enemy Modifiers",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Greed",
+        "type": "Enemy Modifier",
+        "effect": "Every 10 seconds, steal 10% HP of all nearby enemies within 5 range.",
+        "counters": "Shadow (Divine), Puppet (Telekinetic)",
+        "notes": "Steals HP from nearby enemies into the host; focus the tagged enemy to stop the steal loop.",
+        "cardSummary": "Steals HP from nearby enemies on a short timer to keep itself topped up."
+      },
+      "system": {
+        "slug": "greed",
+        "section": "Enemy Modifiers",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cage",
+        "type": "Enemy Modifier",
+        "effect": "Pick a random unit on the field, and cage them, disabling their attacks, passives and abilities.",
+        "counters": "Bring multiple DPS Units instead of relying on a single carry.",
+        "notes": "Single-carry comps are risky because a random unit can be fully disabled.",
+        "cardSummary": "Randomly cages a unit and shuts off its attacks, passives, and abilities."
+      },
+      "system": {
+        "slug": "cage",
+        "section": "Enemy Modifiers",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fear",
+        "type": "Enemy Modifier",
+        "effect": "Every 15 seconds, decrease DMG/SPA/RNG by -10% to all units within 30 range for 10 seconds.",
+        "counters": "Shadow (Divine), 8th Sword (Berserk), Puppet (Telekinetic)",
+        "notes": "",
+        "cardSummary": "Periodically weakens nearby units' damage, SPA, and range."
+      },
+      "system": {
+        "slug": "fear",
+        "section": "Enemy Modifiers",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Warlock",
+        "type": "Enemy Modifier",
+        "effect": "Grants +1 Shield and +10% speed boost to surrounding enemies every 5 seconds within 10 range.",
+        "counters": "Shadow (Divine), String Demon (Awakened), 8th Sword (Berserk)",
+        "notes": "",
+        "cardSummary": "Keeps buffing nearby enemies with shields and speed on a short cycle."
+      },
+      "system": {
+        "slug": "warlock",
+        "section": "Enemy Modifiers",
+        "sortOrder": 50,
+        "image": null
+      }
+    }
+  ]
+}

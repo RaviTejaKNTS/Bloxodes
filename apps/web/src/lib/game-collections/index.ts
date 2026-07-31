@@ -121,6 +121,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   mastery: "mastery skills, grind source, perk themes, level 99 reward, and priority notes",
   minigames: "minigame locations, activity type, entry rules, rewards, and Huge or Titanic notes",
   maps: "availability, difficulty, supported modes, ranked pool, creators, and feature notes",
+  modifiers: "game vs enemy modifier type, stage or enemy effects, counterplay, and notes",
   materials: "sources, drops, farming routes, crafting or trade uses, requirements, availability, and risk",
   "map-themes": "theme names, categories, requirements, costs, and map effects",
   "maps-stages": "mode family, map or stage group, stage count, difficulty, major mechanics, rewards, availability, and unlock notes",
