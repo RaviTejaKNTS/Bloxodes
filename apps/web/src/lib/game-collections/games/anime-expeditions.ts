@@ -15,6 +15,6 @@ export const animeExpeditionsCollectionGroup = {
     "modifiers",
     "elements",
     "status-effects",
-    "gamemodes"
+    "achievements"
   ]
 } satisfies GameCollectionGroup;

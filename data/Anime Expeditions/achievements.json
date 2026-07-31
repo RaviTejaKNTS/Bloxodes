@@ -1,0 +1,429 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "achievements",
+    "route": "/wiki/anime-expeditions/achievements",
+    "catalogCode": "anime-expeditions-achievements",
+    "universeId": 7613921865,
+    "sourceItemCount": 20,
+    "itemFields": [
+      "name",
+      "cardSummary",
+      "requirement",
+      "rewards",
+      "category",
+      "exclusiveReward",
+      "exclusiveRewardType"
+    ],
+    "columns": [
+      "name",
+      "category",
+      "requirement",
+      "rewards",
+      "exclusiveReward",
+      "exclusiveRewardType",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Section",
+      "sectionOrder": [
+        "The Collector",
+        "Expeditions",
+        "Raid Mode",
+        "Secrets",
+        "Story Mode"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [
+        "exclusiveRewardType"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "category",
+        "requirement",
+        "rewards",
+        "exclusiveReward",
+        "exclusiveRewardType"
+      ],
+      "tableFields": [
+        "category",
+        "requirement",
+        "rewards",
+        "exclusiveReward",
+        "exclusiveRewardType",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "category": {
+          "kind": "chip",
+          "label": "Category"
+        },
+        "requirement": {
+          "kind": "detail",
+          "label": "Requirement"
+        },
+        "rewards": {
+          "kind": "chip",
+          "label": "Rewards"
+        },
+        "exclusiveReward": {
+          "kind": "highlight",
+          "label": "Exclusive"
+        },
+        "exclusiveRewardType": {
+          "kind": "chip",
+          "label": "Exclusive type"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Unit Collector I",
+        "requirement": "Own 10 different units.",
+        "rewards": "250 Gems, 500 Gold",
+        "category": "Collector",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "Early roster milestone that pays a small Gem and Gold claim once you have ten distinct units."
+      },
+      "system": {
+        "slug": "unit-collector-i",
+        "section": "The Collector",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unit Collector II",
+        "requirement": "Own 30 different units.",
+        "rewards": "250 Gems, 1,000 Gold",
+        "category": "Collector",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "Mid roster target for thirty unique units with a larger Gold payout than Collector I."
+      },
+      "system": {
+        "slug": "unit-collector-ii",
+        "section": "The Collector",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unit Collector III",
+        "requirement": "Own 45 different units.",
+        "rewards": "750 Gems, 1,500 Gold",
+        "category": "Collector",
+        "exclusiveReward": "Collector",
+        "exclusiveRewardType": "Title",
+        "cardSummary": "Top unit-ownership milestone that grants strong Gem and Gold rewards plus the Collector title."
+      },
+      "system": {
+        "slug": "unit-collector-iii",
+        "section": "The Collector",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Summoner I",
+        "requirement": "Summon 10 units.",
+        "rewards": "250 Gems, 500 Gold",
+        "category": "Collector",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "First summon-count claim that unlocks naturally while pulling early banners."
+      },
+      "system": {
+        "slug": "summoner-i",
+        "section": "The Collector",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Summoner II",
+        "requirement": "Summon 50 units.",
+        "rewards": "500 Gems, 1,000 Gold",
+        "category": "Collector",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "Mid summon grind for fifty pulls with a higher Gem payout than Summoner I."
+      },
+      "system": {
+        "slug": "summoner-ii",
+        "section": "The Collector",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Summoner III",
+        "requirement": "Summon 100 units.",
+        "rewards": "750 Gems, 1,500 Gold",
+        "category": "Collector",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "Hundred-summon milestone for the largest Collector summon Gem and Gold payout."
+      },
+      "system": {
+        "slug": "summoner-iii",
+        "section": "The Collector",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Category Completion",
+        "requirement": "Complete all 6 The Collector achievements.",
+        "rewards": "15 Trait Crystals, 1,000 Gems",
+        "category": "Collector",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "Category clear bonus after finishing every Collector achievement; one of the best Trait Crystal claims in the set."
+      },
+      "system": {
+        "slug": "category-completion",
+        "section": "The Collector",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Hero's Journey",
+        "requirement": "Reach the 3rd map node on Skull 3 difficulty on any map.",
+        "rewards": "250 Gems, 500 Gold, 250 Expedition Coins",
+        "category": "Expeditions",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "Expedition progress challenge for pushing to the third node on Skull 3, with Expedition Coins on top of Gems and Gold."
+      },
+      "system": {
+        "slug": "the-heros-journey",
+        "section": "Expeditions",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Maximum Output",
+        "requirement": "Kill the Cursed Summoner Boss before he summons more than 3 times.",
+        "rewards": "250 Gems, 500 Gold, 250 Expedition Coins",
+        "category": "Expeditions",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "Boss-speed challenge that rewards heavy damage before the Cursed Summoner can summon a fourth time."
+      },
+      "system": {
+        "slug": "maximum-output",
+        "section": "Expeditions",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Meteoric Success",
+        "requirement": "Hit the highest possible stat Rainbow Shard from an anvil.",
+        "rewards": "250 Gems, 500 Gold, 250 Expedition Coins",
+        "category": "Expeditions",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "Anvil forge challenge for rolling the top Rainbow Shard outcome during an Expedition run."
+      },
+      "system": {
+        "slug": "meteoric-success",
+        "section": "Expeditions",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Elementalist",
+        "requirement": "Obtain 9 different Elemental Cards within the same run, activating the 3rd tier Elementalism set.",
+        "rewards": "250 Gems, 500 Gold, 250 Expedition Coins",
+        "category": "Expeditions",
+        "exclusiveReward": "",
+        "exclusiveRewardType": "",
+        "cardSummary": "Single-run Elemental Card set challenge that also pays Expedition Coins along with Gems and Gold."
+      },
+      "system": {
+        "slug": "elementalist",
+        "section": "Expeditions",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit City",
+        "requirement": "Complete all acts of Spirit City.",
+        "rewards": "5 Trait Crystals, 500 Gems",
+        "category": "Raid Mode",
+        "exclusiveReward": "Spirit City Banner, Savior of Society",
+        "exclusiveRewardType": "Title + Banner",
+        "cardSummary": "Raid clear for every Spirit City act, with Trait Crystals plus both the Spirit City Banner and Savior of Society title."
+      },
+      "system": {
+        "slug": "spirit-city",
+        "section": "Raid Mode",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Obtain 8th Sword",
+        "requirement": "Obtain the Secret-rarity 8th Sword.",
+        "rewards": "5 Trait Crystals, 500 Gems",
+        "category": "Secrets",
+        "exclusiveReward": "8th Sword",
+        "exclusiveRewardType": "Title",
+        "cardSummary": "Secret-unit claim for pulling 8th Sword, with Trait Crystals, Gems, and the 8th Sword title."
+      },
+      "system": {
+        "slug": "obtain-8th-sword",
+        "section": "Secrets",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Obtain Shadow",
+        "requirement": "Obtain the Secret-rarity Shadow.",
+        "rewards": "5 Trait Crystals, 500 Gems",
+        "category": "Secrets",
+        "exclusiveReward": "Divine Controller",
+        "exclusiveRewardType": "Title",
+        "cardSummary": "Secret-unit claim for pulling Shadow, rewarding Trait Crystals, Gems, and the Divine Controller title."
+      },
+      "system": {
+        "slug": "obtain-shadow",
+        "section": "Secrets",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Secret Maniac",
+        "requirement": "Summon the same Secret-rarity unit 3 times.",
+        "rewards": "5 Trait Crystals, 500 Gems",
+        "category": "Secrets",
+        "exclusiveReward": "Secret Maniac",
+        "exclusiveRewardType": "Title",
+        "cardSummary": "Duplicate Secret summon challenge that grants Trait Crystals, Gems, and the Secret Maniac title."
+      },
+      "system": {
+        "slug": "secret-maniac",
+        "section": "Secrets",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rose Kingdom",
+        "requirement": "Complete all acts of Rose Kingdom on Hard difficulty.",
+        "rewards": "5 Trait Crystals, 500 Gems",
+        "category": "Story Mode",
+        "exclusiveReward": "Rose Kingdom Banner",
+        "exclusiveRewardType": "Banner",
+        "cardSummary": "Hard Story clear for Rose Kingdom that pays Trait Crystals, Gems, and the Rose Kingdom profile banner."
+      },
+      "system": {
+        "slug": "rose-kingdom",
+        "section": "Story Mode",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fairy King Forest",
+        "requirement": "Complete all acts of Fairy King Forest on Hard difficulty.",
+        "rewards": "5 Trait Crystals, 500 Gems",
+        "category": "Story Mode",
+        "exclusiveReward": "Fairy King Forest Banner",
+        "exclusiveRewardType": "Banner",
+        "cardSummary": "Hard Story clear for Fairy King Forest with Trait Crystals, Gems, and the matching profile banner."
+      },
+      "system": {
+        "slug": "fairy-king-forest",
+        "section": "Story Mode",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flower Forest",
+        "requirement": "Complete all acts of Flower Forest on Hard difficulty.",
+        "rewards": "5 Trait Crystals, 500 Gems",
+        "category": "Story Mode",
+        "exclusiveReward": "Flower Forest Banner",
+        "exclusiveRewardType": "Banner",
+        "cardSummary": "Hard Story clear for Flower Forest that unlocks Trait Crystals, Gems, and the Flower Forest Banner."
+      },
+      "system": {
+        "slug": "flower-forest",
+        "section": "Story Mode",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "King's Tomb",
+        "requirement": "Complete all acts of King's Tomb on Hard difficulty.",
+        "rewards": "5 Trait Crystals, 500 Gems",
+        "category": "Story Mode",
+        "exclusiveReward": "Kings Tomb Banner",
+        "exclusiveRewardType": "Banner",
+        "cardSummary": "Hard Story clear for King's Tomb with Trait Crystals, Gems, and the Kings Tomb Banner."
+      },
+      "system": {
+        "slug": "kings-tomb",
+        "section": "Story Mode",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "School Grounds",
+        "requirement": "Complete all acts of School Grounds on Hard difficulty.",
+        "rewards": "5 Trait Crystals, 500 Gems",
+        "category": "Story Mode",
+        "exclusiveReward": "School Grounds Banner",
+        "exclusiveRewardType": "Banner",
+        "cardSummary": "Hard Story clear for School Grounds that grants Trait Crystals, Gems, and the School Grounds Banner."
+      },
+      "system": {
+        "slug": "school-grounds",
+        "section": "Story Mode",
+        "sortOrder": 20,
+        "image": null
+      }
+    }
+  ]
+}
