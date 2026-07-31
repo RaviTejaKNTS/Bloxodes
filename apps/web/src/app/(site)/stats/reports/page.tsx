@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
-import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 const pageUrl = `${SITE_URL}/stats/reports`;
 
@@ -30,9 +31,23 @@ const reports = [
   }
 ] as const;
 
+const breadcrumbStructuredData = breadcrumbJsonLd([
+  { name: "Home", url: SITE_URL },
+  { name: "Roblox Stats", url: `${SITE_URL}/stats` },
+  { name: "Monthly reports", url: pageUrl }
+]);
+
 export default function StatsReportsPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
+    <main className="mx-auto w-full max-w-3xl">
+      <PageBreadcrumb
+        className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Roblox Stats", href: "/stats" },
+          { label: "Reports", href: null }
+        ]}
+      />
       <header className="max-w-2xl">
         <p className="text-sm font-semibold text-accent">Roblox stats</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Monthly reports</h1>
@@ -79,6 +94,10 @@ export default function StatsReportsPage() {
           </article>
         ))}
       </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { PageBreadcrumb } from "@/components/PageBreadcrumb";
 import {
   AnimalHospitalChart,
   CoolingGamesChart,
@@ -102,7 +103,16 @@ const body = "text-[1.05rem] leading-relaxed text-foreground md:text-[1.09rem]";
 
 export default function RobloxJune2026ReportPage() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
+    <main className="mx-auto w-full max-w-3xl">
+      <PageBreadcrumb
+        className="mb-6 text-xs uppercase tracking-[0.25em] text-muted"
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Roblox Stats", href: "/stats" },
+          { label: "Reports", href: "/stats/reports" },
+          { label: report.featureImage.month, href: null }
+        ]}
+      />
       <article>
         <header className="space-y-3">
           <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">{report.title}</h1>
