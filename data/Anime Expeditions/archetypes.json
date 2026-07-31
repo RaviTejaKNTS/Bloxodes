@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "archetypes",
+    "route": "/wiki/anime-expeditions/archetypes",
+    "catalogCode": "anime-expeditions-archetypes",
+    "universeId": 7613921865,
+    "sourceItemCount": 3,
+    "itemFields": [
+      "name",
+      "description",
+      "stageInteraction",
+      "supportAnchor",
+      "strength",
+      "weakness",
+      "playstyle",
+      "exampleUnits",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "description",
+      "stageInteraction",
+      "supportAnchor",
+      "strength",
+      "weakness",
+      "playstyle",
+      "exampleUnits",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Archetypes",
+      "sectionOrder": [
+        "Archetypes"
+      ],
+      "badgeField": null,
+      "subtitleFields": [
+        "supportAnchor"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "supportAnchor",
+        "stageInteraction",
+        "strength",
+        "weakness",
+        "playstyle",
+        "exampleUnits"
+      ],
+      "tableFields": [
+        "supportAnchor",
+        "description",
+        "stageInteraction",
+        "strength",
+        "weakness",
+        "playstyle",
+        "exampleUnits",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "description": {
+          "kind": "plain",
+          "label": "Description"
+        },
+        "stageInteraction": {
+          "kind": "detail",
+          "label": "Stage interaction"
+        },
+        "supportAnchor": {
+          "kind": "chip",
+          "label": "Support"
+        },
+        "strength": {
+          "kind": "highlight",
+          "label": "Strength"
+        },
+        "weakness": {
+          "kind": "detail",
+          "label": "Weakness"
+        },
+        "playstyle": {
+          "kind": "detail",
+          "label": "When to use"
+        },
+        "exampleUnits": {
+          "kind": "detail",
+          "label": "Example units"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Physical",
+        "description": "Units with this Archetype deal Physical Archetype damage.",
+        "stageInteraction": "Stage modifiers can boost or cut Physical damage. Check the stage before locking a Physical-heavy board.",
+        "supportAnchor": "The Hero",
+        "strength": "Gains damage from Physical support auras and performs well on Physical-friendly stages.",
+        "weakness": "Loses output on stages that debuff Physical damage.",
+        "playstyle": "Build around Physical carries when you can place The Hero and the stage does not punish Physical damage.",
+        "exampleUnits": "The Hero, Scissor, 8th Sword (Berserk), Cursed Student (True Love), Hollow (Blaze), Razorjaw (Hunter)",
+        "cardSummary": "Physical damage type that stacks with The Hero's aura, but can be weakened by Physical stage debuffs."
+      },
+      "system": {
+        "slug": "physical",
+        "section": "Archetypes",
+        "sortOrder": 100
+      }
+    },
+    {
+      "item": {
+        "name": "Magical",
+        "description": "Units with this Archetype deal Magical Archetype damage.",
+        "stageInteraction": "Stage modifiers can boost or cut Magical damage. Avoid Magical stacks on stages that specifically weaken Magical units.",
+        "supportAnchor": "Forbidden Teacher",
+        "strength": "Gains damage from Magical support auras and thrives on Magical-friendly stages.",
+        "weakness": "Loses output on stages that debuff Magical damage.",
+        "playstyle": "Stack Magical carries with Forbidden Teacher when you want aura-amplified spell and AoE damage.",
+        "exampleUnits": "Forbidden Teacher, Shadow (Divine), Crimson (Brother), Flame Emperor (Reincarnate), Crow (Black Fire), Elf Mage (Unleashed)",
+        "cardSummary": "Magical damage type that stacks with Forbidden Teacher's aura, but can be weakened by Magical stage debuffs."
+      },
+      "system": {
+        "slug": "magical",
+        "section": "Archetypes",
+        "sortOrder": 200
+      }
+    },
+    {
+      "item": {
+        "name": "Psychic",
+        "description": "Units with this Archetype deal Psychic Archetype damage. Psychic is the neutral Archetype.",
+        "stageInteraction": "Psychic stays undebuffed by stage modifiers aimed at Physical or Magical damage, so output stays steadier across stages.",
+        "supportAnchor": "None",
+        "strength": "Never takes Physical or Magical stage debuffs, so it stays consistent when those modifiers appear.",
+        "weakness": "Has no dedicated support unit that raises Psychic damage.",
+        "playstyle": "Bring Psychic units for control and consistency when stages punish Physical or Magical boards.",
+        "exampleUnits": "Toy Maker, Puppet, Puppet (Telekinetic)",
+        "cardSummary": "Neutral Psychic damage type that ignores Physical/Magical stage debuffs but has no dedicated damage buffer."
+      },
+      "system": {
+        "slug": "psychic",
+        "section": "Archetypes",
+        "sortOrder": 300
+      }
+    }
+  ]
+}
