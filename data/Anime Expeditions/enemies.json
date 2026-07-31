@@ -126,7 +126,7 @@
         "slug": "cursed-summoner",
         "section": "School Grounds",
         "sortOrder": 1,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/cursed-summoner.png"
       }
     },
     {
@@ -146,7 +146,7 @@
         "slug": "rope-weaver",
         "section": "School Grounds",
         "sortOrder": 2,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/rope-weaver.png"
       }
     },
     {
@@ -166,7 +166,7 @@
         "slug": "centipede-curse",
         "section": "School Grounds",
         "sortOrder": 3,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/centipede-curse.png"
       }
     },
     {
@@ -186,7 +186,7 @@
         "slug": "mutant-parasite",
         "section": "School Grounds",
         "sortOrder": 4,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/mutant-parasite.png"
       }
     },
     {
@@ -206,7 +206,7 @@
         "slug": "titan-worm",
         "section": "School Grounds",
         "sortOrder": 5,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/titan-worm.png"
       }
     },
     {
@@ -226,7 +226,7 @@
         "slug": "insect-curse",
         "section": "School Grounds",
         "sortOrder": 6,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/insect-curse.png"
       }
     },
     {
@@ -246,7 +246,7 @@
         "slug": "pelican-curse",
         "section": "School Grounds",
         "sortOrder": 7,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/pelican-curse.png"
       }
     },
     {
@@ -266,7 +266,7 @@
         "slug": "school-girl",
         "section": "School Grounds",
         "sortOrder": 8,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/school-girl.png"
       }
     },
     {
@@ -286,7 +286,7 @@
         "slug": "school-curse",
         "section": "School Grounds",
         "sortOrder": 9,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/school-curse.png"
       }
     },
     {
@@ -306,7 +306,7 @@
         "slug": "fabric-curse",
         "section": "School Grounds",
         "sortOrder": 10,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/fabric-curse.png"
       }
     },
     {
@@ -326,7 +326,7 @@
         "slug": "purple-flower",
         "section": "Flower Forest",
         "sortOrder": 11,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/purple-flower.png"
       }
     },
     {
@@ -346,7 +346,7 @@
         "slug": "orange-petal",
         "section": "Flower Forest",
         "sortOrder": 12,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/orange-petal.png"
       }
     },
     {
@@ -366,7 +366,7 @@
         "slug": "yellow-petal",
         "section": "Flower Forest",
         "sortOrder": 13,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/yellow-petal.png"
       }
     },
     {
@@ -386,7 +386,7 @@
         "slug": "butterfly",
         "section": "Flower Forest",
         "sortOrder": 14,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/butterfly.png"
       }
     },
     {
@@ -406,7 +406,7 @@
         "slug": "centipede",
         "section": "Flower Forest",
         "sortOrder": 15,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/centipede.png"
       }
     },
     {
@@ -426,7 +426,7 @@
         "slug": "lower-deity",
         "section": "Flower Forest",
         "sortOrder": 16,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/lower-deity.png"
       }
     },
     {
@@ -446,7 +446,7 @@
         "slug": "khakkhara",
         "section": "Flower Forest",
         "sortOrder": 17,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/khakkhara.png"
       }
     },
     {
@@ -466,7 +466,7 @@
         "slug": "oni",
         "section": "Flower Forest",
         "sortOrder": 18,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/oni.png"
       }
     },
     {
@@ -486,7 +486,7 @@
         "slug": "buddha-blue",
         "section": "Flower Forest",
         "sortOrder": 19,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/buddha-blue.png"
       }
     },
     {
@@ -506,7 +506,7 @@
         "slug": "buddha-green",
         "section": "Flower Forest",
         "sortOrder": 20,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/buddha-green.png"
       }
     },
     {
@@ -526,7 +526,7 @@
         "slug": "string-demon",
         "section": "Rose Kingdom",
         "sortOrder": 21,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/string-demon.png"
       }
     },
     {
@@ -546,7 +546,7 @@
         "slug": "spade-officer",
         "section": "Rose Kingdom",
         "sortOrder": 22,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/spade-officer.png"
       }
     },
     {
@@ -566,7 +566,7 @@
         "slug": "diamond-officer",
         "section": "Rose Kingdom",
         "sortOrder": 23,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/diamond-officer.png"
       }
     },
     {
@@ -586,7 +586,7 @@
         "slug": "club-officer",
         "section": "Rose Kingdom",
         "sortOrder": 24,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/club-officer.png"
       }
     },
     {
@@ -606,7 +606,7 @@
         "slug": "heart-officer",
         "section": "Rose Kingdom",
         "sortOrder": 25,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/heart-officer.png"
       }
     },
     {
@@ -626,7 +626,7 @@
         "slug": "mr-magenta",
         "section": "Rose Kingdom",
         "sortOrder": 26,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/mr-magenta.png"
       }
     },
     {
@@ -646,7 +646,7 @@
         "slug": "bouncer",
         "section": "Rose Kingdom",
         "sortOrder": 27,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/bouncer.png"
       }
     },
     {
@@ -666,7 +666,7 @@
         "slug": "sashimi",
         "section": "Rose Kingdom",
         "sortOrder": 28,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/sashimi.png"
       }
     },
     {
@@ -686,7 +686,7 @@
         "slug": "toy",
         "section": "Rose Kingdom",
         "sortOrder": 29,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/toy.png"
       }
     },
     {
@@ -706,7 +706,7 @@
         "slug": "marine",
         "section": "Rose Kingdom",
         "sortOrder": 30,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/marine.png"
       }
     },
     {
@@ -726,7 +726,7 @@
         "slug": "piety",
         "section": "Fairy King Forest",
         "sortOrder": 31,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/piety.png"
       }
     },
     {
@@ -746,7 +746,7 @@
         "slug": "purity",
         "section": "Fairy King Forest",
         "sortOrder": 32,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/purity.png"
       }
     },
     {
@@ -766,7 +766,7 @@
         "slug": "reticence",
         "section": "Fairy King Forest",
         "sortOrder": 33,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/reticence.png"
       }
     },
     {
@@ -786,7 +786,7 @@
         "slug": "faith",
         "section": "Fairy King Forest",
         "sortOrder": 34,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/faith.png"
       }
     },
     {
@@ -806,7 +806,7 @@
         "slug": "pacifism",
         "section": "Fairy King Forest",
         "sortOrder": 35,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/pacifism.png"
       }
     },
     {
@@ -826,7 +826,7 @@
         "slug": "red-demon",
         "section": "Fairy King Forest",
         "sortOrder": 36,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/red-demon.png"
       }
     },
     {
@@ -846,7 +846,7 @@
         "slug": "grey-demon",
         "section": "Fairy King Forest",
         "sortOrder": 37,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/grey-demon.png"
       }
     },
     {
@@ -866,7 +866,7 @@
         "slug": "copper-demon",
         "section": "Fairy King Forest",
         "sortOrder": 38,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/copper-demon.png"
       }
     },
     {
@@ -886,7 +886,7 @@
         "slug": "fairy",
         "section": "Fairy King Forest",
         "sortOrder": 39,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/fairy.png"
       }
     },
     {
@@ -906,7 +906,7 @@
         "slug": "knight",
         "section": "Fairy King Forest",
         "sortOrder": 40,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/knight.png"
       }
     },
     {
@@ -926,7 +926,7 @@
         "slug": "mirror-demon",
         "section": "King's Tomb",
         "sortOrder": 41,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/mirror-demon.png"
       }
     },
     {
@@ -946,7 +946,7 @@
         "slug": "elf-mage-clone",
         "section": "King's Tomb",
         "sortOrder": 42,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/elf-mage-clone.png"
       }
     },
     {
@@ -966,7 +966,7 @@
         "slug": "proctor-clone",
         "section": "King's Tomb",
         "sortOrder": 43,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/proctor-clone.png"
       }
     },
     {
@@ -986,7 +986,7 @@
         "slug": "demon-of-obedience",
         "section": "King's Tomb",
         "sortOrder": 44,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/demon-of-obedience.png"
       }
     },
     {
@@ -1006,7 +1006,7 @@
         "slug": "demon-prince",
         "section": "King's Tomb",
         "sortOrder": 45,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/demon-prince.png"
       }
     },
     {
@@ -1026,7 +1026,7 @@
         "slug": "corrupt-elder",
         "section": "King's Tomb",
         "sortOrder": 46,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/corrupt-elder.png"
       }
     },
     {
@@ -1046,7 +1046,7 @@
         "slug": "thread-demon",
         "section": "King's Tomb",
         "sortOrder": 47,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/thread-demon.png"
       }
     },
     {
@@ -1066,7 +1066,7 @@
         "slug": "imitation-demon",
         "section": "King's Tomb",
         "sortOrder": 48,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/imitation-demon.png"
       }
     },
     {
@@ -1086,7 +1086,7 @@
         "slug": "ice-mage-clone",
         "section": "King's Tomb",
         "sortOrder": 49,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/ice-mage-clone.png"
       }
     },
     {
@@ -1106,7 +1106,7 @@
         "slug": "resurrected-knight",
         "section": "King's Tomb",
         "sortOrder": 50,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/resurrected-knight.png"
       }
     },
     {
@@ -1126,7 +1126,7 @@
         "slug": "gargoyles",
         "section": "King's Tomb",
         "sortOrder": 51,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/gargoyles.png"
       }
     },
     {
@@ -1146,7 +1146,7 @@
         "slug": "berserker",
         "section": "Spirit City",
         "sortOrder": 52,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/berserker.png"
       }
     },
     {
@@ -1166,7 +1166,7 @@
         "slug": "silver-serpent",
         "section": "Spirit City",
         "sortOrder": 53,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/silver-serpent.png"
       }
     },
     {
@@ -1186,7 +1186,7 @@
         "slug": "silver-justice",
         "section": "Spirit City",
         "sortOrder": 54,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/silver-justice.png"
       }
     },
     {
@@ -1206,7 +1206,7 @@
         "slug": "crimson-fang",
         "section": "Spirit City",
         "sortOrder": 55,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/crimson-fang.png"
       }
     },
     {
@@ -1226,7 +1226,7 @@
         "slug": "glam-reaper",
         "section": "Spirit City",
         "sortOrder": 56,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/glam-reaper.png"
       }
     },
     {
@@ -1246,7 +1246,7 @@
         "slug": "furyblade",
         "section": "Spirit City",
         "sortOrder": 57,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/furyblade.png"
       }
     },
     {
@@ -1266,7 +1266,7 @@
         "slug": "reaper",
         "section": "Spirit City",
         "sortOrder": 58,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/reaper.png"
       }
     },
     {
@@ -1286,7 +1286,7 @@
         "slug": "soul-footsoldier",
         "section": "Spirit City",
         "sortOrder": 59,
-        "image": ""
+        "image": "/Anime%20Expeditions/Enemies/soul-footsoldier.png"
       }
     }
   ]
