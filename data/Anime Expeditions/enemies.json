@@ -1,0 +1,1293 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "enemies",
+    "route": "/wiki/anime-expeditions/enemies",
+    "catalogCode": "anime-expeditions-enemies",
+    "universeId": 7613921865,
+    "sourceItemCount": 59,
+    "itemFields": [
+      "name",
+      "enemyType",
+      "indexRarity",
+      "map",
+      "gamemodes",
+      "alsoAppearsOn",
+      "indexDropChance",
+      "indexReward",
+      "actRole",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "enemyType",
+      "indexRarity",
+      "map",
+      "gamemodes",
+      "alsoAppearsOn",
+      "indexDropChance",
+      "indexReward",
+      "actRole",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "School Grounds",
+        "Flower Forest",
+        "Rose Kingdom",
+        "Fairy King Forest",
+        "King's Tomb",
+        "Spirit City"
+      ],
+      "badgeField": "enemyType",
+      "subtitleFields": [
+        "map"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "enemyType",
+        "map",
+        "gamemodes",
+        "indexDropChance",
+        "indexReward",
+        "alsoAppearsOn",
+        "actRole"
+      ],
+      "tableFields": [
+        "enemyType",
+        "indexRarity",
+        "map",
+        "gamemodes",
+        "alsoAppearsOn",
+        "indexDropChance",
+        "indexReward",
+        "actRole",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "enemyType": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "indexRarity": {
+          "kind": "chip",
+          "label": "Index rarity"
+        },
+        "map": {
+          "kind": "plain",
+          "label": "Map"
+        },
+        "gamemodes": {
+          "kind": "plain",
+          "label": "Modes"
+        },
+        "alsoAppearsOn": {
+          "kind": "detail",
+          "label": "Also appears on"
+        },
+        "indexDropChance": {
+          "kind": "chip",
+          "label": "Index drop"
+        },
+        "indexReward": {
+          "kind": "highlight",
+          "label": "Index reward"
+        },
+        "actRole": {
+          "kind": "detail",
+          "label": "Act role"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Cursed Summoner",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "cursed-summoner",
+        "section": "School Grounds",
+        "sortOrder": 1,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Rope Weaver",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "rope-weaver",
+        "section": "School Grounds",
+        "sortOrder": 2,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Centipede Curse",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "centipede-curse",
+        "section": "School Grounds",
+        "sortOrder": 3,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Mutant Parasite",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "mutant-parasite",
+        "section": "School Grounds",
+        "sortOrder": 4,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Titan Worm",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "titan-worm",
+        "section": "School Grounds",
+        "sortOrder": 5,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Insect Curse",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "insect-curse",
+        "section": "School Grounds",
+        "sortOrder": 6,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Pelican Curse",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "pelican-curse",
+        "section": "School Grounds",
+        "sortOrder": 7,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "School Girl",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "school-girl",
+        "section": "School Grounds",
+        "sortOrder": 8,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "School Curse",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "school-curse",
+        "section": "School Grounds",
+        "sortOrder": 9,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Fabric Curse",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "School Grounds",
+        "gamemodes": "Story, Infinite, Expedition, Mastery, Event",
+        "alsoAppearsOn": "Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on School Grounds. Appears in Story, Infinite, Expedition, Mastery, Event. Also listed on Mountain Expedition, School Grounds Expedition, Desert Expedition, Creator Spotlight. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "fabric-curse",
+        "section": "School Grounds",
+        "sortOrder": 10,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Flower",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "purple-flower",
+        "section": "Flower Forest",
+        "sortOrder": 11,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Petal",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "orange-petal",
+        "section": "Flower Forest",
+        "sortOrder": 12,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Yellow Petal",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "yellow-petal",
+        "section": "Flower Forest",
+        "sortOrder": 13,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Butterfly",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "butterfly",
+        "section": "Flower Forest",
+        "sortOrder": 14,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Centipede",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "centipede",
+        "section": "Flower Forest",
+        "sortOrder": 15,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Lower Deity",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "lower-deity",
+        "section": "Flower Forest",
+        "sortOrder": 16,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Khakkhara",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "khakkhara",
+        "section": "Flower Forest",
+        "sortOrder": 17,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Oni",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "oni",
+        "section": "Flower Forest",
+        "sortOrder": 18,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Buddha (Blue)",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "buddha-blue",
+        "section": "Flower Forest",
+        "sortOrder": 19,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Buddha (Green)",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "Flower Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on Flower Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "buddha-green",
+        "section": "Flower Forest",
+        "sortOrder": 20,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "String Demon",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "string-demon",
+        "section": "Rose Kingdom",
+        "sortOrder": 21,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Spade Officer",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "Boss of Act 4 on Rose Kingdom Story",
+        "cardSummary": "Boss enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry. Boss of Act 4 on Rose Kingdom Story."
+      },
+      "system": {
+        "slug": "spade-officer",
+        "section": "Rose Kingdom",
+        "sortOrder": 22,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Officer",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "diamond-officer",
+        "section": "Rose Kingdom",
+        "sortOrder": 23,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Club Officer",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "club-officer",
+        "section": "Rose Kingdom",
+        "sortOrder": 24,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Officer",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "heart-officer",
+        "section": "Rose Kingdom",
+        "sortOrder": 25,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Mr. Magenta",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "mr-magenta",
+        "section": "Rose Kingdom",
+        "sortOrder": 26,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Bouncer",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "bouncer",
+        "section": "Rose Kingdom",
+        "sortOrder": 27,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Sashimi",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "sashimi",
+        "section": "Rose Kingdom",
+        "sortOrder": 28,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Toy",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "toy",
+        "section": "Rose Kingdom",
+        "sortOrder": 29,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Marine",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "Rose Kingdom",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on Rose Kingdom. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "marine",
+        "section": "Rose Kingdom",
+        "sortOrder": 30,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Piety",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "piety",
+        "section": "Fairy King Forest",
+        "sortOrder": 31,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Purity",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "purity",
+        "section": "Fairy King Forest",
+        "sortOrder": 32,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Reticence",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "reticence",
+        "section": "Fairy King Forest",
+        "sortOrder": 33,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Faith",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "faith",
+        "section": "Fairy King Forest",
+        "sortOrder": 34,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Pacifism",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "pacifism",
+        "section": "Fairy King Forest",
+        "sortOrder": 35,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Red Demon",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "red-demon",
+        "section": "Fairy King Forest",
+        "sortOrder": 36,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Grey Demon",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "grey-demon",
+        "section": "Fairy King Forest",
+        "sortOrder": 37,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Copper Demon",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "copper-demon",
+        "section": "Fairy King Forest",
+        "sortOrder": 38,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Fairy",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "fairy",
+        "section": "Fairy King Forest",
+        "sortOrder": 39,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Knight",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "Fairy King Forest",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on Fairy King Forest. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "knight",
+        "section": "Fairy King Forest",
+        "sortOrder": 40,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Mirror Demon",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "mirror-demon",
+        "section": "King's Tomb",
+        "sortOrder": 41,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Elf Mage Clone",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "elf-mage-clone",
+        "section": "King's Tomb",
+        "sortOrder": 42,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Proctor Clone",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "proctor-clone",
+        "section": "King's Tomb",
+        "sortOrder": 43,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Demon of Obedience",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "demon-of-obedience",
+        "section": "King's Tomb",
+        "sortOrder": 44,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Prince",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "demon-prince",
+        "section": "King's Tomb",
+        "sortOrder": 45,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupt Elder",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "corrupt-elder",
+        "section": "King's Tomb",
+        "sortOrder": 46,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Thread Demon",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "thread-demon",
+        "section": "King's Tomb",
+        "sortOrder": 47,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Imitation Demon",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "imitation-demon",
+        "section": "King's Tomb",
+        "sortOrder": 48,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Mage Clone",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "ice-mage-clone",
+        "section": "King's Tomb",
+        "sortOrder": 49,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Resurrected Knight",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "resurrected-knight",
+        "section": "King's Tomb",
+        "sortOrder": 50,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Gargoyles",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "King's Tomb",
+        "gamemodes": "Story, Infinite, Mastery",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on King's Tomb. Appears in Story, Infinite, Mastery. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "gargoyles",
+        "section": "King's Tomb",
+        "sortOrder": 51,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Berserker",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Spirit City",
+        "gamemodes": "Raid",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "Featured boss of Spirit City Raid Act 3",
+        "cardSummary": "Boss enemy on Spirit City. Appears in Raid. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry. Featured boss of Spirit City Raid Act 3."
+      },
+      "system": {
+        "slug": "berserker",
+        "section": "Spirit City",
+        "sortOrder": 52,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Serpent",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Spirit City",
+        "gamemodes": "Raid",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "Featured boss of Spirit City Raid Act 2",
+        "cardSummary": "Boss enemy on Spirit City. Appears in Raid. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry. Featured boss of Spirit City Raid Act 2."
+      },
+      "system": {
+        "slug": "silver-serpent",
+        "section": "Spirit City",
+        "sortOrder": 53,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Justice",
+        "enemyType": "Boss",
+        "indexRarity": "Secret",
+        "map": "Spirit City",
+        "gamemodes": "Raid",
+        "alsoAppearsOn": "",
+        "indexDropChance": "30%",
+        "indexReward": "1 Trait Crystal",
+        "actRole": "",
+        "cardSummary": "Boss enemy on Spirit City. Appears in Raid. Enemy Index unlock chance 30%; reward 1 Trait Crystal per entry."
+      },
+      "system": {
+        "slug": "silver-justice",
+        "section": "Spirit City",
+        "sortOrder": 54,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Fang",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Spirit City",
+        "gamemodes": "Raid",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Spirit City. Appears in Raid. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "crimson-fang",
+        "section": "Spirit City",
+        "sortOrder": 55,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Glam Reaper",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Spirit City",
+        "gamemodes": "Raid",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "Featured Act 1 Spirit City Raid target in raid guides (Enemy Index type is Elite)",
+        "cardSummary": "Elite enemy on Spirit City. Appears in Raid. Enemy Index unlock chance 20%; reward 150 Gems per entry. Featured Act 1 Spirit City Raid target in raid guides (Enemy Index type is Elite)."
+      },
+      "system": {
+        "slug": "glam-reaper",
+        "section": "Spirit City",
+        "sortOrder": 56,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Furyblade",
+        "enemyType": "Elite",
+        "indexRarity": "Legendary",
+        "map": "Spirit City",
+        "gamemodes": "Raid",
+        "alsoAppearsOn": "",
+        "indexDropChance": "20%",
+        "indexReward": "150 Gems",
+        "actRole": "",
+        "cardSummary": "Elite enemy on Spirit City. Appears in Raid. Enemy Index unlock chance 20%; reward 150 Gems per entry."
+      },
+      "system": {
+        "slug": "furyblade",
+        "section": "Spirit City",
+        "sortOrder": 57,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Reaper",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "Spirit City",
+        "gamemodes": "Raid",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on Spirit City. Appears in Raid. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "reaper",
+        "section": "Spirit City",
+        "sortOrder": 58,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Soul Footsoldier",
+        "enemyType": "Basic",
+        "indexRarity": "Rare",
+        "map": "Spirit City",
+        "gamemodes": "Raid",
+        "alsoAppearsOn": "",
+        "indexDropChance": "10%",
+        "indexReward": "50 Gems",
+        "actRole": "",
+        "cardSummary": "Basic enemy on Spirit City. Appears in Raid. Enemy Index unlock chance 10%; reward 50 Gems per entry."
+      },
+      "system": {
+        "slug": "soul-footsoldier",
+        "section": "Spirit City",
+        "sortOrder": 59,
+        "image": ""
+      }
+    }
+  ]
+}
