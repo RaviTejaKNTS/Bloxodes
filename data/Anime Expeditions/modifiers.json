@@ -83,7 +83,7 @@
         "slug": "boss-waves",
         "section": "Game Modifiers",
         "sortOrder": 1,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/boss-waves.png"
       }
     },
     {
@@ -99,7 +99,7 @@
         "slug": "cards-disabled",
         "section": "Game Modifiers",
         "sortOrder": 2,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/cards-disabled.png"
       }
     },
     {
@@ -115,7 +115,7 @@
         "slug": "mirror",
         "section": "Game Modifiers",
         "sortOrder": 3,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/mirror.png"
       }
     },
     {
@@ -131,7 +131,7 @@
         "slug": "no-anvils",
         "section": "Game Modifiers",
         "sortOrder": 4,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/no-anvils.png"
       }
     },
     {
@@ -147,7 +147,7 @@
         "slug": "no-farms",
         "section": "Game Modifiers",
         "sortOrder": 5,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/no-farms.png"
       }
     },
     {
@@ -163,7 +163,7 @@
         "slug": "no-repair",
         "section": "Game Modifiers",
         "sortOrder": 6,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/no-repair.png"
       }
     },
     {
@@ -179,7 +179,7 @@
         "slug": "no-research-tree",
         "section": "Game Modifiers",
         "sortOrder": 7,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/no-research-tree.png"
       }
     },
     {
@@ -195,7 +195,7 @@
         "slug": "no-tomes",
         "section": "Game Modifiers",
         "sortOrder": 8,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/no-tomes.png"
       }
     },
     {
@@ -211,7 +211,7 @@
         "slug": "resistance",
         "section": "Game Modifiers",
         "sortOrder": 9,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/resistance.png"
       }
     },
     {
@@ -227,7 +227,7 @@
         "slug": "shielded",
         "section": "Game Modifiers",
         "sortOrder": 10,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/shielded.png"
       }
     },
     {
@@ -243,7 +243,7 @@
         "slug": "short-range",
         "section": "Game Modifiers",
         "sortOrder": 11,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/short-range.png"
       }
     },
     {
@@ -259,7 +259,7 @@
         "slug": "speedy",
         "section": "Game Modifiers",
         "sortOrder": 12,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/speedy.png"
       }
     },
     {
@@ -275,7 +275,7 @@
         "slug": "traitless",
         "section": "Game Modifiers",
         "sortOrder": 13,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/traitless.png"
       }
     },
     {
@@ -291,7 +291,7 @@
         "slug": "upgrade-cap",
         "section": "Game Modifiers",
         "sortOrder": 14,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/upgrade-cap.png"
       }
     },
     {
@@ -307,7 +307,7 @@
         "slug": "sprinter",
         "section": "Enemy Modifiers",
         "sortOrder": 15,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/sprinter.png"
       }
     },
     {
@@ -323,7 +323,7 @@
         "slug": "tank",
         "section": "Enemy Modifiers",
         "sortOrder": 16,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/tank.png"
       }
     },
     {
@@ -339,7 +339,7 @@
         "slug": "summoner",
         "section": "Enemy Modifiers",
         "sortOrder": 17,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/summoner.png"
       }
     },
     {
@@ -355,7 +355,7 @@
         "slug": "explosive",
         "section": "Enemy Modifiers",
         "sortOrder": 18,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/explosive.png"
       }
     },
     {
@@ -371,7 +371,7 @@
         "slug": "splitter",
         "section": "Enemy Modifiers",
         "sortOrder": 19,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/splitter.png"
       }
     },
     {
@@ -387,7 +387,7 @@
         "slug": "armored",
         "section": "Enemy Modifiers",
         "sortOrder": 20,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/armored.png"
       }
     },
     {
@@ -403,7 +403,7 @@
         "slug": "reinforced",
         "section": "Enemy Modifiers",
         "sortOrder": 21,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/reinforced.png"
       }
     },
     {
@@ -419,7 +419,7 @@
         "slug": "regen-i",
         "section": "Enemy Modifiers",
         "sortOrder": 22,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/regen-i.png"
       }
     },
     {
@@ -435,7 +435,7 @@
         "slug": "regen-ii",
         "section": "Enemy Modifiers",
         "sortOrder": 23,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/regen-ii.png"
       }
     },
     {
@@ -451,7 +451,7 @@
         "slug": "regen-iii",
         "section": "Enemy Modifiers",
         "sortOrder": 24,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/regen-iii.png"
       }
     },
     {
@@ -467,7 +467,7 @@
         "slug": "regen-iv",
         "section": "Enemy Modifiers",
         "sortOrder": 25,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/regen-iv.png"
       }
     },
     {
@@ -483,7 +483,7 @@
         "slug": "shield",
         "section": "Enemy Modifiers",
         "sortOrder": 26,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/shield.png"
       }
     },
     {
@@ -499,7 +499,7 @@
         "slug": "immunity",
         "section": "Enemy Modifiers",
         "sortOrder": 27,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/immunity.png"
       }
     },
     {
@@ -515,7 +515,7 @@
         "slug": "momentum",
         "section": "Enemy Modifiers",
         "sortOrder": 28,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/momentum.png"
       }
     },
     {
@@ -531,7 +531,7 @@
         "slug": "burrowing",
         "section": "Enemy Modifiers",
         "sortOrder": 29,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/burrowing.png"
       }
     },
     {
@@ -547,7 +547,7 @@
         "slug": "zombie",
         "section": "Enemy Modifiers",
         "sortOrder": 30,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/zombie.png"
       }
     },
     {
@@ -563,7 +563,7 @@
         "slug": "zombify",
         "section": "Enemy Modifiers",
         "sortOrder": 31,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/zombify.png"
       }
     },
     {
@@ -579,7 +579,7 @@
         "slug": "zombified",
         "section": "Enemy Modifiers",
         "sortOrder": 32,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/zombified.png"
       }
     },
     {
@@ -595,7 +595,7 @@
         "slug": "commander",
         "section": "Enemy Modifiers",
         "sortOrder": 33,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/commander.png"
       }
     },
     {
@@ -611,7 +611,7 @@
         "slug": "research-project",
         "section": "Enemy Modifiers",
         "sortOrder": 34,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/research-project.png"
       }
     },
     {
@@ -627,7 +627,7 @@
         "slug": "soldier",
         "section": "Enemy Modifiers",
         "sortOrder": 35,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/soldier.png"
       }
     },
     {
@@ -643,7 +643,7 @@
         "slug": "veil",
         "section": "Enemy Modifiers",
         "sortOrder": 36,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/veil.png"
       }
     },
     {
@@ -659,7 +659,7 @@
         "slug": "tartaros",
         "section": "Enemy Modifiers",
         "sortOrder": 37,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/tartaros.png"
       }
     },
     {
@@ -675,7 +675,7 @@
         "slug": "death",
         "section": "Enemy Modifiers",
         "sortOrder": 38,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/death.png"
       }
     },
     {
@@ -691,7 +691,7 @@
         "slug": "sword",
         "section": "Enemy Modifiers",
         "sortOrder": 39,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/sword.png"
       }
     },
     {
@@ -707,7 +707,7 @@
         "slug": "dawn",
         "section": "Enemy Modifiers",
         "sortOrder": 40,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/dawn.png"
       }
     },
     {
@@ -723,7 +723,7 @@
         "slug": "stunner",
         "section": "Enemy Modifiers",
         "sortOrder": 41,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/stunner.png"
       }
     },
     {
@@ -755,7 +755,7 @@
         "slug": "transformer",
         "section": "Enemy Modifiers",
         "sortOrder": 43,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/transformer.png"
       }
     },
     {
@@ -771,7 +771,7 @@
         "slug": "bulwark",
         "section": "Enemy Modifiers",
         "sortOrder": 44,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/bulwark.png"
       }
     },
     {
@@ -787,7 +787,7 @@
         "slug": "status-cleanse",
         "section": "Enemy Modifiers",
         "sortOrder": 45,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/status-cleanse.png"
       }
     },
     {
@@ -803,7 +803,7 @@
         "slug": "retaliation-counter",
         "section": "Enemy Modifiers",
         "sortOrder": 46,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/retaliation-counter.png"
       }
     },
     {
@@ -819,7 +819,7 @@
         "slug": "greed",
         "section": "Enemy Modifiers",
         "sortOrder": 47,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/greed.png"
       }
     },
     {
@@ -851,7 +851,7 @@
         "slug": "fear",
         "section": "Enemy Modifiers",
         "sortOrder": 49,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/fear.png"
       }
     },
     {
@@ -867,7 +867,7 @@
         "slug": "warlock",
         "section": "Enemy Modifiers",
         "sortOrder": 50,
-        "image": null
+        "image": "/Anime%20Expeditions/modifiers/warlock.png"
       }
     }
   ]
