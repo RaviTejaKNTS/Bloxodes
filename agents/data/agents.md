@@ -102,6 +102,11 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 
 - Wiki/collection datasets should keep source-backed fields that players need for decisions, such as prices, currencies, shops, requirements, damage, chances, upgrade paths, locations, roles, limits, and availability, instead of storing only easy-to-scrape labels.
 
+- `src/data/reports/roblox-june-2026.ts`
+  - Frozen editorial snapshot for the public `/stats/reports/roblox-june-2026` report, written as a continuous player-facing feature rather than a dashboard.
+  - Daily and same-weekday/rolling-window comparisons come from `roblox_universe_stats_daily`; event markers come from `roblox_virtual_events`; platform and community mentions keep attributable source URLs inline in the copy.
+  - `featureImage` selects the approved headline, lead metric, accessible description, and real chart series used to generate `public/images/reports/roblox-june-2026.png` for the archive and social previews.
+  - Keep each monthly report immutable after approval except for explicit corrections. New months should add a new dated module and route instead of mutating a prior edition.
 - `data/Admin commands/*.md`
   - Parsed by `src/lib/admin-commands.ts`.
 - `data/Grow a Garden/crops.json`

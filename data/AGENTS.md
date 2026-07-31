@@ -8,6 +8,10 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 
 ## Dataset Map
 
+- `apps/web/src/data/reports/roblox-june-2026.ts`
+  - Frozen stats, event annotations, and attributable news context for the public June 2026 Roblox monthly report.
+  - Its `featureImage` configuration drives the static, data-backed archive and social image at `apps/web/public/images/reports/roblox-june-2026.png`.
+  - The published `/stats/reports/roblox-june-2026` route is indexed through the Stats sitemap and linked from the Stats home and RSS feed.
 - `data/Admin commands/*.md`
   - Parsed by `src/lib/admin-commands.ts`.
   - Used by catalog admin-command routes.

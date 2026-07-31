@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import { resolveContentDates } from "@/lib/content-dates";
+import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -146,6 +147,15 @@ async function loadFeedItems(): Promise<FeedItem[]> {
   }
 
   const items: FeedItem[] = [];
+  const monthlyReport = toFeedItem({
+    title: robloxJune2026Report.title,
+    path: `/stats/reports/${robloxJune2026Report.slug}`,
+    description: robloxJune2026Report.subtitle,
+    updatedAt: robloxJune2026Report.updatedAt,
+    publishedAt: robloxJune2026Report.publishedAt,
+    createdAt: robloxJune2026Report.publishedAt
+  });
+  if (monthlyReport) items.push(monthlyReport);
 
   for (const article of (articlesRes.data ?? []) as ArticleRow[]) {
     if (!article.slug || !article.title) continue;

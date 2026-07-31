@@ -40,6 +40,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Wiki | `/wiki`, `/wiki/[slug]` | `src/app/(site)/wiki/*`, shared helpers in `page-data.tsx`, Supabase read layer in `src/lib/wiki.ts` |
 | Authors | `/authors`, `/authors/[slug]` | `src/app/(site)/authors/*` |
 | Stats | `/stats`, `/stats/roblox-platform`, `/stats/games`, `/stats/games/[slug]`, `/stats/creators`, `/stats/items`, `/stats/items/[assetId]` | `src/app/(site)/stats/*`, shared read layer in `src/lib/stats.ts`, chart UI in `stats/components/*`, backed by `roblox_universes`, stats current-index tables, platform aggregate tables, hourly/daily stats tables, rank snapshot tables, `roblox_catalog_items`, and item stats hourly/daily/resale tables. Games-list SEO indexes only the unfiltered CCU/visits/24h/7d pages plus valid genre/subgenre CCU and visits pages; other filter/sort variants are `noindex, follow`, while individual games use the bounded top-1,000 policy. |
+| Monthly stats reports | `/stats/reports`, `/stats/reports/roblox-june-2026` | `src/app/(site)/stats/reports/*`, frozen data in `src/data/reports/roblox-june-2026.ts`, reusable chart UI in `src/components/reports/RobloxMonthlyReportCharts.tsx`, and static data-backed feature images in `public/images/reports/*`. Published reports are linked from the Stats home, included in the Stats sitemap and RSS feed, and carry article, breadcrumb, Open Graph, and Twitter metadata. |
 
 ## Catalog Families
 

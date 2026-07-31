@@ -620,6 +620,10 @@ export function StatsHomeView({ data }: { data: StatsHomeData }) {
           <p className="mt-3 text-sm font-medium leading-6 text-muted">
             Public Roblox game data tracked by Bloxodes, refreshed regularly for players and researchers.
           </p>
+          <Link className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline" href="/stats/reports">
+            <BookOpen className="h-4 w-4" aria-hidden />
+            Monthly Roblox reports
+          </Link>
         </div>
         <form action="/stats/games" className="flex w-full max-w-xl gap-2">
           <div className="relative flex-1">

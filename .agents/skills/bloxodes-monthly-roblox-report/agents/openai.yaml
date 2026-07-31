@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Monthly Roblox Report"
+  short_description: "Research and build monthly Roblox editorial reports"
+  default_prompt: "Use $bloxodes-monthly-roblox-report to research and build the Roblox report for June 2026."
