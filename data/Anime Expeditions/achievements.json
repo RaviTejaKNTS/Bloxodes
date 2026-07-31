@@ -286,7 +286,7 @@
         "slug": "spirit-city",
         "section": "Raid Mode",
         "sortOrder": 12,
-        "image": null
+        "image": "/Anime%20Expeditions/Achievements/spirit-city.png"
       }
     },
     {
@@ -303,7 +303,7 @@
         "slug": "obtain-8th-sword",
         "section": "Secrets",
         "sortOrder": 13,
-        "image": null
+        "image": "/Anime%20Expeditions/Achievements/obtain-8th-sword.png"
       }
     },
     {
@@ -320,7 +320,7 @@
         "slug": "obtain-shadow",
         "section": "Secrets",
         "sortOrder": 14,
-        "image": null
+        "image": "/Anime%20Expeditions/Achievements/obtain-shadow.png"
       }
     },
     {
@@ -354,7 +354,7 @@
         "slug": "rose-kingdom",
         "section": "Story Mode",
         "sortOrder": 16,
-        "image": null
+        "image": "/Anime%20Expeditions/Achievements/rose-kingdom.png"
       }
     },
     {
@@ -371,7 +371,7 @@
         "slug": "fairy-king-forest",
         "section": "Story Mode",
         "sortOrder": 17,
-        "image": null
+        "image": "/Anime%20Expeditions/Achievements/fairy-king-forest.png"
       }
     },
     {
@@ -388,7 +388,7 @@
         "slug": "flower-forest",
         "section": "Story Mode",
         "sortOrder": 18,
-        "image": null
+        "image": "/Anime%20Expeditions/Achievements/flower-forest.png"
       }
     },
     {
@@ -405,7 +405,7 @@
         "slug": "kings-tomb",
         "section": "Story Mode",
         "sortOrder": 19,
-        "image": null
+        "image": "/Anime%20Expeditions/Achievements/kings-tomb.png"
       }
     },
     {
@@ -422,7 +422,7 @@
         "slug": "school-grounds",
         "section": "Story Mode",
         "sortOrder": 20,
-        "image": null
+        "image": "/Anime%20Expeditions/Achievements/school-grounds.png"
       }
     }
   ]
