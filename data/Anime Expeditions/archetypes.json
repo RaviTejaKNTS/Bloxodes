@@ -111,7 +111,8 @@
       "system": {
         "slug": "physical",
         "section": "Archetypes",
-        "sortOrder": 100
+        "sortOrder": 100,
+        "image": "/Anime%20Expeditions/archetypes/physical.webp"
       }
     },
     {
@@ -129,7 +130,8 @@
       "system": {
         "slug": "magical",
         "section": "Archetypes",
-        "sortOrder": 200
+        "sortOrder": 200,
+        "image": "/Anime%20Expeditions/archetypes/magical.webp"
       }
     },
     {
@@ -147,7 +149,8 @@
       "system": {
         "slug": "psychic",
         "section": "Archetypes",
-        "sortOrder": 300
+        "sortOrder": 300,
+        "image": "/Anime%20Expeditions/archetypes/psychic.webp"
       }
     }
   ]
