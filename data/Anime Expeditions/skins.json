@@ -96,7 +96,7 @@
         "slug": "8th-sword-aztec",
         "section": "Exclusive",
         "sortOrder": 1,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/8th-sword-aztec.png"
       }
     },
     {
@@ -113,7 +113,7 @@
         "slug": "8th-sword-thug",
         "section": "Exclusive",
         "sortOrder": 2,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/8th-sword-thug.png"
       }
     },
     {
@@ -130,7 +130,7 @@
         "slug": "crow-rider",
         "section": "Exclusive",
         "sortOrder": 3,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/crow-rider.png"
       }
     },
     {
@@ -147,7 +147,7 @@
         "slug": "cursed-student-manga",
         "section": "Exclusive",
         "sortOrder": 4,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/cursed-student-manga.png"
       }
     },
     {
@@ -164,7 +164,7 @@
         "slug": "elf-mage-maid",
         "section": "Exclusive",
         "sortOrder": 5,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/elf-mage-maid.png"
       }
     },
     {
@@ -181,7 +181,7 @@
         "slug": "elf-mage-ranni",
         "section": "Exclusive",
         "sortOrder": 6,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/elf-mage-ranni.png"
       }
     },
     {
@@ -198,7 +198,7 @@
         "slug": "hazmat-skin",
         "section": "Exclusive",
         "sortOrder": 7,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/hazmat-skin.png"
       }
     },
     {
@@ -215,7 +215,7 @@
         "slug": "player-skin",
         "section": "Exclusive",
         "sortOrder": 8,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/player-skin.png"
       }
     },
     {
@@ -232,7 +232,7 @@
         "slug": "ramen-guy-sage",
         "section": "Exclusive",
         "sortOrder": 9,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/ramen-guy-sage.png"
       }
     },
     {
@@ -251,7 +251,7 @@
         "slug": "razorjaw-beyond",
         "section": "Exclusive",
         "sortOrder": 10,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/razorjaw-beyond.png"
       }
     },
     {
@@ -268,7 +268,7 @@
         "slug": "salmon-sorcerer-frog",
         "section": "Exclusive",
         "sortOrder": 11,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/salmon-sorcerer-frog.png"
       }
     },
     {
@@ -287,7 +287,7 @@
         "slug": "hollow-hellblade",
         "section": "Legendary",
         "sortOrder": 12,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/hollow-hellblade.png"
       }
     },
     {
@@ -304,7 +304,7 @@
         "slug": "puppet-biker",
         "section": "Legendary",
         "sortOrder": 13,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/puppet-biker.png"
       }
     },
     {
@@ -323,7 +323,7 @@
         "slug": "reaper-cyborg",
         "section": "Legendary",
         "sortOrder": 14,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/reaper-cyborg.png"
       }
     },
     {
@@ -340,7 +340,7 @@
         "slug": "string-demon-badboy",
         "section": "Legendary",
         "sortOrder": 15,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/string-demon-badboy.png"
       }
     },
     {
@@ -357,7 +357,7 @@
         "slug": "forbidden-teacher-curse-queen",
         "section": "Epic",
         "sortOrder": 16,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/forbidden-teacher-curse-queen.png"
       }
     },
     {
@@ -374,7 +374,7 @@
         "slug": "stone-alchemist-boss",
         "section": "Rare",
         "sortOrder": 17,
-        "image": null
+        "image": "/Anime%20Expeditions/Skins/stone-alchemist-boss.png"
       }
     }
   ]
