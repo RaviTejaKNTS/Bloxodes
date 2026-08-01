@@ -6,17 +6,18 @@ import {
   buildDecalCategoryPath,
   loadDecalCategoryBySlug,
   loadRobloxDecalIdsPageData,
-  resolveDecalSearch,
   renderRobloxDecalIdsPage
 } from "../../../../page-data";
 
 export const revalidate = 21600;
-export const dynamic = "force-dynamic";
 
 type PageProps = {
   params: Promise<{ category: string; page: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
+
+export async function generateStaticParams() {
+  return [];
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { category: categorySlug, page } = await params;
@@ -36,15 +37,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RobloxDecalCategoryPaginatedPage({ params, searchParams }: PageProps) {
+export default async function RobloxDecalCategoryPaginatedPage({ params }: PageProps) {
   const { category: categorySlug, page } = await params;
   const category = await loadDecalCategoryBySlug(categorySlug);
   if (!category) notFound();
   const pageNumber = Number.parseInt(page, 10);
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
-  const search = await resolveDecalSearch(searchParams);
-
-  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, search, { category: category.slug });
+  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, undefined, { category: category.slug });
 
   return renderRobloxDecalIdsPage({
     decals,
@@ -52,8 +51,6 @@ export default async function RobloxDecalCategoryPaginatedPage({ params, searchP
     totalPages,
     currentPage: safePageNumber,
     showHero: false,
-    search: search.search,
-    sort: search.sort,
     section: "category",
     category,
     pageTitleOverride: `${category.label} Roblox Decal IDs`,

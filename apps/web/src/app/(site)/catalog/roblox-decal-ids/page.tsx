@@ -8,7 +8,6 @@ import {
     DECAL_PAGE_HEADING,
     DECAL_SEO_TITLE,
     loadRobloxDecalIdsPageData,
-    resolveDecalSearch,
     renderRobloxDecalIdsPage,
 } from "./page-data";
 
@@ -16,10 +15,6 @@ export const revalidate = 21600;
 
 const CATALOG_CODE_CANDIDATES = ["roblox-decal-ids"];
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
-
-type PageProps = {
-    searchParams?: Promise<Record<string, string | string[] | undefined>>;
-};
 
 export async function generateMetadata(): Promise<Metadata> {
     const catalog = await getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES);
@@ -56,10 +51,9 @@ export async function generateMetadata(): Promise<Metadata> {
     };
 }
 
-export default async function RobloxDecalIdsPage({ searchParams }: PageProps) {
-    const search = await resolveDecalSearch(searchParams);
+export default async function RobloxDecalIdsPage() {
     const [{ decals, total, totalPages }, catalog] = await Promise.all([
-        loadRobloxDecalIdsPageData(1, search),
+        loadRobloxDecalIdsPageData(1),
         getCatalogPageContentByCodes(CATALOG_CODE_CANDIDATES)
     ]);
     const contentHtml = await buildRobloxDecalCatalogContentHtml(catalog);
@@ -71,8 +65,6 @@ export default async function RobloxDecalIdsPage({ searchParams }: PageProps) {
         currentPage: 1,
         showHero: true,
         contentHtml,
-        search: search.search,
-        sort: search.sort,
         pageTitleOverride: DECAL_PAGE_HEADING
     });
 }

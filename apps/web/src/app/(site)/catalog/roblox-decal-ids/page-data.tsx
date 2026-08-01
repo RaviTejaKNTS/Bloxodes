@@ -8,7 +8,6 @@ import type { CatalogPageContent } from "@/lib/catalog";
 import { formatRelativeDate } from "@/lib/content-dates";
 import {
   DEFAULT_SORT,
-  buildSearchQueryString,
   normalizeSearchQuery,
   normalizeSortKey,
   type DecalSortKey
@@ -101,11 +100,6 @@ type PageData = {
   totalPages: number;
 };
 
-export type SearchParamsInput =
-  | Promise<Record<string, string | string[] | undefined>>
-  | Record<string, string | string[] | undefined>
-  | undefined;
-
 export type DecalResolvedSearch = {
   search: string;
   sort: DecalSortKey;
@@ -156,19 +150,6 @@ export async function buildRobloxDecalCatalogContentHtml(
   catalog: CatalogPageContent | null
 ): Promise<CatalogContentHtml | null> {
   return buildPageContentHtml(catalog);
-}
-
-function firstSearchParam(value: string | string[] | undefined): string | null {
-  if (Array.isArray(value)) return value[0] ?? null;
-  return value ?? null;
-}
-
-export async function resolveDecalSearch(searchParams: SearchParamsInput): Promise<DecalResolvedSearch> {
-  const params = searchParams ? await searchParams : {};
-  return {
-    search: normalizeSearchQuery(firstSearchParam(params.q)),
-    sort: normalizeSortKey(firstSearchParam(params.sort))
-  };
 }
 
 function formatLoadError(error: unknown) {
@@ -534,8 +515,6 @@ export function renderRobloxDecalIdsPage({
   currentPage,
   showHero,
   contentHtml,
-  search = "",
-  sort = DEFAULT_SORT,
   section = "all",
   category = null,
   pageTitleOverride,
@@ -547,8 +526,6 @@ export function renderRobloxDecalIdsPage({
   currentPage: number;
   showHero: boolean;
   contentHtml?: CatalogContentHtml | null;
-  search?: string;
-  sort?: DecalSortKey;
   section?: "all" | "curated" | "category";
   category?: DecalCategoryRow | null;
   pageTitleOverride?: string;
@@ -582,7 +559,6 @@ export function renderRobloxDecalIdsPage({
   const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : undefined;
   const updatedIso = updatedDate && !Number.isNaN(updatedDate.getTime()) ? updatedDate.toISOString() : undefined;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
-  const searchQueryString = buildSearchQueryString({ query: search, sort });
   const activeNav: DecalNavKey = section === "curated" ? "curated" : section === "category" ? "categories" : "all";
 
   const breadcrumbNavItems: BreadcrumbItem[] = [

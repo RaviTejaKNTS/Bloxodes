@@ -6,7 +6,6 @@ import {
   buildDecalCategoryPath,
   loadDecalCategoryBySlug,
   loadRobloxDecalIdsPageData,
-  resolveDecalSearch,
   renderRobloxDecalIdsPage
 } from "../../page-data";
 
@@ -14,8 +13,11 @@ export const revalidate = 21600;
 
 type PageProps = {
   params: Promise<{ category: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
+
+export async function generateStaticParams() {
+  return [];
+}
 
 function buildCategorySeoDescription(categoryLabel: string): string {
   return `Find ${categoryLabel.toLowerCase()} Roblox decal IDs with image previews, copy-ready codes, creator details, and Roblox links.`;
@@ -46,13 +48,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function RobloxDecalCategoryPage({ params, searchParams }: PageProps) {
+export default async function RobloxDecalCategoryPage({ params }: PageProps) {
   const { category: categorySlug } = await params;
   const category = await loadDecalCategoryBySlug(categorySlug);
   if (!category) notFound();
-  const search = await resolveDecalSearch(searchParams);
-
-  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(1, search, { category: category.slug });
+  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(1, undefined, { category: category.slug });
 
   return renderRobloxDecalIdsPage({
     decals,
@@ -60,8 +60,6 @@ export default async function RobloxDecalCategoryPage({ params, searchParams }: 
     totalPages,
     currentPage: 1,
     showHero: true,
-    search: search.search,
-    sort: search.sort,
     section: "category",
     category,
     pageTitleOverride: `${category.label} Roblox Decal IDs`,

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BadgeCheck } from "lucide-react";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
@@ -30,6 +30,11 @@ type Props = {
   basePath: string;
   section?: "all" | "curated" | "category";
   category?: string | null;
+};
+
+type ContentProps = Props & {
+  urlQuery: string;
+  urlSort: DecalSortKey;
 };
 
 function buildThumbnailUrl(decal: DecalRow): string {
@@ -137,15 +142,38 @@ function DecalCard({ decal }: { decal: DecalRow }) {
 }
 
 export function DecalIdsBrowser({
+  ...props
+}: Props) {
+  return (
+    <Suspense fallback={<DecalIdsBrowserContent {...props} urlQuery="" urlSort={DEFAULT_SORT} />}>
+      <DecalIdsBrowserWithSearchParams {...props} />
+    </Suspense>
+  );
+}
+
+function DecalIdsBrowserWithSearchParams(props: Props) {
+  const searchParams = useSearchParams();
+
+  return (
+    <DecalIdsBrowserContent
+      {...props}
+      urlQuery={normalizeSearchQuery(searchParams.get("q"))}
+      urlSort={normalizeSortKey(searchParams.get("sort"))}
+    />
+  );
+}
+
+function DecalIdsBrowserContent({
   initialDecals,
   initialTotalPages,
   currentPage,
   basePath,
   section = "all",
-  category = null
-}: Props) {
+  category = null,
+  urlQuery,
+  urlSort
+}: ContentProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [queryInput, setQueryInput] = useState("");
   const [sortInput, setSortInput] = useState<DecalSortKey>(DEFAULT_SORT);
   const [decals, setDecals] = useState<DecalRow[]>(initialDecals);
@@ -154,8 +182,6 @@ export function DecalIdsBrowser({
   const [error, setError] = useState<string | null>(null);
   const hasFetchedRef = useRef(false);
 
-  const urlQuery = normalizeSearchQuery(searchParams.get("q"));
-  const urlSort = normalizeSortKey(searchParams.get("sort"));
   const searchQueryString = buildSearchQueryString({ query: urlQuery, sort: urlSort });
   const hasFilters = urlQuery.length > 0 || urlSort !== DEFAULT_SORT;
 

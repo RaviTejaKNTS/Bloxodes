@@ -4,20 +4,21 @@ import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import {
   buildDecalCuratedPath,
   loadRobloxDecalIdsPageData,
-  resolveDecalSearch,
   renderRobloxDecalIdsPage
 } from "../../../page-data";
 
 export const revalidate = 21600;
-export const dynamic = "force-dynamic";
 
 const TITLE = "Curated Roblox Decal IDs";
 const DESCRIPTION = "Browse the best Roblox decal IDs from curated lists, strong Roblox ratings, useful categories, and verified image previews.";
 
 type PageProps = {
   params: Promise<{ page: string }>;
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
+
+export async function generateStaticParams() {
+  return [];
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { page } = await params;
@@ -32,13 +33,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function CuratedRobloxDecalIdsPaginatedPage({ params, searchParams }: PageProps) {
+export default async function CuratedRobloxDecalIdsPaginatedPage({ params }: PageProps) {
   const { page } = await params;
   const pageNumber = Number.parseInt(page, 10);
   const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
-  const search = await resolveDecalSearch(searchParams);
-
-  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, search, { curated: true });
+  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, undefined, { curated: true });
 
   return renderRobloxDecalIdsPage({
     decals,
@@ -46,8 +45,6 @@ export default async function CuratedRobloxDecalIdsPaginatedPage({ params, searc
     totalPages,
     currentPage: safePageNumber,
     showHero: false,
-    search: search.search,
-    sort: search.sort,
     section: "curated",
     pageTitleOverride: TITLE,
     pageDescription: DESCRIPTION

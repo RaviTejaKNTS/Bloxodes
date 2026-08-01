@@ -9,8 +9,6 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { breadcrumbJsonLd, CATALOG_DESCRIPTION, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import {
   DEFAULT_SORT,
-  SORT_OPTIONS,
-  buildSearchQueryString,
   normalizeSearchQuery,
   normalizeSortKey,
   type MusicSortKey
@@ -20,6 +18,7 @@ import { UpdatedTimestamp } from "@/components/UpdatedTimestamp";
 import { ContentFaq } from "@/components/ContentFaq";
 import { formatRelativeDate } from "@/lib/content-dates";
 import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } from "@/lib/page-content";
+import { MusicIdsBrowser } from "./MusicIdsBrowser";
 
 const PAGE_SIZE = 24;
 const OPTION_PAGE_SIZE = 24;
@@ -84,19 +83,6 @@ export async function buildRobloxMusicCatalogContentHtml(
   catalog: CatalogPageContent | null
 ): Promise<CatalogContentHtml | null> {
   return buildPageContentHtml(catalog);
-}
-
-function firstSearchParam(value: string | string[] | undefined): string | null {
-  if (Array.isArray(value)) return value[0] ?? null;
-  return value ?? null;
-}
-
-export async function resolveMusicSearch(searchParams: SearchParamsInput): Promise<MusicResolvedSearch> {
-  const params = searchParams ? await searchParams : {};
-  return {
-    search: normalizeSearchQuery(firstSearchParam(params.q)),
-    sort: normalizeSortKey(firstSearchParam(params.sort))
-  };
 }
 
 const MUSIC_NAV_ITEMS: MusicNavItem[] = [
@@ -756,66 +742,6 @@ export function MusicIdItems({ songs }: { songs: MusicRow[] }) {
   );
 }
 
-function MusicIdsFilterForm({
-  basePath,
-  search,
-  sort
-}: {
-  basePath: string;
-  search: string;
-  sort: MusicSortKey;
-}) {
-  const hasFilters = search.length > 0 || sort !== DEFAULT_SORT;
-
-  return (
-    <form action={basePath} method="get" className="flex flex-col gap-4 md:flex-row md:items-end">
-      <div className="flex-1 space-y-2">
-        <label htmlFor="music-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          Search
-        </label>
-        <input
-          id="music-search"
-          name="q"
-          type="search"
-          defaultValue={search}
-          placeholder="Search title, artist, album, genre, or ID"
-          className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-accent/40"
-        />
-      </div>
-      <div className="w-full space-y-2 md:w-56">
-        <label htmlFor="music-sort" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
-          Sort
-        </label>
-        <select
-          id="music-sort"
-          name="sort"
-          defaultValue={sort}
-          className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40"
-        >
-          {SORT_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="flex items-center gap-3">
-        <button
-          type="submit"
-          className="inline-flex items-center justify-center rounded-md bg-accent px-5 py-2 text-sm font-semibold text-white transition hover:bg-accent-dark dark:bg-accent-dark dark:hover:bg-accent"
-        >
-          Apply
-        </button>
-        {hasFilters ? (
-          <Link href={basePath} className="text-sm font-semibold text-muted transition hover:text-accent">
-            Clear
-          </Link>
-        ) : null}
-      </div>
-    </form>
-  );
-}
-
 export function TrendingMusicList({ songs, startIndex = 0 }: { songs: MusicRow[]; startIndex?: number }) {
   if (!songs.length) {
     return (
@@ -924,9 +850,7 @@ export function renderRobloxMusicIdsPage({
   currentPage,
   showHero,
   contentHtml,
-  activeNav = "all",
-  search = "",
-  sort = DEFAULT_SORT
+  activeNav = "all"
 }: {
   songs: MusicRow[];
   total: number;
@@ -935,8 +859,6 @@ export function renderRobloxMusicIdsPage({
   showHero: boolean;
   contentHtml?: CatalogContentHtml | null;
   activeNav?: MusicNavKey;
-  search?: string;
-  sort?: MusicSortKey;
 }) {
   const latest = songs.reduce<Date | null>((latestDate, song) => {
     if (!song.last_seen_at) return latestDate;
@@ -963,7 +885,6 @@ export function renderRobloxMusicIdsPage({
   const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
   const updatedIso = updatedDate?.toISOString() ?? null;
   const startIndex = (currentPage - 1) * PAGE_SIZE;
-  const searchQueryString = buildSearchQueryString({ query: search, sort });
   const breadcrumbNavItems: BreadcrumbItem[] = [
     { label: "Home", href: "/" },
     { label: "Catalog", href: "/catalog" },
@@ -1041,13 +962,11 @@ export function renderRobloxMusicIdsPage({
 
         <MusicCatalogNav active={activeNav} />
 
-        <MusicIdsFilterForm basePath={BASE_PATH} search={search} sort={sort} />
-        <MusicIdItems songs={songs} />
-        <PagePagination
-          basePath={BASE_PATH}
+        <MusicIdsBrowser
+          initialSongs={songs}
+          initialTotalPages={totalPages}
           currentPage={currentPage}
-          totalPages={totalPages}
-          query={searchQueryString || undefined}
+          basePath={BASE_PATH}
         />
 
         {showHero && hasDetails ? (

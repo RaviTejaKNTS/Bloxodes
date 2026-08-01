@@ -6,19 +6,20 @@ import {
     DECAL_PAGE_HEADING,
     DECAL_SEO_TITLE,
     loadRobloxDecalIdsPageData,
-    resolveDecalSearch,
     renderRobloxDecalIdsPage,
 } from "../../page-data";
 
 export const revalidate = 21600;
-export const dynamic = "force-dynamic";
 
 const FALLBACK_IMAGE = `${SITE_URL}/Bloxodes.png`;
 
 type PageProps = {
     params: Promise<{ page: string }>;
-    searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
+
+export async function generateStaticParams() {
+    return [];
+}
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { page } = await params;
@@ -61,13 +62,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
 }
 
-export default async function RobloxDecalIdsPaginatedPage({ params, searchParams }: PageProps) {
+export default async function RobloxDecalIdsPaginatedPage({ params }: PageProps) {
     const { page } = await params;
     const pageNumber = Number.parseInt(page, 10);
     const safePageNumber = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
-    const search = await resolveDecalSearch(searchParams);
-
-    const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber, search);
+    const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(safePageNumber);
 
     return renderRobloxDecalIdsPage({
         decals,
@@ -75,8 +74,6 @@ export default async function RobloxDecalIdsPaginatedPage({ params, searchParams
         totalPages,
         currentPage: safePageNumber,
         showHero: false,
-        search: search.search,
-        sort: search.sort,
         pageTitleOverride: DECAL_PAGE_HEADING
     });
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CopyCodeButton } from "@/components/CopyCodeButton";
@@ -44,6 +44,11 @@ type Props = {
   basePath: string;
 };
 
+type ContentProps = Props & {
+  urlQuery: string;
+  urlSort: MusicSortKey;
+};
+
 function formatDuration(seconds: number | null): string | null {
   if (!seconds || seconds <= 0) return null;
   const minutes = Math.floor(seconds / 60);
@@ -84,9 +89,35 @@ function buildGenrePath(genre: string): string {
   return `/catalog/roblox-music-ids/genres/${slugify(genre)}`;
 }
 
-export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, basePath }: Props) {
-  const router = useRouter();
+export function MusicIdsBrowser(props: Props) {
+  return (
+    <Suspense fallback={<MusicIdsBrowserContent {...props} urlQuery="" urlSort={DEFAULT_SORT} />}>
+      <MusicIdsBrowserWithSearchParams {...props} />
+    </Suspense>
+  );
+}
+
+function MusicIdsBrowserWithSearchParams(props: Props) {
   const searchParams = useSearchParams();
+
+  return (
+    <MusicIdsBrowserContent
+      {...props}
+      urlQuery={normalizeSearchQuery(searchParams.get("q"))}
+      urlSort={normalizeSortKey(searchParams.get("sort"))}
+    />
+  );
+}
+
+function MusicIdsBrowserContent({
+  initialSongs,
+  initialTotalPages,
+  currentPage,
+  basePath,
+  urlQuery,
+  urlSort
+}: ContentProps) {
+  const router = useRouter();
   const [queryInput, setQueryInput] = useState("");
   const [sortInput, setSortInput] = useState<MusicSortKey>(DEFAULT_SORT);
   const [songs, setSongs] = useState<MusicRow[]>(initialSongs);
@@ -95,8 +126,6 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
   const [error, setError] = useState<string | null>(null);
   const hasFetchedRef = useRef(false);
 
-  const urlQuery = normalizeSearchQuery(searchParams.get("q"));
-  const urlSort = normalizeSortKey(searchParams.get("sort"));
   const searchQueryString = buildSearchQueryString({ query: urlQuery, sort: urlSort });
   const hasFilters = urlQuery.length > 0 || urlSort !== DEFAULT_SORT;
 
@@ -167,7 +196,7 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
   }
 
   return (
-    <div className="catalog-surface space-y-6">
+    <>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:flex-row md:items-end">
         <div className="flex-1 space-y-2">
           <label htmlFor="music-search" className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
@@ -228,15 +257,13 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
           No music IDs have been collected yet. Check back soon.
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <>
           {songs.map((song) => {
             const durationLabel = formatDuration(song.duration_seconds);
             return (
-              <article
-                key={song.asset_id}
-                className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55"
-              >
-                <div className="flex flex-1 flex-col gap-4 p-4">
+              <div key={song.asset_id} data-journey-item className="h-full">
+                <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
+                  <div className="flex flex-1 flex-col gap-4 p-4">
                   <div className="flex items-start gap-4">
                     <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border border-border/60 bg-background/60">
                       <MusicCoverImage
@@ -316,11 +343,12 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
                       Play on Roblox
                     </a>
                   </div>
-                </div>
-              </article>
+                  </div>
+                </article>
+              </div>
             );
           })}
-        </div>
+        </>
       )}
 
       <PagePagination
@@ -329,6 +357,6 @@ export function MusicIdsBrowser({ initialSongs, initialTotalPages, currentPage, 
         totalPages={totalPages}
         query={searchQueryString || undefined}
       />
-    </div>
+    </>
   );
 }

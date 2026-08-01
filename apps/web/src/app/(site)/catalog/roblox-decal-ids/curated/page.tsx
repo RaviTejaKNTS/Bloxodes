@@ -4,7 +4,6 @@ import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import {
   buildDecalCuratedPath,
   loadRobloxDecalIdsPageData,
-  resolveDecalSearch,
   renderRobloxDecalIdsPage
 } from "../page-data";
 
@@ -14,10 +13,6 @@ const HEADING = "Curated Roblox Decal IDs";
 const SEO_TITLE = "Best Roblox Decal IDs to Copy [Image IDs]";
 const DESCRIPTION =
   "Find the best Roblox decal IDs for memes, anime, logos, faces, and image codes with previews and copy-ready IDs.";
-
-type PageProps = {
-  searchParams?: Promise<Record<string, string | string[] | undefined>>;
-};
 
 export async function generateMetadata(): Promise<Metadata> {
   const canonical = `${SITE_URL.replace(/\/$/, "")}${buildDecalCuratedPath()}`;
@@ -37,9 +32,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function CuratedRobloxDecalIdsPage({ searchParams }: PageProps) {
-  const search = await resolveDecalSearch(searchParams);
-  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(1, search, { curated: true });
+export default async function CuratedRobloxDecalIdsPage() {
+  const { decals, total, totalPages } = await loadRobloxDecalIdsPageData(1, undefined, { curated: true });
 
   return renderRobloxDecalIdsPage({
     decals,
@@ -47,8 +41,6 @@ export default async function CuratedRobloxDecalIdsPage({ searchParams }: PagePr
     totalPages,
     currentPage: 1,
     showHero: true,
-    search: search.search,
-    sort: search.sort,
     section: "curated",
     pageTitleOverride: HEADING,
     pageDescription: DESCRIPTION
