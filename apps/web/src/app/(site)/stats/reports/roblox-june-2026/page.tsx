@@ -16,15 +16,15 @@ const canonicalUrl = `${SITE_URL}/stats/reports/${report.slug}`;
 const featureImageUrl = `${SITE_URL}${report.featureImage.src}`;
 
 export const metadata: Metadata = {
-  title: `${report.title} | ${SITE_NAME}`,
-  description: report.subtitle,
+  title: report.seoTitle,
+  description: report.seoDescription,
   alternates: buildAlternates(canonicalUrl),
   openGraph: {
     type: "article",
     url: canonicalUrl,
     siteName: SITE_NAME,
     title: report.title,
-    description: report.subtitle,
+    description: report.seoDescription,
     publishedTime: report.publishedAt,
     modifiedTime: report.updatedAt,
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: report.title,
-    description: report.subtitle,
+    description: report.seoDescription,
     images: [featureImageUrl]
   }
 };
@@ -52,7 +52,7 @@ const articleStructuredData = {
     "@id": canonicalUrl
   },
   headline: report.title,
-  description: report.subtitle,
+  description: report.seoDescription,
   image: [featureImageUrl],
   datePublished: report.publishedAt,
   dateModified: report.updatedAt,

@@ -31,12 +31,15 @@ export type IndexedGameSeries = {
 
 export const robloxJune2026Report = {
   slug: "roblox-june-2026",
-  title: "The hospital game that took over Roblox in June",
+  title: "Roblox Stats June 2026 Report: Animal Hospital Took Over the Platform",
+  seoTitle: "Roblox Stats June 2026 Report: Animal Hospital Took Over",
+  seoDescription:
+    "June 2026 Roblox stats report covering Animal Hospital’s breakout, survival game growth, Saturday event spikes, cooling hits, and major platform news.",
   subtitle:
-    "One breakout hit, a month of Saturday events, and the games that kept climbing while others cooled off.",
+    "The games, genres, weekend events, breakouts, cool-downs, and major Roblox changes that defined June 2026.",
   dataWindowLabel: "June 6–30, 2026",
   publishedAt: "2026-07-31T00:00:00.000Z",
-  updatedAt: "2026-07-31T00:00:00.000Z",
+  updatedAt: "2026-08-01T00:00:00.000Z",
   featureImage: {
     src: "/images/reports/roblox-june-2026.png",
     alt: "June 2026 Roblox report cover showing Animal Hospital average players rising from 884 to 429,721.",

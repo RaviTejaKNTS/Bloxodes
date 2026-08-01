@@ -4,6 +4,14 @@ import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
 const juneDates = Array.from({ length: 25 }, (_, i) => `2026-06-${String(i + 6).padStart(2, "0")}`);
 
 describe("June 2026 Roblox report data", () => {
+  it("presents itself as a full monthly Roblox stats report in search and on-page copy", () => {
+    expect(robloxJune2026Report.title).toContain("Roblox Stats June 2026 Report");
+    expect(robloxJune2026Report.seoTitle).toContain("Roblox Stats June 2026 Report");
+    expect(robloxJune2026Report.seoDescription).toContain("Animal Hospital");
+    expect(robloxJune2026Report.seoDescription).toContain("survival game growth");
+    expect(robloxJune2026Report.seoDescription).toContain("platform news");
+  });
+
   it("covers June 6-30 for the Animal Hospital breakout chart, with only the earliest days missing", () => {
     const points = robloxJune2026Report.animalHospital.points;
     expect(points.map((point) => point.date)).toEqual(juneDates);
