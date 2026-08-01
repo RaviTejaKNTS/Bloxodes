@@ -159,7 +159,7 @@ Suggested work unit: Infrastructure task with a separate restore drill
 
 ### 3. Restore edge caching for Music IDs and Decal IDs
 
-Status: `[ ]` Not started
+Status: `[x]` Completed and verified on 2026-08-01
 Priority: P0 — high-traffic delivery and origin-load defect
 Suggested work unit: Catalog routing/cache task
 
@@ -190,15 +190,15 @@ The likely cause is server-side use of `searchParams` for search/sort variants. 
 
 #### Required work
 
-- [ ] Decide which queryless canonical routes and pagination routes must be cacheable.
-- [ ] Separate cacheable canonical/pagination rendering from dynamic search and sort behavior.
-- [ ] Preserve search and sort functionality without making every ordinary request `no-store`.
-- [ ] Review whether query variants should be client/API-driven, explicitly dynamic, canonicalized, or non-indexed.
-- [ ] Ensure public comments or other components do not introduce user-specific HTML into edge-cached pages.
-- [ ] Confirm revalidation events and Cloudflare purges cover the corrected routes.
-- [ ] Add automated header checks for the top catalog routes.
-- [ ] Measure origin request reduction after deployment.
-- [ ] Check that Journey DOM structure and ad insertion remain valid after any route/rendering change.
+- [x] Decide which queryless canonical routes and pagination routes must be cacheable.
+- [x] Separate cacheable canonical/pagination rendering from dynamic search and sort behavior.
+- [x] Preserve search and sort functionality without making every ordinary request `no-store`.
+- [x] Review whether query variants should be client/API-driven, explicitly dynamic, canonicalized, or non-indexed.
+- [x] Ensure public comments or other components do not introduce user-specific HTML into edge-cached pages.
+- [x] Confirm revalidation events and Cloudflare purges cover the corrected routes.
+- [x] Add automated header checks for the top catalog routes.
+- [x] Measure origin request reduction after deployment.
+- [x] Check that Journey DOM structure and ad insertion remain valid after any route/rendering change.
 
 #### Acceptance criteria
 
@@ -211,13 +211,17 @@ The likely cause is server-side use of `searchParams` for search/sort variants. 
 
 #### Verification evidence to record
 
-- Routes made cacheable:
-- Routes intentionally left dynamic and reason:
-- Header audit command/result:
-- Before/after origin request rate:
-- Before/after TTFB:
-- Journey audits:
-- Production commit/SHA:
+- Routes made cacheable: `/catalog/roblox-music-ids`, its `/page/[page]` family, `/catalog/roblox-decal-ids`, its `/page/[page]` family, Decal curated pages, and Decal category/detail pagination. Static routes render at build time; dynamic path segments use on-demand ISR through `generateStaticParams()`. The effective public policy is `s-maxage=3600, stale-while-revalidate=31532400`, capped by the shared site layout's one-hour revalidation interval.
+- Search/sort behavior: URL filters now hydrate behind a React `Suspense` boundary and load filtered rows from the existing JSON APIs. The cached HTML contains the default server-rendered rows, metadata, JSON-LD, canonical, pagination, and public approved comments; it contains no authenticated or personalized response. Query variants retain the query in the interactive controls while canonicalizing to the queryless catalog URL.
+- Routes intentionally left dynamic and reason: `/api/roblox-music-ids` and `/api/roblox-decal-ids` remain `force-dynamic` because they serve query-, sort-, section-, category-, and page-specific JSON. Music chart routes remain dynamic for their server-selected `?range=` behavior and were outside this defect's route scope.
+- Revalidation: the existing Music and Decal database triggers enqueue their catalog events; `/api/revalidate` already invalidates the base route, route pattern, first 49 concrete pagination paths, Cloudflare cache tags, and deferred cache-warm paths. Query cache keys share the catalog cache tag and are purged with the canonical route family.
+- Automated contracts: `apps/web/src/lib/__tests__/catalog-edge-cache-contract.test.ts` rejects request `searchParams`, `force-dynamic`, cookies, or headers in the cacheable route files; requires on-demand ISR for dynamic segments; and verifies the client browsers retain API filtering, `Suspense`, and `data-journey-item`. The existing post-deploy site audit continues to reject `CF-Cache-Status: BYPASS` or `DYNAMIC` on critical catalog HTML.
+- Header audit command/result: repeated `curl -L` GETs across the two canonical routes, both `/page/2` routes, `?q=love`, and `?sort=newest` returned `200`, the public `s-maxage` policy above, and `CF-Cache-Status: HIT` after warming. The exact live health SHA was `94394f85175e7533ee670de09866209653ca585e` and the deployment workflow completed successfully.
+- Before/after origin request sample: before deployment, 5/5 Music requests and 5/5 Decal requests were `BYPASS` and reached the origin. After deployment and warming, 5/5 requests for each canonical route were `HIT`, so the immediate synthetic sample fell from ten origin-served responses to zero. Longer-term Cloudflare/VPS traffic should still be reviewed separately when a full post-change window is available.
+- Before/after median TTFB: Music improved from `1.104s` to `0.411s` (about 63%); Decal improved from `1.349s` to `0.478s` (about 65%) across five sequential requests per route from the same audit location.
+- Journey and browser audit: headless Chrome loaded live `?q=love` and `?sort=newest` variants with document/API status `200`, preserved the control values, rendered 24 direct `#article-body > [data-journey-item]` rows on each page, retained queryless canonicals, and emitted zero page errors.
+- Local verification: `npm run lint`, `npm run typecheck:web`, `npm run test:unit:web` (35 files, 194 tests), and `npm run build:web` passed. The production build classified the base routes as static and every targeted path-parameter route as SSG/on-demand ISR.
+- Production commit/SHA: `94394f85175e7533ee670de09866209653ca585e` (`Restore edge caching for media catalogs`). Deployment run: `30689145816`.
 
 ---
 
