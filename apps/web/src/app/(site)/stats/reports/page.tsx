@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageBreadcrumb } from "@/components/PageBreadcrumb";
+import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
 import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
 import { breadcrumbJsonLd, buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 
@@ -22,6 +23,13 @@ export const metadata: Metadata = {
 };
 
 const reports = [
+  {
+    href: `/stats/reports/${robloxJuly2026Report.slug}`,
+    month: robloxJuly2026Report.featureImage.month,
+    title: robloxJuly2026Report.title,
+    description: robloxJuly2026Report.subtitle,
+    image: robloxJuly2026Report.featureImage
+  },
   {
     href: `/stats/reports/${robloxJune2026Report.slug}`,
     month: robloxJune2026Report.featureImage.month,

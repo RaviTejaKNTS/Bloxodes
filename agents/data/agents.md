@@ -107,6 +107,11 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Daily and same-weekday/rolling-window comparisons come from `roblox_universe_stats_daily`; event markers come from `roblox_virtual_events`; platform and community mentions keep attributable source URLs inline in the copy.
   - `featureImage` selects the approved headline, lead metric, accessible description, and real chart series used to generate `public/images/reports/roblox-june-2026.png` for the archive and social previews.
   - Keep each monthly report immutable after approval except for explicit corrections. New months should add a new dated module and route instead of mutating a prior edition.
+- `src/data/reports/roblox-july-2026.ts`
+  - Frozen editorial snapshot for the published `/stats/reports/roblox-july-2026` report, sourced from the dossier-approved analysis in `tmp/content-workspace/roblox/reports/2026-07/`. Chart UI lives in `src/components/reports/RobloxJuly2026ReportCharts.tsx`.
+  - The route is indexed and included in the reports archive, Stats navigation, Stats sitemap, RSS feed, and report-aware stats revalidation.
+  - `featureImage` selects the dossier-approved headline, lead metric, accessible description, and real Murder Mystery 2 chart series used to generate `public/images/reports/roblox-july-2026.png` for the archive and social metadata.
+  - Keep this module immutable except for explicit corrections, and never edit the June module or route while working on July.
 - `data/Admin commands/*.md`
   - Parsed by `src/lib/admin-commands.ts`.
 - `data/Grow a Garden/crops.json`

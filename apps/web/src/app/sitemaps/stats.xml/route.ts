@@ -6,6 +6,7 @@ import {
   listStatsSitemapGames
 } from "@/lib/stats";
 import { robloxJune2026Report } from "@/data/reports/roblox-june-2026";
+import { robloxJuly2026Report } from "@/data/reports/roblox-july-2026";
 import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +23,13 @@ export async function GET() {
       loc: withSiteUrl("/stats/reports"),
       changefreq: "monthly",
       priority: "0.7",
-      lastmod: toIsoDate(robloxJune2026Report.updatedAt)
+      lastmod: toIsoDate(robloxJuly2026Report.updatedAt)
+    },
+    {
+      loc: withSiteUrl(`/stats/reports/${robloxJuly2026Report.slug}`),
+      changefreq: "monthly",
+      priority: "0.8",
+      lastmod: toIsoDate(robloxJuly2026Report.updatedAt)
     },
     {
       loc: withSiteUrl(`/stats/reports/${robloxJune2026Report.slug}`),

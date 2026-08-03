@@ -213,8 +213,11 @@ function revalidateForWiki(slug: string) {
 
 function revalidateForStats(slug: string) {
   const normalized = normalizeSlug(slug);
+  const reportSlug = normalized.startsWith("reports/") ? normalized.replace(/^reports\//, "") : "";
   const scopedPaths =
-    normalized === "home" || normalized === "stats"
+    reportSlug
+      ? ["/stats", "/stats/reports", `/stats/reports/${reportSlug}`, FEED_PATH]
+      : normalized === "home" || normalized === "stats"
       ? ["/stats", "/stats/roblox-platform"]
       : normalized === "roblox-platform" || normalized === "platform"
         ? ["/stats", "/stats/roblox-platform"]
@@ -230,7 +233,17 @@ function revalidateForStats(slug: string) {
   const detailSlug = normalized.startsWith("games/") ? normalized.replace(/^games\//, "") : null;
   return applyRevalidation(
     [...scopedPaths, "/api/stats/platform/chart", "/api/stats/visit-share", "/api/stats/games", "/api/stats/creators", "/api/stats/items", "/", SITEMAP_INDEX_PATH, STATS_SITEMAP_PATH],
-    ["stats", "stats-home", "stats-platform", "stats-games", "stats-creators", "stats-items", detailSlug ? `stats-game:${detailSlug}` : "", "home"]
+    [
+      "stats",
+      "stats-home",
+      "stats-platform",
+      "stats-games",
+      "stats-creators",
+      "stats-items",
+      reportSlug ? "stats-reports" : "",
+      detailSlug ? `stats-game:${detailSlug}` : "",
+      "home"
+    ]
   );
 }
 
