@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Practical Basketball",
+    "gameSlug": "practical-basketball",
+    "collection": "takeovers",
+    "route": "/wiki/practical-basketball/takeovers",
+    "catalogCode": "practical-basketball-takeovers",
+    "itemFields": [
+      "name",
+      "effectSummary",
+      "primaryRole",
+      "bestFit",
+      "bestFor",
+      "avoidIf",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "effectSummary",
+      "primaryRole",
+      "bestFit",
+      "bestFor",
+      "avoidIf",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Scoring and shot creation",
+        "Slashing and drive pressure",
+        "Playmaking and team support",
+        "Interior, rebounding, and utility"
+      ],
+      "badgeField": "primaryRole",
+      "subtitleFields": [
+        "bestFit"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "effectSummary",
+      "cardFields": [
+        "effectSummary",
+        "primaryRole",
+        "bestFit",
+        "bestFor",
+        "avoidIf"
+      ],
+      "tableFields": [
+        "effectSummary",
+        "primaryRole",
+        "bestFit",
+        "bestFor",
+        "avoidIf",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "effectSummary": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "primaryRole": {
+          "kind": "highlight",
+          "label": "Primary role"
+        },
+        "bestFit": {
+          "kind": "plain",
+          "label": "Best fit"
+        },
+        "bestFor": {
+          "kind": "detail",
+          "label": "Best for"
+        },
+        "avoidIf": {
+          "kind": "detail",
+          "label": "Avoid if"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Knockdown Shooter",
+        "effectSummary": "Boosts shooting success on contested and tough jump shots, with guides also describing better range or difficult-shot reliability.",
+        "primaryRole": "Shot making",
+        "bestFit": "Shooting guards and stretch scorers",
+        "bestFor": "Players whose offense is built around pull-ups, spot-up looks, and late-clock jumpers.",
+        "avoidIf": "You need paint pressure, rebounding help, or a team-support takeover more than shooting boosts.",
+        "cardSummary": "Knockdown Shooter is the safest fit for perimeter scorers who want their takeover to turn hard jumpers into more reliable scoring chances."
+      },
+      "system": {
+        "slug": "knockdown-shooter",
+        "section": "Scoring and shot creation",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Smooth Operator",
+        "effectSummary": "Improves off-the-dribble shot creation and range for ball handlers who create their own looks.",
+        "primaryRole": "Self-created scoring",
+        "bestFit": "Point guards and scoring ball handlers",
+        "bestFor": "Players who use dribble moves to create space before taking mid-range or perimeter shots.",
+        "avoidIf": "You mostly run the offense for teammates or need a takeover that helps finishing, boards, or defense.",
+        "cardSummary": "Smooth Operator fits guards who want takeover value while handling the ball, chaining moves, and creating shots without waiting for catch-and-shoot chances."
+      },
+      "system": {
+        "slug": "smooth-operator",
+        "section": "Scoring and shot creation",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unleash",
+        "effectSummary": "Improves offensive production for self-creating point guards through better dribbling, shot creation, and scoring consistency.",
+        "primaryRole": "Guard offense",
+        "bestFit": "Scoring point guards",
+        "bestFor": "Ball handlers who want their takeover to make isolation possessions and self-created scoring feel stronger.",
+        "avoidIf": "Your main value is pass-first playmaking or you need a clearer shooting, slashing, or rebounding specialization.",
+        "cardSummary": "Unleash is a scoring-guard option for players who want a broader offensive takeover instead of a pure shooter or pure facilitator choice."
+      },
+      "system": {
+        "slug": "unleash",
+        "section": "Scoring and shot creation",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Highlight Reel",
+        "effectSummary": "Boosts blow-by success, posterizer chances, and driving dunk strength for rim-attacking builds.",
+        "primaryRole": "Slashing",
+        "bestFit": "Small forwards and high-dunk wings",
+        "bestFor": "Players who create pressure by beating defenders to the rim and finishing through contact.",
+        "avoidIf": "Your build is more about perimeter shooting, passing, or rebounding than attacking the basket.",
+        "cardSummary": "Highlight Reel is the clear slasher takeover: it rewards wings and athletic forwards that already want to turn a lane into a dunk."
+      },
+      "system": {
+        "slug": "highlight-reel",
+        "section": "Slashing and drive pressure",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Downhill",
+        "effectSummary": "Improves blow-by success and speed with the ball so direct drives become harder to stop.",
+        "primaryRole": "Drive pressure",
+        "bestFit": "Tall ball handlers and do-it-all forwards",
+        "bestFor": "Players who attack from the perimeter, use speed with the ball, and force bigger defenders to guard movement.",
+        "avoidIf": "You play mostly as a spot-up shooter, pure passer, or interior big instead of creating downhill pressure.",
+        "cardSummary": "Downhill is for builds that win by moving with the ball, pushing past defenders, and turning size plus handle into rim pressure."
+      },
+      "system": {
+        "slug": "downhill",
+        "section": "Slashing and drive pressure",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Team Riser",
+        "effectSummary": "Helps pass-first guards elevate teammates instead of focusing only on their own scoring.",
+        "primaryRole": "Facilitation",
+        "bestFit": "Pass-first point guards",
+        "bestFor": "Players who control the offense, move the ball, and want takeover value tied to team play.",
+        "avoidIf": "You need a takeover for self-created buckets, shooting pressure, or finishing through contact.",
+        "cardSummary": "Team Riser is the team-first point guard option when your build is meant to set up others rather than carry possessions alone."
+      },
+      "system": {
+        "slug": "team-riser",
+        "section": "Playmaking and team support",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diesel",
+        "effectSummary": "Adds contact-dunk and paint-dominance value for big builds that want to pressure the rim.",
+        "primaryRole": "Paint scoring",
+        "bestFit": "Centers and interior scorers",
+        "bestFor": "Players who use size, strength, post control, and inside finishing to punish smaller defenders.",
+        "avoidIf": "You would rather stretch the floor, chase rebounds, or support teammates with a utility takeover.",
+        "cardSummary": "Diesel is the interior scoring takeover for bigs that want to turn strength and paint position into contact finishes."
+      },
+      "system": {
+        "slug": "diesel",
+        "section": "Interior, rebounding, and utility",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Board Hunter",
+        "effectSummary": "Shows where a missed shot will land before it comes off the rim, helping rebounders get position early.",
+        "primaryRole": "Rebounding",
+        "bestFit": "Rebounding centers",
+        "bestFor": "Players whose job is to secure boards, protect the paint, and prevent second-chance possessions.",
+        "avoidIf": "Your build is not responsible for rebounding or you need scoring pressure from your takeover.",
+        "cardSummary": "Board Hunter is the specialist rebounding option, giving bigs a clearer read on missed shots before everyone reacts."
+      },
+      "system": {
+        "slug": "board-hunter",
+        "section": "Interior, rebounding, and utility",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glue Guy",
+        "effectSummary": "Improves loose-ball chasing, rebounding, and contest ability on both the perimeter and interior.",
+        "primaryRole": "Utility defense",
+        "bestFit": "Power forwards and switch defenders",
+        "bestFor": "Players who clean up misses, guard multiple spots, chase loose balls, and help without needing every shot.",
+        "avoidIf": "You need a takeover built around pure scoring, pure shooting, or a single rebounding read.",
+        "cardSummary": "Glue Guy is the all-around frontcourt utility option for builds that make winning plays through defense, boards, and hustle."
+      },
+      "system": {
+        "slug": "glue-guy",
+        "section": "Interior, rebounding, and utility",
+        "sortOrder": 90,
+        "image": null
+      }
+    }
+  ]
+}

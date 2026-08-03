@@ -54,6 +54,7 @@ import { flingThingsAndPeopleCollectionGroup } from "./fling-things-and-people";
 import { homeAloneCollectionGroup } from "./home-alone";
 import { buildABaseAndStealCollectionGroup } from "./build-a-base-and-steal";
 import { creaturesOfSonariaCollectionGroup } from "./creatures-of-sonaria";
+import { practicalBasketballCollectionGroup } from "./practical-basketball";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -112,5 +113,6 @@ export const GAME_COLLECTION_GROUPS = [
   flingThingsAndPeopleCollectionGroup,
   homeAloneCollectionGroup,
   buildABaseAndStealCollectionGroup,
-  creaturesOfSonariaCollectionGroup
+  creaturesOfSonariaCollectionGroup,
+  practicalBasketballCollectionGroup
 ] satisfies GameCollectionGroup[];

@@ -1,0 +1,565 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Practical Basketball",
+    "gameSlug": "practical-basketball",
+    "collection": "badges",
+    "route": "/wiki/practical-basketball/badges",
+    "catalogCode": "practical-basketball-badges",
+    "itemFields": [
+      "name",
+      "effect",
+      "observedTier",
+      "bestFor",
+      "attributeNote",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "effect",
+      "observedTier",
+      "bestFor",
+      "attributeNote",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Finishing",
+        "Shooting",
+        "Playmaking",
+        "Defense & Rebounding"
+      ],
+      "badgeField": "observedTier",
+      "subtitleFields": [
+        "bestFor"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "effect",
+        "observedTier",
+        "bestFor",
+        "attributeNote"
+      ],
+      "tableFields": [
+        "effect",
+        "observedTier",
+        "bestFor",
+        "attributeNote",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "effect": "detail",
+        "observedTier": {
+          "kind": "chip",
+          "label": "Observed tier"
+        },
+        "bestFor": {
+          "kind": "highlight",
+          "label": "Best for"
+        },
+        "attributeNote": "detail",
+        "cardSummary": "detail"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Aerial Assault",
+        "effect": "Improves floater success when a guard or wing gets into the paint without relying on dunks.",
+        "observedTier": null,
+        "bestFor": "Floaters",
+        "attributeNote": null,
+        "cardSummary": "Aerial Assault helps layup-focused players turn paint touches into more reliable floaters."
+      },
+      "system": {
+        "slug": "aerial-assault",
+        "section": "Finishing",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Alley-Oop Finisher",
+        "effect": "Boosts lob finishes from teammates and also helps self-lob attempts near the rim.",
+        "observedTier": "Gold",
+        "bestFor": "Lobs",
+        "attributeNote": null,
+        "cardSummary": "Alley-Oop Finisher is for players who score from lob catches, rolls, cuts, or self-lobs."
+      },
+      "system": {
+        "slug": "alley-oop-finisher",
+        "section": "Finishing",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gymnast",
+        "effect": "Boosts difficult layup gathers such as spins, half-spins, hop steps, euro steps, cradles, reverses, and change-shot finishes.",
+        "observedTier": null,
+        "bestFor": "Crafty layups",
+        "attributeNote": null,
+        "cardSummary": "Gymnast supports guards and wings who finish with advanced layup gathers instead of straight-line attempts."
+      },
+      "system": {
+        "slug": "gymnast",
+        "section": "Finishing",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "High Flyer",
+        "effect": "Extends the distance from which driving dunks can trigger, making rim attacks start from farther out.",
+        "observedTier": "Hall of Fame",
+        "bestFor": "Driving dunks",
+        "attributeNote": null,
+        "cardSummary": "High Flyer is a core dunking badge for slashers, forwards, and bigs that attack open lanes."
+      },
+      "system": {
+        "slug": "high-flyer",
+        "section": "Finishing",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Paint King",
+        "effect": "Helps bigs create space inside by pushing defenders during hop steps or post moves near the basket.",
+        "observedTier": null,
+        "bestFor": "Paint scoring",
+        "attributeNote": null,
+        "cardSummary": "Paint King gives interior players a better chance to make room before finishing at the rim."
+      },
+      "system": {
+        "slug": "paint-king",
+        "section": "Finishing",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Relentless Finisher",
+        "effect": "Keeps contact layup and dunk attempts viable when defenders meet the scorer near the rim.",
+        "observedTier": null,
+        "bestFor": "Contact finishes",
+        "attributeNote": null,
+        "cardSummary": "Relentless Finisher is for bigs and slashers who expect body contact on layups or dunks."
+      },
+      "system": {
+        "slug": "relentless-finisher",
+        "section": "Finishing",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Traffic Finisher",
+        "effect": "Improves close-range finishes through contact, especially contested dunks around the rim.",
+        "observedTier": "Hall of Fame",
+        "bestFor": "Contested rim attacks",
+        "attributeNote": null,
+        "cardSummary": "Traffic Finisher helps athletic forwards convert drives when help defense is already waiting."
+      },
+      "system": {
+        "slug": "traffic-finisher",
+        "section": "Finishing",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corner Spot Up",
+        "effect": "Boosts catch-and-shoot attempts from the corner for off-ball players spacing the floor.",
+        "observedTier": null,
+        "bestFor": "Corner shooting",
+        "attributeNote": null,
+        "cardSummary": "Corner Spot Up gives forwards a clearer shooting role when they wait in the corner instead of posting up."
+      },
+      "system": {
+        "slug": "corner-spot-up",
+        "section": "Shooting",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Deep Post Fade",
+        "effect": "Improves post fade attempts taken farther from the basket, giving post scorers a mid-post counter.",
+        "observedTier": null,
+        "bestFor": "Post fades",
+        "attributeNote": null,
+        "cardSummary": "Deep Post Fade is a shooting option for bigs and power forwards who work from the mid-post."
+      },
+      "system": {
+        "slug": "deep-post-fade",
+        "section": "Shooting",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Formless Shooter",
+        "effect": "Boosts difficult off-dribble jumpers such as hop steps, spins, stepbacks, and pull-ups.",
+        "observedTier": "Gold",
+        "bestFor": "Difficult jumpers",
+        "attributeNote": null,
+        "cardSummary": "Formless Shooter supports shot creators who take jumpers after movement instead of only standing still."
+      },
+      "system": {
+        "slug": "formless-shooter",
+        "section": "Shooting",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Limitless Shooter",
+        "effect": "Extends the effective range for standing three-point shots when the shooter gets set.",
+        "observedTier": "Hall of Fame",
+        "bestFor": "Deep standing threes",
+        "attributeNote": null,
+        "cardSummary": "Limitless Shooter lets perimeter builds threaten from deeper range on set three-point attempts."
+      },
+      "system": {
+        "slug": "limitless-shooter",
+        "section": "Shooting",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mid-Range Maestro",
+        "effect": "Raises mid-range shot reliability, especially for players who use pull-ups and shots inside the arc.",
+        "observedTier": "Diamond",
+        "bestFor": "Mid-range scoring",
+        "attributeNote": null,
+        "cardSummary": "Mid-Range Maestro rewards builds that use middies as a main scoring answer when threes or drives are covered."
+      },
+      "system": {
+        "slug": "mid-range-maestro",
+        "section": "Shooting",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Quick Draw",
+        "effect": "Speeds up catch-and-shoot jumpers so defenders have less time to close out.",
+        "observedTier": "Hall of Fame",
+        "bestFor": "Fast releases",
+        "attributeNote": null,
+        "cardSummary": "Quick Draw is valuable for shooters who receive passes and need to fire before the contest arrives."
+      },
+      "system": {
+        "slug": "quick-draw",
+        "section": "Shooting",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tunnel Vision",
+        "effect": "Reduces the shot penalty from defenders closing out on mid-range and three-point attempts.",
+        "observedTier": "Hall of Fame",
+        "bestFor": "Late contests",
+        "attributeNote": null,
+        "cardSummary": "Tunnel Vision helps jump shooters stay reliable when a defender recovers late to contest."
+      },
+      "system": {
+        "slug": "tunnel-vision",
+        "section": "Shooting",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dimer",
+        "effect": "Boosts teammates' shot chances after they receive a pass from the badge holder.",
+        "observedTier": "Hall of Fame or Gold",
+        "bestFor": "Pass-first play",
+        "attributeNote": null,
+        "cardSummary": "Dimer turns good kick-outs and setup passes into more valuable scoring chances for teammates."
+      },
+      "system": {
+        "slug": "dimer",
+        "section": "Playmaking",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glove",
+        "effect": "Makes the ball harder to strip when defenders reach against the dribbler.",
+        "observedTier": "Hall of Fame",
+        "bestFor": "Ball security",
+        "attributeNote": null,
+        "cardSummary": "Glove protects high-usage guards from losing the ball to aggressive reach attempts."
+      },
+      "system": {
+        "slug": "glove",
+        "section": "Playmaking",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Post Hook",
+        "effect": "Improves post hook attempts near the basket when a defender takes away a fade or direct finish.",
+        "observedTier": "Silver",
+        "bestFor": "Post scoring counters",
+        "attributeNote": null,
+        "cardSummary": "Post Hook gives frontcourt players a close-range scoring counter from the block."
+      },
+      "system": {
+        "slug": "post-hook",
+        "section": "Playmaking",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Quick Handles",
+        "effect": "Improves the ability to chain dribble moves together quickly.",
+        "observedTier": "Gold",
+        "bestFor": "Dribble combos",
+        "attributeNote": null,
+        "cardSummary": "Quick Handles helps creators move from one dribble move into the next without feeling delayed."
+      },
+      "system": {
+        "slug": "quick-handles",
+        "section": "Playmaking",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Quick Pass",
+        "effect": "Speeds up pass release and pass velocity, helping the ball move before defenders rotate.",
+        "observedTier": "Hall of Fame or Gold",
+        "bestFor": "Fast ball movement",
+        "attributeNote": null,
+        "cardSummary": "Quick Pass is useful for guards, forwards, and bigs who need to move the ball out of pressure."
+      },
+      "system": {
+        "slug": "quick-pass",
+        "section": "Playmaking",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spacemaker",
+        "effect": "Helps create separation on space-making moves such as stepbacks, side steps, and similar shot-creation actions.",
+        "observedTier": "Gold",
+        "bestFor": "Isolation creation",
+        "attributeNote": null,
+        "cardSummary": "Spacemaker is a shot-creation badge for ball handlers who use movement to create a clean look."
+      },
+      "system": {
+        "slug": "spacemaker",
+        "section": "Playmaking",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tireless Handles",
+        "effect": "Reduces the stamina lost from dribble moves, allowing longer chains before tiring out.",
+        "observedTier": "Hall of Fame or Silver",
+        "bestFor": "Long combos",
+        "attributeNote": null,
+        "cardSummary": "Tireless Handles lets dribble-heavy players keep creating without draining energy as quickly."
+      },
+      "system": {
+        "slug": "tireless-handles",
+        "section": "Playmaking",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Intimidator",
+        "effect": "Strengthens contests so nearby offensive players miss more often when tightly guarded.",
+        "observedTier": "Diamond or Hall of Fame",
+        "bestFor": "Shot contests",
+        "attributeNote": null,
+        "cardSummary": "Intimidator is a defensive badge for players who stay close enough to make every shot attempt uncomfortable."
+      },
+      "system": {
+        "slug": "intimidator",
+        "section": "Defense & Rebounding",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Locks",
+        "effect": "Improves perimeter cutoffs, hip riding, and the ability to stay in front of ball handlers.",
+        "observedTier": "Hall of Fame",
+        "bestFor": "On-ball defense",
+        "attributeNote": null,
+        "cardSummary": "Locks helps perimeter defenders stop blow-bys and stay attached during drives."
+      },
+      "system": {
+        "slug": "locks",
+        "section": "Defense & Rebounding",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lurker",
+        "effect": "Improves chase-down block ability for defenders who recover from behind or from the side.",
+        "observedTier": "Gold or higher",
+        "bestFor": "Chase-down blocks",
+        "attributeNote": "A center guide recommends Gold or higher before it starts feeling reliable.",
+        "cardSummary": "Lurker gives rim protectors more value when they rotate late but still have a block angle."
+      },
+      "system": {
+        "slug": "lurker",
+        "section": "Defense & Rebounding",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Navigator",
+        "effect": "Helps defenders work through screens without getting stuck on the screener.",
+        "observedTier": null,
+        "bestFor": "Screen defense",
+        "attributeNote": null,
+        "cardSummary": "Navigator is for guards who need to stay connected to shooters and ball handlers through picks."
+      },
+      "system": {
+        "slug": "navigator",
+        "section": "Defense & Rebounding",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Post Lockdown",
+        "effect": "Makes it harder for post scorers to back down, move, or create space against the defender.",
+        "observedTier": null,
+        "bestFor": "Post defense",
+        "attributeNote": null,
+        "cardSummary": "Post Lockdown is a frontcourt defense badge for holding position against post scorers."
+      },
+      "system": {
+        "slug": "post-lockdown",
+        "section": "Defense & Rebounding",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebound Chaser",
+        "effect": "Helps players track down missed shots faster on both offensive and defensive rebounds.",
+        "observedTier": "Diamond or Bronze",
+        "bestFor": "Rebounding",
+        "attributeNote": "One 6'9 build guide ties Bronze Rebound Chaser to 59 Rebound.",
+        "cardSummary": "Rebound Chaser is the main badge for ending possessions or creating second chances on the glass."
+      },
+      "system": {
+        "slug": "rebound-chaser",
+        "section": "Defense & Rebounding",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rim Saver",
+        "effect": "Widens effective shot-blocking range near the basket, helping block attempts that would otherwise get over the defender.",
+        "observedTier": "Diamond or Gold",
+        "bestFor": "Rim protection",
+        "attributeNote": "One 6'9 build guide ties Gold Rim Saver to 80 Interior Defense and 85 Block.",
+        "cardSummary": "Rim Saver is a core paint-defense badge for bigs and switchable forwards."
+      },
+      "system": {
+        "slug": "rim-saver",
+        "section": "Defense & Rebounding",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thief",
+        "effect": "Improves the chance of creating steals when the ball handler exposes the ball.",
+        "observedTier": null,
+        "bestFor": "Steals",
+        "attributeNote": "A point guard guide cites 84 Steal for consistent Thief results.",
+        "cardSummary": "Thief is for defensive guards who want to pressure the ball and create extra possessions."
+      },
+      "system": {
+        "slug": "thief",
+        "section": "Defense & Rebounding",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tough Ankles",
+        "effect": "Lowers the chance of getting crossed over or ankle-broken by opposing dribble moves.",
+        "observedTier": null,
+        "bestFor": "Dribble defense",
+        "attributeNote": null,
+        "cardSummary": "Tough Ankles helps perimeter defenders survive change-of-direction moves without losing balance."
+      },
+      "system": {
+        "slug": "tough-ankles",
+        "section": "Defense & Rebounding",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Trampoline",
+        "effect": "Boosts repeated jumps for blocks and contests, helping interior defenders keep challenging shots.",
+        "observedTier": "Diamond",
+        "bestFor": "Repeated contests",
+        "attributeNote": null,
+        "cardSummary": "Trampoline supports power forwards who stay near the rim and need multiple jumps in one possession."
+      },
+      "system": {
+        "slug": "trampoline",
+        "section": "Defense & Rebounding",
+        "sortOrder": 31,
+        "image": null
+      }
+    }
+  ]
+}

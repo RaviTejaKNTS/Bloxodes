@@ -59,6 +59,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   anomalies: "warning signs, encounter type, location, best action, and consequence",
   emergencies: "time limit, what triggers it, how to resolve it, tools needed, and the failure consequence",
   accessories: "rarity, type, stats, obtainment, and build value",
+  badges: "badge effects, observed tiers, build roles, and source-backed attribute notes",
   "accessory-shop": "chests, accessory shop items, prices, rarity chances, and obtainment notes",
   "aura-stages": "aura progression, stage requirements, visuals, and buffs",
   "aura-visuals": "how each aura stage appears on the character",

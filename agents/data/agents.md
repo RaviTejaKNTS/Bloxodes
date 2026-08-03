@@ -181,6 +181,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Push Rock for Brainrots/*.json`
   - Local Push Rock for Brainrots datasets for wiki/collection page work, including Brainrots, rocks/gates, and upgrades.
   - Matching row or system images live under `apps/web/public/Push Rock for Brainrots/` by collection folder. Keep gamepasses, badges, developer products, and generic Hunter mentions out of the datasets unless the row-level facts are source-backed and useful to players.
+- `data/Practical Basketball/*.json`
+  - Local Practical Basketball datasets for wiki/collection page work. `badges.json` stores source-backed My Player gameplay badges by Finishing, Shooting, Playmaking, and Defense & Rebounding, with text-only rows until source-backed badge icons are collected.
+  - `takeovers.json` stores source-backed build takeover boosts by player role, including scoring, slashing, playmaking, and interior/rebounding utility sections. Requirements stay blank unless a source-backed unlock or attribute gate is found.
+  - Keep each dataset limited to its source-backed Practical Basketball system. Do not mix Roblox achievement badges, takeovers, badges, animations, cosmetics, or invented thresholds into the wrong collection.
 - `data/Restaurant Tycoon 3/*.json`
   - Local Restaurant Tycoon 3 datasets for wiki/collection page work, including food, drinks, ingredients, customers, workers, upgrades, build items, milestones, and locations.
   - Matching source-backed images live under `apps/web/public/Restaurant Tycoon 3/` by collection folder where useful row images are available.
