@@ -154,6 +154,53 @@ export const AVATAR_CATALOG_FAMILY_CODES = [
   AVATAR_MAKEUP_CODE
 ] as const;
 
+const AVATAR_CATALOG_SEO_TITLES: Record<string, string> = {
+  [AVATAR_CATALOG_MASTER_CODE]: "Roblox Item IDs and Bundle Codes",
+  [AVATAR_ACCESSORIES_CODE]: "Roblox Accessory Codes and Item IDs",
+  [`${AVATAR_ACCESSORIES_CODE}/hair-accessories`]: "Roblox Hair Codes and IDs",
+  [`${AVATAR_ACCESSORIES_CODE}/head-accessories`]: "Roblox Hat and Head Accessory Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/face-accessories`]: "Roblox Face Accessory Codes and IDs",
+  [`${AVATAR_ACCESSORIES_CODE}/neck-accessories`]: "Roblox Neck Accessory Codes and IDs",
+  [`${AVATAR_ACCESSORIES_CODE}/shoulder-accessories`]: "Roblox Shoulder Accessory Codes and IDs",
+  [`${AVATAR_ACCESSORIES_CODE}/front-accessories`]: "Roblox Front Accessory Codes and IDs",
+  [`${AVATAR_ACCESSORIES_CODE}/back-accessories`]: "Roblox Back Accessory Codes and IDs",
+  [`${AVATAR_ACCESSORIES_CODE}/waist-accessories`]: "Roblox Waist Accessory Codes and IDs",
+  [`${AVATAR_ACCESSORIES_CODE}/gear`]: "Roblox Gear IDs and Codes",
+  [AVATAR_CLOTHING_CODE]: "Roblox Clothing Codes and Item IDs",
+  [`${AVATAR_CLOTHING_CODE}/layered-t-shirts`]: "Roblox Layered T-Shirt Codes and IDs",
+  [`${AVATAR_CLOTHING_CODE}/shirts`]: "Roblox Layered Shirt Codes and IDs",
+  [`${AVATAR_CLOTHING_CODE}/sweaters`]: "Roblox Sweater Codes and IDs",
+  [`${AVATAR_CLOTHING_CODE}/jackets`]: "Roblox Jacket Codes and IDs",
+  [`${AVATAR_CLOTHING_CODE}/pants`]: "Roblox Layered Pants Codes and IDs",
+  [`${AVATAR_CLOTHING_CODE}/shorts`]: "Roblox Shorts Codes and IDs",
+  [`${AVATAR_CLOTHING_CODE}/dresses-skirts`]: "Roblox Dress and Skirt Codes and IDs",
+  [`${AVATAR_CLOTHING_CODE}/shoes`]: "Roblox Shoe Codes and IDs",
+  [`${AVATAR_CLOTHING_CODE}/classic-shirts`]: "Roblox Classic Shirt IDs and Codes",
+  [`${AVATAR_CLOTHING_CODE}/classic-t-shirts`]: "Roblox Classic T-Shirt IDs and Codes",
+  [`${AVATAR_CLOTHING_CODE}/classic-pants`]: "Roblox Classic Pants IDs and Codes",
+  [AVATAR_BODY_PARTS_CODE]: "Roblox Body Codes and Item IDs",
+  [`${AVATAR_BODY_PARTS_CODE}/full-bodies`]: "Roblox Avatar Bundle Codes and IDs",
+  [`${AVATAR_BODY_PARTS_CODE}/dynamic-heads`]: "Roblox Dynamic Head Codes and IDs",
+  [`${AVATAR_BODY_PARTS_CODE}/classic-heads`]: "Roblox Classic Head IDs and Codes",
+  [`${AVATAR_BODY_PARTS_CODE}/classic-faces`]: "Roblox Classic Face IDs and Codes",
+  [AVATAR_EMOTES_CODE]: "Roblox Emote IDs and Codes",
+  [AVATAR_ANIMATIONS_CODE]: "Roblox Animation Pack and Bundle IDs",
+  [AVATAR_MAKEUP_CODE]: "Roblox Makeup Codes and Item IDs"
+};
+
+export function getAvatarCatalogSeoTitle(config: Pick<AvatarCatalogConfig, "code" | "title">): string {
+  return AVATAR_CATALOG_SEO_TITLES[config.code] ?? `${config.title} Item IDs and Codes`;
+}
+
+export function getAvatarCatalogSeoDescription(config: Pick<AvatarCatalogConfig, "code" | "title">): string {
+  const catalogName = config.title.replace(/\s+on Roblox$/i, "");
+  const idTypes = config.code === AVATAR_CATALOG_MASTER_CODE || config.code.endsWith("/full-bodies") || config.code === AVATAR_ANIMATIONS_CODE
+    ? "item and bundle IDs"
+    : "item IDs and codes";
+
+  return `Find ${catalogName} and copy Roblox ${idTypes}. Search by name, creator, or ID; compare prices and popularity; open official Marketplace listings.`;
+}
+
 function normalizeAvatarCatalogPathParts(value: string): string[] {
   return value
     .trim()
@@ -594,7 +641,7 @@ function applyAvatarCatalogFilters(query: any, filters: AvatarCatalogResolvedSea
       `creator_name.ilike.${pattern}`
     ];
     if (/^\d+$/.test(filters.search)) {
-      orParts.unshift(`asset_id.eq.${filters.search}`);
+      orParts.unshift(`asset_id.eq.${filters.search}`, `asset_id.eq.-${filters.search}`);
     }
     nextQuery = nextQuery.or(orParts.join(","));
   }

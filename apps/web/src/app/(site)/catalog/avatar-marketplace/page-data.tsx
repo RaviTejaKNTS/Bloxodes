@@ -20,6 +20,8 @@ import {
   AVATAR_CATALOG_SALE_OPTIONS,
   AVATAR_CATALOG_SORT_OPTIONS,
   buildAvatarCatalogQueryString,
+  getAvatarCatalogSeoDescription,
+  getAvatarCatalogSeoTitle,
   getAvatarCatalogCount,
   listAvatarCatalogItems,
   normalizeAvatarCatalogCreator,
@@ -68,6 +70,11 @@ function formatCompactCount(value: number): string {
     notation: "compact",
     maximumFractionDigits: 1
   }).format(value);
+}
+
+function buildCountedAvatarCatalogTitle(config: AvatarCatalogConfig, count: number): string {
+  const seoTitle = getAvatarCatalogSeoTitle(config);
+  return count > 0 ? `${formatCount(count)} ${seoTitle}` : seoTitle;
 }
 
 function buildCompactNavTitle(title: string, isAll: boolean): string {
@@ -261,10 +268,20 @@ function buildAvatarCatalogItemListSchema({
       name: string;
       url: string;
       image?: string;
+      identifier: {
+        "@type": "PropertyValue";
+        propertyID: string;
+        value: number;
+      };
     } = {
       "@type": "Thing",
       name: item.name ?? `Roblox item ${item.asset_id}`,
-      url: item.roblox_url
+      url: item.roblox_url,
+      identifier: {
+        "@type": "PropertyValue",
+        propertyID: item.item_type === "Bundle" ? "Roblox Bundle ID" : "Roblox Item ID",
+        value: item.item_type === "Bundle" ? Math.abs(Math.trunc(item.asset_id)) : Math.trunc(item.asset_id)
+      }
     };
 
     if (item.thumbnail_url) {
@@ -422,7 +439,7 @@ function AvatarCatalogFilterForm({
           name="q"
           type="search"
           defaultValue={filters.search}
-          placeholder="Search item, creator, or ID"
+          placeholder="Search name, creator, or Roblox ID"
           className="w-full rounded-md border border-border/60 bg-surface/60 px-4 py-2 text-sm text-foreground placeholder:text-muted/70 focus:outline-none focus:ring-2 focus:ring-accent/40"
         />
       </div>
@@ -527,7 +544,7 @@ function AvatarCatalogGrid({
     return (
       <div className="rounded-lg border border-dashed border-border/60 bg-surface/60 p-8 text-center">
         <p className="text-base font-semibold text-foreground">
-          {hasFilters ? "No matching items" : "No items available yet"}
+          {hasFilters ? "No matching IDs" : "No IDs available yet"}
         </p>
         <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted">
           {hasFilters
@@ -563,22 +580,24 @@ export async function generateAvatarCatalogMetadata({
     };
   }
 
-  const filters = await resolveAvatarCatalogSearch(searchParams);
-  const [catalog, count] = await Promise.all([
+  const [catalog, count, filters] = await Promise.all([
     getCatalogPageContentByCodes([route.config.code]),
-    getAvatarCatalogCount(route.config, filters).catch(() => 0)
+    getAvatarCatalogCount(route.config).catch(() => 0),
+    resolveAvatarCatalogSearch(searchParams)
   ]);
+  const shouldNoIndex = route.page > 1 || hasActiveAvatarFilters(filters);
   const canonicalPath = route.page > 1 ? `${route.config.basePath}/page/${route.page}` : route.config.basePath;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const baseTitle = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? route.config.title;
-  const title = count > 0 ? `${baseTitle} (${formatCount(count)} items)` : baseTitle;
-  const description = catalog?.meta_description ?? route.config.description;
+  const baseTitle = resolveSeoTitle(buildCountedAvatarCatalogTitle(route.config, count)) ?? route.config.title;
+  const title = route.page > 1 ? `${baseTitle} - Page ${route.page}` : baseTitle;
+  const description = getAvatarCatalogSeoDescription(route.config);
   const image = catalog?.thumb_url || `${SITE_URL}/Bloxodes.png`;
 
   return {
     title,
     description,
     alternates: buildAlternates(canonicalUrl),
+    robots: shouldNoIndex ? { index: false, follow: true } : undefined,
     openGraph: {
       type: "website",
       url: canonicalUrl,
@@ -606,14 +625,17 @@ export async function renderAvatarCatalogPage({
   const primaryNavParent = resolveAvatarCatalogPrimaryNavParent(route);
   const secondaryNavParent = resolveAvatarCatalogSecondaryNavParent(route);
   const primaryActiveCode = resolveAvatarCatalogPrimaryActiveCode(route);
-  const [{ items, total, totalPages }, catalog, navCounts] = await Promise.all([
+  const hasFilters = hasActiveAvatarFilters(filters);
+  const [{ items, total, totalPages }, catalog, navCounts, unfilteredTitleCount] = await Promise.all([
     loadAvatarCatalogPageData(route.config, route.page, filters),
     getCatalogPageContentByCodes([route.config.code]),
-    loadAvatarCatalogNavCounts(primaryNavParent)
+    loadAvatarCatalogNavCounts(primaryNavParent),
+    hasFilters ? getAvatarCatalogCount(route.config).catch(() => null) : Promise.resolve(null)
   ]);
   const contentHtml = await buildAvatarCatalogContentHtml(catalog);
-  const pageTitle = contentHtml?.title?.trim() ? contentHtml.title.trim() : route.config.title;
-  const description = catalog?.meta_description ?? route.config.description;
+  const baseTitle = getAvatarCatalogSeoTitle(route.config);
+  const pageTitle = buildCountedAvatarCatalogTitle(route.config, unfilteredTitleCount ?? total);
+  const description = getAvatarCatalogSeoDescription(route.config);
   const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
   const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
   const updatedDate = contentHtml?.updatedAt ? new Date(contentHtml.updatedAt) : null;
@@ -627,9 +649,8 @@ export async function renderAvatarCatalogPage({
   const descriptionHtml = contentHtml?.descriptionHtml ?? [];
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const faqHtml = contentHtml?.faqHtml ?? [];
-  const hasFilters = hasActiveAvatarFilters(filters);
   const hasDetails = Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
-  const breadcrumbItems = buildAvatarCatalogBreadcrumbItems(route, pageTitle);
+  const breadcrumbItems = buildAvatarCatalogBreadcrumbItems(route, baseTitle);
 
   const pageSchema = JSON.stringify(
     webPageJsonLd({
@@ -668,10 +689,6 @@ export async function renderAvatarCatalogPage({
     ...faq,
     nodes: renderPageContentNodes(faq.a, `avatar-catalog-faq-${idx}`)
   }));
-  const resultSummary = total > 0
-    ? `${formatCount(total)} ${total === 1 ? "item" : "items"}`
-    : null;
-
   return (
     <div className="catalog-surface space-y-10">
       <header className="space-y-4">
@@ -682,6 +699,12 @@ export async function renderAvatarCatalogPage({
       </header>
 
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space space-y-6">
+        {showHero ? (
+          <p>
+            Search {route.config.title.replace(/\s+on Roblox$/i, "")} by name, creator, or Roblox ID. Every result includes a copy-ready
+            {" "}Item ID or Bundle ID and a direct link to its official Roblox listing.
+          </p>
+        ) : null}
         {introNodes && showHero ? introNodes : null}
 
         <CatalogAdSlot />
@@ -691,7 +714,6 @@ export async function renderAvatarCatalogPage({
         <AvatarCatalogSubnav parent={secondaryNavParent} activeCode={route.config.code} />
 
         <div className="catalog-surface space-y-6">
-          {resultSummary ? <p className="text-sm text-muted">{resultSummary}</p> : null}
           <AvatarCatalogFilterForm basePath={route.config.basePath} filters={filters} />
           <AvatarCatalogGrid items={items} pageTitle={pageTitle} hasFilters={hasFilters} />
           <PagePagination

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CopyCodeButton } from "@/components/CopyCodeButton";
 
 export type RobloxCatalogItemCardItem = {
   asset_id: number;
@@ -78,6 +79,14 @@ function buildFallbackRobloxUrl(item: Pick<RobloxCatalogItemCardItem, "asset_id"
   return `https://www.roblox.com/catalog/${item.asset_id}`;
 }
 
+function getCopyableId(item: Pick<RobloxCatalogItemCardItem, "asset_id" | "item_type">): number {
+  return item.item_type === "Bundle" ? Math.abs(Math.trunc(item.asset_id)) : Math.trunc(item.asset_id);
+}
+
+function getIdLabel(itemType: string): string {
+  return itemType === "Bundle" ? "Bundle ID" : "Item ID";
+}
+
 export function RobloxCatalogItemCard({
   item,
   categoryLabelMode = "avatar",
@@ -88,6 +97,8 @@ export function RobloxCatalogItemCard({
   const favoriteCount = typeof item.favorite_count === "number" ? item.favorite_count : 0;
   const isLimited = item.is_limited || item.is_limited_unique;
   const hasResale = item.has_resellers || Boolean(item.lowest_resale_price_robux && item.lowest_resale_price_robux > 0);
+  const copyableId = getCopyableId(item);
+  const idLabel = getIdLabel(item.item_type);
   const NameHeading = nameHeadingLevel;
 
   return (
@@ -148,6 +159,25 @@ export function RobloxCatalogItemCard({
                 Resale
               </span>
             ) : null}
+          </div>
+
+          <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-2.5 py-1 text-[11px] font-semibold text-foreground">
+            <span>{idLabel}</span>
+            <span className="font-mono text-[0.78rem]">{copyableId}</span>
+            <CopyCodeButton
+              code={String(copyableId)}
+              tone="surface"
+              size="sm"
+              analytics={{
+                event: "marketplace_item_id_copy",
+                params: {
+                  asset_id: copyableId,
+                  item_type: item.item_type,
+                  category: item.category ?? "",
+                  subcategory: item.subcategory ?? ""
+                }
+              }}
+            />
           </div>
 
           <div className="rounded-md border border-border/60 bg-background/40 px-3 py-2.5">
