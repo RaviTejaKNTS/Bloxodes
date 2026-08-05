@@ -14,6 +14,7 @@ type HealthSnapshot = {
     stats_never_refreshed: number;
     stats_stale_24h: number;
     stats_stale_7d: number;
+    stats_overdue: number;
     broken_media: number;
     duplicate_canonical_keys: number;
     tiers: Record<string, number>;
@@ -61,7 +62,7 @@ function check(name: string, value: unknown, status: Check["status"], expectatio
 function evaluate(snapshot: HealthSnapshot): Check[] {
   const active = Math.max(1, Number(snapshot.catalog.active_total));
   const neverMetadataRatio = Number(snapshot.catalog.metadata_never_verified) / active;
-  const staleStatsRatio = Number(snapshot.catalog.stats_stale_7d) / active;
+  const overdueStatsRatio = Number(snapshot.catalog.stats_overdue) / active;
   const indexAge = ageHours(snapshot.stats.index_latest_at);
   const freeAge = ageHours(snapshot.free_items.latest_verified_at);
   const discoveryFinishedAt = (snapshot.latest_discovery?.finished_at as string | null) ?? null;
@@ -70,7 +71,7 @@ function evaluate(snapshot: HealthSnapshot): Check[] {
   return [
     check("catalog_growth", snapshot.catalog.discovered_24h, snapshot.catalog.discovered_24h > 0 ? "pass" : "warn", "> 0 items discovered in 24h"),
     check("metadata_coverage", neverMetadataRatio, neverMetadataRatio <= 0.02 ? "pass" : neverMetadataRatio <= 0.1 ? "warn" : "fail", "<= 2% never verified"),
-    check("stats_freshness_7d", staleStatsRatio, staleStatsRatio <= 0.05 ? "pass" : staleStatsRatio <= 0.2 ? "warn" : "fail", "<= 5% stale over 7d"),
+    check("stats_refresh_sla", overdueStatsRatio, overdueStatsRatio <= 0.05 ? "pass" : overdueStatsRatio <= 0.2 ? "warn" : "fail", "<= 5% past tier-specific refresh due time"),
     check("queue_expired_leases", snapshot.queue.expired_leases, snapshot.queue.expired_leases === 0 ? "pass" : "fail", "0 expired leases"),
     check("queue_dead", snapshot.queue.dead, snapshot.queue.dead === 0 ? "pass" : "warn", "0 dead jobs"),
     check("canonical_duplicates", snapshot.catalog.duplicate_canonical_keys, snapshot.catalog.duplicate_canonical_keys === 0 ? "pass" : "warn", "0 legacy duplicate keys"),

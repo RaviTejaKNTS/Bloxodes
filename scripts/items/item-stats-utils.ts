@@ -494,16 +494,16 @@ export function assignItemStatsTier(row: {
     return { tier: "NEW", reason: "thumbnail_http_error", refreshHours: 1 };
   }
   if ((row.favorite_count ?? 0) >= 100_000 || (row.lowest_resale_price_robux ?? 0) >= 10_000) {
-    return { tier: "HOT", reason: "high_value_or_favorites", refreshHours: 2 };
+    return { tier: "HOT", reason: "high_value_or_favorites", refreshHours: 24 };
   }
   if (row.has_resellers || (row.lowest_resale_price_robux ?? 0) > 0 || row.collectible_item_id || row.is_limited || row.is_limited_unique) {
-    return { tier: "HOT", reason: "resale_or_collectible", refreshHours: 2 };
+    return { tier: "WARM", reason: "resale_or_collectible", refreshHours: 504 };
   }
   if ((row.favorite_count ?? 0) >= 10_000) {
-    return { tier: "WARM", reason: "moderate_favorites", refreshHours: 12 };
+    return { tier: "WARM", reason: "moderate_favorites", refreshHours: 504 };
   }
   if (!row.name || !row.category || !row.subcategory || row.favorite_count == null || !row.last_item_stats_refreshed_at) {
     return { tier: "NEW", reason: "missing_or_never_refreshed", refreshHours: 1 };
   }
-  return { tier: "COLD", reason: "long_tail", refreshHours: 72 };
+  return { tier: "COLD", reason: "long_tail", refreshHours: 2_160 };
 }
