@@ -1,0 +1,47 @@
+{
+  "universe_id": 10356701370,
+  "wiki_slug": "build-a-base-and-steal",
+  "collection_slug": "pets",
+  "code": "build-a-base-and-steal-pets",
+  "display_name": "Pets",
+  "title": "All {count} Pets in Build a Base and Steal",
+  "seo_title": "All {count} Build a Base and Steal Pets for Rebirth",
+  "meta_description": "Compare every named rebirth pet in Build a Base and Steal, see which tier each one gates, and learn when to roll, steal, or keep pets before you reset.",
+  "intro_md": "Pets are your cash engine in Build a Base and Steal. Roll them from the Egg Mystery platform, pay to claim them into your base, and they earn money while you build, steal, or go offline. Every rebirth tier names specific pets you must hold in your base when you confirm the reset, so knowing which names gate which tier saves you from rolling the same gate pet twice.",
+  "description_md": "## How rebirth pets work\n\nRebirth is the long-term luck multiplier in Build a Base and Steal. Open the rebirth panel on the left side of the screen when you have enough cash and the named pets sitting in your base. Confirming rebirth wipes your current pets and resets your short-term income, but you keep permanent Pet Luck, higher max pet slots, extra base floors, and unlocked gear.\n\nThe named pet requirement is strict. A pet you rolled earlier does not count if it is not in your base at confirm time. Pair pets are common in early and mid tiers, so plan for two slots before you spend on the money threshold.\n\n## Rolling at the Egg Mystery\n\nThe Egg Mystery platform is the main roll loop. Each roll shows a pet preview, and you pay a claim cost in cash to add it to your base. Pet Luck, raised through rebirth and related upgrades, shifts rolls toward rarer names over time.\n\nDo not reroll away a pet you still need for an upcoming rebirth tier. Dragon, Unicorn, and other late gate names are painful to see vanish from the roll window when you are one tier away.\n\n## Stealing pets from other bases\n\nStealing is a full obtain path alongside rolling. Walk into another player's plot with the right gear, grab a pet, and sprint back to your conveyor before their defenses wake up. Valuable gate pets on busy servers are common raid targets, which cuts both ways: stealing can skip hours of rolling, but your own gate pets need layered walls, traps, and gear before you attempt rebirth.\n\nOffline earnings still apply to pets left in a defended base, so protecting income pets matters even when you are not in the server.\n\n## Progression by rebirth band\n\nEarly tiers ask for familiar animals like Cat, Chicken, Bat, and Bunny. Mid tiers move into exotics such as Lion, Mammoth, Yi Qi, and Gargoyle Bat. High tiers bring myth-style names like Sphinx, Hydra, Qilin, Dragon, and Unicorn. Endgame tiers add Golden mutation requirements and single-pet gates.\n\n| Band | What changes | Practical focus |\n| --- | --- | --- |\n| Early rebirth pets | Two-pet gates, low rebirth count | Learn the in-base rule and basic base layout before rushing rebirth |\n| Mid rebirth pets | Higher cash thresholds, stronger steal targets | Invest in Pet Luck and defense before rare names become mandatory |\n| High rebirth pets | Top standard names, prime raid value | Park gate pets deep inside the base and rebirth only when both names are secure |\n| Endgame & Golden pets | Golden mutations and single-pet tiers | Hunt mutated versions, not the base pets you already used earlier |\n\n## Golden mutations and endgame gates\n\nRebirth 13 and beyond stops being a simple name check. Golden Kitsune, Golden Dragon, and Golden Unicorn must be the mutated versions in your base, not the standard pets you may already own from earlier tiers. Gnome and the Fairy plus Mermaid pair close out the current max rebirth track.\n\nTreat Golden pets like a separate hunt. Roll luck, watch for mutation visuals on the Egg Mystery preview, or steal a mutated pet from a player who already landed one.\n\n## Bat and Gargoyle Bat: pets, not weapons\n\nTwo names collide with gear naming. The Bat pet and Gargoyle Bat pet are income pets from the roll or steal loop. Wooden Bat, Steel Bat, Cobalt Bat, and other melee bats from the gear shop are held weapons for stealing and defense. If you are hunting a rebirth gate, you want the pet row, not a shop bat.\n\n## Common mistakes\n\n- Confirming rebirth while a gate pet is still on the Egg Mystery preview or in transit, not in a base slot.\n- Rerolling a rare gate pet because the claim cost feels high in the moment.\n- Using a standard Dragon or Unicorn for a Golden-tier rebirth that requires the mutated version.\n- Leaving freshly rolled gate pets on the outer floor where a six-player server can grab them in one trip.\n- Confusing gear bats with the Bat or Gargoyle Bat pets required for rebirth.",
+  "how_it_works_md": "Each card shows the rebirth tier that needs the pet, how that pet fits the gate (required pair, Golden mutation, or single-pet tier), where it usually comes from, and short obtain notes. Rebirth is the tier number chip. Rebirth role highlights whether the pet is a standard gate, a Golden mutation requirement, or a solo endgame gate. Source covers the Egg Mystery roll path and stealing from other bases.",
+  "description_json": {
+    "Early rebirth pets": "These are the first rebirth gates where you learn the core rule: both named pets must be in your base when you confirm, and rebirth clears every pet afterward. Permanent Pet Luck and defense upgrades stay, so early resets are about learning timing more than chasing perfect rolls.",
+    "Mid rebirth pets": "Mid tiers raise cash thresholds and introduce rarer animal and prehistoric names. Pet Luck investment starts paying off here, and stealing becomes a realistic shortcut when another plot already holds a gate pet you need.",
+    "High rebirth pets": "High rebirth pets are top standard names with serious raid value. Treat them as base-defense projects: secure both gate pets deep inside layered defenses before you open the rebirth panel.",
+    "Endgame & Golden pets": "Endgame gates add Golden mutation requirements and single-pet tiers. You need the mutated Golden Kitsune, Golden Dragon, or Golden Unicorn where noted, not the standard versions used in earlier rebirths."
+  },
+  "faq_json": [
+    {
+      "q": "Do rebirth pets need to be in my base when I confirm?",
+      "a": "Yes. The named pets must be sitting in your base slots at confirm time. A pet you rolled earlier but never claimed, or one you are still carrying, does not count toward the rebirth requirement."
+    },
+    {
+      "q": "What happens to my pets when I rebirth?",
+      "a": "Rebirth wipes your current pets and resets short-term income, but you keep permanent Pet Luck, higher max pet slots, extra base floors, unlocked gear, and any defense blocks you already placed. Plan which gate pets to secure again after the reset."
+    },
+    {
+      "q": "Is the Bat pet the same as bat weapons from the shop?",
+      "a": "No. Bat and Gargoyle Bat are income pets tied to rebirth gates. Wooden Bat, Steel Bat, Cobalt Bat, and other shop bats are gear weapons for stealing and defense. The names overlap, but the rebirth requirement is always the pet."
+    },
+    {
+      "q": "What are Golden mutation pets?",
+      "a": "Golden mutation pets are mutated versions of standard pets with a visible Golden treatment. Rebirth 13 and Rebirth 14 require Golden Kitsune, Golden Dragon, and Golden Unicorn specifically, not the base pets you may already own from earlier tiers."
+    },
+    {
+      "q": "Can I steal a pet instead of rolling it?",
+      "a": "Yes. Stealing from another player's base is a valid way to obtain gate pets, especially rare mid and high-tier names. Defend your own gate pets the same way, because other players can steal them too."
+    },
+    {
+      "q": "When is a good time to rebirth?",
+      "a": "Rebirth when you have the cash threshold shown in the rebirth panel plus every named pet already in your base. Rushing before both pets are secure wastes the reset, while waiting too long slows permanent Pet Luck growth that makes future rolls and income easier."
+    }
+  ],
+  "wiki_md": "Pets earn passive cash from your base in Build a Base and Steal. Roll them at the Egg Mystery platform or steal them from other players, then defend them while they generate income online or offline. Rebirth resets your pets but permanently raises Pet Luck, and each tier names exact pets that must sit in your base when you confirm the reset.",
+  "is_published": true
+}
