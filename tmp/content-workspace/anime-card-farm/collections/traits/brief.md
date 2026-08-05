@@ -85,7 +85,7 @@ Data readiness:
 - Chip fields: `rollChance`, `cashMultiplier`, `damageMultiplier`, `healthMultiplier`
 - Detail fields: `cardSummary`
 - Field consistency: yes; all 17 rows have the same public keys, and every unchanged stat is explicitly `1x`
-- Image needed: yes, investigate whether the in-game trait menu exposes clean, distinct per-trait icons; use an intentional text-only collection if it does not
+- Image needed: no; image research found only partial trait-menu screenshots with embedded glyphs, not a clean complete standalone icon set, so the accepted presentation is text-only
 - Image field: `items[].system.image`
 - Hidden/source/dev fields absent from public item data: yes
 - Sort order: `items[].system.sortOrder`
@@ -97,3 +97,15 @@ Data readiness:
 - Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection traits`
 - Checker result: pass; 17 items, section counts 4/3/10, 17/17 card summaries; expected warning for 0/17 images
 - Ready for images: yes
+
+Image readiness:
+- Image field: `items[].system.image`
+- Expected image count: 0 for the accepted text-only presentation; 17 would be required before enabling per-trait card images
+- Images found: 0 reusable standalone item images
+- Images missing: 17 accepted gaps — Sovereign, Almighty, Phoenix, Emperor, Assassin, Berserk, Tank, Rich, Fortune I–III, Vigor I–III, and Strength I–III
+- Image sources used: The AllThings.How trait guide and its source screenshots were inspected. The in-game Traits Machine screenshot shows small color-coded glyphs for only Fortune I–II, Vigor I–II, and Strength I–II. Those glyphs are embedded in one scrolling UI screenshot rather than supplied as standalone files, and no complete rare-trait icon set was found. Exact-name searches for Sovereign, Almighty, Phoenix, and Emperor returned no clean Anime Card Farm icon assets and mostly surfaced wrong-game imagery.
+- Public image path: none; no `apps/web/public/Anime Card Farm/Traits/` directory is needed for this text-only collection
+- Dataset image paths updated: no; all 17 `items[].system.image` values remain `null` intentionally
+- Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection traits`
+- Checker result: pass; 17 items, 17/17 card summaries, and 0/17 images with the expected non-blocking no-images warning
+- Ready for writing: yes; the complete chance and multiplier fields provide the comparison value, and fabricated, unrelated, screenshot-cropped, or wrong-game art would reduce accuracy
