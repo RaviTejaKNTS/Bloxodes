@@ -2,7 +2,7 @@ import "../shared/load-env";
 
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { enqueueDiscoveredCatalogItems, internalCatalogItemId, upsertDiscoveredCatalogItems } from "./catalog-discovery-db";
+import { enqueueDiscoveredCatalogItems, internalCatalogItemId, robloxCatalogSortParams, upsertDiscoveredCatalogItems } from "./catalog-discovery-db";
 
 const CATALOG_DETAILS_API = "https://catalog.roblox.com/v1/search/items/details";
 const CATALOG_CATEGORIES_API = "https://catalog.roblox.com/v1/categories";
@@ -638,7 +638,7 @@ async function run() {
             const params: Record<string, string> = {
               category: CATEGORY,
               subcategory,
-              sortType,
+              ...robloxCatalogSortParams(sortType),
               limit: String(LIMIT)
             };
             if (keyword) params.keyword = keyword;

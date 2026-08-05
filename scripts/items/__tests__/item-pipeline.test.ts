@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { internalCatalogItemId } from "../../catalog/catalog-discovery-db";
+import { internalCatalogItemId, robloxCatalogSortParams } from "../../catalog/catalog-discovery-db";
 import {
   assignItemStatsTier,
   fetchCatalogItemDetailsBatch,
@@ -15,6 +15,13 @@ test("canonical item identity keeps asset IDs positive and bundle IDs negative",
   assert.equal(internalCatalogItemId(123, "Asset"), 123);
   assert.equal(internalCatalogItemId(123, "Bundle"), -123);
   assert.equal(robloxTargetId({ asset_id: -123, item_type: "Bundle" }), 123);
+});
+
+test("catalog discovery maps friendly sort labels to Roblox's numeric API enum", () => {
+  assert.deepEqual(robloxCatalogSortParams("MostFavorited"), { sortType: "1", sortAggregation: "5" });
+  assert.deepEqual(robloxCatalogSortParams("BestSelling"), { sortType: "2", sortAggregation: "5" });
+  assert.deepEqual(robloxCatalogSortParams("RecentlyUpdated"), { sortType: "3" });
+  assert.throws(() => robloxCatalogSortParams("NotARealSort"));
 });
 
 test("item stats tiers match the universe NEW HOT WARM COLD vocabulary", () => {

@@ -2,7 +2,7 @@ import "../shared/load-env";
 
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { enqueueDiscoveredCatalogItems, upsertDiscoveredCatalogItems } from "./catalog-discovery-db";
+import { enqueueDiscoveredCatalogItems, robloxCatalogSortParams, upsertDiscoveredCatalogItems } from "./catalog-discovery-db";
 
 const CATALOG_DETAILS_API = "https://catalog.roblox.com/v1/search/items/details";
 const USER_AGENT = "BloxodesCatalogBot/1.0";
@@ -469,7 +469,7 @@ async function run() {
           const params: Record<string, string> = {
             category: "All",
             keyword,
-            sortType,
+            ...robloxCatalogSortParams(sortType),
             limit: String(LIMIT)
           };
           if (cursor) params.cursor = cursor;
