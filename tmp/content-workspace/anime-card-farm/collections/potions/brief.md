@@ -41,7 +41,7 @@ Page layout plan:
 - Image field: `image`
 - Sort order: Section order above, then family order Cash → Production / Luck → Mutation / Time, then numeric tier ascending within each family.
 - Section note needs: Economy & Production should state that exact Cash/Production formulas and offline behavior remain unverified. Pull & Mutation Odds should distinguish general Luck from Mutation Luck without claiming exact rates. Pack Timing should say sources describe reduced pack-open wait time but do not provide duration or multiplier. A page-level note should explain that only publicly evidenced variants are listed and missing tier combinations are not assumed.
-- Renderer/config changes needed: yes — this is a new game/collection registration and will need the Anime Card Farm group/config, dataset path, section labels/order, displayed fields, and image path wired to the generic game-collection renderer during the later data phase.
+- Renderer/config changes needed: yes — completed for the data phase through the shared Anime Card Farm group, dataset path, section/display contract, and generic renderer registration; row images remain for the approved image phase.
 
 Data readiness:
 - Dataset file: `data/Anime Card Farm/potions.json`

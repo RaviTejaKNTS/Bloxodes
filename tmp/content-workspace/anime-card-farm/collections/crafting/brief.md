@@ -41,3 +41,35 @@ Page layout plan:
 - Sort order: Ascending progression in the source-backed recipe order, from Flame Pillar to Dark Saber. Do not alphabetize; the income ladder is the useful comparison order.
 - Section note needs: Each section should briefly explain that the bands are browsing aids based on listed output scale, not official in-game rarity tiers. The endgame note may identify Dark Saber as the highest-output card in the reviewed 11-row source while avoiding a timeless “best in the game” claim.
 - Renderer/config changes needed: yes for registering the new game/collection dataset, labels, sections, and display fields; no custom renderer component is expected if the generic game-collection cards support a summary plus four key-value fields.
+
+Data readiness:
+- Dataset file: `data/Anime Card Farm/crafting.json`
+- Item count: 11
+- Source item count: 11
+- Dataset shape: v2 wrapped `{ meta, items[].item, items[].system }` yes
+- Public item fields: `name`, `ingredients`, `baseCardCopies`, `cashCost`, `moneyPerSecond`, `cardSummary`
+- System fields: `slug`, `section`, `sortOrder`, `image` only yes
+- Metadata: `schemaVersion`, `itemFields`, `columns`, `display.groupLabel`, `display.sectionOrder`, `display.tableFields`, `display.cardFields`, `display.fieldPresentation`
+- Section source: Curated browsing bands based on the primary source's ascending recipe/output order; these are not claimed as official in-game tiers.
+- Section counts: `Early Evolution Recipes` 4; `Advanced Evolution Recipes` 3; `Endgame Evolution Recipes` 4
+- Section order: `Early Evolution Recipes`, `Advanced Evolution Recipes`, `Endgame Evolution Recipes`
+- Card fields: `ingredients`, `baseCardCopies`, `cashCost`, `moneyPerSecond`; `cardSummary` is the card description
+- Card/table field order: Cards show ingredients, base-card count, Cash cost, then money per second. Tables use the same order followed by the recipe summary.
+- Card summary coverage: 11/11
+- Field presentation: Explicit collection-level labels and kinds are defined for all five display fields.
+- Highlight fields: none; no source-backed status or recommendation field is needed
+- Chip fields: `baseCardCopies`, `cashCost`, `moneyPerSecond`
+- Detail fields: `ingredients`, `cardSummary`
+- Field consistency: All 11 rows contain the same five public comparison fields, with exact source Cash and money-per-second suffixes and precision preserved.
+- Image needed: yes
+- Image field: `items[].system.image`
+- Hidden/source/dev fields absent from public item data: yes
+- Sort order: `items[].system.sortOrder`, ascending from Flame Pillar (10) through Dark Saber (110)
+- description_json section keys: Later writing must use the three exact rendered section labels; no `final.json` exists at the data stage.
+- Renderer/config support: The shared Anime Card Farm group registers `crafting`; the v2 display contract uses the generic renderer and needs no custom component.
+- Missing items: none
+- Audit command: `npm run audit:game-collection-datasets:v2 -- --game anime-card-farm --collection crafting`
+- Audit result: pending
+- Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection crafting`
+- Checker result: pending
+- Ready for images: pending audit and checker
