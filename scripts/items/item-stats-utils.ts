@@ -1,4 +1,4 @@
-export const ITEM_STATS_TIERS = ["NEW", "HOT", "WARM", "COLD", "TRADE", "STALE", "BROKEN_MEDIA"] as const;
+export const ITEM_STATS_TIERS = ["NEW", "HOT", "WARM", "COLD"] as const;
 export type ItemStatsTier = (typeof ITEM_STATS_TIERS)[number];
 
 export type ItemStatsSourceRow = {
@@ -76,6 +76,13 @@ const RESALE_DATA_API = (assetId: number) => `https://economy.roblox.com/v1/asse
 
 let csrfToken: string | null = null;
 let lastRequestAt = 0;
+let requestGate: Promise<void> = Promise.resolve();
+
+export function resetRobloxRequestStateForTests() {
+  csrfToken = null;
+  lastRequestAt = 0;
+  requestGate = Promise.resolve();
+}
 
 export class RobloxRateLimitError extends Error {
   readonly status = 429;
@@ -87,6 +94,24 @@ export class RobloxRateLimitError extends Error {
     this.retryAfterMs = retryAfterMs;
   }
 }
+
+export class RobloxHttpError extends Error {
+  readonly status: number | null;
+  readonly retryAfterMs: number | null;
+  readonly retryable: boolean;
+
+  constructor(message: string, options: { status?: number | null; retryAfterMs?: number | null; retryable?: boolean } = {}) {
+    super(message);
+    this.name = "RobloxHttpError";
+    this.status = options.status ?? null;
+    this.retryAfterMs = options.retryAfterMs ?? null;
+    this.retryable = options.retryable ?? false;
+  }
+}
+
+export type ResaleFetchResult =
+  | { kind: "success"; payload: ResaleDataResponse }
+  | { kind: "unsupported"; payload: ResaleDataResponse | null; status: 400 | 404 };
 
 export function toBoolean(value: string | undefined, fallback: boolean) {
   if (value == null || value === "") return fallback;
@@ -144,9 +169,19 @@ export function sleep(ms: number) {
 }
 
 export async function throttle(minIntervalMs: number) {
-  const waitMs = Math.max(0, lastRequestAt + minIntervalMs - Date.now());
-  if (waitMs > 0) await sleep(waitMs);
-  lastRequestAt = Date.now();
+  let release: () => void = () => undefined;
+  const previous = requestGate;
+  requestGate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await previous;
+  try {
+    const waitMs = Math.max(0, lastRequestAt + minIntervalMs - Date.now());
+    if (waitMs > 0) await sleep(waitMs);
+    lastRequestAt = Date.now();
+  } finally {
+    release();
+  }
 }
 
 export function chunkArray<T>(items: T[], size: number): T[][] {
@@ -161,7 +196,20 @@ function retryAfterMs(response: Response) {
   const header = response.headers.get("retry-after");
   if (!header) return null;
   const seconds = Number(header);
-  return Number.isFinite(seconds) ? Math.max(0, seconds * 1000) : null;
+  if (Number.isFinite(seconds)) return Math.max(0, seconds * 1000);
+  const dateMs = Date.parse(header);
+  return Number.isFinite(dateMs) ? Math.max(0, dateMs - Date.now()) : null;
+}
+
+function retryDelay(attempt: number, response?: Response | null) {
+  const serverDelay = response ? retryAfterMs(response) : null;
+  const exponential = Math.min(60_000, 1_500 * 2 ** Math.max(0, attempt));
+  const jittered = Math.round(exponential * (0.75 + Math.random() * 0.5));
+  return Math.max(serverDelay ?? 0, jittered);
+}
+
+function isRetryableStatus(status: number) {
+  return status === 408 || status === 425 || status === 429 || status >= 500;
 }
 
 export async function fetchCatalogItemDetailsBatch(
@@ -187,7 +235,19 @@ export async function fetchCatalogItemDetailsBatch(
     };
     if (csrfToken) headers["x-csrf-token"] = csrfToken;
 
-    let response = await fetch(CATALOG_ITEM_DETAILS_BATCH_API, { method: "POST", headers, body });
+    let response: Response;
+    try {
+      response = await fetch(CATALOG_ITEM_DETAILS_BATCH_API, { method: "POST", headers, body });
+    } catch (error) {
+      if (attempt >= options.maxRetries) {
+        throw new RobloxHttpError(`Catalog item details network failure: ${error instanceof Error ? error.message : String(error)}`, {
+          retryable: true
+        });
+      }
+      await sleep(retryDelay(attempt));
+      attempt += 1;
+      continue;
+    }
     if (response.status === 403) {
       const token = response.headers.get("x-csrf-token");
       if (token) {
@@ -206,9 +266,10 @@ export async function fetchCatalogItemDetailsBatch(
     }
 
     const rateLimitRetryMs = response.status === 429 ? retryAfterMs(response) : null;
-    if (response.status === 429 && attempt < options.maxRetries) {
+    if (isRetryableStatus(response.status) && attempt < options.maxRetries) {
+      const delay = retryDelay(attempt, response);
       attempt += 1;
-      await sleep(rateLimitRetryMs ?? 5_000 * attempt);
+      await sleep(delay);
       continue;
     }
 
@@ -216,7 +277,11 @@ export async function fetchCatalogItemDetailsBatch(
     if (response.status === 429) {
       throw new RobloxRateLimitError(`Catalog item details rate limited (429): ${text.slice(0, 180)}`, rateLimitRetryMs);
     }
-    throw new Error(`Catalog item details failed (${response.status}): ${text.slice(0, 180)}`);
+    throw new RobloxHttpError(`Catalog item details failed (${response.status}): ${text.slice(0, 180)}`, {
+      status: response.status,
+      retryAfterMs: retryAfterMs(response),
+      retryable: isRetryableStatus(response.status)
+    });
   }
 }
 
@@ -227,19 +292,77 @@ export async function fetchAssetEconomyDetails(
   let attempt = 0;
   while (true) {
     await throttle(options.minRequestMs);
-    const response = await fetch(ECONOMY_ASSET_DETAILS_API(assetId), {
-      headers: { accept: "application/json", "user-agent": options.userAgent }
-    });
+    let response: Response;
+    try {
+      response = await fetch(ECONOMY_ASSET_DETAILS_API(assetId), {
+        headers: { accept: "application/json", "user-agent": options.userAgent }
+      });
+    } catch (error) {
+      if (attempt >= options.maxRetries) {
+        throw new RobloxHttpError(`Economy asset details network failure for ${assetId}: ${error instanceof Error ? error.message : String(error)}`, {
+          retryable: true
+        });
+      }
+      await sleep(retryDelay(attempt));
+      attempt += 1;
+      continue;
+    }
     if (response.ok) {
       return (await response.json().catch(() => null)) as Record<string, unknown> | null;
     }
     if (response.status === 404 || response.status === 400) return null;
-    if (response.status === 429 && attempt < options.maxRetries) {
+    if (isRetryableStatus(response.status) && attempt < options.maxRetries) {
+      const delay = retryDelay(attempt, response);
       attempt += 1;
-      await sleep(retryAfterMs(response) ?? 5_000 * attempt);
+      await sleep(delay);
       continue;
     }
-    throw new Error(`Economy asset details failed for ${assetId} (${response.status})`);
+    throw new RobloxHttpError(`Economy asset details failed for ${assetId} (${response.status})`, {
+      status: response.status,
+      retryAfterMs: retryAfterMs(response),
+      retryable: isRetryableStatus(response.status)
+    });
+  }
+}
+
+export async function fetchResaleDataResult(
+  assetId: number,
+  options: { userAgent: string; minRequestMs: number; maxRetries: number }
+): Promise<ResaleFetchResult> {
+  let attempt = 0;
+  while (true) {
+    await throttle(options.minRequestMs);
+    let response: Response;
+    try {
+      response = await fetch(RESALE_DATA_API(assetId), {
+        headers: { accept: "application/json", "user-agent": options.userAgent }
+      });
+    } catch (error) {
+      if (attempt >= options.maxRetries) {
+        throw new RobloxHttpError(`Resale data network failure for ${assetId}: ${error instanceof Error ? error.message : String(error)}`, {
+          retryable: true
+        });
+      }
+      await sleep(retryDelay(attempt));
+      attempt += 1;
+      continue;
+    }
+    const payload = (await response.json().catch(() => null)) as ResaleDataResponse | null;
+    if (response.ok) return { kind: "success", payload: payload ?? {} };
+    if (response.status === 400 || response.status === 404) {
+      return { kind: "unsupported", payload, status: response.status };
+    }
+    if (isRetryableStatus(response.status) && attempt < options.maxRetries) {
+      const delay = retryDelay(attempt, response);
+      attempt += 1;
+      await sleep(delay);
+      continue;
+    }
+    throw new RobloxHttpError(`Resale data failed for ${assetId} (${response.status})`, {
+      status: response.status,
+      retryAfterMs: retryAfterMs(response),
+      retryable: isRetryableStatus(response.status)
+    });
   }
 }
 
@@ -247,42 +370,46 @@ export async function fetchResaleData(
   assetId: number,
   options: { userAgent: string; minRequestMs: number; maxRetries: number }
 ): Promise<ResaleDataResponse | null> {
-  let attempt = 0;
-  while (true) {
-    await throttle(options.minRequestMs);
-    const response = await fetch(RESALE_DATA_API(assetId), {
-      headers: { accept: "application/json", "user-agent": options.userAgent }
-    });
-    const payload = (await response.json().catch(() => null)) as ResaleDataResponse | null;
-    if (response.ok) return payload;
-    if (response.status === 400 || response.status === 404) return payload;
-    if (response.status === 429 && attempt < options.maxRetries) {
-      attempt += 1;
-      await sleep(retryAfterMs(response) ?? 5_000 * attempt);
-      continue;
-    }
-    throw new Error(`Resale data failed for ${assetId} (${response.status})`);
-  }
+  const result = await fetchResaleDataResult(assetId, options);
+  return result.payload;
 }
 
 async function fetchThumbnailEntries(url: string, options: { userAgent: string; maxRetries: number }): Promise<ThumbnailEntry[]> {
   let attempt = 0;
   while (true) {
-    const response = await fetch(url, { headers: { accept: "application/json", "user-agent": options.userAgent } });
+    await throttle(0);
+    let response: Response;
+    try {
+      response = await fetch(url, { headers: { accept: "application/json", "user-agent": options.userAgent } });
+    } catch (error) {
+      if (attempt >= options.maxRetries) {
+        throw new RobloxHttpError(`Thumbnail network failure: ${error instanceof Error ? error.message : String(error)}`, {
+          retryable: true
+        });
+      }
+      await sleep(retryDelay(attempt));
+      attempt += 1;
+      continue;
+    }
     if (response.ok) {
       const payload = (await response.json().catch(() => null)) as { data?: ThumbnailEntry[] } | null;
       return Array.isArray(payload?.data) ? payload.data : [];
     }
     const rateLimitRetryMs = response.status === 429 ? retryAfterMs(response) : null;
-    if (response.status === 429 && attempt < options.maxRetries) {
+    if (isRetryableStatus(response.status) && attempt < options.maxRetries) {
+      const delay = retryDelay(attempt, response);
       attempt += 1;
-      await sleep(rateLimitRetryMs ?? 2_000 * attempt);
+      await sleep(delay);
       continue;
     }
     if (response.status === 429) {
       throw new RobloxRateLimitError(`Thumbnail request rate limited (429)`, rateLimitRetryMs);
     }
-    throw new Error(`Thumbnail request failed (${response.status})`);
+    throw new RobloxHttpError(`Thumbnail request failed (${response.status})`, {
+      status: response.status,
+      retryAfterMs: retryAfterMs(response),
+      retryable: isRetryableStatus(response.status)
+    });
   }
 }
 
@@ -350,13 +477,13 @@ export function assignItemStatsTier(row: {
   thumbnail_http_status?: number | null;
 }): { tier: ItemStatsTier; reason: string; refreshHours: number } {
   if ((row.thumbnail_http_status ?? 0) >= 400) {
-    return { tier: "BROKEN_MEDIA", reason: "thumbnail_http_error", refreshHours: 1 };
-  }
-  if (row.has_resellers || (row.lowest_resale_price_robux ?? 0) > 0 || row.collectible_item_id || row.is_limited || row.is_limited_unique) {
-    return { tier: "TRADE", reason: "resale_or_collectible", refreshHours: 1 };
+    return { tier: "NEW", reason: "thumbnail_http_error", refreshHours: 1 };
   }
   if ((row.favorite_count ?? 0) >= 100_000 || (row.lowest_resale_price_robux ?? 0) >= 10_000) {
     return { tier: "HOT", reason: "high_value_or_favorites", refreshHours: 2 };
+  }
+  if (row.has_resellers || (row.lowest_resale_price_robux ?? 0) > 0 || row.collectible_item_id || row.is_limited || row.is_limited_unique) {
+    return { tier: "HOT", reason: "resale_or_collectible", refreshHours: 2 };
   }
   if ((row.favorite_count ?? 0) >= 10_000) {
     return { tier: "WARM", reason: "moderate_favorites", refreshHours: 12 };

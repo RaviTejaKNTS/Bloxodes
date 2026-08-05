@@ -1436,9 +1436,14 @@ async function isStatsItemIndexAvailable() {
     try {
       const { data, error } = await supabaseAdmin()
         .from("stats_item_current_index")
-        .select("asset_id")
-        .limit(1);
-      return !error && (data?.length ?? 0) > 0;
+        .select("asset_id,indexed_at")
+        .order("indexed_at", { ascending: false, nullsFirst: false })
+        .limit(1)
+        .maybeSingle();
+      if (error || !data?.indexed_at) return false;
+      const indexedAt = Date.parse(data.indexed_at);
+      const maxAgeMs = Math.max(15, Number(process.env.STATS_ITEM_INDEX_MAX_AGE_MINUTES ?? "120")) * 60 * 1000;
+      return Number.isFinite(indexedAt) && Date.now() - indexedAt <= maxAgeMs;
     } catch {
       return false;
     }

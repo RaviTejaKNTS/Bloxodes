@@ -34,4 +34,18 @@
 
 0 7 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh free-items-candidate-refresh "export ALLOW_PROD_FREE_ITEMS_IMPORT=true ROBLOXDEN_SKIP_FAVORITE_BACKFILL=true; npm run import:free-item-candidates"
 30 7 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh free-items-refresh "export ROBLOX_FREE_ITEMS_DELAY_MS=650 ROBLOX_FREE_ITEMS_MAX_RETRIES=6; npm run collect:free-items -- --apply --allow-prod"
+
+# Roblox Marketplace item pipeline. Each stage has its own lock so a slow
+# discovery or index run cannot suppress enrichment, tier refreshes, or audits.
+10 2 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh catalog-items-discovery "export ROBLOX_CATALOG_MIN_REQUEST_MS=1500 ROBLOX_CATALOG_QUERY_DELAY_MS=1800 ROBLOX_CATALOG_ENQUEUE_REFRESH=true; npm run collect:catalog-items"
+2,17,32,47 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh catalog-items-enrichment "export ROBLOX_CATALOG_ENRICH_LIMIT=200 ROBLOX_CATALOG_ENRICH_MAX_TOTAL=200 ROBLOX_CATALOG_ENRICH_MIN_REQUEST_MS=1500 ROBLOX_CATALOG_ENRICH_DETAILS_BATCH=10; npm run enrich:catalog-items"
+5 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-tier "npm run stats:items:tier -- --apply"
+7,22,37,52 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-new "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=1500 ROBLOX_ITEM_STATS_DETAILS_BATCH=10; npm run stats:items:refresh -- --tier NEW --limit 100 --skip-index-refresh"
+12 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-hot "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=1500 ROBLOX_ITEM_STATS_DETAILS_BATCH=10; npm run stats:items:refresh -- --tier HOT --limit 200 --skip-index-refresh"
+27 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-warm "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=1500 ROBLOX_ITEM_STATS_DETAILS_BATCH=10; npm run stats:items:refresh -- --tier WARM --limit 400 --skip-index-refresh"
+42 3 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-cold "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=1500 ROBLOX_ITEM_STATS_DETAILS_BATCH=10; npm run stats:items:refresh -- --tier COLD --limit 800 --skip-index-refresh"
+18 */3 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-resale "export ROBLOX_ITEM_RESALE_MIN_REQUEST_MS=3000; npm run stats:items:resale -- --limit 50 --max-age-hours 24"
+45 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-index "npm run stats:items:index:refresh"
+25 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-rollup "npm run stats:items:rollup-daily -- --date yesterday --finalize"
+55 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-audit "npm run stats:items:audit -- --strict"
 # BLOXODES_SCHEDULED_AUTOMATION_END

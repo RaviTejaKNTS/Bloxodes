@@ -2,6 +2,7 @@ import "../shared/load-env";
 
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { enqueueDiscoveredCatalogItems, upsertDiscoveredCatalogItems } from "./catalog-discovery-db";
 
 const CATALOG_DETAILS_API = "https://catalog.roblox.com/v1/search/items/details";
 const USER_AGENT = "BloxodesCatalogBot/1.0";
@@ -362,10 +363,8 @@ function buildCatalogRows(items: CatalogItem[], nowIso: string): CatalogItemRow[
 
 async function upsertCatalogItems(rows: CatalogItemRow[]) {
   if (!rows.length || DRY_RUN) return;
-  const sb = supabaseAdmin();
   for (const chunk of chunkArray(rows, 200)) {
-    const { error } = await sb.from("roblox_catalog_items").upsert(chunk, { onConflict: "asset_id" });
-    if (error) throw new Error(`Failed to upsert makeup catalog items: ${error.message}`);
+    await upsertDiscoveredCatalogItems(chunk, DRY_RUN);
     logInfo(`Upserted ${chunk.length} makeup items into roblox_catalog_items.`);
   }
 }
@@ -384,18 +383,7 @@ async function insertDiscoveryHits(rows: DiscoveryHitRow[]) {
 
 async function enqueueRefresh(assetIds: number[], nowIso: string) {
   if (!assetIds.length || DRY_RUN || !ENQUEUE_REFRESH) return;
-  const sb = supabaseAdmin();
-  const rows = assetIds.map((assetId) => ({
-    asset_id: assetId,
-    priority: "new",
-    next_run_at: nowIso,
-    attempts: 0,
-    last_error: null
-  }));
-  const { error } = await sb
-    .from("roblox_catalog_refresh_queue")
-    .upsert(rows, { onConflict: "asset_id", ignoreDuplicates: true });
-  if (error) throw new Error(`Failed to enqueue makeup refresh items: ${error.message}`);
+  await enqueueDiscoveredCatalogItems(assetIds, nowIso, DRY_RUN, "makeup_discovery");
   logDebug(`Enqueued ${assetIds.length} makeup assets for refresh.`);
 }
 
@@ -418,7 +406,7 @@ async function createDiscoveryRun(): Promise<string | null> {
   return data.run_id;
 }
 
-async function finishDiscoveryRun(runId: string | null, status: "completed" | "failed", notes?: string) {
+async function finishDiscoveryRun(runId: string | null, status: "completed" | "partial" | "failed", notes?: string) {
   if (DRY_RUN || !runId) return;
   const sb = supabaseAdmin();
   const { error } = await sb
@@ -439,6 +427,8 @@ async function run() {
   const seenQueryHashes = new Set<string>();
   let totalAssets = 0;
   let totalQueries = 0;
+  let successfulQueries = 0;
+  const failedQueries: string[] = [];
 
   logInfo(
     `Makeup discovery config: sortTypes=${sortTypes.length}, keywords=${keywords.length}, limit=${LIMIT}, dryRun=${DRY_RUN}`
@@ -455,11 +445,12 @@ async function run() {
         totalQueries += 1;
         logInfo(`Starting makeup query ${totalQueries}: ${sortType}/${keyword}`);
 
-        let cursor: string | null = null;
-        let page = 0;
-        const seenCursors = new Set<string>();
+        try {
+          let cursor: string | null = null;
+          let page = 0;
+          const seenCursors = new Set<string>();
 
-        while (true) {
+          while (true) {
           if (MAX_PAGES > 0 && page >= MAX_PAGES) break;
           if (MAX_ASSETS > 0 && totalAssets >= MAX_ASSETS) break;
 
@@ -515,18 +506,33 @@ async function run() {
             `Makeup query ${totalQueries} page ${page + 1}: ${data.length} raw items, ${rows.length} makeup items, total makeup hits ${totalAssets}.`
           );
 
-          page += 1;
-          cursor = response.nextPageCursor ?? null;
-          if (!cursor || seenCursors.has(cursor)) break;
-          seenCursors.add(cursor);
+            page += 1;
+            cursor = response.nextPageCursor ?? null;
+            if (!cursor || seenCursors.has(cursor)) break;
+            seenCursors.add(cursor);
+          }
+          successfulQueries += 1;
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          failedQueries.push(`${sortType}/${keyword}: ${message}`);
+          console.warn(`Skipping failed makeup query ${sortType}/${keyword}: ${message}`);
         }
 
         await sleep(withJitter(QUERY_DELAY_MS, RETRY_JITTER_MS));
       }
     }
 
-    await finishDiscoveryRun(runId, "completed", `Collected ${totalAssets} makeup item hits across ${totalQueries} queries.`);
-    logInfo(`Makeup discovery complete. Queries=${totalQueries}, makeup hits=${totalAssets}`);
+    if (successfulQueries === 0 && failedQueries.length > 0) {
+      throw new Error(`Every makeup discovery query failed. First failure: ${failedQueries[0]}`);
+    }
+    const status = failedQueries.length ? "partial" : "completed";
+    const notes = `Collected ${totalAssets} makeup item hits; ${successfulQueries}/${totalQueries} queries succeeded.${
+      failedQueries.length ? ` Failures: ${failedQueries.slice(0, 10).join(" | ")}` : ""
+    }`;
+    await finishDiscoveryRun(runId, status, notes);
+    logInfo(
+      `Makeup discovery ${status}. Queries=${totalQueries}, successful=${successfulQueries}, failed=${failedQueries.length}, makeup hits=${totalAssets}`
+    );
   } catch (error) {
     await finishDiscoveryRun(runId, "failed", (error as Error).message);
     throw error;

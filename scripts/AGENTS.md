@@ -93,12 +93,12 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - `events/`: event ingestion, page seeding, event detail hydration, event guide generation.
 - `music/`: music ID collection, import, enrichment, verification, thumbnails.
 - `items/`: public `/stats/items` automation and read-model maintenance.
-  - `assign-item-stats-tier.ts` classifies Roblox marketplace rows into `NEW`, `HOT`, `WARM`, `COLD`, `TRADE`, or `BROKEN_MEDIA`; it is dry-run by default and writes only with `--apply`.
+  - `assign-item-stats-tier.ts` classifies Roblox marketplace rows into the same four operational tiers used by the universe pipeline: `NEW`, `HOT`, `WARM`, or `COLD`; it is dry-run by default and writes only with `--apply`.
   - `update-item-hourly-stats.ts` refreshes public Roblox catalog detail data, thumbnails, optional economy detail data, and hourly item snapshots. It is lease-aware and prioritizes high-favorite/high-resale due rows within each tier. Use tiered runs such as `npm run stats:items:refresh -- --tier TRADE --limit 180`; use `--asset-id <id>` for targeted repairs.
   - `sync-item-resale-history.ts` fetches Roblox public resale price/volume points for resale-capable asset rows and updates resale freshness markers.
   - `rollup-item-daily-stats.ts` rolls hourly snapshots into daily open/close/min/max rows; use `--date yesterday --finalize` after the UTC day ends.
-  - `rebuild-stats-item-indexes.ts` calls `refresh_stats_item_current_indexes()` and queues `/stats/items` revalidation; run it after bulk item refreshes.
-  - `audit-item-stats-workflow.ts` reports item stats freshness, index coverage, hourly/daily rows, resale coverage, and broken media counts.
+  - `rebuild-stats-item-indexes.ts` calls the advisory-locked `refresh_stats_item_current_indexes()` and queues `/stats/items` revalidation. The hourly refresh uses daily rollups for 24-hour/7-day comparisons, avoids per-item history probes, and processes no more than 2,000 changed/missing index rows per call.
+  - `audit-item-stats-workflow.ts` calls the service-role-only pipeline health RPC and checks discovery, queue leases/dead rows, metadata, thumbnails, free items, tier freshness, hourly/daily/resale data, canonical duplicates, and read-index freshness. Pass `--strict` in automation so failed SLAs return a non-zero exit.
   - Recurring item stats refresh should run on the VPS stats worker beside games stats. GitHub Actions are a manual fallback only because Roblox item endpoints rate-limit shared GitHub runner IPs aggressively.
 - `ops/`: checked-in operational manifests and server runbooks.
   - `check-production-data-readiness.mjs` is an explicit read-only PostgREST HEAD diagnostic. It requires `SUPABASE_URL` (or `NEXT_PUBLIC_SUPABASE_URL`) plus a service-role or anon key, retries transient failures five times, and prints no secrets. It is not part of the daily Docker build.

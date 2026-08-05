@@ -3,91 +3,104 @@ import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
-type CountQuery = any;
+type HealthSnapshot = {
+  generated_at: string;
+  catalog: {
+    active_total: number;
+    discovered_24h: number;
+    metadata_never_verified: number;
+    metadata_stale_7d: number;
+    thumbnail_never_verified: number;
+    stats_never_refreshed: number;
+    stats_stale_24h: number;
+    stats_stale_7d: number;
+    broken_media: number;
+    duplicate_canonical_keys: number;
+    tiers: Record<string, number>;
+    statuses: Record<string, number>;
+  };
+  queue: {
+    total: number;
+    due: number;
+    pending: number;
+    retry: number;
+    processing: number;
+    expired_leases: number;
+    dead: number;
+    oldest_due_at: string | null;
+  };
+  free_items: { direct: number; verified_24h: number; latest_verified_at: string | null };
+  stats: {
+    index_total: number;
+    index_latest_at: string | null;
+    hourly_total: number;
+    hourly_24h: number;
+    hourly_latest_at: string | null;
+    daily_total: number;
+    daily_latest_date: string | null;
+    resale_total: number;
+    resale_latest_date: string | null;
+  };
+  latest_discovery: Record<string, unknown> | null;
+  recent_jobs: Array<Record<string, unknown>>;
+};
 
-async function countRows(table: string, label: string, apply?: (query: CountQuery) => CountQuery) {
-  let query: CountQuery = supabaseAdmin().from(table).select("*", { count: "exact", head: true });
-  if (apply) query = apply(query);
-  const { count, error } = await query;
-  if (error) throw new Error(`${label}: ${error.message}`);
-  return count ?? 0;
+type Check = { name: string; status: "pass" | "warn" | "fail"; value: unknown; expectation: string };
+
+const STRICT = process.argv.includes("--strict");
+
+function ageHours(value: string | null) {
+  if (!value) return Number.POSITIVE_INFINITY;
+  return Math.max(0, (Date.now() - new Date(value).getTime()) / 3_600_000);
 }
 
-async function latestRow(table: string, select: string, orderColumn: string) {
-  const { data, error } = await supabaseAdmin()
-    .from(table)
-    .select(select)
-    .order(orderColumn, { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (error) throw new Error(`${table}: ${error.message}`);
-  return data ?? null;
+function check(name: string, value: unknown, status: Check["status"], expectation: string): Check {
+  return { name, status, value, expectation };
+}
+
+function evaluate(snapshot: HealthSnapshot): Check[] {
+  const active = Math.max(1, Number(snapshot.catalog.active_total));
+  const neverMetadataRatio = Number(snapshot.catalog.metadata_never_verified) / active;
+  const staleStatsRatio = Number(snapshot.catalog.stats_stale_7d) / active;
+  const indexAge = ageHours(snapshot.stats.index_latest_at);
+  const freeAge = ageHours(snapshot.free_items.latest_verified_at);
+  const discoveryFinishedAt = (snapshot.latest_discovery?.finished_at as string | null) ?? null;
+  const discoveryAge = ageHours(discoveryFinishedAt);
+
+  return [
+    check("catalog_growth", snapshot.catalog.discovered_24h, snapshot.catalog.discovered_24h > 0 ? "pass" : "warn", "> 0 items discovered in 24h"),
+    check("metadata_coverage", neverMetadataRatio, neverMetadataRatio <= 0.02 ? "pass" : neverMetadataRatio <= 0.1 ? "warn" : "fail", "<= 2% never verified"),
+    check("stats_freshness_7d", staleStatsRatio, staleStatsRatio <= 0.05 ? "pass" : staleStatsRatio <= 0.2 ? "warn" : "fail", "<= 5% stale over 7d"),
+    check("queue_expired_leases", snapshot.queue.expired_leases, snapshot.queue.expired_leases === 0 ? "pass" : "fail", "0 expired leases"),
+    check("queue_dead", snapshot.queue.dead, snapshot.queue.dead === 0 ? "pass" : "warn", "0 dead jobs"),
+    check("canonical_duplicates", snapshot.catalog.duplicate_canonical_keys, snapshot.catalog.duplicate_canonical_keys === 0 ? "pass" : "warn", "0 legacy duplicate keys"),
+    check("free_items_freshness_hours", freeAge, freeAge <= 30 ? "pass" : freeAge <= 48 ? "warn" : "fail", "<= 30h"),
+    check("discovery_freshness_hours", discoveryAge, discoveryAge <= 30 ? "pass" : discoveryAge <= 48 ? "warn" : "fail", "<= 30h"),
+    check("stats_index_freshness_hours", indexAge, indexAge <= 2 ? "pass" : indexAge <= 26 ? "warn" : "fail", "<= 2h; application falls back to live catalog when stale"),
+    check("hourly_stats_activity", snapshot.stats.hourly_24h, snapshot.stats.hourly_24h > 0 ? "pass" : "fail", "> 0 hourly samples in 24h")
+  ];
 }
 
 async function main() {
-  const run = await startStatsJobRun({ jobName: "stats_items_audit" });
-  const now = new Date();
-  const stale24h = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
-  const stale7d = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
-  const stale30d = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000).toISOString();
-
+  const run = await startStatsJobRun({ jobName: "stats_items_audit", metadata: { strict: STRICT } });
   try {
-    const summary = {
-      generatedAt: now.toISOString(),
-      catalogItems: {
-        total: await countRows("roblox_catalog_items", "items total", (query) => query.eq("is_deleted", false)),
-        neverStatsRefreshed: await countRows("roblox_catalog_items", "never stats refreshed", (query) =>
-          query.eq("is_deleted", false).is("last_item_stats_refreshed_at", null)
-        ),
-        staleOver24h: await countRows("roblox_catalog_items", "stale over 24h", (query) =>
-          query.eq("is_deleted", false).or(`last_item_stats_refreshed_at.is.null,last_item_stats_refreshed_at.lt.${stale24h}`)
-        ),
-        staleOver7d: await countRows("roblox_catalog_items", "stale over 7d", (query) =>
-          query.eq("is_deleted", false).or(`last_item_stats_refreshed_at.is.null,last_item_stats_refreshed_at.lt.${stale7d}`)
-        ),
-        dueNow: await countRows("roblox_catalog_items", "due now", (query) =>
-          query.eq("is_deleted", false).or(`next_item_stats_refresh_at.is.null,next_item_stats_refresh_at.lte.${now.toISOString()}`)
-        ),
-        brokenMedia: await countRows("roblox_catalog_items", "broken media", (query) =>
-          query.eq("is_deleted", false).gte("thumbnail_http_status", 400)
-        )
-      },
-      currentIndex: {
-        total: await countRows("stats_item_current_index", "current index total"),
-        latestIndexed: await latestRow("stats_item_current_index", "asset_id,indexed_at", "indexed_at")
-      },
-      hourly: {
-        rows: await countRows("roblox_catalog_item_stats_hourly", "hourly rows"),
-        rowsLast24h: await countRows("roblox_catalog_item_stats_hourly", "hourly rows last 24h", (query) => query.gt("hour_start", stale24h)),
-        latest: await latestRow("roblox_catalog_item_stats_hourly", "asset_id,hour_start,sampled_at", "hour_start")
-      },
-      daily: {
-        rows: await countRows("roblox_catalog_item_stats_daily", "daily rows"),
-        latest: await latestRow("roblox_catalog_item_stats_daily", "asset_id,stat_date,last_sampled_at", "stat_date")
-      },
-      resale: {
-        candidates: await countRows("roblox_catalog_items", "resale candidates", (query) =>
-          query.eq("is_deleted", false).eq("item_type", "Asset").gt("asset_id", 0).or("has_resellers.eq.true,lowest_resale_price_robux.gt.0")
-        ),
-        points: await countRows("roblox_catalog_item_resale_points", "resale points"),
-        staleOver30d: await countRows("roblox_catalog_items", "resale stale", (query) =>
-          query
-            .eq("is_deleted", false)
-            .eq("item_type", "Asset")
-            .gt("asset_id", 0)
-            .or("has_resellers.eq.true,lowest_resale_price_robux.gt.0")
-            .or(`last_resale_data_fetched_at.is.null,last_resale_data_fetched_at.lt.${stale30d}`)
-        )
-      }
-    };
+    const { data, error } = await supabaseAdmin().rpc("get_roblox_item_pipeline_health");
+    if (error) throw new Error(`Failed to load item pipeline health: ${error.message}`);
+    const snapshot = data as HealthSnapshot;
+    const checks = evaluate(snapshot);
+    const failures = checks.filter((entry) => entry.status === "fail");
+    const warnings = checks.filter((entry) => entry.status === "warn");
+    const health = failures.length ? "unhealthy" : warnings.length ? "degraded" : "healthy";
+    const report = { health, strict: STRICT, checks, snapshot };
 
     await finishStatsJobRun(run, {
-      status: "success",
-      rowsSucceeded: summary.currentIndex.total,
-      metadata: summary
+      status: failures.length ? "partial" : "success",
+      rowsSucceeded: checks.length - failures.length,
+      rowsFailed: failures.length,
+      metadata: report
     });
-
-    console.log(JSON.stringify(summary, null, 2));
+    console.log(JSON.stringify(report, null, 2));
+    if (STRICT && failures.length) process.exitCode = 1;
   } catch (error) {
     await finishStatsJobRun(run, { status: "failed", error });
     throw error;
@@ -95,6 +108,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error("Item stats workflow audit failed:", error instanceof Error ? error.message : error);
+  console.error("Item pipeline audit failed:", error instanceof Error ? error.message : error);
   process.exit(1);
 });

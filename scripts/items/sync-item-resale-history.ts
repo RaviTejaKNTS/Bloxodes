@@ -2,7 +2,7 @@ import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
-import { addHours, chunkArray, fetchResaleData, normalizeNumber, readNumber, toBoolean } from "./item-stats-utils";
+import { addHours, chunkArray, fetchResaleDataResult, normalizeNumber, readNumber, toBoolean } from "./item-stats-utils";
 
 type ResaleCandidate = {
   asset_id: number;
@@ -89,18 +89,32 @@ async function main() {
     const pointRows: Record<string, unknown>[] = [];
     const itemUpdates: Record<string, unknown>[] = [];
     let skipped = 0;
+    let failed = 0;
+    const failures: Array<{ assetId: number; error: string }> = [];
 
     for (const candidate of candidates) {
-      const payload = await fetchResaleData(candidate.asset_id, {
-        userAgent: USER_AGENT,
-        minRequestMs: REQUEST_MIN_MS,
-        maxRetries: MAX_RETRIES
-      }).catch((error) => {
-        console.warn(`Resale data failed for ${candidate.asset_id}:`, error instanceof Error ? error.message : String(error));
-        return null;
-      });
+      let result: Awaited<ReturnType<typeof fetchResaleDataResult>>;
+      try {
+        result = await fetchResaleDataResult(candidate.asset_id, {
+          userAgent: USER_AGENT,
+          minRequestMs: REQUEST_MIN_MS,
+          maxRetries: MAX_RETRIES
+        });
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        console.warn(`Resale data failed for ${candidate.asset_id}: ${message}`);
+        failed += 1;
+        failures.push({ assetId: candidate.asset_id, error: message });
+        itemUpdates.push({
+          asset_id: candidate.asset_id,
+          last_item_stats_refresh_error: message,
+          next_item_stats_refresh_at: addHours(nowIso, 6)
+        });
+        continue;
+      }
+      const payload = result.payload;
 
-      if (!payload?.priceDataPoints?.length && !payload?.volumeDataPoints?.length) {
+      if (result.kind === "unsupported" || (!payload?.priceDataPoints?.length && !payload?.volumeDataPoints?.length)) {
         skipped += 1;
         itemUpdates.push({
           asset_id: candidate.asset_id,
@@ -144,15 +158,17 @@ async function main() {
       await upsertRows("roblox_catalog_items", itemUpdates, "asset_id", 100);
     }
 
+    const status = failed === 0 ? "success" : candidates.length - failed > 0 ? "partial" : "failed";
     await finishStatsJobRun(run, {
-      status: "success",
+      status,
       rowsClaimed: candidates.length,
-      rowsSucceeded: candidates.length - skipped,
-      rowsFailed: skipped,
-      metadata: { point_rows: pointRows.length, dry_run: options.dryRun }
+      rowsSucceeded: candidates.length - skipped - failed,
+      rowsFailed: failed,
+      metadata: { point_rows: pointRows.length, unsupported_or_empty: skipped, failures: failures.slice(0, 20), dry_run: options.dryRun }
     });
 
-    console.log(JSON.stringify({ dryRun: options.dryRun, candidates: candidates.length, pointRows: pointRows.length, skipped }, null, 2));
+    console.log(JSON.stringify({ status, dryRun: options.dryRun, candidates: candidates.length, pointRows: pointRows.length, skipped, failed }, null, 2));
+    if (status === "failed") process.exitCode = 1;
   } catch (error) {
     await finishStatsJobRun(run, { status: "failed", error });
     throw error;

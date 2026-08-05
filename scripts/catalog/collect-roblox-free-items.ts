@@ -2,6 +2,7 @@ import "../shared/load-env";
 
 import { classifyFreeItemEligibility, type FreeItemEligibilityInput } from "@/lib/free-items-eligibility";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
 const CATEGORIES_API = "https://catalog.roblox.com/v1/categories";
 const SEARCH_API = "https://catalog.roblox.com/v1/search/items/details";
@@ -536,6 +537,10 @@ async function prepareCandidate(candidate: Candidate, verifiedAt: string): Promi
     collectible_item_id: asText(search.collectibleItemId) ?? undefined,
     last_seen_at: verifiedAt,
     last_enriched_at: verifiedAt,
+    last_metadata_verified_at: verifiedAt,
+    catalog_status: "active",
+    catalog_status_checked_at: verifiedAt,
+    catalog_status_failure_count: 0,
     is_deleted: false,
     raw_catalog_json: search,
     free_claimability: "unavailable",
@@ -665,11 +670,13 @@ async function fetchThumbnails(rows: PreparedRow[]) {
       url.searchParams.set("isCircular", "false");
       const payload = await fetchJson<{ data?: ThumbnailRow[] }>(url.toString());
       const internalIdByExternalId = new Map(batch.map((row) => [Math.abs(row.asset_id), row.asset_id]));
+      const rowByInternalId = new Map(batch.map((row) => [row.asset_id, row]));
       for (const thumbnail of payload.data ?? []) {
         const externalId = asNumber(thumbnail.targetId);
         const imageUrl = asText(thumbnail.imageUrl);
         const internalId = externalId ? internalIdByExternalId.get(externalId) : null;
         if (!internalId || !imageUrl) continue;
+        const preparedRow = rowByInternalId.get(internalId);
         imageRows.push({
           asset_id: internalId,
           size: THUMBNAIL_SIZE,
@@ -679,6 +686,12 @@ async function fetchThumbnails(rows: PreparedRow[]) {
           version: asText(thumbnail.version),
           last_checked_at: new Date().toISOString(),
         });
+        if (preparedRow) {
+          preparedRow.last_thumbnail_verified_at = new Date().toISOString();
+          preparedRow.last_thumbnail_health_checked_at = preparedRow.last_thumbnail_verified_at;
+          preparedRow.thumbnail_http_status = 200;
+          preparedRow.thumbnail_last_error = null;
+        }
       }
     }
   }
@@ -742,6 +755,13 @@ async function main() {
     throw new Error("Refusing to write to non-local Supabase without --allow-prod");
   }
 
+  const run = await startStatsJobRun({
+    jobName: "catalog_free_items_verification",
+    metadata: { apply: options.apply, max_pages: options.maxPages, category: options.category }
+  });
+
+  try {
+
   const { candidates, complete: discoveryComplete } = await discoverCandidates(options);
   let complete = discoveryComplete;
   const verifiedAt = new Date().toISOString();
@@ -788,11 +808,29 @@ async function main() {
     ),
   );
   if (!options.apply) {
+    await finishStatsJobRun(run, {
+      status: failures.length ? "partial" : "success",
+      rowsClaimed: candidates.length,
+      rowsSucceeded: rows.length,
+      rowsFailed: failures.length,
+      metadata: { dry_run: true, complete, counts, reasons, thumbnails: images.length }
+    });
     console.log("Dry run only. Pass --apply to write to Supabase.");
     return;
   }
   await persist(rows, images, complete);
+  await finishStatsJobRun(run, {
+    status: failures.length ? "partial" : "success",
+    rowsClaimed: candidates.length,
+    rowsSucceeded: rows.length,
+    rowsFailed: failures.length,
+    metadata: { dry_run: false, complete, counts, reasons, thumbnails: images.length }
+  });
   console.log(`Saved ${rows.length} official Roblox free-item verification rows.`);
+  } catch (error) {
+    await finishStatsJobRun(run, { status: "failed", error });
+    throw error;
+  }
 }
 
 main().catch((error) => {

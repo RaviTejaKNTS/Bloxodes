@@ -18,7 +18,6 @@ import {
   normalizeText,
   readNumber,
   robloxTargetId,
-  RobloxRateLimitError,
   toBoolean,
   type CatalogItemDetails,
   type ItemStatsSourceRow,
@@ -58,7 +57,7 @@ function parseArgs(): Options {
     limit: DEFAULT_LIMIT,
     assetIds: [],
     includeEconomyDetails: toBoolean(process.env.ROBLOX_ITEM_STATS_ECONOMY_DETAILS, false),
-    refreshIndexes: toBoolean(process.env.ROBLOX_ITEM_STATS_REFRESH_INDEXES, true),
+    refreshIndexes: toBoolean(process.env.ROBLOX_ITEM_STATS_REFRESH_INDEXES, false),
     dryRun: toBoolean(process.env.ROBLOX_ITEM_STATS_DRY_RUN, false)
   };
 
@@ -82,7 +81,7 @@ function parseArgs(): Options {
       options.dryRun = true;
     } else if (arg === "--help" || arg === "-h") {
       console.log(`
-Usage: npm run stats:items:refresh -- [--tier HOT|WARM|COLD|NEW|TRADE|BROKEN_MEDIA|ALL] [--limit <n>]
+Usage: npm run stats:items:refresh -- [--tier HOT|WARM|COLD|NEW|ALL] [--limit <n>]
 
 Refreshes Roblox item metadata/thumbnails, writes hourly snapshots, and optionally rebuilds /stats/items indexes.
 `);
@@ -130,7 +129,7 @@ function catalogPayloadByTargetId(payloads: CatalogItemDetails[]) {
   return map;
 }
 
-async function loadItems(options: Options): Promise<ItemStatsSourceRow[]> {
+async function loadItems(options: Options, workerId: string): Promise<ItemStatsSourceRow[]> {
   const select = `
     asset_id,item_type,asset_type_id,name,description,category,subcategory,
     creator_id,creator_target_id,creator_name,creator_type,creator_has_verified_badge,
@@ -143,6 +142,18 @@ async function loadItems(options: Options): Promise<ItemStatsSourceRow[]> {
     last_item_stats_refreshed_at,last_resale_data_fetched_at,
     last_thumbnail_health_checked_at,thumbnail_http_status,thumbnail_last_error
   `;
+  if (!options.dryRun) {
+    const { data, error } = await supabaseAdmin().rpc("claim_roblox_item_stats_rows", {
+      p_worker_id: workerId,
+      p_tier: options.tier,
+      p_limit: options.limit,
+      p_lease_minutes: LEASE_MINUTES,
+      p_asset_ids: options.assetIds.length ? Array.from(new Set(options.assetIds)) : null
+    });
+    if (error) throw new Error(`Failed to atomically claim item stats rows: ${error.message}`);
+    return (data ?? []) as ItemStatsSourceRow[];
+  }
+
   const nowIso = new Date().toISOString();
   const leaseCutoff = new Date(Date.now() - LEASE_MINUTES * 60 * 1000).toISOString();
 
@@ -170,24 +181,8 @@ async function loadItems(options: Options): Promise<ItemStatsSourceRow[]> {
   return (data ?? []) as ItemStatsSourceRow[];
 }
 
-async function claimRows(rows: ItemStatsSourceRow[], workerId: string, dryRun: boolean) {
-  if (!rows.length || dryRun) return;
-  const nowIso = new Date().toISOString();
-  const leaseCutoff = new Date(Date.now() - LEASE_MINUTES * 60 * 1000).toISOString();
-  const { error } = await supabaseAdmin()
-    .from("roblox_catalog_items")
-    .update({
-      item_stats_refresh_locked_at: nowIso,
-      item_stats_refresh_locked_by: workerId,
-      last_item_stats_refresh_error: null
-    })
-    .in("asset_id", rows.map((row) => row.asset_id))
-    .or(`item_stats_refresh_locked_at.is.null,item_stats_refresh_locked_at.lt.${leaseCutoff}`);
-  if (error) throw new Error(`Failed to claim item stats rows: ${error.message}`);
-}
-
-function itemUpdateFromPayload(row: ItemStatsSourceRow, payload: CatalogItemDetails | null, economy: Record<string, unknown> | null, nowIso: string) {
-  const rawCatalog = payload ?? row.raw_catalog_json ?? {};
+function itemUpdateFromPayload(row: ItemStatsSourceRow, payload: CatalogItemDetails, economy: Record<string, unknown> | null, nowIso: string) {
+  const rawCatalog = { ...(row.raw_catalog_json ?? {}), ...payload };
   const creator = (rawCatalog.Creator && typeof rawCatalog.Creator === "object" ? rawCatalog.Creator : null) as Record<string, unknown> | null;
   const collectibles = (economy?.CollectiblesItemDetails && typeof economy.CollectiblesItemDetails === "object" ? economy.CollectiblesItemDetails : null) as Record<string, unknown> | null;
 
@@ -196,6 +191,10 @@ function itemUpdateFromPayload(row: ItemStatsSourceRow, payload: CatalogItemDeta
     item_type: itemTypeForRoblox(row.item_type),
     last_item_stats_refreshed_at: nowIso,
     last_enriched_at: nowIso,
+    last_metadata_verified_at: nowIso,
+    catalog_status: "active",
+    catalog_status_checked_at: nowIso,
+    catalog_status_failure_count: 0,
     is_deleted: false,
     raw_catalog_json: rawCatalog
   };
@@ -265,6 +264,8 @@ function itemUpdateFromPayload(row: ItemStatsSourceRow, payload: CatalogItemDeta
     last_item_stats_refreshed_at: nowIso
   });
   update.item_stats_tier = assigned.tier;
+  update.item_stats_tier_reason = assigned.reason;
+  update.item_stats_tier_updated_at = nowIso;
   update.next_item_stats_refresh_at = addHours(nowIso, assigned.refreshHours);
   update.item_stats_refresh_locked_at = null;
   update.item_stats_refresh_locked_by = null;
@@ -311,18 +312,18 @@ async function upsertRows(table: string, rows: Record<string, unknown>[], onConf
   }
 }
 
-async function markFailures(rows: ItemStatsSourceRow[], error: unknown) {
+async function markFailures(rows: ItemStatsSourceRow[], workerId: string, error: unknown) {
+  if (!rows.length) return;
   const message = error instanceof Error ? error.message : String(error);
   const nowIso = new Date().toISOString();
-  const updates = rows.map((row) => ({
-    asset_id: row.asset_id,
-    item_stats_refresh_locked_at: null,
-    item_stats_refresh_locked_by: null,
-    item_stats_refresh_attempt_count: (row.item_stats_refresh_attempt_count ?? 0) + 1,
-    last_item_stats_refresh_error: message,
-    next_item_stats_refresh_at: addHours(nowIso, Math.min(72, 2 ** Math.min((row.item_stats_refresh_attempt_count ?? 0) + 1, 6)))
-  }));
-  await upsertRows("roblox_catalog_items", updates, "asset_id", 100);
+  const maxAttempts = Math.max(...rows.map((row) => row.item_stats_refresh_attempt_count ?? 1));
+  const { error: releaseError } = await supabaseAdmin().rpc("release_roblox_item_stats_rows", {
+    p_worker_id: workerId,
+    p_asset_ids: rows.map((row) => row.asset_id),
+    p_error: message,
+    p_next_run_at: addHours(nowIso, Math.min(72, 2 ** Math.min(maxAttempts, 6)))
+  });
+  if (releaseError) throw new Error(`Failed to release item stats rows: ${releaseError.message}`);
 }
 
 function summarizeRows(rows: ItemStatsSourceRow[]) {
@@ -351,14 +352,12 @@ async function main() {
     }
   });
 
-  const rows = await loadItems(options);
+  const rows = await loadItems(options, workerId);
   if (!rows.length) {
     await finishStatsJobRun(run, { status: "skipped", metadata: { reason: "no_items" } });
     console.log("No item stats rows ready for refresh.");
     return;
   }
-
-  await claimRows(rows, workerId, options.dryRun);
 
   try {
     const nowIso = new Date().toISOString();
@@ -366,9 +365,9 @@ async function main() {
     const itemUpdates: Record<string, unknown>[] = [];
     const hourlyRows: Record<string, unknown>[] = [];
     const thumbnailRows: Record<string, unknown>[] = [];
-    let rateLimitedBatches = 0;
-    let rateLimitedRows = 0;
-    const rateLimitedSamples: number[] = [];
+    let failedBatches = 0;
+    let failedRows = 0;
+    const failedSamples: number[] = [];
 
     for (const detailBatch of chunkArray(rows, DETAILS_BATCH)) {
       let payloads: CatalogItemDetails[];
@@ -387,15 +386,13 @@ async function main() {
           maxRetries: MAX_RETRIES
         });
       } catch (error) {
-        if (!(error instanceof RobloxRateLimitError)) throw error;
-
-        rateLimitedBatches += 1;
-        rateLimitedRows += detailBatch.length;
-        rateLimitedSamples.push(...summarizeRows(detailBatch).slice(0, Math.max(0, 10 - rateLimitedSamples.length)));
+        failedBatches += 1;
+        failedRows += detailBatch.length;
+        failedSamples.push(...summarizeRows(detailBatch).slice(0, Math.max(0, 10 - failedSamples.length)));
         console.warn(
-          `Roblox rate limited ${detailBatch.length} item stats rows; backing off batch. Sample asset ids: ${summarizeRows(detailBatch).join(", ")}`
+          `Roblox item stats request failed for ${detailBatch.length} rows; backing off batch. Sample asset ids: ${summarizeRows(detailBatch).join(", ")}. ${error instanceof Error ? error.message : String(error)}`
         );
-        if (!options.dryRun) await markFailures(detailBatch, error);
+        if (!options.dryRun) await markFailures(detailBatch, workerId, error);
         continue;
       }
 
@@ -404,6 +401,13 @@ async function main() {
       for (const row of detailBatch) {
         const targetId = robloxTargetId(row);
         const payload = payloadById.get(targetId) ?? null;
+        if (!payload) {
+          const error = new Error("Item missing from successful Roblox catalog details response");
+          failedRows += 1;
+          failedSamples.push(...summarizeRows([row]).slice(0, Math.max(0, 10 - failedSamples.length)));
+          if (!options.dryRun) await markFailures([row], workerId, error);
+          continue;
+        }
         const economy =
           options.includeEconomyDetails && itemTypeForRoblox(row.item_type) === "Asset"
             ? await fetchAssetEconomyDetails(targetId, { userAgent: USER_AGENT, minRequestMs: REQUEST_MIN_MS, maxRetries: MAX_RETRIES }).catch((error) => {
@@ -427,8 +431,13 @@ async function main() {
             last_checked_at: nowIso
           });
           update.last_thumbnail_health_checked_at = nowIso;
-          update.thumbnail_http_status = thumbnailUrl ? 200 : null;
-          update.thumbnail_last_error = null;
+          if (thumbnailUrl && thumbnailState?.toLowerCase() === "completed") {
+            update.last_thumbnail_verified_at = nowIso;
+            update.thumbnail_http_status = 200;
+            update.thumbnail_last_error = null;
+          } else {
+            update.thumbnail_last_error = `Roblox thumbnail state: ${thumbnailState ?? "missing"}`;
+          }
         }
 
         itemUpdates.push(update);
@@ -443,19 +452,19 @@ async function main() {
     }
 
     const indexResult = !options.dryRun && options.refreshIndexes ? await refreshIndexes() : null;
-    const status = rateLimitedRows > 0 ? "partial" : "success";
+    const status = failedRows > 0 ? (itemUpdates.length > 0 ? "partial" : "failed") : "success";
 
     await finishStatsJobRun(run, {
       status,
       rowsClaimed: rows.length,
       rowsSucceeded: itemUpdates.length,
-      rowsFailed: rateLimitedRows,
+      rowsFailed: failedRows,
       metadata: {
         hourly_rows: hourlyRows.length,
         thumbnail_rows: thumbnailRows.length,
-        rate_limited_batches: rateLimitedBatches,
-        rate_limited_rows: rateLimitedRows,
-        rate_limited_sample_asset_ids: rateLimitedSamples,
+        failed_batches: failedBatches,
+        failed_rows: failedRows,
+        failed_sample_asset_ids: failedSamples,
         index_result: indexResult
       }
     });
@@ -466,9 +475,9 @@ async function main() {
           dryRun: options.dryRun,
           status,
           refreshed: itemUpdates.length,
-          rateLimitedRows,
-          rateLimitedBatches,
-          rateLimitedSamples,
+          failedRows,
+          failedBatches,
+          failedSamples,
           hourlyRows: hourlyRows.length,
           thumbnailRows: thumbnailRows.length,
           indexResult
@@ -477,8 +486,9 @@ async function main() {
         2
       )
     );
+    if (status === "failed") process.exitCode = 1;
   } catch (error) {
-    if (!options.dryRun) await markFailures(rows, error);
+    if (!options.dryRun) await markFailures(rows, workerId, error);
     await finishStatsJobRun(run, { status: "failed", rowsClaimed: rows.length, error });
     throw error;
   }

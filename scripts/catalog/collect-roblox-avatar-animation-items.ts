@@ -2,6 +2,7 @@ import "../shared/load-env";
 
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { enqueueDiscoveredCatalogItems, internalCatalogItemId, upsertDiscoveredCatalogItems } from "./catalog-discovery-db";
 
 const CATALOG_DETAILS_API = "https://catalog.roblox.com/v1/search/items/details";
 const CATALOG_CATEGORIES_API = "https://catalog.roblox.com/v1/categories";
@@ -461,10 +462,11 @@ function buildCatalogRows(
 ): CatalogItemRow[] {
   const rows: CatalogItemRow[] = [];
   items.forEach((item) => {
-    const assetId = normalizeNumber(item.id);
-    if (!assetId) return;
+    const robloxId = normalizeNumber(item.id);
+    if (!robloxId) return;
     const itemType = normalizeText(item.itemType) ?? "Asset";
     if (itemType !== "Asset" && itemType !== "Bundle") return;
+    const assetId = internalCatalogItemId(robloxId, itemType);
 
     const creatorId = normalizeNumber(item.creatorId);
     const creatorTargetId = normalizeNumber(item.creatorTargetId) ?? creatorId;
@@ -514,10 +516,8 @@ function buildCatalogRows(
 
 async function upsertCatalogItems(rows: CatalogItemRow[]) {
   if (!rows.length || DRY_RUN) return;
-  const sb = supabaseAdmin();
   for (const chunk of chunkArray(rows, 200)) {
-    const { error } = await sb.from("roblox_catalog_items").upsert(chunk, { onConflict: "asset_id" });
-    if (error) throw new Error(`Failed to upsert catalog items: ${error.message}`);
+    await upsertDiscoveredCatalogItems(chunk, DRY_RUN);
     logInfo(`Upserted ${chunk.length} items into roblox_catalog_items.`);
   }
 }
@@ -536,18 +536,7 @@ async function insertDiscoveryHits(rows: DiscoveryHitRow[]) {
 
 async function enqueueRefresh(assetIds: number[], nowIso: string) {
   if (!assetIds.length || DRY_RUN || !ENQUEUE_REFRESH) return;
-  const sb = supabaseAdmin();
-  const rows = assetIds.map((assetId) => ({
-    asset_id: assetId,
-    priority: "new",
-    next_run_at: nowIso,
-    attempts: 0,
-    last_error: null
-  }));
-  const { error } = await sb
-    .from("roblox_catalog_refresh_queue")
-    .upsert(rows, { onConflict: "asset_id", ignoreDuplicates: true });
-  if (error) throw new Error(`Failed to enqueue refresh items: ${error.message}`);
+  await enqueueDiscoveredCatalogItems(assetIds, nowIso, DRY_RUN, "avatar_animation_discovery");
   logDebug(`Enqueued ${assetIds.length} assets for refresh.`);
 }
 

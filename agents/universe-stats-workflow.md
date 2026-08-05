@@ -134,17 +134,17 @@ Current VPS crontab block:
 # BLOXODES_STATS_WORKER_END
 ```
 
-Active item stats cron lines installed on the VPS worker after the item stats migration and priority refresh fixes:
+The item pipeline schedule is now owned by `scripts/ops/vps-scheduled-automation.crontab`. Its stages deliberately use separate worker locks:
 
 ```cron
 # BLOXODES_ITEM_STATS_WORKER_START
-12,42 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-refresh "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=12000 ROBLOX_ITEM_STATS_DETAILS_BATCH=2 ROBLOX_ITEM_STATS_REFRESH_INDEXES=false ROBLOX_ITEM_RESALE_MIN_REQUEST_MS=5000; npm run stats:items:tier -- --apply --limit 10000 && npm run stats:items:refresh -- --tier HOT --limit 4 --skip-index-refresh && npm run stats:items:refresh -- --tier TRADE --limit 4 --skip-index-refresh && npm run stats:items:refresh -- --tier NEW --limit 2 --skip-index-refresh && npm run stats:items:refresh -- --tier BROKEN_MEDIA --limit 2 --skip-index-refresh && npm run stats:items:resale -- --limit 5 --max-age-hours 24 && npm run stats:items:index:refresh"
-27 */3 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-refresh "export ROBLOX_ITEM_STATS_MIN_REQUEST_MS=12000 ROBLOX_ITEM_STATS_DETAILS_BATCH=2 ROBLOX_ITEM_STATS_REFRESH_INDEXES=false; npm run stats:items:refresh -- --tier WARM --limit 10 --skip-index-refresh && npm run stats:items:refresh -- --tier COLD --limit 5 --skip-index-refresh && npm run stats:items:index:refresh"
-17 2 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-refresh "export ROBLOX_CATALOG_MIN_REQUEST_MS=1200 ROBLOX_CATALOG_QUERY_DELAY_MS=1800 ROBLOX_CATALOG_ENQUEUE_REFRESH=true; npm run collect:catalog-items && npm run stats:items:tier -- --apply --limit 20000 && npm run stats:items:index:refresh"
-25 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-rollup "npm run stats:items:rollup-daily -- --date yesterday --finalize && npm run stats:items:audit"
-20 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-audit "npm run stats:items:audit"
+# Install the exact catalog-items-discovery, catalog-items-enrichment,
+# stats-items-{tier,new,hot,warm,cold,resale,index,rollup,audit} lines from:
+# scripts/ops/vps-scheduled-automation.crontab
 # BLOXODES_ITEM_STATS_WORKER_END
 ```
+
+The tier vocabulary matches the universe pipeline: `NEW`, `HOT`, `WARM`, and `COLD`. Discovery runs daily and continues through all five catalog families even if one family fails. Enrichment runs every 15 minutes from an atomic leased queue. Item stats refresh NEW every 15 minutes, HOT hourly, WARM every six hours, and COLD daily. Resale, daily rollup, the optimized hourly current-index refresh, and a strict health audit are independent jobs. The index refresh uses durable daily rollups for 24-hour and 7-day baselines and processes at most 2,000 changed rows per run, avoiding both per-item hourly probes and long full-table rewrites.
 
 GitHub item refresh and catalog discovery workflows are manual fallback only. Recurring item discovery, item refresh, item rollup, and item audit should run through the VPS worker to avoid GitHub runner IP limits on Roblox item APIs.
 
@@ -172,7 +172,7 @@ Decal ID rerank source loading uses paginated reads instead of a large `asset_id
 First proof after worker changes should be a targeted one-off run:
 
 ```txt
-/home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-smoke "npm run stats:items:tier -- --apply --limit 100 && npm run stats:items:refresh -- --tier NEW --limit 10 --skip-index-refresh && npm run stats:items:index:refresh && npm run stats:items:audit"
+/home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-items-smoke "npm run stats:items:tier -- --apply --limit 100 && npm run enrich:catalog-items -- --max-total 10 && npm run stats:items:refresh -- --tier NEW --limit 10 --skip-index-refresh && npm run stats:items:index:refresh && npm run stats:items:audit -- --strict"
 ```
 
 VPS logs live here:

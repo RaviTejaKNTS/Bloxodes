@@ -35,7 +35,7 @@ function parseArgs(): Options {
       console.log(`
 Usage: npm run stats:items:tier -- [--apply] [--limit <n>]
 
-Classifies Roblox marketplace items into NEW, HOT, WARM, COLD, TRADE, STALE, or BROKEN_MEDIA.
+Classifies Roblox marketplace items into NEW, HOT, WARM, or COLD.
 Dry-run by default; pass --apply to update roblox_catalog_items.
 `);
       process.exit(0);
@@ -48,13 +48,13 @@ Dry-run by default; pass --apply to update roblox_catalog_items.
 async function loadRows(limit: number) {
   const pageSize = 1000;
   const rows: ItemStatsSourceRow[] = [];
-  let from = 0;
+  let afterAssetId: number | null = null;
 
   while (true) {
     const remaining = limit > 0 ? limit - rows.length : pageSize;
     if (limit > 0 && remaining <= 0) break;
     const size = limit > 0 ? Math.min(pageSize, remaining) : pageSize;
-    const { data, error } = await supabaseAdmin()
+    let query = supabaseAdmin()
       .from("roblox_catalog_items")
       .select(`
         asset_id, name, category, subcategory, favorite_count,
@@ -63,14 +63,15 @@ async function loadRows(limit: number) {
         item_stats_tier, next_item_stats_refresh_at, thumbnail_http_status
       `)
       .eq("is_deleted", false)
-      .order("last_item_stats_refreshed_at", { ascending: true, nullsFirst: true })
-      .order("favorite_count", { ascending: false, nullsFirst: false })
-      .range(from, from + size - 1);
+      .order("asset_id", { ascending: true })
+      .limit(size);
+    if (afterAssetId != null) query = query.gt("asset_id", afterAssetId);
+    const { data, error } = await query;
 
     if (error) throw new Error(`Failed to load catalog items for tiering: ${error.message}`);
     rows.push(...((data ?? []) as ItemStatsSourceRow[]));
     if ((data?.length ?? 0) < size) break;
-    from += size;
+    afterAssetId = Number(data?.[data.length - 1]?.asset_id);
   }
 
   return rows;
@@ -103,6 +104,8 @@ async function main() {
         updates.push({
           asset_id: row.asset_id,
           item_stats_tier: assigned.tier,
+          item_stats_tier_reason: assigned.reason,
+          item_stats_tier_updated_at: nowIso,
           next_item_stats_refresh_at: row.next_item_stats_refresh_at ?? nowIso,
           last_item_stats_refresh_error: null
         });
