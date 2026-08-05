@@ -1,0 +1,251 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Card Farm",
+    "gameSlug": "anime-card-farm",
+    "collection": "mutations",
+    "route": "/wiki/anime-card-farm/mutations",
+    "catalogCode": "anime-card-farm-mutations",
+    "sourceItemCount": 11,
+    "sources": [
+      {
+        "label": "Bloxodes — Anime Card Farm mutations guide",
+        "url": "https://bloxodes.com/articles/anime-card-farm-mutations-guide",
+        "accessed": "2026-08-05"
+      },
+      {
+        "label": "AllThings.How — all 11 mutations and multipliers",
+        "url": "https://allthings.how/anime-card-farm-mutations-all-11-types-and-multipliers/",
+        "accessed": "2026-08-05"
+      },
+      {
+        "label": "Roblox — official Anime Card Farm experience",
+        "url": "https://www.roblox.com/games/125039473548047/Anime-Card-Farm",
+        "accessed": "2026-08-05"
+      }
+    ],
+    "itemFields": [
+      "name",
+      "multiplier",
+      "availability",
+      "howToGet",
+      "effect"
+    ],
+    "columns": [
+      "name",
+      "multiplier",
+      "availability",
+      "howToGet",
+      "effect"
+    ],
+    "display": {
+      "groupLabel": "Availability",
+      "sectionOrder": [
+        "Spawn Pack conveyor mutations",
+        "Admin Abuse exclusive"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "multiplier"
+      ],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "multiplier",
+        "availability",
+        "howToGet"
+      ],
+      "tableFields": [
+        "multiplier",
+        "availability",
+        "howToGet",
+        "effect"
+      ],
+      "fieldPresentation": {
+        "multiplier": {
+          "kind": "chip",
+          "label": "Multiplier"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "howToGet": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Starfallen",
+        "multiplier": "75x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Starfallen mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 75x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "starfallen",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Glitch",
+        "multiplier": "50x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Glitch mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 50x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "glitch",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Radioactive",
+        "multiplier": "30x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Radioactive mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 30x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "radioactive",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blessed",
+        "multiplier": "20x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Blessed mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 20x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "blessed",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Candy",
+        "multiplier": "15x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Candy mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 15x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "candy",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sakura",
+        "multiplier": "10x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Sakura mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 10x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "sakura",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow",
+        "multiplier": "5x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Rainbow mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 5x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Veno",
+        "multiplier": "3x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Veno mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 3x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "veno",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond",
+        "multiplier": "2x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Diamond mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 2x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "diamond",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Golden",
+        "multiplier": "1.5x",
+        "availability": "Spawn Pack conveyor",
+        "howToGet": "Buy a Golden mutated pack when it appears after using Spawn Pack, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 1.5x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "golden",
+        "section": "Spawn Pack conveyor mutations",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Admin",
+        "multiplier": "80x",
+        "availability": "Admin Abuse only",
+        "howToGet": "During Admin Abuse, buy an Admin mutated pack when it appears on the conveyor, then place the pack on your plot to open it.",
+        "effect": "Guide-reported 80x multiplier to both the card's sale value and passive earning rate."
+      },
+      "system": {
+        "slug": "admin",
+        "section": "Admin Abuse exclusive",
+        "sortOrder": 11,
+        "image": null
+      }
+    }
+  ]
+}
