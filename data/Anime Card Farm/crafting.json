@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Card Farm",
+    "gameSlug": "anime-card-farm",
+    "collection": "crafting",
+    "route": "/wiki/anime-card-farm/crafting",
+    "catalogCode": "anime-card-farm-crafting",
+    "itemFields": [
+      "ingredients",
+      "baseCardCopies",
+      "cashCost",
+      "moneyPerSecond",
+      "cardSummary"
+    ],
+    "columns": [
+      "ingredients",
+      "baseCardCopies",
+      "cashCost",
+      "moneyPerSecond",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Recipe stage",
+      "sectionOrder": [
+        "Early Evolution Recipes",
+        "Advanced Evolution Recipes",
+        "Endgame Evolution Recipes"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "ingredients",
+        "baseCardCopies",
+        "cashCost",
+        "moneyPerSecond"
+      ],
+      "tableFields": [
+        "ingredients",
+        "baseCardCopies",
+        "cashCost",
+        "moneyPerSecond",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "ingredients": {
+          "kind": "detail",
+          "label": "Ingredients"
+        },
+        "baseCardCopies": {
+          "kind": "chip",
+          "label": "Base cards"
+        },
+        "cashCost": {
+          "kind": "chip",
+          "label": "Cash cost"
+        },
+        "moneyPerSecond": {
+          "kind": "chip",
+          "label": "Money per second"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Recipe summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Flame Pillar",
+        "ingredients": "1x Wind Slayer, 1x Serpent Slayer, 1x Fog Slayer",
+        "baseCardCopies": 3,
+        "cashCost": "1.8M Cash",
+        "moneyPerSecond": "2.4M",
+        "cardSummary": "Requires Wind Slayer, Serpent Slayer, and Fog Slayer plus 1.8M Cash. Produces 2.4M per second."
+      },
+      "system": {
+        "slug": "flame-pillar",
+        "section": "Early Evolution Recipes",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Emperor King",
+        "ingredients": "1x Pirate Emperor, 1x Red Emperor",
+        "baseCardCopies": 2,
+        "cashCost": "21M Cash",
+        "moneyPerSecond": "70M",
+        "cardSummary": "Requires Pirate Emperor and Red Emperor plus 21M Cash. Produces 70M per second."
+      },
+      "system": {
+        "slug": "emperor-king",
+        "section": "Early Evolution Recipes",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Silent Esper",
+        "ingredients": "2x Galaxy Destroyer, 3x Galaxy Tyrant",
+        "baseCardCopies": 5,
+        "cashCost": "2.4B Cash",
+        "moneyPerSecond": "6.5B",
+        "cardSummary": "Requires two Galaxy Destroyers and three Galaxy Tyrants plus 2.4B Cash. Produces 6.5B per second."
+      },
+      "system": {
+        "slug": "silent-esper",
+        "section": "Early Evolution Recipes",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Genius Striker",
+        "ingredients": "3x Wild Striker, 1x Vision Striker",
+        "baseCardCopies": 4,
+        "cashCost": "270B Cash",
+        "moneyPerSecond": "890B",
+        "cardSummary": "Requires three Wild Strikers and one Vision Striker plus 270B Cash. Produces 890B per second."
+      },
+      "system": {
+        "slug": "genius-striker",
+        "section": "Early Evolution Recipes",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Star Brawler",
+        "ingredients": "1x Chrono Overlord, 1x Calamity King, 1x Star Rider, 1x Infinite Spinner",
+        "baseCardCopies": 4,
+        "cashCost": "17T Cash",
+        "moneyPerSecond": "40.2T",
+        "cardSummary": "Requires Chrono Overlord, Calamity King, Star Rider, and Infinite Spinner plus 17T Cash. Produces 40.2T per second."
+      },
+      "system": {
+        "slug": "star-brawler",
+        "section": "Advanced Evolution Recipes",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Captain",
+        "ingredients": "1x Demon Knight, 3x Chaos Witch",
+        "baseCardCopies": 4,
+        "cashCost": "70Qd Cash",
+        "moneyPerSecond": "140Qd",
+        "cardSummary": "Requires one Demon Knight and three Chaos Witches plus 70Qd Cash. Produces 140Qd per second."
+      },
+      "system": {
+        "slug": "demon-captain",
+        "section": "Advanced Evolution Recipes",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Almighty Prime",
+        "ingredients": "2x Savage Reaper, 2x Green Reaper",
+        "baseCardCopies": 4,
+        "cashCost": "380Qn Cash",
+        "moneyPerSecond": "810Qn",
+        "cardSummary": "Requires two Savage Reapers and two Green Reapers plus 380Qn Cash. Produces 810Qn per second."
+      },
+      "system": {
+        "slug": "almighty-prime",
+        "section": "Advanced Evolution Recipes",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Twin Mages",
+        "ingredients": "2x Ember Elf, 2x Violet Mage",
+        "baseCardCopies": 4,
+        "cashCost": "1.3Sp Cash",
+        "moneyPerSecond": "2.4Sp",
+        "cardSummary": "Requires two Ember Elves and two Violet Mages plus 1.3Sp Cash. Produces 2.4Sp per second."
+      },
+      "system": {
+        "slug": "twin-mages",
+        "section": "Endgame Evolution Recipes",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Emerald Successor",
+        "ingredients": "1x Volt Successor, 1x Peace Titan",
+        "baseCardCopies": 2,
+        "cashCost": "4.35Sp Cash",
+        "moneyPerSecond": "12.4Sp",
+        "cardSummary": "Requires Volt Successor and Peace Titan plus 4.35Sp Cash. Produces 12.4Sp per second."
+      },
+      "system": {
+        "slug": "emerald-successor",
+        "section": "Endgame Evolution Recipes",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fox Ascendant",
+        "ingredients": "1x Golden Flash, 1x Tidal Founder, 1x Forest Founder",
+        "baseCardCopies": 3,
+        "cashCost": "25Sp Cash",
+        "moneyPerSecond": "30Sp",
+        "cardSummary": "Requires Golden Flash, Tidal Founder, and Forest Founder plus 25Sp Cash. Produces 30Sp per second."
+      },
+      "system": {
+        "slug": "fox-ascendant",
+        "section": "Endgame Evolution Recipes",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Saber",
+        "ingredients": "1x Royal Saber, 2x Shadow Rider, 1x Golden King",
+        "baseCardCopies": 4,
+        "cashCost": "40Sp Cash",
+        "moneyPerSecond": "92.1Sp",
+        "cardSummary": "Requires one Royal Saber, two Shadow Riders, and one Golden King plus 40Sp Cash. Produces 92.1Sp per second."
+      },
+      "system": {
+        "slug": "dark-saber",
+        "section": "Endgame Evolution Recipes",
+        "sortOrder": 110,
+        "image": null
+      }
+    }
+  ]
+}
