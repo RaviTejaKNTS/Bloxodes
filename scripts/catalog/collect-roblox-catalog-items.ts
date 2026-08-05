@@ -41,6 +41,8 @@ const LOG_SAMPLE_RAW = toBoolean(process.env.ROBLOX_CATALOG_LOG_SAMPLE_RAW, fals
 const LIMIT = clampLimit(Number(process.env.ROBLOX_CATALOG_LIMIT ?? "30"));
 const MAX_PAGES = Math.max(0, Math.floor(Number(process.env.ROBLOX_CATALOG_MAX_PAGES ?? "0")));
 const MAX_ASSETS = Math.max(0, Math.floor(Number(process.env.ROBLOX_CATALOG_MAX_ASSETS ?? "0")));
+const MAX_QUERIES = Math.max(0, Math.floor(Number(process.env.ROBLOX_CATALOG_MAX_QUERIES ?? "0")));
+const ROTATION_OFFSET = Math.max(0, Math.floor(Number(process.env.ROBLOX_CATALOG_ROTATION_OFFSET ?? "0")));
 const REQUEST_DELAY_MS = Math.max(0, Math.floor(Number(process.env.ROBLOX_CATALOG_DELAY_MS ?? "300")));
 const QUERY_DELAY_MS = Math.max(0, Math.floor(Number(process.env.ROBLOX_CATALOG_QUERY_DELAY_MS ?? "600")));
 const MIN_REQUEST_INTERVAL_MS = Math.max(0, Math.floor(Number(process.env.ROBLOX_CATALOG_MIN_REQUEST_MS ?? "400")));
@@ -205,6 +207,12 @@ function parseCsv(raw?: string): string[] {
     .split(",")
     .map((value) => value.trim())
     .filter((value) => value.length > 0);
+}
+
+function rotateValues<T>(values: T[], offset: number) {
+  if (values.length < 2) return values;
+  const start = offset % values.length;
+  return [...values.slice(start), ...values.slice(0, start)];
 }
 
 function normalizeSortType(value: string) {
@@ -574,12 +582,15 @@ async function finishDiscoveryRun(runId: string | null, status: "completed" | "f
 }
 
 async function run() {
-  const subcategories = await resolveSubcategories(CATEGORY);
-  if (!subcategories.length) {
+  const resolvedSubcategories = await resolveSubcategories(CATEGORY);
+  if (!resolvedSubcategories.length) {
     throw new Error(`No subcategories resolved for category ${CATEGORY}.`);
   }
 
-  const sortTypes = resolveSortTypes();
+  const resolvedSortTypes = resolveSortTypes();
+  const rotation = ROTATION_OFFSET * Math.max(1, MAX_QUERIES);
+  const subcategories = rotateValues(resolvedSubcategories, Math.floor(rotation / Math.max(1, resolvedSortTypes.length)));
+  const sortTypes = rotateValues(resolvedSortTypes, rotation % Math.max(1, resolvedSortTypes.length));
   const keywordSortTypes = resolveKeywordSortTypes();
   const keywordSortSet = new Set(keywordSortTypes.map(normalizeSortType));
   const keywords = resolveKeywords();
@@ -590,7 +601,7 @@ async function run() {
   let totalAssets = 0;
   let totalQueries = 0;
   logInfo(
-    `Catalog discovery config: category=${CATEGORY}, subcategories=${subcategories.length}, sortTypes=${sortTypes.length}, keywordSortTypes=${keywordSortTypes.join(
+    `Catalog discovery config: category=${CATEGORY}, subcategories=${subcategories.length}, sortTypes=${sortTypes.length}, maxQueries=${MAX_QUERIES || "unlimited"}, rotation=${ROTATION_OFFSET}, keywordSortTypes=${keywordSortTypes.join(
       ","
     )}, keywords=${keywordList.length}, includeEmptyKeyword=${INCLUDE_EMPTY_KEYWORD}, limit=${LIMIT}, dryRun=${DRY_RUN}`
   );
@@ -605,6 +616,7 @@ async function run() {
         );
         for (const keyword of sortKeywords) {
           if (MAX_ASSETS > 0 && totalAssets >= MAX_ASSETS) break;
+          if (MAX_QUERIES > 0 && totalQueries >= MAX_QUERIES) break;
           const queryHash = buildQueryHash({ category: CATEGORY, subcategory, sortType, keyword, limit: LIMIT });
           if (seenQueryHashes.has(queryHash)) continue;
           seenQueryHashes.add(queryHash);

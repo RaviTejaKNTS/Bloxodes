@@ -11,6 +11,12 @@ const FAMILIES = [
   { name: "makeup", script: "collect:makeup-items" }
 ] as const;
 
+const ROTATION_WINDOW_HOURS = Math.max(1, Math.floor(Number(process.env.ROBLOX_CATALOG_ROTATION_WINDOW_HOURS ?? "6")));
+const ROTATION_OFFSET = Math.max(
+  0,
+  Math.floor(Number(process.env.ROBLOX_CATALOG_ROTATION_OFFSET ?? Math.floor(Date.now() / (ROTATION_WINDOW_HOURS * 3_600_000))))
+);
+
 function selectedFamilies() {
   const familyIndex = process.argv.indexOf("--family");
   if (familyIndex < 0) return [...FAMILIES];
@@ -22,7 +28,10 @@ function selectedFamilies() {
 
 function runNpmScript(script: string) {
   return new Promise<number>((resolve, reject) => {
-    const child = spawn("npm", ["run", script], { stdio: "inherit", env: process.env });
+    const child = spawn("npm", ["run", script], {
+      stdio: "inherit",
+      env: { ...process.env, ROBLOX_CATALOG_ROTATION_OFFSET: String(ROTATION_OFFSET) }
+    });
     child.once("error", reject);
     child.once("exit", (code, signal) => {
       if (signal) reject(new Error(`${script} terminated by ${signal}`));
@@ -40,7 +49,7 @@ async function main() {
   const families = selectedFamilies();
   const run = await startStatsJobRun({
     jobName: "catalog_items_discovery_orchestrator",
-    metadata: { families: families.map((family) => family.name) }
+    metadata: { families: families.map((family) => family.name), rotation_offset: ROTATION_OFFSET, rotation_window_hours: ROTATION_WINDOW_HOURS }
   });
   const results: Array<{ family: string; status: "success" | "failed"; exitCode?: number; error?: string }> = [];
 
