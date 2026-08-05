@@ -36,6 +36,7 @@ type ExistingItemRow = ItemStatsSourceRow & {
   rap_sales: number | null;
   catalog_status: string | null;
   catalog_status_failure_count: number | null;
+  last_thumbnail_verified_at: string | null;
 };
 
 type ItemResult = {
@@ -330,6 +331,7 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
 
   const payloadByTarget = new Map(payloads.map((payload) => [payloadId(payload), payload]));
   const itemUpdates: Record<string, unknown>[] = [];
+  const statusUpdates: Record<string, unknown>[] = [];
   const historyRows: Record<string, unknown>[] = [];
   const resultByAssetId = new Map<number, ItemResult>();
   const metadataRows: ExistingItemRow[] = [];
@@ -353,7 +355,10 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
     const payload = payloadByTarget.get(robloxTargetId(existing));
     if (!payload) {
       const failures = (existing.catalog_status_failure_count ?? 0) + 1;
-      itemUpdates.push({
+      // Keep partial status writes separate from authoritative metadata rows.
+      // PostgREST unions object keys within one upsert batch and would otherwise
+      // fill absent metadata keys with null for these rows.
+      statusUpdates.push({
         asset_id: existing.asset_id,
         catalog_status: failures >= 3 ? "unavailable" : existing.catalog_status ?? "unknown",
         catalog_status_checked_at: nowIso,
@@ -405,6 +410,7 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
   }
 
   await upsertRows("roblox_catalog_items", itemUpdates, "asset_id");
+  await upsertRows("roblox_catalog_items", statusUpdates, "asset_id");
   await insertHistory(historyRows);
 
   if (metadataRows.length) {
@@ -436,12 +442,10 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
         const thumbnailItemUpdate: Record<string, unknown> = {
           asset_id: existing.asset_id,
           last_thumbnail_health_checked_at: nowIso,
-          thumbnail_http_status: completed ? 200 : null,
+          last_thumbnail_verified_at: completed ? nowIso : existing.last_thumbnail_verified_at,
+          thumbnail_http_status: completed ? 200 : existing.thumbnail_http_status,
           thumbnail_last_error: completed ? null : `Roblox thumbnail state: ${state ?? "missing"}`
         };
-        // A pending Roblox thumbnail response is not proof that the last known
-        // good image became invalid. Preserve the last successful verification.
-        if (completed) thumbnailItemUpdate.last_thumbnail_verified_at = nowIso;
         thumbnailItemUpdates.push(thumbnailItemUpdate);
         if (completed) {
           const current = resultByAssetId.get(existing.asset_id);
