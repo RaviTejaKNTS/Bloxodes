@@ -73,3 +73,16 @@ Data readiness:
 - Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection crafting`
 - Checker result: pass with the expected pre-image warning; registered yes, 11 items, section counts 4/3/4, card summaries 11/11, images 0/11, and no errors
 - Ready for images: yes
+
+Image readiness:
+- Image field: `items[].system.image`
+- Expected image count: 11
+- Images found: 8 — Flame Pillar, Emperor King, Silent Esper, Genius Striker, Star Brawler, Demon Captain, Almighty Prime, and Twin Mages
+- Images missing: 3 — Emerald Successor, Fox Ascendant, and Dark Saber. These are accepted gaps because no clean, item-identifiable in-game images were found; unrelated anime art, marketplace listing graphics, and guessed character substitutes were rejected.
+- Image sources used: The visible Card Craft panels in the in-game screenshot published at https://allthings.how/anime-card-farm-crafting-every-evolution-card-recipe/ with source image https://static.allthings.how/wp-content/uploads/2026/08/anime-card-farm-crafting-guide-5785637307.webp
+- Public image path: `/Anime%20Card%20Farm/Crafting/<item-slug>.webp`
+- Dataset image paths updated: yes for 8 matched items; the 3 accepted gaps remain `null`
+- Provenance/handling: Each local WebP is a direct crop of its named, visible in-game Card Craft panel. Files are hosted locally rather than hotlinked, and no generic cover, AI-style article cover, or unrelated character art was used.
+- Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection crafting --require-images`
+- Checker result: pending
+- Ready for writing: pending checker review; partial coverage is acceptable because all 11 text rows remain complete and the renderer supplies consistent placeholders for missing images
