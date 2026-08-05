@@ -332,6 +332,7 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
   const payloadByTarget = new Map(payloads.map((payload) => [payloadId(payload), payload]));
   const itemUpdates: Record<string, unknown>[] = [];
   const statusUpdates: Record<string, unknown>[] = [];
+  const unavailableStatusUpdates: Record<string, unknown>[] = [];
   const historyRows: Record<string, unknown>[] = [];
   const resultByAssetId = new Map<number, ItemResult>();
   const metadataRows: ExistingItemRow[] = [];
@@ -358,12 +359,23 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
       // Keep partial status writes separate from authoritative metadata rows.
       // PostgREST unions object keys within one upsert batch and would otherwise
       // fill absent metadata keys with null for these rows.
-      statusUpdates.push({
+      const statusUpdate = {
         asset_id: existing.asset_id,
         catalog_status: failures >= 3 ? "unavailable" : existing.catalog_status ?? "unknown",
         catalog_status_checked_at: nowIso,
         catalog_status_failure_count: failures
-      });
+      };
+      if (failures >= 3) {
+        unavailableStatusUpdates.push({
+          ...statusUpdate,
+          item_stats_tier: "COLD",
+          item_stats_tier_reason: "catalog_unavailable",
+          item_stats_tier_updated_at: nowIso,
+          next_item_stats_refresh_at: addHours(nowIso, 168)
+        });
+      } else {
+        statusUpdates.push(statusUpdate);
+      }
       resultByAssetId.set(row.asset_id, {
         assetId: row.asset_id,
         success: false,
@@ -411,6 +423,7 @@ async function processBatch(queueRows: QueueRow[]): Promise<ItemResult[]> {
 
   await upsertRows("roblox_catalog_items", itemUpdates, "asset_id");
   await upsertRows("roblox_catalog_items", statusUpdates, "asset_id");
+  await upsertRows("roblox_catalog_items", unavailableStatusUpdates, "asset_id");
   await insertHistory(historyRows);
 
   if (metadataRows.length) {

@@ -60,7 +60,8 @@ async function loadRows(limit: number) {
         asset_id, name, category, subcategory, favorite_count,
         lowest_resale_price_robux, has_resellers, collectible_item_id,
         is_limited, is_limited_unique, last_item_stats_refreshed_at,
-        item_stats_tier, next_item_stats_refresh_at, thumbnail_http_status
+        item_stats_tier, next_item_stats_refresh_at, thumbnail_http_status,
+        catalog_status
       `)
       .eq("is_deleted", false)
       .order("asset_id", { ascending: true })

@@ -46,6 +46,8 @@ export type ItemStatsSourceRow = {
   last_thumbnail_health_checked_at: string | null;
   thumbnail_http_status: number | null;
   thumbnail_last_error: string | null;
+  catalog_status?: string | null;
+  catalog_status_failure_count?: number | null;
 };
 
 export type CatalogItemDetails = Record<string, unknown>;
@@ -483,7 +485,11 @@ export function assignItemStatsTier(row: {
   is_limited_unique?: boolean | null;
   last_item_stats_refreshed_at?: string | null;
   thumbnail_http_status?: number | null;
+  catalog_status?: string | null;
 }): { tier: ItemStatsTier; reason: string; refreshHours: number } {
+  if (row.catalog_status === "unavailable" || row.catalog_status === "private" || row.catalog_status === "deleted") {
+    return { tier: "COLD", reason: "catalog_unavailable", refreshHours: 168 };
+  }
   if ((row.thumbnail_http_status ?? 0) >= 400) {
     return { tier: "NEW", reason: "thumbnail_http_error", refreshHours: 1 };
   }

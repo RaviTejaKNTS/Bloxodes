@@ -141,6 +141,7 @@ async function loadItems(options: Options, workerId: string): Promise<ItemStatsS
     item_stats_tier,next_item_stats_refresh_at,item_stats_refresh_locked_at,item_stats_refresh_locked_by,item_stats_refresh_attempt_count,
     last_item_stats_refreshed_at,last_resale_data_fetched_at,
     last_thumbnail_health_checked_at,thumbnail_http_status,thumbnail_last_error
+    ,catalog_status,catalog_status_failure_count
   `;
   if (!options.dryRun) {
     const { data, error } = await supabaseAdmin().rpc("claim_roblox_item_stats_rows", {
@@ -312,7 +313,7 @@ async function upsertRows(table: string, rows: Record<string, unknown>[], onConf
   }
 }
 
-async function markFailures(rows: ItemStatsSourceRow[], workerId: string, error: unknown) {
+async function markFailures(rows: ItemStatsSourceRow[], workerId: string, error: unknown, retryAfterHours?: number) {
   if (!rows.length) return;
   const message = error instanceof Error ? error.message : String(error);
   const nowIso = new Date().toISOString();
@@ -321,9 +322,40 @@ async function markFailures(rows: ItemStatsSourceRow[], workerId: string, error:
     p_worker_id: workerId,
     p_asset_ids: rows.map((row) => row.asset_id),
     p_error: message,
-    p_next_run_at: addHours(nowIso, Math.min(72, 2 ** Math.min(maxAttempts, 6)))
+    p_next_run_at: addHours(nowIso, retryAfterHours ?? Math.min(72, 2 ** Math.min(maxAttempts, 6)))
   });
   if (releaseError) throw new Error(`Failed to release item stats rows: ${releaseError.message}`);
+}
+
+async function markMissingResponses(rows: ItemStatsSourceRow[], workerId: string) {
+  if (!rows.length) return;
+  const nowIso = new Date().toISOString();
+  const unavailable: ItemStatsSourceRow[] = [];
+  const retry: ItemStatsSourceRow[] = [];
+
+  await Promise.all(rows.map(async (row) => {
+    const failureCount = (row.catalog_status_failure_count ?? 0) + 1;
+    const confirmedUnavailable = failureCount >= 3;
+    const update: Record<string, unknown> = {
+      catalog_status: confirmedUnavailable ? "unavailable" : row.catalog_status ?? "unknown",
+      catalog_status_checked_at: nowIso,
+      catalog_status_failure_count: failureCount
+    };
+    if (confirmedUnavailable) {
+      update.item_stats_tier = "COLD";
+      update.item_stats_tier_reason = "catalog_unavailable";
+      update.item_stats_tier_updated_at = nowIso;
+      unavailable.push(row);
+    } else {
+      retry.push(row);
+    }
+    const { error } = await supabaseAdmin().from("roblox_catalog_items").update(update).eq("asset_id", row.asset_id);
+    if (error) throw new Error(`Failed to record catalog availability for ${row.asset_id}: ${error.message}`);
+  }));
+
+  const missingError = new Error("Item missing from successful Roblox catalog details response");
+  await markFailures(retry, workerId, missingError);
+  await markFailures(unavailable, workerId, missingError, 168);
 }
 
 function summarizeRows(rows: ItemStatsSourceRow[]) {
@@ -397,15 +429,15 @@ async function main() {
       }
 
       const payloadById = catalogPayloadByTargetId(payloads);
+      const missingRows: ItemStatsSourceRow[] = [];
 
       for (const row of detailBatch) {
         const targetId = robloxTargetId(row);
         const payload = payloadById.get(targetId) ?? null;
         if (!payload) {
-          const error = new Error("Item missing from successful Roblox catalog details response");
           failedRows += 1;
           failedSamples.push(...summarizeRows([row]).slice(0, Math.max(0, 10 - failedSamples.length)));
-          if (!options.dryRun) await markFailures([row], workerId, error);
+          missingRows.push(row);
           continue;
         }
         const economy =
@@ -443,6 +475,7 @@ async function main() {
         itemUpdates.push(update);
         hourlyRows.push(hourlyRowFromUpdate(row, update, thumbnailUrl, thumbnailState, nowIso, hourIso));
       }
+      if (!options.dryRun) await markMissingResponses(missingRows, workerId);
     }
 
     if (!options.dryRun) {

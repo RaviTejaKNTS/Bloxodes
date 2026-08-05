@@ -22,6 +22,7 @@ test("item stats tiers match the universe NEW HOT WARM COLD vocabulary", () => {
   assert.equal(assignItemStatsTier({ name: "Limited", category: "Accessories", subcategory: "Head", favorite_count: 5, has_resellers: true, last_item_stats_refreshed_at: "2026-01-01T00:00:00Z" }).tier, "HOT");
   assert.equal(assignItemStatsTier({ name: "Popular", category: "Accessories", subcategory: "Head", favorite_count: 15_000, last_item_stats_refreshed_at: "2026-01-01T00:00:00Z" }).tier, "WARM");
   assert.equal(assignItemStatsTier({ name: "Long tail", category: "Accessories", subcategory: "Head", favorite_count: 10, last_item_stats_refreshed_at: "2026-01-01T00:00:00Z" }).tier, "COLD");
+  assert.deepEqual(assignItemStatsTier({ catalog_status: "unavailable" }), { tier: "COLD", reason: "catalog_unavailable", refreshHours: 168 });
 });
 
 test("catalog details sends typed positive Roblox IDs", async (context) => {
