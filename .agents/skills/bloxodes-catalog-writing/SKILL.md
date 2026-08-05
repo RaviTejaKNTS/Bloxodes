@@ -45,11 +45,21 @@ Bloxodes house voice: write like a player who knows the game well, telling a fri
 - Do not expose raw HTML, raw arrays, nested objects, or unexplained `Yes`/`No` values.
 - FAQs should answer real player questions.
 
+## SEO and Heading Rules
+
+- Write one keyword-first H1 in `title`. Use a natural, stable phrase that names the collection. Do not pair exact synonyms such as `codes` and `IDs` when they refer to the same value; use the clearest search term once. Do not lead the H1 with an item count, month, year, or freshness claim.
+- Keep `seo_title` close to the H1. When a verified count or compact synonym materially helps search intent, place it after the main phrase in brackets, such as `Roblox Music Codes [58K+ Audio/Song IDs]`. Omit the count when it is not maintained by the source workflow.
+- Make `meta_description` state what the reader can find, compare, filter, or copy. Include a verified count only when the same refresh workflow maintains it.
+- Write H2s as complete, standalone descriptions of the section. Prefer clear questions or tasks such as `What are Roblox Music Codes?` or `How to use Roblox Music Codes`. Avoid fragments such as `Choosing a font`, `Overview`, `Details`, and generic `How it works`.
+- Use a topic-specific FAQ heading in the renderer, such as `Roblox Font IDs FAQ`, instead of a bare `FAQ` when the route supports a custom title.
+- Do not add a visible `Browse all...`, count line, eyebrow, badge, or label merely to create a heading level or repeat the H1. If repeated item names need headings and no useful parent heading exists, render item names as H2s. Use H3s only under a genuinely useful visible H2.
+- Keep the H1, browser title, Open Graph title, breadcrumb name, WebPage name, and ItemList name sourced consistently so they do not drift.
+
 ## Field Jobs
 
 - `code`: Use the stable catalog route code.
-- `title`: Name the collection clearly and match the real reader task.
-- `seo_title`: Keep it close to the visible title unless search needs a cleaner version.
+- `title`: Write the natural keyword-first H1. Keep changing counts and dates out of it.
+- `seo_title`: Follow the approved comparison-page pattern. Put a verified count or compact synonym in brackets only when it improves search clarity.
 - `meta_description`: Say what the reader can find, compare, or understand.
 - `intro_md`: Explain what the collection is and why players use it.
 - `description_md`: Answer the main collection question in depth without repeating item cards.

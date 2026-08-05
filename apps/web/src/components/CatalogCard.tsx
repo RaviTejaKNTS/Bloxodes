@@ -1,4 +1,4 @@
-import { Gift, Image as ImageIcon, Music, Package, Palette, Shirt, Smile, Sparkles, Terminal, Wrench } from "lucide-react";
+import { Gift, Image as ImageIcon, Music, Package, Palette, Shirt, Smile, Sparkles, Terminal, Type, Wrench } from "lucide-react";
 import { ContentCard } from "@/components/ContentCard";
 import type { CatalogIconKey } from "@/lib/catalog-card-meta";
 
@@ -18,6 +18,7 @@ const ICONS: Record<CatalogIconKey, typeof Music> = {
   image: ImageIcon,
   palette: Palette,
   terminal: Terminal,
+  type: Type,
   smile: Smile,
   sparkles: Sparkles,
   wrench: Wrench

@@ -32,6 +32,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Tool copy and tool indexes.
 - `catalog_pages`, `catalog_pages_view`
   - General Roblox catalog hub copy and catalog indexes for pages that are not tied to one game, such as music IDs, decal IDs, free Roblox items, and admin commands.
+- `roblox_font_ids`
+  - Official Roblox Creator Store FontFamily assets, native faces/styles, preview thumbnails, licensing metadata, and verification timestamps for `/catalog/roblox-font-ids`.
+- `roblox_mesh_ids`
+  - Public Roblox Creator Store MeshPart listings, their underlying geometry Mesh IDs, optional Texture IDs, square previews, source order, and verification timestamps for `/catalog/roblox-mesh-ids`.
 - `events_pages`
   - Event landing pages.
 

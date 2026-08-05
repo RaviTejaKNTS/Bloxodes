@@ -42,6 +42,17 @@ Do not re-implement these patterns inside each route unless the catalog page gen
 - Do not fall back to `new Date()` just to show an updated label or schema date.
 - Default public catalog route revalidation is `86400` unless a page has a clearly faster update cycle.
 
+## SEO and Heading Rules
+
+- Follow the closest successful page in the same catalog/search family. Record the comparison in the research brief before writing.
+- Keep the H1 keyword-first, natural, and stable. Do not lead it with a count, date, or freshness value that can change after a refresh.
+- Do not pair exact synonyms such as `codes` and `IDs` in the H1 when they name the same value. Use the clearest search term once.
+- Keep the SEO title close to the H1. A verified count or compact synonym may appear in brackets when it improves search clarity and the source workflow maintains it.
+- Use complete, meaningful H2s that explain a real question or task. Avoid vague fragments such as `Overview`, `Details`, `Choosing...`, or generic `How it works`.
+- Do not add a visible `Browse all...` heading, eyebrow, badge, label, or count just to repeat the H1 or manufacture document hierarchy. If item names need headings without a useful parent section, use H2 for the item names.
+- Use a topic-specific FAQ heading when the page renderer supports it.
+- Verify the rendered browser title, meta description, canonical, one H1, H2 outline, Open Graph title, and relevant JSON-LD names together.
+
 ## Publish Rules
 
 - Public catalog routes should use published content loaders.

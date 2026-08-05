@@ -56,6 +56,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Admin commands | `/catalog/admin-commands`, `/catalog/admin-commands/[system]` | `src/app/(site)/catalog/admin-commands/*`, backed by `data/Admin commands/*.md` |
 | Roblox errors and fixes | `/catalog/roblox-errors-and-fixes` | `src/app/(site)/catalog/roblox-errors-and-fixes/*`, with the searchable error reference in `data/roblox-errors/roblox-errors.json` and long-form copy in `catalog_pages` |
 | Roblox promo codes and reward items | `/catalog/roblox-promo-codes` | `src/app/(site)/catalog/roblox-promo-codes/*`, with server-rendered rows from `roblox_promo_rewards`, client-side search/type filters, explicit source-listed versus verified claimability states, and long-form copy in `catalog_pages` |
+| Roblox font IDs | `/catalog/roblox-font-ids` | `src/app/(site)/catalog/roblox-font-ids/*`, with 85 official FontFamily records from `roblox_font_ids`, Roblox-supplied previews, searchable style/designer filtering, copyable IDs and Luau, and long-form copy in `catalog_pages` |
+| Roblox mesh IDs | `/catalog/roblox-mesh-ids`, `/catalog/roblox-mesh-ids/page/[page]` | `src/app/(site)/catalog/roblox-mesh-ids/*`, with 1,000 public Creator Store MeshPart records from `roblox_mesh_ids`, official square previews, searchable underlying Mesh IDs, optional Texture IDs, and long-form copy in `catalog_pages` |
 | The Forge collections | `/wiki/the-forge/[collection]` | `src/app/(site)/wiki/collections/games/the-forge.tsx` |
 | Grow a Garden collections | `/wiki/grow-a-garden/[collection]` | `src/app/(site)/wiki/collections/games/grow-a-garden.tsx` |
 | Generic catalog fallback | `/catalog/[...slug]` | `src/app/(site)/catalog/[...slug]/page.tsx`, backed by Supabase catalog copy |

@@ -39,7 +39,8 @@ npm run verify:catalog-finals -- --base-url http://localhost:<port> --file <fina
 ```
 
 8. If the verifier passes, open the verified `/catalog/<code>` link in the Codex Browser.
-9. Return paths, localhost link, blocked reason if any, and remaining risks.
+9. In the rendered page, verify the browser title, meta description, canonical, one H1, meaningful H2 outline, Open Graph title, and relevant JSON-LD names. Confirm that visible headings add information instead of repeating the H1.
+10. Return paths, localhost link, blocked reason if any, and remaining risks.
 
 ## Parent Checks
 
@@ -49,3 +50,7 @@ npm run verify:catalog-finals -- --base-url http://localhost:<port> --file <fina
 - no raw dataset or website-first wording appears in public copy
 - public copy reads in the Bloxodes house voice: simple English, calm playful gamer-buddy, light wit on real facts, no hype words or AI filler
 - verifier and Browser preview pass
+- H1 is keyword-first and stable; changing counts or dates live in metadata only when verified
+- SEO title follows the approved comparable-page pattern without keyword stuffing
+- section headings are complete and meaningful, with no redundant `Browse all...`, eyebrow, count, or label added only for hierarchy
+- rendered metadata, canonical, Open Graph title, heading outline, and JSON-LD names agree

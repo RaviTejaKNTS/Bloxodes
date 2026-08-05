@@ -75,6 +75,8 @@ const GENERAL_CATALOG_ORDER = [
   "roblox-music-ids",
   "free-roblox-items",
   "roblox-decal-ids",
+  "roblox-font-ids",
+  "roblox-mesh-ids",
   "roblox-color-codes",
   "admin-commands"
 ] as const;

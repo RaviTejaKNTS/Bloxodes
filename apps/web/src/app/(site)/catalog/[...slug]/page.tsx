@@ -29,6 +29,8 @@ const RESERVED_CATALOG_PREFIXES = [
   "roblox-makeup",
   "roblox-errors-and-fixes",
   "roblox-promo-codes",
+  "roblox-font-ids",
+  "roblox-mesh-ids",
   "the-forge",
   "grow-a-garden"
 ];

@@ -16,6 +16,7 @@ export type CatalogIconKey =
   | "image"
   | "palette"
   | "terminal"
+  | "type"
   | "smile"
   | "sparkles"
   | "wrench";
@@ -34,6 +35,8 @@ type CountSource =
   | { kind: "avatar"; code: string; sale?: AvatarCatalogSaleFilter }
   | { kind: "music" }
   | { kind: "decal" }
+  | { kind: "font" }
+  | { kind: "mesh" }
   | { kind: "promo" }
   | null;
 
@@ -115,6 +118,8 @@ const CATALOG_CONFIG: Record<string, CatalogConfig> = {
     source: { kind: "promo" }
   },
   "roblox-decal-ids": { shortLabel: "Decal IDs", unit: "decal IDs", icon: "image", source: { kind: "decal" } },
+  "roblox-font-ids": { shortLabel: "Font IDs", unit: "font families", icon: "type", source: { kind: "font" } },
+  "roblox-mesh-ids": { shortLabel: "Mesh IDs", unit: "MeshPart assets", icon: "package", source: { kind: "mesh" } },
   "admin-commands": { shortLabel: "Admin Commands", unit: "commands", icon: "terminal", source: null }
 };
 
@@ -161,6 +166,38 @@ const countPromoRewards = publicContentCache(
   { revalidate: 3600, tags: ["catalog-index", "catalog:roblox-promo-codes"] }
 );
 
+const countFontIds = publicContentCache(
+  async (): Promise<number | null> => {
+    const sb = supabaseAdmin();
+    const { count, error } = await sb
+      .from("roblox_font_ids")
+      .select("asset_id", { count: "exact", head: true })
+      .eq("status", "active")
+      .eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null);
+    if (error) throw error;
+    return count ?? null;
+  },
+  ["catalogCardMeta:fontIdsCount:v1"],
+  { revalidate: 3600, tags: ["catalog-index", "catalog:roblox-font-ids"] }
+);
+
+const countMeshIds = publicContentCache(
+  async (): Promise<number | null> => {
+    const sb = supabaseAdmin();
+    const { count, error } = await sb
+      .from("roblox_mesh_ids")
+      .select("asset_id", { count: "exact", head: true })
+      .eq("status", "active")
+      .eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null);
+    if (error) throw error;
+    return count ?? null;
+  },
+  ["catalogCardMeta:meshIdsCount:v1"],
+  { revalidate: 3600, tags: ["catalog-index", "catalog:roblox-mesh-ids"] }
+);
+
 async function resolveCount(source: CountSource): Promise<number | null> {
   if (!source) return null;
   try {
@@ -169,6 +206,12 @@ async function resolveCount(source: CountSource): Promise<number | null> {
     }
     if (source.kind === "decal") {
       return await countDecalIds();
+    }
+    if (source.kind === "font") {
+      return await countFontIds();
+    }
+    if (source.kind === "mesh") {
+      return await countMeshIds();
     }
     if (source.kind === "promo") {
       return await countPromoRewards();

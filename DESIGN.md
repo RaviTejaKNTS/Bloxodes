@@ -91,6 +91,9 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Articles and guides can use large headings and comfortable paragraph spacing.
 - Data-heavy sections can be denser, but should still be readable on mobile.
 - Do not convert article content into a dashboard layout. Apply the database feel to the shell and reusable UI controls.
+- Every visible heading must help the reader understand a distinct section. Do not add `Browse all...` or similar headings merely to repeat the H1 or satisfy document hierarchy.
+- Avoid decorative eyebrows, redundant labels, status text, count lines, and badges on public content cards. Keep one only when it provides decision-relevant information that is not already clear from the title, value, control, or surrounding context.
+- Prefer large, readable item names and previews over dense card metadata. Keep functional labels only where accessibility or ambiguity requires them.
 
 ## Interaction
 

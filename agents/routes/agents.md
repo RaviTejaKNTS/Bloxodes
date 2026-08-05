@@ -53,6 +53,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/roblox-decal-ids` | `GET` | `src/app/api/roblox-decal-ids/route.ts` | Paginated/searchable Roblox decal ID catalog data. |
 | `/api/roblox-id-extractor` | `GET` | `src/app/api/roblox-id-extractor/route.ts` | Resolve Roblox URLs and IDs with Roblox API plus Supabase fallbacks. |
 | `/api/roblox-music-ids` | `GET` | `src/app/api/roblox-music-ids/route.ts` | Paginated/searchable music ID catalog data. |
+| `/api/roblox-mesh-ids` | `GET` | `src/app/api/roblox-mesh-ids/route.ts` | Paginated/searchable Roblox Mesh ID catalog data. |
 | `/api/search/all` | `GET` | `src/app/api/search/all/route.ts` | Site-wide aggregated search. |
 | `/api/search/games` | `GET` | `src/app/api/search/games/route.ts` | Lightweight games search for UI autocomplete. |
 | `/api/stats/games` | `GET` | `src/app/api/stats/games/route.ts` | Public stats game table payload with search, sort, genre, and minimum-player filters. |

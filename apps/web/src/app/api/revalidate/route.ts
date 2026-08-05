@@ -28,6 +28,8 @@ const EVENT_TYPES = new Set<PublicCacheEventType>([
 const MUSIC_CATALOG_CODES = new Set(["roblox-music-ids"]);
 const DECAL_CATALOG_CODE = "roblox-decal-ids";
 const DECAL_BASE_PATH = `/catalog/${DECAL_CATALOG_CODE}`;
+const MESH_CATALOG_CODE = "roblox-mesh-ids";
+const MESH_BASE_PATH = `/catalog/${MESH_CATALOG_CODE}`;
 const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
 const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
 const FREE_ITEMS_CATALOG_PREFIXES = [FREE_ITEMS_CATALOG_CODE, LEGACY_FREE_ITEMS_CATALOG_CODE];
@@ -419,6 +421,19 @@ function revalidateForDecalIds(slug = DECAL_CATALOG_CODE) {
   ]);
 }
 
+function revalidateForMeshIds() {
+  return applyRevalidation(
+    [
+      "/catalog",
+      ...paginatedIndexPaths(MESH_BASE_PATH),
+      "/",
+      SITEMAP_INDEX_PATH,
+      CATALOG_SITEMAP_PATH
+    ],
+    ["catalog-index", `catalog:${MESH_CATALOG_CODE}`]
+  );
+}
+
 function isFreeItemsCatalogSlug(slug: string) {
   return FREE_ITEMS_CATALOG_PREFIXES.some((prefix) => slug === prefix || slug.startsWith(`${prefix}/`));
 }
@@ -801,6 +816,9 @@ async function collectRevalidationTargets(payload: SinglePayload) {
       }
       if (slug === DECAL_CATALOG_CODE || slug.startsWith(`${DECAL_CATALOG_CODE}/`)) {
         purgePaths = [...purgePaths, ...revalidateForDecalIds(slug)];
+      }
+      if (slug === MESH_CATALOG_CODE) {
+        purgePaths = [...purgePaths, ...revalidateForMeshIds()];
       }
       if (isFreeItemsCatalogSlug(slug)) {
         purgePaths = [...purgePaths, ...revalidateForFreeItems(slug)];

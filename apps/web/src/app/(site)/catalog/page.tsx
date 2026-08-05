@@ -42,6 +42,8 @@ const GENERAL_CATALOG_ORDER = [
   "free-roblox-items",
   "roblox-promo-codes",
   "roblox-decal-ids",
+  "roblox-font-ids",
+  "roblox-mesh-ids",
   "roblox-color-codes",
   "admin-commands"
 ];
