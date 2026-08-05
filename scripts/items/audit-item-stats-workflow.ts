@@ -66,6 +66,7 @@ function evaluate(snapshot: HealthSnapshot): Check[] {
   const indexAge = ageHours(snapshot.stats.index_latest_at);
   const freeAge = ageHours(snapshot.free_items.latest_verified_at);
   const discoveryFinishedAt = (snapshot.latest_discovery?.finished_at as string | null) ?? null;
+  const discoveryStatus = (snapshot.latest_discovery?.status as string | null) ?? null;
   const discoveryAge = ageHours(discoveryFinishedAt);
 
   return [
@@ -76,6 +77,7 @@ function evaluate(snapshot: HealthSnapshot): Check[] {
     check("queue_dead", snapshot.queue.dead, snapshot.queue.dead === 0 ? "pass" : "warn", "0 dead jobs"),
     check("canonical_duplicates", snapshot.catalog.duplicate_canonical_keys, snapshot.catalog.duplicate_canonical_keys === 0 ? "pass" : "warn", "0 legacy duplicate keys"),
     check("free_items_freshness_hours", freeAge, freeAge <= 30 ? "pass" : freeAge <= 48 ? "warn" : "fail", "<= 30h"),
+    check("discovery_last_status", discoveryStatus, discoveryStatus === "success" ? "pass" : discoveryStatus === "partial" ? "warn" : "fail", "latest discovery run succeeded"),
     check("discovery_freshness_hours", discoveryAge, discoveryAge <= 30 ? "pass" : discoveryAge <= 48 ? "warn" : "fail", "<= 30h"),
     check("stats_index_freshness_hours", indexAge, indexAge <= 2 ? "pass" : indexAge <= 26 ? "warn" : "fail", "<= 2h; application falls back to live catalog when stale"),
     check("hourly_stats_activity", snapshot.stats.hourly_24h, snapshot.stats.hourly_24h > 0 ? "pass" : "fail", "> 0 hourly samples in 24h")
