@@ -61,6 +61,7 @@ type UniverseRow = {
   last_stats_refreshed_at: string | null;
   last_seen_in_search: string | null;
   last_seen_in_sort: string | null;
+  stats_refresh_attempt_count: number | null;
 };
 
 type HourlyRow = {
@@ -113,6 +114,10 @@ function compactIsoHour(date: Date): string {
 
 function isoDate(date: Date): string {
   return date.toISOString().slice(0, 10);
+}
+
+function addHours(value: string, hours: number) {
+  return new Date(new Date(value).getTime() + hours * 3_600_000).toISOString();
 }
 
 function toNumber(value: unknown): number | null {
@@ -189,86 +194,74 @@ async function fetchRobloxJson(url: string, label: string): Promise<any> {
 }
 
 async function fetchUniverses(options: Options): Promise<UniverseRow[]> {
-  const sb = supabaseAdmin();
-  const rows: UniverseRow[] = [];
-  let from = 0;
-  const leaseCutoff = new Date(Date.now() - LEASE_MINUTES * 60 * 1000).toISOString();
-  while (true) {
-    if (options.limit > 0 && rows.length >= options.limit) break;
-    const remaining = options.limit > 0 ? options.limit - rows.length : BATCH_SIZE;
-    const pageSize = Math.min(BATCH_SIZE, remaining);
-    let query = sb
-      .from("roblox_universes")
-      .select("universe_id, root_place_id, slug, playing, visits, favorites, likes, dislikes, created_at_api, updated_at_api, stats_tier, last_stats_refreshed_at, last_seen_in_search, last_seen_in_sort")
-      .not("root_place_id", "is", null)
-      .or(`stats_refresh_locked_at.is.null,stats_refresh_locked_at.lt.${leaseCutoff}`);
-
-    if (options.universeIds.length) {
-      query = query.in("universe_id", options.universeIds);
-    } else if (options.tier === "NEW") {
-      query = query.or("stats_tier.eq.NEW,last_stats_refreshed_at.is.null,playing.is.null,visits.is.null");
-    } else if (options.tier !== "ALL") {
-      query = query.eq("stats_tier", options.tier);
-    }
-
-    let orderedQuery = query
-      .order("last_stats_refreshed_at", { ascending: true, nullsFirst: true })
-      .order("last_playing_refreshed_at", { ascending: true, nullsFirst: true });
-
-    if (!options.universeIds.length && options.tier === "NEW") {
-      orderedQuery = orderedQuery
-        .order("last_seen_in_sort", { ascending: false, nullsFirst: false })
-        .order("last_seen_in_search", { ascending: false, nullsFirst: false });
-    }
-
-    const { data, error } = await orderedQuery
-      .order("playing", { ascending: false, nullsFirst: false })
-      .order("visits", { ascending: false, nullsFirst: false })
-      .order("universe_id", { ascending: true })
-      .range(from, from + pageSize - 1);
-    if (error) throw error;
-    const chunk = (data ?? []) as UniverseRow[];
-    rows.push(...chunk);
-    if (chunk.length < pageSize) break;
-    from += pageSize;
-  }
-  return claimUniverseLeases(rows);
-}
-
-async function claimUniverseLeases(rows: UniverseRow[]) {
-  if (!rows.length) return rows;
-  for (let index = 0; index < rows.length; index += LEASE_CHUNK_SIZE) {
-    const ids = rows.slice(index, index + LEASE_CHUNK_SIZE).map((row) => row.universe_id);
-    const { error } = await supabaseAdmin()
-      .from("roblox_universes")
-      .update({
-        stats_refresh_locked_at: new Date().toISOString(),
-        stats_refresh_locked_by: WORKER_ID
-      })
-      .in("universe_id", ids);
-    if (error) {
-      console.warn("Failed to claim stats refresh leases:", error.message);
-    }
-  }
-  return rows;
+  const requestedLimit = options.universeIds.length || options.limit || DEFAULT_LIMIT || BATCH_SIZE;
+  const { data, error } = await supabaseAdmin().rpc("claim_roblox_universe_stats_rows", {
+    p_worker_id: WORKER_ID,
+    p_tier: options.tier,
+    p_limit: requestedLimit,
+    p_lease_minutes: LEASE_MINUTES,
+    p_universe_ids: options.universeIds.length ? options.universeIds : null
+  });
+  if (error) throw new Error(`Failed to claim universe stats rows: ${error.message}`);
+  return (data ?? []) as UniverseRow[];
 }
 
 async function releaseUniverseLeases(universeIds: number[]) {
   if (!universeIds.length) return;
   for (let index = 0; index < universeIds.length; index += LEASE_CHUNK_SIZE) {
     const ids = universeIds.slice(index, index + LEASE_CHUNK_SIZE);
-    const { error } = await supabaseAdmin()
-      .from("roblox_universes")
-      .update({
-        stats_refresh_locked_at: null,
-        stats_refresh_locked_by: null
-      })
-      .in("universe_id", ids)
-      .eq("stats_refresh_locked_by", WORKER_ID);
+    const { error } = await supabaseAdmin().rpc("release_roblox_universe_stats_rows", {
+      p_worker_id: WORKER_ID,
+      p_universe_ids: ids,
+      p_error: null,
+      p_next_run_at: null
+    });
     if (error) {
       console.warn("Failed to release stats refresh leases:", error.message);
     }
   }
+}
+
+async function markFailures(rows: UniverseRow[], error: unknown, retryAfterHours?: number) {
+  if (!rows.length) return;
+  const message = error instanceof Error ? error.message : String(error);
+  const maxAttempts = Math.max(...rows.map((row) => row.stats_refresh_attempt_count ?? 1));
+  const nextRunAt = addHours(
+    new Date().toISOString(),
+    retryAfterHours ?? Math.min(72, 2 ** Math.min(maxAttempts, 6))
+  );
+  for (let index = 0; index < rows.length; index += LEASE_CHUNK_SIZE) {
+    const { error: releaseError } = await supabaseAdmin().rpc("release_roblox_universe_stats_rows", {
+      p_worker_id: WORKER_ID,
+      p_universe_ids: rows.slice(index, index + LEASE_CHUNK_SIZE).map((row) => row.universe_id),
+      p_error: message,
+      p_next_run_at: nextRunAt
+    });
+    if (releaseError) throw new Error(`Failed to release universe stats rows: ${releaseError.message}`);
+  }
+}
+
+async function markMissingResponses(rows: UniverseRow[]) {
+  if (!rows.length) return;
+  const nowIso = new Date().toISOString();
+  const unavailable = rows.filter((row) => (row.stats_refresh_attempt_count ?? 1) >= 3);
+  const unavailableIds = new Set(unavailable.map((row) => row.universe_id));
+  const retry = rows.filter((row) => !unavailableIds.has(row.universe_id));
+  for (const row of unavailable) {
+    const { error } = await supabaseAdmin()
+      .from("roblox_universes")
+      .update({
+        stats_tier: "COLD",
+        stats_tier_reason: "game_details_unavailable",
+        stats_tier_updated_at: nowIso
+      })
+      .eq("universe_id", row.universe_id)
+      .eq("stats_refresh_locked_by", WORKER_ID);
+    if (error) throw new Error(`Failed to quarantine unavailable universe ${row.universe_id}: ${error.message}`);
+  }
+  const missingError = new Error("Universe missing from successful Roblox game details response");
+  await markFailures(retry, missingError);
+  await markFailures(unavailable, missingError, 168);
 }
 
 async function fetchStats(universeIds: number[]): Promise<Record<number, PublicStats>> {
@@ -373,6 +366,7 @@ function buildHourlyPayload(row: UniverseRow, stats: PublicStats, existing: Hour
 type ChunkWriteResult = {
   attempted: number;
   updated: number;
+  missing: number;
   hourlyRows: number;
   updateEvents: number;
   detailEvents: RevalidationEvent[];
@@ -398,6 +392,8 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
   const hourlyPayloads = [];
   const updateEventPayloads = [];
   const detailEvents: RevalidationEvent[] = [];
+  const missingRows = chunk.filter((row) => !values[row.universe_id]);
+  await markMissingResponses(missingRows);
   let updated = 0;
   for (const row of chunk) {
     const stats = values[row.universe_id];
@@ -425,7 +421,12 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
       stats_tier: tier.tier,
       stats_tier_reason: tier.reason,
       stats_tier_updated_at: sampledAtIso,
-      last_stats_refreshed_at: sampledAtIso
+      last_stats_refreshed_at: sampledAtIso,
+      next_stats_refresh_at: addHours(sampledAtIso, tier.refreshHours),
+      stats_refresh_locked_at: null,
+      stats_refresh_locked_by: null,
+      stats_refresh_attempt_count: 0,
+      last_stats_refresh_error: null
     };
     if (!row.created_at_api && stats.createdAtApi) updatePayload.created_at_api = stats.createdAtApi;
     if (!row.updated_at_api && stats.updatedAtApi) updatePayload.updated_at_api = stats.updatedAtApi;
@@ -488,6 +489,7 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
   return {
     attempted: chunk.length,
     updated,
+    missing: missingRows.length,
     hourlyRows: hourlyPayloads.length,
     updateEvents: updateEventPayloads.length,
     detailEvents
@@ -601,7 +603,7 @@ async function main() {
 
   try {
     universes = (await fetchUniverses(options)).filter(
-      (row) => typeof row.universe_id === "number" && row.root_place_id !== null
+      (row) => typeof row.universe_id === "number" && typeof row.root_place_id === "number" && row.root_place_id > 0
     );
     if (!universes.length) {
       console.log("No universes found.");
@@ -617,6 +619,7 @@ async function main() {
         const statsMap = await fetchStats(ids);
         const result = await writeChunk(chunk, statsMap, sampledAt);
         updatedRows += result.updated;
+        failedRows += result.missing;
         hourlyRows += result.hourlyRows;
         updateEvents += result.updateEvents;
         for (const event of result.detailEvents) {
@@ -625,6 +628,7 @@ async function main() {
         console.log(`  - Updated chunk ${i / BATCH_SIZE + 1} (${result.updated}/${chunk.length} universes)`);
       } catch (error) {
         failedRows += chunk.length;
+        await markFailures(chunk, error);
         console.error(`Chunk ${i / BATCH_SIZE + 1} failed:`, (error as Error).message);
       }
       await sleep(REQUEST_DELAY_MS);

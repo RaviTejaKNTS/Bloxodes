@@ -563,7 +563,7 @@ async function fetchUniversePage(
   let query = supabase
     .from("roblox_universes")
     .select("universe_id, root_place_id, last_seen_in_sort, last_seen_in_search, updated_at, name, playing, visits, stats_tier")
-    .not("root_place_id", "is", null);
+    .gt("root_place_id", 0);
 
   if (universeIds.length) {
     query = query.in("universe_id", universeIds);
@@ -1446,13 +1446,29 @@ async function processBatch(
     mode === "deep" ? fetchUniverseMetadata(universeIds) : Promise.resolve(new Map<number, UniverseMetadata>()),
     fetchGameDetails(universeIds)
   ]);
+  const validDetails = details.filter((detail) => Number.isSafeInteger(detail.id) && detail.id > 0);
+  const returnedIds = new Set(validDetails.map((detail) => detail.id));
+  const missingIds = universeIds.filter((universeId) => !returnedIds.has(universeId));
+  if (missingIds.length) {
+    const { error } = await supabase
+      .from("roblox_universes")
+      .update({
+        last_light_enriched_at: nowIso(),
+        last_stats_refresh_error: "Universe missing from successful Roblox game details response"
+      })
+      .in("universe_id", missingIds);
+    if (error) throw error;
+    console.warn(
+      `⚠️ Roblox omitted ${missingIds.length} requested universes; deferred them so enrichment can rotate. Examples: ${missingIds.slice(0, 5).join(", ")}`
+    );
+  }
   const rootMap = new Map(universes.map((u) => [u.universe_id, u.root_place_id]));
   for (const [id, meta] of metadataMap.entries()) {
     if (meta.rootPlaceId) {
       rootMap.set(id, meta.rootPlaceId);
     }
   }
-  const needsLookup = details
+  const needsLookup = validDetails
     .filter((detail) => {
       const existing = rootMap.get(detail.id);
       return (detail.rootPlaceId == null || detail.rootPlaceId === 0) && (existing == null || existing === 0);
@@ -1474,7 +1490,7 @@ async function processBatch(
 
   const missingRootIds: number[] = [];
   const enrichedAt = nowIso();
-  const upsertPayload = details
+  const upsertPayload = validDetails
     .map((detail) => {
       const metadata = metadataMap.get(detail.id);
       const fallbackRoot = rootMap.get(detail.id) ?? null;
@@ -1492,7 +1508,7 @@ async function processBatch(
       return mapped;
     })
     .filter((value): value is NonNullable<typeof value> => value != null);
-  const skipped = details.length - upsertPayload.length;
+  const skipped = validDetails.length - upsertPayload.length;
   if (skipped > 0) {
     console.warn(
       `⚠️ Skipped ${skipped} universes due to missing root place IDs. Examples: ${missingRootIds.slice(0, 5).join(", ")}`

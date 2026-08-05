@@ -81,7 +81,7 @@ function evaluate(snapshot: HealthSnapshot): Check[] {
     check("stale_discovery_runs", snapshot.catalog.stale_discovery_runs, snapshot.catalog.stale_discovery_runs === 0 ? "pass" : "fail", "0 discovery runs left running for over 2h"),
     check("stale_job_runs", snapshot.catalog.stale_job_runs, snapshot.catalog.stale_job_runs === 0 ? "pass" : "fail", "0 job runs left running for over 6h"),
     check("free_items_freshness_hours", freeAge, freeAge <= 30 ? "pass" : freeAge <= 48 ? "warn" : "fail", "<= 30h"),
-    check("discovery_last_status", discoveryStatus, discoveryStatus === "success" ? "pass" : discoveryStatus === "partial" ? "warn" : "fail", "latest discovery run succeeded"),
+    check("discovery_last_status", discoveryStatus, discoveryStatus === "completed" || discoveryStatus === "success" ? "pass" : discoveryStatus === "partial" ? "warn" : "fail", "latest discovery run completed"),
     check("discovery_freshness_hours", discoveryAge, discoveryAge <= 30 ? "pass" : discoveryAge <= 48 ? "warn" : "fail", "<= 30h"),
     check("stats_index_freshness_hours", indexAge, indexAge <= 2 ? "pass" : indexAge <= 26 ? "warn" : "fail", "<= 2h; application falls back to live catalog when stale"),
     check("hourly_stats_activity", snapshot.stats.hourly_24h, snapshot.stats.hourly_24h > 0 ? "pass" : "fail", "> 0 hourly samples in 24h")

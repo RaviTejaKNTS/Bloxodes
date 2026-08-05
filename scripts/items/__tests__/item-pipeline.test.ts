@@ -10,6 +10,7 @@ import {
   robloxTargetId,
   RobloxRateLimitError
 } from "../item-stats-utils";
+import { assignStatsTier } from "../../universes/stats-tier";
 
 test("canonical item identity keeps asset IDs positive and bundle IDs negative", () => {
   assert.equal(internalCatalogItemId(123, "Asset"), 123);
@@ -31,6 +32,13 @@ test("item stats tiers match the universe NEW HOT WARM COLD vocabulary", () => {
   assert.equal(assignItemStatsTier({ name: "Popular", category: "Accessories", subcategory: "Head", favorite_count: 15_000, last_item_stats_refreshed_at: "2026-01-01T00:00:00Z" }).tier, "WARM");
   assert.equal(assignItemStatsTier({ name: "Long tail", category: "Accessories", subcategory: "Head", favorite_count: 10, last_item_stats_refreshed_at: "2026-01-01T00:00:00Z" }).tier, "COLD");
   assert.deepEqual(assignItemStatsTier({ catalog_status: "unavailable" }), { tier: "COLD", reason: "catalog_unavailable", refreshHours: 168 });
+});
+
+test("universe tiers carry refresh SLAs for NEW HOT WARM and COLD", () => {
+  assert.deepEqual(assignStatsTier({}), { tier: "NEW", reason: "new_or_missing_stats", refreshHours: 2 });
+  assert.equal(assignStatsTier({ playing: 100, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 1);
+  assert.equal(assignStatsTier({ visits: 10_000_000, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 12);
+  assert.equal(assignStatsTier({ playing: 0, visits: 0, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 168);
 });
 
 test("catalog details sends typed positive Roblox IDs", async (context) => {
