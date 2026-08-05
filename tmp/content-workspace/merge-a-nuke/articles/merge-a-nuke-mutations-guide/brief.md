@@ -1,0 +1,147 @@
+Evidence checked:
+- Existing Bloxodes coverage:
+  - No published article at `/articles/merge-a-nuke-mutations-guide` (live 404).
+  - No merge-a-nuke article slugs in the public articles sitemap.
+  - Live wiki hub exists at `/wiki/merge-a-nuke` (200) but covers core loop, tips, events, and game passes only — no mutations section.
+  - Live stats page exists at `/stats/games/merge-a-nuke` (200).
+  - No live `/codes/merge-a-nuke`, `/checklists/merge-a-nuke`, `/events/merge-a-nuke`, or `/quizzes/merge-a-nuke` pages (all 404).
+  - Local repo registers the game in `apps/web/src/lib/game-collections/games/merge-a-nuke.ts` with `universeId: 10199301628`; no collection datasets yet.
+  - Production DB could not be queried directly in this environment (no `.env` credentials available). Live-site checks above are the overlap source of truth used here.
+- Game universe_id (if game-specific): `10199301628` (Merge a Nuke / Merge a Nuke! by Nuke The Game)
+- Internal link candidates (existing same-game/related pages with slugs, 2+):
+  - `/wiki/merge-a-nuke` — game hub, merge/raid/rebirth context
+  - `/stats/games/merge-a-nuke` — live player/visit stats and game identity
+- Source/competitor coverage:
+  - Sportskeeda (user lead): https://www.sportskeeda.com/roblox-news/merge-a-nuke-mutations-guide — published 2026-08-05; title/meta confirm a mutations guide, but article body was not extractable in this environment.
+  - Pro Game Guides: https://progameguides.com/roblox/merge-a-nuke-mutations-how-to-get-effects-more/ — strongest competitor table for known mutation names/effects; explicitly marks several index slots as TBA.
+  - BloxRant: https://bloxrant.com/merge-a-nuke-mutations-update-guide/ — update explainer for unlock flow, Index, destroy/lock tools, multi-mutation behavior, farming loop; no per-mutation stat table.
+  - Xbox Play Games: https://xboxplay.games/merge-a-nuke/how-to-get-the-magma-mutation-in-merge-a-nuke-74956 — corroborates rebirth gates, stacking, Stabilized Legendary rolls, Magma event path.
+  - Beebom / Insider Gaming / Radio Times — codes only; no mutation mechanics.
+  - mergeanuke.art / mergeanuke.online — wiki-style hubs with codes/raid/rebirth content; no verified full mutation table found.
+  - IGN, Eurogamer, TechWiser, Game Rant — no dedicated Merge a Nuke mutations pages found.
+- Sources found:
+  - https://www.sportskeeda.com/roblox-news/merge-a-nuke-mutations-guide
+  - https://progameguides.com/roblox/merge-a-nuke-mutations-how-to-get-effects-more/
+  - https://bloxrant.com/merge-a-nuke-mutations-update-guide/
+  - https://xboxplay.games/merge-a-nuke/how-to-get-the-magma-mutation-in-merge-a-nuke-74956
+  - https://beebom.com/merge-a-nuke-codes/
+  - https://bloxodes.com/wiki/merge-a-nuke
+  - https://bloxodes.com/stats/games/merge-a-nuke
+  - https://www.youtube.com/watch?v=CfIdoE-D5R8 (update showcase; not mutations-specific)
+  - Third-party universe confirmation: robipedia / ggaid list universe `10199301628`
+- Sources used for exact facts:
+  - Pro Game Guides + Xbox Play Games for rebirth unlock gates, mutation count/rarity structure, known buff/debuff percentages, Stabilized Legendary note, Magma event basics.
+  - BloxRant + Pro Game Guides for destroy/lock/check/index/multi-mutation/farming behavior.
+  - Bloxodes wiki + Roblox experience metadata for game identity and creator name.
+- Sources checked but not usable:
+  - Sportskeeda lead article body — static fetch returned shell HTML only; no mutation table or prose could be verified from the page itself. Metadata only.
+  - mergeanuke.art update/rebirth guides — useful for general progression tone, but rebirth counts and rocket tables conflict with current mutation-era sources; not used for mutation facts.
+  - allthings.how overpowered guide — outdated rebirth cap (claims 3 rebirths); do not use.
+  - allthings.how events schedule page — fetched copy was stale (July Contracts event); could not verify the Aug 1–8 Mutations event block from a stable page body.
+  - YouTube results — no transcript-backed mutations walkthrough found.
+  - AI-spun/xboxplay long-form page — useful only where it matches PGG on hard numbers; not a primary source for unnamed mutations.
+- Search limitations:
+  - Sportskeeda article is client-rendered; curl/WebFetch could not recover the article body or table.
+  - No production Supabase credentials in workspace, so article-table overlap was verified via live HTTP/sitemap checks instead of `articles` query by `universe_id`.
+  - No official Trello/Discord mutation dump surfaced in discovery.
+  - Several index slots remain publicly undocumented even in the best competitor table (PGG marks 1 Common, 3 Epic, 1 Admiral as TBA).
+- Related page-type overlap:
+  - Wiki hub already exists and should stay the evergreen game overview; it should not absorb a full mutation stat table.
+  - No codes/checklist/quiz/events page to duplicate.
+  - This belongs as an `/articles` reference guide because readers need a scannable rarity/effects list plus unlock/farming steps, not a wiki hub rewrite or a codes refresh workflow.
+- Useful uncovered angle:
+  - Frame mutations as trade-offs, not straight upgrades: every documented standard mutation pairs buffs with debuffs.
+  - Give a practical unlock ladder (Rebirth 3 / 5 / 10), then a known-effects table grouped by rarity.
+  - Include the new Destroy + Lock nuke tools as part of farming, which competitors split across separate sections.
+  - Call out Magma separately as event-only and not in the Index.
+  - Be explicit about the five still-unknown index entries instead of inventing names/effects.
+
+Media plan:
+- YouTube match quality (perfect / near / none): none
+- YouTube candidate URL and reason:
+  - Near only: https://www.youtube.com/watch?v=CfIdoE-D5R8 — covers the broader new update/nuke unlock grind, not a focused mutations-system explainer. Skip embed.
+- Image candidates (source URL, what it shows, clean yes/no, rights note):
+  - https://staticg.sportskeeda.com/editor/2026/08/65bc5-17858689337907-1920.jpg — Sportskeeda cover art; editorial/competitor asset; not clean for reuse.
+  - Pro Game Guides in-article volcano screenshot — shows Magma event context; branded/watermarked competitor capture; not clean for reuse.
+  - No official mutation UI screenshot with a defensible reuse basis found.
+- Images to host (0-3, with planned file stems):
+  - 0 body images recommended for v1 unless the writing pass can capture original in-game UI locally. A Mutations Index screenshot would help, but no rights-clean source exists.
+- Cover image plan (null / generated / hosted cover.webp): null — let import flow generate from linked universe thumbnail unless parent wants a custom cover later.
+
+Article plan:
+- Working title: Merge a Nuke Mutations Guide: All Known Types and Effects (Roblox)
+- Suggested slug: merge-a-nuke-mutations-guide
+- Title promise:
+  - Explain what nuke mutations are and what stats they change (Cash, Damage, Health, Cooldown).
+  - Show how to unlock the system and roll mutations.
+  - List every mutation name and effect that is currently documented in multiple independent sources.
+  - Cover Magma as the separate event mutation.
+  - Do not promise complete coverage of unnamed Index slots.
+- Reader need:
+  - Players returning after the Mutations update want a fast answer to: when mutations unlock, how to get them, what each known mutation does, whether they can stack two on one nuke, and how to avoid losing good rolls.
+- Facts to use:
+  - Game: Merge a Nuke / Merge a Nuke! by Nuke The Game; universe_id `10199301628`.
+  - Mutations modify Cash earnings, Damage, Health, and launch Cooldown.
+  - System unlocks after completing Rebirth 3.
+  - Legendary mutation pool unlocks at Rebirth 5.
+  - Admiral-tier mutations and a second mutation slot unlock at Rebirth 10.
+  - Nukes can randomly spawn with a mutation after unlock; merging can also produce/pass mutations.
+  - At Rebirth 10+, one nuke can hold up to two mutations; merging differently mutated nukes can combine traits.
+  - Legendary mutations have a 10% chance to roll Stabilized (buffs without debuffs), per PGG + Xbox Play.
+  - Mutations Index tracks discovered entries by rarity: Common, Rare, Epic, Legendary, Admiral.
+  - Pick up/hold a nuke to read its mutation details; discovered mutations register in the Index.
+  - New Destroy Nuke button removes unwanted nukes to free spawn slots for farming.
+  - New Lock icon prevents merge and destroy on kept nukes.
+  - Max rebirth count remains 10 in the mutation update coverage (BloxRant); mutation Index completion is the new endgame chase.
+  - Documented mutation count structure: 15 indexable mutations + 1 event-only Magma mutation = 16 total referenced by competitors.
+  - Known mutation effects (use a table in writing):
+    - Common — Accelerated Fuel: 35% shorter launch cooldown; 25% less damage.
+    - Common — Dense Core: 25% more Cash; 25% more Health; 40% longer cooldown.
+    - Common — Enriched Core: 40% more Cash; 25% less Health.
+    - Common — Reinforced Plating: 50% more Health; 25% less Cash.
+    - Rare — Critical Mass: 50% more damage below half Health; 25% less Cash.
+    - Rare — Leeching Warhead: restores 25% Health after a successful hit; 25% longer cooldown.
+    - Rare — Regenerative Alloy: slowly heals after avoiding damage; 20% less Cash.
+    - Epic — Siege Core: 75% more damage; 50% longer cooldown.
+    - Legendary — Fissioned: creates a bonus lower-tier nuke when merged; 30% less Cash; 20% less Health.
+    - Legendary — Overclocked Reactor: 2x Cash; 75% more damage; 40% less Health; 35% longer cooldown.
+    - Event — Magma: not in Index; from Volcano Event during Admin Abuse; +50% Cash, extra damage, impact area catches fire with no extra fire damage (PGG).
+    - Magma acquisition path corroborated: volcano weak-point hits; every 15 hits lava targets top hitter; lava can apply Magma to nukes; Lava Merge event may also grant it.
+  - Practical tips: lock good rolls immediately; destroy low-value nukes to cycle spawns; keep already-mutated nukes for a second-slot roll instead of discarding after Index registration.
+- Facts to avoid:
+  - Do not invent names/effects for the 1 unknown Common, 3 unknown Epic, or 1 unknown Admiral index entries.
+  - Do not state exact spawn/merge mutation odds; sources only say “random chance.”
+  - Do not claim Magma “extra damage” as a precise percentage (PGG only says extra damage).
+  - Do not use outdated rebirth-cap claims from older guides (e.g., “only 3 rebirths”).
+  - Do not copy Sportskeeda/PGG wording verbatim; do not hotlink competitor images.
+  - Do not present AI-spun wiki pages as verified stat sources.
+  - Do not list active codes as the article focus; at most one brief link to future codes coverage if added later.
+- FAQ opportunities:
+  - What rebirth do I need to unlock mutations? (Rebirth 3)
+  - Can one nuke have two mutations? (Yes, after Rebirth 10)
+  - What is a Stabilized mutation? (Legendary roll with no debuffs; 10% chance per PGG/Xbox Play)
+  - How do I get Magma? (Volcano/Admin Abuse event; not in Index)
+  - Should I destroy a nuke after its mutation is in the Index? (No if you still want a second slot roll)
+- Open gaps or risks:
+  - Title says “All Types and Effects,” but public sources only document 11 named standard mutations plus Magma. Five index slots remain TBA even in Pro Game Guides. Writing should either use “all known types” language or include a clearly labeled “still unknown in Index” section.
+  - Sportskeeda lead could not be fully verified; article should not depend on any Sportskeeda-only claims.
+  - No rights-clean gameplay UI images found without an original capture pass.
+  - No perfect YouTube embed candidate.
+  - If the live game has already revealed the missing mutation names after PGG’s publish date, writing should re-check the in-game Mutations Index before finalizing the table.
+
+Outline:
+- Mutations unlock at Rebirth 3, and you roll them by spawning and merging nukes
+  - One short intro: mutations are trade-off modifiers on individual nukes, not automatic upgrades.
+  - Rebirth gates in a compact list or mini-table: Rebirth 3 = system on; Rebirth 5 = Legendary pool; Rebirth 10 = Admiral pool + second slot.
+  - How rolls happen: random on spawn; chance on merge; merge different mutated nukes to try for two traits after Rebirth 10.
+  - How to inspect mutations: visual effect, pick up nuke for details, Mutations Index tracks discoveries by rarity.
+  - Farming basics: destroy unwanted nukes, lock keepers, do not throw away indexed nukes if chasing a second slot.
+  - Optional short callout box for Stabilized Legendary rolls (10%, buffs only).
+- Here are the known mutation types and what each one does
+  - Main content: one markdown table grouped by rarity (Common / Rare / Epic / Legendary / Admiral / Event).
+  - Include only verified rows listed under Facts to use.
+  - Add a separate small “Still unknown in the Index” note for the five TBA slots (1 Common, 3 Epic, 1 Admiral) without fabricating names.
+  - Short Magma subsection: how to get it during Volcano/Admin Abuse and what its documented buffs are.
+  - Close with 2–3 practical build tips (cash vs survivability vs raid damage) using named mutations only.
+  - Internal links: link once to `/wiki/merge-a-nuke` for broader progression and once to `/stats/games/merge-a-nuke` for game context.
+  - Media placement: no embed/images unless parent approves an original Index screenshot capture during writing/verification.

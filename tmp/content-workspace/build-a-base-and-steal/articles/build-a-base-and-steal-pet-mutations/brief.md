@@ -1,0 +1,138 @@
+Evidence checked:
+- Existing Bloxodes coverage:
+  - Production DB query (2026-08-05): no published `articles` rows for `universe_id` 10356701370; slug `build-a-base-and-steal-pet-mutations` is unused.
+  - Published wiki hub: `/wiki/build-a-base-and-steal` (`wiki_pages.slug=build-a-base-and-steal`, `universe_id=10356701370`).
+  - Published gear collection: `/wiki/build-a-base-and-steal/gear` (`wiki_collection_pages`, 7 gear items).
+  - No published codes, events, checklist, or quiz pages for this game in production at query time.
+  - Article sitemap has no Build a Base and Steal article entries.
+- Game universe_id (if game-specific): 10356701370
+- Internal link candidates (existing same-game/related pages with slugs, 2+):
+  - `/wiki/build-a-base-and-steal` — game wiki hub; good intro/context link for pets, rolling, rebirth, and base defense.
+  - `/wiki/build-a-base-and-steal/gear` — gear collection; link when mentioning bats/weapons for stealing mutated pets or defending them.
+  - Optional tertiary link if useful in prose: `/stats/games/build-a-base-and-steal` (live game stats; same universe).
+- Source/competitor coverage:
+  - Lead source (blocked): Sportskeeda — https://www.sportskeeda.com/roblox-news/build-a-base-and-steal-all-pet-mutations-effects — AWS WAF captcha on fetch/curl; content not directly readable in this run.
+  - Primary fetchable competitor: beatcopgame.com — full 4-mutation table, multipliers, acquisition methods, tips, FAQs — https://beatcopgame.com/build-a-base-and-steal-pet-mutations-multipliers-how-to-get/
+  - Contextual event/update coverage: allthings.how — confirms July 11, 2026 “Weathers + Mutations” update event; Admin Abuse and short one-hour Update + Event cadence — https://allthings.how/build-a-base-and-steal-next-update-event-2/
+  - Beginner/pet-loop sources (mutations not detailed): allthings.how pet/steal guides, Pro Game Guides beginner guide (fetch timed out; snippets only), Roonby beginner guide — Egg Mystery rolls, Pet Luck, stealing, rebirth, base defense.
+  - Wrong-game pollution everywhere: Steal a Brainrot mutation guides (Beebom/Pro Game Guides/Fandom/u7buy/lootester), Grow a Garden pet mutations — must not be copied into this article.
+  - Codes articles exist (Sportskeeda, Game Rant) but are out of scope and conflict on whether a codes menu exists; do not fold codes into this mutations article.
+- Sources found:
+  - https://www.sportskeeda.com/roblox-news/build-a-base-and-steal-all-pet-mutations-effects (lead; blocked)
+  - https://beatcopgame.com/build-a-base-and-steal-pet-mutations-multipliers-how-to-get/
+  - https://allthings.how/build-a-base-and-steal-next-update-event-2/
+  - https://allthings.how/build-a-base-and-steal-how-to-steal-pets-earn-money-and-defend-your-base/
+  - https://allthings.how/build-a-base-and-steal-beginner-s-guide-to-pets-rebirth-and-base-defense/
+  - https://www.roblox.com/games/132016691802922 (official experience page)
+  - https://progameguides.com/guides/build-a-base-and-steal-beginners-guide/ (timeout; snippets)
+  - https://roonby.com/2026/07/19/build-a-base-and-steal-beginners-guide-best-tips-to-earn-more-cash-and-protect-your-base/
+  - https://gamerant.com/build-base-steal-codes-roblox/ (codes only)
+  - https://earnaldo.com/blog/build-a-base-and-steal-free-robux-guide (beginner loop; no mutation table)
+  - Steal a Brainrot / Grow a Garden mutation pages (checked to avoid cross-game contamination)
+- Sources used for exact facts:
+  - Mutation names, count (4), multipliers (Golden 1.5x, Cosmic 2x, Inferno 3x, Admin 4x), and “affects earning rate + sale value”: beatcopgame.com only (fully fetched).
+  - Acquisition mapping (Golden from rolls; Cosmic from rolls/Cosmic event; Inferno from Volcano event; Admin from Admin Abuse event): beatcopgame.com, with event-theme support from allthings.how (Weathers + Mutations update; Admin Abuse event theme).
+  - Core pet-roll location (Egg Mystery platform), offline income, stealing loop, rebirth + Pet Luck as progression levers: allthings.how + Roonby + Pro Game Guides snippets (mechanic context, not mutation numbers).
+  - Game identity (developer replayable fun games, place ID 132016691802922, 6-player servers, steal/build loop): Roblox experience page + multiple guides.
+- Sources checked but not usable:
+  - Sportskeeda lead article — Cloudflare/AWS WAF block; cannot verify exact wording, visuals, or any extra mutations beyond search-snippet alignment with beatcopgame.
+  - Pro Game Guides beginner guide — fetch timeout.
+  - RoUniverse Build a Base and Steal guides — community/meta focus; one guide incorrectly claims no rebirth/prestige (contradicted by multiple beginner sources); no reliable mutation table.
+  - Steal a Brainrot wiki/guides — different game with 10+ mutations and different multipliers.
+  - Grow a Garden mutation guides — unrelated machine-based pet mutation system.
+  - YouTube results — no on-topic Build a Base and Steal mutation walkthrough found; top hits are Steal a Brainrot, Grow a Garden, or other games.
+- Search limitations:
+  - Sportskeeda lead blocked on both WebFetch and curl; Google cache also blocked.
+  - Heavy SEO cross-contamination with Steal a Brainrot “mutations” content; exact quoted searches often return wrong-game pages.
+  - No official developer wiki/Trello with mutation stats found; Roblox description does not explain mutations.
+  - No verified public spawn-rate percentages or fixed event schedules documented in fetchable sources.
+- Related page-type overlap:
+  - Wiki hub exists but does not appear to explain pet mutations in page HTML; gear collection covers weapons, not mutations.
+  - This topic fits an article (mechanic explainer + how-to) better than a catalog/collection page because mutations are modifiers on pets, not a stable item inventory with local dataset rows.
+  - Do not duplicate a full beginner guide; link to wiki hub for broader loop context.
+- Useful uncovered angle:
+  - Build a Base and Steal has a small, game-specific mutation set (4 tiers) distinct from the much larger Steal a Brainrot mutation ecosystem — a clean comparison-free explainer helps searchers who land on the wrong game’s guides.
+  - Mutations tie directly to the game’s short live Update + Event windows (Weathers + Mutations launch, Volcano/Inferno, Admin Abuse), which is the practical “how to get them” story beyond a static table.
+
+Media plan:
+- YouTube match quality (perfect / near / none): none
+- YouTube candidate URL and reason:
+  - Checked YouTube-oriented searches; no video clearly titled for Build a Base and Steal pet mutations / Golden-Cosmic-Inferno-Admin explainer. Closest results were Steal a Brainrot mutation shorts or unrelated games — skip embed.
+- Image candidates (source URL, what it shows, clean yes/no, rights note):
+  - No clean, reusable mutation UI screenshots found in fetchable sources.
+  - Competitor pages are text/table-heavy; no defensible official asset URLs for Golden/Cosmic/Inferno/Admin pet visuals.
+  - Fandom/Steal a Brainrot mutation images are wrong game — do not reuse.
+- Images to host (0-3, with planned file stems):
+  - 0 body images recommended unless the writing pass captures original in-game screenshots during local preview.
+  - If a capture pass happens later: `golden-pet-roll.webp`, `volcano-inferno-event.webp`, `admin-mutation-pet.webp` (only with original captures).
+- Cover image plan (null / generated / hosted cover.webp): null — let import flow generate cover from linked universe thumbnail unless parent requests a hosted capture.
+
+Article plan:
+- Working title: Build a Base and Steal Pet Mutations Guide: All Effects Explained (Roblox)
+- Suggested slug: build-a-base-and-steal-pet-mutations
+- Title promise:
+  - Name all current pet mutations in Build a Base and Steal.
+  - Explain what each mutation does to pet income/value.
+  - Tell players how each mutation is obtained (rolls vs event types).
+- Reader need:
+  - Players see mutated pets in rolls/raids/events but the in-game UI barely explains the system.
+  - Search results mix this game with Steal a Brainrot mutation guides; readers need a short, game-correct reference.
+- Facts to use:
+  - Game: Build a Base and Steal by replayable fun games; Roblox place ID 132016691802922; Bloxodes `universe_id` 10356701370; 6-player servers.
+  - Pet mutations are income/value multipliers on individual pets; they matter because pets generate passive cash (including offline).
+  - Current mutation set reported consistently by fetchable competitor coverage: Golden (1.5x), Cosmic (2x), Inferno (3x), Admin (4x).
+  - Mutations boost both earning rate and sale value (per beatcopgame).
+  - Each pet holds one mutation at a time; mutation multiplies on top of the pet’s base rarity/tier earnings (do not describe multiple simultaneous mutations).
+  - How to get them:
+    - Golden: random chance on Pet Roll at the Egg Mystery station on your base.
+    - Cosmic: Pet Roll and/or Cosmic-themed event windows.
+    - Inferno: Volcano event (primary path).
+    - Admin: Admin Abuse events only.
+  - Update context: July 11, 2026 Update + Event introduced “Weathers + Mutations”; later mid-July events leaned into Admin Abuse (allthings.how).
+  - Events are short, often one-hour windows; no dependable fixed public schedule — community Discord/event notifications are the practical way to catch Volcano/Admin drops (beatcopgame recommendation; align wording cautiously).
+  - Supporting progression tips that are source-backed and on-topic: stack Pet Luck/rebirth luck before rolling; keep cash ready during events; protect high-value mutated pets deep in layered bases; stealing can acquire mutated pets from other players (general game loop).
+  - Internal links: wiki hub + gear collection at minimum.
+- Facts to avoid:
+  - Any Steal a Brainrot mutation names, counts, or multipliers (Gold 1.25x, Diamond, Rainbow 10x, Lava 6x, etc.).
+  - Grow a Garden mutation machine mechanics, costs, or mutation list.
+  - Unverified Sportskeeda-only claims (e.g., “Cosmic Invasion” alien-abduction wording) since the lead page was not readable here.
+  - Exact spawn odds, roll percentages, or guaranteed event timers unless verified in-game during writing preview.
+  - “Best/current/meta/latest/updated daily” freshness language.
+  - Codes lists, code redemption steps, or debates about whether the codes menu exists — separate page type.
+  - RoUniverse claim that the game has no rebirth/prestige — contradicted by multiple beginner guides; if rebirth is mentioned, say rebirth exists and can help luck/progression, without over-explaining rebirth in this article.
+  - Robux skip/reroll mutation monetization unless kept as a brief optional note; beatcopgame mentions it but it is single-source — treat as low-confidence if included at all.
+- FAQ opportunities:
+  - What are pet mutations in Build a Base and Steal?
+  - How many mutations are there right now?
+  - Which mutation is strongest?
+  - Can one pet have more than one mutation?
+  - Do mutations change sale value or only income?
+  - How do you get Inferno and Admin mutations?
+  - Can you steal mutated pets from other players?
+- Open gaps or risks:
+  - **Primary risk:** exact multiplier table and “sale value + earning rate” effect are supported by one fully fetchable independent article (beatcopgame). Sportskeeda lead likely matches but was blocked and cannot be cited as verified.
+  - **Secondary risk:** visual effect descriptions (how Golden/Cosmic/Inferno/Admin look) are thin in fetchable sources — article should focus on mechanics, not cosmetic lore.
+  - **Live-game risk:** mutation roster or multipliers may change in future Update + Event drops; writing should frame the list as the current four-tier set without date-stamped freshness claims.
+  - **Event naming risk:** “Cosmic Event” / “Volcano Event” naming is community/guide terminology, not confirmed on the Roblox description page.
+  - **Recommendation:** proceed to writing only if parent accepts a conservative article that uses the four-mutation table with beatcopgame as the numeric source, avoids unverified Sportskeeda extras, and optionally validates mutation labels/multipliers during local in-game preview before import.
+
+Outline:
+- **Pet mutations multiply both cash income and sale value on one pet at a time**
+  - Short intro: what mutations are in Build a Base and Steal, why they matter for passive income and stealing risk.
+  - Include a scan-friendly Markdown table: Mutation | Multiplier | Main source | Notes.
+  - Rows: Golden 1.5x (rolls), Cosmic 2x (rolls + Cosmic event), Inferno 3x (Volcano event), Admin 4x (Admin Abuse event).
+  - One-line rules: one mutation per pet; higher tier beats lower tier; mutated pets are high-value steal targets.
+  - Optional internal link to `/wiki/build-a-base-and-steal` for the broader pet/base loop.
+
+- **You can roll Golden and Cosmic pets, but Inferno and Admin usually need live events**
+  - Egg Mystery Pet Roll path for Golden (most common) and possible Cosmic.
+  - Event paths: Volcano for Inferno; Admin Abuse for Admin; Cosmic event as secondary Cosmic source.
+  - Brief note that mutations arrived with the July 2026 Weathers + Mutations update wave and continue through themed Update + Event windows.
+  - Practical prep list: save cash before events, turn on notifications/Discord alerts, roll during the window, protect new mutated pets immediately.
+  - Mention stealing as an alternate acquisition route tied to the core game loop; link `/wiki/build-a-base-and-steal/gear` if referencing bats/weapons for raids or defense.
+
+- **Protect mutated pets and use luck upgrades so your best multipliers do not walk out the door**
+  - Short defensive guidance: store top mutated earners deep in layered/maze bases; offline income makes losses costly.
+  - Short offensive/progression guidance: invest in Pet Luck and rebirth-related luck before batch rolling; prioritize keeping higher multipliers over selling low ones.
+  - Close with a compact FAQ block (3–5 questions from FAQ opportunities above).
+  - No YouTube embed; no body images unless original captures are added during preview.
