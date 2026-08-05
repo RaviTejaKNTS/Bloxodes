@@ -121,7 +121,7 @@
         "slug": "chicken",
         "section": "Early rebirth pets",
         "sortOrder": 20,
-        "image": "/Build%20a%20Base%20and%20Steal/pets/chicken.webp"
+        "image": null
       }
     },
     {
@@ -499,7 +499,7 @@
         "slug": "dragon",
         "section": "High rebirth pets",
         "sortOrder": 230,
-        "image": "/Build%20a%20Base%20and%20Steal/pets/dragon.webp"
+        "image": null
       }
     },
     {
@@ -517,7 +517,7 @@
         "slug": "unicorn",
         "section": "High rebirth pets",
         "sortOrder": 240,
-        "image": "/Build%20a%20Base%20and%20Steal/pets/unicorn.webp"
+        "image": null
       }
     },
     {
