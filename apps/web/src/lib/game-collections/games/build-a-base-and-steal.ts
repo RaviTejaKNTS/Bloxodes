@@ -10,5 +10,5 @@ export const buildABaseAndStealCollectionGroup = {
     "Build a Base and Steal😈",
     "[UPD] Build a Base and Steal"
   ],
-  collections: ["gear"]
+  collections: ["gear", "pet-mutations"]
 } satisfies GameCollectionGroup;

@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Build a Base and Steal",
+    "gameSlug": "build-a-base-and-steal",
+    "collection": "pet-mutations",
+    "route": "/wiki/build-a-base-and-steal/pet-mutations",
+    "catalogCode": "build-a-base-and-steal-pet-mutations",
+    "itemFields": [
+      "multiplier",
+      "rarityTier",
+      "acquisition",
+      "eventName",
+      "cardSummary"
+    ],
+    "columns": [
+      "multiplier",
+      "rarityTier",
+      "acquisition",
+      "eventName",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "All pet mutations"
+      ],
+      "badgeField": "rarityTier",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "multiplier",
+        "rarityTier",
+        "acquisition",
+        "eventName",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "multiplier",
+        "rarityTier",
+        "acquisition",
+        "eventName",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "multiplier": {
+          "kind": "chip",
+          "label": "Multiplier"
+        },
+        "rarityTier": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "acquisition": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "eventName": {
+          "kind": "plain",
+          "label": "Event"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Effect"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Golden",
+        "multiplier": "1.5x",
+        "rarityTier": "Common mutation",
+        "acquisition": "Pet Roll at the Egg Mystery station on your base.",
+        "eventName": null,
+        "cardSummary": "Applies a 1.5x multiplier to both passive income and sale value on one pet at a time."
+      },
+      "system": {
+        "slug": "golden",
+        "section": "All pet mutations",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cosmic",
+        "multiplier": "2x",
+        "rarityTier": "Uncommon mutation",
+        "acquisition": "Cosmic Event is the primary source. Some community guides also report rare Cosmic results from Pet Rolls.",
+        "eventName": "Cosmic Event",
+        "cardSummary": "Applies a 2x multiplier to both passive income and sale value on one pet at a time."
+      },
+      "system": {
+        "slug": "cosmic",
+        "section": "All pet mutations",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Inferno",
+        "multiplier": "3x",
+        "rarityTier": "Rare mutation",
+        "acquisition": "Volcano Event. Guides also mention naturally mutated Inferno pets appearing inside the volcano during the event window.",
+        "eventName": "Volcano Event",
+        "cardSummary": "Applies a 3x multiplier to both passive income and sale value on one pet at a time."
+      },
+      "system": {
+        "slug": "inferno",
+        "section": "All pet mutations",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Admin",
+        "multiplier": "4x",
+        "rarityTier": "Very rare mutation",
+        "acquisition": "Admin Abuse Event only. These developer-hosted windows are short and irregular.",
+        "eventName": "Admin Abuse Event",
+        "cardSummary": "Applies a 4x multiplier to both passive income and sale value on one pet at a time."
+      },
+      "system": {
+        "slug": "admin",
+        "section": "All pet mutations",
+        "sortOrder": 4,
+        "image": null
+      }
+    }
+  ]
+}
