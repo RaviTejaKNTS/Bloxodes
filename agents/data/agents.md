@@ -176,6 +176,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/collection page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki collections.
   - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
+- `data/Anime Card Farm/mutations.json`
+  - Local Anime Card Farm mutation collection with the 11 guide-reported Crafting Update multipliers, split between normal Spawn Pack conveyor mutations and the Admin Abuse-exclusive mutation.
+  - Exact spawn chances and pack prices remain omitted because the checked sources do not publish reliable values. Row images stay empty until clean in-game mutation or mutated-pack visuals are collected.
 - `data/Catch And Tame/*.json`
   - Local Catch And Tame game datasets for wiki/collection page work, including mutations, pets, breeding recipes, weather events, traits, biomes, lassos, and items.
   - Rows are source-backed to Catch And Tame wiki pages and stay text-only until clean local row images are collected.
