@@ -74,3 +74,21 @@ Data readiness:
 - Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection potions`
 - Checker result: Pass with the expected pre-image warning — registered yes, 8 items, section counts 3/3/2, card summaries 8/8, images 0/8
 - Ready for images: yes
+
+Image readiness:
+- Image field: `items[].system.image`
+- Expected image count: 8
+- Images found: 0
+- Images missing: 8 — Cash Potion I, Cash Potion III, Production Potion, Luck Potion I, Luck Potion III, Mutation Potion I, Time Potion II, and Time Potion III
+- Image sources used: None. No checked source supplied acceptable item-level art.
+- Sources checked for images: All four official Roblox game-media images; Beebom, Dexerto, All Things How, Roonby, Pro Game Guides/search extracts, both dedicated Anime Card Farm community wikis, targeted item/inventory web searches, and available gameplay-video search results.
+- Rejected image candidates: Official Roblox media is promotional card artwork with no potions. Guide images show the code-redemption menu or unrelated gameplay rather than potion items. The community reference uses emoji, not in-game art. Edited thumbnails, page screenshots, generic potion assets, and icons from other games are not valid substitutes.
+- Public image path: Planned path is `/Anime%20Card%20Farm/Potions/<item-slug>.webp`; no public image files were created because no clean source matched an item.
+- Dataset image paths updated: no — all eight `items[].system.image` values remain `null`
+- Strict checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection potions --require-images`
+- Strict checker result: Expected fail — registered yes, 8 items, summaries 8/8, images 0/8, and 8 items reported missing images
+- Accepted-gap checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection potions`
+- Accepted-gap checker result: Pass with warning — registered yes, 8 items, summaries 8/8, images 0/8
+- Accepted gaps: All eight image gaps are accepted for the initial page. The cards remain unambiguous without art because each row has a distinct title, family, tier where evidenced, qualitative effect, and best-use field; consistent renderer placeholders are more accurate than fabricated or mismatched icons.
+- Blocker to future image coverage: Clean in-game inventory/item captures that identify each potion family and tier are not publicly available in the checked sources. Shared family icons may be wired later if a trustworthy in-game capture confirms them.
+- Ready for writing: yes, as a deliberately text-first collection with accepted image gaps, pending parent approval
