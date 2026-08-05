@@ -18,6 +18,7 @@ type HealthSnapshot = {
     broken_media: number;
     duplicate_canonical_keys: number;
     stale_discovery_runs: number;
+    stale_job_runs: number;
     tiers: Record<string, number>;
     statuses: Record<string, number>;
   };
@@ -78,6 +79,7 @@ function evaluate(snapshot: HealthSnapshot): Check[] {
     check("queue_dead", snapshot.queue.dead, snapshot.queue.dead === 0 ? "pass" : "warn", "0 dead jobs"),
     check("canonical_duplicates", snapshot.catalog.duplicate_canonical_keys, snapshot.catalog.duplicate_canonical_keys === 0 ? "pass" : "warn", "0 legacy duplicate keys"),
     check("stale_discovery_runs", snapshot.catalog.stale_discovery_runs, snapshot.catalog.stale_discovery_runs === 0 ? "pass" : "fail", "0 discovery runs left running for over 2h"),
+    check("stale_job_runs", snapshot.catalog.stale_job_runs, snapshot.catalog.stale_job_runs === 0 ? "pass" : "fail", "0 job runs left running for over 6h"),
     check("free_items_freshness_hours", freeAge, freeAge <= 30 ? "pass" : freeAge <= 48 ? "warn" : "fail", "<= 30h"),
     check("discovery_last_status", discoveryStatus, discoveryStatus === "success" ? "pass" : discoveryStatus === "partial" ? "warn" : "fail", "latest discovery run succeeded"),
     check("discovery_freshness_hours", discoveryAge, discoveryAge <= 30 ? "pass" : discoveryAge <= 48 ? "warn" : "fail", "<= 30h"),
@@ -100,6 +102,14 @@ async function main() {
       .lt("started_at", staleCutoff);
     if (staleDiscoveryError) throw new Error(`Failed to audit stale discovery runs: ${staleDiscoveryError.message}`);
     snapshot.catalog.stale_discovery_runs = staleDiscoveryRuns ?? 0;
+    const staleJobCutoff = new Date(Date.now() - 360 * 60_000).toISOString();
+    const { count: staleJobRuns, error: staleJobError } = await supabaseAdmin()
+      .from("stats_job_runs")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "running")
+      .lt("started_at", staleJobCutoff);
+    if (staleJobError) throw new Error(`Failed to audit stale job runs: ${staleJobError.message}`);
+    snapshot.catalog.stale_job_runs = staleJobRuns ?? 0;
     const checks = evaluate(snapshot);
     const failures = checks.filter((entry) => entry.status === "fail");
     const warnings = checks.filter((entry) => entry.status === "warn");
