@@ -65,3 +65,35 @@ Page layout plan:
 - Sort order: Within each section, strongest broad effect first, then lower base roll chance, then source roster order as the stable tie-breaker. Proposed visible order: Sovereign, Almighty, Phoenix, Emperor; Assassin, Berserk, Tank; Rich, Fortune III, Strength III, Vigor III, Fortune II, Strength II, Vigor II, Fortune I, Strength I, Vigor I.
 - Section note needs: One short global note should state that chances are listed base chances and may not reflect Trait Luck bonuses. The one-stat section can note that Fortune affects Cash, Strength affects Damage, and Vigor affects Health. No per-section ranking claims are needed.
 - Renderer/config changes needed: no, assuming the generic game-collection renderer supports three sections, numeric/text key-value fields, and image-optional cards.
+
+Data readiness:
+- Dataset file: `data/Anime Card Farm/traits.json`
+- Item count: 17
+- Source item count: 17
+- Dataset shape: v2 wrapped `{ meta, items[].item, items[].system }` yes
+- Public item fields: `name`, `cardSummary`, `rollChance`, `cashMultiplier`, `damageMultiplier`, `healthMultiplier`
+- System fields: `slug`, `section`, `sortOrder`, `image` only yes
+- Metadata: `schemaVersion`, `itemFields`, `columns`, `display.groupLabel`, `display.sectionOrder`, `display.tableFields`, `display.cardFields`, `display.fieldPresentation` all present
+- Section source: Number of stats changed above the unchanged `1x` baseline, derived directly from the sourced Cash, Damage, and Health multipliers.
+- Section counts: `Boosts all three stats` 4; `Boosts two stats` 3; `Boosts one stat` 10
+- Section order: `Boosts all three stats` → `Boosts two stats` → `Boosts one stat`
+- Card fields: `cardSummary`, `rollChance`, `cashMultiplier`, `damageMultiplier`, `healthMultiplier`
+- Card/table field order: Effect summary → Base roll chance → Cash → Damage → Health
+- Card summary coverage: 17/17
+- Field presentation: `cardSummary` detail; all chance and multiplier comparisons chips
+- Highlight fields: none; no source-backed status or recommendation field is needed
+- Chip fields: `rollChance`, `cashMultiplier`, `damageMultiplier`, `healthMultiplier`
+- Detail fields: `cardSummary`
+- Field consistency: yes; all 17 rows have the same public keys, and every unchanged stat is explicitly `1x`
+- Image needed: yes, investigate whether the in-game trait menu exposes clean, distinct per-trait icons; use an intentional text-only collection if it does not
+- Image field: `items[].system.image`
+- Hidden/source/dev fields absent from public item data: yes
+- Sort order: `items[].system.sortOrder`
+- description_json section keys: `Boosts all three stats`, `Boosts two stats`, `Boosts one stat`
+- Renderer/config support: registered as `anime-card-farm/traits`; generic renderer resolved the dataset, five card fields, all three sections, and 17 rows
+- Missing items: none
+- Audit command: `npm run audit:game-collection-datasets:v2 -- --game anime-card-farm --collection traits`
+- Audit result: pass; 1 registered dataset checked, 0 issues
+- Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection traits`
+- Checker result: pass; 17 items, section counts 4/3/10, 17/17 card summaries; expected warning for 0/17 images
+- Ready for images: yes
