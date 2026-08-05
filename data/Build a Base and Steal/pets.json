@@ -1,0 +1,632 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Build a Base and Steal",
+    "gameSlug": "build-a-base-and-steal",
+    "collection": "pets",
+    "route": "/wiki/build-a-base-and-steal/pets",
+    "catalogCode": "build-a-base-and-steal-pets",
+    "itemFields": [
+      "rebirthRequired",
+      "rebirthRole",
+      "source",
+      "petCategory",
+      "obtainNotes",
+      "cardSummary",
+      "description"
+    ],
+    "columns": [
+      "rebirthRequired",
+      "rebirthRole",
+      "source",
+      "petCategory",
+      "obtainNotes",
+      "cardSummary",
+      "description"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Early rebirth pets",
+        "Mid rebirth pets",
+        "High rebirth pets",
+        "Endgame & Golden pets"
+      ],
+      "badgeField": "rebirthRequired",
+      "subtitleFields": [
+        "petCategory"
+      ],
+      "descriptionField": "description",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rebirthRequired",
+        "rebirthRole",
+        "source",
+        "petCategory",
+        "obtainNotes",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "rebirthRequired",
+        "rebirthRole",
+        "source",
+        "petCategory",
+        "obtainNotes",
+        "cardSummary",
+        "description"
+      ],
+      "fieldPresentation": {
+        "rebirthRequired": {
+          "kind": "chip",
+          "label": "Rebirth"
+        },
+        "rebirthRole": {
+          "kind": "highlight",
+          "label": "Rebirth role"
+        },
+        "source": {
+          "kind": "normal",
+          "label": "Source"
+        },
+        "petCategory": {
+          "kind": "chip",
+          "label": "Category"
+        },
+        "obtainNotes": {
+          "kind": "detail",
+          "label": "Obtain notes"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "description": {
+          "kind": "detail",
+          "label": "Description"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Cat",
+        "rebirthRequired": "1",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 1. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "First rebirth gate pet paired with Chicken for Rebirth 1.",
+        "description": "Named pet requirement for Rebirth 1 in Build a Base and Steal. Guides list Cat with Chicken alongside a $50k money threshold. Like every rebirth pet, it must be sitting in your base at confirm time, not merely rolled earlier in the run."
+      },
+      "system": {
+        "slug": "cat",
+        "section": "Early rebirth pets",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chicken",
+        "rebirthRequired": "1",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 1. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "First rebirth gate pet paired with Cat for Rebirth 1.",
+        "description": "Named pet requirement for Rebirth 1 alongside Cat. It is an income pet from the Egg Mystery roll loop, not a shop item. Public sources do not publish claim cost or cash-per-second values for this pet."
+      },
+      "system": {
+        "slug": "chicken",
+        "section": "Early rebirth pets",
+        "sortOrder": 20,
+        "image": "/Build%20a%20Base%20and%20Steal/pets/chicken.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bat",
+        "rebirthRequired": "2",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 2. This is the Bat pet, not a gear-shop bat weapon.",
+        "cardSummary": "Rebirth 2 gate pet. Not the same as Wooden, Steel, or Cobalt bat weapons from the gear shop.",
+        "description": "Named pet for Rebirth 2 paired with Bunny. This Bat is a collectible income pet from the Egg Mystery roll or steal loop. It is not the held bat weapons sold in the gear shop, which are documented separately on the gear collection page."
+      },
+      "system": {
+        "slug": "bat",
+        "section": "Early rebirth pets",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny",
+        "rebirthRequired": "2",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 2. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Early rebirth gate pet paired with Bat for Rebirth 2.",
+        "description": "Named pet requirement for Rebirth 2 alongside Bat. AllThings lists a $190k money threshold for that tier. Treat money gates as live UI values that can shift after updates."
+      },
+      "system": {
+        "slug": "bunny",
+        "section": "Early rebirth pets",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Llama",
+        "rebirthRequired": "3",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 3. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Rebirth 3 gate pet paired with Owl.",
+        "description": "Named pet requirement for Rebirth 3 alongside Owl. Mid-early progression pet from the standard roll or steal paths. No published drop rate or income numbers for this row."
+      },
+      "system": {
+        "slug": "llama",
+        "section": "Early rebirth pets",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Owl",
+        "rebirthRequired": "3",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 3. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Rebirth 3 gate pet paired with Llama.",
+        "description": "Named pet requirement for Rebirth 3 alongside Llama. Guides tie Rebirth 3 to a $2M money threshold. Higher Pet Luck investment makes landing rarer gate pets faster over time."
+      },
+      "system": {
+        "slug": "owl",
+        "section": "Early rebirth pets",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Elephant",
+        "rebirthRequired": "4",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 4. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Rebirth 4 gate pet paired with Zebra.",
+        "description": "Named pet requirement for Rebirth 4 alongside Zebra. AllThings lists a $7M money threshold for that tier. Rebirth resets pets, so plan when to spend versus when to hold gate pets."
+      },
+      "system": {
+        "slug": "elephant",
+        "section": "Early rebirth pets",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Zebra",
+        "rebirthRequired": "4",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 4. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Rebirth 4 gate pet paired with Elephant.",
+        "description": "Named pet requirement for Rebirth 4 alongside Elephant. Still part of the early rebirth band before mid-tier exotic names appear in later tiers."
+      },
+      "system": {
+        "slug": "zebra",
+        "section": "Early rebirth pets",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lion",
+        "rebirthRequired": "5",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 5. Higher-tier gate pet that may be easier to steal than to roll.",
+        "cardSummary": "Mid rebirth gate pet paired with Stegosaurus for Rebirth 5.",
+        "description": "Named pet requirement for Rebirth 5 alongside Stegosaurus. AllThings lists a $25M money threshold for that tier. Guides treat rarer gate pets as worth defending once obtained."
+      },
+      "system": {
+        "slug": "lion",
+        "section": "Mid rebirth pets",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stegosaurus",
+        "rebirthRequired": "5",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 5. Higher-tier gate pet that may be easier to steal than to roll.",
+        "cardSummary": "Mid rebirth gate pet paired with Lion for Rebirth 5.",
+        "description": "Named pet requirement for Rebirth 5 alongside Lion. Part of the mid rebirth band where money thresholds climb quickly and luck multipliers matter more."
+      },
+      "system": {
+        "slug": "stegosaurus",
+        "section": "Mid rebirth pets",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mammoth",
+        "rebirthRequired": "6",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 6. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Rebirth 6 gate pet paired with Yi Qi.",
+        "description": "Named pet requirement for Rebirth 6 alongside Yi Qi. AllThings lists a $95M money threshold for that tier. Rebirth 6 rewards also unlock Juggernaut and Golden Bat gear per the same guide."
+      },
+      "system": {
+        "slug": "mammoth",
+        "section": "Mid rebirth pets",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Yi Qi",
+        "rebirthRequired": "6",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 6. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Rebirth 6 gate pet paired with Mammoth. Spelled Yi Qi in the primary rebirth table.",
+        "description": "Named pet requirement for Rebirth 6 alongside Mammoth. AllThings spells the name Yi Qi while some secondary guides shorten it to YiQi. Treat the live pet label as authoritative after updates."
+      },
+      "system": {
+        "slug": "yi-qi",
+        "section": "Mid rebirth pets",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Azhdarchid",
+        "rebirthRequired": "7",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 7. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Rebirth 7 gate pet paired with Velociraptor.",
+        "description": "Named pet requirement for Rebirth 7 alongside Velociraptor. AllThings lists a $360M money threshold for that tier. Late-mid gate pets are common steal targets on six-player servers."
+      },
+      "system": {
+        "slug": "azhdarchid",
+        "section": "Mid rebirth pets",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Velociraptor",
+        "rebirthRequired": "7",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 7. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Rebirth 7 gate pet paired with Azhdarchid.",
+        "description": "Named pet requirement for Rebirth 7 alongside Azhdarchid. Guides emphasize keeping high-value gate pets deep inside layered bases before attempting the rebirth reset."
+      },
+      "system": {
+        "slug": "velociraptor",
+        "section": "Mid rebirth pets",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cockatrice",
+        "rebirthRequired": "8",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 8. Roll at the Egg Mystery platform or steal from another plot.",
+        "cardSummary": "Rebirth 8 gate pet paired with Gargoyle Bat.",
+        "description": "Named pet requirement for Rebirth 8 alongside Gargoyle Bat. AllThings lists a $1.3B money threshold for that tier. Rebirth 8 also unlocks Invisibility Cloak and Sky Bat gear in the same guide table."
+      },
+      "system": {
+        "slug": "cockatrice",
+        "section": "Mid rebirth pets",
+        "sortOrder": 150,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gargoyle Bat",
+        "rebirthRequired": "8",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 8. This is the Gargoyle Bat pet, not a gear-shop bat weapon.",
+        "cardSummary": "Rebirth 8 gate pet. Not the same as melee bat weapons from the gear shop.",
+        "description": "Named pet requirement for Rebirth 8 alongside Cockatrice. The name overlaps with bat-themed gear, but this row is the income pet from the Egg Mystery roll or steal loop, not a held bat weapon from the gear shop."
+      },
+      "system": {
+        "slug": "gargoyle-bat",
+        "section": "Mid rebirth pets",
+        "sortOrder": 160,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pegasus",
+        "rebirthRequired": "9",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 9. High-tier gate pet worth protecting before rebirth.",
+        "cardSummary": "High rebirth gate pet paired with Sphinx for Rebirth 9.",
+        "description": "Named pet requirement for Rebirth 9 alongside Sphinx. AllThings lists a $4.7B money threshold for that tier. These high rebirth pets are prime raid targets once other players spot them."
+      },
+      "system": {
+        "slug": "pegasus",
+        "section": "High rebirth pets",
+        "sortOrder": 170,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sphinx",
+        "rebirthRequired": "9",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 9. High-tier gate pet worth protecting before rebirth.",
+        "cardSummary": "High rebirth gate pet paired with Pegasus for Rebirth 9.",
+        "description": "Named pet requirement for Rebirth 9 alongside Pegasus. Rebirth 9 rewards also unlock Body Swap Potion and Galaxy Bat gear per AllThings."
+      },
+      "system": {
+        "slug": "sphinx",
+        "section": "High rebirth pets",
+        "sortOrder": 180,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hydra",
+        "rebirthRequired": "10",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 10. High-tier gate pet worth protecting before rebirth.",
+        "cardSummary": "High rebirth gate pet paired with Roc for Rebirth 10.",
+        "description": "Named pet requirement for Rebirth 10 alongside Roc. AllThings lists a $17.5B money threshold for that tier. Rebirth 10 also unlocks Rage Bat gear in the same guide table."
+      },
+      "system": {
+        "slug": "hydra",
+        "section": "High rebirth pets",
+        "sortOrder": 190,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Roc",
+        "rebirthRequired": "10",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 10. High-tier gate pet worth protecting before rebirth.",
+        "cardSummary": "High rebirth gate pet paired with Hydra for Rebirth 10.",
+        "description": "Named pet requirement for Rebirth 10 alongside Hydra. Guides warn against rerolling away rare gate pets when they appear on your Egg Mystery roll."
+      },
+      "system": {
+        "slug": "roc",
+        "section": "High rebirth pets",
+        "sortOrder": 200,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Qilin",
+        "rebirthRequired": "11",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 11. High-tier gate pet worth protecting before rebirth.",
+        "cardSummary": "High rebirth gate pet paired with Simurgh for Rebirth 11.",
+        "description": "Named pet requirement for Rebirth 11 alongside Simurgh. AllThings lists a $65B money threshold for that tier. Rebirth 11 also unlocks Hacker Bat gear in the same guide table."
+      },
+      "system": {
+        "slug": "qilin",
+        "section": "High rebirth pets",
+        "sortOrder": 210,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Simurgh",
+        "rebirthRequired": "11",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 11. High-tier gate pet worth protecting before rebirth.",
+        "cardSummary": "High rebirth gate pet paired with Qilin for Rebirth 11.",
+        "description": "Named pet requirement for Rebirth 11 alongside Qilin. Late high-tier gate pet before the Dragon and Unicorn requirements in Rebirth 12."
+      },
+      "system": {
+        "slug": "simurgh",
+        "section": "High rebirth pets",
+        "sortOrder": 220,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon",
+        "rebirthRequired": "12",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 12. Do not reroll away if you still need it for this tier.",
+        "cardSummary": "Rebirth 12 gate pet paired with Unicorn.",
+        "description": "Named pet requirement for Rebirth 12 alongside Unicorn. AllThings lists a $300T money threshold for that tier and warns players not to reroll away pets like Dragon when they appear on the Egg Mystery roll."
+      },
+      "system": {
+        "slug": "dragon",
+        "section": "High rebirth pets",
+        "sortOrder": 230,
+        "image": "/Build%20a%20Base%20and%20Steal/pets/dragon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Unicorn",
+        "rebirthRequired": "12",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 12. Do not reroll away if you still need it for this tier.",
+        "cardSummary": "Rebirth 12 gate pet paired with Dragon.",
+        "description": "Named pet requirement for Rebirth 12 alongside Dragon. Rebirth 12 also unlocks Flashbang gear per AllThings. A separate Golden Unicorn mutation is required later for Rebirth 14."
+      },
+      "system": {
+        "slug": "unicorn",
+        "section": "High rebirth pets",
+        "sortOrder": 240,
+        "image": "/Build%20a%20Base%20and%20Steal/pets/unicorn.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Kitsune",
+        "rebirthRequired": "13",
+        "rebirthRole": "Golden mutation required; single-pet tier",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Golden mutation",
+        "obtainNotes": "Must be the Golden-mutation Kitsune in your base for Rebirth 13. AllThings marks the money threshold TBA. Roll or steal the mutated version, not the base pet.",
+        "cardSummary": "Endgame Golden mutation gate for Rebirth 13. Only one pet required at this tier.",
+        "description": "Named Golden-mutation pet requirement for Rebirth 13. AllThings notes you need the mutated Golden Kitsune rather than a standard Kitsune. Rebirth 13 is a single-pet tier and its money requirement was not confirmed in the primary source when this dataset was built."
+      },
+      "system": {
+        "slug": "golden-kitsune",
+        "section": "Endgame & Golden pets",
+        "sortOrder": 250,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Dragon",
+        "rebirthRequired": "14",
+        "rebirthRole": "Golden mutation required",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Golden mutation",
+        "obtainNotes": "Must be the Golden-mutation Dragon in your base for Rebirth 14. Roll or steal the mutated version, not the base Dragon used for Rebirth 12.",
+        "cardSummary": "Golden mutation gate pet paired with Golden Unicorn for Rebirth 14.",
+        "description": "Named Golden-mutation pet requirement for Rebirth 14 alongside Golden Unicorn. AllThings marks the money threshold TBA for this tier. Rebirth 14 also unlocks Magnet gear in the same guide table."
+      },
+      "system": {
+        "slug": "golden-dragon",
+        "section": "Endgame & Golden pets",
+        "sortOrder": 260,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Unicorn",
+        "rebirthRequired": "14",
+        "rebirthRole": "Golden mutation required",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Golden mutation",
+        "obtainNotes": "Must be the Golden-mutation Unicorn in your base for Rebirth 14. Roll or steal the mutated version, not the base Unicorn used for Rebirth 12.",
+        "cardSummary": "Golden mutation gate pet paired with Golden Dragon for Rebirth 14.",
+        "description": "Named Golden-mutation pet requirement for Rebirth 14 alongside Golden Dragon. This is distinct from the standard Unicorn required for Rebirth 12."
+      },
+      "system": {
+        "slug": "golden-unicorn",
+        "section": "Endgame & Golden pets",
+        "sortOrder": 270,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gnome",
+        "rebirthRequired": "15",
+        "rebirthRole": "Single-pet tier",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 15. AllThings marks the money threshold TBA.",
+        "cardSummary": "Endgame rebirth gate pet for Rebirth 15. Only one pet required at this tier.",
+        "description": "Named pet requirement for Rebirth 15. AllThings lists Gnome alone for that tier with money marked TBA. Rebirth 15 also unlocks Sniper Rifle gear in the same guide table."
+      },
+      "system": {
+        "slug": "gnome",
+        "section": "Endgame & Golden pets",
+        "sortOrder": 280,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fairy",
+        "rebirthRequired": "16",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 16. AllThings marks the money threshold TBA.",
+        "cardSummary": "Final rebirth gate pet paired with Mermaid for Rebirth 16.",
+        "description": "Named pet requirement for Rebirth 16 alongside Mermaid. AllThings treats Rebirth 16 as the current max tier with money marked TBA when this dataset was built."
+      },
+      "system": {
+        "slug": "fairy",
+        "section": "Endgame & Golden pets",
+        "sortOrder": 290,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mermaid",
+        "rebirthRequired": "16",
+        "rebirthRole": "Required for rebirth",
+        "source": "Egg Mystery roll or steal",
+        "petCategory": "Standard",
+        "obtainNotes": "Must be in your base when you confirm Rebirth 16. AllThings marks the money threshold TBA.",
+        "cardSummary": "Final rebirth gate pet paired with Fairy for Rebirth 16.",
+        "description": "Named pet requirement for Rebirth 16 alongside Fairy. AllThings states the full rebirth track includes fish pets among its named requirements, but it does not label which specific pets are fish-only, so this row does not assign a fish category without stronger proof."
+      },
+      "system": {
+        "slug": "mermaid",
+        "section": "Endgame & Golden pets",
+        "sortOrder": 300,
+        "image": null
+      }
+    }
+  ]
+}
