@@ -52,8 +52,11 @@ async function latestValue(table: string, column: string) {
 }
 
 async function tableCount(table: string) {
-  const { count, error } = await supabaseAdmin().from(table).select("*", { count: "exact", head: true });
-  if (error) throw error;
+  // Rank/hourly tables contain millions of rows. PostgREST exact HEAD counts
+  // can exceed the production statement timeout, while an estimated count is
+  // sufficient for this operational growth signal.
+  const { count, error } = await supabaseAdmin().from(table).select("*", { count: "estimated", head: true });
+  if (error) throw new Error(`${table} estimated count: ${error.message || JSON.stringify(error)}`);
   return count ?? 0;
 }
 

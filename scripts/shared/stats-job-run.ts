@@ -36,7 +36,19 @@ function defaultWorkerId() {
 
 function errorMessage(error: unknown) {
   if (!error) return null;
-  return error instanceof Error ? error.message : String(error);
+  if (error instanceof Error) return error.message;
+  if (typeof error === "object" && "message" in error) {
+    const message = (error as { message?: unknown }).message;
+    if (typeof message === "string" && message.trim()) return message;
+  }
+  if (typeof error === "object") {
+    try {
+      return JSON.stringify(error);
+    } catch {
+      // Fall through to the generic string representation.
+    }
+  }
+  return String(error);
 }
 
 export async function startStatsJobRun(input: StartStatsJobInput): Promise<StatsJobRun> {
@@ -89,4 +101,3 @@ export async function finishStatsJobRun(run: StatsJobRun, input: FinishStatsJobI
     console.warn(`Unable to record stats job finish for ${run.jobName}: ${errorMessage(error)}`);
   }
 }
-
