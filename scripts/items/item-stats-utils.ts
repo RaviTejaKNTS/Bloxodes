@@ -73,6 +73,10 @@ const ASSET_THUMBNAILS_API = "https://thumbnails.roblox.com/v1/assets";
 const BUNDLE_THUMBNAILS_API = "https://thumbnails.roblox.com/v1/bundles/thumbnails";
 const ECONOMY_ASSET_DETAILS_API = (assetId: number) => `https://economy.roblox.com/v2/assets/${assetId}/details`;
 const RESALE_DATA_API = (assetId: number) => `https://economy.roblox.com/v1/assets/${assetId}/resale-data`;
+const RATE_LIMIT_FALLBACK_MS = Math.max(
+  1_000,
+  Math.floor(readNumber(process.env.ROBLOX_RATE_LIMIT_FALLBACK_MS, 60_000))
+);
 
 let csrfToken: string | null = null;
 let lastRequestAt = 0;
@@ -205,7 +209,11 @@ function retryDelay(attempt: number, response?: Response | null) {
   const serverDelay = response ? retryAfterMs(response) : null;
   const exponential = Math.min(60_000, 1_500 * 2 ** Math.max(0, attempt));
   const jittered = Math.round(exponential * (0.75 + Math.random() * 0.5));
-  return Math.max(serverDelay ?? 0, jittered);
+  // Roblox commonly omits Retry-After on 429 responses even though the
+  // catalog quota resets on a longer window. Short exponential retries only
+  // burn the remaining attempts inside that same window.
+  const rateLimitFallback = response?.status === 429 ? RATE_LIMIT_FALLBACK_MS : 0;
+  return Math.max(serverDelay ?? 0, rateLimitFallback, jittered);
 }
 
 function isRetryableStatus(status: number) {
