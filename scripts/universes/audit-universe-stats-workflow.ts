@@ -62,11 +62,12 @@ async function main() {
   const now = new Date();
   const stale24h = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
   const stale7d = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  const expiredLeaseCutoff = new Date(now.getTime() - 45 * 60 * 1000).toISOString();
 
   try {
     const counts = {
       total: await countRows("total"),
-      withRootPlace: await countRows("with root place", (query) => query.not("root_place_id", "is", null)),
+      withRootPlace: await countRows("with root place", (query) => query.gt("root_place_id", 0)),
       withSlug: await countRows("with slug", (query) => query.not("slug", "is", null)),
       withIcon: await countRows("with icon", (query) => query.not("icon_url", "is", null)),
       neverStatsRefreshed: await countRows("never stats refreshed", (query) => query.is("last_stats_refreshed_at", null)),
@@ -89,6 +90,17 @@ async function main() {
       ),
       missingIconHot: await countRows("missing HOT icons", (query) => query.eq("stats_tier", "HOT").is("icon_url", null)),
       missingIconWarm: await countRows("missing WARM icons", (query) => query.eq("stats_tier", "WARM").is("icon_url", null)),
+      activeStatsLeases: await countRows("active stats leases", (query) => query.not("stats_refresh_locked_at", "is", null)),
+      expiredStatsLeases: await countRows("expired stats leases", (query) =>
+        query.not("stats_refresh_locked_at", "is", null).lt("stats_refresh_locked_at", expiredLeaseCutoff)
+      ),
+      retryBackoff: await countRows("stats retry backoff", (query) =>
+        query.not("last_stats_refresh_error", "is", null).gt("next_stats_refresh_at", now.toISOString())
+      ),
+      unavailableCooldowns: await countRows("unavailable cooldowns", (query) =>
+        query.eq("stats_tier_reason", "game_details_unavailable").gt("next_stats_refresh_at", now.toISOString())
+      ),
+      rowsWithRefreshSla: await countRows("rows with refresh SLA", (query) => query.not("next_stats_refresh_at", "is", null)),
       currentIndexRows: await tableCount("stats_game_current_index"),
       hourlyRows: await tableCount("roblox_universe_stats_hourly"),
       dailyRows: await tableCount("roblox_universe_stats_daily"),
@@ -107,9 +119,10 @@ async function main() {
     };
 
     await finishStatsJobRun(run, {
-      status: "success",
+      status: counts.expiredStatsLeases > 0 ? "partial" : "success",
       rowsClaimed: counts.total,
       rowsSucceeded: counts.currentIndexRows,
+      rowsFailed: counts.expiredStatsLeases,
       metadata: summary
     });
     console.log(JSON.stringify(summary, null, 2));
