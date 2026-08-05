@@ -69,7 +69,7 @@ Data readiness:
 - Renderer/config support: The shared Anime Card Farm group registers `crafting`; the v2 display contract uses the generic renderer and needs no custom component.
 - Missing items: none
 - Audit command: `npm run audit:game-collection-datasets:v2 -- --game anime-card-farm --collection crafting`
-- Audit result: pending
+- Audit result: pass; 1 registered dataset checked, 0 issues
 - Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection crafting`
-- Checker result: pending
-- Ready for images: pending audit and checker
+- Checker result: pass with the expected pre-image warning; registered yes, 11 items, section counts 4/3/4, card summaries 11/11, images 0/11, and no errors
+- Ready for images: yes
