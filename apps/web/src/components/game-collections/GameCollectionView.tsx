@@ -13,6 +13,7 @@ export type CollectionFieldPresentation = {
   kind: CollectionFieldKind;
   label?: string;
   tone?: CollectionFieldTone;
+  omitWhenEmpty?: boolean;
 };
 
 export type GameCollectionViewConfig = {
@@ -77,6 +78,7 @@ type CollectionPresentationField = {
   kind: CollectionFieldKind;
   tone?: GameCollectionDisplayStat["tone"];
   parts?: string[];
+  omitWhenEmpty?: boolean;
 };
 
 type CollectionItemPresentation = {
@@ -515,7 +517,8 @@ function buildPresentationField(
     value: displayStat?.value ?? null,
     parts: configured ? undefined : displayStat?.parts,
     tone: definition.presentation?.tone ?? displayStat?.tone,
-    kind: classifyFieldKind(definition, displayStat)
+    kind: classifyFieldKind(definition, displayStat),
+    omitWhenEmpty: definition.presentation?.omitWhenEmpty
   };
 }
 
@@ -700,14 +703,16 @@ function ForgeItemCard({
         </div>
 
         <dl className="mt-4 space-y-3 border-t border-border/60 pt-4">
-          {presentation.fields.map((field) => (
-            <div key={field.key} className={getCardFieldRowClass(field)}>
-              <dt className="min-w-0 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted [overflow-wrap:break-word]">
-                {field.label}
-              </dt>
-              <dd className="min-w-0 text-sm">{renderFieldValue(field)}</dd>
-            </div>
-          ))}
+          {presentation.fields
+            .filter((field) => !(field.omitWhenEmpty && !field.value))
+            .map((field) => (
+              <div key={field.key} className={getCardFieldRowClass(field)}>
+                <dt className="min-w-0 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted [overflow-wrap:break-word]">
+                  {field.label}
+                </dt>
+                <dd className="min-w-0 text-sm">{renderFieldValue(field)}</dd>
+              </div>
+            ))}
         </dl>
       </div>
     </article>

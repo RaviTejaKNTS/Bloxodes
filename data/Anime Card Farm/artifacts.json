@@ -1,0 +1,234 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Card Farm",
+    "gameSlug": "anime-card-farm",
+    "collection": "artifacts",
+    "route": "/wiki/anime-card-farm/artifacts",
+    "catalogCode": "anime-card-farm-artifacts",
+    "sources": [
+      {
+        "label": "All Things How — current artifacts guide",
+        "url": "https://allthings.how/anime-card-farm-artifacts-guide-best-artifacts-and-upgrades/",
+        "accessed": "2026-08-05"
+      },
+      {
+        "label": "All Things How — original five artifacts",
+        "url": "https://allthings.how/anime-card-farm-how-to-get-artifacts-and-every-buff/",
+        "accessed": "2026-08-05"
+      },
+      {
+        "label": "Roonby — artifacts guide",
+        "url": "https://roonby.com/2026/07/29/anime-card-farm-artifacts-guide-how-to-get-equip-and-best-artifacts/",
+        "accessed": "2026-08-05"
+      }
+    ],
+    "itemFields": [
+      "name",
+      "cardSummary",
+      "buff",
+      "effectStatus",
+      "boss"
+    ],
+    "columns": [
+      "name",
+      "cardSummary",
+      "buff",
+      "effectStatus",
+      "boss"
+    ],
+    "display": {
+      "groupLabel": "Boss",
+      "sectionOrder": [
+        "White Titan Artifacts",
+        "Moon Demon Artifacts"
+      ],
+      "badgeField": "effectStatus",
+      "subtitleFields": [
+        "boss"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "buff"
+      ],
+      "tableFields": [
+        "cardSummary",
+        "buff",
+        "effectStatus",
+        "boss"
+      ],
+      "fieldPresentation": {
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        },
+        "buff": {
+          "kind": "detail",
+          "label": "Buff",
+          "omitWhenEmpty": true
+        },
+        "effectStatus": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "boss": {
+          "kind": "normal",
+          "label": "Drops from"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Void Blindfold",
+        "cardSummary": "Raises income and raid reward luck while equipped, making it useful for Cash farming and repeated Boss Raids.",
+        "buff": "Cash from all sources and Boss Raid Luck",
+        "effectStatus": "Confirmed",
+        "boss": "White Titan"
+      },
+      "system": {
+        "slug": "void-blindfold",
+        "section": "White Titan Artifacts",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Divine Wheel",
+        "cardSummary": "Combines two luck bonuses in one equipped slot for general card and mutation farming.",
+        "buff": "Main Luck and Mutation Luck",
+        "effectStatus": "Confirmed",
+        "boss": "White Titan"
+      },
+      "system": {
+        "slug": "divine-wheel",
+        "section": "White Titan Artifacts",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Voodoo Doll",
+        "cardSummary": "Improves Trait Luck while equipped, including when duplicate copies are stacked before trait rolls.",
+        "buff": "Trait Luck",
+        "effectStatus": "Confirmed",
+        "boss": "White Titan"
+      },
+      "system": {
+        "slug": "voodoo-doll",
+        "section": "White Titan Artifacts",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Cleaver",
+        "cardSummary": "Provides the White Titan artifact option focused on the account's main Luck stat.",
+        "buff": "Main Luck",
+        "effectStatus": "Confirmed",
+        "boss": "White Titan"
+      },
+      "system": {
+        "slug": "cursed-cleaver",
+        "section": "White Titan Artifacts",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Cash",
+        "cardSummary": "Provides a direct Cash-earning boost from every source while the artifact is equipped.",
+        "buff": "Cash from all sources",
+        "effectStatus": "Confirmed",
+        "boss": "White Titan"
+      },
+      "system": {
+        "slug": "cursed-cash",
+        "section": "White Titan Artifacts",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wisteria Bloom",
+        "cardSummary": "Moon Demon Boss Raid artifact whose exact buff has not yet been confirmed by the checked sources.",
+        "buff": null,
+        "effectStatus": "Effect unconfirmed",
+        "boss": "Moon Demon"
+      },
+      "system": {
+        "slug": "wisteria-bloom",
+        "section": "Moon Demon Artifacts",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sun Earrings",
+        "cardSummary": "Moon Demon Boss Raid artifact whose exact buff has not yet been confirmed by the checked sources.",
+        "buff": null,
+        "effectStatus": "Effect unconfirmed",
+        "boss": "Moon Demon"
+      },
+      "system": {
+        "slug": "sun-earrings",
+        "section": "Moon Demon Artifacts",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Mask",
+        "cardSummary": "Moon Demon Boss Raid artifact whose exact buff has not yet been confirmed by the checked sources.",
+        "buff": null,
+        "effectStatus": "Effect unconfirmed",
+        "boss": "Moon Demon"
+      },
+      "system": {
+        "slug": "crimson-mask",
+        "section": "Moon Demon Artifacts",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fox Mask",
+        "cardSummary": "Moon Demon Boss Raid artifact whose exact buff has not yet been confirmed by the checked sources.",
+        "buff": null,
+        "effectStatus": "Effect unconfirmed",
+        "boss": "Moon Demon"
+      },
+      "system": {
+        "slug": "fox-mask",
+        "section": "Moon Demon Artifacts",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Moon Blade",
+        "cardSummary": "Moon Demon Boss Raid artifact whose exact buff has not yet been confirmed by the checked sources.",
+        "buff": null,
+        "effectStatus": "Effect unconfirmed",
+        "boss": "Moon Demon"
+      },
+      "system": {
+        "slug": "moon-blade",
+        "section": "Moon Demon Artifacts",
+        "sortOrder": 10,
+        "image": null
+      }
+    }
+  ]
+}
