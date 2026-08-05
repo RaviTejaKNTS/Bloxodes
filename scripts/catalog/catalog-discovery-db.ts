@@ -55,3 +55,20 @@ export async function enqueueDiscoveredCatalogItems(
   if (error) throw new Error(`Failed to enqueue discovered catalog items: ${error.message}`);
   return typeof data === "number" ? data : assetIds.length;
 }
+
+export async function expireStaleCatalogDiscoveryRuns(maxAgeMinutes = 120) {
+  const cutoff = new Date(Date.now() - Math.max(5, maxAgeMinutes) * 60_000).toISOString();
+  const nowIso = new Date().toISOString();
+  const { data, error } = await supabaseAdmin()
+    .from("roblox_catalog_discovery_runs")
+    .update({
+      status: "failed",
+      finished_at: nowIso,
+      notes: "Automatically expired after the discovery worker stopped without finishing."
+    })
+    .eq("status", "running")
+    .lt("started_at", cutoff)
+    .select("run_id");
+  if (error) throw new Error(`Failed to expire stale catalog discovery runs: ${error.message}`);
+  return data?.length ?? 0;
+}

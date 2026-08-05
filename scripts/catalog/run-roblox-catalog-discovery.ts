@@ -2,6 +2,7 @@ import "../shared/load-env";
 
 import { spawn } from "node:child_process";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
+import { expireStaleCatalogDiscoveryRuns } from "./catalog-discovery-db";
 
 const FAMILIES = [
   { name: "accessories", script: "collect:accessory-items" },
@@ -47,9 +48,15 @@ async function main() {
   }
 
   const families = selectedFamilies();
+  const expiredDiscoveryRuns = await expireStaleCatalogDiscoveryRuns();
   const run = await startStatsJobRun({
     jobName: "catalog_items_discovery_orchestrator",
-    metadata: { families: families.map((family) => family.name), rotation_offset: ROTATION_OFFSET, rotation_window_hours: ROTATION_WINDOW_HOURS }
+    metadata: {
+      families: families.map((family) => family.name),
+      rotation_offset: ROTATION_OFFSET,
+      rotation_window_hours: ROTATION_WINDOW_HOURS,
+      expired_discovery_runs: expiredDiscoveryRuns
+    }
   });
   const results: Array<{ family: string; status: "success" | "failed"; exitCode?: number; error?: string }> = [];
 
@@ -71,7 +78,7 @@ async function main() {
     rowsClaimed: results.length,
     rowsSucceeded: succeeded,
     rowsFailed: failed.length,
-    metadata: { results }
+    metadata: { results, expired_discovery_runs: expiredDiscoveryRuns }
   });
   console.log(JSON.stringify({ status, results }, null, 2));
   if (failed.length) process.exitCode = 1;

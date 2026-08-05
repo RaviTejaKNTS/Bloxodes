@@ -17,6 +17,7 @@ type HealthSnapshot = {
     stats_overdue: number;
     broken_media: number;
     duplicate_canonical_keys: number;
+    stale_discovery_runs: number;
     tiers: Record<string, number>;
     statuses: Record<string, number>;
   };
@@ -76,6 +77,7 @@ function evaluate(snapshot: HealthSnapshot): Check[] {
     check("queue_expired_leases", snapshot.queue.expired_leases, snapshot.queue.expired_leases === 0 ? "pass" : "fail", "0 expired leases"),
     check("queue_dead", snapshot.queue.dead, snapshot.queue.dead === 0 ? "pass" : "warn", "0 dead jobs"),
     check("canonical_duplicates", snapshot.catalog.duplicate_canonical_keys, snapshot.catalog.duplicate_canonical_keys === 0 ? "pass" : "warn", "0 legacy duplicate keys"),
+    check("stale_discovery_runs", snapshot.catalog.stale_discovery_runs, snapshot.catalog.stale_discovery_runs === 0 ? "pass" : "fail", "0 discovery runs left running for over 2h"),
     check("free_items_freshness_hours", freeAge, freeAge <= 30 ? "pass" : freeAge <= 48 ? "warn" : "fail", "<= 30h"),
     check("discovery_last_status", discoveryStatus, discoveryStatus === "success" ? "pass" : discoveryStatus === "partial" ? "warn" : "fail", "latest discovery run succeeded"),
     check("discovery_freshness_hours", discoveryAge, discoveryAge <= 30 ? "pass" : discoveryAge <= 48 ? "warn" : "fail", "<= 30h"),
@@ -90,6 +92,14 @@ async function main() {
     const { data, error } = await supabaseAdmin().rpc("get_roblox_item_pipeline_health");
     if (error) throw new Error(`Failed to load item pipeline health: ${error.message}`);
     const snapshot = data as HealthSnapshot;
+    const staleCutoff = new Date(Date.now() - 120 * 60_000).toISOString();
+    const { count: staleDiscoveryRuns, error: staleDiscoveryError } = await supabaseAdmin()
+      .from("roblox_catalog_discovery_runs")
+      .select("run_id", { count: "exact", head: true })
+      .eq("status", "running")
+      .lt("started_at", staleCutoff);
+    if (staleDiscoveryError) throw new Error(`Failed to audit stale discovery runs: ${staleDiscoveryError.message}`);
+    snapshot.catalog.stale_discovery_runs = staleDiscoveryRuns ?? 0;
     const checks = evaluate(snapshot);
     const failures = checks.filter((entry) => entry.status === "fail");
     const warnings = checks.filter((entry) => entry.status === "warn");
