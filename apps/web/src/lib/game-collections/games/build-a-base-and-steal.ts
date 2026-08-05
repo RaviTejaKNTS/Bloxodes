@@ -1,5 +1,6 @@
 import type { GameCollectionGroup } from "../types";
 
+/** gear, pets (rebirth track), and pet-mutations local datasets. */
 export const buildABaseAndStealCollectionGroup = {
   gameSlug: "build-a-base-and-steal",
   gameName: "Build a Base and Steal",
