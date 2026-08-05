@@ -84,5 +84,5 @@ Image readiness:
 - Dataset image paths updated: yes for 8 matched items; the 3 accepted gaps remain `null`
 - Provenance/handling: Each local WebP is a direct crop of its named, visible in-game Card Craft panel. Files are hosted locally rather than hotlinked, and no generic cover, AI-style article cover, or unrelated character art was used.
 - Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection crafting --require-images`
-- Checker result: pending
-- Ready for writing: pending checker review; partial coverage is acceptable because all 11 text rows remain complete and the renderer supplies consistent placeholders for missing images
+- Checker result: Strict image mode reports the 3 documented missing images and exits nonzero. The standard checker passes with 11/11 card summaries, 8/11 images, and no missing local files; the v2 audit also passes with 0 issues.
+- Ready for writing: yes with the 3 accepted image gaps. All 11 text rows remain complete, 8 named cards have clean local in-game crops, and the renderer supplies consistent placeholders for Emerald Successor, Fox Ascendant, and Dark Saber.
