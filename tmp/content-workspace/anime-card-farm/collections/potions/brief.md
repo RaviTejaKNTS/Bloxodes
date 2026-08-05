@@ -30,15 +30,47 @@ Data plan:
 - Known gaps or risks: No checked source proves exact duration, multiplier, stacking rules, whether Cash applies during offline income, the precise Production formula, a shop purchase path, or the complete tier matrix. Tier labels conflict with Beebom's quantity wording. Public sources use both Arabic and Roman tier notation; in-game UI is needed to settle canonical display. The current Roblox creator group differs from older community-wiki attribution. The game is actively updated, so the dataset should be designed for additional variants without implying completeness.
 
 Page layout plan:
-- Section field: `effectGroup`
+- Section field: `items[].system.section` (the approved effect grouping)
 - Section order: `economy-production`, `pull-mutation`, `pack-timing`
 - Section labels: Economy & Production; Pull & Mutation Odds; Pack Timing
 - Why these sections help players: They group potions by the decision a player is making, keep same-family tiers adjacent for comparison, and avoid a thin section for every tier or acquisition source.
 - Card title field: `name`
-- Card description field: `effect`
-- Card key-value fields: Tier; Best used for; Known acquisition
+- Card description field: `cardSummary`
+- Card key-value fields: Family; Tier; Effect; Best use; Known acquisition
 - Hidden/source-only fields: Exact observed code/reward mapping, source URLs, source access date, conflicting reward wording, confidence level, and raw name notation. These support maintenance but should not turn the evergreen collection into another live codes table.
 - Image field: `image`
 - Sort order: Section order above, then family order Cash → Production / Luck → Mutation / Time, then numeric tier ascending within each family.
 - Section note needs: Economy & Production should state that exact Cash/Production formulas and offline behavior remain unverified. Pull & Mutation Odds should distinguish general Luck from Mutation Luck without claiming exact rates. Pack Timing should say sources describe reduced pack-open wait time but do not provide duration or multiplier. A page-level note should explain that only publicly evidenced variants are listed and missing tier combinations are not assumed.
 - Renderer/config changes needed: yes — this is a new game/collection registration and will need the Anime Card Farm group/config, dataset path, section labels/order, displayed fields, and image path wired to the generic game-collection renderer during the later data phase.
+
+Data readiness:
+- Dataset file: `data/Anime Card Farm/potions.json`
+- Item count: 8
+- Source item count: 8 approved, source-backed variants
+- Dataset shape: v2 wrapped `{ meta, items[].item, items[].system }` yes
+- Public item fields: `name`, `family`, `tier`, `effect`, `bestUse`, `knownAcquisition`, `cardSummary`
+- System fields: `slug`, `section`, `sortOrder`, `image` only yes
+- Metadata: `schemaVersion`, `itemFields`, `columns`, `display.groupLabel`, `display.sectionOrder`, `display.tableFields`, `display.cardFields`, `display.fieldPresentation` all present
+- Section source: Player-decision grouping derived from each potion's source-backed effect family; grouping is stored only in `items[].system.section`.
+- Section counts: Economy & Production 3; Pull & Mutation Odds 3; Pack Timing 2
+- Section order: Economy & Production → Pull & Mutation Odds → Pack Timing
+- Card fields: `family`, `tier`, `effect`, `bestUse`, `knownAcquisition`, `cardSummary`
+- Card/table field order: Cards use Family badge, Tier subtitle, `cardSummary` description, then Tier → Effect → Best use → Known acquisition. Table uses Family → Tier → Effect → Best use → Known acquisition → Summary.
+- Card summary coverage: 8/8
+- Field presentation: Family and Known acquisition plain; Tier chip; Effect and Summary detail; Best use highlight
+- Highlight fields: `bestUse`
+- Chip fields: `tier`
+- Detail fields: `effect`, `cardSummary`
+- Field consistency: Every row contains every public field. Production Potion alone has `tier: null` because no tier is source-backed; no row omits the key.
+- Image needed: yes
+- Image field: `items[].system.image`
+- Hidden/source/dev fields absent from public item data: yes
+- Sort order: `items[].system.sortOrder` 1–8, following approved section/family/tier order
+- description_json section keys: `Economy & Production`, `Pull & Mutation Odds`, `Pack Timing`
+- Renderer/config support: Registered as `anime-card-farm/potions` in the shared Anime Card Farm collection group with universe `10144587520` and data directory `Anime Card Farm`; the generic renderer resolves 8 items and all three sections.
+- Missing items: None within the approved eight-variant evidence scope. Cash II, Luck II, Mutation II/III, Production tiers, and Time I remain intentionally absent.
+- Audit command: `npm run audit:game-collection-datasets:v2 -- --game anime-card-farm --collection potions`
+- Audit result: Pass — 1 registered dataset checked, 0 issues
+- Checker command: `npm run check:game-collection-data -- --game anime-card-farm --collection potions`
+- Checker result: Pass with the expected pre-image warning — registered yes, 8 items, section counts 3/3/2, card summaries 8/8, images 0/8
+- Ready for images: yes
