@@ -6,5 +6,5 @@ export const animeCardFarmCollectionGroup = {
   universeId: 10144587520,
   dataDir: "Anime Card Farm",
   universeNames: ["Anime Card Farm", "[CRAFT🔨] Anime Card Farm"],
-  collections: ["traits", "crafting"]
+  collections: ["traits", "crafting", "mutations"]
 } satisfies GameCollectionGroup;
