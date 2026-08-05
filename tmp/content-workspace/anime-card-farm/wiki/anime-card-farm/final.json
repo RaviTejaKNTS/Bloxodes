@@ -1,0 +1,23 @@
+{
+  "universe_id": 10144587520,
+  "slug": "anime-card-farm",
+  "title": "Anime Card Farm Wiki",
+  "seo_title": "Anime Card Farm Wiki: Cards, Upgrades and Guides",
+  "meta_description": "Learn the Anime Card Farm core loop, upgrades, offline income, controls, mutations, traits, crafting, artifacts, potions, and related guides.",
+  "description_md": "You spawn cards on a conveyor, buy the ones you want, and place them in farm slots. Active cards make Card Boxes, which you collect and sell for Cash. That Cash goes back into stronger packs, more slots, conveyor upgrades, and the cards worth keeping. The belt never runs out of ways to spend your wallet.\n\nPacks and money keep moving while you are offline, so your setup before leaving matters. Later progress branches into mutations, traits, Card Craft, Card Ranking, potions, and Boss Raids. Anime Card Factory built the game around a simple rule: make the farm earn more before you chase the next expensive card.",
+  "tips_md": "- Learn one clean earning cycle before buying everything on the belt: spawn a card, buy it, place it, collect its Card Boxes, and sell them for Cash. The [beginner guide](/articles/anime-card-farm-beginners-guide) walks through that first setup, while the [codes page](/codes/anime-card-farm) keeps changing rewards out of evergreen advice.\n- Keep mutations and traits separate. Mutations come from mutated packs, while traits are rolled with Trait Gems. Compare the [mutations list](/wiki/anime-card-farm/mutations), [traits list](/wiki/anime-card-farm/traits), and [potions list](/wiki/anime-card-farm/potions) before spending scarce resources. The [mutation guide](/articles/anime-card-farm-mutations-guide) explains the pack hunt in more detail. A rare name is not a permission slip for a bad reroll.\n- Save cards for a chosen recipe before using Card Craft, and keep enough Cash for its separate fee. Check the [crafting recipes](/wiki/anime-card-farm/crafting) before feeding away a needed card. When Boss Raids open up, match your three active slots to the job with the [artifacts list](/wiki/anime-card-farm/artifacts).\n- Upgrade your best earners before leaving so offline progress starts from a stronger farm. Use [Anime Card Farm stats](/stats/games/anime-card-farm-10144587520) when you want live player and trend data instead of squeezing changing numbers into your farm plan.",
+  "controls_json": [
+    {
+      "action": "Interact or buy when prompted",
+      "desktop": "E"
+    },
+    {
+      "action": "Use on-screen menus",
+      "desktop": "Click",
+      "mobile": "Tap",
+      "tablet": "Tap"
+    }
+  ],
+  "cover_image": "https://tr.rbxcdn.com/180DAY-40439240c1bb973b44f837a0ddeffca5/512/512/Image/Png/noFilter",
+  "is_published": true
+}
