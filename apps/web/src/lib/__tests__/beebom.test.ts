@@ -52,6 +52,42 @@ describe("Beebom code parsing", () => {
     ]);
   });
 
+  it("uses copy-button data without storing the button label in rewards", () => {
+    const result = parseBeebomHtml(
+      page(`
+        <h2>All New Survive Zombie Arena Codes</h2>
+        <ul class="wp-block-list is-style-copy-code-list">
+          <li>
+            <strong>UPDATE0.5</strong>: 5,000 Credits (<strong>NEW</strong>)
+            <button class="copy-code-list__copy-button" data-copy-text="UPDATE0.5"
+              data-default-label="Copy" data-copied-label="Copied">Copy</button>
+          </li>
+        </ul>
+        <h3>Expired Survive Zombie Arena Codes</h3>
+        <ul>
+          <li>
+            <strong>OLD_CODE</strong>
+            <button class="copy-code-list__copy-button" data-copy-text="OLD_CODE">Copy</button>
+          </li>
+        </ul>
+      `)
+    );
+
+    expect(result.codes).toEqual([
+      {
+        code: "UPDATE0.5",
+        status: "active",
+        provider: "beebom",
+        rewardsText: "5,000 Credits",
+        isNew: true,
+      },
+    ]);
+    expect(result.expiredCodes).toEqual([
+      { code: "OLD_CODE", provider: "beebom" },
+    ]);
+    expect(JSON.stringify(result)).not.toMatch(/\bCopy\b/);
+  });
+
   it("does not treat troubleshooting headings as working code sections", () => {
     const result = parseBeebomHtml(
       page(`

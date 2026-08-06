@@ -69,7 +69,11 @@ function isAdRow($item: cheerio.Cheerio<cheerio.Element>, $: cheerio.CheerioAPI)
 
 function extractCode($item: cheerio.Cheerio<cheerio.Element>, $: cheerio.CheerioAPI): string | null {
   // Primary: contenteditable container
-  const primary = $item.find(".codes-list__copy-container [contenteditable]").first().text().trim();
+  const primary = $item
+    .find(".codes-list__copy-container [contenteditable], .copy-button [contenteditable]")
+    .first()
+    .text()
+    .trim();
   if (primary) return primary;
 
   // Fallback 1: data-search-terms (JSON array)
@@ -81,9 +85,10 @@ function extractCode($item: cheerio.Cheerio<cheerio.Element>, $: cheerio.Cheerio
     } catch {}
   }
 
-  // Fallback 2: button[data-copy]
-  const btn = $item.find("button.copy-button").attr("data-copy");
-  if (btn) return String(btn).trim();
+  // Fallback 2: copy controls. RobloxDen has used both buttons and divs.
+  const copyControl = $item.find("[data-copy-text], [data-copy]").first();
+  const copiedCode = copyControl.attr("data-copy-text") || copyControl.attr("data-copy");
+  if (copiedCode) return String(copiedCode).trim();
 
   // Fallback 3: any [data-code], [data-clipboard-text]
   const any =
@@ -99,6 +104,7 @@ function extractStatus(
   $: cheerio.CheerioAPI,
 ): "active" | "expired" | "check" {
   // Explicit expired markers
+  if ($item.attr("data-expired") === "true") return "expired";
   if ($item.find('[data-expired="true"]').length > 0) return "expired";
   if ($item.find(".badge--inactive, .badge--expired").length > 0) return "expired";
 
@@ -127,6 +133,7 @@ function sanitizeRewardText(text: string): string {
 function extractRewards($item: cheerio.Cheerio<cheerio.Element>, $: cheerio.CheerioAPI): string | undefined {
   // Try common containers
   const candidates = [
+    ".search-term",
     ".codes-list__description",
     ".codes-list__rewards",
     ".codes-list__reward",
@@ -219,10 +226,16 @@ function extractIsNew($item: cheerio.Cheerio<cheerio.Element>, $: cheerio.Cheeri
 
 export async function scrapeRobloxdenPage(url: string): Promise<ScrapeResult> {
   const html = await fetchRobloxdenHtml(url);
+  return parseRobloxdenHtml(html);
+}
+
+export function parseRobloxdenHtml(html: string): ScrapeResult {
   const $ = cheerio.load(html);
 
-  // Typical item selector
-  const items = $("#masonry .codes-list__item, .codes-list__item");
+  // RobloxDen has used both masonry cards and table rows for game codes.
+  const items = $(
+    "#masonry .codes-list__item, .codes-list__item, tr[data-search='game-codes']"
+  );
   const activeCodes: ScrapedCode[] = [];
   const expiredCodes: { code: string; provider: "robloxden" }[] = [];
 

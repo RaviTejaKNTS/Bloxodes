@@ -1,5 +1,6 @@
 import * as cheerio from "cheerio";
 import type { ScrapeResult, ScrapedCode } from "./scraper-types";
+import { stripTrailingCopyButtonText } from "./code-normalization";
 
 const USER_AGENT = "Mozilla/5.0 (compatible; RobloxCodesBot/1.0)";
 const LIST_SEPARATOR_REGEX = /\s*:\s*|\s*[–—]\s*|(?:\s+-\s*|\s*-\s+)/;
@@ -54,6 +55,28 @@ function stripNewFlag(value: string): { cleaned: string; isNew: boolean } {
   const hasNew = NEW_REGEX.test(value);
   const cleaned = value.replace(NEW_REGEX, "").trim();
   return { cleaned, isNew: hasNew };
+}
+
+const COPY_CONTROL_SELECTOR =
+  ".copy-code-list__copy-button, button[data-copy-text], button[data-copy]";
+
+function textWithoutCopyControls(
+  $: cheerio.CheerioAPI,
+  node: cheerio.Cheerio<cheerio.Element>
+): string {
+  const clone = node.clone();
+  clone.find(COPY_CONTROL_SELECTOR).remove();
+  return clone.text().replace(/\s+/g, " ").trim();
+}
+
+function extractCopyCode(node: cheerio.Cheerio<cheerio.Element>): string | null {
+  const copyControl = node.find("[data-copy-text], [data-copy]").first();
+  const value = copyControl.attr("data-copy-text") || copyControl.attr("data-copy");
+  return value?.trim() || null;
+}
+
+function sanitizeRewardText(value: string): string {
+  return (stripTrailingCopyButtonText(value) ?? "").replace(/\s+/g, " ").trim();
 }
 
 /**
@@ -163,7 +186,8 @@ function findExpiredCodes($: cheerio.CheerioAPI): { code: string; provider: "bee
     }
 
     list.find("li").each((_: number, li: cheerio.Element) => {
-      const text = $(li).text().trim();
+      const item = $(li);
+      const text = extractCopyCode(item) || textWithoutCopyControls($, item);
       if (!text || isLikelyNonCodeText(text)) return;
       expired.push({ code: text, provider: "beebom" });
     });
@@ -191,11 +215,14 @@ export function parseBeebomHtml(html: string): ScrapeResult {
         const rewardCell = cells.length > 1 ? $(cells[1]) : null;
 
         const codeText =
-          codeCell.find("strong").first().text().trim() || codeCell.text().trim();
-        const rewardText = rewardCell ? rewardCell.text().trim() : "";
+          extractCopyCode(codeCell) ||
+          codeCell.find("strong").first().text().trim() ||
+          textWithoutCopyControls($, codeCell);
+        const rewardText = rewardCell ? textWithoutCopyControls($, rewardCell) : "";
 
         const { cleaned: codeClean, isNew: codeNew } = stripNewFlag(codeText);
-        const { cleaned: rewardClean, isNew: rewardNew } = stripNewFlag(rewardText);
+        const { cleaned: rawRewardClean, isNew: rewardNew } = stripNewFlag(rewardText);
+        const rewardClean = sanitizeRewardText(rawRewardClean);
         const normalized = normalizeCode(codeClean);
         if (!normalized || isLikelyNonCodeText(codeClean)) return;
 
@@ -212,14 +239,19 @@ export function parseBeebomHtml(html: string): ScrapeResult {
       });
     } else {
       container.find("li").each((_: number, li: cheerio.Element) => {
-        const text = $(li).text().trim();
+        const item = $(li);
+        const text = textWithoutCopyControls($, item);
         if (!text) return;
 
         const [beforeSeparator, rewardPart = ""] = text.split(LIST_SEPARATOR_REGEX, 2);
         const rewardRaw = rewardPart.trim();
 
-        const { cleaned: codeClean, isNew: codeNew } = stripNewFlag(beforeSeparator);
-        const { cleaned: rewardClean, isNew: rewardNew } = stripNewFlag(rewardRaw);
+        const copiedCode = extractCopyCode(item);
+        const { cleaned: codeClean, isNew: codeNew } = stripNewFlag(
+          copiedCode || beforeSeparator
+        );
+        const { cleaned: rawRewardClean, isNew: rewardNew } = stripNewFlag(rewardRaw);
+        const rewardClean = sanitizeRewardText(rawRewardClean);
         const normalized = normalizeCode(codeClean);
         if (!normalized || isLikelyNonCodeText(codeClean)) return;
         const entry: ScrapedCode = {
