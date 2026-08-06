@@ -20,6 +20,7 @@ import {
   AVATAR_CATALOG_SALE_OPTIONS,
   AVATAR_CATALOG_SORT_OPTIONS,
   buildAvatarCatalogQueryString,
+  getAvatarCatalogPageHeading,
   getAvatarCatalogSeoDescription,
   getAvatarCatalogSeoTitle,
   getAvatarCatalogCount,
@@ -70,11 +71,6 @@ function formatCompactCount(value: number): string {
     notation: "compact",
     maximumFractionDigits: 1
   }).format(value);
-}
-
-function buildCountedAvatarCatalogTitle(config: AvatarCatalogConfig, count: number): string {
-  const seoTitle = getAvatarCatalogSeoTitle(config);
-  return count > 0 ? `${formatCount(count)} ${seoTitle}` : seoTitle;
 }
 
 function buildCompactNavTitle(title: string, isAll: boolean): string {
@@ -588,7 +584,7 @@ export async function generateAvatarCatalogMetadata({
   const shouldNoIndex = route.page > 1 || hasActiveAvatarFilters(filters);
   const canonicalPath = route.page > 1 ? `${route.config.basePath}/page/${route.page}` : route.config.basePath;
   const canonicalUrl = `${SITE_URL.replace(/\/$/, "")}${canonicalPath}`;
-  const baseTitle = resolveSeoTitle(buildCountedAvatarCatalogTitle(route.config, count)) ?? route.config.title;
+  const baseTitle = resolveSeoTitle(getAvatarCatalogSeoTitle(route.config, count)) ?? route.config.title;
   const title = route.page > 1 ? `${baseTitle} - Page ${route.page}` : baseTitle;
   const description = getAvatarCatalogSeoDescription(route.config);
   const image = catalog?.thumb_url || `${SITE_URL}/Bloxodes.png`;
@@ -626,15 +622,14 @@ export async function renderAvatarCatalogPage({
   const secondaryNavParent = resolveAvatarCatalogSecondaryNavParent(route);
   const primaryActiveCode = resolveAvatarCatalogPrimaryActiveCode(route);
   const hasFilters = hasActiveAvatarFilters(filters);
-  const [{ items, total, totalPages }, catalog, navCounts, unfilteredTitleCount] = await Promise.all([
+  const [{ items, total, totalPages }, catalog, navCounts] = await Promise.all([
     loadAvatarCatalogPageData(route.config, route.page, filters),
     getCatalogPageContentByCodes([route.config.code]),
-    loadAvatarCatalogNavCounts(primaryNavParent),
-    hasFilters ? getAvatarCatalogCount(route.config).catch(() => null) : Promise.resolve(null)
+    loadAvatarCatalogNavCounts(primaryNavParent)
   ]);
   const contentHtml = await buildAvatarCatalogContentHtml(catalog);
-  const baseTitle = getAvatarCatalogSeoTitle(route.config);
-  const pageTitle = buildCountedAvatarCatalogTitle(route.config, unfilteredTitleCount ?? total);
+  const pageHeading = getAvatarCatalogPageHeading(route.config);
+  const structuredDataTitle = route.page > 1 ? `${pageHeading} - Page ${route.page}` : pageHeading;
   const description = getAvatarCatalogSeoDescription(route.config);
   const publishedDate = contentHtml?.publishedAt ? new Date(contentHtml.publishedAt) : null;
   const publishedIso = publishedDate && !Number.isNaN(publishedDate.getTime()) ? publishedDate.toISOString() : null;
@@ -650,13 +645,13 @@ export async function renderAvatarCatalogPage({
   const howHtml = contentHtml?.howHtml?.trim() ? contentHtml.howHtml : "";
   const faqHtml = contentHtml?.faqHtml ?? [];
   const hasDetails = Boolean(descriptionHtml.length) || Boolean(howHtml) || Boolean(faqHtml.length);
-  const breadcrumbItems = buildAvatarCatalogBreadcrumbItems(route, baseTitle);
+  const breadcrumbItems = buildAvatarCatalogBreadcrumbItems(route, pageHeading);
 
   const pageSchema = JSON.stringify(
     webPageJsonLd({
       siteUrl: SITE_URL,
       slug: canonicalPath.replace(/^\//, ""),
-      title: pageTitle,
+      title: structuredDataTitle,
       description,
       image: `${SITE_URL}/Bloxodes.png`,
       author: null,
@@ -665,7 +660,7 @@ export async function renderAvatarCatalogPage({
     })
   );
   const listSchema = buildAvatarCatalogItemListSchema({
-    title: pageTitle,
+    title: structuredDataTitle,
     description,
     url: canonicalUrl,
     items,
@@ -693,7 +688,7 @@ export async function renderAvatarCatalogPage({
     <div className="catalog-surface space-y-10">
       <header className="space-y-4">
         <PageBreadcrumb items={breadcrumbItems} />
-        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{pageTitle}</h1>
+        <h1 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl">{pageHeading}</h1>
         <UpdatedTimestamp value={updatedDate} />
         {route.page > 1 ? <p className="text-sm text-muted">Page {route.page} of {totalPages}</p> : null}
       </header>
@@ -715,7 +710,7 @@ export async function renderAvatarCatalogPage({
 
         <div className="catalog-surface space-y-6">
           <AvatarCatalogFilterForm basePath={route.config.basePath} filters={filters} />
-          <AvatarCatalogGrid items={items} pageTitle={pageTitle} hasFilters={hasFilters} />
+          <AvatarCatalogGrid items={items} pageTitle={pageHeading} hasFilters={hasFilters} />
           <PagePagination
             basePath={route.config.basePath}
             currentPage={route.page}

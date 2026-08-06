@@ -154,7 +154,7 @@ export const AVATAR_CATALOG_FAMILY_CODES = [
   AVATAR_MAKEUP_CODE
 ] as const;
 
-const AVATAR_CATALOG_SEO_TITLES: Record<string, string> = {
+const AVATAR_CATALOG_PAGE_HEADINGS: Record<string, string> = {
   [AVATAR_CATALOG_MASTER_CODE]: "Roblox Item IDs and Bundle Codes",
   [AVATAR_ACCESSORIES_CODE]: "Roblox Accessory Codes and Item IDs",
   [`${AVATAR_ACCESSORIES_CODE}/hair-accessories`]: "Roblox Hair Codes and IDs",
@@ -188,8 +188,63 @@ const AVATAR_CATALOG_SEO_TITLES: Record<string, string> = {
   [AVATAR_MAKEUP_CODE]: "Roblox Makeup Codes and Item IDs"
 };
 
-export function getAvatarCatalogSeoTitle(config: Pick<AvatarCatalogConfig, "code" | "title">): string {
-  return AVATAR_CATALOG_SEO_TITLES[config.code] ?? `${config.title} Item IDs and Codes`;
+const AVATAR_CATALOG_SEO_TITLE_PREFIXES: Record<string, string> = {
+  [AVATAR_CATALOG_MASTER_CODE]: "Roblox Item & Bundle Codes",
+  [AVATAR_ACCESSORIES_CODE]: "Roblox Accessory Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/hair-accessories`]: "Roblox Hair Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/head-accessories`]: "Roblox Hat & Head Accessory Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/face-accessories`]: "Roblox Face Accessory Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/neck-accessories`]: "Roblox Neck Accessory Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/shoulder-accessories`]: "Roblox Shoulder Accessory Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/front-accessories`]: "Roblox Front Accessory Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/back-accessories`]: "Roblox Back Accessory Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/waist-accessories`]: "Roblox Waist Accessory Codes",
+  [`${AVATAR_ACCESSORIES_CODE}/gear`]: "Roblox Gear Codes",
+  [AVATAR_CLOTHING_CODE]: "Roblox Clothing Codes",
+  [`${AVATAR_CLOTHING_CODE}/layered-t-shirts`]: "Roblox Layered T-Shirt Codes",
+  [`${AVATAR_CLOTHING_CODE}/shirts`]: "Roblox Layered Shirt Codes",
+  [`${AVATAR_CLOTHING_CODE}/sweaters`]: "Roblox Sweater Codes",
+  [`${AVATAR_CLOTHING_CODE}/jackets`]: "Roblox Jacket Codes",
+  [`${AVATAR_CLOTHING_CODE}/pants`]: "Roblox Layered Pants Codes",
+  [`${AVATAR_CLOTHING_CODE}/shorts`]: "Roblox Shorts Codes",
+  [`${AVATAR_CLOTHING_CODE}/dresses-skirts`]: "Roblox Dress & Skirt Codes",
+  [`${AVATAR_CLOTHING_CODE}/shoes`]: "Roblox Shoe Codes",
+  [`${AVATAR_CLOTHING_CODE}/classic-shirts`]: "Roblox Classic Shirt Codes",
+  [`${AVATAR_CLOTHING_CODE}/classic-t-shirts`]: "Roblox Classic T-Shirt Codes",
+  [`${AVATAR_CLOTHING_CODE}/classic-pants`]: "Roblox Classic Pants Codes",
+  [AVATAR_BODY_PARTS_CODE]: "Roblox Body Codes",
+  [`${AVATAR_BODY_PARTS_CODE}/full-bodies`]: "Roblox Avatar Bundle Codes",
+  [`${AVATAR_BODY_PARTS_CODE}/dynamic-heads`]: "Roblox Dynamic Head Codes",
+  [`${AVATAR_BODY_PARTS_CODE}/classic-heads`]: "Roblox Classic Head Codes",
+  [`${AVATAR_BODY_PARTS_CODE}/classic-faces`]: "Roblox Classic Face Codes",
+  [AVATAR_EMOTES_CODE]: "Roblox Emote Codes",
+  [AVATAR_ANIMATIONS_CODE]: "Roblox Animation Codes",
+  [AVATAR_MAKEUP_CODE]: "Roblox Makeup Codes"
+};
+
+function formatAvatarCatalogSeoCount(count: number): string {
+  if (count >= 1_000) return `${Math.floor(count / 1_000)}K+`;
+  return count.toLocaleString("en-US");
+}
+
+function getAvatarCatalogSeoCountType(code: string): string {
+  if (code === AVATAR_CATALOG_MASTER_CODE) return "Marketplace IDs";
+  if (code === AVATAR_BODY_PARTS_CODE) return "Item & Bundle IDs";
+  if (code.endsWith("/full-bodies") || code === AVATAR_ANIMATIONS_CODE) return "Bundle IDs";
+  return "Item IDs";
+}
+
+export function getAvatarCatalogPageHeading(config: Pick<AvatarCatalogConfig, "code" | "title">): string {
+  return AVATAR_CATALOG_PAGE_HEADINGS[config.code] ?? `${config.title} Item IDs and Codes`;
+}
+
+export function getAvatarCatalogSeoTitle(
+  config: Pick<AvatarCatalogConfig, "code" | "title">,
+  count: number
+): string {
+  const prefix = AVATAR_CATALOG_SEO_TITLE_PREFIXES[config.code] ?? getAvatarCatalogPageHeading(config);
+  if (count <= 0) return prefix;
+  return `${prefix} [${formatAvatarCatalogSeoCount(count)} ${getAvatarCatalogSeoCountType(config.code)}]`;
 }
 
 export function getAvatarCatalogSeoDescription(config: Pick<AvatarCatalogConfig, "code" | "title">): string {
