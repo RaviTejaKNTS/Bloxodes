@@ -5,15 +5,12 @@ import { gunzipSync } from "node:zlib";
 import { createClient } from "@supabase/supabase-js";
 import * as cheerio from "cheerio";
 
-import { firecrawlSearch } from "../shared/firecrawl";
-
 type SourceName =
   | "pro-game-guides"
   | "destructoid"
   | "beebom"
   | "sportskeeda"
   | "game8"
-  | "pocket-tactics"
   | "game-rant"
   | "techwiser";
 
@@ -41,7 +38,6 @@ const ALL_SOURCES: SourceName[] = [
   "beebom",
   "sportskeeda",
   "game8",
-  "pocket-tactics",
   "game-rant",
   "techwiser"
 ];
@@ -52,7 +48,6 @@ const SOURCE_LABELS: Record<SourceName, string> = {
   beebom: "Beebom",
   sportskeeda: "Sportskeeda",
   game8: "Game8",
-  "pocket-tactics": "Pocket Tactics",
   "game-rant": "Game Rant",
   techwiser: "TechWiser"
 };
@@ -393,44 +388,6 @@ async function collectGame8(): Promise<Candidate[]> {
   });
 }
 
-async function collectFirecrawlSite(sourceName: SourceName, domain: string): Promise<Candidate[]> {
-  const cutoff = new Date(Date.now() - SEARCH_LOOKBACK_MS).toISOString().slice(0, 10);
-  const discoveredFrom = `Firecrawl: site:${domain} after:${cutoff} Roblox`;
-  const response = await firecrawlSearch(`site:${domain} after:${cutoff} Roblox`, {
-    includeDomains: [domain],
-    limit: 30,
-    timeoutMs: 60_000
-  });
-  const candidates = (response.data?.web ?? []).flatMap((result) => {
-    const sourceUrl = normalizeUrl(result.url ?? result.metadata?.sourceURL ?? result.metadata?.url ?? "");
-    const title = cleanText(result.title ?? result.metadata?.title ?? "");
-    if (!sourceUrl || !title || !new URL(sourceUrl).hostname.endsWith(domain)) return [];
-    return [{
-      sourceName,
-      sourceUrl,
-      title,
-      publishedAt: null,
-      description: cleanText(result.description ?? result.metadata?.description ?? "") || undefined,
-      discoveredFrom
-    }];
-  });
-  return enrichMissingDates(candidates.filter((candidate) => !isCodesArticle(candidate)));
-}
-
-async function collectRssWithSearchFallback(
-  sourceName: SourceName,
-  feedUrl: string,
-  domain: string
-): Promise<Candidate[]> {
-  const rssCandidates = await collectRss(sourceName, feedUrl, true);
-  try {
-    return [...rssCandidates, ...(await collectFirecrawlSite(sourceName, domain))];
-  } catch (error) {
-    console.warn(`${SOURCE_LABELS[sourceName]} search fallback unavailable: ${error instanceof Error ? error.message : error}`);
-    return rssCandidates;
-  }
-}
-
 function isCodesArticle(candidate: Candidate): boolean {
   const text = `${candidate.title} ${new URL(candidate.sourceUrl).pathname.replace(/[-_/]+/g, " ")}`;
   const withoutTechnicalErrors = text.replace(/\berror codes?\b/gi, "");
@@ -463,11 +420,9 @@ async function collectSource(sourceName: SourceName): Promise<Candidate[]> {
     case "beebom":
       return enrichMissingDates((await collectBeebom()).filter((candidate) => !isCodesArticle(candidate)));
     case "sportskeeda":
-      return collectRssWithSearchFallback(sourceName, "https://www.sportskeeda.com/feed/roblox", "sportskeeda.com");
+      return collectRss(sourceName, "https://www.sportskeeda.com/feed/roblox", true);
     case "game8":
       return collectGame8();
-    case "pocket-tactics":
-      return collectFirecrawlSite(sourceName, "pockettactics.com");
     case "game-rant":
       return collectGameRantLanding();
     case "techwiser":

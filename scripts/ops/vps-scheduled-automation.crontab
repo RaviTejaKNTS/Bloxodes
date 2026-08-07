@@ -9,9 +9,8 @@
 #
 # Required env lives in /home/codex-admin/bloxodes-stats-worker/env.stats-worker.
 # It must include Supabase service-role env plus job-specific secrets such as
-# Google Indexing, OpenAI/Tavily for event details, FIRECRAWL_API_KEY for
-# Sportskeeda/Pocket Tactics article discovery, GROQ_API_KEY for article topic
-# curation, and LINKEDIN_LI_AT for LinkedIn puzzles when available.
+# Google Indexing, OpenAI/Tavily for event details, GROQ_API_KEY for article
+# topic curation, and LINKEDIN_LI_AT for LinkedIn puzzles when available.
 
 # BLOXODES_SCHEDULED_AUTOMATION_START
 35 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-daily-rollup "npm run stats:rollup-daily -- --date yesterday --finalize && npm run stats:prune-hourly -- --days 90 --apply && npm run stats:audit"
