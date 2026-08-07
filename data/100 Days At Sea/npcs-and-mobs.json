@@ -1,0 +1,774 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "100 Days At Sea",
+    "gameSlug": "100-days-at-sea",
+    "collection": "npcs-and-mobs",
+    "route": "/wiki/100-days-at-sea/npcs-and-mobs",
+    "catalogCode": "100-days-at-sea-npcs-and-mobs",
+    "sourceItemCount": 35,
+    "itemFields": [
+      "name",
+      "alignment",
+      "role",
+      "whereFound",
+      "howToInteract",
+      "threatNotes",
+      "dropsOrRewards",
+      "relatedSystem",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "alignment",
+      "role",
+      "whereFound",
+      "howToInteract",
+      "threatNotes",
+      "dropsOrRewards",
+      "relatedSystem",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Friendly NPCs",
+        "Ghost Pirates",
+        "Buku Tribe",
+        "Rival Survivors",
+        "Corrupt Creatures",
+        "Aliens",
+        "Sea Monsters",
+        "Biome Wildlife",
+        "Passive Wildlife"
+      ],
+      "badgeField": "alignment",
+      "subtitleFields": [
+        "role",
+        "whereFound"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "alignment",
+        "role",
+        "whereFound",
+        "howToInteract",
+        "threatNotes",
+        "dropsOrRewards",
+        "relatedSystem"
+      ],
+      "tableFields": [
+        "alignment",
+        "role",
+        "whereFound",
+        "howToInteract",
+        "threatNotes",
+        "dropsOrRewards",
+        "relatedSystem",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "alignment": {
+          "kind": "chip",
+          "label": "Alignment"
+        },
+        "role": {
+          "kind": "chip",
+          "label": "Role"
+        },
+        "whereFound": {
+          "kind": "plain",
+          "label": "Where found"
+        },
+        "howToInteract": {
+          "kind": "detail",
+          "label": "How to interact"
+        },
+        "threatNotes": {
+          "kind": "detail",
+          "label": "Threat notes"
+        },
+        "dropsOrRewards": {
+          "kind": "detail",
+          "label": "Drops / rewards"
+        },
+        "relatedSystem": {
+          "kind": "plain",
+          "label": "Related"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Captain Stephen",
+        "alignment": "Friendly",
+        "role": "Rescue",
+        "whereFound": "One of three Survivor Islands each run (radio-marked)",
+        "howToInteract": "Clear island pressure, walk up, and interact to rescue. He teleports to your base and starts working.",
+        "threatNotes": "Cannot be damaged. Island guards (often Ghost Pirates) must be cleared before a safe rescue.",
+        "dropsOrRewards": "Each rescued Survivor adds +1 Day Multiplier and automates base machines and material processing.",
+        "relatedSystem": "Survivor Islands, radio map marks, base automation",
+        "cardSummary": "One of three named Survivors with the same rescue payoff. Free him on his Survivor Island for Day Multiplier and long-run base automation."
+      },
+      "system": {
+        "slug": "captain-stephen",
+        "section": "Friendly NPCs",
+        "sortOrder": 1,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/captain-stephen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Doctor Madelaine",
+        "alignment": "Friendly",
+        "role": "Rescue",
+        "whereFound": "One of three Survivor Islands each run (radio-marked)",
+        "howToInteract": "Clear island pressure, walk up, and interact to rescue. She teleports to your base and starts working.",
+        "threatNotes": "Cannot be damaged. Island guards (often Ghost Pirates) must be cleared before a safe rescue.",
+        "dropsOrRewards": "Each rescued Survivor adds +1 Day Multiplier and automates base machines and material processing.",
+        "relatedSystem": "Survivor Islands, radio map marks, base automation",
+        "cardSummary": "One of three named Survivors with the same rescue payoff. Free her on her Survivor Island for Day Multiplier and long-run base automation."
+      },
+      "system": {
+        "slug": "doctor-madelaine",
+        "section": "Friendly NPCs",
+        "sortOrder": 2,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/doctor-madelaine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Professor Erik",
+        "alignment": "Friendly",
+        "role": "Rescue",
+        "whereFound": "One of three Survivor Islands each run (radio-marked)",
+        "howToInteract": "Clear island pressure, walk up, and interact to rescue. He teleports to your base and starts working.",
+        "threatNotes": "Cannot be damaged. Island guards (often Ghost Pirates) must be cleared before a safe rescue.",
+        "dropsOrRewards": "Each rescued Survivor adds +1 Day Multiplier and automates base machines and material processing.",
+        "relatedSystem": "Survivor Islands, radio map marks, base automation",
+        "cardSummary": "One of three named Survivors with the same rescue payoff. Free him on his Survivor Island for Day Multiplier and long-run base automation."
+      },
+      "system": {
+        "slug": "professor-erik",
+        "section": "Friendly NPCs",
+        "sortOrder": 3,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/professor-erik.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fisherman",
+        "alignment": "Friendly",
+        "role": "Rescue trader",
+        "whereFound": "Fisherman Island, the large landmass next to the starting raft",
+        "howToInteract": "Defeat Buku guards on the island, then interact to free him. After rescue, trade cooked fish dishes for gear in a fixed order.",
+        "threatNotes": "Cannot be damaged. Early Buku warriors guard the island approach.",
+        "dropsOrRewards": "Rescue grants a Fishing Rod for every player and unlocks a hut chest that holds a Dinghy. Trades include Crab Trap, Machete, Good Sack, Flintlock, Chowder, Flare, Doubloons, Blunderbuss, Giant Sack, and Swordfish Sword for specific fish dishes.",
+        "relatedSystem": "Fisherman Island, fishing progression, early boat and tool unlocks",
+        "cardSummary": "Top early priority. Free him for fishing gear and the Dinghy path, then climb the fixed fish-for-loot trade ladder when you have food to spare."
+      },
+      "system": {
+        "slug": "fisherman",
+        "section": "Friendly NPCs",
+        "sortOrder": 4,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/fisherman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "MukuMuku Merchant",
+        "alignment": "Friendly",
+        "role": "Traveling trader",
+        "whereFound": "Sails up beside your base during the day and leaves at night",
+        "howToInteract": "Spend Doubloons at his ship shop. Stock is limited per player and purchased lines do not restock on later visits.",
+        "threatNotes": "Cannot be damaged. Missing him at night means waiting for the next daytime visit.",
+        "dropsOrRewards": "Doubloons-only shop with limited stock. High-value leads include Medkits (revive), Pearls, Rifle, Ghost Sack, plus boats, weapons, building materials, and Corrupt Shards.",
+        "relatedSystem": "Doubloons economy, revives, Pearl spending path outside Companion Shop",
+        "cardSummary": "Daytime Doubloons trader with one-time stock per player. Plan medkits, Pearls, and key gear buys instead of impulse spending."
+      },
+      "system": {
+        "slug": "mukumuku-merchant",
+        "section": "Friendly NPCs",
+        "sortOrder": 5,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/mukumuku-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glorbus",
+        "alignment": "Friendly",
+        "role": "Quest trader",
+        "whereFound": "One of the Alien Islands",
+        "howToInteract": "Feed him 20 food items of any kind. He then rewards the Alien Food Machine.",
+        "threatNotes": "Cannot be damaged. Reach him only after Alien Island combat pressure is under control.",
+        "dropsOrRewards": "Alien Food Machine turns five food items into Alien Soup, which restores more hunger than regular Chowder.",
+        "relatedSystem": "Alien Islands, food crafting. Placed machines can be auto-fed by rescued Survivors.",
+        "cardSummary": "Alien Island food NPC. Trade a large food dump for the Alien Food Machine, then decide carefully where to place it so Survivors do not auto-feed premium meals."
+      },
+      "system": {
+        "slug": "glorbus",
+        "section": "Friendly NPCs",
+        "sortOrder": 6,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/glorbus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lost Penguin",
+        "alignment": "Friendly",
+        "role": "Collectible",
+        "whereFound": "Scattered across Ice Region islands when the map has an Ice Biome (20 total)",
+        "howToInteract": "Find each Lost Penguin on ice islands and return it to the Penguin Mother.",
+        "threatNotes": "Cannot be damaged. Ice Region wildlife and travel risk are the real danger while collecting.",
+        "dropsOrRewards": "Progress toward the full Ice penguin hand-in that unlocks the Yeti boss path.",
+        "relatedSystem": "Ice Region, Penguin Mother, Yeti boss (bosses collection). Not the Companion Shop Penguin pet.",
+        "cardSummary": "Ice Biome collectibles. Return all 20 to the Penguin Mother to open the Yeti route. Separate from the Companion Shop penguin pet."
+      },
+      "system": {
+        "slug": "lost-penguin",
+        "section": "Friendly NPCs",
+        "sortOrder": 7,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Penguin Mother",
+        "alignment": "Friendly",
+        "role": "Quest turn-in",
+        "whereFound": "Ice Region when the map spawns with an Ice Biome",
+        "howToInteract": "Deliver all 20 Lost Penguins to her. Completing the set spawns the Yeti boss path.",
+        "threatNotes": "Cannot be damaged.",
+        "dropsOrRewards": "Completing deliveries triggers the Yeti encounter path rather than a direct loot drop here.",
+        "relatedSystem": "Ice Region penguin quest. Yeti fight details live on the bosses collection.",
+        "cardSummary": "Turn-in NPC for the Ice penguin rescue set. Finish all deliveries to unlock Yeti; do not treat her as a combat target."
+      },
+      "system": {
+        "slug": "penguin-mother",
+        "section": "Friendly NPCs",
+        "sortOrder": 8,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Pirate",
+        "alignment": "Hostile",
+        "role": "Melee",
+        "whereFound": "Pirate islands, cauldron treasure islands, Ghost Galleon boards, pirate raids, pirate strongholds",
+        "howToInteract": "Fight with melee or ranged weapons. Collect bodies when you need ghost-pirate crafting inputs.",
+        "threatNotes": "Transparent green sword pirates that swarm early, including the guaranteed first-night raid. Prefer range when many spawn at once.",
+        "dropsOrRewards": "Essences for potions are a common lead. Night raids also grant Glue per pirate kill for crafting table use.",
+        "relatedSystem": "Ghost pirate night raids, strongholds, Ghost Galleon content. Not Captain Greenbeard or the Galleon boss card.",
+        "cardSummary": "Core ghost-pirate melee unit and first-night raid filler. Farm them for Essences and Glue, and clear them before boarding harder pirate structures."
+      },
+      "system": {
+        "slug": "ghost-pirate",
+        "section": "Ghost Pirates",
+        "sortOrder": 9,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/ghost-pirate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Pirate Gunner",
+        "alignment": "Hostile",
+        "role": "Ranged",
+        "whereFound": "Pirate islands, Ghost Galleon, pirate raids, pirate strongholds",
+        "howToInteract": "Keep moving while closing or answering with your own ranged weapons.",
+        "threatNotes": "Transparent green rifle or gun pirates. Bullets punish standing still more than pure melee ghosts do.",
+        "dropsOrRewards": "Same pirate-group leads as other ghosts: Essences and raid Glue when killed during raids.",
+        "relatedSystem": "Ghost pirate raids and ship boards",
+        "cardSummary": "Ranged ghost-pirate variant. Strafe their shots, then clear them before they shred raft walls or your health during raids."
+      },
+      "system": {
+        "slug": "ghost-pirate-gunner",
+        "section": "Ghost Pirates",
+        "sortOrder": 10,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/ghost-pirate-gunner.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Bombardier",
+        "alignment": "Hostile",
+        "role": "AoE",
+        "whereFound": "Ghost Galleon and higher-day pirate raids",
+        "howToInteract": "Watch the ground marker, step out of the blast zone, then punish after the shot.",
+        "threatNotes": "Transparent green boomstick pirates that telegraph an AoE impact zone before firing.",
+        "dropsOrRewards": "Pirate-group Essences and raid Glue leads.",
+        "relatedSystem": "High-day pirate raids, Ghost Galleon boarding fights",
+        "cardSummary": "AoE ghost-pirate variant on galleon and late pirate raids. Leave the telegraphed blast circle, then finish them with ranged fire."
+      },
+      "system": {
+        "slug": "ghost-bombardier",
+        "section": "Ghost Pirates",
+        "sortOrder": 11,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/ghost-bombardier.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Pirate Captain",
+        "alignment": "Hostile",
+        "role": "Elite melee",
+        "whereFound": "High-day pirate raids and pirate strongholds",
+        "howToInteract": "Prefer ranged weapons and extra healing. Do not confuse this regular elite with the named Greenbeard boss.",
+        "threatNotes": "Larger dual-sword green ghost with more HP and damage than standard pirates.",
+        "dropsOrRewards": "Pirate-group Essences and raid Glue leads. Boss-grade cutlass rewards belong to the separate Greenbeard / Galleon boss path.",
+        "relatedSystem": "Pirate raids and strongholds. Distinct from Captain Greenbeard and Ghost Galleon boss cards.",
+        "cardSummary": "Elite dual-sword ghost pirate on late raids and strongholds. Treat as a tough regular unit, not the named Captain Greenbeard boss entry."
+      },
+      "system": {
+        "slug": "ghost-pirate-captain",
+        "section": "Ghost Pirates",
+        "sortOrder": 12,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/ghost-pirate-captain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Buku Buku",
+        "alignment": "Hostile",
+        "role": "Melee",
+        "whereFound": "Many early islands and Buku raids (can appear with little warning, even by day)",
+        "howToInteract": "Basic melee clear. Safe to farm early for chests and island control.",
+        "threatNotes": "Masked humanoids in yellow-blue gear with swords. Low threat compared with pirates and later elites.",
+        "dropsOrRewards": "Early island chests and general loot pressure. Buku raids are low-damage skirmishes.",
+        "relatedSystem": "Early island clears, Buku night or day raids, Fisherman Island guards",
+        "cardSummary": "Default Buku Tribe melee fighter and early-island staple. Clear them for island access and light raid value."
+      },
+      "system": {
+        "slug": "buku-buku",
+        "section": "Buku Tribe",
+        "sortOrder": 13,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/buku-buku.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Buku Boku",
+        "alignment": "Hostile",
+        "role": "Ranged",
+        "whereFound": "Buku-held islands and Buku raids",
+        "howToInteract": "Close distance or answer with guns so archers cannot free-fire from cover.",
+        "threatNotes": "Masked humanoids in green-blue gear with bows.",
+        "dropsOrRewards": "Tribe loot and chests. Raid sources note a possible sword drop from Boku-named fighters.",
+        "relatedSystem": "Buku raids and early island combat",
+        "cardSummary": "Bow-using Buku variant. Prioritize them when they sit behind melee tribe members on early islands and raids."
+      },
+      "system": {
+        "slug": "buku-boku",
+        "section": "Buku Tribe",
+        "sortOrder": 14,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/buku-boku.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Buku Poku",
+        "alignment": "Hostile",
+        "role": "Spear",
+        "whereFound": "Buku-held islands and Buku raids",
+        "howToInteract": "Fight like other tribe melee units, then check the body for the rare weapon lead.",
+        "threatNotes": "Fish-masked humanoids in red-yellow gear with spears.",
+        "dropsOrRewards": "Chance to drop the Poku Poku weapon.",
+        "relatedSystem": "Buku Tribe loot path, weapons progression",
+        "cardSummary": "Spear Buku variant with the Poku Poku weapon lead. Worth killing on sight when you are still building a mid-run melee kit."
+      },
+      "system": {
+        "slug": "buku-poku",
+        "section": "Buku Tribe",
+        "sortOrder": 15,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/buku-poku.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Buku Toku",
+        "alignment": "Hostile",
+        "role": "Shield spear",
+        "whereFound": "High-day Buku raids",
+        "howToInteract": "Expect a tankier tribe fighter. Break them with sustained damage rather than ignoring them for softer targets.",
+        "threatNotes": "Fish-masked red-yellow fighters with shield and spear. Appear more often on tougher Buku waves.",
+        "dropsOrRewards": "Tribe raid loot. No unique guaranteed drop published beyond standard Buku combat rewards.",
+        "relatedSystem": "High-day Buku raids",
+        "cardSummary": "Shielded Buku elite on harder raids. Higher durability than basic Buku Buku, still lower overall pressure than late pirates or corruption packs."
+      },
+      "system": {
+        "slug": "buku-toku",
+        "section": "Buku Tribe",
+        "sortOrder": 16,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/buku-toku.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rival Survivor (Melee)",
+        "alignment": "Hostile",
+        "role": "Melee",
+        "whereFound": "Rival Rigs and Radio Tower islands",
+        "howToInteract": "Clear aggressively but with healing ready. Loot the platform after the fight.",
+        "threatNotes": "Hostile humans with swords or knives. Loadout can vary by location (for example ghost cutlass on larger rigs).",
+        "dropsOrRewards": "High-tier weapons, Doubloon chests, and armor leads from cleared rigs and towers.",
+        "relatedSystem": "Rival Rigs set, Radio Towers chain",
+        "cardSummary": "Melee rival defender on rigs and radio towers. Expect strong platform loot after the clear, not a free early farm."
+      },
+      "system": {
+        "slug": "rival-survivor-melee",
+        "section": "Rival Survivors",
+        "sortOrder": 17,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/rival-survivor-melee.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rival Survivor (Ranged)",
+        "alignment": "Hostile",
+        "role": "Ranged",
+        "whereFound": "Rival Rigs and Radio Tower islands",
+        "howToInteract": "Stay mobile, use cover, and answer with ranged weapons when possible.",
+        "threatNotes": "Hostile humans with guns. Standing still on open platforms is punished hard.",
+        "dropsOrRewards": "Same high-tier weapons, Doubloon chests, and armor leads as melee rivals after a full clear.",
+        "relatedSystem": "Rival Rigs set, Radio Towers chain",
+        "cardSummary": "Gun rival defender on the same structures as melee rivals. Keep moving while you clear towers and the three-rig objective set."
+      },
+      "system": {
+        "slug": "rival-survivor-ranged",
+        "section": "Rival Survivors",
+        "sortOrder": 18,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/rival-survivor-ranged.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupt Crewmate",
+        "alignment": "Hostile",
+        "role": "Melee",
+        "whereFound": "Corrupted structures such as the Cargo Ship",
+        "howToInteract": "Bring mid-to-late weapons and healing. Clear rooms carefully instead of rushing.",
+        "threatNotes": "Purple-transparent military humanoids with axes. High HP and hard hits compared with early islands.",
+        "dropsOrRewards": "Corruption weapon leads such as Saber, Revolver, and Corrupt Minigun from the broader corrupt set.",
+        "relatedSystem": "Corruption / Cargo Ship content",
+        "cardSummary": "Basic corruption melee unit in cargo and corrupted rooms. Expect tankier fights than Buku or early pirates."
+      },
+      "system": {
+        "slug": "corrupt-crewmate",
+        "section": "Corrupt Creatures",
+        "sortOrder": 19,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/corrupt-crewmate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupt Officer",
+        "alignment": "Hostile",
+        "role": "Ranged",
+        "whereFound": "Corrupted structures such as the Cargo Ship",
+        "howToInteract": "Prioritize while moving so gunfire does not stack with melee crewmates.",
+        "threatNotes": "Purple-transparent military gunners mixed into corruption packs.",
+        "dropsOrRewards": "Corruption weapon leads shared with the corrupt set.",
+        "relatedSystem": "Corruption / Cargo Ship content",
+        "cardSummary": "Ranged corruption officer. Drop them early in mixed rooms so crewmates cannot pin you under gunfire."
+      },
+      "system": {
+        "slug": "corrupt-officer",
+        "section": "Corrupt Creatures",
+        "sortOrder": 20,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupt Saber Yielder",
+        "alignment": "Hostile",
+        "role": "Elite melee",
+        "whereFound": "Corrupted structures such as the Cargo Ship",
+        "howToInteract": "Keep distance if possible and do not trade hits carelessly.",
+        "threatNotes": "Purple humanoid with a laser saber. Higher pressure melee elite inside corruption spaces.",
+        "dropsOrRewards": "Saber-class corruption loot is a soft lead from this family.",
+        "relatedSystem": "Corruption / Cargo Ship content",
+        "cardSummary": "Saber-wielding corruption elite. One of the reasons cargo clears need real weapons and healing, not starter tools."
+      },
+      "system": {
+        "slug": "corrupt-saber-yielder",
+        "section": "Corrupt Creatures",
+        "sortOrder": 21,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/corrupt-saber-yielder.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupt Minigunner",
+        "alignment": "Hostile",
+        "role": "Heavy ranged",
+        "whereFound": "Corrupted structures such as the Cargo Ship",
+        "howToInteract": "Break line of sight, peek damage, and avoid long open corridors.",
+        "threatNotes": "Purple humanoid in yellow gear with a minigun. Sustained ranged pressure.",
+        "dropsOrRewards": "Corrupt Minigun is a soft lead from the corruption enemy family.",
+        "relatedSystem": "Corruption / Cargo Ship content",
+        "cardSummary": "Heavy gun corruption elite. Treat as a priority target when clearing cargo rooms with limited cover."
+      },
+      "system": {
+        "slug": "corrupt-minigunner",
+        "section": "Corrupt Creatures",
+        "sortOrder": 22,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/corrupt-minigunner.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chest Mimic",
+        "alignment": "Hostile",
+        "role": "Ambush",
+        "whereFound": "Corrupted structures such as the Cargo Ship",
+        "howToInteract": "Approach suspicious chests ready to fight instead of assuming free loot.",
+        "threatNotes": "Chest body with an eye and teeth. Ambush threat mixed into corruption loot routes.",
+        "dropsOrRewards": "Corruption combat loot after the fake chest is defeated.",
+        "relatedSystem": "Corruption / Cargo Ship content",
+        "cardSummary": "Fake chest that fights back. Open cargo loot carefully and keep a weapon ready on any odd chest model."
+      },
+      "system": {
+        "slug": "chest-mimic",
+        "section": "Corrupt Creatures",
+        "sortOrder": 23,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/chest-mimic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Jellyfish",
+        "alignment": "Hostile",
+        "role": "Ambient hostile",
+        "whereFound": "Corrupted rooms and related corruption spaces",
+        "howToInteract": "Clear with mid-range weapons. Avoid walking through packs of jellies while low on health.",
+        "threatNotes": "Human-sized red jelly that floats slightly above ground.",
+        "dropsOrRewards": "Corruption room combat loot. No unique public drop table isolated for color variants.",
+        "relatedSystem": "Corruption / Cargo Ship content",
+        "cardSummary": "Red floating jelly inside corruption spaces. Clear them so they do not chip you while you handle humanoid corrupt packs."
+      },
+      "system": {
+        "slug": "red-jellyfish",
+        "section": "Corrupt Creatures",
+        "sortOrder": 24,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Jellyfish",
+        "alignment": "Hostile",
+        "role": "Ambient hostile",
+        "whereFound": "Corrupted rooms and related corruption spaces",
+        "howToInteract": "Clear with mid-range weapons alongside red jellies and humanoid corrupt packs.",
+        "threatNotes": "Human-sized blue jelly that floats slightly above ground.",
+        "dropsOrRewards": "Corruption room combat loot. No unique public drop table isolated for color variants.",
+        "relatedSystem": "Corruption / Cargo Ship content",
+        "cardSummary": "Blue floating jelly variant in the same corruption rooms as the red jelly. Same job: clear space before the humanoid elites stack damage."
+      },
+      "system": {
+        "slug": "blue-jellyfish",
+        "section": "Corrupt Creatures",
+        "sortOrder": 25,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Alien",
+        "alignment": "Hostile",
+        "role": "Raid and island",
+        "whereFound": "Alien raids on your base and Alien Islands",
+        "howToInteract": "Clear raid waves for the Transponder path, then fight island aliens with strong mid-to-late gear.",
+        "threatNotes": "Small green aliens beam down from UFOs in raids. Island packs hit harder and should not be rushed undergeared.",
+        "dropsOrRewards": "Clearing an alien raid can drop an Alien Transponder used to locate Alien Islands. Island fights can lead to Energy Sword drops.",
+        "relatedSystem": "Alien raids, Alien Transponder, Alien Islands, Glorbus. Not a player class.",
+        "cardSummary": "Base alien unit for raids and Alien Islands. Raid clears open the Transponder route; island packs are among the harder regular hostiles."
+      },
+      "system": {
+        "slug": "alien",
+        "section": "Aliens",
+        "sortOrder": 26,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/alien.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Alien Warrior",
+        "alignment": "Hostile",
+        "role": "Elite",
+        "whereFound": "Later alien raids and Alien Islands",
+        "howToInteract": "Keep distance, use cover, and do not treat late alien raids like the weak early UFO waves.",
+        "threatNotes": "Tougher alien fighters that mix into higher-day raids and island defenses. Damage can approach ghost-pirate pressure.",
+        "dropsOrRewards": "Alien combat loot and Energy Sword soft leads from the alien enemy family.",
+        "relatedSystem": "Alien raids and islands. Name collides with the Alien Warrior class loadout; this card is the world mob only.",
+        "cardSummary": "Elite alien world enemy on later raids and islands. Separate from the Alien Warrior player class with the same name."
+      },
+      "system": {
+        "slug": "alien-warrior",
+        "section": "Aliens",
+        "sortOrder": 27,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/alien-warrior.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shark",
+        "alignment": "Hostile",
+        "role": "Open sea",
+        "whereFound": "Open ocean around boats and islands",
+        "howToInteract": "Avoid unnecessary water fights. Outrun when undergeared; only fight with real weapons if you must.",
+        "threatNotes": "Can knock you off boats and deal instant-feeling water damage. Riskier than land Buku packs for early rafts.",
+        "dropsOrRewards": "No stable public per-kill table listed in primary guides. Survival is the main reward early.",
+        "relatedSystem": "Open-sea travel. Not the Companion Shop Shark pet.",
+        "cardSummary": "Open-sea predator that punishes bad boat fights. Prefer evasion early, and do not confuse this world shark with the Companion Shop pet."
+      },
+      "system": {
+        "slug": "shark",
+        "section": "Sea Monsters",
+        "sortOrder": 28,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/shark.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Salamander",
+        "alignment": "Hostile",
+        "role": "Open sea",
+        "whereFound": "Open ocean",
+        "howToInteract": "Treat as a rare sea threat. Outrun unless you are geared for open-water combat.",
+        "threatNotes": "Sea monster that can knock players off boats and punish exposed swims.",
+        "dropsOrRewards": "No stable public per-kill table listed in primary guides.",
+        "relatedSystem": "Open-sea travel. Not the Companion Shop Salamander pet.",
+        "cardSummary": "Rarer open-sea monster alongside sharks and angler fish. Avoid casual fights while your raft is still fragile."
+      },
+      "system": {
+        "slug": "salamander",
+        "section": "Sea Monsters",
+        "sortOrder": 29,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Angler Fish",
+        "alignment": "Hostile",
+        "role": "Night sea threat",
+        "whereFound": "Open ocean, especially dangerous at night if the bonfire is out",
+        "howToInteract": "Keep the bonfire lit and avoid night chases when possible. Do not bait it without a retreat plan.",
+        "threatNotes": "Community guides flag it as one of the most dangerous sea threats, able to chase hard when night defenses fail.",
+        "dropsOrRewards": "No stable public per-kill table listed in primary guides. Keeping the run alive is the real reward.",
+        "relatedSystem": "Night survival, bonfire upkeep, open-sea travel",
+        "cardSummary": "Top open-sea chase threat, especially when night lights fail. Outrun and secure the bonfire rather than farming it for loot."
+      },
+      "system": {
+        "slug": "angler-fish",
+        "section": "Sea Monsters",
+        "sortOrder": 30,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/angler-fish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wolf",
+        "alignment": "Hostile",
+        "role": "Ice wildlife",
+        "whereFound": "Ice Region islands when the map has an ice biome",
+        "howToInteract": "Fight only with mid-to-late weapons and healing. Do not treat ice wildlife like early Buku packs.",
+        "threatNotes": "Among the tougher land animals in cold regions.",
+        "dropsOrRewards": "No isolated public drop table beyond general Ice Region combat loot.",
+        "relatedSystem": "Ice Region exploration. Distinct from the Companion Shop Arctic Wolf pet.",
+        "cardSummary": "Ice Region hostile animal. Expect harder fights than early islands while you collect penguins or push toward Yeti prep."
+      },
+      "system": {
+        "slug": "wolf",
+        "section": "Biome Wildlife",
+        "sortOrder": 31,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Polar Bear",
+        "alignment": "Hostile",
+        "role": "Ice wildlife",
+        "whereFound": "Ice Region islands when the map has an ice biome",
+        "howToInteract": "Keep distance, use strong weapons, and avoid multi-bear pulls.",
+        "threatNotes": "High-pressure ice wildlife among the toughest non-boss land fights.",
+        "dropsOrRewards": "No isolated public drop table beyond general Ice Region combat loot.",
+        "relatedSystem": "Ice Region exploration. Distinct from the Companion Shop Polar Bear pet.",
+        "cardSummary": "Heavy Ice Region animal threat. Clear carefully while hunting Lost Penguins; this is not a Companion Shop pet card."
+      },
+      "system": {
+        "slug": "polar-bear",
+        "section": "Biome Wildlife",
+        "sortOrder": 32,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Magma Snail",
+        "alignment": "Hostile",
+        "role": "Volcano wildlife",
+        "whereFound": "Volcano / magma biome spaces",
+        "howToInteract": "Engage only when prepared for volcano-region combat pressure.",
+        "threatNotes": "Biome-specific magma wildlife listed among the harder non-boss land threats.",
+        "dropsOrRewards": "No isolated public drop table beyond general volcano-region combat loot.",
+        "relatedSystem": "Volcano Region. Fire Golems and Lord of Lava stay on the bosses collection. Distinct from Companion Shop Lava Snail.",
+        "cardSummary": "Volcano-region wildlife, not the Fire Golems mini-boss trio. Clear only with real mid-run gear while traveling the magma route."
+      },
+      "system": {
+        "slug": "magma-snail",
+        "section": "Biome Wildlife",
+        "sortOrder": 33,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Seagull",
+        "alignment": "Passive",
+        "role": "Food bird",
+        "whereFound": "Low sky around the map, reachable with harpoon or guns",
+        "howToInteract": "Harpoon or shoot for a one-shot kill. Harpooning can drag cooked bird meat back to you.",
+        "threatNotes": "Non-hostile. Lowest combat threat in the game.",
+        "dropsOrRewards": "Cooked bird food on death (already cooked).",
+        "relatedSystem": "Emergency food. Distinct from the Companion Shop Seagull pet.",
+        "cardSummary": "Passive sky bird you can harpoon for quick cooked food. Not hostile and not the Companion Shop seagull."
+      },
+      "system": {
+        "slug": "seagull",
+        "section": "Passive Wildlife",
+        "sortOrder": 34,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/seagull.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crow",
+        "alignment": "Passive",
+        "role": "Food bird",
+        "whereFound": "Low sky around the map, reachable with harpoon or guns",
+        "howToInteract": "Harpoon or shoot for a one-shot kill. Harpooning can drag cooked bird meat back to you.",
+        "threatNotes": "Non-hostile. Lowest combat threat in the game.",
+        "dropsOrRewards": "Cooked bird food on death (already cooked).",
+        "relatedSystem": "Emergency food. Distinct from the Companion Shop Crow pet.",
+        "cardSummary": "Passive sky bird twin to the seagull for emergency cooked food. Not hostile and not the Companion Shop crow."
+      },
+      "system": {
+        "slug": "crow",
+        "section": "Passive Wildlife",
+        "sortOrder": 35,
+        "image": "/100%20Days%20At%20Sea/NPCs%20and%20Mobs/crow.png"
+      }
+    }
+  ]
+}

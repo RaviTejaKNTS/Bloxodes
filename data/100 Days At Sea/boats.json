@@ -1,0 +1,260 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "100 Days At Sea",
+    "gameSlug": "100-days-at-sea",
+    "collection": "boats",
+    "route": "/wiki/100-days-at-sea/boats",
+    "catalogCode": "100-days-at-sea-boats",
+    "itemFields": [
+      "role",
+      "maxSpeed",
+      "carriesItems",
+      "passengers",
+      "howToGet",
+      "craftCost",
+      "cardSummary",
+      "notes"
+    ],
+    "columns": [
+      "role",
+      "maxSpeed",
+      "carriesItems",
+      "passengers",
+      "howToGet",
+      "craftCost",
+      "cardSummary",
+      "notes"
+    ],
+    "display": {
+      "groupLabel": "Use case",
+      "sectionOrder": [
+        "Early boats",
+        "Solo speed",
+        "Cargo & crew",
+        "Class exclusive"
+      ],
+      "badgeField": "role",
+      "subtitleFields": [
+        "role"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "maxSpeed",
+        "carriesItems",
+        "passengers",
+        "howToGet",
+        "craftCost"
+      ],
+      "tableFields": [
+        "role",
+        "maxSpeed",
+        "carriesItems",
+        "passengers",
+        "howToGet",
+        "craftCost",
+        "cardSummary",
+        "notes"
+      ],
+      "fieldPresentation": {
+        "role": {
+          "kind": "chip",
+          "label": "use case"
+        },
+        "maxSpeed": {
+          "kind": "chip",
+          "label": "max speed"
+        },
+        "carriesItems": {
+          "kind": "chip",
+          "label": "carries items"
+        },
+        "passengers": {
+          "kind": "chip",
+          "label": "passengers"
+        },
+        "howToGet": {
+          "kind": "detail",
+          "label": "how to get"
+        },
+        "craftCost": {
+          "kind": "chip",
+          "label": "craft cost"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "summary"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "notes"
+        }
+      }
+    },
+    "notes": {
+      "imagePolicy": "per-boat in-game still or class icon",
+      "imageAcceptedMissing": false,
+      "imageAcceptedMissingReason": null,
+      "imageSourcesSearched": [
+        "https://100-days-at-sea-roblox.fandom.com/wiki/Boats (+ allimages API)",
+        "https://allthings.how/100-days-at-sea-every-boat-its-speed-and-how-to-get-it/",
+        "https://techwiser.com/100-days-at-sea-boats/"
+      ],
+      "imageMissingByItem": {},
+      "imageSourcesUsed": [
+        "https://100-days-at-sea-roblox.fandom.com/wiki/File:Dinghy.png \u2014 Dinghy hull still",
+        "https://100-days-at-sea-roblox.fandom.com/wiki/File:Raft.png \u2014 Raft still",
+        "https://100-days-at-sea-roblox.fandom.com/wiki/File:Yacht.png \u2014 Yacht still",
+        "https://100-days-at-sea-roblox.fandom.com/wiki/File:Galleon_boat.png \u2014 Galleon night hull still",
+        "https://100-days-at-sea-roblox.fandom.com/wiki/File:Millionaire%27s_massive_luxury_boat.png \u2014 Massive Luxury Yacht class perk icon crop",
+        "https://techwiser.com/wp-content/uploads/2026/08/Jetski.webp \u2014 Jetski action still",
+        "https://techwiser.com/wp-content/uploads/2026/08/UFO.webp \u2014 UFO still"
+      ],
+      "publicImagePath": "apps/web/public/100 Days At Sea/Boats/",
+      "scopeNote": "Usable player boats only. Cosmetic/NPC/event vessels (Sinister Vessels, raid Ghost Galleons, Cargo Ship, merchant raft, Buku Buku craft) are out of scope as item cards.",
+      "craftCostNote": "Only Jetski and Yacht craft recipes are multi-source confirmed. Raft, Dinghy, and Galleon craft costs left null.",
+      "imageNotes": {
+        "galleon": "Best available labeled player galleon still; night/fog lighting with UI pin; may resemble Ghost Galleon aesthetics.",
+        "yacht": "Minor HUD pin/speed fragment in frame; hull clear.",
+        "massive-luxury-yacht": "Cropped class-shop perk icon (no clean open-water hull still found).",
+        "jetski": "TechWiser action still; cursor and purple sea creature at frame edge."
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Dinghy",
+        "role": "Early boats",
+        "maxSpeed": "42",
+        "carriesItems": "Yes",
+        "passengers": "3",
+        "howToGet": "Free on Fisherman Island (Fisherman's Hut after rescue; also reported from island chests). Can be crafted or bought from the MukuMuku merchant.",
+        "craftCost": null,
+        "cardSummary": "Best first boat for most runs. Faster than the Raft, seats three, hauls items, and is often free once you hit Fisherman Island.",
+        "notes": "Craft recipe cost is not confirmed in public boat guides. Prefer the free Fisherman path over crafting early."
+      },
+      "system": {
+        "slug": "dinghy",
+        "section": "Early boats",
+        "sortOrder": 1,
+        "image": "/100%20Days%20At%20Sea/Boats/dinghy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Raft",
+        "role": "Early boats",
+        "maxSpeed": "16",
+        "carriesItems": "Yes",
+        "passengers": "1",
+        "howToGet": "Craftable from the raft crafting table.",
+        "craftCost": null,
+        "cardSummary": "Slow starter boat that can haul items for one player. Drop it as soon as the free Dinghy is available.",
+        "notes": "Craft recipe cost is not confirmed in public boat guides. Guides consistently recommend skipping it for the Dinghy."
+      },
+      "system": {
+        "slug": "raft",
+        "section": "Early boats",
+        "sortOrder": 2,
+        "image": "/100%20Days%20At%20Sea/Boats/raft.png"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO",
+        "role": "Solo speed",
+        "maxSpeed": "100",
+        "carriesItems": "No",
+        "passengers": "1",
+        "howToGet": "Alien Overlord class starter, or found on the UFO alien island.",
+        "craftCost": null,
+        "cardSummary": "Fastest boat in the game. Stays as an inventory item you equip on demand, so it is always with you for pure island hopping.",
+        "notes": "Only boat that equips from inventory instead of placing on water. Cannot haul items, seats one, and cannot be used in dungeons. Equipping under a structure spawns the UFO above it."
+      },
+      "system": {
+        "slug": "ufo",
+        "section": "Solo speed",
+        "sortOrder": 3,
+        "image": "/100%20Days%20At%20Sea/Boats/ufo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jetski",
+        "role": "Solo speed",
+        "maxSpeed": "80",
+        "carriesItems": "No",
+        "passengers": "1",
+        "howToGet": "Craft at the crafting table, or buy from the MukuMuku merchant.",
+        "craftCost": "15 Metal, 15 Wood, 2 Goop",
+        "cardSummary": "Fastest craftable boat and the best everyday solo travel pick when you do not have a UFO. Great for scouting; no cargo seat.",
+        "notes": "Also spelled Jetsky in some community pages. Merchant Doubloon price is not listed in public boat guides."
+      },
+      "system": {
+        "slug": "jetski",
+        "section": "Solo speed",
+        "sortOrder": 4,
+        "image": "/100%20Days%20At%20Sea/Boats/jetski.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yacht",
+        "role": "Cargo & crew",
+        "maxSpeed": "60",
+        "carriesItems": "Yes",
+        "passengers": "5",
+        "howToGet": "Craft at the crafting table, or buy from the MukuMuku merchant.",
+        "craftCost": "35 Metal, 60 Wood, 10 Goop",
+        "cardSummary": "Mid-speed hauler for teams that need to move people and loot together. Often skipped in pure solo play for a faster non-cargo boat.",
+        "notes": "Merchant Doubloon price is not listed in public boat guides."
+      },
+      "system": {
+        "slug": "yacht",
+        "section": "Cargo & crew",
+        "sortOrder": 5,
+        "image": "/100%20Days%20At%20Sea/Boats/yacht.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Galleon",
+        "role": "Cargo & crew",
+        "maxSpeed": "45",
+        "carriesItems": "Yes",
+        "passengers": "6",
+        "howToGet": "Craftable, or drop from the green chest on the Ghost Galleon after clearing enemies during Ghost Raids / the summoned galleon route.",
+        "craftCost": null,
+        "cardSummary": "Largest crew boat with six seats and item haul. Slow and huge, so it shines for group hauls more than solo island chains.",
+        "notes": "Craft recipe cost is not confirmed in public boat guides. The Ghost Galleon structure itself is not a player boat\u2014only the green-chest Galleon item is."
+      },
+      "system": {
+        "slug": "galleon",
+        "section": "Cargo & crew",
+        "sortOrder": 6,
+        "image": "/100%20Days%20At%20Sea/Boats/galleon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Massive Luxury Yacht",
+        "role": "Class exclusive",
+        "maxSpeed": null,
+        "carriesItems": null,
+        "passengers": null,
+        "howToGet": "Millionaire class exclusive starter (also called Jumbo Luxury Yacht or Luxury Yacht in class guides).",
+        "craftCost": null,
+        "cardSummary": "Class-only luxury boat tied to Millionaire. Useful for early travel and economy starts, but public guides do not publish firm speed or cargo stats.",
+        "notes": "Speed, cargo, and passenger values are unknown in dedicated boat guides. Do not invent numbers. Alias names: Jumbo Luxury Yacht, Luxury Yacht."
+      },
+      "system": {
+        "slug": "massive-luxury-yacht",
+        "section": "Class exclusive",
+        "sortOrder": 7,
+        "image": "/100%20Days%20At%20Sea/Boats/massive-luxury-yacht.png"
+      }
+    }
+  ]
+}

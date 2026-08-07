@@ -10,6 +10,11 @@ export const daysAtSeaCollectionGroup = {
     "bosses",
     "companions",
     "islands",
-    "classes"
+    "classes",
+    "boats",
+    "potions",
+    "weapons",
+    "npcs-and-mobs",
+    "structures"
   ]
 } satisfies GameCollectionGroup;
