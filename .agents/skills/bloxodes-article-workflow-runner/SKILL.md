@@ -1,11 +1,39 @@
 ---
 name: bloxodes-article-workflow-runner
-description: Run one or many Bloxodes article writing jobs with parent review. Use when the user gives approved article ideas, asks to write multiple articles, wants subagents to research/write articles, or needs parent QA before final.json output.
+description: Run one or many Bloxodes article writing jobs with parent review. Use explicit topics from the user's message when present; otherwise select pending article_generation_queue leads. Use when the user asks to write articles, gives article ideas, wants subagents to research/write articles, or needs parent QA before final.json output.
 ---
 
 # Bloxodes Article Workflow Runner
 
 Use this as the parent review workflow for one article or a list of articles.
+
+## Input Selection
+
+Choose inputs in this order:
+
+1. If the user's current message supplies one or more topics, article ideas, titles, or source URLs, treat them as explicitly user-approved and work only on those supplied inputs. Do not query the generation queue merely to fill spare capacity. These are direct jobs, so do not update a queue row unless the user also supplied its queue ID or explicitly asked to include queue work.
+2. If the user explicitly asks for both supplied topics and queued topics, do both in the order the user requested.
+3. If the current message supplies no topic, title, idea, or source URL, load pending `agent_runner` leads from `article_generation_queue`:
+
+```bash
+npm run articles:queue:list -- --limit <candidate-window> --json
+```
+
+When the user gives a count but no topics, the target article count is that count. Otherwise, the target count is the number of research subagent slots currently available. Set `<candidate-window>` to as many as three times the target count, capped at 50, so unsuitable leads can be skipped without exhausting the batch. Accept no more than the target count; leave unselected rows pending.
+
+Queue listing returns only Groq-curated rows and orders them by newest `source_published_at` first. Inspect the canonical title, grouped source URLs, source dates, curation reason, and existing Bloxodes coverage before accepting it for research. If no pending rows exist, return that the queue is empty; do not invent substitute topics. If the queue cannot be read, report the operational blocker rather than silently switching to topic suggestion.
+
+An eligible `agent_runner` row in `article_generation_queue` has already passed the Groq topic-type, owned-page-family, source-grouping, and overlap filter. The parent still verifies that the sources support accurate research before writing. Preserve the queue ID and every grouped source URL throughout the job so the same skill can close the row when local work finishes.
+
+### Externally Claimed Local Writer Jobs
+
+When the current message explicitly says that `scripts/articles/run-local-article-writer.ts` has already claimed the queue item:
+
+- Treat the supplied title, type, queue reference, and source packet as the one explicit approved input.
+- Do not list, claim, or update `article_generation_queue`; the wrapper owns production queue state and Grok does not receive production credentials.
+- Complete the same research, separate writing-subagent, parent review, verifier, local Supabase import, and real-browser preview workflow.
+- Never publish or import the article to production. Normal `SUPABASE_*` variables are intentionally local-only in this mode.
+- End with the structured status requested by the wrapper. Report `completed` only when `final.json`, verification, local import, and rendered preview all passed. Otherwise return `skipped`, `blocked`, or `failed` with the actual reason.
 
 Use separate research and writing subagents. Give each subagent one article only. The parent model orchestrates the work, approves briefs, reviews finals, runs verification, and previews the rendered pages.
 
@@ -67,17 +95,37 @@ Save approved images with `npm run content:save-article-image` before final veri
 
 ## Workflow
 
-1. Confirm the approved article idea or list of ideas.
-2. Start one research subagent per article and queue extras when slots are full.
-3. Require each research subagent to use `/bloxodes-article-research` and return `brief.md` only.
-4. Review each brief. Do not approve weak research just because the angle sounds good.
-5. Send research feedback to the same research subagent, or approve the brief.
-6. After approval, start a new writing subagent with the normal, tech, or tier-list writing skill.
-7. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; send copy and content changes back to the writing subagent.
-8. Start or reuse the local web server with `npm run dev:local`.
-9. Run the batch verifier on reviewed final files. Send copy failures to the writing subagent and research gaps to the research subagent.
-10. Open each verified localhost article in an available real browser and inspect the rendered page.
-11. Return approved paths, localhost article links, blocked articles, and remaining risks.
+1. Resolve inputs using **Input Selection**. Confirm direct user-supplied ideas. For queue-backed work, inspect the source lead and existing Bloxodes coverage first. Mark a duplicate, codes article, unsupported lead, or topic without a useful angle `skipped` with a concise reason.
+2. For each accepted queue-backed lead, mark it `processing` before starting research:
+
+```bash
+npm run articles:queue:update -- --queue-id <uuid> --status processing --worker <worker-name> --apply --allow-prod
+```
+
+3. Start one research subagent per article and queue extras when slots are full.
+4. Require each research subagent to use `/bloxodes-article-research` and return `brief.md` only.
+5. Review each brief. Do not approve weak research just because the angle sounds good.
+6. Send research feedback to the same research subagent, or approve the brief.
+7. After approval, start a new writing subagent with the normal, tech, or tier-list writing skill.
+8. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; send copy and content changes back to the writing subagent.
+9. Start or reuse the local web server with `npm run dev:local`.
+10. Run the batch verifier on reviewed final files. Send copy failures to the writing subagent and research gaps to the research subagent.
+11. Open each verified localhost article in an available real browser and inspect the rendered page.
+12. Immediately after an article passes both verification and rendered browser preview, mark its queue row `completed`:
+
+```bash
+npm run articles:queue:update -- --queue-id <uuid> --status completed --result-path <final.json> --apply --allow-prod
+```
+
+13. Return approved paths, localhost article links, queue outcomes, blocked articles, and remaining risks.
+
+Use `skipped` for a deliberate editorial rejection such as existing coverage or no useful/source-backed angle:
+
+```bash
+npm run articles:queue:update -- --queue-id <uuid> --status skipped --reason "<concise reason>" --apply --allow-prod
+```
+
+Use `failed` only for a terminal operational failure, with `--reason`. Do not mark a row `completed` merely because `final.json` exists: the verifier and actual browser preview must both have passed.
 
 ## Brief Review
 
@@ -164,3 +212,4 @@ Return:
 - blocked articles and why
 - verification done, including `verify:article-finals` and the browser used for rendered-page preview
 - remaining risks
+- queue ID and final queue status for every queue-backed article

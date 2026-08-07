@@ -33,6 +33,12 @@ Automatic daily workflows use fast code/build/dataset checks and tiny targeted s
 | Beebom code-page discovery and immediate draft generation | `scripts/codes/discover-beebom-code-pages.ts` | `npm run discover:beebom-codes -- --apply` |
 | Event guide generation | `scripts/events/generate-events-articles.ts` | `npm run generate:events-articles` |
 | Article generation queue worker | `scripts/automation/run-article-generation-queue.ts` | `npm run articles:queue` |
+| Discover recent non-codes article leads | `scripts/articles/discover-article-topics.ts` | `npm run articles:discover` for a dry run; scheduled production writes use `-- --apply --allow-prod` and stage raw, source-deduplicated candidates without creating generation jobs |
+| Curate source leads into article jobs | `scripts/articles/curate-article-topics.ts` | `npm run articles:curate` for a read-only Groq preview; scheduled writes use `-- --apply --allow-prod`. Only Groq-approved guides, tier lists, and explainers reach the `agent_runner` queue; same-topic sources are grouped into one row. |
+| List article-runner queue leads | `scripts/articles/list-article-queue.ts` | `npm run articles:queue:list -- --limit <n> --json`; read-only, Groq-curated `agent_runner` rows only, newest source publication first |
+| Update an article-runner queue row | `scripts/articles/update-article-queue-item.ts` | `npm run articles:queue:update -- --queue-id <uuid> --status <processing|completed|skipped|failed> --apply --allow-prod`; completion also requires `--result-path <final.json>` |
+| Write one curated production-queue article locally with Grok | `scripts/articles/run-local-article-writer.ts` | `ARTICLE_QUEUE_ENV_FILE=<production-env> npm run articles:writer:local` is a dry run; add `-- --apply` to claim one job, run the existing article workflow, import only to local Supabase, and close the production queue row after verification |
+| Install the ten-times-daily local writer | `scripts/ops/install-local-article-writer-launchd.ts` | Validate with `npm run articles:writer:launchd -- --queue-env-file <production-env>`; add `--install` only after the production queue migration and environment are ready |
 | Generic generation queue worker | `scripts/automation/run-generation-queue.ts` | `npm run generate:queue` |
 | Article refresh/update | `scripts/articles/update-articles.ts` | `npm run articles:update` |
 | Code-article rewrite | `scripts/codes/rewrite-codes-articles.ts` | `npm run rewrite:codes` |

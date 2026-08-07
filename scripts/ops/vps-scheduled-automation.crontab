@@ -9,8 +9,9 @@
 #
 # Required env lives in /home/codex-admin/bloxodes-stats-worker/env.stats-worker.
 # It must include Supabase service-role env plus job-specific secrets such as
-# Google Indexing, OpenAI/Tavily for event details, and LINKEDIN_LI_AT for
-# LinkedIn puzzles when available.
+# Google Indexing, OpenAI/Tavily for event details, FIRECRAWL_API_KEY for
+# Sportskeeda/Pocket Tactics article discovery, GROQ_API_KEY for article topic
+# curation, and LINKEDIN_LI_AT for LinkedIn puzzles when available.
 
 # BLOXODES_SCHEDULED_AUTOMATION_START
 35 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-daily-rollup "npm run stats:rollup-daily -- --date yesterday --finalize && npm run stats:prune-hourly -- --days 90 --apply && npm run stats:audit"
@@ -19,6 +20,8 @@
 0 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh codes-refresh "export REFRESH_CONCURRENCY=6 REFRESH_BATCH_DELAY_MS=750; npm run refresh:codes"
 17 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh google-indexing "export GOOGLE_INDEXING_STATE_BACKEND=supabase; npm run indexing:google -- --apply"
 40 9 * * 3 JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh promo-rewards-refresh "export ROBLOX_PROMO_RETIRE_AFTER_MISSES=2; npm run refresh:promo-rewards -- --apply --allow-prod"
+
+22 0,8,16 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh article-topic-discovery "npm run articles:discover -- --apply --allow-prod && npm run articles:curate -- --apply --allow-prod"
 
 15 0 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh events-refresh "export ROBLOX_VIRTUAL_EVENTS_LIMIT=200; npm run collect:virtual-events && npm run seed:event-details -- --all"
 

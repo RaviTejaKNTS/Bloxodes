@@ -42,6 +42,7 @@ async function pickQueueItems(limit: number): Promise<QueueRow[]> {
   const { data, error } = await supabase
     .from("article_generation_queue")
     .select("id, article_title, status, attempts, next_attempt_at, last_attempted_at, last_error")
+    .eq("workflow_mode", "legacy_generator")
     .eq("status", "pending")
     .or(`next_attempt_at.is.null,next_attempt_at.lte.${new Date().toISOString()}`)
     .order("created_at", { ascending: true })

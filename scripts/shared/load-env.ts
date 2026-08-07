@@ -5,13 +5,17 @@ import { config as loadDotenv } from "dotenv";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const nodeEnv = process.env.NODE_ENV ?? "development";
+const localWriterOnly = process.env.ARTICLE_WRITER_LOCAL_ONLY === "true";
 
-const candidates = [
-  `.env.${nodeEnv}.local`,
-  nodeEnv === "test" || nodeEnv === "production" ? null : ".env.local",
-  `.env.${nodeEnv}`,
-  ".env"
-].filter((value): value is string => Boolean(value));
+const candidates = (localWriterOnly
+  ? [`.env.${nodeEnv}.local`, ".env.local"]
+  : [
+      `.env.${nodeEnv}.local`,
+      nodeEnv === "test" || nodeEnv === "production" ? null : ".env.local",
+      `.env.${nodeEnv}`,
+      ".env"
+    ]
+).filter((value): value is string => Boolean(value));
 
 for (const relativePath of candidates) {
   const envPath = path.join(repoRoot, relativePath);
