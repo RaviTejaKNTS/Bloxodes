@@ -15,6 +15,7 @@ import {
   type DecalSortKey
 } from "@/lib/decal-ids-search";
 import type { DecalRow } from "./page-data";
+import type { DecalGameDatasetPreset } from "@/lib/game-specific-id-pages";
 
 type ApiResponse = {
   ok: boolean;
@@ -28,8 +29,12 @@ type Props = {
   initialTotalPages: number;
   currentPage: number;
   basePath: string;
-  section?: "all" | "curated" | "category";
+  section?: "all" | "curated" | "category" | "game";
   category?: string | null;
+  preset?: DecalGameDatasetPreset;
+  idLabel?: "Decal ID" | "Crosshair ID" | "Face or Eye ID" | "Picture ID" | "Image ID" | "Spray Paint ID";
+  copyTextureId?: boolean;
+  gameSlug?: string;
 };
 
 type ContentProps = Props & {
@@ -58,7 +63,19 @@ function formatCount(value: number | null | undefined): string | null {
   return value.toLocaleString("en-US");
 }
 
-function DecalCard({ decal }: { decal: DecalRow }) {
+function DecalCard({
+  decal,
+  idLabel,
+  copyTextureId,
+  showCuratedDetails
+}: {
+  decal: DecalRow;
+  idLabel: NonNullable<Props["idLabel"]>;
+  copyTextureId: boolean;
+  showCuratedDetails: boolean;
+}) {
+  if (copyTextureId && !decal.texture_id) return null;
+
   const uploaded = formatDate(decal.roblox_created_at);
   const votes = formatCount(decal.vote_count);
   const sales = formatCount(decal.sales);
@@ -67,6 +84,11 @@ function DecalCard({ decal }: { decal: DecalRow }) {
     decal.upvote_percent !== null && decal.upvote_percent !== undefined ? `${decal.upvote_percent}%` : null,
     votes ? `${votes} votes` : null
   ].filter(Boolean).join(" · ");
+  const copyId = copyTextureId ? decal.texture_id! : decal.asset_id;
+  const showPairedImageId = idLabel === "Spray Paint ID" && Boolean(decal.texture_id) && decal.texture_id !== decal.asset_id;
+  const curatedReason = decal.curated_reason?.trim()
+    ? decal.curated_reason.replace(/^curated source/i, "Selected from a curated source")
+    : "Selected from our reviewed decal collection.";
 
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-lg border border-border/70 bg-surface transition duration-200 hover:border-accent/55">
@@ -78,7 +100,7 @@ function DecalCard({ decal }: { decal: DecalRow }) {
           imageAltBase={`${decal.name} Roblox decal`}
           openLabel={`Open ${decal.name} decal preview`}
           buttonClassName="h-full"
-          imageClassName="transition duration-500 group-hover:scale-105"
+          imageClassName="!object-contain p-2 transition duration-500 group-hover:scale-105"
         />
         {decal.is_for_sale && decal.price_in_robux ? (
           <span className="absolute right-2 top-2 rounded-md bg-accent px-3 py-1 text-xs font-semibold text-white">
@@ -89,11 +111,13 @@ function DecalCard({ decal }: { decal: DecalRow }) {
 
       <div className="flex flex-1 flex-col gap-3 p-3">
         <div className="space-y-1">
+          {showCuratedDetails && decal.curated_rank ? (
+            <p className="text-sm font-semibold text-accent">Rank #{decal.curated_rank}</p>
+          ) : null}
           <h2 className="text-base font-semibold leading-snug text-foreground line-clamp-2">{decal.name}</h2>
           {decal.creator_name ? (
             <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
-              <span className="text-[10px] font-semibold uppercase tracking-wide">Creator</span>
-              <span className="font-semibold text-foreground line-clamp-1">{decal.creator_name}</span>
+              <span className="font-semibold text-foreground line-clamp-1">by {decal.creator_name}</span>
               {decal.creator_verified ? (
                 <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-accent" aria-label="Verified creator" />
               ) : null}
@@ -101,30 +125,54 @@ function DecalCard({ decal }: { decal: DecalRow }) {
           ) : null}
         </div>
 
+        {showCuratedDetails ? (
+          <p className="text-sm leading-5 text-muted">{curatedReason}</p>
+        ) : null}
+
         <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-2.5 py-1 text-[11px] font-semibold text-foreground">
-          <span>Decal ID</span>
-          <span className="font-mono text-[0.78rem]">{decal.asset_id}</span>
+          <span>{idLabel}</span>
+          <span className="font-mono text-[0.78rem]">{copyId}</span>
           <CopyCodeButton
-            code={String(decal.asset_id)}
+            code={String(copyId)}
             tone="surface"
             size="sm"
             analytics={{
               event: "decal_id_copy",
               params: {
                 asset_id: decal.asset_id,
+                copied_id: copyId,
+                copy_kind: copyId === decal.texture_id ? "texture" : "asset",
                 creator: decal.creator_name ?? ""
               }
             }}
           />
         </div>
 
+        {showPairedImageId ? (
+          <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-2.5 py-1 text-[11px] font-semibold text-foreground">
+            <span>Image ID</span>
+            <span className="font-mono text-[0.78rem]">{decal.texture_id}</span>
+            <CopyCodeButton
+              code={String(decal.texture_id)}
+              tone="surface"
+              size="sm"
+              analytics={{
+                event: "decal_id_copy",
+                params: {
+                  asset_id: decal.asset_id,
+                  copied_id: decal.texture_id!,
+                  copy_kind: "texture",
+                  creator: decal.creator_name ?? ""
+                }
+              }}
+            />
+          </div>
+        ) : null}
+
         <div className="space-y-2 text-xs text-muted">
           {detailsLine ? <p className="font-medium text-muted">{detailsLine}</p> : null}
           {sales ? (
-            <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
-              <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Sales</span>
-              <span className="font-semibold text-foreground">{sales}</span>
-            </span>
+            <span className="font-semibold text-foreground">{sales} sales</span>
           ) : null}
         </div>
 
@@ -170,6 +218,10 @@ function DecalIdsBrowserContent({
   basePath,
   section = "all",
   category = null,
+  preset,
+  idLabel = "Decal ID",
+  copyTextureId = false,
+  gameSlug,
   urlQuery,
   urlSort
 }: ContentProps) {
@@ -207,6 +259,8 @@ function DecalIdsBrowserContent({
     const params = new URLSearchParams();
     params.set("page", String(currentPage));
     if (section === "curated") params.set("section", "curated");
+    if (preset) params.set("preset", preset);
+    if (gameSlug) params.set("game", gameSlug);
     if (category) params.set("category", category);
     if (urlQuery) params.set("q", urlQuery);
     if (urlSort !== DEFAULT_SORT) params.set("sort", urlSort);
@@ -237,7 +291,7 @@ function DecalIdsBrowserContent({
       });
 
     return () => controller.abort();
-  }, [category, currentPage, hasFilters, initialDecals, initialTotalPages, section, urlQuery, urlSort]);
+  }, [category, currentPage, gameSlug, hasFilters, initialDecals, initialTotalPages, preset, section, urlQuery, urlSort]);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -315,13 +369,18 @@ function DecalIdsBrowserContent({
           No decal IDs have been collected yet. Check back soon.
         </div>
       ) : (
-        <>
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
           {decals.map((decal) => (
             <div key={decal.asset_id} data-journey-item className="h-full">
-              <DecalCard decal={decal} />
+              <DecalCard
+                decal={decal}
+                idLabel={idLabel}
+                copyTextureId={copyTextureId}
+                showCuratedDetails={section === "curated"}
+              />
             </div>
           ))}
-        </>
+        </div>
       )}
 
       <PagePagination

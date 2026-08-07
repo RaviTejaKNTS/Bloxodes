@@ -33,6 +33,7 @@ export async function GET() {
       const code = row.code?.trim();
       if (!code) continue;
       if (code.startsWith("free-roblox-items/") || code.startsWith("roblox-free-items/")) continue;
+      if (code === "roblox-music-ids/games" || code === "roblox-decal-ids/games") continue;
 
       const path = isAvatarCatalogCode(code) ? buildAvatarCatalogPath(code) : `/catalog/${code}`;
       const updated = row.content_updated_at ?? row.updated_at ?? row.published_at;
@@ -43,6 +44,17 @@ export async function GET() {
         lastmod: toIsoDate(updated)
       });
     }
+
+    pageMap.set("/catalog/roblox-music-ids/trending", {
+      loc: withSiteUrl("/catalog/roblox-music-ids/trending"),
+      changefreq: "daily",
+      priority: "0.9"
+    });
+    pageMap.set("/catalog/roblox-decal-ids/curated", {
+      loc: withSiteUrl("/catalog/roblox-decal-ids/curated"),
+      changefreq: "weekly",
+      priority: "0.9"
+    });
 
     const pages = Array.from(pageMap.values()).sort((a, b) => a.loc.localeCompare(b.loc));
 

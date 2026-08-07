@@ -142,6 +142,8 @@
     "seed:game-collection-pages": "tsx scripts/collections/seed-game-collection-pages.ts",
     "seed:game-wiki-pages": "tsx scripts/catalog/seed-game-wiki-pages.ts",
     "seed:catalog-pages": "tsx scripts/catalog/seed-catalog-pages.ts",
+    "sync:game-specific-id-sources": "tsx scripts/catalog/sync-game-specific-id-sources.ts",
+    "seed:game-specific-id-usage": "tsx scripts/catalog/seed-game-specific-id-usage.ts",
     "queue:event-guides": "tsx scripts/events/queue-event-guides.ts",
     "enrich:universes": "tsx scripts/universes/enrich-roblox-universes.ts",
     "enrich:universes:light": "tsx scripts/universes/enrich-roblox-universes.ts --mode light",

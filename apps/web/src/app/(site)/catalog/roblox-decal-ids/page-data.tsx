@@ -22,6 +22,7 @@ import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } fr
 import { breadcrumbJsonLd, CATALOG_DESCRIPTION, SITE_URL, webPageJsonLd } from "@/lib/seo";
 import { supabaseAdmin } from "@/lib/supabase";
 import { DecalIdsBrowser } from "./DecalIdsBrowser";
+import { getDecalGameIdPage, type DecalGameDatasetPreset } from "@/lib/game-specific-id-pages";
 
 const PAGE_SIZE = 24;
 const IS_BUILD = process.env.NEXT_PHASE === "phase-production-build";
@@ -105,7 +106,7 @@ export type DecalResolvedSearch = {
   sort: DecalSortKey;
 };
 
-type DecalNavKey = "all" | "curated" | "categories";
+export type DecalNavKey = "all" | "curated" | "categories" | "games";
 
 type DecalNavItem = {
   id: DecalNavKey;
@@ -123,6 +124,7 @@ type OrderableQuery<T> = {
 type DecalListOptions = {
   category?: string | null;
   curated?: boolean;
+  preset?: DecalGameDatasetPreset | null;
 };
 
 const DECAL_NAV_ITEMS: DecalNavItem[] = [
@@ -143,6 +145,12 @@ const DECAL_NAV_ITEMS: DecalNavItem[] = [
     title: "Categories",
     description: "Browse decal IDs by image style, theme, and common use.",
     href: buildDecalCategoriesPath()
+  },
+  {
+    id: "games",
+    title: "Game Specific",
+    description: "Image IDs selected for the custom-image features in Roblox games.",
+    href: `${BASE_PATH}/games`
   }
 ];
 
@@ -231,6 +239,18 @@ export async function loadRobloxDecalIdsPageData(
     query = query.not("curated_rank", "is", null);
   }
 
+  if (options.preset === "crosshairs") {
+    query = query.ilike("name", "%crosshair%");
+  } else if (options.preset === "faces") {
+    query = query.overlaps("categories", ["faces"]);
+  } else if (options.preset === "decor") {
+    query = query.overlaps("categories", ["posters", "aesthetic", "textures"]);
+  } else if (options.preset === "jjs-images") {
+    query = query.overlaps("categories", ["anime", "memes", "characters", "posters"]);
+  } else if (options.preset === "spray-paint") {
+    query = query.not("curated_rank", "is", null);
+  }
+
   const categorySlug = options.category ? normalizeCategorySlug(options.category) : null;
   if (categorySlug) {
     query = query.contains("categories", [categorySlug]);
@@ -268,6 +288,103 @@ export async function loadRobloxDecalIdsPageData(
   const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
 
   return { decals: normalizeBaseDecalRows(data), total, totalPages };
+}
+
+export async function loadGameDecalIdsPageData(
+  page: number,
+  gameSlug: string,
+  preset: DecalGameDatasetPreset,
+  search: DecalResolvedSearch = { search: "", sort: DEFAULT_SORT }
+): Promise<PageData> {
+  const game = getDecalGameIdPage(gameSlug);
+  const requiresTextureId = game?.copyTextureId ?? false;
+
+  try {
+    const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+    const offset = (safePage - 1) * PAGE_SIZE;
+    const supabase = supabaseAdmin();
+    let query = supabase
+      .from("roblox_decal_ids_game_view")
+      .select(BASE_SELECT_FIELDS, { count: "exact" })
+      .eq("game_slug", gameSlug);
+
+    if (requiresTextureId) {
+      query = query.not("texture_id", "is", null).gt("texture_id", 0);
+    }
+
+    if (search.search) {
+      const pattern = buildLoosePattern(search.search);
+      const orParts = [
+        `name.ilike.${pattern}`,
+        `description.ilike.${pattern}`,
+        `creator_name.ilike.${pattern}`
+      ];
+      if (/^\d+$/.test(search.search)) orParts.unshift(`asset_id.eq.${search.search}`, `texture_id.eq.${search.search}`);
+      query = query.or(orParts.join(","));
+    }
+
+    if (search.sort === DEFAULT_SORT) {
+      query = query.order("game_sort_order", { ascending: true }).order("popularity_score", { ascending: false, nullsFirst: false });
+    } else {
+      query = applySort(query, search.sort);
+    }
+
+    const { data, error, count } = await query.order("asset_id", { ascending: true }).range(offset, offset + PAGE_SIZE - 1);
+    if (!error && (count ?? 0) > 0) {
+      const total = count ?? data?.length ?? 0;
+      return { decals: normalizeBaseDecalRows(data), total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
+    }
+    if (error) reportLoadError(`Failed to load mapped decal IDs for ${gameSlug}`, error);
+  } catch (error) {
+    reportLoadError(`Failed to load mapped decal IDs for ${gameSlug}`, error);
+  }
+
+  if (!requiresTextureId) return loadRobloxDecalIdsPageData(page, search, { preset });
+
+  const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+  const offset = (safePage - 1) * PAGE_SIZE;
+  const supabase = supabaseAdmin();
+  let fallback = supabase
+    .from(DECAL_SOURCE_TABLE)
+    .select(BASE_SELECT_FIELDS, { count: "exact" })
+    .eq("status", "active")
+    .eq("thumbnail_state", "Completed")
+    .not("thumbnail_url", "is", null)
+    .not("thumbnail_url", "ilike", "%/UnknownImage/%")
+    .not("texture_id", "is", null)
+    .gt("texture_id", 0);
+
+  if (preset === "crosshairs") {
+    fallback = fallback.ilike("name", "%crosshair%");
+  } else if (preset === "faces") {
+    fallback = fallback.overlaps("categories", ["faces"]);
+  } else if (preset === "decor") {
+    fallback = fallback.overlaps("categories", ["posters", "aesthetic", "textures"]);
+  } else if (preset === "jjs-images") {
+    fallback = fallback.overlaps("categories", ["anime", "memes", "characters", "posters"]);
+  } else if (preset === "spray-paint") {
+    fallback = fallback.not("curated_rank", "is", null);
+  }
+
+  if (search.search) {
+    const pattern = buildLoosePattern(search.search);
+    const orParts = [
+      `name.ilike.${pattern}`,
+      `description.ilike.${pattern}`,
+      `creator_name.ilike.${pattern}`
+    ];
+    if (/^\d+$/.test(search.search)) orParts.unshift(`asset_id.eq.${search.search}`, `texture_id.eq.${search.search}`);
+    fallback = fallback.or(orParts.join(","));
+  }
+
+  fallback = applySort(fallback, search.sort);
+  const { data, error, count } = await fallback.range(offset, offset + PAGE_SIZE - 1);
+  if (error) {
+    reportLoadError(`Failed to load texture IDs for ${gameSlug}`, error);
+    return { decals: [], total: 0, totalPages: 1 };
+  }
+  const total = count ?? data?.length ?? 0;
+  return { decals: normalizeBaseDecalRows(data), total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
 }
 
 export async function loadDecalCategories(): Promise<DecalCategoryRow[]> {
@@ -333,9 +450,9 @@ function formatCount(value: number): string {
   return value.toLocaleString("en-US");
 }
 
-function DecalCatalogNav({ active }: { active: DecalNavKey }) {
+export function DecalCatalogNav({ active }: { active: DecalNavKey }) {
   return (
-    <section className="catalog-surface grid gap-4 md:grid-cols-3" aria-label="Roblox decal ID sections">
+    <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4" aria-label="Roblox decal ID sections">
       {DECAL_NAV_ITEMS.map((item) => {
         const isActive = item.id === active;
         const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${isActive
@@ -350,14 +467,7 @@ function DecalCatalogNav({ active }: { active: DecalNavKey }) {
                 }`}
             />
             <div className="flex h-full flex-col gap-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="text-lg font-semibold text-foreground">{item.title}</p>
-                {isActive ? (
-                  <span className="rounded-md bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
-                    Active
-                  </span>
-                ) : null}
-              </div>
+              <p className="text-lg font-semibold text-foreground">{item.title}</p>
               <p className="text-sm text-muted">{item.description}</p>
             </div>
           </article>
@@ -648,7 +758,27 @@ export function renderRobloxDecalIdsPage({
       <section id="article-body" itemProp="articleBody" className="article-content md-copy-scope copy-with-sidebar-space journey-content-stream journey-content-stream--decals">
         {introNodes ? introNodes : null}
 
+        {section === "curated" && currentPage === 1 ? (
+          <p>
+            Curated Roblox decal IDs are a smaller set of previewed images chosen for strong source and community signals. Use them when you want a reliable starting point for posters, signs, paintings, screens, and other custom images without digging through the full decal catalog.
+          </p>
+        ) : null}
+
         <DecalCatalogNav active={activeNav} />
+
+        {section === "curated" && currentPage === 1 ? (
+          <div className="space-y-3 border-y border-border/60 py-6">
+            <h2 className="text-2xl font-semibold leading-snug text-foreground">
+              How we choose the best Roblox decal IDs
+            </h2>
+            <p>
+              These curated Roblox decal IDs form a quality-first shortlist rather than another copy of the full catalog. Every entry must be an active Roblox decal with a completed image preview and enough source information to review confidently.
+            </p>
+            <p>
+              Ranking considers trusted curated sources, Roblox community votes, favorites, source coverage, creator information, and useful metadata. Cards show their current rank and the strongest available reason for their selection.
+            </p>
+          </div>
+        ) : null}
 
         <DecalIdsBrowser
           initialDecals={decals}
@@ -658,6 +788,52 @@ export function renderRobloxDecalIdsPage({
           section={section}
           category={category?.slug ?? null}
         />
+
+        {section === "curated" && currentPage === 1 ? (
+          <div className="space-y-8 border-t border-border/60 pt-8">
+            <section className="space-y-3">
+              <h2 className="text-2xl font-semibold leading-snug text-foreground">
+                How to use a curated Roblox decal ID
+              </h2>
+              <p>
+                Open the image preview first and make sure it matches what you want. Copy the numeric Decal ID, then paste it into a Roblox experience or Studio property that accepts decal assets. Common uses include signs, posters, paintings, screens, clothing templates, and custom build details.
+              </p>
+              <p>
+                Games do not all use the same kind of number. Some accept the public Decal ID, while others ask for the underlying image or texture ID. The game-specific decal sections use the ID format required by that feature when a separate texture ID is available.
+              </p>
+            </section>
+
+            <section className="space-y-3">
+              <h2 className="text-2xl font-semibold leading-snug text-foreground">
+                Why a Roblox decal ID may not work
+              </h2>
+              <p>
+                A decal can stop loading if Roblox moderates the asset, changes its privacy, or removes its image. The game may also block custom images or expect a texture ID instead of the Decal ID you copied. Check the preview, copy only the digits, and confirm which ID type the game asks for before trying another image.
+              </p>
+            </section>
+
+            <ContentFaq
+              title="Curated Roblox Decal IDs FAQ"
+              items={[
+                {
+                  id: "curated-meaning",
+                  question: "What makes a Roblox decal ID curated?",
+                  answer: <p>Curated entries pass the normal active-asset and preview checks, then rank strongly using source quality, community signals, creator information, and useful metadata.</p>
+                },
+                {
+                  id: "curated-safe",
+                  question: "Are curated decal IDs guaranteed to stay available?",
+                  answer: <p>No. Curation confirms the strongest information available when the list is refreshed. Roblox can still moderate, privatize, or remove an asset later.</p>
+                },
+                {
+                  id: "decal-texture-difference",
+                  question: "What is the difference between a Decal ID and an image ID?",
+                  answer: <p>The Decal ID identifies the public Roblox decal asset. The image or texture ID identifies the underlying uploaded image. A game can require either one, so use the format named by its input.</p>
+                }
+              ]}
+            />
+          </div>
+        ) : null}
 
         {showHero && hasDetails ? (
           <>

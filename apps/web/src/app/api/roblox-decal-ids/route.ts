@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabase";
 import { normalizeCategorySlug } from "@/lib/decal-id-categories";
 import { normalizeSearchQuery, normalizeSortKey, type DecalSortKey } from "@/lib/decal-ids-search";
+import { getDecalGameIdPage, type DecalGameDatasetPreset } from "@/lib/game-specific-id-pages";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -25,6 +26,16 @@ function normalizePage(value: string | null): number {
   const parsed = Number(value);
   if (!Number.isFinite(parsed) || parsed <= 0) return 1;
   return Math.floor(parsed);
+}
+
+function normalizePreset(value: string | null): DecalGameDatasetPreset | null {
+  return value === "crosshairs" ||
+    value === "faces" ||
+    value === "decor" ||
+    value === "jjs-images" ||
+    value === "spray-paint"
+    ? value
+    : null;
 }
 
 function applySort<T extends OrderableQuery<T>>(query: T, sort: DecalSortKey): T {
@@ -71,23 +82,46 @@ export async function GET(request: Request) {
   const sort = normalizeSortKey(searchParams.get("sort"));
   const section = searchParams.get("section");
   const category = normalizeCategorySlug(searchParams.get("category"));
+  const game = getDecalGameIdPage(searchParams.get("game") ?? "");
+  const preset = normalizePreset(searchParams.get("preset")) ?? game?.datasetPreset ?? null;
   const offset = (page - 1) * PAGE_SIZE;
 
   const supabase = supabaseAdmin();
-  let query = supabase.from(DECAL_SOURCE_TABLE).select(BASE_SELECT_FIELDS, { count: "exact" });
+  let query = supabase
+    .from(game ? "roblox_decal_ids_game_view" : DECAL_SOURCE_TABLE)
+    .select(BASE_SELECT_FIELDS, { count: "exact" });
 
-  query = query
-    .eq("status", "active")
-    .eq("thumbnail_state", "Completed")
-    .not("thumbnail_url", "is", null)
-    .not("thumbnail_url", "ilike", "%/UnknownImage/%");
+  if (game) {
+    query = query.eq("game_slug", game.slug);
+    if (game.copyTextureId) {
+      query = query.not("texture_id", "is", null).gt("texture_id", 0);
+    }
+  } else {
+    query = query
+      .eq("status", "active")
+      .eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null)
+      .not("thumbnail_url", "ilike", "%/UnknownImage/%");
+  }
 
-  if (section === "curated") {
+  if (!game && section === "curated") {
     query = query.not("curated_rank", "is", null);
   }
 
-  if (category) {
+  if (!game && category) {
     query = query.contains("categories", [category]);
+  }
+
+  if (!game && preset === "crosshairs") {
+    query = query.ilike("name", "%crosshair%");
+  } else if (!game && preset === "faces") {
+    query = query.overlaps("categories", ["faces"]);
+  } else if (!game && preset === "decor") {
+    query = query.overlaps("categories", ["posters", "aesthetic", "textures"]);
+  } else if (!game && preset === "jjs-images") {
+    query = query.overlaps("categories", ["anime", "memes", "characters", "posters"]);
+  } else if (!game && preset === "spray-paint") {
+    query = query.not("curated_rank", "is", null);
   }
 
   if (search) {
@@ -103,7 +137,11 @@ export async function GET(request: Request) {
     query = query.or(orParts.join(","));
   }
 
-  if (section === "curated" && sort === "recommended") {
+  if (game && sort === "recommended") {
+    query = query
+      .order("game_sort_order", { ascending: true })
+      .order("popularity_score", { ascending: false, nullsFirst: false });
+  } else if ((section === "curated" || preset === "spray-paint") && sort === "recommended") {
     query = query
       .order("curated_rank", { ascending: true, nullsFirst: false })
       .order("curated_score", { ascending: false, nullsFirst: false })
@@ -112,7 +150,55 @@ export async function GET(request: Request) {
     query = applySort(query, sort);
   }
 
-  const { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
+  let { data, error, count } = await query.range(offset, offset + PAGE_SIZE - 1);
+
+  // Game mappings are authoritative when present. The preset fallback lets a
+  // newly configured local page render while its source allowlist is prepared.
+  if (game && (error || (count ?? data?.length ?? 0) === 0)) {
+    let fallback = supabase
+      .from(DECAL_SOURCE_TABLE)
+      .select(BASE_SELECT_FIELDS, { count: "exact" })
+      .eq("status", "active")
+      .eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null)
+      .not("thumbnail_url", "ilike", "%/UnknownImage/%");
+    if (game.copyTextureId) {
+      fallback = fallback.not("texture_id", "is", null).gt("texture_id", 0);
+    }
+    if (preset === "crosshairs") {
+      fallback = fallback.ilike("name", "%crosshair%");
+    } else if (preset === "faces") {
+      fallback = fallback.overlaps("categories", ["faces"]);
+    } else if (preset === "decor") {
+      fallback = fallback.overlaps("categories", ["posters", "aesthetic", "textures"]);
+    } else if (preset === "jjs-images") {
+      fallback = fallback.overlaps("categories", ["anime", "memes", "characters", "posters"]);
+    } else if (preset === "spray-paint") {
+      fallback = fallback.not("curated_rank", "is", null);
+    }
+    if (search) {
+      const pattern = buildLoosePattern(search);
+      const orParts = [
+        `name.ilike.${pattern}`,
+        `description.ilike.${pattern}`,
+        `creator_name.ilike.${pattern}`
+      ];
+      if (/^\d+$/.test(search)) orParts.unshift(`asset_id.eq.${search}`, `texture_id.eq.${search}`);
+      fallback = fallback.or(orParts.join(","));
+    }
+    const fallbackResult = ((preset === "spray-paint" && sort === "recommended")
+      ? fallback
+          .order("curated_rank", { ascending: true, nullsFirst: false })
+          .order("curated_score", { ascending: false, nullsFirst: false })
+          .order("popularity_score", { ascending: false, nullsFirst: false })
+      : applySort(fallback, sort)
+    ).range(offset, offset + PAGE_SIZE - 1);
+    const resolvedFallback = await fallbackResult;
+    data = resolvedFallback.data;
+    error = resolvedFallback.error;
+    count = resolvedFallback.count;
+  }
+
   if (error) {
     return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
   }

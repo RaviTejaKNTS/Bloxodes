@@ -19,7 +19,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${SEO_TITLE} | ${SITE_NAME}`,
     description: DESCRIPTION,
-    robots: { index: false, follow: true },
     alternates: buildAlternates(canonical),
     openGraph: {
       type: "website",

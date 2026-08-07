@@ -380,6 +380,8 @@ function revalidateForMusic(slug = "roblox-music-ids") {
       ? paginatedIndexPaths(`${MUSIC_BASE_PATH}/genres/${valueSlug}`)
       : section === "artists" && valueSlug
       ? paginatedIndexPaths(`${MUSIC_BASE_PATH}/artists/${valueSlug}`)
+      : section === "games" && valueSlug
+      ? paginatedIndexPaths(`${MUSIC_BASE_PATH}/games/${valueSlug}`)
       : [];
 
   return applyRevalidation([
@@ -393,6 +395,9 @@ function revalidateForMusic(slug = "roblox-music-ids") {
     ...paginatedIndexPaths(`${MUSIC_BASE_PATH}/artists`),
     `${MUSIC_BASE_PATH}/artists/[artist]`,
     `${MUSIC_BASE_PATH}/artists/[artist]/page/[page]`,
+    `${MUSIC_BASE_PATH}/games`,
+    `${MUSIC_BASE_PATH}/games/[game]`,
+    `${MUSIC_BASE_PATH}/games/[game]/page/[page]`,
     ...scopedPaths,
     "/",
     SITEMAP_INDEX_PATH,
@@ -405,6 +410,8 @@ function revalidateForDecalIds(slug = DECAL_CATALOG_CODE) {
   const scopedPaths =
     section === "categories" && valueSlug
       ? paginatedIndexPaths(`${DECAL_BASE_PATH}/categories/${valueSlug}`)
+      : section === "games" && valueSlug
+      ? paginatedIndexPaths(`${DECAL_BASE_PATH}/games/${valueSlug}`)
       : [];
 
   return applyRevalidation([
@@ -414,6 +421,9 @@ function revalidateForDecalIds(slug = DECAL_CATALOG_CODE) {
     `${DECAL_BASE_PATH}/categories`,
     `${DECAL_BASE_PATH}/categories/[category]`,
     `${DECAL_BASE_PATH}/categories/[category]/page/[page]`,
+    `${DECAL_BASE_PATH}/games`,
+    `${DECAL_BASE_PATH}/games/[game]`,
+    `${DECAL_BASE_PATH}/games/[game]/page/[page]`,
     ...scopedPaths,
     "/",
     SITEMAP_INDEX_PATH,

@@ -14,6 +14,7 @@ import {
   normalizeSortKey,
   type MusicSortKey
 } from "@/lib/music-ids-search";
+import type { MusicGameDatasetPreset } from "@/lib/game-specific-id-pages";
 
 type MusicRow = {
   asset_id: number;
@@ -42,6 +43,9 @@ type Props = {
   initialTotalPages: number;
   currentPage: number;
   basePath: string;
+  preset?: MusicGameDatasetPreset;
+  idLabel?: "Music ID" | "Sound ID";
+  gameSlug?: string;
 };
 
 type ContentProps = Props & {
@@ -114,6 +118,9 @@ function MusicIdsBrowserContent({
   initialTotalPages,
   currentPage,
   basePath,
+  preset,
+  idLabel = "Music ID",
+  gameSlug,
   urlQuery,
   urlSort
 }: ContentProps) {
@@ -150,6 +157,8 @@ function MusicIdsBrowserContent({
 
     const params = new URLSearchParams();
     params.set("page", String(currentPage));
+    if (preset) params.set("preset", preset);
+    if (gameSlug) params.set("game", gameSlug);
     if (urlQuery) params.set("q", urlQuery);
     if (urlSort !== DEFAULT_SORT) params.set("sort", urlSort);
 
@@ -179,7 +188,7 @@ function MusicIdsBrowserContent({
       });
 
     return () => controller.abort();
-  }, [currentPage, hasFilters, initialSongs, initialTotalPages, urlQuery, urlSort]);
+  }, [currentPage, gameSlug, hasFilters, initialSongs, initialTotalPages, preset, urlQuery, urlSort]);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -257,7 +266,7 @@ function MusicIdsBrowserContent({
           No music IDs have been collected yet. Check back soon.
         </div>
       ) : (
-        <>
+        <div className="grid gap-4 md:grid-cols-2">
           {songs.map((song) => {
             const durationLabel = formatDuration(song.duration_seconds);
             return (
@@ -275,7 +284,7 @@ function MusicIdsBrowserContent({
                     </div>
                     <div className="min-w-0 flex-1 space-y-1">
                       <h2 className="text-lg font-semibold leading-snug text-foreground line-clamp-2">{song.title}</h2>
-                      <div className="space-y-1 text-xs text-muted">
+                      {preset !== "short-sounds" ? <div className="space-y-1 text-xs text-muted">
                         <div className="flex flex-wrap items-center gap-2">
                           <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Artist</span>
                           <Link
@@ -289,13 +298,13 @@ function MusicIdsBrowserContent({
                           <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Album</span>
                           <span className="text-foreground">{song.album ?? "Single / Unknown"}</span>
                         </div>
-                      </div>
+                      </div> : null}
                     </div>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-2">
                     <div className="flex items-center gap-1.5 rounded-md border border-border/50 bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-foreground">
-                      <span>Music ID</span>
+                      <span>{idLabel}</span>
                       <span className="font-mono text-[0.82rem]">{song.asset_id}</span>
                       <CopyCodeButton
                         code={String(song.asset_id)}
@@ -313,7 +322,7 @@ function MusicIdsBrowserContent({
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
+                  {preset !== "short-sounds" ? <div className="flex flex-wrap items-center gap-2 text-xs text-muted">
                     <span className="inline-flex items-center gap-2 rounded-md border border-border/60 bg-background/60 px-3 py-1">
                       <span className="text-[10px] font-semibold uppercase tracking-wide text-muted">Duration</span>
                       <span className="font-semibold text-foreground">{durationLabel ?? "-"}</span>
@@ -331,7 +340,7 @@ function MusicIdsBrowserContent({
                         <span className="font-semibold text-foreground">-</span>
                       )}
                     </span>
-                  </div>
+                  </div> : null}
 
                   <div className="mt-auto flex flex-wrap items-center justify-between gap-3">
                     <a
@@ -348,7 +357,7 @@ function MusicIdsBrowserContent({
               </div>
             );
           })}
-        </>
+        </div>
       )}
 
       <PagePagination

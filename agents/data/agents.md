@@ -71,6 +71,10 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Event scheduling and event media linkage.
 - `roblox_music_ids`, `roblox_music_ids_ranked_view`
   - Music ID catalog and ranking/search views.
+- `roblox_music_id_game_usage`, `roblox_music_ids_game_view`
+  - Source-backed audio-to-game associations for `/catalog/roblox-music-ids/games/*`. Compatibility evidence stays separate from canonical audio metadata; only `in_game_verified` means a row was tested inside the named experience.
+- `roblox_decal_id_game_usage`, `roblox_decal_ids_game_view`
+  - Source-backed decal/image-to-game associations for `/catalog/roblox-decal-ids/games/*`, including the submitted decal asset, optional underlying texture ID, use type, source, and compatibility status.
 - `roblox_music_genres_view`, `roblox_music_artists_view`
   - Music filters and taxonomy views.
 - `roblox_promo_rewards`

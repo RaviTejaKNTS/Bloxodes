@@ -19,6 +19,7 @@ import { ContentFaq } from "@/components/ContentFaq";
 import { formatRelativeDate } from "@/lib/content-dates";
 import { buildPageContentHtml, renderPageContentNodes, type PageContentHtml } from "@/lib/page-content";
 import { MusicIdsBrowser } from "./MusicIdsBrowser";
+import type { MusicGameDatasetPreset } from "@/lib/game-specific-id-pages";
 
 const PAGE_SIZE = 24;
 const OPTION_PAGE_SIZE = 24;
@@ -61,7 +62,7 @@ export type MusicResolvedSearch = {
   sort: MusicSortKey;
 };
 
-export type MusicNavKey = "all" | "trending" | "charts" | "genres" | "artists";
+export type MusicNavKey = "all" | "trending" | "charts" | "genres" | "artists" | "games";
 export type MusicChartKey = "trending" | "weekly" | "monthly" | "yearly";
 
 type MusicNavItem = {
@@ -103,6 +104,12 @@ const MUSIC_NAV_ITEMS: MusicNavItem[] = [
     title: "Charts",
     description: "Weekly, monthly, and yearly Creator Store music charts.",
     href: `${BASE_PATH}/charts`
+  },
+  {
+    id: "games",
+    title: "Game Specific",
+    description: "Music, radio, and sound IDs organized around supported Roblox games.",
+    href: `${BASE_PATH}/games`
   }
 ];
 
@@ -297,7 +304,14 @@ const MUSIC_SELECT_FIELDS =
 
 async function loadMusicIdsPage(
   pageNumber: number,
-  options?: { genre?: string; artist?: string; trending?: boolean; search?: string; sort?: MusicSortKey }
+  options?: {
+    genre?: string;
+    artist?: string;
+    trending?: boolean;
+    search?: string;
+    sort?: MusicSortKey;
+    preset?: MusicGameDatasetPreset;
+  }
 ) {
   try {
     const safePage = Number.isFinite(pageNumber) && pageNumber > 0 ? pageNumber : 1;
@@ -309,6 +323,12 @@ async function loadMusicIdsPage(
 
     // Filter out songs without duration
     query = query.not("duration_seconds", "is", null).gt("duration_seconds", 0);
+
+    if (options?.preset === "short-sounds") {
+      query = query.lte("duration_seconds", 20);
+    } else if (options?.preset === "music") {
+      query = query.gte("duration_seconds", 30).lte("duration_seconds", 600);
+    }
 
     if (options?.genre) {
       query = query.ilike("genre", buildLoosePattern(options.genre));
@@ -460,6 +480,55 @@ export async function loadRobloxMusicIdsPageData(
   return loadMusicIdsPage(page, { search: options?.search, sort: options?.sort });
 }
 
+export async function loadGameMusicIdsPageData(
+  page: number,
+  gameSlug: string,
+  preset: MusicGameDatasetPreset,
+  options?: { search?: string; sort?: MusicSortKey }
+): Promise<PageData> {
+  try {
+    const safePage = Number.isFinite(page) && page > 0 ? Math.floor(page) : 1;
+    const offset = (safePage - 1) * PAGE_SIZE;
+    const supabase = supabaseAdmin();
+    let query = supabase
+      .from("roblox_music_ids_game_view")
+      .select(MUSIC_SELECT_FIELDS, { count: "exact" })
+      .eq("game_slug", gameSlug);
+
+    const searchTerm = normalizeSearchQuery(options?.search);
+    if (searchTerm) {
+      const pattern = buildLoosePattern(searchTerm);
+      const orParts = [
+        `title.ilike.${pattern}`,
+        `artist.ilike.${pattern}`,
+        `album.ilike.${pattern}`,
+        `genre.ilike.${pattern}`
+      ];
+      if (/^\d+$/.test(searchTerm)) orParts.unshift(`asset_id.eq.${searchTerm}`);
+      query = query.or(orParts.join(","));
+    }
+
+    const sort = options?.sort ?? DEFAULT_SORT;
+    if (sort === "newest") query = query.order("last_seen_at", { ascending: false, nullsFirst: false });
+    else if (sort === "duration_desc") query = query.order("duration_seconds", { ascending: false, nullsFirst: false });
+    else if (sort === "duration_asc") query = query.order("duration_seconds", { ascending: true, nullsFirst: false });
+    else if (sort === "title_asc") query = query.order("title", { ascending: true, nullsFirst: false });
+    else if (sort === "artist_asc") query = query.order("artist", { ascending: true, nullsFirst: false });
+    else query = query.order("game_sort_order", { ascending: true }).order("popularity_score", { ascending: false, nullsFirst: false });
+
+    const { data, error, count } = await query.order("asset_id", { ascending: true }).range(offset, offset + PAGE_SIZE - 1);
+    if (!error && (count ?? 0) > 0) {
+      const total = count ?? data?.length ?? 0;
+      return { songs: (data ?? []) as MusicRow[], total, totalPages: Math.max(1, Math.ceil(total / PAGE_SIZE)) };
+    }
+    if (error) reportLoadError(`Failed to load mapped music IDs for ${gameSlug}`, error);
+  } catch (error) {
+    reportLoadError(`Failed to load mapped music IDs for ${gameSlug}`, error);
+  }
+
+  return loadMusicIdsPage(page, { preset, search: options?.search, sort: options?.sort });
+}
+
 export async function loadTrendingMusicIdsPageData(page: number): Promise<PageData> {
   return loadDailyTop500MusicIdsPage(page);
 }
@@ -502,7 +571,7 @@ export async function loadArtistOptionBySlug(slug: string) {
 
 export function MusicCatalogNav({ active }: { active: MusicNavKey }) {
   return (
-    <section className="catalog-surface grid gap-4 md:grid-cols-3">
+    <section className="catalog-surface grid gap-4 md:grid-cols-2 xl:grid-cols-4" aria-label="Roblox music ID sections">
       {MUSIC_NAV_ITEMS.map((item) => {
         const isActive = item.id === active;
         const cardClasses = `group relative overflow-hidden rounded-lg border px-5 py-4 transition ${isActive
@@ -517,14 +586,7 @@ export function MusicCatalogNav({ active }: { active: MusicNavKey }) {
                 }`}
             />
             <div className="flex h-full flex-col gap-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="text-lg font-semibold text-foreground">{item.title}</p>
-                {isActive ? (
-                  <span className="rounded-md bg-accent/20 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
-                    Active
-                  </span>
-                ) : null}
-              </div>
+              <p className="text-lg font-semibold text-foreground">{item.title}</p>
               <p className="text-sm text-muted">{item.description}</p>
             </div>
           </article>

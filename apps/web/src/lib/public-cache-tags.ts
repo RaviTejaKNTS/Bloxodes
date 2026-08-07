@@ -21,6 +21,7 @@ export type PublicCacheEvent = {
 };
 
 const MUSIC_CATALOG_CODE = "roblox-music-ids";
+const DECAL_CATALOG_CODE = "roblox-decal-ids";
 const FREE_ITEMS_CATALOG_CODE = "free-roblox-items";
 const LEGACY_FREE_ITEMS_CATALOG_CODE = "roblox-free-items";
 const AVATAR_CATALOG_MASTER_CODE = "roblox-items-and-bundles";
@@ -85,6 +86,19 @@ function musicScopeTags(slug: string) {
 
   if (section === "genres" && value) tags.push(`music-genre:${value}`);
   if (section === "artists" && value) tags.push(`music-artist:${value}`);
+  if (section === "games" && value) tags.push(`music-game:${value}`);
+
+  return tags;
+}
+
+function decalScopeTags(slug: string) {
+  const parts = normalizeCacheSlug(slug).split("/").filter(Boolean);
+  const section = parts[1];
+  const value = parts[2];
+  const tags = ["decal-catalog", slugTag("catalog", DECAL_CATALOG_CODE)];
+
+  if (section === "categories" && value) tags.push(`decal-category:${value}`);
+  if (section === "games" && value) tags.push(`decal-game:${value}`);
 
   return tags;
 }
@@ -250,6 +264,12 @@ export function cacheTagsForPath(pathname: string) {
       if (third === "artists" && fourth) catalogTags.push(`music-artist:${fourth}`);
     }
 
+    if (second === DECAL_CATALOG_CODE) {
+      catalogTags.push(...decalScopeTags(catalogSlug));
+      if (third === "categories" && fourth) catalogTags.push(`decal-category:${fourth}`);
+      if (third === "games" && fourth) catalogTags.push(`decal-game:${fourth}`);
+    }
+
     if (isAvatarCatalogSlug(catalogSlugForTags)) {
       catalogTags.push(...avatarCatalogScopeTags(catalogSlugForTags));
     }
@@ -355,6 +375,10 @@ export function cacheTagsForEvent(type: PublicCacheEventType, slug: string) {
 
       if (normalized === MUSIC_CATALOG_CODE || normalized.startsWith(`${MUSIC_CATALOG_CODE}/`)) {
         tags.push(...musicScopeTags(normalized));
+      }
+
+      if (normalized === DECAL_CATALOG_CODE || normalized.startsWith(`${DECAL_CATALOG_CODE}/`)) {
+        tags.push(...decalScopeTags(normalized));
       }
 
       if (
