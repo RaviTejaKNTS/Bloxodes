@@ -117,22 +117,9 @@ eval "${STATS_WORKER_COMMAND:-npm run stats:audit}"
 
 So the `codex-admin` crontab command is the source of truth for each VPS job.
 
-Current VPS crontab block:
+Current VPS crontab block (install the exact block from `scripts/ops/vps-universe-stats.crontab`):
 
-```cron
-# BLOXODES_STATS_WORKER_START
-5 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/build-image.sh >> /home/codex-admin/bloxodes-stats-worker/logs/build-image.log 2>&1
-7 */2 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-new-refresh "npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25 && npm run stats:refresh:new -- --limit 5000 && npm run stats:tier -- --tier NEW && npm run enqueue:revalidation -- --source stats_new_vps --event stats:stats --event stats:games"
-22 * * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-priority "npm run discover:universes:priority && npm run enrich:universes:light -- --tier NEW --limit 500 --batch 25 && npm run stats:refresh:new -- --limit 1000 && npm run stats:tier -- --tier NEW && npm run enrich:universes:light -- --tier HOT --limit 250 --batch 25 && npm run enqueue:revalidation -- --source stats_discovery_priority_vps --event stats:stats --event stats:games"
-32 */12 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-warm-refresh "npm run stats:refresh:warm -- --limit 20000 && npm run stats:tier -- --tier WARM && npm run enqueue:revalidation -- --source stats_warm_vps --event stats:stats --event stats:games"
-47 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-cold-refresh "npm run stats:refresh:cold -- --limit 10000 && npm run stats:tier -- --tier COLD && npm run enqueue:revalidation -- --source stats_cold_vps --event stats:stats --event stats:games"
-35 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery "npm run collect:universes && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
-20 3 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-search "npm run discover:universes:search -- --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
-10 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-discovery-creators "npm run discover:universes:creators -- --limit 500 --max-pages 2 && npm run enrich:universes:light -- --tier NEW --limit 1000 --batch 25"
-5 5 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-deep-enrichment "npm run enrich:universes:deep -- --tier HOT --limit 500 --batch 25"
-10 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-audit "npm run stats:audit"
-# BLOXODES_STATS_WORKER_END
-```
+The block intentionally contains no HOT or hourly rank job. Northflank is the sole HOT/rank owner. WARM runs twice daily; COLD processes 4,000 rows in every hour except the two WARM hours, providing 88,000 daily COLD slots for the 24-hour public freshness requirement. The hourly `stats-current-index` job is the only scheduled full read-index rebuild.
 
 The item pipeline schedule is now owned by `scripts/ops/vps-scheduled-automation.crontab`. Its stages deliberately use separate worker locks:
 
@@ -387,12 +374,13 @@ npm run enrich:universes:deep -- --tier HOT
 | NEW refresh | VPS worker `stats-new-refresh` | Every 2 hours at `:07` UTC, `:37` IST |
 | Priority discovery | VPS worker `stats-discovery-priority` | Hourly at `:22` UTC, `:52` IST |
 | WARM refresh | VPS worker `stats-warm-refresh` | Every 12 hours at `:32` UTC, `:02` IST |
-| COLD refresh | VPS worker `stats-cold-refresh` | Every 6 hours at `:47` UTC, `:17` IST |
+| COLD refresh | VPS worker `stats-cold-refresh` | Hourly at `:47` UTC except `00:47` and `12:47` |
+| Current stats indexes | VPS worker `stats-current-index` | Hourly at `:40` UTC |
 | Discovery | VPS worker `stats-discovery` | Daily `01:35` UTC, `07:05` IST |
 | Search discovery | VPS worker `stats-discovery-search` | Daily `03:20` UTC, `08:50` IST |
 | Creator/group discovery | VPS worker `stats-discovery-creators` | Daily `04:10` UTC, `09:40` IST |
 | Deep enrichment | VPS worker `stats-deep-enrichment` | Daily `05:05` UTC, `10:35` IST |
-| Daily rollup + hourly prune | VPS worker `stats-daily-rollup` | Daily `00:35` UTC, `06:05` IST |
+| Daily rollup + hourly prune | VPS worker `stats-daily-rollup` | Daily `00:02` UTC, `05:32` IST |
 | Platform aggregates | VPS worker `stats-platform-refresh` | Daily `01:05` UTC, `06:35` IST |
 | Codes refresh | VPS worker `codes-refresh` | Every 6 hours at `:00` UTC |
 | Google Indexing API | VPS worker `google-indexing` | Every 6 hours at `:17` UTC |

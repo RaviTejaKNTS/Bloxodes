@@ -1,17 +1,28 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import {
+  claimStatsPipelineLease,
+  releaseStatsPipelineLease,
+  statsPipelineLeaseName
+} from "../shared/stats-pipeline-lease";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 import { isStatsTier, type StatsTier } from "./stats-tier";
 import { STATS_PLAYING_FRESHNESS_MS } from "@/lib/stats-freshness";
 
 const DEFAULT_LIMIT = readNonNegativeInteger("UNIVERSE_RANK_LIMIT", 0);
 const PAGE_SIZE = readNonNegativeInteger("UNIVERSE_RANK_PAGE_SIZE", 1000);
-const UPSERT_CHUNK_SIZE = readNonNegativeInteger("UNIVERSE_RANK_UPSERT_CHUNK_SIZE", 5000);
+const UPSERT_CHUNK_SIZE = readNonNegativeInteger("UNIVERSE_RANK_UPSERT_CHUNK_SIZE", 1000);
+const PIPELINE_LEASE_MINUTES = readNonNegativeInteger("UNIVERSE_RANK_PIPELINE_LEASE_MINUTES", 120);
 const RELEVANT_GLOBAL_PLAYING_LIMIT = readNonNegativeInteger("UNIVERSE_RANK_RELEVANT_GLOBAL_PLAYING_LIMIT", 10000);
 const RELEVANT_SCOPED_PLAYING_LIMIT = readNonNegativeInteger("UNIVERSE_RANK_RELEVANT_SCOPED_PLAYING_LIMIT", 1000);
 const RANK_TYPES = ["global_playing", "genre_playing", "subgenre_playing", "global_visits", "global_favorites", "global_rating"] as const;
 const PLAYING_RANK_TYPES = ["global_playing", "genre_playing", "subgenre_playing"] as const;
+const WORKER_ID =
+  process.env.STATS_WORKER_ID ||
+  process.env.NORTHFLANK_JOB_NAME ||
+  process.env.HOSTNAME ||
+  `stats-rank-${process.pid}`;
 
 type RankType = (typeof RANK_TYPES)[number];
 type RankSet = "playing" | "all";
@@ -258,7 +269,7 @@ function parseArgs(): Options {
   const options: Options = {
     limit: Number.isFinite(DEFAULT_LIMIT) && DEFAULT_LIMIT > 0 ? DEFAULT_LIMIT : 0,
     pageSize: PAGE_SIZE > 0 ? PAGE_SIZE : 1000,
-    upsertChunkSize: UPSERT_CHUNK_SIZE > 0 ? UPSERT_CHUNK_SIZE : 5000,
+    upsertChunkSize: UPSERT_CHUNK_SIZE > 0 ? UPSERT_CHUNK_SIZE : 1000,
     tier: "ALL",
     rankSet: process.env.UNIVERSE_RANK_SET === "all" ? "all" : "playing",
     snapshotScope: process.env.UNIVERSE_RANK_SNAPSHOT_SCOPE === "all" ? "all" : "relevant",
@@ -349,8 +360,24 @@ async function main() {
   sampledAt.setUTCMinutes(0, 0, 0);
   const sampledAtIso = sampledAt.toISOString();
   let totalRanked = 0;
+  const pipelineLeaseName = statsPipelineLeaseName(["universe-rank", options.granularity, options.rankSet]);
+  let pipelineLeaseAcquired = false;
 
   try {
+    pipelineLeaseAcquired = await claimStatsPipelineLease({
+      leaseName: pipelineLeaseName,
+      workerId: WORKER_ID,
+      leaseMinutes: Math.max(1, PIPELINE_LEASE_MINUTES)
+    });
+    if (!pipelineLeaseAcquired) {
+      console.log(`Skipping rank snapshot because another worker holds ${pipelineLeaseName}.`);
+      await finishStatsJobRun(run, {
+        status: "skipped",
+        metadata: { reason: "pipeline_lease_busy", pipeline_lease: pipelineLeaseName, sampled_at: sampledAtIso }
+      });
+      return;
+    }
+
     console.log(
       `Snapshotting ranks (granularity=${options.granularity}, rankSet=${options.rankSet}, snapshotScope=${options.snapshotScope}, limit=${options.limit || "all"}, pageSize=${options.pageSize}, dryRun=${options.dryRun})...`
     );
@@ -395,6 +422,10 @@ async function main() {
   } catch (error) {
     await finishStatsJobRun(run, { status: "failed", rowsSucceeded: totalRanked, error });
     throw error;
+  } finally {
+    if (pipelineLeaseAcquired) {
+      await releaseStatsPipelineLease({ leaseName: pipelineLeaseName, workerId: WORKER_ID });
+    }
   }
 }
 

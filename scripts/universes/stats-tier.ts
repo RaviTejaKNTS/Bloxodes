@@ -31,5 +31,5 @@ export function assignStatsTier(input: TierInput): { tier: StatsTier; reason: st
   if ((visits ?? 0) >= 10_000_000) {
     return { tier: "WARM", reason: "visits_gte_10m", refreshHours: 12 };
   }
-  return { tier: "COLD", reason: "remaining_valid_game", refreshHours: 168 };
+  return { tier: "COLD", reason: "remaining_valid_game", refreshHours: 24 };
 }

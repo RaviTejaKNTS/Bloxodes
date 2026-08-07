@@ -2,6 +2,11 @@ import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { enqueueRevalidationEvents, type RevalidationEvent } from "../shared/revalidation-events";
+import {
+  claimStatsPipelineLease,
+  releaseStatsPipelineLease,
+  statsPipelineLeaseName
+} from "../shared/stats-pipeline-lease";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 import { assignStatsTier, isStatsTier, type StatsTier } from "./stats-tier";
 
@@ -16,6 +21,8 @@ const RETRY_MAX_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_MAX_D
 const DETAIL_REVALIDATION_LIMIT = readPositiveNumber("UNIVERSE_STATS_DETAIL_REVALIDATION_LIMIT", 1000);
 const LEASE_MINUTES = readPositiveNumber("UNIVERSE_STATS_REFRESH_LEASE_MINUTES", 45);
 const LEASE_CHUNK_SIZE = readPositiveNumber("UNIVERSE_STATS_REFRESH_LEASE_CHUNK_SIZE", 100);
+const CLAIM_BATCH_SIZE = Math.max(1, Math.min(readPositiveNumber("UNIVERSE_STATS_CLAIM_BATCH_SIZE", 500), 500));
+const PIPELINE_LEASE_MINUTES = Math.max(1, readPositiveNumber("UNIVERSE_STATS_PIPELINE_LEASE_MINUTES", 180));
 const WORKER_ID =
   process.env.STATS_WORKER_ID ||
   process.env.NORTHFLANK_JOB_NAME ||
@@ -94,6 +101,7 @@ type Options = {
   limit: number;
   tier: StatsTier | "ALL";
   rollupToday: boolean;
+  skipIndexRefresh: boolean;
   universeIds: number[];
 };
 
@@ -193,14 +201,19 @@ async function fetchRobloxJson(url: string, label: string): Promise<any> {
   throw new Error(`${label} failed after retries`);
 }
 
-async function fetchUniverses(options: Options): Promise<UniverseRow[]> {
-  const requestedLimit = options.universeIds.length || options.limit || DEFAULT_LIMIT || BATCH_SIZE;
+export function universeClaimBatchSize(remaining: number, configuredSize = CLAIM_BATCH_SIZE) {
+  const safeConfiguredSize = Math.max(1, Math.min(Math.floor(configuredSize), 500));
+  if (!Number.isFinite(remaining) || remaining <= 0) return safeConfiguredSize;
+  return Math.max(1, Math.min(Math.floor(remaining), safeConfiguredSize));
+}
+
+async function claimUniverseBatch(options: Options, requestedLimit: number, universeIds: number[] = []): Promise<UniverseRow[]> {
   const { data, error } = await supabaseAdmin().rpc("claim_roblox_universe_stats_rows", {
     p_worker_id: WORKER_ID,
     p_tier: options.tier,
-    p_limit: requestedLimit,
+    p_limit: universeClaimBatchSize(requestedLimit),
     p_lease_minutes: LEASE_MINUTES,
-    p_universe_ids: options.universeIds.length ? options.universeIds : null
+    p_universe_ids: universeIds.length ? universeIds : null
   });
   if (error) throw new Error(`Failed to claim universe stats rows: ${error.message}`);
   return (data ?? []) as UniverseRow[];
@@ -502,6 +515,7 @@ function parseArgs(): Options {
     limit: Number.isFinite(DEFAULT_LIMIT) && DEFAULT_LIMIT > 0 ? DEFAULT_LIMIT : 0,
     tier: isStatsTier(process.env.UNIVERSE_STATS_TIER) ? process.env.UNIVERSE_STATS_TIER : "HOT",
     rollupToday: false,
+    skipIndexRefresh: false,
     universeIds: []
   };
   for (let i = 0; i < args.length; i += 1) {
@@ -541,6 +555,8 @@ function parseArgs(): Options {
       options.tier = "HOT";
     } else if (arg === "--rollup-today") {
       options.rollupToday = true;
+    } else if (arg === "--skip-index-refresh") {
+      options.skipIndexRefresh = true;
     } else if (arg === "--help" || arg === "-h") {
       console.log(`
 Usage: npm run update:hourly-stats -- [options]
@@ -551,6 +567,7 @@ Options:
   --universe-id <id>     Refresh one universe ID; can repeat or accept comma-separated IDs
   --all                  Refresh all universes with a root place id
   --rollup-today         Also run the daily rollup for today's date after hourly writes
+  --skip-index-refresh   Leave current-index rebuilding to the dedicated serialized job
   -h, --help             Show this help text
 `);
       process.exit(0);
@@ -568,14 +585,9 @@ async function rollupTodayIfRequested(options: Options, sampledAt: Date) {
 async function refreshStatsIndexes() {
   try {
     const sb = supabaseAdmin();
-    const { data, error } = await sb.rpc("refresh_stats_current_indexes");
+    const { data, error } = await sb.rpc("refresh_stats_current_indexes_serialized");
     if (error) throw error;
-    const { data: creatorData, error: creatorError } = await sb.rpc("refresh_stats_creator_current_index");
-    if (creatorError) throw creatorError;
-    return {
-      ...((data ?? {}) as Record<string, unknown>),
-      ...((creatorData ?? {}) as Record<string, unknown>)
-    };
+    return (data ?? {}) as Record<string, unknown>;
   } catch (error) {
     console.warn("Failed to refresh stats current indexes:", error instanceof Error ? error.message : String(error));
     return null;
@@ -590,52 +602,102 @@ async function main() {
       tier: options.tier,
       limit: options.limit,
       rollup_today: options.rollupToday,
+      skip_index_refresh: options.skipIndexRefresh,
+      claim_batch_size: CLAIM_BATCH_SIZE,
       universe_ids: options.universeIds
     }
   });
-  const sampledAt = new Date();
-  let universes: UniverseRow[] = [];
+  let latestSampledAt = new Date();
+  let activeClaim: UniverseRow[] = [];
+  let claimedRows = 0;
   let updatedRows = 0;
   let failedRows = 0;
   let hourlyRows = 0;
   let updateEvents = 0;
+  let claimBatches = 0;
   const detailEvents: RevalidationEvent[] = [];
+  const pipelineLeaseName = statsPipelineLeaseName(["universe-refresh", options.tier]);
+  let pipelineLeaseAcquired = false;
 
   try {
-    universes = (await fetchUniverses(options)).filter(
-      (row) => typeof row.universe_id === "number" && typeof row.root_place_id === "number" && row.root_place_id > 0
-    );
-    if (!universes.length) {
-      console.log("No universes found.");
-      await finishStatsJobRun(run, { status: "skipped", metadata: { reason: "no_universes" } });
+    pipelineLeaseAcquired = await claimStatsPipelineLease({
+      leaseName: pipelineLeaseName,
+      workerId: WORKER_ID,
+      leaseMinutes: PIPELINE_LEASE_MINUTES
+    });
+    if (!pipelineLeaseAcquired) {
+      console.log(`Skipping ${options.tier} refresh because another worker holds ${pipelineLeaseName}.`);
+      await finishStatsJobRun(run, { status: "skipped", metadata: { reason: "pipeline_lease_busy", pipeline_lease: pipelineLeaseName } });
       return;
     }
 
-    console.log(`Updating hourly stats for ${universes.length} universes (tier=${options.tier})...`);
-    for (let i = 0; i < universes.length; i += BATCH_SIZE) {
-      const chunk = universes.slice(i, i + BATCH_SIZE);
-      const ids = chunk.map((row) => row.universe_id);
-      try {
-        const statsMap = await fetchStats(ids);
-        const result = await writeChunk(chunk, statsMap, sampledAt);
-        updatedRows += result.updated;
-        failedRows += result.missing;
-        hourlyRows += result.hourlyRows;
-        updateEvents += result.updateEvents;
-        for (const event of result.detailEvents) {
-          if (detailEvents.length < DETAIL_REVALIDATION_LIMIT) detailEvents.push(event);
-        }
-        console.log(`  - Updated chunk ${i / BATCH_SIZE + 1} (${result.updated}/${chunk.length} universes)`);
-      } catch (error) {
-        failedRows += chunk.length;
-        await markFailures(chunk, error);
-        console.error(`Chunk ${i / BATCH_SIZE + 1} failed:`, (error as Error).message);
-      }
-      await sleep(REQUEST_DELAY_MS);
-    }
-    await rollupTodayIfRequested(options, sampledAt);
+    const explicitIds = [...new Set(options.universeIds)];
+    let explicitOffset = 0;
+    while (true) {
+      const remaining = options.limit > 0 ? options.limit - claimedRows : Number.POSITIVE_INFINITY;
+      if (remaining <= 0) break;
 
-    const indexResult = updatedRows > 0 ? await refreshStatsIndexes() : null;
+      let requestedIds: number[] = [];
+      if (explicitIds.length) {
+        requestedIds = explicitIds.slice(explicitOffset, explicitOffset + universeClaimBatchSize(remaining));
+        explicitOffset += requestedIds.length;
+        if (!requestedIds.length) break;
+      }
+
+      const requestedClaimSize = universeClaimBatchSize(explicitIds.length ? requestedIds.length : remaining);
+      activeClaim = (await claimUniverseBatch(options, requestedClaimSize, requestedIds)).filter(
+        (row) => typeof row.universe_id === "number" && typeof row.root_place_id === "number" && row.root_place_id > 0
+      );
+      if (!activeClaim.length) {
+        if (explicitIds.length && explicitOffset < explicitIds.length) continue;
+        break;
+      }
+
+      claimBatches += 1;
+      const claimedBatchSize = activeClaim.length;
+      claimedRows += claimedBatchSize;
+      console.log(`Claimed batch ${claimBatches}: ${claimedBatchSize} universes (tier=${options.tier}, total=${claimedRows}).`);
+
+      try {
+        for (let i = 0; i < activeClaim.length; i += BATCH_SIZE) {
+          const chunk = activeClaim.slice(i, i + BATCH_SIZE);
+          const ids = chunk.map((row) => row.universe_id);
+          latestSampledAt = new Date();
+          try {
+            const statsMap = await fetchStats(ids);
+            const result = await writeChunk(chunk, statsMap, latestSampledAt);
+            updatedRows += result.updated;
+            failedRows += result.missing;
+            hourlyRows += result.hourlyRows;
+            updateEvents += result.updateEvents;
+            for (const event of result.detailEvents) {
+              if (detailEvents.length < DETAIL_REVALIDATION_LIMIT) detailEvents.push(event);
+            }
+            console.log(`  - Updated chunk ${i / BATCH_SIZE + 1} (${result.updated}/${chunk.length} universes)`);
+          } catch (error) {
+            failedRows += chunk.length;
+            await markFailures(chunk, error);
+            console.error(`Chunk ${i / BATCH_SIZE + 1} failed:`, error instanceof Error ? error.message : String(error));
+          }
+          await sleep(REQUEST_DELAY_MS);
+        }
+      } finally {
+        await releaseUniverseLeases(activeClaim.map((row) => row.universe_id));
+        activeClaim = [];
+      }
+
+      if (!explicitIds.length && claimedBatchSize < requestedClaimSize) break;
+    }
+
+    if (!claimedRows) {
+      console.log("No universes found.");
+      await finishStatsJobRun(run, { status: "skipped", metadata: { reason: "no_universes", claim_batches: claimBatches } });
+      return;
+    }
+
+    await rollupTodayIfRequested(options, latestSampledAt);
+
+    const indexResult = updatedRows > 0 && !options.skipIndexRefresh ? await refreshStatsIndexes() : null;
     const revalidationEvents: RevalidationEvent[] =
       updatedRows > 0
         ? [
@@ -650,11 +712,12 @@ async function main() {
 
     await finishStatsJobRun(run, {
       status: failedRows > 0 ? "partial" : "success",
-      rowsClaimed: universes.length,
+      rowsClaimed: claimedRows,
       rowsSucceeded: updatedRows,
       rowsFailed: failedRows,
       metadata: {
         hourly_rows: hourlyRows,
+        claim_batches: claimBatches,
         update_events: updateEvents,
         detail_revalidation_events: detailEvents.length,
         queued_revalidation_events: queued.events,
@@ -663,19 +726,22 @@ async function main() {
     });
 
     console.log(
-      `Done. Updated ${updatedRows}/${universes.length} universes, wrote ${hourlyRows} hourly rows, queued ${queued.queued} revalidation events.`
+      `Done. Updated ${updatedRows}/${claimedRows} universes across ${claimBatches} claim batches, wrote ${hourlyRows} hourly rows, queued ${queued.queued} revalidation events.`
     );
   } catch (error) {
     await finishStatsJobRun(run, {
       status: "failed",
-      rowsClaimed: universes.length,
+      rowsClaimed: claimedRows,
       rowsSucceeded: updatedRows,
       rowsFailed: failedRows,
       error
     });
     throw error;
   } finally {
-    await releaseUniverseLeases(universes.map((row) => row.universe_id));
+    await releaseUniverseLeases(activeClaim.map((row) => row.universe_id));
+    if (pipelineLeaseAcquired) {
+      await releaseStatsPipelineLease({ leaseName: pipelineLeaseName, workerId: WORKER_ID });
+    }
   }
 }
 

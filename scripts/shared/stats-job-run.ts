@@ -23,6 +23,7 @@ export type StatsJobRun = {
   id: string | null;
   jobName: string;
   startedAt: string;
+  metadata: Record<string, unknown>;
 };
 
 function defaultWorkerId() {
@@ -68,16 +69,22 @@ export async function startStatsJobRun(input: StartStatsJobInput): Promise<Stats
       .select("id")
       .single();
     if (error) throw error;
-    return { id: (data as { id?: string } | null)?.id ?? null, jobName: input.jobName, startedAt };
+    return {
+      id: (data as { id?: string } | null)?.id ?? null,
+      jobName: input.jobName,
+      startedAt,
+      metadata: input.metadata ?? {}
+    };
   } catch (error) {
     console.warn(`Unable to record stats job start for ${input.jobName}: ${errorMessage(error)}`);
-    return { id: null, jobName: input.jobName, startedAt };
+    return { id: null, jobName: input.jobName, startedAt, metadata: input.metadata ?? {} };
   }
 }
 
 export async function finishStatsJobRun(run: StatsJobRun, input: FinishStatsJobInput) {
   if (!run.id) return;
   const metadata = {
+    ...run.metadata,
     ...(input.metadata ?? {}),
     started_at: run.startedAt
   };

@@ -38,7 +38,7 @@ test("universe tiers carry refresh SLAs for NEW HOT WARM and COLD", () => {
   assert.deepEqual(assignStatsTier({}), { tier: "NEW", reason: "new_or_missing_stats", refreshHours: 2 });
   assert.equal(assignStatsTier({ playing: 100, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 1);
   assert.equal(assignStatsTier({ visits: 10_000_000, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 12);
-  assert.equal(assignStatsTier({ playing: 0, visits: 0, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 168);
+  assert.equal(assignStatsTier({ playing: 0, visits: 0, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 24);
 });
 
 test("catalog details sends typed positive Roblox IDs", async (context) => {

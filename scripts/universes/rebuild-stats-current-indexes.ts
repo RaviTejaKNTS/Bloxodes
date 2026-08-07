@@ -12,13 +12,23 @@ async function main() {
 
   try {
     const sb = supabaseAdmin();
-    const { data, error } = await sb.rpc("refresh_stats_current_indexes");
+    const { data, error } = await sb.rpc("refresh_stats_current_indexes_serialized");
     if (error) throw error;
-    const { data: creatorData, error: creatorError } = await sb.rpc("refresh_stats_creator_current_index");
-    if (creatorError) throw creatorError;
 
-    const result = (data ?? {}) as { games?: number; genres?: number; risers?: number; indexed_at?: string };
-    const creatorResult = (creatorData ?? {}) as { creators?: number; indexed_at?: string };
+    const result = (data ?? {}) as {
+      games?: number;
+      genres?: number;
+      risers?: number;
+      creators?: number;
+      indexed_at?: string;
+      skipped?: boolean;
+      reason?: string;
+    };
+    if (result.skipped) {
+      await finishStatsJobRun(run, { status: "skipped", metadata: result });
+      console.log(`Stats index rebuild skipped: ${result.reason ?? "lock_busy"}`);
+      return;
+    }
     const queued = await enqueueRevalidationEvents(
       [
         { type: "stats", slug: "stats" },
@@ -33,13 +43,12 @@ async function main() {
       rowsSucceeded: result.games ?? 0,
       metadata: {
         ...result,
-        ...creatorResult,
         revalidation_events: queued.events
       }
     });
 
     console.log(
-      `Rebuilt stats indexes: games=${result.games ?? 0}, genres=${result.genres ?? 0}, risers=${result.risers ?? 0}, creators=${creatorResult.creators ?? 0}; queued=${queued.queued}`
+      `Rebuilt stats indexes: games=${result.games ?? 0}, genres=${result.genres ?? 0}, risers=${result.risers ?? 0}, creators=${result.creators ?? 0}; queued=${queued.queued}`
     );
   } catch (error) {
     await finishStatsJobRun(run, { status: "failed", error });
