@@ -119,7 +119,7 @@ So the `codex-admin` crontab command is the source of truth for each VPS job.
 
 Current VPS crontab block (install the exact block from `scripts/ops/vps-universe-stats.crontab`):
 
-The block intentionally contains no HOT or hourly rank job. Northflank is the sole HOT/rank owner. WARM runs twice daily; COLD processes 4,000 rows in every hour except the two WARM hours, providing 88,000 daily COLD slots for the 24-hour public freshness requirement. The hourly `stats-current-index` job is the only scheduled full read-index rebuild.
+The block intentionally contains no HOT or hourly rank job. Northflank is the sole HOT/rank owner. Full-population rank jobs execute through `refresh_universe_rank_snapshots()` inside PostgreSQL so they do not page the complete sorted population through PostgREST. WARM runs twice daily; COLD processes 4,000 rows in every hour except the two WARM hours, providing 88,000 daily COLD slots for the 24-hour public freshness requirement. The hourly `stats-current-index` job is the only scheduled full read-index rebuild.
 
 The item pipeline schedule is now owned by `scripts/ops/vps-scheduled-automation.crontab`. Its stages deliberately use separate worker locks:
 

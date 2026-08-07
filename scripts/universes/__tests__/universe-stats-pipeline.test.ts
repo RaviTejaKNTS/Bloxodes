@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import { statsPipelineLeaseName } from "../../shared/stats-pipeline-lease";
+import { shouldUseDatabaseRankRefresh } from "../rank-universe-stats";
 import { assignStatsTier } from "../stats-tier";
 import { universeClaimBatchSize } from "../update-universe-hourly-stats";
 
@@ -16,6 +17,13 @@ test("universe claims stay below the production Data API response cap", () => {
 test("pipeline lease names are stable across hosts", () => {
   assert.equal(statsPipelineLeaseName(["Universe-Refresh", "HOT"]), "universe-refresh:hot");
   assert.equal(statsPipelineLeaseName(["universe-rank", "hourly", "playing"]), "universe-rank:hourly:playing");
+});
+
+test("scheduled full-population rank jobs use the database implementation", () => {
+  assert.equal(shouldUseDatabaseRankRefresh({ tier: "ALL", limit: 0, dryRun: false }), true);
+  assert.equal(shouldUseDatabaseRankRefresh({ tier: "HOT", limit: 0, dryRun: false }), false);
+  assert.equal(shouldUseDatabaseRankRefresh({ tier: "ALL", limit: 1000, dryRun: false }), false);
+  assert.equal(shouldUseDatabaseRankRefresh({ tier: "ALL", limit: 0, dryRun: true }), false);
 });
 
 test("every valid universe tier remains visible inside the 24-hour freshness window", () => {

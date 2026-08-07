@@ -63,11 +63,41 @@ type RankSnapshotPayload = {
   sampled_at: string;
 };
 
+type DatabaseRankResult = {
+  skipped?: boolean;
+  reason?: string;
+  sampled_at?: string;
+  rows_written?: number;
+  global_playing?: number;
+  genre_playing?: number;
+  subgenre_playing?: number;
+  global_visits?: number;
+  global_favorites?: number;
+  global_rating?: number;
+};
+
 function readNonNegativeInteger(name: string, fallback: number) {
   const raw = process.env[name];
   if (!raw) return fallback;
   const parsed = Number(raw);
   return Number.isFinite(parsed) && parsed >= 0 ? Math.floor(parsed) : fallback;
+}
+
+export function shouldUseDatabaseRankRefresh(options: Pick<Options, "tier" | "limit" | "dryRun">) {
+  return options.tier === "ALL" && options.limit === 0 && !options.dryRun;
+}
+
+async function refreshRanksInDatabase(options: Options, sampledAt: string): Promise<DatabaseRankResult> {
+  const { data, error } = await supabaseAdmin().rpc("refresh_universe_rank_snapshots", {
+    p_granularity: options.granularity,
+    p_rank_set: options.rankSet,
+    p_snapshot_scope: options.snapshotScope,
+    p_sampled_at: sampledAt,
+    p_global_limit: RELEVANT_GLOBAL_PLAYING_LIMIT,
+    p_scoped_limit: RELEVANT_SCOPED_PLAYING_LIMIT
+  });
+  if (error) throw error;
+  return (data ?? {}) as DatabaseRankResult;
 }
 
 function metricFor(row: UniverseRankRow, rankType: RankType): number | null {
@@ -384,6 +414,32 @@ async function main() {
 
     const countsByType: Record<string, number> = {};
 
+    if (shouldUseDatabaseRankRefresh(options)) {
+      const result = await refreshRanksInDatabase(options, sampledAtIso);
+      if (result.skipped) {
+        await finishStatsJobRun(run, {
+          status: "skipped",
+          metadata: { reason: result.reason ?? "database_lock_busy", sampled_at: sampledAtIso }
+        });
+        console.log(`Rank snapshot skipped: ${result.reason ?? "database_lock_busy"}`);
+        return;
+      }
+
+      const rankTypes = options.rankSet === "playing" ? PLAYING_RANK_TYPES : RANK_TYPES;
+      for (const rankType of rankTypes) {
+        const count = Number(result[rankType] ?? 0);
+        countsByType[rankType] = count;
+        console.log(`Ranked ${count} rows for ${rankType}.`);
+      }
+      totalRanked = Number(result.rows_written ?? Object.values(countsByType).reduce((sum, count) => sum + count, 0));
+      await finishStatsJobRun(run, {
+        status: "success",
+        rowsSucceeded: totalRanked,
+        metadata: { ...result, sampled_at: sampledAtIso, counts_by_type: countsByType, execution: "database" }
+      });
+      return;
+    }
+
     if (options.rankSet === "playing") {
       const counts = await writePlayingRankTypes(options, sampledAtIso);
       for (const rankType of PLAYING_RANK_TYPES) {
@@ -429,7 +485,9 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
