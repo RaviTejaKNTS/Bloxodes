@@ -104,10 +104,14 @@ docker build -t bloxodes-stats-worker:production -f Dockerfile.stats-worker .
 
 ```txt
 docker run --rm \
+  --network supabase_default \
   --env-file /home/codex-admin/bloxodes-stats-worker/env.stats-worker \
+  -e SUPABASE_URL="http://supabase-kong:8000" \
   -e STATS_WORKER_COMMAND="<cron command>" \
   bloxodes-stats-worker:production
 ```
+
+The worker and Supabase share the VPS, so the runner deliberately uses Kong on the private `supabase_default` Docker network. This avoids Cloudflare gateway timeouts for long database RPCs and transient public-path 502s during bulk refreshes. Override `STATS_WORKER_DOCKER_NETWORK` or `STATS_WORKER_SUPABASE_INTERNAL_URL` only if the local stack names change.
 
 `Dockerfile.stats-worker` executes:
 

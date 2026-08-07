@@ -12,6 +12,8 @@ COMMAND="$*"
 BASE="$HOME/bloxodes-stats-worker"
 ENV_FILE="$BASE/env.stats-worker"
 LOG_DIR="$BASE/logs"
+DOCKER_NETWORK="${STATS_WORKER_DOCKER_NETWORK:-supabase_default}"
+SUPABASE_INTERNAL_URL="${STATS_WORKER_SUPABASE_INTERNAL_URL:-http://supabase-kong:8000}"
 mkdir -p "$LOG_DIR"
 
 exec 9>"$BASE/$JOB.lock"
@@ -44,7 +46,9 @@ fi
 echo "$(date -Is) starting $JOB" >> "$LOG_DIR/$JOB.log"
 docker run --rm \
   --name "bloxodes-stats-$JOB-$(date +%s)" \
+  --network "$DOCKER_NETWORK" \
   --env-file "$ENV_FILE" \
+  -e SUPABASE_URL="$SUPABASE_INTERNAL_URL" \
   -e STATS_WORKER_COMMAND="$COMMAND" \
   bloxodes-stats-worker:production \
   >> "$LOG_DIR/$JOB.log" 2>&1
