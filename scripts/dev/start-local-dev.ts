@@ -13,23 +13,26 @@ function isLocalSupabaseUrl(value: string | undefined): boolean {
 }
 
 const supabaseUrl = process.env.SUPABASE_URL;
-const articleDevUrl = process.env.ARTICLE_DEV_SUPABASE_URL;
-const remoteArticleDev = process.env.ARTICLE_WRITER_DEV_ONLY === "true";
 const productionHosts = new Set(["database.bloxodes.com", "bloxodesdb.ravitejaknts.com"]);
 
-function isApprovedArticleDevUrl(value: string | undefined): boolean {
-  if (!remoteArticleDev || !value) return false;
+function isApprovedManagedDevUrl(value: string | undefined): boolean {
+  if (!value) return false;
   try {
     const url = new URL(value);
-    return !productionHosts.has(url.hostname) && (!articleDevUrl || articleDevUrl === value);
+    return (
+      url.protocol === "https:" &&
+      url.hostname.endsWith(".supabase.co") &&
+      !productionHosts.has(url.hostname)
+    );
   } catch {
     return false;
   }
 }
 
-if (!isLocalSupabaseUrl(supabaseUrl) && !isApprovedArticleDevUrl(supabaseUrl)) {
+if (!isLocalSupabaseUrl(supabaseUrl) && !isApprovedManagedDevUrl(supabaseUrl)) {
   throw new Error(
-    `Refusing to start local dev against unapproved SUPABASE_URL (${supabaseUrl ?? "unset"}). Check the article dev environment.`
+    `Refusing to start local dev against unapproved SUPABASE_URL (${supabaseUrl ?? "unset"}). ` +
+      "Use localhost or an HTTPS *.supabase.co development project."
   );
 }
 

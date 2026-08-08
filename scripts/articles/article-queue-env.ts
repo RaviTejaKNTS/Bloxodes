@@ -92,12 +92,13 @@ export function resolveArticleDevCredentials(options: { envFile?: string | null 
 
   const fallbackUrl = process.env.SUPABASE_URL?.trim();
   const fallbackRole = process.env.SUPABASE_SERVICE_ROLE?.trim();
-  if (fallbackUrl && fallbackRole && isLocalSupabaseUrl(fallbackUrl)) {
-    return { url: fallbackUrl, serviceRole: fallbackRole, source: "legacy localhost environment" };
+  if (fallbackUrl && fallbackRole) {
+    assertNonProductionArticleTarget(fallbackUrl);
+    return { url: fallbackUrl, serviceRole: fallbackRole, source: "standard development environment" };
   }
   throw new Error(
     "Article dev credentials are required through ARTICLE_DEV_SUPABASE_URL and ARTICLE_DEV_SUPABASE_SERVICE_ROLE. " +
-      "Standard SUPABASE_* credentials are accepted only for localhost compatibility."
+      "Standard SUPABASE_* credentials are also accepted when they point to localhost or an HTTPS *.supabase.co project."
   );
 }
 

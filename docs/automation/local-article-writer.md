@@ -8,9 +8,9 @@ Production overlap checks use the public, GET-only endpoint at `/api/articles/ed
 
 The homelab systemd services load `/etc/bloxodes/article-automation.env`. Start from `docs/automation/homelab-article-automation.env.example` and keep the installed file mode `0600`.
 
-Required later:
+Required environment:
 
-- `ARTICLE_DEV_SUPABASE_URL` and `ARTICLE_DEV_SUPABASE_SERVICE_ROLE` for the managed development project.
+- `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE` for the managed development project. The `ARTICLE_DEV_*` aliases remain available when the article worker needs a dedicated override.
 - `SUPABASE_MEDIA_BUCKET` and `SUPABASE_MEDIA_PUBLIC_URL` for draft article images.
 - `GROQ_API_KEY` for discovery curation.
 - Grok CLI authentication under the `teja` account.
