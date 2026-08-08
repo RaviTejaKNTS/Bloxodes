@@ -23,6 +23,7 @@ type Options = {
   timeoutMinutes: number;
   worktree: string;
   grokBin: string;
+  grokModel: string;
 };
 
 type QueueRow = {
@@ -86,6 +87,7 @@ Options:
   --queue-id UUID            Target one pending queue item instead of the next eligible item
   --worktree PATH            Persistent Bloxodes writing worktree (default: current repo)
   --grok-bin PATH            Grok CLI path (default: ARTICLE_WRITER_GROK_BIN or grok)
+  --grok-model MODEL         Grok model (default: ARTICLE_WRITER_GROK_MODEL or grok-4.5)
   --max-attempts N           Terminal failure threshold, 1-10 (default: 3)
   --timeout-minutes N        Grok timeout, 10-360 (default: 120)
   --help                     Show this help
@@ -115,7 +117,8 @@ function parseArgs(argv: string[]): Options {
     maxAttempts: parseInteger(process.env.ARTICLE_WRITER_MAX_ATTEMPTS ?? "3", "ARTICLE_WRITER_MAX_ATTEMPTS", 1, 10),
     timeoutMinutes: parseInteger(process.env.ARTICLE_WRITER_TIMEOUT_MINUTES ?? "120", "ARTICLE_WRITER_TIMEOUT_MINUTES", 10, 360),
     worktree: path.resolve(process.env.ARTICLE_WRITER_WORKTREE?.trim() || process.cwd()),
-    grokBin: process.env.ARTICLE_WRITER_GROK_BIN?.trim() || "grok"
+    grokBin: process.env.ARTICLE_WRITER_GROK_BIN?.trim() || "grok",
+    grokModel: process.env.ARTICLE_WRITER_GROK_MODEL?.trim() || "grok-4.5"
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -140,6 +143,11 @@ function parseArgs(argv: string[]): Options {
       index += 1;
     } else if (arg.startsWith("--grok-bin=")) {
       options.grokBin = arg.slice("--grok-bin=".length).trim();
+    } else if (arg === "--grok-model") {
+      options.grokModel = requireValue(argv, index, arg);
+      index += 1;
+    } else if (arg.startsWith("--grok-model=")) {
+      options.grokModel = arg.slice("--grok-model=".length).trim();
     } else if (arg === "--max-attempts") {
       options.maxAttempts = parseInteger(requireValue(argv, index, arg), arg, 1, 10);
       index += 1;
@@ -335,14 +343,15 @@ async function runGrok(
   const args = [
     "--cwd",
     options.worktree,
+    "--model",
+    options.grokModel,
+    "--always-approve",
     "--single",
     buildGrokPrompt(row),
     "--json-schema",
     GROK_OUTCOME_SCHEMA,
     "--output-format",
     "json",
-    "--permission-mode",
-    "bypassPermissions",
     "--max-turns",
     "200",
     "--no-memory",
