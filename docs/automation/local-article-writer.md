@@ -15,6 +15,12 @@ Required environment:
 - `GROQ_API_KEY` for discovery curation.
 - Grok CLI authentication under the `teja` account.
 
+The writer pins `grok-4.5` by default and passes Grok's `--always-approve` flag on
+every invocation. This keeps unattended systemd runs non-interactive even if the
+account-level Grok configuration changes. Override only the model with
+`ARTICLE_WRITER_GROK_MODEL` or `--grok-model` when intentionally testing another
+model; automatic approval is not optional for this scheduled worker.
+
 Never add production `SUPABASE_SERVICE_ROLE` to this file. The scripts accept only localhost compatibility or an HTTPS `*.supabase.co` managed-dev project and explicitly reject the known Bloxodes production hosts.
 
 ## Data Boundary
