@@ -15,6 +15,7 @@ const PRODUCTION_SUPABASE_HOSTS = new Set([
   "database.bloxodes.com",
   "bloxodesdb.ravitejaknts.com"
 ]);
+const HOMELAB_ARTICLE_ENV_PATH = "/etc/bloxodes/article-automation.env";
 
 export const ARTICLE_QUEUE_ENV_KEYS = [
   "ARTICLE_QUEUE_ENV_FILE",
@@ -74,7 +75,16 @@ export function resolveArticleDevCredentials(options: { envFile?: string | null 
     return { url: directUrl, serviceRole: directRole, source: "article dev environment" };
   }
 
-  const configuredFile = options.envFile?.trim() || process.env.ARTICLE_DEV_ENV_FILE?.trim();
+  const configuredFile =
+    options.envFile?.trim() ||
+    process.env.ARTICLE_DEV_ENV_FILE?.trim() ||
+    (() => {
+      try {
+        return statSync(HOMELAB_ARTICLE_ENV_PATH).isFile() ? HOMELAB_ARTICLE_ENV_PATH : null;
+      } catch {
+        return null;
+      }
+    })();
   if (configuredFile) {
     const absolutePath = path.resolve(configuredFile);
     if (!statSync(absolutePath).isFile()) throw new Error(`Article dev env path is not a file: ${absolutePath}`);

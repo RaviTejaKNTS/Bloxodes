@@ -23,6 +23,13 @@ When the user gives a count but no topics, the target article count is that coun
 
 Queue listing returns only Groq-curated rows and orders them by newest `source_published_at` first. Inspect the canonical title, grouped source URLs, source dates, curation reason, and existing Bloxodes coverage before accepting it for research. If no pending rows exist, return that the queue is empty; do not invent substitute topics. If the queue cannot be read, report the operational blocker rather than silently switching to topic suggestion.
 
+On the Bloxodes homelab, queue commands automatically resolve the managed-dev
+credentials from `/etc/bloxodes/article-automation.env` when that file is
+readable by the worker user and no explicit article-dev credentials are set.
+Never print, quote, or add the file contents to a prompt. If the conventional
+file exists but is unreadable, report its ownership and mode without revealing
+values; the supported installation is `root:teja` with mode `0640`.
+
 An eligible `agent_runner` row in `article_generation_queue` has already passed the Groq topic-type, owned-page-family, source-grouping, and overlap filter. The parent still verifies that the sources support accurate research before writing. Preserve the queue ID and every grouped source URL throughout the job so the same skill can close the row when local work finishes.
 
 ### Externally Claimed Homelab Writer Jobs

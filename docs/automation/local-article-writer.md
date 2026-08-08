@@ -6,7 +6,7 @@ Production overlap checks use the public, GET-only endpoint at `/api/articles/ed
 
 ## Credentials
 
-The homelab systemd services load `/etc/bloxodes/article-automation.env`. Start from `docs/automation/homelab-article-automation.env.example` and keep the installed file mode `0600`.
+The homelab systemd services load `/etc/bloxodes/article-automation.env`. Start from `docs/automation/homelab-article-automation.env.example` and keep it owned by `root:teja` with mode `0640`. This lets the sole trusted worker user run the same queue commands interactively without copying the managed-dev service-role key into the repository.
 
 Required environment:
 
@@ -69,6 +69,11 @@ npm run articles:writer:homelab -- --apply
 ```
 
 The writer is dry-run by default. Only one writer can run in the worktree; lock files and structured Grok outputs remain under `tmp/article-writer/`.
+
+On the homelab, article queue commands automatically use the readable
+`/etc/bloxodes/article-automation.env` file when no explicit article-dev
+credentials or `ARTICLE_DEV_ENV_FILE` are present. Do not source or print this
+file in Grok prompts or logs.
 
 ## Homelab systemd
 
