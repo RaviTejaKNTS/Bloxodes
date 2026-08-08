@@ -7,6 +7,7 @@ These routes back interactive site features, search, tool data, session/progress
 ## Endpoint Groups
 
 - Search and catalog data:
+  - `articles/editorial-inventory`
   - `search/all`
   - `search/games`
   - `roblox-music-ids`
@@ -57,6 +58,7 @@ These routes back interactive site features, search, tool data, session/progress
   - `apps/web/src/lib/security/rate-limit.ts`
 - Make runtime behavior explicit with `dynamic`, `runtime`, or both when the endpoint depends on request-time state.
 - Revalidate tags or paths after successful mutations.
+- `/api/articles/editorial-inventory` is a GET-only projection of already-published editorial identity fields for off-host duplicate and internal-link checks. Keep its response limited to page family, title, route key, and universe ID; never add draft content, user data, operational rows, or mutation behavior.
 
 ## Revalidation Notes
 

@@ -25,15 +25,16 @@ Queue listing returns only Groq-curated rows and orders them by newest `source_p
 
 An eligible `agent_runner` row in `article_generation_queue` has already passed the Groq topic-type, owned-page-family, source-grouping, and overlap filter. The parent still verifies that the sources support accurate research before writing. Preserve the queue ID and every grouped source URL throughout the job so the same skill can close the row when local work finishes.
 
-### Externally Claimed Local Writer Jobs
+### Externally Claimed Homelab Writer Jobs
 
 When the current message explicitly says that `scripts/articles/run-local-article-writer.ts` has already claimed the queue item:
 
 - Treat the supplied title, type, queue reference, and source packet as the one explicit approved input.
-- Do not list, claim, or update `article_generation_queue`; the wrapper owns production queue state and Grok does not receive production credentials.
-- Complete the same research, separate writing-subagent, parent review, verifier, local Supabase import, and real-browser preview workflow.
-- Never publish or import the article to production. Normal `SUPABASE_*` variables are intentionally local-only in this mode.
-- End with the structured status requested by the wrapper. Report `completed` only when `final.json`, verification, local import, and rendered preview all passed. Otherwise return `skipped`, `blocked`, or `failed` with the actual reason.
+- Do not list, claim, or update `article_generation_queue`; the wrapper owns managed-dev queue state and Grok does not receive production database credentials.
+- Complete the same research, separate writing-subagent, parent review, verifier, managed-dev Supabase import, and real-browser preview workflow.
+- Check production overlap only with `npm run articles:inventory:production`; this GET-only path cannot mutate production.
+- Never publish or import the article to production. Normal `SUPABASE_*` variables intentionally point to managed dev in this mode.
+- End with the structured status requested by the wrapper. Report `completed` only when `final.json`, verification, managed-dev import, and rendered preview all passed. Otherwise return `skipped`, `blocked`, or `failed` with the actual reason.
 
 Use separate research and writing subagents. Give each subagent one article only. The parent model orchestrates the work, approves briefs, reviews finals, runs verification, and previews the rendered pages.
 
@@ -99,7 +100,7 @@ Save approved images with `npm run content:save-article-image` before final veri
 2. For each accepted queue-backed lead, mark it `processing` before starting research:
 
 ```bash
-npm run articles:queue:update -- --queue-id <uuid> --status processing --worker <worker-name> --apply --allow-prod
+npm run articles:queue:update -- --queue-id <uuid> --status processing --worker <worker-name> --apply
 ```
 
 3. Start one research subagent per article and queue extras when slots are full.
@@ -114,7 +115,7 @@ npm run articles:queue:update -- --queue-id <uuid> --status processing --worker 
 12. Immediately after an article passes both verification and rendered browser preview, mark its queue row `completed`:
 
 ```bash
-npm run articles:queue:update -- --queue-id <uuid> --status completed --result-path <final.json> --apply --allow-prod
+npm run articles:queue:update -- --queue-id <uuid> --status completed --result-path <final.json> --apply
 ```
 
 13. Return approved paths, localhost article links, queue outcomes, blocked articles, and remaining risks.
@@ -122,7 +123,7 @@ npm run articles:queue:update -- --queue-id <uuid> --status completed --result-p
 Use `skipped` for a deliberate editorial rejection such as existing coverage or no useful/source-backed angle:
 
 ```bash
-npm run articles:queue:update -- --queue-id <uuid> --status skipped --reason "<concise reason>" --apply --allow-prod
+npm run articles:queue:update -- --queue-id <uuid> --status skipped --reason "<concise reason>" --apply
 ```
 
 Use `failed` only for a terminal operational failure, with `--reason`. Do not mark a row `completed` merely because `final.json` exists: the verifier and actual browser preview must both have passed.

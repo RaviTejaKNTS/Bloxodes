@@ -10,16 +10,14 @@ import { randomUUID } from "node:crypto";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
 import {
+  ARTICLE_DEV_ENV_KEYS,
   ARTICLE_QUEUE_ENV_KEYS,
-  isLocalSupabaseUrl,
-  resolveArticleQueueCredentials,
+  resolveArticleDevCredentials,
   supabaseTarget
 } from "./article-queue-env";
 
 type Options = {
   apply: boolean;
-  allowLocalQueue: boolean;
-  queueEnvFile: string | null;
   queueId: string | null;
   maxAttempts: number;
   timeoutMinutes: number;
@@ -81,21 +79,19 @@ const GROK_OUTCOME_SCHEMA = JSON.stringify({
 });
 
 function printUsage() {
-  console.log(`Usage: npm run articles:writer:local -- [options]
+  console.log(`Usage: npm run articles:writer:homelab -- [options]
 
 Options:
-  --apply                    Claim one production queue item and run Grok (dry-run by default)
-  --queue-env-file PATH      Env file containing production queue SUPABASE_URL/service role
+  --apply                    Claim one managed-dev queue item and run Grok (dry-run by default)
   --queue-id UUID            Target one pending queue item instead of the next eligible item
   --worktree PATH            Persistent Bloxodes writing worktree (default: current repo)
   --grok-bin PATH            Grok CLI path (default: ARTICLE_WRITER_GROK_BIN or grok)
   --max-attempts N           Terminal failure threshold, 1-10 (default: 3)
   --timeout-minutes N        Grok timeout, 10-360 (default: 120)
-  --allow-local-queue        Permit a local queue target for safe dry-run/testing
   --help                     Show this help
 
-The normal SUPABASE_URL/service role must point to local Supabase. Production queue
-credentials are read separately and are never passed to the Grok child process.`);
+ARTICLE_DEV_SUPABASE_URL and ARTICLE_DEV_SUPABASE_SERVICE_ROLE own both queue and
+draft content. Production is read only through ARTICLE_PRODUCTION_INVENTORY_URL.`);
 }
 
 function parseInteger(value: string | undefined, flag: string, minimum: number, maximum: number): number {
@@ -115,8 +111,6 @@ function requireValue(argv: string[], index: number, flag: string): string {
 function parseArgs(argv: string[]): Options {
   const options: Options = {
     apply: false,
-    allowLocalQueue: false,
-    queueEnvFile: process.env.ARTICLE_QUEUE_ENV_FILE?.trim() || null,
     queueId: null,
     maxAttempts: parseInteger(process.env.ARTICLE_WRITER_MAX_ATTEMPTS ?? "3", "ARTICLE_WRITER_MAX_ATTEMPTS", 1, 10),
     timeoutMinutes: parseInteger(process.env.ARTICLE_WRITER_TIMEOUT_MINUTES ?? "120", "ARTICLE_WRITER_TIMEOUT_MINUTES", 10, 360),
@@ -131,13 +125,6 @@ function parseArgs(argv: string[]): Options {
       process.exit(0);
     } else if (arg === "--apply") {
       options.apply = true;
-    } else if (arg === "--allow-local-queue") {
-      options.allowLocalQueue = true;
-    } else if (arg === "--queue-env-file") {
-      options.queueEnvFile = path.resolve(requireValue(argv, index, arg));
-      index += 1;
-    } else if (arg.startsWith("--queue-env-file=")) {
-      options.queueEnvFile = path.resolve(arg.slice("--queue-env-file=".length));
     } else if (arg === "--queue-id") {
       options.queueId = requireValue(argv, index, arg);
       index += 1;
@@ -209,24 +196,19 @@ async function acquireWriterLock(worktree: string): Promise<() => Promise<void>>
         // A malformed lock is stale unless another live PID can be established.
       }
       if (isProcessAlive(existingPid)) {
-        throw new Error(`Another local article writer is already running with PID ${existingPid}.`);
+        throw new Error(`Another homelab article writer is already running with PID ${existingPid}.`);
       }
       await unlink(lockPath);
     }
   }
-  throw new Error("Could not acquire the local article writer lock.");
+  throw new Error("Could not acquire the homelab article writer lock.");
 }
 
-async function assertLocalWorkspace(options: Options): Promise<{ url: string; serviceRole: string }> {
-  const localUrl = process.env.SUPABASE_URL?.trim() ?? "";
-  const localRole = process.env.SUPABASE_SERVICE_ROLE?.trim() ?? "";
-  if (!localUrl || !localRole) throw new Error("Local SUPABASE_URL and SUPABASE_SERVICE_ROLE are required.");
-  if (!isLocalSupabaseUrl(localUrl)) {
-    throw new Error(`Refusing to run Grok because normal SUPABASE_URL is not local (${supabaseTarget(localUrl)}).`);
-  }
+async function assertDevWorkspace(options: Options): Promise<{ url: string; serviceRole: string }> {
+  const dev = resolveArticleDevCredentials();
   await access(path.join(options.worktree, "package.json"), fsConstants.R_OK);
   if (path.isAbsolute(options.grokBin)) await access(options.grokBin, fsConstants.X_OK);
-  return { url: localUrl, serviceRole: localRole };
+  return dev;
 }
 
 async function recoverStaleWriterClaims(queue: SupabaseClient, maxAttempts: number, staleMinutes: number) {
@@ -236,9 +218,9 @@ async function recoverStaleWriterClaims(queue: SupabaseClient, maxAttempts: numb
     .select("id, attempts")
     .eq("workflow_mode", "agent_runner")
     .eq("status", "processing")
-    .like("locked_by", "grok-local:%")
+    .like("locked_by", "grok-homelab:%")
     .lt("locked_at", cutoff);
-  if (error) throw new Error(`Could not inspect stale local writer claims: ${error.message}`);
+  if (error) throw new Error(`Could not inspect stale homelab writer claims: ${error.message}`);
   for (const row of data ?? []) {
     const attempts = Number(row.attempts ?? 0);
     const terminal = attempts >= maxAttempts;
@@ -246,8 +228,8 @@ async function recoverStaleWriterClaims(queue: SupabaseClient, maxAttempts: numb
       .from("article_generation_queue")
       .update({
         status: terminal ? "failed" : "pending",
-        last_error: "Recovered after the local Grok writer left a stale processing claim.",
-        outcome_reason: terminal ? "Local Grok writer exceeded max attempts after stale claims." : null,
+        last_error: "Recovered after the homelab Grok writer left a stale processing claim.",
+        outcome_reason: terminal ? "Homelab Grok writer exceeded max attempts after stale claims." : null,
         locked_at: null,
         locked_by: null,
         next_attempt_at: terminal ? null : new Date().toISOString(),
@@ -255,11 +237,11 @@ async function recoverStaleWriterClaims(queue: SupabaseClient, maxAttempts: numb
       })
       .eq("id", row.id)
       .eq("status", "processing")
-      .like("locked_by", "grok-local:%")
+      .like("locked_by", "grok-homelab:%")
       .lt("locked_at", cutoff);
     if (updateError) throw new Error(`Could not recover stale queue item ${row.id}: ${updateError.message}`);
   }
-  if (data?.length) console.log(`Recovered ${data.length} stale local writer claim(s).`);
+  if (data?.length) console.log(`Recovered ${data.length} stale homelab writer claim(s).`);
 }
 
 async function selectPendingQueueItem(queue: SupabaseClient, options: Options): Promise<QueueRow | null> {
@@ -277,7 +259,7 @@ async function selectPendingQueueItem(queue: SupabaseClient, options: Options): 
     .order("created_at", { ascending: true })
     .limit(1)
     .maybeSingle();
-  if (error) throw new Error(`Could not select a pending production article: ${error.message}`);
+  if (error) throw new Error(`Could not select a pending dev article: ${error.message}`);
   return data ? data as unknown as QueueRow : null;
 }
 
@@ -303,10 +285,10 @@ async function claimQueueItem(queue: SupabaseClient, options: Options, workerId:
       .eq("status", "pending")
       .select(QUEUE_SELECT)
       .maybeSingle();
-    if (error) throw new Error(`Could not claim production queue item ${candidate.id}: ${error.message}`);
+    if (error) throw new Error(`Could not claim dev queue item ${candidate.id}: ${error.message}`);
     if (data) return data as unknown as QueueRow;
   }
-  throw new Error("The next production queue item changed repeatedly while being claimed.");
+  throw new Error("The next dev queue item changed repeatedly while being claimed.");
 }
 
 function buildGrokPrompt(row: QueueRow): string {
@@ -315,7 +297,7 @@ function buildGrokPrompt(row: QueueRow): string {
     : [{ source_name: row.source_name, source_url: row.source_url }];
   return `Run exactly one Bloxodes article through $bloxodes-article-workflow-runner.
 
-This topic has already been Groq-curated and claimed by an external local writer. Treat it as an explicit approved input. Do not list, claim, or update article_generation_queue; the wrapper owns queue state and Grok has no production credentials.
+This topic has already been Groq-curated and claimed by the homelab wrapper. Treat it as an explicit approved input. Do not list, claim, or update article_generation_queue; the wrapper owns queue state. You have no production database credentials.
 
 Article title: ${row.article_title}
 Article type: ${row.article_type}
@@ -323,10 +305,10 @@ Queue reference: ${row.id}
 Curation reason: ${row.curation_reason ?? "Approved by automated curation."}
 Source material: ${JSON.stringify(sourcePayload)}
 
-Complete the normal research, parent review, writing-subagent, verification, local Supabase import, and real-browser localhost preview workflow. All article/database writes must remain in local Supabase. Never publish or import the article to production. Do not open, inspect, print, or modify any .env file; the wrapper has already provided the safe local environment required by repository commands.
+Complete the normal research, parent review, writing-subagent, verification, managed-dev Supabase import, and real-browser localhost preview workflow. Check existing production coverage only with npm run articles:inventory:production. All database and Storage writes must remain in managed dev Supabase. Never publish or import the article to production. Do not open, inspect, print, or modify any .env file; the wrapper has already provided the safe dev environment required by repository commands.
 
 At the end, return the required structured result:
-- completed: final.json exists, verification and browser preview passed, and the matching article row exists in local Supabase
+- completed: final.json exists, verification and browser preview passed, and the matching article row exists in managed dev Supabase
 - skipped: the topic should deliberately not be written (duplicate, unsupported, or no useful angle)
 - blocked: an operational or evidence blocker prevented completion
 - failed: an unrecoverable workflow failure
@@ -334,20 +316,21 @@ At the end, return the required structured result:
 For completed, include the repo-relative final.json path and its slug. For every other status, use null for final_path/result_slug and give a concise reason.`;
 }
 
-function childEnvironment(local: { url: string; serviceRole: string }): NodeJS.ProcessEnv {
+function childEnvironment(dev: { url: string; serviceRole: string }): NodeJS.ProcessEnv {
   const childEnv: NodeJS.ProcessEnv = { ...process.env };
   for (const key of ARTICLE_QUEUE_ENV_KEYS) delete childEnv[key];
+  for (const key of ARTICLE_DEV_ENV_KEYS) delete childEnv[key];
   delete childEnv.ARTICLE_WRITER_QUEUE_ENV_FILE;
-  childEnv.SUPABASE_URL = local.url;
-  childEnv.SUPABASE_SERVICE_ROLE = local.serviceRole;
-  childEnv.ARTICLE_WRITER_LOCAL_ONLY = "true";
+  childEnv.SUPABASE_URL = dev.url;
+  childEnv.SUPABASE_SERVICE_ROLE = dev.serviceRole;
+  childEnv.ARTICLE_WRITER_DEV_ONLY = "true";
   return childEnv;
 }
 
 async function runGrok(
   options: Options,
   row: QueueRow,
-  local: { url: string; serviceRole: string }
+  dev: { url: string; serviceRole: string }
 ): Promise<{ exitCode: number; stdout: string; timedOut: boolean }> {
   const args = [
     "--cwd",
@@ -368,7 +351,7 @@ async function runGrok(
   return new Promise((resolve, reject) => {
     const child = spawn(options.grokBin, args, {
       cwd: options.worktree,
-      env: childEnvironment(local),
+      env: childEnvironment(dev),
       stdio: ["ignore", "pipe", "inherit"]
     });
     let stdout = "";
@@ -451,10 +434,10 @@ function parseGrokOutcome(stdout: string): GrokOutcome {
   throw new Error("Grok output did not contain the required structured outcome.");
 }
 
-async function verifyLocalCompletion(
+async function verifyDevCompletion(
   outcome: GrokOutcome,
   options: Options,
-  local: { url: string; serviceRole: string }
+  dev: { url: string; serviceRole: string }
 ): Promise<{ resultPath: string; resultSlug: string }> {
   if (!outcome.final_path) throw new Error("Grok reported completed without final_path.");
   const absolutePath = path.resolve(options.worktree, outcome.final_path);
@@ -471,16 +454,16 @@ async function verifyLocalCompletion(
   if (!fileSlug || !resultSlug || fileSlug !== resultSlug) {
     throw new Error("Grok result_slug does not match final.json.");
   }
-  const localSupabase = createClient(local.url, local.serviceRole, {
+  const devSupabase = createClient(dev.url, dev.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
-  const { data, error } = await localSupabase
+  const { data, error } = await devSupabase
     .from("articles")
     .select("id, slug, title")
     .eq("slug", resultSlug)
     .maybeSingle();
-  if (error) throw new Error(`Could not verify the local article row: ${error.message}`);
-  if (!data) throw new Error(`Grok reported completion but local Supabase has no article row for ${resultSlug}.`);
+  if (error) throw new Error(`Could not verify the managed-dev article row: ${error.message}`);
+  if (!data) throw new Error(`Grok reported completion but managed dev Supabase has no article row for ${resultSlug}.`);
   return { resultPath: relativePath, resultSlug };
 }
 
@@ -508,8 +491,8 @@ async function markTerminal(
     .eq("status", "processing")
     .eq("locked_by", workerId)
     .select("id");
-  if (error) throw new Error(`Could not mark production queue item ${status}: ${error.message}`);
-  if (!data?.length) throw new Error("Production queue ownership changed before the terminal update.");
+  if (error) throw new Error(`Could not mark dev queue item ${status}: ${error.message}`);
+  if (!data?.length) throw new Error("Dev queue ownership changed before the terminal update.");
 }
 
 async function releaseForRetry(
@@ -536,35 +519,27 @@ async function releaseForRetry(
     .eq("status", "processing")
     .eq("locked_by", workerId)
     .select("id");
-  if (error) throw new Error(`Could not release production queue item after failure: ${error.message}`);
-  if (!data?.length) throw new Error("Production queue ownership changed before retry release.");
+  if (error) throw new Error(`Could not release dev queue item after failure: ${error.message}`);
+  if (!data?.length) throw new Error("Dev queue ownership changed before retry release.");
   console.log(terminal ? `Queue item failed after ${row.attempts} attempt(s).` : `Queue item returned to pending for retry in ${delayMinutes} minutes.`);
 }
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const local = await assertLocalWorkspace(options);
-  const queueCredentials = resolveArticleQueueCredentials({ envFile: options.queueEnvFile });
-  if (isLocalSupabaseUrl(queueCredentials.url) && !options.allowLocalQueue) {
-    throw new Error("Article queue target is local. Use a production queue env file or --allow-local-queue for testing.");
-  }
-  if (options.apply && isLocalSupabaseUrl(queueCredentials.url)) {
-    throw new Error("--apply requires a non-local production queue; local queues are dry-run only.");
-  }
+  const dev = await assertDevWorkspace(options);
 
   const releaseLock = await acquireWriterLock(options.worktree);
   try {
-    const queue = createClient(queueCredentials.url, queueCredentials.serviceRole, {
+    const queue = createClient(dev.url, dev.serviceRole, {
       auth: { autoRefreshToken: false, persistSession: false }
     });
     if (options.apply) await recoverStaleWriterClaims(queue, options.maxAttempts, options.timeoutMinutes + 30);
     const candidate = await selectPendingQueueItem(queue, options);
     if (!candidate) {
-      console.log("No eligible Groq-curated production article is waiting.");
+      console.log("No eligible Groq-curated dev article is waiting.");
       return;
     }
-    console.log(`Queue target: ${supabaseTarget(queueCredentials.url)} (${queueCredentials.source})`);
-    console.log(`Local content database: ${supabaseTarget(local.url)}`);
+    console.log(`Dev queue and content database: ${supabaseTarget(dev.url)}`);
     console.log(`Next article: ${candidate.article_title} [${candidate.article_type}] (${candidate.id})`);
     console.log(`Sources: ${Array.isArray(candidate.source_urls) ? candidate.source_urls.length : candidate.source_url ? 1 : 0}`);
     if (!options.apply) {
@@ -572,7 +547,7 @@ async function main() {
       return;
     }
 
-    const workerId = `grok-local:${os.hostname()}:${process.pid}`;
+    const workerId = `grok-homelab:${os.hostname()}:${process.pid}`;
     const claimed = await claimQueueItem(queue, options, workerId);
     if (!claimed) {
       console.log("The selected article was claimed by another worker; nothing to do.");
@@ -580,20 +555,20 @@ async function main() {
     }
     console.log(`Claimed ${claimed.id}; starting Grok in ${options.worktree}.`);
     try {
-      const result = await runGrok(options, claimed, local);
+      const result = await runGrok(options, claimed, dev);
       const grokOutputPath = await saveGrokOutput(options.worktree, claimed.id, result.stdout);
       console.log(`Grok output: ${grokOutputPath}`);
       if (result.timedOut) throw new Error(`Grok exceeded the ${options.timeoutMinutes}-minute timeout.`);
       if (result.exitCode !== 0) throw new Error(`Grok exited with code ${result.exitCode}.`);
       const outcome = parseGrokOutcome(result.stdout);
       if (outcome.status === "completed") {
-        const verified = await verifyLocalCompletion(outcome, options, local);
+        const verified = await verifyDevCompletion(outcome, options, dev);
         await markTerminal(queue, claimed, workerId, "completed", {
           reason: outcome.reason,
           resultPath: verified.resultPath,
           resultSlug: verified.resultSlug
         });
-        console.log(`Completed locally: ${verified.resultSlug} (${verified.resultPath})`);
+        console.log(`Completed in managed dev: ${verified.resultSlug} (${verified.resultPath})`);
       } else if (outcome.status === "skipped") {
         await markTerminal(queue, claimed, workerId, "skipped", { reason: outcome.reason });
         console.log(`Skipped: ${outcome.reason}`);

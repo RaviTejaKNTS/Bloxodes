@@ -1,0 +1,25 @@
+[Unit]
+Description=Bloxodes managed-dev Grok article writer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=teja
+Group=teja
+WorkingDirectory=/srv/data/bloxodes-article-worker/current
+EnvironmentFile=/etc/bloxodes/article-automation.env
+Environment=NODE_ENV=development
+Environment=ARTICLE_WRITER_WORKTREE=/srv/data/bloxodes-article-worker/current
+ExecStart=/usr/bin/npm run articles:homelab:check -- --component writer
+ExecStart=/usr/bin/npm run articles:writer:homelab -- --apply
+Nice=10
+CPUWeight=20
+MemoryHigh=5G
+MemoryMax=6G
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+TimeoutStartSec=3h
+
+[Install]
+WantedBy=multi-user.target

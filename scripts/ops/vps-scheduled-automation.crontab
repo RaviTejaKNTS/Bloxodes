@@ -20,8 +20,6 @@
 17 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh google-indexing "export GOOGLE_INDEXING_STATE_BACKEND=supabase; npm run indexing:google -- --apply"
 40 9 * * 3 JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh promo-rewards-refresh "export ROBLOX_PROMO_RETIRE_AFTER_MISSES=2; npm run refresh:promo-rewards -- --apply --allow-prod"
 
-22 0,8,16 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh article-topic-discovery "npm run articles:discover -- --apply --allow-prod && npm run articles:curate -- --apply --allow-prod"
-
 15 0 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh events-refresh "export ROBLOX_VIRTUAL_EVENTS_LIMIT=200; npm run collect:virtual-events && npm run seed:event-details -- --all"
 
 10 4 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-early-nyt "npm run sync:puzzles -- --group early-nyt --skip-linkedin-if-missing"

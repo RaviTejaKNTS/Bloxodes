@@ -5,7 +5,7 @@ import path from "node:path";
 
 import { createClient } from "@supabase/supabase-js";
 
-import { isLocalSupabaseUrl, resolveArticleQueueCredentials } from "./article-queue-env";
+import { resolveArticleDevCredentials } from "./article-queue-env";
 
 type TargetStatus = "processing" | "completed" | "skipped" | "failed";
 
@@ -13,7 +13,6 @@ type Options = {
   queueId: string;
   status: TargetStatus;
   apply: boolean;
-  allowProd: boolean;
   worker: string;
   reason: string | null;
   resultPath: string | null;
@@ -33,7 +32,7 @@ type QueueRow = {
 
 function printUsage() {
   console.log(
-    "Usage: npm run articles:queue:update -- --queue-id UUID --status processing|completed|skipped|failed --apply [--allow-prod] [--worker NAME] [--reason TEXT] [--result-path final.json] [--result-slug SLUG]"
+    "Usage: npm run articles:queue:update -- --queue-id UUID --status processing|completed|skipped|failed --apply [--worker NAME] [--reason TEXT] [--result-path final.json] [--result-slug SLUG]"
   );
 }
 
@@ -48,8 +47,7 @@ function parseArgs(argv: string[]): Options {
     queueId: "",
     status: "processing",
     apply: false,
-    allowProd: false,
-    worker: "grok-local",
+    worker: "grok-homelab",
     reason: null,
     resultPath: null,
     resultSlug: null
@@ -74,8 +72,6 @@ function parseArgs(argv: string[]): Options {
       index += 1;
     } else if (arg === "--apply") {
       options.apply = true;
-    } else if (arg === "--allow-prod") {
-      options.allowProd = true;
     } else if (arg === "--worker") {
       options.worker = requireValue(argv, index, arg);
       index += 1;
@@ -132,10 +128,7 @@ function assertTransition(row: QueueRow, status: TargetStatus) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const queue = resolveArticleQueueCredentials();
-  if (!isLocalSupabaseUrl(queue.url) && !options.allowProd) {
-    throw new Error("Refusing a non-local queue update without --allow-prod.");
-  }
+  const queue = resolveArticleDevCredentials();
 
   const completedOutput = options.status === "completed" ? await verifyCompletedOutput(options) : null;
   const supabase = createClient(queue.url, queue.serviceRole, {

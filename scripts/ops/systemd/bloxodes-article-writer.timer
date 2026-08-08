@@ -1,0 +1,20 @@
+[Unit]
+Description=Check the Bloxodes managed-dev article queue ten times daily
+
+[Timer]
+OnCalendar=*-*-* 00:30:00
+OnCalendar=*-*-* 03:00:00
+OnCalendar=*-*-* 05:30:00
+OnCalendar=*-*-* 08:00:00
+OnCalendar=*-*-* 10:30:00
+OnCalendar=*-*-* 13:00:00
+OnCalendar=*-*-* 15:30:00
+OnCalendar=*-*-* 18:00:00
+OnCalendar=*-*-* 20:30:00
+OnCalendar=*-*-* 23:00:00
+Persistent=true
+RandomizedDelaySec=3min
+Unit=bloxodes-article-writer.service
+
+[Install]
+WantedBy=timers.target

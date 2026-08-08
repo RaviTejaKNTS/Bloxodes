@@ -102,7 +102,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `revalidation_events`
   - Publish-trigger queue for the revalidation edge function.
 - `article_discovery_candidates`, `article_curation_runs`
-  - Raw publisher leads and the Groq/Llama batch decision audit. Candidate rows retain source name, canonical source URL, source headline/date, rejection reason, model/confidence, grouped topic key, and promoted queue ID.
+  - Managed-dev raw publisher leads and the Groq/Llama batch decision audit. Candidate rows retain source name, canonical source URL, source headline/date, rejection reason, model/confidence, grouped topic key, and promoted queue ID. Homelab automation owns these rows; production is checked through the GET-only editorial inventory endpoint.
 - `article_generation_queue`, `article_generation_artifacts`
   - Article draft generation queue state and per-run model/source/validation audit artifacts. Source-discovered `agent_runner` work is eligible only after Groq curation and retains all grouped publisher links in `source_urls` and `source_items`.
 - RPC `search_site`

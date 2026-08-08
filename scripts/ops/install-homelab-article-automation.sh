@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ "${EUID}" -ne 0 ]]; then
+  echo "Run this installer with sudo." >&2
+  exit 1
+fi
+
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+UNIT_SOURCE="${REPO_ROOT}/scripts/ops/systemd"
+ENV_DIR="/etc/bloxodes"
+ENV_PATH="${ENV_DIR}/article-automation.env"
+
+if [[ "${REPO_ROOT}" != "/srv/data/bloxodes-article-worker/current" ]]; then
+  echo "Expected the worker checkout at /srv/data/bloxodes-article-worker/current; found ${REPO_ROOT}." >&2
+  exit 1
+fi
+
+install -d -m 0750 -o root -g teja "${ENV_DIR}"
+if [[ ! -e "${ENV_PATH}" ]]; then
+  install -m 0600 -o root -g teja \
+    "${REPO_ROOT}/docs/automation/homelab-article-automation.env.example" \
+    "${ENV_PATH}"
+  echo "Created ${ENV_PATH} with placeholders; replace them before enabling timers."
+fi
+
+for unit in \
+  bloxodes-article-discovery.service \
+  bloxodes-article-discovery.timer \
+  bloxodes-article-writer.service \
+  bloxodes-article-writer.timer; do
+  install -m 0644 "${UNIT_SOURCE}/${unit}" "/etc/systemd/system/${unit}"
+done
+
+systemctl daemon-reload
+systemctl disable bloxodes-article-discovery.timer bloxodes-article-writer.timer >/dev/null 2>&1 || true
+
+echo "Installed Bloxodes article units in an inactive state."
+echo "After credentials and Grok authentication are ready, run the readiness checks and enable both timers."

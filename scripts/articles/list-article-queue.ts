@@ -2,7 +2,7 @@ import "../shared/load-env";
 
 import { createClient } from "@supabase/supabase-js";
 
-import { resolveArticleQueueCredentials } from "./article-queue-env";
+import { resolveArticleDevCredentials } from "./article-queue-env";
 
 type QueueStatus = "pending" | "processing" | "completed" | "skipped" | "failed";
 
@@ -54,7 +54,7 @@ function parseStatus(value: string | undefined): QueueStatus {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const queue = resolveArticleQueueCredentials();
+  const queue = resolveArticleDevCredentials();
 
   const supabase = createClient(queue.url, queue.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }

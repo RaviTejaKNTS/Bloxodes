@@ -1,69 +1,93 @@
-# Local Grok Article Writer
+# Homelab Article Automation
 
-The production database owns only article discovery and queue state. Finished article content remains in local Supabase until it is manually reviewed and promoted.
+Article discovery, Groq curation, the writing queue, draft articles, and draft media all live in one managed development Supabase project. The homelab never receives a production Supabase service-role credential.
+
+Production overlap checks use the public, GET-only endpoint at `/api/articles/editorial-inventory`. It returns only published page family, title, key, and optional universe ID. It cannot mutate production.
+
+## Credentials
+
+The homelab systemd services load `/etc/bloxodes/article-automation.env`. Start from `docs/automation/homelab-article-automation.env.example` and keep the installed file mode `0600`.
+
+Required later:
+
+- `ARTICLE_DEV_SUPABASE_URL` and `ARTICLE_DEV_SUPABASE_SERVICE_ROLE` for the managed development project.
+- `SUPABASE_MEDIA_BUCKET` and `SUPABASE_MEDIA_PUBLIC_URL` for draft article images.
+- `GROQ_API_KEY` for discovery curation.
+- Grok CLI authentication under the `teja` account.
+
+Never add production `SUPABASE_SERVICE_ROLE` to this file. The scripts accept only localhost compatibility or an HTTPS `*.supabase.co` managed-dev project and explicitly reject the known Bloxodes production hosts.
 
 ## Data Boundary
 
-- `ARTICLE_QUEUE_ENV_FILE` points to an env file containing the production `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE` used by the wrapper.
-- Normal `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE` must resolve to local Supabase through `.env.local`.
-- The wrapper removes `ARTICLE_QUEUE_*` and the production env-file path before starting Grok. It also sets `ARTICLE_WRITER_LOCAL_ONLY=true`, which makes repository scripts load only `.env.local`-style files and skip the base production `.env`.
-- Grok can research, edit the persistent worktree, run the local app, and import to local Supabase. Production queue credentials are not passed through its environment or loaded by repository scripts.
-- The wrapper changes the production queue row to `completed` only after `final.json` exists and the matching slug is present in the local `articles` table.
+- Discovery inserts only into managed-dev `article_discovery_candidates`.
+- Curation reads live published production coverage through the read-only inventory endpoint and writes decisions/queue rows only to managed dev.
+- The writer claims and completes managed-dev `article_generation_queue` rows.
+- Grok receives normal `SUPABASE_*` variables mapped to the managed-dev project only.
+- Finished `final.json`, draft article rows, and draft Storage objects remain in managed dev until manual promotion.
+- Manual promotion is the only workflow allowed to receive both dev and production credentials.
 
-The root `.env` currently represents production and `.env.local` represents local development, so local commands can use:
+## Readiness
 
-```bash
-ARTICLE_QUEUE_ENV_FILE=.env npm run articles:writer:local
-```
-
-The command is a dry run by default. It prints the next eligible topic without claiming it or starting Grok.
-
-## Run One Article
-
-Confirm local Supabase is running, then execute:
+The readiness command is read-only:
 
 ```bash
-ARTICLE_QUEUE_ENV_FILE=.env npm run articles:writer:local -- --apply
+npm run articles:homelab:check
+npm run articles:homelab:check -- --component discovery
+npm run articles:homelab:check -- --component writer
 ```
 
-Useful targeted and safety options:
+It checks the required managed-dev tables, production inventory endpoint, Groq key, Grok CLI, and Chrome/Chromium.
+
+## Manual Commands
+
+Discovery and curation:
 
 ```bash
-ARTICLE_QUEUE_ENV_FILE=.env npm run articles:writer:local -- --queue-id <uuid>
-ARTICLE_QUEUE_ENV_FILE=.env npm run articles:writer:local -- --max-attempts 3 --timeout-minutes 120
+npm run articles:discover -- --apply
+npm run articles:curate -- --apply
 ```
 
-Only one writer can run in a worktree. Its lock and logs live under `tmp/article-writer/`. A failed or blocked run returns the queue item to `pending` with exponential backoff until it reaches the attempt limit. Stale local claims are recovered by the next scheduled run.
-
-## Install the macOS Schedule
-
-Validate the launchd configuration without changing the machine:
+Inspect production overlap without production credentials:
 
 ```bash
-npm run articles:writer:launchd -- --queue-env-file .env
+npm run articles:inventory:production -- --search "game topic"
+npm run articles:inventory:production -- --family article --universe-id 123456 --json
 ```
 
-Activate ten local checks per day:
+Inspect or write one managed-dev queue item:
 
 ```bash
-npm run articles:writer:launchd -- --queue-env-file .env --install
+npm run articles:queue:list -- --status pending
+npm run articles:writer:homelab
+npm run articles:writer:homelab -- --apply
 ```
 
-The checks run at `00:30`, `03:00`, `05:30`, `08:00`, `10:30`, `13:00`, `15:30`, `18:00`, `20:30`, and `23:00` in the Mac's local timezone. Output goes to:
+The writer is dry-run by default. Only one writer can run in the worktree; lock files and structured Grok outputs remain under `tmp/article-writer/`.
 
-```text
-tmp/article-writer/launchd.stdout.log
-tmp/article-writer/launchd.stderr.log
-```
+## Homelab systemd
 
-Disable and remove the job with:
+The checked-in units live under `scripts/ops/systemd/` and expect:
+
+- repository: `/srv/data/bloxodes-article-worker/current`
+- Linux user/group: `teja`
+- environment: `/etc/bloxodes/article-automation.env`
+
+From the expected worker checkout, install the four unit files and placeholder environment in an intentionally inactive state:
 
 ```bash
-npm run articles:writer:launchd -- --uninstall
+sudo bash scripts/ops/install-homelab-article-automation.sh
 ```
 
-Install only after the article discovery/curation migration is deployed to production. The VPS discovery and Groq curation job runs three times daily at `00:22`, `08:22`, and `16:22` in the VPS cron timezone.
+Replace the placeholders in `/etc/bloxodes/article-automation.env`, authenticate Grok as `teja`, and leave both timers disabled until readiness passes. Once credentials and Grok authentication exist:
+
+```bash
+sudo systemctl start bloxodes-article-discovery.service
+sudo systemctl start bloxodes-article-writer.service
+sudo systemctl enable --now bloxodes-article-discovery.timer bloxodes-article-writer.timer
+```
+
+Discovery runs three times daily. The writer checks ten times daily, with one writer at a time, reduced CPU/IO priority, a 5 GiB memory high-water mark, and a 6 GiB hard memory limit.
 
 ## Manual Publication
 
-The local writer does not publish. Review the localhost article, `brief.md`, `final.json`, sources, images, and local `articles` row. Promote approved content through the normal controlled production import/release flow.
+Review the localhost article, `brief.md`, `final.json`, sources, draft images, and managed-dev `articles` row. Promotion must copy approved Storage objects to production and rewrite their public URLs before importing the production article row.

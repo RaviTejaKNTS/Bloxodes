@@ -5,6 +5,8 @@ import { gunzipSync } from "node:zlib";
 import { createClient } from "@supabase/supabase-js";
 import * as cheerio from "cheerio";
 
+import { resolveArticleDevCredentials } from "./article-queue-env";
+
 type SourceName =
   | "pro-game-guides"
   | "destructoid"
@@ -26,7 +28,6 @@ type Candidate = {
 
 type Options = {
   apply: boolean;
-  allowProd: boolean;
   maxAgeHours: number;
   perSource: number;
   sources: Set<SourceName>;
@@ -58,7 +59,7 @@ const SEARCH_LOOKBACK_MS = 7 * 24 * 60 * 60 * 1000;
 
 function printUsage() {
   console.log(
-    "Usage: npm run articles:discover -- [--apply] [--allow-prod] [--max-age-hours N] [--per-source N] [--source NAME]"
+    "Usage: npm run articles:discover -- [--apply] [--max-age-hours N] [--per-source N] [--source NAME]"
   );
   console.log(`Sources: ${ALL_SOURCES.join(", ")}`);
 }
@@ -72,7 +73,6 @@ function readPositiveNumber(value: string | undefined, flag: string): number {
 function parseArgs(argv: string[]): Options {
   const options: Options = {
     apply: false,
-    allowProd: false,
     maxAgeHours: 96,
     perSource: 25,
     sources: new Set(ALL_SOURCES)
@@ -86,8 +86,6 @@ function parseArgs(argv: string[]): Options {
       process.exit(0);
     } else if (arg === "--apply") {
       options.apply = true;
-    } else if (arg === "--allow-prod") {
-      options.allowProd = true;
     } else if (arg === "--max-age-hours") {
       options.maxAgeHours = readPositiveNumber(argv[++index], arg);
     } else if (arg.startsWith("--max-age-hours=")) {
@@ -114,14 +112,6 @@ function parseSource(value: string | undefined): SourceName {
     throw new Error(`Unknown source: ${value ?? "(missing)"}`);
   }
   return value as SourceName;
-}
-
-function isLocalSupabaseUrl(value: string): boolean {
-  try {
-    return ["localhost", "127.0.0.1", "::1"].includes(new URL(value).hostname);
-  } catch {
-    return false;
-  }
 }
 
 async function fetchResponse(url: string): Promise<Response> {
@@ -431,10 +421,8 @@ async function collectSource(sourceName: SourceName): Promise<Candidate[]> {
 }
 
 async function insertCandidates(candidates: Candidate[]) {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE;
-  if (!url || !key) throw new Error("SUPABASE_URL and SUPABASE_SERVICE_ROLE are required with --apply.");
-  const supabase = createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });
+  const dev = resolveArticleDevCredentials();
+  const supabase = createClient(dev.url, dev.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });
   let inserted = 0;
   let duplicates = 0;
 
@@ -463,12 +451,7 @@ async function insertCandidates(candidates: Candidate[]) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  if (options.apply) {
-    const supabaseUrl = process.env.SUPABASE_URL ?? "";
-    if (!isLocalSupabaseUrl(supabaseUrl) && !options.allowProd) {
-      throw new Error("Refusing a non-local queue write without --allow-prod.");
-    }
-  }
+  if (options.apply) resolveArticleDevCredentials();
 
   const settled = await Promise.allSettled(
     [...options.sources].map(async (sourceName) => ({

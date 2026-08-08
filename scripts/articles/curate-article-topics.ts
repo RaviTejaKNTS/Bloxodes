@@ -7,10 +7,11 @@ import { parse as parseDotenv } from "dotenv";
 import { z } from "zod";
 
 import { slugify } from "@/lib/slug";
+import { resolveArticleDevCredentials } from "./article-queue-env";
+import { fetchProductionEditorialInventory } from "./production-editorial-inventory";
 
 type Options = {
   apply: boolean;
-  allowProd: boolean;
   limit: number;
   model: string;
 };
@@ -84,18 +85,6 @@ const CurationResponseSchema = z.object({
 
 type CurationDecision = z.infer<typeof DecisionSchema>;
 
-const INVENTORY_CONFIGS = [
-  { table: "articles", family: "article", title: "title", key: "slug", visibility: ["is_published", true] as const },
-  { table: "code_pages", family: "codes", title: "name", key: "slug", visibility: ["is_published", true] as const },
-  { table: "wiki_pages", family: "wiki", title: "title", key: "slug", visibility: ["is_published", true] as const },
-  { table: "wiki_collection_pages", family: "collection", title: "title", key: "code", visibility: ["is_published", true] as const },
-  { table: "catalog_pages", family: "catalog", title: "title", key: "code", visibility: ["is_published", true] as const },
-  { table: "events_pages", family: "event", title: "title", key: "slug", visibility: ["is_published", true] as const },
-  { table: "checklist_pages", family: "checklist", title: "title", key: "slug", visibility: ["is_public", true] as const },
-  { table: "quiz_pages", family: "quiz", title: "title", key: "code", visibility: ["is_published", true] as const },
-  { table: "tools", family: "tool", title: "title", key: "code", visibility: ["is_published", true] as const }
-];
-
 const STOP_WORDS = new Set([
   "a", "an", "and", "are", "as", "at", "all", "best", "complete", "for", "from", "guide", "how", "in", "is",
   "list", "new", "of", "on", "roblox", "the", "tier", "to", "update", "what", "when", "where", "with"
@@ -103,7 +92,7 @@ const STOP_WORDS = new Set([
 
 function printUsage() {
   console.log(
-    "Usage: npm run articles:curate -- [--apply] [--allow-prod] [--limit N] [--model MODEL]"
+    "Usage: npm run articles:curate -- [--apply] [--limit N] [--model MODEL]"
   );
   console.log("GROQ_API_KEY is required. For local reuse, set GROQ_ENV_FILE=/absolute/path/to/.env.");
 }
@@ -111,7 +100,6 @@ function printUsage() {
 function parseArgs(argv: string[]): Options {
   const options: Options = {
     apply: false,
-    allowProd: false,
     limit: 60,
     model: process.env.ARTICLE_CURATION_MODEL?.trim() || DEFAULT_MODEL
   };
@@ -122,8 +110,6 @@ function parseArgs(argv: string[]): Options {
       process.exit(0);
     } else if (arg === "--apply") {
       options.apply = true;
-    } else if (arg === "--allow-prod") {
-      options.allowProd = true;
     } else if (arg === "--limit") {
       options.limit = parseLimit(argv[++index]);
     } else if (arg.startsWith("--limit=")) {
@@ -151,14 +137,6 @@ function requireValue(value: string | undefined, flag: string): string {
   const trimmed = value?.trim();
   if (!trimmed) throw new Error(`${flag} requires a value.`);
   return trimmed;
-}
-
-function isLocalSupabaseUrl(value: string): boolean {
-  try {
-    return ["localhost", "127.0.0.1", "::1"].includes(new URL(value).hostname);
-  } catch {
-    return false;
-  }
 }
 
 function loadGroqApiKey(): string {
@@ -217,36 +195,7 @@ function deterministicRejection(candidate: CandidateRow): { code: "codes" | "lin
   return null;
 }
 
-async function fetchPagedRows(
-  supabase: SupabaseClient,
-  config: (typeof INVENTORY_CONFIGS)[number]
-): Promise<InventoryItem[]> {
-  const rows: InventoryItem[] = [];
-  const pageSize = 1000;
-  for (let from = 0; ; from += pageSize) {
-    const { data, error } = await supabase
-      .from(config.table)
-      .select(`${config.title},${config.key}`)
-      .eq(config.visibility[0], config.visibility[1])
-      .range(from, from + pageSize - 1);
-    if (error) throw new Error(`Could not load ${config.table} inventory: ${error.message}`);
-    const page = (data ?? []) as unknown as Record<string, unknown>[];
-    for (const row of page) {
-      const rawTitle = row[config.title];
-      const rawKey = row[config.key];
-      const title = typeof rawTitle === "string" ? rawTitle.trim() : "";
-      const key = typeof rawKey === "string" ? rawKey.trim() : "";
-      if (title && key) rows.push({ family: config.family, title, key });
-    }
-    if (page.length < pageSize) break;
-  }
-  return rows;
-}
-
-async function loadRelevantInventory(supabase: SupabaseClient, candidates: CandidateRow[]): Promise<InventoryItem[]> {
-  const familyRows = await Promise.all(INVENTORY_CONFIGS.map((config) => fetchPagedRows(supabase, config)));
-  const allRows = familyRows.flat();
-
+function loadRelevantInventory(allRows: InventoryItem[], candidates: CandidateRow[]): InventoryItem[] {
   const candidateTokenSets = candidates.map((candidate) => tokens(candidate.source_title));
   return allRows
     .map((item) => ({ item, score: Math.max(...candidateTokenSets.map((set) => overlapScore(set, item))) }))
@@ -631,14 +580,9 @@ async function recoverStaleCurationClaims(supabase: SupabaseClient) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const supabaseUrl = process.env.SUPABASE_URL ?? "";
-  const serviceRole = process.env.SUPABASE_SERVICE_ROLE ?? "";
-  if (!supabaseUrl || !serviceRole) throw new Error("SUPABASE_URL and SUPABASE_SERVICE_ROLE are required.");
-  if (options.apply && !isLocalSupabaseUrl(supabaseUrl) && !options.allowProd) {
-    throw new Error("Refusing non-local curation writes without --allow-prod.");
-  }
+  const dev = resolveArticleDevCredentials();
   const apiKey = loadGroqApiKey();
-  const supabase = createClient(supabaseUrl, serviceRole, {
+  const supabase = createClient(dev.url, dev.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
   if (options.apply) await recoverStaleCurationClaims(supabase);
@@ -703,7 +647,10 @@ async function main() {
       .map((_candidate, index) => index)
       .filter((index) => !deterministicIds.has(`C${index}`));
     const groqCandidates = groqOriginalIndexes.map((index) => candidates[index]);
-    const inventory = groqCandidates.length ? await loadRelevantInventory(supabase, groqCandidates) : [];
+    const productionInventory = groqCandidates.length
+      ? (await fetchProductionEditorialInventory()).items
+      : [];
+    const inventory = loadRelevantInventory(productionInventory, groqCandidates);
     const groqResult = groqCandidates.length
       ? await curateWithGroq(apiKey, options.model, groqCandidates, inventory)
       : { decisions: [] as CurationDecision[], raw: { response: { decisions: [] } } };

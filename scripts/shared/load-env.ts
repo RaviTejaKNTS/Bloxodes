@@ -5,9 +5,10 @@ import { config as loadDotenv } from "dotenv";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const nodeEnv = process.env.NODE_ENV ?? "development";
-const localWriterOnly = process.env.ARTICLE_WRITER_LOCAL_ONLY === "true";
+const isolatedArticleWriter =
+  process.env.ARTICLE_WRITER_LOCAL_ONLY === "true" || process.env.ARTICLE_WRITER_DEV_ONLY === "true";
 
-const candidates = (localWriterOnly
+const candidates = (isolatedArticleWriter
   ? [`.env.${nodeEnv}.local`, ".env.local"]
   : [
       `.env.${nodeEnv}.local`,

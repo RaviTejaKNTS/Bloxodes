@@ -16,12 +16,16 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 
 ## Start
 
-Start by checking if we have already covered this article on the production db. This is to make sure we are not writing an existing article.
+Start by checking if we have already covered this article in production. Use the GET-only inventory command; never query production Supabase directly:
+
+```bash
+npm run articles:inventory:production -- --search "<game or topic>" --json
+```
 
 If the article belongs to a game:
 
-1. Find the game's `roblox_universes` row first (match on `name`/`slug`; the visible game name may differ from the prompt's wording, so try variations). Record its `universe_id` — the writing step needs it.
-2. List the game's existing published articles by querying `articles` on that `universe_id` (do not rely only on a loose `ilike '%keyword%'` on title — that misses articles whose slug or title spells the game differently).
+1. Find the game's `universe_id` from the production inventory or the managed-dev `roblox_universes` mirror. Match on name/slug variations when needed. Record it because the writing step needs it.
+2. List the game's existing published articles with `npm run articles:inventory:production -- --family article --universe-id <id> --json` (do not rely only on a loose title search, which misses articles whose slug or title spells the game differently).
 3. Treat those same-game articles as internal-link candidates and list them in the brief, with slugs, so the writing step can link to at least 2 real pages.
 4. Confirm none of them already cover this exact topic before continuing.
 

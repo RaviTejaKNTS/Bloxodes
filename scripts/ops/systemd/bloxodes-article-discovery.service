@@ -1,0 +1,23 @@
+[Unit]
+Description=Bloxodes article discovery and Groq curation
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=teja
+Group=teja
+WorkingDirectory=/srv/data/bloxodes-article-worker/current
+EnvironmentFile=/etc/bloxodes/article-automation.env
+Environment=NODE_ENV=development
+ExecStart=/usr/bin/npm run articles:homelab:check -- --component discovery
+ExecStart=/usr/bin/npm run articles:discover -- --apply
+ExecStart=/usr/bin/npm run articles:curate -- --apply
+Nice=10
+CPUWeight=30
+IOSchedulingClass=best-effort
+IOSchedulingPriority=6
+TimeoutStartSec=45min
+
+[Install]
+WantedBy=multi-user.target
