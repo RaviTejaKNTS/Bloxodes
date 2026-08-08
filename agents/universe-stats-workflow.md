@@ -2,7 +2,7 @@
 
 This workflow powers `/stats` and Roblox universe metadata.
 
-Last verified runtime notes: 2026-06-08.
+Last verified runtime notes: 2026-08-08.
 
 ## Data Rules
 
@@ -112,6 +112,8 @@ docker run --rm \
 ```
 
 The worker and Supabase share the VPS, so the runner deliberately uses Kong on the private `supabase_default` Docker network. This avoids Cloudflare gateway timeouts for long database RPCs and transient public-path 502s during bulk refreshes. `STATS_WORKER_DOCKER_NETWORK` and `STATS_WORKER_SUPABASE_INTERNAL_URL` are host-shell overrides; putting them only in `env.stats-worker` does not change wrapper routing. Keep `SUPABASE_MEDIA_PUBLIC_URL=https://media.bloxodes.com` in `env.stats-worker` so stored public media URLs never use the internal hostname.
+
+The self-hosted Supabase Kong config must give the `rest-v1` service a `read_timeout` of `300000` milliseconds. Full daily rank RPCs allow a PostgreSQL `statement_timeout` of 240 seconds and can legitimately exceed Kong's 60-second default. The live config is `/home/codex-admin/bloxodes-supabase/volumes/api/kong.yml`; validate it with `kong config parse` and recreate only the `kong` Compose service after changing it. A missing override produces an internal HTTP 504 with `upstream timed out while reading response header` even though PostgreSQL and the rank function are healthy.
 
 After a production pull, install the checked-in wrapper explicitly because image builds do not update the external executable:
 

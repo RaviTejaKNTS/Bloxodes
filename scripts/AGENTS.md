@@ -156,6 +156,7 @@ These files are operational jobs, imports, backfills, collectors, and automation
 - If a script creates or updates publishable content, review `/api/revalidate` coverage and any relevant Supabase revalidation trigger flow.
 - If a job becomes part of the normal workflow, add a package script and update `agents/scripts/agents.md`.
 - Scheduled production jobs that do not need GitHub checkout state should run through the VPS stats worker and stay manual-only in GitHub Actions. Keep Draft Code Page Generation and Discover Beebom Code Pages scheduled in GitHub unless the product direction changes.
+- VPS jobs use the private `supabase_default` network and `http://supabase-kong:8000`. Keep the self-hosted Kong `rest-v1` service `read_timeout` at `300000` milliseconds so database RPCs with a 240-second statement timeout are not cut off by Kong's 60-second default.
 - Keep editorial page slugs separate from stats slugs. `roblox_universes.slug` belongs to `/stats/games/*`; scripts must not copy it into `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_collection_pages.wiki_slug`.
 
 ## Script Authoring Checklist
