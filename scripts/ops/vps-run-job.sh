@@ -16,6 +16,11 @@ DOCKER_NETWORK="${STATS_WORKER_DOCKER_NETWORK:-supabase_default}"
 SUPABASE_INTERNAL_URL="${STATS_WORKER_SUPABASE_INTERNAL_URL:-http://supabase-kong:8000}"
 mkdir -p "$LOG_DIR"
 
+if ! docker network inspect "$DOCKER_NETWORK" >/dev/null 2>&1; then
+  echo "stats worker Docker network not found: $DOCKER_NETWORK" >&2
+  exit 1
+fi
+
 exec 9>"$BASE/$JOB.lock"
 flock -n 9 || {
   echo "$(date -Is) $JOB already running" >> "$LOG_DIR/$JOB.log"

@@ -56,8 +56,8 @@ Stats and universe jobs no longer run from GitHub Actions. GitHub Actions should
 Production is split across three places:
 
 ```txt
-VPS worker      -> NEW/WARM/COLD/discovery/deep enrichment/audit
-Northflank      -> HOT hourly refresh + rank jobs
+VPS worker      -> NEW/WARM/COLD/ranks/indexes/discovery/deep enrichment/audit
+Northflank      -> HOT hourly refresh only
 Supabase cron   -> DB-local rollups/pruning/health/revalidation drain
 ```
 
@@ -111,7 +111,15 @@ docker run --rm \
   bloxodes-stats-worker:production
 ```
 
-The worker and Supabase share the VPS, so the runner deliberately uses Kong on the private `supabase_default` Docker network. This avoids Cloudflare gateway timeouts for long database RPCs and transient public-path 502s during bulk refreshes. Override `STATS_WORKER_DOCKER_NETWORK` or `STATS_WORKER_SUPABASE_INTERNAL_URL` only if the local stack names change.
+The worker and Supabase share the VPS, so the runner deliberately uses Kong on the private `supabase_default` Docker network. This avoids Cloudflare gateway timeouts for long database RPCs and transient public-path 502s during bulk refreshes. `STATS_WORKER_DOCKER_NETWORK` and `STATS_WORKER_SUPABASE_INTERNAL_URL` are host-shell overrides; putting them only in `env.stats-worker` does not change wrapper routing. Keep `SUPABASE_MEDIA_PUBLIC_URL=https://media.bloxodes.com` in `env.stats-worker` so stored public media URLs never use the internal hostname.
+
+After a production pull, install the checked-in wrapper explicitly because image builds do not update the external executable:
+
+```txt
+cp /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh.<timestamp>.bak
+install -m 0755 /home/codex-admin/bloxodes-stats-worker/repo/scripts/ops/vps-run-job.sh /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh
+sh -n /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh
+```
 
 `Dockerfile.stats-worker` executes:
 
@@ -123,7 +131,7 @@ So the `codex-admin` crontab command is the source of truth for each VPS job.
 
 Current VPS crontab block (install the exact block from `scripts/ops/vps-universe-stats.crontab`):
 
-The block intentionally contains no HOT or hourly rank job. Northflank is the sole HOT/rank owner. Full-population rank jobs execute through `refresh_universe_rank_snapshots()` inside PostgreSQL so they do not page the complete sorted population through PostgREST. WARM runs twice daily; COLD processes 4,000 rows in every hour except the two WARM hours, providing 88,000 daily COLD slots for the 24-hour public freshness requirement. The hourly `stats-current-index` job is the only scheduled full read-index rebuild.
+The block intentionally contains no HOT refresh. Northflank remains its sole owner for separate Roblox API/IP capacity. Hourly and daily rank jobs are VPS-owned because their long database RPCs must use the internal Supabase route rather than Cloudflare. Full-population rank jobs execute through `refresh_universe_rank_snapshots()` inside PostgreSQL so they do not page the complete sorted population through PostgREST. WARM runs twice daily; COLD processes 4,000 rows in every hour except the two WARM hours, providing 88,000 daily COLD slots for the 24-hour public freshness requirement. The hourly `stats-current-index` job is the only scheduled full read-index rebuild.
 
 The item pipeline schedule is now owned by `scripts/ops/vps-scheduled-automation.crontab`. Its stages deliberately use separate worker locks:
 
@@ -301,7 +309,7 @@ Only add more countries beyond this list if the Explore crawl duration and Roblo
 
 ### Northflank
 
-Northflank stats account `_1` currently owns the fast ranking/stats jobs.
+Northflank stats account `_1` owns only the HOT Roblox refresh job.
 
 Project:
 
@@ -313,21 +321,13 @@ Current Northflank stats jobs:
 
 ```txt
 stats-hot-hourly
-stats-daily-ranks
 ```
 
 `stats-hot-hourly`:
 
 ```txt
 schedule: hourly at :12 UTC
-purpose: refresh HOT Roblox universe stats and write hourly playing ranks
-```
-
-`stats-daily-ranks`:
-
-```txt
-schedule: daily at 00:50 UTC
-purpose: snapshot complete daily Roblox universe rank history
+purpose: refresh HOT Roblox universe stats and enqueue stats revalidation; use --skip-index-refresh and do not chain ranks
 ```
 
 Northflank does not run the VPS discovery job. Do not look for `stats-discovery` in the Northflank stats account.
@@ -373,8 +373,9 @@ npm run enrich:universes:deep -- --tier HOT
 
 | Job area | Owner | Schedule |
 | --- | --- | --- |
-| HOT refresh + hourly playing ranks | Northflank `stats-hot-hourly` | Hourly at `:12` UTC, `:42` IST |
-| Daily all-game ranks | Northflank `stats-daily-ranks` | Daily `00:50` UTC, `06:20` IST |
+| HOT refresh | Northflank `stats-hot-hourly` | Hourly at `:12` UTC, `:42` IST |
+| Hourly playing ranks | VPS worker `stats-hourly-ranks` | Hourly at `:30` UTC |
+| Daily all-game ranks | VPS worker `stats-daily-ranks` | Daily `00:50` UTC, `06:20` IST |
 | NEW refresh | VPS worker `stats-new-refresh` | Every 2 hours at `:07` UTC, `:37` IST |
 | Priority discovery | VPS worker `stats-discovery-priority` | Hourly at `:22` UTC, `:52` IST |
 | WARM refresh | VPS worker `stats-warm-refresh` | Every 12 hours at `:32` UTC, `:02` IST |
