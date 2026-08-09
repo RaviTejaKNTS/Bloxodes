@@ -147,6 +147,10 @@ function ratingPercent(likes: number | null, dislikes: number | null): number | 
   return Math.round((up / total) * 1000) / 10;
 }
 
+export function hasAnyFreshUniverseStat(stats: Pick<PublicStats, "playing" | "visits" | "favorites" | "likes" | "dislikes">) {
+  return stats.playing != null || stats.visits != null || stats.favorites != null || stats.likes != null || stats.dislikes != null;
+}
+
 function delta(end: number | null, start: number | null): number | null {
   if (end == null || start == null) return null;
   return end - start;
@@ -406,14 +410,17 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
   const updateEventPayloads = [];
   const detailEvents: RevalidationEvent[] = [];
   const missingRows = chunk.filter((row) => !values[row.universe_id]);
+  const emptyRows = chunk.filter((row) => {
+    const stats = values[row.universe_id];
+    return stats != null && !hasAnyFreshUniverseStat(stats);
+  });
   await markMissingResponses(missingRows);
+  await markFailures(emptyRows, new Error("Roblox game details response contained no usable stats"));
   let updated = 0;
   for (const row of chunk) {
     const stats = values[row.universe_id];
     if (!stats) continue;
-    const hasAnyFreshStat =
-      stats.playing != null || stats.visits != null || stats.favorites != null || stats.likes != null || stats.dislikes != null;
-    if (!hasAnyFreshStat) continue;
+    if (!hasAnyFreshUniverseStat(stats)) continue;
     hourlyPayloads.push(buildHourlyPayload(row, stats, existingHourly.get(row.universe_id), hourStart, sampledAtIso));
     if (shouldRevalidateDetail(row, stats) && detailEvents.length < DETAIL_REVALIDATION_LIMIT) {
       detailEvents.push({ type: "stats", slug: `games/${row.slug}` });
@@ -502,7 +509,7 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
   return {
     attempted: chunk.length,
     updated,
-    missing: missingRows.length,
+    missing: missingRows.length + emptyRows.length,
     hourlyRows: hourlyPayloads.length,
     updateEvents: updateEventPayloads.length,
     detailEvents

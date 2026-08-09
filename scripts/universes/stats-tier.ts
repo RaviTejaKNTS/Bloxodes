@@ -31,5 +31,8 @@ export function assignStatsTier(input: TierInput): { tier: StatsTier; reason: st
   if ((visits ?? 0) >= 10_000_000) {
     return { tier: "WARM", reason: "visits_gte_10m", refreshHours: 12 };
   }
-  return { tier: "COLD", reason: "remaining_valid_game", refreshHours: 24 };
+  // Stay one scheduler interval ahead of the public 24-hour player-count
+  // expiry. Exact 24-hour scheduling leaves healthy rows hidden while they
+  // wait for the next hourly COLD worker and index rebuild.
+  return { tier: "COLD", reason: "remaining_valid_game", refreshHours: 23 };
 }

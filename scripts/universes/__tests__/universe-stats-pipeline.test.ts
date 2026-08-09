@@ -5,7 +5,7 @@ import test from "node:test";
 import { statsPipelineLeaseName } from "../../shared/stats-pipeline-lease";
 import { shouldUseDatabaseRankRefresh } from "../rank-universe-stats";
 import { assignStatsTier } from "../stats-tier";
-import { universeClaimBatchSize } from "../update-universe-hourly-stats";
+import { hasAnyFreshUniverseStat, universeClaimBatchSize } from "../update-universe-hourly-stats";
 
 test("universe claims stay below the production Data API response cap", () => {
   assert.equal(universeClaimBatchSize(Number.POSITIVE_INFINITY), 500);
@@ -30,7 +30,30 @@ test("scheduled full-population rank jobs use the database implementation", () =
 test("every valid universe tier remains visible inside the 24-hour freshness window", () => {
   assert.equal(assignStatsTier({ playing: 100, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 1);
   assert.equal(assignStatsTier({ visits: 10_000_000, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 12);
-  assert.equal(assignStatsTier({ playing: 0, visits: 0, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 24);
+  assert.equal(assignStatsTier({ playing: 0, visits: 0, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 23);
+});
+
+test("all-null Roblox detail responses are not treated as successful refreshes", () => {
+  assert.equal(
+    hasAnyFreshUniverseStat({ playing: null, visits: null, favorites: null, likes: null, dislikes: null }),
+    false
+  );
+  assert.equal(
+    hasAnyFreshUniverseStat({ playing: 0, visits: null, favorites: null, likes: null, dislikes: null }),
+    true
+  );
+});
+
+test("database scheduling keeps visibility headroom without bypassing unavailable cooldowns", () => {
+  const migration = readFileSync(
+    new URL("../../../supabase/migrations/20260920000003_align_cold_stats_with_public_freshness.sql", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(migration, /last_playing_refreshed_at \+ interval '23 hours'/);
+  assert.match(migration, /statement_timestamp\(\) \+ interval '1 hour'/);
+  assert.match(migration, /stats_tier_reason = 'game_details_unavailable'/);
+  assert.match(migration, /before update of/);
 });
 
 test("VPS owns database-only ranks and the serialized index exactly once", () => {
