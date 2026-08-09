@@ -89,7 +89,7 @@ file in Grok prompts or logs.
 
 The checked-in units live under `scripts/ops/systemd/` and expect:
 
-- repository: `/srv/data/bloxodes-article-worker/current`
+- repository: `/home/teja/projects/Bloxodes`
 - Linux user/group: `teja`
 - environment: `/etc/bloxodes/article-automation.env`
 
