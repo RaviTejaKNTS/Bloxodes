@@ -8,6 +8,10 @@ import sharp from "sharp";
 import { createHash } from "node:crypto";
 
 import { slugify } from "@/lib/slug";
+import {
+  pickEligibleArticleAuthorId,
+  type ArticleAuthorCandidate
+} from "../shared/article-author-selection";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
 import { tavilySearch } from "../shared/tavily";
 
@@ -129,7 +133,6 @@ const SUPABASE_URL = process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_ROLE = process.env.SUPABASE_SERVICE_ROLE;
 const TAVILY_API_KEY = process.env.TAVILY_API_KEY;
 const OPENAI_KEY = process.env.OPENAI_API_KEY;
-const AUTHOR_ID = process.env.ARTICLE_AUTHOR_ID ?? "4fc99a58-83da-46f6-9621-7816e36b4088";
 const SUPABASE_MEDIA_BUCKET = process.env.SUPABASE_MEDIA_BUCKET;
 const SITE_URL = (process.env.SITE_URL ?? "https://bloxodes.com").replace(/\/$/, "");
 const LOG_DRAFT_PROMPT = process.env.LOG_DRAFT_PROMPT === "true";
@@ -204,28 +207,18 @@ const QUALITY_DOMAINS = [
   "gamingonphone.com"
 ];
 
-let cachedAuthorIds: string[] | null = null;
+let cachedAuthors: ArticleAuthorCandidate[] | null = null;
 
-async function pickAuthorId(): Promise<string | null> {
-  if (!cachedAuthorIds) {
-    const { data, error } = await supabase.from("authors").select("id");
-    if (error) {
-      console.warn("⚠️ Unable to load authors:", error.message);
-      cachedAuthorIds = [];
-    } else {
-      cachedAuthorIds = (data ?? [])
-        .map((author) => author.id)
-        .filter((id): id is string => typeof id === "string" && id.length > 0);
-    }
+async function pickAuthorId(): Promise<string> {
+  if (!cachedAuthors) {
+    const { data, error } = await supabase.from("authors").select("id,name,slug");
+    if (error) throw new Error(`Unable to load eligible article authors: ${error.message}`);
+    cachedAuthors = (data ?? []) as ArticleAuthorCandidate[];
   }
 
-  if (!cachedAuthorIds || cachedAuthorIds.length === 0) {
-    console.warn("⚠️ No authors available; falling back to default author.");
-    return null;
-  }
-
-  const index = Math.floor(Math.random() * cachedAuthorIds.length);
-  return cachedAuthorIds[index] ?? null;
+  return pickEligibleArticleAuthorId(cachedAuthors, {
+    preferredAuthorId: process.env.ARTICLE_AUTHOR_ID ?? null
+  });
 }
 
 const eventPageUniverseCache = new Map<number, boolean>();
@@ -2691,7 +2684,7 @@ async function insertArticleDraft(
 ): Promise<{ id: string; slug: string }> {
   const slug = options.slug ?? (await ensureUniqueSlug(article.title));
   const wordCount = estimateWordCount(article.content_md);
-  const authorId = (await pickAuthorId()) ?? AUTHOR_ID;
+  const authorId = await pickAuthorId();
 
   const { data, error } = await supabase
     .from("articles")

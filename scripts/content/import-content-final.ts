@@ -5,6 +5,10 @@ import path from "node:path";
 import sharp from "sharp";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import {
+  pickEligibleArticleAuthorId,
+  type ArticleAuthorCandidate
+} from "../shared/article-author-selection";
 import { assertEditorialSlug } from "../shared/editorial-slugs";
 import { assertCanonicalMediaUrls, toMediaPublicUrl } from "../shared/storage-public-url";
 
@@ -35,12 +39,11 @@ type ArticleFaqEntry = {
 
 type SupabaseAdminClient = ReturnType<typeof supabaseAdmin>;
 
-const DEFAULT_ARTICLE_AUTHOR_ID = process.env.ARTICLE_AUTHOR_ID ?? "4fc99a58-83da-46f6-9621-7816e36b4088";
 const SUPABASE_MEDIA_BUCKET = process.env.SUPABASE_MEDIA_BUCKET;
 const PRODUCTION_MEDIA_ORIGIN = "https://media.bloxodes.com";
 const LOCAL_URL_PATTERN = /https?:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?(?:\/|$)/i;
 
-let cachedAuthorIds: string[] | null = null;
+let cachedAuthors: ArticleAuthorCandidate[] | null = null;
 
 type ChecklistFinal = {
   page: {
@@ -205,20 +208,14 @@ function pickRandom<T>(items: T[]): T | null {
   return items[Math.floor(Math.random() * items.length)] ?? null;
 }
 
-async function pickAuthorId(sb: SupabaseAdminClient): Promise<string> {
-  if (!cachedAuthorIds) {
-    const { data, error } = await sb.from("authors").select("id");
-    if (error) {
-      console.warn(`Unable to load authors, falling back to default author: ${error.message}`);
-      cachedAuthorIds = [];
-    } else {
-      cachedAuthorIds = (data ?? [])
-        .map((author) => (author as { id?: unknown }).id)
-        .filter((id): id is string => typeof id === "string" && id.length > 0);
-    }
+async function pickAuthorId(sb: SupabaseAdminClient, preferredAuthorId?: string | null): Promise<string> {
+  if (!cachedAuthors) {
+    const { data, error } = await sb.from("authors").select("id,name,slug");
+    if (error) throw new Error(`Unable to load eligible article authors: ${error.message}`);
+    cachedAuthors = (data ?? []) as ArticleAuthorCandidate[];
   }
 
-  return pickRandom(cachedAuthorIds) ?? DEFAULT_ARTICLE_AUTHOR_ID;
+  return pickEligibleArticleAuthorId(cachedAuthors, { preferredAuthorId });
 }
 
 async function pickUniverseCoverImage(sb: SupabaseAdminClient, universeId: number | null | undefined): Promise<string | null> {
@@ -483,10 +480,10 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
     .maybeSingle();
   if (existingError) throw new Error(`Failed to check article ${slug}: ${existingError.message}`);
 
+  const existingAuthorId = ((existing as { author_id?: string | null } | null)?.author_id || null) ?? null;
   const authorId =
-    finalJson.author_id ??
-    ((existing as { author_id?: string | null } | null)?.author_id || null) ??
-    (await pickAuthorId(sb));
+    existingAuthorId ??
+    (await pickAuthorId(sb, finalJson.author_id ?? process.env.ARTICLE_AUTHOR_ID ?? null));
   const suppliedCover = normalizeArticleCover(finalJson.cover_image);
   const existingCover = normalizeArticleCover(
     ((existing as { cover_image?: string | null } | null)?.cover_image || null) ?? null
