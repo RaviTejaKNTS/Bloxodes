@@ -82,6 +82,9 @@ test("universe refresh capacity cannot be starved by the item API lock", () => {
     assert.ok(line);
     assert.match(line, /JOB_LOCK_WAIT_SECONDS=1800/);
   }
+  const warmLine = universeLines.find((line) => line.includes(" stats-warm-refresh "));
+  assert.ok(warmLine);
+  assert.match(warmLine, /^32 \*\/6 \* \* \*/);
 });
 
 test("VPS runner uses the internal Supabase network and fails closed when it is absent", () => {
