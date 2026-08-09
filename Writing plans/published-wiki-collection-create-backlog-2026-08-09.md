@@ -19,21 +19,14 @@ Checkbox legend:
 
 ## Release handoff
 
-- Release branch: `codex/release-50-wiki-collections`, based directly on `origin/production`.
+- Release branch: `codex/release-50-wiki-collections`, based directly on `origin/production` and retained for follow-up.
 - Collection content commit: `75d88d02` (`Add 50 verified wiki collections`).
-- Repository state: the release branch contains only the collection allowlist and this handoff; unrelated Chrono Warfare article assets were excluded.
-- Database preparation: production dry-runs passed for all 50 checked collection rows across the 10 completed games.
-- Production status at pause: not published. HTTPS push could not authenticate, GitHub CLI is unavailable, and the available SSH identity is not authorized.
-- Safety boundary: do not seed the 50 production rows before the repository commit deploys, because the pages depend on its bundled datasets and public image assets.
-
-Resume the release in this order:
-
-1. Authenticate Git for `https://github.com/RaviTejaKNTS/Bloxodes.git` in this checkout.
-2. From `codex/release-50-wiki-collections`, run `git push origin HEAD:production` without force.
-3. Wait for the production deployment and require `/api/health` to report the deployed production SHA and a healthy database.
-4. Run the existing `seed:game-collection-pages` production command with `--allow-prod`, the same explicit 50-collection allowlist, and each game's approved `tmp/content-workspace/<game-slug>/collections` final JSON root.
-5. Read back the 50 `wiki_collection_pages` rows and verify their exact public URLs.
-6. Fast-forward the local `production` ref/worktree to the published SHA, retaining this release branch for follow-up.
+- Deployed collection build: `3075bf2131dfa4f5c2c4e0c1bced9675dc131885`; `/api/health` reported this SHA with a healthy database.
+- Database release: all 50 checked `wiki_collection_pages` rows were dry-run, idempotently published, and read back with published state, wiki hub linkage, and universe linkage.
+- Live verification: all 50 exact collection URLs returned indexable HTML and appeared in `/sitemaps/wiki.xml`.
+- Release cleanup: the temporary GitHub Actions publication workflow and its copied final-JSON payload were removed after successful verification.
+- Exclusions: all 177 unchecked collections, temporary research reports, and unrelated Chrono Warfare article assets were excluded from this release.
+- Production status: complete. Resume collection creation at Build a Base and Steal — Building Parts.
 
 ## Scope
 
