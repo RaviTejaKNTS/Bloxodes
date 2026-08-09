@@ -45,6 +45,22 @@ test("VPS owns database-only ranks and the serialized index exactly once", () =>
   assert.equal(lines.filter((line) => line.includes("stats-daily-ranks")).some((line) => line.includes("JOB_LOCK_GROUP")), false);
 });
 
+test("universe refresh capacity cannot be starved by the item API lock", () => {
+  const universeCron = readFileSync(new URL("../../ops/vps-universe-stats.crontab", import.meta.url), "utf8");
+  const itemCron = readFileSync(new URL("../../ops/vps-scheduled-automation.crontab", import.meta.url), "utf8");
+  const universeLines = universeCron.split("\n").filter((line) => line && !line.startsWith("#"));
+  const groupedUniverseLines = universeLines.filter((line) => line.includes("JOB_LOCK_GROUP"));
+
+  assert.ok(groupedUniverseLines.length > 0);
+  assert.equal(groupedUniverseLines.every((line) => line.includes("JOB_LOCK_GROUP=roblox-universe-api")), true);
+  assert.equal(itemCron.includes("JOB_LOCK_GROUP=roblox-universe-api"), false);
+  for (const job of ["stats-new-refresh", "stats-warm-refresh", "stats-cold-refresh"]) {
+    const line = universeLines.find((candidate) => candidate.includes(` ${job} `));
+    assert.ok(line);
+    assert.match(line, /JOB_LOCK_WAIT_SECONDS=1800/);
+  }
+});
+
 test("VPS runner uses the internal Supabase network and fails closed when it is absent", () => {
   const runner = readFileSync(new URL("../../ops/vps-run-job.sh", import.meta.url), "utf8");
 
@@ -53,4 +69,7 @@ test("VPS runner uses the internal Supabase network and fails closed when it is 
   assert.match(runner, /docker network inspect "\$DOCKER_NETWORK"/);
   assert.match(runner, /--network "\$DOCKER_NETWORK"/);
   assert.match(runner, /-e SUPABASE_URL="\$SUPABASE_INTERNAL_URL"/);
+  assert.match(runner, /JOB_LOCK_WAIT_SECONDS/);
+  assert.match(runner, /flock -w "\$LOCK_WAIT_SECONDS"/);
+  assert.match(runner, /timed out waiting for lock group/);
 });

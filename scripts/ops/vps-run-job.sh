@@ -37,11 +37,26 @@ if [ -n "${JOB_LOCK_GROUP:-}" ]; then
       exit 2
       ;;
   esac
+  LOCK_WAIT_SECONDS="${JOB_LOCK_WAIT_SECONDS:-0}"
+  case "$LOCK_WAIT_SECONDS" in
+    ''|*[!0-9]*)
+      echo "invalid JOB_LOCK_WAIT_SECONDS: $LOCK_WAIT_SECONDS" >&2
+      exit 2
+      ;;
+  esac
   exec 8>"$BASE/group-$JOB_LOCK_GROUP.lock"
-  flock -n 8 || {
-    echo "$(date -Is) $JOB skipped; lock group $JOB_LOCK_GROUP is busy" >> "$LOG_DIR/$JOB.log"
-    exit 0
-  }
+  if [ "$LOCK_WAIT_SECONDS" -gt 0 ]; then
+    echo "$(date -Is) $JOB waiting up to ${LOCK_WAIT_SECONDS}s for lock group $JOB_LOCK_GROUP" >> "$LOG_DIR/$JOB.log"
+    flock -w "$LOCK_WAIT_SECONDS" 8 || {
+      echo "$(date -Is) $JOB timed out waiting for lock group $JOB_LOCK_GROUP" >> "$LOG_DIR/$JOB.log"
+      exit 1
+    }
+  else
+    flock -n 8 || {
+      echo "$(date -Is) $JOB skipped; lock group $JOB_LOCK_GROUP is busy" >> "$LOG_DIR/$JOB.log"
+      exit 0
+    }
+  fi
 fi
 
 if ! docker image inspect bloxodes-stats-worker:production >/dev/null 2>&1; then

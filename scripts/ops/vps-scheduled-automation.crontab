@@ -2,8 +2,8 @@
 #
 # Install these lines in the codex-admin crontab on the VPS, beside the
 # existing BLOXODES_STATS_WORKER and BLOXODES_ITEM_STATS_WORKER blocks.
-# Every Roblox-facing entry in the adjacent stats block, including
-# stats-hot-refresh, must also set JOB_LOCK_GROUP=roblox-api.
+# Item/catalog-facing jobs below use JOB_LOCK_GROUP=roblox-api. Universe
+# collectors use the separate roblox-universe-api group in their own manifest.
 # The worker wrapper is expected at:
 # /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh
 #
