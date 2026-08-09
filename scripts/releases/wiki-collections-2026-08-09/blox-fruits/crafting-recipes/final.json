@@ -1,0 +1,42 @@
+{
+  "universe_id": 994732206,
+  "wiki_slug": "blox-fruits",
+  "collection_slug": "crafting-recipes",
+  "code": "blox-fruits-crafting-recipes",
+  "display_name": "Crafting Recipes",
+  "title": "All {count} Crafting Recipes in Blox Fruits",
+  "seo_title": "All {count} Blox Fruits Crafting Recipes, Ingredients, Stations and Results",
+  "meta_description": "Compare Blox Fruits crafting recipes by station, ingredients, result, availability, and source-backed route.",
+  "intro_md": "Crafting recipes turn materials into potions, bait, scrolls, and special utility items. The station matters as much as the ingredients, because the right materials at the wrong NPC are only a very organized backpack.",
+  "description_md": "## Pick the crafting station first\n\nCampfire recipes cover potions and utility crafts. NPC Crafting rows identify named character routes, while Scroll Crafting groups the four normal scroll tiers. Use Station before collecting ingredients.\n\n## Read the full ingredient list\n\nIngredients records the exact material combination for each result. Check the complete list before traveling so one missing component does not turn a crafting trip into a scenic tour.\n\n## Keep the scope practical\n\nThis collection covers the verified portable Campfire and NPC guide recipes in the source set. It does not claim to replace every weapon-upgrade table elsewhere in the game.",
+  "how_it_works_md": "Station tells you where the craft happens, Ingredients lists the required materials, Result states the output, and Availability records whether the route is a normal target.",
+  "description_json": {
+    "Campfire": "Verified Campfire potion and utility recipes.",
+    "NPC Crafting": "Recipes completed through a named NPC route.",
+    "Scroll Crafting": "The four player-obtainable scroll recipes."
+  },
+  "faq_json": [
+    {
+      "q": "Why does the crafting station matter?",
+      "a": "Recipes are tied to a Campfire or named NPC route, so ingredients alone are not enough."
+    },
+    {
+      "q": "Are scroll recipes included?",
+      "a": "Yes. Common, Rare, Legendary, and Mythical Scroll crafting rows are included."
+    },
+    {
+      "q": "Does this include every weapon upgrade?",
+      "a": "No. The scope is the verified portable Campfire and NPC guide recipe set, not every upgrade table."
+    },
+    {
+      "q": "Why do some recipes have no image?",
+      "a": "Four abstract result rows lack an exact verified image, so they stay text-first instead of borrowing unrelated art."
+    },
+    {
+      "q": "How should I prepare for crafting?",
+      "a": "Check Station and the complete Ingredients field before traveling to the crafting route."
+    }
+  ],
+  "wiki_md": "Crafting recipes convert materials into potions, bait, scrolls, and utility outputs. Start with the station, verify the full ingredient list, and use the collection as the scoped Campfire and NPC guide reference.",
+  "is_published": true
+}

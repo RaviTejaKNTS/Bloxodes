@@ -1,0 +1,42 @@
+{
+  "universe_id": 994732206,
+  "wiki_slug": "blox-fruits",
+  "collection_slug": "raids",
+  "code": "blox-fruits-raids",
+  "display_name": "Raids",
+  "title": "All {count} Raids in Blox Fruits",
+  "seo_title": "All {count} Blox Fruits Raids, Types, Bosses and Awakening Uses",
+  "meta_description": "Compare Blox Fruits raids by fruit, type, status, boss, time limit, chip requirement, and awakening use.",
+  "intro_md": "Fruit raids are timed five-island challenges used to earn Fragments and unlock awakening progress. Basic and Advanced routes have different chip requirements, while removed Rumble is retained only as clearly labeled history.",
+  "description_md": "## Choose the fruit raid\n\nEach active row names the fruit, raid boss, and awakening purpose. Match the raid to the fruit you are progressing instead of treating every chip as interchangeable.\n\n## Plan around the timer and islands\n\nThe listed raids use five islands and a fixed time limit. A group should be ready before activation, because the timer is more interested in moving than in hearing one final build debate.\n\n## Separate Basic, Advanced, and Removed\n\nBasic raids use the standard raid-chip route. Dough and Phoenix are Advanced raids with special unlock and chip requirements. Rumble is a removed historical row and is not presented as a current raid target.",
+  "how_it_works_md": "Fruit, Boss, and Reward identify the raid goal. Type, Status, Chip requirement, Islands, and Time limit explain access and challenge structure.",
+  "description_json": {
+    "Basic": "Active standard fruit raids using the regular chip route.",
+    "Advanced": "Active Dough and Phoenix raids with special unlock requirements.",
+    "Removed": "Historical Rumble Raid, retained for reference and not current progression."
+  },
+  "faq_json": [
+    {
+      "q": "What are raids used for?",
+      "a": "Active fruit raids award Fragments and support awakening progress for the matching fruit."
+    },
+    {
+      "q": "How many islands are in a fruit raid?",
+      "a": "The recorded fruit raids use five raid islands."
+    },
+    {
+      "q": "How long does a raid last?",
+      "a": "The listed time limit is 12 minutes and 30 seconds."
+    },
+    {
+      "q": "Which raids are Advanced?",
+      "a": "Dough and Phoenix are the two Advanced raid rows."
+    },
+    {
+      "q": "Is the Rumble Raid still available?",
+      "a": "No. It is retained as a removed historical row and is not a current progression target."
+    }
+  ],
+  "wiki_md": "Raids are timed five-island challenges tied to fruit awakening and Fragment rewards. Match the fruit, type, chip requirement, and boss before starting, and treat Rumble as historical only.",
+  "is_published": true
+}

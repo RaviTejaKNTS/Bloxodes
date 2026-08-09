@@ -1,0 +1,45 @@
+{
+  "universe_id": 994732206,
+  "wiki_slug": "blox-fruits",
+  "collection_slug": "potions",
+  "code": "blox-fruits-potions",
+  "display_name": "Potions",
+  "title": "All {count} Potions in Blox Fruits",
+  "seo_title": "All {count} Blox Fruits Potions, Effects and Sources",
+  "meta_description": "Compare Blox Fruits potions by effect, duration, rarity, availability, source, location, and carrying capacity.",
+  "intro_md": "Potions cover combat, farming, travel, protection, and a few wonderfully strange area effects. Their duration and source matter as much as the effect, since drinking the right boost after the job is finished is mostly fancy hydration.",
+  "description_md": "## Pick a potion for the job\n\nCombat options solve different problems. Berserkers Elixir raises damage against enemies and bosses, Aggro Elixir draws nearby enemies to you, and Oni Soul summons a spectral clone that fights NPCs. Monk Potion takes the opposite approach by disabling PvP for its user.\n\nFarming potions focus on particular rewards. Fortune Elixir improves Money drops, Fragments Elixir improves Fragment drops from NPCs, and Materials Elixir raises the chance of NPC material drops. Match the boost to the activity instead of hoping one bottle understands your entire task list.\n\nUtility effects cover the odd jobs. Gate Potion travels to a chosen island, Loot Seeker reveals nearby chests through walls with an exception for Fragment Chests, Lava Potion protects against lava, and Invisibility Potion makes the user nearly invisible.\n\n## Check duration before using it\n\nMost effects last for a set time, while Gate Potion is instant and some special effects end through a condition. Start a timed potion when you are ready to fight, farm, or move, not while the group is still deciding who forgot the boat.\n\nCapacity tells you how much of that potion can be held. It does not make the effect stronger, so use rarity, effect, duration, and source as separate facts when choosing what to craft.\n\n## Separate regular crafts from old event potions\n\nObtainable potions use Campfire routes, including special locations such as the Celestial Domain and Oni Realm. The source and location identify which crafting stop belongs to each recipe.\n\nLimited or past event potions came through older Halloween routes such as the Witch or Unbound Werewolf. Their area effects remain useful history, but the status does not promise that those sources are active now.",
+  "how_it_works_md": "Effect explains what the potion changes, and Duration shows how long that change lasts. Status, Source, and Location identify availability and obtainment, while Rarity and Capacity provide the remaining comparison details.",
+  "description_json": {
+    "Obtainable": "These potions have a regular Campfire or special-domain crafting route recorded for player progression.",
+    "Limited or past event": "These throwable potions belonged to older Halloween routes. Their return is not guaranteed outside a matching event."
+  },
+  "faq_json": [
+    {
+      "q": "Which potion helps with Money drops?",
+      "a": "Fortune Elixir raises Money drops for its duration. Start it when you are ready to farm so the timer is spent on enemies instead of preparation."
+    },
+    {
+      "q": "Which potions help with Fragment and material farming?",
+      "a": "Fragments Elixir raises Fragment drops from NPCs, while Materials Elixir raises the chance of NPC material drops. Choose the one that matches your current farm."
+    },
+    {
+      "q": "Which potion teleports me to an island?",
+      "a": "Gate Potion teleports its user to a chosen island. Its effect is instant rather than a timed boost."
+    },
+    {
+      "q": "Which potion protects against lava?",
+      "a": "Lava Potion grants complete immunity to lava for its listed duration."
+    },
+    {
+      "q": "Which potion disables PvP?",
+      "a": "Monk Potion disables PvP for its user during the effect. It comes through a Campfire route in the Oni Realm."
+    },
+    {
+      "q": "Are the Halloween potions obtainable now?",
+      "a": "Do not assume they are active. Potions marked Limited or past event came from older event routes and need a matching return before they become practical targets again."
+    }
+  ],
+  "wiki_md": "Potions give temporary, instant, or condition-based effects for combat, farming, travel, protection, and area tricks. Most obtainable options come through Campfire crafting, with special routes in the Celestial Domain and Oni Realm, while older Halloween potions are event-limited. Check the effect and duration before using one, because a perfect farming boost during a snack break has questionable timing.",
+  "is_published": true
+}

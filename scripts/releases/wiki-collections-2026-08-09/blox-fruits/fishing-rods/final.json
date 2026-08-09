@@ -1,0 +1,40 @@
+{
+  "universe_id": 994732206,
+  "wiki_slug": "blox-fruits",
+  "collection_slug": "fishing-rods",
+  "code": "blox-fruits-fishing-rods",
+  "display_name": "Fishing Rods",
+  "title": "All {count} Fishing Rods in Blox Fruits",
+  "seo_title": "All {count} Blox Fruits Fishing Rods and How to Get Them",
+  "meta_description": "Compare Blox Fruits fishing rods by rarity, availability, source, sea, location, and crafting cost.",
+  "intro_md": "Fishing rods begin with the Fisherman's basic gear and branch into Angler crafts and special realm rewards. The right route depends on your sea and unlock progress, because even a shiny rod cannot craft itself out of good intentions.",
+  "description_md": "## Get the starter Fishing Rod\n\nThe Fisherman provides the basic Fishing Rod. You can find this NPC at Frozen Village in the First Sea, the Kingdom of Rose in the Second Sea, and Port Town in the Third Sea, so each stage of progression has a place to begin fishing.\n\nGrab the starter before planning a crafted upgrade. A recipe route is not much help when your fishing career is still waiting beside the Fisherman.\n\n## Follow the Angler crafting route\n\nAngler crafts are tied to sea progression. The Gold Rod route belongs to Skylands in the First Sea, the Shark Rod comes through Green Zone in the Second Sea, and the Shell Rod and Treasure Rod are associated with Hydra Island in the Third Sea.\n\nTrust quests matter for recipe unlocks. Complete the relevant Angler progression before gathering a craft cost, then check the rod's source, sea, and location together. This avoids carrying a tidy pile of materials to the wrong ocean.\n\n## Handle special and unavailable rods\n\nThe corrupted Shark and celestial Shell use their own realm Fishermen instead of the normal Angler path. Their Legendary label describes rarity, while the source and location explain the actual route.\n\nThe Admin Rod is not normal player progression. Treat its unavailable status as the important fact and focus your effort on an obtainable rod with a confirmed source.",
+  "how_it_works_md": "Rarity and Status show classification and availability. Source, Seas, and Location describe the unlock route, while Cost keeps the recorded crafting requirement with the rod.",
+  "description_json": {
+    "Unavailable or unresolved": "This rod is not available through normal player progression. It has no confirmed public unlock route to follow."
+  },
+  "faq_json": [
+    {
+      "q": "How do I get the basic Fishing Rod in Blox Fruits?",
+      "a": "Interact with the Fisherman. The NPC appears at Frozen Village, the Kingdom of Rose, and Port Town, covering the First, Second, and Third Sea routes."
+    },
+    {
+      "q": "How do I unlock Angler fishing rods?",
+      "a": "Follow the Angler route in the rod's listed sea and complete the required trust progression when the recipe calls for it. Then use the listed crafting source and cost."
+    },
+    {
+      "q": "Where do the normal Angler rod routes lead?",
+      "a": "The Gold Rod is tied to Skylands, the Shark Rod to Green Zone, and the Shell Rod and Treasure Rod to Hydra Island. Check the sea on the rod before traveling."
+    },
+    {
+      "q": "How do I get the corrupted Shark and celestial Shell rods?",
+      "a": "They use special realm routes. The corrupted Shark comes from the Oni Fisherman in the Oni Realm, while the celestial Shell comes from the Celestial Fisherman in the Celestial Domain."
+    },
+    {
+      "q": "Can normal players obtain the Admin Rod?",
+      "a": "No normal player route is available. It is an admin or staff-exclusive rod, so it should not be treated as a progression target."
+    }
+  ],
+  "wiki_md": "Fishing rods are the gear used to begin and progress through fishing. The Fisherman supplies the starter rod, Angler routes unlock crafted rods across later seas, and special realm Fishermen handle their own gear. Check the source and sea before gathering a craft cost, or your materials may enjoy a longer voyage than you do.",
+  "is_published": true
+}

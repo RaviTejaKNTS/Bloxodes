@@ -1,0 +1,45 @@
+{
+  "universe_id": 383310974,
+  "wiki_slug": "adopt-me",
+  "collection_slug": "task-board-tasks",
+  "code": "adopt-me-task-board-tasks",
+  "display_name": "Task Board Tasks",
+  "title": "All {count} Task Board Tasks in Adopt Me",
+  "seo_title": "All {count} Task Board Tasks in Adopt Me",
+  "meta_description": "Compare current Adopt Me Task Board objectives, rewards, activity types, and daily or bonus slots across the post-revamp base pool.",
+  "intro_md": "Task Board Tasks turn normal Adopt Me activities into extra Bucks objectives. The board can ask for pet care, shopping, jobs, progression, home visits, trading activity, or help from a friend, so a quiet day rarely stays unemployed.",
+  "description_md": "## Completing Daily Tasks\n\nDaily Tasks cover the widest set of activities and pay 25 Bucks when completed. Some objective families change their target by pet rarity, need type, item, or visit goal, so the full task name matters more than the short family label.\n\nNeed tasks work well alongside normal pet aging. Shopping, Pizza Shop, Salon, job, home, and trading objectives need more deliberate routing, and several pet progression tasks expect a particular rarity, Neon status, XP target, or age level.\n\nTasks can accumulate on the permanent board instead of forcing every objective into one play session. Rerolls provide another route when an objective does not fit the pets, supplies, or activities available to you.\n\n## Completing Bonus Tasks\n\nBonus Tasks pay 100 Bucks and focus on social play. They can ask you to complete a need on a friend's pet, pet that animal, play with a friend for 10 minutes, visit a friend's home for 60 seconds, or host a party.\n\nThese tasks depend on another player or a social action, so they need different preparation from normal pet-care objectives. A backpack full of food is useful, but it remains surprisingly bad at accepting a friend request.\n\n## Planning around task variants\n\nRepeated families are separate objectives when their targets differ. Needy, Needier, The Neediest, Daily Routine, Running Errands, and Shopping Spree each use the exact target in the task name and objective text.\n\nReward does not measure how expensive or time-consuming the objective will be for your account. A shopping task may require buying a named item, while a needs task can line up with progress you already planned to make.",
+  "how_it_works_md": "Task family groups related objectives, while Objective gives the exact action and target. Reward shows the Bucks payout, Slot separates Daily from Bonus, and Activity identifies the kind of play needed to complete it.",
+  "description_json": {
+    "Daily Tasks": "Daily objectives pay 25 Bucks and cover pet needs, progression, care, shopping, jobs, homes, and trading. Variant names preserve the exact pet rarity, need, item, or target required.",
+    "Bonus Tasks": "Bonus objectives pay 100 Bucks and use social actions involving friends, their pets, their homes, or a hosted party. They require another player or a party action rather than solo routine care."
+  },
+  "faq_json": [
+    {
+      "q": "How many Bucks does a Daily Task give?",
+      "a": "A current Daily Task gives 25 Bucks when its exact objective is completed."
+    },
+    {
+      "q": "How many Bucks does a Bonus Task give?",
+      "a": "A current Bonus Task gives 100 Bucks. Bonus objectives focus on friends, social play, home visits, or hosting a party."
+    },
+    {
+      "q": "Can Task Board Tasks accumulate?",
+      "a": "Yes. Tasks can remain on the permanent board and accumulate instead of requiring completion in one play session."
+    },
+    {
+      "q": "Can I reroll a Task Board objective?",
+      "a": "Yes. Rerolls let you replace an objective that does not fit your current pets, items, or planned activities."
+    },
+    {
+      "q": "Why do some Task Board Tasks have similar names?",
+      "a": "Task families can have different targets, such as pet rarity, need type, shopping item, or visit goal. The exact objective decides what counts for completion."
+    },
+    {
+      "q": "Are Bonus Tasks solo objectives?",
+      "a": "No. Current Bonus Tasks use social actions involving a friend, a friend's pet or home, or a hosted party."
+    }
+  ],
+  "wiki_md": "The Task Board gives recurring Bucks objectives for pet needs, progression, shopping, jobs, homes, trading, and social play. Daily Tasks cover solo and routine activities, while Bonus Tasks offer a larger reward for friend-based goals. Exact targets vary within repeated task families, so each variant can ask for a different pet, need, item, or visit.",
+  "is_published": true
+}

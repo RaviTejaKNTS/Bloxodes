@@ -1,0 +1,43 @@
+{
+  "universe_id": 7326934954,
+  "wiki_slug": "99-nights-in-the-forest",
+  "collection_slug": "armor",
+  "code": "99-nights-in-the-forest-armor",
+  "display_name": "Armor",
+  "title": "All {count} Armor in 99 Nights in the Forest",
+  "seo_title": "All {count} Armor in 99 Nights in the Forest",
+  "meta_description": "Compare body armor, warm clothing, boots, and specialist wearables in 99 Nights in the Forest, including effects, access routes, layering, and trim support.",
+  "intro_md": "Armor covers more than damage reduction. Body gear protects you, warm clothing slows freezing, boots change movement, and specialist wearables add effects that can rescue a run when the forest gets rude.",
+  "description_md": "## Choosing body armor\n\nStart with the threat you expect to face. Basic body armor reduces incoming damage, while other choices add poison or contact retaliation, Alien Tech Energy recovery, an explosion meter, nighttime healing, or a Hard Mode corruption tradeoff.\n\nDo not rank those effects as if they solve the same problem. Alien Armor supports Alien Tech gear, Obsidiron Body fits its matching meter setup, and Vampire Cloak rewards nighttime survival. Corrupted Armour adds protection through the Hard Mode chest route, but its corruption pressure still needs managing.\n\n## Layering cold and movement gear\n\nWarm clothing can be worn alongside body armor, so cold protection does not have to replace your main defensive piece. Use the known Warmth rating when comparing shop pieces, but do not assign a made-up number to Mammoth Helmet just because it comes later.\n\nBoots also layer with body armor and warm clothing. Frog Boots improve jumping, while Obsidiron Boots improve sprinting and contribute to the Obsidiron explosion-meter setup. Pick the movement effect that helps your route instead of choosing footwear by dramatic name alone.\n\nInfernal Helmet fills a separate specialist role. It reduces damage and grants immunity to burning, and it can be worn with body armor and boots.\n\n## Using Armor Trim Kits\n\nAn Armor Trim Kit improves damage resistance on Leather Body, Poison Armor, Iron Body, Thorn Body, Alien Armor, and Obsidiron Body. Warm clothing, boots, and helmets cannot be trimmed.\n\nRiot Shield is held combat gear rather than wearable Armor. Treat it as a weapon and defensive tool, not another body piece competing for your equipment setup.",
+  "how_it_works_md": "Gear type shows where each wearable fits. Main effect and Special effect explain its protection or utility, while Warmth, acquisition routes, Armor trim, and Equip notes cover comparison details and layering rules.",
+  "description_json": {
+    "Body Armor": "Body Armor reduces incoming damage, with some pieces adding retaliation, energy, healing, or meter effects. Riot Shield stays separate because it is held gear rather than a wearable body piece.",
+    "Warm Clothing": "Warm Clothing slows freeze-meter loss and can layer with body armor. Earmuffs, Beanie, Arctic Fox Hat, and Polar Bear Hat have numeric Warmth ratings, while Mammoth Helmet does not have a confirmed number.",
+    "Boots": "Boots can layer with body armor and warm clothing. Their main choice is movement: Frog Boots improve jumping, while Obsidiron Boots improve sprinting and join the Obsidiron meter setup.",
+    "Other Wearables": "Infernal Helmet is a specialist defensive wearable from the Tool Workshop. It combines damage reduction with immunity to burning without taking the body-armor role."
+  },
+  "faq_json": [
+    {
+      "q": "Can I wear warm clothing with body armor?",
+      "a": "Yes. Warm clothing can layer with body armor, so you can slow freezing without giving up your main body protection."
+    },
+    {
+      "q": "What is the difference between Frog Boots and Obsidiron Boots?",
+      "a": "Frog Boots improve jump power. Obsidiron Boots increase sprint speed and also contribute to the Obsidiron explosion-meter setup."
+    },
+    {
+      "q": "Which armor works with an Armor Trim Kit?",
+      "a": "Leather Body, Poison Armor, Iron Body, Thorn Body, Alien Armor, and Obsidiron Body can be trimmed. Warm clothing, boots, and helmets cannot."
+    },
+    {
+      "q": "How do I get Corrupted Armour?",
+      "a": "Activate Hard Mode, then search Corrupted Chests through its corruption route. The armor improves survivability but adds corruption-management pressure."
+    },
+    {
+      "q": "Is Riot Shield wearable armor?",
+      "a": "No. Riot Shield is held combat gear, so it belongs with weapons and defensive tools rather than wearable Armor."
+    }
+  ],
+  "wiki_md": "Armor includes wearable body protection, cold-weather clothing, movement boots, and specialist gear such as Infernal Helmet. Pieces come from chests, shops, classes, workshops, and mode-specific routes, with effects ranging from damage reduction to warmth, retaliation, healing, and movement. Layer compatible gear so one slot choice does not leave another survival problem waving politely.",
+  "is_published": true
+}

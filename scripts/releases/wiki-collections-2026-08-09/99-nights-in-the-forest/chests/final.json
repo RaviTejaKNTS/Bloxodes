@@ -1,0 +1,45 @@
+{
+  "universe_id": 7326934954,
+  "wiki_slug": "99-nights-in-the-forest",
+  "collection_slug": "chests",
+  "code": "99-nights-in-the-forest-chests",
+  "display_name": "Chests",
+  "title": "All {count} Chests in 99 Nights in the Forest",
+  "seo_title": "All {count} Chests in 99 Nights in the Forest",
+  "meta_description": "Compare chest locations, spawn conditions, access requirements, loot pools, rarity, and special behavior in 99 Nights in the Forest.",
+  "intro_md": "Chests turn exploration into stronger gear, but each route asks for something different. Campfire progress opens normal loot paths, while biomes, encounters, crafting, and Hard Mode hide their own reward boxes behind extra chores.",
+  "description_md": "## Following the classic chest route\n\nClassic Chests grow more useful as the Campfire opens deeper parts of the map. Common, Good, and Iron Chests support early survival with tools, fuel, seeds, weapons, and basic armor, while Legendary and Gold Chests can move a run into stronger storage, healing, defense, and late progression materials.\n\nRuby and Diamond Chests need a different plan. Clearing the Cultist Stronghold guarantees access to both rewards: Ruby offers a high-end item pool, while Diamond gives 5 Diamonds. A Ruby Chest becomes a Gold Chest for other players after one person opens it, so teams should decide who needs the first reward before curious hands get involved.\n\n## Planning conditional chest routes\n\nConditional Chests only matter when their biome, encounter, craft, or mode is available. Check the route requirement before spending food and daylight on the trip. An Ice Chest needs its ice broken, Jungle Chest needs crystal skulls for the Mother Temple basement, and Frog Chest sits behind keys and combat waves.\n\nThe loot theme usually matches the route. Snow chests carry frozen gear, Volcanic chests carry fire gear, and Alien Chest holds Alien Tech rewards. Obsidiron Chest is the odd carpenter in the group: you craft and place it at base instead of finding it on the map.\n\nCorrupted Chest belongs to Hard Mode. Its stable value is access to corrupted weapons and Corrupted Armour, so treat unsupported spawn odds or exact location density as forest gossip rather than a route plan.\n\n## Comparing loot pools\n\nUse the loot pool to decide whether a detour can solve the problem your team has now. A chest with armor and healing is more useful before a dangerous rescue, while a weapon-focused chest matters when damage is the bottleneck.\n\nPossible loot does not mean guaranteed loot unless the reward field says so. Route for the chest family you need, then keep a backup plan in case the box produces the one item nobody packed for.",
+  "how_it_works_md": "Chest group separates normal progression from route-gated chests. Availability, locations, spawn condition, and access requirement explain how to reach each one, while Possible loot and Guaranteed reward show what the trip can return.",
+  "description_json": {
+    "Classic Chests": "Classic Chests follow normal map and Campfire progression. Rarity applies to these roaming tiers, while Diamond Chest is a Cultist Stronghold reward with a fixed payout instead of a normal rarity roll.",
+    "Conditional Chests": "Conditional Chests depend on a biome, encounter, crafted blueprint, or Hard Mode route. Their names may come from older event themes, but their useful distinction is the run condition needed to reach them."
+  },
+  "faq_json": [
+    {
+      "q": "Where should I look for early chests?",
+      "a": "Check towers, houses, campsites, caves, crashes, playgrounds, and other structures opened by early Campfire upgrades. Common, Good, and Iron Chests are the practical early route."
+    },
+    {
+      "q": "What does the Cultist Stronghold give?",
+      "a": "Clearing it guarantees access to a Ruby Chest and a Diamond Chest. Ruby rolls from a high-end item pool, while Diamond gives 5 Diamonds."
+    },
+    {
+      "q": "Why can another player see a Gold Chest after I open a Ruby Chest?",
+      "a": "Ruby Chest changes into a Gold Chest for other players after the first player opens it. Teams should choose who takes the Ruby reward before opening."
+    },
+    {
+      "q": "How do I open an Ice Chest?",
+      "a": "Find one in the Snow Biome at a Polar Bear Cave or Ice Temple, then break the ice around it with an axe."
+    },
+    {
+      "q": "Is Obsidiron Chest found on the map?",
+      "a": "No. Craft its blueprint at the Meteor Tool Workshop with the required Meteor Shards, Gold Shards, and Obsidiron Ingots, then place the chest at base."
+    },
+    {
+      "q": "What can a Corrupted Chest drop?",
+      "a": "Hard Mode Corrupted Chests can provide Corrupted Axe, Corrupted Thrown Axe, Corrupted Revolver, Corrupted Shotgun, or Corrupted Armour."
+    }
+  ],
+  "wiki_md": "Chests are the main loot containers for tools, weapons, armor, supplies, seeds, and progression materials. Normal chests open up as the Campfire grows, while special chests need a biome, encounter, craft, or Hard Mode route. Match the chest route to the gear your team needs before the forest charges you in food, time, and bad decisions.",
+  "is_published": true
+}

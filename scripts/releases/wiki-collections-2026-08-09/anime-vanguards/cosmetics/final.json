@@ -1,0 +1,46 @@
+{
+  "universe_id": 5578556129,
+  "wiki_slug": "anime-vanguards",
+  "collection_slug": "cosmetics",
+  "code": "anime-vanguards-cosmetics",
+  "display_name": "Cosmetics",
+  "title": "All {count} Cosmetics in Anime Vanguards",
+  "seo_title": "All {count} Cosmetics in Anime Vanguards",
+  "meta_description": "Compare Anime Vanguards cosmetics by type, associated unit, acquisition group, and availability across standard looks, skins, and special rewards.",
+  "intro_md": "Cosmetics connect a visual look to a specific Anime Vanguards unit or variant. The name may catch your eye first, but the associated unit, acquisition group, and availability decide whether that look belongs in your current collection plan.",
+  "description_md": "## Matching a cosmetic to its unit\n\nAssociated Unit names the character and form tied to the cosmetic. Normal and Shiny variants can have separate entries, so matching the exact form matters. A familiar haircut is not a legally binding unit match, however convincing it looks.\n\nCosmetic Type separates unit cosmetics from skins. Standard and Special entries are unit cosmetics tied to their named unit forms, while Skins are alternate looks connected to a unit and a limited, bundle, competitive, or other acquisition group.\n\n## Following the acquisition group\n\nAcquisition Group tells you which part of the game the cosmetic belongs to. Default Banner Units point toward normal banner roster progress, while event banners, Legend Stages, Raids, Rifts, Portals, Dungeons, Worldlines, Boss Events, Battlepasses, Tournaments, and Leaderboards each connect the cosmetic to a different progression route.\n\nPlan around groups that overlap with units or modes you already want. Chasing a Raid-linked look while ignoring the related Raid progression creates a long detour with very stylish luggage.\n\n## Reading availability safely\n\nAvailable means the listed route is treated as open. Limited access means the route is tied to something restricted, such as an event, bundle, Battlepass, Tournament, Leaderboard, or special release. It does not guarantee that the route is active today, and it does not mean the cosmetic can never return.\n\nFor a limited cosmetic, the current in-game event, shop, competition, or reward panel decides whether it can still be earned. Past group names explain where the look belongs, but they are not a promise that an old activity will reopen.\n\n## Building a focused cosmetic collection\n\nStart with the unit form you actually use, then follow its acquisition group and status. This avoids farming for a look tied to another variant or saving currency for a route that is not active.\n\nCollectors can also work by group, such as finishing one event family or one mode's associated units before moving on. That makes Normal, Shiny, skin, and special variants easier to track without turning the lobby wardrobe into unpaid inventory work.",
+  "how_it_works_md": "Status shows whether access is open or limited. Cosmetic type identifies a unit cosmetic or skin, Associated unit names the exact linked form, and Acquisition group shows the banner, event, mode, bundle, competition, or reward family behind it.",
+  "description_json": {
+    "Standard Cosmetics": "Standard Cosmetics are visual looks tied to named Normal or Shiny unit forms, including default and event banner groups. The associated variant matters when matching the look to a unit.",
+    "Skins": "Skins are alternate unit looks grouped by events, bundles, competitive rewards, and miscellaneous routes. Limited status marks restricted access without promising whether an old route will return.",
+    "Special Cosmetics": "Special Cosmetics connect unit forms to progression outside the default banner path, including stages, Raids, Rifts, Portals, Dungeons, Worldlines, Boss Events, Battlepasses, Tournaments, Leaderboards, and special releases."
+  },
+  "faq_json": [
+    {
+      "q": "What does Associated Unit mean for a cosmetic?",
+      "a": "It names the exact unit form linked to that visual. Normal and Shiny variants can have separate cosmetics, so the full associated unit name matters."
+    },
+    {
+      "q": "What is the difference between Standard Cosmetics and Skins?",
+      "a": "Standard Cosmetics are unit visuals tied to named banner unit forms. Skins are alternate looks grouped under event, bundle, competitive, or other skin routes."
+    },
+    {
+      "q": "What makes a Special Cosmetic special?",
+      "a": "Its associated unit comes from a progression group outside the default banner path, such as a Legend Stage, Raid, Rift, Portal, Dungeon, Worldline, Boss Event, Battlepass, Tournament, or Leaderboard."
+    },
+    {
+      "q": "Does limited availability mean a cosmetic is unobtainable?",
+      "a": "Not always. It means access depends on a restricted route, and the current event, bundle, competition, shop, or reward panel decides whether that route is open."
+    },
+    {
+      "q": "Will an old event cosmetic return?",
+      "a": "A return is not guaranteed. The event group explains the original family, but only a new in-game announcement or active reward route can make it obtainable again."
+    },
+    {
+      "q": "How should I choose which cosmetic to chase?",
+      "a": "Start with the exact unit form you use, then match its acquisition group to content you already plan to play. Availability tells you whether that route is open or limited."
+    }
+  ],
+  "wiki_md": "Cosmetics give Anime Vanguards units visual looks tied to an exact character or Normal/Shiny variant. Standard Cosmetics follow banner unit groups, Skins use event, bundle, or competitive routes, and Special Cosmetics connect to modes such as Raids, Rifts, Portals, Dungeons, and Worldlines. Availability shows whether the acquisition group is open or limited, so the unit form and route should be matched before chasing a look.",
+  "is_published": true
+}

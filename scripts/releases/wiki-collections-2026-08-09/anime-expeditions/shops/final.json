@@ -1,0 +1,46 @@
+{
+  "universe_id": 7613921865,
+  "wiki_slug": "anime-expeditions",
+  "collection_slug": "shops",
+  "code": "anime-expeditions-shops",
+  "display_name": "Shops",
+  "title": "All {count} Shops in Anime Expeditions",
+  "seo_title": "All {count} Shops in Anime Expeditions",
+  "meta_description": "Compare Anime Expeditions shops by currency, access, purpose, stock rules, reset behavior, and availability before spending.",
+  "intro_md": "Shops turn each part of Anime Expeditions into its own small economy. Gold, Gems, Raid Tokens, Spirit Tokens, Crowns, Expedition Coins, and event currency have different homes, so the shortest shopping trip begins before the farming does.",
+  "description_md": "## Matching currency to the right shop\n\nGold Shop handles general progression spending, while Wandering Trader Sentaku uses Gems for reroll and lock supplies when the trader appears. Sentaku follows a live schedule, so appearance time, stay duration, quantities, and prices belong to the in-game panel rather than a permanent shopping plan.\n\nMode currencies do not replace one another. Raid Tokens go to General Raid Shop, Spirit Tokens belong to Spirit City Shop, Crowns serve Tournament Shop, and Expedition Coins stay inside the Expedition Hub economy. A full wallet can still be the wrong wallet, which feels very organized of the game.\n\n## Permanent shops and limited raid stock\n\nGeneral Raid Shop unlocks with Raids at player level 25 and has fixed purchase caps. Its limited stock does not restock after selling out, even though the mode shop itself is permanent.\n\nSpirit City Shop follows the same important distinction for its map-specific stock: permanent access does not turn a purchased limit into a repeating reset. Keep Spirit Tokens for Spirit City progression instead of assuming they work like the shared Raid Tokens.\n\n## Checking rotating and event shelves\n\nTournament and Expedition shops can rotate rewards or carry live purchase limits. Their current stock, cost, cap, and timer should be read in-game before spending, especially when a permanent shop offers items that are only temporarily on its shelves.\n\nEvent Shop uses the active event's currency and closes with that event's schedule. Its stock, deadline, and any currency carry-over rule can change, so the live event panel decides whether saving or spending is safer. Yesterday's coin is not automatically tomorrow's treasure.",
+  "how_it_works_md": "Type and Currency show which economy a shop belongs to. Access, Best for, Stock, Reset check, and Status explain where it opens, what it supports, and whether its shelves are fixed, rotating, or temporary.",
+  "description_json": {
+    "General Shops": "These shops use broad account currencies for normal progression or reroll supplies. Gold Shop is a core exchange, while Sentaku appears on a live schedule with changing prices and quantities.",
+    "Mode Shops": "Raid, Spirit City, Tournament, and Expedition shops keep their own mode currencies and purchase rules. A permanent mode shop may still have fixed limited stock or a rotating shelf.",
+    "Event Shops": "Event Shop follows the active event's currency, rewards, and deadline. Its live panel holds the current stock and any carry-over rule."
+  },
+  "faq_json": [
+    {
+      "q": "What currency does each Anime Expeditions shop use?",
+      "a": "Gold Shop uses Gold, Sentaku uses Gems, General Raid Shop uses Raid Tokens, Spirit City Shop uses Spirit Tokens, Tournament Shop uses Crowns, and Expedition Shop uses Expedition Coins. Event Shop uses the active event's currency."
+    },
+    {
+      "q": "Does General Raid Shop stock reset?",
+      "a": "Its limited stock has fixed purchase caps and does not restock after selling out. The shop remains part of Raid mode, but permanent access does not mean repeating shelves."
+    },
+    {
+      "q": "Are Raid Tokens and Spirit Tokens the same?",
+      "a": "No. Raid Tokens are spent at General Raid Shop, while Spirit Tokens are tied to Spirit City Shop and its map-specific progression."
+    },
+    {
+      "q": "Where can I find Wandering Trader Sentaku?",
+      "a": "Sentaku is a roaming Gem trader who appears on a live schedule. The in-game notice or trader panel provides the active timing, stock, quantities, and prices."
+    },
+    {
+      "q": "Does Expedition Shop always have the same stock?",
+      "a": "No. The shop is permanent inside Expedition Hub, but its progression stock can rotate. Read its live cost, purchase cap, and expiry before buying."
+    },
+    {
+      "q": "Should I save event currency for the next event?",
+      "a": "Only if the active event panel says the currency carries over. Event stock, deadlines, and currency rules can change, so do not assume an old coin will remain useful."
+    }
+  ],
+  "wiki_md": "Shops use separate currencies for general progression, rerolls, Raids, Spirit City, Tournaments, Expeditions, and events. Permanent shops can still have limited or rotating shelves, while Sentaku and Event Shop depend on live timing. Match the currency first, then read the in-game stock, cap, reset, and carry-over details before spending.",
+  "is_published": true
+}

@@ -1,0 +1,40 @@
+{
+  "universe_id": 9167377564,
+  "wiki_slug": "100-days-at-sea",
+  "collection_slug": "night-raids",
+  "code": "100-days-at-sea-night-raids",
+  "display_name": "Night Raids",
+  "title": "All {count} Night Raids in 100 Days At Sea",
+  "seo_title": "All {count} Night Raids in 100 Days At Sea",
+  "meta_description": "Compare Night Raid warnings, enemies, mechanics, and defense strategies in 100 Days At Sea, including Ghost Pirate, Buku, Kraken, and Alien threats.",
+  "intro_md": "Night Raids bring recurring enemy pressure straight to your raft or base. The warning tells you which threat is coming, and quick preparation matters because the ocean does not respect bedtime.",
+  "description_md": "## Reading raid warnings\n\nTreat every raid warning as a signal to stop wandering and prepare. Do not plan around a fixed day: Buku attackers can arrive with little warning, while Kraken and mothership messages tell you to get ready for that night.\n\nThe wording also shows where the danger is headed. Ghost Pirates and the Kraken pressure the raft, while the mothership warning announces an Alien attack on the base.\n\n## Preparing your defense\n\nKeep weapons and healing ready, then clear enough room to move without getting trapped by your own raft setup. An Auto Turret can reduce incoming pressure while you deal with enemies that need direct attention.\n\nGhost Pirate and Buku raids mix close-range attackers with ranged pressure. Clear gunners and other ranged enemies early, then deal with the melee group instead of letting both sides turn the deck into a very small problem room.\n\nThe Kraken needs open deck space and advance preparation for a sea fight. Alien attacks put more focus on base defense and positioning, so avoid getting surrounded while the Auto Turret helps control the approach.\n\n## Kraken Raid vs Ancient Squid\n\nThe Kraken Raid is an announced attack on the raft at sea. The Ancient Squid is a separate boss encounter summoned with tablets, so do not use the two names for the same fight.",
+  "how_it_works_md": "Warning gives the in-game alert, while Trigger explains the timing in qualitative terms. Enemy names identify the threat group, and Mechanics, Strategy, and Distinction explain what is attacked, how to respond, and which similar encounter should not be confused with the raid.",
+  "description_json": {
+    "All Night Raids": "Raid warnings identify the incoming threat and whether the raft or base needs attention. Use that signal to arm up, heal, clear movement space, and put defensive structures to work before the attackers settle in."
+  },
+  "faq_json": [
+    {
+      "q": "Do Night Raids happen on a fixed schedule in 100 Days At Sea?",
+      "a": "Do not assume a fixed schedule. Watch for the raid warning and prepare when it appears, since some attacks give clearer notice than others."
+    },
+    {
+      "q": "What does the mothership warning mean?",
+      "a": "The message that the mothership will attack your base tonight signals an Alien Raid. Prepare base defenses and avoid getting surrounded when the attackers arrive."
+    },
+    {
+      "q": "How should I prepare for a Night Raid?",
+      "a": "Keep weapons and healing ready, leave room to move, and use an Auto Turret to help control incoming enemies. Focus ranged attackers first during mixed raids."
+    },
+    {
+      "q": "What is the difference between Ghost Pirate and Buku raids?",
+      "a": "Ghost Pirates board the raft with melee pirates and gunners. Buku attacks use a mixed group of melee and ranged fighters and can begin with little warning."
+    },
+    {
+      "q": "Is the Kraken Raid the same as the Ancient Squid?",
+      "a": "No. The Kraken Raid is an announced open-sea attack on the raft, while the Ancient Squid is a separate boss encounter summoned with tablets."
+    }
+  ],
+  "wiki_md": "Night Raids are recurring attacks that pressure your raft or base. Their warnings identify Ghost Pirate, Buku, Kraken, or Alien threats, giving you a cue to grab weapons, healing, and defensive support. Each raid changes what you should protect and which enemies need attention first.",
+  "is_published": true
+}

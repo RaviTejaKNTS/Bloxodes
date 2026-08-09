@@ -1,0 +1,44 @@
+{
+  "universe_id": 383310974,
+  "wiki_slug": "adopt-me",
+  "collection_slug": "weather",
+  "code": "adopt-me-weather",
+  "display_name": "Weather",
+  "title": "All {count} Weather Types in Adopt Me",
+  "seo_title": "All {count} Weather Types in Adopt Me",
+  "meta_description": "Compare Adopt Me weather rotation order, duration, map changes, temporary shops, forecast icons, and matching Pet Needs.",
+  "intro_md": "Special weather temporarily reshapes Adoption Island and gives pets a matching activity. Each rotation changes the route, opens temporary shops, and makes the forecast board much more interesting than a polite drawing of the sky.",
+  "description_md": "## How the weather rotation works\n\nThe recurring base order is Fall, Rain, Desert, Snow, then Fall again. Weather changes on Wednesdays, and each special rotation normally appears once every four Wednesdays for 36 hours.\n\nThat order is a base cycle, not a promise for a future calendar date. Special events or other overrides can change the forecast, while the in-game weather boards and countdown show what the active schedule is preparing to do.\n\nSunny is the normal forecast state between special rotations. It is not a separate recurring shop and map transformation in this system.\n\n## Completing Weather Needs\n\nEach special weather activates a pet activity tied to its map changes. Fall adds leaf piles, Rain forms puddles, Desert uses the Beach Party diving board, and Snow lets pets build a snowman.\n\nThe matching need only makes sense while that weather is active. A puddle task cannot negotiate with a sunny road, however determined the pet may look.\n\n## Planning around map and shop changes\n\nFall recolors the island and opens the Fall Shop near Pizza Shop. Rain darkens the sky, fills roads with puddles, and opens its pet, gift, and boat shops near Camping Shop.\n\nDesert covers the map with sand, dries the river, and places Desert Shop behind School. Snow covers the island, freezes most of the river for skating, and opens Snowy Igloo Shop near Playground.\n\nTemporary weather shops can offer categories such as pets, toys, pet accessories, vehicles, strollers, and food. Exact stock and prices can change, so the durable comparison is where the shop appears and what broad kinds of items belong to that rotation.",
+  "how_it_works_md": "Weather need names the matching pet activity. Rotation, Duration, and Follows explain the recurring base cycle, while Map changes, Temporary shops, Obtainable categories, and Forecast cover what appears during the active weather.",
+  "description_json": {
+    "Weather Rotation": "The base cycle follows Fall, Rain, Desert, and Snow, with each weather temporarily changing Adoption Island and activating a matching Pet Need. Forecast overrides can happen, so the in-game boards and countdown remain part of the system."
+  },
+  "faq_json": [
+    {
+      "q": "What is the Adopt Me weather rotation order?",
+      "a": "The recurring base order is Fall, Rain, Desert, Snow, then Fall again. Special events or other overrides can change the active forecast."
+    },
+    {
+      "q": "How long does special weather last in Adopt Me?",
+      "a": "Each special weather normally lasts 36 hours and appears once every four Wednesdays in the base rotation."
+    },
+    {
+      "q": "When is the next Adopt Me weather type?",
+      "a": "A future calendar date should not be promised from the base order alone because overrides can happen. The in-game weather boards and countdown display the active forecast."
+    },
+    {
+      "q": "Which Pet Need belongs to each weather?",
+      "a": "Fall uses leaf piles, Rain uses puddles, Desert uses the Beach Party diving board, and Snow uses snowman building."
+    },
+    {
+      "q": "Are weather shops permanent?",
+      "a": "No. Fall Shop, the Rain shops, Desert Shop, and Snowy Igloo Shop appear with their matching special weather."
+    },
+    {
+      "q": "Is Sunny part of the special weather rotation?",
+      "a": "Sunny is the normal forecast state. It does not create a separate recurring weather shop and map transformation."
+    }
+  ],
+  "wiki_md": "Adopt Me weather follows a recurring base cycle through Fall, Rain, Desert, and Snow. Each special weather changes Adoption Island, opens temporary shops, and activates a matching Pet Need for a limited window. In-game forecast boards and the countdown reflect the active schedule when special events or other overrides affect the usual order.",
+  "is_published": true
+}

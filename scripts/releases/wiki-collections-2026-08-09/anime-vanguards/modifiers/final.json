@@ -1,0 +1,53 @@
+{
+  "universe_id": 5578556129,
+  "wiki_slug": "anime-vanguards",
+  "collection_slug": "modifiers",
+  "code": "anime-vanguards-modifiers",
+  "display_name": "Modifiers",
+  "title": "All {count} Modifiers in Anime Vanguards",
+  "seo_title": "All {count} Modifiers in Anime Vanguards",
+  "meta_description": "Compare Anime Vanguards stage rules, enemy effects, counters, boss attacks, cooldowns, and starting, stacking, or Dungeon cards.",
+  "intro_md": "Modifiers change the rules around a run instead of simply adding more enemy health. They can disable parts of a team, protect enemies, trigger boss attacks, or reshape the economy, so reading the effect before placing units saves a very expensive surprise.",
+  "description_md": "## Reading stage and enemy rules\n\nStage Modifiers apply a broad rule to the fight, such as draining Meter, reducing Range, changing how damage spreads, or making enemies resist certain attacks. Build around that rule before the wave gets busy. A favorite unit is still allowed to be the wrong tool for one stage.\n\nEnemy Modifiers describe protection or behavior attached to enemies, including Overshield, Regen, Dodge, Shields, extra speed, or death copies. Enemy Effects focus on the response to a named mechanic. The same name can appear in both places because one explains what happens and the other explains the counter.\n\nSome mechanics have a clean answer through elements, immunity, cleansing, Nullify, bypass effects, or a different attack type. Others have no direct counter and require avoiding the trigger or leaving a vulnerable unit type out of the team. Empty Counter text should never be treated as proof that every normal answer works.\n\n## Preparing for enemy attacks\n\nStatus Attacks usually stop units from acting through Stun or another condition. Debuff Attacks lower Damage or Range, raise SPA, or place a mark that another enemy can use. Spread key roles across placements when a boss targets nearby units, and protect the unit that keeps your team functioning.\n\nSummoner Attacks add enemies or objects that create another job during the wave. Special Attacks follow unique triggers and can remove, steal, or destroy units, so their effect matters more than a normal damage race. Bosses do enjoy adding chores to a crisis.\n\nCooldown shows whether an attack repeats on a timer. N/A can mean the action is tied to a spawn, health threshold, number of hits, or a special one-time trigger instead, so watch the effect wording rather than waiting for a clock that never volunteered.\n\n## Choosing modifier cards\n\nStarting Cards establish a rule for the run, such as enemy multiplication, healing, explosions, crowd-control immunity, or unit stuns. Choose a team that can live with the card from the opening waves because the effect is not a problem you solve after it has already eaten the lane.\n\nStacking Cards add effects that can build as more copies are taken. Extra Shields, speed, SPA, Dodge, regeneration, or health can look manageable alone and become the real boss when combined, so judge the total pressure instead of each card in isolation.\n\nDungeon-Exclusive Cards only belong to Dungeon runs and can offer a bonus, a penalty, or both. Compare the tradeoff with your team before taking it: extra income, traits, placement space, damage, Range loss, time changes, and Life Stock recovery each favor a different plan.",
+  "how_it_works_md": "Status and Modifier type identify the active mechanic and its family. Effect explains what changes, Counter gives a supported response when one exists, and Cooldown shows a repeating timer or N/A for a different trigger pattern.",
+  "description_json": {
+    "Stage Modifiers": "These rules affect the stage as a whole and can change damage, summons, Meter, Range, movement, or enemy defenses. Team choice should account for the rule before the run begins.",
+    "Enemy Modifiers": "Enemy Modifiers add protection or behavior such as Overshield, Regen, Dodge, Shields, speed, health, or copies on death. Their visual or combat effect tells you what must be broken, bypassed, or outpaced.",
+    "Enemy Effects": "Enemy Effects explain the practical counter to a named mechanic. Some use immunity, cleansing, Nullify, elements, or bypass damage, while others must be avoided because no direct counter exists.",
+    "Status Attacks": "Status Attacks apply conditions such as Stun through boss timers, spawns, hit counts, ranges, or health thresholds. Their target rule decides whether spreading placements or protecting a key unit helps.",
+    "Debuff Attacks": "Debuff Attacks weaken units by changing Damage, Range, SPA, or another combat stat. Some expire, some last until the boss dies, and some interact with a later attack.",
+    "Summoner Attacks": "Summoner Attacks create extra enemies or objects during the fight. Those summons can block boss progress, add lane pressure, or punish the unit that defeats them.",
+    "Special Attacks": "Special Attacks use unique boss rules such as marks, Mind Control, invulnerability, or line-based unit removal. Their exact trigger and target pattern matter more than a normal cooldown.",
+    "Starting Cards": "Starting Cards set an early rule for the run, including enemy multiplication, healing, explosions, immunity, or unit stuns. The opening team needs to function under that condition immediately.",
+    "Stacking Cards": "Stacking Cards build repeated pressure through Shields, speed, SPA, Dodge, regeneration, or enemy health. Several manageable picks can combine into a much harder lane.",
+    "Dungeon-Exclusive Cards": "Dungeon-only choices can strengthen the team, weaken it, change the economy, or trade one stat for another. The best card depends on whether your current team can exploit the upside without collapsing under the cost."
+  },
+  "faq_json": [
+    {
+      "q": "What is the difference between Stage Modifiers and Enemy Modifiers?",
+      "a": "Stage Modifiers set a broad rule for the fight. Enemy Modifiers add protection or behavior to enemies, such as Overshield, Regen, Dodge, Shields, speed, or death copies."
+    },
+    {
+      "q": "Why does the same modifier name appear under Enemy Effects?",
+      "a": "The stage or enemy entry explains what the mechanic does. The Enemy Effects entry explains a supported counter, immunity, cleanse, bypass, or avoidance plan for that mechanic."
+    },
+    {
+      "q": "What does N/A cooldown mean for a boss attack?",
+      "a": "It means the attack is not shown as a normal repeating timer. Its trigger may be a spawn, health threshold, hit count, transformation, or special one-time action described in the effect."
+    },
+    {
+      "q": "How should I prepare for Status and Debuff Attacks?",
+      "a": "Read the target rule, trigger, duration, and cooldown. Spread important roles when attacks hit nearby units, and bring protection or cleansing only when the named effect allows it."
+    },
+    {
+      "q": "What is special about Stacking Cards?",
+      "a": "Their pressure builds as more copies are added. Plan around the combined Shields, speed, SPA, Dodge, regeneration, or health instead of judging each pick alone."
+    },
+    {
+      "q": "Can Dungeon-Exclusive Cards help the player?",
+      "a": "Yes. Some give income, damage, traits, placement space, healing, or other benefits, while others attach a penalty or tradeoff that the team must handle."
+    }
+  ],
+  "wiki_md": "Modifiers change stage rules, enemy defenses, counters, and boss attacks in Anime Vanguards. Effects and cooldowns show whether a threat repeats on a timer or triggers from a spawn, health threshold, hit count, or special action. Starting Cards shape the run early, Stacking Cards build repeated pressure, and Dungeon-Exclusive Cards offer bonuses or tradeoffs that need the right team.",
+  "is_published": true
+}

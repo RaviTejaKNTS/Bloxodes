@@ -1,0 +1,47 @@
+{
+  "universe_id": 383310974,
+  "wiki_slug": "adopt-me",
+  "collection_slug": "pet-needs",
+  "code": "adopt-me-pet-needs",
+  "display_name": "Pet Needs",
+  "title": "All {count} Pet Needs in Adopt Me",
+  "seo_title": "All {count} Pet Needs in Adopt Me",
+  "meta_description": "Learn how to complete Adopt Me Pet Needs, earn Bucks and age progress, handle weather tasks, and unlock Choose and Specific Item Requests.",
+  "intro_md": "Pet Needs turn everyday care into age progress and Bucks. Some are quick home tasks, others send you across Adoption Island, and the advanced requests make a well-stocked backpack feel suspiciously responsible.",
+  "description_md": "## Completing everyday needs\n\nKeep basic care furniture and supplies ready at home. Beds handle Sleepy, food and water handle Hungry and Thirsty, and showers or bathtubs handle Dirty without requiring a trip across the island.\n\nPet-only activities need more movement or interaction. Catch uses a throw toy, Potty uses supported furniture or fixtures, Ride accepts a rideable pet, vehicle, or stroller, and Walk completes while moving with the pet.\n\n## Planning location needs\n\nLocation needs reward a short trip to the matching destination. School, Beach Party, Salon, Pizza Shop, and Campsite complete their named tasks, while Playground handles Bored.\n\nBored can also be completed with a piano at home. Sick has several routes too: a Healing Apple, Doctor Heart, or the Hospital healing bench can cure it, so one grumpy ailment does not control your whole route.\n\n## Handling weather needs\n\nWeather changes on Wednesdays, and each weather need only appears with its matching rotation. Rain uses puddles, Fall uses leaf piles, Desert uses the Beach Party diving board, and Snow asks the pet to build a snowman.\n\nThese weather activities are for pets, not babies. Snowman has no supported Bucks value, so its blank reward means unknown rather than zero.\n\n## Unlocking advanced needs\n\nChoose unlocks after completing 50 total needs. It offers three possible needs and lets you select the pet's next activity, which is handy when your route already has a plan.\n\nSpecific Item Request unlocks after completing 100 total needs. It asks for an exact Hungry, Thirsty, Catch, Walk, or Ride action or item and pays 3x the underlying XP and Bucks reward.\n\nBabies do not receive Choose or Specific Item Requests. Both advanced systems belong to pets only, so baby care cannot be used to trigger those options.",
+  "how_it_works_md": "Need type groups the activity, Completion explains the required action, and Bucks reward gives the supported payout. Applies to identifies pets, babies, or both, while Unlock and Availability explain progression gates and weather rotation.",
+  "description_json": {
+    "Everyday Needs": "Routine care and pet activities can be completed with home furniture, supplies, toys, movement, or direct interaction. The Applies to value matters because several newer activities are pet-only.",
+    "Location Needs": "These needs use a named Adoption Island destination, though Bored and Sick also have supported alternatives. Planning nearby tasks together can save a great deal of polite running.",
+    "Weather Needs": "Weather needs rotate with Rain, Fall, Desert, and Snow on Wednesdays. They apply to pets only and are unavailable outside the matching weather.",
+    "Advanced Needs": "Choose and Specific Item Request unlock through total completed needs and apply only to pets. Specific Item Requests multiply the reward of the underlying need instead of using one fixed payout."
+  },
+  "faq_json": [
+    {
+      "q": "Do babies get Choose or Specific Item Requests?",
+      "a": "No. Choose and Specific Item Requests apply only to pets. Babies can receive supported everyday and location needs, but not these advanced options."
+    },
+    {
+      "q": "How do I unlock Choose in Adopt Me?",
+      "a": "Complete 50 total needs. Choose then offers three possible needs and lets you select the pet's next activity."
+    },
+    {
+      "q": "How do I unlock Specific Item Request?",
+      "a": "Complete 100 total needs. The request asks for an exact action or item tied to Hungry, Thirsty, Catch, Walk, or Ride."
+    },
+    {
+      "q": "What reward does a Specific Item Request give?",
+      "a": "It gives 3x the XP and Bucks reward of the underlying need. The exact amount depends on which need the request uses."
+    },
+    {
+      "q": "When do weather needs change in Adopt Me?",
+      "a": "The weather rotation changes on Wednesdays. Rain Puddle, Leaf Pile, Diving Board, and Snowman only appear with their matching weather."
+    },
+    {
+      "q": "How many Bucks does Snowman give?",
+      "a": "A dependable Bucks reward is not stated for Snowman. Its blank reward should be treated as unknown, not zero."
+    }
+  ],
+  "wiki_md": "Pet Needs are care and activity objectives that give pets age progress and Bucks. Everyday and location tasks use home furniture, supplies, movement, or Adoption Island destinations, while weather tasks rotate on Wednesdays. Pet-only advanced needs unlock after 50 and 100 completed needs, adding player choice and exact item requests to the care loop.",
+  "is_published": true
+}

@@ -1,0 +1,40 @@
+{
+  "universe_id": 9167377564,
+  "wiki_slug": "100-days-at-sea",
+  "collection_slug": "food",
+  "code": "100-days-at-sea-food",
+  "display_name": "Food",
+  "title": "All {count} Food in 100 Days At Sea",
+  "seo_title": "All {count} Food in 100 Days At Sea",
+  "meta_description": "Compare how to find Food in 100 Days At Sea and see which potion recipes and brewing roles use each item.",
+  "intro_md": "Food keeps your survival run moving and also doubles as brewing material. Some finds belong in useful potion recipes, while spare food can become trade goods for the Fisherman instead of an emergency snack.",
+  "description_md": "## Finding food early\n\nUse the starter Fishing Rod to build an early food supply. You can also Harpoon floating Potatoes near the raft and hit daytime birds to get Cooked Bird, which makes looking up worthwhile for once.\n\nCrab Traps can passively bring in fish and food. A Pizza Oven fills a similar food-production role as your raft grows, so you do not have to spend every calm moment holding a rod.\n\n## Deciding what to keep\n\nDo not eat every food pickup as soon as it lands. Starvation stops normal health recovery, so keep enough food for survival, then save ingredients needed for your next potion.\n\nSpare food can be traded to the Fisherman for valuable loot. Hold onto anything required for a planned brew before trading, especially food that appears across several potion roles.\n\n## Food and potion roles\n\nA named potion use means that food appears in the brew's recipe. Healing, Attack, Defense, Utility, and Wacky describe what those potions are for, not what happens when you eat the ingredient. A Defense ingredient will not make your lunch block damage by itself.",
+  "how_it_works_md": "How to get shows the known acquisition route. Potion recipes and Used in potions show how often and where the food appears in brewing, while Potion roles groups those brews by purpose. Survival use appears only when a specific eating effect is known.",
+  "description_json": {
+    "All Food": "Food can support survival, serve as a potion ingredient, or be saved for general Fisherman trades. The potion fields name each brew and its role, so you can tell what to keep before dinner wins the argument."
+  },
+  "faq_json": [
+    {
+      "q": "How do I get Food in 100 Days At Sea?",
+      "a": "Start with the Fishing Rod and collect food found around the map. Crab Traps can passively bring in fish and food, while the Pizza Oven adds another food-production option for your raft."
+    },
+    {
+      "q": "How do I get Potato and Cooked Bird?",
+      "a": "Use the Harpoon on floating Potatoes near the raft. During the day, Harpoon birds above the raft to make them drop Cooked Bird."
+    },
+    {
+      "q": "What happens if I starve?",
+      "a": "Starvation stops your normal health regeneration. Keep some food ready so taking damage does not leave your health stuck."
+    },
+    {
+      "q": "Is Food used for potions?",
+      "a": "Yes. Many Food items appear as ingredients in named potion recipes, and a food can be used across different potion roles."
+    },
+    {
+      "q": "Can I trade Food to the Fisherman?",
+      "a": "Yes. Spare food can be traded to the Fisherman for valuable loot. Keep ingredients needed for a planned potion before trading them away."
+    }
+  ],
+  "wiki_md": "Food supports survival and supplies ingredients for potion brewing. You can get it through fishing, map pickups, the Harpoon, and passive food systems on your raft. Keep enough to avoid starvation, save recipe ingredients, and trade true extras to the Fisherman for loot.",
+  "is_published": true
+}

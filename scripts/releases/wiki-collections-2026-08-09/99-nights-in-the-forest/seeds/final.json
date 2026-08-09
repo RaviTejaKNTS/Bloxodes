@@ -1,0 +1,46 @@
+{
+  "universe_id": 7326934954,
+  "wiki_slug": "99-nights-in-the-forest",
+  "collection_slug": "seeds",
+  "code": "99-nights-in-the-forest-seeds",
+  "display_name": "Seeds",
+  "title": "All {count} Seeds in 99 Nights in the Forest",
+  "seo_title": "All {count} Seeds in 99 Nights in the Forest",
+  "meta_description": "Compare seed outputs, growth time, planting locations, acquisition routes, and uses in 99 Nights in the Forest.",
+  "intro_md": "Seeds turn one packet into food, Flowers, Fireflies, or potion ingredients after an in-game day. The packet is small; the number of survival errands it can create is doing impressive work.",
+  "description_md": "## Choosing seeds for the run\n\nFood Seeds solve hunger or movement problems. Berry Seeds create a renewable food source, while Chili Seeds grow Chili that gives a temporary speed increase. Plant them before the team is already hungry enough to debate the furniture.\n\nFlower Seeds support the Fairy loop because harvested Flowers can buy more seed packets. Firefly Seeds create Fireflies, giving the map extra light and helping recharge flashlights.\n\nPotion Ingredient Seeds need more planning. Dripleaves grow beside ponds, Cavevines belong in Locked Caves and Mineshafts, and Mandrakes grow near Trick-or-Treat houses. Moonflowers and Stareweeds can grow across the map, but harvesting them has its own rule.\n\n## Using the Fairy seed route\n\nThe Fairy sells seed packets for Flowers. Common food, Flower, and Firefly packets also appear through grocery or chest routes, while the specialist potion packets come through the Fairy.\n\nSpend Flowers on the output your route can actually use. Buying a cave plant when nobody plans to brew potions is a fine way to grow decorative homework.\n\n## Planting and harvesting\n\nEach seed packet grows its output one in-game day after planting. Check the planting context before using a specialist packet, because Cavevines, Dripleaves, and Mandrakes need the right part of the map.\n\nMoonflower Bulbs can only be harvested at night. Stareweed needs a Flashlight shone on it before its petals can be collected. Those rules affect the harvest, so pack the light and schedule the trip before the plant is ready.",
+  "how_it_works_md": "Seed type, Grows, Growth time, and Planting context explain what the packet produces and where. Sources, Main use, Harvest notes, and Availability cover the acquisition and special-use rules.",
+  "description_json": {
+    "Food Seeds": "Chili Seeds grow speed-boosting Chili, while Berry Seeds create renewable food. Both grow after one in-game day and have several acquisition routes.",
+    "Flowers and Light": "Flower Seeds feed the Fairy purchase loop, while Firefly Seeds create light and flashlight support across the map.",
+    "Potion Ingredient Seeds": "These Fairy packets grow potion plants. Some need ponds, caves, mineshafts, or Trick-or-Treat houses, and some add a special harvest rule."
+  },
+  "faq_json": [
+    {
+      "q": "How long do seeds take to grow?",
+      "a": "Seed packets grow their output one in-game day after planting."
+    },
+    {
+      "q": "Where can I get seed packets?",
+      "a": "The Fairy sells seed packets for Flowers. Chili, Berry, Flower, and Firefly Seeds also appear through grocery or chest routes."
+    },
+    {
+      "q": "Which seeds grow food?",
+      "a": "Berry Seeds grow Berries for hunger, and Chili Seeds grow Chili that gives a temporary speed increase."
+    },
+    {
+      "q": "Where should I plant Dripleaf Seeds?",
+      "a": "Plant Dripleaf Seeds next to ponds. The grown Dripleaf is used for potion brewing."
+    },
+    {
+      "q": "How do I harvest Moonflowers and Stareweed?",
+      "a": "Moonflower Bulbs can only be harvested at night. Shine a Flashlight on Stareweed before collecting its petals."
+    },
+    {
+      "q": "Where do Cavevine and Mandrake Seeds grow?",
+      "a": "Cavevine Seeds grow in Locked Caves and Mineshafts. Mandrake Seeds grow near Trick-or-Treat houses."
+    }
+  ],
+  "wiki_md": "Seeds grow food, Flowers, Fireflies, and potion ingredients after one in-game day. Common packets come from the Fairy, grocery routes, or chests, while specialist potion plants need the right pond, cave, mineshaft, or house area. Plant for the route your team plans to use, unless the goal is a very tidy garden beside an empty Crock Pot.",
+  "is_published": true
+}

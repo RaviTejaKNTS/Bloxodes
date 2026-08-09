@@ -1,0 +1,43 @@
+{
+  "universe_id": 994732206,
+  "wiki_slug": "blox-fruits",
+  "collection_slug": "trinkets",
+  "code": "blox-fruits-trinkets",
+  "display_name": "Trinkets",
+  "title": "All {count} Trinkets in Blox Fruits",
+  "seo_title": "All {count} Blox Fruits Trinkets, Effects, Grades and Sources",
+  "meta_description": "Compare Blox Fruits trinkets by grade, family, effect, source, location, and availability.",
+  "intro_md": "Trinkets are passive equipment rewards that improve fishing, combat, movement, or farming. Each family climbs through four grades, so the family tells you the purpose and the grade tells you how far the bonus has progressed.",
+  "description_md": "## Compare families before grades\n\nEach trinket family has a consistent role. The Seashell line supports fishing, Tooth Amulets help combat, Daggers support movement, Lockets improve survivability, Herbs support recovery, and Idols focus on rewards. Pick the family that matches the activity before chasing a higher grade.\n\n## Follow the grade ladder\n\nGrades I through IV are separate rows with progressively stronger effects. A higher grade is useful only when its family serves your build, so compare the exact effect instead of treating every Roman numeral as an automatic upgrade.\n\n## Check the source and location\n\nThe Source and Location fields identify where each trinket enters progression. Availability separates regular targets from anything tied to a limited route. Plan the source first, then compare the grade you can realistically reach.",
+  "how_it_works_md": "Family describes the trinket's role, Grade shows its progression tier, and Effect states the passive bonus. Source, Location, and Availability explain where and whether it can be obtained.",
+  "description_json": {
+    "Grade I": "Entry-level versions of all six trinket families.",
+    "Grade II": "Second-tier versions with stronger family effects.",
+    "Grade III": "Advanced versions of the same six family roles.",
+    "Grade IV": "Top recorded grade for each trinket family."
+  },
+  "faq_json": [
+    {
+      "q": "What are trinkets used for?",
+      "a": "Trinkets provide passive bonuses while equipped. Their effects cover fishing, combat, movement, survival, recovery, and reward farming."
+    },
+    {
+      "q": "How are trinkets grouped?",
+      "a": "They are grouped by Grade I through Grade IV. Each grade includes one version from every permanent trinket family."
+    },
+    {
+      "q": "Is a higher-grade trinket always better?",
+      "a": "A higher grade strengthens its family effect, but the effect still needs to match your activity or build."
+    },
+    {
+      "q": "Where do I find a trinket's route?",
+      "a": "Use the Source and Location fields on its card. They identify the recorded obtainment route."
+    },
+    {
+      "q": "Do all trinkets have images?",
+      "a": "Yes. This collection uses exact source-backed art for every listed trinket."
+    }
+  ],
+  "wiki_md": "Trinkets are passive equipment pieces arranged into six families and four grades. Choose the family for the effect you need, then use the grade, source, and location to plan the upgrade route.",
+  "is_published": true
+}

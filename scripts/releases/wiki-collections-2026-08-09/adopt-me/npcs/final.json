@@ -1,0 +1,41 @@
+{
+  "universe_id": 383310974,
+  "wiki_slug": "adopt-me",
+  "collection_slug": "npcs",
+  "code": "adopt-me-npcs",
+  "display_name": "NPCs",
+  "title": "All {count} NPCs in Adopt Me",
+  "seo_title": "All {count} NPCs in Adopt Me",
+  "meta_description": "Find Adopt Me NPCs by current status, appearance type, and location context, including active characters and past event appearances.",
+  "intro_md": "NPCs give Adopt Me shops, services, tasks, and story moments a face. Availability matters as much as location because some characters stand in permanent buildings while others only appear through a recurring condition or older activity.",
+  "description_md": "## Finding current NPCs\n\nStart with availability, then check the location context. In game means the character is marked as active, but it does not always mean the NPC stands in one permanent spot every day.\n\nSome active characters belong to recurring weather or special contexts. Their location tells you the condition or place connected to the appearance, so check that before crossing Adoption Island with great confidence and no actual NPC.\n\nCharacters in permanent buildings are more direct. Shopkeepers and service NPCs are usually tied to places such as the Nursery, Safety Hub, Coffee Shop, Hospital, Salon, or Sky Castle.\n\n## Understanding past and event NPCs\n\nNot currently in game means the character is not marked as active. The location field records where that NPC appeared before, not a place where you can expect to find them now.\n\nEvent or limited describes a temporary appearance, while Removed covers a character taken out of an older location or system. Neither label promises a return, even if a similar event comes back later.\n\n## Reading multiple appearance contexts\n\nAn NPC can appear in several places across different updates. Keep availability as the main status check and treat each location as appearance context rather than proof that every version is active at once.\n\nDo not invent a role from a costume or name. The location and appearance type explain where the character fits, while any actual shop or service function belongs to the supported in-game context.",
+  "how_it_works_md": "Availability shows whether an NPC is marked in game. Appearance type separates current, recurring, event, limited, and removed contexts, while Location records the places or activities connected to that character.",
+  "description_json": {
+    "Current NPCs": "These characters are marked in game. Some use permanent buildings, while recurring NPCs may still depend on weather or another active context before they appear.",
+    "Past and Event NPCs": "These characters are not currently marked in game. Their locations record earlier appearances and do not promise that the NPC or activity will return."
+  },
+  "faq_json": [
+    {
+      "q": "What does In game mean for an Adopt Me NPC?",
+      "a": "It means the character is marked as active in Adopt Me. A recurring NPC may still need the matching weather or special context before appearing."
+    },
+    {
+      "q": "Why does a current NPC have several locations?",
+      "a": "Some NPCs have appeared in different buildings or activities across updates. Use availability for current status and treat the location text as appearance context."
+    },
+    {
+      "q": "Will past or event NPCs return?",
+      "a": "A past appearance does not confirm a return. Event or limited and Removed describe the NPC's known status, not a future schedule."
+    },
+    {
+      "q": "What is the difference between Event or limited and Removed?",
+      "a": "Event or limited means the NPC appeared through a temporary activity or condition. Removed means the character was taken out of an older location or system."
+    },
+    {
+      "q": "How do I find an NPC in Adopt Me?",
+      "a": "Check whether the NPC is marked in game, then use its location or activity context. Recurring characters may not appear until their matching condition is active."
+    }
+  ],
+  "wiki_md": "NPCs connect Adopt Me players to shops, services, tasks, and special activities. Current characters can live in permanent buildings or appear through recurring conditions, while past NPCs keep their earlier location context without a return promise. Availability and location together show whether a character is active and where that appearance belongs.",
+  "is_published": true
+}

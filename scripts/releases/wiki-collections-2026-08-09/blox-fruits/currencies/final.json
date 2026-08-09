@@ -1,0 +1,41 @@
+{
+  "universe_id": 994732206,
+  "wiki_slug": "blox-fruits",
+  "collection_slug": "currencies",
+  "code": "blox-fruits-currencies",
+  "display_name": "Currencies",
+  "title": "All {count} Currencies in Blox Fruits",
+  "seo_title": "All {count} Blox Fruits Currencies, Sources, Uses and Caps",
+  "meta_description": "Compare Blox Fruits currencies by sea access, cap, primary sources, main uses, and availability.",
+  "intro_md": "Blox Fruits uses Money, Fragments, and Valor for different progression systems. Their sources and spending targets are distinct, so a large balance in one currency does not solve a requirement written in another.",
+  "description_md": "## Separate the core currencies\n\nMoney and Fragments are the broad progression currencies. Their Main sources and Main uses fields show the activities that build and spend each balance across normal progression.\n\n## Treat Valor as specialized\n\nValor belongs to a narrower progression route than the two core currencies. Use Sea access and Main uses before farming it so the target system is actually available to your character.\n\n## Check the cap before long farms\n\nCap records the verified holding limit or limit behavior. Compare it with your planned purchase so farming time does not disappear into a full balance.",
+  "how_it_works_md": "Sea access shows when a currency enters progression, Cap records its holding limit, and Main sources plus Main uses explain how it is earned and spent.",
+  "description_json": {
+    "Core": "Money and Fragments, the broad progression currencies.",
+    "Specialized": "Valor, used by a narrower progression system."
+  },
+  "faq_json": [
+    {
+      "q": "What are the main Blox Fruits currencies?",
+      "a": "This collection covers Money, Fragments, and Valor."
+    },
+    {
+      "q": "Are currencies interchangeable?",
+      "a": "No. Each currency has its own sources and spending systems."
+    },
+    {
+      "q": "Why should I check Sea access?",
+      "a": "It shows when the earning and spending route becomes relevant in progression."
+    },
+    {
+      "q": "What does Cap mean?",
+      "a": "It records the verified holding limit or cap behavior for the currency."
+    },
+    {
+      "q": "Why are currency rows text-first?",
+      "a": "The systems are represented by interface values and the verified source set does not provide a distinct reusable row icon for each one."
+    }
+  ],
+  "wiki_md": "Money, Fragments, and Valor fund different Blox Fruits systems. Compare sea access, sources, uses, and caps before choosing a farming route.",
+  "is_published": true
+}

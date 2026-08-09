@@ -1,0 +1,46 @@
+{
+  "universe_id": 5578556129,
+  "wiki_slug": "anime-vanguards",
+  "collection_slug": "crafting-recipes",
+  "code": "anime-vanguards-crafting-recipes",
+  "display_name": "Crafting Recipes",
+  "title": "All {count} Crafting Recipes in Anime Vanguards",
+  "seo_title": "All {count} Crafting Recipes in Anime Vanguards",
+  "meta_description": "Compare Anime Vanguards crafting, synthesis, and dismantling recipes by materials, Gold cost, output, and action type.",
+  "intro_md": "The Crafting station in the Upgrades area turns essences and other materials into evolution items, potions, or different resources. Crafting builds upward, dismantling breaks essences down, and synthesis helps redirect spare Legend Stage drops.",
+  "description_md": "## Crafting essences and evolution items\n\nCrafting consumes the listed materials plus its Gold cost to make the shown result. Colored essences build from Green Essence, while Rainbow Essence combines the colored types and then feeds several evolution-item recipes.\n\nCheck every input before spending. Similar recipes often change only one color or quantity, which is a small difference right until the station eats the materials you meant to save.\n\n## How synthesis works\n\nSynthesis applies to eligible evolution items from Legend Stages. You sacrifice two copies of another eligible item to receive one chosen eligible result, making duplicate drops useful when the stage refuses to cooperate.\n\nNew items from a major update do not enter synthesis immediately. They are added in the following half update, so a fresh evolution material may need to be farmed normally before it becomes selectable.\n\n## When to dismantle essences\n\nDismantling converts colored essences back into Green Essence for a Gold fee. It is useful when you have the wrong colors for the next recipe, but the return is lower than the original crafting path.\n\nDismantle only the surplus you are ready to lose. Keeping a reserve of colored and Rainbow Essence avoids paying to rebuild the same material chain later, a loop with all the charm of buying your own groceries twice.",
+  "how_it_works_md": "Action Type separates Craft, Synthesize, and Dismantle rows. Inputs and Gold Cost show what is spent, while Output and Output Quantity show what the station returns.",
+  "description_json": {
+    "Crafting": "Crafting combines listed materials and Gold into essences, evolution items, or utility items at the Upgrades-area station.",
+    "Synthesis": "Synthesis trades duplicate eligible Legend Stage evolution items for a chosen eligible result after its update-delay window ends.",
+    "Dismantling": "Dismantling spends a colored essence and Gold to recover Green Essence, giving spare colors a fallback use."
+  },
+  "faq_json": [
+    {
+      "q": "Where is the Crafting station in Anime Vanguards?",
+      "a": "It is in the Upgrades area. Crafting, synthesis, and dismantling are handled there."
+    },
+    {
+      "q": "What can I make with crafting?",
+      "a": "Recipes include colored and Rainbow Essence, evolution items, and utility items such as Super Lucky Potion."
+    },
+    {
+      "q": "How does Legend Stage synthesis work?",
+      "a": "Sacrifice two copies of another eligible Legend Stage evolution item to receive one chosen eligible item."
+    },
+    {
+      "q": "Why is a new evolution item missing from synthesis?",
+      "a": "Items introduced in a major update are added to synthesis in the following half update, so the newest material may not be eligible yet."
+    },
+    {
+      "q": "What does dismantling do?",
+      "a": "It converts colored or Rainbow Essence back into Green Essence for a Gold cost."
+    },
+    {
+      "q": "Should I dismantle every spare essence?",
+      "a": "Usually not. Keep colors needed by planned evolution recipes, then dismantle only the surplus you want to turn back into Green Essence."
+    }
+  ],
+  "wiki_md": "Crafting at the Upgrades-area station combines essences, materials, and Gold into new items. Synthesis trades duplicate eligible Legend Stage evolution drops for a chosen result, while dismantling converts colored essences back into Green Essence. Check the action type and inputs before spending because each system returns materials differently.",
+  "is_published": true
+}

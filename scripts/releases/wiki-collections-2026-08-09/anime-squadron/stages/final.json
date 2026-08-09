@@ -1,0 +1,28 @@
+{
+  "universe_id": 8356066619,
+  "wiki_slug": "anime-squadron",
+  "collection_slug": "stages",
+  "code": "anime-squadron-stages",
+  "display_name": "Stages",
+  "title": "All {count} Stages in Anime Squadron",
+  "seo_title": "All {count} Anime Squadron Stages, Modes, and Bosses",
+  "meta_description": "Compare Anime Squadron stages by mode, world, act, boss, listed boss HP, and the kind of progression each route supports.",
+  "intro_md": "Stages split Anime Squadron progression across Story, Raid, Squadron, Challenge, Event, and world-boss routes. Matching the mode, world, and act to the boss you need saves a lot of wandering through menus with heroic confidence and no plan.",
+  "description_md": "## Which mode should you play?\n\nUse Story for normal world progression and repeatable material farming. Move to Raid or Squadron when an awakening or key item points to those modes, and use Challenge routes for focused rewards that do not belong to the regular world path.\n\nEvent stages can be temporary, so confirm that the route is active in the game before building a farm around it. World bosses are separate encounters and should not be treated like normal numbered acts.\n\n## Read the route before building a team\n\nWorld and act identify the exact destination, while Boss tells you the final named threat. Boss HP is a comparison clue, not a full difficulty rating, because enemy waves, modifiers, and your team matchups still decide whether a run feels easy.\n\nA repeated boss name can appear in several acts or modes. Follow the complete route name instead of stopping at the boss, or you may clear the right enemy in the wrong place. That is still a victory, just not a useful one.",
+  "how_it_works_md": "Boss HP appears where a value is confirmed. `Unknown` means no value is established for that route, and it should not be read as zero.",
+  "description_json": {
+    "Story": "Story routes move through the main worlds and provide the baseline progression path.",
+    "Raid": "Raid routes revisit worlds for focused drops and awakening-related farming.",
+    "Squadron": "Squadron routes are separate team encounters tied to materials and key items.",
+    "Challenge": "Challenge routes focus on a specific encounter and its reward pool.",
+    "Event": "Event routes belong to limited content, so check whether the encounter is active before farming.",
+    "World Bosses": "World bosses are standalone encounters rather than normal numbered acts."
+  },
+  "faq_json": [
+    { "q": "Are Story and Raid versions of a world the same stage?", "a": "No. Mode is part of the route. The same world or boss can appear in different modes with a different purpose and reward path." },
+    { "q": "Does higher boss HP always mean a harder stage?", "a": "Not by itself. HP helps compare the listed bosses, but waves, modifiers, enemy types, and your team can change the real difficulty." },
+    { "q": "What does Unknown boss HP mean?", "a": "A boss HP value is not confirmed for that route. It does not mean the boss has zero health." }
+  ],
+  "wiki_md": "Stages are the routes where you progress, farm materials, and fight named bosses. Mode, world, and act identify the exact destination, while Raid, Squadron, Challenge, Event, and world-boss routes serve different reward goals. Check the full route before building a farm so a repeated boss name does not send you to the wrong encounter.",
+  "is_published": true
+}

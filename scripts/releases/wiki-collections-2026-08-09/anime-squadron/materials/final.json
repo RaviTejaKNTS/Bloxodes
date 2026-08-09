@@ -1,0 +1,24 @@
+{
+  "universe_id": 8356066619,
+  "wiki_slug": "anime-squadron",
+  "collection_slug": "materials",
+  "code": "anime-squadron-materials",
+  "display_name": "Materials",
+  "title": "All {count} Materials in Anime Squadron",
+  "seo_title": "All {count} Anime Squadron Materials and Farming Sources",
+  "meta_description": "Find Anime Squadron material farming routes, worlds, acts, Normal and Hard chances, and the awakenings or progression goals that use each item.",
+  "intro_md": "Materials drop across Story, Raid, Squadron, and Challenge routes, then feed awakening and crafting goals. Start with the item you need and compare its route chances before turning your evening into an accidental tour of every world.",
+  "description_md": "## How to choose a farming route\n\nCheck the mode, world, and act first. If both difficulties are listed, Hard usually offers the stronger chance, but the best farm is still the highest difficulty you can clear quickly and consistently.\n\nUse the full route summary when a material drops from more than one place. A lower chance on a short, reliable clear can beat a better chance on a run that keeps failing near the boss.\n\n## Farm for more than one goal\n\nShared materials appear across several awakening recipes. Plan your next targets together, total the overlapping needs, and farm those shared drops before chasing route-specific key items.\n\nRows with no listed stage location are not guesses. Their item identity is established, but a normal stage farm is not confirmed, so check current event or game guidance before spending resources around them. The mystery box stays closed until the game hands us a key.",
+  "how_it_works_md": "Normal and Hard chances appear only when they are confirmed for the route. The route summary keeps additional locations visible when an item has more than one farming option.",
+  "description_json": {
+    "Farming Sources": "These materials have a confirmed stage route. Compare the mode, act, and difficulty chance before choosing your farm.",
+    "Special or Unconfirmed Sources": "These key materials are part of progression recipes, but a normal stage location is not confirmed for them."
+  },
+  "faq_json": [
+    { "q": "Should I always farm Anime Squadron materials on Hard?", "a": "Hard often has the better listed chance, but clear speed matters. Use the difficulty you can finish reliably, then compare how many successful runs you complete in the same time." },
+    { "q": "Why does a material say no stage location is listed?", "a": "The material is established in progression, but a normal stage location is not confirmed. Its acquisition may come from another system or need newer confirmation." },
+    { "q": "What does Used for mean?", "a": "It names awakening targets that require the material. Shared progression material means the item is established but is not tied to one of the displayed target recipes." }
+  ],
+  "wiki_md": "Materials are the drops and key items used for awakenings and other progression crafts. Their routes span different modes, worlds, acts, and difficulties, with some items shared by several targets. Comparing the listed chances helps you pick a farm that your team can clear consistently.",
+  "is_published": true
+}

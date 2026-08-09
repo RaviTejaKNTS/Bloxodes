@@ -1,0 +1,24 @@
+{
+  "universe_id": 8356066619,
+  "wiki_slug": "anime-squadron",
+  "collection_slug": "awakenings",
+  "code": "anime-squadron-awakenings",
+  "display_name": "Awakenings",
+  "title": "All {count} Awakenings in Anime Squadron",
+  "seo_title": "All {count} Anime Squadron Awakenings, Costs, and Materials",
+  "meta_description": "Compare Anime Squadron awakening routes by base unit, target rarity, element, Gold cost, key item, and required materials.",
+  "intro_md": "Awakening changes a base unit into a stronger target form after you gather its materials and pay the Gold cost. The key item is usually the stubborn part of the recipe, because progression always keeps one dramatic ingredient up its sleeve.",
+  "description_md": "## How to plan an awakening\n\nChoose the target before you start farming. Check that you own the correct base unit, then separate the recipe into its key item and shared materials so one rare drop does not hide a pile of routine farming.\n\nFarm shared materials on routes that help more than one planned target when possible. Save Gold alongside the item grind, since completing the recipe without the fee leaves your unit standing at the door.\n\n## Secret and Mythic targets\n\nTarget rarity describes the awakened form, not the starting unit. Secret routes often ask for rarer key items or larger shared-material totals, while Mythic routes can be useful stepping stones for a roster that still needs reliable damage and coverage.\n\nDo not assume a similarly named form uses the same recipe. Follow the exact base-unit and target pair shown on the card, especially for the SSJ4 routes where the names are close enough to cause an expensive oops.",
+  "how_it_works_md": "Gold cost is paid with the material recipe. The key item calls out the route-specific or hardest-to-replace requirement, while Materials shows the full recipe.",
+  "description_json": {
+    "Secret Awakenings": "Secret targets are long-term upgrades with demanding recipes. Confirm the exact key item before committing shared materials.",
+    "Mythic Awakenings": "Mythic targets provide focused progression routes and can prepare a roster for harder farms without requiring a Secret target first."
+  },
+  "faq_json": [
+    { "q": "Do I need the base unit before farming an awakening?", "a": "Yes. Each route starts from the named base unit, so confirm that unit and target pair before spending time on the recipe." },
+    { "q": "What is the key item in an awakening recipe?", "a": "It is the route-specific or most important named requirement. You still need every shared material and the listed Gold cost." },
+    { "q": "Can I use one material farm for several awakenings?", "a": "Often, yes. Shared materials such as Pelli, Behelit, Headband, or Zeni appear in more than one route, so planning several targets can make farming more efficient." }
+  ],
+  "wiki_md": "Awakenings turn specific base units into stronger named forms. Each route needs Gold, a key item, and a set of shared materials from Story, Raid, Squadron, or Challenge content. Picking the target first helps you farm overlapping materials without wasting the rare pieces.",
+  "is_published": true
+}

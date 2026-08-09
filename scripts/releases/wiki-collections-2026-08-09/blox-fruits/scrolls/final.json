@@ -1,0 +1,41 @@
+{
+  "universe_id": 994732206,
+  "wiki_slug": "blox-fruits",
+  "collection_slug": "scrolls",
+  "code": "blox-fruits-scrolls",
+  "display_name": "Scrolls",
+  "title": "All {count} Scrolls in Blox Fruits",
+  "seo_title": "All {count} Blox Fruits Scrolls, Tiers, Recipes and Enchant Levels",
+  "meta_description": "Compare Blox Fruits scrolls by tier, enchant levels, recipe, source, availability, and special roll behavior.",
+  "intro_md": "Scrolls apply enchantments to eligible weapons and fishing rods. Higher tiers support more enchantment levels and may introduce blessing or curse rolls, while two special scrolls remain admin-only.",
+  "description_md": "## Choose a tier for the item\n\nCommon, Rare, Legendary, and Mythical Scrolls are the player-obtainable progression. Their Enchant levels field shows the maximum level budget, while Recipe and Source show how to get each tier.\n\n## Understand special rolls\n\nLegendary and Mythical tiers can produce special blessing or curse results. The Special roll field records that behavior, so compare it before spending rare materials.\n\n## Keep admin scrolls separate\n\nBlessed and Cursed Scrolls are documented system entries but are unavailable to normal players. They remain in their own section so the collection explains the full named scroll set without presenting admin tools as progression targets.",
+  "how_it_works_md": "Tier and Enchant levels describe scroll strength. Recipe and Source explain obtainment, Availability separates player routes from admin-only rows, and Special roll records blessing or curse behavior.",
+  "description_json": {
+    "Obtainable": "The four scroll tiers available through normal crafting or shop routes.",
+    "Admin-only": "Special scrolls documented in the system but unavailable to normal players."
+  },
+  "faq_json": [
+    {
+      "q": "What do scrolls do?",
+      "a": "Scrolls apply enchantments to eligible weapons or fishing rods."
+    },
+    {
+      "q": "Which scrolls can players obtain?",
+      "a": "Common, Rare, Legendary, and Mythical Scrolls have normal player routes."
+    },
+    {
+      "q": "Which scrolls can roll blessings or curses?",
+      "a": "Legendary and Mythical Scrolls have documented special-roll behavior."
+    },
+    {
+      "q": "Can normal players get Blessed or Cursed Scrolls?",
+      "a": "No. Those two rows are admin-only and are not normal progression targets."
+    },
+    {
+      "q": "Why do some scroll rows have no image?",
+      "a": "Common, Rare, and Mythical lack exact source art in the verified local set, so they stay text-first instead of using proxy images."
+    }
+  ],
+  "wiki_md": "Scrolls enchant weapons and fishing rods through four obtainable tiers. Compare the level budget, recipe, and special-roll rules before crafting, and treat Blessed and Cursed Scrolls as admin-only reference entries.",
+  "is_published": true
+}

@@ -1,0 +1,42 @@
+{
+  "universe_id": 5578556129,
+  "wiki_slug": "anime-vanguards",
+  "collection_slug": "stat-ranks",
+  "code": "anime-vanguards-stat-ranks",
+  "display_name": "Stat Ranks",
+  "title": "All {count} Stat Ranks in Anime Vanguards",
+  "seo_title": "All {count} Stat Ranks in Anime Vanguards",
+  "meta_description": "Compare Anime Vanguards stat ranks by Damage, SPA, Range, normal roll chance, and full-potential roll chance.",
+  "intro_md": "Stat ranks add percentage bonuses to a unit's Damage, SPA, and Range. Higher grades offer stronger bands, but their roll chances make a lucky chip feel like it has suddenly learned dramatic timing.",
+  "description_md": "## How stat ranks affect a unit\n\nDamage increases the unit's attack output. Range expands how much of the map it can cover, while SPA changes attack speed, so a lower SPA value is the helpful direction even when the rank itself moves upward.\n\nEach stat rolls separately. A unit can therefore have different grades for Damage, SPA, and Range, and the useful target depends on whether that unit needs raw damage, reach, or faster attacks most.\n\n## Normal rolls and full potential\n\nNormal Chance is the base chance for each rank. Full Potential Chance applies when the unit reaches 100% Stat Potential, which requires 5,000 takedowns, and the potential resets after a stat roll.\n\nFull potential removes the low-grade outcomes and heavily shifts the roll toward better ranks. Save that setup for a unit you intend to keep, unless rebuilding takedowns sounds like a particularly slow hobby.\n\n## Evolution and stat transfer rules\n\nEvolution raises each stat by one rank once per evolution, but it cannot push Z+ into Godly. Units with more than one evolution can receive the rank increase at each eligible evolution stage.\n\nMythic-or-higher units can transfer selected stats at the Cyan NPC in the Upgrades area. The sacrificed unit loses its stats, trait, ascensions, and levels, while keeping its shiny state and evolutions. Each transferred stat costs Gold, and the receiving unit's previous value for that stat is replaced.",
+  "how_it_works_md": "Damage, SPA, and Range show the bonus band for each rank. Normal Chance is the base roll rate, while Full Potential Chance applies after the unit reaches 100% Stat Potential.",
+  "description_json": {},
+  "faq_json": [
+    {
+      "q": "What do stat ranks improve in Anime Vanguards?",
+      "a": "They add percentage bonuses to a unit's Damage, SPA, and Range. Each stat can have a different rank."
+    },
+    {
+      "q": "How do I reach 100% Stat Potential?",
+      "a": "Use the unit to reach 5,000 takedowns. Stat Potential resets after you roll a stat."
+    },
+    {
+      "q": "Does full potential guarantee Godly?",
+      "a": "No. Full potential changes the rank chances and removes the lowest outcomes, but Godly still has its own small roll chance."
+    },
+    {
+      "q": "Can evolution raise Z+ to Godly?",
+      "a": "No. Evolution can raise eligible lower grades by one rank, but it cannot turn Z+ into Godly."
+    },
+    {
+      "q": "Which units can transfer stats?",
+      "a": "Mythic-or-higher units can transfer selected stats with each other at the Cyan NPC in the Upgrades area."
+    },
+    {
+      "q": "What does the sacrificed unit lose in a stat transfer?",
+      "a": "It loses its stats, trait, ascensions, and levels. It keeps its shiny state and evolutions."
+    }
+  ],
+  "wiki_md": "Stat ranks add percentage bonuses to a unit's Damage, SPA, and Range, with separate grades for each stat. The Cyan NPC can reroll or transfer them, and 100% Stat Potential changes the rank chances after a unit reaches 5,000 takedowns. Evolution can raise eligible grades, but Z+ cannot become Godly through evolution.",
+  "is_published": true
+}

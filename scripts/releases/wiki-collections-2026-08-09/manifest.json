@@ -1,0 +1,76 @@
+{
+  "games": [
+    {
+      "slug": "1-speed-keyboard-escape",
+      "collections": ["items", "rebirths", "number-buttons"]
+    },
+    {
+      "slug": "100-days-at-sea",
+      "collections": ["armor", "food", "night-raids"]
+    },
+    {
+      "slug": "99-nights-in-the-forest",
+      "collections": ["armor", "chests", "blessings", "fire-offerings", "seeds"]
+    },
+    {
+      "slug": "adopt-me",
+      "collections": [
+        "pet-accessories",
+        "stickers",
+        "houses",
+        "locations",
+        "npcs",
+        "pet-needs",
+        "task-board-tasks",
+        "weather"
+      ]
+    },
+    {
+      "slug": "animal-hospital",
+      "collections": ["patient-conditions"]
+    },
+    {
+      "slug": "anime-expeditions",
+      "collections": ["expedition-buildings", "stat-potentials", "banners", "shops"]
+    },
+    {
+      "slug": "anime-squadron",
+      "collections": ["perks", "awakenings", "materials", "stages"]
+    },
+    {
+      "slug": "anime-vanguards",
+      "collections": [
+        "mounts",
+        "achievements",
+        "modifiers",
+        "cosmetics",
+        "emotes",
+        "profile-customization",
+        "stat-ranks",
+        "crafting-recipes"
+      ]
+    },
+    {
+      "slug": "blox-fruits",
+      "collections": [
+        "fish",
+        "fishing-rods",
+        "baits",
+        "potions",
+        "trinkets",
+        "scrolls",
+        "enchantments",
+        "aura-skins",
+        "fruit-skins",
+        "raids",
+        "crafting-recipes",
+        "currencies",
+        "stats"
+      ]
+    },
+    {
+      "slug": "brookhaven-rp",
+      "collections": ["lore-characters"]
+    }
+  ]
+}

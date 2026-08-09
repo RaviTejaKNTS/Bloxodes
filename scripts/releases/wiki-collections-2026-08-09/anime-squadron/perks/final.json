@@ -1,0 +1,21 @@
+{
+  "universe_id": 8356066619,
+  "wiki_slug": "anime-squadron",
+  "collection_slug": "perks",
+  "code": "anime-squadron-perks",
+  "display_name": "Perks",
+  "title": "All {count} Perks in Anime Squadron",
+  "seo_title": "All {count} Anime Squadron Perks and Upgrade Priorities",
+  "meta_description": "Compare every Anime Squadron perk by effect, known cap, Gold currency, practical use, and upgrade priority.",
+  "intro_md": "Perks spend Gold on permanent account upgrades for Yen capacity, Yen income, or base health. The right early choice helps every match, which is much nicer than asking your units to work on an empty wallet.",
+  "description_md": "## Which perk should you upgrade first?\n\nBuild Maximum Yen and Yen Generation together. Raise the cap when it blocks the next unit upgrade, then put Gold into generation so you reach that cap faster.\n\nBase Health is a safety net for leaks, but it does not place units or improve their upgrades. Treat it as a later comfort pick unless a specific stage keeps slipping one enemy through.\n\n## A simple Gold plan\n\n- Add a little Maximum Yen until your main unit can reach the upgrade you need.\n- Improve Yen Generation when your cap is high enough but filling too slowly.\n- Return to Maximum Yen whenever a new upgrade costs more than you can hold.\n- Buy Base Health only when extra survival solves a real problem in your runs.\n\nThe Base Health cap stays unknown because a reliable maximum is not established. Unknown is better than a very confident fairy tale.",
+  "how_it_works_md": "Known maximum values show confirmed caps. `Unknown` means the value is not established, not that the perk has no limit.",
+  "description_json": {},
+  "faq_json": [
+    { "q": "What should I spend Gold on first in Anime Squadron?", "a": "Start with Maximum Yen and Yen Generation. Increase the cap enough to afford useful unit upgrades, then improve generation so you reach them sooner." },
+    { "q": "Is Base Health a bad perk?", "a": "It can help when enemies leak through, but it does not improve your unit economy. That usually makes it a lower priority than the Yen perks." },
+    { "q": "Why is the Base Health maximum unknown?", "a": "A reliable maximum level or final health value is not confirmed, so the value is left unknown instead of guessed." }
+  ],
+  "wiki_md": "Perks are permanent account upgrades bought with Gold. Maximum Yen raises what you can hold, Yen Generation speeds up your income, and Base Health gives your base more room for mistakes. Most progression comes from balancing the Yen perks so your units can reach stronger upgrades sooner.",
+  "is_published": true
+}
