@@ -11,8 +11,8 @@ UNIT_SOURCE="${REPO_ROOT}/scripts/ops/systemd"
 ENV_DIR="/etc/bloxodes"
 ENV_PATH="${ENV_DIR}/article-automation.env"
 
-if [[ "${REPO_ROOT}" != "/srv/data/bloxodes-article-worker/current" ]]; then
-  echo "Expected the worker checkout at /srv/data/bloxodes-article-worker/current; found ${REPO_ROOT}." >&2
+if [[ "${REPO_ROOT}" != "/home/teja/projects/Bloxodes" ]]; then
+  echo "Expected the worker checkout at /home/teja/projects/Bloxodes; found ${REPO_ROOT}." >&2
   exit 1
 fi
 
