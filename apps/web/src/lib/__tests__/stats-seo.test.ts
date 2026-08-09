@@ -7,6 +7,7 @@ import {
   isStatsGameDetailIndexable,
   listStatsGamesIndexPaths,
   parseStatsSearchParams,
+  STATS_GAMES_COUNT_MODE,
   statsGameSeoDescription,
   statsGameSeoTitle,
   type StatsGamesSeoTaxonomy
@@ -26,6 +27,10 @@ function seo(searchParams?: Record<string, string | string[] | undefined>) {
 }
 
 describe("stats games SEO policy", () => {
+  it("uses exact counts so pagination never hides valid game rows", () => {
+    expect(STATS_GAMES_COUNT_MODE).toBe("exact");
+  });
+
   it("indexes the approved unfiltered sorts", () => {
     expect(seo().indexable).toBe(true);
     expect(seo({ sort: "visits" }).indexable).toBe(true);

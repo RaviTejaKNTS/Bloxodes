@@ -16,6 +16,7 @@ export { formatCompactNumber, formatFullNumber, formatPercent } from "@/lib/stat
 export type { StatsVisitShareChartData, StatsVisitSharePoint, StatsVisitShareSeries } from "@/lib/stats-visit-share";
 
 export const STATS_PAGE_SIZE = 50;
+export const STATS_GAMES_COUNT_MODE = "exact" as const;
 const STATS_HOME_TOP_GAMES_LIMIT = 10;
 const STATS_HOME_RISERS_LIMIT = 10;
 const STATS_HOME_GENRES_LIMIT = 10;
@@ -2634,7 +2635,7 @@ export async function listStatsGames(input: {
       subgenre: selectedSubgenres,
       minPlayers,
       sort,
-      count: "planned"
+      count: STATS_GAMES_COUNT_MODE
     }),
     getStatsGenreOptions(),
     getStatsSubgenreOptions(),
