@@ -344,22 +344,37 @@ async function curateWithGroq(
   const attempts: Record<string, unknown>[] = [];
   let validationFeedback: string | undefined;
   for (let attempt = 1; attempt <= 3; attempt += 1) {
-    const response = await fetch(GROQ_CHAT_URL, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model,
-        messages: [{ role: "user", content: buildPrompt(candidates, inventory, validationFeedback) }],
-        response_format: { type: "json_object" },
-        temperature: 0,
-        max_tokens: 6000
-      }),
-      signal: AbortSignal.timeout(90_000)
-    });
-    if (!response.ok) {
+    let response: Response | null = null;
+    for (let requestAttempt = 1; requestAttempt <= 3; requestAttempt += 1) {
+      response = await fetch(GROQ_CHAT_URL, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model,
+          messages: [{ role: "user", content: buildPrompt(candidates, inventory, validationFeedback) }],
+          response_format: { type: "json_object" },
+          temperature: 0,
+          max_tokens: 6000
+        }),
+        signal: AbortSignal.timeout(90_000)
+      });
+      if (response.ok) break;
       const errorText = await response.text();
-      throw new Error(`Groq curation failed (${response.status}): ${errorText.slice(0, 500)}`);
+      if (response.status !== 429 || requestAttempt === 3) {
+        throw new Error(`Groq curation failed (${response.status}): ${errorText.slice(0, 500)}`);
+      }
+      const retryHeader = Number(response.headers.get("retry-after"));
+      const bodySeconds = Number(errorText.match(/try again in ([\d.]+)s/i)?.[1]);
+      const retrySeconds = Number.isFinite(retryHeader) && retryHeader > 0
+        ? retryHeader
+        : Number.isFinite(bodySeconds) && bodySeconds > 0
+          ? bodySeconds
+          : 30 * requestAttempt;
+      const waitMs = Math.min(90_000, Math.max(1_000, Math.ceil(retrySeconds * 1000) + 1_000));
+      console.warn(`Groq curation rate limited; retrying request in ${Math.ceil(waitMs / 1000)} seconds.`);
+      await new Promise((resolve) => setTimeout(resolve, waitMs));
     }
+    if (!response?.ok) throw new Error("Groq curation exhausted its rate-limit retries.");
     const payload = (await response.json()) as {
       model?: string;
       choices?: { message?: { content?: string } }[];
