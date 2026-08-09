@@ -34,7 +34,7 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --include=dev
 
       - name: Publish and verify 50 wiki collections
         run: node scripts/releases/wiki-collections-2026-08-09/publish.mjs
