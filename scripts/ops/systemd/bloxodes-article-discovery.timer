@@ -1,12 +1,12 @@
 [Unit]
-Description=Run Bloxodes article discovery three times daily
+Description=Run Bloxodes article discovery four times daily
 
 [Timer]
-OnCalendar=*-*-* 00:22:00
-OnCalendar=*-*-* 08:22:00
-OnCalendar=*-*-* 16:22:00
+OnCalendar=*-*-* 00:00:00
+OnCalendar=*-*-* 06:00:00
+OnCalendar=*-*-* 12:00:00
+OnCalendar=*-*-* 18:00:00
 Persistent=true
-RandomizedDelaySec=4min
 Unit=bloxodes-article-discovery.service
 
 [Install]

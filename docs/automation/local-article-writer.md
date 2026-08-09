@@ -27,7 +27,7 @@ Never add production `SUPABASE_SERVICE_ROLE` to this file. The scripts accept on
 
 - Discovery inserts only into managed-dev `article_discovery_candidates`.
 - Curation reads live published production coverage through the read-only inventory endpoint and writes decisions/queue rows only to managed dev.
-- The writer claims and completes managed-dev `article_generation_queue` rows.
+- After successful discovery and curation, one Grok parent run asks the article workflow runner to process at most six managed-dev `article_generation_queue` rows with its required research and writing subagents.
 - Grok receives normal `SUPABASE_*` variables mapped to the managed-dev project only.
 - Finished `final.json`, draft article rows, and draft Storage objects remain in managed dev until manual promotion.
 - Manual promotion is the only workflow allowed to receive both dev and production credentials.
@@ -70,6 +70,16 @@ npm run articles:writer:homelab -- --apply
 
 The writer is dry-run by default. Only one writer can run in the worktree; lock files and structured Grok outputs remain under `tmp/article-writer/`.
 
+Preview or manually start the same capped batch used by systemd:
+
+```bash
+npm run articles:writer:batch
+npm run articles:writer:batch -- --apply --limit 6
+```
+
+The batch checks the curated queue before invoking Grok, exits without model use
+when it is empty, and refuses limits above six.
+
 On the homelab, article queue commands automatically use the readable
 `/etc/bloxodes/article-automation.env` file when no explicit article-dev
 credentials or `ARTICLE_DEV_ENV_FILE` are present. Do not source or print this
@@ -83,21 +93,20 @@ The checked-in units live under `scripts/ops/systemd/` and expect:
 - Linux user/group: `teja`
 - environment: `/etc/bloxodes/article-automation.env`
 
-From the expected worker checkout, install the four unit files and placeholder environment in an intentionally inactive state:
+From the expected worker checkout, install the three unit files and placeholder environment in an intentionally inactive state:
 
 ```bash
 sudo bash scripts/ops/install-homelab-article-automation.sh
 ```
 
-Replace the placeholders in `/etc/bloxodes/article-automation.env`, authenticate Grok as `teja`, and leave both timers disabled until readiness passes. Once credentials and Grok authentication exist:
+Replace the placeholders in `/etc/bloxodes/article-automation.env`, authenticate Grok as `teja`, and leave the timer disabled until readiness passes. Once credentials and Grok authentication exist:
 
 ```bash
 sudo systemctl start bloxodes-article-discovery.service
-sudo systemctl start bloxodes-article-writer.service
-sudo systemctl enable --now bloxodes-article-discovery.timer bloxodes-article-writer.timer
+sudo systemctl enable --now bloxodes-article-discovery.timer
 ```
 
-Discovery runs three times daily. The writer checks ten times daily, with one writer at a time, reduced CPU/IO priority, a 5 GiB memory high-water mark, and a 6 GiB hard memory limit.
+Discovery starts at 00:00, 06:00, 12:00, and 18:00 IST with no randomized delay. A successful discovery-and-curation service immediately starts the Grok batch writer. One Grok parent handles at most six queued articles with subagents; an empty queue skips Grok. The writer has reduced CPU/IO priority, a 5 GiB memory high-water mark, a 6 GiB hard memory limit, and no separate timer.
 
 ## Manual Publication
 

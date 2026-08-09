@@ -2,6 +2,7 @@
 Description=Bloxodes article discovery and Groq curation
 After=network-online.target
 Wants=network-online.target
+OnSuccess=bloxodes-article-writer.service
 
 [Service]
 Type=oneshot

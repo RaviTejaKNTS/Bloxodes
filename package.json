@@ -71,6 +71,7 @@
     "articles:queue:update": "tsx scripts/articles/update-article-queue-item.ts",
     "articles:writer:local": "tsx scripts/articles/run-local-article-writer.ts",
     "articles:writer:homelab": "tsx scripts/articles/run-local-article-writer.ts",
+    "articles:writer:batch": "tsx scripts/articles/run-homelab-article-batch.ts",
     "articles:homelab:check": "tsx scripts/ops/check-homelab-article-automation.ts",
     "articles:update": "tsx scripts/articles/update-articles.ts",
     "refresh:codes": "tsx scripts/codes/update-codes.ts",
