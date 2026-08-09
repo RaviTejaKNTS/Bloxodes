@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "currencies",
+    "route": "/wiki/blox-fruits/currencies",
+    "catalogCode": "blox-fruits-currencies",
+    "sourceItemCount": 3,
+    "itemFields": [
+      "seaAccess",
+      "cap",
+      "mainSources",
+      "mainUses",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "seaAccess",
+      "cap",
+      "mainSources",
+      "mainUses",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Currency role",
+      "sectionOrder": [
+        "Core",
+        "Specialized"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "seaAccess"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "seaAccess",
+        "cap",
+        "mainSources",
+        "mainUses",
+        "availability"
+      ],
+      "tableFields": [
+        "seaAccess",
+        "cap",
+        "mainSources",
+        "mainUses",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "seaAccess": {
+          "kind": "plain",
+          "label": "Sea access"
+        },
+        "cap": {
+          "kind": "chip",
+          "label": "Cap"
+        },
+        "mainSources": {
+          "kind": "detail",
+          "label": "Main sources"
+        },
+        "mainUses": {
+          "kind": "detail",
+          "label": "Main uses"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Role"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "The three durable primary currencies: Money, Fragments, and Valor. Temporary event currencies are excluded.",
+      "sources": [
+        "https://blox-fruits.fandom.com/wiki/Money",
+        "https://blox-fruits.fandom.com/wiki/Fragments",
+        "https://blox-fruits.fandom.com/wiki/Valor",
+        "https://roblox.fandom.com/wiki/Gamer_Robot_Inc/Blox_Fruits"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Core": 2,
+        "Specialized": 1
+      },
+      "imagePolicy": "Text-first accepted because these are HUD currencies and no clean row art is present in the local source-backed index."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Money",
+        "seaAccess": "All Seas",
+        "cap": "1,000,000,000",
+        "mainSources": "Quests, enemies, bosses, chests, selling fish, and other rewards",
+        "mainUses": "Weapons, fruits, fighting styles, boats, gear, and many upgrades",
+        "availability": "Core currency",
+        "cardSummary": "Money is the broad everyday currency used across Blox Fruits progression."
+      },
+      "system": {
+        "slug": "money",
+        "section": "Core",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fragments",
+        "seaAccess": "Mainly Second and Third Sea",
+        "cap": "1,000,000,000",
+        "mainSources": "Raids, raid bosses, sea events, chests, and selected quests",
+        "mainUses": "Fruit awakenings, fighting styles, race changes, stat resets, crew slots, skins, and upgrades",
+        "availability": "Core currency",
+        "cardSummary": "Fragments fund awakenings and many advanced systems after early progression."
+      },
+      "system": {
+        "slug": "fragments",
+        "section": "Core",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Valor",
+        "seaAccess": "Third Sea",
+        "cap": "5,000",
+        "mainSources": "Sea Events",
+        "mainUses": "Unlocking and leveling Shipwright abilities through the Shipwright Teacher",
+        "availability": "Specialized currency",
+        "cardSummary": "Valor is earned from sea events and spent on Shipwright progression."
+      },
+      "system": {
+        "slug": "valor",
+        "section": "Specialized",
+        "sortOrder": 3,
+        "image": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,455 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "potions",
+    "route": "/wiki/blox-fruits/potions",
+    "catalogCode": "blox-fruits-potions",
+    "sourceItemCount": 18,
+    "itemFields": [
+      "rarity",
+      "availability",
+      "effect",
+      "duration",
+      "source",
+      "location",
+      "capacity",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "availability",
+      "effect",
+      "duration",
+      "source",
+      "location",
+      "capacity",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Availability",
+      "sectionOrder": [
+        "Obtainable",
+        "Limited or past event"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "duration"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "availability",
+        "effect",
+        "duration",
+        "source",
+        "location",
+        "capacity"
+      ],
+      "tableFields": [
+        "rarity",
+        "availability",
+        "effect",
+        "duration",
+        "source",
+        "location",
+        "capacity",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "duration": {
+          "kind": "chip",
+          "label": "Duration"
+        },
+        "source": {
+          "kind": "plain",
+          "label": "Source"
+        },
+        "location": {
+          "kind": "plain",
+          "label": "Location"
+        },
+        "capacity": {
+          "kind": "chip",
+          "label": "Capacity"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Obtainment note"
+        }
+      }
+    },
+    "notes": {
+      "scope": "Potion-typed consumables from the source item index, with old event entries retained and labeled.",
+      "sources": [
+        "https://blox-fruits.fandom.com/wiki/Potions",
+        "https://progameguides.com/roblox/all-potions-in-blox-fruits-crafting-guide/",
+        "https://blox-fruits.fandom.com/wiki/Campfire"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Obtainable": 11,
+        "Limited or past event": 7
+      },
+      "imagePolicy": "Reuse exact source-backed potion art from the local Blox Fruits item index."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Aggro Elixir",
+        "rarity": "Uncommon",
+        "availability": "Obtainable",
+        "effect": "Forces nearby enemies to target the user.",
+        "duration": "2 minutes",
+        "source": "Campfire",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Aggro Elixir can be crafted at the Campfire for 2 Uncommon fish and 1 Fish Tail."
+      },
+      "system": {
+        "slug": "aggro-elixir",
+        "section": "Obtainable",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Items/aggro-elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Berserkers Elixir",
+        "rarity": "Uncommon",
+        "availability": "Obtainable",
+        "effect": "Raises damage against enemies and bosses by 10%.",
+        "duration": "2 minutes",
+        "source": "Campfire",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Berserkers Elixir is an Uncommon potion."
+      },
+      "system": {
+        "slug": "berserkers-elixir",
+        "section": "Obtainable",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Items/berserkers-elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Head Elixir",
+        "rarity": "Common",
+        "availability": "Limited or past event",
+        "effect": "Enlarges the heads of players in its area.",
+        "duration": "30 seconds",
+        "source": "Witch",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Big Head Elixir is a limited-time Common throwable potion. It is only obtainable during the Halloween Event 2025."
+      },
+      "system": {
+        "slug": "big-head-elixir",
+        "section": "Limited or past event",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Items/big-head-elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Concoction",
+        "rarity": "Rare",
+        "availability": "Limited or past event",
+        "effect": "Produces Candy Corn for players in its area.",
+        "duration": "15 seconds",
+        "source": "Unbound Werewolf",
+        "location": "Portable or source-specific campfire",
+        "capacity": "50",
+        "cardSummary": "The Candy Concoction was a limited-time Rare throwable potion. It was only obtainable during the Halloween Event 2025."
+      },
+      "system": {
+        "slug": "candy-concoction",
+        "section": "Limited or past event",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Items/candy-concoction.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Disguise Elixir",
+        "rarity": "Uncommon",
+        "availability": "Limited or past event",
+        "effect": "Turns players in its area into random bosses.",
+        "duration": "Until death or combat",
+        "source": "Campfire",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Disguise Elixir is a limited-time Uncommon throwable potion. It was available during the Halloween Event 2025."
+      },
+      "system": {
+        "slug": "disguise-elixir",
+        "section": "Limited or past event",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Items/disguise-elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fortune Elixir",
+        "rarity": "Not stated",
+        "availability": "Obtainable",
+        "effect": "Raises Money drops by 20%.",
+        "duration": "2 minutes",
+        "source": "Campfire",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Fortune Elixir can be crafted from the Campfire for:"
+      },
+      "system": {
+        "slug": "fortune-elixir",
+        "section": "Obtainable",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Items/fortune-elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fragments Elixir",
+        "rarity": "Not stated",
+        "availability": "Obtainable",
+        "effect": "Raises Fragment drops from NPCs by 20%.",
+        "duration": "10 minutes",
+        "source": "Celestial Campfire",
+        "location": "Celestial Domain",
+        "capacity": "99",
+        "cardSummary": "The Fragments Elixir could be crafted from the Celestial Campfire in the Celestial Domain for:"
+      },
+      "system": {
+        "slug": "fragments-elixir",
+        "section": "Obtainable",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Items/fragments-elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gate Potion",
+        "rarity": "Not stated",
+        "availability": "Obtainable",
+        "effect": "Teleports the user to a chosen island.",
+        "duration": "Instant",
+        "source": "Campfire",
+        "location": "Celestial Domain",
+        "capacity": "99",
+        "cardSummary": "The Gate Potion could be crafted from the Campfire for:"
+      },
+      "system": {
+        "slug": "gate-potion",
+        "section": "Obtainable",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Items/gate-potion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Invisibility Potion",
+        "rarity": "Uncommon",
+        "availability": "Obtainable",
+        "effect": "Makes the user nearly invisible.",
+        "duration": "2 minutes",
+        "source": "Campfire",
+        "location": "Oni Realm",
+        "capacity": "99",
+        "cardSummary": "The Invisibility Potion was an Uncommon potion."
+      },
+      "system": {
+        "slug": "invisibility-potion",
+        "section": "Obtainable",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Items/invisibility-potion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lava Bomb Elixir",
+        "rarity": "Uncommon",
+        "availability": "Limited or past event",
+        "effect": "Creates a damaging lava area.",
+        "duration": "30 seconds",
+        "source": "Witch",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Lava Bomb Elixir is a limited-time Uncommon throwable potion. It is only obtainable during the Halloween Event 2025."
+      },
+      "system": {
+        "slug": "lava-bomb-elixir",
+        "section": "Limited or past event",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Items/lava-bomb-elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lava Potion",
+        "rarity": "Common",
+        "availability": "Obtainable",
+        "effect": "Grants complete immunity to lava.",
+        "duration": "2 minutes",
+        "source": "Campfire",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Lava Potion can be obtained from the Campfire for 3 Common Fish."
+      },
+      "system": {
+        "slug": "lava-potion",
+        "section": "Obtainable",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Items/lava-potion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Loot Seeker",
+        "rarity": "Not stated",
+        "availability": "Obtainable",
+        "effect": "Reveals nearby chests through walls, except Fragment Chests.",
+        "duration": "2 minutes",
+        "source": "Campfire",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Loot Seeker can be crafted from the Campfire for:"
+      },
+      "system": {
+        "slug": "loot-seeker",
+        "section": "Obtainable",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Items/loot-seeker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Materials Elixir",
+        "rarity": "Uncommon",
+        "availability": "Obtainable",
+        "effect": "Raises the chance for NPC material drops by 15%.",
+        "duration": "10 minutes",
+        "source": "Campfire",
+        "location": "Celestial Domain",
+        "capacity": "99",
+        "cardSummary": "The Materials Elixir was an Uncommon potion."
+      },
+      "system": {
+        "slug": "materials-elixir",
+        "section": "Obtainable",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Items/materials-elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Monk Potion",
+        "rarity": "Not stated",
+        "availability": "Obtainable",
+        "effect": "Disables PvP for the user.",
+        "duration": "10 minutes",
+        "source": "Campfire",
+        "location": "Oni Realm",
+        "capacity": "1",
+        "cardSummary": "The Monk Potion can be crafted at the Campfire for:"
+      },
+      "system": {
+        "slug": "monk-potion",
+        "section": "Obtainable",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Items/monk-potion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Monster Mash Elixir",
+        "rarity": "Uncommon",
+        "availability": "Limited or past event",
+        "effect": "Makes players in its area perform the monster mash dance.",
+        "duration": "30 seconds",
+        "source": "Witch",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Monster Mash Elixir is a limited-time Uncommon throwable potion. It is only obtainable during the Halloween Event 2025."
+      },
+      "system": {
+        "slug": "monster-mash-elixir",
+        "section": "Limited or past event",
+        "sortOrder": 15,
+        "image": "/Blox%20Fruits/Items/monster-mash-elixir.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Oni Soul",
+        "rarity": "Not stated",
+        "availability": "Obtainable",
+        "effect": "Summons a spectral clone that fights NPCs.",
+        "duration": "2 minutes",
+        "source": "Campfire",
+        "location": "Oni Realm",
+        "capacity": "99",
+        "cardSummary": "The Oni Soul could be crafted at the Campfire in the Oni Realm for:"
+      },
+      "system": {
+        "slug": "oni-soul",
+        "section": "Obtainable",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Items/oni-soul.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Potion",
+        "rarity": "Common",
+        "availability": "Limited or past event",
+        "effect": "Turns player heads in its area into pumpkins.",
+        "duration": "30 seconds",
+        "source": "Witch",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Pumpkin Potion was a limited-time Common throwable potion. It was only obtainable during the Halloween Event 2025."
+      },
+      "system": {
+        "slug": "pumpkin-potion",
+        "section": "Limited or past event",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Items/pumpkin-potion.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Suspicious Growth Potion",
+        "rarity": "Uncommon",
+        "availability": "Limited or past event",
+        "effect": "Enlarges players in its area, including transformed players.",
+        "duration": "30 seconds",
+        "source": "Witch",
+        "location": "Portable or source-specific campfire",
+        "capacity": "99",
+        "cardSummary": "The Suspicious Growth Potion was a limited-time Uncommon throwable potion. It was only available during the Halloween Event 2025."
+      },
+      "system": {
+        "slug": "suspicious-growth-potion",
+        "section": "Limited or past event",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Items/suspicious-growth-potion.webp"
+      }
+    }
+  ]
+}

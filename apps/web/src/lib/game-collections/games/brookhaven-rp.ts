@@ -17,6 +17,7 @@ export const brookhavenRpCollectionGroup = {
       "secrets",
       "inventory-items",
       "vehicles",
-      "gamepasses"
+      "gamepasses",
+      "lore-characters"
     ]
   } satisfies GameCollectionGroup;

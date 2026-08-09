@@ -1,0 +1,344 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Vanguards",
+    "gameSlug": "anime-vanguards",
+    "collection": "emotes",
+    "route": "/wiki/anime-vanguards/emotes",
+    "catalogCode": "anime-vanguards-emotes",
+    "itemFields": [
+      "availability",
+      "obtainment",
+      "cardSummary"
+    ],
+    "columns": [
+      "availability",
+      "obtainment",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Emotes"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "obtainment"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "availability",
+        "obtainment"
+      ],
+      "tableFields": [
+        "availability",
+        "obtainment"
+      ],
+      "fieldPresentation": {
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "obtainment": "detail",
+        "cardSummary": "detail"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Casey Emote",
+        "availability": "Available",
+        "obtainment": "Complete Achievement: Trouble on Planet Namak",
+        "cardSummary": "Casey Emote is a player emote unlocked through complete achievement: trouble on planet namak."
+      },
+      "system": {
+        "slug": "casey-emote",
+        "section": "Emotes",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ric Flair Emote",
+        "availability": "Available",
+        "obtainment": "Complete Achievement: Raid on Sand Village",
+        "cardSummary": "Ric Flair Emote is a player emote unlocked through complete achievement: raid on sand village."
+      },
+      "system": {
+        "slug": "ric-flair-emote",
+        "section": "Emotes",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Popular Vibe Emote",
+        "availability": "Available",
+        "obtainment": "Complete Achievement: Disaster in the Double Dungeon",
+        "cardSummary": "Popular Vibe Emote is a player emote unlocked through complete achievement: disaster in the double dungeon."
+      },
+      "system": {
+        "slug": "popular-vibe-emote",
+        "section": "Emotes",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jabba Switchaway Emote",
+        "availability": "Available",
+        "obtainment": "Complete Achievement: The Collector",
+        "cardSummary": "Jabba Switchaway Emote is a player emote unlocked through complete achievement: the collector."
+      },
+      "system": {
+        "slug": "jabba-switchaway-emote",
+        "section": "Emotes",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tidy Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Tidy Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "tidy-emote",
+        "section": "Emotes",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Griddy Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Griddy Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "griddy-emote",
+        "section": "Emotes",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boogie Down Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Boogie Down Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "boogie-down-emote",
+        "section": "Emotes",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "God Requiem Emote",
+        "availability": "Available",
+        "obtainment": "Evolve Haruka Rin",
+        "cardSummary": "God Requiem Emote is a player emote unlocked through evolve haruka rin."
+      },
+      "system": {
+        "slug": "god-requiem-emote",
+        "section": "Emotes",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "California Gurls Emote",
+        "availability": "Available",
+        "obtainment": "Complete Achievement: Behold, My Arachnid Exterminator!",
+        "cardSummary": "California Gurls Emote is a player emote unlocked through complete achievement: behold, my arachnid exterminator!."
+      },
+      "system": {
+        "slug": "california-gurls-emote",
+        "section": "Emotes",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blood-Red Commander Emote",
+        "availability": "Available",
+        "obtainment": "Purchased from Boss Event Shop for 250 Commander Tokens or from Legacy Shop for 30 Legacy Coins.",
+        "cardSummary": "Blood-Red Commander Emote is a player emote unlocked through purchased from boss event shop for 250 commander tokens or from legacy shop for 30 legacy coins."
+      },
+      "system": {
+        "slug": "blood-red-commander-emote",
+        "section": "Emotes",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Justice Emote",
+        "availability": "Available",
+        "obtainment": "Complete Achievement: Train Station Massacre",
+        "cardSummary": "Orange Justice Emote is a player emote unlocked through complete achievement: train station massacre."
+      },
+      "system": {
+        "slug": "orange-justice-emote",
+        "section": "Emotes",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Honored One Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Honored One Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "honored-one-emote",
+        "section": "Emotes",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Take The L Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Take The L Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "take-the-l-emote",
+        "section": "Emotes",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Electro Shuffle Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Electro Shuffle Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "electro-shuffle-emote",
+        "section": "Emotes",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Smooth Criminal Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Smooth Criminal Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "smooth-criminal-emote",
+        "section": "Emotes",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unforgettable Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Unforgettable Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "unforgettable-emote",
+        "section": "Emotes",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jubilation Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Jubilation Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "jubilation-emote",
+        "section": "Emotes",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goofy Skeleton Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Goofy Skeleton Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "goofy-skeleton-emote",
+        "section": "Emotes",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Smug Dance Emote",
+        "availability": "Available",
+        "obtainment": "Purchasable via the Trophy Exchange.",
+        "cardSummary": "Smug Dance Emote is a player emote unlocked through purchasable via the trophy exchange."
+      },
+      "system": {
+        "slug": "smug-dance-emote",
+        "section": "Emotes",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Beserker! Emote",
+        "availability": "Available",
+        "obtainment": "Purchased from the Boss Event Shop For 20 Corrupted Tokens",
+        "cardSummary": "Beserker! Emote is a player emote unlocked through purchased from the boss event shop for 20 corrupted tokens."
+      },
+      "system": {
+        "slug": "beserker-emote",
+        "section": "Emotes",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Piano Emote",
+        "availability": "Available",
+        "obtainment": "Purchased from the piano emote Bundle.",
+        "cardSummary": "Piano Emote is a player emote unlocked through purchased from the piano emote bundle."
+      },
+      "system": {
+        "slug": "piano-emote",
+        "section": "Emotes",
+        "sortOrder": 21,
+        "image": null
+      }
+    }
+  ]
+}

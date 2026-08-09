@@ -1,0 +1,473 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "100 Days At Sea",
+    "gameSlug": "100-days-at-sea",
+    "collection": "food",
+    "route": "/wiki/100-days-at-sea/food",
+    "catalogCode": "100-days-at-sea-food",
+    "sourceItemCount": 17,
+    "itemFields": [
+      "acquisition",
+      "potionUseCount",
+      "potionCategories",
+      "potionUses",
+      "survivalUse",
+      "cardSummary"
+    ],
+    "columns": [
+      "acquisition",
+      "potionUseCount",
+      "potionCategories",
+      "potionUses",
+      "survivalUse",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Food group",
+      "sectionOrder": [
+        "All Food"
+      ],
+      "badgeField": "potionUseCount",
+      "subtitleFields": [
+        "potionCategories"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "acquisition",
+        "potionUseCount",
+        "potionCategories",
+        "potionUses",
+        "survivalUse"
+      ],
+      "tableFields": [
+        "acquisition",
+        "potionUseCount",
+        "potionCategories",
+        "potionUses",
+        "survivalUse",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "acquisition": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "potionUseCount": {
+          "kind": "chip",
+          "label": "Potion recipes"
+        },
+        "potionCategories": {
+          "kind": "plain",
+          "label": "Potion roles"
+        },
+        "potionUses": {
+          "kind": "detail",
+          "label": "Used in potions"
+        },
+        "survivalUse": {
+          "kind": "detail",
+          "label": "Survival use"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "The 17 named items classified as Food in the matched current potion ingredient indexes. Rows are food items, not potions; potion names are retained only as exact uses for each food.",
+      "sources": [
+        "https://techwiser.com/100-days-at-sea-potions/",
+        "https://allthings.how/100-days-at-sea-potions-every-recipe-and-how-to-brew-them/",
+        "https://progameguides.com/roblox/complete-100-days-at-sea-beginners-guide/",
+        "https://allthings.how/100-days-at-sea-beginner-guide-early-build-order-food-and-survival/"
+      ],
+      "acquisitionPolicy": "Use the exact Harpoon route only for Potato and Cooked Bird. The other 15 foods retain the complete ingredient guides' broad Fishing or map pickup wording.",
+      "valuePolicy": "No exact hunger recovery, healing recovery, rarity, drop chance, sell value, or item-specific Fisherman trade requirement is publicly confirmed for the complete roster. These values are not inferred.",
+      "tradeNote": "Beginner guides establish that spare food can be traded to the Fisherman for valuable loot, but do not provide a complete item-by-item request and reward table. This is collection-level context, not a per-row claim.",
+      "imagePolicy": "Use only clean in-game inventory or Recipe Book icons and clearly labeled food-item crops attributable to the exact named row. Shared potion scenes, recipe posters, cooking stations, real-world food, and speculative fan art are not row images."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Buttered Bass",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 1,
+        "potionCategories": [
+          "Utility"
+        ],
+        "potionUses": [
+          "Swiftness Potion"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Buttered Bass is a food pickup used in the Swiftness Potion recipe."
+      },
+      "system": {
+        "slug": "buttered-bass",
+        "section": "All Food",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Calamari",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 1,
+        "potionCategories": [
+          "Defense"
+        ],
+        "potionUses": [
+          "Camouflage I"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Calamari is a food pickup used in the Camouflage I potion recipe."
+      },
+      "system": {
+        "slug": "calamari",
+        "section": "All Food",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chowder",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 2,
+        "potionCategories": [
+          "Healing",
+          "Utility"
+        ],
+        "potionUses": [
+          "Greater Healing Potion",
+          "Hunger Brew"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Chowder is used in Greater Healing Potion and Hunger Brew, covering healing and utility recipes."
+      },
+      "system": {
+        "slug": "chowder",
+        "section": "All Food",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cooked Bird",
+        "acquisition": "Harpoon daytime birds above the raft",
+        "potionUseCount": 2,
+        "potionCategories": [
+          "Utility",
+          "Wacky"
+        ],
+        "potionUses": [
+          "Bouncy Potion",
+          "Big Gulp"
+        ],
+        "survivalUse": "Restores a large portion of the satiety bar when eaten.",
+        "cardSummary": "Harpoon a daytime bird for Cooked Bird, then eat it for substantial satiety or save it for Bouncy Potion or Big Gulp."
+      },
+      "system": {
+        "slug": "cooked-bird",
+        "section": "All Food",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crab Sticks",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 2,
+        "potionCategories": [
+          "Attack",
+          "Wacky"
+        ],
+        "potionUses": [
+          "Deadeye Potion I",
+          "Crab Cocktail"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Crab Sticks are used in Deadeye Potion I and Crab Cocktail, spanning attack and transformation recipes."
+      },
+      "system": {
+        "slug": "crab-sticks",
+        "section": "All Food",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fish and Chips",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 1,
+        "potionCategories": [
+          "Utility"
+        ],
+        "potionUses": [
+          "Fortune Brew"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Fish and Chips is a food pickup used in the Fortune Brew recipe."
+      },
+      "system": {
+        "slug": "fish-and-chips",
+        "section": "All Food",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fish Filet",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 2,
+        "potionCategories": [
+          "Healing",
+          "Attack"
+        ],
+        "potionUses": [
+          "Minor Healing Potion",
+          "Buddy Brew I"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Fish Filet is used in Minor Healing Potion and Buddy Brew I, covering healing and companion-focused brewing."
+      },
+      "system": {
+        "slug": "fish-filet",
+        "section": "All Food",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fish Sandwich",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 1,
+        "potionCategories": [
+          "Attack"
+        ],
+        "potionUses": [
+          "Power Potion I"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Fish Sandwich is a food pickup used in the Power Potion I recipe."
+      },
+      "system": {
+        "slug": "fish-sandwich",
+        "section": "All Food",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jar of Jelly",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 2,
+        "potionCategories": [
+          "Defense",
+          "Wacky"
+        ],
+        "potionUses": [
+          "Hearty Tonic I",
+          "Featherweight Flask"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Jar of Jelly is used in Hearty Tonic I and Featherweight Flask, spanning defense and wacky brewing."
+      },
+      "system": {
+        "slug": "jar-of-jelly",
+        "section": "All Food",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lobster Tail",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 1,
+        "potionCategories": [
+          "Defense"
+        ],
+        "potionUses": [
+          "Hearty Tonic II"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Lobster Tail is a food pickup used in the Hearty Tonic II recipe."
+      },
+      "system": {
+        "slug": "lobster-tail",
+        "section": "All Food",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Meat",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 2,
+        "potionCategories": [
+          "Attack"
+        ],
+        "potionUses": [
+          "Vampire Tonic I",
+          "Vampire Tonic II"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Meat is used in both Vampire Tonic tiers."
+      },
+      "system": {
+        "slug": "meat",
+        "section": "All Food",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Potato",
+        "acquisition": "Harpoon floating Potatoes near the raft",
+        "potionUseCount": 3,
+        "potionCategories": [
+          "Attack",
+          "Wacky"
+        ],
+        "potionUses": [
+          "Brawler's Brew I",
+          "Tiny Tincture",
+          "Fart Flask"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Harpoon floating Potatoes near the raft, then keep them for Brawler's Brew I, Tiny Tincture, or Fart Flask."
+      },
+      "system": {
+        "slug": "potato",
+        "section": "All Food",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Seafood Slice",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 1,
+        "potionCategories": [
+          "Attack"
+        ],
+        "potionUses": [
+          "Arcane Elixir II"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Seafood Slice is a food pickup used in the Arcane Elixir II recipe."
+      },
+      "system": {
+        "slug": "seafood-slice",
+        "section": "All Food",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shark Steak",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 2,
+        "potionCategories": [
+          "Attack"
+        ],
+        "potionUses": [
+          "Brawler's Brew II",
+          "Power Potion II"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Shark Steak is used in Brawler's Brew II and Power Potion II."
+      },
+      "system": {
+        "slug": "shark-steak",
+        "section": "All Food",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stew",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 4,
+        "potionCategories": [
+          "Healing",
+          "Attack",
+          "Utility",
+          "Wacky"
+        ],
+        "potionUses": [
+          "Healing Potion",
+          "Arcane Elixir I",
+          "Hunger Brew",
+          "Fart Flask"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Stew has the widest recipe coverage in this roster, appearing in healing, attack, utility, and wacky brews."
+      },
+      "system": {
+        "slug": "stew",
+        "section": "All Food",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sushi",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 1,
+        "potionCategories": [
+          "Wacky"
+        ],
+        "potionUses": [
+          "Chum in a Bottle"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Sushi is a food pickup used in the Chum in a Bottle recipe."
+      },
+      "system": {
+        "slug": "sushi",
+        "section": "All Food",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Swordfish Steak",
+        "acquisition": "Fishing or map pickup",
+        "potionUseCount": 1,
+        "potionCategories": [
+          "Attack"
+        ],
+        "potionUses": [
+          "Buddy Brew II"
+        ],
+        "survivalUse": null,
+        "cardSummary": "Swordfish Steak is a food pickup used in the Buddy Brew II recipe."
+      },
+      "system": {
+        "slug": "swordfish-steak",
+        "section": "All Food",
+        "sortOrder": 17,
+        "image": null
+      }
+    }
+  ]
+}

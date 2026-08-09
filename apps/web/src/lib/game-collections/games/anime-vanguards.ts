@@ -15,6 +15,14 @@ export const animeVanguardsCollectionGroup = {
       "familiars",
       "elements",
       "enemies",
-      "maps-stages"
+      "maps-stages",
+      "mounts",
+      "achievements",
+      "modifiers",
+      "cosmetics",
+      "emotes",
+      "profile-customization",
+      "stat-ranks",
+      "crafting-recipes"
     ]
   } satisfies GameCollectionGroup;

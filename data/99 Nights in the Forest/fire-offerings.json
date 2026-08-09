@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "99 Nights in the Forest",
+    "gameSlug": "99-nights-in-the-forest",
+    "collection": "fire-offerings",
+    "route": "/wiki/99-nights-in-the-forest/fire-offerings",
+    "catalogCode": "99-nights-in-the-forest-fire-offerings",
+    "sourceItemCount": 9,
+    "itemFields": ["effectType", "effect", "bestFor", "acquisition", "singleCost", "bundleCost", "purchaseChance", "carryOver", "activation", "activationLimit", "cardSummary"],
+    "columns": ["effectType", "effect", "bestFor", "acquisition", "singleCost", "bundleCost", "purchaseChance", "carryOver", "activation", "activationLimit", "cardSummary"],
+    "display": {
+      "groupLabel": "Effect group",
+      "sectionOrder": ["Resource Boosts", "Survival and Taming", "Event Triggers"],
+      "badgeField": "effectType",
+      "subtitleFields": ["carryOver"],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": ["effect", "bestFor", "acquisition", "singleCost", "bundleCost", "purchaseChance", "carryOver", "activation", "activationLimit"],
+      "tableFields": ["effectType", "effect", "bestFor", "acquisition", "singleCost", "bundleCost", "purchaseChance", "carryOver", "activation", "activationLimit", "cardSummary"],
+      "fieldPresentation": {
+        "effectType": { "kind": "chip", "label": "Effect type" },
+        "effect": { "kind": "detail", "label": "Effect" },
+        "bestFor": { "kind": "highlight", "label": "Best for" },
+        "acquisition": { "kind": "plain", "label": "Sources" },
+        "singleCost": { "kind": "chip", "label": "Single roll" },
+        "bundleCost": { "kind": "chip", "label": "Bundle" },
+        "purchaseChance": { "kind": "chip", "label": "Reported chance" },
+        "carryOver": { "kind": "highlight", "label": "Storage" },
+        "activation": { "kind": "detail", "label": "How to use" },
+        "activationLimit": { "kind": "detail", "label": "Run limit" },
+        "cardSummary": { "kind": "detail", "label": "Summary" }
+      }
+    },
+    "notes": {
+      "scope": "The current nine-item Fire Offering pool. Older Flames are historical context only.",
+      "sources": [
+        "https://games.gg/roblox/guides/99-nights-in-the-forest-offerings-guide/",
+        "https://allthings.how/99-nights-in-the-forest-offerings-guide-and-effects/",
+        "https://99-nights-in-the-forest.com/wiki/modifier-flames"
+      ],
+      "imagePolicy": "Text-first because checked guides do not provide a clean distinct icon set for every current offering."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Coinsplosion Offering",
+        "effectType": "Economy boost",
+        "effect": "Spawns coins near the campfire and increases coin spawns across the map.",
+        "bestFor": "Building coin income early in a run.",
+        "acquisition": ["Sketchy Salesman", "Daily quests"],
+        "singleCost": "10 Gems",
+        "bundleCost": "99 Robux for 3 random offerings",
+        "purchaseChance": "11.1% reported equal chance",
+        "carryOver": "Stored between runs",
+        "activation": "Spend it through the Supply Crate inventory to apply its modifier to the current run.",
+        "activationLimit": "One active Fire Modifier or Offering at a time.",
+        "cardSummary": "An economy modifier that adds coins near camp and improves coin spawns across the map."
+      },
+      "system": { "slug": "coinsplosion-offering", "section": "Resource Boosts", "sortOrder": 1, "image": null }
+    },
+    {
+      "item": {
+        "name": "Fairy Offering",
+        "effectType": "Seed boost",
+        "effect": "Applies Fairy Seed effects across the map.",
+        "bestFor": "Seed-focused support and farming routes.",
+        "acquisition": ["Sketchy Salesman", "Daily quests"],
+        "singleCost": "10 Gems",
+        "bundleCost": "99 Robux for 3 random offerings",
+        "purchaseChance": "11.1% reported equal chance",
+        "carryOver": "Stored between runs",
+        "activation": "Spend it through the Supply Crate inventory to apply its modifier to the current run.",
+        "activationLimit": "One active Fire Modifier or Offering at a time.",
+        "cardSummary": "A map-wide Fairy Seed modifier for runs built around plant and seed effects."
+      },
+      "system": { "slug": "fairy-offering", "section": "Resource Boosts", "sortOrder": 2, "image": null }
+    },
+    {
+      "item": {
+        "name": "Red Chest Offering",
+        "effectType": "Chest boost",
+        "effect": "Increases the spawn rate of Red Chests.",
+        "bestFor": "Targeting Red Chest loot during a prepared run.",
+        "acquisition": ["Sketchy Salesman", "Daily quests"],
+        "singleCost": "10 Gems",
+        "bundleCost": "99 Robux for 3 random offerings",
+        "purchaseChance": "11.1% reported equal chance",
+        "carryOver": "Stored between runs",
+        "activation": "Spend it through the Supply Crate inventory to apply its modifier to the current run.",
+        "activationLimit": "One active Fire Modifier or Offering at a time.",
+        "cardSummary": "A targeted loot modifier that makes Red Chest spawns more common."
+      },
+      "system": { "slug": "red-chest-offering", "section": "Resource Boosts", "sortOrder": 3, "image": null }
+    },
+    {
+      "item": {
+        "name": "Apple Tree Offering",
+        "effectType": "Food boost",
+        "effect": "Increases Apple Tree spawns across the map.",
+        "bestFor": "Food-heavy routes that need more reliable apples.",
+        "acquisition": ["Sketchy Salesman", "Daily quests"],
+        "singleCost": "10 Gems",
+        "bundleCost": "99 Robux for 3 random offerings",
+        "purchaseChance": "11.1% reported equal chance",
+        "carryOver": "Stored between runs",
+        "activation": "Spend it through the Supply Crate inventory to apply its modifier to the current run.",
+        "activationLimit": "One active Fire Modifier or Offering at a time.",
+        "cardSummary": "A food-route modifier that raises Apple Tree spawns across the map."
+      },
+      "system": { "slug": "apple-tree-offering", "section": "Resource Boosts", "sortOrder": 4, "image": null }
+    },
+    {
+      "item": {
+        "name": "Fishing Offering",
+        "effectType": "Fishing boost",
+        "effect": "Strengthens fishing effects for the run.",
+        "bestFor": "Fishing routes focused on food, experience, or rare gear.",
+        "acquisition": ["Sketchy Salesman", "Daily quests"],
+        "singleCost": "10 Gems",
+        "bundleCost": "99 Robux for 3 random offerings",
+        "purchaseChance": "11.1% reported equal chance",
+        "carryOver": "Stored between runs",
+        "activation": "Spend it through the Supply Crate inventory to apply its modifier to the current run.",
+        "activationLimit": "One active Fire Modifier or Offering at a time.",
+        "cardSummary": "A fishing modifier for runs that want more value from rods and fishing routes."
+      },
+      "system": { "slug": "fishing-offering", "section": "Resource Boosts", "sortOrder": 5, "image": null }
+    },
+    {
+      "item": {
+        "name": "Blue Offering",
+        "effectType": "Campfire protection",
+        "effect": "Makes rain drain the campfire much more slowly.",
+        "bestFor": "Rainy runs where the campfire is losing fuel too quickly.",
+        "acquisition": ["Sketchy Salesman", "Daily quests"],
+        "singleCost": "10 Gems",
+        "bundleCost": "99 Robux for 3 random offerings",
+        "purchaseChance": "11.1% reported equal chance",
+        "carryOver": "Stored between runs",
+        "activation": "Spend it through the Supply Crate inventory to apply its modifier to the current run.",
+        "activationLimit": "One active Fire Modifier or Offering at a time.",
+        "cardSummary": "A survival modifier that protects campfire fuel from heavy rain drain."
+      },
+      "system": { "slug": "blue-offering", "section": "Survival and Taming", "sortOrder": 6, "image": null }
+    },
+    {
+      "item": {
+        "name": "Pet Offering",
+        "effectType": "Taming boost",
+        "effect": "Boosts pet taming effects.",
+        "bestFor": "Runs built around taming and animal support.",
+        "acquisition": ["Sketchy Salesman", "Daily quests"],
+        "singleCost": "10 Gems",
+        "bundleCost": "99 Robux for 3 random offerings",
+        "purchaseChance": "11.1% reported equal chance",
+        "carryOver": "Stored between runs",
+        "activation": "Spend it through the Supply Crate inventory to apply its modifier to the current run.",
+        "activationLimit": "One active Fire Modifier or Offering at a time.",
+        "cardSummary": "A taming modifier for pet-focused progression and animal support routes."
+      },
+      "system": { "slug": "pet-offering", "section": "Survival and Taming", "sortOrder": 7, "image": null }
+    },
+    {
+      "item": {
+        "name": "Thanksgiving Offering",
+        "effectType": "Event trigger",
+        "effect": "Triggers the Thanksgiving event for the run.",
+        "bestFor": "Prepared teams targeting Thanksgiving rewards and encounters.",
+        "acquisition": ["Sketchy Salesman", "Daily quests"],
+        "singleCost": "10 Gems",
+        "bundleCost": "99 Robux for 3 random offerings",
+        "purchaseChance": "11.1% reported equal chance",
+        "carryOver": "Stored between runs",
+        "activation": "Spend it through the Supply Crate inventory to apply its modifier to the current run.",
+        "activationLimit": "One active Fire Modifier or Offering at a time.",
+        "cardSummary": "A stored event trigger for runs prepared to farm Thanksgiving content."
+      },
+      "system": { "slug": "thanksgiving-offering", "section": "Event Triggers", "sortOrder": 8, "image": null }
+    },
+    {
+      "item": {
+        "name": "Valentines Offering",
+        "effectType": "Event trigger",
+        "effect": "Triggers the Valentine's event for the run.",
+        "bestFor": "Prepared teams targeting flower, bouquet, and Valentine's reward routes.",
+        "acquisition": ["Sketchy Salesman", "Daily quests"],
+        "singleCost": "10 Gems",
+        "bundleCost": "99 Robux for 3 random offerings",
+        "purchaseChance": "11.1% reported equal chance",
+        "carryOver": "Stored between runs",
+        "activation": "Spend it through the Supply Crate inventory to apply its modifier to the current run.",
+        "activationLimit": "One active Fire Modifier or Offering at a time.",
+        "cardSummary": "A stored event trigger for Valentine's flower and bouquet reward routes."
+      },
+      "system": { "slug": "valentines-offering", "section": "Event Triggers", "sortOrder": 9, "image": null }
+    }
+  ]
+}

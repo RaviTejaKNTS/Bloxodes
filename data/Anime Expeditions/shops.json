@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "shops",
+    "route": "/wiki/anime-expeditions/shops",
+    "catalogCode": "anime-expeditions-shops",
+    "universeId": 7613921865,
+    "sourceItemCount": 7,
+    "itemFields": ["name", "cardSummary", "type", "currency", "access", "purpose", "stockRule", "resetRule", "availability"],
+    "columns": ["name", "type", "currency", "access", "purpose", "stockRule", "resetRule", "availability", "cardSummary"],
+    "display": {
+      "groupLabel": "Shop type",
+      "sectionOrder": ["General Shops", "Mode Shops", "Event Shops"],
+      "badgeField": "type",
+      "subtitleFields": ["currency"],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": ["type", "currency", "access", "purpose", "stockRule", "resetRule", "availability"],
+      "tableFields": ["type", "currency", "access", "purpose", "stockRule", "resetRule", "availability", "cardSummary"],
+      "fieldPresentation": {
+        "type": { "kind": "chip", "label": "Type" },
+        "currency": { "kind": "chip", "label": "Currency" },
+        "access": { "kind": "plain", "label": "Access" },
+        "purpose": { "kind": "highlight", "label": "Best for" },
+        "stockRule": { "kind": "detail", "label": "Stock" },
+        "resetRule": { "kind": "detail", "label": "Reset check" },
+        "availability": { "kind": "highlight", "label": "Status" },
+        "cardSummary": { "kind": "detail", "label": "Summary" }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Gold Shop",
+        "cardSummary": "The general Gold exchange for progression items. Its exact shelves, prices, limits, and refresh state need a live check.",
+        "type": "General",
+        "currency": "Gold",
+        "access": "Main progression areas",
+        "purpose": "General progression items",
+        "stockRule": "Stock and prices can change.",
+        "resetRule": "Read the current shop panel for limits and reset.",
+        "availability": "Core shop"
+      },
+      "system": { "slug": "gold-shop", "section": "General Shops", "sortOrder": 10, "image": null }
+    },
+    {
+      "item": {
+        "name": "Wandering Trader Sentaku",
+        "cardSummary": "A roaming Gem trader that can offer unit and equipment reroll or lock items when present.",
+        "type": "Wandering trader",
+        "currency": "Gems",
+        "access": "Appears in-game on a live schedule",
+        "purpose": "Reroll and lock supplies",
+        "stockRule": "Can offer Trait Crystals, Stat Rerolls, Stat Locks, Equipment Rerolls, and Equipment Locks.",
+        "resetRule": "Spawn time, stay duration, price, and quantity must be checked live.",
+        "availability": "Rotating appearance"
+      },
+      "system": { "slug": "wandering-trader-sentaku", "section": "General Shops", "sortOrder": 20, "image": null }
+    },
+    {
+      "item": {
+        "name": "General Raid Shop",
+        "cardSummary": "Spends Raid Tokens earned across raids on reroll, lock, and Sprite supplies with fixed purchase limits.",
+        "type": "Raid",
+        "currency": "Raid Tokens",
+        "access": "Raids, unlocked at player level 25",
+        "purpose": "Shared raid progression supplies",
+        "stockRule": "Limited stock with fixed purchase caps.",
+        "resetRule": "Documented stock does not restock after it sells out.",
+        "availability": "Permanent mode shop"
+      },
+      "system": { "slug": "general-raid-shop", "section": "Mode Shops", "sortOrder": 30, "image": null }
+    },
+    {
+      "item": {
+        "name": "Spirit City Shop",
+        "cardSummary": "A map-specific raid exchange that uses Spirit Tokens for Spirit City upgrades and rewards, separate from the shared Raid Shop.",
+        "type": "Map raid",
+        "currency": "Spirit Tokens",
+        "access": "Spirit City raid",
+        "purpose": "Spirit City progression",
+        "stockRule": "Map-specific limited stock, including Spirit City upgrades and rewards.",
+        "resetRule": "Documented limited stock does not reset after purchase.",
+        "availability": "Permanent map shop"
+      },
+      "system": { "slug": "spirit-city-shop", "section": "Mode Shops", "sortOrder": 40, "image": null }
+    },
+    {
+      "item": {
+        "name": "Tournament Shop",
+        "cardSummary": "Turns competitive Crowns into tournament rewards. The payout rules and shop rotation belong to the current tournament panel.",
+        "type": "Competitive",
+        "currency": "Crowns",
+        "access": "Tournament modes",
+        "purpose": "Competitive rewards",
+        "stockRule": "Tournament reward stock can rotate.",
+        "resetRule": "Check the current leaderboard payout and shop timer.",
+        "availability": "Mode shop"
+      },
+      "system": { "slug": "tournament-shop", "section": "Mode Shops", "sortOrder": 50, "image": null }
+    },
+    {
+      "item": {
+        "name": "Expedition Shop",
+        "cardSummary": "Spends Expedition Coins on materials, resources, and reroll supplies inside the Expedition progression loop.",
+        "type": "Expedition",
+        "currency": "Expedition Coins",
+        "access": "Expedition Hub",
+        "purpose": "Expedition resources and rerolls",
+        "stockRule": "Offers rotating progression stock.",
+        "resetRule": "Check live cost, purchase cap, and expiry before buying.",
+        "availability": "Permanent shop, rotating stock"
+      },
+      "system": { "slug": "expedition-shop", "section": "Mode Shops", "sortOrder": 60, "image": null }
+    },
+    {
+      "item": {
+        "name": "Event Shop",
+        "cardSummary": "A temporary exchange for the active event's currency and upgrade rewards. Its value disappears with the event schedule, so timers matter here.",
+        "type": "Event",
+        "currency": "Current Event Coin",
+        "access": "Active event",
+        "purpose": "Limited-event upgrades",
+        "stockRule": "Stock and currency change with the event.",
+        "resetRule": "Confirm deadline and currency carry-over in the live panel.",
+        "availability": "Temporary"
+      },
+      "system": { "slug": "event-shop", "section": "Event Shops", "sortOrder": 70, "image": null }
+    }
+  ]
+}

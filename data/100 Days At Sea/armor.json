@@ -1,0 +1,486 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "100 Days At Sea",
+    "gameSlug": "100-days-at-sea",
+    "collection": "armor",
+    "route": "/wiki/100-days-at-sea/armor",
+    "catalogCode": "100-days-at-sea-armor",
+    "sourceItemCount": 16,
+    "itemFields": [
+      "slot",
+      "availability",
+      "damageReduction",
+      "maxHpBonus",
+      "meleeDamageBonus",
+      "doubloonBonus",
+      "howToGet",
+      "classStarter",
+      "sourceLocation",
+      "notes",
+      "cardSummary"
+    ],
+    "columns": [
+      "slot",
+      "availability",
+      "damageReduction",
+      "maxHpBonus",
+      "meleeDamageBonus",
+      "doubloonBonus",
+      "howToGet",
+      "classStarter",
+      "sourceLocation",
+      "notes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Armor slot",
+      "sectionOrder": [
+        "Chest armor",
+        "Leg armor"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "slot",
+        "damageReduction"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "slot",
+        "availability",
+        "damageReduction",
+        "maxHpBonus",
+        "meleeDamageBonus",
+        "doubloonBonus",
+        "classStarter",
+        "howToGet"
+      ],
+      "tableFields": [
+        "slot",
+        "availability",
+        "damageReduction",
+        "maxHpBonus",
+        "meleeDamageBonus",
+        "doubloonBonus",
+        "classStarter",
+        "howToGet",
+        "sourceLocation",
+        "notes",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "slot": {
+          "kind": "plain",
+          "label": "Slot"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "damageReduction": {
+          "kind": "chip",
+          "label": "Damage reduction"
+        },
+        "maxHpBonus": {
+          "kind": "chip",
+          "label": "Max HP bonus"
+        },
+        "meleeDamageBonus": {
+          "kind": "chip",
+          "label": "Melee damage bonus"
+        },
+        "doubloonBonus": {
+          "kind": "chip",
+          "label": "Doubloon bonus"
+        },
+        "howToGet": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "classStarter": {
+          "kind": "plain",
+          "label": "Class link"
+        },
+        "sourceLocation": {
+          "kind": "plain",
+          "label": "Source location"
+        },
+        "notes": {
+          "kind": "detail",
+          "label": "Notes"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "Equipable character armor with a documented chest or leg slot. Excludes raft defenses, weapons, classes as primary rows, cosmetics, and inferred set bonuses.",
+      "sources": [
+        "https://techwiser.com/100-days-at-sea-armor/",
+        "https://allthings.how/100-days-at-sea-on-roblox-codes-classes-islands-and-bosses/",
+        "https://gamestratwiki.com/100-days-at-sea-alien-invasion-update-guide/"
+      ],
+      "sourceChecked": "2026-08-09",
+      "normalization": "Source values written as reduced damage taken are displayed as the equivalent damage-reduction percentage. No combined chest-plus-leg total is inferred.",
+      "knownGap": "Military Armor is documented as a Soldier Level 2 unlock, but its effect remains TBA in the primary source.",
+      "imagePolicy": "Eleven dedicated row-identifiable equipment crops from the primary guide are wired. Knight Armor, Alien Chest, Military Armor, Alien Legs, and Wooden Legs remain null because the available media are class portraits or no dedicated file exists."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Knight Armor",
+        "slot": "Chest",
+        "availability": "Class-exclusive",
+        "damageReduction": "30%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Choose the Knight class; this armor is exclusive to that class.",
+        "classStarter": "Knight",
+        "sourceLocation": "Knight class loadout",
+        "notes": "The strongest confirmed single-piece reduction in the current roster.",
+        "cardSummary": "Knight-only chest armor with 30% damage reduction for tank-focused runs."
+      },
+      "system": {
+        "slug": "knight-armor",
+        "section": "Chest armor",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Chest",
+        "slot": "Chest",
+        "availability": "Chest loot",
+        "damageReduction": "20%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Chest-loot armor with 20% damage reduction and no documented secondary bonus."
+      },
+      "system": {
+        "slug": "diamond-chest",
+        "section": "Chest armor",
+        "sortOrder": 2,
+        "image": "/100%20Days%20At%20Sea/Armor/diamond-chest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alien Chest",
+        "slot": "Chest",
+        "availability": "Class starter or island reward",
+        "damageReduction": "15%",
+        "maxHpBonus": "15%",
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Start as Alien Warrior, or complete the Dynamite Alien Island objective and claim its armor reward.",
+        "classStarter": "Alien Warrior",
+        "sourceLocation": "Alien Warrior loadout; Dynamite Alien Island",
+        "notes": "The island route is independently corroborated by an Alien Invasion walkthrough.",
+        "cardSummary": "Alien chest gear pairs 15% damage reduction with 15% more max HP and has both class and island routes."
+      },
+      "system": {
+        "slug": "alien-chest",
+        "section": "Chest armor",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Steel Chest",
+        "slot": "Chest",
+        "availability": "Chest loot",
+        "damageReduction": "15%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Chest-loot armor with 15% damage reduction and no documented secondary bonus."
+      },
+      "system": {
+        "slug": "steel-chest",
+        "section": "Chest armor",
+        "sortOrder": 4,
+        "image": "/100%20Days%20At%20Sea/Armor/steel-chest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Iron Chest",
+        "slot": "Chest",
+        "availability": "Chest loot",
+        "damageReduction": "12%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Chest-loot armor with 12% damage reduction and no documented secondary bonus."
+      },
+      "system": {
+        "slug": "iron-chest",
+        "section": "Chest armor",
+        "sortOrder": 5,
+        "image": "/100%20Days%20At%20Sea/Armor/iron-chest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Chest",
+        "slot": "Chest",
+        "availability": "Chest loot",
+        "damageReduction": "10%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": "10%",
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": "Its secondary bonus is aimed at Doubloon earning rather than extra combat damage.",
+        "cardSummary": "Economy-focused chest armor with 10% damage reduction and 10% more Doubloons."
+      },
+      "system": {
+        "slug": "gold-chest",
+        "section": "Chest armor",
+        "sortOrder": 6,
+        "image": "/100%20Days%20At%20Sea/Armor/gold-chest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Warrior Chest",
+        "slot": "Chest",
+        "availability": "Chest loot",
+        "damageReduction": "10%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": "10%",
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": "Its secondary bonus favors melee combat.",
+        "cardSummary": "Melee-focused chest armor with 10% damage reduction and 10% more melee damage."
+      },
+      "system": {
+        "slug": "warrior-chest",
+        "section": "Chest armor",
+        "sortOrder": 7,
+        "image": "/100%20Days%20At%20Sea/Armor/warrior-chest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bronze Chest",
+        "slot": "Chest",
+        "availability": "Chest loot",
+        "damageReduction": "8%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Chest-loot armor with 8% damage reduction and no documented secondary bonus."
+      },
+      "system": {
+        "slug": "bronze-chest",
+        "section": "Chest armor",
+        "sortOrder": 8,
+        "image": "/100%20Days%20At%20Sea/Armor/bronze-chest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wooden Chest",
+        "slot": "Chest",
+        "availability": "Chest loot",
+        "damageReduction": "5%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Entry-level chest-loot armor with 5% damage reduction."
+      },
+      "system": {
+        "slug": "wooden-chest",
+        "section": "Chest armor",
+        "sortOrder": 9,
+        "image": "/100%20Days%20At%20Sea/Armor/wooden-chest.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Military Armor",
+        "slot": "Chest",
+        "availability": "Class unlock",
+        "damageReduction": null,
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Reach Level 2 with the Soldier class to unlock this armor.",
+        "classStarter": "Soldier (Level 2)",
+        "sourceLocation": "Soldier class progression",
+        "notes": "The primary armor guide lists the effect as TBA, so no stat is assigned.",
+        "cardSummary": "Soldier Level 2 chest armor whose defensive effect is not yet confirmed by the source."
+      },
+      "system": {
+        "slug": "military-armor",
+        "section": "Chest armor",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Legs",
+        "slot": "Leg",
+        "availability": "Chest loot",
+        "damageReduction": "20%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Chest-loot leg armor with 20% damage reduction and no documented secondary bonus."
+      },
+      "system": {
+        "slug": "diamond-legs",
+        "section": "Leg armor",
+        "sortOrder": 11,
+        "image": "/100%20Days%20At%20Sea/Armor/diamond-legs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alien Legs",
+        "slot": "Leg",
+        "availability": "Class starter or island reward",
+        "damageReduction": "15%",
+        "maxHpBonus": "15%",
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Start as Alien Warrior, or complete the Dynamite Alien Island objective and claim its armor reward.",
+        "classStarter": "Alien Warrior",
+        "sourceLocation": "Alien Warrior loadout; Dynamite Alien Island",
+        "notes": "The island route is independently corroborated by an Alien Invasion walkthrough.",
+        "cardSummary": "Alien leg gear pairs 15% damage reduction with 15% more max HP and has both class and island routes."
+      },
+      "system": {
+        "slug": "alien-legs",
+        "section": "Leg armor",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Steel Legs",
+        "slot": "Leg",
+        "availability": "Chest loot",
+        "damageReduction": "15%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Chest-loot leg armor with 15% damage reduction and no documented secondary bonus."
+      },
+      "system": {
+        "slug": "steel-legs",
+        "section": "Leg armor",
+        "sortOrder": 13,
+        "image": "/100%20Days%20At%20Sea/Armor/steel-legs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Iron Legs",
+        "slot": "Leg",
+        "availability": "Chest loot",
+        "damageReduction": "12%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Chest-loot leg armor with 12% damage reduction and no documented secondary bonus."
+      },
+      "system": {
+        "slug": "iron-legs",
+        "section": "Leg armor",
+        "sortOrder": 14,
+        "image": "/100%20Days%20At%20Sea/Armor/iron-legs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bronze Legs",
+        "slot": "Leg",
+        "availability": "Chest loot",
+        "damageReduction": "8%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Chest-loot leg armor with 8% damage reduction and no documented secondary bonus."
+      },
+      "system": {
+        "slug": "bronze-legs",
+        "section": "Leg armor",
+        "sortOrder": 15,
+        "image": "/100%20Days%20At%20Sea/Armor/bronze-legs.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wooden Legs",
+        "slot": "Leg",
+        "availability": "Chest loot",
+        "damageReduction": "5%",
+        "maxHpBonus": null,
+        "meleeDamageBonus": null,
+        "doubloonBonus": null,
+        "howToGet": "Open chests; the primary armor guide does not publish a more specific drop table.",
+        "classStarter": null,
+        "sourceLocation": "Chests",
+        "notes": null,
+        "cardSummary": "Entry-level chest-loot leg armor with 5% damage reduction."
+      },
+      "system": {
+        "slug": "wooden-legs",
+        "section": "Leg armor",
+        "sortOrder": 16,
+        "image": null
+      }
+    }
+  ]
+}

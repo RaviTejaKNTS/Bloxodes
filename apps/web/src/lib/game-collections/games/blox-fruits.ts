@@ -3,6 +3,7 @@ import type { GameCollectionGroup } from "../types";
 export const bloxFruitsCollectionGroup = {
     gameSlug: "blox-fruits",
     gameName: "Blox Fruits",
+    universeId: 994732206,
     dataDir: "Blox Fruits",
     universeNames: ["Blox Fruits"],
     collections: [
@@ -26,6 +27,19 @@ export const bloxFruitsCollectionGroup = {
       "special-titles",
       "swords",
       "title-colors",
-      "titles"
+      "titles",
+      "fish",
+      "fishing-rods",
+      "baits",
+      "potions",
+      "trinkets",
+      "scrolls",
+      "enchantments",
+      "aura-skins",
+      "fruit-skins",
+      "raids",
+      "crafting-recipes",
+      "currencies",
+      "stats"
     ]
   } satisfies GameCollectionGroup;

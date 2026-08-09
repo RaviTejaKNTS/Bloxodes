@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Squadron",
+    "gameSlug": "anime-squadron",
+    "collection": "perks",
+    "route": "/wiki/anime-squadron/perks",
+    "catalogCode": "anime-squadron-perks",
+    "universeId": 8356066619,
+    "itemFields": [
+      "name",
+      "cardSummary",
+      "effect",
+      "maxLevel",
+      "maxValue",
+      "currency",
+      "bestFor",
+      "priority"
+    ],
+    "columns": [
+      "name",
+      "cardSummary",
+      "effect",
+      "maxLevel",
+      "maxValue",
+      "currency",
+      "bestFor",
+      "priority"
+    ],
+    "display": {
+      "groupLabel": "Perk type",
+      "sectionOrder": [
+        "Perks"
+      ],
+      "badgeField": "priority",
+      "subtitleFields": [
+        "effect"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "effect",
+        "maxLevel",
+        "maxValue",
+        "currency",
+        "bestFor",
+        "priority"
+      ],
+      "tableFields": [
+        "effect",
+        "maxLevel",
+        "maxValue",
+        "currency",
+        "bestFor",
+        "priority",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "maxLevel": {
+          "kind": "chip",
+          "label": "Max level"
+        },
+        "maxValue": {
+          "kind": "chip",
+          "label": "Known max"
+        },
+        "currency": {
+          "kind": "chip",
+          "label": "Currency"
+        },
+        "bestFor": {
+          "kind": "highlight",
+          "label": "Best for"
+        },
+        "priority": {
+          "kind": "highlight",
+          "label": "Priority"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Maximum Yen",
+        "effect": "Raises the most Yen you can hold during a match.",
+        "maxLevel": "40",
+        "maxValue": "20.5K Yen capacity",
+        "currency": "Gold",
+        "bestFor": "Reaching expensive unit upgrades",
+        "priority": "Upgrade early alongside Yen Generation",
+        "cardSummary": "A larger Yen cap lets you afford higher unit upgrades instead of getting stopped by the wallet limit."
+      },
+      "system": {
+        "slug": "maximum-yen",
+        "section": "Perks",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Yen Generation",
+        "effect": "Raises the Yen earned each second during a match.",
+        "maxLevel": "25",
+        "maxValue": "390 Yen per second",
+        "currency": "Gold",
+        "bestFor": "Placing and upgrading units faster",
+        "priority": "Main early progression perk",
+        "cardSummary": "More Yen each second speeds up placements and upgrades, making this the practical early Gold sink."
+      },
+      "system": {
+        "slug": "yen-generation",
+        "section": "Perks",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Base Health",
+        "effect": "Raises the health of your base.",
+        "maxLevel": "Unknown",
+        "maxValue": "Unknown",
+        "currency": "Gold",
+        "bestFor": "Extra room for leaked enemies",
+        "priority": "Lower priority than the Yen perks",
+        "cardSummary": "Extra base health can forgive a leak, but it does not help you place or upgrade the units that prevent leaks."
+      },
+      "system": {
+        "slug": "base-health",
+        "section": "Perks",
+        "sortOrder": 30,
+        "image": null
+      }
+    }
+  ]
+}

@@ -6,5 +6,13 @@ export const animeSquadronCollectionGroup = {
     universeId: 8356066619,
     dataDir: "Anime Squadron",
     universeNames: ["Anime Squadron", "[UPD 0.5] Anime Squadron"],
-    collections: ["equipment", "traits", "units"]
+    collections: [
+      "equipment",
+      "traits",
+      "units",
+      "perks",
+      "awakenings",
+      "materials",
+      "stages"
+    ]
   } satisfies GameCollectionGroup;

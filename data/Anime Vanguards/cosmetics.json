@@ -1,0 +1,4991 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Vanguards",
+    "gameSlug": "anime-vanguards",
+    "collection": "cosmetics",
+    "route": "/wiki/anime-vanguards/cosmetics",
+    "catalogCode": "anime-vanguards-cosmetics",
+    "itemFields": [
+      "availability",
+      "cosmeticType",
+      "associatedUnit",
+      "acquisitionGroup",
+      "cardSummary"
+    ],
+    "columns": [
+      "availability",
+      "cosmeticType",
+      "associatedUnit",
+      "acquisitionGroup",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Standard Cosmetics",
+        "Skins",
+        "Special Cosmetics"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "cosmeticType",
+        "associatedUnit"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "availability",
+        "cosmeticType",
+        "associatedUnit",
+        "acquisitionGroup"
+      ],
+      "tableFields": [
+        "availability",
+        "cosmeticType",
+        "associatedUnit",
+        "acquisitionGroup"
+      ],
+      "fieldPresentation": {
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "cosmeticType": "normal",
+        "associatedUnit": "normal",
+        "cardSummary": "detail",
+        "acquisitionGroup": "normal"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Fire Foot (Chef) Normal Cosmetic",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Fire Foot (Chef) Normal",
+        "cardSummary": "Fire Foot (Chef) Normal Cosmetic is a visual cosmetic tied to Fire Foot (Chef) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "this-cosmetic-has-unique-effects-when-jumping",
+        "section": "Standard Cosmetics",
+        "sortOrder": 1,
+        "image": "/Anime%20Vanguards/Cosmetics/this-cosmetic-has-unique-effects-when-jumping.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fire Foot (Chef) Shiny Cosmetic",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Fire Foot (Chef) Shiny",
+        "cardSummary": "Fire Foot (Chef) Shiny Cosmetic is a visual cosmetic tied to Fire Foot (Chef) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "this-cosmetic-has-unique-effects-when-jumping-2",
+        "section": "Standard Cosmetics",
+        "sortOrder": 2,
+        "image": "/Anime%20Vanguards/Cosmetics/this-cosmetic-has-unique-effects-when-jumping-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tempest Pirate",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Tempest Pirate (Navigator) Normal",
+        "cardSummary": "Tempest Pirate is a visual cosmetic tied to Tempest Pirate (Navigator) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "tempestpiratecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 3,
+        "image": "/Anime%20Vanguards/Cosmetics/tempestpiratecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Tempest Pirate",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Tempest Pirate (Navigator) Shiny",
+        "cardSummary": "Shiny Tempest Pirate is a visual cosmetic tied to Tempest Pirate (Navigator) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinytempestpiratecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 4,
+        "image": "/Anime%20Vanguards/Cosmetics/shinytempestpiratecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Skele King",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Skele King (Rock) Normal",
+        "cardSummary": "Skele King is a visual cosmetic tied to Skele King (Rock) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "skelekingcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 5,
+        "image": "/Anime%20Vanguards/Cosmetics/skelekingcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Skele King",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Skele King (Rock) Shiny",
+        "cardSummary": "Shiny Skele King is a visual cosmetic tied to Skele King (Rock) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyskelekingcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 6,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyskelekingcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lord Friezo Emperor",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lord Friezo (Emperor) Normal",
+        "cardSummary": "Lord Friezo Emperor is a visual cosmetic tied to Lord Friezo (Emperor) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "lordfriezoemperorcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 7,
+        "image": "/Anime%20Vanguards/Cosmetics/lordfriezoemperorcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Lord Friezo Emperor",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lord Friezo (Emperor) Shiny",
+        "cardSummary": "Shiny Lord Friezo Emperor is a visual cosmetic tied to Lord Friezo (Emperor) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinylordfriezoemperorcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 8,
+        "image": "/Anime%20Vanguards/Cosmetics/shinylordfriezoemperorcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Struggler",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "The Struggler (Rampage) Normal",
+        "cardSummary": "The Struggler is a visual cosmetic tied to The Struggler (Rampage) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "thestrugglercosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 9,
+        "image": "/Anime%20Vanguards/Cosmetics/thestrugglercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny The Struggler",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "The Struggler (Rampage) Shiny",
+        "cardSummary": "Shiny The Struggler is a visual cosmetic tied to The Struggler (Rampage) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinythestrugglercosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 10,
+        "image": "/Anime%20Vanguards/Cosmetics/shinythestrugglercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Smith",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "The Smith (Forged) Normal",
+        "cardSummary": "The Smith is a visual cosmetic tied to The Smith (Forged) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "thesmithcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 11,
+        "image": "/Anime%20Vanguards/Cosmetics/thesmithcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny The Smith",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "The Smith (Forged) Shiny",
+        "cardSummary": "Shiny The Smith is a visual cosmetic tied to The Smith (Forged) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinythesmithcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 12,
+        "image": "/Anime%20Vanguards/Cosmetics/shinythesmithcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roku Super 3",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Roku (Super 3) Normal",
+        "cardSummary": "Roku Super 3 is a visual cosmetic tied to Roku (Super 3) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "rokusuper3cosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 13,
+        "image": "/Anime%20Vanguards/Cosmetics/rokusuper3cosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Roku Super 3",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Roku (Super 3) Shiny",
+        "cardSummary": "Shiny Roku Super 3 is a visual cosmetic tied to Roku (Super 3) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyrokusuper3cosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 14,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyrokusuper3cosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Eizan",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Eizan (Aura) Normal",
+        "cardSummary": "Eizan is a visual cosmetic tied to Eizan (Aura) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "eizancosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 15,
+        "image": "/Anime%20Vanguards/Cosmetics/eizancosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Eizan",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Eizan (Aura) Shiny",
+        "cardSummary": "Shiny Eizan is a visual cosmetic tied to Eizan (Aura) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyeizancosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 16,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyeizancosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Valentine (Love Train) Normal",
+        "cardSummary": "Valentine is a visual cosmetic tied to Valentine (Love Train) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "valentinecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 17,
+        "image": "/Anime%20Vanguards/Cosmetics/valentinecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Valentine",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Valentine (Love Train) Shiny",
+        "cardSummary": "Shiny Valentine is a visual cosmetic tied to Valentine (Love Train) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyvalentinecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 18,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyvalentinecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gujo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Gujo (Infinity) Normal",
+        "cardSummary": "Gujo is a visual cosmetic tied to Gujo (Infinity) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "gujocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 19,
+        "image": "/Anime%20Vanguards/Cosmetics/gujocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Gujo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Gujo (Infinity) Shiny",
+        "cardSummary": "Shiny Gujo is a visual cosmetic tied to Gujo (Infinity) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinygujocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 20,
+        "image": "/Anime%20Vanguards/Cosmetics/shinygujocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sukono",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Sukono Normal",
+        "cardSummary": "Sukono is a visual cosmetic tied to Sukono Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "sukonocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 21,
+        "image": "/Anime%20Vanguards/Cosmetics/sukonocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Sukono",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Sukono Shiny",
+        "cardSummary": "Shiny Sukono is a visual cosmetic tied to Sukono Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinysukonocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 22,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysukonocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alocard",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Alocard (Vampire King) Normal",
+        "cardSummary": "Alocard is a visual cosmetic tied to Alocard (Vampire King) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "alocardcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 23,
+        "image": "/Anime%20Vanguards/Cosmetics/alocardcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Alocard",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Alocard (Vampire King) Shiny",
+        "cardSummary": "Shiny Alocard is a visual cosmetic tied to Alocard (Vampire King) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyalocardcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 24,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyalocardcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ishtar",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ishtar (Divinity) Normal",
+        "cardSummary": "Ishtar is a visual cosmetic tied to Ishtar (Divinity) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "ishtarcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 25,
+        "image": "/Anime%20Vanguards/Cosmetics/ishtarcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Ishtar",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ishtar (Divinity) Shiny",
+        "cardSummary": "Shiny Ishtar is a visual cosmetic tied to Ishtar (Divinity) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyishtarcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 26,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyishtarcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brisket",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Brisket (Yo-Yo) Normal",
+        "cardSummary": "Brisket is a visual cosmetic tied to Brisket (Yo-Yo) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "brisketcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 27,
+        "image": "/Anime%20Vanguards/Cosmetics/brisketcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Brisket",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Brisket (Yo-Yo) Shiny",
+        "cardSummary": "Shiny Brisket is a visual cosmetic tied to Brisket (Yo-Yo) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinybrisketcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 28,
+        "image": "/Anime%20Vanguards/Cosmetics/shinybrisketcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kazzy",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Kazzy (Queen) Normal",
+        "cardSummary": "Kazzy is a visual cosmetic tied to Kazzy (Queen) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "kazzycosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 29,
+        "image": "/Anime%20Vanguards/Cosmetics/kazzycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Kazzy",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Kazzy (Queen) Shiny",
+        "cardSummary": "Shiny Kazzy is a visual cosmetic tied to Kazzy (Queen) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinykazzycosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 30,
+        "image": "/Anime%20Vanguards/Cosmetics/shinykazzycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gear Boy",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Gear Boy (Hungry) Normal",
+        "cardSummary": "Gear Boy is a visual cosmetic tied to Gear Boy (Hungry) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "gearboycosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 31,
+        "image": "/Anime%20Vanguards/Cosmetics/gearboycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Gear Boy",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Gear Boy (Hungry) Shiny",
+        "cardSummary": "Shiny Gear Boy is a visual cosmetic tied to Gear Boy (Hungry) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinygearboycosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 32,
+        "image": "/Anime%20Vanguards/Cosmetics/shinygearboycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Obita",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Obita (Awakened) Normal",
+        "cardSummary": "Obita is a visual cosmetic tied to Obita (Awakened) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "obitacosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 33,
+        "image": "/Anime%20Vanguards/Cosmetics/obitacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Obita",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Obita (Awakened) Shiny",
+        "cardSummary": "Shiny Obita is a visual cosmetic tied to Obita (Awakened) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyobitacosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 34,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyobitacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Oryo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Oryo (Antithesis) Normal",
+        "cardSummary": "Oryo is a visual cosmetic tied to Oryo (Antithesis) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "oryocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 35,
+        "image": "/Anime%20Vanguards/Cosmetics/oryocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Oryo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Oryo (Antithesis) Shiny",
+        "cardSummary": "Shiny Oryo is a visual cosmetic tied to Oryo (Antithesis) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyoryocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 36,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyoryocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yuruicha",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Yuruicha (Raijin) Normal",
+        "cardSummary": "Yuruicha is a visual cosmetic tied to Yuruicha (Raijin) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "yuruichacosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 37,
+        "image": "/Anime%20Vanguards/Cosmetics/yuruichacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Yuruicha",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Yuruicha (Raijin) Shiny",
+        "cardSummary": "Shiny Yuruicha is a visual cosmetic tied to Yuruicha (Raijin) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyyuruichacosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 38,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyyuruichacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ichiga Savior",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ichiga (Savior) Normal",
+        "cardSummary": "Ichiga Savior is a visual cosmetic tied to Ichiga (Savior) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "ichigasaviorcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 39,
+        "image": "/Anime%20Vanguards/Cosmetics/ichigasaviorcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Ichiga Savior",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ichiga (Savior) Shiny",
+        "cardSummary": "Shiny Ichiga Savior is a visual cosmetic tied to Ichiga (Savior) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyichigasaviorcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 40,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyichigasaviorcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Deruta",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Deruta (Hunt) Normal",
+        "cardSummary": "Deruta is a visual cosmetic tied to Deruta (Hunt) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "derutacosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 41,
+        "image": "/Anime%20Vanguards/Cosmetics/derutacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Deruta",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Deruta (Hunt) Shiny",
+        "cardSummary": "Shiny Deruta is a visual cosmetic tied to Deruta (Hunt) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinyderutacosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 42,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyderutacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Noruto Six Tails",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Noruto (Six Tails) Normal",
+        "cardSummary": "Noruto Six Tails is a visual cosmetic tied to Noruto (Six Tails) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "norutosixtailscosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 43,
+        "image": "/Anime%20Vanguards/Cosmetics/norutosixtailscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Noruto Six Tails",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Noruto (Six Tails) Shiny",
+        "cardSummary": "Shiny Noruto Six Tails is a visual cosmetic tied to Noruto (Six Tails) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinynorutosixtailscosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 44,
+        "image": "/Anime%20Vanguards/Cosmetics/shinynorutosixtailscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Song Jinwu",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Song Jinwu (Monarch) Normal",
+        "cardSummary": "Song Jinwu is a visual cosmetic tied to Song Jinwu (Monarch) Normal.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "songjinwucosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 45,
+        "image": "/Anime%20Vanguards/Cosmetics/songjinwucosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Song Jinwu",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Song Jinwu (Monarch) Shiny",
+        "cardSummary": "Shiny Song Jinwu is a visual cosmetic tied to Song Jinwu (Monarch) Shiny.",
+        "acquisitionGroup": "Default Banner Units"
+      },
+      "system": {
+        "slug": "shinysongjinwucosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 46,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysongjinwucosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Divalo",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Divalo (Requiem) Normal",
+        "cardSummary": "Divalo is a visual cosmetic tied to Divalo (Requiem) Normal.",
+        "acquisitionGroup": "Occult Event Banner"
+      },
+      "system": {
+        "slug": "divalocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 47,
+        "image": "/Anime%20Vanguards/Cosmetics/divalocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Divalo",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Divalo (Requiem) Shiny",
+        "cardSummary": "Shiny Divalo is a visual cosmetic tied to Divalo (Requiem) Shiny.",
+        "acquisitionGroup": "Occult Event Banner"
+      },
+      "system": {
+        "slug": "shinydivalocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 48,
+        "image": "/Anime%20Vanguards/Cosmetics/shinydivalocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Okorun",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Okorun (Turbo) Normal",
+        "cardSummary": "Okorun is a visual cosmetic tied to Okorun (Turbo) Normal.",
+        "acquisitionGroup": "Occult Event Banner"
+      },
+      "system": {
+        "slug": "okoruncosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 49,
+        "image": "/Anime%20Vanguards/Cosmetics/okoruncosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Okorun",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Okorun (Turbo) Shiny",
+        "cardSummary": "Shiny Okorun is a visual cosmetic tied to Okorun (Turbo) Shiny.",
+        "acquisitionGroup": "Occult Event Banner"
+      },
+      "system": {
+        "slug": "shinyokoruncosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 50,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyokoruncosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pweeny",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Pweeny (Boxer) Normal",
+        "cardSummary": "Pweeny is a visual cosmetic tied to Pweeny (Boxer) Normal.",
+        "acquisitionGroup": "Occult Event Banner"
+      },
+      "system": {
+        "slug": "pweenycosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 51,
+        "image": "/Anime%20Vanguards/Cosmetics/pweenycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Pweeny",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Pweeny (Boxer) Shiny",
+        "cardSummary": "Shiny Pweeny is a visual cosmetic tied to Pweeny (Boxer) Shiny.",
+        "acquisitionGroup": "Occult Event Banner"
+      },
+      "system": {
+        "slug": "shinypweenycosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 52,
+        "image": "/Anime%20Vanguards/Cosmetics/shinypweenycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mimi",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Mimi (Psychic) Normal",
+        "cardSummary": "Mimi is a visual cosmetic tied to Mimi (Psychic) Normal.",
+        "acquisitionGroup": "Occult Event Banner"
+      },
+      "system": {
+        "slug": "mimicosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 53,
+        "image": "/Anime%20Vanguards/Cosmetics/mimicosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Mimi",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Mimi (Psychic) Shiny",
+        "cardSummary": "Shiny Mimi is a visual cosmetic tied to Mimi (Psychic) Shiny.",
+        "acquisitionGroup": "Occult Event Banner"
+      },
+      "system": {
+        "slug": "shinymimicosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 54,
+        "image": "/Anime%20Vanguards/Cosmetics/shinymimicosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rogita Super 4",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rogita (Super 4) Normal",
+        "cardSummary": "Rogita Super 4 is a visual cosmetic tied to Rogita (Super 4) Normal.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "rogitasuper4cosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 55,
+        "image": "/Anime%20Vanguards/Cosmetics/rogitasuper4cosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Rogita Super 4",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rogita (Super 4) Shiny",
+        "cardSummary": "Shiny Rogita Super 4 is a visual cosmetic tied to Rogita (Super 4) Shiny.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "shinyrogitasuper4cosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 56,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyrogitasuper4cosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rom And Ran",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rom and Ran (Fanatic) Normal",
+        "cardSummary": "Rom And Ran is a visual cosmetic tied to Rom and Ran (Fanatic) Normal.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "romandrancosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 57,
+        "image": "/Anime%20Vanguards/Cosmetics/romandrancosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Rom And Ran",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rom and Ran (Fanatic) Shiny",
+        "cardSummary": "Shiny Rom And Ran is a visual cosmetic tied to Rom and Ran (Fanatic) Shiny.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "shinyromandrancosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 58,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyromandrancosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Foboko",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Foboko (Hellish) Normal",
+        "cardSummary": "Foboko is a visual cosmetic tied to Foboko (Hellish) Normal.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "fobokocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 59,
+        "image": "/Anime%20Vanguards/Cosmetics/fobokocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Foboko",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Foboko (Hellish) Shiny",
+        "cardSummary": "Shiny Foboko is a visual cosmetic tied to Foboko (Hellish) Shiny.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "shinyfobokocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 60,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyfobokocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Karem",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Karem (Chilled) Normal",
+        "cardSummary": "Karem is a visual cosmetic tied to Karem (Chilled) Normal.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "karemcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 61,
+        "image": "/Anime%20Vanguards/Cosmetics/karemcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Karem",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Karem (Chilled) Shiny",
+        "cardSummary": "Shiny Karem is a visual cosmetic tied to Karem (Chilled) Shiny.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "shinykaremcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 62,
+        "image": "/Anime%20Vanguards/Cosmetics/shinykaremcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Emmie",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Emmie (Ice Witch) Normal",
+        "cardSummary": "Emmie is a visual cosmetic tied to Emmie (Ice Witch) Normal.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "emmiecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 63,
+        "image": "/Anime%20Vanguards/Cosmetics/emmiecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Emmie",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Emmie (Ice Witch) Shiny",
+        "cardSummary": "Shiny Emmie is a visual cosmetic tied to Emmie (Ice Witch) Shiny.",
+        "acquisitionGroup": "Winter Event Banner"
+      },
+      "system": {
+        "slug": "shinyemmiecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 64,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyemmiecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Iscanur",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Iscanur (Pride) Normal",
+        "cardSummary": "Iscanur is a visual cosmetic tied to Iscanur (Pride) Normal.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "iscanurcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 65,
+        "image": "/Anime%20Vanguards/Cosmetics/iscanurcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Iscanur Shiny",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Iscanur (Pride) Shiny",
+        "cardSummary": "Iscanur Shiny is a visual cosmetic tied to Iscanur (Pride) Shiny.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "iscanurshinycosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 66,
+        "image": "/Anime%20Vanguards/Cosmetics/iscanurshinycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hei",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Hei (Black Dragon) Normal",
+        "cardSummary": "Hei is a visual cosmetic tied to Hei (Black Dragon) Normal.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "heicosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 67,
+        "image": "/Anime%20Vanguards/Cosmetics/heicosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Hei",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Hei (Black Dragon) Shiny",
+        "cardSummary": "Shiny Hei is a visual cosmetic tied to Hei (Black Dragon) Shiny.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "shinyheicosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 68,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyheicosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Newsman",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Newsman (Forecast) Normal",
+        "cardSummary": "Newsman is a visual cosmetic tied to Newsman (Forecast) Normal.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "newsmancosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 69,
+        "image": "/Anime%20Vanguards/Cosmetics/newsmancosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Newsman",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Newsman (Forecast) Shiny",
+        "cardSummary": "Shiny Newsman is a visual cosmetic tied to Newsman (Forecast) Shiny.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "shinynewsmancosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 70,
+        "image": "/Anime%20Vanguards/Cosmetics/shinynewsmancosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Quetzalcoatl",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Quetzalcoatl (Sun God) Normal",
+        "cardSummary": "Quetzalcoatl is a visual cosmetic tied to Quetzalcoatl (Sun God) Normal.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "quetzalcoatlcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 71,
+        "image": "/Anime%20Vanguards/Cosmetics/quetzalcoatlcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Quetzalcoatl",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Quetzalcoatl (Sun God) Shiny",
+        "cardSummary": "Shiny Quetzalcoatl is a visual cosmetic tied to Quetzalcoatl (Sun God) Shiny.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "shinyquetzalcoatlcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 72,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyquetzalcoatlcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ali",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ali (Djinn) Normal",
+        "cardSummary": "Ali is a visual cosmetic tied to Ali (Djinn) Normal.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "alicosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 73,
+        "image": "/Anime%20Vanguards/Cosmetics/alicosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Ali",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ali (Djinn) Shiny",
+        "cardSummary": "Shiny Ali is a visual cosmetic tied to Ali (Djinn) Shiny.",
+        "acquisitionGroup": "Summer Event Banner"
+      },
+      "system": {
+        "slug": "shinyalicosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 74,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyalicosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rudie",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rudie (Prodigy) Normal",
+        "cardSummary": "Rudie is a visual cosmetic tied to Rudie (Prodigy) Normal.",
+        "acquisitionGroup": "Spring Event Banner"
+      },
+      "system": {
+        "slug": "rudiecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 75,
+        "image": "/Anime%20Vanguards/Cosmetics/rudiecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Rudie",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rudie (Prodigy) Shiny",
+        "cardSummary": "Shiny Rudie is a visual cosmetic tied to Rudie (Prodigy) Shiny.",
+        "acquisitionGroup": "Spring Event Banner"
+      },
+      "system": {
+        "slug": "shinyrudiecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 76,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hebano",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Hebano (Clematis) Normal",
+        "cardSummary": "Hebano is a visual cosmetic tied to Hebano (Clematis) Normal.",
+        "acquisitionGroup": "Spring Event Banner"
+      },
+      "system": {
+        "slug": "hebanocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 77,
+        "image": "/Anime%20Vanguards/Cosmetics/hebanocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Hebano",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Hebano (Clematis) Shiny",
+        "cardSummary": "Shiny Hebano is a visual cosmetic tied to Hebano (Clematis) Shiny.",
+        "acquisitionGroup": "Spring Event Banner"
+      },
+      "system": {
+        "slug": "shinyhebanocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 78,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyhebanocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Koguro",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Koguro (Unsealed) Normal",
+        "cardSummary": "Koguro is a visual cosmetic tied to Koguro (Unsealed) Normal.",
+        "acquisitionGroup": "Spring Event Banner"
+      },
+      "system": {
+        "slug": "kogurocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 79,
+        "image": "/Anime%20Vanguards/Cosmetics/kogurocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Koguro",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Koguro (Unsealed) Shiny",
+        "cardSummary": "Shiny Koguro is a visual cosmetic tied to Koguro (Unsealed) Shiny.",
+        "acquisitionGroup": "Spring Event Banner"
+      },
+      "system": {
+        "slug": "shinykogurocosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 80,
+        "image": "/Anime%20Vanguards/Cosmetics/shinykogurocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "God",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Normal",
+        "cardSummary": "God is a visual cosmetic tied to God (Standless) Normal.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "godcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 81,
+        "image": "/Anime%20Vanguards/Cosmetics/godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny God",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Shiny",
+        "cardSummary": "Shiny God is a visual cosmetic tied to God (Standless) Shiny.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "shinygodcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 82,
+        "image": "/Anime%20Vanguards/Cosmetics/shinygodcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cat",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Cat (Stupid) Normal",
+        "cardSummary": "Cat is a visual cosmetic tied to Cat (Stupid) Normal.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "catcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 83,
+        "image": "/Anime%20Vanguards/Cosmetics/catcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Cat",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Cat (Stupid) Shiny",
+        "cardSummary": "Shiny Cat is a visual cosmetic tied to Cat (Stupid) Shiny.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "shinycatcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 84,
+        "image": "/Anime%20Vanguards/Cosmetics/shinycatcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Traitless",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Traitless (Vigilante) Normal",
+        "cardSummary": "Traitless is a visual cosmetic tied to Traitless (Vigilante) Normal.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "traitlesscosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 85,
+        "image": "/Anime%20Vanguards/Cosmetics/traitlesscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Traitless",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Traitless (Vigilante) Shiny",
+        "cardSummary": "Shiny Traitless is a visual cosmetic tied to Traitless (Vigilante) Shiny.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "shinytraitlesscosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 86,
+        "image": "/Anime%20Vanguards/Cosmetics/shinytraitlesscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rummie",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rummie (Scythe) Normal",
+        "cardSummary": "Rummie is a visual cosmetic tied to Rummie (Scythe) Normal.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "rummiecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 87,
+        "image": "/Anime%20Vanguards/Cosmetics/rummiecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Rummie",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rummie (Scythe) Shiny",
+        "cardSummary": "Shiny Rummie is a visual cosmetic tied to Rummie (Scythe) Shiny.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "shinyrummiecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 88,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyrummiecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dot",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dot (Nemesis) Normal",
+        "cardSummary": "Dot is a visual cosmetic tied to Dot (Nemesis) Normal.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "dotcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 89,
+        "image": "/Anime%20Vanguards/Cosmetics/dotcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Dot",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dot (Nemesis) Shiny",
+        "cardSummary": "Shiny Dot is a visual cosmetic tied to Dot (Nemesis) Shiny.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "shinydotcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 90,
+        "image": "/Anime%20Vanguards/Cosmetics/shinydotcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lizard",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lizard (Fission) Normal",
+        "cardSummary": "Lizard is a visual cosmetic tied to Lizard (Fission) Normal.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "lizardcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 91,
+        "image": "/Anime%20Vanguards/Cosmetics/lizardcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Lizard",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lizard (Fission) Shiny",
+        "cardSummary": "Shiny Lizard is a visual cosmetic tied to Lizard (Fission) Shiny.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "shinylizardcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 92,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Their Idle animation is randomized upon joining!",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Callasuba (Squad) Normal",
+        "cardSummary": "Their Idle animation is randomized upon joining! is a visual cosmetic tied to Callasuba (Squad) Normal.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "their-idle-animation-is-randomized-upon-joining",
+        "section": "Standard Cosmetics",
+        "sortOrder": 93,
+        "image": "/Anime%20Vanguards/Cosmetics/their-idle-animation-is-randomized-upon-joining.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Their Idle animation is randomized upon joining!",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Callasuba (Squad) Shiny",
+        "cardSummary": "Their Idle animation is randomized upon joining! is a visual cosmetic tied to Callasuba (Squad) Shiny.",
+        "acquisitionGroup": "Anniversary Event Banner"
+      },
+      "system": {
+        "slug": "their-idle-animation-is-randomized-upon-joining-2",
+        "section": "Standard Cosmetics",
+        "sortOrder": 94,
+        "image": "/Anime%20Vanguards/Cosmetics/their-idle-animation-is-randomized-upon-joining-2.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lich King",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lich King (Ruler) Normal",
+        "cardSummary": "Lich King is a visual cosmetic tied to Lich King (Ruler) Normal.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "lichkingcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 95,
+        "image": "/Anime%20Vanguards/Cosmetics/lichkingcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Lich King",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lich King (Ruler) Shiny",
+        "cardSummary": "Shiny Lich King is a visual cosmetic tied to Lich King (Ruler) Shiny.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "shinylichkingcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 96,
+        "image": "/Anime%20Vanguards/Cosmetics/shinylichkingcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghoul",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ghoul (Winged) Normal",
+        "cardSummary": "Ghoul is a visual cosmetic tied to Ghoul (Winged) Normal.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "ghoulcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 97,
+        "image": "/Anime%20Vanguards/Cosmetics/ghoulcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Ghoul",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ghoul (Winged) Shiny",
+        "cardSummary": "Shiny Ghoul is a visual cosmetic tied to Ghoul (Winged) Shiny.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "shinyghoulcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 98,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyghoulcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Hole",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Black Hole (Ninjutsu) Normal",
+        "cardSummary": "Black Hole is a visual cosmetic tied to Black Hole (Ninjutsu) Normal.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "blackholecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 99,
+        "image": "/Anime%20Vanguards/Cosmetics/blackholecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Black Hole",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Black Hole (Ninjutsu) Shiny",
+        "cardSummary": "Shiny Black Hole is a visual cosmetic tied to Black Hole (Ninjutsu) Shiny.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "shinyblackholecosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 100,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyblackholecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Girl",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ghost Girl (Umbrella) Normal",
+        "cardSummary": "Ghost Girl is a visual cosmetic tied to Ghost Girl (Umbrella) Normal.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "ghostgirlcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 101,
+        "image": "/Anime%20Vanguards/Cosmetics/ghostgirlcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Ghost Girl",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Ghost Girl (Umbrella) Shiny",
+        "cardSummary": "Shiny Ghost Girl is a visual cosmetic tied to Ghost Girl (Umbrella) Shiny.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "shinyghostgirlcosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 102,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyghostgirlcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jailer",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Jailer (Underworld) Normal",
+        "cardSummary": "Jailer is a visual cosmetic tied to Jailer (Underworld) Normal.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "jailercosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 103,
+        "image": "/Anime%20Vanguards/Cosmetics/jailercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Jailer",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Jailer (Underworld) Shiny",
+        "cardSummary": "Shiny Jailer is a visual cosmetic tied to Jailer (Underworld) Shiny.",
+        "acquisitionGroup": "Fall Event Banner"
+      },
+      "system": {
+        "slug": "shinyjailercosmetic",
+        "section": "Standard Cosmetics",
+        "sortOrder": 104,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyjailercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Igros Occult",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Igros (Elite Knight) Infernal PaladinSecretSecret",
+        "cardSummary": "Igros Occult is a visual cosmetic tied to Igros (Elite Knight) Infernal PaladinSecretSecret.",
+        "acquisitionGroup": "Occult Event"
+      },
+      "system": {
+        "slug": "igrosoccultcosmetic",
+        "section": "Skins",
+        "sortOrder": 105,
+        "image": "/Anime%20Vanguards/Cosmetics/igrosoccultcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Haruka Occult",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Haruka Rin (Dancer) MikuExclusiveExclusive",
+        "cardSummary": "Haruka Occult is a visual cosmetic tied to Haruka Rin (Dancer) MikuExclusiveExclusive.",
+        "acquisitionGroup": "Occult Event"
+      },
+      "system": {
+        "slug": "harukaoccultcosmetic",
+        "section": "Skins",
+        "sortOrder": 106,
+        "image": "/Anime%20Vanguards/Cosmetics/harukaoccultcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tengon Occult",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Tengon (Flashiness) PirateMythicMythic",
+        "cardSummary": "Tengon Occult is a visual cosmetic tied to Tengon (Flashiness) PirateMythicMythic.",
+        "acquisitionGroup": "Occult Event"
+      },
+      "system": {
+        "slug": "tengonoccultcosmetic",
+        "section": "Skins",
+        "sortOrder": 107,
+        "image": "/Anime%20Vanguards/Cosmetics/tengonoccultcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Chaso Occult",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Chaso (Blood Curse) VampireMythicMythic",
+        "cardSummary": "Chaso Occult is a visual cosmetic tied to Chaso (Blood Curse) VampireMythicMythic.",
+        "acquisitionGroup": "Occult Event"
+      },
+      "system": {
+        "slug": "chasooccultcosmetic",
+        "section": "Skins",
+        "sortOrder": 108,
+        "image": "/Anime%20Vanguards/Cosmetics/chasooccultcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Todu Occult",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Todu (Unleashed) School GirlMythicMythic",
+        "cardSummary": "Todu Occult is a visual cosmetic tied to Todu (Unleashed) School GirlMythicMythic.",
+        "acquisitionGroup": "Occult Event"
+      },
+      "system": {
+        "slug": "toduoccultcosmetic",
+        "section": "Skins",
+        "sortOrder": 109,
+        "image": "/Anime%20Vanguards/Cosmetics/toduoccultcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jago Occult",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Jag-o (Volcanic) BlingMythicMythic",
+        "cardSummary": "Jago Occult is a visual cosmetic tied to Jag-o (Volcanic) BlingMythicMythic.",
+        "acquisitionGroup": "Occult Event"
+      },
+      "system": {
+        "slug": "jagooccultcosmetic",
+        "section": "Skins",
+        "sortOrder": 110,
+        "image": "/Anime%20Vanguards/Cosmetics/jagooccultcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grim Wow Occult",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Grim Wow CacoaLegendaryLegendary",
+        "cardSummary": "Grim Wow Occult is a visual cosmetic tied to Grim Wow CacoaLegendaryLegendary.",
+        "acquisitionGroup": "Occult Event"
+      },
+      "system": {
+        "slug": "grimwowoccultcosmetic",
+        "section": "Skins",
+        "sortOrder": 111,
+        "image": "/Anime%20Vanguards/Cosmetics/grimwowoccultcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Nazuka Occult",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Nazuka DressEpicEpic",
+        "cardSummary": "Nazuka Occult is a visual cosmetic tied to Nazuka DressEpicEpic.",
+        "acquisitionGroup": "Occult Event"
+      },
+      "system": {
+        "slug": "nazukaoccultcosmetic",
+        "section": "Skins",
+        "sortOrder": 112,
+        "image": "/Anime%20Vanguards/Cosmetics/nazukaoccultcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Eizan Pool Party",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Eizan (Aura) Pool PartySecretSecret",
+        "cardSummary": "Eizan Pool Party is a visual cosmetic tied to Eizan (Aura) Pool PartySecretSecret.",
+        "acquisitionGroup": "Summer Event"
+      },
+      "system": {
+        "slug": "eizanpoolpartycosmetic",
+        "section": "Skins",
+        "sortOrder": 113,
+        "image": "/Anime%20Vanguards/Cosmetics/eizanpoolpartycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sprintwagon Floatie",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Sprintwagon FloatieMythicMythic",
+        "cardSummary": "Sprintwagon Floatie is a visual cosmetic tied to Sprintwagon FloatieMythicMythic.",
+        "acquisitionGroup": "Summer Event"
+      },
+      "system": {
+        "slug": "sprintwagonfloatiecosmetic",
+        "section": "Skins",
+        "sortOrder": 114,
+        "image": "/Anime%20Vanguards/Cosmetics/sprintwagonfloatiecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yomomata Turtle",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Yomomata (Captain) TurtleLegendaryLegendary",
+        "cardSummary": "Yomomata Turtle is a visual cosmetic tied to Yomomata (Captain) TurtleLegendaryLegendary.",
+        "acquisitionGroup": "Summer Event"
+      },
+      "system": {
+        "slug": "yomomataturtlecosmetic",
+        "section": "Skins",
+        "sortOrder": 115,
+        "image": "/Anime%20Vanguards/Cosmetics/yomomataturtlecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hercool Sunny",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Hercool and Mr Boo SunnyEpicEpic",
+        "cardSummary": "Hercool Sunny is a visual cosmetic tied to Hercool and Mr Boo SunnyEpicEpic.",
+        "acquisitionGroup": "Summer Event"
+      },
+      "system": {
+        "slug": "hercoolsunnycosmetic",
+        "section": "Skins",
+        "sortOrder": 116,
+        "image": "/Anime%20Vanguards/Cosmetics/hercoolsunnycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Smith John Vacation",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Smith John VacationRareRare",
+        "cardSummary": "Smith John Vacation is a visual cosmetic tied to Smith John VacationRareRare.",
+        "acquisitionGroup": "Summer Event"
+      },
+      "system": {
+        "slug": "smithjohnvacationcosmetic",
+        "section": "Skins",
+        "sortOrder": 117,
+        "image": "/Anime%20Vanguards/Cosmetics/smithjohnvacationcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sukuno Sweater",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Sukono SweaterSecretSecret",
+        "cardSummary": "Sukuno Sweater is a visual cosmetic tied to Sukono SweaterSecretSecret.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "sukunosweater",
+        "section": "Skins",
+        "sortOrder": 118,
+        "image": "/Anime%20Vanguards/Cosmetics/sukunosweater.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gujo Santa",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Gujo (Infinity) SantaMythicMythic",
+        "cardSummary": "Gujo Santa is a visual cosmetic tied to Gujo (Infinity) SantaMythicMythic.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "gujosanta",
+        "section": "Skins",
+        "sortOrder": 119,
+        "image": "/Anime%20Vanguards/Cosmetics/gujosanta.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "SJWFurcoat",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Song Jinwu (Monarch) FurcoatSecretSecret",
+        "cardSummary": "SJWFurcoat is a visual cosmetic tied to Song Jinwu (Monarch) FurcoatSecretSecret.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "sjwfurcoat",
+        "section": "Skins",
+        "sortOrder": 120,
+        "image": "/Anime%20Vanguards/Cosmetics/sjwfurcoat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Saber Padoru",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Saber (King of Knights) PadoruSecretSecret",
+        "cardSummary": "Saber Padoru is a visual cosmetic tied to Saber (King of Knights) PadoruSecretSecret.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "saberpadoru",
+        "section": "Skins",
+        "sortOrder": 121,
+        "image": "/Anime%20Vanguards/Cosmetics/saberpadoru.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vogita SJacket",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Vogita Super (Awakened) JacketMythicMythic",
+        "cardSummary": "Vogita SJacket is a visual cosmetic tied to Vogita Super (Awakened) JacketMythicMythic.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "vogitasjacket",
+        "section": "Skins",
+        "sortOrder": 122,
+        "image": "/Anime%20Vanguards/Cosmetics/vogitasjacket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Obita Wraps",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Obita (Awakened) WrapsMythicMythic",
+        "cardSummary": "Obita Wraps is a visual cosmetic tied to Obita (Awakened) WrapsMythicMythic.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "obitawraps",
+        "section": "Skins",
+        "sortOrder": 123,
+        "image": "/Anime%20Vanguards/Cosmetics/obitawraps.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Akazo Coat",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Akazo (Destructive) CoatLegendaryLegendary",
+        "cardSummary": "Akazo Coat is a visual cosmetic tied to Akazo (Destructive) CoatLegendaryLegendary.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "akazocoat",
+        "section": "Skins",
+        "sortOrder": 124,
+        "image": "/Anime%20Vanguards/Cosmetics/akazocoat.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fuboko Ice",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Foboko (Hellish) IceMythicMythic",
+        "cardSummary": "Fuboko Ice is a visual cosmetic tied to Foboko (Hellish) IceMythicMythic.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "fubokoice",
+        "section": "Skins",
+        "sortOrder": 125,
+        "image": "/Anime%20Vanguards/Cosmetics/fubokoice.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Takaroda St Itchas",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Takaroda St. ItchasLegendaryLegendary",
+        "cardSummary": "Takaroda St Itchas is a visual cosmetic tied to Takaroda St. ItchasLegendaryLegendary.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "takarodastitchas",
+        "section": "Skins",
+        "sortOrder": 126,
+        "image": "/Anime%20Vanguards/Cosmetics/takarodastitchas.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Genitsu Reindeer",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Genitsu ReindeerEpicEpic",
+        "cardSummary": "Genitsu Reindeer is a visual cosmetic tied to Genitsu ReindeerEpicEpic.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "genitsureindeer",
+        "section": "Skins",
+        "sortOrder": 127,
+        "image": "/Anime%20Vanguards/Cosmetics/genitsureindeer.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roku Jacket",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Roku JacketRareRare",
+        "cardSummary": "Roku Jacket is a visual cosmetic tied to Roku JacketRareRare.",
+        "acquisitionGroup": "Winter Event"
+      },
+      "system": {
+        "slug": "rokujacket",
+        "section": "Skins",
+        "sortOrder": 128,
+        "image": "/Anime%20Vanguards/Cosmetics/rokujacket.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Orehimi Secret",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Orehimi (Faith) LeekspinSecretSecret",
+        "cardSummary": "Orehimi Secret is a visual cosmetic tied to Orehimi (Faith) LeekspinSecretSecret.",
+        "acquisitionGroup": "Spring Event"
+      },
+      "system": {
+        "slug": "orehimisecretcosmetic",
+        "section": "Skins",
+        "sortOrder": 129,
+        "image": "/Anime%20Vanguards/Cosmetics/orehimisecretcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yuruicha Kimono",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Yuruicha (Raijin) KimonoMythicMythic",
+        "cardSummary": "Yuruicha Kimono is a visual cosmetic tied to Yuruicha (Raijin) KimonoMythicMythic.",
+        "acquisitionGroup": "Spring Event"
+      },
+      "system": {
+        "slug": "yuruichakimonocosmetic",
+        "section": "Skins",
+        "sortOrder": 130,
+        "image": "/Anime%20Vanguards/Cosmetics/yuruichakimonocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gilgamesh B",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Gilgamesh (King of Heroes) BaddieMythicMythic",
+        "cardSummary": "Gilgamesh B is a visual cosmetic tied to Gilgamesh (King of Heroes) BaddieMythicMythic.",
+        "acquisitionGroup": "Spring Event"
+      },
+      "system": {
+        "slug": "gilgameshbcosmetic",
+        "section": "Skins",
+        "sortOrder": 131,
+        "image": "/Anime%20Vanguards/Cosmetics/gilgameshbcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "RRNeko",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Rom and Ran (Fanatic) NekoLegendaryLegendary",
+        "cardSummary": "RRNeko is a visual cosmetic tied to Rom and Ran (Fanatic) NekoLegendaryLegendary.",
+        "acquisitionGroup": "Spring Event"
+      },
+      "system": {
+        "slug": "rrnekocosmetic",
+        "section": "Skins",
+        "sortOrder": 132,
+        "image": "/Anime%20Vanguards/Cosmetics/rrnekocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ragna T",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Regnaw (Rage) TotseroEpicEpic",
+        "cardSummary": "Ragna T is a visual cosmetic tied to Regnaw (Rage) TotseroEpicEpic.",
+        "acquisitionGroup": "Spring Event"
+      },
+      "system": {
+        "slug": "ragnatcosmetic",
+        "section": "Skins",
+        "sortOrder": 133,
+        "image": "/Anime%20Vanguards/Cosmetics/ragnatcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roku Low Class",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Roku (Super 3) Low ClassRareRare",
+        "cardSummary": "Roku Low Class is a visual cosmetic tied to Roku (Super 3) Low ClassRareRare.",
+        "acquisitionGroup": "Spring Event"
+      },
+      "system": {
+        "slug": "rokulowclasscosmetic",
+        "section": "Skins",
+        "sortOrder": 134,
+        "image": "/Anime%20Vanguards/Cosmetics/rokulowclasscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Hole Skeleton Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Black Hole (Ninjutsu) SkeletonMythicMythic",
+        "cardSummary": "Black Hole Skeleton Skin is a visual cosmetic tied to Black Hole (Ninjutsu) SkeletonMythicMythic.",
+        "acquisitionGroup": "Fall Event"
+      },
+      "system": {
+        "slug": "blackholeskeletonskincosmetic",
+        "section": "Skins",
+        "sortOrder": 135,
+        "image": "/Anime%20Vanguards/Cosmetics/blackholeskeletonskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sukono Demon Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Sukono DemonMythicMythic",
+        "cardSummary": "Sukono Demon Skin is a visual cosmetic tied to Sukono DemonMythicMythic.",
+        "acquisitionGroup": "Fall Event"
+      },
+      "system": {
+        "slug": "sukonodemonskincosmetic",
+        "section": "Skins",
+        "sortOrder": 136,
+        "image": "/Anime%20Vanguards/Cosmetics/sukonodemonskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sprintwagon Zombie Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Sprintwagon ZombieMythicMythic",
+        "cardSummary": "Sprintwagon Zombie Skin is a visual cosmetic tied to Sprintwagon ZombieMythicMythic.",
+        "acquisitionGroup": "Fall Event"
+      },
+      "system": {
+        "slug": "sprintwagonzombieskincosmetic",
+        "section": "Skins",
+        "sortOrder": 137,
+        "image": "/Anime%20Vanguards/Cosmetics/sprintwagonzombieskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Unstable Pumpkin Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Unstable (Psychosis) PumpkinLegendaryLegendary",
+        "cardSummary": "Unstable Pumpkin Skin is a visual cosmetic tied to Unstable (Psychosis) PumpkinLegendaryLegendary.",
+        "acquisitionGroup": "Fall Event"
+      },
+      "system": {
+        "slug": "unstablepumpkinskincosmetic",
+        "section": "Skins",
+        "sortOrder": 138,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Girl Ghost Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Ghost Girl (Umbrella) GhostEpicEpic",
+        "cardSummary": "Ghost Girl Ghost Skin is a visual cosmetic tied to Ghost Girl (Umbrella) GhostEpicEpic.",
+        "acquisitionGroup": "Fall Event"
+      },
+      "system": {
+        "slug": "ghostgirlghostskincosmetic",
+        "section": "Skins",
+        "sortOrder": 139,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gujo Vampire Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Gujo (Infinity) VampireRareRare",
+        "cardSummary": "Gujo Vampire Skin is a visual cosmetic tied to Gujo (Infinity) VampireRareRare.",
+        "acquisitionGroup": "Fall Event"
+      },
+      "system": {
+        "slug": "gujovampireskincosmetic",
+        "section": "Skins",
+        "sortOrder": 140,
+        "image": "/Anime%20Vanguards/Cosmetics/gujovampireskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alocard Baddie Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Alocard (Vampire King) BaddieExclusiveExclusive",
+        "cardSummary": "Alocard Baddie Skin is a visual cosmetic tied to Alocard (Vampire King) BaddieExclusiveExclusive.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "alocardbaddieskin",
+        "section": "Skins",
+        "sortOrder": 141,
+        "image": "/Anime%20Vanguards/Cosmetics/alocardbaddieskin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Leader Nurse Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Demon Leader (Control) NurseExclusiveExclusive",
+        "cardSummary": "Demon Leader Nurse Skin is a visual cosmetic tied to Demon Leader (Control) NurseExclusiveExclusive.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "demonleadernurseskin",
+        "section": "Skins",
+        "sortOrder": 142,
+        "image": "/Anime%20Vanguards/Cosmetics/demonleadernurseskin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Queen Casual Wear Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Ice Queen (Release) Casual WearExclusiveExclusive",
+        "cardSummary": "Ice Queen Casual Wear Skin is a visual cosmetic tied to Ice Queen (Release) Casual WearExclusiveExclusive.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "icequeencasualwearskin",
+        "section": "Skins",
+        "sortOrder": 143,
+        "image": "/Anime%20Vanguards/Cosmetics/icequeencasualwearskin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Iscanur Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Iscanur (Pride) FinalBossSecretSecret",
+        "cardSummary": "Iscanur Skin is a visual cosmetic tied to Iscanur (Pride) FinalBossSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "iscanurskincosmetic",
+        "section": "Skins",
+        "sortOrder": 144,
+        "image": "/Anime%20Vanguards/Cosmetics/iscanurskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Monkey King Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Monkey King (Awakened) AscendedSecretSecret",
+        "cardSummary": "Monkey King Skin is a visual cosmetic tied to Monkey King (Awakened) AscendedSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "monkeykingskincosmetic",
+        "section": "Skins",
+        "sortOrder": 145,
+        "image": "/Anime%20Vanguards/Cosmetics/monkeykingskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Struggler Abyss Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "The Struggler (Rampage) AbyssSecretSecret",
+        "cardSummary": "The Struggler Abyss Skin is a visual cosmetic tied to The Struggler (Rampage) AbyssSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "thestrugglerabyssskincosmetic",
+        "section": "Skins",
+        "sortOrder": 146,
+        "image": "/Anime%20Vanguards/Cosmetics/thestrugglerabyssskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Slime Summertime",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Slime (King) SummertimeSecretSecret",
+        "cardSummary": "Slime Summertime is a visual cosmetic tied to Slime (King) SummertimeSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "slimesummertimecosmetic",
+        "section": "Skins",
+        "sortOrder": 147,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Conqueror Variant",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Conqueror vs Invulnerable VariantsSecretSecret",
+        "cardSummary": "Conqueror Variant is a visual cosmetic tied to Conqueror vs Invulnerable VariantsSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "conquerorvariantcosmetic",
+        "section": "Skins",
+        "sortOrder": 148,
+        "image": "/Anime%20Vanguards/Cosmetics/conquerorvariantcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Clatakiri Baddie Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Clatakiri (Mochi) BaddieSecretSecret",
+        "cardSummary": "Clatakiri Baddie Skin is a visual cosmetic tied to Clatakiri (Mochi) BaddieSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "clatakiribaddieskincosmetic",
+        "section": "Skins",
+        "sortOrder": 149,
+        "image": "/Anime%20Vanguards/Cosmetics/clatakiribaddieskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Roku Super 3 Drip Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Roku (Super 3) DripSecretSecret",
+        "cardSummary": "Roku Super 3 Drip Skin is a visual cosmetic tied to Roku (Super 3) DripSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "rokusuper3dripskincosmetic",
+        "section": "Skins",
+        "sortOrder": 150,
+        "image": "/Anime%20Vanguards/Cosmetics/rokusuper3dripskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vigil Baddie Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Vigil (Power) BaddieSecretSecret",
+        "cardSummary": "Vigil Baddie Skin is a visual cosmetic tied to Vigil (Power) BaddieSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "vigilbaddieskincosmetic",
+        "section": "Skins",
+        "sortOrder": 151,
+        "image": "/Anime%20Vanguards/Cosmetics/vigilbaddieskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sprintwagon Slickwagon Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Sprintwagon SlickwagonSecretSecret",
+        "cardSummary": "Sprintwagon Slickwagon Skin is a visual cosmetic tied to Sprintwagon SlickwagonSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "sprintwagonslickwagonskincosmetic",
+        "section": "Skins",
+        "sortOrder": 152,
+        "image": "/Anime%20Vanguards/Cosmetics/sprintwagonslickwagonskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ichiga Casual Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Ichiga (Savior) CasualSecretSecret",
+        "cardSummary": "Ichiga Casual Skin is a visual cosmetic tied to Ichiga (Savior) CasualSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "ichigacasualskincosmetic",
+        "section": "Skins",
+        "sortOrder": 153,
+        "image": "/Anime%20Vanguards/Cosmetics/ichigacasualskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Saber BTDress Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Saber (Black Tyrant) DressSecretSecret",
+        "cardSummary": "Saber BTDress Skin is a visual cosmetic tied to Saber (Black Tyrant) DressSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "saberbtdressskincosmetic",
+        "section": "Skins",
+        "sortOrder": 154,
+        "image": "/Anime%20Vanguards/Cosmetics/saberbtdressskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ackers Goth",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Ackers (Ken) GothSecretSecret",
+        "cardSummary": "Ackers Goth is a visual cosmetic tied to Ackers (Ken) GothSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "ackersgothcosmetic",
+        "section": "Skins",
+        "sortOrder": 155,
+        "image": "/Anime%20Vanguards/Cosmetics/ackersgothcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gilgamesh Casual Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Gilgamesh (King of Heroes) CasualSecretSecret",
+        "cardSummary": "Gilgamesh Casual Skin is a visual cosmetic tied to Gilgamesh (King of Heroes) CasualSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "gilgameshcasualskincosmetic",
+        "section": "Skins",
+        "sortOrder": 156,
+        "image": "/Anime%20Vanguards/Cosmetics/gilgameshcasualskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gujo Suit Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Gujo (Infinity) SuitSecretSecret",
+        "cardSummary": "Gujo Suit Skin is a visual cosmetic tied to Gujo (Infinity) SuitSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "gujosuitskincosmetic",
+        "section": "Skins",
+        "sortOrder": 157,
+        "image": "/Anime%20Vanguards/Cosmetics/gujosuitskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yuruicha Timika Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Yuruicha (Raijin) TimikaSecretSecret",
+        "cardSummary": "Yuruicha Timika Skin is a visual cosmetic tied to Yuruicha (Raijin) TimikaSecretSecret.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "yuruichatimikaskincosmetic",
+        "section": "Skins",
+        "sortOrder": 158,
+        "image": "/Anime%20Vanguards/Cosmetics/yuruichatimikaskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ishtar Galaxy Skin",
+        "availability": "Available",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Ishtar (Divinity) GalaxyVanguardVanguard",
+        "cardSummary": "Ishtar Galaxy Skin is a visual cosmetic tied to Ishtar (Divinity) GalaxyVanguardVanguard.",
+        "acquisitionGroup": "Bundles"
+      },
+      "system": {
+        "slug": "ishtargalaxyskincosmetic",
+        "section": "Skins",
+        "sortOrder": 159,
+        "image": "/Anime%20Vanguards/Cosmetics/ishtargalaxyskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Iscanur Chef Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Iscanur (Pride) ChefExclusiveExclusive",
+        "cardSummary": "Iscanur Chef Skin is a visual cosmetic tied to Iscanur (Pride) ChefExclusiveExclusive.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "iscanurchefskincosmetic",
+        "section": "Skins",
+        "sortOrder": 160,
+        "image": "/Anime%20Vanguards/Cosmetics/iscanurchefskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hellkiller Helljumper Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Hellkiller (Slayer) HelljumperExclusiveExclusive",
+        "cardSummary": "Hellkiller Helljumper Skin is a visual cosmetic tied to Hellkiller (Slayer) HelljumperExclusiveExclusive.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "hellkillerhelljumperskincosmetic",
+        "section": "Skins",
+        "sortOrder": 161,
+        "image": "/Anime%20Vanguards/Cosmetics/hellkillerhelljumperskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Eizan Soultracer Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Eizan (Aura) SoultracerVanguardVanguard",
+        "cardSummary": "Eizan Soultracer Skin is a visual cosmetic tied to Eizan (Aura) SoultracerVanguardVanguard.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "eizansoultracerskincosmetic",
+        "section": "Skins",
+        "sortOrder": 162,
+        "image": "/Anime%20Vanguards/Cosmetics/eizansoultracerskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Alocard Disorder Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Alocard (Vampire King) Gleeful DisorderExclusiveExclusive",
+        "cardSummary": "Alocard Disorder Skin is a visual cosmetic tied to Alocard (Vampire King) Gleeful DisorderExclusiveExclusive.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "alocarddisorderskincosmetic",
+        "section": "Skins",
+        "sortOrder": 163,
+        "image": "/Anime%20Vanguards/Cosmetics/alocarddisorderskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vigil Janny Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Vigil (Power) JannyExclusiveExclusive",
+        "cardSummary": "Vigil Janny Skin is a visual cosmetic tied to Vigil (Power) JannyExclusiveExclusive.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "vigiljannyskincosmetic",
+        "section": "Skins",
+        "sortOrder": 164,
+        "image": "/Anime%20Vanguards/Cosmetics/vigiljannyskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Choy Alchemist Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Choy Jong En (Guild Leader) AlchemistExclusiveExclusive",
+        "cardSummary": "Choy Alchemist Skin is a visual cosmetic tied to Choy Jong En (Guild Leader) AlchemistExclusiveExclusive.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "choyalchemistskincosmetic",
+        "section": "Skins",
+        "sortOrder": 165,
+        "image": "/Anime%20Vanguards/Cosmetics/choyalchemistskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Witch Uma Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "The Witch (Disciple) UmaExclusiveExclusive",
+        "cardSummary": "The Witch Uma Skin is a visual cosmetic tied to The Witch (Disciple) UmaExclusiveExclusive.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "thewitchumaskincosmetic",
+        "section": "Skins",
+        "sortOrder": 166,
+        "image": "/Anime%20Vanguards/Cosmetics/thewitchumaskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Luce Uma Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Luce (Hacker) UmaExclusiveExclusive",
+        "cardSummary": "Luce Uma Skin is a visual cosmetic tied to Luce (Hacker) UmaExclusiveExclusive.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "luceumaskincosmetic",
+        "section": "Skins",
+        "sortOrder": 167,
+        "image": "/Anime%20Vanguards/Cosmetics/luceumaskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cu Chulainn Doorman Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Cu Chulainn (Child of Light) DoormanExclusiveExclusive",
+        "cardSummary": "Cu Chulainn Doorman Skin is a visual cosmetic tied to Cu Chulainn (Child of Light) DoormanExclusiveExclusive.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "cuchulainndoormanskincosmetic",
+        "section": "Skins",
+        "sortOrder": 168,
+        "image": "/Anime%20Vanguards/Cosmetics/cuchulainndoormanskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Saber Kye Skin",
+        "availability": "Limited source",
+        "cosmeticType": "Skin cosmetic",
+        "associatedUnit": "Saber (King of Knights) KyeExclusiveExclusive",
+        "cardSummary": "Saber Kye Skin is a visual cosmetic tied to Saber (King of Knights) KyeExclusiveExclusive.",
+        "acquisitionGroup": "Leaderboard, Tournament and Misc Skins"
+      },
+      "system": {
+        "slug": "saberkyeskincosmetic",
+        "section": "Skins",
+        "sortOrder": 169,
+        "image": "/Anime%20Vanguards/Cosmetics/saberkyeskincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Igros",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Igros (Elite Knight) Normal",
+        "cardSummary": "Igros is a visual cosmetic tied to Igros (Elite Knight) Normal.",
+        "acquisitionGroup": "Legend Stage Units"
+      },
+      "system": {
+        "slug": "igroscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 170,
+        "image": "/Anime%20Vanguards/Cosmetics/igroscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Igros",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Igros (Elite Knight) Shiny",
+        "cardSummary": "Shiny Igros is a visual cosmetic tied to Igros (Elite Knight) Shiny.",
+        "acquisitionGroup": "Legend Stage Units"
+      },
+      "system": {
+        "slug": "shinyigroscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 171,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyigroscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yomomata",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Yomomata (Captain) Normal",
+        "cardSummary": "Yomomata is a visual cosmetic tied to Yomomata (Captain) Normal.",
+        "acquisitionGroup": "Legend Stage Units"
+      },
+      "system": {
+        "slug": "yomomatacosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 172,
+        "image": "/Anime%20Vanguards/Cosmetics/yomomatacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Yomomata",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Yomomata (Captain) Shiny",
+        "cardSummary": "Shiny Yomomata is a visual cosmetic tied to Yomomata (Captain) Shiny.",
+        "acquisitionGroup": "Legend Stage Units"
+      },
+      "system": {
+        "slug": "shinyyomomatacosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 173,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyyomomatacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Arin",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Arin (Rumbling) Normal",
+        "cardSummary": "Arin is a visual cosmetic tied to Arin (Rumbling) Normal.",
+        "acquisitionGroup": "Legend Stage Units"
+      },
+      "system": {
+        "slug": "arincosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 174,
+        "image": "/Anime%20Vanguards/Cosmetics/arincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Arin",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Arin (Rumbling) Shiny",
+        "cardSummary": "Shiny Arin is a visual cosmetic tied to Arin (Rumbling) Shiny.",
+        "acquisitionGroup": "Legend Stage Units"
+      },
+      "system": {
+        "slug": "shinyarincosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 175,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyarincosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Smith John",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Smith John Normal",
+        "cardSummary": "Smith John is a visual cosmetic tied to Smith John Normal.",
+        "acquisitionGroup": "Raid Units"
+      },
+      "system": {
+        "slug": "smithjohncosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 176,
+        "image": "/Anime%20Vanguards/Cosmetics/smithjohncosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Smith John",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Smith John Shiny",
+        "cardSummary": "Shiny Smith John is a visual cosmetic tied to Smith John Shiny.",
+        "acquisitionGroup": "Raid Units"
+      },
+      "system": {
+        "slug": "shinysmithjohncosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 177,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysmithjohncosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Diogo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Diogo (Alternate) Normal",
+        "cardSummary": "Diogo is a visual cosmetic tied to Diogo (Alternate) Normal.",
+        "acquisitionGroup": "Raid Units"
+      },
+      "system": {
+        "slug": "diogocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 178,
+        "image": "/Anime%20Vanguards/Cosmetics/diogocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Diogo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Diogo (Alternate) Shiny",
+        "cardSummary": "Shiny Diogo is a visual cosmetic tied to Diogo (Alternate) Shiny.",
+        "acquisitionGroup": "Raid Units"
+      },
+      "system": {
+        "slug": "shinydiogocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 179,
+        "image": "/Anime%20Vanguards/Cosmetics/shinydiogocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Renguko",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Renguko (Purgatory) Normal",
+        "cardSummary": "Renguko is a visual cosmetic tied to Renguko (Purgatory) Normal.",
+        "acquisitionGroup": "Raid Units"
+      },
+      "system": {
+        "slug": "rengukocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 180,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Renguko",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Renguko (Purgatory) Shiny",
+        "cardSummary": "Shiny Renguko is a visual cosmetic tied to Renguko (Purgatory) Shiny.",
+        "acquisitionGroup": "Raid Units"
+      },
+      "system": {
+        "slug": "shinyrengukocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 181,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyrengukocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "GG",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "GG (Possessed) Normal",
+        "cardSummary": "GG is a visual cosmetic tied to GG (Possessed) Normal.",
+        "acquisitionGroup": "Rift Units"
+      },
+      "system": {
+        "slug": "ggcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 182,
+        "image": "/Anime%20Vanguards/Cosmetics/ggcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny GG",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "GG (Possessed) Shiny",
+        "cardSummary": "Shiny GG is a visual cosmetic tied to GG (Possessed) Shiny.",
+        "acquisitionGroup": "Rift Units"
+      },
+      "system": {
+        "slug": "shinyggcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 183,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyggcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Astolfo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Astolfo (Rider of Black) Normal",
+        "cardSummary": "Astolfo is a visual cosmetic tied to Astolfo (Rider of Black) Normal.",
+        "acquisitionGroup": "Rift Units"
+      },
+      "system": {
+        "slug": "astolfocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 184,
+        "image": "/Anime%20Vanguards/Cosmetics/astolfocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Astolfo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Astolfo (Rider of Black) Shiny",
+        "cardSummary": "Shiny Astolfo is a visual cosmetic tied to Astolfo (Rider of Black) Shiny.",
+        "acquisitionGroup": "Rift Units"
+      },
+      "system": {
+        "slug": "shinyastolfocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 185,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyastolfocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Yehowach",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Yehowach (Almighty) Normal",
+        "cardSummary": "Yehowach is a visual cosmetic tied to Yehowach (Almighty) Normal.",
+        "acquisitionGroup": "Rift Units"
+      },
+      "system": {
+        "slug": "yehowachcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 186,
+        "image": "/Anime%20Vanguards/Cosmetics/yehowachcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Yehowach",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Yehowach (Almighty) Shiny",
+        "cardSummary": "Shiny Yehowach is a visual cosmetic tied to Yehowach (Almighty) Shiny.",
+        "acquisitionGroup": "Rift Units"
+      },
+      "system": {
+        "slug": "shinyyehowachcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 187,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyyehowachcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Slime",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Slime (King) Normal",
+        "cardSummary": "Slime is a visual cosmetic tied to Slime (King) Normal.",
+        "acquisitionGroup": "Portal Units"
+      },
+      "system": {
+        "slug": "slimecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 188,
+        "image": "/Anime%20Vanguards/Cosmetics/slimecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Slime",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Slime (King) Shiny",
+        "cardSummary": "Shiny Slime is a visual cosmetic tied to Slime (King) Shiny.",
+        "acquisitionGroup": "Portal Units"
+      },
+      "system": {
+        "slug": "shinyslimecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 189,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyslimecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lfelt",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lfelt (Love) Normal",
+        "cardSummary": "Lfelt is a visual cosmetic tied to Lfelt (Love) Normal.",
+        "acquisitionGroup": "Portal Units"
+      },
+      "system": {
+        "slug": "lfeltcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 190,
+        "image": "/Anime%20Vanguards/Cosmetics/lfeltcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Lfelt",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lfelt (Love) Shiny",
+        "cardSummary": "Shiny Lfelt is a visual cosmetic tied to Lfelt (Love) Shiny.",
+        "acquisitionGroup": "Portal Units"
+      },
+      "system": {
+        "slug": "shinylfeltcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 191,
+        "image": "/Anime%20Vanguards/Cosmetics/shinylfeltcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Boo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Boo (Evil) Normal",
+        "cardSummary": "Boo is a visual cosmetic tied to Boo (Evil) Normal.",
+        "acquisitionGroup": "Portal Units"
+      },
+      "system": {
+        "slug": "boocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 192,
+        "image": "/Anime%20Vanguards/Cosmetics/boocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Boo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Boo (Evil) Shiny",
+        "cardSummary": "Shiny Boo is a visual cosmetic tied to Boo (Evil) Shiny.",
+        "acquisitionGroup": "Portal Units"
+      },
+      "system": {
+        "slug": "shinyboocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 193,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyboocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Regnaw",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Regnaw (Rage) Normal",
+        "cardSummary": "Regnaw is a visual cosmetic tied to Regnaw (Rage) Normal.",
+        "acquisitionGroup": "Portal Units"
+      },
+      "system": {
+        "slug": "regnawcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 194,
+        "image": "/Anime%20Vanguards/Cosmetics/regnawcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Regnaw",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Regnaw (Rage) Shiny",
+        "cardSummary": "Shiny Regnaw is a visual cosmetic tied to Regnaw (Rage) Shiny.",
+        "acquisitionGroup": "Portal Units"
+      },
+      "system": {
+        "slug": "shinyregnawcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 195,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyregnawcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Brolzi Super Wrathful",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Brolzi Super (Wrathful) Normal",
+        "cardSummary": "Brolzi Super Wrathful is a visual cosmetic tied to Brolzi Super (Wrathful) Normal.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "brolzisuperwrathfulcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 196,
+        "image": "/Anime%20Vanguards/Cosmetics/brolzisuperwrathfulcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Brolzi Super Wrathful",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Brolzi Super (Wrathful) Shiny",
+        "cardSummary": "Shiny Brolzi Super Wrathful is a visual cosmetic tied to Brolzi Super (Wrathful) Shiny.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "shinybrolzisuperwrathfulcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 197,
+        "image": "/Anime%20Vanguards/Cosmetics/shinybrolzisuperwrathfulcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rogita Super",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rogita (Super) Normal",
+        "cardSummary": "Rogita Super is a visual cosmetic tied to Rogita (Super) Normal.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "rogitasupercosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 198,
+        "image": "/Anime%20Vanguards/Cosmetics/rogitasupercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Rogita Super",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rogita (Super) Shiny",
+        "cardSummary": "Shiny Rogita Super is a visual cosmetic tied to Rogita (Super) Shiny.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "shinyrogitasupercosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 199,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyrogitasupercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Song Jinwu And Igros",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Song Jinwu and Igros Normal",
+        "cardSummary": "Song Jinwu And Igros is a visual cosmetic tied to Song Jinwu and Igros Normal.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "songjinwuandigroscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 200,
+        "image": "/Anime%20Vanguards/Cosmetics/songjinwuandigroscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Song Jinwu And Igros",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Song Jinwu and Igros Shiny",
+        "cardSummary": "Shiny Song Jinwu And Igros is a visual cosmetic tied to Song Jinwu and Igros Shiny.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "shinysongjinwuandigroscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 201,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysongjinwuandigroscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "CJE",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Choy Jong En (Guild Leader) Normal",
+        "cardSummary": "CJE is a visual cosmetic tied to Choy Jong En (Guild Leader) Normal.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "cjecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 202,
+        "image": "/Anime%20Vanguards/Cosmetics/cjecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny CJE",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Choy Jong En (Guild Leader) Shiny",
+        "cardSummary": "Shiny CJE is a visual cosmetic tied to Choy Jong En (Guild Leader) Shiny.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "shinycjecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 203,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Saiko",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Saiko (Spirit Medium) Normal",
+        "cardSummary": "Saiko is a visual cosmetic tied to Saiko (Spirit Medium) Normal.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "saikocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 204,
+        "image": "/Anime%20Vanguards/Cosmetics/saikocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Saiko",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Saiko (Spirit Medium) Shiny",
+        "cardSummary": "Shiny Saiko is a visual cosmetic tied to Saiko (Spirit Medium) Shiny.",
+        "acquisitionGroup": "Dungeon Units"
+      },
+      "system": {
+        "slug": "shinysaikocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 205,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysaikocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Horsegirls (Racers) Normal Cosmetic",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Horsegirls (Racers) Normal",
+        "cardSummary": "Horsegirls (Racers) Normal Cosmetic is a visual cosmetic tied to Horsegirls (Racers) Normal.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "this-cosmetic-has-unique-effects-when-running",
+        "section": "Special Cosmetics",
+        "sortOrder": 206,
+        "image": "/Anime%20Vanguards/Cosmetics/this-cosmetic-has-unique-effects-when-running.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Horsegirls (Racers) Shiny Cosmetic",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Horsegirls (Racers) Shiny",
+        "cardSummary": "Horsegirls (Racers) Shiny Cosmetic is a visual cosmetic tied to Horsegirls (Racers) Shiny.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "this-cosmetic-has-unique-effects-when-walking-running",
+        "section": "Special Cosmetics",
+        "sortOrder": 207,
+        "image": "/Anime%20Vanguards/Cosmetics/this-cosmetic-has-unique-effects-when-walking-running.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Wolf Resurrection",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Wolf (Resurrection) Normal",
+        "cardSummary": "Wolf Resurrection is a visual cosmetic tied to Wolf (Resurrection) Normal.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "wolfresurrectioncosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 208,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Wolf Resurrection",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Wolf (Resurrection) Shiny",
+        "cardSummary": "Shiny Wolf Resurrection is a visual cosmetic tied to Wolf (Resurrection) Shiny.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "shinywolfresurrectioncosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 209,
+        "image": "/Anime%20Vanguards/Cosmetics/shinywolfresurrectioncosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Monkey King",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Monkey King (Awakened) Normal",
+        "cardSummary": "Monkey King is a visual cosmetic tied to Monkey King (Awakened) Normal.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "monkeykingcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 210,
+        "image": "/Anime%20Vanguards/Cosmetics/monkeykingcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Monkey King",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Monkey King (Awakened) Shiny",
+        "cardSummary": "Shiny Monkey King is a visual cosmetic tied to Monkey King (Awakened) Shiny.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "shinymonkeykingcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 211,
+        "image": "/Anime%20Vanguards/Cosmetics/shinymonkeykingcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Conq VSInv",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Conqueror vs Invulnerable Normal",
+        "cardSummary": "Conq VSInv is a visual cosmetic tied to Conqueror vs Invulnerable Normal.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "conqvsinvcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 212,
+        "image": "/Anime%20Vanguards/Cosmetics/conqvsinvcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Conq VSInv",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Conqueror vs Invulnerable Shiny",
+        "cardSummary": "Shiny Conq VSInv is a visual cosmetic tied to Conqueror vs Invulnerable Shiny.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "shinyconqvsinvcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 213,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Clatakiri",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Clatakiri (Mochi) Normal",
+        "cardSummary": "Clatakiri is a visual cosmetic tied to Clatakiri (Mochi) Normal.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "clatakiricosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 214,
+        "image": "/Anime%20Vanguards/Cosmetics/clatakiricosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Clatakiri",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Clatakiri (Mochi) Shiny",
+        "cardSummary": "Shiny Clatakiri is a visual cosmetic tied to Clatakiri (Mochi) Shiny.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "shinyclatakiricosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 215,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyclatakiricosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Isdead",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Isdead (Romantic) Normal",
+        "cardSummary": "Isdead is a visual cosmetic tied to Isdead (Romantic) Normal.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "isdeadcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 216,
+        "image": "/Anime%20Vanguards/Cosmetics/isdeadcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Isdead",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Isdead (Romantic) Shiny",
+        "cardSummary": "Shiny Isdead is a visual cosmetic tied to Isdead (Romantic) Shiny.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "shinyisdeadcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 217,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyisdeadcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Soburo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Soburo (Contract) Normal",
+        "cardSummary": "Soburo is a visual cosmetic tied to Soburo (Contract) Normal.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "soburocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 218,
+        "image": "/Anime%20Vanguards/Cosmetics/soburocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Soburo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Soburo (Contract) Shiny",
+        "cardSummary": "Shiny Soburo is a visual cosmetic tied to Soburo (Contract) Shiny.",
+        "acquisitionGroup": "Worldlines Units"
+      },
+      "system": {
+        "slug": "shinysoburocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 219,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysoburocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Giant Queen",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Giant Queen (Founder) Normal",
+        "cardSummary": "Giant Queen is a visual cosmetic tied to Giant Queen (Founder) Normal.",
+        "acquisitionGroup": "Boss Event Units"
+      },
+      "system": {
+        "slug": "giantqueencosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 220,
+        "image": "/Anime%20Vanguards/Cosmetics/giantqueencosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Giant Queen",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Giant Queen (Founder) Shiny",
+        "cardSummary": "Shiny Giant Queen is a visual cosmetic tied to Giant Queen (Founder) Shiny.",
+        "acquisitionGroup": "Boss Event Units"
+      },
+      "system": {
+        "slug": "shinygiantqueencosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 221,
+        "image": "/Anime%20Vanguards/Cosmetics/shinygiantqueencosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Saber BT",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Saber (Black Tyrant) Normal",
+        "cardSummary": "Saber BT is a visual cosmetic tied to Saber (Black Tyrant) Normal.",
+        "acquisitionGroup": "Boss Event Units"
+      },
+      "system": {
+        "slug": "saberbtcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 222,
+        "image": "/Anime%20Vanguards/Cosmetics/saberbtcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Sokara BT",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Saber (Black Tyrant) Shiny",
+        "cardSummary": "Shiny Sokara BT is a visual cosmetic tied to Saber (Black Tyrant) Shiny.",
+        "acquisitionGroup": "Boss Event Units"
+      },
+      "system": {
+        "slug": "shinysokarabtcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 223,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysokarabtcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sokora",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Sokora (Angra Mainyu) Normal",
+        "cardSummary": "Sokora is a visual cosmetic tied to Sokora (Angra Mainyu) Normal.",
+        "acquisitionGroup": "Boss Event Units"
+      },
+      "system": {
+        "slug": "sokoracosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 224,
+        "image": "/Anime%20Vanguards/Cosmetics/sokoracosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rvs S",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rideon vs Samuel (Duel) Normal",
+        "cardSummary": "Rvs S is a visual cosmetic tied to Rideon vs Samuel (Duel) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "rvsscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 225,
+        "image": "/Anime%20Vanguards/Cosmetics/rvsscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Rvs S",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rideon vs Samuel (Duel) Shiny",
+        "cardSummary": "Shiny Rvs S is a visual cosmetic tied to Rideon vs Samuel (Duel) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinyrvsscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 226,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyrvsscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Senator",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Senator (Nanomachines) Normal",
+        "cardSummary": "Senator is a visual cosmetic tied to Senator (Nanomachines) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "senatorcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 227,
+        "image": "/Anime%20Vanguards/Cosmetics/senatorcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Senator",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Senator (Nanomachines) Shiny",
+        "cardSummary": "Shiny Senator is a visual cosmetic tied to Senator (Nanomachines) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinysenatorcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 228,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysenatorcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Goblin Killer",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Goblin Killer (Trapper) Normal",
+        "cardSummary": "Goblin Killer is a visual cosmetic tied to Goblin Killer (Trapper) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "goblinkillercosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 229,
+        "image": "/Anime%20Vanguards/Cosmetics/goblinkillercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Goblin Killer",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Goblin Killer (Trapper) Shiny",
+        "cardSummary": "Shiny Goblin Killer is a visual cosmetic tied to Goblin Killer (Trapper) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinygoblinkillercosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 230,
+        "image": "/Anime%20Vanguards/Cosmetics/shinygoblinkillercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Priestess",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Priestess (Holy) Normal",
+        "cardSummary": "Priestess is a visual cosmetic tied to Priestess (Holy) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "priestesscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 231,
+        "image": "/Anime%20Vanguards/Cosmetics/priestesscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Priestess",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Priestess (Holy) Shiny",
+        "cardSummary": "Shiny Priestess is a visual cosmetic tied to Priestess (Holy) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinypriestesscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 232,
+        "image": "/Anime%20Vanguards/Cosmetics/shinypriestesscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Reimu",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Reimu (Shrine Maid) Normal",
+        "cardSummary": "Reimu is a visual cosmetic tied to Reimu (Shrine Maid) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "reimucosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 233,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Reimu",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Reimu (Shrine Maid) Shiny",
+        "cardSummary": "Shiny Reimu is a visual cosmetic tied to Reimu (Shrine Maid) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinyreimucosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 234,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyreimucosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sakuya",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Sakuya (Time Maid) Normal",
+        "cardSummary": "Sakuya is a visual cosmetic tied to Sakuya (Time Maid) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "sakuyacosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 235,
+        "image": "/Anime%20Vanguards/Cosmetics/sakuyacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Sakuya",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Sakuya (Time Maid) Shiny",
+        "cardSummary": "Shiny Sakuya is a visual cosmetic tied to Sakuya (Time Maid) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinysakuyacosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 236,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysakuyacosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Mage",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dark Mage (Evil) Normal",
+        "cardSummary": "Dark Mage is a visual cosmetic tied to Dark Mage (Evil) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "darkmagecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 237,
+        "image": "/Anime%20Vanguards/Cosmetics/darkmagecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Dark Mage",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dark Mage (Evil) Shiny",
+        "cardSummary": "Shiny Dark Mage is a visual cosmetic tied to Dark Mage (Evil) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinydarkmagecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 238,
+        "image": "/Anime%20Vanguards/Cosmetics/shinydarkmagecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Al",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Al (Good) Normal",
+        "cardSummary": "Al is a visual cosmetic tied to Al (Good) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "alcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 239,
+        "image": "/Anime%20Vanguards/Cosmetics/alcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Al",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Al (Good) Shiny",
+        "cardSummary": "Shiny Al is a visual cosmetic tied to Al (Good) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinyalcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 240,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyalcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dawntay",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dawntay (Jackpot) Normal",
+        "cardSummary": "Dawntay is a visual cosmetic tied to Dawntay (Jackpot) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "dawntaycosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 241,
+        "image": "/Anime%20Vanguards/Cosmetics/dawntaycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Dawntay",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dawntay (Jackpot) Shiny",
+        "cardSummary": "Shiny Dawntay is a visual cosmetic tied to Dawntay (Jackpot) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinydawntaycosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 242,
+        "image": "/Anime%20Vanguards/Cosmetics/shinydawntaycosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vigil",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Vigil (Power) Normal",
+        "cardSummary": "Vigil is a visual cosmetic tied to Vigil (Power) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "vigilcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 243,
+        "image": "/Anime%20Vanguards/Cosmetics/vigilcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Vigil",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Vigil (Power) Shiny",
+        "cardSummary": "Shiny Vigil is a visual cosmetic tied to Vigil (Power) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinyvigilcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 244,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyvigilcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Luce",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Luce (Hacker) Normal",
+        "cardSummary": "Luce is a visual cosmetic tied to Luce (Hacker) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "lucecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 245,
+        "image": "/Anime%20Vanguards/Cosmetics/lucecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Luce",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Luce (Hacker) Shiny",
+        "cardSummary": "Shiny Luce is a visual cosmetic tied to Luce (Hacker) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinylucecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 246,
+        "image": "/Anime%20Vanguards/Cosmetics/shinylucecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dave",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dave (Cyber Psycho) Normal",
+        "cardSummary": "Dave is a visual cosmetic tied to Dave (Cyber Psycho) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "davecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 247,
+        "image": "/Anime%20Vanguards/Cosmetics/davecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Dave",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dave (Cyber Psycho) Shiny",
+        "cardSummary": "Shiny Dave is a visual cosmetic tied to Dave (Cyber Psycho) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinydavecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 248,
+        "image": "/Anime%20Vanguards/Cosmetics/shinydavecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sosora",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Sosora (Puppeteer) Normal",
+        "cardSummary": "Sosora is a visual cosmetic tied to Sosora (Puppeteer) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "sosoracosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 249,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Sosora",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Sosora (Puppeteer) Shiny",
+        "cardSummary": "Shiny Sosora is a visual cosmetic tied to Sosora (Puppeteer) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinysosoracosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 250,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysosoracosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dodara",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dodara (Explosive) Normal",
+        "cardSummary": "Dodara is a visual cosmetic tied to Dodara (Explosive) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "dodaracosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 251,
+        "image": "/Anime%20Vanguards/Cosmetics/dodaracosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Dodara",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Dodara (Explosive) Shiny",
+        "cardSummary": "Shiny Dodara is a visual cosmetic tied to Dodara (Explosive) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinydodaracosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 252,
+        "image": "/Anime%20Vanguards/Cosmetics/shinydodaracosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zion",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Zion (Burdelyon) Normal",
+        "cardSummary": "Zion is a visual cosmetic tied to Zion (Burdelyon) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "zioncosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 253,
+        "image": "/Anime%20Vanguards/Cosmetics/zioncosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Zion",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Zion (Burdelyon) Shiny",
+        "cardSummary": "Shiny Zion is a visual cosmetic tied to Zion (Burdelyon) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinyzioncosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 254,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyzioncosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Julias",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Julias (Eisplosion) Normal",
+        "cardSummary": "Julias is a visual cosmetic tied to Julias (Eisplosion) Normal.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "juliascosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 255,
+        "image": "/Anime%20Vanguards/Cosmetics/juliascosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Julias",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Julias (Eisplosion) Shiny",
+        "cardSummary": "Shiny Julias is a visual cosmetic tied to Julias (Eisplosion) Shiny.",
+        "acquisitionGroup": "Battlepass Units"
+      },
+      "system": {
+        "slug": "shinyjuliascosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 256,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyjuliascosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Stone Lee",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Stone Lee Normal",
+        "cardSummary": "Stone Lee is a visual cosmetic tied to Stone Lee Normal.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "stoneleecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 257,
+        "image": "/Anime%20Vanguards/Cosmetics/stoneleecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Stone Lee",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Stone Lee Shiny",
+        "cardSummary": "Shiny Stone Lee is a visual cosmetic tied to Stone Lee Shiny.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "shinystoneleecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 258,
+        "image": "/Anime%20Vanguards/Cosmetics/shinystoneleecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lethal Bee",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lethal Bee Normal",
+        "cardSummary": "Lethal Bee is a visual cosmetic tied to Lethal Bee Normal.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "lethalbeecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 259,
+        "image": "/Anime%20Vanguards/Cosmetics/lethalbeecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Lethal Bee",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lethal Bee Shiny",
+        "cardSummary": "Shiny Lethal Bee is a visual cosmetic tied to Lethal Bee Shiny.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "shinylethalbeecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 260,
+        "image": "/Anime%20Vanguards/Cosmetics/shinylethalbeecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Giyu",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Giyu Normal",
+        "cardSummary": "Giyu is a visual cosmetic tied to Giyu Normal.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "giyucosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 261,
+        "image": "/Anime%20Vanguards/Cosmetics/giyucosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Giyu",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Giyu Shiny",
+        "cardSummary": "Shiny Giyu is a visual cosmetic tied to Giyu Shiny.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "shinygiyucosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 262,
+        "image": "/Anime%20Vanguards/Cosmetics/shinygiyucosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rodock",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rodock Normal",
+        "cardSummary": "Rodock is a visual cosmetic tied to Rodock Normal.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "rodockcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 263,
+        "image": "/Anime%20Vanguards/Cosmetics/rodockcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Rodock",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Rodock Shiny",
+        "cardSummary": "Shiny Rodock is a visual cosmetic tied to Rodock Shiny.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "shinyrodockcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 264,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyrodockcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mechamar",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Mechamar Normal",
+        "cardSummary": "Mechamar is a visual cosmetic tied to Mechamar Normal.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "mechamarcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 265,
+        "image": "/Anime%20Vanguards/Cosmetics/mechamarcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Mechamar",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Mechamar Shiny",
+        "cardSummary": "Shiny Mechamar is a visual cosmetic tied to Mechamar Shiny.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "shinymechamarcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 266,
+        "image": "/Anime%20Vanguards/Cosmetics/shinymechamarcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mohato",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Mohato Normal",
+        "cardSummary": "Mohato is a visual cosmetic tied to Mohato Normal.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "mohatocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 267,
+        "image": "/Anime%20Vanguards/Cosmetics/mohatocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Mohato",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Mohato Shiny",
+        "cardSummary": "Shiny Mohato is a visual cosmetic tied to Mohato Shiny.",
+        "acquisitionGroup": "Tournament Units"
+      },
+      "system": {
+        "slug": "shinymohatocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 268,
+        "image": "/Anime%20Vanguards/Cosmetics/shinymohatocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Octopus",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Octopus Normal",
+        "cardSummary": "Octopus is a visual cosmetic tied to Octopus Normal.",
+        "acquisitionGroup": "Leaderboard Units"
+      },
+      "system": {
+        "slug": "octopuscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 269,
+        "image": "/Anime%20Vanguards/Cosmetics/octopuscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Octopus",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Octopus Shiny",
+        "cardSummary": "Shiny Octopus is a visual cosmetic tied to Octopus Shiny.",
+        "acquisitionGroup": "Leaderboard Units"
+      },
+      "system": {
+        "slug": "shinyoctopuscosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 270,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyoctopuscosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Seban",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Seban Normal",
+        "cardSummary": "Seban is a visual cosmetic tied to Seban Normal.",
+        "acquisitionGroup": "Leaderboard Units"
+      },
+      "system": {
+        "slug": "sebancosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 271,
+        "image": "/Anime%20Vanguards/Cosmetics/sebancosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Seban",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Seban Shiny",
+        "cardSummary": "Shiny Seban is a visual cosmetic tied to Seban Shiny.",
+        "acquisitionGroup": "Leaderboard Units"
+      },
+      "system": {
+        "slug": "shinysebancosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 272,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysebancosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "LSB",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Legendary Super Brolzi Normal",
+        "cardSummary": "LSB is a visual cosmetic tied to Legendary Super Brolzi Normal.",
+        "acquisitionGroup": "Leaderboard Units"
+      },
+      "system": {
+        "slug": "lsbcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 273,
+        "image": "/Anime%20Vanguards/Cosmetics/lsbcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny LSB",
+        "availability": "Limited source",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Legendary Super Brolzi Shiny",
+        "cardSummary": "Shiny LSB is a visual cosmetic tied to Legendary Super Brolzi Shiny.",
+        "acquisitionGroup": "Leaderboard Units"
+      },
+      "system": {
+        "slug": "shinylsbcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 274,
+        "image": "/Anime%20Vanguards/Cosmetics/shinylsbcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Unstable",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Unstable (Psychosis) Normal",
+        "cardSummary": "Unstable is a visual cosmetic tied to Unstable (Psychosis) Normal.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "unstablecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 275,
+        "image": "/Anime%20Vanguards/Cosmetics/unstablecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Unstable",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Unstable (Psychosis) Shiny",
+        "cardSummary": "Shiny Unstable is a visual cosmetic tied to Unstable (Psychosis) Shiny.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "shinyunstablecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 276,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyunstablecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "The Falcon",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "The Falcon (Sacrifice) Normal",
+        "cardSummary": "The Falcon is a visual cosmetic tied to The Falcon (Sacrifice) Normal.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "thefalconcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 277,
+        "image": "/Anime%20Vanguards/Cosmetics/thefalconcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny The Falcon",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "The Falcon (Sacrifice) Shiny",
+        "cardSummary": "Shiny The Falcon is a visual cosmetic tied to The Falcon (Sacrifice) Shiny.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "shinythefalconcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 278,
+        "image": "/Anime%20Vanguards/Cosmetics/shinythefalconcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Leo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Leo (Fangs) Normal",
+        "cardSummary": "Leo is a visual cosmetic tied to Leo (Fangs) Normal.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "leocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 279,
+        "image": "/Anime%20Vanguards/Cosmetics/leocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Leo",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Leo (Fangs) Shiny",
+        "cardSummary": "Shiny Leo is a visual cosmetic tied to Leo (Fangs) Shiny.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "shinyleocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 280,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyleocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Byeken",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Byeken (Ronin) Normal",
+        "cardSummary": "Byeken is a visual cosmetic tied to Byeken (Ronin) Normal.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "byekencosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 281,
+        "image": "/Anime%20Vanguards/Cosmetics/byekencosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Byeken",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Byeken (Ronin) Shiny",
+        "cardSummary": "Shiny Byeken is a visual cosmetic tied to Byeken (Ronin) Shiny.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "shinybyekencosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 282,
+        "image": "/Anime%20Vanguards/Cosmetics/shinybyekencosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tuji",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Tuji (Sorcerer Killer) Normal",
+        "cardSummary": "Tuji is a visual cosmetic tied to Tuji (Sorcerer Killer) Normal.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "tujicosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 283,
+        "image": "/Anime%20Vanguards/Cosmetics/tujicosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Tuji",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Tuji (Sorcerer Killer) Shiny",
+        "cardSummary": "Shiny Tuji is a visual cosmetic tied to Tuji (Sorcerer Killer) Shiny.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "shinytujicosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 284,
+        "image": "/Anime%20Vanguards/Cosmetics/shinytujicosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gilgamesh",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Gilgamesh (King of Heroes) Normal",
+        "cardSummary": "Gilgamesh is a visual cosmetic tied to Gilgamesh (King of Heroes) Normal.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "gilgameshcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 285,
+        "image": "/Anime%20Vanguards/Cosmetics/gilgameshcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Gilgamesh",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Gilgamesh (King of Heroes) Shiny",
+        "cardSummary": "Shiny Gilgamesh is a visual cosmetic tied to Gilgamesh (King of Heroes) Shiny.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "shinygilgameshcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 286,
+        "image": "/Anime%20Vanguards/Cosmetics/shinygilgameshcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gazelle",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Gazelle (Zombie) Normal",
+        "cardSummary": "Gazelle is a visual cosmetic tied to Gazelle (Zombie) Normal.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "gazellecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 287,
+        "image": "/Anime%20Vanguards/Cosmetics/gazellecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Gazelle",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Gazelle (Zombie) Shiny",
+        "cardSummary": "Shiny Gazelle is a visual cosmetic tied to Gazelle (Zombie) Shiny.",
+        "acquisitionGroup": "Miscellaneous"
+      },
+      "system": {
+        "slug": "shinygazellecosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 288,
+        "image": "/Anime%20Vanguards/Cosmetics/shinygazellecosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hollowseph",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Hollowseph (Pure) Normal",
+        "cardSummary": "Hollowseph is a visual cosmetic tied to Hollowseph (Pure) Normal.",
+        "acquisitionGroup": "Update 9.0 (Anniversary)"
+      },
+      "system": {
+        "slug": "hollowsephcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 289,
+        "image": "/Anime%20Vanguards/Cosmetics/hollowsephcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Hollowseph",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Hollowseph (Pure) Shiny",
+        "cardSummary": "Shiny Hollowseph is a visual cosmetic tied to Hollowseph (Pure) Shiny.",
+        "acquisitionGroup": "Update 9.0 (Anniversary)"
+      },
+      "system": {
+        "slug": "shinyhollowsephcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 290,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyhollowsephcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hellkiller",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Hellkiller (Slayer) Normal",
+        "cardSummary": "Hellkiller is a visual cosmetic tied to Hellkiller (Slayer) Normal.",
+        "acquisitionGroup": "Update 9.0 (Anniversary)"
+      },
+      "system": {
+        "slug": "hellkillercosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 291,
+        "image": "/Anime%20Vanguards/Cosmetics/hellkillercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Hellkiller",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Hellkiller (Slayer) Shiny",
+        "cardSummary": "Shiny Hellkiller is a visual cosmetic tied to Hellkiller (Slayer) Shiny.",
+        "acquisitionGroup": "Update 9.0 (Anniversary)"
+      },
+      "system": {
+        "slug": "shinyhellkillercosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 292,
+        "image": "/Anime%20Vanguards/Cosmetics/shinyhellkillercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Thunder",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Thunder (You) Normal",
+        "cardSummary": "Thunder is a visual cosmetic tied to Thunder (You) Normal.",
+        "acquisitionGroup": "Update 9.0 (Anniversary)"
+      },
+      "system": {
+        "slug": "thundercosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 293,
+        "image": "/Anime%20Vanguards/Cosmetics/thundercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Thunder",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Thunder (You) Shiny",
+        "cardSummary": "Shiny Thunder is a visual cosmetic tied to Thunder (You) Shiny.",
+        "acquisitionGroup": "Update 9.0 (Anniversary)"
+      },
+      "system": {
+        "slug": "shinythundercosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 294,
+        "image": "/Anime%20Vanguards/Cosmetics/shinythundercosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shero",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Shero (Hero of Justice) Normal",
+        "cardSummary": "Shero is a visual cosmetic tied to Shero (Hero of Justice) Normal.",
+        "acquisitionGroup": "Update 9.0 (Anniversary)"
+      },
+      "system": {
+        "slug": "sherocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 295,
+        "image": "/Anime%20Vanguards/Cosmetics/sherocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Shero",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Shero (Hero of Justice) Shiny",
+        "cardSummary": "Shiny Shero is a visual cosmetic tied to Shero (Hero of Justice) Shiny.",
+        "acquisitionGroup": "Update 9.0 (Anniversary)"
+      },
+      "system": {
+        "slug": "shinysherocosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 296,
+        "image": "/Anime%20Vanguards/Cosmetics/shinysherocosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized Lich King",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "Lich King (Ruler) Serialized",
+        "cardSummary": "Serialized Lich King is a visual cosmetic tied to Lich King (Ruler) Serialized.",
+        "acquisitionGroup": "Lich King"
+      },
+      "system": {
+        "slug": "serializedlichkingcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 297,
+        "image": "/Anime%20Vanguards/Cosmetics/serializedlichkingcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 1 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 1 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized1godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 298,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized1godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 2 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 2 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized2godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 299,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized2godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 3 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 3 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized3godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 300,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized3godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 4 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 4 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized4godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 301,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized4godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 5 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 5 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized5godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 302,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized5godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 6 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 6 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized6godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 303,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized6godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 7 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 7 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized7godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 304,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized7godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 8 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 8 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized8godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 305,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized8godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 9 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 9 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized9godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 306,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized9godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized 10 God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized 10 God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serialized10godcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 307,
+        "image": "/Anime%20Vanguards/Cosmetics/serialized10godcosmetic.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Serialized God",
+        "availability": "Available",
+        "cosmeticType": "Unit cosmetic",
+        "associatedUnit": "God (Standless) Serialized",
+        "cardSummary": "Serialized God is a visual cosmetic tied to God (Standless) Serialized.",
+        "acquisitionGroup": "God #'s 1-10 Have 1 of 1 cosmetics, the rest have the same cosmetic with their Serialized numbers floating around and above the player"
+      },
+      "system": {
+        "slug": "serializedgodcosmetic",
+        "section": "Special Cosmetics",
+        "sortOrder": 308,
+        "image": "/Anime%20Vanguards/Cosmetics/serializedgodcosmetic.webp"
+      }
+    }
+  ]
+}

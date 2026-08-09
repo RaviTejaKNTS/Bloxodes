@@ -1,0 +1,2585 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Vanguards",
+    "gameSlug": "anime-vanguards",
+    "collection": "achievements",
+    "route": "/wiki/anime-vanguards/achievements",
+    "catalogCode": "anime-vanguards-achievements",
+    "itemFields": [
+      "availability",
+      "category",
+      "group",
+      "requirement",
+      "reward",
+      "cardSummary"
+    ],
+    "columns": [
+      "availability",
+      "category",
+      "group",
+      "requirement",
+      "reward",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Story",
+        "Raid and Dungeon",
+        "Collector",
+        "Unit"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "category",
+        "group"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "availability",
+        "category",
+        "group",
+        "requirement",
+        "reward"
+      ],
+      "tableFields": [
+        "availability",
+        "category",
+        "group",
+        "requirement",
+        "reward"
+      ],
+      "fieldPresentation": {
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "category": "normal",
+        "group": "normal",
+        "requirement": "detail",
+        "reward": "detail",
+        "cardSummary": "detail"
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "First of all, I am Vogita",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Planet Namak",
+        "requirement": "Clear Act 1 of Planet Namak on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "First of all, I am Vogita is earned by completing its Planet Namak objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "first-of-all-i-am-vogita",
+        "section": "Story",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Anger Management Therapy",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Planet Namak",
+        "requirement": "Clear Act 2 of Planet Namak on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Anger Management Therapy is earned by completing its Planet Namak objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "anger-management-therapy",
+        "section": "Story",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Beauty and the Beast",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Planet Namak",
+        "requirement": "Clear Act 3 of Planet Namak on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Beauty and the Beast is earned by completing its Planet Namak objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "beauty-and-the-beast",
+        "section": "Story",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Not So Formidable Anymore",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Planet Namak",
+        "requirement": "Clear Act 4 of Planet Namak on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Not So Formidable Anymore is earned by completing its Planet Namak objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "not-so-formidable-anymore",
+        "section": "Story",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Puny Tyrant",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Planet Namak",
+        "requirement": "Clear Act 5 of Planet Namak on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Puny Tyrant is earned by completing its Planet Namak objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "puny-tyrant",
+        "section": "Story",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Down With The Emperor!",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Planet Namak",
+        "requirement": "Clear Act 6 of Planet Namak on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Down With The Emperor! is earned by completing its Planet Namak objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "down-with-the-emperor",
+        "section": "Story",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Planet Namak Completion Bonus",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Planet Namak",
+        "requirement": "Complete all the achievements of the Trouble on Planet Namak category.",
+        "reward": "Trait Reroll 2 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! File:Golden Cloud.png Golden Cloud Golden Cloud SecretSecret Type: MountsObtainment: AchievementsMax Quantity: 1Description: This cloud veiled in a yellow mist, can only be ridden by those of a pure heart. <a href=\"https://static.wikia.nocookie.net/rbx-anime-vanguards/images/7/78/Casey_Aykasu_gif.gif/revision/latest?cb=2024091180419\" class=\"mw-file-description image\"><img alt=\"Casey Emote\" src=\"https://static.wikia.nocookie.net/rbx-anime-vanguards/images/7/78/Casey_Aykasu_gif.gif/revision/latest/scale-to-width-down/180?cb=2024091180419\" decoding=\"async\" loading=\"lazy\" width=\"180\" height=\"180\" class=\"thumbimage\" data-image-name=\"Casey Aykasu gif.gif\" data-image-key=\"Casey_Aykasu_gif.gif\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/rbx-anime-vanguards/images/7/78/Casey_Aykasu_gif.gif/revision/latest/scale-to-width-down/180?cb=2024091180419\" /></a> Casey Emote",
+        "cardSummary": "Planet Namak Completion Bonus is earned by completing its Planet Namak objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "planet-namak-completion-bonus",
+        "section": "Story",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blonde Bomber",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Sand Village",
+        "requirement": "Clear Act 1 of Sand village on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Blonde Bomber is earned by completing its Sand Village objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "blonde-bomber",
+        "section": "Story",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hidden Mists Monster",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Sand Village",
+        "requirement": "Clear Act 2 of Sand Village on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Hidden Mists Monster is earned by completing its Sand Village objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "hidden-mists-monster",
+        "section": "Story",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hidden Leaves Languish",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Sand Village",
+        "requirement": "Clear Act 3 of Sand Village on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Hidden Leaves Languish is earned by completing its Sand Village objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "hidden-leaves-languish",
+        "section": "Story",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Puppet's Shell",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Sand Village",
+        "requirement": "Clear Act 4 of Sand Village on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Puppet's Shell is earned by completing its Sand Village objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "puppets-shell",
+        "section": "Story",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Puppet's Puppet",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Sand Village",
+        "requirement": "Clear Act 5 of Sand Village on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Puppet's Puppet is earned by completing its Sand Village objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-puppets-puppet",
+        "section": "Story",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Master Manipulator",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Sand Village",
+        "requirement": "Clear Act 6 of Sand Village on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Master Manipulator is earned by completing its Sand Village objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "master-manipulator",
+        "section": "Story",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Village Completion Bonus",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Sand Village",
+        "requirement": "Complete all the achievements of the Raid on Sand Village category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! File:Elder Sage.png Elder Sage Elder Sage SecretSecret Type: MountsObtainment: AchievementsMax Quantity: 1Description: This wise and old sage frog used to be on the front lines of battle. <a href=\"https://static.wikia.nocookie.net/rbx-anime-vanguards/images/7/72/Ric_Flair_Aykasu_gif.gif/revision/latest?cb=2024091180421\" class=\"mw-file-description image\"><img alt=\"Ric Flair Emote\" src=\"https://static.wikia.nocookie.net/rbx-anime-vanguards/images/7/72/Ric_Flair_Aykasu_gif.gif/revision/latest/scale-to-width-down/180?cb=2024091180421\" decoding=\"async\" loading=\"lazy\" width=\"180\" height=\"180\" class=\"thumbimage\" data-image-name=\"Ric Flair Aykasu gif.gif\" data-image-key=\"Ric_Flair_Aykasu_gif.gif\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/rbx-anime-vanguards/images/7/72/Ric_Flair_Aykasu_gif.gif/revision/latest/scale-to-width-down/180?cb=2024091180421\" /></a> Ric Flair Emote",
+        "cardSummary": "Sand Village Completion Bonus is earned by completing its Sand Village objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "sand-village-completion-bonus",
+        "section": "Story",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mace To Mace",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Double Dungeon",
+        "requirement": "Clear Act 1 of Double Dungeon on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Mace To Mace is earned by completing its Double Dungeon objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "mace-to-mace",
+        "section": "Story",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Let Me Axe You Something!",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Double Dungeon",
+        "requirement": "Clear Act 2 of Double Dungeon on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Let Me Axe You Something! is earned by completing its Double Dungeon objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "let-me-axe-you-something",
+        "section": "Story",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blade Runner",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Double Dungeon",
+        "requirement": "Clear Act 3 of Double Dungeon on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Blade Runner is earned by completing its Double Dungeon objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "blade-runner",
+        "section": "Story",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "S.H.I.E.L.D",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Double Dungeon",
+        "requirement": "Clear Act 4 of Double Dungeon on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "S.H.I.E.L.D is earned by completing its Double Dungeon objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "s-h-i-e-l-d",
+        "section": "Story",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Attack On The Titan",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Double Dungeon",
+        "requirement": "Clear Act 5 of Double Dungeon on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Attack On The Titan is earned by completing its Double Dungeon objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "attack-on-the-titan",
+        "section": "Story",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I Am The Disaster",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Double Dungeon",
+        "requirement": "Clear Act 6 of Double Dungeon on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "I Am The Disaster is earned by completing its Double Dungeon objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "i-am-the-disaster",
+        "section": "Story",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Double Dungeon Completion Bonus",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Double Dungeon",
+        "requirement": "Complete all the achievements in the Disaster in the Double Dungeon category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! File:Shadow Bear.png Shadow Bear Shadow Bear SecretSecret Type: MountsObtainment: AchievementsMax Quantity: 1Description: Ride into battle on the fearsome Shadow Bear, a majestic beast wreathed in darkness, summoned from the depths of the undead. <a href=\"https://static.wikia.nocookie.net/rbx-anime-vanguards/images/1/1c/Popular_Vibe_Aykasu_gif.gif/revision/latest?cb=2024091180421\" class=\"mw-file-description image\"><img alt=\"Popular Vibe Emote\" src=\"https://static.wikia.nocookie.net/rbx-anime-vanguards/images/1/1c/Popular_Vibe_Aykasu_gif.gif/revision/latest/scale-to-width-down/180?cb=2024091180421\" decoding=\"async\" loading=\"lazy\" width=\"180\" height=\"180\" class=\"thumbimage\" data-image-name=\"Popular Vibe Aykasu gif.gif\" data-image-key=\"Popular_Vibe_Aykasu_gif.gif\" data-relevant=\"1\" data-src=\"https://static.wikia.nocookie.net/rbx-anime-vanguards/images/1/1c/Popular_Vibe_Aykasu_gif.gif/revision/latest/scale-to-width-down/180?cb=2024091180421\" /></a> Popular Vibe Emote",
+        "cardSummary": "Double Dungeon Completion Bonus is earned by completing its Double Dungeon objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "double-dungeon-completion-bonus",
+        "section": "Story",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Who's Up For Sushi",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Shibuya Station",
+        "requirement": "Clear Act 1 of Shibuya Station on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Who's Up For Sushi is earned by completing its Shibuya Station objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "whos-up-for-sushi",
+        "section": "Story",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Happy Fathers Day",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Shibuya Station",
+        "requirement": "Clear Act 2 of Shibuya Station on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Happy Fathers Day is earned by completing its Shibuya Station objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "happy-fathers-day",
+        "section": "Story",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Brotherly Delsuion",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Shibuya Station",
+        "requirement": "Clear Act 3 of Shibuya Station on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Brotherly Delsuion is earned by completing its Shibuya Station objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "brotherly-delsuion",
+        "section": "Story",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "6th Time's the Charm",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Shibuya Station",
+        "requirement": "Clear Act 4 of Shibuya Station on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "6th Time's the Charm is earned by completing its Shibuya Station objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "6th-times-the-charm",
+        "section": "Story",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Without a Second Thought",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Shibuya Station",
+        "requirement": "Clear Act 5 of Shibuya Stationon Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Without a Second Thought is earned by completing its Shibuya Station objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "without-a-second-thought",
+        "section": "Story",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I Am a True Curse",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Shibuya Station",
+        "requirement": "Clear Act 6 of Shibuya Station on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "I Am a True Curse is earned by completing its Shibuya Station objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "i-am-a-true-curse",
+        "section": "Story",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shibuya Station Completion Bonus",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Shibuya Station",
+        "requirement": "Complete all the achievements in the Disaster in the Train Station Massacre category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "Shibuya Station Completion Bonus is earned by completing its Shibuya Station objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "shibuya-station-completion-bonus",
+        "section": "Story",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Whats with the Jumpsuit Man",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Underground Church",
+        "requirement": "Clear Act 1 of Underground Church on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Whats with the Jumpsuit Man is earned by completing its Underground Church objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "whats-with-the-jumpsuit-man",
+        "section": "Story",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Man with Nine Lives",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Underground Church",
+        "requirement": "Clear Act 2 of Underground Church on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Man with Nine Lives is earned by completing its Underground Church objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-man-with-nine-lives",
+        "section": "Story",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "How is She Able to See",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Underground Church",
+        "requirement": "Clear Act 3 of Underground Church on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "How is She Able to See is earned by completing its Underground Church objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "how-is-she-able-to-see",
+        "section": "Story",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Fake Assassin",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Underground Church",
+        "requirement": "Clear Act 4 of Underground Church on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Fake Assassin is earned by completing its Underground Church objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-fake-assassin",
+        "section": "Story",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wannabe Magical Girl",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Underground Church",
+        "requirement": "Clear Act 5 of Underground Church Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Wannabe Magical Girl is earned by completing its Underground Church objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "wannabe-magical-girl",
+        "section": "Story",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "All for the Sake of Love",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Underground Church",
+        "requirement": "Clear Act 6 of Underground Church on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "All for the Sake of Love is earned by completing its Underground Church objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "all-for-the-sake-of-love",
+        "section": "Story",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Underground Church Completion Bonus",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Underground Church",
+        "requirement": "Complete all the achievements in the Anomalies within the Underground Church category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Gold 500 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items! File:Vimana.png Vimana Vimana SecretSecret Type: MountsObtainment: AchievementsMax Quantity: 1Description: A throne worthy of only the highest of kings.",
+        "cardSummary": "Underground Church Completion Bonus is earned by completing its Underground Church objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "underground-church-completion-bonus",
+        "section": "Story",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Visionary",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Spirit Society",
+        "requirement": "Clear Act 1 of Spirit Society on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Visionary is earned by completing its Spirit Society objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-visionary",
+        "section": "Story",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Explosion",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Spirit Society",
+        "requirement": "Clear Act 2 of Spirit Society on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Explosion is earned by completing its Spirit Society objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-explosion",
+        "section": "Story",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Superstar",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Spirit Society",
+        "requirement": "Clear Act 3 of Spirit Society on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Superstar is earned by completing its Spirit Society objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-superstar",
+        "section": "Story",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Axis",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Spirit Society",
+        "requirement": "Clear Act 4 of Spirit Society on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Axis is earned by completing its Spirit Society objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-axis",
+        "section": "Story",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Deathdealing",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Spirit Society",
+        "requirement": "Clear Act 5 of Spirit Society Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Deathdealing is earned by completing its Spirit Society objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-deathdealing",
+        "section": "Story",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Miracle",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Spirit Society",
+        "requirement": "Clear Act 6 of Spirit Society on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Miracle is earned by completing its Spirit Society objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-miracle",
+        "section": "Story",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spirit Society Completion Bonus",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Spirit Society",
+        "requirement": "Complete all the achievements in the The Many Year Cursed War category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Gold 500 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items!",
+        "cardSummary": "Spirit Society Completion Bonus is earned by completing its Spirit Society objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "spirit-society-completion-bonus",
+        "section": "Story",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wait Thats Mine",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Martial Island",
+        "requirement": "Clear Act 1 of Martial Island on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Wait Thats Mine is earned by completing its Martial Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "wait-thats-mine",
+        "section": "Story",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I Can Fix him",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Martial Island",
+        "requirement": "Clear Act 2 of Martial Island on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "I Can Fix him is earned by completing its Martial Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "i-can-fix-him",
+        "section": "Story",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Too Much Candy",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Martial Island",
+        "requirement": "Clear Act 3 of Martial Island on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Too Much Candy is earned by completing its Martial Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "too-much-candy",
+        "section": "Story",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Weight Watchers",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Martial Island",
+        "requirement": "Clear Act 4 of Martial Island on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Weight Watchers is earned by completing its Martial Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "weight-watchers",
+        "section": "Story",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Egg Stomper",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Martial Island",
+        "requirement": "Clear Act 5 of Martial Island Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Egg Stomper is earned by completing its Martial Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "egg-stomper",
+        "section": "Story",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "He's Just a Kid",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Martial Island",
+        "requirement": "Clear Act 6 of Martial Island on Nightmare difficulty.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "He's Just a Kid is earned by completing its Martial Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "hes-just-a-kid",
+        "section": "Story",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Martial Island Completion Bonus",
+        "availability": "Available",
+        "category": "Story",
+        "group": "Martial Island",
+        "requirement": "Complete all the achievements in the Pink Bubblegum Revival category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Gold 500 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items!",
+        "cardSummary": "Martial Island Completion Bonus is earned by completing its Martial Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "martial-island-completion-bonus",
+        "section": "Story",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ba Dum bum tishh",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Spider Forest",
+        "requirement": "Clear Act 1 of Demon Slayer.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Ba Dum bum tishh is earned by completing its Spider Forest objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "ba-dum-bum-tishh",
+        "section": "Raid and Dungeon",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I'm Vector OH YEAH",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Spider Forest",
+        "requirement": "Clear Act 2 of Demon Slayer.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "I'm Vector OH YEAH is earned by completing its Spider Forest objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "im-vector-oh-yeah",
+        "section": "Raid and Dungeon",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "C'mon, Let's Play Kickball!",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Spider Forest",
+        "requirement": "Clear Act 3 of Demon Slayer.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "C'mon, Let's Play Kickball! is earned by completing its Spider Forest objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "cmon-lets-play-kickball",
+        "section": "Raid and Dungeon",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The World Wide Web",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Spider Forest",
+        "requirement": "Clear Act 4 of Demon Slayer.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The World Wide Web is earned by completing its Spider Forest objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-world-wide-web",
+        "section": "Raid and Dungeon",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Itsy Bitsy Spide",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Spider Forest",
+        "requirement": "Clear Act 4 of Demon Slayer 50 times.",
+        "reward": "Trait Reroll 15 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "Itsy Bitsy Spide is earned by completing its Spider Forest objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "itsy-bitsy-spide",
+        "section": "Raid and Dungeon",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bonus Rewards",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Spider Forest",
+        "requirement": "Complete all the achievements of the Behold, My Arachnid Exterminator! category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Stat Chip 1 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Bonus Rewards is earned by completing its Spider Forest objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "bonus-rewards",
+        "section": "Raid and Dungeon",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wild Wild West",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Tracks at the Edge of the World",
+        "requirement": "Clear Act 1 of Steel Ball Run",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Wild Wild West is earned by completing its Tracks at the Edge of the World objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "wild-wild-west",
+        "section": "Raid and Dungeon",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "SPIN SPIN SPIN",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Tracks at the Edge of the World",
+        "requirement": "Clear Act 2 of Steel Ball Run",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "SPIN SPIN SPIN is earned by completing its Tracks at the Edge of the World objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "spin-spin-spin",
+        "section": "Raid and Dungeon",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Act With the Bad Mechanic",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Tracks at the Edge of the World",
+        "requirement": "Clear Act 3 of Steel Ball run",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Act With the Bad Mechanic is earned by completing its Tracks at the Edge of the World objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-act-with-the-bad-mechanic",
+        "section": "Raid and Dungeon",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Act With the Bad Mechanic 2",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Tracks at the Edge of the World",
+        "requirement": "Clear Act 4 of Steel Ball Run",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Act With the Bad Mechanic 2 is earned by completing its Tracks at the Edge of the World objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-act-with-the-bad-mechanic-2",
+        "section": "Raid and Dungeon",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diogo Used to Be Here",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Tracks at the Edge of the World",
+        "requirement": "Clear Act 5 of Steel Ball Run",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "Diogo Used to Be Here is earned by completing its Tracks at the Edge of the World objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "diogo-used-to-be-here",
+        "section": "Raid and Dungeon",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bonus Rewards",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Tracks at the Edge of the World",
+        "requirement": "Complete all the achievements of the The Body Parts of WHO category.",
+        "reward": "Trait Reroll 3 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Gold 500 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items!",
+        "cardSummary": "Bonus Rewards is earned by completing its Tracks at the Edge of the World objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "bonus-rewards-2",
+        "section": "Raid and Dungeon",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Escaping the Island",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Ant Island",
+        "requirement": "Clear Ant Island once.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Escaping the Island is earned by completing its Ant Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "escaping-the-island",
+        "section": "Raid and Dungeon",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "God Save the Queen",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Ant Island",
+        "requirement": "Kill the Ant Queen once.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "God Save the Queen is earned by completing its Ant Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "god-save-the-queen",
+        "section": "Raid and Dungeon",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "It's a Revolution!",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Ant Island",
+        "requirement": "Kill the Ant King once.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "It's a Revolution! is earned by completing its Ant Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "its-a-revolution",
+        "section": "Raid and Dungeon",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "STOP SPAWNING",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Ant Island",
+        "requirement": "Plug 25 Ant Tunnels.",
+        "reward": "Trait Reroll 15 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "STOP SPAWNING is earned by completing its Ant Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stop-spawning",
+        "section": "Raid and Dungeon",
+        "sortOrder": 65,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Monarch Arrives",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Ant Island",
+        "requirement": "Kill the Ant King with Song Jinwu.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Monarch Arrives is earned by completing its Ant Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-monarch-arrives",
+        "section": "Raid and Dungeon",
+        "sortOrder": 66,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bonus Rewards",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Ant Island",
+        "requirement": "Complete all the achievements of the I'll Need a Big Can of Raid category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Gold 500 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items!",
+        "cardSummary": "Bonus Rewards is earned by completing its Ant Island objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "bonus-rewards-3",
+        "section": "Raid and Dungeon",
+        "sortOrder": 67,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Knight Slayer - I",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Blood Red Chamber",
+        "requirement": "Clear the Igros Boss Event once.",
+        "reward": "Super Stat Chip 1 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Knight Slayer - I is earned by completing its Blood Red Chamber objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "knight-slayer-i",
+        "section": "Raid and Dungeon",
+        "sortOrder": 68,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Knight Slayer - II",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Blood Red Chamber",
+        "requirement": "Clear the Igros Boss Event three times.",
+        "reward": "Super Stat Chip 3 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Knight Slayer - II is earned by completing its Blood Red Chamber objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "knight-slayer-ii",
+        "section": "Raid and Dungeon",
+        "sortOrder": 69,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Knight Slayer - III",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Blood Red Chamber",
+        "requirement": "Clear the Igros Boss Event five times.",
+        "reward": "Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Knight Slayer - III is earned by completing its Blood Red Chamber objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "knight-slayer-iii",
+        "section": "Raid and Dungeon",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "No Monarch, No Problem",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Blood Red Chamber",
+        "requirement": "Clear the Igros Boss Event without using Song Jinwu.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "No Monarch, No Problem is earned by completing its Blood Red Chamber objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "no-monarch-no-problem",
+        "section": "Raid and Dungeon",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bonus Rewards",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Blood Red Chamber",
+        "requirement": "Complete all the achievements of the Battle Against an Elite Knight category.",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Title - Blood-Red Commander",
+        "cardSummary": "Bonus Rewards is earned by completing its Blood Red Chamber objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "bonus-rewards-4",
+        "section": "Raid and Dungeon",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Buster I",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Shibuya Aftermath",
+        "requirement": "Clear the Sukono Boss Event once.",
+        "reward": "Super Stat Chip 1 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Ghost Buster I is earned by completing its Shibuya Aftermath objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "ghost-buster-i",
+        "section": "Raid and Dungeon",
+        "sortOrder": 73,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Buster II",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Shibuya Aftermath",
+        "requirement": "Clear the Sukono Boss Event three times.",
+        "reward": "Super Stat Chip 3 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Ghost Buster II is earned by completing its Shibuya Aftermath objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "ghost-buster-ii",
+        "section": "Raid and Dungeon",
+        "sortOrder": 74,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Buster III",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Shibuya Aftermath",
+        "requirement": "Clear the Sukono Boss Event five times.",
+        "reward": "Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Ghost Buster III is earned by completing its Shibuya Aftermath objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "ghost-buster-iii",
+        "section": "Raid and Dungeon",
+        "sortOrder": 75,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Act of Rebellion",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Shibuya Aftermath",
+        "requirement": "Kill Sukono with Itaduri once.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Act of Rebellion is earned by completing its Shibuya Aftermath objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "act-of-rebellion",
+        "section": "Raid and Dungeon",
+        "sortOrder": 76,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bonus Rewards",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Shibuya Aftermath",
+        "requirement": "Complete all the achievements of the Showdown Against the King category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Gold 500 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items!",
+        "cardSummary": "Bonus Rewards is earned by completing its Shibuya Aftermath objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "bonus-rewards-5",
+        "section": "Raid and Dungeon",
+        "sortOrder": 77,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corruption Cleanser - I",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Cavern",
+        "requirement": "Clear the Saber Boss Event once.",
+        "reward": "Super Stat Chip 1 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Corruption Cleanser - I is earned by completing its Cavern objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "corruption-cleanser-i",
+        "section": "Raid and Dungeon",
+        "sortOrder": 78,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corruption Cleanser - II",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Cavern",
+        "requirement": "Clear the Saber Boss Event three times.",
+        "reward": "Super Stat Chip 3 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Corruption Cleanser - II is earned by completing its Cavern objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "corruption-cleanser-ii",
+        "section": "Raid and Dungeon",
+        "sortOrder": 79,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Corruption Cleanser - III",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Cavern",
+        "requirement": "Clear the Saber Boss Event five times.",
+        "reward": "Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Corruption Cleanser - III is earned by completing its Cavern objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "corruption-cleanser-iii",
+        "section": "Raid and Dungeon",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "YOU WERE SUPPOSED TO STOP THE CORRUPTION, NOT JOIN IT",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Cavern",
+        "requirement": "Corrupt saber five times.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "YOU WERE SUPPOSED TO STOP THE CORRUPTION, NOT JOIN IT is earned by completing its Cavern objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "you-were-supposed-to-stop-the-corruption-not-join-it",
+        "section": "Raid and Dungeon",
+        "sortOrder": 81,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bonus Rewards",
+        "availability": "Available",
+        "category": "Raid and Dungeon",
+        "group": "Cavern",
+        "requirement": "Complete all the achievements of the Staving Off the Darkness category.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 150 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Gold 500 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items!",
+        "cardSummary": "Bonus Rewards is earned by completing its Cavern objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "bonus-rewards-6",
+        "section": "Raid and Dungeon",
+        "sortOrder": 82,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unit Collector I",
+        "availability": "Available",
+        "category": "Collector",
+        "group": "The Collector",
+        "requirement": "Own 5 different units.",
+        "reward": "Gems 25 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "Unit Collector I is earned by completing its The Collector objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "unit-collector-i",
+        "section": "Collector",
+        "sortOrder": 83,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unit Collector II",
+        "availability": "Available",
+        "category": "Collector",
+        "group": "The Collector",
+        "requirement": "Own 10 different units.",
+        "reward": "Gems 50 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "Unit Collector II is earned by completing its The Collector objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "unit-collector-ii",
+        "section": "Collector",
+        "sortOrder": 84,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unit Collector III",
+        "availability": "Available",
+        "category": "Collector",
+        "group": "The Collector",
+        "requirement": "Own 25 different units.",
+        "reward": "Gems 10 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "Unit Collector III is earned by completing its The Collector objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "unit-collector-iii",
+        "section": "Collector",
+        "sortOrder": 85,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Summoner I",
+        "availability": "Available",
+        "category": "Collector",
+        "group": "The Collector",
+        "requirement": "Summon 1 unit.",
+        "reward": "Gold 50 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items! Gems 25 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "Summoner I is earned by completing its The Collector objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "summoner-i",
+        "section": "Collector",
+        "sortOrder": 86,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Summoner II",
+        "availability": "Available",
+        "category": "Collector",
+        "group": "The Collector",
+        "requirement": "Summon 250 units.",
+        "reward": "Gold 150 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items! Gems 50 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "Summoner II is earned by completing its The Collector objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "summoner-ii",
+        "section": "Collector",
+        "sortOrder": 87,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Summoner III",
+        "availability": "Available",
+        "category": "Collector",
+        "group": "The Collector",
+        "requirement": "Summon 50 units.",
+        "reward": "Gold 30 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items! Gems 10 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners!",
+        "cardSummary": "Summoner III is earned by completing its The Collector objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "summoner-iii",
+        "section": "Collector",
+        "sortOrder": 88,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Collector Completion Bonus",
+        "availability": "Available",
+        "category": "Collector",
+        "group": "The Collector",
+        "requirement": "Complete all the achievements in The Collector category",
+        "reward": "Gold 100 Gold LegendaryLegendary Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to buy or craft several items! Gems 200 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "The Collector Completion Bonus is earned by completing its The Collector objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-collector-completion-bonus",
+        "section": "Collector",
+        "sortOrder": 89,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascensions-Sosuke",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Vengeful Prodigy",
+        "requirement": "Ascend this unit 3 times.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Ascensions-Sosuke is earned by completing its Vengeful Prodigy objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "ascensions-sosuke",
+        "section": "Unit",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Event Clears-Sosuke",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Vengeful Prodigy",
+        "requirement": "Clear 10 Boss Events with this unit.",
+        "reward": "Trophy 10 Trophy LegendaryLegendary Type: CurrencyObtainment: Boss Rush, LeaderboardDescription: Winner winner, chicken dinner!",
+        "cardSummary": "Boss Event Clears-Sosuke is earned by completing its Vengeful Prodigy objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-event-clears-sosuke",
+        "section": "Unit",
+        "sortOrder": 91,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Kills-Sosuke",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Vengeful Prodigy",
+        "requirement": "Kill 10 bosses with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Boss Kills-Sosuke is earned by completing its Vengeful Prodigy objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-kills-sosuke",
+        "section": "Unit",
+        "sortOrder": 92,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evolve-Sosuke",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Vengeful Prodigy",
+        "requirement": "Evolve this unit once.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Evolve-Sosuke is earned by completing its Vengeful Prodigy objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "evolve-sosuke",
+        "section": "Unit",
+        "sortOrder": 93,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stage Clears-Sosuke",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Vengeful Prodigy",
+        "requirement": "Clear 50 stages (any stage) with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Stage Clears-Sosuke is earned by completing its Vengeful Prodigy objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stage-clears-sosuke",
+        "section": "Unit",
+        "sortOrder": 94,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Takedowns-Sosuke",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Vengeful Prodigy",
+        "requirement": "Get 20,00 takedowns with this unit.",
+        "reward": "Stat Chip 5 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Takedowns-Sosuke is earned by completing its Vengeful Prodigy objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "takedowns-sosuke",
+        "section": "Unit",
+        "sortOrder": 95,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vengeful Prodigy Completion Bonus",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Vengeful Prodigy",
+        "requirement": "Complete all the achievements in Vengeful Prodigy category.",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats. Kirin of the Clouds",
+        "cardSummary": "Vengeful Prodigy Completion Bonus is earned by completing its Vengeful Prodigy objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "vengeful-prodigy-completion-bonus",
+        "section": "Unit",
+        "sortOrder": 96,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascensions-Obita",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Beyond The Mask",
+        "requirement": "Ascend this unit 3 times.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Ascensions-Obita is earned by completing its Beyond The Mask objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "ascensions-obita",
+        "section": "Unit",
+        "sortOrder": 97,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Event Clears-Obita",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Beyond The Mask",
+        "requirement": "Clear 10 Boss Events with this unit.",
+        "reward": "Trophy 10 Trophy LegendaryLegendary Type: CurrencyObtainment: Boss Rush, LeaderboardDescription: Winner winner, chicken dinner!",
+        "cardSummary": "Boss Event Clears-Obita is earned by completing its Beyond The Mask objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-event-clears-obita",
+        "section": "Unit",
+        "sortOrder": 98,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Kills-Obita",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Beyond The Mask",
+        "requirement": "Kill 10 bosses with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Boss Kills-Obita is earned by completing its Beyond The Mask objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-kills-obita",
+        "section": "Unit",
+        "sortOrder": 99,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evolve-Obita",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Beyond The Mask",
+        "requirement": "Evolve this unit once.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Evolve-Obita is earned by completing its Beyond The Mask objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "evolve-obita",
+        "section": "Unit",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stage Clears-Obita",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Beyond The Mask",
+        "requirement": "Clear 50 stages (any stage) with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Stage Clears-Obita is earned by completing its Beyond The Mask objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stage-clears-obita",
+        "section": "Unit",
+        "sortOrder": 101,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Takedowns-Obita",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Beyond The Mask",
+        "requirement": "Get 20,00 takedowns with this unit.",
+        "reward": "Stat Chip 5 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Takedowns-Obita is earned by completing its Beyond The Mask objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "takedowns-obita",
+        "section": "Unit",
+        "sortOrder": 102,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Beyond The Mask Completion Bonus",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Beyond The Mask",
+        "requirement": "Complete all the achievements in Beyond The Mask category.",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats. Eyes of Despair",
+        "cardSummary": "Beyond The Mask Completion Bonus is earned by completing its Beyond The Mask objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "beyond-the-mask-completion-bonus",
+        "section": "Unit",
+        "sortOrder": 103,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Event Clears-Igros",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Shadow Commander",
+        "requirement": "Clear 10 Boss Events with this unit.",
+        "reward": "Trophy 10 Trophy LegendaryLegendary Type: CurrencyObtainment: Boss Rush, LeaderboardDescription: Winner winner, chicken dinner!",
+        "cardSummary": "Boss Event Clears-Igros is earned by completing its Shadow Commander objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-event-clears-igros",
+        "section": "Unit",
+        "sortOrder": 104,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Kills-Igros",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Shadow Commander",
+        "requirement": "Kill 10 bosses with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Boss Kills-Igros is earned by completing its Shadow Commander objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-kills-igros",
+        "section": "Unit",
+        "sortOrder": 105,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evolve-Igros",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Shadow Commander",
+        "requirement": "Evolve this unit once.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Evolve-Igros is earned by completing its Shadow Commander objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "evolve-igros",
+        "section": "Unit",
+        "sortOrder": 106,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stage Clears-Igros",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Shadow Commander",
+        "requirement": "Clear 50 stages (any stage) with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Stage Clears-Igros is earned by completing its Shadow Commander objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stage-clears-igros",
+        "section": "Unit",
+        "sortOrder": 107,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Takedowns-Igros",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Shadow Commander",
+        "requirement": "Get 20,00 takedowns with this unit.",
+        "reward": "Stat Chip 5 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Takedowns-Igros is earned by completing its Shadow Commander objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "takedowns-igros",
+        "section": "Unit",
+        "sortOrder": 108,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Commander Completion Bonus",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Shadow Commander",
+        "requirement": "Complete all the achievements in Shadow Commander category.",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats. Blood-Red Commander",
+        "cardSummary": "Shadow Commander Completion Bonus is earned by completing its Shadow Commander objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "shadow-commander-completion-bonus",
+        "section": "Unit",
+        "sortOrder": 109,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascensions-Vogita Super",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Prideful Prince",
+        "requirement": "Ascend this unit 3 times.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Ascensions-Vogita Super is earned by completing its Prideful Prince objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "ascensions-vogita-super",
+        "section": "Unit",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Event Clears-Vogita Super",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Prideful Prince",
+        "requirement": "Clear 10 Boss Events with this unit.",
+        "reward": "Trophy 10 Trophy LegendaryLegendary Type: CurrencyObtainment: Boss Rush, LeaderboardDescription: Winner winner, chicken dinner!",
+        "cardSummary": "Boss Event Clears-Vogita Super is earned by completing its Prideful Prince objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-event-clears-vogita-super",
+        "section": "Unit",
+        "sortOrder": 111,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Kills-Vogita Super",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Prideful Prince",
+        "requirement": "Kill 10 bosses with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Boss Kills-Vogita Super is earned by completing its Prideful Prince objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-kills-vogita-super",
+        "section": "Unit",
+        "sortOrder": 112,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evolve-Vogita Super",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Prideful Prince",
+        "requirement": "Evolve this unit once.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Evolve-Vogita Super is earned by completing its Prideful Prince objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "evolve-vogita-super",
+        "section": "Unit",
+        "sortOrder": 113,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stage Clears-Vogita Super",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Prideful Prince",
+        "requirement": "Clear 50 stages (any stage) with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Stage Clears-Vogita Super is earned by completing its Prideful Prince objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stage-clears-vogita-super",
+        "section": "Unit",
+        "sortOrder": 114,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Takedowns-Vogita Super",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Prideful Prince",
+        "requirement": "Get 20,00 takedowns with this unit.",
+        "reward": "Stat Chip 5 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Takedowns-Vogita Super is earned by completing its Prideful Prince objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "takedowns-vogita-super",
+        "section": "Unit",
+        "sortOrder": 115,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Prideful Prince Completion Bonus",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Prideful Prince",
+        "requirement": "Complete all the achievements in Prideful Prince category.",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats. Egotistical Fighter",
+        "cardSummary": "Prideful Prince Completion Bonus is earned by completing its Prideful Prince objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "prideful-prince-completion-bonus",
+        "section": "Unit",
+        "sortOrder": 116,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Event Clears-Alocard",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Bird of Hermes",
+        "requirement": "Clear 10 Boss Events with this unit.",
+        "reward": "Trophy 10 Trophy LegendaryLegendary Type: CurrencyObtainment: Boss Rush, LeaderboardDescription: Winner winner, chicken dinner!",
+        "cardSummary": "Boss Event Clears-Alocard is earned by completing its Bird of Hermes objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-event-clears-alocard",
+        "section": "Unit",
+        "sortOrder": 117,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Kills-Alocard",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Bird of Hermes",
+        "requirement": "Kill 10 bosses with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Boss Kills-Alocard is earned by completing its Bird of Hermes objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-kills-alocard",
+        "section": "Unit",
+        "sortOrder": 118,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evolve-Alocard",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Bird of Hermes",
+        "requirement": "Evolve this unit once.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Evolve-Alocard is earned by completing its Bird of Hermes objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "evolve-alocard",
+        "section": "Unit",
+        "sortOrder": 119,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stage Clears-Alocard",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Bird of Hermes",
+        "requirement": "Clear 50 stages (any stage) with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Stage Clears-Alocard is earned by completing its Bird of Hermes objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stage-clears-alocard",
+        "section": "Unit",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Takedowns-Alocard",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Bird of Hermes",
+        "requirement": "Get 20,00 takedowns with this unit.",
+        "reward": "Stat Chip 5 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Takedowns-Alocard is earned by completing its Bird of Hermes objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "takedowns-alocard",
+        "section": "Unit",
+        "sortOrder": 121,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bird of Hermes Completion Bonus",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Bird of Hermes",
+        "requirement": "Complete all the achievements in Bird of Hermes category.",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats. Vampire King",
+        "cardSummary": "Bird of Hermes Completion Bonus is earned by completing its Bird of Hermes objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "bird-of-hermes-completion-bonus",
+        "section": "Unit",
+        "sortOrder": 122,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascensions-Cha-In",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Dancer In Battle",
+        "requirement": "Ascend this unit 3 times.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Ascensions-Cha-In is earned by completing its Dancer In Battle objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "ascensions-cha-in",
+        "section": "Unit",
+        "sortOrder": 123,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Event Clears-Cha-In",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Dancer In Battle",
+        "requirement": "Clear 10 Boss Events with this unit.",
+        "reward": "Trophy 10 Trophy LegendaryLegendary Type: CurrencyObtainment: Boss Rush, LeaderboardDescription: Winner winner, chicken dinner!",
+        "cardSummary": "Boss Event Clears-Cha-In is earned by completing its Dancer In Battle objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-event-clears-cha-in",
+        "section": "Unit",
+        "sortOrder": 124,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Kills-Cha-In",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Dancer In Battle",
+        "requirement": "Kill 10 bosses with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Boss Kills-Cha-In is earned by completing its Dancer In Battle objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-kills-cha-in",
+        "section": "Unit",
+        "sortOrder": 125,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evolve-Cha-In",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Dancer In Battle",
+        "requirement": "Evolve this unit once.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Evolve-Cha-In is earned by completing its Dancer In Battle objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "evolve-cha-in",
+        "section": "Unit",
+        "sortOrder": 126,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stage Clears-Cha-In",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Dancer In Battle",
+        "requirement": "Clear 50 stages (any stage) with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Stage Clears-Cha-In is earned by completing its Dancer In Battle objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stage-clears-cha-in",
+        "section": "Unit",
+        "sortOrder": 127,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Takedowns-Cha-In",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Dancer In Battle",
+        "requirement": "Get 20,00 takedowns with this unit.",
+        "reward": "Stat Chip 5 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Takedowns-Cha-In is earned by completing its Dancer In Battle objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "takedowns-cha-in",
+        "section": "Unit",
+        "sortOrder": 128,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dancer In Battle Completion Bonus",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Dancer In Battle",
+        "requirement": "Complete all the achievements in Dancer In Battle category.",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats. S-Rank Valkyrie",
+        "cardSummary": "Dancer In Battle Completion Bonus is earned by completing its Dancer In Battle objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "dancer-in-battle-completion-bonus",
+        "section": "Unit",
+        "sortOrder": 129,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Event Clears-Roku (Angel)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "The Ultimate Fusion",
+        "requirement": "Clear 10 Boss Events with this unit.",
+        "reward": "Trophy 10 Trophy LegendaryLegendary Type: CurrencyObtainment: Boss Rush, LeaderboardDescription: Winner winner, chicken dinner!",
+        "cardSummary": "Boss Event Clears-Roku (Angel) is earned by completing its The Ultimate Fusion objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-event-clears-roku-angel",
+        "section": "Unit",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Kills-Roku (Angel)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "The Ultimate Fusion",
+        "requirement": "Kill 10 bosses with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Boss Kills-Roku (Angel) is earned by completing its The Ultimate Fusion objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-kills-roku-angel",
+        "section": "Unit",
+        "sortOrder": 131,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evolve-Roku (Angel)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "The Ultimate Fusion",
+        "requirement": "Evolve this unit once.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Evolve-Roku (Angel) is earned by completing its The Ultimate Fusion objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "evolve-roku-angel",
+        "section": "Unit",
+        "sortOrder": 132,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stage Clears-Roku (Angel)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "The Ultimate Fusion",
+        "requirement": "Clear 50 stages (any stage) with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Stage Clears-Roku (Angel) is earned by completing its The Ultimate Fusion objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stage-clears-roku-angel",
+        "section": "Unit",
+        "sortOrder": 133,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Takedowns-Roku (Angel)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "The Ultimate Fusion",
+        "requirement": "Get 20,00 takedowns with this unit.",
+        "reward": "Stat Chip 5 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Takedowns-Roku (Angel) is earned by completing its The Ultimate Fusion objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "takedowns-roku-angel",
+        "section": "Unit",
+        "sortOrder": 134,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Ultimate Fusion Completion Bonus",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "The Ultimate Fusion",
+        "requirement": "Complete all the achievements in The Ultimate Fusion category.",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats. Ultimate Fusion",
+        "cardSummary": "The Ultimate Fusion Completion Bonus is earned by completing its The Ultimate Fusion objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "the-ultimate-fusion-completion-bonus",
+        "section": "Unit",
+        "sortOrder": 135,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ascensions-Noruto (Sage)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Knucklehead Ninja",
+        "requirement": "Ascend this unit 3 times.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Ascensions-Noruto (Sage) is earned by completing its Knucklehead Ninja objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "ascensions-noruto-sage",
+        "section": "Unit",
+        "sortOrder": 136,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Event Clears-Noruto (Sage)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Knucklehead Ninja",
+        "requirement": "Clear 10 Boss Events with this unit.",
+        "reward": "Trophy 10 Trophy LegendaryLegendary Type: CurrencyObtainment: Boss Rush, LeaderboardDescription: Winner winner, chicken dinner!",
+        "cardSummary": "Boss Event Clears-Noruto (Sage) is earned by completing its Knucklehead Ninja objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-event-clears-noruto-sage",
+        "section": "Unit",
+        "sortOrder": 137,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Kills-Noruto (Sage)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Knucklehead Ninja",
+        "requirement": "Kill 10 bosses with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Boss Kills-Noruto (Sage) is earned by completing its Knucklehead Ninja objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-kills-noruto-sage",
+        "section": "Unit",
+        "sortOrder": 138,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evolve-Noruto (Sage)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Knucklehead Ninja",
+        "requirement": "Evolve this unit once.",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Evolve-Noruto (Sage) is earned by completing its Knucklehead Ninja objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "evolve-noruto-sage",
+        "section": "Unit",
+        "sortOrder": 139,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stage Clears-Noruto (Sage)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Knucklehead Ninja",
+        "requirement": "Clear 50 stages (any stage) with this unit.",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Stage Clears-Noruto (Sage) is earned by completing its Knucklehead Ninja objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stage-clears-noruto-sage",
+        "section": "Unit",
+        "sortOrder": 140,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Takedowns-Noruto (Sage)",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Knucklehead Ninja",
+        "requirement": "Get 20,00 takedowns with this unit.",
+        "reward": "Stat Chip 5 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Takedowns-Noruto (Sage) is earned by completing its Knucklehead Ninja objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "takedowns-noruto-sage",
+        "section": "Unit",
+        "sortOrder": 141,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Knucklehead Ninja Completion Bonus",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Knucklehead Ninja",
+        "requirement": "Complete all the achievements in Knucklehead Ninja category",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats. Tailed Beast",
+        "cardSummary": "Knucklehead Ninja Completion Bonus is earned by completing its Knucklehead Ninja objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "knucklehead-ninja-completion-bonus",
+        "section": "Unit",
+        "sortOrder": 142,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Event Clears-Yuruicha",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Goddess of Lightning",
+        "requirement": "Clear 10 Boss Events with this unit.",
+        "reward": "Trophy 10 Trophy LegendaryLegendary Type: CurrencyObtainment: Boss Rush, LeaderboardDescription: Winner winner, chicken dinner!",
+        "cardSummary": "Boss Event Clears-Yuruicha is earned by completing its Goddess of Lightning objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-event-clears-yuruicha",
+        "section": "Unit",
+        "sortOrder": 143,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Boss Kills-Yuruicha",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Goddess of Lightning",
+        "requirement": "Kill 10 bosses with this unit",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Boss Kills-Yuruicha is earned by completing its Goddess of Lightning objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "boss-kills-yuruicha",
+        "section": "Unit",
+        "sortOrder": 144,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Evolve-Yuruicha",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Goddess of Lightning",
+        "requirement": "Evolve this unit once",
+        "reward": "Trait Reroll 5 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Evolve-Yuruicha is earned by completing its Goddess of Lightning objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "evolve-yuruicha",
+        "section": "Unit",
+        "sortOrder": 145,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stage Clears-Yuruicha",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Goddess of Lightning",
+        "requirement": "Clear 50 stages (any stage) with this unit",
+        "reward": "Trait Reroll 1 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats.",
+        "cardSummary": "Stage Clears-Yuruicha is earned by completing its Goddess of Lightning objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "stage-clears-yuruicha",
+        "section": "Unit",
+        "sortOrder": 146,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Takedowns-Yuruicha",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Goddess of Lightning",
+        "requirement": "Get 20,00 takedowns with this unit",
+        "reward": "Stat Chip 5 Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 99Description: Used for rerolling a unit's substats.",
+        "cardSummary": "Takedowns-Yuruicha is earned by completing its Goddess of Lightning objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "takedowns-yuruicha",
+        "section": "Unit",
+        "sortOrder": 147,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Goddess of Lightning Completion Bonus",
+        "availability": "Available",
+        "category": "Unit",
+        "group": "Goddess of Lightning",
+        "requirement": "Complete all the achievements in Goddess of Lightning category",
+        "reward": "Trait Reroll 20 Trait Reroll Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: These fragments embued with energy let you change a unit's stats. Gems 100 Gems Type: CurrencyObtainment: Gamemodes, Quests, Battlepasses, Codes,...Description: Use this currency to obtain special units from banners! Super Stat Chip 5 Super Stat Chip MythicMythic Type: MiscObtainment: Daily Challenge, Battle PassMax Quantity: 50Description: Used for rerolling a unit's substats. Goddess of Flash",
+        "cardSummary": "Goddess of Lightning Completion Bonus is earned by completing its Goddess of Lightning objective and grants the listed reward."
+      },
+      "system": {
+        "slug": "goddess-of-lightning-completion-bonus",
+        "section": "Unit",
+        "sortOrder": 148,
+        "image": null
+      }
+    }
+  ]
+}

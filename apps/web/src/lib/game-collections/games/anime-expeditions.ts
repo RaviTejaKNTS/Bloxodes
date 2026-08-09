@@ -19,6 +19,10 @@ export const animeExpeditionsCollectionGroup = {
     "gamemodes",
     "achievements",
     "enemies",
-    "skins"
+    "skins",
+    "expedition-buildings",
+    "stat-potentials",
+    "banners",
+    "shops"
   ]
 } satisfies GameCollectionGroup;

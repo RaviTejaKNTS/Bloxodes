@@ -1,0 +1,249 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "fishing-rods",
+    "route": "/wiki/blox-fruits/fishing-rods",
+    "catalogCode": "blox-fruits-fishing-rods",
+    "sourceItemCount": 8,
+    "itemFields": [
+      "rarity",
+      "availability",
+      "source",
+      "seas",
+      "location",
+      "cost",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "availability",
+      "source",
+      "seas",
+      "location",
+      "cost",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Availability",
+      "sectionOrder": [
+        "Unavailable or unresolved",
+        "Obtainable"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "source"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "availability",
+        "source",
+        "seas",
+        "location",
+        "cost"
+      ],
+      "tableFields": [
+        "rarity",
+        "availability",
+        "source",
+        "seas",
+        "location",
+        "cost",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "source": {
+          "kind": "plain",
+          "label": "Source"
+        },
+        "seas": {
+          "kind": "plain",
+          "label": "Seas"
+        },
+        "location": {
+          "kind": "plain",
+          "label": "Location"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Progression note"
+        }
+      }
+    },
+    "notes": {
+      "scope": "The complete source table of fishing rods, including event and admin entries labeled by status.",
+      "sources": [
+        "https://blox-fruits.fandom.com/wiki/Fishing_Rods",
+        "https://beebom.com/blox-fruits-fishing-guide/",
+        "https://progameguides.com/roblox/blox-fruits-fishing-guide-controls-gear/"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Unavailable or unresolved": 1,
+        "Obtainable": 7
+      },
+      "imagePolicy": "Reuse exact source-backed rod art from the local Blox Fruits item index."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Admin Rod",
+        "rarity": "Not stated",
+        "availability": "Unavailable or unresolved",
+        "source": "Not confirmed",
+        "seas": "Not confirmed",
+        "location": "Not confirmed",
+        "cost": "Free or not confirmed",
+        "cardSummary": "The Admin Rod is unobtainable for normal players, as it is an admin/staff-exclusive item."
+      },
+      "system": {
+        "slug": "admin-rod",
+        "section": "Unavailable or unresolved",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Items/admin-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Fishing Rod",
+        "rarity": "Not stated",
+        "availability": "Obtainable",
+        "source": "Interact with the Fisherman",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "location": "Frozen VillageKingdom of RosePort Town",
+        "cost": "Free or not confirmed",
+        "cardSummary": "The Fishing Rod can be obtained by interacting with the Fisherman who is located in all three seas."
+      },
+      "system": {
+        "slug": "fishing-rod",
+        "section": "Obtainable",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Items/fishing-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Rod",
+        "rarity": "Not stated",
+        "availability": "Obtainable",
+        "source": "Craft from Angler",
+        "seas": "First Sea",
+        "location": "Skylands",
+        "cost": "500,000 4 3",
+        "cardSummary": "In order to unlock the Gold Rod's crafting recipe, the player must complete 10 of the Angler's Trust Quests from the First Sea."
+      },
+      "system": {
+        "slug": "gold-rod",
+        "section": "Obtainable",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Items/gold-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shark (Corrupted)",
+        "rarity": "Legendary",
+        "availability": "Obtainable",
+        "source": "Craft from Oni Fisherman",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "location": "Oni Realm",
+        "cost": "500",
+        "cardSummary": "The Shark (Corrupted) is a Legendary fishing rod."
+      },
+      "system": {
+        "slug": "shark-corrupted",
+        "section": "Obtainable",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Items/shark-corrupted.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shark Rod",
+        "rarity": "Uncommon",
+        "availability": "Obtainable",
+        "source": "Craft from Angler",
+        "seas": "Second Sea",
+        "location": "Green Zone",
+        "cost": "1 1,000 5 7",
+        "cardSummary": "The Shark Rod is an Uncommon fishing rod."
+      },
+      "system": {
+        "slug": "shark-rod",
+        "section": "Obtainable",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Items/shark-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shell (Celestial)",
+        "rarity": "Legendary",
+        "availability": "Obtainable",
+        "source": "Craft from Celestial Fisherman",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "location": "Celestial Domain",
+        "cost": "500",
+        "cardSummary": "The Shell (Celestial) is a Legendary fishing rod."
+      },
+      "system": {
+        "slug": "shell-celestial",
+        "section": "Obtainable",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Items/shell-celestial.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Shell Rod",
+        "rarity": "Not stated",
+        "availability": "Obtainable",
+        "source": "Craft from Angler",
+        "seas": "Third Sea",
+        "location": "Hydra Island",
+        "cost": "2 2,000 8 10",
+        "cardSummary": "The Shell Rod's crafting recipe can be unlocked from after completing 40 of Angler's quests from the Third Sea."
+      },
+      "system": {
+        "slug": "shell-rod",
+        "section": "Obtainable",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Items/shell-rod.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Rod",
+        "rarity": "Legendary",
+        "availability": "Obtainable",
+        "source": "Craft from Angler",
+        "seas": "Third Sea",
+        "location": "Hydra Island",
+        "cost": "1 10 10 3,000",
+        "cardSummary": "The Treasure Rod is a Legendary fishing rod."
+      },
+      "system": {
+        "slug": "treasure-rod",
+        "section": "Obtainable",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Items/treasure-rod.webp"
+      }
+    }
+  ]
+}

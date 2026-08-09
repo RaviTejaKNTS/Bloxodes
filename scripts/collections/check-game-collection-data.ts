@@ -231,6 +231,10 @@ function stringValue(value: unknown): string | null {
     return trimmed || null;
   }
   if (typeof value === "number" && Number.isFinite(value)) return String(value);
+  if (Array.isArray(value)) {
+    const parts = value.map((entry) => stringValue(entry)).filter(Boolean) as string[];
+    return parts.length ? parts.join("; ") : null;
+  }
   return null;
 }
 

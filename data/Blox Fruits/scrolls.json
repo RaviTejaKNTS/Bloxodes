@@ -1,0 +1,213 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "scrolls",
+    "route": "/wiki/blox-fruits/scrolls",
+    "catalogCode": "blox-fruits-scrolls",
+    "sourceItemCount": 6,
+    "itemFields": [
+      "tier",
+      "enchantLevels",
+      "recipe",
+      "source",
+      "availability",
+      "specialRoll",
+      "cardSummary"
+    ],
+    "columns": [
+      "tier",
+      "enchantLevels",
+      "recipe",
+      "source",
+      "availability",
+      "specialRoll",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Availability",
+      "sectionOrder": [
+        "Obtainable",
+        "Admin-only"
+      ],
+      "badgeField": "tier",
+      "subtitleFields": [
+        "enchantLevels"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "tier",
+        "enchantLevels",
+        "recipe",
+        "source",
+        "availability",
+        "specialRoll"
+      ],
+      "tableFields": [
+        "tier",
+        "enchantLevels",
+        "recipe",
+        "source",
+        "availability",
+        "specialRoll",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "tier": {
+          "kind": "chip",
+          "label": "Tier"
+        },
+        "enchantLevels": {
+          "kind": "chip",
+          "label": "Enchant levels"
+        },
+        "recipe": {
+          "kind": "detail",
+          "label": "Recipe"
+        },
+        "source": {
+          "kind": "plain",
+          "label": "Source"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "specialRoll": {
+          "kind": "plain",
+          "label": "Special roll"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Use"
+        }
+      }
+    },
+    "notes": {
+      "scope": "The four player-obtainable scroll tiers plus the two documented admin-only scrolls.",
+      "sources": [
+        "https://blox-fruits.fandom.com/wiki/Scrolls",
+        "https://progameguides.com/roblox/how-to-get-and-use-scrolls-in-blox-fruits/",
+        "https://progameguides.com/roblox/all-blox-fruits-crafting-recipes-npc-campfire-crafting-guide/"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Obtainable": 4,
+        "Admin-only": 2
+      },
+      "imagePolicy": "Use exact local item art only where already available; accept three text-first rows."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Common Scroll",
+        "tier": "Common",
+        "enchantLevels": "3",
+        "recipe": "3 Fool's Gold + 2 Shark Tooth",
+        "source": "Dragon Talon Sage",
+        "availability": "Obtainable",
+        "specialRoll": "Normal enchantments",
+        "cardSummary": "Common Scroll applies up to 3 enchantment levels to an eligible weapon or fishing rod."
+      },
+      "system": {
+        "slug": "common-scroll",
+        "section": "Obtainable",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rare Scroll",
+        "tier": "Rare",
+        "enchantLevels": "5",
+        "recipe": "2 Electric Wing + 5 Fool's Gold + 4 Shark Tooth",
+        "source": "Dragon Talon Sage",
+        "availability": "Obtainable",
+        "specialRoll": "Normal enchantments",
+        "cardSummary": "Rare Scroll applies up to 5 enchantment levels to an eligible weapon or fishing rod."
+      },
+      "system": {
+        "slug": "rare-scroll",
+        "section": "Obtainable",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Legendary Scroll",
+        "tier": "Legendary",
+        "enchantLevels": "7",
+        "recipe": "5 Leviathan Scale + 3 Electric Wing + 1 Mutant Tooth + 7 Fool's Gold",
+        "source": "Dragon Talon Sage or Shop",
+        "availability": "Obtainable",
+        "specialRoll": "3% blessing chance; curse chance",
+        "cardSummary": "Legendary Scroll applies up to 7 enchantment levels to an eligible weapon or fishing rod."
+      },
+      "system": {
+        "slug": "legendary-scroll",
+        "section": "Obtainable",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Items/legendary-scroll.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mythical Scroll",
+        "tier": "Mythical",
+        "enchantLevels": "9",
+        "recipe": "1 Leviathan Heart + 15 Leviathan Scale + 1 Terror Eyes + 20 Fool's Gold",
+        "source": "Dragon Talon Sage or Shop",
+        "availability": "Obtainable",
+        "specialRoll": "10% blessing chance; curse chance",
+        "cardSummary": "Mythical Scroll applies up to 9 enchantment levels to an eligible weapon or fishing rod."
+      },
+      "system": {
+        "slug": "mythical-scroll",
+        "section": "Obtainable",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blessed Scroll",
+        "tier": "Special",
+        "enchantLevels": "9",
+        "recipe": "Not craftable",
+        "source": "Admins",
+        "availability": "Unavailable to normal players",
+        "specialRoll": "Guaranteed blessing",
+        "cardSummary": "Blessed Scroll is an admin-only scroll that applies its named special result."
+      },
+      "system": {
+        "slug": "blessed-scroll",
+        "section": "Admin-only",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Items/blessed-scroll.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Scroll",
+        "tier": "Special",
+        "enchantLevels": "9",
+        "recipe": "Not craftable",
+        "source": "Admins",
+        "availability": "Unavailable to normal players",
+        "specialRoll": "Guaranteed curse",
+        "cardSummary": "Cursed Scroll is an admin-only scroll that applies its named special result."
+      },
+      "system": {
+        "slug": "cursed-scroll",
+        "section": "Admin-only",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Items/cursed-scroll.webp"
+      }
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "99 Nights in the Forest",
+    "gameSlug": "99-nights-in-the-forest",
+    "collection": "blessings",
+    "route": "/wiki/99-nights-in-the-forest/blessings",
+    "catalogCode": "99-nights-in-the-forest-blessings",
+    "sourceItemCount": 8,
+    "itemFields": [
+      "entity",
+      "tier",
+      "effectTarget",
+      "effect",
+      "relativeStrength",
+      "bestFor",
+      "accessNotes",
+      "choiceRule",
+      "cardSummary"
+    ],
+    "columns": [
+      "entity",
+      "tier",
+      "effectTarget",
+      "effect",
+      "relativeStrength",
+      "bestFor",
+      "accessNotes",
+      "choiceRule",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Survival focus",
+      "sectionOrder": ["Weather Blessings", "Time Blessings", "Resource Blessings"],
+      "badgeField": "entity",
+      "subtitleFields": ["tier", "effectTarget"],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": ["tier", "effectTarget", "effect", "relativeStrength", "bestFor", "accessNotes", "choiceRule"],
+      "tableFields": ["entity", "tier", "effectTarget", "effect", "relativeStrength", "bestFor", "accessNotes", "choiceRule", "cardSummary"],
+      "fieldPresentation": {
+        "entity": { "kind": "chip", "label": "Statue" },
+        "tier": { "kind": "chip", "label": "Tier" },
+        "effectTarget": { "kind": "plain", "label": "Affects" },
+        "effect": { "kind": "detail", "label": "Effect" },
+        "relativeStrength": { "kind": "highlight", "label": "Strength" },
+        "bestFor": { "kind": "detail", "label": "Best for" },
+        "accessNotes": { "kind": "detail", "label": "How to reach" },
+        "choiceRule": { "kind": "detail", "label": "Choice rule" },
+        "cardSummary": { "kind": "detail", "label": "Summary" }
+      }
+    },
+    "notes": {
+      "scope": "The eight tiered passive blessings offered by Ram, Owl, Deer, and Bat statues in the cave system.",
+      "sources": [
+        "https://progameguides.com/roblox/all-cave-statue-blessings-in-99-nights-in-the-forest/",
+        "https://allthings.how/99-nights-in-the-forest-cave-blessings-and-statues-explained/",
+        "https://99-nights-in-the-forest.fandom.com/wiki/Caverns"
+      ],
+      "valuePolicy": "Effects are qualitative because the checked sources do not publish stable percentages. Tier II is recorded only as stronger than tier I.",
+      "imagePolicy": "Text-first collection. Available screenshots show cave or statue environments rather than distinct row-level blessing icons."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Blessing of the Ram I",
+        "entity": "Ram",
+        "tier": "I",
+        "effectTarget": "Lightning",
+        "effect": "Reduces how often lightning occurs.",
+        "relativeStrength": "Base tier",
+        "bestFor": "Runs where lightning is causing dangerous weather interruptions.",
+        "accessNotes": "Clear a cave and reach a statue room to choose from the offered statues.",
+        "choiceRule": "Choosing the statue locks this blessing into one of your blessing slots for the run.",
+        "cardSummary": "The first Ram tier reduces lightning pressure during stormy runs."
+      },
+      "system": { "slug": "blessing-of-the-ram-i", "section": "Weather Blessings", "sortOrder": 1, "image": null }
+    },
+    {
+      "item": {
+        "name": "Blessing of the Ram II",
+        "entity": "Ram",
+        "tier": "II",
+        "effectTarget": "Lightning",
+        "effect": "Reduces lightning occurrence further than Ram I.",
+        "relativeStrength": "Stronger tier",
+        "bestFor": "Runs that need the strongest available reduction in lightning interruptions.",
+        "accessNotes": "Clear a cave and reach a statue room to choose from the offered statues.",
+        "choiceRule": "Choosing the statue locks this blessing into one of your blessing slots for the run.",
+        "cardSummary": "The stronger Ram tier pushes lightning frequency lower than the first tier."
+      },
+      "system": { "slug": "blessing-of-the-ram-ii", "section": "Weather Blessings", "sortOrder": 2, "image": null }
+    },
+    {
+      "item": {
+        "name": "Blessing of the Owl I",
+        "entity": "Owl",
+        "tier": "I",
+        "effectTarget": "Rain",
+        "effect": "Reduces the chance of rain.",
+        "relativeStrength": "Base tier",
+        "bestFor": "Runs where rain and wet weather are making travel or fights harder.",
+        "accessNotes": "Clear a cave and reach a statue room to choose from the offered statues.",
+        "choiceRule": "Choosing the statue locks this blessing into one of your blessing slots for the run.",
+        "cardSummary": "The first Owl tier makes rainy weather less likely during the run."
+      },
+      "system": { "slug": "blessing-of-the-owl-i", "section": "Weather Blessings", "sortOrder": 3, "image": null }
+    },
+    {
+      "item": {
+        "name": "Blessing of the Owl II",
+        "entity": "Owl",
+        "tier": "II",
+        "effectTarget": "Rain",
+        "effect": "Reduces rain frequency further than Owl I.",
+        "relativeStrength": "Stronger tier",
+        "bestFor": "Runs that need the strongest available reduction in rainy weather.",
+        "accessNotes": "Clear a cave and reach a statue room to choose from the offered statues.",
+        "choiceRule": "Choosing the statue locks this blessing into one of your blessing slots for the run.",
+        "cardSummary": "The stronger Owl tier lowers rain frequency beyond the first tier."
+      },
+      "system": { "slug": "blessing-of-the-owl-ii", "section": "Weather Blessings", "sortOrder": 4, "image": null }
+    },
+    {
+      "item": {
+        "name": "Blessing of the Deer I",
+        "entity": "Deer",
+        "tier": "I",
+        "effectTarget": "Day and night length",
+        "effect": "Extends daytime and shortens nighttime.",
+        "relativeStrength": "Base tier",
+        "bestFor": "Runs that need more daylight for gathering, travel, and objectives.",
+        "accessNotes": "Clear a cave and reach a statue room to choose from the offered statues.",
+        "choiceRule": "Choosing the statue locks this blessing into one of your blessing slots for the run.",
+        "cardSummary": "The first Deer tier trades some night length for a longer daylight window."
+      },
+      "system": { "slug": "blessing-of-the-deer-i", "section": "Time Blessings", "sortOrder": 5, "image": null }
+    },
+    {
+      "item": {
+        "name": "Blessing of the Deer II",
+        "entity": "Deer",
+        "tier": "II",
+        "effectTarget": "Day and night length",
+        "effect": "Extends daytime and shortens nighttime further than Deer I.",
+        "relativeStrength": "Stronger tier",
+        "bestFor": "Runs that need the strongest available daylight extension.",
+        "accessNotes": "Clear a cave and reach a statue room to choose from the offered statues.",
+        "choiceRule": "Choosing the statue locks this blessing into one of your blessing slots for the run.",
+        "cardSummary": "The stronger Deer tier gives a larger shift toward daylight than the first tier."
+      },
+      "system": { "slug": "blessing-of-the-deer-ii", "section": "Time Blessings", "sortOrder": 6, "image": null }
+    },
+    {
+      "item": {
+        "name": "Blessing of the Bat I",
+        "entity": "Bat",
+        "tier": "I",
+        "effectTarget": "Hunger drain",
+        "effect": "Slows the rate at which hunger drains.",
+        "relativeStrength": "Base tier",
+        "bestFor": "Runs where food use and hunger pressure are the main resource problem.",
+        "accessNotes": "Clear a cave and reach a statue room to choose from the offered statues.",
+        "choiceRule": "Choosing the statue locks this blessing into one of your blessing slots for the run.",
+        "cardSummary": "The first Bat tier slows hunger drain and reduces pressure on the food supply."
+      },
+      "system": { "slug": "blessing-of-the-bat-i", "section": "Resource Blessings", "sortOrder": 7, "image": null }
+    },
+    {
+      "item": {
+        "name": "Blessing of the Bat II",
+        "entity": "Bat",
+        "tier": "II",
+        "effectTarget": "Hunger drain",
+        "effect": "Slows hunger drain further than Bat I.",
+        "relativeStrength": "Stronger tier",
+        "bestFor": "Runs that need the strongest available reduction in food pressure.",
+        "accessNotes": "Clear a cave and reach a statue room to choose from the offered statues.",
+        "choiceRule": "Choosing the statue locks this blessing into one of your blessing slots for the run.",
+        "cardSummary": "The stronger Bat tier stretches food supplies further than the first tier."
+      },
+      "system": { "slug": "blessing-of-the-bat-ii", "section": "Resource Blessings", "sortOrder": 8, "image": null }
+    }
+  ]
+}

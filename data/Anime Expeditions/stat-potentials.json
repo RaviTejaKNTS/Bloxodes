@@ -1,0 +1,253 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "stat-potentials",
+    "route": "/wiki/anime-expeditions/stat-potentials",
+    "catalogCode": "anime-expeditions-stat-potentials",
+    "universeId": 7613921865,
+    "sourceItemCount": 14,
+    "itemFields": [
+      "name",
+      "cardSummary",
+      "damage",
+      "spa",
+      "range",
+      "chance",
+      "quality"
+    ],
+    "columns": [
+      "name",
+      "quality",
+      "chance",
+      "damage",
+      "spa",
+      "range",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Grade",
+      "sectionOrder": [
+        "Grades"
+      ],
+      "badgeField": "name",
+      "subtitleFields": [
+        "quality"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "quality",
+        "chance",
+        "damage",
+        "spa",
+        "range"
+      ],
+      "tableFields": [
+        "quality",
+        "chance",
+        "damage",
+        "spa",
+        "range",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "quality": {
+          "kind": "highlight",
+          "label": "Quality"
+        },
+        "chance": {
+          "kind": "chip",
+          "label": "Single-stat chance"
+        },
+        "damage": {
+          "kind": "chip",
+          "label": "Damage"
+        },
+        "spa": {
+          "kind": "chip",
+          "label": "SPA"
+        },
+        "range": {
+          "kind": "chip",
+          "label": "Range"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Z",
+        "cardSummary": "The strongest and rarest grade, with the largest Damage and Range gains plus the fastest SPA band.",
+        "damage": "+17.5% to +20%",
+        "spa": "-12.5% to -15%",
+        "range": "+12.5% to +15%",
+        "chance": "0.15%",
+        "quality": "Best"
+      },
+      "system": { "slug": "z", "section": "Grades", "sortOrder": 10, "image": null }
+    },
+    {
+      "item": {
+        "name": "SSS",
+        "cardSummary": "A near-top roll with large boosts across all three stat types and a much better chance than Z.",
+        "damage": "+14.9% to +17.4%",
+        "spa": "-9.9% to -12.4%",
+        "range": "+9.9% to +12.4%",
+        "chance": "0.8%",
+        "quality": "Excellent"
+      },
+      "system": { "slug": "sss", "section": "Grades", "sortOrder": 20, "image": null }
+    },
+    {
+      "item": {
+        "name": "SS",
+        "cardSummary": "A very strong grade that keeps Damage and Range comfortably positive while cutting SPA by a useful amount.",
+        "damage": "+11.1% to +14.8%",
+        "spa": "-6.1% to -9.8%",
+        "range": "+6.1% to +9.8%",
+        "chance": "1.75%",
+        "quality": "Excellent"
+      },
+      "system": { "slug": "ss", "section": "Grades", "sortOrder": 30, "image": null }
+    },
+    {
+      "item": {
+        "name": "S",
+        "cardSummary": "A strong positive roll for every stat, suited to units you want to improve without chasing the rarest bands.",
+        "damage": "+9.1% to +11%",
+        "spa": "-4.1% to -6%",
+        "range": "+4.1% to +6%",
+        "chance": "2.2%",
+        "quality": "Strong"
+      },
+      "system": { "slug": "s", "section": "Grades", "sortOrder": 40, "image": null }
+    },
+    {
+      "item": {
+        "name": "A+",
+        "cardSummary": "A good all-around result with positive Damage and Range and a faster attack interval.",
+        "damage": "+8.1% to +9%",
+        "spa": "-3.1% to -4%",
+        "range": "+3.1% to +4%",
+        "chance": "3.25%",
+        "quality": "Good"
+      },
+      "system": { "slug": "a-plus", "section": "Grades", "sortOrder": 50, "image": null }
+    },
+    {
+      "item": {
+        "name": "A",
+        "cardSummary": "A clean positive band across all three stats, useful when rerolls or locks are limited.",
+        "damage": "+7.1% to +8%",
+        "spa": "-2.1% to -3%",
+        "range": "+2.1% to +3%",
+        "chance": "4%",
+        "quality": "Good"
+      },
+      "system": { "slug": "a", "section": "Grades", "sortOrder": 60, "image": null }
+    },
+    {
+      "item": {
+        "name": "A-",
+        "cardSummary": "A modest positive roll in every category, with enough upside to keep on an early or secondary unit.",
+        "damage": "+6.1% to +7%",
+        "spa": "-1.1% to -2%",
+        "range": "+1.1% to +2%",
+        "chance": "5.25%",
+        "quality": "Good"
+      },
+      "system": { "slug": "a-minus", "section": "Grades", "sortOrder": 70, "image": null }
+    },
+    {
+      "item": {
+        "name": "B+",
+        "cardSummary": "The last grade with a fully favorable band for Damage, SPA, and Range, though each gain is small.",
+        "damage": "+5.1% to +6%",
+        "spa": "-0.1% to -1%",
+        "range": "+0.1% to +1%",
+        "chance": "8.75%",
+        "quality": "Positive"
+      },
+      "system": { "slug": "b-plus", "section": "Grades", "sortOrder": 80, "image": null }
+    },
+    {
+      "item": {
+        "name": "B",
+        "cardSummary": "Damage stays positive, but SPA can become slower and Range can dip below its base value.",
+        "damage": "+4.1% to +5%",
+        "spa": "0% to +0.9%",
+        "range": "-0.9% to 0%",
+        "chance": "10%",
+        "quality": "Mixed"
+      },
+      "system": { "slug": "b", "section": "Grades", "sortOrder": 90, "image": null }
+    },
+    {
+      "item": {
+        "name": "B-",
+        "cardSummary": "A mixed roll with some Damage upside, paired with slower SPA and reduced Range.",
+        "damage": "+3.1% to +4%",
+        "spa": "+1% to +1.9%",
+        "range": "-1.9% to -1%",
+        "chance": "13%",
+        "quality": "Mixed"
+      },
+      "system": { "slug": "b-minus", "section": "Grades", "sortOrder": 100, "image": null }
+    },
+    {
+      "item": {
+        "name": "C+",
+        "cardSummary": "A small Damage gain comes with slower attacks and shorter Range, so the trade is usually temporary.",
+        "damage": "+2.1% to +3%",
+        "spa": "+2% to +2.9%",
+        "range": "-2.9% to -2%",
+        "chance": "15.5%",
+        "quality": "Weak"
+      },
+      "system": { "slug": "c-plus", "section": "Grades", "sortOrder": 110, "image": null }
+    },
+    {
+      "item": {
+        "name": "C",
+        "cardSummary": "Damage is barely positive while SPA and Range move the wrong way, making this a weak stopping point.",
+        "damage": "+0.1% to +2%",
+        "spa": "+3% to +4.9%",
+        "range": "-4.9% to -3%",
+        "chance": "23.5%",
+        "quality": "Weak"
+      },
+      "system": { "slug": "c", "section": "Grades", "sortOrder": 120, "image": null }
+    },
+    {
+      "item": {
+        "name": "C-",
+        "cardSummary": "Damage can be neutral or negative, while SPA slows and Range drops by a larger amount.",
+        "damage": "-2.6% to 0%",
+        "spa": "+5% to +7.6%",
+        "range": "-7.6% to -5%",
+        "chance": "7.55%",
+        "quality": "Poor"
+      },
+      "system": { "slug": "c-minus", "section": "Grades", "sortOrder": 130, "image": null }
+    },
+    {
+      "item": {
+        "name": "F",
+        "cardSummary": "The weakest grade, reducing Damage and Range while making SPA slower.",
+        "damage": "-5% to -2.5%",
+        "spa": "+7.5% to +10%",
+        "range": "-10% to -7.5%",
+        "chance": "4.3%",
+        "quality": "Worst"
+      },
+      "system": { "slug": "f", "section": "Grades", "sortOrder": 140, "image": null }
+    }
+  ]
+}

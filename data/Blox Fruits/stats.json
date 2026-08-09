@@ -1,0 +1,194 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "stats",
+    "route": "/wiki/blox-fruits/stats",
+    "catalogCode": "blox-fruits-stats",
+    "sourceItemCount": 5,
+    "itemFields": [
+      "affects",
+      "perPoint",
+      "maxBaseLevel",
+      "pointsPerPlayerLevel",
+      "buildRole",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "affects",
+      "perPoint",
+      "maxBaseLevel",
+      "pointsPerPlayerLevel",
+      "buildRole",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Stat role",
+      "sectionOrder": [
+        "Core Stats",
+        "Damage Stats"
+      ],
+      "badgeField": "buildRole",
+      "subtitleFields": [
+        "affects"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "affects",
+        "perPoint",
+        "maxBaseLevel",
+        "pointsPerPlayerLevel",
+        "buildRole",
+        "availability"
+      ],
+      "tableFields": [
+        "affects",
+        "perPoint",
+        "maxBaseLevel",
+        "pointsPerPlayerLevel",
+        "buildRole",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "affects": {
+          "kind": "plain",
+          "label": "Affects"
+        },
+        "perPoint": {
+          "kind": "highlight",
+          "label": "Per point"
+        },
+        "maxBaseLevel": {
+          "kind": "chip",
+          "label": "Base cap"
+        },
+        "pointsPerPlayerLevel": {
+          "kind": "chip",
+          "label": "Level gain"
+        },
+        "buildRole": {
+          "kind": "plain",
+          "label": "Build role"
+        },
+        "availability": {
+          "kind": "plain",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "The five player-allocated stats and their exact source-listed per-point effects.",
+      "sources": [
+        "https://blox-fruits.fandom.com/wiki/Stats",
+        "https://www.roblox.com/games/2753915549/Blox-Fruits"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Core Stats": 2,
+        "Damage Stats": 3
+      },
+      "imagePolicy": "Text-first accepted because stats are GUI attributes, not distinct inventory items."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Melee",
+        "affects": "Fighting style damage and Energy",
+        "perPoint": "+0.5 fighting style damage and +5 Energy per point",
+        "maxBaseLevel": "2,800",
+        "pointsPerPlayerLevel": "3 shared stat points",
+        "buildRole": "Core survival and fighting-style stat",
+        "availability": "Always available",
+        "cardSummary": "Melee affects fighting style damage and energy. +0.5 fighting style damage and +5 Energy per point."
+      },
+      "system": {
+        "slug": "melee",
+        "section": "Core Stats",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Defense",
+        "affects": "Health",
+        "perPoint": "+5 Health per point",
+        "maxBaseLevel": "2,800",
+        "pointsPerPlayerLevel": "3 shared stat points",
+        "buildRole": "Core survival stat",
+        "availability": "Always available",
+        "cardSummary": "Defense affects health. +5 Health per point."
+      },
+      "system": {
+        "slug": "defense",
+        "section": "Core Stats",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sword",
+        "affects": "Sword damage",
+        "perPoint": "+0.5 sword damage per point",
+        "maxBaseLevel": "2,800",
+        "pointsPerPlayerLevel": "3 shared stat points",
+        "buildRole": "Sword-main damage stat",
+        "availability": "Always available",
+        "cardSummary": "Sword affects sword damage. +0.5 sword damage per point."
+      },
+      "system": {
+        "slug": "sword",
+        "section": "Damage Stats",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gun",
+        "affects": "Gun damage",
+        "perPoint": "+0.5 gun damage per point",
+        "maxBaseLevel": "2,800",
+        "pointsPerPlayerLevel": "3 shared stat points",
+        "buildRole": "Gun-main damage stat",
+        "availability": "Always available",
+        "cardSummary": "Gun affects gun damage. +0.5 gun damage per point."
+      },
+      "system": {
+        "slug": "gun",
+        "section": "Damage Stats",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blox Fruit",
+        "affects": "Blox Fruit damage",
+        "perPoint": "+0.5 Blox Fruit damage per point",
+        "maxBaseLevel": "2,800",
+        "pointsPerPlayerLevel": "3 shared stat points",
+        "buildRole": "Fruit-main damage stat",
+        "availability": "Always available",
+        "cardSummary": "Blox Fruit affects blox fruit damage. +0.5 Blox Fruit damage per point."
+      },
+      "system": {
+        "slug": "blox-fruit",
+        "section": "Damage Stats",
+        "sortOrder": 5,
+        "image": null
+      }
+    }
+  ]
+}

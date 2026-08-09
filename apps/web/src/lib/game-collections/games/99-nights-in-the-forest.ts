@@ -14,6 +14,11 @@ export const nightsInTheForestCollectionGroup = {
       "tools",
       "food",
       "materials",
-      "tameable-animals"
+      "tameable-animals",
+      "armor",
+      "chests",
+      "blessings",
+      "fire-offerings",
+      "seeds"
     ]
   } satisfies GameCollectionGroup;

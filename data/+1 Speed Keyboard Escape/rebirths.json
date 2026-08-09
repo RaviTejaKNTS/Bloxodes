@@ -1,0 +1,365 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "+1 Speed Keyboard Escape",
+    "gameSlug": "1-speed-keyboard-escape",
+    "collection": "rebirths",
+    "route": "/wiki/1-speed-keyboard-escape/rebirths",
+    "catalogCode": "1-speed-keyboard-escape-rebirths",
+    "itemFields": [
+      "name",
+      "rebirthNumber",
+      "levelRequired",
+      "multiplier",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "rebirthNumber",
+      "levelRequired",
+      "multiplier",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Rebirths 1-10",
+        "Rebirths 11-20"
+      ],
+      "badgeField": "multiplier",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "levelRequired",
+        "multiplier"
+      ],
+      "tableFields": [
+        "rebirthNumber",
+        "levelRequired",
+        "multiplier",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rebirthNumber": {
+          "kind": "chip",
+          "label": "Rebirth"
+        },
+        "levelRequired": {
+          "kind": "chip",
+          "label": "Level required"
+        },
+        "multiplier": {
+          "kind": "highlight",
+          "label": "Speed multiplier"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Progression note"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Rebirth 1",
+        "rebirthNumber": 1,
+        "levelRequired": 15,
+        "multiplier": "x1.5",
+        "cardSummary": "The first listed rebirth starts the permanent multiplier ladder once you reach Level 15."
+      },
+      "system": {
+        "slug": "rebirth-1",
+        "section": "Rebirths 1-10",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 2",
+        "rebirthNumber": 2,
+        "levelRequired": 25,
+        "multiplier": "x2",
+        "cardSummary": "The second milestone raises the permanent Speed multiplier to x2 at Level 25."
+      },
+      "system": {
+        "slug": "rebirth-2",
+        "section": "Rebirths 1-10",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 3",
+        "rebirthNumber": 3,
+        "levelRequired": 40,
+        "multiplier": "x2.5",
+        "cardSummary": "Rebirth 3 moves the requirement to Level 40 and increases the permanent multiplier to x2.5."
+      },
+      "system": {
+        "slug": "rebirth-3",
+        "section": "Rebirths 1-10",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 4",
+        "rebirthNumber": 4,
+        "levelRequired": 60,
+        "multiplier": "x3",
+        "cardSummary": "This milestone requires Level 60 and brings the permanent multiplier to x3."
+      },
+      "system": {
+        "slug": "rebirth-4",
+        "section": "Rebirths 1-10",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 5",
+        "rebirthNumber": 5,
+        "levelRequired": 75,
+        "multiplier": "x3.5",
+        "cardSummary": "Rebirth 5 is an early checkpoint at Level 75 with a listed x3.5 Speed multiplier."
+      },
+      "system": {
+        "slug": "rebirth-5",
+        "section": "Rebirths 1-10",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 6",
+        "rebirthNumber": 6,
+        "levelRequired": 100,
+        "multiplier": "x4",
+        "cardSummary": "The sixth listed reset reaches the Level 100 threshold and raises the multiplier to x4."
+      },
+      "system": {
+        "slug": "rebirth-6",
+        "section": "Rebirths 1-10",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 7",
+        "rebirthNumber": 7,
+        "levelRequired": 125,
+        "multiplier": "x5",
+        "cardSummary": "Rebirth 7 requires Level 125 and is the first listed milestone with an x5 multiplier."
+      },
+      "system": {
+        "slug": "rebirth-7",
+        "section": "Rebirths 1-10",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 8",
+        "rebirthNumber": 8,
+        "levelRequired": 150,
+        "multiplier": "x6",
+        "cardSummary": "The next Level 150 milestone advances the permanent Speed multiplier to x6."
+      },
+      "system": {
+        "slug": "rebirth-8",
+        "section": "Rebirths 1-10",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 9",
+        "rebirthNumber": 9,
+        "levelRequired": 175,
+        "multiplier": "x7.5",
+        "cardSummary": "Rebirth 9 sits at Level 175 and supplies the last listed multiplier before the x10 checkpoint."
+      },
+      "system": {
+        "slug": "rebirth-9",
+        "section": "Rebirths 1-10",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 10",
+        "rebirthNumber": 10,
+        "levelRequired": 200,
+        "multiplier": "x10",
+        "cardSummary": "Rebirth 10 is the Level 200 checkpoint where the listed multiplier reaches x10."
+      },
+      "system": {
+        "slug": "rebirth-10",
+        "section": "Rebirths 1-10",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 11",
+        "rebirthNumber": 11,
+        "levelRequired": 225,
+        "multiplier": "x100",
+        "cardSummary": "The advanced ladder begins at Level 225 with the first listed jump to a three-digit multiplier."
+      },
+      "system": {
+        "slug": "rebirth-11",
+        "section": "Rebirths 11-20",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 12",
+        "rebirthNumber": 12,
+        "levelRequired": 260,
+        "multiplier": "x1K",
+        "cardSummary": "Rebirth 12 requires Level 260 and moves the permanent multiplier into the thousands."
+      },
+      "system": {
+        "slug": "rebirth-12",
+        "section": "Rebirths 11-20",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 13",
+        "rebirthNumber": 13,
+        "levelRequired": 300,
+        "multiplier": "x10K",
+        "cardSummary": "This Level 300 checkpoint raises the listed permanent Speed multiplier to x10K."
+      },
+      "system": {
+        "slug": "rebirth-13",
+        "section": "Rebirths 11-20",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 14",
+        "rebirthNumber": 14,
+        "levelRequired": 340,
+        "multiplier": "x100K",
+        "cardSummary": "Rebirth 14 continues the tenfold late-game climb at Level 340 with an x100K multiplier."
+      },
+      "system": {
+        "slug": "rebirth-14",
+        "section": "Rebirths 11-20",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 15",
+        "rebirthNumber": 15,
+        "levelRequired": 380,
+        "multiplier": "x1M",
+        "cardSummary": "The Level 380 milestone is the first listed Rebirth to reach a million-times Speed multiplier."
+      },
+      "system": {
+        "slug": "rebirth-15",
+        "section": "Rebirths 11-20",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 16",
+        "rebirthNumber": 16,
+        "levelRequired": 420,
+        "multiplier": "x10M",
+        "cardSummary": "Rebirth 16 requires Level 420 and advances the listed permanent multiplier to x10M."
+      },
+      "system": {
+        "slug": "rebirth-16",
+        "section": "Rebirths 11-20",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 17",
+        "rebirthNumber": 17,
+        "levelRequired": 465,
+        "multiplier": "x100M",
+        "cardSummary": "At Level 465, Rebirth 17 supplies the listed x100M permanent Speed multiplier."
+      },
+      "system": {
+        "slug": "rebirth-17",
+        "section": "Rebirths 11-20",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 18",
+        "rebirthNumber": 18,
+        "levelRequired": 510,
+        "multiplier": "x1B",
+        "cardSummary": "Rebirth 18 is the Level 510 milestone where the listed multiplier first reaches x1B."
+      },
+      "system": {
+        "slug": "rebirth-18",
+        "section": "Rebirths 11-20",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 19",
+        "rebirthNumber": 19,
+        "levelRequired": 560,
+        "multiplier": "x10B",
+        "cardSummary": "The nineteenth listed milestone requires Level 560 and raises the multiplier to x10B."
+      },
+      "system": {
+        "slug": "rebirth-19",
+        "section": "Rebirths 11-20",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth 20",
+        "rebirthNumber": 20,
+        "levelRequired": 600,
+        "multiplier": "x100B",
+        "cardSummary": "The highest source-backed row in this dataset requires Level 600 and lists an x100B multiplier."
+      },
+      "system": {
+        "slug": "rebirth-20",
+        "section": "Rebirths 11-20",
+        "sortOrder": 20,
+        "image": null
+      }
+    }
+  ]
+}

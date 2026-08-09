@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Anime Expeditions",
+    "gameSlug": "anime-expeditions",
+    "collection": "expedition-buildings",
+    "route": "/wiki/anime-expeditions/expedition-buildings",
+    "catalogCode": "anime-expeditions-expedition-buildings",
+    "universeId": 7613921865,
+    "sourceItemCount": 8,
+    "itemFields": [
+      "name",
+      "cardSummary",
+      "role",
+      "function",
+      "input",
+      "output",
+      "unlockDependency",
+      "priority",
+      "availability"
+    ],
+    "columns": [
+      "name",
+      "role",
+      "function",
+      "input",
+      "output",
+      "unlockDependency",
+      "priority",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Building",
+      "sectionOrder": [
+        "Buildings"
+      ],
+      "badgeField": "role",
+      "subtitleFields": [
+        "output"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "role",
+        "input",
+        "output",
+        "unlockDependency",
+        "priority",
+        "availability"
+      ],
+      "tableFields": [
+        "role",
+        "function",
+        "input",
+        "output",
+        "unlockDependency",
+        "priority",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "role": {
+          "kind": "chip",
+          "label": "Role"
+        },
+        "function": {
+          "kind": "detail",
+          "label": "What it does"
+        },
+        "input": {
+          "kind": "plain",
+          "label": "Uses"
+        },
+        "output": {
+          "kind": "plain",
+          "label": "Gives"
+        },
+        "unlockDependency": {
+          "kind": "detail",
+          "label": "Requirement"
+        },
+        "priority": {
+          "kind": "highlight",
+          "label": "Build priority"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Expedition Center",
+        "cardSummary": "The hub for Expedition progression. Its level gates upgrades for the other buildings, so it sets the ceiling for the whole area.",
+        "role": "Hub",
+        "function": "Controls Expedition progression and unlocks higher levels for the surrounding buildings.",
+        "input": "Expedition progression resources",
+        "output": "Higher building upgrade limits",
+        "unlockDependency": "Reach player level 20 and unlock Expedition mode.",
+        "priority": "Foundation",
+        "availability": "Permanent"
+      },
+      "system": {
+        "slug": "expedition-center",
+        "section": "Buildings",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Research Lab",
+        "cardSummary": "Turns Expedition Coins into permanent upgrades for economy, payload strength, unit power, and progression across future runs.",
+        "role": "Research",
+        "function": "Opens a permanent upgrade tree with economy, payload, power, and progression branches.",
+        "input": "Expedition Coins",
+        "output": "Permanent Expedition bonuses",
+        "unlockDependency": "Requires access to the Expedition Hub; later research tiers depend on earlier nodes.",
+        "priority": "Early investment",
+        "availability": "Permanent"
+      },
+      "system": {
+        "slug": "research-lab",
+        "section": "Buildings",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gold Mine",
+        "cardSummary": "Consumes stored Fuel Cells to make Gold passively. Higher building levels improve the return from the same limited fuel supply.",
+        "role": "Production",
+        "function": "Converts Expedition Fuel into passive Gold production.",
+        "input": "Expedition Fuel",
+        "output": "Gold",
+        "unlockDependency": "Higher mine levels require the Expedition Center to be upgraded first.",
+        "priority": "Early income",
+        "availability": "Permanent"
+      },
+      "system": {
+        "slug": "gold-mine",
+        "section": "Buildings",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Resource Drill",
+        "cardSummary": "Uses Fuel Cells to mine Geodes. Opening those Geodes can return rerolls, Trait Crystals, Gems, and other useful materials.",
+        "role": "Production",
+        "function": "Converts Expedition Fuel into Geodes that open into account resources.",
+        "input": "Expedition Fuel",
+        "output": "Geodes and their resource drops",
+        "unlockDependency": "Its first build uses Expedition Coins and Cursed Timber from School Grounds.",
+        "priority": "Core resource farm",
+        "availability": "Permanent"
+      },
+      "system": {
+        "slug": "resource-drill",
+        "section": "Buildings",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Armory",
+        "cardSummary": "Handles the Expedition equipment loop. You can craft gear from Scrap, reroll its stats, or dismantle unwanted pieces.",
+        "role": "Equipment",
+        "function": "Forges, rerolls, and dismantles equipment for stronger unit builds.",
+        "input": "Equipment Scrap and equipment",
+        "output": "Crafted or improved equipment",
+        "unlockDependency": "Available through Expedition building progression.",
+        "priority": "Early combat power",
+        "availability": "Permanent"
+      },
+      "system": {
+        "slug": "armory",
+        "section": "Buildings",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Quest Board",
+        "cardSummary": "Offers recurring Expedition goals that pay progression resources. It is a steady source of rewards while you build out the Hub.",
+        "role": "Quests",
+        "function": "Tracks recurring Expedition objectives and milestone rewards.",
+        "input": "Completed Expedition objectives",
+        "output": "Gold, Gems, Expedition Coins, and reroll items",
+        "unlockDependency": "Available through Expedition building progression.",
+        "priority": "Reliable rewards",
+        "availability": "Permanent"
+      },
+      "system": {
+        "slug": "quest-board",
+        "section": "Buildings",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Expedition Shop",
+        "cardSummary": "Spends Expedition Coins on materials and reroll resources. Its stock can rotate, so the shop matters more as a currency outlet than a fixed item roster.",
+        "role": "Shop",
+        "function": "Trades Expedition Coins for resources, materials, and reroll items.",
+        "input": "Expedition Coins",
+        "output": "Rotating progression stock",
+        "unlockDependency": "Available through Expedition building progression.",
+        "priority": "After core upgrades",
+        "availability": "Permanent shop, rotating stock"
+      },
+      "system": {
+        "slug": "expedition-shop",
+        "section": "Buildings",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Training Grounds",
+        "cardSummary": "Parks idle units to gain Unit EXP and Worthiness over time. It helps the bench grow, but it does not solve Expedition resource shortages.",
+        "role": "Training",
+        "function": "Lets assigned idle units earn Unit EXP and Worthiness on a passive timer.",
+        "input": "Assigned units and time",
+        "output": "Unit EXP and Worthiness",
+        "unlockDependency": "Available through Expedition building progression.",
+        "priority": "Later convenience",
+        "availability": "Permanent"
+      },
+      "system": {
+        "slug": "training-grounds",
+        "section": "Buildings",
+        "sortOrder": 80,
+        "image": null
+      }
+    }
+  ]
+}

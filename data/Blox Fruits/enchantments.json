@@ -1,0 +1,753 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "enchantments",
+    "route": "/wiki/blox-fruits/enchantments",
+    "catalogCode": "blox-fruits-enchantments",
+    "sourceItemCount": 38,
+    "itemFields": [
+      "category",
+      "appliesTo",
+      "levelRange",
+      "effect",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "category",
+      "appliesTo",
+      "levelRange",
+      "effect",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Enchantment type",
+      "sectionOrder": [
+        "Normal weapon",
+        "Normal rod",
+        "Unique",
+        "Rod skill",
+        "Rod ability",
+        "Blessing",
+        "Curse"
+      ],
+      "badgeField": "category",
+      "subtitleFields": [
+        "appliesTo"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "category",
+        "appliesTo",
+        "levelRange",
+        "effect",
+        "availability"
+      ],
+      "tableFields": [
+        "category",
+        "appliesTo",
+        "levelRange",
+        "effect",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "category": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "appliesTo": {
+          "kind": "plain",
+          "label": "Applies to"
+        },
+        "levelRange": {
+          "kind": "chip",
+          "label": "Levels"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Source"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "The current named normal, unique, rod skill, rod ability, blessing, and curse enchantments.",
+      "sources": [
+        "https://blox-fruits.fandom.com/wiki/Enchantments",
+        "https://blox-fruits.fandom.com/wiki/Fishing_Rods",
+        "https://progameguides.com/roblox/how-to-get-and-use-scrolls-in-blox-fruits/"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Normal weapon": 12,
+        "Normal rod": 5,
+        "Unique": 6,
+        "Rod skill": 3,
+        "Rod ability": 1,
+        "Blessing": 6,
+        "Curse": 5
+      },
+      "imagePolicy": "Text-first accepted because enchantments are abstract modifiers and the source does not provide distinct row icons."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Agile",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-3",
+        "effect": "Reduces cooldowns by 6%, 9%, or 12% by level.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Agile is a normal weapon enchantment for weapons. Reduces cooldowns by 6%, 9%, or 12% by level."
+      },
+      "system": {
+        "slug": "agile",
+        "section": "Normal weapon",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Beast",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-5",
+        "effect": "Raises damage against Beast users by 3% per level, up to 15%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Beast is a normal weapon enchantment for weapons. Raises damage against Beast users by 3% per level, up to 15%."
+      },
+      "system": {
+        "slug": "beast",
+        "section": "Normal weapon",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Deadly",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-5",
+        "effect": "Raises damage against players by 2% per level, up to 10%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Deadly is a normal weapon enchantment for weapons. Raises damage against players by 2% per level, up to 10%."
+      },
+      "system": {
+        "slug": "deadly",
+        "section": "Normal weapon",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Efficient",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-4",
+        "effect": "Raises XP from NPCs by 15% per level, up to 60%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Efficient is a normal weapon enchantment for weapons. Raises XP from NPCs by 15% per level, up to 60%."
+      },
+      "system": {
+        "slug": "efficient",
+        "section": "Normal weapon",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Elemental",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-5",
+        "effect": "Raises damage against Elemental users by 3% per level, up to 15%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Elemental is a normal weapon enchantment for weapons. Raises damage against Elemental users by 3% per level, up to 15%."
+      },
+      "system": {
+        "slug": "elemental",
+        "section": "Normal weapon",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fortune",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-4",
+        "effect": "Raises Money drops from NPCs by 15% per level, up to 60%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Fortune is a normal weapon enchantment for weapons. Raises Money drops from NPCs by 15% per level, up to 60%."
+      },
+      "system": {
+        "slug": "fortune",
+        "section": "Normal weapon",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-4",
+        "effect": "Raises NPC drop rates by 5% per level, up to 20%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Lucky is a normal weapon enchantment for weapons. Raises NPC drop rates by 5% per level, up to 20%."
+      },
+      "system": {
+        "slug": "lucky",
+        "section": "Normal weapon",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Natural",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-5",
+        "effect": "Raises damage against Natural users by 3% per level, up to 15%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Natural is a normal weapon enchantment for weapons. Raises damage against Natural users by 3% per level, up to 15%."
+      },
+      "system": {
+        "slug": "natural",
+        "section": "Normal weapon",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Piercing",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-4",
+        "effect": "Ignores 6% of defensive buffs per level, up to 24%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Piercing is a normal weapon enchantment for weapons. Ignores 6% of defensive buffs per level, up to 24%."
+      },
+      "system": {
+        "slug": "piercing",
+        "section": "Normal weapon",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sharp",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-6",
+        "effect": "Raises damage against NPCs by 3% per level, up to 18%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Sharp is a normal weapon enchantment for weapons. Raises damage against NPCs by 3% per level, up to 18%."
+      },
+      "system": {
+        "slug": "sharp",
+        "section": "Normal weapon",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Siphon",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-3",
+        "effect": "Restores 4%, 6%, or 10% of damage dealt as energy.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Siphon is a normal weapon enchantment for weapons. Restores 4%, 6%, or 10% of damage dealt as energy."
+      },
+      "system": {
+        "slug": "siphon",
+        "section": "Normal weapon",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vampiric",
+        "category": "Normal weapon",
+        "appliesTo": "Weapons",
+        "levelRange": "Levels 1-3",
+        "effect": "Heals 4%, 6%, or 10% of damage dealt.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Vampiric is a normal weapon enchantment for weapons. Heals 4%, 6%, or 10% of damage dealt."
+      },
+      "system": {
+        "slug": "vampiric",
+        "section": "Normal weapon",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Baitless Catch",
+        "category": "Normal rod",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Levels 1-3",
+        "effect": "Adds a 2% per level chance not to consume bait.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Baitless Catch is a normal rod enchantment for fishing rods. Adds a 2% per level chance not to consume bait."
+      },
+      "system": {
+        "slug": "baitless-catch",
+        "section": "Normal rod",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Experience Sharing",
+        "category": "Normal rod",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Levels 1-5",
+        "effect": "Shares 5% fishing XP per level with nearby players and also grants it to the user.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Experience Sharing is a normal rod enchantment for fishing rods. Shares 5% fishing XP per level with nearby players and also grants it to the user."
+      },
+      "system": {
+        "slug": "experience-sharing",
+        "section": "Normal rod",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fish Scanner",
+        "category": "Normal rod",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Levels 1-5",
+        "effect": "Raises the final luck factor by 2% per level.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Fish Scanner is a normal rod enchantment for fishing rods. Raises the final luck factor by 2% per level."
+      },
+      "system": {
+        "slug": "fish-scanner",
+        "section": "Normal rod",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Resilient Fishing Rod",
+        "category": "Normal rod",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Levels 1-4",
+        "effect": "Raises rod resilience by 2% per level.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Resilient Fishing Rod is a normal rod enchantment for fishing rods. Raises rod resilience by 2% per level."
+      },
+      "system": {
+        "slug": "resilient-fishing-rod",
+        "section": "Normal rod",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tasty Bait",
+        "category": "Normal rod",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Levels 1-3",
+        "effect": "Raises the chance for fish to bite faster by 2% per level.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Tasty Bait is a normal rod enchantment for fishing rods. Raises the chance for fish to bite faster by 2% per level."
+      },
+      "system": {
+        "slug": "tasty-bait",
+        "section": "Normal rod",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Masterpiece",
+        "category": "Unique",
+        "appliesTo": "Weapons",
+        "levelRange": "One unique slot",
+        "effect": "Skills cost no energy, damage rises by 5%, and cooldowns fall by 8%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Masterpiece is a unique enchantment for weapons. Skills cost no energy, damage rises by 5%, and cooldowns fall by 8%."
+      },
+      "system": {
+        "slug": "masterpiece",
+        "section": "Unique",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rage",
+        "category": "Unique",
+        "appliesTo": "Weapons",
+        "levelRange": "One unique slot",
+        "effect": "Raises movement speed on hit, with duration scaling from base damage.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Rage is a unique enchantment for weapons. Raises movement speed on hit, with duration scaling from base damage."
+      },
+      "system": {
+        "slug": "rage",
+        "section": "Unique",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sharpshooter",
+        "category": "Unique",
+        "appliesTo": "Weapons",
+        "levelRange": "One unique slot",
+        "effect": "Raises damage by 10% but raises cooldowns by 20%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Sharpshooter is a unique enchantment for weapons. Raises damage by 10% but raises cooldowns by 20%."
+      },
+      "system": {
+        "slug": "sharpshooter",
+        "section": "Unique",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Strong Grip",
+        "category": "Unique",
+        "appliesTo": "Weapons",
+        "levelRange": "One unique slot",
+        "effect": "Scales damage from 40% Melee and 60% Sword or Gun stats.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Strong Grip is a unique enchantment for weapons. Scales damage from 40% Melee and 60% Sword or Gun stats."
+      },
+      "system": {
+        "slug": "strong-grip",
+        "section": "Unique",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unbreakable",
+        "category": "Unique",
+        "appliesTo": "Weapons",
+        "levelRange": "One unique slot",
+        "effect": "Prevents held skills from being interrupted for 2 seconds.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Unbreakable is a unique enchantment for weapons. Prevents held skills from being interrupted for 2 seconds."
+      },
+      "system": {
+        "slug": "unbreakable",
+        "section": "Unique",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unreal",
+        "category": "Unique",
+        "appliesTo": "Weapons",
+        "levelRange": "One unique slot",
+        "effect": "Cuts cooldowns by 20% but lowers damage by 15%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Unreal is a unique enchantment for weapons. Cuts cooldowns by 20% but lowers damage by 15%."
+      },
+      "system": {
+        "slug": "unreal",
+        "section": "Unique",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Reel Boost",
+        "category": "Rod skill",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Replaces Z skill",
+        "effect": "Temporarily raises rod strength for 10 seconds.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Reel Boost is a rod skill enchantment for fishing rods. Temporarily raises rod strength for 10 seconds."
+      },
+      "system": {
+        "slug": "reel-boost",
+        "section": "Rod skill",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Calming Technique",
+        "category": "Rod skill",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Replaces Z skill",
+        "effect": "Slows fish movement by 50% for 10 seconds.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Calming Technique is a rod skill enchantment for fishing rods. Slows fish movement by 50% for 10 seconds."
+      },
+      "system": {
+        "slug": "calming-technique",
+        "section": "Rod skill",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Conserve Bait",
+        "category": "Rod skill",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Replaces Z skill",
+        "effect": "Reduces bait consumption chance by 25% for 120 seconds.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Conserve Bait is a rod skill enchantment for fishing rods. Reduces bait consumption chance by 25% for 120 seconds."
+      },
+      "system": {
+        "slug": "conserve-bait",
+        "section": "Rod skill",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fishing Rod Protector",
+        "category": "Rod ability",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Passive",
+        "effect": "Prevents one line snap per catch, then adds 30% progress and calms the fish.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Fishing Rod Protector is a rod ability enchantment for fishing rods. Prevents one line snap per catch, then adds 30% progress and calms the fish."
+      },
+      "system": {
+        "slug": "fishing-rod-protector",
+        "section": "Rod ability",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Burning",
+        "category": "Blessing",
+        "appliesTo": "Weapons",
+        "levelRange": "Rare special roll",
+        "effect": "Applies Burn for 4 seconds on hit, scaling from final damage.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Burning is a blessing enchantment for weapons. Applies Burn for 4 seconds on hit, scaling from final damage."
+      },
+      "system": {
+        "slug": "burning",
+        "section": "Blessing",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen",
+        "category": "Blessing",
+        "appliesTo": "Weapons",
+        "levelRange": "Rare special roll",
+        "effect": "Applies Slowness for 5 seconds on hit, scaling from base damage.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Frozen is a blessing enchantment for weapons. Applies Slowness for 5 seconds on hit, scaling from base damage."
+      },
+      "system": {
+        "slug": "frozen",
+        "section": "Blessing",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rot",
+        "category": "Blessing",
+        "appliesTo": "Weapons",
+        "levelRange": "Rare special roll",
+        "effect": "Applies Rot to fruit users for 4 seconds and strongly reduces healing.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Rot is a blessing enchantment for weapons. Applies Rot to fruit users for 4 seconds and strongly reduces healing."
+      },
+      "system": {
+        "slug": "rot",
+        "section": "Blessing",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Storm",
+        "category": "Blessing",
+        "appliesTo": "Weapons",
+        "levelRange": "Rare special roll",
+        "effect": "Chains lightning damage to nearby enemies on hit.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Storm is a blessing enchantment for weapons. Chains lightning damage to nearby enemies on hit."
+      },
+      "system": {
+        "slug": "storm",
+        "section": "Blessing",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blessing of an Angler's Treasure",
+        "category": "Blessing",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Rare special roll",
+        "effect": "Raises the daily treasure limit by 2.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Blessing of an Angler's Treasure is a blessing enchantment for fishing rods. Raises the daily treasure limit by 2."
+      },
+      "system": {
+        "slug": "blessing-of-an-angler-s-treasure",
+        "section": "Blessing",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blessing of Bait Efficiency",
+        "category": "Blessing",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Rare special roll",
+        "effect": "Adds a 20% chance not to consume materials while crafting bait.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Blessing of Bait Efficiency is a blessing enchantment for fishing rods. Adds a 20% chance not to consume materials while crafting bait."
+      },
+      "system": {
+        "slug": "blessing-of-bait-efficiency",
+        "section": "Blessing",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Curse of the Reaper",
+        "category": "Curse",
+        "appliesTo": "Weapons",
+        "levelRange": "Very rare special roll",
+        "effect": "Halves health regeneration and adds life drain against players and NPCs.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Curse of the Reaper is a curse enchantment for weapons. Halves health regeneration and adds life drain against players and NPCs."
+      },
+      "system": {
+        "slug": "curse-of-the-reaper",
+        "section": "Curse",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Curse of the Thief",
+        "category": "Curse",
+        "appliesTo": "Weapons",
+        "levelRange": "Very rare special roll",
+        "effect": "Raises enemy aggression, XP and Money gains, but also raises damage taken by 25%.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Curse of the Thief is a curse enchantment for weapons. Raises enemy aggression, XP and Money gains, but also raises damage taken by 25%."
+      },
+      "system": {
+        "slug": "curse-of-the-thief",
+        "section": "Curse",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Curse of the Leviathan",
+        "category": "Curse",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Very rare special roll",
+        "effect": "Catching a specific species may disturb the Leviathan.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Curse of the Leviathan is a curse enchantment for fishing rods. Catching a specific species may disturb the Leviathan."
+      },
+      "system": {
+        "slug": "curse-of-the-leviathan",
+        "section": "Curse",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Curse of the Whale",
+        "category": "Curse",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Very rare special roll",
+        "effect": "Raises final fish weight by 15% but may consume two bait.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Curse of the Whale is a curse enchantment for fishing rods. Raises final fish weight by 15% but may consume two bait."
+      },
+      "system": {
+        "slug": "curse-of-the-whale",
+        "section": "Curse",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Curse of the Terrorshark",
+        "category": "Curse",
+        "appliesTo": "Fishing Rods",
+        "levelRange": "Very rare special roll",
+        "effect": "Starts a catch with 20% extra progress but makes fish panic faster.",
+        "availability": "Rolled with eligible scrolls",
+        "cardSummary": "Curse of the Terrorshark is a curse enchantment for fishing rods. Starts a catch with 20% extra progress but makes fish panic faster."
+      },
+      "system": {
+        "slug": "curse-of-the-terrorshark",
+        "section": "Curse",
+        "sortOrder": 38,
+        "image": null
+      }
+    }
+  ]
+}

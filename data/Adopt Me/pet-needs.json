@@ -1,0 +1,507 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Adopt Me",
+    "gameSlug": "adopt-me",
+    "collection": "pet-needs",
+    "route": "/wiki/adopt-me/pet-needs",
+    "catalogCode": "adopt-me-pet-needs",
+    "sourceItemCount": 22,
+    "itemFields": [
+      "needType",
+      "completion",
+      "bucksReward",
+      "appliesTo",
+      "unlockCondition",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "needType",
+      "completion",
+      "bucksReward",
+      "appliesTo",
+      "unlockCondition",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Need group",
+      "sectionOrder": [
+        "Everyday Needs",
+        "Location Needs",
+        "Weather Needs",
+        "Advanced Needs"
+      ],
+      "badgeField": "needType",
+      "subtitleFields": [
+        "appliesTo"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "needType",
+        "completion",
+        "bucksReward",
+        "appliesTo",
+        "unlockCondition",
+        "availability"
+      ],
+      "tableFields": [
+        "needType",
+        "completion",
+        "bucksReward",
+        "appliesTo",
+        "unlockCondition",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "needType": {
+          "kind": "chip",
+          "label": "Need type"
+        },
+        "completion": {
+          "kind": "detail",
+          "label": "How to complete"
+        },
+        "bucksReward": {
+          "kind": "chip",
+          "label": "Bucks reward"
+        },
+        "appliesTo": {
+          "kind": "plain",
+          "label": "Applies to"
+        },
+        "unlockCondition": {
+          "kind": "chip",
+          "label": "Unlock"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "Durable routine, location, recurring weather, and advanced pet need types. Removed needs and temporary event/Admin Abuse objectives are excluded.",
+      "sources": [
+        "https://www.playadopt.me/news/pet-needs-revamp",
+        "https://www.playadopt.me/news/new-weather-needs",
+        "https://adoptme.fandom.com/wiki/Bucks",
+        "https://adoptme.fandom.com/wiki/Gameplay"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Everyday Needs": 9,
+        "Location Needs": 7,
+        "Weather Needs": 4,
+        "Advanced Needs": 2
+      },
+      "rewardPolicy": "Use the current checked Bucks table. Snowman and Choose remain null; Specific Item Request stores its official 3x rule instead of a fixed value.",
+      "imagePolicy": "Text-first. Official screenshots demonstrate the shared system but do not provide distinct row art for each need."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Sleepy",
+        "needType": "Routine care",
+        "completion": "Place the pet or baby in a pet bed or crib until the need completes.",
+        "bucksReward": "10 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Sleepy is a routine care for pets and babies. It rewards 10 Bucks."
+      },
+      "system": {
+        "slug": "sleepy",
+        "section": "Everyday Needs",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hungry",
+        "needType": "Routine care",
+        "completion": "Feed the pet or baby food. Pets can also use food bowls.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Hungry is a routine care for pets and babies. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "hungry",
+        "section": "Everyday Needs",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Thirsty",
+        "needType": "Routine care",
+        "completion": "Give the pet or baby a drink. Pets can also use water bowls.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Thirsty is a routine care for pets and babies. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "thirsty",
+        "section": "Everyday Needs",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dirty",
+        "needType": "Routine care",
+        "completion": "Place the pet or baby in a shower or bathtub until the need completes.",
+        "bucksReward": "15 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Dirty is a routine care for pets and babies. It rewards 15 Bucks."
+      },
+      "system": {
+        "slug": "dirty",
+        "section": "Everyday Needs",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Catch",
+        "needType": "Pet activity",
+        "completion": "Use a throw toy with the pet.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets only",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Catch is a pet activity for pets only. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "catch",
+        "section": "Everyday Needs",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Potty",
+        "needType": "Pet activity",
+        "completion": "Take the pet to a fire hydrant, toilet, litter box, or pet potty furniture item.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets only",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Potty is a pet activity for pets only. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "potty",
+        "section": "Everyday Needs",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ride",
+        "needType": "Pet activity",
+        "completion": "Ride the pet or transport it with a vehicle or stroller.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets only",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Ride is a pet activity for pets only. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "ride",
+        "section": "Everyday Needs",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Walk",
+        "needType": "Pet activity",
+        "completion": "Walk around with the pet.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets only",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Walk is a pet activity for pets only. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "walk",
+        "section": "Everyday Needs",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pet Me",
+        "needType": "Pet interaction",
+        "completion": "Open the needs menu and pet the animal with the interaction control.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets only",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Pet Me is a pet interaction for pets only. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "pet-me",
+        "section": "Everyday Needs",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bored",
+        "needType": "Location need",
+        "completion": "Visit the Playground or use a piano in a house.",
+        "bucksReward": "20 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Bored is a location need for pets and babies. It rewards 20 Bucks."
+      },
+      "system": {
+        "slug": "bored",
+        "section": "Location Needs",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "School",
+        "needType": "Location need",
+        "completion": "Stay at the School until the need completes.",
+        "bucksReward": "20 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "School is a location need for pets and babies. It rewards 20 Bucks."
+      },
+      "system": {
+        "slug": "school",
+        "section": "Location Needs",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Beach Party",
+        "needType": "Location need",
+        "completion": "Stay at the Beach Party until the need completes.",
+        "bucksReward": "20 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Beach Party is a location need for pets and babies. It rewards 20 Bucks."
+      },
+      "system": {
+        "slug": "beach-party",
+        "section": "Location Needs",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Salon",
+        "needType": "Location need",
+        "completion": "Stay at the Salon until the need completes.",
+        "bucksReward": "20 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Salon is a location need for pets and babies. It rewards 20 Bucks."
+      },
+      "system": {
+        "slug": "salon",
+        "section": "Location Needs",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pizza Party",
+        "needType": "Location need",
+        "completion": "Stay at the Pizza Shop until the need completes.",
+        "bucksReward": "20 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Pizza Party is a location need for pets and babies. It rewards 20 Bucks."
+      },
+      "system": {
+        "slug": "pizza-party",
+        "section": "Location Needs",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Camping",
+        "needType": "Location need",
+        "completion": "Stay at the Campsite until the need completes.",
+        "bucksReward": "16 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Camping is a location need for pets and babies. It rewards 16 Bucks."
+      },
+      "system": {
+        "slug": "camping",
+        "section": "Location Needs",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sick",
+        "needType": "Care need",
+        "completion": "Use a Healing Apple, talk to Doctor Heart, or use the Hospital healing bench.",
+        "bucksReward": "16 Bucks",
+        "appliesTo": "Pets and babies",
+        "unlockCondition": null,
+        "availability": "Always available",
+        "cardSummary": "Sick is a care need for pets and babies. It rewards 16 Bucks."
+      },
+      "system": {
+        "slug": "sick",
+        "section": "Location Needs",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rain Puddle",
+        "needType": "Weather need",
+        "completion": "Take the pet to a puddle on Adoption Island during Rain weather.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets only",
+        "unlockCondition": null,
+        "availability": "Rain rotation",
+        "cardSummary": "Rain Puddle is a weather need for pets only. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "rain-puddle",
+        "section": "Weather Needs",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Leaf Pile",
+        "needType": "Weather need",
+        "completion": "Place the pet in a leaf pile on Adoption Island during Fall weather.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets only",
+        "unlockCondition": null,
+        "availability": "Fall rotation",
+        "cardSummary": "Leaf Pile is a weather need for pets only. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "leaf-pile",
+        "section": "Weather Needs",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Diving Board",
+        "needType": "Weather need",
+        "completion": "Jump from the Beach Party diving board with the pet during Desert weather.",
+        "bucksReward": "12 Bucks",
+        "appliesTo": "Pets only",
+        "unlockCondition": null,
+        "availability": "Desert rotation",
+        "cardSummary": "Diving Board is a weather need for pets only. It rewards 12 Bucks."
+      },
+      "system": {
+        "slug": "diving-board",
+        "section": "Weather Needs",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snowman",
+        "needType": "Weather need",
+        "completion": "Build a snowman with the pet during Snow weather.",
+        "bucksReward": null,
+        "appliesTo": "Pets only",
+        "unlockCondition": null,
+        "availability": "Snow rotation",
+        "cardSummary": "Snowman is a weather need for pets only."
+      },
+      "system": {
+        "slug": "snowman",
+        "section": "Weather Needs",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Choose",
+        "needType": "Advanced need",
+        "completion": "Choose one of the three offered needs as the pet's next activity.",
+        "bucksReward": null,
+        "appliesTo": "Pets only",
+        "unlockCondition": "Complete 50 total needs",
+        "availability": "Progression unlock",
+        "cardSummary": "Choose is a advanced need for pets only."
+      },
+      "system": {
+        "slug": "choose",
+        "section": "Advanced Needs",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Specific Item Request",
+        "needType": "Advanced need",
+        "completion": "Complete the exact requested Hungry, Thirsty, Catch, Walk, or Ride action or item.",
+        "bucksReward": "3x the underlying need",
+        "appliesTo": "Pets only",
+        "unlockCondition": "Complete 100 total needs",
+        "availability": "Progression unlock",
+        "cardSummary": "Specific Item Request is a advanced need for pets only. It rewards 3x the underlying need."
+      },
+      "system": {
+        "slug": "specific-item-request",
+        "section": "Advanced Needs",
+        "sortOrder": 22,
+        "image": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,411 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "aura-skins",
+    "route": "/wiki/blox-fruits/aura-skins",
+    "catalogCode": "blox-fruits-aura-skins",
+    "sourceItemCount": 20,
+    "itemFields": [
+      "rarity",
+      "source",
+      "availability",
+      "use",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "source",
+      "availability",
+      "use",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Rarity",
+      "sectionOrder": [
+        "Rare",
+        "Legendary",
+        "Mythical"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "availability"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "source",
+        "availability",
+        "use"
+      ],
+      "tableFields": [
+        "rarity",
+        "source",
+        "availability",
+        "use",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "source": {
+          "kind": "detail",
+          "label": "Obtainment"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "use": {
+          "kind": "plain",
+          "label": "Use"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "The 20 published Aura skin rows; the Hacker placeholder is excluded because its details are TBA.",
+      "sources": [
+        "https://blox-fruits.fandom.com/wiki/Skins",
+        "https://blox-fruits.fandom.com/wiki/Berries",
+        "https://progameguides.com/roblox/how-to-get-full-body-haki-in-roblox-blox-fruits/"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Rare": 10,
+        "Legendary": 5,
+        "Mythical": 5
+      },
+      "imagePolicy": "Use exact source table Aura icon files resolved through the Fandom MediaWiki API."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Orange Soda",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Orange Soda is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "orange-soda",
+        "section": "Rare",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Aura%20Skins/orange-soda.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bright Yellow",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Bright Yellow is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "bright-yellow",
+        "section": "Rare",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Aura%20Skins/bright-yellow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yellow Sunshine",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Yellow Sunshine is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "yellow-sunshine",
+        "section": "Rare",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Aura%20Skins/yellow-sunshine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Slimy Green",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Slimy Green is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "slimy-green",
+        "section": "Rare",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Aura%20Skins/slimy-green.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Lizard",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Green Lizard is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "green-lizard",
+        "section": "Rare",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Aura%20Skins/green-lizard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Jeans",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Blue Jeans is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "blue-jeans",
+        "section": "Rare",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Aura%20Skins/blue-jeans.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Plump Purple",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Plump Purple is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "plump-purple",
+        "section": "Rare",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Aura%20Skins/plump-purple.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fiery Rose",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Fiery Rose is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "fiery-rose",
+        "section": "Rare",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Aura%20Skins/fiery-rose.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heat Wave",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Heat Wave is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "heat-wave",
+        "section": "Rare",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Aura%20Skins/heat-wave.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Absolute Zero",
+        "rarity": "Rare",
+        "source": "Barista recipe",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Absolute Zero is a Rare Aura skin obtained through Barista recipe."
+      },
+      "system": {
+        "slug": "absolute-zero",
+        "section": "Rare",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Aura%20Skins/absolute-zero.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snow White",
+        "rarity": "Legendary",
+        "source": "Barista recipe; unlocks True Heart",
+        "availability": "Obtainable",
+        "use": "Required color for summoning rip_indra True Form",
+        "cardSummary": "Snow White is a Legendary Aura skin obtained through Barista recipe; unlocks True Heart."
+      },
+      "system": {
+        "slug": "snow-white",
+        "section": "Legendary",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Aura%20Skins/snow-white.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pure Red",
+        "rarity": "Legendary",
+        "source": "Barista recipe; unlocks Bringer of Doom",
+        "availability": "Obtainable",
+        "use": "Required color for summoning rip_indra True Form",
+        "cardSummary": "Pure Red is a Legendary Aura skin obtained through Barista recipe; unlocks Bringer of Doom."
+      },
+      "system": {
+        "slug": "pure-red",
+        "section": "Legendary",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Aura%20Skins/pure-red.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Winter Sky",
+        "rarity": "Legendary",
+        "source": "Barista recipe; unlocks Realm Creator",
+        "availability": "Obtainable",
+        "use": "Required color for summoning rip_indra True Form",
+        "cardSummary": "Winter Sky is a Legendary Aura skin obtained through Barista recipe; unlocks Realm Creator."
+      },
+      "system": {
+        "slug": "winter-sky",
+        "section": "Legendary",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Aura%20Skins/winter-sky.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aquamarine",
+        "rarity": "Legendary",
+        "source": "Party Shop for 1,000 Confetti",
+        "availability": "Past event",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Aquamarine is a Legendary Aura skin obtained through Party Shop for 1,000 Confetti."
+      },
+      "system": {
+        "slug": "aquamarine",
+        "section": "Legendary",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Aura%20Skins/aquamarine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Light Pink",
+        "rarity": "Legendary",
+        "source": "Valentine Shop for 1,000 Hearts",
+        "availability": "Past event",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Light Pink is a Legendary Aura skin obtained through Valentine Shop for 1,000 Hearts."
+      },
+      "system": {
+        "slug": "light-pink",
+        "section": "Legendary",
+        "sortOrder": 15,
+        "image": "/Blox%20Fruits/Aura%20Skins/light-pink.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon",
+        "rarity": "Mythical",
+        "source": "Barista after the sixth Dojo Trainer quest",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Dragon is a Mythical Aura skin obtained through Barista after the sixth Dojo Trainer quest."
+      },
+      "system": {
+        "slug": "dragon",
+        "section": "Mythical",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Aura%20Skins/dragon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Saviour",
+        "rarity": "Mythical",
+        "source": "Horned Man quest",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Rainbow Saviour is a Mythical Aura skin obtained through Horned Man quest."
+      },
+      "system": {
+        "slug": "rainbow-saviour",
+        "section": "Mythical",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Aura%20Skins/rainbow-saviour.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kitsune",
+        "rarity": "Mythical",
+        "source": "Kitsune Shrine with at least 15 Azure Embers",
+        "availability": "Obtainable",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Kitsune is a Mythical Aura skin obtained through Kitsune Shrine with at least 15 Azure Embers."
+      },
+      "system": {
+        "slug": "kitsune",
+        "section": "Mythical",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Aura%20Skins/kitsune.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oni",
+        "rarity": "Mythical",
+        "source": "Red Gacha or Party Gacha",
+        "availability": "Past event",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Oni is a Mythical Aura skin obtained through Red Gacha or Party Gacha."
+      },
+      "system": {
+        "slug": "oni",
+        "section": "Mythical",
+        "sortOrder": 19,
+        "image": "/Blox%20Fruits/Aura%20Skins/oni.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial",
+        "rarity": "Mythical",
+        "source": "Celestial Gacha or Party Gacha",
+        "availability": "Past event",
+        "use": "Changes Aura, sword, and gun glow color",
+        "cardSummary": "Celestial is a Mythical Aura skin obtained through Celestial Gacha or Party Gacha."
+      },
+      "system": {
+        "slug": "celestial",
+        "section": "Mythical",
+        "sortOrder": 20,
+        "image": "/Blox%20Fruits/Aura%20Skins/celestial.png"
+      }
+    }
+  ]
+}

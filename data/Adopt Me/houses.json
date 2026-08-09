@@ -1,0 +1,1081 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Adopt Me",
+    "gameSlug": "adopt-me",
+    "collection": "houses",
+    "route": "/wiki/adopt-me/houses",
+    "catalogCode": "adopt-me-houses",
+    "sourceItemCount": 54,
+    "itemFields": [
+      "purchaseRoute",
+      "price",
+      "availability",
+      "floors",
+      "rooms",
+      "specialFeature",
+      "cardSummary"
+    ],
+    "columns": [
+      "purchaseRoute",
+      "price",
+      "availability",
+      "floors",
+      "rooms",
+      "specialFeature",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "How to get",
+      "sectionOrder": [
+        "Bucks Homes",
+        "Robux and Bundle Homes",
+        "Trade-Only or Reward Homes"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "purchaseRoute"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "purchaseRoute",
+        "price",
+        "availability",
+        "floors",
+        "rooms",
+        "specialFeature"
+      ],
+      "tableFields": [
+        "purchaseRoute",
+        "price",
+        "availability",
+        "floors",
+        "rooms",
+        "specialFeature",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "purchaseRoute": {
+          "kind": "plain",
+          "label": "How to get"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "floors": {
+          "kind": "chip",
+          "label": "Floors"
+        },
+        "rooms": {
+          "kind": "chip",
+          "label": "Rooms"
+        },
+        "specialFeature": {
+          "kind": "detail",
+          "label": "Notable feature"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "The named house templates in the current Adopt Me Wiki Types of Houses roster. Furniture, wall/floor surfaces, player builds, map buildings, and trade values are excluded.",
+      "sources": [
+        "https://adoptme.fandom.com/wiki/Houses",
+        "https://www.playadopt.me/news/house-trading",
+        "https://adoptme.noob.wiki/"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Bucks Homes": 35,
+        "Robux and Bundle Homes": 5,
+        "Trade-Only or Reward Homes": 14
+      },
+      "pricePolicy": "Only active acquisition prices are public. Historical prices are hidden for trade-only houses.",
+      "sizePolicy": "Floor and room counts are included only when the source states them.",
+      "imagePolicy": "Use exact exterior art from the roster or individual house page."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Beehive House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "5,450 Bucks",
+        "availability": "Available",
+        "floors": "3",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Beehive House costs 5,450 Bucks, has 3 floors."
+      },
+      "system": {
+        "slug": "beehive-house",
+        "section": "Bucks Homes",
+        "sortOrder": 1,
+        "image": "/Adopt%20Me/Houses/beehive-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunker House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "750 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Bunker House costs 750 Bucks, has 1 floor."
+      },
+      "system": {
+        "slug": "bunker-house",
+        "section": "Bucks Homes",
+        "sortOrder": 2,
+        "image": "/Adopt%20Me/Houses/bunker-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Castle",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,499 Bucks",
+        "availability": "Available",
+        "floors": "3",
+        "rooms": "9",
+        "specialFeature": null,
+        "cardSummary": "Castle costs 1,499 Bucks, has 3 floors, has 9 rooms."
+      },
+      "system": {
+        "slug": "castle",
+        "section": "Bucks Homes",
+        "sortOrder": 3,
+        "image": "/Adopt%20Me/Houses/castle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Container Home",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,800 Bucks",
+        "availability": "Available",
+        "floors": "3",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Container Home costs 1,800 Bucks, has 3 floors."
+      },
+      "system": {
+        "slug": "container-home",
+        "section": "Bucks Homes",
+        "sortOrder": 4,
+        "image": "/Adopt%20Me/Houses/container-home.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crooked House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,000 Bucks",
+        "availability": "Available",
+        "floors": "2",
+        "rooms": "4",
+        "specialFeature": null,
+        "cardSummary": "Crooked House costs 2,000 Bucks, has 2 floors, has 4 rooms."
+      },
+      "system": {
+        "slug": "crooked-house",
+        "section": "Bucks Homes",
+        "sortOrder": 5,
+        "image": "/Adopt%20Me/Houses/crooked-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Donut Shop",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,299 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Donut Shop costs 1,299 Bucks."
+      },
+      "system": {
+        "slug": "donut-shop",
+        "section": "Bucks Homes",
+        "sortOrder": 6,
+        "image": "/Adopt%20Me/Houses/donut-shop.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon's Castle",
+        "purchaseRoute": "Bucks purchase",
+        "price": "3,000 Bucks",
+        "availability": "Available",
+        "floors": "2",
+        "rooms": "4",
+        "specialFeature": null,
+        "cardSummary": "Dragon's Castle costs 3,000 Bucks, has 2 floors, has 4 rooms."
+      },
+      "system": {
+        "slug": "dragons-castle",
+        "section": "Bucks Homes",
+        "sortOrder": 7,
+        "image": "/Adopt%20Me/Houses/dragons-castle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Estate",
+        "purchaseRoute": "Bucks purchase",
+        "price": "972 Bucks",
+        "availability": "Available",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Estate costs 972 Bucks, has 2 floors."
+      },
+      "system": {
+        "slug": "estate",
+        "section": "Bucks Homes",
+        "sortOrder": 8,
+        "image": "/Adopt%20Me/Houses/estate.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Expandable Friendly Home",
+        "purchaseRoute": "Bucks purchase",
+        "price": "675 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": "Supports paid floor expansion.",
+        "cardSummary": "Expandable Friendly Home costs 675 Bucks, has 1 floor. Supports paid floor expansion."
+      },
+      "system": {
+        "slug": "expandable-friendly-home",
+        "section": "Bucks Homes",
+        "sortOrder": 9,
+        "image": "/Adopt%20Me/Houses/expandable-friendly-home.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Expandable Hillside Mansion",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,500 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": "Supports paid floor expansion.",
+        "cardSummary": "Expandable Hillside Mansion costs 1,500 Bucks, has 1 floor. Supports paid floor expansion."
+      },
+      "system": {
+        "slug": "expandable-hillside-mansion",
+        "section": "Bucks Homes",
+        "sortOrder": 10,
+        "image": "/Adopt%20Me/Houses/expandable-hillside-mansion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fairy House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,100 Bucks",
+        "availability": "Available",
+        "floors": "3",
+        "rooms": "3",
+        "specialFeature": null,
+        "cardSummary": "Fairy House costs 1,100 Bucks, has 3 floors, has 3 rooms."
+      },
+      "system": {
+        "slug": "fairy-house",
+        "section": "Bucks Homes",
+        "sortOrder": 11,
+        "image": "/Adopt%20Me/Houses/fairy-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Family Home",
+        "purchaseRoute": "Bucks purchase",
+        "price": "489 Bucks",
+        "availability": "Available",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": "Cannot host parties.",
+        "cardSummary": "Family Home costs 489 Bucks, has 2 floors. Cannot host parties."
+      },
+      "system": {
+        "slug": "family-home",
+        "section": "Bucks Homes",
+        "sortOrder": 12,
+        "image": "/Adopt%20Me/Houses/family-home.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Futuristic House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,500 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": "5",
+        "specialFeature": "Includes a pool area.",
+        "cardSummary": "Futuristic House costs 2,500 Bucks, has 5 rooms. Includes a pool area."
+      },
+      "system": {
+        "slug": "futuristic-house",
+        "section": "Bucks Homes",
+        "sortOrder": 13,
+        "image": "/Adopt%20Me/Houses/futuristic-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,850 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Gingerbread House costs 1,850 Bucks."
+      },
+      "system": {
+        "slug": "gingerbread-house",
+        "section": "Bucks Homes",
+        "sortOrder": 14,
+        "image": "/Adopt%20Me/Houses/gingerbread-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween Hotel",
+        "purchaseRoute": "Bucks purchase",
+        "price": "7,000 Bucks",
+        "availability": "Available",
+        "floors": "3",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Halloween Hotel costs 7,000 Bucks, has 3 floors."
+      },
+      "system": {
+        "slug": "halloween-hotel",
+        "section": "Bucks Homes",
+        "sortOrder": 15,
+        "image": "/Adopt%20Me/Houses/halloween-hotel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Haunted House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,950 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Haunted House costs 1,950 Bucks."
+      },
+      "system": {
+        "slug": "haunted-house",
+        "section": "Bucks Homes",
+        "sortOrder": 16,
+        "image": "/Adopt%20Me/Houses/haunted-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hollywood House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "4,500 Bucks",
+        "availability": "Available",
+        "floors": "3",
+        "rooms": "4",
+        "specialFeature": "Has a customizable billboard.",
+        "cardSummary": "Hollywood House costs 4,500 Bucks, has 3 floors, has 4 rooms. Has a customizable billboard."
+      },
+      "system": {
+        "slug": "hollywood-house",
+        "section": "Bucks Homes",
+        "sortOrder": 17,
+        "image": "/Adopt%20Me/Houses/hollywood-house.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Cream House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,150 Bucks",
+        "availability": "Available",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Ice Cream House costs 2,150 Bucks, has 2 floors."
+      },
+      "system": {
+        "slug": "ice-cream-house",
+        "section": "Bucks Homes",
+        "sortOrder": 18,
+        "image": "/Adopt%20Me/Houses/ice-cream-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Igloo Home",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,999 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Igloo Home costs 2,999 Bucks, has 1 floor."
+      },
+      "system": {
+        "slug": "igloo-home",
+        "section": "Bucks Homes",
+        "sortOrder": 19,
+        "image": "/Adopt%20Me/Houses/igloo-home.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Korean House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,200 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Korean House costs 2,200 Bucks, has 1 floor."
+      },
+      "system": {
+        "slug": "korean-house",
+        "section": "Bucks Homes",
+        "sortOrder": 20,
+        "image": "/Adopt%20Me/Houses/korean-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,000 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Lunar House costs 2,000 Bucks."
+      },
+      "system": {
+        "slug": "lunar-house",
+        "section": "Bucks Homes",
+        "sortOrder": 21,
+        "image": "/Adopt%20Me/Houses/lunar-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Luxury Apartments",
+        "purchaseRoute": "Bucks purchase",
+        "price": "8,000 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": "22",
+        "specialFeature": "Includes a pool area.",
+        "cardSummary": "Luxury Apartments costs 8,000 Bucks, has 22 rooms. Includes a pool area."
+      },
+      "system": {
+        "slug": "luxury-apartments",
+        "section": "Bucks Homes",
+        "sortOrder": 22,
+        "image": "/Adopt%20Me/Houses/luxury-apartments.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Moon House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "4,000 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Moon House costs 4,000 Bucks, has 1 floor."
+      },
+      "system": {
+        "slug": "moon-house",
+        "section": "Bucks Homes",
+        "sortOrder": 23,
+        "image": "/Adopt%20Me/Houses/moon-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mountain House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "3,000 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Mountain House costs 3,000 Bucks, has 1 floor."
+      },
+      "system": {
+        "slug": "mountain-house",
+        "section": "Bucks Homes",
+        "sortOrder": 24,
+        "image": "/Adopt%20Me/Houses/mountain-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Party House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "3,575 Bucks",
+        "availability": "Available",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Party House costs 3,575 Bucks, has 2 floors."
+      },
+      "system": {
+        "slug": "party-house",
+        "section": "Bucks Homes",
+        "sortOrder": 25,
+        "image": "/Adopt%20Me/Houses/party-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pizza Place",
+        "purchaseRoute": "Bucks purchase",
+        "price": "500 Bucks",
+        "availability": "Available",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": "Includes a Cash Register.",
+        "cardSummary": "Pizza Place costs 500 Bucks, has 2 floors. Includes a Cash Register."
+      },
+      "system": {
+        "slug": "pizza-place",
+        "section": "Bucks Homes",
+        "sortOrder": 26,
+        "image": "/Adopt%20Me/Houses/pizza-place.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Queenslander House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,650 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Queenslander House costs 1,650 Bucks, has 1 floor."
+      },
+      "system": {
+        "slug": "queenslander-house",
+        "section": "Bucks Homes",
+        "sortOrder": 27,
+        "image": "/Adopt%20Me/Houses/queenslander-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Racetrack House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,100 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Racetrack House costs 2,100 Bucks."
+      },
+      "system": {
+        "slug": "racetrack-house",
+        "section": "Bucks Homes",
+        "sortOrder": 28,
+        "image": "/Adopt%20Me/Houses/racetrack-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Royal Palace",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,750 Bucks",
+        "availability": "Available",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Royal Palace costs 2,750 Bucks, has 2 floors."
+      },
+      "system": {
+        "slug": "royal-palace",
+        "section": "Bucks Homes",
+        "sortOrder": 29,
+        "image": "/Adopt%20Me/Houses/royal-palace.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Safari Home",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,100 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Safari Home costs 2,100 Bucks, has 1 floor."
+      },
+      "system": {
+        "slug": "safari-home",
+        "section": "Bucks Homes",
+        "sortOrder": 30,
+        "image": "/Adopt%20Me/Houses/safari-home.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Sandbox Island",
+        "purchaseRoute": "Bucks purchase",
+        "price": "2,500 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": null,
+        "specialFeature": "Includes a beach island area that vehicles can enter.",
+        "cardSummary": "Sandbox Island costs 2,500 Bucks. Includes a beach island area that vehicles can enter."
+      },
+      "system": {
+        "slug": "sandbox-island",
+        "section": "Bucks Homes",
+        "sortOrder": 31,
+        "image": "/Adopt%20Me/Houses/sandbox-island.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Scary House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,800 Bucks",
+        "availability": "Available",
+        "floors": "4",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Scary House costs 1,800 Bucks, has 4 floors."
+      },
+      "system": {
+        "slug": "scary-house",
+        "section": "Bucks Homes",
+        "sortOrder": 32,
+        "image": "/Adopt%20Me/Houses/scary-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shop House",
+        "purchaseRoute": "Bucks purchase",
+        "price": "1,750 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": "4",
+        "specialFeature": "Has a customizable shop logo.",
+        "cardSummary": "Shop House costs 1,750 Bucks, has 4 rooms. Has a customizable shop logo."
+      },
+      "system": {
+        "slug": "shop-house",
+        "section": "Bucks Homes",
+        "sortOrder": 33,
+        "image": "/Adopt%20Me/Houses/shop-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tiny Home",
+        "purchaseRoute": "Free starter home or Bucks purchase",
+        "price": "240 Bucks",
+        "availability": "Available",
+        "floors": null,
+        "rooms": "3",
+        "specialFeature": "Cannot host parties.",
+        "cardSummary": "Tiny Home costs 240 Bucks, has 3 rooms. Cannot host parties."
+      },
+      "system": {
+        "slug": "tiny-home",
+        "section": "Bucks Homes",
+        "sortOrder": 34,
+        "image": "/Adopt%20Me/Houses/tiny-home.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Treehouse",
+        "purchaseRoute": "Bucks purchase",
+        "price": "800 Bucks",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": "3",
+        "specialFeature": null,
+        "cardSummary": "Treehouse costs 800 Bucks, has 1 floor, has 3 rooms."
+      },
+      "system": {
+        "slug": "treehouse",
+        "section": "Bucks Homes",
+        "sortOrder": 35,
+        "image": "/Adopt%20Me/Houses/treehouse.png"
+      }
+    },
+    {
+      "item": {
+        "name": "A Very Very Important Person’s House",
+        "purchaseRoute": "Robux bundle or gamepass",
+        "price": "640 Robux",
+        "availability": "Available",
+        "floors": "4",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "A Very Very Important Person’s House costs 640 Robux, has 4 floors."
+      },
+      "system": {
+        "slug": "a-very-very-important-persons-house",
+        "section": "Robux and Bundle Homes",
+        "sortOrder": 36,
+        "image": "/Adopt%20Me/Houses/a-very-very-important-persons-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Expandable Luxury Mansion",
+        "purchaseRoute": "Robux purchase",
+        "price": "380 Robux",
+        "availability": "Available",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": "Supports paid floor expansion.",
+        "cardSummary": "Expandable Luxury Mansion costs 380 Robux, has 1 floor. Supports paid floor expansion."
+      },
+      "system": {
+        "slug": "expandable-luxury-mansion",
+        "section": "Robux and Bundle Homes",
+        "sortOrder": 37,
+        "image": "/Adopt%20Me/Houses/expandable-luxury-mansion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Millionaire Mansion",
+        "purchaseRoute": "Robux purchase",
+        "price": "1,060 Robux",
+        "availability": "Available",
+        "floors": "3",
+        "rooms": null,
+        "specialFeature": "Includes a vehicle driveway.",
+        "cardSummary": "Millionaire Mansion costs 1,060 Robux, has 3 floors. Includes a vehicle driveway."
+      },
+      "system": {
+        "slug": "millionaire-mansion",
+        "section": "Robux and Bundle Homes",
+        "sortOrder": 38,
+        "image": "/Adopt%20Me/Houses/millionaire-mansion.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Space Fleet House",
+        "purchaseRoute": "Robux bundle or gamepass",
+        "price": "1,060 Robux",
+        "availability": "Available",
+        "floors": "3",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Space Fleet House costs 1,060 Robux, has 3 floors."
+      },
+      "system": {
+        "slug": "space-fleet-house",
+        "section": "Robux and Bundle Homes",
+        "sortOrder": 39,
+        "image": "/Adopt%20Me/Houses/space-fleet-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Toyshop House",
+        "purchaseRoute": "Robux purchase",
+        "price": "430 Robux",
+        "availability": "Available",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Toyshop House costs 430 Robux, has 2 floors."
+      },
+      "system": {
+        "slug": "toyshop-house",
+        "section": "Robux and Bundle Homes",
+        "sortOrder": 40,
+        "image": "/Adopt%20Me/Houses/toyshop-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Biodome Home",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Biodome Home is obtained through house trading, has 2 floors."
+      },
+      "system": {
+        "slug": "biodome-home",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 41,
+        "image": "/Adopt%20Me/Houses/biodome-home.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Celebrity Mansion",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "3",
+        "rooms": null,
+        "specialFeature": "Includes a pool area.",
+        "cardSummary": "Celebrity Mansion is obtained through house trading, has 3 floors. Includes a pool area."
+      },
+      "system": {
+        "slug": "celebrity-mansion",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 42,
+        "image": "/Adopt%20Me/Houses/celebrity-mansion.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Pudding House",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Christmas Pudding House is obtained through house trading, has 2 floors."
+      },
+      "system": {
+        "slug": "christmas-pudding-house",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 43,
+        "image": "/Adopt%20Me/Houses/christmas-pudding-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cozy Cabin",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": "Includes an ice rink.",
+        "cardSummary": "Cozy Cabin is obtained through house trading, has 2 floors. Includes an ice rink."
+      },
+      "system": {
+        "slug": "cozy-cabin",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 44,
+        "image": "/Adopt%20Me/Houses/cozy-cabin.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Eco Natural Earth House",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "3",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Eco Natural Earth House is obtained through house trading, has 3 floors."
+      },
+      "system": {
+        "slug": "eco-natural-earth-house",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 45,
+        "image": "/Adopt%20Me/Houses/eco-natural-earth-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Expandable Dino House",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": "Supports paid floor expansion.",
+        "cardSummary": "Expandable Dino House is obtained through house trading, has 1 floor. Supports paid floor expansion."
+      },
+      "system": {
+        "slug": "expandable-dino-house",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 46,
+        "image": "/Adopt%20Me/Houses/expandable-dino-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hospital Home",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Hospital Home is obtained through house trading, has 1 floor."
+      },
+      "system": {
+        "slug": "hospital-home",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 47,
+        "image": "/Adopt%20Me/Houses/hospital-home.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Mansion",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "3",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Mansion is obtained through house trading, has 3 floors."
+      },
+      "system": {
+        "slug": "mansion",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 48,
+        "image": "/Adopt%20Me/Houses/mansion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mermaid Mansion",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": null,
+        "rooms": "4",
+        "specialFeature": "Includes a pool area.",
+        "cardSummary": "Mermaid Mansion is obtained through house trading, has 4 rooms. Includes a pool area."
+      },
+      "system": {
+        "slug": "mermaid-mansion",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 49,
+        "image": "/Adopt%20Me/Houses/mermaid-mansion.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Modern Mansion",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Modern Mansion is obtained through house trading, has 2 floors."
+      },
+      "system": {
+        "slug": "modern-mansion",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 50,
+        "image": "/Adopt%20Me/Houses/modern-mansion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pirate Ship House",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": null,
+        "rooms": "7",
+        "specialFeature": null,
+        "cardSummary": "Pirate Ship House is obtained through house trading, has 7 rooms."
+      },
+      "system": {
+        "slug": "pirate-ship-house",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 51,
+        "image": "/Adopt%20Me/Houses/pirate-ship-house.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ruler's Castle",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "2",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Ruler's Castle is obtained through house trading, has 2 floors."
+      },
+      "system": {
+        "slug": "rulers-castle",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 52,
+        "image": "/Adopt%20Me/Houses/rulers-castle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Schoolhouse Home",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": "1",
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Schoolhouse Home is obtained through house trading, has 1 floor."
+      },
+      "system": {
+        "slug": "schoolhouse-home",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 53,
+        "image": "/Adopt%20Me/Houses/schoolhouse-home.jpg"
+      }
+    },
+    {
+      "item": {
+        "name": "Soccer Stadium",
+        "purchaseRoute": "Trading",
+        "price": null,
+        "availability": "Trade only",
+        "floors": null,
+        "rooms": null,
+        "specialFeature": null,
+        "cardSummary": "Soccer Stadium is obtained through house trading."
+      },
+      "system": {
+        "slug": "soccer-stadium",
+        "section": "Trade-Only or Reward Homes",
+        "sortOrder": 54,
+        "image": "/Adopt%20Me/Houses/soccer-stadium.png"
+      }
+    }
+  ]
+}

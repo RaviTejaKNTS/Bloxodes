@@ -3,6 +3,7 @@ import type { GameCollectionGroup } from "../types";
 export const adoptMeCollectionGroup = {
     gameSlug: "adopt-me",
     gameName: "Adopt Me",
+    universeId: 383310974,
     dataDir: "Adopt Me",
     universeNames: ["Adopt Me", "Adopt Me!"],
     collections: [
@@ -19,6 +20,14 @@ export const adoptMeCollectionGroup = {
       "star-rewards",
       "strollers",
       "toys",
-      "vehicles"
+      "vehicles",
+      "pet-accessories",
+      "stickers",
+      "houses",
+      "locations",
+      "npcs",
+      "pet-needs",
+      "task-board-tasks",
+      "weather"
     ]
   } satisfies GameCollectionGroup;

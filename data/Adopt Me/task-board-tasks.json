@@ -1,0 +1,1239 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Adopt Me",
+    "gameSlug": "adopt-me",
+    "collection": "task-board-tasks",
+    "route": "/wiki/adopt-me/task-board-tasks",
+    "catalogCode": "adopt-me-task-board-tasks",
+    "sourceItemCount": 63,
+    "itemFields": [
+      "taskFamily",
+      "objective",
+      "reward",
+      "slotType",
+      "activityType",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "taskFamily",
+      "objective",
+      "reward",
+      "slotType",
+      "activityType",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Task slot",
+      "sectionOrder": [
+        "Daily Tasks",
+        "Bonus Tasks"
+      ],
+      "badgeField": "slotType",
+      "subtitleFields": [
+        "taskFamily"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "taskFamily",
+        "objective",
+        "reward",
+        "slotType",
+        "activityType",
+        "availability"
+      ],
+      "tableFields": [
+        "taskFamily",
+        "objective",
+        "reward",
+        "slotType",
+        "activityType",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "taskFamily": {
+          "kind": "plain",
+          "label": "Task family"
+        },
+        "objective": {
+          "kind": "detail",
+          "label": "Objective"
+        },
+        "reward": {
+          "kind": "chip",
+          "label": "Reward"
+        },
+        "slotType": {
+          "kind": "chip",
+          "label": "Slot"
+        },
+        "activityType": {
+          "kind": "plain",
+          "label": "Activity"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Availability"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    },
+    "notes": {
+      "scope": "Only rows under the current post-revamp base Task Board table. Event, tutorial, and old pre-revamp tasks are excluded.",
+      "sources": [
+        "https://www.playadopt.me/news/taskboard-update-notes",
+        "https://adoptme.fandom.com/wiki/Task_Board"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Daily Tasks": 58,
+        "Bonus Tasks": 5
+      },
+      "rewardPolicy": "Current base table rewards only. Old RGB-box rules and event currencies are excluded.",
+      "imagePolicy": "Text-first because tasks share the board UI and do not have distinct row art."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Needy: Common Pet, 5 Needs",
+        "taskFamily": "Needy",
+        "objective": "Complete 5 Needs on a Common pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Needy: Common Pet, 5 Needs asks you to complete 5 Needs on a Common pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needy-common-pet-5-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Needy: Uncommon Pet, 5 Needs",
+        "taskFamily": "Needy",
+        "objective": "Complete 5 Needs on a Uncommon pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Needy: Uncommon Pet, 5 Needs asks you to complete 5 Needs on a Uncommon pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needy-uncommon-pet-5-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Needy: Rare Pet, 5 Needs",
+        "taskFamily": "Needy",
+        "objective": "Complete 5 Needs on a Rare pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Needy: Rare Pet, 5 Needs asks you to complete 5 Needs on a Rare pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needy-rare-pet-5-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Needy: Ultra-Rare Pet, 5 Needs",
+        "taskFamily": "Needy",
+        "objective": "Complete 5 Needs on a Ultra-Rare pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Needy: Ultra-Rare Pet, 5 Needs asks you to complete 5 Needs on a Ultra-Rare pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needy-ultra-rare-pet-5-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Needy: Legendary Pet, 5 Needs",
+        "taskFamily": "Needy",
+        "objective": "Complete 5 Needs on a Legendary pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Needy: Legendary Pet, 5 Needs asks you to complete 5 Needs on a Legendary pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needy-legendary-pet-5-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Needier: Common Pet, 10 Needs",
+        "taskFamily": "Needier",
+        "objective": "Complete 10 Needs on a Common pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "Needier: Common Pet, 10 Needs asks you to complete 10 Needs on a Common pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needier-common-pet-10-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Needier: Uncommon Pet, 10 Needs",
+        "taskFamily": "Needier",
+        "objective": "Complete 10 Needs on a Uncommon pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "Needier: Uncommon Pet, 10 Needs asks you to complete 10 Needs on a Uncommon pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needier-uncommon-pet-10-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Needier: Rare Pet, 10 Needs",
+        "taskFamily": "Needier",
+        "objective": "Complete 10 Needs on a Rare pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "Needier: Rare Pet, 10 Needs asks you to complete 10 Needs on a Rare pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needier-rare-pet-10-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Needier: Ultra-Rare Pet, 10 Needs",
+        "taskFamily": "Needier",
+        "objective": "Complete 10 Needs on a Ultra-Rare pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "Needier: Ultra-Rare Pet, 10 Needs asks you to complete 10 Needs on a Ultra-Rare pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needier-ultra-rare-pet-10-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Needier: Legendary Pet, 10 Needs",
+        "taskFamily": "Needier",
+        "objective": "Complete 10 Needs on a Legendary pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "Needier: Legendary Pet, 10 Needs asks you to complete 10 Needs on a Legendary pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "needier-legendary-pet-10-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Neediest: Common Pet, 15 Needs",
+        "taskFamily": "The Neediest",
+        "objective": "Complete 15 Needs on a Common pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "The Neediest: Common Pet, 15 Needs asks you to complete 15 Needs on a Common pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "the-neediest-common-pet-15-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Neediest: Uncommon Pet, 15 Needs",
+        "taskFamily": "The Neediest",
+        "objective": "Complete 15 Needs on a Uncommon pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "The Neediest: Uncommon Pet, 15 Needs asks you to complete 15 Needs on a Uncommon pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "the-neediest-uncommon-pet-15-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Neediest: Rare Pet, 15 Needs",
+        "taskFamily": "The Neediest",
+        "objective": "Complete 15 Needs on a Rare pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "The Neediest: Rare Pet, 15 Needs asks you to complete 15 Needs on a Rare pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "the-neediest-rare-pet-15-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Neediest: Ultra-Rare Pet, 15 Needs",
+        "taskFamily": "The Neediest",
+        "objective": "Complete 15 Needs on a Ultra-Rare pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "The Neediest: Ultra-Rare Pet, 15 Needs asks you to complete 15 Needs on a Ultra-Rare pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "the-neediest-ultra-rare-pet-15-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Neediest: Legendary Pet, 15 Needs",
+        "taskFamily": "The Neediest",
+        "objective": "Complete 15 Needs on a Legendary pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "General",
+        "availability": "Current pool",
+        "cardSummary": "The Neediest: Legendary Pet, 15 Needs asks you to complete 15 Needs on a Legendary pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "the-neediest-legendary-pet-15-needs",
+        "section": "Daily Tasks",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "High Maintenance",
+        "taskFamily": "High Maintenance",
+        "objective": "Complete 10 Needs on a Neon or Mega Neon pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "High Maintenance asks you to complete 10 Needs on a Neon or Mega Neon pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "high-maintenance",
+        "section": "Daily Tasks",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Higher Maintenance",
+        "taskFamily": "Higher Maintenance",
+        "objective": "Complete 15 Needs on a Neon or Mega Neon pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Higher Maintenance asks you to complete 15 Needs on a Neon or Mega Neon pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "higher-maintenance",
+        "section": "Daily Tasks",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Routine: Catch",
+        "taskFamily": "Daily Routine",
+        "objective": "Complete the Catch Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Daily Routine: Catch asks you to complete the Catch Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "daily-routine-catch",
+        "section": "Daily Tasks",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Routine: Dirty",
+        "taskFamily": "Daily Routine",
+        "objective": "Complete the Dirty Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Daily Routine: Dirty asks you to complete the Dirty Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "daily-routine-dirty",
+        "section": "Daily Tasks",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Routine: Pet Me",
+        "taskFamily": "Daily Routine",
+        "objective": "Complete the Pet Me Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Daily Routine: Pet Me asks you to complete the Pet Me Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "daily-routine-pet-me",
+        "section": "Daily Tasks",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Routine: Potty",
+        "taskFamily": "Daily Routine",
+        "objective": "Complete the Potty Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Daily Routine: Potty asks you to complete the Potty Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "daily-routine-potty",
+        "section": "Daily Tasks",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Routine: Ride",
+        "taskFamily": "Daily Routine",
+        "objective": "Complete the Ride Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Daily Routine: Ride asks you to complete the Ride Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "daily-routine-ride",
+        "section": "Daily Tasks",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Routine: Sleepy",
+        "taskFamily": "Daily Routine",
+        "objective": "Complete the Sleepy Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Daily Routine: Sleepy asks you to complete the Sleepy Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "daily-routine-sleepy",
+        "section": "Daily Tasks",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Routine: Walk",
+        "taskFamily": "Daily Routine",
+        "objective": "Complete the Walk Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Daily Routine: Walk asks you to complete the Walk Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "daily-routine-walk",
+        "section": "Daily Tasks",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Running Errands: Beach Party",
+        "taskFamily": "Running Errands",
+        "objective": "Complete the Beach Party Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Running Errands: Beach Party asks you to complete the Beach Party Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "running-errands-beach-party",
+        "section": "Daily Tasks",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Running Errands: Bored",
+        "taskFamily": "Running Errands",
+        "objective": "Complete the Bored Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Running Errands: Bored asks you to complete the Bored Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "running-errands-bored",
+        "section": "Daily Tasks",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Running Errands: Camping",
+        "taskFamily": "Running Errands",
+        "objective": "Complete the Camping Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Running Errands: Camping asks you to complete the Camping Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "running-errands-camping",
+        "section": "Daily Tasks",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Running Errands: Pizza Party",
+        "taskFamily": "Running Errands",
+        "objective": "Complete the Pizza Party Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Running Errands: Pizza Party asks you to complete the Pizza Party Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "running-errands-pizza-party",
+        "section": "Daily Tasks",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Running Errands: Salon",
+        "taskFamily": "Running Errands",
+        "objective": "Complete the Salon Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Running Errands: Salon asks you to complete the Salon Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "running-errands-salon",
+        "section": "Daily Tasks",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Running Errands: School",
+        "taskFamily": "Running Errands",
+        "objective": "Complete the School Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Running Errands: School asks you to complete the School Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "running-errands-school",
+        "section": "Daily Tasks",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Running Errands: Sick",
+        "taskFamily": "Running Errands",
+        "objective": "Complete the Sick Need on a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Need completion",
+        "availability": "Current pool",
+        "cardSummary": "Running Errands: Sick asks you to complete the Sick Need on a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "running-errands-sick",
+        "section": "Daily Tasks",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "They Grow Up So Fast",
+        "taskFamily": "They Grow Up So Fast",
+        "objective": "Earn 5000 pet XP",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Pet progression",
+        "availability": "Current pool",
+        "cardSummary": "They Grow Up So Fast asks you to earn 5000 pet XP and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "they-grow-up-so-fast",
+        "section": "Daily Tasks",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Level-Up!",
+        "taskFamily": "Level-Up!",
+        "objective": "Age your Pet 1 Level",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Pet progression",
+        "availability": "Current pool",
+        "cardSummary": "Level-Up! asks you to age your Pet 1 Level and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "level-up",
+        "section": "Daily Tasks",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Showstopper",
+        "taskFamily": "Showstopper",
+        "objective": "Make your pet do a trick",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Pet care",
+        "availability": "Current pool",
+        "cardSummary": "Showstopper asks you to make your pet do a trick and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "showstopper",
+        "section": "Daily Tasks",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Personal Stylist",
+        "taskFamily": "Personal Stylist",
+        "objective": "Dress up your pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Pet care",
+        "availability": "Current pool",
+        "cardSummary": "Personal Stylist asks you to dress up your pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "personal-stylist",
+        "section": "Daily Tasks",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pizza Maker",
+        "taskFamily": "Pizza Maker",
+        "objective": "Make a Pizza at the Pizza Shop",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Pizza Maker asks you to make a Pizza at the Pizza Shop and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "pizza-maker",
+        "section": "Daily Tasks",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Makeover!",
+        "taskFamily": "Makeover!",
+        "objective": "Paint a pet",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Pet care",
+        "availability": "Current pool",
+        "cardSummary": "Makeover! asks you to paint a pet and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "makeover",
+        "section": "Daily Tasks",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "New Parent",
+        "taskFamily": "New Parent",
+        "objective": "Hatch 1 Egg",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Pet progression",
+        "availability": "Current pool",
+        "cardSummary": "New Parent asks you to hatch 1 Egg and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "new-parent",
+        "section": "Daily Tasks",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Baby Formula",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Baby Formula",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Baby Formula asks you to buy 1 Baby Formula and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-baby-formula",
+        "section": "Daily Tasks",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Big Head Potion",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Big Head Potion",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Big Head Potion asks you to buy 1 Big Head Potion and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-big-head-potion",
+        "section": "Daily Tasks",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Cheese",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Cheese",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Cheese asks you to buy 1 Cheese and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-cheese",
+        "section": "Daily Tasks",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Chocolate Milk",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Chocolate Milk",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Chocolate Milk asks you to buy 1 Chocolate Milk and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-chocolate-milk",
+        "section": "Daily Tasks",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Coffee",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Coffee",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Coffee asks you to buy 1 Coffee and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-coffee",
+        "section": "Daily Tasks",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Ham",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Ham",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Ham asks you to buy 1 Ham and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-ham",
+        "section": "Daily Tasks",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Hotdog",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Hotdog",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Hotdog asks you to buy 1 Hotdog and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-hotdog",
+        "section": "Daily Tasks",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Ice Cream",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Ice Cream",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Ice Cream asks you to buy 1 Ice Cream and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-ice-cream",
+        "section": "Daily Tasks",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Ice Cream Cup",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Ice Cream Cup",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Ice Cream Cup asks you to buy 1 Ice Cream Cup and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-ice-cream-cup",
+        "section": "Daily Tasks",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Pet Food",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Pet Food",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Pet Food asks you to buy 1 Pet Food and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-pet-food",
+        "section": "Daily Tasks",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: S'mores Cookie",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 S'mores Cookie",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: S'mores Cookie asks you to buy 1 S'mores Cookie and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-smores-cookie",
+        "section": "Daily Tasks",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Tea",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Tea",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Tea asks you to buy 1 Tea and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-tea",
+        "section": "Daily Tasks",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Water Bottle",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Water Bottle",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Water Bottle asks you to buy 1 Water Bottle and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-water-bottle",
+        "section": "Daily Tasks",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Spree: Watermelon",
+        "taskFamily": "Shopping Spree",
+        "objective": "Buy 1 Watermelon",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "Shopping Spree: Watermelon asks you to buy 1 Watermelon and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "shopping-spree-watermelon",
+        "section": "Daily Tasks",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hard Worker",
+        "taskFamily": "Hard Worker",
+        "objective": "Earn 50 Bucks at a job",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Jobs and earnings",
+        "availability": "Current pool",
+        "cardSummary": "Hard Worker asks you to earn 50 Bucks at a job and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "hard-worker",
+        "section": "Daily Tasks",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rags to Riches",
+        "taskFamily": "Rags to Riches",
+        "objective": "Earn 200 Bucks",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Jobs and earnings",
+        "availability": "Current pool",
+        "cardSummary": "Rags to Riches asks you to earn 200 Bucks and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "rags-to-riches",
+        "section": "Daily Tasks",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Cheese Tax",
+        "taskFamily": "The Cheese Tax",
+        "objective": "Make a Pizza at the Pizza Shop",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Shopping and food",
+        "availability": "Current pool",
+        "cardSummary": "The Cheese Tax asks you to make a Pizza at the Pizza Shop and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "the-cheese-tax",
+        "section": "Daily Tasks",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Housewarming",
+        "taskFamily": "Housewarming",
+        "objective": "Visit 3 player homes",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Homes",
+        "availability": "Current pool",
+        "cardSummary": "Housewarming asks you to visit 3 player homes and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "housewarming",
+        "section": "Daily Tasks",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Neighborhood Tour",
+        "taskFamily": "Neighborhood Tour",
+        "objective": "Visit 5 player homes",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Homes",
+        "availability": "Current pool",
+        "cardSummary": "Neighborhood Tour asks you to visit 5 player homes and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "neighborhood-tour",
+        "section": "Daily Tasks",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Value Watch",
+        "taskFamily": "Value Watch",
+        "objective": "Spectate a trade",
+        "reward": "25 Bucks",
+        "slotType": "Daily",
+        "activityType": "Trading",
+        "availability": "Current pool",
+        "cardSummary": "Value Watch asks you to spectate a trade and rewards 25 Bucks."
+      },
+      "system": {
+        "slug": "value-watch",
+        "section": "Daily Tasks",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "BONUS: Helping Hand",
+        "taskFamily": "BONUS: Helping Hand",
+        "objective": "Complete a Need on a Friend's pet",
+        "reward": "100 Bucks",
+        "slotType": "Bonus",
+        "activityType": "Social",
+        "availability": "Current pool",
+        "cardSummary": "BONUS: Helping Hand asks you to complete a Need on a Friend's pet and rewards 100 Bucks."
+      },
+      "system": {
+        "slug": "bonus-helping-hand",
+        "section": "Bonus Tasks",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "BONUS: Pets In Law",
+        "taskFamily": "BONUS: Pets In Law",
+        "objective": "Pet a Friend's pet",
+        "reward": "100 Bucks",
+        "slotType": "Bonus",
+        "activityType": "Social",
+        "availability": "Current pool",
+        "cardSummary": "BONUS: Pets In Law asks you to pet a Friend's pet and rewards 100 Bucks."
+      },
+      "system": {
+        "slug": "bonus-pets-in-law",
+        "section": "Bonus Tasks",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "BONUS: Party Up!",
+        "taskFamily": "BONUS: Party Up!",
+        "objective": "Play with a Friend for 10 minutes",
+        "reward": "100 Bucks",
+        "slotType": "Bonus",
+        "activityType": "Social",
+        "availability": "Current pool",
+        "cardSummary": "BONUS: Party Up! asks you to play with a Friend for 10 minutes and rewards 100 Bucks."
+      },
+      "system": {
+        "slug": "bonus-party-up",
+        "section": "Bonus Tasks",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "BONUS: Nice Place Ya Got There",
+        "taskFamily": "BONUS: Nice Place Ya Got There",
+        "objective": "Visit a Friend's home for 60 seconds",
+        "reward": "100 Bucks",
+        "slotType": "Bonus",
+        "activityType": "Social",
+        "availability": "Current pool",
+        "cardSummary": "BONUS: Nice Place Ya Got There asks you to visit a Friend's home for 60 seconds and rewards 100 Bucks."
+      },
+      "system": {
+        "slug": "bonus-nice-place-ya-got-there",
+        "section": "Bonus Tasks",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "BONUS: Time For a Boogie!",
+        "taskFamily": "BONUS: Time For a Boogie!",
+        "objective": "Host a Party",
+        "reward": "100 Bucks",
+        "slotType": "Bonus",
+        "activityType": "Social",
+        "availability": "Current pool",
+        "cardSummary": "BONUS: Time For a Boogie! asks you to host a Party and rewards 100 Bucks."
+      },
+      "system": {
+        "slug": "bonus-time-for-a-boogie",
+        "section": "Bonus Tasks",
+        "sortOrder": 63,
+        "image": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,1119 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Blox Fruits",
+    "gameSlug": "blox-fruits",
+    "collection": "fish",
+    "route": "/wiki/blox-fruits/fish",
+    "catalogCode": "blox-fruits-fish",
+    "sourceItemCount": 60,
+    "itemFields": [
+      "availability",
+      "location",
+      "bait",
+      "seas",
+      "fishIndex",
+      "cardSummary"
+    ],
+    "columns": [
+      "availability",
+      "location",
+      "bait",
+      "seas",
+      "fishIndex",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Catch status",
+      "sectionOrder": [
+        "Obtainable",
+        "Limited or past event",
+        "Unavailable or unresolved"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "location"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "availability",
+        "location",
+        "bait",
+        "seas",
+        "fishIndex"
+      ],
+      "tableFields": [
+        "availability",
+        "location",
+        "bait",
+        "seas",
+        "fishIndex",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "location": {
+          "kind": "plain",
+          "label": "Location"
+        },
+        "bait": {
+          "kind": "plain",
+          "label": "Bait"
+        },
+        "seas": {
+          "kind": "plain",
+          "label": "Seas"
+        },
+        "fishIndex": {
+          "kind": "chip",
+          "label": "Fish index"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Catch note"
+        }
+      }
+    },
+    "notes": {
+      "scope": "Rows whose source-backed item index type is Fish. Soggy Boot and fishing materials are excluded.",
+      "sources": [
+        "https://blox-fruits.fandom.com/wiki/Fish",
+        "https://beebom.com/blox-fruits-fishing-guide/",
+        "https://progameguides.com/roblox/blox-fruits-fishing-guide-controls-gear/"
+      ],
+      "checkedAt": "2026-08-09",
+      "sectionCounts": {
+        "Obtainable": 50,
+        "Limited or past event": 2,
+        "Unavailable or unresolved": 8
+      },
+      "imagePolicy": "Reuse the exact source-backed item art already stored under Blox Fruits/Items."
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Candyfish",
+        "availability": "Obtainable",
+        "location": "Sea of Treats",
+        "bait": "Any",
+        "seas": "Third Sea",
+        "fishIndex": "1",
+        "cardSummary": "The Candyfish can be obtained by fishing at the Sea of Treats."
+      },
+      "system": {
+        "slug": "candyfish",
+        "section": "Obtainable",
+        "sortOrder": 1,
+        "image": "/Blox%20Fruits/Items/candyfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Catfish",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "Second Sea, Third Sea",
+        "fishIndex": "2",
+        "cardSummary": "Catfish can be obtained by fishing in the Second and Third Sea."
+      },
+      "system": {
+        "slug": "catfish",
+        "section": "Obtainable",
+        "sortOrder": 2,
+        "image": "/Blox%20Fruits/Items/catfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Angelfish",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "3",
+        "cardSummary": "The Angelfish can be obtained by fishing."
+      },
+      "system": {
+        "slug": "angelfish",
+        "section": "Obtainable",
+        "sortOrder": 3,
+        "image": "/Blox%20Fruits/Items/angelfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Carp",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "4",
+        "cardSummary": "Carp is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "carp",
+        "section": "Obtainable",
+        "sortOrder": 4,
+        "image": "/Blox%20Fruits/Items/carp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Flatfish",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "5",
+        "cardSummary": "Flatfish is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "flatfish",
+        "section": "Obtainable",
+        "sortOrder": 5,
+        "image": "/Blox%20Fruits/Items/flatfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Redfin",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "6",
+        "cardSummary": "Redfin is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "redfin",
+        "section": "Obtainable",
+        "sortOrder": 6,
+        "image": "/Blox%20Fruits/Items/redfin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tidegill",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "7",
+        "cardSummary": "Tidegill is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "tidegill",
+        "section": "Obtainable",
+        "sortOrder": 7,
+        "image": "/Blox%20Fruits/Items/tidegill.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Saltwater Salmon",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "8",
+        "cardSummary": "The Saltwater Salmon can be obtained by fishing."
+      },
+      "system": {
+        "slug": "saltwater-salmon",
+        "section": "Obtainable",
+        "sortOrder": 8,
+        "image": "/Blox%20Fruits/Items/saltwater-salmon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Goldfish",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "9",
+        "cardSummary": "Goldfish is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "goldfish",
+        "section": "Obtainable",
+        "sortOrder": 9,
+        "image": "/Blox%20Fruits/Items/goldfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghostfish",
+        "availability": "Obtainable",
+        "location": "Cursed ShipHaunted CastleHaunted ShipwreckMirage Island",
+        "bait": "Abyssal BaitEpic Bait",
+        "seas": "Second Sea, Third Sea",
+        "fishIndex": "10",
+        "cardSummary": "The Ghostfish can be obtained by fishing with Abyssal Bait or Epic Bait at:"
+      },
+      "system": {
+        "slug": "ghostfish",
+        "section": "Obtainable",
+        "sortOrder": 10,
+        "image": "/Blox%20Fruits/Items/ghostfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sea Sturgeon",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "11",
+        "cardSummary": "The Sea Sturgeon can be obtained by fishing."
+      },
+      "system": {
+        "slug": "sea-sturgeon",
+        "section": "Obtainable",
+        "sortOrder": 11,
+        "image": "/Blox%20Fruits/Items/sea-sturgeon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Grouper",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "12",
+        "cardSummary": "Grouper is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "grouper",
+        "section": "Obtainable",
+        "sortOrder": 12,
+        "image": "/Blox%20Fruits/Items/grouper.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Clownfish",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "13",
+        "cardSummary": "The Clownfish can be obtained by fishing."
+      },
+      "system": {
+        "slug": "clownfish",
+        "section": "Obtainable",
+        "sortOrder": 13,
+        "image": "/Blox%20Fruits/Items/clownfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Mossback",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "14",
+        "cardSummary": "Mossback is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "mossback",
+        "section": "Obtainable",
+        "sortOrder": 14,
+        "image": "/Blox%20Fruits/Items/mossback.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Amber Trout",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "15",
+        "cardSummary": "The Amber Trout can be obtained by fishing."
+      },
+      "system": {
+        "slug": "amber-trout",
+        "section": "Obtainable",
+        "sortOrder": 15,
+        "image": "/Blox%20Fruits/Items/amber-trout.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Frostjaw",
+        "availability": "Obtainable",
+        "location": "Frozen VillageSnow MountainFrozen Dimension",
+        "bait": "AnyFrozen Bait",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "16",
+        "cardSummary": "The Frostjaw can be obtained by fishing at the Frozen Village, the Snow Mountain, or the Frozen Dimension."
+      },
+      "system": {
+        "slug": "frostjaw",
+        "section": "Obtainable",
+        "sortOrder": 16,
+        "image": "/Blox%20Fruits/Items/frostjaw.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gravelhead Shark",
+        "availability": "Obtainable",
+        "location": "Prehistoric Island",
+        "bait": "Carnivore Bait",
+        "seas": "Third Sea",
+        "fishIndex": "17",
+        "cardSummary": "The Gravelhead Shark can be obtained by fishing with the Carnivore Bait at the Prehistoric Island."
+      },
+      "system": {
+        "slug": "gravelhead-shark",
+        "section": "Obtainable",
+        "sortOrder": 17,
+        "image": "/Blox%20Fruits/Items/gravelhead-shark.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Bullfish",
+        "availability": "Obtainable",
+        "location": "DesertForgotten IslandPrehistoric Island",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "18",
+        "cardSummary": "The Bullfish can be obtained by fishing at the Desert, the Forgotten Island, and the Prehistoric Island."
+      },
+      "system": {
+        "slug": "bullfish",
+        "section": "Obtainable",
+        "sortOrder": 18,
+        "image": "/Blox%20Fruits/Items/bullfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Parrotfish",
+        "availability": "Obtainable",
+        "location": "Green ZoneTiki Outpost",
+        "bait": "Any",
+        "seas": "Second Sea, Third Sea",
+        "fishIndex": "19",
+        "cardSummary": "The Parrotfish can be obtained by fishing at the Green Zone and the Tiki Outpost."
+      },
+      "system": {
+        "slug": "parrotfish",
+        "section": "Obtainable",
+        "sortOrder": 19,
+        "image": "/Blox%20Fruits/Items/parrotfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Leafy Trout",
+        "availability": "Obtainable",
+        "location": "Green ZoneFloating TurtleGreat Tree",
+        "bait": "Any",
+        "seas": "Second Sea, Third Sea",
+        "fishIndex": "20",
+        "cardSummary": "The Leafy Trout can be obtained at the Green Zone, the Floating Turtle, and the Great Tree."
+      },
+      "system": {
+        "slug": "leafy-trout",
+        "section": "Obtainable",
+        "sortOrder": 20,
+        "image": "/Blox%20Fruits/Items/leafy-trout.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Azure Marlin",
+        "availability": "Obtainable",
+        "location": "Hydra IslandKitsune Island",
+        "bait": "Any",
+        "seas": "Third Sea",
+        "fishIndex": "21",
+        "cardSummary": "The Azure Marlin can be obtained by fishing at the Hydra Island and the Kitsune Island."
+      },
+      "system": {
+        "slug": "azure-marlin",
+        "section": "Obtainable",
+        "sortOrder": 21,
+        "image": "/Blox%20Fruits/Items/azure-marlin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Terrorfish",
+        "availability": "Obtainable",
+        "location": "Tiki OutpostFrozen DimensionPrehistoric Island",
+        "bait": "Carnivore Bait",
+        "seas": "Third Sea",
+        "fishIndex": "22",
+        "cardSummary": "The Terrorfish can be obtained by fishing with the Carnivore Bait at the Tiki Outpost, the Frozen Dimension or the Prehistoric Island."
+      },
+      "system": {
+        "slug": "terrorfish",
+        "section": "Obtainable",
+        "sortOrder": 22,
+        "image": "/Blox%20Fruits/Items/terrorfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Deepglow Oarfish",
+        "availability": "Obtainable",
+        "location": "Cursed Ship",
+        "bait": "Abyssal Bait",
+        "seas": "Second Sea",
+        "fishIndex": "23",
+        "cardSummary": "The Deepglow Oarfish can be obtained by fishing with the Abyssal Bait at the Cursed Ship."
+      },
+      "system": {
+        "slug": "deepglow-oarfish",
+        "section": "Obtainable",
+        "sortOrder": 23,
+        "image": "/Blox%20Fruits/Items/deepglow-oarfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Bass",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "24",
+        "cardSummary": "The Sand Bass can be obtained by fishing."
+      },
+      "system": {
+        "slug": "sand-bass",
+        "section": "Obtainable",
+        "sortOrder": 24,
+        "image": "/Blox%20Fruits/Items/sand-bass.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Angler",
+        "availability": "Obtainable",
+        "location": "Cursed ShipHaunted Castle",
+        "bait": "Abyssal Bait",
+        "seas": "Second Sea, Third Sea",
+        "fishIndex": "25",
+        "cardSummary": "The Angler can be obtained by fishing with the Abyssal Bait at the Haunted Castle and Cursed Ship."
+      },
+      "system": {
+        "slug": "angler",
+        "section": "Obtainable",
+        "sortOrder": 25,
+        "image": "/Blox%20Fruits/Items/angler.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Molten Trout",
+        "availability": "Obtainable",
+        "location": "Magma VillagePrehistoric Island",
+        "bait": "Any",
+        "seas": "First Sea, Third Sea",
+        "fishIndex": "26",
+        "cardSummary": "The Molten Trout can be obtained by fishing at the Magma Village and the Prehistoric Island."
+      },
+      "system": {
+        "slug": "molten-trout",
+        "section": "Obtainable",
+        "sortOrder": 26,
+        "image": "/Blox%20Fruits/Items/molten-trout.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gliderfish",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "27",
+        "cardSummary": "The Gliderfish can be obtained by fishing."
+      },
+      "system": {
+        "slug": "gliderfish",
+        "section": "Obtainable",
+        "sortOrder": 27,
+        "image": "/Blox%20Fruits/Items/gliderfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Rock Dweller",
+        "availability": "Obtainable",
+        "location": "Magma VillagePrehistoric Island",
+        "bait": "Any",
+        "seas": "First Sea, Third Sea",
+        "fishIndex": "28",
+        "cardSummary": "The Rock Dweller can be obtained by fishing at the Magma Village and the Prehistoric Island."
+      },
+      "system": {
+        "slug": "rock-dweller",
+        "section": "Obtainable",
+        "sortOrder": 28,
+        "image": "/Blox%20Fruits/Items/rock-dweller.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Levi",
+        "availability": "Obtainable",
+        "location": "Tiki OutpostSubmerged IslandHydra Island",
+        "bait": "Frozen BaitEpic Bait",
+        "seas": "Third Sea",
+        "fishIndex": "29",
+        "cardSummary": "The Levi can be obtained by fishing with the Epic Bait or Frozen Bait at the Hydra Island, Submerged Island, or Tiki Outpost."
+      },
+      "system": {
+        "slug": "levi",
+        "section": "Obtainable",
+        "sortOrder": 29,
+        "image": "/Blox%20Fruits/Items/levi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Pufferfish",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "30",
+        "cardSummary": "The Pufferfish can be obtained by fishing."
+      },
+      "system": {
+        "slug": "pufferfish",
+        "section": "Obtainable",
+        "sortOrder": 30,
+        "image": "/Blox%20Fruits/Items/pufferfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Barracuda",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "31",
+        "cardSummary": "Barracuda is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "barracuda",
+        "section": "Obtainable",
+        "sortOrder": 31,
+        "image": "/Blox%20Fruits/Items/barracuda.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Kelp Bass",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "32",
+        "cardSummary": "The Kelp Bass can be obtained by fishing."
+      },
+      "system": {
+        "slug": "kelp-bass",
+        "section": "Obtainable",
+        "sortOrder": 32,
+        "image": "/Blox%20Fruits/Items/kelp-bass.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Tuna",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "33",
+        "cardSummary": "Tuna is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "tuna",
+        "section": "Obtainable",
+        "sortOrder": 33,
+        "image": "/Blox%20Fruits/Items/tuna.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Crab",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "34",
+        "cardSummary": "Crab is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "crab",
+        "section": "Obtainable",
+        "sortOrder": 34,
+        "image": "/Blox%20Fruits/Items/crab.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Seahorse",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "35",
+        "cardSummary": "Seahorse is recorded in the fishing index, but its current catch details are not confirmed."
+      },
+      "system": {
+        "slug": "seahorse",
+        "section": "Obtainable",
+        "sortOrder": 35,
+        "image": "/Blox%20Fruits/Items/seahorse.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Colossal Shrimp",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "36",
+        "cardSummary": "The Colossal Shrimp can be obtained by fishing."
+      },
+      "system": {
+        "slug": "colossal-shrimp",
+        "section": "Obtainable",
+        "sortOrder": 36,
+        "image": "/Blox%20Fruits/Items/colossal-shrimp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Koi",
+        "availability": "Unavailable or unresolved",
+        "location": "Not confirmed",
+        "bait": "Not confirmed",
+        "seas": "Not confirmed",
+        "fishIndex": "37",
+        "cardSummary": "The obtainment of the Dragon Koi is currently unknown."
+      },
+      "system": {
+        "slug": "dragon-koi",
+        "section": "Unavailable or unresolved",
+        "sortOrder": 37,
+        "image": "/Blox%20Fruits/Items/dragon-koi.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Carp",
+        "availability": "Limited or past event",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "38",
+        "cardSummary": "The Golden Carp could be obtained by fishing."
+      },
+      "system": {
+        "slug": "golden-carp",
+        "section": "Limited or past event",
+        "sortOrder": 38,
+        "image": "/Blox%20Fruits/Items/golden-carp.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starfish (Yellow)",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "39",
+        "cardSummary": "The Starfish (Yellow) can be obtained by fishing."
+      },
+      "system": {
+        "slug": "starfish-yellow",
+        "section": "Obtainable",
+        "sortOrder": 39,
+        "image": "/Blox%20Fruits/Items/starfish-yellow.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Swamp Lurker",
+        "availability": "Obtainable",
+        "location": "Whirlpool",
+        "bait": "Any",
+        "seas": "Third Sea",
+        "fishIndex": "40",
+        "cardSummary": "The Swamp Lurker can be obtained by fishing at the Whirlpool."
+      },
+      "system": {
+        "slug": "swamp-lurker",
+        "section": "Obtainable",
+        "sortOrder": 40,
+        "image": "/Blox%20Fruits/Items/swamp-lurker.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Hermit Crab",
+        "availability": "Unavailable or unresolved",
+        "location": "Not confirmed",
+        "bait": "Not confirmed",
+        "seas": "Not confirmed",
+        "fishIndex": "41",
+        "cardSummary": "The obtainment of the Hermit Crab is currently unknown."
+      },
+      "system": {
+        "slug": "hermit-crab",
+        "section": "Unavailable or unresolved",
+        "sortOrder": 41,
+        "image": "/Blox%20Fruits/Items/hermit-crab.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starfish (Purple)",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "42",
+        "cardSummary": "The Starfish (Purple) can be obtained by fishing."
+      },
+      "system": {
+        "slug": "starfish-purple",
+        "section": "Obtainable",
+        "sortOrder": 42,
+        "image": "/Blox%20Fruits/Items/starfish-purple.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jellyfish",
+        "availability": "Unavailable or unresolved",
+        "location": "Not confirmed",
+        "bait": "Not confirmed",
+        "seas": "Not confirmed",
+        "fishIndex": "43",
+        "cardSummary": "The obtainment of the Jellyfish is currently unknown."
+      },
+      "system": {
+        "slug": "jellyfish",
+        "section": "Unavailable or unresolved",
+        "sortOrder": 43,
+        "image": "/Blox%20Fruits/Items/jellyfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Turtle",
+        "availability": "Obtainable",
+        "location": "Whirlpool",
+        "bait": "Any",
+        "seas": "Third Sea",
+        "fishIndex": "44",
+        "cardSummary": "The Turtle can be obtained by fishing at the Whirlpool."
+      },
+      "system": {
+        "slug": "turtle",
+        "section": "Obtainable",
+        "sortOrder": 44,
+        "image": "/Blox%20Fruits/Items/turtle.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Deepsea Squid",
+        "availability": "Obtainable",
+        "location": "Whirlpool",
+        "bait": "Any",
+        "seas": "Third Sea",
+        "fishIndex": "45",
+        "cardSummary": "The Deepsea Squid can be obtained by fishing at the Whirlpool, Submerged Island."
+      },
+      "system": {
+        "slug": "deepsea-squid",
+        "section": "Obtainable",
+        "sortOrder": 45,
+        "image": "/Blox%20Fruits/Items/deepsea-squid.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starfish (Blue)",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "46",
+        "cardSummary": "The Starfish (Blue) can be obtained by fishing."
+      },
+      "system": {
+        "slug": "starfish-blue",
+        "section": "Obtainable",
+        "sortOrder": 46,
+        "image": "/Blox%20Fruits/Items/starfish-blue.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starfish (Green)",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "47",
+        "cardSummary": "The Starfish (Green) can be obtained by fishing."
+      },
+      "system": {
+        "slug": "starfish-green",
+        "section": "Obtainable",
+        "sortOrder": 47,
+        "image": "/Blox%20Fruits/Items/starfish-green.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starfish (Pink)",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "48",
+        "cardSummary": "The Starfish (Pink) can be obtained by fishing."
+      },
+      "system": {
+        "slug": "starfish-pink",
+        "section": "Obtainable",
+        "sortOrder": 48,
+        "image": "/Blox%20Fruits/Items/starfish-pink.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Starfish (Red)",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "49",
+        "cardSummary": "The Starfish (Red) can be obtained by fishing."
+      },
+      "system": {
+        "slug": "starfish-red",
+        "section": "Obtainable",
+        "sortOrder": 49,
+        "image": "/Blox%20Fruits/Items/starfish-red.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Lumo Whale",
+        "availability": "Obtainable",
+        "location": "Whirlpool",
+        "bait": "Any",
+        "seas": "Third Sea",
+        "fishIndex": "50",
+        "cardSummary": "The Lumo Whale can be obtained by fishing at the Whirlpool."
+      },
+      "system": {
+        "slug": "lumo-whale",
+        "section": "Obtainable",
+        "sortOrder": 50,
+        "image": "/Blox%20Fruits/Items/lumo-whale.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Deepsea Octopus",
+        "availability": "Obtainable",
+        "location": "Whirlpool",
+        "bait": "Any",
+        "seas": "Third Sea",
+        "fishIndex": "51",
+        "cardSummary": "The Deepsea Octopus can be obtained by fishing at the Whirlpool."
+      },
+      "system": {
+        "slug": "deepsea-octopus",
+        "section": "Obtainable",
+        "sortOrder": 51,
+        "image": "/Blox%20Fruits/Items/deepsea-octopus.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jack-O-Fish",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "52",
+        "cardSummary": "The Jack-O-Fish can be obtained by fishing."
+      },
+      "system": {
+        "slug": "jack-o-fish",
+        "section": "Obtainable",
+        "sortOrder": 52,
+        "image": "/Blox%20Fruits/Items/jack-o-fish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Jester Clownfish",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "53",
+        "cardSummary": "The Jester Clownfish can be obtained by fishing."
+      },
+      "system": {
+        "slug": "jester-clownfish",
+        "section": "Obtainable",
+        "sortOrder": 53,
+        "image": "/Blox%20Fruits/Items/jester-clownfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Zombie Bass",
+        "availability": "Obtainable",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "54",
+        "cardSummary": "The Zombie Bass can be obtained by fishing."
+      },
+      "system": {
+        "slug": "zombie-bass",
+        "section": "Obtainable",
+        "sortOrder": 54,
+        "image": "/Blox%20Fruits/Items/zombie-bass.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Terrorbones",
+        "availability": "Limited or past event",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "55",
+        "cardSummary": "The Terrorbones could be obtained by fishing."
+      },
+      "system": {
+        "slug": "terrorbones",
+        "section": "Limited or past event",
+        "sortOrder": 55,
+        "image": "/Blox%20Fruits/Items/terrorbones.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Reindeer Bullfish",
+        "availability": "Unavailable or unresolved",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "58",
+        "cardSummary": "The Reindeer Bullfish can be obtained by fishing."
+      },
+      "system": {
+        "slug": "reindeer-bullfish",
+        "section": "Unavailable or unresolved",
+        "sortOrder": 56,
+        "image": "/Blox%20Fruits/Items/reindeer-bullfish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowman Marlin",
+        "availability": "Unavailable or unresolved",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "59",
+        "cardSummary": "The Snowman Marlin can be obtained by fishing."
+      },
+      "system": {
+        "slug": "snowman-marlin",
+        "section": "Unavailable or unresolved",
+        "sortOrder": 57,
+        "image": "/Blox%20Fruits/Items/snowman-marlin.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread Sturgeon",
+        "availability": "Unavailable or unresolved",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "60",
+        "cardSummary": "The Gingerbread Sturgeon can be obtained by fishing."
+      },
+      "system": {
+        "slug": "gingerbread-sturgeon",
+        "section": "Unavailable or unresolved",
+        "sortOrder": 58,
+        "image": "/Blox%20Fruits/Items/gingerbread-sturgeon.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Peppermint Fish",
+        "availability": "Unavailable or unresolved",
+        "location": "Any",
+        "bait": "Any",
+        "seas": "First Sea, Second Sea, Third Sea",
+        "fishIndex": "61",
+        "cardSummary": "The Peppermint Fish can be obtained by fishing."
+      },
+      "system": {
+        "slug": "peppermint-fish",
+        "section": "Unavailable or unresolved",
+        "sortOrder": 59,
+        "image": "/Blox%20Fruits/Items/peppermint-fish.webp"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire Squid",
+        "availability": "Unavailable or unresolved",
+        "location": "Not confirmed",
+        "bait": "Not confirmed",
+        "seas": "Not confirmed",
+        "fishIndex": null,
+        "cardSummary": "The obtainment of the Vampire Squid is currently unknown."
+      },
+      "system": {
+        "slug": "vampire-squid",
+        "section": "Unavailable or unresolved",
+        "sortOrder": 60,
+        "image": "/Blox%20Fruits/Items/vampire-squid.webp"
+      }
+    }
+  ]
+}

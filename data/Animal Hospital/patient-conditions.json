@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Animal Hospital",
+    "gameSlug": "animal-hospital",
+    "collection": "patient-conditions",
+    "route": "/wiki/animal-hospital/patient-conditions",
+    "catalogCode": "animal-hospital-patient-conditions",
+    "itemFields": [
+      "correctTreatment",
+      "supplyLocation",
+      "wrongTreatmentRisk",
+      "specialNote",
+      "cardSummary"
+    ],
+    "columns": [
+      "correctTreatment",
+      "supplyLocation",
+      "wrongTreatmentRisk",
+      "specialNote",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "treatment family",
+      "sectionOrder": [
+        "Hydration",
+        "Anti-Inflammatory",
+        "Skin Remedies",
+        "Ache Remedies",
+        "Syrups"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "correctTreatment",
+        "specialNote"
+      ],
+      "tableFields": [
+        "correctTreatment",
+        "supplyLocation",
+        "wrongTreatmentRisk",
+        "specialNote",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "correctTreatment": {
+          "kind": "highlight",
+          "label": "Correct treatment"
+        },
+        "supplyLocation": {
+          "kind": "plain",
+          "label": "Supply location"
+        },
+        "wrongTreatmentRisk": {
+          "kind": "detail",
+          "label": "Wrong treatment risk"
+        },
+        "specialNote": {
+          "kind": "detail",
+          "label": "Extra use"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Dried Eyes",
+        "correctTreatment": "Eyedrops",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "Eyedrops can also clear Death Ritual candles and temporarily calm the Mass of Eyes.",
+        "cardSummary": "Use Eyedrops when the diagnosis screen shows Dried Eyes. Read the condition first, because a similar-looking supply is not a safe substitute."
+      },
+      "system": {
+        "slug": "dried-eyes",
+        "section": "Hydration",
+        "sortOrder": 1
+      }
+    },
+    {
+      "item": {
+        "name": "Dehydration",
+        "correctTreatment": "IV Drops",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "IV Drops can also clear Death Ritual candles and appear at the start of Room 8 surgery care.",
+        "cardSummary": "Bring IV Drops when a patient is diagnosed with Dehydration. Confirm the room before using them so the correct patient gets the supply."
+      },
+      "system": {
+        "slug": "dehydration",
+        "section": "Hydration",
+        "sortOrder": 2
+      }
+    },
+    {
+      "item": {
+        "name": "Bruises",
+        "correctTreatment": "Medkit",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "Medkits can also appear as requested supplies during Room 8 surgery care.",
+        "cardSummary": "Use a Medkit for the Bruises diagnosis. This is normal patient care even though the same supply can turn up in surgery prompts."
+      },
+      "system": {
+        "slug": "bruises",
+        "section": "Anti-Inflammatory",
+        "sortOrder": 3
+      }
+    },
+    {
+      "item": {
+        "name": "Fever",
+        "correctTreatment": "Thermo",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "Thermo is the treatment item name used by the current condition roster.",
+        "cardSummary": "Match Fever with Thermo after the diagnosis finishes. The name sounds like a checking tool, but here it is the cure the patient needs."
+      },
+      "system": {
+        "slug": "fever",
+        "section": "Anti-Inflammatory",
+        "sortOrder": 4
+      }
+    },
+    {
+      "item": {
+        "name": "Rashes",
+        "correctTreatment": "Ointment",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "Ointment can also treat a patient after you put out their fire by hand.",
+        "cardSummary": "Use Ointment for Rashes. Its fire-care use is separate, so still follow the displayed diagnosis during normal treatment."
+      },
+      "system": {
+        "slug": "rashes",
+        "section": "Skin Remedies",
+        "sortOrder": 5
+      }
+    },
+    {
+      "item": {
+        "name": "Bleeding",
+        "correctTreatment": "Bandages",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "Bandages use green cross artwork in the current version of the game.",
+        "cardSummary": "Bring Bandages when the diagnosis is Bleeding. Use the item only after the condition appears on the room display."
+      },
+      "system": {
+        "slug": "bleeding",
+        "section": "Skin Remedies",
+        "sortOrder": 6
+      }
+    },
+    {
+      "item": {
+        "name": "Headache",
+        "correctTreatment": "Medicine",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "Medicine is for Headache; Herbs are for Stomach Ache.",
+        "cardSummary": "Use Medicine for a Headache diagnosis. This pair is easy to swap under pressure, so call out the condition before someone runs for supplies."
+      },
+      "system": {
+        "slug": "headache",
+        "section": "Ache Remedies",
+        "sortOrder": 7
+      }
+    },
+    {
+      "item": {
+        "name": "Stomach Ache",
+        "correctTreatment": "Herbs",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "Herbs are for Stomach Ache; Medicine is for Headache.",
+        "cardSummary": "Use Herbs for a Stomach Ache diagnosis. Keep this mapping separate from Medicine, which belongs to Headache."
+      },
+      "system": {
+        "slug": "stomach-ache",
+        "section": "Ache Remedies",
+        "sortOrder": 8
+      }
+    },
+    {
+      "item": {
+        "name": "Low Sugar",
+        "correctTreatment": "Maple Syrup",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "A patient with both Low Sugar and Canadian can request Maple Syrup twice. Maple Syrup also calms the Bed Monster.",
+        "cardSummary": "Use Maple Syrup for Low Sugar. If Canadian also appears on the same patient, the game can require a second bottle even when one checkmark seems to cover both."
+      },
+      "system": {
+        "slug": "low-sugar",
+        "section": "Syrups",
+        "sortOrder": 9
+      }
+    },
+    {
+      "item": {
+        "name": "Canadian",
+        "correctTreatment": "Maple Syrup",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "A patient with both Canadian and Low Sugar can request Maple Syrup twice. Maple Syrup also calms the Bed Monster.",
+        "cardSummary": "Canadian is a displayed diagnosis in Animal Hospital, and Maple Syrup is its treatment. It can appear with Low Sugar, so watch for a double request."
+      },
+      "system": {
+        "slug": "canadian",
+        "section": "Syrups",
+        "sortOrder": 10
+      }
+    },
+    {
+      "item": {
+        "name": "Flu",
+        "correctTreatment": "Cough Syrup",
+        "supplyLocation": "Treatment stations outside patient rooms",
+        "wrongTreatmentRisk": "The patient dies and the hospital loses one life if you use the wrong treatment.",
+        "specialNote": "Cough Syrup is the standard treatment tied to the Flu diagnosis.",
+        "cardSummary": "Use Cough Syrup when the diagnosis screen shows Flu. Do not guess from the patient's appearance before the room finishes checking them."
+      },
+      "system": {
+        "slug": "flu",
+        "section": "Syrups",
+        "sortOrder": 11
+      }
+    }
+  ]
+}
