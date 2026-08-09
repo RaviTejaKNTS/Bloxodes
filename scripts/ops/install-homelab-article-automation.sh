@@ -29,13 +29,14 @@ chmod 0640 "${ENV_PATH}"
 for unit in \
   bloxodes-article-discovery.service \
   bloxodes-article-discovery.timer \
-  bloxodes-article-writer.service \
-  bloxodes-article-writer.timer; do
+  bloxodes-article-writer.service; do
   install -m 0644 "${UNIT_SOURCE}/${unit}" "/etc/systemd/system/${unit}"
 done
 
+systemctl disable --now bloxodes-article-writer.timer >/dev/null 2>&1 || true
+rm -f /etc/systemd/system/bloxodes-article-writer.timer
 systemctl daemon-reload
-systemctl disable bloxodes-article-discovery.timer bloxodes-article-writer.timer >/dev/null 2>&1 || true
+systemctl disable bloxodes-article-discovery.timer >/dev/null 2>&1 || true
 
 echo "Installed Bloxodes article units in an inactive state."
-echo "After credentials and Grok authentication are ready, run the readiness checks and enable both timers."
+echo "After credentials and Grok authentication are ready, run the readiness checks and enable the discovery timer."
