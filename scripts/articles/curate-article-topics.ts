@@ -1,12 +1,18 @@
 import "../shared/load-env";
 
 import { readFileSync } from "node:fs";
+import { pathToFileURL } from "node:url";
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { parse as parseDotenv } from "dotenv";
 import { z } from "zod";
 
 import { slugify } from "@/lib/slug";
+import {
+  ARTICLE_CURATION_PROMPT_VERSION,
+  ARTICLE_CURATION_REVISIT_REASON_CODES,
+  ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS
+} from "./article-curation-config";
 import { groupingSimilarity, sameSearchIntent } from "./article-curation-intent";
 import { resolveArticleDevCredentials } from "./article-queue-env";
 import { fetchProductionEditorialInventory } from "./production-editorial-inventory";
@@ -27,6 +33,7 @@ type CandidateRow = {
   source_published_at: string;
   source_discovered_at: string;
   source_description: string | null;
+  source_evidence: { headings?: unknown; excerpt?: unknown } | null;
   source_categories: string[];
   discovered_from: string;
 };
@@ -44,9 +51,9 @@ type QueueSourceItem = {
   source_title: string;
   source_published_at: string;
   source_description: string | null;
+  source_evidence: CandidateRow["source_evidence"];
 };
 
-const PROMPT_VERSION = "article-curation-v2-2026-08-10";
 const DEFAULT_MODEL = "llama-3.3-70b-versatile";
 const GROQ_CHAT_URL = "https://api.groq.com/openai/v1/chat/completions";
 
@@ -98,7 +105,7 @@ function printUsage() {
 function parseArgs(argv: string[]): Options {
   const options: Options = {
     apply: false,
-    limit: 20,
+    limit: 12,
     model: process.env.ARTICLE_CURATION_MODEL?.trim() || DEFAULT_MODEL
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -167,16 +174,35 @@ function loadRelevantInventory(allRows: InventoryItem[], candidates: CandidateRo
       score: Math.max(
         ...candidates.map((candidate) => {
           const inventoryTitle = `${item.title} ${item.key.replace(/-/g, " ")}`;
-          if (!sameSearchIntent(candidate.source_title, inventoryTitle)) return 0;
-          const similarity = groupingSimilarity(candidate.source_title, inventoryTitle);
-          return similarity.shared * 10 + similarity.jaccard;
+          return Math.max(...candidateIntentSurfaces(candidate).map((sourceIntent) => {
+            if (!sameSearchIntent(sourceIntent, inventoryTitle)) return 0;
+            const similarity = groupingSimilarity(sourceIntent, inventoryTitle);
+            return similarity.shared * 10 + similarity.jaccard;
+          }));
         })
       )
     }))
     .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score || a.item.family.localeCompare(b.item.family))
-    .slice(0, 120)
+    .slice(0, 80)
     .map(({ item }) => item);
+}
+
+function candidateIntentSurfaces(candidate: CandidateRow): string[] {
+  const headings = Array.isArray(candidate.source_evidence?.headings)
+    ? candidate.source_evidence.headings.filter((value): value is string => typeof value === "string").slice(0, 16)
+    : [];
+  return [candidate.source_title, candidate.source_description ?? "", ...headings].filter(Boolean);
+}
+
+function candidateSearchCorpus(candidate: CandidateRow): string {
+  return candidateIntentSurfaces(candidate).join(" ");
+}
+
+function supportsDerivedAngle(candidate: CandidateRow, canonicalTitle: string): boolean {
+  if (sameSearchIntent(candidate.source_title, canonicalTitle)) return true;
+  const similarity = groupingSimilarity(candidateSearchCorpus(candidate), canonicalTitle);
+  return similarity.shared >= 3 || (similarity.shared >= 2 && similarity.jaccard >= 0.18);
 }
 
 function buildPrompt(candidates: CandidateRow[], inventory: InventoryItem[], validationFeedback?: string): string {
@@ -187,6 +213,15 @@ function buildPrompt(candidates: CandidateRow[], inventory: InventoryItem[], val
     url: candidate.source_url,
     published_at: candidate.source_published_at,
     description: candidate.source_description?.slice(0, 500) ?? null,
+    source_headings: Array.isArray(candidate.source_evidence?.headings)
+      ? candidate.source_evidence.headings
+        .filter((value): value is string => typeof value === "string")
+        .slice(0, 8)
+        .map((value) => value.slice(0, 120))
+      : [],
+    source_excerpt: typeof candidate.source_evidence?.excerpt === "string"
+      ? candidate.source_evidence.excerpt.slice(0, 600)
+      : null,
     categories: candidate.source_categories
   }));
   const inventoryPayload = inventory.map((item) => ({ family: item.family, title: item.title, key: item.key }));
@@ -207,17 +242,18 @@ REJECT anything owned by another Bloxodes page family:
 - checklist, quiz, tool/calculator/planner/tracker, stats/leaderboard, Trello/Discord/official-links pages
 
 CURATION RULES:
-1. Account for every candidate ID exactly once.
+1. Account for every candidate ID at least once. Usually use it once. A single source lead may appear in several approved decisions only when its evidence clearly supports several distinct, useful article angles. A rejected candidate must appear exactly once and may not also appear in an approved decision.
 2. Group candidates ONLY when they cover the same Roblox game AND the same interchangeable search intent/player task. Different games must always be separate decisions. Different mechanics, items, guide goals, or ranking subjects in the same game must also be separate. Never group merely because candidates share an article type, say "tier list", or belong to the same game.
 3. Reject a candidate that overlaps EXISTING BLOXODES COVERAGE, including an existing curated queue topic, only when it serves the same interchangeable player task or search intent. Sharing a game name, article type, broad category, or one generic noun is never enough. A guide for one item, mechanic, location, job, style, or ritual does not overlap a different guide in the same game.
 4. Do not approve a broad collection merely because the source calls it a guide.
 5. A narrow gameplay task guide is allowed. A database-like "all X" reference is not. A real tier ranking is allowed and is not a collection merely because it ranks many choices.
-6. Prefer topics with clear player intent, enough source evidence, and a useful angle. Reject thin announcements and topics that cannot support an accurate article.
-7. Never invent a source, candidate ID, fact, or existing page.
-8. Approved canonical titles must include the Roblox game name and clearly state the useful promise.
-9. topic_key must be a stable lowercase hyphenated key describing game plus intent, without dates, update versions, hype, or publisher names.
-10. primary_candidate_id must be one of the group's candidate_ids. Choose the clearest and most authoritative source.
-11. A decision containing several IDs means those source articles could all support one identical Bloxodes article. For example, never group tier lists for different games, and never group one game's beginner guide with that game's weather-events reference.
+6. Treat patch notes and update announcements as source leads, not necessarily as the final article. Derive focused guides or explainers from their headings and excerpt when they reveal a concrete player task, mechanic, item, boss, build, ritual, unlock, or progression change. One update source may yield zero, one, or several distinct approved angles. Never approve a patch-notes recap merely because it is recent.
+7. Prefer topics with clear player intent, enough source evidence, and a useful angle. Reject thin announcements only when their supplied headings/excerpt do not support a focused article.
+8. Never invent a source, candidate ID, fact, or existing page.
+9. Approved canonical titles must include the Roblox game name and clearly state the useful promise.
+10. topic_key must be a stable lowercase hyphenated key describing game plus intent, without dates, update versions, hype, or publisher names.
+11. primary_candidate_id must be one of the group's candidate_ids. Choose the clearest and most authoritative source.
+12. A decision containing several IDs means those source articles could all support one identical Bloxodes article. For example, never group tier lists for different games, and never group one game's beginner guide with that game's weather-events reference.
 
 Allowed reason_code values:
 approved, codes, wiki, collection, catalog, event, checklist, quiz, tool, stats, link_page, duplicate_candidates, existing_coverage, unsupported_article_type, thin_topic, insufficient_evidence, other
@@ -249,22 +285,29 @@ ${JSON.stringify(inventoryPayload)}${validationFeedback ? `
 
 YOUR PREVIOUS RESPONSE FAILED LOCAL VALIDATION:
 ${validationFeedback}
-Return a fully corrected JSON object. Split unrelated candidate IDs into separate decisions and still account for every ID exactly once.` : ""}`;
+Return a fully corrected JSON object. Split unrelated candidate IDs into separate decisions. Account for every ID, allowing reuse only across distinct approved angles supported by that lead.` : ""}`;
 }
 
-function validateDecisions(
+export function validateDecisions(
   parsed: z.infer<typeof CurationResponseSchema>,
   candidates: CandidateRow[]
 ): CurationDecision[] {
   const validIds = new Set(candidates.map((_candidate, index) => `C${index}`));
-  const seen = new Set<string>();
+  const approvedIds = new Set<string>();
+  const rejectedIds = new Set<string>();
   const topicKeys = new Set<string>();
 
   for (const decision of parsed.decisions) {
     for (const id of decision.candidate_ids) {
       if (!validIds.has(id)) throw new Error(`Groq returned unknown candidate ID ${id}.`);
-      if (seen.has(id)) throw new Error(`Groq returned candidate ${id} more than once.`);
-      seen.add(id);
+      if (decision.decision === "reject") {
+        if (rejectedIds.has(id)) throw new Error(`Groq rejected candidate ${id} more than once.`);
+        if (approvedIds.has(id)) throw new Error(`Groq both approved and rejected candidate ${id}.`);
+        rejectedIds.add(id);
+      } else {
+        if (rejectedIds.has(id)) throw new Error(`Groq both rejected and approved candidate ${id}.`);
+        approvedIds.add(id);
+      }
     }
     if (decision.candidate_ids.length > 1) {
       for (let leftIndex = 0; leftIndex < decision.candidate_ids.length; leftIndex += 1) {
@@ -274,9 +317,11 @@ function validateDecisions(
           const left = candidates[Number(leftAlias.slice(1))];
           const right = candidates[Number(rightAlias.slice(1))];
           const similarity = groupingSimilarity(left.source_title, right.source_title);
-          if (!sameSearchIntent(left.source_title, right.source_title)) {
+          const supportsApprovedAngle = decision.decision === "approve" && Boolean(decision.canonical_title) &&
+            supportsDerivedAngle(left, decision.canonical_title!) && supportsDerivedAngle(right, decision.canonical_title!);
+          if (!sameSearchIntent(left.source_title, right.source_title) && !supportsApprovedAngle) {
             throw new Error(
-              `Groq grouped candidates ${leftAlias} and ${rightAlias} without the same search intent (title similarity ${similarity.jaccard.toFixed(2)}).`
+              `Groq grouped candidates ${leftAlias} and ${rightAlias} without the same search intent or shared evidence for the derived angle (title similarity ${similarity.jaccard.toFixed(2)}).`
             );
           }
         }
@@ -302,8 +347,9 @@ function validateDecisions(
       }
     }
   }
-  if (seen.size !== validIds.size) {
-    const missing = [...validIds].filter((id) => !seen.has(id));
+  const accounted = new Set([...approvedIds, ...rejectedIds]);
+  if (accounted.size !== validIds.size) {
+    const missing = [...validIds].filter((id) => !accounted.has(id));
     throw new Error(`Groq did not account for candidates: ${missing.join(", ")}`);
   }
   return parsed.decisions;
@@ -328,7 +374,7 @@ async function curateWithGroq(
           messages: [{ role: "user", content: buildPrompt(candidates, inventory, validationFeedback) }],
           response_format: { type: "json_object" },
           temperature: 0,
-          max_tokens: Math.min(3600, Math.max(1200, 600 + candidates.length * 220))
+          max_tokens: Math.min(3200, Math.max(1200, 700 + candidates.length * 190))
         }),
         signal: AbortSignal.timeout(90_000)
       });
@@ -383,19 +429,18 @@ function queueSourceItem(candidate: CandidateRow): QueueSourceItem {
     source_url: candidate.source_url,
     source_title: candidate.source_title,
     source_published_at: candidate.source_published_at,
-    source_description: candidate.source_description
+    source_description: candidate.source_description,
+    source_evidence: candidate.source_evidence
   };
 }
 
 async function findExistingQueueRow(
   supabase: SupabaseClient,
   topicKey: string,
-  primaryUrl: string,
   title: string
 ): Promise<Record<string, unknown> | null> {
   for (const [column, value] of [
     ["topic_key", topicKey],
-    ["source_url", primaryUrl],
     ["idempotency_key", `global:${slugify(title)}`]
   ] as const) {
     const { data, error } = await supabase
@@ -448,7 +493,7 @@ async function createOrMergeQueueItem(
   const primary = candidates[Number(primaryAlias.slice(1))];
   const sourceItems = decision.candidate_ids.map((id) => queueSourceItem(candidates[Number(id.slice(1))]));
   const sourceUrls = sourceItems.map((item) => item.source_url);
-  const existing = await findExistingQueueRow(supabase, decision.topic_key!, primary.source_url, decision.canonical_title!);
+  const existing = await findExistingQueueRow(supabase, decision.topic_key!, decision.canonical_title!);
   if (existing) {
     const mergedItems = mergeJsonRows(existing.source_items, sourceItems, "source_url");
     const mergedUrls = [...new Set([...(Array.isArray(existing.source_urls) ? existing.source_urls.filter((url): url is string => typeof url === "string") : []), ...sourceUrls])];
@@ -464,7 +509,7 @@ async function createOrMergeQueueItem(
         sources: mergedUrls.join("\n"),
         topic_key: decision.topic_key,
         curation_model: model,
-        curation_prompt_version: PROMPT_VERSION,
+        curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
         curation_reason: decision.reason,
         curation_confidence: decision.confidence,
         curation_run_id: runId,
@@ -497,7 +542,7 @@ async function createOrMergeQueueItem(
       source_items: sourceItems,
       topic_key: decision.topic_key,
       curation_model: model,
-      curation_prompt_version: PROMPT_VERSION,
+      curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
       curation_reason: decision.reason,
       curation_confidence: decision.confidence,
       curation_run_id: runId,
@@ -512,7 +557,7 @@ async function createOrMergeQueueItem(
     .single();
   if (!error && data) return data.id;
   if (error?.code === "23505") {
-    const raced = await findExistingQueueRow(supabase, decision.topic_key!, primary.source_url, decision.canonical_title!);
+    const raced = await findExistingQueueRow(supabase, decision.topic_key!, decision.canonical_title!);
     if (raced?.id) return raced.id as string;
   }
   throw new Error(`Could not create curated queue item: ${error?.message ?? "unknown insert failure"}`);
@@ -568,6 +613,92 @@ async function recoverStaleCurationClaims(supabase: SupabaseClient) {
   console.log(`Recovered ${recoveredRows?.length ?? 0} stale curation candidate(s).`);
 }
 
+async function requeueCandidatesForCurrentPrompt(supabase: SupabaseClient): Promise<number> {
+  const { data, error } = await supabase
+    .from("article_discovery_candidates")
+    .select("id, curation_status, curation_reason_code, curation_prompt_version, queue_id, queue_ids, recuration_count")
+    .in("curation_status", ["approved", "rejected"])
+    .limit(1000);
+  if (error) throw new Error(`Could not inspect candidates for prompt re-curation: ${error.message}`);
+  const stale = (data ?? []).filter((row) => row.curation_prompt_version !== ARTICLE_CURATION_PROMPT_VERSION);
+  if (!stale.length) return 0;
+
+  const queueIdsForRow = (row: { queue_id?: unknown; queue_ids?: unknown }): string[] => [...new Set([
+    ...(typeof row.queue_id === "string" ? [row.queue_id] : []),
+    ...(Array.isArray(row.queue_ids) ? row.queue_ids.filter((value): value is string => typeof value === "string") : [])
+  ])];
+  const approvedQueueIds = stale.flatMap((row) => row.curation_status === "approved" ? queueIdsForRow(row) : []);
+  const retryableQueueIds = new Set<string>();
+  if (approvedQueueIds.length) {
+    const { data: queueRows, error: queueError } = await supabase
+      .from("article_generation_queue")
+      .select("id, status")
+      .in("id", approvedQueueIds);
+    if (queueError) throw new Error(`Could not inspect prior queue outcomes for re-curation: ${queueError.message}`);
+    for (const row of queueRows ?? []) {
+      if (["skipped", "failed"].includes(row.status)) retryableQueueIds.add(row.id);
+    }
+  }
+
+  const revisitReasons = new Set<string>(ARTICLE_CURATION_REVISIT_REASON_CODES);
+  const candidates = stale.filter((row) =>
+    (row.curation_status === "rejected" && revisitReasons.has(row.curation_reason_code ?? "")) ||
+    (row.curation_status === "approved" && queueIdsForRow(row).some((queueId) => retryableQueueIds.has(queueId)))
+  );
+  for (const row of candidates) {
+    const { error: updateError } = await supabase
+      .from("article_discovery_candidates")
+      .update({
+        curation_status: "pending",
+        curation_reason_code: null,
+        curation_reason: null,
+        curation_model: null,
+        curation_confidence: null,
+        curation_run_id: null,
+        curation_prompt_version: null,
+        queue_id: null,
+        queue_ids: [],
+        topic_key: null,
+        curated_at: null,
+        recuration_count: Number(row.recuration_count ?? 0) + 1
+      })
+      .eq("id", row.id)
+      .eq("curation_status", row.curation_status);
+    if (updateError) throw new Error(`Could not requeue candidate ${row.id}: ${updateError.message}`);
+  }
+  if (candidates.length) {
+    console.log(`Requeued ${candidates.length} candidate(s) decided by an older curation prompt.`);
+  }
+  return candidates.length;
+}
+
+async function markRepeatedZeroApprovalDegraded(
+  supabase: SupabaseClient,
+  runId: string,
+  approvedGroups: number
+): Promise<boolean> {
+  if (approvedGroups > 0) return false;
+  const { data, error } = await supabase
+    .from("article_curation_runs")
+    .select("id, approved_group_count")
+    .eq("prompt_version", ARTICLE_CURATION_PROMPT_VERSION)
+    .eq("status", "completed")
+    .order("created_at", { ascending: false })
+    .limit(ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS);
+  if (error) throw new Error(`Could not evaluate curation health: ${error.message}`);
+  const repeated = (data?.length ?? 0) >= ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS &&
+    (data ?? []).every((row) => Number(row.approved_group_count ?? 0) === 0);
+  if (!repeated) return false;
+  const reason = `${ARTICLE_CURATION_ZERO_APPROVAL_WARN_RUNS} consecutive ${ARTICLE_CURATION_PROMPT_VERSION} runs approved zero topics.`;
+  const { error: updateError } = await supabase
+    .from("article_curation_runs")
+    .update({ degraded: true, degraded_reason: reason })
+    .eq("id", runId);
+  if (updateError) throw new Error(`Could not mark degraded curation health: ${updateError.message}`);
+  console.error(`DEGRADED ARTICLE CURATION: ${reason}`);
+  return true;
+}
+
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const dev = resolveArticleDevCredentials();
@@ -575,12 +706,15 @@ async function main() {
   const supabase = createClient(dev.url, dev.serviceRole, {
     auth: { autoRefreshToken: false, persistSession: false }
   });
-  if (options.apply) await recoverStaleCurationClaims(supabase);
+  if (options.apply) {
+    await recoverStaleCurationClaims(supabase);
+    await requeueCandidatesForCurrentPrompt(supabase);
+  }
 
   const { data: pendingData, error: pendingError } = await supabase
     .from("article_discovery_candidates")
     .select(
-      "id, source_name, source_url, source_title, source_published_at, source_discovered_at, source_description, source_categories, discovered_from"
+      "id, source_name, source_url, source_title, source_published_at, source_discovered_at, source_description, source_evidence, source_categories, discovered_from"
     )
     .eq("curation_status", "pending")
     .order("source_published_at", { ascending: false })
@@ -590,6 +724,27 @@ async function main() {
   let candidates = (pendingData ?? []) as CandidateRow[];
   if (!candidates.length) {
     console.log("No pending article discovery candidates to curate.");
+    if (options.apply) {
+      const { data: emptyRun, error: emptyRunError } = await supabase
+        .from("article_curation_runs")
+        .insert({
+          status: "completed",
+          model: options.model,
+          prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
+          candidate_count: 0,
+          approved_group_count: 0,
+          approved_candidate_count: 0,
+          rejected_candidate_count: 0,
+          raw_response: { reason: "no_pending_candidates" },
+          completed_at: new Date().toISOString()
+        })
+        .select("id")
+        .single();
+      if (emptyRunError || !emptyRun) {
+        throw new Error(`Could not record empty curation run: ${emptyRunError?.message ?? "missing run"}`);
+      }
+      if (await markRepeatedZeroApprovalDegraded(supabase, emptyRun.id, 0)) process.exitCode = 2;
+    }
     return;
   }
 
@@ -598,7 +753,7 @@ async function main() {
     if (options.apply) {
       const { data: run, error: runError } = await supabase
         .from("article_curation_runs")
-        .insert({ model: options.model, prompt_version: PROMPT_VERSION, candidate_count: candidates.length })
+        .insert({ model: options.model, prompt_version: ARTICLE_CURATION_PROMPT_VERSION, candidate_count: candidates.length })
         .select("id")
         .single();
       if (runError || !run) throw new Error(`Could not create curation run: ${runError?.message ?? "missing run"}`);
@@ -609,7 +764,7 @@ async function main() {
         .in("id", candidates.map((candidate) => candidate.id))
         .eq("curation_status", "pending")
         .select(
-          "id, source_name, source_url, source_title, source_published_at, source_discovered_at, source_description, source_categories, discovered_from"
+          "id, source_name, source_url, source_title, source_published_at, source_discovered_at, source_description, source_evidence, source_categories, discovered_from"
         );
       if (claimError) throw new Error(`Could not claim discovery candidates: ${claimError.message}`);
       candidates = (claimed ?? []) as CandidateRow[];
@@ -684,37 +839,56 @@ async function main() {
       return;
     }
 
+    const approvals = decisions.filter((decision) => decision.decision === "approve");
+    const queueIdsByAlias = new Map<string, Array<{ queueId: string; decision: CurationDecision }>>();
+    for (const decision of approvals) {
+      const queueId = await createOrMergeQueueItem(supabase, decision, candidates, runId!, options.model);
+      for (const alias of decision.candidate_ids) {
+        const entries = queueIdsByAlias.get(alias) ?? [];
+        entries.push({ queueId, decision });
+        queueIdsByAlias.set(alias, entries);
+      }
+    }
+
     let approvedCandidates = 0;
     let rejectedCandidates = 0;
-    for (const decision of decisions) {
-      const rows = decision.candidate_ids.map((id) => candidates[Number(id.slice(1))]);
-      const candidateIds = rows.map((row) => row.id);
-      if (decision.decision === "approve") {
-        const queueId = await createOrMergeQueueItem(supabase, decision, candidates, runId!, options.model);
-        await updateCandidateDecision(supabase, candidateIds, runId!, {
+    for (let index = 0; index < candidates.length; index += 1) {
+      const alias = `C${index}`;
+      const candidate = candidates[index];
+      const candidateApprovals = queueIdsByAlias.get(alias) ?? [];
+      if (candidateApprovals.length) {
+        const queueIds = [...new Set(candidateApprovals.map((entry) => entry.queueId))];
+        const topicKeys = [...new Set(candidateApprovals.flatMap((entry) => entry.decision.topic_key ? [entry.decision.topic_key] : []))];
+        await updateCandidateDecision(supabase, [candidate.id], runId!, {
           curation_status: "approved",
           curation_reason_code: "approved",
-          curation_reason: decision.reason,
+          curation_reason: candidateApprovals.map((entry) => entry.decision.reason).join(" | ").slice(0, 2000),
           curation_model: options.model,
-          curation_confidence: decision.confidence,
-          queue_id: queueId,
-          topic_key: decision.topic_key,
+          curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
+          curation_confidence: Math.max(...candidateApprovals.map((entry) => entry.decision.confidence)),
+          queue_id: queueIds[0],
+          queue_ids: queueIds,
+          topic_key: topicKeys.length === 1 ? topicKeys[0] : null,
           curated_at: new Date().toISOString()
         });
-        approvedCandidates += candidateIds.length;
-      } else {
-        await updateCandidateDecision(supabase, candidateIds, runId!, {
-          curation_status: "rejected",
-          curation_reason_code: decision.reason_code,
-          curation_reason: decision.reason,
-          curation_model: deterministicIds.has(decision.candidate_ids[0]) ? "deterministic" : options.model,
-          curation_confidence: decision.confidence,
-          queue_id: null,
-          topic_key: null,
-          curated_at: new Date().toISOString()
-        });
-        rejectedCandidates += candidateIds.length;
+        approvedCandidates += 1;
+        continue;
       }
+      const rejection = decisions.find((decision) => decision.decision === "reject" && decision.candidate_ids.includes(alias));
+      if (!rejection) throw new Error(`Candidate ${alias} has no persisted curation outcome.`);
+      await updateCandidateDecision(supabase, [candidate.id], runId!, {
+        curation_status: "rejected",
+        curation_reason_code: rejection.reason_code,
+        curation_reason: rejection.reason,
+        curation_model: deterministicIds.has(alias) ? "deterministic" : options.model,
+        curation_prompt_version: ARTICLE_CURATION_PROMPT_VERSION,
+        curation_confidence: rejection.confidence,
+        queue_id: null,
+        queue_ids: [],
+        topic_key: null,
+        curated_at: new Date().toISOString()
+      });
+      rejectedCandidates += 1;
     }
 
     const approvedGroups = decisions.filter((decision) => decision.decision === "approve").length;
@@ -732,6 +906,7 @@ async function main() {
       .eq("id", runId!);
     if (finishError) throw new Error(`Could not complete curation run: ${finishError.message}`);
     console.log(`Curation completed: ${approvedGroups} queue topic(s), ${rejectedCandidates} rejected source candidate(s).`);
+    if (await markRepeatedZeroApprovalDegraded(supabase, runId!, approvedGroups)) process.exitCode = 2;
   } catch (error) {
     if (options.apply && runId) {
       const message = error instanceof Error ? error.message : String(error);
@@ -749,7 +924,9 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error instanceof Error ? error.message : error);
-  process.exit(1);
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((error) => {
+    console.error(error instanceof Error ? error.message : error);
+    process.exit(1);
+  });
+}

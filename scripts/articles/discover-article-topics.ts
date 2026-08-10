@@ -1,5 +1,6 @@
 import "../shared/load-env";
 
+import { createHash } from "node:crypto";
 import { gunzipSync } from "node:zlib";
 
 import { createClient } from "@supabase/supabase-js";
@@ -11,6 +12,7 @@ import {
   type DiscoveryFunnelStats,
   validateDiscoveryMaxAgeHours
 } from "./article-discovery-filter";
+import { ARTICLE_CURATION_PROMPT_VERSION, ARTICLE_CURATION_REVISIT_REASON_CODES } from "./article-curation-config";
 import { resolveArticleDevCredentials } from "./article-queue-env";
 
 type SourceName =
@@ -30,6 +32,12 @@ type Candidate = {
   description?: string;
   categories?: string[];
   discoveredFrom: string;
+  evidence?: ArticleEvidence;
+};
+
+type ArticleEvidence = {
+  headings: string[];
+  excerpt: string;
 };
 
 type Options = {
@@ -58,6 +66,7 @@ const SOURCE_LABELS: Record<SourceName, string> = {
   "game-rant": "Game Rant",
   techwiser: "TechWiser"
 };
+const REVISIT_REASON_CODES = new Set<string>(ARTICLE_CURATION_REVISIT_REASON_CODES);
 
 const USER_AGENT = "BloxodesTopicDiscovery/1.0 (+https://bloxodes.com)";
 const FETCH_TIMEOUT_MS = 20_000;
@@ -220,7 +229,7 @@ function dateFromElement($element: cheerio.Cheerio<cheerio.Element>): string | n
 async function collectProGameGuides(): Promise<Candidate[]> {
   const discoveredFrom = "https://progameguides.com/roblox/";
   const $ = cheerio.load(await fetchText(discoveredFrom));
-  return $("article.m-btm-half")
+  const landing = $("article.m-btm-half, article")
     .toArray()
     .flatMap((element) => {
       const article = $(element);
@@ -228,8 +237,16 @@ async function collectProGameGuides(): Promise<Candidate[]> {
       const title = cleanText(anchor.text());
       const sourceUrl = normalizeUrl(anchor.attr("href") ?? "");
       if (!title || !sourceUrl) return [];
-      return [{ sourceName: "pro-game-guides", sourceUrl, title, publishedAt: dateFromElement(article), discoveredFrom }];
+      return [{ sourceName: "pro-game-guides" as const, sourceUrl, title, publishedAt: dateFromElement(article), discoveredFrom }];
     });
+  const feedUrl = "https://progameguides.com/feed/";
+  let feed: Candidate[] = [];
+  try {
+    feed = await collectRss("pro-game-guides", feedUrl, true);
+  } catch {
+    // Keep the first-party landing page useful when the broad feed is unavailable.
+  }
+  return [...new Map([...landing, ...feed].map((candidate) => [candidate.sourceUrl, candidate])).values()];
 }
 
 async function collectBeebom(): Promise<Candidate[]> {
@@ -285,11 +302,16 @@ async function collectGameRantLanding(): Promise<Candidate[]> {
   return [...await enrichMissingDates(articles), ...codes];
 }
 
-type ArticleMetadata = { title: string | null; publishedAt: string | null; description: string | null };
+type ArticleMetadata = {
+  title: string | null;
+  publishedAt: string | null;
+  description: string | null;
+  evidence: ArticleEvidence;
+};
 
-function visitJsonLd(value: unknown, dates: string[], titles: string[]) {
+function visitJsonLd(value: unknown, dates: string[], titles: string[], bodies: string[]) {
   if (Array.isArray(value)) {
-    for (const child of value) visitJsonLd(child, dates, titles);
+    for (const child of value) visitJsonLd(child, dates, titles, bodies);
     return;
   }
   if (!value || typeof value !== "object") return;
@@ -300,16 +322,37 @@ function visitJsonLd(value: unknown, dates: string[], titles: string[]) {
   for (const key of ["headline", "name"]) {
     if (typeof record[key] === "string") titles.push(record[key]);
   }
-  if (record["@graph"]) visitJsonLd(record["@graph"], dates, titles);
+  if (typeof record.articleBody === "string") bodies.push(record.articleBody);
+  if (record["@graph"]) visitJsonLd(record["@graph"], dates, titles, bodies);
+}
+
+function usefulHeading(value: string): boolean {
+  return Boolean(value) && value.length <= 180 && !/^(related|recommended|more|comments?|about the author|latest|trending)$/i.test(value);
+}
+
+function collectPageEvidence($: cheerio.CheerioAPI, jsonLdBodies: string[]): ArticleEvidence {
+  const scope = $("article").first().length ? $("article").first() : $("main").first();
+  const root = scope.length ? scope : $("body");
+  const headings = [...new Set(root.find("h2, h3").toArray()
+    .map((element) => cleanText($(element).text()))
+    .filter(usefulHeading))].slice(0, 24);
+  const paragraphText = root.find("p").toArray()
+    .map((element) => cleanText($(element).text()))
+    .filter((text) => text.length >= 35 && !/^(related|read more|advertisement)/i.test(text))
+    .join(" ");
+  const structuredBody = cleanText(jsonLdBodies[0] ?? "");
+  const excerpt = (structuredBody.length >= 200 ? structuredBody : cleanText(paragraphText)).slice(0, 4000);
+  return { headings, excerpt };
 }
 
 async function fetchArticleMetadata(url: string): Promise<ArticleMetadata> {
   const $ = cheerio.load(await fetchText(url));
   const dates: string[] = [];
   const titles: string[] = [];
+  const bodies: string[] = [];
   $("script[type='application/ld+json']").each((_index, element) => {
     try {
-      visitJsonLd(JSON.parse($(element).text()), dates, titles);
+      visitJsonLd(JSON.parse($(element).text()), dates, titles, bodies);
     } catch {
       // A malformed JSON-LD block should not discard otherwise usable page metadata.
     }
@@ -326,7 +369,7 @@ async function fetchArticleMetadata(url: string): Promise<ArticleMetadata> {
   const description = cleanText(
     $("meta[name='description']").attr("content") ?? $("meta[property='og:description']").attr("content") ?? ""
   );
-  return { title: title || null, publishedAt, description: description || null };
+  return { title: title || null, publishedAt, description: description || null, evidence: collectPageEvidence($, bodies) };
 }
 
 async function mapWithConcurrency<T, R>(
@@ -355,7 +398,8 @@ async function enrichMissingDates(candidates: Candidate[]): Promise<Candidate[]>
         ...candidate,
         title: candidate.title || metadata.title || "",
         publishedAt: metadata.publishedAt,
-        description: candidate.description ?? metadata.description ?? undefined
+        description: candidate.description ?? metadata.description ?? undefined,
+        evidence: metadata.evidence
       };
     } catch {
       return candidate;
@@ -398,7 +442,8 @@ async function collectGame8(maxAgeHours: number): Promise<Candidate[]> {
         title: metadata.title ?? "",
         publishedAt: row.lastModified ?? metadata.publishedAt,
         description: metadata.description ?? undefined,
-        discoveredFrom
+        discoveredFrom,
+        evidence: metadata.evidence
       };
     } catch {
       return {
@@ -410,6 +455,35 @@ async function collectGame8(maxAgeHours: number): Promise<Candidate[]> {
       };
     }
   });
+}
+
+async function enrichCandidateEvidence(candidates: Candidate[]): Promise<Candidate[]> {
+  return mapWithConcurrency(candidates, 5, async (candidate) => {
+    if (candidate.evidence?.headings.length || candidate.evidence?.excerpt) return candidate;
+    try {
+      const metadata = await fetchArticleMetadata(candidate.sourceUrl);
+      return {
+        ...candidate,
+        title: candidate.title || metadata.title || "",
+        publishedAt: candidate.publishedAt ?? metadata.publishedAt,
+        description: candidate.description ?? metadata.description ?? undefined,
+        evidence: metadata.evidence
+      };
+    } catch {
+      return candidate;
+    }
+  });
+}
+
+function candidateContentHash(candidate: Candidate): string {
+  return createHash("sha256")
+    .update(JSON.stringify({
+      title: candidate.title,
+      description: candidate.description ?? null,
+      categories: candidate.categories ?? [],
+      headings: candidate.evidence?.headings ?? []
+    }))
+    .digest("hex");
 }
 
 function isCodesArticle(candidate: Candidate): boolean {
@@ -441,11 +515,14 @@ async function insertCandidates(candidates: Candidate[]) {
   const dev = resolveArticleDevCredentials();
   const supabase = createClient(dev.url, dev.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });
   let inserted = 0;
-  let duplicates = 0;
-  const bySource = new Map<SourceName, { inserted: number; duplicates: number }>();
+  let refreshed = 0;
+  let requeued = 0;
+  let unchanged = 0;
+  const bySource = new Map<SourceName, { inserted: number; refreshed: number; requeued: number; unchanged: number }>();
 
   for (const candidate of candidates) {
-    const { error } = await supabase.from("article_discovery_candidates").insert({
+    const contentHash = candidateContentHash(candidate);
+    const payload = {
       source_name: SOURCE_LABELS[candidate.sourceName],
       source_url: candidate.sourceUrl,
       source_title: candidate.title,
@@ -454,23 +531,77 @@ async function insertCandidates(candidates: Candidate[]) {
       source_description: candidate.description?.slice(0, 1200) ?? null,
       source_categories: candidate.categories ?? [],
       discovered_from: candidate.discoveredFrom,
-      curation_status: "pending"
-    });
-    if (!error) {
+      source_evidence: candidate.evidence ?? { headings: [], excerpt: "" },
+      source_content_hash: contentHash,
+      last_seen_at: new Date().toISOString()
+    };
+    const { data: existing, error: lookupError } = await supabase
+      .from("article_discovery_candidates")
+      .select("id, curation_status, curation_reason_code, curation_prompt_version, source_content_hash, queue_id, recuration_count")
+      .eq("source_url", candidate.sourceUrl)
+      .maybeSingle();
+    if (lookupError) throw new Error(`Could not inspect ${candidate.sourceUrl}: ${lookupError.message}`);
+    const source = bySource.get(candidate.sourceName) ?? { inserted: 0, refreshed: 0, requeued: 0, unchanged: 0 };
+    if (!existing) {
+      const { error } = await supabase.from("article_discovery_candidates").insert({
+        ...payload,
+        curation_status: "pending"
+      });
+      if (error) throw new Error(`Could not stage ${candidate.sourceUrl}: ${error.message}`);
       inserted += 1;
-      const source = bySource.get(candidate.sourceName) ?? { inserted: 0, duplicates: 0 };
       source.inserted += 1;
-      bySource.set(candidate.sourceName, source);
-    } else if (error.code === "23505") {
-      duplicates += 1;
-      const source = bySource.get(candidate.sourceName) ?? { inserted: 0, duplicates: 0 };
-      source.duplicates += 1;
-      bySource.set(candidate.sourceName, source);
     } else {
-      throw new Error(`Could not stage ${candidate.sourceUrl}: ${error.message}`);
+      let queueStatus: string | undefined;
+      if (existing.queue_id) {
+        const { data: queueRow, error: queueError } = await supabase
+          .from("article_generation_queue")
+          .select("status")
+          .eq("id", existing.queue_id)
+          .maybeSingle();
+        if (queueError) throw new Error(`Could not inspect prior queue outcome for ${candidate.sourceUrl}: ${queueError.message}`);
+        queueStatus = queueRow?.status;
+      }
+      const stalePrompt = existing.curation_prompt_version !== ARTICLE_CURATION_PROMPT_VERSION;
+      const contentChanged = existing.source_content_hash !== contentHash;
+      const retryableOutcome = (existing.curation_status === "rejected" &&
+        REVISIT_REASON_CODES.has(existing.curation_reason_code ?? "")) ||
+        (existing.curation_status === "approved" && ["skipped", "failed"].includes(queueStatus ?? ""));
+      const shouldRequeue = retryableOutcome && (stalePrompt || contentChanged);
+      const { error } = await supabase
+        .from("article_discovery_candidates")
+        .update({
+          ...payload,
+          ...(shouldRequeue ? {
+            curation_status: "pending",
+            curation_reason_code: null,
+            curation_reason: null,
+            curation_model: null,
+            curation_confidence: null,
+            curation_run_id: null,
+            curation_prompt_version: null,
+            queue_id: null,
+            queue_ids: [],
+            topic_key: null,
+            curated_at: null,
+            recuration_count: Number(existing.recuration_count ?? 0) + 1
+          } : {})
+        })
+        .eq("id", existing.id);
+      if (error) throw new Error(`Could not refresh ${candidate.sourceUrl}: ${error.message}`);
+      if (shouldRequeue) {
+        requeued += 1;
+        source.requeued += 1;
+      } else if (contentChanged) {
+        refreshed += 1;
+        source.refreshed += 1;
+      } else {
+        unchanged += 1;
+        source.unchanged += 1;
+      }
     }
+    bySource.set(candidate.sourceName, source);
   }
-  return { inserted, duplicates, bySource };
+  return { inserted, refreshed, requeued, unchanged, bySource };
 }
 
 async function main() {
@@ -486,10 +617,7 @@ async function main() {
         limit: options.perSource,
         exclude: isCodesArticle
       });
-      return {
-      sourceName,
-        ...filtered
-      };
+      return { sourceName, ...filtered, candidates: await enrichCandidateEvidence(filtered.candidates) };
     })
   );
   const candidates: Candidate[] = [];
@@ -524,7 +652,7 @@ async function main() {
     return;
   }
   const result = await insertCandidates(uniqueCandidates);
-  console.log(`Discovery staging updated: ${result.inserted} inserted, ${result.duplicates} already discovered.`);
+  console.log(`Discovery staging updated: ${result.inserted} inserted, ${result.requeued} requeued, ${result.refreshed} refreshed, ${result.unchanged} unchanged.`);
   console.table(
     [...result.bySource].map(([sourceName, counts]) => ({ source: SOURCE_LABELS[sourceName], ...counts }))
   );

@@ -20,6 +20,7 @@ type Options = {
   resultSlug: string | null;
   productionUrl: string | null;
   devEnvFile: string | null;
+  retryAfterMinutes: number;
 };
 
 type QueueRow = {
@@ -36,7 +37,7 @@ type QueueRow = {
 
 function printUsage() {
   console.log(
-    "Usage: npm run articles:queue:update -- --queue-id UUID --status processing|completed|published|rejected|skipped|failed --apply [--dev-env-file PATH] [--worker NAME] [--reason TEXT] [--result-path final.json] [--result-slug SLUG] [--production-url URL]"
+    "Usage: npm run articles:queue:update -- --queue-id UUID --status processing|blocked|completed|published|rejected|skipped|failed --apply [--dev-env-file PATH] [--worker NAME] [--reason TEXT] [--retry-after-minutes N] [--result-path final.json] [--result-slug SLUG] [--production-url URL]"
   );
 }
 
@@ -56,7 +57,8 @@ function parseArgs(argv: string[]): Options {
     resultPath: null,
     resultSlug: null,
     productionUrl: null,
-    devEnvFile: null
+    devEnvFile: null,
+    retryAfterMinutes: 180
   };
   let hasStatus = false;
 
@@ -94,6 +96,13 @@ function parseArgs(argv: string[]): Options {
     } else if (arg === "--dev-env-file") {
       options.devEnvFile = requireValue(argv, index, arg);
       index += 1;
+    } else if (arg === "--retry-after-minutes") {
+      const value = Number(requireValue(argv, index, arg));
+      if (!Number.isInteger(value) || value < 5 || value > 10080) {
+        throw new Error("--retry-after-minutes must be an integer from 5 to 10080.");
+      }
+      options.retryAfterMinutes = value;
+      index += 1;
     } else {
       throw new Error(`Unknown option: ${arg}`);
     }
@@ -102,7 +111,7 @@ function parseArgs(argv: string[]): Options {
   if (!options.queueId) throw new Error("--queue-id is required.");
   if (!hasStatus) throw new Error("--status is required.");
   if (!options.apply) throw new Error("Queue state changes require --apply.");
-  if (["rejected", "skipped", "failed"].includes(options.status) && !options.reason?.trim()) {
+  if (["blocked", "rejected", "skipped", "failed"].includes(options.status) && !options.reason?.trim()) {
     throw new Error(`${options.status} requires --reason.`);
   }
   if (options.status === "completed" && !options.resultPath) {
@@ -185,6 +194,18 @@ async function main() {
       last_error: null,
       outcome_reason: null,
       completed_at: null,
+      published_at: null,
+      rejected_at: null,
+      production_url: null
+    });
+  } else if (options.status === "blocked") {
+    Object.assign(update, {
+      completed_at: null,
+      locked_at: null,
+      locked_by: null,
+      next_attempt_at: new Date(Date.now() + options.retryAfterMinutes * 60_000).toISOString(),
+      outcome_reason: options.reason!.trim(),
+      last_error: options.reason!.trim(),
       published_at: null,
       rejected_at: null,
       production_url: null

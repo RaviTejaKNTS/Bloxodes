@@ -1,6 +1,7 @@
 export const ARTICLE_QUEUE_STATUSES = [
   "pending",
   "processing",
+  "blocked",
   "completed",
   "published",
   "rejected",
@@ -13,6 +14,7 @@ export type ArticleQueueStatus = (typeof ARTICLE_QUEUE_STATUSES)[number];
 export const ARTICLE_TOPIC_DEDUPE_STATUSES: ArticleQueueStatus[] = [
   "pending",
   "processing",
+  "blocked",
   "completed",
   "published",
   "rejected"
@@ -20,7 +22,8 @@ export const ARTICLE_TOPIC_DEDUPE_STATUSES: ArticleQueueStatus[] = [
 
 const ALLOWED_TRANSITIONS: Record<ArticleQueueStatus, ArticleQueueStatus[]> = {
   pending: ["processing", "skipped", "failed"],
-  processing: ["processing", "completed", "skipped", "failed"],
+  processing: ["processing", "blocked", "completed", "skipped", "failed"],
+  blocked: ["pending", "blocked", "skipped", "failed"],
   completed: ["completed", "published", "rejected"],
   published: ["published"],
   rejected: ["rejected"],

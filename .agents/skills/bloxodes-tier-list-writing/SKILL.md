@@ -1,6 +1,6 @@
 ---
 name: bloxodes-tier-list-writing
-description: Write one Bloxodes Roblox tier-list article final.json from an approved brief. Use for /articles content that ranks a complete source-backed set of units, classes, weapons, abilities, items, characters, or similar game entities and needs the visual tier-list block, reusable local images, matching per-tier Markdown tables, explanations, metadata, and article verification.
+description: Write one Bloxodes Roblox tier-list article final.json from an approved brief. Use for /articles content that ranks a complete source-backed set of units, classes, weapons, abilities, items, characters, or similar game entities using a visual tier-list when complete exact-match local images exist, or a text/table-first layout when they do not.
 ---
 
 # Bloxodes Tier List Writing
@@ -24,8 +24,8 @@ Before ranking:
 1. Define the exact scope, such as general progression, PvE, PvP, beginners, or endgame.
 2. List the complete expected item set. Do not let easy-to-find images define coverage.
 3. Verify ranking criteria and placements from the approved sources and game evidence. Do not copy one competitor's order blindly.
-4. Map every item to its exact existing Bloxodes public image path. Reuse canonical game and collection assets under `apps/web/public`; do not duplicate them into the article folder.
-5. Stop if important items, placement evidence, or exact images are unresolved.
+4. Check whether every item has an exact existing Bloxodes public image path. Reuse canonical game and collection assets under `apps/web/public`; do not duplicate them into the article folder.
+5. Stop if important items or placement evidence are unresolved. Do not stop solely because some or all per-item images are unavailable; use the text/table-first shape instead.
 
 ## Required Article Shape
 
@@ -33,15 +33,17 @@ Write Markdown in `content_md` in this order:
 
 1. Give the direct answer and top recommendations with any essential caveat.
 2. State the ranking scope and criteria briefly.
-3. Add exactly one `tier-list` block containing only tier ranks, images, names, and optional links.
-4. Add one `## <rank> Tier` section for every tier, in overview order.
-5. Begin each tier section with one Markdown detail table. Repeat the exact item name and image path from the overview.
+3. When every ranked item has an exact verified local image, add exactly one `tier-list` block containing only tier ranks, images, names, and optional links. Otherwise omit the block entirely and introduce the ranking with a concise Markdown summary table.
+4. Add one `## <rank> Tier` section for every tier, in best-to-worst ranking order.
+5. Begin each tier section with one Markdown detail table. In visual mode, repeat the exact item name and image path from the overview. In text/table-first mode, omit the image column and include every ranked item by exact name.
 6. Follow the table with useful tier-level analysis, exceptions, and player advice. Do not narrate every row again.
 7. Add a conclusion only when it contributes a choice, caveat, or next step.
 
 Use topic-specific detail columns. Examples include role, cost, stats, strengths, weaknesses, best use, PvE value, or PvP value. Keep cells concise.
 
 ## Tier-List Block
+
+Use this block only in visual mode, when the image set is complete. Never insert placeholders, near matches, or hotlinks to force visual mode.
 
 ```yaml
 schema: 1
@@ -87,7 +89,7 @@ Use an exact H2 such as `## S Tier`. The verifier matches that heading to `rank:
 | ![Hakari fighting style icon in Gakuran](/Gakuran/Fighting%20Styles/hakari.png) | Hakari | General combat | Source-backed detail | Source-backed limitation |
 ```
 
-Every overview item must appear in its matching tier table with the exact same image path. Do not add a detailed row that is absent from the overview.
+Every overview item must appear in its matching tier table with the exact same image path. Do not add a detailed row that is absent from the overview. In text/table-first mode, use the same tier headings and detail tables without an Image column; every item must still appear exactly once.
 
 ## Optional Embedded Checklist
 
@@ -109,9 +111,9 @@ Place that YAML inside a fenced block whose language is `article-checklist`. Ite
 
 Before returning `final.json`:
 
-- Confirm the expected, ranked, tabled, and imaged item counts match.
+- Confirm the expected, ranked, and tabled item counts match. In visual mode, also confirm the imaged item count matches; in text/table-first mode, confirm there is no partial tier-list block or placeholder image.
 - Confirm each placement belongs to the stated scope and each table adds real detail.
-- Confirm overview names and image paths exactly match the per-tier tables.
+- In visual mode, confirm overview names and image paths exactly match the per-tier tables.
 - Parse-check JSON.
 - Run the normal article verifier against a local web server:
 
@@ -119,4 +121,4 @@ Before returning `final.json`:
 npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json>
 ```
 
-Do not call the article ready if the structured block, tier detail contract, local image checks, import, or rendered route fails.
+Do not call a visual article ready if the structured block or local image checks fail. For either shape, do not call it ready if the tier detail contract, import, or rendered route fails.

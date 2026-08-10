@@ -74,7 +74,7 @@ For normal gameplay and general articles, tell it:
 
 For Roblox tech, platform, or troubleshooting articles, replace the writing skill with `/bloxodes-tech-article-writing` and apply its rules on top of the base article-writing rules.
 
-For articles whose primary job is ranking a complete set of units, classes, weapons, abilities, items, characters, or similar entities, replace the writing skill with `/bloxodes-tier-list-writing`. Require the visual overview block, reusable exact-match images, and one matching detail table per tier.
+For articles whose primary job is ranking a complete set of units, classes, weapons, abilities, items, characters, or similar entities, replace the writing skill with `/bloxodes-tier-list-writing`. Prefer its visual overview when a complete exact-match local image set exists. Otherwise use its text/table-first tier-list shape; missing per-item images alone must not block an otherwise source-backed ranking.
 
 Pass the writing subagent the paths to `brief.md` and `final.json`, the topic and article slugs, whether the article is normal, tech, or tier-list content, and any parent approval notes. Resume that writing subagent when copy changes are needed so it retains the article context.
 
@@ -133,7 +133,13 @@ Use `skipped` for a deliberate editorial rejection such as existing coverage or 
 npm run articles:queue:update -- --queue-id <uuid> --status skipped --reason "<concise reason>" --apply
 ```
 
-Use `failed` only for a terminal operational failure, with `--reason`. Do not mark a row `completed` merely because `final.json` exists: the verifier and actual browser preview must both have passed.
+For a queue row claimed directly by this runner, use `blocked` for a temporary evidence, tool, browser, media, or service failure. The homelab batch returns due blocked rows to pending with bounded attempts:
+
+```bash
+npm run articles:queue:update -- --queue-id <uuid> --status blocked --reason "<concise reason>" --retry-after-minutes 180 --apply
+```
+
+For an externally claimed one-row homelab job, return `blocked` in the structured result and let its wrapper apply backoff. Use `failed` only for an unrecoverable workflow failure. Use `skipped` only for a deliberate editorial rejection, never for a temporary inability to obtain optional media. Do not mark a row `completed` merely because `final.json` exists: the verifier and actual browser preview must both have passed.
 
 ## Brief Review
 

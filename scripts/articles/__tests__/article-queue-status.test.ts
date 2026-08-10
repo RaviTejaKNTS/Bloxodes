@@ -10,6 +10,8 @@ import {
 test("allows the writing and release-review lifecycle", () => {
   assert.doesNotThrow(() => assertArticleQueueTransition("pending", "processing"));
   assert.doesNotThrow(() => assertArticleQueueTransition("processing", "completed"));
+  assert.doesNotThrow(() => assertArticleQueueTransition("processing", "blocked"));
+  assert.doesNotThrow(() => assertArticleQueueTransition("blocked", "pending"));
   assert.doesNotThrow(() => assertArticleQueueTransition("completed", "published"));
   assert.doesNotThrow(() => assertArticleQueueTransition("completed", "rejected"));
 });
@@ -20,7 +22,7 @@ test("keeps production decisions terminal", () => {
 });
 
 test("deduplicates terminal editorial decisions", () => {
-  assert.deepEqual(ARTICLE_TOPIC_DEDUPE_STATUSES, ["pending", "processing", "completed", "published", "rejected"]);
+  assert.deepEqual(ARTICLE_TOPIC_DEDUPE_STATUSES, ["pending", "processing", "blocked", "completed", "published", "rejected"]);
   assert.equal(parseArticleQueueStatus("published"), "published");
   assert.throws(() => parseArticleQueueStatus("unknown"), /Unsupported queue status/);
 });

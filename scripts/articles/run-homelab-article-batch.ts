@@ -23,6 +23,7 @@ type Options = {
   worktree: string;
   grokBin: string;
   grokModel: string;
+  maxAttempts: number;
 };
 
 const MAX_BATCH_SIZE = 6;
@@ -36,6 +37,7 @@ Options:
   --worktree PATH            Persistent Bloxodes worktree (default: current repo)
   --grok-bin PATH            Grok CLI path (default: ARTICLE_WRITER_GROK_BIN or grok)
   --grok-model MODEL         Grok model (default: ARTICLE_WRITER_GROK_MODEL or grok-4.5)
+  --max-attempts N           Retry threshold for blocked rows, 1-10 (default: 3)
   --timeout-minutes N        Batch timeout, 30-330 (default: 300)
   --help                     Show this help
 
@@ -73,7 +75,8 @@ function parseArgs(argv: string[]): Options {
     ),
     worktree: path.resolve(process.env.ARTICLE_WRITER_WORKTREE?.trim() || process.cwd()),
     grokBin: process.env.ARTICLE_WRITER_GROK_BIN?.trim() || "grok",
-    grokModel: process.env.ARTICLE_WRITER_GROK_MODEL?.trim() || "grok-4.5"
+    grokModel: process.env.ARTICLE_WRITER_GROK_MODEL?.trim() || "grok-4.5",
+    maxAttempts: parseInteger(process.env.ARTICLE_WRITER_MAX_ATTEMPTS ?? "3", "ARTICLE_WRITER_MAX_ATTEMPTS", 1, 10)
   };
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -103,6 +106,11 @@ function parseArgs(argv: string[]): Options {
       index += 1;
     } else if (arg.startsWith("--grok-model=")) {
       options.grokModel = arg.slice("--grok-model=".length).trim();
+    } else if (arg === "--max-attempts") {
+      options.maxAttempts = parseInteger(requireValue(argv, index, arg), arg, 1, 10);
+      index += 1;
+    } else if (arg.startsWith("--max-attempts=")) {
+      options.maxAttempts = parseInteger(arg.slice("--max-attempts=".length), "--max-attempts", 1, 10);
     } else if (arg === "--timeout-minutes") {
       options.timeoutMinutes = parseInteger(requireValue(argv, index, arg), arg, 30, 330);
       index += 1;
@@ -174,6 +182,64 @@ async function pendingQueueCount(dev: { url: string; serviceRole: string }): Pro
   return count ?? 0;
 }
 
+async function completedQueueCountSince(
+  dev: { url: string; serviceRole: string },
+  startedAt: string
+): Promise<number> {
+  const supabase = createClient(dev.url, dev.serviceRole, {
+    auth: { autoRefreshToken: false, persistSession: false }
+  });
+  const { count, error } = await supabase
+    .from("article_generation_queue")
+    .select("id", { count: "exact", head: true })
+    .eq("workflow_mode", "agent_runner")
+    .eq("status", "completed")
+    .gte("completed_at", startedAt);
+  if (error) throw new Error(`Could not count articles completed by the current batch: ${error.message}`);
+  return count ?? 0;
+}
+
+async function requeueDueBlockedRows(
+  dev: { url: string; serviceRole: string },
+  maxAttempts: number
+): Promise<{ requeued: number; failed: number }> {
+  const supabase = createClient(dev.url, dev.serviceRole, {
+    auth: { autoRefreshToken: false, persistSession: false }
+  });
+  const now = new Date().toISOString();
+  const { data: failedRows, error: failedError } = await supabase
+    .from("article_generation_queue")
+    .update({
+      status: "failed",
+      completed_at: now,
+      next_attempt_at: null,
+      locked_at: null,
+      locked_by: null,
+      last_error: "Blocked article exceeded the configured homelab writer attempt limit."
+    })
+    .eq("workflow_mode", "agent_runner")
+    .eq("status", "blocked")
+    .gte("attempts", maxAttempts)
+    .lte("next_attempt_at", now)
+    .select("id");
+  if (failedError) throw new Error(`Could not close exhausted blocked article rows: ${failedError.message}`);
+  const { data, error } = await supabase
+    .from("article_generation_queue")
+    .update({
+      status: "pending",
+      locked_at: null,
+      locked_by: null,
+      outcome_reason: null
+    })
+    .eq("workflow_mode", "agent_runner")
+    .eq("status", "blocked")
+    .lt("attempts", maxAttempts)
+    .lte("next_attempt_at", now)
+    .select("id");
+  if (error) throw new Error(`Could not requeue due blocked article rows: ${error.message}`);
+  return { requeued: data?.length ?? 0, failed: failedRows?.length ?? 0 };
+}
+
 function buildPrompt(targetCount: number): string {
   return `Use /bloxodes-article-workflow-runner for this unattended homelab batch.
 
@@ -236,6 +302,11 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (path.isAbsolute(options.grokBin)) await access(options.grokBin, fsConstants.X_OK);
   const dev = resolveArticleDevCredentials();
+  if (options.apply) {
+    const retryResult = await requeueDueBlockedRows(dev, options.maxAttempts);
+    if (retryResult.requeued) console.log(`Returned ${retryResult.requeued} due blocked article row(s) to pending.`);
+    if (retryResult.failed) console.log(`Closed ${retryResult.failed} blocked article row(s) after max attempts.`);
+  }
   const pending = await pendingQueueCount(dev);
   const targetCount = Math.min(options.limit, pending);
   console.log(`Managed dev queue: ${pending} pending at ${supabaseTarget(dev.url)}; batch target ${targetCount}.`);
@@ -256,7 +327,13 @@ async function main() {
   }
   try {
     console.log(`Starting ${options.grokModel} batch for up to ${targetCount} article(s) with automatic approval.`);
+    const batchStartedAt = new Date().toISOString();
     await runGrok(options, targetCount, dev);
+    const completed = await completedQueueCountSince(dev, batchStartedAt);
+    if (completed === 0) {
+      throw new Error("DEGRADED ARTICLE WRITER: Grok processed a non-empty batch but completed zero managed-dev articles.");
+    }
+    console.log(`Grok batch completed ${completed} managed-dev article(s).`);
   } finally {
     await releaseLock();
   }
