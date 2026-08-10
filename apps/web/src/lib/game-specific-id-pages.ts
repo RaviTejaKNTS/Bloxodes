@@ -7,6 +7,7 @@ export type MusicGameIdPage = {
   description: string;
   datasetPreset: MusicGameDatasetPreset;
   idLabel: "Sound ID" | "Music ID";
+  seoCountLabel: string;
 };
 
 export type DecalGameIdPage = {
@@ -21,38 +22,43 @@ export type DecalGameIdPage = {
 export const MUSIC_GAME_ID_PAGES: MusicGameIdPage[] = [
   {
     slug: "jujutsu-shenanigans",
-    title: "Jujutsu Shenanigans Sound IDs",
+    title: "Jujutsu Shenanigans Music IDs",
     description: "Find short Roblox audio IDs suited to Jujutsu Shenanigans kill sounds, death sounds, and Boombox clips.",
     datasetPreset: "short-sounds",
-    idLabel: "Sound ID"
+    idLabel: "Sound ID",
+    seoCountLabel: "Kill & Death Sounds"
   },
   {
     slug: "murder-mystery-2",
     title: "Murder Mystery 2 Music IDs",
     description: "Browse Roblox music IDs for the Murder Mystery 2 Radio and copy a song for your saved playlist.",
     datasetPreset: "music",
-    idLabel: "Music ID"
+    idLabel: "Music ID",
+    seoCountLabel: "MM2 Radio Codes"
   },
   {
     slug: "the-strongest-battlegrounds",
-    title: "The Strongest Battlegrounds Kill Sound IDs",
+    title: "The Strongest Battlegrounds Music IDs",
     description: "Browse short Roblox audio IDs that fit The Strongest Battlegrounds custom kill-sound field.",
     datasetPreset: "short-sounds",
-    idLabel: "Sound ID"
+    idLabel: "Sound ID",
+    seoCountLabel: "Kill Sound Codes"
   },
   {
     slug: "forsaken",
-    title: "Forsaken Sound IDs",
+    title: "Forsaken Music IDs",
     description: "Find short Roblox audio IDs for Forsaken hit sounds, kill sounds, and other custom sound slots.",
     datasetPreset: "short-sounds",
-    idLabel: "Sound ID"
+    idLabel: "Sound ID",
+    seoCountLabel: "Hit & Kill Sounds"
   },
   {
     slug: "adopt-me",
     title: "Adopt Me Music IDs",
     description: "Browse Roblox music IDs for Adopt Me house builds, Jukeboxes, and soundtrack searches.",
     datasetPreset: "music",
-    idLabel: "Music ID"
+    idLabel: "Music ID",
+    seoCountLabel: "Jukebox Songs"
   }
 ];
 

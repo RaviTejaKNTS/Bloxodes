@@ -1,10 +1,9 @@
 import { publicContentCache } from "@/lib/public-content-cache";
 import { supabaseAdmin } from "@/lib/supabase";
+import { getFreeItemsCount } from "@/lib/db";
 import {
   getAvatarCatalogCount,
-  resolveAvatarCatalogTopLevelConfig,
-  type AvatarCatalogResolvedSearch,
-  type AvatarCatalogSaleFilter
+  resolveAvatarCatalogTopLevelConfig
 } from "@/lib/roblox-avatar-catalog";
 
 /** Icon hint for a catalog card; the card maps this to a concrete icon. */
@@ -32,7 +31,8 @@ export type CatalogCardMeta = {
 };
 
 type CountSource =
-  | { kind: "avatar"; code: string; sale?: AvatarCatalogSaleFilter }
+  | { kind: "avatar"; code: string }
+  | { kind: "free" }
   | { kind: "music" }
   | { kind: "decal" }
   | { kind: "font" }
@@ -65,13 +65,13 @@ const CATALOG_CONFIG: Record<string, CatalogConfig> = {
     shortLabel: "Free Items",
     unit: "free items",
     icon: "gift",
-    source: { kind: "avatar", code: "roblox-items-and-bundles", sale: "free" }
+    source: { kind: "free" }
   },
   "roblox-free-items": {
     shortLabel: "Free Items",
     unit: "free items",
     icon: "gift",
-    source: { kind: "avatar", code: "roblox-items-and-bundles", sale: "free" }
+    source: { kind: "free" }
   },
   "roblox-accessories": {
     shortLabel: "Accessories",
@@ -128,11 +128,13 @@ const countMusicIds = publicContentCache(
     const sb = supabaseAdmin();
     const { count, error } = await sb
       .from("roblox_music_ids_ranked_view")
-      .select("asset_id", { count: "exact", head: true });
+      .select("asset_id", { count: "exact", head: true })
+      .not("duration_seconds", "is", null)
+      .gt("duration_seconds", 0);
     if (error) throw error;
     return count ?? null;
   },
-  ["catalogCardMeta:musicIdsCount"],
+  ["catalogCardMeta:musicIdsCount:v2"],
   { revalidate: 3600, tags: ["catalog-index", "music-ids"] }
 );
 
@@ -144,42 +146,13 @@ const countDecalIds = publicContentCache(
       .select("asset_id", { count: "exact", head: true })
       .eq("status", "active")
       .eq("thumbnail_state", "Completed")
-      .not("thumbnail_url", "is", null);
+      .not("thumbnail_url", "is", null)
+      .not("thumbnail_url", "ilike", "%/UnknownImage/%");
     if (error) throw error;
     return count ?? null;
   },
-  ["catalogCardMeta:decalIdsCount"],
+  ["catalogCardMeta:decalIdsCount:v2"],
   { revalidate: 3600, tags: ["catalog-index", "decal-ids"] }
-);
-
-const countPromoRewards = publicContentCache(
-  async (): Promise<number | null> => {
-    const sb = supabaseAdmin();
-    const { count, error } = await sb
-      .from("roblox_promo_rewards")
-      .select("id", { count: "exact", head: true })
-      .in("status", ["source_listed_unverified", "verified_claimable", "unavailable", "expired"]);
-    if (error) throw error;
-    return count ?? null;
-  },
-  ["catalogCardMeta:promoRewardsCount"],
-  { revalidate: 3600, tags: ["catalog-index", "catalog:roblox-promo-codes"] }
-);
-
-const countFontIds = publicContentCache(
-  async (): Promise<number | null> => {
-    const sb = supabaseAdmin();
-    const { count, error } = await sb
-      .from("roblox_font_ids")
-      .select("asset_id", { count: "exact", head: true })
-      .eq("status", "active")
-      .eq("thumbnail_state", "Completed")
-      .not("thumbnail_url", "is", null);
-    if (error) throw error;
-    return count ?? null;
-  },
-  ["catalogCardMeta:fontIdsCount:v1"],
-  { revalidate: 3600, tags: ["catalog-index", "catalog:roblox-font-ids"] }
 );
 
 const countMeshIds = publicContentCache(
@@ -198,6 +171,37 @@ const countMeshIds = publicContentCache(
   { revalidate: 3600, tags: ["catalog-index", "catalog:roblox-mesh-ids"] }
 );
 
+const countFontIds = publicContentCache(
+  async (): Promise<number | null> => {
+    const sb = supabaseAdmin();
+    const { count, error } = await sb
+      .from("roblox_font_ids")
+      .select("asset_id", { count: "exact", head: true })
+      .eq("status", "active")
+      .eq("thumbnail_state", "Completed")
+      .not("thumbnail_url", "is", null);
+    if (error) throw error;
+    return count ?? null;
+  },
+  ["catalogCardMeta:fontIdsCount:v1"],
+  { revalidate: 3600, tags: ["catalog-index", "catalog:roblox-font-ids"] }
+);
+
+const countPromoRewards = publicContentCache(
+  async (): Promise<number | null> => {
+    const sb = supabaseAdmin();
+    const { count, error } = await sb
+      .from("roblox_promo_rewards")
+      .select("id", { count: "exact", head: true })
+      .in("status", ["source_listed_unverified", "verified_claimable", "unavailable", "expired"])
+      .or("status.in.(verified_claimable,unavailable,expired),claim_type.eq.experience_code");
+    if (error) throw error;
+    return count ?? null;
+  },
+  ["catalogCardMeta:promoRewardsCount:v2"],
+  { revalidate: 3600, tags: ["catalog-index", "catalog:roblox-promo-codes"] }
+);
+
 async function resolveCount(source: CountSource): Promise<number | null> {
   if (!source) return null;
   try {
@@ -207,24 +211,21 @@ async function resolveCount(source: CountSource): Promise<number | null> {
     if (source.kind === "decal") {
       return await countDecalIds();
     }
+    if (source.kind === "mesh") {
+      return await countMeshIds();
+    }
     if (source.kind === "font") {
       return await countFontIds();
     }
-    if (source.kind === "mesh") {
-      return await countMeshIds();
+    if (source.kind === "free") {
+      return await getFreeItemsCount();
     }
     if (source.kind === "promo") {
       return await countPromoRewards();
     }
     const config = resolveAvatarCatalogTopLevelConfig(source.code);
     if (!config) return null;
-    const filters: AvatarCatalogResolvedSearch = {
-      search: "",
-      sort: "featured",
-      sale: source.sale ?? "all",
-      creator: "all"
-    };
-    return await getAvatarCatalogCount(config, filters);
+    return await getAvatarCatalogCount(config);
   } catch (error) {
     console.error("Error resolving catalog card count", error);
     return null;

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Article Release Review"
+  short_description: "Review and publish completed Bloxodes articles"
+  default_prompt: "Use $bloxodes-article-release-review to list completed articles, preview them locally, and publish or reject only the articles I explicitly decide."

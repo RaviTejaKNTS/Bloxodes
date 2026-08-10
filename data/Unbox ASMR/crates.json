@@ -1,0 +1,301 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Unbox ASMR",
+    "gameSlug": "unbox-asmr",
+    "collection": "crates",
+    "route": "/wiki/unbox-asmr/crates",
+    "catalogCode": "unbox-asmr-crates",
+    "itemFields": [
+      "rarity",
+      "currency",
+      "howToGet",
+      "availability",
+      "contentsNotes",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "currency",
+      "howToGet",
+      "availability",
+      "contentsNotes",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Conveyor crates",
+        "Event crates",
+        "Special unlocks"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "currency",
+        "howToGet",
+        "availability",
+        "contentsNotes"
+      ],
+      "tableFields": [
+        "rarity",
+        "currency",
+        "howToGet",
+        "availability",
+        "contentsNotes",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "currency": {
+          "kind": "chip",
+          "label": "Currency"
+        },
+        "howToGet": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "contentsNotes": {
+          "kind": "detail",
+          "label": "Contents"
+        },
+        "cardSummary": {
+          "kind": "detail"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Common Crate",
+        "rarity": "Common",
+        "currency": "Cash",
+        "howToGet": "Buy from the toy crate conveyor when a Common crate spawns. Cash prices are shown live on the belt.",
+        "availability": "Available",
+        "contentsNotes": null,
+        "cardSummary": "Lowest conveyor rarity. Early cash crates for starter ASMR toys while you build income and conveyor luck."
+      },
+      "system": {
+        "slug": "common-crate",
+        "section": "Conveyor crates",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Uncommon Crate",
+        "rarity": "Uncommon",
+        "currency": "Cash",
+        "howToGet": "Buy from the toy crate conveyor when an Uncommon crate spawns. Upgrading the conveyor improves higher-rarity luck.",
+        "availability": "Available",
+        "contentsNotes": null,
+        "cardSummary": "Early conveyor step up from Common. Spend Cash on the belt and reinvest into conveyor upgrades for better rolls."
+      },
+      "system": {
+        "slug": "uncommon-crate",
+        "section": "Conveyor crates",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rare Crate",
+        "rarity": "Rare",
+        "currency": "Cash",
+        "howToGet": "Buy from the toy crate conveyor when a Rare crate spawns. Conveyor cash upgrades raise luck toward higher rarities.",
+        "availability": "Available",
+        "contentsNotes": null,
+        "cardSummary": "Mid-early conveyor rarity. More valuable ASMR toys than Common and Uncommon once your belt luck improves."
+      },
+      "system": {
+        "slug": "rare-crate",
+        "section": "Conveyor crates",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Epic Crate",
+        "rarity": "Epic",
+        "currency": "Cash",
+        "howToGet": "Buy from the toy crate conveyor when an Epic crate spawns. Conveyor upgrades and luck boosts help this tier appear more often.",
+        "availability": "Available",
+        "contentsNotes": null,
+        "cardSummary": "Mid-game conveyor rarity. Worth grabbing when cash is stable so your field upgrades past early toys."
+      },
+      "system": {
+        "slug": "epic-crate",
+        "section": "Conveyor crates",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Legendary Crate",
+        "rarity": "Legendary",
+        "currency": "Cash",
+        "howToGet": "Buy from the toy crate conveyor when a Legendary crate spawns. Higher conveyor luck and Luck weather help reach this tier.",
+        "availability": "Available",
+        "contentsNotes": null,
+        "cardSummary": "Strong mid-game conveyor crate. Prioritize opening during luck boosts when you can afford the live belt price."
+      },
+      "system": {
+        "slug": "legendary-crate",
+        "section": "Conveyor crates",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mythic Crate",
+        "rarity": "Mythic",
+        "currency": "Cash",
+        "howToGet": "Buy from the toy crate conveyor when a Mythic crate spawns. Needs solid conveyor upgrades and optional luck multipliers.",
+        "availability": "Available",
+        "contentsNotes": null,
+        "cardSummary": "Late conveyor rarity with stronger ASMR payouts. Treat Luck weather and paid luck boosts as help, not requirements."
+      },
+      "system": {
+        "slug": "mythic-crate",
+        "section": "Conveyor crates",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Divine Crate",
+        "rarity": "Divine",
+        "currency": "Cash",
+        "howToGet": "Buy from the toy crate conveyor when a Divine crate spawns. High conveyor luck and event luck windows are the practical path.",
+        "availability": "Available",
+        "contentsNotes": null,
+        "cardSummary": "High conveyor rarity just below special event and premium tiers. Save cash so you can buy it when it rolls on the belt."
+      },
+      "system": {
+        "slug": "divine-crate",
+        "section": "Conveyor crates",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Honey Crate",
+        "rarity": "Honey",
+        "currency": "Cash",
+        "howToGet": "Can appear on the conveyor at a low natural rate. During Honey weather, about 1 in 5 conveyor crates can become Honey Crates for the 5-minute event.",
+        "availability": "Event-boosted",
+        "contentsNotes": "Honey-themed ASMRs. Named examples include Keyboard, Spoon, and Honey Comb. Exact full list and item count are not dual-sourced.",
+        "cardSummary": "Event-linked conveyor crate. Farm hardest during Honey weather when Honey Crates spike on the belt, and still watch for rare off-event spawns."
+      },
+      "system": {
+        "slug": "honey-crate",
+        "section": "Event crates",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Exotic Crate",
+        "rarity": "Exotic",
+        "currency": "Cash",
+        "howToGet": "Buy from the toy crate conveyor when an Exotic crate spawns. High conveyor luck and Luck weather improve access.",
+        "availability": "Available",
+        "contentsNotes": null,
+        "cardSummary": "High-tier conveyor crate above Honey on the rarity ladder. Cash only; exact drop odds are unpublished."
+      },
+      "system": {
+        "slug": "exotic-crate",
+        "section": "Conveyor crates",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Godly Crate",
+        "rarity": "Godly",
+        "currency": "Cash",
+        "howToGet": "Buy from the toy crate conveyor when a Godly crate spawns. Top standard belt rarity before special permanent unlocks.",
+        "availability": "Available",
+        "contentsNotes": null,
+        "cardSummary": "Highest normal cash conveyor rarity before Rebirth, Exclusive, and Limited specials. Open during luck windows when you can."
+      },
+      "system": {
+        "slug": "godly-crate",
+        "section": "Conveyor crates",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebirth ASMR",
+        "rarity": "Rebirth ASMR",
+        "currency": "Rebirth",
+        "howToGet": "Not a conveyor crate. Complete a rebirth that meets the cash and required ASMR conditions to receive one permanent Rebirth ASMR. Guides list up to 10 rebirths.",
+        "availability": "Permanent after unlock",
+        "contentsNotes": "One permanent Rebirth ASMR per completed rebirth. Survives rebirth wipes with Limited and Exclusive items. Cannot be sold.",
+        "cardSummary": "Special ladder tier unlocked by rebirths, not the conveyor. Each rebirth awards a permanent Rebirth ASMR that stays through later resets."
+      },
+      "system": {
+        "slug": "rebirth-asmr",
+        "section": "Special unlocks",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Exclusive Golden Keyboard",
+        "rarity": "Exclusive",
+        "currency": "VIP",
+        "howToGet": "Not a conveyor crate. Purchase the VIP gamepass (about 119 Robux) from the in-game VIP button to receive the Exclusive Golden Keyboard.",
+        "availability": "Available with VIP",
+        "contentsNotes": "Exclusive Golden Keyboard ASMR. VIP also grants about +50% luck and +50% cash. Survives rebirth wipes.",
+        "cardSummary": "Premium Exclusive tier from the VIP gamepass, not the crate belt. Unlocks the Golden Keyboard plus permanent luck and cash boosts."
+      },
+      "system": {
+        "slug": "exclusive-golden-keyboard",
+        "section": "Special unlocks",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Limited Prismwave Keyboard Crate",
+        "rarity": "Limited",
+        "currency": "Robux",
+        "howToGet": "Not a conveyor crate. Buy the Limited Prismwave Keyboard Crate with Robux at the center of the map when stock is available.",
+        "availability": "Sold out",
+        "contentsNotes": "Limited Prismwave Keyboard ASMR. Restock timing is unconfirmed.",
+        "cardSummary": "Highest ladder tier via a Robux Limited crate at map center. Guides currently report the crate sold out with restock unknown."
+      },
+      "system": {
+        "slug": "limited-prismwave-keyboard-crate",
+        "section": "Special unlocks",
+        "sortOrder": 13,
+        "image": null
+      }
+    }
+  ]
+}

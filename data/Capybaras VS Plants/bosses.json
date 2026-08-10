@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Capybaras VS Plants",
+    "gameSlug": "capybaras-vs-plants",
+    "collection": "bosses",
+    "route": "/wiki/capybaras-vs-plants/bosses",
+    "catalogCode": "capybaras-vs-plants-bosses",
+    "itemFields": [
+      "summonerOrder",
+      "rosterStatus",
+      "hp",
+      "progression",
+      "cardSummary"
+    ],
+    "columns": [
+      "summonerOrder",
+      "rosterStatus",
+      "hp",
+      "progression",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "rosterStatus",
+      "subtitleFields": [
+        "summonerOrder",
+        "hp"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "summonerOrder",
+        "rosterStatus",
+        "hp",
+        "progression"
+      ],
+      "tableFields": [
+        "summonerOrder",
+        "rosterStatus",
+        "hp",
+        "progression",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "summonerOrder": {
+          "kind": "chip",
+          "label": "Order"
+        },
+        "rosterStatus": {
+          "kind": "highlight",
+          "label": "Roster"
+        },
+        "hp": {
+          "kind": "chip",
+          "label": "HP"
+        },
+        "progression": {
+          "kind": "detail",
+          "label": "Progression"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Scarlet Carrot",
+        "summonerOrder": "1st",
+        "rosterStatus": "Original roster",
+        "hp": "500",
+        "progression": "First entry in the Boss Summoner sequence.",
+        "cardSummary": "Scarlet Carrot starts the Boss Summoner progression and has 500 HP."
+      },
+      "system": {
+        "slug": "scarlet-carrot",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Red Potato",
+        "summonerOrder": "2nd",
+        "rosterStatus": "Original roster",
+        "hp": "4,000",
+        "progression": "Follows Scarlet Carrot in the Boss Summoner sequence.",
+        "cardSummary": "Red Potato is the second Boss Summoner entry. It has 4K HP, and defeating it can drop Red Potato as a plant."
+      },
+      "system": {
+        "slug": "red-potato",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Tomato",
+        "summonerOrder": "3rd",
+        "rosterStatus": "Original roster",
+        "hp": "20,000",
+        "progression": "Follows Red Potato in the Boss Summoner sequence.",
+        "cardSummary": "Dark Tomato is the third Boss Summoner entry. It is a named boss rather than an ordinary Tomato carrying a temporary Dark mutation."
+      },
+      "system": {
+        "slug": "dark-tomato",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Skull Flower",
+        "summonerOrder": "4th",
+        "rosterStatus": "Original roster",
+        "hp": null,
+        "progression": "Follows Dark Tomato in the Boss Summoner sequence.",
+        "cardSummary": "Skull Flower is the fourth entry in the original Boss Summoner roster, between Dark Tomato and Holy Garlic."
+      },
+      "system": {
+        "slug": "skull-flower",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Garlic",
+        "summonerOrder": "5th",
+        "rosterStatus": "Original roster",
+        "hp": "250,000",
+        "progression": "Follows Skull Flower in the Boss Summoner sequence.",
+        "cardSummary": "Holy Garlic is the fifth Boss Summoner entry, is distinct from regular Garlic, and has 250K HP."
+      },
+      "system": {
+        "slug": "holy-garlic",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Tyrant",
+        "summonerOrder": "6th",
+        "rosterStatus": "Original roster",
+        "hp": "25,000,000",
+        "progression": "Final entry in the original Boss Summoner sequence.",
+        "cardSummary": "Pumpkin Tyrant closes the original Boss Summoner roster and has 25M HP."
+      },
+      "system": {
+        "slug": "pumpkin-tyrant",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Conqueror Carrot",
+        "summonerOrder": "7th",
+        "rosterStatus": "Added in Update 3",
+        "hp": "25,000,000",
+        "progression": "Appears after Pumpkin Tyrant in the current Boss Summoner sequence.",
+        "cardSummary": "Conqueror Carrot is the boss added in Update 3. It appears after Pumpkin Tyrant and has 25M HP."
+      },
+      "system": {
+        "slug": "conqueror-carrot",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": null
+      }
+    }
+  ]
+}

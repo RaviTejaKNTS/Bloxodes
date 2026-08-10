@@ -1,0 +1,1631 @@
+{
+  "generated_at": "2026-08-05T13:15:01.005282+00:00",
+  "latest_demand_window": [
+    "2026-07-25",
+    "2026-08-01"
+  ],
+  "decision": "Which genuinely new evergreen Roblox lookup topics should Bloxodes build next after the avatar item-ID rollout?",
+  "recommendation": {
+    "highest_demand": "Roblox Fonts Library + Font Generator",
+    "fastest_catalog_win": "Roblox Crosshair and Cursor IDs",
+    "strongest_new_database": "Roblox Mesh IDs",
+    "portfolio_conclusion": "No untouched single topic is close to Music IDs demand; the rational path is a three-page portfolio rather than expecting one page to match Music IDs."
+  },
+  "benchmarks": {
+    "music_weekly_clicks": 10366.5,
+    "music_core_exact_demand": 6700.5,
+    "decal_weekly_clicks": 7781.0,
+    "decal_core_exact_demand": 4500.0,
+    "observed_click_to_core_demand_ratios": {
+      "music": 1.5471233490038057,
+      "decal": 1.729111111111111,
+      "colors": 1.708133971291866,
+      "classic_faces": 0.5443425076452599,
+      "gear": 0.77
+    }
+  },
+  "opportunities": [
+    {
+      "key": "font_library_generator",
+      "topic": "Roblox Fonts Library + Font Generator",
+      "weekly_exact_impressions": 832.0,
+      "intent_fit": 0.7,
+      "addressable_weekly_exact_impressions": 582.4,
+      "mature_weekly_click_low": 291.2,
+      "mature_weekly_click_base": 582.4,
+      "mature_weekly_click_high": 873.5999999999999,
+      "data_score": 5,
+      "reuse_score": 3,
+      "effort_score": 3,
+      "priority": "Build as the highest-demand new topic",
+      "dataset": "85 public FontFamily assets returned by Roblox in one Creator Store response, with IDs, names, native styles, descriptions, votes, dates, and thumbnails.",
+      "page_shape": "A hybrid tool/database: live text preview, copyable fancy text, all Studio fonts, font asset IDs, native weights/styles, and copyable Luau snippets.",
+      "risk": "The generic query has mixed intent (fancy-text generator, Roblox logo font, and Studio fonts), so a static 85-row table would underserve it.",
+      "demand_rank": 1
+    },
+    {
+      "key": "mesh_ids",
+      "topic": "Roblox Mesh IDs",
+      "weekly_exact_impressions": 527.0,
+      "intent_fit": 0.9,
+      "addressable_weekly_exact_impressions": 474.3,
+      "mature_weekly_click_low": 237.15,
+      "mature_weekly_click_base": 474.3,
+      "mature_weekly_click_high": 711.45,
+      "data_score": 4,
+      "reuse_score": 2,
+      "effort_score": 4,
+      "priority": "Build next as the strongest new asset database",
+      "dataset": "Roblox MeshPart search exposes at least 1,000 top results with pagination, asset ID, texture ID, name, creator, votes, dates, and preview support.",
+      "page_shape": "A searchable MeshPart catalog that copies MeshId and TextureId separately, shows preview/creator/votes, and explains Studio use and asset permissions.",
+      "risk": "It needs a new ingestion, verification, table, and route family; Creator Store totalResults is capped at 1,000 per query, so broad discovery needs multiple seeds/sorts.",
+      "demand_rank": 2
+    },
+    {
+      "key": "crosshair_ids",
+      "topic": "Roblox Crosshair and Cursor IDs",
+      "weekly_exact_impressions": 363.5,
+      "intent_fit": 0.95,
+      "addressable_weekly_exact_impressions": 345.325,
+      "mature_weekly_click_low": 172.6625,
+      "mature_weekly_click_base": 345.325,
+      "mature_weekly_click_high": 517.9875,
+      "data_score": 5,
+      "reuse_score": 5,
+      "effort_score": 2,
+      "priority": "Build first as the fastest catalog win",
+      "dataset": "2,233 unique public decal candidates across crosshair, cursor, and reticle searches before Bloxodes verification and moderation filtering.",
+      "page_shape": "A dedicated crosshair/cursor ID catalog or decal category with previews, one-click ID copy, shape/style filters, and tested game-use instructions.",
+      "risk": "The current production decal corpus has no crosshair/cursor keyword matches because those search seeds are not collected yet; the raw candidates still need the existing verification gate.",
+      "demand_rank": 3
+    },
+    {
+      "key": "flag_ids",
+      "topic": "Roblox Flag IDs",
+      "weekly_exact_impressions": 102.0,
+      "intent_fit": 0.8,
+      "addressable_weekly_exact_impressions": 81.60000000000001,
+      "mature_weekly_click_low": 40.800000000000004,
+      "mature_weekly_click_base": 81.60000000000001,
+      "mature_weekly_click_high": 122.4,
+      "data_score": 4,
+      "reuse_score": 5,
+      "effort_score": 2,
+      "priority": "Backlog decal-category expansion",
+      "dataset": "Can be collected and verified through the existing public decal pipeline using flag and country-name search seeds.",
+      "page_shape": "A flag-image ID category grouped by country and style.",
+      "risk": "Lower demand and ambiguous intent make it materially smaller than the top three.",
+      "demand_rank": 4
+    },
+    {
+      "key": "spray_paint_codes",
+      "topic": "Roblox Spray Paint IDs",
+      "weekly_exact_impressions": 76.5,
+      "intent_fit": 0.9,
+      "addressable_weekly_exact_impressions": 68.85000000000001,
+      "mature_weekly_click_low": 34.425000000000004,
+      "mature_weekly_click_base": 68.85000000000001,
+      "mature_weekly_click_high": 103.275,
+      "data_score": 4,
+      "reuse_score": 5,
+      "effort_score": 2,
+      "priority": "Backlog decal-category expansion",
+      "dataset": "Uses the existing verified decal corpus plus spray-paint/graffiti collector seeds.",
+      "page_shape": "A game-use-focused decal collection for spray-paint and art experiences.",
+      "risk": "Demand is modest and many assets overlap the existing graffiti and general decal experience.",
+      "demand_rank": 5
+    }
+  ],
+  "top_three_combined": {
+    "weekly_exact_impressions": 1722.5,
+    "addressable_weekly_exact_impressions": 1402.025,
+    "mature_weekly_click_low": 701.0125,
+    "mature_weekly_click_base": 1402.025,
+    "mature_weekly_click_high": 2103.0375
+  },
+  "all_candidate_demand": [
+    {
+      "key": "font_catalog",
+      "label": "Roblox fonts and font codes",
+      "weekly_exact_impressions": 650.0,
+      "terms": [
+        {
+          "term": "roblox fonts",
+          "weekly_exact_impressions": 650.0,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox font list",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox font codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox studio fonts",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox font ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox font id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "font id roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "mesh_ids",
+      "label": "Roblox mesh IDs",
+      "weekly_exact_impressions": 527.0,
+      "terms": [
+        {
+          "term": "roblox mesh ids",
+          "weekly_exact_impressions": 256.0,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox mesh id",
+          "weekly_exact_impressions": 139.0,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox mesh codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "mesh id roblox",
+          "weekly_exact_impressions": 100.0,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "mesh ids roblox",
+          "weekly_exact_impressions": 32.0,
+          "history_rows": 25,
+          "latest_rows": 2
+        }
+      ]
+    },
+    {
+      "key": "texture_ids",
+      "label": "Roblox texture IDs",
+      "weekly_exact_impressions": 410.0,
+      "terms": [
+        {
+          "term": "roblox texture ids",
+          "weekly_exact_impressions": 215.0,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox texture id",
+          "weekly_exact_impressions": 102.0,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox texture codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "texture id roblox",
+          "weekly_exact_impressions": 71.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "texture ids roblox",
+          "weekly_exact_impressions": 21.5,
+          "history_rows": 10,
+          "latest_rows": 2
+        }
+      ]
+    },
+    {
+      "key": "crosshair_ids",
+      "label": "Roblox crosshair IDs",
+      "weekly_exact_impressions": 363.5,
+      "terms": [
+        {
+          "term": "roblox crosshair ids",
+          "weekly_exact_impressions": 32.5,
+          "history_rows": 22,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox crosshair id",
+          "weekly_exact_impressions": 198.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox crosshair codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 7,
+          "latest_rows": 0
+        },
+        {
+          "term": "crosshair id roblox",
+          "weekly_exact_impressions": 61.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox cursor ids",
+          "weekly_exact_impressions": 60.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox cursor id",
+          "weekly_exact_impressions": 10.5,
+          "history_rows": 10,
+          "latest_rows": 1
+        }
+      ]
+    },
+    {
+      "key": "boombox_codes",
+      "label": "Roblox boombox codes",
+      "weekly_exact_impressions": 344.0,
+      "terms": [
+        {
+          "term": "roblox boombox codes",
+          "weekly_exact_impressions": 294.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox boombox music codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "boombox codes roblox",
+          "weekly_exact_impressions": 49.5,
+          "history_rows": 24,
+          "latest_rows": 2
+        }
+      ]
+    },
+    {
+      "key": "font_generator",
+      "label": "Roblox font and fancy-text generator",
+      "weekly_exact_impressions": 182.0,
+      "terms": [
+        {
+          "term": "roblox font generator",
+          "weekly_exact_impressions": 127.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox fonts generator",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox text generator",
+          "weekly_exact_impressions": 11.0,
+          "history_rows": 23,
+          "latest_rows": 1
+        },
+        {
+          "term": "roblox fancy text",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox fonts copy and paste",
+          "weekly_exact_impressions": 43.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        }
+      ]
+    },
+    {
+      "key": "outfit_ids",
+      "label": "Roblox outfit IDs",
+      "weekly_exact_impressions": 133.5,
+      "terms": [
+        {
+          "term": "roblox outfit ids",
+          "weekly_exact_impressions": 15.0,
+          "history_rows": 6,
+          "latest_rows": 1
+        },
+        {
+          "term": "roblox outfit id",
+          "weekly_exact_impressions": 16.0,
+          "history_rows": 10,
+          "latest_rows": 1
+        },
+        {
+          "term": "roblox outfit codes",
+          "weekly_exact_impressions": 102.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        }
+      ]
+    },
+    {
+      "key": "user_id_lookup",
+      "label": "Roblox user ID lookup",
+      "weekly_exact_impressions": 116.5,
+      "terms": [
+        {
+          "term": "roblox user ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox user id",
+          "weekly_exact_impressions": 116.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox id lookup",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "find roblox user id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 6,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "game_icon_ids",
+      "label": "Roblox game-icon IDs",
+      "weekly_exact_impressions": 112.0,
+      "terms": [
+        {
+          "term": "roblox game icon ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox icon ids",
+          "weekly_exact_impressions": 45.0,
+          "history_rows": 17,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox icon id",
+          "weekly_exact_impressions": 67.0,
+          "history_rows": 25,
+          "latest_rows": 2
+        }
+      ]
+    },
+    {
+      "key": "flag_ids",
+      "label": "Roblox flag IDs",
+      "weekly_exact_impressions": 102.0,
+      "terms": [
+        {
+          "term": "roblox flag ids",
+          "weekly_exact_impressions": 77.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox flag id",
+          "weekly_exact_impressions": 24.5,
+          "history_rows": 25,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox flag codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "spray_paint_codes",
+      "label": "Roblox spray-paint codes",
+      "weekly_exact_impressions": 76.5,
+      "terms": [
+        {
+          "term": "roblox spray paint codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox spray paint ids",
+          "weekly_exact_impressions": 65.5,
+          "history_rows": 21,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox spray paint id",
+          "weekly_exact_impressions": 11.0,
+          "history_rows": 1,
+          "latest_rows": 1
+        }
+      ]
+    },
+    {
+      "key": "sound_effect_ids",
+      "label": "Roblox sound-effect IDs",
+      "weekly_exact_impressions": 51.5,
+      "terms": [
+        {
+          "term": "roblox sound effect ids",
+          "weekly_exact_impressions": 41.5,
+          "history_rows": 25,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox sound effects ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox sfx ids",
+          "weekly_exact_impressions": 10.0,
+          "history_rows": 8,
+          "latest_rows": 1
+        },
+        {
+          "term": "roblox sound effect id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 4,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "material_catalog",
+      "label": "Roblox materials list",
+      "weekly_exact_impressions": 47.5,
+      "terms": [
+        {
+          "term": "roblox materials",
+          "weekly_exact_impressions": 47.5,
+          "history_rows": 26,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox material list",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox studio materials",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox material ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "phonk_music_ids",
+      "label": "Roblox phonk music IDs",
+      "weekly_exact_impressions": 39.0,
+      "terms": [
+        {
+          "term": "roblox phonk ids",
+          "weekly_exact_impressions": 39.0,
+          "history_rows": 21,
+          "latest_rows": 2
+        },
+        {
+          "term": "phonk ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 1,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox phonk music ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox phonk codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "logo_ids",
+      "label": "Roblox logo IDs",
+      "weekly_exact_impressions": 32.0,
+      "terms": [
+        {
+          "term": "roblox logo ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 10,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox logo id",
+          "weekly_exact_impressions": 32.0,
+          "history_rows": 24,
+          "latest_rows": 2
+        },
+        {
+          "term": "roblox logo codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 1,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "meme_music_ids",
+      "label": "Roblox meme music IDs",
+      "weekly_exact_impressions": 23.5,
+      "terms": [
+        {
+          "term": "roblox meme song ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 2,
+          "latest_rows": 0
+        },
+        {
+          "term": "meme song ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox meme music ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox meme sound ids",
+          "weekly_exact_impressions": 23.5,
+          "history_rows": 13,
+          "latest_rows": 2
+        }
+      ]
+    },
+    {
+      "key": "meme_decal_ids",
+      "label": "Roblox meme decal IDs",
+      "weekly_exact_impressions": 10.5,
+      "terms": [
+        {
+          "term": "roblox meme decal ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "meme decal ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox meme ids",
+          "weekly_exact_impressions": 10.5,
+          "history_rows": 7,
+          "latest_rows": 1
+        },
+        {
+          "term": "meme ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "skybox_ids",
+      "label": "Roblox skybox IDs",
+      "weekly_exact_impressions": 10.0,
+      "terms": [
+        {
+          "term": "roblox skybox ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox skybox id",
+          "weekly_exact_impressions": 10.0,
+          "history_rows": 1,
+          "latest_rows": 1
+        },
+        {
+          "term": "roblox skybox codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "particle_ids",
+      "label": "Roblox particle IDs",
+      "weekly_exact_impressions": 10.0,
+      "terms": [
+        {
+          "term": "roblox particle ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox particle id",
+          "weekly_exact_impressions": 10.0,
+          "history_rows": 5,
+          "latest_rows": 1
+        },
+        {
+          "term": "roblox particle texture ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "model_ids",
+      "label": "Roblox model IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox model ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox model id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox model codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox models ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "plugin_ids",
+      "label": "Roblox plugin IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox plugin ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox plugin id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox plugin codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "badge_ids",
+      "label": "Roblox badge IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox badge ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox badge id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox badge codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "thumbnail_ids",
+      "label": "Roblox thumbnail IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox thumbnail ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox thumbnail id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox thumbnail codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "library_ids",
+      "label": "Roblox library IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox library ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox library id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 2,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox library codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "asset_packs",
+      "label": "Roblox Studio asset packs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox asset packs",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox studio asset packs",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox model packs",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "game_ids",
+      "label": "Roblox game, place, and universe IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox game ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 2,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox game id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 3,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox place ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox place id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 4,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox universe ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox universe id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "group_id_lookup",
+      "label": "Roblox group ID lookup",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox group ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox group id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox group id lookup",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "gamepass_ids",
+      "label": "Roblox game-pass IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox gamepass ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox game pass ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox gamepass id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 1,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox game pass id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "developer_product_ids",
+      "label": "Roblox developer-product IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox developer product ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox developer product id",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox product ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "anime_decal_ids",
+      "label": "Roblox anime decal IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox anime decal ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "anime decal ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "anime decals roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox anime image ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "aesthetic_decal_ids",
+      "label": "Roblox aesthetic decal IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox aesthetic decal ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "aesthetic decal ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "aesthetic decals roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox aesthetic image ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "cute_decal_ids",
+      "label": "Roblox cute decal IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox cute decal ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "cute decal ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "cute decals roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox cute image ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "bloxburg_decal_ids",
+      "label": "Bloxburg decal and texture IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "bloxburg decal ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "bloxburg texture ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox bloxburg decal ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "bloxburg picture codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 12,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "flag_decal_ids",
+      "label": "Roblox flag decal IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox flag decal ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "flag decal ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox flag image ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "rap_music_ids",
+      "label": "Roblox rap music IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox rap music ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 1,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox rap ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 2,
+          "latest_rows": 0
+        },
+        {
+          "term": "rap ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox rap codes",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "anime_music_ids",
+      "label": "Roblox anime music IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox anime music ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "anime music ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox anime song ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "anime song ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    },
+    {
+      "key": "loud_music_ids",
+      "label": "Roblox loud music IDs",
+      "weekly_exact_impressions": 0.0,
+      "terms": [
+        {
+          "term": "roblox loud music ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "loud music ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "roblox loud song ids",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        },
+        {
+          "term": "loud song ids roblox",
+          "weekly_exact_impressions": 0.0,
+          "history_rows": 0,
+          "latest_rows": 0
+        }
+      ]
+    }
+  ],
+  "weekly_history": [
+    {
+      "family": "font_catalog",
+      "week": "2026-05-16",
+      "impressions": 467.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-05-23",
+      "impressions": 548.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-05-30",
+      "impressions": 567.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-06-06",
+      "impressions": 580.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-06-13",
+      "impressions": 528.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-06-20",
+      "impressions": 553.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-06-27",
+      "impressions": 522.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-07-04",
+      "impressions": 558.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-07-11",
+      "impressions": 721.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-07-18",
+      "impressions": 732.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-07-25",
+      "impressions": 683.0
+    },
+    {
+      "family": "font_catalog",
+      "week": "2026-08-01",
+      "impressions": 617.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-05-16",
+      "impressions": 167.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-05-23",
+      "impressions": 123.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-05-30",
+      "impressions": 206.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-06-06",
+      "impressions": 213.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-06-13",
+      "impressions": 229.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-06-20",
+      "impressions": 172.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-06-27",
+      "impressions": 196.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-07-04",
+      "impressions": 160.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-07-11",
+      "impressions": 158.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-07-18",
+      "impressions": 152.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-07-25",
+      "impressions": 181.0
+    },
+    {
+      "family": "font_generator",
+      "week": "2026-08-01",
+      "impressions": 183.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-05-16",
+      "impressions": 512.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-05-23",
+      "impressions": 677.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-05-30",
+      "impressions": 659.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-06-06",
+      "impressions": 601.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-06-13",
+      "impressions": 629.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-06-20",
+      "impressions": 624.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-06-27",
+      "impressions": 604.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-07-04",
+      "impressions": 650.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-07-11",
+      "impressions": 641.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-07-18",
+      "impressions": 632.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-07-25",
+      "impressions": 507.0
+    },
+    {
+      "family": "mesh_ids",
+      "week": "2026-08-01",
+      "impressions": 547.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-05-16",
+      "impressions": 290.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-05-23",
+      "impressions": 294.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-05-30",
+      "impressions": 364.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-06-06",
+      "impressions": 288.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-06-13",
+      "impressions": 291.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-06-20",
+      "impressions": 258.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-06-27",
+      "impressions": 258.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-07-04",
+      "impressions": 300.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-07-11",
+      "impressions": 273.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-07-18",
+      "impressions": 324.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-07-25",
+      "impressions": 379.0
+    },
+    {
+      "family": "texture_ids",
+      "week": "2026-08-01",
+      "impressions": 441.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-05-16",
+      "impressions": 310.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-05-23",
+      "impressions": 371.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-05-30",
+      "impressions": 325.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-06-06",
+      "impressions": 327.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-06-13",
+      "impressions": 373.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-06-20",
+      "impressions": 353.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-06-27",
+      "impressions": 416.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-07-04",
+      "impressions": 431.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-07-11",
+      "impressions": 421.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-07-18",
+      "impressions": 495.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-07-25",
+      "impressions": 373.0
+    },
+    {
+      "family": "crosshair_ids",
+      "week": "2026-08-01",
+      "impressions": 354.0
+    }
+  ],
+  "momentum": {
+    "font_catalog": {
+      "recent_4_week_avg": 688.25,
+      "prior_4_week_avg": 540.25,
+      "change": 0.27394724664507164
+    },
+    "font_generator": {
+      "recent_4_week_avg": 168.5,
+      "prior_4_week_avg": 189.25,
+      "change": -0.10964332892998674
+    },
+    "mesh_ids": {
+      "recent_4_week_avg": 581.75,
+      "prior_4_week_avg": 626.75,
+      "change": -0.07179896290386911
+    },
+    "texture_ids": {
+      "recent_4_week_avg": 354.25,
+      "prior_4_week_avg": 276.75,
+      "change": 0.2800361336946702
+    },
+    "crosshair_ids": {
+      "recent_4_week_avg": 410.75,
+      "prior_4_week_avg": 393.25,
+      "change": 0.04450095359186279
+    }
+  },
+  "source_checks": {
+    "published_catalog_pages": 42,
+    "published_tools": 10,
+    "live_decal_categories": 12,
+    "live_texture_category_items": 5666,
+    "font_family_total_results": 85,
+    "font_family_rows_returned": 85,
+    "font_thumbnail_completed": 3,
+    "font_thumbnail_sample": 3,
+    "mesh_total_results_cap": 1000,
+    "mesh_first_page_rows": 100,
+    "mesh_has_next_page": true,
+    "crosshair_search_total_results": 1000,
+    "cursor_search_total_results": 1000,
+    "reticle_search_total_results": 265,
+    "crosshair_cursor_reticle_unique_raw": 2233,
+    "current_verified_decal_keyword_matches": 0,
+    "live_id_title_samples": [
+      "3,278 Roblox Hair Codes and IDs",
+      "354 Roblox Classic Face IDs and Codes",
+      "2,949 Roblox Classic Shirt IDs and Codes",
+      "634 Roblox Animation Pack and Bundle IDs"
+    ]
+  },
+  "existing_opportunities_not_new": [
+    {
+      "topic": "Roblox Texture IDs",
+      "weekly_exact_impressions": 410.0,
+      "reason": "Already live as the Textures decal category with 5,666 verified items; improve that route instead of creating a duplicate."
+    },
+    {
+      "topic": "Roblox Boombox Codes",
+      "weekly_exact_impressions": 344.0,
+      "reason": "Already served and ranked by Music IDs; make it an on-page alias/section, not a competing page."
+    },
+    {
+      "topic": "Roblox User ID Lookup",
+      "weekly_exact_impressions": 116.5,
+      "reason": "Already covered by the published Roblox ID Extractor tool."
+    },
+    {
+      "topic": "Avatar item ID catalogs",
+      "weekly_exact_impressions": null,
+      "reason": "The live nested item pages now render ID-focused titles and are explicitly excluded from this screen."
+    }
+  ],
+  "data_quality": {
+    "status": "Share with caveats",
+    "checks": [
+      "Screened 142 exact keyword phrases across 37 candidate families using Bing Webmaster Keyword Stats.",
+      "Used the two latest complete Bing keyword buckets (July 25 and August 1, 2026) and inspected 12-week stability for the leading families.",
+      "Verified 42 published catalog records, 12 live decal categories, and 10 published tools in production before labeling a topic new.",
+      "Tested live Roblox Creator Store search and thumbnail responses for FontFamily, MeshPart, Decal crosshair/cursor/reticle, and image previews."
+    ],
+    "caveats": [
+      "Bing Keyword Stats are global/unspecified-market exact-query estimates, not Google volume and not a complete semantic topic total.",
+      "A zero means Bing returned no reportable rows for that exact phrase; it does not prove literally zero searches.",
+      "The font opportunity combines mixed intents; the 70% intent-fit assumption is a judgment range, not an observed conversion rate.",
+      "The 0.5x-1.5x mature-click range is a scenario anchored to existing Bloxodes catalog click-to-core-demand ratios, not a traffic guarantee.",
+      "Crosshair records are raw public candidates before Bloxodes' active/deleted/private/moderation checks; the verified publishable count will be lower than 2,233.",
+      "Creator Store totalResults is capped at 1,000 per MeshPart query, so a production mesh collector must combine search seeds and sort orders."
+    ]
+  }
+}

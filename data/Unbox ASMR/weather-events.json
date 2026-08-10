@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Unbox ASMR",
+    "gameSlug": "unbox-asmr",
+    "collection": "weather-events",
+    "route": "/wiki/unbox-asmr/weather-events",
+    "catalogCode": "unbox-asmr-weather-events",
+    "itemFields": [
+      "boost",
+      "duration",
+      "effect",
+      "visual",
+      "affects",
+      "bestUse",
+      "cardSummary"
+    ],
+    "columns": [
+      "boost",
+      "duration",
+      "effect",
+      "visual",
+      "affects",
+      "bestUse",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Weather events"
+      ],
+      "badgeField": "boost",
+      "subtitleFields": [
+        "duration"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "boost",
+        "duration",
+        "effect",
+        "bestUse",
+        "cardSummary"
+      ],
+      "tableFields": [
+        "boost",
+        "duration",
+        "effect",
+        "visual",
+        "affects",
+        "bestUse",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "boost": {
+          "kind": "chip",
+          "label": "Boost"
+        },
+        "duration": {
+          "kind": "chip",
+          "label": "Duration"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "visual": {
+          "kind": "normal",
+          "label": "Visual cue"
+        },
+        "affects": {
+          "kind": "normal",
+          "label": "Affects"
+        },
+        "bestUse": {
+          "kind": "detail",
+          "label": "Best use"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Cash Rush",
+        "boost": "2x cash",
+        "duration": "5 minutes",
+        "effect": "Doubles cash earnings from all sources while the event is active.",
+        "visual": "Bundles of cash fall from the sky.",
+        "affects": "All cash sources",
+        "bestUse": "Stay active: walk and click ASMRs for income, and sell spare ASMRs while the multiplier lasts.",
+        "cardSummary": "Short cash-farm window. Income is doubled across sources, so keep interacting with ASMRs and cash out extras before the five minutes end."
+      },
+      "system": {
+        "slug": "cash-rush",
+        "section": "Weather events",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Honey",
+        "boost": "Honey Crates",
+        "duration": "5 minutes",
+        "effect": "About 1 in 5 conveyor crates can become Honey Crates that drop Honey ASMRs.",
+        "visual": "A giant beehive appears in the sky and bees fly around the map.",
+        "affects": "Conveyor crate pool",
+        "bestUse": "Spawn and grab as many Honey Crates as you can while the event is up.",
+        "cardSummary": "Collection-focused weather. Honey Crates spike on the conveyor for a few minutes—prioritize spawning and claiming them for exclusive Honey ASMRs."
+      },
+      "system": {
+        "slug": "honey",
+        "section": "Weather events",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Luck",
+        "boost": "2x luck",
+        "duration": "5 minutes",
+        "effect": "Applies a server-wide 2x luck boost to both Conveyor Luck and Crate Luck.",
+        "visual": null,
+        "affects": "Conveyor Luck and Crate Luck",
+        "bestUse": "Spawn and open as many crates as possible while the luck window is active.",
+        "cardSummary": "Free luck window for crate and ASMR odds. Open inventory crates and buy from the conveyor aggressively—this is the main free way to raise luck during play."
+      },
+      "system": {
+        "slug": "luck",
+        "section": "Weather events",
+        "sortOrder": 3,
+        "image": null
+      }
+    }
+  ]
+}

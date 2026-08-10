@@ -31,11 +31,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `tools`, `tools_view`
   - Tool copy and tool indexes.
 - `catalog_pages`, `catalog_pages_view`
+- `roblox_font_ids`: official Roblox Creator Store FontFamily assets, native faces/styles, preview thumbnails, licensing metadata, and verification timestamps for `/catalog/roblox-font-ids`
+- `roblox_mesh_ids`: public Roblox Creator Store MeshPart listings, their underlying geometry Mesh IDs, optional Texture IDs, square previews, source order, and verification timestamps for `/catalog/roblox-mesh-ids`
   - General Roblox catalog hub copy and catalog indexes for pages that are not tied to one game, such as music IDs, decal IDs, free Roblox items, and admin commands.
-- `roblox_font_ids`
-  - Official Roblox Creator Store FontFamily assets, native faces/styles, preview thumbnails, licensing metadata, and verification timestamps for `/catalog/roblox-font-ids`.
-- `roblox_mesh_ids`
-  - Public Roblox Creator Store MeshPart listings, their underlying geometry Mesh IDs, optional Texture IDs, square previews, source order, and verification timestamps for `/catalog/roblox-mesh-ids`.
 - `events_pages`
   - Event landing pages.
 
@@ -104,7 +102,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `article_discovery_candidates`, `article_curation_runs`
   - Managed-dev raw publisher leads and the Groq/Llama batch decision audit. Candidate rows retain source name, canonical source URL, source headline/date, rejection reason, model/confidence, grouped topic key, and promoted queue ID. Homelab automation owns these rows; production is checked through the GET-only editorial inventory endpoint.
 - `article_generation_queue`, `article_generation_artifacts`
-  - Article draft generation queue state and per-run model/source/validation audit artifacts. Source-discovered `agent_runner` work is eligible only after Groq curation and retains all grouped publisher links in `source_urls` and `source_items`.
+  - Article draft generation queue state and per-run model/source/validation audit artifacts. Source-discovered `agent_runner` work is eligible only after Groq curation and retains all grouped publisher links in `source_urls` and `source_items`. `completed` means the local article passed QA and awaits human review; `published` records a verified production URL; `rejected` records a human decision not to publish. Published and rejected topic keys remain deduplicated.
 - RPC `search_site`
   - Site-wide search aggregation.
 
@@ -158,6 +156,9 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Blox Fruits/*.json`
   - Local Blox Fruits in-game datasets collected from the Blox Fruits Wiki and Roblox public APIs for wiki/collection page work.
   - Matching source-provided images live under `apps/web/public/Blox Fruits/`.
+- `data/Capybaras VS Plants/*.json`
+  - Local Capybaras VS Plants datasets for wiki/collection page work, including the Plant Index and the Boss Summoner progression.
+  - Keep Boss Summoner rows separate from ordinary plant drops: Pumpkin Tyrant is the sixth original boss, Carnivorous Plant is not a boss row, and Update 3 adds Conqueror Carrot after Pumpkin Tyrant.
 - `data/Dress To Impress/*.json`
   - Local Dress To Impress game datasets for wiki/collection and quiz page work, including themes, free items, code items, currency items, pose packs, ranks, walk packs, runway effects, pattern packs, hairstyles, makeup, nails, reward items, Robux items, VIP items, and quiz content.
   - Matching source-provided images live under `apps/web/public/Dress To Impress/` where useful item, pack, salon, or unlock art exists. Themes stay text-only; the free-items collection has one documented image gap for Gingerbread Suit where no clean source image was available.
@@ -186,9 +187,6 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Kick a Lucky Block/*.json`
   - Local Kick a Lucky Block game datasets for wiki/collection page work, including brainrots, mutations, weights, and zones. Gamepasses are out of scope for Bloxodes game wiki collections.
   - Matching row images live under `apps/web/public/Kick a Lucky Block/` where reliable item art exists. Brainrot rows stay blank when only weak crops, edited graphics, or non-item substitutes are available; mutation rows stay text-only until clean in-game effect captures exist.
-- `data/Anime Card Farm/mutations.json`
-  - Local Anime Card Farm mutation collection with the 11 guide-reported Crafting Update multipliers, split between normal Spawn Pack conveyor mutations and the Admin Abuse-exclusive mutation.
-  - Exact spawn chances and pack prices remain omitted because the checked sources do not publish reliable values. Row images stay empty until clean in-game mutation or mutated-pack visuals are collected.
 - `data/Catch And Tame/*.json`
   - Local Catch And Tame game datasets for wiki/collection page work, including mutations, pets, breeding recipes, weather events, traits, biomes, lassos, and items.
   - Rows are source-backed to Catch And Tame wiki pages and stay text-only until clean local row images are collected.

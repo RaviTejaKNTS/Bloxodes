@@ -55,7 +55,8 @@ import { homeAloneCollectionGroup } from "./home-alone";
 import { buildABaseAndStealCollectionGroup } from "./build-a-base-and-steal";
 import { creaturesOfSonariaCollectionGroup } from "./creatures-of-sonaria";
 import { practicalBasketballCollectionGroup } from "./practical-basketball";
-import { animeCardFarmCollectionGroup } from "./anime-card-farm";
+import { capybarasVsPlantsCollectionGroup } from "./capybaras-vs-plants";
+import { unboxAsmrCollectionGroup } from "./unbox-asmr";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -116,5 +117,6 @@ export const GAME_COLLECTION_GROUPS = [
   buildABaseAndStealCollectionGroup,
   creaturesOfSonariaCollectionGroup,
   practicalBasketballCollectionGroup,
-  animeCardFarmCollectionGroup
+  capybarasVsPlantsCollectionGroup,
+  unboxAsmrCollectionGroup
 ] satisfies GameCollectionGroup[];

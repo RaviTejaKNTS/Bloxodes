@@ -4,7 +4,7 @@ import "@/styles/article-content.css";
 import { getCatalogPageContentByCodes } from "@/lib/catalog";
 import { getMusicGameIdPage, musicGameCatalogCode, MUSIC_GAME_ID_PAGES } from "@/lib/game-specific-id-pages";
 import { normalizeSearchQuery, normalizeSortKey } from "@/lib/music-ids-search";
-import { buildAlternates, resolveSeoTitle, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { buildAlternates, SITE_NAME, SITE_URL } from "@/lib/seo";
 import { loadGameMusicIdsPageData } from "../../page-data";
 import { buildMusicGameContentHtml, MUSIC_GAMES_PATH, renderMusicGamePage } from "../page-data";
 
@@ -18,8 +18,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const game = getMusicGameIdPage((await params).game);
   if (!game) return {};
-  const catalog = await getCatalogPageContentByCodes([musicGameCatalogCode(game.slug)]);
-  const title = resolveSeoTitle(catalog?.seo_title) ?? catalog?.title ?? `${game.title} | ${SITE_NAME}`;
+  const [catalog, pageData] = await Promise.all([
+    getCatalogPageContentByCodes([musicGameCatalogCode(game.slug)]),
+    loadGameMusicIdsPageData(1, game.slug, game.datasetPreset)
+  ]);
+  const title = pageData.total > 0
+    ? `${game.title} [${pageData.total.toLocaleString("en-US")} ${game.seoCountLabel}]`
+    : game.title;
   const description = catalog?.meta_description ?? game.description;
   const canonical = `${SITE_URL.replace(/\/$/, "")}${MUSIC_GAMES_PATH}/${game.slug}`;
   return {

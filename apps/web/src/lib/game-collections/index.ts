@@ -183,6 +183,7 @@ const COLLECTION_FOCUS: Record<string, string> = {
   "vip-items": "VIP Dressing Room item types, locations, toggles, images, and outfit-building use",
   wands: "cost, Attack, Attack Bonus, special bonuses, source locations, and upgrade value",
   weapons: "weapon type, damage or effect, source route, ammo or use limits, requirements, availability, and combat role",
+  "weather-events": "event boosts, durations, visual cues, affected systems, and best-use tips during each weather window",
   weights: "rarity, kick power, cost, progression stage, and weight upgrade value",
   "walk-packs": "walk pack prices, currencies, unlock routes, availability, idle or walk style, and presentation value",
   "night-stealing": "night raid tools, defensive pets, protective props, visibility helpers, and steal-limit choices",

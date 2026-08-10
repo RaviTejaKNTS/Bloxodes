@@ -6,8 +6,9 @@ import path from "node:path";
 import { createClient } from "@supabase/supabase-js";
 
 import { resolveArticleDevCredentials } from "./article-queue-env";
+import { assertArticleQueueTransition, parseArticleQueueStatus, type ArticleQueueStatus } from "./article-queue-status";
 
-type TargetStatus = "processing" | "completed" | "skipped" | "failed";
+type TargetStatus = Exclude<ArticleQueueStatus, "pending">;
 
 type Options = {
   queueId: string;
@@ -17,6 +18,8 @@ type Options = {
   reason: string | null;
   resultPath: string | null;
   resultSlug: string | null;
+  productionUrl: string | null;
+  devEnvFile: string | null;
 };
 
 type QueueRow = {
@@ -28,11 +31,12 @@ type QueueRow = {
   source_url: string | null;
   result_path: string | null;
   result_slug: string | null;
+  production_url: string | null;
 };
 
 function printUsage() {
   console.log(
-    "Usage: npm run articles:queue:update -- --queue-id UUID --status processing|completed|skipped|failed --apply [--worker NAME] [--reason TEXT] [--result-path final.json] [--result-slug SLUG]"
+    "Usage: npm run articles:queue:update -- --queue-id UUID --status processing|completed|published|rejected|skipped|failed --apply [--dev-env-file PATH] [--worker NAME] [--reason TEXT] [--result-path final.json] [--result-slug SLUG] [--production-url URL]"
   );
 }
 
@@ -50,7 +54,9 @@ function parseArgs(argv: string[]): Options {
     worker: "grok-homelab",
     reason: null,
     resultPath: null,
-    resultSlug: null
+    resultSlug: null,
+    productionUrl: null,
+    devEnvFile: null
   };
   let hasStatus = false;
 
@@ -63,10 +69,8 @@ function parseArgs(argv: string[]): Options {
       options.queueId = requireValue(argv, index, arg);
       index += 1;
     } else if (arg === "--status") {
-      const value = requireValue(argv, index, arg) as TargetStatus;
-      if (!["processing", "completed", "skipped", "failed"].includes(value)) {
-        throw new Error(`Unsupported queue status: ${value}`);
-      }
+      const value = parseArticleQueueStatus(requireValue(argv, index, arg));
+      if (value === "pending") throw new Error("Use the writer retry flow to return an item to pending.");
       options.status = value;
       hasStatus = true;
       index += 1;
@@ -84,6 +88,12 @@ function parseArgs(argv: string[]): Options {
     } else if (arg === "--result-slug") {
       options.resultSlug = requireValue(argv, index, arg);
       index += 1;
+    } else if (arg === "--production-url") {
+      options.productionUrl = requireValue(argv, index, arg);
+      index += 1;
+    } else if (arg === "--dev-env-file") {
+      options.devEnvFile = requireValue(argv, index, arg);
+      index += 1;
     } else {
       throw new Error(`Unknown option: ${arg}`);
     }
@@ -92,11 +102,14 @@ function parseArgs(argv: string[]): Options {
   if (!options.queueId) throw new Error("--queue-id is required.");
   if (!hasStatus) throw new Error("--status is required.");
   if (!options.apply) throw new Error("Queue state changes require --apply.");
-  if (["skipped", "failed"].includes(options.status) && !options.reason?.trim()) {
+  if (["rejected", "skipped", "failed"].includes(options.status) && !options.reason?.trim()) {
     throw new Error(`${options.status} requires --reason.`);
   }
   if (options.status === "completed" && !options.resultPath) {
     throw new Error("completed requires --result-path so local output can be verified.");
+  }
+  if (options.status === "published" && !options.productionUrl) {
+    throw new Error("published requires --production-url after the exact live article URL is verified.");
   }
   return options;
 }
@@ -118,17 +131,24 @@ function assertTransition(row: QueueRow, status: TargetStatus) {
   if (row.workflow_mode !== "agent_runner") {
     throw new Error(`Queue item ${row.id} belongs to ${row.workflow_mode}, not the article runner.`);
   }
-  if (["completed", "skipped", "failed"].includes(row.status) && row.status !== status) {
-    throw new Error(`Queue item ${row.id} is already terminal (${row.status}).`);
+  assertArticleQueueTransition(row.status, status);
+}
+
+function verifyProductionUrl(value: string, resultSlug: string | null): string {
+  const url = new URL(value);
+  if (url.protocol !== "https:" || !["bloxodes.com", "www.bloxodes.com"].includes(url.hostname)) {
+    throw new Error("--production-url must use https://bloxodes.com.");
   }
-  if (status === "processing" && !["pending", "processing"].includes(row.status)) {
-    throw new Error(`Cannot move ${row.status} queue item to processing.`);
+  if (!resultSlug) throw new Error("The completed queue row has no result_slug to verify against production.");
+  if (url.pathname !== `/articles/${resultSlug}` || url.search || url.hash) {
+    throw new Error(`--production-url must be the exact canonical article URL: https://bloxodes.com/articles/${resultSlug}`);
   }
+  return `https://${url.hostname}${url.pathname}`;
 }
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  const queue = resolveArticleDevCredentials();
+  const queue = resolveArticleDevCredentials({ envFile: options.devEnvFile });
 
   const completedOutput = options.status === "completed" ? await verifyCompletedOutput(options) : null;
   const supabase = createClient(queue.url, queue.serviceRole, {
@@ -136,14 +156,20 @@ async function main() {
   });
   const { data, error } = await supabase
     .from("article_generation_queue")
-    .select("id, article_title, workflow_mode, status, attempts, source_url, result_path, result_slug")
+    .select("id, article_title, workflow_mode, status, attempts, source_url, result_path, result_slug, production_url")
     .eq("id", options.queueId)
     .single();
   if (error || !data) throw new Error(`Could not load queue item ${options.queueId}: ${error?.message ?? "not found"}`);
 
   const row = data as QueueRow;
   assertTransition(row, options.status);
-  if (row.status === options.status && ["completed", "skipped", "failed"].includes(options.status)) {
+  if (row.status === options.status && options.status !== "processing") {
+    if (options.status === "published") {
+      const productionUrl = verifyProductionUrl(options.productionUrl!, row.result_slug);
+      if (row.production_url !== productionUrl) {
+        throw new Error(`Queue item ${row.id} is published with a different production URL: ${row.production_url ?? "missing"}`);
+      }
+    }
     console.log(`Queue item ${row.id} is already ${row.status}; no update needed.`);
     return;
   }
@@ -158,7 +184,48 @@ async function main() {
       locked_by: options.worker,
       last_error: null,
       outcome_reason: null,
-      completed_at: null
+      completed_at: null,
+      published_at: null,
+      rejected_at: null,
+      production_url: null
+    });
+  } else if (options.status === "completed") {
+    Object.assign(update, {
+      completed_at: now,
+      locked_at: null,
+      locked_by: null,
+      next_attempt_at: null,
+      outcome_reason: options.reason?.trim() || null,
+      last_error: null,
+      published_at: null,
+      rejected_at: null,
+      production_url: null
+    });
+    if (completedOutput) {
+      update.result_path = completedOutput.resultPath;
+      update.result_slug = completedOutput.resultSlug;
+    }
+  } else if (options.status === "published") {
+    Object.assign(update, {
+      published_at: now,
+      rejected_at: null,
+      production_url: verifyProductionUrl(options.productionUrl!, row.result_slug),
+      outcome_reason: null,
+      last_error: null,
+      locked_at: null,
+      locked_by: null,
+      next_attempt_at: null
+    });
+  } else if (options.status === "rejected") {
+    Object.assign(update, {
+      rejected_at: now,
+      published_at: null,
+      production_url: null,
+      outcome_reason: options.reason!.trim(),
+      last_error: null,
+      locked_at: null,
+      locked_by: null,
+      next_attempt_at: null
     });
   } else {
     Object.assign(update, {
@@ -167,12 +234,11 @@ async function main() {
       locked_by: null,
       next_attempt_at: null,
       outcome_reason: options.reason?.trim() || null,
-      last_error: options.status === "failed" ? options.reason?.trim() : null
+      last_error: options.status === "failed" ? options.reason?.trim() : null,
+      published_at: null,
+      rejected_at: null,
+      production_url: null
     });
-    if (completedOutput) {
-      update.result_path = completedOutput.resultPath;
-      update.result_slug = completedOutput.resultSlug;
-    }
   }
 
   const { data: updatedRows, error: updateError } = await supabase

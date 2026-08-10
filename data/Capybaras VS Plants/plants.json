@@ -1,0 +1,345 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Capybaras VS Plants",
+    "gameSlug": "capybaras-vs-plants",
+    "collection": "plants",
+    "route": "/wiki/capybaras-vs-plants/plants",
+    "catalogCode": "capybaras-vs-plants-plants",
+    "itemFields": [
+      "plantType",
+      "rarity",
+      "encounter",
+      "incomeRole",
+      "cardSummary"
+    ],
+    "columns": [
+      "plantType",
+      "rarity",
+      "encounter",
+      "incomeRole",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "plantType",
+      "subtitleFields": [
+        "rarity"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "plantType",
+        "rarity",
+        "encounter",
+        "incomeRole"
+      ],
+      "tableFields": [
+        "plantType",
+        "rarity",
+        "encounter",
+        "incomeRole",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "plantType": {
+          "kind": "highlight",
+          "label": "Type"
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "encounter": {
+          "kind": "detail",
+          "label": "Encounter"
+        },
+        "incomeRole": {
+          "kind": "normal",
+          "label": "Plot role"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Broccoli",
+        "plantType": "Standard plant",
+        "rarity": null,
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Broccoli is a canonical Plant Index entry from the regular plant roster. Its normalized rarity and base stats remain unlisted because the checked footage did not prove them without modifiers."
+      },
+      "system": {
+        "slug": "broccoli",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Carnivorous Plant",
+        "plantType": "Standard plant",
+        "rarity": null,
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Carnivorous Plant is a canonical Plant Index entry from the regular plant roster. It is not classified as a Boss Summoner entry because the checked boss menu instead names Pumpkin Tyrant."
+      },
+      "system": {
+        "slug": "carnivorous-plant",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Carrot",
+        "plantType": "Standard plant",
+        "rarity": "Common",
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Carrot is a Common Plant Index entry from the regular plant roster. Variable encounter health and income values are intentionally omitted rather than treated as normalized base stats."
+      },
+      "system": {
+        "slug": "carrot",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cocotree",
+        "plantType": "Standard plant",
+        "rarity": null,
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Cocotree is the canonical spelling shown by the Plant Index for the palm-shaped regular plant. Its normalized rarity and base stats were not fully proven in the checked footage."
+      },
+      "system": {
+        "slug": "cocotree",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Conqueror Carrot",
+        "plantType": "Boss plant",
+        "rarity": null,
+        "encounter": "Defeat the boss added in Update 3; it also appears in the Plant Index.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Conqueror Carrot is the boss plant added with Update 3 and is represented in the current Plant Index. It is separate from the standard Carrot entry, not a weather-prefixed mutation."
+      },
+      "system": {
+        "slug": "conqueror-carrot",
+        "section": "Items",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Tomato",
+        "plantType": "Boss Summoner plant",
+        "rarity": null,
+        "encounter": "Fight it through the Boss Summoner; it also appears in the Plant Index.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Dark Tomato is a named Boss Summoner and Plant Index entry. Unlike temporary Dark weather prefixes on ordinary plants, the summoner menu treats Dark Tomato as its own boss plant."
+      },
+      "system": {
+        "slug": "dark-tomato",
+        "section": "Items",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fancy Avocado",
+        "plantType": "Standard plant",
+        "rarity": "Mythic",
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Fancy Avocado is a Mythic Plant Index entry from the regular plant roster. Observed health and earnings are omitted because the footage did not establish unmodified baseline values."
+      },
+      "system": {
+        "slug": "fancy-avocado",
+        "section": "Items",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Garlic",
+        "plantType": "Standard plant",
+        "rarity": "Legendary",
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Garlic is a Legendary Plant Index entry from the regular plant roster. Instance-level health and income seen in gameplay are not published as normalized base stats."
+      },
+      "system": {
+        "slug": "garlic",
+        "section": "Items",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Garlic",
+        "plantType": "Boss Summoner plant",
+        "rarity": null,
+        "encounter": "Fight it through the Boss Summoner; it also appears in the Plant Index.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Holy Garlic is one of the original six entries visible in the Boss Summoner and also belongs to the Plant Index. It is a distinct plant from the standard Garlic entry."
+      },
+      "system": {
+        "slug": "holy-garlic",
+        "section": "Items",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Tulip",
+        "plantType": "Standard plant",
+        "rarity": null,
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Orange Tulip is a canonical Plant Index entry from the regular plant roster. The dataset keeps its exact in-game name while leaving unverified normalized rarity and stats empty."
+      },
+      "system": {
+        "slug": "orange-tulip",
+        "section": "Items",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Potato",
+        "plantType": "Standard plant",
+        "rarity": "Common",
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Potato is a Common Plant Index entry from the regular plant roster. Variable encounter health and income values are intentionally omitted rather than treated as normalized base stats."
+      },
+      "system": {
+        "slug": "potato",
+        "section": "Items",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Red Potato",
+        "plantType": "Boss Summoner plant",
+        "rarity": null,
+        "encounter": "Fight it through the Boss Summoner; it also appears in the Plant Index.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Red Potato is a named Boss Summoner and Plant Index entry, distinct from the standard Potato. It is listed as its own plant because both in-game systems name it directly."
+      },
+      "system": {
+        "slug": "red-potato",
+        "section": "Items",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Scarlet Carrot",
+        "plantType": "Boss Summoner plant",
+        "rarity": null,
+        "encounter": "Fight it through the Boss Summoner; it also appears in the Plant Index.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Scarlet Carrot is a named Boss Summoner and Plant Index entry, distinct from the standard Carrot. Its boss name is canonical rather than a temporary mutation prefix."
+      },
+      "system": {
+        "slug": "scarlet-carrot",
+        "section": "Items",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Skull Flower",
+        "plantType": "Boss Summoner plant",
+        "rarity": null,
+        "encounter": "Fight it through the Boss Summoner; it also appears in the Plant Index.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Skull Flower is one of the named plants in the original Boss Summoner roster and also appears in the Plant Index. Its normalized base stats remain empty until directly supported."
+      },
+      "system": {
+        "slug": "skull-flower",
+        "section": "Items",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sunflower",
+        "plantType": "Standard plant",
+        "rarity": null,
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Sunflower is a canonical Plant Index entry from the regular plant roster. Its normalized rarity and base stats remain unlisted because checked values were not clean baselines."
+      },
+      "system": {
+        "slug": "sunflower",
+        "section": "Items",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tomato",
+        "plantType": "Standard plant",
+        "rarity": null,
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Tomato is a canonical Plant Index entry from the regular plant roster. It remains separate from the named Dark Tomato boss plant and from temporary mutation-prefixed instances."
+      },
+      "system": {
+        "slug": "tomato",
+        "section": "Items",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Watermelon",
+        "plantType": "Standard plant",
+        "rarity": "Legendary",
+        "encounter": "Defeat its regular plant encounter and collect the dropped plant.",
+        "incomeRole": "Generates money while placed on the plot, including while offline.",
+        "cardSummary": "Watermelon is a Legendary Plant Index entry from the regular plant roster. Chilly and other prefixed versions seen in gameplay are mutations, not separate rows in this collection."
+      },
+      "system": {
+        "slug": "watermelon",
+        "section": "Items",
+        "sortOrder": 17,
+        "image": null
+      }
+    }
+  ]
+}

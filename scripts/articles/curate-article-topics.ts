@@ -10,6 +10,8 @@ import { slugify } from "@/lib/slug";
 import { resolveArticleDevCredentials } from "./article-queue-env";
 import { fetchProductionEditorialInventory } from "./production-editorial-inventory";
 
+import { ARTICLE_TOPIC_DEDUPE_STATUSES } from "./article-queue-status";
+
 type Options = {
   apply: boolean;
   limit: number;
@@ -428,7 +430,7 @@ async function findExistingQueueRow(
       .select("id, source_urls, source_items, source_metadata, status")
       .eq("workflow_mode", "agent_runner")
       .eq(column, value)
-      .in("status", ["pending", "processing", "completed"])
+      .in("status", ARTICLE_TOPIC_DEDUPE_STATUSES)
       .maybeSingle();
     if (error) throw new Error(`Could not check existing queue ${column}: ${error.message}`);
     if (data) return data as Record<string, unknown>;
@@ -438,7 +440,7 @@ async function findExistingQueueRow(
     .from("article_generation_queue")
     .select("id, article_title, topic_key, source_urls, source_items, source_metadata, status")
     .eq("workflow_mode", "agent_runner")
-    .in("status", ["pending", "processing", "completed"])
+    .in("status", ARTICLE_TOPIC_DEDUPE_STATUSES)
     .limit(1000);
   if (queueError) throw new Error(`Could not check semantically similar queue topics: ${queueError.message}`);
   for (const row of queueRows ?? []) {

@@ -3,18 +3,17 @@ import "../shared/load-env";
 import { createClient } from "@supabase/supabase-js";
 
 import { resolveArticleDevCredentials } from "./article-queue-env";
-
-type QueueStatus = "pending" | "processing" | "completed" | "skipped" | "failed";
+import { parseArticleQueueStatus, type ArticleQueueStatus } from "./article-queue-status";
 
 type Options = {
   limit: number;
-  status: QueueStatus;
+  status: ArticleQueueStatus;
   json: boolean;
 };
 
 function printUsage() {
   console.log(
-    "Usage: npm run articles:queue:list -- [--limit N] [--status pending|processing|completed|skipped|failed] [--json]"
+    "Usage: npm run articles:queue:list -- [--limit N] [--status pending|processing|completed|published|rejected|skipped|failed] [--json]"
   );
 }
 
@@ -46,11 +45,7 @@ function parseArgs(argv: string[]): Options {
   return options;
 }
 
-function parseStatus(value: string | undefined): QueueStatus {
-  const statuses: QueueStatus[] = ["pending", "processing", "completed", "skipped", "failed"];
-  if (!value || !statuses.includes(value as QueueStatus)) throw new Error(`Unsupported queue status: ${value ?? "(missing)"}`);
-  return value as QueueStatus;
-}
+const parseStatus = parseArticleQueueStatus;
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
@@ -62,7 +57,7 @@ async function main() {
   const { data, error } = await supabase
     .from("article_generation_queue")
     .select(
-      "id, article_title, article_type, status, source_name, source_url, source_published_at, source_discovered_at, source_urls, source_items, topic_key, curation_model, curation_reason, curation_confidence, curated_at, source_metadata, attempts, created_at"
+      "id, article_title, article_type, status, source_name, source_url, source_published_at, source_discovered_at, source_urls, source_items, topic_key, curation_model, curation_reason, curation_confidence, curated_at, source_metadata, attempts, created_at, completed_at, result_path, result_slug, published_at, rejected_at, production_url, outcome_reason"
     )
     .eq("workflow_mode", "agent_runner")
     .not("curated_at", "is", null)
@@ -83,7 +78,8 @@ async function main() {
       source: row.source_name,
       type: row.article_type,
       title: row.article_title,
-      url: row.source_url
+      slug: row.result_slug,
+      url: row.status === "published" ? row.production_url : row.source_url
     }))
   );
   console.log(`${data?.length ?? 0} ${options.status} agent-runner queue item(s).`);

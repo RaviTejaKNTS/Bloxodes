@@ -69,6 +69,8 @@
     "articles:inventory:production": "tsx scripts/articles/list-production-editorial-inventory.ts",
     "articles:queue:list": "tsx scripts/articles/list-article-queue.ts",
     "articles:queue:update": "tsx scripts/articles/update-article-queue-item.ts",
+    "articles:review:list": "tsx scripts/articles/list-article-release-review.ts",
+    "test:article-queue": "node --import tsx --test scripts/articles/__tests__/*.test.ts",
     "articles:writer:local": "tsx scripts/articles/run-local-article-writer.ts",
     "articles:writer:homelab": "tsx scripts/articles/run-local-article-writer.ts",
     "articles:writer:batch": "tsx scripts/articles/run-homelab-article-batch.ts",

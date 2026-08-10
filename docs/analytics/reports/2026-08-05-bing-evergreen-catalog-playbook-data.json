@@ -1,0 +1,1467 @@
+{
+  "generated_at": "2026-08-05T12:35:06.457908+00:00",
+  "timezone": "Asia/Kolkata for saved Umami context; Bing weekly dates normalized to UTC dates",
+  "latest_page_window": [
+    "2026-07-24",
+    "2026-07-31"
+  ],
+  "latest_demand_window": [
+    "2026-07-25",
+    "2026-08-01"
+  ],
+  "page_results": [
+    {
+      "page_key": "music",
+      "page": "Music IDs",
+      "url": "https://bloxodes.com/catalog/roblox-music-ids",
+      "weekly_clicks": 10366.5,
+      "weekly_impressions": 163813.0,
+      "ctr": 0.06328252336505649,
+      "avg_impression_position": 5.0,
+      "rows": 2,
+      "returned_query_count": 89,
+      "returned_query_weekly_clicks": 3440.5,
+      "returned_query_weekly_impressions": 24724.0,
+      "returned_query_ctr": 0.13915628539071348,
+      "returned_query_avg_position": 1.9765005662514157,
+      "top_10_query_click_share": 0.592501089957855,
+      "core_exact_demand": 6700.5
+    },
+    {
+      "page_key": "decal",
+      "page": "Decal IDs",
+      "url": "https://bloxodes.com/catalog/roblox-decal-ids",
+      "weekly_clicks": 7781.0,
+      "weekly_impressions": 84899.0,
+      "ctr": 0.09165007832836665,
+      "avg_impression_position": 4.0,
+      "rows": 2,
+      "returned_query_count": 61,
+      "returned_query_weekly_clicks": 1230.0,
+      "returned_query_weekly_impressions": 17005.5,
+      "returned_query_ctr": 0.07232954044279792,
+      "returned_query_avg_position": 2.9394901649466347,
+      "top_10_query_click_share": 0.7117886178861789,
+      "core_exact_demand": 4500.0
+    },
+    {
+      "page_key": "colors",
+      "page": "Color codes",
+      "url": "https://bloxodes.com/catalog/roblox-color-codes",
+      "weekly_clicks": 178.5,
+      "weekly_impressions": 4766.0,
+      "ctr": 0.03745279060008393,
+      "avg_impression_position": 4.0,
+      "rows": 2,
+      "returned_query_count": 123,
+      "returned_query_weekly_clicks": 75.5,
+      "returned_query_weekly_impressions": 172.0,
+      "returned_query_ctr": 0.438953488372093,
+      "returned_query_avg_position": 2.6569767441860463,
+      "top_10_query_click_share": 0.19205298013245034,
+      "core_exact_demand": 104.5
+    },
+    {
+      "page_key": "classic_faces",
+      "page": "Classic faces",
+      "url": "https://bloxodes.com/catalog/roblox-items-and-bundles/roblox-body-parts/classic-faces",
+      "weekly_clicks": 178.0,
+      "weekly_impressions": 4463.0,
+      "ctr": 0.0398834864440959,
+      "avg_impression_position": 5.0,
+      "rows": 2,
+      "returned_query_count": 52,
+      "returned_query_weekly_clicks": 111.0,
+      "returned_query_weekly_impressions": 1221.0,
+      "returned_query_ctr": 0.09090909090909091,
+      "returned_query_avg_position": 4.045454545454546,
+      "top_10_query_click_share": 0.8108108108108109,
+      "core_exact_demand": 327.0
+    },
+    {
+      "page_key": "classic_shirts",
+      "page": "Classic shirts",
+      "url": "https://bloxodes.com/catalog/roblox-items-and-bundles/roblox-clothing/classic-shirts",
+      "weekly_clicks": 136.5,
+      "weekly_impressions": 3165.0,
+      "ctr": 0.04312796208530806,
+      "avg_impression_position": 5.0,
+      "rows": 2,
+      "returned_query_count": 98,
+      "returned_query_weekly_clicks": 57.5,
+      "returned_query_weekly_impressions": 283.5,
+      "returned_query_ctr": 0.20282186948853614,
+      "returned_query_avg_position": 5.072310405643739,
+      "top_10_query_click_share": 0.2782608695652174,
+      "core_exact_demand": null
+    },
+    {
+      "page_key": "gear",
+      "page": "Gear",
+      "url": "https://bloxodes.com/catalog/roblox-items-and-bundles/roblox-accessories/gear",
+      "weekly_clicks": 115.5,
+      "weekly_impressions": 5414.0,
+      "ctr": 0.02133357960842261,
+      "avg_impression_position": 6.0,
+      "rows": 2,
+      "returned_query_count": 57,
+      "returned_query_weekly_clicks": 62.0,
+      "returned_query_weekly_impressions": 1356.5,
+      "returned_query_ctr": 0.04570586067084408,
+      "returned_query_avg_position": 4.9708809436048655,
+      "top_10_query_click_share": 0.6209677419354839,
+      "core_exact_demand": 150.0
+    },
+    {
+      "page_key": "free_items",
+      "page": "Free items",
+      "url": "https://bloxodes.com/catalog/free-roblox-items",
+      "weekly_clicks": 39.0,
+      "weekly_impressions": 1606.5,
+      "ctr": 0.02427637721755369,
+      "avg_impression_position": 6.354808590102707,
+      "rows": 2,
+      "returned_query_count": 70,
+      "returned_query_weekly_clicks": 31.0,
+      "returned_query_weekly_impressions": 221.5,
+      "returned_query_ctr": 0.1399548532731377,
+      "returned_query_avg_position": 5.6207674943566595,
+      "top_10_query_click_share": 0.3870967741935484,
+      "core_exact_demand": 33.0
+    }
+  ],
+  "weekly_winner_rows": [
+    {
+      "week": "2026-01-02",
+      "page": "Music IDs",
+      "clicks": 2430,
+      "impressions": 40222,
+      "ctr": 0.0604146984237482,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-01-09",
+      "page": "Music IDs",
+      "clicks": 4878,
+      "impressions": 86559,
+      "ctr": 0.0563546251689599,
+      "avg_impression_position": 5
+    },
+    {
+      "week": "2026-01-16",
+      "page": "Music IDs",
+      "clicks": 3017,
+      "impressions": 57987,
+      "ctr": 0.05202890302998948,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-01-23",
+      "page": "Music IDs",
+      "clicks": 1037,
+      "impressions": 19176,
+      "ctr": 0.054078014184397165,
+      "avg_impression_position": 3
+    },
+    {
+      "week": "2026-01-30",
+      "page": "Music IDs",
+      "clicks": 1204,
+      "impressions": 26376,
+      "ctr": 0.045647558386411886,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-02-06",
+      "page": "Music IDs",
+      "clicks": 1607,
+      "impressions": 32063,
+      "ctr": 0.050120076100177775,
+      "avg_impression_position": 3
+    },
+    {
+      "week": "2026-02-13",
+      "page": "Music IDs",
+      "clicks": 2512,
+      "impressions": 45884,
+      "ctr": 0.054746752680673,
+      "avg_impression_position": 3
+    },
+    {
+      "week": "2026-02-27",
+      "page": "Music IDs",
+      "clicks": 28,
+      "impressions": 716,
+      "ctr": 0.03910614525139665,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-03-06",
+      "page": "Music IDs",
+      "clicks": 3080,
+      "impressions": 61071,
+      "ctr": 0.05043310245452015,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-03-13",
+      "page": "Music IDs",
+      "clicks": 3318,
+      "impressions": 60176,
+      "ctr": 0.05513826110077107,
+      "avg_impression_position": 3
+    },
+    {
+      "week": "2026-03-20",
+      "page": "Music IDs",
+      "clicks": 3477,
+      "impressions": 56488,
+      "ctr": 0.06155289619034131,
+      "avg_impression_position": 3
+    },
+    {
+      "week": "2026-03-27",
+      "page": "Music IDs",
+      "clicks": 3452,
+      "impressions": 58360,
+      "ctr": 0.059150102810143934,
+      "avg_impression_position": 3
+    },
+    {
+      "week": "2026-04-03",
+      "page": "Music IDs",
+      "clicks": 4206,
+      "impressions": 83901,
+      "ctr": 0.05013051095934494,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-04-10",
+      "page": "Music IDs",
+      "clicks": 6837,
+      "impressions": 106836,
+      "ctr": 0.06399528248904864,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-04-17",
+      "page": "Music IDs",
+      "clicks": 5949,
+      "impressions": 86168,
+      "ctr": 0.06903955064525114,
+      "avg_impression_position": 3
+    },
+    {
+      "week": "2026-04-24",
+      "page": "Music IDs",
+      "clicks": 3945,
+      "impressions": 82103,
+      "ctr": 0.0480494013617042,
+      "avg_impression_position": 3
+    },
+    {
+      "week": "2026-05-01",
+      "page": "Music IDs",
+      "clicks": 3378,
+      "impressions": 61902,
+      "ctr": 0.054570126974895806,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-05-08",
+      "page": "Decal IDs",
+      "clicks": 13,
+      "impressions": 1675,
+      "ctr": 0.007761194029850746,
+      "avg_impression_position": 7
+    },
+    {
+      "week": "2026-05-08",
+      "page": "Music IDs",
+      "clicks": 4468,
+      "impressions": 86664,
+      "ctr": 0.05155543247484538,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-05-15",
+      "page": "Decal IDs",
+      "clicks": 13,
+      "impressions": 1988,
+      "ctr": 0.006539235412474849,
+      "avg_impression_position": 7
+    },
+    {
+      "week": "2026-05-15",
+      "page": "Music IDs",
+      "clicks": 3616,
+      "impressions": 79032,
+      "ctr": 0.04575361878732665,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-05-22",
+      "page": "Decal IDs",
+      "clicks": 11,
+      "impressions": 2443,
+      "ctr": 0.0045026606631191155,
+      "avg_impression_position": 7
+    },
+    {
+      "week": "2026-05-22",
+      "page": "Music IDs",
+      "clicks": 4593,
+      "impressions": 83755,
+      "ctr": 0.05483851710345651,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-05-29",
+      "page": "Decal IDs",
+      "clicks": 10,
+      "impressions": 1391,
+      "ctr": 0.007189072609633357,
+      "avg_impression_position": 8
+    },
+    {
+      "week": "2026-05-29",
+      "page": "Music IDs",
+      "clicks": 9775,
+      "impressions": 158820,
+      "ctr": 0.061547664022163454,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-06-05",
+      "page": "Music IDs",
+      "clicks": 10995,
+      "impressions": 169123,
+      "ctr": 0.06501185527692863,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-06-12",
+      "page": "Music IDs",
+      "clicks": 12364,
+      "impressions": 187693,
+      "ctr": 0.0658735275156772,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-06-19",
+      "page": "Music IDs",
+      "clicks": 12905,
+      "impressions": 176950,
+      "ctr": 0.07293020627295846,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-06-26",
+      "page": "Music IDs",
+      "clicks": 31618,
+      "impressions": 331712,
+      "ctr": 0.09531762492764809,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-07-03",
+      "page": "Decal IDs",
+      "clicks": 129,
+      "impressions": 10744,
+      "ctr": 0.012006701414743113,
+      "avg_impression_position": 7
+    },
+    {
+      "week": "2026-07-03",
+      "page": "Music IDs",
+      "clicks": 13389,
+      "impressions": 179829,
+      "ctr": 0.07445406469479339,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-07-10",
+      "page": "Decal IDs",
+      "clicks": 1508,
+      "impressions": 48932,
+      "ctr": 0.030818278427205102,
+      "avg_impression_position": 5
+    },
+    {
+      "week": "2026-07-10",
+      "page": "Music IDs",
+      "clicks": 2398,
+      "impressions": 34948,
+      "ctr": 0.0686162298271718,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-07-17",
+      "page": "Decal IDs",
+      "clicks": 3290,
+      "impressions": 58930,
+      "ctr": 0.05582894960122179,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-07-17",
+      "page": "Music IDs",
+      "clicks": 8909,
+      "impressions": 134228,
+      "ctr": 0.06637214292100009,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-07-24",
+      "page": "Decal IDs",
+      "clicks": 7343,
+      "impressions": 80713,
+      "ctr": 0.09097667042483863,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-07-24",
+      "page": "Music IDs",
+      "clicks": 10353,
+      "impressions": 159314,
+      "ctr": 0.06498487264145021,
+      "avg_impression_position": 5
+    },
+    {
+      "week": "2026-07-31",
+      "page": "Decal IDs",
+      "clicks": 8219,
+      "impressions": 89085,
+      "ctr": 0.09226020093169444,
+      "avg_impression_position": 4
+    },
+    {
+      "week": "2026-07-31",
+      "page": "Music IDs",
+      "clicks": 10380,
+      "impressions": 168312,
+      "ctr": 0.06167118209040354,
+      "avg_impression_position": 5
+    }
+  ],
+  "demand_comparison": [
+    {
+      "page": "Music IDs",
+      "weekly_page_clicks": 10366.5,
+      "weekly_core_exact_demand": 6700.5,
+      "avg_impression_position": 5.0,
+      "ctr": 0.06328252336505649
+    },
+    {
+      "page": "Decal IDs",
+      "weekly_page_clicks": 7781.0,
+      "weekly_core_exact_demand": 4500.0,
+      "avg_impression_position": 4.0,
+      "ctr": 0.09165007832836665
+    },
+    {
+      "page": "Color codes",
+      "weekly_page_clicks": 178.5,
+      "weekly_core_exact_demand": 104.5,
+      "avg_impression_position": 4.0,
+      "ctr": 0.03745279060008393
+    },
+    {
+      "page": "Classic faces",
+      "weekly_page_clicks": 178.0,
+      "weekly_core_exact_demand": 327.0,
+      "avg_impression_position": 5.0,
+      "ctr": 0.0398834864440959
+    },
+    {
+      "page": "Gear",
+      "weekly_page_clicks": 115.5,
+      "weekly_core_exact_demand": 150.0,
+      "avg_impression_position": 6.0,
+      "ctr": 0.02133357960842261
+    },
+    {
+      "page": "Free items",
+      "weekly_page_clicks": 39.0,
+      "weekly_core_exact_demand": 33.0,
+      "avg_impression_position": 6.354808590102707,
+      "ctr": 0.02427637721755369
+    }
+  ],
+  "top_queries": {
+    "music": [
+      {
+        "query": "roblox music ids",
+        "weekly_clicks": 392.5,
+        "weekly_impressions": 2014.0,
+        "ctr": 0.1948857994041708,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox song ids",
+        "weekly_clicks": 271.5,
+        "weekly_impressions": 2528.0,
+        "ctr": 0.10739715189873418,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox music id",
+        "weekly_clicks": 269.5,
+        "weekly_impressions": 1508.0,
+        "ctr": 0.1787135278514589,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox sound ids",
+        "weekly_clicks": 216.5,
+        "weekly_impressions": 2693.5,
+        "ctr": 0.0803786894375348,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox sound id",
+        "weekly_clicks": 209.0,
+        "weekly_impressions": 1299.0,
+        "ctr": 0.1608929946112394,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox music codes",
+        "weekly_clicks": 200.0,
+        "weekly_impressions": 702.5,
+        "ctr": 0.2846975088967972,
+        "avg_impression_position": 1.5181494661921708
+      },
+      {
+        "query": "roblox song id",
+        "weekly_clicks": 125.5,
+        "weekly_impressions": 977.5,
+        "ctr": 0.12838874680306905,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox id songs",
+        "weekly_clicks": 125.5,
+        "weekly_impressions": 966.5,
+        "ctr": 0.1298499741334713,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "id music roblox",
+        "weekly_clicks": 119.5,
+        "weekly_impressions": 243.0,
+        "ctr": 0.49176954732510286,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox id",
+        "weekly_clicks": 109.0,
+        "weekly_impressions": 1570.5,
+        "ctr": 0.06940464820120981,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "music id roblox",
+        "weekly_clicks": 74.5,
+        "weekly_impressions": 398.0,
+        "ctr": 0.1871859296482412,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox id music",
+        "weekly_clicks": 71.5,
+        "weekly_impressions": 326.5,
+        "ctr": 0.21898928024502298,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "sound id roblox",
+        "weekly_clicks": 66.5,
+        "weekly_impressions": 392.0,
+        "ctr": 0.16964285714285715,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox radio codes",
+        "weekly_clicks": 65.0,
+        "weekly_impressions": 170.0,
+        "ctr": 0.38235294117647056,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "id roblox music",
+        "weekly_clicks": 64.0,
+        "weekly_impressions": 162.5,
+        "ctr": 0.39384615384615385,
+        "avg_impression_position": 1.0
+      }
+    ],
+    "decal": [
+      {
+        "query": "roblox decals",
+        "weekly_clicks": 193.5,
+        "weekly_impressions": 6026.5,
+        "ctr": 0.032108188832655774,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "roblox image ids",
+        "weekly_clicks": 157.0,
+        "weekly_impressions": 2382.5,
+        "ctr": 0.06589716684155299,
+        "avg_impression_position": 3.525498426023085
+      },
+      {
+        "query": "roblox asset id",
+        "weekly_clicks": 136.5,
+        "weekly_impressions": 597.0,
+        "ctr": 0.228643216080402,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox image id",
+        "weekly_clicks": 122.5,
+        "weekly_impressions": 1181.0,
+        "ctr": 0.10372565622353937,
+        "avg_impression_position": 2.536409822184589
+      },
+      {
+        "query": "roblox decal ids",
+        "weekly_clicks": 107.5,
+        "weekly_impressions": 824.0,
+        "ctr": 0.1304611650485437,
+        "avg_impression_position": 2.5103155339805827
+      },
+      {
+        "query": "roblox decal id",
+        "weekly_clicks": 37.0,
+        "weekly_impressions": 324.0,
+        "ctr": 0.11419753086419752,
+        "avg_impression_position": 2.4814814814814814
+      },
+      {
+        "query": "roblox asset ids",
+        "weekly_clicks": 36.0,
+        "weekly_impressions": 92.5,
+        "ctr": 0.3891891891891892,
+        "avg_impression_position": 2.1783783783783783
+      },
+      {
+        "query": "roblox id images",
+        "weekly_clicks": 31.5,
+        "weekly_impressions": 533.0,
+        "ctr": 0.05909943714821764,
+        "avg_impression_position": 3.548780487804878
+      },
+      {
+        "query": "roblox decal",
+        "weekly_clicks": 27.5,
+        "weekly_impressions": 778.5,
+        "ctr": 0.035324341682723186,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "image id roblox",
+        "weekly_clicks": 26.5,
+        "weekly_impressions": 638.0,
+        "ctr": 0.041536050156739814,
+        "avg_impression_position": 3.49294670846395
+      },
+      {
+        "query": "roblox decals id",
+        "weekly_clicks": 25.5,
+        "weekly_impressions": 186.0,
+        "ctr": 0.13709677419354838,
+        "avg_impression_position": 2.475806451612903
+      },
+      {
+        "query": "roblox id image",
+        "weekly_clicks": 24.0,
+        "weekly_impressions": 101.5,
+        "ctr": 0.23645320197044334,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox picture id",
+        "weekly_clicks": 23.5,
+        "weekly_impressions": 105.0,
+        "ctr": 0.22380952380952382,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "decal id roblox",
+        "weekly_clicks": 22.5,
+        "weekly_impressions": 238.5,
+        "ctr": 0.09433962264150944,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "rbxassetid",
+        "weekly_clicks": 22.0,
+        "weekly_impressions": 276.5,
+        "ctr": 0.07956600361663653,
+        "avg_impression_position": 4.725135623869801
+      }
+    ],
+    "colors": [
+      {
+        "query": "jjs id color code finder",
+        "weekly_clicks": 3.0,
+        "weekly_impressions": 4.0,
+        "ctr": 0.75,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox skin hex codes",
+        "weekly_clicks": 2.5,
+        "weekly_impressions": 3.0,
+        "ctr": 0.8333333333333334,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "roblox brick colors",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 21.0,
+        "ctr": 0.07142857142857142,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "golden color id for roblox 2026",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 0.5,
+        "ctr": 3.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox brick color codes",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 6.0,
+        "ctr": 0.16666666666666666,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox hex color codes",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 3.0,
+        "ctr": 0.3333333333333333,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "what colour code is the dark green roblox chat colour",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.0,
+        "ctr": 1.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "code hex mau da vang roblox",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.0,
+        "ctr": 1.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "image to roblox colour ids converter",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 6.0
+      },
+      {
+        "query": "my jail cell roblox how to get the original brick color",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 8.0
+      },
+      {
+        "query": "skin hex roblox codes",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox brick color 346 name",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox skin color hex codes",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 3.5,
+        "ctr": 0.2857142857142857,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "roblox skin tone hex codes",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 6.5,
+        "ctr": 0.15384615384615385,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "roblox hex codes",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 2.5,
+        "ctr": 0.4,
+        "avg_impression_position": 2.0
+      }
+    ],
+    "free_items": [
+      {
+        "query": "free avatar roblox",
+        "weekly_clicks": 2.0,
+        "weekly_impressions": 15.0,
+        "ctr": 0.13333333333333333,
+        "avg_impression_position": 7.266666666666667
+      },
+      {
+        "query": "free items roblox",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 41.0,
+        "ctr": 0.036585365853658534,
+        "avg_impression_position": 5.475609756097561
+      },
+      {
+        "query": "roblox skins free",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 9.0,
+        "ctr": 0.16666666666666666,
+        "avg_impression_position": 5.0
+      },
+      {
+        "query": "free roblox skins",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 10.5,
+        "ctr": 0.09523809523809523,
+        "avg_impression_position": 6.0
+      },
+      {
+        "query": "free item",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 3.5,
+        "ctr": 0.2857142857142857,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "free items in roblox",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 2.0,
+        "ctr": 0.5,
+        "avg_impression_position": 6.0
+      },
+      {
+        "query": "free roblox avatars",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 23.0,
+        "ctr": 0.043478260869565216,
+        "avg_impression_position": 7.0
+      },
+      {
+        "query": "free roblox items",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 19.0,
+        "ctr": 0.05263157894736842,
+        "avg_impression_position": 4.684210526315789
+      },
+      {
+        "query": "roblox free items",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 12.5,
+        "ctr": 0.08,
+        "avg_impression_position": 4.6
+      },
+      {
+        "query": "free roblox autfit",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 6.0
+      },
+      {
+        "query": "free items",
+        "weekly_clicks": 0.5,
+        "weekly_impressions": 1.5,
+        "ctr": 0.3333333333333333,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "free roblox ttems",
+        "weekly_clicks": 0.5,
+        "weekly_impressions": 1.0,
+        "ctr": 0.5,
+        "avg_impression_position": 4.0
+      },
+      {
+        "query": "roblox free accessories",
+        "weekly_clicks": 0.5,
+        "weekly_impressions": 1.0,
+        "ctr": 0.5,
+        "avg_impression_position": 8.0
+      },
+      {
+        "query": "free avatars on roblox",
+        "weekly_clicks": 0.5,
+        "weekly_impressions": 1.0,
+        "ctr": 0.5,
+        "avg_impression_position": 4.0
+      },
+      {
+        "query": "free club avatars for guys roblox",
+        "weekly_clicks": 0.5,
+        "weekly_impressions": 1.0,
+        "ctr": 0.5,
+        "avg_impression_position": 3.0
+      }
+    ],
+    "classic_faces": [
+      {
+        "query": "roblox classic faces",
+        "weekly_clicks": 35.0,
+        "weekly_impressions": 129.0,
+        "ctr": 0.2713178294573643,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "classic roblox faces",
+        "weekly_clicks": 19.0,
+        "weekly_impressions": 49.0,
+        "ctr": 0.3877551020408163,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "classic faces roblox",
+        "weekly_clicks": 10.5,
+        "weekly_impressions": 44.0,
+        "ctr": 0.23863636363636365,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "classic faces",
+        "weekly_clicks": 6.5,
+        "weekly_impressions": 16.5,
+        "ctr": 0.3939393939393939,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox classic face",
+        "weekly_clicks": 6.0,
+        "weekly_impressions": 20.0,
+        "ctr": 0.3,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "classic face roblox",
+        "weekly_clicks": 3.0,
+        "weekly_impressions": 2.5,
+        "ctr": 1.2,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox faces",
+        "weekly_clicks": 3.0,
+        "weekly_impressions": 236.5,
+        "ctr": 0.012684989429175475,
+        "avg_impression_position": 4.509513742071881
+      },
+      {
+        "query": "класик лица роблокс",
+        "weekly_clicks": 2.5,
+        "weekly_impressions": 1.0,
+        "ctr": 2.5,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "all roblox classic faces",
+        "weekly_clicks": 2.5,
+        "weekly_impressions": 5.0,
+        "ctr": 0.5,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox smile face",
+        "weekly_clicks": 2.0,
+        "weekly_impressions": 19.5,
+        "ctr": 0.10256410256410256,
+        "avg_impression_position": 5.0
+      },
+      {
+        "query": "roblox og faces",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 1.0,
+        "ctr": 1.5,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox face",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 589.0,
+        "ctr": 0.0025466893039049238,
+        "avg_impression_position": 5.0
+      },
+      {
+        "query": "classicface",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 4.0,
+        "ctr": 0.375,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "all classic faces roblox",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.5,
+        "ctr": 0.6666666666666666,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "og roblox faces",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.5,
+        "ctr": 0.6666666666666666,
+        "avg_impression_position": 2.0
+      }
+    ],
+    "classic_shirts": [
+      {
+        "query": "roblox classic shirt",
+        "weekly_clicks": 4.0,
+        "weekly_impressions": 25.5,
+        "ctr": 0.1568627450980392,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox classic shirts",
+        "weekly_clicks": 2.0,
+        "weekly_impressions": 4.5,
+        "ctr": 0.4444444444444444,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox classic clothing",
+        "weekly_clicks": 2.0,
+        "weekly_impressions": 8.0,
+        "ctr": 0.25,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "cool rare roblox shirts",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 0.5,
+        "ctr": 3.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox classic shirt id",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 2.5,
+        "ctr": 0.6,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox classic shir",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.0,
+        "ctr": 1.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "classic roblox shirts",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox blush classic shirt",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "free classic shirt suit id roblox",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "shorts roblox asset id classic shirt",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "classic clothing roblox",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 4.5,
+        "ctr": 0.2222222222222222,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "shirt id roblox",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 15.0,
+        "ctr": 0.06666666666666667,
+        "avg_impression_position": 7.0
+      },
+      {
+        "query": "roblox classic shirt that is read with chains girl",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.5,
+        "ctr": 0.6666666666666666,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox classic shirt ids",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.5,
+        "ctr": 0.6666666666666666,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "roblox classic clothing 2016",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.0,
+        "ctr": 1.0,
+        "avg_impression_position": 3.0
+      }
+    ],
+    "gear": [
+      {
+        "query": "roblox gears",
+        "weekly_clicks": 16.5,
+        "weekly_impressions": 429.5,
+        "ctr": 0.03841676367869616,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "roblox gear",
+        "weekly_clicks": 7.0,
+        "weekly_impressions": 133.0,
+        "ctr": 0.05263157894736842,
+        "avg_impression_position": 2.612781954887218
+      },
+      {
+        "query": "all roblox gears",
+        "weekly_clicks": 3.0,
+        "weekly_impressions": 14.5,
+        "ctr": 0.20689655172413793,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox gear ids",
+        "weekly_clicks": 2.0,
+        "weekly_impressions": 181.0,
+        "ctr": 0.011049723756906077,
+        "avg_impression_position": 5.0
+      },
+      {
+        "query": "gears roblox",
+        "weekly_clicks": 2.0,
+        "weekly_impressions": 55.5,
+        "ctr": 0.036036036036036036,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "every roblox gear",
+        "weekly_clicks": 2.0,
+        "weekly_impressions": 2.5,
+        "ctr": 0.8,
+        "avg_impression_position": 4.0
+      },
+      {
+        "query": "roblox gear list",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 5.0,
+        "ctr": 0.3,
+        "avg_impression_position": 2.5
+      },
+      {
+        "query": "roblox gears list",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 3.5,
+        "ctr": 0.42857142857142855,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "gear roblox",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 40.0,
+        "ctr": 0.0375,
+        "avg_impression_position": 2.0
+      },
+      {
+        "query": "roblox items",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 22.0,
+        "ctr": 0.06818181818181818,
+        "avg_impression_position": 5.159090909090909
+      },
+      {
+        "query": "roblox catalog gears",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 1.5,
+        "ctr": 1.0,
+        "avg_impression_position": 3.0
+      },
+      {
+        "query": "roblox red sword",
+        "weekly_clicks": 1.5,
+        "weekly_impressions": 0.5,
+        "ctr": 3.0,
+        "avg_impression_position": 1.0
+      },
+      {
+        "query": "roblox all gear name",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.0,
+        "ctr": 1.0,
+        "avg_impression_position": 4.0
+      },
+      {
+        "query": "best gears roblox and their codes",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 1.0,
+        "ctr": 1.0,
+        "avg_impression_position": 4.0
+      },
+      {
+        "query": "good gears for roblox cheap",
+        "weekly_clicks": 1.0,
+        "weekly_impressions": 0.5,
+        "ctr": 2.0,
+        "avg_impression_position": 1.0
+      }
+    ]
+  },
+  "live_page_profiles": [
+    {
+      "document_bytes": 298279,
+      "visible_word_count": 1946,
+      "h1": "Roblox Music Codes and Song IDs",
+      "h2_count": 35,
+      "first_page_item_count": 24,
+      "unique_internal_link_count": 81,
+      "schema_types": [
+        "WebPage",
+        "ItemList",
+        "BreadcrumbList"
+      ],
+      "title": "Roblox Music Codes [58K+ Audio/Song IDs]",
+      "canonical": "https://bloxodes.com/catalog/roblox-music-ids",
+      "meta_description": "Explore working Roblox Music Codes with artist, album, duration &amp; genre. Search, filter, and sort popular audio IDs, updated often to fine new and remove deleted tracks.",
+      "page_key": "music",
+      "page": "Music IDs",
+      "content_updated_at": "2026-08-05T06:21:48.809618+00:00",
+      "editorial_word_count": 977
+    },
+    {
+      "document_bytes": 298791,
+      "visible_word_count": 2163,
+      "h1": "Roblox Decal IDs / Image IDs",
+      "h2_count": 35,
+      "first_page_item_count": 24,
+      "unique_internal_link_count": 38,
+      "schema_types": [
+        "WebPage",
+        "ItemList",
+        "BreadcrumbList"
+      ],
+      "title": "Roblox Decal IDs [24K+ Image Codes]",
+      "canonical": "https://bloxodes.com/catalog/roblox-decal-ids",
+      "meta_description": "Find Roblox decal IDs for images, logos, memes, faces, signs, and builds. Search visual previews, creators, dates, ratings, and copy-ready decal codes.",
+      "page_key": "decal",
+      "page": "Decal IDs",
+      "content_updated_at": "2026-06-26T12:50:20.082931+00:00",
+      "editorial_word_count": 1604
+    },
+    {
+      "document_bytes": 1143010,
+      "visible_word_count": 3952,
+      "h1": "Roblox Color Codes (BrickColor &amp; Color3)",
+      "h2_count": 215,
+      "first_page_item_count": 0,
+      "unique_internal_link_count": 31,
+      "schema_types": [
+        "WebPage",
+        "ItemList",
+        "BreadcrumbList"
+      ],
+      "title": "Roblox Color Codes (BrickColor &amp; Color3)",
+      "canonical": "https://bloxodes.com/catalog/roblox-color-codes",
+      "meta_description": "Roblox Color Codes list with BrickColor IDs and a Color3 hex color picker. Browse Roblox colors, copy codes, and use them in Roblox Studio builds and UI.",
+      "page_key": "colors",
+      "page": "Color codes",
+      "content_updated_at": "2026-03-07T10:51:50.359274+00:00",
+      "editorial_word_count": 0
+    },
+    {
+      "document_bytes": 385470,
+      "visible_word_count": 1367,
+      "h1": "Roblox Free Items and Bundles",
+      "h2_count": 33,
+      "first_page_item_count": 0,
+      "unique_internal_link_count": 43,
+      "schema_types": [
+        "WebPage",
+        "ItemList",
+        "BreadcrumbList"
+      ],
+      "title": "Roblox Free Items and Bundles (224 items)",
+      "canonical": "https://bloxodes.com/catalog/free-roblox-items",
+      "meta_description": "Browse free Roblox items, bundles, clothing, hair, and animations verified at 0 Robux and available directly through the official Roblox shop.",
+      "page_key": "free_items",
+      "page": "Free items",
+      "content_updated_at": "2026-07-11T10:23:21.77962+00:00",
+      "editorial_word_count": 739
+    }
+  ],
+  "candidate_topics": [
+    {
+      "candidate": "Roblox sound IDs",
+      "weekly_exact_demand": 2602.5,
+      "existing_surface": "Music IDs page already ranks for this synonym"
+    },
+    {
+      "candidate": "Roblox hair IDs",
+      "weekly_exact_demand": 547.5,
+      "existing_surface": "Existing hair-accessories catalog page; no Bing page stats returned"
+    },
+    {
+      "candidate": "Roblox face IDs",
+      "weekly_exact_demand": 450.0,
+      "existing_surface": "Existing classic-faces catalog page"
+    },
+    {
+      "candidate": "Roblox gear IDs",
+      "weekly_exact_demand": 342.5,
+      "existing_surface": "Existing gear catalog page"
+    },
+    {
+      "candidate": "Roblox asset IDs",
+      "weekly_exact_demand": 119.0,
+      "existing_surface": "Existing catalog families and ID extractor"
+    },
+    {
+      "candidate": "Roblox clothing IDs",
+      "weekly_exact_demand": 108.5,
+      "existing_surface": "Existing clothing catalog family"
+    },
+    {
+      "candidate": "Roblox shirt IDs",
+      "weekly_exact_demand": 101.0,
+      "existing_surface": "Existing classic-shirts catalog page"
+    },
+    {
+      "candidate": "Roblox item IDs",
+      "weekly_exact_demand": 71.0,
+      "existing_surface": "Existing items-and-bundles catalog"
+    },
+    {
+      "candidate": "Roblox animation IDs",
+      "weekly_exact_demand": 44.0,
+      "existing_surface": "Existing animation catalog family"
+    },
+    {
+      "candidate": "Roblox image codes",
+      "weekly_exact_demand": 39.5,
+      "existing_surface": "Decal IDs page already covers this synonym"
+    },
+    {
+      "candidate": "Roblox emote IDs",
+      "weekly_exact_demand": 0.0,
+      "existing_surface": "Existing emotes catalog page"
+    },
+    {
+      "candidate": "Roblox game IDs",
+      "weekly_exact_demand": 0.0,
+      "existing_surface": "No focused catalog surface"
+    }
+  ],
+  "directional_log_demand_click_correlation": 0.981742655037733,
+  "directional_spearman_demand_click_correlation": 0.8285714285714286,
+  "dataset_counts": {
+    "music": 59320,
+    "decal": 38046
+  },
+  "umami_saved_context": [
+    {
+      "window": "2026-07-12 to 2026-07-21 Asia/Kolkata",
+      "scope": "all catalog pages combined",
+      "pageviews": 78217,
+      "adjusted_9d_pageviews": 70807,
+      "adjusted_9d_engaged_visits": 4018,
+      "adjusted_engaged_rate": 0.0567
+    }
+  ],
+  "umami_access": {
+    "fresh_page_level_status": "blocked",
+    "reason": "The production endpoint returned HTTP 401 and the available browser session is signed out; no Umami credential is stored in the repo environment.",
+    "impact": "Current music-vs-decal engagement and source mix cannot be verified. Bing search conclusions remain available."
+  },
+  "data_quality": {
+    "page_query_stats": {
+      "music": {
+        "rows": 2300,
+        "duplicate_week_query_keys": 0,
+        "clicks_greater_than_impressions_rows": 17,
+        "clicks_in_anomalous_rows": 41.0,
+        "impressions_in_anomalous_rows": 19.0
+      },
+      "decal": {
+        "rows": 355,
+        "duplicate_week_query_keys": 0,
+        "clicks_greater_than_impressions_rows": 8,
+        "clicks_in_anomalous_rows": 21.0,
+        "impressions_in_anomalous_rows": 13.0
+      },
+      "colors": {
+        "rows": 1062,
+        "duplicate_week_query_keys": 0,
+        "clicks_greater_than_impressions_rows": 26,
+        "clicks_in_anomalous_rows": 60.0,
+        "impressions_in_anomalous_rows": 29.0
+      },
+      "free_items": {
+        "rows": 170,
+        "duplicate_week_query_keys": 0,
+        "clicks_greater_than_impressions_rows": 1,
+        "clicks_in_anomalous_rows": 2.0,
+        "impressions_in_anomalous_rows": 1.0
+      },
+      "classic_faces": {
+        "rows": 344,
+        "duplicate_week_query_keys": 0,
+        "clicks_greater_than_impressions_rows": 15,
+        "clicks_in_anomalous_rows": 49.0,
+        "impressions_in_anomalous_rows": 26.0
+      },
+      "classic_shirts": {
+        "rows": 503,
+        "duplicate_week_query_keys": 0,
+        "clicks_greater_than_impressions_rows": 16,
+        "clicks_in_anomalous_rows": 35.0,
+        "impressions_in_anomalous_rows": 17.0
+      },
+      "gear": {
+        "rows": 325,
+        "duplicate_week_query_keys": 0,
+        "clicks_greater_than_impressions_rows": 4,
+        "clicks_in_anomalous_rows": 10.0,
+        "impressions_in_anomalous_rows": 4.0
+      }
+    },
+    "known_limitations": [
+      "Bing GetPageQueryStats returns a bounded top-query extract, not every long-tail query.",
+      "Bing keyword demand uses global/unspecified country and language because supported market enums were not available.",
+      "The latest Bing page comparison averages the two weekly buckets dated July 24 and July 31, 2026.",
+      "The demand-versus-click correlation has only six topic observations with uneven synonym coverage; it is directional, not causal.",
+      "Fresh Umami page-level data was unavailable; the saved Umami context is catalog-family level only."
+    ]
+  }
+}
