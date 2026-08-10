@@ -5,6 +5,12 @@ import { gunzipSync } from "node:zlib";
 import { createClient } from "@supabase/supabase-js";
 import * as cheerio from "cheerio";
 
+import {
+  DEFAULT_ARTICLE_DISCOVERY_MAX_AGE_HOURS,
+  filterRecentDiscoveryCandidates,
+  type DiscoveryFunnelStats,
+  validateDiscoveryMaxAgeHours
+} from "./article-discovery-filter";
 import { resolveArticleDevCredentials } from "./article-queue-env";
 
 type SourceName =
@@ -55,7 +61,6 @@ const SOURCE_LABELS: Record<SourceName, string> = {
 
 const USER_AGENT = "BloxodesTopicDiscovery/1.0 (+https://bloxodes.com)";
 const FETCH_TIMEOUT_MS = 20_000;
-const SEARCH_LOOKBACK_MS = 7 * 24 * 60 * 60 * 1000;
 
 function printUsage() {
   console.log(
@@ -73,7 +78,7 @@ function readPositiveNumber(value: string | undefined, flag: string): number {
 function parseArgs(argv: string[]): Options {
   const options: Options = {
     apply: false,
-    maxAgeHours: 96,
+    maxAgeHours: DEFAULT_ARTICLE_DISCOVERY_MAX_AGE_HOURS,
     perSource: 25,
     sources: new Set(ALL_SOURCES)
   };
@@ -104,6 +109,7 @@ function parseArgs(argv: string[]): Options {
   }
 
   if (selected.length) options.sources = new Set(selected);
+  options.maxAgeHours = validateDiscoveryMaxAgeHours(options.maxAgeHours);
   return options;
 }
 
@@ -234,15 +240,34 @@ async function collectBeebom(): Promise<Candidate[]> {
     .flatMap((element) => {
       const article = $(element);
       const anchor = article.find("h2 a, h3 a, a[href*='beebom.com/']").first();
-      const title = cleanText(anchor.text() || anchor.attr("aria-label") || "");
+      const title = cleanText(anchor.text()) || cleanText(anchor.attr("aria-label") ?? "");
       const sourceUrl = normalizeUrl(anchor.attr("href") ?? "");
       if (!title || !sourceUrl) return [];
       return [{ sourceName: "beebom", sourceUrl, title, publishedAt: dateFromElement(article), discoveredFrom }];
     });
 }
 
+async function collectSportskeedaLanding(): Promise<Candidate[]> {
+  const discoveredFrom = "https://www.sportskeeda.com/roblox-news";
+  const $ = cheerio.load(await fetchText(discoveredFrom));
+  const candidates = $(".fi--article a.hidden-item-cta, .fi--article a[href^='/roblox-news/']")
+    .toArray()
+    .flatMap((element) => {
+      const anchor = $(element);
+      const title = cleanText(anchor.attr("title") || anchor.attr("aria-label") || anchor.text());
+      const href = anchor.attr("href");
+      const sourceUrl = href ? normalizeUrl(new URL(href, discoveredFrom).toString()) : null;
+      if (!title || !sourceUrl || sourceUrl === normalizeUrl(discoveredFrom)) return [];
+      return [{ sourceName: "sportskeeda" as const, sourceUrl, title, publishedAt: null, discoveredFrom }];
+    });
+  const unique = [...new Map(candidates.map((candidate) => [candidate.sourceUrl, candidate])).values()].slice(0, 30);
+  const codes = unique.filter(isCodesArticle);
+  const articles = unique.filter((candidate) => !isCodesArticle(candidate));
+  return [...await enrichMissingDates(articles), ...codes];
+}
+
 async function collectGameRantLanding(): Promise<Candidate[]> {
-  const discoveredFrom = "https://gamerant.com/db/video-game/roblox/";
+  const discoveredFrom = "https://gamerant.com/tag/roblox/";
   const $ = cheerio.load(await fetchText(discoveredFrom));
   const candidates = $(".display-card.article h5.display-card-title a")
     .toArray()
@@ -254,9 +279,10 @@ async function collectGameRantLanding(): Promise<Candidate[]> {
       if (!title || !sourceUrl) return [];
       return [{ sourceName: "game-rant" as const, sourceUrl, title, publishedAt: null, discoveredFrom }];
     })
-    .filter((candidate) => !isCodesArticle(candidate))
-    .slice(0, 30);
-  return enrichMissingDates(candidates);
+    .slice(0, 40);
+  const codes = candidates.filter(isCodesArticle);
+  const articles = candidates.filter((candidate) => !isCodesArticle(candidate));
+  return [...await enrichMissingDates(articles), ...codes];
 }
 
 type ArticleMetadata = { title: string | null; publishedAt: string | null; description: string | null };
@@ -337,7 +363,7 @@ async function enrichMissingDates(candidates: Candidate[]): Promise<Candidate[]>
   });
 }
 
-async function collectGame8(): Promise<Candidate[]> {
+async function collectGame8(maxAgeHours: number): Promise<Candidate[]> {
   const discoveredFrom = "https://game8.co/sitemaps/game_1486.xml.gz";
   const response = await fetchResponse(discoveredFrom);
   let bytes = Buffer.from(await response.arrayBuffer());
@@ -351,11 +377,19 @@ async function collectGame8(): Promise<Candidate[]> {
       if (!sourceUrl || !sourceUrl.includes("game8.co/games/Roblox/archives/")) return [];
       return [{ sourceUrl, lastModified: toIsoDate(firstDirectText(row, "lastmod")) }];
     })
-    .filter((row) => row.lastModified && Date.parse(row.lastModified) >= Date.now() - SEARCH_LOOKBACK_MS)
     .sort((a, b) => (b.lastModified ?? "").localeCompare(a.lastModified ?? ""))
-    .slice(0, 50);
+    .slice(0, 100);
 
   return mapWithConcurrency(sitemapRows, 5, async (row) => {
+    if (!row.lastModified || Date.parse(row.lastModified) < Date.now() - maxAgeHours * 60 * 60 * 1000) {
+      return {
+        sourceName: "game8" as const,
+        sourceUrl: row.sourceUrl,
+        title: "",
+        publishedAt: row.lastModified,
+        discoveredFrom
+      };
+    }
     try {
       const metadata = await fetchArticleMetadata(row.sourceUrl);
       return {
@@ -384,35 +418,18 @@ function isCodesArticle(candidate: Candidate): boolean {
   return /\bcodes\b|\b(?:promo|redeem|working|active|expired)\s+code\b/i.test(withoutTechnicalErrors);
 }
 
-function keepRecentCandidates(candidates: Candidate[], options: Options): Candidate[] {
-  const cutoff = Date.now() - options.maxAgeHours * 60 * 60 * 1000;
-  const futureTolerance = Date.now() + 6 * 60 * 60 * 1000;
-  const seen = new Set<string>();
-  return candidates
-    .filter((candidate) => {
-      if (!candidate.title || !candidate.publishedAt || isCodesArticle(candidate)) return false;
-      const timestamp = Date.parse(candidate.publishedAt);
-      if (!Number.isFinite(timestamp) || timestamp < cutoff || timestamp > futureTolerance) return false;
-      if (seen.has(candidate.sourceUrl)) return false;
-      seen.add(candidate.sourceUrl);
-      return true;
-    })
-    .sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""))
-    .slice(0, options.perSource);
-}
-
-async function collectSource(sourceName: SourceName): Promise<Candidate[]> {
+async function collectSource(sourceName: SourceName, maxAgeHours: number): Promise<Candidate[]> {
   switch (sourceName) {
     case "pro-game-guides":
-      return enrichMissingDates((await collectProGameGuides()).filter((candidate) => !isCodesArticle(candidate)));
+      return enrichMissingDates(await collectProGameGuides());
     case "destructoid":
       return collectRss(sourceName, "https://www.destructoid.com/category/roblox/feed/");
     case "beebom":
-      return enrichMissingDates((await collectBeebom()).filter((candidate) => !isCodesArticle(candidate)));
+      return enrichMissingDates(await collectBeebom());
     case "sportskeeda":
-      return collectRss(sourceName, "https://www.sportskeeda.com/feed/roblox", true);
+      return collectSportskeedaLanding();
     case "game8":
-      return collectGame8();
+      return collectGame8(maxAgeHours);
     case "game-rant":
       return collectGameRantLanding();
     case "techwiser":
@@ -425,6 +442,7 @@ async function insertCandidates(candidates: Candidate[]) {
   const supabase = createClient(dev.url, dev.serviceRole, { auth: { autoRefreshToken: false, persistSession: false } });
   let inserted = 0;
   let duplicates = 0;
+  const bySource = new Map<SourceName, { inserted: number; duplicates: number }>();
 
   for (const candidate of candidates) {
     const { error } = await supabase.from("article_discovery_candidates").insert({
@@ -440,35 +458,54 @@ async function insertCandidates(candidates: Candidate[]) {
     });
     if (!error) {
       inserted += 1;
+      const source = bySource.get(candidate.sourceName) ?? { inserted: 0, duplicates: 0 };
+      source.inserted += 1;
+      bySource.set(candidate.sourceName, source);
     } else if (error.code === "23505") {
       duplicates += 1;
+      const source = bySource.get(candidate.sourceName) ?? { inserted: 0, duplicates: 0 };
+      source.duplicates += 1;
+      bySource.set(candidate.sourceName, source);
     } else {
       throw new Error(`Could not stage ${candidate.sourceUrl}: ${error.message}`);
     }
   }
-  return { inserted, duplicates };
+  return { inserted, duplicates, bySource };
 }
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   if (options.apply) resolveArticleDevCredentials();
 
+  console.log(`Discovery window: ${options.maxAgeHours} hours; per-source cap: ${options.perSource}.`);
+  const sourceNames = [...options.sources];
   const settled = await Promise.allSettled(
-    [...options.sources].map(async (sourceName) => ({
+    sourceNames.map(async (sourceName) => {
+      const filtered = filterRecentDiscoveryCandidates(await collectSource(sourceName, options.maxAgeHours), {
+        maxAgeHours: options.maxAgeHours,
+        limit: options.perSource,
+        exclude: isCodesArticle
+      });
+      return {
       sourceName,
-      candidates: keepRecentCandidates(await collectSource(sourceName), options)
-    }))
+        ...filtered
+      };
+    })
   );
   const candidates: Candidate[] = [];
   const errors: string[] = [];
-  for (const result of settled) {
+  const funnelRows: Array<DiscoveryFunnelStats & { source: string }> = [];
+  for (let index = 0; index < settled.length; index += 1) {
+    const result = settled[index];
     if (result.status === "rejected") {
-      errors.push(result.reason instanceof Error ? result.reason.message : String(result.reason));
+      const message = result.reason instanceof Error ? result.reason.message : String(result.reason);
+      errors.push(`${SOURCE_LABELS[sourceNames[index]]}: ${message}`);
       continue;
     }
     candidates.push(...result.value.candidates);
-    console.log(`${SOURCE_LABELS[result.value.sourceName]}: ${result.value.candidates.length} eligible article(s)`);
+    funnelRows.push({ source: SOURCE_LABELS[result.value.sourceName], ...result.value.stats });
   }
+  console.table(funnelRows);
   if (errors.length) console.warn(`Source errors (${errors.length}):\n- ${errors.join("\n- ")}`);
   if (!settled.some((result) => result.status === "fulfilled")) throw new Error("Every article source failed.");
 
@@ -488,6 +525,9 @@ async function main() {
   }
   const result = await insertCandidates(uniqueCandidates);
   console.log(`Discovery staging updated: ${result.inserted} inserted, ${result.duplicates} already discovered.`);
+  console.table(
+    [...result.bySource].map(([sourceName, counts]) => ({ source: SOURCE_LABELS[sourceName], ...counts }))
+  );
 }
 
 main().catch((error) => {

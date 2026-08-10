@@ -207,6 +207,8 @@ npm run articles:discover -- --apply
 npm run articles:curate -- --apply
 ```
 
+Discovery applies one uniform 18-hour freshness window to every publisher; the CLI refuses windows of 24 hours or more. Its journal includes a per-source funnel table, so a source that is reachable but stale is distinguishable from a broken parser or a feed with missing dates. Curation claims at most 20 candidates per scheduled run by default, sends only intent-matched production inventory rows to Groq, and scales the response token budget with that batch to avoid unnecessary free-tier TPM failures. Same-game leads remain separate unless they serve an interchangeable player task.
+
 Only a fully successful discovery service triggers `bloxodes-article-writer.service` through `OnSuccess=`. The writer unit is configured to run:
 
 ```bash

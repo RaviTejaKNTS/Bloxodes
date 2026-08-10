@@ -7,6 +7,7 @@ import { parse as parseDotenv } from "dotenv";
 import { z } from "zod";
 
 import { slugify } from "@/lib/slug";
+import { groupingSimilarity, sameSearchIntent } from "./article-curation-intent";
 import { resolveArticleDevCredentials } from "./article-queue-env";
 import { fetchProductionEditorialInventory } from "./production-editorial-inventory";
 
@@ -45,7 +46,7 @@ type QueueSourceItem = {
   source_description: string | null;
 };
 
-const PROMPT_VERSION = "article-curation-v1-2026-08-07";
+const PROMPT_VERSION = "article-curation-v2-2026-08-10";
 const DEFAULT_MODEL = "llama-3.3-70b-versatile";
 const GROQ_CHAT_URL = "https://api.groq.com/openai/v1/chat/completions";
 
@@ -87,11 +88,6 @@ const CurationResponseSchema = z.object({
 
 type CurationDecision = z.infer<typeof DecisionSchema>;
 
-const STOP_WORDS = new Set([
-  "a", "an", "and", "are", "as", "at", "all", "best", "complete", "for", "from", "guide", "how", "in", "is",
-  "list", "new", "of", "on", "roblox", "the", "tier", "to", "update", "what", "when", "where", "with"
-]);
-
 function printUsage() {
   console.log(
     "Usage: npm run articles:curate -- [--apply] [--limit N] [--model MODEL]"
@@ -102,7 +98,7 @@ function printUsage() {
 function parseArgs(argv: string[]): Options {
   const options: Options = {
     apply: false,
-    limit: 60,
+    limit: 20,
     model: process.env.ARTICLE_CURATION_MODEL?.trim() || DEFAULT_MODEL
   };
   for (let index = 0; index < argv.length; index += 1) {
@@ -152,39 +148,6 @@ function loadGroqApiKey(): string {
   return key;
 }
 
-function tokens(value: string): Set<string> {
-  return new Set(
-    value
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, " ")
-      .split(/\s+/)
-      .filter((token) => token.length >= 3 && !STOP_WORDS.has(token))
-      .map((token) => (token.length > 4 && token.endsWith("s") && !token.endsWith("ss") ? token.slice(0, -1) : token))
-  );
-}
-
-function groupingSimilarity(left: string, right: string): { shared: number; jaccard: number } {
-  const leftTokens = tokens(left);
-  const rightTokens = tokens(right);
-  const union = new Set([...leftTokens, ...rightTokens]);
-  const shared = [...leftTokens].filter((token) => rightTokens.has(token)).length;
-  return { shared, jaccard: union.size ? shared / union.size : 0 };
-}
-
-function overlapScore(candidateTokens: Set<string>, item: InventoryItem): number {
-  const itemTokens = tokens(`${item.title} ${item.key}`);
-  let shared = 0;
-  let longShared = 0;
-  for (const token of candidateTokens) {
-    if (!itemTokens.has(token)) continue;
-    shared += 1;
-    if (token.length >= 8) longShared += 1;
-  }
-  if (shared >= 2) return shared * 10 + longShared;
-  if (longShared >= 1) return 5 + longShared;
-  return 0;
-}
-
 function deterministicRejection(candidate: CandidateRow): { code: "codes" | "link_page"; reason: string } | null {
   const combined = `${candidate.source_title} ${new URL(candidate.source_url).pathname.replace(/[-_/]+/g, " ")}`;
   const withoutErrors = combined.replace(/\berror codes?\b/gi, "");
@@ -198,12 +161,21 @@ function deterministicRejection(candidate: CandidateRow): { code: "codes" | "lin
 }
 
 function loadRelevantInventory(allRows: InventoryItem[], candidates: CandidateRow[]): InventoryItem[] {
-  const candidateTokenSets = candidates.map((candidate) => tokens(candidate.source_title));
   return allRows
-    .map((item) => ({ item, score: Math.max(...candidateTokenSets.map((set) => overlapScore(set, item))) }))
+    .map((item) => ({
+      item,
+      score: Math.max(
+        ...candidates.map((candidate) => {
+          const inventoryTitle = `${item.title} ${item.key.replace(/-/g, " ")}`;
+          if (!sameSearchIntent(candidate.source_title, inventoryTitle)) return 0;
+          const similarity = groupingSimilarity(candidate.source_title, inventoryTitle);
+          return similarity.shared * 10 + similarity.jaccard;
+        })
+      )
+    }))
     .filter(({ score }) => score > 0)
     .sort((a, b) => b.score - a.score || a.item.family.localeCompare(b.item.family))
-    .slice(0, 400)
+    .slice(0, 120)
     .map(({ item }) => item);
 }
 
@@ -237,7 +209,7 @@ REJECT anything owned by another Bloxodes page family:
 CURATION RULES:
 1. Account for every candidate ID exactly once.
 2. Group candidates ONLY when they cover the same Roblox game AND the same interchangeable search intent/player task. Different games must always be separate decisions. Different mechanics, items, guide goals, or ranking subjects in the same game must also be separate. Never group merely because candidates share an article type, say "tier list", or belong to the same game.
-3. Reject a candidate that overlaps EXISTING BLOXODES COVERAGE, including an existing curated queue topic.
+3. Reject a candidate that overlaps EXISTING BLOXODES COVERAGE, including an existing curated queue topic, only when it serves the same interchangeable player task or search intent. Sharing a game name, article type, broad category, or one generic noun is never enough. A guide for one item, mechanic, location, job, style, or ritual does not overlap a different guide in the same game.
 4. Do not approve a broad collection merely because the source calls it a guide.
 5. A narrow gameplay task guide is allowed. A database-like "all X" reference is not. A real tier ranking is allowed and is not a collection merely because it ranks many choices.
 6. Prefer topics with clear player intent, enough source evidence, and a useful angle. Reject thin announcements and topics that cannot support an accurate article.
@@ -302,9 +274,9 @@ function validateDecisions(
           const left = candidates[Number(leftAlias.slice(1))];
           const right = candidates[Number(rightAlias.slice(1))];
           const similarity = groupingSimilarity(left.source_title, right.source_title);
-          if (similarity.shared < 2 || similarity.jaccard < 0.3) {
+          if (!sameSearchIntent(left.source_title, right.source_title)) {
             throw new Error(
-              `Groq grouped unrelated candidates ${leftAlias} and ${rightAlias} (title similarity ${similarity.jaccard.toFixed(2)}).`
+              `Groq grouped candidates ${leftAlias} and ${rightAlias} without the same search intent (title similarity ${similarity.jaccard.toFixed(2)}).`
             );
           }
         }
@@ -356,7 +328,7 @@ async function curateWithGroq(
           messages: [{ role: "user", content: buildPrompt(candidates, inventory, validationFeedback) }],
           response_format: { type: "json_object" },
           temperature: 0,
-          max_tokens: 6000
+          max_tokens: Math.min(3600, Math.max(1200, 600 + candidates.length * 220))
         }),
         signal: AbortSignal.timeout(90_000)
       });
@@ -390,6 +362,7 @@ async function curateWithGroq(
       if (!parsed.success) throw new Error(`Groq curation JSON failed validation: ${parsed.error.message}`);
       const decisions = validateDecisions(parsed.data, candidates);
       attempts.push({ attempt, usage: payload.usage ?? null, response: parsed.data });
+      if (payload.usage) console.log(`Groq usage: ${JSON.stringify(payload.usage)}`);
       return {
         decisions,
         raw: { model: payload.model ?? model, attempts }
@@ -668,6 +641,12 @@ async function main() {
       ? (await fetchProductionEditorialInventory()).items
       : [];
     const inventory = loadRelevantInventory(productionInventory, groqCandidates);
+    console.table([
+      { stage: "selected pending candidates", count: candidates.length },
+      { stage: "deterministic rejects", count: deterministicIds.size },
+      { stage: "sent to Groq", count: groqCandidates.length },
+      { stage: "intent-matched inventory rows", count: inventory.length }
+    ]);
     const groqResult = groqCandidates.length
       ? await curateWithGroq(apiKey, options.model, groqCandidates, inventory)
       : { decisions: [] as CurationDecision[], raw: { response: { decisions: [] } } };
@@ -692,6 +671,13 @@ async function main() {
         reason: decision.reason_code,
         confidence: decision.confidence
       }))
+    );
+    const reasonCounts = new Map<string, number>();
+    for (const decision of decisions) {
+      reasonCounts.set(decision.reason_code, (reasonCounts.get(decision.reason_code) ?? 0) + decision.candidate_ids.length);
+    }
+    console.table(
+      [...reasonCounts].map(([reason, count]) => ({ reason, candidates: count }))
     );
     if (!options.apply) {
       console.log(`Dry run: ${decisions.filter((decision) => decision.decision === "approve").length} approved topic group(s); no database rows changed.`);
