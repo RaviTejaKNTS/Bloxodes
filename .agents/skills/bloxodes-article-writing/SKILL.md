@@ -42,7 +42,7 @@ If the brief is missing, weak, unapproved, or has unresolved source gaps, stop a
 - If 300 words covers it fully, stop at 300. There's no minimum or maximum: the only test is whether more words add real depth.
 - Never restate something already said elsewhere in the article, even in different phrasing.
 - However, do not skip on any info. Do not asssume people already know something, make it clear for everyone to understand.
-- We may not need an what it is headings, but definitely need to cover all such info in the article. We need to make a detailed article that can rank better than all competitors. If the article is missing any info, run a fan-out research query and fill it, never leave a gap.
+- Before drafting, check the competing pages for the target topic and make a materially better page. One-up them with better SEO, SEO-friendly headings, more information that is actually useful, better readability, simpler explanations, and a clean flow readers can follow from start to finish. If useful information is missing, research and add it; do not add filler merely to make the article longer.
 
 **Readability and formatting**
 - This sits on top of the value rule: every sentence must add value, and every sentence must also be easy to read.
@@ -64,6 +64,10 @@ If the brief is missing, weak, unapproved, or has unresolved source gaps, stop a
 - One structured element per section, never a table and a list together. Keep it simple.
 - Use tables and lists only for core, structured info (stats, steps, comparisons). Otherwise default to plain prose.
 - Use numbered lists for step-by-step instructions.
+
+**Preferred article media**
+- Strongly prefer at least one useful media type in the article body: a screenshot, a YouTube embed, or a collected image that is approved for use. Actively work on finding or gathering one.
+- The cover image does not count as body media. Do not block or stop an otherwise strong article solely because no suitable non-cover media can be found or approved.
 
 **YouTube embeds (optional)**
 - Embed a video only when the approved brief marks it as a perfect match. Skip near matches and filler videos.
@@ -148,7 +152,7 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 
 **Final pass**
 - Re-read as a reader, not the writer. Cut anything that doesn't earn its place. Confirm the article actually solves what the reader came for.
-- If media is present, confirm each video is a perfect match and each hosted image path, placement, and alt text is useful. Remove media that does not help.
+- If non-cover media is present, confirm it is useful. Each video must be a perfect match, and each hosted image path, placement, and alt text must help the reader. Remove media that does not help.
 
 ## Writing and Field Jobs
 
@@ -157,7 +161,7 @@ Write `final.json` only in the content workspace. Approved Supabase Storage uplo
 - `title`: State the exact reader question, action, story, or guide promise in human search language. Include the game name for game-specific articles.
 - `slug`: Use a short stable editorial slug for the article topic. Include the game name for game-specific articles.
 - `meta_description`: Summarize the answer or reader outcome in one specific search snippet.
-- `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy. Include optional YouTube embeds and hosted body images only when the brief supports them.
+- `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy. Strongly prefer a useful non-cover screenshot, YouTube embed, or hosted collected image, but do not weaken or block the article when no suitable option is available.
 - `faq_json`: Add 2-4 useful questions only when they cover follow-up points not already answered in the article. Keep answers short, clear, and source-backed. Use `[]` if FAQs would repeat the body.
 - `cover_image`: Use an existing Bloxodes Supabase Storage public URL when a cover is already hosted; otherwise use null so the import path can generate and upload one.
 - `author_id`: Set when known, or let the import path assign it if that is the project flow.

@@ -67,7 +67,7 @@ These are almost always platform-level, so `universe_id` is usually `null`. Set 
 - Follow the base writing skill's perfect-match video and hosted-image rules.
 - Use a video only when it demonstrates the same error or procedure. Place it after the short intro or near the matching fix.
 - Use a clean hosted screenshot when a settings path or UI control is difficult to find from prose alone.
-- Skip media when the scan table and numbered fixes already make the procedure clear.
+- Actively try to include a useful non-cover media type as strongly preferred by the base writing skill. When the scan table and numbered fixes already make the procedure clear, choose the lightest useful media option; do not block the article when none is suitable.
 
 ## Output
 
