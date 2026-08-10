@@ -1,5 +1,7 @@
 # Homelab Article Automation
 
+> For the live `/home/teja/projects/Bloxodes` checkout, current four-times-daily systemd chain, GitHub access, health checks, known configuration drift, and safe release procedure, use [Bloxodes Homelab Content Pipeline](./homelab-content-pipeline.md). The installer paths and timer layout below describe the older checked-in design.
+
 Article discovery, Groq curation, the writing queue, draft articles, and draft media all live in one managed development Supabase project. The homelab never receives a production Supabase service-role credential.
 
 Production overlap checks use the public, GET-only endpoint at `/api/articles/editorial-inventory`. It returns only published page family, title, key, and optional universe ID. It cannot mutate production.
