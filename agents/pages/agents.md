@@ -69,6 +69,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Tools hub | `/tools`, `/tools/page/[page]` | `src/app/(site)/tools/*`, shared helpers in `page-data.tsx` |
 | Tools workflow guide | all tool routes | `src/app/(site)/tools/AGENTS.md` |
 | Roblox ID extractor | `/tools/roblox-id-extractor` | `src/app/(site)/tools/roblox-id-extractor/*`, client in `RobloxIdExtractorClient.tsx` |
+| Roblox profile checker | `/tools/roblox-profile-checker` | `src/app/(site)/tools/roblox-profile-checker/*`, client in `RobloxProfileCheckerClient.tsx`, API proxy at `/api/roblox-profile-checker` |
 | Robux to USD | `/tools/robux-to-usd-calculator` | `src/app/(site)/tools/robux-to-usd-calculator/*`, static tables in `robux-bundles.ts` and `robux-plans.ts` |
 | DevEx | `/tools/roblox-devex-calculator` | `src/app/(site)/tools/roblox-devex-calculator/*` |
 | The Forge crafting | `/tools/the-forge-crafting-calculator` | `src/app/(site)/tools/the-forge-crafting-calculator/*` |
