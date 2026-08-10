@@ -108,6 +108,25 @@ git log --oneline --decorate -5
 
 Preserve unrelated work. Do not reset, clean, force-push, or replace another workflow's branch. Use the normal `bloxodes-release-e2e` safeguards only when the user explicitly requests an end-to-end production release.
 
+### Two-device production synchronization
+
+GitHub `production` is the only shared source of truth. The canonical Mac checkout and `/home/teja/projects/Bloxodes` on the homelab should both rest on `production`, track `origin/production`, fetch all remote branches, and use:
+
+```bash
+git config pull.ff only
+git config fetch.prune true
+```
+
+Use one writer device at a time:
+
+1. On the device that will work, require a clean tracked worktree, switch to `production`, fetch, and run `git pull --ff-only origin production` before editing.
+2. Prepare and validate the exact content or code scope. Scheduled article jobs may keep ignored workspace artifacts locally, but approved repository-owned content must be committed before it can move between devices.
+3. Immediately before release, fetch again. Push only a normal fast-forward update to `origin/production`; never force-push.
+4. On the other device, require a clean tracked worktree and run `git pull --ff-only origin production`. Verify that `HEAD` equals `origin/production` before starting its next job.
+5. If a push is rejected or a fast-forward pull fails, stop. Preserve the local commit on a clearly named safety branch and reconcile it against the latest GitHub `production`; do not create a merge commit, reset, clean, copy the whole checkout, or overwrite either device.
+
+Do not edit tracked files concurrently on both devices. A successful GitHub push is the handoff signal; the receiving device pulls only after that push completes. Database rows and Storage objects are not synchronized by Git and must continue through their page-type release workflow.
+
 ## Credentials And Data Boundaries
 
 The systemd jobs load:
