@@ -363,13 +363,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title,
     description,
-    keywords: [
-      `${game.name} codes`,
-      "Roblox codes",
-      "Roblox promo codes",
-      "gaming rewards",
-      "Bloxodes"
-    ],
     category: "Gaming",
     alternates: buildAlternates(canonicalUrl),
     authors: null,

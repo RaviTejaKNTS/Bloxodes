@@ -30,22 +30,18 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = resolveSeoTitle(tool.seo_title) ?? tool.title ?? undefined;
   const description = tool.meta_description ?? undefined;
   const image = tool.thumb_url || FALLBACK_IMAGE;
-  const publishedTime = resolvePublishedAt(tool);
-  const modifiedTime = resolveModifiedAt(tool);
 
   return {
     title,
     description,
     alternates: buildAlternates(CANONICAL),
     openGraph: {
-      type: "article",
+      type: "website",
       url: CANONICAL,
       title,
       description,
       siteName: SITE_NAME,
-      images: [image],
-      publishedTime: publishedTime ? new Date(publishedTime).toISOString() : undefined,
-      modifiedTime: modifiedTime ? new Date(modifiedTime).toISOString() : undefined
+      images: [image]
     },
     twitter: {
       card: "summary_large_image",

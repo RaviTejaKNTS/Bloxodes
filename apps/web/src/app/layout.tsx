@@ -14,13 +14,6 @@ export const metadata = {
     template: "%s"
   },
   description: SITE_DESCRIPTION,
-  keywords: [
-    "Roblox codes",
-    "Roblox game codes",
-    "Bloxodes",
-    "gaming rewards",
-    "promo codes"
-  ],
   category: "Gaming",
   publisher: SITE_NAME,
   creator: SITE_NAME,

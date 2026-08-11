@@ -41,7 +41,6 @@ type HomeHubLink = { href: string; icon: typeof Key; label: string };
 export const metadata: Metadata = {
   title: PAGE_TITLE,
   description: PAGE_DESCRIPTION,
-  keywords: ["Roblox codes", "Roblox guides", "Roblox stats", "Bloxodes", "Roblox tools", "Roblox wiki"],
   alternates: buildAlternates(SITE_URL),
   openGraph: {
     title: PAGE_TITLE,
