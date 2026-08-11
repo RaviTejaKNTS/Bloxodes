@@ -166,7 +166,7 @@ async function main() {
   const run = await startStatsJobRun({ jobName: "stats_universe_audit", metadata: { strict: STRICT } });
 
   try {
-    const { data, error } = await supabaseAdmin().rpc("get_roblox_universe_pipeline_health");
+    const { data, error } = await supabaseAdmin().rpc("get_roblox_universe_pipeline_health_v2");
     if (error) throw new Error(`Failed to load universe pipeline health: ${error.message}`);
     const snapshot = data as HealthSnapshot;
     const checks = evaluate(snapshot);

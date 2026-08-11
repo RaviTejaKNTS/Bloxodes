@@ -53,8 +53,8 @@ After the monorepo move, older shorthand paths in this inventory that begin with
   - Historical Roblox game update markers detected during hourly stats refreshes. Use this for stats chart update overlays; `roblox_universes.updated_at_api` is latest-state only.
 - `stats_game_current_index`, `stats_genre_current_index`, `stats_risers_current_index`, `stats_creator_current_index`
   - Public `/stats` read models for game listings, genre summaries, risers, and creator leaderboards. Current-player values, playing growth, and playing ranks are null after `last_playing_refreshed_at` is more than 24 hours old; the raw last observation remains on `roblox_universes` for history. Rebuild through the stats current-index refresh workflow.
-- `stats_job_runs`, `get_roblox_universe_pipeline_health()`
-  - Operational job history and the service-role-only single-statement health snapshot used by strict game-stats audits. The snapshot reconciles public 24-hour visibility, tier refresh starts, leases, overdue rows, and current-index freshness without many timeout-prone PostgREST count requests.
+- `stats_job_runs`, `get_roblox_universe_pipeline_health_v2()`
+  - Operational job history and the service-role-only single-statement health snapshot used by strict game-stats audits. The snapshot reconciles public 24-hour visibility, tier refresh starts, recent universe-only stale runs, leases, overdue rows, and current-index freshness without many timeout-prone PostgREST count requests.
 - `roblox_platform_stats_hourly`, `roblox_platform_stats_daily`
   - Public `/stats/roblox-platform` aggregates for platform-level playing, visits, favorites, rating, tracked-game count, and chart ranges. Refresh through `npm run stats:platform:refresh`.
 - `roblox_catalog_items`
