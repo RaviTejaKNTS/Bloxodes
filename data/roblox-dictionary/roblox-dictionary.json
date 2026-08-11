@@ -1,0 +1,4310 @@
+{
+  "meta": {
+    "title": "Roblox Dictionary: Slang, Acronyms & Terms",
+    "updatedAt": "2026-08-11",
+    "itemCount": 198,
+    "sources": [
+      {
+        "label": "RobloxDen Dictionary",
+        "url": "https://robloxden.com/dictionary",
+        "accessed": "2026-08-11"
+      },
+      {
+        "label": "Roblox Wiki slang reference",
+        "url": "https://roblox.fandom.com/wiki/Roblox_slang",
+        "accessed": "2026-08-11"
+      },
+      {
+        "label": "Official Roblox Dictionary",
+        "url": "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "accessed": "2026-08-11"
+      },
+      {
+        "label": "Roblox Creator Hub: What is Roblox?",
+        "url": "https://create.roblox.com/docs/what-is-roblox",
+        "accessed": "2026-08-11"
+      },
+      {
+        "label": "Roblox Creator Hub: Marketplace",
+        "url": "https://create.roblox.com/docs/marketplace",
+        "accessed": "2026-08-11"
+      },
+      {
+        "label": "Roblox Creator Hub: Avatars",
+        "url": "https://create.roblox.com/docs/avatar",
+        "accessed": "2026-08-11"
+      },
+      {
+        "label": "Roblox Creator Hub: Assets",
+        "url": "https://create.roblox.com/docs/projects/assets",
+        "accessed": "2026-08-11"
+      },
+      {
+        "label": "Roblox Creator Hub: Publishing games and places",
+        "url": "https://create.roblox.com/docs/production/publishing/publish-experiences-and-places",
+        "accessed": "2026-08-11"
+      }
+    ],
+    "columns": [
+      "term",
+      "slug",
+      "aliases",
+      "expansion",
+      "definition",
+      "example",
+      "category",
+      "termType",
+      "status",
+      "robloxSpecific",
+      "safetyNote",
+      "sourceUrls",
+      "lastVerifiedAt",
+      "sortOrder"
+    ],
+    "coverage": {
+      "robloxDenExpected": 55,
+      "robloxDenCovered": 55,
+      "auditedAt": "2026-08-11",
+      "scopeNote": "All terms linked from the current RobloxDen dictionary index are represented as a card or a deduplicated alias, then expanded with official Roblox and established community sources."
+    }
+  },
+  "items": [
+    {
+      "term": "1v1",
+      "slug": "1v1",
+      "aliases": [
+        "one v one",
+        "one versus one"
+      ],
+      "expansion": null,
+      "definition": "A fair match where two players compete against each other, often in a fight or skill challenge.",
+      "example": "They joined a private server for a 1v1 after the match ended.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 1,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "13+",
+      "slug": "13-plus",
+      "aliases": [
+        "13 plus",
+        "thirteen plus"
+      ],
+      "expansion": null,
+      "definition": "An older Roblox age label used to show that content or a feature was aimed at users aged 13 or over. Current access labels can differ, so treat it as historical context rather than a promise of access.",
+      "example": "The old guide marked the feature 13+, but the player checked the current Roblox settings instead.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": "Age and access labels change. Check the current Roblox screen or help page instead of relying on an old label.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/13plus"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 2
+    },
+    {
+      "term": "1337",
+      "slug": "1337",
+      "aliases": [
+        "leet",
+        "l33t"
+      ],
+      "expansion": null,
+      "definition": "Older gamer slang for elite skill or style, written with numbers that resemble letters.",
+      "example": "The winner typed 1337 after the round as a deliberately old-school flex.",
+      "category": "classic-roblox",
+      "termType": "slang",
+      "status": "legacy",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/1337"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 3
+    },
+    {
+      "term": "A/C",
+      "slug": "a-c",
+      "aliases": [
+        "AC",
+        "accept or counter"
+      ],
+      "expansion": "Accept or Counter",
+      "definition": "Trading shorthand asking whether someone will accept the offer or send a counteroffer.",
+      "example": "The trader posted A/C after sending a limited-item offer.",
+      "category": "avatars-and-marketplace",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Use Roblox's official trade window and review every item before accepting.",
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 4
+    },
+    {
+      "term": "A/D",
+      "slug": "a-d",
+      "aliases": [
+        "AD",
+        "accept or decline"
+      ],
+      "expansion": "Accept or Decline",
+      "definition": "Trading shorthand asking whether an offer should be accepted or declined.",
+      "example": "She asked A/D before deciding whether the trade was fair.",
+      "category": "avatars-and-marketplace",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Do not let chat pressure rush a trade decision.",
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 5
+    },
+    {
+      "term": "AA",
+      "slug": "aa",
+      "aliases": [
+        "admin abuse"
+      ],
+      "expansion": "Admin Abuse",
+      "definition": "Admin abuse is when an experience administrator misuses special commands or powers to disrupt play or treat players unfairly.",
+      "example": "Players called it AA when an admin repeatedly kicked people who won a round.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/aa",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 6,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "ABC",
+      "slug": "abc",
+      "aliases": [
+        "abc for"
+      ],
+      "expansion": null,
+      "definition": "A Roblox chat response used to show interest in a request or roleplay prompt, such as an offer to team up or take a role.",
+      "example": "Someone typed ABC for cashier, and two players replied ABC.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Replying ABC does not create a real agreement. Keep personal details and off-platform contact out of roleplay chats.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/abc"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 7
+    },
+    {
+      "term": "Account",
+      "slug": "account",
+      "aliases": [
+        "roblox account",
+        "user account",
+        "Acc"
+      ],
+      "expansion": null,
+      "definition": "Your Roblox login profile that holds your avatar, inventory, friends, and game progress.",
+      "example": "She signed into her account before joining the group game night.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Never share your password, 2-step codes, or login links. Roblox staff will not ask for your password in chat or messages.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 8,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Admin",
+      "slug": "admin",
+      "aliases": [
+        "administrator",
+        "server admin"
+      ],
+      "expansion": null,
+      "definition": "A player with special powers in a game or group, such as kicking users or changing server settings.",
+      "example": "The admin muted chat so everyone could hear the event announcement.",
+      "category": "gameplay",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 9,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "AFK",
+      "slug": "afk",
+      "aliases": [
+        "away",
+        "idle"
+      ],
+      "expansion": "away from keyboard",
+      "definition": "A short way to say you stepped away and are not actively playing right now.",
+      "example": "He typed AFK and left his avatar standing near the lobby fountain.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/afk",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 10,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Alias",
+      "slug": "alias",
+      "aliases": [
+        "friend alias",
+        "nickname"
+      ],
+      "expansion": null,
+      "definition": "An older friend feature that let a player privately assign a nickname to someone on their Roblox friends list.",
+      "example": "The old account guide showed how a friend alias appeared only to the person who set it.",
+      "category": "classic-roblox",
+      "termType": "platform term",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/alias"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 11
+    },
+    {
+      "term": "ALR",
+      "slug": "alr",
+      "aliases": [
+        "alright",
+        "all right"
+      ],
+      "expansion": "Alright",
+      "definition": "A casual chat reply meaning okay, understood, or that a plan works.",
+      "example": "ALR, meet the squad beside spawn.",
+      "category": "chat-and-social",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 12
+    },
+    {
+      "term": "Alt",
+      "slug": "alt",
+      "aliases": [
+        "alt account",
+        "alternate account"
+      ],
+      "expansion": null,
+      "definition": "A second Roblox account someone uses in addition to their main one.",
+      "example": "She used an alt to test the new game without spoiling her main inventory.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/alt",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 13,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Animation",
+      "slug": "animation",
+      "aliases": [
+        "animation asset"
+      ],
+      "expansion": null,
+      "definition": "A saved sequence of poses that makes an avatar, character, or rig move.",
+      "example": "The animator published a new run animation for the enemy rig.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 14
+    },
+    {
+      "term": "Annually",
+      "slug": "annually",
+      "aliases": [
+        "annual",
+        "yearly"
+      ],
+      "expansion": null,
+      "definition": "Once per year. On a Roblox purchase or subscription screen, it describes how often a recurring charge is scheduled.",
+      "example": "The player checked whether the plan billed monthly or annually before choosing it.",
+      "category": "accounts-and-safety",
+      "termType": "billing term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Confirm the amount and renewal schedule on the current purchase screen before paying.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/annually"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 15
+    },
+    {
+      "term": "AOS",
+      "slug": "aos",
+      "aliases": [
+        "arrest on sight",
+        "AOSer"
+      ],
+      "expansion": "Arrest on Sight",
+      "definition": "A roleplay status telling law-enforcement characters to arrest a named character when seen.",
+      "example": "The suspect became AOS after escaping the roleplay jail.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 16
+    },
+    {
+      "term": "Asset",
+      "slug": "asset",
+      "aliases": [
+        "roblox asset",
+        "catalog asset"
+      ],
+      "expansion": null,
+      "definition": "A piece of content on Roblox such as clothing, a model, a sound, or an image used in experiences.",
+      "example": "The creator uploaded a new asset for the shop’s window display.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/marketplace",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 17,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Asset ID",
+      "slug": "asset-id",
+      "aliases": [
+        "assetId",
+        "asset number"
+      ],
+      "expansion": null,
+      "definition": "The unique number Roblox assigns to an asset such as an image, model, audio file, or animation.",
+      "example": "The creator pasted the asset ID into the property that loads the image.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 18
+    },
+    {
+      "term": "Asset Manager",
+      "slug": "asset-manager",
+      "aliases": [
+        "Studio Asset Manager"
+      ],
+      "expansion": null,
+      "definition": "A Roblox Studio window for importing and managing assets tied to the current project.",
+      "example": "The creator used Asset Manager to upload the new lobby image.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets/manager"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 19
+    },
+    {
+      "term": "Audio",
+      "slug": "audio",
+      "aliases": [
+        "sound asset",
+        "audio asset"
+      ],
+      "expansion": null,
+      "definition": "A sound or music asset that a Roblox game can load and play through its audio objects.",
+      "example": "The button played a short audio clip when the round began.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 20
+    },
+    {
+      "term": "Aura",
+      "slug": "aura",
+      "aliases": [
+        "glow",
+        "vibe"
+      ],
+      "expansion": null,
+      "definition": "A cool look, style, or presence a player seems to have in chat or gameplay, often as a joke compliment.",
+      "example": "After the clutch win, the chat said his aura was unmatched.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 21,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Avatar",
+      "slug": "avatar",
+      "aliases": [
+        "character",
+        "roblox avatar"
+      ],
+      "expansion": null,
+      "definition": "The character you control on Roblox, including your body type, clothes, and accessories.",
+      "example": "She changed her avatar’s jacket before joining the fashion runway game.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/avatar",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 22,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Bacon",
+      "slug": "bacon",
+      "aliases": [
+        "bacon hair",
+        "default bacon"
+      ],
+      "expansion": null,
+      "definition": "A nickname for the classic Pal Hair look that appeared on many default Roblox avatars.",
+      "example": "The group photo mixed a bacon-style avatar with several custom outfits.",
+      "category": "avatars-and-marketplace",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 23,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Badge",
+      "slug": "badge",
+      "aliases": [
+        "achievement badge",
+        "game badge"
+      ],
+      "expansion": null,
+      "definition": "A reward icon a game can give you for finishing a goal, finding a secret, or hitting a milestone.",
+      "example": "He earned a badge for completing the beginner parkour course.",
+      "category": "gameplay",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 24,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Ban",
+      "slug": "ban",
+      "aliases": [
+        "banned",
+        "account ban",
+        "Beaned"
+      ],
+      "expansion": null,
+      "definition": "A penalty that blocks a player from Roblox or from a specific game for breaking the rules.",
+      "example": "The account got a ban after repeated chat violations in the lobby.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "A ban is a safety and rules action. Do not try to dodge it with extra accounts, and never trust anyone who claims they can remove a ban for payment or free items.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 25,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Beamed",
+      "slug": "beamed",
+      "aliases": [
+        "got beamed",
+        "account beamed",
+        "Comped",
+        "compromised"
+      ],
+      "expansion": null,
+      "definition": "Slang for losing an account or valuable items because of account theft or a deceptive link.",
+      "example": "He said his account got beamed after he clicked a fake free-item message.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "If someone says you got beamed, treat it as a warning about theft. Do not click unknown login links, and tell a trusted adult if your account or items go missing.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 26,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Beta",
+      "slug": "beta",
+      "aliases": [
+        "beta test",
+        "beta version"
+      ],
+      "expansion": null,
+      "definition": "An early test version of a game or feature that is still being improved before a wider release.",
+      "example": "Players in the beta could try the new map a week early.",
+      "category": "creator-and-studio",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/beta",
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 27,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Blocky",
+      "slug": "blocky",
+      "aliases": [
+        "1.0 body",
+        "classic body"
+      ],
+      "expansion": null,
+      "definition": "An avatar look built from simple rectangular body parts, similar to the classic Roblox character shape.",
+      "example": "The outfit used a blocky body with modern layered accessories.",
+      "category": "avatars-and-marketplace",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://create.roblox.com/docs/characters"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 28
+    },
+    {
+      "term": "Bloxxed",
+      "slug": "bloxxed",
+      "aliases": [
+        "blox",
+        "got bloxxed"
+      ],
+      "expansion": null,
+      "definition": "Classic Roblox slang for defeating or knocking out another player in older combat games.",
+      "example": "In the classic arena, the winner proudly said the rival had been bloxxed.",
+      "category": "classic-roblox",
+      "termType": "slang",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 29,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Bobux",
+      "slug": "bobux",
+      "aliases": [
+        "Bobuck",
+        "Roux"
+      ],
+      "expansion": null,
+      "definition": "A joke misspelling of Robux used in memes, chat, and playful requests for currency.",
+      "example": "The sign promised free bobux, but the player ignored the suspicious claim.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Free-Robux promises are a common scam lure. Do not enter login details on unknown sites.",
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 30
+    },
+    {
+      "term": "BRB",
+      "slug": "brb",
+      "aliases": [
+        "be right back"
+      ],
+      "expansion": "be right back",
+      "definition": "A chat phrase meaning you will step away for a short time and return soon.",
+      "example": "She typed BRB and paused the trade until she came back.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/brb",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 31,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "BrickBattle",
+      "slug": "brickbattle",
+      "aliases": [
+        "brick battle",
+        "classic brickbattle"
+      ],
+      "expansion": null,
+      "definition": "An early Roblox combat style that used classic tools like rockets, bombs, and swords in blocky arenas.",
+      "example": "Their favorite classic place was a BrickBattle map with team bases.",
+      "category": "classic-roblox",
+      "termType": "gameplay term",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 32,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Buff",
+      "slug": "buff",
+      "aliases": [
+        "buffed",
+        "power buff"
+      ],
+      "expansion": null,
+      "definition": "A change that makes a character, item, or ability stronger than it was before.",
+      "example": "The update gave the starter sword a small damage buff.",
+      "category": "gameplay",
+      "termType": "gameplay term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 33,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Bundle",
+      "slug": "bundle",
+      "aliases": [
+        "avatar bundle",
+        "outfit bundle"
+      ],
+      "expansion": null,
+      "definition": "A Marketplace listing that groups a complete avatar body or a set of related avatar parts under one item.",
+      "example": "She equipped a robot bundle, then mixed its arms with a different avatar body.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/marketplace",
+        "https://create.roblox.com/docs/avatar"
+      ],
+      "sortOrder": 34,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Bypass",
+      "slug": "bypass",
+      "aliases": [
+        "filter bypass",
+        "chat bypass"
+      ],
+      "expansion": null,
+      "definition": "An unsafe attempt to get around Roblox chat filters or other safety protections.",
+      "example": "The moderator removed players who tried to use a bypass in public chat.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Bypass talk is not allowed and can lead to reports or bans. If you see someone trying to hide unsafe messages, leave the chat and report the behavior.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 35,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Cap",
+      "slug": "cap",
+      "aliases": [
+        "capping",
+        "no cap"
+      ],
+      "expansion": null,
+      "definition": "Slang for a false claim or exaggeration. Players say no cap when they mean they are telling the truth.",
+      "example": "That trade offer is cap; the item is not that rare.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 36,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Carry",
+      "slug": "carry",
+      "aliases": [
+        "carried",
+        "carrying"
+      ],
+      "expansion": null,
+      "definition": "When a strong teammate does most of the work so the rest of the team still wins.",
+      "example": "Our tank carried the round while we finished the objective.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 37,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Chat filter",
+      "slug": "chat-filter",
+      "aliases": [
+        "text filter",
+        "filter"
+      ],
+      "expansion": null,
+      "definition": "Roblox systems that hide or block chat text that breaks the rules or is not allowed for a player's age settings.",
+      "example": "The chat filter replaced some of her message with hashtags.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 38,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Chile",
+      "slug": "chile",
+      "aliases": [
+        "chill",
+        "child"
+      ],
+      "expansion": null,
+      "definition": "Context-dependent chat slang that may be a playful spelling of chill or child. The surrounding sentence decides which meaning fits.",
+      "example": "Chile, it was one missed jump, not the end of the obby.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/chile"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 39
+    },
+    {
+      "term": "Classic clothing",
+      "slug": "classic-clothing",
+      "aliases": [
+        "classic clothes",
+        "2D clothing"
+      ],
+      "expansion": null,
+      "definition": "Older style avatar outfits that use flat shirt, pants, and related layers instead of layered 3D clothing.",
+      "example": "He wore classic clothing with a simple T-shirt template.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/avatar",
+        "https://create.roblox.com/docs/marketplace"
+      ],
+      "sortOrder": 40,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Community",
+      "slug": "community",
+      "aliases": [
+        "communities",
+        "group",
+        "groups"
+      ],
+      "expansion": null,
+      "definition": "A Roblox feature for shared clubs and creator teams. Community is the current name that replaced Groups in Roblox naming.",
+      "example": "She joined a Community to play events with friends.",
+      "category": "chat-and-social",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 41,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Cooked",
+      "slug": "cooked",
+      "aliases": [
+        "got cooked",
+        "cooking"
+      ],
+      "expansion": null,
+      "definition": "Slang for being completely outplayed, embarrassed, or left with no good options in a match.",
+      "example": "We got cooked in the final round of the tower defense map.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 42,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Copy and paste",
+      "slug": "copy-and-paste",
+      "aliases": [
+        "CNP",
+        "C&P",
+        "copy-paste avatar"
+      ],
+      "expansion": null,
+      "definition": "Roblox avatar slang for a recognizable outfit style that uses many of the same body shapes, faces, hairstyles, and accessories as other players.",
+      "example": "Their matching copy-and-paste avatars used similar hair, faces, and dark outfits.",
+      "category": "avatars-and-marketplace",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 43,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Creator",
+      "slug": "creator",
+      "aliases": [
+        "creators",
+        "game creator"
+      ],
+      "expansion": null,
+      "definition": "A person who builds experiences, avatars, items, or other content on Roblox.",
+      "example": "The creator posted a new update for the racing experience.",
+      "category": "creator-and-studio",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 44,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Creator Dashboard",
+      "slug": "creator-dashboard",
+      "aliases": [
+        "Dashboard"
+      ],
+      "expansion": null,
+      "definition": "Roblox's web workspace for managing games, places, assets, analytics, access, and creator settings.",
+      "example": "The developer opened Creator Dashboard to review the game's places and permissions.",
+      "category": "creator-and-studio",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/creator-dashboard"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 45
+    },
+    {
+      "term": "Creator Store",
+      "slug": "creator-store",
+      "aliases": [
+        "Toolbox store",
+        "asset store"
+      ],
+      "expansion": null,
+      "definition": "The Roblox marketplace where creators browse, share, and use models, plugins, audio, and other development assets.",
+      "example": "She found a free park bench model in the Creator Store.",
+      "category": "creator-and-studio",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/marketplace",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 46,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "CRP",
+      "slug": "crp",
+      "aliases": [
+        "combat roleplay"
+      ],
+      "expansion": "Combat Roleplay",
+      "definition": "Roleplay centered on structured fights and character actions during combat scenes.",
+      "example": "The server rules asked players to agree before starting CRP.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 47
+    },
+    {
+      "term": "DataStore",
+      "slug": "data-store",
+      "aliases": [
+        "data store",
+        "persistent data"
+      ],
+      "expansion": null,
+      "definition": "A Roblox cloud service creators use to save information that should persist between play sessions.",
+      "example": "The game stored the player's unlocked tools in a DataStore.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/cloud-services/data-stores"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 48
+    },
+    {
+      "term": "Dec",
+      "slug": "dec",
+      "aliases": [
+        "dec prefix"
+      ],
+      "expansion": null,
+      "definition": "Older Roblox slang for a word placed near numbers in an attempt to get around chat filtering.",
+      "example": "The moderator treated Dec followed by hidden numbers as a filter-bypass attempt.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": "Do not use coded prefixes to bypass chat filters or share private numbers.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/dec"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 49
+    },
+    {
+      "term": "Decal ID",
+      "slug": "decal-id",
+      "aliases": [
+        "decal asset id",
+        "image id"
+      ],
+      "expansion": null,
+      "definition": "The unique number that identifies a decal image asset so creators can apply that image in Studio or on items.",
+      "example": "He pasted the Decal ID into the texture property of the sign.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/marketplace",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 50,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Dev",
+      "slug": "dev",
+      "aliases": [
+        "devs"
+      ],
+      "expansion": "Developer",
+      "definition": "Short for developer, meaning someone who scripts, builds, or maintains a Roblox experience.",
+      "example": "A dev fixed the bug that blocked the lobby door.",
+      "category": "creator-and-studio",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 51,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Developer",
+      "slug": "developer",
+      "aliases": [
+        "game developer",
+        "experience developer"
+      ],
+      "expansion": null,
+      "definition": "A creator who designs, codes, or publishes Roblox experiences and related systems.",
+      "example": "The developer added a daily quest board after the update.",
+      "category": "creator-and-studio",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 52,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Developer product",
+      "slug": "developer-product",
+      "aliases": [
+        "dev product",
+        "developer products"
+      ],
+      "expansion": null,
+      "definition": "A creator-set purchase that players can buy more than once inside a Roblox game, unlike a one-time pass.",
+      "example": "The revive button used a developer product because a player could purchase another revive later.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Check the current purchase prompt before spending Robux.",
+      "sourceUrls": [
+        "https://create.roblox.com/docs/production/monetization/developer-products"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 53
+    },
+    {
+      "term": "DevEx",
+      "slug": "devex",
+      "aliases": [
+        "Developer Exchange",
+        "dev exchange"
+      ],
+      "expansion": "Developer Exchange",
+      "definition": "Roblox program that lets eligible creators convert earned Robux into real-world currency under platform rules.",
+      "example": "After meeting the requirements, the studio applied for DevEx.",
+      "category": "creator-and-studio",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 54,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Disc",
+      "slug": "disc",
+      "aliases": [
+        "Discord shorthand"
+      ],
+      "expansion": "Discord",
+      "definition": "Shorthand some players use for Discord or another off-platform chat server.",
+      "example": "A stranger asked for her disc, so she kept the conversation on Roblox and left.",
+      "category": "accounts-and-safety",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Do not move a conversation off Roblox because someone pressures you. Never share personal contact details with strangers.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/disc",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 55
+    },
+    {
+      "term": "Display name",
+      "slug": "display-name",
+      "aliases": [
+        "displayname"
+      ],
+      "expansion": null,
+      "definition": "The name shown for a Roblox account in many social and in-game surfaces. It is separate from the account's unique username.",
+      "example": "Her display name changed, but friends could still find the same username.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "A familiar display name does not prove who controls an account. Check the username when identity matters.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203313130-Changing-Your-Display-Name"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 56
+    },
+    {
+      "term": "DM",
+      "slug": "dm",
+      "aliases": [
+        "direct message",
+        "private message",
+        "pm"
+      ],
+      "expansion": "Direct Message",
+      "definition": "A private chat between players instead of public experience chat.",
+      "example": "She sent a DM to invite her friend to the same server.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 57,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Drip",
+      "slug": "drip",
+      "aliases": [
+        "fit",
+        "drip check"
+      ],
+      "expansion": null,
+      "definition": "Slang for a stylish avatar outfit or cool clothing combo.",
+      "example": "His limited jacket and shoes gave him serious drip.",
+      "category": "avatars-and-marketplace",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://create.roblox.com/docs/avatar"
+      ],
+      "sortOrder": 58,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "DW",
+      "slug": "dw",
+      "aliases": [
+        "don't worry"
+      ],
+      "expansion": "Don't Worry",
+      "definition": "A quick chat reply used to reassure someone that a mistake or delay is fine.",
+      "example": "DW, we can restart the round if you disconnect.",
+      "category": "chat-and-social",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 59
+    },
+    {
+      "term": "e.e",
+      "slug": "e-e",
+      "aliases": [
+        "e_e",
+        "e-e"
+      ],
+      "expansion": null,
+      "definition": "A text face used to show boredom, tiredness, or an unimpressed reaction.",
+      "example": "The queue reset again, and chat answered e.e.",
+      "category": "classic-roblox",
+      "termType": "emoticon",
+      "status": "legacy",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/e-e"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 60
+    },
+    {
+      "term": "Emote",
+      "slug": "emote",
+      "aliases": [
+        "emotes",
+        "avatar emote"
+      ],
+      "expansion": null,
+      "definition": "A short avatar animation or dance players can trigger to react or show off in an experience.",
+      "example": "After the win, the whole team played the same emote.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/avatar",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 61,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Experience",
+      "slug": "experience",
+      "aliases": [
+        "experiences",
+        "game",
+        "place",
+        "Roblox game"
+      ],
+      "expansion": null,
+      "definition": "A Roblox game or interactive project that players can join. Creator tools also use game and place, and one project can contain one or more places.",
+      "example": "The project has a lobby place and two match places inside the same Roblox experience.",
+      "category": "gameplay",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 62,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Exploiter",
+      "slug": "exploiter",
+      "aliases": [
+        "cheater",
+        "hacker"
+      ],
+      "expansion": null,
+      "definition": "A player who uses unauthorized tools or methods to gain unfair advantages and break normal game rules.",
+      "example": "The server kicked an exploiter who moved faster than any normal character.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "If you see unfair cheating behavior, leave the server if needed and report it through official Roblox tools. Do not try to copy or learn those methods.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 63,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "EZ",
+      "slug": "ez",
+      "aliases": [
+        "easy"
+      ],
+      "expansion": "Easy",
+      "definition": "A boast claiming a match was easy, often typed after a win and sometimes seen as poor sportsmanship.",
+      "example": "The winner typed EZ, while the rest of the lobby moved on to the rematch.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 64
+    },
+    {
+      "term": "F2P",
+      "slug": "f2p",
+      "aliases": [
+        "free to play",
+        "free-to-play"
+      ],
+      "expansion": "Free to Play",
+      "definition": "A game model that lets players join without paying, though optional purchases may still exist.",
+      "example": "The popular simulator is F2P, so anyone can start with the free tools.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 65,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "FE",
+      "slug": "fe",
+      "aliases": [
+        "Filtering Enabled"
+      ],
+      "expansion": "Filtering Enabled",
+      "definition": "A legacy Studio term for server-authoritative behavior that stopped ordinary client changes from automatically appearing for everyone.",
+      "example": "An older scripting tutorial says the game is FE, even though filtering is now part of normal Roblox architecture.",
+      "category": "classic-roblox",
+      "termType": "creator term",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/fe"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 66
+    },
+    {
+      "term": "FFA",
+      "slug": "ffa",
+      "aliases": [
+        "free for all",
+        "free-for-all"
+      ],
+      "expansion": "Free for All",
+      "definition": "A match mode where every player competes alone instead of joining fixed teams.",
+      "example": "The sword arena switched to FFA for the final five minutes.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 67,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "FFS",
+      "slug": "ffs",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A frustrated chat reaction whose full phrase usually contains profanity.",
+      "example": "After the checkpoint failed again, the player typed FFS and took a break.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "The expanded phrase may be inappropriate for Roblox chat. Use a calmer reaction instead.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/ffs"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 68
+    },
+    {
+      "term": "Flex",
+      "slug": "flex",
+      "aliases": [
+        "flexing"
+      ],
+      "expansion": null,
+      "definition": "Showing off a rare avatar item, high stats, or a strong loadout so other players notice.",
+      "example": "They joined the lobby just to flex their Limited wings.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 69,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "FPS",
+      "slug": "fps",
+      "aliases": [
+        "frames per second"
+      ],
+      "expansion": "Frames Per Second",
+      "definition": "How many frames your device draws each second in a Roblox experience. Higher FPS usually feels smoother.",
+      "example": "Turning down graphics helped my FPS stay steady in a crowded server.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 70,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "FRP",
+      "slug": "frp",
+      "aliases": [
+        "fail roleplay",
+        "failed roleplay"
+      ],
+      "expansion": "Fail Roleplay",
+      "definition": "Roleplay slang for an unrealistic action that ignores the scene, breaks character, or goes against an experience's roleplay rules.",
+      "example": "Driving away after a serious crash without reacting was marked as FRP by the server moderator.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 71,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Game Pass",
+      "slug": "game-pass",
+      "aliases": [
+        "gamepass",
+        "game passes"
+      ],
+      "expansion": null,
+      "definition": "A one-time Robux purchase that grants a lasting privilege or unlock inside a Roblox game, as defined by its creator.",
+      "example": "The Game Pass permanently unlocked an extra inventory slot for that game.",
+      "category": "gameplay",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 72,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Gear",
+      "slug": "gear",
+      "aliases": [
+        "gears"
+      ],
+      "expansion": null,
+      "definition": "A Roblox tool asset that players can equip or use in games that support it. Many classic games used catalog Gear heavily.",
+      "example": "The classic arena allowed a sword Gear item, while the newer map disabled outside tools.",
+      "category": "gameplay",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 73,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "GFX",
+      "slug": "gfx",
+      "aliases": [
+        "graphics",
+        "gfx art"
+      ],
+      "expansion": "Graphics",
+      "definition": "Custom Roblox art such as thumbnails, logos, or renders made for games, groups, or profiles.",
+      "example": "The developer hired an artist to make new GFX for the game icon.",
+      "category": "creator-and-studio",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/gfx",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 74,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "GG",
+      "slug": "gg",
+      "aliases": [
+        "good game"
+      ],
+      "expansion": "Good Game",
+      "definition": "A short sportsmanlike message players send after a match or round ends.",
+      "example": "Both teams typed GG in chat when the round finished.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/gg",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 75,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Grind",
+      "slug": "grind",
+      "aliases": [
+        "grinding"
+      ],
+      "expansion": null,
+      "definition": "Repeating the same tasks, rounds, or farms to earn currency, levels, or items over time.",
+      "example": "They planned to grind quests all afternoon for enough coins to buy the sword.",
+      "category": "gameplay",
+      "termType": "gameplay term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 76,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Group",
+      "slug": "group",
+      "aliases": [
+        "groups",
+        "community",
+        "communities"
+      ],
+      "expansion": null,
+      "definition": "The older Roblox label for a shared member space with a wall, roles, and related experiences. Roblox now calls these Communities.",
+      "example": "Their old Group page is now listed under Communities with the same members and ranks.",
+      "category": "classic-roblox",
+      "termType": "platform term",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 77,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "GUI",
+      "slug": "gui",
+      "aliases": [
+        "UI",
+        "user interface"
+      ],
+      "expansion": "Graphical User Interface",
+      "definition": "The on-screen interface players use, such as menus, buttons, health bars, and inventory panels.",
+      "example": "The mobile GUI moved its jump button away from the shop panel.",
+      "category": "creator-and-studio",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/ui"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 78
+    },
+    {
+      "term": "HR",
+      "slug": "hr",
+      "aliases": [
+        "high rank"
+      ],
+      "expansion": "High Rank",
+      "definition": "A senior role or member in a Roblox community or structured roleplay group.",
+      "example": "An HR ran the training and reviewed the new recruits.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/hr",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 79
+    },
+    {
+      "term": "Humanoid",
+      "slug": "humanoid",
+      "aliases": [
+        "Humanoid object"
+      ],
+      "expansion": null,
+      "definition": "A Roblox object that gives a character common behavior such as health, movement states, and name display.",
+      "example": "The NPC needed a Humanoid so it could walk and take damage.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/reference/engine/classes/Humanoid"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 80
+    },
+    {
+      "term": "IC",
+      "slug": "ic",
+      "aliases": [
+        "in character"
+      ],
+      "expansion": "In Character",
+      "definition": "Acting and chatting as your roleplay character instead of as yourself outside the story.",
+      "example": "She stayed IC as the shopkeeper while customers entered the cafe.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 81,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "IDK",
+      "slug": "idk",
+      "aliases": [
+        "i don't know",
+        "i do not know"
+      ],
+      "expansion": "I Don't Know",
+      "definition": "A quick reply meaning you are unsure about something another player asked.",
+      "example": "When asked where the boss spawned, they answered IDK.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 82,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Image",
+      "slug": "image",
+      "aliases": [
+        "image asset"
+      ],
+      "expansion": null,
+      "definition": "A 2D asset used for interface graphics, textures, decals, thumbnails, and other visual surfaces on Roblox.",
+      "example": "The inventory slot used an image asset for the potion icon.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 83
+    },
+    {
+      "term": "Instance",
+      "slug": "instance",
+      "aliases": [
+        "Roblox object"
+      ],
+      "expansion": null,
+      "definition": "Any object in Roblox's data model, including parts, scripts, folders, sounds, and interface elements.",
+      "example": "The creator selected an instance in Explorer and changed its properties.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/reference/engine/classes/Instance"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 84
+    },
+    {
+      "term": "L",
+      "slug": "l",
+      "aliases": [
+        "loss",
+        "took an L"
+      ],
+      "expansion": "loss",
+      "definition": "Chat slang for a loss, bad outcome, or light criticism. Players say someone took an L after a failed match, trade, or choice.",
+      "example": "We took an L in the finals, but the rematch is tomorrow.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 85,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Layered clothing",
+      "slug": "layered-clothing",
+      "aliases": [
+        "LC",
+        "layered clothes"
+      ],
+      "expansion": null,
+      "definition": "Avatar clothing that can stack and wrap over body shapes so jackets, shirts, and pants sit more naturally together.",
+      "example": "Layered clothing let the jacket sit over the shirt without clipping as much.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/avatar",
+        "https://create.roblox.com/docs/marketplace"
+      ],
+      "sortOrder": 86,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Lel",
+      "slug": "lel",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A dated, playful variation of LOL used as a light or sarcastic laugh.",
+      "example": "He missed the easiest jump and typed lel before respawning.",
+      "category": "classic-roblox",
+      "termType": "slang",
+      "status": "legacy",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/lel"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 87
+    },
+    {
+      "term": "Limited",
+      "slug": "limited",
+      "aliases": [
+        "limited item",
+        "limiteds"
+      ],
+      "expansion": null,
+      "definition": "An avatar item marked Limited whose copies can be resold through supported Roblox systems. Classic and creator-made Limited items can follow different rules.",
+      "example": "The player checked the Limited listing and recent sales before considering a resale.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/marketplace",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 88,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Limited Unique",
+      "slug": "limited-unique",
+      "aliases": [
+        "limited u",
+        "LU",
+        "limited uniques",
+        "Limited (U)"
+      ],
+      "expansion": null,
+      "definition": "An older Roblox label for a Limited item released in a fixed quantity with numbered copies. Newer Limited systems may use different labels and rules.",
+      "example": "The archived item page called the numbered hat Limited Unique.",
+      "category": "classic-roblox",
+      "termType": "platform term",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/limited-u",
+        "https://create.roblox.com/docs/marketplace",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 89,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "LMaD",
+      "slug": "lmad",
+      "aliases": [
+        "Let's Make a Deal",
+        "Lets Make a Deal"
+      ],
+      "expansion": "Let's Make a Deal",
+      "definition": "The name of Roblox's retired trading forum, where players discussed Limited items, values, and possible deals.",
+      "example": "Older trading guides may mention LMaD when describing how Limited traders compared offers.",
+      "category": "classic-roblox",
+      "termType": "acronym",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/lmad",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 90,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "LMAO",
+      "slug": "lmao",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A strong laugh reaction whose full phrase contains profanity.",
+      "example": "The cart rolled backward into the lobby and chat filled with LMAO.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Keep the meaning in mind before using it in spaces where profanity is not appropriate.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/lmao"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 91
+    },
+    {
+      "term": "LocalScript",
+      "slug": "local-script",
+      "aliases": [
+        "local script",
+        "client script"
+      ],
+      "expansion": null,
+      "definition": "A Luau code container that runs on a player's device for local input, camera, interface, and similar client behavior.",
+      "example": "The LocalScript opened the inventory when the player pressed the key.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/reference/engine/classes/LocalScript"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 92
+    },
+    {
+      "term": "LOL",
+      "slug": "lol",
+      "aliases": [
+        "loling"
+      ],
+      "expansion": "Laughing Out Loud",
+      "definition": "A common chat reaction that means you found something funny.",
+      "example": "The fail montage was so silly that half the server spammed LOL.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 93,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Luau",
+      "slug": "luau",
+      "aliases": [
+        "Roblox Luau"
+      ],
+      "expansion": null,
+      "definition": "The programming language used to script Roblox experiences. It is based on Lua with Roblox-specific features.",
+      "example": "They wrote the shop script in Luau inside Roblox Studio.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 94,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "M8",
+      "slug": "m8",
+      "aliases": [
+        "mate"
+      ],
+      "expansion": "Mate",
+      "definition": "Number-based chat slang for mate, meaning a friend or another player.",
+      "example": "Nice save, m8, you kept the whole team alive.",
+      "category": "classic-roblox",
+      "termType": "slang",
+      "status": "legacy",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/m8"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 95
+    },
+    {
+      "term": "Main",
+      "slug": "main",
+      "aliases": [
+        "main account",
+        "main slot"
+      ],
+      "expansion": null,
+      "definition": "Your primary Roblox account, character slot, or most-used setup, as opposed to an alternate one.",
+      "example": "He keeps rare items on his main and uses an alt for testing games.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 96,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Marketplace",
+      "slug": "marketplace",
+      "aliases": [
+        "avatar marketplace",
+        "catalog",
+        "Roblox Marketplace"
+      ],
+      "expansion": null,
+      "definition": "The Roblox storefront where players browse and buy avatar items, including clothes, accessories, and other creations.",
+      "example": "She found a new jacket in the Marketplace and added it to her avatar.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/marketplace",
+        "https://create.roblox.com/docs/avatar"
+      ],
+      "sortOrder": 97,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Mesh",
+      "slug": "mesh",
+      "aliases": [
+        "3D mesh",
+        "MeshPart"
+      ],
+      "expansion": null,
+      "definition": "A custom 3D shape used to give a Roblox object more detail than basic block parts.",
+      "example": "The sword blade used an imported mesh while its handle stayed a simple part.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 98
+    },
+    {
+      "term": "Meta",
+      "slug": "meta",
+      "aliases": [
+        "the meta",
+        "meta loadout"
+      ],
+      "expansion": null,
+      "definition": "The strategies, classes, or items players currently treat as strongest or most common in a game.",
+      "example": "After the balance update, the meta shifted away from heavy tanks.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 99,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Mic up",
+      "slug": "mic-up",
+      "aliases": [
+        "use your mic",
+        "voice chat"
+      ],
+      "expansion": null,
+      "definition": "A phrase inviting or challenging another player to talk through voice chat instead of typing.",
+      "example": "Someone typed mic up after the match, but she chose to keep the conversation in public chat.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "You never have to join voice chat. Mute, block, or report anyone who pressures you or makes the conversation unsafe.",
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 100,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "MK",
+      "slug": "mk",
+      "aliases": [
+        "m'kay",
+        "okay"
+      ],
+      "expansion": null,
+      "definition": "A quick chat reply meaning okay or understood.",
+      "example": "Meet at spawn after the round. MK.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/mk"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 101
+    },
+    {
+      "term": "MLG",
+      "slug": "mlg",
+      "aliases": [],
+      "expansion": "Major League Gaming",
+      "definition": "Older gaming slang for a highly skilled or exaggerated highlight play, often used sarcastically.",
+      "example": "The lucky trick shot got called MLG in the replay chat.",
+      "category": "classic-roblox",
+      "termType": "acronym",
+      "status": "legacy",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/mlg"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 102
+    },
+    {
+      "term": "Mod",
+      "slug": "mod",
+      "aliases": [
+        "moderator",
+        "mods"
+      ],
+      "expansion": "moderator",
+      "definition": "A player or staff member who helps keep a game fair by enforcing rules and handling reports.",
+      "example": "A mod muted chat after players started spamming the lobby.",
+      "category": "accounts-and-safety",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 103,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Model",
+      "slug": "model",
+      "aliases": [
+        "Roblox model"
+      ],
+      "expansion": null,
+      "definition": "A container that groups parts, meshes, scripts, or other Roblox objects into one reusable build.",
+      "example": "The shop model contained the walls, counter, signs, and door script.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Review unfamiliar models before using them, especially when they contain scripts.",
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 104
+    },
+    {
+      "term": "ModuleScript",
+      "slug": "module-script",
+      "aliases": [
+        "module script",
+        "module"
+      ],
+      "expansion": null,
+      "definition": "A reusable Luau code container that returns values or functions for other scripts to use.",
+      "example": "Both shop scripts required the same ModuleScript for price formatting.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/reference/engine/classes/ModuleScript"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 105
+    },
+    {
+      "term": "MR",
+      "slug": "mr",
+      "aliases": [
+        "medium rank",
+        "mid rank"
+      ],
+      "expansion": "Medium Rank",
+      "definition": "A middle-level role in a Roblox community or structured roleplay group, below its high ranks and above entry roles.",
+      "example": "The new MR helped train members but could not change the top roles.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/mr",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 106
+    },
+    {
+      "term": "NBC",
+      "slug": "nbc",
+      "aliases": [
+        "Non-Builders Club"
+      ],
+      "expansion": "Non-Builders Club",
+      "definition": "A legacy label for a player who did not have Builders Club under Roblox's retired membership system.",
+      "example": "The old forum post compared NBC accounts with the three Builders Club tiers.",
+      "category": "classic-roblox",
+      "termType": "acronym",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/nbc"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 107
+    },
+    {
+      "term": "Nerf",
+      "slug": "nerf",
+      "aliases": [
+        "nerfed",
+        "nerfing"
+      ],
+      "expansion": null,
+      "definition": "A balance change that makes a weapon, ability, or item weaker so it is less dominant in play.",
+      "example": "After the update nerf, that sword no longer one-shots most players.",
+      "category": "gameplay",
+      "termType": "gameplay term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 108,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Newb",
+      "slug": "newb",
+      "aliases": [
+        "newbie"
+      ],
+      "expansion": null,
+      "definition": "A polite way to describe a new or less experienced player who is still learning the game.",
+      "example": "He is a newb at tower defense, so the team walked him through the first few waves.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 109,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Newgen",
+      "slug": "newgen",
+      "aliases": [
+        "new gen",
+        "new generation"
+      ],
+      "expansion": "New Generation",
+      "definition": "A sometimes dismissive label for a newer or younger player who missed an earlier era of a game or Roblox culture.",
+      "example": "Calling every new player a newgen did not help them learn the map.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "The term can be insulting. Explain the reference instead of using it to exclude newer players.",
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 110
+    },
+    {
+      "term": "NFT",
+      "slug": "nft",
+      "aliases": [
+        "not for trade"
+      ],
+      "expansion": "Not for Trade",
+      "definition": "In Roblox trading, a label saying the owner is not offering an item. Outside that context, NFT can mean non-fungible token.",
+      "example": "The limited stayed NFT because it was part of the owner's main outfit.",
+      "category": "avatars-and-marketplace",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 111
+    },
+    {
+      "term": "NGF",
+      "slug": "ngf",
+      "aliases": [
+        "not going first"
+      ],
+      "expansion": "Not Going First",
+      "definition": "A claim used in unofficial deals to say the speaker will not send their item or currency first.",
+      "example": "The stranger insisted on NGF during an off-platform deal, so the player left.",
+      "category": "accounts-and-safety",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "NGF pressure is a scam warning. Avoid unofficial and cross-platform deals, and use Roblox's supported purchase or trade systems.",
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 112
+    },
+    {
+      "term": "No cap",
+      "slug": "no-cap",
+      "aliases": [
+        "no cappin"
+      ],
+      "expansion": null,
+      "definition": "Chat slang meaning a player is telling the truth and not exaggerating.",
+      "example": "No cap, that limited sold out in under a minute on the catalog.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 113,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Noob",
+      "slug": "noob",
+      "aliases": [
+        "n00b"
+      ],
+      "expansion": null,
+      "definition": "A common label for a new or unskilled player. It can sound rude, so many players prefer friendlier wording.",
+      "example": "Calling someone a noob after one loss is usually just trash talk, not real skill talk.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/noob",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 114,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "NPC",
+      "slug": "npc",
+      "aliases": [
+        "non-player character"
+      ],
+      "expansion": "non-player character",
+      "definition": "A character controlled by the game, not by a real player, often used for quests, shops, or story scenes.",
+      "example": "Talk to the shop NPC near the spawn pad to buy better tools.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 115,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "NTY",
+      "slug": "nty",
+      "aliases": [
+        "no thank you"
+      ],
+      "expansion": "no thank you",
+      "definition": "A short chat reply that politely turns down a trade, invite, or offer.",
+      "example": "NTY, I am saving my Robux for a game pass later.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 116,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "NVM",
+      "slug": "nvm",
+      "aliases": [
+        "never mind",
+        "n/m"
+      ],
+      "expansion": "Never Mind",
+      "definition": "A quick way to cancel an earlier question or say the issue no longer matters.",
+      "example": "NVM, I found the quest NPC beside spawn.",
+      "category": "chat-and-social",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/nvm"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 117
+    },
+    {
+      "term": "Obby",
+      "slug": "obby",
+      "aliases": [
+        "obstacle course",
+        "obbies"
+      ],
+      "expansion": "obstacle course",
+      "definition": "A Roblox experience built around jumping, timing, and parkour challenges from stage to stage.",
+      "example": "That free obby has 200 stages and a finish line reward at the end.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/obby",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 118,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "OBC",
+      "slug": "obc",
+      "aliases": [
+        "Outrageous Builders Club"
+      ],
+      "expansion": "Outrageous Builders Club",
+      "definition": "The highest tier of Roblox's retired Builders Club membership.",
+      "example": "The classic profile screenshot shows an OBC badge beside the username.",
+      "category": "classic-roblox",
+      "termType": "acronym",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/obc"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 119
+    },
+    {
+      "term": "Obj",
+      "slug": "obj",
+      "aliases": [
+        "OBJ",
+        "object replacement character",
+        "OBJ file"
+      ],
+      "expansion": null,
+      "definition": "A context-dependent term. Older chat references may mean a replacement shown for an unsupported character, while creators use OBJ for a common 3D model file format.",
+      "example": "The creator asked for the OBJ file, not the odd obj symbol that appeared in chat.",
+      "category": "creator-and-studio",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/obj",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 120
+    },
+    {
+      "term": "ODer",
+      "slug": "oder",
+      "aliases": [
+        "OD",
+        "online dater"
+      ],
+      "expansion": "online dater",
+      "definition": "A player who uses Roblox mainly to seek romantic chat or dating-style attention instead of normal gameplay.",
+      "example": "If someone asks personal questions in a hangout game, they may be acting like an ODer.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Do not share personal details, and do not move chats off Roblox. Leave or report if someone pushes for private contact.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 121,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "OFC",
+      "slug": "ofc",
+      "aliases": [
+        "of course"
+      ],
+      "expansion": "Of Course",
+      "definition": "Chat shorthand for an obvious yes or a confident confirmation.",
+      "example": "OFC I will join after this round ends.",
+      "category": "chat-and-social",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 122
+    },
+    {
+      "term": "OMG",
+      "slug": "omg",
+      "aliases": [
+        "OML",
+        "oh my lord"
+      ],
+      "expansion": "Oh My God",
+      "definition": "A chat reaction showing surprise, excitement, or disbelief. OML is a common variation.",
+      "example": "OMG, the rare pet dropped on the first try.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 123
+    },
+    {
+      "term": "OMQ",
+      "slug": "omq",
+      "aliases": [
+        "OMG variation"
+      ],
+      "expansion": null,
+      "definition": "A dated variation of OMG used to show surprise or added to a username for style.",
+      "example": "The old chat log says OMQ after the rare item drops.",
+      "category": "classic-roblox",
+      "termType": "slang",
+      "status": "legacy",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/omq"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 124
+    },
+    {
+      "term": "OOC",
+      "slug": "ooc",
+      "aliases": [
+        "OoC",
+        "out of character"
+      ],
+      "expansion": "Out of Character",
+      "definition": "A roleplay label for a message spoken as the player rather than as the character they are acting.",
+      "example": "OOC, I need to leave the server for a minute.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 125
+    },
+    {
+      "term": "Oof",
+      "slug": "oof",
+      "aliases": [
+        "oofed"
+      ],
+      "expansion": null,
+      "definition": "The name of Roblox's former classic death sound, now also used as a short reaction when something goes wrong.",
+      "example": "He missed the final jump and typed oof before trying the obby again.",
+      "category": "classic-roblox",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/oof",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 126,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "OOG",
+      "slug": "oog",
+      "aliases": [
+        "OoG",
+        "out of game"
+      ],
+      "expansion": "Out of Game",
+      "definition": "A note that a message or subject is outside the current game or roleplay scene.",
+      "example": "The event schedule is OOG, so the characters would not discuss it in the scene.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 127
+    },
+    {
+      "term": "OP",
+      "slug": "op",
+      "aliases": [
+        "overpowered",
+        "too strong"
+      ],
+      "expansion": "overpowered",
+      "definition": "In gameplay, something far stronger than normal options. Context can change the meaning, such as original poster in forum threads.",
+      "example": "That pet feels OP because it doubles coin gains for the whole party.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/op",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 128,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "P2W",
+      "slug": "p2w",
+      "aliases": [
+        "pay to win",
+        "pay2win"
+      ],
+      "expansion": "pay to win",
+      "definition": "A label for an experience where spending Robux on upgrades gives a strong gameplay advantage over players who do not pay.",
+      "example": "Players called the arena P2W because its strongest weapon was available only through a paid upgrade.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 129,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Package",
+      "slug": "package",
+      "aliases": [
+        "Studio package"
+      ],
+      "expansion": null,
+      "definition": "A reusable Roblox asset or object hierarchy whose copies can receive updates from the same source.",
+      "example": "The team used one door package across several maps so fixes stayed consistent.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 130
+    },
+    {
+      "term": "Paid Access",
+      "slug": "paid-access",
+      "aliases": [
+        "paid game",
+        "paid experience"
+      ],
+      "expansion": null,
+      "definition": "A Roblox game or experience that requires a Robux purchase before a player can join it.",
+      "example": "The join screen showed Paid Access, so the player checked the purchase before continuing.",
+      "category": "gameplay",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Review the current purchase screen before spending Robux.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/paid-access"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 131
+    },
+    {
+      "term": "Part",
+      "slug": "part",
+      "aliases": [
+        "BasePart",
+        "building block"
+      ],
+      "expansion": null,
+      "definition": "A basic 3D object used to build Roblox worlds, such as a block, sphere, wedge, or cylinder.",
+      "example": "The builder resized a part into a platform and anchored it above the lava.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/reference/engine/classes/BasePart"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 132
+    },
+    {
+      "term": "Pay to lose",
+      "slug": "pay-to-lose",
+      "aliases": [
+        "P2L"
+      ],
+      "expansion": null,
+      "definition": "A joke aimed at someone who bought a paid advantage but still lost to players without it.",
+      "example": "The expensive weapon missed every shot, and chat called it pay to lose.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 133
+    },
+    {
+      "term": "Place",
+      "slug": "place",
+      "aliases": [
+        "places",
+        "experience place"
+      ],
+      "expansion": null,
+      "definition": "A published Roblox world or level that players can join. Experiences can include one or more places linked together.",
+      "example": "The creator added a tutorial place before the main battle map.",
+      "category": "creator-and-studio",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 134,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "PLOX",
+      "slug": "plox",
+      "aliases": [
+        "plox",
+        "please"
+      ],
+      "expansion": "Please",
+      "definition": "A playful, dated spelling of please that appeared in older Roblox and gaming chat.",
+      "example": "Open the gate plox, the round is about to start.",
+      "category": "classic-roblox",
+      "termType": "slang",
+      "status": "legacy",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/plox"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 135
+    },
+    {
+      "term": "Plugin",
+      "slug": "plugin",
+      "aliases": [
+        "Studio plugin"
+      ],
+      "expansion": null,
+      "definition": "An extension that adds tools or workflows to Roblox Studio.",
+      "example": "The builder used a plugin to align a row of parts evenly.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Install plugins only from sources you trust and review the permissions or behavior they add.",
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets/toolbox"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 136
+    },
+    {
+      "term": "Premium",
+      "slug": "premium",
+      "aliases": [
+        "Roblox Premium",
+        "Premium membership"
+      ],
+      "expansion": null,
+      "definition": "Roblox's paid membership program, which provides a Robux allowance and other platform benefits that can change over time.",
+      "example": "She checked the current Premium benefits before deciding whether the membership suited her account.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 137,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Private server",
+      "slug": "private-server",
+      "aliases": [
+        "VIP server",
+        "reserved server",
+        "PS",
+        "PSL",
+        "private server link"
+      ],
+      "expansion": null,
+      "definition": "A separate server instance whose owner can control who joins. An experience can offer private servers for free or for Robux.",
+      "example": "They opened a private server so their group could practice the raid without a crowded lobby.",
+      "category": "gameplay",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 138,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "PTS",
+      "slug": "pts",
+      "aliases": [
+        "permission to speak"
+      ],
+      "expansion": "Permission to Speak",
+      "definition": "A request to speak used in structured military, training, and similar Roblox roleplay communities.",
+      "example": "The recruit typed PTS before asking the trainer a question.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/pts"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 139
+    },
+    {
+      "term": "Pwned",
+      "slug": "pwned",
+      "aliases": [
+        "pwn",
+        "owned"
+      ],
+      "expansion": null,
+      "definition": "Older gamer slang for completely beating someone, often used after a decisive win in chat or matches.",
+      "example": "Back then, typing pwned after a clean 1v1 win was common in classic fighting places.",
+      "category": "classic-roblox",
+      "termType": "slang",
+      "status": "legacy",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 140,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "QT",
+      "slug": "qt",
+      "aliases": [
+        "cutie"
+      ],
+      "expansion": "Cutie",
+      "definition": "Chat shorthand for cutie, usually used as a light compliment.",
+      "example": "The matching avatar outfits looked qt in the group photo.",
+      "category": "chat-and-social",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Keep compliments respectful and stop if another player is uncomfortable.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/qt"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 141
+    },
+    {
+      "term": "R6",
+      "slug": "r6",
+      "aliases": [
+        "R6 avatar",
+        "six body parts"
+      ],
+      "expansion": null,
+      "definition": "A classic Roblox avatar body type with six main parts and simpler joint movement than newer rigs.",
+      "example": "Some older games still force R6 so classic animations and hitboxes stay consistent.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/avatar",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 142,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "R15",
+      "slug": "r15",
+      "aliases": [
+        "R15 avatar",
+        "fifteen body parts"
+      ],
+      "expansion": null,
+      "definition": "A modern Roblox avatar body type with fifteen parts, allowing more natural animations and body scaling.",
+      "example": "Most new experiences support R15 so avatars can use smoother walk and emote animations.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/avatar",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 143,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Rank",
+      "slug": "rank",
+      "aliases": [
+        "community rank",
+        "group rank"
+      ],
+      "expansion": null,
+      "definition": "A position in a Roblox Community hierarchy, or a competitive level inside a game when the context is ranked play.",
+      "example": "Her community rank allowed training new members, while her arena rank tracked match skill.",
+      "category": "gameplay",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203313760-Group-Roles-Ranks-and-Permissions",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 144
+    },
+    {
+      "term": "RAP",
+      "slug": "rap",
+      "aliases": [
+        "recent average price"
+      ],
+      "expansion": "Recent Average Price",
+      "definition": "The recent average sale price shown for limited marketplace items, used as a rough market value guide.",
+      "example": "Traders check RAP before offering a limited hat so the trade values look fair.",
+      "category": "avatars-and-marketplace",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/rap",
+        "https://create.roblox.com/docs/marketplace",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 145,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "RDM",
+      "slug": "rdm",
+      "aliases": [
+        "random deathmatch",
+        "random death match"
+      ],
+      "expansion": "Random Deathmatch",
+      "definition": "In combat experiences, RDM means harming another player for no valid match reason, such as outside the role, rule set, or objective.",
+      "example": "The admin warned the team that RDM would get someone removed from the roleplay server.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 146,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "REEEE",
+      "slug": "reeee",
+      "aliases": [
+        "REEE",
+        "REEEEE"
+      ],
+      "expansion": null,
+      "definition": "A drawn-out text scream used for exaggerated frustration or a joking meltdown.",
+      "example": "The moving platform reset at the finish, and chat answered REEEE.",
+      "category": "classic-roblox",
+      "termType": "slang",
+      "status": "legacy",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/reeee"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 147
+    },
+    {
+      "term": "RemoteEvent",
+      "slug": "remote-event",
+      "aliases": [
+        "remote event",
+        "remote"
+      ],
+      "expansion": null,
+      "definition": "A Roblox object used to send one-way messages between client and server scripts.",
+      "example": "The LocalScript fired a RemoteEvent, and the server checked the request before changing the score.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/reference/engine/classes/RemoteEvent"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 148
+    },
+    {
+      "term": "Rig",
+      "slug": "rig",
+      "aliases": [
+        "character rig",
+        "avatar rig"
+      ],
+      "expansion": null,
+      "definition": "A character model with joints and structure prepared for posing and animation.",
+      "example": "The animator loaded an R15 rig before creating the emote.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/animation/rigging"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 149
+    },
+    {
+      "term": "RK",
+      "slug": "rk",
+      "aliases": [
+        "RKing",
+        "random kill",
+        "random killing"
+      ],
+      "expansion": "Random Killing",
+      "definition": "Attacking or defeating another player without a valid roleplay or match reason, similar to RDM.",
+      "example": "The roleplay moderator warned the player for RK outside the combat scene.",
+      "category": "gameplay",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 150
+    },
+    {
+      "term": "RNG",
+      "slug": "rng",
+      "aliases": [
+        "random number generator",
+        "luck"
+      ],
+      "expansion": "Random Number Generator",
+      "definition": "RNG is the luck factor behind random outcomes in Roblox games, such as item rolls, crit chance, or loot drops.",
+      "example": "They kept fishing because good RNG can still give a rare catch on the next try.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 151,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Robloxian",
+      "slug": "robloxian",
+      "aliases": [
+        "Robloxians"
+      ],
+      "expansion": null,
+      "definition": "A Robloxian is a person who plays on Roblox, often used for the community as a whole or a player’s in-world identity.",
+      "example": "Many Robloxians joined the experience launch party on day one.",
+      "category": "chat-and-social",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 152,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Robux",
+      "slug": "robux",
+      "aliases": [
+        "R$",
+        "robux currency"
+      ],
+      "expansion": null,
+      "definition": "Robux is Roblox’s official virtual currency used to buy avatar items, game passes, developer products, and other in-experience purchases.",
+      "example": "They saved Robux for a limited catalog item and a game pass on their favorite map.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Only spend Robux through official Roblox purchase flows, and never share account access or payment details with others.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/marketplace",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 153,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "ROFL",
+      "slug": "rofl",
+      "aliases": [],
+      "expansion": "Rolling on the Floor Laughing",
+      "definition": "A chat acronym meaning something is extremely funny.",
+      "example": "The cart launched into the ceiling and the whole server typed ROFL.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/rofl"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 154
+    },
+    {
+      "term": "Role",
+      "slug": "role",
+      "aliases": [
+        "community role",
+        "group role"
+      ],
+      "expansion": null,
+      "definition": "A named membership level in a Roblox Community that can carry its own permissions and responsibilities.",
+      "example": "The event host role could post announcements but could not change the owner role.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203313760-Group-Roles-Ranks-and-Permissions"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 155
+    },
+    {
+      "term": "Roleplay",
+      "slug": "roleplay",
+      "aliases": [
+        "RP",
+        "role play",
+        "roleplaying"
+      ],
+      "expansion": null,
+      "definition": "Roleplay is acting as a character or job inside an experience, following story, rules, and social cues instead of pure combat scores.",
+      "example": "In the cafe game they roleplay as staff and guests instead of racing for points.",
+      "category": "gameplay",
+      "termType": "gameplay term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 156,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Rthro",
+      "slug": "rthro",
+      "aliases": [
+        "R15 Rthro",
+        "humanoid avatar scaling"
+      ],
+      "expansion": null,
+      "definition": "Rthro was Roblox’s more human-proportioned avatar body style and scaling system introduced for modern character looks.",
+      "example": "Older posts still call taller, more realistic body proportions Rthro even as avatar options keep changing.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/rthro",
+        "https://create.roblox.com/docs/avatar",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 157,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Script",
+      "slug": "script",
+      "aliases": [
+        "server script"
+      ],
+      "expansion": null,
+      "definition": "A Luau code container that commonly runs on the server and controls shared game logic.",
+      "example": "The Script awarded the badge after the server confirmed the finish.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/reference/engine/classes/Script"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 158
+    },
+    {
+      "term": "Selling",
+      "slug": "selling",
+      "aliases": [
+        "sold",
+        "selling the game",
+        "throwing"
+      ],
+      "expansion": null,
+      "definition": "In match slang, selling means playing so poorly that your team loses value or the round, not buying or trading items.",
+      "example": "After three free goals, chat said the keeper was selling the ranked match.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 159,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Server",
+      "slug": "server",
+      "aliases": [
+        "game server",
+        "server instance"
+      ],
+      "expansion": null,
+      "definition": "A running copy of a Roblox place where a group of players shares the same live session.",
+      "example": "When one server filled up, the next players joined another copy of the same map.",
+      "category": "gameplay",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/teleporting"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 160
+    },
+    {
+      "term": "Server hop",
+      "slug": "server-hop",
+      "aliases": [
+        "server hopping",
+        "hop servers",
+        "serverhop"
+      ],
+      "expansion": null,
+      "definition": "Server hop means leaving one live instance of an experience and joining another server, often to find a quieter lobby or different players.",
+      "example": "They server hopped until they found a map with open trade booths and fewer people.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 161,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "SFL",
+      "slug": "sfl",
+      "aliases": [
+        "single file line"
+      ],
+      "expansion": "Single File Line",
+      "definition": "A formation command telling players to stand one behind another, often in military or training roleplay.",
+      "example": "The trainer called SFL before leading the recruits through the course.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/sfl"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 162
+    },
+    {
+      "term": "Skid",
+      "slug": "skid",
+      "aliases": [
+        "script kiddie"
+      ],
+      "expansion": "Script Kiddie",
+      "definition": "An insult for an exploiter who uses scripts made by other people without understanding them.",
+      "example": "The moderator called the cheater a skid, then reported the behavior instead of arguing.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Do not download or run exploit tools or copied scripts. They can break rules, steal accounts, or install malware.",
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 163
+    },
+    {
+      "term": "Slender",
+      "slug": "slender",
+      "aliases": [
+        "slender avatar",
+        "skinny avatar"
+      ],
+      "expansion": null,
+      "definition": "Roblox slang for a tall, thin avatar style built with body scaling, long limbs, and a recognizable outfit aesthetic.",
+      "example": "The outfit guide used a slender avatar so the layered clothes had a taller silhouette.",
+      "category": "avatars-and-marketplace",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/avatar",
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 164,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "SMH",
+      "slug": "smh",
+      "aliases": [],
+      "expansion": "Shaking My Head",
+      "definition": "A chat reaction showing disappointment, disbelief, or mild annoyance.",
+      "example": "He sold the quest item by mistake and typed SMH.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/smh"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 165
+    },
+    {
+      "term": "Smurf",
+      "slug": "smurf",
+      "aliases": [
+        "smurf account",
+        "alt account",
+        "smurfing"
+      ],
+      "expansion": null,
+      "definition": "A smurf is an alternate account, often used by an experienced player in lower-level or fresher lobbies than their main.",
+      "example": "The new username played like a pro, so the lobby guessed it was a smurf.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 166,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "SOS",
+      "slug": "sos",
+      "aliases": [
+        "help signal"
+      ],
+      "expansion": null,
+      "definition": "A widely recognized distress call used in Roblox survival, combat, and roleplay scenes to ask for urgent help.",
+      "example": "SOS at the north tower, the boss trapped our squad.",
+      "category": "gameplay",
+      "termType": "signal",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Treat a real safety threat seriously. Use Roblox reporting tools and tell a trusted adult when appropriate.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/sos"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 167
+    },
+    {
+      "term": "Spawn",
+      "slug": "spawn",
+      "aliases": [
+        "spawn point",
+        "respawn",
+        "spawn pad"
+      ],
+      "expansion": null,
+      "definition": "Spawn is the place a player appears when joining or returning after defeat, and the verb for that appearance.",
+      "example": "The team met at spawn before walking to the first objective.",
+      "category": "gameplay",
+      "termType": "gameplay term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 168,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Spawn kill",
+      "slug": "spawn-kill",
+      "aliases": [
+        "spawnkilling",
+        "spawn camping",
+        "spawn kill"
+      ],
+      "expansion": null,
+      "definition": "Spawn kill means defeating players right as they appear at spawn, giving them little chance to move or fight back.",
+      "example": "The lobby asked for fair play after repeated spawn kill rounds near the entry pad.",
+      "category": "gameplay",
+      "termType": "gameplay term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 169,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "SSD",
+      "slug": "ssd",
+      "aliases": [
+        "server shutdown"
+      ],
+      "expansion": "Server Shutdown",
+      "definition": "Roleplay-community shorthand announcing that the current organized server session is ending.",
+      "example": "The host posted SSD after the final training event.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 170
+    },
+    {
+      "term": "SSU",
+      "slug": "ssu",
+      "aliases": [
+        "server startup"
+      ],
+      "expansion": "Server Startup",
+      "definition": "Roleplay-community shorthand announcing that an organized server session is opening or beginning.",
+      "example": "The community posted SSU before members joined the roleplay server.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 171
+    },
+    {
+      "term": "Start place",
+      "slug": "start-place",
+      "aliases": [
+        "starting place",
+        "default place"
+      ],
+      "expansion": null,
+      "definition": "The first place players load into when they join a Roblox game or experience.",
+      "example": "The creator made the lobby the start place and teleported players to match maps from there.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/production/publishing/publish-experiences-and-places"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 172
+    },
+    {
+      "term": "STS",
+      "slug": "sts",
+      "aliases": [
+        "shoulder to shoulder"
+      ],
+      "expansion": "Shoulder to Shoulder",
+      "definition": "A formation command telling players to line up side by side, often in military or training roleplay.",
+      "example": "The officer called STS so the squad formed one straight row.",
+      "category": "gameplay",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/sts",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 173
+    },
+    {
+      "term": "Studio",
+      "slug": "studio",
+      "aliases": [
+        "Roblox Studio",
+        "RS"
+      ],
+      "expansion": null,
+      "definition": "Studio is Roblox’s creation app for building experiences, scripting gameplay, testing places, and publishing to the platform.",
+      "example": "They opened Studio to fix the door script and publish a small map update.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 174,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Subscription",
+      "slug": "subscription",
+      "aliases": [
+        "recurring purchase"
+      ],
+      "expansion": null,
+      "definition": "A purchase that renews on a schedule until it is canceled. Roblox games can use subscriptions for ongoing in-game benefits.",
+      "example": "The player reviewed the renewal details before starting the game's subscription.",
+      "category": "creator-and-studio",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Review the current price, renewal period, and cancellation information before subscribing.",
+      "sourceUrls": [
+        "https://create.roblox.com/docs/production/monetization/subscriptions"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 175
+    },
+    {
+      "term": "Sweat",
+      "slug": "sweat",
+      "aliases": [
+        "sweater",
+        "sweaty",
+        "tryhard"
+      ],
+      "expansion": null,
+      "definition": "A sweat is a player who tries extremely hard to win, using high effort, strong loadouts, and little room for casual play.",
+      "example": "The casual server got quiet when a full sweat squad joined ranked voice chat.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 176,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Tags",
+      "slug": "tags",
+      "aliases": [
+        "tagged",
+        "hashtags",
+        "filtered chat"
+      ],
+      "expansion": null,
+      "definition": "Chat slang for the hashtag symbols Roblox shows when part of a message is filtered.",
+      "example": "Her sentence came out as tags, so she rewrote it in simpler, appropriate words.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Do not try to work around the chat filter. Rewrite the message safely or leave out private information.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/tags",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 177,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "TBC",
+      "slug": "tbc",
+      "aliases": [
+        "Turbo Builders Club"
+      ],
+      "expansion": "Turbo Builders Club",
+      "definition": "The middle tier of Roblox's retired Builders Club membership.",
+      "example": "The old account comparison lists TBC between BC and OBC.",
+      "category": "classic-roblox",
+      "termType": "acronym",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/tbc"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 178
+    },
+    {
+      "term": "TBH",
+      "slug": "tbh",
+      "aliases": [],
+      "expansion": "To Be Honest",
+      "definition": "A chat phrase used before a direct opinion or honest reaction.",
+      "example": "TBH, the starter sword works better after the update.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/tbh"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 179
+    },
+    {
+      "term": "Team Create",
+      "slug": "team-create",
+      "aliases": [
+        "collaborative editing"
+      ],
+      "expansion": null,
+      "definition": "Roblox Studio collaboration that lets approved creators work in the same project.",
+      "example": "The builders used Team Create to edit different rooms at the same time.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Give edit access only to collaborators you trust.",
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/collaboration"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 180
+    },
+    {
+      "term": "Termed",
+      "slug": "termed",
+      "aliases": [
+        "terminated",
+        "term",
+        "account terminated"
+      ],
+      "expansion": null,
+      "definition": "Termed means a Roblox account was terminated, so the player can no longer use that account under normal access.",
+      "example": "After repeated serious rule breaks, the old account was termed and stayed locked.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Treat termination as a serious account status. Keep play fair and report harmful behavior through official Roblox tools.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 181,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Texture",
+      "slug": "texture",
+      "aliases": [
+        "surface texture"
+      ],
+      "expansion": null,
+      "definition": "An image applied to a 3D surface to add color, detail, or a material-like appearance.",
+      "example": "The creator changed the crate texture without rebuilding its mesh.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 182
+    },
+    {
+      "term": "Tix",
+      "slug": "tix",
+      "aliases": [
+        "tickets",
+        "Tx",
+        "ROBUX tickets"
+      ],
+      "expansion": null,
+      "definition": "Tix were Roblox’s old free tickets currency, removed years ago when the platform moved fully to Robux.",
+      "example": "Veteran players still joke about buying hats with Tix before tickets left the platform.",
+      "category": "classic-roblox",
+      "termType": "abbreviation",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 183,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Toolbox",
+      "slug": "toolbox",
+      "aliases": [
+        "Studio Toolbox"
+      ],
+      "expansion": null,
+      "definition": "A Roblox Studio panel for finding and inserting Creator Store assets and a creator's own assets.",
+      "example": "The builder opened Toolbox to find a tree model for the park.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Inspect inserted models and scripts before using them in a published game.",
+      "sourceUrls": [
+        "https://create.roblox.com/docs/projects/assets/toolbox"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 184
+    },
+    {
+      "term": "Top Earning",
+      "slug": "top-earning",
+      "aliases": [
+        "top earning games"
+      ],
+      "expansion": null,
+      "definition": "An older Roblox discovery label for games ranked by how much Robux they generated during a period.",
+      "example": "The archived homepage screenshot has a Top Earning chart beside the popular games.",
+      "category": "classic-roblox",
+      "termType": "platform term",
+      "status": "legacy",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/top-earning"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 185
+    },
+    {
+      "term": "Trade",
+      "slug": "trade",
+      "aliases": [
+        "trading",
+        "item trade",
+        "limited trade"
+      ],
+      "expansion": null,
+      "definition": "Trade is the official exchange of eligible avatar items or limiteds between players through Roblox’s trading features.",
+      "example": "They opened a trade for two limiteds and waited for both sides to confirm.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Only trade through official Roblox trade windows. Never trust chat deals that ask you to leave the platform or share your password.",
+      "sourceUrls": [
+        "https://create.roblox.com/docs/marketplace",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/avatar"
+      ],
+      "sortOrder": 186,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Troll",
+      "slug": "troll",
+      "aliases": [
+        "trolling",
+        "troller"
+      ],
+      "expansion": null,
+      "definition": "A troll is someone who bothers others on purpose, such as spamming chat, ruining a roleplay, or blocking progress for attention.",
+      "example": "The server muted the troll after they kept knocking builds over in the sandbox.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "Do not join in. Leave, block, or report players who harass others, and keep your own chat respectful.",
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 187,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "TY",
+      "slug": "ty",
+      "aliases": [
+        "thank you",
+        "thx",
+        "thanks"
+      ],
+      "expansion": "Thank You",
+      "definition": "TY is a short chat way to say thank you after help, a gift, a trade confirm, or a clutch play.",
+      "example": "After the revive, they typed TY and followed the squad back to base.",
+      "category": "chat-and-social",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/ty",
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 188,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "TYSM",
+      "slug": "tysm",
+      "aliases": [
+        "tysm",
+        "thank you so much"
+      ],
+      "expansion": "thank you so much",
+      "definition": "A quick chat shorthand for thanking someone a lot, often after a trade help, save, or kind reply.",
+      "example": "Player: TYSM for showing me where the portal is!",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 189,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "UGC",
+      "slug": "ugc",
+      "aliases": [
+        "user-generated content",
+        "user generated content"
+      ],
+      "expansion": "user-generated content",
+      "definition": "Content made by Roblox players and creators, including experiences, avatar items, models, clothing, and other community-built assets, not only official Roblox-made content.",
+      "example": "That parkour map is popular UGC built by an independent studio on the platform.",
+      "category": "creator-and-studio",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/what-is-roblox",
+        "https://create.roblox.com/docs/marketplace",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 190,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Universe",
+      "slug": "universe",
+      "aliases": [
+        "experience universe",
+        "game universe"
+      ],
+      "expansion": null,
+      "definition": "The internal Roblox project container that groups a game or experience with its places and shared settings.",
+      "example": "The lobby and battle maps belong to the same universe but use different places.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://create.roblox.com/docs/production/publishing/publish-experiences-and-places"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 191
+    },
+    {
+      "term": "USD-bought",
+      "slug": "usd-bought",
+      "aliases": [
+        "usd bought",
+        "bought with usd"
+      ],
+      "expansion": null,
+      "definition": "Chat slang claiming an item was purchased with real money outside Roblox’s official systems. Such deals are unsafe and against platform rules, so treat the label as a warning sign rather than a normal shopping tip.",
+      "example": "If someone brags that a limited is USD-bought, do not trust the offer and stay on official Roblox trades only.",
+      "category": "accounts-and-safety",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Never buy or sell Roblox items for real money off the platform. Keep trades and purchases inside Roblox, ignore pressure to move chats elsewhere, and report suspicious sellers.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 192,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Username",
+      "slug": "username",
+      "aliases": [
+        "user name",
+        "account handle"
+      ],
+      "expansion": null,
+      "definition": "The unique name that identifies a Roblox account, separate from its changeable display name.",
+      "example": "Two players shared a display name, so the moderator checked their usernames.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": "A username is public. Never share a password, recovery code, or login link with it.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/203313130-Changing-Your-Display-Name"
+      ],
+      "lastVerifiedAt": "2026-08-11",
+      "sortOrder": 193
+    },
+    {
+      "term": "VC",
+      "slug": "vc",
+      "aliases": [
+        "voice chat",
+        "voicechat"
+      ],
+      "expansion": "voice chat",
+      "definition": "Roblox voice chat, where eligible players can talk with nearby or party members using a microphone instead of only typing.",
+      "example": "I turned on VC so my friends could call out where the boss was spawning.",
+      "category": "chat-and-social",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": "Only enable voice chat with people you trust, mute or leave if talk gets unkind, and never share personal details over audio.",
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 194,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Voided",
+      "slug": "voided",
+      "aliases": [
+        "void",
+        "voiding"
+      ],
+      "expansion": null,
+      "definition": "In roleplay, voided means an action or scene is treated as if it did not happen, usually because it broke the server's roleplay rules.",
+      "example": "The moderator voided the crash scene after a player ignored the server's roleplay rules.",
+      "category": "gameplay",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang"
+      ],
+      "sortOrder": 195,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "W",
+      "slug": "w",
+      "aliases": [
+        "dub",
+        "win"
+      ],
+      "expansion": "win",
+      "definition": "Chat slang for a win, good outcome, or praise. Players call a play, fit, or decision a W when they think it was solid.",
+      "example": "That clutch save was a massive W for our team.",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 196,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "WIP",
+      "slug": "wip",
+      "aliases": [
+        "work in progress",
+        "work-in-progress"
+      ],
+      "expansion": "work in progress",
+      "definition": "A label for experiences, maps, models, or clothing still being built and not finished yet.",
+      "example": "The creator tagged the new lobby as WIP, so only test systems were open.",
+      "category": "creator-and-studio",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/wip",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 197,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "XD",
+      "slug": "xd",
+      "aliases": [
+        "xD",
+        "xd face"
+      ],
+      "expansion": null,
+      "definition": "A text emoticon that looks like a big laughing face, used to show something is funny or silly in chat.",
+      "example": "I fell off the tower right at the end XD",
+      "category": "chat-and-social",
+      "termType": "slang",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://robloxden.com/dictionary/xd",
+        "https://roblox.fandom.com/wiki/Roblox_slang",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 198,
+      "lastVerifiedAt": "2026-08-11"
+    }
+  ]
+}

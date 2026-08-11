@@ -45,6 +45,7 @@ const GENERAL_CATALOG_ORDER = [
   "roblox-font-ids",
   "roblox-mesh-ids",
   "roblox-color-codes",
+  "roblox-dictionary",
   "admin-commands"
 ];
 const AVATAR_CATALOG_CHILD_CODES = new Set<string>(

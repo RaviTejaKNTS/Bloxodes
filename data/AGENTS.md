@@ -86,6 +86,9 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
 - `data/roblox-errors/roblox-errors.json`
   - Roblox error reference data behind `/catalog/roblox-errors-and-fixes`.
   - Loaded by `apps/web/src/app/(site)/catalog/roblox-errors-and-fixes/page-data.tsx`. `articleSlug` links a card to its `/articles/<slug>` fix guide; `surface` must match a section in that route's `ERROR_SECTIONS`.
+- `data/roblox-dictionary/roblox-dictionary.json`
+  - Source-backed Roblox slang, acronym, platform, creator, and legacy terminology behind `/catalog/roblox-dictionary`.
+  - Keep definitions and examples original, retain per-term source URLs and verification dates, mark retired language as `legacy`, and never add filter-bypass, exploit, scam, or off-platform contact instructions.
 - `src/data/slug_oldslugs.json`
   - Legacy slug redirect map for the public fallback route.
 

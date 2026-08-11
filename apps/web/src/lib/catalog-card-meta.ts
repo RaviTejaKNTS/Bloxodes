@@ -110,6 +110,7 @@ const CATALOG_CONFIG: Record<string, CatalogConfig> = {
     source: { kind: "avatar", code: "roblox-makeup" }
   },
   "roblox-color-codes": { shortLabel: "Color Codes", unit: "color codes", icon: "palette", source: null },
+  "roblox-dictionary": { shortLabel: "Roblox Dictionary", unit: "terms", icon: "type", source: null },
   "roblox-errors-and-fixes": { shortLabel: "Errors & Fixes", unit: "errors", icon: "wrench", source: null },
   "roblox-promo-codes": {
     shortLabel: "Promo Codes & Rewards",
