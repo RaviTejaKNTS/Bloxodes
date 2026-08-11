@@ -135,9 +135,13 @@ test("the scheduled universe audit is strict and uses one health RPC", () => {
     new URL("../../../supabase/migrations/20260920000007_scope_universe_pipeline_stale_jobs.sql", import.meta.url),
     "utf8"
   );
+  const fastMigration = readFileSync(
+    new URL("../../../supabase/migrations/20260920000008_add_fast_universe_pipeline_health_rpc.sql", import.meta.url),
+    "utf8"
+  );
 
   assert.match(cron, /stats-audit "npm run stats:audit -- --strict"/);
-  assert.match(audit, /rpc\("get_roblox_universe_pipeline_health_v2"\)/);
+  assert.match(audit, /rpc\("get_roblox_universe_pipeline_health_v3"\)/);
   assert.match(audit, /public_playing_coverage/);
   assert.match(audit, /cold_refresh_starts_6h/);
   assert.match(audit, /if \(STRICT && failures\.length\) process\.exitCode = 1/);
@@ -149,6 +153,10 @@ test("the scheduled universe audit is strict and uses one health RPC", () => {
   assert.match(scopedMigration, /job_name like 'stats_refresh_%'/);
   assert.match(scopedMigration, /job_name like 'discover_universes_%'/);
   assert.doesNotMatch(scopedMigration, /stats_items_/);
+  assert.match(fastMigration, /get_roblox_universe_pipeline_health_v3/);
+  assert.match(fastMigration, /current_index_fresh_playing_24h/);
+  assert.doesNotMatch(fastMigration, /roblox_universe_stats_daily/);
+  assert.doesNotMatch(fastMigration, /roblox_universe_rank_snapshots_daily/);
 });
 
 test("broad search discovery is bounded and rate-limit circuit broken by default", () => {
