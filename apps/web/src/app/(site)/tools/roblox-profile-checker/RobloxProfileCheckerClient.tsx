@@ -1,111 +1,12 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-
-type ProfileCore = {
-  userId: number;
-  username: string;
-  displayName: string;
-  description: string | null;
-  created: string | null;
-  isBanned: boolean;
-  hasVerifiedBadge: boolean;
-  avatarUrl: string | null;
-  headshotUrl: string | null;
-};
-
-type ProfileStats = {
-  friends: number | null;
-  followers: number | null;
-  following: number | null;
-  totalPlaceVisits: number | null;
-};
-
-type PresenceStatus = "offline" | "online" | "in-game" | "in-studio" | "invisible";
-
-type PresenceInfo = {
-  status: PresenceStatus;
-  lastLocation: string | null;
-};
-
-type WornItem = {
-  assetId: number;
-  name: string;
-  assetType: string;
-  imageUrl: string | null;
-};
-
-type CollectibleItem = {
-  assetId: number;
-  name: string;
-  recentAveragePrice: number | null;
-  serialNumber: number | null;
-  imageUrl: string | null;
-};
-
-type CollectiblesInfo = {
-  canView: boolean;
-  totalRap: number | null;
-  rapIsPartial: boolean;
-  itemCount: number;
-  items: CollectibleItem[];
-};
-
-type GroupMembership = {
-  groupId: number;
-  name: string;
-  memberCount: number | null;
-  role: string | null;
-  rank: number | null;
-  hasVerifiedBadge: boolean;
-  imageUrl: string | null;
-};
-
-type PlatformBadge = {
-  id: number;
-  name: string;
-  description: string | null;
-  imageUrl: string | null;
-};
-
-type GameEntry = {
-  universeId: number;
-  rootPlaceId: number | null;
-  name: string;
-  placeVisits: number | null;
-  imageUrl: string | null;
-};
-
-type ProfileResponseOk = {
-  ok: true;
-  profile: ProfileCore;
-  stats: ProfileStats;
-  presence: PresenceInfo | null;
-  previousUsernames: string[];
-  wearing: WornItem[];
-  collectibles: CollectiblesInfo;
-  groups: GroupMembership[];
-  robloxBadges: PlatformBadge[];
-  socialLinks: Record<string, string>;
-  createdGames: GameEntry[];
-  favoriteGames: GameEntry[];
-  profileUrl: string;
-  warnings: string[];
-};
-
-type ProfileSuggestion = {
-  username: string;
-  displayName: string;
-  hasVerifiedBadge: boolean;
-};
-
-type ProfileResponseError = {
-  ok: false;
-  error: { code: string; message: string; hint?: string };
-  suggestions?: ProfileSuggestion[];
-};
-
-type ProfileResponse = ProfileResponseOk | ProfileResponseError;
+import type {
+  PresenceStatus,
+  ProfileResponse,
+  ProfileResponseOk,
+  ProfileSuggestion
+} from "@/lib/roblox-profile-checker";
 
 const PRESENCE_STYLES: Record<PresenceStatus, { label: string; dot: string }> = {
   offline: { label: "Offline", dot: "bg-slate-400" },
@@ -521,21 +422,21 @@ export function RobloxProfileCheckerClient() {
 
           <section className="space-y-4">
             <SectionHeading>Limiteds and RAP</SectionHeading>
-            {result.collectibles.canView ? (
+            {result.collectibles.status === "public" ? (
               result.collectibles.itemCount > 0 ? (
                 <>
                   <p className="text-sm text-muted">
-                    {formatFull(result.collectibles.itemCount)} limited {result.collectibles.itemCount === 1 ? "item" : "items"}{" "}
+                    {result.collectibles.hasMore ? `${formatFull(result.collectibles.fetchedItemCount)}+` : formatFull(result.collectibles.fetchedItemCount)} limited {result.collectibles.fetchedItemCount === 1 ? "item" : "items"}{" "}
                     worth a combined recent average price of{" "}
                     <span className="font-semibold text-foreground">
-                      {formatFull(result.collectibles.totalRap)} Robux
+                      {result.collectibles.rapIsPartial ? "at least " : ""}{formatFull(result.collectibles.totalRap)} Robux
                     </span>
-                    {result.collectibles.rapIsPartial ? " (large inventory, totals cover the first 300 items)" : ""}.
+                    {result.collectibles.rapIsPartial ? " across the items checked" : ""}.
                   </p>
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
-                    {result.collectibles.items.map((item) => (
+                    {result.collectibles.items.map((item, index) => (
                       <a
-                        key={item.assetId}
+                        key={`${item.assetId}-${item.serialNumber ?? "copy"}-${index}`}
                         href={`https://www.roblox.com/catalog/${item.assetId}`}
                         target="_blank"
                         rel="noreferrer"
@@ -565,9 +466,13 @@ export function RobloxProfileCheckerClient() {
               ) : (
                 <p className="text-sm text-muted">This account does not own any limited items yet.</p>
               )
-            ) : (
+            ) : result.collectibles.status === "private" ? (
               <p className="text-sm text-muted">
                 This account keeps its inventory private, so limited items and RAP are hidden.
+              </p>
+            ) : (
+              <p className="text-sm text-muted">
+                Roblox inventory data is unavailable right now. Try this profile again in a moment.
               </p>
             )}
           </section>

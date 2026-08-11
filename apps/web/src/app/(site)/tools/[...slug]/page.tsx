@@ -43,6 +43,7 @@ const RESERVED_TOOL_CODES = new Set([
   "roblox-devex-calculator",
   "roblox-id-extractor",
   "roblox-username-generator",
+  "roblox-account-value-calculator",
   "robux-to-usd-calculator",
   "the-forge-crafting-calculator",
   "the-forge-inventory-optimizer",

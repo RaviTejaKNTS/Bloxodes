@@ -71,6 +71,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 | Roblox ID extractor | `/tools/roblox-id-extractor` | `src/app/(site)/tools/roblox-id-extractor/*`, client in `RobloxIdExtractorClient.tsx` |
 | Roblox profile checker | `/tools/roblox-profile-checker` | `src/app/(site)/tools/roblox-profile-checker/*`, client in `RobloxProfileCheckerClient.tsx`, API proxy at `/api/roblox-profile-checker` |
 | Roblox username generator | `/tools/roblox-username-generator` | `src/app/(site)/tools/roblox-username-generator/*`, server-rendered client shell in `RobloxUsernameGeneratorClient.tsx`, live validation API at `/api/roblox-username-generator` |
+| Roblox account value calculator | `/tools/roblox-account-value-calculator` | `src/app/(site)/tools/roblox-account-value-calculator/*`, SSR-compatible calculator client reusing `/api/roblox-profile-checker` with explicit public inventory coverage and local-only optional Robux inputs |
 | Robux to USD | `/tools/robux-to-usd-calculator` | `src/app/(site)/tools/robux-to-usd-calculator/*`, static tables in `robux-bundles.ts` and `robux-plans.ts` |
 | DevEx | `/tools/roblox-devex-calculator` | `src/app/(site)/tools/roblox-devex-calculator/*` |
 | The Forge crafting | `/tools/the-forge-crafting-calculator` | `src/app/(site)/tools/the-forge-crafting-calculator/*` |

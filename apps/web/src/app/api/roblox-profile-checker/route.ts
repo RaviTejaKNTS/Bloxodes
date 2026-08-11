@@ -1,4 +1,18 @@
 import { NextResponse } from "next/server";
+import type {
+  CollectibleItem,
+  CollectiblesInfo,
+  GameEntry,
+  GroupMembership,
+  PlatformBadge,
+  PresenceInfo,
+  ProfileCore,
+  ProfileResponseError,
+  ProfileResponseOk,
+  ProfileStats,
+  ProfileSuggestion,
+  WornItem
+} from "@/lib/roblox-profile-checker";
 import { checkRateLimit } from "@/lib/security/rate-limit";
 import { getRequestIp } from "@/lib/security/request";
 
@@ -22,108 +36,7 @@ type FetchResult<T> =
   | { ok: true; status: number; data: T }
   | { ok: false; status: number; error: string; rateLimited: boolean };
 
-type ProfileCore = {
-  userId: number;
-  username: string;
-  displayName: string;
-  description: string | null;
-  created: string | null;
-  isBanned: boolean;
-  hasVerifiedBadge: boolean;
-  avatarUrl: string | null;
-  headshotUrl: string | null;
-};
-
-type ProfileStats = {
-  friends: number | null;
-  followers: number | null;
-  following: number | null;
-  totalPlaceVisits: number | null;
-};
-
-type PresenceInfo = {
-  status: "offline" | "online" | "in-game" | "in-studio" | "invisible";
-  lastLocation: string | null;
-};
-
-type WornItem = {
-  assetId: number;
-  name: string;
-  assetType: string;
-  imageUrl: string | null;
-};
-
-type CollectibleItem = {
-  assetId: number;
-  name: string;
-  recentAveragePrice: number | null;
-  serialNumber: number | null;
-  imageUrl: string | null;
-};
-
-type CollectiblesInfo = {
-  canView: boolean;
-  totalRap: number | null;
-  rapIsPartial: boolean;
-  itemCount: number;
-  items: CollectibleItem[];
-};
-
-type GroupMembership = {
-  groupId: number;
-  name: string;
-  memberCount: number | null;
-  role: string | null;
-  rank: number | null;
-  hasVerifiedBadge: boolean;
-  imageUrl: string | null;
-};
-
-type PlatformBadge = {
-  id: number;
-  name: string;
-  description: string | null;
-  imageUrl: string | null;
-};
-
-type GameEntry = {
-  universeId: number;
-  rootPlaceId: number | null;
-  name: string;
-  placeVisits: number | null;
-  imageUrl: string | null;
-};
-
 type SocialLinks = Record<string, string>;
-
-type ProfileResponseOk = {
-  ok: true;
-  profile: ProfileCore;
-  stats: ProfileStats;
-  presence: PresenceInfo | null;
-  previousUsernames: string[];
-  wearing: WornItem[];
-  collectibles: CollectiblesInfo;
-  groups: GroupMembership[];
-  robloxBadges: PlatformBadge[];
-  socialLinks: SocialLinks;
-  createdGames: GameEntry[];
-  favoriteGames: GameEntry[];
-  profileUrl: string;
-  warnings: string[];
-};
-
-type ProfileSuggestion = {
-  username: string;
-  displayName: string;
-  hasVerifiedBadge: boolean;
-};
-
-type ProfileResponseError = {
-  ok: false;
-  error: { code: string; message: string; hint?: string };
-  suggestions?: ProfileSuggestion[];
-};
 
 type CacheEntry = { expires: number; payload: ProfileResponseOk };
 
@@ -314,9 +227,29 @@ async function fetchCollectibles(userId: number, warnings: string[], deadline: n
     deadline
   );
   noteFailure(warnings, canViewRes);
-  const canView = canViewRes.ok ? Boolean(canViewRes.data.canView) : false;
-  if (!canView) {
-    return { canView: false, totalRap: null, rapIsPartial: false, itemCount: 0, items: [] };
+  if (!canViewRes.ok) {
+    return {
+      status: "unavailable",
+      canView: false,
+      totalRap: null,
+      rapIsPartial: false,
+      itemCount: 0,
+      fetchedItemCount: 0,
+      hasMore: false,
+      items: []
+    };
+  }
+  if (!canViewRes.data.canView) {
+    return {
+      status: "private",
+      canView: false,
+      totalRap: null,
+      rapIsPartial: false,
+      itemCount: 0,
+      fetchedItemCount: 0,
+      hasMore: false,
+      items: []
+    };
   }
 
   type CollectiblePage = {
@@ -332,10 +265,25 @@ async function fetchCollectibles(userId: number, warnings: string[], deadline: n
   const items: CollectibleItem[] = [];
   let cursor: string | null = null;
   let rapIsPartial = false;
+  let hasMore = false;
+  let pagesFetched = 0;
 
   for (let page = 0; page < COLLECTIBLE_PAGE_LIMIT; page += 1) {
     if (Date.now() >= deadline) {
+      if (pagesFetched === 0) {
+        return {
+          status: "unavailable",
+          canView: false,
+          totalRap: null,
+          rapIsPartial: false,
+          itemCount: 0,
+          fetchedItemCount: 0,
+          hasMore: false,
+          items: []
+        };
+      }
       rapIsPartial = true;
+      hasMore = true;
       break;
     }
     const params = new URLSearchParams({ limit: "100", sortOrder: "Asc" });
@@ -346,8 +294,23 @@ async function fetchCollectibles(userId: number, warnings: string[], deadline: n
     );
     if (!res.ok) {
       noteFailure(warnings, res);
+      if (pagesFetched === 0) {
+        return {
+          status: "unavailable",
+          canView: false,
+          totalRap: null,
+          rapIsPartial: false,
+          itemCount: 0,
+          fetchedItemCount: 0,
+          hasMore: false,
+          items: []
+        };
+      }
+      rapIsPartial = true;
+      hasMore = true;
       break;
     }
+    pagesFetched += 1;
     for (const entry of res.data.data ?? []) {
       if (!entry.assetId || !entry.name) continue;
       items.push({
@@ -360,7 +323,10 @@ async function fetchCollectibles(userId: number, warnings: string[], deadline: n
     }
     cursor = res.data.nextPageCursor ?? null;
     if (!cursor) break;
-    if (page === COLLECTIBLE_PAGE_LIMIT - 1) rapIsPartial = true;
+    if (page === COLLECTIBLE_PAGE_LIMIT - 1) {
+      rapIsPartial = true;
+      hasMore = true;
+    }
   }
 
   const totalRap = items.reduce((sum, item) => sum + (item.recentAveragePrice ?? 0), 0);
@@ -376,10 +342,13 @@ async function fetchCollectibles(userId: number, warnings: string[], deadline: n
   }
 
   return {
+    status: "public",
     canView: true,
     totalRap,
     rapIsPartial,
     itemCount: items.length,
+    fetchedItemCount: items.length,
+    hasMore,
     items: topItems
   };
 }
@@ -632,6 +601,7 @@ async function buildProfile(user: ResolvedUser, deadline: number): Promise<Profi
 
   return {
     ok: true,
+    checkedAt: new Date().toISOString(),
     profile,
     stats,
     presence,
