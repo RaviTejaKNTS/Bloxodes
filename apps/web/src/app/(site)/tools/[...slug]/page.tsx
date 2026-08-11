@@ -42,6 +42,7 @@ const RESERVED_TOOL_CODES = new Set([
   "grow-a-garden-crop-value-calculator",
   "roblox-devex-calculator",
   "roblox-id-extractor",
+  "roblox-username-generator",
   "robux-to-usd-calculator",
   "the-forge-crafting-calculator",
   "the-forge-inventory-optimizer",

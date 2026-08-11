@@ -54,6 +54,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/roblox-decal-ids` | `GET` | `src/app/api/roblox-decal-ids/route.ts` | Paginated/searchable Roblox decal ID catalog data. |
 | `/api/roblox-id-extractor` | `GET` | `src/app/api/roblox-id-extractor/route.ts` | Resolve Roblox URLs and IDs with Roblox API plus Supabase fallbacks. |
 | `/api/roblox-profile-checker` | `GET` | `src/app/api/roblox-profile-checker/route.ts` | Username lookup aggregating public Roblox profile data (avatar, stats, groups, collectibles) with short in-memory caching. |
+| `/api/roblox-username-generator` | `POST` | `src/app/api/roblox-username-generator/route.ts` | Same-origin, rate-limited username generation, remix, live Roblox validation, and point-in-time recheck endpoint. |
 | `/api/roblox-music-ids` | `GET` | `src/app/api/roblox-music-ids/route.ts` | Paginated/searchable music ID catalog data. |
 | `/api/roblox-mesh-ids` | `GET` | `src/app/api/roblox-mesh-ids/route.ts` | Paginated/searchable Roblox Mesh ID catalog data. |
 | `/api/search/all` | `GET` | `src/app/api/search/all/route.ts` | Site-wide aggregated search. |
