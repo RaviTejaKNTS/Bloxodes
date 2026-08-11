@@ -143,6 +143,8 @@ test("the scheduled universe audit is strict and uses one health RPC", () => {
   assert.match(cron, /stats-audit "npm run stats:audit -- --strict"/);
   assert.match(audit, /rpc\("get_roblox_universe_pipeline_health_v3"\)/);
   assert.match(audit, /public_playing_coverage/);
+  assert.match(audit, /Number\(counts\.fresh_player_values_24h\)/);
+  assert.match(audit, /Number\(counts\.eligible_total\)/);
   assert.match(audit, /cold_refresh_starts_6h/);
   assert.match(audit, /if \(STRICT && failures\.length\) process\.exitCode = 1/);
   assert.match(migration, /create or replace function public\.get_roblox_universe_pipeline_health\(\)/);

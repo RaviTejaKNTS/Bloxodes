@@ -80,8 +80,8 @@ function refreshStarts(snapshot: HealthSnapshot, jobName: string) {
 function evaluate(snapshot: HealthSnapshot): Check[] {
   const counts = snapshot.counts;
   const publicPlayingCoverage = ratio(
-    Number(counts.current_index_fresh_playing_24h),
-    Number(counts.current_index_playing_rows)
+    Number(counts.fresh_player_values_24h),
+    Number(counts.eligible_total)
   );
   const indexCoverage = ratio(Number(counts.current_index_rows), Number(counts.eligible_total));
   const overdueRatio = ratio(Number(counts.stats_overdue), Number(counts.eligible_total));
