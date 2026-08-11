@@ -1,5 +1,6 @@
 import "server-only";
 import { publicContentCache } from "@/lib/public-content-cache";
+import { partitionPuzzleAnswersByDate } from "@/lib/puzzle-dates";
 import { supabaseAdmin } from "@/lib/supabase";
 
 export type PuzzleFaqEntry = { q: string; a: string };
@@ -178,7 +179,7 @@ export async function getPuzzlePageWithAnswers(slug: string): Promise<PuzzlePage
   const page = await getPuzzlePageBySlug(slug);
   if (!page) return null;
   const answers = await getPuzzleAnswers(page.slug, 45);
-  const [today = null, yesterday = null, ...archive] = answers;
+  const { today, yesterday, archive } = partitionPuzzleAnswersByDate(answers);
   return { page, answers, today, yesterday, archive };
 }
 

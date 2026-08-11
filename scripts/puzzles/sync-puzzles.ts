@@ -1,24 +1,17 @@
 import "../shared/load-env";
 import * as cheerio from "cheerio";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { formatPuzzleDate, shiftPuzzleDate } from "@/lib/puzzle-dates";
+import {
+  ALL_PUZZLE_SLUGS,
+  formatUnknownError,
+  isSamePuzzleAnswer,
+  resolveWordlePuzzleNumber,
+  type AnyRecord,
+  type PuzzleSlug
+} from "./pipeline-utils";
 
-type AnyRecord = Record<string, unknown>;
 type PuzzleId = string | number | null;
-type PuzzleSlug =
-  | "wordle"
-  | "connections"
-  | "strands"
-  | "spelling-bee"
-  | "letter-boxed"
-  | "sudoku"
-  | "pips"
-  | "contexto"
-  | "letroso"
-  | "linkedin-zip"
-  | "linkedin-crossclimb"
-  | "linkedin-queens"
-  | "linkedin-tango"
-  | "linkedin-mini-sudoku";
 type PuzzleGroup =
   | "early-nyt"
   | "beebom"
@@ -53,22 +46,7 @@ const LETROSO_SOURCE_URL = "https://beebom.com/puzzle/letroso-answer-today/";
 const VOYAGER_QUERY_ID = "voyagerIdentityDashGames.882556aa369e9517b26dadb09a426063";
 const VOYAGER_BASE_URL = "https://www.linkedin.com/voyager/api/graphql";
 
-const ALL_PUZZLES: PuzzleSlug[] = [
-  "wordle",
-  "connections",
-  "strands",
-  "spelling-bee",
-  "letter-boxed",
-  "sudoku",
-  "pips",
-  "contexto",
-  "letroso",
-  "linkedin-zip",
-  "linkedin-crossclimb",
-  "linkedin-queens",
-  "linkedin-tango",
-  "linkedin-mini-sudoku"
-];
+const ALL_PUZZLES = ALL_PUZZLE_SLUGS;
 
 const PUZZLE_GROUPS: Record<PuzzleGroup, PuzzleSlug[]> = {
   "early-nyt": ["wordle", "connections", "strands", "sudoku", "pips"],
@@ -77,7 +55,7 @@ const PUZZLE_GROUPS: Record<PuzzleGroup, PuzzleSlug[]> = {
   "late-nyt": ["spelling-bee", "letter-boxed"],
   linkedin: ["linkedin-zip", "linkedin-crossclimb", "linkedin-queens", "linkedin-tango", "linkedin-mini-sudoku"],
   "late-nyt-and-linkedin": ["spelling-bee", "letter-boxed", "linkedin-zip", "linkedin-crossclimb", "linkedin-queens", "linkedin-tango", "linkedin-mini-sudoku"],
-  all: ALL_PUZZLES
+  all: [...ALL_PUZZLES]
 };
 
 const LINKEDIN_GAME_CONFIG: Record<Extract<PuzzleSlug, `linkedin-${string}`>, { gameTypeId: number; gamePageUrl: string; gameName: string }> = {
@@ -97,6 +75,7 @@ function parseArgs() {
   let backfillDays = 0;
   let skipLinkedIn = false;
   let skipLinkedInIfMissing = false;
+  let requireCurrentDate = false;
 
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
@@ -128,6 +107,8 @@ function parseArgs() {
       skipLinkedIn = true;
     } else if (arg === "--skip-linkedin-if-missing") {
       skipLinkedInIfMissing = true;
+    } else if (arg === "--require-current-date") {
+      requireCurrentDate = true;
     }
   }
 
@@ -135,7 +116,15 @@ function parseArgs() {
   if (!Number.isFinite(backfillDays) || backfillDays < 0) backfillDays = 0;
 
   const targetPuzzles = puzzles.length ? puzzles : group ? PUZZLE_GROUPS[group] : ALL_PUZZLES;
-  return { puzzles: Array.from(new Set(targetPuzzles)), answerDate, dryRun, backfillDays: Math.floor(backfillDays), skipLinkedIn, skipLinkedInIfMissing };
+  return {
+    puzzles: Array.from(new Set(targetPuzzles)),
+    answerDate,
+    dryRun,
+    backfillDays: Math.floor(backfillDays),
+    skipLinkedIn,
+    skipLinkedInIfMissing,
+    requireCurrentDate
+  };
 }
 
 function requireNextArg(args: string[], index: number, name: string) {
@@ -164,22 +153,14 @@ function validateAnswerDate(value: string) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) throw new Error(`Invalid answer date: ${value}. Expected YYYY-MM-DD.`);
 }
 
-function formatDateInTimezone(date: Date, timezoneId: string) {
-  const parts = new Intl.DateTimeFormat("en", { timeZone: timezoneId, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(date);
-  return `${parts.find((part) => part.type === "year")?.value ?? "0000"}-${parts.find((part) => part.type === "month")?.value ?? "00"}-${parts.find((part) => part.type === "day")?.value ?? "00"}`;
-}
-
 function getRequestedDate(answerDate: string | undefined, timezone = process.env.PUZZLES_TIMEZONE || "America/New_York") {
-  const date = answerDate || formatDateInTimezone(new Date(), timezone);
+  const date = answerDate || formatPuzzleDate(new Date(), timezone);
   validateAnswerDate(date);
   return date;
 }
 
 function addDays(answerDate: string, days: number) {
-  const date = new Date(`${answerDate}T00:00:00Z`);
-  if (Number.isNaN(date.getTime())) throw new Error(`Invalid answer date: ${answerDate}`);
-  date.setUTCDate(date.getUTCDate() + days);
-  return date.toISOString().slice(0, 10);
+  return shiftPuzzleDate(answerDate, days);
 }
 
 function normalizeAnswer(value: unknown) {
@@ -249,18 +230,19 @@ async function revealWordle(answerDate?: string): Promise<PuzzleAnswerResult> {
   const requestedDate = getRequestedDate(answerDate);
   const sourceUrl = `${WORDLE_SOURCE_URL}/${requestedDate}.json`;
   const payload = await fetchJson<AnyRecord>(sourceUrl);
-  const answerDateValue = ensureDate(payload.print_date ?? requestedDate, sourceUrl);
+  const answerDateValue = ensureExactDate(payload.print_date ?? requestedDate, requestedDate, sourceUrl);
   const answer = normalizeAnswer(payload.solution);
   if (!answer) throw new Error(`Wordle response from ${sourceUrl} did not include a solution.`);
+  const wordleNumber = resolveWordlePuzzleNumber(payload);
 
   return {
     puzzleSlug: "wordle",
     answerDate: answerDateValue,
-    puzzleId: normalizePuzzleId(payload.id ?? payload.days_since_launch),
+    puzzleId: wordleNumber,
     sourceUrl,
     fetchedAt: new Date().toISOString(),
     extractedFrom: "nyt:wordle-endpoint",
-    answerSummary: { answer, puzzleId: payload.id, wordleNumber: payload.days_since_launch },
+    answerSummary: { answer, puzzleId: wordleNumber, wordleNumber, nytRecordId: payload.id ?? null },
     payload: { ...payload, answer, answerDate: answerDateValue }
   };
 }
@@ -299,7 +281,7 @@ async function revealConnections(answerDate?: string): Promise<PuzzleAnswerResul
     .filter((card) => card.content)
     .sort((a, b) => (a.position ?? a.fallbackPosition) - (b.position ?? b.fallbackPosition))
     .map(({ fallbackPosition, ...card }) => card);
-  const answerDateValue = ensureDate(payload.print_date ?? requestedDate, sourceUrl);
+  const answerDateValue = ensureExactDate(payload.print_date ?? requestedDate, requestedDate, sourceUrl);
 
   return {
     puzzleSlug: "connections",
@@ -320,7 +302,7 @@ async function revealStrands(answerDate?: string): Promise<PuzzleAnswerResult> {
   const rawThemeWords = Array.isArray(payload.themeWords) ? payload.themeWords.map(String) : [];
   if (!rawThemeWords.length) throw new Error(`Strands response from ${sourceUrl} did not include theme words.`);
   const themeWords = rawThemeWords.map(normalizeAnswer);
-  const answerDateValue = ensureDate(payload.printDate ?? requestedDate, sourceUrl);
+  const answerDateValue = ensureExactDate(payload.printDate ?? requestedDate, requestedDate, sourceUrl);
 
   return {
     puzzleSlug: "strands",
@@ -665,8 +647,17 @@ async function revealPuzzle(slug: PuzzleSlug, answerDate?: string): Promise<Puzz
 }
 
 async function saveAnswer(result: PuzzleAnswerResult, dryRun: boolean) {
-  if (dryRun) return;
+  if (dryRun) return "dry-run" as const;
   const sb = supabaseAdmin();
+  const { data: existing, error: readError } = await sb
+    .from("puzzle_answers")
+    .select("puzzle_id, source_url, extracted_from, answer_summary, payload")
+    .eq("puzzle_slug", result.puzzleSlug)
+    .eq("answer_date", result.answerDate)
+    .maybeSingle();
+  if (readError) throw readError;
+  if (existing && isSamePuzzleAnswer(existing, result)) return "unchanged" as const;
+
   const { error } = await sb.from("puzzle_answers").upsert(
     {
       puzzle_slug: result.puzzleSlug,
@@ -681,6 +672,7 @@ async function saveAnswer(result: PuzzleAnswerResult, dryRun: boolean) {
     { onConflict: "puzzle_slug,answer_date" }
   );
   if (error) throw error;
+  return existing ? "updated" as const : "inserted" as const;
 }
 
 async function recordRun(puzzleSlug: string, status: string, issue: string | null, payload: AnyRecord, dryRun: boolean) {
@@ -697,15 +689,27 @@ async function recordRun(puzzleSlug: string, status: string, issue: string | nul
 
 async function main() {
   const args = parseArgs();
-  const skipLinkedIn = args.skipLinkedIn || (args.skipLinkedInIfMissing && !process.env.LINKEDIN_LI_AT);
+  const linkedInCredentialMissing = !process.env.LINKEDIN_LI_AT?.trim();
   const baseDate = getRequestedDate(args.answerDate);
   const dates = args.backfillDays > 0
     ? Array.from({ length: args.backfillDays }, (_, index) => addDays(baseDate, -index))
     : [args.answerDate];
+  let hadFailures = false;
 
   for (const date of dates) {
+    const expectedDate = date ?? baseDate;
     for (const puzzle of args.puzzles) {
-      if (skipLinkedIn && puzzle.startsWith("linkedin-")) continue;
+      if (puzzle.startsWith("linkedin-") && args.skipLinkedIn) {
+        console.log(`[skip] ${puzzle} was explicitly excluded`);
+        continue;
+      }
+      if (puzzle.startsWith("linkedin-") && args.skipLinkedInIfMissing && linkedInCredentialMissing) {
+        const message = "LINKEDIN_LI_AT is missing; the published LinkedIn puzzle cannot be refreshed.";
+        await recordRun(puzzle, "blocked", message, { expectedDate }, args.dryRun);
+        console.error(`[blocked] ${puzzle}: ${message}`);
+        if (args.requireCurrentDate) hadFailures = true;
+        continue;
+      }
       if ((puzzle === "contexto" || puzzle === "letroso") && date) {
         console.log(`[skip] ${puzzle} does not support historical date fetch from Beebom source`);
         continue;
@@ -713,16 +717,33 @@ async function main() {
 
       try {
         const result = await revealPuzzle(puzzle, date);
-        await saveAnswer(result, args.dryRun);
-        await recordRun(puzzle, "ok", null, { answerDate: result.answerDate, summary: result.answerSummary }, args.dryRun);
-        console.log(`[ok] ${puzzle} ${result.answerDate}${args.dryRun ? " (dry-run)" : ""}`);
+        if (result.answerDate !== expectedDate) {
+          const message = `Source returned ${result.answerDate}; expected ${expectedDate}.`;
+          await recordRun(puzzle, "not_ready", message, { answerDate: result.answerDate, expectedDate }, args.dryRun);
+          console.warn(`[not-ready] ${puzzle}: ${message}`);
+          if (args.requireCurrentDate) hadFailures = true;
+          continue;
+        }
+
+        const writeAction = await saveAnswer(result, args.dryRun);
+        await recordRun(
+          puzzle,
+          "ok",
+          null,
+          { answerDate: result.answerDate, summary: result.answerSummary, writeAction },
+          args.dryRun
+        );
+        console.log(`[ok] ${puzzle} ${result.answerDate} (${writeAction})`);
       } catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
-        await recordRun(puzzle, "error", message, { date }, args.dryRun);
+        const message = formatUnknownError(error);
+        await recordRun(puzzle, "error", message, { expectedDate }, args.dryRun);
         console.error(`[error] ${puzzle}${date ? ` ${date}` : ""}: ${message}`);
+        hadFailures = true;
       }
     }
   }
+
+  if (hadFailures) process.exitCode = 1;
 }
 
 main().catch((error) => {

@@ -82,6 +82,8 @@
     "collect:mesh-ids": "tsx scripts/catalog/collect-roblox-mesh-ids.ts",
     "discover:beebom-codes": "tsx scripts/codes/discover-beebom-code-pages.ts",
     "sync:puzzles": "tsx scripts/puzzles/sync-puzzles.ts",
+    "audit:puzzles": "tsx scripts/puzzles/audit-puzzle-pipeline.ts",
+    "test:puzzles": "node --import tsx --test scripts/puzzles/__tests__/*.test.ts",
     "upload:puzzle-icons": "tsx scripts/puzzles/upload-puzzle-icons.ts",
     "upsert:puzzle-pages": "tsx scripts/puzzles/upsert-puzzle-page-copy.ts",
     "rewrite:codes": "tsx scripts/codes/rewrite-codes-articles.ts",

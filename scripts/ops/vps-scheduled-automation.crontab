@@ -28,7 +28,8 @@
 30 5 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-beebom-with-early "npm run sync:puzzles -- --group beebom-with-early --skip-linkedin-if-missing"
 10 7 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-late-nyt-linkedin "npm run sync:puzzles -- --group late-nyt-and-linkedin --skip-linkedin-if-missing"
 10 8 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-late-nyt-linkedin "npm run sync:puzzles -- --group late-nyt-and-linkedin --skip-linkedin-if-missing"
-30 8 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-full-sweep "npm run sync:puzzles -- --group all --skip-linkedin-if-missing"
+30 8 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-full-sweep "npm run sync:puzzles -- --group all --skip-linkedin-if-missing --require-current-date"
+45 8 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh puzzles-audit "npm run audit:puzzles -- --strict"
 
 20 6 * * * JOB_LOCK_GROUP=roblox-api /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh music-ids-refresh "export ROBLOX_TOP_SONGS_TARGET=500 ROBLOX_TOP_SONGS_PAGE_LIMIT=50 ROBLOX_TOP_SONGS_MAX_PAGES=10 ROBLOX_CURATED_INCLUDE_TOP_SONGS=false ROBLOX_CURATED_TOOLBOX_CHART_TYPES=Week,Month,Year ROBLOX_CURATED_TOOLBOX_INCLUDE_TRENDING=false ROBLOX_CURATED_TOOLBOX_MAX_PAGES=10 ROBLOX_CURATED_MAX_ASSETS=3000; npm run collect:top-songs && npm run collect:music-ids-curated && npm run rerank:music-ids"
 
