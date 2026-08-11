@@ -1,103 +1,54 @@
-# Local Supabase Workflow
+# Development Supabase Workflow
 
-This repo now supports a local-first Supabase workflow without changing production env names.
+Bloxodes uses a dedicated managed Supabase project as its development database. Local web previews, content imports, and workflow QA read the gitignored `.env.local`; they do not require Docker or a locally running Supabase stack.
 
-## What stays the same in production
+## Environment boundary
 
-- Dokploy can keep injecting the current `SUPABASE_*`, `SITE_URL`, `AUTH_SESSION_SECRET`, and related env vars.
-- The app still reads the same production env variable names.
-- Build-time env for Docker/Dokploy stays unchanged.
+- Development: the managed Supabase project configured in `.env.local`.
+- Production: the self-hosted API at `https://database.bloxodes.com`, with public media at `https://media.bloxodes.com`.
+- Former managed production: rollback/source fallback only. It is not the development project.
+- Never copy production service-role credentials into `.env.local` or an agent child process.
+- Never commit or print `.env.local` values. Confirm only the resolved hostname when checking a target.
 
-## First-time local setup
+The development file should provide the app's normal Supabase variables, including `SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_URL`, the anon key, and the service-role key needed by approved development import scripts.
 
-1. Start a Docker-compatible runtime such as Docker Desktop or OrbStack.
-2. Copy `.env.local.example` to `.env.local`.
-3. Start the local Supabase stack:
+## Start localhost
 
-```bash
-npm run supabase:start
-```
-
-4. Copy the local Supabase values into `.env.local`:
+For ordinary web development:
 
 ```bash
-npm run supabase:status:env
+npm run dev:web
 ```
 
-Use the local `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE` shown by the CLI.
-
-5. Reset the local database from migrations and local seeds:
+Next.js loads `.env.local` automatically. For content workflows that call the guarded launcher, explicitly select managed-development mode:
 
 ```bash
-npm run supabase:reset
+ARTICLE_WRITER_DEV_ONLY=true npm run dev:local
 ```
 
-6. Start the app:
+The guarded launcher rejects the known Bloxodes production hosts. If port 3000 is occupied, reuse the existing Bloxodes development process or stop that exact process before starting another one.
 
-```bash
-npm run dev
-```
+## Content preview flow
 
-The local stack uses:
+1. Prepare and review the page's `final.json`.
+2. Run the page-type dry-run and copy checks.
+3. Confirm `.env.local` resolves to the managed development project, not `database.bloxodes.com`.
+4. Import only the approved development row.
+5. Open the localhost route and verify its rendered content, metadata, and behavior.
+6. Keep production publication as a separate, explicitly approved release.
 
-- API: `http://127.0.0.1:54321`
-- DB: `postgresql://postgres:postgres@127.0.0.1:54322/postgres`
-- Studio: `http://127.0.0.1:54323`
+Some older import scripts treat every remote hostname as production even when `.env.local` points to managed development. Follow a script's documented remote confirmation only after checking the hostname. A flag named `--allow-prod` does not select the database; the environment determines the target. Never use that flag as a reason to skip target verification.
 
-## Normal development flow
+## Schema changes
 
-1. Make schema changes locally.
-2. Save them as migrations in `supabase/migrations/`.
-3. Rebuild from scratch locally:
+1. Add a forward-only migration under `supabase/migrations/`.
+2. Apply and test it against the managed development project first.
+3. Verify affected application routes and scripts locally.
+4. Apply it to production only through the explicit migration and release workflow.
+5. Regenerate `supabase/schema.sql` from the live database after the production migration; do not hand-edit the snapshot.
 
-```bash
-npm run supabase:reset
-```
+Use Supabase CLI linked-project commands only after confirming which project is linked. Do not assume a previous CLI link is still correct.
 
-4. Test the app and any affected scripts locally.
-5. Push migrations to remote only when local checks pass.
+## Optional isolated Docker stack
 
-## Safe push flow
-
-Preview what would be applied:
-
-```bash
-npm run supabase:push:dry
-```
-
-Push when ready:
-
-```bash
-supabase db push
-```
-
-Use a staging/preview Supabase environment before production when possible.
-
-## Script env behavior
-
-Most scripts in `scripts/` now load env through `scripts/shared/load-env.ts`.
-
-The load order matches a local-friendly pattern:
-
-1. `.env.development.local` or `.env.production.local`
-2. `.env.local`
-3. `.env.development` or `.env.production`
-4. `.env`
-
-Important:
-
-- existing process env vars always win
-- local files do not override injected production env vars
-- this keeps Dokploy/GitHub Actions behavior intact while making local script work safer
-
-## Handy commands
-
-```bash
-npm run supabase:start
-npm run supabase:stop
-npm run supabase:status
-npm run supabase:status:env
-npm run supabase:reset
-npm run supabase:push:local
-npm run supabase:push:dry
-```
+The `supabase:start`, `supabase:stop`, `supabase:status`, and `supabase:reset` commands remain available for exceptional isolated database work. They are optional tools, not prerequisites for normal development, content imports, or localhost previews.
