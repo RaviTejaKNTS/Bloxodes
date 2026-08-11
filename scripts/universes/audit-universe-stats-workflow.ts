@@ -2,133 +2,188 @@ import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
-import { STATS_TIERS, type StatsTier } from "./stats-tier";
 
-type CountQuery = any;
+type RefreshRunHealth = {
+  started?: number;
+  successful?: number;
+  rows_succeeded?: number;
+  latest_started_at?: string | null;
+  latest_finished_at?: string | null;
+};
 
-async function countRows(label: string, apply?: (query: CountQuery) => CountQuery) {
-  let query: CountQuery = supabaseAdmin().from("roblox_universes").select("universe_id", { count: "exact", head: true });
-  if (apply) {
-    query = apply(query) as typeof query;
-  }
-  const { count, error } = await query;
-  if (error) throw new Error(`${label}: ${error.message}`);
-  return count ?? 0;
-}
-
-async function tierCounts() {
-  const result: Record<StatsTier, number> = {
-    NEW: 0,
-    HOT: 0,
-    WARM: 0,
-    COLD: 0
+type HealthSnapshot = {
+  generated_at: string;
+  tiers: Record<string, number>;
+  counts: {
+    total: number;
+    eligible_total: number;
+    with_root_place: number;
+    with_slug: number;
+    with_icon: number;
+    never_stats_refreshed: number;
+    never_playing_refreshed: number;
+    stale_over_24h: number;
+    stale_over_7d: number;
+    stale_player_values_over_24h: number;
+    stale_player_values_over_7d: number;
+    fresh_player_values_24h: number;
+    missing_icon_hot: number;
+    missing_icon_warm: number;
+    active_stats_leases: number;
+    expired_stats_leases: number;
+    retry_backoff: number;
+    unavailable_cooldowns: number;
+    rows_with_refresh_sla: number;
+    stats_overdue: number;
+    current_index_rows: number;
+    current_index_playing_rows: number;
+    current_index_fresh_playing_24h: number;
   };
-  for (const tier of STATS_TIERS) {
-    result[tier] = await countRows(`tier ${tier}`, (query) => query.eq("stats_tier", tier));
-  }
-  return result;
+  latest: {
+    current_index: string | null;
+    hourly: string | null;
+    daily: string | null;
+    rank_hourly: string | null;
+    rank_daily: string | null;
+  };
+  recent_refresh_runs: Record<string, RefreshRunHealth>;
+  stale_job_runs: number;
+};
+
+type Check = {
+  name: string;
+  status: "pass" | "warn" | "fail";
+  value: unknown;
+  expectation: string;
+};
+
+const STRICT = process.argv.includes("--strict");
+
+function ageHours(value: string | null) {
+  if (!value) return Number.POSITIVE_INFINITY;
+  return Math.max(0, (Date.now() - new Date(value).getTime()) / 3_600_000);
 }
 
-async function latestHourly() {
-  const { data, error } = await supabaseAdmin()
-    .from("roblox_universe_stats_hourly")
-    .select("hour_start")
-    .order("hour_start", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (error) throw error;
-  return data?.hour_start ?? null;
+function ratio(numerator: number, denominator: number) {
+  if (denominator <= 0) return 0;
+  return numerator / denominator;
 }
 
-async function latestValue(table: string, column: string) {
-  const { data, error } = await supabaseAdmin()
-    .from(table)
-    .select(column)
-    .order(column, { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (error) throw error;
-  return (data as Record<string, unknown> | null)?.[column] ?? null;
+function check(name: string, value: unknown, status: Check["status"], expectation: string): Check {
+  return { name, status, value, expectation };
 }
 
-async function tableCount(table: string) {
-  // Rank/hourly tables contain millions of rows. PostgREST exact HEAD counts
-  // can exceed the production statement timeout, while an estimated count is
-  // sufficient for this operational growth signal.
-  const { count, error } = await supabaseAdmin().from(table).select("*", { count: "estimated", head: true });
-  if (error) throw new Error(`${table} estimated count: ${error.message || JSON.stringify(error)}`);
-  return count ?? 0;
+function refreshStarts(snapshot: HealthSnapshot, jobName: string) {
+  return Number(snapshot.recent_refresh_runs[jobName]?.started ?? 0);
+}
+
+function evaluate(snapshot: HealthSnapshot): Check[] {
+  const counts = snapshot.counts;
+  const publicPlayingCoverage = ratio(
+    Number(counts.current_index_fresh_playing_24h),
+    Number(counts.current_index_playing_rows)
+  );
+  const indexCoverage = ratio(Number(counts.current_index_rows), Number(counts.eligible_total));
+  const overdueRatio = ratio(Number(counts.stats_overdue), Number(counts.eligible_total));
+  const indexAge = ageHours(snapshot.latest.current_index);
+  const hourlyAge = ageHours(snapshot.latest.hourly);
+  const rankHourlyAge = ageHours(snapshot.latest.rank_hourly);
+  const coldStarts = refreshStarts(snapshot, "stats_refresh_cold");
+  const warmStarts = refreshStarts(snapshot, "stats_refresh_warm");
+  const newStarts = refreshStarts(snapshot, "stats_refresh_new");
+
+  return [
+    check(
+      "public_playing_coverage",
+      publicPlayingCoverage,
+      publicPlayingCoverage >= 0.995 ? "pass" : publicPlayingCoverage >= 0.98 ? "warn" : "fail",
+      ">= 99.5% of indexed games with stored player stats remain visible inside the 24-hour cutoff"
+    ),
+    check(
+      "current_index_coverage",
+      indexCoverage,
+      indexCoverage >= 0.995 ? "pass" : indexCoverage >= 0.98 ? "warn" : "fail",
+      ">= 99.5% of eligible universes are present in the current read index"
+    ),
+    check(
+      "refresh_overdue_ratio",
+      overdueRatio,
+      overdueRatio <= 0.1 ? "pass" : overdueRatio <= 0.2 ? "warn" : "fail",
+      "<= 10% of eligible universes are currently due"
+    ),
+    check(
+      "expired_stats_leases",
+      counts.expired_stats_leases,
+      counts.expired_stats_leases === 0 ? "pass" : "fail",
+      "0 refresh leases older than 45 minutes"
+    ),
+    check(
+      "stale_job_runs",
+      snapshot.stale_job_runs,
+      snapshot.stale_job_runs === 0 ? "pass" : "fail",
+      "0 stats jobs left running for more than 2 hours"
+    ),
+    check(
+      "cold_refresh_starts_6h",
+      coldStarts,
+      coldStarts >= 5 ? "pass" : coldStarts >= 4 ? "warn" : "fail",
+      ">= 5 COLD refresh workers started in the last 6 hours"
+    ),
+    check(
+      "warm_refresh_starts_6h",
+      warmStarts,
+      warmStarts >= 1 ? "pass" : "fail",
+      ">= 1 WARM refresh worker started in the last 6 hours"
+    ),
+    check(
+      "new_refresh_starts_6h",
+      newStarts,
+      newStarts >= 2 ? "pass" : newStarts >= 1 ? "warn" : "fail",
+      ">= 2 NEW refresh workers started in the last 6 hours"
+    ),
+    check(
+      "current_index_freshness_hours",
+      indexAge,
+      indexAge <= 2 ? "pass" : indexAge <= 3 ? "warn" : "fail",
+      "<= 2 hours"
+    ),
+    check(
+      "hourly_stats_freshness_hours",
+      hourlyAge,
+      hourlyAge <= 2 ? "pass" : hourlyAge <= 3 ? "warn" : "fail",
+      "<= 2 hours"
+    ),
+    check(
+      "hourly_rank_freshness_hours",
+      rankHourlyAge,
+      rankHourlyAge <= 2 ? "pass" : rankHourlyAge <= 3 ? "warn" : "fail",
+      "<= 2 hours"
+    )
+  ];
 }
 
 async function main() {
-  const run = await startStatsJobRun({ jobName: "stats_universe_audit" });
-  const now = new Date();
-  const stale24h = new Date(now.getTime() - 24 * 60 * 60 * 1000).toISOString();
-  const stale7d = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
-  const expiredLeaseCutoff = new Date(now.getTime() - 45 * 60 * 1000).toISOString();
+  const run = await startStatsJobRun({ jobName: "stats_universe_audit", metadata: { strict: STRICT } });
 
   try {
-    const counts = {
-      total: await countRows("total"),
-      withRootPlace: await countRows("with root place", (query) => query.gt("root_place_id", 0)),
-      withSlug: await countRows("with slug", (query) => query.not("slug", "is", null)),
-      withIcon: await countRows("with icon", (query) => query.not("icon_url", "is", null)),
-      neverStatsRefreshed: await countRows("never stats refreshed", (query) => query.is("last_stats_refreshed_at", null)),
-      neverPlayingRefreshed: await countRows("never playing refreshed", (query) => query.is("last_playing_refreshed_at", null)),
-      staleOver24h: await countRows("stale over 24h", (query) =>
-        query.or(`last_stats_refreshed_at.is.null,last_stats_refreshed_at.lt.${stale24h}`)
-      ),
-      staleOver7d: await countRows("stale over 7d", (query) =>
-        query.or(`last_stats_refreshed_at.is.null,last_stats_refreshed_at.lt.${stale7d}`)
-      ),
-      stalePlayerValuesOver24h: await countRows("stale player values over 24h", (query) =>
-        query
-          .not("playing", "is", null)
-          .or(`last_playing_refreshed_at.is.null,last_playing_refreshed_at.lt.${stale24h}`)
-      ),
-      stalePlayerValuesOver7d: await countRows("stale player values over 7d", (query) =>
-        query
-          .not("playing", "is", null)
-          .or(`last_playing_refreshed_at.is.null,last_playing_refreshed_at.lt.${stale7d}`)
-      ),
-      missingIconHot: await countRows("missing HOT icons", (query) => query.eq("stats_tier", "HOT").is("icon_url", null)),
-      missingIconWarm: await countRows("missing WARM icons", (query) => query.eq("stats_tier", "WARM").is("icon_url", null)),
-      activeStatsLeases: await countRows("active stats leases", (query) => query.not("stats_refresh_locked_at", "is", null)),
-      expiredStatsLeases: await countRows("expired stats leases", (query) =>
-        query.not("stats_refresh_locked_at", "is", null).lt("stats_refresh_locked_at", expiredLeaseCutoff)
-      ),
-      retryBackoff: await countRows("stats retry backoff", (query) =>
-        query.not("last_stats_refresh_error", "is", null).gt("next_stats_refresh_at", now.toISOString())
-      ),
-      unavailableCooldowns: await countRows("unavailable cooldowns", (query) =>
-        query.eq("stats_tier_reason", "game_details_unavailable").gt("next_stats_refresh_at", now.toISOString())
-      ),
-      rowsWithRefreshSla: await countRows("rows with refresh SLA", (query) => query.not("next_stats_refresh_at", "is", null)),
-      currentIndexRows: await tableCount("stats_game_current_index"),
-      hourlyRows: await tableCount("roblox_universe_stats_hourly"),
-      dailyRows: await tableCount("roblox_universe_stats_daily"),
-      rankHourlyRows: await tableCount("roblox_universe_rank_snapshots_hourly"),
-      rankDailyRows: await tableCount("roblox_universe_rank_snapshots_daily")
-    };
-
-    const summary = {
-      generatedAt: now.toISOString(),
-      latestHourly: await latestHourly(),
-      latestDaily: await latestValue("roblox_universe_stats_daily", "stat_date"),
-      latestRankHourly: await latestValue("roblox_universe_rank_snapshots_hourly", "hour_start"),
-      latestRankDaily: await latestValue("roblox_universe_rank_snapshots_daily", "stat_date"),
-      tiers: await tierCounts(),
-      counts
-    };
+    const { data, error } = await supabaseAdmin().rpc("get_roblox_universe_pipeline_health");
+    if (error) throw new Error(`Failed to load universe pipeline health: ${error.message}`);
+    const snapshot = data as HealthSnapshot;
+    const checks = evaluate(snapshot);
+    const failures = checks.filter((entry) => entry.status === "fail");
+    const warnings = checks.filter((entry) => entry.status === "warn");
+    const health = failures.length ? "unhealthy" : warnings.length ? "degraded" : "healthy";
+    const report = { health, strict: STRICT, checks, snapshot };
 
     await finishStatsJobRun(run, {
-      status: counts.expiredStatsLeases > 0 ? "partial" : "success",
-      rowsClaimed: counts.total,
-      rowsSucceeded: counts.currentIndexRows,
-      rowsFailed: counts.expiredStatsLeases,
-      metadata: summary
+      status: failures.length ? "partial" : "success",
+      rowsClaimed: Number(snapshot.counts.eligible_total),
+      rowsSucceeded: Number(snapshot.counts.current_index_fresh_playing_24h),
+      rowsFailed: Number(snapshot.counts.stale_player_values_over_24h),
+      metadata: report
     });
-    console.log(JSON.stringify(summary, null, 2));
+    console.log(JSON.stringify(report, null, 2));
+    if (STRICT && failures.length) process.exitCode = 1;
   } catch (error) {
     await finishStatsJobRun(run, { status: "failed", error });
     throw error;

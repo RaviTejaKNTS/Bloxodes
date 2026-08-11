@@ -68,23 +68,90 @@ test("VPS owns database-only ranks and the serialized index exactly once", () =>
   assert.equal(lines.filter((line) => line.includes("stats-daily-ranks")).some((line) => line.includes("JOB_LOCK_GROUP")), false);
 });
 
-test("universe refresh capacity cannot be starved by the item API lock", () => {
+test("universe refresh capacity is protected from item and discovery work", () => {
   const universeCron = readFileSync(new URL("../../ops/vps-universe-stats.crontab", import.meta.url), "utf8");
   const itemCron = readFileSync(new URL("../../ops/vps-scheduled-automation.crontab", import.meta.url), "utf8");
   const universeLines = universeCron.split("\n").filter((line) => line && !line.startsWith("#"));
-  const groupedUniverseLines = universeLines.filter((line) => line.includes("JOB_LOCK_GROUP"));
 
-  assert.ok(groupedUniverseLines.length > 0);
-  assert.equal(groupedUniverseLines.every((line) => line.includes("JOB_LOCK_GROUP=roblox-universe-api")), true);
-  assert.equal(itemCron.includes("JOB_LOCK_GROUP=roblox-universe-api"), false);
   for (const job of ["stats-new-refresh", "stats-warm-refresh", "stats-cold-refresh"]) {
     const line = universeLines.find((candidate) => candidate.includes(` ${job} `));
     assert.ok(line);
+    assert.match(line, /JOB_LOCK_GROUP=roblox-universe-refresh/);
     assert.match(line, /JOB_LOCK_WAIT_SECONDS=1800/);
   }
+  assert.equal(itemCron.includes("JOB_LOCK_GROUP=roblox-universe-refresh"), false);
+  assert.equal(
+    universeLines
+      .filter((line) => line.includes("JOB_LOCK_GROUP=roblox-universe-refresh"))
+      .every((line) => / stats-(new|warm|cold)-refresh /.test(line)),
+    true
+  );
+
+  const priorityDiscoveryLine = universeLines.find((line) => line.includes(" stats-discovery-priority "));
+  assert.ok(priorityDiscoveryLine);
+  assert.match(priorityDiscoveryLine, /JOB_LOCK_GROUP=roblox-universe-discovery/);
+  assert.match(priorityDiscoveryLine, /--max-pages 1/);
+  assert.match(priorityDiscoveryLine, /--devices computer/);
+  assert.match(priorityDiscoveryLine, /--countries us,br,ph/);
+
+  for (const disabledJob of [
+    "stats-discovery ",
+    "stats-discovery-search ",
+    "stats-discovery-creators ",
+    "stats-deep-enrichment "
+  ]) {
+    assert.equal(universeLines.some((line) => line.includes(` ${disabledJob}`)), false);
+  }
+
+  const newLine = universeLines.find((line) => line.includes(" stats-new-refresh "));
+  assert.ok(newLine);
+  assert.doesNotMatch(newLine, /enrich:universes/);
   const warmLine = universeLines.find((line) => line.includes(" stats-warm-refresh "));
   assert.ok(warmLine);
   assert.match(warmLine, /^32 \*\/6 \* \* \*/);
+});
+
+test("the COLD schedule has full-day capacity above the tracked population", () => {
+  const cron = readFileSync(new URL("../../ops/vps-universe-stats.crontab", import.meta.url), "utf8");
+  const coldLine = cron
+    .split("\n")
+    .find((line) => line && !line.startsWith("#") && line.includes(" stats-cold-refresh "));
+  assert.ok(coldLine);
+  assert.match(coldLine, /^47 \* \* \* \*/);
+  const limit = Number(coldLine.match(/stats:refresh:cold -- --limit (\d+)/)?.[1] ?? 0);
+  const dailyCapacity = 24 * limit;
+  assert.equal(limit, 5_000);
+  assert.ok(dailyCapacity >= 120_000, `expected at least 120K COLD rows/day, got ${dailyCapacity}`);
+});
+
+test("the scheduled universe audit is strict and uses one health RPC", () => {
+  const cron = readFileSync(new URL("../../ops/vps-universe-stats.crontab", import.meta.url), "utf8");
+  const audit = readFileSync(new URL("../audit-universe-stats-workflow.ts", import.meta.url), "utf8");
+  const migration = readFileSync(
+    new URL("../../../supabase/migrations/20260920000006_add_universe_pipeline_health_rpc.sql", import.meta.url),
+    "utf8"
+  );
+
+  assert.match(cron, /stats-audit "npm run stats:audit -- --strict"/);
+  assert.match(audit, /rpc\("get_roblox_universe_pipeline_health"\)/);
+  assert.match(audit, /public_playing_coverage/);
+  assert.match(audit, /cold_refresh_starts_6h/);
+  assert.match(audit, /if \(STRICT && failures\.length\) process\.exitCode = 1/);
+  assert.match(migration, /create or replace function public\.get_roblox_universe_pipeline_health\(\)/);
+  assert.match(migration, /last_playing_refreshed_at >= now\(\) - interval '24 hours'/);
+  assert.match(migration, /started_at >= now\(\) - interval '6 hours'/);
+  assert.match(migration, /grant execute .* to service_role/);
+});
+
+test("broad search discovery is bounded and rate-limit circuit broken by default", () => {
+  const search = readFileSync(new URL("../search-roblox-universes.ts", import.meta.url), "utf8");
+
+  assert.match(search, /ROBLOX_SEARCH_QUERY_LIMIT", 24/);
+  assert.match(search, /ROBLOX_SEARCH_MAX_PAGES", 1/);
+  assert.match(search, /ROBLOX_SEARCH_MAX_RUNTIME_SECONDS", 600/);
+  assert.match(search, /ROBLOX_SEARCH_MAX_CONSECUTIVE_RATE_LIMITS/);
+  assert.match(search, /stoppedReason = "consecutive_rate_limits"/);
+  assert.match(search, /dailyRotationOffset/);
 });
 
 test("VPS runner uses the internal Supabase network and fails closed when it is absent", () => {

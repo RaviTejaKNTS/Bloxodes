@@ -20,13 +20,18 @@ const OMNI_SEARCH_API = "https://apis.roblox.com/search-api/omni-search";
 const REQUEST_OPTIONS: FetchJsonOptions = {
   userAgent: "BloxodesUniverseSearchDiscovery/1.0",
   requestIntervalMs: readPositiveNumber("ROBLOX_SEARCH_REQUEST_INTERVAL_MS", 1200),
-  retryLimit: readPositiveNumber("ROBLOX_SEARCH_RETRY_LIMIT", 5),
+  retryLimit: readPositiveNumber("ROBLOX_SEARCH_RETRY_LIMIT", 1),
   retryBaseDelayMs: readPositiveNumber("ROBLOX_SEARCH_RETRY_BASE_DELAY_MS", 4000),
-  retryMaxDelayMs: readPositiveNumber("ROBLOX_SEARCH_RETRY_MAX_DELAY_MS", 90000)
+  retryMaxDelayMs: readPositiveNumber("ROBLOX_SEARCH_RETRY_MAX_DELAY_MS", 15000)
 };
 
-const DEFAULT_MAX_PAGES = readPositiveNumber("ROBLOX_SEARCH_MAX_PAGES", 2);
-const DEFAULT_LIMIT = readPositiveNumber("ROBLOX_SEARCH_QUERY_LIMIT", 0);
+const DEFAULT_MAX_PAGES = readPositiveNumber("ROBLOX_SEARCH_MAX_PAGES", 1);
+const DEFAULT_LIMIT = readPositiveNumber("ROBLOX_SEARCH_QUERY_LIMIT", 24);
+const DEFAULT_MAX_RUNTIME_SECONDS = readPositiveNumber("ROBLOX_SEARCH_MAX_RUNTIME_SECONDS", 600);
+const DEFAULT_MAX_CONSECUTIVE_RATE_LIMITS = readPositiveNumber(
+  "ROBLOX_SEARCH_MAX_CONSECUTIVE_RATE_LIMITS",
+  3
+);
 
 const SEED_TERMS = [
   "anime",
@@ -72,6 +77,8 @@ type Options = {
   limit: number;
   offset: number;
   maxPages: number;
+  maxRuntimeSeconds: number;
+  maxConsecutiveRateLimits: number;
   dryRun: boolean;
 };
 
@@ -84,13 +91,28 @@ function normalizeQuery(value: string) {
   return value.trim().replace(/\s+/g, " ");
 }
 
+function dailyRotationOffset(queryCount: number, limit: number, now = new Date()) {
+  if (queryCount <= 0 || limit <= 0) return 0;
+  const utcDay = Math.floor(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) / 86_400_000);
+  return (utcDay * limit) % queryCount;
+}
+
 function parseArgs(): Options {
   const args = process.argv.slice(2);
+  let offsetWasExplicit = false;
   const options: Options = {
     queries: [],
     limit: Number.isFinite(DEFAULT_LIMIT) && DEFAULT_LIMIT > 0 ? DEFAULT_LIMIT : 0,
     offset: 0,
     maxPages: Number.isFinite(DEFAULT_MAX_PAGES) && DEFAULT_MAX_PAGES > 0 ? DEFAULT_MAX_PAGES : 2,
+    maxRuntimeSeconds:
+      Number.isFinite(DEFAULT_MAX_RUNTIME_SECONDS) && DEFAULT_MAX_RUNTIME_SECONDS > 0
+        ? DEFAULT_MAX_RUNTIME_SECONDS
+        : 600,
+    maxConsecutiveRateLimits:
+      Number.isFinite(DEFAULT_MAX_CONSECUTIVE_RATE_LIMITS) && DEFAULT_MAX_CONSECUTIVE_RATE_LIMITS > 0
+        ? DEFAULT_MAX_CONSECUTIVE_RATE_LIMITS
+        : 3,
     dryRun: false
   };
 
@@ -111,9 +133,16 @@ function parseArgs(): Options {
       i += 1;
     } else if (arg === "--offset") {
       options.offset = readCliNonNegativeInteger(args[i + 1], "offset");
+      offsetWasExplicit = true;
       i += 1;
     } else if (arg === "--max-pages") {
       options.maxPages = readCliPositiveInteger(args[i + 1], "max-pages");
+      i += 1;
+    } else if (arg === "--max-runtime-seconds") {
+      options.maxRuntimeSeconds = readCliPositiveInteger(args[i + 1], "max-runtime-seconds");
+      i += 1;
+    } else if (arg === "--max-consecutive-rate-limits") {
+      options.maxConsecutiveRateLimits = readCliPositiveInteger(args[i + 1], "max-consecutive-rate-limits");
       i += 1;
     } else if (arg === "--dry-run") {
       options.dryRun = true;
@@ -125,10 +154,15 @@ function parseArgs(): Options {
     }
   }
 
-  const queries = options.queries.length ? options.queries : buildDefaultQueries();
+  const usesDefaultQueries = options.queries.length === 0;
+  const queries = usesDefaultQueries ? buildDefaultQueries() : options.queries;
   const uniqueQueries = Array.from(new Set(queries.map(normalizeQuery).filter(Boolean)));
-  const offsetQueries = uniqueQueries.slice(options.offset);
-  options.queries = options.limit > 0 ? offsetQueries.slice(0, options.limit) : offsetQueries;
+  if (usesDefaultQueries && !offsetWasExplicit) {
+    options.offset = dailyRotationOffset(uniqueQueries.length, options.limit);
+  }
+  const normalizedOffset = uniqueQueries.length ? options.offset % uniqueQueries.length : 0;
+  const rotatedQueries = [...uniqueQueries.slice(normalizedOffset), ...uniqueQueries.slice(0, normalizedOffset)];
+  options.queries = options.limit > 0 ? rotatedQueries.slice(0, options.limit) : rotatedQueries;
   return options;
 }
 
@@ -154,9 +188,13 @@ rows into roblox_universes as NEW. Existing universe rows are not overwritten.
 Options:
   --query <text>       Search one query. Repeatable.
   --queries <csv>      Comma-separated search queries.
-  -l, --limit <n>      Limit query count after offset. 0 means all. Default ${DEFAULT_LIMIT}.
-  --offset <n>         Skip the first n default queries.
+  -l, --limit <n>      Limit query count after offset. 0 explicitly means all. Default ${DEFAULT_LIMIT}.
+  --offset <n>         Start at this default-query offset. Defaults to a daily rotation.
   --max-pages <n>      Search result pages per query. Default ${DEFAULT_MAX_PAGES}.
+  --max-runtime-seconds <n>
+                       Stop cleanly before starting another query after this wall time. Default ${DEFAULT_MAX_RUNTIME_SECONDS}.
+  --max-consecutive-rate-limits <n>
+                       Stop after this many consecutive 429 query failures. Default ${DEFAULT_MAX_CONSECUTIVE_RATE_LIMITS}.
   --dry-run            Fetch and report without inserting rows.
   -h, --help           Show this help text.
 `);
@@ -287,6 +325,7 @@ async function fetchSearchCandidates(query: string, maxPages: number) {
 
 async function main() {
   const options = parseArgs();
+  const startedAtMs = Date.now();
   const run = await startStatsJobRun({
     jobName: "discover_universes_search",
     metadata: {
@@ -294,6 +333,8 @@ async function main() {
       limit: options.limit,
       offset: options.offset,
       max_pages: options.maxPages,
+      max_runtime_seconds: options.maxRuntimeSeconds,
+      max_consecutive_rate_limits: options.maxConsecutiveRateLimits,
       dry_run: options.dryRun
     }
   });
@@ -310,12 +351,19 @@ async function main() {
   let existing = 0;
   let insertable = 0;
   let inserted = 0;
+  let consecutiveRateLimits = 0;
+  let stoppedReason: string | null = null;
   console.log(
     `Starting Roblox search discovery: ${options.queries.length} queries, max pages ${options.maxPages}, dryRun=${options.dryRun}`
   );
 
   try {
     for (const [index, query] of options.queries.entries()) {
+      if (Date.now() - startedAtMs >= options.maxRuntimeSeconds * 1000) {
+        stoppedReason = "max_runtime_reached";
+        console.warn(`Stopping search discovery after ${options.maxRuntimeSeconds}s runtime budget.`);
+        break;
+      }
       try {
         const results = await fetchSearchCandidates(query, options.maxPages);
         const result = await insertNewUniverseCandidates({
@@ -329,6 +377,7 @@ async function main() {
         existing += result.existing;
         insertable += result.insertable;
         inserted += result.inserted;
+        consecutiveRateLimits = 0;
         console.log(
           ` • ${index + 1}/${options.queries.length} "${query}": ${result.candidates} candidates, ${result.inserted}/${result.insertable} inserted`
         );
@@ -336,11 +385,19 @@ async function main() {
         const message = error instanceof Error ? error.message : String(error);
         failedQueries.push({ query, error: message });
         console.warn(` • ${index + 1}/${options.queries.length} "${query}": skipped after error: ${message}`);
+        consecutiveRateLimits = /\(429\)/.test(message) ? consecutiveRateLimits + 1 : 0;
+        if (consecutiveRateLimits >= options.maxConsecutiveRateLimits) {
+          stoppedReason = "consecutive_rate_limits";
+          console.warn(
+            `Stopping search discovery after ${consecutiveRateLimits} consecutive Roblox 429 responses.`
+          );
+          break;
+        }
       }
     }
 
     await finishStatsJobRun(run, {
-      status: failedQueries.length ? "partial" : "success",
+      status: failedQueries.length || stoppedReason ? "partial" : "success",
       rowsClaimed: options.queries.length,
       rowsSucceeded: inserted,
       rowsFailed: failedQueries.length,
@@ -349,6 +406,7 @@ async function main() {
         existing,
         insertable,
         inserted,
+        stopped_reason: stoppedReason,
         failed_queries: failedQueries
       }
     });
