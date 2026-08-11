@@ -2,7 +2,7 @@
   "meta": {
     "title": "Roblox Dictionary: Slang, Acronyms & Terms",
     "updatedAt": "2026-08-11",
-    "itemCount": 198,
+    "itemCount": 251,
     "sources": [
       {
         "label": "RobloxDen Dictionary",
@@ -65,7 +65,9 @@
       "robloxDenExpected": 55,
       "robloxDenCovered": 55,
       "auditedAt": "2026-08-11",
-      "scopeNote": "All terms linked from the current RobloxDen dictionary index are represented as a card or a deduplicated alias, then expanded with official Roblox and established community sources."
+      "scopeNote": "All terms in the current RobloxDen and official Roblox dictionaries are represented as cards or deduplicated aliases, then expanded with official creator documentation and established community sources.",
+      "officialRobloxDictionaryExpected": 67,
+      "officialRobloxDictionaryCovered": 67
     }
   },
   "items": [
@@ -240,6 +242,24 @@
       "lastVerifiedAt": "2026-08-11"
     },
     {
+      "term": "Additional Terms",
+      "slug": "additional-terms",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Extra conditions that apply on top of Roblox's main User Terms, Creator Terms, Community Standards, privacy materials, and regional rules when you use certain features or products.",
+      "example": "A limited-time event may list Additional Terms that players must accept before joining.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 9,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
       "term": "Admin",
       "slug": "admin",
       "aliases": [
@@ -255,10 +275,27 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://robloxden.com/dictionary",
+        "https://robloxden.com/dictionary"
+      ],
+      "sortOrder": 10,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Affiliated Parties",
+      "slug": "affiliated-parties",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Roblox plus the people and companies linked to it, including officers, directors, employees, consultants, affiliates, investors, partners, subsidiaries, and agents named together in the Terms.",
+      "example": "Liability sections often protect Roblox and its Affiliated Parties from certain claims.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
       ],
-      "sortOrder": 9,
+      "sortOrder": 11,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -280,7 +317,7 @@
         "https://robloxden.com/dictionary/afk",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 10,
+      "sortOrder": 12,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -302,7 +339,7 @@
         "https://robloxden.com/dictionary/alias"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 11
+      "sortOrder": 13
     },
     {
       "term": "ALR",
@@ -323,7 +360,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 12
+      "sortOrder": 14
     },
     {
       "term": "Alt",
@@ -344,7 +381,25 @@
         "https://robloxden.com/dictionary/alt",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 13,
+      "sortOrder": 15,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Ancillary Use",
+      "slug": "ancillary-use",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A right a creator grants Roblox to use that creator's UGC when marketing or advertising Roblox and its services.",
+      "example": "Roblox may rely on Ancillary Use rights when featuring creator content in promotional material.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 16,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -365,7 +420,7 @@
         "https://create.roblox.com/docs/projects/assets"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 14
+      "sortOrder": 17
     },
     {
       "term": "Annually",
@@ -386,7 +441,7 @@
         "https://robloxden.com/dictionary/annually"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 15
+      "sortOrder": 18
     },
     {
       "term": "AOS",
@@ -407,7 +462,64 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 16
+      "sortOrder": 19
+    },
+    {
+      "term": "App",
+      "slug": "app",
+      "aliases": [
+        "Roblox App",
+        "mobile app"
+      ],
+      "expansion": null,
+      "definition": "The official Roblox mobile application that players install on phones and tablets to access experiences, avatars, chat, and account features.",
+      "example": "A player opened the App on their phone to join an experience.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 20,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Appeal",
+      "slug": "appeal",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A formal request asking Roblox to recheck a suspension, account termination, or removal of UGC or Virtual Content that followed a Terms violation decision.",
+      "example": "After a moderation ban, you submit an Appeal explaining why the action was incorrect.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 21,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Arbitration Agreement",
+      "slug": "arbitration-agreement",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A U.S. User Terms clause that sends unresolved disputes to binding individual arbitration and waives jury trials and class-action style proceedings.",
+      "example": "The Arbitration Agreement section explains how U.S. users resolve most legal disputes with Roblox.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 22,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Asset",
@@ -428,7 +540,7 @@
         "https://create.roblox.com/docs/marketplace",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 17,
+      "sortOrder": 23,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -450,7 +562,7 @@
         "https://create.roblox.com/docs/projects/assets"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 18
+      "sortOrder": 24
     },
     {
       "term": "Asset Manager",
@@ -470,7 +582,7 @@
         "https://create.roblox.com/docs/projects/assets/manager"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 19
+      "sortOrder": 25
     },
     {
       "term": "Audio",
@@ -491,7 +603,7 @@
         "https://create.roblox.com/docs/projects/assets"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 20
+      "sortOrder": 26
     },
     {
       "term": "Aura",
@@ -512,7 +624,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 21,
+      "sortOrder": 27,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -534,7 +646,7 @@
         "https://create.roblox.com/docs/avatar",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 22,
+      "sortOrder": 28,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -556,7 +668,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 23,
+      "sortOrder": 29,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -575,10 +687,9 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 24,
+      "sortOrder": 30,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -598,10 +709,9 @@
       "robloxSpecific": false,
       "safetyNote": "A ban is a safety and rules action. Do not try to dodge it with extra accounts, and never trust anyone who claims they can remove a ban for payment or free items.",
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 25,
+      "sortOrder": 31,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -625,7 +735,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 26,
+      "sortOrder": 32,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -645,10 +755,9 @@
       "safetyNote": null,
       "sourceUrls": [
         "https://robloxden.com/dictionary/beta",
-        "https://create.roblox.com/docs/what-is-roblox",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 27,
+      "sortOrder": 33,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -671,7 +780,7 @@
         "https://create.roblox.com/docs/characters"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 28
+      "sortOrder": 34
     },
     {
       "term": "Bloxxed",
@@ -692,7 +801,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 29,
+      "sortOrder": 35,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -714,7 +823,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 30
+      "sortOrder": 36
     },
     {
       "term": "BRB",
@@ -731,10 +840,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://robloxden.com/dictionary/brb",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://robloxden.com/dictionary/brb"
       ],
-      "sortOrder": 31,
+      "sortOrder": 37,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -756,7 +864,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 32,
+      "sortOrder": 38,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -778,7 +886,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 33,
+      "sortOrder": 39,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -800,7 +908,7 @@
         "https://create.roblox.com/docs/marketplace",
         "https://create.roblox.com/docs/avatar"
       ],
-      "sortOrder": 34,
+      "sortOrder": 40,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -819,10 +927,9 @@
       "robloxSpecific": true,
       "safetyNote": "Bypass talk is not allowed and can lead to reports or bans. If you see someone trying to hide unsafe messages, leave the chat and report the behavior.",
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 35,
+      "sortOrder": 41,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -844,7 +951,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 36,
+      "sortOrder": 42,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -866,7 +973,27 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 37,
+      "sortOrder": 43,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Cash Out",
+      "slug": "cash-out",
+      "aliases": [
+        "cashout"
+      ],
+      "expansion": null,
+      "definition": "Converting eligible Earned Robux into U.S. dollars through DevEx, using the program's rules and the exchange rate in effect at payout.",
+      "example": "Once approved for DevEx, a developer can Cash Out qualifying Robux each payout window.",
+      "category": "creator-and-studio",
+      "termType": "billing term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 44,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -885,9 +1012,10 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://en.help.roblox.com/hc/en-us/articles/203313120-Safety-Features-Chat-Privacy-Filtering",
+        "https://create.roblox.com/docs/ui/text-filtering"
       ],
-      "sortOrder": 38,
+      "sortOrder": 45,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -909,7 +1037,45 @@
         "https://robloxden.com/dictionary/chile"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 39
+      "sortOrder": 46
+    },
+    {
+      "term": "China Publisher",
+      "slug": "china-publisher",
+      "aliases": [
+        "Shenzhen Tencent Computer Systems Co., Ltd."
+      ],
+      "expansion": null,
+      "definition": "Shenzhen Tencent Computer Systems Co., Ltd., the company named as publisher and operator partner for Roblox-related services in China.",
+      "example": "Regional notices may name the China Publisher when describing the PRC version of the platform.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 47,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Classic Avatar",
+      "slug": "classic-avatar",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Roblox-made avatar body models that creators may license and use on the platform under the Creator Terms when building experiences or content.",
+      "example": "Studio tutorials often start from a Classic Avatar before you customize clothing and proportions.",
+      "category": "avatars-and-marketplace",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 48,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Classic clothing",
@@ -927,10 +1093,11 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/avatar",
         "https://create.roblox.com/docs/marketplace"
       ],
-      "sortOrder": 40,
+      "sortOrder": 49,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -942,8 +1109,8 @@
         "groups"
       ],
       "expansion": null,
-      "definition": "A Roblox feature for shared clubs and creator teams. Community is the current name that replaced Groups in Roblox naming.",
-      "example": "She joined a Community to play events with friends.",
+      "definition": "A Roblox space creators can own and manage to connect with audiences, share updates, showcase experiences, and host discussions. Communities replaced the public Groups name.",
+      "example": "The creator posted an experience update in the Community for its players.",
       "category": "chat-and-social",
       "termType": "platform term",
       "status": "current",
@@ -953,7 +1120,7 @@
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 41,
+      "sortOrder": 50,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -975,7 +1142,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 42,
+      "sortOrder": 51,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -997,7 +1164,7 @@
       "sourceUrls": [
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 43,
+      "sortOrder": 52,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1016,10 +1183,10 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/what-is-roblox",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 44,
+      "sortOrder": 53,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1040,7 +1207,25 @@
         "https://create.roblox.com/docs/creator-dashboard"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 45
+      "sortOrder": 54
+    },
+    {
+      "term": "Creator Rewards",
+      "slug": "creator-rewards",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A Roblox bonus program that pays eligible experience creators for daily player engagement and growth of their audience under program rules.",
+      "example": "Strong daily visits can qualify an experience for Creator Rewards payouts.",
+      "category": "creator-and-studio",
+      "termType": "billing term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 55,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Creator Store",
@@ -1061,7 +1246,25 @@
         "https://create.roblox.com/docs/marketplace",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 46,
+      "sortOrder": 56,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Creator Terms",
+      "slug": "creator-terms",
+      "aliases": [],
+      "expansion": null,
+      "definition": "The contract rules for creators using Studio and creating, publishing, monetizing, and managing Virtual Content, music, and related creator activity on Roblox.",
+      "example": "Before enabling paid access, review the Creator Terms on monetization and UGC rights.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 57,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1082,7 +1285,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 47
+      "sortOrder": 58
     },
     {
       "term": "DataStore",
@@ -1103,7 +1306,7 @@
         "https://create.roblox.com/docs/cloud-services/data-stores"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 48
+      "sortOrder": 59
     },
     {
       "term": "Dec",
@@ -1123,7 +1326,7 @@
         "https://robloxden.com/dictionary/dec"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 49
+      "sortOrder": 60
     },
     {
       "term": "Decal ID",
@@ -1144,7 +1347,7 @@
         "https://create.roblox.com/docs/marketplace",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 50,
+      "sortOrder": 61,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1165,7 +1368,7 @@
         "https://create.roblox.com/docs/what-is-roblox",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 51,
+      "sortOrder": 62,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1184,10 +1387,10 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/what-is-roblox",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 52,
+      "sortOrder": 63,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1209,28 +1412,70 @@
         "https://create.roblox.com/docs/production/monetization/developer-products"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 53
+      "sortOrder": 64
     },
     {
       "term": "DevEx",
       "slug": "devex",
       "aliases": [
         "Developer Exchange",
-        "dev exchange"
+        "dev exchange",
+        "DevEx Program",
+        "Developer Exchange Program"
       ],
       "expansion": "Developer Exchange",
-      "definition": "Roblox program that lets eligible creators convert earned Robux into real-world currency under platform rules.",
-      "example": "After meeting the requirements, the studio applied for DevEx.",
+      "definition": "Roblox's Developer Exchange Program, which lets eligible creators Cash Out Earned Robux for real-world currency under the DevEx Terms.",
+      "example": "The developer reviewed the DevEx requirements before requesting a Cash Out.",
       "category": "creator-and-studio",
       "termType": "acronym",
       "status": "current",
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 65,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "DevEx Eligibility Requirements",
+      "slug": "devex-eligibility-requirements",
+      "aliases": [
+        "Developer Exchange Eligibility Requirements"
+      ],
+      "expansion": null,
+      "definition": "The conditions a creator must satisfy before exchanging Earned Robux for cash through the Developer Exchange program.",
+      "example": "A creator checks the DevEx Eligibility Requirements before requesting a Cash Out.",
+      "category": "creator-and-studio",
+      "termType": "billing term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
       ],
-      "sortOrder": 54,
+      "sortOrder": 66,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "DevEx Terms",
+      "slug": "devex-terms",
+      "aliases": [
+        "Developer Exchange Terms"
+      ],
+      "expansion": null,
+      "definition": "The full set of rules, policies, rates, requirements, and limits that control how Developer Exchange cash-outs work.",
+      "example": "DevEx Terms list which Robux counts and what documentation creators must provide.",
+      "category": "creator-and-studio",
+      "termType": "billing term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 67,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1252,7 +1497,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 55
+      "sortOrder": 68
     },
     {
       "term": "Display name",
@@ -1272,7 +1517,25 @@
         "https://en.help.roblox.com/hc/en-us/articles/203313130-Changing-Your-Display-Name"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 56
+      "sortOrder": 69
+    },
+    {
+      "term": "Dispute",
+      "slug": "dispute",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Any claim, controversy, or disagreement that relates to the Roblox Terms or your use of the platform.",
+      "example": "Billing problems and account actions can become a Dispute under the User Terms.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 70,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "DM",
@@ -1291,10 +1554,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 57,
+      "sortOrder": 71,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1317,7 +1579,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://create.roblox.com/docs/avatar"
       ],
-      "sortOrder": 58,
+      "sortOrder": 72,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1338,7 +1600,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 59
+      "sortOrder": 73
     },
     {
       "term": "e.e",
@@ -1359,7 +1621,25 @@
         "https://robloxden.com/dictionary/e-e"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 60
+      "sortOrder": 74
+    },
+    {
+      "term": "Earned Robux",
+      "slug": "earned-robux",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Robux a creator legitimately earns from approved monetization of their content, not ordinary purchases, membership grants, or trading profits from reselling others' items.",
+      "example": "Game passes sales that follow the rules count as Earned Robux for DevEx.",
+      "category": "creator-and-studio",
+      "termType": "billing term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 75,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Emote",
@@ -1377,10 +1657,9 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/avatar",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://create.roblox.com/docs/avatar"
       ],
-      "sortOrder": 61,
+      "sortOrder": 76,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1401,10 +1680,28 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 77,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Experience Rules",
+      "slug": "experience-rules",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Custom behavior rules set and enforced by an experience's creator for players inside that specific game, separate from platform-wide Community Standards.",
+      "example": "The lobby posts Experience Rules banning griefing and requiring respectful team chat.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
       ],
-      "sortOrder": 62,
+      "sortOrder": 78,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1423,10 +1720,9 @@
       "robloxSpecific": true,
       "safetyNote": "If you see unfair cheating behavior, leave the server if needed and report it through official Roblox tools. Do not try to copy or learn those methods.",
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 63,
+      "sortOrder": 79,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1447,7 +1743,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 64
+      "sortOrder": 80
     },
     {
       "term": "F2P",
@@ -1468,7 +1764,25 @@
         "https://robloxden.com/dictionary",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 65,
+      "sortOrder": 81,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "FAA",
+      "slug": "faa",
+      "aliases": [],
+      "expansion": "Federal Arbitration Act",
+      "definition": "The U.S. Federal Arbitration Act, the federal statute that governs how the Arbitration Agreement operates for covered disputes.",
+      "example": "The User Terms cite the FAA when describing how arbitration awards are enforced.",
+      "category": "accounts-and-safety",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 82,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1489,7 +1803,25 @@
         "https://robloxden.com/dictionary/fe"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 66
+      "sortOrder": 83
+    },
+    {
+      "term": "FedArb",
+      "slug": "fedarb",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A national alternative-dispute-resolution organization that Roblox designates to run arbitration cases under its mandatory informal dispute process.",
+      "example": "If MIDR fails, the Terms may send the case to FedArb for arbitration.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 84,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "FFA",
@@ -1510,7 +1842,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 67,
+      "sortOrder": 85,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1529,7 +1861,7 @@
         "https://robloxden.com/dictionary/ffs"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 68
+      "sortOrder": 86
     },
     {
       "term": "Flex",
@@ -1549,7 +1881,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 69,
+      "sortOrder": 87,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1567,10 +1899,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 70,
+      "sortOrder": 88,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1591,7 +1922,7 @@
       "sourceUrls": [
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 71,
+      "sortOrder": 89,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1610,10 +1941,9 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 72,
+      "sortOrder": 90,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1631,10 +1961,9 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://roblox.fandom.com/wiki/Roblox_slang",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 73,
+      "sortOrder": 91,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1656,7 +1985,7 @@
         "https://robloxden.com/dictionary/gfx",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 74,
+      "sortOrder": 92,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1674,10 +2003,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://robloxden.com/dictionary/gg",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://robloxden.com/dictionary/gg"
       ],
-      "sortOrder": 75,
+      "sortOrder": 93,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1698,7 +2026,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 76,
+      "sortOrder": 94,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1710,18 +2038,39 @@
         "communities"
       ],
       "expansion": null,
-      "definition": "The older Roblox label for a shared member space with a wall, roles, and related experiences. Roblox now calls these Communities.",
-      "example": "Their old Group page is now listed under Communities with the same members and ranks.",
-      "category": "classic-roblox",
+      "definition": "The former public name for a Community. In Roblox's Creator Economic Terms, Group also means creators joined to release an Experience or other Virtual Content.",
+      "example": "A creator team can publish through a Group while players see its public space as a Community.",
+      "category": "creator-and-studio",
       "termType": "platform term",
-      "status": "legacy",
+      "status": "current",
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 77,
+      "sortOrder": 95,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Guardian",
+      "slug": "guardian",
+      "aliases": [
+        "parent",
+        "legal guardian"
+      ],
+      "expansion": null,
+      "definition": "A parent or legal guardian responsible for a minor who uses Roblox and may need to consent to certain account actions.",
+      "example": "A Guardian can help a child set privacy controls and recover account access.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 96,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1743,7 +2092,7 @@
         "https://create.roblox.com/docs/ui"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 78
+      "sortOrder": 97
     },
     {
       "term": "HR",
@@ -1764,7 +2113,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 79
+      "sortOrder": 98
     },
     {
       "term": "Humanoid",
@@ -1784,7 +2133,7 @@
         "https://create.roblox.com/docs/reference/engine/classes/Humanoid"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 80
+      "sortOrder": 99
     },
     {
       "term": "IC",
@@ -1804,7 +2153,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 81,
+      "sortOrder": 100,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1823,10 +2172,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 82,
+      "sortOrder": 101,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1847,7 +2195,25 @@
         "https://create.roblox.com/docs/projects/assets"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 83
+      "sortOrder": 102
+    },
+    {
+      "term": "In-Experience Items",
+      "slug": "in-experience-items",
+      "aliases": [],
+      "expansion": null,
+      "definition": "User-generated content that players obtain and use only inside a specific experience, such as game passes or special abilities.",
+      "example": "Buying a speed boost pass unlocks In-Experience Items that work only in that game.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 103,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Instance",
@@ -1867,7 +2233,7 @@
         "https://create.roblox.com/docs/reference/engine/classes/Instance"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 84
+      "sortOrder": 104
     },
     {
       "term": "L",
@@ -1888,7 +2254,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 85,
+      "sortOrder": 105,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1910,7 +2276,7 @@
         "https://create.roblox.com/docs/avatar",
         "https://create.roblox.com/docs/marketplace"
       ],
-      "sortOrder": 86,
+      "sortOrder": 106,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1929,7 +2295,25 @@
         "https://robloxden.com/dictionary/lel"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 87
+      "sortOrder": 107
+    },
+    {
+      "term": "Licensed Music",
+      "slug": "licensed-music",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Audio recordings, compositions, or sound effects that Roblox licenses from third parties so creators can use them inside experiences on the platform.",
+      "example": "A creator checks the license before adding Licensed Music to an experience.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 108,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Limited",
@@ -1947,10 +2331,9 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/marketplace",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://create.roblox.com/docs/marketplace"
       ],
-      "sortOrder": 88,
+      "sortOrder": 109,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1975,7 +2358,7 @@
         "https://create.roblox.com/docs/marketplace",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 89,
+      "sortOrder": 110,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -1997,7 +2380,7 @@
         "https://robloxden.com/dictionary/lmad",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 90,
+      "sortOrder": 111,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2016,7 +2399,7 @@
         "https://robloxden.com/dictionary/lmao"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 91
+      "sortOrder": 112
     },
     {
       "term": "LocalScript",
@@ -2037,7 +2420,7 @@
         "https://create.roblox.com/docs/reference/engine/classes/LocalScript"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 92
+      "sortOrder": 113
     },
     {
       "term": "LOL",
@@ -2054,10 +2437,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 93,
+      "sortOrder": 114,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2075,10 +2457,47 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/what-is-roblox",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 115,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Luobu Studio",
+      "slug": "luobu-studio",
+      "aliases": [],
+      "expansion": null,
+      "definition": "The PRC-operated edition of Roblox Studio used to build UGC for Roblox services and the Luobulesi Game.",
+      "example": "Creators in China publish experiences with Luobu Studio for the local platform version.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
       ],
-      "sortOrder": 94,
+      "sortOrder": 116,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Luobulesi Game",
+      "slug": "luobulesi-game",
+      "aliases": [
+        "Luobulesi"
+      ],
+      "expansion": null,
+      "definition": "The Roblox platform version operated for players in the People's Republic of China under local publishing arrangements.",
+      "example": "Accounts on the Luobulesi Game follow regional rules set for PRC users.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 117,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2099,7 +2518,7 @@
         "https://robloxden.com/dictionary/m8"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 95
+      "sortOrder": 118
     },
     {
       "term": "Main",
@@ -2120,7 +2539,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 96,
+      "sortOrder": 119,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2140,10 +2559,11 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/marketplace",
         "https://create.roblox.com/docs/avatar"
       ],
-      "sortOrder": 97,
+      "sortOrder": 120,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2165,7 +2585,7 @@
         "https://create.roblox.com/docs/projects/assets"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 98
+      "sortOrder": 121
     },
     {
       "term": "Meta",
@@ -2186,7 +2606,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 99,
+      "sortOrder": 122,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2207,7 +2627,43 @@
       "sourceUrls": [
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 100,
+      "sortOrder": 123,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "MIDR",
+      "slug": "midr",
+      "aliases": [],
+      "expansion": "Mandatory Informal Dispute Resolution",
+      "definition": "Mandatory Informal Dispute Resolution, the required pre-arbitration steps in the User Terms for trying to resolve a dispute with Roblox before formal arbitration.",
+      "example": "The User Terms describe MIDR as a step before covered disputes proceed to arbitration.",
+      "category": "accounts-and-safety",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 124,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Minor",
+      "slug": "minor",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A user who is under the legal age of majority in the place where they live, so extra consent and safety rules may apply.",
+      "example": "A Minor may need Guardian permission before making certain purchases or sharing data.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 125,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2229,7 +2685,7 @@
         "https://robloxden.com/dictionary/mk"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 101
+      "sortOrder": 126
     },
     {
       "term": "MLG",
@@ -2247,7 +2703,7 @@
         "https://robloxden.com/dictionary/mlg"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 102
+      "sortOrder": 127
     },
     {
       "term": "Mod",
@@ -2265,10 +2721,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 103,
+      "sortOrder": 128,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2289,7 +2744,25 @@
         "https://create.roblox.com/docs/projects/assets"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 104
+      "sortOrder": 129
+    },
+    {
+      "term": "Modified Classic Avatar",
+      "slug": "modified-classic-avatar",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A Classic Avatar that a creator has altered or customized under the Creator Terms while still using Roblox's licensed base model.",
+      "example": "A creator customized a Classic Avatar under the rules for a Modified Classic Avatar.",
+      "category": "avatars-and-marketplace",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 130,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "ModuleScript",
@@ -2310,7 +2783,7 @@
         "https://create.roblox.com/docs/reference/engine/classes/ModuleScript"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 105
+      "sortOrder": 131
     },
     {
       "term": "MR",
@@ -2332,7 +2805,25 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 106
+      "sortOrder": 132
+    },
+    {
+      "term": "Musical Works",
+      "slug": "musical-works",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Original music compositions written or owned by a creator, either alone or with collaborators, separate from third-party Licensed Music.",
+      "example": "Uploading your own song means you control the Musical Works rights in that composition.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 133,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "NBC",
@@ -2352,7 +2843,7 @@
         "https://robloxden.com/dictionary/nbc"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 107
+      "sortOrder": 134
     },
     {
       "term": "Nerf",
@@ -2373,7 +2864,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 108,
+      "sortOrder": 135,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2394,7 +2885,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 109,
+      "sortOrder": 136,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2416,7 +2907,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 110
+      "sortOrder": 137
     },
     {
       "term": "NFT",
@@ -2436,7 +2927,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 111
+      "sortOrder": 138
     },
     {
       "term": "NGF",
@@ -2456,7 +2947,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 112
+      "sortOrder": 139
     },
     {
       "term": "No cap",
@@ -2476,7 +2967,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 113,
+      "sortOrder": 140,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2495,10 +2986,9 @@
       "safetyNote": null,
       "sourceUrls": [
         "https://robloxden.com/dictionary/noob",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 114,
+      "sortOrder": 141,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2516,10 +3006,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 115,
+      "sortOrder": 142,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2537,10 +3026,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://robloxden.com/dictionary",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 116,
+      "sortOrder": 143,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2562,7 +3050,7 @@
         "https://robloxden.com/dictionary/nvm"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 117
+      "sortOrder": 144
     },
     {
       "term": "Obby",
@@ -2581,10 +3069,9 @@
       "safetyNote": null,
       "sourceUrls": [
         "https://robloxden.com/dictionary/obby",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 118,
+      "sortOrder": 145,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2605,7 +3092,7 @@
         "https://robloxden.com/dictionary/obc"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 119
+      "sortOrder": 146
     },
     {
       "term": "Obj",
@@ -2628,7 +3115,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 120
+      "sortOrder": 147
     },
     {
       "term": "ODer",
@@ -2646,10 +3133,9 @@
       "robloxSpecific": true,
       "safetyNote": "Do not share personal details, and do not move chats off Roblox. Leave or report if someone pushes for private contact.",
       "sourceUrls": [
-        "https://robloxden.com/dictionary",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 121,
+      "sortOrder": 148,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2670,7 +3156,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 122
+      "sortOrder": 149
     },
     {
       "term": "OMG",
@@ -2691,7 +3177,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 123
+      "sortOrder": 150
     },
     {
       "term": "OMQ",
@@ -2711,7 +3197,7 @@
         "https://robloxden.com/dictionary/omq"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 124
+      "sortOrder": 151
     },
     {
       "term": "OOC",
@@ -2732,7 +3218,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 125
+      "sortOrder": 152
     },
     {
       "term": "Oof",
@@ -2752,7 +3238,7 @@
         "https://robloxden.com/dictionary/oof",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 126,
+      "sortOrder": 153,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2774,7 +3260,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 127
+      "sortOrder": 154
     },
     {
       "term": "OP",
@@ -2795,7 +3281,64 @@
         "https://robloxden.com/dictionary/op",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 128,
+      "sortOrder": 155,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Other Content License",
+      "slug": "other-content-license",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A limited license from Roblox that lets creators use Other Roblox Content together with their own UGC on the platform.",
+      "example": "A creator reviews the Other Content License before using Roblox-provided content in UGC.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 156,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Other Roblox Content",
+      "slug": "other-roblox-content",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Content created by Roblox and offered to creators for use, not including Classic Avatars or Modified Classic Avatars.",
+      "example": "The Creator Terms distinguish Other Roblox Content from Classic Avatar models.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 157,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Owner",
+      "slug": "owner",
+      "aliases": [
+        "Community Owner",
+        "group owner"
+      ],
+      "expansion": null,
+      "definition": "The person or organization chosen to represent a Community, manage its registration email, and act on its behalf on Roblox.",
+      "example": "A Community notice may identify the Owner who represents it on Roblox.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 158,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2817,7 +3360,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 129,
+      "sortOrder": 159,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2838,7 +3381,7 @@
         "https://create.roblox.com/docs/projects/assets"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 130
+      "sortOrder": 160
     },
     {
       "term": "Paid Access",
@@ -2859,7 +3402,7 @@
         "https://robloxden.com/dictionary/paid-access"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 131
+      "sortOrder": 161
     },
     {
       "term": "Part",
@@ -2880,7 +3423,7 @@
         "https://create.roblox.com/docs/reference/engine/classes/BasePart"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 132
+      "sortOrder": 162
     },
     {
       "term": "Pay to lose",
@@ -2900,7 +3443,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 133
+      "sortOrder": 163
     },
     {
       "term": "Place",
@@ -2918,10 +3461,9 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/what-is-roblox",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 134,
+      "sortOrder": 164,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -2943,7 +3485,7 @@
         "https://robloxden.com/dictionary/plox"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 135
+      "sortOrder": 165
     },
     {
       "term": "Plugin",
@@ -2963,7 +3505,25 @@
         "https://create.roblox.com/docs/projects/assets/toolbox"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 136
+      "sortOrder": 166
+    },
+    {
+      "term": "PRC",
+      "slug": "prc",
+      "aliases": [],
+      "expansion": "People's Republic of China",
+      "definition": "The People's Republic of China, the region referenced for local platform versions, publishers, and related operating rules.",
+      "example": "Luobu and Luobulesi materials apply specifically to users and creators in the PRC.",
+      "category": "accounts-and-safety",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 167,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Premium",
@@ -2983,7 +3543,25 @@
       "sourceUrls": [
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
       ],
-      "sortOrder": 137,
+      "sortOrder": 168,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Privacy Policy",
+      "slug": "privacy-policy",
+      "aliases": [],
+      "expansion": null,
+      "definition": "The policy that explains what information Roblox collects, how it is protected and used, and how it fits into the User Terms.",
+      "example": "Before creating an account, review the Privacy Policy for data collection practices.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 169,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3005,10 +3583,27 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 138,
+      "sortOrder": 170,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "PRO",
+      "slug": "pro",
+      "aliases": [],
+      "expansion": "Performing Rights Organization",
+      "definition": "A Performing Rights Organization that represents musical works and helps collect public-performance royalties for copyright holders.",
+      "example": "Songwriters often register compositions with a PRO so venues and platforms report usage.",
+      "category": "creator-and-studio",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 171,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3029,7 +3624,25 @@
         "https://robloxden.com/dictionary/pts"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 139
+      "sortOrder": 172
+    },
+    {
+      "term": "Publish",
+      "slug": "publish",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Releasing UGC on Roblox by creating, uploading, submitting, displaying, generating, transmitting, or otherwise making it available to others.",
+      "example": "A creator chooses Publish when making new UGC available through Roblox.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 173,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Pwned",
@@ -3050,7 +3663,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 140,
+      "sortOrder": 174,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3071,7 +3684,7 @@
         "https://robloxden.com/dictionary/qt"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 141
+      "sortOrder": 175
     },
     {
       "term": "R6",
@@ -3089,10 +3702,9 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/avatar",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://create.roblox.com/docs/avatar"
       ],
-      "sortOrder": 142,
+      "sortOrder": 176,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3114,7 +3726,25 @@
         "https://create.roblox.com/docs/avatar",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 143,
+      "sortOrder": 177,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Random Virtual Item",
+      "slug": "random-virtual-item",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A Virtual Item obtained inside an experience through a randomized acquisition system rather than a fixed, direct purchase of that exact item.",
+      "example": "Opening a mystery crate can grant a Random Virtual Item from a prize pool.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 178,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3137,7 +3767,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 144
+      "sortOrder": 179
     },
     {
       "term": "RAP",
@@ -3155,10 +3785,9 @@
       "safetyNote": null,
       "sourceUrls": [
         "https://robloxden.com/dictionary/rap",
-        "https://create.roblox.com/docs/marketplace",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://create.roblox.com/docs/marketplace"
       ],
-      "sortOrder": 145,
+      "sortOrder": 180,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3180,7 +3809,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 146,
+      "sortOrder": 181,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3202,7 +3831,7 @@
         "https://robloxden.com/dictionary/reeee"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 147
+      "sortOrder": 182
     },
     {
       "term": "RemoteEvent",
@@ -3223,7 +3852,25 @@
         "https://create.roblox.com/docs/reference/engine/classes/RemoteEvent"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 148
+      "sortOrder": 183
+    },
+    {
+      "term": "Resale",
+      "slug": "resale",
+      "aliases": [],
+      "expansion": null,
+      "definition": "When Premium or Plus members sell eligible Roblox-created Virtual Content again through Roblox marketplace tools under platform resale rules.",
+      "example": "Limited items support Resale so eligible members can list them on the marketplace.",
+      "category": "avatars-and-marketplace",
+      "termType": "billing term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 184,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Rig",
@@ -3244,7 +3891,7 @@
         "https://create.roblox.com/docs/animation/rigging"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 149
+      "sortOrder": 185
     },
     {
       "term": "RK",
@@ -3266,7 +3913,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 150
+      "sortOrder": 186
     },
     {
       "term": "RNG",
@@ -3287,7 +3934,83 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 151,
+      "sortOrder": 187,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Roblox",
+      "slug": "roblox",
+      "aliases": [
+        "Roblox Corporation"
+      ],
+      "expansion": null,
+      "definition": "Roblox Corporation and the subsidiaries identified in the Roblox Terms as the companies operating the platform and related services.",
+      "example": "The contract defines Roblox as the corporate entities that provide the Services.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 188,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Roblox IP",
+      "slug": "roblox-ip",
+      "aliases": [],
+      "expansion": "Roblox Intellectual Property",
+      "definition": "Interfaces, graphics, avatars, trademarks, data, code, software, and other platform materials owned by Roblox, plus related intellectual property rights.",
+      "example": "Copying official UI assets outside allowed tools can violate Roblox IP protections.",
+      "category": "creator-and-studio",
+      "termType": "abbreviation",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 189,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Roblox Terms",
+      "slug": "roblox-terms",
+      "aliases": [
+        "Terms"
+      ],
+      "expansion": null,
+      "definition": "The full package of rules covering User Terms, Creator Terms, Community Standards, privacy and cookie policies, regional add-ons, and Additional Terms.",
+      "example": "The Roblox Terms link the rules that apply to users and creators.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 190,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Roblox Trademark License",
+      "slug": "roblox-trademark-license",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A narrow creator license allowing Roblox trademark use only with Virtual Content or experiences hosted on Roblox, not unrestricted branding rights.",
+      "example": "The Roblox Trademark License does not let you put the logo on third-party merch.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 191,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3305,11 +4028,10 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/what-is-roblox",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 152,
+      "sortOrder": 192,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3332,7 +4054,25 @@
         "https://create.roblox.com/docs/marketplace",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 153,
+      "sortOrder": 193,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Robux Allocation",
+      "slug": "robux-allocation",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Roblox's split of Robux from a Virtual Content sale among the creator, any seller, and the platform according to current rules.",
+      "example": "Marketplace sales show a Robux Allocation that leaves a platform fee after the creator share.",
+      "category": "avatars-and-marketplace",
+      "termType": "billing term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 194,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3351,7 +4091,7 @@
         "https://robloxden.com/dictionary/rofl"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 154
+      "sortOrder": 195
     },
     {
       "term": "Role",
@@ -3372,7 +4112,7 @@
         "https://en.help.roblox.com/hc/en-us/articles/203313760-Group-Roles-Ranks-and-Permissions"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 155
+      "sortOrder": 196
     },
     {
       "term": "Roleplay",
@@ -3392,10 +4132,9 @@
       "safetyNote": null,
       "sourceUrls": [
         "https://robloxden.com/dictionary",
-        "https://roblox.fandom.com/wiki/Roblox_slang",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 156,
+      "sortOrder": 197,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3416,10 +4155,9 @@
       "sourceUrls": [
         "https://robloxden.com/dictionary/rthro",
         "https://create.roblox.com/docs/avatar",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 157,
+      "sortOrder": 198,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3440,7 +4178,7 @@
         "https://create.roblox.com/docs/reference/engine/classes/Script"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 158
+      "sortOrder": 199
     },
     {
       "term": "Selling",
@@ -3462,7 +4200,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 159,
+      "sortOrder": 200,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3484,7 +4222,7 @@
         "https://create.roblox.com/docs/projects/teleporting"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 160
+      "sortOrder": 201
     },
     {
       "term": "Server hop",
@@ -3506,7 +4244,27 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 161,
+      "sortOrder": 202,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Services",
+      "slug": "services",
+      "aliases": [
+        "Roblox Services"
+      ],
+      "expansion": null,
+      "definition": "Roblox websites, apps, Player, Studio, products, content, software, data feeds, and related offerings provided under the Roblox Terms.",
+      "example": "Studio and the mobile client are both part of the Roblox Services.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 203,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3527,7 +4285,7 @@
         "https://robloxden.com/dictionary/sfl"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 162
+      "sortOrder": 204
     },
     {
       "term": "Skid",
@@ -3547,7 +4305,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 163
+      "sortOrder": 205
     },
     {
       "term": "Slender",
@@ -3569,7 +4327,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 164,
+      "sortOrder": 206,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3588,7 +4346,7 @@
         "https://robloxden.com/dictionary/smh"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 165
+      "sortOrder": 207
     },
     {
       "term": "Smurf",
@@ -3610,7 +4368,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 166,
+      "sortOrder": 208,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3631,7 +4389,7 @@
         "https://robloxden.com/dictionary/sos"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 167
+      "sortOrder": 209
     },
     {
       "term": "Spawn",
@@ -3651,10 +4409,9 @@
       "safetyNote": null,
       "sourceUrls": [
         "https://robloxden.com/dictionary",
-        "https://roblox.fandom.com/wiki/Roblox_slang",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 168,
+      "sortOrder": 210,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3677,7 +4434,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 169,
+      "sortOrder": 211,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3698,7 +4455,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 170
+      "sortOrder": 212
     },
     {
       "term": "SSU",
@@ -3718,7 +4475,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 171
+      "sortOrder": 213
     },
     {
       "term": "Start place",
@@ -3739,7 +4496,7 @@
         "https://create.roblox.com/docs/production/publishing/publish-experiences-and-places"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 172
+      "sortOrder": 214
     },
     {
       "term": "STS",
@@ -3760,7 +4517,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 173
+      "sortOrder": 215
     },
     {
       "term": "Studio",
@@ -3778,10 +4535,28 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://create.roblox.com/docs/what-is-roblox",
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/what-is-roblox"
+      ],
+      "sortOrder": 216,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Studio License",
+      "slug": "studio-license",
+      "aliases": [],
+      "expansion": null,
+      "definition": "The limited permission Roblox grants creators to install and use Roblox Studio for building and publishing content on the platform.",
+      "example": "The Creator Terms describe the Studio License for using Roblox Studio.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
       ],
-      "sortOrder": 174,
+      "sortOrder": 217,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3802,7 +4577,7 @@
         "https://create.roblox.com/docs/production/monetization/subscriptions"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 175
+      "sortOrder": 218
     },
     {
       "term": "Sweat",
@@ -3824,7 +4599,7 @@
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 176,
+      "sortOrder": 219,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3847,7 +4622,7 @@
         "https://robloxden.com/dictionary/tags",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 177,
+      "sortOrder": 220,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3868,7 +4643,7 @@
         "https://robloxden.com/dictionary/tbc"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 178
+      "sortOrder": 221
     },
     {
       "term": "TBH",
@@ -3886,7 +4661,7 @@
         "https://robloxden.com/dictionary/tbh"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 179
+      "sortOrder": 222
     },
     {
       "term": "Team Create",
@@ -3906,7 +4681,25 @@
         "https://create.roblox.com/docs/projects/collaboration"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 180
+      "sortOrder": 223
+    },
+    {
+      "term": "Template",
+      "slug": "template",
+      "aliases": [],
+      "expansion": null,
+      "definition": "A Roblox-owned starter resource for building UGC that creators may use under the Studio License when beginning new experiences or assets.",
+      "example": "A creator can begin a project with a Template provided through Studio.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 224,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Termed",
@@ -3925,11 +4718,10 @@
       "robloxSpecific": true,
       "safetyNote": "Treat termination as a serious account status. Keep play fair and report harmful behavior through official Roblox tools.",
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 181,
+      "sortOrder": 225,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3950,7 +4742,25 @@
         "https://create.roblox.com/docs/projects/assets"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 182
+      "sortOrder": 226
+    },
+    {
+      "term": "Third-Party Services",
+      "slug": "third-party-services",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Outside content, tools, or materials offered through or alongside Roblox that Roblox does not own or control.",
+      "example": "The Terms distinguish Third-Party Services from tools and content controlled by Roblox.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 227,
+      "lastVerifiedAt": "2026-08-11"
     },
     {
       "term": "Tix",
@@ -3969,11 +4779,10 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 183,
+      "sortOrder": 228,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -3994,7 +4803,7 @@
         "https://create.roblox.com/docs/projects/assets/toolbox"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 184
+      "sortOrder": 229
     },
     {
       "term": "Top Earning",
@@ -4014,7 +4823,7 @@
         "https://robloxden.com/dictionary/top-earning"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 185
+      "sortOrder": 230
     },
     {
       "term": "Trade",
@@ -4033,11 +4842,11 @@
       "robloxSpecific": true,
       "safetyNote": "Only trade through official Roblox trade windows. Never trust chat deals that ask you to leave the platform or share your password.",
       "sourceUrls": [
-        "https://create.roblox.com/docs/marketplace",
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
+        "https://create.roblox.com/docs/marketplace",
         "https://create.roblox.com/docs/avatar"
       ],
-      "sortOrder": 186,
+      "sortOrder": 231,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4057,10 +4866,9 @@
       "safetyNote": "Do not join in. Leave, block, or report players who harass others, and keep your own chat respectful.",
       "sourceUrls": [
         "https://robloxden.com/dictionary",
-        "https://roblox.fandom.com/wiki/Roblox_slang",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 187,
+      "sortOrder": 232,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4081,10 +4889,9 @@
       "safetyNote": null,
       "sourceUrls": [
         "https://robloxden.com/dictionary/ty",
-        "https://roblox.fandom.com/wiki/Roblox_slang",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 188,
+      "sortOrder": 233,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4103,10 +4910,9 @@
       "robloxSpecific": false,
       "safetyNote": null,
       "sourceUrls": [
-        "https://robloxden.com/dictionary",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 189,
+      "sortOrder": 234,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4125,11 +4931,65 @@
       "robloxSpecific": true,
       "safetyNote": null,
       "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://create.roblox.com/docs/what-is-roblox",
-        "https://create.roblox.com/docs/marketplace",
+        "https://create.roblox.com/docs/marketplace"
+      ],
+      "sortOrder": 235,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "UGC License",
+      "slug": "ugc-license",
+      "aliases": [],
+      "expansion": "User-Generated Content License",
+      "definition": "The rights users and creators grant Roblox to host, display, and otherwise use their UGC under the User Terms and Creator Terms.",
+      "example": "Publishing an outfit grants Roblox a UGC License to show it on the marketplace.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
         "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
       ],
-      "sortOrder": 190,
+      "sortOrder": 236,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "UGC Subscription",
+      "slug": "ugc-subscription",
+      "aliases": [],
+      "expansion": "User-Generated Content Subscription",
+      "definition": "A renewable creator subscription purchased with real-world money that delivers ongoing benefits to subscribers under the creator's offer.",
+      "example": "A creator's UGC Subscription may provide continuing benefits described in its offer.",
+      "category": "creator-and-studio",
+      "termType": "billing term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 237,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "UGC with Licensed Music",
+      "slug": "ugc-with-licensed-music",
+      "aliases": [],
+      "expansion": "User-Generated Content with Licensed Music",
+      "definition": "User-generated content or experiences that synchronize Licensed Music into the experience or asset under Roblox's music licensing rules.",
+      "example": "An experience becomes UGC with Licensed Music when licensed audio is synchronized into it.",
+      "category": "creator-and-studio",
+      "termType": "creator term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 238,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4151,7 +5011,7 @@
         "https://create.roblox.com/docs/production/publishing/publish-experiences-and-places"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 191
+      "sortOrder": 239
     },
     {
       "term": "USD-bought",
@@ -4169,10 +5029,65 @@
       "robloxSpecific": true,
       "safetyNote": "Never buy or sell Roblox items for real money off the platform. Keep trades and purchases inside Roblox, ignore pressure to move chats elsewhere, and report suspicious sellers.",
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 192,
+      "sortOrder": 240,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "User",
+      "slug": "user",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Any person or organization that accesses or uses Roblox Services, whether as a player, creator, or other account holder.",
+      "example": "Every User must follow the Community Standards while playing or publishing content.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 241,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "User PII",
+      "slug": "user-pii",
+      "aliases": [
+        "PII"
+      ],
+      "expansion": "Personally Identifiable Information",
+      "definition": "Personally identifiable information that belongs to a user, such as details that can identify them as an individual.",
+      "example": "Support tickets should avoid sharing extra User PII beyond what staff need.",
+      "category": "accounts-and-safety",
+      "termType": "acronym",
+      "status": "current",
+      "robloxSpecific": false,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 242,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "User Terms",
+      "slug": "user-terms",
+      "aliases": [],
+      "expansion": null,
+      "definition": "The terms that apply to everyone using Roblox, covering accounts, purchases, trading, safety expectations, and core legal conditions.",
+      "example": "Purchase refunds are handled under the User Terms purchase and payment sections.",
+      "category": "accounts-and-safety",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 243,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4194,7 +5109,7 @@
         "https://en.help.roblox.com/hc/en-us/articles/203313130-Changing-Your-Display-Name"
       ],
       "lastVerifiedAt": "2026-08-11",
-      "sortOrder": 193
+      "sortOrder": 244
     },
     {
       "term": "VC",
@@ -4212,10 +5127,45 @@
       "robloxSpecific": true,
       "safetyNote": "Only enable voice chat with people you trust, mute or leave if talk gets unkind, and never share personal details over audio.",
       "sourceUrls": [
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary",
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 194,
+      "sortOrder": 245,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Virtual Content",
+      "slug": "virtual-content",
+      "aliases": [],
+      "expansion": null,
+      "definition": "All Roblox-created content and UGC that users can acquire, including Virtual Items and In-Experience Items across the platform.",
+      "example": "Clothing, accessories, and game passes all fall under Virtual Content in the Terms.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 246,
+      "lastVerifiedAt": "2026-08-11"
+    },
+    {
+      "term": "Virtual Items",
+      "slug": "virtual-items",
+      "aliases": [],
+      "expansion": null,
+      "definition": "Roblox-created or user-generated digital goods—such as avatar clothing and accessories—that users can acquire for use on avatars.",
+      "example": "A new jacket listed on the marketplace is a Virtual Item for your avatar.",
+      "category": "avatars-and-marketplace",
+      "termType": "platform term",
+      "status": "current",
+      "robloxSpecific": true,
+      "safetyNote": null,
+      "sourceUrls": [
+        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+      ],
+      "sortOrder": 247,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4236,7 +5186,7 @@
       "sourceUrls": [
         "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 195,
+      "sortOrder": 248,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4258,7 +5208,7 @@
         "https://roblox.fandom.com/wiki/Roblox_slang",
         "https://robloxden.com/dictionary"
       ],
-      "sortOrder": 196,
+      "sortOrder": 249,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4280,7 +5230,7 @@
         "https://robloxden.com/dictionary/wip",
         "https://create.roblox.com/docs/what-is-roblox"
       ],
-      "sortOrder": 197,
+      "sortOrder": 250,
       "lastVerifiedAt": "2026-08-11"
     },
     {
@@ -4300,10 +5250,9 @@
       "safetyNote": null,
       "sourceUrls": [
         "https://robloxden.com/dictionary/xd",
-        "https://roblox.fandom.com/wiki/Roblox_slang",
-        "https://en.help.roblox.com/hc/en-us/articles/4415545981332-Roblox-Dictionary"
+        "https://roblox.fandom.com/wiki/Roblox_slang"
       ],
-      "sortOrder": 198,
+      "sortOrder": 251,
       "lastVerifiedAt": "2026-08-11"
     }
   ]

@@ -125,7 +125,7 @@ After the monorepo move, older shorthand paths in this inventory that begin with
 - `data/Admin commands/*.md`
   - Parsed by `src/lib/admin-commands.ts`.
 - `data/roblox-dictionary/roblox-dictionary.json`
-  - Local source-backed dictionary for `/catalog/roblox-dictionary`, with 198 searchable Roblox slang, acronym, platform, creator, and legacy entries and complete coverage of RobloxDen's 55-entry index as audited on 2026-08-11.
+  - Local source-backed dictionary for `/catalog/roblox-dictionary`, with 251 searchable Roblox slang, acronym, platform, creator, and legacy entries and complete coverage of RobloxDen's 55-entry index plus the official Roblox Dictionary's 67 terms as audited on 2026-08-11.
   - Public definitions and examples are original. Per-item `sourceUrls`, `lastVerifiedAt`, and current/legacy status support later audits without exposing harmful bypass or exploit instructions.
 - `data/Grow a Garden/crops.json`
   - Parsed by `src/lib/grow-a-garden/crops.ts`.
