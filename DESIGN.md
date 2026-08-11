@@ -109,3 +109,7 @@ The shell may take inspiration from Notion-style product surfaces: quiet navigat
 - Do not place cards inside cards.
 - Keep text inside controls from wrapping awkwardly or overflowing.
 - Use lucide icons for common actions instead of custom-drawn icons when an icon exists.
+
+## Feature Thumbnails
+
+Small feature images should follow the [Bloxodes Single-Object Thumbnail System](docs/design/single-object-feature-thumbnails.md). The default is one immediately recognizable subject on a quiet background, composed for recognition at card size rather than detail at full resolution. Avoid miniature scenes, floating interface panels, explanatory diagrams, and decorative supporting objects.
