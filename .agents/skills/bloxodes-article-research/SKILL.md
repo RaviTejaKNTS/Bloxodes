@@ -118,7 +118,16 @@ Tier-list readiness:
 
 ## Media Research
 
-Media is optional. Use it only when it removes friction for the reader.
+Decide whether media is optional or whether the article needs a complete visual set. Location guides, routes, NPCs, puzzle states, collectibles, menu states, and ordered visual walkthroughs normally require a visual set because images remove identification and navigation guesswork. Catalog, collection, and item-set articles keep their existing required image rules.
+
+When a visual set is required:
+
+1. List every expected visual target and the expected count before searching.
+2. Give each target a stable lowercase ID and a planned article heading.
+3. Check the lead source, but do not stop when its images are branded, unusable, incomplete, or unavailable.
+4. Fan out per target to official game media, the game's wiki, reputable community wikis, and credible guide pages. Search exact game and target names plus spelling variants.
+5. Record candidate source pages, exact-match evidence to confirm, usage/source notes, and missing targets.
+6. Mark the brief blocked when important coverage is weak. After parent brief approval, send the work through `bloxodes-article-images` before writing.
 
 ### YouTube
 
@@ -135,7 +144,7 @@ Only a `perfect` match may be embedded. A `near` match is research only. If noth
 
 ### Images
 
-Look for images only when they clarify a menu, panel, UI state, map region, or other step that prose cannot show cleanly.
+For normal articles, look for images when they clarify a menu, panel, UI state, map region, or other step that prose cannot show cleanly. For a required visual set, search every expected target even when prose could technically describe it.
 
 Accept images only when they:
 
@@ -145,19 +154,7 @@ Accept images only when they:
 
 Do not assume a wiki or competitor image is free to reuse. Record the source URL, what the image shows, cleanliness result, rights/source note, and whether it should be hosted.
 
-Hosted body images belong at:
-
-```text
-apps/web/public/articles/<article-slug>/<descriptive-name>.webp
-```
-
-Save a suitable image with:
-
-```bash
-npm run content:save-article-image -- --slug <article-slug> --url <source-url> --name <file-stem> --alt "useful UI fact"
-```
-
-Prefer zero to three body images. Cover images are separate and may remain null for the import flow to generate.
+Do not hotlink or save article-owned images in the repository. The separate article-image pass records `media.json`, converts approved files to WebP, uploads them to Supabase Storage, and retains provenance. Prefer zero to three body images only for normal articles; the limit does not apply to a complete visual set.
 
 ## Brief Shape
 
@@ -179,8 +176,11 @@ Evidence checked:
 Media plan:
 - YouTube match quality (perfect / near / none):
 - YouTube candidate URL and reason:
-- Image candidates (source URL, what it shows, clean yes/no, rights note):
-- Images to host (0-3, with planned file stems):
+- Visual set required (yes/no) and why:
+- Visual type (locations / steps / NPCs / puzzles / routes / collectibles / items / other):
+- Expected visual targets and count (stable ID, label, planned heading):
+- Image candidates by target (source page, what it shows, clean yes/no, exact-match evidence to confirm, rights note):
+- Missing targets and searches attempted:
 - Cover image plan (null / generated / hosted cover.webp):
 
 Article plan:
@@ -209,5 +209,5 @@ If research is weak, say what is missing. Do not pretend the article is ready.
 - explain why this should be an article, not another page type
 - give an outline that answers the title promise
 - separate facts to use from facts to avoid
-- keep the media plan optional and evidence-based
+- classify media as optional or a required visual set, with the expected set defined before discovery
 - make gaps obvious so the parent can approve, refine, or block the article

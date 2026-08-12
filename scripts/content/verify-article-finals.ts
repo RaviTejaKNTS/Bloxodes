@@ -10,6 +10,12 @@ import {
   checkArticleMedia,
   logArticleMediaFindings,
 } from "./check-article-media";
+import {
+  assertArticleImageReadiness,
+  checkArticleImageReadiness,
+  readArticleImageManifest,
+  type ArticleImageManifest,
+} from "./article-image-readiness";
 
 type ArticleFinal = {
   title: string;
@@ -33,6 +39,12 @@ type ArticleFaqEntry = {
 type CliOptions = {
   files: string[];
   baseUrl: string | null;
+  requireImageReadiness: boolean;
+};
+
+type LoadedImageManifest = {
+  file: string;
+  manifest: ArticleImageManifest;
 };
 
 type ArticleRow = {
@@ -56,11 +68,12 @@ function printUsage() {
   console.log(
     [
       "Usage:",
-      "  npm run verify:article-finals -- --base-url http://localhost:3000 --file <final.json> [--file <final.json>...]",
+      "  npm run verify:article-finals -- --base-url http://localhost:3000 --file <final.json> [--file <final.json>...] [--require-image-readiness]",
       "",
       "Checks:",
       "  - parse article final.json files",
       "  - YouTube directive + hosted image media checks",
+      "  - validate sibling media.json when present; require it with --require-image-readiness",
       "  - run content:check-copy",
       "  - import into local Supabase",
       "  - read back saved article rows",
@@ -74,6 +87,7 @@ function parseArgs(argv: string[]): CliOptions {
   const options: CliOptions = {
     files: [],
     baseUrl: null,
+    requireImageReadiness: false,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -97,6 +111,9 @@ function parseArgs(argv: string[]): CliOptions {
         i += 1;
         break;
       }
+      case "--require-image-readiness":
+        options.requireImageReadiness = true;
+        break;
       default:
         throw new Error(`Unknown option: ${arg}`);
     }
@@ -234,6 +251,99 @@ async function readBackRows(finals: ArticleFinal[]) {
   }
 
   console.log(`Local Supabase readback passed for ${finals.length} article${finals.length === 1 ? "" : "s"}.`);
+  return rowsBySlug;
+}
+
+async function loadAndCheckImageManifests(
+  files: string[],
+  finals: ArticleFinal[],
+  required: boolean
+): Promise<Array<LoadedImageManifest | null>> {
+  const loaded: Array<LoadedImageManifest | null> = [];
+
+  for (let index = 0; index < files.length; index += 1) {
+    const finalFile = path.resolve(process.cwd(), files[index]!);
+    const mediaFile = path.join(path.dirname(finalFile), "media.json");
+    let manifest: ArticleImageManifest;
+    try {
+      manifest = await readArticleImageManifest(mediaFile);
+    } catch (error) {
+      const code = (error as NodeJS.ErrnoException)?.code;
+      if (code === "ENOENT" && !required) {
+        loaded.push(null);
+        continue;
+      }
+      if (code === "ENOENT") {
+        throw new Error(`${files[index]} requires sibling media.json for image readiness`);
+      }
+      throw error;
+    }
+
+    const result = checkArticleImageReadiness({ manifest, finalJson: finals[index]! });
+    const summary = result.summary;
+    console.log(
+      `Image readiness ${manifest.article_slug}: expected=${summary.expected} verified=${summary.verified} uploaded=${summary.uploaded} inserted=${summary.inserted} missing=${summary.missing} accepted_missing=${summary.acceptedMissing}`
+    );
+    assertArticleImageReadiness(result, mediaFile);
+    loaded.push({ file: mediaFile, manifest });
+  }
+
+  return loaded;
+}
+
+async function syncImageProvenance(
+  manifests: Array<LoadedImageManifest | null>,
+  rowsBySlug: Map<string | null, ArticleRow>
+): Promise<void> {
+  const sb = supabaseAdmin();
+  let synced = 0;
+
+  for (const loaded of manifests) {
+    if (!loaded) continue;
+    const article = rowsBySlug.get(loaded.manifest.article_slug);
+    if (!article) throw new Error(`Cannot sync image provenance: article ${loaded.manifest.article_slug} was not imported`);
+
+    for (const entry of loaded.manifest.entries) {
+      if (entry.status !== "verified" || !entry.original_image_url || !entry.public_url || !entry.uploaded_path) {
+        continue;
+      }
+      const payload = {
+        article_id: article.id,
+        source_url: entry.source_page_url!,
+        source_host: new URL(entry.source_page_url!).hostname.replace(/^www\./i, "").toLowerCase(),
+        name: entry.label,
+        original_url: entry.original_image_url,
+        uploaded_path: entry.uploaded_path,
+        public_url: entry.public_url,
+        alt_text: entry.alt ?? null,
+        caption: null,
+        context: entry.match_evidence ?? entry.placement_heading,
+        is_table: false,
+        width: entry.width ?? null,
+        height: entry.height ?? null,
+        table_key: null,
+        row_text: entry.placement_heading,
+      };
+
+      const { data: existing, error: lookupError } = await sb
+        .from("article_source_images")
+        .select("id")
+        .eq("article_id", article.id)
+        .eq("original_url", entry.original_image_url)
+        .limit(1)
+        .maybeSingle();
+      if (lookupError) throw new Error(`Failed to read image provenance for ${entry.label}: ${lookupError.message}`);
+
+      const operation = existing?.id
+        ? sb.from("article_source_images").update(payload).eq("id", existing.id)
+        : sb.from("article_source_images").insert(payload);
+      const { error } = await operation;
+      if (error) throw new Error(`Failed to sync image provenance for ${entry.label}: ${error.message}`);
+      synced += 1;
+    }
+  }
+
+  if (synced) console.log(`Synced ${synced} article_source_images provenance row${synced === 1 ? "" : "s"}.`);
 }
 
 async function fetchWithTimeout(url: string, timeoutMs = 20000): Promise<Response> {
@@ -374,13 +484,19 @@ async function main() {
 
   console.log(`Parsed ${finals.length} article final file${finals.length === 1 ? "" : "s"}.`);
 
+  const imageManifests = await loadAndCheckImageManifests(
+    options.files,
+    finals,
+    options.requireImageReadiness
+  );
   await verifyArticleMedia(finals, options.files);
   await runCommand("npm", ["run", "content:check-copy", "--", ...options.files]);
 
   const importArgs = options.files.flatMap((file) => ["--file", file]);
   await runCommand("npm", ["run", "import:content-final", "--", ...importArgs]);
 
-  await readBackRows(finals);
+  const rowsBySlug = await readBackRows(finals);
+  await syncImageProvenance(imageManifests, rowsBySlug);
   const urls = await verifyRoutes(baseUrl, finals);
 
   console.log("\nVerified localhost article links:");

@@ -112,6 +112,31 @@ describe("article images", () => {
     expect(classifyArticleImageSrc("https://example.com/x.png", "foo").ok).toBe(false);
   });
 
+  it("allows only the configured managed-dev public Storage origin", () => {
+    const previous = process.env.SUPABASE_URL;
+    process.env.SUPABASE_URL = "https://article-dev.supabase.co";
+    try {
+      expect(
+        classifyArticleImageSrc(
+          "https://article-dev.supabase.co/storage/v1/object/public/media/articles/foo/source.webp",
+          "foo"
+        ).ok
+      ).toBe(true);
+      expect(
+        classifyArticleImageSrc(
+          "https://unrelated.supabase.co/storage/v1/object/public/media/articles/foo/source.webp",
+          "foo"
+        ).ok
+      ).toBe(false);
+      expect(classifyArticleImageSrc("https://article-dev.supabase.co/not-storage/source.webp", "foo").ok).toBe(
+        false
+      );
+    } finally {
+      if (previous === undefined) delete process.env.SUPABASE_URL;
+      else process.env.SUPABASE_URL = previous;
+    }
+  });
+
   it("suggests hosted markdown", () => {
     expect(suggestArticleImageMarkdown({ slug: "Foo-Bar", fileName: "menu.webp", alt: "Menu" })).toBe(
       "![Menu](/articles/foo-bar/menu.webp)"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bloxodes Article Images"
+  short_description: "Gather and verify complete article visual sets"
+  default_prompt: "Use $bloxodes-article-images after article research approval to define the expected visual set, find exact-match source images, host approved images in Supabase Storage, record provenance, run image readiness, and stop before writing."

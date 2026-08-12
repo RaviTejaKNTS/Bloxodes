@@ -18,6 +18,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
 - `.agents/skills/bloxodes-article-release-review/SKILL.md`: list completed automated articles, serve managed-dev previews, and publish or reject only explicit human selections.
+- `.agents/skills/bloxodes-article-images/SKILL.md`: run a separate collection-style image pass for location guides, routes, NPCs, puzzle steps, collectibles, and other visually dependent articles before writing.
 - `.agents/skills/bloxodes-*-research/SKILL.md`: focused content research and source proof before writing.
 - `.agents/skills/bloxodes-game-collection-data/SKILL.md`: game collection dataset, fields, sections, and renderer readiness.
 - `.agents/skills/bloxodes-game-collection-images/SKILL.md`: game collection image collection, local image paths, and image readiness.

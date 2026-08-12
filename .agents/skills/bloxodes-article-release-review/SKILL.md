@@ -52,7 +52,7 @@ npm run articles:review:list -- --base-url http://127.0.0.1:<port> --limit 100 -
 
 The managed-dev article row can render locally even when its `final.json` and repository-owned media exist only in `/home/teja/projects/Bloxodes` on the homelab.
 
-Before publishing, ensure the current task worktree contains the selected row's exact `result_path` and `apps/web/public/articles/<slug>/` directory when present remotely.
+Before publishing, ensure the current task worktree contains the selected row's exact `result_path` and sibling `media.json` when present remotely. Legacy repository-owned article media may still require `apps/web/public/articles/<slug>/`; new article source images remain in managed-dev Supabase Storage and are promoted from `media.json` instead.
 
 - Load connection details from `.env.homelab`; never print their values.
 - Read and stage only the exact selected paths from `$HOMELAB_REPO_ROOT` into a temporary directory.
@@ -66,11 +66,25 @@ The user's explicit approval in the current message authorizes production writes
 
 1. Re-query every selected queue ID and require `workflow_mode = agent_runner` and `status = completed`. Preserve the managed-dev queue credential source; production commands must not replace it.
 2. Resolve homelab artifacts using **Homelab Artifacts**.
-3. Review the exact release allowlist: selected `final.json` files plus only their required repository-owned article media. Ignore unrelated worktree changes.
+3. Review the exact release allowlist: selected `final.json` files, sibling `media.json` manifests, plus only legacy repository-owned article media when present. Ignore unrelated worktree changes.
 4. Follow the publication safeguards in `.agents/skills/bloxodes-release-e2e/SKILL.md` for the exact allowlist without treating this as authority to release anything else:
-   - publish required repository media/code first;
+   - publish required legacy repository media/code first;
+   - for each `media.json`, promote the exact approved managed-dev WebP bytes to the same production Storage object paths and rewrite `final.json` to production media URLs:
+
+```bash
+NODE_ENV=production npm run collect:article-images -- --manifest <media.json> --file <final.json> --apply --allow-prod
+```
+
    - run the selected article import production dry-run;
    - apply only the selected article rows;
+   - dry-run, apply, and read back image provenance for each promoted manifest:
+
+```bash
+NODE_ENV=production npm run sync:article-image-provenance -- --manifest <media.json> --allow-prod
+NODE_ENV=production npm run sync:article-image-provenance -- --manifest <media.json> --apply --allow-prod
+```
+
+   - require every production `article_source_images.public_url` and `content_md` image URL to match the promoted production Storage object;
    - read back each production article;
    - verify each exact `/articles/<slug>` URL and sitemap entry.
 5. If the production row and URL already match because an earlier queue close failed, do not republish. Verify them and continue.

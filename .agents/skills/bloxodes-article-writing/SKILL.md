@@ -23,6 +23,8 @@ Read the approved `brief.md`.
 
 If the brief is missing, weak, unapproved, or has unresolved source gaps, stop and ask for the article research step to be fixed first.
 
+If the brief marks a required visual set, also read sibling `media.json`. Start writing only after the parent approved image readiness. Insert every verified hosted image beneath its matching `placement_heading`; do not replace it with prose, a YouTube embed, a lead-source hotlink, or an unrelated generic image.
+
 ## Writing Rules
 
 **Voice & tone (Bloxodes house voice)**
@@ -92,25 +94,26 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 - Keep the source article URL in `sources`. Keep per-image provenance in `article_source_images`; do not mention competitors or image collection in public copy.
 - Treat media like tables and lists: use the one structured element that best explains the point instead of stacking several versions of the same information.
 
-**Required catalog, collection, and item images**
-- For articles about catalog entries, items, characters, enemies, rewards, abilities, evolutions, loadouts, or another visual collection, gather a useful matching image set. This is a required research and writing step, not an optional enhancement.
+**Required visual sets**
+- For location guides, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, catalog entries, items, characters, enemies, rewards, abilities, evolutions, loadouts, or another visual collection, gather a useful matching image set. This is a required research and writing step, not an optional enhancement.
 - Apply the same readiness standard as the game-collection image workflow: identify the expected item set first, find one clean exact-match image per useful entry, record every missing entry, and do not call the image pass ready while important coverage is weak.
+- Use `bloxodes-article-images` for this separate pass. Its `media.json` is the mapping contract between research and writing: entry label, planned heading, approved hosted URL, alt text, source provenance, match evidence, and readiness status.
 - Start with the approved lead source. If it has no usable images or does not cover the full useful set, run a targeted image fan-out. Check official game pages, official media, the game's own wiki, reputable community wikis, and other credible source articles. Prefer official or first-party captures, then clearly licensed wiki media, then other source-approved genuine gameplay captures.
 - Do not stop because the lead source has no images. Search each item or group by its exact in-game name plus the game name, try spelling variants, and inspect relevant source pages rather than relying only on image-search thumbnails.
 - Inspect the source's in-article images, including lazy-loaded `src`, `srcset`, and `data-src` candidates. Exclude logos, ads, author photos, related-post thumbnails, decorative banners, duplicates, and images for entries the article does not cover.
 - Match every selected image to its exact item using nearby headings, captions, alt text, table-row text, or surrounding copy. Open the full source image and visually confirm it shows that item. Cross-check ambiguous matches against an official or independent source. Do not guess from a filename, search thumbnail, color, or resemblance.
 - Reject edited thumbnails, page screenshots, group collages that hide the individual item, placeholder art, logos, fan art presented as game art, and any image that does not clearly show the named entry.
-- Put the hosted image in the matching table row or directly beside that item's explanation. Give the alt text the real item or state name plus the visible detail; never use generic text such as `image` or `screenshot`.
+- Put the hosted image in the matching table row or directly beneath the matching location, step, NPC, puzzle, or item heading. Give the alt text the real location, item, or state name plus the visible detail; never use generic text such as `image` or `screenshot`.
 - The normal zero-to-three preference does not apply to this useful item set. Include one clear image per distinct entry when it materially helps identification, but do not copy unrelated parts of the source gallery.
 - Add every image source page used to `sources` and keep the original image URL in `article_source_images` provenance.
 - Do not silently finish an image-free `final.json` before completing this fan-out. If useful images still cannot be found, downloaded, mapped confidently, approved for reuse, uploaded, or verified, return the searches attempted and the exact media gap for correction instead of substituting hotlinks or repo files.
 
-**Article table image readiness gate**
-- Before collecting, list the exact article table rows that should have images. Treat that count as `expected`; do not let whatever images happen to be easy to find define the scope.
-- Add one `Image` column to the existing Markdown table and put each verified `![specific alt](<Supabase public URL>)` in the correct row. Do not create a second gallery that makes the reader match images back to rows.
-- Keep a row-to-image mapping while working: canonical row name, source page, original image URL, Storage object path, public URL, match evidence, and status (`verified` or a precise missing reason).
+**Article image readiness gate**
+- Before collecting, list the exact locations, steps, NPCs, puzzle states, collectibles, or table rows that should have images. Treat that count as `expected`; do not let whatever images happen to be easy to find define the scope.
+- For walkthroughs, use one useful heading per visual target and put its verified `![specific alt](<Supabase public URL>)` in that section. For tables, add one `Image` column and put each image in the correct row. Do not create a detached gallery that makes the reader map images back to instructions.
+- Keep the target-to-image mapping in `media.json`: canonical target name, placement heading, source page, original image URL, Storage object path, public URL, match evidence, and status (`verified` or a precise missing reason).
 - Before returning `final.json`, compare expected, found, uploaded, inserted, and missing counts. Every inserted URL must belong to its row, and one image must not be reused for different entries unless the entries genuinely share the same visual.
-- Open every uploaded public URL and visually inspect it, then preview the rendered local article table. Confirm the image loads, the row label and image agree, the alt text is accurate, and the table remains readable.
+- Open every uploaded public URL and visually inspect it, then preview the rendered local article. Confirm each image loads beneath the correct heading or in the correct table row, its label agrees, and its alt text is accurate.
 - The image gate passes only when all useful rows are verified or every unresolved row has an explicit accepted reason. A wrong image is worse than a missing image: remove uncertain matches and report them as missing.
 
 **Supabase Storage workflow for article images**
@@ -161,7 +164,7 @@ Write `final.json` only in the content workspace. Approved Supabase Storage uplo
 - `title`: State the exact reader question, action, story, or guide promise in human search language. Include the game name for game-specific articles.
 - `slug`: Use a short stable editorial slug for the article topic. Include the game name for game-specific articles.
 - `meta_description`: Summarize the answer or reader outcome in one specific search snippet.
-- `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy. Strongly prefer a useful non-cover screenshot, YouTube embed, or hosted collected image, but do not weaken or block the article when no suitable option is available.
+- `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy. For normal articles, strongly prefer useful non-cover media without blocking solely on optional media. For a required visual set, insert every approved `media.json` image under its matching heading or table row.
 - `faq_json`: Add 2-4 useful questions only when they cover follow-up points not already answered in the article. Keep answers short, clear, and source-backed. Use `[]` if FAQs would repeat the body.
 - `cover_image`: Use an existing Bloxodes Supabase Storage public URL when a cover is already hosted; otherwise use null so the import path can generate and upload one.
 - `author_id`: Set when known, or let the import path assign it if that is the project flow.

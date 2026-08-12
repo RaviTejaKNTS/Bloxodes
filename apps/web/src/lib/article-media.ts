@@ -241,9 +241,28 @@ export function isAllowedRemoteArticleImageUrl(src: string): boolean {
     const url = new URL(src);
     if (url.protocol !== "https:" && url.protocol !== "http:") return false;
     const host = url.hostname.replace(/^www\./, "").toLowerCase();
-    return ALLOWED_REMOTE_IMAGE_HOST_SUFFIXES.some(
+    if (ALLOWED_REMOTE_IMAGE_HOST_SUFFIXES.some(
       (suffix) => host === suffix || host.endsWith(`.${suffix}`)
-    );
+    )) {
+      return true;
+    }
+
+    if (!url.pathname.includes("/storage/v1/object/public/")) return false;
+    const configuredOrigins = [
+      process.env.SUPABASE_MEDIA_PUBLIC_URL,
+      process.env.SUPABASE_URL,
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
+    ]
+      .map((value) => value?.trim())
+      .filter((value): value is string => Boolean(value))
+      .flatMap((value) => {
+        try {
+          return [new URL(value).origin];
+        } catch {
+          return [];
+        }
+      });
+    return configuredOrigins.includes(url.origin);
   } catch {
     return false;
   }
