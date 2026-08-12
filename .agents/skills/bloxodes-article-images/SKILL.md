@@ -1,11 +1,11 @@
 ---
 name: bloxodes-article-images
-description: Gather, host, map, and verify a complete visual set for one approved Bloxodes article before writing. Use for location guides, routes, NPCs, puzzle steps, collectibles, menus, item sets, or other walkthroughs where readers benefit from one exact-match image per named place or step. Creates media.json and updates brief.md; does not write final.json.
+description: Gather, host, map, and verify useful images for every approved Bloxodes article before writing. Define a nonzero target set, search reliable exact-match sources, and allow image-free output only when every target is explicitly accepted as missing after the search. Creates media.json and updates brief.md; does not write final.json.
 ---
 
 # Bloxodes Article Images
 
-Use this after article research and parent brief approval. Give visually dependent articles the same separate image-readiness pass as game collections. Do not write `final.json`.
+Use this after article research and parent brief approval for every article. The image pass is mandatory even when the article is not a location guide or collection. Do not write `final.json`.
 
 ## Workspace
 
@@ -18,9 +18,10 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 ## Define the expected set first
 
 1. Read the approved `brief.md`.
-2. Decide whether the article is visually dependent. Treat named locations, routes, NPCs, puzzle states, collectibles, menu states, and ordered visual steps as visually dependent unless the brief explains why images would not help.
-3. List every useful visual target before searching. Do not let easy-to-find images define the expected count.
-4. Use one stable entry ID and one planned article heading per target.
+2. Define at least one useful visual target. The image pass can never start with an expected count of zero.
+3. For named locations, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, complete rankings, or other visual sets, list every distinct target that images would help identify. For a normal article, list the one to three highest-value screenshots, UI states, items, characters, or steps that would make the answer clearer.
+4. Do not let easy-to-find images define the expected count.
+5. Use one stable entry ID and one planned article heading per target.
 
 For example, a five-location guide starts with five entries even if the lead source has no reusable images.
 
@@ -28,11 +29,11 @@ For example, a five-location guide starts with five entries even if the lead sou
 
 1. Start with the lead source, then fan out for every unresolved entry.
 2. Search the exact game name plus location, NPC, item, or step name. Try spelling variants.
-3. Check official game pages and media, the game's wiki, reputable community wikis, and credible guide pages. Prefer first-party captures, then clearly licensed wiki media, then other source-approved genuine gameplay captures.
+3. Check official game pages and media, the game's wiki, reputable community wikis, and credible guide pages. A clean, exact, genuine gameplay screenshot from a credible page is usable when its provenance is recorded; do not reject it only because another editorial site hosts it or the page does not state a general reuse license.
 4. Inspect full source pages and lazy-loaded `src`, `srcset`, and `data-src` values. Do not select from a search thumbnail alone.
 5. Match each image with nearby headings, captions, alt text, map labels, or surrounding instructions. Visually inspect the full image. Cross-check ambiguous matches.
-6. Reject logos, covers, edited thumbnails, page screenshots, decorative art, unrelated maps, collages that hide the target, watermarks, large arrows, and competitor branding.
-7. Record the source page, original image URL, exact-match evidence, usage/source note, useful alt text, and status for every entry.
+6. Reject logos, covers, edited thumbnails, page screenshots, decorative art, unrelated maps, collages that hide the target, watermarks, large arrows, and visible site branding.
+7. Record the source page, original image URL, exact-match evidence, provenance/source note, useful alt text, and status for every entry. If the source or file states an explicit attribution or license condition, record it and stop for parent review before use. Do not add a public attribution caption automatically.
 
 Do not stop after rejecting the lead source. Continue the source fan-out until every expected entry is verified or has a precise missing reason.
 
@@ -57,7 +58,7 @@ Use this shape:
       "source_page_url": "https://example.com/source-page",
       "original_image_url": "https://example.com/full-image.png",
       "match_evidence": "The source heading and caption identify the exact in-game location.",
-      "rights_note": "Source and usage basis checked; attribution retained internally.",
+      "rights_note": "Credible source and exact gameplay provenance recorded; no explicit attribution condition found.",
       "alt": "Character standing beside the First Location marker",
       "uploaded_path": null,
       "public_url": null,
@@ -68,7 +69,29 @@ Use this shape:
 }
 ```
 
-Allowed statuses are `candidate`, `verified`, `missing`, and `accepted_missing`. Only the parent may approve `accepted_missing`; include both `missing_reason` and `acceptance_note`.
+Allowed statuses are `candidate`, `verified`, `missing`, and `accepted_missing`. The manifest and every entry must use `required: true`. `candidate` and `missing` never pass readiness. Only the parent may approve `accepted_missing`. Each accepted omission must include `search_queries` with at least two distinct query variants, `searched_source_urls` with at least two distinct HTTP source-page URLs, a specific `missing_reason`, and the parent's explicit decision in `acceptance_note`.
+
+Use this shape for an accepted omission:
+
+```json
+{
+  "id": "rebirth-confirmation",
+  "label": "Rebirth confirmation",
+  "required": true,
+  "placement_heading": "Confirm the rebirth",
+  "status": "accepted_missing",
+  "search_queries": [
+    "game name rebirth confirmation screen",
+    "game name rebirth menu wiki"
+  ],
+  "searched_source_urls": [
+    "https://example.com/game-wiki/rebirth",
+    "https://example.org/game-guide/rebirth"
+  ],
+  "missing_reason": "Both checked pages explain rebirth but contain no clean exact screenshot of the confirmation state.",
+  "acceptance_note": "Parent approved prose-only coverage after reviewing the documented search."
+}
+```
 
 ## Host the verified set
 
@@ -112,8 +135,8 @@ Image readiness:
 - Ready for writing: yes/no
 ```
 
-The parent approves readiness before writing. If required coverage is weak, stop with the exact missing entries and searches attempted. The writing pass inserts every verified `public_url` beneath its matching `placement_heading`; final verification then runs:
+The parent approves readiness before writing. An article may proceed with no inserted images only when reliable, accurate, helpful images could not be found for every planned target and every entry is `accepted_missing`. The writing pass inserts every verified `public_url` beneath its matching `placement_heading`; final verification then runs:
 
 ```bash
-npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json> --require-image-readiness
+npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json>
 ```

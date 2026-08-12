@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   checkArticleImageReadiness,
+  parseArticleImageManifest,
   type ArticleImageManifest,
 } from "../article-image-readiness";
 
@@ -16,6 +17,7 @@ const manifest: ArticleImageManifest = {
     {
       id: "jujutsu-high-school",
       label: "Jujutsu High School",
+      required: true,
       placement_heading: "Jujutsu High School",
       status: "verified",
       source_page_url: "https://lineage-piece.example/wiki/Jujutsu_High_School",
@@ -33,6 +35,7 @@ const manifest: ArticleImageManifest = {
     {
       id: "scorched-ruins",
       label: "Scorched Ruins",
+      required: true,
       placement_heading: "Scorched Ruins",
       status: "verified",
       source_page_url: "https://lineage-piece.example/wiki/Scorched_Ruins",
@@ -81,6 +84,7 @@ test("fails when a required location is still missing", () => {
   missingManifest.entries[1] = {
     id: "scorched-ruins",
     label: "Scorched Ruins",
+    required: true,
     placement_heading: "Scorched Ruins",
     status: "missing",
     missing_reason: "No exact-match image found after documented source fan-out.",
@@ -111,8 +115,17 @@ test("allows an explicitly accepted missing visual", () => {
   acceptedManifest.entries[1] = {
     id: "scorched-ruins",
     label: "Scorched Ruins",
+    required: true,
     placement_heading: "Scorched Ruins",
     status: "accepted_missing",
+    search_queries: [
+      "lineage piece scorched ruins Orihime Reiatsu",
+      "lineage piece scorched ruins location wiki",
+    ],
+    searched_source_urls: [
+      "https://lineage-piece.example/wiki/Scorched_Ruins",
+      "https://guides.example/lineage-piece-orihime-locations",
+    ],
     missing_reason: "No exact-match clean source image was found after wiki and guide searches.",
     acceptance_note: "Parent approved prose-only coverage for this one location.",
   };
@@ -126,4 +139,89 @@ test("allows an explicitly accepted missing visual", () => {
 
   assert.equal(result.ready, true);
   assert.equal(result.summary.acceptedMissing, 1);
+});
+
+test("rejects accepted missing without documented search fan-out", () => {
+  const weakMissingManifest = structuredClone(manifest);
+  weakMissingManifest.entries[1] = {
+    id: "scorched-ruins",
+    label: "Scorched Ruins",
+    required: true,
+    placement_heading: "Scorched Ruins",
+    status: "accepted_missing",
+    search_queries: ["lineage piece scorched ruins"],
+    searched_source_urls: ["https://lineage-piece.example/wiki/Scorched_Ruins"],
+    missing_reason: "No exact-match image was found.",
+    acceptance_note: "Parent approved prose-only coverage.",
+  };
+  const result = checkArticleImageReadiness({
+    manifest: weakMissingManifest,
+    finalJson: {
+      slug: manifest.article_slug,
+      content_md: `### Jujutsu High School\n\n![${manifest.entries[0]!.alt}](${manifest.entries[0]!.public_url})\n\n### Scorched Ruins\n\nWalk to the ruins.`,
+    },
+  });
+
+  assert.equal(result.ready, false);
+  assert.match(result.errors.join("\n"), /at least two distinct search_queries/);
+  assert.match(result.errors.join("\n"), /at least two distinct searched_source_urls/);
+});
+
+test("allows an image-free final only when every target has accepted search evidence", () => {
+  const imageFreeManifest = structuredClone(manifest);
+  imageFreeManifest.entries = imageFreeManifest.entries.map((entry, index) => ({
+    id: entry.id,
+    label: entry.label,
+    required: true,
+    placement_heading: entry.placement_heading,
+    status: "accepted_missing" as const,
+    search_queries: [
+      `lineage piece ${entry.label} screenshot`,
+      `lineage piece ${entry.label} location wiki`,
+    ],
+    searched_source_urls: [
+      `https://lineage-piece.example/wiki/target-${index}`,
+      `https://guides.example/lineage-piece/target-${index}`,
+    ],
+    missing_reason: "Checked the wiki and guide pages, but neither has a clean exact-match gameplay image.",
+    acceptance_note: "Parent approved prose-only coverage after reviewing both searches.",
+  }));
+
+  const result = checkArticleImageReadiness({
+    manifest: imageFreeManifest,
+    finalJson: {
+      slug: manifest.article_slug,
+      content_md: imageFreeManifest.entries
+        .map((entry) => `### ${entry.placement_heading}\n\nUse the written landmark.`)
+        .join("\n\n"),
+    },
+  });
+
+  assert.equal(result.ready, true);
+  assert.equal(result.summary.verified, 0);
+  assert.equal(result.summary.acceptedMissing, 2);
+});
+
+test("rejects a manifest that tries to make image readiness optional", () => {
+  const optionalManifest = {
+    ...structuredClone(manifest),
+    required: false,
+  };
+
+  assert.throws(
+    () => parseArticleImageManifest(optionalManifest),
+    /required must be true/
+  );
+});
+
+test("rejects an entry that tries to opt out of the planned visual set", () => {
+  const optionalEntryManifest = structuredClone(manifest) as unknown as {
+    entries: Array<{ required: boolean }>;
+  };
+  optionalEntryManifest.entries[1]!.required = false;
+
+  assert.throws(
+    () => parseArticleImageManifest(optionalEntryManifest),
+    /entries\[1\]\.required must be true/
+  );
 });

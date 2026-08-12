@@ -23,7 +23,7 @@ Read the approved `brief.md`.
 
 If the brief is missing, weak, unapproved, or has unresolved source gaps, stop and ask for the article research step to be fixed first.
 
-If the brief marks a required visual set, also read sibling `media.json`. Start writing only after the parent approved image readiness. Insert every verified hosted image beneath its matching `placement_heading`; do not replace it with prose, a YouTube embed, a lead-source hotlink, or an unrelated generic image.
+Always read sibling `media.json`. Start writing only after the parent approved image readiness. Insert every verified hosted image beneath its matching `placement_heading`; do not replace it with prose, a YouTube embed, a lead-source hotlink, or an unrelated generic image. An image-free article is allowed only when every planned target is `accepted_missing` because no reliable, accurate, helpful match was found.
 
 ## Writing Rules
 
@@ -68,8 +68,8 @@ If the brief marks a required visual set, also read sibling `media.json`. Start 
 - Use numbered lists for step-by-step instructions.
 
 **Preferred article media**
-- Strongly prefer at least one useful media type in the article body: a screenshot, a YouTube embed, or a collected image that is approved for use. Actively work on finding or gathering one.
-- The cover image does not count as body media. Do not block or stop an otherwise strong article solely because no suitable non-cover media can be found or approved.
+- Insert every verified useful image from the mandatory image pass. A YouTube embed may supplement those images when the brief marks it as a perfect match.
+- The cover image does not count as body media. Do not bypass the image pass because a cover exists.
 
 **YouTube embeds (optional)**
 - Embed a video only when the approved brief marks it as a perfect match. Skip near matches and filler videos.
@@ -86,10 +86,10 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 
 **Source-provided article images**
 - Actively inspect the approved lead source for genuine gameplay screenshots, item or character panels, maps, menus, raid screens, and collection-style images. Use them when they explain an article fact, step, item, or table row better than prose alone.
-- A source article containing useful images is a candidate, not automatic permission. Reuse only images covered by the approved brief's rights/source note or an explicit user approval. Prefer genuine in-game captures over a publisher's custom illustrations or branded composites.
+- Prefer genuine in-game captures over a publisher's custom illustrations or branded composites. Clean, exact gameplay screenshots from credible guide or wiki pages are usable when the approved manifest records their provenance. Flag any explicit attribution or license condition for parent review.
 - Do not use images with watermarks, large arrows, subscribe overlays, or competitor branding.
 - Do not hotlink the source page, wiki, Discord, Imgur, competitor CDN, or any other third-party host in `content_md`. Download, validate, convert to WebP, and upload the selected image to Bloxodes Supabase Storage first.
-- Prefer zero to three body images for normal articles.
+- Normal articles usually use one to three body images. Complete visual sets may use more.
 - Write each hosted image as `![useful factual alt text](<Supabase public URL>)` beside the matching explanation. Use the exact public URL returned for the current environment, never the original source URL.
 - Keep the source article URL in `sources`. Keep per-image provenance in `article_source_images`; do not mention competitors or image collection in public copy.
 - Treat media like tables and lists: use the one structured element that best explains the point instead of stacking several versions of the same information.
@@ -98,7 +98,7 @@ Use `bloxodes-tier-list-writing` instead of this skill when the article's primar
 - For location guides, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, catalog entries, items, characters, enemies, rewards, abilities, evolutions, loadouts, or another visual collection, gather a useful matching image set. This is a required research and writing step, not an optional enhancement.
 - Apply the same readiness standard as the game-collection image workflow: identify the expected item set first, find one clean exact-match image per useful entry, record every missing entry, and do not call the image pass ready while important coverage is weak.
 - Use `bloxodes-article-images` for this separate pass. Its `media.json` is the mapping contract between research and writing: entry label, planned heading, approved hosted URL, alt text, source provenance, match evidence, and readiness status.
-- Start with the approved lead source. If it has no usable images or does not cover the full useful set, run a targeted image fan-out. Check official game pages, official media, the game's own wiki, reputable community wikis, and other credible source articles. Prefer official or first-party captures, then clearly licensed wiki media, then other source-approved genuine gameplay captures.
+- Start with the approved lead source. If it has no usable images or does not cover the full useful set, run a targeted image fan-out. Check official game pages, official media, the game's own wiki, reputable community wikis, and other credible source articles. Do not reject a clean exact-match gameplay screenshot only because another editorial site hosts it or the page lacks a general reuse statement.
 - Do not stop because the lead source has no images. Search each item or group by its exact in-game name plus the game name, try spelling variants, and inspect relevant source pages rather than relying only on image-search thumbnails.
 - Inspect the source's in-article images, including lazy-loaded `src`, `srcset`, and `data-src` candidates. Exclude logos, ads, author photos, related-post thumbnails, decorative banners, duplicates, and images for entries the article does not cover.
 - Match every selected image to its exact item using nearby headings, captions, alt text, table-row text, or surrounding copy. Open the full source image and visually confirm it shows that item. Cross-check ambiguous matches against an official or independent source. Do not guess from a filename, search thumbnail, color, or resemblance.
@@ -164,7 +164,7 @@ Write `final.json` only in the content workspace. Approved Supabase Storage uplo
 - `title`: State the exact reader question, action, story, or guide promise in human search language. Include the game name for game-specific articles.
 - `slug`: Use a short stable editorial slug for the article topic. Include the game name for game-specific articles.
 - `meta_description`: Summarize the answer or reader outcome in one specific search snippet.
-- `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy. For normal articles, strongly prefer useful non-cover media without blocking solely on optional media. For a required visual set, insert every approved `media.json` image under its matching heading or table row.
+- `content_md`: Answer the title fully. Use headings only for real sections and keep source-gathering language out of public copy. Insert every approved `media.json` image under its matching heading or table row. Use no body images only when all planned entries are explicitly `accepted_missing`.
 - `faq_json`: Add 2-4 useful questions only when they cover follow-up points not already answered in the article. Keep answers short, clear, and source-backed. Use `[]` if FAQs would repeat the body.
 - `cover_image`: Use an existing Bloxodes Supabase Storage public URL when a cover is already hosted; otherwise use null so the import path can generate and upload one.
 - `author_id`: Set when known, or let the import path assign it if that is the project flow.

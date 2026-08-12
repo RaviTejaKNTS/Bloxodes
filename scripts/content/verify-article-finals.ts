@@ -39,7 +39,6 @@ type ArticleFaqEntry = {
 type CliOptions = {
   files: string[];
   baseUrl: string | null;
-  requireImageReadiness: boolean;
 };
 
 type LoadedImageManifest = {
@@ -68,12 +67,12 @@ function printUsage() {
   console.log(
     [
       "Usage:",
-      "  npm run verify:article-finals -- --base-url http://localhost:3000 --file <final.json> [--file <final.json>...] [--require-image-readiness]",
+      "  npm run verify:article-finals -- --base-url http://localhost:3000 --file <final.json> [--file <final.json>...]",
       "",
       "Checks:",
       "  - parse article final.json files",
       "  - YouTube directive + hosted image media checks",
-      "  - validate sibling media.json when present; require it with --require-image-readiness",
+      "  - require and validate sibling media.json for every article",
       "  - run content:check-copy",
       "  - import into local Supabase",
       "  - read back saved article rows",
@@ -87,7 +86,6 @@ function parseArgs(argv: string[]): CliOptions {
   const options: CliOptions = {
     files: [],
     baseUrl: null,
-    requireImageReadiness: false,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -111,9 +109,6 @@ function parseArgs(argv: string[]): CliOptions {
         i += 1;
         break;
       }
-      case "--require-image-readiness":
-        options.requireImageReadiness = true;
-        break;
       default:
         throw new Error(`Unknown option: ${arg}`);
     }
@@ -256,10 +251,9 @@ async function readBackRows(finals: ArticleFinal[]) {
 
 async function loadAndCheckImageManifests(
   files: string[],
-  finals: ArticleFinal[],
-  required: boolean
-): Promise<Array<LoadedImageManifest | null>> {
-  const loaded: Array<LoadedImageManifest | null> = [];
+  finals: ArticleFinal[]
+): Promise<LoadedImageManifest[]> {
+  const loaded: LoadedImageManifest[] = [];
 
   for (let index = 0; index < files.length; index += 1) {
     const finalFile = path.resolve(process.cwd(), files[index]!);
@@ -269,10 +263,6 @@ async function loadAndCheckImageManifests(
       manifest = await readArticleImageManifest(mediaFile);
     } catch (error) {
       const code = (error as NodeJS.ErrnoException)?.code;
-      if (code === "ENOENT" && !required) {
-        loaded.push(null);
-        continue;
-      }
       if (code === "ENOENT") {
         throw new Error(`${files[index]} requires sibling media.json for image readiness`);
       }
@@ -292,14 +282,13 @@ async function loadAndCheckImageManifests(
 }
 
 async function syncImageProvenance(
-  manifests: Array<LoadedImageManifest | null>,
+  manifests: LoadedImageManifest[],
   rowsBySlug: Map<string | null, ArticleRow>
 ): Promise<void> {
   const sb = supabaseAdmin();
   let synced = 0;
 
   for (const loaded of manifests) {
-    if (!loaded) continue;
     const article = rowsBySlug.get(loaded.manifest.article_slug);
     if (!article) throw new Error(`Cannot sync image provenance: article ${loaded.manifest.article_slug} was not imported`);
 
@@ -484,11 +473,7 @@ async function main() {
 
   console.log(`Parsed ${finals.length} article final file${finals.length === 1 ? "" : "s"}.`);
 
-  const imageManifests = await loadAndCheckImageManifests(
-    options.files,
-    finals,
-    options.requireImageReadiness
-  );
+  const imageManifests = await loadAndCheckImageManifests(options.files, finals);
   await verifyArticleMedia(finals, options.files);
   await runCommand("npm", ["run", "content:check-copy", "--", ...options.files]);
 

@@ -38,12 +38,12 @@ When the current message explicitly says that `scripts/articles/run-local-articl
 
 - Treat the supplied title, type, queue reference, and source packet as the one explicit approved input.
 - Do not list, claim, or update `article_generation_queue`; the wrapper owns managed-dev queue state and Grok does not receive production database credentials.
-- Complete the same research, separate writing-subagent, parent review, verifier, managed-dev Supabase import, and real-browser preview workflow.
+- Complete the same separate research, mandatory image, and writing-subagent workflow, with parent review at each gate, followed by the verifier, managed-dev Supabase import, and real-browser preview.
 - Check production overlap only with `npm run articles:inventory:production`; this GET-only path cannot mutate production.
 - Never publish or import the article to production. Normal `SUPABASE_*` variables intentionally point to managed dev in this mode.
 - End with the structured status requested by the wrapper. Report `completed` only when `final.json`, verification, managed-dev import, and rendered preview all passed. Otherwise return `skipped`, `blocked`, or `failed` with the actual reason.
 
-Use separate research and writing subagents. Give each subagent one article only. The parent model orchestrates the work, approves briefs, reviews finals, runs verification, and previews the rendered pages.
+Use separate research, image, and writing subagents. Give each subagent one article only. The parent model orchestrates the work, approves briefs and image readiness, reviews finals, runs verification, and previews the rendered pages.
 
 If there are more article ideas than available subagent slots, queue the extra articles. Do not write them from the parent role. Start the next article with a new subagent only after another subagent finishes or becomes available.
 
@@ -62,21 +62,21 @@ Tell the research subagent:
 
 ## Writing Subagent Handoff
 
-After the parent approves `brief.md`, run the separate article-image pass first when the brief marks a required visual set. Start writing only after image readiness is approved. Do not reuse the research or image subagent for writing.
+After the parent approves `brief.md`, always run the separate article-image pass. Start writing only after image readiness is approved. Do not reuse the research or image subagent for writing.
 
 ## Image Subagent Handoff
 
-When the approved brief marks a required visual set, start a new image subagent before writing. Tell it:
+For every approved brief, start a new image subagent before writing. Tell it:
 
 - You are the image subagent for one article only.
 - Do not write `final.json` and do not call subagents.
 - Use `/bloxodes-article-images`.
 - Skill file: `.agents/skills/bloxodes-article-images/SKILL.md`.
-- Read the approved `brief.md`, define the complete expected set in `media.json`, search alternate wiki/official/guide sources for every unresolved target, host approved exact matches, update image readiness in `brief.md`, and stop for parent approval.
+- Read the approved `brief.md`, define a nonzero expected set in `media.json`, search alternate wiki/official/guide sources for every unresolved target, host approved exact matches, update image readiness in `brief.md`, and stop for parent approval.
 
-The parent reviews expected count, exact matches, provenance, missing reasons, uploaded URL readback, and readiness. Send search or mapping gaps back to the image subagent. Only the parent may accept a missing entry.
+The parent reviews expected count, exact matches, provenance, missing reasons, at least two distinct query variants and two checked source-page URLs for each proposed omission, uploaded URL readback, and readiness. Send search or mapping gaps back to the image subagent. Only the parent may accept a missing entry, and only after reliable, accurate, helpful images could not be found. An article may be image-free only when all planned targets are accepted missing.
 
-For normal gameplay and general articles, tell it:
+After image readiness passes, tell the separate writing subagent for normal gameplay and general articles:
 
 - Use `/bloxodes-article-writing`.
 - Skill file: `.agents/skills/bloxodes-article-writing/SKILL.md`.
@@ -86,7 +86,7 @@ For normal gameplay and general articles, tell it:
 
 For Roblox tech, platform, or troubleshooting articles, replace the writing skill with `/bloxodes-tech-article-writing` and apply its rules on top of the base article-writing rules.
 
-For articles whose primary job is ranking a complete set of units, classes, weapons, abilities, items, characters, or similar entities, replace the writing skill with `/bloxodes-tier-list-writing`. Prefer its visual overview when a complete exact-match local image set exists. Otherwise use its text/table-first tier-list shape; missing per-item images alone must not block an otherwise source-backed ranking.
+For articles whose primary job is ranking a complete set of units, classes, weapons, abilities, items, characters, or similar entities, replace the writing skill with `/bloxodes-tier-list-writing`. Run the same mandatory image pass first. Prefer its visual overview when a complete exact-match image set exists. Use its text/table-first tier-list shape only when the unresolved image targets were explicitly accepted missing after the source search.
 
 Pass the writing subagent the paths to `brief.md` and `final.json`, the topic and article slugs, whether the article is normal, tech, or tier-list content, and any parent approval notes. Resume that writing subagent when copy changes are needed so it retains the article context.
 
@@ -100,7 +100,7 @@ For each article:
 tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
   brief.md
   final.json
-  media.json        # required for a complete visual set; source, mapping, upload, and readiness state
+  media.json        # required for every article; source, mapping, upload, and readiness state
 ```
 
 Article-owned source images live in Supabase Storage under `articles/<article-slug>/sources/`. Never add them to the repository or hotlink third-party hosts.
@@ -118,11 +118,11 @@ npm run articles:queue:update -- --queue-id <uuid> --status processing --worker 
 4. Require each research subagent to use `/bloxodes-article-research` and return `brief.md` only.
 5. Review each brief. Do not approve weak research just because the angle sounds good.
 6. Send research feedback to the same research subagent, or approve the brief.
-7. If the brief marks a required visual set, start a new image subagent. Review and approve `media.json` and the updated image-readiness block before writing. If required coverage is weak, return it to the image subagent or block the article.
+7. Start a new image subagent for every approved brief. Review and approve `media.json` and the updated image-readiness block before writing. If coverage is weak and the search is incomplete, return it to the image subagent or block the article.
 8. After research and image readiness are approved, start a new writing subagent with the normal, tech, or tier-list writing skill.
 9. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; send copy and content changes back to the writing subagent.
 10. Start or reuse the local web server with `npm run dev:local`.
-11. Run the batch verifier on reviewed final files. For a required visual set, add `--require-image-readiness`. Send copy failures to the writing subagent, source gaps to the research subagent, and image coverage or mapping failures to the image subagent.
+11. Run the batch verifier on reviewed final files. It requires sibling `media.json` for every article. Send copy failures to the writing subagent, source gaps to the research subagent, and image coverage or mapping failures to the image subagent.
 12. Open each verified localhost article in an available real browser and inspect the rendered page.
 13. Immediately after an article passes both verification and rendered browser preview, mark its queue row `completed`:
 
@@ -144,7 +144,7 @@ For a queue row claimed directly by this runner, use `blocked` for a temporary e
 npm run articles:queue:update -- --queue-id <uuid> --status blocked --reason "<concise reason>" --retry-after-minutes 180 --apply
 ```
 
-For an externally claimed one-row homelab job, return `blocked` in the structured result and let its wrapper apply backoff. Use `failed` only for an unrecoverable workflow failure. Use `skipped` only for a deliberate editorial rejection, never for a temporary inability to obtain optional media. Do not mark a row `completed` merely because `final.json` exists: the verifier and actual browser preview must both have passed.
+For an externally claimed one-row homelab job, return `blocked` in the structured result and let its wrapper apply backoff. Use `failed` only for an unrecoverable workflow failure. Use `skipped` only for a deliberate editorial rejection, never for a temporary image-search or media-service failure. Do not mark a row `completed` merely because `final.json` exists: the verifier and actual browser preview must both have passed.
 
 ## Brief Review
 
@@ -161,10 +161,10 @@ Check:
 - the outline answers the title
 - facts to avoid are named
 - open gaps are honest
-- the brief explicitly classifies media as optional or a required visual set
-- required visual sets define every expected target and count before image discovery
+- the brief defines a nonzero expected visual target set before image discovery
+- complete visual topics include every useful target; normal articles include the one to three highest-value targets
 - image candidates are mapped by target and preserve exact-match evidence, source URL, and usage/source notes
-- optional media uses only perfect-match video candidates and clean, source-checked images
+- images are clean, exact matches from reliable source pages; source provenance and any explicit attribution condition are recorded
 
 If the brief is weak, ask for more research or mark the article blocked.
 
@@ -195,8 +195,8 @@ Check:
 - links are useful, not decorative
 - videos are perfect matches and use `{{ youtube: ... }}` rather than leftover raw links
 - body images are clean, use verified Bloxodes-hosted paths, have useful alt text, and sit beside the relevant content; tier-list articles may reuse canonical game/collection assets under `apps/web/public`
-- required visual sets match sibling `media.json`: expected, verified, uploaded, inserted, missing, and accepted-missing counts reconcile, with every image beneath its planned heading or in its row
-- media is omitted when it does not make the article easier to understand
+- every article matches sibling `media.json`: expected, verified, uploaded, inserted, missing, and accepted-missing counts reconcile, with every image beneath its planned heading or in its row
+- body images are omitted only when all planned targets are accepted missing because no reliable, accurate, helpful image was found
 
 After this review, run the batch verifier on the files that look ready. Treat writing, copy, tone, body, and FAQ failures as feedback for the writing subagent, and research or accuracy gaps as feedback for the research subagent. The parent may directly fix verifier failures only when they are small non-content metadata or JSON issues, such as a wrong slug, malformed JSON, source URL typo, tag cleanup, missing `universe_id`, or an import-required null/default field.
 
@@ -207,12 +207,11 @@ Before final output, the parent model must preview every approved article on the
 Use any browser control or automation available in the current environment. Prefer Chrome or Chromium. When only terminal tools are available, use the repository's Playwright package with an installed Chrome or Chromium executable. Do not depend on a product-specific browser name.
 
 1. Start or reuse the local web server with `npm run dev:local`.
-2. If `media.json` exists, open every hosted public URL and confirm it loads. Article-owned images must use Supabase Storage; tier lists may reuse canonical game/collection assets under `apps/web/public`.
-3. Run the normal verifier. Add `--require-image-readiness` for a required visual set:
+2. Open sibling `media.json` and every hosted public URL, then confirm each image loads. Article-owned images must use Supabase Storage; tier lists may reuse canonical game/collection assets under `apps/web/public`.
+3. Run the verifier. Image readiness is mandatory:
 
 ```bash
 npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json> --file <final.json>
-npm run verify:article-finals -- --base-url http://localhost:<port> --file <final.json> --require-image-readiness
 ```
 
 Use one `--file` for each approved article and the actual localhost port shown by the dev server.
@@ -231,7 +230,7 @@ Return:
 
 - brief paths
 - final.json paths
-- media.json paths and image readiness counts for required visual sets
+- media.json paths and image readiness counts for every article
 - localhost article links
 - approved articles
 - blocked articles and why

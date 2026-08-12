@@ -1,6 +1,6 @@
 ---
 name: bloxodes-tier-list-writing
-description: Write one Bloxodes Roblox tier-list article final.json from an approved brief. Use for /articles content that ranks a complete source-backed set of units, classes, weapons, abilities, items, characters, or similar game entities using a visual tier-list when complete exact-match local images exist, or a text/table-first layout when they do not.
+description: Write one Bloxodes Roblox tier-list article final.json from an approved brief and mandatory media.json. Use for /articles content that ranks a complete source-backed set of units, classes, weapons, abilities, items, characters, or similar game entities, using a visual tier list when exact images are verified and text/table fallback only for explicitly accepted-missing image targets.
 ---
 
 # Bloxodes Tier List Writing
@@ -12,6 +12,7 @@ Use this after `bloxodes-article-research` and parent approval. Write one articl
 ```text
 tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
   brief.md
+  media.json
   final.json
 ```
 
@@ -25,7 +26,7 @@ Before ranking:
 2. List the complete expected item set. Do not let easy-to-find images define coverage.
 3. Verify ranking criteria and placements from the approved sources and game evidence. Do not copy one competitor's order blindly.
 4. Check whether every item has an exact existing Bloxodes public image path. Reuse canonical game and collection assets under `apps/web/public`; do not duplicate them into the article folder.
-5. Stop if important items or placement evidence are unresolved. Do not stop solely because some or all per-item images are unavailable; use the text/table-first shape instead.
+5. Stop if important items or placement evidence are unresolved. Run `bloxodes-article-images` for the complete item set. Use the text/table-first shape only when the parent has explicitly accepted unresolved images as missing after reliable exact-match searches.
 
 ## Required Article Shape
 
@@ -33,7 +34,7 @@ Write Markdown in `content_md` in this order:
 
 1. Give the direct answer and top recommendations with any essential caveat.
 2. State the ranking scope and criteria briefly.
-3. When every ranked item has an exact verified local image, add exactly one `tier-list` block containing only tier ranks, images, names, and optional links. Otherwise omit the block entirely and introduce the ranking with a concise Markdown summary table.
+3. When every ranked item has an exact verified image, add exactly one `tier-list` block containing only tier ranks, images, names, and optional links. Otherwise omit the block entirely and introduce the ranking with a concise Markdown summary table after every unresolved media target has been accepted missing.
 4. Add one `## <rank> Tier` section for every tier, in best-to-worst ranking order.
 5. Begin each tier section with one Markdown detail table. In visual mode, repeat the exact item name and image path from the overview. In text/table-first mode, omit the image column and include every ranked item by exact name.
 6. Follow the table with useful tier-level analysis, exceptions, and player advice. Do not narrate every row again.

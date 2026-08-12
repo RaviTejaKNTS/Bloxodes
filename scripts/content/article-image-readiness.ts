@@ -8,7 +8,7 @@ export type ArticleImageStatus = "candidate" | "verified" | "missing" | "accepte
 export type ArticleImageEntry = {
   id: string;
   label: string;
-  required?: boolean;
+  required: true;
   placement_heading: string;
   status: ArticleImageStatus;
   source_page_url?: string | null;
@@ -22,13 +22,15 @@ export type ArticleImageEntry = {
   height?: number | null;
   missing_reason?: string | null;
   acceptance_note?: string | null;
+  search_queries?: string[] | null;
+  searched_source_urls?: string[] | null;
 };
 
 export type ArticleImageManifest = {
   schema: 1;
   article_slug: string;
   visual_type: "locations" | "steps" | "npcs" | "puzzles" | "routes" | "collectibles" | "items" | "other";
-  required: boolean;
+  required: true;
   expected_count: number;
   entries: ArticleImageEntry[];
 };
@@ -78,6 +80,24 @@ function isHttpUrl(value: unknown): value is string {
   }
 }
 
+function distinctTextCount(value: unknown): number {
+  if (!Array.isArray(value)) return 0;
+  return new Set(
+    value
+      .filter((item): item is string => hasText(item, 4))
+      .map((item) => item.trim().toLowerCase())
+  ).size;
+}
+
+function distinctHttpUrlCount(value: unknown): number {
+  if (!Array.isArray(value)) return 0;
+  return new Set(
+    value
+      .filter((item): item is string => isHttpUrl(item))
+      .map((item) => new URL(item).toString())
+  ).size;
+}
+
 function normalizeHeading(value: string): string {
   return value
     .trim()
@@ -115,11 +135,15 @@ export function parseArticleImageManifest(value: unknown, label = "media.json"):
   if (value.schema !== 1) throw new Error(`${label} schema must be 1`);
   if (!hasText(value.article_slug)) throw new Error(`${label} article_slug is required`);
   if (!hasText(value.visual_type)) throw new Error(`${label} visual_type is required`);
-  if (typeof value.required !== "boolean") throw new Error(`${label} required must be boolean`);
+  if (value.required !== true) throw new Error(`${label} required must be true`);
   if (!Number.isInteger(value.expected_count) || Number(value.expected_count) < 1) {
     throw new Error(`${label} expected_count must be a positive integer`);
   }
   if (!Array.isArray(value.entries)) throw new Error(`${label} entries must be an array`);
+  for (const [index, entry] of value.entries.entries()) {
+    if (!isRecord(entry)) throw new Error(`${label} entries[${index}] must be an object`);
+    if (entry.required !== true) throw new Error(`${label} entries[${index}].required must be true`);
+  }
 
   return value as unknown as ArticleImageManifest;
 }
@@ -156,7 +180,6 @@ export function checkArticleImageReadiness(params: {
 
   for (const [index, entry] of manifest.entries.entries()) {
     const label = entry.label?.trim() || `entry ${index + 1}`;
-    const required = entry.required !== false;
 
     if (!hasText(entry.id) || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.id)) {
       errors.push(`${label}: id must be a lowercase hyphenated slug`);
@@ -166,6 +189,7 @@ export function checkArticleImageReadiness(params: {
       ids.add(entry.id);
     }
     if (!hasText(entry.label)) errors.push(`${label}: label is required`);
+    if (entry.required !== true) errors.push(`${label}: required must be true`);
     if (!hasText(entry.placement_heading)) errors.push(`${label}: placement_heading is required`);
     if (!VALID_STATUSES.has(entry.status)) errors.push(`${label}: invalid status ${String(entry.status)}`);
 
@@ -177,18 +201,24 @@ export function checkArticleImageReadiness(params: {
       if (!hasText(entry.acceptance_note, 8)) {
         errors.push(`${label}: accepted_missing needs an explicit acceptance_note`);
       }
+      if (distinctTextCount(entry.search_queries) < 2) {
+        errors.push(`${label}: accepted_missing needs at least two distinct search_queries`);
+      }
+      if (distinctHttpUrlCount(entry.searched_source_urls) < 2) {
+        errors.push(`${label}: accepted_missing needs at least two distinct searched_source_urls`);
+      }
       continue;
     }
 
     if (entry.status === "missing") {
       missing += 1;
       if (!hasText(entry.missing_reason, 8)) errors.push(`${label}: missing needs a specific missing_reason`);
-      if (manifest.required && required) errors.push(`${label}: required visual is still missing`);
+      errors.push(`${label}: required visual is still missing`);
       continue;
     }
 
     if (entry.status === "candidate") {
-      if (manifest.required && required) errors.push(`${label}: required visual is still only a candidate`);
+      errors.push(`${label}: required visual is still only a candidate`);
       continue;
     }
 

@@ -29,7 +29,7 @@ Never add production `SUPABASE_SERVICE_ROLE` to this file. The scripts accept on
 
 - Discovery inserts only into managed-dev `article_discovery_candidates`.
 - Curation reads live published production coverage through the read-only inventory endpoint and writes decisions/queue rows only to managed dev.
-- After successful discovery and curation, one Grok parent run asks the article workflow runner to process at most six managed-dev `article_generation_queue` rows with its required research and writing subagents.
+- After successful discovery and curation, one Grok parent run asks the article workflow runner to process at most six managed-dev `article_generation_queue` rows with its required research, image, and writing subagents. Every accepted article must produce `media.json` with at least one useful target; an image-free result is valid only when all targets are explicitly accepted missing after reliable exact-match searches.
 - Grok receives normal `SUPABASE_*` variables mapped to the managed-dev project only.
 - Finished `final.json`, draft article rows, and draft Storage objects remain in managed dev until manual promotion.
 - Manual promotion is the only workflow allowed to receive both dev and production credentials.

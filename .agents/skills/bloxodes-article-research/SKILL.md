@@ -98,8 +98,8 @@ When the approved idea is a tier-list article, add a dedicated readiness pass:
 1. Define one ranking scope and the criteria that matter inside it. Do not mix PvP, PvE, beginner value, and endgame value without explaining how they are weighted.
 2. Build the complete expected item inventory before assigning tiers.
 3. Record placement evidence, disagreements, update/version boundaries, and uncertain items. A community consensus may inform a placement but does not replace exact game facts.
-4. Check `data/<Game>/` and `apps/web/public/<Game>/` for canonical existing item rows and images. Record the exact public image path for every expected item.
-5. Mark the brief blocked if important item coverage, placement evidence, or exact-match images are weak.
+4. Check `data/<Game>/` and `apps/web/public/<Game>/` for canonical existing item rows and images. Record the exact public image path for every expected item, then plan source-image searches for gaps.
+5. Mark the brief blocked if important item coverage or placement evidence is weak. Image gaps continue into the mandatory image pass; text/table fallback is allowed only after the parent accepts those targets as missing.
 
 Add this to `brief.md` for tier-list work:
 
@@ -118,16 +118,17 @@ Tier-list readiness:
 
 ## Media Research
 
-Decide whether media is optional or whether the article needs a complete visual set. Location guides, routes, NPCs, puzzle states, collectibles, menu states, and ordered visual walkthroughs normally require a visual set because images remove identification and navigation guesswork. Catalog, collection, and item-set articles keep their existing required image rules.
+Every article requires a separate image pass and a nonzero visual target set. There is no optional-media classification. Images may be omitted only after the image pass cannot find reliable, accurate, helpful matches and the parent explicitly accepts every unresolved target as missing.
 
-When a visual set is required:
+Define the visual plan like this:
 
-1. List every expected visual target and the expected count before searching.
-2. Give each target a stable lowercase ID and a planned article heading.
-3. Check the lead source, but do not stop when its images are branded, unusable, incomplete, or unavailable.
-4. Fan out per target to official game media, the game's wiki, reputable community wikis, and credible guide pages. Search exact game and target names plus spelling variants.
-5. Record candidate source pages, exact-match evidence to confirm, usage/source notes, and missing targets.
-6. Mark the brief blocked when important coverage is weak. After parent brief approval, send the work through `bloxodes-article-images` before writing.
+1. List every expected visual target and the expected count before searching. The count must be at least one.
+2. For locations, routes, NPCs, puzzle states, collectibles, menu states, ordered visual walkthroughs, complete rankings, and item sets, include every distinct target that an image would help identify. For other articles, choose the one to three highest-value screenshots, UI states, items, characters, or steps.
+3. Give each target a stable lowercase ID and a planned article heading.
+4. Check the lead source, but do not stop when its images are branded, unusable, incomplete, or unavailable.
+5. Fan out per target to official game media, the game's wiki, reputable community wikis, and credible guide pages. Search exact game and target names plus spelling variants.
+6. Record candidate source pages, exact-match evidence to confirm, provenance/source notes, and missing targets.
+7. After parent brief approval, always send the work through `bloxodes-article-images` before writing.
 
 ### YouTube
 
@@ -144,17 +145,17 @@ Only a `perfect` match may be embedded. A `near` match is research only. If noth
 
 ### Images
 
-For normal articles, look for images when they clarify a menu, panel, UI state, map region, or other step that prose cannot show cleanly. For a required visual set, search every expected target even when prose could technically describe it.
+Search every planned target even when prose could technically describe it. An image is useful when it helps the reader recognize a location, menu, state, item, character, result, or action faster or more accurately than prose alone.
 
 Accept images only when they:
 
 - show the useful detail clearly
 - have no watermarks, large arrows, subscribe overlays, or competitor branding
-- have a defensible source or usage basis, preferably an official asset or our own capture
+- come from a reliable source page and match the exact game target or state
 
-Do not assume a wiki or competitor image is free to reuse. Record the source URL, what the image shows, cleanliness result, rights/source note, and whether it should be hosted.
+A clean, exact, genuine gameplay screenshot from a credible guide or wiki is usable when its provenance is recorded. Do not reject it only because another editorial site hosts it or the page does not state a general reuse license. If the source or file states an explicit attribution or license condition, record it for parent review before use. Do not add a public attribution caption automatically.
 
-Do not hotlink or save article-owned images in the repository. The separate article-image pass records `media.json`, converts approved files to WebP, uploads them to Supabase Storage, and retains provenance. Prefer zero to three body images only for normal articles; the limit does not apply to a complete visual set.
+Do not hotlink or save article-owned images in the repository. The separate article-image pass records `media.json`, converts approved files to WebP, uploads them to Supabase Storage, and retains provenance. Normal articles usually need one to three planned targets; complete visual sets may need more.
 
 ## Brief Shape
 
@@ -176,11 +177,11 @@ Evidence checked:
 Media plan:
 - YouTube match quality (perfect / near / none):
 - YouTube candidate URL and reason:
-- Visual set required (yes/no) and why:
+- Why these visuals help the reader:
 - Visual type (locations / steps / NPCs / puzzles / routes / collectibles / items / other):
 - Expected visual targets and count (stable ID, label, planned heading):
 - Image candidates by target (source page, what it shows, clean yes/no, exact-match evidence to confirm, rights note):
-- Missing targets and searches attempted:
+- Missing targets and searches attempted (at least two distinct query variants and two checked HTTP source-page URLs per target before `accepted_missing` can be proposed):
 - Cover image plan (null / generated / hosted cover.webp):
 
 Article plan:
@@ -209,5 +210,5 @@ If research is weak, say what is missing. Do not pretend the article is ready.
 - explain why this should be an article, not another page type
 - give an outline that answers the title promise
 - separate facts to use from facts to avoid
-- classify media as optional or a required visual set, with the expected set defined before discovery
+- define a nonzero expected visual set before discovery; never classify media as optional
 - make gaps obvious so the parent can approve, refine, or block the article
