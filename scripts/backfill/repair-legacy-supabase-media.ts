@@ -12,6 +12,7 @@ import {
   findNonCanonicalMediaUrls,
   LEGACY_MANAGED_SUPABASE_ORIGIN,
 } from "../shared/storage-public-url";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type Row = Record<string, unknown> & {
   id: string;
@@ -84,13 +85,13 @@ function printUsage() {
 Read-only by default. It inventories published code_pages and articles for non-canonical Supabase media URLs and prints the planned repair.
 
 Options:
-  --allow-remote-read                 Allow an intentional read-only inventory against non-local Supabase.
+  --allow-remote-read                 Allow an intentional read-only inventory outside managed development.
   --recovery-root <path>              Root containing <object-path>/<physical-version-file> directories.
   --remove-unrecoverable-body-images  Remove only unrecoverable Markdown image tokens; preserve surrounding copy/tables.
   --replace-missing-covers-from-roblox
                                       Replace an unrecoverable code-page cover with its official Roblox universe icon.
   --apply                             Upload media and update affected rows.
-  --allow-prod                        Required with --apply for non-local Supabase.
+  --allow-prod                        Required with --apply outside managed development.
   -h, --help                          Show this help.
 `);
 }
@@ -126,15 +127,6 @@ function parseOptions(argv: string[]): Options {
   }
 
   return options;
-}
-
-function isLocalUrl(value: string): boolean {
-  try {
-    const hostname = new URL(value).hostname;
-    return hostname === "127.0.0.1" || hostname === "localhost";
-  } catch {
-    return false;
-  }
 }
 
 function mediaOrigin(): string {
@@ -414,12 +406,12 @@ async function main() {
   const supabaseUrl = process.env.SUPABASE_URL?.trim();
   const serviceRole = process.env.SUPABASE_SERVICE_ROLE?.trim();
   if (!supabaseUrl || !serviceRole) throw new Error("SUPABASE_URL and SUPABASE_SERVICE_ROLE are required");
-  const local = isLocalUrl(supabaseUrl);
-  if (!local && !options.allowRemoteRead && !options.apply) {
-    throw new Error("Refusing remote inventory without --allow-remote-read");
+  const managedDevelopment = isManagedDevelopmentSupabaseUrl(supabaseUrl);
+  if (!managedDevelopment && !options.allowRemoteRead && !options.apply) {
+    throw new Error("Refusing inventory outside managed development without --allow-remote-read");
   }
-  if (options.apply && !local && !options.allowProd) {
-    throw new Error("Refusing production repair without --allow-prod");
+  if (options.apply && !managedDevelopment && !options.allowProd) {
+    throw new Error("Refusing repair outside managed development without --allow-prod");
   }
 
   const bucket = bucketName();

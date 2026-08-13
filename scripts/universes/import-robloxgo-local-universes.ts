@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { assertManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 import * as cheerio from "cheerio";
 
@@ -228,13 +229,13 @@ function printHelp() {
   console.log(`
 Usage: tsx scripts/universes/import-robloxgo-local-universes.ts [options]
 
-One-time local-only RobloxGo seed import. It fetches public RobloxGo pages,
+One-time managed-development RobloxGo seed import. It fetches public RobloxGo pages,
 extracts Roblox place IDs from /game/<placeId>/ links, resolves universe IDs
-through Roblox, and inserts official Roblox game rows into local roblox_universes.
+through Roblox, and inserts official Roblox game rows into the managed development roblox_universes table.
 
 Options:
-  --apply                     Write to local Supabase. Without this, dry-run only.
-  --no-clean                  Do not clean local universe rows before inserting.
+  --apply                     Write to managed development. Without this, dry-run only.
+  --no-clean                  Do not clean development universe rows before inserting.
   --max-pages-per-route <n>   Limit pages per route. Default ${DEFAULT_MAX_PAGES_PER_ROUTE}; 0 means no pages.
   --max-routes <n>            Limit routes after discovery.
   --route <text>              Only process routes containing this text. Repeatable.
@@ -244,17 +245,6 @@ Options:
   --place-id-limit <n>        Limit unique place IDs before resolving. Useful for local smoke imports.
   -h, --help                  Show this help.
 `);
-}
-
-function isLocalSupabaseUrl(value: string | undefined) {
-  return Boolean(value && /^https?:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?/i.test(value));
-}
-
-function assertLocalSupabase() {
-  if (isLocalSupabaseUrl(process.env.SUPABASE_URL)) return;
-  throw new Error(
-    `Refusing to write because SUPABASE_URL is not local (${process.env.SUPABASE_URL ?? "unset"}).`
-  );
 }
 
 async function fetchText(url: string, label: string) {
@@ -748,7 +738,7 @@ async function main() {
   console.log(`Supabase target: ${process.env.SUPABASE_URL ?? "unset"}`);
 
   if (options.apply) {
-    assertLocalSupabase();
+    assertManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL, "RobloxGo universe import");
   }
 
   const discoveredRoutes = await discoverRoutes();
@@ -806,7 +796,7 @@ async function main() {
   );
 
   if (!options.apply) {
-    console.log("\nDry-run complete. Re-run with --apply to clean and insert into local Supabase.");
+    console.log("\nDry-run complete. Re-run with --apply to clean and insert into managed development.");
     return;
   }
 
@@ -834,6 +824,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error("RobloxGo local import failed:", error instanceof Error ? error.message : error);
+  console.error("RobloxGo development import failed:", error instanceof Error ? error.message : error);
   process.exit(1);
 });

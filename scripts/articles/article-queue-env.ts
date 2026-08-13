@@ -2,6 +2,7 @@ import { readFileSync, statSync } from "node:fs";
 import path from "node:path";
 
 import { parse as parseDotenv } from "dotenv";
+import { assertManagedDevelopmentSupabaseUrl, isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 export type ArticleQueueCredentials = {
   url: string;
@@ -11,10 +12,6 @@ export type ArticleQueueCredentials = {
 
 export type ArticleDevCredentials = ArticleQueueCredentials;
 
-const PRODUCTION_SUPABASE_HOSTS = new Set([
-  "database.bloxodes.com",
-  "bloxodesdb.ravitejaknts.com"
-]);
 const HOMELAB_ARTICLE_ENV_PATH = "/etc/bloxodes/article-automation.env";
 
 export const ARTICLE_QUEUE_ENV_KEYS = [
@@ -29,14 +26,6 @@ export const ARTICLE_DEV_ENV_KEYS = [
   "ARTICLE_DEV_SUPABASE_SERVICE_ROLE"
 ] as const;
 
-export function isLocalSupabaseUrl(value: string): boolean {
-  try {
-    return ["localhost", "127.0.0.1", "::1"].includes(new URL(value).hostname);
-  } catch {
-    return false;
-  }
-}
-
 export function supabaseTarget(value: string): string {
   try {
     return new URL(value).hostname;
@@ -46,22 +35,7 @@ export function supabaseTarget(value: string): string {
 }
 
 export function assertNonProductionArticleTarget(value: string): void {
-  let url: URL;
-  try {
-    url = new URL(value);
-  } catch {
-    throw new Error("ARTICLE_DEV_SUPABASE_URL must be a valid URL.");
-  }
-  const host = url.hostname;
-  if (PRODUCTION_SUPABASE_HOSTS.has(host)) {
-    throw new Error(`Refusing article automation writes to the production Supabase host (${host}).`);
-  }
-  if (isLocalSupabaseUrl(value)) return;
-  if (url.protocol !== "https:" || !host.endsWith(".supabase.co")) {
-    throw new Error(
-      `Refusing article automation writes to ${host}; managed dev must use an HTTPS *.supabase.co project URL.`
-    );
-  }
+  assertManagedDevelopmentSupabaseUrl(value, "article automation");
 }
 
 export function resolveArticleDevCredentials(options: { envFile?: string | null } = {}): ArticleDevCredentials {
@@ -102,12 +76,12 @@ export function resolveArticleDevCredentials(options: { envFile?: string | null 
 
   const fallbackUrl = process.env.SUPABASE_URL?.trim();
   const fallbackRole = process.env.SUPABASE_SERVICE_ROLE?.trim();
-  if (fallbackUrl && fallbackRole && isLocalSupabaseUrl(fallbackUrl)) {
-    return { url: fallbackUrl, serviceRole: fallbackRole, source: "legacy localhost environment" };
+  if (fallbackUrl && fallbackRole && isManagedDevelopmentSupabaseUrl(fallbackUrl)) {
+    return { url: fallbackUrl, serviceRole: fallbackRole, source: "managed development environment" };
   }
   throw new Error(
     "Article dev credentials are required through ARTICLE_DEV_SUPABASE_URL and ARTICLE_DEV_SUPABASE_SERVICE_ROLE. " +
-      "Standard SUPABASE_* credentials are accepted only for localhost compatibility."
+      "Standard SUPABASE_* credentials are accepted only when they target the managed development project."
   );
 }
 

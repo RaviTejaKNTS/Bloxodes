@@ -3,6 +3,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseDotenv } from "dotenv";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import {
+  assertManagedDevelopmentSupabaseUrl,
+  isProductionSupabaseUrl
+} from "../shared/supabase-target";
 
 type Row = Record<string, unknown>;
 type AwaitableQuery = PromiseLike<{
@@ -40,25 +44,16 @@ function required(env: Record<string, string>, key: string, filename: string): s
   return value;
 }
 
-function isLocalSupabaseUrl(value: string): boolean {
-  return value.includes("127.0.0.1") || value.includes("localhost");
-}
-
 const prodEnv = readEnvFile(".envs/targets/production.env");
-const localEnv = readEnvFile(".envs/targets/local.env");
+const localEnv = readEnvFile(".envs/targets/managed-dev.env");
 
 const prodUrl = required(prodEnv, "SUPABASE_URL", ".envs/targets/production.env");
 const prodKey = required(prodEnv, "SUPABASE_SERVICE_ROLE", ".envs/targets/production.env");
-const localUrl = required(localEnv, "SUPABASE_URL", ".envs/targets/local.env");
-const localKey = required(localEnv, "SUPABASE_SERVICE_ROLE", ".envs/targets/local.env");
+const localUrl = required(localEnv, "SUPABASE_URL", ".envs/targets/managed-dev.env");
+const localKey = required(localEnv, "SUPABASE_SERVICE_ROLE", ".envs/targets/managed-dev.env");
 
-if (isLocalSupabaseUrl(prodUrl)) {
-  throw new Error("Production target SUPABASE_URL appears to be local. Refusing to use it as production source.");
-}
-
-if (!isLocalSupabaseUrl(localUrl)) {
-  throw new Error("Local target SUPABASE_URL is not local. Refusing to write.");
-}
+if (!isProductionSupabaseUrl(prodUrl)) throw new Error("Production source is not the production Supabase host.");
+assertManagedDevelopmentSupabaseUrl(localUrl, "production sample sync");
 
 const source = createClient(prodUrl, prodKey, {
   auth: { autoRefreshToken: false, persistSession: false }

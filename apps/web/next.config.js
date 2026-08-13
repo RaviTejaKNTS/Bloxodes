@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test") {
     ".envs/shared/application.env",
     ".envs/integrations/content.env",
     ".envs/integrations/distribution.env",
-    ".envs/targets/local.env"
+    ".envs/targets/managed-dev.env"
   ]) {
     const envPath = path.join(repoRoot, file);
     if (fs.existsSync(envPath)) dotenv.config({ path: envPath, override: false, quiet: true });

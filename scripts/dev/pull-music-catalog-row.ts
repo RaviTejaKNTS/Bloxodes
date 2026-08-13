@@ -1,32 +1,30 @@
 /**
  * One-off: pull the `catalog_pages` row for `roblox-music-ids` from PROD and
- * upsert it into the LOCAL Supabase stack so the page can be previewed/edited
+ * upsert it into managed Supabase development so the page can be previewed/edited
  * locally. Read-only on prod. Run with: tsx scripts/dev/pull-music-catalog-row.ts
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseDotenv } from "dotenv";
+import {
+  assertManagedDevelopmentSupabaseUrl,
+  isProductionSupabaseUrl
+} from "../shared/supabase-target";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const prodEnv = parseDotenv(
   fs.readFileSync(path.join(repoRoot, ".envs/targets/production.env"))
 );
-const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".envs/targets/local.env")));
+const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".envs/targets/managed-dev.env")));
 
 const CODE = "roblox-music-ids";
 
 function assertLocal(url: string) {
-  const host = new URL(url).hostname;
-  if (!["localhost", "127.0.0.1", "::1"].includes(host)) {
-    throw new Error(`Target is not local: ${url}`);
-  }
+  assertManagedDevelopmentSupabaseUrl(url, "production sample import");
 }
 function assertProd(url: string) {
-  const host = new URL(url).hostname;
-  if (["localhost", "127.0.0.1", "::1"].includes(host)) {
-    throw new Error(`Source is not prod: ${url}`);
-  }
+  if (!isProductionSupabaseUrl(url)) throw new Error(`Source is not production: ${new URL(url).hostname}`);
 }
 
 async function rest(base: string, key: string, pathAndQuery: string, init?: RequestInit) {
@@ -68,7 +66,7 @@ async function main() {
     headers: { Prefer: "resolution=merge-duplicates,return=minimal" },
     body: JSON.stringify(row)
   });
-  console.log(`Upserted into local catalog_pages (id=${row.id}).`);
+  console.log(`Upserted into managed-dev catalog_pages (id=${row.id}).`);
 }
 
 main().catch((err) => {

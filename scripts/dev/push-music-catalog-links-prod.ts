@@ -2,7 +2,7 @@
  * Push the three internal links into the PROD `catalog_pages` row for
  * `roblox-music-ids`, then enqueue a revalidation event so the live page
  * refreshes. Idempotent: skips edits already present. Refuses to run against a
- * local Supabase URL. Run with: tsx scripts/dev/push-music-catalog-links-prod.ts
+ * non-production Supabase URL. Run with: tsx scripts/dev/push-music-catalog-links-prod.ts
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -18,8 +18,8 @@ const CODE = "roblox-music-ids";
 const base = prodEnv.SUPABASE_URL!;
 const key = prodEnv.SUPABASE_SERVICE_ROLE!;
 
-if (["localhost", "127.0.0.1", "::1"].includes(new URL(base).hostname)) {
-  throw new Error(`Refusing to run prod push against local Supabase: ${base}`);
+if (new URL(base).hostname !== "database.bloxodes.com") {
+  throw new Error(`Refusing to run prod push against non-production Supabase: ${base}`);
 }
 
 // Same minimal, contextual edits applied locally. Each `find` must appear once.

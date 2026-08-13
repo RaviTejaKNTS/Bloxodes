@@ -40,7 +40,7 @@ tmp/content-workspace/<game-slug>/wiki/<game-slug>/
 4. Send feedback or approve the research.
 5. Ask the same subagent to use the `bloxodes-wiki-writing` skill and create `final.json`.
 6. Review `final.json`, simple language, controls, tips, metadata, and related-page assumptions.
-7. Start or reuse localhost with `npm run dev:local`.
+7. Start or reuse localhost with `npm run dev:managed`.
 8. Run:
 
 ```bash

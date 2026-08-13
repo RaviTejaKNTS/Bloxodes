@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { assertManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 import * as cheerio from "cheerio";
 
@@ -135,11 +136,11 @@ function printHelp() {
 Usage: tsx scripts/universes/collect-robloxgo-place-ids.ts [options]
 
 Discovers Roblox place IDs from public RobloxGo listing pages and stores them
-in the local robloxgo_place_discovery staging table. This does not resolve
+in the managed development robloxgo_place_discovery staging table. This does not resolve
 universe IDs and does not write to roblox_universes.
 
 Options:
-  --apply                     Write to local Supabase. Without this, dry-run only.
+  --apply                     Write to managed development. Without this, dry-run only.
   --reset                     Clear robloxgo discovery/crawl staging tables first.
   --no-skip-fetched           Re-fetch pages already marked fetched.
   --max-pages-per-route <n>   Limit pages per route. Use "all" for no cap. Default all.
@@ -149,17 +150,6 @@ Options:
   --page-delay-ms <n>         Delay between RobloxGo page requests. Default ${DEFAULT_PAGE_DELAY_MS}.
   -h, --help                  Show this help.
 `);
-}
-
-function isLocalSupabaseUrl(value: string | undefined) {
-  return Boolean(value && /^https?:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?/i.test(value));
-}
-
-function assertLocalSupabase() {
-  if (isLocalSupabaseUrl(process.env.SUPABASE_URL)) return;
-  throw new Error(
-    `Refusing to write because SUPABASE_URL is not local (${process.env.SUPABASE_URL ?? "unset"}).`
-  );
 }
 
 function retryAfterMs(headers: Headers) {
@@ -521,7 +511,7 @@ async function main() {
   console.log(`Supabase target: ${process.env.SUPABASE_URL ?? "unset"}`);
 
   if (options.apply) {
-    assertLocalSupabase();
+    assertManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL, "RobloxGo place discovery");
   }
 
   if (options.reset) {

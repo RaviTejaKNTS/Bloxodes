@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { resolveContentDates } from "../../apps/web/src/lib/content-dates";
 import { findNonCanonicalMediaUrls } from "../shared/storage-public-url";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type Row = Record<string, unknown>;
 
@@ -188,15 +189,6 @@ function hasContent(value: unknown): boolean {
   return false;
 }
 
-function isLocalSupabaseUrl(value: string): boolean {
-  try {
-    const hostname = new URL(value).hostname;
-    return hostname === "127.0.0.1" || hostname === "localhost";
-  } catch {
-    return false;
-  }
-}
-
 function parseOptions() {
   const args = process.argv.slice(2);
   let reportDir = DEFAULT_REPORT_DIR;
@@ -213,7 +205,7 @@ function parseOptions() {
       reportDir = path.resolve(repoRoot, value);
       index += 1;
     } else if (arg === "--help") {
-      console.log(`Usage: npm run validate:published-content -- [--allow-remote-read] [--fail-on-warning] [--report-dir <path>]\n\nThe validator is read-only and refuses non-local Supabase by default.`);
+      console.log(`Usage: npm run validate:published-content -- [--allow-remote-read] [--fail-on-warning] [--report-dir <path>]\n\nThe validator is read-only and defaults to the managed development project.`);
       process.exit(0);
     } else {
       throw new Error(`Unknown option: ${arg}`);
@@ -425,8 +417,8 @@ async function main() {
   const url = process.env.SUPABASE_URL?.trim();
   const key = process.env.SUPABASE_SERVICE_ROLE?.trim();
   if (!url || !key) throw new Error("SUPABASE_URL and SUPABASE_SERVICE_ROLE are required");
-  if (!isLocalSupabaseUrl(url) && !options.allowRemoteRead) {
-    throw new Error("Refusing non-local Supabase. Pass --allow-remote-read for an intentional read-only candidate check.");
+  if (!isManagedDevelopmentSupabaseUrl(url) && !options.allowRemoteRead) {
+    throw new Error("Refusing a target other than managed development. Pass --allow-remote-read for an intentional read-only candidate check.");
   }
 
   const client = createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });
@@ -498,7 +490,7 @@ async function main() {
   );
   const report = {
     generatedAt,
-    source: isLocalSupabaseUrl(url) ? "local" : "remote-read-only",
+    source: isManagedDevelopmentSupabaseUrl(url) ? "managed-dev" : "remote-read-only",
     counts,
     routeDates,
     issues

@@ -10,6 +10,7 @@ import {
   GAME_COLLECTIONS,
   type GameCollectionConfig
 } from "@/lib/game-collections";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type DatasetMeta = {
   schemaVersion?: number | null;
@@ -368,8 +369,8 @@ async function main() {
   if (!dryRun && (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE)) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE. Use --dry-run to preview without writing.");
   }
-  if (!dryRun && !allowProd && !isLocalSupabaseUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to write to a non-local Supabase URL. Use --allow-prod only after local review is clean.");
+  if (!dryRun && !allowProd && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing to write outside managed development. Use --allow-prod only after managed-dev review is clean.");
   }
 
   const [existingPublishedAt, universeIdsByGameSlug, wikiPageIdsBySlug] = await Promise.all([
@@ -405,13 +406,3 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
-
-function isLocalSupabaseUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  try {
-    const url = new URL(value);
-    return ["localhost", "127.0.0.1", "::1"].includes(url.hostname);
-  } catch {
-    return false;
-  }
-}

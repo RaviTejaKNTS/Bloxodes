@@ -1,24 +1,23 @@
 /**
- * LOCAL-ONLY: rewrite the `catalog_pages` content for `roblox-decal-ids` to
+ * MANAGED-DEV ONLY: rewrite the `catalog_pages` content for `roblox-decal-ids` to
  * match the depth/tone of the music IDs page, focused on decal-ID substance.
- * Refuses to run against a non-local Supabase URL.
+ * Refuses to run outside managed Supabase development.
  * Run: tsx scripts/dev/update-decal-catalog-content-local.ts
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseDotenv } from "dotenv";
+import { assertManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".envs/targets/local.env")));
+const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".envs/targets/managed-dev.env")));
 
 const CODE = "roblox-decal-ids";
 const base = localEnv.SUPABASE_URL!;
 const key = localEnv.SUPABASE_SERVICE_ROLE!;
 
-if (!["localhost", "127.0.0.1", "::1"].includes(new URL(base).hostname)) {
-  throw new Error(`Refusing to edit non-local Supabase: ${base}`);
-}
+assertManagedDevelopmentSupabaseUrl(base, "decal catalog edit");
 
 const intro_md = `Bloxodes' Roblox decal IDs catalog is a large, verified collection of image asset codes you can drop straight into builds, signs, spray-paint art, roleplay scenes, and game UI. A decal ID is just a number, so once you find art you like, copy it and paste it into any Roblox game or Studio property that accepts a custom image.
 

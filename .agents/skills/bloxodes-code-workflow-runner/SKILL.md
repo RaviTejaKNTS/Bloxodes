@@ -30,7 +30,7 @@ npm run upsert:code-page -- --file <payload.json> --publish
 npm run refresh:codes -- --slug <game-slug>
 ```
 
-5. Start or reuse localhost with `npm run dev:local`.
+5. Start or reuse localhost with `npm run dev:managed`.
 6. Open `/codes/<game-slug>` in the Codex Browser and verify the page renders.
 7. Return paths, localhost link, refresh status, blocked reason if any, and remaining risks.
 

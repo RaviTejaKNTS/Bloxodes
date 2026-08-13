@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type CliOptions = {
   files: string[];
@@ -171,15 +172,6 @@ async function loadRows(files: string[]): Promise<ToolRow[]> {
   return rows;
 }
 
-function isLocalSupabaseUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  try {
-    return ["localhost", "127.0.0.1", "::1"].includes(new URL(value).hostname);
-  } catch {
-    return false;
-  }
-}
-
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const rows = await loadRows(options.files);
@@ -194,10 +186,10 @@ async function main() {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE. Use --dry-run to preview without writing.");
   }
 
-  const isLocal = isLocalSupabaseUrl(process.env.SUPABASE_URL);
-  if (!isLocal && (process.env.NODE_ENV !== "production" || !options.allowProd)) {
+  const isManagedDev = isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL);
+  if (!isManagedDev && (process.env.NODE_ENV !== "production" || !options.allowProd)) {
     throw new Error(
-      "Refusing to write to non-local Supabase. Set NODE_ENV=production and pass --allow-prod after local review."
+      "Refusing to write outside managed development. Set NODE_ENV=production and pass --allow-prod after managed-dev review."
     );
   }
 
@@ -220,7 +212,7 @@ async function main() {
     }
   }
 
-  const target = isLocal ? "local Supabase" : new URL(process.env.SUPABASE_URL).hostname;
+  const target = isManagedDev ? "managed Supabase development" : new URL(process.env.SUPABASE_URL).hostname;
   console.log(`Upserted and verified ${rows.length} tools rows in ${target}.`);
 }
 

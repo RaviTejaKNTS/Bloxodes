@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 const CREATOR_STORE_API = "https://apis.roblox.com/toolbox-service/v2/assets:search";
 const ASSET_DELIVERY_API = "https://assetdelivery.roblox.com/v1/asset";
@@ -111,15 +112,6 @@ function parseArgs(argv: string[]): CliOptions {
     }
   }
   return options;
-}
-
-function isLocalSupabaseUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  try {
-    return ["localhost", "127.0.0.1", "::1"].includes(new URL(value).hostname);
-  } catch {
-    return false;
-  }
 }
 
 async function fetchJson<T>(url: string): Promise<T> {
@@ -351,8 +343,8 @@ async function applyRows(rows: FontRow[]) {
 
 async function main() {
   const options = parseArgs(process.argv.slice(2));
-  if (options.apply && !options.allowProd && !isLocalSupabaseUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to update non-local Supabase without --allow-prod");
+  if (options.apply && !options.allowProd && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing to update outside managed development without --allow-prod");
   }
 
   const { rows, totalResults } = await collectRows();

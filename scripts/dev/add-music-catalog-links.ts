@@ -1,24 +1,23 @@
 /**
- * One-off LOCAL-ONLY edit: add three internal links into the local
+ * One-off MANAGED-DEV edit: add three internal links into the development
  * `catalog_pages` row for `roblox-music-ids`. Minimal, contextual edits to
- * how_it_works_md only. Refuses to run against a non-local Supabase URL.
+ * how_it_works_md only. Refuses to run outside managed Supabase development.
  * Run with: tsx scripts/dev/add-music-catalog-links.ts
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseDotenv } from "dotenv";
+import { assertManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".envs/targets/local.env")));
+const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".envs/targets/managed-dev.env")));
 
 const CODE = "roblox-music-ids";
 const base = localEnv.SUPABASE_URL!;
 const key = localEnv.SUPABASE_SERVICE_ROLE!;
 
-if (!["localhost", "127.0.0.1", "::1"].includes(new URL(base).hostname)) {
-  throw new Error(`Refusing to edit non-local Supabase: ${base}`);
-}
+assertManagedDevelopmentSupabaseUrl(base, "catalog link edit");
 
 // [find, replace] pairs. Each `find` must appear exactly once.
 const EDITS: Array<[string, string]> = [
@@ -54,7 +53,7 @@ async function main() {
   const rows = (await (
     await rest(`catalog_pages?code=eq.${CODE}&select=id,how_it_works_md`)
   ).json()) as Array<{ id: string; how_it_works_md: string }>;
-  if (!rows.length) throw new Error(`No local row for code=${CODE}`);
+  if (!rows.length) throw new Error(`No managed-dev row for code=${CODE}`);
   const row = rows[0];
 
   let md = row.how_it_works_md;
@@ -74,7 +73,7 @@ async function main() {
     headers: { Prefer: "return=minimal" },
     body: JSON.stringify({ how_it_works_md: md })
   });
-  console.log(`Updated local catalog_pages.how_it_works_md (id=${row.id}).`);
+  console.log(`Updated managed-dev catalog_pages.how_it_works_md (id=${row.id}).`);
 }
 
 main().catch((err) => {

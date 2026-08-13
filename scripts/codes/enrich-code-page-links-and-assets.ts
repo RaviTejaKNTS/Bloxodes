@@ -8,6 +8,7 @@ import { scrapeRobloxGameMetadata } from "@/lib/roblox/game-metadata";
 import { ensureUniverseForRobloxLink } from "@/lib/roblox/universe";
 import { scrapeSocialLinksFromSources, type SocialLinks as ScrapedSocialLinks } from "@/lib/social-links";
 import { toMediaPublicUrl } from "../shared/storage-public-url";
+import { assertManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type CodePageRow = {
   id: string;
@@ -56,13 +57,6 @@ const supabase = createClient(
 const sleep = (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms));
 const ENABLE_GOOGLE_IMAGE_FALLBACK = process.argv.includes("--google-image-fallback");
 const RETRY_MISSING_UNIVERSE_ONLY = process.argv.includes("--retry-missing-universe-only");
-
-function assertLocalSupabase() {
-  const url = process.env.SUPABASE_URL ?? "";
-  if (!/^https?:\/\/(127\.0\.0\.1|localhost)(:|\/)/.test(url)) {
-    throw new Error(`Refusing to run against non-local Supabase URL: ${url}`);
-  }
-}
 
 function normalizeExternalLink(url: string | null | undefined): string | null {
   if (!url) return null;
@@ -646,7 +640,7 @@ async function verify() {
 }
 
 async function main() {
-  assertLocalSupabase();
+  assertManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL, "code-page enrichment");
 
   const args = process.argv.slice(2);
   const limit = parseLimit(args);

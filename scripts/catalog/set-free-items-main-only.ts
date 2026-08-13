@@ -1,12 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
-
-function isLocalSupabaseUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  const hostname = new URL(value).hostname;
-  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
-}
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 async function main() {
   if (process.argv.includes("--help") || process.argv.includes("-h")) {
@@ -18,8 +13,8 @@ async function main() {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE");
   }
-  if (apply && !allowProd && !isLocalSupabaseUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to update non-local Supabase without --allow-prod");
+  if (apply && !allowProd && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing to update outside managed development without --allow-prod");
   }
 
   const sb = supabaseAdmin();

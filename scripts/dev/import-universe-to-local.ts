@@ -2,6 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { parse as parseDotenv } from "dotenv";
 import { createClient } from "@supabase/supabase-js";
+import {
+  assertManagedDevelopmentSupabaseUrl,
+  isProductionSupabaseUrl
+} from "../shared/supabase-target";
 
 async function main() {
   const repoRoot = process.cwd();
@@ -12,13 +16,11 @@ async function main() {
   const prodEnv = parseDotenv(
     fs.readFileSync(path.join(repoRoot, ".envs/targets/production.env"))
   );
-  const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".envs/targets/local.env")));
+  const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".envs/targets/managed-dev.env")));
   const prodUrl = prodEnv.SUPABASE_URL!, prodKey = prodEnv.SUPABASE_SERVICE_ROLE!;
   const localUrl = localEnv.SUPABASE_URL!, localKey = localEnv.SUPABASE_SERVICE_ROLE!;
-  if (/127\.0\.0\.1|localhost/.test(prodUrl)) {
-    throw new Error("Production target is local; refusing");
-  }
-  if (!/127\.0\.0\.1|localhost/.test(localUrl)) throw new Error("Local target is not local; refusing");
+  if (!isProductionSupabaseUrl(prodUrl)) throw new Error("Production source is not the production host; refusing");
+  assertManagedDevelopmentSupabaseUrl(localUrl, "universe import");
 
   const prod = createClient(prodUrl, prodKey);
   const local = createClient(localUrl, localKey);
@@ -33,6 +35,6 @@ async function main() {
   const { error: upErr } = await local.from("roblox_universes").upsert(filtered, { onConflict: "universe_id" });
   if (upErr) throw upErr;
   const { data: check } = await local.from("roblox_universes").select("universe_id,name,slug").eq("universe_id", uid);
-  console.log("Local now has:", JSON.stringify(check));
+  console.log("Managed dev now has:", JSON.stringify(check));
 }
 main().catch((e) => { console.error(e); process.exit(1); });

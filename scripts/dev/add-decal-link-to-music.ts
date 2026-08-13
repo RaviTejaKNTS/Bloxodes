@@ -1,33 +1,39 @@
 /**
  * Add a reciprocal "Roblox decal IDs" cross-link to the music IDs page intro.
- * Idempotent. Target explicit local or production profiles via --target.
+ * Idempotent. Target explicit managed-development or production profiles.
  * Prod runs also enqueue a revalidation event.
- *   tsx scripts/dev/add-decal-link-to-music.ts --target=local
+ *   tsx scripts/dev/add-decal-link-to-music.ts --target=dev
  *   tsx scripts/dev/add-decal-link-to-music.ts --target=prod
  */
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse as parseDotenv } from "dotenv";
+import {
+  isManagedDevelopmentSupabaseUrl,
+  isProductionSupabaseUrl
+} from "../shared/supabase-target";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const target = (process.argv.find((a) => a.startsWith("--target="))?.split("=")[1] ?? "").trim();
-if (target !== "local" && target !== "prod") {
-  throw new Error('Pass --target=local or --target=prod');
+if (target !== "dev" && target !== "prod") {
+  throw new Error('Pass --target=dev or --target=prod');
 }
 
 const env = parseDotenv(
   fs.readFileSync(
-    path.join(repoRoot, target === "prod" ? ".envs/targets/production.env" : ".envs/targets/local.env")
+    path.join(repoRoot, target === "prod" ? ".envs/targets/production.env" : ".envs/targets/managed-dev.env")
   )
 );
 const CODE = "roblox-music-ids";
 const base = env.SUPABASE_URL!;
 const key = env.SUPABASE_SERVICE_ROLE!;
-const isLocal = ["localhost", "127.0.0.1", "::1"].includes(new URL(base).hostname);
-
-if (target === "prod" && isLocal) throw new Error(`--target=prod but SUPABASE_URL is local: ${base}`);
-if (target === "local" && !isLocal) throw new Error(`--target=local but SUPABASE_URL is not local: ${base}`);
+if (target === "prod" && !isProductionSupabaseUrl(base)) {
+  throw new Error(`--target=prod does not resolve to the production Supabase host`);
+}
+if (target === "dev" && !isManagedDevelopmentSupabaseUrl(base)) {
+  throw new Error(`--target=dev does not resolve to managed Supabase development`);
+}
 
 const FIND = "so you are not relying on outdated codes.";
 const ADDED =

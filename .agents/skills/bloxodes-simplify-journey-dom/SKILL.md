@@ -128,7 +128,7 @@ npm run audit:journey-browser -- --base-url http://127.0.0.1:<port>
 git diff --check
 ```
 
-Use the repository production-build environment wrapper only when the local database is unavailable and the task authorizes read-only production-backed rendering. State that caveat in the handoff.
+Use the repository production-build environment wrapper only when managed development is unavailable and the task authorizes read-only production-backed rendering. State that caveat in the handoff.
 
 Treat the in-app Browser plugin failing to initialize as a tool failure, not an application failure. Use the repository Playwright audit with installed Chrome when necessary.
 

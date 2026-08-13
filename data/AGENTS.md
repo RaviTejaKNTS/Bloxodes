@@ -20,7 +20,7 @@ When turning a game dataset into public wiki or collection pages, use `agents/co
   - Parsed by `src/lib/admin-commands.ts`.
   - Used by catalog admin-command routes.
 - `data/game-specific-ids/source-backed.json`
-  - Generated audio and decal associations used to seed the game-specific Music IDs and Decal IDs pages. Refresh through `npm run sync:game-specific-id-sources`, review the diff, then dry-run and run `npm run seed:game-specific-id-usage -- --replace-source-rows` against local Supabase so stale rows from the same source are removed.
+  - Generated audio and decal associations used to seed the game-specific Music IDs and Decal IDs pages. Refresh through `npm run sync:game-specific-id-sources`, review the diff, then dry-run and run `npm run seed:game-specific-id-usage -- --replace-source-rows` against managed Supabase development so stale rows from the same source are removed.
   - Preserve source URL, checked time, use type, and compatibility status. A source-listed row is not an in-game verification result.
 - `data/Grow a Garden/*`
   - Dataset-backed Grow a Garden collection content, including crops, seeds, pets, eggs, gears, mutations, weather, merchants, NPCs, shops, seed packs, crafting recipes, food, currencies, and `quiz.json`.

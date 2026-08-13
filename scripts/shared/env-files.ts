@@ -20,7 +20,7 @@ function selectedProfile(): string {
   if (explicit) return explicit;
   return process.env.NODE_ENV === "production" || process.env.NODE_ENV === "test"
     ? "process-only"
-    : "local";
+    : "managed-dev";
 }
 
 function selectedOverlays(): string[] {

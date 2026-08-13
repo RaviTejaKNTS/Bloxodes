@@ -61,7 +61,7 @@ def resolve_env_path() -> str:
     candidates = (
         [".envs/targets/production.env"]
         if node_env == "production"
-        else [".envs/targets/local.env"]
+        else [".envs/targets/managed-dev.env"]
     )
     for relative_path in candidates:
         candidate = os.path.join(repo_root, relative_path)
@@ -70,9 +70,9 @@ def resolve_env_path() -> str:
     raise FileNotFoundError(f"No Bloxodes env file found under {repo_root}")
 
 
-def is_local_supabase_url(value: str) -> bool:
+def is_managed_dev_supabase_url(value: str) -> bool:
     hostname = urllib.parse.urlparse(value).hostname
-    return hostname in {"localhost", "127.0.0.1", "::1"}
+    return bool(hostname and hostname.endswith(".supabase.co"))
 
 
 def now_iso() -> str:
@@ -768,10 +768,10 @@ def main() -> int:
     if "SUPABASE_URL" not in env or "SUPABASE_SERVICE_ROLE" not in env:
         print("Missing Supabase credentials in .env", file=sys.stderr)
         return 1
-    if not is_local_supabase_url(env["SUPABASE_URL"]) and os.environ.get("ALLOW_PROD_FREE_ITEMS_IMPORT") != "true":
+    if not is_managed_dev_supabase_url(env["SUPABASE_URL"]) and os.environ.get("ALLOW_PROD_FREE_ITEMS_IMPORT") != "true":
         print(
-            "Refusing to import RobloxDen candidates into non-local Supabase. "
-            "Set ALLOW_PROD_FREE_ITEMS_IMPORT=true only after a local review.",
+            "Refusing to import RobloxDen candidates outside managed development. "
+            "Set ALLOW_PROD_FREE_ITEMS_IMPORT=true only after managed-dev review.",
             file=sys.stderr,
         )
         return 1

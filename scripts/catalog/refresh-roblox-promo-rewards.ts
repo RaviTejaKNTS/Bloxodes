@@ -13,6 +13,7 @@ import {
 } from "@/lib/robloxden-promo-rewards";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun, type StatsJobRun } from "../shared/stats-job-run";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 const JOB_NAME = "catalog_roblox_promo_rewards_refresh";
 const CATALOG_PAGE_CODE = "roblox-promo-codes";
@@ -155,17 +156,12 @@ function parseArgs(argv: string[]): CliOptions {
   return options;
 }
 
-function isLocalSupabaseUrl(value: string): boolean {
-  const hostname = new URL(value).hostname;
-  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
-}
-
 function validateEnvironment(options: CliOptions) {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE");
   }
-  if (options.apply && !options.allowProd && !isLocalSupabaseUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to update non-local Supabase without --allow-prod");
+  if (options.apply && !options.allowProd && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing to update outside managed development without --allow-prod");
   }
 }
 
@@ -630,7 +626,7 @@ async function runRefresh(options: CliOptions): Promise<RefreshSummary> {
     materialChanges,
   };
   console.log(JSON.stringify({ ...summary, missing: missingCount, apply: options.apply }, null, 2));
-  if (!options.apply) console.log("Dry run only. Pass --apply to write; non-local writes also require --allow-prod.");
+  if (!options.apply) console.log("Dry run only. Pass --apply to write; targets outside managed development also require --allow-prod.");
   return summary;
 }
 

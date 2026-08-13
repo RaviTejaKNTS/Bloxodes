@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { isProductionSupabaseUrl } from "../shared/supabase-target";
 
 import {
   inferDecalCategorySlugs,
@@ -449,8 +450,7 @@ function assignCuratedRanks(payload: Array<Omit<ScorePayload, "curated_rank"> & 
 }
 
 function shouldUsePgQueryBulkUpdate(): boolean {
-  const url = process.env.SUPABASE_URL ?? "";
-  return Boolean(url) && !/localhost|127\.0\.0\.1/.test(url);
+  return isProductionSupabaseUrl(process.env.SUPABASE_URL);
 }
 
 function dollarQuote(value: string, tag: string): string {

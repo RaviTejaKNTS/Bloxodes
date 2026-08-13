@@ -194,7 +194,7 @@ function reasonLabel(reason: MatchReason): string {
 }
 
 async function loadLocalGames(): Promise<GameRow[]> {
-  const local = createTargetClient("local");
+  const local = createTargetClient("dev");
   return fetchAllRows<GameRow>(
     local,
     "games",

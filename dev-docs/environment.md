@@ -2,7 +2,7 @@
 
 Status: Active
 Last verified: 2026-08-13
-Evidence: 126 unique legacy key/value pairs verified losslessly; 119 stored variable names covered by committed examples; local, managed-dev, production-preview, and process-only profiles executed
+Evidence: 126 unique legacy key/value pairs verified losslessly; 119 stored variable names covered by 16 committed example files; managed-dev, production-preview, and process-only profiles executed
 
 ## Storage Model
 
@@ -13,7 +13,6 @@ env/                         # committed contracts only
 
 .envs/                       # ignored real values; mode 600
   targets/
-    local.env
     managed-dev.env
     production.env
   shared/application.env
@@ -28,12 +27,11 @@ Real secrets are never committed. `env/examples/` is the variable-name and safe-
 
 ## Profiles
 
-- `local`: true local Supabase at `127.0.0.1:54321`; generated with `npm run env:sync-local` from the running CLI stack.
-- `managed-dev`: remote non-production `*.supabase.co` project used by article queue/writer workflows.
+- `managed-dev`: remote non-production HTTPS `*.supabase.co` project used by all workstation web development, scripts, previews, content imports, and article queue/writer workflows.
 - `production-preview`: workstation preview against self-hosted production; explicit selection only.
 - `process-only`: loads no files. This is the default for `NODE_ENV=production` and `NODE_ENV=test`.
 
-Select a profile with `BLOXODES_ENV_PROFILE`. Development defaults to `local`; production/test never fall back to workstation files.
+Select a profile with `BLOXODES_ENV_PROFILE`. Development defaults to `managed-dev`; production/test never fall back to workstation files. The retired local Supabase CLI database has no profile or env file and must not be used.
 
 ## Overlays
 
@@ -58,9 +56,8 @@ For a workstation command that intentionally targets production, set both `BLOXO
 - `npm run env:migrate`: one-time migration command; classify legacy root files into `.envs/` without deleting the sources. It refuses to run after legacy cleanup.
 - `npm run env:verify`: one-time proof that every legacy key/value pair and the Google JSON secret survived migration. The Google file path is intentionally relocated from `.env.secrets/` to `.envs/secrets/`.
 - `npm run env:check`: ensure every real stored variable name has a committed example and secret files are not group/world readable.
-- `npm run env:sync-local`: derive current local publishable/secret API keys from the running Bloxodes Supabase CLI stack without printing them.
-- `npm run dev:local`: use the true local target and refuse non-local Supabase.
 - `npm run dev:managed`: use the managed-development target and refuse anything outside HTTPS `*.supabase.co`.
+- `npm run dev:local`: compatibility alias to `dev:managed`; despite the name, it starts a local Next.js process against managed Supabase development.
 - `npm run dev:prod`: use the explicit production target for a read-only operator preview.
 
 ## Value Ownership

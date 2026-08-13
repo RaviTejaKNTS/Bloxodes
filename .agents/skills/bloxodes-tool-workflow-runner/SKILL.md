@@ -31,7 +31,7 @@ After the parent approves the brief, send the same subagent:
 3. Review whether this is a real interactive tool, not a static content page.
 4. Ask the same subagent to use `/bloxodes-tool-writing` and create `final.json`.
 5. Review formula assumptions, limits, metadata, copy, and JSON.
-6. Start or reuse localhost with `npm run dev:local`.
+6. Start or reuse localhost with `npm run dev:managed`.
 7. Run:
 
 ```bash

@@ -2,7 +2,7 @@
 
 Status: Active; production has documented degraded components
 Last verified: 2026-08-13
-Evidence: repository `ef536f62`, public health/routes, VPS Docker/Swarm, production PostgreSQL, homelab systemd, and local Docker inspection
+Evidence: current worktree architecture/configuration, public health/routes, managed-development checks, VPS Docker/Swarm, production PostgreSQL, and homelab systemd
 
 ## Product Surfaces
 
@@ -51,7 +51,7 @@ Current scale sampled read-only on 2026-08-13:
 
 - VPS `codex-admin` crontab owns universe stats, item stats, codes, indexing, events, puzzles, catalog, music IDs, decals, promo rewards, free items, revalidation, and cache warming.
 - The worker runs ephemeral `bloxodes-stats-worker:production` containers on the private `supabase_default` network and normally points database traffic at `http://supabase-kong:8000`.
-- Homelab systemd owns article discovery/curation and managed-dev article writing.
+- Managed Supabase development owns all workstation/non-production database work; homelab systemd owns article discovery/curation and managed-dev article writing.
 - GitHub Actions owns immutable web image build/deploy and retains manual fallback workflows for several scheduled pipelines.
 - Production database events flow through `revalidation_events` and `cache_warm_events`; VPS minute cron invokes the two Edge Function workers.
 

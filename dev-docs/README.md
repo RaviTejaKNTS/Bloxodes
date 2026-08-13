@@ -2,7 +2,7 @@
 
 Status: Active
 Last verified: 2026-08-13
-Verified against: repository `ef536f62` plus read-only production, VPS, homelab, Cloudflare, Docker, and Supabase checks performed on 2026-08-13
+Evidence: current worktree code/configuration plus read-only production, VPS, homelab, Cloudflare, Docker, managed-development, and Supabase checks performed on 2026-08-13
 
 ## Authority
 
@@ -48,7 +48,7 @@ GitHub Actions ----------> web image build/deploy and manual fallback jobs
 
 - [Architecture](architecture.md): deployed components, applications, data boundaries, and request/data flows.
 - [Environment system](environment.md): profiles, overlays, storage, loading precedence, examples, migration, and external secret owners.
-- [Data environments](data/data-environments.md): true local, managed development, production, datasets, and write safety.
+- [Data environments](data/data-environments.md): managed workstation development, production, datasets, and write safety.
 - [Production Supabase](data/supabase.md): live self-hosted topology, local CLI stack, current versions, known health caveats, and upgrade watch items.
 - [VPS](infrastructure/vps.md): host, security, resources, containers, schedules, and operational risks.
 - [Docker](infrastructure/docker.md): web/worker images, build-secret boundary, local containers, and Compose.

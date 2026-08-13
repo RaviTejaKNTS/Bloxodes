@@ -121,7 +121,7 @@ npm run articles:queue:update -- --queue-id <uuid> --status processing --worker 
 7. Start a new image subagent for every approved brief. Review and approve `media.json` and the updated image-readiness block before writing. If coverage is weak and the search is incomplete, return it to the image subagent or block the article.
 8. After research and image readiness are approved, start a new writing subagent with the normal, tech, or tier-list writing skill.
 9. Review `final.json`. Fix only tiny non-content metadata or JSON issues directly; send copy and content changes back to the writing subagent.
-10. Start or reuse the local web server with `npm run dev:local`.
+10. Start or reuse the local web server with `npm run dev:managed`.
 11. Run the batch verifier on reviewed final files. It requires sibling `media.json` for every article. Send copy failures to the writing subagent, source gaps to the research subagent, and image coverage or mapping failures to the image subagent.
 12. Open each verified localhost article in an available real browser and inspect the rendered page.
 13. Immediately after an article passes both verification and rendered browser preview, mark its queue row `completed`:
@@ -206,7 +206,7 @@ Before final output, the parent model must preview every approved article on the
 
 Use any browser control or automation available in the current environment. Prefer Chrome or Chromium. When only terminal tools are available, use the repository's Playwright package with an installed Chrome or Chromium executable. Do not depend on a product-specific browser name.
 
-1. Start or reuse the local web server with `npm run dev:local`.
+1. Start or reuse the local web server with `npm run dev:managed`.
 2. Open sibling `media.json` and every hosted public URL, then confirm each image loads. Article-owned images must use Supabase Storage; tier lists may reuse canonical game/collection assets under `apps/web/public`.
 3. Run the verifier. Image readiness is mandatory:
 

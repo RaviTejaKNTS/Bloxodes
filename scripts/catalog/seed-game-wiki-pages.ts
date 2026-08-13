@@ -5,6 +5,7 @@ import { supabaseAdmin } from "@/lib/supabase-admin";
 import { GAME_COLLECTION_GROUPS, GAME_COLLECTIONS } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
 import { validateWikiControlsJson } from "../shared/wiki-controls";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type GameCollectionGroup = (typeof GAME_COLLECTION_GROUPS)[number];
 
@@ -963,22 +964,12 @@ function truncateMeta(value: string): string {
   return `${normalized.slice(0, 152).replace(/\s+\S*$/, "")}...`;
 }
 
-function isLocalSupabaseUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  try {
-    const url = new URL(value);
-    return ["localhost", "127.0.0.1", "::1"].includes(url.hostname);
-  } catch {
-    return false;
-  }
-}
-
 async function main() {
   if (!dryRun && (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE)) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE. Use --dry-run to preview without writing.");
   }
-  if (!dryRun && !allowProd && !isLocalSupabaseUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to write to a non-local Supabase URL. Use --allow-prod only after local review is clean.");
+  if (!dryRun && !allowProd && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing to write outside managed development. Use --allow-prod only after managed-dev review is clean.");
   }
 
   const [existingPublishedAt, universeIdsByGameSlug] = await Promise.all([

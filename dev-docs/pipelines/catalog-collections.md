@@ -18,7 +18,7 @@ Roblox-facing scheduled jobs share the `roblox-api` lock to avoid cross-pipeline
 
 - Structured datasets live under `data/<Game>/...` and follow `data/AGENTS.md`.
 - Page metadata/copy lives in `wiki_collection_pages` (439 rows at verification).
-- Workflow order: research -> source-backed data -> image collection/wiring -> writing -> local seed/preview -> controlled production promotion.
+- Workflow order: research -> source-backed data -> image collection/wiring -> writing -> managed-development seed/local web preview -> controlled production promotion.
 - Collection codes use `<game-slug>-<collection-slug>`.
 - Roblox APIs may verify identity/metadata/thumbnails, but item rows come from source research rather than assuming an API endpoint exists.
 

@@ -2,7 +2,7 @@
 
 Status: Active
 Last verified: 2026-08-13
-Evidence: root Dockerfiles, compose file, local Docker inventory, and live container images
+Evidence: root Dockerfiles, compose file, production container inventory, and live container images
 
 ## Web Image
 
@@ -14,9 +14,9 @@ GitHub production builds receive one aggregate BuildKit secret at `/run/secrets/
 
 `Dockerfile.stats-worker` packages scripts, relevant web libraries, types, and datasets with Node 24 and Python. The VPS cron wrapper starts ephemeral `bloxodes-stats-worker:production` containers with a selected `STATS_WORKER_COMMAND`, a private Supabase network, the root-owned worker env file, locks, and per-job logs.
 
-## Local Containers
+## Retired Local Supabase Containers
 
-The local Supabase CLI project is `roblox-codes`. On verification it ran PostgreSQL 17.6.1.075, Kong 2.8.1, GoTrue 2.186, and PostgREST 14.3. Regenerate `.envs/targets/local.env` from the running Kong config with `npm run env:sync-local`; never paste printed keys into docs.
+The Supabase CLI project `roblox-codes` was observed on this workstation during the 2026-08-13 audit, but it is no longer part of the active Bloxodes workflow. Do not start it, generate credentials from it, or point application/scripts at it. Local Next.js development uses `.envs/targets/managed-dev.env`; leftover Docker containers may be removed separately when no other work depends on them.
 
 ## Compose
 

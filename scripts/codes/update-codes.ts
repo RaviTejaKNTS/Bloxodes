@@ -1,4 +1,5 @@
 import "../shared/load-env";
+import { isProductionSupabaseUrl } from "../shared/supabase-target";
 import { promises as fs } from "node:fs";
 import { detectProvider, getCodeDisplayPriority, scrapeSources } from "@/lib/scraper";
 import { supabaseAdmin } from "@/lib/supabase-admin";
@@ -92,15 +93,6 @@ function statusRank(status: CleanupCodeRow["status"]): number {
   if (status === "active") return 2;
   if (status === "check") return 1;
   return 0;
-}
-
-function isRemoteSupabase(): boolean {
-  try {
-    const host = new URL(process.env.SUPABASE_URL ?? "").hostname;
-    return host !== "localhost" && host !== "127.0.0.1";
-  } catch {
-    return true;
-  }
 }
 
 async function fetchAllCodeRows(sb: ReturnType<typeof supabaseAdmin>) {
@@ -223,7 +215,7 @@ function buildCopyCleanupPlan(rows: CleanupCodeRow[]) {
 }
 
 async function runCopyCleanup(sb: ReturnType<typeof supabaseAdmin>) {
-  if (APPLY_COPY_CLEANUP && isRemoteSupabase()) {
+  if (APPLY_COPY_CLEANUP && isProductionSupabaseUrl(process.env.SUPABASE_URL)) {
     if (process.env.NODE_ENV !== "production" || !ALLOW_PROD) {
       throw new Error(
         "Production copy-text cleanup requires NODE_ENV=production, --apply, and --allow-prod."

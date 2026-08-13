@@ -31,7 +31,7 @@ After the parent approves the brief, send the same subagent:
 3. Review existing coverage, data state, sources, useful fields, and gaps.
 4. Ask the same subagent to use `/bloxodes-catalog-writing` and create `final.json`.
 5. Review copy, metadata, FAQs, and JSON.
-6. Start or reuse localhost with `npm run dev:local`.
+6. Start or reuse localhost with `npm run dev:managed`.
 7. Run:
 
 ```bash

@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { spawn } from "node:child_process";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type Options = {
   allowLive: boolean;
@@ -83,10 +84,10 @@ function printHelp() {
   console.log(`
 Usage: npm run pipeline:universes -- [options]
 
-Local-safe orchestration for the universe discovery pipeline.
+Managed-development-safe orchestration for the universe discovery pipeline.
 
 Options:
-  --allow-live              Allow non-local SUPABASE_URL targets
+  --allow-live              Allow targets other than managed development
   --skip-discovery          Skip Explore universe collection
   --light-limit <number>    Light enrichment limit; 0 skips (default: 500)
   --new-stats-limit <n>     Refresh NEW game stats; 0 skips
@@ -100,16 +101,11 @@ Options:
 `);
 }
 
-function isLocalSupabaseUrl(value: string | undefined) {
-  if (!value) return false;
-  return /^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?/i.test(value);
-}
-
 function assertSafeTarget(options: Options) {
   if (options.allowLive) return;
-  if (isLocalSupabaseUrl(process.env.SUPABASE_URL)) return;
+  if (isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) return;
   throw new Error(
-    `Refusing to run universe pipeline against non-local SUPABASE_URL (${process.env.SUPABASE_URL ?? "unset"}). Use --allow-live when intentionally running outside local Supabase.`
+    `Refusing to run universe pipeline outside managed development (${process.env.SUPABASE_URL ?? "unset"}). Use --allow-live only for an intentional live target.`
   );
 }
 

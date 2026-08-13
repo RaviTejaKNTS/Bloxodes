@@ -3,6 +3,7 @@ import "../shared/load-env";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type Options = { file: string; dryRun: boolean; allowProd: boolean; replaceSourceRows: boolean };
 
@@ -23,15 +24,6 @@ function parseArgs(argv: string[]): Options {
   return options;
 }
 
-function isLocalUrl(value: string | undefined) {
-  if (!value) return false;
-  try {
-    return ["localhost", "127.0.0.1", "::1"].includes(new URL(value).hostname);
-  } catch {
-    return false;
-  }
-}
-
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const raw = await readFile(path.resolve(process.cwd(), options.file), "utf8");
@@ -40,8 +32,8 @@ async function main() {
   const decals = Array.isArray(payload.decals) ? payload.decals : [];
   console.log(`Prepared ${music.length} music and ${decals.length} decal usage rows.`);
   if (options.dryRun) return;
-  if (!options.allowProd && !isLocalUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to write outside local Supabase without --allow-prod.");
+  if (!options.allowProd && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing to write outside managed development without --allow-prod.");
   }
   const client = supabaseAdmin();
   if (options.replaceSourceRows) {

@@ -1,12 +1,6 @@
 {
   "version": 1,
   "profiles": {
-    "local": [
-      "shared/application.env",
-      "integrations/content.env",
-      "integrations/distribution.env",
-      "targets/local.env"
-    ],
     "managed-dev": [
       "shared/application.env",
       "integrations/content.env",

@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 const CREATOR_STORE_API = "https://apis.roblox.com/toolbox-service/v2/assets:search";
 const THUMBNAIL_API = "https://thumbnails.roblox.com/v1/assets";
@@ -76,15 +77,6 @@ function parseArgs(argv: string[]): CliOptions {
     } else throw new Error(`Unknown option: ${arg}`);
   }
   return options;
-}
-
-function isLocalSupabaseUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  try {
-    return ["localhost", "127.0.0.1", "::1"].includes(new URL(value).hostname);
-  } catch {
-    return false;
-  }
 }
 
 function optionalSafeInteger(value: unknown): number | null {
@@ -234,8 +226,8 @@ async function applyRows(rows: MeshRow[]) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  if (options.apply && !isLocalSupabaseUrl(supabaseUrl) && !options.allowProd) {
-    throw new Error("Refusing a non-local write without --allow-prod");
+  if (options.apply && !isManagedDevelopmentSupabaseUrl(supabaseUrl) && !options.allowProd) {
+    throw new Error("Refusing a write outside managed development without --allow-prod");
   }
 
   const assets = await loadCreatorStoreMeshes();

@@ -6,6 +6,7 @@ import path from "node:path";
 import { getGameCollectionConfigByWikiPath } from "@/lib/game-collections";
 import { repoPath } from "@/lib/paths";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type CliOptions = {
   game: string | null;
@@ -40,7 +41,7 @@ function printUsage() {
   npm run export:game-collection-final -- --game <game-slug> --collection <collection-slug> --output-root <directory> [options]
 
 Options:
-  --allow-remote-read   Allow an intentional read-only export from a non-local Supabase URL.
+  --allow-remote-read   Allow an intentional read-only export outside managed development.
   --force               Replace an existing final.json.
   --dry-run             Print the final JSON without writing a file.
   -h, --help            Show this help.
@@ -102,15 +103,6 @@ function requireValue(argv: string[], index: number, option: string): string {
   return value;
 }
 
-function isLocalSupabaseUrl(value: string): boolean {
-  try {
-    const url = new URL(value);
-    return ["localhost", "127.0.0.1", "::1"].includes(url.hostname);
-  } catch {
-    return false;
-  }
-}
-
 function escapeRegExp(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
@@ -144,8 +136,8 @@ async function main() {
   const supabaseUrl = process.env.SUPABASE_URL;
   const serviceRole = process.env.SUPABASE_SERVICE_ROLE;
   if (!supabaseUrl || !serviceRole) throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE");
-  if (!isLocalSupabaseUrl(supabaseUrl) && !options.allowRemoteRead) {
-    throw new Error("Refusing non-local Supabase. Pass --allow-remote-read for an intentional read-only export.");
+  if (!isManagedDevelopmentSupabaseUrl(supabaseUrl) && !options.allowRemoteRead) {
+    throw new Error("Refusing a read outside managed development. Pass --allow-remote-read for an intentional remote export.");
   }
 
   const sb = supabaseAdmin();

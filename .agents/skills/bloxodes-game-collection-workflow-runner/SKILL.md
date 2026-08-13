@@ -82,7 +82,7 @@ Also give the writing subagent:
 9. Review image coverage, quality, paths, dataset wiring, and checker result.
 10. Writing gate: spawn a writing subagent with `bloxodes-game-collection-writing`.
 11. Review `final.json`. Send copy/tone/structure/FAQ fixes to the writing subagent. Send data/image gaps back to the collection subagent.
-12. Start or reuse localhost with `npm run dev:local`.
+12. Start or reuse localhost with `npm run dev:managed`.
 13. Run:
 
 ```bash

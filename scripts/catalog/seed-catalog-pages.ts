@@ -3,6 +3,7 @@ import "../shared/load-env";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type CliOptions = {
   files: string[];
@@ -171,16 +172,6 @@ async function loadRows(options: CliOptions): Promise<CatalogPageRow[]> {
   return rows;
 }
 
-function isLocalSupabaseUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  try {
-    const url = new URL(value);
-    return ["localhost", "127.0.0.1", "::1"].includes(url.hostname);
-  } catch {
-    return false;
-  }
-}
-
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const rows = await loadRows(options);
@@ -196,8 +187,8 @@ async function main() {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE. Use --dry-run to preview without writing.");
   }
-  if (!options.allowProd && !isLocalSupabaseUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to write to a non-local Supabase URL. Use --allow-prod only after local review is clean.");
+  if (!options.allowProd && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing to write outside managed development. Use --allow-prod only after managed-dev review is clean.");
   }
 
   const sb = supabaseAdmin();

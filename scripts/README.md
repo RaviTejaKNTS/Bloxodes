@@ -18,10 +18,10 @@ The `scripts/` folder is organized by task area so it's easier to find the right
 
 Prefer the `package.json` scripts when available so command names stay stable even if file locations change again.
 
-Local development note:
+Development environment note:
 
 - shared script env loading lives in `scripts/shared/load-env.ts`
-- local scripts load the true local profile; managed development and production preview are explicit profiles, and process env still wins
+- workstation scripts load managed development by default; production preview is explicit, production/test are process-only, and process env always wins
 - Google Indexing loads `.envs/pipelines/indexing.env`; keep indexing secrets separate from analytics
 - production jobs can keep injecting `SUPABASE_*` and other env vars the same way they do today
 - see `dev-docs/environment.md` for profiles, overlays, examples, migration, and verification commands

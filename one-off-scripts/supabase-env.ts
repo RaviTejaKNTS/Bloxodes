@@ -4,7 +4,7 @@ import path from "node:path";
 import { parse } from "dotenv";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
-export type DatabaseTarget = "prod" | "local";
+export type DatabaseTarget = "prod" | "dev";
 
 type TargetConfig = {
   url: string;
@@ -26,9 +26,9 @@ export function getTargetConfig(target: DatabaseTarget): TargetConfig {
   const envPath =
     target === "prod"
       ? process.env.PROD_ENV_FILE ?? ".envs/targets/production.env"
-      : process.env.LOCAL_ENV_FILE ?? ".envs/targets/local.env";
+      : process.env.DEV_ENV_FILE ?? ".envs/targets/managed-dev.env";
   const env = readEnvFile(envPath);
-  const url = env.SUPABASE_URL || (target === "local" ? "http://127.0.0.1:54321" : "");
+  const url = env.SUPABASE_URL;
   const serviceRole = env.SUPABASE_SERVICE_ROLE;
 
   if (!url || !serviceRole) {

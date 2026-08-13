@@ -29,7 +29,7 @@ After the parent approves the brief, continue the same subagent with SendMessage
 3. Review source proof, topic coverage, difficulty plan, and facts to avoid.
 4. Ask the same subagent to use the `bloxodes-quiz-writing` skill and create `final.json`.
 5. Review that questions are fair, stable, and useful.
-6. Start or reuse localhost with `npm run dev:local`.
+6. Start or reuse localhost with `npm run dev:managed`.
 7. Run:
 
 ```bash

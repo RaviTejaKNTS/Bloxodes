@@ -74,7 +74,7 @@ function printUsage() {
       "  - YouTube directive + hosted image media checks",
       "  - require and validate sibling media.json for every article",
       "  - run content:check-copy",
-      "  - import into local Supabase",
+      "  - import into managed Supabase development",
       "  - read back saved article rows",
       "  - request every /articles/<slug> route",
       "  - confirm YouTube embeds and local images appear in HTML when present",

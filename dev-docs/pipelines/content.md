@@ -20,7 +20,7 @@ Evidence: page tables/counts, workflow skills, final validators/importers, route
 2. Research production overlap, identity, sources, scope, and route expectations.
 3. Write a typed `final.json` using the page-family skill.
 4. Validate with the relevant `verify:*` command.
-5. Import/seed locally and preview.
+5. Import/seed into managed development and preview through the local Next.js process.
 6. Promote with a controlled idempotent script or forward-only migration.
 7. Revalidate public paths/tags and verify the published URL.
 

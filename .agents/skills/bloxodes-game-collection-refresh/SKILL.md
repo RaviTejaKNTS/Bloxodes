@@ -79,7 +79,7 @@ Export the current page row into the content workspace before editing existing c
 npm run export:game-collection-final -- --game <game-slug> --collection <collection-slug> --output-root tmp/content-workspace/<game-slug>/collections
 ```
 
-Pass `--allow-remote-read` only for an intentional read-only snapshot from a non-local database. The export helper never writes to the database.
+Pass `--allow-remote-read` only for an intentional read-only snapshot from production or another non-default target. The export helper never writes to the database.
 
 Use `bloxodes-game-collection-writing` to update `final.json` when any of these are true:
 

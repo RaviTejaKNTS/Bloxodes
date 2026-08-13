@@ -3,6 +3,7 @@ import "../shared/load-env";
 import { classifyFreeItemEligibility, type FreeItemEligibilityInput } from "@/lib/free-items-eligibility";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 const CATEGORIES_API = "https://catalog.roblox.com/v1/categories";
 const SEARCH_API = "https://catalog.roblox.com/v1/search/items/details";
@@ -210,12 +211,6 @@ function parseArgs(argv: string[]): CliOptions {
     }
   }
   return options;
-}
-
-function isLocalUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  const hostname = new URL(value).hostname;
-  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
 }
 
 function asNumber(value: unknown): number | null {
@@ -751,8 +746,8 @@ async function main() {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE");
   }
-  if (options.apply && !options.allowProd && !isLocalUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to write to non-local Supabase without --allow-prod");
+  if (options.apply && !options.allowProd && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing to write outside managed development without --allow-prod");
   }
 
   const run = await startStatsJobRun({

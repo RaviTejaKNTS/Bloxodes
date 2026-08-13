@@ -56,6 +56,6 @@ The newest audit ledger currently lives in the main checkout as `docs/stats/2026
 ## Safety
 
 - Never run overlapping same-tier workers outside a bounded lease/claim test.
-- Production operator commands must identify the production target; local/managed-dev output is not production evidence.
+- Production operator commands must identify the production target; managed-development output is not production evidence.
 - Rank/index/rollup/audit commands can mutate state; capture before/after and job IDs.
 - Keep Roblox calls serialized through appropriate lock groups.

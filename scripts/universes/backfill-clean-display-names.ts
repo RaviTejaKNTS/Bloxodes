@@ -3,6 +3,7 @@ import "../shared/load-env";
 import { cleanRobloxUniverseDisplayName } from "@/lib/roblox/display-name";
 import { slugify } from "@/lib/slug";
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type UniverseDisplayNameRow = {
   universe_id: number;
@@ -66,16 +67,6 @@ function normalize(value?: string | null): string | null {
   if (typeof value !== "string") return null;
   const normalized = value.replace(/\s+/g, " ").trim();
   return normalized || null;
-}
-
-function isLocalSupabaseUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  try {
-    const url = new URL(value);
-    return ["localhost", "127.0.0.1", "::1"].includes(url.hostname);
-  } catch {
-    return false;
-  }
 }
 
 function buildUpdate(row: UniverseDisplayNameRow): UniverseNameUpdate | null {
@@ -307,8 +298,8 @@ async function main() {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE.");
   }
-  if (apply && !allowProd && !isLocalSupabaseUrl(process.env.SUPABASE_URL)) {
-    throw new Error("Refusing to write to a non-local Supabase URL. Add --allow-prod after a clean production dry-run.");
+  if (apply && !allowProd && !isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing to write outside managed development. Add --allow-prod after a clean production dry-run.");
   }
 
   if (apply) {

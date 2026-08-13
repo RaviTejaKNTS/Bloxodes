@@ -34,5 +34,5 @@ The VPS worker runs `refresh:codes` every six hours at minute 0 with configured 
 ## Safety
 
 - Never manually seed active/expired codes or code dates.
-- Do not run a production refresh using the local or managed-dev target.
+- Do not run a production refresh using the managed-development target.
 - New page publication must preserve metadata, sitemap/search/feed/revalidation behavior.

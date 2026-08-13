@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { isManagedDevelopmentSupabaseUrl } from "../shared/supabase-target";
 
 type ToolFinal = {
   code: string;
@@ -96,22 +97,12 @@ async function readEntry(file: string): Promise<FinalEntry> {
   throw new Error(`${file} is not a supported tool or events final.json`);
 }
 
-function isLocalSupabaseUrl(value: string | undefined): boolean {
-  if (!value) return false;
-  try {
-    const url = new URL(value);
-    return ["localhost", "127.0.0.1", "::1"].includes(url.hostname);
-  } catch {
-    return false;
-  }
-}
-
 function assertLocalWriteTarget() {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE) {
     throw new Error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE.");
   }
-  if (!isLocalSupabaseUrl(process.env.SUPABASE_URL)) {
-    throw new Error(`Refusing to write to non-local Supabase URL (${process.env.SUPABASE_URL}).`);
+  if (!isManagedDevelopmentSupabaseUrl(process.env.SUPABASE_URL)) {
+    throw new Error("Refusing verification writes outside managed Supabase development.");
   }
 }
 
