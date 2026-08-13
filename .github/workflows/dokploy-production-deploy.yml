@@ -146,6 +146,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 30
     needs: classify
     if: ${{ needs.classify.outputs.deploy == 'true' }}
@@ -153,6 +154,7 @@ jobs:
       group: dokploy-production
       cancel-in-progress: false
     env:
+      BLOXODES_ENV_PROFILE: process-only
       PRODUCTION_SITE_URL: ${{ inputs.site_url || vars.PRODUCTION_SITE_URL || 'https://bloxodes.com' }}
       IMAGE_NAME: ghcr.io/ravitejaknts/bloxodes-web
       DEPLOY_IMAGE_SHA: ${{ inputs.image_sha || github.sha }}

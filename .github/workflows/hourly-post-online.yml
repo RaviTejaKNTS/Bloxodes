@@ -11,8 +11,10 @@ on:
 jobs:
   post-online:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 45
     env:
+      BLOXODES_ENV_PROFILE: process-only
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}

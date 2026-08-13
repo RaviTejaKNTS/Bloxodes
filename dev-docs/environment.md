@@ -2,7 +2,7 @@
 
 Status: Active
 Last verified: 2026-08-13
-Evidence: 126 unique legacy key/value pairs verified losslessly; 119 stored variable names covered by 16 committed example files; managed-dev, production-preview, and process-only profiles executed
+Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on 2026-08-13
 
 ## Storage Model
 
@@ -53,12 +53,13 @@ For a workstation command that intentionally targets production, set both `BLOXO
 
 ## Commands
 
-- `npm run env:migrate`: one-time migration command; classify legacy root files into `.envs/` without deleting the sources. It refuses to run after legacy cleanup.
-- `npm run env:verify`: one-time proof that every legacy key/value pair and the Google JSON secret survived migration. The Google file path is intentionally relocated from `.env.secrets/` to `.envs/secrets/`.
+- `npm run env:doctor`: verify the full workstation layout, private modes, committed example coverage, target host/key consistency, profile order, ignored Git boundary, and absence of retired root/local-Supabase files without printing values.
 - `npm run env:check`: ensure every real stored variable name has a committed example and secret files are not group/world readable.
-- `npm run dev:managed`: use the managed-development target and refuse anything outside HTTPS `*.supabase.co`.
-- `npm run dev:local`: compatibility alias to `dev:managed`; despite the name, it starts a local Next.js process against managed Supabase development.
+- `npm run dev` or `npm run dev:managed`: start the workstation Next.js app against managed development and refuse anything outside HTTPS `*.supabase.co`.
 - `npm run dev:prod`: use the explicit production target for a read-only operator preview.
+- `npm run supabase:migrations:check`: validate the committed migration chain and convergence policy without a database connection.
+- `npm run supabase:managed-dev:check`: run guarded, read-only managed-development schema/API readiness checks.
+- `npm run platform:sync:check`: read-only comparison of Git, live deployment, homelab, VPS image, and production migration state.
 
 ## Value Ownership
 
@@ -73,9 +74,7 @@ Do not create a pipeline env file merely for symmetry. Codes, catalog, stats, an
 
 ## Worktrees
 
-The Codex template runs `scripts/dev/setup-worktree.sh`. New worktrees link the single ignored `.envs/` directory from the main checkout rather than linking many ambiguous root `.env*` files. Existing files are never overwritten.
-
-For this migration worktree, `.envs/` is intentionally an isolated copy so changes cannot modify the active main checkout.
+The Codex template runs `scripts/dev/setup-worktree.sh`. New worktrees link the single ignored `.envs/` directory from the main checkout rather than linking many ambiguous root `.env*` files. Existing files are never overwritten. The `.envs` path itself and its contents are both ignored so a worktree symlink cannot appear in a commit.
 
 ## External Runtime Contracts
 
@@ -93,6 +92,7 @@ The migration preserves exact values and therefore preserves these old names: `H
 ## Safety
 
 - Never print env values during audits.
+- Never stage `.envs`, an env value file, or a credential JSON. `env/examples/` is the only committed env surface.
 - Never expose `SUPABASE_SERVICE_ROLE` or `sb_secret_*` to browser/mobile/extension code.
 - `NEXT_PUBLIC_*` and Expo public variables are client-visible.
 - Production-capable scripts must retain URL/host guards and explicit allow-production flags.

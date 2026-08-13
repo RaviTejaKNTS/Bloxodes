@@ -1,5 +1,8 @@
-# For detailed configuration reference documentation, visit:
-# https://supabase.com/docs/guides/local-development/cli/config
+# Remote migration and Edge Function configuration for Bloxodes.
+# The Supabase CLI local Docker stack is retired. Do not run `supabase start`,
+# `supabase db reset`, or any command with `--local` for this repository.
+# Local-only port settings remain because the CLI config schema requires them;
+# they are not an active Bloxodes execution target.
 # A string used to distinguish different Supabase projects on the same host. Defaults to the
 # working directory name when running `supabase init`.
 project_id = "roblox-codes"
@@ -58,11 +61,11 @@ enabled = true
 schema_paths = []
 
 [db.seed]
-# If enabled, seeds the database after migrations during a db reset.
-enabled = true
+# Bloxodes does not maintain a local CLI database or a remote bulk seed.
+enabled = false
 # Specifies an ordered list of seed files to load during db reset.
 # Supports glob patterns relative to supabase directory: "./seeds/*.sql"
-sql_paths = ["./seed.sql"]
+sql_paths = []
 
 [db.network_restrictions]
 # Enable management of network restrictions.

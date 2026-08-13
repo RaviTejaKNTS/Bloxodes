@@ -8,8 +8,10 @@ on:
 jobs:
   top-songs:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 45
     env:
+      BLOXODES_ENV_PROFILE: process-only
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       ROBLOX_TOP_SONGS_TARGET: '500'
@@ -64,9 +66,11 @@ jobs:
 
   daily-deep-charts:
     runs-on: ubuntu-latest
+    environment: production
     needs: top-songs
     timeout-minutes: 35
     env:
+      BLOXODES_ENV_PROFILE: process-only
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       ROBLOX_CURATED_INCLUDE_TOP_SONGS: 'false'
@@ -123,9 +127,11 @@ jobs:
 
   rerank:
     runs-on: ubuntu-latest
+    environment: production
     needs: daily-deep-charts
     timeout-minutes: 25
     env:
+      BLOXODES_ENV_PROFILE: process-only
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
     steps:

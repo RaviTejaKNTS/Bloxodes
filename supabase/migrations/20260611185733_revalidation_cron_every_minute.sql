@@ -1,0 +1,2 @@
+-- Historical production migration ledger marker.
+-- Its final schema is superseded by the checked-in revalidation worker migrations.

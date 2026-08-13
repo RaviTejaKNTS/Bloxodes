@@ -8,8 +8,10 @@ on:
 jobs:
   discover:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 45
     env:
+      BLOXODES_ENV_PROFILE: process-only
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       ROBLOX_DECAL_COLLECT_MAX_ASSETS: '3000'
@@ -67,9 +69,11 @@ jobs:
 
   verify-and-rerank:
     runs-on: ubuntu-latest
+    environment: production
     needs: discover
     timeout-minutes: 75
     env:
+      BLOXODES_ENV_PROFILE: process-only
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       ROBLOX_DECAL_VERIFY_MAX_TOTAL: '5000'

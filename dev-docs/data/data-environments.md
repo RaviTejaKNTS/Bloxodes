@@ -7,7 +7,7 @@ Evidence: env target inspection, managed-development URL guard, local web health
 ## Workstation Development
 
 - Database target: managed Supabase development at HTTPS `*.supabase.co`.
-- Web runtime: the Next.js process still runs locally, but both `npm run dev:managed` and the compatibility alias `npm run dev:local` load `.envs/targets/managed-dev.env`.
+- Web runtime: the Next.js process runs on the workstation; both `npm run dev` and `npm run dev:managed` load `.envs/targets/managed-dev.env`.
 - Purpose: schema/migration development, content preview/import verification, mutation tests, and safe page work.
 - Write rule: managed-development-first for content and migration work. Production remains explicit and separately guarded.
 - Retired boundary: do not start, target, synchronize, or store credentials for a local Supabase CLI database.
@@ -37,6 +37,7 @@ Machine-consumed inputs should live under `data/` or a pipeline-specific input f
 
 ## Sync Boundaries
 
-- `npm run sync:local-public-sample` retains a legacy command name but reads explicit production credentials and writes only to the verified managed-development target.
+- `npm run sync:managed-dev-public-sample` reads the public production projection and targets only verified managed development. It is dry-run by default and writes only with `--apply`.
 - Article production inventory is a read-only public projection at `/api/articles/editorial-inventory`; the writer queue itself stays in managed development.
 - Production storage URLs must use `media.bloxodes.com`, including when jobs connect to Supabase through the VPS-private Kong network.
+- Database schema flows forward as a reviewed migration: repository integrity check, managed-development plan/apply/readiness/advisors, explicit production approval, production plan/apply/readback/health/advisors. Database rows are not synchronized by cloning one environment over another.

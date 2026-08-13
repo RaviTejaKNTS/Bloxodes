@@ -49,13 +49,13 @@ GitHub Actions ----------> web image build/deploy and manual fallback jobs
 - [Architecture](architecture.md): deployed components, applications, data boundaries, and request/data flows.
 - [Environment system](environment.md): profiles, overlays, storage, loading precedence, examples, migration, and external secret owners.
 - [Data environments](data/data-environments.md): managed workstation development, production, datasets, and write safety.
-- [Production Supabase](data/supabase.md): live self-hosted topology, local CLI stack, current versions, known health caveats, and upgrade watch items.
+- [Production Supabase](data/supabase.md): managed-development boundary, live self-hosted topology, migration convergence, current versions, known health caveats, and upgrade watch items.
 - [VPS](infrastructure/vps.md): host, security, resources, containers, schedules, and operational risks.
 - [Docker](infrastructure/docker.md): web/worker images, build-secret boundary, local containers, and Compose.
 - [Dokploy](infrastructure/dokploy.md): Swarm deployment ownership, access, runtime env, and health gates.
 - [Cloudflare](infrastructure/cloudflare.md): DNS/proxy, caching, revalidation, origin policy, and emergency cache.
 - [Homelab](infrastructure/homelab.md): article automation host and current service health.
-- [Deployment](operations/deployment.md): production branch through GHCR, Dokploy, health verification, purge, and smoke tests.
+- [Deployment](operations/deployment.md): production branch through GHCR, Dokploy, schema release controls, platform synchronization, health verification, purge, and smoke tests.
 - [Revalidation and cache](operations/revalidation-cache.md): database events through Edge Functions, Next revalidation, Cloudflare purge, and deferred warm.
 - [Stats pipeline](pipelines/stats.md): universe and item stats workers, cron ordering, reads, and current incident state.
 - [Codes pipeline](pipelines/codes.md): page ownership, source fields, refresh schedule, publication, and safety.

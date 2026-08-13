@@ -1,6 +1,6 @@
 # Article Pipeline
 
-Status: Discovery active; automated writer blocked by exhausted Grok balance
+Status: Discovery and writer active; homelab checkout is behind production
 Last verified: 2026-08-13
 Evidence: code, systemd units/timer/journal, managed-dev readiness, production inventory, and production article count
 
@@ -26,15 +26,15 @@ All approved articles require a separate nonzero image pass before writing, as d
 
 Discovery timer runs four times daily (00:00, 06:00, 12:00, 18:00 local) and triggers the writer after successful curation.
 
-On verification date:
+On the latest verification date:
 
 - discovery readiness and curation succeeded;
 - production inventory contained 3,265 published pages across page families;
-- managed-dev queue had pending work;
-- writer readiness passed;
-- Grok Build failed with HTTP 402 because usage balance was exhausted.
+- managed-dev queue had work available;
+- writer readiness passed; and
+- the latest audited writer run succeeded, completing 6 of 6 claimed items.
 
-Restore the external balance/account before expecting writer recovery; changing env keys will not fix the current failure.
+An earlier HTTP 402 balance failure is historical, not the current service state. The remaining operational drift is the clean homelab checkout at `ef536f62`, which must be fast-forwarded only after the prepared repository change is approved and released.
 
 ## Production State
 

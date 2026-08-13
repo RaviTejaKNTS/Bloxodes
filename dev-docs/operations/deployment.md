@@ -1,6 +1,6 @@
 # Production Deployment
 
-Status: Active
+Status: Active; environment/schema release controls prepared locally
 Last verified: 2026-08-13
 Evidence: GitHub workflow, Dockerfile, live Dokploy service/image, public health, production build, and `npm audit --omit=dev`
 
@@ -18,7 +18,7 @@ The public `/api/health` response is the deploy gate. It includes build SHA, dat
 
 ## Secrets
 
-- GitHub Actions owns CI build/deploy secrets and public build variables.
+- GitHub Actions owns CI build/deploy secrets and public build variables. Production-capable workflow jobs declare the `production` GitHub environment so its approvals/secrets can become the single CI production boundary after this change is released and configured.
 - Dokploy owns application runtime env.
 - Workstation `.envs/targets/production.env` is for explicit local operator preview/tools, not the deployment source of truth.
 - The Docker image must not contain the BuildKit env secret.
@@ -26,6 +26,19 @@ The public `/api/health` response is the deploy gate. It includes build SHA, dat
 ## Data-Only Publication
 
 Database-backed content normally publishes through controlled scripts/migrations and revalidation rather than requiring a web image. Local datasets under `data/` or `apps/web/src/data/` require a code/image deploy.
+
+Schema changes use the authenticated Supabase connector for managed development, followed by migration listing, readiness, and advisors. Production is self-hosted and its Postgres port stays private: `npm run supabase:production:release -- --approved-sha <full-sha>` plans through an ephemeral SSH tunnel. Apply additionally requires the exact released SHA on `origin/production`, `--apply`, and `--confirm "APPLY production"`. It first runs the checked-in object-proof SQL and repairs only the five policy-listed, schema-present ledger gaps before dry-running/applying real pending migrations. Managed development must pass first; production remains a separate explicit approval.
+
+## Platform Synchronization
+
+1. Run `npm run env:doctor`, `npm run env:check`, and `npm run supabase:migrations:check` locally.
+2. Run `npm run platform:sync:check -- --local-only` before release.
+3. After an approved repository release, require the public deploy health SHA and database health to match.
+4. Apply approved schema changes to managed development through the Supabase connector, then list migrations and run readiness/advisors.
+5. Obtain separate production permission before production schema, Edge Function, VPS, or homelab mutations.
+6. Synchronize the homelab to the exact approved production SHA and run the full read-only platform check.
+
+The check reports drift; it never fixes drift. Database/Storage backup work is intentionally outside this sequence for now.
 
 ## Known Release Caveats
 

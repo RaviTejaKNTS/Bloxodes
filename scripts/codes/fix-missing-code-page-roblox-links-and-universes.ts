@@ -629,7 +629,7 @@ async function main() {
 
   console.log(
     `${options.apply ? "Applying" : "Dry run for"} ${codePages.length} code page${codePages.length === 1 ? "" : "s"} against ${
-      options.prod ? ".envs/targets/production.env" : "selected local/dev environment"
+      options.prod ? ".envs/targets/production.env" : "managed-development environment"
     }${
       options.overwrite ? " with overwrite enabled" : ""
     } with concurrency ${options.concurrency}. Target: intro_md present, roblox_link missing, universe_id missing. Twitter/X links are ignored.`

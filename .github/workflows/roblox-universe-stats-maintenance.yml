@@ -33,8 +33,10 @@ concurrency:
 jobs:
   universe-stats-maintenance:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 90
     env:
+      BLOXODES_ENV_PROFILE: process-only
       NODE_ENV: production
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}

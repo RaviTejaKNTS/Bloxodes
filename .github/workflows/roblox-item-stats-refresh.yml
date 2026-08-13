@@ -12,8 +12,10 @@ concurrency:
 jobs:
   refresh-items:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 90
     env:
+      BLOXODES_ENV_PROFILE: process-only
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       ROBLOX_ITEM_STATS_LIMIT: "250"
@@ -62,10 +64,12 @@ jobs:
 
   rotate-long-tail:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 90
     needs: refresh-items
     if: always()
     env:
+      BLOXODES_ENV_PROFILE: process-only
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       ROBLOX_ITEM_STATS_LIMIT: "250"

@@ -1,6 +1,6 @@
 # VPS
 
-Status: Active with resource and container-health risks
+Status: Active; application current, data-plane reconciliation pending approval
 Last verified: 2026-08-13
 Evidence: read-only SSH and privileged configuration inspection
 
@@ -13,7 +13,7 @@ Evidence: read-only SSH and privileged configuration inspection
 - CPU: 4 logical CPUs.
 - Memory: 15 GiB; ~8.7 GiB available at check time.
 - Swap: 2 GiB and effectively fully used at check time.
-- Root disk: 193 GB, 109 GB used (57%).
+- Root disk: capacity pressure must be checked immediately before any approved build, database migration, or vendor-stack work; the later 2026-08-13 read-only check observed approximately 67% used.
 - Uptime: about 8 weeks.
 
 The web app, Supabase, Dokploy, Umami, and other services share this host. Heavy crawls, builds, database jobs, and cache operations compete for the same resources.
@@ -62,5 +62,6 @@ Worker ownership:
 - Full swap usage warrants investigation even with available RAM; check pressure, swappiness, and long-lived containers before large jobs.
 - Public-anywhere UFW rules on 80/443 weaken the intended Cloudflare-only origin model. Confirm the origin-firewall script's effective policy and remove redundant public rules only through a tested, recoverable change.
 - Meta/REST unhealthy probes reduce Docker health signal quality.
-- Host and database backups were not proven restorable in this audit.
+- Production migration history has verified pre-convergence differences from the repository, and the deployed `revalidate` Edge Function checksum differs from the checked-in source. Both require a controlled, separately approved reconciliation; neither was changed during local preparation.
+- Database and Storage backup/recovery work is owner-deferred and excluded from this change.
 - Several unrelated workloads share CPU, disk, and Docker; incident triage must inspect the whole host.

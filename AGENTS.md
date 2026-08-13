@@ -82,7 +82,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 1. Use the matching `.agents/skills/bloxodes-*` skill directly. For new pages, prefer `bloxodes-wiki-workflow-runner` or `bloxodes-game-collection-workflow-runner`. For source-backed maintenance of existing local collection datasets and their wiki pages, use `bloxodes-game-collection-refresh`.
 2. Gather game collection item rows through online research and source collection, not Roblox APIs. APIs are only for universe identity, Roblox metadata, thumbnails, or cross-checks; never block a collection because an API does not expose item rows.
 3. Before writing, verify the item list, useful fields, image coverage, and route behavior. Do not write around missing source-backed facts.
-4. Seed and preview `wiki_pages` and `wiki_collection_pages` locally before production.
+4. Seed and preview `wiki_pages` and `wiki_collection_pages` in managed development before production.
 5. Keep collection codes in `<game-slug>-<collection-slug>` format.
 6. Verify local dataset images, item counts, useful card fields, metadata, sitemaps, search, and revalidation before publishing.
 7. Promote to production only through a forward-only migration or controlled idempotent seed/upsert script.
@@ -121,13 +121,15 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 ### Database or content model
 
 1. Add a forward-only migration in `supabase/migrations/`.
-2. Update the read layer in `apps/web/src/lib/*`.
-3. Wire publish/revalidation flows if the new data powers public content.
-4. Update the relevant `AGENTS.md` and `agents/data/agents.md`.
+2. Run `npm run supabase:migrations:check`, plan against managed development, apply and verify there first, and obtain explicit approval before any production application.
+3. Update the read layer in `apps/web/src/lib/*`.
+4. Wire publish/revalidation flows if the new data powers public content.
+5. Update the relevant existing `dev-docs/` owner, `AGENTS.md`, and `agents/data/agents.md`.
 
 ### Script or automation
 
 1. Put the job in the correct `scripts/<area>/` folder.
 2. Add or update the `package.json` command if the script is part of the normal workflow.
 3. Keep shared helpers in `scripts/shared/`.
-4. Document side effects, required env, and purpose in `scripts/AGENTS.md` and `agents/scripts/agents.md`.
+4. Run `npm run env:doctor` when env ownership or runtime loading changes.
+5. Document side effects, required env, and purpose in `scripts/AGENTS.md`, the existing owning `dev-docs/` file, and `agents/scripts/agents.md`.

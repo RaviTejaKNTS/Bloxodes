@@ -28,15 +28,23 @@ This folder defines the app's database contract and edge-function behavior.
 ## Migration Rules
 
 - Add new migrations; do not rewrite old ones once they are part of repo history.
+- Create migration files with `supabase migration new <name>`, then run `npm run supabase:migrations:check`.
 - Favor additive, reversible changes where possible.
 - For this repo, `schema.sql` is the clean reference for the current database shape. Read it first when you need to understand the live schema.
 - Do not manually edit `schema.sql` during feature work. Treat it as a live database dump/reference snapshot only.
 - Validate pending migrations against managed Supabase development before controlled production application. Do not bootstrap a local Supabase database as part of the active workflow.
+- `supabase/migration-policy.json` records verified pre-convergence ledger exceptions. Do not add an exception from filenames alone: prove the corresponding live objects and record why history differs.
+- Migration histories must contain every version at or after the policy's `convergence_version`. Earlier history repairs and schema migrations are separate operations and require explicit target review.
+- Apply each reviewed migration to managed development through the authenticated Supabase connector, then list migrations and run readiness/advisors. This project intentionally does not store the managed database password or a second CI copy of it.
+- Plan self-hosted production with `npm run supabase:production:release -- --approved-sha <full-sha>`. Apply only after explicit permission, after that SHA is on `origin/production`, with `--apply --confirm "APPLY production"`. The command uses an ephemeral SSH tunnel, proves policy-listed live objects, repairs only verified historical gaps, dry-runs, applies, and lists the ledger without exposing Postgres publicly.
+- After a managed-development application, run `npm run supabase:managed-dev:check` and Supabase security/performance advisors. After production application, verify the ledger, affected objects/RPCs, application health, and the self-hosted security audit before calling the environments converged.
+- Do not use `supabase db reset`, local seeding, or a local CLI database in this repository.
 - After migrations are applied to live, regenerate `schema.sql` from the live database dump instead of hand-editing it.
 - Treat `migrations/` as deployment history for the existing production project, not as the easiest way to infer current state.
 - Do not replace the active migration chain with a single baseline file for the current production project. If you generate a clean baseline snapshot, keep it in `schema.sql` or archive it outside `migrations/`.
 - Views are heavily used by `src/lib/db.ts`, `src/lib/catalog.ts`, and `src/lib/tools.ts`; update app queries alongside schema changes.
 - When changing policies, security definer functions, or search-path-sensitive code, review prior hardening migrations for consistency.
+- Edge Functions are deployed artifacts, not just source files. Compare the deployed checksum with `supabase/functions/<name>/index.ts`; deploy only the reviewed function to managed development first and obtain explicit approval before production.
 
 ## App Integration Checklist
 

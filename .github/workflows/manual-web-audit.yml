@@ -42,8 +42,10 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 90
     env:
+      BLOXODES_ENV_PROFILE: process-only
       TEST_BASE_URL: ${{ inputs.site_url }}
       SEO_AUDIT_FETCH_ORIGIN: ${{ inputs.site_url }}
       SITE_URL: ${{ inputs.site_url }}

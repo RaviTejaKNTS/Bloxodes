@@ -17,8 +17,17 @@ These files are operational jobs, imports, backfills, collectors, and automation
 
 - `dev/`: workstation development and worktree setup.
   - `setup-worktree.sh` powers `npm run setup:worktree`. In linked worktrees only, it links ignored `.envs/` from the main checkout without overwriting an existing path, installs dependencies when `package-lock.json` changes, and creates ignored temp/report directories.
-  - `start-managed-dev.ts` powers `npm run dev:managed`; `npm run dev:local` is a compatibility alias to the same command. Both load `.envs/targets/managed-dev.env` and refuse targets outside HTTPS `*.supabase.co`.
-  - Env migration and coverage are owned by the `env:*` npm commands documented in `dev-docs/environment.md`. There is no active local Supabase target or local-key sync command.
+  - `start-managed-dev.ts` powers both `npm run dev` and `npm run dev:managed`. It loads `.envs/targets/managed-dev.env` and refuses targets outside HTTPS `*.supabase.co`.
+  - `env-doctor.ts` owns workstation readiness and safety checks; `check-env-contract.ts` owns committed example coverage. The one-time legacy env migration commands are retired.
+  - `check-migration-integrity.ts` validates migration filenames, version uniqueness, the convergence policy, seed retirement, and future `SECURITY DEFINER` search paths without connecting to a database.
+  - `check-managed-dev-readiness.ts` is a read-only managed-development schema/API check. It must retain the managed-project URL guard.
+  - There is no active local Supabase target, local seed/reset workflow, or local-key sync command.
+- `ops/`: platform health and deliberately gated synchronization.
+  - `check-platform-sync.ts` compares the local checkout, cached `origin/production`, public production SHA/database health, homelab checkout/timer, VPS web image, and production migration ledger. It is read-only; use `--local-only` before a release and the full check after approved synchronization.
+  - `release-production-schema.ts` plans by default through an ephemeral SSH tunnel to the VPS-local Postgres port. `--apply` additionally requires the exact released `origin/production` SHA and `--confirm "APPLY production"`; it proves objects, repairs only policy-listed history, dry-runs, applies, and lists the ledger. Never run apply without explicit production permission.
+  - `sync-homelab-checkout.sh` requires an exact full SHA and is dry-run by default. `--apply` is a remote mutation and requires explicit production/synchronization approval.
+  - `install-homelab-article-automation.sh` requires `--apply <approved-full-sha>` and preserves the timer state. Never install units from an uncommitted or unapproved checkout.
+  - `sql/verify-production-history-repair.sql` proves the five audited pre-convergence production objects before the production release command marks their missing ledger versions applied. Keep it synchronized with `supabase/migration-policy.json`; history repair is a production mutation and requires explicit approval.
 - `quality/`: final-stage content checks, post-publish URL verification, and manual sitemap/SEO/route/render diagnostics. E2E release reuses completed final checks and must not rerun the suite. Agents may use deeper audits while troubleshooting when their expected time and shared VPS/origin load are proportionate; start with the narrowest useful command. Use `verify:published-url` after one database page is published. See `docs/testing/stability-and-seo.md`.
 - `ads/`: build-time ad and policy helpers.
   - `audit-journey-catalog-dom.ts` is the read-only local DOM guard for every Music IDs and Decal IDs route shape. Start the local web app, then run `npm run audit:journey-dom -- --base-url http://127.0.0.1:<port>`; it requires exactly one `#article-body`, direct block-level `data-journey-item` children, and no manual Mediavine content hints.

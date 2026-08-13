@@ -57,7 +57,7 @@ Before publishing, ensure the current task worktree contains the selected row's 
 - Load connection details from `.envs/infrastructure/homelab.env`; never print their values.
 - Read and stage only the exact selected paths from `$HOMELAB_REPO_ROOT` into a temporary directory.
 - Copy a missing artifact into the current task worktree.
-- If a local target exists with different content, stop and report the conflict. Never overwrite it.
+- If the worktree artifact target exists with different content, stop and report the conflict. Never overwrite it.
 - Never synchronize the whole homelab checkout, its `.env*`, `.grok`, `node_modules`, or unrelated generated articles.
 
 ## Publish Mode

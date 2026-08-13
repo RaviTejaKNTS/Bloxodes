@@ -114,7 +114,7 @@ npm run audit:game-collection-datasets:v2 -- --game <game-slug> --collection <co
 npm run check:game-collection-data -- --game <game-slug> --collection <collection-slug>
 ```
 
-When images are required, add `--require-images`. When `final.json` changed, follow the complete verification and preview sequence in `bloxodes-game-collection-workflow-runner`, including copy checks, local seeding/readback, route verification, HTML-size audit, pagination checks when applicable, and Browser preview.
+When images are required, add `--require-images`. When `final.json` changed, follow the complete verification and preview sequence in `bloxodes-game-collection-workflow-runner`, including copy checks, managed-development seeding/readback, local route verification, HTML-size audit, pagination checks when applicable, and Browser preview.
 
 For a data-only change with unaffected page copy, verify the targeted local route still renders the updated item count, sections, fields, and images. Do not generate replacement prose just to satisfy a verifier that expects `final.json`.
 

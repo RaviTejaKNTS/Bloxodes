@@ -1,0 +1,2 @@
+-- Historical production migration ledger marker.
+-- Its final schema is superseded by later checked-in stats index migrations.

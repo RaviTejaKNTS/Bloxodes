@@ -28,7 +28,7 @@ Do not search for tracker rows, old logs, approval files, or ignored/temp output
 4. Build the allowlist from the work completed in this chat. Ignore unrelated files, worktrees, branches, `.env*`, `node_modules`, build output, reports, caches, and `tmp/` unless a specific database payload in `tmp/` is part of this release.
 5. Stop only for an unclear allowlisted file, a staged secret, an overlapping change, or a real merge conflict.
 
-Never use `git add .`, `git add -A`, a broad stash, force push, or another agent's branch.
+Never use `git add .`, `git add -A`, a broad stash, force push, or another agent's branch. Never stage `.envs`, dotenv value files, or credential JSON; only `env/examples/` is a committed env contract.
 
 ## 2. Fast Release Check
 
@@ -36,7 +36,8 @@ Treat the invocation as confirmation that content and code final checks passed.
 
 1. Review the allowlisted diff.
 2. Run `git diff --check`.
-3. Run at most one tiny change-specific syntax or smoke check only if the release process itself changed a file after final approval.
+3. If the allowlist changes env ownership/loading, migrations, deployment, or platform synchronization, run `npm run env:doctor`, `npm run env:check`, `npm run supabase:migrations:check`, and `npm run platform:sync:check -- --local-only`. These are release-safety checks, not a repeat of content QA.
+4. Run at most one tiny change-specific syntax or smoke check only if the release process itself changed a file after final approval.
 
 Do not rerun content verifiers, dataset validation, Browser inspection, HTML-size checks, pagination checks, lint, typecheck, coverage, builds, Playwright, crawls, SEO audits, or database-wide audits.
 
@@ -64,6 +65,7 @@ If GitHub protection rejects the direct push, report that exact configuration bl
 - Database-only content: do not trigger a web build.
 - Mixed code/content: deploy code, data, and assets first; publish the database row second.
 - Schema required by new code: apply a backward-compatible migration before dependent code. Stop instead of guessing when ordering is unclear.
+- Environment/schema/platform changes: repository release, managed-development application, production schema application, Edge Function deployment, VPS reconciliation, and homelab synchronization are distinct gates. Do not collapse an approval for one into permission for another.
 
 Do not add a broad crawl, cache warm, full Cloudflare purge, or extra route-family scan. The deployment workflow owns its small mapped health/smoke checks.
 
@@ -73,9 +75,10 @@ Run only when the completed task explicitly includes a prepared database change.
 
 1. Use the existing page-type seed/import command.
 2. Run its production dry-run.
-3. Apply only the named idempotent rows or migration.
-4. Read back the affected production rows.
-5. Verify each exact public URL with `verify:published-url` or the page-type equivalent.
+3. For schema, apply reviewed migrations to managed development through the Supabase connector first, then list migrations and run readiness/advisors. Obtain separate explicit production permission before using the exact-SHA `supabase:production:release` plan/apply command.
+4. Apply only the named idempotent rows or migration.
+5. Read back the affected production rows or objects and verify the migration ledger.
+6. Verify each exact public URL with `verify:published-url` or the page-type equivalent.
 
 For article imports, rely on `import:content-final` for the small release-time media check: it reads back each saved article, rejects a missing or local feature image, and fetches that exact cover once. Then verify only the exact published article URL; do not rerun article final checks.
 
@@ -85,8 +88,10 @@ Do not publish unrelated drafts or queued content.
 
 1. Fast-forward the main local `production` worktree to `origin/production` without touching unrelated work.
 2. Verify both resolve to the same SHA.
-3. Keep the current task worktree and local task branch intact, even when clean and fully published.
-4. Return the task to the user for immediate follow-up changes in the same chat and worktree.
+3. If the released scope changes homelab-owned automation, synchronize the homelab only to that exact production SHA using the guarded sync script, and only when that remote mutation was explicitly approved.
+4. Run the full read-only `npm run platform:sync:check` after all approved platform steps; report any remaining drift instead of hiding it.
+5. Keep the current task worktree and local task branch intact, even when clean and fully published.
+6. Return the task to the user for immediate follow-up changes in the same chat and worktree.
 
 Remove the task worktree or branch only when the user explicitly says the task is finished and asks for cleanup. Never remove another agent's worktree.
 

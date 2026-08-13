@@ -1,6 +1,6 @@
 # Supabase
 
-Status: Active with known degraded health probes
+Status: Active; convergence prepared locally, remote application pending approval
 Last verified: 2026-08-13
 Evidence: official Supabase changelog, managed-development env/URL/health checks, VPS containers, production PostgreSQL queries, and public endpoints
 
@@ -52,10 +52,14 @@ Official changelog items relevant to this self-hosted installation:
 ## Schema and Security
 
 - Add forward-only migrations under `supabase/migrations/` using the current CLI workflow in `supabase/AGENTS.md`.
+- `supabase/migration-policy.json` records the read-only-audited pre-convergence differences between managed development, production, and repository history. Three production-only ledger versions now have no-op repository markers; five production objects still need explicit history repair after object proof; two article migrations are pending production; and four later migrations are pending managed development.
+- `20260920000013_harden_internal_security_definer_execution.sql` is the common convergence migration. It moves the privileged admin implementation into a private schema and narrows queue, worker, chart, and pipeline-health RPC execution. It has not been applied to any remote environment.
+- Managed-development migrations use the authenticated Supabase connector, followed by migration listing, readiness, and advisors; its database password is deliberately not duplicated into workstation or CI env. Self-hosted production uses the exact-SHA `supabase:production:release` operator command through an ephemeral SSH tunnel, with a read-only plan by default and separate explicit apply confirmation.
+- Until that controlled sequence completes, repository history and the two remote ledgers are intentionally not described as synchronized.
 - Keep RLS on exposed tables and never expose service-role keys to clients.
 - Views exposed to anon/authenticated roles need security-invoker behavior or explicit privilege review.
 - Revalidation/cache queues are part of runtime freshness; schema changes affecting public content must update their event mapping.
 
 ## Backups
 
-The VPS retains original 2026-06-12 managed-to-self-hosted dump/restore artifacts under the Supabase `backups/` directory. This audit verified their presence, not restore viability. A future backup/recovery runbook must record current recurring backup ownership, retention, off-host copies, and a tested restore date.
+Database and Storage backup/recovery work is explicitly deferred by the owner. The VPS retains original 2026-06-12 managed-to-self-hosted dump/restore artifacts, but this change does not inspect, modify, validate, or automate them. A later dedicated run must own retention, off-host copies, and tested restores.

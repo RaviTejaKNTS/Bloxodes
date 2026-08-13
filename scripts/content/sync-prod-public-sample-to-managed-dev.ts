@@ -1,8 +1,5 @@
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { parse as parseDotenv } from "dotenv";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { readBloxodesEnvFile } from "../shared/env-files";
 import {
   assertManagedDevelopmentSupabaseUrl,
   isProductionSupabaseUrl
@@ -14,9 +11,9 @@ type AwaitableQuery = PromiseLike<{
   error: { message?: string } | null;
 }>;
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const args = new Set(process.argv.slice(2));
-const dryRun = args.has("--dry-run");
+const apply = args.has("--apply");
+const dryRun = !apply;
 
 const preferredCodePageHints = [
   "adopt-me",
@@ -32,33 +29,27 @@ const preferredCodePageHints = [
 const pageSize = 1000;
 const writeBatchSize = 250;
 
-function readEnvFile(filename: string): Record<string, string> {
-  const envPath = path.join(repoRoot, filename);
-  if (!fs.existsSync(envPath)) throw new Error(`Missing ${filename}`);
-  return parseDotenv(fs.readFileSync(envPath));
-}
-
 function required(env: Record<string, string>, key: string, filename: string): string {
   const value = env[key]?.trim();
   if (!value) throw new Error(`Missing ${key} in ${filename}`);
   return value;
 }
 
-const prodEnv = readEnvFile(".envs/targets/production.env");
-const localEnv = readEnvFile(".envs/targets/managed-dev.env");
+const prodEnv = readBloxodesEnvFile("targets/production.env");
+const managedDevEnv = readBloxodesEnvFile("targets/managed-dev.env");
 
 const prodUrl = required(prodEnv, "SUPABASE_URL", ".envs/targets/production.env");
 const prodKey = required(prodEnv, "SUPABASE_SERVICE_ROLE", ".envs/targets/production.env");
-const localUrl = required(localEnv, "SUPABASE_URL", ".envs/targets/managed-dev.env");
-const localKey = required(localEnv, "SUPABASE_SERVICE_ROLE", ".envs/targets/managed-dev.env");
+const managedDevUrl = required(managedDevEnv, "SUPABASE_URL", ".envs/targets/managed-dev.env");
+const managedDevKey = required(managedDevEnv, "SUPABASE_SERVICE_ROLE", ".envs/targets/managed-dev.env");
 
 if (!isProductionSupabaseUrl(prodUrl)) throw new Error("Production source is not the production Supabase host.");
-assertManagedDevelopmentSupabaseUrl(localUrl, "production sample sync");
+assertManagedDevelopmentSupabaseUrl(managedDevUrl, "production sample sync");
 
 const source = createClient(prodUrl, prodKey, {
   auth: { autoRefreshToken: false, persistSession: false }
 });
-const target = createClient(localUrl, localKey, {
+const target = createClient(managedDevUrl, managedDevKey, {
   auth: { autoRefreshToken: false, persistSession: false }
 });
 
@@ -205,8 +196,8 @@ function addUniverseIds(targetSet: Set<number>, rows: Row[]): void {
 
 async function main() {
   console.log(`Source: production Supabase`);
-  console.log(`Target: ${localUrl}`);
-  console.log(`Mode: ${dryRun ? "dry run" : "write local"}`);
+  console.log(`Target: ${new URL(managedDevUrl).hostname}`);
+  console.log(`Mode: ${dryRun ? "dry run" : "write managed development"}`);
 
   const universeIds = new Set<number>();
 
@@ -286,7 +277,7 @@ async function main() {
   await optionalUpsert("roblox_universe_stats_hourly", hourlyStats, "universe_id,hour_start");
   await optionalUpsert("roblox_universe_stats_daily", dailyStats, "universe_id,stat_date");
 
-  console.log("Done.");
+  console.log("Managed-dev public sample sync complete.");
 }
 
 main().catch((error) => {

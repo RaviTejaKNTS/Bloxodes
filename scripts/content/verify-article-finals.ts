@@ -196,7 +196,7 @@ function articleUrl(baseUrl: string, slug: string): string {
 }
 
 function assertRowMatchesFinal(row: ArticleRow | null, finalJson: ArticleFinal) {
-  if (!row) throw new Error(`No local articles row found for slug ${finalJson.slug}`);
+  if (!row) throw new Error(`No managed-dev articles row found for slug ${finalJson.slug}`);
   if (row.slug !== finalJson.slug) throw new Error(`Readback slug mismatch for ${finalJson.slug}`);
   if (row.title !== finalJson.title) {
     throw new Error(`Readback title mismatch for ${finalJson.slug}: expected "${finalJson.title}", got "${row.title}"`);
@@ -229,7 +229,7 @@ async function readBackRows(finals: ArticleFinal[]) {
     )
     .in("slug", slugs);
 
-  if (error) throw new Error(`Failed to read back local article rows: ${error.message}`);
+  if (error) throw new Error(`Failed to read back managed-dev article rows: ${error.message}`);
 
   const rowsBySlug = new Map((data ?? []).map((row) => [(row as ArticleRow).slug, row as ArticleRow]));
   for (const finalJson of finals) {
@@ -245,7 +245,7 @@ async function readBackRows(finals: ArticleFinal[]) {
     console.warn(`Warning: ${missingCovers.length} article row(s) have no cover_image: ${missingCovers.join(", ")}`);
   }
 
-  console.log(`Local Supabase readback passed for ${finals.length} article${finals.length === 1 ? "" : "s"}.`);
+  console.log(`Managed-dev Supabase readback passed for ${finals.length} article${finals.length === 1 ? "" : "s"}.`);
   return rowsBySlug;
 }
 

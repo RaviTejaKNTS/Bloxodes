@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "convergence_version": "20260920000013",
+  "production_history_only": [
+    "20260611123408",
+    "20260611123916",
+    "20260611185733"
+  ],
+  "production_schema_present_history_missing": [
+    "20260627215244",
+    "20260628000100",
+    "20260805170407",
+    "20260918000008",
+    "20260919000005"
+  ],
+  "production_pending_before_convergence": [
+    "20260920000004",
+    "20260920000005"
+  ],
+  "managed_dev_pending_before_convergence": [
+    "20260920000003",
+    "20260920000009",
+    "20260920000010",
+    "20260920000011"
+  ],
+  "notes": "Historical ledgers differ because managed development was created from a verified baseline. Both environments must contain every migration at or after convergence_version. Earlier exceptions require explicit object verification before migration-history repair."
+}

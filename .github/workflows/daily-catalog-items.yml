@@ -12,8 +12,10 @@ concurrency:
 jobs:
   collect-catalog-items:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 180
     env:
+      BLOXODES_ENV_PROFILE: process-only
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE: ${{ secrets.SUPABASE_SERVICE_ROLE }}
       ROBLOX_CATALOG_LOG_LEVEL: info

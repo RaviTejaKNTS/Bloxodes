@@ -8,8 +8,10 @@ on:
 jobs:
   generate-articles:
     runs-on: ubuntu-latest
+    environment: production
     timeout-minutes: 90
     env:
+      BLOXODES_ENV_PROFILE: process-only
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
