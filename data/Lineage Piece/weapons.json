@@ -1,0 +1,501 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Lineage Piece",
+    "gameSlug": "lineage-piece",
+    "collection": "weapons",
+    "route": "/wiki/lineage-piece/weapons",
+    "catalogCode": "lineage-piece-weapons",
+    "sourceItemCount": 16,
+    "itemFields": [
+      "name",
+      "alsoKnownAs",
+      "rarity",
+      "obtainmentType",
+      "island",
+      "npc",
+      "cost",
+      "requirements",
+      "materials",
+      "mastery",
+      "moveKeys",
+      "masteryNote",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "alsoKnownAs",
+      "rarity",
+      "obtainmentType",
+      "island",
+      "npc",
+      "cost",
+      "requirements",
+      "materials",
+      "mastery",
+      "moveKeys",
+      "masteryNote",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Progression",
+      "sectionOrder": [
+        "Starter Weapons",
+        "Mid-game Weapons",
+        "Endgame Weapons"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "obtainmentType"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "obtainmentType",
+        "island",
+        "npc",
+        "cost",
+        "requirements",
+        "materials",
+        "mastery",
+        "moveKeys",
+        "masteryNote"
+      ],
+      "tableFields": [
+        "alsoKnownAs",
+        "rarity",
+        "obtainmentType",
+        "island",
+        "npc",
+        "cost",
+        "requirements",
+        "materials",
+        "mastery",
+        "moveKeys",
+        "masteryNote",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "alsoKnownAs": {
+          "kind": "plain",
+          "label": "Also Known As"
+        },
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "obtainmentType": {
+          "kind": "plain",
+          "label": "How to Get"
+        },
+        "island": {
+          "kind": "plain",
+          "label": "Island"
+        },
+        "npc": {
+          "kind": "plain",
+          "label": "NPC"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "requirements": {
+          "kind": "detail",
+          "label": "Requirements"
+        },
+        "materials": {
+          "kind": "detail",
+          "label": "Materials"
+        },
+        "mastery": {
+          "kind": "chip",
+          "label": "Mastery"
+        },
+        "moveKeys": {
+          "kind": "plain",
+          "label": "Moves"
+        },
+        "masteryNote": {
+          "kind": "detail",
+          "label": "Mastery Quests"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Katana",
+        "alsoKnownAs": "",
+        "rarity": "Common",
+        "obtainmentType": "Shop",
+        "island": "Dawnwind Village",
+        "npc": "Katana NPC",
+        "cost": "2,500 Coins",
+        "requirements": "",
+        "materials": "",
+        "mastery": "None",
+        "moveKeys": "M1, Z",
+        "masteryNote": "",
+        "cardSummary": "The first shop sword on Dawnwind Village. It only has M1 and Z, so it is a short starter blade before Dual Katana or Gryphon."
+      },
+      "system": {
+        "slug": "katana",
+        "section": "Starter Weapons",
+        "sortOrder": 1,
+        "image": "/Lineage%20Piece/Weapons/katana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dual Katana",
+        "alsoKnownAs": "",
+        "rarity": "Uncommon",
+        "obtainmentType": "Shop",
+        "island": "Deeproot Jungle",
+        "npc": "Dual Katana NPC",
+        "cost": "30,000 Coins",
+        "requirements": "",
+        "materials": "",
+        "mastery": "None",
+        "moveKeys": "M1, Z, X",
+        "masteryNote": "",
+        "cardSummary": "A Deeproot Jungle shop upgrade that adds an X move over Katana. It costs 30,000 Coins and needs no extra materials."
+      },
+      "system": {
+        "slug": "dual-katana",
+        "section": "Starter Weapons",
+        "sortOrder": 2,
+        "image": "/Lineage%20Piece/Weapons/dual-katana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stylish Bandit Slayer",
+        "alsoKnownAs": "",
+        "rarity": "Uncommon",
+        "obtainmentType": "Quest",
+        "island": "Dawnwind Village",
+        "npc": "Cid NPC",
+        "cost": "150,000 Coins and 600 Gems",
+        "requirements": "Find 2 Crowbars and take 5M damage, then buy the sword from Cid.",
+        "materials": "",
+        "mastery": "None",
+        "moveKeys": "M1, Z",
+        "masteryNote": "",
+        "cardSummary": "Cid's quest sword on Dawnwind Village. Finish the Crowbar and 5M-damage quest, pay 150,000 Coins and 600 Gems, and keep it if you plan to unlock Shadow later."
+      },
+      "system": {
+        "slug": "stylish-bandit-slayer",
+        "section": "Starter Weapons",
+        "sortOrder": 3,
+        "image": "/Lineage%20Piece/Weapons/stylish-bandit-slayer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gryphon",
+        "alsoKnownAs": "",
+        "rarity": "Rare",
+        "obtainmentType": "Shop",
+        "island": "Deeproot Jungle",
+        "npc": "Gryphon NPC",
+        "cost": "750,000 Coins and 100 Gems",
+        "requirements": "",
+        "materials": "",
+        "mastery": "None",
+        "moveKeys": "M1, Z, X",
+        "masteryNote": "",
+        "cardSummary": "A Rare Deeproot Jungle shop sword with M1, Z, and X. The official seller card lists 750,000 Coins and 100 Gems."
+      },
+      "system": {
+        "slug": "gryphon",
+        "section": "Starter Weapons",
+        "sortOrder": 4,
+        "image": "/Lineage%20Piece/Weapons/gryphon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yoru",
+        "alsoKnownAs": "",
+        "rarity": "Rare",
+        "obtainmentType": "Shop",
+        "island": "Frostborn Island",
+        "npc": "Dark Blade Seller",
+        "cost": "200,000 Coins and 500 Gems",
+        "requirements": "",
+        "materials": "",
+        "mastery": "None",
+        "moveKeys": "M1, Z, X",
+        "masteryNote": "",
+        "cardSummary": "The Rare Frostborn Island shop blade from the Dark Blade Seller. It costs 200,000 Coins and 500 Gems and needs no extra materials."
+      },
+      "system": {
+        "slug": "yoru",
+        "section": "Starter Weapons",
+        "sortOrder": 5,
+        "image": "/Lineage%20Piece/Weapons/yoru.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Zangetsu",
+        "alsoKnownAs": "",
+        "rarity": "Epic",
+        "obtainmentType": "Shop",
+        "island": "Hueco Mundo",
+        "npc": "Ichigo NPC",
+        "cost": "500,000 Coins and 1,000 Gems",
+        "requirements": "",
+        "materials": "",
+        "mastery": "None",
+        "moveKeys": "M1, Z, X, C",
+        "masteryNote": "",
+        "cardSummary": "Ichigo's Epic shop sword on Hueco Mundo. It is a straight coin-and-gem buy and is required before Tensa Zangetsu."
+      },
+      "system": {
+        "slug": "zangetsu",
+        "section": "Mid-game Weapons",
+        "sortOrder": 6,
+        "image": "/Lineage%20Piece/Weapons/zangetsu.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Player's Dagger",
+        "alsoKnownAs": "",
+        "rarity": "Legendary",
+        "obtainmentType": "Materials",
+        "island": "Scorched Ruins",
+        "npc": "Sung Jin Woo NPC",
+        "cost": "1,000,000 Coins and 7,500 Gems",
+        "requirements": "",
+        "materials": "x1 Sword Technique Book, x5 System Core, x1 Venom Fang, x1 Knight Killer",
+        "mastery": "Has mastery",
+        "moveKeys": "M1, Z, X, C, V",
+        "masteryNote": "Sung Mastery NPC on Scorched Ruins. Deal 200M damage with Player's Dagger, use any Player's Dagger skill 400 times, and defeat Sung Jinwoo 15 times.",
+        "cardSummary": "Sung Jin Woo's Legendary craft on Scorched Ruins. Hand in a Sword Technique Book, System Cores, Venom Fang, and Knight Killer with 1,000,000 Coins and 7,500 Gems."
+      },
+      "system": {
+        "slug": "players-dagger",
+        "section": "Mid-game Weapons",
+        "sortOrder": 7,
+        "image": "/Lineage%20Piece/Weapons/players-dagger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Excalibur",
+        "alsoKnownAs": "",
+        "rarity": "Legendary",
+        "obtainmentType": "Materials",
+        "island": "Legend's Arena",
+        "npc": "Saber NPC",
+        "cost": "650,000 Coins and 3,500 Gems",
+        "requirements": "",
+        "materials": "x1 Sword Technique Book, x1 Avalon, x5 Goblet",
+        "mastery": "Has mastery",
+        "moveKeys": "M1, Z, X, C, V",
+        "masteryNote": "Saber Mastery NPC on Legend's Arena. Deal 125M damage with Excalibur, M1 with Excalibur 1,250 times, and defeat Saber 20 times.",
+        "cardSummary": "Saber's Legendary sword on Legend's Arena. It needs a Sword Technique Book, Avalon, Goblets, 650,000 Coins, and 3,500 Gems, then has a mastery NPC on the same island."
+      },
+      "system": {
+        "slug": "excalibur",
+        "section": "Mid-game Weapons",
+        "sortOrder": 8,
+        "image": "/Lineage%20Piece/Weapons/excalibur.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tensa Zangetsu",
+        "alsoKnownAs": "",
+        "rarity": "Legendary",
+        "obtainmentType": "Materials",
+        "island": "Hueco Mundo",
+        "npc": "Tensa Zangetsu NPC",
+        "cost": "600,000 Coins and 2,000 Gems",
+        "requirements": "Obtain Zangetsu. Kill Ichigo (Bankai) 50 times.",
+        "materials": "x1 Hollow Mask",
+        "mastery": "Has mastery",
+        "moveKeys": "M1, Z, X, C, V, R",
+        "masteryNote": "Tensa Zangetsu Mastery NPC on Hueco Mundo. Equip the Substitute Shinigami title, be Shinigami Race, kill 150 Hollows, and defeat Ichigo (Bankai) 30 times.",
+        "cardSummary": "The Hueco Mundo upgrade of Zangetsu. Obtain Zangetsu, defeat Ichigo (Bankai) 50 times, then buy it with a Hollow Mask, 600,000 Coins, and 2,000 Gems."
+      },
+      "system": {
+        "slug": "tensa-zangetsu",
+        "section": "Mid-game Weapons",
+        "sortOrder": 9,
+        "image": "/Lineage%20Piece/Weapons/tensa-zangetsu.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow",
+        "alsoKnownAs": "",
+        "rarity": "Mythical",
+        "obtainmentType": "Materials",
+        "island": "Frostborn Island",
+        "npc": "Shadow NPC",
+        "cost": "7,500,000 Coins and 15,000 Gems",
+        "requirements": "Obtain Stylish Bandit Slayer. Kill 100 Bandits with Stylish Bandit Slayer. Clear Cid's Castle 5 times on Medium, Hard, or Extreme.",
+        "materials": "x100 Black Slime, x6 Shadow Fragment, x12 Shadow Orb, x2 Atomic Core",
+        "mastery": "Has mastery",
+        "moveKeys": "M1, Z, X, C, V, R",
+        "masteryNote": "Shadow Mastery NPC on Frostborn Island. Deal 1B damage with Shadow, equip The Eminence in Shadow title, kill 40 bosses, and clear Cid's Castle 15 times on Hard or Extreme.",
+        "cardSummary": "Cid's Mythical sword on Frostborn Island. Finish Stylish Bandit Slayer, kill 100 Bandits with it, clear Cid's Castle five times, then turn in slime, fragment, orb, and Atomic Core materials."
+      },
+      "system": {
+        "slug": "shadow",
+        "section": "Endgame Weapons",
+        "sortOrder": 10,
+        "image": "/Lineage%20Piece/Weapons/shadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Raiden Shogun",
+        "alsoKnownAs": "Raiden",
+        "rarity": "Mythical",
+        "obtainmentType": "Materials",
+        "island": "Frostborn Island",
+        "npc": "Raiden Shogun NPC",
+        "cost": "7,500,000 Coins and 7,500 Gems",
+        "requirements": "Archon Race",
+        "materials": "x40 Celesial Steel, x5 Shard of Calamity, x5 Tear of Eternity, x2 Puppet Core, x1 Electro Vision",
+        "mastery": "Has mastery",
+        "moveKeys": "M1, Z, X, C, V, R",
+        "masteryNote": "Raiden Shogun Mastery NPC on Frostborn Island. Be Archon Race, deal 750M damage with Raiden Shogun, and clear Planet of Euthymia 10 times on Hard or Extreme.",
+        "cardSummary": "A Mythical Frostborn Island sword that needs Archon Race plus Plane of Euthymia materials. Mastery R switches it into a second mode with its own M1, X, and V."
+      },
+      "system": {
+        "slug": "raiden-shogun",
+        "section": "Endgame Weapons",
+        "sortOrder": 11,
+        "image": "/Lineage%20Piece/Weapons/raiden-shogun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Miyabi",
+        "alsoKnownAs": "",
+        "rarity": "Mythical",
+        "obtainmentType": "Banner",
+        "island": "Lineage Town",
+        "npc": "Banner [Gacha]",
+        "cost": "",
+        "requirements": "Banner tickets",
+        "materials": "",
+        "mastery": "Has mastery",
+        "moveKeys": "M1, Z, X, C, V, R",
+        "masteryNote": "Miyabi Mastery NPC on Monument Isle. Deal 2B damage with Miyabi, defeat Miyabi 10 times, be Frost Kitsune race, and bring x1 Frost Katana Tsuba.",
+        "cardSummary": "The only banner weapon. Roll it from the Banner NPC, then finish mastery on Monument Isle with Frost Kitsune and a Frost Katana Tsuba."
+      },
+      "system": {
+        "slug": "miyabi",
+        "section": "Endgame Weapons",
+        "sortOrder": 12,
+        "image": "/Lineage%20Piece/Weapons/miyabi.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Daggers",
+        "alsoKnownAs": "",
+        "rarity": "Mythical",
+        "obtainmentType": "Materials",
+        "island": "Scorched Ruins",
+        "npc": "Shadow Daggers NPC",
+        "cost": "10,000,000 Coins and 10,000 Gems",
+        "requirements": "Requires Player's Dagger, level 5,000+, and Monarch's Acknowledgment from the Sung Jin Woo boss at a 10% chance. The official questline then asks for 15 SJW kills, Tower floor 50, 15 Cartenon Temple clears, both Demon King Daggers, 2B damage with Player's Dagger, a Clone of Monarch kill, 20 Extreme Sovereign clears, 20 Extreme Abyss clears, and 10 Shadow Monarch kills.",
+        "materials": "x1 Monarch's Soul, x2 Core of Shadow, x10 Gate Fragment",
+        "mastery": "None",
+        "moveKeys": "M1, Z, X, C, V, R",
+        "masteryNote": "No mastery NPC is listed on the official Trello. The weapon card includes an R move with the rest of the kit.",
+        "cardSummary": "The Scorched Ruins upgrade of Player's Dagger. It needs level 5,000, Monarch's Acknowledgment, a long Sung Jin Woo and dungeon questline, then Monarch's Soul, Cores of Shadow, and Gate Fragments."
+      },
+      "system": {
+        "slug": "shadow-daggers",
+        "section": "Endgame Weapons",
+        "sortOrder": 13,
+        "image": "/Lineage%20Piece/Weapons/shadow-daggers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kokushibo",
+        "alsoKnownAs": "",
+        "rarity": "Mythical",
+        "obtainmentType": "Materials",
+        "island": "Deeproot Jungle",
+        "npc": "Kokushibo NPC",
+        "cost": "10,000,000 Coins and 10,000 Gems",
+        "requirements": "Demon Race",
+        "materials": "x1 Nichirin blue print, x4 Broken Flute, x6 Upper One Eye",
+        "mastery": "Has mastery",
+        "moveKeys": "M1, Z, X, C, V, R",
+        "masteryNote": "Kokushibo Mastery NPC on Deeproot Jungle. Deal 2B damage with Kokushibo, kill 250 NPCs at night, kill 50 bosses at night, defeat Kokushibo 25 times on Hard or Extreme at night, and equip the Upper Moon One title.",
+        "cardSummary": "A Mythical Deeproot Jungle sword gated behind Demon Race. Buy it with a Nichirin blueprint, Broken Flutes, Upper One Eyes, 10,000,000 Coins, and 10,000 Gems."
+      },
+      "system": {
+        "slug": "kokushibo",
+        "section": "Endgame Weapons",
+        "sortOrder": 14,
+        "image": "/Lineage%20Piece/Weapons/kokushibo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Saber Alter",
+        "alsoKnownAs": "Excalibur Morgan",
+        "rarity": "Mythical",
+        "obtainmentType": "Materials",
+        "island": "Legend's Arena",
+        "npc": "Saber Alter NPC",
+        "cost": "20,000,000 Coins and 2,000 Gems",
+        "requirements": "",
+        "materials": "x1 Corrupted Holy Sword, x3 Dark Mana Core, x5 Servant Covenant, x10 Dragon Blood, x750 Grail Mud",
+        "mastery": "Has mastery",
+        "moveKeys": "M1, Z, X, C, V, R",
+        "masteryNote": "Saber Alter Mastery NPC on Legend's Arena. Deal 2.5B damage with Excalibur Morgan, equip The Tyrant King title, defeat Medusa 10 times, and defeat Corruption 50 times.",
+        "cardSummary": "The Mythical Legend's Arena follow-up to Excalibur. Players also call the blade Excalibur Morgan. The seller wants Ryuudo Cave materials plus 20,000,000 Coins and 2,000 Gems."
+      },
+      "system": {
+        "slug": "saber-alter",
+        "section": "Endgame Weapons",
+        "sortOrder": 15,
+        "image": "/Lineage%20Piece/Weapons/saber-alter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Solemn Lament",
+        "alsoKnownAs": "",
+        "rarity": "Mythical",
+        "obtainmentType": "Materials",
+        "island": "Frostborn Island",
+        "npc": "Solemn Lament NPC",
+        "cost": "30,000,000 Coins and 45,000 Gems",
+        "requirements": "",
+        "materials": "x1 Grief for the dead, x1 Lament for the living, x5 Fusion Core, x100 Soulweaver Butterfly, x250 Boss's Soul",
+        "mastery": "Has mastery",
+        "moveKeys": "M1, Z, X, C, V, R",
+        "masteryNote": "Solemn Lament Mastery NPC on Frostborn Island. Deal 3.5B damage with Solemn Lament, kill 50 NPCs with Butterflyed Mutation, defeat 15 bosses with Butterflyed Mutation, defeat Solemn Lament User 15 times on Hard or Extreme, and bury the grief with a Large Coffin.",
+        "cardSummary": "The Mythical Frostborn Island weapon from the Solemn Lament NPC. It needs Grief for the Dead, Lament for the Living, Fusion Cores, Soulweaver Butterflies, Boss's Souls, 30,000,000 Coins, and 45,000 Gems."
+      },
+      "system": {
+        "slug": "solemn-lament",
+        "section": "Endgame Weapons",
+        "sortOrder": 16,
+        "image": "/Lineage%20Piece/Weapons/solemn-lament.png"
+      }
+    }
+  ]
+}

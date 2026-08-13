@@ -1,0 +1,1948 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Lineage Piece",
+    "gameSlug": "lineage-piece",
+    "collection": "items",
+    "route": "/wiki/lineage-piece/items",
+    "catalogCode": "lineage-piece-items",
+    "itemFields": [
+      "type",
+      "obtainment",
+      "use",
+      "dropChance",
+      "cardSummary"
+    ],
+    "columns": [
+      "type",
+      "obtainment",
+      "use",
+      "dropChance",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Chests",
+        "Ores",
+        "Keys",
+        "Rerolls",
+        "Unlock Items",
+        "Boss Materials"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "type",
+        "dropChance",
+        "obtainment",
+        "use"
+      ],
+      "tableFields": [
+        "type",
+        "dropChance",
+        "obtainment",
+        "use",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "type": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "dropChance": {
+          "kind": "chip",
+          "label": "Chance"
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "use": {
+          "kind": "detail",
+          "label": "Use"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Common Chest",
+        "type": "Chest",
+        "obtainment": "Drops from any mob.",
+        "use": "Opens for 1,000 to 2,500 Coins and 7 to 15 Gems.",
+        "dropChance": "3% from mobs",
+        "cardSummary": "The basic combat chest. Kill anything and you can walk away with a small coin and gem payout."
+      },
+      "system": {
+        "slug": "common-chest",
+        "section": "Chests",
+        "sortOrder": 1,
+        "image": "/Lineage%20Piece/items/common-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uncommon Chest",
+        "type": "Chest",
+        "obtainment": "Drops from any mob.",
+        "use": "Opens for 3,000 to 6,000 Coins and 25 to 50 Gems.",
+        "dropChance": "2% from mobs",
+        "cardSummary": "A step up from Common. Same mob farm, better coin and gem ranges."
+      },
+      "system": {
+        "slug": "uncommon-chest",
+        "section": "Chests",
+        "sortOrder": 2,
+        "image": "/Lineage%20Piece/items/uncommon-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rare Chest",
+        "type": "Chest",
+        "obtainment": "Drops from any mob.",
+        "use": "Opens for 10,000 to 20,000 Coins, 100 to 125 Gems, and one bonus item from Haki Color Reroll, Summon Core, Reroll Essence, Trait Reroll, or Race Reroll.",
+        "dropChance": "1% from mobs",
+        "cardSummary": "The first chest that also hands you a reroll or Summon Core every time you open it."
+      },
+      "system": {
+        "slug": "rare-chest",
+        "section": "Chests",
+        "sortOrder": 3,
+        "image": "/Lineage%20Piece/items/rare-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Epic Chest",
+        "type": "Chest",
+        "obtainment": "Drops from any mob and from bosses.",
+        "use": "Opens for 30,000 to 60,000 Coins, 150 to 300 Gems, and one bonus stack of 1 to 2 Haki Color Rerolls or Summon Cores, or 1 Reroll Essence, Trait Reroll, or Race Reroll.",
+        "dropChance": "0.5% from mobs, 7.5% from bosses",
+        "cardSummary": "Bosses drop this far more often than trash mobs. Open it for a bigger payout plus a guaranteed bonus material."
+      },
+      "system": {
+        "slug": "epic-chest",
+        "section": "Chests",
+        "sortOrder": 4,
+        "image": "/Lineage%20Piece/items/epic-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Legendary Chest",
+        "type": "Chest",
+        "obtainment": "Drops from any mob and from bosses.",
+        "use": "Opens for 80,000 to 150,000 Coins, 500 to 800 Gems, and 1 or 2 bonus items from the reroll and Summon Core pool.",
+        "dropChance": "0.25% from mobs, 5% from bosses",
+        "cardSummary": "A late-farm chest. Boss kills are the realistic way to see these and the extra rerolls inside."
+      },
+      "system": {
+        "slug": "legendary-chest",
+        "section": "Chests",
+        "sortOrder": 5,
+        "image": "/Lineage%20Piece/items/legendary-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mythical Chest",
+        "type": "Chest",
+        "obtainment": "Drops from any mob and from bosses.",
+        "use": "Opens for 200,000 to 350,000 Coins, 900 to 1,100 Gems, and 2 or 3 bonus items, including up to 3 Haki Color Rerolls or Summon Cores.",
+        "dropChance": "0.1% from mobs, 1% from bosses",
+        "cardSummary": "The rarest chest. Bosses still only drop it at 1%, but the bonus pile is the biggest in the set."
+      },
+      "system": {
+        "slug": "mythical-chest",
+        "section": "Chests",
+        "sortOrder": 6,
+        "image": "/Lineage%20Piece/items/mythical-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Common Ore",
+        "type": "Ore",
+        "obtainment": "Destroy the Huge Stone world event on Dawnwind Village. It spawns every 20 minutes, despawns after 5 minutes, and gives 1 random ore for every 1% damage you deal.",
+        "use": "Used to enchant weapons.",
+        "dropChance": null,
+        "cardSummary": "The most common Huge Stone payout. Break the stone on the starter island, then spend the ore on weapon enchants."
+      },
+      "system": {
+        "slug": "common-ore",
+        "section": "Ores",
+        "sortOrder": 7,
+        "image": "/Lineage%20Piece/items/common-ore.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uncommon Ore",
+        "type": "Ore",
+        "obtainment": "Destroy the Huge Stone world event on Dawnwind Village. It spawns every 20 minutes, despawns after 5 minutes, and gives 1 random ore for every 1% damage you deal.",
+        "use": "Used to enchant weapons.",
+        "dropChance": null,
+        "cardSummary": "A mid-tier Huge Stone ore. Same event as the other ores, better than Common for enchants."
+      },
+      "system": {
+        "slug": "uncommon-ore",
+        "section": "Ores",
+        "sortOrder": 8,
+        "image": "/Lineage%20Piece/items/uncommon-ore.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rare Ore",
+        "type": "Ore",
+        "obtainment": "Destroy the Huge Stone world event on Dawnwind Village. It spawns every 20 minutes, despawns after 5 minutes, and gives 1 random ore for every 1% damage you deal.",
+        "use": "Used to enchant weapons.",
+        "dropChance": null,
+        "cardSummary": "A stronger Huge Stone roll. Show up every 20 minutes on Dawnwind Village and chip the stone down."
+      },
+      "system": {
+        "slug": "rare-ore",
+        "section": "Ores",
+        "sortOrder": 9,
+        "image": "/Lineage%20Piece/items/rare-ore.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Epic Ore",
+        "type": "Ore",
+        "obtainment": "Destroy the Huge Stone world event on Dawnwind Village. It spawns every 20 minutes, despawns after 5 minutes, and gives 1 random ore for every 1% damage you deal.",
+        "use": "Used to enchant weapons.",
+        "dropChance": null,
+        "cardSummary": "A high-tier enchant ore from the same Huge Stone loop as the rest of the set."
+      },
+      "system": {
+        "slug": "epic-ore",
+        "section": "Ores",
+        "sortOrder": 10,
+        "image": "/Lineage%20Piece/items/epic-ore.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Legendary Ore",
+        "type": "Ore",
+        "obtainment": "Destroy the Huge Stone world event on Dawnwind Village. It spawns every 20 minutes, despawns after 5 minutes, and gives 1 random ore for every 1% damage you deal.",
+        "use": "Used to enchant weapons.",
+        "dropChance": null,
+        "cardSummary": "A rare Huge Stone ore. Private-server damage on the stone is the clean way to stock these."
+      },
+      "system": {
+        "slug": "legendary-ore",
+        "section": "Ores",
+        "sortOrder": 11,
+        "image": "/Lineage%20Piece/items/legendary-ore.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mythical Ore",
+        "type": "Ore",
+        "obtainment": "Destroy the Huge Stone world event on Dawnwind Village. It spawns every 20 minutes, despawns after 5 minutes, and gives 1 random ore for every 1% damage you deal.",
+        "use": "Used to enchant weapons.",
+        "dropChance": null,
+        "cardSummary": "One of the top Huge Stone rolls. Same 20-minute Dawnwind spawn as every other ore."
+      },
+      "system": {
+        "slug": "mythical-ore",
+        "section": "Ores",
+        "sortOrder": 12,
+        "image": "/Lineage%20Piece/items/mythical-ore.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lineage Ore",
+        "type": "Ore",
+        "obtainment": "Destroy the Huge Stone world event on Dawnwind Village. It spawns every 20 minutes, despawns after 5 minutes, and gives 1 random ore for every 1% damage you deal.",
+        "use": "Used to enchant weapons.",
+        "dropChance": null,
+        "cardSummary": "The top-named ore on the Trello list. It still comes from Huge Stone, not from mobs or chests."
+      },
+      "system": {
+        "slug": "lineage-ore",
+        "section": "Ores",
+        "sortOrder": 13,
+        "image": "/Lineage%20Piece/items/lineage-ore.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trial's Key",
+        "type": "Key",
+        "obtainment": "Buy from the Portal Key Seller on Scorched Ruins for 1 Boss's Soul plus 75,000 Coins or 750 Gems.",
+        "use": "Opens artifact trial portals.",
+        "dropChance": null,
+        "cardSummary": "The paid portal key. Spend a Boss's Soul at Scorched Ruins when you are ready to farm artifacts."
+      },
+      "system": {
+        "slug": "trials-key",
+        "section": "Keys",
+        "sortOrder": 14,
+        "image": "/Lineage%20Piece/items/trials-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cid's Key",
+        "type": "Key",
+        "obtainment": "Drops from Bandits on Dawnwind Village. The Tower Shop on Monument Isle also sells it for 8 Tower Shards.",
+        "use": "Opens Cid's Castle.",
+        "dropChance": null,
+        "cardSummary": "Your ticket into Cid's Castle for Shadow materials. Farm starter-island Bandits or spend Tower Shards."
+      },
+      "system": {
+        "slug": "cids-key",
+        "section": "Keys",
+        "sortOrder": 15,
+        "image": "/Lineage%20Piece/items/cids-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shrine Key",
+        "type": "Key",
+        "obtainment": "Drops from Snow Bandits on Frostborn Island. The Tower Shop on Monument Isle also sells it for 5 Tower Shards.",
+        "use": "Opens the Plane of Euthymia raid for Raiden materials.",
+        "dropChance": "1% from Snow Bandits",
+        "cardSummary": "The Raiden raid key. Snow Bandits on Frostborn are the combat farm, Tower Shards are the pity buy."
+      },
+      "system": {
+        "slug": "shrine-key",
+        "section": "Keys",
+        "sortOrder": 16,
+        "image": "/Lineage%20Piece/items/shrine-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cartenon Key",
+        "type": "Key",
+        "obtainment": "Drops from Sung Jinwoo on Fossil Island.",
+        "use": "Opens Cartenon Temple for Shadow Monarch materials.",
+        "dropChance": "60% from Sung Jinwoo",
+        "cardSummary": "Sung Jinwoo almost always drops one. Use it to enter Cartenon Temple and hunt Monarch mats."
+      },
+      "system": {
+        "slug": "cartenon-key",
+        "section": "Keys",
+        "sortOrder": 17,
+        "image": "/Lineage%20Piece/items/cartenon-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Absolute Ether Key",
+        "type": "Key",
+        "obtainment": "Obtained from the Miyabi banner at Lineage Town.",
+        "use": "Opens Absolute Dead End for the Miyabi fight.",
+        "dropChance": null,
+        "cardSummary": "The Miyabi dungeon key. Pull it from the Lineage Town banner, then run Absolute Dead End."
+      },
+      "system": {
+        "slug": "absolute-ether-key",
+        "section": "Keys",
+        "sortOrder": 18,
+        "image": "/Lineage%20Piece/items/absolute-ether-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scatthen Key",
+        "type": "Key",
+        "obtainment": "Finish the Scatthen Key quest on Hueco Mundo (500 Quincy kills, 25 Aizen kills, and 4 Reishi Crystals with Observation Haki). After that, Quincy can drop the key.",
+        "use": "Opens Wandenreich for the Yhwach raid.",
+        "dropChance": "1% from Quincy after the quest",
+        "cardSummary": "Yhwach's door key. Clear the Hueco Mundo quest first or Quincy will not start dropping it."
+      },
+      "system": {
+        "slug": "scatthen-key",
+        "section": "Keys",
+        "sortOrder": 19,
+        "image": "/Lineage%20Piece/items/scatthen-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ryuudo Key",
+        "type": "Key",
+        "obtainment": "Drops from Saber in Legend's Arena.",
+        "use": "Opens Ryuudo Cave for the Saber Alter route.",
+        "dropChance": "7.25% from Saber",
+        "cardSummary": "Farm Saber, then use the key to reach Medusa, Corruption, and Saber Alter."
+      },
+      "system": {
+        "slug": "ryuudo-key",
+        "section": "Keys",
+        "sortOrder": 20,
+        "image": "/Lineage%20Piece/items/ryuudo-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glamoth Planet Key",
+        "type": "Key",
+        "obtainment": "Buy from the Byte Shop on Monument Isle for 500 Bytes.",
+        "use": "Opens Glamoth Planet for Firefly materials.",
+        "dropChance": null,
+        "cardSummary": "Spend Simulated Sea Bytes on Monument Isle, then run Glamoth Planet for Firefly mats and Armor Scrap."
+      },
+      "system": {
+        "slug": "glamoth-planet-key",
+        "section": "Keys",
+        "sortOrder": 21,
+        "image": "/Lineage%20Piece/items/glamoth-planet-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Butterfly Grave Key",
+        "type": "Key",
+        "obtainment": "Buy from the Butterfly Shop on Frostborn Island for 35 Soulweaver Butterflies.",
+        "use": "Opens The Butterfly Grave dungeon.",
+        "dropChance": null,
+        "cardSummary": "Angela's shop key. Bank Soulweaver Butterflies on Frostborn, then open Butterfly Grave for Solemn Lament parts."
+      },
+      "system": {
+        "slug": "butterfly-grave-key",
+        "section": "Keys",
+        "sortOrder": 22,
+        "image": "/Lineage%20Piece/items/butterfly-grave-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Haki Color Reroll",
+        "type": "Reroll",
+        "obtainment": "Drops from Rare Chests or higher, and from any mob or boss.",
+        "use": "Rerolls your Armament Haki color at the color system. Color is cosmetic only.",
+        "dropChance": "4% from mobs or bosses",
+        "cardSummary": "A cosmetic Armament reroll. Farm Rare+ chests or the 4% combat pool if you hate your first aura color."
+      },
+      "system": {
+        "slug": "haki-color-reroll",
+        "section": "Rerolls",
+        "sortOrder": 23,
+        "image": "/Lineage%20Piece/items/haki-color-reroll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Race Reroll",
+        "type": "Reroll",
+        "obtainment": "Drops from Rare Chests or higher, and from any mob or boss. The Armor Scrap Shop and Byte Shop on Monument Isle also sell it.",
+        "use": "Rerolls your race at the Race Reroll NPC in Lineage Town.",
+        "dropChance": "4% from mobs or bosses",
+        "cardSummary": "The standard race spin. Chests, combat, Armor Scrap, and Bytes all feed this NPC in Lineage Town."
+      },
+      "system": {
+        "slug": "race-reroll",
+        "section": "Rerolls",
+        "sortOrder": 24,
+        "image": "/Lineage%20Piece/items/race-reroll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trait Reroll",
+        "type": "Reroll",
+        "obtainment": "Drops from Rare Chests or higher, and from any mob or boss. The Armor Scrap Shop and Byte Shop on Monument Isle also sell it.",
+        "use": "Rerolls your trait at the Trait Reroll NPC in Lineage Town.",
+        "dropChance": "4% from mobs or bosses",
+        "cardSummary": "Same farm as Race Reroll, different NPC. Use it when you are chasing a better trait roll."
+      },
+      "system": {
+        "slug": "trait-reroll",
+        "section": "Rerolls",
+        "sortOrder": 25,
+        "image": "/Lineage%20Piece/items/trait-reroll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reroll Essence",
+        "type": "Reroll",
+        "obtainment": "Drops from Rare Chests or higher, and from any mob or boss. The Armor Scrap Shop and Byte Shop on Monument Isle also sell it.",
+        "use": "Rerolls stats at the Stats Potential NPC in Lineage Town.",
+        "dropChance": "4% from mobs or bosses",
+        "cardSummary": "The stat-board reroll. Hold these until you know which potential you are pushing."
+      },
+      "system": {
+        "slug": "reroll-essence",
+        "section": "Rerolls",
+        "sortOrder": 26,
+        "image": "/Lineage%20Piece/items/reroll-essence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Artifact Sub-Reroll",
+        "type": "Reroll",
+        "obtainment": "Exchanged from Simulated Sea, including a 10,000-point Simulated Sea reward. The Byte Shop also sells it for 1,000 Bytes, and the Armor Scrap Shop sells it for 50 Armor Scrap.",
+        "use": "Rerolls artifact sub-stats.",
+        "dropChance": null,
+        "cardSummary": "Not a combat drop. Run Simulated Sea or buy it with Bytes or Armor Scrap when you are tuning artifact rolls."
+      },
+      "system": {
+        "slug": "artifact-sub-reroll",
+        "section": "Rerolls",
+        "sortOrder": 27,
+        "image": "/Lineage%20Piece/items/artifact-sub-reroll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Haki Book",
+        "type": "Unlock Item",
+        "obtainment": "Drops from any mob or boss.",
+        "use": "Hand in at the Buso Haki NPC on Frostborn Island to unlock Armament Haki.",
+        "dropChance": "0.1% from mobs or bosses",
+        "cardSummary": "The Armament book. It is a 0.1% combat drop and is not the same item as the Observation quest book."
+      },
+      "system": {
+        "slug": "haki-book",
+        "section": "Unlock Items",
+        "sortOrder": 28,
+        "image": "/Lineage%20Piece/items/haki-book.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Obs Haki Book",
+        "type": "Unlock Item",
+        "obtainment": "Granted automatically after you light the fifth Observation Haki torch on the Deeproot Jungle quest.",
+        "use": "Hand in at the Observation Haki trainer with 2.5 million Yen to unlock Observation Haki. The book is untradeable and one-time.",
+        "dropChance": null,
+        "cardSummary": "A quest-only Observation book. You cannot farm or trade this the way you farm the Armament Haki Book."
+      },
+      "system": {
+        "slug": "obs-haki-book",
+        "section": "Unlock Items",
+        "sortOrder": 29,
+        "image": "/Lineage%20Piece/items/obs-haki-book.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sword Technique Book",
+        "type": "Unlock Item",
+        "obtainment": "Drops from sword bosses. Sung Jinwoo and Saber both drop it.",
+        "use": "Required to buy Player's Dagger and Excalibur.",
+        "dropChance": "3% from Sung Jinwoo, 1% from Saber",
+        "cardSummary": "The shared sword-unlock book. Farm Sung Jinwoo if you want the better listed chance."
+      },
+      "system": {
+        "slug": "sword-technique-book",
+        "section": "Unlock Items",
+        "sortOrder": 30,
+        "image": "/Lineage%20Piece/items/sword-technique-book.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Limitless Scroll",
+        "type": "Unlock Item",
+        "obtainment": "Exchanged at the Limitless Scroll Seller on Shinjuku Showdown after the Gojo Shinjuku mastery quests, for 50 Cursed Shards, 2 Infinity Cores, and 5 Limitless Shards.",
+        "use": "Unlocks Gojo Shinjuku mastery moves.",
+        "dropChance": null,
+        "cardSummary": "A crafted mastery scroll, not a world drop. Finish the Shinjuku Gojo quests, then pay the shard cost."
+      },
+      "system": {
+        "slug": "limitless-scroll",
+        "section": "Unlock Items",
+        "sortOrder": 31,
+        "image": "/Lineage%20Piece/items/limitless-scroll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shrine Scroll",
+        "type": "Unlock Item",
+        "obtainment": "Exchanged at the Shrine Scroll Seller on Shinjuku Showdown after the Sukuna Shinjuku mastery quests, for 50 Cursed Shards, 2 Slash Cores, and 5 Shrine Shards.",
+        "use": "Unlocks Sukuna Shinjuku mastery moves.",
+        "dropChance": null,
+        "cardSummary": "Sukuna Shinjuku's mastery scroll. Same island as Limitless Scroll, different seller and materials."
+      },
+      "system": {
+        "slug": "shrine-scroll",
+        "section": "Unlock Items",
+        "sortOrder": 32,
+        "image": "/Lineage%20Piece/items/shrine-scroll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Summon Core",
+        "type": "Unlock Item",
+        "obtainment": "Drops from Rare Chests or higher, and from any mob or boss.",
+        "use": "Spent at the Boss Summoner in Legend's Arena. Verdant Hero costs 2 Summon Cores and 350 Gems. Saber costs 2 Summon Cores and 500 Gems.",
+        "dropChance": "4% from mobs or bosses",
+        "cardSummary": "The Legend's Arena summon token. Save stacks for Deku and Saber spawns instead of opening them like chests."
+      },
+      "system": {
+        "slug": "summon-core",
+        "section": "Unlock Items",
+        "sortOrder": 33,
+        "image": "/Lineage%20Piece/items/summon-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boss's Soul",
+        "type": "Unlock Item",
+        "obtainment": "Drops once per Legend's Arena boss kill.",
+        "use": "Spent at the Boss Exchange in Legend's Arena and at the Portal Key Seller for Trial's Keys. Solemn Lament also asks for 250.",
+        "dropChance": "1 per Legend's Arena boss",
+        "cardSummary": "Legend's Arena pity currency. Trade it for keys, exchange rewards, or the Solemn Lament bill."
+      },
+      "system": {
+        "slug": "boss-soul",
+        "section": "Unlock Items",
+        "sortOrder": 34,
+        "image": "/Lineage%20Piece/items/boss-soul.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ticket",
+        "type": "Unlock Item",
+        "obtainment": "Earned from playtime rewards, Tower, the Merchant, Tower Shop, and shop products. Trello also notes a Ticket every 5 Tower floors.",
+        "use": "Spent on the Lineage Town banner, including the Miyabi banner that can grant Absolute Ether Keys.",
+        "dropChance": null,
+        "cardSummary": "Banner fuel. Do playtime and Tower, then spend Tickets in Lineage Town instead of treating them like combat loot."
+      },
+      "system": {
+        "slug": "ticket",
+        "section": "Unlock Items",
+        "sortOrder": 35,
+        "image": "/Lineage%20Piece/items/ticket.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tower Shard",
+        "type": "Unlock Item",
+        "obtainment": "Drops from the Tower gamemode on Monument Isle.",
+        "use": "Traded at the Tower Shop for dungeon keys, including 5 shards for a Shrine Key and 8 shards for a Cid's Key. Also used for Tower upgrades.",
+        "dropChance": null,
+        "cardSummary": "Tower's own currency. Climb floors, then buy Shrine or Cid keys when you do not want to farm the mobs."
+      },
+      "system": {
+        "slug": "tower-shard",
+        "section": "Unlock Items",
+        "sortOrder": 36,
+        "image": "/Lineage%20Piece/items/tower-shard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Grail",
+        "type": "Unlock Item",
+        "obtainment": "Crafted at the Holy Grail Craft NPC in Legend's Arena for 5 Golden Dust.",
+        "use": "Used to spawn Gilgamesh at the Boss Summoner.",
+        "dropChance": null,
+        "cardSummary": "Gilgamesh's spawn item. Turn Golden Dust into one Grail, then pay the rest of the summon cost."
+      },
+      "system": {
+        "slug": "holy-grail",
+        "section": "Unlock Items",
+        "sortOrder": 37,
+        "image": "/Lineage%20Piece/items/holy-grail.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Dust",
+        "type": "Unlock Item",
+        "obtainment": "Drops from any mob.",
+        "use": "Exchanged 5 to 1 into a Holy Grail, which is required to spawn Gilgamesh.",
+        "dropChance": "2.5% from any mob",
+        "cardSummary": "A common-looking dust with one job: five of these become a Holy Grail in Legend's Arena."
+      },
+      "system": {
+        "slug": "golden-dust",
+        "section": "Unlock Items",
+        "sortOrder": 38,
+        "image": "/Lineage%20Piece/items/golden-dust.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Slime",
+        "type": "Unlock Item",
+        "obtainment": "Drops from Rimuru on Fossil Island.",
+        "use": "Consumed to roll the Slime race at a 5% success chance.",
+        "dropChance": "35% from Rimuru",
+        "cardSummary": "Rimuru's race item. You will burn several of these before the Slime race actually sticks."
+      },
+      "system": {
+        "slug": "slime",
+        "section": "Unlock Items",
+        "sortOrder": 39,
+        "image": "/Lineage%20Piece/items/slime.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frozen Sakura",
+        "type": "Unlock Item",
+        "obtainment": null,
+        "use": "Consumed to roll the Frost Kitsune race at a 10% success chance.",
+        "dropChance": null,
+        "cardSummary": "The Miyabi race item. Official Trello lists the race use, but not where the sakura itself drops."
+      },
+      "system": {
+        "slug": "frozen-sakura",
+        "section": "Unlock Items",
+        "sortOrder": 40,
+        "image": "/Lineage%20Piece/items/frozen-sakura.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Black heart",
+        "type": "Unlock Item",
+        "obtainment": null,
+        "use": "Consumed to obtain the Monarch race.",
+        "dropChance": null,
+        "cardSummary": "The Monarch race consumable for Shadow's Dagger builds. Trello does not list a drop source."
+      },
+      "system": {
+        "slug": "black-heart",
+        "section": "Unlock Items",
+        "sortOrder": 41,
+        "image": "/Lineage%20Piece/items/black-heart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Soul",
+        "type": "Unlock Item",
+        "obtainment": null,
+        "use": null,
+        "dropChance": null,
+        "cardSummary": "A named Trello item in the Kokushibo group. Official cards do not yet list a drop or a spend."
+      },
+      "system": {
+        "slug": "demon-soul",
+        "section": "Unlock Items",
+        "sortOrder": 42,
+        "image": "/Lineage%20Piece/items/demon-soul.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Spider Lily",
+        "type": "Unlock Item",
+        "obtainment": "Spawns in the world on Fossil Island, Shinjuku Showdown, Lineage Town, Deeproot Jungle, and Legend's Arena.",
+        "use": "Hand in 10 at the Muzan race NPC to unlock the Demon race.",
+        "dropChance": null,
+        "cardSummary": "A world spawn, not a boss drop. Sweep the five listed islands, then pay Muzan 10 lilies for Demon."
+      },
+      "system": {
+        "slug": "blue-spider-lily",
+        "section": "Unlock Items",
+        "sortOrder": 43,
+        "image": "/Lineage%20Piece/items/blue-spider-lily.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hollow Mask",
+        "type": "Unlock Item",
+        "obtainment": "Drops from Ichigo (Bankai) on Hueco Mundo.",
+        "use": "Required to buy Tensa Zangetsu after you own Zangetsu and have killed Ichigo (Bankai) 50 times.",
+        "dropChance": "0.1% from Ichigo (Bankai)",
+        "cardSummary": "A Tensa unlock material, not an accessory. The drop is tiny, so plan a long Bankai farm."
+      },
+      "system": {
+        "slug": "hollow-mask",
+        "section": "Unlock Items",
+        "sortOrder": 44,
+        "image": "/Lineage%20Piece/items/hollow-mask.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Orb",
+        "type": "Boss Material",
+        "obtainment": "Drops from Sorcerer Students and Miwa at Jujutsu High School.",
+        "use": "Spent at the Sorcerer Summoner to spawn Gojo and Sukuna.",
+        "dropChance": "5% from Sorcerer Student, 20% from Miwa",
+        "cardSummary": "Jujutsu summon bait. Miwa is the faster orb farm if you can kill her on cooldown."
+      },
+      "system": {
+        "slug": "cursed-orb",
+        "section": "Boss Materials",
+        "sortOrder": 45,
+        "image": "/Lineage%20Piece/items/cursed-orb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cursed Shard",
+        "type": "Boss Material",
+        "obtainment": "Drops from Jujutsu bosses, including Gojo, Sukuna, and both Shinjuku versions.",
+        "use": "Required for Gojo (x15), Sukuna (x15), Gojo Shinjuku (x100), Sukuna Shinjuku (x100), and both Shinjuku mastery scrolls (x50 each).",
+        "dropChance": "35% from Gojo or Sukuna, 50% from Shinjuku bosses",
+        "cardSummary": "The shared Jujutsu tax. You need a lot of these for both base styles and the Shinjuku upgrades."
+      },
+      "system": {
+        "slug": "cursed-shard",
+        "section": "Boss Materials",
+        "sortOrder": 46,
+        "image": "/Lineage%20Piece/items/cursed-shard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Six Eye",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gojo at Jujutsu High School.",
+        "use": "Required to buy Gojo. The NPC asks for 2.",
+        "dropChance": "3% from Gojo",
+        "cardSummary": "Gojo's rare eye drop. You need two, so expect a long Sorcerer Summoner loop."
+      },
+      "system": {
+        "slug": "six-eye",
+        "section": "Boss Materials",
+        "sortOrder": 47,
+        "image": "/Lineage%20Piece/items/six-eye.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Infinity Essence",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gojo at Jujutsu High School.",
+        "use": "Required to buy Gojo. The NPC asks for 8.",
+        "dropChance": "11% from Gojo",
+        "cardSummary": "The common Gojo material. Farm this alongside Six Eye and Cursed Shards."
+      },
+      "system": {
+        "slug": "infinity-essence",
+        "section": "Boss Materials",
+        "sortOrder": 48,
+        "image": "/Lineage%20Piece/items/infinity-essence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sukuna's Finger",
+        "type": "Boss Material",
+        "obtainment": "Drops from Sukuna at Jujutsu High School.",
+        "use": "Required to buy Sukuna. The NPC asks for 20.",
+        "dropChance": "15% from Sukuna",
+        "cardSummary": "Sukuna's named drop. Twenty fingers is a long summon farm even at 15%."
+      },
+      "system": {
+        "slug": "sukunas-finger",
+        "section": "Boss Materials",
+        "sortOrder": 49,
+        "image": "/Lineage%20Piece/items/sukunas-finger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "True six eye",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gojo Shinjuku at Shinjuku Showdown.",
+        "use": "Required to buy Gojo Shinjuku (x1) and to unlock the Enlightened race (x2).",
+        "dropChance": "0.45% from Gojo Shinjuku",
+        "cardSummary": "The Shinjuku Gojo eye. One buys the style, two more are burned for Enlightened."
+      },
+      "system": {
+        "slug": "true-six-eye",
+        "section": "Boss Materials",
+        "sortOrder": 50,
+        "image": "/Lineage%20Piece/items/true-six-eye.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Infinity Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gojo Shinjuku at Shinjuku Showdown.",
+        "use": "Required to buy Gojo Shinjuku (x1) and to exchange a Limitless Scroll (x2).",
+        "dropChance": "6% from Gojo Shinjuku",
+        "cardSummary": "Shinjuku Gojo's core. Keep extras for the Limitless Scroll after you buy the style."
+      },
+      "system": {
+        "slug": "infinity-core",
+        "section": "Boss Materials",
+        "sortOrder": 51,
+        "image": "/Lineage%20Piece/items/infinity-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Limitless Shard",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gojo Shinjuku at Shinjuku Showdown.",
+        "use": "Required to buy Gojo Shinjuku (x5) and to exchange a Limitless Scroll (x5).",
+        "dropChance": "10% from Gojo Shinjuku",
+        "cardSummary": "The bulk Shinjuku Gojo shard. You will need a second set of five for mastery."
+      },
+      "system": {
+        "slug": "limitless-shard",
+        "section": "Boss Materials",
+        "sortOrder": 52,
+        "image": "/Lineage%20Piece/items/limitless-shard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "True Sukuna Fingers",
+        "type": "Boss Material",
+        "obtainment": "Drops from Sukuna Shinjuku at Shinjuku Showdown.",
+        "use": "Required to buy Sukuna Shinjuku (x5) and to unlock the Vessel race (x20).",
+        "dropChance": "16.5% from Sukuna Shinjuku",
+        "cardSummary": "Shinjuku Sukuna's finger pile. Five unlock the style, twenty more buy Vessel."
+      },
+      "system": {
+        "slug": "true-sukuna-fingers",
+        "section": "Boss Materials",
+        "sortOrder": 53,
+        "image": "/Lineage%20Piece/items/true-sukuna-fingers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Slash Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Sukuna Shinjuku at Shinjuku Showdown.",
+        "use": "Required to buy Sukuna Shinjuku (x1) and to exchange a Shrine Scroll (x2).",
+        "dropChance": "0.65% from Sukuna Shinjuku",
+        "cardSummary": "The rare Shinjuku Sukuna core. Save at least three if you want both the style and mastery."
+      },
+      "system": {
+        "slug": "slash-core",
+        "section": "Boss Materials",
+        "sortOrder": 54,
+        "image": "/Lineage%20Piece/items/slash-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shrine Shard",
+        "type": "Boss Material",
+        "obtainment": "Drops from Sukuna Shinjuku at Shinjuku Showdown.",
+        "use": "Required to buy Sukuna Shinjuku (x5) and to exchange a Shrine Scroll (x5).",
+        "dropChance": "6% from Sukuna Shinjuku",
+        "cardSummary": "Sukuna Shinjuku's bulk shard. Same double-tax as Limitless Shard."
+      },
+      "system": {
+        "slug": "shrine-shard",
+        "section": "Boss Materials",
+        "sortOrder": 55,
+        "image": "/Lineage%20Piece/items/shrine-shard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Slime Essence",
+        "type": "Boss Material",
+        "obtainment": "Drops from Rimuru on Fossil Island.",
+        "use": "Required to buy Rimuru. The NPC asks for 10.",
+        "dropChance": "15% from Rimuru",
+        "cardSummary": "Rimuru's common material. You still need Slime race, a Shizu Mask, and seven Slime Cores with it."
+      },
+      "system": {
+        "slug": "slime-essence",
+        "section": "Boss Materials",
+        "sortOrder": 56,
+        "image": "/Lineage%20Piece/items/slime-essence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Slime Orb",
+        "type": "Boss Material",
+        "obtainment": "Drops from Hollows and Arrancars on Hueco Mundo. The Book Exchange on Fossil Island also trades for it.",
+        "use": "Given to the Slime Summoner so Rimuru spawns instead of Sung Jinwoo. The orb is consumed each summon.",
+        "dropChance": "1% from Hollow or Arrancar",
+        "cardSummary": "Rimuru's spawn item. Farm Hueco Mundo or use the Fossil Island book trader, then spend one orb per spawn."
+      },
+      "system": {
+        "slug": "slime-orb",
+        "section": "Boss Materials",
+        "sortOrder": 57,
+        "image": "/Lineage%20Piece/items/slime-orb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Slime Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Rimuru on Fossil Island.",
+        "use": "Required to buy Rimuru. The NPC asks for 7.",
+        "dropChance": "10% from Rimuru",
+        "cardSummary": "The harder Rimuru material. Seven cores is the long part of that Fossil Island buy."
+      },
+      "system": {
+        "slug": "slime-core",
+        "section": "Boss Materials",
+        "sortOrder": 58,
+        "image": "/Lineage%20Piece/items/slime-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shizu Mask",
+        "type": "Boss Material",
+        "obtainment": "Drops from Rimuru on Fossil Island.",
+        "use": "Required to buy Rimuru. The NPC asks for 1.",
+        "dropChance": "1.25% from Rimuru",
+        "cardSummary": "A Rimuru unlock material, not Rimuru's Outfit. One mask, very low drop."
+      },
+      "system": {
+        "slug": "shizu-mask",
+        "section": "Boss Materials",
+        "sortOrder": 59,
+        "image": "/Lineage%20Piece/items/shizu-mask.png"
+      }
+    },
+    {
+      "item": {
+        "name": "One for all's Cell",
+        "type": "Boss Material",
+        "obtainment": "Drops from Deku in Legend's Arena.",
+        "use": "Required to buy Verdant Hero. The NPC asks for 9.",
+        "dropChance": "17.5% from Deku",
+        "cardSummary": "Deku's only style material. Summon him in Legend's Arena until you have nine cells."
+      },
+      "system": {
+        "slug": "one-for-alls-cell",
+        "section": "Boss Materials",
+        "sortOrder": 60,
+        "image": "/Lineage%20Piece/items/one-for-alls-cell.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Knight Killer",
+        "type": "Boss Material",
+        "obtainment": "Drops from Sung Jinwoo on Fossil Island.",
+        "use": "Required to buy Player's Dagger. The NPC asks for 1, plus Venom Fang, System Cores, and a Sword Technique Book.",
+        "dropChance": "3.5% from Sung Jinwoo",
+        "cardSummary": "One of the two Sung dagger pieces. Pair it with Venom Fang at the Scorched Ruins NPC."
+      },
+      "system": {
+        "slug": "knight-killer",
+        "section": "Boss Materials",
+        "sortOrder": 61,
+        "image": "/Lineage%20Piece/items/knight-killer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Venom Fang",
+        "type": "Boss Material",
+        "obtainment": "Drops from Sung Jinwoo on Fossil Island.",
+        "use": "Required to buy Player's Dagger. The NPC asks for 1.",
+        "dropChance": "3.5% from Sung Jinwoo",
+        "cardSummary": "The other Sung dagger piece. Same boss, same 3.5% as Knight Killer."
+      },
+      "system": {
+        "slug": "venom-fang",
+        "section": "Boss Materials",
+        "sortOrder": 62,
+        "image": "/Lineage%20Piece/items/venom-fang.png"
+      }
+    },
+    {
+      "item": {
+        "name": "System Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Sung Jinwoo on Fossil Island.",
+        "use": "Required to buy Player's Dagger. The NPC asks for 5.",
+        "dropChance": "13.5% from Sung Jinwoo",
+        "cardSummary": "Sung's bulk material. Five cores plus the two named fangs unlock Player's Dagger."
+      },
+      "system": {
+        "slug": "system-core",
+        "section": "Boss Materials",
+        "sortOrder": 63,
+        "image": "/Lineage%20Piece/items/system-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Goblet",
+        "type": "Boss Material",
+        "obtainment": "Drops from Saber in Legend's Arena.",
+        "use": "Required to buy Excalibur. The NPC asks for 5.",
+        "dropChance": "15% from Saber",
+        "cardSummary": "Saber's common Excalibur material. You still need Avalon and a Sword Technique Book."
+      },
+      "system": {
+        "slug": "goblet",
+        "section": "Boss Materials",
+        "sortOrder": 64,
+        "image": "/Lineage%20Piece/items/goblet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Avalon",
+        "type": "Boss Material",
+        "obtainment": "Drops from Saber in Legend's Arena.",
+        "use": "Required to buy Excalibur. The NPC asks for 1.",
+        "dropChance": "5% from Saber",
+        "cardSummary": "The rare Saber piece. One Avalon gates the whole Excalibur purchase."
+      },
+      "system": {
+        "slug": "avalon",
+        "section": "Boss Materials",
+        "sortOrder": 65,
+        "image": "/Lineage%20Piece/items/avalon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Slime",
+        "type": "Boss Material",
+        "obtainment": "Drops from any mob in Cid's Castle.",
+        "use": "Required to buy Shadow. The NPC asks for 100.",
+        "dropChance": "5% from Cid's Castle mobs",
+        "cardSummary": "Shadow's trash-farm material. Clear Cid's Castle waves, not just the final boss."
+      },
+      "system": {
+        "slug": "black-slime",
+        "section": "Boss Materials",
+        "sortOrder": 66,
+        "image": "/Lineage%20Piece/items/black-slime.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Fragment",
+        "type": "Boss Material",
+        "obtainment": "Drops from the Shadow boss in Cid's Castle.",
+        "use": "Required to buy Shadow. The NPC asks for 6.",
+        "dropChance": "6% from Shadow",
+        "cardSummary": "A Cid's Castle boss drop. Six fragments sit between you and the Shadow weapon."
+      },
+      "system": {
+        "slug": "shadow-fragment",
+        "section": "Boss Materials",
+        "sortOrder": 67,
+        "image": "/Lineage%20Piece/items/shadow-fragment.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Orb",
+        "type": "Boss Material",
+        "obtainment": "Drops from the Shadow boss in Cid's Castle.",
+        "use": "Required to buy Shadow. The NPC asks for 12.",
+        "dropChance": "12% from Shadow",
+        "cardSummary": "The bulk Shadow boss drop. Twelve orbs plus fragments, cores, and Black Slime finish the buy."
+      },
+      "system": {
+        "slug": "shadow-orb",
+        "section": "Boss Materials",
+        "sortOrder": 68,
+        "image": "/Lineage%20Piece/items/shadow-orb.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Atomic Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from the Shadow boss in Cid's Castle.",
+        "use": "Required to buy Shadow. The NPC asks for 2.",
+        "dropChance": "2% from Shadow",
+        "cardSummary": "Shadow's rare core. Two of these are the stingy part of the Frostborn purchase."
+      },
+      "system": {
+        "slug": "atomic-core",
+        "section": "Boss Materials",
+        "sortOrder": 69,
+        "image": "/Lineage%20Piece/items/atomic-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial Steel",
+        "type": "Boss Material",
+        "obtainment": "Drops in the Plane of Euthymia raid opened with a Shrine Key.",
+        "use": "Required to buy Raiden. The NPC asks for 40.",
+        "dropChance": "35% from Plane of Euthymia",
+        "cardSummary": "Raiden's bulk steel. Forty pieces is a long Plane of Euthymia loop even at 35%."
+      },
+      "system": {
+        "slug": "celestial-steel",
+        "section": "Boss Materials",
+        "sortOrder": 70,
+        "image": "/Lineage%20Piece/items/celestial-steel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tear of Eternity",
+        "type": "Boss Material",
+        "obtainment": "Drops in the Plane of Euthymia raid opened with a Shrine Key.",
+        "use": "Required to buy Raiden. The NPC asks for 5.",
+        "dropChance": "5% from Plane of Euthymia",
+        "cardSummary": "A mid-rare Raiden drop. Farm it on the same Shrine Key runs as Celestial Steel."
+      },
+      "system": {
+        "slug": "tear-of-eternity",
+        "section": "Boss Materials",
+        "sortOrder": 71,
+        "image": "/Lineage%20Piece/items/tear-of-eternity.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shard of Calamity",
+        "type": "Boss Material",
+        "obtainment": "Drops in the Plane of Euthymia raid opened with a Shrine Key.",
+        "use": "Required to buy Raiden. The NPC asks for 5.",
+        "dropChance": "5% from Plane of Euthymia",
+        "cardSummary": "Matches Tear of Eternity on rate and count. Same raid, same Raiden bill."
+      },
+      "system": {
+        "slug": "shard-of-calamity",
+        "section": "Boss Materials",
+        "sortOrder": 72,
+        "image": "/Lineage%20Piece/items/shard-of-calamity.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Electro Vision",
+        "type": "Boss Material",
+        "obtainment": "Drops in the Plane of Euthymia raid opened with a Shrine Key.",
+        "use": "Required to buy Raiden. The NPC asks for 1.",
+        "dropChance": "1% from Plane of Euthymia",
+        "cardSummary": "Raiden's rare vision. One copy, 1% chance, same dungeon as the steel."
+      },
+      "system": {
+        "slug": "electro-vision",
+        "section": "Boss Materials",
+        "sortOrder": 73,
+        "image": "/Lineage%20Piece/items/electro-vision.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Puppet Core",
+        "type": "Boss Material",
+        "obtainment": "Drops in the Plane of Euthymia raid opened with a Shrine Key.",
+        "use": "Required to buy Raiden. The NPC asks for 2.",
+        "dropChance": "2% from Plane of Euthymia",
+        "cardSummary": "The other rare Raiden core. You need two, so plan extra Shrine Key runs."
+      },
+      "system": {
+        "slug": "puppet-core",
+        "section": "Boss Materials",
+        "sortOrder": 74,
+        "image": "/Lineage%20Piece/items/puppet-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hogyoku",
+        "type": "Boss Material",
+        "obtainment": "Drops from Aizen on Hueco Mundo as Hogyoku Shard.",
+        "use": "Required to buy Aizen. The NPC asks for 1, plus True Shinigami.",
+        "dropChance": "0.85% from Aizen",
+        "cardSummary": "Aizen's named core. Trello's item is Hogyoku even though the boss card says Hogyoku Shard."
+      },
+      "system": {
+        "slug": "hogyoku",
+        "section": "Boss Materials",
+        "sortOrder": 75,
+        "image": "/Lineage%20Piece/items/hogyoku.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shattered Soul",
+        "type": "Boss Material",
+        "obtainment": "Drops from Aizen on Hueco Mundo.",
+        "use": "Required to buy Aizen. The NPC asks for 5.",
+        "dropChance": "3.5% from Aizen",
+        "cardSummary": "A mid-rare Aizen drop. Spawn him through the Hollow-kill summoner on Hueco Mundo."
+      },
+      "system": {
+        "slug": "shattered-soul",
+        "section": "Boss Materials",
+        "sortOrder": 76,
+        "image": "/Lineage%20Piece/items/shattered-soul.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Formless Mirror",
+        "type": "Boss Material",
+        "obtainment": "Drops from Aizen on Hueco Mundo.",
+        "use": "Required to buy Aizen. The NPC asks for 10.",
+        "dropChance": "7% from Aizen",
+        "cardSummary": "Aizen's bulk rare. Ten mirrors plus souls, silk, and a Hogyoku finish the buy."
+      },
+      "system": {
+        "slug": "formless-mirror",
+        "section": "Boss Materials",
+        "sortOrder": 77,
+        "image": "/Lineage%20Piece/items/formless-mirror.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reishi Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Aizen on Hueco Mundo.",
+        "use": "Required to buy Aizen. The NPC asks for 30.",
+        "dropChance": "50% from Aizen",
+        "cardSummary": "Aizen's common core. Thirty is a lot of summons even at 50%."
+      },
+      "system": {
+        "slug": "reishi-core",
+        "section": "Boss Materials",
+        "sortOrder": 78,
+        "image": "/Lineage%20Piece/items/reishi-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Silk",
+        "type": "Boss Material",
+        "obtainment": "Drops from Aizen on Hueco Mundo.",
+        "use": "Required to buy Aizen. The NPC asks for 35.",
+        "dropChance": "60% from Aizen",
+        "cardSummary": "The most common Aizen drop. You still need 35 of them for the Hueco Mundo NPC."
+      },
+      "system": {
+        "slug": "void-silk",
+        "section": "Boss Materials",
+        "sortOrder": 79,
+        "image": "/Lineage%20Piece/items/void-silk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Genesis core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gilgamesh in Legend's Arena.",
+        "use": "Required to buy Gilgamesh. The NPC asks for 1 and the King of Heroes title.",
+        "dropChance": "0.85% from Gilgamesh",
+        "cardSummary": "Gilgamesh's rare core. Spawn him with a Holy Grail, then hope this 0.85% lands."
+      },
+      "system": {
+        "slug": "genesis-core",
+        "section": "Boss Materials",
+        "sortOrder": 80,
+        "image": "/Lineage%20Piece/items/genesis-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Babylon Fragment",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gilgamesh in Legend's Arena.",
+        "use": "Required to buy Gilgamesh. The NPC asks for 4.",
+        "dropChance": "6% from Gilgamesh",
+        "cardSummary": "A mid-rare Gilgamesh fragment. Four copies ride along with the Genesis core farm."
+      },
+      "system": {
+        "slug": "babylon-fragment",
+        "section": "Boss Materials",
+        "sortOrder": 81,
+        "image": "/Lineage%20Piece/items/babylon-fragment.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tyrant's Crest",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gilgamesh in Legend's Arena.",
+        "use": "Required to buy Gilgamesh. The NPC asks for 7.",
+        "dropChance": "10% from Gilgamesh",
+        "cardSummary": "Gilgamesh's crest drop. Seven crests plus fragments, essence, and the core unlock the style."
+      },
+      "system": {
+        "slug": "tyrants-crest",
+        "section": "Boss Materials",
+        "sortOrder": 82,
+        "image": "/Lineage%20Piece/items/tyrants-crest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Essence",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gilgamesh in Legend's Arena.",
+        "use": "Required to buy Gilgamesh. The NPC asks for 20.",
+        "dropChance": "25% from Gilgamesh",
+        "cardSummary": "The common Gilgamesh material. Twenty essences is the volume grind on that summon."
+      },
+      "system": {
+        "slug": "golden-essence",
+        "section": "Boss Materials",
+        "sortOrder": 83,
+        "image": "/Lineage%20Piece/items/golden-essence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frost Katana Tsuba",
+        "type": "Boss Material",
+        "obtainment": "Drops from Miyabi in Absolute Dead End.",
+        "use": "Required for Miyabi mastery. The Monument Isle mastery NPC asks for 1.",
+        "dropChance": "3% from Miyabi",
+        "cardSummary": "Miyabi's mastery part. Open Absolute Dead End with an Absolute Ether Key, then grab one tsuba."
+      },
+      "system": {
+        "slug": "frost-katana-tsuba",
+        "section": "Boss Materials",
+        "sortOrder": 84,
+        "image": "/Lineage%20Piece/items/frost-katana-tsuba.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Monarch's Soul",
+        "type": "Boss Material",
+        "obtainment": "Drops from Shadow Monarch in Cartenon Temple.",
+        "use": "Required to buy Shadow's Daggers. The NPC asks for 1.",
+        "dropChance": "1.2% from Shadow Monarch",
+        "cardSummary": "The rare Cartenon soul. One copy is the last named material on the Shadow Daggers bill."
+      },
+      "system": {
+        "slug": "monarchs-soul",
+        "section": "Boss Materials",
+        "sortOrder": 85,
+        "image": "/Lineage%20Piece/items/monarchs-soul.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Core of Shadow",
+        "type": "Boss Material",
+        "obtainment": "Drops from Shadow Monarch in Cartenon Temple.",
+        "use": "Required to buy Shadow's Daggers. The NPC asks for 2.",
+        "dropChance": "3% from Shadow Monarch",
+        "cardSummary": "Cartenon's second named core. Farm it on the same key runs as Monarch's Soul."
+      },
+      "system": {
+        "slug": "core-of-shadow",
+        "section": "Boss Materials",
+        "sortOrder": 86,
+        "image": "/Lineage%20Piece/items/core-of-shadow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gate Fragment",
+        "type": "Boss Material",
+        "obtainment": null,
+        "use": "Required to buy Shadow's Daggers. The NPC asks for 10.",
+        "dropChance": null,
+        "cardSummary": "Shadow Daggers needs ten of these. Official Trello lists the spend, not the drop."
+      },
+      "system": {
+        "slug": "gate-fragment",
+        "section": "Boss Materials",
+        "sortOrder": 87,
+        "image": "/Lineage%20Piece/items/gate-fragment.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nichirin blue print",
+        "type": "Boss Material",
+        "obtainment": "Drops from Kokushibo in Legend's Arena.",
+        "use": "Required to buy Kokushibo. The NPC asks for 1 and Demon race.",
+        "dropChance": null,
+        "cardSummary": "Kokushibo's blueprint. Get Demon from Muzan first, then spend this with flutes and eyes."
+      },
+      "system": {
+        "slug": "nichirin-blue-print",
+        "section": "Boss Materials",
+        "sortOrder": 88,
+        "image": "/Lineage%20Piece/items/nichirin-blue-print.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Broken Flute",
+        "type": "Boss Material",
+        "obtainment": "Drops from Kokushibo in Legend's Arena.",
+        "use": "Required to buy Kokushibo. The NPC asks for 4.",
+        "dropChance": null,
+        "cardSummary": "A Kokushibo material. Four flutes sit next to the blueprint and Upper One Eyes."
+      },
+      "system": {
+        "slug": "broken-flute",
+        "section": "Boss Materials",
+        "sortOrder": 89,
+        "image": "/Lineage%20Piece/items/broken-flute.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Upper One Eye",
+        "type": "Boss Material",
+        "obtainment": "Drops from Kokushibo in Legend's Arena.",
+        "use": "Required to buy Kokushibo. The NPC asks for 6.",
+        "dropChance": null,
+        "cardSummary": "Kokushibo's eye pile. Six copies are the volume grind on that Legend's Arena summon."
+      },
+      "system": {
+        "slug": "upper-one-eye",
+        "section": "Boss Materials",
+        "sortOrder": 90,
+        "image": "/Lineage%20Piece/items/upper-one-eye.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eye of the Almighty",
+        "type": "Boss Material",
+        "obtainment": "Drops from Yhwach in Wandenreich.",
+        "use": "Required to buy Yhwach. The NPC asks for 3 and Quincy race.",
+        "dropChance": "0.5% from Yhwach",
+        "cardSummary": "Yhwach's rarest listed drop. Open Wandenreich with a Scatthen Key, then hunt three eyes."
+      },
+      "system": {
+        "slug": "eye-of-the-almighty",
+        "section": "Boss Materials",
+        "sortOrder": 91,
+        "image": "/Lineage%20Piece/items/eye-of-the-almighty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Angel Halo",
+        "type": "Boss Material",
+        "obtainment": "Drops from Lille Barro in Wandenreich.",
+        "use": "Required to buy Yhwach. The NPC asks for 5.",
+        "dropChance": "1.25% from Lille Barro",
+        "cardSummary": "A Wandenreich mini-boss drop. Clear the five crosses before you even see Yhwach."
+      },
+      "system": {
+        "slug": "angel-halo",
+        "section": "Boss Materials",
+        "sortOrder": 92,
+        "image": "/Lineage%20Piece/items/angel-halo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bomb Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Bambietta in Wandenreich.",
+        "use": "Required to buy Yhwach. The NPC asks for 5.",
+        "dropChance": "1.25% from Bambietta",
+        "cardSummary": "Another Wandenreich mini-boss piece. Five cores are on the same Yhwach receipt."
+      },
+      "system": {
+        "slug": "bomb-core",
+        "section": "Boss Materials",
+        "sortOrder": 93,
+        "image": "/Lineage%20Piece/items/bomb-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Miracle Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Gerard Valkyrie in Wandenreich.",
+        "use": "Required to buy Yhwach. The NPC asks for 5.",
+        "dropChance": "1.25% from Gerard Valkyrie",
+        "cardSummary": "Gerard's Wandenreich drop. Same 1.25% as the other Sternritter pieces."
+      },
+      "system": {
+        "slug": "miracle-core",
+        "section": "Boss Materials",
+        "sortOrder": 94,
+        "image": "/Lineage%20Piece/items/miracle-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poison Vial",
+        "type": "Boss Material",
+        "obtainment": "Drops from Askin Nakk Le Vaar in Wandenreich.",
+        "use": "Required to buy Yhwach. The NPC asks for 5.",
+        "dropChance": "1.25% from Askin Nakk Le Vaar",
+        "cardSummary": "Askin's Wandenreich vial. Farm the crosses, then spend five vials on Yhwach."
+      },
+      "system": {
+        "slug": "poison-vial",
+        "section": "Boss Materials",
+        "sortOrder": 95,
+        "image": "/Lineage%20Piece/items/poison-vial.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silver Shield",
+        "type": "Boss Material",
+        "obtainment": "Drops from Jugram Haschwalth in Wandenreich.",
+        "use": "Required to buy Yhwach. The NPC asks for 5.",
+        "dropChance": "1.25% from Jugram Haschwalth",
+        "cardSummary": "Jugram's shield drop. It is a Yhwach material, not an accessory."
+      },
+      "system": {
+        "slug": "silver-shield",
+        "section": "Boss Materials",
+        "sortOrder": 96,
+        "image": "/Lineage%20Piece/items/silver-shield.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Quincy Cross",
+        "type": "Boss Material",
+        "obtainment": "Drops from Yhwach in Wandenreich.",
+        "use": "Required to buy Yhwach. The NPC asks for 10.",
+        "dropChance": "1.5% from Yhwach",
+        "cardSummary": "Yhwach's own cross drop. Ten copies plus the Sternritter set unlock the style."
+      },
+      "system": {
+        "slug": "quincy-cross",
+        "section": "Boss Materials",
+        "sortOrder": 97,
+        "image": "/Lineage%20Piece/items/quincy-cross.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Soul",
+        "type": "Boss Material",
+        "obtainment": "Drops from Wandenreich mini-bosses and from Yhwach.",
+        "use": "Required to buy Yhwach. The NPC asks for 400.",
+        "dropChance": "25% from mini-bosses, 15% from Yhwach",
+        "cardSummary": "Yhwach's volume tax. Four hundred souls is why people live in Wandenreich."
+      },
+      "system": {
+        "slug": "blue-soul",
+        "section": "Boss Materials",
+        "sortOrder": 98,
+        "image": "/Lineage%20Piece/items/blue-soul.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Corrupted Holy Sword",
+        "type": "Boss Material",
+        "obtainment": "Drops from Saber Alter in Ryuudo Cave.",
+        "use": "Required to buy Saber Alter / Excalibur Morgan. The NPC asks for 1.",
+        "dropChance": "1% from Saber Alter",
+        "cardSummary": "The rare Saber Alter sword. Open Ryuudo Cave, beat Medusa and Corruption, then hope for 1%."
+      },
+      "system": {
+        "slug": "corrupted-holy-sword",
+        "section": "Boss Materials",
+        "sortOrder": 99,
+        "image": "/Lineage%20Piece/items/corrupted-holy-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Mana Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Saber Alter in Ryuudo Cave.",
+        "use": "Required to buy Saber Alter. The NPC asks for 3.",
+        "dropChance": "4.5% from Saber Alter",
+        "cardSummary": "A mid-rare Saber Alter core. Three copies ride on the same Ryuudo Cave loop."
+      },
+      "system": {
+        "slug": "dark-mana-core",
+        "section": "Boss Materials",
+        "sortOrder": 100,
+        "image": "/Lineage%20Piece/items/dark-mana-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Servant Covenant",
+        "type": "Boss Material",
+        "obtainment": "Drops from Medusa in Ryuudo Cave.",
+        "use": "Required to buy Saber Alter. The NPC asks for 5.",
+        "dropChance": "8% from Medusa",
+        "cardSummary": "Medusa's covenant drop. Farm it before the Saber Alter spawn, not after."
+      },
+      "system": {
+        "slug": "servant-covenant",
+        "section": "Boss Materials",
+        "sortOrder": 101,
+        "image": "/Lineage%20Piece/items/servant-covenant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Blood",
+        "type": "Boss Material",
+        "obtainment": "Drops from Saber Alter in Ryuudo Cave.",
+        "use": "Required to buy Saber Alter. The NPC asks for 10.",
+        "dropChance": "11.5% from Saber Alter",
+        "cardSummary": "Saber Alter's common material. Ten bloods plus the rare sword finish Excalibur Morgan."
+      },
+      "system": {
+        "slug": "dragon-blood",
+        "section": "Boss Materials",
+        "sortOrder": 102,
+        "image": "/Lineage%20Piece/items/dragon-blood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grail Mud",
+        "type": "Boss Material",
+        "obtainment": "Drops from Corruption in Ryuudo Cave.",
+        "use": "Required to buy Saber Alter. The NPC asks for 750.",
+        "dropChance": "60% from Corruption",
+        "cardSummary": "The huge Saber Alter pile. Survive Corruption for 60 seconds and scoop mud every run."
+      },
+      "system": {
+        "slug": "grail-mud",
+        "section": "Boss Materials",
+        "sortOrder": 103,
+        "image": "/Lineage%20Piece/items/grail-mud.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Molten Core",
+        "type": "Boss Material",
+        "obtainment": "Drops from Proto-SAM Type-III and Fyrefly Type-IV on Glamoth Planet.",
+        "use": "Required to buy Firefly. The NPC asks for 1 and Glamoth race.",
+        "dropChance": "0.3% from Proto-SAM, 0.8% from Fyrefly Type-IV",
+        "cardSummary": "Firefly's rare core. Fyrefly Type-IV is the better listed chance of the two Glamoth bosses."
+      },
+      "system": {
+        "slug": "molten-core",
+        "section": "Boss Materials",
+        "sortOrder": 104,
+        "image": "/Lineage%20Piece/items/molten-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shaper",
+        "type": "Boss Material",
+        "obtainment": "Drops from Proto-SAM Type-III and Fyrefly Type-IV on Glamoth Planet.",
+        "use": "Required to buy Firefly. The NPC asks for 3.",
+        "dropChance": "1% from Proto-SAM, 2% from Fyrefly Type-IV",
+        "cardSummary": "A Glamoth Planet drop. Three Shapers sit on the Firefly receipt with Will and valves."
+      },
+      "system": {
+        "slug": "shaper",
+        "section": "Boss Materials",
+        "sortOrder": 105,
+        "image": "/Lineage%20Piece/items/shaper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Firefly's Will",
+        "type": "Boss Material",
+        "obtainment": "Drops from Proto-SAM Type-III and Fyrefly Type-IV on Glamoth Planet.",
+        "use": "Required to buy Firefly. The NPC asks for 6.",
+        "dropChance": "1.6% from Proto-SAM, 4% from Fyrefly Type-IV",
+        "cardSummary": "Firefly's named will drop. Six copies come from the same Glamoth Planet key runs."
+      },
+      "system": {
+        "slug": "fireflys-will",
+        "section": "Boss Materials",
+        "sortOrder": 106,
+        "image": "/Lineage%20Piece/items/fireflys-will.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ignition Valve",
+        "type": "Boss Material",
+        "obtainment": "Drops from Proto-SAM Type-III and Fyrefly Type-IV on Glamoth Planet.",
+        "use": "Required to buy Firefly. The NPC asks for 9.",
+        "dropChance": "2.5% from Proto-SAM, 5% from Fyrefly Type-IV",
+        "cardSummary": "The bulk Firefly valve. Nine valves plus scrap and a Molten Core unlock the style."
+      },
+      "system": {
+        "slug": "ignition-valve",
+        "section": "Boss Materials",
+        "sortOrder": 107,
+        "image": "/Lineage%20Piece/items/ignition-valve.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glamoth Essence",
+        "type": "Boss Material",
+        "obtainment": null,
+        "use": "Consumed to roll the Glamoth race at a 10% success chance. The Armor Scrap Shop also takes it for 50 Armor Scrap.",
+        "dropChance": null,
+        "cardSummary": "Firefly's race item. Trello lists the race use and a shop exchange, not a boss drop rate."
+      },
+      "system": {
+        "slug": "glamoth-essence",
+        "section": "Boss Materials",
+        "sortOrder": 108,
+        "image": "/Lineage%20Piece/items/glamoth-essence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Armor Scrap",
+        "type": "Boss Material",
+        "obtainment": "Obtained from the Glamoth Planet dungeon.",
+        "use": "Required to buy Firefly (x250). Also spent at the Armor Scrap Shop for Dreamscape, Oak Cake Roll, Glamoth Essence, and rerolls.",
+        "dropChance": null,
+        "cardSummary": "Glamoth Planet scrap. Two hundred fifty buy Firefly, and extras feed the Monument Isle scrap shop."
+      },
+      "system": {
+        "slug": "armor-scrap",
+        "section": "Boss Materials",
+        "sortOrder": 109,
+        "image": "/Lineage%20Piece/items/armor-scrap.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oak Cake Roll",
+        "type": "Boss Material",
+        "obtainment": null,
+        "use": "Exchanged at the Armor Scrap Shop on Monument Isle for 150 Armor Scrap.",
+        "dropChance": null,
+        "cardSummary": "A Firefly-group Trello item with a shop sink. Official cards do not list where the cake itself drops."
+      },
+      "system": {
+        "slug": "oak-cake-roll",
+        "section": "Boss Materials",
+        "sortOrder": 110,
+        "image": "/Lineage%20Piece/items/oak-cake-roll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dreamscape",
+        "type": "Boss Material",
+        "obtainment": null,
+        "use": "Exchanged at the Armor Scrap Shop on Monument Isle for 125 Armor Scrap.",
+        "dropChance": null,
+        "cardSummary": "Another scrap-shop sink from the Firefly group. Keep it if you need Armor Scrap, not Firefly itself."
+      },
+      "system": {
+        "slug": "dreamscape",
+        "section": "Boss Materials",
+        "sortOrder": 111,
+        "image": "/Lineage%20Piece/items/dreamscape.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grief for the dead",
+        "type": "Boss Material",
+        "obtainment": "Crafted at the Butterfly Shop on Frostborn Island from White Gun Parts 1, 2, and 3.",
+        "use": "Required to buy Solemn Lament. The NPC asks for 1.",
+        "dropChance": null,
+        "cardSummary": "One of Solemn Lament's two finished gun parts. Assemble the white set at Angela's shop."
+      },
+      "system": {
+        "slug": "grief-for-the-dead",
+        "section": "Boss Materials",
+        "sortOrder": 112,
+        "image": "/Lineage%20Piece/items/grief-for-the-dead.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lament for the living",
+        "type": "Boss Material",
+        "obtainment": "Crafted at the Butterfly Shop on Frostborn Island from Black Gun Parts 1, 2, and 3.",
+        "use": "Required to buy Solemn Lament. The NPC asks for 1.",
+        "dropChance": null,
+        "cardSummary": "The black Solemn Lament half. Pair it with Grief, Fusion Cores, butterflies, and Boss's Souls."
+      },
+      "system": {
+        "slug": "lament-for-the-living",
+        "section": "Boss Materials",
+        "sortOrder": 113,
+        "image": "/Lineage%20Piece/items/lament-for-the-living.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fusion Core",
+        "type": "Boss Material",
+        "obtainment": "Crafted at the Butterfly Shop on Frostborn Island for 20 Boss's Souls and 100 Soulweaver Butterflies.",
+        "use": "Required to buy Solemn Lament. The NPC asks for 5.",
+        "dropChance": null,
+        "cardSummary": "A crafted Solemn Lament core. Five cores means 100 Boss's Souls and 500 butterflies if you craft every one."
+      },
+      "system": {
+        "slug": "fusion-core",
+        "section": "Boss Materials",
+        "sortOrder": 114,
+        "image": "/Lineage%20Piece/items/fusion-core.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Monochrome Wood",
+        "type": "Boss Material",
+        "obtainment": null,
+        "use": "Spent at the Butterfly Shop with Invert Tears and Soulweaver Butterflies to craft A Large Coffin.",
+        "dropChance": null,
+        "cardSummary": "A Solemn Lament-group material with a coffin recipe. Official Trello does not list its drop."
+      },
+      "system": {
+        "slug": "monochrome-wood",
+        "section": "Boss Materials",
+        "sortOrder": 115,
+        "image": "/Lineage%20Piece/items/monochrome-wood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Invert Tears",
+        "type": "Boss Material",
+        "obtainment": null,
+        "use": "Spent at the Butterfly Shop with Monochrome Wood and Soulweaver Butterflies to craft A Large Coffin.",
+        "dropChance": null,
+        "cardSummary": "The other coffin ingredient. Same shop as Grief, Lament, and Fusion Cores."
+      },
+      "system": {
+        "slug": "invert-tears",
+        "section": "Boss Materials",
+        "sortOrder": 116,
+        "image": "/Lineage%20Piece/items/invert-tears.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Soulweaver Butterfly",
+        "type": "Boss Material",
+        "obtainment": "Drops from Butterflyed mobs and from The Butterfly Grave dungeon on Frostborn Island.",
+        "use": "Required to buy Solemn Lament (x100). Also spent on Butterfly Grave Keys (x35), Fusion Cores (x100 each), and A Large Coffin (x500).",
+        "dropChance": null,
+        "cardSummary": "The Solemn Lament grind item. Kill Butterflyed mobs, run Butterfly Grave, then spend stacks at Angela's shop."
+      },
+      "system": {
+        "slug": "soulweaver-butterfly",
+        "section": "Boss Materials",
+        "sortOrder": 117,
+        "image": "/Lineage%20Piece/items/soulweaver-butterfly.png"
+      }
+    }
+  ]
+}

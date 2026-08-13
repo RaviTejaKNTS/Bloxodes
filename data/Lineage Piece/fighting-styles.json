@@ -1,0 +1,368 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Lineage Piece",
+    "gameSlug": "lineage-piece",
+    "collection": "fighting-styles",
+    "route": "/wiki/lineage-piece/fighting-styles",
+    "catalogCode": "lineage-piece-fighting-styles",
+    "sourceItemCount": 11,
+    "itemFields": [
+      "name",
+      "rarity",
+      "island",
+      "sellerNpc",
+      "raceGate",
+      "currencyCost",
+      "materials",
+      "masteryNpc",
+      "masteryQuests",
+      "moveKeys",
+      "inspiredBy",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "rarity",
+      "island",
+      "sellerNpc",
+      "raceGate",
+      "currencyCost",
+      "materials",
+      "masteryNpc",
+      "masteryQuests",
+      "moveKeys",
+      "inspiredBy",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Rarity",
+      "sectionOrder": [
+        "Common",
+        "Epic",
+        "Legendary",
+        "Mythical"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [
+        "island"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "island",
+        "sellerNpc",
+        "raceGate",
+        "currencyCost",
+        "materials",
+        "masteryNpc",
+        "masteryQuests",
+        "moveKeys"
+      ],
+      "tableFields": [
+        "rarity",
+        "island",
+        "sellerNpc",
+        "raceGate",
+        "currencyCost",
+        "materials",
+        "masteryNpc",
+        "masteryQuests",
+        "moveKeys",
+        "inspiredBy",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "island": {
+          "kind": "normal",
+          "label": "Island"
+        },
+        "sellerNpc": {
+          "kind": "normal",
+          "label": "Seller"
+        },
+        "raceGate": {
+          "kind": "highlight",
+          "label": "Race or title"
+        },
+        "currencyCost": {
+          "kind": "chip",
+          "label": "Cost"
+        },
+        "materials": {
+          "kind": "detail",
+          "label": "Materials"
+        },
+        "masteryNpc": {
+          "kind": "normal",
+          "label": "Mastery NPC"
+        },
+        "masteryQuests": {
+          "kind": "detail",
+          "label": "Mastery"
+        },
+        "moveKeys": {
+          "kind": "detail",
+          "label": "Move keys"
+        },
+        "inspiredBy": {
+          "kind": "normal",
+          "label": "Inspired by"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Combat",
+        "rarity": "Common",
+        "island": "Starter island",
+        "sellerNpc": "Starter style",
+        "raceGate": null,
+        "currencyCost": null,
+        "materials": null,
+        "masteryNpc": null,
+        "masteryQuests": null,
+        "moveKeys": "Z",
+        "inspiredBy": null,
+        "cardSummary": "The default Common melee style every account starts with. No seller, materials, race, or mastery route is listed."
+      },
+      "system": {
+        "slug": "combat",
+        "section": "Common",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Verdant Hero",
+        "rarity": "Epic",
+        "island": "Legend's Arena",
+        "sellerNpc": "Deku",
+        "raceGate": null,
+        "currencyCost": "250,000 Coins and 2,500 Gems",
+        "materials": "x9 One for all's Cell",
+        "masteryNpc": null,
+        "masteryQuests": null,
+        "moveKeys": "M1, Z, X, C, V",
+        "inspiredBy": "Deku",
+        "cardSummary": "The first buyable melee style. Purchase it from Deku at Legend's Arena after farming One for all's Cell. No official mastery card is listed."
+      },
+      "system": {
+        "slug": "verdant-hero",
+        "section": "Epic",
+        "sortOrder": 2,
+        "image": "/Lineage%20Piece/Fighting%20Styles/verdant-hero.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gojo",
+        "rarity": "Legendary",
+        "island": "Jujutsu Highschool",
+        "sellerNpc": "Gojo",
+        "raceGate": null,
+        "currencyCost": "850,000 Coins and 6,500 Gems",
+        "materials": "x2 Six Eye, x8 Infinity Essence, x15 Cursed Shard",
+        "masteryNpc": "Gojo Mastery at Jujutsu Highschool",
+        "masteryQuests": "Deal 200M damage with Gojo. Defeat 45 any bosses. Defeat Gojo 20 times. Unlocks R.",
+        "moveKeys": "M1, Z, X, C, V, mastery R",
+        "inspiredBy": "Satoru Gojo",
+        "cardSummary": "A Legendary Jujutsu Highschool style bought from the Gojo NPC with Six Eye, Infinity Essence, and Cursed Shards. Mastery unlocks the R key."
+      },
+      "system": {
+        "slug": "gojo",
+        "section": "Legendary",
+        "sortOrder": 3,
+        "image": "/Lineage%20Piece/Fighting%20Styles/gojo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sukuna",
+        "rarity": "Legendary",
+        "island": "Jujutsu Highschool",
+        "sellerNpc": "Sukuna",
+        "raceGate": null,
+        "currencyCost": "950,000 Coins and 6,500 Gems",
+        "materials": "x15 Cursed Shard, x20 Sukuna's Finger",
+        "masteryNpc": "Sukuna Mastery at Jujutsu Highschool",
+        "masteryQuests": "Deal 200M damage with Sukuna. Kill 450 any NPCs. Defeat Sukuna 20 times. Unlocks R.",
+        "moveKeys": "M1, Z, X, C, V, mastery R",
+        "inspiredBy": "Sukuna",
+        "cardSummary": "The other Legendary Jujutsu Highschool style, bought from the Sukuna NPC with Cursed Shards and Sukuna's Fingers. Mastery unlocks the R key."
+      },
+      "system": {
+        "slug": "sukuna",
+        "section": "Legendary",
+        "sortOrder": 4,
+        "image": "/Lineage%20Piece/Fighting%20Styles/sukuna.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rimuru",
+        "rarity": "Mythical",
+        "island": "Fossil Island",
+        "sellerNpc": "Rimuru",
+        "raceGate": "Slime Race",
+        "currencyCost": "5,000,000 Coins and 10,000 Gems",
+        "materials": "x7 Slime Core, x1 Shizu Mask, x10 Slime Essence",
+        "masteryNpc": "Rimuru Mastery at Fossil Island",
+        "masteryQuests": "Obtain the Demon Lord title. Kill 3,000 NPCs. Unlocks R.",
+        "moveKeys": "M1, Z, X, C, V, mastery R",
+        "inspiredBy": "Rimuru Tempest",
+        "cardSummary": "A Mythical Fossil Island style that requires Slime Race plus Rimuru boss materials. Mastery asks for the Demon Lord title and a large NPC kill count."
+      },
+      "system": {
+        "slug": "rimuru",
+        "section": "Mythical",
+        "sortOrder": 5,
+        "image": "/Lineage%20Piece/Fighting%20Styles/rimuru.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aizen",
+        "rarity": "Mythical",
+        "island": "Hueco Mundo",
+        "sellerNpc": "Aizen",
+        "raceGate": "True Shinigami Race",
+        "currencyCost": "15,000,000 Coins and 20,000 Gems",
+        "materials": "x1 Hogyoku, x5 Shattered Soul, x10 Formless Mirror, x30 Reishi Core, x35 Void Silk",
+        "masteryNpc": "Aizen Mastery at Hueco Mundo",
+        "masteryQuests": "Deal 1B damage with Aizen. Kill 15 players. Defeat Aizen 15 times. Equip The Betrayer title. Unlocks F and R. F adds +35% Aizen damage.",
+        "moveKeys": "M1, Z, X, C, V, mastery F, mastery R",
+        "inspiredBy": "Sosuke Aizen",
+        "cardSummary": "A Mythical Hueco Mundo style gated behind True Shinigami Race and Aizen materials. Mastery unlocks F, which boosts Aizen damage, plus R."
+      },
+      "system": {
+        "slug": "aizen",
+        "section": "Mythical",
+        "sortOrder": 6,
+        "image": "/Lineage%20Piece/Fighting%20Styles/aizen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gilgamesh",
+        "rarity": "Mythical",
+        "island": "Legend's Arena",
+        "sellerNpc": "Gilgamesh",
+        "raceGate": "King of Heroes title",
+        "currencyCost": "10,000,000 Coins and 10,000 Gems",
+        "materials": "x1 Genesis core, x4 Babylon Fragment, x7 Tyrant's Crest, x20 Golden Essence",
+        "masteryNpc": "Gilgamesh Mastery at Legend's Arena",
+        "masteryQuests": "Deal 850M damage with Gilgamesh while using Demi God Race. Then defeat Shank 50, Mihawk 50, Ichigo (Bankai) 35, Saber 25, Sung Jinwoo 2, Rimuru 1, Aizen 2, and Gilgamesh Hard/Extreme 10. Unlocks R.",
+        "moveKeys": "M1, Z, X, C, V, mastery R",
+        "inspiredBy": "Gilgamesh",
+        "cardSummary": "A Mythical Legend's Arena style that needs the King of Heroes title and Gilgamesh materials. Mastery is a long boss list plus Demi God Race."
+      },
+      "system": {
+        "slug": "gilgamesh",
+        "section": "Mythical",
+        "sortOrder": 7,
+        "image": "/Lineage%20Piece/Fighting%20Styles/gilgamesh.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gojo (Shinjuku)",
+        "rarity": "Mythical",
+        "island": "Shinjuku Showdown",
+        "sellerNpc": "Gojo (Shinjuku)",
+        "raceGate": "Enlightened Race",
+        "currencyCost": "10,000,000 Coins and 10,000 Gems",
+        "materials": "x1 True six eye, x1 Infinty Core, x5 Limitless Shard, x100 Cursed Shard",
+        "masteryNpc": "Limitless Scroll Seller at Shinjuku Showdown",
+        "masteryQuests": "Deal 1.5B damage with Gojo Shinjuku. Defeat Gojo 30 times. Use any Gojo Shinjuku skill 250 times. Defeat Gojo Shinjuku 20 times. Exchange x50 Cursed Shard, x2 Infinty Core, and x5 Limitless Shard for 1 Limitless Scroll. Unlocks V and R.",
+        "moveKeys": "M1, Z, X, C, F (+15% Gojo Shinjuku damage), mastery V, mastery R",
+        "inspiredBy": "Satoru Gojo (Shinjuku)",
+        "cardSummary": "The Mythical Shinjuku Gojo style. Buy it with Enlightened Race and Shinjuku Gojo drops, then finish the Limitless Scroll quests for V and R."
+      },
+      "system": {
+        "slug": "gojo-shinjuku",
+        "section": "Mythical",
+        "sortOrder": 8,
+        "image": "/Lineage%20Piece/Fighting%20Styles/gojo-shinjuku.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sukuna (Shinjuku)",
+        "rarity": "Mythical",
+        "island": "Shinjuku Showdown",
+        "sellerNpc": "Sukuna (Shinjuku)",
+        "raceGate": "Vessel Race",
+        "currencyCost": "10,000,000 Coins and 10,000 Gems",
+        "materials": "x1 Slash Core, x5 True Sukuna Fingers, x5 Shrine Shard, x100 Cursed Shard",
+        "masteryNpc": "Shrine Scroll Seller at Shinjuku Showdown",
+        "masteryQuests": "Deal 1.5B damage with Sukuna Shinjuku. Defeat Sukuna 30 times. Use any Sukuna Shinjuku skill 250 times. Defeat Sukuna Shinjuku 20 times. Exchange x50 Cursed Shard, x2 Slash Core, and x5 Shrine Shard for 1 Shrine Scroll. Unlocks V and R.",
+        "moveKeys": "M1, Z, X, C, F (+15% Sukuna Shinjuku damage), mastery V, mastery R",
+        "inspiredBy": "Sukuna (Shinjuku)",
+        "cardSummary": "The Mythical Shinjuku Sukuna style. Vessel Race and Shinjuku Sukuna drops unlock the seller, and the Shrine Scroll quests unlock V and R."
+      },
+      "system": {
+        "slug": "sukuna-shinjuku",
+        "section": "Mythical",
+        "sortOrder": 9,
+        "image": "/Lineage%20Piece/Fighting%20Styles/sukuna-shinjuku.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Yhwach",
+        "rarity": "Mythical",
+        "island": "Hueco Mundo",
+        "sellerNpc": "Yhwach",
+        "raceGate": "Quincy Race",
+        "currencyCost": "15,000,000 Coins and 15,000 Gems",
+        "materials": "x3 Eye of the Almighty, x5 Angel Halo, x5 Bomb Core, x5 Miracle Core, x5 Poison Vial, x5 Silver Shield, x10 Quincy Cross, x400 Blue Soul",
+        "masteryNpc": "Yhwach Mastery at Hueco Mundo",
+        "masteryQuests": "Deal 5B damage with Yhwach. Equip The Quincy King title. Dodge with Observation Haki 200 times. Defeat Ichigo (Bankai) 50 times. Defeat Aizen 25 times. Defeat Yhwach Hard/Extreme 20 times. Unlocks F and R.",
+        "moveKeys": "M1, Z, X, C, V, mastery F, mastery R",
+        "inspiredBy": "Yhwach",
+        "cardSummary": "A Mythical Hueco Mundo style gated behind Quincy Race and Wandenreich materials. Mastery is a long Hueco Mundo questline that unlocks F and R."
+      },
+      "system": {
+        "slug": "yhwach",
+        "section": "Mythical",
+        "sortOrder": 10,
+        "image": "/Lineage%20Piece/Fighting%20Styles/yhwach.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Firefly",
+        "rarity": "Mythical",
+        "island": "Monument Isle",
+        "sellerNpc": "Firefly",
+        "raceGate": "Glamoth Race",
+        "currencyCost": "27,500,000 Coins and 30,000 Gems",
+        "materials": "x1 Molten Core, x3 Shaper, x6 Firefly's Will, x9 Ignition Valve, x250 Armor Scrap",
+        "masteryNpc": "Shaper at Monument Isle",
+        "masteryQuests": "Deal 2B damage with Firefly. Equip The Molten Knight title. Use any Firefly skill 300 times. Clear Simulated Sea (Sea 5) once. Defeat Fyrefly Type-IV 15 times.",
+        "moveKeys": "Stage 1: M1, F. Stage 2: M1, Z, X, F. Stage 3: M1, Z, X, C, V, R",
+        "inspiredBy": "Firefly",
+        "cardSummary": "A Mythical Monument Isle melee style, not a sword. Glamoth Race and Glamoth materials buy it, and the Shaper NPC handles mastery for the staged kit."
+      },
+      "system": {
+        "slug": "firefly",
+        "section": "Mythical",
+        "sortOrder": 11,
+        "image": "/Lineage%20Piece/Fighting%20Styles/firefly.png"
+      }
+    }
+  ]
+}

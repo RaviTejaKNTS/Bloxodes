@@ -1,0 +1,637 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Lineage Piece",
+    "gameSlug": "lineage-piece",
+    "collection": "simulated-sea-cards",
+    "route": "/wiki/lineage-piece/simulated-sea-cards",
+    "catalogCode": "lineage-piece-simulated-sea-cards",
+    "itemFields": [
+      "deck",
+      "buff",
+      "obtainment",
+      "cardSummary"
+    ],
+    "columns": [
+      "deck",
+      "buff",
+      "obtainment",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Isolation",
+        "Tidal Striker",
+        "Blade Rifter"
+      ],
+      "badgeField": null,
+      "subtitleFields": [
+        "deck"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "deck",
+        "buff",
+        "obtainment"
+      ],
+      "tableFields": [
+        "deck",
+        "buff",
+        "obtainment",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "deck": {
+          "kind": "chip",
+          "label": "Deck"
+        },
+        "buff": {
+          "kind": "detail",
+          "label": "Buff"
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Close Exile",
+        "deck": "Isolation",
+        "buff": "+10% Melee DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A small Isolation melee bump. Easy early pick if your run is still leaning on unarmed hits."
+      },
+      "system": {
+        "slug": "close-exile",
+        "section": "Isolation",
+        "sortOrder": 1,
+        "image": "/Lineage%20Piece/simulated-sea-cards/close-exile.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Scavenger's Solitude",
+        "deck": "Isolation",
+        "buff": "+10% Fragments Gain",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A small fragment-farm card. Take it when you need more shop currency later in the run."
+      },
+      "system": {
+        "slug": "scavengers-solitude",
+        "section": "Isolation",
+        "sortOrder": 2,
+        "image": "/Lineage%20Piece/simulated-sea-cards/scavengers-solitude.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Focused Solitude",
+        "deck": "Isolation",
+        "buff": "+10% Crit Chance",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A modest crit-rate bump that works on any Isolation draft. Useful before you chase bigger crit-damage cards."
+      },
+      "system": {
+        "slug": "focused-solitude",
+        "section": "Isolation",
+        "sortOrder": 3,
+        "image": "/Lineage%20Piece/simulated-sea-cards/focused-solitude.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ashen Blade",
+        "deck": "Isolation",
+        "buff": "+10% Weapon DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A small sword bump inside the general deck. Fine if you are mixed, but Blade Rifter still specializes harder."
+      },
+      "system": {
+        "slug": "ashen-blade",
+        "section": "Isolation",
+        "sortOrder": 4,
+        "image": "/Lineage%20Piece/simulated-sea-cards/ashen-blade.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stagnant Time",
+        "deck": "Isolation",
+        "buff": "-5% Cooldown",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A light cooldown cut. Helps skills come back a little faster without locking you into melee or sword."
+      },
+      "system": {
+        "slug": "stagnant-time",
+        "section": "Isolation",
+        "sortOrder": 5,
+        "image": "/Lineage%20Piece/simulated-sea-cards/stagnant-time.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Silent Impact",
+        "deck": "Isolation",
+        "buff": "+20% Crit DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A mid Isolation crit-damage card. Pairs well if you already have some crit chance."
+      },
+      "system": {
+        "slug": "silent-impact",
+        "section": "Isolation",
+        "sortOrder": 6,
+        "image": "/Lineage%20Piece/simulated-sea-cards/silent-impact.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Self-Reliance",
+        "deck": "Isolation",
+        "buff": "+10% Total DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A flat total-damage bump. Safe on any Isolation line because it does not care about melee or weapon type."
+      },
+      "system": {
+        "slug": "self-reliance",
+        "section": "Isolation",
+        "sortOrder": 7,
+        "image": "/Lineage%20Piece/simulated-sea-cards/self-reliance.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lone Rhythm",
+        "deck": "Isolation",
+        "buff": "+12.5% Basic Attack Speed",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "Speeds up basic attacks. Handy when your run is still leaning on auto hits between skills."
+      },
+      "system": {
+        "slug": "lone-rhythm",
+        "section": "Isolation",
+        "sortOrder": 8,
+        "image": "/Lineage%20Piece/simulated-sea-cards/lone-rhythm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hollow Shell",
+        "deck": "Isolation",
+        "buff": "+12.5% HP",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A small Isolation health card. Use it to stay upright through later rooms without changing your damage plan."
+      },
+      "system": {
+        "slug": "hollow-shell",
+        "section": "Isolation",
+        "sortOrder": 9,
+        "image": "/Lineage%20Piece/simulated-sea-cards/hollow-shell.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Recluse Wrath",
+        "deck": "Isolation",
+        "buff": "+20% Skill DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A skill-damage bump in the general deck. Stronger when your kit is already skill-heavy."
+      },
+      "system": {
+        "slug": "recluse-wrath",
+        "section": "Isolation",
+        "sortOrder": 10,
+        "image": "/Lineage%20Piece/simulated-sea-cards/recluse-wrath.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Isolation Sanctuary",
+        "deck": "Isolation",
+        "buff": "+30% HP",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A larger Isolation health card. Better than Hollow Shell when elite or boss rooms are starting to sting."
+      },
+      "system": {
+        "slug": "isolation-sanctuary",
+        "section": "Isolation",
+        "sortOrder": 11,
+        "image": "/Lineage%20Piece/simulated-sea-cards/isolation-sanctuary.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Forbidden Mastery",
+        "deck": "Isolation",
+        "buff": "+25% Mastery DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "Boosts mastery damage. Pick it when your mastery skills are carrying the room clears."
+      },
+      "system": {
+        "slug": "forbidden-mastery",
+        "section": "Isolation",
+        "sortOrder": 12,
+        "image": "/Lineage%20Piece/simulated-sea-cards/forbidden-mastery.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abyss Force",
+        "deck": "Isolation",
+        "buff": "+15% Total DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A stronger total-damage Isolation card than Self-Reliance. Still weapon-agnostic."
+      },
+      "system": {
+        "slug": "abyss-force",
+        "section": "Isolation",
+        "sortOrder": 13,
+        "image": "/Lineage%20Piece/simulated-sea-cards/abyss-force.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Temporal Distortion",
+        "deck": "Isolation",
+        "buff": "-10% Cooldown",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A bigger cooldown cut than Stagnant Time. Helps any Isolation draft that lives on skills."
+      },
+      "system": {
+        "slug": "temporal-distortion",
+        "section": "Isolation",
+        "sortOrder": 14,
+        "image": "/Lineage%20Piece/simulated-sea-cards/temporal-distortion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Collector",
+        "deck": "Isolation",
+        "buff": "+25% Fragments Gain",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A larger fragment-gain card. Better late-run shopping fuel than Scavenger's Solitude."
+      },
+      "system": {
+        "slug": "void-collector",
+        "section": "Isolation",
+        "sortOrder": 15,
+        "image": "/Lineage%20Piece/simulated-sea-cards/void-collector.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phantom Motion",
+        "deck": "Isolation",
+        "buff": "+22.5% Basic Attack Speed",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "The bigger Isolation attack-speed card. Stacks the same idea as Lone Rhythm at a higher value."
+      },
+      "system": {
+        "slug": "phantom-motion",
+        "section": "Isolation",
+        "sortOrder": 16,
+        "image": "/Lineage%20Piece/simulated-sea-cards/phantom-motion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Calamity of Solitude",
+        "deck": "Isolation",
+        "buff": "+65% Crit DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A large Isolation crit-damage card. Worth more if you already stacked crit chance."
+      },
+      "system": {
+        "slug": "calamity-of-solitude",
+        "section": "Isolation",
+        "sortOrder": 17,
+        "image": "/Lineage%20Piece/simulated-sea-cards/calamity-of-solitude.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Singularity Aura",
+        "deck": "Isolation",
+        "buff": "+50% Fragments Gain",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "The biggest Isolation fragment card. Use it when you still need shop money for later rooms."
+      },
+      "system": {
+        "slug": "singularity-aura",
+        "section": "Isolation",
+        "sortOrder": 18,
+        "image": "/Lineage%20Piece/simulated-sea-cards/singularity-aura.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sovereign Void",
+        "deck": "Isolation",
+        "buff": "+75% Total DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "The largest Isolation total-damage card. A general finisher that helps any build in the deck."
+      },
+      "system": {
+        "slug": "sovereign-void",
+        "section": "Isolation",
+        "sortOrder": 19,
+        "image": "/Lineage%20Piece/simulated-sea-cards/sovereign-void.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Desolate Eye",
+        "deck": "Isolation",
+        "buff": "+40% Crit Chance",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "The largest Isolation crit-chance card. Isolation has no deck-stack card, so this is a raw stat closer."
+      },
+      "system": {
+        "slug": "desolate-eye",
+        "section": "Isolation",
+        "sortOrder": 20,
+        "image": "/Lineage%20Piece/simulated-sea-cards/desolate-eye.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fluid Flow",
+        "deck": "Tidal Striker",
+        "buff": "+10% Skill Speed",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A small Tidal Striker skill-speed opener. Starts the melee deck without a health or weapon trade."
+      },
+      "system": {
+        "slug": "fluid-flow",
+        "section": "Tidal Striker",
+        "sortOrder": 21,
+        "image": "/Lineage%20Piece/simulated-sea-cards/fluid-flow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tidal Impact",
+        "deck": "Tidal Striker",
+        "buff": "+15% Melee DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A clean early melee-damage card. No downside, so it is a simple Tidal Striker pickup."
+      },
+      "system": {
+        "slug": "tidal-impact",
+        "section": "Tidal Striker",
+        "sortOrder": 22,
+        "image": "/Lineage%20Piece/simulated-sea-cards/tidal-impact.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ebb and Flow",
+        "deck": "Tidal Striker",
+        "buff": "-20% Cooldown and +5% Melee DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "Mostly a cooldown card with a small melee kicker. Good when Tidal skills need to cycle faster."
+      },
+      "system": {
+        "slug": "ebb-and-flow",
+        "section": "Tidal Striker",
+        "sortOrder": 23,
+        "image": "/Lineage%20Piece/simulated-sea-cards/ebb-and-flow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whirlpool Vortex",
+        "deck": "Tidal Striker",
+        "buff": "+15% Crit DMG and +25% Skill DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A Tidal mix of crit damage and skill damage. Stronger if your melee kit is already using skills often."
+      },
+      "system": {
+        "slug": "whirlpool-vortex",
+        "section": "Tidal Striker",
+        "sortOrder": 24,
+        "image": "/Lineage%20Piece/simulated-sea-cards/whirlpool-vortex.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tsunami Drive",
+        "deck": "Tidal Striker",
+        "buff": "+35% Melee DMG and -30% HP",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A large melee spike that cuts a lot of HP. Only take it if you can survive the health trade."
+      },
+      "system": {
+        "slug": "tsunami-drive",
+        "section": "Tidal Striker",
+        "sortOrder": 25,
+        "image": "/Lineage%20Piece/simulated-sea-cards/tsunami-drive.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unarmed Torrent",
+        "deck": "Tidal Striker",
+        "buff": "+25% Melee DMG and -25% Weapon DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "Melee-only commitment. It hurts sword damage, so skip it if you still want weapon hits."
+      },
+      "system": {
+        "slug": "unarmed-torrent",
+        "section": "Tidal Striker",
+        "sortOrder": 26,
+        "image": "/Lineage%20Piece/simulated-sea-cards/unarmed-torrent.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poseidon's Domain",
+        "deck": "Tidal Striker",
+        "buff": "+75% Melee DMG and -25% DMG Reduction",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "The largest raw Tidal melee card. You lose damage reduction, so you hit harder and take more."
+      },
+      "system": {
+        "slug": "poseidons-domain",
+        "section": "Tidal Striker",
+        "sortOrder": 27,
+        "image": "/Lineage%20Piece/simulated-sea-cards/poseidons-domain.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Abalath's Punch",
+        "deck": "Tidal Striker",
+        "buff": "35% chance to deal x1.5 Melee DMG during each attack",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A chance-based melee multiplier. It can spike hits, but it is not a guaranteed damage increase."
+      },
+      "system": {
+        "slug": "abalaths-punch",
+        "section": "Tidal Striker",
+        "sortOrder": 28,
+        "image": "/Lineage%20Piece/simulated-sea-cards/abalaths-punch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Oceanic Resonance",
+        "deck": "Tidal Striker",
+        "buff": "+10% Melee DMG for every Tidal Striker card you have",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "The Tidal Striker stack card. It gets better the more Tidal cards you keep in the run."
+      },
+      "system": {
+        "slug": "oceanic-resonance",
+        "section": "Tidal Striker",
+        "sortOrder": 29,
+        "image": "/Lineage%20Piece/simulated-sea-cards/oceanic-resonance.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flashing Void",
+        "deck": "Blade Rifter",
+        "buff": "+10% Weapon DMG and +5% Crit Chance",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A small Blade Rifter opener with weapon damage and a little crit chance."
+      },
+      "system": {
+        "slug": "flashing-void",
+        "section": "Blade Rifter",
+        "sortOrder": 30,
+        "image": "/Lineage%20Piece/simulated-sea-cards/flashing-void.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spatial Edge",
+        "deck": "Blade Rifter",
+        "buff": "+15% Weapon DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A clean weapon-damage bump. No tradeoff, so it is an easy sword-deck pickup."
+      },
+      "system": {
+        "slug": "spatial-edge",
+        "section": "Blade Rifter",
+        "sortOrder": 31,
+        "image": "/Lineage%20Piece/simulated-sea-cards/spatial-edge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rift Slasher",
+        "deck": "Blade Rifter",
+        "buff": "+10% Skill DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A skill-damage card inside the sword deck. Useful when your weapon kit still leans on skills."
+      },
+      "system": {
+        "slug": "rift-slasher",
+        "section": "Blade Rifter",
+        "sortOrder": 32,
+        "image": "/Lineage%20Piece/simulated-sea-cards/rift-slasher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heavy Distortion",
+        "deck": "Blade Rifter",
+        "buff": "+10% Cooldown and +35% Weapon DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A large weapon spike that also lengthens cooldown. Take it for sword damage, not for skill cycling."
+      },
+      "system": {
+        "slug": "heavy-distortion",
+        "section": "Blade Rifter",
+        "sortOrder": 33,
+        "image": "/Lineage%20Piece/simulated-sea-cards/heavy-distortion.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Distanced Tear",
+        "deck": "Blade Rifter",
+        "buff": "-25% Melee DMG and +25% Weapon DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A sword-only trade. It cuts melee damage, so skip it if you still want unarmed hits."
+      },
+      "system": {
+        "slug": "distanced-tear",
+        "section": "Blade Rifter",
+        "sortOrder": 34,
+        "image": "/Lineage%20Piece/simulated-sea-cards/distanced-tear.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flowing Void",
+        "deck": "Blade Rifter",
+        "buff": "-5% Cooldown and +20% Weapon DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "Weapon damage plus a small cooldown cut. A cleaner Blade Rifter pickup than Heavy Distortion."
+      },
+      "system": {
+        "slug": "flowing-void",
+        "section": "Blade Rifter",
+        "sortOrder": 35,
+        "image": "/Lineage%20Piece/simulated-sea-cards/flowing-void.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dimensional Reset",
+        "deck": "Blade Rifter",
+        "buff": "After you use Mastery Skills, 20% chance to reset all skill cooldowns",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "A chance to refresh skills after mastery. Strong if your sword kit is built around mastery casts."
+      },
+      "system": {
+        "slug": "dimensional-reset",
+        "section": "Blade Rifter",
+        "sortOrder": 36,
+        "image": "/Lineage%20Piece/simulated-sea-cards/dimensional-reset.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Overflowing Horizon",
+        "deck": "Blade Rifter",
+        "buff": "Every 1% Crit Rate above 100% converts to 2% Crit DMG",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "Turns overflow crit rate into crit damage. Only matters once your crit chance is already over 100%."
+      },
+      "system": {
+        "slug": "overflowing-horizon",
+        "section": "Blade Rifter",
+        "sortOrder": 37,
+        "image": "/Lineage%20Piece/simulated-sea-cards/overflowing-horizon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blade Nexus",
+        "deck": "Blade Rifter",
+        "buff": "+10% Weapon DMG for every Blade Rifter card you have",
+        "obtainment": "Buy or upgrade it during a Simulated Sea run. Start the mode from Monument Isle. Rest rooms have the Card Shop and Card Upgrade NPCs, and higher seas raise card and upgrade prices.",
+        "cardSummary": "The Blade Rifter stack card. Weapon damage grows with each Blade Rifter card in the run."
+      },
+      "system": {
+        "slug": "blade-nexus",
+        "section": "Blade Rifter",
+        "sortOrder": 38,
+        "image": "/Lineage%20Piece/simulated-sea-cards/blade-nexus.png"
+      }
+    }
+  ]
+}

@@ -1,0 +1,613 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Lineage Piece",
+    "gameSlug": "lineage-piece",
+    "collection": "titles",
+    "route": "/wiki/lineage-piece/titles",
+    "catalogCode": "lineage-piece-titles",
+    "sourceItemCount": 29,
+    "itemFields": [
+      "name",
+      "type",
+      "buff",
+      "specBuffed",
+      "unlockRequirement",
+      "dropChance",
+      "source",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "type",
+      "buff",
+      "specBuffed",
+      "unlockRequirement",
+      "dropChance",
+      "source",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Type",
+      "sectionOrder": [
+        "Utility",
+        "Offense"
+      ],
+      "badgeField": "type",
+      "subtitleFields": [
+        "buff"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "type",
+        "buff",
+        "unlockRequirement",
+        "dropChance"
+      ],
+      "tableFields": [
+        "type",
+        "buff",
+        "specBuffed",
+        "unlockRequirement",
+        "dropChance",
+        "source",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "type": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "buff": {
+          "kind": "chip",
+          "label": "Buff"
+        },
+        "specBuffed": {
+          "kind": "normal",
+          "label": "Spec"
+        },
+        "unlockRequirement": {
+          "kind": "detail",
+          "label": "Unlock"
+        },
+        "dropChance": {
+          "kind": "chip",
+          "label": "Drop Chance"
+        },
+        "source": {
+          "kind": "normal",
+          "label": "Source"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Novice",
+        "type": "Utility",
+        "buff": "+5% Exp, +5% Coins",
+        "specBuffed": null,
+        "unlockRequirement": "Reach Level 500",
+        "dropChance": null,
+        "source": "Level",
+        "cardSummary": "The first level title. Equip it at the Lineage Town Title NPC once you hit level 500 for a small EXP and coin bump while you farm."
+      },
+      "system": {
+        "slug": "novice",
+        "section": "Utility",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rookie",
+        "type": "Utility",
+        "buff": "+10% Exp, +10% Coins",
+        "specBuffed": null,
+        "unlockRequirement": "Reach Level 1000",
+        "dropChance": null,
+        "source": "Level",
+        "cardSummary": "A mid-early farming title. Unlock it at level 1000 and swap it on when you want more EXP and coins than Novice."
+      },
+      "system": {
+        "slug": "rookie",
+        "section": "Utility",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Veteran",
+        "type": "Utility",
+        "buff": "+15% Exp, +15% Coins",
+        "specBuffed": null,
+        "unlockRequirement": "Reach Level 1500",
+        "dropChance": null,
+        "source": "Level",
+        "cardSummary": "The strongest level-gated farming title. Unlock it at level 1500. Tower ranks still beat it for luck and gems."
+      },
+      "system": {
+        "slug": "veteran",
+        "section": "Utility",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tester",
+        "type": "Utility",
+        "buff": "30% Luck, 25% Coins, 15% Gems, 25% Exp",
+        "specBuffed": null,
+        "unlockRequirement": "Must be a Tester for Lineage Piece",
+        "dropChance": null,
+        "source": "Tester access",
+        "cardSummary": "A restricted tester title with large luck, coin, gem, and EXP buffs. Players cannot farm this through normal play."
+      },
+      "system": {
+        "slug": "tester",
+        "section": "Utility",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "#1 Tower",
+        "type": "Utility",
+        "buff": "100% Luck, 40% Gems, 40% Coins, 40% Exp",
+        "specBuffed": null,
+        "unlockRequirement": "Must be #1 in Tower Gamemode",
+        "dropChance": null,
+        "source": "Tower gamemode",
+        "cardSummary": "The top Tower rank title. It is the strongest farming buff on the list, but only the current rank 1 player can equip it."
+      },
+      "system": {
+        "slug": "1-tower",
+        "section": "Utility",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "#2 Tower",
+        "type": "Utility",
+        "buff": "80% Luck, 30% Gems, 30% Coins, 30% Exp",
+        "specBuffed": null,
+        "unlockRequirement": "Must be #2 in Tower Gamemode",
+        "dropChance": null,
+        "source": "Tower gamemode",
+        "cardSummary": "The second-place Tower rank title. Huge luck and currency bonuses, locked to whoever holds Tower rank 2."
+      },
+      "system": {
+        "slug": "2-tower",
+        "section": "Utility",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "#3 Tower",
+        "type": "Utility",
+        "buff": "75% Luck, 20% Gems, 20% Coins, 20% Exp",
+        "specBuffed": null,
+        "unlockRequirement": "Must be #3 in Tower Gamemode",
+        "dropChance": null,
+        "source": "Tower gamemode",
+        "cardSummary": "The third-place Tower rank title. Still far stronger than the level titles if you can hold the podium."
+      },
+      "system": {
+        "slug": "3-tower",
+        "section": "Utility",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Top 10 Tower",
+        "type": "Utility",
+        "buff": "60% Luck, 10% Gems, 10% Coins, 10% Exp",
+        "specBuffed": null,
+        "unlockRequirement": "Must be Top 10 in Tower Gamemode",
+        "dropChance": null,
+        "source": "Tower gamemode",
+        "cardSummary": "A leaderboard farming title for anyone in the Tower top 10. Strong luck with smaller coin, gem, and EXP bonuses."
+      },
+      "system": {
+        "slug": "top-10-tower",
+        "section": "Utility",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Top 100 Tower",
+        "type": "Utility",
+        "buff": "50% Luck",
+        "specBuffed": null,
+        "unlockRequirement": "Must be Top 100 in Tower Gamemode",
+        "dropChance": null,
+        "source": "Tower gamemode",
+        "cardSummary": "The entry Tower leaderboard title. It only boosts luck, so use it when you are farming drops rather than coins."
+      },
+      "system": {
+        "slug": "top-100-tower",
+        "section": "Utility",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "King of Knights",
+        "type": "Offense",
+        "buff": "+15% Excalibur Damage",
+        "specBuffed": "Excalibur",
+        "unlockRequirement": "Defeat Saber",
+        "dropChance": "3%",
+        "source": "Saber, Legend's Arena",
+        "cardSummary": "The Excalibur damage title. Farm Saber in Legend's Arena at a 3% drop, then equip it when you are using Excalibur."
+      },
+      "system": {
+        "slug": "king-of-knights",
+        "section": "Offense",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Weakest Hunter",
+        "type": "Offense",
+        "buff": "+15% Player's Dagger Damage",
+        "specBuffed": "Player's Dagger",
+        "unlockRequirement": "Defeat Sung Jinwoo",
+        "dropChance": "3%",
+        "source": "Sung Jin Woo, Fossil Island",
+        "cardSummary": "The Player's Dagger damage title. It drops from Sung Jin Woo at 3%. Equip it while you run that starter dagger spec."
+      },
+      "system": {
+        "slug": "the-weakest-hunter",
+        "section": "Offense",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Ninth Holder",
+        "type": "Offense",
+        "buff": "+15% Verdant Hero Damage",
+        "specBuffed": "Verdant Hero",
+        "unlockRequirement": "Defeat Verdant Hero",
+        "dropChance": "3%",
+        "source": "Deku, Legend's Arena",
+        "cardSummary": "The Verdant Hero damage title. Deku in Legend's Arena drops it at 3%. Equip it when you are grinding with Verdant Hero."
+      },
+      "system": {
+        "slug": "the-ninth-holder",
+        "section": "Offense",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Honored One",
+        "type": "Offense",
+        "buff": "+15% Gojo Damage",
+        "specBuffed": "Gojo",
+        "unlockRequirement": "Defeat Gojo",
+        "dropChance": "3%",
+        "source": "Gojo, Jujutsu Highschool",
+        "cardSummary": "The base Gojo damage title. Farm Gojo at Jujutsu Highschool for a 3% drop, then equip it on the Gojo style."
+      },
+      "system": {
+        "slug": "the-honored-one",
+        "section": "Offense",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Curse King",
+        "type": "Offense",
+        "buff": "+15% Sukuna Damage",
+        "specBuffed": "Sukuna",
+        "unlockRequirement": "Defeat Sukuna",
+        "dropChance": "3%",
+        "source": "Sukuna, Jujutsu Highschool",
+        "cardSummary": "The base Sukuna damage title. It drops from Sukuna at Jujutsu Highschool at 3%. Use it on the Sukuna style, not Shinjuku Sukuna."
+      },
+      "system": {
+        "slug": "curse-king",
+        "section": "Offense",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Lord",
+        "type": "Offense",
+        "buff": "+15% Rimuru Damage",
+        "specBuffed": "Rimuru",
+        "unlockRequirement": "Defeat Rimuru",
+        "dropChance": "4%",
+        "source": "Rimuru, Fossil Island",
+        "cardSummary": "The Rimuru damage title. Rimuru on Fossil Island drops it at 4%. The Rimuru mastery quest also asks you to equip it."
+      },
+      "system": {
+        "slug": "demon-lord",
+        "section": "Offense",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Eminence in Shadow",
+        "type": "Offense",
+        "buff": "+15% Shadow Damage",
+        "specBuffed": "Shadow",
+        "unlockRequirement": "Defeat Shadow in Cid's Castle",
+        "dropChance": "2%",
+        "source": "Shadow, Cid's Castle",
+        "cardSummary": "The Shadow weapon title. Clear Cid's Castle for a 2% drop from the Shadow boss. Shadow mastery requires this title equipped."
+      },
+      "system": {
+        "slug": "the-eminence-in-shadow",
+        "section": "Offense",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Betrayer",
+        "type": "Offense",
+        "buff": "+15% Aizen Damage",
+        "specBuffed": "Aizen",
+        "unlockRequirement": "Defeat Aizen",
+        "dropChance": "3%",
+        "source": "Aizen, Hueco Mundo",
+        "cardSummary": "The Aizen damage title. Aizen in Hueco Mundo drops it at 3%. Aizen mastery needs this title equipped."
+      },
+      "system": {
+        "slug": "the-betrayer",
+        "section": "Offense",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "God of Eternity",
+        "type": "Offense",
+        "buff": "+15% Raiden Damage",
+        "specBuffed": "Raiden",
+        "unlockRequirement": "Defeat Raiden in Plane of Euthymia",
+        "dropChance": "3%",
+        "source": "Raiden Shogun, Plane of Euthymia",
+        "cardSummary": "The Raiden damage title. It drops from Raiden in the Plane of Euthymia raid at 3%. Raiden mastery starts by asking you to equip it."
+      },
+      "system": {
+        "slug": "god-of-eternity",
+        "section": "Offense",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Substitute Shinigami",
+        "type": "Offense",
+        "buff": "+15% Tensa Zangetsu Damage",
+        "specBuffed": "Tensa Zangetsu",
+        "unlockRequirement": "Defeat Ichigo (Bankai)",
+        "dropChance": "0.1%",
+        "source": "Ichigo (Bankai), Hueco Mundo",
+        "cardSummary": "The Tensa Zangetsu title. It is a 0.1% drop from Ichigo (Bankai) on Hueco Mundo, not a kill-count unlock. Tensa mastery still requires the title equipped."
+      },
+      "system": {
+        "slug": "substitute-shinigami",
+        "section": "Offense",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "King of Heroes",
+        "type": "Offense",
+        "buff": "+15% Gilgamesh Damage",
+        "specBuffed": "Gilgamesh",
+        "unlockRequirement": "Defeat Gilgamesh in Legend Arena",
+        "dropChance": "2.5%",
+        "source": "Gilgamesh, Legend's Arena",
+        "cardSummary": "The Gilgamesh damage title. Gilgamesh in Legend's Arena drops it at 2.5%. Equip it when you are running the Gilgamesh style."
+      },
+      "system": {
+        "slug": "king-of-heroes",
+        "section": "Offense",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Strongest of Today",
+        "type": "Offense",
+        "buff": "+15% Gojo Shinjuku Damage",
+        "specBuffed": "Gojo Shinjuku",
+        "unlockRequirement": "Defeat Gojo Shinjuku in Shinjuku Showdown",
+        "dropChance": "2%",
+        "source": "Gojo (Shinjuku), Shinjuku Showdown",
+        "cardSummary": "The Gojo Shinjuku title. Farm the Shinjuku Gojo boss for a 2% drop. Do not confuse it with The Strongest in History, which buffs Sukuna Shinjuku."
+      },
+      "system": {
+        "slug": "the-strongest-of-today",
+        "section": "Offense",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Strongest in History",
+        "type": "Offense",
+        "buff": "+15% Sukuna Shinjuku Damage",
+        "specBuffed": "Sukuna Shinjuku",
+        "unlockRequirement": "Defeat Sukuna Shinjuku in Shinjuku Showdown",
+        "dropChance": "1.5%",
+        "source": "Sukuna (Shinjuku), Shinjuku Showdown",
+        "cardSummary": "The Sukuna Shinjuku title. The Shinjuku Sukuna boss drops it at 1.5%. Equip this on Sukuna Shinjuku, not on base Sukuna."
+      },
+      "system": {
+        "slug": "the-strongest-in-history",
+        "section": "Offense",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Void Hunter",
+        "type": "Offense",
+        "buff": "+15% Miyabi Damage",
+        "specBuffed": "Miyabi",
+        "unlockRequirement": "Defeat Miyabi in Absolute Dead End",
+        "dropChance": "3%",
+        "source": "Miyabi, Absolute Dead End",
+        "cardSummary": "The Miyabi damage title. Clear Absolute Dead End and pick it up from the Miyabi boss at 3%."
+      },
+      "system": {
+        "slug": "the-void-hunter",
+        "section": "Offense",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Monarch",
+        "type": "Offense",
+        "buff": "+15% Shadow's Dagger Damage",
+        "specBuffed": "Shadow's Dagger",
+        "unlockRequirement": "Defeat Shadow Monarch in Cartenon Temple",
+        "dropChance": "3%",
+        "source": "Shadow Monarch, Cartenon Temple",
+        "cardSummary": "The Shadow's Dagger title. The Shadow Monarch boss in Cartenon Temple drops it at 3%. Equip it on Shadow's Dagger, not on the Shadow sword."
+      },
+      "system": {
+        "slug": "shadow-monarch",
+        "section": "Offense",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Upper Moon One",
+        "type": "Offense",
+        "buff": "+15% Kokushibo Damage",
+        "specBuffed": "Kokushibo",
+        "unlockRequirement": "Defeat Kokushibo in Legend Arena",
+        "dropChance": null,
+        "source": "Kokushibo, Legend's Arena",
+        "cardSummary": "The Kokushibo damage title. The in-game tooltip says to defeat Kokushibo in Legend's Arena. Official Trello has no listed drop rate, so the chance is left blank. Kokushibo mastery requires this title equipped."
+      },
+      "system": {
+        "slug": "upper-moon-one",
+        "section": "Offense",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Quincy King",
+        "type": "Offense",
+        "buff": "+15% Yhwach Damage",
+        "specBuffed": "Yhwach",
+        "unlockRequirement": "Defeat Yhwach in Wandenreich",
+        "dropChance": "1%",
+        "source": "Yhwach, Wandenreich",
+        "cardSummary": "The Yhwach damage title. Yhwach in the Wandenreich raid drops it at 1%. Yhwach mastery requires this title equipped."
+      },
+      "system": {
+        "slug": "the-quincy-king",
+        "section": "Offense",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Tyrant King",
+        "type": "Offense",
+        "buff": "+15% Excalibur Morgan Damage",
+        "specBuffed": "Excalibur Morgan",
+        "unlockRequirement": "Defeat Saber Alter in Ryuudo Cave",
+        "dropChance": "3%",
+        "source": "Saber Alter, Ryuudo Cave",
+        "cardSummary": "The Excalibur Morgan title. Saber Alter in Ryuudo Cave drops it at 3%. Saber Alter mastery requires this title equipped."
+      },
+      "system": {
+        "slug": "the-tyrant-king",
+        "section": "Offense",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Molten Knight",
+        "type": "Offense",
+        "buff": "+15% Firefly Damage",
+        "specBuffed": "Firefly",
+        "unlockRequirement": "Defeat Firefly in Glamoth Planet",
+        "dropChance": "3%",
+        "source": "Fyrefly Type-IV, Glamoth Planet",
+        "cardSummary": "The Firefly damage title. Fyrefly Type-IV in Glamoth Planet drops it at 3%. Proto-SAM Type-III in the same raid also drops it at 0.85%."
+      },
+      "system": {
+        "slug": "the-molten-knight",
+        "section": "Offense",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Final Elegy",
+        "type": "Offense",
+        "buff": "+15% Solemn Lament Damage",
+        "specBuffed": "Solemn Lament",
+        "unlockRequirement": "Defeat Solemn Lament in The Butterfly Grave",
+        "dropChance": "3%",
+        "source": "Yi Sang, The Butterfly Grave",
+        "cardSummary": "The Solemn Lament title. Yi Sang in The Butterfly Grave drops it at 3%. Equip it when you are using Solemn Lament."
+      },
+      "system": {
+        "slug": "the-final-elegy",
+        "section": "Offense",
+        "sortOrder": 29,
+        "image": null
+      }
+    }
+  ]
+}

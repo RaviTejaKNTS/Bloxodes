@@ -57,6 +57,7 @@ import { creaturesOfSonariaCollectionGroup } from "./creatures-of-sonaria";
 import { practicalBasketballCollectionGroup } from "./practical-basketball";
 import { capybarasVsPlantsCollectionGroup } from "./capybaras-vs-plants";
 import { unboxAsmrCollectionGroup } from "./unbox-asmr";
+import { lineagePieceCollectionGroup } from "./lineage-piece";
 import type { GameCollectionGroup } from "../types";
 
 export const GAME_COLLECTION_GROUPS = [
@@ -118,5 +119,6 @@ export const GAME_COLLECTION_GROUPS = [
   creaturesOfSonariaCollectionGroup,
   practicalBasketballCollectionGroup,
   capybarasVsPlantsCollectionGroup,
-  unboxAsmrCollectionGroup
+  unboxAsmrCollectionGroup,
+  lineagePieceCollectionGroup
 ] satisfies GameCollectionGroup[];

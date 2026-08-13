@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Lineage Piece",
+    "gameSlug": "lineage-piece",
+    "collection": "fruits",
+    "route": "/wiki/lineage-piece/fruits",
+    "catalogCode": "lineage-piece-fruits",
+    "sourceItemCount": 4,
+    "itemFields": [
+      "name",
+      "chance",
+      "bestUse",
+      "skills",
+      "obtainment",
+      "scalesWith",
+      "cardSummary"
+    ],
+    "columns": [
+      "name",
+      "chance",
+      "bestUse",
+      "skills",
+      "obtainment",
+      "scalesWith",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Fruits",
+      "sectionOrder": [
+        "Items"
+      ],
+      "badgeField": "chance",
+      "subtitleFields": [
+        "bestUse"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "chance",
+        "bestUse",
+        "skills",
+        "obtainment",
+        "scalesWith"
+      ],
+      "tableFields": [
+        "chance",
+        "bestUse",
+        "skills",
+        "obtainment",
+        "scalesWith",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "chance": {
+          "kind": "chip",
+          "label": "Chance"
+        },
+        "bestUse": {
+          "kind": "highlight",
+          "label": "Best use"
+        },
+        "skills": {
+          "kind": "chip",
+          "label": "Skills"
+        },
+        "obtainment": {
+          "kind": "detail",
+          "label": "How to get"
+        },
+        "scalesWith": {
+          "kind": "normal",
+          "label": "Scales with"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Bomb",
+        "chance": "61%",
+        "bestUse": "Early farming",
+        "skills": "Z, X",
+        "obtainment": "Roll at the Lineage Town Fruit Reroll NPCs. One NPC takes 25,000 Coins per roll and the other takes 250 Gems.",
+        "scalesWith": "Power",
+        "cardSummary": "The most common fruit roll. It has Z and X explosive attacks and is mainly useful for early farming before stronger weapons and styles take over."
+      },
+      "system": {
+        "slug": "bomb",
+        "section": "Items",
+        "sortOrder": 1,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Flame",
+        "chance": "24%",
+        "bestUse": "Early farming",
+        "skills": "Z, X",
+        "obtainment": "Roll at the Lineage Town Fruit Reroll NPCs. One NPC takes 25,000 Coins per roll and the other takes 250 Gems.",
+        "scalesWith": "Power",
+        "cardSummary": "A mid-rate fruit roll with Z and X fire attacks. It is an early farming option, not a late-game combat spec."
+      },
+      "system": {
+        "slug": "flame",
+        "section": "Items",
+        "sortOrder": 2,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Quake",
+        "chance": "10%",
+        "bestUse": "Early farming",
+        "skills": "Z, X, C",
+        "obtainment": "Roll at the Lineage Town Fruit Reroll NPCs. One NPC takes 25,000 Coins per roll and the other takes 250 Gems.",
+        "scalesWith": "Power",
+        "cardSummary": "A less common fruit with Z, X, and C shockwave attacks. It is useful for early farming, then usually replaced by a weapon or melee style."
+      },
+      "system": {
+        "slug": "quake",
+        "section": "Items",
+        "sortOrder": 3,
+        "image": ""
+      }
+    },
+    {
+      "item": {
+        "name": "Light",
+        "chance": "2%",
+        "bestUse": "Mobility",
+        "skills": "M1, Z, X, C, F",
+        "obtainment": "Roll at the Lineage Town Fruit Reroll NPCs. One NPC takes 25,000 Coins per roll and the other takes 250 Gems.",
+        "scalesWith": "Power",
+        "cardSummary": "The rarest fruit, with M1, Z, X, C, and F. Combat value drops later, but players keep it for travel speed between islands."
+      },
+      "system": {
+        "slug": "light",
+        "section": "Items",
+        "sortOrder": 4,
+        "image": ""
+      }
+    }
+  ]
+}
