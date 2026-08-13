@@ -1,8 +1,8 @@
 # Environment System
 
 Status: Active
-Last verified: 2026-08-13
-Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on 2026-08-13
+Last verified: 2026-08-14
+Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on 2026-08-14
 
 ## Storage Model
 

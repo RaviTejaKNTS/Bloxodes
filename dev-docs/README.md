@@ -1,8 +1,8 @@
 # Bloxodes Developer Documentation
 
 Status: Active
-Last verified: 2026-08-13
-Evidence: current worktree code/configuration plus read-only production, VPS, homelab, Cloudflare, Docker, managed-development, and Supabase checks performed on 2026-08-13
+Last verified: 2026-08-14
+Evidence: repository contracts plus managed-development and production migration readback, production Edge Function checksum/smoke, deployment health, and platform synchronization checks performed on 2026-08-14
 
 ## Authority
 

@@ -1,8 +1,8 @@
 # Revalidation and Cache Warming
 
 Status: Active
-Last verified: 2026-08-13
-Evidence: repository event mapping, live cron, deployed Edge Functions, public cache headers, and health features
+Last verified: 2026-08-14
+Evidence: repository event mapping, live cron, deployed `revalidate` checksum and authenticated worker smoke, public cache headers, and health features
 
 ## Flow
 
@@ -39,4 +39,5 @@ Revalidation and warming are intentionally separate. Broad stats/list invalidati
 - `/api/health` reported cache tags enabled, tag purge strategy, and ISR public rendering.
 - Public home returned Cloudflare `HIT`.
 - Both worker cron entries were installed.
+- The production `revalidate` source checksum matched the repository after its guarded release, and the authenticated worker smoke processed the queued batch without failures.
 - Queue depth/drain correctness was not exhaustively tested in this documentation migration; use targeted pipeline audits for incident work.

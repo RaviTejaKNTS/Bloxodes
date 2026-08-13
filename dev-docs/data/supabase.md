@@ -1,8 +1,8 @@
 # Supabase
 
-Status: Active; convergence prepared locally, remote application pending approval
-Last verified: 2026-08-13
-Evidence: official Supabase changelog, managed-development env/URL/health checks, VPS containers, production PostgreSQL queries, and public endpoints
+Status: Active; managed development and production converged through migration 20260920000013
+Last verified: 2026-08-14
+Evidence: official Supabase documentation, managed-development migration/readiness/advisor checks, production transactional release/readback, VPS containers, Edge Function checksum/smoke, and public health
 
 ## Managed Development
 
@@ -52,10 +52,11 @@ Official changelog items relevant to this self-hosted installation:
 ## Schema and Security
 
 - Add forward-only migrations under `supabase/migrations/` using the current CLI workflow in `supabase/AGENTS.md`.
-- `supabase/migration-policy.json` records the audited pre-convergence differences between managed development, production, and repository history. Three production-only ledger versions have no-op repository markers; four production objects require explicit history repair after object proof; the wiki fallback-removal migration and two article migrations are genuinely pending production; and the managed-development pre-convergence stats set was applied under its baseline ledger on 2026-08-14.
-- `20260920000013_harden_internal_security_definer_execution.sql` is the common convergence migration. It moves the privileged admin implementation into a private schema and narrows queue, worker, chart, and pipeline-health RPC execution. It has not been applied to any remote environment.
+- `supabase/migration-policy.json` preserves the audited reconciliation record. Managed development received the four pre-cutoff stats migrations under a recorded baseline; production received the genuine pending wiki/article migrations and four object-proven ledger repairs. Both environments were then converged through `20260920000013_harden_internal_security_definer_execution.sql` on 2026-08-14.
+- The convergence migration moves the privileged admin implementation into a private schema and narrows queue, worker, chart, and pipeline-health RPC execution. Readback confirmed the private admin function, expected service-role execution, and removal of anonymous execution for the protected RPCs in both environments.
 - Managed-development migrations use the authenticated Supabase connector, followed by migration listing, readiness, and advisors; its database password is deliberately not duplicated into workstation or CI env. Self-hosted production uses the exact-SHA `supabase:production:release` operator command, which streams a transaction through SSH into the existing database container. Plan mode rolls the transaction back; apply mode requires separate explicit confirmation and commits atomically. SSH forwarding and public Postgres remain disabled.
-- Until that controlled sequence completes, repository history and the two remote ledgers are intentionally not described as synchronized.
+- `npm run supabase:production:release -- --approved-sha <full-sha>` is now also the repeatable read-only proof that production remains converged: when no repository migration is pending, it completes its transaction plan and rolls back without applying changes.
+- The production `revalidate` Edge Function matches the checked-in source as of 2026-08-14. Use `npm run supabase:production:function:release -- --function revalidate --approved-sha <full-sha>` for checksum-only planning; applying a changed function additionally requires `--apply --confirm "APPLY revalidate"`, performs an authenticated smoke test, and rolls back the function file if restart/smoke fails.
 - Keep RLS on exposed tables and never expose service-role keys to clients.
 - Views exposed to anon/authenticated roles need security-invoker behavior or explicit privilege review.
 - Revalidation/cache queues are part of runtime freshness; schema changes affecting public content must update their event mapping.

@@ -1,8 +1,8 @@
 # Architecture
 
 Status: Active; production has documented degraded components
-Last verified: 2026-08-13
-Evidence: current worktree architecture/configuration, public health/routes, managed-development checks, VPS Docker/Swarm, production PostgreSQL, and homelab systemd
+Last verified: 2026-08-14
+Evidence: repository architecture/configuration, exact-SHA public health, managed-development/production migration readback, VPS Docker/Swarm and Edge Function checks, and homelab synchronization checks
 
 ## Product Surfaces
 
@@ -21,9 +21,9 @@ Evidence: current worktree architecture/configuration, public health/routes, man
 5. Server-side reads and mutations use self-hosted Supabase through `https://database.bloxodes.com`.
 6. Public storage URLs use `https://media.bloxodes.com`.
 
-Verified live on 2026-08-13:
+Verified live on 2026-08-14:
 
-- `/api/health` returned `200`, database `ok`, build `0c6b5f66…`, tag purge enabled, and a fresh stats index.
+- `/api/health` returned `200`, database `ok`, an immutable production commit SHA, tag purge enabled, and a fresh stats index.
 - The public home page returned Cloudflare `HIT` with the current cache/security headers.
 - Direct public access to VPS port 3000 timed out; Docker publishes it for Dokploy, while the host `DOCKER-USER` chain drops inbound traffic to that port.
 
@@ -64,5 +64,5 @@ Cloudflare is the long-lived public cache. The origin uses Next.js ISR-style res
 - `supabase-meta` is unhealthy and its health command aborts; Studio itself still responds behind authentication.
 - `supabase-rest` is marked unhealthy because its probe targets `localhost:3001/ready`; public REST and application database checks work through the proxy/gateway topology.
 - VPS swap was effectively full (2 GiB used) with 15 GiB RAM and about 8.7 GiB available memory.
-- The homelab article writer was failing with Grok Build `402 Payment Required`; discovery/curation remained healthy.
+- The earlier homelab Grok Build `402 Payment Required` failure is historical; the latest audited discovery and writer services succeeded.
 - Universe stats had an active end-to-end incident audit started 2026-08-12. Current public health was green, but the audit identified scheduler/index ordering, capacity, NEW quarantine, growth-baseline, daily-rank, and alerting defects. See `pipelines/stats.md`.

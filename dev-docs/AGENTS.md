@@ -1,7 +1,7 @@
 # Canonical Developer Documentation Rules
 
 Scope: `dev-docs/`.
-Last verified: 2026-08-13
+Last verified: 2026-08-14
 Evidence: current root documentation rules and the canonical `dev-docs/` index/structure
 
 - These are stable current-state documents, not dated snapshots. Keep their existing filenames and update the owning document in place.

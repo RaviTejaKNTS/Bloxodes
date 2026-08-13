@@ -1,8 +1,8 @@
 # VPS
 
-Status: Active; application current, data-plane reconciliation pending approval
-Last verified: 2026-08-13
-Evidence: read-only SSH and privileged configuration inspection
+Status: Active; application, migration ledger, and revalidate function synchronized
+Last verified: 2026-08-14
+Evidence: SSH/container inspection, transactional production migration release/readback, deployed Edge Function checksum/smoke, and exact-SHA application health
 
 ## Host
 
@@ -62,6 +62,6 @@ Worker ownership:
 - Full swap usage warrants investigation even with available RAM; check pressure, swappiness, and long-lived containers before large jobs.
 - Public-anywhere UFW rules on 80/443 weaken the intended Cloudflare-only origin model. Confirm the origin-firewall script's effective policy and remove redundant public rules only through a tested, recoverable change.
 - Meta/REST unhealthy probes reduce Docker health signal quality.
-- Production migration history has verified pre-convergence differences from the repository, and the deployed `revalidate` Edge Function checksum differs from the checked-in source. Both require a controlled, separately approved reconciliation; neither was changed during local preparation.
+- Production migration history was reconciled and converged through repository migration `20260920000013` on 2026-08-14. The deployed `revalidate` Edge Function also matches the checked-in source and passed an authenticated production smoke run.
 - Database and Storage backup/recovery work is owner-deferred and excluded from this change.
 - Several unrelated workloads share CPU, disk, and Docker; incident triage must inspect the whole host.

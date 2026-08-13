@@ -1,8 +1,8 @@
 # Production Deployment
 
-Status: Active; environment/schema release controls prepared locally
-Last verified: 2026-08-13
-Evidence: GitHub workflow, Dockerfile, live Dokploy service/image, public health, production build, and `npm audit --omit=dev`
+Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
+Last verified: 2026-08-14
+Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, Edge Function release smoke, and platform checks
 
 ## Normal Path
 
@@ -29,6 +29,8 @@ Database-backed content normally publishes through controlled scripts/migrations
 
 Schema changes use the authenticated Supabase connector for managed development, followed by migration listing, readiness, and advisors. Production is self-hosted and its Postgres port stays private: `npm run supabase:production:release -- --approved-sha <full-sha>` streams a transaction through SSH into the existing database container and rolls it back after proving the full plan. Apply additionally requires the exact released SHA on `origin/production`, `--apply`, and `--confirm "APPLY production"`. It runs the checked-in object proof, repairs only policy-listed schema-present ledger gaps, applies only expected migrations, commits atomically, and verifies the ledger. Managed development must pass first; production remains a separate explicit approval.
 
+Production Edge Functions use the same immutable-SHA boundary. `npm run supabase:production:function:release -- --function <name> --approved-sha <full-sha>` compares local and deployed checksums without mutation. Apply requires `--apply --confirm "APPLY <name>"`, preserves the host file ownership/mode, restarts only Edge Runtime, performs an authenticated smoke request, and restores the previous function on failure.
+
 ## Platform Synchronization
 
 1. Run `npm run env:doctor`, `npm run env:check`, and `npm run supabase:migrations:check` locally.
@@ -39,6 +41,8 @@ Schema changes use the authenticated Supabase connector for managed development,
 6. Synchronize the homelab to the exact approved production SHA and run the full read-only platform check.
 
 The check reports drift; it never fixes drift. Database/Storage backup work is intentionally outside this sequence for now.
+
+The final platform check treats the live web image as synchronized when it is the exact production SHA. It may also accept an older ancestor when the intervening commits contain no web-runtime path according to the same classifier used by the deployment workflow.
 
 ## Known Release Caveats
 

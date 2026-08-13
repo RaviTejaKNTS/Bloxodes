@@ -44,7 +44,7 @@ This folder defines the app's database contract and edge-function behavior.
 - Do not replace the active migration chain with a single baseline file for the current production project. If you generate a clean baseline snapshot, keep it in `schema.sql` or archive it outside `migrations/`.
 - Views are heavily used by `src/lib/db.ts`, `src/lib/catalog.ts`, and `src/lib/tools.ts`; update app queries alongside schema changes.
 - When changing policies, security definer functions, or search-path-sensitive code, review prior hardening migrations for consistency.
-- Edge Functions are deployed artifacts, not just source files. Compare the deployed checksum with `supabase/functions/<name>/index.ts`; deploy only the reviewed function to managed development first and obtain explicit approval before production.
+- Edge Functions are deployed artifacts, not just source files. Compare the deployed checksum with `supabase/functions/<name>/index.ts`. Managed development currently has no deployed Bloxodes functions; production reconciliation uses `npm run supabase:production:function:release -- --approved-sha <sha> --function <name>` in plan mode and requires explicit approval plus `--apply --confirm "APPLY <name>"` to mutate the self-hosted runtime.
 
 ## App Integration Checklist
 

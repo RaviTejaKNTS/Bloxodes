@@ -2,7 +2,7 @@
 
 - Status: Implemented; retained as the dated decision record
 - Created: 2026-08-11
-- Last reviewed: 2026-08-13
+- Last reviewed: 2026-08-14
 
 ## Decision
 

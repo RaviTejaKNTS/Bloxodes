@@ -1,8 +1,8 @@
 # Data Environments
 
 Status: Active
-Last verified: 2026-08-13
-Evidence: env target inspection, managed-development URL guard, local web health, homelab readiness output, public health, and production read-only counts
+Last verified: 2026-08-14
+Evidence: env target inspection, managed-development URL/readiness guard, migration ledgers, production readback/health, and platform synchronization checks
 
 ## Workstation Development
 
@@ -41,3 +41,4 @@ Machine-consumed inputs should live under `data/` or a pipeline-specific input f
 - Article production inventory is a read-only public projection at `/api/articles/editorial-inventory`; the writer queue itself stays in managed development.
 - Production storage URLs must use `media.bloxodes.com`, including when jobs connect to Supabase through the VPS-private Kong network.
 - Database schema flows forward as a reviewed migration: repository integrity check, managed-development plan/apply/readiness/advisors, explicit production approval, production plan/apply/readback/health/advisors. Database rows are not synchronized by cloning one environment over another.
+- Managed development and production were converged through repository migration `20260920000013` on 2026-08-14. Future migration files must repeat the same forward-only sequence; do not infer schema parity from application health alone.

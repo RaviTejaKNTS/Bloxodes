@@ -22,6 +22,7 @@
     "supabase:migrations:check": "node --import tsx scripts/dev/check-migration-integrity.ts",
     "supabase:managed-dev:check": "node --import tsx scripts/dev/check-managed-dev-readiness.ts",
     "supabase:production:release": "BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=vps node --import tsx scripts/ops/release-production-schema.ts",
+    "supabase:production:function:release": "BLOXODES_ENV_PROFILE=production-preview BLOXODES_ENV_OVERLAYS=vps node --import tsx scripts/ops/release-production-edge-function.ts",
     "platform:sync:check": "BLOXODES_ENV_OVERLAYS=homelab,vps node --import tsx scripts/ops/check-platform-sync.ts",
     "ads:update": "tsx scripts/ads/update-ads-txt.ts",
     "audit:journey-dom": "tsx scripts/ads/audit-journey-catalog-dom.ts",

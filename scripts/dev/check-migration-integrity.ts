@@ -6,8 +6,11 @@ type MigrationPolicy = {
   convergence_version: string;
   production_history_only: string[];
   production_schema_present_history_missing: string[];
+  production_history_repaired?: string[];
   production_pending_before_convergence: string[];
+  production_applied_pre_convergence?: string[];
   managed_dev_pending_before_convergence: string[];
+  managed_dev_baseline_applied?: string[];
 };
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
@@ -52,8 +55,11 @@ if (!/\[db\.seed\][\s\S]*?enabled\s*=\s*false/.test(config)) {
 
 for (const version of [
   ...policy.production_schema_present_history_missing,
+  ...(policy.production_history_repaired ?? []),
   ...policy.production_pending_before_convergence,
-  ...policy.managed_dev_pending_before_convergence
+  ...(policy.production_applied_pre_convergence ?? []),
+  ...policy.managed_dev_pending_before_convergence,
+  ...(policy.managed_dev_baseline_applied ?? [])
 ]) {
   if (!byVersion.has(version)) errors.push(`Migration policy references missing local version ${version}.`);
 }

@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -50,6 +51,22 @@ function safeAbsolutePath(value: string | undefined, label: string): string {
   return value;
 }
 
+function runtimeDeployRequired(fromSha: string, toSha: string): boolean {
+  if (!/^[0-9a-f]{40}$/.test(fromSha)) return true;
+  if (!succeeds("git", ["merge-base", "--is-ancestor", fromSha, toSha])) return true;
+  const changed = run("git", ["diff", "--name-only", fromSha, toSha]);
+  if (!changed) return false;
+  return changed.split("\n").some((file) =>
+    file.startsWith("data/") ||
+    file.startsWith("apps/web/src/data/") ||
+    file.startsWith("apps/web/public/") ||
+    file.startsWith("apps/web/") ||
+    file === "Dockerfile" ||
+    file === "package.json" ||
+    file === "package-lock.json"
+  );
+}
+
 async function main() {
 const head = run("git", ["rev-parse", "HEAD"]);
 const originProduction = run("git", ["rev-parse", "origin/production"]);
@@ -69,10 +86,12 @@ if (!localOnly) {
   const publicHealth = await fetch("https://bloxodes.com/api/health?scope=deploy", { cache: "no-store" });
   const health = (await publicHealth.json()) as { ok?: boolean; build?: { sha?: string }; checks?: { database?: { ok?: boolean } } };
   const liveSha = health.build?.sha ?? "unknown";
+  const liveRuntimeCurrent = !runtimeDeployRequired(liveSha, originProduction);
   add(
     "production-web",
-    publicHealth.ok && health.ok === true && health.checks?.database?.ok === true && liveSha === originProduction,
-    `sha=${liveSha.slice(0, 12)} database=${health.checks?.database?.ok === true ? "ok" : "failed"}`
+    publicHealth.ok && health.ok === true && health.checks?.database?.ok === true && liveRuntimeCurrent,
+    `sha=${liveSha.slice(0, 12)} runtime_current=${liveRuntimeCurrent} ` +
+      `database=${health.checks?.database?.ok === true ? "ok" : "failed"}`
   );
 
   const homelabTarget = safeSshTarget(process.env.HOMELAB_SSH_TARGET, "HOMELAB_SSH_TARGET");
@@ -103,12 +122,23 @@ if (!localOnly) {
     "-o", "ConnectTimeout=10",
     vpsTarget,
     "printf '%s|' \"$(docker ps --filter name=bloxodes-web --format '{{.Image}}' | head -n1)\"; " +
+      "printf '%s|' \"$(sha256sum /home/codex-admin/bloxodes-supabase/volumes/functions/revalidate/index.ts | awk '{print $1}')\"; " +
       "docker exec supabase-db psql -U postgres -d postgres -Atc \"select version from supabase_migrations.schema_migrations order by version;\""
   ]);
-  const splitAt = vpsRaw.indexOf("|");
-  const image = vpsRaw.slice(0, splitAt);
-  const productionVersions = new Set(vpsRaw.slice(splitAt + 1).split(/\s+/).filter(Boolean));
-  add("vps-web-image", image.endsWith(`:${originProduction}`), `image=${image}`);
+  const [image = "", deployedRevalidateSha = "", ...versionParts] = vpsRaw.split("|");
+  const imageSha = image.match(/:([0-9a-f]{40})$/)?.[1] ?? "unknown";
+  const productionVersions = new Set(versionParts.join("|").split(/\s+/).filter(Boolean));
+  const imageRuntimeCurrent = !runtimeDeployRequired(imageSha, originProduction);
+  add("vps-web-image", imageRuntimeCurrent, `image=${image} runtime_current=${imageRuntimeCurrent}`);
+
+  const localRevalidateSha = createHash("sha256")
+    .update(fs.readFileSync(path.join(repoRoot, "supabase/functions/revalidate/index.ts")))
+    .digest("hex");
+  add(
+    "production-revalidate-function",
+    deployedRevalidateSha === localRevalidateSha,
+    `deployed=${deployedRevalidateSha.slice(0, 12)} local=${localRevalidateSha.slice(0, 12)}`
+  );
 
   const policy = JSON.parse(
     fs.readFileSync(path.join(repoRoot, "supabase/migration-policy.json"), "utf8")

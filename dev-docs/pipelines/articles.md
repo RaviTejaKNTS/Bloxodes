@@ -1,8 +1,8 @@
 # Article Pipeline
 
-Status: Discovery and writer active; homelab checkout is behind production
-Last verified: 2026-08-13
-Evidence: code, systemd units/timer/journal, managed-dev readiness, production inventory, and production article count
+Status: Discovery and writer active; homelab synchronized with production
+Last verified: 2026-08-14
+Evidence: code, guarded homelab checkout synchronization, systemd units/timer/journal, managed-development readiness, production inventory, and production article count
 
 ## Stages
 
@@ -34,7 +34,7 @@ On the latest verification date:
 - writer readiness passed; and
 - the latest audited writer run succeeded, completing 6 of 6 claimed items.
 
-An earlier HTTP 402 balance failure is historical, not the current service state. The remaining operational drift is the clean homelab checkout at `ef536f62`, which must be fast-forwarded only after the prepared repository change is approved and released.
+An earlier HTTP 402 balance failure is historical, not the current service state. The homelab checkout was fast-forwarded to the approved production SHA through the guarded synchronization command on 2026-08-14.
 
 ## Production State
 
