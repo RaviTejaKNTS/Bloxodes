@@ -1,7 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
-import { assignStatsTier, isStatsTier, type StatsTier } from "./stats-tier";
+import { assignStatsTier, isStatsTier, shouldPreserveStatsTierReason, type StatsTier } from "./stats-tier";
 
 const DEFAULT_LIMIT = Number(process.env.UNIVERSE_STATS_TIER_LIMIT ?? "0");
 const BATCH_SIZE = Number(process.env.UNIVERSE_STATS_TIER_BATCH ?? "500");
@@ -16,19 +16,23 @@ type UniverseRow = {
   playing: number | null;
   visits: number | null;
   stats_tier: StatsTier | null;
+  stats_tier_reason: string | null;
   last_stats_refreshed_at: string | null;
 };
 
-async function fetchPage(options: Options, offset: number, count: number): Promise<UniverseRow[]> {
+async function fetchPage(options: Options, afterUniverseId: number | null, count: number): Promise<UniverseRow[]> {
   let query = supabaseAdmin()
     .from("roblox_universes")
-    .select("universe_id, playing, visits, stats_tier, last_stats_refreshed_at")
+    .select("universe_id, playing, visits, stats_tier, stats_tier_reason, last_stats_refreshed_at")
     .not("root_place_id", "is", null)
     .order("universe_id", { ascending: true })
-    .range(offset, offset + count - 1);
+    .limit(count);
 
   if (options.tier !== "ALL") {
     query = query.eq("stats_tier", options.tier);
+  }
+  if (afterUniverseId != null) {
+    query = query.gt("universe_id", afterUniverseId);
   }
 
   const { data, error } = await query;
@@ -40,12 +44,13 @@ async function writeRows(rows: UniverseRow[]) {
   const now = new Date().toISOString();
   let changed = 0;
   for (const row of rows) {
+    if (shouldPreserveStatsTierReason(row.stats_tier_reason)) continue;
     const next = assignStatsTier({
       playing: row.playing,
       visits: row.visits,
       lastStatsRefreshedAt: row.last_stats_refreshed_at
     });
-    if (row.stats_tier === next.tier) continue;
+    if (row.stats_tier === next.tier && row.stats_tier_reason === next.reason) continue;
     const { error } = await supabaseAdmin()
       .from("roblox_universes")
       .update({
@@ -99,18 +104,18 @@ Options:
 
 async function main() {
   const options = parseArgs();
-  let offset = 0;
+  let afterUniverseId: number | null = null;
   let inspected = 0;
   let changed = 0;
 
   while (true) {
     if (options.limit > 0 && inspected >= options.limit) break;
     const count = options.limit > 0 ? Math.min(BATCH_SIZE, options.limit - inspected) : BATCH_SIZE;
-    const rows = await fetchPage(options, offset, count);
+    const rows = await fetchPage(options, afterUniverseId, count);
     if (!rows.length) break;
     changed += await writeRows(rows);
     inspected += rows.length;
-    offset += rows.length;
+    afterUniverseId = rows[rows.length - 1]?.universe_id ?? afterUniverseId;
     console.log(`Inspected ${inspected} universes; changed ${changed} tiers.`);
     if (rows.length < count) break;
   }

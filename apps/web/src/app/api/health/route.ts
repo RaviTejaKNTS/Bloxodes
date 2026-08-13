@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { isStaleTimestamp } from "@/lib/health";
+import {
+  evaluateStatsPipelineHealth,
+  type StatsPipelineHealthSnapshot
+} from "@/lib/stats-pipeline-health";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 
 export const dynamic = "force-dynamic";
@@ -35,8 +39,9 @@ function readBuildSha() {
   return envSha || "unknown";
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   const supabase = supabaseAdmin();
+  const deployScope = new URL(request.url).searchParams.get("scope") === "deploy";
   const playingCutoff = new Date(Date.now() - 24 * 60 * 60 * 1_000).toISOString();
   const databaseCheck = await supabase.from("code_pages").select("id", { head: true, count: "exact" }).limit(1);
   const databaseOk = !databaseCheck.error;
@@ -77,10 +82,19 @@ export async function GET() {
       .or(`last_playing_refreshed_at.is.null,last_playing_refreshed_at.lt.${playingCutoff}`)
   ]);
 
-  const ok = databaseOk;
+  const pipelineHealth = await supabase.rpc("get_roblox_universe_pipeline_health_v4");
+  const evaluatedStats = pipelineHealth.error
+    ? null
+    : evaluateStatsPipelineHealth(pipelineHealth.data as StatsPipelineHealthSnapshot);
+  const statsOperational = evaluatedStats?.status !== "unhealthy";
+  const ok = databaseOk && (deployScope || (pipelineHealth.error == null && statsOperational));
   return NextResponse.json(
     {
       ok,
+      status: !databaseOk || pipelineHealth.error || evaluatedStats?.status === "unhealthy"
+        ? "unhealthy"
+        : evaluatedStats?.status ?? "healthy",
+      scope: deployScope ? "deploy" : "operational",
       timestamp: new Date().toISOString(),
       build: {
         sha: readBuildSha()
@@ -107,6 +121,13 @@ export async function GET() {
           freshCurrentValues: freshPlayers.count ?? null,
           staleStoredValues: stalePlayerValues.count ?? null,
           error: freshPlayers.error?.message ?? stalePlayerValues.error?.message ?? null
+        },
+        statsPipeline: {
+          ok: pipelineHealth.error == null && statsOperational,
+          status: evaluatedStats?.status ?? "unavailable",
+          checks: evaluatedStats?.checks ?? [],
+          snapshot: pipelineHealth.data ?? null,
+          error: pipelineHealth.error?.message ?? null
         }
       }
     },

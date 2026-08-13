@@ -1,0 +1,91 @@
+name: Stats Operational Health Monitor
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: stats-operational-health-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check operational health
+        id: health
+        env:
+          HEALTH_URL: https://bloxodes.com/api/health
+        run: |
+          status_code="$(curl --silent --show-error --max-time 20 \
+            --output /tmp/stats-health.json \
+            --write-out '%{http_code}' \
+            "$HEALTH_URL" || true)"
+          if [ "$status_code" = "200" ] && node -e '
+            const fs = require("fs");
+            const value = JSON.parse(fs.readFileSync("/tmp/stats-health.json", "utf8"));
+            if (value.ok !== true || value.scope !== "operational") process.exit(1);
+          '; then
+            echo "state=healthy" >> "$GITHUB_OUTPUT"
+          else
+            echo "state=unhealthy" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Read previous monitor outcome
+        id: previous
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          conclusion="$(gh api \
+            "repos/${GITHUB_REPOSITORY}/actions/workflows/stats-health-monitor.yml/runs?per_page=10" \
+            --jq ".workflow_runs | map(select(.id != ${GITHUB_RUN_ID})) | .[0].conclusion // \"none\"")"
+          echo "conclusion=$conclusion" >> "$GITHUB_OUTPUT"
+
+      - name: Notify state transition
+        if: >-
+          (steps.health.outputs.state == 'unhealthy' && steps.previous.outputs.conclusion != 'failure') ||
+          (steps.health.outputs.state == 'healthy' && steps.previous.outputs.conclusion == 'failure')
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.AUTOMATION_REPORT_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.AUTOMATION_REPORT_CHAT_ID }}
+          HEALTH_STATE: ${{ steps.health.outputs.state }}
+        run: |
+          test -n "$TELEGRAM_BOT_TOKEN"
+          test -n "$TELEGRAM_CHAT_ID"
+          node -e '
+            const fs = require("fs");
+            const state = process.env.HEALTH_STATE;
+            let detail = {};
+            try { detail = JSON.parse(fs.readFileSync("/tmp/stats-health.json", "utf8")); } catch {}
+            const pipeline = detail.checks?.statsPipeline ?? {};
+            const failed = Array.isArray(pipeline.checks)
+              ? pipeline.checks.filter((entry) => entry.status === "fail").map((entry) => entry.name).slice(0, 5)
+              : [];
+            const message = [
+              state === "healthy" ? "✅ Bloxodes stats recovered" : "❌ Bloxodes stats unhealthy",
+              `Status: ${pipeline.status ?? detail.status ?? state}`,
+              failed.length ? `Failed checks: ${failed.join(", ")}` : null,
+              `Health: https://bloxodes.com/api/health`,
+              `Run: https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
+            ].filter(Boolean).join("\n");
+            fetch(`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ chat_id: process.env.TELEGRAM_CHAT_ID, text: message })
+            }).then((response) => {
+              if (!response.ok) throw new Error(`Telegram returned ${response.status}`);
+            }).catch((error) => {
+              console.error(error.message);
+              process.exit(1);
+            });
+          '
+
+      - name: Fail on unhealthy stats
+        if: steps.health.outputs.state == 'unhealthy'
+        run: exit 1

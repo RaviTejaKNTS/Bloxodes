@@ -12,6 +12,11 @@ import {
   STATS_PLAYING_INDEX_GRACE_MS
 } from "@/lib/stats-freshness";
 import { getStatsVisitShareChart, type StatsVisitShareChartData } from "@/lib/stats-visit-share";
+import {
+  closestStatsGrowthRow,
+  statsGrowthBaselineToleranceMs,
+  statsGrowthReferenceMs
+} from "@/lib/stats-growth";
 export { formatCompactNumber, formatFullNumber, formatPercent } from "@/lib/stats-format";
 export type { StatsVisitShareChartData, StatsVisitSharePoint, StatsVisitShareSeries } from "@/lib/stats-visit-share";
 
@@ -25,7 +30,6 @@ const STATS_HOME_RISERS_MIN_GAIN = 1000;
 export const STATS_GAME_MIN_RATING_VOTES = 25;
 const SUPABASE_READ_PAGE_SIZE = 1000;
 const SUPABASE_IN_CHUNK_SIZE = 500;
-const STATS_GROWTH_BASELINE_TOLERANCE_MS = 90 * 60 * 1000;
 let statsIndexAvailability: Promise<boolean> | null = null;
 let statsItemIndexAvailability: Promise<boolean> | null = null;
 let statsItemHistoryAvailability: Promise<boolean> | null = null;
@@ -1534,33 +1538,13 @@ function groupHourlyRows(rows: GrowthHourlyRow[]) {
   return byId;
 }
 
-function closestPlayingRow(rows: GrowthHourlyRow[], targetMs: number): GrowthHourlyRow | null {
-  return rows.reduce<GrowthHourlyRow | null>((best, row) => {
-    if (row.playing == null) return best;
-    const time = Date.parse(row.hour_start);
-    if (!Number.isFinite(time)) return best;
-    if (!best) return row;
-    return Math.abs(time - targetMs) < Math.abs(Date.parse(best.hour_start) - targetMs) ? row : best;
-  }, null);
-}
-
 function hydrateGrowthFromRows(game: StatsGame, index: number, rows: GrowthHourlyRow[], nowMs = Date.now()): StatsGame {
-  const cutoff24 = nowMs - 24 * 60 * 60 * 1000;
-  const cutoff7d = nowMs - 7 * 24 * 60 * 60 * 1000;
-  const first24 = closestPlayingRow(
-    rows.filter((row) => {
-      const time = Date.parse(row.hour_start);
-      return Number.isFinite(time) && Math.abs(time - cutoff24) <= STATS_GROWTH_BASELINE_TOLERANCE_MS;
-    }),
-    cutoff24
-  );
-  const first7d = closestPlayingRow(
-    rows.filter((row) => {
-      const time = Date.parse(row.hour_start);
-      return Number.isFinite(time) && Math.abs(time - cutoff7d) <= STATS_GROWTH_BASELINE_TOLERANCE_MS;
-    }),
-    cutoff7d
-  );
+  const referenceMs = statsGrowthReferenceMs(game.lastPlayingRefreshedAt, nowMs);
+  const cutoff24 = referenceMs - 24 * 60 * 60 * 1000;
+  const cutoff7d = referenceMs - 7 * 24 * 60 * 60 * 1000;
+  const toleranceMs = statsGrowthBaselineToleranceMs(game.statsTier);
+  const first24 = closestStatsGrowthRow(rows, cutoff24, toleranceMs);
+  const first7d = closestStatsGrowthRow(rows, cutoff7d, toleranceMs);
   const peak24h = rows
     .filter((row) => Date.parse(row.hour_start) >= cutoff24)
     .reduce<number | null>((max, row) => (row.peak_playing == null ? max : max == null ? row.peak_playing : Math.max(max, row.peak_playing)), null);
@@ -1609,19 +1593,15 @@ async function attachGrowth(games: StatsGame[]): Promise<StatsGame[]> {
 async function attachGrowthBaselines(games: StatsGame[]): Promise<StatsGame[]> {
   if (!games.length) return games;
   const nowMs = Date.now();
-  const cutoff24 = nowMs - 24 * 60 * 60 * 1000;
-  const cutoff7d = nowMs - 7 * 24 * 60 * 60 * 1000;
   const ids = games.map((game) => game.universeId);
-  const baselineWindows = [
-    {
-      startIso: new Date(cutoff24 - STATS_GROWTH_BASELINE_TOLERANCE_MS).toISOString(),
-      endIso: new Date(cutoff24 + STATS_GROWTH_BASELINE_TOLERANCE_MS).toISOString()
-    },
-    {
-      startIso: new Date(cutoff7d - STATS_GROWTH_BASELINE_TOLERANCE_MS).toISOString(),
-      endIso: new Date(cutoff7d + STATS_GROWTH_BASELINE_TOLERANCE_MS).toISOString()
-    }
-  ];
+  const references = games.map((game) => statsGrowthReferenceMs(game.lastPlayingRefreshedAt, nowMs));
+  const maxTolerance = Math.max(...games.map((game) => statsGrowthBaselineToleranceMs(game.statsTier)));
+  const oldestReference = Math.min(...references);
+  const newestReference = Math.max(...references);
+  const baselineWindows = [24, 24 * 7].map((hours) => ({
+    startIso: new Date(oldestReference - hours * 60 * 60 * 1000 - maxTolerance).toISOString(),
+    endIso: new Date(newestReference - hours * 60 * 60 * 1000 + maxTolerance).toISOString()
+  }));
   let data: GrowthHourlyRow[];
 
   try {

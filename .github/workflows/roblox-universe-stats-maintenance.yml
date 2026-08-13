@@ -60,7 +60,7 @@ jobs:
         run: npm run stats:rollup-daily -- --date "$ROLLUP_DATE" --finalize
 
       - name: Refresh platform stats aggregates
-        run: npm run stats:platform:refresh -- --hourly-days 90 --daily-days 180
+        run: npm run stats:platform:refresh -- --hourly-days 2 --daily-days 2
 
       - name: Prune hourly universe history
         if: env.RUN_PRUNE == 'true'
@@ -68,4 +68,4 @@ jobs:
 
       - name: Audit universe stats pipeline
         if: env.RUN_AUDIT == 'true'
-        run: npm run stats:audit
+        run: npm run stats:audit -- --strict

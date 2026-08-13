@@ -2,6 +2,8 @@ export const STATS_TIERS = ["NEW", "HOT", "WARM", "COLD"] as const;
 
 export type StatsTier = (typeof STATS_TIERS)[number];
 
+export const UNIVERSE_STATS_UNAVAILABLE_REASON = "game_details_unavailable";
+
 type TierInput = {
   playing?: number | null;
   visits?: number | null;
@@ -10,6 +12,10 @@ type TierInput = {
 
 export function isStatsTier(value: string | undefined): value is StatsTier {
   return STATS_TIERS.includes(value as StatsTier);
+}
+
+export function shouldPreserveStatsTierReason(reason?: string | null) {
+  return reason === UNIVERSE_STATS_UNAVAILABLE_REASON;
 }
 
 export function assignStatsTier(input: TierInput): { tier: StatsTier; reason: string; refreshHours: number } {
@@ -31,8 +37,8 @@ export function assignStatsTier(input: TierInput): { tier: StatsTier; reason: st
   if ((visits ?? 0) >= 10_000_000) {
     return { tier: "WARM", reason: "visits_gte_10m", refreshHours: 12 };
   }
-  // Stay one scheduler interval ahead of the public 24-hour player-count
-  // expiry. Exact 24-hour scheduling leaves healthy rows hidden while they
-  // wait for the next hourly COLD worker and index rebuild.
-  return { tier: "COLD", reason: "remaining_valid_game", refreshHours: 23 };
+  // Leave enough room for the fixed hourly poll, a bounded lock wait, the
+  // Roblox request, and the serialized index rebuild before the public
+  // 24-hour current-player cutoff.
+  return { tier: "COLD", reason: "remaining_valid_game", refreshHours: 20 };
 }

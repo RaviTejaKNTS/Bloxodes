@@ -3,8 +3,8 @@ import "../shared/load-env";
 import { supabaseAdmin } from "@/lib/supabase-admin";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
-const DEFAULT_HOURLY_DAYS = readPositiveInteger("PLATFORM_STATS_HOURLY_DAYS", 30);
-const DEFAULT_DAILY_DAYS = readPositiveInteger("PLATFORM_STATS_DAILY_DAYS", 180);
+const DEFAULT_HOURLY_DAYS = readPositiveInteger("PLATFORM_STATS_HOURLY_DAYS", 2);
+const DEFAULT_DAILY_DAYS = readPositiveInteger("PLATFORM_STATS_DAILY_DAYS", 2);
 
 type Options = {
   hourlyDays: number;
@@ -93,10 +93,11 @@ async function main() {
   });
 
   try {
-    const [hourlyRows, dailyRows] = await Promise.all([
-      refreshHourly(hourlySince),
-      refreshDaily(dailySince)
-    ]);
+    // Keep each aggregate bounded and observable. Running both RPCs together
+    // previously left a partial daily write when the oversized hourly scan
+    // timed out, while the job could report only one combined failure.
+    const hourlyRows = await refreshHourly(hourlySince);
+    const dailyRows = await refreshDaily(dailySince);
     await finishStatsJobRun(run, {
       status: "success",
       rowsClaimed: hourlyRows + dailyRows,

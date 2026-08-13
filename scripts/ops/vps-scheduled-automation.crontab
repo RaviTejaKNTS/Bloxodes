@@ -13,8 +13,8 @@
 # topic curation, and LINKEDIN_LI_AT for LinkedIn puzzles when available.
 
 # BLOXODES_SCHEDULED_AUTOMATION_START
-2 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-daily-rollup "npm run stats:rollup-daily -- --date yesterday --finalize && npm run stats:prune-hourly -- --days 90 --apply && npm run stats:audit"
-5 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-platform-refresh "npm run stats:platform:refresh -- --hourly-days 90 --daily-days 180"
+2 0 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-daily-rollup "npm run stats:rollup-daily -- --date yesterday --finalize && npm run stats:prune-hourly -- --days 90 --apply && npm run stats:audit -- --strict"
+5 1 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh stats-platform-refresh "npm run stats:platform:refresh -- --hourly-days 2 --daily-days 2"
 
 0 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh codes-refresh "export REFRESH_CONCURRENCY=6 REFRESH_BATCH_DELAY_MS=750; npm run refresh:codes"
 17 */6 * * * /home/codex-admin/bloxodes-stats-worker/bin/run-job.sh google-indexing "export GOOGLE_INDEXING_STATE_BACKEND=supabase; npm run indexing:google -- --apply"

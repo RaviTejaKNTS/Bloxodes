@@ -341,7 +341,7 @@ jobs:
       - name: Wait for exact live SHA and healthy database
         if: ${{ steps.freshness.outputs.fresh == 'true' }}
         run: |
-          health_url="${PRODUCTION_SITE_URL%/}/api/health"
+          health_url="${PRODUCTION_SITE_URL%/}/api/health?scope=deploy"
           for attempt in $(seq 1 60); do
             status_code="$(curl --silent --show-error \
               --output /tmp/dokploy-health.json \

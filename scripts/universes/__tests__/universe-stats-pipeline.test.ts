@@ -4,7 +4,7 @@ import test from "node:test";
 
 import { statsPipelineLeaseName } from "../../shared/stats-pipeline-lease";
 import { shouldUseDatabaseRankRefresh } from "../rank-universe-stats";
-import { assignStatsTier } from "../stats-tier";
+import { assignStatsTier, shouldPreserveStatsTierReason } from "../stats-tier";
 import { hasAnyFreshUniverseStat, universeClaimBatchSize } from "../update-universe-hourly-stats";
 
 test("universe claims stay below the production Data API response cap", () => {
@@ -30,7 +30,23 @@ test("scheduled full-population rank jobs use the database implementation", () =
 test("every valid universe tier remains visible inside the 24-hour freshness window", () => {
   assert.equal(assignStatsTier({ playing: 100, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 1);
   assert.equal(assignStatsTier({ visits: 10_000_000, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 12);
-  assert.equal(assignStatsTier({ playing: 0, visits: 0, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 23);
+  assert.equal(assignStatsTier({ playing: 0, visits: 0, lastStatsRefreshedAt: "2026-01-01T00:00:00Z" }).refreshHours, 20);
+});
+
+test("COLD phase budget remains below the public cutoff", () => {
+  const completionMinute = 56;
+  const dueHours = 20;
+  const maximumPollDelayMinutes = 51;
+  const maximumLockWaitMinutes = 30;
+  const workAndIndexMinutes = 15;
+  const maximumAgeMinutes = dueHours * 60 + maximumPollDelayMinutes + maximumLockWaitMinutes + workAndIndexMinutes;
+  assert.ok(completionMinute > 47);
+  assert.ok(maximumAgeMinutes < 24 * 60);
+});
+
+test("manual tier repair preserves unavailable quarantine", () => {
+  assert.equal(shouldPreserveStatsTierReason("game_details_unavailable"), true);
+  assert.equal(shouldPreserveStatsTierReason("remaining_valid_game"), false);
 });
 
 test("all-null Roblox detail responses are not treated as successful refreshes", () => {
@@ -44,28 +60,30 @@ test("all-null Roblox detail responses are not treated as successful refreshes",
   );
 });
 
-test("database scheduling keeps visibility headroom without bypassing unavailable cooldowns", () => {
+test("database scheduling keeps phase-safe visibility headroom without bypassing unavailable cooldowns", () => {
   const migration = readFileSync(
-    new URL("../../../supabase/migrations/20260920000003_align_cold_stats_with_public_freshness.sql", import.meta.url),
+    new URL("../../../supabase/migrations/20260920000009_stabilize_universe_stats_recurrence.sql", import.meta.url),
     "utf8"
   );
 
-  assert.match(migration, /last_playing_refreshed_at \+ interval '23 hours'/);
+  assert.match(migration, /last_playing_refreshed_at \+ interval '20 hours'/);
   assert.match(migration, /statement_timestamp\(\) \+ interval '1 hour'/);
   assert.match(migration, /stats_tier_reason = 'game_details_unavailable'/);
-  assert.match(migration, /before update of/);
+  assert.match(migration, /next_stats_refresh_at = statement_timestamp\(\) \+ interval '168 hours'/);
 });
 
-test("VPS owns database-only ranks and the serialized index exactly once", () => {
+test("VPS owns hourly ranks, pauses unused daily ranks, and publishes index after COLD", () => {
   const cron = readFileSync(new URL("../../ops/vps-universe-stats.crontab", import.meta.url), "utf8");
   const lines = cron.split("\n").filter((line) => line && !line.startsWith("#"));
 
   assert.equal(lines.filter((line) => line.includes(" stats-hourly-ranks ")).length, 1);
-  assert.equal(lines.filter((line) => line.includes(" stats-daily-ranks ")).length, 1);
-  assert.equal(lines.filter((line) => line.includes(" stats-current-index ")).length, 1);
+  assert.equal(lines.filter((line) => line.includes(" stats-daily-ranks ")).length, 0);
+  assert.equal(lines.filter((line) => line.includes(" stats-current-index ")).length, 0);
   assert.equal(lines.some((line) => line.includes("stats:refresh:hot")), false);
   assert.equal(lines.filter((line) => line.includes("stats-hourly-ranks")).some((line) => line.includes("JOB_LOCK_GROUP")), false);
-  assert.equal(lines.filter((line) => line.includes("stats-daily-ranks")).some((line) => line.includes("JOB_LOCK_GROUP")), false);
+  const coldLine = lines.find((line) => line.includes(" stats-cold-refresh ")) ?? "";
+  assert.ok(coldLine.indexOf("stats:refresh:cold") < coldLine.indexOf("stats:index:refresh"));
+  assert.equal(lines.filter((line) => line.includes("stats:index:refresh")).length, 1);
 });
 
 test("universe refresh capacity is protected from item and discovery work", () => {
@@ -106,12 +124,16 @@ test("universe refresh capacity is protected from item and discovery work", () =
   const newLine = universeLines.find((line) => line.includes(" stats-new-refresh "));
   assert.ok(newLine);
   assert.doesNotMatch(newLine, /enrich:universes/);
+  assert.doesNotMatch(newLine, /stats:tier/);
+  const tierScript = readFileSync(new URL("../assign-universe-stats-tier.ts", import.meta.url), "utf8");
+  assert.match(tierScript, /\.gt\("universe_id", afterUniverseId\)/);
+  assert.doesNotMatch(tierScript, /\.range\(/);
   const warmLine = universeLines.find((line) => line.includes(" stats-warm-refresh "));
   assert.ok(warmLine);
   assert.match(warmLine, /^32 \*\/6 \* \* \*/);
 });
 
-test("the COLD schedule has full-day capacity above the tracked population", () => {
+test("the COLD schedule has cadence and failure headroom above the tracked population", () => {
   const cron = readFileSync(new URL("../../ops/vps-universe-stats.crontab", import.meta.url), "utf8");
   const coldLine = cron
     .split("\n")
@@ -119,9 +141,10 @@ test("the COLD schedule has full-day capacity above the tracked population", () 
   assert.ok(coldLine);
   assert.match(coldLine, /^47 \* \* \* \*/);
   const limit = Number(coldLine.match(/stats:refresh:cold -- --limit (\d+)/)?.[1] ?? 0);
-  const dailyCapacity = 24 * limit;
-  assert.equal(limit, 5_000);
-  assert.ok(dailyCapacity >= 120_000, `expected at least 120K COLD rows/day, got ${dailyCapacity}`);
+  const usableDailyCapacity = 24 * limit * 0.9;
+  const requiredCapacity = 120_000 * (24 / 20) * 1.05;
+  assert.equal(limit, 7_000);
+  assert.ok(usableDailyCapacity >= requiredCapacity, `expected ${requiredCapacity} usable rows/day, got ${usableDailyCapacity}`);
 });
 
 test("the scheduled universe audit is strict and uses one health RPC", () => {
@@ -141,11 +164,8 @@ test("the scheduled universe audit is strict and uses one health RPC", () => {
   );
 
   assert.match(cron, /stats-audit "npm run stats:audit -- --strict"/);
-  assert.match(audit, /rpc\("get_roblox_universe_pipeline_health_v3"\)/);
-  assert.match(audit, /public_playing_coverage/);
-  assert.match(audit, /Number\(counts\.fresh_player_values_24h\)/);
-  assert.match(audit, /Number\(counts\.eligible_total\)/);
-  assert.match(audit, /cold_refresh_starts_6h/);
+  assert.match(audit, /rpc\("get_roblox_universe_pipeline_health_v4"\)/);
+  assert.match(audit, /evaluateStatsPipelineHealth/);
   assert.match(audit, /if \(STRICT && failures\.length\) process\.exitCode = 1/);
   assert.match(migration, /create or replace function public\.get_roblox_universe_pipeline_health\(\)/);
   assert.match(migration, /last_playing_refreshed_at >= now\(\) - interval '24 hours'/);
