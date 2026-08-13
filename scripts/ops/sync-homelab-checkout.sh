@@ -4,6 +4,7 @@ set -euo pipefail
 apply=false
 expected_sha=""
 repo_root="${HOMELAB_REPO_ROOT:-/home/teja/projects/Bloxodes}"
+env_path="${HOMELAB_ENV_PATH:-/etc/bloxodes/article-automation.env}"
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -25,6 +26,10 @@ if [[ ! "$expected_sha" =~ ^[0-9a-f]{40}$ ]]; then
 fi
 if [[ ! -d "$repo_root/.git" ]]; then
   echo "Homelab checkout not found at $repo_root." >&2
+  exit 1
+fi
+if [[ ! -r "$env_path" ]]; then
+  echo "Homelab runtime env is not readable at $env_path." >&2
   exit 1
 fi
 if [[ "$(git -C "$repo_root" branch --show-current)" != "production" ]]; then
@@ -75,5 +80,9 @@ for unit in bloxodes-article-discovery.service bloxodes-article-writer.service; 
   fi
 done
 
-npm --prefix "$repo_root" run articles:homelab:check -- --component all
+(
+  cd "$repo_root"
+  NODE_ENV=development node --env-file="$env_path" --import tsx \
+    scripts/ops/check-homelab-article-automation.ts --component all
+)
 echo "Homelab synchronized to $expected_sha; timer state was not changed."
