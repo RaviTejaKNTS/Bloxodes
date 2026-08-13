@@ -1,18 +1,26 @@
 import "../shared/load-env";
 
-import { execFileSync, spawn, spawnSync, type ChildProcess } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
 import fs from "node:fs";
-import net from "node:net";
 import path from "node:path";
-import { setTimeout as delay } from "node:timers/promises";
 
 import { isProductionSupabaseUrl } from "../shared/supabase-target";
 
 type MigrationPolicy = {
+  convergence_version: string;
   production_schema_present_history_missing: string[];
+  production_pending_before_convergence: string[];
+};
+
+type Migration = {
+  version: string;
+  name: string;
+  file: string;
+  sql: string;
 };
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
+const migrationRoot = path.join(repoRoot, "supabase/migrations");
 const argv = process.argv.slice(2);
 const apply = argv.includes("--apply");
 
@@ -31,48 +39,53 @@ function required(name: string, input: string | undefined): string {
   return resolved;
 }
 
-function run(command: string, args: string[], env: NodeJS.ProcessEnv): void {
-  const result = spawnSync(command, args, {
+function sqlLiteral(input: string): string {
+  return `'${input.replaceAll("'", "''")}'`;
+}
+
+function readMigrations(): Migration[] {
+  return fs.readdirSync(migrationRoot)
+    .filter((name) => name.endsWith(".sql"))
+    .sort()
+    .map((file) => {
+      const match = file.match(/^(\d{8,14})_([a-z0-9_]+)\.sql$/);
+      if (!match) throw new Error(`Invalid migration filename: ${file}`);
+      return {
+        version: match[1]!,
+        name: match[2]!,
+        file,
+        sql: fs.readFileSync(path.join(migrationRoot, file), "utf8").trim()
+      };
+    });
+}
+
+function runRemoteSql(target: string, sql: string, tuplesOnly = false): string {
+  const psql = [
+    "docker", "exec", "-i", "supabase-db",
+    "psql", "-U", "postgres", "-d", "postgres",
+    "-X", "-v", "ON_ERROR_STOP=1"
+  ];
+  if (tuplesOnly) psql.push("-A", "-t");
+  const result = spawnSync("ssh", [
+    "-o", "BatchMode=yes",
+    "-o", "ConnectTimeout=10",
+    target,
+    psql.join(" ")
+  ], {
     cwd: repoRoot,
-    env,
-    stdio: "inherit"
+    input: sql,
+    encoding: "utf8",
+    maxBuffer: 20 * 1024 * 1024
   });
   if (result.error) throw result.error;
-  if (result.status !== 0) throw new Error(`${command} exited with status ${result.status}.`);
+  if (result.stderr) process.stderr.write(result.stderr);
+  if (result.status !== 0) throw new Error(`Remote production psql exited with status ${result.status}.`);
+  return result.stdout.trim();
 }
 
-async function unusedLocalPort(): Promise<number> {
-  const server = net.createServer();
-  await new Promise<void>((resolve, reject) => {
-    server.once("error", reject);
-    server.listen(0, "127.0.0.1", resolve);
-  });
-  const address = server.address();
-  if (!address || typeof address === "string") throw new Error("Could not reserve a local SSH tunnel port.");
-  await new Promise<void>((resolve, reject) => server.close((error) => error ? reject(error) : resolve()));
-  return address.port;
-}
-
-async function waitForTunnel(process: ChildProcess, port: number): Promise<void> {
-  let earlyExit: Error | null = null;
-  process.once("exit", (code) => {
-    earlyExit = new Error(`SSH tunnel exited before readiness with status ${code}.`);
-  });
-
-  for (let attempt = 0; attempt < 40; attempt += 1) {
-    if (earlyExit) throw earlyExit;
-    const connected = await new Promise<boolean>((resolve) => {
-      const socket = net.connect({ host: "127.0.0.1", port });
-      socket.once("connect", () => {
-        socket.destroy();
-        resolve(true);
-      });
-      socket.once("error", () => resolve(false));
-    });
-    if (connected) return;
-    await delay(250);
-  }
-  throw new Error("Timed out waiting for the production Postgres SSH tunnel.");
+function ledgerInsert(migration: Migration): string {
+  return `insert into supabase_migrations.schema_migrations (version, name, statements)\n` +
+    `values (${sqlLiteral(migration.version)}, ${sqlLiteral(migration.name)}, array[]::text[]);`;
 }
 
 async function main() {
@@ -89,57 +102,84 @@ async function main() {
 
   const productionUrl = required("SUPABASE_URL", process.env.SUPABASE_URL);
   if (!isProductionSupabaseUrl(productionUrl)) throw new Error("SUPABASE_URL is not the Bloxodes production host.");
-  const password = required("SUPABASE_DB_PASSWORD", process.env.SUPABASE_DB_PASSWORD);
   const sshUser = required("VPS_ADMIN_USER", process.env.VPS_ADMIN_USER);
   const sshHost = required("VPS_HOST", process.env.VPS_HOST);
   if (!/^[a-zA-Z0-9_.-]+$/.test(sshUser) || !/^[a-zA-Z0-9_.-]+$/.test(sshHost)) {
     throw new Error("The configured VPS SSH target is invalid.");
   }
+  const target = `${sshUser}@${sshHost}`;
 
-  const port = await unusedLocalPort();
-  const tunnel = spawn("ssh", [
-    "-o", "BatchMode=yes",
-    "-o", "ExitOnForwardFailure=yes",
-    "-o", "ConnectTimeout=10",
-    "-N",
-    "-L", `127.0.0.1:${port}:127.0.0.1:54322`,
-    `${sshUser}@${sshHost}`
-  ], { stdio: ["ignore", "ignore", "inherit"] });
+  const policy = JSON.parse(
+    fs.readFileSync(path.join(repoRoot, "supabase/migration-policy.json"), "utf8")
+  ) as MigrationPolicy;
+  const migrations = readMigrations();
+  const byVersion = new Map(migrations.map((migration) => [migration.version, migration]));
+  const remoteVersions = new Set(
+    runRemoteSql(
+      target,
+      "select version from supabase_migrations.schema_migrations order by version;",
+      true
+    ).split(/\s+/).filter(Boolean)
+  );
 
-  try {
-    await waitForTunnel(tunnel, port);
-    const dbUrl = `postgresql://postgres@127.0.0.1:${port}/postgres?sslmode=disable`;
-    const commandEnv = { ...process.env, PGPASSWORD: password };
-    const proofFile = path.join(repoRoot, "scripts/ops/sql/verify-production-history-repair.sql");
-    const policy = JSON.parse(
-      fs.readFileSync(path.join(repoRoot, "supabase/migration-policy.json"), "utf8")
-    ) as MigrationPolicy;
-
-    run("psql", [dbUrl, "--no-psqlrc", "--file", proofFile], commandEnv);
-
-    if (!apply) {
-      console.log("Production schema plan (read only):");
-      run("supabase", ["db", "push", "--db-url", dbUrl, "--dry-run"], commandEnv);
-      console.log("Plan complete. Pre-convergence schema-present versions remain pending until an approved apply repairs history.");
-      return;
-    }
-
-    if (!policy.production_schema_present_history_missing.length) {
-      throw new Error("Migration policy has no verified production history repairs.");
-    }
-    run("supabase", [
-      "migration", "repair",
-      ...policy.production_schema_present_history_missing,
-      "--status", "applied",
-      "--db-url", dbUrl,
-      "--yes"
-    ], commandEnv);
-    run("supabase", ["db", "push", "--db-url", dbUrl, "--dry-run"], commandEnv);
-    run("supabase", ["db", "push", "--db-url", dbUrl], commandEnv);
-    run("supabase", ["migration", "list", "--db-url", dbUrl], commandEnv);
-  } finally {
-    tunnel.kill("SIGTERM");
+  const historyRepairs = policy.production_schema_present_history_missing
+    .filter((version) => !remoteVersions.has(version))
+    .map((version) => {
+      const migration = byVersion.get(version);
+      if (!migration) throw new Error(`History repair version ${version} has no local migration file.`);
+      return migration;
+    });
+  const historyRepairVersions = new Set(historyRepairs.map((migration) => migration.version));
+  const pending = migrations.filter(
+    (migration) => !remoteVersions.has(migration.version) && !historyRepairVersions.has(migration.version)
+  );
+  const allowedPreConvergence = new Set(policy.production_pending_before_convergence);
+  const unexpected = pending.filter(
+    (migration) => migration.version < policy.convergence_version && !allowedPreConvergence.has(migration.version)
+  );
+  if (unexpected.length) {
+    throw new Error(`Unexpected pre-convergence production migrations: ${unexpected.map((item) => item.file).join(", ")}`);
   }
+
+  const proofSql = fs.readFileSync(
+    path.join(repoRoot, "scripts/ops/sql/verify-production-history-repair.sql"),
+    "utf8"
+  );
+  const transaction = [
+    proofSql,
+    "begin;",
+    ...historyRepairs.map(ledgerInsert),
+    ...pending.flatMap((migration) => [
+      `-- ${migration.file}`,
+      migration.sql,
+      ledgerInsert(migration)
+    ]),
+    apply ? "commit;" : "rollback;"
+  ].join("\n\n");
+
+  console.log(`Production history repairs: ${historyRepairs.map((item) => item.version).join(", ") || "none"}`);
+  console.log(`Production schema migrations: ${pending.map((item) => item.version).join(", ") || "none"}`);
+  if (!historyRepairs.length && !pending.length) {
+    console.log("Production schema is already converged.");
+    return;
+  }
+
+  runRemoteSql(target, transaction);
+  if (!apply) {
+    console.log("Production schema plan passed and was rolled back; no production changes were retained.");
+    return;
+  }
+
+  const finalVersions = new Set(
+    runRemoteSql(
+      target,
+      "select version from supabase_migrations.schema_migrations order by version;",
+      true
+    ).split(/\s+/).filter(Boolean)
+  );
+  const missing = [...historyRepairs, ...pending].filter((migration) => !finalVersions.has(migration.version));
+  if (missing.length) throw new Error(`Production ledger verification failed: ${missing.map((item) => item.version).join(", ")}`);
+  console.log(`Production schema applied and verified at approved SHA ${approvedSha}.`);
 }
 
 main().catch((error) => {

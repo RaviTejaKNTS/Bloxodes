@@ -27,7 +27,7 @@ The public `/api/health` response is the deploy gate. It includes build SHA, dat
 
 Database-backed content normally publishes through controlled scripts/migrations and revalidation rather than requiring a web image. Local datasets under `data/` or `apps/web/src/data/` require a code/image deploy.
 
-Schema changes use the authenticated Supabase connector for managed development, followed by migration listing, readiness, and advisors. Production is self-hosted and its Postgres port stays private: `npm run supabase:production:release -- --approved-sha <full-sha>` plans through an ephemeral SSH tunnel. Apply additionally requires the exact released SHA on `origin/production`, `--apply`, and `--confirm "APPLY production"`. It first runs the checked-in object-proof SQL and repairs only the five policy-listed, schema-present ledger gaps before dry-running/applying real pending migrations. Managed development must pass first; production remains a separate explicit approval.
+Schema changes use the authenticated Supabase connector for managed development, followed by migration listing, readiness, and advisors. Production is self-hosted and its Postgres port stays private: `npm run supabase:production:release -- --approved-sha <full-sha>` streams a transaction through SSH into the existing database container and rolls it back after proving the full plan. Apply additionally requires the exact released SHA on `origin/production`, `--apply`, and `--confirm "APPLY production"`. It runs the checked-in object proof, repairs only policy-listed schema-present ledger gaps, applies only expected migrations, commits atomically, and verifies the ledger. Managed development must pass first; production remains a separate explicit approval.
 
 ## Platform Synchronization
 
