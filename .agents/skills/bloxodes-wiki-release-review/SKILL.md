@@ -89,21 +89,21 @@ After deploy is live, publish approved games one game at a time.
 3. Run production dry-runs:
 
 ```bash
-NODE_ENV=production npm run seed:game-wiki-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>
-NODE_ENV=production npm run seed:game-collection-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections
+BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-wiki-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>
+BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-collection-pages -- --dry-run --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections
 ```
 
 4. Seed production in order:
 
 ```bash
-NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug> --allow-prod
+BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-wiki-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug> --allow-prod
 ```
 
 5. Read back the production wiki row.
 6. Seed collections:
 
 ```bash
-NODE_ENV=production npm run seed:game-collection-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --allow-prod
+BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run seed:game-collection-pages -- --game <game-slug> --final-json-root tmp/content-workspace/<game-slug>/collections --allow-prod
 ```
 
 7. Read back production collection rows.

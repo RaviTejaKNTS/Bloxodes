@@ -9,12 +9,16 @@ async function main() {
   const localCols = (process.argv[3] || "").split(",").filter(Boolean);
   if (!uid) throw new Error("usage: tsx import-universe-to-local.ts <universeId> <localCols>");
 
-  const prodEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".env")));
-  const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".env.local")));
+  const prodEnv = parseDotenv(
+    fs.readFileSync(path.join(repoRoot, ".envs/targets/production.env"))
+  );
+  const localEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".envs/targets/local.env")));
   const prodUrl = prodEnv.SUPABASE_URL!, prodKey = prodEnv.SUPABASE_SERVICE_ROLE!;
   const localUrl = localEnv.SUPABASE_URL!, localKey = localEnv.SUPABASE_SERVICE_ROLE!;
-  if (/127\.0\.0\.1|localhost/.test(prodUrl)) throw new Error(".env is local; refusing");
-  if (!/127\.0\.0\.1|localhost/.test(localUrl)) throw new Error(".env.local not local; refusing");
+  if (/127\.0\.0\.1|localhost/.test(prodUrl)) {
+    throw new Error("Production target is local; refusing");
+  }
+  if (!/127\.0\.0\.1|localhost/.test(localUrl)) throw new Error("Local target is not local; refusing");
 
   const prod = createClient(prodUrl, prodKey);
   const local = createClient(localUrl, localKey);

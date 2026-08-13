@@ -246,7 +246,7 @@ If live routes or images 404, the DB publish is not a completed site release. Co
 
 ### Google Indexing API Workflow
 
-The Google Indexing API job is separate from `.env.analytics`. Local settings belong in ignored `.env.indexing` files; production/GitHub settings should be injected as secrets or variables. The script is guarded twice: it needs `--apply`, and it still exits without submitting unless `GOOGLE_INDEXING_API_ENABLED=true`.
+The Google Indexing API job is separate from analytics. Local settings belong in ignored `.envs/pipelines/indexing.env`; production/GitHub settings should be injected as secrets or variables. The script is guarded twice: it needs `--apply`, and it still exits without submitting unless `GOOGLE_INDEXING_API_ENABLED=true`.
 
 For recurring runs, use Supabase state by setting `GOOGLE_INDEXING_STATE_BACKEND=supabase` with `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE`. That lets the job persist the daily submission count and rotate through older URLs instead of hitting the same sitemap URLs every run.
 

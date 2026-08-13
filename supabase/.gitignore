@@ -3,6 +3,8 @@
 .temp
 
 # dotenvx
+# Safety fallback only: do not create a second env layout here. Repository env
+# values belong in the root ignored `.envs/` tree documented in dev-docs.
 .env.keys
 .env.local
 .env.*.local

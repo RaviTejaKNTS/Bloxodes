@@ -112,7 +112,7 @@ The collector downloads, validates, converts to WebP, uploads to `articles/<arti
 Production publication promotes the exact approved managed-dev WebP bytes to the same object paths and rewrites the reviewed final to production URLs:
 
 ```bash
-NODE_ENV=production npm run collect:article-images -- --manifest <media.json> --file <final.json> --apply --allow-prod
+BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run collect:article-images -- --manifest <media.json> --file <final.json> --apply --allow-prod
 ```
 
 Do not run that command without explicit production publication approval.

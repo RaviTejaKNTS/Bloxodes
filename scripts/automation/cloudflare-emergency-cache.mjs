@@ -28,8 +28,7 @@ function loadEnvFile(path) {
   }
 }
 
-loadEnvFile(resolve(process.cwd(), ".env.codex"));
-loadEnvFile(resolve(process.cwd(), ".env"));
+loadEnvFile(resolve(process.cwd(), ".envs/infrastructure/cloudflare.env"));
 
 const command = process.argv[2] ?? "status";
 const dryRun = process.argv.includes("--dry-run");
@@ -57,7 +56,7 @@ function readPositiveIntArg(name) {
 function apiToken() {
   const token = process.env.CLOUDFLARE_BLOXODES_API;
   if (!token) {
-    throw new Error("Missing CLOUDFLARE_BLOXODES_API. Add the Cloudflare operator token to .env.codex.");
+    throw new Error("Missing CLOUDFLARE_BLOXODES_API. Add it to .envs/infrastructure/cloudflare.env.");
   }
   return token;
 }

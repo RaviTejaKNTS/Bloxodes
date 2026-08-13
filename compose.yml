@@ -3,11 +3,19 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      secrets:
+        - application_env
+        - content_env
+        - distribution_env
+        - production_target_env
     image: bloxodes-web:local
     restart: unless-stopped
     init: true
     env_file:
-      - .env.production
+      - .envs/shared/application.env
+      - .envs/integrations/content.env
+      - .envs/integrations/distribution.env
+      - .envs/targets/production.env
     environment:
       NODE_ENV: production
       HOSTNAME: 0.0.0.0
@@ -30,3 +38,13 @@ services:
 
 volumes:
   next-cache:
+
+secrets:
+  application_env:
+    file: .envs/shared/application.env
+  content_env:
+    file: .envs/integrations/content.env
+  distribution_env:
+    file: .envs/integrations/distribution.env
+  production_target_env:
+    file: .envs/targets/production.env

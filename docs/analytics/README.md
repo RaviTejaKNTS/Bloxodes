@@ -30,12 +30,12 @@ Use the Umami dashboard for normal analysis. Select the `Bloxodes` website after
 
 The website ID is a public tracker identifier, but the repo still keeps operational values in environment configuration rather than duplicating them in reports:
 
-- Local operator source: `.env.codex`, currently under `Umami_website_id`.
+- Local operator source: `.envs/operations/umami.env`, currently under the legacy `Umami_website_id` name.
 - Production build variables:
   - `NEXT_PUBLIC_UMAMI_HOST_URL`
   - `NEXT_PUBLIC_UMAMI_WEBSITE_ID`
 - GitHub Actions passes those variables into the immutable production image through `.github/workflows/dokploy-production-deploy.yml`.
-- Public configuration examples live in `.env.example`.
+- Public configuration examples live under `env/examples/operations/` and `env/examples/shared/`.
 
 Before using an ID for a production change, confirm that the Umami `website` row resolves to `Bloxodes | bloxodes.com`. Never print unrelated environment values while checking it.
 

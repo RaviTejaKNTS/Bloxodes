@@ -1,11 +1,7 @@
 import "../shared/load-env";
 
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { config as loadDotenv } from "dotenv";
+import { readBloxodesEnvFile } from "../shared/env-files";
 import { JSDOM } from "jsdom";
 
 import { extractPlaceId, scrapeRobloxGameMetadata } from "@/lib/roblox/game-metadata";
@@ -77,17 +73,8 @@ const RUNS_WITH_PROD_ENV = process.argv.slice(2).includes("--prod");
 function loadProdEnvIfRequested() {
   if (!RUNS_WITH_PROD_ENV) return;
 
-  const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-  const prodEnvPath = path.join(repoRoot, ".env");
-  if (!fs.existsSync(prodEnvPath)) {
-    throw new Error(`--prod was passed, but ${prodEnvPath} does not exist.`);
-  }
-
-  loadDotenv({
-    path: prodEnvPath,
-    override: true,
-    quiet: true
-  });
+  const values = readBloxodesEnvFile("targets/production.env");
+  for (const [key, value] of Object.entries(values)) process.env[key] = value;
 }
 
 loadProdEnvIfRequested();
@@ -114,7 +101,7 @@ Options:
   --slug <slug>            Process one game.
   --limit <count>          Max matching code pages to process. Defaults to all matches.
   --concurrency <count>    Number of code pages to process at once. Defaults to ${DEFAULT_CONCURRENCY}.
-  --prod                   Use .env directly instead of local development env.
+  --prod                   Use the explicit production target instead of local development.
   --published-only         Only process published code pages.
   --overwrite              Replace existing non-empty links/IDs when a new value is found.
   -h, --help               Show this help message.
@@ -642,7 +629,7 @@ async function main() {
 
   console.log(
     `${options.apply ? "Applying" : "Dry run for"} ${codePages.length} code page${codePages.length === 1 ? "" : "s"} against ${
-      options.prod ? ".env" : "local/dev env"
+      options.prod ? ".envs/targets/production.env" : "selected local/dev environment"
     }${
       options.overwrite ? " with overwrite enabled" : ""
     } with concurrency ${options.concurrency}. Target: intro_md present, roblox_link missing, universe_id missing. Twitter/X links are ignored.`

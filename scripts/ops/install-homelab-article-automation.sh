@@ -19,7 +19,7 @@ fi
 install -d -m 0750 -o root -g teja "${ENV_DIR}"
 if [[ ! -e "${ENV_PATH}" ]]; then
   install -m 0640 -o root -g teja \
-    "${REPO_ROOT}/docs/automation/homelab-article-automation.env.example" \
+    "${REPO_ROOT}/env/examples/pipelines/articles.env.example" \
     "${ENV_PATH}"
   echo "Created ${ENV_PATH} with placeholders; replace them before enabling timers."
 fi

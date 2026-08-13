@@ -21,6 +21,7 @@ Prefer the `package.json` scripts when available so command names stay stable ev
 Local development note:
 
 - shared script env loading lives in `scripts/shared/load-env.ts`
-- scripts now prefer `.env.local` for local work, but they do not override real process env vars
-- Google Indexing API jobs load `.env.indexing.local` / `.env.indexing` after the normal env files; keep indexing secrets separate from `.env.analytics`
+- local scripts load the true local profile; managed development and production preview are explicit profiles, and process env still wins
+- Google Indexing loads `.envs/pipelines/indexing.env`; keep indexing secrets separate from analytics
 - production jobs can keep injecting `SUPABASE_*` and other env vars the same way they do today
+- see `dev-docs/environment.md` for profiles, overlays, examples, migration, and verification commands

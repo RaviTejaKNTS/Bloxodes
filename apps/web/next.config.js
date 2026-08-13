@@ -1,16 +1,18 @@
 const path = require("node:path");
 const dotenv = require("dotenv");
+const fs = require("node:fs");
 
 const repoRoot = path.resolve(__dirname, "../..");
-const envFiles = [
-  `.env.${process.env.NODE_ENV || "development"}.local`,
-  process.env.NODE_ENV === "test" ? null : ".env.local",
-  `.env.${process.env.NODE_ENV || "development"}`,
-  ".env"
-].filter(Boolean);
-
-for (const file of envFiles) {
-  dotenv.config({ path: path.join(repoRoot, file), override: false, quiet: true });
+if (process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test") {
+  for (const file of [
+    ".envs/shared/application.env",
+    ".envs/integrations/content.env",
+    ".envs/integrations/distribution.env",
+    ".envs/targets/local.env"
+  ]) {
+    const envPath = path.join(repoRoot, file);
+    if (fs.existsSync(envPath)) dotenv.config({ path: envPath, override: false, quiet: true });
+  }
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

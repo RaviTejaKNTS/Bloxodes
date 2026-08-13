@@ -99,7 +99,9 @@ function printUsage() {
   console.log(
     "Usage: npm run articles:curate -- [--apply] [--limit N] [--model MODEL]"
   );
-  console.log("GROQ_API_KEY is required. For local reuse, set GROQ_ENV_FILE=/absolute/path/to/.env.");
+  console.log(
+    "GROQ_API_KEY is required. Use BLOXODES_ENV_OVERLAYS=articles or set GROQ_ENV_FILE to an explicit env file."
+  );
 }
 
 function parseArgs(argv: string[]): Options {

@@ -25,8 +25,8 @@ function readEnvFile(relativePath: string): Record<string, string> {
 export function getTargetConfig(target: DatabaseTarget): TargetConfig {
   const envPath =
     target === "prod"
-      ? process.env.PROD_ENV_FILE ?? ".env"
-      : process.env.LOCAL_ENV_FILE ?? ".env.development.local";
+      ? process.env.PROD_ENV_FILE ?? ".envs/targets/production.env"
+      : process.env.LOCAL_ENV_FILE ?? ".envs/targets/local.env";
   const env = readEnvFile(envPath);
   const url = env.SUPABASE_URL || (target === "local" ? "http://127.0.0.1:54321" : "");
   const serviceRole = env.SUPABASE_SERVICE_ROLE;

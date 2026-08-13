@@ -10,7 +10,9 @@ import { fileURLToPath } from "node:url";
 import { parse as parseDotenv } from "dotenv";
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const prodEnv = parseDotenv(fs.readFileSync(path.join(repoRoot, ".env")));
+const prodEnv = parseDotenv(
+  fs.readFileSync(path.join(repoRoot, ".envs/targets/production.env"))
+);
 
 const CODE = "roblox-music-ids";
 const base = prodEnv.SUPABASE_URL!;

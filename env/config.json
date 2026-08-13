@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "profiles": {
+    "local": [
+      "shared/application.env",
+      "integrations/content.env",
+      "integrations/distribution.env",
+      "targets/local.env"
+    ],
+    "managed-dev": [
+      "shared/application.env",
+      "integrations/content.env",
+      "integrations/distribution.env",
+      "targets/managed-dev.env"
+    ],
+    "production-preview": [
+      "shared/application.env",
+      "integrations/content.env",
+      "integrations/distribution.env",
+      "targets/production.env"
+    ],
+    "process-only": []
+  },
+  "overlays": {
+    "analytics": ["operations/analytics.env"],
+    "articles": ["pipelines/articles.env"],
+    "cloudflare": ["infrastructure/cloudflare.env"],
+    "dokploy": ["infrastructure/dokploy.env"],
+    "homelab": ["infrastructure/homelab.env", "pipelines/articles.env"],
+    "indexing": ["pipelines/indexing.env"],
+    "northflank": ["infrastructure/northflank.env"],
+    "northflank-stats": ["infrastructure/northflank-stats.env"],
+    "vps": ["infrastructure/vps.env"]
+  }
+}

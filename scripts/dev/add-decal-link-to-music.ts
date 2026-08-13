@@ -1,6 +1,6 @@
 /**
  * Add a reciprocal "Roblox decal IDs" cross-link to the music IDs page intro.
- * Idempotent. Target local (.env.local) or prod (.env) via --target.
+ * Idempotent. Target explicit local or production profiles via --target.
  * Prod runs also enqueue a revalidation event.
  *   tsx scripts/dev/add-decal-link-to-music.ts --target=local
  *   tsx scripts/dev/add-decal-link-to-music.ts --target=prod
@@ -16,7 +16,11 @@ if (target !== "local" && target !== "prod") {
   throw new Error('Pass --target=local or --target=prod');
 }
 
-const env = parseDotenv(fs.readFileSync(path.join(repoRoot, target === "prod" ? ".env" : ".env.local")));
+const env = parseDotenv(
+  fs.readFileSync(
+    path.join(repoRoot, target === "prod" ? ".envs/targets/production.env" : ".envs/targets/local.env")
+  )
+);
 const CODE = "roblox-music-ids";
 const base = env.SUPABASE_URL!;
 const key = env.SUPABASE_SERVICE_ROLE!;

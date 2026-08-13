@@ -10,22 +10,12 @@ if [[ -z "$main_checkout" || "$repo_root" == "$main_checkout" ]]; then
 fi
 
 linked_env_count=0
-shopt -s nullglob
-for source_path in "$main_checkout"/.env*; do
-  [[ -e "$source_path" || -L "$source_path" ]] || continue
-
-  filename="${source_path##*/}"
-  git -C "$main_checkout" check-ignore -q -- "$filename" || continue
-
-  destination_path="$repo_root/$filename"
-  if [[ -e "$destination_path" || -L "$destination_path" ]]; then
-    continue
-  fi
-
-  ln -s "$source_path" "$destination_path"
-  linked_env_count=$((linked_env_count + 1))
-done
-shopt -u nullglob
+source_env_dir="$main_checkout/.envs"
+destination_env_dir="$repo_root/.envs"
+if [[ -d "$source_env_dir" && ! -e "$destination_env_dir" && ! -L "$destination_env_dir" ]]; then
+  ln -s "$source_env_dir" "$destination_env_dir"
+  linked_env_count=1
+fi
 
 mkdir -p "$repo_root/tmp" "$repo_root/tmp/test-reports"
 
@@ -44,6 +34,6 @@ if [[ ! -d "$repo_root/node_modules" || "$installed_hash" != "$lock_hash" ]]; th
   printf '%s\n' "$lock_hash" > "$install_marker"
 fi
 
-printf 'Worktree ready (%d env item%s linked).\n' \
+printf 'Worktree ready (%d env director%s linked).\n' \
   "$linked_env_count" \
-  "$([[ "$linked_env_count" -eq 1 ]] && printf '' || printf 's')"
+  "$([[ "$linked_env_count" -eq 1 ]] && printf 'y' || printf 'ies')"

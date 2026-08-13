@@ -85,12 +85,7 @@ type StateStore = {
 };
 
 function loadIndexingEnv() {
-  const nodeEnv = process.env.NODE_ENV ?? "development";
-  const candidates = [
-    `.env.indexing.${nodeEnv}.local`,
-    ".env.indexing.local",
-    ".env.indexing"
-  ];
+  const candidates = [".envs/pipelines/indexing.env"];
 
   for (const relativePath of candidates) {
     const envPath = path.join(REPO_ROOT, relativePath);

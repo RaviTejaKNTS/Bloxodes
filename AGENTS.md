@@ -5,6 +5,9 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ## Start Here
 
+- `dev-docs/README.md`: canonical last-verified architecture and operations index; prefer this over old `docs/` and `agents/` narratives for current-state understanding.
+- `dev-docs/architecture.md`: verified production request, data, and automation topology plus known degraded components.
+- `dev-docs/environment.md`: env profiles, overlays, ignored value storage, committed examples, runtime ownership, and safety rules.
 - `apps/extension/AGENTS.md`: Chrome MV3 extension packaging, Roblox injection, API use, and Chrome Web Store update rules.
 - `apps/mobile/AGENTS.md`: Expo React Native app scope, mobile API contract, and local testing commands.
 - `apps/web/src/app/AGENTS.md`: App Router, layouts, feeds, auth routes, and API conventions.
@@ -12,8 +15,8 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `apps/web/src/app/api/AGENTS.md`: JSON endpoints, mutation safety, session/progress flows, and revalidation behavior.
 - `apps/web/src/lib/AGENTS.md`: shared data access, caching, SEO helpers, auth/security utilities, and domain modules.
 - `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
-- `docs/testing/content-release-runbook.md`: required daily release decision tree, code-first/DB-second publishing order, automatic checks, targeted verification, manual audit options, and failure handling.
-- `docs/automation/homelab-content-pipeline.md`: homelab access, repository and credential boundaries, systemd schedules, health checks, GitHub/Grok setup, and safe content-release operation.
+- `dev-docs/operations/deployment.md`: current production deployment flow and ownership.
+- `dev-docs/infrastructure/homelab.md`: current homelab article automation and health.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.
@@ -27,7 +30,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Journey automatic in-content ad placement, including pagination and hydrated DOM verification.
 - `.agents/skills/bloxodes-release-e2e/SKILL.md`: explicit-only fast publication of completed work directly to production, including required deployment or database publication, local production sync, and retaining the task worktree for follow-up.
-- `docs/analytics/README.md`: Umami/GA4 ownership, access, event taxonomy, verification, and the home for future analytics reports.
+- `dev-docs/pipelines/indexing-distribution.md`: current indexing, analytics, and distribution ownership.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
 
 ## Architecture Snapshot
@@ -36,7 +39,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - Next.js App Router application in `apps/web`, with public content in `apps/web/src/app/(site)` and account/auth flows in `apps/web/src/app/(secure)` plus `apps/web/src/app/auth`.
 - Chrome extension source lives in `apps/extension`. It builds a Chrome MV3 upload package and calls Bloxodes web APIs; it is not part of Dokploy deployment.
 - Expo React Native mobile source lives in `apps/mobile`. The app is an expo-router client with native codes, catalog, wiki/collection, tools, events, quiz, checklist, and stats screens, all backed by `/api/mobile/*` web routes plus optional bearer-token Roblox login.
-- Supabase is the primary content and product data store. Production now uses the self-hosted Supabase stack on the same Hostinger VPS as the web app, with API at `https://database.bloxodes.com`, Studio at `https://studio.bloxodes.com`, and public storage/media URLs at `https://media.bloxodes.com`; the old managed Supabase project is rollback/source-of-truth fallback only until deletion.
+- Supabase is the primary content and product data store. Production uses the self-hosted stack on the same Hostinger VPS as the web app, with API at `https://database.bloxodes.com`, Studio at `https://studio.bloxodes.com`, and public storage/media URLs at `https://media.bloxodes.com`. A separate managed `*.supabase.co` project remains the non-production article queue/writer target; do not confuse it with production or true local Supabase.
 - Local datasets in `data/` and `apps/web/src/data/` back a few tools/catalog sections where structured content does not live in Supabase.
 - Operational work happens through root `scripts/` and Supabase edge functions in `supabase/functions/`.
 - Dokploy deploys the public web app from the root Dockerfile, which builds `@bloxodes/web` and runs `apps/web/server.js`.
@@ -45,11 +48,14 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 
 ## Working Defaults
 
+- Treat canonical documentation maintenance as part of implementation. Any change to architecture, env ownership, infrastructure, deployment, data flow, or a pipeline must update its existing `dev-docs/` owner in the same change. Keep the stable filename, refresh `Last verified` only after rechecking evidence, and do not create parallel current-state docs. New rough notes belong in `docs/YYYY-MM-DD-topic.md`.
 - Keep pages server-first. Move repeated loaders and rendering helpers into route-family `page-data.tsx` files or `apps/web/src/lib/*`.
 - Prefer adding or extending typed helpers in `apps/web/src/lib/db.ts` instead of scattering raw Supabase queries across page files.
 - For public content changes, check all of: metadata, JSON-LD, pagination, sitemap coverage, feed coverage, and `/api/revalidate`.
 - For mutations, keep origin validation, rate limiting, and tag revalidation explicit.
 - Prefer `npm run ...` aliases over direct `tsx path/to/script.ts` when an alias already exists.
+- Treat `docs/`, `Writing plans/`, and legacy `agents/` narratives as notes, plans, reports, or historical evidence that can be outdated or unimplemented. Current architecture belongs in the existing owning `dev-docs/` file with a `Last verified` date.
+- Store real workstation env values only in ignored `.envs/`; committed contracts live in `env/examples/`. Development defaults to true local, production/test use process-only, and production preview is explicit. See `dev-docs/environment.md`.
 - Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_collection_pages.wiki_slug`.
 - Invoke `bloxodes-release-e2e` only when the user explicitly names `$bloxodes-release-e2e` or asks for an `e2e`/`end-to-end` production release. Treat that invocation as confirmation that final checks passed. Publish the explicit allowlist directly to `production` without force; use a PR only when the user explicitly requests one. Never include another branch/worktree's changes. After release, synchronize local `production` but keep the current task worktree and branch for immediate follow-up until the user asks for cleanup.
 

@@ -1,9 +1,6 @@
 import "../shared/load-env";
 
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { parse as parseDotenv } from "dotenv";
+import { readBloxodesEnvFile } from "../shared/env-files";
 import { spawn } from "node:child_process";
 
 // Occasional preview against the PROD Supabase on port 5000.
@@ -11,7 +8,7 @@ import { spawn } from "node:child_process";
 // content/writing workflows must run there first. This command only forces the
 // Supabase connection to prod for read-only design/data spot checks.
 
-const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+const repoRoot = process.cwd();
 
 // Supabase keys we override to prod. Everything else keeps the normal dev config
 // loaded by ../shared/load-env (local-first).
@@ -19,9 +16,11 @@ const PROD_SUPABASE_KEYS = [
   "SUPABASE_URL",
   "SUPABASE_ANON_KEY",
   "SUPABASE_SERVICE_ROLE",
+  "SUPABASE_DB_PASSWORD",
   "NEXT_PUBLIC_SUPABASE_URL",
   "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-  "SUPABASE_MEDIA_BUCKET"
+  "SUPABASE_MEDIA_BUCKET",
+  "SUPABASE_MEDIA_PUBLIC_URL"
 ];
 
 function isLocalSupabaseUrl(value: string | undefined): boolean {
@@ -34,16 +33,11 @@ function isLocalSupabaseUrl(value: string | undefined): boolean {
   }
 }
 
-const baseEnvPath = path.join(repoRoot, ".env");
-if (!fs.existsSync(baseEnvPath)) {
-  throw new Error("Cannot start prod preview: base .env (prod credentials) not found.");
-}
-
-const baseEnv = parseDotenv(fs.readFileSync(baseEnvPath));
+const baseEnv = readBloxodesEnvFile("targets/production.env");
 for (const key of PROD_SUPABASE_KEYS) {
   if (baseEnv[key]) {
     // Set in process.env so Next (@next/env does not override pre-set keys) keeps prod
-    // even though .env.local points Supabase at the local stack.
+    // even though the default local profile points Supabase at the local stack.
     process.env[key] = baseEnv[key];
   }
 }
@@ -51,7 +45,7 @@ for (const key of PROD_SUPABASE_KEYS) {
 const supabaseUrl = process.env.SUPABASE_URL;
 if (isLocalSupabaseUrl(supabaseUrl)) {
   throw new Error(
-    `Refusing to start prod preview against local SUPABASE_URL (${supabaseUrl ?? "unset"}). Check .env.`
+    `Refusing to start prod preview against local SUPABASE_URL (${supabaseUrl ?? "unset"}). Check .envs/targets/production.env.`
   );
 }
 

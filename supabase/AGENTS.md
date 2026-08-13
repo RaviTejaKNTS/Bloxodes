@@ -2,6 +2,10 @@
 
 Scope: `supabase/`.
 
+Current verified self-hosted/local topology, versions, health caveats, and upgrade watch items live in `dev-docs/data/supabase.md`. Treat older migration plans in `docs/` as historical evidence.
+
+Update that existing canonical document in the same change whenever the live topology, versions, env ownership, migration model, or Edge Function flow changes. Do not create a parallel current-state Supabase doc.
+
 This folder defines the app's database contract and edge-function behavior.
 
 ## Layout
@@ -15,7 +19,7 @@ This folder defines the app's database contract and edge-function behavior.
 
 ## Current Responsibilities
 
-- Production Supabase is self-hosted on the same VPS as the web app. The production API endpoint is `https://database.bloxodes.com`; Studio is `https://studio.bloxodes.com`; public storage/media URLs should use `https://media.bloxodes.com`. Managed Supabase is a rollback/source fallback, not the hot production path, and should not be referenced by runtime rows before the old project is deleted.
+- Production Supabase is self-hosted on the same VPS as the web app. The production API endpoint is `https://database.bloxodes.com`; Studio is `https://studio.bloxodes.com`; public storage/media URLs should use `https://media.bloxodes.com`. The separate managed `*.supabase.co` project is non-production and currently owns article queue/writer work; it must not be used as the public site's production runtime or media origin.
 - Core public content tables and views for codes, articles, checklists, quizzes, wiki pages, tools, catalog pages, authors, puzzles, stats, and events.
 - User/account data in `app_users` plus session/progress/comment tables used by account and community features.
 - Search, ranking, music IDs, free items, and universe enrichment data that power public pages and API routes.

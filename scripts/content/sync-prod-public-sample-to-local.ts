@@ -44,20 +44,20 @@ function isLocalSupabaseUrl(value: string): boolean {
   return value.includes("127.0.0.1") || value.includes("localhost");
 }
 
-const prodEnv = readEnvFile(".env");
-const localEnv = readEnvFile(".env.local");
+const prodEnv = readEnvFile(".envs/targets/production.env");
+const localEnv = readEnvFile(".envs/targets/local.env");
 
-const prodUrl = required(prodEnv, "SUPABASE_URL", ".env");
-const prodKey = required(prodEnv, "SUPABASE_SERVICE_ROLE", ".env");
-const localUrl = required(localEnv, "SUPABASE_URL", ".env.local");
-const localKey = required(localEnv, "SUPABASE_SERVICE_ROLE", ".env.local");
+const prodUrl = required(prodEnv, "SUPABASE_URL", ".envs/targets/production.env");
+const prodKey = required(prodEnv, "SUPABASE_SERVICE_ROLE", ".envs/targets/production.env");
+const localUrl = required(localEnv, "SUPABASE_URL", ".envs/targets/local.env");
+const localKey = required(localEnv, "SUPABASE_SERVICE_ROLE", ".envs/targets/local.env");
 
 if (isLocalSupabaseUrl(prodUrl)) {
-  throw new Error(".env SUPABASE_URL appears to be local. Refusing to use it as production source.");
+  throw new Error("Production target SUPABASE_URL appears to be local. Refusing to use it as production source.");
 }
 
 if (!isLocalSupabaseUrl(localUrl)) {
-  throw new Error(".env.local SUPABASE_URL is not local. Refusing to write.");
+  throw new Error("Local target SUPABASE_URL is not local. Refusing to write.");
 }
 
 const source = createClient(prodUrl, prodKey, {

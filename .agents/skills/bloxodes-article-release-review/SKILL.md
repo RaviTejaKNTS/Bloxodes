@@ -33,7 +33,7 @@ Do not treat newly completed rows that appeared after a review as included in â€
 1. Start or reuse the local web app with managed-dev Supabase:
 
 ```bash
-npm run dev:local
+npm run dev:managed
 ```
 
 Use the actual port reported by the server.
@@ -54,7 +54,7 @@ The managed-dev article row can render locally even when its `final.json` and re
 
 Before publishing, ensure the current task worktree contains the selected row's exact `result_path` and sibling `media.json` when present remotely. Legacy repository-owned article media may still require `apps/web/public/articles/<slug>/`; new article source images remain in managed-dev Supabase Storage and are promoted from `media.json` instead.
 
-- Load connection details from `.env.homelab`; never print their values.
+- Load connection details from `.envs/infrastructure/homelab.env`; never print their values.
 - Read and stage only the exact selected paths from `$HOMELAB_REPO_ROOT` into a temporary directory.
 - Copy a missing artifact into the current task worktree.
 - If a local target exists with different content, stop and report the conflict. Never overwrite it.
@@ -72,7 +72,7 @@ The user's explicit approval in the current message authorizes production writes
    - for each `media.json`, promote the exact approved managed-dev WebP bytes to the same production Storage object paths and rewrite `final.json` to production media URLs:
 
 ```bash
-NODE_ENV=production npm run collect:article-images -- --manifest <media.json> --file <final.json> --apply --allow-prod
+BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run collect:article-images -- --manifest <media.json> --file <final.json> --apply --allow-prod
 ```
 
    - run the selected article import production dry-run;
@@ -80,8 +80,8 @@ NODE_ENV=production npm run collect:article-images -- --manifest <media.json> --
    - dry-run, apply, and read back image provenance for each promoted manifest:
 
 ```bash
-NODE_ENV=production npm run sync:article-image-provenance -- --manifest <media.json> --allow-prod
-NODE_ENV=production npm run sync:article-image-provenance -- --manifest <media.json> --apply --allow-prod
+BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run sync:article-image-provenance -- --manifest <media.json> --allow-prod
+BLOXODES_ENV_PROFILE=production-preview NODE_ENV=production npm run sync:article-image-provenance -- --manifest <media.json> --apply --allow-prod
 ```
 
    - require every production `article_source_images.public_url` and `content_md` image URL to match the promoted production Storage object;

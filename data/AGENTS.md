@@ -2,6 +2,10 @@
 
 Scope: `data/` plus related static data under `src/data/`.
 
+Environment boundaries and database-vs-dataset ownership are documented in `dev-docs/data/data-environments.md`.
+
+When dataset ownership or a consuming pipeline changes, update that existing canonical file or the owning existing pipeline document in the same change. Do not create a replacement current-state doc.
+
 These files back tools, game collections, and broad catalog sections that are not fully modeled in Supabase.
 
 When turning a game dataset into public wiki or collection pages, use `agents/content-writing/agents.md` and the matching wiki or game collection skill. Use `bloxodes-game-collection-refresh` when checking and refreshing one existing collection dataset, one game's collection datasets, or every registered game collection.

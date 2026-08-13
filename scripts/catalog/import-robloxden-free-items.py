@@ -59,9 +59,9 @@ def resolve_env_path() -> str:
     repo_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     node_env = os.environ.get("NODE_ENV", "development")
     candidates = (
-        [".env.production.local", ".env.production", ".env"]
+        [".envs/targets/production.env"]
         if node_env == "production"
-        else [".env.local", f".env.{node_env}.local", f".env.{node_env}", ".env"]
+        else [".envs/targets/local.env"]
     )
     for relative_path in candidates:
         candidate = os.path.join(repo_root, relative_path)
