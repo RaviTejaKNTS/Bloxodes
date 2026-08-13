@@ -168,4 +168,21 @@ The live run will follow this order so each downstream result can be attributed 
 
 ## Next checkpoint
 
-The next natural checkpoints are hourly ranks at `:30`, current index at `:40`, COLD refresh at `:47`, and then the following index at the next hour's `:40`. Because the current order publishes COLD one cycle late, the meaningful recurrence checkpoint is after the next COLD run has finished and the following index has completed. Do not launch a duplicate large COLD run while the scheduled worker or its group lock is active.
+The repaired natural checkpoint is now one chained COLD transaction beginning at `:47`: refresh up to 7,000 due rows, rebuild the current index, then enqueue revalidation. Do not launch a duplicate large COLD run while the scheduled worker or its group lock is active.
+
+## August 13 production completion
+
+Release `112462b6` deployed successfully. Its immutable-SHA gate, database health gate, Cloudflare validation/purge, and live smoke all passed. Production migrations `20260920000009` through `20260920000012` are applied and recorded.
+
+- The recurrence migration repaired 2,091 loop victims during application. At final verification, all 3,450 exact missing-response rows were COLD with `game_details_unavailable`, zero were NEW, zero had lost their reason, and zero were prematurely due.
+- Bounded live COLD trials passed: 499/500 in 30 seconds, then 1,000/1,000 in 89 seconds. The immediate recovery pass refreshed 2,143 of the 2,145 rows that remained due and published the index.
+- The next natural `:47` cron exercised the new full path: 7,000 claimed, 6,996 succeeded, four missing responses handled, index rebuilt to 99,770 rows, and revalidation enqueued. The wrapper completed at 05:01:10 UTC.
+- Source state after publication: 100,079 source universes, 99,768 with stored player values, and 96,629 fresh within 24 hours. The read index had 99,770 rows and 96,373 publicly fresh games.
+- The rendered production listing showed page 1 of 1,928, exactly matching 96,373 games at 50 rows per page.
+- Current-player freshness and growth-history coverage are separate. At completion, 95,776 of the 96,373 visible games had a 24-hour baseline; 597 did not. Only 9,980 had a 7-day baseline because the Aug 5-6 collection incident left too little hourly history at the comparison timestamp. Aug 7 has 96,326 finalized daily rows, so this historical gap should age out at the next seven-day boundary; it is not a current refresh or render regression. Do not use 7-day `Not tracked` labels alone as evidence that current stats failed.
+- Operational `/api/health` returned HTTP 200 with `degraded`, not `unhealthy`: trackable coverage was 99.998%; only the conservative due-ratio check warned at 12.45%. No expired leases, stuck runs, freshness failures, or worker-outcome failures remained.
+- Final strict audit completed successfully with the same degraded-only due warning. The external five-minute GitHub health monitor completed successfully.
+- Revalidation and cache-warm queues both drained to zero.
+- The unused daily-rank writer is absent from cron. Autovacuum cleared dead tuples to zero, the table uses the new 2%/50K thresholds, and only its primary-key index remains; the unused duplicate 1 GB index is gone.
+
+One operational follow-up remains outside the data-path repair: the VPS nightly worker build cannot fetch the private repository because it has no GitHub credential. The currently running worker image was rebuilt from the exact committed 24-file release snapshot with critical hashes verified. A dedicated public key exists on the VPS, but registering it as a persistent read-only GitHub deploy key requires explicit user approval. Until then, future code releases must rebuild or transfer the worker snapshot manually; this does not affect the repaired hourly pipeline using the current image.
