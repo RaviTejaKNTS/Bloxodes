@@ -23,8 +23,8 @@ Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`,
 
 ## Synchronization
 
-- `scripts/ops/sync-homelab-checkout.sh --expected-sha <full-sha>` performs a read-only preflight by default. It requires the clean `production` branch, stopped services, an exact remote SHA, matching installed units, and readiness before an apply can succeed.
-- Adding `--apply` fetches and fast-forwards to that exact approved SHA, conditionally runs `npm ci`, verifies unit files/readiness, and restores the timer's prior state. This is a remote synchronization mutation and requires explicit approval.
+- Execute the released `scripts/ops/sync-homelab-checkout.sh --expected-sha <full-sha>` on the homelab through configured operator access. It performs a read-only preflight by default and requires the clean `production` branch, stopped services, and an exact remote SHA before apply.
+- Adding `--apply` fetches and fast-forwards to that exact approved SHA, conditionally runs `npm ci`, verifies unit files/readiness, and restores the timer's prior state. An explicit e2e/end-to-end release authorizes this guarded checkout synchronization for every release, including releases that do not change homelab-owned files.
 - `scripts/ops/install-homelab-article-automation.sh --apply <full-sha>` installs reviewed units only from an exact clean approved checkout and preserves the timer state.
 - The checkout synchronization command was applied and verified on 2026-08-14. The installer remains available for reviewed unit-file changes; do not run it when synchronization alone proves the installed units already match.
 
@@ -35,3 +35,4 @@ Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`,
 - Human review/import is required before production publication.
 - Homelab operator access belongs in `.envs/infrastructure/homelab.env`; writer runtime values belong in `.envs/pipelines/articles.env` and the host env file.
 - Never copy the production Supabase target into the homelab writer env; queue and media staging remain managed development.
+- E2e checkout-sync authority does not include env changes, unit installation, stopping active discovery/writer jobs, service restarts, or unrelated host mutations. If the production delta changes installed units, a service is active, or preflight fails, leave the checkout unchanged and report synchronization pending.

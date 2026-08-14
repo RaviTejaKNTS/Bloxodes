@@ -2,7 +2,7 @@
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
 Last verified: 2026-08-14
-Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, Edge Function release smoke, and platform checks
+Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
 
 ## Normal Path
 
@@ -37,8 +37,9 @@ Production Edge Functions use the same immutable-SHA boundary. `npm run supabase
 2. Run `npm run platform:sync:check -- --local-only` before release.
 3. After an approved repository release, require the public deploy health SHA and database health to match.
 4. Apply approved schema changes to managed development through the Supabase connector, then list migrations and run readiness/advisors.
-5. Obtain separate production permission before production schema, Edge Function, VPS, or homelab mutations.
-6. Synchronize the homelab to the exact approved production SHA and run the full read-only platform check.
+5. Obtain separate production permission before production schema, Edge Function, VPS, or homelab mutations other than the guarded checkout synchronization included in an explicit e2e release. That checkout-only authorization does not include env changes, unit installation, job interruption, or service control.
+6. After every explicit e2e release, execute the released `scripts/ops/sync-homelab-checkout.sh` on the homelab: dry-run and then apply it against the exact `origin/production` SHA. If the production delta changes installed units, article automation is active, or preflight fails, leave the checkout unchanged and report synchronization pending instead of forcing it. If apply fails after starting, stop and report the exact resulting remote state.
+7. Run the full read-only platform check after the synchronization attempt and report any remaining drift.
 
 The check reports drift; it never fixes drift. Database/Storage backup work is intentionally outside this sequence for now.
 

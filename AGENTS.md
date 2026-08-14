@@ -31,7 +31,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `.agents/skills/bloxodes-*-writing/SKILL.md`: self-contained page-type writing workflows.
 - `.agents/skills/bloxodes-*-suggestions/SKILL.md`: focused content opportunity research before writing pages.
 - `.agents/skills/bloxodes-simplify-journey-dom/SKILL.md`: audit and flatten card/list page families for Journey automatic in-content ad placement, including pagination and hydrated DOM verification.
-- `.agents/skills/bloxodes-release-e2e/SKILL.md`: explicit-only fast publication of completed work directly to production, including required deployment or database publication, local production sync, and retaining the task worktree for follow-up.
+- `.agents/skills/bloxodes-release-e2e/SKILL.md`: explicit-only fast publication of completed work directly to production, including required deployment or database publication, exact-SHA local and guarded homelab checkout synchronization, and retaining the task worktree for follow-up.
 - `dev-docs/pipelines/indexing-distribution.md`: current indexing, analytics, and distribution ownership.
 - `agents/agents.md`: legacy inventory index kept for quick repo-wide reference.
 
@@ -59,7 +59,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - Treat `docs/`, `Writing plans/`, and legacy `agents/` narratives as notes, plans, reports, or historical evidence that can be outdated or unimplemented. Current architecture belongs in the existing owning `dev-docs/` file with a `Last verified` date.
 - Store real workstation env values only in ignored `.envs/`; committed contracts live in `env/examples/`. Development defaults to managed Supabase development, production/test use process-only, and production preview is explicit. See `dev-docs/environment.md`.
 - Keep slug ownership explicit: `roblox_universes.slug` is the stats/universe URL slug for `/stats/games/*` and may include the universe ID. Never copy it into editorial page slugs such as `code_pages.slug`, `wiki_pages.slug`, `events_pages.slug`, `checklist_pages.slug`, `quiz_pages.code`, or `wiki_collection_pages.wiki_slug`.
-- Invoke `bloxodes-release-e2e` only when the user explicitly names `$bloxodes-release-e2e` or asks for an `e2e`/`end-to-end` production release. Treat that invocation as confirmation that final checks passed. Publish the explicit allowlist directly to `production` without force; use a PR only when the user explicitly requests one. Never include another branch/worktree's changes. After release, synchronize local `production` but keep the current task worktree and branch for immediate follow-up until the user asks for cleanup.
+- Invoke `bloxodes-release-e2e` only when the user explicitly names `$bloxodes-release-e2e` or asks for an `e2e`/`end-to-end` production release. Treat that invocation as confirmation that final checks passed. Publish the explicit allowlist directly to `production` without force; use a PR only when the user explicitly requests one. Never include another branch/worktree's changes. After every release, synchronize local `production` and use the guarded script to synchronize the homelab checkout to the exact production SHA, but do not change homelab env, install units, interrupt jobs, or control services under that authorization. Keep the current task worktree and branch for immediate follow-up until the user asks for cleanup.
 
 ## Design Direction
 
