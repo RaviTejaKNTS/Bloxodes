@@ -5,7 +5,18 @@ import test from "node:test";
 import { statsPipelineLeaseName } from "../../shared/stats-pipeline-lease";
 import { shouldUseDatabaseRankRefresh } from "../rank-universe-stats";
 import { assignStatsTier, shouldPreserveStatsTierReason } from "../stats-tier";
-import { hasAnyFreshUniverseStat, universeClaimBatchSize } from "../update-universe-hourly-stats";
+import {
+  hasAnyFreshUniverseStat,
+  isTransientDataApiFailure,
+  runDataApiOperation,
+  universeClaimBatchSize
+} from "../update-universe-hourly-stats";
+
+const immediateRetry = {
+  baseDelayMs: 0,
+  maxDelayMs: 0,
+  sleep: async () => {}
+};
 
 test("universe claims stay below the production Data API response cap", () => {
   assert.equal(universeClaimBatchSize(Number.POSITIVE_INFINITY), 500);
@@ -13,6 +24,105 @@ test("universe claims stay below the production Data API response cap", () => {
   assert.equal(universeClaimBatchSize(237), 237);
   assert.equal(universeClaimBatchSize(20_000, 5_000), 500);
   assert.equal(universeClaimBatchSize(20_000, 250), 250);
+});
+
+test("transient Data API failures retry individual operations and then succeed", async () => {
+  let calls = 0;
+  const result = await runDataApiOperation(
+    "test operation",
+    async () => {
+      calls += 1;
+      if (calls < 3) {
+        return {
+          data: null,
+          error: { code: "PGRST001", message: "An invalid response was received from the upstream server" },
+          status: 502
+        };
+      }
+      return { data: "ok", error: null, status: 200 };
+    },
+    { ...immediateRetry, retryLimit: 3 }
+  );
+
+  assert.equal(calls, 3);
+  assert.equal(result.data, "ok");
+});
+
+test("non-transient Data API failures are not retried", async () => {
+  let calls = 0;
+  await assert.rejects(
+    runDataApiOperation(
+      "test operation",
+      async () => {
+        calls += 1;
+        return { data: null, error: { code: "23505", message: "duplicate key" }, status: 409 };
+      },
+      { ...immediateRetry, retryLimit: 3 }
+    ),
+    /duplicate key/
+  );
+  assert.equal(calls, 1);
+});
+
+test("transient Data API retry exhaustion returns the final failure", async () => {
+  let calls = 0;
+  await assert.rejects(
+    runDataApiOperation(
+      "test operation",
+      async () => {
+        calls += 1;
+        return { data: null, error: { code: "PGRST003", message: "pool timeout" }, status: 504 };
+      },
+      { ...immediateRetry, retryLimit: 2 }
+    ),
+    /pool timeout/
+  );
+  assert.equal(calls, 3);
+});
+
+test("ambiguous mutation retries reuse one fixed payload", async () => {
+  const payload = Object.freeze({ universe_id: 123, hour_start: "2026-08-14T10:00:00.000Z", sample_count: 4 });
+  const attemptedPayloads: Array<typeof payload> = [];
+  let stored: typeof payload | null = null;
+  let calls = 0;
+
+  await runDataApiOperation(
+    "hourly upsert",
+    async () => {
+      calls += 1;
+      attemptedPayloads.push(payload);
+      stored = { ...payload };
+      return calls === 1
+        ? { data: null, error: { message: "An invalid response was received from the upstream server" }, status: 502 }
+        : { data: null, error: null, status: 201 };
+    },
+    { ...immediateRetry, retryLimit: 2 }
+  );
+
+  assert.equal(calls, 2);
+  assert.equal(attemptedPayloads[0], payload);
+  assert.equal(attemptedPayloads[1], payload);
+  assert.deepEqual(stored, payload);
+  assert.equal(stored?.sample_count, 4);
+});
+
+test("Data API transient classification stays narrow", () => {
+  assert.equal(isTransientDataApiFailure({ status: 503 }), true);
+  assert.equal(isTransientDataApiFailure({ error: new TypeError("fetch failed") }), true);
+  assert.equal(isTransientDataApiFailure({ error: { code: "PGRST000", message: "database unavailable" } }), true);
+  assert.equal(isTransientDataApiFailure({ status: 400, error: { code: "PGRST100", message: "bad request" } }), false);
+});
+
+test("claim RPCs remain outside generic retries while writes are guarded and retried", () => {
+  const source = readFileSync(new URL("../update-universe-hourly-stats.ts", import.meta.url), "utf8");
+  const claimStart = source.indexOf("async function claimUniverseBatch");
+  const claimEnd = source.indexOf("async function releaseUniverseLeases", claimStart);
+  const claimSource = source.slice(claimStart, claimEnd);
+
+  assert.doesNotMatch(claimSource, /runDataApiOperation/);
+  assert.match(source, /\.eq\("stats_refresh_locked_by", WORKER_ID\)/);
+  assert.match(source, /runDataApiOperation\("Upsert universe hourly stats"/);
+  assert.match(source, /runDataApiOperation\("Upsert universe update events"/);
 });
 
 test("pipeline lease names are stable across hosts", () => {

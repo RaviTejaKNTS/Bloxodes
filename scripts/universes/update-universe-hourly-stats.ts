@@ -18,6 +18,9 @@ const REQUEST_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_REQUEST_DELAY
 const RETRY_LIMIT = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_LIMIT", 5);
 const RETRY_BASE_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_BASE_DELAY_MS", 5000);
 const RETRY_MAX_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_MAX_DELAY_MS", 90000);
+const DATA_API_RETRY_LIMIT = readPositiveNumber("UNIVERSE_STATS_DATA_API_RETRY_LIMIT", 3);
+const DATA_API_RETRY_BASE_DELAY_MS = readPositiveNumber("UNIVERSE_STATS_DATA_API_RETRY_BASE_DELAY_MS", 500);
+const DATA_API_RETRY_MAX_DELAY_MS = readPositiveNumber("UNIVERSE_STATS_DATA_API_RETRY_MAX_DELAY_MS", 5000);
 const DETAIL_REVALIDATION_LIMIT = readPositiveNumber("UNIVERSE_STATS_DETAIL_REVALIDATION_LIMIT", 1000);
 const LEASE_MINUTES = readPositiveNumber("UNIVERSE_STATS_REFRESH_LEASE_MINUTES", 45);
 const LEASE_CHUNK_SIZE = readPositiveNumber("UNIVERSE_STATS_REFRESH_LEASE_CHUNK_SIZE", 100);
@@ -105,6 +108,23 @@ type Options = {
   universeIds: number[];
 };
 
+type DataApiError = {
+  code?: string | null;
+  message?: string | null;
+};
+
+type DataApiResult = {
+  error: DataApiError | null;
+  status?: number;
+};
+
+type DataApiRetryOptions = {
+  retryLimit?: number;
+  baseDelayMs?: number;
+  maxDelayMs?: number;
+  sleep?: (ms: number) => Promise<void>;
+};
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function readPositiveNumber(name: string, fallback: number): number {
@@ -176,6 +196,73 @@ function jitter(ms: number) {
   return Math.round(ms * (0.75 + Math.random() * 0.5));
 }
 
+export function isTransientDataApiFailure(input: { error?: unknown; status?: number }) {
+  if ([502, 503, 504, 520].includes(input.status ?? 0)) return true;
+
+  const error = input.error;
+  const code =
+    error && typeof error === "object" && "code" in error && typeof error.code === "string"
+      ? error.code.toUpperCase()
+      : "";
+  if (["PGRST000", "PGRST001", "PGRST002", "PGRST003"].includes(code)) return true;
+
+  const message =
+    error instanceof Error
+      ? error.message
+      : error && typeof error === "object" && "message" in error && typeof error.message === "string"
+        ? error.message
+        : String(error ?? "");
+  const normalized = message.toLowerCase();
+  return (
+    normalized.includes("an invalid response was received from the upstream server") ||
+    normalized.includes("fetch failed") ||
+    normalized.includes("network error") ||
+    normalized.includes("connection reset")
+  );
+}
+
+function dataApiFailureMessage(label: string, result: DataApiResult) {
+  const status = result.status ? ` (${result.status})` : "";
+  const code = result.error?.code ? ` ${result.error.code}` : "";
+  const message = result.error?.message ?? "Unknown Data API failure";
+  return `${label} failed${status}${code}: ${message}`;
+}
+
+export async function runDataApiOperation<T extends DataApiResult>(
+  label: string,
+  operation: () => PromiseLike<T>,
+  options: DataApiRetryOptions = {}
+): Promise<T> {
+  const retryLimit = Math.max(0, Math.floor(options.retryLimit ?? DATA_API_RETRY_LIMIT));
+  const baseDelayMs = Math.max(0, Math.floor(options.baseDelayMs ?? DATA_API_RETRY_BASE_DELAY_MS));
+  const maxDelayMs = Math.max(baseDelayMs, Math.floor(options.maxDelayMs ?? DATA_API_RETRY_MAX_DELAY_MS));
+  const wait = options.sleep ?? sleep;
+
+  for (let attempt = 0; attempt <= retryLimit; attempt += 1) {
+    let result: T;
+    try {
+      result = await operation();
+    } catch (error) {
+      if (!isTransientDataApiFailure({ error }) || attempt >= retryLimit) throw error;
+      const delayMs = jitter(Math.min(baseDelayMs * 2 ** attempt, maxDelayMs));
+      console.warn(`${label} request failed; retrying in ${delayMs}ms`);
+      await wait(delayMs);
+      continue;
+    }
+
+    if (!result.error) return result;
+    if (!isTransientDataApiFailure(result) || attempt >= retryLimit) {
+      throw new Error(dataApiFailureMessage(label, result));
+    }
+
+    const delayMs = jitter(Math.min(baseDelayMs * 2 ** attempt, maxDelayMs));
+    console.warn(`${label} returned a transient Data API failure; retrying in ${delayMs}ms`);
+    await wait(delayMs);
+  }
+
+  throw new Error(`${label} failed after retries`);
+}
+
 async function fetchRobloxJson(url: string, label: string): Promise<any> {
   for (let attempt = 0; attempt <= RETRY_LIMIT; attempt += 1) {
     let res: Response;
@@ -227,14 +314,17 @@ async function releaseUniverseLeases(universeIds: number[]) {
   if (!universeIds.length) return;
   for (let index = 0; index < universeIds.length; index += LEASE_CHUNK_SIZE) {
     const ids = universeIds.slice(index, index + LEASE_CHUNK_SIZE);
-    const { error } = await supabaseAdmin().rpc("release_roblox_universe_stats_rows", {
-      p_worker_id: WORKER_ID,
-      p_universe_ids: ids,
-      p_error: null,
-      p_next_run_at: null
-    });
-    if (error) {
-      console.warn("Failed to release stats refresh leases:", error.message);
+    try {
+      await runDataApiOperation("Release universe stats leases", () =>
+        supabaseAdmin().rpc("release_roblox_universe_stats_rows", {
+          p_worker_id: WORKER_ID,
+          p_universe_ids: ids,
+          p_error: null,
+          p_next_run_at: null
+        })
+      );
+    } catch (error) {
+      console.warn("Failed to release stats refresh leases:", error instanceof Error ? error.message : String(error));
     }
   }
 }
@@ -248,13 +338,15 @@ async function markFailures(rows: UniverseRow[], error: unknown, retryAfterHours
     retryAfterHours ?? Math.min(72, 2 ** Math.min(maxAttempts, 6))
   );
   for (let index = 0; index < rows.length; index += LEASE_CHUNK_SIZE) {
-    const { error: releaseError } = await supabaseAdmin().rpc("release_roblox_universe_stats_rows", {
-      p_worker_id: WORKER_ID,
-      p_universe_ids: rows.slice(index, index + LEASE_CHUNK_SIZE).map((row) => row.universe_id),
-      p_error: message,
-      p_next_run_at: nextRunAt
-    });
-    if (releaseError) throw new Error(`Failed to release universe stats rows: ${releaseError.message}`);
+    const ids = rows.slice(index, index + LEASE_CHUNK_SIZE).map((row) => row.universe_id);
+    await runDataApiOperation("Mark failed universe stats rows", () =>
+      supabaseAdmin().rpc("release_roblox_universe_stats_rows", {
+        p_worker_id: WORKER_ID,
+        p_universe_ids: ids,
+        p_error: message,
+        p_next_run_at: nextRunAt
+      })
+    );
   }
 }
 
@@ -265,16 +357,18 @@ async function markMissingResponses(rows: UniverseRow[]) {
   const unavailableIds = new Set(unavailable.map((row) => row.universe_id));
   const retry = rows.filter((row) => !unavailableIds.has(row.universe_id));
   for (const row of unavailable) {
-    const { error } = await supabaseAdmin()
-      .from("roblox_universes")
-      .update({
-        stats_tier: "COLD",
-        stats_tier_reason: "game_details_unavailable",
-        stats_tier_updated_at: nowIso
-      })
-      .eq("universe_id", row.universe_id)
-      .eq("stats_refresh_locked_by", WORKER_ID);
-    if (error) throw new Error(`Failed to quarantine unavailable universe ${row.universe_id}: ${error.message}`);
+    const updatePayload = {
+      stats_tier: "COLD",
+      stats_tier_reason: "game_details_unavailable",
+      stats_tier_updated_at: nowIso
+    };
+    await runDataApiOperation(`Quarantine unavailable universe ${row.universe_id}`, () =>
+      supabaseAdmin()
+        .from("roblox_universes")
+        .update(updatePayload)
+        .eq("universe_id", row.universe_id)
+        .eq("stats_refresh_locked_by", WORKER_ID)
+    );
   }
   const missingError = new Error("Universe missing from successful Roblox game details response");
   await markFailures(retry, missingError);
@@ -320,14 +414,15 @@ async function fetchStats(universeIds: number[]): Promise<Record<number, PublicS
 
 async function fetchExistingHourly(universeIds: number[], hourStart: string): Promise<Map<number, HourlyRow>> {
   if (!universeIds.length) return new Map();
-  const { data, error } = await supabaseAdmin()
-    .from("roblox_universe_stats_hourly")
-    .select(
-      "universe_id, hour_start, avg_playing, peak_playing, min_playing, visits_start, favorites_start, likes_start, dislikes_start, sample_count, first_sampled_at"
-    )
-    .eq("hour_start", hourStart)
-    .in("universe_id", universeIds);
-  if (error) throw error;
+  const { data } = await runDataApiOperation("Load existing universe hourly stats", () =>
+    supabaseAdmin()
+      .from("roblox_universe_stats_hourly")
+      .select(
+        "universe_id, hour_start, avg_playing, peak_playing, min_playing, visits_start, favorites_start, likes_start, dislikes_start, sample_count, first_sampled_at"
+      )
+      .eq("hour_start", hourStart)
+      .in("universe_id", universeIds)
+  );
   return new Map(((data ?? []) as HourlyRow[]).map((row) => [row.universe_id, row]));
 }
 
@@ -480,31 +575,25 @@ async function writeChunk(chunk: UniverseRow[], values: Record<number, PublicSta
     if (stats.favorites != null) updatePayload.favorites = stats.favorites;
     if (stats.likes != null) updatePayload.likes = stats.likes;
     if (stats.dislikes != null) updatePayload.dislikes = stats.dislikes;
-    const { error } = await sb
-      .from("roblox_universes")
-      .update(updatePayload)
-      .eq("universe_id", row.universe_id)
-      .limit(1);
-    if (error) {
-      throw new Error(`Failed to update latest stats for ${row.universe_id}: ${error.message}`);
-    }
+    await runDataApiOperation(`Update latest stats for ${row.universe_id}`, () =>
+      sb
+        .from("roblox_universes")
+        .update(updatePayload)
+        .eq("universe_id", row.universe_id)
+        .eq("stats_refresh_locked_by", WORKER_ID)
+        .limit(1)
+    );
     updated += 1;
   }
   if (hourlyPayloads.length) {
-    const { error } = await sb
-      .from("roblox_universe_stats_hourly")
-      .upsert(hourlyPayloads, { onConflict: "universe_id,hour_start" });
-    if (error) {
-      throw new Error(`Failed to upsert hourly stats: ${error.message}`);
-    }
+    await runDataApiOperation("Upsert universe hourly stats", () =>
+      sb.from("roblox_universe_stats_hourly").upsert(hourlyPayloads, { onConflict: "universe_id,hour_start" })
+    );
   }
   if (updateEventPayloads.length) {
-    const { error } = await sb
-      .from("roblox_universe_update_events")
-      .upsert(updateEventPayloads, { onConflict: "universe_id,updated_at_api" });
-    if (error) {
-      throw new Error(`Failed to upsert universe update events: ${error.message}`);
-    }
+    await runDataApiOperation("Upsert universe update events", () =>
+      sb.from("roblox_universe_update_events").upsert(updateEventPayloads, { onConflict: "universe_id,updated_at_api" })
+    );
   }
   return {
     attempted: chunk.length,

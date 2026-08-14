@@ -1,6 +1,6 @@
 # VPS
 
-Status: Active; stats-worker packaging recovery release in verification
+Status: Active; stats-worker packaging guard deployed and verified
 Last verified: 2026-08-14
 Evidence: SSH/container inspection, transactional production migration release/readback, deployed Edge Function checksum/smoke, and exact-SHA application health
 

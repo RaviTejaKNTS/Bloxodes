@@ -1,6 +1,6 @@
 # Stats Pipelines
 
-Status: Active; worker packaging recovery release in verification
+Status: Active; worker packaging guard deployed and verified
 Last verified: 2026-08-14
 Evidence: checked-in/installed cron, worker and Northflank logs, production DB/API/health, container inspection, and worker packaging regression tests
 
@@ -15,6 +15,13 @@ current read indexes
 /stats pages and APIs
 revalidation events -> Cloudflare refresh
 ```
+
+The universe collector retries transient Supabase Data API failures only at the
+individual operation boundary. Mutation payloads and sample timestamps remain
+fixed across retries, so an upstream response lost after commit cannot increment
+an hourly sample twice. Stateful row-claim and pipeline-lease claims are not
+blindly retried because an ambiguous successful claim requires server-side
+idempotency rather than a second claim request.
 
 Northflank owns HOT at `:12` every hour for separate Roblox API capacity. The
 VPS `codex-admin` crontab runs:
@@ -55,7 +62,7 @@ Catalog item tiers drive NEW/HOT/WARM/COLD refreshes, resale history, current in
 
 ## Public Reads
 
-Web/API readers use current index tables through `apps/web/src/lib/stats.ts` and route helpers. Health reports the latest stats index and fresh/stale player-value counts. On 2026-08-13 it reported a current index, 96,370 fresh values, and 3,140 stale stored values.
+Web/API readers use current index tables through `apps/web/src/lib/stats.ts` and route helpers. Health reports the latest stats index and fresh/stale player-value counts. During recovery, compare the source freshness and `stats_game_current_index` timestamp after each serialized rebuild; index membership alone does not make a player observation younger than the public 24-hour cutoff.
 
 ## August 14 Worker Packaging Incident
 

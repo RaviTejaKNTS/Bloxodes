@@ -1,6 +1,6 @@
 # Docker
 
-Status: Active; stats-worker packaging guard release in verification
+Status: Active; stats-worker packaging guard deployed and verified
 Last verified: 2026-08-14
 Evidence: root Dockerfiles, compose file, production container inventory, live image inspection, and stats-worker smoke tests
 
@@ -36,4 +36,8 @@ The Supabase CLI project `roblox-codes` was observed on this workstation during 
 
 ## Local Verification Boundary
 
-On 2026-08-13, `docker compose config --quiet` passed and the real Compose build loaded the four split BuildKit secrets, completed the full Next.js production build, TypeScript, static generation, and trace collection. The local host then reached 99% disk use and OrbStack stopped during final image export, so the final local image/container runtime check could not be completed. This does not affect the normal GitHub/Dokploy path, which uses the already-supported aggregate `production_env` secret, but repeat the final Compose export/runtime smoke test after local disk space is available.
+On 2026-08-14, a real local `Dockerfile.stats-worker` image build completed and
+its runtime `npm run stats:worker:smoke` passed with the expected build SHA and
+process-only environment profile. The production VPS candidate repeated the
+same smoke before exact-SHA promotion, and Northflank deployed that SHA before
+both a bounded and a normally scheduled HOT run.
