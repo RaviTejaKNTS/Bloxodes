@@ -366,7 +366,7 @@ jobs:
           exit 1
 
       - name: Validate selected Cloudflare configuration
-        if: ${{ steps.freshness.outputs.fresh == 'true' && ((github.event_name == 'push' && needs.classify.outputs.runtime_code == 'true') || (github.event_name == 'workflow_dispatch' && inputs.purge_cloudflare == 'true')) }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' && ((github.event_name == 'push' && needs.classify.outputs.runtime_code == 'true' && needs.classify.outputs.purge_tags != '[]') || (github.event_name == 'workflow_dispatch' && inputs.purge_cloudflare == 'true')) }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
@@ -375,7 +375,7 @@ jobs:
           test -n "$CLOUDFLARE_ZONE_ID"
 
       - name: Purge targeted Cloudflare tags after runtime changes
-        if: ${{ steps.freshness.outputs.fresh == 'true' && github.event_name == 'push' && needs.classify.outputs.runtime_code == 'true' }}
+        if: ${{ steps.freshness.outputs.fresh == 'true' && github.event_name == 'push' && needs.classify.outputs.runtime_code == 'true' && needs.classify.outputs.purge_tags != '[]' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ZONE_ID: ${{ vars.CLOUDFLARE_ZONE_ID || secrets.CLOUDFLARE_ZONE_ID }}
