@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { formatDataApiError, runDataApiOperation } from "../shared/data-api-retry";
 import { enqueueRevalidationEvents } from "../shared/revalidation-events";
 import { finishStatsJobRun, startStatsJobRun } from "../shared/stats-job-run";
 
@@ -12,8 +13,9 @@ async function main() {
 
   try {
     const sb = supabaseAdmin();
-    const { data, error } = await sb.rpc("refresh_stats_current_indexes_serialized");
-    if (error) throw error;
+    const { data } = await runDataApiOperation("Refresh serialized stats current indexes", () =>
+      sb.rpc("refresh_stats_current_indexes_serialized")
+    );
 
     const result = (data ?? {}) as {
       games?: number;
@@ -57,6 +59,6 @@ async function main() {
 }
 
 main().catch((error) => {
-  console.error(error instanceof Error ? error.message : String(error));
+  console.error(formatDataApiError(error));
   process.exit(1);
 });

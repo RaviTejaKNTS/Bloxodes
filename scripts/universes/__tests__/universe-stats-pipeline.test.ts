@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import { statsPipelineLeaseName } from "../../shared/stats-pipeline-lease";
+import { formatDataApiError } from "../../shared/data-api-retry";
 import { shouldUseDatabaseRankRefresh } from "../rank-universe-stats";
 import { assignStatsTier, shouldPreserveStatsTierReason } from "../stats-tier";
 import {
@@ -111,6 +112,20 @@ test("Data API transient classification stays narrow", () => {
   assert.equal(isTransientDataApiFailure({ error: new TypeError("fetch failed") }), true);
   assert.equal(isTransientDataApiFailure({ error: { code: "PGRST000", message: "database unavailable" } }), true);
   assert.equal(isTransientDataApiFailure({ status: 400, error: { code: "PGRST100", message: "bad request" } }), false);
+});
+
+test("structured Data API failures retain useful diagnostics", () => {
+  assert.equal(
+    formatDataApiError({ message: "upstream failed", details: "connection pool timeout", hint: "retry later" }),
+    "upstream failed; connection pool timeout; retry later"
+  );
+  assert.equal(formatDataApiError({ unexpected: "shape" }), '{"unexpected":"shape"}');
+});
+
+test("serialized current-index RPC uses the transient Data API retry boundary", () => {
+  const source = readFileSync(new URL("../rebuild-stats-current-indexes.ts", import.meta.url), "utf8");
+  assert.match(source, /runDataApiOperation\("Refresh serialized stats current indexes"/);
+  assert.match(source, /rpc\("refresh_stats_current_indexes_serialized"\)/);
 });
 
 test("claim RPCs remain outside generic retries while writes are guarded and retried", () => {

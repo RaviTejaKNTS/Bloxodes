@@ -35,8 +35,10 @@ VPS `codex-admin` crontab runs:
 - strict audit every six hours at `:10`.
 
 The COLD command rebuilds current indexes after a successful refresh and before
-revalidation. Daily rank writes remain intentionally unscheduled. The schedule
-source is `scripts/ops/vps-universe-stats.crontab`. Jobs run through
+revalidation. The serialized, idempotent index RPC retries only transient Data
+API responses and preserves structured failure diagnostics instead of reducing
+them to `[object Object]`. Daily rank writes remain intentionally unscheduled.
+The schedule source is `scripts/ops/vps-universe-stats.crontab`. Jobs run through
 `vps-run-job.sh`, use explicit locks, private Kong, and worker logs under
 `/home/codex-admin/bloxodes-stats-worker/logs`.
 

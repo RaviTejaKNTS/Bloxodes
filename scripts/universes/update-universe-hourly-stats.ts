@@ -1,6 +1,7 @@
 import "../shared/load-env";
 
 import { supabaseAdmin } from "@/lib/supabase-admin";
+import { runDataApiOperation } from "../shared/data-api-retry";
 import { enqueueRevalidationEvents, type RevalidationEvent } from "../shared/revalidation-events";
 import {
   claimStatsPipelineLease,
@@ -18,9 +19,6 @@ const REQUEST_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_REQUEST_DELAY
 const RETRY_LIMIT = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_LIMIT", 5);
 const RETRY_BASE_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_BASE_DELAY_MS", 5000);
 const RETRY_MAX_DELAY_MS = readPositiveNumber("UNIVERSE_HOURLY_STATS_RETRY_MAX_DELAY_MS", 90000);
-const DATA_API_RETRY_LIMIT = readPositiveNumber("UNIVERSE_STATS_DATA_API_RETRY_LIMIT", 3);
-const DATA_API_RETRY_BASE_DELAY_MS = readPositiveNumber("UNIVERSE_STATS_DATA_API_RETRY_BASE_DELAY_MS", 500);
-const DATA_API_RETRY_MAX_DELAY_MS = readPositiveNumber("UNIVERSE_STATS_DATA_API_RETRY_MAX_DELAY_MS", 5000);
 const DETAIL_REVALIDATION_LIMIT = readPositiveNumber("UNIVERSE_STATS_DETAIL_REVALIDATION_LIMIT", 1000);
 const LEASE_MINUTES = readPositiveNumber("UNIVERSE_STATS_REFRESH_LEASE_MINUTES", 45);
 const LEASE_CHUNK_SIZE = readPositiveNumber("UNIVERSE_STATS_REFRESH_LEASE_CHUNK_SIZE", 100);
@@ -108,23 +106,6 @@ type Options = {
   universeIds: number[];
 };
 
-type DataApiError = {
-  code?: string | null;
-  message?: string | null;
-};
-
-type DataApiResult = {
-  error: DataApiError | null;
-  status?: number;
-};
-
-type DataApiRetryOptions = {
-  retryLimit?: number;
-  baseDelayMs?: number;
-  maxDelayMs?: number;
-  sleep?: (ms: number) => Promise<void>;
-};
-
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function readPositiveNumber(name: string, fallback: number): number {
@@ -196,72 +177,7 @@ function jitter(ms: number) {
   return Math.round(ms * (0.75 + Math.random() * 0.5));
 }
 
-export function isTransientDataApiFailure(input: { error?: unknown; status?: number }) {
-  if ([502, 503, 504, 520].includes(input.status ?? 0)) return true;
-
-  const error = input.error;
-  const code =
-    error && typeof error === "object" && "code" in error && typeof error.code === "string"
-      ? error.code.toUpperCase()
-      : "";
-  if (["PGRST000", "PGRST001", "PGRST002", "PGRST003"].includes(code)) return true;
-
-  const message =
-    error instanceof Error
-      ? error.message
-      : error && typeof error === "object" && "message" in error && typeof error.message === "string"
-        ? error.message
-        : String(error ?? "");
-  const normalized = message.toLowerCase();
-  return (
-    normalized.includes("an invalid response was received from the upstream server") ||
-    normalized.includes("fetch failed") ||
-    normalized.includes("network error") ||
-    normalized.includes("connection reset")
-  );
-}
-
-function dataApiFailureMessage(label: string, result: DataApiResult) {
-  const status = result.status ? ` (${result.status})` : "";
-  const code = result.error?.code ? ` ${result.error.code}` : "";
-  const message = result.error?.message ?? "Unknown Data API failure";
-  return `${label} failed${status}${code}: ${message}`;
-}
-
-export async function runDataApiOperation<T extends DataApiResult>(
-  label: string,
-  operation: () => PromiseLike<T>,
-  options: DataApiRetryOptions = {}
-): Promise<T> {
-  const retryLimit = Math.max(0, Math.floor(options.retryLimit ?? DATA_API_RETRY_LIMIT));
-  const baseDelayMs = Math.max(0, Math.floor(options.baseDelayMs ?? DATA_API_RETRY_BASE_DELAY_MS));
-  const maxDelayMs = Math.max(baseDelayMs, Math.floor(options.maxDelayMs ?? DATA_API_RETRY_MAX_DELAY_MS));
-  const wait = options.sleep ?? sleep;
-
-  for (let attempt = 0; attempt <= retryLimit; attempt += 1) {
-    let result: T;
-    try {
-      result = await operation();
-    } catch (error) {
-      if (!isTransientDataApiFailure({ error }) || attempt >= retryLimit) throw error;
-      const delayMs = jitter(Math.min(baseDelayMs * 2 ** attempt, maxDelayMs));
-      console.warn(`${label} request failed; retrying in ${delayMs}ms`);
-      await wait(delayMs);
-      continue;
-    }
-
-    if (!result.error) return result;
-    if (!isTransientDataApiFailure(result) || attempt >= retryLimit) {
-      throw new Error(dataApiFailureMessage(label, result));
-    }
-
-    const delayMs = jitter(Math.min(baseDelayMs * 2 ** attempt, maxDelayMs));
-    console.warn(`${label} returned a transient Data API failure; retrying in ${delayMs}ms`);
-    await wait(delayMs);
-  }
-
-  throw new Error(`${label} failed after retries`);
-}
+export { isTransientDataApiFailure, runDataApiOperation } from "../shared/data-api-retry";
 
 async function fetchRobloxJson(url: string, label: string): Promise<any> {
   for (let attempt = 0; attempt <= RETRY_LIMIT; attempt += 1) {
