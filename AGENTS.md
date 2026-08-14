@@ -17,6 +17,8 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `scripts/AGENTS.md`: automation jobs, preferred npm commands, and script authoring rules.
 - `dev-docs/operations/deployment.md`: current production deployment flow and ownership.
 - `dev-docs/infrastructure/homelab.md`: current homelab article automation and health.
+- `dev-docs/pipelines/catalog.md`: global Roblox `/catalog` data, refresh, page, and release ownership.
+- `dev-docs/pipelines/wiki-collections.md`: game wiki hubs and their game-specific collection workflow/data ownership.
 - `supabase/AGENTS.md`: migrations, edge functions, and how DB changes connect back to the app.
 - `data/AGENTS.md`: local datasets and which routes/tools consume them.
 - `.agents/skills/bloxodes-*-workflow-runner/SKILL.md`: parent review workflows for multi-step content jobs.

@@ -74,13 +74,21 @@ const realFiles = filesUnder(envRoot, ".env");
 const exampleFiles = filesUnder(exampleRoot, ".env.example");
 const realKeys = new Set<string>();
 const exampleKeys = new Set<string>();
+const realOwners = new Map<string, string[]>();
+const exampleOwners = new Map<string, string[]>();
 for (const file of realFiles) {
   const mode = fs.statSync(file).mode & 0o777;
   if ((mode & 0o077) !== 0) errors.push(`${path.relative(repoRoot, file)} must be mode 600, not ${mode.toString(8)}.`);
-  for (const key of Object.keys(parse(fs.readFileSync(file)))) realKeys.add(key);
+  for (const key of Object.keys(parse(fs.readFileSync(file)))) {
+    realKeys.add(key);
+    realOwners.set(key, [...(realOwners.get(key) ?? []), path.relative(envRoot, file)]);
+  }
 }
 for (const file of exampleFiles) {
-  for (const key of Object.keys(parse(fs.readFileSync(file)))) exampleKeys.add(key);
+  for (const key of Object.keys(parse(fs.readFileSync(file)))) {
+    exampleKeys.add(key);
+    exampleOwners.set(key, [...(exampleOwners.get(key) ?? []), path.relative(exampleRoot, file)]);
+  }
 }
 for (const key of [...realKeys].sort()) {
   if (!exampleKeys.has(key)) errors.push(`Real env key is missing from committed examples: ${key}`);
@@ -131,6 +139,34 @@ if (JSON.stringify(config.profiles["managed-dev"]) !== JSON.stringify(expectedMa
   errors.push("managed-dev profile does not match the canonical file order.");
 }
 if ((config.profiles["process-only"] ?? []).length !== 0) errors.push("process-only must not load workstation files.");
+
+if (JSON.stringify(config.overlays.umami) !== JSON.stringify(["operations/umami.env"])) {
+  errors.push("The umami overlay must load only operations/umami.env.");
+}
+for (const key of ["UMAMI_USERNAME", "UMAMI_PASSWORD", "UMAMI_WEBSITE_ID"]) {
+  const realExpected = ["operations/umami.env"];
+  const exampleExpected = ["operations/umami.env.example"];
+  if (JSON.stringify(realOwners.get(key) ?? []) !== JSON.stringify(realExpected)) {
+    errors.push(`${key} must exist only in .envs/operations/umami.env.`);
+  }
+  if (JSON.stringify(exampleOwners.get(key) ?? []) !== JSON.stringify(exampleExpected)) {
+    errors.push(`${key} must exist only in env/examples/operations/umami.env.example.`);
+  }
+}
+if (JSON.stringify(realOwners.get("NEXT_PUBLIC_GOOGLE_ANALYTICS_ID") ?? []) !== JSON.stringify(["shared/application.env"])) {
+  errors.push("NEXT_PUBLIC_GOOGLE_ANALYTICS_ID must exist only in .envs/shared/application.env.");
+}
+if (JSON.stringify(exampleOwners.get("NEXT_PUBLIC_GOOGLE_ANALYTICS_ID") ?? []) !== JSON.stringify(["shared/application.env.example"])) {
+  errors.push("NEXT_PUBLIC_GOOGLE_ANALYTICS_ID must exist only in env/examples/shared/application.env.example.");
+}
+if (realKeys.has("Umami_website_id") || exampleKeys.has("Umami_website_id")) {
+  errors.push("Legacy Umami_website_id is forbidden; use UMAMI_WEBSITE_ID.");
+}
+const umami = read("operations/umami.env");
+if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(umami.UMAMI_WEBSITE_ID ?? "")) {
+  errors.push("UMAMI_WEBSITE_ID must be a UUID-shaped Umami website identifier.");
+}
+if (!umami.UMAMI_USERNAME || !umami.UMAMI_PASSWORD) errors.push("Umami operator credentials are incomplete.");
 
 if (errors.length) {
   console.error(`Environment doctor found ${errors.length} problem(s):`);

@@ -1,18 +1,18 @@
 # Content and Engagement Pipelines
 
 Status: Active
-Last verified: 2026-08-13
-Evidence: page tables/counts, workflow skills, final validators/importers, routes, sitemap/feed/revalidation code
+Last verified: 2026-08-14
+Evidence: page tables/counts, workflow skills, final validators/importers, routes, sitemap/feed/revalidation code, and explicit wiki/collection ownership separation
 
 ## Page Families
 
-- Wiki hubs: 57 `wiki_pages` rows.
-- Wiki collections: 439 `wiki_collection_pages` rows.
 - Tools: 13 rows.
 - Events: 22 page rows.
 - Checklists: 14 rows.
 - Quizzes: 13 rows.
 - Articles: 419 rows.
+
+Game wiki hubs and game-specific collections are a separate cohesive pipeline owned by `wiki-collections.md`. Global Roblox catalog pages are owned independently by `catalog.md`.
 
 ## Standard Workflow
 

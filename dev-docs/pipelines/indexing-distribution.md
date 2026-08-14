@@ -1,8 +1,8 @@
 # Indexing, Analytics, and Distribution
 
 Status: Active
-Last verified: 2026-08-13
-Evidence: scripts, installed VPS cron, GitHub workflows, public sitemap/cache, and env contracts
+Last verified: 2026-08-14
+Evidence: scripts, installed VPS cron, GitHub workflows, public sitemap/cache, env ownership contracts, and redacted live Umami tracker-ID comparison
 
 ## Search Indexing
 
@@ -14,8 +14,9 @@ Evidence: scripts, installed VPS cron, GitHub workflows, public sitemap/cache, a
 
 ## Analytics
 
-- Public runtime may load GA4 and Umami IDs via client-visible variables.
-- Operator analytics credentials for GA4, Search Console, Bing, and Umami live in `.envs/operations/analytics.env`.
+- Public runtime loads the GA measurement ID and Umami website ID through separate client-visible variables because they identify different analytics systems. Workstation GA configuration belongs to shared application env; production values are injected by GitHub/Dokploy.
+- GA4, Search Console, Bing, and Google OAuth operator values live in `.envs/operations/analytics.env`.
+- Self-hosted Umami operator credentials and `UMAMI_WEBSITE_ID` live only in `.envs/operations/umami.env` and load through the `umami` overlay. The operator website ID matched the live production tracker ID during the 2026-08-14 read-only check.
 - Reports and notebooks remain dated artifacts under `docs/analytics/reports`; they are analyses, not architecture authority.
 
 ## Distribution

@@ -1,6 +1,8 @@
 # Bloxodes Analytics Operations
 
-This is the source of truth for accessing, extending, verifying, and reporting on Bloxodes analytics.
+Last reviewed: 2026-08-14
+
+This is the detailed supporting guide for accessing, extending, verifying, and reporting on Bloxodes analytics. Current env and pipeline ownership is canonical in `dev-docs/environment.md` and `dev-docs/pipelines/indexing-distribution.md`.
 
 ## Advertising implementation records
 
@@ -30,7 +32,7 @@ Use the Umami dashboard for normal analysis. Select the `Bloxodes` website after
 
 The website ID is a public tracker identifier, but the repo still keeps operational values in environment configuration rather than duplicating them in reports:
 
-- Local operator source: `.envs/operations/umami.env`, currently under the legacy `Umami_website_id` name.
+- Local operator source: `.envs/operations/umami.env`, containing `UMAMI_USERNAME`, `UMAMI_PASSWORD`, and `UMAMI_WEBSITE_ID`. Load it explicitly with the `umami` overlay for operator work; do not place these values in `operations/analytics.env`.
 - Production build variables:
   - `NEXT_PUBLIC_UMAMI_HOST_URL`
   - `NEXT_PUBLIC_UMAMI_WEBSITE_ID`

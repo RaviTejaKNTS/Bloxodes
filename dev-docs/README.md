@@ -60,8 +60,9 @@ GitHub Actions ----------> web image build/deploy and manual fallback jobs
 - [Stats pipeline](pipelines/stats.md): universe and item stats workers, cron ordering, reads, and current incident state.
 - [Codes pipeline](pipelines/codes.md): page ownership, source fields, refresh schedule, publication, and safety.
 - [Article pipeline](pipelines/articles.md): discovery, curation, managed-dev writing, review, media, and production publication.
-- [Catalog and collection pipelines](pipelines/catalog-collections.md): Roblox global catalog, local game collections, images, and page records.
-- [Content and engagement pipelines](pipelines/content.md): wiki, tools, events, quizzes, checklists, puzzles, and generic final import flow.
+- [Global Roblox catalog pipeline](pipelines/catalog.md): platform-wide catalog ingestion, specialized item domains, page records, schedules, and publication.
+- [Game wiki and collection pipeline](pipelines/wiki-collections.md): wiki hubs, game-specific collection datasets, images, workflow gates, and publication.
+- [Content and engagement pipelines](pipelines/content.md): tools, events, quizzes, checklists, puzzles, and generic final import flow.
 - [Indexing and distribution](pipelines/indexing-distribution.md): Google Indexing, IndexNow, sitemaps/feeds, analytics, and social posting.
 
 ## Verification Policy

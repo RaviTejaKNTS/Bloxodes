@@ -2,7 +2,7 @@
 
 Scope: `data/` plus related static data under `src/data/`.
 
-Environment boundaries and database-vs-dataset ownership are documented in `dev-docs/data/data-environments.md`.
+Environment boundaries and database-vs-dataset ownership are documented in `dev-docs/data/data-environments.md`. Global `/catalog` data belongs to `dev-docs/pipelines/catalog.md`; game wiki hubs and their game-specific collection datasets belong together in `dev-docs/pipelines/wiki-collections.md`.
 
 When dataset ownership or a consuming pipeline changes, update that existing canonical file or the owning existing pipeline document in the same change. Do not create a replacement current-state doc.
 

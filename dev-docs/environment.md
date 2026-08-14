@@ -45,6 +45,7 @@ Set comma-separated `BLOXODES_ENV_OVERLAYS` when a command needs additional cred
 - `indexing`
 - `northflank`
 - `northflank-stats`
+- `umami`
 - `vps`
 
 Process variables always win because dotenv loading uses `override: false`.
@@ -64,10 +65,12 @@ For a workstation command that intentionally targets production, set both `BLOXO
 ## Value Ownership
 
 - Targets contain only database/media endpoint credentials for that target.
-- Shared application contains cross-target web/auth settings.
+- Shared application contains cross-target web/auth settings, including the public GA measurement ID used by workstation builds. Public production analytics IDs are injected by GitHub/Dokploy.
 - Integrations contain content research/generation and distribution providers.
 - Pipelines contain workload-specific credentials and controls.
 - Infrastructure contains operator access for one platform.
+- `operations/analytics.env` owns GA4 account/property, Search Console, Bing Webmaster, and Google OAuth operator values. It must contain neither Umami values nor duplicated `NEXT_PUBLIC_*` web configuration.
+- `operations/umami.env` exclusively owns the self-hosted Umami operator username, password, and canonical `UMAMI_WEBSITE_ID`. Production web builds receive the public `NEXT_PUBLIC_UMAMI_HOST_URL` and matching `NEXT_PUBLIC_UMAMI_WEBSITE_ID` from GitHub/Dokploy rather than loading operator credentials.
 - Non-dotenv private material lives under `.envs/secrets/`.
 
 Do not create a pipeline env file merely for symmetry. Codes, catalog, stats, and content scripts normally consume the selected target plus process-injected schedule tuning; their non-secret defaults stay in code or checked-in cron manifests.
@@ -87,7 +90,7 @@ The Codex template runs `scripts/dev/setup-worktree.sh`. New worktrees link the 
 
 ## Legacy Aliases
 
-The migration preserves exact values and therefore preserves these old names: `HOSTINGER_Token`, `Northflank_API_Token`, and `Umami_website_id`. Committed examples label them as legacy. Normalize them only together with all consumers and external stores.
+The migration preserves these remaining old names: `HOSTINGER_Token` and `Northflank_API_Token`. Committed examples label them as legacy. Normalize them only together with all consumers and external stores. The former `Umami_website_id` alias was normalized to `UMAMI_WEBSITE_ID` on 2026-08-14 and must not be reintroduced.
 
 ## Safety
 
