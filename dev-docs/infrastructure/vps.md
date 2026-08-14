@@ -1,6 +1,6 @@
 # VPS
 
-Status: Active; application, migration ledger, and revalidate function synchronized
+Status: Active; stats-worker packaging recovery release in verification
 Last verified: 2026-08-14
 Evidence: SSH/container inspection, transactional production migration release/readback, deployed Edge Function checksum/smoke, and exact-SHA application health
 
@@ -55,11 +55,20 @@ Worker ownership:
 - `/home/codex-admin/bloxodes-stats-worker`, owner `codex-admin`, mode 700.
 - Runtime env `env.stats-worker`, mode 600.
 - Wrapper and build scripts under `bin/`.
+- The source-controlled build implementation is
+  `scripts/ops/vps-build-stats-worker.sh`; install it as `bin/build-image.sh`.
+- `approved-worker-sha` pins recurring image rebuilds to the last explicitly
+  released worker commit instead of arbitrary branch HEAD.
+- Candidate images must pass the process-only worker smoke before promotion;
+  the wrapper can restore a verified `last-known-good` image automatically.
 - Logs show active jobs through the verification time.
 
 ## Operational Risks
 
 - Full swap usage warrants investigation even with available RAM; check pressure, swappiness, and long-lived containers before large jobs.
+- The August 14 universe-stats collapse was not caused by this pressure: both
+  VPS and Northflank jobs failed before work because the worker image omitted
+  `env/config.json`. The packaging/promotion guards above own that failure mode.
 - Public-anywhere UFW rules on 80/443 weaken the intended Cloudflare-only origin model. Confirm the origin-firewall script's effective policy and remove redundant public rules only through a tested, recoverable change.
 - Meta/REST unhealthy probes reduce Docker health signal quality.
 - Production migration history was reconciled and converged through repository migration `20260920000013` on 2026-08-14. The deployed `revalidate` Edge Function also matches the checked-in source and passed an authenticated production smoke run.

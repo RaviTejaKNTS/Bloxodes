@@ -1,8 +1,8 @@
 # Stats Pipelines
 
-Status: Active; universe stats under active incident remediation
-Last verified: 2026-08-13
-Evidence: checked-in/installed cron, worker logs/files, production DB/API/health, and 2026-08-12 end-to-end audit ledger
+Status: Active; worker packaging recovery release in verification
+Last verified: 2026-08-14
+Evidence: checked-in/installed cron, worker and Northflank logs, production DB/API/health, container inspection, and worker packaging regression tests
 
 ## Universe Stats Flow
 
@@ -16,19 +16,38 @@ current read indexes
 revalidation events -> Cloudflare refresh
 ```
 
-The VPS `codex-admin` crontab runs:
+Northflank owns HOT at `:12` every hour for separate Roblox API capacity. The
+VPS `codex-admin` crontab runs:
 
-- image build daily at 00:05;
+- an exact-approved-SHA worker image rebuild daily at 00:05;
 - NEW every two hours at `:07`;
 - bounded priority discovery hourly at `:22`;
 - WARM every six hours at `:32`;
 - COLD hourly at `:47`;
 - hourly ranks at `:30`;
-- current indexes at `:40`;
-- daily ranks at 00:50;
 - strict audit every six hours at `:10`.
 
-The schedule source is `scripts/ops/vps-universe-stats.crontab`. Jobs run through `vps-run-job.sh`, use explicit locks, private Kong, and worker logs under `/home/codex-admin/bloxodes-stats-worker/logs`.
+The COLD command rebuilds current indexes after a successful refresh and before
+revalidation. Daily rank writes remain intentionally unscheduled. The schedule
+source is `scripts/ops/vps-universe-stats.crontab`. Jobs run through
+`vps-run-job.sh`, use explicit locks, private Kong, and worker logs under
+`/home/codex-admin/bloxodes-stats-worker/logs`.
+
+## Worker Image Safety
+
+`Dockerfile.stats-worker` deliberately packages the non-secret
+`env/config.json` routing manifest and runs `npm run stats:worker:smoke` during
+the image build. `scripts/ops/vps-build-stats-worker.sh` accepts only an exact
+40-character approved commit SHA, builds a candidate tag, repeats the runtime
+smoke, retains a healthy prior image as `last-known-good`, and promotes only a
+passing candidate. Its installed approved SHA file pins nightly rebuilds; cron
+must never reset the worker checkout to arbitrary `production` HEAD.
+
+Before every scheduled command, `vps-run-job.sh` repeats the packaging smoke.
+If the production tag fails but the retained image passes, the wrapper restores
+the last-known-good tag before starting the job. Northflank uses an allowlist of
+worker runtime paths so unrelated production commits do not rebuild HOT; the
+same Dockerfile build smoke remains the final deployment gate.
 
 ## Item Stats Flow
 
@@ -38,20 +57,24 @@ Catalog item tiers drive NEW/HOT/WARM/COLD refreshes, resale history, current in
 
 Web/API readers use current index tables through `apps/web/src/lib/stats.ts` and route helpers. Health reports the latest stats index and fresh/stale player-value counts. On 2026-08-13 it reported a current index, 96,370 fresh values, and 3,140 stale stored values.
 
-## Active Universe Incident
+## August 14 Worker Packaging Incident
 
-The 2026-08-12 live audit found multiple correctness/operability defects. Do not infer resolution from a green general health endpoint:
+The August 13 environment-profile refactor made `env/config.json` a module-load
+dependency of scripts, while the narrow stats-worker image still omitted that
+file. Northflank HOT failed first after continuous deployment; the VPS failed
+after its 00:05 daily image rebuild. Every affected container exited before its
+first Roblox or database request. Stored rows and current-index membership
+survived, but the public 24-hour freshness predicate reduced visible games as
+observations aged.
 
-- COLD claim due-times and fixed `:47` schedule can miss the 24-hour public cutoff.
-- Nominal COLD capacity lacks safe headroom.
-- Current index at `:40` precedes COLD at `:47`, publishing COLD work one cycle late.
-- NEW unavailable games can loop between quarantine and NEW tier.
-- Tier mutation used offset pagination against the filtered column.
-- Daily ranks had repeated statement-timeout failures.
-- Growth baselines were too narrow for sparse tier sampling.
-- Strict audit failure had no proven external notification path.
+This was not Roblox throttling, a lost database population, page rendering, or
+VPS capacity. The operational health monitor detected the transition and sent
+Telegram, but detection did not protect image promotion or roll back the worker.
+The image manifest, candidate promotion, exact-SHA pin, last-known-good restore,
+and CI regression tests now own that prevention path.
 
-The newest audit ledger currently lives in the main checkout as `docs/stats/2026-08-12-universe-stats-e2e-audit.md`; it is an incident record, not canonical architecture. Update this file when remediation is actually verified through a natural recurrence window.
+The older audit ledger at `docs/stats/2026-08-12-universe-stats-e2e-audit.md`
+remains incident history rather than current architecture.
 
 ## Safety
 

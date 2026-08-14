@@ -42,6 +42,7 @@ function parseSuite(): Suite {
 
 const deterministic = [
   npmRun("lint", "ESLint"),
+  npmRun("test:universe-stats-pipeline", "Universe stats pipeline contracts"),
   npmRun("typecheck:web", "Web TypeScript"),
   npmRun("test:unit:web", "Vitest unit and contract tests"),
   npmRun("test:coverage:web", "Coverage thresholds"),

@@ -204,3 +204,34 @@ test("VPS runner uses the internal Supabase network and fails closed when it is 
   assert.match(runner, /flock -w "\$LOCK_WAIT_SECONDS"/);
   assert.match(runner, /timed out waiting for lock group/);
 });
+
+test("stats worker image includes and validates every env-routing runtime dependency", () => {
+  const dockerfile = readFileSync(
+    new URL("../../../Dockerfile.stats-worker", import.meta.url),
+    "utf8"
+  );
+  const smoke = readFileSync(new URL("../../ops/smoke-stats-worker.ts", import.meta.url), "utf8");
+
+  assert.match(dockerfile, /COPY env\/config\.json \.\/env\/config\.json/);
+  assert.match(dockerfile, /RUN npm run stats:worker:smoke/);
+  assert.match(smoke, /scripts\/shared\/env-files\.ts/);
+  assert.match(smoke, /scripts\/universes\/update-universe-hourly-stats\.ts/);
+  assert.match(smoke, /loaded\.profile !== "process-only"/);
+});
+
+test("VPS worker promotion is exact-SHA, smoke-gated, and recoverable", () => {
+  const builder = readFileSync(
+    new URL("../../ops/vps-build-stats-worker.sh", import.meta.url),
+    "utf8"
+  );
+  const runner = readFileSync(new URL("../../ops/vps-run-job.sh", import.meta.url), "utf8");
+
+  assert.match(builder, /--approved-sha/);
+  assert.match(builder, /candidate-\$SHORT_SHA/);
+  assert.match(builder, /npm run stats:worker:smoke/);
+  assert.match(builder, /bloxodes-stats-worker:last-known-good/);
+  assert.match(builder, /docker tag "\$CANDIDATE_IMAGE" "\$IMAGE"/);
+  assert.doesNotMatch(builder, /reset --hard origin\/production/);
+  assert.match(runner, /production image failed smoke/);
+  assert.match(runner, /restored last-known-good worker image/);
+});

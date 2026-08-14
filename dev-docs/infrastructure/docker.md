@@ -1,8 +1,8 @@
 # Docker
 
-Status: Active
-Last verified: 2026-08-13
-Evidence: root Dockerfiles, compose file, production container inventory, and live container images
+Status: Active; stats-worker packaging guard release in verification
+Last verified: 2026-08-14
+Evidence: root Dockerfiles, compose file, production container inventory, live image inspection, and stats-worker smoke tests
 
 ## Web Image
 
@@ -12,7 +12,19 @@ GitHub production builds receive one aggregate BuildKit secret at `/run/secrets/
 
 ## Stats Worker Image
 
-`Dockerfile.stats-worker` packages scripts, relevant web libraries, types, and datasets with Node 24 and Python. The VPS cron wrapper starts ephemeral `bloxodes-stats-worker:production` containers with a selected `STATS_WORKER_COMMAND`, a private Supabase network, the root-owned worker env file, locks, and per-job logs.
+`Dockerfile.stats-worker` packages scripts, relevant web libraries, types,
+datasets, and the non-secret `env/config.json` routing manifest with Node 24 and
+Python. The build runs `npm run stats:worker:smoke`; a missing imported runtime
+asset therefore fails image construction instead of every scheduled job after
+deployment.
+
+The VPS builder accepts an exact approved repository SHA, builds a candidate
+tag, repeats the smoke in a disposable container, and promotes it only after a
+pass. A healthy previous production image is retained as
+`bloxodes-stats-worker:last-known-good`. The cron wrapper starts ephemeral
+`bloxodes-stats-worker:production` containers with a selected
+`STATS_WORKER_COMMAND`, private Supabase network, host-owned worker env file,
+locks, per-job logs, and a pre-command smoke/last-known-good restoration guard.
 
 ## Retired Local Supabase Containers
 

@@ -31,6 +31,28 @@ Schema changes use the authenticated Supabase connector for managed development,
 
 Production Edge Functions use the same immutable-SHA boundary. `npm run supabase:production:function:release -- --function <name> --approved-sha <full-sha>` compares local and deployed checksums without mutation. Apply requires `--apply --confirm "APPLY <name>"`, preserves the host file ownership/mode, restarts only Edge Runtime, performs an authenticated smoke request, and restores the previous function on failure.
 
+## Stats Worker Release
+
+The stats worker is a separate production artifact shared by the VPS jobs and
+Northflank HOT. `Dockerfile.stats-worker` must pass its build-time smoke before
+either environment can deploy it.
+
+For the VPS, install the released `scripts/ops/vps-build-stats-worker.sh` as
+`/home/codex-admin/bloxodes-stats-worker/bin/build-image.sh`, then invoke it
+with `--approved-sha <full-production-sha>`. The script fetches that exact
+commit, builds a candidate, repeats the smoke, preserves a healthy current image
+as last-known-good, promotes the candidate, and records the approved SHA for
+future pinned nightly rebuilds. Never restore the old `reset --hard
+origin/production` builder.
+
+Northflank continuous deployment uses an allowlist covering the worker
+Dockerfile, root/workspace package manifests, `scripts/`, required web source,
+`types/`, `data/`, and `env/config.json`. Unrelated documentation/content-only
+commits must not rebuild HOT. A worker-runtime commit is complete only after the
+Northflank build succeeds, one scheduled or bounded HOT run succeeds, the VPS
+candidate is promoted, and a bounded VPS collector plus current-index rebuild
+advance production health.
+
 ## Platform Synchronization
 
 1. Run `npm run env:doctor`, `npm run env:check`, and `npm run supabase:migrations:check` locally.

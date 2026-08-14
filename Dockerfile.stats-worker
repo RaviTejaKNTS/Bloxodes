@@ -3,8 +3,10 @@
 FROM node:24-bookworm-slim
 
 WORKDIR /app
+ARG BLOXODES_BUILD_SHA=unknown
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV BLOXODES_BUILD_SHA=$BLOXODES_BUILD_SHA
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends python3 \
@@ -23,5 +25,10 @@ COPY apps/web/next-env.d.ts ./apps/web/next-env.d.ts
 COPY apps/web/tsconfig.json ./apps/web/tsconfig.json
 COPY types ./types
 COPY data ./data
+COPY env/config.json ./env/config.json
+
+# Fail the image build before deployment when a script runtime dependency is
+# missing from the deliberately narrow worker image manifest.
+RUN npm run stats:worker:smoke
 
 CMD ["sh", "-lc", "eval \"${STATS_WORKER_COMMAND:-npm run stats:audit}\""]

@@ -14,6 +14,9 @@ ENV_FILE="$BASE/env.stats-worker"
 LOG_DIR="$BASE/logs"
 DOCKER_NETWORK="${STATS_WORKER_DOCKER_NETWORK:-supabase_default}"
 SUPABASE_INTERNAL_URL="${STATS_WORKER_SUPABASE_INTERNAL_URL:-http://supabase-kong:8000}"
+IMAGE="bloxodes-stats-worker:production"
+LAST_GOOD_IMAGE="bloxodes-stats-worker:last-known-good"
+SMOKE_COMMAND="npm run stats:worker:smoke"
 mkdir -p "$LOG_DIR"
 
 if ! docker network inspect "$DOCKER_NETWORK" >/dev/null 2>&1; then
@@ -59,8 +62,28 @@ if [ -n "${JOB_LOCK_GROUP:-}" ]; then
   fi
 fi
 
-if ! docker image inspect bloxodes-stats-worker:production >/dev/null 2>&1; then
+if ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
   "$BASE/bin/build-image.sh"
+fi
+
+if ! docker run --rm \
+  --env BLOXODES_ENV_PROFILE=process-only \
+  --entrypoint sh \
+  "$IMAGE" \
+  -lc "$SMOKE_COMMAND" >/dev/null 2>&1; then
+  echo "$(date -Is) $JOB production image failed smoke" >> "$LOG_DIR/$JOB.log"
+  if docker image inspect "$LAST_GOOD_IMAGE" >/dev/null 2>&1 \
+    && docker run --rm \
+      --env BLOXODES_ENV_PROFILE=process-only \
+      --entrypoint sh \
+      "$LAST_GOOD_IMAGE" \
+      -lc "$SMOKE_COMMAND" >/dev/null 2>&1; then
+    docker tag "$LAST_GOOD_IMAGE" "$IMAGE"
+    echo "$(date -Is) $JOB restored last-known-good worker image" >> "$LOG_DIR/$JOB.log"
+  else
+    echo "$(date -Is) $JOB has no healthy last-known-good worker image" >> "$LOG_DIR/$JOB.log"
+    exit 1
+  fi
 fi
 
 echo "$(date -Is) starting $JOB" >> "$LOG_DIR/$JOB.log"
@@ -70,6 +93,6 @@ docker run --rm \
   --env-file "$ENV_FILE" \
   -e SUPABASE_URL="$SUPABASE_INTERNAL_URL" \
   -e STATS_WORKER_COMMAND="$COMMAND" \
-  bloxodes-stats-worker:production \
+  "$IMAGE" \
   >> "$LOG_DIR/$JOB.log" 2>&1
 echo "$(date -Is) finished $JOB" >> "$LOG_DIR/$JOB.log"
