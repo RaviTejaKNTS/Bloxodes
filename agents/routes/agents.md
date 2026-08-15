@@ -28,7 +28,7 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 | `/api/extension/auth/logout` | `POST`, `OPTIONS` | `apps/web/src/app/api/extension/auth/logout/route.ts` | Revokes the current extension bearer session. |
 | `/api/extension/codes/progress` | `GET`, `PUT`, `PATCH`, `OPTIONS` | `apps/web/src/app/api/extension/codes/progress/route.ts` | Reads and incrementally updates the signed-in user's used-code progress shared with the website. |
 | `/api/feedback` | `POST` | `src/app/api/feedback/route.ts` | Same-origin site feedback submissions from the header drawer with optional contact email. |
-| `/api/health` | `GET` | `src/app/api/health/route.ts` | Runtime health endpoint. |
+| `/api/health` | `GET` | `src/app/api/health/route.ts` | Deep operational health by default; `?scope=deploy` performs only lightweight database/build readiness for Docker and deployment gates. |
 | `/api/articles/editorial-inventory` | `GET` | `apps/web/src/app/api/articles/editorial-inventory/route.ts` | Cached, GET-only production inventory of published page families, titles, route keys, and universe IDs for external duplicate and internal-link checks; exposes no mutation or production credential. |
 | `/api/mobile/auth/complete` | `GET` | `apps/web/src/app/api/mobile/auth/complete/route.ts` | Mobile login completion: reads the web session cookie and redirects to `bloxodes://auth` with a short-lived signed handoff code (or to web login when signed out). |
 | `/api/mobile/auth/exchange` | `POST`, `OPTIONS` | `apps/web/src/app/api/mobile/auth/exchange/route.ts` | Exchanges a mobile handoff code for an `app_sessions` bearer token plus the user profile. |

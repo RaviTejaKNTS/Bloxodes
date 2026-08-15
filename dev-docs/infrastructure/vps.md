@@ -1,8 +1,8 @@
 # VPS
 
-Status: Active; stats-worker packaging guard deployed and verified
-Last verified: 2026-08-14
-Evidence: SSH/container inspection, transactional production migration release/readback, deployed Edge Function checksum/smoke, and exact-SHA application health
+Status: Active; Supabase Meta runaway contained and web stability protections verified
+Last verified: 2026-08-15
+Evidence: SSH/container/process inspection, repeated public latency checks, transactional production migration release/readback, and exact-SHA application health
 
 ## Host
 
@@ -11,9 +11,9 @@ Evidence: SSH/container inspection, transactional production migration release/r
 - OS: Ubuntu 24.04.
 - Kernel: 6.8.0-124-generic.
 - CPU: 4 logical CPUs.
-- Memory: 15 GiB; ~8.7 GiB available at check time.
+- Memory: 15 GiB; ~7.6 GiB available during the incident check.
 - Swap: 2 GiB and effectively fully used at check time.
-- Root disk: capacity pressure must be checked immediately before any approved build, database migration, or vendor-stack work; the later 2026-08-13 read-only check observed approximately 67% used.
+- Root disk: 59% used during the 2026-08-15 incident check; recheck before large builds, migrations, or vendor-stack work.
 - Uptime: about 8 weeks.
 
 The web app, Supabase, Dokploy, Umami, and other services share this host. Heavy crawls, builds, database jobs, and cache operations compete for the same resources.
@@ -41,7 +41,7 @@ Fail2ban `sshd` is active. The `DOCKER-USER` chain drops inbound TCP 3000, confi
 - Supabase stack contains 12 core containers plus the REST bridge.
 - Umami and unrelated application stacks share the server.
 
-See `data/supabase.md` for Supabase versions and degraded probes.
+See `data/supabase.md` for Supabase versions and probe state. The Meta image-level health check is explicitly disabled in production Compose after it caused runaway child processes; the service itself remains running.
 
 ## Schedulers
 
@@ -66,11 +66,12 @@ Worker ownership:
 ## Operational Risks
 
 - Full swap usage warrants investigation even with available RAM; check pressure, swappiness, and long-lived containers before large jobs.
+- On 2026-08-15 the 4-core host sustained load well above capacity, with CPU steal and a two-month-old `supabase-meta` container holding about 19,000 zombie Node processes. Swarm then replaced the only web replica after five 10-second deploy-health timeouts, causing a complete site outage during each replacement. Recreating only Meta and disabling its image-level probe dropped Meta from about 108% CPU to under 1% without restarting the public data plane.
 - The August 14 universe-stats collapse was not caused by this pressure: both
   VPS and Northflank jobs failed before work because the worker image omitted
   `env/config.json`. The packaging/promotion guards above own that failure mode.
 - Public-anywhere UFW rules on 80/443 weaken the intended Cloudflare-only origin model. Confirm the origin-firewall script's effective policy and remove redundant public rules only through a tested, recoverable change.
-- Meta/REST unhealthy probes reduce Docker health signal quality.
+- The Meta image-level probe is disabled until a bounded replacement is proven. The REST probe still reduces Docker health signal quality because it targets the wrong internal endpoint.
 - Production migration history was reconciled and converged through repository migration `20260920000013` on 2026-08-14. The deployed `revalidate` Edge Function also matches the checked-in source and passed an authenticated production smoke run.
 - Database and Storage backup/recovery work is owner-deferred and excluded from this change.
 - Several unrelated workloads share CPU, disk, and Docker; incident triage must inspect the whole host.

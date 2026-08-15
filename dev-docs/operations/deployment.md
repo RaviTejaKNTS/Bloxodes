@@ -1,8 +1,8 @@
 # Production Deployment
 
 Status: Active; environment, schema, Edge Function, and platform synchronization controls verified
-Last verified: 2026-08-14
-Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
+Last verified: 2026-08-15
+Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, managed-development/production migration readback, VPS incident evidence, Edge Function release smoke, guarded e2e homelab synchronization contract, and platform checks
 
 ## Normal Path
 
@@ -11,10 +11,10 @@ Evidence: GitHub workflow, Dockerfile, exact-SHA Dokploy deployment health, mana
 3. A Node 24 BuildKit build receives production build variables through a secret mount.
 4. GHCR receives an immutable commit-SHA image and the moving `production` tag.
 5. GitHub updates Dokploy to the immutable image and triggers deployment.
-6. The workflow waits until `/api/health` reports that exact SHA and a healthy database.
+6. The workflow waits until `/api/health?scope=deploy` reports that exact SHA and a healthy database.
 7. It purges route-family Cloudflare tags, optionally performs an explicit full purge, and checks selected public paths.
 
-The public `/api/health` response is the deploy gate. It includes build SHA, database health, stats freshness, and cache feature flags.
+The public `/api/health?scope=deploy` response is the container/deploy gate. It performs one lightweight database-readiness request and returns build SHA plus cache feature flags; it does not run stats freshness or pipeline RPCs. The default `/api/health` response remains the deeper operational check and includes stats freshness and pipeline health. Keeping these scopes separate prevents a slow stats query from replacing the only healthy web replica.
 
 ## Secrets
 

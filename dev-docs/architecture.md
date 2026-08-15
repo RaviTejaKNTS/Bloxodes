@@ -61,7 +61,7 @@ Cloudflare is the long-lived public cache. The origin uses Next.js ISR-style res
 
 ## Known Degraded State
 
-- `supabase-meta` is unhealthy and its health command aborts; Studio itself still responds behind authentication.
+- The `supabase-meta` image-level health probe is explicitly disabled after it accumulated unreaped Node processes and overloaded the shared host; Meta itself remains running and Studio still responds behind authentication.
 - `supabase-rest` is marked unhealthy because its probe targets `localhost:3001/ready`; public REST and application database checks work through the proxy/gateway topology.
 - VPS swap was effectively full (2 GiB used) with 15 GiB RAM and about 8.7 GiB available memory.
 - The earlier homelab Grok Build `402 Payment Required` failure is historical; the latest audited discovery and writer services succeeded.

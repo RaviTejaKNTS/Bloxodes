@@ -42,9 +42,45 @@ function readBuildSha() {
 export async function GET(request: Request) {
   const supabase = supabaseAdmin();
   const deployScope = new URL(request.url).searchParams.get("scope") === "deploy";
-  const playingCutoff = new Date(Date.now() - 24 * 60 * 60 * 1_000).toISOString();
-  const databaseCheck = await supabase.from("code_pages").select("id", { head: true, count: "exact" }).limit(1);
+  const databaseCheck = await supabase.from("code_pages").select("id", { head: true }).limit(1);
   const databaseOk = !databaseCheck.error;
+  const timestamp = new Date().toISOString();
+  const build = { sha: readBuildSha() };
+  const features = {
+    cacheTags: true,
+    cacheHeaderVersion: 4,
+    publicHtmlCacheHeaders: "cloudflare-200-only",
+    publicPageRendering: "isr",
+    cloudflarePurgeStrategy: process.env.CLOUDFLARE_PURGE_STRATEGY || "tags"
+  };
+  const database = {
+    ok: databaseOk,
+    error: databaseCheck.error?.message ?? null
+  };
+
+  // Container and deployment readiness must remain lightweight. The operational
+  // endpoint below performs the deeper stats checks used by monitoring.
+  if (deployScope) {
+    return NextResponse.json(
+      {
+        ok: databaseOk,
+        status: databaseOk ? "healthy" : "unhealthy",
+        scope: "deploy",
+        timestamp,
+        build,
+        features,
+        checks: { database }
+      },
+      {
+        status: databaseOk ? 200 : 503,
+        headers: {
+          "Cache-Control": "no-store, max-age=0"
+        }
+      }
+    );
+  }
+
+  const playingCutoff = new Date(Date.now() - 24 * 60 * 60 * 1_000).toISOString();
 
   let statsLatestAt: string | null = null;
   let statsSource = "stats_game_current_index";
@@ -87,30 +123,19 @@ export async function GET(request: Request) {
     ? null
     : evaluateStatsPipelineHealth(pipelineHealth.data as StatsPipelineHealthSnapshot);
   const statsOperational = evaluatedStats?.status !== "unhealthy";
-  const ok = databaseOk && (deployScope || (pipelineHealth.error == null && statsOperational));
+  const ok = databaseOk && pipelineHealth.error == null && statsOperational;
   return NextResponse.json(
     {
       ok,
       status: !databaseOk || pipelineHealth.error || evaluatedStats?.status === "unhealthy"
         ? "unhealthy"
         : evaluatedStats?.status ?? "healthy",
-      scope: deployScope ? "deploy" : "operational",
-      timestamp: new Date().toISOString(),
-      build: {
-        sha: readBuildSha()
-      },
-      features: {
-        cacheTags: true,
-        cacheHeaderVersion: 4,
-        publicHtmlCacheHeaders: "cloudflare-200-only",
-        publicPageRendering: "isr",
-        cloudflarePurgeStrategy: process.env.CLOUDFLARE_PURGE_STRATEGY || "tags"
-      },
+      scope: "operational",
+      timestamp,
+      build,
+      features,
       checks: {
-        database: {
-          ok: databaseOk,
-          error: databaseCheck.error?.message ?? null
-        },
+        database,
         statsIndex: {
           source: statsSource,
           latestAt: statsLatestAt,
