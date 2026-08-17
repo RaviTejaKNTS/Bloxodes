@@ -332,6 +332,7 @@ function childEnvironment(dev: { url: string; serviceRole: string }): NodeJS.Pro
   childEnv.SUPABASE_URL = dev.url;
   childEnv.SUPABASE_SERVICE_ROLE = dev.serviceRole;
   childEnv.ARTICLE_WRITER_DEV_ONLY = "true";
+  childEnv.ARTICLE_WRITER_REGENERATE_COVERS = "true";
   return childEnv;
 }
 

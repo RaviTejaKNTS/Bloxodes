@@ -489,19 +489,41 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
     ((existing as { cover_image?: string | null } | null)?.cover_image || null) ?? null
   );
   const universeCover = await pickUniverseCoverImage(sb, universeId);
-  const coverImage =
-    suppliedCover ??
-    (isEditedArticleCover(existingCover, slug) ? existingCover : null) ??
-    (!dryRun && universeCover
-      ? await uploadEditedArticleCover({
-          imageUrl: universeCover,
-          slug,
-          title: finalJson.title,
-          sb,
-        })
-      : null) ??
-    existingCover ??
-    universeCover;
+  const forceEditedCover = process.env.ARTICLE_WRITER_REGENERATE_COVERS === "true";
+  let coverImage: string | null;
+  if (forceEditedCover) {
+    const coverSource = universeCover ?? suppliedCover ?? existingCover;
+    if (!coverSource) {
+      throw new Error(`Article writer cannot create an edited cover for ${slug}: no source image is available.`);
+    }
+    if (dryRun) {
+      coverImage = coverSource;
+    } else {
+      coverImage = await uploadEditedArticleCover({
+        imageUrl: coverSource,
+        slug,
+        title: finalJson.title,
+        sb,
+      });
+      if (!coverImage) {
+        throw new Error(`Article writer could not generate and upload the required edited cover for ${slug}.`);
+      }
+    }
+  } else {
+    coverImage =
+      suppliedCover ??
+      (isEditedArticleCover(existingCover, slug) ? existingCover : null) ??
+      (!dryRun && universeCover
+        ? await uploadEditedArticleCover({
+            imageUrl: universeCover,
+            slug,
+            title: finalJson.title,
+            sb,
+          })
+        : null) ??
+      existingCover ??
+      universeCover;
+  }
   const contentMd = coverImage
     ? injectCoverImageBeforeFirstH2(finalJson.content_md, coverImage, finalJson.title)
     : finalJson.content_md;

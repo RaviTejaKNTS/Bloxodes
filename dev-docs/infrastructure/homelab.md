@@ -1,6 +1,6 @@
 # Homelab
 
-Status: Automation healthy; checkout synchronized with production
+Status: Installed automation healthy; Codex-primary writer change awaiting release and article canary
 Last verified: 2026-08-14
 Evidence: guarded exact-SHA synchronization, repository cleanliness, systemd timer/service state, managed-development readiness, env name contract, and journal
 
@@ -17,9 +17,11 @@ Evidence: guarded exact-SHA synchronization, repository cleanliness, systemd tim
 
 - `bloxodes-article-discovery.timer`: enabled, active, runs at 00:00/06:00/12:00/18:00 local time with persistence.
 - `bloxodes-article-discovery.service`: runs readiness, discovery, and Groq curation; last run succeeded.
-- `bloxodes-article-writer.service`: triggered after successful discovery; the latest audited run succeeded and completed all 6 claimed items.
+- `bloxodes-article-writer.service`: triggered after successful discovery; the latest installed-release audit used Grok and completed all 6 claimed items. The pending code revision changes the primary to authenticated Codex CLI with GPT-5.6 Luna at xhigh reasoning and retains Grok 4.5 as the classified provider fallback.
 
-Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`, mode 640. It contains managed-dev Supabase, media, production inventory, Groq, model, and writer controls.
+Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`, mode 640. It contains managed-dev Supabase, media, production inventory, Groq curation/fallback, Codex model/reasoning, and writer controls. Codex CLI authentication belongs to the `teja` account's protected Codex home and is checked without starting a paid model run.
+
+The homelab currently has Codex CLI at `/home/teja/.local/bin/codex` and Grok at `/home/teja/.grok/bin/grok`. A read-only `gpt-5.6-luna` `xhigh` access canary succeeded on 2026-08-17. The writer resolves these user-local paths directly because systemd does not inherit the interactive shell's user-local PATH.
 
 ## Synchronization
 
@@ -33,6 +35,7 @@ Runtime env is `/etc/bloxodes/article-automation.env`, root-owned, group `teja`,
 - Article queue writes target the managed-dev Supabase project.
 - Production is read only through the public editorial inventory endpoint during automated discovery/writing.
 - Human review/import is required before production publication.
+- Codex and Grok receive the same scrubbed managed-development child environment. A Codex failure may start Grok only once and only for queue slots not already touched by the Codex run.
 - Homelab operator access belongs in `.envs/infrastructure/homelab.env`; writer runtime values belong in `.envs/pipelines/articles.env` and the host env file.
 - Never copy the production Supabase target into the homelab writer env; queue and media staging remain managed development.
 - E2e checkout-sync authority does not include env changes, unit installation, stopping active discovery/writer jobs, service restarts, or unrelated host mutations. If the production delta changes installed units, a service is active, or preflight fails, leave the checkout unchanged and report synchronization pending.

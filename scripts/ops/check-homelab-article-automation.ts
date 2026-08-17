@@ -6,6 +6,7 @@ import { spawnSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 
 import { resolveArticleDevCredentials, supabaseTarget } from "../articles/article-queue-env";
+import { parseCodexReasoningEffort } from "../articles/article-writer-provider";
 import { fetchProductionEditorialInventory } from "../articles/production-editorial-inventory";
 
 type Component = "all" | "discovery" | "writer";
@@ -73,6 +74,23 @@ async function main() {
 
   if (component !== "discovery") {
     if (!process.env.SUPABASE_MEDIA_BUCKET?.trim()) throw new Error("SUPABASE_MEDIA_BUCKET is required for article media.");
+    const codexConfigured = process.env.ARTICLE_WRITER_CODEX_BIN?.trim();
+    const codex = findExecutable(
+      [codexConfigured || "", `${process.env.HOME ?? ""}/.local/bin/codex`, "codex"].filter(Boolean)
+    );
+    if (!codex) throw new Error("Codex CLI is not installed or ARTICLE_WRITER_CODEX_BIN is incorrect.");
+    const codexVersion = spawnSync(codex, ["--version"], { encoding: "utf8" });
+    if (codexVersion.status !== 0) throw new Error(`Codex CLI failed its version check: ${codexVersion.stderr.trim()}`);
+    const codexLogin = spawnSync(codex, ["login", "status"], { encoding: "utf8" });
+    if (codexLogin.status !== 0) {
+      throw new Error(`Codex CLI authentication is not ready: ${codexLogin.stderr.trim() || codexLogin.stdout.trim()}`);
+    }
+    const codexModel = process.env.ARTICLE_WRITER_CODEX_MODEL?.trim() || "gpt-5.6-luna";
+    const codexReasoning = parseCodexReasoningEffort(
+      process.env.ARTICLE_WRITER_CODEX_REASONING_EFFORT?.trim() || "xhigh"
+    );
+    console.log(`Codex CLI: ${codexVersion.stdout.trim()} (${codexModel}, ${codexReasoning})`);
+
     const grokConfigured = process.env.ARTICLE_WRITER_GROK_BIN?.trim();
     const grok = findExecutable([grokConfigured || "", `${process.env.HOME ?? ""}/.grok/bin/grok`, "grok"].filter(Boolean));
     if (!grok) throw new Error("Grok CLI is not installed or ARTICLE_WRITER_GROK_BIN is incorrect.");
