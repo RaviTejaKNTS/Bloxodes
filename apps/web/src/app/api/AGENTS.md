@@ -44,6 +44,9 @@ These routes back interactive site features, search, tool data, session/progress
 - Ops:
   - `health`
   - `revalidate`
+- Personal admin (bearer `ADMIN_API_TOKEN`, used only by `apps/admin-extension`):
+  - `admin/codes`
+  - `admin/articles`
 
 ## Implementation Rules
 
@@ -58,6 +61,7 @@ These routes back interactive site features, search, tool data, session/progress
   - `apps/web/src/lib/security/rate-limit.ts`
 - Make runtime behavior explicit with `dynamic`, `runtime`, or both when the endpoint depends on request-time state.
 - Revalidate tags or paths after successful mutations.
+- `/api/admin/*` routes exist only when `ADMIN_API_TOKEN` is set (otherwise 404) and require that token as a bearer header. They share `apps/web/src/lib/admin/http.ts` (guard, slug/body parsing, normalizers, error mapping) and per-family modules over `supabaseAdmin()`, are rate-limited per IP, and rely on database revalidation triggers rather than calling `/api/revalidate`. Keep them narrow and reject unknown fields: `admin/codes` patches only editorial columns of one codes page (name, universe ID, SEO title/description, cover image, the five social/Roblox links, positional `source_url`..`source_url_10`, five markdown sections); `admin/articles` patches title, meta description, cover image, universe ID, author ID, body (recomputing `word_count`), tags, sources, and `faq_json`. Neither touches slug, publish state, `published_at`, or code rows.
 - `/api/articles/editorial-inventory` is a GET-only projection of already-published editorial identity fields for off-host duplicate and internal-link checks. Keep its response limited to page family, title, route key, and universe ID; never add draft content, user data, operational rows, or mutation behavior.
 
 ## Revalidation Notes

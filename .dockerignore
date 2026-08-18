@@ -9,6 +9,7 @@
 apps/web/.next
 apps/extension/dist
 apps/extension/*.zip
+apps/admin-extension/dist
 apps/mobile/.expo
 apps/mobile/dist
 coverage

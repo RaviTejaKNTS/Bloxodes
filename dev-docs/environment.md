@@ -65,7 +65,7 @@ For a workstation command that intentionally targets production, set both `BLOXO
 ## Value Ownership
 
 - Targets contain only database/media endpoint credentials for that target.
-- Shared application contains cross-target web/auth settings, including the public GA measurement ID used by workstation builds. Public production analytics IDs are injected by GitHub/Dokploy.
+- Shared application contains cross-target web/auth settings, including the public GA measurement ID used by workstation builds. Public production analytics IDs are injected by GitHub/Dokploy. `ADMIN_API_TOKEN` also lives here: it enables `/api/admin/*` for the personal `apps/admin-extension`; leaving it unset disables those routes, and the production value is set only on the Dokploy runtime service.
 - Integrations contain content research/generation and distribution providers.
 - Pipelines contain workload-specific credentials and controls.
 - Infrastructure contains operator access for one platform.

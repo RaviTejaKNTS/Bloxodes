@@ -9,6 +9,7 @@ When working in a folder, prefer the closest `AGENTS.md` over older reference do
 - `dev-docs/architecture.md`: verified production request, data, and automation topology plus known degraded components.
 - `dev-docs/environment.md`: env profiles, overlays, ignored value storage, committed examples, runtime ownership, and safety rules.
 - `apps/extension/AGENTS.md`: Chrome MV3 extension packaging, Roblox injection, API use, and Chrome Web Store update rules.
+- `apps/admin-extension/AGENTS.md`: personal unpacked-only admin popup plus full-page editor for codes pages and articles through `/api/admin/*`.
 - `apps/mobile/AGENTS.md`: Expo React Native app scope, mobile API contract, and local testing commands.
 - `apps/web/src/app/AGENTS.md`: App Router, layouts, feeds, auth routes, and API conventions.
 - `apps/web/src/app/(site)/AGENTS.md`: public page families, page-data patterns, SEO, and content route expectations.

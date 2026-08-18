@@ -8,6 +8,7 @@ Evidence: repository architecture/configuration, exact-SHA public health, manage
 
 - Web: Next.js App Router in `apps/web`; the production image is built from the root `Dockerfile` and runs the standalone server at `apps/web/server.js`.
 - Extension: Chrome MV3 in `apps/extension`; it calls Bloxodes `/api/extension/*` routes and never receives Supabase private keys.
+- Admin extension: personal unpacked-only Chrome MV3 popup in `apps/admin-extension`; it calls `/api/admin/*` on the origin of the current tab with a bearer `ADMIN_API_TOKEN` and is never packaged, published, or deployed.
 - Mobile: Expo Router in `apps/mobile`; it calls `/api/mobile/*`, uses optional bearer authentication, and does not connect directly to Supabase.
 - Data/content jobs: root `scripts/` grouped by pipeline, with stable npm aliases in `package.json`.
 - Database functions: migrations and Edge Functions under `supabase/`.

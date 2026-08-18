@@ -11,6 +11,8 @@ This file is the inventory for API, auth, feed, and sitemap routes.
 
 | Route | Methods | File | Purpose |
 | --- | --- | --- | --- |
+| `/api/admin/articles` | `GET`, `PATCH` | `src/app/api/admin/articles/route.ts` | Personal admin API for `apps/admin-extension`: read or partially patch an article's editorial columns (title, meta description, cover image, universe/author IDs, body + word count, tags, sources, FAQ). Requires bearer `ADMIN_API_TOKEN`; 404 when the variable is unset. |
+| `/api/admin/codes` | `GET`, `PATCH` | `src/app/api/admin/codes/route.ts` | Personal admin API for `apps/admin-extension`: read or partially patch a codes page's editorial columns (name, universe ID, SEO fields, cover image, links, positional sources, markdown sections). Requires bearer `ADMIN_API_TOKEN`; 404 when the variable is unset. |
 | `/api/account/avatar` | `GET` | `src/app/api/account/avatar/route.ts` | Signed-in avatar/display-name payload for account UI. |
 | `/api/checklists/progress` | `GET`, `PUT` | `src/app/api/checklists/progress/route.ts` | Per-user checklist progress read/write. |
 | `/api/checklists/session` | `GET` | `src/app/api/checklists/session/route.ts` | Session snapshot for checklist UI. |

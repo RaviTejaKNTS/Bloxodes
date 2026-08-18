@@ -1,0 +1,15 @@
+{
+  "name": "@bloxodes/admin-extension",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Personal, unpacked-only Bloxodes admin popup for codes pages. Never published to a store.",
+  "scripts": {
+    "clean": "node scripts/clean.mjs",
+    "build": "npm run clean && tsc -p tsconfig.json && node scripts/build.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "sharp": "^0.33.5",
+    "typescript": "5.5.4"
+  }
+}
