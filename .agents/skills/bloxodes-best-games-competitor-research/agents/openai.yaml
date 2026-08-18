@@ -1,0 +1,4 @@
+interface:
+  display_name: "Best-Games Competitor Research"
+  short_description: "Map competitor lists into broad game candidates"
+  default_prompt: "Use $bloxodes-best-games-competitor-research to collect competing Roblox recommendation lists and build a source-backed candidate inventory before selection."

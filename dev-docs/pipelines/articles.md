@@ -15,6 +15,8 @@ Evidence: code, guarded homelab checkout synchronization, systemd units/timer/jo
 
 All approved articles require a separate nonzero image pass before writing, as defined by the article workflow skills and `scripts/content/check-article-image-readiness.ts`.
 
+Opinionated Roblox game-list articles remain ordinary `articles` rows. The reusable `roblox-game-card` fenced block carries a stable universe ID, square game icon, Roblox URL, and optional Bloxodes stats URL; all recommendation detail stays in the surrounding Markdown prose. The repo-local best-games workflow is split into discovery, selection/order, per-game research, and writing skills so the candidate set is not capped at a hardcoded count.
+
 ## Environments
 
 - Managed-dev queue: remote non-production Supabase.

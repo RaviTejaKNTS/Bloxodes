@@ -3,7 +3,12 @@ import { z } from "zod";
 
 const BLOCK_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const TIER_RANK_PATTERN = /^[A-Za-z0-9+.-]{1,12}$/;
-const ARTICLE_BLOCK_LANGUAGES = new Set(["tier-list", "article-checklist"]);
+const ARTICLE_BLOCK_LANGUAGES = new Set([
+  "tier-list",
+  "article-checklist",
+  "roblox-game-card",
+  "article-page-break",
+]);
 
 function isSafeArticleHref(value: string): boolean {
   if (value.startsWith("/") && !value.startsWith("//")) return true;
@@ -140,22 +145,48 @@ export const articleChecklistBlockSchema = z
     });
   });
 
+export const robloxGameCardBlockSchema = z
+  .object({
+    schema: z.literal(1),
+    id: z.string().trim().regex(BLOCK_ID_PATTERN),
+    universeId: z.number().int().positive(),
+    name: z.string().trim().min(1).max(100),
+    image: articleHrefSchema,
+    robloxUrl: articleHrefSchema,
+    statsUrl: articleHrefSchema.optional(),
+  })
+  .strict();
+
+export const articlePageBreakBlockSchema = z
+  .object({
+    schema: z.literal(1),
+    id: z.string().trim().regex(BLOCK_ID_PATTERN),
+  })
+  .strict();
+
 export type TierListBlockData = z.infer<typeof tierListBlockSchema>;
 export type TierListItem = z.infer<typeof tierListItemSchema>;
 export type ArticleChecklistBlockData = z.infer<typeof articleChecklistBlockSchema>;
 export type ArticleChecklistItem = z.infer<typeof checklistItemSchema>;
+export type RobloxGameCardBlockData = z.infer<typeof robloxGameCardBlockSchema>;
+export type ArticlePageBreakBlockData = z.infer<typeof articlePageBreakBlockSchema>;
 
 export type ArticleContentBlock =
   | { kind: "markdown"; markdown: string }
   | { kind: "tier-list"; data: TierListBlockData }
   | { kind: "article-checklist"; data: ArticleChecklistBlockData }
+  | { kind: "roblox-game-card"; data: RobloxGameCardBlockData }
+  | { kind: "article-page-break"; data: ArticlePageBreakBlockData }
   | { kind: "invalid"; language: string; message: string };
+
+export type RenderableArticleContentBlock = Exclude<ArticleContentBlock, { kind: "article-page-break" }>;
 
 export type ArticleBlockImageRef = {
   blockId: string;
   itemName: string;
   alt: string;
   src: string;
+  kind: "tier-list" | "roblox-game-card";
 };
 
 function formatZodError(error: z.ZodError): string {
@@ -174,6 +205,20 @@ function parseStructuredBlock(language: string, source: string): ArticleContentB
       const parsed = tierListBlockSchema.safeParse(raw);
       return parsed.success
         ? { kind: "tier-list", data: parsed.data }
+        : { kind: "invalid", language, message: formatZodError(parsed.error) };
+    }
+
+    if (language === "roblox-game-card") {
+      const parsed = robloxGameCardBlockSchema.safeParse(raw);
+      return parsed.success
+        ? { kind: "roblox-game-card", data: parsed.data }
+        : { kind: "invalid", language, message: formatZodError(parsed.error) };
+    }
+
+    if (language === "article-page-break") {
+      const parsed = articlePageBreakBlockSchema.safeParse(raw);
+      return parsed.success
+        ? { kind: "article-page-break", data: parsed.data }
         : { kind: "invalid", language, message: formatZodError(parsed.error) };
     }
 
@@ -255,8 +300,54 @@ export function parseArticleContentBlocks(markdown: string): ArticleContentBlock
   return blocks;
 }
 
+export function parseArticleContentPages(markdown: string): RenderableArticleContentBlock[][] {
+  const pages: RenderableArticleContentBlock[][] = [[]];
+
+  for (const block of parseArticleContentBlocks(markdown)) {
+    if (block.kind === "article-page-break") {
+      pages.push([]);
+      continue;
+    }
+    pages[pages.length - 1]?.push(block);
+  }
+
+  return pages;
+}
+
+function articleContentPageBreakErrors(markdown: string): string[] {
+  const blocks = parseArticleContentBlocks(markdown);
+  const errors: string[] = [];
+  let pageHasContent = false;
+
+  for (const block of blocks) {
+    if (block.kind === "article-page-break") {
+      if (!pageHasContent) {
+        errors.push("article-page-break: Page breaks must appear between content sections");
+      }
+      pageHasContent = false;
+      continue;
+    }
+    pageHasContent = true;
+  }
+
+  if (blocks.some((block) => block.kind === "article-page-break") && !pageHasContent) {
+    errors.push("article-page-break: The article cannot end with a page break");
+  }
+
+  return errors;
+}
+
 export function extractArticleBlockImageRefs(markdown: string): ArticleBlockImageRef[] {
-  return parseArticleContentBlocks(markdown).flatMap((block) => {
+  return parseArticleContentBlocks(markdown).flatMap((block): ArticleBlockImageRef[] => {
+    if (block.kind === "roblox-game-card") {
+      return [{
+        blockId: block.data.id,
+        itemName: block.data.name,
+        alt: `${block.data.name} Roblox game icon`,
+        src: block.data.image,
+        kind: "roblox-game-card",
+      }];
+    }
     if (block.kind !== "tier-list") return [];
     return block.data.tiers.flatMap((tier) =>
       tier.items.map((item) => ({
@@ -264,15 +355,19 @@ export function extractArticleBlockImageRefs(markdown: string): ArticleBlockImag
         itemName: item.name,
         alt: item.alt,
         src: item.image,
+        kind: "tier-list",
       }))
     );
   });
 }
 
 export function articleBlockErrors(markdown: string): string[] {
-  return parseArticleContentBlocks(markdown)
-    .filter((block): block is Extract<ArticleContentBlock, { kind: "invalid" }> => block.kind === "invalid")
-    .map((block) => `${block.language}: ${block.message}`);
+  return [
+    ...parseArticleContentBlocks(markdown)
+      .filter((block): block is Extract<ArticleContentBlock, { kind: "invalid" }> => block.kind === "invalid")
+      .map((block) => `${block.language}: ${block.message}`),
+    ...articleContentPageBreakErrors(markdown),
+  ];
 }
 
 export function stripArticleContentBlocks(markdown: string): string {

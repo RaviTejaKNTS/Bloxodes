@@ -136,6 +136,7 @@ function revalidateForArticle(slug: string, articleGameSlug?: string | null) {
   return applyRevalidation(
     [
       `/articles/${slug}`,
+      "/articles/[slug]/page/[page]",
       ...paginatedIndexPaths("/articles"),
       ...articleGamePaths,
       "/articles/games/[slug]",

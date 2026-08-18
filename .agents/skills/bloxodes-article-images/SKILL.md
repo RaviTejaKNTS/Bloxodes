@@ -19,8 +19,8 @@ tmp/content-workspace/<game-or-topic-slug>/articles/<article-slug>/
 
 1. Read the approved `brief.md`.
 2. Define at least one useful visual target. The image pass can never start with an expected count of zero.
-3. For named locations, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, complete rankings, or other visual sets, list every distinct target that images would help identify. For a normal article, list the one to three highest-value screenshots, UI states, items, characters, or steps that would make the answer clearer.
-4. Do not let easy-to-find images define the expected count.
+3. For named locations, routes, NPCs, puzzle states, collectibles, menu states, ordered visual steps, complete rankings, or other visual sets, list every distinct target that images would help identify. For a normal article, list the one to three highest-value screenshots, UI states, items, characters, or steps that would make the answer clearer. For an opinionated best-games article, every selected game is a distinct target: plan one useful landscape gameplay thumbnail per game section, in the approved order.
+4. Do not let easy-to-find images define the expected count. The approved game selection defines the expected thumbnail count.
 5. Use one stable entry ID and one planned article heading per target.
 
 For example, a five-location guide starts with five entries even if the lead source has no reusable images.
@@ -31,7 +31,7 @@ For example, a five-location guide starts with five entries even if the lead sou
 2. Search the exact game name plus location, NPC, item, or step name. Try spelling variants.
 3. Check official game pages and media, the game's wiki, reputable community wikis, and credible guide pages. A clean, exact, genuine gameplay screenshot from a credible page is usable when its provenance is recorded; do not reject it only because another editorial site hosts it or the page does not state a general reuse license.
 4. Inspect full source pages and lazy-loaded `src`, `srcset`, and `data-src` values. Do not select from a search thumbnail alone.
-5. Match each image with nearby headings, captions, alt text, map labels, or surrounding instructions. Visually inspect the full image. Cross-check ambiguous matches.
+5. Match each image with nearby headings, captions, alt text, map labels, or surrounding instructions. For best-games articles, the exact official Roblox experience page is the source-page proof for its landscape thumbnail. Visually inspect the full image. Cross-check ambiguous matches.
 6. Reject logos, covers, edited thumbnails, page screenshots, decorative art, unrelated maps, collages that hide the target, watermarks, large arrows, and visible site branding.
 7. Record the source page, original image URL, exact-match evidence, provenance/source note, useful alt text, and status for every entry. If the source or file states an explicit attribution or license condition, record it and stop for parent review before use. Do not add a public attribution caption automatically.
 

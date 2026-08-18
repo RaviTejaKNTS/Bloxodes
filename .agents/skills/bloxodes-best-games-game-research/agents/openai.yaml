@@ -1,0 +1,4 @@
+interface:
+  display_name: "Best Games Game Research"
+  short_description: "Verify active Roblox games for accurate prose"
+  default_prompt: "Use $bloxodes-best-games-game-research to verify each selected Roblox game is active and research its real loop, quality, strengths, friction, and unique details."

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   articleBlockErrors,
   extractArticleBlockImageRefs,
+  parseArticleContentPages,
   parseArticleContentBlocks,
   stripArticleContentBlocks,
   validateTierListArticleDetails,
@@ -49,12 +50,14 @@ describe("article content blocks", () => {
         itemName: "Hakari",
         alt: "Hakari fighting style icon",
         src: "/Gakuran/Fighting%20Styles/hakari.png",
+        kind: "tier-list",
       },
       {
         blockId: "fighting-styles",
         itemName: "Boxing",
         alt: "Boxing fighting style icon",
         src: "/Gakuran/Fighting%20Styles/boxing.png",
+        kind: "tier-list",
       },
     ]);
   });
@@ -79,6 +82,47 @@ describe("article content blocks", () => {
         kind: "article-checklist",
         data: { id: "raid-preparation", sections: [{ title: "Gear" }] },
       },
+    ]);
+  });
+
+  it("splits content at validated page-break blocks", () => {
+    const markdown = [
+      "Intro and first section.",
+      "",
+      "```article-page-break",
+      "schema: 1",
+      "id: page-two",
+      "```",
+      "",
+      "Second page section.",
+    ].join("\n");
+
+    expect(parseArticleContentBlocks(markdown).map((block) => block.kind)).toEqual([
+      "markdown",
+      "article-page-break",
+      "markdown",
+    ]);
+    expect(parseArticleContentPages(markdown).map((page) => page.length)).toEqual([1, 1]);
+  });
+
+  it("rejects page breaks at the beginning, end, or next to another break", () => {
+    const markdown = [
+      "```article-page-break",
+      "schema: 1",
+      "id: page-two",
+      "```",
+      "",
+      "Content.",
+      "",
+      "```article-page-break",
+      "schema: 1",
+      "id: page-three",
+      "```",
+    ].join("\n");
+
+    expect(articleBlockErrors(markdown)).toEqual([
+      "article-page-break: Page breaks must appear between content sections",
+      "article-page-break: The article cannot end with a page break",
     ]);
   });
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Best Games Article Writing"
+  short_description: "Write flowing opinionated Roblox game articles"
+  default_prompt: "Use $bloxodes-best-games-writing to write the complete flowing article from approved discovery, selection, and game research."

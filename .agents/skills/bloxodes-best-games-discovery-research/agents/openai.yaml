@@ -1,0 +1,4 @@
+interface:
+  display_name: "Best Games Discovery Research"
+  short_description: "Build a broad current Roblox game candidate set"
+  default_prompt: "Use $bloxodes-best-games-discovery-research to combine competitor leads with independent research and document every credible Roblox game candidate before selection."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Best Games Selection Research"
+  short_description: "Select and order a deliberate Roblox game list"
+  default_prompt: "Use $bloxodes-best-games-selection-research to turn broad Roblox game discovery into a justified approved list and editorial order."
