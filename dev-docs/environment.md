@@ -1,8 +1,8 @@
 # Environment System
 
 Status: Active
-Last verified: 2026-08-14
-Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on 2026-08-14
+Last verified: 2026-08-19
+Evidence: ignored value store and permissions, committed examples/config, loader guards, worktree linkage, and `env:doctor`/`env:check` executed on both the workstation and homelab on 2026-08-19
 
 ## Storage Model
 
@@ -78,6 +78,8 @@ Do not create a pipeline env file merely for symmetry. Codes, catalog, stats, an
 ## Worktrees
 
 The Codex template runs `scripts/dev/setup-worktree.sh`. New worktrees link the single ignored `.envs/` directory from the main checkout rather than linking many ambiguous root `.env*` files. Existing files are never overwritten. The `.envs` path itself and its contents are both ignored so a worktree symlink cannot appear in a commit.
+
+The homelab checkout mirrors the complete private `.envs/` profile tree for feature, content, and operator work. Host-specific executable paths may differ between the Mac and Linux checkouts; the homelab systemd jobs continue to use the separate protected `/etc/bloxodes/article-automation.env` runtime file.
 
 ## External Runtime Contracts
 
