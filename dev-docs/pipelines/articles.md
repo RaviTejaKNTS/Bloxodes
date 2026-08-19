@@ -32,7 +32,7 @@ Opinionated Roblox game-list articles remain ordinary `articles` rows. The reusa
 - The batch counts queue rows touched since Codex started and subtracts them from the fallback target. If every slot already has activity, fallback is withheld rather than overlap partial work.
 - Only one Grok fallback runs per batch, under the same host lock and managed-development-only child environment.
 - A later batch recovers stale `codex-homelab` or `grok-homelab` processing claims only after the configured provider timeout plus a 30-minute margin.
-- Writers leave `final.json.cover_image` null so managed-development import creates and uploads the edited cover. Source-provided and pre-existing covers are not accepted as the final cover by the unattended batch prompt.
+- Writers leave `final.json.cover_image` null so managed-development import creates and uploads the edited cover. Source-provided and pre-existing covers are not accepted as the final cover by the unattended batch prompt. A reviewed generated source may be passed explicitly to `import-content-final.ts --cover-source-file`; the importer still stores only its derived edited cover.
 
 ## Schedule and Health
 

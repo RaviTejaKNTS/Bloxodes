@@ -16,6 +16,7 @@ type CliOptions = {
   files: string[];
   dryRun: boolean;
   allowProd: boolean;
+  coverSourceFile: string | null;
 };
 
 type ArticleFinal = {
@@ -82,7 +83,9 @@ type QuizFinal = {
 };
 
 function printUsage() {
-  console.log(`Usage: npm run import:content-final -- --file <final.json> [--file <final.json>...] [--dry-run] [--allow-prod]`);
+  console.log(
+    `Usage: npm run import:content-final -- --file <final.json> [--file <final.json>...] [--cover-source-file <image>] [--dry-run] [--allow-prod]`
+  );
 }
 
 function parseArgs(argv: string[]): CliOptions {
@@ -90,6 +93,7 @@ function parseArgs(argv: string[]): CliOptions {
     files: [],
     dryRun: false,
     allowProd: false,
+    coverSourceFile: null,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -112,6 +116,13 @@ function parseArgs(argv: string[]): CliOptions {
       case "--allow-prod":
         options.allowProd = true;
         break;
+      case "--cover-source-file": {
+        const value = argv[i + 1];
+        if (!value) throw new Error("Missing value for --cover-source-file");
+        options.coverSourceFile = value;
+        i += 1;
+        break;
+      }
       default:
         throw new Error(`Unknown option: ${arg}`);
     }
@@ -239,60 +250,6 @@ async function pickUniverseCoverImage(sb: SupabaseAdminClient, universeId: numbe
   return pickRandom(candidates);
 }
 
-function escapeForSvg(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
-}
-
-function normalizeOverlayTitle(value: string | null | undefined, limit = 70): string | null {
-  if (!value) return null;
-  const cleaned = value.replace(/\s+/g, " ").trim();
-  if (!cleaned) return null;
-  return cleaned.length > limit ? `${cleaned.slice(0, limit - 1)}...` : cleaned;
-}
-
-function coverOverlayTitle(title: string): string {
-  const cleaned = title
-    .replace(/^slime rng\s+/i, "")
-    .replace(/\s*:\s*.*/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-  return normalizeOverlayTitle(cleaned || title) ?? "Roblox Guide";
-}
-
-function pickOverlayFontSize(lines: string[]): number {
-  const longest = lines.reduce((max, line) => Math.max(max, line.length), 0);
-  if (longest <= 10) return 104;
-  if (longest <= 16) return 94;
-  if (longest <= 22) return 82;
-  if (longest <= 28) return 70;
-  if (longest <= 34) return 62;
-  return 52;
-}
-
-function wrapOverlayLines(text: string): string[] {
-  const words = text.replace(/\s+/g, " ").trim().split(" ").filter(Boolean);
-  const lines: string[] = [];
-  let current = "";
-
-  for (const word of words) {
-    const next = current ? `${current} ${word}` : word;
-    if (next.length <= 18) {
-      current = next;
-      continue;
-    }
-    if (current) lines.push(current);
-    current = word;
-  }
-
-  if (current) lines.push(current);
-  return lines.slice(0, 3);
-}
-
 function isEditedArticleCover(value: string | null | undefined, slug: string): boolean {
   if (!value) return false;
   return value.includes(`/articles/${slug}/`) || value.includes(`/article-covers/`);
@@ -391,7 +348,8 @@ async function verifyProductionArticleMedia(params: {
 }
 
 async function uploadEditedArticleCover(params: {
-  imageUrl: string;
+  imageUrl?: string;
+  sourceFile?: string | null;
   slug: string;
   title: string;
   sb: SupabaseAdminClient;
@@ -402,38 +360,29 @@ async function uploadEditedArticleCover(params: {
   }
 
   try {
-    const response = await fetch(params.imageUrl, {
-      headers: {
-        "User-Agent": "Mozilla/5.0",
-        Accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8"
+    let source: Buffer;
+    if (params.sourceFile) {
+      source = await readFile(path.resolve(process.cwd(), params.sourceFile));
+    } else if (params.imageUrl) {
+      const response = await fetch(params.imageUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0",
+          Accept: "image/avif,image/webp,image/apng,image/*,*/*;q=0.8"
+        }
+      });
+
+      if (!response.ok) {
+        console.warn(`Unable to download universe thumbnail for ${params.slug}: ${response.statusText}`);
+        return null;
       }
-    });
 
-    if (!response.ok) {
-      console.warn(`Unable to download universe thumbnail for ${params.slug}: ${response.statusText}`);
-      return null;
+      source = Buffer.from(await response.arrayBuffer());
+    } else {
+      throw new Error("No cover source URL or file was provided");
     }
-
-    const source = Buffer.from(await response.arrayBuffer());
-    const overlayText = coverOverlayTitle(params.title);
-    const overlayLines = wrapOverlayLines(overlayText);
-    const fontSize = pickOverlayFontSize(overlayLines);
-    const lineHeight = Math.round(fontSize * 1.2);
-    const startY = Math.round(337.5 - ((overlayLines.length - 1) * lineHeight) / 2);
-    const textBlock = overlayLines
-      .map((line, index) => `<tspan x="600" dy="${index === 0 ? 0 : lineHeight}">${escapeForSvg(line)}</tspan>`)
-      .join("");
-
-    const overlay = Buffer.from(
-      `<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" role="presentation">
-        <rect x="0" y="0" width="1200" height="675" fill="rgba(0,0,0,0.78)"/>
-        <text x="600" y="${startY}" text-anchor="middle" fill="#f8f9fb" font-size="${fontSize}" font-family="Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="800" font-style="italic" letter-spacing="1.2" dominant-baseline="hanging">${textBlock}</text>
-      </svg>`.replace(/\s+/g, " ")
-    );
 
     const cover = await sharp(source)
       .resize(1200, 675, { fit: "cover", position: "attention" })
-      .composite([{ input: overlay, blend: "over" }])
       .webp({ quality: 90, effort: 4 })
       .toBuffer();
 
@@ -466,7 +415,7 @@ function injectCoverImageBeforeFirstH2(content: string, imageUrl: string, altTex
   return `${content.slice(0, firstH2Index).trim()}\n\n${imageLine}\n\n${content.slice(firstH2Index).trimStart()}`;
 }
 
-async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
+async function importArticle(finalJson: ArticleFinal, dryRun: boolean, coverSourceFile: string | null) {
   const sb = supabaseAdmin();
   const slug = finalJson.slug.trim().toLowerCase();
   const isPublished = finalJson.is_published ?? true;
@@ -491,8 +440,22 @@ async function importArticle(finalJson: ArticleFinal, dryRun: boolean) {
   const universeCover = await pickUniverseCoverImage(sb, universeId);
   const forceEditedCover = process.env.ARTICLE_WRITER_REGENERATE_COVERS === "true";
   let coverImage: string | null;
-  if (forceEditedCover) {
-    const coverSource = universeCover ?? suppliedCover ?? existingCover;
+  if (coverSourceFile) {
+    if (dryRun) {
+      coverImage = suppliedCover ?? (isEditedArticleCover(existingCover, slug) ? existingCover : null) ?? universeCover;
+    } else {
+      coverImage = await uploadEditedArticleCover({
+        sourceFile: coverSourceFile,
+        slug,
+        title: finalJson.title,
+        sb,
+      });
+      if (!coverImage) {
+        throw new Error(`Article importer could not generate and upload the required edited cover for ${slug}.`);
+      }
+    }
+  } else if (forceEditedCover) {
+    const coverSource = suppliedCover ?? universeCover ?? existingCover;
     if (!coverSource) {
       throw new Error(`Article writer cannot create an edited cover for ${slug}: no source image is available.`);
     }
@@ -675,7 +638,7 @@ async function main() {
     const value = await readJson(file);
     assertCanonicalMediaUrls(value, file);
     if (isArticleFinal(value)) {
-      await importArticle(value, options.dryRun);
+      await importArticle(value, options.dryRun, options.coverSourceFile);
     } else if (isChecklistFinal(value) || isLegacyChecklistFinal(value)) {
       await importChecklist(value, options.dryRun);
     } else if (isQuizFinal(value)) {
