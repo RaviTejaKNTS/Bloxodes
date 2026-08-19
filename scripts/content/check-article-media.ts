@@ -71,6 +71,15 @@ function isCoverPath(src: string, slug: string): boolean {
   return false;
 }
 
+function isRobloxGameIconUrl(src: string): boolean {
+  try {
+    const url = new URL(src);
+    return url.protocol === "https:" && url.hostname === "tr.rbxcdn.com" && /\/512\/512\//.test(url.pathname);
+  } catch {
+    return false;
+  }
+}
+
 export async function checkArticleMedia(input: ArticleMediaInput): Promise<ArticleMediaFinding[]> {
   const findings: ArticleMediaFinding[] = [];
   const label = labelOf(input);
@@ -129,11 +138,12 @@ export async function checkArticleMedia(input: ArticleMediaInput): Promise<Artic
       findings,
       { alt: image.alt, src: image.src, raw: image.src, index: 0 },
       input.slug,
-      `${label} tier-list ${image.blockId} item ${image.itemName}`,
+      `${label} ${image.kind} ${image.blockId} item ${image.itemName}`,
       {
         requireLocalFiles,
         requireImageAlt,
         context: "body",
+        allowRobloxGameIcon: image.kind === "roblox-game-card",
       }
     );
   }
@@ -213,7 +223,12 @@ async function collectImageFindings(
   image: MarkdownImageRef,
   slug: string,
   label: string,
-  options: { requireLocalFiles: boolean; requireImageAlt: boolean; context: "body" | "cover" }
+  options: {
+    requireLocalFiles: boolean;
+    requireImageAlt: boolean;
+    context: "body" | "cover";
+    allowRobloxGameIcon?: boolean;
+  }
 ) {
   if (options.requireImageAlt && !image.alt.trim()) {
     findings.push({
@@ -231,6 +246,8 @@ async function collectImageFindings(
       message: `${label}: weak alt text ${JSON.stringify(image.alt)} for ${image.src}`,
     });
   }
+
+  if (options.allowRobloxGameIcon && isRobloxGameIconUrl(image.src)) return;
 
   const classified = classifyArticleImageSrc(image.src, slug);
   if (!classified.ok) {

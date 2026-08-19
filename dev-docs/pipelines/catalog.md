@@ -30,7 +30,7 @@ It does not own game-specific wiki collections. Those are children of a game wik
 1. Research the global player need, production overlap, source/data availability, fields, and route behavior.
 2. Use the catalog research/writing workflow for `catalog_pages` copy and metadata.
 3. Validate the payload with `npm run verify:catalog-finals` against managed development.
-4. Preview the actual `/catalog/<slug>` route, including metadata, structured data, cards/tables, pagination, search, and useful fields.
+4. Preview the actual `/catalog/<slug>` route, including metadata, structured data, tables, pagination, search, and useful fields.
 5. Promote through a controlled idempotent seed/upsert or forward-only migration.
 6. Revalidate the catalog path/index and verify the production page.
 
