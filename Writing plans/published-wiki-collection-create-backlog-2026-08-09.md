@@ -354,7 +354,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/fish-it.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/fling-things-and-people.md)
 
-- [ ] Slot Machine Rewards
+- [ ] Slot Machine Rewards — blocked 2026-08-20: the slot machine pays 5 coin tiers on a chance table; a probability note, not a durable item collection
 
 ### Forsaken
 
