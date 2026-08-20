@@ -86,6 +86,8 @@ Tier B run completed 2026-08-20 on branch `tier-a-collections` (local only, not 
 
 ### Tier C — 20k to 40k players (4 games, 17 collections)
 
+Tier C run completed 2026-08-20 on branch `tier-a-collections` (local only, not published to production). 10 collections shipped and locally verified; 7 rows blocked with reasons on their lines. Per game: Storage Hunters 5/6, Grow a Garden 3/3 remaining rows, Gakuran 2/4, Merge a Nuke 0/4 (no reliable sources; the game's search ecosystem is AI wiki farms).
+
 | Game | ~Players | Collections |
 | --- | --- | --- |
 | Storage Hunters: Open World | 32k | 6 |
@@ -425,10 +427,10 @@ Evidence: [full report](../tmp/game-collection-suggestions/lifetogether-rp.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/merge-a-nuke.md)
 
-- [ ] Nukes
-- [ ] Commanders
-- [ ] Mutations
-- [ ] Base Upgrades
+- [ ] Nukes — blocked 2026-08-20: only real source (merge-a-nuke.fandom.com, 5 pages) marks its roster "under maintenance" and is missing the ~8 tiers between 16.38K and 4.19M; every other site is an AI-generated wiki farm
+- [ ] Commanders — blocked 2026-08-20: no reliable roster source; only AI-generated SEO wiki farms name commanders
+- [ ] Mutations — blocked 2026-08-20: no roster source exists anywhere
+- [ ] Base Upgrades — blocked 2026-08-20: only the Spawn Tier Upgrade (1 of 3 upgrades) has partial data, with "?" costs mid-table
 
 ### Murder Mystery 2
 
