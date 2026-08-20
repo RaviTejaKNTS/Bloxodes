@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Demonology",
+    "gameSlug": "demonology",
+    "collection": "ghost-models",
+    "route": "/wiki/demonology/ghost-models",
+    "catalogCode": "demonology-ghost-models",
+    "itemFields": [
+      "gender",
+      "identity",
+      "look",
+      "idTell",
+      "warning",
+      "cardSummary"
+    ],
+    "columns": [
+      "gender",
+      "identity",
+      "look",
+      "idTell",
+      "warning",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Female Models",
+        "Male Models"
+      ],
+      "badgeField": "gender",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "gender",
+        "identity",
+        "look",
+        "idTell",
+        "warning"
+      ],
+      "tableFields": [
+        "gender",
+        "identity",
+        "look",
+        "idTell",
+        "warning",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "gender": {
+          "kind": "chip",
+          "label": "Gender"
+        },
+        "identity": {
+          "kind": "normal",
+          "label": "Identity",
+          "omitWhenEmpty": true
+        },
+        "look": {
+          "kind": "detail",
+          "label": "Look"
+        },
+        "idTell": {
+          "kind": "detail",
+          "label": "Hunt tell"
+        },
+        "warning": {
+          "kind": "highlight",
+          "label": "Watch for",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Abaddon",
+        "gender": "Female",
+        "identity": "Angel of Death",
+        "look": "A winged seraphim in a golden veil and beige tunic, with horn-pierced eyes, a third eye on the forehead, and wings and eyes covering the body.",
+        "idTell": "This is a female body. Siren and Keres always use a female model, so this look can belong to either type.",
+        "warning": null,
+        "cardSummary": "A winged seraphim with a golden veil. Female, so a Siren or Keres can appear as this body."
+      },
+      "system": {
+        "slug": "abaddon",
+        "section": "Female Models",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Leech",
+        "gender": "Female",
+        "identity": "Nun",
+        "look": "A floating nun in a black tunic, white sleeves, black veil, and cross necklace, with no legs and a wide mouth of sharp teeth.",
+        "idTell": "This is a female body. Siren and Keres always use a female model, so this look can belong to either type.",
+        "warning": "If the ghost is a Dullahan, the veil and hood vanish in photos with the head.",
+        "cardSummary": "A legless nun with a leech-like mouth. Female, so a Siren or Keres can appear as this body."
+      },
+      "system": {
+        "slug": "leech",
+        "section": "Female Models",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rattle",
+        "gender": "Female",
+        "identity": "The Puppet",
+        "look": "A shaking puppet in a long bluish-gray dress, with wood-like skin, glowing white eyes, and floating strings holding her up.",
+        "idTell": "This is a female body. Siren and Keres always use a female model, so this look can belong to either type.",
+        "warning": "Dead hunters can appear hung from the ceiling by puppet strings.",
+        "cardSummary": "A string-held puppet in a long dress. Female, so a Siren or Keres can appear as this body."
+      },
+      "system": {
+        "slug": "rattle",
+        "section": "Female Models",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Watcher",
+        "gender": "Female",
+        "identity": null,
+        "look": "A horned figure in a long torn grey dress, with wrinkled flesh, eyes over the body, three distorted faces on the head, chest, and back, and grey hair to the shoulders.",
+        "idTell": "This is a female body. Siren and Keres always use a female model, so this look can belong to either type.",
+        "warning": null,
+        "cardSummary": "A three-faced, horned body in a torn grey dress. Female, so a Siren or Keres can appear as this body."
+      },
+      "system": {
+        "slug": "watcher",
+        "section": "Female Models",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Biter",
+        "gender": "Male",
+        "identity": "Official mascot",
+        "look": "A brown-suited figure with holes through the body, clothes, and face, plus sharp visible teeth.",
+        "idTell": "This is a male body. It rules out Siren and Keres. Dullahan is always male and looks headless in photos.",
+        "warning": "Turn on Trypophobia Safe Mode to replace this body with a cat image.",
+        "cardSummary": "The hole-riddled suited mascot. Male, so it cannot be a Siren or Keres, and a Dullahan using it looks headless in photos."
+      },
+      "system": {
+        "slug": "biter",
+        "section": "Male Models",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dr. Ratched",
+        "gender": "Male",
+        "identity": "Clinical psychologist",
+        "look": "A grey-skinned doctor in a long white coat over blue scrubs and gloves, with sunken eyes and a smaller second head joined at the mouth.",
+        "idTell": "This is a male body. It rules out Siren and Keres. Dullahan is always male and looks headless in photos.",
+        "warning": null,
+        "cardSummary": "A two-headed doctor in a white coat. Male, so it cannot be a Siren or Keres, and a Dullahan using it looks headless in photos."
+      },
+      "system": {
+        "slug": "dr-ratched",
+        "section": "Male Models",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Marrow",
+        "gender": "Male",
+        "identity": null,
+        "look": "A stitched pink-fleshed figure in a blue shirt, brown apron, and black pants, with knives on the arms, metal bars warping the face, and extra pupils.",
+        "idTell": "This is a male body. It rules out Siren and Keres. Dullahan is always male and looks headless in photos.",
+        "warning": null,
+        "cardSummary": "A stitched, apron-wearing body with knives and extra pupils. Male, so it cannot be a Siren or Keres, and a Dullahan using it looks headless in photos."
+      },
+      "system": {
+        "slug": "marrow",
+        "section": "Male Models",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mouthpiece",
+        "gender": "Male",
+        "identity": null,
+        "look": "A black-suited figure with cracked shell-like skin, black gloves, a bowtie, and a head that can detach from the body except for the lower jaw.",
+        "idTell": "This is a male body. It rules out Siren and Keres. Dullahan is always male and looks headless in photos.",
+        "warning": "The Mouthpiece Dullahan skin is a cosmetic. It is not the Dullahan ghost type, which looks headless in photos.",
+        "cardSummary": "A suited body with a detachable head. Male, so it cannot be a Siren or Keres. Do not mix its Dullahan skin up with the Dullahan type."
+      },
+      "system": {
+        "slug": "mouthpiece",
+        "section": "Male Models",
+        "sortOrder": 8,
+        "image": null
+      }
+    }
+  ]
+}

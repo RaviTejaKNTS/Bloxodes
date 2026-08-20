@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Demonology",
+    "gameSlug": "demonology",
+    "collection": "difficulties",
+    "route": "/wiki/demonology/difficulties",
+    "catalogCode": "demonology-difficulties",
+    "itemFields": [
+      "cardSummary",
+      "rewardMultiplier",
+      "huntThreshold",
+      "fuseBox",
+      "cursedObjects",
+      "evidenceNotes",
+      "huntNotes",
+      "bestFor",
+      "customControls"
+    ],
+    "columns": [
+      "cardSummary",
+      "rewardMultiplier",
+      "huntThreshold",
+      "fuseBox",
+      "cursedObjects",
+      "evidenceNotes",
+      "huntNotes",
+      "bestFor",
+      "customControls"
+    ],
+    "display": {
+      "groupLabel": "Difficulty type",
+      "sectionOrder": [
+        "Standard Difficulties",
+        "Custom Difficulty"
+      ],
+      "badgeField": "rewardMultiplier",
+      "subtitleFields": [
+        "huntThreshold"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rewardMultiplier",
+        "huntThreshold",
+        "fuseBox",
+        "cursedObjects",
+        "evidenceNotes",
+        "huntNotes",
+        "bestFor",
+        "customControls"
+      ],
+      "tableFields": [
+        "cardSummary",
+        "rewardMultiplier",
+        "huntThreshold",
+        "fuseBox",
+        "cursedObjects",
+        "evidenceNotes",
+        "huntNotes",
+        "bestFor",
+        "customControls"
+      ],
+      "fieldPresentation": {
+        "rewardMultiplier": {
+          "kind": "chip",
+          "label": "Reward"
+        },
+        "huntThreshold": {
+          "kind": "chip",
+          "label": "Hunt threshold"
+        },
+        "fuseBox": {
+          "kind": "normal",
+          "label": "Fuse box"
+        },
+        "cursedObjects": {
+          "kind": "highlight",
+          "label": "Cursed objects"
+        },
+        "evidenceNotes": {
+          "kind": "detail",
+          "label": "Evidence"
+        },
+        "huntNotes": {
+          "kind": "detail",
+          "label": "Hunts"
+        },
+        "bestFor": {
+          "kind": "highlight",
+          "label": "Best for"
+        },
+        "customControls": {
+          "kind": "detail",
+          "label": "Custom controls",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Easy",
+        "cardSummary": "The beginner job setting. Evidence shows up more often, hunts are rare, the fuse box is already on, and the paycheck stays at 1x.",
+        "rewardMultiplier": "1x",
+        "huntThreshold": "≤25% energy",
+        "fuseBox": "Starts on",
+        "cursedObjects": "1",
+        "evidenceNotes": "Evidence interactions happen more often, so tools like the Laser Projector, thermometer, and Spirit Book fill in faster. Some evidence can also be ruled out after a few minutes if it never appears.",
+        "huntNotes": "Hunts are rarer and shorter, energy drains slower, and ghosts stop hunting after a kill.",
+        "bestFor": "Learning maps and evidence",
+        "customControls": null
+      },
+      "system": {
+        "slug": "easy",
+        "section": "Standard Difficulties",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Medium",
+        "cardSummary": "The default job setting. Pay is 1.25x, hunts start around 50% average energy, and you have to find the fuse box yourself.",
+        "rewardMultiplier": "1.25x",
+        "huntThreshold": "≤50% energy",
+        "fuseBox": "Starts off",
+        "cursedObjects": "1",
+        "evidenceNotes": "Standard evidence rate with the usual three-evidence loop. There is no Easy-mode boost and no Nightmare-mode cut.",
+        "huntNotes": "Baseline hunt rules. Ghosts can hunt once average energy hits 50%, with the usual 5-second grace before they appear.",
+        "bestFor": "Default jobs",
+        "customControls": null
+      },
+      "system": {
+        "slug": "medium",
+        "section": "Standard Difficulties",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hard",
+        "cardSummary": "A higher-pay preset at 1.5x. Hunts can start at 75% average energy, the fuse box starts off, and one cursed object still spawns.",
+        "rewardMultiplier": "1.5x",
+        "huntThreshold": "≤75% energy",
+        "fuseBox": "Starts off",
+        "cursedObjects": "1",
+        "evidenceNotes": "Hard does not add a separate evidence penalty. Gather the usual three pieces while surviving earlier hunts.",
+        "huntNotes": "Ghosts can hunt once average energy hits 75%, with the usual 5-second grace. A kill does not stop the hunt the way it does on Easy.",
+        "bestFor": "Higher payout without Nightmare rules",
+        "customControls": null
+      },
+      "system": {
+        "slug": "hard",
+        "section": "Standard Difficulties",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Nightmare",
+        "cardSummary": "The hardest preset. Pay is 2x, you start at 75% energy with no cursed objects, the ghost room can move, and hunts hit with no grace period.",
+        "rewardMultiplier": "2x",
+        "huntThreshold": "Start at 75% energy",
+        "fuseBox": "Starts off",
+        "cursedObjects": "None",
+        "evidenceNotes": "Evidence is harder to get. Prints last 60 seconds instead of 120, and Wither shows on the site after about 8 minutes instead of about 3. If the ghost room changes, Ghost Orbs drift to the new room.",
+        "huntNotes": "No setup time and no hunt grace. The ghost room can change during the job, hunts are more frequent, Energy Drinks restore 30% energy, and the Base Camp energy monitor is broken.",
+        "bestFor": "Highest preset payout",
+        "customControls": null
+      },
+      "system": {
+        "slug": "nightmare",
+        "section": "Standard Difficulties",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Custom",
+        "cardSummary": "A slider difficulty from 0x practice with hunts off up to 4.07x. You set energy, hunts, evidence, map, and player rules instead of using a preset.",
+        "rewardMultiplier": "0x to 4.07x",
+        "huntThreshold": "Custom",
+        "fuseBox": "Custom",
+        "cursedObjects": "Custom, up to 6",
+        "evidenceNotes": "Sliders cover how many evidence types the ghost gives, thermometer rate, Spirit Box responses, EMF 5 rate, and print duration. Max Custom is often played with no evidence, identifying from traits only.",
+        "huntNotes": "Ghost sliders cover hunt duration, hunt energy, cooldown, grace, probability, whether hunts happen, whether a kill ends the hunt, walk speed, room changes, and setup time. Turning hunts off pays 0x and is used to learn maps.",
+        "bestFor": "Practice or max payout",
+        "customControls": "Energy, Ghost, Evidence, Map, and Player sliders, plus ghost-type force, weather, evidence chance, cursed-object count, fuse box, and broken flashlights."
+      },
+      "system": {
+        "slug": "custom",
+        "section": "Custom Difficulty",
+        "sortOrder": 5,
+        "image": null
+      }
+    }
+  ]
+}

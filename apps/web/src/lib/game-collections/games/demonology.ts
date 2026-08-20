@@ -12,6 +12,14 @@ export const demonologyCollectionGroup = {
       "equipment",
       "evidence",
       "cursed-objects",
-      "maps"
+      "maps",
+      "fortune-teller-tickets",
+      "challenges",
+      "photo-rewards",
+      "difficulties",
+      "skins",
+      "level-unlocks",
+      "objectives",
+      "ghost-models"
     ]
   } satisfies GameCollectionGroup;

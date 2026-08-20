@@ -1,0 +1,704 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Demonology",
+    "gameSlug": "demonology",
+    "collection": "level-unlocks",
+    "route": "/wiki/demonology/level-unlocks",
+    "catalogCode": "demonology-level-unlocks",
+    "itemFields": [
+      "unlockLevel",
+      "unlockType",
+      "price",
+      "instantUnlockCost",
+      "unlocks",
+      "totalXp",
+      "cardSummary"
+    ],
+    "columns": [
+      "unlockLevel",
+      "unlockType",
+      "price",
+      "instantUnlockCost",
+      "unlocks",
+      "totalXp",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Progression band",
+      "sectionOrder": [
+        "Early Unlocks",
+        "Mid Unlocks",
+        "Late Unlocks"
+      ],
+      "badgeField": "unlockType",
+      "subtitleFields": [
+        "unlockLevel"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "unlockLevel",
+        "unlockType",
+        "price",
+        "instantUnlockCost",
+        "unlocks",
+        "totalXp"
+      ],
+      "tableFields": [
+        "unlockLevel",
+        "unlockType",
+        "price",
+        "instantUnlockCost",
+        "unlocks",
+        "totalXp",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "unlockLevel": {
+          "kind": "chip",
+          "label": "Level"
+        },
+        "unlockType": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "price": {
+          "kind": "chip",
+          "label": "Price"
+        },
+        "instantUnlockCost": {
+          "kind": "chip",
+          "label": "Instant Unlock"
+        },
+        "unlocks": {
+          "kind": "highlight",
+          "label": "Unlocks"
+        },
+        "totalXp": {
+          "kind": "plain",
+          "label": "Total XP",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Fenway Drive",
+        "unlockLevel": "Level 0",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": null,
+        "unlocks": "Adds this small starter house to the job site list.",
+        "totalXp": "0 XP",
+        "cardSummary": "One of the three small houses you can pick from the first job, with no level gate and no Instant Unlock cost."
+      },
+      "system": {
+        "slug": "fenway-drive",
+        "section": "Early Unlocks",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Juniper Road",
+        "unlockLevel": "Level 0",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": null,
+        "unlocks": "Adds this small starter house to the job site list.",
+        "totalXp": "0 XP",
+        "cardSummary": "A compact starter house available from Level 0, often used for short, low-risk jobs."
+      },
+      "system": {
+        "slug": "juniper-road",
+        "section": "Early Unlocks",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lincoln Street",
+        "unlockLevel": "Level 0",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": null,
+        "unlocks": "Adds this small starter house to the job site list.",
+        "totalXp": "0 XP",
+        "cardSummary": "The third starter house, open from Level 0, with a basement unlike the other small launch homes."
+      },
+      "system": {
+        "slug": "lincoln-street",
+        "section": "Early Unlocks",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Starter Equipment",
+        "unlockLevel": "Level 0",
+        "unlockType": "Equipment",
+        "price": "Free",
+        "instantUnlockCost": null,
+        "unlocks": "Makes Blacklight, EMF Reader, Flashlight, Flower Pot, Laser Projector, Spirit Book, Spirit Box, Thermometer, and Video Camera available, with one of each free every job.",
+        "totalXp": "0 XP",
+        "cardSummary": "The nine starter tools are unlocked from the start. One of each is free every job; extra copies still cost cash."
+      },
+      "system": {
+        "slug": "starter-equipment",
+        "section": "Early Unlocks",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Photo Camera",
+        "unlockLevel": "Level 3",
+        "unlockType": "Equipment",
+        "price": "$45",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Photo Camera to the equipment shop.",
+        "totalXp": "324 XP",
+        "cardSummary": "The first shop tool, used to take paid investigation photos once you reach Level 3 or skip the gate for R$160."
+      },
+      "system": {
+        "slug": "photo-camera",
+        "section": "Early Unlocks",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lilim Lane",
+        "unlockLevel": "Level 4",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": "R$240",
+        "unlocks": "Adds this medium two-floor house to the job site list.",
+        "totalXp": null,
+        "cardSummary": "The first medium job site, a two-floor house that opens at Level 4 or with a R$240 Instant Unlock."
+      },
+      "system": {
+        "slug": "lilim-lane",
+        "section": "Early Unlocks",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cross",
+        "unlockLevel": "Level 5",
+        "unlockType": "Equipment",
+        "price": "$40",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Cross to the equipment shop.",
+        "totalXp": null,
+        "cardSummary": "A Level 5 shop tool used to stop a hunt from starting near the ghost room."
+      },
+      "system": {
+        "slug": "cross",
+        "section": "Early Unlocks",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lighter",
+        "unlockLevel": "Level 5",
+        "unlockType": "Equipment",
+        "price": "$10",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Lighter to the equipment shop.",
+        "totalXp": null,
+        "cardSummary": "A cheap Level 5 tool for lighting lanterns, candles, and a Summoning Circle."
+      },
+      "system": {
+        "slug": "lighter",
+        "section": "Early Unlocks",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bodega",
+        "unlockLevel": "Level 6",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": "R$240",
+        "unlocks": "Adds this small two-floor shop to the job site list.",
+        "totalXp": null,
+        "cardSummary": "The first non-house small map, a two-floor corner store that unlocks at Level 6."
+      },
+      "system": {
+        "slug": "bodega",
+        "section": "Early Unlocks",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lantern",
+        "unlockLevel": "Level 7",
+        "unlockType": "Equipment",
+        "price": "$15",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Lantern to the equipment shop.",
+        "totalXp": "2,103 XP",
+        "cardSummary": "A Level 7 light source that also slows energy drain for nearby hunters when it is lit."
+      },
+      "system": {
+        "slug": "lantern",
+        "section": "Early Unlocks",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cafe",
+        "unlockLevel": "Level 8",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": "R$240",
+        "unlocks": "Adds this medium two-floor cafe to the job site list.",
+        "totalXp": null,
+        "cardSummary": "A medium two-floor cafe that unlocks at Level 8."
+      },
+      "system": {
+        "slug": "cafe",
+        "section": "Early Unlocks",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Prison",
+        "unlockLevel": "Level 9",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": "R$240",
+        "unlocks": "Adds this large prison to the job site list.",
+        "totalXp": null,
+        "cardSummary": "The first large job site, a prison that opens at Level 9."
+      },
+      "system": {
+        "slug": "prison",
+        "section": "Early Unlocks",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Salt Canister",
+        "unlockLevel": "Level 10",
+        "unlockType": "Equipment",
+        "price": "$35",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Salt Canister to the equipment shop.",
+        "totalXp": null,
+        "cardSummary": "A Level 10 shop tool used to lay salt lines for footprint evidence."
+      },
+      "system": {
+        "slug": "salt-canister",
+        "section": "Early Unlocks",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Challenges tab",
+        "unlockLevel": "Level 10",
+        "unlockType": "System",
+        "price": null,
+        "instantUnlockCost": null,
+        "unlocks": "Lets the party leader add Challenges from the Shop Job Site tab.",
+        "totalXp": null,
+        "cardSummary": "At Level 10 the party leader can attach daily job modifiers from the Shop. This unlocks the tab, not any one modifier."
+      },
+      "system": {
+        "slug": "challenges-tab",
+        "section": "Early Unlocks",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Energy Drink",
+        "unlockLevel": "Level 12",
+        "unlockType": "Equipment",
+        "price": "$35",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds Energy Drinks to the equipment shop.",
+        "totalXp": null,
+        "cardSummary": "A Level 12 consumable that restores energy during a job."
+      },
+      "system": {
+        "slug": "energy-drink",
+        "section": "Mid Unlocks",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Hanged Man",
+        "unlockLevel": "Level 12",
+        "unlockType": "Perk",
+        "price": "$35",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds The Hanged Man to the perks shop.",
+        "totalXp": null,
+        "cardSummary": "The first perk, a Level 12 card that lets Crosses burn twice for one job."
+      },
+      "system": {
+        "slug": "the-hanged-man",
+        "section": "Mid Unlocks",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "School",
+        "unlockLevel": "Level 13",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": "R$240",
+        "unlocks": "Adds this large school to the job site list.",
+        "totalXp": "6,823 XP",
+        "cardSummary": "A large two-floor school that unlocks at Level 13."
+      },
+      "system": {
+        "slug": "school",
+        "section": "Mid Unlocks",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Temperance",
+        "unlockLevel": "Level 14",
+        "unlockType": "Perk",
+        "price": "$25",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds Temperance to the perks shop.",
+        "totalXp": "7,828 XP",
+        "cardSummary": "The cheapest perk, unlocking at Level 14 and adding extra photo discards for one job."
+      },
+      "system": {
+        "slug": "temperance",
+        "section": "Mid Unlocks",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Head-Mounted Camera",
+        "unlockLevel": "Level 15",
+        "unlockType": "Equipment",
+        "price": "$25",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Head-Mounted Camera to the equipment shop.",
+        "totalXp": "8,880 XP",
+        "cardSummary": "A Level 15 camera teammates can watch from base camp without using an inventory slot."
+      },
+      "system": {
+        "slug": "head-mounted-camera",
+        "section": "Mid Unlocks",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Empress",
+        "unlockLevel": "Level 15",
+        "unlockType": "Perk",
+        "price": "$50",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds The Empress to the perks shop.",
+        "totalXp": "8,880 XP",
+        "cardSummary": "A Level 15 team perk that speeds up stamina regeneration for every hunter on the job."
+      },
+      "system": {
+        "slug": "the-empress",
+        "section": "Mid Unlocks",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bridgewood Drive",
+        "unlockLevel": "Level 16",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": "R$240",
+        "unlocks": "Adds this medium forest mansion to the job site list.",
+        "totalXp": "9,985 XP",
+        "cardSummary": "A larger medium mansion that unlocks at Level 16."
+      },
+      "system": {
+        "slug": "bridgewood-drive",
+        "section": "Mid Unlocks",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Beach House",
+        "unlockLevel": "Level 17",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": "R$240",
+        "unlocks": "Adds this small one-floor beach house to the job site list.",
+        "totalXp": "11,143 XP",
+        "cardSummary": "A small single-floor beach house that unlocks at Level 17."
+      },
+      "system": {
+        "slug": "beach-house",
+        "section": "Mid Unlocks",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Chariot",
+        "unlockLevel": "Level 18",
+        "unlockType": "Perk",
+        "price": "$35",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds The Chariot to the perks shop.",
+        "totalXp": "12,352 XP",
+        "cardSummary": "A Level 18 team perk that raises walk speed for every hunter on the job."
+      },
+      "system": {
+        "slug": "the-chariot",
+        "section": "Mid Unlocks",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Oil",
+        "unlockLevel": "Level 19",
+        "unlockType": "Equipment",
+        "price": "$60",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds Holy Oil to the equipment shop.",
+        "totalXp": "13,613 XP",
+        "cardSummary": "A Level 19 shop tool that lays a hunt barrier the ghost cannot cross."
+      },
+      "system": {
+        "slug": "holy-oil",
+        "section": "Mid Unlocks",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Asylum",
+        "unlockLevel": "Level 20",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": "R$240",
+        "unlocks": "Adds this large asylum to the job site list.",
+        "totalXp": "14,923 XP",
+        "cardSummary": "The largest job site, unlocking at Level 20."
+      },
+      "system": {
+        "slug": "asylum",
+        "section": "Mid Unlocks",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Energy Watch",
+        "unlockLevel": "Level 20",
+        "unlockType": "Equipment",
+        "price": "$30",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Energy Watch to the equipment shop.",
+        "totalXp": "14,923 XP",
+        "cardSummary": "A Level 20 shop tool for checking energy without going back to base camp."
+      },
+      "system": {
+        "slug": "energy-watch",
+        "section": "Mid Unlocks",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Strength",
+        "unlockLevel": "Level 22",
+        "unlockType": "Perk",
+        "price": "$35",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds Strength to the perks shop.",
+        "totalXp": "17,691 XP",
+        "cardSummary": "A Level 22 team perk that doubles stamina for every hunter on the job."
+      },
+      "system": {
+        "slug": "strength",
+        "section": "Mid Unlocks",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sun",
+        "unlockLevel": "Level 24",
+        "unlockType": "Perk",
+        "price": "$35",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds Sun to the perks shop.",
+        "totalXp": null,
+        "cardSummary": "A Level 24 perk that makes Holy Oil burn twice for one job."
+      },
+      "system": {
+        "slug": "sun",
+        "section": "Mid Unlocks",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Oakbridge Estates",
+        "unlockLevel": "Level 25",
+        "unlockType": "Job Site",
+        "price": null,
+        "instantUnlockCost": "R$240",
+        "unlocks": "Adds this medium multi-unit estate to the job site list.",
+        "totalXp": "22,200 XP",
+        "cardSummary": "A sprawling medium estate that unlocks at Level 25."
+      },
+      "system": {
+        "slug": "oakbridge-estates",
+        "section": "Mid Unlocks",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "LIDAR Scanner",
+        "unlockLevel": "Level 25",
+        "unlockType": "Equipment",
+        "price": "$45",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the LIDAR Scanner to the equipment shop.",
+        "totalXp": "22,200 XP",
+        "cardSummary": "A Level 25 scanner that shows the ghost's outline so you can find it, not gather evidence."
+      },
+      "system": {
+        "slug": "lidar-scanner",
+        "section": "Mid Unlocks",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Plushie",
+        "unlockLevel": "Level 30",
+        "unlockType": "Equipment",
+        "price": "$35",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Plushie to the equipment shop.",
+        "totalXp": null,
+        "cardSummary": "A Level 30 shop tool used to check or rule out Spirit Box evidence after a ghost interacts with it."
+      },
+      "system": {
+        "slug": "plushie",
+        "section": "Late Unlocks",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Defibrillator",
+        "unlockLevel": "Level 35",
+        "unlockType": "Equipment",
+        "price": "$100",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Defibrillator to the equipment shop.",
+        "totalXp": "40,134 XP",
+        "cardSummary": "A Level 35 revive tool that brings one dead hunter back once."
+      },
+      "system": {
+        "slug": "defibrillator",
+        "section": "Late Unlocks",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Emperor",
+        "unlockLevel": "Level 35",
+        "unlockType": "Perk",
+        "price": "$50",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds The Emperor to the perks shop.",
+        "totalXp": "40,134 XP",
+        "cardSummary": "A Level 35 team perk that gives every hunter an extra inventory slot for one job."
+      },
+      "system": {
+        "slug": "the-emperor",
+        "section": "Late Unlocks",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rock Salt Shotgun",
+        "unlockLevel": "Level 40",
+        "unlockType": "Equipment",
+        "price": "$100",
+        "instantUnlockCost": "R$160",
+        "unlocks": "Adds the Rock Salt Shotgun to the equipment shop.",
+        "totalXp": null,
+        "cardSummary": "The last documented unlock: a Level 40 shotgun that can end a hunt when fired at the ghost."
+      },
+      "system": {
+        "slug": "rock-salt-shotgun",
+        "section": "Late Unlocks",
+        "sortOrder": 34,
+        "image": null
+      }
+    }
+  ]
+}

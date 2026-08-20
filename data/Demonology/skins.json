@@ -1,0 +1,1603 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Demonology",
+    "gameSlug": "demonology",
+    "collection": "skins",
+    "route": "/wiki/demonology/skins",
+    "catalogCode": "demonology-skins",
+    "itemFields": [
+      "appliesTo",
+      "skinType",
+      "cost",
+      "currency",
+      "source",
+      "availability",
+      "cardSummary"
+    ],
+    "columns": [
+      "appliesTo",
+      "skinType",
+      "cost",
+      "currency",
+      "source",
+      "availability",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "section",
+      "sectionOrder": [
+        "Equipment Skins",
+        "Ghost Skins"
+      ],
+      "badgeField": "availability",
+      "subtitleFields": [
+        "appliesTo"
+      ],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "appliesTo",
+        "cost",
+        "currency",
+        "source",
+        "availability"
+      ],
+      "tableFields": [
+        "appliesTo",
+        "skinType",
+        "cost",
+        "currency",
+        "source",
+        "availability",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "appliesTo": {
+          "kind": "normal",
+          "label": "Applies to"
+        },
+        "skinType": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "cost": {
+          "kind": "chip",
+          "label": "Cost",
+          "omitWhenEmpty": true
+        },
+        "currency": {
+          "kind": "chip",
+          "label": "Currency",
+          "omitWhenEmpty": true
+        },
+        "source": {
+          "kind": "normal",
+          "label": "Source"
+        },
+        "availability": {
+          "kind": "highlight",
+          "label": "Status"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Blacklight Gun",
+        "appliesTo": "Blacklight",
+        "skinType": "Equipment",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A gun-shaped Blacklight cosmetic from the Equipment Store. It only changes how the tool looks."
+      },
+      "system": {
+        "slug": "blacklight-gun",
+        "section": "Equipment Skins",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "UV Wand",
+        "appliesTo": "Blacklight",
+        "skinType": "Equipment",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A wand-shaped Blacklight cosmetic from the Equipment Store. Evidence still works the same way."
+      },
+      "system": {
+        "slug": "uv-wand",
+        "section": "Equipment Skins",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Reactive Crystal",
+        "appliesTo": "Blacklight",
+        "skinType": "Equipment",
+        "cost": "$25,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A high-cost Blacklight cosmetic from the Equipment Store. Spend cash here only if you want the look."
+      },
+      "system": {
+        "slug": "reactive-crystal",
+        "section": "Equipment Skins",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "BIG BLACKLIGHT",
+        "appliesTo": "Blacklight",
+        "skinType": "Equipment",
+        "cost": "$40,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "The oversized Blacklight cosmetic and the most expensive cash look for this tool."
+      },
+      "system": {
+        "slug": "big-blacklight",
+        "section": "Equipment Skins",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Cross",
+        "appliesTo": "Cross",
+        "skinType": "Equipment",
+        "cost": "$1,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "The cheapest Cross cosmetic in the Equipment Store. Hunt prevention is unchanged."
+      },
+      "system": {
+        "slug": "golden-cross",
+        "section": "Equipment Skins",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Celtic Cross",
+        "appliesTo": "Cross",
+        "skinType": "Equipment",
+        "cost": "$2,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A mid-price Cross cosmetic. Buy it from Item Skins under the Cross."
+      },
+      "system": {
+        "slug": "celtic-cross",
+        "section": "Equipment Skins",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ankh",
+        "appliesTo": "Cross",
+        "skinType": "Equipment",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash-shop Cross cosmetic. It is a look swap only, not a stronger crucifix."
+      },
+      "system": {
+        "slug": "ankh",
+        "section": "Equipment Skins",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Seashell Cross",
+        "appliesTo": "Cross",
+        "skinType": "Equipment",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A seashell Cross cosmetic from the Equipment Store. Function stays the same as the default Cross."
+      },
+      "system": {
+        "slug": "seashell-cross",
+        "section": "Equipment Skins",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "SciFi Defib",
+        "appliesTo": "Defibrillator",
+        "skinType": "Equipment",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "The only listed Defibrillator cosmetic. Revive rules do not change with this skin."
+      },
+      "system": {
+        "slug": "scifi-defib",
+        "section": "Equipment Skins",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tactical EMF",
+        "appliesTo": "EMF Reader",
+        "skinType": "Equipment",
+        "cost": "$3,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash-shop EMF Reader cosmetic. Readings and EMF Level 5 evidence stay the same."
+      },
+      "system": {
+        "slug": "tactical-emf",
+        "section": "Equipment Skins",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Green Phone",
+        "appliesTo": "EMF Reader",
+        "skinType": "Equipment",
+        "cost": "$3,500",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A phone-shaped EMF Reader look bought with in-game cash."
+      },
+      "system": {
+        "slug": "green-phone",
+        "section": "Equipment Skins",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "PCB EMF Reader",
+        "appliesTo": "EMF Reader",
+        "skinType": "Equipment",
+        "cost": "R$99",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux EMF Reader cosmetic. This is a shop SKU, not a seasonal pack."
+      },
+      "system": {
+        "slug": "pcb-emf-reader",
+        "section": "Equipment Skins",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Metal Detector",
+        "appliesTo": "EMF Reader",
+        "skinType": "Equipment",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "An EMF Reader look from the 2026 Summer Skin Pack. The Robux price is the pack, not a solo shop SKU."
+      },
+      "system": {
+        "slug": "metal-detector",
+        "section": "Equipment Skins",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween EMF",
+        "appliesTo": "EMF Reader",
+        "skinType": "Equipment",
+        "cost": "R$399",
+        "currency": "Robux",
+        "source": "2025 Halloween Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "An EMF Reader look from the 2025 Halloween Skin Pack. Unlock it with the pack, not a separate Robux listing."
+      },
+      "system": {
+        "slug": "halloween-emf",
+        "section": "Equipment Skins",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Festive EMF",
+        "appliesTo": "EMF Reader",
+        "skinType": "Equipment",
+        "cost": "R$599",
+        "currency": "Robux",
+        "source": "2025 Christmas Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "An EMF Reader look from the 2025 Christmas Skin Pack. The listed Robux cost is the full pack."
+      },
+      "system": {
+        "slug": "festive-emf",
+        "section": "Equipment Skins",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coffee",
+        "appliesTo": "Energy Drink",
+        "skinType": "Equipment",
+        "cost": "$3,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A coffee-cup Energy Drink cosmetic from the Equipment Store."
+      },
+      "system": {
+        "slug": "coffee",
+        "section": "Equipment Skins",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Water Bottle",
+        "appliesTo": "Energy Drink",
+        "skinType": "Equipment",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "An Energy Drink look from the 2026 Summer Skin Pack. Buy the pack to unlock it."
+      },
+      "system": {
+        "slug": "water-bottle",
+        "section": "Equipment Skins",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hot Cocoa",
+        "appliesTo": "Energy Drink",
+        "skinType": "Equipment",
+        "cost": "R$599",
+        "currency": "Robux",
+        "source": "2025 Christmas Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "An Energy Drink look from the 2025 Christmas Skin Pack. The Robux amount is the pack price."
+      },
+      "system": {
+        "slug": "hot-cocoa",
+        "section": "Equipment Skins",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Biter Watch",
+        "appliesTo": "Energy Watch",
+        "skinType": "Equipment",
+        "cost": "$1,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "The cheaper Energy Watch cosmetic. Energy tracking does not change."
+      },
+      "system": {
+        "slug": "biter-watch",
+        "section": "Equipment Skins",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Money Watch",
+        "appliesTo": "Energy Watch",
+        "skinType": "Equipment",
+        "cost": "$3,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash-shop Energy Watch cosmetic with a money-themed look."
+      },
+      "system": {
+        "slug": "money-watch",
+        "section": "Equipment Skins",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pocket Flashlight",
+        "appliesTo": "Flashlight",
+        "skinType": "Equipment",
+        "cost": "$1,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A compact Flashlight cosmetic and the cheapest cash look for this tool."
+      },
+      "system": {
+        "slug": "pocket-flashlight",
+        "section": "Equipment Skins",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "BIG FLASHLIGHT",
+        "appliesTo": "Flashlight",
+        "skinType": "Equipment",
+        "cost": "$20,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "An oversized Flashlight cosmetic. Lighting still works like the default flashlight."
+      },
+      "system": {
+        "slug": "big-flashlight",
+        "section": "Equipment Skins",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane Flashlight",
+        "appliesTo": "Flashlight",
+        "skinType": "Equipment",
+        "cost": "R$599",
+        "currency": "Robux",
+        "source": "2025 Christmas Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Flashlight look from the 2025 Christmas Skin Pack. It is packed with the other Christmas skins."
+      },
+      "system": {
+        "slug": "candy-cane-flashlight",
+        "section": "Equipment Skins",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flower Vase",
+        "appliesTo": "Flower Pot",
+        "skinType": "Equipment",
+        "cost": "$1,500",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A vase-style Flower Pot cosmetic. Wither evidence still uses the same tool."
+      },
+      "system": {
+        "slug": "flower-vase",
+        "section": "Equipment Skins",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sunflower Pot",
+        "appliesTo": "Flower Pot",
+        "skinType": "Equipment",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash Flower Pot cosmetic added beside the summer update. It is not part of the Summer Skin Pack."
+      },
+      "system": {
+        "slug": "sunflower-pot",
+        "section": "Equipment Skins",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Aquarium",
+        "appliesTo": "Flower Pot",
+        "skinType": "Equipment",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Flower Pot look from the 2026 Summer Skin Pack. Unlock it with the pack purchase."
+      },
+      "system": {
+        "slug": "aquarium",
+        "section": "Equipment Skins",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Antique Flower Pot",
+        "appliesTo": "Flower Pot",
+        "skinType": "Equipment",
+        "cost": "R$399",
+        "currency": "Robux",
+        "source": "2025 Halloween Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Flower Pot look from the 2025 Halloween Skin Pack. The Robux cost is the pack price."
+      },
+      "system": {
+        "slug": "antique-flower-pot",
+        "section": "Equipment Skins",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spy Glasses",
+        "appliesTo": "Head-Mounted Camera",
+        "skinType": "Equipment",
+        "cost": "$3,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A glasses-style Head-Mounted Camera cosmetic from the Equipment Store."
+      },
+      "system": {
+        "slug": "spy-glasses",
+        "section": "Equipment Skins",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Balloon Crown",
+        "appliesTo": "Head-Mounted Camera",
+        "skinType": "Equipment",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A crown-style Head-Mounted Camera cosmetic. Camera feed still works the same."
+      },
+      "system": {
+        "slug": "balloon-crown",
+        "section": "Equipment Skins",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Snorkel",
+        "appliesTo": "Head-Mounted Camera",
+        "skinType": "Equipment",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Head-Mounted Camera look from the 2026 Summer Skin Pack, not a standalone Robux listing."
+      },
+      "system": {
+        "slug": "snorkel",
+        "section": "Equipment Skins",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sanctified Elixir",
+        "appliesTo": "Holy Oil",
+        "skinType": "Equipment",
+        "cost": "$3,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash-shop Holy Oil cosmetic. Placement and burn behavior stay the same."
+      },
+      "system": {
+        "slug": "sanctified-elixir",
+        "section": "Equipment Skins",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sunscreen",
+        "appliesTo": "Holy Oil",
+        "skinType": "Equipment",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash Holy Oil cosmetic from the summer update. It is not in the Summer Skin Pack."
+      },
+      "system": {
+        "slug": "sunscreen",
+        "section": "Equipment Skins",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Divine Elixir",
+        "appliesTo": "Holy Oil",
+        "skinType": "Equipment",
+        "cost": "R$199",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux Holy Oil cosmetic. Buy it from the Robux shop, not from a seasonal pack."
+      },
+      "system": {
+        "slug": "divine-elixir",
+        "section": "Equipment Skins",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ancient Holy Oil",
+        "appliesTo": "Holy Oil",
+        "skinType": "Equipment",
+        "cost": "R$399",
+        "currency": "Robux",
+        "source": "2025 Halloween Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Holy Oil look from the 2025 Halloween Skin Pack. The Robux price buys the whole pack."
+      },
+      "system": {
+        "slug": "ancient-holy-oil",
+        "section": "Equipment Skins",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Firefly Jar",
+        "appliesTo": "Lantern",
+        "skinType": "Equipment",
+        "cost": "$15,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A high-cost Lantern cosmetic from the Equipment Store. Light and energy rules do not change."
+      },
+      "system": {
+        "slug": "firefly-jar",
+        "section": "Equipment Skins",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lava Lamp",
+        "appliesTo": "Lantern",
+        "skinType": "Equipment",
+        "cost": "R$99",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux Lantern cosmetic. This is a shop SKU rather than a pack reward."
+      },
+      "system": {
+        "slug": "lava-lamp",
+        "section": "Equipment Skins",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jack o Lantern",
+        "appliesTo": "Lantern",
+        "skinType": "Equipment",
+        "cost": "R$399",
+        "currency": "Robux",
+        "source": "2025 Halloween Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Lantern look from the 2025 Halloween Skin Pack. Unlock it with the pack."
+      },
+      "system": {
+        "slug": "jack-o-lantern",
+        "section": "Equipment Skins",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Lantern",
+        "appliesTo": "Lantern",
+        "skinType": "Equipment",
+        "cost": "R$599",
+        "currency": "Robux",
+        "source": "2025 Christmas Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Lantern look from the 2025 Christmas Skin Pack. The listed cost is the pack Robux price."
+      },
+      "system": {
+        "slug": "christmas-lantern",
+        "section": "Equipment Skins",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Compact Projector",
+        "appliesTo": "Laser Projector",
+        "skinType": "Equipment",
+        "cost": "$4,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A smaller Laser Projector cosmetic from the Equipment Store."
+      },
+      "system": {
+        "slug": "compact-projector",
+        "section": "Equipment Skins",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Disco Ball",
+        "appliesTo": "Laser Projector",
+        "skinType": "Equipment",
+        "cost": "R$199",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux Laser Projector cosmetic. Ghost-shadow evidence still uses the same tool."
+      },
+      "system": {
+        "slug": "disco-ball",
+        "section": "Equipment Skins",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Barcode Scanner",
+        "appliesTo": "LIDAR Scanner",
+        "skinType": "Equipment",
+        "cost": "$10,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "The only listed LIDAR Scanner cosmetic. Scan behavior does not change."
+      },
+      "system": {
+        "slug": "barcode-scanner",
+        "section": "Equipment Skins",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Metal Lighter",
+        "appliesTo": "Lighter",
+        "skinType": "Equipment",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash-shop Lighter cosmetic. Fuel and lighting still work like the default lighter."
+      },
+      "system": {
+        "slug": "metal-lighter",
+        "section": "Equipment Skins",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grill Lighter",
+        "appliesTo": "Lighter",
+        "skinType": "Equipment",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Lighter look from the 2026 Summer Skin Pack. You unlock it with the pack, not a solo shop buy."
+      },
+      "system": {
+        "slug": "grill-lighter",
+        "section": "Equipment Skins",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Printer Camera",
+        "appliesTo": "Photo Camera",
+        "skinType": "Equipment",
+        "cost": "$6,500",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash-shop Photo Camera cosmetic. Photo scoring and rewards stay the same."
+      },
+      "system": {
+        "slug": "printer-camera",
+        "section": "Equipment Skins",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Seashell Camera",
+        "appliesTo": "Photo Camera",
+        "skinType": "Equipment",
+        "cost": "R$99",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux Photo Camera cosmetic. This is a shop SKU, not a pack skin."
+      },
+      "system": {
+        "slug": "seashell-camera",
+        "section": "Equipment Skins",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Field Camera",
+        "appliesTo": "Photo Camera",
+        "skinType": "Equipment",
+        "cost": "R$199",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux Photo Camera cosmetic with a field-camera look."
+      },
+      "system": {
+        "slug": "field-camera",
+        "section": "Equipment Skins",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Biter Plushie",
+        "appliesTo": "Plushie",
+        "skinType": "Equipment",
+        "cost": "Free",
+        "currency": "Free",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "The free Plushie cosmetic. It is a skin for the Plushie tool, not a separate piece of equipment."
+      },
+      "system": {
+        "slug": "biter-plushie",
+        "section": "Equipment Skins",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ratched Plushie",
+        "appliesTo": "Plushie",
+        "skinType": "Equipment",
+        "cost": "$1,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash-shop Plushie cosmetic themed after Dr. Ratched."
+      },
+      "system": {
+        "slug": "ratched-plushie",
+        "section": "Equipment Skins",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rubber Duck",
+        "appliesTo": "Plushie",
+        "skinType": "Equipment",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Plushie look from the 2026 Summer Skin Pack. The Robux cost is the pack price."
+      },
+      "system": {
+        "slug": "rubber-duck",
+        "section": "Equipment Skins",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Big Iron",
+        "appliesTo": "Rock Salt Shotgun",
+        "skinType": "Equipment",
+        "cost": "R$180",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux Rock Salt Shotgun cosmetic. Shotgun use does not change."
+      },
+      "system": {
+        "slug": "big-iron",
+        "section": "Equipment Skins",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Finger Gun",
+        "appliesTo": "Rock Salt Shotgun",
+        "skinType": "Equipment",
+        "cost": "R$270",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux Rock Salt Shotgun cosmetic. Damage and salt shots stay the same."
+      },
+      "system": {
+        "slug": "finger-gun",
+        "section": "Equipment Skins",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Water Gun",
+        "appliesTo": "Rock Salt Shotgun",
+        "skinType": "Equipment",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Rock Salt Shotgun look from the 2026 Summer Skin Pack, not a separate shop listing."
+      },
+      "system": {
+        "slug": "water-gun",
+        "section": "Equipment Skins",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Salt Shaker",
+        "appliesTo": "Salt Canister",
+        "skinType": "Equipment",
+        "cost": "$1,500",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "The cheaper cash Salt Canister cosmetic. Salt placement still works like the default canister."
+      },
+      "system": {
+        "slug": "salt-shaker",
+        "section": "Equipment Skins",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Salt Grinder",
+        "appliesTo": "Salt Canister",
+        "skinType": "Equipment",
+        "cost": "$3,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash-shop Salt Canister cosmetic with a grinder look."
+      },
+      "system": {
+        "slug": "salt-grinder",
+        "section": "Equipment Skins",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grandpas Ashes",
+        "appliesTo": "Salt Canister",
+        "skinType": "Equipment",
+        "cost": "R$99",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux Salt Canister cosmetic. This is a shop SKU, not a pack reward."
+      },
+      "system": {
+        "slug": "grandpas-ashes",
+        "section": "Equipment Skins",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sand Bucket",
+        "appliesTo": "Salt Canister",
+        "skinType": "Equipment",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Salt Canister look from the 2026 Summer Skin Pack. Buy the pack to unlock it."
+      },
+      "system": {
+        "slug": "sand-bucket",
+        "section": "Equipment Skins",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Witches Salt",
+        "appliesTo": "Salt Canister",
+        "skinType": "Equipment",
+        "cost": "R$399",
+        "currency": "Robux",
+        "source": "2025 Halloween Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Salt Canister look from the 2025 Halloween Skin Pack. The Robux amount is the pack price."
+      },
+      "system": {
+        "slug": "witches-salt",
+        "section": "Equipment Skins",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Weathered Book",
+        "appliesTo": "Spirit Book",
+        "skinType": "Equipment",
+        "cost": "$3,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A worn Spirit Book cosmetic from the Equipment Store. Inscription evidence still uses the same book."
+      },
+      "system": {
+        "slug": "weathered-book",
+        "section": "Equipment Skins",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Easel",
+        "appliesTo": "Spirit Book",
+        "skinType": "Equipment",
+        "cost": "$7,500",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A canvas-and-easel Spirit Book cosmetic. Ghost writing still counts as the same evidence."
+      },
+      "system": {
+        "slug": "easel",
+        "section": "Equipment Skins",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Santas List",
+        "appliesTo": "Spirit Book",
+        "skinType": "Equipment",
+        "cost": "R$599",
+        "currency": "Robux",
+        "source": "2025 Christmas Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Spirit Book look from the 2025 Christmas Skin Pack. Unlock it with the pack purchase."
+      },
+      "system": {
+        "slug": "santas-list",
+        "section": "Equipment Skins",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Black Phone",
+        "appliesTo": "Spirit Box",
+        "skinType": "Equipment",
+        "cost": "$3,500",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A phone-shaped Spirit Box cosmetic from the Equipment Store."
+      },
+      "system": {
+        "slug": "black-phone",
+        "section": "Equipment Skins",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vintage Spirit Box",
+        "appliesTo": "Spirit Box",
+        "skinType": "Equipment",
+        "cost": "R$399",
+        "currency": "Robux",
+        "source": "2025 Halloween Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Spirit Box look from the 2025 Halloween Skin Pack. The Robux cost is the pack, not a solo SKU."
+      },
+      "system": {
+        "slug": "vintage-spirit-box",
+        "section": "Equipment Skins",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Spirit Box",
+        "appliesTo": "Spirit Box",
+        "skinType": "Equipment",
+        "cost": "R$599",
+        "currency": "Robux",
+        "source": "2025 Christmas Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Spirit Box look from the 2025 Christmas Skin Pack. Buy the pack to unlock it."
+      },
+      "system": {
+        "slug": "festive-spirit-box",
+        "section": "Equipment Skins",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Digital Thermometer",
+        "appliesTo": "Thermometer",
+        "skinType": "Equipment",
+        "cost": "$1,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "The cheaper Thermometer cosmetic. Freezing temperatures still read the same way."
+      },
+      "system": {
+        "slug": "digital-thermometer",
+        "section": "Equipment Skins",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "House Thermometer",
+        "appliesTo": "Thermometer",
+        "skinType": "Equipment",
+        "cost": "$2,000",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A wall-style Thermometer cosmetic from the Equipment Store."
+      },
+      "system": {
+        "slug": "house-thermometer",
+        "section": "Equipment Skins",
+        "sortOrder": 65,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hollywood Camera",
+        "appliesTo": "Video Camera",
+        "skinType": "Equipment",
+        "cost": "$7,500",
+        "currency": "Cash",
+        "source": "Equipment Store",
+        "availability": "Shop",
+        "cardSummary": "A cash-shop Video Camera cosmetic. Ghost orbs still show on the same tool."
+      },
+      "system": {
+        "slug": "hollywood-camera",
+        "section": "Equipment Skins",
+        "sortOrder": 66,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vintage Camera",
+        "appliesTo": "Video Camera",
+        "skinType": "Equipment",
+        "cost": "R$199",
+        "currency": "Robux",
+        "source": "Robux shop",
+        "availability": "Shop",
+        "cardSummary": "A standalone Robux Video Camera cosmetic. This is a shop SKU rather than a pack skin."
+      },
+      "system": {
+        "slug": "vintage-camera",
+        "section": "Equipment Skins",
+        "sortOrder": 67,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cthulhu",
+        "appliesTo": "Abaddon",
+        "skinType": "Ghost",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "An Abaddon look from the 2026 Summer Skin Pack. Only you see equipped ghost skins."
+      },
+      "system": {
+        "slug": "cthulhu",
+        "section": "Ghost Skins",
+        "sortOrder": 68,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gentleman",
+        "appliesTo": "Biter",
+        "skinType": "Ghost",
+        "cost": null,
+        "currency": null,
+        "source": "Biter poster",
+        "availability": "Merch",
+        "cardSummary": "A Biter look from the in-game Biter poster. Equipped ghost skins are only visible to you."
+      },
+      "system": {
+        "slug": "gentleman",
+        "section": "Ghost Skins",
+        "sortOrder": 69,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Maid",
+        "appliesTo": "Biter",
+        "skinType": "Ghost",
+        "cost": null,
+        "currency": null,
+        "source": "Biter T-shirt",
+        "availability": "Merch",
+        "cardSummary": "A Biter look from the in-game Biter T-shirt. Teammates still see the default model."
+      },
+      "system": {
+        "slug": "maid",
+        "section": "Ghost Skins",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Summer",
+        "appliesTo": "Biter",
+        "skinType": "Ghost",
+        "cost": "R$299",
+        "currency": "Robux",
+        "source": "2026 Summer Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Biter look from the 2026 Summer Skin Pack. The Robux price is the pack, not a solo skin buy."
+      },
+      "system": {
+        "slug": "summer",
+        "section": "Ghost Skins",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Human Doctor",
+        "appliesTo": "Dr. Ratched",
+        "skinType": "Ghost",
+        "cost": null,
+        "currency": null,
+        "source": "Dr. Ratched T-shirt",
+        "availability": "Merch",
+        "cardSummary": "A Dr. Ratched look from the in-game Dr. Ratched T-shirt. Only you see the equipped model."
+      },
+      "system": {
+        "slug": "human-doctor",
+        "section": "Ghost Skins",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Plague Doctor",
+        "appliesTo": "Dr. Ratched",
+        "skinType": "Ghost",
+        "cost": null,
+        "currency": null,
+        "source": "Dr. Ratched plushie pre-order",
+        "availability": "Merch",
+        "cardSummary": "A Dr. Ratched look tied to the Dr. Ratched plushie pre-order. Ghost hunts and evidence do not change."
+      },
+      "system": {
+        "slug": "plague-doctor",
+        "section": "Ghost Skins",
+        "sortOrder": 73,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Barista",
+        "appliesTo": "Leech",
+        "skinType": "Ghost",
+        "cost": null,
+        "currency": null,
+        "source": "Ghost sticker sheet",
+        "availability": "Merch",
+        "cardSummary": "A Leech look from the in-game ghost sticker sheet. Equipped ghost skins stay first-person only."
+      },
+      "system": {
+        "slug": "barista",
+        "section": "Ghost Skins",
+        "sortOrder": 74,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost of Christmas",
+        "appliesTo": "Leech",
+        "skinType": "Ghost",
+        "cost": "R$599",
+        "currency": "Robux",
+        "source": "2025 Christmas Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Leech look from the 2025 Christmas Skin Pack. Unlock it with the pack, not a standalone listing."
+      },
+      "system": {
+        "slug": "ghost-of-christmas",
+        "section": "Ghost Skins",
+        "sortOrder": 75,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Witch",
+        "appliesTo": "Leech",
+        "skinType": "Ghost",
+        "cost": null,
+        "currency": null,
+        "source": "Leech poster",
+        "availability": "Merch",
+        "cardSummary": "A Leech look from the in-game Leech poster. Other hunters still see the default Leech."
+      },
+      "system": {
+        "slug": "witch",
+        "section": "Ghost Skins",
+        "sortOrder": 76,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gardener",
+        "appliesTo": "Marrow",
+        "skinType": "Ghost",
+        "cost": "$5,000",
+        "currency": "Cash",
+        "source": "Ghost Skins shop",
+        "availability": "Shop",
+        "cardSummary": "A Marrow look bought with in-game cash in the Ghost Skins shop. Only you see it during hunts."
+      },
+      "system": {
+        "slug": "gardener",
+        "section": "Ghost Skins",
+        "sortOrder": 77,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dullahan",
+        "appliesTo": "Mouthpiece",
+        "skinType": "Ghost",
+        "cost": "R$399",
+        "currency": "Robux",
+        "source": "2025 Halloween Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Mouthpiece look from the 2025 Halloween Skin Pack. The Robux price is the pack cost."
+      },
+      "system": {
+        "slug": "dullahan",
+        "section": "Ghost Skins",
+        "sortOrder": 78,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Waiter",
+        "appliesTo": "Mouthpiece",
+        "skinType": "Ghost",
+        "cost": "$7,500",
+        "currency": "Cash",
+        "source": "Ghost Skins shop",
+        "availability": "Shop",
+        "cardSummary": "A Mouthpiece look bought with in-game cash. It does not change hunt behavior."
+      },
+      "system": {
+        "slug": "waiter",
+        "section": "Ghost Skins",
+        "sortOrder": 79,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Human Rattle",
+        "appliesTo": "Rattle",
+        "skinType": "Ghost",
+        "cost": "$10,000",
+        "currency": "Cash",
+        "source": "Ghost Skins shop",
+        "availability": "Shop",
+        "cardSummary": "A Rattle look bought with in-game cash. Equipped ghost skins are only visible to you."
+      },
+      "system": {
+        "slug": "human-rattle",
+        "section": "Ghost Skins",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Nutcracker",
+        "appliesTo": "Rattle",
+        "skinType": "Ghost",
+        "cost": null,
+        "currency": null,
+        "source": "Rattle poster",
+        "availability": "Merch",
+        "cardSummary": "A Rattle look from the in-game Rattle poster. Lootbloc merch does not grant this skin by itself."
+      },
+      "system": {
+        "slug": "nutcracker",
+        "section": "Ghost Skins",
+        "sortOrder": 81,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Grasp",
+        "appliesTo": "Watcher",
+        "skinType": "Ghost",
+        "cost": null,
+        "currency": null,
+        "source": "Launch-window job",
+        "availability": "Unobtainable",
+        "cardSummary": "A Watcher look from a short launch-window job. That unlock route is closed."
+      },
+      "system": {
+        "slug": "grasp",
+        "section": "Ghost Skins",
+        "sortOrder": 82,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Krampus",
+        "appliesTo": "Watcher",
+        "skinType": "Ghost",
+        "cost": "R$599",
+        "currency": "Robux",
+        "source": "2025 Christmas Skin Pack",
+        "availability": "Limited pack",
+        "cardSummary": "A Watcher look from the 2025 Christmas Skin Pack. The listed Robux cost is the pack price."
+      },
+      "system": {
+        "slug": "krampus",
+        "section": "Ghost Skins",
+        "sortOrder": 83,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pride",
+        "appliesTo": "Watcher",
+        "skinType": "Ghost",
+        "cost": "R$99",
+        "currency": "Robux",
+        "source": "In-game gamepass",
+        "availability": "Shop",
+        "cardSummary": "A Watcher look from a 99 Robux in-game gamepass. Only you see the equipped ghost skin."
+      },
+      "system": {
+        "slug": "pride",
+        "section": "Ghost Skins",
+        "sortOrder": 84,
+        "image": null
+      }
+    }
+  ]
+}

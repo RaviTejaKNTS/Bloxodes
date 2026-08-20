@@ -266,14 +266,14 @@ Evidence: [full report](../tmp/game-collection-suggestions/creatures-of-sonaria.
 
 Evidence: [full report](../tmp/game-collection-suggestions/demonology.md)
 
-- [ ] Ghost Models
-- [ ] Skins
-- [ ] Challenges
-- [ ] Objectives
-- [ ] Difficulties
-- [ ] Level Unlocks
-- [ ] Photo Rewards
-- [ ] Fortune Teller Tickets
+- [x] Ghost Models
+- [x] Skins
+- [x] Challenges
+- [x] Objectives
+- [x] Difficulties
+- [x] Level Unlocks
+- [x] Photo Rewards
+- [x] Fortune Teller Tickets
 
 ### Drain the Lake
 
