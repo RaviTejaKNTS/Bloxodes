@@ -668,7 +668,13 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "fisch-npcs": 26_000,
   "fisch-rod-skins": 26_000,
   "fisch-titles": 40_000,
-  "fisch-lanterns": 30_000
+  "fisch-lanterns": 30_000,
+  // Evade cosmetic mega-catalogs: hundreds of image cards each.
+  "evade-item-skins": 26_000,
+  "evade-emotes": 26_000,
+  "evade-cosmetics": 26_000,
+  "evade-unusuals": 26_000,
+  "evade-nametags": 30_000
 };
 
 // When a collection needs large single sections (e.g. Furniture) split across pages, lower
@@ -686,7 +692,13 @@ const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
   "fisch-npcs": 26_000,
   "fisch-rod-skins": 26_000,
   "fisch-titles": 40_000,
-  "fisch-lanterns": 30_000
+  "fisch-lanterns": 30_000,
+  // Evade cosmetic mega-catalogs: hundreds of image cards each.
+  "evade-item-skins": 26_000,
+  "evade-emotes": 26_000,
+  "evade-cosmetics": 26_000,
+  "evade-unusuals": 26_000,
+  "evade-nametags": 30_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {

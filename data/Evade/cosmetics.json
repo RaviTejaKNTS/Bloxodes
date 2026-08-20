@@ -1,0 +1,2702 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Evade",
+    "gameSlug": "evade",
+    "collection": "cosmetics",
+    "route": "/wiki/evade/cosmetics",
+    "catalogCode": "evade-cosmetics",
+    "itemFields": [
+      "price",
+      "flavor"
+    ],
+    "columns": [
+      "price",
+      "flavor"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Cosmetics"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "flavor",
+      "cardDescriptionField": "flavor",
+      "cardFields": [
+        "price",
+        "flavor"
+      ],
+      "tableFields": [
+        "price",
+        "flavor"
+      ],
+      "fieldPresentation": {
+        "price": {
+          "kind": "chip",
+          "label": "Price",
+          "omitWhenEmpty": true
+        },
+        "flavor": {
+          "kind": "detail",
+          "label": "Description",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Milkman",
+        "price": "10 Points",
+        "flavor": "I am the Milkman. My milk is delicious."
+      },
+      "system": {
+        "slug": "milkman",
+        "section": "Cosmetics",
+        "sortOrder": 1,
+        "image": "/Evade/Cosmetics/milkman.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Krusty Hat",
+        "price": "10 Points",
+        "flavor": "I hate my job."
+      },
+      "system": {
+        "slug": "krusty-hat",
+        "section": "Cosmetics",
+        "sortOrder": 2,
+        "image": "/Evade/Cosmetics/krusty-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headset",
+        "price": "15 Points",
+        "flavor": "Gamer mode activated."
+      },
+      "system": {
+        "slug": "headset",
+        "section": "Cosmetics",
+        "sortOrder": 3,
+        "image": "/Evade/Cosmetics/headset.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boxed Electricizer",
+        "price": "70 Points",
+        "flavor": "Hey, isn't this that tower from that Tower Defense Simulator game? Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "boxed-electricizer",
+        "section": "Cosmetics",
+        "sortOrder": 4,
+        "image": "/Evade/Cosmetics/boxed-electricizer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Headphones",
+        "price": "25 Points",
+        "flavor": "Can't afford these earpods bru"
+      },
+      "system": {
+        "slug": "orange-headphones",
+        "section": "Cosmetics",
+        "sortOrder": 5,
+        "image": "/Evade/Cosmetics/orange-headphones.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Egg On Toast",
+        "price": "15 Points",
+        "flavor": null
+      },
+      "system": {
+        "slug": "egg-on-toast",
+        "section": "Cosmetics",
+        "sortOrder": 6,
+        "image": "/Evade/Cosmetics/egg-on-toast.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Faded Cape",
+        "price": "20 Points",
+        "flavor": "Stylish."
+      },
+      "system": {
+        "slug": "red-faded-cape",
+        "section": "Cosmetics",
+        "sortOrder": 7,
+        "image": "/Evade/Cosmetics/red-faded-cape.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Faded Cape",
+        "price": "20 Points",
+        "flavor": "Stylish."
+      },
+      "system": {
+        "slug": "blue-faded-cape",
+        "section": "Cosmetics",
+        "sortOrder": 8,
+        "image": "/Evade/Cosmetics/blue-faded-cape.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Faded Cape",
+        "price": "20 Points",
+        "flavor": "Stylish."
+      },
+      "system": {
+        "slug": "green-faded-cape",
+        "section": "Cosmetics",
+        "sortOrder": 9,
+        "image": "/Evade/Cosmetics/green-faded-cape.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Plaid Hat",
+        "price": "25 Points",
+        "flavor": "They've gone to plaid?"
+      },
+      "system": {
+        "slug": "plaid-hat",
+        "section": "Cosmetics",
+        "sortOrder": 10,
+        "image": "/Evade/Cosmetics/plaid-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chainsaw",
+        "price": "20 Points",
+        "flavor": "Beware the Texas Massacre."
+      },
+      "system": {
+        "slug": "chainsaw",
+        "section": "Cosmetics",
+        "sortOrder": 11,
+        "image": "/Evade/Cosmetics/chainsaw.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boxed Slinger",
+        "price": "50 Points",
+        "flavor": "Designed to steal the money from chumps like you. Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "boxed-slinger",
+        "section": "Cosmetics",
+        "sortOrder": 12,
+        "image": "/Evade/Cosmetics/boxed-slinger.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aviator Cap",
+        "price": "20 Points",
+        "flavor": "For incase you go airborne."
+      },
+      "system": {
+        "slug": "aviator-cap",
+        "section": "Cosmetics",
+        "sortOrder": 13,
+        "image": "/Evade/Cosmetics/aviator-cap.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Snowboard",
+        "price": "25 Points",
+        "flavor": "Too bad there are no snowy mountains. Created by Sirdui"
+      },
+      "system": {
+        "slug": "purple-snowboard",
+        "section": "Cosmetics",
+        "sortOrder": 14,
+        "image": "/Evade/Cosmetics/purple-snowboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Snowboard",
+        "price": "25 Points",
+        "flavor": "Doesn't help when there aren't very many snow maps. Created by Sirdui"
+      },
+      "system": {
+        "slug": "orange-snowboard",
+        "section": "Cosmetics",
+        "sortOrder": 15,
+        "image": "/Evade/Cosmetics/orange-snowboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pudding Hat",
+        "price": "35 Points",
+        "flavor": "Scrumptious and delicious toffee pudding. Created by Aurrous"
+      },
+      "system": {
+        "slug": "pudding-hat",
+        "section": "Cosmetics",
+        "sortOrder": 16,
+        "image": "/Evade/Cosmetics/pudding-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Old Barrel",
+        "price": "25 Points",
+        "flavor": null
+      },
+      "system": {
+        "slug": "old-barrel",
+        "section": "Cosmetics",
+        "sortOrder": 17,
+        "image": "/Evade/Cosmetics/old-barrel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Neon Shades",
+        "price": "25 Points",
+        "flavor": "Actual realistic and pragmatic glasses? That's so 2000s."
+      },
+      "system": {
+        "slug": "blue-neon-shades",
+        "section": "Cosmetics",
+        "sortOrder": 18,
+        "image": "/Evade/Cosmetics/blue-neon-shades.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Infection",
+        "price": "30 Points",
+        "flavor": "The truth has been unsealed."
+      },
+      "system": {
+        "slug": "infection",
+        "section": "Cosmetics",
+        "sortOrder": 19,
+        "image": "/Evade/Cosmetics/infection.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Energy Sword",
+        "price": "30 Points",
+        "flavor": "Reality-0438 artifact."
+      },
+      "system": {
+        "slug": "energy-sword",
+        "section": "Cosmetics",
+        "sortOrder": 20,
+        "image": "/Evade/Cosmetics/energy-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Exo Helmet",
+        "price": "30 Points",
+        "flavor": "Reality collapse requires preparation!"
+      },
+      "system": {
+        "slug": "exo-helmet",
+        "section": "Cosmetics",
+        "sortOrder": 21,
+        "image": "/Evade/Cosmetics/exo-helmet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glyph",
+        "price": "30 Points",
+        "flavor": "A strange symbol with a pulsating glow. What could this mean? Where is it from? Who knows? Who cares??"
+      },
+      "system": {
+        "slug": "glyph",
+        "section": "Cosmetics",
+        "sortOrder": 22,
+        "image": "/Evade/Cosmetics/glyph.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Neon Shades",
+        "price": "35 Points",
+        "flavor": "Houston, we don't have a problem."
+      },
+      "system": {
+        "slug": "orange-neon-shades",
+        "section": "Cosmetics",
+        "sortOrder": 23,
+        "image": "/Evade/Cosmetics/orange-neon-shades.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Back Guitar",
+        "price": "30 Points",
+        "flavor": "Gets the girls. Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "back-guitar",
+        "section": "Cosmetics",
+        "sortOrder": 24,
+        "image": "/Evade/Cosmetics/back-guitar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chained",
+        "price": "30 Points",
+        "flavor": "These shackles won't keep me down forever!"
+      },
+      "system": {
+        "slug": "chained",
+        "section": "Cosmetics",
+        "sortOrder": 25,
+        "image": "/Evade/Cosmetics/chained.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Digital Bee Friends",
+        "price": "35 Points",
+        "flavor": "Pretty good replacement for social interacton. Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "digital-bee-friends",
+        "section": "Cosmetics",
+        "sortOrder": 26,
+        "image": "/Evade/Cosmetics/digital-bee-friends.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Demonic Sword",
+        "price": "80 Points",
+        "flavor": "For slaying demons."
+      },
+      "system": {
+        "slug": "demonic-sword",
+        "section": "Cosmetics",
+        "sortOrder": 27,
+        "image": "/Evade/Cosmetics/demonic-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blast Pack",
+        "price": "40 Points",
+        "flavor": "chiken. Created by Aurrous"
+      },
+      "system": {
+        "slug": "blast-pack",
+        "section": "Cosmetics",
+        "sortOrder": 28,
+        "image": "/Evade/Cosmetics/blast-pack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Roasted Chicken",
+        "price": "55 Points",
+        "flavor": null
+      },
+      "system": {
+        "slug": "roasted-chicken",
+        "section": "Cosmetics",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Angelic",
+        "price": "60 Points",
+        "flavor": "Your honor, orange you glad I left 3 clients?"
+      },
+      "system": {
+        "slug": "angelic",
+        "section": "Cosmetics",
+        "sortOrder": 30,
+        "image": "/Evade/Cosmetics/angelic.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Purified Wings",
+        "price": "75 Points",
+        "flavor": "Wings of redemption."
+      },
+      "system": {
+        "slug": "purified-wings",
+        "section": "Cosmetics",
+        "sortOrder": 31,
+        "image": "/Evade/Cosmetics/purified-wings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kugelblitz Ring",
+        "price": "60 Points",
+        "flavor": "A concentration of light so intense that it forms an event horizon. This is no theory, this is reality."
+      },
+      "system": {
+        "slug": "kugelblitz-ring",
+        "section": "Cosmetics",
+        "sortOrder": 32,
+        "image": "/Evade/Cosmetics/kugelblitz-ring.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Jard",
+        "price": "40 Points",
+        "flavor": "A helpful advisor on your shoulder."
+      },
+      "system": {
+        "slug": "mini-jard",
+        "section": "Cosmetics",
+        "sortOrder": 33,
+        "image": "/Evade/Cosmetics/mini-jard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Bobo",
+        "price": "40 Points",
+        "flavor": "Sometimes it's best to ignore what he says, no matter how real it sounds."
+      },
+      "system": {
+        "slug": "mini-bobo",
+        "section": "Cosmetics",
+        "sortOrder": 34,
+        "image": "/Evade/Cosmetics/mini-bobo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boxed Bobo",
+        "price": "50 Points",
+        "flavor": "Mommy, can I have that cute Bobo plushie? No, sweety, only losers get that. Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "boxed-bobo",
+        "section": "Cosmetics",
+        "sortOrder": 35,
+        "image": "/Evade/Cosmetics/boxed-bobo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Boxed Vulcan",
+        "price": "60 Points",
+        "flavor": "Doesn't come with the emplacement minigun toy. Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "boxed-vulcan",
+        "section": "Cosmetics",
+        "sortOrder": 36,
+        "image": "/Evade/Cosmetics/boxed-vulcan.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Avarian Staff",
+        "price": null,
+        "flavor": "A blessed staff from Avaria."
+      },
+      "system": {
+        "slug": "avarian-staff",
+        "section": "Cosmetics",
+        "sortOrder": 37,
+        "image": "/Evade/Cosmetics/avarian-staff.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carved Pumpkin Head",
+        "price": "40 Points",
+        "flavor": "Celebrate the spooky Halloween season with this carved pumpkin head."
+      },
+      "system": {
+        "slug": "carved-pumpkin-head",
+        "section": "Cosmetics",
+        "sortOrder": 38,
+        "image": "/Evade/Cosmetics/carved-pumpkin-head.png"
+      }
+    },
+    {
+      "item": {
+        "name": "[[Overhaul]] Hat",
+        "price": null,
+        "flavor": "Patient."
+      },
+      "system": {
+        "slug": "overhaul-hat",
+        "section": "Cosmetics",
+        "sortOrder": 39,
+        "image": "/Evade/Cosmetics/overhaul-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Ticket",
+        "price": "300 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "red-ticket",
+        "section": "Cosmetics",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Ticket",
+        "price": "1000 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "orange-ticket",
+        "section": "Cosmetics",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Ticket",
+        "price": "3000 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "golden-ticket",
+        "section": "Cosmetics",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Green Gift",
+        "price": "1000 Gifts",
+        "flavor": "Congratulations on earning 1000+ Gifts! We hope you enjoy the event. A gift from the developers"
+      },
+      "system": {
+        "slug": "green-gift",
+        "section": "Cosmetics",
+        "sortOrder": 43,
+        "image": "/Evade/Cosmetics/green-gift.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gift Pair",
+        "price": "3000 Gifts",
+        "flavor": "Congratulations on earning 4000+ Gifts! That was no easy feat, your dedication will not go unrecognized. A gift from the developers."
+      },
+      "system": {
+        "slug": "gift-pair",
+        "section": "Cosmetics",
+        "sortOrder": 44,
+        "image": "/Evade/Cosmetics/gift-pair.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gift Stack",
+        "price": "7000 Gifts",
+        "flavor": "Congratulations on earning 7000+ Gifts! You've finished the battle pass, what else is there to spend it on? Anyways, take this special reward. This event took a while to make and it was a collaborative effort between the developers and community, thanks for playing."
+      },
+      "system": {
+        "slug": "gift-stack",
+        "section": "Cosmetics",
+        "sortOrder": 45,
+        "image": "/Evade/Cosmetics/gift-stack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "1 Billion Celebration",
+        "price": null,
+        "flavor": "I never thought I'd ever get this successful. I genuinely, wholeheartedly, couldn't done it within you, so please accept this as a reward."
+      },
+      "system": {
+        "slug": "1-billion-celebration",
+        "section": "Cosmetics",
+        "sortOrder": 46,
+        "image": "/Evade/Cosmetics/1-billion-celebration.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bird Badge",
+        "price": null,
+        "flavor": "Thanks for following our official account! @HexagonDCRoblox"
+      },
+      "system": {
+        "slug": "bird-badge",
+        "section": "Cosmetics",
+        "sortOrder": 47,
+        "image": "/Evade/Cosmetics/bird-badge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Four Clover Pin",
+        "price": null,
+        "flavor": "Use code \"luckyday\" in Evade for some pin thing. Theres also n update out that's kinda cool"
+      },
+      "system": {
+        "slug": "four-clover-pin",
+        "section": "Cosmetics",
+        "sortOrder": 48,
+        "image": "/Evade/Cosmetics/four-clover-pin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Firework Pack",
+        "price": "40 Points",
+        "flavor": "May cause first degree burns on your back."
+      },
+      "system": {
+        "slug": "firework-pack",
+        "section": "Cosmetics",
+        "sortOrder": 49,
+        "image": "/Evade/Cosmetics/firework-pack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Xmas Tree Cookie",
+        "price": "4500 Gingerbread",
+        "flavor": "Congratulations on receiving 4500 Gingerbreads!"
+      },
+      "system": {
+        "slug": "xmas-tree-cookie",
+        "section": "Cosmetics",
+        "sortOrder": 50,
+        "image": "/Evade/Cosmetics/xmas-tree-cookie.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine Roses",
+        "price": "2200 Roses",
+        "flavor": "Congratulations on receiving over 2200 roses!"
+      },
+      "system": {
+        "slug": "valentine-roses",
+        "section": "Cosmetics",
+        "sortOrder": 51,
+        "image": "/Evade/Cosmetics/valentine-roses.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gleaming Treasure Chest",
+        "price": "2500 Coins",
+        "flavor": "Congratulations on collecting 2500 gold coins, may you be eternally blessed with good fortune and wealth"
+      },
+      "system": {
+        "slug": "gleaming-treasure-chest",
+        "section": "Cosmetics",
+        "sortOrder": 52,
+        "image": "/Evade/Cosmetics/gleaming-treasure-chest.png"
+      }
+    },
+    {
+      "item": {
+        "name": "[https://tower-blitz.fandom.com/wiki/Overlord Overlord] Set",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "https-tower-blitz-fandom-com-wiki-overlord-overlord-set",
+        "section": "Cosmetics",
+        "sortOrder": 53,
+        "image": "/Evade/Cosmetics/https-tower-blitz-fandom-com-wiki-overlord-overlord-set.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shining Sun",
+        "price": "5500 Suns",
+        "flavor": "A gleaming star that bathes the land in eternal sunlight and warmth, a momento of the summer season. Congratulations on collecting 5500 Suns and completing the event!"
+      },
+      "system": {
+        "slug": "shining-sun",
+        "section": "Cosmetics",
+        "sortOrder": 54,
+        "image": "/Evade/Cosmetics/shining-sun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bat Attack",
+        "price": "20 Tickets",
+        "flavor": "WATCH OUT!!!! A SWARM OF BATS!!! HALP!! Created by DevChams"
+      },
+      "system": {
+        "slug": "bat-attack",
+        "section": "Cosmetics",
+        "sortOrder": 55,
+        "image": "/Evade/Cosmetics/bat-attack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tombstone",
+        "price": "20 Tickets",
+        "flavor": "F. Rest in peace. Created by clonemace"
+      },
+      "system": {
+        "slug": "tombstone",
+        "section": "Cosmetics",
+        "sortOrder": 56,
+        "image": "/Evade/Cosmetics/tombstone.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bag Head",
+        "price": "25 Tickets",
+        "flavor": "Who said that using empty bean sacks weren't stylish? Created by FartSquad166"
+      },
+      "system": {
+        "slug": "bag-head",
+        "section": "Cosmetics",
+        "sortOrder": 57,
+        "image": "/Evade/Cosmetics/bag-head.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candle Head",
+        "price": "35 Tickets",
+        "flavor": "An ornate candle, passively emits a small amount of light."
+      },
+      "system": {
+        "slug": "candle-head",
+        "section": "Cosmetics",
+        "sortOrder": 58,
+        "image": "/Evade/Cosmetics/candle-head.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Horns",
+        "price": "35 Tickets",
+        "flavor": "im so evil. Created by nick200x"
+      },
+      "system": {
+        "slug": "demon-horns",
+        "section": "Cosmetics",
+        "sortOrder": 59,
+        "image": "/Evade/Cosmetics/demon-horns.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Impaled Head",
+        "price": "20 Tickets",
+        "flavor": "Storing your machete in convenient places... Created by nick200x"
+      },
+      "system": {
+        "slug": "impaled-head",
+        "section": "Cosmetics",
+        "sortOrder": 60,
+        "image": "/Evade/Cosmetics/impaled-head.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Witch Hat",
+        "price": "25 Tickets",
+        "flavor": "A pointy hat all witches use, excluding the wicked witch of the west. Created by nick200x"
+      },
+      "system": {
+        "slug": "witch-hat",
+        "section": "Cosmetics",
+        "sortOrder": 61,
+        "image": "/Evade/Cosmetics/witch-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dual Bone Sword",
+        "price": "30 Tickets",
+        "flavor": "ARGHHHHH... where be my trusty swords... Created by clonemace"
+      },
+      "system": {
+        "slug": "dual-bone-sword",
+        "section": "Cosmetics",
+        "sortOrder": 62,
+        "image": "/Evade/Cosmetics/dual-bone-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spider Infestation",
+        "price": "30 Tickets",
+        "flavor": "People with arachnophobia crawling in their beds rn. Created by Jard"
+      },
+      "system": {
+        "slug": "spider-infestation",
+        "section": "Cosmetics",
+        "sortOrder": 63,
+        "image": "/Evade/Cosmetics/spider-infestation.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vampire Outfit",
+        "price": "45 Tickets",
+        "flavor": "I stole this fashionable outfit from a coffin from some guy called Dracula. Created by Hrouko"
+      },
+      "system": {
+        "slug": "vampire-outfit",
+        "section": "Cosmetics",
+        "sortOrder": 64,
+        "image": "/Evade/Cosmetics/vampire-outfit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Halloween Face",
+        "price": "30 Tickets",
+        "flavor": "A possessed face. Twisted and unnerving. In a hauntingly cold and dark color."
+      },
+      "system": {
+        "slug": "blue-halloween-face",
+        "section": "Cosmetics",
+        "sortOrder": 65,
+        "image": "/Evade/Cosmetics/blue-halloween-face.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Halloween Face",
+        "price": "30 Tickets",
+        "flavor": "A possessed face. Twisted and unnerving in a toxic green color."
+      },
+      "system": {
+        "slug": "green-halloween-face",
+        "section": "Cosmetics",
+        "sortOrder": 66,
+        "image": "/Evade/Cosmetics/green-halloween-face.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange Halloween Face",
+        "price": "30 Tickets",
+        "flavor": "A possessed face. Twisted and unnerving. In a vivid orange color."
+      },
+      "system": {
+        "slug": "orange-halloween-face",
+        "section": "Cosmetics",
+        "sortOrder": 67,
+        "image": "/Evade/Cosmetics/orange-halloween-face.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Wings",
+        "price": "45 Tickets",
+        "flavor": "Monstrous appendages growing out of your back. Created by clonemace"
+      },
+      "system": {
+        "slug": "demon-wings",
+        "section": "Cosmetics",
+        "sortOrder": 68,
+        "image": "/Evade/Cosmetics/demon-wings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fungal Overgrowth",
+        "price": "60 Tickets",
+        "flavor": "Exposure to infectious spores can lead to an uncontrollable and rapid growth of fungi and other biological matter. Stalk-like structures of chitin replace muscle and tissue in an extremely painful process."
+      },
+      "system": {
+        "slug": "fungal-overgrowth",
+        "section": "Cosmetics",
+        "sortOrder": 69,
+        "image": "/Evade/Cosmetics/fungal-overgrowth.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Monoculi",
+        "price": "40 Tickets",
+        "flavor": "seek"
+      },
+      "system": {
+        "slug": "monoculi",
+        "section": "Cosmetics",
+        "sortOrder": 70,
+        "image": "/Evade/Cosmetics/monoculi.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wretched Wings",
+        "price": "40 Tickets",
+        "flavor": "Wings of the well damned, made from the bones of goblins >;3. Created by omuq"
+      },
+      "system": {
+        "slug": "wretched-wings",
+        "section": "Cosmetics",
+        "sortOrder": 71,
+        "image": "/Evade/Cosmetics/wretched-wings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phantom Blades",
+        "price": "45 Tickets",
+        "flavor": "GUHHHHHHHHHHHHHHH!!! -Impaled by several ghost weapons.."
+      },
+      "system": {
+        "slug": "phantom-blades",
+        "section": "Cosmetics",
+        "sortOrder": 72,
+        "image": "/Evade/Cosmetics/phantom-blades.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Amethyst Staff",
+        "price": "50 Tickets",
+        "flavor": "The fabled scepter of Bobo the IV, before his eventual passing on Tudor Manor. Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "amethyst-staff",
+        "section": "Cosmetics",
+        "sortOrder": 73,
+        "image": "/Evade/Cosmetics/amethyst-staff.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Abduction",
+        "price": "65 Tickets",
+        "flavor": "He just wants a friend ;-;"
+      },
+      "system": {
+        "slug": "ghost-abduction",
+        "section": "Cosmetics",
+        "sortOrder": 74,
+        "image": "/Evade/Cosmetics/ghost-abduction.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eye Corruption",
+        "price": "45 Tickets",
+        "flavor": "Sentient eyes cover your body like a plague. Created by Subzeroto"
+      },
+      "system": {
+        "slug": "eye-corruption",
+        "section": "Cosmetics",
+        "sortOrder": 75,
+        "image": "/Evade/Cosmetics/eye-corruption.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue UFO Abduction",
+        "price": "75 Tickets",
+        "flavor": "A grand saucer interested in partaking a piece of your body. Created by omuq"
+      },
+      "system": {
+        "slug": "blue-ufo-abduction",
+        "section": "Cosmetics",
+        "sortOrder": 76,
+        "image": "/Evade/Cosmetics/blue-ufo-abduction.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink UFO Abduction",
+        "price": "75 Tickets",
+        "flavor": "A mysterious concoction, coincidentally boiling ontop of my head. Created by FartSquad166"
+      },
+      "system": {
+        "slug": "pink-ufo-abduction",
+        "section": "Cosmetics",
+        "sortOrder": 77,
+        "image": "/Evade/Cosmetics/pink-ufo-abduction.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cauldronhead",
+        "price": "80 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "cauldronhead",
+        "section": "Cosmetics",
+        "sortOrder": 78,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hellish Grip",
+        "price": "100 Tickets",
+        "flavor": "Perfect for reaping the souls of your enemies, with the most high-tech available reapers. Created by Taz3r_X"
+      },
+      "system": {
+        "slug": "hellish-grip",
+        "section": "Cosmetics",
+        "sortOrder": 79,
+        "image": "/Evade/Cosmetics/hellish-grip.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mechanical Scythe",
+        "price": "40 Tickets",
+        "flavor": "Dracarys Created by JerryR0X"
+      },
+      "system": {
+        "slug": "mechanical-scythe",
+        "section": "Cosmetics",
+        "sortOrder": 80,
+        "image": "/Evade/Cosmetics/mechanical-scythe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Skull",
+        "price": "40 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "dragon-skull",
+        "section": "Cosmetics",
+        "sortOrder": 81,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ghost Friend",
+        "price": "50 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "ghost-friend",
+        "section": "Cosmetics",
+        "sortOrder": 82,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Alchemist Belt",
+        "price": "30 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "alchemist-belt",
+        "section": "Cosmetics",
+        "sortOrder": 83,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frankenstein",
+        "price": "40 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "frankenstein",
+        "section": "Cosmetics",
+        "sortOrder": 84,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Electrifying Guitar",
+        "price": "40 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "electrifying-guitar",
+        "section": "Cosmetics",
+        "sortOrder": 85,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Banana Suit",
+        "price": "65 Tickets",
+        "flavor": null
+      },
+      "system": {
+        "slug": "banana-suit",
+        "section": "Cosmetics",
+        "sortOrder": 86,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chained Coffin",
+        "price": "20 Candies",
+        "flavor": "Here rests those who died waiting for Halloween and Overhaul. Created by abrahamabugri"
+      },
+      "system": {
+        "slug": "chained-coffin",
+        "section": "Cosmetics",
+        "sortOrder": 87,
+        "image": "/Evade/Cosmetics/chained-coffin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sealed Book",
+        "price": "25 Candies",
+        "flavor": "Chanting one line within this book will cause the four horsemen of the apocalypse. Created by Sirdui"
+      },
+      "system": {
+        "slug": "sealed-book",
+        "section": "Cosmetics",
+        "sortOrder": 88,
+        "image": "/Evade/Cosmetics/sealed-book.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clown Butcher",
+        "price": "20 Candies",
+        "flavor": "Clown from ohio. Created by LeeW011"
+      },
+      "system": {
+        "slug": "clown-butcher",
+        "section": "Cosmetics",
+        "sortOrder": 89,
+        "image": "/Evade/Cosmetics/clown-butcher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Demon Helmet",
+        "price": "25 Candies",
+        "flavor": "One ring to rule them all. Created by Snowyclown0"
+      },
+      "system": {
+        "slug": "demon-helmet",
+        "section": "Cosmetics",
+        "sortOrder": 90,
+        "image": "/Evade/Cosmetics/demon-helmet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Soul Extinguisher",
+        "price": "25 Candies",
+        "flavor": "Vacuum up the dead. Created by vvostrikov"
+      },
+      "system": {
+        "slug": "soul-extinguisher",
+        "section": "Cosmetics",
+        "sortOrder": 91,
+        "image": "/Evade/Cosmetics/soul-extinguisher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phantom Hat",
+        "price": "20 Candies",
+        "flavor": "If its a ghost then how can u wear it. Created by Sirdui"
+      },
+      "system": {
+        "slug": "phantom-hat",
+        "section": "Cosmetics",
+        "sortOrder": 92,
+        "image": "/Evade/Cosmetics/phantom-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mechanical Witch Hat",
+        "price": "20 Candies",
+        "flavor": "Is this thing battery powered?. Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "mechanical-witch-hat",
+        "section": "Cosmetics",
+        "sortOrder": 93,
+        "image": "/Evade/Cosmetics/mechanical-witch-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Calming Mask",
+        "price": "20 Candies",
+        "flavor": "luh calm fit. Created by abrahamabugri"
+      },
+      "system": {
+        "slug": "calming-mask",
+        "section": "Cosmetics",
+        "sortOrder": 94,
+        "image": "/Evade/Cosmetics/calming-mask.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headless Horeman<br>Headtaker",
+        "price": "50 Candies",
+        "flavor": "You fool, what have you done?!. Created by ElectroMeltdown"
+      },
+      "system": {
+        "slug": "headless-horeman-br-headtaker",
+        "section": "Cosmetics",
+        "sortOrder": 95,
+        "image": "/Evade/Cosmetics/headless-horeman-br-headtaker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Batwing Basher",
+        "price": "30 Candies",
+        "flavor": "Rock'n'roll from the grave. Created by abrahamabugri"
+      },
+      "system": {
+        "slug": "batwing-basher",
+        "section": "Cosmetics",
+        "sortOrder": 96,
+        "image": "/Evade/Cosmetics/batwing-basher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mariachi Set Yellow",
+        "price": "20 Bread",
+        "flavor": "Care for a lively tune?"
+      },
+      "system": {
+        "slug": "mariachi-set-yellow",
+        "section": "Cosmetics",
+        "sortOrder": 97,
+        "image": "/Evade/Cosmetics/mariachi-set-yellow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mariachi Set Black",
+        "price": "20 Bread",
+        "flavor": "Care for a lively tune?"
+      },
+      "system": {
+        "slug": "mariachi-set-black",
+        "section": "Cosmetics",
+        "sortOrder": 98,
+        "image": "/Evade/Cosmetics/mariachi-set-black.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowflakes",
+        "price": "15 Gifts",
+        "flavor": "Budget cosmetic since you can't afford an unusual yet. Created by Sirdui"
+      },
+      "system": {
+        "slug": "snowflakes",
+        "section": "Cosmetics",
+        "sortOrder": 99,
+        "image": "/Evade/Cosmetics/snowflakes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa Hat",
+        "price": "20 Gifts",
+        "flavor": "There is no Christmas without the iconic hat everybody knows and loves. Created by Sirdui"
+      },
+      "system": {
+        "slug": "santa-hat",
+        "section": "Cosmetics",
+        "sortOrder": 100,
+        "image": "/Evade/Cosmetics/santa-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cozy Scarf",
+        "price": "20 Gifts",
+        "flavor": "Snug. Creeated by clonemace"
+      },
+      "system": {
+        "slug": "cozy-scarf",
+        "section": "Cosmetics",
+        "sortOrder": 101,
+        "image": "/Evade/Cosmetics/cozy-scarf.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Headband",
+        "price": "30 Gifts",
+        "flavor": "A cute festive headband. Created by Sirdui"
+      },
+      "system": {
+        "slug": "festive-headband",
+        "section": "Cosmetics",
+        "sortOrder": 102,
+        "image": "/Evade/Cosmetics/festive-headband.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carrot Nose",
+        "price": "15 Gifts",
+        "flavor": "Got your nose!!. Creted by omuq"
+      },
+      "system": {
+        "slug": "carrot-nose",
+        "section": "Cosmetics",
+        "sortOrder": 103,
+        "image": "/Evade/Cosmetics/carrot-nose.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ornament Bandolier",
+        "price": "25 Gifts",
+        "flavor": "Quick and easy access to your ornaments to shatter upon your foes. Created by nick200x"
+      },
+      "system": {
+        "slug": "ornament-bandolier",
+        "section": "Cosmetics",
+        "sortOrder": 104,
+        "image": "/Evade/Cosmetics/ornament-bandolier.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Flintlock",
+        "price": "35 Gifts",
+        "flavor": "Shoot the elves who desobey. Created by FartSquad166"
+      },
+      "system": {
+        "slug": "candy-flintlock",
+        "section": "Cosmetics",
+        "sortOrder": 105,
+        "image": "/Evade/Cosmetics/candy-flintlock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Back Menorah",
+        "price": "55 Gifts",
+        "flavor": "Celebrate Hannukah with this backside menorah. Created by Kapurikon"
+      },
+      "system": {
+        "slug": "back-menorah",
+        "section": "Cosmetics",
+        "sortOrder": 106,
+        "image": "/Evade/Cosmetics/back-menorah.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sock Stocking",
+        "price": "20 Gifts",
+        "flavor": "All i want for Christmas is someone to love me. Created by nick200x"
+      },
+      "system": {
+        "slug": "sock-stocking",
+        "section": "Cosmetics",
+        "sortOrder": 107,
+        "image": "/Evade/Cosmetics/sock-stocking.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Confetti",
+        "price": "25 Gifts",
+        "flavor": "A swirl of delicious candy all around you. Created by DevCharms"
+      },
+      "system": {
+        "slug": "candy-confetti",
+        "section": "Cosmetics",
+        "sortOrder": 108,
+        "image": "/Evade/Cosmetics/candy-confetti.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread Guards",
+        "price": "35 Gifts",
+        "flavor": "Defend the house with all you got. Created by YourDeadlyDesire"
+      },
+      "system": {
+        "slug": "gingerbread-guards",
+        "section": "Cosmetics",
+        "sortOrder": 109,
+        "image": "/Evade/Cosmetics/gingerbread-guards.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bobo Snowman Pal",
+        "price": "20 Gifts",
+        "flavor": ":) Created by Aurrous"
+      },
+      "system": {
+        "slug": "bobo-snowman-pal",
+        "section": "Cosmetics",
+        "sortOrder": 110,
+        "image": "/Evade/Cosmetics/bobo-snowman-pal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hanging Mistletoe",
+        "price": "25 Gifts",
+        "flavor": "Hey look, just us two under the mistletoe. Created by Magikarp"
+      },
+      "system": {
+        "slug": "hanging-mistletoe",
+        "section": "Cosmetics",
+        "sortOrder": 111,
+        "image": "/Evade/Cosmetics/hanging-mistletoe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Festive Antlers",
+        "price": "45 Gifts",
+        "flavor": "No deers were hurt in the process. Created by Sirdui"
+      },
+      "system": {
+        "slug": "festive-antlers",
+        "section": "Cosmetics",
+        "sortOrder": 112,
+        "image": "/Evade/Cosmetics/festive-antlers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Crown",
+        "price": "55 Gifts",
+        "flavor": "An ornate crown made from a thousand melted candy canes, each from the 7 kingdoms. Created by Magikarp"
+      },
+      "system": {
+        "slug": "candy-crown",
+        "section": "Cosmetics",
+        "sortOrder": 113,
+        "image": "/Evade/Cosmetics/candy-crown.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vintage Hat",
+        "price": "25 Gifts",
+        "flavor": "For when you want to look like an old guy"
+      },
+      "system": {
+        "slug": "vintage-hat",
+        "section": "Cosmetics",
+        "sortOrder": 114,
+        "image": "/Evade/Cosmetics/vintage-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Backpack Gift",
+        "price": "30 Gifts",
+        "flavor": "Bring your gift along with you on your back. Created by Sirdui"
+      },
+      "system": {
+        "slug": "backpack-gift",
+        "section": "Cosmetics",
+        "sortOrder": 115,
+        "image": "/Evade/Cosmetics/backpack-gift.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Windbreaker",
+        "price": "35 Gifts",
+        "flavor": "Excellent for staying warm this season. Created by vvostrikov"
+      },
+      "system": {
+        "slug": "blue-windbreaker",
+        "section": "Cosmetics",
+        "sortOrder": 116,
+        "image": "/Evade/Cosmetics/blue-windbreaker.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cane Daggers",
+        "price": "25 Gifts",
+        "flavor": "kill. Created by sc6uth"
+      },
+      "system": {
+        "slug": "cane-daggers",
+        "section": "Cosmetics",
+        "sortOrder": 117,
+        "image": "/Evade/Cosmetics/cane-daggers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane Shotgun",
+        "price": "30 Gifts",
+        "flavor": "For when the naughty list gets too big. Created by KoreWaAkaDesu"
+      },
+      "system": {
+        "slug": "candy-cane-shotgun",
+        "section": "Cosmetics",
+        "sortOrder": 118,
+        "image": "/Evade/Cosmetics/candy-cane-shotgun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Portable Chimney",
+        "price": "40 Gifts",
+        "flavor": "Keep warm this holiday season by directly bringing the warmth with you. Created by Jaguar4444YT"
+      },
+      "system": {
+        "slug": "portable-chimney",
+        "section": "Cosmetics",
+        "sortOrder": 119,
+        "image": "/Evade/Cosmetics/portable-chimney.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowman Head",
+        "price": "45 Gifts",
+        "flavor": "We beheaded Frosty for you to enjoy this. Created by KoreWaAkaDesu"
+      },
+      "system": {
+        "slug": "snowman-head",
+        "section": "Cosmetics",
+        "sortOrder": 120,
+        "image": "/Evade/Cosmetics/snowman-head.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Xmas Tree Hat",
+        "price": "50 Gifts",
+        "flavor": "idk what to put here. Created by omuq"
+      },
+      "system": {
+        "slug": "xmas-tree-hat",
+        "section": "Cosmetics",
+        "sortOrder": 121,
+        "image": "/Evade/Cosmetics/xmas-tree-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Satchel of Noobs",
+        "price": "60 Gifts",
+        "flavor": "Capture them and feast on their souls. Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "satchel-of-noobs",
+        "section": "Cosmetics",
+        "sortOrder": 122,
+        "image": "/Evade/Cosmetics/satchel-of-noobs.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Back Crank",
+        "price": "30 Gifts",
+        "flavor": "Wind-up toys has always been an integral part of our childhoods. Now it's your turn to be a toy. Created by Sirdui"
+      },
+      "system": {
+        "slug": "back-crank",
+        "section": "Cosmetics",
+        "sortOrder": 123,
+        "image": "/Evade/Cosmetics/back-crank.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly Scythe",
+        "price": "35 Gifts",
+        "flavor": "Hack at your enemies with the joyous feeling of the holidays! Created by Z_niy"
+      },
+      "system": {
+        "slug": "jolly-scythe",
+        "section": "Cosmetics",
+        "sortOrder": 124,
+        "image": "/Evade/Cosmetics/jolly-scythe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glacius Set",
+        "price": "40 Gifts",
+        "flavor": "The omnipotent crown and staff of Glacius."
+      },
+      "system": {
+        "slug": "glacius-set",
+        "section": "Cosmetics",
+        "sortOrder": 125,
+        "image": "/Evade/Cosmetics/glacius-set.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Melodical Harp",
+        "price": "50 Gifts",
+        "flavor": "The tune of harpsichord has magical properties. Created by Sirdui"
+      },
+      "system": {
+        "slug": "melodical-harp",
+        "section": "Cosmetics",
+        "sortOrder": 126,
+        "image": "/Evade/Cosmetics/melodical-harp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dual Candy Canes",
+        "price": "30 Gifts",
+        "flavor": "Prepare for the winter season by equipping yourself with a handy candy canes. Created by Sirdui"
+      },
+      "system": {
+        "slug": "dual-candy-canes",
+        "section": "Cosmetics",
+        "sortOrder": 127,
+        "image": "/Evade/Cosmetics/dual-candy-canes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "North Pole Sign",
+        "price": "30 Gifts",
+        "flavor": "We stole this from Santa's workshopin the north. Created by clonemace"
+      },
+      "system": {
+        "slug": "north-pole-sign",
+        "section": "Cosmetics",
+        "sortOrder": 128,
+        "image": "/Evade/Cosmetics/north-pole-sign.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gift Hat",
+        "price": "40 Gifts",
+        "flavor": "An exquisite top hat for the season. Created by Magikarp"
+      },
+      "system": {
+        "slug": "gift-hat",
+        "section": "Cosmetics",
+        "sortOrder": 129,
+        "image": "/Evade/Cosmetics/gift-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gift Sack",
+        "price": "60 Gifts",
+        "flavor": "Naughty list? Never of that! Created by Sirdui"
+      },
+      "system": {
+        "slug": "gift-sack",
+        "section": "Cosmetics",
+        "sortOrder": 130,
+        "image": "/Evade/Cosmetics/gift-sack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Permafrost Staff",
+        "price": "70 Gifts",
+        "flavor": "The many apostles of Glacius used their knowledge of frost to conjure up blizzards using this staff. Created by Sirdui"
+      },
+      "system": {
+        "slug": "permafrost-staff",
+        "section": "Cosmetics",
+        "sortOrder": 131,
+        "image": "/Evade/Cosmetics/permafrost-staff.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa Suit",
+        "price": "80 Gifts",
+        "flavor": "We stole this from Santa's workshop, so you better be content. Created by KoreWaAkaDesu"
+      },
+      "system": {
+        "slug": "santa-suit",
+        "section": "Cosmetics",
+        "sortOrder": 132,
+        "image": "/Evade/Cosmetics/santa-suit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gilded Jetpack",
+        "price": "100 Gifts",
+        "flavor": "Take to the skies"
+      },
+      "system": {
+        "slug": "gilded-jetpack",
+        "section": "Cosmetics",
+        "sortOrder": 133,
+        "image": "/Evade/Cosmetics/gilded-jetpack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grinch Mask",
+        "price": "35 Gifts",
+        "flavor": "Mischecious and devious. Created by pokchoy"
+      },
+      "system": {
+        "slug": "grinch-mask",
+        "section": "Cosmetics",
+        "sortOrder": 134,
+        "image": "/Evade/Cosmetics/grinch-mask.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gift Sled",
+        "price": "35 Gifts",
+        "flavor": "The naughty list was the least of my worries. Created by Sirdui"
+      },
+      "system": {
+        "slug": "gift-sled",
+        "section": "Cosmetics",
+        "sortOrder": 135,
+        "image": "/Evade/Cosmetics/gift-sled.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holly Berry Infection",
+        "price": "40 Gifts",
+        "flavor": "He swallowed a holly berry seed and it grew in his stomach. Created by pokchoy"
+      },
+      "system": {
+        "slug": "holly-berry-infection",
+        "section": "Cosmetics",
+        "sortOrder": 136,
+        "image": "/Evade/Cosmetics/holly-berry-infection.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wreath",
+        "price": "40 Gifts",
+        "flavor": "Wear it around your head or something idk. Created by Sirdui"
+      },
+      "system": {
+        "slug": "wreath",
+        "section": "Cosmetics",
+        "sortOrder": 137,
+        "image": "/Evade/Cosmetics/wreath.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hover Train",
+        "price": "80 Gifts",
+        "flavor": "The Polar Express in 2062. Created by 4it3dm1"
+      },
+      "system": {
+        "slug": "hover-train",
+        "section": "Cosmetics",
+        "sortOrder": 138,
+        "image": "/Evade/Cosmetics/hover-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ornament Hook",
+        "price": "30 Gifts",
+        "flavor": "Become the ornament."
+      },
+      "system": {
+        "slug": "ornament-hook",
+        "section": "Cosmetics",
+        "sortOrder": 139,
+        "image": "/Evade/Cosmetics/ornament-hook.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seal Buds",
+        "price": "20 Gifts",
+        "flavor": "Friendly Seal Pals :)"
+      },
+      "system": {
+        "slug": "seal-buds",
+        "section": "Cosmetics",
+        "sortOrder": 140,
+        "image": "/Evade/Cosmetics/seal-buds.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reindeer Hood",
+        "price": "10 Gingerbread",
+        "flavor": "You go down in history."
+      },
+      "system": {
+        "slug": "reindeer-hood",
+        "section": "Cosmetics",
+        "sortOrder": 141,
+        "image": "/Evade/Cosmetics/reindeer-hood.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ornament Helmet",
+        "price": "20 Gingerbread",
+        "flavor": "Allows you to shatter into 5 million pieces."
+      },
+      "system": {
+        "slug": "ornament-helmet",
+        "section": "Cosmetics",
+        "sortOrder": 142,
+        "image": "/Evade/Cosmetics/ornament-helmet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Xmas Tree Suit",
+        "price": "30 Gingerbread",
+        "flavor": "You looks like a laughing stock."
+      },
+      "system": {
+        "slug": "xmas-tree-suit",
+        "section": "Cosmetics",
+        "sortOrder": 143,
+        "image": "/Evade/Cosmetics/xmas-tree-suit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice Crown",
+        "price": "20 Gingerbread",
+        "flavor": "Grants you the ability to go insane."
+      },
+      "system": {
+        "slug": "ice-crown",
+        "section": "Cosmetics",
+        "sortOrder": 144,
+        "image": "/Evade/Cosmetics/ice-crown.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly Guitar",
+        "price": "20 Gingerbread",
+        "flavor": "It's the best time of the year."
+      },
+      "system": {
+        "slug": "jolly-guitar",
+        "section": "Cosmetics",
+        "sortOrder": 145,
+        "image": "/Evade/Cosmetics/jolly-guitar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tattered Cape",
+        "price": "20 Gingerbread",
+        "flavor": "Dedicated to those who served in the battle."
+      },
+      "system": {
+        "slug": "tattered-cape",
+        "section": "Cosmetics",
+        "sortOrder": 146,
+        "image": "/Evade/Cosmetics/tattered-cape.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seal Pal",
+        "price": "20 Gingerbread",
+        "flavor": "El es mejor hora de comer"
+      },
+      "system": {
+        "slug": "seal-pal",
+        "section": "Cosmetics",
+        "sortOrder": 147,
+        "image": "/Evade/Cosmetics/seal-pal.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Seal Gift",
+        "price": "10 Gingerbread",
+        "flavor": "A little seal buddy  to keep you company"
+      },
+      "system": {
+        "slug": "seal-gift",
+        "section": "Cosmetics",
+        "sortOrder": 148,
+        "image": "/Evade/Cosmetics/seal-gift.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Attack",
+        "price": "10 Envelopes",
+        "flavor": "*tongue rolls out*"
+      },
+      "system": {
+        "slug": "heart-attack",
+        "section": "Cosmetics",
+        "sortOrder": 149,
+        "image": "/Evade/Cosmetics/heart-attack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine Headband",
+        "price": "10 Envelopes",
+        "flavor": "The most powerful wave of force is love, not sound."
+      },
+      "system": {
+        "slug": "valentine-headband",
+        "section": "Cosmetics",
+        "sortOrder": 150,
+        "image": "/Evade/Cosmetics/valentine-headband.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lollipop",
+        "price": "20 Envelopes",
+        "flavor": "Straight from the doctor's office."
+      },
+      "system": {
+        "slug": "lollipop",
+        "section": "Cosmetics",
+        "sortOrder": 151,
+        "image": "/Evade/Cosmetics/lollipop.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Belt",
+        "price": "20 Envelopes",
+        "flavor": "Shows your heart beat in full time!"
+      },
+      "system": {
+        "slug": "heart-belt",
+        "section": "Cosmetics",
+        "sortOrder": 152,
+        "image": "/Evade/Cosmetics/heart-belt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Love Chaser",
+        "price": "20 Envelopes",
+        "flavor": "Extra useful on a pig."
+      },
+      "system": {
+        "slug": "love-chaser",
+        "section": "Cosmetics",
+        "sortOrder": 153,
+        "image": "/Evade/Cosmetics/love-chaser.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rose",
+        "price": "10 Envelopes",
+        "flavor": "W rizz."
+      },
+      "system": {
+        "slug": "rose",
+        "section": "Cosmetics",
+        "sortOrder": 154,
+        "image": "/Evade/Cosmetics/rose.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentine Brawler",
+        "price": "15 Envelopes",
+        "flavor": "If I can't be happy..."
+      },
+      "system": {
+        "slug": "valentine-brawler",
+        "section": "Cosmetics",
+        "sortOrder": 155,
+        "image": "/Evade/Cosmetics/valentine-brawler.png"
+      }
+    },
+    {
+      "item": {
+        "name": "2-14 Vision",
+        "price": "20 Envelopes",
+        "flavor": "Pretty bad score."
+      },
+      "system": {
+        "slug": "2-14-vision",
+        "section": "Cosmetics",
+        "sortOrder": 156,
+        "image": "/Evade/Cosmetics/2-14-vision.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Roman Sword",
+        "price": "20 Envelopes",
+        "flavor": "May be necessary to slay the beast."
+      },
+      "system": {
+        "slug": "roman-sword",
+        "section": "Cosmetics",
+        "sortOrder": 157,
+        "image": "/Evade/Cosmetics/roman-sword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lupercalia Tommy",
+        "price": "30 Envelopes",
+        "flavor": "Bows aren't exactly a suitable choice in modern warfare."
+      },
+      "system": {
+        "slug": "lupercalia-tommy",
+        "section": "Cosmetics",
+        "sortOrder": 158,
+        "image": "/Evade/Cosmetics/lupercalia-tommy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentinian Beast",
+        "price": "40 Envelopes",
+        "flavor": "Being lovely has made me mad."
+      },
+      "system": {
+        "slug": "valentinian-beast",
+        "section": "Cosmetics",
+        "sortOrder": 159,
+        "image": "/Evade/Cosmetics/valentinian-beast.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hermes Pack",
+        "price": "20 Envelopes",
+        "flavor": "Messaging anonymously."
+      },
+      "system": {
+        "slug": "hermes-pack",
+        "section": "Cosmetics",
+        "sortOrder": 160,
+        "image": "/Evade/Cosmetics/hermes-pack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Natures Trident",
+        "price": "30 Envelopes",
+        "flavor": "Show your appreciation with a dangerous lethal weapon!"
+      },
+      "system": {
+        "slug": "natures-trident",
+        "section": "Cosmetics",
+        "sortOrder": 161,
+        "image": "/Evade/Cosmetics/natures-trident.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sakura Tree",
+        "price": "40 Envelopes",
+        "flavor": "Place vs Place, Japan. Created by Kapurikon"
+      },
+      "system": {
+        "slug": "sakura-tree",
+        "section": "Cosmetics",
+        "sortOrder": 162,
+        "image": "/Evade/Cosmetics/sakura-tree.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Teddy Infestation",
+        "price": "20 Envelopes",
+        "flavor": "3 more months until we all welcome Graduation. Created by snowyclown0"
+      },
+      "system": {
+        "slug": "teddy-infestation",
+        "section": "Cosmetics",
+        "sortOrder": 163,
+        "image": "/Evade/Cosmetics/teddy-infestation.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cupid Mirage",
+        "price": "30 Envelopes",
+        "flavor": "Do you really love me? Created by snowyclown0"
+      },
+      "system": {
+        "slug": "cupid-mirage",
+        "section": "Cosmetics",
+        "sortOrder": 164,
+        "image": "/Evade/Cosmetics/cupid-mirage.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Kugelblitz",
+        "price": "40 Roses",
+        "flavor": "Perhaps Tower Blitz can get some love this year?? Just wait and see..."
+      },
+      "system": {
+        "slug": "heart-kugelblitz",
+        "section": "Cosmetics",
+        "sortOrder": 165,
+        "image": "/Evade/Cosmetics/heart-kugelblitz.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Eyes",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "coin-eyes",
+        "section": "Cosmetics",
+        "sortOrder": 166,
+        "image": "/Evade/Cosmetics/coin-eyes.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Charm Lantern",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "charm-lantern",
+        "section": "Cosmetics",
+        "sortOrder": 167,
+        "image": "/Evade/Cosmetics/charm-lantern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pot of Gold Pin",
+        "price": "10 FourClevers",
+        "flavor": "Yep. That's my pin. I made that."
+      },
+      "system": {
+        "slug": "pot-of-gold-pin",
+        "section": "Cosmetics",
+        "sortOrder": 168,
+        "image": "/Evade/Cosmetics/pot-of-gold-pin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Suspenders",
+        "price": "30 FourClevers",
+        "flavor": "A cool aura at the cost of looking like a clown."
+      },
+      "system": {
+        "slug": "lucky-suspenders",
+        "section": "Cosmetics",
+        "sortOrder": 169,
+        "image": "/Evade/Cosmetics/lucky-suspenders.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Valkyrie",
+        "price": "30 FourClevers",
+        "flavor": "For when you're feeling heroic. Made by. MontiCats"
+      },
+      "system": {
+        "slug": "lucky-valkyrie",
+        "section": "Cosmetics",
+        "sortOrder": 170,
+        "image": "/Evade/Cosmetics/lucky-valkyrie.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Catch The Rainbow",
+        "price": "50 FourClevers",
+        "flavor": "Taste the rainbow."
+      },
+      "system": {
+        "slug": "catch-the-rainbow",
+        "section": "Cosmetics",
+        "sortOrder": 171,
+        "image": "/Evade/Cosmetics/catch-the-rainbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Irish Shield",
+        "price": "50 Coins",
+        "flavor": "Top of the morning to ya laddies my name is Jack Septiceye. (I am 2% Irish)"
+      },
+      "system": {
+        "slug": "irish-shield",
+        "section": "Cosmetics",
+        "sortOrder": 172,
+        "image": "/Evade/Cosmetics/irish-shield.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blazing Candie",
+        "price": "60 Cakes",
+        "flavor": "HAPPY BIRTHDAY!!!. Are you one, are you two."
+      },
+      "system": {
+        "slug": "blazing-candie",
+        "section": "Cosmetics",
+        "sortOrder": 173,
+        "image": "/Evade/Cosmetics/blazing-candie.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Medallion Lantern",
+        "price": "40 Points",
+        "flavor": "Imbues you with the spirit of the snake."
+      },
+      "system": {
+        "slug": "medallion-lantern",
+        "section": "Cosmetics",
+        "sortOrder": 174,
+        "image": "/Evade/Cosmetics/medallion-lantern.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cool Evade Surfboard",
+        "price": "20 Suns",
+        "flavor": "Look at my sick evade-branded surfboard broo"
+      },
+      "system": {
+        "slug": "cool-evade-surfboard",
+        "section": "Cosmetics",
+        "sortOrder": 175,
+        "image": "/Evade/Cosmetics/cool-evade-surfboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hot Evade Surfboard",
+        "price": "20 Suns",
+        "flavor": "Look at my evade-branded surfboard broo"
+      },
+      "system": {
+        "slug": "hot-evade-surfboard",
+        "section": "Cosmetics",
+        "sortOrder": 176,
+        "image": "/Evade/Cosmetics/hot-evade-surfboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cola Cooler",
+        "price": "20 Suns",
+        "flavor": "Crackin' open a cold cola with the boys"
+      },
+      "system": {
+        "slug": "cola-cooler",
+        "section": "Cosmetics",
+        "sortOrder": 177,
+        "image": "/Evade/Cosmetics/cola-cooler.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bobo Popsicle",
+        "price": "30 Suns",
+        "flavor": "HALP! IM MELTING D="
+      },
+      "system": {
+        "slug": "bobo-popsicle",
+        "section": "Cosmetics",
+        "sortOrder": 178,
+        "image": "/Evade/Cosmetics/bobo-popsicle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ghostly Anchor",
+        "price": "70 Bubbles",
+        "flavor": null
+      },
+      "system": {
+        "slug": "ghostly-anchor",
+        "section": "Cosmetics",
+        "sortOrder": 179,
+        "image": "/Evade/Cosmetics/ghostly-anchor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Leviathan Anchor",
+        "price": "70 Bubbles",
+        "flavor": null
+      },
+      "system": {
+        "slug": "leviathan-anchor",
+        "section": "Cosmetics",
+        "sortOrder": 180,
+        "image": "/Evade/Cosmetics/leviathan-anchor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "bobo tower",
+        "price": null,
+        "flavor": "The almighty Bobo tower."
+      },
+      "system": {
+        "slug": "bobo-tower",
+        "section": "Cosmetics",
+        "sortOrder": 181,
+        "image": "/Evade/Cosmetics/bobo-tower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Elite Helmet",
+        "price": null,
+        "flavor": "w0rt w0rt w0rt."
+      },
+      "system": {
+        "slug": "elite-helmet",
+        "section": "Cosmetics",
+        "sortOrder": 182,
+        "image": "/Evade/Cosmetics/elite-helmet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kugelblitz Horizon",
+        "price": null,
+        "flavor": "what the scallop."
+      },
+      "system": {
+        "slug": "kugelblitz-horizon",
+        "section": "Cosmetics",
+        "sortOrder": 183,
+        "image": "/Evade/Cosmetics/kugelblitz-horizon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glow",
+        "price": null,
+        "flavor": "oke."
+      },
+      "system": {
+        "slug": "glow",
+        "section": "Cosmetics",
+        "sortOrder": 184,
+        "image": "/Evade/Cosmetics/glow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headless",
+        "price": null,
+        "flavor": "knockoff headless"
+      },
+      "system": {
+        "slug": "headless",
+        "section": "Cosmetics",
+        "sortOrder": 185,
+        "image": "/Evade/Cosmetics/headless.png"
+      }
+    },
+    {
+      "item": {
+        "name": "test lol",
+        "price": null,
+        "flavor": "why do you have this."
+      },
+      "system": {
+        "slug": "test-lol",
+        "section": "Cosmetics",
+        "sortOrder": 186,
+        "image": "/Evade/Cosmetics/test-lol.png"
+      }
+    },
+    {
+      "item": {
+        "name": "hand test",
+        "price": null,
+        "flavor": "He just wants a friend ;-;"
+      },
+      "system": {
+        "slug": "hand-test",
+        "section": "Cosmetics",
+        "sortOrder": 187,
+        "image": "/Evade/Cosmetics/hand-test.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Archangel Wings",
+        "price": null,
+        "flavor": "The delicate, yet glistening wings of The Archangel, the last remaining people of Avaria."
+      },
+      "system": {
+        "slug": "archangel-wings",
+        "section": "Cosmetics",
+        "sortOrder": 188,
+        "image": "/Evade/Cosmetics/archangel-wings.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Avarian Staff",
+        "price": null,
+        "flavor": "A blessed staff from Avaria."
+      },
+      "system": {
+        "slug": "avarian-staff-2",
+        "section": "Cosmetics",
+        "sortOrder": 189,
+        "image": "/Evade/Cosmetics/avarian-staff-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chained Coffin",
+        "price": "30 CandyOld",
+        "flavor": "Whatever you do, DO NOT unlock his coffin."
+      },
+      "system": {
+        "slug": "chained-coffin-2",
+        "section": "Cosmetics",
+        "sortOrder": 190,
+        "image": "/Evade/Cosmetics/chained-coffin-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jester Hat",
+        "price": "15 CandyOld",
+        "flavor": "I'm just a comic relief character."
+      },
+      "system": {
+        "slug": "jester-hat",
+        "section": "Cosmetics",
+        "sortOrder": 191,
+        "image": "/Evade/Cosmetics/jester-hat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skull Demolisher",
+        "price": "25 CandyOld",
+        "flavor": "One swing is enough to cave in your ribs."
+      },
+      "system": {
+        "slug": "skull-demolisher",
+        "section": "Cosmetics",
+        "sortOrder": 192,
+        "image": "/Evade/Cosmetics/skull-demolisher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "DeadTech Lich Staff",
+        "price": "40 CandyOld",
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "deadtech-lich-staff",
+        "section": "Cosmetics",
+        "sortOrder": 193,
+        "image": "/Evade/Cosmetics/deadtech-lich-staff.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dual Bat Blades",
+        "price": "20 CandyOld",
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "dual-bat-blades",
+        "section": "Cosmetics",
+        "sortOrder": 194,
+        "image": "/Evade/Cosmetics/dual-bat-blades.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue Soul Extinguisher",
+        "price": "25 CandyOld",
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "blue-soul-extinguisher",
+        "section": "Cosmetics",
+        "sortOrder": 195,
+        "image": "/Evade/Cosmetics/blue-soul-extinguisher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mechanical Witch",
+        "price": "25 CandyOld",
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "mechanical-witch",
+        "section": "Cosmetics",
+        "sortOrder": 196,
+        "image": "/Evade/Cosmetics/mechanical-witch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lil Guy",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "lil-guy",
+        "section": "Cosmetics",
+        "sortOrder": 197,
+        "image": "/Evade/Cosmetics/lil-guy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Holy Visor",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "holy-visor",
+        "section": "Cosmetics",
+        "sortOrder": 198,
+        "image": "/Evade/Cosmetics/holy-visor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hellish Cap",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "hellish-cap",
+        "section": "Cosmetics",
+        "sortOrder": 199,
+        "image": "/Evade/Cosmetics/hellish-cap.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cowboy",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "cowboy",
+        "section": "Cosmetics",
+        "sortOrder": 200,
+        "image": "/Evade/Cosmetics/cowboy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skateboard",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "skateboard",
+        "section": "Cosmetics",
+        "sortOrder": 201,
+        "image": "/Evade/Cosmetics/skateboard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orca",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "orca",
+        "section": "Cosmetics",
+        "sortOrder": 202,
+        "image": "/Evade/Cosmetics/orca.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flower Crown",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "flower-crown",
+        "section": "Cosmetics",
+        "sortOrder": 203,
+        "image": "/Evade/Cosmetics/flower-crown.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Banana Sabre",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "banana-sabre",
+        "section": "Cosmetics",
+        "sortOrder": 204,
+        "image": "/Evade/Cosmetics/banana-sabre.png"
+      }
+    }
+  ]
+}

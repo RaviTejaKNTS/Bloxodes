@@ -1,0 +1,1259 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Evade",
+    "gameSlug": "evade",
+    "collection": "nametags",
+    "route": "/wiki/evade/nametags",
+    "catalogCode": "evade-nametags",
+    "itemFields": [
+      "price",
+      "flavor"
+    ],
+    "columns": [
+      "price",
+      "flavor"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Nametags"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "flavor",
+      "cardDescriptionField": "flavor",
+      "cardFields": [
+        "price",
+        "flavor"
+      ],
+      "tableFields": [
+        "price",
+        "flavor"
+      ],
+      "fieldPresentation": {
+        "price": {
+          "kind": "chip",
+          "label": "Price",
+          "omitWhenEmpty": true
+        },
+        "flavor": {
+          "kind": "detail",
+          "label": "Description",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Mars",
+        "price": "35 Points",
+        "flavor": "The bringer of war"
+      },
+      "system": {
+        "slug": "mars",
+        "section": "Nametags",
+        "sortOrder": 1,
+        "image": "/Evade/Nametags/mars.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Banana Co",
+        "price": "28 Points",
+        "flavor": "For conditions where 120F is a natural occurance."
+      },
+      "system": {
+        "slug": "banana-co",
+        "section": "Nametags",
+        "sortOrder": 2,
+        "image": "/Evade/Nametags/banana-co.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rave",
+        "price": "100 Points",
+        "flavor": "For members of Kappa Delta Omega."
+      },
+      "system": {
+        "slug": "rave",
+        "section": "Nametags",
+        "sortOrder": 3,
+        "image": "/Evade/Nametags/rave.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Prism",
+        "price": "60 Points",
+        "flavor": "Light fractals and glass."
+      },
+      "system": {
+        "slug": "prism",
+        "section": "Nametags",
+        "sortOrder": 4,
+        "image": "/Evade/Nametags/prism.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ice",
+        "price": "50 Points",
+        "flavor": "Under pressure.."
+      },
+      "system": {
+        "slug": "ice",
+        "section": "Nametags",
+        "sortOrder": 5,
+        "image": "/Evade/Nametags/ice.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Luminescence",
+        "price": "40 Points",
+        "flavor": "From the blood of our fathers and sons"
+      },
+      "system": {
+        "slug": "red-luminescence",
+        "section": "Nametags",
+        "sortOrder": 6,
+        "image": "/Evade/Nametags/red-luminescence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Night Vision",
+        "price": "28 Points",
+        "flavor": "Any amount of vision helps"
+      },
+      "system": {
+        "slug": "night-vision",
+        "section": "Nametags",
+        "sortOrder": 7,
+        "image": "/Evade/Nametags/night-vision.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Purple Luminescence",
+        "price": "58 Points",
+        "flavor": "Naturally white, but gives off a distinct hue."
+      },
+      "system": {
+        "slug": "purple-luminescence",
+        "section": "Nametags",
+        "sortOrder": 8,
+        "image": "/Evade/Nametags/purple-luminescence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bioluminescent",
+        "price": "55 Points",
+        "flavor": "Glows in the dark"
+      },
+      "system": {
+        "slug": "bioluminescent",
+        "section": "Nametags",
+        "sortOrder": 9,
+        "image": "/Evade/Nametags/bioluminescent.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void",
+        "price": "200 Points",
+        "flavor": "Recovered from nonreality."
+      },
+      "system": {
+        "slug": "void",
+        "section": "Nametags",
+        "sortOrder": 10,
+        "image": "/Evade/Nametags/void.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow",
+        "price": "250 Points",
+        "flavor": "Found on the dark side of the moon."
+      },
+      "system": {
+        "slug": "rainbow",
+        "section": "Nametags",
+        "sortOrder": 11,
+        "image": "/Evade/Nametags/rainbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sakura Tag",
+        "price": "60 Points",
+        "flavor": "The Sakura tree blooms once again."
+      },
+      "system": {
+        "slug": "sakura-tag",
+        "section": "Nametags",
+        "sortOrder": 12,
+        "image": "/Evade/Nametags/sakura-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nightfall",
+        "price": "40 Points",
+        "flavor": "Dark gradient."
+      },
+      "system": {
+        "slug": "nightfall",
+        "section": "Nametags",
+        "sortOrder": 13,
+        "image": "/Evade/Nametags/nightfall.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sunset Rodeo",
+        "price": "60 Points",
+        "flavor": "Yes I listen to the Eagles and folk rock."
+      },
+      "system": {
+        "slug": "sunset-rodeo",
+        "section": "Nametags",
+        "sortOrder": 14,
+        "image": "/Evade/Nametags/sunset-rodeo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Northern Lights Tag",
+        "price": "80 Points",
+        "flavor": "Aurora Borealis at this time of year at this time of day at this time of country localized within your kitchen?"
+      },
+      "system": {
+        "slug": "northern-lights-tag",
+        "section": "Nametags",
+        "sortOrder": 15,
+        "image": "/Evade/Nametags/northern-lights-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Serenading Cerulean",
+        "price": "70 Points",
+        "flavor": "Do re mi fa so la ti do so."
+      },
+      "system": {
+        "slug": "serenading-cerulean",
+        "section": "Nametags",
+        "sortOrder": 16,
+        "image": "/Evade/Nametags/serenading-cerulean.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heat Meter",
+        "price": "40 Points",
+        "flavor": "Don't let it overcharge!"
+      },
+      "system": {
+        "slug": "heat-meter",
+        "section": "Nametags",
+        "sortOrder": 17,
+        "image": "/Evade/Nametags/heat-meter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cumulus Clouds",
+        "price": "50 Points",
+        "flavor": "The summer sky has never looked prettier."
+      },
+      "system": {
+        "slug": "cumulus-clouds",
+        "section": "Nametags",
+        "sortOrder": 18,
+        "image": "/Evade/Nametags/cumulus-clouds.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Spring Flowers",
+        "price": "50 Points",
+        "flavor": "To be a cat frolicing in the fields..."
+      },
+      "system": {
+        "slug": "spring-flowers",
+        "section": "Nametags",
+        "sortOrder": 19,
+        "image": "/Evade/Nametags/spring-flowers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sticker Tag",
+        "price": "60 Points",
+        "flavor": "You get 5 goodie boy points."
+      },
+      "system": {
+        "slug": "sticker-tag",
+        "section": "Nametags",
+        "sortOrder": 20,
+        "image": "/Evade/Nametags/sticker-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blue",
+        "price": "1000 Tokens",
+        "flavor": "Blue is the new black."
+      },
+      "system": {
+        "slug": "blue",
+        "section": "Nametags",
+        "sortOrder": 21,
+        "image": "/Evade/Nametags/blue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green",
+        "price": "1000 Tokens",
+        "flavor": "Green is the new black."
+      },
+      "system": {
+        "slug": "green",
+        "section": "Nametags",
+        "sortOrder": 22,
+        "image": "/Evade/Nametags/green.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red",
+        "price": "1000 Tokens",
+        "flavor": "Red is the new black."
+      },
+      "system": {
+        "slug": "red",
+        "section": "Nametags",
+        "sortOrder": 23,
+        "image": "/Evade/Nametags/red.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange",
+        "price": "1000 Tokens",
+        "flavor": "Orange is the new black."
+      },
+      "system": {
+        "slug": "orange",
+        "section": "Nametags",
+        "sortOrder": 24,
+        "image": "/Evade/Nametags/orange.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pink",
+        "price": "1000 Tokens",
+        "flavor": "Pink is the new black."
+      },
+      "system": {
+        "slug": "pink",
+        "section": "Nametags",
+        "sortOrder": 25,
+        "image": "/Evade/Nametags/pink.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bright Red",
+        "price": "1200 Tokens",
+        "flavor": "Glows in the dark."
+      },
+      "system": {
+        "slug": "bright-red",
+        "section": "Nametags",
+        "sortOrder": 26,
+        "image": "/Evade/Nametags/bright-red.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bright Blue",
+        "price": "1200 Tokens",
+        "flavor": "Glows in the dark."
+      },
+      "system": {
+        "slug": "bright-blue",
+        "section": "Nametags",
+        "sortOrder": 27,
+        "image": "/Evade/Nametags/bright-blue.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bright Yellow",
+        "price": "1200 Tokens",
+        "flavor": "Glows in the dark."
+      },
+      "system": {
+        "slug": "bright-yellow",
+        "section": "Nametags",
+        "sortOrder": 28,
+        "image": "/Evade/Nametags/bright-yellow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tester Tag",
+        "price": null,
+        "flavor": "man I wish testers were real."
+      },
+      "system": {
+        "slug": "tester-tag",
+        "section": "Nametags",
+        "sortOrder": 29,
+        "image": "/Evade/Nametags/tester-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Contributor Tag",
+        "price": null,
+        "flavor": "Don't give this thing to Nirethi"
+      },
+      "system": {
+        "slug": "contributor-tag",
+        "section": "Nametags",
+        "sortOrder": 30,
+        "image": "/Evade/Nametags/contributor-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "[[Cat Jard]]",
+        "price": "100 Points",
+        "flavor": "cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard cat jard"
+      },
+      "system": {
+        "slug": "cat-jard",
+        "section": "Nametags",
+        "sortOrder": 31,
+        "image": "/Evade/Nametags/cat-jard.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Disco Beat Tag",
+        "price": "40 Points",
+        "flavor": "WE ARE PARTYING TONIGHT!!!"
+      },
+      "system": {
+        "slug": "disco-beat-tag",
+        "section": "Nametags",
+        "sortOrder": 32,
+        "image": "/Evade/Nametags/disco-beat-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cat Set",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "cat-set",
+        "section": "Nametags",
+        "sortOrder": 33,
+        "image": "/Evade/Nametags/cat-set.png"
+      }
+    },
+    {
+      "item": {
+        "name": "[https://www.roblox.com/game-pass/1128324493/Classic-Roblox-Set",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "https-www-roblox-com-game-pass-1128324493-classic-roblox-set",
+        "section": "Nametags",
+        "sortOrder": 34,
+        "image": "/Evade/Nametags/https-www-roblox-com-game-pass-1128324493-classic-roblox-set.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frog Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "frog-tag",
+        "section": "Nametags",
+        "sortOrder": 35,
+        "image": "/Evade/Nametags/frog-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Capybara Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "capybara-tag",
+        "section": "Nametags",
+        "sortOrder": 36,
+        "image": "/Evade/Nametags/capybara-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Axolotl Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "axolotl-tag",
+        "section": "Nametags",
+        "sortOrder": 37,
+        "image": "/Evade/Nametags/axolotl-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Animal Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "animal-set",
+        "section": "Nametags",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Animal Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "animal-set-2",
+        "section": "Nametags",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Animal Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "animal-set-3",
+        "section": "Nametags",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar Eclipse Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "lunar-eclipse-tag",
+        "section": "Nametags",
+        "sortOrder": 41,
+        "image": "/Evade/Nametags/lunar-eclipse-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Solar Eclipse Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "solar-eclipse-tag",
+        "section": "Nametags",
+        "sortOrder": 42,
+        "image": "/Evade/Nametags/solar-eclipse-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eclipse Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "eclipse-set",
+        "section": "Nametags",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eclipse Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "eclipse-set-2",
+        "section": "Nametags",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Doggo Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "candy-doggo-tag",
+        "section": "Nametags",
+        "sortOrder": 45,
+        "image": "/Evade/Nametags/candy-doggo-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frosty Doggo Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "frosty-doggo-tag",
+        "section": "Nametags",
+        "sortOrder": 46,
+        "image": "/Evade/Nametags/frosty-doggo-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dog Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "dog-set",
+        "section": "Nametags",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dog Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "dog-set-2",
+        "section": "Nametags",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Koi Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "koi-tag",
+        "section": "Nametags",
+        "sortOrder": 49,
+        "image": "/Evade/Nametags/koi-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lantern Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "lantern-tag",
+        "section": "Nametags",
+        "sortOrder": 50,
+        "image": "/Evade/Nametags/lantern-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar New Year Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "lunar-new-year-set",
+        "section": "Nametags",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar New Year Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "lunar-new-year-set-2",
+        "section": "Nametags",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bee Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "bee-tag",
+        "section": "Nametags",
+        "sortOrder": 53,
+        "image": "/Evade/Nametags/bee-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bee Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "bee-set",
+        "section": "Nametags",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Poseidon Tag",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "poseidon-tag",
+        "section": "Nametags",
+        "sortOrder": 55,
+        "image": "/Evade/Nametags/poseidon-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poseidon Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "poseidon-set",
+        "section": "Nametags",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Candy Cane Tag",
+        "price": "50 Gingerbread",
+        "flavor": "Not sweet not edible"
+      },
+      "system": {
+        "slug": "candy-cane-tag",
+        "section": "Nametags",
+        "sortOrder": 57,
+        "image": "/Evade/Nametags/candy-cane-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ornament Tag",
+        "price": "60 Gingerbread",
+        "flavor": "Be wary of broken glass"
+      },
+      "system": {
+        "slug": "ornament-tag",
+        "section": "Nametags",
+        "sortOrder": 58,
+        "image": "/Evade/Nametags/ornament-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread Tag",
+        "price": "60 Gingerbread",
+        "flavor": "Freshly baked. Bade by butterfly723"
+      },
+      "system": {
+        "slug": "gingerbread-tag",
+        "section": "Nametags",
+        "sortOrder": 59,
+        "image": "/Evade/Nametags/gingerbread-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Santa Bobo Tag",
+        "price": "60 Gingerbread",
+        "flavor": "A present for you, you and you!"
+      },
+      "system": {
+        "slug": "santa-bobo-tag",
+        "section": "Nametags",
+        "sortOrder": 60,
+        "image": "/Evade/Nametags/santa-bobo-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Christmas Tree Tag",
+        "price": "60 Gingerbread",
+        "flavor": "All that's missing are the presents under the tree."
+      },
+      "system": {
+        "slug": "christmas-tree-tag",
+        "section": "Nametags",
+        "sortOrder": 61,
+        "image": "/Evade/Nametags/christmas-tree-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rose Tag",
+        "price": "60 Roses",
+        "flavor": "Now with red 40 dye."
+      },
+      "system": {
+        "slug": "rose-tag",
+        "section": "Nametags",
+        "sortOrder": 62,
+        "image": "/Evade/Nametags/rose-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eclipse Love Tag",
+        "price": "80 Roses",
+        "flavor": "Yep, black and white, so swag, #emo #cool."
+      },
+      "system": {
+        "slug": "eclipse-love-tag",
+        "section": "Nametags",
+        "sortOrder": 63,
+        "image": "/Evade/Nametags/eclipse-love-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heart Tag",
+        "price": "80 Chocolate",
+        "flavor": "this is how much I luv u"
+      },
+      "system": {
+        "slug": "heart-tag",
+        "section": "Nametags",
+        "sortOrder": 64,
+        "image": "/Evade/Nametags/heart-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dark Rose Tag",
+        "price": "100 Chocolate",
+        "flavor": "I'm so frickin edgy bruh"
+      },
+      "system": {
+        "slug": "dark-rose-tag",
+        "section": "Nametags",
+        "sortOrder": 65,
+        "image": "/Evade/Nametags/dark-rose-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shamrock Stickers",
+        "price": "80 Coins",
+        "flavor": "man I wish leprechauns were real."
+      },
+      "system": {
+        "slug": "shamrock-stickers",
+        "section": "Nametags",
+        "sortOrder": 66,
+        "image": "/Evade/Nametags/shamrock-stickers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Shower",
+        "price": "100 Coins",
+        "flavor": "It's raining money!!"
+      },
+      "system": {
+        "slug": "rainbow-shower",
+        "section": "Nametags",
+        "sortOrder": 67,
+        "image": "/Evade/Nametags/rainbow-shower.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clover Nametag",
+        "price": "50 Robux",
+        "flavor": "Don't forget to wear green!"
+      },
+      "system": {
+        "slug": "clover-nametag",
+        "section": "Nametags",
+        "sortOrder": 68,
+        "image": "/Evade/Nametags/clover-nametag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic Bricks",
+        "price": "40 Points",
+        "flavor": "I miss old Roblox ;-;."
+      },
+      "system": {
+        "slug": "classic-bricks",
+        "section": "Nametags",
+        "sortOrder": 69,
+        "image": "/Evade/Nametags/classic-bricks.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bunny Ears Tag",
+        "price": "40 Points",
+        "flavor": "boing boing boing :3"
+      },
+      "system": {
+        "slug": "bunny-ears-tag",
+        "section": "Nametags",
+        "sortOrder": 70,
+        "image": "/Evade/Nametags/bunny-ears-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Retro Easter Tag",
+        "price": "40 Points",
+        "flavor": "the easter bunny is coming. the easter bunny is coming. the easter bunny is coming. the easter bunny is coming"
+      },
+      "system": {
+        "slug": "retro-easter-tag",
+        "section": "Nametags",
+        "sortOrder": 71,
+        "image": "/Evade/Nametags/retro-easter-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jolly Roger Tag",
+        "price": "80 Suns",
+        "flavor": "YARRRGHHH! THERE BE TREASURE!"
+      },
+      "system": {
+        "slug": "jolly-roger-tag",
+        "section": "Nametags",
+        "sortOrder": 72,
+        "image": "/Evade/Nametags/jolly-roger-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Underwater Tag",
+        "price": "100 Suns",
+        "flavor": "helo I am under de water."
+      },
+      "system": {
+        "slug": "underwater-tag",
+        "section": "Nametags",
+        "sortOrder": 73,
+        "image": "/Evade/Nametags/underwater-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Popsicle Tag",
+        "price": "120 Suns",
+        "flavor": "A refreshing ice pop to cool off in the summer heat!"
+      },
+      "system": {
+        "slug": "popsicle-tag",
+        "section": "Nametags",
+        "sortOrder": 74,
+        "image": "/Evade/Nametags/popsicle-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shark Tag",
+        "price": "50 Bubbles",
+        "flavor": null
+      },
+      "system": {
+        "slug": "shark-tag",
+        "section": "Nametags",
+        "sortOrder": 75,
+        "image": "/Evade/Nametags/shark-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Retro Sunset Tag",
+        "price": "80 Bubbles",
+        "flavor": null
+      },
+      "system": {
+        "slug": "retro-sunset-tag",
+        "section": "Nametags",
+        "sortOrder": 76,
+        "image": "/Evade/Nametags/retro-sunset-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frutiger Blue Tag",
+        "price": "80 Bubbles",
+        "flavor": null
+      },
+      "system": {
+        "slug": "frutiger-blue-tag",
+        "section": "Nametags",
+        "sortOrder": 77,
+        "image": "/Evade/Nametags/frutiger-blue-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frutiger Green Tag",
+        "price": "80 Bubbles",
+        "flavor": null
+      },
+      "system": {
+        "slug": "frutiger-green-tag",
+        "section": "Nametags",
+        "sortOrder": 78,
+        "image": "/Evade/Nametags/frutiger-green-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Apple Tag",
+        "price": "60 Honey",
+        "flavor": null
+      },
+      "system": {
+        "slug": "green-apple-tag",
+        "section": "Nametags",
+        "sortOrder": 79,
+        "image": "/Evade/Nametags/green-apple-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Apple Tag",
+        "price": "60 Honey",
+        "flavor": null
+      },
+      "system": {
+        "slug": "red-apple-tag",
+        "section": "Nametags",
+        "sortOrder": 80,
+        "image": "/Evade/Nametags/red-apple-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "[[Gubby]] Tag",
+        "price": "45 Points",
+        "flavor": "RELEASE THE GUBBBBBBBBIIESSSS!!!!!!"
+      },
+      "system": {
+        "slug": "gubby-tag",
+        "section": "Nametags",
+        "sortOrder": 81,
+        "image": "/Evade/Nametags/gubby-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "[[Turkey]] Tag",
+        "price": "40 Points",
+        "flavor": "gobble gobble"
+      },
+      "system": {
+        "slug": "turkey-tag",
+        "section": "Nametags",
+        "sortOrder": 82,
+        "image": "/Evade/Nametags/turkey-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blood Moon Tag",
+        "price": "60 Bread",
+        "flavor": "THIS IS NOT THE BLOOD MOON UNUSUAL!!"
+      },
+      "system": {
+        "slug": "blood-moon-tag",
+        "section": "Nametags",
+        "sortOrder": 83,
+        "image": "/Evade/Nametags/blood-moon-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Carvings Tag",
+        "price": "80 Bread",
+        "flavor": "pumpkin bleh"
+      },
+      "system": {
+        "slug": "pumpkin-carvings-tag",
+        "section": "Nametags",
+        "sortOrder": 84,
+        "image": "/Evade/Nametags/pumpkin-carvings-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cat Witch Tag",
+        "price": "80 Bread",
+        "flavor": "meow meow abra cadabra!! miau :-3"
+      },
+      "system": {
+        "slug": "cat-witch-tag",
+        "section": "Nametags",
+        "sortOrder": 85,
+        "image": "/Evade/Nametags/cat-witch-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Animated Rainbow",
+        "price": null,
+        "flavor": "ego."
+      },
+      "system": {
+        "slug": "animated-rainbow",
+        "section": "Nametags",
+        "sortOrder": 86,
+        "image": "/Evade/Nametags/animated-rainbow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glowing Haze Tag",
+        "price": null,
+        "flavor": "rainbow poop vomit tag."
+      },
+      "system": {
+        "slug": "glowing-haze-tag",
+        "section": "Nametags",
+        "sortOrder": 87,
+        "image": "/Evade/Nametags/glowing-haze-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lots of Effects",
+        "price": null,
+        "flavor": "disabled."
+      },
+      "system": {
+        "slug": "lots-of-effects",
+        "section": "Nametags",
+        "sortOrder": 88,
+        "image": "/Evade/Nametags/lots-of-effects.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Strobe Light Tag",
+        "price": null,
+        "flavor": "Comes with complimentary epilepsy."
+      },
+      "system": {
+        "slug": "strobe-light-tag",
+        "section": "Nametags",
+        "sortOrder": 89,
+        "image": "/Evade/Nametags/strobe-light-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chromatic Cresendo",
+        "price": null,
+        "flavor": "Unknown"
+      },
+      "system": {
+        "slug": "chromatic-cresendo",
+        "section": "Nametags",
+        "sortOrder": 90,
+        "image": "/Evade/Nametags/chromatic-cresendo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bobo Tag",
+        "price": null,
+        "flavor": "him."
+      },
+      "system": {
+        "slug": "bobo-tag",
+        "section": "Nametags",
+        "sortOrder": 91,
+        "image": "/Evade/Nametags/bobo-tag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unknown",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "unknown",
+        "section": "Nametags",
+        "sortOrder": 92,
+        "image": "/Evade/Nametags/unknown.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unknown",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "unknown-2",
+        "section": "Nametags",
+        "sortOrder": 93,
+        "image": "/Evade/Nametags/unknown-2.png"
+      }
+    }
+  ]
+}

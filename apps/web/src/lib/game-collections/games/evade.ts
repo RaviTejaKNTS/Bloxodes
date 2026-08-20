@@ -17,6 +17,14 @@ export const evadeCollectionGroup = {
       "weapons",
       "usables",
       "characters",
-      "maps"
+      "maps",
+      "emotes",
+      "cosmetics",
+      "item-skins",
+      "unusuals",
+      "carry-animations",
+      "nametags",
+      "currencies",
+      "daily-missions"
     ]
   } satisfies GameCollectionGroup;

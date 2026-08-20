@@ -1,0 +1,973 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Evade",
+    "gameSlug": "evade",
+    "collection": "carry-animations",
+    "route": "/wiki/evade/carry-animations",
+    "catalogCode": "evade-carry-animations",
+    "itemFields": [
+      "price",
+      "flavor"
+    ],
+    "columns": [
+      "price",
+      "flavor"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Carry Animations"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "flavor",
+      "cardDescriptionField": "flavor",
+      "cardFields": [
+        "price",
+        "flavor"
+      ],
+      "tableFields": [
+        "price",
+        "flavor"
+      ],
+      "fieldPresentation": {
+        "price": {
+          "kind": "chip",
+          "label": "Price",
+          "omitWhenEmpty": true
+        },
+        "flavor": {
+          "kind": "detail",
+          "label": "Description",
+          "omitWhenEmpty": true
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Strapped",
+        "price": null,
+        "flavor": "Attach the carried player to your back."
+      },
+      "system": {
+        "slug": "strapped",
+        "section": "Carry Animations",
+        "sortOrder": 1,
+        "image": "/Evade/Carry Animations/strapped.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cradle",
+        "price": null,
+        "flavor": "Hold the baby with a firm grasp, don't let it get hurt.."
+      },
+      "system": {
+        "slug": "cradle",
+        "section": "Carry Animations",
+        "sortOrder": 2,
+        "image": "/Evade/Carry Animations/cradle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Piggyback",
+        "price": "Level 25",
+        "flavor": "Take them for a ride."
+      },
+      "system": {
+        "slug": "piggyback",
+        "section": "Carry Animations",
+        "sortOrder": 3,
+        "image": "/Evade/Carry Animations/piggyback.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pizza Delivery",
+        "price": "Level 15",
+        "flavor": "Carrying someone? Just another day on the job."
+      },
+      "system": {
+        "slug": "pizza-delivery",
+        "section": "Carry Animations",
+        "sortOrder": 4,
+        "image": "/Evade/Carry Animations/pizza-delivery.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Drag",
+        "price": null,
+        "flavor": "Show them how useless they truly are."
+      },
+      "system": {
+        "slug": "drag",
+        "section": "Carry Animations",
+        "sortOrder": 5,
+        "image": "/Evade/Carry Animations/drag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Force Choke",
+        "price": "Level 60",
+        "flavor": "Be careful not to choke on your aspirations."
+      },
+      "system": {
+        "slug": "force-choke",
+        "section": "Carry Animations",
+        "sortOrder": 6,
+        "image": "/Evade/Carry Animations/force-choke.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ballon Carry",
+        "price": "Level 90",
+        "flavor": null
+      },
+      "system": {
+        "slug": "ballon-carry",
+        "section": "Carry Animations",
+        "sortOrder": 7,
+        "image": "/Evade/Carry Animations/ballon-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shopping Cart Carry",
+        "price": "Level 130",
+        "flavor": null
+      },
+      "system": {
+        "slug": "shopping-cart-carry",
+        "section": "Carry Animations",
+        "sortOrder": 8,
+        "image": "/Evade/Carry Animations/shopping-cart-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Overhead Carry",
+        "price": "60 Points",
+        "flavor": "The grip go crazy."
+      },
+      "system": {
+        "slug": "overhead-carry",
+        "section": "Carry Animations",
+        "sortOrder": 9,
+        "image": "/Evade/Carry Animations/overhead-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Overhead Carry",
+        "price": "100 Points",
+        "flavor": "A very ergonomic method of carrying."
+      },
+      "system": {
+        "slug": "overhead-carry-2",
+        "section": "Carry Animations",
+        "sortOrder": 10,
+        "image": "/Evade/Carry Animations/overhead-carry-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rugburn Carry",
+        "price": "100 Points",
+        "flavor": "For left handed people."
+      },
+      "system": {
+        "slug": "rugburn-carry",
+        "section": "Carry Animations",
+        "sortOrder": 11,
+        "image": "/Evade/Carry Animations/rugburn-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skateboard Carry",
+        "price": "115 Points",
+        "flavor": "Unfortunately you can't do any tricks on this."
+      },
+      "system": {
+        "slug": "skateboard-carry",
+        "section": "Carry Animations",
+        "sortOrder": 12,
+        "image": "/Evade/Carry Animations/skateboard-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Over-Shoulder Carry",
+        "price": "40 Points",
+        "flavor": "Gets the jobs done."
+      },
+      "system": {
+        "slug": "over-shoulder-carry",
+        "section": "Carry Animations",
+        "sortOrder": 13,
+        "image": "/Evade/Carry Animations/over-shoulder-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fireman Carry",
+        "price": "50 Points",
+        "flavor": "Used often in the military and other services."
+      },
+      "system": {
+        "slug": "fireman-carry",
+        "section": "Carry Animations",
+        "sortOrder": 14,
+        "image": "/Evade/Carry Animations/fireman-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Arm-Shoulder Carry",
+        "price": "90 Points",
+        "flavor": "Luckily Roblox characters have much larger shoulders to allow for this to work."
+      },
+      "system": {
+        "slug": "arm-shoulder-carry",
+        "section": "Carry Animations",
+        "sortOrder": 15,
+        "image": "/Evade/Carry Animations/arm-shoulder-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Log Carry",
+        "price": "80 Points",
+        "flavor": "You're so heavy I'm about to lose my balance."
+      },
+      "system": {
+        "slug": "log-carry",
+        "section": "Carry Animations",
+        "sortOrder": 16,
+        "image": "/Evade/Carry Animations/log-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snowball Carry",
+        "price": "60 Points",
+        "flavor": "The snowball must grow bigger"
+      },
+      "system": {
+        "slug": "snowball-carry",
+        "section": "Carry Animations",
+        "sortOrder": 17,
+        "image": "/Evade/Carry Animations/snowball-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Air Swim Carry",
+        "price": "80 Points",
+        "flavor": null
+      },
+      "system": {
+        "slug": "air-swim-carry",
+        "section": "Carry Animations",
+        "sortOrder": 18,
+        "image": "/Evade/Carry Animations/air-swim-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cat Carry",
+        "price": "600 Robux",
+        "flavor": "Two helper cats carry you to victory!"
+      },
+      "system": {
+        "slug": "cat-carry",
+        "section": "Carry Animations",
+        "sortOrder": 19,
+        "image": "/Evade/Carry Animations/cat-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cat Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "cat-set",
+        "section": "Carry Animations",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Duck Carry",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "duck-carry",
+        "section": "Carry Animations",
+        "sortOrder": 21,
+        "image": "/Evade/Carry Animations/duck-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Classic Roblox Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "classic-roblox-set",
+        "section": "Carry Animations",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Cpt. Jaws Carry",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "cpt-jaws-carry",
+        "section": "Carry Animations",
+        "sortOrder": 23,
+        "image": "/Evade/Carry Animations/cpt-jaws-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Animal Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "animal-set",
+        "section": "Carry Animations",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar Scribe",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "lunar-scribe",
+        "section": "Carry Animations",
+        "sortOrder": 25,
+        "image": "/Evade/Carry Animations/lunar-scribe.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Eclipse Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "eclipse-set",
+        "section": "Carry Animations",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dog Sleigh",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "dog-sleigh",
+        "section": "Carry Animations",
+        "sortOrder": 27,
+        "image": "/Evade/Carry Animations/dog-sleigh.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dog Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "dog-set",
+        "section": "Carry Animations",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flying Dragon",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "flying-dragon",
+        "section": "Carry Animations",
+        "sortOrder": 29,
+        "image": "/Evade/Carry Animations/flying-dragon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lunar New Year Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "lunar-new-year-set",
+        "section": "Carry Animations",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Honeymancer",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "honeymancer",
+        "section": "Carry Animations",
+        "sortOrder": 31,
+        "image": "/Evade/Carry Animations/honeymancer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bee Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "bee-set",
+        "section": "Carry Animations",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hype Train",
+        "price": "350 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "hype-train",
+        "section": "Carry Animations",
+        "sortOrder": 33,
+        "image": "/Evade/Carry Animations/hype-train.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shadow Rider",
+        "price": "350 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "shadow-rider",
+        "section": "Carry Animations",
+        "sortOrder": 34,
+        "image": "/Evade/Carry Animations/shadow-rider.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Synthwave Surfer",
+        "price": "350 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "synthwave-surfer",
+        "section": "Carry Animations",
+        "sortOrder": 35,
+        "image": "/Evade/Carry Animations/synthwave-surfer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Music Carry Pack 1",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "music-carry-pack-1",
+        "section": "Carry Animations",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Music Carry Pack 1",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "music-carry-pack-1-2",
+        "section": "Carry Animations",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Music Carry Pack 1",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "music-carry-pack-1-3",
+        "section": "Carry Animations",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "TBA",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "tba",
+        "section": "Carry Animations",
+        "sortOrder": 39,
+        "image": "/Evade/Carry Animations/tba.png"
+      }
+    },
+    {
+      "item": {
+        "name": "TBA",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "tba-2",
+        "section": "Carry Animations",
+        "sortOrder": 40,
+        "image": "/Evade/Carry Animations/tba-2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "TBA",
+        "price": null,
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "tba-3",
+        "section": "Carry Animations",
+        "sortOrder": 41,
+        "image": "/Evade/Carry Animations/tba-3.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kraken Carry",
+        "price": "600 Robux",
+        "flavor": "TBA"
+      },
+      "system": {
+        "slug": "kraken-carry",
+        "section": "Carry Animations",
+        "sortOrder": 42,
+        "image": "/Evade/Carry Animations/kraken-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Poseidon Set",
+        "price": null,
+        "flavor": null
+      },
+      "system": {
+        "slug": "poseidon-set",
+        "section": "Carry Animations",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Love Dove Carry",
+        "price": "20000 Tokens",
+        "flavor": "An angel to rescue you."
+      },
+      "system": {
+        "slug": "love-dove-carry",
+        "section": "Carry Animations",
+        "sortOrder": 44,
+        "image": "/Evade/Carry Animations/love-dove-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Celestial Carry",
+        "price": "300 Roses",
+        "flavor": "Aid from beyond the stars."
+      },
+      "system": {
+        "slug": "celestial-carry",
+        "section": "Carry Animations",
+        "sortOrder": 45,
+        "image": "/Evade/Carry Animations/celestial-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Love Balloon",
+        "price": "160 Chocolate",
+        "flavor": "Love will only take us higher and higher..."
+      },
+      "system": {
+        "slug": "love-balloon",
+        "section": "Carry Animations",
+        "sortOrder": 46,
+        "image": "/Evade/Carry Animations/love-balloon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Caged Dove",
+        "price": "160 Chocolate",
+        "flavor": "You're mine for the taking"
+      },
+      "system": {
+        "slug": "caged-dove",
+        "section": "Carry Animations",
+        "sortOrder": 47,
+        "image": "/Evade/Carry Animations/caged-dove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Flight",
+        "price": "100 Robux",
+        "flavor": "Off to the sky!"
+      },
+      "system": {
+        "slug": "green-flight",
+        "section": "Carry Animations",
+        "sortOrder": 48,
+        "image": "/Evade/Carry Animations/green-flight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Horror Drag",
+        "price": "80 Candies",
+        "flavor": "DCJKGNDKJGNDF- HELP- IM DEAD-"
+      },
+      "system": {
+        "slug": "horror-drag",
+        "section": "Carry Animations",
+        "sortOrder": 49,
+        "image": "/Evade/Carry Animations/horror-drag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Puppeteer Carry",
+        "price": "60 Candies",
+        "flavor": "Call upon the powers of Master Hand and Crazy Hand to control your fallen brethren."
+      },
+      "system": {
+        "slug": "puppeteer-carry",
+        "section": "Carry Animations",
+        "sortOrder": 50,
+        "image": "/Evade/Carry Animations/puppeteer-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pitchfork Carry",
+        "price": "60 Candies",
+        "flavor": "Useful for storming the rural villages."
+      },
+      "system": {
+        "slug": "pitchfork-carry",
+        "section": "Carry Animations",
+        "sortOrder": 51,
+        "image": "/Evade/Carry Animations/pitchfork-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pumpkin Bros",
+        "price": "200 Bread",
+        "flavor": "Come and get your freshly churned human blood smoothie!"
+      },
+      "system": {
+        "slug": "pumpkin-bros",
+        "section": "Carry Animations",
+        "sortOrder": 52,
+        "image": "/Evade/Carry Animations/pumpkin-bros.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Iron Maiden Carry",
+        "price": "160 Bread",
+        "flavor": "Subject your teammate to endless torment"
+      },
+      "system": {
+        "slug": "iron-maiden-carry",
+        "section": "Carry Animations",
+        "sortOrder": 53,
+        "image": "/Evade/Carry Animations/iron-maiden-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Necromancer Carry",
+        "price": "300 Bread",
+        "flavor": "Wingardium Leviosa!"
+      },
+      "system": {
+        "slug": "necromancer-carry",
+        "section": "Carry Animations",
+        "sortOrder": 54,
+        "image": "/Evade/Carry Animations/necromancer-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dread Wings Carry",
+        "price": "666 Bread",
+        "flavor": "Wretched beasts from the shadow lands"
+      },
+      "system": {
+        "slug": "dread-wings-carry",
+        "section": "Carry Animations",
+        "sortOrder": 55,
+        "image": "/Evade/Carry Animations/dread-wings-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sled Carry",
+        "price": "60 Gingerbread",
+        "flavor": "Push your friends on a sled, I guess it wouldn't be called a carry then?"
+      },
+      "system": {
+        "slug": "sled-carry",
+        "section": "Carry Animations",
+        "sortOrder": 56,
+        "image": "/Evade/Carry Animations/sled-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gift Sack Carry",
+        "price": "100 Gingerbread",
+        "flavor": "Me kidnapping people under 5'6 to go work."
+      },
+      "system": {
+        "slug": "gift-sack-carry",
+        "section": "Carry Animations",
+        "sortOrder": 57,
+        "image": "/Evade/Carry Animations/gift-sack-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Krapmus Carry",
+        "price": "200 Gingerbread",
+        "flavor": "The most naughtiest of children are captured and send directly to hell"
+      },
+      "system": {
+        "slug": "krapmus-carry",
+        "section": "Carry Animations",
+        "sortOrder": 58,
+        "image": "/Evade/Carry Animations/krapmus-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Frostborne Steed Carry",
+        "price": "400 Gingerbread",
+        "flavor": "A chariot forget from ice and carbon"
+      },
+      "system": {
+        "slug": "frostborne-steed-carry",
+        "section": "Carry Animations",
+        "sortOrder": 59,
+        "image": "/Evade/Carry Animations/frostborne-steed-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Minecart Carry",
+        "price": "60 Points",
+        "flavor": "Flint and steel."
+      },
+      "system": {
+        "slug": "minecart-carry",
+        "section": "Carry Animations",
+        "sortOrder": 60,
+        "image": "/Evade/Carry Animations/minecart-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Carry",
+        "price": "50 Points",
+        "flavor": "A consequence of putting too many eggs in one basket."
+      },
+      "system": {
+        "slug": "easter-carry",
+        "section": "Carry Animations",
+        "sortOrder": 61,
+        "image": "/Evade/Carry Animations/easter-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Crab Carry",
+        "price": "150 Suns",
+        "flavor": "LISTEN YOU CRUSTACEUS CHEAPSKATE!!!"
+      },
+      "system": {
+        "slug": "crab-carry",
+        "section": "Carry Animations",
+        "sortOrder": 62,
+        "image": "/Evade/Carry Animations/crab-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Surfer Bro Carry",
+        "price": "250 Suns",
+        "flavor": "RIDIN' THE WAVES"
+      },
+      "system": {
+        "slug": "surfer-bro-carry",
+        "section": "Carry Animations",
+        "sortOrder": 63,
+        "image": "/Evade/Carry Animations/surfer-bro-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flamingo Carry",
+        "price": "140 Bubbles",
+        "flavor": null
+      },
+      "system": {
+        "slug": "flamingo-carry",
+        "section": "Carry Animations",
+        "sortOrder": 64,
+        "image": "/Evade/Carry Animations/flamingo-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vibrant Sailfish",
+        "price": "140 Bubbles",
+        "flavor": null
+      },
+      "system": {
+        "slug": "vibrant-sailfish",
+        "section": "Carry Animations",
+        "sortOrder": 65,
+        "image": "/Evade/Carry Animations/vibrant-sailfish.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Jellyfish Entanglement",
+        "price": "180 Bubbles",
+        "flavor": null
+      },
+      "system": {
+        "slug": "jellyfish-entanglement",
+        "section": "Carry Animations",
+        "sortOrder": 66,
+        "image": "/Evade/Carry Animations/jellyfish-entanglement.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gnome Carry",
+        "price": "100 Honey",
+        "flavor": null
+      },
+      "system": {
+        "slug": "gnome-carry",
+        "section": "Carry Animations",
+        "sortOrder": 67,
+        "image": "/Evade/Carry Animations/gnome-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dung Beetle Carry",
+        "price": "200 Honey",
+        "flavor": null
+      },
+      "system": {
+        "slug": "dung-beetle-carry",
+        "section": "Carry Animations",
+        "sortOrder": 68,
+        "image": "/Evade/Carry Animations/dung-beetle-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ant Queen",
+        "price": "200 Honey",
+        "flavor": null
+      },
+      "system": {
+        "slug": "ant-queen",
+        "section": "Carry Animations",
+        "sortOrder": 69,
+        "image": "/Evade/Carry Animations/ant-queen.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Beach Ball Carry",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "beach-ball-carry",
+        "section": "Carry Animations",
+        "sortOrder": 70,
+        "image": "/Evade/Carry Animations/beach-ball-carry.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Side Arm Carry",
+        "price": null,
+        "flavor": "Unknown."
+      },
+      "system": {
+        "slug": "side-arm-carry",
+        "section": "Carry Animations",
+        "sortOrder": 71,
+        "image": "/Evade/Carry Animations/side-arm-carry.png"
+      }
+    }
+  ]
+}

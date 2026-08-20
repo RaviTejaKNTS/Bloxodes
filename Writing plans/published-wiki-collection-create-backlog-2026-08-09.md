@@ -305,14 +305,14 @@ Evidence: [full report](../tmp/game-collection-suggestions/driving-empire.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/evade.md)
 
-- [ ] Emotes
-- [ ] Cosmetics
-- [ ] Item Skins
-- [ ] Unusuals
-- [ ] Carry Animations
-- [ ] Nametags
-- [ ] Currencies
-- [ ] Daily Missions
+- [x] Emotes
+- [x] Cosmetics
+- [x] Item Skins
+- [x] Unusuals
+- [x] Carry Animations
+- [x] Nametags
+- [x] Currencies
+- [x] Daily Missions
 
 ### Evomon
 

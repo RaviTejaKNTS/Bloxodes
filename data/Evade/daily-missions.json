@@ -1,0 +1,230 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Evade",
+    "gameSlug": "evade",
+    "collection": "daily-missions",
+    "route": "/wiki/evade/daily-missions",
+    "catalogCode": "evade-daily-missions",
+    "itemFields": [
+      "category",
+      "reward"
+    ],
+    "columns": [
+      "category",
+      "reward"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Daily Missions"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "reward",
+      "cardDescriptionField": "reward",
+      "cardFields": [
+        "category",
+        "reward"
+      ],
+      "tableFields": [
+        "category",
+        "reward"
+      ],
+      "fieldPresentation": {
+        "category": {
+          "kind": "chip",
+          "label": "Type"
+        },
+        "reward": {
+          "kind": "plain",
+          "label": "Reward"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Complete 3 map objectives",
+        "category": "Objectives",
+        "reward": "20 Points 75 Experience"
+      },
+      "system": {
+        "slug": "complete-3-map-objectives",
+        "section": "Daily Missions",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Win 2 matches without any utilities",
+        "category": "No Utilities",
+        "reward": "15 Points 200 Token"
+      },
+      "system": {
+        "slug": "win-2-matches-without-any-utilities",
+        "section": "Daily Missions",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Win 2 matches without any light tools",
+        "category": "No Lights",
+        "reward": "5 Points 40 Experience"
+      },
+      "system": {
+        "slug": "win-2-matches-without-any-light-tools",
+        "section": "Daily Missions",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Build 6 deployables",
+        "category": "Deployables",
+        "reward": "10 Points 40 Experience"
+      },
+      "system": {
+        "slug": "build-6-deployables",
+        "section": "Daily Missions",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Use 4 consumables",
+        "category": "Consumables",
+        "reward": "10 Points 40 Experience"
+      },
+      "system": {
+        "slug": "use-4-consumables",
+        "section": "Daily Missions",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Use 12 consumables",
+        "category": "Consumables",
+        "reward": "20 Points 60 Experience"
+      },
+      "system": {
+        "slug": "use-12-consumables",
+        "section": "Daily Missions",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Survive 2 special rounds",
+        "category": "Special Round",
+        "reward": "15 Points 250 Token"
+      },
+      "system": {
+        "slug": "survive-2-special-rounds",
+        "section": "Daily Missions",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Play 6 games",
+        "category": "Play Games",
+        "reward": "10 Points 50 Experience"
+      },
+      "system": {
+        "slug": "play-6-games",
+        "section": "Daily Missions",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Play 12 games",
+        "category": "Play Games",
+        "reward": "20 Points 80 Experience"
+      },
+      "system": {
+        "slug": "play-12-games",
+        "section": "Daily Missions",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Win 3 games without dying",
+        "category": "Win Games",
+        "reward": "20 Points 300 Token"
+      },
+      "system": {
+        "slug": "win-3-games-without-dying",
+        "section": "Daily Missions",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Revive 10 people",
+        "category": "Revive",
+        "reward": "15 Points 45 Experience"
+      },
+      "system": {
+        "slug": "revive-10-people",
+        "section": "Daily Missions",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Revive 20 people",
+        "category": "Revive",
+        "reward": "25 Points 60 Experience"
+      },
+      "system": {
+        "slug": "revive-20-people",
+        "section": "Daily Missions",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Run for 5000 studs",
+        "category": "Run",
+        "reward": "10 Points 45 Experience"
+      },
+      "system": {
+        "slug": "run-for-5000-studs",
+        "section": "Daily Missions",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Run for 12000 studs",
+        "category": "Run",
+        "reward": "20 Points 60 Experience"
+      },
+      "system": {
+        "slug": "run-for-12000-studs",
+        "section": "Daily Missions",
+        "sortOrder": 14,
+        "image": null
+      }
+    }
+  ]
+}
