@@ -1,0 +1,2349 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "The Strongest Battlegrounds",
+    "gameSlug": "the-strongest-battlegrounds",
+    "collection": "techniques",
+    "route": "/wiki/the-strongest-battlegrounds/techniques",
+    "catalogCode": "the-strongest-battlegrounds-techniques",
+    "itemFields": [
+      "howToPerform",
+      "cardSummary"
+    ],
+    "columns": [
+      "howToPerform",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Character",
+      "sectionOrder": [
+        "Universal Techs",
+        "The Strongest Hero",
+        "Hero Hunter",
+        "Monster Form",
+        "Destructive Cyborg",
+        "Deadly Ninja",
+        "Brutal Demon",
+        "Blade Master",
+        "Wild Psychic",
+        "Martial Artist",
+        "Tech Prodigy",
+        "KJ",
+        "Undying Hero",
+        "Removed and Patched"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "howToPerform"
+      ],
+      "tableFields": [
+        "howToPerform",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "howToPerform": {
+          "kind": "detail",
+          "label": "How to perform",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "What it does"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Uppercut Dash",
+        "howToPerform": "To perform the \"Uppercut Dash\" Technique you need to forward dash right after a mini uppercut, then loop back directly below them as soon as possible to hit the target with a front dash.",
+        "cardSummary": "Forward dash in a loop right after a mini uppercut so the target rolls into empty air and takes almost no knockback, leaving a side dash extension open."
+      },
+      "system": {
+        "slug": "uppercut-dash",
+        "section": "Universal Techs",
+        "sortOrder": 1,
+        "image": "/The Strongest Battlegrounds/Techniques/uppercut-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Upside Down Ragdoll",
+        "howToPerform": "To perform the Upside Down Ragdoll tech you need to downslam someone IMMEDIATELY when they get up.",
+        "cardSummary": "Downslam someone the instant they rise from ragdoll and their torso over-rotates onto their head, with a hitbox that lets ground moves connect."
+      },
+      "system": {
+        "slug": "upside-down-ragdoll",
+        "section": "Universal Techs",
+        "sortOrder": 2,
+        "image": "/The Strongest Battlegrounds/Techniques/upside-down-ragdoll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uppercut Jump",
+        "howToPerform": "To perform this, do 3 m1s, jump, then immediately uppercut.",
+        "cardSummary": "Three M1s, jump, then an instant uppercut opens a window to use grounded-only moves in midair or change how a move lands."
+      },
+      "system": {
+        "slug": "uppercut-jump",
+        "section": "Universal Techs",
+        "sortOrder": 3,
+        "image": "/The Strongest Battlegrounds/Techniques/uppercut-jump.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uppercut Flick",
+        "howToPerform": "First, mini uppercut your target and immediately forward dash in a loop to hit the forward dash as the player falls down.",
+        "cardSummary": "The easy version of Uppercut Dash: mini uppercut, then loop a forward dash to clip the target as they float."
+      },
+      "system": {
+        "slug": "uppercut-flick",
+        "section": "Universal Techs",
+        "sortOrder": 4,
+        "image": "/The Strongest Battlegrounds/Techniques/uppercut-flick.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stun Negation",
+        "howToPerform": null,
+        "cardSummary": "A forward dash timed to the exact frame someone rises from ragdoll, punching through their usual no-stun window."
+      },
+      "system": {
+        "slug": "stun-negation",
+        "section": "Universal Techs",
+        "sortOrder": 5,
+        "image": "/The Strongest Battlegrounds/Techniques/stun-negation.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Delayed M1s",
+        "howToPerform": null,
+        "cardSummary": "Deliberately slowing your M1 string to buy cooldown time mid-combo, trading rhythm for a refreshed dash or move."
+      },
+      "system": {
+        "slug": "delayed-m1s",
+        "section": "Universal Techs",
+        "sortOrder": 6,
+        "image": "/The Strongest Battlegrounds/Techniques/delayed-m1s.png"
+      }
+    },
+    {
+      "item": {
+        "name": "M1 Shove",
+        "howToPerform": null,
+        "cardSummary": "An M1 timed to shove the opponent for repositioning or a sliver of extra damage."
+      },
+      "system": {
+        "slug": "m1-shove",
+        "section": "Universal Techs",
+        "sortOrder": 7,
+        "image": "/The Strongest Battlegrounds/Techniques/m1-shove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Backdash Cancel",
+        "howToPerform": null,
+        "cardSummary": "Fire a move mid-backdash to cancel it into a surprise attack."
+      },
+      "system": {
+        "slug": "backdash-cancel",
+        "section": "Universal Techs",
+        "sortOrder": 8,
+        "image": "/The Strongest Battlegrounds/Techniques/backdash-cancel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Aerial Backdash Cancel",
+        "howToPerform": null,
+        "cardSummary": "The airborne version of the backdash cancel, stretching its range with a jump."
+      },
+      "system": {
+        "slug": "aerial-backdash-cancel",
+        "section": "Universal Techs",
+        "sortOrder": 9,
+        "image": "/The Strongest Battlegrounds/Techniques/aerial-backdash-cancel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wall Extend",
+        "howToPerform": null,
+        "cardSummary": "A wall-assisted inescapable combo loop whose strength depends on the character used."
+      },
+      "system": {
+        "slug": "wall-extend",
+        "section": "Universal Techs",
+        "sortOrder": 10,
+        "image": "/The Strongest Battlegrounds/Techniques/wall-extend.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ground Punch",
+        "howToPerform": "You must ragdoll the opponent, then wait a bit before performing an M1 string. If done correctly, you will knock the opponents away on the final M1.",
+        "cardSummary": "Ragdoll the opponent, wait a beat, then start an M1 string as they rise to knock them straight back down."
+      },
+      "system": {
+        "slug": "ground-punch",
+        "section": "Universal Techs",
+        "sortOrder": 11,
+        "image": "/The Strongest Battlegrounds/Techniques/ground-punch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "DMG Chip",
+        "howToPerform": null,
+        "cardSummary": "A mini uppercut woven into dashes that stuns players while they are still mid-ragdoll."
+      },
+      "system": {
+        "slug": "dmg-chip",
+        "section": "Universal Techs",
+        "sortOrder": 12,
+        "image": "/The Strongest Battlegrounds/Techniques/dmg-chip.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Micro Dash",
+        "howToPerform": "Side dash, and immediately use a move. Punching does not work because it will not cancel the dash.",
+        "cardSummary": "Side dash and immediately use a move: the dash cuts short, moving you a sliver of the distance at full speed."
+      },
+      "system": {
+        "slug": "micro-dash",
+        "section": "Universal Techs",
+        "sortOrder": 13,
+        "image": "/The Strongest Battlegrounds/Techniques/micro-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headwalk",
+        "howToPerform": null,
+        "cardSummary": "After a mini uppercut, walk onto the opponent's head to keep the combo running from above."
+      },
+      "system": {
+        "slug": "headwalk",
+        "section": "Universal Techs",
+        "sortOrder": 14,
+        "image": "/The Strongest Battlegrounds/Techniques/headwalk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "True Downslam",
+        "howToPerform": null,
+        "cardSummary": "Downslam off the third M1's stun so the opponent cannot ragdoll cancel out of it."
+      },
+      "system": {
+        "slug": "true-downslam",
+        "section": "Universal Techs",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Trashy Escape Plan",
+        "howToPerform": null,
+        "cardSummary": "A movement meme: jump and side dash at a trashcan sideways with shiftlock off to get launched."
+      },
+      "system": {
+        "slug": "trashy-escape-plan",
+        "section": "Universal Techs",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bench-Jump",
+        "howToPerform": null,
+        "cardSummary": "Climb a bench's backrest and jump for extra height, the game's most law-abiding movement tech."
+      },
+      "system": {
+        "slug": "bench-jump",
+        "section": "Universal Techs",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ragdoll Shove",
+        "howToPerform": "To perform the Ragdoll Shove Tech, you need to do: 3m1 + shove + m1 right after.",
+        "cardSummary": "Three M1s, shove, then an instant M1: the ragdolled opponent eats fall damage on the way down."
+      },
+      "system": {
+        "slug": "ragdoll-shove",
+        "section": "The Strongest Hero",
+        "sortOrder": 18,
+        "image": "/The Strongest Battlegrounds/Techniques/ragdoll-shove.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Double Downslam",
+        "howToPerform": null,
+        "cardSummary": "Downslam, punch string, then a second downslam before the opponent recovers."
+      },
+      "system": {
+        "slug": "double-downslam",
+        "section": "The Strongest Hero",
+        "sortOrder": 19,
+        "image": "/The Strongest Battlegrounds/Techniques/double-downslam.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tactical Yeet",
+        "howToPerform": null,
+        "cardSummary": "Uppercut into a roll applied on an already-rolling opponent, launching them absurd distances."
+      },
+      "system": {
+        "slug": "tactical-yeet",
+        "section": "The Strongest Hero",
+        "sortOrder": 20,
+        "image": "/The Strongest Battlegrounds/Techniques/tactical-yeet.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kick",
+        "howToPerform": "You need to side dash to your opponent and do shove quickly after the 4th m1",
+        "cardSummary": "A shove buried right after the fourth M1: a damage-free Ragdoll Shove used purely for style points."
+      },
+      "system": {
+        "slug": "kick",
+        "section": "The Strongest Hero",
+        "sortOrder": 21,
+        "image": "/The Strongest Battlegrounds/Techniques/kick.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Makaku",
+        "howToPerform": "After the move shove, you need to immediately M1. Keep in mind that this only works after 0, 1, or 2 M1s into shove, otherwise you will just do the ragdoll shove tech. Also if you use Consecutive Punches right before Sho",
+        "cardSummary": "Shove then instant M1 (only after 0 to 2 M1s), keeping the opponent standing for a fresh string."
+      },
+      "system": {
+        "slug": "makaku",
+        "section": "The Strongest Hero",
+        "sortOrder": 22,
+        "image": "/The Strongest Battlegrounds/Techniques/makaku.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shove Dash",
+        "howToPerform": "After using the move shove, m1 right away. After that, back away for a bit, then forward dash. {{WdsTooltips |toggle = {} |content = Make sure the M1 you use after the shove is the 1st, 2nd, or 3rd M1. Otherwise, it'll j",
+        "cardSummary": "Shove, instant M1, step back, then forward dash: a bait-and-punish rhythm tech."
+      },
+      "system": {
+        "slug": "shove-dash",
+        "section": "The Strongest Hero",
+        "sortOrder": 23,
+        "image": "/The Strongest Battlegrounds/Techniques/shove-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ragdoll Shove Dash",
+        "howToPerform": "To perform the ragdoll shove Dash, you need to: 3m1 + shove + m1 right after + Instant forward dash",
+        "cardSummary": "A Ragdoll Shove finished with an instant forward dash so the knockback carries the fall damage further."
+      },
+      "system": {
+        "slug": "ragdoll-shove-dash",
+        "section": "The Strongest Hero",
+        "sortOrder": 24,
+        "image": "/The Strongest Battlegrounds/Techniques/ragdoll-shove-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uppercut Strike",
+        "howToPerform": null,
+        "cardSummary": "An input timing that makes your follow-up hit land far faster after the Uppercut move."
+      },
+      "system": {
+        "slug": "uppercut-strike",
+        "section": "The Strongest Hero",
+        "sortOrder": 25,
+        "image": "/The Strongest Battlegrounds/Techniques/uppercut-strike.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Double Shove Downslam",
+        "howToPerform": null,
+        "cardSummary": "Chains the Ragdoll Shove into the Double Downslam for one extended beating."
+      },
+      "system": {
+        "slug": "double-shove-downslam",
+        "section": "The Strongest Hero",
+        "sortOrder": 26,
+        "image": "/The Strongest Battlegrounds/Techniques/double-shove-downslam.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shove Uppercut",
+        "howToPerform": null,
+        "cardSummary": "A shove placement that buys one extra M1 and a second combo extender in the same string."
+      },
+      "system": {
+        "slug": "shove-uppercut",
+        "section": "The Strongest Hero",
+        "sortOrder": 27,
+        "image": "/The Strongest Battlegrounds/Techniques/shove-uppercut.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Headwalk Uppercut",
+        "howToPerform": null,
+        "cardSummary": "A flair-only uppercut off a headwalk that launches the opponent further than normal."
+      },
+      "system": {
+        "slug": "headwalk-uppercut",
+        "section": "The Strongest Hero",
+        "sortOrder": 28,
+        "image": "/The Strongest Battlegrounds/Techniques/headwalk-uppercut.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uppercut Shove Tech",
+        "howToPerform": null,
+        "cardSummary": "An M1 reset built around Uppercut plus shove for extra damage."
+      },
+      "system": {
+        "slug": "uppercut-shove-tech",
+        "section": "The Strongest Hero",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shove Upper Extender",
+        "howToPerform": "Make sure to be close to the opponent and do 3m1s. Do a shove afterwards, while holding jump to mini uppercut them. As soon as the opponent goes in the air, loop dash towards them. Side dash once they fall to make the co",
+        "cardSummary": "Three M1s, shove, then a held-jump mini uppercut: an Uppercut Dash with a shove's damage baked in."
+      },
+      "system": {
+        "slug": "shove-upper-extender",
+        "section": "The Strongest Hero",
+        "sortOrder": 30,
+        "image": "/The Strongest Battlegrounds/Techniques/shove-upper-extender.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Twisted Dash",
+        "howToPerform": "To perform the twisted dash, you need to land the forward dash ASAP. Sometimes (almost always) you need to go backward a little bit before dashing",
+        "cardSummary": "A forward dash the frame the fourth M1 lands, cutting the opponent's knockback so the combo continues."
+      },
+      "system": {
+        "slug": "twisted-dash",
+        "section": "Hero Hunter",
+        "sortOrder": 31,
+        "image": "/The Strongest Battlegrounds/Techniques/twisted-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Surf Tech",
+        "howToPerform": "Perform 3 M1s turn around while doing Hunter's Grasp and hold the W key.",
+        "cardSummary": "Three M1s, turn around mid Hunter's Grasp, and hold forward: the grasp carries you surfing along with the target."
+      },
+      "system": {
+        "slug": "surf-tech",
+        "section": "Hero Hunter",
+        "sortOrder": 32,
+        "image": "/The Strongest Battlegrounds/Techniques/surf-tech.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lethal Dash Extender",
+        "howToPerform": "Right after using Lethal Whirlwind Stream, forward dash in a circle to hit your forward dash as EARLY AS POSSIBLE, when you land your dash, they should take less knockback and be within side dash reach to combo extend.",
+        "cardSummary": "Loop a forward dash immediately after Lethal Whirlwind Stream to catch the target before they escape."
+      },
+      "system": {
+        "slug": "lethal-dash-extender",
+        "section": "Hero Hunter",
+        "sortOrder": 33,
+        "image": "/The Strongest Battlegrounds/Techniques/lethal-dash-extender.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Whirlwind flick-dash",
+        "howToPerform": null,
+        "cardSummary": "The flick-input version of the Whirlwind dash: same extension, simpler motion."
+      },
+      "system": {
+        "slug": "whirlwind-flick-dash",
+        "section": "Hero Hunter",
+        "sortOrder": 34,
+        "image": "/The Strongest Battlegrounds/Techniques/whirlwind-flick-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Kyoto",
+        "howToPerform": "To perform the Kyoto tech, you need to side dash or backdash cancel ASAP after flowing water to catch them with Lethal Whirlwind Stream.",
+        "cardSummary": "Side dash the instant Flowing Water ends to sweep the target into Lethal Whirlwind Stream."
+      },
+      "system": {
+        "slug": "kyoto",
+        "section": "Hero Hunter",
+        "sortOrder": 35,
+        "image": "/The Strongest Battlegrounds/Techniques/kyoto.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Reverse Kyoto",
+        "howToPerform": null,
+        "cardSummary": "Land Lethal Whirlwind on an airborne ragdolled target to reverse the Kyoto sequence."
+      },
+      "system": {
+        "slug": "reverse-kyoto",
+        "section": "Hero Hunter",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Skyoto",
+        "howToPerform": null,
+        "cardSummary": "An easier aerial entry into Kyoto that works even on descending targets."
+      },
+      "system": {
+        "slug": "skyoto",
+        "section": "Hero Hunter",
+        "sortOrder": 37,
+        "image": "/The Strongest Battlegrounds/Techniques/skyoto.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Countering a Counter",
+        "howToPerform": "Simply backdash during the small window before you get ragdolled by Prey's Peril to dodge and counter their counter (has to be the last hit to be inescapable with Prey's Peril). Note that you can also use unblockable mov",
+        "cardSummary": "Backdash during the tiny window before Prey's Peril ragdolls you to dodge the counter and punish it."
+      },
+      "system": {
+        "slug": "countering-a-counter",
+        "section": "Hero Hunter",
+        "sortOrder": 38,
+        "image": "/The Strongest Battlegrounds/Techniques/countering-a-counter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Uppercut Grasp",
+        "howToPerform": "To perform this tech you need to do 3 M1s + jump + mini uppercut + hunter's grasp.",
+        "cardSummary": "Three M1s, jump, mini uppercut, then Hunter's Grasp: the fastest reliable grasp confirm."
+      },
+      "system": {
+        "slug": "uppercut-grasp",
+        "section": "Hero Hunter",
+        "sortOrder": 39,
+        "image": "/The Strongest Battlegrounds/Techniques/uppercut-grasp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grasp Punch",
+        "howToPerform": null,
+        "cardSummary": "A punch timed to freeze an opponent's knockback mid-flight from Hunter's Grasp."
+      },
+      "system": {
+        "slug": "grasp-punch",
+        "section": "Hero Hunter",
+        "sortOrder": 40,
+        "image": "/The Strongest Battlegrounds/Techniques/grasp-punch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Webby Smash",
+        "howToPerform": null,
+        "cardSummary": "Bounce Lethal Whirlwind Stream off a fence or wall to throw the target at an unexpected angle."
+      },
+      "system": {
+        "slug": "webby-smash",
+        "section": "Hero Hunter",
+        "sortOrder": 41,
+        "image": "/The Strongest Battlegrounds/Techniques/webby-smash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Curve Dash",
+        "howToPerform": null,
+        "cardSummary": "Four M1s, side dash behind the falling opponent, then an ability from the blind side."
+      },
+      "system": {
+        "slug": "curve-dash",
+        "section": "Hero Hunter",
+        "sortOrder": 42,
+        "image": "/The Strongest Battlegrounds/Techniques/curve-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Peril Twist",
+        "howToPerform": null,
+        "cardSummary": "Turn around during Prey's Peril's final punch so the knockback lands where your combo continues."
+      },
+      "system": {
+        "slug": "peril-twist",
+        "section": "Hero Hunter",
+        "sortOrder": 43,
+        "image": "/The Strongest Battlegrounds/Techniques/peril-twist.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flowing Dash",
+        "howToPerform": "After the final hit of flowing water front dash ASAP in a zigzag.",
+        "cardSummary": "Zigzag a forward dash the moment Flowing Water ends to keep the M1 string alive."
+      },
+      "system": {
+        "slug": "flowing-dash",
+        "section": "Hero Hunter",
+        "sortOrder": 44,
+        "image": "/The Strongest Battlegrounds/Techniques/flowing-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Samdak Grasp",
+        "howToPerform": null,
+        "cardSummary": "A timing that fits Hunter's Grasp in after a string it normally cannot follow."
+      },
+      "system": {
+        "slug": "samdak-grasp",
+        "section": "Hero Hunter",
+        "sortOrder": 45,
+        "image": "/The Strongest Battlegrounds/Techniques/samdak-grasp.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hamster Wheel",
+        "howToPerform": null,
+        "cardSummary": "A ping-dependent Kyoto shortcut that only really lands on high-latency opponents."
+      },
+      "system": {
+        "slug": "hamster-wheel",
+        "section": "Hero Hunter",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Water Stream True Extender",
+        "howToPerform": null,
+        "cardSummary": "A true extender off Water Stream Cutting Fist that opens guaranteed follow-up combos."
+      },
+      "system": {
+        "slug": "water-stream-true-extender",
+        "section": "Hero Hunter",
+        "sortOrder": 47,
+        "image": "/The Strongest Battlegrounds/Techniques/water-stream-true-extender.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Swirl Tech",
+        "howToPerform": null,
+        "cardSummary": "Kyoto in reverse: Lethal Whirlwind first, then Flowing Water as they drop."
+      },
+      "system": {
+        "slug": "swirl-tech",
+        "section": "Hero Hunter",
+        "sortOrder": 48,
+        "image": "/The Strongest Battlegrounds/Techniques/swirl-tech.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Monster brr brr patapim",
+        "howToPerform": null,
+        "cardSummary": "A Monster Form sequence tech named after the meme, chaining form moves into a loop."
+      },
+      "system": {
+        "slug": "monster-brr-brr-patapim",
+        "section": "Monster Form",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Whirl Dive",
+        "howToPerform": null,
+        "cardSummary": "Doom Dive canceled straight into Crimson Whirl with no recovery gap."
+      },
+      "system": {
+        "slug": "whirl-dive",
+        "section": "Monster Form",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crowd Buster M1 Reset",
+        "howToPerform": null,
+        "cardSummary": "A Monster Form M1 reset discovered off Crowd Buster's recovery."
+      },
+      "system": {
+        "slug": "crowd-buster-m1-reset",
+        "section": "Monster Form",
+        "sortOrder": 51,
+        "image": "/The Strongest Battlegrounds/Techniques/crowd-buster-m1-reset.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lore Tech / Lore Combo",
+        "howToPerform": null,
+        "cardSummary": "Monster Form's parallel to the Lethal Whirlwind extension, run through its own kit."
+      },
+      "system": {
+        "slug": "lore-tech-lore-combo",
+        "section": "Monster Form",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Regressor Tech / Binding Cloth M1 Reset",
+        "howToPerform": null,
+        "cardSummary": "Binding Cloth into a small loop dash for an instant M1 reset."
+      },
+      "system": {
+        "slug": "regressor-tech-binding-cloth-m1-reset",
+        "section": "Monster Form",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Instant Binding Tech",
+        "howToPerform": null,
+        "cardSummary": "An instant M1 extension straight out of Binding Cloth."
+      },
+      "system": {
+        "slug": "instant-binding-tech",
+        "section": "Monster Form",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Doom Hammer Heel Technique",
+        "howToPerform": null,
+        "cardSummary": "A Monster Form link from Hammer Heel into a continued combo."
+      },
+      "system": {
+        "slug": "doom-hammer-heel-technique",
+        "section": "Monster Form",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wrathful Beatdown",
+        "howToPerform": null,
+        "cardSummary": "An extended Monster Form beatdown string built from its core moves."
+      },
+      "system": {
+        "slug": "wrathful-beatdown",
+        "section": "Monster Form",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Wheel Launcher",
+        "howToPerform": "Right when you land hammer heel aim at a 45+ degree angle (Your choice as long as it doesn't reduce the damage) and when you're about to throw the opponent quickly look straight backwards, hold M1 side dash and downslam.",
+        "cardSummary": "Hammer Heel aimed 45 degrees upward converts into a launcher without losing damage."
+      },
+      "system": {
+        "slug": "crimson-wheel-launcher",
+        "section": "Monster Form",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Weaving Cloth Combo",
+        "howToPerform": "Start the combo by doing an uppercut followed by a jump and Binding Cloth. While you are using Binding Cloth, hold down the jump button and use the aerial variant of Hammer Heel. *see here if they use evasive* After the ",
+        "cardSummary": "Uppercut, jump, Binding Cloth, then weave M1s while the cloth holds them."
+      },
+      "system": {
+        "slug": "weaving-cloth-combo",
+        "section": "Monster Form",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Binding Dive",
+        "howToPerform": "After hitting the first dive of Doom Dive (2nd press), align your position so that the 3rd press will land short of your opponent but will still cause them to roll. Before the third press of Doom Dive (1), use Binding Cl",
+        "cardSummary": "Position Doom Dive's third hit short of the target so the landing combos instead of scattering."
+      },
+      "system": {
+        "slug": "binding-dive",
+        "section": "Monster Form",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Crimson Whirl Is Overrated",
+        "howToPerform": "Instead of using Hammer Heel while facing towards the opponent, look to the left around 70 to 90 degrees. Side dash and run towards your opponent shortly before performing a forward dash. If the opponent is on the ground",
+        "cardSummary": "Face 70 to 90 degrees off-target during Hammer Wheel so the forward dash connects cleanly after."
+      },
+      "system": {
+        "slug": "crimson-whirl-is-overrated",
+        "section": "Monster Form",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ignition Dash",
+        "howToPerform": null,
+        "cardSummary": "Turn around mid Ignition Burst so both its startup and finisher hits land on the same target."
+      },
+      "system": {
+        "slug": "ignition-dash",
+        "section": "Destructive Cyborg",
+        "sortOrder": 61,
+        "image": "/The Strongest Battlegrounds/Techniques/ignition-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "26.5% Ignition M1 Reset",
+        "howToPerform": null,
+        "cardSummary": "An Ignition Dash adjusted into a full M1 reset at a stated 26.5 percent success rate."
+      },
+      "system": {
+        "slug": "26-5-ignition-m1-reset",
+        "section": "Destructive Cyborg",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coward Catcher",
+        "howToPerform": "Very simple, just hold m1 while doing Ignition Burst like the 's Shove Dash tech.",
+        "cardSummary": "Hold M1 through Ignition Burst to snag opponents who run from the wind-up; strictly situational."
+      },
+      "system": {
+        "slug": "coward-catcher",
+        "section": "Destructive Cyborg",
+        "sortOrder": 63,
+        "image": "/The Strongest Battlegrounds/Techniques/coward-catcher.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Explosive Shot Blitz",
+        "howToPerform": null,
+        "cardSummary": "An M1 extension threaded off Blitz Shot's knockback."
+      },
+      "system": {
+        "slug": "explosive-shot-blitz",
+        "section": "Destructive Cyborg",
+        "sortOrder": 64,
+        "image": "/The Strongest Battlegrounds/Techniques/explosive-shot-blitz.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Air Burst",
+        "howToPerform": null,
+        "cardSummary": "An Ignition Dash with a mini uppercut mixed in, catching targets at air height."
+      },
+      "system": {
+        "slug": "air-burst",
+        "section": "Destructive Cyborg",
+        "sortOrder": 65,
+        "image": "/The Strongest Battlegrounds/Techniques/air-burst.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Air Burst Extend",
+        "howToPerform": null,
+        "cardSummary": "The Air Burst variant that skips the finisher hit so the M1 string keeps going."
+      },
+      "system": {
+        "slug": "air-burst-extend",
+        "section": "Destructive Cyborg",
+        "sortOrder": 66,
+        "image": "/The Strongest Battlegrounds/Techniques/air-burst-extend.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ignition Blitz",
+        "howToPerform": null,
+        "cardSummary": "Blitz Shot into Ignition Burst as a two-move extension."
+      },
+      "system": {
+        "slug": "ignition-blitz",
+        "section": "Destructive Cyborg",
+        "sortOrder": 67,
+        "image": "/The Strongest Battlegrounds/Techniques/ignition-blitz.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ignition Burst Wall Boost",
+        "howToPerform": null,
+        "cardSummary": "Complex movement that rides Ignition Burst up walls for absurd vertical distance."
+      },
+      "system": {
+        "slug": "ignition-burst-wall-boost",
+        "section": "Destructive Cyborg",
+        "sortOrder": 68,
+        "image": "/The Strongest Battlegrounds/Techniques/ignition-burst-wall-boost.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wall Combo Bug",
+        "howToPerform": "You need to spam the 4 move after the fourth m1, and once the startup plays, forward dash.",
+        "cardSummary": "A glitch: spam the fourth move after your fourth M1 and forward dash on its startup to wall-combo mid-skill."
+      },
+      "system": {
+        "slug": "wall-combo-bug",
+        "section": "Destructive Cyborg",
+        "sortOrder": 69,
+        "image": "/The Strongest Battlegrounds/Techniques/wall-combo-bug.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Heavens Rhythm",
+        "howToPerform": "To perform Heavens Rhythm, use Ignition Burst on a ragdolled/blocking player, and quickly use a shortened Blitz Shot (hold for a short period instead of a simple tap). This will ragdoll the player out of the roll which c",
+        "cardSummary": "Ignition Burst on a ragdolled or blocking player, followed instantly, to keep them locked in the rhythm."
+      },
+      "system": {
+        "slug": "heavens-rhythm",
+        "section": "Destructive Cyborg",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Uppercut Flick 2: The Sequel",
+        "howToPerform": "To perform Uppercut Flick 2: The Sequel (or UF2 for short), the player must angle their camera in such a way that when they dash, they can press shiftlock to reangle their dash straight under their opponent. You have to ",
+        "cardSummary": "An angled-camera version of the Uppercut Flick built for this kit's dashes."
+      },
+      "system": {
+        "slug": "uppercut-flick-2-the-sequel",
+        "section": "Destructive Cyborg",
+        "sortOrder": 71,
+        "image": "/The Strongest Battlegrounds/Techniques/uppercut-flick-2-the-sequel.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fourfold Rebound",
+        "howToPerform": null,
+        "cardSummary": "Dash timing off Fourfold Flashstrike that reopens the M1 string."
+      },
+      "system": {
+        "slug": "fourfold-rebound",
+        "section": "Deadly Ninja",
+        "sortOrder": 72,
+        "image": "/The Strongest Battlegrounds/Techniques/fourfold-rebound.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Flash Strike Tech",
+        "howToPerform": "Make your opponent go in a rolling state, then jump, use Flash Strike and side dash to catch your opponent.",
+        "cardSummary": "Force a roll, jump, Flash Strike, then side dash to meet the target on the other side."
+      },
+      "system": {
+        "slug": "the-flash-strike-tech",
+        "section": "Deadly Ninja",
+        "sortOrder": 73,
+        "image": "/The Strongest Battlegrounds/Techniques/the-flash-strike-tech.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Explosive Flash Strike",
+        "howToPerform": "Start with 4 M1s then use explosive shuriken ASAP as soon as you knock them away with the fourth M1, this will fling them up and back in a rolling state, then time your Flash Strike to them at the perfect range to combo ",
+        "cardSummary": "Four M1s into an instant Explosive Shuriken, then Flash Strike to chase the knockback."
+      },
+      "system": {
+        "slug": "explosive-flash-strike",
+        "section": "Deadly Ninja",
+        "sortOrder": 74,
+        "image": "/The Strongest Battlegrounds/Techniques/explosive-flash-strike.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shuri Scatter",
+        "howToPerform": "Preform 3 M1 into a mini uppercut. Once they opponent is around body level use Explosive Shuriken, and then immediately use Scatter. This will catch them mid-air in your Scatter, or depending on your timing will catch th",
+        "cardSummary": "Three M1s, mini uppercut, then Explosive Shuriken at body height with Scatter as the follow-up."
+      },
+      "system": {
+        "slug": "shuri-scatter",
+        "section": "Deadly Ninja",
+        "sortOrder": 75,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "ALL UR HP R BELONG TO ME",
+        "howToPerform": "You need to use 4 m1s while moving forward. then once you close around 10-15% of the gap (estimate, not accurate) by walking forward, jump and use explosive shuriken. if done correctly, the shuriken should land behind th",
+        "cardSummary": "Four advancing M1s into a gap-close that claims most of the health bar when the spacing lands."
+      },
+      "system": {
+        "slug": "all-ur-hp-r-belong-to-me",
+        "section": "Deadly Ninja",
+        "sortOrder": 76,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flash Dunk",
+        "howToPerform": "First, cause rolling via either an m1 shove or a front dash close to the target. As soon as possible, jump and use Flash Strike. This will sometimes cause the target to get slight knockback, and other times will result i",
+        "cardSummary": "Cause a roll, then dunk them out of the air with a timed follow-up before the roll ends."
+      },
+      "system": {
+        "slug": "flash-dunk",
+        "section": "Deadly Ninja",
+        "sortOrder": 77,
+        "image": "/The Strongest Battlegrounds/Techniques/flash-dunk.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Explosive Elevation Roll",
+        "howToPerform": "First, knock down the opponent by any means, and force them into the ragdoll state. Then, as long as they are any amount higher than you, throw a normal variant shuriken at their body. It should launch them up, and allow",
+        "cardSummary": "Knock the opponent into ragdoll below you and the elevation difference converts into a rolling state you can chase."
+      },
+      "system": {
+        "slug": "explosive-elevation-roll",
+        "section": "Deadly Ninja",
+        "sortOrder": 78,
+        "image": "/The Strongest Battlegrounds/Techniques/explosive-elevation-roll.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shuriken Fling Grab",
+        "howToPerform": null,
+        "cardSummary": "An air-variant shuriken caught into a grab for the extension."
+      },
+      "system": {
+        "slug": "shuriken-fling-grab",
+        "section": "Deadly Ninja",
+        "sortOrder": 79,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Whirlwind Slam",
+        "howToPerform": null,
+        "cardSummary": "An Upside Down Ragdoll cousin executed through this kit's slam."
+      },
+      "system": {
+        "slug": "whirlwind-slam",
+        "section": "Deadly Ninja",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Super Cool Tech to Amaze Your Friends However it's Pretty...",
+        "howToPerform": null,
+        "cardSummary": "An air-shuriken experiment that became a legitimate extension, name and all."
+      },
+      "system": {
+        "slug": "super-cool-tech-to-amaze-your-friends-however-it-s-pretty",
+        "section": "Deadly Ninja",
+        "sortOrder": 81,
+        "image": "/The Strongest Battlegrounds/Techniques/super-cool-tech-to-amaze-your-friends-however-it-s-pretty.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coward catcher Deadly Ninja variant",
+        "howToPerform": null,
+        "cardSummary": "The kit's Coward Catcher variant for punishing runners."
+      },
+      "system": {
+        "slug": "coward-catcher-deadly-ninja-variant",
+        "section": "Deadly Ninja",
+        "sortOrder": 82,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Homerun Loop",
+        "howToPerform": null,
+        "cardSummary": "An M1 extension after a non-airborne Homerun."
+      },
+      "system": {
+        "slug": "homerun-loop",
+        "section": "Brutal Demon",
+        "sortOrder": 83,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Versatile Slam",
+        "howToPerform": null,
+        "cardSummary": "Grand Slam spaced so its landing hit meets the target exactly as they recover."
+      },
+      "system": {
+        "slug": "versatile-slam",
+        "section": "Brutal Demon",
+        "sortOrder": 84,
+        "image": "/The Strongest Battlegrounds/Techniques/versatile-slam.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Foul Ball Rebound",
+        "howToPerform": null,
+        "cardSummary": "Foul Ball's rock used as a knockback tool that tees up either extension route."
+      },
+      "system": {
+        "slug": "foul-ball-rebound",
+        "section": "Brutal Demon",
+        "sortOrder": 85,
+        "image": "/The Strongest Battlegrounds/Techniques/foul-ball-rebound.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Foul Homerun",
+        "howToPerform": null,
+        "cardSummary": "An input that makes Foul Ball into Homerun a guaranteed true link."
+      },
+      "system": {
+        "slug": "foul-homerun",
+        "section": "Brutal Demon",
+        "sortOrder": 86,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Batter's Pitch",
+        "howToPerform": null,
+        "cardSummary": "Angling Foul Ball upward rides gravity to throw the rock much further than normal."
+      },
+      "system": {
+        "slug": "batter-s-pitch",
+        "section": "Brutal Demon",
+        "sortOrder": 87,
+        "image": "/The Strongest Battlegrounds/Techniques/batter-s-pitch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Foul Spinback",
+        "howToPerform": null,
+        "cardSummary": "A release timing that widens Foul Ball's effective rock hitbox."
+      },
+      "system": {
+        "slug": "foul-spinback",
+        "section": "Brutal Demon",
+        "sortOrder": 88,
+        "image": "/The Strongest Battlegrounds/Techniques/foul-spinback.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chicken Jockey",
+        "howToPerform": null,
+        "cardSummary": "Ragdoll via four M1s, then mount for the ride-along beatdown the name promises."
+      },
+      "system": {
+        "slug": "chicken-jockey",
+        "section": "Brutal Demon",
+        "sortOrder": 89,
+        "image": "/The Strongest Battlegrounds/Techniques/chicken-jockey.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Inescapable Grab",
+        "howToPerform": null,
+        "cardSummary": "A grab setup that lands guaranteed damage even through the Evasive ability."
+      },
+      "system": {
+        "slug": "inescapable-grab",
+        "section": "Brutal Demon",
+        "sortOrder": 90,
+        "image": "/The Strongest Battlegrounds/Techniques/inescapable-grab.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stay Down",
+        "howToPerform": null,
+        "cardSummary": "Uses the kit's final M1 as a downslam substitute, minus the escape window a real downslam grants."
+      },
+      "system": {
+        "slug": "stay-down",
+        "section": "Brutal Demon",
+        "sortOrder": 91,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Foul Play",
+        "howToPerform": null,
+        "cardSummary": "A Foul Ball follow-up window that converts the rock hit into pressure."
+      },
+      "system": {
+        "slug": "foul-play",
+        "section": "Brutal Demon",
+        "sortOrder": 92,
+        "image": "/The Strongest Battlegrounds/Techniques/foul-play.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Unstoppable Homerun",
+        "howToPerform": null,
+        "cardSummary": "A Homerun timing variant for keeping the bat pressure unbroken."
+      },
+      "system": {
+        "slug": "unstoppable-homerun",
+        "section": "Brutal Demon",
+        "sortOrder": 93,
+        "image": "/The Strongest Battlegrounds/Techniques/unstoppable-homerun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "World WACKIEST Wall Extend!",
+        "howToPerform": null,
+        "cardSummary": "Grand Slam into an instant dash at a wall for a wall-combo extension."
+      },
+      "system": {
+        "slug": "world-wackiest-wall-extend",
+        "section": "Brutal Demon",
+        "sortOrder": 94,
+        "image": "/The Strongest Battlegrounds/Techniques/world-wackiest-wall-extend.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Foul Extend",
+        "howToPerform": null,
+        "cardSummary": "Foul Ball, instant side dash, then Beatdown before the target settles."
+      },
+      "system": {
+        "slug": "foul-extend",
+        "section": "Brutal Demon",
+        "sortOrder": 95,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Homerun Extend",
+        "howToPerform": null,
+        "cardSummary": "Homerun, side dash, then Grand Slam to keep swinging."
+      },
+      "system": {
+        "slug": "homerun-extend",
+        "section": "Brutal Demon",
+        "sortOrder": 96,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Slow-Mo Foul",
+        "howToPerform": null,
+        "cardSummary": "Hold the third M1 into a no-leap Foul Ball for a slow-motion true link."
+      },
+      "system": {
+        "slug": "slow-mo-foul",
+        "section": "Brutal Demon",
+        "sortOrder": 97,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Precision Cut",
+        "howToPerform": null,
+        "cardSummary": "A Pinpoint Cut placement that turns the combo inescapable."
+      },
+      "system": {
+        "slug": "precision-cut",
+        "section": "Blade Master",
+        "sortOrder": 98,
+        "image": "/The Strongest Battlegrounds/Techniques/precision-cut.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Back to Back",
+        "howToPerform": null,
+        "cardSummary": "Quick Slice woven back-to-back with M1s for the damage stack."
+      },
+      "system": {
+        "slug": "back-to-back",
+        "section": "Blade Master",
+        "sortOrder": 99,
+        "image": "/The Strongest Battlegrounds/Techniques/back-to-back.png"
+      }
+    },
+    {
+      "item": {
+        "name": "freshfrenchfries Tech",
+        "howToPerform": null,
+        "cardSummary": "Aerial Pinpoint Cut landed even on ragdolled targets for the extension."
+      },
+      "system": {
+        "slug": "freshfrenchfries-tech",
+        "section": "Blade Master",
+        "sortOrder": 100,
+        "image": "/The Strongest Battlegrounds/Techniques/freshfrenchfries-tech.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Phantom Cleave",
+        "howToPerform": null,
+        "cardSummary": "Answer an enemy Ultimate with an instant Atmos Cleave punish."
+      },
+      "system": {
+        "slug": "phantom-cleave",
+        "section": "Blade Master",
+        "sortOrder": 101,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "True Fire Slam",
+        "howToPerform": null,
+        "cardSummary": "Fire slam threaded inside an M1 string rather than after it."
+      },
+      "system": {
+        "slug": "true-fire-slam",
+        "section": "Blade Master",
+        "sortOrder": 102,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Double Fireslam",
+        "howToPerform": null,
+        "cardSummary": "Triggers the downslam passive twice in one sequence for maximum damage."
+      },
+      "system": {
+        "slug": "double-fireslam",
+        "section": "Blade Master",
+        "sortOrder": 103,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "pinpoint cut tech so cool",
+        "howToPerform": null,
+        "cardSummary": "Pinpoint Cut into a walk-up, the kit's version of the uppercut extender."
+      },
+      "system": {
+        "slug": "pinpoint-cut-tech-so-cool",
+        "section": "Blade Master",
+        "sortOrder": 104,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Kusho Dodge",
+        "howToPerform": null,
+        "cardSummary": "A movement pattern that dodges Atomic Slash entirely without spending ragdoll cancel."
+      },
+      "system": {
+        "slug": "kusho-dodge",
+        "section": "Blade Master",
+        "sortOrder": 105,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Green",
+        "howToPerform": null,
+        "cardSummary": "A perfected setup known simply as Green: the kit's signature true extension."
+      },
+      "system": {
+        "slug": "green",
+        "section": "Wild Psychic",
+        "sortOrder": 106,
+        "image": "/The Strongest Battlegrounds/Techniques/green.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Windstorm Dash",
+        "howToPerform": null,
+        "cardSummary": "One M1 and a forward dash off Windstorm Fury reopens the string."
+      },
+      "system": {
+        "slug": "windstorm-dash",
+        "section": "Wild Psychic",
+        "sortOrder": 107,
+        "image": "/The Strongest Battlegrounds/Techniques/windstorm-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Wind Sage Extender",
+        "howToPerform": null,
+        "cardSummary": "Two M1 extends squeezed from a single Wind Sage usage."
+      },
+      "system": {
+        "slug": "wind-sage-extender",
+        "section": "Wild Psychic",
+        "sortOrder": 108,
+        "image": "/The Strongest Battlegrounds/Techniques/wind-sage-extender.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Meteoric Smash",
+        "howToPerform": null,
+        "cardSummary": "Cosmic Strike into Terrible Tornado arranged into an inescapable sequence."
+      },
+      "system": {
+        "slug": "meteoric-smash",
+        "section": "Wild Psychic",
+        "sortOrder": 109,
+        "image": "/The Strongest Battlegrounds/Techniques/meteoric-smash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Expulsive Catch",
+        "howToPerform": null,
+        "cardSummary": "A Windstorm catch popularized by the YouTuber Loppy, converting the pull into a held combo."
+      },
+      "system": {
+        "slug": "expulsive-catch",
+        "section": "Wild Psychic",
+        "sortOrder": 110,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tornado Flow",
+        "howToPerform": null,
+        "cardSummary": "Windstorm Fury into an easy M1 reset flow."
+      },
+      "system": {
+        "slug": "tornado-flow",
+        "section": "Wild Psychic",
+        "sortOrder": 111,
+        "image": "/The Strongest Battlegrounds/Techniques/tornado-flow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Skibidi Coffin",
+        "howToPerform": null,
+        "cardSummary": "An M1 shove setup that makes Stone Coffin a true extension."
+      },
+      "system": {
+        "slug": "skibidi-coffin",
+        "section": "Wild Psychic",
+        "sortOrder": 112,
+        "image": "/The Strongest Battlegrounds/Techniques/skibidi-coffin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "bonk",
+        "howToPerform": null,
+        "cardSummary": "Psychic Ricochet comboed straight out of a landed Cosmic Strike."
+      },
+      "system": {
+        "slug": "bonk",
+        "section": "Wild Psychic",
+        "sortOrder": 113,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Get back here",
+        "howToPerform": null,
+        "cardSummary": "The recovery net for a failed Uppercut Dash: a pull that drags the escapee back in."
+      },
+      "system": {
+        "slug": "get-back-here",
+        "section": "Wild Psychic",
+        "sortOrder": 114,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Triple Slam",
+        "howToPerform": null,
+        "cardSummary": "Three consecutive slams chained for the extra damage."
+      },
+      "system": {
+        "slug": "triple-slam",
+        "section": "Wild Psychic",
+        "sortOrder": 115,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Airborne Grab",
+        "howToPerform": null,
+        "cardSummary": "Three M1s, uppercut, headwalk, then Crushing Pull from above."
+      },
+      "system": {
+        "slug": "airborne-grab",
+        "section": "Wild Psychic",
+        "sortOrder": 116,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Head First M1 Reset",
+        "howToPerform": "this: Use Head First, face yourself, spam Front Dash, and the moment you front dash, enable shift-lock to turn around and hit the enemy. An easier variant is to do a downslam after and loop dash, but that cannot be reset",
+        "cardSummary": "Head First converted into an M1 reset through a shiftlock-timed front dash."
+      },
+      "system": {
+        "slug": "head-first-m1-reset",
+        "section": "Martial Artist",
+        "sortOrder": 117,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Whirlwind Kick",
+        "howToPerform": "this: Hold M1 whilst using Vanishing Kick, and when your M1 connects, use Whirlwind Drop. Wait and use Vanishing Kick again.",
+        "cardSummary": "Hold M1 through Vanishing Kick and Whirlwind Drop becomes safe on hit."
+      },
+      "system": {
+        "slug": "whirlwind-kick",
+        "section": "Martial Artist",
+        "sortOrder": 118,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Whirlwind Stop",
+        "howToPerform": "this: Jump and M1 whilst going onto the enemy's head, using Whirlwind Drop immediately. Same methodology as the Hunter's Grasp uppercut. Once performed, do a front dash or another move as a surprise.",
+        "cardSummary": "A headwalk Whirlwind Drop that trades the fling for an M1 reset or ambush."
+      },
+      "system": {
+        "slug": "whirlwind-stop",
+        "section": "Martial Artist",
+        "sortOrder": 119,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rockstar Reset",
+        "howToPerform": "this: Use Bullet Barrage, and right as they begin rolling your Head First must connect. Face the direction they began rolling and spam Front Dash. Do it correctly and you earned a free reset.",
+        "cardSummary": "The iconic 1-4 combo rebuilt into a true M1 reset via a rolling Head First link."
+      },
+      "system": {
+        "slug": "rockstar-reset",
+        "section": "Martial Artist",
+        "sortOrder": 120,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Draconic Supa",
+        "howToPerform": "this: Perform a dragon uppercut at a 45 degree angle to an opponent whilst walking into them. Shiftlock setting does not matter.",
+        "cardSummary": "A 45-degree dragon uppercut while walking into the target flings you both, the Supa tech in draconic form."
+      },
+      "system": {
+        "slug": "draconic-supa",
+        "section": "Martial Artist",
+        "sortOrder": 121,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Supa Splitting Strike",
+        "howToPerform": "this: Perform a Draconic Supa and use Earth Splitting Strike at about 3/4 of the total height. Turn the camera around to move the shockwave to where the dragon is. Do it correctly and it will automatically hit.",
+        "cardSummary": "Draconic Supa capped with Earth Splitting Strike at three quarters of the flight's height."
+      },
+      "system": {
+        "slug": "supa-splitting-strike",
+        "section": "Martial Artist",
+        "sortOrder": 122,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Draconic Fissure",
+        "howToPerform": "this: Perform a dragon uppercut, Side Dash left, face left, and summon Grand Fissure right as the dragon thrashes left.",
+        "cardSummary": "Dragon uppercut, side dash left, then Grand Fissure summoned to meet the falling target."
+      },
+      "system": {
+        "slug": "draconic-fissure",
+        "section": "Martial Artist",
+        "sortOrder": 123,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fissure Fangs",
+        "howToPerform": "this: Perform a Draconic Fissure. When the second plate falls, immediately use Twin Fangs. Use Earth Splitting Strike as backup. Doing it correctly should either kill or leave the opponent with 1 HP.",
+        "cardSummary": "Draconic Fissure into an immediate Twin Fangs when the second plate drops: the kit's instant-kill line."
+      },
+      "system": {
+        "slug": "fissure-fangs",
+        "section": "Martial Artist",
+        "sortOrder": 124,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Draconic Barrage",
+        "howToPerform": "this: Peform a dragon uppercut on the absolute left of the player, Side Dash left, and peform a Backdash-Cancelled Bullet Barrage facing the way the player will be flung.",
+        "cardSummary": "Uppercut passive converted into a full Bullet Barrage from the left side."
+      },
+      "system": {
+        "slug": "draconic-barrage",
+        "section": "Martial Artist",
+        "sortOrder": 125,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dragon Drop",
+        "howToPerform": "this: Perform a dragon uppercut, Side Dash 10 degrees clockwise to the left, and use Whirlwind Drop when the dragon thrashes to the right. If done correctly, the opponent will be thrusted into the air. Follow up with any",
+        "cardSummary": "The uppercut passive turned into an extender using Whirlwind, no Vanishing Kick needed."
+      },
+      "system": {
+        "slug": "dragon-drop",
+        "section": "Martial Artist",
+        "sortOrder": 126,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Draconic Dropkick",
+        "howToPerform": "this: Hit a Vanishing Kick and immediately do a Dragon Drop. Do the Vanishing Kick variant as they hit the floor.",
+        "cardSummary": "Vanishing Kick into an immediate Dragon Drop for the extension."
+      },
+      "system": {
+        "slug": "draconic-dropkick",
+        "section": "Martial Artist",
+        "sortOrder": 127,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rocksupa",
+        "howToPerform": "this: Perform a Draconic Supa and use Vanishing Kick a little later. Aim for the dragon and hold M1.",
+        "cardSummary": "Draconic Supa with a slightly delayed Vanishing Kick aimed at the dragon: unstoppable when timed."
+      },
+      "system": {
+        "slug": "rocksupa",
+        "section": "Martial Artist",
+        "sortOrder": 128,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Draconic Kick",
+        "howToPerform": "this: Perform a dragon uppercut, Side Dash left, and use Vanishing Kick when they get thrown. M1 and Front Dash to continue your combo.",
+        "cardSummary": "Dragon uppercut, side dash left, Vanishing Kick as they come through: a ranked-match discovery."
+      },
+      "system": {
+        "slug": "draconic-kick",
+        "section": "Martial Artist",
+        "sortOrder": 129,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Draconic Head First",
+        "howToPerform": "this: Perform a dragon uppercut, Side Dash left, and Back Dash. Spam Head First and you should be able to connect it.",
+        "cardSummary": "Dragon uppercut into spammed Head First off a back dash for the extension."
+      },
+      "system": {
+        "slug": "draconic-head-first",
+        "section": "Martial Artist",
+        "sortOrder": 130,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Draconic Uppercut Reset",
+        "howToPerform": "this: Perform a dragon uppercut, Side Dash, walk forward, and then Front Dash when they hit the floor.",
+        "cardSummary": "Dragon uppercut, side dash, walk forward, front dash on their landing: a clean M1 reset."
+      },
+      "system": {
+        "slug": "draconic-uppercut-reset",
+        "section": "Martial Artist",
+        "sortOrder": 131,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Whirlwind Headstand Reset",
+        "howToPerform": "this: Perform 4 M1s and immediately use Whirlwind Drop. Adjust your position so they land on your head. Continue M1ing and use a Front Dash.",
+        "cardSummary": "Four M1s into an instant Whirlwind Drop positioned so the target lands on their head, resetting M1s."
+      },
+      "system": {
+        "slug": "whirlwind-headstand-reset",
+        "section": "Martial Artist",
+        "sortOrder": 132,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vanishing Headstand Reset",
+        "howToPerform": "this: Ragdoll your opponent and use Vanishing Kick's variant. Adjust your position so they land on your head. Continue M1ing and use a Front Dash.",
+        "cardSummary": "Vanishing Kick's variant on a ragdolled target, positioned for the headstand landing and reset."
+      },
+      "system": {
+        "slug": "vanishing-headstand-reset",
+        "section": "Martial Artist",
+        "sortOrder": 133,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vanishing Variant",
+        "howToPerform": "this: Perform an M1 Shove and use the Vanishing Kick variant immediately. Side Dash and continue comboing for a true extender.",
+        "cardSummary": "M1 Shove into the Vanishing Kick variant, side dash, and the string continues."
+      },
+      "system": {
+        "slug": "vanishing-variant",
+        "section": "Martial Artist",
+        "sortOrder": 134,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vanishing Trip",
+        "howToPerform": "this: Perform a delayed M1 Shove and use Vanishing Kick. This is counterable, so be careful.",
+        "cardSummary": "A delayed M1 Shove into Vanishing Kick that forces ragdoll on the first hit; counterable, so pick moments."
+      },
+      "system": {
+        "slug": "vanishing-trip",
+        "section": "Martial Artist",
+        "sortOrder": 135,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spiral Strike",
+        "howToPerform": null,
+        "cardSummary": "An extension arranged so the opponent has no counter window at all."
+      },
+      "system": {
+        "slug": "spiral-strike",
+        "section": "Martial Artist",
+        "sortOrder": 136,
+        "image": "/The Strongest Battlegrounds/Techniques/spiral-strike.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Impact Toss",
+        "howToPerform": null,
+        "cardSummary": "Bullet Barrage into a safely spaced Vanishing Kick."
+      },
+      "system": {
+        "slug": "impact-toss",
+        "section": "Martial Artist",
+        "sortOrder": 137,
+        "image": "/The Strongest Battlegrounds/Techniques/impact-toss.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hurl Kick",
+        "howToPerform": null,
+        "cardSummary": "A spacing tool: converts Vanishing Kick into a huge fling for distance or surprise."
+      },
+      "system": {
+        "slug": "hurl-kick",
+        "section": "Martial Artist",
+        "sortOrder": 138,
+        "image": "/The Strongest Battlegrounds/Techniques/hurl-kick.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Vanishing Dash",
+        "howToPerform": null,
+        "cardSummary": "A Vanishing Kick timing that ragdolls unexpectedly mid-approach."
+      },
+      "system": {
+        "slug": "vanishing-dash",
+        "section": "Martial Artist",
+        "sortOrder": 139,
+        "image": "/The Strongest Battlegrounds/Techniques/vanishing-dash.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bullet Barrage+",
+        "howToPerform": null,
+        "cardSummary": "Vanishing Kick woven into Bullet Barrage for its maximum damage ceiling."
+      },
+      "system": {
+        "slug": "bullet-barrage",
+        "section": "Martial Artist",
+        "sortOrder": 140,
+        "image": "/The Strongest Battlegrounds/Techniques/bullet-barrage.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blazing Fist",
+        "howToPerform": null,
+        "cardSummary": "A deliberately disorienting Vanishing Kick extension that scrambles the opponent's read."
+      },
+      "system": {
+        "slug": "blazing-fist",
+        "section": "Martial Artist",
+        "sortOrder": 141,
+        "image": "/The Strongest Battlegrounds/Techniques/blazing-fist.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Breakage Slam",
+        "howToPerform": "this: After ragdolling an opponent, wait a split second before wake up to use Grand Fissure. This will make it so that the moment of wake up causes your opponent to not get launched towards you any further allowing the b",
+        "cardSummary": "Grand Fissure timed a split second before wake-up collects its bonus 25 percent damage."
+      },
+      "system": {
+        "slug": "breakage-slam",
+        "section": "Martial Artist",
+        "sortOrder": 142,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Slam Lift",
+        "howToPerform": "this: After using Vanishing Kick, quickly ragdoll your opponent, recast your Vanishing Kick then use Head First right after it lifts both of you midair. You can use Whirlwind Drop, cancel it midair with recast and then d",
+        "cardSummary": "Vanishing Kick, ragdoll, recast: a flashy lift that confirms into Head First or M1s."
+      },
+      "system": {
+        "slug": "slam-lift",
+        "section": "Martial Artist",
+        "sortOrder": 143,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fissure Loop",
+        "howToPerform": "this: Use Grand Fissure, dash away from it, and turn around to hit the opponent back into the second impact.",
+        "cardSummary": "Grand Fissure with a loop dash that knocks the opponent back into the plates for full damage."
+      },
+      "system": {
+        "slug": "fissure-loop",
+        "section": "Martial Artist",
+        "sortOrder": 144,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fissure Headstand",
+        "howToPerform": "this: Peform an M1 whilst jumping on the opponent's head. Use Grand Fissure whilst on top of them. Follow up with any move.",
+        "cardSummary": "Grand Fissure cast from the opponent's head so knockback never takes them out of it."
+      },
+      "system": {
+        "slug": "fissure-headstand",
+        "section": "Martial Artist",
+        "sortOrder": 145,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Combo Cancel",
+        "howToPerform": "this: While doing a wall combo, you can side dash out of it. This is currently the only character in the game who is ale to do this. This technique allows you to cancel the wall combo and combo extend.",
+        "cardSummary": "Side dashing out of a wall combo, the one clean exit the game allows."
+      },
+      "system": {
+        "slug": "combo-cancel",
+        "section": "Martial Artist",
+        "sortOrder": 146,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bullet Dash",
+        "howToPerform": "this:After doing a Bullet Barrage, wait to fall down and wait for the moment when the target starts rolling, then M1 and forward dash in the direction they rolled in. You need to be very quick for this and keep the m1 as",
+        "cardSummary": "Bullet Barrage, fall, then a forward dash timed to the target's recovery for the reset."
+      },
+      "system": {
+        "slug": "bullet-dash",
+        "section": "Martial Artist",
+        "sortOrder": 147,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Shove Kick Dash",
+        "howToPerform": "this: After 1-2 M1s, use vanishing kick in a loop and hit the opponent, instantly using an M1 after. You can follow up with a dash, another M1 to either ragdoll the player (if you did 2 M1s prior) or keep them stunned (i",
+        "cardSummary": "One or two M1s into a looped Vanishing Kick with an instant follow-up, this kit's Shove Dash."
+      },
+      "system": {
+        "slug": "shove-kick-dash",
+        "section": "Martial Artist",
+        "sortOrder": 148,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "M1 Shove Kick",
+        "howToPerform": null,
+        "cardSummary": "The M1 Shove tech capped with an immediate Vanishing Kick."
+      },
+      "system": {
+        "slug": "m1-shove-kick",
+        "section": "Martial Artist",
+        "sortOrder": 149,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rip Off \"Twisted",
+        "howToPerform": null,
+        "cardSummary": "The kit's take on the Twisted extension, trading the dash timing for its own rhythm."
+      },
+      "system": {
+        "slug": "rip-off-twisted",
+        "section": "Tech Prodigy",
+        "sortOrder": 150,
+        "image": "/The Strongest Battlegrounds/Techniques/rip-off-twisted.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mechanical Loopty Loop Spiral",
+        "howToPerform": null,
+        "cardSummary": "A dash after Trinity Tear that reopens M1s, in the Lethal Dash family."
+      },
+      "system": {
+        "slug": "mechanical-loopty-loop-spiral",
+        "section": "Tech Prodigy",
+        "sortOrder": 151,
+        "image": "/The Strongest Battlegrounds/Techniques/mechanical-loopty-loop-spiral.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Weboom Extend V2",
+        "howToPerform": null,
+        "cardSummary": "A downslam setup that makes Weboom a real extension."
+      },
+      "system": {
+        "slug": "weboom-extend-v2",
+        "section": "Tech Prodigy",
+        "sortOrder": 152,
+        "image": "/The Strongest Battlegrounds/Techniques/weboom-extend-v2.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Downslam Weboom Extend",
+        "howToPerform": null,
+        "cardSummary": "A Weboom placed off a downslam to drain ragdoll cancel or stall for cooldowns."
+      },
+      "system": {
+        "slug": "downslam-weboom-extend",
+        "section": "Tech Prodigy",
+        "sortOrder": 153,
+        "image": "/The Strongest Battlegrounds/Techniques/downslam-weboom-extend.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Twinless",
+        "howToPerform": null,
+        "cardSummary": "An angled Twin Burst that becomes an inescapable extender."
+      },
+      "system": {
+        "slug": "twinless",
+        "section": "Tech Prodigy",
+        "sortOrder": 154,
+        "image": "/The Strongest Battlegrounds/Techniques/twinless.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Explosive Push",
+        "howToPerform": null,
+        "cardSummary": "Downslam while standing directly on top, then the explosive push carries the extension."
+      },
+      "system": {
+        "slug": "explosive-push",
+        "section": "Tech Prodigy",
+        "sortOrder": 155,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rocket Missile",
+        "howToPerform": null,
+        "cardSummary": "The Explosive Push setup angled away instead, sending them into the missile line."
+      },
+      "system": {
+        "slug": "rocket-missile",
+        "section": "Tech Prodigy",
+        "sortOrder": 156,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Air Doom",
+        "howToPerform": null,
+        "cardSummary": "The same downslam setup launched upward into the air variant."
+      },
+      "system": {
+        "slug": "air-doom",
+        "section": "Tech Prodigy",
+        "sortOrder": 157,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tactical DMG chip",
+        "howToPerform": null,
+        "cardSummary": "Tactical Storm into a front dash loop, this kit's DMG chip."
+      },
+      "system": {
+        "slug": "tactical-dmg-chip",
+        "section": "Tech Prodigy",
+        "sortOrder": 158,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spider Snatch",
+        "howToPerform": null,
+        "cardSummary": "Weboom placed behind you plus Trinity Tear drags the ragdolled target through it."
+      },
+      "system": {
+        "slug": "spider-snatch",
+        "section": "Tech Prodigy",
+        "sortOrder": 159,
+        "image": "/The Strongest Battlegrounds/Techniques/spider-snatch.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trinity SLAM",
+        "howToPerform": null,
+        "cardSummary": "Twin Burst angled like Twinless, then Trinity Tear slams the catch."
+      },
+      "system": {
+        "slug": "trinity-slam",
+        "section": "Tech Prodigy",
+        "sortOrder": 160,
+        "image": "/The Strongest Battlegrounds/Techniques/trinity-slam.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dev’s Combo",
+        "howToPerform": null,
+        "cardSummary": "The kit's ultimate-dependent showpiece combo, assembled from its ult toolkit."
+      },
+      "system": {
+        "slug": "dev-s-combo",
+        "section": "Tech Prodigy",
+        "sortOrder": 161,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Property In Egypt",
+        "howToPerform": "Do 2 m1s and on third m1 jump and m1 at the same time, allowing you to get on top of your opponent without them being able to hit you because of the stun from the third m1. Next, aim your Swift Sweep similar to how Fdrfe",
+        "cardSummary": "Two M1s, then jump-M1 on the third to mount their head for an inescapable extension."
+      },
+      "system": {
+        "slug": "property-in-egypt",
+        "section": "KJ",
+        "sortOrder": 162,
+        "image": "/The Strongest Battlegrounds/Techniques/property-in-egypt.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Collateral Extend",
+        "howToPerform": null,
+        "cardSummary": "Front dash after Collateral Ruin converts the roll into a continuation."
+      },
+      "system": {
+        "slug": "collateral-extend",
+        "section": "KJ",
+        "sortOrder": 163,
+        "image": "/The Strongest Battlegrounds/Techniques/collateral-extend.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sending Bro to China Be Like",
+        "howToPerform": "Do 3 m1s and on 4th m1 side dash to the player positio and use \"Swift Sweep\" then land the dummy with forward Dash",
+        "cardSummary": "Third M1, side dash on the fourth, Swift Sweep on landing: the meme-named ranged send-off."
+      },
+      "system": {
+        "slug": "sending-bro-to-china-be-like",
+        "section": "KJ",
+        "sortOrder": 164,
+        "image": "/The Strongest Battlegrounds/Techniques/sending-bro-to-china-be-like.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Swift Turn",
+        "howToPerform": null,
+        "cardSummary": "Turn around after Swift Sweep's first hit and the second hit extends instead of ending."
+      },
+      "system": {
+        "slug": "swift-turn",
+        "section": "KJ",
+        "sortOrder": 165,
+        "image": "/The Strongest Battlegrounds/Techniques/swift-turn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "The Drizzliest Glizzy",
+        "howToPerform": null,
+        "cardSummary": "A mini uppercut into an immediate Swift Sweep, the Swift Reprisal timing."
+      },
+      "system": {
+        "slug": "the-drizzliest-glizzy",
+        "section": "KJ",
+        "sortOrder": 166,
+        "image": "/The Strongest Battlegrounds/Techniques/the-drizzliest-glizzy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Catch This",
+        "howToPerform": null,
+        "cardSummary": "Four M1s and a dash arranged Twisted-style for this kit."
+      },
+      "system": {
+        "slug": "catch-this",
+        "section": "KJ",
+        "sortOrder": 167,
+        "image": "/The Strongest Battlegrounds/Techniques/catch-this.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Twisted",
+        "howToPerform": null,
+        "cardSummary": "A pause after the fourth M1 opens the kit's version of the Twisted extension."
+      },
+      "system": {
+        "slug": "twisted",
+        "section": "Undying Hero",
+        "sortOrder": 168,
+        "image": "/The Strongest Battlegrounds/Techniques/twisted.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grave Maker Loop",
+        "howToPerform": null,
+        "cardSummary": "Grave Maker into a forward dash loop for the continuation."
+      },
+      "system": {
+        "slug": "grave-maker-loop",
+        "section": "Undying Hero",
+        "sortOrder": 169,
+        "image": "/The Strongest Battlegrounds/Techniques/grave-maker-loop.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Blast Breaker Extend",
+        "howToPerform": null,
+        "cardSummary": "A two-version extension off Blast Breaker depending on your melee timing."
+      },
+      "system": {
+        "slug": "blast-breaker-extend",
+        "section": "Undying Hero",
+        "sortOrder": 170,
+        "image": "/The Strongest Battlegrounds/Techniques/blast-breaker-extend.png"
+      }
+    },
+    {
+      "item": {
+        "name": "M1 Extend",
+        "howToPerform": "Once you land 2m1s you need to side dash right as you perform the 3rd m1. keep in mind your side dash needs to go straight away from your opponent. Then after that, you need to forward dash to them immediately, Alternati",
+        "cardSummary": "The patched global exploit that once allowed up to seven M1s in a single string; removed, remembered."
+      },
+      "system": {
+        "slug": "m1-extend",
+        "section": "Removed and Patched",
+        "sortOrder": 171,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flash Strike",
+        "howToPerform": null,
+        "cardSummary": "An early Deadly Ninja pairing of M1 Shove and Flash Strike, patched out."
+      },
+      "system": {
+        "slug": "flash-strike",
+        "section": "Removed and Patched",
+        "sortOrder": 172,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rebounding Robotics",
+        "howToPerform": null,
+        "cardSummary": "Four M1s, side dash, and a catch that the balance pass eventually closed."
+      },
+      "system": {
+        "slug": "rebounding-robotics",
+        "section": "Removed and Patched",
+        "sortOrder": 173,
+        "image": "/The Strongest Battlegrounds/Techniques/rebounding-robotics.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Troubling Catch",
+        "howToPerform": null,
+        "cardSummary": "A dash extension off Double Trouble from before its patch."
+      },
+      "system": {
+        "slug": "troubling-catch",
+        "section": "Removed and Patched",
+        "sortOrder": 174,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Easy Weboom Extend",
+        "howToPerform": null,
+        "cardSummary": "The original easy Weboom extension, patched into the harder modern setup."
+      },
+      "system": {
+        "slug": "easy-weboom-extend",
+        "section": "Removed and Patched",
+        "sortOrder": 175,
+        "image": "/The Strongest Battlegrounds/Techniques/easy-weboom-extend.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Consecutive Blows",
+        "howToPerform": null,
+        "cardSummary": "An extension that skipped Machine Gun Blows' final hit, closed by a later patch."
+      },
+      "system": {
+        "slug": "consecutive-blows",
+        "section": "Removed and Patched",
+        "sortOrder": 176,
+        "image": "/The Strongest Battlegrounds/Techniques/consecutive-blows.png"
+      }
+    }
+  ]
+}

@@ -11,6 +11,7 @@ export const theStrongestBattlegroundsCollectionGroup = {
       "auras",
       "titles",
       "limited-emotes",
-      "characters"
+      "characters",
+      "techniques"
     ]
   } satisfies GameCollectionGroup;

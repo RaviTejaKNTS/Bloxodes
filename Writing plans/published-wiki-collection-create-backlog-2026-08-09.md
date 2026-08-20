@@ -562,8 +562,8 @@ Evidence: [full report](../tmp/game-collection-suggestions/the-forge.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/the-strongest-battlegrounds.md)
 
-- [ ] Emotes
-- [ ] Techniques
+- [ ] Emotes — blocked 2026-08-20: only source is a stub gallery that self-declares missing emotes (544 exist, fraction listed, name-only); limited set already covered by prod limited-emotes
+- [x] Techniques
 
 ### Untitled Boxing Game
 
