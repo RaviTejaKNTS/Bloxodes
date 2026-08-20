@@ -1,0 +1,210 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "ultimates",
+    "route": "/wiki/pet-simulator-99/ultimates",
+    "catalogCode": "pet-simulator-99-ultimates",
+    "itemFields": [
+      "tier",
+      "obtainedFrom",
+      "cardSummary"
+    ],
+    "columns": [
+      "tier",
+      "obtainedFrom",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Ultimates"
+      ],
+      "badgeField": "tier",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "tier",
+        "obtainedFrom"
+      ],
+      "tableFields": [
+        "tier",
+        "obtainedFrom",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "tier": {
+          "kind": "chip",
+          "label": "Tier"
+        },
+        "obtainedFrom": {
+          "kind": "plain",
+          "label": "Source",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Ground Pound",
+        "tier": "Exotic",
+        "obtainedFrom": "*Rebirth 4",
+        "cardSummary": "The starter ultimate: a big tap-damage slam that scales with your click power."
+      },
+      "system": {
+        "slug": "ground-pound",
+        "section": "Ultimates",
+        "sortOrder": 1,
+        "image": "/Pet Simulator 99/Ultimates/ground-pound.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pet Surge",
+        "tier": "Divine",
+        "obtainedFrom": "*Tech Spinny Wheel *Tech Chest *Void Chest *Void Spinny Wheel *A chance from breakables",
+        "cardSummary": "Supercharges your pets' damage for its duration, the default pick for pure farming."
+      },
+      "system": {
+        "slug": "pet-surge",
+        "section": "Ultimates",
+        "sortOrder": 2,
+        "image": "/Pet Simulator 99/Ultimates/pet-surge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "TNT Surge",
+        "tier": "Divine",
+        "obtainedFrom": "*Tech Spinny Wheel *Tech Chest *Void Chest *Void Spinny Wheel *A chance from breakables",
+        "cardSummary": "Carpet-bombs breakables around you, ideal for clearing dense areas fast."
+      },
+      "system": {
+        "slug": "tnt-surge",
+        "section": "Ultimates",
+        "sortOrder": 3,
+        "image": "/Pet Simulator 99/Ultimates/tnt-surge.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lightning Storm",
+        "tier": "Divine",
+        "obtainedFrom": "* Tech Spinny Wheel *Tech Chest *Void Chest *Void Spinny Wheel *A chance from breakables",
+        "cardSummary": "Chains lightning through breakables, a crowd-clear ultimate for coin runs."
+      },
+      "system": {
+        "slug": "lightning-storm",
+        "section": "Ultimates",
+        "sortOrder": 4,
+        "image": "/Pet Simulator 99/Ultimates/lightning-storm.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tornado",
+        "tier": "Superior",
+        "obtainedFrom": "*Tech Spinny Wheel *Tech Chest *Void Chest *Void Spinny Wheel *A chance from breakables",
+        "cardSummary": "Sweeps up loot and breakables in a moving funnel."
+      },
+      "system": {
+        "slug": "tornado",
+        "section": "Ultimates",
+        "sortOrder": 5,
+        "image": "/Pet Simulator 99/Ultimates/tornado.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tsunami",
+        "tier": "Superior",
+        "obtainedFrom": "*Tech Spinny Wheel *Tech Chest *Void Chest *A chance from breakables",
+        "cardSummary": "A wave that crushes everything across the area in one pass."
+      },
+      "system": {
+        "slug": "tsunami",
+        "section": "Ultimates",
+        "sortOrder": 6,
+        "image": "/Pet Simulator 99/Ultimates/tsunami.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Chest Spell",
+        "tier": "Celestial",
+        "obtainedFrom": "* Tech Spinny Wheel *Tech Chest *Void Chest *Void Spinny Wheel *A chance from breakables",
+        "cardSummary": "Conjures bonus chests, turning ultimate charge into loot directly."
+      },
+      "system": {
+        "slug": "chest-spell",
+        "section": "Ultimates",
+        "sortOrder": 7,
+        "image": "/Pet Simulator 99/Ultimates/chest-spell.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Black Hole",
+        "tier": "Exclusive",
+        "obtainedFrom": "*Exclusive Shop (3,500 Robux previously, now trading only)",
+        "cardSummary": "Pulls breakables and loot into one point for concentrated farming."
+      },
+      "system": {
+        "slug": "black-hole",
+        "section": "Ultimates",
+        "sortOrder": 8,
+        "image": "/Pet Simulator 99/Ultimates/black-hole.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hidden Treasure",
+        "tier": "Exclusive",
+        "obtainedFrom": "*Exclusive Shop (4,500 Robux previously, now trading only)",
+        "cardSummary": "Reveals buried treasure where you stand."
+      },
+      "system": {
+        "slug": "hidden-treasure",
+        "section": "Ultimates",
+        "sortOrder": 9,
+        "image": "/Pet Simulator 99/Ultimates/hidden-treasure.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nightmare",
+        "tier": "Exclusive",
+        "obtainedFrom": "*Exclusive Shop - (2,600 Robux previously, now trading only) *Backrooms Pack",
+        "cardSummary": "An exclusive-tier ultimate with a darkness-themed area nuke."
+      },
+      "system": {
+        "slug": "nightmare",
+        "section": "Ultimates",
+        "sortOrder": 10,
+        "image": "/Pet Simulator 99/Ultimates/nightmare.png"
+      }
+    },
+    {
+      "item": {
+        "name": "UFO",
+        "tier": "Exclusive",
+        "obtainedFrom": "* The Forever Pack",
+        "cardSummary": "Calls in a UFO strike, one of the exclusive-tier showpieces."
+      },
+      "system": {
+        "slug": "ufo",
+        "section": "Ultimates",
+        "sortOrder": 11,
+        "image": "/Pet Simulator 99/Ultimates/ufo.png"
+      }
+    }
+  ]
+}

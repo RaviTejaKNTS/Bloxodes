@@ -449,21 +449,21 @@ Evidence: [full report](../tmp/game-collection-suggestions/paint-and-seek.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/pet-simulator-99.md)
 
-- [ ] Ultimates
-- [ ] Ranks
-- [ ] Rebirths
-- [ ] Achievements
-- [ ] Currencies
-- [ ] Upgrades
-- [ ] Merchants
-- [ ] Secret Rooms
-- [ ] Random Events
-- [ ] Fruits
-- [ ] Flags
-- [ ] Fishing Rods
-- [ ] Shovels
-- [ ] Keys
-- [ ] Lootboxes
+- [x] Ultimates
+- [ ] Ranks — blocked 2026-08-20: no per-rank roster exists in sources (Ranks page covers quest mechanics only)
+- [x] Rebirths
+- [x] Achievements
+- [x] Currencies
+- [x] Upgrades
+- [x] Merchants
+- [ ] Secret Rooms — blocked 2026-08-20: only 3 rooms exist, too thin for a page
+- [ ] Random Events — blocked 2026-08-20: no row-level source for a random events roster
+- [x] Fruits
+- [x] Flags
+- [x] Fishing Rods
+- [ ] Shovels — blocked 2026-08-20: no shovel roster exists in sources
+- [x] Keys
+- [ ] Lootboxes — blocked 2026-08-20: no lootbox roster page; giftbox data lives in a wiki data template without stable row evidence
 
 ### Practical Basketball
 

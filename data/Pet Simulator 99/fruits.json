@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "fruits",
+    "route": "/wiki/pet-simulator-99/fruits",
+    "catalogCode": "pet-simulator-99-fruits",
+    "itemFields": [
+      "rarity",
+      "buff",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "buff",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Fruits"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "rarity",
+        "buff"
+      ],
+      "tableFields": [
+        "rarity",
+        "buff",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "buff": {
+          "kind": "plain",
+          "label": "Buff"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Banana",
+        "rarity": "Rare",
+        "buff": "+5% Coin boost.",
+        "cardSummary": "A stackable pet buff fruit: each one eaten adds +5% coin boost and stacks with more of the same fruit."
+      },
+      "system": {
+        "slug": "banana",
+        "section": "Fruits",
+        "sortOrder": 1,
+        "image": "/Pet Simulator 99/Fruits/banana.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Apple",
+        "rarity": "Rare",
+        "buff": "+1.5% Damage boost.",
+        "cardSummary": "A stackable pet buff fruit: each one eaten adds +1.5% damage boost and stacks with more of the same fruit."
+      },
+      "system": {
+        "slug": "apple",
+        "section": "Fruits",
+        "sortOrder": 2,
+        "image": "/Pet Simulator 99/Fruits/apple.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Orange",
+        "rarity": "Rare",
+        "buff": "+1% Diamond boost.",
+        "cardSummary": "A stackable pet buff fruit: each one eaten adds +1% diamond boost and stacks with more of the same fruit."
+      },
+      "system": {
+        "slug": "orange",
+        "section": "Fruits",
+        "sortOrder": 3,
+        "image": "/Pet Simulator 99/Fruits/orange.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pineapple",
+        "rarity": "Rare",
+        "buff": "+1% Increase in chance for drops from breakables.",
+        "cardSummary": "A stackable pet buff fruit: each one eaten adds +1% increase in chance for drops from breakables and stacks with more of the same fruit."
+      },
+      "system": {
+        "slug": "pineapple",
+        "section": "Fruits",
+        "sortOrder": 4,
+        "image": "/Pet Simulator 99/Fruits/pineapple.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Watermelon",
+        "rarity": "Rare",
+        "buff": "+1% increase to chance of bonuses.",
+        "cardSummary": "A stackable pet buff fruit: each one eaten adds +1% increase to chance of bonuses and stacks with more of the same fruit."
+      },
+      "system": {
+        "slug": "watermelon",
+        "section": "Fruits",
+        "sortOrder": 5,
+        "image": "/Pet Simulator 99/Fruits/watermelon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Fruit",
+        "rarity": "Legendary",
+        "buff": "+5% Coin boost, +1.5% damage boost, +1% Diamond boost, and +1% increase for drops from breakables.",
+        "cardSummary": "A stackable pet buff fruit: each one eaten adds +5% coin boost, +1.5% damage boost, +1% diamond boost, and +1% increase for drops from breakables and stacks with more of the same fruit."
+      },
+      "system": {
+        "slug": "rainbow-fruit",
+        "section": "Fruits",
+        "sortOrder": 6,
+        "image": "/Pet Simulator 99/Fruits/rainbow-fruit.png"
+      }
+    }
+  ]
+}

@@ -1,0 +1,829 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "currencies",
+    "route": "/wiki/pet-simulator-99/currencies",
+    "catalogCode": "pet-simulator-99-currencies",
+    "itemFields": [
+      "worth",
+      "context",
+      "cardSummary"
+    ],
+    "columns": [
+      "worth",
+      "context",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "World Currencies",
+        "Minigame Currencies",
+        "Event Currencies"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "cardSummary",
+      "cardDescriptionField": "cardSummary",
+      "cardFields": [
+        "worth",
+        "context"
+      ],
+      "tableFields": [
+        "worth",
+        "context",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "worth": {
+          "kind": "chip",
+          "label": "Worth",
+          "omitWhenEmpty": true
+        },
+        "context": {
+          "kind": "plain",
+          "label": "Where",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Coin",
+        "worth": null,
+        "context": null,
+        "cardSummary": "The base unit of its world's coin ladder."
+      },
+      "system": {
+        "slug": "coin",
+        "section": "World Currencies",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bar Gold Bar",
+        "worth": "1 Million Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "bar-gold-bar",
+        "section": "World Currencies",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Platinum Coin",
+        "worth": "1 Million Gold Bars",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "platinum-coin",
+        "section": "World Currencies",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bar Platinum Bar",
+        "worth": "1 Million Platinum Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "bar-platinum-bar",
+        "section": "World Currencies",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Emerald Coin",
+        "worth": "1 Million Platinum Bars",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "emerald-coin",
+        "section": "World Currencies",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Bar Emerald Bar",
+        "worth": "1 Million Emerald Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "bar-emerald-bar",
+        "section": "World Currencies",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sapphire Coin",
+        "worth": "1 Million Emerald Bars",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "sapphire-coin",
+        "section": "World Currencies",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tech Coins",
+        "worth": null,
+        "context": null,
+        "cardSummary": "The base unit of its world's coin ladder."
+      },
+      "system": {
+        "slug": "tech-coins",
+        "section": "World Currencies",
+        "sortOrder": 8,
+        "image": "/Pet Simulator 99/Currencies/tech-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tech Bar",
+        "worth": "1 Million Tech Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "tech-bar",
+        "section": "World Currencies",
+        "sortOrder": 9,
+        "image": "/Pet Simulator 99/Currencies/tech-bar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tech Gold Coin",
+        "worth": "1 Million Tech Bars",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "tech-gold-coin",
+        "section": "World Currencies",
+        "sortOrder": 10,
+        "image": "/Pet Simulator 99/Currencies/tech-gold-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tech Gold Bar",
+        "worth": "1 Million Tech Gold Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "tech-gold-bar",
+        "section": "World Currencies",
+        "sortOrder": 11,
+        "image": "/Pet Simulator 99/Currencies/tech-gold-bar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tech Platinum Coin",
+        "worth": "1 Million Tech Gold Bars",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "tech-platinum-coin",
+        "section": "World Currencies",
+        "sortOrder": 12,
+        "image": "/Pet Simulator 99/Currencies/tech-platinum-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tech Platinum Bar",
+        "worth": "1 Million Tech Platinum Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "tech-platinum-bar",
+        "section": "World Currencies",
+        "sortOrder": 13,
+        "image": "/Pet Simulator 99/Currencies/tech-platinum-bar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tech Emerald Coin",
+        "worth": "1 Million Tech Platinum Bar",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "tech-emerald-coin",
+        "section": "World Currencies",
+        "sortOrder": 14,
+        "image": "/Pet Simulator 99/Currencies/tech-emerald-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Tech Emerald Bar",
+        "worth": "1 Million Tech Emerald Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "tech-emerald-bar",
+        "section": "World Currencies",
+        "sortOrder": 15,
+        "image": "/Pet Simulator 99/Currencies/tech-emerald-bar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Coin",
+        "worth": null,
+        "context": null,
+        "cardSummary": "The base unit of its world's coin ladder."
+      },
+      "system": {
+        "slug": "void-coin",
+        "section": "World Currencies",
+        "sortOrder": 16,
+        "image": "/Pet Simulator 99/Currencies/void-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Gold Bar",
+        "worth": "1 Million Void Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "void-gold-bar",
+        "section": "World Currencies",
+        "sortOrder": 17,
+        "image": "/Pet Simulator 99/Currencies/void-gold-bar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Platinum Coin",
+        "worth": "1 Million Void Bars",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "void-platinum-coin",
+        "section": "World Currencies",
+        "sortOrder": 18,
+        "image": "/Pet Simulator 99/Currencies/void-platinum-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Void Platinum Bar",
+        "worth": "1 Million Void Platinum Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "void-platinum-bar",
+        "section": "World Currencies",
+        "sortOrder": 19,
+        "image": "/Pet Simulator 99/Currencies/void-platinum-bar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fantasy Coin",
+        "worth": null,
+        "context": null,
+        "cardSummary": "The base unit of its world's coin ladder."
+      },
+      "system": {
+        "slug": "fantasy-coin",
+        "section": "World Currencies",
+        "sortOrder": 20,
+        "image": "/Pet Simulator 99/Currencies/fantasy-coin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fantasy Bar",
+        "worth": "1 Million Fantasy Coins",
+        "context": null,
+        "cardSummary": "A rung on the world's million-to-one coin ladder."
+      },
+      "system": {
+        "slug": "fantasy-bar",
+        "section": "World Currencies",
+        "sortOrder": 21,
+        "image": "/Pet Simulator 99/Currencies/fantasy-bar.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mining Coins",
+        "worth": null,
+        "context": "Digsite",
+        "cardSummary": "Earned and spent inside the Digsite minigame; it does not convert to main-world coins."
+      },
+      "system": {
+        "slug": "mining-coins",
+        "section": "Minigame Currencies",
+        "sortOrder": 22,
+        "image": "/Pet Simulator 99/Currencies/mining-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fishing Coins",
+        "worth": null,
+        "context": "Fishing",
+        "cardSummary": "Earned and spent inside the Fishing minigame; it does not convert to main-world coins."
+      },
+      "system": {
+        "slug": "fishing-coins",
+        "section": "Minigame Currencies",
+        "sortOrder": 23,
+        "image": "/Pet Simulator 99/Currencies/fishing-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Woodcutting Coins",
+        "worth": null,
+        "context": "Woodcutting",
+        "cardSummary": "Earned and spent inside the Woodcutting minigame; it does not convert to main-world coins."
+      },
+      "system": {
+        "slug": "woodcutting-coins",
+        "section": "Minigame Currencies",
+        "sortOrder": 24,
+        "image": "/Pet Simulator 99/Currencies/woodcutting-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fishing World Coins",
+        "worth": null,
+        "context": "Fishing World",
+        "cardSummary": "Earned and spent inside the Fishing World minigame; it does not convert to main-world coins."
+      },
+      "system": {
+        "slug": "fishing-world-coins",
+        "section": "Minigame Currencies",
+        "sortOrder": 25,
+        "image": "/Pet Simulator 99/Currencies/fishing-world-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Farming Coins",
+        "worth": null,
+        "context": "Farming World",
+        "cardSummary": "Earned and spent inside the Farming World minigame; it does not convert to main-world coins."
+      },
+      "system": {
+        "slug": "farming-coins",
+        "section": "Minigame Currencies",
+        "sortOrder": 26,
+        "image": "/Pet Simulator 99/Currencies/farming-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Clover Coins",
+        "worth": null,
+        "context": "St. Patrick's Event 2024",
+        "cardSummary": "The event currency of the St. Patrick's Event 2024, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "clover-coins",
+        "section": "Event Currencies",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Backrooms Coins",
+        "worth": null,
+        "context": "Backrooms Event 2024",
+        "cardSummary": "The event currency of the Backrooms Event 2024, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "backrooms-coins",
+        "section": "Event Currencies",
+        "sortOrder": 28,
+        "image": "/Pet Simulator 99/Currencies/backrooms-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Good Vs Evil Coins",
+        "worth": null,
+        "context": "Good vs. Evil Event 2024",
+        "cardSummary": "The event currency of the Good vs. Evil Event 2024, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "good-vs-evil-coins",
+        "section": "Event Currencies",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Rave Coins",
+        "worth": null,
+        "context": "Lucky Tiles Event 2024",
+        "cardSummary": "The event currency of the Lucky Tiles Event 2024, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "rave-coins",
+        "section": "Event Currencies",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Dino Tycoon Coins",
+        "worth": null,
+        "context": "Dino Tycoon Event 2024",
+        "cardSummary": "The event currency of the Dino Tycoon Event 2024, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "dino-tycoon-coins",
+        "section": "Event Currencies",
+        "sortOrder": 31,
+        "image": "/Pet Simulator 99/Currencies/dino-tycoon-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "G Coins (2024)",
+        "worth": null,
+        "context": "RNG Event 2024",
+        "cardSummary": "The event currency of the RNG Event 2024, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "g-coins-2024",
+        "section": "Event Currencies",
+        "sortOrder": 32,
+        "image": "/Pet Simulator 99/Currencies/g-coins-2024.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Color Coins",
+        "worth": null,
+        "context": "Color War Event 2024",
+        "cardSummary": "The event currency of the Color War Event 2024, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "color-coins",
+        "section": "Event Currencies",
+        "sortOrder": 33,
+        "image": "/Pet Simulator 99/Currencies/color-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Halloween Candy",
+        "worth": null,
+        "context": "Halloween Event 2024 and Halloween Event 2025",
+        "cardSummary": "The event currency of the Halloween Event 2024 and Halloween Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "halloween-candy",
+        "section": "Event Currencies",
+        "sortOrder": 34,
+        "image": "/Pet Simulator 99/Currencies/halloween-candy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Acorn",
+        "worth": null,
+        "context": "Autumn Event 2024",
+        "cardSummary": "The event currency of the Autumn Event 2024, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "acorn",
+        "section": "Event Currencies",
+        "sortOrder": 35,
+        "image": "/Pet Simulator 99/Currencies/acorn.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gingerbread Coins",
+        "worth": null,
+        "context": "Christmas Event 2024 and Christmas Event 2025",
+        "cardSummary": "The event currency of the Christmas Event 2024 and Christmas Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "gingerbread-coins",
+        "section": "Event Currencies",
+        "sortOrder": 36,
+        "image": "/Pet Simulator 99/Currencies/gingerbread-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Game Coins",
+        "worth": null,
+        "context": "Pet Games Event 2025",
+        "cardSummary": "The event currency of the Pet Games Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "game-coins",
+        "section": "Event Currencies",
+        "sortOrder": 37,
+        "image": "/Pet Simulator 99/Currencies/game-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cannon Tycoon Coins",
+        "worth": null,
+        "context": "Cannon Tycoon Event 2025",
+        "cardSummary": "The event currency of the Cannon Tycoon Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "cannon-tycoon-coins",
+        "section": "Event Currencies",
+        "sortOrder": 38,
+        "image": "/Pet Simulator 99/Currencies/cannon-tycoon-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Valentines Coins",
+        "worth": null,
+        "context": "Valentine's Event 2025",
+        "cardSummary": "The event currency of the Valentine's Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "valentines-coins",
+        "section": "Event Currencies",
+        "sortOrder": 39,
+        "image": "/Pet Simulator 99/Currencies/valentines-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Card Coins",
+        "worth": null,
+        "context": "Trading Cards Event 2025",
+        "cardSummary": "The event currency of the Trading Cards Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "card-coins",
+        "section": "Event Currencies",
+        "sortOrder": 40,
+        "image": "/Pet Simulator 99/Currencies/card-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Lucky Coins",
+        "worth": null,
+        "context": "St. Patrick's Event 2025 and St. Patrick's Event 2026",
+        "cardSummary": "The event currency of the St. Patrick's Event 2025 and St. Patrick's Event 2026, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "lucky-coins",
+        "section": "Event Currencies",
+        "sortOrder": 41,
+        "image": "/Pet Simulator 99/Currencies/lucky-coins.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mining Coins",
+        "worth": null,
+        "context": "Mine & Combine Event 2025",
+        "cardSummary": "The event currency of the Mine & Combine Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "mining-coins-mine-combine",
+        "section": "Event Currencies",
+        "sortOrder": 42,
+        "image": "/Pet Simulator 99/Currencies/mining-coins-mine-combine.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Factory Coins",
+        "worth": null,
+        "context": "Slime Factory Event 2025 (Week 1)",
+        "cardSummary": "The event currency of the Slime Factory Event 2025 (Week 1), earnable only while that event ran."
+      },
+      "system": {
+        "slug": "coin-factory-coins",
+        "section": "Event Currencies",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Factory Slime Coins",
+        "worth": null,
+        "context": "Slime Factory Event 2025 (Week 2)",
+        "cardSummary": "The event currency of the Slime Factory Event 2025 (Week 2), earnable only while that event ran."
+      },
+      "system": {
+        "slug": "coin-factory-slime-coins",
+        "section": "Event Currencies",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Easter Coins",
+        "worth": null,
+        "context": "Easter Event 2025",
+        "cardSummary": "The event currency of the Easter Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "easter-coins",
+        "section": "Event Currencies",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Basketball Coins",
+        "worth": null,
+        "context": "Yeet a Basketball Event 2025",
+        "cardSummary": "The event currency of the Yeet a Basketball Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "coin-basketball-coins",
+        "section": "Event Currencies",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Orb Yeet Orbs",
+        "worth": null,
+        "context": "Yeet a Basketball Event 2025",
+        "cardSummary": "The event currency of the Yeet a Basketball Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "orb-yeet-orbs",
+        "section": "Event Currencies",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Gym Coins",
+        "worth": null,
+        "context": "Muscle Beach Event 2025",
+        "cardSummary": "The event currency of the Muscle Beach Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "coin-gym-coins",
+        "section": "Event Currencies",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Block Party Coins",
+        "worth": null,
+        "context": "Summer Block Party Event 2025",
+        "cardSummary": "The event currency of the Summer Block Party Event 2025, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "coin-block-party-coins",
+        "section": "Event Currencies",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Spring Coins",
+        "worth": null,
+        "context": "Spring Egg Machine Event 2026",
+        "cardSummary": "The event currency of the Spring Egg Machine Event 2026, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "coin-spring-coins",
+        "section": "Event Currencies",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "G2026 RNG Coins (2026)",
+        "worth": null,
+        "context": "RNG Event 2026",
+        "cardSummary": "The event currency of the RNG Event 2026, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "g2026-rng-coins-2026",
+        "section": "Event Currencies",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Daydream Coins",
+        "worth": null,
+        "context": "Backrooms Event 2026",
+        "cardSummary": "The event currency of the Backrooms Event 2026, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "coin-daydream-coins",
+        "section": "Event Currencies",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Soccer Coins",
+        "worth": null,
+        "context": "Soccer Event 2026",
+        "cardSummary": "The event currency of the Soccer Event 2026, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "coin-soccer-coins",
+        "section": "Event Currencies",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Orb Soccer Orbs",
+        "worth": null,
+        "context": "Soccer Event 2026",
+        "cardSummary": "The event currency of the Soccer Event 2026, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "orb-soccer-orbs",
+        "section": "Event Currencies",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sunflowers",
+        "worth": null,
+        "context": "Pets vs. Coins Event 2026",
+        "cardSummary": "The event currency of the Pets vs. Coins Event 2026, earnable only while that event ran."
+      },
+      "system": {
+        "slug": "sunflowers",
+        "section": "Event Currencies",
+        "sortOrder": 55,
+        "image": null
+      }
+    }
+  ]
+}

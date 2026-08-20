@@ -1,0 +1,200 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "merchants",
+    "route": "/wiki/pet-simulator-99/merchants",
+    "catalogCode": "pet-simulator-99-merchants",
+    "itemFields": [
+      "location",
+      "stock",
+      "currency",
+      "cardSummary"
+    ],
+    "columns": [
+      "location",
+      "stock",
+      "currency",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Selling Merchants",
+        "Buying Merchants"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "stock",
+      "cardDescriptionField": "stock",
+      "cardFields": [
+        "location",
+        "stock",
+        "currency"
+      ],
+      "tableFields": [
+        "location",
+        "stock",
+        "currency",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "location": {
+          "kind": "plain",
+          "label": "Location"
+        },
+        "stock": {
+          "kind": "detail",
+          "label": "Stock"
+        },
+        "currency": {
+          "kind": "chip",
+          "label": "Currency",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Items Merchant",
+        "location": "World 1; Area 19: Oasis",
+        "stock": "Miscellaneous Items Potions (Tier I - IV) Enchants (Tier I - IV, Special) Fruits Crystal Key halves",
+        "currency": "Diamonds Diamonds",
+        "cardSummary": "A rotating-stock merchant; buying builds Respect levels that unlock more of its slots."
+      },
+      "system": {
+        "slug": "items-merchant",
+        "section": "Selling Merchants",
+        "sortOrder": 1,
+        "image": "/Pet Simulator 99/Merchants/items-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Advanced Merchant",
+        "location": "World 1; Area 39: Ice Rink",
+        "stock": "Miscellaneous Items Potions (Tier I - V) (Tier I - V, Special) Fruits Crystal Key halves",
+        "currency": "Diamonds Diamonds",
+        "cardSummary": "A rotating-stock merchant; buying builds Respect levels that unlock more of its slots."
+      },
+      "system": {
+        "slug": "advanced-merchant",
+        "section": "Selling Merchants",
+        "sortOrder": 2,
+        "image": "/Pet Simulator 99/Merchants/advanced-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Garden Merchant",
+        "location": "World 1; Area 54: Flower Field",
+        "stock": "Gardening items",
+        "currency": "Diamonds Diamonds",
+        "cardSummary": "A rotating-stock merchant; buying builds Respect levels that unlock more of its slots."
+      },
+      "system": {
+        "slug": "garden-merchant",
+        "section": "Selling Merchants",
+        "sortOrder": 3,
+        "image": "/Pet Simulator 99/Merchants/garden-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Snow Merchant",
+        "location": "World 1; Area 63: Frost Mountains",
+        "stock": "Snowball Launcher & Snowballs",
+        "currency": "Diamonds Diamonds",
+        "cardSummary": "A rotating-stock merchant; buying builds Respect levels that unlock more of its slots."
+      },
+      "system": {
+        "slug": "snow-merchant",
+        "section": "Selling Merchants",
+        "sortOrder": 4,
+        "image": "/Pet Simulator 99/Merchants/snow-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Index Merchant",
+        "location": "Any area with an Index Machine",
+        "stock": "Potions (Tier VII) Keys Vouchers Diamond Shovel & Fishing Rod Parrot Booth",
+        "currency": "Index Index Tokens",
+        "cardSummary": "A rotating-stock merchant; buying builds Respect levels that unlock more of its slots."
+      },
+      "system": {
+        "slug": "index-merchant",
+        "section": "Selling Merchants",
+        "sortOrder": 5,
+        "image": "/Pet Simulator 99/Merchants/index-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Adventurer Store",
+        "location": "World 2; Area 140: Electric Garden",
+        "stock": "Miscellaneous Items Potions (Tier IX) Vouchers Keys M-10 Hoverboard Panda Booth",
+        "currency": "Quest Quest Medals",
+        "cardSummary": "A rotating-stock merchant; buying builds Respect levels that unlock more of its slots."
+      },
+      "system": {
+        "slug": "adventurer-store",
+        "section": "Selling Merchants",
+        "sortOrder": 6,
+        "image": "/Pet Simulator 99/Merchants/adventurer-store.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Raffle Merchant",
+        "location": "Millionaire World; Area 218: Golden Metropolis",
+        "stock": "Millionaire Tickets",
+        "currency": "Diamonds Diamonds",
+        "cardSummary": "A rotating-stock merchant; buying builds Respect levels that unlock more of its slots."
+      },
+      "system": {
+        "slug": "raffle-merchant",
+        "section": "Selling Merchants",
+        "sortOrder": 7,
+        "image": "/Pet Simulator 99/Merchants/raffle-merchant.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pet Cube Store",
+        "location": "Elemental World; Area 225: Grassy Plains",
+        "stock": "Pet Cubes",
+        "currency": "Diamonds Diamonds",
+        "cardSummary": "A rotating-stock merchant; buying builds Respect levels that unlock more of its slots."
+      },
+      "system": {
+        "slug": "pet-cube-store",
+        "section": "Selling Merchants",
+        "sortOrder": 8,
+        "image": "/Pet Simulator 99/Merchants/pet-cube-store.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dealer Merchant",
+        "location": "World 1; Area 72: Runic Altar",
+        "stock": "Miscellaneous Items",
+        "currency": "Diamonds Diamonds",
+        "cardSummary": "Buys items from players rather than selling."
+      },
+      "system": {
+        "slug": "dealer-merchant",
+        "section": "Buying Merchants",
+        "sortOrder": 9,
+        "image": "/Pet Simulator 99/Merchants/dealer-merchant.png"
+      }
+    }
+  ]
+}

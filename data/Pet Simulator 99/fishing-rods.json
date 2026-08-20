@@ -1,0 +1,212 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "fishing-rods",
+    "route": "/wiki/pet-simulator-99/fishing-rods",
+    "catalogCode": "pet-simulator-99-fishing-rods",
+    "itemFields": [
+      "cost",
+      "details",
+      "cardSummary"
+    ],
+    "columns": [
+      "cost",
+      "details",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Basic Fishing Rods",
+        "Advanced Fishing Rods"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "details",
+      "cardDescriptionField": "details",
+      "cardFields": [
+        "cost",
+        "details"
+      ],
+      "tableFields": [
+        "cost",
+        "details",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "cost": {
+          "kind": "chip",
+          "label": "Cost",
+          "omitWhenEmpty": true
+        },
+        "details": {
+          "kind": "detail",
+          "label": "Details",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Wooden Fishing Rod",
+        "cost": "Free",
+        "details": "Simple fishing rod. You can catch stuff.",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "wooden-fishing-rod",
+        "section": "Basic Fishing Rods",
+        "sortOrder": 1,
+        "image": "/Pet Simulator 99/Fishing Rods/wooden-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sturdy Fishing Rod",
+        "cost": "Fishing 100",
+        "details": "You could catch a big fish with this!",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "sturdy-fishing-rod",
+        "section": "Basic Fishing Rods",
+        "sortOrder": 2,
+        "image": "/Pet Simulator 99/Fishing Rods/sturdy-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Advanced Fishing Rod",
+        "cost": "Fishing 2,500",
+        "details": "Catch bigger fish, faster!",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "advanced-fishing-rod",
+        "section": "Basic Fishing Rods",
+        "sortOrder": 3,
+        "image": "/Pet Simulator 99/Fishing Rods/advanced-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Super Fishing Rod",
+        "cost": "Fishing 25,000",
+        "details": null,
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "super-fishing-rod",
+        "section": "Basic Fishing Rods",
+        "sortOrder": 4,
+        "image": "/Pet Simulator 99/Fishing Rods/super-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Pro Fishing Rod",
+        "cost": "Fishing 100,000",
+        "details": "Very efficient fishing rod.",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "pro-fishing-rod",
+        "section": "Basic Fishing Rods",
+        "sortOrder": 5,
+        "image": "/Pet Simulator 99/Fishing Rods/pro-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Golden Fishing Rod",
+        "cost": "A fishing rod made of gold? Doesn't seem very realistic.",
+        "details": "Appears occasionally in Item Merchant and Advanced Merchant.",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "golden-fishing-rod",
+        "section": "Basic Fishing Rods",
+        "sortOrder": 6,
+        "image": "/Pet Simulator 99/Fishing Rods/golden-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Platinum Fishing Rod",
+        "cost": "Fishing 40,000",
+        "details": "Sleek and efficient fishing rod.",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "platinum-fishing-rod",
+        "section": "Advanced Fishing Rods",
+        "sortOrder": 7,
+        "image": "/Pet Simulator 99/Fishing Rods/platinum-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Emerald Fishing Rod",
+        "cost": "Fishing 150,000",
+        "details": "Streamlined casting perfection.",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "emerald-fishing-rod",
+        "section": "Advanced Fishing Rods",
+        "sortOrder": 8,
+        "image": "/Pet Simulator 99/Fishing Rods/emerald-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Sapphire Fishing Rod",
+        "cost": "Fishing 425,000",
+        "details": "Unmatched casting performance.",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "sapphire-fishing-rod",
+        "section": "Advanced Fishing Rods",
+        "sortOrder": 9,
+        "image": "/Pet Simulator 99/Fishing Rods/sapphire-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Amethyst Fishing Rod",
+        "cost": "Fishing 2,250,000",
+        "details": "Elegant fishing mastery.",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "amethyst-fishing-rod",
+        "section": "Advanced Fishing Rods",
+        "sortOrder": 10,
+        "image": "/Pet Simulator 99/Fishing Rods/amethyst-fishing-rod.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamond Fishing Rod",
+        "cost": "3,120 (Index Tokens)",
+        "details": "Do you like my Diamond Fishing Rod?",
+        "cardSummary": "Higher rod tiers raise the odds of rare catches, items, and the huge fishing pets."
+      },
+      "system": {
+        "slug": "diamond-fishing-rod",
+        "section": "Advanced Fishing Rods",
+        "sortOrder": 11,
+        "image": "/Pet Simulator 99/Fishing Rods/diamond-fishing-rod.png"
+      }
+    }
+  ]
+}

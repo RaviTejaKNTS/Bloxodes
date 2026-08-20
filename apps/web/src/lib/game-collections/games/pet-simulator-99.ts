@@ -18,6 +18,16 @@ export const petSimulator99CollectionGroup = {
       "booths",
       "mastery",
       "minigames",
-      "shiny-relics"
+      "shiny-relics",
+      "ultimates",
+      "rebirths",
+      "achievements",
+      "currencies",
+      "upgrades",
+      "merchants",
+      "fruits",
+      "flags",
+      "fishing-rods",
+      "keys"
     ]
   } satisfies GameCollectionGroup;

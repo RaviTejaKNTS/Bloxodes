@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "flags",
+    "route": "/wiki/pet-simulator-99/flags",
+    "catalogCode": "pet-simulator-99-flags",
+    "itemFields": [
+      "rarity",
+      "effect",
+      "cardSummary"
+    ],
+    "columns": [
+      "rarity",
+      "effect",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Flags"
+      ],
+      "badgeField": "rarity",
+      "subtitleFields": [],
+      "descriptionField": "effect",
+      "cardDescriptionField": "effect",
+      "cardFields": [
+        "rarity",
+        "effect"
+      ],
+      "tableFields": [
+        "rarity",
+        "effect",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "rarity": {
+          "kind": "chip",
+          "label": "Rarity"
+        },
+        "effect": {
+          "kind": "detail",
+          "label": "Effect"
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Strength Flag",
+        "rarity": "Rare",
+        "effect": "Place in an area to increase your pet strength by 50%! Lasts 5 minutes!",
+        "cardSummary": "A placeable 5-minute area buff that applies to every player standing in the zone; only one flag type can be active per area."
+      },
+      "system": {
+        "slug": "strength-flag",
+        "section": "Flags",
+        "sortOrder": 1,
+        "image": "/Pet Simulator 99/Flags/strength-flag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Magnet Flag",
+        "rarity": "Rare",
+        "effect": "Automatically collects all orbs and treasures dropped in an area.",
+        "cardSummary": "A placeable 5-minute area buff that applies to every player standing in the zone; only one flag type can be active per area."
+      },
+      "system": {
+        "slug": "magnet-flag",
+        "section": "Flags",
+        "sortOrder": 2,
+        "image": "/Pet Simulator 99/Flags/magnet-flag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Coins Flag",
+        "rarity": "Rare",
+        "effect": "Increases coins dropped by breakables by 50%",
+        "cardSummary": "A placeable 5-minute area buff that applies to every player standing in the zone; only one flag type can be active per area."
+      },
+      "system": {
+        "slug": "coins-flag",
+        "section": "Flags",
+        "sortOrder": 3,
+        "image": "/Pet Simulator 99/Flags/coins-flag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Diamonds Flag",
+        "rarity": "Epic",
+        "effect": "Increases diamond breakable spawn rate by x2.",
+        "cardSummary": "A placeable 5-minute area buff that applies to every player standing in the zone; only one flag type can be active per area."
+      },
+      "system": {
+        "slug": "diamonds-flag",
+        "section": "Flags",
+        "sortOrder": 4,
+        "image": "/Pet Simulator 99/Flags/diamonds-flag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hasty Flag",
+        "rarity": "Epic",
+        "effect": "\"Super charges\" your pets (increased attack speed and walk speed for pets)",
+        "cardSummary": "A placeable 5-minute area buff that applies to every player standing in the zone; only one flag type can be active per area."
+      },
+      "system": {
+        "slug": "hasty-flag",
+        "section": "Flags",
+        "sortOrder": 5,
+        "image": "/Pet Simulator 99/Flags/hasty-flag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fortune Flag",
+        "rarity": "Legendary",
+        "effect": "Boosts drop rates of coins by +50% and diamonds by 2.5x.",
+        "cardSummary": "A placeable 5-minute area buff that applies to every player standing in the zone; only one flag type can be active per area."
+      },
+      "system": {
+        "slug": "fortune-flag",
+        "section": "Flags",
+        "sortOrder": 6,
+        "image": "/Pet Simulator 99/Flags/fortune-flag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Rainbow Flag",
+        "rarity": "Divine",
+        "effect": "When placed in an area, temporarily makes ALL pets Rainbow! Lasts 5 minutes!",
+        "cardSummary": "A placeable 5-minute area buff that applies to every player standing in the zone; only one flag type can be active per area."
+      },
+      "system": {
+        "slug": "rainbow-flag",
+        "section": "Flags",
+        "sortOrder": 7,
+        "image": "/Pet Simulator 99/Flags/rainbow-flag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Shiny Flag",
+        "rarity": "Superior",
+        "effect": "When placed in an area, temporarily makes ALL pets Shiny! Lasts 5 minutes!",
+        "cardSummary": "A placeable 5-minute area buff that applies to every player standing in the zone; only one flag type can be active per area."
+      },
+      "system": {
+        "slug": "shiny-flag",
+        "section": "Flags",
+        "sortOrder": 8,
+        "image": "/Pet Simulator 99/Flags/shiny-flag.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Exotic Treasure Flag",
+        "rarity": "Celestial",
+        "effect": "Increases drops substantially (numbers unknown)",
+        "cardSummary": "A placeable 5-minute area buff that applies to every player standing in the zone; only one flag type can be active per area."
+      },
+      "system": {
+        "slug": "exotic-treasure-flag",
+        "section": "Flags",
+        "sortOrder": 9,
+        "image": "/Pet Simulator 99/Flags/exotic-treasure-flag.png"
+      }
+    }
+  ]
+}

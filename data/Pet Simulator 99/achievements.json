@@ -1,0 +1,1610 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Pet Simulator 99",
+    "gameSlug": "pet-simulator-99",
+    "collection": "achievements",
+    "route": "/wiki/pet-simulator-99/achievements",
+    "catalogCode": "pet-simulator-99-achievements",
+    "itemFields": [
+      "requirement",
+      "reward",
+      "difficulty",
+      "cardSummary"
+    ],
+    "columns": [
+      "requirement",
+      "reward",
+      "difficulty",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Family",
+      "sectionOrder": [
+        "Balloon Gift Achievements",
+        "Big Chests Achievements",
+        "Breakables Achievements",
+        "Chest Raid Achievements",
+        "Coin Jar Achievements",
+        "Comets Achievements",
+        "Daycare Achievements",
+        "Egg Achievements",
+        "Enchant Achievements",
+        "Enchant Empowering Achievements",
+        "Enchant Essence Achievements",
+        "Fishing Achievements",
+        "Flags Achievements",
+        "Forge Achievements",
+        "Free Gifts Achievements",
+        "Fruit Achievements",
+        "Fuse Machine Achievements",
+        "Gold Achievements",
+        "Item Jar Achievements",
+        "Magic Machine Achievements",
+        "Merch Code Achievements",
+        "Merchant Achievements",
+        "Mini Chest Achievements",
+        "Orb Achievements",
+        "Piñata Achievements",
+        "Potion Achievements",
+        "Rainbow Achievements",
+        "Shiny Achievements",
+        "Stairway to Heaven Achievements",
+        "Ultimate Achievements",
+        "Vending Machine Achievements",
+        "XP Potion Machine Achievements"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "requirement",
+      "cardDescriptionField": "requirement",
+      "cardFields": [
+        "requirement",
+        "reward",
+        "difficulty"
+      ],
+      "tableFields": [
+        "requirement",
+        "reward",
+        "difficulty",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "requirement": {
+          "kind": "detail",
+          "label": "Requirement"
+        },
+        "reward": {
+          "kind": "plain",
+          "label": "Reward"
+        },
+        "difficulty": {
+          "kind": "chip",
+          "label": "Difficulty",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Balloon Popper",
+        "requirement": "Pop 200 Balloon Gifts",
+        "reward": "25 Gift Bags",
+        "difficulty": "1 Star",
+        "cardSummary": "A balloon gift milestone: pop 200 Balloon Gifts to claim the reward."
+      },
+      "system": {
+        "slug": "balloon-popper",
+        "section": "Balloon Gift Achievements",
+        "sortOrder": 1,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Air Head",
+        "requirement": "Pop 1500 Balloon Gifts",
+        "reward": "25 Large Gift Bags",
+        "difficulty": "2 Stars",
+        "cardSummary": "A balloon gift milestone: pop 1500 Balloon Gifts to claim the reward."
+      },
+      "system": {
+        "slug": "air-head",
+        "section": "Balloon Gift Achievements",
+        "sortOrder": 2,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Balloon Obsession",
+        "requirement": "Pop 5,000 Balloon Gifts",
+        "reward": "25 Mini Chests",
+        "difficulty": "3 Stars",
+        "cardSummary": "A balloon gift milestone: pop 5,000 Balloon Gifts to claim the reward."
+      },
+      "system": {
+        "slug": "balloon-obsession",
+        "section": "Balloon Gift Achievements",
+        "sortOrder": 3,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Feeling Destructive",
+        "requirement": "Break 15,000 Breakables",
+        "reward": "20 TNT, 8 Squeaky Toys, 20 Toy Bones",
+        "difficulty": "1 Star",
+        "cardSummary": "A breakables milestone: break 15,000 Breakables to claim the reward."
+      },
+      "system": {
+        "slug": "feeling-destructive",
+        "section": "Breakables Achievements",
+        "sortOrder": 4,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Breaking Breakables",
+        "requirement": "Break 50,000 Breakables",
+        "reward": "30k Diamonds, 3 TNT Crates",
+        "difficulty": "2 Stars",
+        "cardSummary": "A breakables milestone: break 50,000 Breakables to claim the reward."
+      },
+      "system": {
+        "slug": "breaking-breakables",
+        "section": "Breakables Achievements",
+        "sortOrder": 5,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Wrecking Ball",
+        "requirement": "Break 250,000 Breakables",
+        "reward": "90k Diamonds, Dragon Booth",
+        "difficulty": "2 Stars",
+        "cardSummary": "A breakables milestone: break 250,000 Breakables to claim the reward."
+      },
+      "system": {
+        "slug": "wrecking-ball",
+        "section": "Breakables Achievements",
+        "sortOrder": 6,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Break-athlon",
+        "requirement": "Break 500,000 Breakables",
+        "reward": "125k Diamonds, 2 Midas Touch Enchants",
+        "difficulty": "3 Stars",
+        "cardSummary": "A breakables milestone: break 500,000 Breakables to claim the reward."
+      },
+      "system": {
+        "slug": "break-athlon",
+        "section": "Breakables Achievements",
+        "sortOrder": 7,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "One Million Breakables",
+        "requirement": "Break 1,000,000 Breakables",
+        "reward": "Royalty Charm",
+        "difficulty": "3 Stars",
+        "cardSummary": "A breakables milestone: break 1,000,000 Breakables to claim the reward."
+      },
+      "system": {
+        "slug": "one-million-breakables",
+        "section": "Breakables Achievements",
+        "sortOrder": 8,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Treasure Hunter",
+        "requirement": "Break 150 Big Chests",
+        "reward": "5 Gift Bags",
+        "difficulty": "1 Star",
+        "cardSummary": "A big chests milestone: break 150 Big Chests to claim the reward."
+      },
+      "system": {
+        "slug": "treasure-hunter",
+        "section": "Big Chests Achievements",
+        "sortOrder": 9,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chest Opening Spree",
+        "requirement": "Break 500 Big Chests",
+        "reward": "4 Damage Potion V, 7 Gift Bags",
+        "difficulty": "2 Stars",
+        "cardSummary": "A big chests milestone: break 500 Big Chests to claim the reward."
+      },
+      "system": {
+        "slug": "chest-opening-spree",
+        "section": "Big Chests Achievements",
+        "sortOrder": 10,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chest Fest",
+        "requirement": "Break 1,500 Big Chests",
+        "reward": "3 Damage Potion VI, 5 Large Gift Bags",
+        "difficulty": "3 Stars",
+        "cardSummary": "A big chests milestone: break 1,500 Big Chests to claim the reward."
+      },
+      "system": {
+        "slug": "chest-fest",
+        "section": "Big Chests Achievements",
+        "sortOrder": 11,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chests Chests Chests",
+        "requirement": "Break 5,000 Big Chests",
+        "reward": "Chest Breaker (Enchantment), 5 Large Gift Bags",
+        "difficulty": "3 Stars",
+        "cardSummary": "A big chests milestone: break 5,000 Big Chests to claim the reward."
+      },
+      "system": {
+        "slug": "chests-chests-chests",
+        "section": "Big Chests Achievements",
+        "sortOrder": 12,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Comets",
+        "requirement": "Break 250 Comets",
+        "reward": "7 Comets",
+        "difficulty": "1 Star",
+        "cardSummary": "A comets milestone: break 250 Comets to claim the reward."
+      },
+      "system": {
+        "slug": "comets",
+        "section": "Comets Achievements",
+        "sortOrder": 13,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Comet Shower",
+        "requirement": "Break 1,500 Comets",
+        "reward": "25 Comets, 5 Treasure Hunter Potion IV",
+        "difficulty": "2 Stars",
+        "cardSummary": "A comets milestone: break 1,500 Comets to claim the reward."
+      },
+      "system": {
+        "slug": "comet-shower",
+        "section": "Comets Achievements",
+        "sortOrder": 14,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Comet Enthusiast",
+        "requirement": "Break 5,000 Comets",
+        "reward": "1 Starfall (Enchantment)",
+        "difficulty": "3 Stars",
+        "cardSummary": "A comets milestone: break 5,000 Comets to claim the reward."
+      },
+      "system": {
+        "slug": "comet-enthusiast",
+        "section": "Comets Achievements",
+        "sortOrder": 15,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "What's in the Box?",
+        "requirement": "Break 200 Mini Chests",
+        "reward": "10k Diamonds",
+        "difficulty": "1 Star",
+        "cardSummary": "A mini chest milestone: break 200 Mini Chests to claim the reward."
+      },
+      "system": {
+        "slug": "what-s-in-the-box",
+        "section": "Mini Chest Achievements",
+        "sortOrder": 16,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Tiny Treasure",
+        "requirement": "Break 750 Mini Chests",
+        "reward": "Damage Potion IV",
+        "difficulty": "2 Stars",
+        "cardSummary": "A mini chest milestone: break 750 Mini Chests to claim the reward."
+      },
+      "system": {
+        "slug": "tiny-treasure",
+        "section": "Mini Chest Achievements",
+        "sortOrder": 17,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Chest Extravaganza",
+        "requirement": "Break 2,000 Mini Chests",
+        "reward": "2 Large Gift Bags, 35k Diamonds",
+        "difficulty": "2 Stars",
+        "cardSummary": "A mini chest milestone: break 2,000 Mini Chests to claim the reward."
+      },
+      "system": {
+        "slug": "mini-chest-extravaganza",
+        "section": "Mini Chest Achievements",
+        "sortOrder": 18,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Chest Mayhem",
+        "requirement": "Break 7,500 Mini Chests",
+        "reward": "5 Large Gift Bags, 90k Diamonds",
+        "difficulty": "3 Stars",
+        "cardSummary": "A mini chest milestone: break 7,500 Mini Chests to claim the reward."
+      },
+      "system": {
+        "slug": "mini-chest-mayhem",
+        "section": "Mini Chest Achievements",
+        "sortOrder": 19,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mini Chest Insanity",
+        "requirement": "Break 20,000 Mini Chests",
+        "reward": "Corgi Booth, 100k Diamonds",
+        "difficulty": "3 Stars",
+        "cardSummary": "A mini chest milestone: break 20,000 Mini Chests to claim the reward."
+      },
+      "system": {
+        "slug": "mini-chest-insanity",
+        "section": "Mini Chest Achievements",
+        "sortOrder": 20,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Piñatas",
+        "requirement": "Break 250 Piñatas",
+        "reward": "10 Piñatas",
+        "difficulty": "1 Star",
+        "cardSummary": "A piñata milestone: break 250 Piñatas to claim the reward."
+      },
+      "system": {
+        "slug": "pi-atas",
+        "section": "Piñata Achievements",
+        "sortOrder": 21,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Piñata Time",
+        "requirement": "Break 1250 Piñatas",
+        "reward": "25 Piñatas, 5 Damage Potion IVs",
+        "difficulty": "2 Stars",
+        "cardSummary": "A piñata milestone: break 1250 Piñatas to claim the reward."
+      },
+      "system": {
+        "slug": "pi-ata-time",
+        "section": "Piñata Achievements",
+        "sortOrder": 22,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Piñata Fiesta",
+        "requirement": "Break 4,000 Piñatas",
+        "reward": "Large Taps Enchant",
+        "difficulty": "3 Stars",
+        "cardSummary": "A piñata milestone: break 4,000 Piñatas to claim the reward."
+      },
+      "system": {
+        "slug": "pi-ata-fiesta",
+        "section": "Piñata Achievements",
+        "sortOrder": 23,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Adventurer",
+        "requirement": "Destroy 2,000 chests in Chest Raid",
+        "reward": "5 Diamond Potion VIs",
+        "difficulty": "2 Stars",
+        "cardSummary": "A chest raid milestone: destroy 2,000 chests in Chest Raid to claim the reward."
+      },
+      "system": {
+        "slug": "adventurer",
+        "section": "Chest Raid Achievements",
+        "sortOrder": 24,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Raider",
+        "requirement": "Destroy 5,000 chests in Chest Raid",
+        "reward": "15 Secret Keys",
+        "difficulty": "3 Stars",
+        "cardSummary": "A chest raid milestone: destroy 5,000 chests in Chest Raid to claim the reward."
+      },
+      "system": {
+        "slug": "raider",
+        "section": "Chest Raid Achievements",
+        "sortOrder": 25,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Chest Raid Boss",
+        "requirement": "Destroy 15,000 chests in Chest Raid",
+        "reward": "2 Royalty Charms",
+        "difficulty": "3 Stars",
+        "cardSummary": "A chest raid milestone: destroy 15,000 chests in Chest Raid to claim the reward."
+      },
+      "system": {
+        "slug": "chest-raid-boss",
+        "section": "Chest Raid Achievements",
+        "sortOrder": 26,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Piggy Bank",
+        "requirement": "Fill 175 Coin Jars",
+        "reward": "15 Basic Coin Jars, 5 Magic Coin Jars",
+        "difficulty": "1 Star",
+        "cardSummary": "A coin jar milestone: fill 175 Coin Jars to claim the reward."
+      },
+      "system": {
+        "slug": "piggy-bank",
+        "section": "Coin Jar Achievements",
+        "sortOrder": 27,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jar Head",
+        "requirement": "Fill 1,000 Coin Jars",
+        "reward": "25 Basic Coin Jars, 10 Giant Coin Jars",
+        "difficulty": "2 Stars",
+        "cardSummary": "A coin jar milestone: fill 1,000 Coin Jars to claim the reward."
+      },
+      "system": {
+        "slug": "jar-head",
+        "section": "Coin Jar Achievements",
+        "sortOrder": 28,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Jar Factory",
+        "requirement": "Fill 5,000 Coin Jars",
+        "reward": "35 Giant Coin Jars, 70.5k Diamonds",
+        "difficulty": "3 Stars",
+        "cardSummary": "A coin jar milestone: fill 5,000 Coin Jars to claim the reward."
+      },
+      "system": {
+        "slug": "jar-factory",
+        "section": "Coin Jar Achievements",
+        "sortOrder": 29,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Happy Pets",
+        "requirement": "Enroll 200 Pets in Daycare",
+        "reward": "8 Coins III Potions, 8 Damage III Potions, 8 Lucky III Potions",
+        "difficulty": "1 Star",
+        "cardSummary": "A daycare milestone: enroll 200 Pets in Daycare to claim the reward."
+      },
+      "system": {
+        "slug": "happy-pets",
+        "section": "Daycare Achievements",
+        "sortOrder": 30,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Attendance",
+        "requirement": "Enroll 900 Pets in Daycare",
+        "reward": "Happy Pets Enchant, 8 Toy Balls",
+        "difficulty": "2 Stars",
+        "cardSummary": "A daycare milestone: enroll 900 Pets in Daycare to claim the reward."
+      },
+      "system": {
+        "slug": "attendance",
+        "section": "Daycare Achievements",
+        "sortOrder": 31,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Playground",
+        "requirement": "Enroll 2,500 Pets in Daycare",
+        "reward": "5 Fortune Flags, 14 Toy Balls, 14 Toy Bones",
+        "difficulty": "2 Stars",
+        "cardSummary": "A daycare milestone: enroll 2,500 Pets in Daycare to claim the reward."
+      },
+      "system": {
+        "slug": "playground",
+        "section": "Daycare Achievements",
+        "sortOrder": 32,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pet Incubator",
+        "requirement": "Enroll 7,500 Pets in Daycare",
+        "reward": "15 Large Gift Bags, 10 Crystal Keys.",
+        "difficulty": "4 Stars",
+        "cardSummary": "A daycare milestone: enroll 7,500 Pets in Daycare to claim the reward."
+      },
+      "system": {
+        "slug": "pet-incubator",
+        "section": "Daycare Achievements",
+        "sortOrder": 33,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Powermaster",
+        "requirement": "Empower 400 Enchants",
+        "reward": "5 Coins VII Potions",
+        "difficulty": "1 Star",
+        "cardSummary": "A enchant empowering milestone: empower 400 Enchants to claim the reward."
+      },
+      "system": {
+        "slug": "powermaster",
+        "section": "Enchant Empowering Achievements",
+        "sortOrder": 34,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Enchanter",
+        "requirement": "Empower 2,000 Enchants",
+        "reward": "6 Secret Keys",
+        "difficulty": "2 Stars",
+        "cardSummary": "A enchant empowering milestone: empower 2,000 Enchants to claim the reward."
+      },
+      "system": {
+        "slug": "the-enchanter",
+        "section": "Enchant Empowering Achievements",
+        "sortOrder": 35,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Empower To Love",
+        "requirement": "Empower 10,000 Enchants",
+        "reward": "35 Large Gift Bags, 4 Treasure Hideout Keys",
+        "difficulty": "3 Stars",
+        "cardSummary": "A enchant empowering milestone: empower 10,000 Enchants to claim the reward."
+      },
+      "system": {
+        "slug": "empower-to-love",
+        "section": "Enchant Empowering Achievements",
+        "sortOrder": 36,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Scrapper",
+        "requirement": "Convert 5,000 Enchants into Essence",
+        "reward": "5 Diamonds VI Potions",
+        "difficulty": "1 Star",
+        "cardSummary": "A enchant essence milestone: convert 5,000 Enchants into Essence to claim the reward."
+      },
+      "system": {
+        "slug": "the-scrapper",
+        "section": "Enchant Essence Achievements",
+        "sortOrder": 37,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Essence Lover",
+        "requirement": "Convert 30,000 Enchants into Essence",
+        "reward": "2 Secret Keys",
+        "difficulty": "2 Stars",
+        "cardSummary": "A enchant essence milestone: convert 30,000 Enchants into Essence to claim the reward."
+      },
+      "system": {
+        "slug": "essence-lover",
+        "section": "Enchant Essence Achievements",
+        "sortOrder": 38,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Scrapmaster",
+        "requirement": "Convert 250k Enchants into Essence",
+        "reward": "35 Large Gift Bags, 4 Treasure Hideout Keys",
+        "difficulty": "3 Stars",
+        "cardSummary": "A enchant essence milestone: convert 250k Enchants into Essence to claim the reward."
+      },
+      "system": {
+        "slug": "scrapmaster",
+        "section": "Enchant Essence Achievements",
+        "sortOrder": 39,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Falling Down",
+        "requirement": "Visit the Stairway to Heaven. (accessed by falling out of the map)",
+        "reward": "777 Diamonds",
+        "difficulty": "1 Star",
+        "cardSummary": "A stairway to heaven milestone: visit the Stairway to Heaven. (accessed by falling out of the map) to claim the reward."
+      },
+      "system": {
+        "slug": "falling-down",
+        "section": "Stairway to Heaven Achievements",
+        "sortOrder": 40,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Is it Real?",
+        "requirement": "Reach the end of the Stairway to Heaven.",
+        "reward": "Golden Huge Angel Dog",
+        "difficulty": "3 Stars",
+        "cardSummary": "A stairway to heaven milestone: reach the end of the Stairway to Heaven to claim the reward."
+      },
+      "system": {
+        "slug": "is-it-real",
+        "section": "Stairway to Heaven Achievements",
+        "sortOrder": 41,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gone Fishin'",
+        "requirement": "Catch 300 Fish",
+        "reward": "1k Diamonds",
+        "difficulty": "1 Star",
+        "cardSummary": "A fishing milestone: catch 300 Fish to claim the reward."
+      },
+      "system": {
+        "slug": "gone-fishin",
+        "section": "Fishing Achievements",
+        "sortOrder": 42,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Reely Ridiculous",
+        "requirement": "Catch 2,500 Fish",
+        "reward": "5 Nametags",
+        "difficulty": "2 Stars",
+        "cardSummary": "A fishing milestone: catch 2,500 Fish to claim the reward."
+      },
+      "system": {
+        "slug": "reely-ridiculous",
+        "section": "Fishing Achievements",
+        "sortOrder": 43,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Codfather",
+        "requirement": "Catch 10,000 Fish",
+        "reward": "Fishing Booth",
+        "difficulty": "3 Stars",
+        "cardSummary": "A fishing milestone: catch 10,000 Fish to claim the reward."
+      },
+      "system": {
+        "slug": "the-codfather",
+        "section": "Fishing Achievements",
+        "sortOrder": 44,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Team Player",
+        "requirement": "Place and use 250 Flags",
+        "reward": "15 Coins Flags, 15 Diamonds Flags, 15 Magnet Flags",
+        "difficulty": "1 Star",
+        "cardSummary": "A flags milestone: place and use 250 Flags to claim the reward."
+      },
+      "system": {
+        "slug": "team-player",
+        "section": "Flags Achievements",
+        "sortOrder": 45,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Ceremony",
+        "requirement": "Place and use 1,000 Flags",
+        "reward": "15 Fortune Flags, 17.5k Diamonds",
+        "difficulty": "2 Stars",
+        "cardSummary": "A flags milestone: place and use 1,000 Flags to claim the reward."
+      },
+      "system": {
+        "slug": "ceremony",
+        "section": "Flags Achievements",
+        "sortOrder": 46,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Flag Master",
+        "requirement": "Place and use 5,000 Flags",
+        "reward": "25 Exotic Treasure Flag",
+        "difficulty": "3 Stars",
+        "cardSummary": "A flags milestone: place and use 5,000 Flags to claim the reward."
+      },
+      "system": {
+        "slug": "flag-master",
+        "section": "Flags Achievements",
+        "sortOrder": 47,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blacksmith's Apprentice",
+        "requirement": "Forge 500 Items",
+        "reward": "2 Secret Keys",
+        "difficulty": "1 Star",
+        "cardSummary": "A forge milestone: forge 500 Items to claim the reward."
+      },
+      "system": {
+        "slug": "blacksmith-s-apprentice",
+        "section": "Forge Achievements",
+        "sortOrder": 48,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pro Forger",
+        "requirement": "Forge 5,000 Items",
+        "reward": "2 Treasure Hideout Keys",
+        "difficulty": "2 Stars",
+        "cardSummary": "A forge milestone: forge 5,000 Items to claim the reward."
+      },
+      "system": {
+        "slug": "pro-forger",
+        "section": "Forge Achievements",
+        "sortOrder": 49,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Master Blacksmith",
+        "requirement": "Forge 25,000 Items",
+        "reward": "35 Mini Chests",
+        "difficulty": "3 Stars",
+        "cardSummary": "A forge milestone: forge 25,000 Items to claim the reward."
+      },
+      "system": {
+        "slug": "master-blacksmith",
+        "section": "Forge Achievements",
+        "sortOrder": 50,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Daily Grind",
+        "requirement": "Claim 100 Free Gifts",
+        "reward": "10 Gift Bags",
+        "difficulty": "1 Star",
+        "cardSummary": "A free gifts milestone: claim 100 Free Gifts to claim the reward."
+      },
+      "system": {
+        "slug": "daily-grind",
+        "section": "Free Gifts Achievements",
+        "sortOrder": 51,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Stealing From Santa",
+        "requirement": "Claim 450 Free Gifts",
+        "reward": "25 Gift Bags, 25k Diamonds",
+        "difficulty": "2 Stars",
+        "cardSummary": "A free gifts milestone: claim 450 Free Gifts to claim the reward."
+      },
+      "system": {
+        "slug": "stealing-from-santa",
+        "section": "Free Gifts Achievements",
+        "sortOrder": 52,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Birthday Bash",
+        "requirement": "Claim 1,500 Free Gifts",
+        "reward": "20 Large Gift Bags",
+        "difficulty": "3 Stars",
+        "cardSummary": "A free gifts milestone: claim 1,500 Free Gifts to claim the reward."
+      },
+      "system": {
+        "slug": "birthday-bash",
+        "section": "Free Gifts Achievements",
+        "sortOrder": 53,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Apple a Day",
+        "requirement": "Eat 250 Fruit",
+        "reward": "15 Bananas, 15 Pineapples, 15 Oranges",
+        "difficulty": "1 Star",
+        "cardSummary": "A fruit milestone: eat 250 Fruit to claim the reward."
+      },
+      "system": {
+        "slug": "apple-a-day",
+        "section": "Fruit Achievements",
+        "sortOrder": 54,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Banana Bunch",
+        "requirement": "Eat 1,000 Fruit",
+        "reward": "30 Rainbow Fruits, 10k Diamonds",
+        "difficulty": "2 Stars",
+        "cardSummary": "A fruit milestone: eat 1,000 Fruit to claim the reward."
+      },
+      "system": {
+        "slug": "banana-bunch",
+        "section": "Fruit Achievements",
+        "sortOrder": 55,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fruit Fiesta",
+        "requirement": "Eat 4,500 Fruit",
+        "reward": "Hippomelon Booth",
+        "difficulty": "3 Stars",
+        "cardSummary": "A fruit milestone: eat 4,500 Fruit to claim the reward."
+      },
+      "system": {
+        "slug": "fruit-fiesta",
+        "section": "Fruit Achievements",
+        "sortOrder": 56,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fruit Fever",
+        "requirement": "Eat 10,000 Fruit",
+        "reward": "Watermelon Hoverboard",
+        "difficulty": "3 Stars",
+        "cardSummary": "A fruit milestone: eat 10,000 Fruit to claim the reward."
+      },
+      "system": {
+        "slug": "fruit-fever",
+        "section": "Fruit Achievements",
+        "sortOrder": 57,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Fusion Frenzy",
+        "requirement": "Create 800 Pets in the Fuse Machine",
+        "reward": "3 Treasure Hunter IV Potions, Treasure Hunter Potion V",
+        "difficulty": "2 Stars",
+        "cardSummary": "A fuse machine milestone: create 800 Pets in the Fuse Machine to claim the reward."
+      },
+      "system": {
+        "slug": "fusion-frenzy",
+        "section": "Fuse Machine Achievements",
+        "sortOrder": 58,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mad Scientist",
+        "requirement": "Create 4,000 Pets in the Fuse Machine",
+        "reward": "Steampunk Hoverboard, 5 Treasure Hunter V Potions",
+        "difficulty": "3 Stars",
+        "cardSummary": "A fuse machine milestone: create 4,000 Pets in the Fuse Machine to claim the reward."
+      },
+      "system": {
+        "slug": "mad-scientist",
+        "section": "Fuse Machine Achievements",
+        "sortOrder": 59,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "All That Glitters",
+        "requirement": "Gold 1,750 Pets",
+        "reward": "5 Damage V Potions",
+        "difficulty": "2 Stars",
+        "cardSummary": "A gold milestone: gold 1,750 Pets to claim the reward."
+      },
+      "system": {
+        "slug": "all-that-glitters",
+        "section": "Gold Achievements",
+        "sortOrder": 60,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Midas Touch",
+        "requirement": "Gold 7,500 Pets",
+        "reward": "Gold Booth",
+        "difficulty": "3 Stars",
+        "cardSummary": "A gold milestone: gold 7,500 Pets to claim the reward."
+      },
+      "system": {
+        "slug": "midas-touch",
+        "section": "Gold Achievements",
+        "sortOrder": 61,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Item Printer",
+        "requirement": "Fill 175 Item Jars",
+        "reward": "25 Item Jars",
+        "difficulty": "1 Star",
+        "cardSummary": "A item jar milestone: fill 175 Item Jars to claim the reward."
+      },
+      "system": {
+        "slug": "item-printer",
+        "section": "Item Jar Achievements",
+        "sortOrder": 62,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Items 4 Days",
+        "requirement": "Fill 1,000 Item Jars",
+        "reward": "75 Item Jars",
+        "difficulty": "2 Stars",
+        "cardSummary": "A item jar milestone: fill 1,000 Item Jars to claim the reward."
+      },
+      "system": {
+        "slug": "items-4-days",
+        "section": "Item Jar Achievements",
+        "sortOrder": 63,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Too Many Items",
+        "requirement": "Fill 1,000 Item Jars",
+        "reward": "250 Item Jars, 1m Diamonds",
+        "difficulty": "3 Stars",
+        "cardSummary": "A item jar milestone: fill 1,000 Item Jars to claim the reward."
+      },
+      "system": {
+        "slug": "too-many-items",
+        "section": "Item Jar Achievements",
+        "sortOrder": 64,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Magic Trick",
+        "requirement": "Use the Magic Machine 100 times",
+        "reward": "2 Magic Orb enchantments",
+        "difficulty": "3 Stars",
+        "cardSummary": "A magic machine milestone: use the Magic Machine 100 times to claim the reward."
+      },
+      "system": {
+        "slug": "magic-trick",
+        "section": "Magic Machine Achievements",
+        "sortOrder": 65,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "I Got the Magic",
+        "requirement": "Use the Magic Machine 350 times",
+        "reward": "XP Charm, TNT Charm, Overload Charm",
+        "difficulty": "3 Stars",
+        "cardSummary": "A magic machine milestone: use the Magic Machine 350 times to claim the reward."
+      },
+      "system": {
+        "slug": "i-got-the-magic",
+        "section": "Magic Machine Achievements",
+        "sortOrder": 66,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Code Cracker",
+        "requirement": "Redeem 1 Merch Codes",
+        "reward": "Piñata Hoverboard, Lightning Booth",
+        "difficulty": "1 Star",
+        "cardSummary": "A merch code milestone: redeem 1 Merch Codes to claim the reward."
+      },
+      "system": {
+        "slug": "code-cracker",
+        "section": "Merch Code Achievements",
+        "sortOrder": 67,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Super Haul",
+        "requirement": "Redeem 5 Merch Codes",
+        "reward": "Rainbow Hoverboard",
+        "difficulty": "2 Stars",
+        "cardSummary": "A merch code milestone: redeem 5 Merch Codes to claim the reward."
+      },
+      "system": {
+        "slug": "super-haul",
+        "section": "Merch Code Achievements",
+        "sortOrder": 68,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Unboxing Pro",
+        "requirement": "Redeem 20 Merch Codes",
+        "reward": "Oversized Hoverboard",
+        "difficulty": "3 Stars",
+        "cardSummary": "A merch code milestone: redeem 20 Merch Codes to claim the reward."
+      },
+      "system": {
+        "slug": "unboxing-pro",
+        "section": "Merch Code Achievements",
+        "sortOrder": 69,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Frequent Shopper",
+        "requirement": "Purchased 150 items from Merchants",
+        "reward": "10 Gift Bags",
+        "difficulty": "1 Star",
+        "cardSummary": "A merchant milestone: purchased 150 items from Merchants to claim the reward."
+      },
+      "system": {
+        "slug": "frequent-shopper",
+        "section": "Merchant Achievements",
+        "sortOrder": 70,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Full Cart",
+        "requirement": "Purchase 700 items from Merchants",
+        "reward": "5 Large Gift Bags",
+        "difficulty": "2 Stars",
+        "cardSummary": "A merchant milestone: purchase 700 items from Merchants to claim the reward."
+      },
+      "system": {
+        "slug": "full-cart",
+        "section": "Merchant Achievements",
+        "sortOrder": 71,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Loyal Customer",
+        "requirement": "Purchase 2,500 items from Merchants",
+        "reward": "10 Large Gift Bags, Merchant Booth",
+        "difficulty": "3 Stars",
+        "cardSummary": "A merchant milestone: purchase 2,500 items from Merchants to claim the reward."
+      },
+      "system": {
+        "slug": "loyal-customer",
+        "section": "Merchant Achievements",
+        "sortOrder": 72,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eggcessive",
+        "requirement": "Open 5,000 Eggs",
+        "reward": "20 Lucky III Potions",
+        "difficulty": "1 Star",
+        "cardSummary": "A egg milestone: open 5,000 Eggs to claim the reward."
+      },
+      "system": {
+        "slug": "eggcessive",
+        "section": "Egg Achievements",
+        "sortOrder": 73,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eggsecutive",
+        "requirement": "Open 25,000 Eggs",
+        "reward": "20 Lucky IV Potions",
+        "difficulty": "2 Stars",
+        "cardSummary": "A egg milestone: open 25,000 Eggs to claim the reward."
+      },
+      "system": {
+        "slug": "eggsecutive",
+        "section": "Egg Achievements",
+        "sortOrder": 74,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eggconomy",
+        "requirement": "Open 90,000 Eggs",
+        "reward": "20 Lucky V Potions",
+        "difficulty": "2 Stars",
+        "cardSummary": "A egg milestone: open 90,000 Eggs to claim the reward."
+      },
+      "system": {
+        "slug": "eggconomy",
+        "section": "Egg Achievements",
+        "sortOrder": 75,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eggspert",
+        "requirement": "Open 250,000 Eggs",
+        "reward": "20 Lucky V Potions, Lucky Eggs V Enchant",
+        "difficulty": "3 Stars",
+        "cardSummary": "A egg milestone: open 250,000 Eggs to claim the reward."
+      },
+      "system": {
+        "slug": "eggspert",
+        "section": "Egg Achievements",
+        "sortOrder": 76,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Eggstravaganza",
+        "requirement": "Open 750,000 Eggs",
+        "reward": "Huge Hunter Enchant, Egg Booth",
+        "difficulty": "3 Stars",
+        "cardSummary": "A egg milestone: open 750,000 Eggs to claim the reward."
+      },
+      "system": {
+        "slug": "eggstravaganza",
+        "section": "Egg Achievements",
+        "sortOrder": 77,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Orb Magnet",
+        "requirement": "Collect 400,000 Orbs",
+        "reward": "Magnet II Enchant, 5k Diamonds",
+        "difficulty": "1 Star",
+        "cardSummary": "A orb milestone: collect 400,000 Orbs to claim the reward."
+      },
+      "system": {
+        "slug": "orb-magnet",
+        "section": "Orb Achievements",
+        "sortOrder": 78,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "So Many Orbs",
+        "requirement": "Collect 2,000,000 Orbs",
+        "reward": "5 Gift Bags, 12.5k Diamonds",
+        "difficulty": "2 Stars",
+        "cardSummary": "A orb milestone: collect 2,000,000 Orbs to claim the reward."
+      },
+      "system": {
+        "slug": "so-many-orbs",
+        "section": "Orb Achievements",
+        "sortOrder": 79,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Orb Volcano",
+        "requirement": "Collect 10,000,000 Orbs",
+        "reward": "4 Large Gift Bags, Magnet III Enchant",
+        "difficulty": "2 Stars",
+        "cardSummary": "A orb milestone: collect 10,000,000 Orbs to claim the reward."
+      },
+      "system": {
+        "slug": "orb-volcano",
+        "section": "Orb Achievements",
+        "sortOrder": 80,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Orbs Overflowing",
+        "requirement": "Collect 20,000,000 Orbs",
+        "reward": "4 Large Gift Bags, 3 Spinny Wheel Tickets",
+        "difficulty": "3 Stars",
+        "cardSummary": "A orb milestone: collect 20,000,000 Orbs to claim the reward."
+      },
+      "system": {
+        "slug": "orbs-overflowing",
+        "section": "Orb Achievements",
+        "sortOrder": 81,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "The Orb God",
+        "requirement": "Collect 50,000,000 Orbs",
+        "reward": "Balloon Booth, 55k Diamonds",
+        "difficulty": "3 Stars",
+        "cardSummary": "A orb milestone: collect 50,000,000 Orbs to claim the reward."
+      },
+      "system": {
+        "slug": "the-orb-god",
+        "section": "Orb Achievements",
+        "sortOrder": 82,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Double Rainbow",
+        "requirement": "Rainbow 1,000 Pets",
+        "reward": "5 Damage IV Potions, 5 Coins IV Potions, 5 Lucky IV Potions",
+        "difficulty": "2 Stars",
+        "cardSummary": "A rainbow milestone: rainbow 1,000 Pets to claim the reward."
+      },
+      "system": {
+        "slug": "double-rainbow",
+        "section": "Rainbow Achievements",
+        "sortOrder": 83,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Refraction",
+        "requirement": "Rainbow 5,000 Pets",
+        "reward": "Rainbow Booth",
+        "difficulty": "3 Stars",
+        "cardSummary": "A rainbow milestone: rainbow 5,000 Pets to claim the reward."
+      },
+      "system": {
+        "slug": "refraction",
+        "section": "Rainbow Achievements",
+        "sortOrder": 84,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Gleaming",
+        "requirement": "Hatch 250 Shiny Pets",
+        "reward": "10 Lucky IV Potions, 3 Lucky V Potions",
+        "difficulty": "1 Star",
+        "cardSummary": "A shiny milestone: hatch 250 Shiny Pets to claim the reward."
+      },
+      "system": {
+        "slug": "gleaming",
+        "section": "Shiny Achievements",
+        "sortOrder": 85,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Blinding Light",
+        "requirement": "Hatch 2,000 Shiny Pets",
+        "reward": "Shiny Hunter Enchant",
+        "difficulty": "3 Stars",
+        "cardSummary": "A shiny milestone: hatch 2,000 Shiny Pets to claim the reward."
+      },
+      "system": {
+        "slug": "blinding-light",
+        "section": "Shiny Achievements",
+        "sortOrder": 86,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Trainee",
+        "requirement": "Use your Ultimate 1,000 times",
+        "reward": "5 Tech Keys",
+        "difficulty": "3 Stars",
+        "cardSummary": "A ultimate milestone: use your Ultimate 1,000 times to claim the reward."
+      },
+      "system": {
+        "slug": "trainee",
+        "section": "Ultimate Achievements",
+        "sortOrder": 87,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sidekick",
+        "requirement": "Use your Ultimate 3,000 times",
+        "reward": "25 Mini Chests",
+        "difficulty": "3 Stars",
+        "cardSummary": "A ultimate milestone: use your Ultimate 3,000 times to claim the reward."
+      },
+      "system": {
+        "slug": "sidekick",
+        "section": "Ultimate Achievements",
+        "sortOrder": 88,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hero",
+        "requirement": "Use your Ultimate 3,000 times",
+        "reward": "2 Overload Charms",
+        "difficulty": "3 Stars",
+        "cardSummary": "A ultimate milestone: use your Ultimate 3,000 times to claim the reward."
+      },
+      "system": {
+        "slug": "hero",
+        "section": "Ultimate Achievements",
+        "sortOrder": 89,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Spellbook",
+        "requirement": "Upgrade 125 Enchants",
+        "reward": "10 Comets, 15k Diamonds",
+        "difficulty": "1 Star",
+        "cardSummary": "A enchant milestone: upgrade 125 Enchants to claim the reward."
+      },
+      "system": {
+        "slug": "spellbook",
+        "section": "Enchant Achievements",
+        "sortOrder": 90,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Magic Wand",
+        "requirement": "Upgrade 1,000 Enchants",
+        "reward": "Lightning Enchant, 25k Diamonds",
+        "difficulty": "2 Stars",
+        "cardSummary": "A enchant milestone: upgrade 1,000 Enchants to claim the reward."
+      },
+      "system": {
+        "slug": "magic-wand",
+        "section": "Enchant Achievements",
+        "sortOrder": 91,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Mystic Merging",
+        "requirement": "Upgrade 5,000 Enchants",
+        "reward": "Super Lightning Enchant",
+        "difficulty": "3 Stars",
+        "cardSummary": "A enchant milestone: upgrade 5,000 Enchants to claim the reward."
+      },
+      "system": {
+        "slug": "mystic-merging",
+        "section": "Enchant Achievements",
+        "sortOrder": 92,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Pixie Dust",
+        "requirement": "Upgrade 200 Potions",
+        "reward": "8 Coins IV Potions, 15 Damage III Potions, 15 Treasure Hunter III Potions",
+        "difficulty": "1 Star",
+        "cardSummary": "A potion milestone: upgrade 200 Potions to claim the reward."
+      },
+      "system": {
+        "slug": "pixie-dust",
+        "section": "Potion Achievements",
+        "sortOrder": 93,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Abracadabra",
+        "requirement": "Upgrade 1,500 Potions",
+        "reward": "8 Diamonds III Potions, The Cocktail",
+        "difficulty": "2 Stars",
+        "cardSummary": "A potion milestone: upgrade 1,500 Potions to claim the reward."
+      },
+      "system": {
+        "slug": "abracadabra",
+        "section": "Potion Achievements",
+        "sortOrder": 94,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Sorcerer Supreme",
+        "requirement": "Upgrade 7,500 Potions",
+        "reward": "10 The Cocktails",
+        "difficulty": "3 Stars",
+        "cardSummary": "A potion milestone: upgrade 7,500 Potions to claim the reward."
+      },
+      "system": {
+        "slug": "sorcerer-supreme",
+        "section": "Potion Achievements",
+        "sortOrder": 95,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vending Spree",
+        "requirement": "Buy 300 items from Vending Machines",
+        "reward": "10 TNT, 5 Squeaky Toys, 5 Rainbow Fruits",
+        "difficulty": "1 Star",
+        "cardSummary": "A vending machine milestone: buy 300 items from Vending Machines to claim the reward."
+      },
+      "system": {
+        "slug": "vending-spree",
+        "section": "Vending Machine Achievements",
+        "sortOrder": 96,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Coin Drain",
+        "requirement": "Buy 1,500 items from Vending Machines",
+        "reward": "5 TNT Crates, 5 Fortune Flags, 5 Gift Bags",
+        "difficulty": "2 Stars",
+        "cardSummary": "A vending machine milestone: buy 1,500 items from Vending Machines to claim the reward."
+      },
+      "system": {
+        "slug": "coin-drain",
+        "section": "Vending Machine Achievements",
+        "sortOrder": 97,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Vend and Repeat",
+        "requirement": "Buy 8,000 items from Vending Machines",
+        "reward": "Doodle Hoverboard, 8 Spinny Wheel Tickets",
+        "difficulty": "3 Stars",
+        "cardSummary": "A vending machine milestone: buy 8,000 items from Vending Machines to claim the reward."
+      },
+      "system": {
+        "slug": "vend-and-repeat",
+        "section": "Vending Machine Achievements",
+        "sortOrder": 98,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "XP Skipper",
+        "requirement": "Craft 50 XP Potions",
+        "reward": "5 Large Gift Bags",
+        "difficulty": "1 Star",
+        "cardSummary": "A xp potion machine milestone: craft 50 XP Potions to claim the reward."
+      },
+      "system": {
+        "slug": "xp-skipper",
+        "section": "XP Potion Machine Achievements",
+        "sortOrder": 99,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Skip The Grind",
+        "requirement": "Craft 250 XP Potions",
+        "reward": "10 Mini Chests",
+        "difficulty": "2 Stars",
+        "cardSummary": "A xp potion machine milestone: craft 250 XP Potions to claim the reward."
+      },
+      "system": {
+        "slug": "skip-the-grind",
+        "section": "XP Potion Machine Achievements",
+        "sortOrder": 100,
+        "image": null
+      }
+    },
+    {
+      "item": {
+        "name": "Hello 99",
+        "requirement": "Craft 1,500 XP Potions",
+        "reward": "12 Tech Keys, 5 Secret Keys, 25 Crystal Keys",
+        "difficulty": "3 Stars",
+        "cardSummary": "A xp potion machine milestone: craft 1,500 XP Potions to claim the reward."
+      },
+      "system": {
+        "slug": "hello-99",
+        "section": "XP Potion Machine Achievements",
+        "sortOrder": 101,
+        "image": null
+      }
+    }
+  ]
+}
