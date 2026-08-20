@@ -1,0 +1,205 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Forsaken",
+    "gameSlug": "forsaken",
+    "collection": "items",
+    "route": "/wiki/forsaken/items",
+    "catalogCode": "forsaken-items",
+    "itemFields": [
+      "usage",
+      "cardSummary"
+    ],
+    "columns": [
+      "usage",
+      "cardSummary"
+    ],
+    "display": {
+      "groupLabel": "Where",
+      "sectionOrder": [
+        "Map Items",
+        "Private Server Items"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "usage",
+      "cardDescriptionField": "usage",
+      "cardFields": [
+        "usage"
+      ],
+      "tableFields": [
+        "usage",
+        "cardSummary"
+      ],
+      "fieldPresentation": {
+        "usage": {
+          "kind": "detail",
+          "label": "Use",
+          "omitWhenEmpty": true
+        },
+        "cardSummary": {
+          "kind": "detail",
+          "label": "Summary"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Bloxy Cola",
+        "usage": "Drink for a speed boost.",
+        "cardSummary": "The classic clutch drink: about four seconds to chug for ten seconds of Speed 2, dropping to Speed 1 if you double-dip within thirty seconds or drink it in Last Man Standing."
+      },
+      "system": {
+        "slug": "bloxy-cola",
+        "section": "Map Items",
+        "sortOrder": 1,
+        "image": "/Forsaken/Items/bloxy-cola.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Medkit",
+        "usage": "Heal your injuries.",
+        "cardSummary": "The heal that turns a chase survived into a second life; the item every team fights over."
+      },
+      "system": {
+        "slug": "medkit",
+        "section": "Map Items",
+        "sortOrder": 2,
+        "image": "/Forsaken/Items/medkit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Flashlight",
+        "usage": "Light up dark areas.",
+        "cardSummary": "A private-server light source for exploring maps at leisure."
+      },
+      "system": {
+        "slug": "flashlight",
+        "section": "Private Server Items",
+        "sortOrder": 3,
+        "image": "/Forsaken/Items/flashlight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Epicsauce",
+        "usage": "Drink for a high speed boost, but get burnt.",
+        "cardSummary": "A private-server nod to Roblox history with a suitably epic buff."
+      },
+      "system": {
+        "slug": "epicsauce",
+        "section": "Private Server Items",
+        "sortOrder": 4,
+        "image": "/Forsaken/Items/epicsauce.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glock",
+        "usage": "Deal damage to the [[Killers",
+        "cardSummary": "A private-server sidearm for sandbox rounds."
+      },
+      "system": {
+        "slug": "glock",
+        "section": "Private Server Items",
+        "sortOrder": 5,
+        "image": "/Forsaken/Items/glock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Assault Rifle",
+        "usage": "Deal damage to the killer from afar.",
+        "cardSummary": "The private-server heavy option for messing with friends."
+      },
+      "system": {
+        "slug": "assault-rifle",
+        "section": "Private Server Items",
+        "sortOrder": 6,
+        "image": "/Forsaken/Items/assault-rifle.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Broadsword",
+        "usage": "Deal damage to the killer in close range.",
+        "cardSummary": "A private-server melee classic."
+      },
+      "system": {
+        "slug": "broadsword",
+        "section": "Private Server Items",
+        "sortOrder": 7,
+        "image": "/Forsaken/Items/broadsword.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Gravity Gun",
+        "usage": "Punt/Pick up players.",
+        "cardSummary": "The sandbox toy: pick things up, launch them, break the game a little."
+      },
+      "system": {
+        "slug": "gravity-gun",
+        "section": "Private Server Items",
+        "sortOrder": 8,
+        "image": "/Forsaken/Items/gravity-gun.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fake Bloxy Cola",
+        "usage": "Drink for nothing.",
+        "cardSummary": "A prank cola for private servers that does not do what it promises."
+      },
+      "system": {
+        "slug": "fake-bloxy-cola",
+        "section": "Private Server Items",
+        "sortOrder": 9,
+        "image": "/Forsaken/Items/fake-bloxy-cola.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Fake Medkit",
+        "usage": "Use for nothing.",
+        "cardSummary": "The cruelest private-server prank in the game."
+      },
+      "system": {
+        "slug": "fake-medkit",
+        "section": "Private Server Items",
+        "sortOrder": 10,
+        "image": "/Forsaken/Items/fake-medkit.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Green Key",
+        "usage": "Nothing",
+        "cardSummary": "A private-server key item tied to secrets."
+      },
+      "system": {
+        "slug": "green-key",
+        "section": "Private Server Items",
+        "sortOrder": 11,
+        "image": "/Forsaken/Items/green-key.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Bloxiade",
+        "usage": "Drink for a speed boost.",
+        "cardSummary": "A sports-drink twist on the cola formula for private servers."
+      },
+      "system": {
+        "slug": "bloxiade",
+        "section": "Private Server Items",
+        "sortOrder": 12,
+        "image": "/Forsaken/Items/bloxiade.png"
+      }
+    }
+  ]
+}

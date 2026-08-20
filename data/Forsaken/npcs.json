@@ -1,0 +1,655 @@
+{
+  "meta": {
+    "schemaVersion": 2,
+    "game": "Forsaken",
+    "gameSlug": "forsaken",
+    "collection": "npcs",
+    "route": "/wiki/forsaken/npcs",
+    "catalogCode": "forsaken-npcs",
+    "itemFields": [
+      "about"
+    ],
+    "columns": [
+      "about"
+    ],
+    "display": {
+      "groupLabel": "Group",
+      "sectionOrder": [
+        "Current NPCs",
+        "Upcoming NPCs",
+        "Removed NPCs",
+        "Admin-Exclusive NPCs"
+      ],
+      "badgeField": null,
+      "subtitleFields": [],
+      "descriptionField": "about",
+      "cardDescriptionField": "about",
+      "cardFields": [
+        "about"
+      ],
+      "tableFields": [
+        "about"
+      ],
+      "fieldPresentation": {
+        "about": {
+          "kind": "detail",
+          "label": "About"
+        }
+      }
+    }
+  },
+  "items": [
+    {
+      "item": {
+        "name": "Pizza Guy",
+        "about": "Lost his car during Greg's delivery and became stuck here."
+      },
+      "system": {
+        "slug": "pizza-guy",
+        "section": "Current NPCs",
+        "sortOrder": 1,
+        "image": "/Forsaken/NPCs/pizza-guy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "DrakoBloxxerPlaque",
+        "about": "Was beheaded by Slasher and now just screams on a wall."
+      },
+      "system": {
+        "slug": "drakobloxxerplaque",
+        "section": "Current NPCs",
+        "sortOrder": 2,
+        "image": "/Forsaken/NPCs/drakobloxxerplaque.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Brandon",
+        "about": "He is on the right of the fireplace. He asks the player how they are doing. Picking bad will make him ask what's happening, online or IRL. Picking good will make him ask if you are hanging out or gaming. Sometimes he says ERROR [Code D8], which is a reference to the final video of"
+      },
+      "system": {
+        "slug": "brandon",
+        "section": "Current NPCs",
+        "sortOrder": 3,
+        "image": "/Forsaken/NPCs/brandon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Carl",
+        "about": "Host that gives free tables to people due to there being no stores to spend money at."
+      },
+      "system": {
+        "slug": "carl",
+        "section": "Current NPCs",
+        "sortOrder": 4,
+        "image": "/Forsaken/NPCs/carl.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cat",
+        "about": "Talking cat that is aggressive towards the player."
+      },
+      "system": {
+        "slug": "cat",
+        "section": "Current NPCs",
+        "sortOrder": 5,
+        "image": "/Forsaken/NPCs/cat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Roland Cosplayer",
+        "about": "He is found outside the house and beside the doorframe near the player spawn."
+      },
+      "system": {
+        "slug": "roland-cosplayer",
+        "section": "Current NPCs",
+        "sortOrder": 6,
+        "image": "/Forsaken/NPCs/roland-cosplayer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Construction Workers",
+        "about": "Construction workers that work for 2x2, they were ordered to block off an entrance due to it being dangerous."
+      },
+      "system": {
+        "slug": "construction-workers",
+        "section": "Current NPCs",
+        "sortOrder": 7,
+        "image": "/Forsaken/NPCs/construction-workers.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Cake Monster",
+        "about": "Only speaks in gibberish, gets angry when insulted."
+      },
+      "system": {
+        "slug": "cake-monster",
+        "section": "Current NPCs",
+        "sortOrder": 8,
+        "image": "/Forsaken/NPCs/cake-monster.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Desmund",
+        "about": "Fan of Glebus and likes its cool trick."
+      },
+      "system": {
+        "slug": "desmund",
+        "section": "Current NPCs",
+        "sortOrder": 9,
+        "image": "/Forsaken/NPCs/desmund.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Glebus",
+        "about": "Says \"gleeb\" as a cool trick. Gets more vexed the more you talk to it."
+      },
+      "system": {
+        "slug": "glebus",
+        "section": "Current NPCs",
+        "sortOrder": 10,
+        "image": "/Forsaken/NPCs/glebus.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Investigative Iris",
+        "about": "Investigator that uses hashtags when speaking, is looking into a painting with the number 4 on it that seemed off to them."
+      },
+      "system": {
+        "slug": "investigative-iris",
+        "section": "Current NPCs",
+        "sortOrder": 11,
+        "image": "/Forsaken/NPCs/investigative-iris.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Letter",
+        "about": "A letter in a mailbox addressed to a specific person."
+      },
+      "system": {
+        "slug": "letter",
+        "section": "Current NPCs",
+        "sortOrder": 12,
+        "image": "/Forsaken/NPCs/letter.png"
+      }
+    },
+    {
+      "item": {
+        "name": "ragerr",
+        "about": "Sits at a table, claims he's the goat at Forsaken. (he ain't) He then admits he's lowk buns at the game. (he is)"
+      },
+      "system": {
+        "slug": "ragerr",
+        "section": "Current NPCs",
+        "sortOrder": 13,
+        "image": "/Forsaken/NPCs/ragerr.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Greg",
+        "about": "Sits at a table, still waiting for Pizza Guy's pizza."
+      },
+      "system": {
+        "slug": "greg",
+        "section": "Current NPCs",
+        "sortOrder": 14,
+        "image": "/Forsaken/NPCs/greg.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Mart",
+        "about": "Watches the TV on the second floor of the main house. Only says \"panda\"."
+      },
+      "system": {
+        "slug": "mart",
+        "section": "Current NPCs",
+        "sortOrder": 15,
+        "image": "/Forsaken/NPCs/mart.png"
+      }
+    },
+    {
+      "item": {
+        "name": "D3functB0t",
+        "about": "Based off of the [https://roblox.fandom.com/wiki/Catalog:Shoulder_Helper_Bot Helper Robot] and hat. They talks in a quirky style with rapid use of emoticons, replacing vowels with numbers, and random spam of special characters used as an expression of anger."
+      },
+      "system": {
+        "slug": "d3functb0t",
+        "section": "Current NPCs",
+        "sortOrder": 16,
+        "image": "/Forsaken/NPCs/d3functb0t.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Grandfather Clock",
+        "about": "as the name suggests, a 'Grandfather Clock'. It stands in the corner of Lobby and when interacted with will activate and deactivate AFK mode for you."
+      },
+      "system": {
+        "slug": "grandfather-clock",
+        "section": "Current NPCs",
+        "sortOrder": 17,
+        "image": "/Forsaken/NPCs/grandfather-clock.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Envelope",
+        "about": "An envelope meant to explain more of the lore of Forsaken."
+      },
+      "system": {
+        "slug": "envelope",
+        "section": "Current NPCs",
+        "sortOrder": 18,
+        "image": "/Forsaken/NPCs/envelope.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Demophon",
+        "about": "A riddling fish that makes references to several philosophical stories."
+      },
+      "system": {
+        "slug": "demophon",
+        "section": "Current NPCs",
+        "sortOrder": 19,
+        "image": "/Forsaken/NPCs/demophon.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ben",
+        "about": "An out-of-bounds character that is meant to be a 'Roblox anomaly.'"
+      },
+      "system": {
+        "slug": "ben",
+        "section": "Current NPCs",
+        "sortOrder": 20,
+        "image": "/Forsaken/NPCs/ben.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Red Herring",
+        "about": "A troll NPC made to made to distract players from the lore of Forsaken."
+      },
+      "system": {
+        "slug": "red-herring",
+        "section": "Current NPCs",
+        "sortOrder": 21,
+        "image": "/Forsaken/NPCs/red-herring.png"
+      }
+    },
+    {
+      "item": {
+        "name": "WANTED",
+        "about": "A wanted poster of Taph."
+      },
+      "system": {
+        "slug": "wanted",
+        "section": "Current NPCs",
+        "sortOrder": 22,
+        "image": "/Forsaken/NPCs/wanted.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Photo",
+        "about": "A photo of Noob and some of their friends."
+      },
+      "system": {
+        "slug": "photo",
+        "section": "Current NPCs",
+        "sortOrder": 23,
+        "image": "/Forsaken/NPCs/photo.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Big Cheese",
+        "about": "Stands at the top of the staircase, he says nothing, he only stares."
+      },
+      "system": {
+        "slug": "big-cheese",
+        "section": "Current NPCs",
+        "sortOrder": 24,
+        "image": "/Forsaken/NPCs/big-cheese.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ethan",
+        "about": "An NPC who's trying to find another NPC that's hiding somewhere in the Lobby."
+      },
+      "system": {
+        "slug": "ethan",
+        "section": "Current NPCs",
+        "sortOrder": 25,
+        "image": "/Forsaken/NPCs/ethan.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Emma",
+        "about": "An NPC who's hiding from another NPC. No snitching!"
+      },
+      "system": {
+        "slug": "emma",
+        "section": "Current NPCs",
+        "sortOrder": 26,
+        "image": "/Forsaken/NPCs/emma.png"
+      }
+    },
+    {
+      "item": {
+        "name": "trhett123",
+        "about": "An NPC that likes waffles."
+      },
+      "system": {
+        "slug": "trhett123",
+        "section": "Current NPCs",
+        "sortOrder": 27,
+        "image": "/Forsaken/NPCs/trhett123.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Some Random Guy",
+        "about": "Hes just a guy."
+      },
+      "system": {
+        "slug": "some-random-guy",
+        "section": "Current NPCs",
+        "sortOrder": 28,
+        "image": "/Forsaken/NPCs/some-random-guy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Allusion Guy",
+        "about": "an NPC who appeared in the Public Testing game, he looks like Roland Cosplayer but with a dark hole face."
+      },
+      "system": {
+        "slug": "allusion-guy",
+        "section": "Upcoming NPCs",
+        "sortOrder": 29,
+        "image": "/Forsaken/NPCs/allusion-guy.png"
+      }
+    },
+    {
+      "item": {
+        "name": "TheGuestToBlame",
+        "about": "Is an A Bizarre Day Reference. It is unknown why he was removed from the game."
+      },
+      "system": {
+        "slug": "theguesttoblame",
+        "section": "Removed NPCs",
+        "sortOrder": 30,
+        "image": "/Forsaken/NPCs/theguesttoblame.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Toothy Deer",
+        "about": "Hides away from everyone else to avoid being called a Toothy Deer, gets offended when a player calls him that. This NPC was removed for Toothy Deer becoming a Dusekkar Skin."
+      },
+      "system": {
+        "slug": "toothy-deer",
+        "section": "Removed NPCs",
+        "sortOrder": 31,
+        "image": "/Forsaken/NPCs/toothy-deer.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Deadshot",
+        "about": "an Out-of-Bounds NPC."
+      },
+      "system": {
+        "slug": "deadshot",
+        "section": "Removed NPCs",
+        "sortOrder": 32,
+        "image": "/Forsaken/NPCs/deadshot.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stella",
+        "about": "An NPC made to encourage voting in the Roblox Innovation Awards."
+      },
+      "system": {
+        "slug": "stella",
+        "section": "Removed NPCs",
+        "sortOrder": 33,
+        "image": "/Forsaken/NPCs/stella.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Recorder",
+        "about": "Was a recording of a mysterious voice that warned whoever heard it to escape the realm and gave vague hints."
+      },
+      "system": {
+        "slug": "recorder",
+        "section": "Removed NPCs",
+        "sortOrder": 34,
+        "image": "/Forsaken/NPCs/recorder.png"
+      }
+    },
+    {
+      "item": {
+        "name": "???",
+        "about": "A wandering soul in the Lobby."
+      },
+      "system": {
+        "slug": "npc-34",
+        "section": "Removed NPCs",
+        "sortOrder": 35,
+        "image": "/Forsaken/NPCs/npc-34.png"
+      }
+    },
+    {
+      "item": {
+        "name": "ajarbythedoor",
+        "about": "The character associated with the RecallAHollowHeart ARG, all lines said are taken directly from in-game meetings with the character."
+      },
+      "system": {
+        "slug": "ajarbythedoor",
+        "section": "Removed NPCs",
+        "sortOrder": 36,
+        "image": "/Forsaken/NPCs/ajarbythedoor.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Dapper",
+        "about": "A brown bat that only says \"Oi\"."
+      },
+      "system": {
+        "slug": "dapper",
+        "section": "Removed NPCs",
+        "sortOrder": 37,
+        "image": "/Forsaken/NPCs/dapper.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Acid",
+        "about": "An NPC who talks about something that happened related to a specific Survivor."
+      },
+      "system": {
+        "slug": "acid",
+        "section": "Removed NPCs",
+        "sortOrder": 38,
+        "image": "/Forsaken/NPCs/acid.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Stack",
+        "about": "An NPC who talks about the water in the Lobby."
+      },
+      "system": {
+        "slug": "stack",
+        "section": "Removed NPCs",
+        "sortOrder": 39,
+        "image": "/Forsaken/NPCs/stack.png"
+      }
+    },
+    {
+      "item": {
+        "name": "bat",
+        "about": "Just like Cat, they're a talking animal."
+      },
+      "system": {
+        "slug": "bat",
+        "section": "Removed NPCs",
+        "sortOrder": 40,
+        "image": "/Forsaken/NPCs/bat.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Epic Pumpkin",
+        "about": "It's a pumpkin that laughs at you."
+      },
+      "system": {
+        "slug": "epic-pumpkin",
+        "section": "Removed NPCs",
+        "sortOrder": 41,
+        "image": "/Forsaken/NPCs/epic-pumpkin.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Hollow",
+        "about": "An NPC that looks like a grim reaper."
+      },
+      "system": {
+        "slug": "hollow",
+        "section": "Removed NPCs",
+        "sortOrder": 42,
+        "image": "/Forsaken/NPCs/hollow.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Trick",
+        "about": "An NPC that looks like a vampire."
+      },
+      "system": {
+        "slug": "trick",
+        "section": "Removed NPCs",
+        "sortOrder": 43,
+        "image": "/Forsaken/NPCs/trick.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Presence",
+        "about": "The \"A Dark Presence\" Roblox accessory but turned into a humanoid NPC."
+      },
+      "system": {
+        "slug": "presence",
+        "section": "Removed NPCs",
+        "sortOrder": 44,
+        "image": "/Forsaken/NPCs/presence.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Nosferatu",
+        "about": "The \"shopkeeper\" of the Halloween shop in the basement of the Lobby. He is also Nosferatu|a Killer."
+      },
+      "system": {
+        "slug": "nosferatu",
+        "section": "Removed NPCs",
+        "sortOrder": 45,
+        "image": "/Forsaken/NPCs/nosferatu.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Statue of Might",
+        "about": "A statue of a powerful and unstoppable enforcer."
+      },
+      "system": {
+        "slug": "statue-of-might",
+        "section": "Removed NPCs",
+        "sortOrder": 46,
+        "image": "/Forsaken/NPCs/statue-of-might.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Statue of Sight",
+        "about": "A statue of the All Seeing Eye."
+      },
+      "system": {
+        "slug": "statue-of-sight",
+        "section": "Removed NPCs",
+        "sortOrder": 47,
+        "image": "/Forsaken/NPCs/statue-of-sight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Statue of Blight",
+        "about": "A statue of the undead."
+      },
+      "system": {
+        "slug": "statue-of-blight",
+        "section": "Removed NPCs",
+        "sortOrder": 48,
+        "image": "/Forsaken/NPCs/statue-of-blight.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Statue of Fright",
+        "about": "A statue of the Headless Horseman."
+      },
+      "system": {
+        "slug": "statue-of-fright",
+        "section": "Removed NPCs",
+        "sortOrder": 49,
+        "image": "/Forsaken/NPCs/statue-of-fright.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Ao Oni",
+        "about": "Likely a joke by the developers, its only appearance is on the Baseplate map."
+      },
+      "system": {
+        "slug": "ao-oni",
+        "section": "Admin-Exclusive NPCs",
+        "sortOrder": 50,
+        "image": "/Forsaken/NPCs/ao-oni.png"
+      }
+    },
+    {
+      "item": {
+        "name": "Noob With Infinite Hp",
+        "about": "Used by the developers to test."
+      },
+      "system": {
+        "slug": "noob-with-infinite-hp",
+        "section": "Admin-Exclusive NPCs",
+        "sortOrder": 51,
+        "image": "/Forsaken/NPCs/noob-with-infinite-hp.png"
+      }
+    }
+  ]
+}

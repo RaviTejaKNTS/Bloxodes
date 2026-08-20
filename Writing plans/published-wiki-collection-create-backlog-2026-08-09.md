@@ -360,10 +360,10 @@ Evidence: [full report](../tmp/game-collection-suggestions/fling-things-and-peop
 
 Evidence: [full report](../tmp/game-collection-suggestions/forsaken.md)
 
-- [ ] Items
-- [ ] Status Effects
-- [ ] NPCs
-- [ ] Quests
+- [x] Items
+- [x] Status Effects
+- [x] NPCs
+- [ ] Quests — blocked 2026-08-20: no quest roster exists on any Forsaken source
 
 ### Gakuran
 

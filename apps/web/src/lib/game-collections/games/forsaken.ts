@@ -11,6 +11,9 @@ export const forsakenCollectionGroup = {
       "maps",
       "emotes",
       "survivors",
-      "skins"
+      "skins",
+      "items",
+      "status-effects",
+      "npcs"
     ]
   } satisfies GameCollectionGroup;
