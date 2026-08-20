@@ -65,7 +65,7 @@
         "slug": "abaddon",
         "section": "Fighter",
         "sortOrder": 0,
-        "image": null
+        "image": "/BedWars/Kits/abaddon.png"
       }
     },
     {
@@ -177,7 +177,7 @@
         "slug": "eldric",
         "section": "Fighter",
         "sortOrder": 8,
-        "image": null
+        "image": "/BedWars/Kits/eldric.png"
       }
     },
     {
@@ -303,7 +303,7 @@
         "slug": "kaliyah",
         "section": "Fighter",
         "sortOrder": 17,
-        "image": null
+        "image": "/BedWars/Kits/kaliyah.png"
       }
     },
     {
@@ -415,7 +415,7 @@
         "slug": "sheep-herder",
         "section": "Fighter",
         "sortOrder": 25,
-        "image": null
+        "image": "/BedWars/Kits/sheep-herder.png"
       }
     },
     {
@@ -737,7 +737,7 @@
         "slug": "alchemist",
         "section": "Support",
         "sortOrder": 0,
-        "image": null
+        "image": "/BedWars/Kits/alchemist.png"
       }
     },
     {
@@ -849,7 +849,7 @@
         "slug": "nahla",
         "section": "Support",
         "sortOrder": 8,
-        "image": null
+        "image": "/BedWars/Kits/nahla.png"
       }
     },
     {
@@ -863,7 +863,7 @@
         "slug": "noelle",
         "section": "Support",
         "sortOrder": 9,
-        "image": null
+        "image": "/BedWars/Kits/noelle.png"
       }
     },
     {
@@ -877,7 +877,7 @@
         "slug": "nyoka",
         "section": "Support",
         "sortOrder": 10,
-        "image": null
+        "image": "/BedWars/Kits/nyoka.png"
       }
     },
     {
@@ -1157,7 +1157,7 @@
         "slug": "taliyah",
         "section": "Economy",
         "sortOrder": 13,
-        "image": null
+        "image": "/BedWars/Kits/taliyah.png"
       }
     },
     {
@@ -1241,7 +1241,7 @@
         "slug": "trapper",
         "section": "Defender",
         "sortOrder": 3,
-        "image": null
+        "image": "/BedWars/Kits/trapper.png"
       }
     },
     {
@@ -1339,7 +1339,7 @@
         "slug": "smoke",
         "section": "Destroyer",
         "sortOrder": 5,
-        "image": null
+        "image": "/BedWars/Kits/smoke.png"
       }
     },
     {
@@ -1549,7 +1549,7 @@
         "slug": "marrow",
         "section": "Other",
         "sortOrder": 6,
-        "image": null
+        "image": "/BedWars/Kits/marrow.png"
       }
     },
     {
@@ -1591,7 +1591,7 @@
         "slug": "styx",
         "section": "Other",
         "sortOrder": 9,
-        "image": null
+        "image": "/BedWars/Kits/styx.png"
       }
     },
     {

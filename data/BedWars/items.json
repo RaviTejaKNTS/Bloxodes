@@ -150,7 +150,7 @@
         "slug": "bear-claws",
         "section": "Weapons",
         "sortOrder": 5,
-        "image": null
+        "image": "/BedWars/Items/bear-claws.png"
       }
     },
     {
@@ -585,7 +585,7 @@
         "slug": "floral-headhunter",
         "section": "Weapons",
         "sortOrder": 34,
-        "image": null
+        "image": "/BedWars/Items/floral-headhunter.png"
       }
     },
     {
@@ -1560,7 +1560,7 @@
         "slug": "warlock-staff",
         "section": "Weapons",
         "sortOrder": 99,
-        "image": null
+        "image": "/BedWars/Items/warlock-staff.png"
       }
     },
     {
@@ -1740,7 +1740,7 @@
         "slug": "laser-pickaxe",
         "section": "Tools",
         "sortOrder": 8,
-        "image": null
+        "image": "/BedWars/Items/laser-pickaxe.png"
       }
     },
     {
@@ -1935,7 +1935,7 @@
         "slug": "aquamarine-lantern",
         "section": "Blocks",
         "sortOrder": 2,
-        "image": null
+        "image": "/BedWars/Items/aquamarine-lantern.png"
       }
     },
     {
@@ -2010,7 +2010,7 @@
         "slug": "barrel",
         "section": "Blocks",
         "sortOrder": 7,
-        "image": null
+        "image": "/BedWars/Items/barrel.png"
       }
     },
     {
@@ -2130,7 +2130,7 @@
         "slug": "blue-tile",
         "section": "Blocks",
         "sortOrder": 15,
-        "image": null
+        "image": "/BedWars/Items/blue-tile.png"
       }
     },
     {
@@ -2160,7 +2160,7 @@
         "slug": "brewing-cauldron",
         "section": "Blocks",
         "sortOrder": 17,
-        "image": null
+        "image": "/BedWars/Items/brewing-cauldron.png"
       }
     },
     {
@@ -2700,7 +2700,7 @@
         "slug": "glowstone",
         "section": "Blocks",
         "sortOrder": 53,
-        "image": null
+        "image": "/BedWars/Items/glowstone.png"
       }
     },
     {
@@ -2715,7 +2715,7 @@
         "slug": "gold-block",
         "section": "Blocks",
         "sortOrder": 54,
-        "image": null
+        "image": "/BedWars/Items/gold-block.png"
       }
     },
     {
@@ -2835,7 +2835,7 @@
         "slug": "haybale",
         "section": "Blocks",
         "sortOrder": 62,
-        "image": null
+        "image": "/BedWars/Items/haybale.png"
       }
     },
     {
@@ -2940,7 +2940,7 @@
         "slug": "jump-pad",
         "section": "Blocks",
         "sortOrder": 69,
-        "image": null
+        "image": "/BedWars/Items/jump-pad.png"
       }
     },
     {
@@ -2985,7 +2985,7 @@
         "slug": "lantern-block",
         "section": "Blocks",
         "sortOrder": 72,
-        "image": null
+        "image": "/BedWars/Items/lantern-block.png"
       }
     },
     {
@@ -3480,7 +3480,7 @@
         "slug": "scaffold",
         "section": "Blocks",
         "sortOrder": 105,
-        "image": null
+        "image": "/BedWars/Items/scaffold.png"
       }
     },
     {
@@ -3870,7 +3870,7 @@
         "slug": "void-dirt",
         "section": "Blocks",
         "sortOrder": 131,
-        "image": null
+        "image": "/BedWars/Items/void-dirt.png"
       }
     },
     {
@@ -3885,7 +3885,7 @@
         "slug": "void-growth",
         "section": "Blocks",
         "sortOrder": 132,
-        "image": null
+        "image": "/BedWars/Items/void-growth.png"
       }
     },
     {
@@ -3915,7 +3915,7 @@
         "slug": "void-rock",
         "section": "Blocks",
         "sortOrder": 134,
-        "image": null
+        "image": "/BedWars/Items/void-rock.png"
       }
     },
     {
@@ -3945,7 +3945,7 @@
         "slug": "volatile-stone",
         "section": "Blocks",
         "sortOrder": 136,
-        "image": null
+        "image": "/BedWars/Items/volatile-stone.png"
       }
     },
     {
@@ -4590,7 +4590,7 @@
         "slug": "the-big-apple",
         "section": "Consumables",
         "sortOrder": 28,
-        "image": null
+        "image": "/BedWars/Items/the-big-apple.png"
       }
     },
     {
@@ -4800,7 +4800,7 @@
         "slug": "become-a-pirate",
         "section": "Utility & Other",
         "sortOrder": 10,
-        "image": null
+        "image": "/BedWars/Items/become-a-pirate.png"
       }
     },
     {
@@ -4830,7 +4830,7 @@
         "slug": "beehive-grenade",
         "section": "Utility & Other",
         "sortOrder": 12,
-        "image": null
+        "image": "/BedWars/Items/beehive-grenade.png"
       }
     },
     {
@@ -5100,7 +5100,7 @@
         "slug": "construction-pit",
         "section": "Utility & Other",
         "sortOrder": 30,
-        "image": null
+        "image": "/BedWars/Items/construction-pit.png"
       }
     },
     {
@@ -5910,7 +5910,7 @@
         "slug": "ladder",
         "section": "Utility & Other",
         "sortOrder": 84,
-        "image": null
+        "image": "/BedWars/Items/ladder.png"
       }
     },
     {
@@ -5925,7 +5925,7 @@
         "slug": "lucky-block-smelter",
         "section": "Utility & Other",
         "sortOrder": 85,
-        "image": null
+        "image": "/BedWars/Items/lucky-block-smelter.png"
       }
     },
     {

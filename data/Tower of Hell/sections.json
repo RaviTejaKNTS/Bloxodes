@@ -145,7 +145,7 @@
         "slug": "all-around",
         "section": "Vanilla Sections",
         "sortOrder": 3,
-        "image": null
+        "image": "/Tower of Hell/Sections/all-around.png"
       }
     },
     {
@@ -257,7 +257,7 @@
         "slug": "asymmetric",
         "section": "Vanilla Sections",
         "sortOrder": 9,
-        "image": null
+        "image": "/Tower of Hell/Sections/asymmetric.png"
       }
     },
     {
@@ -337,7 +337,7 @@
         "slug": "barrier-breach",
         "section": "Vanilla Sections",
         "sortOrder": 12,
-        "image": null
+        "image": "/Tower of Hell/Sections/barrier-breach.png"
       }
     },
     {
@@ -1297,7 +1297,7 @@
         "slug": "dizzying-paths",
         "section": "Vanilla Sections",
         "sortOrder": 67,
-        "image": null
+        "image": "/Tower of Hell/Sections/dizzying-paths.png"
       }
     },
     {
@@ -1761,7 +1761,7 @@
         "slug": "free-fall",
         "section": "Vanilla Sections",
         "sortOrder": 96,
-        "image": null
+        "image": "/Tower of Hell/Sections/free-fall.png"
       }
     },
     {
@@ -2305,7 +2305,7 @@
         "slug": "island-retreat",
         "section": "Secret Sections",
         "sortOrder": 9,
-        "image": null
+        "image": "/Tower of Hell/Sections/island-retreat.png"
       }
     },
     {
@@ -2497,7 +2497,7 @@
         "slug": "left-right",
         "section": "Vanilla Sections",
         "sortOrder": 137,
-        "image": null
+        "image": "/Tower of Hell/Sections/left-right.png"
       }
     },
     {
@@ -2673,7 +2673,7 @@
         "slug": "magma",
         "section": "Vanilla Sections",
         "sortOrder": 148,
-        "image": null
+        "image": "/Tower of Hell/Sections/magma.png"
       }
     },
     {
@@ -2961,7 +2961,7 @@
         "slug": "oasis",
         "section": "Secret Sections",
         "sortOrder": 14,
-        "image": null
+        "image": "/Tower of Hell/Sections/oasis.png"
       }
     },
     {
@@ -3057,7 +3057,7 @@
         "slug": "orbit",
         "section": "Vanilla Sections",
         "sortOrder": 167,
-        "image": null
+        "image": "/Tower of Hell/Sections/orbit.png"
       }
     },
     {
@@ -4049,7 +4049,7 @@
         "slug": "sandy-escape",
         "section": "Vanilla Sections",
         "sortOrder": 219,
-        "image": null
+        "image": "/Tower of Hell/Sections/sandy-escape.png"
       }
     },
     {
@@ -4161,7 +4161,7 @@
         "slug": "sequence",
         "section": "Vanilla Sections",
         "sortOrder": 226,
-        "image": null
+        "image": "/Tower of Hell/Sections/sequence.png"
       }
     },
     {
@@ -4497,7 +4497,7 @@
         "slug": "stratosphere",
         "section": "Vanilla Sections",
         "sortOrder": 247,
-        "image": null
+        "image": "/Tower of Hell/Sections/stratosphere.png"
       }
     },
     {
@@ -4705,7 +4705,7 @@
         "slug": "t-variant-2",
         "section": "Secret Sections",
         "sortOrder": 26,
-        "image": null
+        "image": "/Tower of Hell/Sections/t-variant-2.png"
       }
     },
     {
