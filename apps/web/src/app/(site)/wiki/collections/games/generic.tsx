@@ -659,7 +659,9 @@ const COLLECTION_PAGINATION_TARGET_WEIGHT: Record<string, number> = {
   "fling-things-and-people-shop-items": 32_000,
   // MM2 weapon sets: 100 composite two-weapon images make the single default page brush
   // the release size ceiling; a lower target splits it safely.
-  "murder-mystery-2-weapon-sets": 30_000
+  "murder-mystery-2-weapon-sets": 30_000,
+  // JJS moves: 397 gameplay-screenshot cards; default packing leaves pages near the release ceiling.
+  "jujutsu-shenanigans-moves": 26_000
 };
 
 // When a collection needs large single sections (e.g. Furniture) split across pages, lower
@@ -668,7 +670,9 @@ const COLLECTION_PAGINATION_MAX_SECTION_WEIGHT: Record<string, number> = {
   "fling-things-and-people-shop-items": 32_000,
   // MM2 weapon sets: 100 composite two-weapon images make the single default page brush
   // the release size ceiling; a lower target splits it safely.
-  "murder-mystery-2-weapon-sets": 30_000
+  "murder-mystery-2-weapon-sets": 30_000,
+  // JJS moves: 397 gameplay-screenshot cards; default packing leaves pages near the release ceiling.
+  "jujutsu-shenanigans-moves": 26_000
 };
 
 function resolvePaginationTargetWeight(code: string): number | undefined {

@@ -402,7 +402,7 @@ Evidence: [full report](../tmp/game-collection-suggestions/home-alone.md)
 
 Evidence: [full report](../tmp/game-collection-suggestions/jujutsu-shenanigans.md)
 
-- [ ] Moves
+- [x] Moves
 
 ### Kick a Lucky Block
 
